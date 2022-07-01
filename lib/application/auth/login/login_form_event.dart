@@ -1,0 +1,17 @@
+part of 'login_form_bloc.dart';
+
+@freezed
+class LoginFormEvent with _$LoginFormEvent {
+  // const factory LoginFormEvent.loadLastSavedCred() = _LoadLastSavedCred;
+  const factory LoginFormEvent.usernameChanged(String usernameStr) =
+      _UsernameChanged;
+  const factory LoginFormEvent.passwordChanged(String passwordStr) =
+      _PasswordChanged;
+  const factory LoginFormEvent.passwordVisibilityChanged() =
+      _PasswordVisibleChanged;
+  const factory LoginFormEvent.rememberCheckChanged() = _RememberCheckChanged;
+  const factory LoginFormEvent.loginWithEmailAndPasswordPressed() =
+      _LoginWithEmailAndPasswordPressed;
+  const factory LoginFormEvent.loginWithOktaButtonPressed() =
+      _LoginWithOktaButtonPressed;
+}
