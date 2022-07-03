@@ -23,8 +23,9 @@ class UserDto with _$UserDto {
     @JsonKey(name: 'lastName') required String lastName,
     @JsonKey(name: 'role') required RoleDto role,
     @JsonKey(name: 'customerCode') required String customerCode,
+    @_SalesOrganisationListConverter()
     @JsonKey(name: 'userSalesOrganisationList')
-        required List<SalesOrganisationDto> userSalesOrganisations, //@@@@@
+        required List<SalesOrganisationDto> userSalesOrganisations,
     @JsonKey(name: 'emailNotifications') required bool emailNotifications,
     @JsonKey(name: 'mobileNotifications') required bool mobileNotifications,
     @JsonKey(name: 'languagePreference') required String languagePreference,
@@ -67,10 +68,23 @@ class UserDto with _$UserDto {
 
   factory UserDto.fromJson(Map<String, dynamic> json) =>
       _$UserDtoFromJson(json);
+}
 
-  // static Map<String, List<SalesOrganisationDto>> readNestedItems(Map json, String key) {
-  //   final fields =
-  //       pick(json, key, 'items').asListOrEmpty(_yourFromPickFunction);
-  //   return fields;
-  // }
+class _SalesOrganisationListConverter
+    extends JsonConverter<List<SalesOrganisationDto>, Map<String, dynamic>> {
+  const _SalesOrganisationListConverter();
+
+  @override
+  List<SalesOrganisationDto> fromJson(Map<String, dynamic> json) {
+    return List.from(json['value'])
+        .map((e) => SalesOrganisationDto.fromJson(e))
+        .toList();
+  }
+
+  @override
+  Map<String, dynamic> toJson(List<SalesOrganisationDto> object) {
+    return {
+      'value': object.map((e) => {'salesOrg': e}).toList()
+    };
+  }
 }

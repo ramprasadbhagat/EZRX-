@@ -32,9 +32,10 @@ mixin _$UserDto {
   RoleDto get role => throw _privateConstructorUsedError;
   @JsonKey(name: 'customerCode')
   String get customerCode => throw _privateConstructorUsedError;
+  @_SalesOrganisationListConverter()
   @JsonKey(name: 'userSalesOrganisationList')
   List<SalesOrganisationDto> get userSalesOrganisations =>
-      throw _privateConstructorUsedError; //@@@@@
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'emailNotifications')
   bool get emailNotifications => throw _privateConstructorUsedError;
   @JsonKey(name: 'mobileNotifications')
@@ -64,6 +65,7 @@ abstract class $UserDtoCopyWith<$Res> {
           RoleDto role,
       @JsonKey(name: 'customerCode')
           String customerCode,
+      @_SalesOrganisationListConverter()
       @JsonKey(name: 'userSalesOrganisationList')
           List<SalesOrganisationDto> userSalesOrganisations,
       @JsonKey(name: 'emailNotifications')
@@ -168,6 +170,7 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
           RoleDto role,
       @JsonKey(name: 'customerCode')
           String customerCode,
+      @_SalesOrganisationListConverter()
       @JsonKey(name: 'userSalesOrganisationList')
           List<SalesOrganisationDto> userSalesOrganisations,
       @JsonKey(name: 'emailNotifications')
@@ -264,6 +267,7 @@ class _$_UserDto extends _UserDto {
           required this.role,
       @JsonKey(name: 'customerCode')
           required this.customerCode,
+      @_SalesOrganisationListConverter()
       @JsonKey(name: 'userSalesOrganisationList')
           required final List<SalesOrganisationDto> userSalesOrganisations,
       @JsonKey(name: 'emailNotifications')
@@ -298,13 +302,13 @@ class _$_UserDto extends _UserDto {
   final String customerCode;
   final List<SalesOrganisationDto> _userSalesOrganisations;
   @override
+  @_SalesOrganisationListConverter()
   @JsonKey(name: 'userSalesOrganisationList')
   List<SalesOrganisationDto> get userSalesOrganisations {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_userSalesOrganisations);
   }
 
-//@@@@@
   @override
   @JsonKey(name: 'emailNotifications')
   final bool emailNotifications;
@@ -382,6 +386,7 @@ abstract class _UserDto extends UserDto {
           required final RoleDto role,
       @JsonKey(name: 'customerCode')
           required final String customerCode,
+      @_SalesOrganisationListConverter()
       @JsonKey(name: 'userSalesOrganisationList')
           required final List<SalesOrganisationDto> userSalesOrganisations,
       @JsonKey(name: 'emailNotifications')
@@ -413,10 +418,11 @@ abstract class _UserDto extends UserDto {
   @JsonKey(name: 'customerCode')
   String get customerCode => throw _privateConstructorUsedError;
   @override
+  @_SalesOrganisationListConverter()
   @JsonKey(name: 'userSalesOrganisationList')
   List<SalesOrganisationDto> get userSalesOrganisations =>
       throw _privateConstructorUsedError;
-  @override //@@@@@
+  @override
   @JsonKey(name: 'emailNotifications')
   bool get emailNotifications => throw _privateConstructorUsedError;
   @override
