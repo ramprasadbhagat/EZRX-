@@ -15,6 +15,10 @@ final appThemeData = {
     iconTheme: const IconThemeData(
       color: ZPColors.lightGray,
     ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      selectedItemColor: ZPColors.darkBlue,
+      unselectedItemColor: ZPColors.lightGray,
+    ),
     tabBarTheme: const TabBarTheme(
       indicator: BoxDecoration(color: ZPColors.primary),
       labelColor: ZPColors.primary,

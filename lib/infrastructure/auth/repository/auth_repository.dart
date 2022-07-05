@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/auth/database/i_token_storage.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
+import 'package:flutter/services.dart';
 
 class AuthRepository implements IAuthRepository {
   final AuthRemoteDataSource remoteDataSource;
@@ -71,11 +72,36 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
+  Future<Either<AuthFailure, Unit>> initOkta() async {
+    try {
+      await oktaLoginServices.init();
+      return const Right(unit);
+    } on PlatformException catch (e) {
+      return Left(AuthFailure.other('${e.message}'));
+    } on ServerException catch (e) {
+      return Left(AuthFailure.other(e.message));
+    }
+  }
+
+  @override
   Future<Either<AuthFailure, Unit>> loginWithOkta() async {
     try {
-      final loginv2 = await oktaLoginServices.login();
-      print('@@@@ $loginv2');
+      await oktaLoginServices.login();
       return const Right(unit);
+    } on PlatformException catch (e) {
+      return Left(AuthFailure.other('${e.message}'));
+    } on ServerException catch (e) {
+      return Left(AuthFailure.other(e.message));
+    }
+  }
+
+  @override
+  Future<Either<AuthFailure, Unit>> getOktaAccessToken() async {
+    try {
+      await oktaLoginServices.getAccessToken();
+      return const Right(unit);
+    } on PlatformException catch (e) {
+      return Left(AuthFailure.other('${e.message}'));
     } on ServerException catch (e) {
       return Left(AuthFailure.other(e.message));
     }

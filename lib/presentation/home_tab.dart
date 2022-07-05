@@ -24,16 +24,20 @@ class HomeNavigationTabbar extends StatelessWidget {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.list),
-              label: 'Order',
+              icon: Icon(Icons.storefront_outlined),
+              label: 'Products',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.history_outlined),
-              label: 'History',
+              icon: Icon(Icons.shopping_basket_outlined),
+              label: 'Orders',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_outline),
-              label: 'Favorite',
+              icon: Icon(Icons.notifications_outlined),
+              label: 'Notifications',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_outline),
+              label: 'Account',
             ),
           ],
         );

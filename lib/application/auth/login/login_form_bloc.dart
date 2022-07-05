@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/domain/auth/entities/loginv2.dart';
 import 'package:ezrxmobile/domain/auth/error/auth_failure.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_auth_repository.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
@@ -95,7 +94,16 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
         }
       },
       loginWithOktaButtonPressed: (e) async {
+        emit(state.copyWith(
+          isSubmitting: true,
+          authFailureOrSuccessOption: none(),
+        ));
         final failureOrSuccess = await authRepository.loginWithOkta();
+        emit(state.copyWith(
+          isSubmitting: false,
+          showErrorMessages: true,
+          authFailureOrSuccessOption: optionOf(failureOrSuccess),
+        ));
       },
     );
   }

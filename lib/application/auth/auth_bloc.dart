@@ -18,13 +18,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required this.userRepository,
   }) : super(const AuthState.initial()) {
     on<AuthEvent>(_onEvent);
-    add(const AuthEvent.authCheck());
+    add(const AuthEvent.init());
   }
 
   Future<void> _onEvent(AuthEvent event, Emitter<AuthState> emit) async {
     await event.map(
+      init: (e) async {
+        await authRepository.initOkta();
+        add(const AuthEvent.authCheck());
+      },
       authCheck: (e) async {
-        final result = await userRepository.getUser();
+        // final result = await userRepository.getUser();
+        // const result = Left('');
+
+        final result = await authRepository.getOktaAccessToken();
         emit(result.fold(
           (failure) => const AuthState.unauthenticated(),
           (_) => const AuthState.authenticated(),

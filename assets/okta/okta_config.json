@@ -1,7 +1,7 @@
 {
-    "client_id": "0oa3xviv0z3TOADUC1d7",
-    "redirect_uri": "http://localhost:7008/api/auth/callback",
-    "end_session_redirect_uri": "zuellig.oktapreview.com:/",
+    "client_id": "0oa402ex52DFKp74y1d7",
+    "redirect_uri": "com.oktapreview.zuellig:/callback",
+    "end_session_redirect_uri": "com.oktapreview.zuellig:/",
     "scopes": ["openid", "profile", "offline_access"],
-    "discovery_uri": "https://zuellig-admin.oktapreview.com"
+    "discovery_uri": "https://zuellig.oktapreview.com/"
 }

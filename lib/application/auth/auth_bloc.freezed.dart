@@ -18,18 +18,21 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AuthEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() init,
     required TResult Function() authCheck,
     required TResult Function() logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? init,
     TResult Function()? authCheck,
     TResult Function()? logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
     TResult Function()? authCheck,
     TResult Function()? logout,
     required TResult orElse(),
@@ -37,18 +40,21 @@ mixin _$AuthEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_AuthInit value) init,
     required TResult Function(_AuthCheck value) authCheck,
     required TResult Function(_Logout value) logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_AuthInit value)? init,
     TResult Function(_AuthCheck value)? authCheck,
     TResult Function(_Logout value)? logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthInit value)? init,
     TResult Function(_AuthCheck value)? authCheck,
     TResult Function(_Logout value)? logout,
     required TResult orElse(),
@@ -69,6 +75,116 @@ class _$AuthEventCopyWithImpl<$Res> implements $AuthEventCopyWith<$Res> {
   final AuthEvent _value;
   // ignore: unused_field
   final $Res Function(AuthEvent) _then;
+}
+
+/// @nodoc
+abstract class _$$_AuthInitCopyWith<$Res> {
+  factory _$$_AuthInitCopyWith(
+          _$_AuthInit value, $Res Function(_$_AuthInit) then) =
+      __$$_AuthInitCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_AuthInitCopyWithImpl<$Res> extends _$AuthEventCopyWithImpl<$Res>
+    implements _$$_AuthInitCopyWith<$Res> {
+  __$$_AuthInitCopyWithImpl(
+      _$_AuthInit _value, $Res Function(_$_AuthInit) _then)
+      : super(_value, (v) => _then(v as _$_AuthInit));
+
+  @override
+  _$_AuthInit get _value => super._value as _$_AuthInit;
+}
+
+/// @nodoc
+
+class _$_AuthInit implements _AuthInit {
+  const _$_AuthInit();
+
+  @override
+  String toString() {
+    return 'AuthEvent.init()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_AuthInit);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() authCheck,
+    required TResult Function() logout,
+  }) {
+    return init();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? authCheck,
+    TResult Function()? logout,
+  }) {
+    return init?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? authCheck,
+    TResult Function()? logout,
+    required TResult orElse(),
+  }) {
+    if (init != null) {
+      return init();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AuthInit value) init,
+    required TResult Function(_AuthCheck value) authCheck,
+    required TResult Function(_Logout value) logout,
+  }) {
+    return init(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_AuthInit value)? init,
+    TResult Function(_AuthCheck value)? authCheck,
+    TResult Function(_Logout value)? logout,
+  }) {
+    return init?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthInit value)? init,
+    TResult Function(_AuthCheck value)? authCheck,
+    TResult Function(_Logout value)? logout,
+    required TResult orElse(),
+  }) {
+    if (init != null) {
+      return init(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AuthInit implements AuthEvent {
+  const factory _AuthInit() = _$_AuthInit;
 }
 
 /// @nodoc
@@ -111,6 +227,7 @@ class _$_AuthCheck implements _AuthCheck {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() init,
     required TResult Function() authCheck,
     required TResult Function() logout,
   }) {
@@ -120,6 +237,7 @@ class _$_AuthCheck implements _AuthCheck {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? init,
     TResult Function()? authCheck,
     TResult Function()? logout,
   }) {
@@ -129,6 +247,7 @@ class _$_AuthCheck implements _AuthCheck {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
     TResult Function()? authCheck,
     TResult Function()? logout,
     required TResult orElse(),
@@ -142,6 +261,7 @@ class _$_AuthCheck implements _AuthCheck {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_AuthInit value) init,
     required TResult Function(_AuthCheck value) authCheck,
     required TResult Function(_Logout value) logout,
   }) {
@@ -151,6 +271,7 @@ class _$_AuthCheck implements _AuthCheck {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_AuthInit value)? init,
     TResult Function(_AuthCheck value)? authCheck,
     TResult Function(_Logout value)? logout,
   }) {
@@ -160,6 +281,7 @@ class _$_AuthCheck implements _AuthCheck {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthInit value)? init,
     TResult Function(_AuthCheck value)? authCheck,
     TResult Function(_Logout value)? logout,
     required TResult orElse(),
@@ -213,6 +335,7 @@ class _$_Logout implements _Logout {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() init,
     required TResult Function() authCheck,
     required TResult Function() logout,
   }) {
@@ -222,6 +345,7 @@ class _$_Logout implements _Logout {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? init,
     TResult Function()? authCheck,
     TResult Function()? logout,
   }) {
@@ -231,6 +355,7 @@ class _$_Logout implements _Logout {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
     TResult Function()? authCheck,
     TResult Function()? logout,
     required TResult orElse(),
@@ -244,6 +369,7 @@ class _$_Logout implements _Logout {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_AuthInit value) init,
     required TResult Function(_AuthCheck value) authCheck,
     required TResult Function(_Logout value) logout,
   }) {
@@ -253,6 +379,7 @@ class _$_Logout implements _Logout {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_AuthInit value)? init,
     TResult Function(_AuthCheck value)? authCheck,
     TResult Function(_Logout value)? logout,
   }) {
@@ -262,6 +389,7 @@ class _$_Logout implements _Logout {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthInit value)? init,
     TResult Function(_AuthCheck value)? authCheck,
     TResult Function(_Logout value)? logout,
     required TResult orElse(),

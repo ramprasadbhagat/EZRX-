@@ -9,7 +9,7 @@ class LoginFormState with _$LoginFormState {
     required bool rememberPassword,
     required bool showErrorMessages,
     required bool isSubmitting,
-    required Option<Either<AuthFailure, LoginV2>> authFailureOrSuccessOption,
+    required Option<Either<AuthFailure, dynamic>> authFailureOrSuccessOption,
   }) = _LoginFormState;
 
   factory LoginFormState.initial() => LoginFormState(
