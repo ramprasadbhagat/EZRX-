@@ -8,8 +8,8 @@ enum AppTheme {
 
 final appThemeData = {
   AppTheme.light: ThemeData.light().copyWith(
-    textTheme: ThemeData.dark().textTheme.apply(fontFamily: 'Poppins'),
-    primaryTextTheme: ThemeData.dark().textTheme.apply(fontFamily: 'Poppins'),
+    textTheme: ThemeData.light().textTheme.apply(fontFamily: 'Poppins'),
+    primaryTextTheme: ThemeData.light().textTheme.apply(fontFamily: 'Poppins'),
     scaffoldBackgroundColor: ZPColors.white,
     primaryColor: ZPColors.primary,
     // primarySwatch: ZPColors.kPrimaryColor,
