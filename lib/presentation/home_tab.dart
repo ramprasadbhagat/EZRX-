@@ -7,41 +7,45 @@ class HomeNavigationTabbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AutoTabsScaffold(
-      routes: const [
-        HomeTabRoute(),
-        OrderTabRoute(),
-        HistoryTabRoute(),
-        FavoriteTabRoute(),
-      ],
-      bottomNavigationBuilder: (_, tabsRouter) {
-        return BottomNavigationBar(
-          currentIndex: tabsRouter.activeIndex,
-          onTap: tabsRouter.setActiveIndex,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.storefront_outlined),
-              label: 'Products',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_basket_outlined),
-              label: 'Orders',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.notifications_outlined),
-              label: 'Notifications',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline),
-              label: 'Account',
-            ),
-          ],
-        );
-      },
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: AutoTabsScaffold(
+        routes: const [
+          HomeTabRoute(),
+          ProductsTabRoute(),
+          OrdersTabRoute(),
+          NotificationsTabRoute(),
+          AccountTabRoute(),
+        ],
+        bottomNavigationBuilder: (_, tabsRouter) {
+          return BottomNavigationBar(
+            currentIndex: tabsRouter.activeIndex,
+            onTap: tabsRouter.setActiveIndex,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home_outlined),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.storefront_outlined),
+                label: 'Products',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.shopping_basket_outlined),
+                label: 'Orders',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.notifications_outlined),
+                label: 'Notifications',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person_outline),
+                label: 'Account',
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }

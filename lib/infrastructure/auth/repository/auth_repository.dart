@@ -107,6 +107,18 @@ class AuthRepository implements IAuthRepository {
     }
   }
 
+  @override
+  Future<Either<AuthFailure, Unit>> logoutWithOkta() async {
+    try {
+      await oktaLoginServices.logout();
+      return const Right(unit);
+    } on PlatformException catch (e) {
+      return Left(AuthFailure.other('${e.message}'));
+    } on ServerException catch (e) {
+      return Left(AuthFailure.other(e.message));
+    }
+  }
+
   // @override
   // Future storeCredential({
   //   required Username username,

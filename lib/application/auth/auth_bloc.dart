@@ -30,15 +30,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       authCheck: (e) async {
         // final result = await userRepository.getUser();
         // const result = Left('');
-
         final result = await authRepository.getOktaAccessToken();
         emit(result.fold(
           (failure) => const AuthState.unauthenticated(),
-          (_) => const AuthState.authenticated(),
+          (success) => const AuthState.authenticated(),
         ));
       },
-      logout: (e) async {
-        // call logout API
+      logout: (e) {
+        authRepository.logoutWithOkta();
         emit(const AuthState.unauthenticated());
       },
     );
@@ -52,6 +51,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   @override
   void onChange(Change<AuthState> change) {
     super.onChange(change);
-    // print(change);
+    // debugPrint(change);
   }
 }

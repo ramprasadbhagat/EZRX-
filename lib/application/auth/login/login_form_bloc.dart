@@ -116,6 +116,6 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
   @override
   void onChange(Change<LoginFormState> change) {
     super.onChange(change);
-    // print(change);
+    // debugPrint(change);
   }
 }

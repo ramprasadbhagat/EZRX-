@@ -28,6 +28,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   @override
   void onChange(Change<UserState> change) {
     super.onChange(change);
-    // print(change);
+    // debugPrint(change);
   }
 }

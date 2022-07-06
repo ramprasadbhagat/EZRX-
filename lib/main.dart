@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/theme_data.dart';
@@ -8,6 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wakelock/wakelock.dart';
 
 void main() {
+  if (const bool.fromEnvironment('dart.vm.product')) {
+    debugPrint = (String? message, {int? wrapWidth}) {};
+  }
   WidgetsFlutterBinding.ensureInitialized();
   Wakelock.enable();
   setupLocator();
@@ -23,8 +27,9 @@ class MyApp extends StatelessWidget {
     final router = locator<AppRouter>();
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AuthBloc>(
-          create: (BuildContext context) => locator<AuthBloc>(),
+        BlocProvider<AuthBloc>(create: (context) => locator<AuthBloc>()),
+        BlocProvider<LoginFormBloc>(
+          create: (context) => locator<LoginFormBloc>(),
         ),
       ],
       child: MaterialApp.router(

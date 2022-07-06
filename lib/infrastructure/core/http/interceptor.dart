@@ -24,7 +24,7 @@ class AuthInterceptor extends Interceptor {
     Response response,
     ResponseInterceptorHandler handler,
   ) async {
-    // print('onResponse ${response.statusCode} ${response.data}');
+    // debugPrint('onResponse ${response.statusCode} ${response.data}');
     // if (response.requestOptions.path.contains('/api/loginAd') &&
     //     response.statusCode == 200) {
     //   tokenStorage.set(jwtDto);
@@ -37,7 +37,7 @@ class AuthInterceptor extends Interceptor {
     DioError err,
     ErrorInterceptorHandler handler,
   ) async {
-    // print('onError ${error.response?.statusCode} ${error.response?.data}');
+    // debugPrint('onError ${error.response?.statusCode} ${error.response?.data}');
     return super.onError(err, handler);
   }
 }

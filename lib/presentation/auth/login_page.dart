@@ -1,6 +1,5 @@
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,9 +10,9 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: BlocProvider(
-          create: (context) => locator<LoginFormBloc>(),
+      body: WillPopScope(
+        onWillPop: () async => false,
+        child: SafeArea(
           child: BlocConsumer<LoginFormBloc, LoginFormState>(
             listenWhen: (previous, current) =>
                 previous.authFailureOrSuccessOption !=
@@ -53,6 +52,9 @@ class LoginPage extends StatelessWidget {
                   children: const [
                     Spacer(),
                     Logo(),
+                    OktaLoginButton(),
+                    Spacer(),
+                    Divider(),
                     Spacer(),
                     UsernameField(),
                     PasswordField(),
@@ -60,7 +62,6 @@ class LoginPage extends StatelessWidget {
                     Spacer(),
                     LoginButton(),
                     Spacer(),
-                    OktaLoginButton(),
                     Spacer(flex: 3),
                   ],
                 ),
@@ -239,7 +240,7 @@ class OktaLoginButton extends StatelessWidget {
                         .read<LoginFormBloc>()
                         .add(const LoginFormEvent.loginWithOktaButtonPressed());
                   },
-            child: const Text('Okta Login'),
+            child: const Text('Login with SSO'),
           ),
         );
       },

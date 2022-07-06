@@ -14,6 +14,7 @@ abstract class IAuthRepository {
   Future<Either<AuthFailure, Unit>> initOkta();
   Future<Either<AuthFailure, Unit>> loginWithOkta();
   Future<Either<AuthFailure, Unit>> getOktaAccessToken();
+  Future<Either<AuthFailure, Unit>> logoutWithOkta();
   // Future storeCredential({
   //   required Username username,
   //   required Password password,

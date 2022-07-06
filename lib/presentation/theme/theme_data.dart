@@ -8,6 +8,8 @@ enum AppTheme {
 
 final appThemeData = {
   AppTheme.light: ThemeData.light().copyWith(
+    textTheme: ThemeData.dark().textTheme.apply(fontFamily: 'Poppins'),
+    primaryTextTheme: ThemeData.dark().textTheme.apply(fontFamily: 'Poppins'),
     scaffoldBackgroundColor: ZPColors.white,
     primaryColor: ZPColors.primary,
     // primarySwatch: ZPColors.kPrimaryColor,
@@ -62,7 +64,11 @@ final appThemeData = {
       style: ElevatedButton.styleFrom(
         primary: ZPColors.primary,
         // onPrimary: AppColors.black80,
-        shape: const StadiumBorder(),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(8.0),
+          ),
+        ), //const StadiumBorder(),
         // textStyle: ThemeData.light().textTheme.bodyText2,
         textStyle: const TextStyle(
           fontSize: 24,
@@ -106,6 +112,13 @@ final appThemeData = {
           Radius.circular(8.0),
         ),
       ),
+    ),
+    dividerTheme: const DividerThemeData(
+      // color: ZPColors.lightGray,
+      space: 0,
+      indent: 24,
+      endIndent: 24,
+      thickness: 1.5,
     ),
     errorColor: ZPColors.error,
   ),
