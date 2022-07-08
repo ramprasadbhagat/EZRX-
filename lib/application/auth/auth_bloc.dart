@@ -24,20 +24,36 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _onEvent(AuthEvent event, Emitter<AuthState> emit) async {
     await event.map(
       init: (e) async {
+        await authRepository.initTokenStorage();
         await authRepository.initOkta();
         add(const AuthEvent.authCheck());
       },
       authCheck: (e) async {
-        // final result = await userRepository.getUser();
-        // const result = Left('');
-        final result = await authRepository.getOktaAccessToken();
-        emit(result.fold(
-          (failure) => const AuthState.unauthenticated(),
-          (success) => const AuthState.authenticated(),
-        ));
+        final result = await userRepository.getUser();
+        result.fold(
+          (failure) => emit(const AuthState.unauthenticated()),
+          (success) => emit(const AuthState.authenticated()),
+        );
+
+        // final oktaResult = await authRepository.getOktaAccessToken();
+        // oktaResult.fold(
+        //   (failure) => emit(const AuthState.unauthenticated()),
+        //   (success) => emit(const AuthState.authenticated()),
+        // );
+
+        // oktaResult.fold(
+        //   (failure) => emit(const AuthState.unauthenticated()),
+        //   (oktaAccessToken) async {
+        //     final ezrxResult = await authRepository.getEZRXJWT(oktaAccessToken);
+        //     ezrxResult.fold(
+        //       (failure) => emit(const AuthState.unauthenticated()),
+        //       (success) => emit(const AuthState.authenticated()),
+        //     );
+        //   },
+        // );
       },
-      logout: (e) {
-        authRepository.logoutWithOkta();
+      logout: (e) async {
+        await authRepository.logout();
         emit(const AuthState.unauthenticated());
       },
     );

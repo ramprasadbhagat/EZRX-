@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
+import 'package:ezrxmobile/application/user/bloc/user_bloc.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/theme_data.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<LoginFormBloc>(
           create: (context) => locator<LoginFormBloc>(),
         ),
+        BlocProvider<UserBloc>(create: (context) => locator<UserBloc>()),
       ],
       child: MaterialApp.router(
         title: 'eZRx',

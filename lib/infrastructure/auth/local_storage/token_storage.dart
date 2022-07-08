@@ -8,11 +8,8 @@ class TokenStorage implements ITokenStorage {
   static const _tokenKey = 'ezrx_auth_token';
   Box get _box => Hive.box(_boxName);
 
-  TokenStorage() {
-    _init();
-  }
-
-  Future<void> _init() async {
+  @override
+  Future<void> init() async {
     await Hive.initFlutter();
     Hive.registerAdapter(JWTDtoAdapter());
     await Hive.openBox(_boxName);
@@ -25,8 +22,8 @@ class TokenStorage implements ITokenStorage {
         _tokenKey,
         defaultValue: JWTDto(access: '', refresh: ''),
       );
-    } catch (_) {
-      throw CacheException();
+    } catch (e) {
+      throw LocalException(message: e.toString());
     }
   }
 
@@ -34,17 +31,17 @@ class TokenStorage implements ITokenStorage {
   Future set(JWTDto jwtDto) async {
     try {
       await _box.put(_tokenKey, jwtDto);
-    } catch (_) {
-      throw CacheException();
+    } catch (e) {
+      throw LocalException(message: e.toString());
     }
   }
 
   @override
-  Future delete() async {
+  Future clear() async {
     try {
-      await _box.delete(_tokenKey);
-    } catch (_) {
-      throw CacheException();
+      await _box.clear();
+    } catch (e) {
+      throw LocalException(message: e.toString());
     }
   }
 }

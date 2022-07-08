@@ -1,11 +1,11 @@
-String capitalize(String text) {
+String stringCapitalize(String text) {
   if (text.isEmpty) return '';
   if (text.length == 1) return text;
   return '${text[0].toUpperCase()}${text.substring(1).toLowerCase()}';
 }
 
 // a simple string => A Simple String
-String titleCase(String text) {
+String stringTitleCase(String text) {
   if (text.isEmpty) return '';
   if (text.length == 1) return text;
   return text

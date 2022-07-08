@@ -25,8 +25,8 @@ class CredStorage implements ICredStorage {
         _credKey,
         defaultValue: CredDto(username: '', password: ''),
       );
-    } catch (_) {
-      throw CacheException();
+    } catch (e) {
+      throw LocalException(message: e.toString());
     }
   }
 
@@ -34,8 +34,8 @@ class CredStorage implements ICredStorage {
   Future set(CredDto jwtDto) async {
     try {
       await _box.put(_credKey, jwtDto);
-    } catch (_) {
-      throw CacheException();
+    } catch (e) {
+      throw LocalException(message: e.toString());
     }
   }
 
@@ -43,8 +43,8 @@ class CredStorage implements ICredStorage {
   Future delete() async {
     try {
       await _box.delete(_credKey);
-    } catch (_) {
-      throw CacheException();
+    } catch (e) {
+      throw LocalException(message: e.toString());
     }
   }
 }

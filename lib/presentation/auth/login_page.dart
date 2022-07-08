@@ -151,6 +151,8 @@ class PasswordField extends StatelessWidget {
                 context.read<LoginFormBloc>().state.password.value.fold(
                       (f) => f.maybeMap(
                         empty: (_) => 'Password cannot be empty',
+                        passwordNotMatchRequirements: (_) =>
+                            'Password should be alphanumeric and consist of at least one upper case letter, one special character and should be 10-20 characters long',
                         orElse: () => null,
                       ),
                       (_) => null,

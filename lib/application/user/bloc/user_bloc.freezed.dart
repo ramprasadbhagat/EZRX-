@@ -19,38 +19,38 @@ mixin _$UserEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() update,
+    required TResult Function() fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? update,
+    TResult Function()? fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? update,
+    TResult Function()? fetch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Loaded value) update,
+    required TResult Function(_Fetch value) fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Loaded value)? update,
+    TResult Function(_Fetch value)? fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Loaded value)? update,
+    TResult Function(_Fetch value)? fetch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -112,7 +112,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() update,
+    required TResult Function() fetch,
   }) {
     return initialized();
   }
@@ -121,7 +121,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? update,
+    TResult Function()? fetch,
   }) {
     return initialized?.call();
   }
@@ -130,7 +130,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? update,
+    TResult Function()? fetch,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -143,7 +143,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Loaded value) update,
+    required TResult Function(_Fetch value) fetch,
   }) {
     return initialized(this);
   }
@@ -152,7 +152,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Loaded value)? update,
+    TResult Function(_Fetch value)? fetch,
   }) {
     return initialized?.call(this);
   }
@@ -161,7 +161,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Loaded value)? update,
+    TResult Function(_Fetch value)? fetch,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -176,35 +176,35 @@ abstract class _Initialized implements UserEvent {
 }
 
 /// @nodoc
-abstract class _$$_LoadedCopyWith<$Res> {
-  factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
-      __$$_LoadedCopyWithImpl<$Res>;
+abstract class _$$_FetchCopyWith<$Res> {
+  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
+      __$$_FetchCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoadedCopyWithImpl<$Res> extends _$UserEventCopyWithImpl<$Res>
-    implements _$$_LoadedCopyWith<$Res> {
-  __$$_LoadedCopyWithImpl(_$_Loaded _value, $Res Function(_$_Loaded) _then)
-      : super(_value, (v) => _then(v as _$_Loaded));
+class __$$_FetchCopyWithImpl<$Res> extends _$UserEventCopyWithImpl<$Res>
+    implements _$$_FetchCopyWith<$Res> {
+  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+      : super(_value, (v) => _then(v as _$_Fetch));
 
   @override
-  _$_Loaded get _value => super._value as _$_Loaded;
+  _$_Fetch get _value => super._value as _$_Fetch;
 }
 
 /// @nodoc
 
-class _$_Loaded implements _Loaded {
-  const _$_Loaded();
+class _$_Fetch implements _Fetch {
+  const _$_Fetch();
 
   @override
   String toString() {
-    return 'UserEvent.update()';
+    return 'UserEvent.fetch()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Loaded);
+        (other.runtimeType == runtimeType && other is _$_Fetch);
   }
 
   @override
@@ -214,29 +214,29 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() update,
+    required TResult Function() fetch,
   }) {
-    return update();
+    return fetch();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? update,
+    TResult Function()? fetch,
   }) {
-    return update?.call();
+    return fetch?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? update,
+    TResult Function()? fetch,
     required TResult orElse(),
   }) {
-    if (update != null) {
-      return update();
+    if (fetch != null) {
+      return fetch();
     }
     return orElse();
   }
@@ -245,36 +245,36 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Loaded value) update,
+    required TResult Function(_Fetch value) fetch,
   }) {
-    return update(this);
+    return fetch(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Loaded value)? update,
+    TResult Function(_Fetch value)? fetch,
   }) {
-    return update?.call(this);
+    return fetch?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Loaded value)? update,
+    TResult Function(_Fetch value)? fetch,
     required TResult orElse(),
   }) {
-    if (update != null) {
-      return update(this);
+    if (fetch != null) {
+      return fetch(this);
     }
     return orElse();
   }
 }
 
-abstract class _Loaded implements UserEvent {
-  const factory _Loaded() = _$_Loaded;
+abstract class _Fetch implements UserEvent {
+  const factory _Fetch() = _$_Fetch;
 }
 
 /// @nodoc

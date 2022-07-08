@@ -35,7 +35,7 @@ class AuthRepository implements IAuthRepository {
     final usernameStr = username.getOrCrash();
     final passwordStr = password.getOrCrash();
     try {
-      final loginv2 = await remoteDataSource.login(
+      final loginv2 = await remoteDataSource.loginWithPassword(
         username: usernameStr,
         password: passwordStr,
       );
@@ -67,8 +67,42 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
+  Future<Either<AuthFailure, LoginV2>> getEZRXJWT(
+      String oktaAccessToken) async {
+    try {
+      final loginv2 = await remoteDataSource.loginWithOktaToken(
+        oktaAccessToken: oktaAccessToken,
+      );
+      return Right(loginv2);
+    } on AuthException catch (e) {
+      return Left(e.map(
+        other: (other) => AuthFailure.other(other.message),
+        serverError: (_) => const AuthFailure.serverError(),
+        invalidEmailAndPasswordCombination: (_) =>
+            const AuthFailure.invalidEmailAndPasswordCombination(),
+        accountLocked: (_) => const AuthFailure.accountLocked(),
+        accountExpired: (_) => const AuthFailure.accountExpired(),
+      ));
+    } on ServerException catch (e) {
+      return Left(AuthFailure.other(e.message));
+    }
+  }
+
+  @override
   Future storeJWT({required JWT jwt}) async {
     await tokenStorage.set(JWTDto.fromDomain(jwt));
+  }
+
+  @override
+  Future<Either<AuthFailure, Unit>> initTokenStorage() async {
+    try {
+      await tokenStorage.init();
+      return const Right(unit);
+    } on PlatformException catch (e) {
+      return Left(AuthFailure.other('${e.message}'));
+    } on ServerException catch (e) {
+      return Left(AuthFailure.other(e.message));
+    }
   }
 
   @override
@@ -96,10 +130,12 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> getOktaAccessToken() async {
+  Future<Either<AuthFailure, String>> getOktaAccessToken() async {
     try {
-      await oktaLoginServices.getAccessToken();
-      return const Right(unit);
+      final result = await oktaLoginServices.getAccessToken();
+      // final bbb = await oktaLoginServices.getUserProfile();
+      // print('@@@ $bbb');
+      return Right(result?['message']);
     } on PlatformException catch (e) {
       return Left(AuthFailure.other('${e.message}'));
     } on ServerException catch (e) {
@@ -108,8 +144,9 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> logoutWithOkta() async {
+  Future<Either<AuthFailure, Unit>> logout() async {
     try {
+      await tokenStorage.clear();
       await oktaLoginServices.logout();
       return const Right(unit);
     } on PlatformException catch (e) {

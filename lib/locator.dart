@@ -83,6 +83,7 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => UserBloc(
+      authBloc: locator<AuthBloc>(),
       userRepository: locator<UserRepository>(),
     ),
   );

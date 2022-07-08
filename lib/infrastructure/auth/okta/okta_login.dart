@@ -41,9 +41,7 @@ class OktaLoginServices implements ILoginService {
   @override
   Future<dynamic> getUserProfile() async {
     return _oktaOidcPlugin.getUserProfile().then((value) {
-      return !value?['status']
-          ? throw PlatformException(code: '0', message: value?['message'])
-          : value;
+      return value;
     }).catchError((error) => throw error as PlatformException);
   }
 }

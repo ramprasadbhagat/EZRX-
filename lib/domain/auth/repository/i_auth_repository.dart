@@ -10,11 +10,13 @@ abstract class IAuthRepository {
     required Password password,
     // required String fcmToken, // not a good design fcm will expired
   });
+  Future<Either<AuthFailure, LoginV2>> getEZRXJWT(String oktaAccessToken);
   Future storeJWT({required JWT jwt});
+  Future<Either<AuthFailure, Unit>> initTokenStorage();
   Future<Either<AuthFailure, Unit>> initOkta();
   Future<Either<AuthFailure, Unit>> loginWithOkta();
-  Future<Either<AuthFailure, Unit>> getOktaAccessToken();
-  Future<Either<AuthFailure, Unit>> logoutWithOkta();
+  Future<Either<AuthFailure, String>> getOktaAccessToken();
+  Future<Either<AuthFailure, Unit>> logout();
   // Future storeCredential({
   //   required Username username,
   //   required Password password,

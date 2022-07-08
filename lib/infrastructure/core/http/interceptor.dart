@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/infrastructure/auth/local_storage/token_storage.dart';
+import 'package:flutter/foundation.dart';
 
 class AuthInterceptor extends Interceptor {
   final TokenStorage tokenStorage;
@@ -12,7 +14,9 @@ class AuthInterceptor extends Interceptor {
     try {
       final token = await tokenStorage.get();
       options.headers['Authorization'] = 'Bearer V2 ${token.access}';
-    } catch (_) {}
+    } on LocalException catch (e) {
+      debugPrint('load token failure: ${e.message}');
+    }
     options.headers['Content-Type'] = 'application/json; charset=UTF-8';
     // options.headers['Accept-Language'] = 'en';
 

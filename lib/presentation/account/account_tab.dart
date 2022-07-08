@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/user/bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,6 +14,19 @@ class AccountTab extends StatelessWidget {
           children: ListTile.divideTiles(
             context: context,
             tiles: [
+              BlocBuilder<UserBloc, UserState>(
+                buildWhen: (previous, current) => previous.user != current.user,
+                builder: (context, state) {
+                  return ListTile(
+                    leading: const CircleAvatar(),
+                    title: Text(
+                      '${state.user.fullName.firstName}, ${state.user.fullName.lastName}',
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    onTap: () {},
+                  );
+                },
+              ),
               ListTile(
                 leading: const Icon(Icons.settings_outlined),
                 title: const Text('Settings'),
