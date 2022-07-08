@@ -77,8 +77,7 @@ class AuthRemoteDataSource {
     return '''{
       loginV2(
           accessToken: "$oktaToken" 
-          username: "mobiledemo"
-          oktaAuhenticated: true
+          isOktaAuthenticated: true
       ) {
           authenticated
           eZRxJWT
