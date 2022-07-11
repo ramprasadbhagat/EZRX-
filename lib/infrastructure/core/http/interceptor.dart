@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:ezrxmobile/domain/auth/local_storage/i_token_storage.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
-import 'package:ezrxmobile/infrastructure/auth/local_storage/token_storage.dart';
 import 'package:flutter/foundation.dart';
 
 class AuthInterceptor extends Interceptor {
-  final TokenStorage tokenStorage;
+  final ITokenStorage tokenStorage;
   AuthInterceptor({required this.tokenStorage});
   @override
   void onRequest(
@@ -13,7 +13,9 @@ class AuthInterceptor extends Interceptor {
   ) async {
     try {
       final token = await tokenStorage.get();
-      options.headers['Authorization'] = 'Bearer V2 ${token.access}';
+      if (token.access.isNotEmpty) {
+        options.headers['Authorization'] = 'Bearer V2 ${token.access}';
+      }
     } on LocalException catch (e) {
       debugPrint('load token failure: ${e.message}');
     }

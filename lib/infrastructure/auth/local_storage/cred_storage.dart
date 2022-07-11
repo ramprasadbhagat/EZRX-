@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/auth/database/i_cred_storage.dart';
+import 'package:ezrxmobile/domain/auth/local_storage/i_cred_storage.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/cred_dto.dart';
 import 'package:hive_flutter/hive_flutter.dart';

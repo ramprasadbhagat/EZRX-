@@ -25,6 +25,8 @@ A new Flutter project.
 3. fvm flutter test --coverage
 4. genhtml coverage/lcov.info -o coverage/html
 
+## Integration test
+```flutter drive --driver=test_driver/integration_driver.dart --target=integration_test/login_test.dart```
 
 ## Auto build json_serializable, freezed, auto_route_generator, hive_generator 
 ```fvm flutter pub run build_runner watch --delete-conflicting-outputs```

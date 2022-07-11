@@ -9,6 +9,7 @@ import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/http/base_options.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/http/interceptor.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/secure_storage.dart';
 import 'package:ezrxmobile/infrastructure/user/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/user/repository/user_repository.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -23,7 +24,10 @@ void setupLocator() {
   //============================================================
 
   locator.registerLazySingleton(() => AppRouter());
-  locator.registerLazySingleton(() => TokenStorage());
+  locator.registerLazySingleton(() => SecureStorage());
+  locator.registerLazySingleton(
+    () => TokenStorage(secureStorage: locator<SecureStorage>()),
+  );
   locator.registerLazySingleton(
     () => AuthInterceptor(tokenStorage: locator<TokenStorage>()),
   );

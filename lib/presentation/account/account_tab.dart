@@ -18,6 +18,7 @@ class AccountTab extends StatelessWidget {
                 buildWhen: (previous, current) => previous.user != current.user,
                 builder: (context, state) {
                   return ListTile(
+                    key: const Key('profileTile'),
                     leading: const CircleAvatar(),
                     title: Text(
                       '${state.user.fullName.firstName}, ${state.user.fullName.lastName}',
@@ -28,11 +29,13 @@ class AccountTab extends StatelessWidget {
                 },
               ),
               ListTile(
+                key: const Key('settingsTile'),
                 leading: const Icon(Icons.settings_outlined),
                 title: const Text('Settings'),
                 onTap: () {},
               ),
               ListTile(
+                key: const Key('logoutTile'),
                 leading: const Icon(Icons.logout_outlined),
                 title: const Text('Logout'),
                 onTap: () => context.read<AuthBloc>().add(

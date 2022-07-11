@@ -52,9 +52,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void _getEZRXJWT(Emitter<AuthState> emit, String oktaAccessToken) async {
     final ezrxResult = await authRepository.getEZRXJWT(oktaAccessToken);
-    ezrxResult.fold(
-      (failure) => emit(const AuthState.unauthenticated()),
-      (success) => emit(const AuthState.authenticated()),
+    await ezrxResult.fold(
+      (failure) async => emit(const AuthState.unauthenticated()),
+      (loginv2) async {
+        await authRepository.storeJWT(jwt: loginv2.jwt);
+        emit(const AuthState.authenticated());
+      },
     );
   }
 

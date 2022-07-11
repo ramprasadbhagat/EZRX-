@@ -6,7 +6,7 @@ import 'package:ezrxmobile/domain/auth/error/auth_failure.dart';
 import 'package:ezrxmobile/domain/auth/login/I_login_service.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_auth_repository.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/database/i_token_storage.dart';
+import 'package:ezrxmobile/domain/auth/local_storage/i_token_storage.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';

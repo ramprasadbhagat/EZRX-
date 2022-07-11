@@ -19,27 +19,43 @@ class HomeNavigationTabbar extends StatelessWidget {
         ],
         bottomNavigationBuilder: (_, tabsRouter) {
           return BottomNavigationBar(
+            key: const Key('homeTabbar'),
             currentIndex: tabsRouter.activeIndex,
             onTap: tabsRouter.setActiveIndex,
             items: const [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined),
+                icon: Icon(
+                  Icons.home_outlined,
+                  key: Key('homeTab'),
+                ),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.storefront_outlined),
+                icon: Icon(
+                  Icons.storefront_outlined,
+                  key: Key('productsTab'),
+                ),
                 label: 'Products',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_basket_outlined),
+                icon: Icon(
+                  Icons.shopping_basket_outlined,
+                  key: Key('ordersTab'),
+                ),
                 label: 'Orders',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.notifications_outlined),
+                icon: Icon(
+                  Icons.notifications_outlined,
+                  key: Key('notificationsTabbar'),
+                ),
                 label: 'Notifications',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person_outline),
+                icon: Icon(
+                  Icons.person_outline,
+                  key: Key('accountTabbar'),
+                ),
                 label: 'Account',
               ),
             ],

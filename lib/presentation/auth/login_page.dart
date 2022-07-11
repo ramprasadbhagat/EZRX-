@@ -52,7 +52,7 @@ class LoginPage extends StatelessWidget {
                   children: const [
                     Spacer(),
                     Logo(),
-                    OktaLoginButton(),
+                    SSOLoginButton(),
                     Spacer(),
                     Divider(),
                     Spacer(),
@@ -96,6 +96,7 @@ class UsernameField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
       child: TextFormField(
+        key: const Key('loginUsernameField'),
         keyboardType: TextInputType.emailAddress,
         autocorrect: false,
         decoration: const InputDecoration(labelText: 'Username'),
@@ -128,6 +129,7 @@ class PasswordField extends StatelessWidget {
             previous.isSubmitting != current.isSubmitting,
         builder: (context, state) {
           return TextFormField(
+            key: const Key('loginPasswordField'),
             keyboardType: TextInputType.visiblePassword,
             autocorrect: false,
             decoration: InputDecoration(
@@ -178,6 +180,7 @@ class RememberPassword extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Checkbox(
+                key: const Key('loginRememberPasswordCheckbox'),
                 value: state.rememberPassword,
                 onChanged: (value) {
                   FocusScope.of(context).unfocus();
@@ -207,6 +210,7 @@ class LoginButton extends StatelessWidget {
         return SizedBox(
           width: MediaQuery.of(context).size.width * 0.8,
           child: ElevatedButton(
+            key: const Key('loginSubmitButton'),
             onPressed: state.isSubmitting
                 ? null
                 : () {
@@ -222,8 +226,8 @@ class LoginButton extends StatelessWidget {
   }
 }
 
-class OktaLoginButton extends StatelessWidget {
-  const OktaLoginButton({Key? key}) : super(key: key);
+class SSOLoginButton extends StatelessWidget {
+  const SSOLoginButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -234,6 +238,7 @@ class OktaLoginButton extends StatelessWidget {
         return SizedBox(
           width: MediaQuery.of(context).size.width * 0.8,
           child: ElevatedButton(
+            key: const Key('ssoLoginButton'),
             onPressed: state.isSubmitting
                 ? null
                 : () {
