@@ -58,7 +58,7 @@ class LoginPage extends StatelessWidget {
                     Spacer(),
                     UsernameField(),
                     PasswordField(),
-                    RememberPassword(),
+                    // RememberPassword(),
                     Spacer(),
                     LoginButton(),
                     Spacer(),
