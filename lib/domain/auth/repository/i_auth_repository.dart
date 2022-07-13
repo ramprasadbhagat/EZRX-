@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/domain/auth/entities/jwt.dart';
 import 'package:ezrxmobile/domain/auth/entities/loginv2.dart';
 import 'package:ezrxmobile/domain/auth/error/auth_failure.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
@@ -10,12 +9,12 @@ abstract class IAuthRepository {
     required Password password,
     // required String fcmToken, // not a good design fcm will expired
   });
-  Future<Either<AuthFailure, LoginV2>> getEZRXJWT(String oktaAccessToken);
+  Future<Either<AuthFailure, LoginV2>> getEZRXJWT(JWT oktaAccessToken);
   Future storeJWT({required JWT jwt});
   Future<Either<AuthFailure, Unit>> initTokenStorage();
   Future<Either<AuthFailure, Unit>> initOkta();
   Future<Either<AuthFailure, Unit>> loginWithOkta();
-  Future<Either<AuthFailure, String>> getOktaAccessToken();
+  Future<Either<AuthFailure, JWT>> getOktaAccessToken();
   Future<Either<AuthFailure, Unit>> logout();
   // Future storeCredential({
   //   required Username username,

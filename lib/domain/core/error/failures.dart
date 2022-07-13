@@ -20,4 +20,10 @@ class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.passwordNotMatchRequirements({
     required T failedValue,
   }) = ShortPassword<T>;
+  const factory ValueFailure.invalidJWT({
+    required T failedValue,
+  }) = InvalidJWT<T>;
+  const factory ValueFailure.invalidJWTPayload({
+    required T failedValue,
+  }) = InvalidJWTPayload<T>;
 }

@@ -264,7 +264,7 @@ class _$_UsernameChanged implements _UsernameChanged {
 abstract class _UsernameChanged implements LoginFormEvent {
   const factory _UsernameChanged(final String usernameStr) = _$_UsernameChanged;
 
-  String get usernameStr => throw _privateConstructorUsedError;
+  String get usernameStr;
   @JsonKey(ignore: true)
   _$$_UsernameChangedCopyWith<_$_UsernameChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -430,7 +430,7 @@ class _$_PasswordChanged implements _PasswordChanged {
 abstract class _PasswordChanged implements LoginFormEvent {
   const factory _PasswordChanged(final String passwordStr) = _$_PasswordChanged;
 
-  String get passwordStr => throw _privateConstructorUsedError;
+  String get passwordStr;
   @JsonKey(ignore: true)
   _$$_PasswordChangedCopyWith<_$_PasswordChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1226,20 +1226,19 @@ abstract class _LoginFormState implements LoginFormState {
           authFailureOrSuccessOption}) = _$_LoginFormState;
 
   @override
-  Username get username => throw _privateConstructorUsedError;
+  Username get username;
   @override
-  Password get password => throw _privateConstructorUsedError;
+  Password get password;
   @override
-  bool get passwordVisible => throw _privateConstructorUsedError;
+  bool get passwordVisible;
   @override
-  bool get rememberPassword => throw _privateConstructorUsedError;
+  bool get rememberPassword;
   @override
-  bool get showErrorMessages => throw _privateConstructorUsedError;
+  bool get showErrorMessages;
   @override
-  bool get isSubmitting => throw _privateConstructorUsedError;
+  bool get isSubmitting;
   @override
-  Option<Either<AuthFailure, dynamic>> get authFailureOrSuccessOption =>
-      throw _privateConstructorUsedError;
+  Option<Either<AuthFailure, dynamic>> get authFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$$_LoginFormStateCopyWith<_$_LoginFormState> get copyWith =>

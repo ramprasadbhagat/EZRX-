@@ -205,7 +205,7 @@ abstract class _Other implements UserFailure {
   const factory _Other(final String message) = _$_Other;
 
   @override
-  String get message => throw _privateConstructorUsedError;
+  String get message;
   @override
   @JsonKey(ignore: true)
   _$$_OtherCopyWith<_$_Other> get copyWith =>

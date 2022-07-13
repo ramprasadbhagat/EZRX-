@@ -166,11 +166,11 @@ abstract class _Settings extends Settings {
   const _Settings._() : super._();
 
   @override
-  bool get emailNotifications => throw _privateConstructorUsedError;
+  bool get emailNotifications;
   @override
-  bool get mobileNotifications => throw _privateConstructorUsedError;
+  bool get mobileNotifications;
   @override
-  String get languagePreference => throw _privateConstructorUsedError;
+  String get languagePreference;
   @override
   @JsonKey(ignore: true)
   _$$_SettingsCopyWith<_$_Settings> get copyWith =>

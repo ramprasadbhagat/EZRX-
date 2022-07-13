@@ -134,9 +134,9 @@ abstract class _Cred extends Cred {
   const _Cred._() : super._();
 
   @override
-  String get username => throw _privateConstructorUsedError;
+  String get username;
   @override
-  String get password => throw _privateConstructorUsedError;
+  String get password;
   @override
   @JsonKey(ignore: true)
   _$$_CredCopyWith<_$_Cred> get copyWith => throw _privateConstructorUsedError;

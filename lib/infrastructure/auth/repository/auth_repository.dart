@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/auth/entities/jwt.dart';
 import 'package:ezrxmobile/domain/auth/entities/loginv2.dart';
 import 'package:ezrxmobile/domain/auth/error/auth_exception.dart';
 import 'package:ezrxmobile/domain/auth/error/auth_failure.dart';
@@ -71,12 +70,12 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
-  Future<Either<AuthFailure, LoginV2>> getEZRXJWT(
-      String oktaAccessToken) async {
+  Future<Either<AuthFailure, LoginV2>> getEZRXJWT(JWT oktaAccessToken) async {
+    final token = oktaAccessToken.getOrCrash();
     if (config.appFlavor == Flavor.mock) {
       try {
         final loginv2 = await localDataSource.loginWithOktaToken(
-          oktaAccessToken: oktaAccessToken,
+          oktaAccessToken: token,
         );
         return Right(loginv2);
       } on LocalException catch (e) {
@@ -85,7 +84,7 @@ class AuthRepository implements IAuthRepository {
     }
     try {
       final loginv2 = await remoteDataSource.loginWithOktaToken(
-        oktaAccessToken: oktaAccessToken,
+        oktaAccessToken: token,
       );
       return Right(loginv2);
     } on AuthException catch (e) {
@@ -144,12 +143,10 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
-  Future<Either<AuthFailure, String>> getOktaAccessToken() async {
+  Future<Either<AuthFailure, JWT>> getOktaAccessToken() async {
     try {
       final result = await oktaLoginServices.getAccessToken();
-      // final bbb = await oktaLoginServices.getUserProfile();
-      // print('@@@ $bbb');
-      return Right(result?['message']);
+      return Right(JWT(result?['message']));
     } on PlatformException catch (e) {
       return Left(AuthFailure.other('${e.message}'));
     } on ServerException catch (e) {

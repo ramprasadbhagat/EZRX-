@@ -277,20 +277,19 @@ abstract class _User extends User {
   const _User._() : super._();
 
   @override
-  Username get username => throw _privateConstructorUsedError;
+  Username get username;
   @override
-  EmailAddress get email => throw _privateConstructorUsedError;
+  EmailAddress get email;
   @override
-  FullName get fullName => throw _privateConstructorUsedError;
+  FullName get fullName;
   @override
-  Role get role => throw _privateConstructorUsedError;
+  Role get role;
   @override
-  CustomerCode get customerCode => throw _privateConstructorUsedError;
+  CustomerCode get customerCode;
   @override
-  List<SalesOrganisation> get userSalesOrganisations =>
-      throw _privateConstructorUsedError;
+  List<SalesOrganisation> get userSalesOrganisations;
   @override
-  Settings get settings => throw _privateConstructorUsedError;
+  Settings get settings;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

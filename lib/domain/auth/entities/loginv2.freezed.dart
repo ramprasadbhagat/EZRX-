@@ -27,8 +27,6 @@ abstract class $LoginV2CopyWith<$Res> {
   factory $LoginV2CopyWith(LoginV2 value, $Res Function(LoginV2) then) =
       _$LoginV2CopyWithImpl<$Res>;
   $Res call({JWT jwt});
-
-  $JWTCopyWith<$Res> get jwt;
 }
 
 /// @nodoc
@@ -50,13 +48,6 @@ class _$LoginV2CopyWithImpl<$Res> implements $LoginV2CopyWith<$Res> {
               as JWT,
     ));
   }
-
-  @override
-  $JWTCopyWith<$Res> get jwt {
-    return $JWTCopyWith<$Res>(_value.jwt, (value) {
-      return _then(_value.copyWith(jwt: value));
-    });
-  }
 }
 
 /// @nodoc
@@ -66,9 +57,6 @@ abstract class _$$_LoginV2CopyWith<$Res> implements $LoginV2CopyWith<$Res> {
       __$$_LoginV2CopyWithImpl<$Res>;
   @override
   $Res call({JWT jwt});
-
-  @override
-  $JWTCopyWith<$Res> get jwt;
 }
 
 /// @nodoc
@@ -129,7 +117,7 @@ abstract class _LoginV2 extends LoginV2 {
   const _LoginV2._() : super._();
 
   @override
-  JWT get jwt => throw _privateConstructorUsedError;
+  JWT get jwt;
   @override
   @JsonKey(ignore: true)
   _$$_LoginV2CopyWith<_$_LoginV2> get copyWith =>

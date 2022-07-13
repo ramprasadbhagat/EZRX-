@@ -125,7 +125,7 @@ abstract class _SalesOrganisation extends SalesOrganisation {
   const _SalesOrganisation._() : super._();
 
   @override
-  SalesOrg get salesOrg => throw _privateConstructorUsedError;
+  SalesOrg get salesOrg;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationCopyWith<_$_SalesOrganisation> get copyWith =>

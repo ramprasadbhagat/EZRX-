@@ -38,7 +38,7 @@ class TokenStorage implements ITokenStorage {
     try {
       return await _encryptedBox.get(
         _tokenKey,
-        defaultValue: JWTDto(access: '', refresh: ''),
+        defaultValue: JWTDto(access: ''),
       );
     } catch (e) {
       throw LocalException(message: e.toString());

@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/auth/value/value_transformers.dart';
+import 'package:ezrxmobile/domain/auth/value/value_validators.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
@@ -40,4 +42,31 @@ class Password extends ValueObject<String> {
   }
 
   const Password._(this.value);
+}
+
+class JWT extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory JWT(String input) {
+    return JWT._(validateJWT(input));
+  }
+
+  DateTime get expirationDate {
+    return getJWTExpirationDate(value.getOrElse(() => ''));
+  }
+
+  Duration get time {
+    return getJWTTime(value.getOrElse(() => ''));
+  }
+
+  Duration get remainingTime {
+    return getJWTRemainingTime(value.getOrElse(() => ''));
+  }
+
+  bool get isExpired {
+    return isJWTExpired(value.getOrElse(() => ''));
+  }
+
+  const JWT._(this.value);
 }

@@ -143,7 +143,7 @@ abstract class _LoginV2Dto extends LoginV2Dto {
 
   @override
   @JsonKey(name: 'eZRxJWT')
-  String get access => throw _privateConstructorUsedError;
+  String get access;
   @override
   @JsonKey(ignore: true)
   _$$_LoginV2DtoCopyWith<_$_LoginV2Dto> get copyWith =>

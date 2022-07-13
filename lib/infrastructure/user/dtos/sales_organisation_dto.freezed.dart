@@ -148,7 +148,7 @@ abstract class _SalesOrganisationDto extends SalesOrganisationDto {
 
   @override
   @JsonKey(name: 'salesOrg')
-  String get salesOrg => throw _privateConstructorUsedError;
+  String get salesOrg;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationDtoCopyWith<_$_SalesOrganisationDto> get copyWith =>

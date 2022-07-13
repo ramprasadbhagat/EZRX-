@@ -186,13 +186,13 @@ abstract class _RoleDto extends RoleDto {
 
   @override
   @JsonKey(name: 'id')
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
   @JsonKey(name: 'name')
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
   @JsonKey(name: 'description')
-  String get description => throw _privateConstructorUsedError;
+  String get description;
   @override
   @JsonKey(ignore: true)
   _$$_RoleDtoCopyWith<_$_RoleDto> get copyWith =>

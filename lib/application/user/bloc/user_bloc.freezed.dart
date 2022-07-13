@@ -393,7 +393,7 @@ abstract class _UserState implements UserState {
   const factory _UserState({required final User user}) = _$_UserState;
 
   @override
-  User get user => throw _privateConstructorUsedError;
+  User get user;
   @override
   @JsonKey(ignore: true)
   _$$_UserStateCopyWith<_$_UserState> get copyWith =>

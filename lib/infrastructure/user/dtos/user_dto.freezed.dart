@@ -401,36 +401,35 @@ abstract class _UserDto extends UserDto {
 
   @override
   @JsonKey(name: 'username')
-  String get username => throw _privateConstructorUsedError;
+  String get username;
   @override
   @JsonKey(name: 'email')
-  String get email => throw _privateConstructorUsedError;
+  String get email;
   @override
   @JsonKey(name: 'firstName')
-  String get firstName => throw _privateConstructorUsedError;
+  String get firstName;
   @override
   @JsonKey(name: 'lastName')
-  String get lastName => throw _privateConstructorUsedError;
+  String get lastName;
   @override
   @JsonKey(name: 'role')
-  RoleDto get role => throw _privateConstructorUsedError;
+  RoleDto get role;
   @override
   @JsonKey(name: 'customerCode')
-  String get customerCode => throw _privateConstructorUsedError;
+  String get customerCode;
   @override
   @_SalesOrganisationListConverter()
   @JsonKey(name: 'userSalesOrganisationList')
-  List<SalesOrganisationDto> get userSalesOrganisations =>
-      throw _privateConstructorUsedError;
+  List<SalesOrganisationDto> get userSalesOrganisations;
   @override
   @JsonKey(name: 'emailNotifications')
-  bool get emailNotifications => throw _privateConstructorUsedError;
+  bool get emailNotifications;
   @override
   @JsonKey(name: 'mobileNotifications')
-  bool get mobileNotifications => throw _privateConstructorUsedError;
+  bool get mobileNotifications;
   @override
   @JsonKey(name: 'languagePreference')
-  String get languagePreference => throw _privateConstructorUsedError;
+  String get languagePreference;
   @override
   @JsonKey(ignore: true)
   _$$_UserDtoCopyWith<_$_UserDto> get copyWith =>

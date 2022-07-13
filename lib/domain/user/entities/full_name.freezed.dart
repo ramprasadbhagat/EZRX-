@@ -138,9 +138,9 @@ abstract class _FullName extends FullName {
   const _FullName._() : super._();
 
   @override
-  String get firstName => throw _privateConstructorUsedError;
+  String get firstName;
   @override
-  String get lastName => throw _privateConstructorUsedError;
+  String get lastName;
   @override
   @JsonKey(ignore: true)
   _$$_FullNameCopyWith<_$_FullName> get copyWith =>

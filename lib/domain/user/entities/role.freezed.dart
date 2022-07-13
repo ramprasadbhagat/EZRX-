@@ -153,11 +153,11 @@ abstract class _Role extends Role {
   const _Role._() : super._();
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String get description => throw _privateConstructorUsedError;
+  String get description;
   @override
   @JsonKey(ignore: true)
   _$$_RoleCopyWith<_$_Role> get copyWith => throw _privateConstructorUsedError;

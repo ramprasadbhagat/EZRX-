@@ -239,7 +239,7 @@ class _$_Other implements _Other {
 abstract class _Other implements AuthFailure {
   const factory _Other(final String message) = _$_Other;
 
-  String get message => throw _privateConstructorUsedError;
+  String get message;
   @JsonKey(ignore: true)
   _$$_OtherCopyWith<_$_Other> get copyWith =>
       throw _privateConstructorUsedError;
