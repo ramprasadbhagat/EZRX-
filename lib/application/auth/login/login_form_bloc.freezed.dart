@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$LoginFormEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() loadLastSavedCred,
     required TResult Function(String usernameStr) usernameChanged,
     required TResult Function(String passwordStr) passwordChanged,
     required TResult Function() passwordVisibilityChanged,
@@ -28,6 +29,7 @@ mixin _$LoginFormEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -38,6 +40,7 @@ mixin _$LoginFormEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -49,6 +52,7 @@ mixin _$LoginFormEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_LoadLastSavedCred value) loadLastSavedCred,
     required TResult Function(_UsernameChanged value) usernameChanged,
     required TResult Function(_PasswordChanged value) passwordChanged,
     required TResult Function(_PasswordVisibleChanged value)
@@ -62,6 +66,7 @@ mixin _$LoginFormEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
     TResult Function(_UsernameChanged value)? usernameChanged,
     TResult Function(_PasswordChanged value)? passwordChanged,
     TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
@@ -74,6 +79,7 @@ mixin _$LoginFormEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
     TResult Function(_UsernameChanged value)? usernameChanged,
     TResult Function(_PasswordChanged value)? passwordChanged,
     TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
@@ -102,6 +108,148 @@ class _$LoginFormEventCopyWithImpl<$Res>
   final LoginFormEvent _value;
   // ignore: unused_field
   final $Res Function(LoginFormEvent) _then;
+}
+
+/// @nodoc
+abstract class _$$_LoadLastSavedCredCopyWith<$Res> {
+  factory _$$_LoadLastSavedCredCopyWith(_$_LoadLastSavedCred value,
+          $Res Function(_$_LoadLastSavedCred) then) =
+      __$$_LoadLastSavedCredCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_LoadLastSavedCredCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res>
+    implements _$$_LoadLastSavedCredCopyWith<$Res> {
+  __$$_LoadLastSavedCredCopyWithImpl(
+      _$_LoadLastSavedCred _value, $Res Function(_$_LoadLastSavedCred) _then)
+      : super(_value, (v) => _then(v as _$_LoadLastSavedCred));
+
+  @override
+  _$_LoadLastSavedCred get _value => super._value as _$_LoadLastSavedCred;
+}
+
+/// @nodoc
+
+class _$_LoadLastSavedCred implements _LoadLastSavedCred {
+  const _$_LoadLastSavedCred();
+
+  @override
+  String toString() {
+    return 'LoginFormEvent.loadLastSavedCred()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_LoadLastSavedCred);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadLastSavedCred,
+    required TResult Function(String usernameStr) usernameChanged,
+    required TResult Function(String passwordStr) passwordChanged,
+    required TResult Function() passwordVisibilityChanged,
+    required TResult Function() rememberCheckChanged,
+    required TResult Function() loginWithEmailAndPasswordPressed,
+    required TResult Function() loginWithOktaButtonPressed,
+  }) {
+    return loadLastSavedCred();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? loadLastSavedCred,
+    TResult Function(String usernameStr)? usernameChanged,
+    TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? passwordVisibilityChanged,
+    TResult Function()? rememberCheckChanged,
+    TResult Function()? loginWithEmailAndPasswordPressed,
+    TResult Function()? loginWithOktaButtonPressed,
+  }) {
+    return loadLastSavedCred?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadLastSavedCred,
+    TResult Function(String usernameStr)? usernameChanged,
+    TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? passwordVisibilityChanged,
+    TResult Function()? rememberCheckChanged,
+    TResult Function()? loginWithEmailAndPasswordPressed,
+    TResult Function()? loginWithOktaButtonPressed,
+    required TResult orElse(),
+  }) {
+    if (loadLastSavedCred != null) {
+      return loadLastSavedCred();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadLastSavedCred value) loadLastSavedCred,
+    required TResult Function(_UsernameChanged value) usernameChanged,
+    required TResult Function(_PasswordChanged value) passwordChanged,
+    required TResult Function(_PasswordVisibleChanged value)
+        passwordVisibilityChanged,
+    required TResult Function(_RememberCheckChanged value) rememberCheckChanged,
+    required TResult Function(_LoginWithEmailAndPasswordPressed value)
+        loginWithEmailAndPasswordPressed,
+    required TResult Function(_LoginWithOktaButtonPressed value)
+        loginWithOktaButtonPressed,
+  }) {
+    return loadLastSavedCred(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
+    TResult Function(_UsernameChanged value)? usernameChanged,
+    TResult Function(_PasswordChanged value)? passwordChanged,
+    TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
+    TResult Function(_RememberCheckChanged value)? rememberCheckChanged,
+    TResult Function(_LoginWithEmailAndPasswordPressed value)?
+        loginWithEmailAndPasswordPressed,
+    TResult Function(_LoginWithOktaButtonPressed value)?
+        loginWithOktaButtonPressed,
+  }) {
+    return loadLastSavedCred?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
+    TResult Function(_UsernameChanged value)? usernameChanged,
+    TResult Function(_PasswordChanged value)? passwordChanged,
+    TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
+    TResult Function(_RememberCheckChanged value)? rememberCheckChanged,
+    TResult Function(_LoginWithEmailAndPasswordPressed value)?
+        loginWithEmailAndPasswordPressed,
+    TResult Function(_LoginWithOktaButtonPressed value)?
+        loginWithOktaButtonPressed,
+    required TResult orElse(),
+  }) {
+    if (loadLastSavedCred != null) {
+      return loadLastSavedCred(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadLastSavedCred implements LoginFormEvent {
+  const factory _LoadLastSavedCred() = _$_LoadLastSavedCred;
 }
 
 /// @nodoc
@@ -170,6 +318,7 @@ class _$_UsernameChanged implements _UsernameChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() loadLastSavedCred,
     required TResult Function(String usernameStr) usernameChanged,
     required TResult Function(String passwordStr) passwordChanged,
     required TResult Function() passwordVisibilityChanged,
@@ -183,6 +332,7 @@ class _$_UsernameChanged implements _UsernameChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -196,6 +346,7 @@ class _$_UsernameChanged implements _UsernameChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -213,6 +364,7 @@ class _$_UsernameChanged implements _UsernameChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_LoadLastSavedCred value) loadLastSavedCred,
     required TResult Function(_UsernameChanged value) usernameChanged,
     required TResult Function(_PasswordChanged value) passwordChanged,
     required TResult Function(_PasswordVisibleChanged value)
@@ -229,6 +381,7 @@ class _$_UsernameChanged implements _UsernameChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
     TResult Function(_UsernameChanged value)? usernameChanged,
     TResult Function(_PasswordChanged value)? passwordChanged,
     TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
@@ -244,6 +397,7 @@ class _$_UsernameChanged implements _UsernameChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
     TResult Function(_UsernameChanged value)? usernameChanged,
     TResult Function(_PasswordChanged value)? passwordChanged,
     TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
@@ -336,6 +490,7 @@ class _$_PasswordChanged implements _PasswordChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() loadLastSavedCred,
     required TResult Function(String usernameStr) usernameChanged,
     required TResult Function(String passwordStr) passwordChanged,
     required TResult Function() passwordVisibilityChanged,
@@ -349,6 +504,7 @@ class _$_PasswordChanged implements _PasswordChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -362,6 +518,7 @@ class _$_PasswordChanged implements _PasswordChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -379,6 +536,7 @@ class _$_PasswordChanged implements _PasswordChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_LoadLastSavedCred value) loadLastSavedCred,
     required TResult Function(_UsernameChanged value) usernameChanged,
     required TResult Function(_PasswordChanged value) passwordChanged,
     required TResult Function(_PasswordVisibleChanged value)
@@ -395,6 +553,7 @@ class _$_PasswordChanged implements _PasswordChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
     TResult Function(_UsernameChanged value)? usernameChanged,
     TResult Function(_PasswordChanged value)? passwordChanged,
     TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
@@ -410,6 +569,7 @@ class _$_PasswordChanged implements _PasswordChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
     TResult Function(_UsernameChanged value)? usernameChanged,
     TResult Function(_PasswordChanged value)? passwordChanged,
     TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
@@ -479,6 +639,7 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() loadLastSavedCred,
     required TResult Function(String usernameStr) usernameChanged,
     required TResult Function(String passwordStr) passwordChanged,
     required TResult Function() passwordVisibilityChanged,
@@ -492,6 +653,7 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -505,6 +667,7 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -522,6 +685,7 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_LoadLastSavedCred value) loadLastSavedCred,
     required TResult Function(_UsernameChanged value) usernameChanged,
     required TResult Function(_PasswordChanged value) passwordChanged,
     required TResult Function(_PasswordVisibleChanged value)
@@ -538,6 +702,7 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
     TResult Function(_UsernameChanged value)? usernameChanged,
     TResult Function(_PasswordChanged value)? passwordChanged,
     TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
@@ -553,6 +718,7 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
     TResult Function(_UsernameChanged value)? usernameChanged,
     TResult Function(_PasswordChanged value)? passwordChanged,
     TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
@@ -615,6 +781,7 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() loadLastSavedCred,
     required TResult Function(String usernameStr) usernameChanged,
     required TResult Function(String passwordStr) passwordChanged,
     required TResult Function() passwordVisibilityChanged,
@@ -628,6 +795,7 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -641,6 +809,7 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -658,6 +827,7 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_LoadLastSavedCred value) loadLastSavedCred,
     required TResult Function(_UsernameChanged value) usernameChanged,
     required TResult Function(_PasswordChanged value) passwordChanged,
     required TResult Function(_PasswordVisibleChanged value)
@@ -674,6 +844,7 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
     TResult Function(_UsernameChanged value)? usernameChanged,
     TResult Function(_PasswordChanged value)? passwordChanged,
     TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
@@ -689,6 +860,7 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
     TResult Function(_UsernameChanged value)? usernameChanged,
     TResult Function(_PasswordChanged value)? passwordChanged,
     TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
@@ -756,6 +928,7 @@ class _$_LoginWithEmailAndPasswordPressed
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() loadLastSavedCred,
     required TResult Function(String usernameStr) usernameChanged,
     required TResult Function(String passwordStr) passwordChanged,
     required TResult Function() passwordVisibilityChanged,
@@ -769,6 +942,7 @@ class _$_LoginWithEmailAndPasswordPressed
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -782,6 +956,7 @@ class _$_LoginWithEmailAndPasswordPressed
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -799,6 +974,7 @@ class _$_LoginWithEmailAndPasswordPressed
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_LoadLastSavedCred value) loadLastSavedCred,
     required TResult Function(_UsernameChanged value) usernameChanged,
     required TResult Function(_PasswordChanged value) passwordChanged,
     required TResult Function(_PasswordVisibleChanged value)
@@ -815,6 +991,7 @@ class _$_LoginWithEmailAndPasswordPressed
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
     TResult Function(_UsernameChanged value)? usernameChanged,
     TResult Function(_PasswordChanged value)? passwordChanged,
     TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
@@ -830,6 +1007,7 @@ class _$_LoginWithEmailAndPasswordPressed
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
     TResult Function(_UsernameChanged value)? usernameChanged,
     TResult Function(_PasswordChanged value)? passwordChanged,
     TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
@@ -897,6 +1075,7 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() loadLastSavedCred,
     required TResult Function(String usernameStr) usernameChanged,
     required TResult Function(String passwordStr) passwordChanged,
     required TResult Function() passwordVisibilityChanged,
@@ -910,6 +1089,7 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -923,6 +1103,7 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadLastSavedCred,
     TResult Function(String usernameStr)? usernameChanged,
     TResult Function(String passwordStr)? passwordChanged,
     TResult Function()? passwordVisibilityChanged,
@@ -940,6 +1121,7 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_LoadLastSavedCred value) loadLastSavedCred,
     required TResult Function(_UsernameChanged value) usernameChanged,
     required TResult Function(_PasswordChanged value) passwordChanged,
     required TResult Function(_PasswordVisibleChanged value)
@@ -956,6 +1138,7 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
     TResult Function(_UsernameChanged value)? usernameChanged,
     TResult Function(_PasswordChanged value)? passwordChanged,
     TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
@@ -971,6 +1154,7 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
     TResult Function(_UsernameChanged value)? usernameChanged,
     TResult Function(_PasswordChanged value)? passwordChanged,
     TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,

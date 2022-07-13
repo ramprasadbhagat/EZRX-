@@ -4,6 +4,9 @@ import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+final TextEditingController _usernameController = TextEditingController();
+final TextEditingController _passwordController = TextEditingController();
+
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -58,7 +61,7 @@ class LoginPage extends StatelessWidget {
                     Spacer(),
                     UsernameField(),
                     PasswordField(),
-                    // RememberPassword(),
+                    RememberPassword(),
                     Spacer(),
                     LoginButton(),
                     Spacer(),
@@ -95,22 +98,34 @@ class UsernameField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-      child: TextFormField(
-        key: const Key('loginUsernameField'),
-        keyboardType: TextInputType.emailAddress,
-        autocorrect: false,
-        decoration: const InputDecoration(labelText: 'Username'),
-        onChanged: (value) => context.read<LoginFormBloc>().add(
-              LoginFormEvent.usernameChanged(value),
-            ),
-        validator: (_) =>
-            context.read<LoginFormBloc>().state.username.value.fold(
-                  (f) => f.maybeMap(
-                    empty: (_) => 'Username cannot be empty',
-                    orElse: () => null,
+      child: BlocListener<LoginFormBloc, LoginFormState>(
+        listenWhen: (previous, current) =>
+            previous.username != current.username,
+        listener: (context, state) {
+          final username = state.username.getOrCrash();
+          _usernameController.value = TextEditingValue(
+            text: username,
+            selection: TextSelection.collapsed(offset: username.length),
+          );
+        },
+        child: TextFormField(
+          key: const Key('loginUsernameField'),
+          controller: _usernameController,
+          keyboardType: TextInputType.emailAddress,
+          autocorrect: false,
+          decoration: const InputDecoration(labelText: 'Username'),
+          onChanged: (value) => context.read<LoginFormBloc>().add(
+                LoginFormEvent.usernameChanged(value),
+              ),
+          validator: (_) =>
+              context.read<LoginFormBloc>().state.username.value.fold(
+                    (f) => f.maybeMap(
+                      empty: (_) => 'Username cannot be empty',
+                      orElse: () => null,
+                    ),
+                    (_) => null,
                   ),
-                  (_) => null,
-                ),
+        ),
       ),
     );
   }
@@ -123,13 +138,23 @@ class PasswordField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-      child: BlocBuilder<LoginFormBloc, LoginFormState>(
+      child: BlocConsumer<LoginFormBloc, LoginFormState>(
+        listenWhen: (previous, current) =>
+            previous.password != current.password,
+        listener: (context, state) {
+          final password = state.password.getOrCrash();
+          _passwordController.value = TextEditingValue(
+            text: password,
+            selection: TextSelection.collapsed(offset: password.length),
+          );
+        },
         buildWhen: (previous, current) =>
             previous.passwordVisible != current.passwordVisible ||
             previous.isSubmitting != current.isSubmitting,
         builder: (context, state) {
           return TextFormField(
             key: const Key('loginPasswordField'),
+            controller: _passwordController,
             keyboardType: TextInputType.visiblePassword,
             autocorrect: false,
             decoration: InputDecoration(

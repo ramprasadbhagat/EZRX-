@@ -1,9 +1,10 @@
 import 'package:ezrxmobile/domain/auth/entities/cred.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:hive/hive.dart';
 
 part 'cred_dto.g.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 1)
 class CredDto {
   CredDto({required this.username, required this.password});
 
@@ -14,15 +15,15 @@ class CredDto {
 
   factory CredDto.fromDomain(Cred cred) {
     return CredDto(
-      username: cred.username,
-      password: cred.password,
+      username: cred.username.getOrCrash(),
+      password: cred.password.getOrCrash(),
     );
   }
 
   Cred toDomain() {
     return Cred(
-      username: username,
-      password: password,
+      username: Username(username),
+      password: Password.login(password),
     );
   }
 }

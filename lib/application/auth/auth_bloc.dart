@@ -26,6 +26,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     await event.map(
       init: (e) async {
         await authRepository.initTokenStorage();
+        await authRepository.initCredStorage();
         await authRepository.initOkta();
         add(const AuthEvent.authCheck());
       },

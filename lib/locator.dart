@@ -31,6 +31,9 @@ void setupLocator() {
     () => TokenStorage(secureStorage: locator<SecureStorage>()),
   );
   locator.registerLazySingleton(
+    () => CredStorage(secureStorage: locator<SecureStorage>()),
+  );
+  locator.registerLazySingleton(
     () => AuthInterceptor(tokenStorage: locator<TokenStorage>()),
   );
   locator.registerLazySingleton(
@@ -49,8 +52,6 @@ void setupLocator() {
     () => AuthRemoteDataSource(httpService: locator<HttpService>()),
   );
 
-  locator.registerLazySingleton(() => CredStorage());
-
   locator.registerLazySingleton(
     () => OktaLoginServices(config: locator<Config>()),
   );
@@ -61,6 +62,7 @@ void setupLocator() {
       remoteDataSource: locator<AuthRemoteDataSource>(),
       localDataSource: locator<AuthLocalDataSource>(),
       tokenStorage: locator<TokenStorage>(),
+      credStorage: locator<CredStorage>(),
       oktaLoginServices: locator<OktaLoginServices>(),
     ),
   );

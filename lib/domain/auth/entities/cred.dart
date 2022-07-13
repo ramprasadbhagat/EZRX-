@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'cred.freezed.dart';
@@ -7,12 +8,12 @@ class Cred with _$Cred {
   const Cred._();
 
   const factory Cred({
-    required String username,
-    required String password,
+    required Username username,
+    required Password password,
   }) = _Cred;
 
-  factory Cred.empty() => const Cred(
-        username: '',
-        password: '',
+  factory Cred.empty() => Cred(
+        username: Username(''),
+        password: Password.login(''),
       );
 }

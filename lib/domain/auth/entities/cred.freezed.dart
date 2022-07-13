@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Cred {
-  String get username => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
+  Username get username => throw _privateConstructorUsedError;
+  Password get password => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CredCopyWith<Cred> get copyWith => throw _privateConstructorUsedError;
@@ -27,7 +27,7 @@ mixin _$Cred {
 abstract class $CredCopyWith<$Res> {
   factory $CredCopyWith(Cred value, $Res Function(Cred) then) =
       _$CredCopyWithImpl<$Res>;
-  $Res call({String username, String password});
+  $Res call({Username username, Password password});
 }
 
 /// @nodoc
@@ -47,11 +47,11 @@ class _$CredCopyWithImpl<$Res> implements $CredCopyWith<$Res> {
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Username,
       password: password == freezed
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Password,
     ));
   }
 }
@@ -61,7 +61,7 @@ abstract class _$$_CredCopyWith<$Res> implements $CredCopyWith<$Res> {
   factory _$$_CredCopyWith(_$_Cred value, $Res Function(_$_Cred) then) =
       __$$_CredCopyWithImpl<$Res>;
   @override
-  $Res call({String username, String password});
+  $Res call({Username username, Password password});
 }
 
 /// @nodoc
@@ -82,11 +82,11 @@ class __$$_CredCopyWithImpl<$Res> extends _$CredCopyWithImpl<$Res>
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Username,
       password: password == freezed
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Password,
     ));
   }
 }
@@ -97,9 +97,9 @@ class _$_Cred extends _Cred {
   const _$_Cred({required this.username, required this.password}) : super._();
 
   @override
-  final String username;
+  final Username username;
   @override
-  final String password;
+  final Password password;
 
   @override
   String toString() {
@@ -129,14 +129,14 @@ class _$_Cred extends _Cred {
 
 abstract class _Cred extends Cred {
   const factory _Cred(
-      {required final String username,
-      required final String password}) = _$_Cred;
+      {required final Username username,
+      required final Password password}) = _$_Cred;
   const _Cred._() : super._();
 
   @override
-  String get username;
+  Username get username;
   @override
-  String get password;
+  Password get password;
   @override
   @JsonKey(ignore: true)
   _$$_CredCopyWith<_$_Cred> get copyWith => throw _privateConstructorUsedError;

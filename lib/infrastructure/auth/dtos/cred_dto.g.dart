@@ -8,7 +8,7 @@ part of 'cred_dto.dart';
 
 class CredDtoAdapter extends TypeAdapter<CredDto> {
   @override
-  final int typeId = 0;
+  final int typeId = 1;
 
   @override
   CredDto read(BinaryReader reader) {

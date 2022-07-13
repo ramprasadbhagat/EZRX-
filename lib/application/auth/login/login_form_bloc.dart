@@ -16,7 +16,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
     required this.authRepository,
   }) : super(LoginFormState.initial()) {
     on<LoginFormEvent>(_onEvent);
-    // add(const LoginFormEvent.loadLastSavedCred());
+    add(const LoginFormEvent.loadLastSavedCred());
   }
 
   Future<void> _onEvent(
@@ -24,20 +24,23 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
     Emitter<LoginFormState> emit,
   ) async {
     await event.map(
-      // loadLastSavedCred: (e) async {
-      //   final failureOrSuccess = await authRepository.loadCredential();
-
-      //   failureOrSuccess.fold(
-      //     (_) {},
-      //     (cred) {
-      //       emit(state.copyWith(
-      //         username: Username(cred.username),
-      //         password: Password.login(cred.password),
-      //         authFailureOrSuccessOption: none(),
-      //       ));
-      //     },
-      //   );
-      // },
+      loadLastSavedCred: (e) async {
+        final failureOrSuccess = await authRepository.loadCredential();
+        failureOrSuccess.fold(
+          (_) {},
+          (cred) {
+            if (cred.username.getOrCrash().isNotEmpty &&
+                cred.password.getOrCrash().isNotEmpty) {
+              emit(state.copyWith(
+                username: cred.username,
+                password: cred.password,
+                rememberPassword: true,
+                authFailureOrSuccessOption: none(),
+              ));
+            }
+          },
+        );
+      },
       usernameChanged: (e) {
         emit(state.copyWith(
           username: Username(e.usernameStr),
@@ -75,12 +78,14 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
             (_) {},
             (loginv2) {
               authRepository.storeJWT(jwt: loginv2.jwt);
-              // if (state.rememberPassword) {
-              //   authRepository.storeCredential(
-              //     username: state.username,
-              //     password: state.password,
-              //   );
-              // }
+              if (state.rememberPassword) {
+                authRepository.storeCredential(
+                  username: state.username,
+                  password: state.password,
+                );
+              } else {
+                authRepository.deleteCredential();
+              }
             },
           );
 
@@ -116,6 +121,6 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
   @override
   void onChange(Change<LoginFormState> change) {
     super.onChange(change);
-    // debugPrint(change);
+    print(change);
   }
 }
