@@ -1,15 +1,17 @@
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/user/bloc/user_bloc.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/infrastructure/auth/datasource/auth_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/local_storage/cred_storage.dart';
 import 'package:ezrxmobile/infrastructure/auth/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/auth/okta/okta_login.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
-import 'package:ezrxmobile/infrastructure/core/http/base_options.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/http/interceptor.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/secure_storage.dart';
+import 'package:ezrxmobile/infrastructure/user/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/user/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/user/repository/user_repository.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -22,7 +24,7 @@ void setupLocator() {
   //  CORE
   //
   //============================================================
-
+  locator.registerLazySingleton(() => Config());
   locator.registerLazySingleton(() => AppRouter());
   locator.registerLazySingleton(() => SecureStorage());
   locator.registerLazySingleton(
@@ -33,7 +35,7 @@ void setupLocator() {
   );
   locator.registerLazySingleton(
     () => HttpService(
-      baseOptions: StageBaseOptions(),
+      config: locator<Config>(),
       interceptors: [locator<AuthInterceptor>()],
     ),
   );
@@ -42,17 +44,22 @@ void setupLocator() {
   //  Auth
   //
   //============================================================
+  locator.registerLazySingleton(() => AuthLocalDataSource());
   locator.registerLazySingleton(
     () => AuthRemoteDataSource(httpService: locator<HttpService>()),
   );
 
   locator.registerLazySingleton(() => CredStorage());
 
-  locator.registerLazySingleton(() => OktaLoginServices());
+  locator.registerLazySingleton(
+    () => OktaLoginServices(config: locator<Config>()),
+  );
 
   locator.registerLazySingleton(
     () => AuthRepository(
+      config: locator<Config>(),
       remoteDataSource: locator<AuthRemoteDataSource>(),
+      localDataSource: locator<AuthLocalDataSource>(),
       tokenStorage: locator<TokenStorage>(),
       oktaLoginServices: locator<OktaLoginServices>(),
     ),
@@ -75,13 +82,16 @@ void setupLocator() {
   //  User
   //
   //============================================================
+  locator.registerLazySingleton(() => UserLocalDataSource());
   locator.registerLazySingleton(
     () => UserRemoteDataSource(httpService: locator<HttpService>()),
   );
 
   locator.registerLazySingleton(
     () => UserRepository(
+      config: locator<Config>(),
       remoteDataSource: locator<UserRemoteDataSource>(),
+      localDataSource: locator<UserLocalDataSource>(),
     ),
   );
 

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/jwt.dart';
 import 'package:ezrxmobile/domain/auth/entities/loginv2.dart';
 import 'package:ezrxmobile/domain/auth/error/auth_exception.dart';
@@ -8,19 +9,24 @@ import 'package:ezrxmobile/domain/auth/repository/i_auth_repository.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/local_storage/i_token_storage.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/infrastructure/auth/datasource/auth_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:flutter/services.dart';
 
 class AuthRepository implements IAuthRepository {
+  final Config config;
   final AuthRemoteDataSource remoteDataSource;
-  // final AuthLocalDataSource localDataSource;
+  final AuthLocalDataSource localDataSource;
   final ITokenStorage tokenStorage;
   final ILoginService oktaLoginServices;
+
   // final ICredStorage credStorage;
 
   AuthRepository({
+    required this.config,
     required this.remoteDataSource,
+    required this.localDataSource,
     required this.tokenStorage,
     required this.oktaLoginServices,
     // required this.credStorage,
@@ -31,9 +37,19 @@ class AuthRepository implements IAuthRepository {
     required Username username,
     required Password password,
   }) async {
-    // if (const String.fromEnvironment('flavor') == 'dev') {
     final usernameStr = username.getOrCrash();
     final passwordStr = password.getOrCrash();
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final loginv2 = await localDataSource.loginWithPassword(
+          username: usernameStr,
+          password: passwordStr,
+        );
+        return Right(loginv2);
+      } on LocalException catch (e) {
+        return Left(AuthFailure.other(e.message));
+      }
+    }
     try {
       final loginv2 = await remoteDataSource.loginWithPassword(
         username: usernameStr,
@@ -52,23 +68,21 @@ class AuthRepository implements IAuthRepository {
     } on ServerException catch (e) {
       return Left(AuthFailure.other(e.message));
     }
-    // }
-    // else {
-    //   try {
-    //     final jwt = await remoteDataSource.login(
-    //       username: username,
-    //       password: password,
-    //     );
-    //     return Right(jwt);
-    //   } on LocalException {
-    //     return const Left(AuthFailure.invalidEmailAndPasswordCombination());
-    //   }
-    // }
   }
 
   @override
   Future<Either<AuthFailure, LoginV2>> getEZRXJWT(
       String oktaAccessToken) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final loginv2 = await localDataSource.loginWithOktaToken(
+          oktaAccessToken: oktaAccessToken,
+        );
+        return Right(loginv2);
+      } on LocalException catch (e) {
+        return Left(AuthFailure.other(e.message));
+      }
+    }
     try {
       final loginv2 = await remoteDataSource.loginWithOktaToken(
         oktaAccessToken: oktaAccessToken,

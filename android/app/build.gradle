@@ -25,6 +25,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 android {
     compileSdkVersion flutter.compileSdkVersion
 
@@ -43,26 +49,69 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.zuelligpharma.ezrxmobile.dev"
+        applicationId "com.zuelligpharma.ezrxmobile"
         minSdkVersion localProperties.getProperty('flutter.minSdkVersion').toInteger()
         targetSdkVersion localProperties.getProperty('flutter.targetSdkVersion').toInteger()
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         manifestPlaceholders += [appAuthRedirectScheme: "com.oktapreview.zuellig"]
-        resValue "string", "app_name", "eZRx"
     }
 
-    
+    signingConfigs {
+        debug {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword keystoreProperties['storePassword']
+        }
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword keystoreProperties['storePassword']
+        }
+    }
 
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
         }
-        // release {
-        //     signingConfig signingConfigs.release
-        //     useProguard true
-        //     proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        // }
+        release {
+            useProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    flavorDimensions "env"
+
+    productFlavors {
+        mock {
+            dimension "env"
+            versionNameSuffix "-mock"
+            applicationIdSuffix ".mock"
+            resValue "string", "app_name", "eZRx Mock"
+        }
+
+        dev {
+            dimension "env"
+            versionNameSuffix "-dev"
+            applicationIdSuffix ".dev"
+            resValue "string", "app_name", "eZRx Dev"
+        }
+
+        uat {
+            dimension "env"
+            versionNameSuffix "-uat"
+            applicationIdSuffix ".uat"
+            resValue "string", "app_name", "eZRx Uat"
+        }
+
+        prod {
+            dimension "env"
+            resValue "string", "app_name", "eZRx"
+        }
+
     }
 }
 

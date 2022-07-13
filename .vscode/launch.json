@@ -8,38 +8,52 @@
             "name": "dev",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main.dart",
-            // "args": [
-            //     "--flavor",
-            //     "dev"
-            // ],
+            "program": "lib/main_dev.dart",
+            "args": [
+                "--flavor",
+                "dev"
+            ],
         },
         {
             "name": "uat",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main.dart",
-            // "args": [
-            //     "--flavor",
-            //     "uat"
-            // ],
+            "program": "lib/main_uat.dart",
+            "args": [
+                "--flavor",
+                "uat"
+            ],
         },
         {
             "name": "prod",
             "request": "launch",
             "type": "dart",
             "program": "lib/main.dart",
-            // "args": [
-            //     // "--release",
-            //     "--flavor",
-            //     "prod"
-            // ],
+            "args": [
+                "--flavor",
+                "prod"
+            ],
+        },
+        {
+            "name": "mock",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_mock.dart",
+            "args": [
+                "--flavor",
+                "mock"
+            ],
         },
         {
             "name": "profile",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "flutterMode": "profile",
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "uat"
+            ],
         }
     ]
 }

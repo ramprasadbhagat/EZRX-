@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 
 class HttpService {
@@ -9,14 +10,10 @@ class HttpService {
   Dio dio() => _dio;
 
   HttpService({
-    required BaseOptions baseOptions,
+    required Config config,
     required List<Interceptor> interceptors,
   }) {
-    _dio = Dio(
-      BaseOptions(
-          baseUrl:
-              'https://zpprodapiportalapimgmt.apimanagement.ap1.hana.ondemand.com'),
-    );
+    _dio = Dio(BaseOptions(baseUrl: config.baseUrl));
     _dio.interceptors.addAll([
       LogInterceptor(requestBody: true, responseBody: true),
       ...interceptors,

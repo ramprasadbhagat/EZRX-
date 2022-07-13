@@ -1,14 +1,17 @@
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/login/I_login_service.dart';
-import 'package:ezrxmobile/infrastructure/constant/okta_config.dart';
 import 'package:flutter/services.dart';
 import 'package:okta_oidc/okta_oidc.dart';
 
 class OktaLoginServices implements ILoginService {
   final _oktaOidcPlugin = OktaOidc();
+  Config config;
+
+  OktaLoginServices({required this.config});
 
   @override
   Future<bool?> init() async {
-    return _oktaOidcPlugin.initOkta(OktaConfig.config).then((value) {
+    return _oktaOidcPlugin.initOkta(config.oktaConfig).then((value) {
       return value ?? (throw PlatformException(code: '0'));
     }).catchError((error) => throw error as PlatformException);
   }

@@ -1,7 +1,5 @@
 # ezrxmobile
 
-A new Flutter project.
-
 ## Require
 - [Vscode](https://code.visualstudio.com/)
 - [Flutter extension](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter)
@@ -21,12 +19,32 @@ A new Flutter project.
 
 ## Test Coverage
 1. [Read this](https://codewithandrea.com/articles/flutter-test-coverage/)
-2. brew install lcov
-3. fvm flutter test --coverage
-4. genhtml coverage/lcov.info -o coverage/html
+2. ```brew install lcov```
+3. ```fvm flutter test --coverage```
+4. ```genhtml coverage/lcov.info -o coverage/html```
 
 ## Integration test
 ```fvm flutter drive --driver=test_driver/integration_driver.dart --target=integration_test/login_test.dart```
 
 ## Auto build json_serializable, freezed, auto_route_generator, hive_generator 
 ```fvm flutter pub run build_runner watch --delete-conflicting-outputs```
+
+## Flavor
+| Flavor| Package name | App Name | Endpoint |
+|--|--|--|--|
+| PROD |  `com.zuelligpharma.ezrxmobile`| eZRx | https://ezrx.com |
+| UAT  |  `com.zuelligpharma.ezrxmobile.uat`| eZRx Uat | https://zpprodapiportalapimgmt.apimanagement.ap1.hana.ondemand.com |
+| DEV  |  `com.zuelligpharma.ezrxmobile.dev`| eZRx Dev | http://127.0.0.1:8080 |
+| MOCK  |  `com.zuelligpharma.ezrxmobile.mock`| eZRx Mock | local json |
+
+## Build app
+### IOS
+- ```fvm flutter build ios --flavor mock -t lib/main_mock.dart```
+- ```fvm flutter build ios --flavor dev -t lib/main_dev.dart```
+- ```fvm flutter build ios --flavor uat -t lib/main_uat.dart```
+- ```fvm flutter build ios --flavor prod -t lib/main.dart```
+### Android
+- ```fvm flutter build appbundle --flavor mock -t lib/main_mock.dart```
+- ```fvm flutter build appbundle --flavor dev -t lib/main_dev.dart```
+- ```fvm flutter build appbundle --flavor uat -t lib/main_uat.dart```
+- ```fvm flutter build appbundle --flavor prod -t lib/main.dart```

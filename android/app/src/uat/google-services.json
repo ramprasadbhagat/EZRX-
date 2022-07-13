@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "289365077122",
+    "project_id": "ezrx-uat",
+    "storage_bucket": "ezrx-uat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289365077122:android:f090a3b6cfa429b2f6589b",
+        "android_client_info": {
+          "package_name": "com.zuelligpharma.ezrxmobile.uat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "289365077122-fo2k0ba3q9p185afokr84t3jsfaaqq57.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDt5uh_WFQphr3EHKkZQLNy-wTz-fqt4Us"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "289365077122-fo2k0ba3q9p185afokr84t3jsfaaqq57.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "289365077122-mverp0qve2uuj8c01nsnppjnt3poqonq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.zuelligpharma.ezrxmobile.uat"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
