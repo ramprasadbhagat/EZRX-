@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/auth/proxyLogin/proxy_login_form_bloc.dart';
-import 'package:ezrxmobile/application/user/bloc/user_bloc.dart';
+import 'package:ezrxmobile/application/user/user_bloc.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
