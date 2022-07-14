@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/user/bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,21 @@ class AccountTab extends StatelessWidget {
                       style: Theme.of(context).textTheme.headline6,
                     ),
                     onTap: () {},
+                  );
+                },
+              ),
+              BlocBuilder<UserBloc, UserState>(
+                buildWhen: (previous, current) => previous.user != current.user,
+                builder: (context, state) {
+                  return Visibility(
+                    //@@@@@ need convert to valueObject
+                    visible: state.user.role.id == '7',
+                    child: ListTile(
+                      key: const Key('loginOnBehalfTile'),
+                      leading: const Icon(Icons.person_outline),
+                      title: const Text('Login on behalf'),
+                      onTap: () => context.router.pushNamed('login_on_behalf'),
+                    ),
                   );
                 },
               ),

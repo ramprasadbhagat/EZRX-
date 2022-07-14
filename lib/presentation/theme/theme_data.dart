@@ -17,6 +17,15 @@ final appThemeData = {
     iconTheme: const IconThemeData(
       color: ZPColors.lightGray,
     ),
+    appBarTheme: AppBarTheme(
+      centerTitle: true,
+      color: ZPColors.white,
+      titleTextStyle: ThemeData.light().textTheme.headline1,
+      iconTheme: const IconThemeData(
+        color: ZPColors.lightGray,
+      ),
+      elevation: 1,
+    ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       selectedItemColor: ZPColors.darkBlue,
       unselectedItemColor: ZPColors.lightGray,

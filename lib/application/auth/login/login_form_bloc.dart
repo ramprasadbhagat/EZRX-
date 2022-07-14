@@ -29,8 +29,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
         failureOrSuccess.fold(
           (_) {},
           (cred) {
-            if (cred.username.getOrCrash().isNotEmpty &&
-                cred.password.getOrCrash().isNotEmpty) {
+            if (cred.username.isValid() && cred.password.isValid()) {
               emit(state.copyWith(
                 username: cred.username,
                 password: cred.password,
@@ -121,6 +120,6 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
   @override
   void onChange(Change<LoginFormState> change) {
     super.onChange(change);
-    print(change);
+    // print(change);
   }
 }

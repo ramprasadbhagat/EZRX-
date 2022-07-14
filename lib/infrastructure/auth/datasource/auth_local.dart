@@ -23,4 +23,11 @@ class AuthLocalDataSource {
     );
     return LoginV2Dto.fromJson(data['data']['loginV2']).toDomain();
   }
+
+  Future<LoginV2> proxyLoginWithUsername({required String username}) async {
+    final data = json.decode(
+      await rootBundle.loadString('assets/json/proxyLoginResponse.json'),
+    );
+    return LoginV2Dto.fromJson(data['data']['proxyLoginV2']).toDomain();
+  }
 }

@@ -72,6 +72,40 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
+  Future<Either<AuthFailure, LoginV2>> proxyLogin({
+    required Username username,
+  }) async {
+    final usernameStr = username.getOrCrash();
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final loginv2 = await localDataSource.proxyLoginWithUsername(
+          username: usernameStr,
+        );
+        return Right(loginv2);
+      } on LocalException catch (e) {
+        return Left(AuthFailure.other(e.message));
+      }
+    }
+    try {
+      final loginv2 = await remoteDataSource.proxyLoginWithUsername(
+        username: usernameStr,
+      );
+      return Right(loginv2);
+    } on AuthException catch (e) {
+      return Left(e.map(
+        other: (other) => AuthFailure.other(other.message),
+        serverError: (_) => const AuthFailure.serverError(),
+        invalidEmailAndPasswordCombination: (_) =>
+            const AuthFailure.invalidEmailAndPasswordCombination(),
+        accountLocked: (_) => const AuthFailure.accountLocked(),
+        accountExpired: (_) => const AuthFailure.accountExpired(),
+      ));
+    } on ServerException catch (e) {
+      return Left(AuthFailure.other(e.message));
+    }
+  }
+
+  @override
   Future<Either<AuthFailure, LoginV2>> getEZRXJWT(JWT oktaAccessToken) async {
     final token = oktaAccessToken.getOrCrash();
     if (config.appFlavor == Flavor.mock) {

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
+import 'package:ezrxmobile/application/auth/proxyLogin/proxy_login_form_bloc.dart';
 import 'package:ezrxmobile/application/user/bloc/user_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -37,6 +38,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<AuthBloc>(create: (context) => locator<AuthBloc>()),
         BlocProvider<LoginFormBloc>(
           create: (context) => locator<LoginFormBloc>(),
+        ),
+        BlocProvider<ProxyLoginFormBloc>(
+          create: (context) => locator<ProxyLoginFormBloc>(),
         ),
         BlocProvider<UserBloc>(create: (context) => locator<UserBloc>()),
       ],

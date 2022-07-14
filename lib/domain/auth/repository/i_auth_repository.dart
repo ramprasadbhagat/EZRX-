@@ -24,9 +24,7 @@ abstract class IAuthRepository {
   });
   Future deleteCredential();
   Future<Either<AuthFailure, Cred>> loadCredential();
-  // Future<Either<AuthFailure, JWT>> proxyLogin({
-  //   required Username username,
-  // });
+  Future<Either<AuthFailure, LoginV2>> proxyLogin({required Username username});
   // void logout();
   // Future<Either<Failure, List<BusStop>>> resetPassword({
   //   LatLng? currentPosition,

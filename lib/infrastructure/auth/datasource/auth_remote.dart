@@ -58,6 +58,28 @@ class AuthRemoteDataSource {
     return LoginV2Dto.fromJson(res.data['data']['loginV2']).toDomain();
   }
 
+  Future<LoginV2> proxyLoginWithUsername({required String username}) async {
+    final res = await httpService.request(
+      method: 'POST',
+      url: '/ezrxapi/api/loginAd',
+      data: jsonEncode({'query': proxyLoginData(username)}),
+    );
+
+    if (res.statusCode != 200) {
+      throw const AuthException.serverError();
+    } else if (res.data['errors'] != null && res.data['data'] == null) {
+      throw AuthException.other(res.data['errors'][0]['message']);
+    } else if (res.data['data']['proxyLoginV2']['authenticated'] == false) {
+      throw const AuthException.invalidEmailAndPasswordCombination();
+    } else if (res.data['data']['proxyLoginV2']['isAccountLocked'] == true) {
+      throw const AuthException.accountLocked();
+    } else if (res.data['data']['proxyLoginV2']['isAccountExpired'] == true) {
+      throw const AuthException.accountExpired();
+    }
+
+    return LoginV2Dto.fromJson(res.data['data']['proxyLoginV2']).toDomain();
+  }
+
   String passwordLoginData(String username, String password, String fcmtoken) {
     return '''{
       loginV2(
@@ -79,6 +101,19 @@ class AuthRemoteDataSource {
           accessToken: "$oktaToken" 
           isOktaAuthenticated: true
       ) {
+          authenticated
+          eZRxJWT
+          isAccountLocked
+          isAccountExpired
+      }
+    }''';
+  }
+
+  String proxyLoginData(String username) {
+    return '''{
+      proxyLoginV2(request:{ 
+          username: "$username"
+      }) {
           authenticated
           eZRxJWT
           isAccountLocked
