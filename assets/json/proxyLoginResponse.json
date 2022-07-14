@@ -1,53 +1,6 @@
 {
     "data":{
        "proxyLoginV2":{
-          "user":{
-             "id":7725,
-             "role":{
-                "id":8,
-                "name":"Internal Sales Rep",
-                "type":"internal_sales_rep",
-                "description":"Internal Sales Representative"
-             },
-             "username":"vwong",
-             "firstName":"Valerie",
-             "lastName":"Wong",
-             "email":"vwong@zuelligpharma.com",
-             "isFromAD":true,
-             "userSalesOrganisationList":{
-                "value":[
-                   {
-                      "customerCode":"all",
-                      "shipToCode":[
-                         "all"
-                      ],
-                      "salesOrg":"2601"
-                   }
-                ]
-             },
-             "blocked":false,
-             "mobileNumber":"-",
-             "countryCode":"-",
-             "initialLogin":true,
-             "accessRight":{
-                "Users":true,
-                "Orders":true,
-                "Promos":false,
-                "HCPHUB":false,
-                "Products":false,
-                "Services":false,
-                "Analytics":false
-             },
-             "hasBonusOverride":null,
-             "hasPriceOverride":null,
-             "acceptTC":false,
-             "acceptAUP":true,
-             "acceptLocalTC":false,
-             "acceptMobileTC":null,
-             "mobileAccess":true,
-             "disable2fa":null,
-             "totp2fa":null
-          },
           "authenticated":true,
           "eZRxJWT":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoidzl4cEFhQkRZUSIsImV4cCI6MTY1Nzg1NTc5MCwiaWF0IjoxNjU3NzY5MzkwLCJpZCI6NzcyNSwicmlnaHRzIjpbeyJ2YWx1ZSI6W3siY3VzdG9tZXJDb2RlIjoiYWxsIiwic2FsZXNPcmciOiIyNjAxIiwic2hpcFRvQ29kZSI6WyJhbGwiXX1dfV0sInJvbGUiOiJJbnRlcm5hbCBTYWxlcyBSZXAiLCJzYWxlc09yZ3MiOlsiMjYwMSJdLCJ1c2VybmFtZSI6InZ3b25nIn0.ixiBTaIef-Sn3NQU-kw8sZ_vKEmgSgZj8tAh-u06htA",
           "passwordLastReset":"",
