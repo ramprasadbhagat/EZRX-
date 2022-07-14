@@ -33,8 +33,7 @@ class AccountTab extends StatelessWidget {
                 buildWhen: (previous, current) => previous.user != current.user,
                 builder: (context, state) {
                   return Visibility(
-                    //@@@@@ need convert to valueObject
-                    visible: state.user.role.id == '7',
+                    visible: state.user.role.name.canLoginOnBehalf,
                     child: ListTile(
                       key: const Key('loginOnBehalfTile'),
                       leading: const Icon(Icons.person_outline),

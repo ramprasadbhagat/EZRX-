@@ -11,7 +11,6 @@ class UserLocalDataSource {
   final ITokenStorage tokenStorage;
   UserLocalDataSource({required this.tokenStorage});
 
-  @override
   Future<User> getUser() async {
     final token = await tokenStorage.get();
     final data = json.decode(

@@ -28,3 +28,18 @@ class SalesOrg extends ValueObject<String> {
 
   const SalesOrg._(this.value);
 }
+
+class RoleName extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory RoleName(String input) {
+    return RoleName._(Right(input));
+  }
+
+  bool get canLoginOnBehalf {
+    return isAdmin(value.getOrElse(() => ''));
+  }
+
+  const RoleName._(this.value);
+}

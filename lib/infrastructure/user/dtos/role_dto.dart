@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/user/entities/role.dart';
+import 'package:ezrxmobile/domain/user/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'role_dto.freezed.dart';
@@ -17,13 +18,13 @@ class RoleDto with _$RoleDto {
   factory RoleDto.fromDomain(Role role) {
     return RoleDto(
       id: role.id,
-      name: role.name,
+      name: role.name.getOrCrash(),
       description: role.description,
     );
   }
 
   Role toDomain() {
-    return Role(id: id, name: name, description: description);
+    return Role(id: id, name: RoleName(name), description: description);
   }
 
   factory RoleDto.fromJson(Map<String, dynamic> json) =>

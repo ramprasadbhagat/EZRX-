@@ -26,7 +26,7 @@ class User with _$User {
         username: Username(''),
         email: EmailAddress(''),
         fullName: const FullName(firstName: '', lastName: ''),
-        role: const Role(id: '', name: '', description: ''),
+        role: Role(id: '', name: RoleName(''), description: ''),
         customerCode: CustomerCode(''),
         userSalesOrganisations: <SalesOrganisation>[],
         settings: const Settings(

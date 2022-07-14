@@ -59,3 +59,13 @@ String salesOrgBuName(String salesOrg) {
       return '';
   }
 }
+
+bool isAdmin(String roleName) {
+  switch (roleName) {
+    case 'ROOT Admin':
+    case 'ZP Admin':
+      return true;
+    default:
+      return false;
+  }
+}

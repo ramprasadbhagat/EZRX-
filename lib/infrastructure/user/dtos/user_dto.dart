@@ -53,7 +53,11 @@ class UserDto with _$UserDto {
       username: Username(username),
       email: EmailAddress(email),
       fullName: FullName(firstName: firstName, lastName: lastName),
-      role: Role(id: role.id, name: role.name, description: role.description),
+      role: Role(
+        id: role.id,
+        name: RoleName(role.name),
+        description: role.description,
+      ),
       customerCode: CustomerCode(customerCode),
       userSalesOrganisations: userSalesOrganisations
           .map((e) => SalesOrganisation(salesOrg: SalesOrg(e.salesOrg)))

@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/user/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'role.freezed.dart';
@@ -8,13 +9,13 @@ class Role with _$Role {
 
   const factory Role({
     required String id,
-    required String name,
+    required RoleName name,
     required String description,
   }) = _Role;
 
-  factory Role.empty() => const Role(
+  factory Role.empty() => Role(
         id: '',
-        name: '',
+        name: RoleName(''),
         description: '',
       );
 }

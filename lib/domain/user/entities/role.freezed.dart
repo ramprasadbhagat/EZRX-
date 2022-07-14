@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Role {
   String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  RoleName get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -28,7 +28,7 @@ mixin _$Role {
 abstract class $RoleCopyWith<$Res> {
   factory $RoleCopyWith(Role value, $Res Function(Role) then) =
       _$RoleCopyWithImpl<$Res>;
-  $Res call({String id, String name, String description});
+  $Res call({String id, RoleName name, String description});
 }
 
 /// @nodoc
@@ -53,7 +53,7 @@ class _$RoleCopyWithImpl<$Res> implements $RoleCopyWith<$Res> {
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as RoleName,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -67,7 +67,7 @@ abstract class _$$_RoleCopyWith<$Res> implements $RoleCopyWith<$Res> {
   factory _$$_RoleCopyWith(_$_Role value, $Res Function(_$_Role) then) =
       __$$_RoleCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String name, String description});
+  $Res call({String id, RoleName name, String description});
 }
 
 /// @nodoc
@@ -93,7 +93,7 @@ class __$$_RoleCopyWithImpl<$Res> extends _$RoleCopyWithImpl<$Res>
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as RoleName,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -112,7 +112,7 @@ class _$_Role extends _Role {
   @override
   final String id;
   @override
-  final String name;
+  final RoleName name;
   @override
   final String description;
 
@@ -148,14 +148,14 @@ class _$_Role extends _Role {
 abstract class _Role extends Role {
   const factory _Role(
       {required final String id,
-      required final String name,
+      required final RoleName name,
       required final String description}) = _$_Role;
   const _Role._() : super._();
 
   @override
   String get id;
   @override
-  String get name;
+  RoleName get name;
   @override
   String get description;
   @override
