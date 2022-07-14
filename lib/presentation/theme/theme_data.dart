@@ -17,6 +17,12 @@ final appThemeData = {
     iconTheme: const IconThemeData(
       color: ZPColors.lightGray,
     ),
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: ZPColors.primary,
+    ),
+    dialogTheme: DialogTheme(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+    ),
     appBarTheme: AppBarTheme(
       centerTitle: true,
       color: ZPColors.white,

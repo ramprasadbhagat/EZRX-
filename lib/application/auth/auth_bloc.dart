@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/user/repository/i_user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_auth_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -12,11 +11,9 @@ part 'auth_bloc.freezed.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final IAuthRepository authRepository;
-  final IUserRepository userRepository;
 
   AuthBloc({
     required this.authRepository,
-    required this.userRepository,
   }) : super(const AuthState.initial()) {
     on<AuthEvent>(_onEvent);
     add(const AuthEvent.init());
@@ -31,13 +28,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         add(const AuthEvent.authCheck());
       },
       authCheck: (e) async {
-        final result = await userRepository.getUser();
+        final result = await authRepository.tokenValid();
         await result.fold(
-          (failure) async => add(const AuthEvent.refreshOktaToken()),
-          (success) async => emit(const AuthState.authenticated()),
+          (invalid) async => add(const AuthEvent.refreshOktaToken()),
+          (valid) async => emit(const AuthState.authenticated()),
         );
       },
       refreshOktaToken: (e) async {
+        emit(const AuthState.loading());
         final oktaResult = await authRepository.getOktaAccessToken();
         await oktaResult.fold(
           (failure) async => emit(const AuthState.unauthenticated()),
@@ -56,8 +54,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           },
         );
       },
-      logout: (e) async {
-        await authRepository.logout();
+      logout: (e) {
+        authRepository.logout();
         emit(const AuthState.unauthenticated());
       },
     );

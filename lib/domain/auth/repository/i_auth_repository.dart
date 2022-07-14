@@ -14,6 +14,7 @@ abstract class IAuthRepository {
   Future storeJWT({required JWT jwt});
   Future<Either<AuthFailure, Unit>> initTokenStorage();
   Future<Either<AuthFailure, Unit>> initOkta();
+  Future<Either<AuthFailure, Unit>> tokenValid();
   Future<Either<AuthFailure, Unit>> loginWithOkta();
   Future<Either<AuthFailure, JWT>> getOktaAccessToken();
   Future<Either<AuthFailure, Unit>> logout();
@@ -25,8 +26,4 @@ abstract class IAuthRepository {
   Future deleteCredential();
   Future<Either<AuthFailure, Cred>> loadCredential();
   Future<Either<AuthFailure, LoginV2>> proxyLogin({required Username username});
-  // void logout();
-  // Future<Either<Failure, List<BusStop>>> resetPassword({
-  //   LatLng? currentPosition,
-  // });
 }

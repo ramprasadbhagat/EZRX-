@@ -13,29 +13,48 @@ class SplashPage extends StatelessWidget {
       listenWhen: (previous, current) => previous != current,
       listener: (context, state) {
         state.map(
-            initial: (_) {},
-            authenticated: (_) {
-              // showSnackBar(context: context, message: 'Welcome back');
-              context.router.replaceAll([
-                const SplashPageRoute(),
-                const HomeNavigationTabbarRoute(),
-              ]);
-            },
-            unauthenticated: (_) {
-              // showSnackBar(context: context, message: 'Please login');
-              context.router.replaceAll([
-                const SplashPageRoute(),
-                const LoginPageRoute(),
-              ]);
-            });
+          initial: (_) => _showLoadingDialog(context),
+          loading: (_) => _showLoadingDialog(context),
+          authenticated: (_) {
+            // showSnackBar(context: context, message: 'Welcome back');
+            context.router.replaceAll([
+              const SplashPageRoute(),
+              const HomeNavigationTabbarRoute(),
+            ]);
+          },
+          unauthenticated: (_) {
+            // showSnackBar(context: context, message: 'Please login');
+            context.router.replaceAll([
+              const SplashPageRoute(),
+              const LoginPageRoute(),
+            ]);
+          },
+        );
       },
-      child: const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(
-            key: Key('splashLoadingIndicator'),
+      child: const Scaffold(),
+    );
+  }
+
+  void _showLoadingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: const <Widget>[
+              SizedBox(
+                width: 50,
+                height: 50,
+                child: CircularProgressIndicator(
+                  key: Key('splashLoadingIndicator'),
+                ),
+              ),
+            ],
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

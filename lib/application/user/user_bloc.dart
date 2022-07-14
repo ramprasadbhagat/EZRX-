@@ -22,7 +22,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     add(const UserEvent.fetch());
     _authBlocSubscription = authBloc.stream.listen((state) {
       state.map(
-        initial: (_) => add(const UserEvent.initialized()),
+        initial: (_) {},
+        loading: (_) {},
         authenticated: (_) => add(const UserEvent.fetch()),
         unauthenticated: (_) => add(const UserEvent.initialized()),
       );

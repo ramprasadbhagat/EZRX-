@@ -34,6 +34,7 @@ class LoginPage extends StatelessWidget {
                             'Wrong Username and/or Password!',
                         accountLocked: (_) => 'Account is Locked',
                         accountExpired: (_) => 'Account is Expired',
+                        tokenExpired: (_) => 'Session token is Expired',
                       ),
                     );
                   },

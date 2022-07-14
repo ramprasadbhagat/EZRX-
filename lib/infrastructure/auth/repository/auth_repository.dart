@@ -155,6 +155,20 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
+  Future<Either<AuthFailure, Unit>> tokenValid() async {
+    try {
+      final token = await tokenStorage.get();
+      return token.toDomain().isValid()
+          ? const Right(unit)
+          : const Left(AuthFailure.tokenExpired());
+    } on PlatformException catch (e) {
+      return Left(AuthFailure.other('${e.message}'));
+    } on ServerException catch (e) {
+      return Left(AuthFailure.other(e.message));
+    }
+  }
+
+  @override
   Future<Either<AuthFailure, Unit>> initOkta() async {
     try {
       await oktaLoginServices.init();

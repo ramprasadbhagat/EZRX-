@@ -105,7 +105,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
         final failureOrSuccess = await authRepository.loginWithOkta();
         emit(state.copyWith(
           isSubmitting: false,
-          showErrorMessages: true,
+          showErrorMessages: false,
           authFailureOrSuccessOption: optionOf(failureOrSuccess),
         ));
       },

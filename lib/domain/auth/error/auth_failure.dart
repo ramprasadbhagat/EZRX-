@@ -10,4 +10,5 @@ class AuthFailure with _$AuthFailure {
       _InvalidEmailAndPasswordCombination;
   const factory AuthFailure.accountLocked() = _AccountLocked;
   const factory AuthFailure.accountExpired() = _AccountExpired;
+  const factory AuthFailure.tokenExpired() = _TokenExpired;
 }

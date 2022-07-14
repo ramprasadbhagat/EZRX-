@@ -23,6 +23,7 @@ mixin _$AuthFailure {
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +33,7 @@ mixin _$AuthFailure {
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +43,7 @@ mixin _$AuthFailure {
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -52,6 +55,7 @@ mixin _$AuthFailure {
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,6 +66,7 @@ mixin _$AuthFailure {
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,6 +77,7 @@ mixin _$AuthFailure {
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -160,6 +166,7 @@ class _$_Other implements _Other {
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
   }) {
     return other(message);
   }
@@ -172,6 +179,7 @@ class _$_Other implements _Other {
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
   }) {
     return other?.call(message);
   }
@@ -184,6 +192,7 @@ class _$_Other implements _Other {
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -201,6 +210,7 @@ class _$_Other implements _Other {
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
   }) {
     return other(this);
   }
@@ -214,6 +224,7 @@ class _$_Other implements _Other {
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
   }) {
     return other?.call(this);
   }
@@ -227,6 +238,7 @@ class _$_Other implements _Other {
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -290,6 +302,7 @@ class _$_ServerError implements _ServerError {
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
   }) {
     return serverError();
   }
@@ -302,6 +315,7 @@ class _$_ServerError implements _ServerError {
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
   }) {
     return serverError?.call();
   }
@@ -314,6 +328,7 @@ class _$_ServerError implements _ServerError {
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -331,6 +346,7 @@ class _$_ServerError implements _ServerError {
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
   }) {
     return serverError(this);
   }
@@ -344,6 +360,7 @@ class _$_ServerError implements _ServerError {
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
   }) {
     return serverError?.call(this);
   }
@@ -357,6 +374,7 @@ class _$_ServerError implements _ServerError {
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -421,6 +439,7 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
   }) {
     return invalidEmailAndPasswordCombination();
   }
@@ -433,6 +452,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
   }) {
     return invalidEmailAndPasswordCombination?.call();
   }
@@ -445,6 +465,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -462,6 +483,7 @@ class _$_InvalidEmailAndPasswordCombination
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
   }) {
     return invalidEmailAndPasswordCombination(this);
   }
@@ -475,6 +497,7 @@ class _$_InvalidEmailAndPasswordCombination
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
   }) {
     return invalidEmailAndPasswordCombination?.call(this);
   }
@@ -488,6 +511,7 @@ class _$_InvalidEmailAndPasswordCombination
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -548,6 +572,7 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
   }) {
     return accountLocked();
   }
@@ -560,6 +585,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
   }) {
     return accountLocked?.call();
   }
@@ -572,6 +598,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -589,6 +616,7 @@ class _$_AccountLocked implements _AccountLocked {
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
   }) {
     return accountLocked(this);
   }
@@ -602,6 +630,7 @@ class _$_AccountLocked implements _AccountLocked {
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
   }) {
     return accountLocked?.call(this);
   }
@@ -615,6 +644,7 @@ class _$_AccountLocked implements _AccountLocked {
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -674,6 +704,7 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
   }) {
     return accountExpired();
   }
@@ -686,6 +717,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
   }) {
     return accountExpired?.call();
   }
@@ -698,6 +730,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -715,6 +748,7 @@ class _$_AccountExpired implements _AccountExpired {
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
   }) {
     return accountExpired(this);
   }
@@ -728,6 +762,7 @@ class _$_AccountExpired implements _AccountExpired {
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
   }) {
     return accountExpired?.call(this);
   }
@@ -741,6 +776,7 @@ class _$_AccountExpired implements _AccountExpired {
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -752,4 +788,136 @@ class _$_AccountExpired implements _AccountExpired {
 
 abstract class _AccountExpired implements AuthFailure {
   const factory _AccountExpired() = _$_AccountExpired;
+}
+
+/// @nodoc
+abstract class _$$_TokenExpiredCopyWith<$Res> {
+  factory _$$_TokenExpiredCopyWith(
+          _$_TokenExpired value, $Res Function(_$_TokenExpired) then) =
+      __$$_TokenExpiredCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_TokenExpiredCopyWithImpl<$Res>
+    extends _$AuthFailureCopyWithImpl<$Res>
+    implements _$$_TokenExpiredCopyWith<$Res> {
+  __$$_TokenExpiredCopyWithImpl(
+      _$_TokenExpired _value, $Res Function(_$_TokenExpired) _then)
+      : super(_value, (v) => _then(v as _$_TokenExpired));
+
+  @override
+  _$_TokenExpired get _value => super._value as _$_TokenExpired;
+}
+
+/// @nodoc
+
+class _$_TokenExpired implements _TokenExpired {
+  const _$_TokenExpired();
+
+  @override
+  String toString() {
+    return 'AuthFailure.tokenExpired()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_TokenExpired);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function() serverError,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+  }) {
+    return tokenExpired();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function()? serverError,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+  }) {
+    return tokenExpired?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function()? serverError,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    required TResult orElse(),
+  }) {
+    if (tokenExpired != null) {
+      return tokenExpired();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+  }) {
+    return tokenExpired(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+  }) {
+    return tokenExpired?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    required TResult orElse(),
+  }) {
+    if (tokenExpired != null) {
+      return tokenExpired(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _TokenExpired implements AuthFailure {
+  const factory _TokenExpired() = _$_TokenExpired;
 }
