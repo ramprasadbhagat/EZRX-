@@ -20,6 +20,8 @@ UserDto _$UserDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserDto {
+  @JsonKey(name: 'id')
+  String get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'username')
   String get username => throw _privateConstructorUsedError;
   @JsonKey(name: 'email')
@@ -53,7 +55,9 @@ abstract class $UserDtoCopyWith<$Res> {
   factory $UserDtoCopyWith(UserDto value, $Res Function(UserDto) then) =
       _$UserDtoCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'username')
+      {@JsonKey(name: 'id')
+          String id,
+      @JsonKey(name: 'username')
           String username,
       @JsonKey(name: 'email')
           String email,
@@ -88,6 +92,7 @@ class _$UserDtoCopyWithImpl<$Res> implements $UserDtoCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? username = freezed,
     Object? email = freezed,
     Object? firstName = freezed,
@@ -100,6 +105,10 @@ class _$UserDtoCopyWithImpl<$Res> implements $UserDtoCopyWith<$Res> {
     Object? languagePreference = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -158,7 +167,9 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       __$$_UserDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'username')
+      {@JsonKey(name: 'id')
+          String id,
+      @JsonKey(name: 'username')
           String username,
       @JsonKey(name: 'email')
           String email,
@@ -195,6 +206,7 @@ class __$$_UserDtoCopyWithImpl<$Res> extends _$UserDtoCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? username = freezed,
     Object? email = freezed,
     Object? firstName = freezed,
@@ -207,6 +219,10 @@ class __$$_UserDtoCopyWithImpl<$Res> extends _$UserDtoCopyWithImpl<$Res>
     Object? languagePreference = freezed,
   }) {
     return _then(_$_UserDto(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -255,7 +271,9 @@ class __$$_UserDtoCopyWithImpl<$Res> extends _$UserDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserDto extends _UserDto {
   const _$_UserDto(
-      {@JsonKey(name: 'username')
+      {@JsonKey(name: 'id')
+          required this.id,
+      @JsonKey(name: 'username')
           required this.username,
       @JsonKey(name: 'email')
           required this.email,
@@ -282,6 +300,9 @@ class _$_UserDto extends _UserDto {
   factory _$_UserDto.fromJson(Map<String, dynamic> json) =>
       _$$_UserDtoFromJson(json);
 
+  @override
+  @JsonKey(name: 'id')
+  final String id;
   @override
   @JsonKey(name: 'username')
   final String username;
@@ -321,7 +342,7 @@ class _$_UserDto extends _UserDto {
 
   @override
   String toString() {
-    return 'UserDto(username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference)';
+    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference)';
   }
 
   @override
@@ -329,6 +350,7 @@ class _$_UserDto extends _UserDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserDto &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.username, username) &&
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.firstName, firstName) &&
@@ -350,6 +372,7 @@ class _$_UserDto extends _UserDto {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(username),
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(firstName),
@@ -374,7 +397,9 @@ class _$_UserDto extends _UserDto {
 
 abstract class _UserDto extends UserDto {
   const factory _UserDto(
-      {@JsonKey(name: 'username')
+      {@JsonKey(name: 'id')
+          required final String id,
+      @JsonKey(name: 'username')
           required final String username,
       @JsonKey(name: 'email')
           required final String email,
@@ -399,6 +424,9 @@ abstract class _UserDto extends UserDto {
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$_UserDto.fromJson;
 
+  @override
+  @JsonKey(name: 'id')
+  String get id;
   @override
   @JsonKey(name: 'username')
   String get username;

@@ -17,6 +17,7 @@ class UserDto with _$UserDto {
   const UserDto._();
 
   const factory UserDto({
+    @JsonKey(name: 'id') required String id,
     @JsonKey(name: 'username') required String username,
     @JsonKey(name: 'email') required String email,
     @JsonKey(name: 'firstName') required String firstName,
@@ -33,6 +34,7 @@ class UserDto with _$UserDto {
 
   factory UserDto.fromDomain(User user) {
     return UserDto(
+      id: user.id,
       username: user.username.getOrCrash(),
       email: user.email.getOrCrash(),
       firstName: user.fullName.firstName,
@@ -50,6 +52,7 @@ class UserDto with _$UserDto {
 
   User toDomain() {
     return User(
+      id: id,
       username: Username(username),
       email: EmailAddress(email),
       fullName: FullName(firstName: firstName, lastName: lastName),

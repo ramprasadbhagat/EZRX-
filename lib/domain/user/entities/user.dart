@@ -13,6 +13,7 @@ class User with _$User {
   const User._();
 
   const factory User({
+    required String id,
     required Username username,
     required EmailAddress email,
     required FullName fullName,
@@ -23,6 +24,7 @@ class User with _$User {
   }) = _User;
 
   factory User.empty() => User(
+        id: '',
         username: Username(''),
         email: EmailAddress(''),
         fullName: const FullName(firstName: '', lastName: ''),

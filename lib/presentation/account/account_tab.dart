@@ -22,7 +22,7 @@ class AccountTab extends StatelessWidget {
                     key: const Key('profileTile'),
                     leading: const CircleAvatar(),
                     title: Text(
-                      '${state.user.fullName.firstName}, ${state.user.fullName.lastName}',
+                      state.user.fullName.toString(),
                       style: Theme.of(context).textTheme.headline6,
                     ),
                     onTap: () {},

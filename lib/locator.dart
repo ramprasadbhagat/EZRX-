@@ -9,13 +9,21 @@ import 'package:ezrxmobile/infrastructure/auth/local_storage/cred_storage.dart';
 import 'package:ezrxmobile/infrastructure/auth/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/auth/okta/okta_login.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/dynamic_links.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/performance_monitor.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-import 'package:ezrxmobile/infrastructure/core/http/interceptor.dart';
+import 'package:ezrxmobile/infrastructure/core/http/interceptor/auth_interceptor.dart';
+import 'package:ezrxmobile/infrastructure/core/http/interceptor/performance_interceptor.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/secure_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/infrastructure/user/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/user/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/user/repository/user_repository.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/routes/router_observer.dart';
 import 'package:get_it/get_it.dart';
 
 GetIt locator = GetIt.instance;
@@ -25,8 +33,28 @@ void setupLocator() {
   //  CORE
   //
   //============================================================
+
   locator.registerLazySingleton(() => Config());
+  locator.registerLazySingleton(() => PackageInfoService());
   locator.registerLazySingleton(() => AppRouter());
+
+  locator.registerLazySingleton(
+    () => PushNotificationService(appRouter: locator<AppRouter>()),
+  );
+  locator.registerLazySingleton(
+    () => DynamicLinksService(
+      config: locator<Config>(),
+      appRouter: locator<AppRouter>(),
+    ),
+  );
+  locator.registerLazySingleton(() => PerformanceMonitorService());
+  locator.registerLazySingleton(() => FirebaseAnalyticsService());
+  locator.registerLazySingleton(() => FirebaseCrashlyticsService());
+  locator.registerLazySingleton(
+    () => RouterObserver(
+      firebaseAnalyticsService: locator<FirebaseAnalyticsService>(),
+    ),
+  );
   locator.registerLazySingleton(() => SecureStorage());
   locator.registerLazySingleton(
     () => TokenStorage(secureStorage: locator<SecureStorage>()),
@@ -38,9 +66,17 @@ void setupLocator() {
     () => AuthInterceptor(tokenStorage: locator<TokenStorage>()),
   );
   locator.registerLazySingleton(
+    () => PerformanceInterceptor(
+      performanceMonitorService: locator<PerformanceMonitorService>(),
+    ),
+  );
+  locator.registerLazySingleton(
     () => HttpService(
       config: locator<Config>(),
-      interceptors: [locator<AuthInterceptor>()],
+      interceptors: [
+        locator<AuthInterceptor>(),
+        locator<PerformanceInterceptor>(),
+      ],
     ),
   );
 
@@ -65,6 +101,7 @@ void setupLocator() {
       tokenStorage: locator<TokenStorage>(),
       credStorage: locator<CredStorage>(),
       oktaLoginServices: locator<OktaLoginServices>(),
+      pushNotificationService: locator<PushNotificationService>(),
     ),
   );
 
@@ -102,6 +139,8 @@ void setupLocator() {
       config: locator<Config>(),
       remoteDataSource: locator<UserRemoteDataSource>(),
       localDataSource: locator<UserLocalDataSource>(),
+      firebaseAnalyticsService: locator<FirebaseAnalyticsService>(),
+      firebaseCrashlyticsService: locator<FirebaseCrashlyticsService>(),
     ),
   );
 

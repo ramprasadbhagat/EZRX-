@@ -17,6 +17,9 @@
 3. Open project with Vscode, check ".fvm/fvm_config.json" file, check the "flutterSdkVersion" inside and use ```fvm use <flutterSdkVersion_you_saw>```
 4. Restart vscode
 
+## Analyze
+```fvm flutter analyze```
+
 ## Test Coverage
 1. [Read this](https://codewithandrea.com/articles/flutter-test-coverage/)
 2. ```brew install lcov```

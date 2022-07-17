@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$User {
+  String get id => throw _privateConstructorUsedError;
   Username get username => throw _privateConstructorUsedError;
   EmailAddress get email => throw _privateConstructorUsedError;
   FullName get fullName => throw _privateConstructorUsedError;
@@ -34,7 +35,8 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
   $Res call(
-      {Username username,
+      {String id,
+      Username username,
       EmailAddress email,
       FullName fullName,
       Role role,
@@ -57,6 +59,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? username = freezed,
     Object? email = freezed,
     Object? fullName = freezed,
@@ -66,6 +69,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? settings = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -125,7 +132,8 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$_UserCopyWithImpl<$Res>;
   @override
   $Res call(
-      {Username username,
+      {String id,
+      Username username,
       EmailAddress email,
       FullName fullName,
       Role role,
@@ -152,6 +160,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? username = freezed,
     Object? email = freezed,
     Object? fullName = freezed,
@@ -161,6 +170,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? settings = freezed,
   }) {
     return _then(_$_User(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -197,7 +210,8 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 
 class _$_User extends _User {
   const _$_User(
-      {required this.username,
+      {required this.id,
+      required this.username,
       required this.email,
       required this.fullName,
       required this.role,
@@ -207,6 +221,8 @@ class _$_User extends _User {
       : _userSalesOrganisations = userSalesOrganisations,
         super._();
 
+  @override
+  final String id;
   @override
   final Username username;
   @override
@@ -229,7 +245,7 @@ class _$_User extends _User {
 
   @override
   String toString() {
-    return 'User(username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, settings: $settings)';
+    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, settings: $settings)';
   }
 
   @override
@@ -237,6 +253,7 @@ class _$_User extends _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_User &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.username, username) &&
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.fullName, fullName) &&
@@ -251,6 +268,7 @@ class _$_User extends _User {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(username),
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(fullName),
@@ -267,7 +285,8 @@ class _$_User extends _User {
 
 abstract class _User extends User {
   const factory _User(
-      {required final Username username,
+      {required final String id,
+      required final Username username,
       required final EmailAddress email,
       required final FullName fullName,
       required final Role role,
@@ -276,6 +295,8 @@ abstract class _User extends User {
       required final Settings settings}) = _$_User;
   const _User._() : super._();
 
+  @override
+  String get id;
   @override
   Username get username;
   @override

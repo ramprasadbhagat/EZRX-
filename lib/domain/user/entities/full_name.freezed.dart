@@ -106,11 +106,6 @@ class _$_FullName extends _FullName {
   final String lastName;
 
   @override
-  String toString() {
-    return 'FullName(firstName: $firstName, lastName: $lastName)';
-  }
-
-  @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&

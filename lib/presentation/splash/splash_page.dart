@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,7 +24,18 @@ class SplashPage extends StatelessWidget {
             ]);
           },
           unauthenticated: (_) {
-            // showSnackBar(context: context, message: 'Please login');
+            // final message = unauthenticated.failure?.map(
+            //   other: (other) => other.message,
+            //   serverError: (_) => 'Server Error',
+            //   invalidEmailAndPasswordCombination: (_) =>
+            //       'Wrong Username and/or Password!',
+            //   accountLocked: (_) => 'Account is Locked',
+            //   accountExpired: (_) => 'Account is Expired',
+            //   tokenExpired: (_) => 'Session token is Expired',
+            // );
+            // if (message != null) {
+            //   showSnackBar(context: context, message: message);
+            // }
             context.router.replaceAll([
               const SplashPageRoute(),
               const LoginPageRoute(),
@@ -39,7 +51,7 @@ class SplashPage extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
+        return CupertinoAlertDialog(
           content: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,

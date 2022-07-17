@@ -16,6 +16,34 @@ class Config {
     }
   }
 
+  String get appName {
+    switch (appFlavor) {
+      case Flavor.mock:
+        return 'eZRx Mock';
+      case Flavor.dev:
+        return 'eZRx Dev';
+      case Flavor.uat:
+        return 'eZRx Uat';
+      case Flavor.prod:
+      default:
+        return 'eZRx';
+    }
+  }
+
+  String get packageName {
+    switch (appFlavor) {
+      case Flavor.mock:
+        return 'com.zuelligpharma.ezrxmobile.mock';
+      case Flavor.dev:
+        return 'com.zuelligpharma.ezrxmobile.dev';
+      case Flavor.uat:
+        return 'com.zuelligpharma.ezrxmobile.uat';
+      case Flavor.prod:
+      default:
+        return 'com.zuelligpharma.ezrxmobile';
+    }
+  }
+
   Map<String, dynamic> get oktaConfig {
     switch (appFlavor) {
       case Flavor.mock:

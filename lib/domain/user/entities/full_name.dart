@@ -15,4 +15,7 @@ class FullName with _$FullName {
         firstName: '',
         lastName: '',
       );
+
+  @override
+  String toString() => '$firstName, $lastName';
 }

@@ -280,3 +280,29 @@ class SSOLoginButton extends StatelessWidget {
     );
   }
 }
+
+// class VersionString extends StatelessWidget {
+//   const VersionString({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return FutureBuilder<String>(
+//       future:
+//           locator<PackageInfoService>().getString(), // a Future<String> or null
+//       builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+//         switch (snapshot.connectionState) {
+//           case ConnectionState.none:
+//             return const Text('Press button to start');
+//           case ConnectionState.waiting:
+//             return const Text('Awaiting result...');
+//           default:
+//             if (snapshot.hasError) {
+//               return Text('Error: ${snapshot.error}');
+//             } else {
+//               return Text('Result: ${snapshot.data}');
+//             }
+//         }
+//       },
+//     );
+//   }
+// }

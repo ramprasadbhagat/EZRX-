@@ -5,7 +5,7 @@ import 'package:okta_oidc/okta_oidc.dart';
 
 class OktaLoginServices implements ILoginService {
   final _oktaOidcPlugin = OktaOidc();
-  Config config;
+  final Config config;
 
   OktaLoginServices({required this.config});
 

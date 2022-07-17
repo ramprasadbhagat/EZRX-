@@ -7,55 +7,68 @@ import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 
 class AuthRemoteDataSource {
   HttpService httpService;
+
   AuthRemoteDataSource({required this.httpService});
 
   Future<LoginV2> loginWithPassword({
     required String username,
     required String password,
+    required String fcmToken,
   }) async {
-    final res = await httpService.request(
-      method: 'POST',
-      url: '/ezrxapi/api/loginAd',
-      data: jsonEncode({'query': passwordLoginData(username, password, '')}),
-    );
-
-    if (res.statusCode != 200) {
+    try {
+      final res = await httpService.request(
+        method: 'POST',
+        url: '/ezrxapi/api/loginAd',
+        data: jsonEncode(
+          {'query': passwordLoginData(username, password, fcmToken)},
+        ),
+      );
+      if (res.statusCode != 200) {
+        throw const AuthException.serverError();
+      } else if (res.data['errors'] != null && res.data['data'] == null) {
+        throw AuthException.other(res.data['errors'][0]['message']);
+      } else if (res.data['data']['loginV2']['authenticated'] == false) {
+        throw const AuthException.invalidEmailAndPasswordCombination();
+      } else if (res.data['data']['loginV2']['isAccountLocked'] == true) {
+        throw const AuthException.accountLocked();
+      } else if (res.data['data']['loginV2']['isAccountExpired'] == true) {
+        throw const AuthException.accountExpired();
+      }
+      return LoginV2Dto.fromJson(res.data['data']['loginV2']).toDomain();
+    } catch (e) {
       throw const AuthException.serverError();
-    } else if (res.data['errors'] != null && res.data['data'] == null) {
-      throw AuthException.other(res.data['errors'][0]['message']);
-    } else if (res.data['data']['loginV2']['authenticated'] == false) {
-      throw const AuthException.invalidEmailAndPasswordCombination();
-    } else if (res.data['data']['loginV2']['isAccountLocked'] == true) {
-      throw const AuthException.accountLocked();
-    } else if (res.data['data']['loginV2']['isAccountExpired'] == true) {
-      throw const AuthException.accountExpired();
     }
-
-    return LoginV2Dto.fromJson(res.data['data']['loginV2']).toDomain();
   }
 
   Future<LoginV2> loginWithOktaToken({
     required String oktaAccessToken,
+    required String fcmToken,
   }) async {
-    final res = await httpService.request(
-      method: 'POST',
-      url: '/ezrxapi/api/loginAd',
-      data: jsonEncode({'query': oktaTokenLoginData(oktaAccessToken)}),
-    );
+    try {
+      final res = await httpService.request(
+        method: 'POST',
+        url: '/ezrxapi/api/loginAd',
+        data: jsonEncode(
+          {'query': oktaTokenLoginData(oktaAccessToken, fcmToken)},
+        ),
+      );
 
-    if (res.statusCode != 200) {
+      if (res.statusCode != 200) {
+        throw const AuthException.serverError();
+      } else if (res.data['errors'] != null && res.data['data'] == null) {
+        throw AuthException.other(res.data['errors'][0]['message']);
+      } else if (res.data['data']['loginV2']['authenticated'] == false) {
+        throw const AuthException.invalidEmailAndPasswordCombination();
+      } else if (res.data['data']['loginV2']['isAccountLocked'] == true) {
+        throw const AuthException.accountLocked();
+      } else if (res.data['data']['loginV2']['isAccountExpired'] == true) {
+        throw const AuthException.accountExpired();
+      }
+
+      return LoginV2Dto.fromJson(res.data['data']['loginV2']).toDomain();
+    } catch (e) {
       throw const AuthException.serverError();
-    } else if (res.data['errors'] != null && res.data['data'] == null) {
-      throw AuthException.other(res.data['errors'][0]['message']);
-    } else if (res.data['data']['loginV2']['authenticated'] == false) {
-      throw const AuthException.invalidEmailAndPasswordCombination();
-    } else if (res.data['data']['loginV2']['isAccountLocked'] == true) {
-      throw const AuthException.accountLocked();
-    } else if (res.data['data']['loginV2']['isAccountExpired'] == true) {
-      throw const AuthException.accountExpired();
     }
-
-    return LoginV2Dto.fromJson(res.data['data']['loginV2']).toDomain();
   }
 
   Future<LoginV2> proxyLoginWithUsername({required String username}) async {
@@ -85,6 +98,7 @@ class AuthRemoteDataSource {
       loginV2(
           username: "$username"
           password: "$password"
+          mobileToken: {mobileTokens:[{token:"$fcmtoken",provider:"firebase"}]}
           includeStrapi: "true"
       ) {
           authenticated
@@ -95,11 +109,12 @@ class AuthRemoteDataSource {
     }''';
   }
 
-  String oktaTokenLoginData(String oktaToken) {
+  String oktaTokenLoginData(String oktaToken, String fcmtoken) {
     return '''{
       loginV2(
           accessToken: "$oktaToken" 
           isOktaAuthenticated: true
+          mobileToken: {mobileTokens:[{token:"$fcmtoken",provider:"firebase"}]}
       ) {
           authenticated
           eZRxJWT

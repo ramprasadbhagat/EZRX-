@@ -14,6 +14,7 @@ import 'package:ezrxmobile/infrastructure/auth/datasource/auth_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/cred_dto.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:flutter/services.dart';
 
 class AuthRepository implements IAuthRepository {
@@ -23,6 +24,7 @@ class AuthRepository implements IAuthRepository {
   final ITokenStorage tokenStorage;
   final ICredStorage credStorage;
   final ILoginService oktaLoginServices;
+  final PushNotificationService pushNotificationService;
 
   AuthRepository({
     required this.config,
@@ -31,6 +33,7 @@ class AuthRepository implements IAuthRepository {
     required this.tokenStorage,
     required this.credStorage,
     required this.oktaLoginServices,
+    required this.pushNotificationService,
   });
 
   @override
@@ -52,9 +55,12 @@ class AuthRepository implements IAuthRepository {
       }
     }
     try {
+      final fcmToken = await pushNotificationService.getFCMToken();
+      print('@@@@ $fcmToken');
       final loginv2 = await remoteDataSource.loginWithPassword(
         username: usernameStr,
         password: passwordStr,
+        fcmToken: fcmToken,
       );
       return Right(loginv2);
     } on AuthException catch (e) {
@@ -66,6 +72,8 @@ class AuthRepository implements IAuthRepository {
         accountLocked: (_) => const AuthFailure.accountLocked(),
         accountExpired: (_) => const AuthFailure.accountExpired(),
       ));
+    } on LocalException catch (e) {
+      return Left(AuthFailure.other(e.message));
     } on ServerException catch (e) {
       return Left(AuthFailure.other(e.message));
     }
@@ -119,8 +127,11 @@ class AuthRepository implements IAuthRepository {
       }
     }
     try {
+      final fcmToken = await pushNotificationService.getFCMToken();
+      print('@@@@ $fcmToken');
       final loginv2 = await remoteDataSource.loginWithOktaToken(
         oktaAccessToken: token,
+        fcmToken: fcmToken,
       );
       return Right(loginv2);
     } on AuthException catch (e) {
@@ -132,6 +143,8 @@ class AuthRepository implements IAuthRepository {
         accountLocked: (_) => const AuthFailure.accountLocked(),
         accountExpired: (_) => const AuthFailure.accountExpired(),
       ));
+    } on LocalException catch (e) {
+      return Left(AuthFailure.other(e.message));
     } on ServerException catch (e) {
       return Left(AuthFailure.other(e.message));
     }
@@ -196,6 +209,7 @@ class AuthRepository implements IAuthRepository {
   Future<Either<AuthFailure, JWT>> getOktaAccessToken() async {
     try {
       final result = await oktaLoginServices.getAccessToken();
+
       return Right(JWT(result?['message']));
     } on PlatformException catch (e) {
       return Left(AuthFailure.other('${e.message}'));

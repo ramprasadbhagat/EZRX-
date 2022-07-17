@@ -7,7 +7,7 @@ class AuthInterceptor extends Interceptor {
   final ITokenStorage tokenStorage;
   AuthInterceptor({required this.tokenStorage});
   @override
-  void onRequest(
+  Future<void> onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
