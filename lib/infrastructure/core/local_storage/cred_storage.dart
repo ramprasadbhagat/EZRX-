@@ -1,25 +1,23 @@
 import 'dart:convert';
 
-import 'package:ezrxmobile/domain/auth/local_storage/i_token_storage.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
-import 'package:ezrxmobile/domain/core/local_storage/i_secure_storage.dart';
+import 'package:ezrxmobile/infrastructure/auth/dtos/cred_dto.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/secure_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 
-class TokenStorage implements ITokenStorage {
-  static const _boxName = 'ezrx_token_box';
-  static const _tokenKey = 'ezrx_auth_token';
-  static const _secureKey = 'ezrx_auth_secure';
+class CredStorage {
+  static const _boxName = 'ezrx_cred_box';
+  static const _credKey = 'ezrx_auth_cred';
+  static const _secureKey = 'ezrx_cred_secure';
+
   late Box _encryptedBox;
-  ISecureStorage secureStorage;
+  SecureStorage secureStorage;
 
-  TokenStorage({required this.secureStorage});
+  CredStorage({required this.secureStorage});
 
-  @override
   Future<void> init() async {
     await Hive.initFlutter();
-    Hive.registerAdapter(JWTDtoAdapter());
-    // https://docs.hivedb.dev/#/advanced/encrypted_box
+    Hive.registerAdapter(CredDtoAdapter());
     final encryprionKey = await secureStorage.read(key: _secureKey);
     if (encryprionKey.isEmpty) {
       final key = Hive.generateSecureKey();
@@ -33,31 +31,28 @@ class TokenStorage implements ITokenStorage {
     );
   }
 
-  @override
-  Future<JWTDto> get() async {
+  Future<CredDto> get() async {
     try {
       return await _encryptedBox.get(
-        _tokenKey,
-        defaultValue: JWTDto(access: ''),
+        _credKey,
+        defaultValue: CredDto(username: '', password: ''),
       );
     } catch (e) {
       throw LocalException(message: e.toString());
     }
   }
 
-  @override
-  Future set(JWTDto jwtDto) async {
+  Future set(CredDto jwtDto) async {
     try {
-      await _encryptedBox.put(_tokenKey, jwtDto);
+      await _encryptedBox.put(_credKey, jwtDto);
     } catch (e) {
       throw LocalException(message: e.toString());
     }
   }
 
-  @override
-  Future clear() async {
+  Future delete() async {
     try {
-      await _encryptedBox.clear();
+      await _encryptedBox.delete(_credKey);
     } catch (e) {
       throw LocalException(message: e.toString());
     }

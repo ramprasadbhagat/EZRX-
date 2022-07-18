@@ -19,9 +19,9 @@ void main() {
 
     // input username and password then click login button
     await tester.tap(loginUsernameField);
-    await tester.enterText(loginUsernameField, 'mobiledemo');
+    await tester.enterText(loginUsernameField, 'superuser');
     await tester.tap(loginPasswordField);
-    await tester.enterText(loginPasswordField, '_Mobiledemo1234');
+    await tester.enterText(loginPasswordField, '_Admin1234');
     await tester.tap(loginSubmitButton);
 
     await tester.pumpAndSettle(const Duration(seconds: 7));

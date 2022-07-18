@@ -5,9 +5,6 @@ import 'package:ezrxmobile/application/user/user_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
-import 'package:ezrxmobile/infrastructure/auth/local_storage/cred_storage.dart';
-import 'package:ezrxmobile/infrastructure/auth/local_storage/token_storage.dart';
-import 'package:ezrxmobile/infrastructure/auth/okta/okta_login.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
@@ -17,7 +14,10 @@ import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/http/interceptor/auth_interceptor.dart';
 import 'package:ezrxmobile/infrastructure/core/http/interceptor/performance_interceptor.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/secure_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/infrastructure/user/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/user/datasource/user_remote.dart';
@@ -80,6 +80,10 @@ void setupLocator() {
     ),
   );
 
+  locator.registerLazySingleton(
+    () => OktaLoginServices(config: locator<Config>()),
+  );
+
   //============================================================
   //  Auth
   //
@@ -87,10 +91,6 @@ void setupLocator() {
   locator.registerLazySingleton(() => AuthLocalDataSource());
   locator.registerLazySingleton(
     () => AuthRemoteDataSource(httpService: locator<HttpService>()),
-  );
-
-  locator.registerLazySingleton(
-    () => OktaLoginServices(config: locator<Config>()),
   );
 
   locator.registerLazySingleton(

@@ -7,7 +7,7 @@ class Config {
     switch (appFlavor) {
       case Flavor.mock:
       case Flavor.dev:
-        return 'http://127.0.0.1:8080';
+        return 'http://127.0.0.1:7091';
       case Flavor.uat:
         return 'https://zpprodapiportalapimgmt.apimanagement.ap1.hana.ondemand.com';
       case Flavor.prod:
@@ -60,9 +60,9 @@ class Config {
       default:
         return {
           'client_id': '0oa402ex52DFKp74y1d7',
-          'redirect_uri': 'com.oktapreview.zuellig:/callback',
-          'end_session_redirect_uri': 'com.oktapreview.zuellig:/',
-          'discovery_uri': 'https://zuellig.oktapreview.com/',
+          'redirect_uri': 'com.zuelligpharma.ezlogin:/callback',
+          'end_session_redirect_uri': 'com.zuelligpharma.ezlogin:/',
+          'discovery_uri': 'https://ezlogin.zuelligpharma.com/',
           'scopes': ['openid', 'profile', 'offline_access']
         };
     }

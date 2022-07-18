@@ -4,26 +4,26 @@ import 'package:ezrxmobile/domain/auth/entities/cred.dart';
 import 'package:ezrxmobile/domain/auth/entities/loginv2.dart';
 import 'package:ezrxmobile/domain/auth/error/auth_exception.dart';
 import 'package:ezrxmobile/domain/auth/error/auth_failure.dart';
-import 'package:ezrxmobile/domain/auth/local_storage/i_cred_storage.dart';
-import 'package:ezrxmobile/domain/auth/login/I_login_service.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_auth_repository.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/local_storage/i_token_storage.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/cred_dto.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
 import 'package:flutter/services.dart';
 
 class AuthRepository implements IAuthRepository {
   final Config config;
   final AuthRemoteDataSource remoteDataSource;
   final AuthLocalDataSource localDataSource;
-  final ITokenStorage tokenStorage;
-  final ICredStorage credStorage;
-  final ILoginService oktaLoginServices;
+  final TokenStorage tokenStorage;
+  final CredStorage credStorage;
+  final OktaLoginServices oktaLoginServices;
   final PushNotificationService pushNotificationService;
 
   AuthRepository({
@@ -56,7 +56,6 @@ class AuthRepository implements IAuthRepository {
     }
     try {
       final fcmToken = await pushNotificationService.getFCMToken();
-      print('@@@@ $fcmToken');
       final loginv2 = await remoteDataSource.loginWithPassword(
         username: usernameStr,
         password: passwordStr,
@@ -128,7 +127,6 @@ class AuthRepository implements IAuthRepository {
     }
     try {
       final fcmToken = await pushNotificationService.getFCMToken();
-      print('@@@@ $fcmToken');
       final loginv2 = await remoteDataSource.loginWithOktaToken(
         oktaAccessToken: token,
         fcmToken: fcmToken,

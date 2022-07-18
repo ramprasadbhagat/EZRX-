@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:ezrxmobile/domain/auth/local_storage/i_token_storage.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:flutter/foundation.dart';
 
 class AuthInterceptor extends Interceptor {
-  final ITokenStorage tokenStorage;
+  final TokenStorage tokenStorage;
   AuthInterceptor({required this.tokenStorage});
   @override
   Future<void> onRequest(
