@@ -27,7 +27,7 @@
 4. ```genhtml coverage/lcov.info -o coverage/html```
 
 ## Integration test
-```fvm flutter drive --driver=test_driver/integration_driver.dart --target=integration_test/login_test.dart```
+```fvm flutter drive --driver=test_driver/integration_driver.dart --target=integration_test/login_test.dart --flavor uat```
 
 ## Auto build json_serializable, freezed, auto_route_generator, hive_generator 
 ```fvm flutter pub run build_runner watch --delete-conflicting-outputs```
@@ -45,9 +45,9 @@
 - ```fvm flutter build ios --flavor mock -t lib/main_mock.dart```
 - ```fvm flutter build ios --flavor dev -t lib/main_dev.dart```
 - ```fvm flutter build ios --flavor uat -t lib/main_uat.dart```
-- ```fvm flutter build ios --flavor prod -t lib/main.dart```
+- ```fvm flutter build ios --flavor prod -t lib/main_prod.dart```
 ### Android
 - ```fvm flutter build appbundle --flavor mock -t lib/main_mock.dart```
 - ```fvm flutter build appbundle --flavor dev -t lib/main_dev.dart```
 - ```fvm flutter build appbundle --flavor uat -t lib/main_uat.dart```
-- ```fvm flutter build appbundle --flavor prod -t lib/main.dart```
+- ```fvm flutter build appbundle --flavor prod -t lib/main_prod.dart```

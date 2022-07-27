@@ -59,7 +59,7 @@ class Config {
       case Flavor.prod:
       default:
         return {
-          'client_id': '0oa402ex52DFKp74y1d7',
+          'client_id': '0oa5urfw6s1OLENaX5d7',
           'redirect_uri': 'com.zuelligpharma.ezlogin:/callback',
           'end_session_redirect_uri': 'com.zuelligpharma.ezlogin:/',
           'discovery_uri': 'https://ezlogin.zuelligpharma.com/',
