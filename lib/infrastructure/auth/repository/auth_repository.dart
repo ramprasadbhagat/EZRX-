@@ -250,8 +250,8 @@ class AuthRepository implements IAuthRepository {
     try {
       final credDto = await credStorage.get();
       return Right(credDto.toDomain());
-    } on CacheException {
-      return const Left(AuthFailure.other(''));
+    } on CacheException catch (e) {
+      return Left(AuthFailure.other(e.message));
     }
   }
 

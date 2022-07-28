@@ -56,7 +56,7 @@ class JWT extends ValueObject<String> {
     return getJWTExpirationDate(value.getOrElse(() => ''));
   }
 
-  Duration get time {
+  Duration get issueTime {
     return getJWTTime(value.getOrElse(() => ''));
   }
 

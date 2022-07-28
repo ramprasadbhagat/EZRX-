@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
@@ -40,14 +39,14 @@ class HttpService {
     // }
   }
 
-  String _readAbleErrorMessage(DioError error) {
-    switch (error.error.runtimeType) {
-      case SocketException:
-        return 'Network Connection Error';
-      case TimeoutException:
-        return 'Timeout Error';
-      default:
-        return error.message;
-    }
-  }
+  // String _readAbleErrorMessage(DioError error) {
+  //   switch (error.error.runtimeType) {
+  //     case SocketException:
+  //       return 'Network Connection Error';
+  //     case TimeoutException:
+  //       return 'Timeout Error';
+  //     default:
+  //       return error.message;
+  //   }
+  // }
 }

@@ -287,4 +287,90 @@ void main() {
       },
     );
   });
+
+  group('JWT value object', () {
+    test(
+      'should return true when JWT is valid',
+      () async {
+        const input =
+            'eyJraWQiOiJ1ZUlHakNWSExJMkl5WXdIRXRia1VMbFdaVEI1OG5zMjFubFd4akIxM3gwIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULnpIdkpOMTRnNjZxaXh0X2UwRHNMZnN1anR1MUx6aEV5bUFsQWkyN0Z6T0kub2Fya2Nyb2V6YkhlQk1nNWUxZDYiLCJpc3MiOiJodHRwczovL3p1ZWxsaWcub2t0YXByZXZpZXcuY29tIiwiYXVkIjoiaHR0cHM6Ly96dWVsbGlnLm9rdGFwcmV2aWV3LmNvbSIsInN1YiI6IkpIQ2hvb0B6dWVsbGlncGhhcm1hLmNvbSIsImlhdCI6MTY1NzAxMTI4OCwiZXhwIjoxNjU3MDE0ODg4LCJjaWQiOiIwb2E0MDJleDUyREZLcDc0eTFkNyIsInVpZCI6IjAwdTN4dzNicDhPMGp0czkyMWQ3Iiwic2NwIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJvZmZsaW5lX2FjY2VzcyJdLCJhdXRoX3RpbWUiOjE2NTcwMTEyODd9.Efp_o6rfc1QnfvDuGPiS6htiWmpKO_y5_o2dYhgcJ1VJ5ok26qR6fHQwkwB0LdwO0dWmHZu81HWtJBhJ29WUHBZdx8_QnzbMxGuy3ur0UzECco7hCUu8VBSZdL4vPc_FZGDYVLZlyi7w9HgKKXxf5ZdMuxDUL2sw2RTF8hRSJHuuDKqbxGTZhnFTlLRNK6ysZ0t_Ws0ZzqrDe073zMulTvu5578m6JU6zZ2kJvlbJS3_IDG3DH81Y4M_HDIPaB1n6wr2P_7KzRFKndVTsabRfjVGKMEr23JCag2z6NFhjbS7HfKWZIKOTUV3-eJFe638raEsmJjVndYUl5gtPymhBA';
+        final jwt = JWT(input);
+        final result = jwt.isValid();
+        expect(result, true);
+      },
+    );
+
+    test(
+      'should return true when JWT is valid',
+      () async {
+        const input =
+            'eyJraWQiOiJ1ZUlHakNWSExJMkl5WXdIRXRia1VMbFdaVEI1OG5zMjFubFd4akIxM3gwIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULnBlVkNUOGhpd0xOTTN0S1E0QkJ3dGFwNGZfWDlXLUVtVHpKQkhVa1lyY2sub2Fya2NvcmN2eEZWVGFwbGUxZDYiLCJpc3MiOiJodHRwczovL3p1ZWxsaWcub2t0YXByZXZpZXcuY29tIiwiYXVkIjoiaHR0cHM6Ly96dWVsbGlnLm9rdGFwcmV2aWV3LmNvbSIsInN1YiI6IkpIQ2hvb0B6dWVsbGlncGhhcm1hLmNvbSIsImlhdCI6MTY1Njk5OTcxMCwiZXhwIjoxNjU3MDAzMzEwLCJjaWQiOiIwb2E0MDJleDUyREZLcDc0eTFkNyIsInVpZCI6IjAwdTN4dzNicDhPMGp0czkyMWQ3Iiwic2NwIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJvZmZsaW5lX2FjY2VzcyJdLCJhdXRoX3RpbWUiOjE2NTY5OTk3MDh9.f-R84B8AX7KaX98rjcw4ZlfJjdz5ZcpP_BlPlsOGGMdmfEnffyKw_Hlw6PqVBrF0tsI6wocypjHMu1LjFMlbvInHcQXzOrnGiMa-OYtHKurPDWlz95RwogvJIyqAe5G1qAvcd-cx9P8j9Tydn7mLSIHYdkNdc6DYD9LLoVIcJ7oSiTAHMFte-QWg07lMCucUSwgVGPgaeW7xPrEpyJmJC1A5PAaDmapjn_Q8o9y7cTCfW3TUtTOit8WTY4bEu_rZS4TP7v8xtj_WN9m96q8vMF8d2FGf9zSp7yqX2v3rpoMpKm2v4DId2AoSjHtgCwhIUJvelDtTDHWDxjwygTgY4Q';
+        final jwt = JWT(input);
+        final result = jwt.isValid();
+        expect(result, true);
+      },
+    );
+
+    test(
+      'should return error message when the jwt is invalid',
+      () async {
+        const errorMessage = 'JWT token invalid';
+        const input =
+            'eyJraWQiOiJ1ZUlHakNWSExJMkl5WXdIRXRia1VMbFdaVEI1OG5zMjFubFd4akIxM3';
+        final jwt = JWT(input);
+        final result = jwt.value.fold(
+          (f) => f.maybeMap(
+            invalidJWT: (_) => errorMessage,
+            orElse: () => null,
+          ),
+          (_) => null,
+        );
+        expect(result, errorMessage);
+      },
+    );
+
+    test(
+      'should return true if the DateTime from expiretionDate is correct',
+      () async {
+        const input =
+            'eyJraWQiOiJ1ZUlHakNWSExJMkl5WXdIRXRia1VMbFdaVEI1OG5zMjFubFd4akIxM3gwIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULnpIdkpOMTRnNjZxaXh0X2UwRHNMZnN1anR1MUx6aEV5bUFsQWkyN0Z6T0kub2Fya2Nyb2V6YkhlQk1nNWUxZDYiLCJpc3MiOiJodHRwczovL3p1ZWxsaWcub2t0YXByZXZpZXcuY29tIiwiYXVkIjoiaHR0cHM6Ly96dWVsbGlnLm9rdGFwcmV2aWV3LmNvbSIsInN1YiI6IkpIQ2hvb0B6dWVsbGlncGhhcm1hLmNvbSIsImlhdCI6MTY1NzAxMTI4OCwiZXhwIjoxNjU3MDE0ODg4LCJjaWQiOiIwb2E0MDJleDUyREZLcDc0eTFkNyIsInVpZCI6IjAwdTN4dzNicDhPMGp0czkyMWQ3Iiwic2NwIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJvZmZsaW5lX2FjY2VzcyJdLCJhdXRoX3RpbWUiOjE2NTcwMTEyODd9.Efp_o6rfc1QnfvDuGPiS6htiWmpKO_y5_o2dYhgcJ1VJ5ok26qR6fHQwkwB0LdwO0dWmHZu81HWtJBhJ29WUHBZdx8_QnzbMxGuy3ur0UzECco7hCUu8VBSZdL4vPc_FZGDYVLZlyi7w9HgKKXxf5ZdMuxDUL2sw2RTF8hRSJHuuDKqbxGTZhnFTlLRNK6ysZ0t_Ws0ZzqrDe073zMulTvu5578m6JU6zZ2kJvlbJS3_IDG3DH81Y4M_HDIPaB1n6wr2P_7KzRFKndVTsabRfjVGKMEr23JCag2z6NFhjbS7HfKWZIKOTUV3-eJFe638raEsmJjVndYUl5gtPymhBA';
+        final jwt = JWT(input);
+        final result = jwt.expirationDate;
+        expect(result, DateTime.fromMillisecondsSinceEpoch(1657014888000));
+      },
+    );
+
+    test(
+      'should return true if the token already expired',
+      () async {
+        const input =
+            'eyJraWQiOiJ1ZUlHakNWSExJMkl5WXdIRXRia1VMbFdaVEI1OG5zMjFubFd4akIxM3gwIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULnpIdkpOMTRnNjZxaXh0X2UwRHNMZnN1anR1MUx6aEV5bUFsQWkyN0Z6T0kub2Fya2Nyb2V6YkhlQk1nNWUxZDYiLCJpc3MiOiJodHRwczovL3p1ZWxsaWcub2t0YXByZXZpZXcuY29tIiwiYXVkIjoiaHR0cHM6Ly96dWVsbGlnLm9rdGFwcmV2aWV3LmNvbSIsInN1YiI6IkpIQ2hvb0B6dWVsbGlncGhhcm1hLmNvbSIsImlhdCI6MTY1NzAxMTI4OCwiZXhwIjoxNjU3MDE0ODg4LCJjaWQiOiIwb2E0MDJleDUyREZLcDc0eTFkNyIsInVpZCI6IjAwdTN4dzNicDhPMGp0czkyMWQ3Iiwic2NwIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJvZmZsaW5lX2FjY2VzcyJdLCJhdXRoX3RpbWUiOjE2NTcwMTEyODd9.Efp_o6rfc1QnfvDuGPiS6htiWmpKO_y5_o2dYhgcJ1VJ5ok26qR6fHQwkwB0LdwO0dWmHZu81HWtJBhJ29WUHBZdx8_QnzbMxGuy3ur0UzECco7hCUu8VBSZdL4vPc_FZGDYVLZlyi7w9HgKKXxf5ZdMuxDUL2sw2RTF8hRSJHuuDKqbxGTZhnFTlLRNK6ysZ0t_Ws0ZzqrDe073zMulTvu5578m6JU6zZ2kJvlbJS3_IDG3DH81Y4M_HDIPaB1n6wr2P_7KzRFKndVTsabRfjVGKMEr23JCag2z6NFhjbS7HfKWZIKOTUV3-eJFe638raEsmJjVndYUl5gtPymhBA';
+        final jwt = JWT(input);
+        final result = jwt.isExpired;
+        expect(result, true);
+      },
+    );
+
+    test(
+      'should be negative on remaining time duration because the token already expired',
+      () async {
+        const input =
+            'eyJraWQiOiJ1ZUlHakNWSExJMkl5WXdIRXRia1VMbFdaVEI1OG5zMjFubFd4akIxM3gwIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULnpIdkpOMTRnNjZxaXh0X2UwRHNMZnN1anR1MUx6aEV5bUFsQWkyN0Z6T0kub2Fya2Nyb2V6YkhlQk1nNWUxZDYiLCJpc3MiOiJodHRwczovL3p1ZWxsaWcub2t0YXByZXZpZXcuY29tIiwiYXVkIjoiaHR0cHM6Ly96dWVsbGlnLm9rdGFwcmV2aWV3LmNvbSIsInN1YiI6IkpIQ2hvb0B6dWVsbGlncGhhcm1hLmNvbSIsImlhdCI6MTY1NzAxMTI4OCwiZXhwIjoxNjU3MDE0ODg4LCJjaWQiOiIwb2E0MDJleDUyREZLcDc0eTFkNyIsInVpZCI6IjAwdTN4dzNicDhPMGp0czkyMWQ3Iiwic2NwIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJvZmZsaW5lX2FjY2VzcyJdLCJhdXRoX3RpbWUiOjE2NTcwMTEyODd9.Efp_o6rfc1QnfvDuGPiS6htiWmpKO_y5_o2dYhgcJ1VJ5ok26qR6fHQwkwB0LdwO0dWmHZu81HWtJBhJ29WUHBZdx8_QnzbMxGuy3ur0UzECco7hCUu8VBSZdL4vPc_FZGDYVLZlyi7w9HgKKXxf5ZdMuxDUL2sw2RTF8hRSJHuuDKqbxGTZhnFTlLRNK6ysZ0t_Ws0ZzqrDe073zMulTvu5578m6JU6zZ2kJvlbJS3_IDG3DH81Y4M_HDIPaB1n6wr2P_7KzRFKndVTsabRfjVGKMEr23JCag2z6NFhjbS7HfKWZIKOTUV3-eJFe638raEsmJjVndYUl5gtPymhBA';
+        final jwt = JWT(input);
+        final result = jwt.remainingTime;
+        expect(result.isNegative, true);
+      },
+    );
+
+    test(
+      'should return false, because the issue time duration should be always positive',
+      () async {
+        const input =
+            'eyJraWQiOiJ1ZUlHakNWSExJMkl5WXdIRXRia1VMbFdaVEI1OG5zMjFubFd4akIxM3gwIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULnpIdkpOMTRnNjZxaXh0X2UwRHNMZnN1anR1MUx6aEV5bUFsQWkyN0Z6T0kub2Fya2Nyb2V6YkhlQk1nNWUxZDYiLCJpc3MiOiJodHRwczovL3p1ZWxsaWcub2t0YXByZXZpZXcuY29tIiwiYXVkIjoiaHR0cHM6Ly96dWVsbGlnLm9rdGFwcmV2aWV3LmNvbSIsInN1YiI6IkpIQ2hvb0B6dWVsbGlncGhhcm1hLmNvbSIsImlhdCI6MTY1NzAxMTI4OCwiZXhwIjoxNjU3MDE0ODg4LCJjaWQiOiIwb2E0MDJleDUyREZLcDc0eTFkNyIsInVpZCI6IjAwdTN4dzNicDhPMGp0czkyMWQ3Iiwic2NwIjpbIm9wZW5pZCIsInByb2ZpbGUiLCJvZmZsaW5lX2FjY2VzcyJdLCJhdXRoX3RpbWUiOjE2NTcwMTEyODd9.Efp_o6rfc1QnfvDuGPiS6htiWmpKO_y5_o2dYhgcJ1VJ5ok26qR6fHQwkwB0LdwO0dWmHZu81HWtJBhJ29WUHBZdx8_QnzbMxGuy3ur0UzECco7hCUu8VBSZdL4vPc_FZGDYVLZlyi7w9HgKKXxf5ZdMuxDUL2sw2RTF8hRSJHuuDKqbxGTZhnFTlLRNK6ysZ0t_Ws0ZzqrDe073zMulTvu5578m6JU6zZ2kJvlbJS3_IDG3DH81Y4M_HDIPaB1n6wr2P_7KzRFKndVTsabRfjVGKMEr23JCag2z6NFhjbS7HfKWZIKOTUV3-eJFe638raEsmJjVndYUl5gtPymhBA';
+        final jwt = JWT(input);
+        final result = jwt.issueTime;
+        expect(result.isNegative, false);
+      },
+    );
+  });
 }
