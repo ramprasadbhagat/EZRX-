@@ -24,11 +24,13 @@ void main() {
     // input username and password then click login button
     await tester.tap(loginUsernameField);
     await tester.enterText(loginUsernameField, 'superuser');
+    await tester.pumpAndSettle(const Duration(microseconds: 200));
     await tester.tap(loginPasswordField);
     await tester.enterText(loginPasswordField, '_Admin1234');
+    await tester.pumpAndSettle(const Duration(microseconds: 200));
     await tester.tap(loginSubmitButton);
 
-    await tester.pumpAndSettle(const Duration(seconds: 7));
+    await tester.pumpAndSettle(const Duration(seconds: 4));
     // should redirect to home page tabbar
     expect(
       find.byWidgetPredicate(
@@ -39,13 +41,13 @@ void main() {
       findsOneWidget,
     );
 
-    await tester.pumpAndSettle(const Duration(milliseconds: 3));
+    await tester.pumpAndSettle(const Duration(seconds: 4));
 
     // click account tab
     final accountTabbar = find.byKey(const Key('accountTabbar'));
     await tester.tap(accountTabbar);
 
-    await tester.pumpAndSettle(const Duration(milliseconds: 3));
+    await tester.pumpAndSettle(const Duration(seconds: 3));
 
     // click logout tile
     final logoutTile = find.byKey(const Key('logoutTile'));

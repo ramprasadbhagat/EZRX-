@@ -25,6 +25,7 @@
 2. ```brew install lcov```
 3. ```fvm flutter test --coverage```
 4. ```genhtml coverage/lcov.info -o coverage/html```
+5. ```open coverage/html/index.html```
 
 ## Integration test
 ```fvm flutter drive --driver=test_driver/integration_driver.dart --target=integration_test/login_test.dart --flavor uat```
