@@ -38,7 +38,7 @@ class RoleName extends ValueObject<String> {
   }
 
   bool get canLoginOnBehalf {
-    return isAdmin(value.getOrElse(() => ''));
+    return canProxyLogin(value.getOrElse(() => ''));
   }
 
   const RoleName._(this.value);

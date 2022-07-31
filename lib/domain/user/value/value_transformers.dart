@@ -60,7 +60,7 @@ String salesOrgBuName(String salesOrg) {
   }
 }
 
-bool isAdmin(String roleName) {
+bool canProxyLogin(String roleName) {
   switch (roleName) {
     case 'ROOT Admin':
     case 'ZP Admin':
