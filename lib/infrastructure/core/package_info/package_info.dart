@@ -1,8 +1,29 @@
 import 'package:package_info_plus/package_info_plus.dart';
 
 class PackageInfoService {
+  late PackageInfo _packageInfo;
+
+  PackageInfoService() {
+    init();
+  }
+
+  Future<void> init() async {
+    _packageInfo = await PackageInfo.fromPlatform();
+  }
+
   Future<String> getString() async {
-    final packageInfo = await PackageInfo.fromPlatform();
-    return '${packageInfo.packageName} ${packageInfo.version} ${packageInfo.buildNumber}';
+    return '${_packageInfo.packageName} ${_packageInfo.version} ${_packageInfo.buildNumber}';
+  }
+
+  Future<String> getPackageName() async {
+    return _packageInfo.packageName;
+  }
+
+  Future<String> getVersion() async {
+    return _packageInfo.version;
+  }
+
+  Future<String> getBuildNumber() async {
+    return _packageInfo.buildNumber;
   }
 }

@@ -63,7 +63,10 @@ void setupLocator() {
     () => CredStorage(secureStorage: locator<SecureStorage>()),
   );
   locator.registerLazySingleton(
-    () => AuthInterceptor(tokenStorage: locator<TokenStorage>()),
+    () => AuthInterceptor(
+      tokenStorage: locator<TokenStorage>(),
+      packageInfoService: locator<PackageInfoService>(),
+    ),
   );
   locator.registerLazySingleton(
     () => PerformanceInterceptor(

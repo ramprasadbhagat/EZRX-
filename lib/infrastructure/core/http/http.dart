@@ -13,8 +13,8 @@ class HttpService {
   }) {
     _dio = Dio(BaseOptions(baseUrl: config.baseUrl));
     _dio.interceptors.addAll([
-      LogInterceptor(requestBody: true, responseBody: true),
       ...interceptors,
+      LogInterceptor(requestBody: true, responseBody: true),
     ]);
   }
 
