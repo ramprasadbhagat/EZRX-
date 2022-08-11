@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -89,7 +90,8 @@ class App extends StatelessWidget {
             ResponsiveBreakpoint.autoScale(800, name: TABLET),
             ResponsiveBreakpoint.resize(1000, name: DESKTOP),
           ],
-          background: Container(color: const Color(0xFFF5F5F5))),
+          background: const ColoredBox(color: ZPColors.white),
+        ),
       ),
     );
   }
