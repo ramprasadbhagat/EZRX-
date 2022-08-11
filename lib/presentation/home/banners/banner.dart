@@ -12,13 +12,12 @@ class HomeBanner extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: 180,
+          height: MediaQuery.of(context).size.width * 0.375,
           child: PageView.builder(
-            controller: controller,
-            itemBuilder: (_, index) {
-              return const BannerTile();
-            }
-          ),
+              controller: controller,
+              itemBuilder: (_, index) {
+                return const BannerTile();
+              }),
         ),
         SmoothPageIndicator(
           controller: controller,
