@@ -38,7 +38,7 @@ class SplashPage extends StatelessWidget {
             // }
             context.router.replaceAll([
               const SplashPageRoute(),
-              const LoginPageRoute(),
+              const HomeNavigationTabbarRoute(),
             ]);
           },
         );

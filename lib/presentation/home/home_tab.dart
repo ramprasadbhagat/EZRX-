@@ -1,4 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/home/banners/banner.dart';
 import 'package:flutter/material.dart';
 
 class HomeTab extends StatelessWidget {
@@ -7,7 +7,7 @@ class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: const Text('Home').tr()),
+      body: SafeArea(child: Center(child: HomeBanner())),
     );
   }
 }
