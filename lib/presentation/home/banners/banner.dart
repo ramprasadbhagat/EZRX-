@@ -25,9 +25,9 @@ class HomeBanner extends StatelessWidget {
             controller.jumpToPage(index);
           },
           count: 4,
-          effect: const ExpandingDotsEffect(
-              dotHeight: 10,
-              dotWidth: 10,
+          effect: ExpandingDotsEffect(
+              dotHeight: MediaQuery.of(context).size.width * 0.02,
+              dotWidth: MediaQuery.of(context).size.width * 0.02,
               dotColor: ZPColors.secondary,
               activeDotColor: ZPColors.primary
               // strokeWidth: 0.5,
