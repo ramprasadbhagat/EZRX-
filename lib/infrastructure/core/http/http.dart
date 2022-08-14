@@ -11,7 +11,14 @@ class HttpService {
     required Config config,
     required List<Interceptor> interceptors,
   }) {
-    _dio = Dio(BaseOptions(baseUrl: config.baseUrl));
+    _dio = Dio(
+      BaseOptions(
+        baseUrl: config.baseUrl,
+        sendTimeout: config.httpSendTimeout,
+        connectTimeout: config.httpConnectTimeout,
+        receiveTimeout: config.httpReceiveTimeout,
+      ),
+    );
     _dio.interceptors.addAll([
       ...interceptors,
       LogInterceptor(requestBody: true, responseBody: true),

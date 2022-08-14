@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class NotificationsTab extends StatelessWidget {
@@ -5,8 +6,8 @@ class NotificationsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text('Notifications')),
+    return Scaffold(
+      body: Center(child: const Text('Notifications').tr()),
     );
   }
 }

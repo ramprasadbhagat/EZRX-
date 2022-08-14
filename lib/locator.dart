@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/auth/proxyLogin/proxy_login_form_bloc.dar
 import 'package:ezrxmobile/application/user/user_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_local.dart';
+import 'package:ezrxmobile/infrastructure/auth/datasource/auth_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
@@ -19,6 +20,7 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/secure_storage.dart
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
+import 'package:ezrxmobile/infrastructure/user/datasource/user_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/user/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/user/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/user/repository/user_repository.dart';
@@ -91,9 +93,15 @@ void setupLocator() {
   //  Auth
   //
   //============================================================
+  locator.registerLazySingleton(
+    () => AuthQueryMutation(),
+  );
   locator.registerLazySingleton(() => AuthLocalDataSource());
   locator.registerLazySingleton(
-    () => AuthRemoteDataSource(httpService: locator<HttpService>()),
+    () => AuthRemoteDataSource(
+      httpService: locator<HttpService>(),
+      authQueryMutation: locator<AuthQueryMutation>(),
+    ),
   );
 
   locator.registerLazySingleton(
@@ -130,11 +138,18 @@ void setupLocator() {
   //  User
   //
   //============================================================
+
+  locator.registerLazySingleton(
+    () => UserQueryMutation(),
+  );
   locator.registerLazySingleton(
     () => UserLocalDataSource(tokenStorage: locator<TokenStorage>()),
   );
   locator.registerLazySingleton(
-    () => UserRemoteDataSource(httpService: locator<HttpService>()),
+    () => UserRemoteDataSource(
+      httpService: locator<HttpService>(),
+      userQueryMutation: locator<UserQueryMutation>(),
+    ),
   );
 
   locator.registerLazySingleton(

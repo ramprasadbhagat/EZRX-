@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 
@@ -22,41 +23,41 @@ class HomeNavigationTabbar extends StatelessWidget {
             key: const Key('homeTabbar'),
             currentIndex: tabsRouter.activeIndex,
             onTap: tabsRouter.setActiveIndex,
-            items: const [
+            items: [
               BottomNavigationBarItem(
-                icon: Icon(
+                icon: const Icon(
                   Icons.home_outlined,
                   key: Key('homeTab'),
                 ),
-                label: 'Home',
+                label: 'Home'.tr(),
               ),
               BottomNavigationBarItem(
-                icon: Icon(
+                icon: const Icon(
                   Icons.storefront_outlined,
                   key: Key('productsTab'),
                 ),
-                label: 'Products',
+                label: 'Products'.tr(),
               ),
               BottomNavigationBarItem(
-                icon: Icon(
+                icon: const Icon(
                   Icons.shopping_basket_outlined,
                   key: Key('ordersTab'),
                 ),
-                label: 'Orders',
+                label: 'Orders'.tr(),
               ),
               BottomNavigationBarItem(
-                icon: Icon(
+                icon: const Icon(
                   Icons.notifications_outlined,
                   key: Key('notificationsTabbar'),
                 ),
-                label: 'Notifications',
+                label: 'Notifications'.tr(),
               ),
               BottomNavigationBarItem(
-                icon: Icon(
+                icon: const Icon(
                   Icons.person_outline,
                   key: Key('accountTabbar'),
                 ),
-                label: 'Account',
+                label: 'Account'.tr(),
               ),
             ],
           );

@@ -1,6 +1,9 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -33,16 +36,36 @@ Future<void> initialSetup() async {
     debugPrint = (String? message, {int? wrapWidth}) {};
   }
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await Wakelock.enable();
   await Firebase.initializeApp();
   setupLocator();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  FlutterError.onError = _crashlytics.recordFlutterError;
+  if (!kDebugMode) {
+    FlutterError.onError = _crashlytics.recordFlutterError;
+  }
 }
 
-void runAppWithCrashlytics() {
+void runAppWithCrashlyticsAndLocalization() {
   runZonedGuarded(
-    () => runApp(const App()),
+    () => runApp(
+      EasyLocalization(
+        supportedLocales: const [
+          Locale('en', 'SG'),
+          Locale('th', 'TH'),
+          Locale('zh', 'TW'),
+          Locale('my', 'MY'),
+          Locale('vi', 'VN'),
+          Locale('km', 'KH'),
+        ],
+        path: 'assets/langs/langs.csv',
+        fallbackLocale: const Locale('en', 'SG'),
+        saveLocale: true,
+        useOnlyLangCode: false,
+        assetLoader: CsvAssetLoader(),
+        child: const App(),
+      ),
+    ),
     (error, stack) => _crashlytics.recordError(error, stack),
   );
 }
@@ -66,6 +89,9 @@ class App extends StatelessWidget {
         BlocProvider<UserBloc>(create: (context) => locator<UserBloc>()),
       ],
       child: MaterialApp.router(
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
         title: locator<Config>().appName,
         theme: appThemeData[AppTheme.light],
         // darkTheme: appThemeData[AppTheme.dark],

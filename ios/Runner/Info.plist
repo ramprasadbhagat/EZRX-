@@ -91,5 +91,14 @@
 			</array>
 		</dict>
 	</array>
+    <key>CFBundleLocalizations</key>
+    <array>
+        <string>en_SG</string>
+        <string>th_TH</string>
+        <string>zh_TW</string>
+        <string>my_MY</string>
+        <string>vi_VN</string>
+        <string>km_KH</string>
+    </array>
 </dict>
 </plist>

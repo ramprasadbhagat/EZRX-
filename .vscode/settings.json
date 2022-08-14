@@ -35,6 +35,9 @@
         "**/*.g.dart": true,
         "**/*.gr.dart": true
     },
+    "[csv]": {
+        "files.eol": "\r\n",
+    },
     "flutter-coverage.coverageFileNames": [
         "lcov.info",
         "cov.xml",

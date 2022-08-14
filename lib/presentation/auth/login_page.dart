@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -27,14 +28,16 @@ class LoginPage extends StatelessWidget {
                   (failure) {
                     showSnackBar(
                       context: context,
-                      message: failure.map(
-                        other: (other) => other.message,
-                        serverError: (_) => 'Server Error',
-                        invalidEmailAndPasswordCombination: (_) =>
-                            'Wrong Username and/or Password!',
-                        accountLocked: (_) => 'Account is Locked',
-                        accountExpired: (_) => 'Account is Expired',
-                        tokenExpired: (_) => 'Session token is Expired',
+                      message: tr(
+                        failure.map(
+                          other: (other) => other.message,
+                          serverError: (_) => 'Server Error',
+                          invalidEmailAndPasswordCombination: (_) =>
+                              'Incorrect username and/or password.',
+                          accountLocked: (_) => 'Account is Locked',
+                          accountExpired: (_) => 'Account is Expired',
+                          tokenExpired: (_) => 'Session token is Expired',
+                        ),
                       ),
                     );
                   },
@@ -114,14 +117,14 @@ class UsernameField extends StatelessWidget {
           controller: _usernameController,
           keyboardType: TextInputType.emailAddress,
           autocorrect: false,
-          decoration: const InputDecoration(labelText: 'Username'),
+          decoration: InputDecoration(labelText: 'Username'.tr()),
           onChanged: (value) => context.read<LoginFormBloc>().add(
                 LoginFormEvent.usernameChanged(value),
               ),
           validator: (_) =>
               context.read<LoginFormBloc>().state.username.value.fold(
                     (f) => f.maybeMap(
-                      empty: (_) => 'Username cannot be empty',
+                      empty: (_) => 'Username cannot be empty.'.tr(),
                       orElse: () => null,
                     ),
                     (_) => null,
@@ -159,7 +162,7 @@ class PasswordField extends StatelessWidget {
             keyboardType: TextInputType.visiblePassword,
             autocorrect: false,
             decoration: InputDecoration(
-              labelText: 'Password',
+              labelText: 'Password'.tr(),
               suffixIcon: IconButton(
                 icon: Icon(
                   state.passwordVisible
@@ -178,9 +181,7 @@ class PasswordField extends StatelessWidget {
             validator: (_) =>
                 context.read<LoginFormBloc>().state.password.value.fold(
                       (f) => f.maybeMap(
-                        empty: (_) => 'Password cannot be empty',
-                        passwordNotMatchRequirements: (_) =>
-                            'Password should be alphanumeric and consist of at least one upper case letter, one special character and should be 10-20 characters long',
+                        empty: (_) => 'Password cannot be empty.'.tr(),
                         orElse: () => null,
                       ),
                       (_) => null,
@@ -215,7 +216,7 @@ class RememberPassword extends StatelessWidget {
                       .add(const LoginFormEvent.rememberCheckChanged());
                 },
               ),
-              const Text('Remember Password')
+              const Text('Remember Password').tr()
             ],
           ),
         );
@@ -244,7 +245,7 @@ class LoginButton extends StatelessWidget {
                     context.read<LoginFormBloc>().add(const LoginFormEvent
                         .loginWithEmailAndPasswordPressed());
                   },
-            child: const Text('Login'),
+            child: const Text('Login').tr(),
           ),
         );
       },
@@ -273,7 +274,7 @@ class SSOLoginButton extends StatelessWidget {
                         .read<LoginFormBloc>()
                         .add(const LoginFormEvent.loginWithOktaButtonPressed());
                   },
-            child: const Text('Login with SSO'),
+            child: const Text('Login with SSO').tr(),
           ),
         );
       },

@@ -28,7 +28,7 @@ class SplashPage extends StatelessWidget {
             //   other: (other) => other.message,
             //   serverError: (_) => 'Server Error',
             //   invalidEmailAndPasswordCombination: (_) =>
-            //       'Wrong Username and/or Password!',
+            //       'Incorrect username and/or password.',
             //   accountLocked: (_) => 'Account is Locked',
             //   accountExpired: (_) => 'Account is Expired',
             //   tokenExpired: (_) => 'Session token is Expired',

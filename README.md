@@ -10,12 +10,18 @@
 - [Version Lens](https://marketplace.visualstudio.com/items?itemName=pflannery.vscode-versionlens)
 - [Coverage Gutters](https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters)
 - [Flutter Coverage](https://marketplace.visualstudio.com/items?itemName=Flutterando.flutter-coverage)
+- [Edit csv](https://marketplace.visualstudio.com/items?itemName=janisdd.vscode-edit-csv)
 
 ## Setup
 1. Install [FVM](https://fvm.app/docs/getting_started/installation)
 2. Git clone project
 3. Open project with Vscode, check ".fvm/fvm_config.json" file, check the "flutterSdkVersion" inside and use ```fvm use <flutterSdkVersion_you_saw>```
 4. Restart vscode
+
+## Edit localization lang file csv
+- directory : assets/langs/langs.csv
+- [Edit csv](https://marketplace.visualstudio.com/items?itemName=janisdd.vscode-edit-csv) edit your csv easily
+- Ensure the csv file is using CRLF to works. ref:https://stackoverflow.com/a/39532890
 
 ## Analyze
 ```fvm flutter analyze```
@@ -28,17 +34,18 @@
 5. ```open coverage/html/index.html```
 
 ## Integration test
-```fvm flutter drive --driver=test_driver/integration_driver.dart --target=integration_test/login_test.dart --flavor uat```
+```fvm flutter drive --driver=test_driver/integration_driver.dart --target=integration_test/app_test.dart --flavor uat```
 
 ## Auto build json_serializable, freezed, auto_route_generator, hive_generator 
 ```fvm flutter pub run build_runner watch --delete-conflicting-outputs```
+
 
 ## Flavor
 | Flavor| Package name | App Name | Endpoint |
 |--|--|--|--|
 | PROD |  `com.zuelligpharma.ezrxmobile`| eZRx | https://ezrx.com |
 | UAT  |  `com.zuelligpharma.ezrxmobile.uat`| eZRx Uat | https://zpprodapiportalapimgmt.apimanagement.ap1.hana.ondemand.com |
-| DEV  |  `com.zuelligpharma.ezrxmobile.dev`| eZRx Dev | http://127.0.0.1:8080 |
+| DEV  |  `com.zuelligpharma.ezrxmobile.dev`| eZRx Dev | https://dev.ezrx.com/ |
 | MOCK  |  `com.zuelligpharma.ezrxmobile.mock`| eZRx Mock | local json |
 
 ## Build app

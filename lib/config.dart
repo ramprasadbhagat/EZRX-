@@ -2,12 +2,16 @@ enum Flavor { mock, dev, uat, prod }
 
 class Config {
   Flavor appFlavor = Flavor.prod;
+  int httpSendTimeout = 15000;
+  int httpConnectTimeout = 15000;
+  int httpReceiveTimeout = 15000;
 
   String get baseUrl {
     switch (appFlavor) {
       case Flavor.mock:
-      case Flavor.dev:
         return 'http://127.0.0.1:7091';
+      case Flavor.dev:
+        return 'https://dev.ezrx.com/';
       case Flavor.uat:
         return 'https://zpprodapiportalapimgmt.apimanagement.ap1.hana.ondemand.com';
       case Flavor.prod:

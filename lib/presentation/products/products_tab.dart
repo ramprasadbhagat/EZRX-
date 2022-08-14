@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ProductsTab extends StatelessWidget {
@@ -5,8 +6,8 @@ class ProductsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text('Products')),
+    return Scaffold(
+      body: Center(child: const Text('Products').tr()),
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/user/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +10,10 @@ class AccountTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Account').tr(),
+        automaticallyImplyLeading: false,
+      ),
       body: Center(
         child: ListView(
           children: ListTile.divideTiles(
@@ -37,7 +41,7 @@ class AccountTab extends StatelessWidget {
                     child: ListTile(
                       key: const Key('loginOnBehalfTile'),
                       leading: const Icon(Icons.person_outline),
-                      title: const Text('Login on behalf'),
+                      title: const Text('Login on behalf').tr(),
                       onTap: () => context.router.pushNamed('login_on_behalf'),
                     ),
                   );
@@ -46,16 +50,8 @@ class AccountTab extends StatelessWidget {
               ListTile(
                 key: const Key('settingsTile'),
                 leading: const Icon(Icons.settings_outlined),
-                title: const Text('Settings'),
-                onTap: () {},
-              ),
-              ListTile(
-                key: const Key('logoutTile'),
-                leading: const Icon(Icons.logout_outlined),
-                title: const Text('Logout'),
-                onTap: () => context.read<AuthBloc>().add(
-                      const AuthEvent.logout(),
-                    ),
+                title: const Text('Settings').tr(),
+                onTap: () => context.router.pushNamed('settings'),
               ),
             ],
           ).toList(),

@@ -1,0 +1,46 @@
+# Test all the test cases when commit happend
+# 
+
+trigger: none
+
+resources:
+- repo: self
+
+pool:
+  vmImage: 'macos-latest'
+
+stages:
+- stage: TestStage
+  dependsOn: []
+  displayName: UnitTestStage
+  jobs:
+
+  - job: TestJob
+    displayName: UnitTestJob
+    steps: 
+
+    - task: Bash@3
+      displayName: flutter setup
+      inputs:
+        targetType: 'inline'
+        script: |
+          brew tap leoafarias/fvm
+          brew install fvm
+          echo Y | fvm global 3.0.5
+          fvm flutter pub get
+
+    - task: Bash@3
+      displayName: Test all the unit test
+      inputs:
+        targetType: 'inline'
+        script: |
+          fvm flutter test --coverage
+
+    # - task: Bash@3
+    #   displayName: Test all the integration test
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       fvm flutter drive --driver=test_driver/integration_driver.dart --target=integration_test/app_test.dart --flavor uat
+
+    

@@ -26,7 +26,7 @@ void main() {
     test(
       'should return error message when the username is empty',
       () async {
-        const errorMessage = 'Username cannot be empty';
+        const errorMessage = 'Username cannot be empty.';
         const input = '';
         final username = Username(input);
         final result = username.value.fold(
@@ -169,7 +169,7 @@ void main() {
     test(
       'should return error message when the password is empty',
       () async {
-        const errorMessage = 'Password cannot be empty';
+        const errorMessage = 'Password cannot be empty.';
         const input = '';
         final password = Password.login(input);
         final result = password.value.fold(
@@ -232,7 +232,7 @@ void main() {
     test(
       'should return error message when the password is empty',
       () async {
-        const errorMessage = 'Password cannot be empty';
+        const errorMessage = 'Password cannot be empty.';
         const input = '';
         final password = Password.reset(input);
         final result = password.value.fold(
