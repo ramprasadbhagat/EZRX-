@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/user/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

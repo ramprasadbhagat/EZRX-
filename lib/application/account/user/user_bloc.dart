@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/domain/user/entities/user.dart';
-import 'package:ezrxmobile/domain/user/repository/i_user_repository.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/repository/i_user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

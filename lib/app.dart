@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxyLogin/proxy_login_form_bloc.dart';
-import 'package:ezrxmobile/application/user/user_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -87,6 +88,9 @@ class App extends StatelessWidget {
           create: (context) => locator<ProxyLoginFormBloc>(),
         ),
         BlocProvider<UserBloc>(create: (context) => locator<UserBloc>()),
+        BlocProvider<SalesOrgBloc>(
+          create: (context) => locator<SalesOrgBloc>(),
+        ),
       ],
       child: MaterialApp.router(
         localizationsDelegates: context.localizationDelegates,

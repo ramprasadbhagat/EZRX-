@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:ezrxmobile/domain/user/entities/user.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-import 'package:ezrxmobile/infrastructure/user/datasource/user_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/user/dtos/user_dto.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/user_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/user_dto.dart';
 
 class UserRemoteDataSource {
   HttpService httpService;

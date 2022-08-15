@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/user/value/value_transformers.dart';
+import 'package:ezrxmobile/domain/account/value/value_transformers.dart';
 
 class CustomerCode extends ValueObject<String> {
   @override
@@ -19,11 +19,15 @@ class SalesOrg extends ValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory SalesOrg(String input) {
-    return SalesOrg._(Right(input));
+    return SalesOrg._(Right(input.trim()));
   }
 
   String get buName {
     return salesOrgBuName(value.getOrElse(() => ''));
+  }
+
+  String get fullName {
+    return '${value.getOrElse(() => '')} - $buName';
   }
 
   const SalesOrg._(this.value);

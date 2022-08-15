@@ -1,7 +1,8 @@
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxyLogin/proxy_login_form_bloc.dart';
-import 'package:ezrxmobile/application/user/user_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_query_mutation.dart';
@@ -20,10 +21,10 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/secure_storage.dart
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
-import 'package:ezrxmobile/infrastructure/user/datasource/user_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/user/datasource/user_local.dart';
-import 'package:ezrxmobile/infrastructure/user/datasource/user_remote.dart';
-import 'package:ezrxmobile/infrastructure/user/repository/user_repository.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/user_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/routes/router_observer.dart';
 import 'package:get_it/get_it.dart';
@@ -167,5 +168,14 @@ void setupLocator() {
       authBloc: locator<AuthBloc>(),
       userRepository: locator<UserRepository>(),
     ),
+  );
+
+  //============================================================
+  //  Sales Org
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => SalesOrgBloc(userBloc: locator<UserBloc>()),
   );
 }
