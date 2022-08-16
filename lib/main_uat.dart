@@ -7,5 +7,5 @@ import 'package:ezrxmobile/locator.dart';
 Future<void> main() async {
   await initialSetup();
   locator<Config>().appFlavor = Flavor.uat;
-  runAppWithCrashlytics();
+  runAppWithCrashlyticsAndLocalization();
 }

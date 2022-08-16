@@ -1,4 +1,10 @@
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/infrastructure/banner/datasource/banner_remote.dart';
+import 'package:ezrxmobile/infrastructure/core/http/http.dart';
+import 'package:ezrxmobile/infrastructure/core/http/interceptor/auth_interceptor.dart';
+import 'package:ezrxmobile/infrastructure/core/http/interceptor/performance_interceptor.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +14,6 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class HomeBanner extends StatelessWidget {
   HomeBanner({Key? key}) : super(key: key);
   final controller = PageController(viewportFraction: 0.95, keepPage: true);
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BannerBloc, BannerState>(
@@ -21,7 +26,13 @@ class HomeBanner extends StatelessWidget {
                 controller: controller,
                 itemCount: state.banner.length,
                 itemBuilder: (_, index) {
-                  return BannerTile(banner: state.banner[index],);
+                  return BannerTile(banner: state.banner[index],remoteDataSource: BannerRemoteDataSource(httpService: HttpService(
+                    config: locator<Config>(),
+                    interceptors: [
+                      locator<AuthInterceptor>(),
+                      locator<PerformanceInterceptor>(),
+                    ],
+                  )),);
                 }),
             ),
             SmoothPageIndicator(

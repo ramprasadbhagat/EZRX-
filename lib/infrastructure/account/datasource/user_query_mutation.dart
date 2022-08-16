@@ -1,26 +1,9 @@
-import 'dart:convert';
+// This class is responsible for all the queries for the GraphQl
+// for fetching the data from the APIs and the params are mentioned
+// in each and every query we require for the functionality
 
-import 'package:ezrxmobile/domain/user/entities/user.dart';
-import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-import 'package:ezrxmobile/infrastructure/user/dtos/user_dto.dart';
-
-class UserRemoteDataSource {
-  HttpService httpService;
-  UserRemoteDataSource({required this.httpService});
-
-  Future<User> getUser() async {
-    final res = await httpService.request(
-      method: 'POST',
-      url: '/api/strapiEngine',
-      data: jsonEncode({
-        'query': fetchUserData(),
-        'variables': {'id': '10797'}, //@@@@@@@ need to remove dependency
-      }),
-    );
-
-    return UserDto.fromJson(res.data['data']['user']).toDomain();
-  }
-
+class UserQueryMutation {
+  // For fetching userdata by user ID
   String fetchUserData() {
     return '''
       query userQuery(\$id: Int!) {

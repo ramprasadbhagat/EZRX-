@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/proxyLogin/proxy_login_form_bloc.dart';
-import 'package:ezrxmobile/application/user/user_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +14,7 @@ class LoginOnBehalfPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login On Behalf')),
+      appBar: AppBar(title: const Text('Login On Behalf').tr()),
       body: SafeArea(
         child: BlocConsumer<ProxyLoginFormBloc, ProxyLoginFormState>(
           listenWhen: (previous, current) =>
@@ -26,14 +27,16 @@ class LoginOnBehalfPage extends StatelessWidget {
                 (failure) {
                   showSnackBar(
                     context: context,
-                    message: failure.map(
-                      other: (other) => other.message,
-                      serverError: (_) => 'Server Error',
-                      invalidEmailAndPasswordCombination: (_) =>
-                          'Wrong Username and/or Password!',
-                      accountLocked: (_) => 'Account is Locked',
-                      accountExpired: (_) => 'Account is Expired',
-                      tokenExpired: (_) => 'Session token is Expired',
+                    message: tr(
+                      failure.map(
+                        other: (other) => other.message,
+                        serverError: (_) => 'Server Error',
+                        invalidEmailAndPasswordCombination: (_) =>
+                            'Incorrect username and/or password.',
+                        accountLocked: (_) => 'Account is Locked',
+                        accountExpired: (_) => 'Account is Expired',
+                        tokenExpired: (_) => 'Session token is Expired',
+                      ),
                     ),
                   );
                 },
@@ -98,14 +101,14 @@ class UsernameField extends StatelessWidget {
         controller: _usernameController,
         keyboardType: TextInputType.emailAddress,
         autocorrect: false,
-        decoration: const InputDecoration(labelText: 'Username'),
+        decoration: InputDecoration(labelText: 'Username'.tr()),
         onChanged: (value) => context.read<ProxyLoginFormBloc>().add(
               ProxyLoginFormEvent.usernameChanged(value),
             ),
         validator: (_) =>
             context.read<ProxyLoginFormBloc>().state.username.value.fold(
                   (f) => f.maybeMap(
-                    empty: (_) => 'Username cannot be empty',
+                    empty: (_) => 'Username cannot be empty.'.tr(),
                     orElse: () => null,
                   ),
                   (_) => null,
@@ -135,7 +138,7 @@ class LoginButton extends StatelessWidget {
                     context.read<ProxyLoginFormBloc>().add(
                         const ProxyLoginFormEvent.loginWithADButtonPressed());
                   },
-            child: const Text('Login'),
+            child: const Text('Login').tr(),
           ),
         );
       },

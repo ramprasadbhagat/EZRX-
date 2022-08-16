@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +18,6 @@ class SplashPage extends StatelessWidget {
           loading: (_) => _showLoadingDialog(context),
           authenticated: (_) {
             // showSnackBar(context: context, message: 'Welcome back');
-            context.read<BannerBloc>().add(const BannerEvent.fetch());
             context.router.replaceAll([
               const SplashPageRoute(),
               const HomeNavigationTabbarRoute(),
@@ -30,7 +28,7 @@ class SplashPage extends StatelessWidget {
             //   other: (other) => other.message,
             //   serverError: (_) => 'Server Error',
             //   invalidEmailAndPasswordCombination: (_) =>
-            //       'Wrong Username and/or Password!',
+            //       'Incorrect username and/or password.',
             //   accountLocked: (_) => 'Account is Locked',
             //   accountExpired: (_) => 'Account is Expired',
             //   tokenExpired: (_) => 'Session token is Expired',

@@ -11,7 +11,14 @@ class HttpService {
     required Config config,
     required List<Interceptor> interceptors,
   }) {
-    _dio = Dio(BaseOptions(baseUrl: config.baseUrl));
+    _dio = Dio(
+      BaseOptions(
+        baseUrl: config.baseUrl,
+        sendTimeout: config.httpSendTimeout,
+        connectTimeout: config.httpConnectTimeout,
+        receiveTimeout: config.httpReceiveTimeout,
+      ),
+    );
     _dio.interceptors.addAll([
       ...interceptors,
       LogInterceptor(requestBody: true, responseBody: true),
@@ -21,10 +28,14 @@ class HttpService {
   Future<Response> request({
     required String method,
     required String url,
-    dynamic data = const {}, // can be Map<String, dynamic> or FormData
+    dynamic data = const {},// can be Map<String, dynamic> or FormData
+    ResponseType? responseType,
   }) async {
     // try {
     _dio.options.method = method;
+    if(responseType!=null){
+      _dio.options.responseType = responseType;
+    }
     final response = await _dio.request(
       url,
       data: data,

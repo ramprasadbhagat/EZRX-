@@ -11,9 +11,9 @@ class BannerInfraRepository implements BannerRepository {
   BannerInfraRepository({required this.remoteDataSource});
 
   @override
-  Future<Either<BannerFailure, List<BannerItem>>> getBanner() async {
+  Future<Either<BannerFailure, List<BannerItem>>> getBanner(bool isPreSalesOrg,String salesOrg) async {
     try {
-      final banner = await remoteDataSource.getBanners(false, '2001');
+      final banner = await remoteDataSource.getBanners(isPreSalesOrg, salesOrg);
       print(banner);
       return Right(banner);
     } on ServerException catch (e) {
