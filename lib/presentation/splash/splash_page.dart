@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class SplashPage extends StatelessWidget {
           loading: (_) => _showLoadingDialog(context),
           authenticated: (_) {
             // showSnackBar(context: context, message: 'Welcome back');
+            context.read<BannerBloc>().add(const BannerEvent.fetch());
             context.router.replaceAll([
               const SplashPageRoute(),
               const HomeNavigationTabbarRoute(),
@@ -38,7 +40,7 @@ class SplashPage extends StatelessWidget {
             // }
             context.router.replaceAll([
               const SplashPageRoute(),
-              const HomeNavigationTabbarRoute(),
+              const LoginPageRoute(),
             ]);
           },
         );

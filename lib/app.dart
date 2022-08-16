@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +67,7 @@ class App extends StatelessWidget {
           create: (context) => locator<ProxyLoginFormBloc>(),
         ),
         BlocProvider<UserBloc>(create: (context) => locator<UserBloc>()),
+        BlocProvider<BannerBloc>(create: (context) => locator<BannerBloc>()),
       ],
       child: MaterialApp.router(
         title: locator<Config>().appName,
