@@ -118,8 +118,8 @@ class App extends StatelessWidget {
           minWidth: 480,
           defaultScale: true,
           breakpoints: const [
-            ResponsiveBreakpoint.resize(480, name: MOBILE),
-            ResponsiveBreakpoint.autoScale(800, name: TABLET),
+            ResponsiveBreakpoint.resize(360, name: MOBILE),
+            ResponsiveBreakpoint.resize(800, name: TABLET),
             ResponsiveBreakpoint.resize(1000, name: DESKTOP),
           ],
           background: const ColoredBox(color: ZPColors.white),

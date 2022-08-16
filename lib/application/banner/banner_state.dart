@@ -6,6 +6,6 @@ class BannerState with _$BannerState {
     required List<BannerItem> banner,
   }) = _BannerState;
   factory BannerState.initial() => BannerState(
-    banner: [BannerItem.empty()],
-  );
+        banner: [BannerItem.empty()],
+      );
 }

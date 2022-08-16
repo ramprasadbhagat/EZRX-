@@ -17,15 +17,15 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$BannerItem {
   int get id => throw _privateConstructorUsedError;
-  dynamic get serial => throw _privateConstructorUsedError;
+  int get serial => throw _privateConstructorUsedError;
   bool get isPreSalesOrg => throw _privateConstructorUsedError;
-  dynamic get isCustomer => throw _privateConstructorUsedError;
+  bool get isCustomer => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
-  dynamic get title => throw _privateConstructorUsedError;
-  dynamic get description => throw _privateConstructorUsedError;
-  dynamic get buttonLabel => throw _privateConstructorUsedError;
-  dynamic get urlLink => throw _privateConstructorUsedError;
-  dynamic get salesOrg => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+  String get buttonLabel => throw _privateConstructorUsedError;
+  String get urlLink => throw _privateConstructorUsedError;
+  String get salesOrg => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BannerItemCopyWith<BannerItem> get copyWith =>
@@ -39,15 +39,15 @@ abstract class $BannerItemCopyWith<$Res> {
       _$BannerItemCopyWithImpl<$Res>;
   $Res call(
       {int id,
-      dynamic serial,
+      int serial,
       bool isPreSalesOrg,
-      dynamic isCustomer,
+      bool isCustomer,
       String url,
-      dynamic title,
-      dynamic description,
-      dynamic buttonLabel,
-      dynamic urlLink,
-      dynamic salesOrg});
+      String title,
+      String description,
+      String buttonLabel,
+      String urlLink,
+      String salesOrg});
 }
 
 /// @nodoc
@@ -79,7 +79,7 @@ class _$BannerItemCopyWithImpl<$Res> implements $BannerItemCopyWith<$Res> {
       serial: serial == freezed
           ? _value.serial
           : serial // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int,
       isPreSalesOrg: isPreSalesOrg == freezed
           ? _value.isPreSalesOrg
           : isPreSalesOrg // ignore: cast_nullable_to_non_nullable
@@ -87,7 +87,7 @@ class _$BannerItemCopyWithImpl<$Res> implements $BannerItemCopyWith<$Res> {
       isCustomer: isCustomer == freezed
           ? _value.isCustomer
           : isCustomer // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as bool,
       url: url == freezed
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -95,23 +95,23 @@ class _$BannerItemCopyWithImpl<$Res> implements $BannerItemCopyWith<$Res> {
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String,
       buttonLabel: buttonLabel == freezed
           ? _value.buttonLabel
           : buttonLabel // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String,
       urlLink: urlLink == freezed
           ? _value.urlLink
           : urlLink // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String,
       salesOrg: salesOrg == freezed
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String,
     ));
   }
 }
@@ -125,15 +125,15 @@ abstract class _$$_BannerItemCopyWith<$Res>
   @override
   $Res call(
       {int id,
-      dynamic serial,
+      int serial,
       bool isPreSalesOrg,
-      dynamic isCustomer,
+      bool isCustomer,
       String url,
-      dynamic title,
-      dynamic description,
-      dynamic buttonLabel,
-      dynamic urlLink,
-      dynamic salesOrg});
+      String title,
+      String description,
+      String buttonLabel,
+      String urlLink,
+      String salesOrg});
 }
 
 /// @nodoc
@@ -164,21 +164,42 @@ class __$$_BannerItemCopyWithImpl<$Res> extends _$BannerItemCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      serial: serial == freezed ? _value.serial : serial,
+      serial: serial == freezed
+          ? _value.serial
+          : serial // ignore: cast_nullable_to_non_nullable
+              as int,
       isPreSalesOrg: isPreSalesOrg == freezed
           ? _value.isPreSalesOrg
           : isPreSalesOrg // ignore: cast_nullable_to_non_nullable
               as bool,
-      isCustomer: isCustomer == freezed ? _value.isCustomer : isCustomer,
+      isCustomer: isCustomer == freezed
+          ? _value.isCustomer
+          : isCustomer // ignore: cast_nullable_to_non_nullable
+              as bool,
       url: url == freezed
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      title: title == freezed ? _value.title : title,
-      description: description == freezed ? _value.description : description,
-      buttonLabel: buttonLabel == freezed ? _value.buttonLabel : buttonLabel,
-      urlLink: urlLink == freezed ? _value.urlLink : urlLink,
-      salesOrg: salesOrg == freezed ? _value.salesOrg : salesOrg,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      buttonLabel: buttonLabel == freezed
+          ? _value.buttonLabel
+          : buttonLabel // ignore: cast_nullable_to_non_nullable
+              as String,
+      urlLink: urlLink == freezed
+          ? _value.urlLink
+          : urlLink // ignore: cast_nullable_to_non_nullable
+              as String,
+      salesOrg: salesOrg == freezed
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -188,37 +209,37 @@ class __$$_BannerItemCopyWithImpl<$Res> extends _$BannerItemCopyWithImpl<$Res>
 class _$_BannerItem extends _BannerItem {
   const _$_BannerItem(
       {required this.id,
-      this.serial,
+      required this.serial,
       required this.isPreSalesOrg,
-      this.isCustomer,
+      required this.isCustomer,
       required this.url,
-      this.title,
-      this.description,
-      this.buttonLabel,
-      this.urlLink,
-      this.salesOrg})
+      required this.title,
+      required this.description,
+      required this.buttonLabel,
+      required this.urlLink,
+      required this.salesOrg})
       : super._();
 
   @override
   final int id;
   @override
-  final dynamic serial;
+  final int serial;
   @override
   final bool isPreSalesOrg;
   @override
-  final dynamic isCustomer;
+  final bool isCustomer;
   @override
   final String url;
   @override
-  final dynamic title;
+  final String title;
   @override
-  final dynamic description;
+  final String description;
   @override
-  final dynamic buttonLabel;
+  final String buttonLabel;
   @override
-  final dynamic urlLink;
+  final String urlLink;
   @override
-  final dynamic salesOrg;
+  final String salesOrg;
 
   @override
   String toString() {
@@ -269,37 +290,37 @@ class _$_BannerItem extends _BannerItem {
 abstract class _BannerItem extends BannerItem {
   const factory _BannerItem(
       {required final int id,
-      final dynamic serial,
+      required final int serial,
       required final bool isPreSalesOrg,
-      final dynamic isCustomer,
+      required final bool isCustomer,
       required final String url,
-      final dynamic title,
-      final dynamic description,
-      final dynamic buttonLabel,
-      final dynamic urlLink,
-      final dynamic salesOrg}) = _$_BannerItem;
+      required final String title,
+      required final String description,
+      required final String buttonLabel,
+      required final String urlLink,
+      required final String salesOrg}) = _$_BannerItem;
   const _BannerItem._() : super._();
 
   @override
   int get id;
   @override
-  dynamic get serial;
+  int get serial;
   @override
   bool get isPreSalesOrg;
   @override
-  dynamic get isCustomer;
+  bool get isCustomer;
   @override
   String get url;
   @override
-  dynamic get title;
+  String get title;
   @override
-  dynamic get description;
+  String get description;
   @override
-  dynamic get buttonLabel;
+  String get buttonLabel;
   @override
-  dynamic get urlLink;
+  String get urlLink;
   @override
-  dynamic get salesOrg;
+  String get salesOrg;
   @override
   @JsonKey(ignore: true)
   _$$_BannerItemCopyWith<_$_BannerItem> get copyWith =>
