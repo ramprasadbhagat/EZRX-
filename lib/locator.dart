@@ -9,8 +9,9 @@ import 'package:ezrxmobile/infrastructure/auth/datasource/auth_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
+import 'package:ezrxmobile/infrastructure/banner/datasource/banner_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_remote.dart';
-import 'package:ezrxmobile/infrastructure/banner/repository/banner_infra_repository.dart';
+import 'package:ezrxmobile/infrastructure/banner/repository/banner_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/dynamic_links.dart';
@@ -177,20 +178,25 @@ void setupLocator() {
   //  Banner
   //
   //============================================================
-
-
   locator.registerLazySingleton(
-    () => BannerRemoteDataSource(httpService: locator<HttpService>()),
+    () => BannerQueryMutation(),
   );
 
   locator.registerLazySingleton(
-    () => BannerInfraRepository(
-      remoteDataSource: locator<BannerRemoteDataSource>()
+    () => BannerRemoteDataSource(
+      httpService: locator<HttpService>(),
+      bannerQueryMutation: locator<BannerQueryMutation>(),
     ),
   );
 
   locator.registerLazySingleton(
-    () => BannerBloc(bannerRepository: locator<BannerInfraRepository>(),salesOrgBloc: locator<SalesOrgBloc>()),
+    () => BannerRepository(remoteDataSource: locator<BannerRemoteDataSource>()),
+  );
+
+  locator.registerLazySingleton(
+    () => BannerBloc(
+        bannerRepository: locator<BannerRepository>(),
+        salesOrgBloc: locator<SalesOrgBloc>()),
   );
   //============================================================
   //  Sales Org

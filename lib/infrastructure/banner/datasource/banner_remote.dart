@@ -2,36 +2,43 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/infrastructure/banner/datasource/banner_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/banner/dtos/banner_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class BannerRemoteDataSource{
+class BannerRemoteDataSource {
   HttpService httpService;
-  BannerRemoteDataSource({required this.httpService});
+  BannerQueryMutation bannerQueryMutation;
+  BannerRemoteDataSource({
+    required this.httpService,
+    required this.bannerQueryMutation,
+  });
 
-  Future<List<BannerItem>> getBanners(bool isPreSalesOrg,String salesOrg) async {
+  Future<List<BannerItem>> getBanners(
+      bool isPreSalesOrg, String salesOrg) async {
     final res = await httpService.request(
       method: 'POST',
       url: '/ezrxapi/api/license',
       data: jsonEncode({
-        'query': getBannerQuery(isPreSalesOrg,salesOrg),
+        'query': bannerQueryMutation.getBannerQuery(isPreSalesOrg, salesOrg),
       }),
     );
 
-    return List.from(res.data['data']['getBanners']).map((e) => BannerDto.fromJson(e).toDomain()).toList();
+    return List.from(res.data['data']['getBanners'])
+        .map((e) => BannerDto.fromJson(e).toDomain())
+        .toList();
   }
 
   Future<dynamic> downloadImage(Map credential) async {
     if (credential['url'] != '') {
       try {
         final res = await httpService.request(
-          method: 'POST',
-          url: '/api/downloadAttachment',
-          data: credential,
-          responseType: ResponseType.bytes
-        );
+            method: 'POST',
+            url: '/api/downloadAttachment',
+            data: credential,
+            responseType: ResponseType.bytes);
 
         if (res.statusCode == 200) {
           var data = res.data;
@@ -62,25 +69,5 @@ class BannerRemoteDataSource{
     } else {
       return 'empty url';
     }
-  }
-
-  String getBannerQuery(bool isPreSalesOrg,String salesOrg) {
-    return '''
-    {
-      getBanners(request: {isPreSalesOrg: $isPreSalesOrg,salesOrg:"$salesOrg"})
-        {
-          id    
-          url    
-          title    
-          description    
-          buttonLabel    
-          urlLink    
-          isPreSalesOrg  
-          salesOrg    
-          serial
-          isCustomer
-      }
-    }
-    ''';
   }
 }

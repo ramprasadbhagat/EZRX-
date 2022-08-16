@@ -19,19 +19,23 @@ mixin _$BannerEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(bool isPreSalesOrg, String salesOrg) fetch,
+    required TResult Function(
+            bool isPreSalesOrg, SalesOrganisation salesOrganisation)
+        fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(bool isPreSalesOrg, String salesOrg)? fetch,
+    TResult Function(bool isPreSalesOrg, SalesOrganisation salesOrganisation)?
+        fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(bool isPreSalesOrg, String salesOrg)? fetch,
+    TResult Function(bool isPreSalesOrg, SalesOrganisation salesOrganisation)?
+        fetch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,7 +117,9 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(bool isPreSalesOrg, String salesOrg) fetch,
+    required TResult Function(
+            bool isPreSalesOrg, SalesOrganisation salesOrganisation)
+        fetch,
   }) {
     return initialized();
   }
@@ -122,7 +128,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(bool isPreSalesOrg, String salesOrg)? fetch,
+    TResult Function(bool isPreSalesOrg, SalesOrganisation salesOrganisation)?
+        fetch,
   }) {
     return initialized?.call();
   }
@@ -131,7 +138,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(bool isPreSalesOrg, String salesOrg)? fetch,
+    TResult Function(bool isPreSalesOrg, SalesOrganisation salesOrganisation)?
+        fetch,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -180,7 +188,9 @@ abstract class _Initialized implements BannerEvent {
 abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
-  $Res call({bool isPreSalesOrg, String salesOrg});
+  $Res call({bool isPreSalesOrg, SalesOrganisation salesOrganisation});
+
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
 
 /// @nodoc
@@ -195,34 +205,41 @@ class __$$_FetchCopyWithImpl<$Res> extends _$BannerEventCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isPreSalesOrg = freezed,
-    Object? salesOrg = freezed,
+    Object? salesOrganisation = freezed,
   }) {
     return _then(_$_Fetch(
       isPreSalesOrg == freezed
           ? _value.isPreSalesOrg
           : isPreSalesOrg // ignore: cast_nullable_to_non_nullable
               as bool,
-      salesOrg == freezed
-          ? _value.salesOrg
-          : salesOrg // ignore: cast_nullable_to_non_nullable
-              as String,
+      salesOrganisation == freezed
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
     ));
+  }
+
+  @override
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  const _$_Fetch(this.isPreSalesOrg, this.salesOrg);
+  const _$_Fetch(this.isPreSalesOrg, this.salesOrganisation);
 
   @override
   final bool isPreSalesOrg;
   @override
-  final String salesOrg;
+  final SalesOrganisation salesOrganisation;
 
   @override
   String toString() {
-    return 'BannerEvent.fetch(isPreSalesOrg: $isPreSalesOrg, salesOrg: $salesOrg)';
+    return 'BannerEvent.fetch(isPreSalesOrg: $isPreSalesOrg, salesOrganisation: $salesOrganisation)';
   }
 
   @override
@@ -232,14 +249,15 @@ class _$_Fetch implements _Fetch {
             other is _$_Fetch &&
             const DeepCollectionEquality()
                 .equals(other.isPreSalesOrg, isPreSalesOrg) &&
-            const DeepCollectionEquality().equals(other.salesOrg, salesOrg));
+            const DeepCollectionEquality()
+                .equals(other.salesOrganisation, salesOrganisation));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(isPreSalesOrg),
-      const DeepCollectionEquality().hash(salesOrg));
+      const DeepCollectionEquality().hash(salesOrganisation));
 
   @JsonKey(ignore: true)
   @override
@@ -250,29 +268,33 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(bool isPreSalesOrg, String salesOrg) fetch,
+    required TResult Function(
+            bool isPreSalesOrg, SalesOrganisation salesOrganisation)
+        fetch,
   }) {
-    return fetch(isPreSalesOrg, salesOrg);
+    return fetch(isPreSalesOrg, salesOrganisation);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(bool isPreSalesOrg, String salesOrg)? fetch,
+    TResult Function(bool isPreSalesOrg, SalesOrganisation salesOrganisation)?
+        fetch,
   }) {
-    return fetch?.call(isPreSalesOrg, salesOrg);
+    return fetch?.call(isPreSalesOrg, salesOrganisation);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(bool isPreSalesOrg, String salesOrg)? fetch,
+    TResult Function(bool isPreSalesOrg, SalesOrganisation salesOrganisation)?
+        fetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(isPreSalesOrg, salesOrg);
+      return fetch(isPreSalesOrg, salesOrganisation);
     }
     return orElse();
   }
@@ -310,11 +332,12 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements BannerEvent {
-  const factory _Fetch(final bool isPreSalesOrg, final String salesOrg) =
+  const factory _Fetch(
+          final bool isPreSalesOrg, final SalesOrganisation salesOrganisation) =
       _$_Fetch;
 
   bool get isPreSalesOrg;
-  String get salesOrg;
+  SalesOrganisation get salesOrganisation;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;

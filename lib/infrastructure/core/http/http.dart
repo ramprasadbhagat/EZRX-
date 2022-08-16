@@ -28,14 +28,13 @@ class HttpService {
   Future<Response> request({
     required String method,
     required String url,
-    dynamic data = const {},// can be Map<String, dynamic> or FormData
-    ResponseType? responseType,
+    dynamic data = const {}, // can be Map<String, dynamic> or FormData
+    ResponseType responseType = ResponseType.json,
   }) async {
     // try {
     _dio.options.method = method;
-    if(responseType!=null){
-      _dio.options.responseType = responseType;
-    }
+    _dio.options.responseType = responseType;
+
     final response = await _dio.request(
       url,
       data: data,
