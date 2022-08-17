@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner_tile.dart';
@@ -27,6 +28,7 @@ class HomeBanner extends StatelessWidget {
                   return BannerTile(
                     banner: state.banner[index],
                     httpService: locator<HttpService>(),
+                    countlyService: locator<CountlyService>(),
                   );
                 },
               ),

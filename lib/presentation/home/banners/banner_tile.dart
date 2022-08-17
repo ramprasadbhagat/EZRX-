@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:flutter/material.dart';
@@ -12,10 +13,12 @@ import 'package:url_launcher/url_launcher.dart';
 class BannerTile extends StatelessWidget {
   final BannerItem banner;
   final HttpService httpService;
+  final CountlyService countlyService;
   const BannerTile({
     Key? key,
     required this.banner,
     required this.httpService,
+    required this.countlyService,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,7 @@ class BannerTile extends StatelessWidget {
             return image.data != null
                 ? GestureDetector(
                     onTap: banner.urlLink.isEmpty ? null : () async {
-                      // addCountlyEvent('carousel_banner_clicked',
+                      // await countlyService.addCountlyEvent('carousel_banner_clicked',
                       //   segmentation: {
                       //   'banner_id': banner.id,
                       //   'landingPage':banner.urlLink,

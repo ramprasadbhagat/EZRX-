@@ -12,6 +12,7 @@ import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_remote.dart';
 import 'package:ezrxmobile/infrastructure/banner/repository/banner_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/dynamic_links.dart';
@@ -198,6 +199,7 @@ void setupLocator() {
         bannerRepository: locator<BannerRepository>(),
         salesOrgBloc: locator<SalesOrgBloc>()),
   );
+
   //============================================================
   //  Sales Org
   //
@@ -205,5 +207,14 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => SalesOrgBloc(userBloc: locator<UserBloc>()),
+  );
+
+  //============================================================
+  //  Countly
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => CountlyService(),
   );
 }
