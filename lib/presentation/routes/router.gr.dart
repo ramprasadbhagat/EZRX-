@@ -10,89 +10,97 @@
 //
 // ignore_for_file: type=lint
 
-import 'package:auto_route/auto_route.dart' as _i11;
-import 'package:flutter/material.dart' as _i12;
+import 'package:auto_route/auto_route.dart' as _i12;
+import 'package:flutter/material.dart' as _i13;
 
-import '../account/account_tab.dart' as _i10;
+import '../account/account_tab.dart' as _i11;
 import '../account/settings_page.dart' as _i4;
 import '../auth/login_page.dart' as _i2;
 import '../auth/proxy_login_page.dart' as _i3;
-import '../home/home_tab.dart' as _i6;
-import '../home_tab.dart' as _i5;
-import '../notifications/notifications_tab.dart' as _i9;
-import '../orders/orders_tab.dart' as _i8;
-import '../products/products_tab.dart' as _i7;
+import '../core/webview_page.dart' as _i5;
+import '../home/home_tab.dart' as _i7;
+import '../home_tab.dart' as _i6;
+import '../notifications/notifications_tab.dart' as _i10;
+import '../orders/orders_tab.dart' as _i9;
+import '../products/products_tab.dart' as _i8;
 import '../splash/splash_page.dart' as _i1;
 
-class AppRouter extends _i11.RootStackRouter {
-  AppRouter([_i12.GlobalKey<_i12.NavigatorState>? navigatorKey])
+class AppRouter extends _i12.RootStackRouter {
+  AppRouter([_i13.GlobalKey<_i13.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i11.PageFactory> pagesMap = {
+  final Map<String, _i12.PageFactory> pagesMap = {
     SplashPageRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i1.SplashPage());
     },
     LoginPageRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i2.LoginPage());
     },
     LoginOnBehalfPageRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i3.LoginOnBehalfPage());
     },
     SettingsPageRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i4.SettingsPage());
     },
+    WebViewPageRoute.name: (routeData) {
+      final args = routeData.argsAs<WebViewPageRouteArgs>();
+      return _i12.MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: _i5.WebViewPage(key: args.key, url: args.url));
+    },
     HomeNavigationTabbarRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i5.HomeNavigationTabbar());
+      return _i12.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i6.HomeNavigationTabbar());
     },
     HomeTabRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i6.HomeTab());
+      return _i12.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i7.HomeTab());
     },
     ProductsTabRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i7.ProductsTab());
+      return _i12.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i8.ProductsTab());
     },
     OrdersTabRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i8.OrdersTab());
+      return _i12.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i9.OrdersTab());
     },
     NotificationsTabRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i9.NotificationsTab());
+      return _i12.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i10.NotificationsTab());
     },
     AccountTabRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i10.AccountTab());
+      return _i12.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i11.AccountTab());
     }
   };
 
   @override
-  List<_i11.RouteConfig> get routes => [
-        _i11.RouteConfig('/#redirect',
+  List<_i12.RouteConfig> get routes => [
+        _i12.RouteConfig('/#redirect',
             path: '/', redirectTo: 'splash', fullMatch: true),
-        _i11.RouteConfig(SplashPageRoute.name, path: 'splash'),
-        _i11.RouteConfig(LoginPageRoute.name, path: 'login'),
-        _i11.RouteConfig(LoginOnBehalfPageRoute.name, path: 'login_on_behalf'),
-        _i11.RouteConfig(SettingsPageRoute.name, path: 'settings'),
-        _i11.RouteConfig(HomeNavigationTabbarRoute.name,
+        _i12.RouteConfig(SplashPageRoute.name, path: 'splash'),
+        _i12.RouteConfig(LoginPageRoute.name, path: 'login'),
+        _i12.RouteConfig(LoginOnBehalfPageRoute.name, path: 'login_on_behalf'),
+        _i12.RouteConfig(SettingsPageRoute.name, path: 'settings'),
+        _i12.RouteConfig(WebViewPageRoute.name, path: 'web_view_page'),
+        _i12.RouteConfig(HomeNavigationTabbarRoute.name,
             path: 'main_tabbar',
             children: [
-              _i11.RouteConfig(HomeTabRoute.name,
+              _i12.RouteConfig(HomeTabRoute.name,
                   path: 'home-tab', parent: HomeNavigationTabbarRoute.name),
-              _i11.RouteConfig(ProductsTabRoute.name,
+              _i12.RouteConfig(ProductsTabRoute.name,
                   path: 'products-tab', parent: HomeNavigationTabbarRoute.name),
-              _i11.RouteConfig(OrdersTabRoute.name,
+              _i12.RouteConfig(OrdersTabRoute.name,
                   path: 'orders-tab', parent: HomeNavigationTabbarRoute.name),
-              _i11.RouteConfig(NotificationsTabRoute.name,
+              _i12.RouteConfig(NotificationsTabRoute.name,
                   path: 'notifications-tab',
                   parent: HomeNavigationTabbarRoute.name),
-              _i11.RouteConfig(AccountTabRoute.name,
+              _i12.RouteConfig(AccountTabRoute.name,
                   path: 'account-tab', parent: HomeNavigationTabbarRoute.name)
             ])
       ];
@@ -100,7 +108,7 @@ class AppRouter extends _i11.RootStackRouter {
 
 /// generated route for
 /// [_i1.SplashPage]
-class SplashPageRoute extends _i11.PageRouteInfo<void> {
+class SplashPageRoute extends _i12.PageRouteInfo<void> {
   const SplashPageRoute() : super(SplashPageRoute.name, path: 'splash');
 
   static const String name = 'SplashPageRoute';
@@ -108,7 +116,7 @@ class SplashPageRoute extends _i11.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.LoginPage]
-class LoginPageRoute extends _i11.PageRouteInfo<void> {
+class LoginPageRoute extends _i12.PageRouteInfo<void> {
   const LoginPageRoute() : super(LoginPageRoute.name, path: 'login');
 
   static const String name = 'LoginPageRoute';
@@ -116,7 +124,7 @@ class LoginPageRoute extends _i11.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.LoginOnBehalfPage]
-class LoginOnBehalfPageRoute extends _i11.PageRouteInfo<void> {
+class LoginOnBehalfPageRoute extends _i12.PageRouteInfo<void> {
   const LoginOnBehalfPageRoute()
       : super(LoginOnBehalfPageRoute.name, path: 'login_on_behalf');
 
@@ -125,16 +133,40 @@ class LoginOnBehalfPageRoute extends _i11.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.SettingsPage]
-class SettingsPageRoute extends _i11.PageRouteInfo<void> {
+class SettingsPageRoute extends _i12.PageRouteInfo<void> {
   const SettingsPageRoute() : super(SettingsPageRoute.name, path: 'settings');
 
   static const String name = 'SettingsPageRoute';
 }
 
 /// generated route for
-/// [_i5.HomeNavigationTabbar]
-class HomeNavigationTabbarRoute extends _i11.PageRouteInfo<void> {
-  const HomeNavigationTabbarRoute({List<_i11.PageRouteInfo>? children})
+/// [_i5.WebViewPage]
+class WebViewPageRoute extends _i12.PageRouteInfo<WebViewPageRouteArgs> {
+  WebViewPageRoute({_i13.Key? key, required String url})
+      : super(WebViewPageRoute.name,
+            path: 'web_view_page',
+            args: WebViewPageRouteArgs(key: key, url: url));
+
+  static const String name = 'WebViewPageRoute';
+}
+
+class WebViewPageRouteArgs {
+  const WebViewPageRouteArgs({this.key, required this.url});
+
+  final _i13.Key? key;
+
+  final String url;
+
+  @override
+  String toString() {
+    return 'WebViewPageRouteArgs{key: $key, url: $url}';
+  }
+}
+
+/// generated route for
+/// [_i6.HomeNavigationTabbar]
+class HomeNavigationTabbarRoute extends _i12.PageRouteInfo<void> {
+  const HomeNavigationTabbarRoute({List<_i12.PageRouteInfo>? children})
       : super(HomeNavigationTabbarRoute.name,
             path: 'main_tabbar', initialChildren: children);
 
@@ -142,32 +174,32 @@ class HomeNavigationTabbarRoute extends _i11.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.HomeTab]
-class HomeTabRoute extends _i11.PageRouteInfo<void> {
+/// [_i7.HomeTab]
+class HomeTabRoute extends _i12.PageRouteInfo<void> {
   const HomeTabRoute() : super(HomeTabRoute.name, path: 'home-tab');
 
   static const String name = 'HomeTabRoute';
 }
 
 /// generated route for
-/// [_i7.ProductsTab]
-class ProductsTabRoute extends _i11.PageRouteInfo<void> {
+/// [_i8.ProductsTab]
+class ProductsTabRoute extends _i12.PageRouteInfo<void> {
   const ProductsTabRoute() : super(ProductsTabRoute.name, path: 'products-tab');
 
   static const String name = 'ProductsTabRoute';
 }
 
 /// generated route for
-/// [_i8.OrdersTab]
-class OrdersTabRoute extends _i11.PageRouteInfo<void> {
+/// [_i9.OrdersTab]
+class OrdersTabRoute extends _i12.PageRouteInfo<void> {
   const OrdersTabRoute() : super(OrdersTabRoute.name, path: 'orders-tab');
 
   static const String name = 'OrdersTabRoute';
 }
 
 /// generated route for
-/// [_i9.NotificationsTab]
-class NotificationsTabRoute extends _i11.PageRouteInfo<void> {
+/// [_i10.NotificationsTab]
+class NotificationsTabRoute extends _i12.PageRouteInfo<void> {
   const NotificationsTabRoute()
       : super(NotificationsTabRoute.name, path: 'notifications-tab');
 
@@ -175,8 +207,8 @@ class NotificationsTabRoute extends _i11.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i10.AccountTab]
-class AccountTabRoute extends _i11.PageRouteInfo<void> {
+/// [_i11.AccountTab]
+class AccountTabRoute extends _i12.PageRouteInfo<void> {
   const AccountTabRoute() : super(AccountTabRoute.name, path: 'account-tab');
 
   static const String name = 'AccountTabRoute';

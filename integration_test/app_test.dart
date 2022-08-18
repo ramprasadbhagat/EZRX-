@@ -157,6 +157,18 @@ void main() {
       await tester.tap(logoutTile);
 
       await tester.pumpAndSettle(const Duration(seconds: 3));
+
+      //============================================================
+      //  Banner Test
+      //
+      //============================================================
+      tester.printToConsole('Home Screen with banner appear');
+      final bannerClick = find.byKey(const Key('bannerClick'));
+
+      tester.printToConsole('Tap Banner');
+      await tester.tap(bannerClick);
+
+      await tester.pumpAndSettle(const Duration(seconds: 4));
     });
   });
 }

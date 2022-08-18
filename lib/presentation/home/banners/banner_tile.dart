@@ -1,11 +1,12 @@
 import 'dart:typed_data';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/webview_page.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
@@ -30,6 +31,7 @@ class BannerTile extends StatelessWidget {
           builder: (context, image) {
             return image.data != null
                 ? GestureDetector(
+                  key: const Key('bannerClick'),
                     onTap: banner.urlLink.isEmpty ? null : () {
                       // await countlyService.addCountlyEvent('carousel_banner_clicked',
                       //   segmentation: {
@@ -41,7 +43,9 @@ class BannerTile extends StatelessWidget {
                       //   'userRole':preferenceData.getUserRoleType,
                       //   },
                       // );
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => WebViewPage(url: banner.urlLink,)));
+                      context.router.push(
+                        WebViewPageRoute(url: banner.urlLink),
+                      );
                     },
                     child: Image.memory(
                       (image.data as Uint8List),
