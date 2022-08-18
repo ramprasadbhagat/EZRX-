@@ -5,10 +5,9 @@ import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/webview_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class BannerTile extends StatelessWidget {
   final BannerItem banner;
@@ -31,7 +30,7 @@ class BannerTile extends StatelessWidget {
           builder: (context, image) {
             return image.data != null
                 ? GestureDetector(
-                    onTap: banner.urlLink.isEmpty ? null : () async {
+                    onTap: banner.urlLink.isEmpty ? null : () {
                       // await countlyService.addCountlyEvent('carousel_banner_clicked',
                       //   segmentation: {
                       //   'banner_id': banner.id,
@@ -42,15 +41,7 @@ class BannerTile extends StatelessWidget {
                       //   'userRole':preferenceData.getUserRoleType,
                       //   },
                       // );
-                      if (await canLaunchUrl(Uri.parse(banner.urlLink))) {
-                        try {
-                          await launchUrl(Uri.parse(banner.urlLink));
-                        } on PlatformException catch (_) {
-                          await launchUrl(Uri.parse(banner.urlLink));
-                        }
-                      } else if (banner.urlLink.isNotEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Could not launch ${banner.urlLink}')));
-                      }
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => WebViewPage(url: banner.urlLink,)));
                     },
                     child: Image.memory(
                       (image.data as Uint8List),

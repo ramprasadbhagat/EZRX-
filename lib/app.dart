@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
@@ -21,6 +22,7 @@ import 'package:ezrxmobile/presentation/routes/router_observer.dart';
 import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,6 +42,9 @@ Future<void> initialSetup() async {
     debugPrint = (String? message, {int? wrapWidth}) {};
   }
   WidgetsFlutterBinding.ensureInitialized();
+  if (Platform.isAndroid) {
+    await AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
+  }
   await EasyLocalization.ensureInitialized();
   await Wakelock.enable();
   await Firebase.initializeApp();
