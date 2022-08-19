@@ -21,6 +21,7 @@ class HomeBanner extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.width * 0.375,
               child: PageView.builder(
+                key: const Key('homeBanner'),
                 controller: _controller,
                 itemCount: state.banner.length,
                 allowImplicitScrolling: true,

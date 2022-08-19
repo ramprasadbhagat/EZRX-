@@ -27,19 +27,22 @@ void main() {
       //  Login Test
       //
       //============================================================
-      tester.printToConsole('Login screen appear');
+      tester.printToConsole('Redirect to login page');
       final loginUsernameField = find.byKey(const Key('loginUsernameField'));
+      expect(loginUsernameField, findsOneWidget);
       final loginPasswordField = find.byKey(const Key('loginPasswordField'));
+      expect(loginPasswordField, findsOneWidget);
       final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
+      expect(loginSubmitButton, findsOneWidget);
 
       tester.printToConsole('Input username');
       await tester.tap(loginUsernameField);
-      await tester.enterText(loginUsernameField, 'superuser');
+      await tester.enterText(loginUsernameField, 'your_username');
       await tester.pumpAndSettle(const Duration(microseconds: 200));
 
       tester.printToConsole('Input password');
       await tester.tap(loginPasswordField);
-      await tester.enterText(loginPasswordField, '_Admin1234');
+      await tester.enterText(loginPasswordField, '<your_password>');
       await tester.pumpAndSettle(const Duration(microseconds: 200));
 
       tester.printToConsole('Tap login button');
@@ -56,7 +59,26 @@ void main() {
         ),
         findsOneWidget,
       );
+      //============================================================
+      //  Banner Test
+      //
+      //============================================================
+      tester.printToConsole('Home Screen with banner appear');
+      final homeBanner = find.byKey(const Key('homeBanner'));
+      expect(homeBanner, findsOneWidget);
 
+      // tester.printToConsole('Swipe banner right to left');
+      // await tester.drag(homeBanner, const Offset(500.0, 0.0));
+
+      // tester.printToConsole('Tap Banner');
+      // await tester.tap(homeBanner);
+
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      //============================================================
+      //  Tabbar Test
+      //
+      //============================================================
       tester.printToConsole('Click account tabbar');
       final accountTabbar = find.byKey(const Key('accountTabbar'));
       await tester.tap(accountTabbar);
@@ -68,6 +90,7 @@ void main() {
       await tester.tap(settingsTile);
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
+      tester.printToConsole('Redirect to setting page');
 
       //============================================================
       //  Localization Test
@@ -158,17 +181,10 @@ void main() {
 
       await tester.pumpAndSettle(const Duration(seconds: 3));
 
-      //============================================================
-      //  Banner Test
-      //
-      //============================================================
-      tester.printToConsole('Home Screen with banner appear');
-      final bannerClick = find.byKey(const Key('bannerClick'));
-
-      tester.printToConsole('Tap Banner');
-      await tester.tap(bannerClick);
-
-      await tester.pumpAndSettle(const Duration(seconds: 4));
+      tester.printToConsole('Redirect back to login page');
+      expect(loginUsernameField, findsOneWidget);
+      expect(loginPasswordField, findsOneWidget);
+      expect(loginSubmitButton, findsOneWidget);
     });
   });
 }

@@ -31,22 +31,23 @@ class BannerTile extends StatelessWidget {
           builder: (context, image) {
             return image.data != null
                 ? GestureDetector(
-                  key: const Key('bannerClick'),
-                    onTap: banner.urlLink.isEmpty ? null : () {
-                      // await countlyService.addCountlyEvent('carousel_banner_clicked',
-                      //   segmentation: {
-                      //   'banner_id': banner.id,
-                      //   'landingPage':banner.urlLink,
-                      //   'selectedSalesOrg':preferenceData.getUserSalesOrg,
-                      //   'selectedCustomerCode':preferenceData.getUserCustomerCode,
-                      //   'selectedShipToAddress':preferenceData.getShipToCode,
-                      //   'userRole':preferenceData.getUserRoleType,
-                      //   },
-                      // );
-                      context.router.push(
-                        WebViewPageRoute(url: banner.urlLink),
-                      );
-                    },
+                    onTap: banner.urlLink.isEmpty
+                        ? null
+                        : () {
+                            // await countlyService.addCountlyEvent('carousel_banner_clicked',
+                            //   segmentation: {
+                            //   'banner_id': banner.id,
+                            //   'landingPage':banner.urlLink,
+                            //   'selectedSalesOrg':preferenceData.getUserSalesOrg,
+                            //   'selectedCustomerCode':preferenceData.getUserCustomerCode,
+                            //   'selectedShipToAddress':preferenceData.getShipToCode,
+                            //   'userRole':preferenceData.getUserRoleType,
+                            //   },
+                            // );
+                            context.router.push(
+                              WebViewPageRoute(url: banner.urlLink),
+                            );
+                          },
                     child: Image.memory(
                       (image.data as Uint8List),
                       fit: BoxFit.fitWidth,
