@@ -12,7 +12,8 @@ class PackageInfoService {
   }
 
   Future<String> getString() async {
-    return '${_packageInfo.packageName} ${_packageInfo.version} ${_packageInfo.buildNumber}';
+    final packageNameArray = _packageInfo.packageName.split('.');
+    return '${packageNameArray.length > 3 ? packageNameArray[3] : ""}${_packageInfo.version}(${_packageInfo.buildNumber})';
   }
 
   Future<String> getPackageName() async {

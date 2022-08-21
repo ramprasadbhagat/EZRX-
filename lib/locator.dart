@@ -13,6 +13,7 @@ import 'package:ezrxmobile/infrastructure/banner/datasource/banner_query_mutatio
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_remote.dart';
 import 'package:ezrxmobile/infrastructure/banner/repository/banner_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/dynamic_links.dart';
@@ -95,6 +96,10 @@ void setupLocator() {
     () => OktaLoginServices(config: locator<Config>()),
   );
 
+  locator.registerLazySingleton(
+    () => DataSourceExceptionHandler(),
+  );
+
   //============================================================
   //  Auth
   //
@@ -107,6 +112,7 @@ void setupLocator() {
     () => AuthRemoteDataSource(
       httpService: locator<HttpService>(),
       authQueryMutation: locator<AuthQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
 
@@ -155,6 +161,7 @@ void setupLocator() {
     () => UserRemoteDataSource(
       httpService: locator<HttpService>(),
       userQueryMutation: locator<UserQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
 
@@ -187,6 +194,7 @@ void setupLocator() {
     () => BannerRemoteDataSource(
       httpService: locator<HttpService>(),
       bannerQueryMutation: locator<BannerQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
 

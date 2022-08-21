@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -44,7 +45,29 @@ class _ProfileTile extends StatelessWidget {
     return BlocBuilder<UserBloc, UserState>(
       buildWhen: (previous, current) => previous.user != current.user,
       builder: (context, state) {
-        return BlocBuilder<UserBloc, UserState>(
+        return BlocConsumer<UserBloc, UserState>(
+          listenWhen: (previous, current) => previous.user != current.user,
+          listener: (context, state) {
+            state.userFailureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  showSnackBar(
+                    context: context,
+                    message: failure.map(
+                      other: (other) => other.message,
+                      serverError: (serverError) =>
+                          '${'Server Error'.tr()} : ${serverError.message}',
+                      poorConnection: (_) => 'Poor Internet connection'.tr(),
+                      serverTimeout: (_) => 'Server time out'.tr(),
+                      userNotFound: (_) => 'User not found.'.tr(),
+                    ),
+                  );
+                },
+                (_) {},
+              ),
+            );
+          },
           buildWhen: (previous, current) => previous.user != current.user,
           builder: (context, state) {
             return ListTile(

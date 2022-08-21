@@ -38,7 +38,7 @@ class CredStorage {
         defaultValue: CredDto(username: '', password: ''),
       );
     } catch (e) {
-      throw LocalException(message: e.toString());
+      throw CacheException(message: e.toString());
     }
   }
 
@@ -46,7 +46,7 @@ class CredStorage {
     try {
       await _encryptedBox.put(_credKey, jwtDto);
     } catch (e) {
-      throw LocalException(message: e.toString());
+      throw CacheException(message: e.toString());
     }
   }
 
@@ -54,7 +54,7 @@ class CredStorage {
     try {
       await _encryptedBox.delete(_credKey);
     } catch (e) {
-      throw LocalException(message: e.toString());
+      throw CacheException(message: e.toString());
     }
   }
 }

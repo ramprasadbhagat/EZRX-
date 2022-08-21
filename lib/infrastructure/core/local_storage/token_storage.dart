@@ -38,7 +38,7 @@ class TokenStorage {
         defaultValue: JWTDto(access: ''),
       );
     } catch (e) {
-      throw LocalException(message: e.toString());
+      throw CacheException(message: e.toString());
     }
   }
 
@@ -46,7 +46,7 @@ class TokenStorage {
     try {
       await _encryptedBox.put(_tokenKey, jwtDto);
     } catch (e) {
-      throw LocalException(message: e.toString());
+      throw CacheException(message: e.toString());
     }
   }
 
@@ -54,7 +54,7 @@ class TokenStorage {
     try {
       await _encryptedBox.clear();
     } catch (e) {
-      throw LocalException(message: e.toString());
+      throw CacheException(message: e.toString());
     }
   }
 }

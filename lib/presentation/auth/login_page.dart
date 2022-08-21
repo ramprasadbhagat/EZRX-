@@ -32,16 +32,17 @@ class LoginPage extends StatelessWidget {
                   (failure) {
                     showSnackBar(
                       context: context,
-                      message: tr(
-                        failure.map(
-                          other: (other) => other.message,
-                          serverError: (_) => 'Server Error',
-                          invalidEmailAndPasswordCombination: (_) =>
-                              'Incorrect username and/or password.',
-                          accountLocked: (_) => 'Account is Locked',
-                          accountExpired: (_) => 'Account is Expired',
-                          tokenExpired: (_) => 'Session token is Expired',
-                        ),
+                      message: failure.map(
+                        other: (other) => other.message,
+                        serverError: (serverError) =>
+                            '${'Server Error'.tr()} : ${serverError.message}',
+                        poorConnection: (_) => 'Poor Internet connection'.tr(),
+                        serverTimeout: (_) => 'Server time out'.tr(),
+                        invalidEmailAndPasswordCombination: (_) =>
+                            'Incorrect username and/or password.'.tr(),
+                        accountLocked: (_) => 'Account is Locked'.tr(),
+                        accountExpired: (_) => 'Account is Expired'.tr(),
+                        tokenExpired: (_) => 'Session token is Expired'.tr(),
                       ),
                     );
                   },
@@ -60,23 +61,20 @@ class LoginPage extends StatelessWidget {
                     : AutovalidateMode.disabled,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Spacer(),
-                    const Logo(),
-                    Spacer(
-                      flex: _config.appFlavor != Flavor.prod ? 1 : 3,
-                    ),
-                    const SSOLoginButton(),
-                    const Spacer(),
-                    const Divider(),
-                    const Spacer(),
-                    const UsernameField(),
-                    const PasswordField(),
-                    const RememberPassword(),
-                    const Spacer(),
-                    const LoginButton(),
-                    const Spacer(),
-                    const Spacer(flex: 3),
+                  children: const [
+                    Spacer(),
+                    _Logo(),
+                    _SSOLoginButton(),
+                    Spacer(),
+                    _OrDivider(),
+                    Spacer(),
+                    _UsernameField(),
+                    _PasswordField(),
+                    _RememberPassword(),
+                    Spacer(),
+                    _LoginButton(),
+                    Spacer(flex: 3),
+                    // _VersionString(),
                   ],
                 ),
               );
@@ -88,8 +86,8 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-class Logo extends StatelessWidget {
-  const Logo({Key? key}) : super(key: key);
+class _Logo extends StatelessWidget {
+  const _Logo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -102,8 +100,55 @@ class Logo extends StatelessWidget {
   }
 }
 
-class UsernameField extends StatelessWidget {
-  const UsernameField({Key? key}) : super(key: key);
+class _SSOLoginButton extends StatelessWidget {
+  const _SSOLoginButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<LoginFormBloc, LoginFormState>(
+      buildWhen: (previous, current) =>
+          previous.isSubmitting != current.isSubmitting,
+      builder: (context, state) {
+        return SizedBox(
+          width: MediaQuery.of(context).size.width * 0.8,
+          child: ElevatedButton(
+            key: const Key('ssoLoginButton'),
+            onPressed: state.isSubmitting
+                ? null
+                : () {
+                    FocusScope.of(context).unfocus();
+                    context
+                        .read<LoginFormBloc>()
+                        .add(const LoginFormEvent.loginWithOktaButtonPressed());
+                  },
+            child: LoadingShimmer.withChild(
+              enabled: state.isSubmitting,
+              child: const Text('Login with SSO').tr(),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _OrDivider extends StatelessWidget {
+  const _OrDivider({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+      child: Row(children: <Widget>[
+        const Expanded(child: Divider()),
+        Text('OR', style: Theme.of(context).textTheme.labelLarge),
+        const Expanded(child: Divider()),
+      ]),
+    );
+  }
+}
+
+class _UsernameField extends StatelessWidget {
+  const _UsernameField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -151,8 +196,8 @@ class UsernameField extends StatelessWidget {
   }
 }
 
-class PasswordField extends StatelessWidget {
-  const PasswordField({Key? key}) : super(key: key);
+class _PasswordField extends StatelessWidget {
+  const _PasswordField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -213,8 +258,8 @@ class PasswordField extends StatelessWidget {
   }
 }
 
-class RememberPassword extends StatelessWidget {
-  const RememberPassword({Key? key}) : super(key: key);
+class _RememberPassword extends StatelessWidget {
+  const _RememberPassword({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -248,8 +293,8 @@ class RememberPassword extends StatelessWidget {
   }
 }
 
-class LoginButton extends StatelessWidget {
-  const LoginButton({Key? key}) : super(key: key);
+class _LoginButton extends StatelessWidget {
+  const _LoginButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -282,60 +327,22 @@ class LoginButton extends StatelessWidget {
   }
 }
 
-class SSOLoginButton extends StatelessWidget {
-  const SSOLoginButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<LoginFormBloc, LoginFormState>(
-      buildWhen: (previous, current) =>
-          previous.isSubmitting != current.isSubmitting,
-      builder: (context, state) {
-        return SizedBox(
-          width: MediaQuery.of(context).size.width * 0.8,
-          child: ElevatedButton(
-            key: const Key('ssoLoginButton'),
-            onPressed: state.isSubmitting
-                ? null
-                : () {
-                    FocusScope.of(context).unfocus();
-                    context
-                        .read<LoginFormBloc>()
-                        .add(const LoginFormEvent.loginWithOktaButtonPressed());
-                  },
-            child: LoadingShimmer.withChild(
-              enabled: state.isSubmitting,
-              child: const Text('Login with SSO').tr(),
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-// class VersionString extends StatelessWidget {
-//   const VersionString({Key? key}) : super(key: key);
+// class _VersionString extends StatelessWidget {
+//   const _VersionString({Key? key}) : super(key: key);
 
 //   @override
 //   Widget build(BuildContext context) {
-//     return FutureBuilder<String>(
-//       future:
-//           locator<PackageInfoService>().getString(), // a Future<String> or null
-//       builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-//         switch (snapshot.connectionState) {
-//           case ConnectionState.none:
-//             return const Text('Press button to start');
-//           case ConnectionState.waiting:
-//             return const Text('Awaiting result...');
-//           default:
-//             if (snapshot.hasError) {
-//               return Text('Error: ${snapshot.error}');
-//             } else {
-//               return Text('Result: ${snapshot.data}');
-//             }
-//         }
-//       },
+//     return Align(
+//       alignment: Alignment.bottomRight,
+//       child: FutureBuilder<String>(
+//         future: locator<PackageInfoService>().getString(),
+//         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+//           return Text(
+//             snapshot.data ?? '',
+//             style: Theme.of(context).textTheme.caption,
+//           );
+//         },
+//       ),
 //     );
 //   }
 // }

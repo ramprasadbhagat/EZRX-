@@ -346,6 +346,8 @@ abstract class _Fetch implements BannerEvent {
 /// @nodoc
 mixin _$BannerState {
   List<BannerItem> get banner => throw _privateConstructorUsedError;
+  Option<Either<BannerFailure, dynamic>> get bannerFailureOrSuccessOption =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BannerStateCopyWith<BannerState> get copyWith =>
@@ -357,7 +359,9 @@ abstract class $BannerStateCopyWith<$Res> {
   factory $BannerStateCopyWith(
           BannerState value, $Res Function(BannerState) then) =
       _$BannerStateCopyWithImpl<$Res>;
-  $Res call({List<BannerItem> banner});
+  $Res call(
+      {List<BannerItem> banner,
+      Option<Either<BannerFailure, dynamic>> bannerFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -371,12 +375,17 @@ class _$BannerStateCopyWithImpl<$Res> implements $BannerStateCopyWith<$Res> {
   @override
   $Res call({
     Object? banner = freezed,
+    Object? bannerFailureOrSuccessOption = freezed,
   }) {
     return _then(_value.copyWith(
       banner: banner == freezed
           ? _value.banner
           : banner // ignore: cast_nullable_to_non_nullable
               as List<BannerItem>,
+      bannerFailureOrSuccessOption: bannerFailureOrSuccessOption == freezed
+          ? _value.bannerFailureOrSuccessOption
+          : bannerFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<BannerFailure, dynamic>>,
     ));
   }
 }
@@ -388,7 +397,9 @@ abstract class _$$_BannerStateCopyWith<$Res>
           _$_BannerState value, $Res Function(_$_BannerState) then) =
       __$$_BannerStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<BannerItem> banner});
+  $Res call(
+      {List<BannerItem> banner,
+      Option<Either<BannerFailure, dynamic>> bannerFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -404,12 +415,17 @@ class __$$_BannerStateCopyWithImpl<$Res> extends _$BannerStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? banner = freezed,
+    Object? bannerFailureOrSuccessOption = freezed,
   }) {
     return _then(_$_BannerState(
       banner: banner == freezed
           ? _value._banner
           : banner // ignore: cast_nullable_to_non_nullable
               as List<BannerItem>,
+      bannerFailureOrSuccessOption: bannerFailureOrSuccessOption == freezed
+          ? _value.bannerFailureOrSuccessOption
+          : bannerFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<BannerFailure, dynamic>>,
     ));
   }
 }
@@ -417,7 +433,9 @@ class __$$_BannerStateCopyWithImpl<$Res> extends _$BannerStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_BannerState implements _BannerState {
-  const _$_BannerState({required final List<BannerItem> banner})
+  const _$_BannerState(
+      {required final List<BannerItem> banner,
+      required this.bannerFailureOrSuccessOption})
       : _banner = banner;
 
   final List<BannerItem> _banner;
@@ -428,8 +446,11 @@ class _$_BannerState implements _BannerState {
   }
 
   @override
+  final Option<Either<BannerFailure, dynamic>> bannerFailureOrSuccessOption;
+
+  @override
   String toString() {
-    return 'BannerState(banner: $banner)';
+    return 'BannerState(banner: $banner, bannerFailureOrSuccessOption: $bannerFailureOrSuccessOption)';
   }
 
   @override
@@ -437,12 +458,17 @@ class _$_BannerState implements _BannerState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BannerState &&
-            const DeepCollectionEquality().equals(other._banner, _banner));
+            const DeepCollectionEquality().equals(other._banner, _banner) &&
+            const DeepCollectionEquality().equals(
+                other.bannerFailureOrSuccessOption,
+                bannerFailureOrSuccessOption));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_banner));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_banner),
+      const DeepCollectionEquality().hash(bannerFailureOrSuccessOption));
 
   @JsonKey(ignore: true)
   @override
@@ -451,11 +477,15 @@ class _$_BannerState implements _BannerState {
 }
 
 abstract class _BannerState implements BannerState {
-  const factory _BannerState({required final List<BannerItem> banner}) =
-      _$_BannerState;
+  const factory _BannerState(
+      {required final List<BannerItem> banner,
+      required final Option<Either<BannerFailure, dynamic>>
+          bannerFailureOrSuccessOption}) = _$_BannerState;
 
   @override
   List<BannerItem> get banner;
+  @override
+  Option<Either<BannerFailure, dynamic>> get bannerFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$$_BannerStateCopyWith<_$_BannerState> get copyWith =>

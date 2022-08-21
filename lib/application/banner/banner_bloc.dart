@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/banner/error/banner_failure.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -29,13 +31,22 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
     await event.map(
       initialized: (e) async => emit(BannerState.initial()),
       fetch: (e) async {
-        final result = await bannerRepository.getBanner(
+        final failureOrSuccess = await bannerRepository.getBanner(
           e.isPreSalesOrg,
           e.salesOrganisation,
         );
-        result.fold(
-          (failure) {},
-          (banner) => emit(state.copyWith(banner: banner)),
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(state.copyWith(
+              banner: [BannerItem.empty()],
+              bannerFailureOrSuccessOption: optionOf(failureOrSuccess),
+            ));
+          },
+          (banner) => emit(state.copyWith(
+            banner: banner,
+            bannerFailureOrSuccessOption: none(),
+          )),
         );
       },
     );

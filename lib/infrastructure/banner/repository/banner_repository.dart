@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/banner/error/banner_failure.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
@@ -22,8 +25,34 @@ class BannerRepository implements IBannerRepository {
         salesOrganisation.salesOrg.getOrCrash(),
       );
       return Right(banner);
+    } on CacheException catch (e) {
+      return Left(BannerFailure.other(e.message));
     } on ServerException catch (e) {
+      return Left(BannerFailure.serverError(e.message));
+    } on SocketException {
+      return const Left(BannerFailure.poorConnection());
+    } on TimeoutException {
+      return const Left(BannerFailure.serverTimeout());
+    } on OtherException catch (e) {
       return Left(BannerFailure.other(e.message));
     }
   }
+
+  // Future<Either<BannerFailure, List<BannerItem>>> _bannerFailureHandler(
+  //   Function function,
+  // ) async {
+  //   try {
+  //     return await function();
+  //   } on CacheException catch (e) {
+  //     return Left(BannerFailure.other(e.message));
+  //   } on ServerException catch (e) {
+  //     return Left(BannerFailure.serverError(e.message));
+  //   } on SocketException {
+  //     return const Left(BannerFailure.poorConnection());
+  //   } on TimeoutException {
+  //     return const Left(BannerFailure.serverTimeout());
+  //   } on OtherException catch (e) {
+  //     return Left(BannerFailure.other(e.message));
+  //   }
+  // }
 }

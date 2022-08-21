@@ -19,11 +19,11 @@ abstract class IAuthRepository {
   Future<Either<AuthFailure, JWT>> getOktaAccessToken();
   Future<Either<AuthFailure, Unit>> logout();
   Future<Either<AuthFailure, Unit>> initCredStorage();
-  Future storeCredential({
+  Future<Either<AuthFailure, Unit>> storeCredential({
     required Username username,
     required Password password,
   });
-  Future deleteCredential();
+  Future<Either<AuthFailure, Unit>> deleteCredential();
   Future<Either<AuthFailure, Cred>> loadCredential();
   Future<Either<AuthFailure, LoginV2>> proxyLogin({required Username username});
 }

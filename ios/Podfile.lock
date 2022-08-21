@@ -1,4 +1,6 @@
 PODS:
+  - countly_flutter (21.11.2):
+    - Flutter
   - Firebase/Analytics (9.2.0):
     - Firebase/Core
   - Firebase/Core (9.2.0):
@@ -112,6 +114,13 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - "GoogleUtilities/NSData+zlib (~> 7.7)"
   - Flutter (1.0.0)
+  - flutter_inappwebview (0.0.1):
+    - Flutter
+    - flutter_inappwebview/Core (= 0.0.1)
+    - OrderedSet (~> 5.0)
+  - flutter_inappwebview/Core (0.0.1):
+    - Flutter
+    - OrderedSet (~> 5.0)
   - flutter_local_notifications (0.0.1):
     - Flutter
   - flutter_native_splash (0.0.1):
@@ -184,6 +193,7 @@ PODS:
   - OktaOidc/AppAuth (3.11.2)
   - OktaOidc/Okta (3.11.2):
     - OktaOidc/AppAuth
+  - OrderedSet (5.0.0)
   - package_info_plus (0.4.5):
     - Flutter
   - path_provider_ios (0.0.1):
@@ -201,6 +211,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - countly_flutter (from `.symlinks/plugins/countly_flutter/ios`)
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_crashlytics (from `.symlinks/plugins/firebase_crashlytics/ios`)
@@ -208,6 +219,7 @@ DEPENDENCIES:
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - firebase_performance (from `.symlinks/plugins/firebase_performance/ios`)
   - Flutter (from `Flutter`)
+  - flutter_inappwebview (from `.symlinks/plugins/flutter_inappwebview/ios`)
   - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
@@ -241,10 +253,13 @@ SPEC REPOS:
     - GoogleUtilities
     - nanopb
     - OktaOidc
+    - OrderedSet
     - PromisesObjC
     - Toast
 
 EXTERNAL SOURCES:
+  countly_flutter:
+    :path: ".symlinks/plugins/countly_flutter/ios"
   firebase_analytics:
     :path: ".symlinks/plugins/firebase_analytics/ios"
   firebase_core:
@@ -259,6 +274,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_performance/ios"
   Flutter:
     :path: Flutter
+  flutter_inappwebview:
+    :path: ".symlinks/plugins/flutter_inappwebview/ios"
   flutter_local_notifications:
     :path: ".symlinks/plugins/flutter_local_notifications/ios"
   flutter_native_splash:
@@ -285,6 +302,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/wakelock/ios"
 
 SPEC CHECKSUMS:
+  countly_flutter: 48109a453b6f1a25cb6a47c34c2701f3a7be4d15
   Firebase: 4ba896cb8e5105d4b9e247e1c1b6222b548df55a
   firebase_analytics: e6754d7dd82bd2006b002d88c0f44f8f50da26e6
   firebase_core: ada8be870601fe3c2684dae2356f634189bd598f
@@ -304,6 +322,7 @@ SPEC CHECKSUMS:
   FirebasePerformance: 5a8d2a9e645a398dfcc02657853f4b946675d5d4
   FirebaseRemoteConfig: 0a644c924b3339bcf3bc3ea253206f171672308e
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  flutter_inappwebview: bfd58618f49dc62f2676de690fc6dcda1d6c3721
   flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
   flutter_secure_storage: 7953c38a04c3fdbb00571bcd87d8e3b5ceb9daec
@@ -316,6 +335,7 @@ SPEC CHECKSUMS:
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   okta_oidc: bc6da484c380ea7f036b55db794a49ea7ea8153f
   OktaOidc: 15fb3d494103d4f07ba8a523b3347d02c4d30486
+  OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
   package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
   path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
   permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce

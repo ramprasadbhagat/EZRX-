@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/cred.dart';
@@ -16,6 +18,7 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
 import 'package:flutter/services.dart';
+import 'dart:io';
 
 class AuthRepository implements IAuthRepository {
   final Config config;
@@ -50,7 +53,7 @@ class AuthRepository implements IAuthRepository {
           password: passwordStr,
         );
         return Right(loginv2);
-      } on LocalException catch (e) {
+      } on MockException catch (e) {
         return Left(AuthFailure.other(e.message));
       }
     }
@@ -64,16 +67,22 @@ class AuthRepository implements IAuthRepository {
       return Right(loginv2);
     } on AuthException catch (e) {
       return Left(e.map(
-        other: (other) => AuthFailure.other(other.message),
-        serverError: (_) => const AuthFailure.serverError(),
         invalidEmailAndPasswordCombination: (_) =>
             const AuthFailure.invalidEmailAndPasswordCombination(),
         accountLocked: (_) => const AuthFailure.accountLocked(),
         accountExpired: (_) => const AuthFailure.accountExpired(),
       ));
-    } on LocalException catch (e) {
+    } on CacheException catch (e) {
       return Left(AuthFailure.other(e.message));
     } on ServerException catch (e) {
+      return Left(AuthFailure.serverError(e.message));
+    } on SocketException {
+      return const Left(AuthFailure.poorConnection());
+    } on TimeoutException {
+      return const Left(AuthFailure.serverTimeout());
+    } on PlatformException catch (e) {
+      return Left(AuthFailure.other('${e.message}'));
+    } on OtherException catch (e) {
       return Left(AuthFailure.other(e.message));
     }
   }
@@ -89,7 +98,7 @@ class AuthRepository implements IAuthRepository {
           username: usernameStr,
         );
         return Right(loginv2);
-      } on LocalException catch (e) {
+      } on MockException catch (e) {
         return Left(AuthFailure.other(e.message));
       }
     }
@@ -100,14 +109,22 @@ class AuthRepository implements IAuthRepository {
       return Right(loginv2);
     } on AuthException catch (e) {
       return Left(e.map(
-        other: (other) => AuthFailure.other(other.message),
-        serverError: (_) => const AuthFailure.serverError(),
         invalidEmailAndPasswordCombination: (_) =>
             const AuthFailure.invalidEmailAndPasswordCombination(),
         accountLocked: (_) => const AuthFailure.accountLocked(),
         accountExpired: (_) => const AuthFailure.accountExpired(),
       ));
+    } on CacheException catch (e) {
+      return Left(AuthFailure.other(e.message));
     } on ServerException catch (e) {
+      return Left(AuthFailure.serverError(e.message));
+    } on SocketException {
+      return const Left(AuthFailure.poorConnection());
+    } on TimeoutException {
+      return const Left(AuthFailure.serverTimeout());
+    } on PlatformException catch (e) {
+      return Left(AuthFailure.other('${e.message}'));
+    } on OtherException catch (e) {
       return Left(AuthFailure.other(e.message));
     }
   }
@@ -121,7 +138,7 @@ class AuthRepository implements IAuthRepository {
           oktaAccessToken: token,
         );
         return Right(loginv2);
-      } on LocalException catch (e) {
+      } on MockException catch (e) {
         return Left(AuthFailure.other(e.message));
       }
     }
@@ -134,23 +151,36 @@ class AuthRepository implements IAuthRepository {
       return Right(loginv2);
     } on AuthException catch (e) {
       return Left(e.map(
-        other: (other) => AuthFailure.other(other.message),
-        serverError: (_) => const AuthFailure.serverError(),
         invalidEmailAndPasswordCombination: (_) =>
             const AuthFailure.invalidEmailAndPasswordCombination(),
         accountLocked: (_) => const AuthFailure.accountLocked(),
         accountExpired: (_) => const AuthFailure.accountExpired(),
       ));
-    } on LocalException catch (e) {
+    } on CacheException catch (e) {
       return Left(AuthFailure.other(e.message));
     } on ServerException catch (e) {
+      return Left(AuthFailure.serverError(e.message));
+    } on SocketException {
+      return const Left(AuthFailure.poorConnection());
+    } on TimeoutException {
+      return const Left(AuthFailure.serverTimeout());
+    } on PlatformException catch (e) {
+      return Left(AuthFailure.other('${e.message}'));
+    } on OtherException catch (e) {
       return Left(AuthFailure.other(e.message));
     }
   }
 
   @override
-  Future storeJWT({required JWT jwt}) async {
-    await tokenStorage.set(JWTDto.fromDomain(jwt));
+  Future<Either<AuthFailure, Unit>> storeJWT({required JWT jwt}) async {
+    try {
+      await tokenStorage.set(JWTDto.fromDomain(jwt));
+      return const Right(unit);
+    } on PlatformException catch (e) {
+      return Left(AuthFailure.other('${e.message}'));
+    } on ServerException catch (e) {
+      return Left(AuthFailure.other(e.message));
+    }
   }
 
   @override
@@ -207,7 +237,6 @@ class AuthRepository implements IAuthRepository {
   Future<Either<AuthFailure, JWT>> getOktaAccessToken() async {
     try {
       final result = await oktaLoginServices.getAccessToken();
-
       return Right(JWT(result?['message']));
     } on PlatformException catch (e) {
       return Left(AuthFailure.other('${e.message}'));
@@ -230,27 +259,33 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
-  Future storeCredential({
+  Future<Either<AuthFailure, Unit>> storeCredential({
     required Username username,
     required Password password,
   }) async {
-    await credStorage.set(
-      CredDto(
-        username: username.getOrCrash(),
-        password: password.getOrCrash(),
-      ),
-    );
+    try {
+      await credStorage.set(
+        CredDto(
+          username: username.getOrCrash(),
+          password: password.getOrCrash(),
+        ),
+      );
+      return const Right(unit);
+    } on PlatformException catch (e) {
+      return Left(AuthFailure.other('${e.message}'));
+    } on ServerException catch (e) {
+      return Left(AuthFailure.other(e.message));
+    }
   }
 
   @override
-  Future deleteCredential() async => await credStorage.delete();
-
-  @override
-  Future<Either<AuthFailure, Cred>> loadCredential() async {
+  Future<Either<AuthFailure, Unit>> deleteCredential() async {
     try {
-      final credDto = await credStorage.get();
-      return Right(credDto.toDomain());
-    } on CacheException catch (e) {
+      await credStorage.delete();
+      return const Right(unit);
+    } on PlatformException catch (e) {
+      return Left(AuthFailure.other('${e.message}'));
+    } on ServerException catch (e) {
       return Left(AuthFailure.other(e.message));
     }
   }
@@ -266,4 +301,77 @@ class AuthRepository implements IAuthRepository {
       return Left(AuthFailure.other(e.message));
     }
   }
+
+  @override
+  Future<Either<AuthFailure, Cred>> loadCredential() async {
+    try {
+      final credDto = await credStorage.get();
+      return Right(credDto.toDomain());
+    } on PlatformException catch (e) {
+      return Left(AuthFailure.other('${e.message}'));
+    } on ServerException catch (e) {
+      return Left(AuthFailure.other(e.message));
+    }
+  }
+
+  // Future<Either<AuthFailure, LoginV2>> _loginV2FailureHandler(
+  //   Function function,
+  // ) async {
+  //   try {
+  //     return await function();
+  //   } on AuthException catch (e) {
+  //     return Left(e.map(
+  //       invalidEmailAndPasswordCombination: (_) =>
+  //           const AuthFailure.invalidEmailAndPasswordCombination(),
+  //       accountLocked: (_) => const AuthFailure.accountLocked(),
+  //       accountExpired: (_) => const AuthFailure.accountExpired(),
+  //     ));
+  //   } on CacheException catch (e) {
+  //     return Left(AuthFailure.other(e.message));
+  //   } on ServerException catch (e) {
+  //     return Left(AuthFailure.serverError(e.message));
+  //   } on SocketException {
+  //     return const Left(AuthFailure.poorConnection());
+  //   } on TimeoutException {
+  //     return const Left(AuthFailure.serverTimeout());
+  //   } on PlatformException catch (e) {
+  //     return Left(AuthFailure.other('${e.message}'));
+  //   } on OtherException catch (e) {
+  //     return Left(AuthFailure.other(e.message));
+  //   }
+  // }
+
+  // Future<Either<AuthFailure, Unit>> _unitFailureHandler(
+  //   Function function,
+  // ) async {
+  //   try {
+  //     return await function();
+  //   } on PlatformException catch (e) {
+  //     return Left(AuthFailure.other('${e.message}'));
+  //   } on ServerException catch (e) {
+  //     return Left(AuthFailure.other(e.message));
+  //   }
+  // }
+
+  // Future<Either<AuthFailure, JWT>> _jwtFailureHandler(Function function) async {
+  //   try {
+  //     return await function();
+  //   } on PlatformException catch (e) {
+  //     return Left(AuthFailure.other('${e.message}'));
+  //   } on ServerException catch (e) {
+  //     return Left(AuthFailure.other(e.message));
+  //   }
+  // }
+
+  // Future<Either<AuthFailure, Cred>> _credFailureHandler(
+  //   Function function,
+  // ) async {
+  //   try {
+  //     return await function();
+  //   } on PlatformException catch (e) {
+  //     return Left(AuthFailure.other('${e.message}'));
+  //   } on ServerException catch (e) {
+  //     return Left(AuthFailure.other(e.message));
+  //   }
+  // }
 }

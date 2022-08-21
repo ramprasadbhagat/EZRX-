@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +15,28 @@ class HomeBanner extends StatelessWidget {
   final _controller = PageController(viewportFraction: 0.95, keepPage: true);
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BannerBloc, BannerState>(
+    return BlocConsumer<BannerBloc, BannerState>(
+      listenWhen: (previous, current) => previous.banner != current.banner,
+      listener: (context, state) {
+        state.bannerFailureOrSuccessOption.fold(
+          () {},
+          (either) => either.fold(
+            (failure) {
+              showSnackBar(
+                context: context,
+                message: failure.map(
+                  other: (other) => other.message,
+                  serverError: (serverError) =>
+                      '${'Server Error'.tr()} : ${serverError.message}',
+                  poorConnection: (_) => 'Poor Internet connection'.tr(),
+                  serverTimeout: (_) => 'Server time out'.tr(),
+                ),
+              );
+            },
+            (_) {},
+          ),
+        );
+      },
       buildWhen: (previous, current) => previous.banner != current.banner,
       builder: (context, state) {
         return Column(
