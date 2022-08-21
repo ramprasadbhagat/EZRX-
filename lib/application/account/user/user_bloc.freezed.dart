@@ -280,6 +280,8 @@ abstract class _Fetch implements UserEvent {
 /// @nodoc
 mixin _$UserState {
   User get user => throw _privateConstructorUsedError;
+  Option<Either<UserFailure, dynamic>> get userFailureOrSuccessOption =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserStateCopyWith<UserState> get copyWith =>
@@ -290,7 +292,9 @@ mixin _$UserState {
 abstract class $UserStateCopyWith<$Res> {
   factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
       _$UserStateCopyWithImpl<$Res>;
-  $Res call({User user});
+  $Res call(
+      {User user,
+      Option<Either<UserFailure, dynamic>> userFailureOrSuccessOption});
 
   $UserCopyWith<$Res> get user;
 }
@@ -306,12 +310,17 @@ class _$UserStateCopyWithImpl<$Res> implements $UserStateCopyWith<$Res> {
   @override
   $Res call({
     Object? user = freezed,
+    Object? userFailureOrSuccessOption = freezed,
   }) {
     return _then(_value.copyWith(
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      userFailureOrSuccessOption: userFailureOrSuccessOption == freezed
+          ? _value.userFailureOrSuccessOption
+          : userFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<UserFailure, dynamic>>,
     ));
   }
 
@@ -329,7 +338,9 @@ abstract class _$$_UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
           _$_UserState value, $Res Function(_$_UserState) then) =
       __$$_UserStateCopyWithImpl<$Res>;
   @override
-  $Res call({User user});
+  $Res call(
+      {User user,
+      Option<Either<UserFailure, dynamic>> userFailureOrSuccessOption});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -348,12 +359,17 @@ class __$$_UserStateCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = freezed,
+    Object? userFailureOrSuccessOption = freezed,
   }) {
     return _then(_$_UserState(
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      userFailureOrSuccessOption: userFailureOrSuccessOption == freezed
+          ? _value.userFailureOrSuccessOption
+          : userFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<UserFailure, dynamic>>,
     ));
   }
 }
@@ -361,14 +377,17 @@ class __$$_UserStateCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_UserState implements _UserState {
-  const _$_UserState({required this.user});
+  const _$_UserState(
+      {required this.user, required this.userFailureOrSuccessOption});
 
   @override
   final User user;
+  @override
+  final Option<Either<UserFailure, dynamic>> userFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'UserState(user: $user)';
+    return 'UserState(user: $user, userFailureOrSuccessOption: $userFailureOrSuccessOption)';
   }
 
   @override
@@ -376,12 +395,16 @@ class _$_UserState implements _UserState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserState &&
-            const DeepCollectionEquality().equals(other.user, user));
+            const DeepCollectionEquality().equals(other.user, user) &&
+            const DeepCollectionEquality().equals(
+                other.userFailureOrSuccessOption, userFailureOrSuccessOption));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(user),
+      const DeepCollectionEquality().hash(userFailureOrSuccessOption));
 
   @JsonKey(ignore: true)
   @override
@@ -390,10 +413,15 @@ class _$_UserState implements _UserState {
 }
 
 abstract class _UserState implements UserState {
-  const factory _UserState({required final User user}) = _$_UserState;
+  const factory _UserState(
+      {required final User user,
+      required final Option<Either<UserFailure, dynamic>>
+          userFailureOrSuccessOption}) = _$_UserState;
 
   @override
   User get user;
+  @override
+  Option<Either<UserFailure, dynamic>> get userFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$$_UserStateCopyWith<_$_UserState> get copyWith =>

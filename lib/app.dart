@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
@@ -19,6 +22,8 @@ import 'package:ezrxmobile/presentation/routes/router_observer.dart';
 import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,6 +42,9 @@ Future<void> initialSetup() async {
     debugPrint = (String? message, {int? wrapWidth}) {};
   }
   WidgetsFlutterBinding.ensureInitialized();
+  if (Platform.isAndroid) {
+    await AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
+  }
   await EasyLocalization.ensureInitialized();
   await Wakelock.enable();
   await Firebase.initializeApp();
@@ -88,6 +96,7 @@ class App extends StatelessWidget {
           create: (context) => locator<ProxyLoginFormBloc>(),
         ),
         BlocProvider<UserBloc>(create: (context) => locator<UserBloc>()),
+        BlocProvider<BannerBloc>(create: (context) => locator<BannerBloc>()),
         BlocProvider<SalesOrgBloc>(
           create: (context) => locator<SalesOrgBloc>(),
         ),
@@ -108,6 +117,18 @@ class App extends StatelessWidget {
           ],
         ),
         routeInformationParser: router.defaultRouteParser(),
+        builder: (context, child) => ResponsiveWrapper.builder(
+          child,
+          maxWidth: 1200,
+          minWidth: 480,
+          defaultScale: true,
+          breakpoints: const [
+            ResponsiveBreakpoint.resize(360, name: MOBILE),
+            ResponsiveBreakpoint.resize(800, name: TABLET),
+            ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+          ],
+          background: const ColoredBox(color: ZPColors.white),
+        ),
       ),
     );
   }

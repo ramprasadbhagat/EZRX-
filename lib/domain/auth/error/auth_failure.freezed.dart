@@ -19,7 +19,9 @@ mixin _$AuthFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String message) other,
-    required TResult Function() serverError,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -29,7 +31,9 @@ mixin _$AuthFailure {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String message)? other,
-    TResult Function()? serverError,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -39,7 +43,9 @@ mixin _$AuthFailure {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String message)? other,
-    TResult Function()? serverError,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -51,6 +57,8 @@ mixin _$AuthFailure {
   TResult map<TResult extends Object?>({
     required TResult Function(_Other value) other,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -62,6 +70,8 @@ mixin _$AuthFailure {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Other value)? other,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -73,6 +83,8 @@ mixin _$AuthFailure {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Other value)? other,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -162,7 +174,9 @@ class _$_Other implements _Other {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String message) other,
-    required TResult Function() serverError,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -175,7 +189,9 @@ class _$_Other implements _Other {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String message)? other,
-    TResult Function()? serverError,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -188,7 +204,9 @@ class _$_Other implements _Other {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String message)? other,
-    TResult Function()? serverError,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -206,6 +224,8 @@ class _$_Other implements _Other {
   TResult map<TResult extends Object?>({
     required TResult Function(_Other value) other,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -220,6 +240,8 @@ class _$_Other implements _Other {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Other value)? other,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -234,6 +256,8 @@ class _$_Other implements _Other {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Other value)? other,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -262,6 +286,7 @@ abstract class _$$_ServerErrorCopyWith<$Res> {
   factory _$$_ServerErrorCopyWith(
           _$_ServerError value, $Res Function(_$_ServerError) then) =
       __$$_ServerErrorCopyWithImpl<$Res>;
+  $Res call({String message});
 }
 
 /// @nodoc
@@ -273,58 +298,87 @@ class __$$_ServerErrorCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
 
   @override
   _$_ServerError get _value => super._value as _$_ServerError;
+
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(_$_ServerError(
+      message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_ServerError implements _ServerError {
-  const _$_ServerError();
+  const _$_ServerError(this.message);
+
+  @override
+  final String message;
 
   @override
   String toString() {
-    return 'AuthFailure.serverError()';
+    return 'AuthFailure.serverError(message: $message)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ServerError);
+        (other.runtimeType == runtimeType &&
+            other is _$_ServerError &&
+            const DeepCollectionEquality().equals(other.message, message));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_ServerErrorCopyWith<_$_ServerError> get copyWith =>
+      __$$_ServerErrorCopyWithImpl<_$_ServerError>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String message) other,
-    required TResult Function() serverError,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
   }) {
-    return serverError();
+    return serverError(message);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String message)? other,
-    TResult Function()? serverError,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
   }) {
-    return serverError?.call();
+    return serverError?.call(message);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String message)? other,
-    TResult Function()? serverError,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -332,7 +386,7 @@ class _$_ServerError implements _ServerError {
     required TResult orElse(),
   }) {
     if (serverError != null) {
-      return serverError();
+      return serverError(message);
     }
     return orElse();
   }
@@ -342,6 +396,8 @@ class _$_ServerError implements _ServerError {
   TResult map<TResult extends Object?>({
     required TResult Function(_Other value) other,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -356,6 +412,8 @@ class _$_ServerError implements _ServerError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Other value)? other,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -370,6 +428,8 @@ class _$_ServerError implements _ServerError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Other value)? other,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -385,7 +445,300 @@ class _$_ServerError implements _ServerError {
 }
 
 abstract class _ServerError implements AuthFailure {
-  const factory _ServerError() = _$_ServerError;
+  const factory _ServerError(final String message) = _$_ServerError;
+
+  String get message;
+  @JsonKey(ignore: true)
+  _$$_ServerErrorCopyWith<_$_ServerError> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_PoorConnectionCopyWith<$Res> {
+  factory _$$_PoorConnectionCopyWith(
+          _$_PoorConnection value, $Res Function(_$_PoorConnection) then) =
+      __$$_PoorConnectionCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_PoorConnectionCopyWithImpl<$Res>
+    extends _$AuthFailureCopyWithImpl<$Res>
+    implements _$$_PoorConnectionCopyWith<$Res> {
+  __$$_PoorConnectionCopyWithImpl(
+      _$_PoorConnection _value, $Res Function(_$_PoorConnection) _then)
+      : super(_value, (v) => _then(v as _$_PoorConnection));
+
+  @override
+  _$_PoorConnection get _value => super._value as _$_PoorConnection;
+}
+
+/// @nodoc
+
+class _$_PoorConnection implements _PoorConnection {
+  const _$_PoorConnection();
+
+  @override
+  String toString() {
+    return 'AuthFailure.poorConnection()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_PoorConnection);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+  }) {
+    return poorConnection();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+  }) {
+    return poorConnection?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    required TResult orElse(),
+  }) {
+    if (poorConnection != null) {
+      return poorConnection();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+  }) {
+    return poorConnection(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+  }) {
+    return poorConnection?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    required TResult orElse(),
+  }) {
+    if (poorConnection != null) {
+      return poorConnection(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PoorConnection implements AuthFailure {
+  const factory _PoorConnection() = _$_PoorConnection;
+}
+
+/// @nodoc
+abstract class _$$_ServerTimeoutCopyWith<$Res> {
+  factory _$$_ServerTimeoutCopyWith(
+          _$_ServerTimeout value, $Res Function(_$_ServerTimeout) then) =
+      __$$_ServerTimeoutCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ServerTimeoutCopyWithImpl<$Res>
+    extends _$AuthFailureCopyWithImpl<$Res>
+    implements _$$_ServerTimeoutCopyWith<$Res> {
+  __$$_ServerTimeoutCopyWithImpl(
+      _$_ServerTimeout _value, $Res Function(_$_ServerTimeout) _then)
+      : super(_value, (v) => _then(v as _$_ServerTimeout));
+
+  @override
+  _$_ServerTimeout get _value => super._value as _$_ServerTimeout;
+}
+
+/// @nodoc
+
+class _$_ServerTimeout implements _ServerTimeout {
+  const _$_ServerTimeout();
+
+  @override
+  String toString() {
+    return 'AuthFailure.serverTimeout()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ServerTimeout);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+  }) {
+    return serverTimeout();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+  }) {
+    return serverTimeout?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    required TResult orElse(),
+  }) {
+    if (serverTimeout != null) {
+      return serverTimeout();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+  }) {
+    return serverTimeout(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+  }) {
+    return serverTimeout?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    required TResult orElse(),
+  }) {
+    if (serverTimeout != null) {
+      return serverTimeout(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ServerTimeout implements AuthFailure {
+  const factory _ServerTimeout() = _$_ServerTimeout;
 }
 
 /// @nodoc
@@ -435,7 +788,9 @@ class _$_InvalidEmailAndPasswordCombination
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String message) other,
-    required TResult Function() serverError,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -448,7 +803,9 @@ class _$_InvalidEmailAndPasswordCombination
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String message)? other,
-    TResult Function()? serverError,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -461,7 +818,9 @@ class _$_InvalidEmailAndPasswordCombination
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String message)? other,
-    TResult Function()? serverError,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -479,6 +838,8 @@ class _$_InvalidEmailAndPasswordCombination
   TResult map<TResult extends Object?>({
     required TResult Function(_Other value) other,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -493,6 +854,8 @@ class _$_InvalidEmailAndPasswordCombination
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Other value)? other,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -507,6 +870,8 @@ class _$_InvalidEmailAndPasswordCombination
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Other value)? other,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -568,7 +933,9 @@ class _$_AccountLocked implements _AccountLocked {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String message) other,
-    required TResult Function() serverError,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -581,7 +948,9 @@ class _$_AccountLocked implements _AccountLocked {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String message)? other,
-    TResult Function()? serverError,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -594,7 +963,9 @@ class _$_AccountLocked implements _AccountLocked {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String message)? other,
-    TResult Function()? serverError,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -612,6 +983,8 @@ class _$_AccountLocked implements _AccountLocked {
   TResult map<TResult extends Object?>({
     required TResult Function(_Other value) other,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -626,6 +999,8 @@ class _$_AccountLocked implements _AccountLocked {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Other value)? other,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -640,6 +1015,8 @@ class _$_AccountLocked implements _AccountLocked {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Other value)? other,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -700,7 +1077,9 @@ class _$_AccountExpired implements _AccountExpired {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String message) other,
-    required TResult Function() serverError,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -713,7 +1092,9 @@ class _$_AccountExpired implements _AccountExpired {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String message)? other,
-    TResult Function()? serverError,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -726,7 +1107,9 @@ class _$_AccountExpired implements _AccountExpired {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String message)? other,
-    TResult Function()? serverError,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -744,6 +1127,8 @@ class _$_AccountExpired implements _AccountExpired {
   TResult map<TResult extends Object?>({
     required TResult Function(_Other value) other,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -758,6 +1143,8 @@ class _$_AccountExpired implements _AccountExpired {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Other value)? other,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -772,6 +1159,8 @@ class _$_AccountExpired implements _AccountExpired {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Other value)? other,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -832,7 +1221,9 @@ class _$_TokenExpired implements _TokenExpired {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String message) other,
-    required TResult Function() serverError,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -845,7 +1236,9 @@ class _$_TokenExpired implements _TokenExpired {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String message)? other,
-    TResult Function()? serverError,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -858,7 +1251,9 @@ class _$_TokenExpired implements _TokenExpired {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String message)? other,
-    TResult Function()? serverError,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -876,6 +1271,8 @@ class _$_TokenExpired implements _TokenExpired {
   TResult map<TResult extends Object?>({
     required TResult Function(_Other value) other,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -890,6 +1287,8 @@ class _$_TokenExpired implements _TokenExpired {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Other value)? other,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -904,6 +1303,8 @@ class _$_TokenExpired implements _TokenExpired {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Other value)? other,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,

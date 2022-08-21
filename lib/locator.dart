@@ -3,11 +3,17 @@ import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxyLogin/proxy_login_form_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
+import 'package:ezrxmobile/infrastructure/banner/datasource/banner_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/banner/datasource/banner_remote.dart';
+import 'package:ezrxmobile/infrastructure/banner/repository/banner_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/dynamic_links.dart';
@@ -90,6 +96,10 @@ void setupLocator() {
     () => OktaLoginServices(config: locator<Config>()),
   );
 
+  locator.registerLazySingleton(
+    () => DataSourceExceptionHandler(),
+  );
+
   //============================================================
   //  Auth
   //
@@ -102,6 +112,7 @@ void setupLocator() {
     () => AuthRemoteDataSource(
       httpService: locator<HttpService>(),
       authQueryMutation: locator<AuthQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
 
@@ -150,6 +161,7 @@ void setupLocator() {
     () => UserRemoteDataSource(
       httpService: locator<HttpService>(),
       userQueryMutation: locator<UserQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
 
@@ -171,11 +183,46 @@ void setupLocator() {
   );
 
   //============================================================
+  //  Banner
+  //
+  //============================================================
+  locator.registerLazySingleton(
+    () => BannerQueryMutation(),
+  );
+
+  locator.registerLazySingleton(
+    () => BannerRemoteDataSource(
+      httpService: locator<HttpService>(),
+      bannerQueryMutation: locator<BannerQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => BannerRepository(remoteDataSource: locator<BannerRemoteDataSource>()),
+  );
+
+  locator.registerLazySingleton(
+    () => BannerBloc(
+        bannerRepository: locator<BannerRepository>(),
+        salesOrgBloc: locator<SalesOrgBloc>()),
+  );
+
+  //============================================================
   //  Sales Org
   //
   //============================================================
 
   locator.registerLazySingleton(
     () => SalesOrgBloc(userBloc: locator<UserBloc>()),
+  );
+
+  //============================================================
+  //  Countly
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => CountlyService(),
   );
 }

@@ -2,6 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -41,16 +45,40 @@ class _ProfileTile extends StatelessWidget {
     return BlocBuilder<UserBloc, UserState>(
       buildWhen: (previous, current) => previous.user != current.user,
       builder: (context, state) {
-        return BlocBuilder<UserBloc, UserState>(
+        return BlocConsumer<UserBloc, UserState>(
+          listenWhen: (previous, current) => previous.user != current.user,
+          listener: (context, state) {
+            state.userFailureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  showSnackBar(
+                    context: context,
+                    message: failure.map(
+                      other: (other) => other.message,
+                      serverError: (serverError) =>
+                          '${'Server Error'.tr()} : ${serverError.message}',
+                      poorConnection: (_) => 'Poor Internet connection'.tr(),
+                      serverTimeout: (_) => 'Server time out'.tr(),
+                      userNotFound: (_) => 'User not found.'.tr(),
+                    ),
+                  );
+                },
+                (_) {},
+              ),
+            );
+          },
           buildWhen: (previous, current) => previous.user != current.user,
           builder: (context, state) {
             return ListTile(
               key: const Key('profileTile'),
               leading: const CircleAvatar(),
-              title: Text(
-                state.user.fullName.toString(),
-                style: Theme.of(context).textTheme.headline6,
-              ),
+              title: state.user == User.empty()
+                  ? LoadingShimmer.tile()
+                  : Text(
+                      state.user.fullName.toString(),
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
               onTap: null,
             );
           },
@@ -72,10 +100,12 @@ class _SalesOrgSelector extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.salesOrganisation != current.salesOrganisation,
         builder: (context, state) {
-          return Text(
-            state.salesOrganisation.salesOrg.fullName,
-            style: Theme.of(context).textTheme.headline6,
-          );
+          return state.salesOrganisation == SalesOrganisation.empty()
+              ? LoadingShimmer.tile()
+              : Text(
+                  state.salesOrganisation.salesOrg.fullName,
+                  style: Theme.of(context).textTheme.headline6,
+                );
         },
       ),
       trailing: const Icon(Icons.arrow_drop_down_outlined),

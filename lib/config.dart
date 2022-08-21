@@ -2,9 +2,9 @@ enum Flavor { mock, dev, uat, prod }
 
 class Config {
   Flavor appFlavor = Flavor.prod;
-  int httpSendTimeout = 15000;
-  int httpConnectTimeout = 15000;
-  int httpReceiveTimeout = 15000;
+  int httpSendTimeout = 150000;
+  int httpConnectTimeout = 150000;
+  int httpReceiveTimeout = 150000;
 
   String get baseUrl {
     switch (appFlavor) {

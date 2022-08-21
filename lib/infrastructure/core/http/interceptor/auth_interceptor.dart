@@ -24,7 +24,7 @@ class AuthInterceptor extends Interceptor {
       options.headers['package'] = await packageInfoService.getPackageName();
       options.headers['version'] = await packageInfoService.getVersion();
       options.headers['build'] = await packageInfoService.getBuildNumber();
-    } on LocalException catch (e) {
+    } on CacheException catch (e) {
       debugPrint('load token failure: ${e.message}');
     }
     options.headers['Content-Type'] = 'application/json; charset=UTF-8';

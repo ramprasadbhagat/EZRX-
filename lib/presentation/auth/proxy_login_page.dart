@@ -27,16 +27,17 @@ class LoginOnBehalfPage extends StatelessWidget {
                 (failure) {
                   showSnackBar(
                     context: context,
-                    message: tr(
-                      failure.map(
-                        other: (other) => other.message,
-                        serverError: (_) => 'Server Error',
-                        invalidEmailAndPasswordCombination: (_) =>
-                            'Incorrect username and/or password.',
-                        accountLocked: (_) => 'Account is Locked',
-                        accountExpired: (_) => 'Account is Expired',
-                        tokenExpired: (_) => 'Session token is Expired',
-                      ),
+                    message: failure.map(
+                      other: (other) => other.message,
+                      serverError: (serverError) =>
+                          '${'Server Error'.tr()} : ${serverError.message}',
+                      poorConnection: (_) => 'Poor Internet connection'.tr(),
+                      serverTimeout: (_) => 'Server time out'.tr(),
+                      invalidEmailAndPasswordCombination: (_) =>
+                          'Incorrect username and/or password.'.tr(),
+                      accountLocked: (_) => 'Account is Locked'.tr(),
+                      accountExpired: (_) => 'Account is Expired'.tr(),
+                      tokenExpired: (_) => 'Session token is Expired'.tr(),
                     ),
                   );
                 },

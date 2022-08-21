@@ -59,6 +59,13 @@ dependencies:
     git: https://github.com/easyhour/easy_localization_loader
     
 
+  responsive_framework: ^0.2.0
+  smooth_page_indicator: ^1.0.0+2
+  shimmer: ^2.0.0
+  fluttertoast: ^8.0.9
+  flutter_cache_manager: ^3.3.0
+  flutter_inappwebview: ^5.4.3+7
+  countly_flutter: ^21.11.2
 
 
   # The following adds the Cupertino Icons font to your application.
