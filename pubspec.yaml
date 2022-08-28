@@ -59,7 +59,8 @@ dependencies:
     git: https://github.com/easyhour/easy_localization_loader
     
 
-  responsive_framework: ^0.2.0
+  # responsive_framework: ^0.2.0
+  sizer: ^2.0.15
   smooth_page_indicator: ^1.0.0+2
   shimmer: ^2.0.0
   fluttertoast: ^8.0.9

@@ -18,10 +18,10 @@ class BannerRemoteDataSource {
     required this.dataSourceExceptionHandler,
   });
 
-  Future<List<BannerItem>> getBanners(
-    bool isPreSalesOrg,
-    String salesOrg,
-  ) async {
+  Future<List<BannerItem>> getBanners({
+    required bool isPreSalesOrg,
+    required String salesOrg,
+  }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',

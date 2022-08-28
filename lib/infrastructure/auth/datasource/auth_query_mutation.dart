@@ -5,7 +5,11 @@
 class AuthQueryMutation {
   // For Loggin in by username and Password and updating the FCM token
   // for notifications using Firebase Cloud Messaging
-  String passwordLoginData(String username, String password, String fcmtoken) {
+  String getPasswordLoginQuery(
+    String username,
+    String password,
+    String fcmtoken,
+  ) {
     return '''{
       loginV2(
           username: "$username"
@@ -23,7 +27,7 @@ class AuthQueryMutation {
 
   // For Loggin in by Okta access token and updating the FCM token
   // for notifications using Firebase Cloud Messaging
-  String oktaTokenLoginData(String oktaToken, String fcmtoken) {
+  String getOktaTokenLoginQuery(String oktaToken, String fcmtoken) {
     return '''{
       loginV2(
           accessToken: "$oktaToken" 
@@ -39,7 +43,7 @@ class AuthQueryMutation {
   }
 
   // For Admin Login on behalf
-  String proxyLoginData(String username) {
+  String getProxyLoginQuery(String username) {
     return '''{
       proxyLoginV2(request:{ 
           username: "$username"

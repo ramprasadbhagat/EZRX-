@@ -1,0 +1,30 @@
+{
+    "data":{
+       "getBanners":[
+          {
+             "id":181,
+             "url":"https://zpdigitalproducts.blob.core.windows.net/eztrade/staging/validation/ftan_1659949217_Singapore eZRx Banner_Slot 1_August .jpg",
+             "title":"Singapore Banner NDP",
+             "description":"",
+             "buttonLabel":"",
+             "urlLink":"",
+             "isPreSalesOrg":false,
+             "salesOrg":"2601",
+             "serial":5,
+             "isCustomer":false
+          },
+          {
+             "id":182,
+             "url":"https://zpdigitalproducts.blob.core.windows.net/eztrade/staging/validation/ftan_1660112274_Singapore_eZRx Banner_Live Chat_August .jpg",
+             "title":"SG2601_eZRx Live Chat (SG)",
+             "description":"",
+             "buttonLabel":"",
+             "urlLink":"",
+             "isPreSalesOrg":false,
+             "salesOrg":"2601",
+             "serial":4,
+             "isCustomer":false
+          }
+       ]
+    }
+ }

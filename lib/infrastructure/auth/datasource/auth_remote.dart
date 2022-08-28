@@ -30,7 +30,7 @@ class AuthRemoteDataSource {
         url: '/ezrxapi/api/loginAd',
         data: jsonEncode(
           {
-            'query': authQueryMutation.passwordLoginData(
+            'query': authQueryMutation.getPasswordLoginQuery(
               username,
               password,
               fcmToken,
@@ -53,7 +53,7 @@ class AuthRemoteDataSource {
         url: '/ezrxapi/api/loginAd',
         data: jsonEncode(
           {
-            'query': authQueryMutation.oktaTokenLoginData(
+            'query': authQueryMutation.getOktaTokenLoginQuery(
               oktaAccessToken,
               fcmToken,
             )
@@ -71,7 +71,11 @@ class AuthRemoteDataSource {
       final res = await httpService.request(
         method: 'POST',
         url: '/ezrxapi/api/loginAd',
-        data: jsonEncode({'query': authQueryMutation.proxyLoginData(username)}),
+        data: jsonEncode(
+          {
+            'query': authQueryMutation.getProxyLoginQuery(username),
+          },
+        ),
       );
 
       _authExceptionChecker(res: res, jsonKey: 'proxyLoginV2');

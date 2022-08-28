@@ -325,6 +325,8 @@ abstract class _Selected implements SalesOrgEvent {
 /// @nodoc
 mixin _$SalesOrgState {
   SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
+  SalesOrganisationConfigs get salesOrganisationConfigs =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrgStateCopyWith<SalesOrgState> get copyWith =>
@@ -336,9 +338,12 @@ abstract class $SalesOrgStateCopyWith<$Res> {
   factory $SalesOrgStateCopyWith(
           SalesOrgState value, $Res Function(SalesOrgState) then) =
       _$SalesOrgStateCopyWithImpl<$Res>;
-  $Res call({SalesOrganisation salesOrganisation});
+  $Res call(
+      {SalesOrganisation salesOrganisation,
+      SalesOrganisationConfigs salesOrganisationConfigs});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
 }
 
 /// @nodoc
@@ -353,12 +358,17 @@ class _$SalesOrgStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? salesOrganisation = freezed,
+    Object? salesOrganisationConfigs = freezed,
   }) {
     return _then(_value.copyWith(
       salesOrganisation: salesOrganisation == freezed
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
+      salesOrganisationConfigs: salesOrganisationConfigs == freezed
+          ? _value.salesOrganisationConfigs
+          : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
     ));
   }
 
@@ -366,6 +376,14 @@ class _$SalesOrgStateCopyWithImpl<$Res>
   $SalesOrganisationCopyWith<$Res> get salesOrganisation {
     return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
       return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+
+  @override
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(
+        _value.salesOrganisationConfigs, (value) {
+      return _then(_value.copyWith(salesOrganisationConfigs: value));
     });
   }
 }
@@ -377,10 +395,14 @@ abstract class _$$_SalesOrgStateCopyWith<$Res>
           _$_SalesOrgState value, $Res Function(_$_SalesOrgState) then) =
       __$$_SalesOrgStateCopyWithImpl<$Res>;
   @override
-  $Res call({SalesOrganisation salesOrganisation});
+  $Res call(
+      {SalesOrganisation salesOrganisation,
+      SalesOrganisationConfigs salesOrganisationConfigs});
 
   @override
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  @override
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
 }
 
 /// @nodoc
@@ -397,12 +419,17 @@ class __$$_SalesOrgStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? salesOrganisation = freezed,
+    Object? salesOrganisationConfigs = freezed,
   }) {
     return _then(_$_SalesOrgState(
       salesOrganisation: salesOrganisation == freezed
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
+      salesOrganisationConfigs: salesOrganisationConfigs == freezed
+          ? _value.salesOrganisationConfigs
+          : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
     ));
   }
 }
@@ -410,14 +437,18 @@ class __$$_SalesOrgStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SalesOrgState implements _SalesOrgState {
-  const _$_SalesOrgState({required this.salesOrganisation});
+  const _$_SalesOrgState(
+      {required this.salesOrganisation,
+      required this.salesOrganisationConfigs});
 
   @override
   final SalesOrganisation salesOrganisation;
+  @override
+  final SalesOrganisationConfigs salesOrganisationConfigs;
 
   @override
   String toString() {
-    return 'SalesOrgState(salesOrganisation: $salesOrganisation)';
+    return 'SalesOrgState(salesOrganisation: $salesOrganisation, salesOrganisationConfigs: $salesOrganisationConfigs)';
   }
 
   @override
@@ -426,12 +457,16 @@ class _$_SalesOrgState implements _SalesOrgState {
         (other.runtimeType == runtimeType &&
             other is _$_SalesOrgState &&
             const DeepCollectionEquality()
-                .equals(other.salesOrganisation, salesOrganisation));
+                .equals(other.salesOrganisation, salesOrganisation) &&
+            const DeepCollectionEquality().equals(
+                other.salesOrganisationConfigs, salesOrganisationConfigs));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(salesOrganisation));
+      runtimeType,
+      const DeepCollectionEquality().hash(salesOrganisation),
+      const DeepCollectionEquality().hash(salesOrganisationConfigs));
 
   @JsonKey(ignore: true)
   @override
@@ -441,10 +476,14 @@ class _$_SalesOrgState implements _SalesOrgState {
 
 abstract class _SalesOrgState implements SalesOrgState {
   const factory _SalesOrgState(
-      {required final SalesOrganisation salesOrganisation}) = _$_SalesOrgState;
+          {required final SalesOrganisation salesOrganisation,
+          required final SalesOrganisationConfigs salesOrganisationConfigs}) =
+      _$_SalesOrgState;
 
   @override
   SalesOrganisation get salesOrganisation;
+  @override
+  SalesOrganisationConfigs get salesOrganisationConfigs;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrgStateCopyWith<_$_SalesOrgState> get copyWith =>

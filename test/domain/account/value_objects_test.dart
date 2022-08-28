@@ -65,4 +65,36 @@ void main() {
       },
     );
   });
+
+  group('Currency value object', () {
+    test(
+      'should return Taiwan (NT\$) currency symbol when given twd input',
+      () async {
+        const input = 'twd';
+        final currency = Currency(input);
+        final result = currency.symbol;
+        expect(result, 'NT\$');
+      },
+    );
+
+    test(
+      'should return Malaysia (RM) currency symbol when given myr input',
+      () async {
+        const input = 'myr';
+        final currency = Currency(input);
+        final result = currency.symbol;
+        expect(result, 'RM');
+      },
+    );
+
+    test(
+      'should return Singapore (\$)  currency symbol when given sgd input',
+      () async {
+        const input = 'sgd';
+        final currency = Currency(input);
+        final result = currency.symbol;
+        expect(result, '\$');
+      },
+    );
+  });
 }

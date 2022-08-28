@@ -4,7 +4,7 @@
 
 class UserQueryMutation {
   // For fetching userdata by user ID
-  String fetchUserData() {
+  String getUserQuery() {
     return '''
       query userQuery(\$id: Int!) {
         user(id: \$id) {

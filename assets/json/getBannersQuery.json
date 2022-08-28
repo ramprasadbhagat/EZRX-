@@ -1,0 +1,3 @@
+{
+    "query":"    {\n      getBanners(request: {isPreSalesOrg: false,salesOrg:\"2601\"})\n        {\n            id    \n            url    \n            title    \n            description    \n            buttonLabel    \n            urlLink    \n            isPreSalesOrg  \n            salesOrg    \n            serial\n            isCustomer\n        }\n    }\n    "
+}

@@ -56,7 +56,7 @@ String salesOrgBuName(String salesOrg) {
     case 'PH02':
       return 'MXPS MDI PH';
     default:
-      return '';
+      return 'Unknown';
   }
 }
 
@@ -67,5 +67,29 @@ bool canProxyLogin(String roleName) {
       return true;
     default:
       return false;
+  }
+}
+
+String currencySymbol(String currency) {
+  switch (currency) {
+    case 'twd':
+      return 'NT\$';
+    case 'php':
+      return '₱';
+    case 'myr':
+      return 'RM';
+    case 'mmk':
+      return 'K';
+    case 'thb':
+      return '฿';
+    case 'vnd':
+      return '₫';
+    case 'krw':
+      return '₩';
+    case 'bnd':
+      return 'B\$';
+    case 'sgd':
+    default:
+      return '\$';
   }
 }

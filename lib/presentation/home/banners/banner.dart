@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -53,6 +54,7 @@ class HomeBanner extends StatelessWidget {
                     banner: state.banner[index],
                     httpService: locator<HttpService>(),
                     countlyService: locator<CountlyService>(),
+                    config: locator<Config>(),
                   );
                 },
               ),

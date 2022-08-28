@@ -37,12 +37,12 @@ void main() {
 
       tester.printToConsole('Input username');
       await tester.tap(loginUsernameField);
-      await tester.enterText(loginUsernameField, 'your_username');
+      await tester.enterText(loginUsernameField, 'ezrxtest05');
       await tester.pumpAndSettle(const Duration(microseconds: 200));
 
       tester.printToConsole('Input password');
       await tester.tap(loginPasswordField);
-      await tester.enterText(loginPasswordField, '<your_password>');
+      await tester.enterText(loginPasswordField, 'St@ysafe01');
       await tester.pumpAndSettle(const Duration(microseconds: 200));
 
       tester.printToConsole('Tap login button');

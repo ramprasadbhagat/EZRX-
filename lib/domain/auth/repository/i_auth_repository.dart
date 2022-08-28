@@ -11,7 +11,7 @@ abstract class IAuthRepository {
     // required String fcmToken, // not a good design fcm will expired
   });
   Future<Either<AuthFailure, LoginV2>> getEZRXJWT(JWT oktaAccessToken);
-  Future storeJWT({required JWT jwt});
+  Future<Either<AuthFailure, Unit>> storeJWT({required JWT jwt});
   Future<Either<AuthFailure, Unit>> initTokenStorage();
   Future<Either<AuthFailure, Unit>> initOkta();
   Future<Either<AuthFailure, Unit>> tokenValid();

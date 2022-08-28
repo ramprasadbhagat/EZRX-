@@ -208,11 +208,11 @@ class __$$_FetchCopyWithImpl<$Res> extends _$BannerEventCopyWithImpl<$Res>
     Object? salesOrganisation = freezed,
   }) {
     return _then(_$_Fetch(
-      isPreSalesOrg == freezed
+      isPreSalesOrg: isPreSalesOrg == freezed
           ? _value.isPreSalesOrg
           : isPreSalesOrg // ignore: cast_nullable_to_non_nullable
               as bool,
-      salesOrganisation == freezed
+      salesOrganisation: salesOrganisation == freezed
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
@@ -230,7 +230,8 @@ class __$$_FetchCopyWithImpl<$Res> extends _$BannerEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  const _$_Fetch(this.isPreSalesOrg, this.salesOrganisation);
+  const _$_Fetch(
+      {required this.isPreSalesOrg, required this.salesOrganisation});
 
   @override
   final bool isPreSalesOrg;
@@ -333,8 +334,8 @@ class _$_Fetch implements _Fetch {
 
 abstract class _Fetch implements BannerEvent {
   const factory _Fetch(
-          final bool isPreSalesOrg, final SalesOrganisation salesOrganisation) =
-      _$_Fetch;
+      {required final bool isPreSalesOrg,
+      required final SalesOrganisation salesOrganisation}) = _$_Fetch;
 
   bool get isPreSalesOrg;
   SalesOrganisation get salesOrganisation;

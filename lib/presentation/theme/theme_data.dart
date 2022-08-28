@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 enum AppTheme {
   light,
@@ -85,8 +86,8 @@ final appThemeData = {
           ),
         ), //const StadiumBorder(),
         // textStyle: ThemeData.light().textTheme.bodyText2,
-        textStyle: const TextStyle(
-          fontSize: 24,
+        textStyle: TextStyle(
+          fontSize: 21.sp,
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),

@@ -5,10 +5,15 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/repository/sales_org_repository.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
+import 'package:ezrxmobile/infrastructure/banner/datasource/banner_local.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_remote.dart';
 import 'package:ezrxmobile/infrastructure/banner/repository/banner_repository.dart';
@@ -96,17 +101,13 @@ void setupLocator() {
     () => OktaLoginServices(config: locator<Config>()),
   );
 
-  locator.registerLazySingleton(
-    () => DataSourceExceptionHandler(),
-  );
+  locator.registerLazySingleton(() => DataSourceExceptionHandler());
 
   //============================================================
   //  Auth
   //
   //============================================================
-  locator.registerLazySingleton(
-    () => AuthQueryMutation(),
-  );
+  locator.registerLazySingleton(() => AuthQueryMutation());
   locator.registerLazySingleton(() => AuthLocalDataSource());
   locator.registerLazySingleton(
     () => AuthRemoteDataSource(
@@ -129,21 +130,15 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
-    () => AuthBloc(
-      authRepository: locator<AuthRepository>(),
-    ),
+    () => AuthBloc(authRepository: locator<AuthRepository>()),
   );
 
   locator.registerLazySingleton(
-    () => LoginFormBloc(
-      authRepository: locator<AuthRepository>(),
-    ),
+    () => LoginFormBloc(authRepository: locator<AuthRepository>()),
   );
 
   locator.registerLazySingleton(
-    () => ProxyLoginFormBloc(
-      authRepository: locator<AuthRepository>(),
-    ),
+    () => ProxyLoginFormBloc(authRepository: locator<AuthRepository>()),
   );
 
   //============================================================
@@ -151,9 +146,7 @@ void setupLocator() {
   //
   //============================================================
 
-  locator.registerLazySingleton(
-    () => UserQueryMutation(),
-  );
+  locator.registerLazySingleton(() => UserQueryMutation());
   locator.registerLazySingleton(
     () => UserLocalDataSource(tokenStorage: locator<TokenStorage>()),
   );
@@ -186,9 +179,9 @@ void setupLocator() {
   //  Banner
   //
   //============================================================
-  locator.registerLazySingleton(
-    () => BannerQueryMutation(),
-  );
+  locator.registerLazySingleton(() => BannerQueryMutation());
+
+  locator.registerLazySingleton(() => BannerLocalDataSource());
 
   locator.registerLazySingleton(
     () => BannerRemoteDataSource(
@@ -199,13 +192,18 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
-    () => BannerRepository(remoteDataSource: locator<BannerRemoteDataSource>()),
+    () => BannerRepository(
+      config: locator<Config>(),
+      localDataSource: locator<BannerLocalDataSource>(),
+      remoteDataSource: locator<BannerRemoteDataSource>(),
+    ),
   );
 
   locator.registerLazySingleton(
     () => BannerBloc(
-        bannerRepository: locator<BannerRepository>(),
-        salesOrgBloc: locator<SalesOrgBloc>()),
+      bannerRepository: locator<BannerRepository>(),
+      salesOrgBloc: locator<SalesOrgBloc>(),
+    ),
   );
 
   //============================================================
@@ -213,8 +211,31 @@ void setupLocator() {
   //
   //============================================================
 
+  locator.registerLazySingleton(() => SalesOrgQueryMutation());
+
+  locator.registerLazySingleton(() => SalesOrgLocalDataSource());
+
   locator.registerLazySingleton(
-    () => SalesOrgBloc(userBloc: locator<UserBloc>()),
+    () => SalesOrgRemoteDataSource(
+      httpService: locator<HttpService>(),
+      salesOrgQueryMutation: locator<SalesOrgQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => SalesOrgRepository(
+      config: locator<Config>(),
+      localDataSource: locator<SalesOrgLocalDataSource>(),
+      remoteDataSource: locator<SalesOrgRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => SalesOrgBloc(
+      userBloc: locator<UserBloc>(),
+      salesOrgRepository: locator<SalesOrgRepository>(),
+    ),
   );
 
   //============================================================

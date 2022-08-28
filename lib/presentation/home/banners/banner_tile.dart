@@ -2,23 +2,27 @@ import 'dart:typed_data';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:dio/dio.dart';
+import 'package:ezrxmobile/config.dart' as c;
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 class BannerTile extends StatelessWidget {
   final BannerItem banner;
   final HttpService httpService;
   final CountlyService countlyService;
+  final c.Config config;
   const BannerTile({
     Key? key,
     required this.banner,
     required this.httpService,
     required this.countlyService,
+    required this.config,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,7 @@ class BannerTile extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(5),
         child: FutureBuilder(
-          future: _fetchImageData(banner.url),
+          future: _fetchImageData(imgUrl: banner.url, config: config),
           builder: (context, image) {
             return image.data != null
                 ? GestureDetector(
@@ -67,13 +71,27 @@ class BannerTile extends StatelessWidget {
     );
   }
 
-  Future<Uint8List?> _fetchImageData(String imgUrl) async {
+  Future<Uint8List?> _fetchImageData({
+    required String imgUrl,
+    required c.Config config,
+  }) async {
     if (imgUrl.isEmpty) return null;
 
     try {
       final file = await DefaultCacheManager().getFileFromCache(imgUrl);
       if (file != null) {
         return file.file.readAsBytesSync();
+      }
+
+      if (config.appFlavor == c.Flavor.mock) {
+        final imageData =
+            await rootBundle.load('assets/images/data/banner_image_data');
+
+        final imageUint8List = imageData.buffer
+            .asUint8List(imageData.offsetInBytes, imageData.lengthInBytes);
+
+        await DefaultCacheManager().putFile(imgUrl, imageUint8List);
+        return imageUint8List;
       }
 
       final res = await httpService.request(

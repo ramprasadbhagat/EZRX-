@@ -22,7 +22,10 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
     on<BannerEvent>(_onEvent);
     _salesOrgBlocSubscription = salesOrgBloc.stream.listen((state) {
       if (state.salesOrganisation != SalesOrganisation.empty()) {
-        add(BannerEvent.fetch(false, state.salesOrganisation));
+        add(BannerEvent.fetch(
+          isPreSalesOrg: false,
+          salesOrganisation: state.salesOrganisation,
+        ));
       }
     });
   }
@@ -32,8 +35,8 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
       initialized: (e) async => emit(BannerState.initial()),
       fetch: (e) async {
         final failureOrSuccess = await bannerRepository.getBanner(
-          e.isPreSalesOrg,
-          e.salesOrganisation,
+          isPreSalesOrg: e.isPreSalesOrg,
+          salesOrganisation: e.salesOrganisation,
         );
 
         failureOrSuccess.fold(

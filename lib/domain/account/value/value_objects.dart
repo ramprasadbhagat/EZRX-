@@ -47,3 +47,18 @@ class RoleName extends ValueObject<String> {
 
   const RoleName._(this.value);
 }
+
+class Currency extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory Currency(String input) {
+    return Currency._(Right(input));
+  }
+
+  String get symbol {
+    return currencySymbol(value.getOrElse(() => ''));
+  }
+
+  const Currency._(this.value);
+}
