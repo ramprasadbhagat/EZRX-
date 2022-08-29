@@ -24,7 +24,7 @@
 - Ensure the csv file is using CRLF to works. ref:https://stackoverflow.com/a/39532890
 
 ## Analyze
-```fvm flutter analyze```
+```fvm flutter analyze --fatal-infos --fatal-warnings```
 
 ## Test Coverage
 1. [Read this](https://codewithandrea.com/articles/flutter-test-coverage/)
@@ -32,6 +32,17 @@
 3. ```fvm flutter test --coverage```
 4. ```genhtml coverage/lcov.info -o coverage/html```
 5. ```open coverage/html/index.html```
+
+## SonarCube
+1. [Read this](https://medium.com/@rajeswari3699/sonarqube-with-flutter-e294e48018f2)
+2. Follow the guide download Sonarqube, SonarScanner, Sonar-Flutter Plugin and put to the correct directory.
+3. ```nano /etc/paths``` add ```/Applications/SonarScanner/bin``` and ```/Applications/SonarScanner/bin``` 
+4. Start SonarCube local server ```sh /Applications/SonarQube/bin/macosx-universal-64/sonar.sh console```
+5. http://localhost:9000/about > Wait for a while until Login screen appear > Login and create project 
+6. Config sonar-project.properties
+7. ```fvm flutter test --machine --coverage > tests.output```
+8. ```sonar-scanner```
+9. open ```http://localhost:9000/dashboard?id=ezrx_mobile```
 
 ## Integration test
 ```fvm flutter drive --driver=test_driver/integration_driver.dart --target=integration_test/app_test.dart --flavor uat```
