@@ -14,9 +14,9 @@ class HttpService {
     _dio = Dio(
       BaseOptions(
         baseUrl: config.baseUrl,
-        sendTimeout: config.httpSendTimeout,
-        connectTimeout: config.httpConnectTimeout,
-        receiveTimeout: config.httpReceiveTimeout,
+        // sendTimeout: config.httpSendTimeout,
+        // connectTimeout: config.httpConnectTimeout,
+        // receiveTimeout: config.httpReceiveTimeout,
       ),
     );
     _dio.interceptors.addAll([

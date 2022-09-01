@@ -199,9 +199,9 @@ class AuthRepository implements IAuthRepository {
   Future<Either<AuthFailure, Unit>> tokenValid() async {
     try {
       final token = await tokenStorage.get();
-      return token.toDomain().isValid()
-          ? const Right(unit)
-          : const Left(AuthFailure.tokenExpired());
+      return token.toDomain().isExpired
+          ? const Left(AuthFailure.tokenExpired())
+          : const Right(unit);
     } on PlatformException catch (e) {
       return Left(AuthFailure.other('${e.message}'));
     } on ServerException catch (e) {

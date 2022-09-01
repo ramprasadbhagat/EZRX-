@@ -73,6 +73,7 @@ class HomeNavigationTabbar extends StatelessWidget {
                 return Row(
                   children: [
                     NavigationRail(
+                      key: const Key('homeTabbar'),
                       destinations: _routesItems
                           .map(
                             (item) => NavigationRailDestination(

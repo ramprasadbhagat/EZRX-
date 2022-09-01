@@ -32,15 +32,75 @@ void main() {
         expect(result, 'ZPSG');
       },
     );
+
+    test(
+      'should return 2601 - ZPSG when get Full Name with SalesOrg 2601',
+      () async {
+        const input = '2601';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.fullName;
+        expect(result, '2601 - ZPSG');
+      },
+    );
+
+    test(
+      'should return 2001 - ZPMY when get Full Name with SalesOrg 2001',
+      () async {
+        const input = '2001';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.fullName;
+        expect(result, '2001 - ZPMY');
+      },
+    );
+
+    test(
+      'should return 2902 - ZPTH when get Full Name with SalesOrg 2902',
+      () async {
+        const input = '2902';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.fullName;
+        expect(result, '2902 - ZPTH');
+      },
+    );
+
+    test(
+      'should return TH when get country with SalesOrg 2902',
+      () async {
+        const input = '2902';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.country;
+        expect(result, 'TH');
+      },
+    );
+
+    test(
+      'should return TW when get country with SalesOrg 2804',
+      () async {
+        const input = '2804';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.country;
+        expect(result, 'TW');
+      },
+    );
+
+    test(
+      'should return VN when get country with SalesOrg 3070',
+      () async {
+        const input = '3070';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.country;
+        expect(result, 'VN');
+      },
+    );
   });
 
-  group('RoleName value object', () {
+  group('RoleType value object', () {
     test(
       'should return true when check can proxy login with ROOT Admin role',
       () async {
-        const input = 'ROOT Admin';
-        final roleName = RoleName(input);
-        final result = roleName.canLoginOnBehalf;
+        const input = 'root_admin';
+        final roleType = RoleType(input);
+        final result = roleType.canLoginOnBehalf;
         expect(result, true);
       },
     );
@@ -48,20 +108,80 @@ void main() {
     test(
       'should return true when check can proxy login with ZP Admin role',
       () async {
-        const input = 'ZP Admin';
-        final roleName = RoleName(input);
-        final result = roleName.canLoginOnBehalf;
+        const input = 'zp_admin';
+        final roleType = RoleType(input);
+        final result = roleType.canLoginOnBehalf;
         expect(result, true);
       },
     );
 
     test(
-      'should return false when check can proxy login with Client User role',
+      'should return false when check can proxy login with External Sales Rep role',
       () async {
-        const input = 'Client User';
-        final roleName = RoleName(input);
-        final result = roleName.canLoginOnBehalf;
+        const input = 'external_sales_rep';
+        final roleType = RoleType(input);
+        final result = roleType.canLoginOnBehalf;
         expect(result, false);
+      },
+    );
+
+    test(
+      'should return salesRep when check login user type with Internal Sales Rep role',
+      () async {
+        const input = 'internal_sales_rep';
+        final roleType = RoleType(input);
+        final result = roleType.loginUserType;
+        expect(result, 'salesRep');
+      },
+    );
+
+    test(
+      'should return salesRep when check login user type with External Sales Rep role',
+      () async {
+        const input = 'external_sales_rep';
+        final roleType = RoleType(input);
+        final result = roleType.loginUserType;
+        expect(result, 'salesRep');
+      },
+    );
+
+    test(
+      'should return client when check login user type with Client user role',
+      () async {
+        const input = 'client_user';
+        final roleType = RoleType(input);
+        final result = roleType.loginUserType;
+        expect(result, 'client');
+      },
+    );
+
+    test(
+      'should return MRXR when check purchase order type with Internal Sales Rep role',
+      () async {
+        const input = 'internal_sales_rep';
+        final roleType = RoleType(input);
+        final result = roleType.purchaseOrderType;
+        expect(result, 'MRXR');
+      },
+    );
+
+    test(
+      'should return MRXP when check purchase order type with External Sales Rep role',
+      () async {
+        const input = 'external_sales_rep';
+        final roleType = RoleType(input);
+        final result = roleType.purchaseOrderType;
+        expect(result, 'MRXP');
+      },
+    );
+
+    test(
+      'should return MRXC when check purchase order type with Client Admin role',
+      () async {
+        const input = 'client_admin';
+        final roleType = RoleType(input);
+        final result = roleType.purchaseOrderType;
+        expect(result, 'MRXC');
       },
     );
   });

@@ -2,13 +2,14 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/value/value_transformers.dart';
+import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 
 class CustomerCode extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
   factory CustomerCode(String input) {
-    return CustomerCode._(Right(input));
+    return CustomerCode._(validateStringNotEmpty(input));
   }
 
   const CustomerCode._(this.value);
@@ -19,7 +20,7 @@ class SalesOrg extends ValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory SalesOrg(String input) {
-    return SalesOrg._(Right(input.trim()));
+    return SalesOrg._(validateStringNotEmpty(input.trim()));
   }
 
   String get buName {
@@ -30,22 +31,34 @@ class SalesOrg extends ValueObject<String> {
     return '${value.getOrElse(() => '')} - $buName';
   }
 
+  String get country {
+    return salesOrgCountry(value.getOrElse(() => ''));
+  }
+
   const SalesOrg._(this.value);
 }
 
-class RoleName extends ValueObject<String> {
+class RoleType extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  factory RoleName(String input) {
-    return RoleName._(Right(input));
+  factory RoleType(String input) {
+    return RoleType._(validateStringNotEmpty(input));
   }
 
   bool get canLoginOnBehalf {
-    return canProxyLogin(value.getOrElse(() => ''));
+    return isAdminRole(value.getOrElse(() => ''));
   }
 
-  const RoleName._(this.value);
+  String get loginUserType {
+    return userType(value.getOrElse(() => ''));
+  }
+
+  String get purchaseOrderType {
+    return orderType(value.getOrElse(() => ''));
+  }
+
+  const RoleType._(this.value);
 }
 
 class Currency extends ValueObject<String> {
@@ -53,7 +66,7 @@ class Currency extends ValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory Currency(String input) {
-    return Currency._(Right(input));
+    return Currency._(validateStringNotEmpty(input));
   }
 
   String get symbol {

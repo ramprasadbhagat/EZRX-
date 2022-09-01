@@ -17,7 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Role {
   String get id => throw _privateConstructorUsedError;
-  RoleName get name => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  RoleType get type => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -28,7 +29,7 @@ mixin _$Role {
 abstract class $RoleCopyWith<$Res> {
   factory $RoleCopyWith(Role value, $Res Function(Role) then) =
       _$RoleCopyWithImpl<$Res>;
-  $Res call({String id, RoleName name, String description});
+  $Res call({String id, String name, RoleType type, String description});
 }
 
 /// @nodoc
@@ -43,6 +44,7 @@ class _$RoleCopyWithImpl<$Res> implements $RoleCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
+    Object? type = freezed,
     Object? description = freezed,
   }) {
     return _then(_value.copyWith(
@@ -53,7 +55,11 @@ class _$RoleCopyWithImpl<$Res> implements $RoleCopyWith<$Res> {
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as RoleName,
+              as String,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as RoleType,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -67,7 +73,7 @@ abstract class _$$_RoleCopyWith<$Res> implements $RoleCopyWith<$Res> {
   factory _$$_RoleCopyWith(_$_Role value, $Res Function(_$_Role) then) =
       __$$_RoleCopyWithImpl<$Res>;
   @override
-  $Res call({String id, RoleName name, String description});
+  $Res call({String id, String name, RoleType type, String description});
 }
 
 /// @nodoc
@@ -83,6 +89,7 @@ class __$$_RoleCopyWithImpl<$Res> extends _$RoleCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
+    Object? type = freezed,
     Object? description = freezed,
   }) {
     return _then(_$_Role(
@@ -93,7 +100,11 @@ class __$$_RoleCopyWithImpl<$Res> extends _$RoleCopyWithImpl<$Res>
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as RoleName,
+              as String,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as RoleType,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -106,19 +117,24 @@ class __$$_RoleCopyWithImpl<$Res> extends _$RoleCopyWithImpl<$Res>
 
 class _$_Role extends _Role {
   const _$_Role(
-      {required this.id, required this.name, required this.description})
+      {required this.id,
+      required this.name,
+      required this.type,
+      required this.description})
       : super._();
 
   @override
   final String id;
   @override
-  final RoleName name;
+  final String name;
+  @override
+  final RoleType type;
   @override
   final String description;
 
   @override
   String toString() {
-    return 'Role(id: $id, name: $name, description: $description)';
+    return 'Role(id: $id, name: $name, type: $type, description: $description)';
   }
 
   @override
@@ -128,6 +144,7 @@ class _$_Role extends _Role {
             other is _$_Role &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality()
                 .equals(other.description, description));
   }
@@ -137,6 +154,7 @@ class _$_Role extends _Role {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(type),
       const DeepCollectionEquality().hash(description));
 
   @JsonKey(ignore: true)
@@ -148,14 +166,17 @@ class _$_Role extends _Role {
 abstract class _Role extends Role {
   const factory _Role(
       {required final String id,
-      required final RoleName name,
+      required final String name,
+      required final RoleType type,
       required final String description}) = _$_Role;
   const _Role._() : super._();
 
   @override
   String get id;
   @override
-  RoleName get name;
+  String get name;
+  @override
+  RoleType get type;
   @override
   String get description;
   @override

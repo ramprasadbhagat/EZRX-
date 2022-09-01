@@ -1,3 +1,5 @@
+import 'package:ezrxmobile/domain/account/entities/setting_aup.dart';
+import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -21,6 +23,8 @@ class User with _$User {
     required CustomerCode customerCode,
     required List<SalesOrganisation> userSalesOrganisations,
     required Settings settings,
+    required SettingTc settingTc,
+    required SettingAup settingAup,
   }) = _User;
 
   factory User.empty() => User(
@@ -28,13 +32,21 @@ class User with _$User {
         username: Username(''),
         email: EmailAddress(''),
         fullName: const FullName(firstName: '', lastName: ''),
-        role: Role(id: '', name: RoleName(''), description: ''),
+        role: Role(id: '', name: '', type: RoleType(''), description: ''),
         customerCode: CustomerCode(''),
         userSalesOrganisations: <SalesOrganisation>[],
         settings: const Settings(
           emailNotifications: false,
           mobileNotifications: false,
           languagePreference: '',
+        ),
+        settingTc: const SettingTc(
+          acceptTC: false,
+          acceptTCTimestamp: '',
+        ),
+        settingAup: const SettingAup(
+          acceptAUP: false,
+          acceptAUPTC: '',
         ),
       );
 }

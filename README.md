@@ -1,4 +1,7 @@
 # ezrxmobile
+This is second generation of eZRx mobile app created by Domain-Driven Design Architecture. 
+To know more about Domain Driven Design in flutter please visit:
+https://resocoder.com/2020/03/09/flutter-firebase-ddd-course-1-domain-driven-design-principles/
 
 ## Require
 - [Vscode](https://code.visualstudio.com/)

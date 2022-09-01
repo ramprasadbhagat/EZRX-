@@ -18,6 +18,7 @@ class UserQueryMutation {
           {
             id,
             name,
+            type,
             description
           },
           initialLogin,
@@ -105,6 +106,63 @@ class UserQueryMutation {
           createdAt,
           updatedAt,
           enableOrderType
+        }
+      }
+    ''';
+  }
+
+  String getAnnouncementsQuery() {
+    return '''
+    {
+      announcements {
+        id
+        active
+        description
+        startTime
+        endTime
+        type
+      }
+    }
+    ''';
+  }
+
+  String updateUAPQuery(String userId, bool acceptAUP) {
+    return '''
+      mutation updateUserMutation(\$input: updateUserInput!) {
+        updateUser(input: \$input) {
+          user {
+              username
+              email
+              provider
+              role{
+                id
+              }
+              customerCode
+              shipToAddr
+              mobileNumber
+              acceptMobileTC
+          }
+        }
+      }
+    ''';
+  }
+
+  String updateUserAcceptMobileTC() {
+    return '''
+      mutation updateUserMutation(\$input: updateUserInput!) {
+        updateUser(input: \$input) {
+          user {
+              username
+              email
+              provider
+              role{
+                id
+              }
+              customerCode
+              shipToAddr
+              mobileNumber
+              acceptMobileTC
+          }
         }
       }
     ''';

@@ -44,6 +44,14 @@ mixin _$UserDto {
   bool get mobileNotifications => throw _privateConstructorUsedError;
   @JsonKey(name: 'languagePreference')
   String get languagePreference => throw _privateConstructorUsedError;
+  @JsonKey(name: 'acceptTC')
+  bool get acceptTC => throw _privateConstructorUsedError;
+  @JsonKey(name: 'acceptTCTimestamp')
+  String get acceptTCTimestamp => throw _privateConstructorUsedError;
+  @JsonKey(name: 'acceptAUP')
+  bool get acceptAUP => throw _privateConstructorUsedError;
+  @JsonKey(name: 'acceptAUPTC')
+  String get acceptAUPTC => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -77,7 +85,15 @@ abstract class $UserDtoCopyWith<$Res> {
       @JsonKey(name: 'mobileNotifications')
           bool mobileNotifications,
       @JsonKey(name: 'languagePreference')
-          String languagePreference});
+          String languagePreference,
+      @JsonKey(name: 'acceptTC')
+          bool acceptTC,
+      @JsonKey(name: 'acceptTCTimestamp')
+          String acceptTCTimestamp,
+      @JsonKey(name: 'acceptAUP')
+          bool acceptAUP,
+      @JsonKey(name: 'acceptAUPTC')
+          String acceptAUPTC});
 
   $RoleDtoCopyWith<$Res> get role;
 }
@@ -103,6 +119,10 @@ class _$UserDtoCopyWithImpl<$Res> implements $UserDtoCopyWith<$Res> {
     Object? emailNotifications = freezed,
     Object? mobileNotifications = freezed,
     Object? languagePreference = freezed,
+    Object? acceptTC = freezed,
+    Object? acceptTCTimestamp = freezed,
+    Object? acceptAUP = freezed,
+    Object? acceptAUPTC = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -149,6 +169,22 @@ class _$UserDtoCopyWithImpl<$Res> implements $UserDtoCopyWith<$Res> {
           ? _value.languagePreference
           : languagePreference // ignore: cast_nullable_to_non_nullable
               as String,
+      acceptTC: acceptTC == freezed
+          ? _value.acceptTC
+          : acceptTC // ignore: cast_nullable_to_non_nullable
+              as bool,
+      acceptTCTimestamp: acceptTCTimestamp == freezed
+          ? _value.acceptTCTimestamp
+          : acceptTCTimestamp // ignore: cast_nullable_to_non_nullable
+              as String,
+      acceptAUP: acceptAUP == freezed
+          ? _value.acceptAUP
+          : acceptAUP // ignore: cast_nullable_to_non_nullable
+              as bool,
+      acceptAUPTC: acceptAUPTC == freezed
+          ? _value.acceptAUPTC
+          : acceptAUPTC // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -189,7 +225,15 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       @JsonKey(name: 'mobileNotifications')
           bool mobileNotifications,
       @JsonKey(name: 'languagePreference')
-          String languagePreference});
+          String languagePreference,
+      @JsonKey(name: 'acceptTC')
+          bool acceptTC,
+      @JsonKey(name: 'acceptTCTimestamp')
+          String acceptTCTimestamp,
+      @JsonKey(name: 'acceptAUP')
+          bool acceptAUP,
+      @JsonKey(name: 'acceptAUPTC')
+          String acceptAUPTC});
 
   @override
   $RoleDtoCopyWith<$Res> get role;
@@ -217,6 +261,10 @@ class __$$_UserDtoCopyWithImpl<$Res> extends _$UserDtoCopyWithImpl<$Res>
     Object? emailNotifications = freezed,
     Object? mobileNotifications = freezed,
     Object? languagePreference = freezed,
+    Object? acceptTC = freezed,
+    Object? acceptTCTimestamp = freezed,
+    Object? acceptAUP = freezed,
+    Object? acceptAUPTC = freezed,
   }) {
     return _then(_$_UserDto(
       id: id == freezed
@@ -263,6 +311,22 @@ class __$$_UserDtoCopyWithImpl<$Res> extends _$UserDtoCopyWithImpl<$Res>
           ? _value.languagePreference
           : languagePreference // ignore: cast_nullable_to_non_nullable
               as String,
+      acceptTC: acceptTC == freezed
+          ? _value.acceptTC
+          : acceptTC // ignore: cast_nullable_to_non_nullable
+              as bool,
+      acceptTCTimestamp: acceptTCTimestamp == freezed
+          ? _value.acceptTCTimestamp
+          : acceptTCTimestamp // ignore: cast_nullable_to_non_nullable
+              as String,
+      acceptAUP: acceptAUP == freezed
+          ? _value.acceptAUP
+          : acceptAUP // ignore: cast_nullable_to_non_nullable
+              as bool,
+      acceptAUPTC: acceptAUPTC == freezed
+          ? _value.acceptAUPTC
+          : acceptAUPTC // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -293,7 +357,15 @@ class _$_UserDto extends _UserDto {
       @JsonKey(name: 'mobileNotifications')
           required this.mobileNotifications,
       @JsonKey(name: 'languagePreference')
-          required this.languagePreference})
+          required this.languagePreference,
+      @JsonKey(name: 'acceptTC')
+          required this.acceptTC,
+      @JsonKey(name: 'acceptTCTimestamp')
+          required this.acceptTCTimestamp,
+      @JsonKey(name: 'acceptAUP')
+          required this.acceptAUP,
+      @JsonKey(name: 'acceptAUPTC')
+          required this.acceptAUPTC})
       : _userSalesOrganisations = userSalesOrganisations,
         super._();
 
@@ -339,10 +411,22 @@ class _$_UserDto extends _UserDto {
   @override
   @JsonKey(name: 'languagePreference')
   final String languagePreference;
+  @override
+  @JsonKey(name: 'acceptTC')
+  final bool acceptTC;
+  @override
+  @JsonKey(name: 'acceptTCTimestamp')
+  final String acceptTCTimestamp;
+  @override
+  @JsonKey(name: 'acceptAUP')
+  final bool acceptAUP;
+  @override
+  @JsonKey(name: 'acceptAUPTC')
+  final String acceptAUPTC;
 
   @override
   String toString() {
-    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference)';
+    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, acceptTC: $acceptTC, acceptTCTimestamp: $acceptTCTimestamp, acceptAUP: $acceptAUP, acceptAUPTC: $acceptAUPTC)';
   }
 
   @override
@@ -365,7 +449,13 @@ class _$_UserDto extends _UserDto {
             const DeepCollectionEquality()
                 .equals(other.mobileNotifications, mobileNotifications) &&
             const DeepCollectionEquality()
-                .equals(other.languagePreference, languagePreference));
+                .equals(other.languagePreference, languagePreference) &&
+            const DeepCollectionEquality().equals(other.acceptTC, acceptTC) &&
+            const DeepCollectionEquality()
+                .equals(other.acceptTCTimestamp, acceptTCTimestamp) &&
+            const DeepCollectionEquality().equals(other.acceptAUP, acceptAUP) &&
+            const DeepCollectionEquality()
+                .equals(other.acceptAUPTC, acceptAUPTC));
   }
 
   @JsonKey(ignore: true)
@@ -382,7 +472,11 @@ class _$_UserDto extends _UserDto {
       const DeepCollectionEquality().hash(_userSalesOrganisations),
       const DeepCollectionEquality().hash(emailNotifications),
       const DeepCollectionEquality().hash(mobileNotifications),
-      const DeepCollectionEquality().hash(languagePreference));
+      const DeepCollectionEquality().hash(languagePreference),
+      const DeepCollectionEquality().hash(acceptTC),
+      const DeepCollectionEquality().hash(acceptTCTimestamp),
+      const DeepCollectionEquality().hash(acceptAUP),
+      const DeepCollectionEquality().hash(acceptAUPTC));
 
   @JsonKey(ignore: true)
   @override
@@ -419,7 +513,15 @@ abstract class _UserDto extends UserDto {
       @JsonKey(name: 'mobileNotifications')
           required final bool mobileNotifications,
       @JsonKey(name: 'languagePreference')
-          required final String languagePreference}) = _$_UserDto;
+          required final String languagePreference,
+      @JsonKey(name: 'acceptTC')
+          required final bool acceptTC,
+      @JsonKey(name: 'acceptTCTimestamp')
+          required final String acceptTCTimestamp,
+      @JsonKey(name: 'acceptAUP')
+          required final bool acceptAUP,
+      @JsonKey(name: 'acceptAUPTC')
+          required final String acceptAUPTC}) = _$_UserDto;
   const _UserDto._() : super._();
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$_UserDto.fromJson;
@@ -458,6 +560,18 @@ abstract class _UserDto extends UserDto {
   @override
   @JsonKey(name: 'languagePreference')
   String get languagePreference;
+  @override
+  @JsonKey(name: 'acceptTC')
+  bool get acceptTC;
+  @override
+  @JsonKey(name: 'acceptTCTimestamp')
+  String get acceptTCTimestamp;
+  @override
+  @JsonKey(name: 'acceptAUP')
+  bool get acceptAUP;
+  @override
+  @JsonKey(name: 'acceptAUPTC')
+  String get acceptAUPTC;
   @override
   @JsonKey(ignore: true)
   _$$_UserDtoCopyWith<_$_UserDto> get copyWith =>

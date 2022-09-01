@@ -25,21 +25,18 @@ class LoginOnBehalfPage extends StatelessWidget {
               () {},
               (either) => either.fold(
                 (failure) {
-                  showSnackBar(
-                    context: context,
-                    message: failure.map(
-                      other: (other) => other.message,
-                      serverError: (serverError) =>
-                          '${'Server Error'.tr()} : ${serverError.message}',
-                      poorConnection: (_) => 'Poor Internet connection'.tr(),
-                      serverTimeout: (_) => 'Server time out'.tr(),
-                      invalidEmailAndPasswordCombination: (_) =>
-                          'Incorrect username and/or password.'.tr(),
-                      accountLocked: (_) => 'Account is Locked'.tr(),
-                      accountExpired: (_) => 'Account is Expired'.tr(),
-                      tokenExpired: (_) => 'Session token is Expired'.tr(),
-                    ),
+                  final failureMessage = failure.map(
+                    other: (other) => other.message,
+                    serverError: (serverError) => serverError.message,
+                    poorConnection: (_) => 'Poor Internet connection',
+                    serverTimeout: (_) => 'Server time out',
+                    invalidEmailAndPasswordCombination: (_) =>
+                        'Incorrect username and/or password.',
+                    accountLocked: (_) => 'Account is Locked',
+                    accountExpired: (_) => 'Account is Expired',
+                    tokenExpired: (_) => 'Session token is Expired',
                   );
+                  showSnackBar(context: context, message: failureMessage.tr());
                 },
                 (_) {
                   context.read<UserBloc>().add(const UserEvent.fetch());

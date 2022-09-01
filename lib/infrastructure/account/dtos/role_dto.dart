@@ -12,19 +12,26 @@ class RoleDto with _$RoleDto {
   const factory RoleDto({
     @JsonKey(name: 'id') required String id,
     @JsonKey(name: 'name') required String name,
+    @JsonKey(name: 'type') required String type,
     @JsonKey(name: 'description') required String description,
   }) = _RoleDto;
 
   factory RoleDto.fromDomain(Role role) {
     return RoleDto(
       id: role.id,
-      name: role.name.getOrCrash(),
+      name: role.name,
+      type: role.type.getOrCrash(),
       description: role.description,
     );
   }
 
   Role toDomain() {
-    return Role(id: id, name: RoleName(name), description: description);
+    return Role(
+      id: id,
+      name: name,
+      type: RoleType(type),
+      description: description,
+    );
   }
 
   factory RoleDto.fromJson(Map<String, dynamic> json) =>

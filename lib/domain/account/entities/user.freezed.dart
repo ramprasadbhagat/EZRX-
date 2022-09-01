@@ -25,6 +25,8 @@ mixin _$User {
   List<SalesOrganisation> get userSalesOrganisations =>
       throw _privateConstructorUsedError;
   Settings get settings => throw _privateConstructorUsedError;
+  SettingTc get settingTc => throw _privateConstructorUsedError;
+  SettingAup get settingAup => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
@@ -42,11 +44,15 @@ abstract class $UserCopyWith<$Res> {
       Role role,
       CustomerCode customerCode,
       List<SalesOrganisation> userSalesOrganisations,
-      Settings settings});
+      Settings settings,
+      SettingTc settingTc,
+      SettingAup settingAup});
 
   $FullNameCopyWith<$Res> get fullName;
   $RoleCopyWith<$Res> get role;
   $SettingsCopyWith<$Res> get settings;
+  $SettingTcCopyWith<$Res> get settingTc;
+  $SettingAupCopyWith<$Res> get settingAup;
 }
 
 /// @nodoc
@@ -67,6 +73,8 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? customerCode = freezed,
     Object? userSalesOrganisations = freezed,
     Object? settings = freezed,
+    Object? settingTc = freezed,
+    Object? settingAup = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -101,6 +109,14 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as Settings,
+      settingTc: settingTc == freezed
+          ? _value.settingTc
+          : settingTc // ignore: cast_nullable_to_non_nullable
+              as SettingTc,
+      settingAup: settingAup == freezed
+          ? _value.settingAup
+          : settingAup // ignore: cast_nullable_to_non_nullable
+              as SettingAup,
     ));
   }
 
@@ -124,6 +140,20 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       return _then(_value.copyWith(settings: value));
     });
   }
+
+  @override
+  $SettingTcCopyWith<$Res> get settingTc {
+    return $SettingTcCopyWith<$Res>(_value.settingTc, (value) {
+      return _then(_value.copyWith(settingTc: value));
+    });
+  }
+
+  @override
+  $SettingAupCopyWith<$Res> get settingAup {
+    return $SettingAupCopyWith<$Res>(_value.settingAup, (value) {
+      return _then(_value.copyWith(settingAup: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -139,7 +169,9 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       Role role,
       CustomerCode customerCode,
       List<SalesOrganisation> userSalesOrganisations,
-      Settings settings});
+      Settings settings,
+      SettingTc settingTc,
+      SettingAup settingAup});
 
   @override
   $FullNameCopyWith<$Res> get fullName;
@@ -147,6 +179,10 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   $RoleCopyWith<$Res> get role;
   @override
   $SettingsCopyWith<$Res> get settings;
+  @override
+  $SettingTcCopyWith<$Res> get settingTc;
+  @override
+  $SettingAupCopyWith<$Res> get settingAup;
 }
 
 /// @nodoc
@@ -168,6 +204,8 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? customerCode = freezed,
     Object? userSalesOrganisations = freezed,
     Object? settings = freezed,
+    Object? settingTc = freezed,
+    Object? settingAup = freezed,
   }) {
     return _then(_$_User(
       id: id == freezed
@@ -202,6 +240,14 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as Settings,
+      settingTc: settingTc == freezed
+          ? _value.settingTc
+          : settingTc // ignore: cast_nullable_to_non_nullable
+              as SettingTc,
+      settingAup: settingAup == freezed
+          ? _value.settingAup
+          : settingAup // ignore: cast_nullable_to_non_nullable
+              as SettingAup,
     ));
   }
 }
@@ -217,7 +263,9 @@ class _$_User extends _User {
       required this.role,
       required this.customerCode,
       required final List<SalesOrganisation> userSalesOrganisations,
-      required this.settings})
+      required this.settings,
+      required this.settingTc,
+      required this.settingAup})
       : _userSalesOrganisations = userSalesOrganisations,
         super._();
 
@@ -242,10 +290,14 @@ class _$_User extends _User {
 
   @override
   final Settings settings;
+  @override
+  final SettingTc settingTc;
+  @override
+  final SettingAup settingAup;
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, settings: $settings)';
+    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, settings: $settings, settingTc: $settingTc, settingAup: $settingAup)';
   }
 
   @override
@@ -262,7 +314,10 @@ class _$_User extends _User {
                 .equals(other.customerCode, customerCode) &&
             const DeepCollectionEquality().equals(
                 other._userSalesOrganisations, _userSalesOrganisations) &&
-            const DeepCollectionEquality().equals(other.settings, settings));
+            const DeepCollectionEquality().equals(other.settings, settings) &&
+            const DeepCollectionEquality().equals(other.settingTc, settingTc) &&
+            const DeepCollectionEquality()
+                .equals(other.settingAup, settingAup));
   }
 
   @override
@@ -275,7 +330,9 @@ class _$_User extends _User {
       const DeepCollectionEquality().hash(role),
       const DeepCollectionEquality().hash(customerCode),
       const DeepCollectionEquality().hash(_userSalesOrganisations),
-      const DeepCollectionEquality().hash(settings));
+      const DeepCollectionEquality().hash(settings),
+      const DeepCollectionEquality().hash(settingTc),
+      const DeepCollectionEquality().hash(settingAup));
 
   @JsonKey(ignore: true)
   @override
@@ -292,7 +349,9 @@ abstract class _User extends User {
       required final Role role,
       required final CustomerCode customerCode,
       required final List<SalesOrganisation> userSalesOrganisations,
-      required final Settings settings}) = _$_User;
+      required final Settings settings,
+      required final SettingTc settingTc,
+      required final SettingAup settingAup}) = _$_User;
   const _User._() : super._();
 
   @override
@@ -311,6 +370,10 @@ abstract class _User extends User {
   List<SalesOrganisation> get userSalesOrganisations;
   @override
   Settings get settings;
+  @override
+  SettingTc get settingTc;
+  @override
+  SettingAup get settingAup;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

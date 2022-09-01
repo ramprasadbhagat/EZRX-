@@ -9,13 +9,15 @@ class Role with _$Role {
 
   const factory Role({
     required String id,
-    required RoleName name,
+    required String name,
+    required RoleType type,
     required String description,
   }) = _Role;
 
   factory Role.empty() => Role(
         id: '',
-        name: RoleName(''),
+        name: '',
+        type: RoleType(''),
         description: '',
       );
 }

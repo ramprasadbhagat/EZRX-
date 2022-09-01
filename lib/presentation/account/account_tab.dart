@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
@@ -52,17 +53,17 @@ class _ProfileTile extends StatelessWidget {
               () {},
               (either) => either.fold(
                 (failure) {
-                  showSnackBar(
-                    context: context,
-                    message: failure.map(
-                      other: (other) => other.message,
-                      serverError: (serverError) =>
-                          '${'Server Error'.tr()} : ${serverError.message}',
-                      poorConnection: (_) => 'Poor Internet connection'.tr(),
-                      serverTimeout: (_) => 'Server time out'.tr(),
-                      userNotFound: (_) => 'User not found.'.tr(),
-                    ),
+                  final failureMessage = failure.map(
+                    other: (other) => other.message,
+                    serverError: (serverError) => serverError.message,
+                    poorConnection: (_) => 'Poor Internet connection',
+                    serverTimeout: (_) => 'Server time out',
+                    userNotFound: (_) => 'User not found.',
                   );
+                  showSnackBar(context: context, message: failureMessage.tr());
+                  if (failureMessage == 'authentication failed') {
+                    context.read<AuthBloc>().add(const AuthEvent.logout());
+                  }
                 },
                 (_) {},
               ),
@@ -150,7 +151,7 @@ class _LoginOnBehalfTile extends StatelessWidget {
       buildWhen: (previous, current) => previous.user != current.user,
       builder: (context, state) {
         return Visibility(
-          visible: state.user.role.name.canLoginOnBehalf,
+          visible: state.user.role.type.canLoginOnBehalf,
           child: ListTile(
             key: const Key('loginOnBehalfTile'),
             leading: const Icon(Icons.person_outline),

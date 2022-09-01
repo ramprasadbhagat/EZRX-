@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
@@ -23,16 +24,16 @@ class HomeBanner extends StatelessWidget {
           () {},
           (either) => either.fold(
             (failure) {
-              showSnackBar(
-                context: context,
-                message: failure.map(
-                  other: (other) => other.message,
-                  serverError: (serverError) =>
-                      '${'Server Error'.tr()} : ${serverError.message}',
-                  poorConnection: (_) => 'Poor Internet connection'.tr(),
-                  serverTimeout: (_) => 'Server time out'.tr(),
-                ),
+              final failureMessage = failure.map(
+                other: (other) => other.message,
+                serverError: (serverError) => serverError.message,
+                poorConnection: (_) => 'Poor Internet connection',
+                serverTimeout: (_) => 'Server time out',
               );
+              showSnackBar(context: context, message: failureMessage.tr());
+              if (failureMessage == 'authentication failed') {
+                context.read<AuthBloc>().add(const AuthEvent.logout());
+              }
             },
             (_) {},
           ),

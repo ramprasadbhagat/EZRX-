@@ -1,3 +1,5 @@
+import 'package:ezrxmobile/domain/account/entities/setting_aup.dart';
+import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -30,6 +32,10 @@ class UserDto with _$UserDto {
     @JsonKey(name: 'emailNotifications') required bool emailNotifications,
     @JsonKey(name: 'mobileNotifications') required bool mobileNotifications,
     @JsonKey(name: 'languagePreference') required String languagePreference,
+    @JsonKey(name: 'acceptTC') required bool acceptTC,
+    @JsonKey(name: 'acceptTCTimestamp') required String acceptTCTimestamp,
+    @JsonKey(name: 'acceptAUP') required bool acceptAUP,
+    @JsonKey(name: 'acceptAUPTC') required String acceptAUPTC,
   }) = _UserDto;
 
   factory UserDto.fromDomain(User user) {
@@ -47,6 +53,10 @@ class UserDto with _$UserDto {
       emailNotifications: user.settings.emailNotifications,
       mobileNotifications: user.settings.mobileNotifications,
       languagePreference: user.settings.languagePreference,
+      acceptTC: user.settingTc.acceptTC,
+      acceptTCTimestamp: user.settingTc.acceptTCTimestamp,
+      acceptAUP: user.settingAup.acceptAUP,
+      acceptAUPTC: user.settingAup.acceptAUPTC,
     );
   }
 
@@ -58,7 +68,8 @@ class UserDto with _$UserDto {
       fullName: FullName(firstName: firstName, lastName: lastName),
       role: Role(
         id: role.id,
-        name: RoleName(role.name),
+        name: role.name,
+        type: RoleType(role.type),
         description: role.description,
       ),
       customerCode: CustomerCode(customerCode),
@@ -69,6 +80,14 @@ class UserDto with _$UserDto {
         emailNotifications: emailNotifications,
         mobileNotifications: mobileNotifications,
         languagePreference: languagePreference,
+      ),
+      settingTc: SettingTc(
+        acceptTC: acceptTC,
+        acceptTCTimestamp: acceptTCTimestamp,
+      ),
+      settingAup: SettingAup(
+        acceptAUP: acceptAUP,
+        acceptAUPTC: acceptAUPTC,
       ),
     );
   }

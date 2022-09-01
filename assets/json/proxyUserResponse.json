@@ -10,6 +10,7 @@
           "role":{
              "id":"8",
              "name":"Internal Sales Rep",
+             "type": "internal_sales_rep",
              "description":"Internal Sales Representative"
           },
           "initialLogin":true,

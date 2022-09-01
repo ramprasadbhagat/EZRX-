@@ -51,14 +51,7 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 4));
 
       tester.printToConsole('Redirect to home page tabbar');
-      expect(
-        find.byWidgetPredicate(
-          (widget) =>
-              widget is BottomNavigationBar &&
-              widget.key == const Key('homeTabbar'),
-        ),
-        findsOneWidget,
-      );
+      expect(find.byKey(const Key('homeTabbar')), findsOneWidget);
       //============================================================
       //  Banner Test
       //

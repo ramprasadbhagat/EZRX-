@@ -19,6 +19,10 @@ _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
       emailNotifications: json['emailNotifications'] as bool,
       mobileNotifications: json['mobileNotifications'] as bool,
       languagePreference: json['languagePreference'] as String,
+      acceptTC: json['acceptTC'] as bool,
+      acceptTCTimestamp: json['acceptTCTimestamp'] as String,
+      acceptAUP: json['acceptAUP'] as bool,
+      acceptAUPTC: json['acceptAUPTC'] as String,
     );
 
 Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
@@ -35,4 +39,8 @@ Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
       'emailNotifications': instance.emailNotifications,
       'mobileNotifications': instance.mobileNotifications,
       'languagePreference': instance.languagePreference,
+      'acceptTC': instance.acceptTC,
+      'acceptTCTimestamp': instance.acceptTCTimestamp,
+      'acceptAUP': instance.acceptAUP,
+      'acceptAUPTC': instance.acceptAUPTC,
     };

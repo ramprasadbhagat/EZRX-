@@ -55,6 +55,11 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => PushNotificationService(appRouter: locator<AppRouter>()),
   );
+
+  locator.registerLazySingleton(
+    () => OktaLoginServices(config: locator<Config>()),
+  );
+
   locator.registerLazySingleton(
     () => DynamicLinksService(
       config: locator<Config>(),
@@ -80,6 +85,10 @@ void setupLocator() {
     () => AuthInterceptor(
       tokenStorage: locator<TokenStorage>(),
       packageInfoService: locator<PackageInfoService>(),
+      oktaLoginServices: locator<OktaLoginServices>(),
+      config: locator<Config>(),
+      authQueryMutation: locator<AuthQueryMutation>(),
+      pushNotificationService: locator<PushNotificationService>(),
     ),
   );
   locator.registerLazySingleton(
@@ -95,10 +104,6 @@ void setupLocator() {
         locator<PerformanceInterceptor>(),
       ],
     ),
-  );
-
-  locator.registerLazySingleton(
-    () => OktaLoginServices(config: locator<Config>()),
   );
 
   locator.registerLazySingleton(() => DataSourceExceptionHandler());
