@@ -11,6 +11,7 @@ class PerformanceInterceptor extends Interceptor {
     RequestInterceptorHandler handler,
   ) async {
     await performanceMonitorService.networkOnRequest(options);
+
     return super.onRequest(options, handler);
   }
 
@@ -20,6 +21,7 @@ class PerformanceInterceptor extends Interceptor {
     ResponseInterceptorHandler handler,
   ) async {
     await performanceMonitorService.networkOnResponse(response);
+
     return super.onResponse(response, handler);
   }
 
@@ -29,6 +31,7 @@ class PerformanceInterceptor extends Interceptor {
     ErrorInterceptorHandler handler,
   ) async {
     await performanceMonitorService.networkOnError(err);
+
     return super.onError(err, handler);
   }
 }

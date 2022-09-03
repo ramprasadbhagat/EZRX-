@@ -110,7 +110,7 @@ class _SalesOrganisationListConverter
   @override
   Map<String, dynamic> toJson(List<SalesOrganisationDto> object) {
     return {
-      'value': object.map((e) => {'salesOrg': e}).toList()
+      'value': object.map((e) => {'salesOrg': e}).toList(),
     };
   }
 }

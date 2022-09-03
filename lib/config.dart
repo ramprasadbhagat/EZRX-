@@ -58,7 +58,7 @@ class Config {
           'redirect_uri': 'com.oktapreview.zuellig:/callback',
           'end_session_redirect_uri': 'com.oktapreview.zuellig:/',
           'discovery_uri': 'https://zuellig.oktapreview.com/',
-          'scopes': ['openid', 'profile', 'offline_access']
+          'scopes': ['openid', 'profile', 'offline_access'],
         };
       case Flavor.prod:
       default:
@@ -67,7 +67,7 @@ class Config {
           'redirect_uri': 'com.zuelligpharma.ezlogin:/callback',
           'end_session_redirect_uri': 'com.zuelligpharma.ezlogin:/',
           'discovery_uri': 'https://ezlogin.zuelligpharma.com/',
-          'scopes': ['openid', 'profile', 'offline_access']
+          'scopes': ['openid', 'profile', 'offline_access'],
         };
     }
   }

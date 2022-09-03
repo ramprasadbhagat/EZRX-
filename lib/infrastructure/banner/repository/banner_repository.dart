@@ -33,6 +33,7 @@ class BannerRepository implements IBannerRepository {
           isPreSalesOrg: isPreSalesOrg,
           salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         );
+
         return Right(loginv2);
       } on MockException catch (e) {
         return Left(BannerFailure.other(e.message));
@@ -43,6 +44,7 @@ class BannerRepository implements IBannerRepository {
         isPreSalesOrg: isPreSalesOrg,
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
       );
+
       return Right(banner);
     } on CacheException catch (e) {
       return Left(BannerFailure.other(e.message));

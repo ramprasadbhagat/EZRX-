@@ -5,39 +5,30 @@ Either<ValueFailure<String>, String> validateMaxStringLength(
   String input,
   int maxLength,
 ) {
-  if (input.length <= maxLength) {
-    return right(input);
-  } else {
-    return left(
-      ValueFailure.exceedingLength(failedValue: input, max: maxLength),
-    );
-  }
+  return input.length <= maxLength
+      ? right(input)
+      : left(ValueFailure.exceedingLength(failedValue: input, max: maxLength));
 }
 
 Either<ValueFailure<String>, String> validateStringNotEmpty(String input) {
-  if (input.isNotEmpty) {
-    return right(input);
-  } else {
-    return left(ValueFailure.empty(failedValue: input));
-  }
+  return input.isNotEmpty
+      ? right(input)
+      : left(ValueFailure.empty(failedValue: input));
 }
 
 Either<ValueFailure<String>, String> validateSingleLine(String input) {
-  if (input.contains('\n')) {
-    return left(ValueFailure.multiline(failedValue: input));
-  } else {
-    return right(input);
-  }
+  return input.contains('\n')
+      ? left(ValueFailure.multiline(failedValue: input))
+      : right(input);
 }
 
 Either<ValueFailure<String>, String> validateEmailAddress(String input) {
   const emailRegex =
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
-  if (RegExp(emailRegex).hasMatch(input)) {
-    return right(input);
-  } else {
-    return left(ValueFailure.invalidEmail(failedValue: input));
-  }
+
+  return RegExp(emailRegex).hasMatch(input)
+      ? right(input)
+      : left(ValueFailure.invalidEmail(failedValue: input));
 }
 
 Either<ValueFailure<String>, String> validatePassword(String input) {
@@ -45,9 +36,8 @@ Either<ValueFailure<String>, String> validatePassword(String input) {
   // one special character and should be 10-20 characters long
   const passwordRegex =
       r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{10,20}$';
-  if (RegExp(passwordRegex).hasMatch(input)) {
-    return right(input);
-  } else {
-    return left(ValueFailure.passwordNotMatchRequirements(failedValue: input));
-  }
+
+  return RegExp(passwordRegex).hasMatch(input)
+      ? right(input)
+      : left(ValueFailure.passwordNotMatchRequirements(failedValue: input));
 }

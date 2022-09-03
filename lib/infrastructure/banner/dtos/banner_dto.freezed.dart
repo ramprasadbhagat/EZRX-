@@ -315,7 +315,9 @@ class _$_BannerDto extends _BannerDto {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BannerDtoToJson(this);
+    return _$$_BannerDtoToJson(
+      this,
+    );
   }
 }
 

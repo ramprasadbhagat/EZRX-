@@ -8,6 +8,7 @@ class LoadingShimmer {
     bool enabled = true,
   }) {
     if (!enabled) return Center(child: child);
+
     return Center(
       child: Shimmer.fromColors(
         baseColor: ZPColors.lightGray,

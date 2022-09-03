@@ -33,7 +33,8 @@ Future<void> _firebaseMessagingBackgroundHandler(
 ) async {
   await Firebase.initializeApp();
   debugPrint(
-      'AppPushs background: ${message.notification?.title} ${message.notification?.body} ${message.data}');
+    'AppPushs background: ${message.notification?.title} ${message.notification?.body} ${message.data}',
+  );
 }
 
 Future<void> initialSetup() async {
@@ -89,6 +90,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final router = locator<AppRouter>();
+
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthBloc>(create: (context) => locator<AuthBloc>()),

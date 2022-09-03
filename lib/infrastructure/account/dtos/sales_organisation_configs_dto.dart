@@ -14,7 +14,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
-      SalesOrganisationConfigs salesOrganisationConfigs) {
+    SalesOrganisationConfigs salesOrganisationConfigs,
+  ) {
     return SalesOrganisationConfigsDto(
       currency: salesOrganisationConfigs.currency.getOrCrash(),
     );

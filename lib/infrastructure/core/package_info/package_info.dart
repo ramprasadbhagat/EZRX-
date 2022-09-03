@@ -13,6 +13,7 @@ class PackageInfoService {
 
   Future<String> getString() async {
     final packageNameArray = _packageInfo.packageName.split('.');
+
     return '${packageNameArray.length > 3 ? packageNameArray[3] : ""}${_packageInfo.version}(${_packageInfo.buildNumber})';
   }
 

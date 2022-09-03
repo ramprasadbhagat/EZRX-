@@ -56,6 +56,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   @override
   Future<void> close() async {
     await _authBlocSubscription.cancel();
+
     return super.close();
   }
 

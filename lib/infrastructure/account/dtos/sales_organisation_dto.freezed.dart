@@ -133,7 +133,9 @@ class _$_SalesOrganisationDto extends _SalesOrganisationDto {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SalesOrganisationDtoToJson(this);
+    return _$$_SalesOrganisationDtoToJson(
+      this,
+    );
   }
 }
 

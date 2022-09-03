@@ -129,7 +129,9 @@ class _$_LoginV2Dto extends _LoginV2Dto {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LoginV2DtoToJson(this);
+    return _$$_LoginV2DtoToJson(
+      this,
+    );
   }
 }
 

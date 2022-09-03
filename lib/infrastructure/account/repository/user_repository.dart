@@ -32,6 +32,7 @@ class UserRepository implements IUserRepository {
     if (config.appFlavor == Flavor.mock) {
       try {
         final user = await localDataSource.getUser();
+
         return Right(user);
       } on MockException catch (e) {
         return Left(UserFailure.other(e.message));
@@ -45,6 +46,7 @@ class UserRepository implements IUserRepository {
         value: user.email.getOrCrash(),
       );
       await firebaseCrashlyticsService.crashlytics.setUserIdentifier(user.id);
+
       return Right(user);
     } on ServerException catch (e) {
       return Left(UserFailure.serverError(e.message));

@@ -66,9 +66,11 @@ class AuthInterceptor extends Interceptor {
         final newJwt = await _refreshToken();
         if (newJwt != null) {
           final newResponse = await _retry(response.requestOptions);
+
           return handler.next(newResponse);
         }
       }
+
       return super.onResponse(response, handler);
     } catch (e) {
       return super.onResponse(response, handler);
@@ -112,9 +114,11 @@ class AuthInterceptor extends Interceptor {
           LoginV2Dto.fromJson(response.data['data']['loginV2']).toDomain();
       final newJwt = JWTDto.fromDomain(loginV2.jwt);
       await tokenStorage.set(newJwt);
+
       return newJwt;
     } catch (e) {
       debugPrint('Refresh token failed : $e');
+
       return null;
     }
   }

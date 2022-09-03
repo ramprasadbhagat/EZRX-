@@ -34,11 +34,12 @@ class AuthRemoteDataSource {
               username,
               password,
               fcmToken,
-            )
+            ),
           },
         ),
       );
       _authExceptionChecker(res: res, jsonKey: 'loginV2');
+
       return LoginV2Dto.fromJson(res.data['data']['loginV2']).toDomain();
     });
   }
@@ -56,12 +57,13 @@ class AuthRemoteDataSource {
             'query': authQueryMutation.getOktaTokenLoginQuery(
               oktaAccessToken,
               fcmToken,
-            )
+            ),
           },
         ),
       );
 
       _authExceptionChecker(res: res, jsonKey: 'loginV2');
+
       return LoginV2Dto.fromJson(res.data['data']['loginV2']).toDomain();
     });
   }
@@ -79,6 +81,7 @@ class AuthRemoteDataSource {
       );
 
       _authExceptionChecker(res: res, jsonKey: 'proxyLoginV2');
+
       return LoginV2Dto.fromJson(res.data['data']['proxyLoginV2']).toDomain();
     });
   }

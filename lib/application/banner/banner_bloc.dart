@@ -58,6 +58,7 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
   @override
   Future<void> close() async {
     await _salesOrgBlocSubscription.cancel();
+
     return super.close();
   }
 

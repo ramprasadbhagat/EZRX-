@@ -36,25 +36,27 @@ class SalesOrgBloc extends Bloc<SalesOrgEvent, SalesOrgState> {
     Emitter<SalesOrgState> emit,
   ) async {
     await event.map(
-        initialized: (e) async => emit(SalesOrgState.initial()),
-        selected: (e) async {
-          emit(
-            state.copyWith(salesOrganisation: e.salesOrganisation),
-          );
-          final failureOrSuccess = await salesOrgRepository
-              .getSalesOrganisationConfigs(e.salesOrganisation);
-          failureOrSuccess.fold(
-            (failure) {},
-            (salesOrganisationConfigs) => emit(state.copyWith(
-              salesOrganisationConfigs: salesOrganisationConfigs,
-            )),
-          );
-        });
+      initialized: (e) async => emit(SalesOrgState.initial()),
+      selected: (e) async {
+        emit(
+          state.copyWith(salesOrganisation: e.salesOrganisation),
+        );
+        final failureOrSuccess = await salesOrgRepository
+            .getSalesOrganisationConfigs(e.salesOrganisation);
+        failureOrSuccess.fold(
+          (failure) {},
+          (salesOrganisationConfigs) => emit(state.copyWith(
+            salesOrganisationConfigs: salesOrganisationConfigs,
+          )),
+        );
+      },
+    );
   }
 
   @override
   Future<void> close() async {
     await userBlocSubscription.cancel();
+
     return super.close();
   }
 

@@ -26,7 +26,7 @@ stages:
         script: |
           brew tap leoafarias/fvm
           brew install fvm
-          echo Y | fvm global 3.0.5
+          echo Y | fvm global 3.3.0
           fvm flutter pub get
 
     - task: Bash@3
@@ -35,6 +35,7 @@ stages:
         targetType: 'inline'
         script: |
           fvm flutter analyze --fatal-infos --fatal-warnings
+          fvm flutter pub run dart_code_metrics:metrics analyze lib --fatal-style --fatal-performance --fatal-warnings
 
     - task: Bash@3
       displayName: Test all the unit test

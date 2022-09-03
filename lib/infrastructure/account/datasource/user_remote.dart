@@ -30,6 +30,7 @@ class UserRemoteDataSource {
         }),
       );
       _userExceptionChecker(res: res);
+
       return UserDto.fromJson(res.data['data']['user']).toDomain();
     });
   }

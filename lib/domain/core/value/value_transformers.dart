@@ -1,6 +1,7 @@
 String stringCapitalize(String text) {
   if (text.isEmpty) return '';
   if (text.length == 1) return text;
+
   return '${text[0].toUpperCase()}${text.substring(1).toLowerCase()}';
 }
 
@@ -8,6 +9,7 @@ String stringCapitalize(String text) {
 String stringTitleCase(String text) {
   if (text.isEmpty) return '';
   if (text.length == 1) return text;
+
   return text
       .trim()
       .split(' ')

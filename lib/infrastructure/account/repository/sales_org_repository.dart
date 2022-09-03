@@ -31,6 +31,7 @@ class SalesOrgRepository implements ISalesOrgRepository {
         final salesOrgConfigs = await localDataSource.getConfig(
           salesOrg: salesOrg,
         );
+
         return Right(salesOrgConfigs);
       } on MockException catch (e) {
         return Left(SalesOrgFailure.other(e.message));
@@ -40,6 +41,7 @@ class SalesOrgRepository implements ISalesOrgRepository {
       final salesOrgConfigs = await remoteDataSource.getConfig(
         salesOrg: salesOrg,
       );
+
       return Right(salesOrgConfigs);
     } on ServerException catch (e) {
       return Left(SalesOrgFailure.serverError(e.message));

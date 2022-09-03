@@ -39,6 +39,7 @@ class HttpService {
         url,
         data: data,
       );
+
       return response;
     } on DioError catch (e) {
       throw e.error;

@@ -16,7 +16,9 @@ class PerformanceMonitorService {
   Future<void> networkOnRequest(RequestOptions options) async {
     try {
       final metric = FirebasePerformance.instance.newHttpMetric(
-          options.uri.normalized(), options.method.asHttpMethod()!);
+        options.uri.normalized(),
+        options.method.asHttpMethod()!,
+      );
 
       final requestKey = options.extra.hashCode;
       _map[requestKey] = metric;
@@ -64,21 +66,22 @@ int? defaultRequestContentLength(RequestOptions options) {
   } catch (_) {
     return null;
   }
+
   return null;
 }
 
 typedef ResponseContentLengthMethod = int? Function(Response options);
 int? defaultResponseContentLength(Response response) {
-  if (response.data is String) {
-    return (response.headers.toString().length) + response.data.length as int?;
-  } else {
-    return null;
-  }
+  return response.data is String
+      ? (response.headers.toString().length) + response.data.length as int?
+      : null;
 }
 
 extension _ResponseHttpMetric on HttpMetric {
-  void setResponse(Response? value,
-      ResponseContentLengthMethod responseContentLengthMethod) {
+  void setResponse(
+    Response? value,
+    ResponseContentLengthMethod responseContentLengthMethod,
+  ) {
     if (value == null) {
       return;
     }

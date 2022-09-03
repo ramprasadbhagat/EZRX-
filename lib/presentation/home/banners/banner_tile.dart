@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart' as c;
@@ -27,7 +25,7 @@ class BannerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      padding: const EdgeInsets.all(5),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(5),
         child: FutureBuilder(
@@ -91,6 +89,7 @@ class BannerTile extends StatelessWidget {
             .asUint8List(imageData.offsetInBytes, imageData.lengthInBytes);
 
         await DefaultCacheManager().putFile(imgUrl, imageUint8List);
+
         return imageUint8List;
       }
 
@@ -104,6 +103,7 @@ class BannerTile extends StatelessWidget {
       if (res.statusCode == 200) {
         final imageData = res.data;
         await DefaultCacheManager().putFile(imgUrl, imageData);
+
         return imageData;
       }
 

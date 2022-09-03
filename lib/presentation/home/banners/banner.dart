@@ -71,7 +71,7 @@ class HomeBanner extends StatelessWidget {
                 activeDotColor: ZPColors.primary,
                 // strokeWidth: 0.5,
               ),
-            )
+            ),
           ],
         );
       },

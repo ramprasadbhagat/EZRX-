@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/core/error/failures.dart';
 Either<ValueFailure<String>, String> validateJWT(String token) {
   try {
     getJWTPayload(token);
+
     return right(token);
   } catch (error) {
     return left(ValueFailure.invalidJWT(failedValue: token));

@@ -28,6 +28,7 @@ class SalesOrgRemoteDataSource {
         }),
       );
       _salesOrgExceptionChecker(res: res);
+
       return SalesOrganisationConfigsDto.fromJson(
         res.data['data']['salesOrgConfigs'][0],
       ).toDomain();

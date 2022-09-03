@@ -92,6 +92,7 @@ class _Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size.width * 0.35;
+
     return Image.asset(
       'assets/images/ezrxlogo.png',
       width: size,
@@ -137,7 +138,7 @@ class _OrDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+      margin: const EdgeInsets.only(top: 20),
       child: Row(children: <Widget>[
         const Expanded(child: Divider()),
         Text('OR', style: Theme.of(context).textTheme.labelLarge),
@@ -155,7 +156,7 @@ class _UsernameField extends StatelessWidget {
     return Visibility(
       visible: _config.appFlavor != Flavor.prod,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         child: BlocConsumer<LoginFormBloc, LoginFormState>(
           listenWhen: (previous, current) =>
               previous.username != current.username,
@@ -204,7 +205,7 @@ class _PasswordField extends StatelessWidget {
     return Visibility(
       visible: _config.appFlavor != Flavor.prod,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         child: BlocConsumer<LoginFormBloc, LoginFormState>(
           listenWhen: (previous, current) =>
               previous.password != current.password,
@@ -270,7 +271,7 @@ class _RememberPassword extends StatelessWidget {
             previous.rememberPassword != current.rememberPassword,
         builder: (context, state) {
           return Padding(
-            padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
             child: Row(
               children: <Widget>[
                 Checkbox(
@@ -283,7 +284,7 @@ class _RememberPassword extends StatelessWidget {
                         .add(const LoginFormEvent.rememberCheckChanged());
                   },
                 ),
-                const Text('Remember Password').tr()
+                const Text('Remember Password').tr(),
               ],
             ),
           );

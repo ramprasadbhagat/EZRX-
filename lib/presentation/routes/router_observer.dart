@@ -9,7 +9,8 @@ class RouterObserver extends AutoRouterObserver {
   @override
   void didPush(Route route, Route? previousRoute) {
     debugPrint(
-        'New route pushed: ${route.settings.name} ${route.settings.arguments}');
+      'New route pushed: ${route.settings.name} ${route.settings.arguments}',
+    );
     firebaseAnalyticsService.analytics.logScreenView(
       screenClass: 'Route',
       screenName: route.settings.name,
@@ -19,7 +20,8 @@ class RouterObserver extends AutoRouterObserver {
   @override
   void didPop(Route route, Route? previousRoute) {
     debugPrint(
-        'Route poped: ${route.settings.name} ${route.settings.arguments}');
+      'Route poped: ${route.settings.name} ${route.settings.arguments}',
+    );
   }
 
   @override

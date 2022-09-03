@@ -52,6 +52,7 @@ class AuthRepository implements IAuthRepository {
           username: usernameStr,
           password: passwordStr,
         );
+
         return Right(loginv2);
       } on MockException catch (e) {
         return Left(AuthFailure.other(e.message));
@@ -64,6 +65,7 @@ class AuthRepository implements IAuthRepository {
         password: passwordStr,
         fcmToken: fcmToken,
       );
+
       return Right(loginv2);
     } on AuthException catch (e) {
       return Left(e.map(
@@ -97,6 +99,7 @@ class AuthRepository implements IAuthRepository {
         final loginv2 = await localDataSource.proxyLoginWithUsername(
           username: usernameStr,
         );
+
         return Right(loginv2);
       } on MockException catch (e) {
         return Left(AuthFailure.other(e.message));
@@ -106,6 +109,7 @@ class AuthRepository implements IAuthRepository {
       final loginv2 = await remoteDataSource.proxyLoginWithUsername(
         username: usernameStr,
       );
+
       return Right(loginv2);
     } on AuthException catch (e) {
       return Left(e.map(
@@ -137,6 +141,7 @@ class AuthRepository implements IAuthRepository {
         final loginv2 = await localDataSource.loginWithOktaToken(
           oktaAccessToken: token,
         );
+
         return Right(loginv2);
       } on MockException catch (e) {
         return Left(AuthFailure.other(e.message));
@@ -148,6 +153,7 @@ class AuthRepository implements IAuthRepository {
         oktaAccessToken: token,
         fcmToken: fcmToken,
       );
+
       return Right(loginv2);
     } on AuthException catch (e) {
       return Left(e.map(
@@ -175,6 +181,7 @@ class AuthRepository implements IAuthRepository {
   Future<Either<AuthFailure, Unit>> storeJWT({required JWT jwt}) async {
     try {
       await tokenStorage.set(JWTDto.fromDomain(jwt));
+
       return const Right(unit);
     } on PlatformException catch (e) {
       return Left(AuthFailure.other('${e.message}'));
@@ -187,6 +194,7 @@ class AuthRepository implements IAuthRepository {
   Future<Either<AuthFailure, Unit>> initTokenStorage() async {
     try {
       await tokenStorage.init();
+
       return const Right(unit);
     } on PlatformException catch (e) {
       return Left(AuthFailure.other('${e.message}'));
@@ -199,6 +207,7 @@ class AuthRepository implements IAuthRepository {
   Future<Either<AuthFailure, Unit>> tokenValid() async {
     try {
       final token = await tokenStorage.get();
+
       return token.toDomain().isExpired
           ? const Left(AuthFailure.tokenExpired())
           : const Right(unit);
@@ -213,6 +222,7 @@ class AuthRepository implements IAuthRepository {
   Future<Either<AuthFailure, Unit>> initOkta() async {
     try {
       await oktaLoginServices.init();
+
       return const Right(unit);
     } on PlatformException catch (e) {
       return Left(AuthFailure.other('${e.message}'));
@@ -225,6 +235,7 @@ class AuthRepository implements IAuthRepository {
   Future<Either<AuthFailure, Unit>> loginWithOkta() async {
     try {
       await oktaLoginServices.login();
+
       return const Right(unit);
     } on PlatformException catch (e) {
       return Left(AuthFailure.other('${e.message}'));
@@ -237,6 +248,7 @@ class AuthRepository implements IAuthRepository {
   Future<Either<AuthFailure, JWT>> getOktaAccessToken() async {
     try {
       final result = await oktaLoginServices.getAccessToken();
+
       return Right(JWT(result?['message']));
     } on PlatformException catch (e) {
       return Left(AuthFailure.other('${e.message}'));
@@ -250,6 +262,7 @@ class AuthRepository implements IAuthRepository {
     try {
       await tokenStorage.clear();
       await oktaLoginServices.logout();
+
       return const Right(unit);
     } on PlatformException catch (e) {
       return Left(AuthFailure.other('${e.message}'));
@@ -270,6 +283,7 @@ class AuthRepository implements IAuthRepository {
           password: password.getOrCrash(),
         ),
       );
+
       return const Right(unit);
     } on PlatformException catch (e) {
       return Left(AuthFailure.other('${e.message}'));
@@ -282,6 +296,7 @@ class AuthRepository implements IAuthRepository {
   Future<Either<AuthFailure, Unit>> deleteCredential() async {
     try {
       await credStorage.delete();
+
       return const Right(unit);
     } on PlatformException catch (e) {
       return Left(AuthFailure.other('${e.message}'));
@@ -294,6 +309,7 @@ class AuthRepository implements IAuthRepository {
   Future<Either<AuthFailure, Unit>> initCredStorage() async {
     try {
       await credStorage.init();
+
       return const Right(unit);
     } on PlatformException catch (e) {
       return Left(AuthFailure.other('${e.message}'));
@@ -306,6 +322,7 @@ class AuthRepository implements IAuthRepository {
   Future<Either<AuthFailure, Cred>> loadCredential() async {
     try {
       final credDto = await credStorage.get();
+
       return Right(credDto.toDomain());
     } on PlatformException catch (e) {
       return Left(AuthFailure.other('${e.message}'));

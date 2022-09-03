@@ -78,7 +78,7 @@ final appThemeData = {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        primary: ZPColors.primary,
+        backgroundColor: ZPColors.primary,
         // onPrimary: AppColors.black80,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
@@ -100,7 +100,7 @@ final appThemeData = {
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        primary: ZPColors.primary,
+        foregroundColor: ZPColors.primary,
         padding: const EdgeInsets.all(15),
       ),
     ),

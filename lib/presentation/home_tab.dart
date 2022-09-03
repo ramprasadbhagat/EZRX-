@@ -5,38 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class HomeNavigationTabbar extends StatelessWidget {
-  HomeNavigationTabbar({Key? key}) : super(key: key);
-
-  final _routesItems = [
-    RouteItem(
-      route: const HomeTabRoute(),
-      icon: const Icon(Icons.home_outlined, key: Key('homeTab')),
-      label: 'Home'.tr(),
-    ),
-    RouteItem(
-      route: const ProductsTabRoute(),
-      icon: const Icon(Icons.storefront_outlined, key: Key('productsTab')),
-      label: 'Products'.tr(),
-    ),
-    RouteItem(
-      route: const OrdersTabRoute(),
-      icon: const Icon(Icons.shopping_basket_outlined, key: Key('ordersTab')),
-      label: 'Orders'.tr(),
-    ),
-    RouteItem(
-      route: const NotificationsTabRoute(),
-      icon: const Icon(
-        Icons.notifications_outlined,
-        key: Key('notificationsTabbar'),
-      ),
-      label: 'Notifications'.tr(),
-    ),
-    RouteItem(
-      route: const AccountTabRoute(),
-      icon: const Icon(Icons.person_outline, key: Key('accountTabbar')),
-      label: 'Account'.tr(),
-    ),
-  ];
+  const HomeNavigationTabbar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +23,7 @@ class HomeNavigationTabbar extends StatelessWidget {
                       .map(
                         (item) => BottomNavigationBarItem(
                           icon: item.icon,
-                          label: item.label,
+                          label: item.label.tr(),
                         ),
                       )
                       .toList(),
@@ -70,6 +39,7 @@ class HomeNavigationTabbar extends StatelessWidget {
                 if (activeIndex == -1) {
                   activeIndex = 0;
                 }
+
                 return Row(
                   children: [
                     NavigationRail(
@@ -78,7 +48,7 @@ class HomeNavigationTabbar extends StatelessWidget {
                           .map(
                             (item) => NavigationRailDestination(
                               icon: item.icon,
-                              label: Text(item.label),
+                              label: Text(item.label).tr(),
                             ),
                           )
                           .toList(),
@@ -96,6 +66,37 @@ class HomeNavigationTabbar extends StatelessWidget {
     );
   }
 }
+
+final _routesItems = [
+  RouteItem(
+    route: const HomeTabRoute(),
+    icon: const Icon(Icons.home_outlined, key: Key('homeTab')),
+    label: 'Home',
+  ),
+  RouteItem(
+    route: const ProductsTabRoute(),
+    icon: const Icon(Icons.storefront_outlined, key: Key('productsTab')),
+    label: 'Products',
+  ),
+  RouteItem(
+    route: const OrdersTabRoute(),
+    icon: const Icon(Icons.shopping_basket_outlined, key: Key('ordersTab')),
+    label: 'Orders',
+  ),
+  RouteItem(
+    route: const NotificationsTabRoute(),
+    icon: const Icon(
+      Icons.notifications_outlined,
+      key: Key('notificationsTabbar'),
+    ),
+    label: 'Notifications',
+  ),
+  RouteItem(
+    route: const AccountTabRoute(),
+    icon: const Icon(Icons.person_outline, key: Key('accountTabbar')),
+    label: 'Account',
+  ),
+];
 
 class RouteItem {
   final PageRouteInfo<dynamic> route;

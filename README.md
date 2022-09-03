@@ -28,6 +28,7 @@ https://resocoder.com/2020/03/09/flutter-firebase-ddd-course-1-domain-driven-des
 
 ## Analyze
 ```fvm flutter analyze --fatal-infos --fatal-warnings```
+```fvm flutter pub run dart_code_metrics:metrics analyze lib --fatal-style --fatal-performance --fatal-warnings```
 
 ## Test Coverage
 1. [Read this](https://codewithandrea.com/articles/flutter-test-coverage/)
@@ -73,3 +74,11 @@ https://resocoder.com/2020/03/09/flutter-firebase-ddd-course-1-domain-driven-des
 - ```fvm flutter build appbundle --flavor dev -t lib/main_dev.dart```
 - ```fvm flutter build appbundle --flavor uat -t lib/main_uat.dart```
 - ```fvm flutter build appbundle --flavor prod -t lib/main_prod.dart```
+
+## Error when run IOS ?
+1. go to /ios
+2. remove `Pods` folder
+3. remove `Podfile.lock` file
+4. `fvm flutter clean`
+5. `fvm flutter pub get`
+6. run you app

@@ -28,6 +28,7 @@ DateTime getJWTExpirationDate(String token) {
   final expirationDate = DateTime.fromMillisecondsSinceEpoch(0).add(
     Duration(seconds: decodedToken['exp'].toInt()),
   );
+
   return expirationDate;
 }
 
@@ -38,6 +39,7 @@ Duration getJWTTime(String token) {
   final issuedAtDate = DateTime.fromMillisecondsSinceEpoch(0).add(
     Duration(seconds: decodedToken['iat']),
   );
+
   return DateTime.now().difference(issuedAtDate);
 }
 
@@ -45,6 +47,7 @@ Duration getJWTTime(String token) {
 Duration getJWTRemainingTime(String token) {
   if (token.isEmpty) return const Duration();
   final expirationDate = getJWTExpirationDate(token);
+
   return expirationDate.difference(DateTime.now());
 }
 
@@ -52,5 +55,6 @@ Duration getJWTRemainingTime(String token) {
 bool isJWTExpired(String token) {
   if (token.isEmpty) return true;
   final expirationDate = getJWTExpirationDate(token);
+
   return DateTime.now().isAfter(expirationDate);
 }

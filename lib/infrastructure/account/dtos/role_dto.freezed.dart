@@ -190,7 +190,9 @@ class _$_RoleDto extends _RoleDto {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RoleDtoToJson(this);
+    return _$$_RoleDtoToJson(
+      this,
+    );
   }
 }
 

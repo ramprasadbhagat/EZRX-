@@ -1,103 +1,86 @@
 String salesOrgBuName(String salesOrg) {
-  switch (salesOrg) {
-    case '1300':
-      return 'ZPBN';
-    case '1500':
-      return 'ZPKH';
-    case '1501':
-      return 'APKH';
-    case '1703':
-      return 'ZPMO';
-    case '1700':
-    case '1750':
-      return 'ZPHK';
-    case '2001':
-      return 'ZPMY';
-    case '2200':
-    case '2201':
-    case '2203':
-    case '2250':
-      return 'ZPMM';
-    case '2500':
-      return 'ZPC PH';
-    case '2501':
-      return 'MDI PH';
-    case '2601':
-      return 'ZPSG';
-    case '2800':
-    case '2801':
-    case '2802':
-    case '2803':
-    case '2804':
-    case '2805':
-      return 'ZPTW';
-    case '2900':
-    case '2902':
-      return 'ZPTH';
-    case '3000':
-    case '3001':
-    case '3072':
-      return 'ZPVN';
-    case '3050':
-      return 'Phyto VN';
-    case '3070':
-      return 'Sang VN';
-    case '3090':
-      return 'Mekophar VN';
-    case '3101':
-    case '3102':
-    case '3150':
-    case '3151':
-    case '3152':
-    case '3153':
-      return 'ZPKR';
-    case 'PH01':
-      return 'GBDI ZPC PH';
-    case 'PH02':
-      return 'MXPS MDI PH';
-    default:
-      return 'Unknown';
-  }
+  // use map insted of switch statement to reduce cyclomatic complexity
+  final salesOrgBuMap = {
+    '1300': 'ZPBN',
+    '1500': 'ZPKH',
+    '1501': 'APKH',
+    '1703': 'ZPMO',
+    '1700': 'ZPHK',
+    '1750': 'ZPHK',
+    '2001': 'ZPMY',
+    '2200': 'ZPMM',
+    '2201': 'ZPMM',
+    '2203': 'ZPMM',
+    '2250': 'ZPMM',
+    '2500': 'ZPC PH',
+    '2501': 'MDI PH',
+    '2601': 'ZPSG',
+    '2800': 'ZPTW',
+    '2801': 'ZPTW',
+    '2802': 'ZPTW',
+    '2803': 'ZPTW',
+    '2804': 'ZPTW',
+    '2805': 'ZPTW',
+    '2900': 'ZPTH',
+    '2902': 'ZPTH',
+    '3000': 'ZPVN',
+    '3001': 'ZPVN',
+    '3072': 'ZPVN',
+    '3050': 'Phyto VN',
+    '3070': 'Sang VN',
+    '3090': 'Mekophar VN',
+    '3101': 'ZPKR',
+    '3102': 'ZPKR',
+    '3150': 'ZPKR',
+    '3151': 'ZPKR',
+    '3152': 'ZPKR',
+    '3153': 'ZPKR',
+    'PH01': 'GBDI ZPC PH',
+    'PH02': 'MXPS MDI PH',
+  };
+
+  return salesOrgBuMap[salesOrg] ?? 'Unknown';
 }
 
 String salesOrgCountry(String salesOrg) {
-  switch (salesOrg) {
-    case '2001':
-      return 'MY';
-    case '2200':
-    case '2201':
-    case '2203':
-    case '2250':
-      return 'MM';
-    case '2500':
-    case '2501':
-    case 'PH02':
-    case 'PH03':
-      return 'PH';
-    case '2601':
-      return 'SG';
-    case '2800':
-    case '2801':
-    case '2802':
-    case '2803':
-    case '2804':
-    case '2805':
-      return 'TW';
-    case '2900':
-    case '2902':
-      return 'TH';
-    case '3070':
-    case '3000':
-    case '3001':
-    case '3050':
-    case '3072':
-    case '3090':
-      return 'VN';
-    default:
-      return 'Unknown';
-  }
+  // use map insted of switch statement to reduce cyclomatic complexity
+  final salesOrgCountryMap = {
+    '2001': 'MY',
+    '2200': 'MM',
+    '2201': 'MM',
+    '2203': 'MM',
+    '2250': 'MM',
+    '2500': 'PH',
+    '2501': 'PH',
+    'PH02': 'PH',
+    'PH03': 'PH',
+    '2601': 'SG',
+    '2800': 'TW',
+    '2801': 'TW',
+    '2802': 'TW',
+    '2803': 'TW',
+    '2804': 'TW',
+    '2805': 'TW',
+    '2900': 'TH',
+    '2902': 'TH',
+    '3000': 'VN',
+    '3001': 'VN',
+    '3072': 'VN',
+    '3050': 'VN',
+    '3070': 'VN',
+    '3090': 'VN',
+    '3101': 'KR',
+    '3102': 'KR',
+    '3150': 'KR',
+    '3151': 'KR',
+    '3152': 'KR',
+    '3153': 'KR',
+  };
+
+  return salesOrgCountryMap[salesOrg] ?? 'Unknown';
 }
 
+//  Possible role
 //  'internal_sales_rep'
 //  'external_sales_rep'
 //  'root_admin'

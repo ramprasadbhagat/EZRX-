@@ -79,6 +79,7 @@ class Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size.width * 0.35;
+
     return Image.asset(
       'assets/images/ezrxlogo.png',
       width: size,
@@ -93,7 +94,7 @@ class UsernameField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       child: TextFormField(
         key: const Key('proxyLoginUsernameField'),
         controller: _usernameController,
@@ -134,7 +135,8 @@ class LoginButton extends StatelessWidget {
                 : () {
                     FocusScope.of(context).unfocus();
                     context.read<ProxyLoginFormBloc>().add(
-                        const ProxyLoginFormEvent.loginWithADButtonPressed());
+                          const ProxyLoginFormEvent.loginWithADButtonPressed(),
+                        );
                   },
             child: const Text('Login').tr(),
           ),

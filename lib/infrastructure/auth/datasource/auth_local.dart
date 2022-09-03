@@ -12,6 +12,7 @@ class AuthLocalDataSource {
     final data = json.decode(
       await rootBundle.loadString('assets/json/loginAdResponse.json'),
     );
+
     return LoginV2Dto.fromJson(data['data']['loginV2']).toDomain();
   }
 
@@ -21,6 +22,7 @@ class AuthLocalDataSource {
     final data = json.decode(
       await rootBundle.loadString('assets/json/loginAdResponse.json'),
     );
+
     return LoginV2Dto.fromJson(data['data']['loginV2']).toDomain();
   }
 
@@ -28,6 +30,7 @@ class AuthLocalDataSource {
     final data = json.decode(
       await rootBundle.loadString('assets/json/proxyLoginResponse.json'),
     );
+
     return LoginV2Dto.fromJson(data['data']['proxyLoginV2']).toDomain();
   }
 }

@@ -138,7 +138,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SalesOrganisationConfigsDtoToJson(this);
+    return _$$_SalesOrganisationConfigsDtoToJson(
+      this,
+    );
   }
 }
 

@@ -58,13 +58,14 @@ class PushNotificationService {
     int notificationId,
     String? notificationTitle,
     String? notificationContent,
-    String payload, {
-    String channelId = 'com.zuelligpharma.ezrxmobile',
-    String channelTitle = 'eZRx notification',
-    Priority notificationPriority = Priority.high,
-    Importance notificationImportance = Importance.max,
-  }) async {
-    final androidPlatformChannelSpecifics = AndroidNotificationDetails(
+    String payload,
+  ) async {
+    const channelId = 'com.zuelligpharma.ezrxmobile';
+    const channelTitle = 'eZRx notification';
+    const notificationPriority = Priority.high;
+    const notificationImportance = Importance.max;
+
+    const androidPlatformChannelSpecifics = AndroidNotificationDetails(
       channelId,
       channelTitle,
       importance: notificationImportance,
@@ -72,7 +73,7 @@ class PushNotificationService {
     );
     const iOSPlatformChannelSpecifics = IOSNotificationDetails();
 
-    final platformChannelSpecifics = NotificationDetails(
+    const platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,
       iOS: iOSPlatformChannelSpecifics,
     );
@@ -111,40 +112,7 @@ class PushNotificationService {
     // Continuosaly Listening to notification using [onMessage] stream
     if (status.isGranted) {
       await _initLocalNotifications();
-
-      FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
-        debugPrint(
-            'AppPushs onBackgroundMessage : ${message.notification?.title} ${message.notification?.body} ${message.data}');
-        await _showLocalNotification(
-          message.notification.hashCode,
-          message.notification?.title,
-          message.notification?.body,
-          jsonEncode({'data': message.data}),
-        );
-      });
-      // from foreground usually won't have the push notification banner display
-      // we need to use the local notification plugin to display
-      FirebaseMessaging.onMessage.listen((RemoteMessage? message) async {
-        debugPrint(
-            'AppPushs onMessage : ${message?.notification?.title} ${message?.notification?.body} ${message?.data}');
-        if (message == null) return;
-        await _showLocalNotification(
-          message.notification.hashCode,
-          message.notification?.title,
-          message.notification?.body,
-          jsonEncode({'data': message.data}),
-        );
-      });
-
-      // Handle any interaction when the app is in the background via a Stream listener
-      FirebaseMessaging.onMessageOpenedApp.listen((
-        RemoteMessage? message,
-      ) async {
-        debugPrint(
-            'AppPushs onMessageOpenedApp : ${message?.notification?.title} ${message?.notification?.body} ${message?.data}');
-        if (message == null) return;
-        _redirectTothePage(message);
-      });
+      await _setupRemoteMessageListener();
     } else {
       debugPrint('User declined or has not accepted permission');
     }
@@ -152,10 +120,50 @@ class PushNotificationService {
     // from terminate mode, app launch when click the push notification banner
     await _fcm.getInitialMessage().then((RemoteMessage? message) async {
       debugPrint(
-          'AppPushs getInitialMessage : ${message?.notification?.title} ${message?.notification?.body} ${message?.data}');
+        'AppPushs getInitialMessage : ${message?.notification?.title} ${message?.notification?.body} ${message?.data}',
+      );
       if (message == null) return;
       _redirectTothePage(message);
       // return;
+    });
+  }
+
+  Future _setupRemoteMessageListener() async {
+    FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
+      debugPrint(
+        'AppPushs onBackgroundMessage : ${message.notification?.title} ${message.notification?.body} ${message.data}',
+      );
+      await _showLocalNotification(
+        message.notification.hashCode,
+        message.notification?.title,
+        message.notification?.body,
+        jsonEncode({'data': message.data}),
+      );
+    });
+    // from foreground usually won't have the push notification banner display
+    // we need to use the local notification plugin to display
+    FirebaseMessaging.onMessage.listen((RemoteMessage? message) async {
+      debugPrint(
+        'AppPushs onMessage : ${message?.notification?.title} ${message?.notification?.body} ${message?.data}',
+      );
+      if (message == null) return;
+      await _showLocalNotification(
+        message.notification.hashCode,
+        message.notification?.title,
+        message.notification?.body,
+        jsonEncode({'data': message.data}),
+      );
+    });
+
+    // Handle any interaction when the app is in the background via a Stream listener
+    FirebaseMessaging.onMessageOpenedApp.listen((
+      RemoteMessage? message,
+    ) async {
+      debugPrint(
+        'AppPushs onMessageOpenedApp : ${message?.notification?.title} ${message?.notification?.body} ${message?.data}',
+      );
+      if (message == null) return;
+      _redirectTothePage(message);
     });
   }
 

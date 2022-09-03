@@ -17,62 +17,78 @@ class _WebViewPageState extends State<WebViewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            title: Image.asset(
+      appBar: AppBar(
+        title: Image.asset(
           'assets/images/ezrxlogo.png',
           width: 80,
           height: 80,
-        )),
-        body: errorLoadingUrl?Center(
-          child: Padding(
-            padding: EdgeInsets.all(MediaQuery.of(context).size.height*0.1),
-            child: Image.asset(
-                'assets/images/error.png',
-              ),
-          ),
-        ):Stack(children: <Widget>[
-            InAppWebView(
-              initialUrlRequest: URLRequest(url: Uri.parse(widget.url)),
-              initialOptions: InAppWebViewGroupOptions(
-                crossPlatform: InAppWebViewOptions(
-                  mediaPlaybackRequiresUserGesture: false,
+        ),
+      ),
+      body: errorLoadingUrl
+          ? Center(
+              child: Padding(
+                padding:
+                    EdgeInsets.all(MediaQuery.of(context).size.height * 0.1),
+                child: Image.asset(
+                  'assets/images/error.png',
                 ),
               ),
-              onWebViewCreated: (InAppWebViewController controller) {},
-              onLoadStart: ((controller, url) {
-                setState(() {
-                  isLoading = true;
-                  errorLoadingUrl = false;
-                });
-                isLoading = true;
-              }),
-              onLoadStop: (controller, url) {
-                setState(() {
-                  isLoading = false;
-                });
-              },
-              onLoadHttpError: (InAppWebViewController controller, Uri? url,
-                  int i, String s) async {
-                setState(() {
-                  errorLoadingUrl = true;
-                });
-              },
-              androidOnPermissionRequest: (InAppWebViewController controller,
-                  String origin, List<String> resources) async {
-                return PermissionRequestResponse(
-                    resources: resources,
-                    action: PermissionRequestResponseAction.GRANT);
-              }),
-          Visibility(
-            visible: isLoading,
-            child: LoadingShimmer.withChild(
-              child: Image.asset(
-                'assets/images/ezrxlogo.png',
-                width: 80,
-                height: 80,
-              ),
+            )
+          : Stack(
+              children: <Widget>[
+                InAppWebView(
+                  initialUrlRequest: URLRequest(url: Uri.parse(widget.url)),
+                  initialOptions: InAppWebViewGroupOptions(
+                    crossPlatform: InAppWebViewOptions(
+                      mediaPlaybackRequiresUserGesture: false,
+                    ),
+                  ),
+                  onWebViewCreated: (InAppWebViewController controller) {},
+                  onLoadStart: ((controller, url) {
+                    setState(() {
+                      isLoading = true;
+                      errorLoadingUrl = false;
+                    });
+                    isLoading = true;
+                  }),
+                  onLoadStop: (controller, url) {
+                    setState(() {
+                      isLoading = false;
+                    });
+                  },
+                  onLoadHttpError: (
+                    InAppWebViewController controller,
+                    Uri? url,
+                    int i,
+                    String s,
+                  ) async {
+                    setState(() {
+                      errorLoadingUrl = true;
+                    });
+                  },
+                  androidOnPermissionRequest: (
+                    InAppWebViewController controller,
+                    String origin,
+                    List<String> resources,
+                  ) async {
+                    return PermissionRequestResponse(
+                      resources: resources,
+                      action: PermissionRequestResponseAction.GRANT,
+                    );
+                  },
+                ),
+                Visibility(
+                  visible: isLoading,
+                  child: LoadingShimmer.withChild(
+                    child: Image.asset(
+                      'assets/images/ezrxlogo.png',
+                      width: 80,
+                      height: 80,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ]));
+    );
   }
 }
