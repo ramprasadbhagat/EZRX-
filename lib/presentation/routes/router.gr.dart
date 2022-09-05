@@ -54,10 +54,8 @@ class AppRouter extends _i12.RootStackRouter {
           child: _i5.WebViewPage(key: args.key, url: args.url));
     },
     HomeNavigationTabbarRoute.name: (routeData) {
-      final args = routeData.argsAs<HomeNavigationTabbarRouteArgs>(
-          orElse: () => const HomeNavigationTabbarRouteArgs());
       return _i12.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i6.HomeNavigationTabbar(key: args.key));
+          routeData: routeData, child: const _i6.HomeNavigationTabbar());
     },
     HomeTabRoute.name: (routeData) {
       return _i12.MaterialPageX<dynamic>(
@@ -167,26 +165,12 @@ class WebViewPageRouteArgs {
 
 /// generated route for
 /// [_i6.HomeNavigationTabbar]
-class HomeNavigationTabbarRoute
-    extends _i12.PageRouteInfo<HomeNavigationTabbarRouteArgs> {
-  HomeNavigationTabbarRoute({_i13.Key? key, List<_i12.PageRouteInfo>? children})
+class HomeNavigationTabbarRoute extends _i12.PageRouteInfo<void> {
+  const HomeNavigationTabbarRoute({List<_i12.PageRouteInfo>? children})
       : super(HomeNavigationTabbarRoute.name,
-            path: 'main_tabbar',
-            args: HomeNavigationTabbarRouteArgs(key: key),
-            initialChildren: children);
+            path: 'main_tabbar', initialChildren: children);
 
   static const String name = 'HomeNavigationTabbarRoute';
-}
-
-class HomeNavigationTabbarRouteArgs {
-  const HomeNavigationTabbarRouteArgs({this.key});
-
-  final _i13.Key? key;
-
-  @override
-  String toString() {
-    return 'HomeNavigationTabbarRouteArgs{key: $key}';
-  }
 }
 
 /// generated route for

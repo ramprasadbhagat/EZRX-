@@ -1,4 +1,6 @@
+import 'package:ezrxmobile/domain/account/entities/customer_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,17 +13,42 @@ class SalesOrganisationDto with _$SalesOrganisationDto {
 
   const factory SalesOrganisationDto({
     @JsonKey(name: 'salesOrg') required String salesOrg,
+    @JsonKey(name: 'customerCode') required String customerCode,
+    @JsonKey(name: 'shipToCode') required List<String> shipToCodes,
   }) = _SalesOrganisationDto;
 
-  factory SalesOrganisationDto.fromDomain(SalesOrganisation salesOrganisation) {
+  factory SalesOrganisationDto.fromDomain(
+    SalesOrganisation salesOrganisation, {
+    int index = 0,
+  }) {
     return SalesOrganisationDto(
       salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+      customerCode: salesOrganisation.customerInfos[index].customerCodeSoldTo,
+      shipToCodes: salesOrganisation.customerInfos[index].shipToInfos
+          .map((e) => e.shipToCustomerCode)
+          .toList(),
     );
   }
 
   SalesOrganisation toDomain() {
-    return SalesOrganisation(salesOrg: SalesOrg(salesOrg));
+    return SalesOrganisation(
+      salesOrg: SalesOrg(salesOrg),
+      customerInfos: [
+        CustomerInfo(
+          customerCodeSoldTo: customerCode,
+          shipToInfos: shipToCodes
+              .map((e) => ShipToInfo(shipToCustomerCode: e))
+              .toList(),
+        ),
+      ],
+    );
   }
+
+  factory SalesOrganisationDto.empty() => const SalesOrganisationDto(
+        salesOrg: '',
+        customerCode: '',
+        shipToCodes: [],
+      );
 
   factory SalesOrganisationDto.fromJson(Map<String, dynamic> json) =>
       _$SalesOrganisationDtoFromJson(json);

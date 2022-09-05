@@ -22,6 +22,10 @@ SalesOrganisationDto _$SalesOrganisationDtoFromJson(Map<String, dynamic> json) {
 mixin _$SalesOrganisationDto {
   @JsonKey(name: 'salesOrg')
   String get salesOrg => throw _privateConstructorUsedError;
+  @JsonKey(name: 'customerCode')
+  String get customerCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'shipToCode')
+  List<String> get shipToCodes => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +38,10 @@ abstract class $SalesOrganisationDtoCopyWith<$Res> {
   factory $SalesOrganisationDtoCopyWith(SalesOrganisationDto value,
           $Res Function(SalesOrganisationDto) then) =
       _$SalesOrganisationDtoCopyWithImpl<$Res>;
-  $Res call({@JsonKey(name: 'salesOrg') String salesOrg});
+  $Res call(
+      {@JsonKey(name: 'salesOrg') String salesOrg,
+      @JsonKey(name: 'customerCode') String customerCode,
+      @JsonKey(name: 'shipToCode') List<String> shipToCodes});
 }
 
 /// @nodoc
@@ -49,12 +56,22 @@ class _$SalesOrganisationDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? salesOrg = freezed,
+    Object? customerCode = freezed,
+    Object? shipToCodes = freezed,
   }) {
     return _then(_value.copyWith(
       salesOrg: salesOrg == freezed
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as String,
+      customerCode: customerCode == freezed
+          ? _value.customerCode
+          : customerCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      shipToCodes: shipToCodes == freezed
+          ? _value.shipToCodes
+          : shipToCodes // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -66,7 +83,10 @@ abstract class _$$_SalesOrganisationDtoCopyWith<$Res>
           $Res Function(_$_SalesOrganisationDto) then) =
       __$$_SalesOrganisationDtoCopyWithImpl<$Res>;
   @override
-  $Res call({@JsonKey(name: 'salesOrg') String salesOrg});
+  $Res call(
+      {@JsonKey(name: 'salesOrg') String salesOrg,
+      @JsonKey(name: 'customerCode') String customerCode,
+      @JsonKey(name: 'shipToCode') List<String> shipToCodes});
 }
 
 /// @nodoc
@@ -83,12 +103,22 @@ class __$$_SalesOrganisationDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? salesOrg = freezed,
+    Object? customerCode = freezed,
+    Object? shipToCodes = freezed,
   }) {
     return _then(_$_SalesOrganisationDto(
       salesOrg: salesOrg == freezed
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as String,
+      customerCode: customerCode == freezed
+          ? _value.customerCode
+          : customerCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      shipToCodes: shipToCodes == freezed
+          ? _value._shipToCodes
+          : shipToCodes // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -97,8 +127,11 @@ class __$$_SalesOrganisationDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SalesOrganisationDto extends _SalesOrganisationDto {
   const _$_SalesOrganisationDto(
-      {@JsonKey(name: 'salesOrg') required this.salesOrg})
-      : super._();
+      {@JsonKey(name: 'salesOrg') required this.salesOrg,
+      @JsonKey(name: 'customerCode') required this.customerCode,
+      @JsonKey(name: 'shipToCode') required final List<String> shipToCodes})
+      : _shipToCodes = shipToCodes,
+        super._();
 
   factory _$_SalesOrganisationDto.fromJson(Map<String, dynamic> json) =>
       _$$_SalesOrganisationDtoFromJson(json);
@@ -106,10 +139,20 @@ class _$_SalesOrganisationDto extends _SalesOrganisationDto {
   @override
   @JsonKey(name: 'salesOrg')
   final String salesOrg;
+  @override
+  @JsonKey(name: 'customerCode')
+  final String customerCode;
+  final List<String> _shipToCodes;
+  @override
+  @JsonKey(name: 'shipToCode')
+  List<String> get shipToCodes {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_shipToCodes);
+  }
 
   @override
   String toString() {
-    return 'SalesOrganisationDto(salesOrg: $salesOrg)';
+    return 'SalesOrganisationDto(salesOrg: $salesOrg, customerCode: $customerCode, shipToCodes: $shipToCodes)';
   }
 
   @override
@@ -117,13 +160,20 @@ class _$_SalesOrganisationDto extends _SalesOrganisationDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SalesOrganisationDto &&
-            const DeepCollectionEquality().equals(other.salesOrg, salesOrg));
+            const DeepCollectionEquality().equals(other.salesOrg, salesOrg) &&
+            const DeepCollectionEquality()
+                .equals(other.customerCode, customerCode) &&
+            const DeepCollectionEquality()
+                .equals(other._shipToCodes, _shipToCodes));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(salesOrg));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(salesOrg),
+      const DeepCollectionEquality().hash(customerCode),
+      const DeepCollectionEquality().hash(_shipToCodes));
 
   @JsonKey(ignore: true)
   @override
@@ -141,8 +191,12 @@ class _$_SalesOrganisationDto extends _SalesOrganisationDto {
 
 abstract class _SalesOrganisationDto extends SalesOrganisationDto {
   const factory _SalesOrganisationDto(
-          {@JsonKey(name: 'salesOrg') required final String salesOrg}) =
-      _$_SalesOrganisationDto;
+      {@JsonKey(name: 'salesOrg')
+          required final String salesOrg,
+      @JsonKey(name: 'customerCode')
+          required final String customerCode,
+      @JsonKey(name: 'shipToCode')
+          required final List<String> shipToCodes}) = _$_SalesOrganisationDto;
   const _SalesOrganisationDto._() : super._();
 
   factory _SalesOrganisationDto.fromJson(Map<String, dynamic> json) =
@@ -151,6 +205,12 @@ abstract class _SalesOrganisationDto extends SalesOrganisationDto {
   @override
   @JsonKey(name: 'salesOrg')
   String get salesOrg;
+  @override
+  @JsonKey(name: 'customerCode')
+  String get customerCode;
+  @override
+  @JsonKey(name: 'shipToCode')
+  List<String> get shipToCodes;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationDtoCopyWith<_$_SalesOrganisationDto> get copyWith =>

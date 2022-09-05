@@ -21,6 +21,9 @@ https://resocoder.com/2020/03/09/flutter-firebase-ddd-course-1-domain-driven-des
 3. Open project with Vscode, check ".fvm/fvm_config.json" file, check the "flutterSdkVersion" inside and use ```fvm use <flutterSdkVersion_you_saw>```
 4. Restart vscode
 
+## Auto build json_serializable, freezed, auto_route_generator, hive_generator 
+```fvm flutter pub run build_runner watch --delete-conflicting-outputs```
+
 ## Edit localization lang file csv
 - directory : assets/langs/langs.csv
 - [Edit csv](https://marketplace.visualstudio.com/items?itemName=janisdd.vscode-edit-csv) edit your csv easily
@@ -50,10 +53,6 @@ https://resocoder.com/2020/03/09/flutter-firebase-ddd-course-1-domain-driven-des
 
 ## Integration test
 ```fvm flutter drive --driver=test_driver/integration_driver.dart --target=integration_test/app_test.dart --flavor uat```
-
-## Auto build json_serializable, freezed, auto_route_generator, hive_generator 
-```fvm flutter pub run build_runner watch --delete-conflicting-outputs```
-
 
 ## Flavor
 | Flavor| Package name | App Name | Endpoint |

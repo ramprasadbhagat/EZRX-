@@ -20,7 +20,7 @@ class SplashPage extends StatelessWidget {
             // showSnackBar(context: context, message: 'Welcome back');
             context.router.replaceAll([
               const SplashPageRoute(),
-              HomeNavigationTabbarRoute(),
+              const HomeNavigationTabbarRoute(),
             ]);
           },
           unauthenticated: (_) {

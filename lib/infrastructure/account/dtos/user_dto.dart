@@ -1,5 +1,7 @@
+import 'package:ezrxmobile/domain/account/entities/customer_info.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_aup.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -47,9 +49,7 @@ class UserDto with _$UserDto {
       lastName: user.fullName.lastName,
       role: RoleDto.fromDomain(user.role),
       customerCode: user.customerCode.getOrCrash(),
-      userSalesOrganisations: user.userSalesOrganisations
-          .map((e) => SalesOrganisationDto.fromDomain(e))
-          .toList(),
+      userSalesOrganisations: _splitSalesOrg(user.userSalesOrganisations),
       emailNotifications: user.settings.emailNotifications,
       mobileNotifications: user.settings.mobileNotifications,
       languagePreference: user.settings.languagePreference,
@@ -73,9 +73,7 @@ class UserDto with _$UserDto {
         description: role.description,
       ),
       customerCode: CustomerCode(customerCode),
-      userSalesOrganisations: userSalesOrganisations
-          .map((e) => SalesOrganisation(salesOrg: SalesOrg(e.salesOrg)))
-          .toList(),
+      userSalesOrganisations: _mergeSalesOrg(userSalesOrganisations),
       settings: Settings(
         emailNotifications: emailNotifications,
         mobileNotifications: mobileNotifications,
@@ -100,6 +98,11 @@ class _SalesOrganisationListConverter
     extends JsonConverter<List<SalesOrganisationDto>, Map<String, dynamic>> {
   const _SalesOrganisationListConverter();
 
+//======================================================================
+// Response give an extra 'value' level that no useful on our DTO and Entity
+// We use this way to remove it
+//
+//======================================================================
   @override
   List<SalesOrganisationDto> fromJson(Map<String, dynamic> json) {
     return List.from(json['value'])
@@ -113,4 +116,66 @@ class _SalesOrganisationListConverter
       'value': object.map((e) => {'salesOrg': e}).toList(),
     };
   }
+}
+
+//======================================================================
+// From response we might receive same salesOrg but have different customer
+// We need to merge those saleOrg become single object
+//
+//======================================================================
+List<SalesOrganisation> _mergeSalesOrg(
+  List<SalesOrganisationDto> salesOrganisations,
+) {
+  final saleOrgs = <SalesOrganisation>[];
+
+  for (final e in salesOrganisations) {
+    // find the coming salesOrg DTO have the same salesOrg code exist on
+    // salesOrgList or not, if yes return the existing SalesOrg domain object
+    // else will return empty
+    final customerExistsSalesOrg = saleOrgs.firstWhere(
+      (f) => f.salesOrg.getOrCrash() == e.salesOrg,
+      orElse: () => SalesOrganisation.empty(),
+    );
+
+    if (customerExistsSalesOrg == SalesOrganisation.empty()) {
+      // New customer directly add to the salesOrg List
+      saleOrgs.add(e.toDomain());
+    } else {
+      // Customer exist in the salesOrg List will merge together
+      final index = saleOrgs.indexOf(customerExistsSalesOrg);
+      final newSalesOrg = customerExistsSalesOrg.copyWith(
+        customerInfos: [
+          ...customerExistsSalesOrg.customerInfos,
+          CustomerInfo(
+            customerCodeSoldTo: e.customerCode,
+            shipToInfos: e.shipToCodes
+                .map((e) => ShipToInfo(shipToCustomerCode: e))
+                .toList(),
+          ),
+        ],
+      );
+      saleOrgs[index] = newSalesOrg;
+    }
+  }
+
+  return saleOrgs;
+}
+
+//======================================================================
+// From saleOrg Entity we might have more than one customer
+// Need to split to two different DTO
+//
+//======================================================================
+List<SalesOrganisationDto> _splitSalesOrg(
+  List<SalesOrganisation> salesOrganisations,
+) {
+  final saleOrgs = <SalesOrganisationDto>[];
+
+  for (final e in salesOrganisations) {
+    for (var i = 0; e.customerInfos.length > i; i++) {
+      saleOrgs.add(SalesOrganisationDto.fromDomain(e, index: i));
+    }
+  }
+
+  return saleOrgs;
 }

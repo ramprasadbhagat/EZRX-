@@ -153,6 +153,14 @@
                    ]
                 },
                 {
+                  "salesOrg":"2501",
+                  "customerCode":"0030003651",
+                  "shipToCode":[
+                     "0070004301",
+                     "0070004312"
+                  ]
+               },
+                {
                    "salesOrg":"3070",
                    "customerCode":"all",
                    "shipToCode":[

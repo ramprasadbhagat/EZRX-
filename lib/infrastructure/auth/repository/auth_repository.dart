@@ -208,7 +208,7 @@ class AuthRepository implements IAuthRepository {
     try {
       final token = await tokenStorage.get();
 
-      return token.toDomain().isExpired
+      return token.toDomain().isExpired && config.appFlavor != Flavor.mock
           ? const Left(AuthFailure.tokenExpired())
           : const Right(unit);
     } on PlatformException catch (e) {
