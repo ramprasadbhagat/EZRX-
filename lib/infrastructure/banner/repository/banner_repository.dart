@@ -1,13 +1,12 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/banner/error/banner_failure.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/banner/repository/i_banner_repository.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_local.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_remote.dart';
 
@@ -23,7 +22,7 @@ class BannerRepository implements IBannerRepository {
   });
 
   @override
-  Future<Either<BannerFailure, List<BannerItem>>> getBanner({
+  Future<Either<ApiFailure, List<BannerItem>>> getBanner({
     required bool isPreSalesOrg,
     required SalesOrganisation salesOrganisation,
   }) async {
@@ -35,8 +34,8 @@ class BannerRepository implements IBannerRepository {
         );
 
         return Right(loginv2);
-      } on MockException catch (e) {
-        return Left(BannerFailure.other(e.message));
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
       }
     }
     try {
@@ -46,34 +45,8 @@ class BannerRepository implements IBannerRepository {
       );
 
       return Right(banner);
-    } on CacheException catch (e) {
-      return Left(BannerFailure.other(e.message));
-    } on ServerException catch (e) {
-      return Left(BannerFailure.serverError(e.message));
-    } on SocketException {
-      return const Left(BannerFailure.poorConnection());
-    } on TimeoutException {
-      return const Left(BannerFailure.serverTimeout());
-    } on OtherException catch (e) {
-      return Left(BannerFailure.other(e.message));
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
-
-  // Future<Either<BannerFailure, List<BannerItem>>> _bannerFailureHandler(
-  //   Function function,
-  // ) async {
-  //   try {
-  //     return await function();
-  //   } on CacheException catch (e) {
-  //     return Left(BannerFailure.other(e.message));
-  //   } on ServerException catch (e) {
-  //     return Left(BannerFailure.serverError(e.message));
-  //   } on SocketException {
-  //     return const Left(BannerFailure.poorConnection());
-  //   } on TimeoutException {
-  //     return const Left(BannerFailure.serverTimeout());
-  //   } on OtherException catch (e) {
-  //     return Left(BannerFailure.other(e.message));
-  //   }
-  // }
 }

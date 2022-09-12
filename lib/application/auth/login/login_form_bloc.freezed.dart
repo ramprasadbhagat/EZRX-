@@ -1184,7 +1184,7 @@ mixin _$LoginFormState {
   bool get rememberPassword => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
-  Option<Either<AuthFailure, dynamic>> get authFailureOrSuccessOption =>
+  Option<Either<ApiFailure, dynamic>> get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -1204,7 +1204,7 @@ abstract class $LoginFormStateCopyWith<$Res> {
       bool rememberPassword,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<AuthFailure, dynamic>> authFailureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -1254,7 +1254,7 @@ class _$LoginFormStateCopyWithImpl<$Res>
       authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<AuthFailure, dynamic>>,
+              as Option<Either<ApiFailure, dynamic>>,
     ));
   }
 }
@@ -1273,7 +1273,7 @@ abstract class _$$_LoginFormStateCopyWith<$Res>
       bool rememberPassword,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<AuthFailure, dynamic>> authFailureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -1325,7 +1325,7 @@ class __$$_LoginFormStateCopyWithImpl<$Res>
       authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<AuthFailure, dynamic>>,
+              as Option<Either<ApiFailure, dynamic>>,
     ));
   }
 }
@@ -1355,7 +1355,7 @@ class _$_LoginFormState implements _LoginFormState {
   @override
   final bool isSubmitting;
   @override
-  final Option<Either<AuthFailure, dynamic>> authFailureOrSuccessOption;
+  final Option<Either<ApiFailure, dynamic>> authFailureOrSuccessOption;
 
   @override
   String toString() {
@@ -1406,7 +1406,7 @@ abstract class _LoginFormState implements LoginFormState {
       required final bool rememberPassword,
       required final bool showErrorMessages,
       required final bool isSubmitting,
-      required final Option<Either<AuthFailure, dynamic>>
+      required final Option<Either<ApiFailure, dynamic>>
           authFailureOrSuccessOption}) = _$_LoginFormState;
 
   @override
@@ -1422,7 +1422,7 @@ abstract class _LoginFormState implements LoginFormState {
   @override
   bool get isSubmitting;
   @override
-  Option<Either<AuthFailure, dynamic>> get authFailureOrSuccessOption;
+  Option<Either<ApiFailure, dynamic>> get authFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$$_LoginFormStateCopyWith<_$_LoginFormState> get copyWith =>

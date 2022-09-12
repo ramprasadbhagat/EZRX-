@@ -324,7 +324,7 @@ mixin _$ProxyLoginFormState {
   Username get username => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
-  Option<Either<AuthFailure, dynamic>> get authFailureOrSuccessOption =>
+  Option<Either<ApiFailure, dynamic>> get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -341,7 +341,7 @@ abstract class $ProxyLoginFormStateCopyWith<$Res> {
       {Username username,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<AuthFailure, dynamic>> authFailureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -376,7 +376,7 @@ class _$ProxyLoginFormStateCopyWithImpl<$Res>
       authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<AuthFailure, dynamic>>,
+              as Option<Either<ApiFailure, dynamic>>,
     ));
   }
 }
@@ -392,7 +392,7 @@ abstract class _$$_ProxyLoginFormStateCopyWith<$Res>
       {Username username,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<AuthFailure, dynamic>> authFailureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -429,7 +429,7 @@ class __$$_ProxyLoginFormStateCopyWithImpl<$Res>
       authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<AuthFailure, dynamic>>,
+              as Option<Either<ApiFailure, dynamic>>,
     ));
   }
 }
@@ -450,7 +450,7 @@ class _$_ProxyLoginFormState implements _ProxyLoginFormState {
   @override
   final bool isSubmitting;
   @override
-  final Option<Either<AuthFailure, dynamic>> authFailureOrSuccessOption;
+  final Option<Either<ApiFailure, dynamic>> authFailureOrSuccessOption;
 
   @override
   String toString() {
@@ -491,7 +491,7 @@ abstract class _ProxyLoginFormState implements ProxyLoginFormState {
       {required final Username username,
       required final bool showErrorMessages,
       required final bool isSubmitting,
-      required final Option<Either<AuthFailure, dynamic>>
+      required final Option<Either<ApiFailure, dynamic>>
           authFailureOrSuccessOption}) = _$_ProxyLoginFormState;
 
   @override
@@ -501,7 +501,7 @@ abstract class _ProxyLoginFormState implements ProxyLoginFormState {
   @override
   bool get isSubmitting;
   @override
-  Option<Either<AuthFailure, dynamic>> get authFailureOrSuccessOption;
+  Option<Either<ApiFailure, dynamic>> get authFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$$_ProxyLoginFormStateCopyWith<_$_ProxyLoginFormState> get copyWith =>

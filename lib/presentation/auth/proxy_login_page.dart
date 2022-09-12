@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/proxyLogin/proxy_login_form_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,17 +26,7 @@ class LoginOnBehalfPage extends StatelessWidget {
               () {},
               (either) => either.fold(
                 (failure) {
-                  final failureMessage = failure.map(
-                    other: (other) => other.message,
-                    serverError: (serverError) => serverError.message,
-                    poorConnection: (_) => 'Poor Internet connection',
-                    serverTimeout: (_) => 'Server time out',
-                    invalidEmailAndPasswordCombination: (_) =>
-                        'Incorrect username and/or password.',
-                    accountLocked: (_) => 'Account is Locked',
-                    accountExpired: (_) => 'Account is Expired',
-                    tokenExpired: (_) => 'Session token is Expired',
-                  );
+                  final failureMessage = failure.failureMessage;
                   showSnackBar(context: context, message: failureMessage.tr());
                 },
                 (_) {

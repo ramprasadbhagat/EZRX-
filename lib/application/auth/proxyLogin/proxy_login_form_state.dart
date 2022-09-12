@@ -6,7 +6,7 @@ class ProxyLoginFormState with _$ProxyLoginFormState {
     required Username username,
     required bool showErrorMessages,
     required bool isSubmitting,
-    required Option<Either<AuthFailure, dynamic>> authFailureOrSuccessOption,
+    required Option<Either<ApiFailure, dynamic>> authFailureOrSuccessOption,
   }) = _ProxyLoginFormState;
 
   factory ProxyLoginFormState.initial() => ProxyLoginFormState(

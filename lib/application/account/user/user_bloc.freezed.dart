@@ -280,7 +280,7 @@ abstract class _Fetch implements UserEvent {
 /// @nodoc
 mixin _$UserState {
   User get user => throw _privateConstructorUsedError;
-  Option<Either<UserFailure, dynamic>> get userFailureOrSuccessOption =>
+  Option<Either<ApiFailure, dynamic>> get userFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -294,7 +294,7 @@ abstract class $UserStateCopyWith<$Res> {
       _$UserStateCopyWithImpl<$Res>;
   $Res call(
       {User user,
-      Option<Either<UserFailure, dynamic>> userFailureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> userFailureOrSuccessOption});
 
   $UserCopyWith<$Res> get user;
 }
@@ -320,7 +320,7 @@ class _$UserStateCopyWithImpl<$Res> implements $UserStateCopyWith<$Res> {
       userFailureOrSuccessOption: userFailureOrSuccessOption == freezed
           ? _value.userFailureOrSuccessOption
           : userFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<UserFailure, dynamic>>,
+              as Option<Either<ApiFailure, dynamic>>,
     ));
   }
 
@@ -340,7 +340,7 @@ abstract class _$$_UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
   @override
   $Res call(
       {User user,
-      Option<Either<UserFailure, dynamic>> userFailureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> userFailureOrSuccessOption});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -369,7 +369,7 @@ class __$$_UserStateCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
       userFailureOrSuccessOption: userFailureOrSuccessOption == freezed
           ? _value.userFailureOrSuccessOption
           : userFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<UserFailure, dynamic>>,
+              as Option<Either<ApiFailure, dynamic>>,
     ));
   }
 }
@@ -383,7 +383,7 @@ class _$_UserState implements _UserState {
   @override
   final User user;
   @override
-  final Option<Either<UserFailure, dynamic>> userFailureOrSuccessOption;
+  final Option<Either<ApiFailure, dynamic>> userFailureOrSuccessOption;
 
   @override
   String toString() {
@@ -415,13 +415,13 @@ class _$_UserState implements _UserState {
 abstract class _UserState implements UserState {
   const factory _UserState(
       {required final User user,
-      required final Option<Either<UserFailure, dynamic>>
+      required final Option<Either<ApiFailure, dynamic>>
           userFailureOrSuccessOption}) = _$_UserState;
 
   @override
   User get user;
   @override
-  Option<Either<UserFailure, dynamic>> get userFailureOrSuccessOption;
+  Option<Either<ApiFailure, dynamic>> get userFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$$_UserStateCopyWith<_$_UserState> get copyWith =>

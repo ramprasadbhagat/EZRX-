@@ -37,7 +37,7 @@ void main() {
 
       tester.printToConsole('Input username');
       await tester.tap(loginUsernameField);
-      await tester.enterText(loginUsernameField, 'ezrxtest05');
+      await tester.enterText(loginUsernameField, 'ezrxtest04');
       await tester.pumpAndSettle(const Duration(microseconds: 200));
 
       tester.printToConsole('Input password');

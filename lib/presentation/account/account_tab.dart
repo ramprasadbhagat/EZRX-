@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
@@ -53,13 +54,7 @@ class _ProfileTile extends StatelessWidget {
               () {},
               (either) => either.fold(
                 (failure) {
-                  final failureMessage = failure.map(
-                    other: (other) => other.message,
-                    serverError: (serverError) => serverError.message,
-                    poorConnection: (_) => 'Poor Internet connection',
-                    serverTimeout: (_) => 'Server time out',
-                    userNotFound: (_) => 'User not found.',
-                  );
+                  final failureMessage = failure.failureMessage;
                   showSnackBar(context: context, message: failureMessage.tr());
                   if (failureMessage == 'authentication failed') {
                     context.read<AuthBloc>().add(const AuthEvent.logout());

@@ -1,7 +1,7 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -11,6 +11,7 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class HomeBanner extends StatelessWidget {
   HomeBanner({Key? key}) : super(key: key);
@@ -24,12 +25,7 @@ class HomeBanner extends StatelessWidget {
           () {},
           (either) => either.fold(
             (failure) {
-              final failureMessage = failure.map(
-                other: (other) => other.message,
-                serverError: (serverError) => serverError.message,
-                poorConnection: (_) => 'Poor Internet connection',
-                serverTimeout: (_) => 'Server time out',
-              );
+              final failureMessage = failure.failureMessage;
               showSnackBar(context: context, message: failureMessage.tr());
               if (failureMessage == 'authentication failed') {
                 context.read<AuthBloc>().add(const AuthEvent.logout());

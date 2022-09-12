@@ -4,11 +4,10 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/cred.dart';
 import 'package:ezrxmobile/domain/auth/entities/loginv2.dart';
-import 'package:ezrxmobile/domain/auth/error/auth_exception.dart';
-import 'package:ezrxmobile/domain/auth/error/auth_failure.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_auth_repository.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/cred_dto.dart';
@@ -17,8 +16,6 @@ import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
-import 'package:flutter/services.dart';
-import 'dart:io';
 
 class AuthRepository implements IAuthRepository {
   final Config config;
@@ -40,7 +37,7 @@ class AuthRepository implements IAuthRepository {
   });
 
   @override
-  Future<Either<AuthFailure, LoginV2>> login({
+  Future<Either<ApiFailure, LoginV2>> login({
     required Username username,
     required Password password,
   }) async {
@@ -54,8 +51,8 @@ class AuthRepository implements IAuthRepository {
         );
 
         return Right(loginv2);
-      } on MockException catch (e) {
-        return Left(AuthFailure.other(e.message));
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
       }
     }
     try {
@@ -67,30 +64,13 @@ class AuthRepository implements IAuthRepository {
       );
 
       return Right(loginv2);
-    } on AuthException catch (e) {
-      return Left(e.map(
-        invalidEmailAndPasswordCombination: (_) =>
-            const AuthFailure.invalidEmailAndPasswordCombination(),
-        accountLocked: (_) => const AuthFailure.accountLocked(),
-        accountExpired: (_) => const AuthFailure.accountExpired(),
-      ));
-    } on CacheException catch (e) {
-      return Left(AuthFailure.other(e.message));
-    } on ServerException catch (e) {
-      return Left(AuthFailure.serverError(e.message));
-    } on SocketException {
-      return const Left(AuthFailure.poorConnection());
-    } on TimeoutException {
-      return const Left(AuthFailure.serverTimeout());
-    } on PlatformException catch (e) {
-      return Left(AuthFailure.other('${e.message}'));
-    } on OtherException catch (e) {
-      return Left(AuthFailure.other(e.message));
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 
   @override
-  Future<Either<AuthFailure, LoginV2>> proxyLogin({
+  Future<Either<ApiFailure, LoginV2>> proxyLogin({
     required Username username,
   }) async {
     final usernameStr = username.getOrCrash();
@@ -101,8 +81,8 @@ class AuthRepository implements IAuthRepository {
         );
 
         return Right(loginv2);
-      } on MockException catch (e) {
-        return Left(AuthFailure.other(e.message));
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
       }
     }
     try {
@@ -111,30 +91,13 @@ class AuthRepository implements IAuthRepository {
       );
 
       return Right(loginv2);
-    } on AuthException catch (e) {
-      return Left(e.map(
-        invalidEmailAndPasswordCombination: (_) =>
-            const AuthFailure.invalidEmailAndPasswordCombination(),
-        accountLocked: (_) => const AuthFailure.accountLocked(),
-        accountExpired: (_) => const AuthFailure.accountExpired(),
-      ));
-    } on CacheException catch (e) {
-      return Left(AuthFailure.other(e.message));
-    } on ServerException catch (e) {
-      return Left(AuthFailure.serverError(e.message));
-    } on SocketException {
-      return const Left(AuthFailure.poorConnection());
-    } on TimeoutException {
-      return const Left(AuthFailure.serverTimeout());
-    } on PlatformException catch (e) {
-      return Left(AuthFailure.other('${e.message}'));
-    } on OtherException catch (e) {
-      return Left(AuthFailure.other(e.message));
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 
   @override
-  Future<Either<AuthFailure, LoginV2>> getEZRXJWT(JWT oktaAccessToken) async {
+  Future<Either<ApiFailure, LoginV2>> getEZRXJWT(JWT oktaAccessToken) async {
     final token = oktaAccessToken.getOrCrash();
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -143,8 +106,8 @@ class AuthRepository implements IAuthRepository {
         );
 
         return Right(loginv2);
-      } on MockException catch (e) {
-        return Left(AuthFailure.other(e.message));
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
       }
     }
     try {
@@ -155,124 +118,93 @@ class AuthRepository implements IAuthRepository {
       );
 
       return Right(loginv2);
-    } on AuthException catch (e) {
-      return Left(e.map(
-        invalidEmailAndPasswordCombination: (_) =>
-            const AuthFailure.invalidEmailAndPasswordCombination(),
-        accountLocked: (_) => const AuthFailure.accountLocked(),
-        accountExpired: (_) => const AuthFailure.accountExpired(),
-      ));
-    } on CacheException catch (e) {
-      return Left(AuthFailure.other(e.message));
-    } on ServerException catch (e) {
-      return Left(AuthFailure.serverError(e.message));
-    } on SocketException {
-      return const Left(AuthFailure.poorConnection());
-    } on TimeoutException {
-      return const Left(AuthFailure.serverTimeout());
-    } on PlatformException catch (e) {
-      return Left(AuthFailure.other('${e.message}'));
-    } on OtherException catch (e) {
-      return Left(AuthFailure.other(e.message));
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> storeJWT({required JWT jwt}) async {
+  Future<Either<ApiFailure, Unit>> storeJWT({required JWT jwt}) async {
     try {
       await tokenStorage.set(JWTDto.fromDomain(jwt));
 
       return const Right(unit);
-    } on PlatformException catch (e) {
-      return Left(AuthFailure.other('${e.message}'));
-    } on ServerException catch (e) {
-      return Left(AuthFailure.other(e.message));
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> initTokenStorage() async {
+  Future<Either<ApiFailure, Unit>> initTokenStorage() async {
     try {
       await tokenStorage.init();
 
       return const Right(unit);
-    } on PlatformException catch (e) {
-      return Left(AuthFailure.other('${e.message}'));
-    } on ServerException catch (e) {
-      return Left(AuthFailure.other(e.message));
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> tokenValid() async {
+  Future<Either<ApiFailure, Unit>> tokenValid() async {
     try {
       final token = await tokenStorage.get();
 
       return token.toDomain().isExpired && config.appFlavor != Flavor.mock
-          ? const Left(AuthFailure.tokenExpired())
+          ? const Left(ApiFailure.tokenExpired())
           : const Right(unit);
-    } on PlatformException catch (e) {
-      return Left(AuthFailure.other('${e.message}'));
-    } on ServerException catch (e) {
-      return Left(AuthFailure.other(e.message));
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> initOkta() async {
+  Future<Either<ApiFailure, Unit>> initOkta() async {
     try {
       await oktaLoginServices.init();
 
       return const Right(unit);
-    } on PlatformException catch (e) {
-      return Left(AuthFailure.other('${e.message}'));
-    } on ServerException catch (e) {
-      return Left(AuthFailure.other(e.message));
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> loginWithOkta() async {
+  Future<Either<ApiFailure, Unit>> loginWithOkta() async {
     try {
       await oktaLoginServices.login();
 
       return const Right(unit);
-    } on PlatformException catch (e) {
-      return Left(AuthFailure.other('${e.message}'));
-    } on ServerException catch (e) {
-      return Left(AuthFailure.other(e.message));
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 
   @override
-  Future<Either<AuthFailure, JWT>> getOktaAccessToken() async {
+  Future<Either<ApiFailure, JWT>> getOktaAccessToken() async {
     try {
       final result = await oktaLoginServices.getAccessToken();
 
       return Right(JWT(result?['message']));
-    } on PlatformException catch (e) {
-      return Left(AuthFailure.other('${e.message}'));
-    } on ServerException catch (e) {
-      return Left(AuthFailure.other(e.message));
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> logout() async {
+  Future<Either<ApiFailure, Unit>> logout() async {
     try {
       await tokenStorage.clear();
       await oktaLoginServices.logout();
 
       return const Right(unit);
-    } on PlatformException catch (e) {
-      return Left(AuthFailure.other('${e.message}'));
-    } on ServerException catch (e) {
-      return Left(AuthFailure.other(e.message));
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> storeCredential({
+  Future<Either<ApiFailure, Unit>> storeCredential({
     required Username username,
     required Password password,
   }) async {
@@ -285,110 +217,41 @@ class AuthRepository implements IAuthRepository {
       );
 
       return const Right(unit);
-    } on PlatformException catch (e) {
-      return Left(AuthFailure.other('${e.message}'));
-    } on ServerException catch (e) {
-      return Left(AuthFailure.other(e.message));
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> deleteCredential() async {
+  Future<Either<ApiFailure, Unit>> deleteCredential() async {
     try {
       await credStorage.delete();
 
       return const Right(unit);
-    } on PlatformException catch (e) {
-      return Left(AuthFailure.other('${e.message}'));
-    } on ServerException catch (e) {
-      return Left(AuthFailure.other(e.message));
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> initCredStorage() async {
+  Future<Either<ApiFailure, Unit>> initCredStorage() async {
     try {
       await credStorage.init();
 
       return const Right(unit);
-    } on PlatformException catch (e) {
-      return Left(AuthFailure.other('${e.message}'));
-    } on ServerException catch (e) {
-      return Left(AuthFailure.other(e.message));
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 
   @override
-  Future<Either<AuthFailure, Cred>> loadCredential() async {
+  Future<Either<ApiFailure, Cred>> loadCredential() async {
     try {
       final credDto = await credStorage.get();
 
       return Right(credDto.toDomain());
-    } on PlatformException catch (e) {
-      return Left(AuthFailure.other('${e.message}'));
-    } on ServerException catch (e) {
-      return Left(AuthFailure.other(e.message));
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
-
-  // Future<Either<AuthFailure, LoginV2>> _loginV2FailureHandler(
-  //   Function function,
-  // ) async {
-  //   try {
-  //     return await function();
-  //   } on AuthException catch (e) {
-  //     return Left(e.map(
-  //       invalidEmailAndPasswordCombination: (_) =>
-  //           const AuthFailure.invalidEmailAndPasswordCombination(),
-  //       accountLocked: (_) => const AuthFailure.accountLocked(),
-  //       accountExpired: (_) => const AuthFailure.accountExpired(),
-  //     ));
-  //   } on CacheException catch (e) {
-  //     return Left(AuthFailure.other(e.message));
-  //   } on ServerException catch (e) {
-  //     return Left(AuthFailure.serverError(e.message));
-  //   } on SocketException {
-  //     return const Left(AuthFailure.poorConnection());
-  //   } on TimeoutException {
-  //     return const Left(AuthFailure.serverTimeout());
-  //   } on PlatformException catch (e) {
-  //     return Left(AuthFailure.other('${e.message}'));
-  //   } on OtherException catch (e) {
-  //     return Left(AuthFailure.other(e.message));
-  //   }
-  // }
-
-  // Future<Either<AuthFailure, Unit>> _unitFailureHandler(
-  //   Function function,
-  // ) async {
-  //   try {
-  //     return await function();
-  //   } on PlatformException catch (e) {
-  //     return Left(AuthFailure.other('${e.message}'));
-  //   } on ServerException catch (e) {
-  //     return Left(AuthFailure.other(e.message));
-  //   }
-  // }
-
-  // Future<Either<AuthFailure, JWT>> _jwtFailureHandler(Function function) async {
-  //   try {
-  //     return await function();
-  //   } on PlatformException catch (e) {
-  //     return Left(AuthFailure.other('${e.message}'));
-  //   } on ServerException catch (e) {
-  //     return Left(AuthFailure.other(e.message));
-  //   }
-  // }
-
-  // Future<Either<AuthFailure, Cred>> _credFailureHandler(
-  //   Function function,
-  // ) async {
-  //   try {
-  //     return await function();
-  //   } on PlatformException catch (e) {
-  //     return Left(AuthFailure.other('${e.message}'));
-  //   } on ServerException catch (e) {
-  //     return Left(AuthFailure.other(e.message));
-  //   }
-  // }
 }

@@ -3,8 +3,8 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/domain/auth/entities/cred.dart';
 import 'package:ezrxmobile/domain/auth/entities/loginv2.dart';
-import 'package:ezrxmobile/domain/auth/error/auth_failure.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -30,7 +30,7 @@ void main() {
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
           (invocation) async => const Left(
-            AuthFailure.other('fake-error'),
+            ApiFailure.other('fake-error'),
           ),
         );
       },
@@ -60,7 +60,7 @@ void main() {
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
           (invocation) async => const Left(
-            AuthFailure.other('fake-error'),
+            ApiFailure.other('fake-error'),
           ),
         );
       },
@@ -80,7 +80,7 @@ void main() {
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
           (invocation) async => const Left(
-            AuthFailure.other('fake-error'),
+            ApiFailure.other('fake-error'),
           ),
         );
       },
@@ -100,7 +100,7 @@ void main() {
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
           (invocation) async => const Left(
-            AuthFailure.other('fake-error'),
+            ApiFailure.other('fake-error'),
           ),
         );
       },
@@ -120,7 +120,7 @@ void main() {
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
           (invocation) async => const Left(
-            AuthFailure.other('fake-error'),
+            ApiFailure.other('fake-error'),
           ),
         );
       },
@@ -140,13 +140,13 @@ void main() {
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
           (invocation) async => const Left(
-            AuthFailure.other('fake-error'),
+            ApiFailure.other('fake-error'),
           ),
         );
 
         when(() => authRepoMock.loginWithOkta()).thenAnswer(
           (invocation) async => const Left(
-            AuthFailure.other('fake-error'),
+            ApiFailure.other('fake-error'),
           ),
         );
       },
@@ -162,7 +162,7 @@ void main() {
           showErrorMessages: false,
           authFailureOrSuccessOption: optionOf(
             const Left(
-              AuthFailure.other('fake-error'),
+              ApiFailure.other('fake-error'),
             ),
           ),
         ),
@@ -175,7 +175,7 @@ void main() {
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
           (invocation) async => const Left(
-            AuthFailure.other('fake-error'),
+            ApiFailure.other('fake-error'),
           ),
         );
 
@@ -183,7 +183,7 @@ void main() {
           () => authRepoMock.loginWithOkta(),
         ).thenAnswer(
           (invocation) async => const Left(
-            AuthFailure.other('fake-error'),
+            ApiFailure.other('fake-error'),
           ),
         );
       },
@@ -199,7 +199,7 @@ void main() {
           showErrorMessages: false,
           authFailureOrSuccessOption: optionOf(
             const Left(
-              AuthFailure.other('fake-error'),
+              ApiFailure.other('fake-error'),
             ),
           ),
         ),
@@ -212,7 +212,7 @@ void main() {
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
           (invocation) async => const Left(
-            AuthFailure.other('fake-error'),
+            ApiFailure.other('fake-error'),
           ),
         );
 
@@ -220,7 +220,7 @@ void main() {
                 authRepoMock.login(username: fakeUser, password: fakePassword))
             .thenAnswer(
           (invocation) async => const Left(
-            AuthFailure.other('fake-error'),
+            ApiFailure.other('fake-error'),
           ),
         );
       },
@@ -240,7 +240,7 @@ void main() {
           showErrorMessages: true,
           authFailureOrSuccessOption: optionOf(
             const Left(
-              AuthFailure.other('fake-error'),
+              ApiFailure.other('fake-error'),
             ),
           ),
         ),
@@ -254,7 +254,7 @@ void main() {
         loginFormState = LoginFormState.initial();
         when(() => authRepoMock.loadCredential()).thenAnswer(
           (invocation) async => const Left(
-            AuthFailure.other('fake-error'),
+            ApiFailure.other('fake-error'),
           ),
         );
 

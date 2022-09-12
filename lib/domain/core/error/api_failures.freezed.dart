@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'auth_failure.dart';
+part of 'api_failures.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,13 +15,14 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$AuthFailure {
+mixin _$ApiFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String message) other,
     required TResult Function(String message) serverError,
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -34,6 +35,7 @@ mixin _$AuthFailure {
     TResult Function(String message)? serverError,
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -46,6 +48,7 @@ mixin _$AuthFailure {
     TResult Function(String message)? serverError,
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -59,6 +62,7 @@ mixin _$AuthFailure {
     required TResult Function(_ServerError value) serverError,
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -72,6 +76,7 @@ mixin _$AuthFailure {
     TResult Function(_ServerError value)? serverError,
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -85,6 +90,7 @@ mixin _$AuthFailure {
     TResult Function(_ServerError value)? serverError,
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -96,19 +102,19 @@ mixin _$AuthFailure {
 }
 
 /// @nodoc
-abstract class $AuthFailureCopyWith<$Res> {
-  factory $AuthFailureCopyWith(
-          AuthFailure value, $Res Function(AuthFailure) then) =
-      _$AuthFailureCopyWithImpl<$Res>;
+abstract class $ApiFailureCopyWith<$Res> {
+  factory $ApiFailureCopyWith(
+          ApiFailure value, $Res Function(ApiFailure) then) =
+      _$ApiFailureCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$AuthFailureCopyWithImpl<$Res> implements $AuthFailureCopyWith<$Res> {
-  _$AuthFailureCopyWithImpl(this._value, this._then);
+class _$ApiFailureCopyWithImpl<$Res> implements $ApiFailureCopyWith<$Res> {
+  _$ApiFailureCopyWithImpl(this._value, this._then);
 
-  final AuthFailure _value;
+  final ApiFailure _value;
   // ignore: unused_field
-  final $Res Function(AuthFailure) _then;
+  final $Res Function(ApiFailure) _then;
 }
 
 /// @nodoc
@@ -119,7 +125,7 @@ abstract class _$$_OtherCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_OtherCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
+class __$$_OtherCopyWithImpl<$Res> extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_OtherCopyWith<$Res> {
   __$$_OtherCopyWithImpl(_$_Other _value, $Res Function(_$_Other) _then)
       : super(_value, (v) => _then(v as _$_Other));
@@ -150,7 +156,7 @@ class _$_Other implements _Other {
 
   @override
   String toString() {
-    return 'AuthFailure.other(message: $message)';
+    return 'ApiFailure.other(message: $message)';
   }
 
   @override
@@ -177,6 +183,7 @@ class _$_Other implements _Other {
     required TResult Function(String message) serverError,
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -192,6 +199,7 @@ class _$_Other implements _Other {
     TResult Function(String message)? serverError,
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -207,6 +215,7 @@ class _$_Other implements _Other {
     TResult Function(String message)? serverError,
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -226,6 +235,7 @@ class _$_Other implements _Other {
     required TResult Function(_ServerError value) serverError,
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -242,6 +252,7 @@ class _$_Other implements _Other {
     TResult Function(_ServerError value)? serverError,
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -258,6 +269,7 @@ class _$_Other implements _Other {
     TResult Function(_ServerError value)? serverError,
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -272,7 +284,7 @@ class _$_Other implements _Other {
   }
 }
 
-abstract class _Other implements AuthFailure {
+abstract class _Other implements ApiFailure {
   const factory _Other(final String message) = _$_Other;
 
   String get message;
@@ -290,7 +302,7 @@ abstract class _$$_ServerErrorCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ServerErrorCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
+class __$$_ServerErrorCopyWithImpl<$Res> extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_ServerErrorCopyWith<$Res> {
   __$$_ServerErrorCopyWithImpl(
       _$_ServerError _value, $Res Function(_$_ServerError) _then)
@@ -322,7 +334,7 @@ class _$_ServerError implements _ServerError {
 
   @override
   String toString() {
-    return 'AuthFailure.serverError(message: $message)';
+    return 'ApiFailure.serverError(message: $message)';
   }
 
   @override
@@ -349,6 +361,7 @@ class _$_ServerError implements _ServerError {
     required TResult Function(String message) serverError,
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -364,6 +377,7 @@ class _$_ServerError implements _ServerError {
     TResult Function(String message)? serverError,
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -379,6 +393,7 @@ class _$_ServerError implements _ServerError {
     TResult Function(String message)? serverError,
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -398,6 +413,7 @@ class _$_ServerError implements _ServerError {
     required TResult Function(_ServerError value) serverError,
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -414,6 +430,7 @@ class _$_ServerError implements _ServerError {
     TResult Function(_ServerError value)? serverError,
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -430,6 +447,7 @@ class _$_ServerError implements _ServerError {
     TResult Function(_ServerError value)? serverError,
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -444,7 +462,7 @@ class _$_ServerError implements _ServerError {
   }
 }
 
-abstract class _ServerError implements AuthFailure {
+abstract class _ServerError implements ApiFailure {
   const factory _ServerError(final String message) = _$_ServerError;
 
   String get message;
@@ -462,7 +480,7 @@ abstract class _$$_PoorConnectionCopyWith<$Res> {
 
 /// @nodoc
 class __$$_PoorConnectionCopyWithImpl<$Res>
-    extends _$AuthFailureCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_PoorConnectionCopyWith<$Res> {
   __$$_PoorConnectionCopyWithImpl(
       _$_PoorConnection _value, $Res Function(_$_PoorConnection) _then)
@@ -479,7 +497,7 @@ class _$_PoorConnection implements _PoorConnection {
 
   @override
   String toString() {
-    return 'AuthFailure.poorConnection()';
+    return 'ApiFailure.poorConnection()';
   }
 
   @override
@@ -498,6 +516,7 @@ class _$_PoorConnection implements _PoorConnection {
     required TResult Function(String message) serverError,
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -513,6 +532,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function(String message)? serverError,
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -528,6 +548,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function(String message)? serverError,
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -547,6 +568,7 @@ class _$_PoorConnection implements _PoorConnection {
     required TResult Function(_ServerError value) serverError,
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -563,6 +585,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function(_ServerError value)? serverError,
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -579,6 +602,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function(_ServerError value)? serverError,
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -593,7 +617,7 @@ class _$_PoorConnection implements _PoorConnection {
   }
 }
 
-abstract class _PoorConnection implements AuthFailure {
+abstract class _PoorConnection implements ApiFailure {
   const factory _PoorConnection() = _$_PoorConnection;
 }
 
@@ -606,7 +630,7 @@ abstract class _$$_ServerTimeoutCopyWith<$Res> {
 
 /// @nodoc
 class __$$_ServerTimeoutCopyWithImpl<$Res>
-    extends _$AuthFailureCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_ServerTimeoutCopyWith<$Res> {
   __$$_ServerTimeoutCopyWithImpl(
       _$_ServerTimeout _value, $Res Function(_$_ServerTimeout) _then)
@@ -623,7 +647,7 @@ class _$_ServerTimeout implements _ServerTimeout {
 
   @override
   String toString() {
-    return 'AuthFailure.serverTimeout()';
+    return 'ApiFailure.serverTimeout()';
   }
 
   @override
@@ -642,6 +666,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     required TResult Function(String message) serverError,
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -657,6 +682,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function(String message)? serverError,
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -672,6 +698,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function(String message)? serverError,
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -691,6 +718,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     required TResult Function(_ServerError value) serverError,
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -707,6 +735,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function(_ServerError value)? serverError,
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -723,6 +752,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function(_ServerError value)? serverError,
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -737,8 +767,157 @@ class _$_ServerTimeout implements _ServerTimeout {
   }
 }
 
-abstract class _ServerTimeout implements AuthFailure {
+abstract class _ServerTimeout implements ApiFailure {
   const factory _ServerTimeout() = _$_ServerTimeout;
+}
+
+/// @nodoc
+abstract class _$$_UserNotFoundCopyWith<$Res> {
+  factory _$$_UserNotFoundCopyWith(
+          _$_UserNotFound value, $Res Function(_$_UserNotFound) then) =
+      __$$_UserNotFoundCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_UserNotFoundCopyWithImpl<$Res> extends _$ApiFailureCopyWithImpl<$Res>
+    implements _$$_UserNotFoundCopyWith<$Res> {
+  __$$_UserNotFoundCopyWithImpl(
+      _$_UserNotFound _value, $Res Function(_$_UserNotFound) _then)
+      : super(_value, (v) => _then(v as _$_UserNotFound));
+
+  @override
+  _$_UserNotFound get _value => super._value as _$_UserNotFound;
+}
+
+/// @nodoc
+
+class _$_UserNotFound implements _UserNotFound {
+  const _$_UserNotFound();
+
+  @override
+  String toString() {
+    return 'ApiFailure.userNotFound()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_UserNotFound);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+  }) {
+    return userNotFound();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+  }) {
+    return userNotFound?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    required TResult orElse(),
+  }) {
+    if (userNotFound != null) {
+      return userNotFound();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+  }) {
+    return userNotFound(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+  }) {
+    return userNotFound?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    required TResult orElse(),
+  }) {
+    if (userNotFound != null) {
+      return userNotFound(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UserNotFound implements ApiFailure {
+  const factory _UserNotFound() = _$_UserNotFound;
 }
 
 /// @nodoc
@@ -751,7 +930,7 @@ abstract class _$$_InvalidEmailAndPasswordCombinationCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InvalidEmailAndPasswordCombinationCopyWithImpl<$Res>
-    extends _$AuthFailureCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_InvalidEmailAndPasswordCombinationCopyWith<$Res> {
   __$$_InvalidEmailAndPasswordCombinationCopyWithImpl(
       _$_InvalidEmailAndPasswordCombination _value,
@@ -771,7 +950,7 @@ class _$_InvalidEmailAndPasswordCombination
 
   @override
   String toString() {
-    return 'AuthFailure.invalidEmailAndPasswordCombination()';
+    return 'ApiFailure.invalidEmailAndPasswordCombination()';
   }
 
   @override
@@ -791,6 +970,7 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function(String message) serverError,
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -806,6 +986,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function(String message)? serverError,
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -821,6 +1002,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function(String message)? serverError,
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -840,6 +1022,7 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function(_ServerError value) serverError,
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -856,6 +1039,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function(_ServerError value)? serverError,
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -872,6 +1056,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function(_ServerError value)? serverError,
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -886,7 +1071,7 @@ class _$_InvalidEmailAndPasswordCombination
   }
 }
 
-abstract class _InvalidEmailAndPasswordCombination implements AuthFailure {
+abstract class _InvalidEmailAndPasswordCombination implements ApiFailure {
   const factory _InvalidEmailAndPasswordCombination() =
       _$_InvalidEmailAndPasswordCombination;
 }
@@ -900,7 +1085,7 @@ abstract class _$$_AccountLockedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_AccountLockedCopyWithImpl<$Res>
-    extends _$AuthFailureCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_AccountLockedCopyWith<$Res> {
   __$$_AccountLockedCopyWithImpl(
       _$_AccountLocked _value, $Res Function(_$_AccountLocked) _then)
@@ -917,7 +1102,7 @@ class _$_AccountLocked implements _AccountLocked {
 
   @override
   String toString() {
-    return 'AuthFailure.accountLocked()';
+    return 'ApiFailure.accountLocked()';
   }
 
   @override
@@ -936,6 +1121,7 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function(String message) serverError,
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -951,6 +1137,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function(String message)? serverError,
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -966,6 +1153,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function(String message)? serverError,
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -985,6 +1173,7 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function(_ServerError value) serverError,
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -1001,6 +1190,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function(_ServerError value)? serverError,
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -1017,6 +1207,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function(_ServerError value)? serverError,
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -1031,7 +1222,7 @@ class _$_AccountLocked implements _AccountLocked {
   }
 }
 
-abstract class _AccountLocked implements AuthFailure {
+abstract class _AccountLocked implements ApiFailure {
   const factory _AccountLocked() = _$_AccountLocked;
 }
 
@@ -1044,7 +1235,7 @@ abstract class _$$_AccountExpiredCopyWith<$Res> {
 
 /// @nodoc
 class __$$_AccountExpiredCopyWithImpl<$Res>
-    extends _$AuthFailureCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_AccountExpiredCopyWith<$Res> {
   __$$_AccountExpiredCopyWithImpl(
       _$_AccountExpired _value, $Res Function(_$_AccountExpired) _then)
@@ -1061,7 +1252,7 @@ class _$_AccountExpired implements _AccountExpired {
 
   @override
   String toString() {
-    return 'AuthFailure.accountExpired()';
+    return 'ApiFailure.accountExpired()';
   }
 
   @override
@@ -1080,6 +1271,7 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function(String message) serverError,
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -1095,6 +1287,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function(String message)? serverError,
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -1110,6 +1303,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function(String message)? serverError,
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -1129,6 +1323,7 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function(_ServerError value) serverError,
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -1145,6 +1340,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function(_ServerError value)? serverError,
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -1161,6 +1357,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function(_ServerError value)? serverError,
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -1175,7 +1372,7 @@ class _$_AccountExpired implements _AccountExpired {
   }
 }
 
-abstract class _AccountExpired implements AuthFailure {
+abstract class _AccountExpired implements ApiFailure {
   const factory _AccountExpired() = _$_AccountExpired;
 }
 
@@ -1187,8 +1384,7 @@ abstract class _$$_TokenExpiredCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TokenExpiredCopyWithImpl<$Res>
-    extends _$AuthFailureCopyWithImpl<$Res>
+class __$$_TokenExpiredCopyWithImpl<$Res> extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_TokenExpiredCopyWith<$Res> {
   __$$_TokenExpiredCopyWithImpl(
       _$_TokenExpired _value, $Res Function(_$_TokenExpired) _then)
@@ -1205,7 +1401,7 @@ class _$_TokenExpired implements _TokenExpired {
 
   @override
   String toString() {
-    return 'AuthFailure.tokenExpired()';
+    return 'ApiFailure.tokenExpired()';
   }
 
   @override
@@ -1224,6 +1420,7 @@ class _$_TokenExpired implements _TokenExpired {
     required TResult Function(String message) serverError,
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -1239,6 +1436,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function(String message)? serverError,
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -1254,6 +1452,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function(String message)? serverError,
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -1273,6 +1472,7 @@ class _$_TokenExpired implements _TokenExpired {
     required TResult Function(_ServerError value) serverError,
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -1289,6 +1489,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function(_ServerError value)? serverError,
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -1305,6 +1506,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function(_ServerError value)? serverError,
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -1319,6 +1521,6 @@ class _$_TokenExpired implements _TokenExpired {
   }
 }
 
-abstract class _TokenExpired implements AuthFailure {
+abstract class _TokenExpired implements ApiFailure {
   const factory _TokenExpired() = _$_TokenExpired;
 }

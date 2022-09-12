@@ -2,10 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
-import 'package:ezrxmobile/domain/banner/error/banner_failure.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
 abstract class IBannerRepository {
-  Future<Either<BannerFailure, List<BannerItem>>> getBanner({
+  Future<Either<ApiFailure, List<BannerItem>>> getBanner({
     required bool isPreSalesOrg,
     required SalesOrganisation salesOrganisation,
   });

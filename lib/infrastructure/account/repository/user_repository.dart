@@ -1,12 +1,12 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/error/user_failure.dart';
 import 'package:ezrxmobile/domain/account/repository/i_user_repository.dart';
+import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
@@ -28,14 +28,14 @@ class UserRepository implements IUserRepository {
   });
 
   @override
-  Future<Either<UserFailure, User>> getUser() async {
+  Future<Either<ApiFailure, User>> getUser() async {
     if (config.appFlavor == Flavor.mock) {
       try {
         final user = await localDataSource.getUser();
 
         return Right(user);
       } on MockException catch (e) {
-        return Left(UserFailure.other(e.message));
+        return Left(ApiFailure.other(e.message));
       }
     }
     try {
@@ -48,34 +48,8 @@ class UserRepository implements IUserRepository {
       await firebaseCrashlyticsService.crashlytics.setUserIdentifier(user.id);
 
       return Right(user);
-    } on ServerException catch (e) {
-      return Left(UserFailure.serverError(e.message));
-    } on CacheException catch (e) {
-      return Left(UserFailure.other(e.message));
-    } on SocketException {
-      return const Left(UserFailure.poorConnection());
-    } on TimeoutException {
-      return const Left(UserFailure.serverTimeout());
-    } on OtherException catch (e) {
-      return Left(UserFailure.other(e.message));
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
-
-  // Future<Either<UserFailure, User>> _userFailureHandler(
-  //   Function function,
-  // ) async {
-  //   try {
-  //     return await function();
-  //   } on ServerException catch (e) {
-  //     return Left(UserFailure.serverError(e.message));
-  //   } on CacheException catch (e) {
-  //     return Left(UserFailure.other(e.message));
-  //   } on SocketException {
-  //     return const Left(UserFailure.poorConnection());
-  //   } on TimeoutException {
-  //     return const Left(UserFailure.serverTimeout());
-  //   } on OtherException catch (e) {
-  //     return Left(UserFailure.other(e.message));
-  //   }
-  // }
 }
