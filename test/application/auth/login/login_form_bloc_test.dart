@@ -292,5 +292,33 @@ void main() {
         ),
       ],
     );
+
+    blocTest(
+      'Login with empty username input',
+      build: () => LoginFormBloc(authRepository: authRepoMock),
+      setUp: () {
+        loginFormState = LoginFormState.initial();
+        when(() => authRepoMock.loadCredential()).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+
+        when(() => authRepoMock.login(
+            username: Username(''), password: fakePassword)).thenAnswer(
+          (invocation) async => Right(LoginV2(jwt: fakeJWT)),
+        );
+      },
+      act: (LoginFormBloc bloc) =>
+          bloc..add(const LoginFormEvent.loginWithEmailAndPasswordPressed()),
+      expect: () => [
+        loginFormState.copyWith(
+          username: Username(''),
+          isSubmitting: false,
+          showErrorMessages: true,
+          authFailureOrSuccessOption: none(),
+        ),
+      ],
+    );
   });
 }

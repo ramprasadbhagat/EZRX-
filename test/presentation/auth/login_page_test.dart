@@ -14,7 +14,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../utils/material_frame_wrapper.dart';
+import '../../utils/material_frame_wrapper.dart';
 
 class LoginFormBlocMock extends MockBloc<LoginFormEvent, LoginFormState>
     implements LoginFormBloc {}

@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/auth/proxyLogin/proxy_login_form_bloc.dart';
+import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -120,7 +120,7 @@ class LoginButton extends StatelessWidget {
         return SizedBox(
           width: MediaQuery.of(context).size.width * 0.8,
           child: ElevatedButton(
-            key: const Key('loginSubmitButton'),
+            key: const Key('proxyLoginSubmitButton'),
             onPressed: state.isSubmitting
                 ? null
                 : () {
