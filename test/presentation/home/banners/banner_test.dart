@@ -1,7 +1,9 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner.dart';
@@ -61,8 +63,33 @@ void main() {
   group('Home Banner', () {
     setUp(() {
       bannerBlocMock = BannerBlocMock();
-
       when(() => bannerBlocMock.state).thenReturn(BannerState.initial());
+      when(() => bannerBlocMock.state.bannerFailureOrSuccessOption)
+          .thenReturn(optionOf(const Left(ApiFailure.other('fake-error'))));
+    });
+
+    testWidgets('Test login error', (tester) async {
+      final expectedStates = [
+        BannerState.initial().bannerFailureOrSuccessOption,
+      ];
+
+      whenListen(bannerBlocMock, Stream.fromIterable(expectedStates));
+
+      await tester.pumpWidget(
+        MaterialFrameWrapper(
+          child: BlocProvider<BannerBloc>(
+            create: (context) => bannerBlocMock,
+            child: HomeBanner(),
+          ),
+        ),
+      );
+
+      final errorMessage = find.byKey(const Key('snackBarMessage'));
+
+      expect(errorMessage, findsNothing);
+      await tester.pump();
+
+      expect(errorMessage, findsOneWidget);
     });
 
     testWidgets('Banner test 1', (tester) async {
