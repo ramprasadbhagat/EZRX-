@@ -43,6 +43,21 @@ void main() {
     );
   });
 
+  // group('Banner Bloc', () {
+  //   blocTest<BannerBloc, BannerState>(
+  //     'Create Banner bloc',
+  //     build: () => BannerBlocMock(),
+  //     setUp: () {
+  //       when(() => bannerBlocMock. ).thenAnswer(
+  //         (invocation) async => const Left(
+  //           ApiFailure.other('fake-error'),
+  //         ),
+  //       );
+  //     },
+  //     expect: () => [],
+  //   );
+  // });
+
   group('Home Banner', () {
     setUp(() {
       bannerBlocMock = BannerBlocMock();
