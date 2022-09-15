@@ -107,11 +107,11 @@ void main() {
       },
       expect: () => [
         BannerState.initial().copyWith(
-          bannerFailureOrSuccessOption: optionOf( const Left(ApiFailure.other('mock-error')))
-        )
+            bannerFailureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('mock-error'))))
       ],
-    );    
-    
+    );
+
     blocTest<BannerBloc, BannerState>(
       'Simulate successful fetch banner',
       build: () => BannerBloc(
@@ -138,6 +138,69 @@ void main() {
           bannerFailureOrSuccessOption: none(),
         )
       ],
+    );
+
+    blocTest<BannerBloc, BannerState>(
+      'Test BannerBlocStream for SalesOrgState.initial',
+      build: () => BannerBloc(
+        bannerRepository: mockBannerRepository,
+        salesOrgBloc: mockSalesOrgBloc,
+      ),
+      setUp: () {
+        when(() => mockSalesOrgBloc.stream).thenAnswer((invocation) {
+          return Stream.value(SalesOrgState.initial());
+        });
+        when(() => mockBannerRepository.getBanner(
+              isPreSalesOrg: false,
+              salesOrganisation: mockSalesOrganisation,
+            )).thenAnswer(
+          (invocation) async => Right([BannerItem.empty()]),
+        );
+      },
+      act: (bloc) {
+        bloc.add(BannerEvent.fetch(
+          isPreSalesOrg: false,
+          salesOrganisation: mockSalesOrganisation,
+        ));
+      },
+      expect: () => [BannerState.initial()],
+    );
+
+    blocTest<BannerBloc, BannerState>(
+      'Test BannerBlocStream for SalesOrg 2601',
+      build: () => BannerBloc(
+        bannerRepository: mockBannerRepository,
+        salesOrgBloc: mockSalesOrgBloc,
+      ),
+      setUp: () {
+        when(() => mockSalesOrgBloc.stream).thenAnswer((invocation) {
+          return Stream.fromIterable([
+            SalesOrgState.initial(),
+            SalesOrgState.initial().copyWith(
+              salesOrganisation: salesOrganisation2601,
+            ),
+          ]);
+        });
+        when(() => mockBannerRepository.getBanner(
+              isPreSalesOrg: false,
+              salesOrganisation: mockSalesOrganisation,
+            )).thenAnswer(
+          (invocation) async => Right([BannerItem.empty()]),
+        );
+        when(() => mockBannerRepository.getBanner(
+              isPreSalesOrg: false,
+              salesOrganisation: salesOrganisation2601,
+            )).thenAnswer(
+          (invocation) async => Right([BannerItem.empty()]),
+        );
+      },
+      act: (bloc) {
+        bloc.add(BannerEvent.fetch(
+          isPreSalesOrg: false,
+          salesOrganisation: mockSalesOrganisation,
+        ));
+      },
+      expect: () => [BannerState.initial()],
     );
   });
 }
