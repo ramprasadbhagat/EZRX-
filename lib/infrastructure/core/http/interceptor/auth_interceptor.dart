@@ -100,7 +100,7 @@ class AuthInterceptor extends Interceptor {
         ),
       );
       final response = await dio.request(
-        '/ezrxapi/api/loginAd',
+        '${config.urlConstants}loginAd',
         data: jsonEncode(
           {
             'query': authQueryMutation.getOktaTokenLoginQuery(

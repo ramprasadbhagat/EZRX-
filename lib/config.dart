@@ -11,12 +11,27 @@ class Config {
       case Flavor.mock:
         return 'http://127.0.0.1:7091';
       case Flavor.dev:
-        return 'https://dev.ezrx.com/';
+        return 'https://dev.ezrx.com';
       case Flavor.uat:
         return 'https://zpprodapiportalapimgmt.apimanagement.ap1.hana.ondemand.com';
       case Flavor.prod:
       default:
         return 'https://ezrx.com';
+    }
+  }
+
+  String get urlConstants {
+    switch (appFlavor) {
+      case Flavor.mock:
+        return '';
+      case Flavor.dev:
+        return '/api/';
+      case Flavor.uat:
+        return '/ezrxapi/api/';
+      case Flavor.prod:
+        return '/ezrxapi/api/';
+      default:
+        return '';
     }
   }
 

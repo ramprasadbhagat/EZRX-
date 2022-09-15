@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/loginv2.dart';
 import 'package:ezrxmobile/domain/auth/error/auth_exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
@@ -13,10 +14,12 @@ class AuthRemoteDataSource {
   HttpService httpService;
   AuthQueryMutation authQueryMutation;
   DataSourceExceptionHandler dataSourceExceptionHandler;
+  Config config;
   AuthRemoteDataSource({
     required this.httpService,
     required this.authQueryMutation,
     required this.dataSourceExceptionHandler,
+    required this.config,
   });
 
   Future<LoginV2> loginWithPassword({
@@ -27,7 +30,7 @@ class AuthRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
-        url: '/ezrxapi/api/loginAd',
+        url: '${config.urlConstants}loginAd',
         data: jsonEncode(
           {
             'query': authQueryMutation.getPasswordLoginQuery(
@@ -51,7 +54,7 @@ class AuthRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
-        url: '/ezrxapi/api/loginAd',
+        url: '${config.urlConstants}loginAd',
         data: jsonEncode(
           {
             'query': authQueryMutation.getOktaTokenLoginQuery(
@@ -72,7 +75,7 @@ class AuthRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
-        url: '/ezrxapi/api/loginAd',
+        url: '${config.urlConstants}loginAd',
         data: jsonEncode(
           {
             'query': authQueryMutation.getProxyLoginQuery(username),

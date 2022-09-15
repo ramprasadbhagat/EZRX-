@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_query_mutation.dart';
@@ -12,10 +13,12 @@ class BannerRemoteDataSource {
   HttpService httpService;
   BannerQueryMutation bannerQueryMutation;
   DataSourceExceptionHandler dataSourceExceptionHandler;
+  Config config;
   BannerRemoteDataSource({
     required this.httpService,
     required this.bannerQueryMutation,
     required this.dataSourceExceptionHandler,
+    required this.config,
   });
 
   Future<List<BannerItem>> getBanners({
@@ -25,7 +28,7 @@ class BannerRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
-        url: '/ezrxapi/api/license',
+        url: '${config.urlConstants}license',
         data: jsonEncode({
           'query': bannerQueryMutation.getBannerQuery(isPreSalesOrg, salesOrg),
         }),

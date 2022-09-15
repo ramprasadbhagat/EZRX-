@@ -119,6 +119,7 @@ void setupLocator() {
       httpService: locator<HttpService>(),
       authQueryMutation: locator<AuthQueryMutation>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      config: locator<Config>(),
     ),
   );
 
@@ -193,6 +194,7 @@ void setupLocator() {
       httpService: locator<HttpService>(),
       bannerQueryMutation: locator<BannerQueryMutation>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      config: locator<Config>(),
     ),
   );
 
