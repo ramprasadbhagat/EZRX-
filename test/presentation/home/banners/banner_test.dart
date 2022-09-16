@@ -56,6 +56,8 @@ void main() {
   final salesOrganisation2601 = SalesOrganisation(
       salesOrg: salesOrg2601, customerInfos: <CustomerInfo>[]);
 
+  late final mockBannerItem;
+
   late final Uint8List imageUint8List;
 
   setUpAll(() async {
@@ -133,8 +135,9 @@ void main() {
         find.byKey(const Key('homeBanner')),
         findsOneWidget,
       );
+      final bannerTile = find.byType(BannerTile);
       expect(
-        find.byType(BannerTile),
+        bannerTile,
         findsOneWidget,
       );
     });
@@ -165,8 +168,8 @@ void main() {
       );
     });
 
-
-    testWidgets('Banner test 3 - is User getting logged out when Auth failed', (tester) async {
+    testWidgets('Banner test 3 - is User getting logged out when Auth failed',
+        (tester) async {
       final bannerBloc = locator<MockBannerBloc>();
 
       when(() => bannerBloc.stream).thenAnswer((invocation) {
@@ -192,7 +195,6 @@ void main() {
       );
     });
 
-
     testWidgets('Banner test 4 - No API error', (tester) async {
       final bannerBloc = locator<MockBannerBloc>();
 
@@ -204,8 +206,7 @@ void main() {
               BannerItem.empty(),
               BannerItem.empty(),
             ],
-            bannerFailureOrSuccessOption:
-                optionOf(const Right('No API error')),
+            bannerFailureOrSuccessOption: optionOf(const Right('No API error')),
           ),
         ]);
       });
@@ -213,11 +214,11 @@ void main() {
       await tester.pumpWidget(getWUT());
       await tester.pump();
 
-
       expect(
         find.byKey(const Key('homeBanner')),
         findsOneWidget,
       );
     });
+
   });
 }
