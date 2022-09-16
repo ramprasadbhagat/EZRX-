@@ -75,8 +75,8 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
 
           failureOrSuccess.fold(
             (_) {},
-            (loginv2) {
-              authRepository.storeJWT(jwt: loginv2.jwt);
+            (login) {
+              authRepository.storeJWT(jwt: login.jwt);
               if (state.rememberPassword) {
                 authRepository.storeCredential(
                   username: state.username,

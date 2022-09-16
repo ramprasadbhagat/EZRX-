@@ -1,9 +1,14 @@
+import 'dart:io';
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:upgrader/upgrader.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -17,25 +22,12 @@ class SplashPage extends StatelessWidget {
           initial: (_) => _showLoadingDialog(context),
           loading: (_) => _showLoadingDialog(context),
           authenticated: (_) {
-            // showSnackBar(context: context, message: 'Welcome back');
             context.router.replaceAll([
               const SplashPageRoute(),
               const HomeNavigationTabbarRoute(),
             ]);
           },
           unauthenticated: (_) {
-            // final message = unauthenticated.failure?.map(
-            //   other: (other) => other.message,
-            //   serverError: (_) => 'Server Error',
-            //   invalidEmailAndPasswordCombination: (_) =>
-            //       'Incorrect username and/or password.',
-            //   accountLocked: (_) => 'Account is Locked',
-            //   accountExpired: (_) => 'Account is Expired',
-            //   tokenExpired: (_) => 'Session token is Expired',
-            // );
-            // if (message != null) {
-            //   showSnackBar(context: context, message: message);
-            // }
             context.router.replaceAll([
               const SplashPageRoute(),
               const LoginPageRoute(),
@@ -43,7 +35,18 @@ class SplashPage extends StatelessWidget {
           },
         );
       },
-      child: const Scaffold(),
+      child: UpgradeAlert(
+        upgrader: Upgrader(
+          messages: _UpgraderLocalizationMessage(),
+          dialogStyle: Platform.isIOS
+              ? UpgradeDialogStyle.cupertino
+              : UpgradeDialogStyle.material,
+          debugLogging:
+              locator<Config>().appFlavor == Flavor.prod ? false : true,
+          minAppVersion: '1.0.0',
+        ),
+        child: const Scaffold(),
+      ),
     );
   }
 
@@ -68,5 +71,29 @@ class SplashPage extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+class _UpgraderLocalizationMessage extends UpgraderMessages {
+  @override
+  String message(UpgraderMessage messageKey) {
+    switch (messageKey) {
+      case UpgraderMessage.body:
+        return 'A new version of {{appName}} is available!'.tr();
+      case UpgraderMessage.buttonTitleIgnore:
+        return 'Ignore'.tr();
+      case UpgraderMessage.buttonTitleLater:
+        return 'Later'.tr();
+      case UpgraderMessage.buttonTitleUpdate:
+        return 'Update Now'.tr();
+      case UpgraderMessage.prompt:
+        return 'Want to update?'.tr();
+      case UpgraderMessage.releaseNotes:
+        return 'Release Notes'.tr();
+      case UpgraderMessage.title:
+        return 'Update App?'.tr();
+      default:
+        return super.message(messageKey) ?? '';
+    }
   }
 }

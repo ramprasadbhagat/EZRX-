@@ -340,3 +340,10 @@ Server Error,Server Error,เซิร์ฟเวอร์ผิดพลาด
 Account is Locked,Account is Locked,บัญชีถูกล็อค,帳戶被鎖定,အကောင့်လော့ခ်ချထားတယ်။,Tài khoản bị khoá,គណនីត្រូវបានចាក់សោ
 Account is Expired,Account is Expired,บัญชีหมดอายุ,帳戶已過期,အကောင့်သက်တမ်းကုန်သွားပါပြီ။,Tài khoản đã hết hạn,គណនីត្រូវបានផុតកំណត់
 Session token is Expired,Session token is Expired,โทเค็นเซสชันหมดอายุ,登入憑證已過期,စက်ရှင် တိုကင်သည် သက်တမ်းကုန်သွားပါပြီ။,Mã thông báo phiên đã hết hạn,សញ្ញាសម្ងាត់សម័យគឺផុតកំណត់
+Ignore,Ignore,ไม่สนใจ,忽略,လျစ်လျူရှုပါ။,Phớt lờ,មិនអើពើ
+Later,Later,ภายหลัง,下次吧,နောက်တော့,Sau,ពេលក្រោយ
+Update Now,Update Now,อัพเดทตอนนี้,現在更新,ယခု အပ်ဒိတ်လုပ်ပါ။,Cập nhật bây giờ,ធ្វើបច្ចុប្បន្នភាពឥឡូវនេះ
+Want to update?,Want to update?,ต้องการที่จะปรับปรุง?,想要更新嗎？,အပ်ဒိတ်လုပ်လိုပါသလား။,Bạn muốn cập nhật?,ចង់អាប់ដេត?
+Release Notes,Release Notes,บันทึกประจำรุ่น,發佈通知,ထုတ်ဝေမှုမှတ်စုများ,Ghi chú phát hành,កំណត់ចំណាំចេញផ្សាយ
+Update App?,Update App?,อัพเดทแอพ?,更新應用程序？,အက်ပ်ကို အပ်ဒိတ်လုပ်မလား။,Cập nhật ứng dụng?,អាប់ដេតកម្មវិធី?
+A new version of {{appName}} is available!,A new version of {{appName}} is available!,A new version of {{appName}} is available!,{{appName}} 有新版本了!,A new version of {{appName}} is available!,A new version of {{appName}} is available!,A new version of {{appName}} is available!

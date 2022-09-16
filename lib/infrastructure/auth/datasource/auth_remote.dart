@@ -101,9 +101,9 @@ class AuthRemoteDataSource {
         ),
       );
 
-      _authExceptionChecker(res: res, jsonKey: 'proxyLogin');
+      _authExceptionChecker(res: res, jsonKey: 'proxyLoginV3');
 
-      return LoginDto.fromJson(res.data['data']['proxyLogin']).toDomain();
+      return LoginDto.fromJson(res.data['data']['proxyLoginV3']).toDomain();
     });
   }
 

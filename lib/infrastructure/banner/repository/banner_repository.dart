@@ -28,12 +28,12 @@ class BannerRepository implements IBannerRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final loginv2 = await localDataSource.getBanners(
+        final banner = await localDataSource.getBanners(
           isPreSalesOrg: isPreSalesOrg,
           salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         );
 
-        return Right(loginv2);
+        return Right(banner);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }

@@ -24,6 +24,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:sizer/sizer.dart';
+import 'package:upgrader/upgrader.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -39,21 +40,22 @@ Future<void> _firebaseMessagingBackgroundHandler(
 }
 
 Future<void> initialSetup() async {
-  if (const bool.fromEnvironment('dart.vm.product')) {
-    debugPrint = (String? message, {int? wrapWidth}) {};
-  }
   WidgetsFlutterBinding.ensureInitialized();
-  if (Platform.isAndroid) {
-    await AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
+  if (kDebugMode) {
+    await Upgrader.clearSavedSettings();
+    if (Platform.isAndroid) {
+      await AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
+    }
+  } else {
+    debugPrint = (String? message, {int? wrapWidth}) {};
+    FlutterError.onError = _crashlytics.recordFlutterError;
   }
+
   await EasyLocalization.ensureInitialized();
   await Wakelock.enable();
   await Firebase.initializeApp();
   setupLocator();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  if (!kDebugMode) {
-    FlutterError.onError = _crashlytics.recordFlutterError;
-  }
 }
 
 void runAppWithCrashlyticsAndLocalization() {

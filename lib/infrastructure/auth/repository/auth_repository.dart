@@ -45,25 +45,25 @@ class AuthRepository implements IAuthRepository {
     final passwordStr = password.getOrCrash();
     if (config.appFlavor == Flavor.mock) {
       try {
-        final loginv2 = await localDataSource.loginWithPassword(
+        final login = await localDataSource.loginWithPassword(
           username: usernameStr,
           password: passwordStr,
         );
 
-        return Right(loginv2);
+        return Right(login);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
     }
     try {
       final fcmToken = await pushNotificationService.getFCMToken();
-      final loginv2 = await remoteDataSource.loginWithPassword(
+      final login = await remoteDataSource.loginWithPassword(
         username: usernameStr,
         password: passwordStr,
         fcmToken: fcmToken,
       );
 
-      return Right(loginv2);
+      return Right(login);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
@@ -76,21 +76,21 @@ class AuthRepository implements IAuthRepository {
     final usernameStr = username.getOrCrash();
     if (config.appFlavor == Flavor.mock) {
       try {
-        final loginv2 = await localDataSource.proxyLoginWithUsername(
+        final login = await localDataSource.proxyLoginWithUsername(
           username: usernameStr,
         );
 
-        return Right(loginv2);
+        return Right(login);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
     }
     try {
-      final loginv2 = await remoteDataSource.proxyLoginWithUsername(
+      final login = await remoteDataSource.proxyLoginWithUsername(
         username: usernameStr,
       );
 
-      return Right(loginv2);
+      return Right(login);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
@@ -101,23 +101,23 @@ class AuthRepository implements IAuthRepository {
     final token = oktaAccessToken.getOrCrash();
     if (config.appFlavor == Flavor.mock) {
       try {
-        final loginv2 = await localDataSource.loginWithOktaToken(
+        final login = await localDataSource.loginWithOktaToken(
           oktaAccessToken: token,
         );
 
-        return Right(loginv2);
+        return Right(login);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
     }
     try {
       final fcmToken = await pushNotificationService.getFCMToken();
-      final loginv2 = await remoteDataSource.loginWithOktaToken(
+      final login = await remoteDataSource.loginWithOktaToken(
         oktaAccessToken: token,
         fcmToken: fcmToken,
       );
 
-      return Right(loginv2);
+      return Right(login);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
