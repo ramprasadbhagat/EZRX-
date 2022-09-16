@@ -13,6 +13,7 @@ abstract class ZPColors {
   static const Color primary = Color.fromRGBO(0, 93, 98, 1.0);
   static const Color secondary = Color.fromRGBO(195, 213, 0, 1.0);
   static const Color gradient = Color.fromRGBO(0, 133, 138, 1.0);
+  static const Color announcementColor = Color(0xffff7c65);
 
   static const MaterialColor kPrimaryColor = MaterialColor(
     0xFF005d62,

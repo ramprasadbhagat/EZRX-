@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 
 class HttpService {
-  static late Dio _dio;
+  late Dio _dio;
   Dio dio() => _dio;
 
   HttpService({
@@ -24,6 +24,8 @@ class HttpService {
       LogInterceptor(requestBody: true, responseBody: true),
     ]);
   }
+
+  HttpService.mockDio(Dio dio) : _dio = dio;
 
   Future<Response> request({
     required String method,

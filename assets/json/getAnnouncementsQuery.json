@@ -1,0 +1,3 @@
+{
+    "query":"    {\n      getAnnouncements {\n        id\n        active\n        description\n        startTime\n        endTime\n        type\n      }\n    }\n    "
+}

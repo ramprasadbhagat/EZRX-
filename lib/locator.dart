@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/application/announcement/bloc/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
@@ -9,6 +10,10 @@ import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_local.dar
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_org_repository.dart';
+import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_local.dart';
+import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_remote.dart';
+import 'package:ezrxmobile/infrastructure/announcement/repository/announcement_repository.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
@@ -252,5 +257,34 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => CountlyService(),
+  );
+
+  //============================================================
+  //  Announcement
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => AnnouncementQueryMutation());
+
+  locator.registerLazySingleton(() => AnnouncementRemoteDataSource(
+        httpService: locator<HttpService>(),
+        queryMutation: locator<AnnouncementQueryMutation>(),
+        exceptionHandler: locator<DataSourceExceptionHandler>(),
+      ));
+
+  locator.registerLazySingleton(() => AnnouncementLocalDataSource());
+
+  locator.registerLazySingleton(
+    () => AnnouncementRepository(
+      config: locator<Config>(),
+      remoteDataSource: locator<AnnouncementRemoteDataSource>(),
+      localDataSource: locator<AnnouncementLocalDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => AnnouncementBloc(
+      announcementRepository: locator<AnnouncementRepository>(),
+    ),
   );
 }

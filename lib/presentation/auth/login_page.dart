@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -44,28 +45,33 @@ class LoginPage extends StatelessWidget {
             buildWhen: (previous, current) =>
                 previous.showErrorMessages != current.showErrorMessages,
             builder: (context, state) {
-              return Form(
-                autovalidateMode: state.showErrorMessages
-                    ? AutovalidateMode.always
-                    : AutovalidateMode.disabled,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Spacer(),
-                    _Logo(),
-                    _SSOLoginButton(),
-                    Spacer(),
-                    _OrDivider(),
-                    Spacer(),
-                    _UsernameField(),
-                    _PasswordField(),
-                    _RememberPassword(),
-                    Spacer(),
-                    _LoginButton(),
-                    Spacer(flex: 3),
-                    // _VersionString(),
-                  ],
-                ),
+              return Stack(
+                children: [
+                  Form(
+                    autovalidateMode: state.showErrorMessages
+                        ? AutovalidateMode.always
+                        : AutovalidateMode.disabled,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Spacer(),
+                        _Logo(),
+                        _SSOLoginButton(),
+                        Spacer(),
+                        _OrDivider(),
+                        Spacer(),
+                        _UsernameField(),
+                        _PasswordField(),
+                        _RememberPassword(),
+                        Spacer(),
+                        _LoginButton(),
+                        Spacer(flex: 3),
+                        // _VersionString(),
+                      ],
+                    ),
+                  ),
+                  const AnnouncementWidget(),
+                ],
               );
             },
           ),

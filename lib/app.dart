@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/announcement/bloc/announcement_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -105,10 +106,14 @@ class App extends StatelessWidget {
         BlocProvider<SalesOrgBloc>(
           create: (context) => locator<SalesOrgBloc>(),
         ),
+        BlocProvider<AnnouncementBloc>(
+          create: (context) => locator<AnnouncementBloc>(),
+        ),
       ],
       child: MaterialApp.router(
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
+        debugShowCheckedModeBanner: false,
         locale: context.locale,
         title: locator<Config>().appName,
         theme: appThemeData[AppTheme.light],
