@@ -41,9 +41,6 @@ void main() {
   final salesOrganisation2601 = SalesOrganisation(
       salesOrg: salesOrg2601, customerInfos: <CustomerInfo>[]);
 
-  final UserRepository mockUserRepo = UserRepoMock();
-  final AuthBloc mockAuthBloc = AuthBlocMock();
-  final BannerBloc mockBannerBloc = MockBannerBloc();
 
   setUpAll(() {
     locator = GetIt.instance;
