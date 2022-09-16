@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/cred.dart';
-import 'package:ezrxmobile/domain/auth/entities/loginv2.dart';
+import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_auth_repository.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -37,7 +37,7 @@ class AuthRepository implements IAuthRepository {
   });
 
   @override
-  Future<Either<ApiFailure, LoginV2>> login({
+  Future<Either<ApiFailure, Login>> login({
     required Username username,
     required Password password,
   }) async {
@@ -70,7 +70,7 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
-  Future<Either<ApiFailure, LoginV2>> proxyLogin({
+  Future<Either<ApiFailure, Login>> proxyLogin({
     required Username username,
   }) async {
     final usernameStr = username.getOrCrash();
@@ -97,7 +97,7 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
-  Future<Either<ApiFailure, LoginV2>> getEZRXJWT(JWT oktaAccessToken) async {
+  Future<Either<ApiFailure, Login>> getEZRXJWT(JWT oktaAccessToken) async {
     final token = oktaAccessToken.getOrCrash();
     if (config.appFlavor == Flavor.mock) {
       try {

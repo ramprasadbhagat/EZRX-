@@ -6,7 +6,7 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
-import 'package:ezrxmobile/infrastructure/auth/dtos/loginv2_dto.dart';
+import 'package:ezrxmobile/infrastructure/auth/dtos/login_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
@@ -100,19 +100,30 @@ class AuthInterceptor extends Interceptor {
         ),
       );
       final response = await dio.request(
-        '${config.urlConstants}loginAd',
+        '${config.urlConstants}loginV3',
         data: jsonEncode(
           {
-            'query': authQueryMutation.getOktaTokenLoginQuery(
-              jwt.getOrCrash(),
-              await pushNotificationService.getFCMToken(),
-            ),
+            'query': authQueryMutation.getLoginQuery(),
+            'variables': {
+              'input': {
+                'isOktaAuthenticated': true,
+                'accessToken': jwt.getOrCrash(),
+                'mobileToken': {
+                  'mobileTokens': [
+                    {
+                      'token': await pushNotificationService.getFCMToken(),
+                      'provider': 'firebase',
+                    },
+                  ],
+                },
+              },
+            },
           },
         ),
       );
-      final loginV2 =
-          LoginV2Dto.fromJson(response.data['data']['loginV2']).toDomain();
-      final newJwt = JWTDto.fromDomain(loginV2.jwt);
+      final login =
+          LoginDto.fromJson(response.data['data']['loginV3']).toDomain();
+      final newJwt = JWTDto.fromDomain(login.jwt);
       await tokenStorage.set(newJwt);
 
       return newJwt;

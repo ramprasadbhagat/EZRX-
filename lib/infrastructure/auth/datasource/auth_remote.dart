@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/auth/entities/loginv2.dart';
+import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/error/auth_exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/auth/dtos/loginv2_dto.dart';
+import 'package:ezrxmobile/infrastructure/auth/dtos/login_dto.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 
@@ -22,7 +22,7 @@ class AuthRemoteDataSource {
     required this.config,
   });
 
-  Future<LoginV2> loginWithPassword({
+  Future<Login> loginWithPassword({
     required String username,
     required String password,
     required String fcmToken,
@@ -30,62 +30,80 @@ class AuthRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}loginAd',
+        url: '${config.urlConstants}loginV3',
         data: jsonEncode(
           {
-            'query': authQueryMutation.getPasswordLoginQuery(
-              username,
-              password,
-              fcmToken,
-            ),
+            'query': authQueryMutation.getLoginQuery(),
+            'variables': {
+              'input': {
+                'username': username,
+                'password': password,
+                'mobileToken': {
+                  'mobileTokens': [
+                    {'token': fcmToken, 'provider': 'firebase'},
+                  ],
+                },
+              },
+            },
           },
         ),
       );
-      _authExceptionChecker(res: res, jsonKey: 'loginV2');
+      _authExceptionChecker(res: res, jsonKey: 'loginV3');
 
-      return LoginV2Dto.fromJson(res.data['data']['loginV2']).toDomain();
+      return LoginDto.fromJson(res.data['data']['loginV3']).toDomain();
     });
   }
 
-  Future<LoginV2> loginWithOktaToken({
+  Future<Login> loginWithOktaToken({
     required String oktaAccessToken,
     required String fcmToken,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}loginAd',
+        url: '${config.urlConstants}loginV3',
         data: jsonEncode(
           {
-            'query': authQueryMutation.getOktaTokenLoginQuery(
-              oktaAccessToken,
-              fcmToken,
-            ),
+            'query': authQueryMutation.getLoginQuery(),
+            'variables': {
+              'input': {
+                'isOktaAuthenticated': true,
+                'accessToken': oktaAccessToken,
+                'mobileToken': {
+                  'mobileTokens': [
+                    {'token': fcmToken, 'provider': 'firebase'},
+                  ],
+                },
+              },
+            },
           },
         ),
       );
 
-      _authExceptionChecker(res: res, jsonKey: 'loginV2');
+      _authExceptionChecker(res: res, jsonKey: 'loginV3');
 
-      return LoginV2Dto.fromJson(res.data['data']['loginV2']).toDomain();
+      return LoginDto.fromJson(res.data['data']['loginV3']).toDomain();
     });
   }
 
-  Future<LoginV2> proxyLoginWithUsername({required String username}) async {
+  Future<Login> proxyLoginWithUsername({required String username}) async {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}loginAd',
+        url: '${config.urlConstants}loginV3',
         data: jsonEncode(
           {
-            'query': authQueryMutation.getProxyLoginQuery(username),
+            'query': authQueryMutation.getProxyLoginQuery(),
+            'variables': {
+              'input': {'username': username},
+            },
           },
         ),
       );
 
-      _authExceptionChecker(res: res, jsonKey: 'proxyLoginV2');
+      _authExceptionChecker(res: res, jsonKey: 'proxyLogin');
 
-      return LoginV2Dto.fromJson(res.data['data']['proxyLoginV2']).toDomain();
+      return LoginDto.fromJson(res.data['data']['proxyLogin']).toDomain();
     });
   }
 

@@ -1,14 +1,15 @@
 {
-    "data":{
-       "proxyLoginV2":{
-          "authenticated":true,
-          "eZRxJWT":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoidzl4cEFhQkRZUSIsImV4cCI6MTY1Nzg1NTc5MCwiaWF0IjoxNjU3NzY5MzkwLCJpZCI6NzcyNSwicmlnaHRzIjpbeyJ2YWx1ZSI6W3siY3VzdG9tZXJDb2RlIjoiYWxsIiwic2FsZXNPcmciOiIyNjAxIiwic2hpcFRvQ29kZSI6WyJhbGwiXX1dfV0sInJvbGUiOiJJbnRlcm5hbCBTYWxlcyBSZXAiLCJzYWxlc09yZ3MiOlsiMjYwMSJdLCJ1c2VybmFtZSI6InZ3b25nIn0.ixiBTaIef-Sn3NQU-kw8sZ_vKEmgSgZj8tAh-u06htA",
-          "passwordLastReset":"",
-          "passwordExpiry":"",
-          "email":"",
-          "isAccountLocked":null,
-          "isAccountExpired":null,
-          "accountExpiryDate":""
+   "data": {
+       "proxyLoginV3": {
+           "userID": 365,
+           "authenticated": true,
+           "eZRxJWT": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoidzl4cEFhQkRZUSIsImV4cCI6MTY2MzQwNzI4NSwiaWF0IjoxNjYzMzIwODg1LCJpZCI6MzY1LCJyaWdodHMiOlt7InZhbHVlIjpbeyJjdXN0b21lckNvZGUiOiJhbGwiLCJzYWxlc09yZyI6IjI2MDEiLCJzaGlwVG9Db2RlIjpbImFsbCJdfV19XSwicm9sZSI6IlpQIEFkbWluIiwic2FsZXNPcmdzIjpbIjI2MDEiXSwidXNlcm5hbWUiOiJzb25nIn0.nCYb0U_MzXinTNXHID8q9lKuy51z6ChcFfEIKya0yVk",
+           "passwordLastReset": "",
+           "passwordExpiry": "",
+           "email": "",
+           "isAccountLocked": null,
+           "isAccountExpired": null,
+           "accountExpiryDate": ""
        }
-    }
- }
+   }
+}

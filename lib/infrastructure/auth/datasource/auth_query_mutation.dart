@@ -3,57 +3,45 @@
 // in each and every query we require for the functionality
 
 class AuthQueryMutation {
-  // For Loggin in by username and Password and updating the FCM token
-  // for notifications using Firebase Cloud Messaging
-  String getPasswordLoginQuery(
-    String username,
-    String password,
-    String fcmtoken,
-  ) {
-    return '''{
-      loginV2(
-          username: "$username"
-          password: "$password"
-          mobileToken: {mobileTokens:[{token:"$fcmtoken",provider:"firebase"}]}
-          includeStrapi: "true"
-      ) {
+  // For Loggin in by username and Password
+  // Or Loggin in by Okta access token
+  // updating the FCM token for notifications using Firebase Cloud Messaging
+  String getLoginQuery() {
+    return '''
+      query (\$input:loginV3Input!){
+        loginV3(input:\$input){
+          userID
           authenticated
           eZRxJWT
+          passwordLastReset
+          passwordExpiry
+          email
           isAccountLocked
           isAccountExpired
+          accountExpiryDate
       }
-    }''';
-  }
-
-  // For Loggin in by Okta access token and updating the FCM token
-  // for notifications using Firebase Cloud Messaging
-  String getOktaTokenLoginQuery(String oktaToken, String fcmtoken) {
-    return '''{
-      loginV2(
-          accessToken: "$oktaToken" 
-          isOktaAuthenticated: true
-          mobileToken: {mobileTokens:[{token:"$fcmtoken",provider:"firebase"}]}
-      ) {
-          authenticated
-          eZRxJWT
-          isAccountLocked
-          isAccountExpired
-      }
-    }''';
+    }
+    ''';
   }
 
   // For Admin Login on behalf
-  String getProxyLoginQuery(String username) {
-    return '''{
-      proxyLoginV2(request:{ 
-          username: "$username"
-      }) {
+  // By given admin access token + target username to get target access token
+  String getProxyLoginQuery() {
+    return '''
+      query (\$input:proxyLoginV3Input!){
+        proxyLoginV3(input:\$input){
+          userID
           authenticated
           eZRxJWT
+          passwordLastReset
+          passwordExpiry
+          email
           isAccountLocked
           isAccountExpired
+          accountExpiryDate
       }
-    }''';
+    }
+    ''';
   }
 
 //   String loginData(String username, String password, String fcmtoken) {

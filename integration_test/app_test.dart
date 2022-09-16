@@ -11,9 +11,9 @@ void main() {
 
   group('end-to-end test', () {
     testWidgets('Login & logout test example', (WidgetTester tester) async {
-      tester.printToConsole('Initial setup and run as UAT flavor');
+      tester.printToConsole('Initial setup and run as DEV flavor');
       await initialSetup();
-      locator<Config>().appFlavor = Flavor.uat;
+      locator<Config>().appFlavor = Flavor.dev;
 
       runAppWithCrashlyticsAndLocalization();
 

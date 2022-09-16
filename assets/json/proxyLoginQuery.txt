@@ -1,0 +1,13 @@
+query ($input:proxyLoginV3Input!){
+   proxyLoginV3(input:$input){
+      userID
+      authenticated
+      eZRxJWT
+      passwordLastReset
+      passwordExpiry
+      email
+      isAccountLocked
+      isAccountExpired
+      accountExpiryDate
+   }
+}

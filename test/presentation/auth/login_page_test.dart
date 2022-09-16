@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/auth/entities/loginv2.dart';
+import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/auth/login_page.dart';
@@ -94,7 +94,7 @@ void main() {
       final expectedStates = [
         LoginFormState.initial().copyWith(
           authFailureOrSuccessOption: optionOf(
-            Right(LoginV2(jwt: JWT('fake-success'))),
+            Right(Login(jwt: JWT('fake-success'))),
           ),
         ),
       ];

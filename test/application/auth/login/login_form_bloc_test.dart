@@ -2,7 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/domain/auth/entities/cred.dart';
-import 'package:ezrxmobile/domain/auth/entities/loginv2.dart';
+import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
@@ -261,7 +261,7 @@ void main() {
         when(() =>
                 authRepoMock.login(username: fakeUser, password: fakePassword))
             .thenAnswer(
-          (invocation) async => Right(LoginV2(jwt: fakeJWT)),
+          (invocation) async => Right(Login(jwt: fakeJWT)),
         );
 
         when(() => authRepoMock.storeJWT(jwt: fakeJWT)).thenAnswer(
@@ -287,7 +287,7 @@ void main() {
           isSubmitting: false,
           showErrorMessages: true,
           authFailureOrSuccessOption: optionOf(
-            Right(LoginV2(jwt: fakeJWT)),
+            Right(Login(jwt: fakeJWT)),
           ),
         ),
       ],
@@ -306,7 +306,7 @@ void main() {
 
         when(() => authRepoMock.login(
             username: Username(''), password: fakePassword)).thenAnswer(
-          (invocation) async => Right(LoginV2(jwt: fakeJWT)),
+          (invocation) async => Right(Login(jwt: fakeJWT)),
         );
       },
       act: (LoginFormBloc bloc) =>

@@ -1,9 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
-import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 final _usernameController = TextEditingController();
 final _passwordController = TextEditingController();
-final _config = locator<Config>();
+// final _config = locator<Config>();
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -145,7 +143,7 @@ class _UsernameField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: _config.appFlavor != Flavor.prod,
+      visible: true, //_config.appFlavor != Flavor.prod,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         child: BlocConsumer<LoginFormBloc, LoginFormState>(
@@ -194,7 +192,7 @@ class _PasswordField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: _config.appFlavor != Flavor.prod,
+      visible: true, //_config.appFlavor != Flavor.prod,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         child: BlocConsumer<LoginFormBloc, LoginFormState>(
@@ -256,7 +254,7 @@ class _RememberPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: _config.appFlavor != Flavor.prod,
+      visible: true, //_config.appFlavor != Flavor.prod,
       child: BlocBuilder<LoginFormBloc, LoginFormState>(
         buildWhen: (previous, current) =>
             previous.rememberPassword != current.rememberPassword,
@@ -291,7 +289,7 @@ class _LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: _config.appFlavor != Flavor.prod,
+      visible: true, //_config.appFlavor != Flavor.prod,
       child: BlocBuilder<LoginFormBloc, LoginFormState>(
         buildWhen: (previous, current) =>
             previous.isSubmitting != current.isSubmitting,

@@ -22,14 +22,12 @@ class Config {
 
   String get urlConstants {
     switch (appFlavor) {
-      case Flavor.mock:
-        return '';
-      case Flavor.dev:
-        return '/api/';
       case Flavor.uat:
         return '/ezrxapi/api/';
+      case Flavor.dev:
       case Flavor.prod:
-        return '/ezrxapi/api/';
+        return '/api/';
+      case Flavor.mock:
       default:
         return '';
     }

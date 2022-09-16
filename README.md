@@ -52,7 +52,7 @@ https://resocoder.com/2020/03/09/flutter-firebase-ddd-course-1-domain-driven-des
 9. open ```http://localhost:9000/dashboard?id=ezrx_mobile```
 
 ## Integration test
-```fvm flutter drive --driver=test_driver/integration_driver.dart --target=integration_test/app_test.dart --flavor uat```
+```fvm flutter drive --driver=test_driver/integration_driver.dart --target=integration_test/app_test.dart --flavor dev```
 
 ## Flavor
 | Flavor| Package name | App Name | Endpoint |

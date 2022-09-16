@@ -5,7 +5,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/auth/entities/loginv2.dart';
+import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/auth/proxy_login_page.dart';
@@ -139,12 +139,12 @@ void main() {
       final expectedStates = [
         ProxyLoginFormState.initial().copyWith(
           authFailureOrSuccessOption:
-              optionOf(Right(LoginV2(jwt: JWT('fake-success')))),
+              optionOf(Right(Login(jwt: JWT('fake-success')))),
         ),
         UserState.initial().copyWith(
           user: User.empty(),
           userFailureOrSuccessOption:
-              optionOf(Right(LoginV2(jwt: JWT('fake-success')))),
+              optionOf(Right(Login(jwt: JWT('fake-success')))),
         )
       ];
       when(() => authBlocMock.state)
