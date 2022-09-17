@@ -24,10 +24,33 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../utils/widget_utils.dart';
 
-class MockHTTPService extends Mock implements HttpService {}
+late final Uint8List imageUint8List;
+final options = RequestOptions(
+  responseType: ResponseType.json,
+  path: '',
+);
+
+class MockHTTPService extends Mock implements HttpService {
+  // @override
+  // Future<Response> request({
+  //   required String method,
+  //   required String url,
+  //   dynamic data = const {}, // can be Map<String, dynamic> or FormData
+  //   ResponseType responseType = ResponseType.json,
+  // }) async {
+  //   return Future.value(
+  //     Response(
+  //       statusCode: 200,
+  //       data: imageUint8List,
+  //       requestOptions: options,
+  //     ),
+  //   );
+  // }
+}
 
 class MockBannerBloc extends MockBloc<BannerEvent, BannerState>
     implements BannerBloc {}
@@ -58,8 +81,6 @@ void main() {
 
   late final mockBannerItem;
 
-  late final Uint8List imageUint8List;
-
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     mockAuthBloc = MockAuthBloc();
@@ -73,22 +94,6 @@ void main() {
     locator.registerLazySingleton(() => mockBannerBloc);
     autoRouterMock = locator<AppRouter>();
     mockHTTPService = MockHTTPService();
-    when(() => mockHTTPService.request(
-          method: 'POST',
-          url: '/api/downloadAttachment',
-        )).thenAnswer((invocation) {
-      var options = RequestOptions(
-        responseType: ResponseType.json,
-        path: '',
-      );
-      return Future.value(
-        Response(
-          statusCode: 200,
-          data: imageUint8List,
-          requestOptions: options,
-        ),
-      );
-    });
     locator.registerLazySingleton<HttpService>(
       () => mockHTTPService,
     );
@@ -140,6 +145,17 @@ void main() {
         bannerTile,
         findsOneWidget,
       );
+      final smootPageIndicator = find.byType(SmoothPageIndicator);
+      expect(
+        smootPageIndicator,
+        findsOneWidget,
+      );
+      final gestD = find.descendant(
+          of: smootPageIndicator, matching: find.byType(GestureDetector));
+      expect(gestD, findsOneWidget);
+      final gestDOffset = tester.getCenter(gestD);
+      final gesture = await tester.startGesture(gestDOffset);
+      await gesture.up();
     });
 
     testWidgets('Banner test 2 - is Snackbar shown?', (tester) async {
@@ -219,6 +235,5 @@ void main() {
         findsOneWidget,
       );
     });
-
   });
 }
