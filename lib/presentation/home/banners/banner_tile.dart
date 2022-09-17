@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
+// aware issue :
+// https://dev.azure.com/zuelligpharmadevops/eZRx%20Overall/_wiki/wikis/eZRx-Overall.wiki/3443/eZRx-banner-workflow-doubt
 class BannerTile extends StatelessWidget {
   final BannerItem banner;
   final HttpService httpService;
