@@ -17,12 +17,14 @@ class BannerTile extends StatelessWidget {
   final HttpService httpService;
   final CountlyService countlyService;
   final c.Config config;
+  final DefaultCacheManager defaultCacheManager;
   const BannerTile({
     Key? key,
     required this.banner,
     required this.httpService,
     required this.countlyService,
     required this.config,
+    required this.defaultCacheManager,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -78,7 +80,7 @@ class BannerTile extends StatelessWidget {
     if (imgUrl.isEmpty) return null;
 
     try {
-      final file = await DefaultCacheManager().getFileFromCache(imgUrl);
+      final file = await defaultCacheManager.getFileFromCache(imgUrl);
       if (file != null) {
         return file.file.readAsBytesSync();
       }
@@ -90,7 +92,7 @@ class BannerTile extends StatelessWidget {
         final imageUint8List = imageData.buffer
             .asUint8List(imageData.offsetInBytes, imageData.lengthInBytes);
 
-        await DefaultCacheManager().putFile(imgUrl, imageUint8List);
+        await defaultCacheManager.putFile(imgUrl, imageUint8List);
 
         return imageUint8List;
       }
@@ -104,7 +106,7 @@ class BannerTile extends StatelessWidget {
 
       if (res.statusCode == 200) {
         final imageData = res.data;
-        await DefaultCacheManager().putFile(imgUrl, imageData);
+        await defaultCacheManager.putFile(imgUrl, imageData);
 
         return imageData;
       }

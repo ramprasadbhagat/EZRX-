@@ -7,9 +7,11 @@ import 'package:ezrxmobile/presentation/home/banners/banner_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart' hide Config;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:file/local.dart';
 
 late final Uint8List imageUint8List;
 final options = RequestOptions(
@@ -19,9 +21,13 @@ final options = RequestOptions(
 
 class MockHTTPService extends Mock implements HttpService {}
 
+class MockCacheManager extends Mock implements DefaultCacheManager {}
+
 void main() {
   late GetIt locator;
   late HttpService mockHTTPService;
+  const mockUrl = 'mock-image-urls';
+  late DefaultCacheManager cacheManagerMock;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -31,10 +37,13 @@ void main() {
     locator.registerLazySingleton(() => CountlyService());
 
     mockHTTPService = MockHTTPService();
+    cacheManagerMock = MockCacheManager();
     when(() => mockHTTPService.request(
           method: 'POST',
           url: '/api/downloadAttachment',
-          data: {'url': 'mock-image-url'},
+          data: {
+            'url': mockUrl,
+          },
           responseType: ResponseType.bytes,
         )).thenAnswer(
       (invocation) => Future.value(
@@ -61,12 +70,13 @@ void main() {
     Widget getWUT(Config config) {
       return BannerTile(
         banner: BannerItem.empty().copyWith(
-          url: 'mock-image-url',
+          url: mockUrl,
           urlLink: 'mock-url-link',
         ),
         httpService: mockHTTPService,
         countlyService: locator<CountlyService>(),
         config: config,
+        defaultCacheManager: cacheManagerMock,
       );
     }
 
@@ -86,6 +96,37 @@ void main() {
     testWidgets('Banner test 2 - Non Mock Flavour', (tester) async {
       final config = locator<Config>();
       config.appFlavor = Flavor.uat;
+      await tester.pumpWidget(getWUT(config));
+      await tester.pump();
+
+      final bannerTile = find.byType(BannerTile);
+      expect(
+        bannerTile,
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('Banner test 3 - Have mock cache file', (tester) async {
+      final config = locator<Config>();
+      config.appFlavor = Flavor.uat;
+      var fileSystem = const LocalFileSystem();
+
+      when(
+        () => cacheManagerMock.getFileFromCache('mock-image-urls'),
+      ).thenAnswer(
+        (invocation) async {
+          var fileInfo = FileInfo(
+            fileSystem.file(
+                './assets/images/ezrxlogo.png'), // Return your image file path
+            FileSource.Cache,
+            DateTime(2050),
+            mockUrl,
+          );
+
+          return fileInfo;
+        },
+      );
+
       await tester.pumpWidget(getWUT(config));
       await tester.pump();
 
