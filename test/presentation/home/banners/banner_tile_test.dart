@@ -27,6 +27,11 @@ void main() {
   late GetIt locator;
   late HttpService mockHTTPService;
   const mockUrl = 'mock-image-urls';
+  const mockUrlLink = 'www.google.com';
+  final mockBanner = BannerItem.empty().copyWith(
+    url: mockUrl,
+    urlLink: mockUrlLink,
+  );
   late DefaultCacheManager cacheManagerMock;
 
   setUpAll(() async {
@@ -69,10 +74,7 @@ void main() {
 
     Widget getWUT(Config config) {
       return BannerTile(
-        banner: BannerItem.empty().copyWith(
-          url: mockUrl,
-          urlLink: 'mock-url-link',
-        ),
+        banner: mockBanner,
         httpService: mockHTTPService,
         countlyService: locator<CountlyService>(),
         config: config,
@@ -124,6 +126,63 @@ void main() {
           );
 
           return fileInfo;
+        },
+      );
+
+      final wut = getWUT(config);
+
+      await tester.pumpWidget(wut);
+      await tester.pump();
+
+      final bannerTile = find.byType(BannerTile);
+      expect(
+        bannerTile,
+        findsOneWidget,
+      );
+      // expect(
+      //   bannerTile,
+      //   isA<BannerTile>()
+      //       .having((b) => b.banner.urlLink, 'urlLink', mockUrlLink),
+      // );
+      final gestD = find.byType(GestureDetector);
+      expect(
+        gestD,
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('Banner test 4 - Mock cache file returns NULL', (tester) async {
+      final config = locator<Config>();
+      config.appFlavor = Flavor.mock;
+
+      when(
+        () => cacheManagerMock.getFileFromCache('mock-image-urls'),
+      ).thenAnswer(
+        (invocation) async {
+          return null;
+        },
+      );
+
+      await tester.pumpWidget(getWUT(config));
+      await tester.pump();
+
+      final bannerTile = find.byType(BannerTile);
+      expect(
+        bannerTile,
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('Banner test 4 - Mock cache file when flavor is mock',
+        (tester) async {
+      final config = locator<Config>();
+      config.appFlavor = Flavor.uat;
+
+      when(
+        () => cacheManagerMock.getFileFromCache('mock-image-urls'),
+      ).thenAnswer(
+        (invocation) async {
+          return null;
         },
       );
 
