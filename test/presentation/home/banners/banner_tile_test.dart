@@ -180,11 +180,6 @@ void main() {
         bannerTile,
         findsOneWidget,
       );
-      // expect(
-      //   bannerTile,
-      //   isA<BannerTile>()
-      //       .having((b) => b.banner.urlLink, 'urlLink', mockUrlLink),
-      // );
       final gestD = find.byType(GestureDetector);
       expect(
         gestD,

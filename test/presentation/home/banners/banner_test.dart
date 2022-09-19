@@ -34,23 +34,7 @@ final options = RequestOptions(
   path: '',
 );
 
-class MockHTTPService extends Mock implements HttpService {
-  // @override
-  // Future<Response> request({
-  //   required String method,
-  //   required String url,
-  //   dynamic data = const {}, // can be Map<String, dynamic> or FormData
-  //   ResponseType responseType = ResponseType.json,
-  // }) async {
-  //   return Future.value(
-  //     Response(
-  //       statusCode: 200,
-  //       data: imageUint8List,
-  //       requestOptions: options,
-  //     ),
-  //   );
-  // }
-}
+class MockHTTPService extends Mock implements HttpService {}
 
 class MockBannerBloc extends MockBloc<BannerEvent, BannerState>
     implements BannerBloc {}
