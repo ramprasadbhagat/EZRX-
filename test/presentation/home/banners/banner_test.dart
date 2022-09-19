@@ -82,7 +82,13 @@ void main() {
   late final mockBannerItem;
   const mockUrl = 'mock-image-urls';
   const mockUrlLink = 'www.google.com';
-  final mockBanner = BannerItem.empty().copyWith(
+  final mockBanner1 = BannerItem.empty().copyWith(
+    title: 'Banner Title 1',
+    url: mockUrl,
+    urlLink: mockUrlLink,
+  );
+  final mockBanner2 = BannerItem.empty().copyWith(
+    title: 'Banner Title 2',
     url: mockUrl,
     urlLink: mockUrlLink,
   );
@@ -129,16 +135,25 @@ void main() {
       );
     }
 
-    testWidgets('Banner test 1', (tester) async {
+    testWidgets('Banner test 1 - Many banners for multiple pages', (tester) async {
       final bannerBloc = locator<MockBannerBloc>();
 
       when(() => bannerBloc.stream).thenAnswer((invocation) {
         return Stream.fromIterable([
-          BannerState.initial(),
-          BannerState.initial().copyWith(banner: [
-            BannerItem.empty(),
-            mockBanner,
-          ]),
+          BannerState.initial().copyWith(
+            banner: [
+              mockBanner1,
+              mockBanner2,
+              mockBanner1,
+              mockBanner2,
+              mockBanner1,
+              mockBanner2,
+              mockBanner1,
+              mockBanner2,
+              mockBanner1,
+              mockBanner2,
+            ],
+          ),
         ]);
       });
 
@@ -151,20 +166,24 @@ void main() {
       );
       final bannerTile = find.byType(BannerTile);
       expect(bannerTile, findsAtLeastNWidgets(2));
-      final smootPageIndicator = find.byType(SmoothPageIndicator);
+      final smoothPageIndicator = find.byType(SmoothPageIndicator);
       expect(
-        smootPageIndicator,
+        smoothPageIndicator,
         findsOneWidget,
       );
-      await tester.tap(smootPageIndicator);
-      await tester.pump();
 
-      final gestD = find.descendant(
-          of: smootPageIndicator, matching: find.byType(GestureDetector));
+      final si = find.descendant(
+          of: smoothPageIndicator, matching: find.byType(SmoothIndicator));
+      expect(si, findsOneWidget);
+      final rotBox = find.descendant(of: si, matching: find.byType(RotatedBox));
+      expect(rotBox, findsOneWidget);
+      final gestD =
+          find.descendant(of: rotBox, matching: find.byType(GestureDetector));
       expect(gestD, findsOneWidget);
-      final gestDOffset = tester.getCenter(gestD);
-      final gesture = await tester.startGesture(gestDOffset);
-      await gesture.up();
+
+      final offsetGestD = tester.getCenter(gestD);
+      await tester.tapAt(offsetGestD);
+      await tester.pump();
     });
 
     testWidgets('Banner test 2 - is Snackbar shown?', (tester) async {
