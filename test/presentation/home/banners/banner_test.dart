@@ -80,6 +80,12 @@ void main() {
       salesOrg: salesOrg2601, customerInfos: <CustomerInfo>[]);
 
   late final mockBannerItem;
+  const mockUrl = 'mock-image-urls';
+  const mockUrlLink = 'www.google.com';
+  final mockBanner = BannerItem.empty().copyWith(
+    url: mockUrl,
+    urlLink: mockUrlLink,
+  );
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -129,7 +135,10 @@ void main() {
       when(() => bannerBloc.stream).thenAnswer((invocation) {
         return Stream.fromIterable([
           BannerState.initial(),
-          BannerState.initial().copyWith(banner: [BannerItem.empty()]),
+          BannerState.initial().copyWith(banner: [
+            BannerItem.empty(),
+            mockBanner,
+          ]),
         ]);
       });
 
@@ -141,15 +150,15 @@ void main() {
         findsOneWidget,
       );
       final bannerTile = find.byType(BannerTile);
-      expect(
-        bannerTile,
-        findsOneWidget,
-      );
+      expect(bannerTile, findsAtLeastNWidgets(2));
       final smootPageIndicator = find.byType(SmoothPageIndicator);
       expect(
         smootPageIndicator,
         findsOneWidget,
       );
+      await tester.tap(smootPageIndicator);
+      await tester.pump();
+
       final gestD = find.descendant(
           of: smootPageIndicator, matching: find.byType(GestureDetector));
       expect(gestD, findsOneWidget);

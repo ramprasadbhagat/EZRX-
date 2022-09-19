@@ -1,4 +1,9 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
@@ -7,11 +12,14 @@ import 'package:ezrxmobile/presentation/home/banners/banner_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart' hide Config;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:file/local.dart';
+
+import '../../../utils/widget_utils.dart';
 
 late final Uint8List imageUint8List;
 final options = RequestOptions(
@@ -22,10 +30,22 @@ final options = RequestOptions(
 class MockHTTPService extends Mock implements HttpService {}
 
 class MockCacheManager extends Mock implements DefaultCacheManager {}
+class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
+class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
+    implements SalesOrgBloc {}
+
+class AutoRouterMock extends Mock implements AppRouter {}
 
 void main() {
   late GetIt locator;
   late HttpService mockHTTPService;
+  late UserBloc userBlocMock;
+  late SalesOrgBloc salesOrgBlocMock;
+  late AuthBloc authBlocMock;
+  late AppRouter autoRouterMock;
   const mockUrl = 'mock-image-urls';
   const mockUrlLink = 'www.google.com';
   final mockBanner = BannerItem.empty().copyWith(
@@ -35,7 +55,8 @@ void main() {
   late DefaultCacheManager cacheManagerMock;
 
   setUpAll(() async {
-    TestWidgetsFlutterBinding.ensureInitialized();
+  TestWidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
     locator = GetIt.instance;
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
@@ -70,7 +91,15 @@ void main() {
   });
 
   group('Banner Tile', () {
-    setUp(() {});
+    setUp(() {
+      userBlocMock = UserBlocMock();
+      salesOrgBlocMock = SalesOrgBlocMock();
+      authBlocMock = AuthBlocMock();
+      autoRouterMock = locator<AppRouter>();
+      when(() => userBlocMock.state).thenReturn(UserState.initial());
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+    });
 
     Widget getWUT(Config config) {
       return BannerTile(
@@ -79,6 +108,18 @@ void main() {
         countlyService: locator<CountlyService>(),
         config: config,
         defaultCacheManager: cacheManagerMock,
+      );
+    }
+
+    StackRouterScope getScopedWidget(Config config) {
+      return WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        providers: [
+          BlocProvider<UserBloc>(create: (context) => userBlocMock),
+          BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+        ],
+        child: getWUT(config),
       );
     }
 
@@ -129,7 +170,7 @@ void main() {
         },
       );
 
-      final wut = getWUT(config);
+      final wut = getScopedWidget(config);
 
       await tester.pumpWidget(wut);
       await tester.pump();
@@ -149,6 +190,8 @@ void main() {
         gestD,
         findsOneWidget,
       );
+      final gestDOffset = tester.getCenter(gestD);
+      await tester.tapAt(gestDOffset);
     });
 
     testWidgets('Banner test 4 - Mock cache file returns NULL', (tester) async {
