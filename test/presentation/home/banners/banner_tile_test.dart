@@ -155,7 +155,7 @@ void main() {
       var fileSystem = const LocalFileSystem();
 
       when(
-        () => cacheManagerMock.getFileFromCache('mock-image-urls'),
+        () => cacheManagerMock.getFileFromCache(mockUrl),
       ).thenAnswer(
         (invocation) async {
           var fileInfo = FileInfo(
@@ -194,7 +194,7 @@ void main() {
       config.appFlavor = Flavor.mock;
 
       when(
-        () => cacheManagerMock.getFileFromCache('mock-image-urls'),
+        () => cacheManagerMock.getFileFromCache(mockUrl),
       ).thenAnswer(
         (invocation) async {
           return null;
@@ -217,7 +217,7 @@ void main() {
       config.appFlavor = Flavor.uat;
 
       when(
-        () => cacheManagerMock.getFileFromCache('mock-image-urls'),
+        () => cacheManagerMock.getFileFromCache(mockUrl),
       ).thenAnswer(
         (invocation) async {
           return null;
