@@ -65,7 +65,6 @@ void main() {
           ),
         ),
       );
-
       // Create the Finders.
       final userNameTextField = find.byKey(const Key('loginUsernameField'));
       final passwordTextField = find.byKey(const Key('loginPasswordField'));

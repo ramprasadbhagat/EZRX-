@@ -20,8 +20,8 @@ void main() {
       // await tester.pumpWidget(const App());
       // await tester.pumpAndSettle(const Duration(seconds: 3));
       // expect(find.byKey(const Key('splashLoadingIndicator')), findsOneWidget);
-
-      await tester.pumpAndSettle(const Duration(seconds: 3));
+      await tester.pump();
+      await tester.pumpAndSettle(const Duration(seconds: 5));
 
       //============================================================
       //  Login Test
@@ -37,13 +37,16 @@ void main() {
 
       tester.printToConsole('Input username');
       await tester.tap(loginUsernameField);
-      await tester.enterText(loginUsernameField, 'ezrxtest04');
+      await tester.enterText(loginUsernameField, 'ezrxtest05');
       await tester.pumpAndSettle(const Duration(microseconds: 200));
 
       tester.printToConsole('Input password');
       await tester.tap(loginPasswordField);
       await tester.enterText(loginPasswordField, 'St@ysafe01');
       await tester.pumpAndSettle(const Duration(microseconds: 200));
+
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
 
       tester.printToConsole('Tap login button');
       await tester.tap(loginSubmitButton);
