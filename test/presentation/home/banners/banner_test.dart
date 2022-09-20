@@ -6,9 +6,6 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
@@ -56,14 +53,6 @@ void main() {
   late SalesOrgBloc mockSalesOrgBloc;
   late AppRouter autoRouterMock;
 
-  final mockSalesOrg = SalesOrg('mock-salesOrg');
-  final salesOrg2601 = SalesOrg('2601');
-  final mockSalesOrganisation = SalesOrganisation(
-      salesOrg: mockSalesOrg, customerInfos: <SalesOrgCustomerInfo>[]);
-  final salesOrganisation2601 = SalesOrganisation(
-      salesOrg: salesOrg2601, customerInfos: <SalesOrgCustomerInfo>[]);
-
-  late final mockBannerItem;
   const mockUrl = 'mock-image-urls';
   const mockUrlLink = 'www.google.com';
   final mockBanner1 = BannerItem.empty().copyWith(
@@ -119,7 +108,8 @@ void main() {
       );
     }
 
-    testWidgets('Banner test 1 - Many banners for multiple pages', (tester) async {
+    testWidgets('Banner test 1 - Many banners for multiple pages',
+        (tester) async {
       final bannerBloc = locator<MockBannerBloc>();
 
       when(() => bannerBloc.stream).thenAnswer((invocation) {

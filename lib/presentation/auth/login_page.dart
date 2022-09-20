@@ -1,4 +1,3 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
@@ -155,7 +154,8 @@ class _UsernameField extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         child: BlocConsumer<LoginFormBloc, LoginFormState>(
           listenWhen: (previous, current) =>
-              previous.username != current.username,
+              previous.username != current.username &&
+              current.username.isValid(),
           listener: (context, state) {
             final username = state.username.getOrCrash();
             _usernameController.value = TextEditingValue(
@@ -204,7 +204,8 @@ class _PasswordField extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         child: BlocConsumer<LoginFormBloc, LoginFormState>(
           listenWhen: (previous, current) =>
-              previous.password != current.password,
+              previous.password != current.password &&
+              current.password.isValid(),
           listener: (context, state) {
             final password = state.password.getOrCrash();
             _passwordController.value = TextEditingValue(

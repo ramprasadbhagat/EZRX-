@@ -10,9 +10,8 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../../utils/material_frame_wrapper.dart';
 
 void main() {
-
   TestWidgetsFlutterBinding.ensureInitialized();
-  setUpAll(() async{
+  setUpAll(() async {
     setupLocator();
   });
 
@@ -35,10 +34,8 @@ void main() {
   });
 
   group('WebViewPage Page', () {
-    setUp(() {
-
-    });
-    testWidgets("WebPage Mock Load", (tester) async {
+    setUp(() {});
+    testWidgets('WebPage Mock Load', (tester) async {
       await tester.pumpWidget(
         MaterialFrameWrapper(
           child: WebViewPage(
@@ -52,9 +49,4 @@ void main() {
       expect(loader, findsOneWidget);
     });
   });
-
 }
-
-
-
-
