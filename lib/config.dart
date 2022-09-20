@@ -33,6 +33,30 @@ class Config {
     }
   }
 
+  String get getPrivacyUrl {
+    switch (appFlavor) {
+      case Flavor.dev:
+      case Flavor.uat:
+      case Flavor.prod:
+        return '$baseUrl/privacy_policy';
+      case Flavor.mock:
+      default:
+        return '';
+    }
+  }
+
+  String? get getPrivacyInitialFile {
+    switch (appFlavor) {
+      case Flavor.mock:
+        return 'assets/html/privacy_policy.html';
+      case Flavor.dev:
+      case Flavor.uat:
+      case Flavor.prod:
+      default:
+        return null;
+    }
+  }
+
   String get appName {
     switch (appFlavor) {
       case Flavor.mock:

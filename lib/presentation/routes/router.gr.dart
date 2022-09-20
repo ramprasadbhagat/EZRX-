@@ -48,10 +48,12 @@ class AppRouter extends _i12.RootStackRouter {
           routeData: routeData, child: const _i4.SettingsPage());
     },
     WebViewPageRoute.name: (routeData) {
-      final args = routeData.argsAs<WebViewPageRouteArgs>();
+      final args = routeData.argsAs<WebViewPageRouteArgs>(
+          orElse: () => const WebViewPageRouteArgs());
       return _i12.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i5.WebViewPage(key: args.key, url: args.url));
+          child: _i5.WebViewPage(
+              key: args.key, url: args.url, initialFile: args.initialFile));
     },
     HomeNavigationTabbarRoute.name: (routeData) {
       return _i12.MaterialPageX<dynamic>(
@@ -142,24 +144,27 @@ class SettingsPageRoute extends _i12.PageRouteInfo<void> {
 /// generated route for
 /// [_i5.WebViewPage]
 class WebViewPageRoute extends _i12.PageRouteInfo<WebViewPageRouteArgs> {
-  WebViewPageRoute({_i13.Key? key, required String url})
+  WebViewPageRoute({_i13.Key? key, String url = '', String? initialFile})
       : super(WebViewPageRoute.name,
             path: 'web_view_page',
-            args: WebViewPageRouteArgs(key: key, url: url));
+            args: WebViewPageRouteArgs(
+                key: key, url: url, initialFile: initialFile));
 
   static const String name = 'WebViewPageRoute';
 }
 
 class WebViewPageRouteArgs {
-  const WebViewPageRouteArgs({this.key, required this.url});
+  const WebViewPageRouteArgs({this.key, this.url = '', this.initialFile});
 
   final _i13.Key? key;
 
   final String url;
 
+  final String? initialFile;
+
   @override
   String toString() {
-    return 'WebViewPageRouteArgs{key: $key, url: $url}';
+    return 'WebViewPageRouteArgs{key: $key, url: $url, initialFile: $initialFile}';
   }
 }
 

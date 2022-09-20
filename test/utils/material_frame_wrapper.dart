@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class MaterialFrameWrapper extends StatelessWidget {
   final Widget child;
 
-  const MaterialFrameWrapper({Key? key, required this.child}) : super(key: key);
+  const MaterialFrameWrapper({Key? key,
+    required this.child
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

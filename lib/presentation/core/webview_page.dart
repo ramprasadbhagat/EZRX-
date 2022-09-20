@@ -4,7 +4,9 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class WebViewPage extends StatefulWidget {
   final String url;
-  const WebViewPage({Key? key, required this.url}) : super(key: key);
+  final String? initialFile;
+  const WebViewPage({Key? key, this.url = '', this.initialFile})
+      : super(key: key);
 
   @override
   State<WebViewPage> createState() => _WebViewPageState();
@@ -26,6 +28,7 @@ class _WebViewPageState extends State<WebViewPage> {
       ),
       body: errorLoadingUrl
           ? Center(
+              key: const ValueKey('errorLoadingUrl'),
               child: Padding(
                 padding:
                     EdgeInsets.all(MediaQuery.of(context).size.height * 0.1),
@@ -35,8 +38,10 @@ class _WebViewPageState extends State<WebViewPage> {
               ),
             )
           : Stack(
+              key: const ValueKey('webview'),
               children: <Widget>[
                 InAppWebView(
+                  initialFile: widget.initialFile,
                   initialUrlRequest: URLRequest(url: Uri.parse(widget.url)),
                   initialOptions: InAppWebViewGroupOptions(
                     crossPlatform: InAppWebViewOptions(
@@ -78,6 +83,7 @@ class _WebViewPageState extends State<WebViewPage> {
                   },
                 ),
                 Visibility(
+                  key: const ValueKey('loader'),
                   visible: isLoading,
                   child: LoadingShimmer.withChild(
                     child: Image.asset(
