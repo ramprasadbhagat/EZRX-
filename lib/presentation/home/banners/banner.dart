@@ -10,6 +10,7 @@ import 'package:ezrxmobile/presentation/home/banners/banner_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart' hide Config;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -52,6 +53,7 @@ class HomeBanner extends StatelessWidget {
                     httpService: locator<HttpService>(),
                     countlyService: locator<CountlyService>(),
                     config: locator<Config>(),
+                    defaultCacheManager: DefaultCacheManager(),
                   );
                 },
               ),
