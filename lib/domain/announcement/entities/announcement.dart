@@ -37,6 +37,33 @@ class Announcement with _$Announcement {
     return input;
   }
 
+  String get descriptionDisplay {
+    var newDescription = descriptionParsed;
+
+    var textsNeedTranslated = const <String>[
+      'eZRx will be undergoing enhancements from ',
+      'SGT on',
+      'We apologize for the inconvenience and appreciate your patience.',
+    ];
+
+    for (var text in textsNeedTranslated) {
+      if (newDescription.contains(text)) {
+        newDescription = newDescription.replaceAll(text, text.tr());
+      }
+    }
+
+    return newDescription;
+  }
+
+  String get descriptionParsed {
+    return description.isNotEmpty
+        ? description
+            .replaceAll('\${startTime}', _startTimeConvert)
+            .replaceAll('\${endTime}', _endTimeConvert)
+            .replaceAll('\${day}', startTime.split(' ')[0])
+        : '';
+  }
+
   String get _startTimeConvert {
     if (startTime.isEmpty) return '';
 
@@ -51,37 +78,5 @@ class Announcement with _$Announcement {
     return endTime.split(' ').length > 2
         ? "${endTime.split(' ')[1]} ${endTime.split(' ')[2]}"
         : endTime.split(' ')[1];
-  }
-
-  String get descriptionDisplay {
-    var newDescription = description.isNotEmpty
-        ? description
-            .replaceAll('\${startTime}', _startTimeConvert)
-            .replaceAll('\${endTime}', _endTimeConvert)
-            .replaceAll('\${day}', startTime.split(' ')[0])
-        : '';
-
-    if (newDescription.contains('eZRx will be undergoing enhancements from ')) {
-      newDescription = newDescription.replaceAll(
-        'eZRx will be undergoing enhancements from ',
-        'eZRx will be undergoing enhancements from '.tr(),
-      );
-    }
-    if (newDescription.contains('SGT on')) {
-      newDescription = newDescription.replaceAll(
-        'SGT on',
-        'SGT on'.tr(),
-      );
-    }
-    if (newDescription.contains(
-      'We apologize for the inconvenience and appreciate your patience.',
-    )) {
-      newDescription = newDescription.replaceAll(
-        'We apologize for the inconvenience and appreciate your patience.',
-        'We apologize for the inconvenience and appreciate your patience.'.tr(),
-      );
-    }
-
-    return newDescription;
   }
 }

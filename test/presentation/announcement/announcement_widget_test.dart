@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/announcement/bloc/announcement_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
@@ -11,6 +12,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../utils/material_frame_wrapper.dart';
+import '../../utils/tester_utils.dart';
 
 class AnnouncementBlocMock
     extends MockBloc<AnnouncementEvent, AnnouncementState>
@@ -80,6 +82,61 @@ void main() {
       expect(reloadIcon, findsOneWidget);
       expect(announcementDescription, findsOneWidget);
       expect(closeIcon, findsOneWidget);
+    });
+
+    testWidgets('Test that announcement loaded successfully and got translated',
+        (tester) async {
+      var evaluatedText = const <String>[
+        'eZRx will be undergoing enhancements from ',
+        'SGT on',
+        'We apologize for the inconvenience and appreciate your patience.'
+      ];
+
+      final needTranslatedAnnouncementMock =
+          announcementMock.copyWith(description: evaluatedText.join(' '));
+
+      when(() => announcementBlocMock.state).thenReturn(
+        AnnouncementState.initial().copyWith(
+          announcement: needTranslatedAnnouncementMock,
+        ),
+      );
+      await TesterUtils.setUpLocalizationWrapper(
+        home: BlocProvider<AnnouncementBloc>(
+          create: (context) => announcementBlocMock,
+          child: const AnnouncementWidget(),
+        ),
+        tester: tester,
+        locale: const Locale('vi', 'VN'),
+      );
+
+      final loadingIndicator =
+          find.byKey(const Key('announcementLoadingIndicator'));
+      final reloadIcon = find.byKey(const Key('announcementReloadIcon'));
+      final announcementDescription =
+          find.byKey(const Key('announcementDescription'));
+      final closeIcon = find.byKey(const Key('announcementCloseIcon'));
+
+      expect(loadingIndicator, findsNothing);
+      expect(reloadIcon, findsOneWidget);
+      expect(announcementDescription, findsOneWidget);
+      expect(closeIcon, findsOneWidget);
+
+      var descriptionTextWidget =
+          announcementDescription.evaluate().single.widget as Text;
+
+      var descriptionText = descriptionTextWidget.data!;
+
+      if (needTranslatedAnnouncementMock.description.isNotEmpty) {
+        var isValidDescription = descriptionText.isNotEmpty;
+        expect(isValidDescription, true);
+      }
+
+      for (var text in evaluatedText) {
+        if (needTranslatedAnnouncementMock.descriptionParsed.contains(text)) {
+          var isValidDescription = descriptionText.contains(text.tr());
+          expect(isValidDescription, true);
+        }
+      }
     });
 
     testWidgets('Test that loaded announcement error', (tester) async {
