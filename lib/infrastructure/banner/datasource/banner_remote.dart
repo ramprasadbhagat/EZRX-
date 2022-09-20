@@ -15,10 +15,10 @@ class BannerRemoteDataSource {
   DataSourceExceptionHandler dataSourceExceptionHandler;
   Config config;
   BannerRemoteDataSource({
+    required this.config,
     required this.httpService,
     required this.bannerQueryMutation,
     required this.dataSourceExceptionHandler,
-    required this.config,
   });
 
   Future<List<BannerItem>> getBanners({

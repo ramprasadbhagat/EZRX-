@@ -325,8 +325,7 @@ abstract class _Selected implements SalesOrgEvent {
 /// @nodoc
 mixin _$SalesOrgState {
   SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
-  SalesOrganisationConfigs get salesOrganisationConfigs =>
-      throw _privateConstructorUsedError;
+  SalesOrganisationConfigs get config => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrgStateCopyWith<SalesOrgState> get copyWith =>
@@ -339,11 +338,10 @@ abstract class $SalesOrgStateCopyWith<$Res> {
           SalesOrgState value, $Res Function(SalesOrgState) then) =
       _$SalesOrgStateCopyWithImpl<$Res>;
   $Res call(
-      {SalesOrganisation salesOrganisation,
-      SalesOrganisationConfigs salesOrganisationConfigs});
+      {SalesOrganisation salesOrganisation, SalesOrganisationConfigs config});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
+  $SalesOrganisationConfigsCopyWith<$Res> get config;
 }
 
 /// @nodoc
@@ -358,16 +356,16 @@ class _$SalesOrgStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? salesOrganisation = freezed,
-    Object? salesOrganisationConfigs = freezed,
+    Object? config = freezed,
   }) {
     return _then(_value.copyWith(
       salesOrganisation: salesOrganisation == freezed
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      salesOrganisationConfigs: salesOrganisationConfigs == freezed
-          ? _value.salesOrganisationConfigs
-          : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
+      config: config == freezed
+          ? _value.config
+          : config // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
     ));
   }
@@ -380,10 +378,9 @@ class _$SalesOrgStateCopyWithImpl<$Res>
   }
 
   @override
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs {
-    return $SalesOrganisationConfigsCopyWith<$Res>(
-        _value.salesOrganisationConfigs, (value) {
-      return _then(_value.copyWith(salesOrganisationConfigs: value));
+  $SalesOrganisationConfigsCopyWith<$Res> get config {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.config, (value) {
+      return _then(_value.copyWith(config: value));
     });
   }
 }
@@ -396,13 +393,12 @@ abstract class _$$_SalesOrgStateCopyWith<$Res>
       __$$_SalesOrgStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {SalesOrganisation salesOrganisation,
-      SalesOrganisationConfigs salesOrganisationConfigs});
+      {SalesOrganisation salesOrganisation, SalesOrganisationConfigs config});
 
   @override
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   @override
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
+  $SalesOrganisationConfigsCopyWith<$Res> get config;
 }
 
 /// @nodoc
@@ -419,16 +415,16 @@ class __$$_SalesOrgStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? salesOrganisation = freezed,
-    Object? salesOrganisationConfigs = freezed,
+    Object? config = freezed,
   }) {
     return _then(_$_SalesOrgState(
       salesOrganisation: salesOrganisation == freezed
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      salesOrganisationConfigs: salesOrganisationConfigs == freezed
-          ? _value.salesOrganisationConfigs
-          : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
+      config: config == freezed
+          ? _value.config
+          : config // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
     ));
   }
@@ -438,17 +434,16 @@ class __$$_SalesOrgStateCopyWithImpl<$Res>
 
 class _$_SalesOrgState implements _SalesOrgState {
   const _$_SalesOrgState(
-      {required this.salesOrganisation,
-      required this.salesOrganisationConfigs});
+      {required this.salesOrganisation, required this.config});
 
   @override
   final SalesOrganisation salesOrganisation;
   @override
-  final SalesOrganisationConfigs salesOrganisationConfigs;
+  final SalesOrganisationConfigs config;
 
   @override
   String toString() {
-    return 'SalesOrgState(salesOrganisation: $salesOrganisation, salesOrganisationConfigs: $salesOrganisationConfigs)';
+    return 'SalesOrgState(salesOrganisation: $salesOrganisation, config: $config)';
   }
 
   @override
@@ -458,15 +453,14 @@ class _$_SalesOrgState implements _SalesOrgState {
             other is _$_SalesOrgState &&
             const DeepCollectionEquality()
                 .equals(other.salesOrganisation, salesOrganisation) &&
-            const DeepCollectionEquality().equals(
-                other.salesOrganisationConfigs, salesOrganisationConfigs));
+            const DeepCollectionEquality().equals(other.config, config));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(salesOrganisation),
-      const DeepCollectionEquality().hash(salesOrganisationConfigs));
+      const DeepCollectionEquality().hash(config));
 
   @JsonKey(ignore: true)
   @override
@@ -476,14 +470,13 @@ class _$_SalesOrgState implements _SalesOrgState {
 
 abstract class _SalesOrgState implements SalesOrgState {
   const factory _SalesOrgState(
-          {required final SalesOrganisation salesOrganisation,
-          required final SalesOrganisationConfigs salesOrganisationConfigs}) =
-      _$_SalesOrgState;
+      {required final SalesOrganisation salesOrganisation,
+      required final SalesOrganisationConfigs config}) = _$_SalesOrgState;
 
   @override
   SalesOrganisation get salesOrganisation;
   @override
-  SalesOrganisationConfigs get salesOrganisationConfigs;
+  SalesOrganisationConfigs get config;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrgStateCopyWith<_$_SalesOrgState> get copyWith =>

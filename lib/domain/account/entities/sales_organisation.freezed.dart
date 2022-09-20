@@ -17,7 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SalesOrganisation {
   SalesOrg get salesOrg => throw _privateConstructorUsedError;
-  List<CustomerInfo> get customerInfos => throw _privateConstructorUsedError;
+  List<SalesOrgCustomerInfo> get customerInfos =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrganisationCopyWith<SalesOrganisation> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $SalesOrganisationCopyWith<$Res> {
   factory $SalesOrganisationCopyWith(
           SalesOrganisation value, $Res Function(SalesOrganisation) then) =
       _$SalesOrganisationCopyWithImpl<$Res>;
-  $Res call({SalesOrg salesOrg, List<CustomerInfo> customerInfos});
+  $Res call({SalesOrg salesOrg, List<SalesOrgCustomerInfo> customerInfos});
 }
 
 /// @nodoc
@@ -54,7 +55,7 @@ class _$SalesOrganisationCopyWithImpl<$Res>
       customerInfos: customerInfos == freezed
           ? _value.customerInfos
           : customerInfos // ignore: cast_nullable_to_non_nullable
-              as List<CustomerInfo>,
+              as List<SalesOrgCustomerInfo>,
     ));
   }
 }
@@ -66,7 +67,7 @@ abstract class _$$_SalesOrganisationCopyWith<$Res>
           $Res Function(_$_SalesOrganisation) then) =
       __$$_SalesOrganisationCopyWithImpl<$Res>;
   @override
-  $Res call({SalesOrg salesOrg, List<CustomerInfo> customerInfos});
+  $Res call({SalesOrg salesOrg, List<SalesOrgCustomerInfo> customerInfos});
 }
 
 /// @nodoc
@@ -93,7 +94,7 @@ class __$$_SalesOrganisationCopyWithImpl<$Res>
       customerInfos: customerInfos == freezed
           ? _value._customerInfos
           : customerInfos // ignore: cast_nullable_to_non_nullable
-              as List<CustomerInfo>,
+              as List<SalesOrgCustomerInfo>,
     ));
   }
 }
@@ -102,15 +103,16 @@ class __$$_SalesOrganisationCopyWithImpl<$Res>
 
 class _$_SalesOrganisation extends _SalesOrganisation {
   const _$_SalesOrganisation(
-      {required this.salesOrg, required final List<CustomerInfo> customerInfos})
+      {required this.salesOrg,
+      required final List<SalesOrgCustomerInfo> customerInfos})
       : _customerInfos = customerInfos,
         super._();
 
   @override
   final SalesOrg salesOrg;
-  final List<CustomerInfo> _customerInfos;
+  final List<SalesOrgCustomerInfo> _customerInfos;
   @override
-  List<CustomerInfo> get customerInfos {
+  List<SalesOrgCustomerInfo> get customerInfos {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_customerInfos);
   }
@@ -145,14 +147,15 @@ class _$_SalesOrganisation extends _SalesOrganisation {
 
 abstract class _SalesOrganisation extends SalesOrganisation {
   const factory _SalesOrganisation(
-      {required final SalesOrg salesOrg,
-      required final List<CustomerInfo> customerInfos}) = _$_SalesOrganisation;
+          {required final SalesOrg salesOrg,
+          required final List<SalesOrgCustomerInfo> customerInfos}) =
+      _$_SalesOrganisation;
   const _SalesOrganisation._() : super._();
 
   @override
   SalesOrg get salesOrg;
   @override
-  List<CustomerInfo> get customerInfos;
+  List<SalesOrgCustomerInfo> get customerInfos;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationCopyWith<_$_SalesOrganisation> get copyWith =>

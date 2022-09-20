@@ -1,7 +1,7 @@
-import 'package:ezrxmobile/domain/account/entities/customer_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_org_ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_aup.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -146,10 +146,10 @@ List<SalesOrganisation> _mergeSalesOrg(
       final newSalesOrg = customerExistsSalesOrg.copyWith(
         customerInfos: [
           ...customerExistsSalesOrg.customerInfos,
-          CustomerInfo(
-            customerCodeSoldTo: e.customerCode,
+          SalesOrgCustomerInfo(
+            customerCodeSoldTo: CustomerCode(e.customerCode),
             shipToInfos: e.shipToCodes
-                .map((e) => ShipToInfo(shipToCustomerCode: e))
+                .map((e) => SalesOrgShipToInfo(shipToCustomerCode: e))
                 .toList(),
           ),
         ],

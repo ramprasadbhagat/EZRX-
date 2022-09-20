@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SalesOrganisationConfigs {
   Currency get currency => throw _privateConstructorUsedError;
+  bool get hideCustomer => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrganisationConfigsCopyWith<SalesOrganisationConfigs> get copyWith =>
@@ -28,7 +29,7 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
   factory $SalesOrganisationConfigsCopyWith(SalesOrganisationConfigs value,
           $Res Function(SalesOrganisationConfigs) then) =
       _$SalesOrganisationConfigsCopyWithImpl<$Res>;
-  $Res call({Currency currency});
+  $Res call({Currency currency, bool hideCustomer});
 }
 
 /// @nodoc
@@ -43,12 +44,17 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? currency = freezed,
+    Object? hideCustomer = freezed,
   }) {
     return _then(_value.copyWith(
       currency: currency == freezed
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as Currency,
+      hideCustomer: hideCustomer == freezed
+          ? _value.hideCustomer
+          : hideCustomer // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -61,7 +67,7 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
           $Res Function(_$_SalesOrganisationConfigs) then) =
       __$$_SalesOrganisationConfigsCopyWithImpl<$Res>;
   @override
-  $Res call({Currency currency});
+  $Res call({Currency currency, bool hideCustomer});
 }
 
 /// @nodoc
@@ -79,12 +85,17 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? currency = freezed,
+    Object? hideCustomer = freezed,
   }) {
     return _then(_$_SalesOrganisationConfigs(
       currency: currency == freezed
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as Currency,
+      hideCustomer: hideCustomer == freezed
+          ? _value.hideCustomer
+          : hideCustomer // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -92,14 +103,18 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
-  const _$_SalesOrganisationConfigs({required this.currency}) : super._();
+  const _$_SalesOrganisationConfigs(
+      {required this.currency, required this.hideCustomer})
+      : super._();
 
   @override
   final Currency currency;
+  @override
+  final bool hideCustomer;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(currency: $currency)';
+    return 'SalesOrganisationConfigs(currency: $currency, hideCustomer: $hideCustomer)';
   }
 
   @override
@@ -107,12 +122,16 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SalesOrganisationConfigs &&
-            const DeepCollectionEquality().equals(other.currency, currency));
+            const DeepCollectionEquality().equals(other.currency, currency) &&
+            const DeepCollectionEquality()
+                .equals(other.hideCustomer, hideCustomer));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(currency));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(currency),
+      const DeepCollectionEquality().hash(hideCustomer));
 
   @JsonKey(ignore: true)
   @override
@@ -122,12 +141,15 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
 }
 
 abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
-  const factory _SalesOrganisationConfigs({required final Currency currency}) =
-      _$_SalesOrganisationConfigs;
+  const factory _SalesOrganisationConfigs(
+      {required final Currency currency,
+      required final bool hideCustomer}) = _$_SalesOrganisationConfigs;
   const _SalesOrganisationConfigs._() : super._();
 
   @override
   Currency get currency;
+  @override
+  bool get hideCustomer;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsCopyWith<_$_SalesOrganisationConfigs>

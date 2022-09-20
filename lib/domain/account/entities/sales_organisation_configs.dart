@@ -9,9 +9,11 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
 
   const factory SalesOrganisationConfigs({
     required Currency currency,
+    required bool hideCustomer,
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
         currency: Currency(''),
+        hideCustomer: false,
       );
 }

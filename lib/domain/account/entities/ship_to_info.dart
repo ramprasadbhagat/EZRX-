@@ -1,3 +1,5 @@
+import 'package:ezrxmobile/domain/account/entities/ship_to_address.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'ship_to_info.freezed.dart';
@@ -7,10 +9,47 @@ class ShipToInfo with _$ShipToInfo {
   const ShipToInfo._();
 
   const factory ShipToInfo({
+    required bool defaultShipToAddress,
     required String shipToCustomerCode,
+    required ShipToName shipToName,
+    required ShipToAddress shipToAddress,
+    required String status,
+    required String building,
+    required String city1,
+    required String city2,
+    required String postalCode,
+    required String houseNumber1,
+    required String telephoneNumber,
+    required String region,
+    required String floor,
+    required String plant,
   }) = _ShipToInfo;
 
   factory ShipToInfo.empty() => const ShipToInfo(
+        defaultShipToAddress: false,
         shipToCustomerCode: '',
+        shipToName: ShipToName(
+          name1: '',
+          name2: '',
+          name3: '',
+          name4: '',
+        ),
+        shipToAddress: ShipToAddress(
+          street: '',
+          street2: '',
+          street3: '',
+          street4: '',
+          street5: '',
+        ),
+        status: '',
+        postalCode: '',
+        houseNumber1: '',
+        region: '',
+        plant: '',
+        telephoneNumber: '',
+        city1: '',
+        city2: '',
+        floor: '',
+        building: '',
       );
 }

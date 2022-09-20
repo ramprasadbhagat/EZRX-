@@ -4,11 +4,11 @@ part of 'sales_org_bloc.dart';
 class SalesOrgState with _$SalesOrgState {
   const factory SalesOrgState({
     required SalesOrganisation salesOrganisation,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisationConfigs config,
   }) = _SalesOrgState;
 
   factory SalesOrgState.initial() => SalesOrgState(
         salesOrganisation: SalesOrganisation.empty(),
-        salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+        config: SalesOrganisationConfigs.empty(),
       );
 }

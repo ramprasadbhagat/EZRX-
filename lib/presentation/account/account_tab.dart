@@ -1,13 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -29,6 +35,8 @@ class AccountTab extends StatelessWidget {
             tiles: [
               const _ProfileTile(),
               const _SalesOrgSelector(),
+              const _CustomerCodeSelector(),
+              const _ShipCodeSelector(),
               const _LoginOnBehalfTile(),
               const _SettingsTile(),
             ],
@@ -100,11 +108,12 @@ class _SalesOrgSelector extends StatelessWidget {
               ? LoadingShimmer.tile()
               : Text(
                   state.salesOrganisation.salesOrg.fullName,
-                  style: Theme.of(context).textTheme.headline6,
+                  // style: Theme.of(context).textTheme.headline6,
                 );
         },
       ),
       trailing: const Icon(Icons.arrow_drop_down_outlined),
+      enabled: !context.watch<CustomerCodeBloc>().state.isFetching,
       onTap: () => showPlatformDialog(
         context: context,
         barrierDismissible: true,
@@ -123,6 +132,161 @@ class _SalesOrgSelector extends StatelessWidget {
                       onPressed: () {
                         context.read<SalesOrgBloc>().add(
                               SalesOrgEvent.selected(salesOrganisation: e),
+                            );
+                        context.router.pop();
+                      },
+                    ),
+                  )
+                  .toList(),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class _CustomerCodeSelector extends StatelessWidget {
+  const _CustomerCodeSelector({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      key: const Key('customerCodeSelect'),
+      leading: const Text('Customer'),
+      title: BlocConsumer<CustomerCodeBloc, CustomerCodeState>(
+        listenWhen: (previous, current) =>
+            previous.apiFailureOrSuccessOption !=
+            current.apiFailureOrSuccessOption,
+        listener: (context, state) {
+          state.apiFailureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) {
+                final failureMessage = failure.failureMessage;
+                showSnackBar(
+                  context: context,
+                  message: failureMessage.tr(),
+                );
+              },
+              (_) {
+                context.read<AuthBloc>().add(const AuthEvent.authCheck());
+              },
+            ),
+          );
+        },
+        buildWhen: (previous, current) =>
+            previous.customeCodeInfo != current.customeCodeInfo,
+        builder: (context, state) {
+          return context.watch<CustomerCodeBloc>().state.isFetching?LoadingShimmer.tile():
+              state.customeCodeInfo == CustomerCodeInfo.empty()?
+              const Text('No Customer Code').tr()
+              : ListTile(
+                  title: RichText(
+                    text: TextSpan(
+                      text: '(${state.customeCodeInfo.customerCodeSoldTo}) ',
+                      style: Theme.of(context).textTheme.subtitle2,
+                      children: [
+                        TextSpan(
+                          text: state.customeCodeInfo.customerName.toString(),
+                        ),
+                      ],
+                    ),
+                  ),
+                  subtitle: RichText(
+                    text: TextSpan(
+                      text: state.customeCodeInfo.customerAddress.toString(),
+                      style: Theme.of(context).textTheme.subtitle2,
+                      children: [
+                        TextSpan(
+                          text: state.customeCodeInfo.postalCode,
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+        },
+      ),
+      trailing: const Icon(Icons.arrow_drop_down_outlined),
+      enabled: !context.watch<CustomerCodeBloc>().state.isFetching,
+      onTap: () => context.router.push(const CustomerSearchPageRoute()),
+    );
+  }
+}
+
+class _ShipCodeSelector extends StatelessWidget {
+  const _ShipCodeSelector({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      key: const Key('shipToCodeSelect'),
+      leading: const Text('Ship To'),
+      title: BlocBuilder<ShipToCodeBloc, ShipToCodeState>(
+        buildWhen: (previous, current) =>
+            previous.shipToInfo != current.shipToInfo,
+        builder: (context, state) {
+          return context.watch<CustomerCodeBloc>().state.isFetching
+              ? LoadingShimmer.tile():state.shipToInfo == ShipToInfo.empty()?
+              const Text('No Shipping Code').tr()
+              : ListTile(
+                  title: RichText(
+                    text: TextSpan(
+                      text: '(${state.shipToInfo.shipToCustomerCode}) ',
+                      style: Theme.of(context).textTheme.subtitle2,
+                      children: [
+                        TextSpan(
+                          text: state.shipToInfo.shipToName.toString(),
+                        ),
+                      ],
+                    ),
+                  ),
+                  subtitle: RichText(
+                    text: TextSpan(
+                      text: state.shipToInfo.shipToAddress.toString(),
+                      style: Theme.of(context).textTheme.subtitle2,
+                      children: [
+                        TextSpan(
+                          text: state.shipToInfo.region,
+                        ),
+                        TextSpan(
+                          text: ' ${state.shipToInfo.postalCode}',
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+        },
+      ),
+      trailing: const Icon(Icons.arrow_drop_down_outlined),
+      enabled: !context.watch<CustomerCodeBloc>().state.isFetching,
+      onTap: () => showPlatformDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (_) => BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
+          buildWhen: (previous, current) =>
+              previous.customeCodeInfo != current.customeCodeInfo,
+          builder: (context, state) {
+            return PlatformAlertDialog(
+              title: const Text('Please select a shipping address').tr(),
+              actions: state.customeCodeInfo.shipToInfos
+                  .map(
+                    (shipToInfo) => PlatformDialogAction(
+                      key: Key('shipToOption${shipToInfo.shipToCustomerCode}'),
+                      child: Text(
+                        shipToInfo.shipToCustomerCode,
+                        style: TextStyle(
+                          fontWeight: shipToInfo.defaultShipToAddress
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                          color: shipToInfo.defaultShipToAddress
+                              ? ZPColors.secondary
+                              : Colors.blueAccent,
+                        ),
+                      ),
+                      onPressed: () {
+                        context.read<ShipToCodeBloc>().add(
+                              ShipToCodeEvent.selected(shipToInfo: shipToInfo),
                             );
                         context.router.pop();
                       },

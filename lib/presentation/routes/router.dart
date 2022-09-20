@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/presentation/account/account_tab.dart';
+import 'package:ezrxmobile/presentation/account/customer_search.dart';
 import 'package:ezrxmobile/presentation/account/settings_page.dart';
 import 'package:ezrxmobile/presentation/auth/login_page.dart';
 import 'package:ezrxmobile/presentation/auth/proxy_login_page.dart';
@@ -19,6 +20,7 @@ import 'package:ezrxmobile/presentation/splash/splash_page.dart';
     AutoRoute(path: 'login_on_behalf', page: LoginOnBehalfPage),
     AutoRoute(path: 'settings', page: SettingsPage),
     AutoRoute(path: 'web_view_page', page: WebViewPage),
+    AutoRoute(path: 'customer_search_page', page: CustomerSearchPage),
     AutoRoute(
       path: 'main_tabbar',
       page: HomeNavigationTabbar,

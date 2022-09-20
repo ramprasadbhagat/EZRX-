@@ -1,3 +1,5 @@
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/announcement/bloc/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
@@ -5,10 +7,15 @@ import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.da
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
+import 'package:ezrxmobile/application/core/search/search_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/repository/customer_code_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_org_repository.dart';
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_local.dart';
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_query_mutation.dart';
@@ -196,10 +203,10 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => BannerRemoteDataSource(
+      config: locator<Config>(),
       httpService: locator<HttpService>(),
       bannerQueryMutation: locator<BannerQueryMutation>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-      config: locator<Config>(),
     ),
   );
 
@@ -248,6 +255,56 @@ void setupLocator() {
       userBloc: locator<UserBloc>(),
       salesOrgRepository: locator<SalesOrgRepository>(),
     ),
+  );
+
+  //============================================================
+  //  Customer Code
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => CustomerCodeQueryMutation());
+
+  locator.registerLazySingleton(() => CustomerCodeLocalDataSource());
+
+  locator.registerLazySingleton(
+    () => CustomerCodeRemoteDataSource(
+      httpService: locator<HttpService>(),
+      customerCodeQueryMutation: locator<CustomerCodeQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      config: locator<Config>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => CustomerCodeRepository(
+      config: locator<Config>(),
+      remoteDataSource: locator<CustomerCodeRemoteDataSource>(),
+      localCustomerCodeDataSource: locator<CustomerCodeLocalDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => CustomerCodeBloc(
+      userBloc: locator<UserBloc>(),
+      customerCodeRepository: locator<CustomerCodeRepository>(),
+      salesOrgBloc: locator<SalesOrgBloc>(),
+      searchBloc: locator<SearchBloc>(),
+    ),
+  );
+
+  //============================================================
+  //  Ship To Code
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => ShipToCodeBloc(
+      customerCodeBloc: locator<CustomerCodeBloc>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => SearchBloc(),
   );
 
   //============================================================

@@ -10,10 +10,12 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
         Map<String, dynamic> json) =>
     _$_SalesOrganisationConfigsDto(
       currency: json['currency'] as String,
+      hideCustomer: json['hideCustomer'] as bool,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
         _$_SalesOrganisationConfigsDto instance) =>
     <String, dynamic>{
       'currency': instance.currency,
+      'hideCustomer': instance.hideCustomer,
     };

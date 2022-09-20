@@ -44,20 +44,20 @@ stages:
         script: |
           fvm flutter test --coverage
 
-    - task: Bash@3
-      displayName: IOS simulator setup
-      inputs:
-        targetType: 'inline'
-        script: |
-          open -a simulator
-          fvm flutter emulators --launch apple_ios_simulator
-          sleep 5
+    # - task: Bash@3
+    #   displayName: IOS simulator setup
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       open -a simulator
+    #       fvm flutter emulators --launch apple_ios_simulator
+    #       sleep 5
 
-    - task: Bash@3
-      displayName: Launch IOS simulator and Test all the integration test
-      inputs:
-        targetType: 'inline'
-        script: |
-          fvm flutter drive --driver=test_driver/integration_driver.dart --target=integration_test/app_test.dart --flavor uat
+    # - task: Bash@3
+    #   displayName: Launch IOS simulator and Test all the integration test
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       fvm flutter drive --driver=test_driver/integration_driver.dart --target=integration_test/app_test.dart --flavor dev
 
     

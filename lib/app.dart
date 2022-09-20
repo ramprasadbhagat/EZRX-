@@ -3,9 +3,12 @@ import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/announcement/bloc/announcement_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
+import 'package:ezrxmobile/application/core/search/search_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -108,9 +111,14 @@ class App extends StatelessWidget {
         BlocProvider<SalesOrgBloc>(
           create: (context) => locator<SalesOrgBloc>(),
         ),
+        BlocProvider<CustomerCodeBloc>(
+            create: (context) => locator<CustomerCodeBloc>(),),
+        BlocProvider<ShipToCodeBloc>(
+            create: (context) => locator<ShipToCodeBloc>(),),
         BlocProvider<AnnouncementBloc>(
           create: (context) => locator<AnnouncementBloc>(),
         ),
+        BlocProvider<SearchBloc>(create: (context) => locator<SearchBloc>(),),
       ],
       child: MaterialApp.router(
         localizationsDelegates: context.localizationDelegates,

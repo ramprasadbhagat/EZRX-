@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/account/entities/customer_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -10,12 +10,12 @@ class SalesOrganisation with _$SalesOrganisation {
 
   const factory SalesOrganisation({
     required SalesOrg salesOrg,
-    required List<CustomerInfo> customerInfos,
+    required List<SalesOrgCustomerInfo> customerInfos,
     // required ShipToCode shipToCode,
   }) = _SalesOrganisation;
 
   factory SalesOrganisation.empty() => SalesOrganisation(
         salesOrg: SalesOrg(''),
-        customerInfos: <CustomerInfo>[],
+        customerInfos: <SalesOrgCustomerInfo>[],
       );
 }

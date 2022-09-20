@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'customer_info.dart';
+part of 'sales_org_customer_info.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,30 +15,33 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$CustomerInfo {
-  String get customerCodeSoldTo => throw _privateConstructorUsedError;
-  List<ShipToInfo> get shipToInfos => throw _privateConstructorUsedError;
+mixin _$SalesOrgCustomerInfo {
+  CustomerCode get customerCodeSoldTo => throw _privateConstructorUsedError;
+  List<SalesOrgShipToInfo> get shipToInfos =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $CustomerInfoCopyWith<CustomerInfo> get copyWith =>
+  $SalesOrgCustomerInfoCopyWith<SalesOrgCustomerInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CustomerInfoCopyWith<$Res> {
-  factory $CustomerInfoCopyWith(
-          CustomerInfo value, $Res Function(CustomerInfo) then) =
-      _$CustomerInfoCopyWithImpl<$Res>;
-  $Res call({String customerCodeSoldTo, List<ShipToInfo> shipToInfos});
+abstract class $SalesOrgCustomerInfoCopyWith<$Res> {
+  factory $SalesOrgCustomerInfoCopyWith(SalesOrgCustomerInfo value,
+          $Res Function(SalesOrgCustomerInfo) then) =
+      _$SalesOrgCustomerInfoCopyWithImpl<$Res>;
+  $Res call(
+      {CustomerCode customerCodeSoldTo, List<SalesOrgShipToInfo> shipToInfos});
 }
 
 /// @nodoc
-class _$CustomerInfoCopyWithImpl<$Res> implements $CustomerInfoCopyWith<$Res> {
-  _$CustomerInfoCopyWithImpl(this._value, this._then);
+class _$SalesOrgCustomerInfoCopyWithImpl<$Res>
+    implements $SalesOrgCustomerInfoCopyWith<$Res> {
+  _$SalesOrgCustomerInfoCopyWithImpl(this._value, this._then);
 
-  final CustomerInfo _value;
+  final SalesOrgCustomerInfo _value;
   // ignore: unused_field
-  final $Res Function(CustomerInfo) _then;
+  final $Res Function(SalesOrgCustomerInfo) _then;
 
   @override
   $Res call({
@@ -49,82 +52,83 @@ class _$CustomerInfoCopyWithImpl<$Res> implements $CustomerInfoCopyWith<$Res> {
       customerCodeSoldTo: customerCodeSoldTo == freezed
           ? _value.customerCodeSoldTo
           : customerCodeSoldTo // ignore: cast_nullable_to_non_nullable
-              as String,
+              as CustomerCode,
       shipToInfos: shipToInfos == freezed
           ? _value.shipToInfos
           : shipToInfos // ignore: cast_nullable_to_non_nullable
-              as List<ShipToInfo>,
+              as List<SalesOrgShipToInfo>,
     ));
   }
 }
 
 /// @nodoc
-abstract class _$$_CustomerInfoCopyWith<$Res>
-    implements $CustomerInfoCopyWith<$Res> {
-  factory _$$_CustomerInfoCopyWith(
-          _$_CustomerInfo value, $Res Function(_$_CustomerInfo) then) =
-      __$$_CustomerInfoCopyWithImpl<$Res>;
+abstract class _$$_SalesOrgCustomerInfoCopyWith<$Res>
+    implements $SalesOrgCustomerInfoCopyWith<$Res> {
+  factory _$$_SalesOrgCustomerInfoCopyWith(_$_SalesOrgCustomerInfo value,
+          $Res Function(_$_SalesOrgCustomerInfo) then) =
+      __$$_SalesOrgCustomerInfoCopyWithImpl<$Res>;
   @override
-  $Res call({String customerCodeSoldTo, List<ShipToInfo> shipToInfos});
+  $Res call(
+      {CustomerCode customerCodeSoldTo, List<SalesOrgShipToInfo> shipToInfos});
 }
 
 /// @nodoc
-class __$$_CustomerInfoCopyWithImpl<$Res>
-    extends _$CustomerInfoCopyWithImpl<$Res>
-    implements _$$_CustomerInfoCopyWith<$Res> {
-  __$$_CustomerInfoCopyWithImpl(
-      _$_CustomerInfo _value, $Res Function(_$_CustomerInfo) _then)
-      : super(_value, (v) => _then(v as _$_CustomerInfo));
+class __$$_SalesOrgCustomerInfoCopyWithImpl<$Res>
+    extends _$SalesOrgCustomerInfoCopyWithImpl<$Res>
+    implements _$$_SalesOrgCustomerInfoCopyWith<$Res> {
+  __$$_SalesOrgCustomerInfoCopyWithImpl(_$_SalesOrgCustomerInfo _value,
+      $Res Function(_$_SalesOrgCustomerInfo) _then)
+      : super(_value, (v) => _then(v as _$_SalesOrgCustomerInfo));
 
   @override
-  _$_CustomerInfo get _value => super._value as _$_CustomerInfo;
+  _$_SalesOrgCustomerInfo get _value => super._value as _$_SalesOrgCustomerInfo;
 
   @override
   $Res call({
     Object? customerCodeSoldTo = freezed,
     Object? shipToInfos = freezed,
   }) {
-    return _then(_$_CustomerInfo(
+    return _then(_$_SalesOrgCustomerInfo(
       customerCodeSoldTo: customerCodeSoldTo == freezed
           ? _value.customerCodeSoldTo
           : customerCodeSoldTo // ignore: cast_nullable_to_non_nullable
-              as String,
+              as CustomerCode,
       shipToInfos: shipToInfos == freezed
           ? _value._shipToInfos
           : shipToInfos // ignore: cast_nullable_to_non_nullable
-              as List<ShipToInfo>,
+              as List<SalesOrgShipToInfo>,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_CustomerInfo extends _CustomerInfo {
-  const _$_CustomerInfo(
+class _$_SalesOrgCustomerInfo extends _SalesOrgCustomerInfo {
+  const _$_SalesOrgCustomerInfo(
       {required this.customerCodeSoldTo,
-      required final List<ShipToInfo> shipToInfos})
+      required final List<SalesOrgShipToInfo> shipToInfos})
       : _shipToInfos = shipToInfos,
         super._();
 
   @override
-  final String customerCodeSoldTo;
-  final List<ShipToInfo> _shipToInfos;
+  final CustomerCode customerCodeSoldTo;
+  final List<SalesOrgShipToInfo> _shipToInfos;
   @override
-  List<ShipToInfo> get shipToInfos {
+  List<SalesOrgShipToInfo> get shipToInfos {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_shipToInfos);
   }
 
   @override
   String toString() {
-    return 'CustomerInfo(customerCodeSoldTo: $customerCodeSoldTo, shipToInfos: $shipToInfos)';
+    return 'SalesOrgCustomerInfo(customerCodeSoldTo: $customerCodeSoldTo, shipToInfos: $shipToInfos)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomerInfo &&
+            other is _$_SalesOrgCustomerInfo &&
             const DeepCollectionEquality()
                 .equals(other.customerCodeSoldTo, customerCodeSoldTo) &&
             const DeepCollectionEquality()
@@ -139,22 +143,24 @@ class _$_CustomerInfo extends _CustomerInfo {
 
   @JsonKey(ignore: true)
   @override
-  _$$_CustomerInfoCopyWith<_$_CustomerInfo> get copyWith =>
-      __$$_CustomerInfoCopyWithImpl<_$_CustomerInfo>(this, _$identity);
+  _$$_SalesOrgCustomerInfoCopyWith<_$_SalesOrgCustomerInfo> get copyWith =>
+      __$$_SalesOrgCustomerInfoCopyWithImpl<_$_SalesOrgCustomerInfo>(
+          this, _$identity);
 }
 
-abstract class _CustomerInfo extends CustomerInfo {
-  const factory _CustomerInfo(
-      {required final String customerCodeSoldTo,
-      required final List<ShipToInfo> shipToInfos}) = _$_CustomerInfo;
-  const _CustomerInfo._() : super._();
+abstract class _SalesOrgCustomerInfo extends SalesOrgCustomerInfo {
+  const factory _SalesOrgCustomerInfo(
+          {required final CustomerCode customerCodeSoldTo,
+          required final List<SalesOrgShipToInfo> shipToInfos}) =
+      _$_SalesOrgCustomerInfo;
+  const _SalesOrgCustomerInfo._() : super._();
 
   @override
-  String get customerCodeSoldTo;
+  CustomerCode get customerCodeSoldTo;
   @override
-  List<ShipToInfo> get shipToInfos;
+  List<SalesOrgShipToInfo> get shipToInfos;
   @override
   @JsonKey(ignore: true)
-  _$$_CustomerInfoCopyWith<_$_CustomerInfo> get copyWith =>
+  _$$_SalesOrgCustomerInfoCopyWith<_$_SalesOrgCustomerInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -46,7 +46,7 @@ class SalesOrgBloc extends Bloc<SalesOrgEvent, SalesOrgState> {
         failureOrSuccess.fold(
           (failure) {},
           (salesOrganisationConfigs) => emit(state.copyWith(
-            salesOrganisationConfigs: salesOrganisationConfigs,
+            config: salesOrganisationConfigs,
           )),
         );
       },

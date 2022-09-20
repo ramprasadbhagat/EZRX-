@@ -23,6 +23,8 @@ SalesOrganisationConfigsDto _$SalesOrganisationConfigsDtoFromJson(
 mixin _$SalesOrganisationConfigsDto {
   @JsonKey(name: 'currency')
   String get currency => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hideCustomer')
+  bool get hideCustomer => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +38,9 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
           SalesOrganisationConfigsDto value,
           $Res Function(SalesOrganisationConfigsDto) then) =
       _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>;
-  $Res call({@JsonKey(name: 'currency') String currency});
+  $Res call(
+      {@JsonKey(name: 'currency') String currency,
+      @JsonKey(name: 'hideCustomer') bool hideCustomer});
 }
 
 /// @nodoc
@@ -51,12 +55,17 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? currency = freezed,
+    Object? hideCustomer = freezed,
   }) {
     return _then(_value.copyWith(
       currency: currency == freezed
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as String,
+      hideCustomer: hideCustomer == freezed
+          ? _value.hideCustomer
+          : hideCustomer // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -69,7 +78,9 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
           $Res Function(_$_SalesOrganisationConfigsDto) then) =
       __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>;
   @override
-  $Res call({@JsonKey(name: 'currency') String currency});
+  $Res call(
+      {@JsonKey(name: 'currency') String currency,
+      @JsonKey(name: 'hideCustomer') bool hideCustomer});
 }
 
 /// @nodoc
@@ -88,12 +99,17 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? currency = freezed,
+    Object? hideCustomer = freezed,
   }) {
     return _then(_$_SalesOrganisationConfigsDto(
       currency: currency == freezed
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as String,
+      hideCustomer: hideCustomer == freezed
+          ? _value.hideCustomer
+          : hideCustomer // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -102,7 +118,8 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   const _$_SalesOrganisationConfigsDto(
-      {@JsonKey(name: 'currency') required this.currency})
+      {@JsonKey(name: 'currency') required this.currency,
+      @JsonKey(name: 'hideCustomer') required this.hideCustomer})
       : super._();
 
   factory _$_SalesOrganisationConfigsDto.fromJson(Map<String, dynamic> json) =>
@@ -111,10 +128,13 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @override
   @JsonKey(name: 'currency')
   final String currency;
+  @override
+  @JsonKey(name: 'hideCustomer')
+  final bool hideCustomer;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(currency: $currency)';
+    return 'SalesOrganisationConfigsDto(currency: $currency, hideCustomer: $hideCustomer)';
   }
 
   @override
@@ -122,13 +142,17 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SalesOrganisationConfigsDto &&
-            const DeepCollectionEquality().equals(other.currency, currency));
+            const DeepCollectionEquality().equals(other.currency, currency) &&
+            const DeepCollectionEquality()
+                .equals(other.hideCustomer, hideCustomer));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(currency));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(currency),
+      const DeepCollectionEquality().hash(hideCustomer));
 
   @JsonKey(ignore: true)
   @override
@@ -147,7 +171,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
 abstract class _SalesOrganisationConfigsDto
     extends SalesOrganisationConfigsDto {
   const factory _SalesOrganisationConfigsDto(
-          {@JsonKey(name: 'currency') required final String currency}) =
+          {@JsonKey(name: 'currency') required final String currency,
+          @JsonKey(name: 'hideCustomer') required final bool hideCustomer}) =
       _$_SalesOrganisationConfigsDto;
   const _SalesOrganisationConfigsDto._() : super._();
 
@@ -157,6 +182,9 @@ abstract class _SalesOrganisationConfigsDto
   @override
   @JsonKey(name: 'currency')
   String get currency;
+  @override
+  @JsonKey(name: 'hideCustomer')
+  bool get hideCustomer;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsDtoCopyWith<_$_SalesOrganisationConfigsDto>

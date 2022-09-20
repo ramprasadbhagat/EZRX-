@@ -6,7 +6,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
@@ -59,9 +59,9 @@ void main() {
   final mockSalesOrg = SalesOrg('mock-salesOrg');
   final salesOrg2601 = SalesOrg('2601');
   final mockSalesOrganisation = SalesOrganisation(
-      salesOrg: mockSalesOrg, customerInfos: <CustomerInfo>[]);
+      salesOrg: mockSalesOrg, customerInfos: <SalesOrgCustomerInfo>[]);
   final salesOrganisation2601 = SalesOrganisation(
-      salesOrg: salesOrg2601, customerInfos: <CustomerInfo>[]);
+      salesOrg: salesOrg2601, customerInfos: <SalesOrgCustomerInfo>[]);
 
   late final mockBannerItem;
   const mockUrl = 'mock-image-urls';

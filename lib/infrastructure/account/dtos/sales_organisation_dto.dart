@@ -1,6 +1,6 @@
-import 'package:ezrxmobile/domain/account/entities/customer_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_org_ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -23,7 +23,7 @@ class SalesOrganisationDto with _$SalesOrganisationDto {
   }) {
     return SalesOrganisationDto(
       salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-      customerCode: salesOrganisation.customerInfos[index].customerCodeSoldTo,
+      customerCode: salesOrganisation.customerInfos[index].customerCodeSoldTo.getOrCrash(),
       shipToCodes: salesOrganisation.customerInfos[index].shipToInfos
           .map((e) => e.shipToCustomerCode)
           .toList(),
@@ -34,10 +34,10 @@ class SalesOrganisationDto with _$SalesOrganisationDto {
     return SalesOrganisation(
       salesOrg: SalesOrg(salesOrg),
       customerInfos: [
-        CustomerInfo(
-          customerCodeSoldTo: customerCode,
+        SalesOrgCustomerInfo(
+          customerCodeSoldTo: CustomerCode(customerCode),
           shipToInfos: shipToCodes
-              .map((e) => ShipToInfo(shipToCustomerCode: e))
+              .map((e) => SalesOrgShipToInfo(shipToCustomerCode: e))
               .toList(),
         ),
       ],

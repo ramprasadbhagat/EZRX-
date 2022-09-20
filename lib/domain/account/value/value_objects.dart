@@ -11,7 +11,7 @@ class CustomerCode extends ValueObject<String> {
   factory CustomerCode(String input) {
     return CustomerCode._(validateStringNotEmpty(input));
   }
-
+  
   const CustomerCode._(this.value);
 }
 
