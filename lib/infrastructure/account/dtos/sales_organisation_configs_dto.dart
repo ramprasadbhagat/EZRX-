@@ -15,11 +15,11 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
-    SalesOrganisationConfigs salesOrganisationConfigs,
+    SalesOrganisationConfigs configs,
   ) {
     return SalesOrganisationConfigsDto(
-      currency: salesOrganisationConfigs.currency.getOrCrash(),
-      hideCustomer: salesOrganisationConfigs.hideCustomer,
+      currency: configs.currency.getOrCrash(),
+      hideCustomer: configs.hideCustomer,
     );
   }
 

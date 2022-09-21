@@ -325,7 +325,9 @@ abstract class _Selected implements SalesOrgEvent {
 /// @nodoc
 mixin _$SalesOrgState {
   SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
-  SalesOrganisationConfigs get config => throw _privateConstructorUsedError;
+  SalesOrganisationConfigs get configs => throw _privateConstructorUsedError;
+  Option<Either<ApiFailure, dynamic>> get salesOrgFailureOrSuccessOption =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrgStateCopyWith<SalesOrgState> get copyWith =>
@@ -338,10 +340,12 @@ abstract class $SalesOrgStateCopyWith<$Res> {
           SalesOrgState value, $Res Function(SalesOrgState) then) =
       _$SalesOrgStateCopyWithImpl<$Res>;
   $Res call(
-      {SalesOrganisation salesOrganisation, SalesOrganisationConfigs config});
+      {SalesOrganisation salesOrganisation,
+      SalesOrganisationConfigs configs,
+      Option<Either<ApiFailure, dynamic>> salesOrgFailureOrSuccessOption});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
-  $SalesOrganisationConfigsCopyWith<$Res> get config;
+  $SalesOrganisationConfigsCopyWith<$Res> get configs;
 }
 
 /// @nodoc
@@ -356,17 +360,22 @@ class _$SalesOrgStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? salesOrganisation = freezed,
-    Object? config = freezed,
+    Object? configs = freezed,
+    Object? salesOrgFailureOrSuccessOption = freezed,
   }) {
     return _then(_value.copyWith(
       salesOrganisation: salesOrganisation == freezed
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      config: config == freezed
-          ? _value.config
-          : config // ignore: cast_nullable_to_non_nullable
+      configs: configs == freezed
+          ? _value.configs
+          : configs // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
+      salesOrgFailureOrSuccessOption: salesOrgFailureOrSuccessOption == freezed
+          ? _value.salesOrgFailureOrSuccessOption
+          : salesOrgFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiFailure, dynamic>>,
     ));
   }
 
@@ -378,9 +387,9 @@ class _$SalesOrgStateCopyWithImpl<$Res>
   }
 
   @override
-  $SalesOrganisationConfigsCopyWith<$Res> get config {
-    return $SalesOrganisationConfigsCopyWith<$Res>(_value.config, (value) {
-      return _then(_value.copyWith(config: value));
+  $SalesOrganisationConfigsCopyWith<$Res> get configs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.configs, (value) {
+      return _then(_value.copyWith(configs: value));
     });
   }
 }
@@ -393,12 +402,14 @@ abstract class _$$_SalesOrgStateCopyWith<$Res>
       __$$_SalesOrgStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {SalesOrganisation salesOrganisation, SalesOrganisationConfigs config});
+      {SalesOrganisation salesOrganisation,
+      SalesOrganisationConfigs configs,
+      Option<Either<ApiFailure, dynamic>> salesOrgFailureOrSuccessOption});
 
   @override
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   @override
-  $SalesOrganisationConfigsCopyWith<$Res> get config;
+  $SalesOrganisationConfigsCopyWith<$Res> get configs;
 }
 
 /// @nodoc
@@ -415,17 +426,22 @@ class __$$_SalesOrgStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? salesOrganisation = freezed,
-    Object? config = freezed,
+    Object? configs = freezed,
+    Object? salesOrgFailureOrSuccessOption = freezed,
   }) {
     return _then(_$_SalesOrgState(
       salesOrganisation: salesOrganisation == freezed
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      config: config == freezed
-          ? _value.config
-          : config // ignore: cast_nullable_to_non_nullable
+      configs: configs == freezed
+          ? _value.configs
+          : configs // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
+      salesOrgFailureOrSuccessOption: salesOrgFailureOrSuccessOption == freezed
+          ? _value.salesOrgFailureOrSuccessOption
+          : salesOrgFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiFailure, dynamic>>,
     ));
   }
 }
@@ -434,16 +450,20 @@ class __$$_SalesOrgStateCopyWithImpl<$Res>
 
 class _$_SalesOrgState implements _SalesOrgState {
   const _$_SalesOrgState(
-      {required this.salesOrganisation, required this.config});
+      {required this.salesOrganisation,
+      required this.configs,
+      required this.salesOrgFailureOrSuccessOption});
 
   @override
   final SalesOrganisation salesOrganisation;
   @override
-  final SalesOrganisationConfigs config;
+  final SalesOrganisationConfigs configs;
+  @override
+  final Option<Either<ApiFailure, dynamic>> salesOrgFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'SalesOrgState(salesOrganisation: $salesOrganisation, config: $config)';
+    return 'SalesOrgState(salesOrganisation: $salesOrganisation, configs: $configs, salesOrgFailureOrSuccessOption: $salesOrgFailureOrSuccessOption)';
   }
 
   @override
@@ -453,14 +473,18 @@ class _$_SalesOrgState implements _SalesOrgState {
             other is _$_SalesOrgState &&
             const DeepCollectionEquality()
                 .equals(other.salesOrganisation, salesOrganisation) &&
-            const DeepCollectionEquality().equals(other.config, config));
+            const DeepCollectionEquality().equals(other.configs, configs) &&
+            const DeepCollectionEquality().equals(
+                other.salesOrgFailureOrSuccessOption,
+                salesOrgFailureOrSuccessOption));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(salesOrganisation),
-      const DeepCollectionEquality().hash(config));
+      const DeepCollectionEquality().hash(configs),
+      const DeepCollectionEquality().hash(salesOrgFailureOrSuccessOption));
 
   @JsonKey(ignore: true)
   @override
@@ -471,12 +495,16 @@ class _$_SalesOrgState implements _SalesOrgState {
 abstract class _SalesOrgState implements SalesOrgState {
   const factory _SalesOrgState(
       {required final SalesOrganisation salesOrganisation,
-      required final SalesOrganisationConfigs config}) = _$_SalesOrgState;
+      required final SalesOrganisationConfigs configs,
+      required final Option<Either<ApiFailure, dynamic>>
+          salesOrgFailureOrSuccessOption}) = _$_SalesOrgState;
 
   @override
   SalesOrganisation get salesOrganisation;
   @override
-  SalesOrganisationConfigs get config;
+  SalesOrganisationConfigs get configs;
+  @override
+  Option<Either<ApiFailure, dynamic>> get salesOrgFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrgStateCopyWith<_$_SalesOrgState> get copyWith =>

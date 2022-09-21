@@ -1,11 +1,13 @@
 import 'dart:async';
 
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/repository/i_sales_org_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
 part 'sales_org_event.dart';
 part 'sales_org_state.dart';
@@ -38,16 +40,24 @@ class SalesOrgBloc extends Bloc<SalesOrgEvent, SalesOrgState> {
     await event.map(
       initialized: (e) async => emit(SalesOrgState.initial()),
       selected: (e) async {
-        emit(
-          state.copyWith(salesOrganisation: e.salesOrganisation),
-        );
+        emit(state.copyWith(salesOrganisation: e.salesOrganisation));
         final failureOrSuccess = await salesOrgRepository
             .getSalesOrganisationConfigs(e.salesOrganisation);
         failureOrSuccess.fold(
-          (failure) {},
-          (salesOrganisationConfigs) => emit(state.copyWith(
-            config: salesOrganisationConfigs,
-          )),
+          (failure) {
+            emit(
+              state.copyWith(
+                configs: SalesOrganisationConfigs.empty(),
+                salesOrgFailureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            );
+          },
+          (configs) => emit(
+            state.copyWith(
+              configs: configs,
+              salesOrgFailureOrSuccessOption: none(),
+            ),
+          ),
         );
       },
     );

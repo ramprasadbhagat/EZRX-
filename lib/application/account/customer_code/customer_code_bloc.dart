@@ -32,15 +32,19 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
   }) : super(CustomerCodeState.initial()) {
     on<CustomerCodeEvent>(_onEvent);
     if (salesOrgBloc.state.salesOrganisation != SalesOrganisation.empty()) {
-      _selectCustomer(salesOrgBloc.state,
-          salesOrgBloc.state.salesOrganisation.customerInfos,);
+      _selectCustomer(
+        salesOrgBloc.state,
+        salesOrgBloc.state.salesOrganisation.customerInfos,
+      );
     }
 
     _salesOrgBlocSubscription = salesOrgBloc.stream.listen(
       (salesOrgState) async {
         if (salesOrgState.salesOrganisation != SalesOrganisation.empty()) {
-          _selectCustomer(salesOrgState,
-              salesOrgBloc.state.salesOrganisation.customerInfos,);
+          _selectCustomer(
+            salesOrgState,
+            salesOrgBloc.state.salesOrganisation.customerInfos,
+          );
         }
       },
     );
@@ -49,16 +53,17 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
       (searchTextState) async {
         if (!searchTextState.isSearchInProgress) return;
         _selectCustomer(
-            salesOrgBloc.state,
-            searchTextState.searchText.isNotEmpty
-                ? [
-                    SalesOrgCustomerInfo(
-                      customerCodeSoldTo:
-                          CustomerCode(searchTextState.searchText),
-                      shipToInfos: [],
-                    ),
-                  ]
-                : salesOrgBloc.state.salesOrganisation.customerInfos,);
+          salesOrgBloc.state,
+          searchTextState.searchText.isNotEmpty
+              ? [
+                  SalesOrgCustomerInfo(
+                    customerCodeSoldTo:
+                        CustomerCode(searchTextState.searchText),
+                    shipToInfos: [],
+                  ),
+                ]
+              : salesOrgBloc.state.salesOrganisation.customerInfos,
+        );
       },
     );
   }
@@ -148,12 +153,14 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
     );
   }
 
-  void _selectCustomer(SalesOrgState salesOrgState,
-    List<SalesOrgCustomerInfo> salesOrgCustomerInfo,) {
+  void _selectCustomer(
+    SalesOrgState salesOrgState,
+    List<SalesOrgCustomerInfo> salesOrgCustomerInfo,
+  ) {
     // Always set first available CustomerCode as default selected Customer Code
     add(CustomerCodeEvent.fetch(
       salesOrganisation: salesOrgState.salesOrganisation,
-      hidecustomer: salesOrgBloc.state.config.hideCustomer,
+      hidecustomer: salesOrgBloc.state.configs.hideCustomer,
       pageIndex: 0,
       salesOrgCustomerInfo: salesOrgCustomerInfo,
       userRoleType: userBloc.state.user.role.type.loginUserType,
