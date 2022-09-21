@@ -8,10 +8,6 @@ import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-final _usernameController = TextEditingController();
-final _passwordController = TextEditingController();
-// final _config = locator<Config>();
-
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -143,9 +139,15 @@ class _OrDivider extends StatelessWidget {
   }
 }
 
-class _UsernameField extends StatelessWidget {
+class _UsernameField extends StatefulWidget {
   const _UsernameField({Key? key}) : super(key: key);
 
+  @override
+  State<_UsernameField> createState() => __UsernameFieldState();
+}
+
+class __UsernameFieldState extends State<_UsernameField> {
+  final _usernameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Visibility(
@@ -191,10 +193,23 @@ class _UsernameField extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _usernameController.dispose();
+  }
 }
 
-class _PasswordField extends StatelessWidget {
+class _PasswordField extends StatefulWidget {
   const _PasswordField({Key? key}) : super(key: key);
+
+  @override
+  State<_PasswordField> createState() => __PasswordFieldState();
+}
+
+class __PasswordFieldState extends State<_PasswordField> {
+  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -253,6 +268,12 @@ class _PasswordField extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _passwordController.dispose();
   }
 }
 
@@ -324,23 +345,3 @@ class _LoginButton extends StatelessWidget {
     );
   }
 }
-
-// class _VersionString extends StatelessWidget {
-//   const _VersionString({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Align(
-//       alignment: Alignment.bottomRight,
-//       child: FutureBuilder<String>(
-//         future: locator<PackageInfoService>().getString(),
-//         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-//           return Text(
-//             snapshot.data ?? '',
-//             style: Theme.of(context).textTheme.caption,
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }

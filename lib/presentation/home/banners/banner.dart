@@ -14,9 +14,16 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart' hide Config;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class HomeBanner extends StatelessWidget {
-  HomeBanner({Key? key}) : super(key: key);
+class HomeBanner extends StatefulWidget {
+  const HomeBanner({Key? key}) : super(key: key);
+
+  @override
+  State<HomeBanner> createState() => _HomeBannerState();
+}
+
+class _HomeBannerState extends State<HomeBanner> {
   final _controller = PageController(viewportFraction: 0.95, keepPage: true);
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<BannerBloc, BannerState>(
@@ -74,5 +81,11 @@ class HomeBanner extends StatelessWidget {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 }

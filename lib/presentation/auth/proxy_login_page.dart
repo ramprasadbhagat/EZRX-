@@ -7,8 +7,6 @@ import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-final TextEditingController _usernameController = TextEditingController();
-
 class LoginOnBehalfPage extends StatelessWidget {
   const LoginOnBehalfPage({Key? key}) : super(key: key);
 
@@ -79,9 +77,15 @@ class Logo extends StatelessWidget {
   }
 }
 
-class UsernameField extends StatelessWidget {
+class UsernameField extends StatefulWidget {
   const UsernameField({Key? key}) : super(key: key);
 
+  @override
+  State<UsernameField> createState() => _UsernameFieldState();
+}
+
+class _UsernameFieldState extends State<UsernameField> {
+  final TextEditingController _usernameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -105,6 +109,12 @@ class UsernameField extends StatelessWidget {
                 ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _usernameController.dispose();
   }
 }
 
