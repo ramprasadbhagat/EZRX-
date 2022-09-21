@@ -5,11 +5,10 @@ import 'package:ezrxmobile/presentation/account/settings_page.dart';
 import 'package:ezrxmobile/presentation/auth/login_page.dart';
 import 'package:ezrxmobile/presentation/auth/proxy_login_page.dart';
 import 'package:ezrxmobile/presentation/core/webview_page.dart';
+import 'package:ezrxmobile/presentation/favorites/favorites_tab.dart';
+import 'package:ezrxmobile/presentation/history/history_tab.dart';
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:ezrxmobile/presentation/home_tab.dart';
-import 'package:ezrxmobile/presentation/notifications/notifications_tab.dart';
-import 'package:ezrxmobile/presentation/orders/orders_tab.dart';
-import 'package:ezrxmobile/presentation/products/products_tab.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 
 @MaterialAutoRouter(
@@ -26,9 +25,8 @@ import 'package:ezrxmobile/presentation/splash/splash_page.dart';
       page: HomeNavigationTabbar,
       children: [
         AutoRoute(page: HomeTab),
-        AutoRoute(page: ProductsTab),
-        AutoRoute(page: OrdersTab),
-        AutoRoute(page: NotificationsTab),
+        AutoRoute(page: HistoryTab),
+        AutoRoute(page: FavoritesTab),
         AutoRoute(page: AccountTab),
       ],
     ),

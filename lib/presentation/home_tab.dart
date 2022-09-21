@@ -83,24 +83,35 @@ final _routesItems = [
     icon: const Icon(Icons.home_outlined, key: Key('homeTab')),
     label: 'Home',
   ),
+
   RouteItem(
-    route: const ProductsTabRoute(),
-    icon: const Icon(Icons.storefront_outlined, key: Key('productsTab')),
-    label: 'Products',
+    route: const HistoryTabRoute(),
+    icon: const Icon(Icons.shopping_basket_outlined, key: Key('historyTab')),
+    label: 'History',
   ),
   RouteItem(
-    route: const OrdersTabRoute(),
-    icon: const Icon(Icons.shopping_basket_outlined, key: Key('ordersTab')),
-    label: 'Orders',
+    route: const FavoritesTabRoute(),
+    icon: const Icon(Icons.favorite_border_outlined, key: Key('favoritesTab')),
+    label: 'Favorites',
   ),
-  RouteItem(
-    route: const NotificationsTabRoute(),
-    icon: const Icon(
-      Icons.notifications_outlined,
-      key: Key('notificationsTabbar'),
-    ),
-    label: 'Notifications',
-  ),
+  // RouteItem(
+  //   route: const ProductsTabRoute(),
+  //   icon: const Icon(Icons.storefront_outlined, key: Key('productsTab')),
+  //   label: 'Products',
+  // ),
+  // RouteItem(
+  //   route: const OrdersTabRoute(),
+  //   icon: const Icon(Icons.shopping_basket_outlined, key: Key('ordersTab')),
+  //   label: 'Orders',
+  // ),
+  // RouteItem(
+  //   route: const NotificationsTabRoute(),
+  //   icon: const Icon(
+  //     Icons.notifications_outlined,
+  //     key: Key('notificationsTabbar'),
+  //   ),
+  //   label: 'Notifications',
+  // ),
   RouteItem(
     route: const AccountTabRoute(),
     icon: const Icon(Icons.person_outline, key: Key('accountTabbar')),
