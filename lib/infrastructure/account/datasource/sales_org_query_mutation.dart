@@ -4,81 +4,81 @@
 
 class SalesOrgQueryMutation {
   // For fetching Sales Organiazation Configs by salesOrg ID
-  String getSalesOrgConfigsQuery(String salesOrg) {
+  String getSalesOrgConfigsQuery() {
     return '''
-    {
-      salesOrgConfigs(salesOrg: "$salesOrg") {
-        id
-        salesOrgCode
-        ponRequired
-        enableAnalytics
-        priceOverride
-        expiryDateDisplay
-        batchNumDisplay
-        currency
-        enableUploadAd
-        enableMobileNumber
-        enableRemarks
-        enableListPrice
-        enableTaxDisplay
-        enableDefaultMD
-        enableZDP5
-        enableZDP8Override
-        enableGMC
-        supportURL
-        minOrderAmount
-        netPriceOverride
-        enableFutureDeliveryDay
-        futureDeliveryDay
-        plantNumber
-        languageFilter
-        languageValue
-        materialWithoutPrice
-        enablePaymentTerms
-        enableBatchNumber
-        enableOHPrice
-        enableSpecialInstructions
-        enableReferenceNote
-        displayOrderDiscount
-        enableTaxClassification
-        supportMail
-        disableDeliveryDate
-        disablePrincipals
-        principalList {
+      query salesOrgConfigs(\$salesOrg: String!){
+        salesOrgConfigs(salesOrg: \$salesOrg) {
+          id
+          salesOrgCode
+          ponRequired
+          enableAnalytics
+          priceOverride
+          expiryDateDisplay
+          batchNumDisplay
+          currency
+          enableUploadAd
+          enableMobileNumber
+          enableRemarks
+          enableListPrice
+          enableTaxDisplay
+          enableDefaultMD
+          enableZDP5
+          enableZDP8Override
+          enableGMC
+          supportURL
+          minOrderAmount
+          netPriceOverride
+          enableFutureDeliveryDay
+          futureDeliveryDay
+          plantNumber
+          languageFilter
+          languageValue
+          materialWithoutPrice
+          enablePaymentTerms
+          enableBatchNumber
+          enableOHPrice
+          enableSpecialInstructions
+          enableReferenceNote
+          displayOrderDiscount
+          enableTaxClassification
+          supportMail
+          disableDeliveryDate
+          disablePrincipals
+          principalList {
+            value {
+              date
+              principal
+            }
+          }  
+          enable2FA
+          disableBundles
+          disableOrderType
+          disablePaymentTermsDisplay
+          netPriceOverride
+          enableCollectiveNumber
+          addOosMaterials
+          vatValue
+          enableVat
+          oosValue
+          enableUnreferencedReturn
+          enableGimmickMaterial
+          enableBillTo
+          hideCustomer
+          hideStockDisplay
+          disablePayment
+          enablePartialPayment
+          disableDeals
+          showPOAttachment
+          principleDisabledDeals {
           value {
-            date
             principal
+           }
           }
-        }  
-        enable2FA
-        disableBundles
-        disableOrderType
-        disablePaymentTermsDisplay
-        netPriceOverride
-        enableCollectiveNumber
-        addOosMaterials
-        vatValue
-        enableVat
-        oosValue
-        enableUnreferencedReturn
-        enableGimmickMaterial
-        enableBillTo
-        hideCustomer
-        hideStockDisplay
-        disablePayment
-        enablePartialPayment
-        disableDeals
-        showPOAttachment
-        principleDisabledDeals {
-        value {
-          principal
-         }
+          created_at
+          updated_at
+          enableLoyaltyScheme
        }
-       created_at
-       updated_at
-       enableLoyaltyScheme
-       }
-    }
+      }
     ''';
   }
 }

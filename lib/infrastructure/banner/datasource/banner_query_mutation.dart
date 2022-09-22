@@ -4,22 +4,22 @@
 
 class BannerQueryMutation {
   // For fetching banners data by Sales Org
-  String getBannerQuery(bool isPreSalesOrg, String salesOrg) {
+  String getBannerQuery() {
     return '''
-    {
-      getBanners(request: {isPreSalesOrg: $isPreSalesOrg,salesOrg:"$salesOrg"})
-        {
-          id    
-          url    
-          title    
-          description    
-          buttonLabel    
-          urlLink    
-          isPreSalesOrg  
-          salesOrg    
-          serial
-          isCustomer
-      }
+      query (\$input:GetBanners!){
+        getBanners(request:\$input)
+          {
+            id    
+            url    
+            title    
+            description    
+            buttonLabel    
+            urlLink    
+            isPreSalesOrg  
+            salesOrg    
+            serial
+            isCustomer
+        }
     }
     ''';
   }

@@ -30,25 +30,28 @@ class CustomerCodeRemoteDataSource {
     required String userName,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      var queryData = loginUserType == 'client'
-          ? customerCodeQueryMutation.getCustomerInfoBySearch(
-              customerCode,
-              salesOrg,
-              paginate,
-              hidecustomer,
-            )
-          : customerCodeQueryMutation.getCustomerListForSalesRep(
-              userName,
-              customerCode,
-              salesOrg,
-              paginate,
-              hidecustomer,
-            );
+      final queryData = loginUserType == 'client'
+          ? customerCodeQueryMutation.getCustomerInfoBySearch()
+          : customerCodeQueryMutation.getCustomerListForSalesRep();
+
+      final variables = {
+        'searchKey': customerCode,
+        'salesOrganisation': salesOrg,
+        'first': 20,
+        'after': paginate,
+        'filterBlockCustomer': hidecustomer,
+      };
+
+      if (loginUserType != 'client') {
+        variables.addEntries({MapEntry('username', userName)});
+      }
+      
       final res = await httpService.request(
         method: 'POST',
         url: '${config.urlConstants}license',
         data: jsonEncode({
           'query': queryData,
+          'variables': variables,
         }),
       );
       _customerCodeExceptionChecker(res: res);

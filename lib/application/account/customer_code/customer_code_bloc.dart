@@ -164,7 +164,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
       pageIndex: 0,
       salesOrgCustomerInfo: salesOrgCustomerInfo,
       userRoleType: userBloc.state.user.role.type.loginUserType,
-      userName: userBloc.state.user.username.toString(),
+      userName: userBloc.state.user.username.getOrCrash(),
     ));
   }
 

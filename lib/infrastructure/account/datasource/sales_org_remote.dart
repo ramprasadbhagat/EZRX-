@@ -24,7 +24,8 @@ class SalesOrgRemoteDataSource {
         method: 'POST',
         url: '/api/strapiEngine',
         data: jsonEncode({
-          'query': salesOrgQueryMutation.getSalesOrgConfigsQuery(salesOrg),
+          'query': salesOrgQueryMutation.getSalesOrgConfigsQuery(),
+          'variables': {'salesOrg': salesOrg},
         }),
       );
       _salesOrgExceptionChecker(res: res);

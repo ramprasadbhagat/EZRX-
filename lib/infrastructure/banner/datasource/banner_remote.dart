@@ -30,7 +30,13 @@ class BannerRemoteDataSource {
         method: 'POST',
         url: '${config.urlConstants}license',
         data: jsonEncode({
-          'query': bannerQueryMutation.getBannerQuery(isPreSalesOrg, salesOrg),
+          'query': bannerQueryMutation.getBannerQuery(),
+          'variables': {
+            'input': {
+              'isPreSalesOrg': isPreSalesOrg,
+              'salesOrg': salesOrg,
+            },
+          },
         }),
       );
 

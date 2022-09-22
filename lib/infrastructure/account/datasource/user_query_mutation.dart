@@ -126,7 +126,7 @@ class UserQueryMutation {
     ''';
   }
 
-  String updateUAPQuery(String userId, bool acceptAUP) {
+  String updateUAPQuery() {
     return '''
       mutation updateUserMutation(\$input: updateUserInput!) {
         updateUser(input: \$input) {
