@@ -14,6 +14,7 @@ https://resocoder.com/2020/03/09/flutter-firebase-ddd-course-1-domain-driven-des
 - [Coverage Gutters](https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters)
 - [Flutter Coverage](https://marketplace.visualstudio.com/items?itemName=Flutterando.flutter-coverage)
 - [Edit csv](https://marketplace.visualstudio.com/items?itemName=janisdd.vscode-edit-csv)
+- [GraphQl](https://marketplace.visualstudio.com/items?itemName=mquandalle.graphql)
 
 ## Setup
 1. Install [FVM](https://fvm.app/docs/getting_started/installation)

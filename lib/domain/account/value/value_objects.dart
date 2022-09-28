@@ -11,7 +11,7 @@ class CustomerCode extends ValueObject<String> {
   factory CustomerCode(String input) {
     return CustomerCode._(validateStringNotEmpty(input));
   }
-  
+
   const CustomerCode._(this.value);
 }
 
@@ -52,6 +52,10 @@ class RoleType extends ValueObject<String> {
 
   String get loginUserType {
     return userType(value.getOrElse(() => ''));
+  }
+
+  bool get isSalesRep {
+    return loginUserType == 'salesRep';
   }
 
   String get purchaseOrderType {

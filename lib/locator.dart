@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/announcement/bloc/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -15,8 +16,12 @@ import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_remot
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/sales_rep_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/sales_rep_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/sales_rep_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/customer_code_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_org_repository.dart';
+import 'package:ezrxmobile/infrastructure/account/repository/sales_rep_repository.dart';
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_local.dart';
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_remote.dart';
@@ -342,6 +347,38 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => AnnouncementBloc(
       announcementRepository: locator<AnnouncementRepository>(),
+    ),
+  );
+
+  //============================================================
+  //  Sales Rep
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => SalesRepQueryMutation());
+
+  locator.registerLazySingleton(() => SalesRepLocalDataSource());
+
+  locator.registerLazySingleton(
+    () => SalesRepRemoteDataSource(
+      httpService: locator<HttpService>(),
+      salesRepQueryMutation: locator<SalesRepQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => SalesRepRepository(
+      config: locator<Config>(),
+      remoteDataSource: locator<SalesRepRemoteDataSource>(),
+      localDataSource: locator<SalesRepLocalDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => SalesRepBloc(
+      userBloc: locator<UserBloc>(),
+      salesRepRepository: locator<SalesRepRepository>(),
     ),
   );
 }

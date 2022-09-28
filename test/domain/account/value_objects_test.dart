@@ -217,4 +217,36 @@ void main() {
       },
     );
   });
+
+  group('UserType for SalesRep', () {
+    test(
+      'should return true when user userType is internal_sales_rep',
+      () async {
+        const input = 'internal_sales_rep';
+        final salesRep = RoleType(input);
+        final result = salesRep.isSalesRep;
+        expect(result, true);
+      },
+    );
+
+    test(
+      'should return true when user userType is external_sales_rep',
+      () async {
+        const input = 'external_sales_rep';
+        final salesRep = RoleType(input);
+        final result = salesRep.isSalesRep;
+        expect(result, true);
+      },
+    );
+
+    test(
+      'should return false when user userType is some dummy',
+      () async {
+        const input = 'dummy';
+        final salesRep = RoleType(input);
+        final result = salesRep.isSalesRep;
+        expect(result, false);
+      },
+    );
+  });
 }
