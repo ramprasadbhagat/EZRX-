@@ -104,7 +104,7 @@ void main() {
           BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
           BlocProvider<BannerBloc>(create: (context) => mockBannerBloc),
         ],
-        child: Scaffold(body: HomeBanner()),
+        child: const Scaffold(body: HomeBanner()),
       );
     }
 

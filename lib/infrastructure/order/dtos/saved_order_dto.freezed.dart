@@ -1,0 +1,436 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+
+part of 'saved_order_dto.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
+SavedOrderDto _$SavedOrderDtoFromJson(Map<String, dynamic> json) {
+  return _SavedOrderDto.fromJson(json);
+}
+
+/// @nodoc
+mixin _$SavedOrderDto {
+  @JsonKey(name: 'id', defaultValue: '')
+  String get id => throw _privateConstructorUsedError;
+  @_OrderProductItemListConverter()
+  @JsonKey(name: 'itemlist', defaultValue: <MaterialItemDto>[])
+  List<MaterialItemDto> get items => throw _privateConstructorUsedError;
+  @JsonKey(name: 'draftorder', defaultValue: false)
+  bool get isDraftOrder => throw _privateConstructorUsedError;
+  @JsonKey(name: 'BillingDocument', defaultValue: '')
+  String get billingDocument => throw _privateConstructorUsedError;
+  @JsonKey(name: 'eZRxNumber', defaultValue: '')
+  String get eZRxNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'SoldToParty', defaultValue: '')
+  String get soldToParty => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ShipToParty', defaultValue: '')
+  String get shipToParty => throw _privateConstructorUsedError;
+  @JsonKey(name: 'CompanyName', defaultValue: '')
+  String get companyName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'TotalOrderValue', defaultValue: 0)
+  num get totalOrderValue => throw _privateConstructorUsedError;
+  @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
+  String get requestedDeliveryDate => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $SavedOrderDtoCopyWith<SavedOrderDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SavedOrderDtoCopyWith<$Res> {
+  factory $SavedOrderDtoCopyWith(
+          SavedOrderDto value, $Res Function(SavedOrderDto) then) =
+      _$SavedOrderDtoCopyWithImpl<$Res>;
+  $Res call(
+      {@JsonKey(name: 'id', defaultValue: '')
+          String id,
+      @_OrderProductItemListConverter()
+      @JsonKey(name: 'itemlist', defaultValue: <MaterialItemDto>[])
+          List<MaterialItemDto> items,
+      @JsonKey(name: 'draftorder', defaultValue: false)
+          bool isDraftOrder,
+      @JsonKey(name: 'BillingDocument', defaultValue: '')
+          String billingDocument,
+      @JsonKey(name: 'eZRxNumber', defaultValue: '')
+          String eZRxNumber,
+      @JsonKey(name: 'SoldToParty', defaultValue: '')
+          String soldToParty,
+      @JsonKey(name: 'ShipToParty', defaultValue: '')
+          String shipToParty,
+      @JsonKey(name: 'CompanyName', defaultValue: '')
+          String companyName,
+      @JsonKey(name: 'TotalOrderValue', defaultValue: 0)
+          num totalOrderValue,
+      @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
+          String requestedDeliveryDate});
+}
+
+/// @nodoc
+class _$SavedOrderDtoCopyWithImpl<$Res>
+    implements $SavedOrderDtoCopyWith<$Res> {
+  _$SavedOrderDtoCopyWithImpl(this._value, this._then);
+
+  final SavedOrderDto _value;
+  // ignore: unused_field
+  final $Res Function(SavedOrderDto) _then;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? items = freezed,
+    Object? isDraftOrder = freezed,
+    Object? billingDocument = freezed,
+    Object? eZRxNumber = freezed,
+    Object? soldToParty = freezed,
+    Object? shipToParty = freezed,
+    Object? companyName = freezed,
+    Object? totalOrderValue = freezed,
+    Object? requestedDeliveryDate = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      items: items == freezed
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<MaterialItemDto>,
+      isDraftOrder: isDraftOrder == freezed
+          ? _value.isDraftOrder
+          : isDraftOrder // ignore: cast_nullable_to_non_nullable
+              as bool,
+      billingDocument: billingDocument == freezed
+          ? _value.billingDocument
+          : billingDocument // ignore: cast_nullable_to_non_nullable
+              as String,
+      eZRxNumber: eZRxNumber == freezed
+          ? _value.eZRxNumber
+          : eZRxNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      soldToParty: soldToParty == freezed
+          ? _value.soldToParty
+          : soldToParty // ignore: cast_nullable_to_non_nullable
+              as String,
+      shipToParty: shipToParty == freezed
+          ? _value.shipToParty
+          : shipToParty // ignore: cast_nullable_to_non_nullable
+              as String,
+      companyName: companyName == freezed
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String,
+      totalOrderValue: totalOrderValue == freezed
+          ? _value.totalOrderValue
+          : totalOrderValue // ignore: cast_nullable_to_non_nullable
+              as num,
+      requestedDeliveryDate: requestedDeliveryDate == freezed
+          ? _value.requestedDeliveryDate
+          : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_SavedOrderDtoCopyWith<$Res>
+    implements $SavedOrderDtoCopyWith<$Res> {
+  factory _$$_SavedOrderDtoCopyWith(
+          _$_SavedOrderDto value, $Res Function(_$_SavedOrderDto) then) =
+      __$$_SavedOrderDtoCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {@JsonKey(name: 'id', defaultValue: '')
+          String id,
+      @_OrderProductItemListConverter()
+      @JsonKey(name: 'itemlist', defaultValue: <MaterialItemDto>[])
+          List<MaterialItemDto> items,
+      @JsonKey(name: 'draftorder', defaultValue: false)
+          bool isDraftOrder,
+      @JsonKey(name: 'BillingDocument', defaultValue: '')
+          String billingDocument,
+      @JsonKey(name: 'eZRxNumber', defaultValue: '')
+          String eZRxNumber,
+      @JsonKey(name: 'SoldToParty', defaultValue: '')
+          String soldToParty,
+      @JsonKey(name: 'ShipToParty', defaultValue: '')
+          String shipToParty,
+      @JsonKey(name: 'CompanyName', defaultValue: '')
+          String companyName,
+      @JsonKey(name: 'TotalOrderValue', defaultValue: 0)
+          num totalOrderValue,
+      @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
+          String requestedDeliveryDate});
+}
+
+/// @nodoc
+class __$$_SavedOrderDtoCopyWithImpl<$Res>
+    extends _$SavedOrderDtoCopyWithImpl<$Res>
+    implements _$$_SavedOrderDtoCopyWith<$Res> {
+  __$$_SavedOrderDtoCopyWithImpl(
+      _$_SavedOrderDto _value, $Res Function(_$_SavedOrderDto) _then)
+      : super(_value, (v) => _then(v as _$_SavedOrderDto));
+
+  @override
+  _$_SavedOrderDto get _value => super._value as _$_SavedOrderDto;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? items = freezed,
+    Object? isDraftOrder = freezed,
+    Object? billingDocument = freezed,
+    Object? eZRxNumber = freezed,
+    Object? soldToParty = freezed,
+    Object? shipToParty = freezed,
+    Object? companyName = freezed,
+    Object? totalOrderValue = freezed,
+    Object? requestedDeliveryDate = freezed,
+  }) {
+    return _then(_$_SavedOrderDto(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      items: items == freezed
+          ? _value._items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<MaterialItemDto>,
+      isDraftOrder: isDraftOrder == freezed
+          ? _value.isDraftOrder
+          : isDraftOrder // ignore: cast_nullable_to_non_nullable
+              as bool,
+      billingDocument: billingDocument == freezed
+          ? _value.billingDocument
+          : billingDocument // ignore: cast_nullable_to_non_nullable
+              as String,
+      eZRxNumber: eZRxNumber == freezed
+          ? _value.eZRxNumber
+          : eZRxNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      soldToParty: soldToParty == freezed
+          ? _value.soldToParty
+          : soldToParty // ignore: cast_nullable_to_non_nullable
+              as String,
+      shipToParty: shipToParty == freezed
+          ? _value.shipToParty
+          : shipToParty // ignore: cast_nullable_to_non_nullable
+              as String,
+      companyName: companyName == freezed
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String,
+      totalOrderValue: totalOrderValue == freezed
+          ? _value.totalOrderValue
+          : totalOrderValue // ignore: cast_nullable_to_non_nullable
+              as num,
+      requestedDeliveryDate: requestedDeliveryDate == freezed
+          ? _value.requestedDeliveryDate
+          : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_SavedOrderDto extends _SavedOrderDto {
+  const _$_SavedOrderDto(
+      {@JsonKey(name: 'id', defaultValue: '')
+          required this.id,
+      @_OrderProductItemListConverter()
+      @JsonKey(name: 'itemlist', defaultValue: <MaterialItemDto>[])
+          required final List<MaterialItemDto> items,
+      @JsonKey(name: 'draftorder', defaultValue: false)
+          required this.isDraftOrder,
+      @JsonKey(name: 'BillingDocument', defaultValue: '')
+          required this.billingDocument,
+      @JsonKey(name: 'eZRxNumber', defaultValue: '')
+          required this.eZRxNumber,
+      @JsonKey(name: 'SoldToParty', defaultValue: '')
+          required this.soldToParty,
+      @JsonKey(name: 'ShipToParty', defaultValue: '')
+          required this.shipToParty,
+      @JsonKey(name: 'CompanyName', defaultValue: '')
+          required this.companyName,
+      @JsonKey(name: 'TotalOrderValue', defaultValue: 0)
+          required this.totalOrderValue,
+      @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
+          required this.requestedDeliveryDate})
+      : _items = items,
+        super._();
+
+  factory _$_SavedOrderDto.fromJson(Map<String, dynamic> json) =>
+      _$$_SavedOrderDtoFromJson(json);
+
+  @override
+  @JsonKey(name: 'id', defaultValue: '')
+  final String id;
+  final List<MaterialItemDto> _items;
+  @override
+  @_OrderProductItemListConverter()
+  @JsonKey(name: 'itemlist', defaultValue: <MaterialItemDto>[])
+  List<MaterialItemDto> get items {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_items);
+  }
+
+  @override
+  @JsonKey(name: 'draftorder', defaultValue: false)
+  final bool isDraftOrder;
+  @override
+  @JsonKey(name: 'BillingDocument', defaultValue: '')
+  final String billingDocument;
+  @override
+  @JsonKey(name: 'eZRxNumber', defaultValue: '')
+  final String eZRxNumber;
+  @override
+  @JsonKey(name: 'SoldToParty', defaultValue: '')
+  final String soldToParty;
+  @override
+  @JsonKey(name: 'ShipToParty', defaultValue: '')
+  final String shipToParty;
+  @override
+  @JsonKey(name: 'CompanyName', defaultValue: '')
+  final String companyName;
+  @override
+  @JsonKey(name: 'TotalOrderValue', defaultValue: 0)
+  final num totalOrderValue;
+  @override
+  @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
+  final String requestedDeliveryDate;
+
+  @override
+  String toString() {
+    return 'SavedOrderDto(id: $id, items: $items, isDraftOrder: $isDraftOrder, billingDocument: $billingDocument, eZRxNumber: $eZRxNumber, soldToParty: $soldToParty, shipToParty: $shipToParty, companyName: $companyName, totalOrderValue: $totalOrderValue, requestedDeliveryDate: $requestedDeliveryDate)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SavedOrderDto &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other._items, _items) &&
+            const DeepCollectionEquality()
+                .equals(other.isDraftOrder, isDraftOrder) &&
+            const DeepCollectionEquality()
+                .equals(other.billingDocument, billingDocument) &&
+            const DeepCollectionEquality()
+                .equals(other.eZRxNumber, eZRxNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.soldToParty, soldToParty) &&
+            const DeepCollectionEquality()
+                .equals(other.shipToParty, shipToParty) &&
+            const DeepCollectionEquality()
+                .equals(other.companyName, companyName) &&
+            const DeepCollectionEquality()
+                .equals(other.totalOrderValue, totalOrderValue) &&
+            const DeepCollectionEquality()
+                .equals(other.requestedDeliveryDate, requestedDeliveryDate));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(_items),
+      const DeepCollectionEquality().hash(isDraftOrder),
+      const DeepCollectionEquality().hash(billingDocument),
+      const DeepCollectionEquality().hash(eZRxNumber),
+      const DeepCollectionEquality().hash(soldToParty),
+      const DeepCollectionEquality().hash(shipToParty),
+      const DeepCollectionEquality().hash(companyName),
+      const DeepCollectionEquality().hash(totalOrderValue),
+      const DeepCollectionEquality().hash(requestedDeliveryDate));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_SavedOrderDtoCopyWith<_$_SavedOrderDto> get copyWith =>
+      __$$_SavedOrderDtoCopyWithImpl<_$_SavedOrderDto>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_SavedOrderDtoToJson(
+      this,
+    );
+  }
+}
+
+abstract class _SavedOrderDto extends SavedOrderDto {
+  const factory _SavedOrderDto(
+      {@JsonKey(name: 'id', defaultValue: '')
+          required final String id,
+      @_OrderProductItemListConverter()
+      @JsonKey(name: 'itemlist', defaultValue: <MaterialItemDto>[])
+          required final List<MaterialItemDto> items,
+      @JsonKey(name: 'draftorder', defaultValue: false)
+          required final bool isDraftOrder,
+      @JsonKey(name: 'BillingDocument', defaultValue: '')
+          required final String billingDocument,
+      @JsonKey(name: 'eZRxNumber', defaultValue: '')
+          required final String eZRxNumber,
+      @JsonKey(name: 'SoldToParty', defaultValue: '')
+          required final String soldToParty,
+      @JsonKey(name: 'ShipToParty', defaultValue: '')
+          required final String shipToParty,
+      @JsonKey(name: 'CompanyName', defaultValue: '')
+          required final String companyName,
+      @JsonKey(name: 'TotalOrderValue', defaultValue: 0)
+          required final num totalOrderValue,
+      @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
+          required final String requestedDeliveryDate}) = _$_SavedOrderDto;
+  const _SavedOrderDto._() : super._();
+
+  factory _SavedOrderDto.fromJson(Map<String, dynamic> json) =
+      _$_SavedOrderDto.fromJson;
+
+  @override
+  @JsonKey(name: 'id', defaultValue: '')
+  String get id;
+  @override
+  @_OrderProductItemListConverter()
+  @JsonKey(name: 'itemlist', defaultValue: <MaterialItemDto>[])
+  List<MaterialItemDto> get items;
+  @override
+  @JsonKey(name: 'draftorder', defaultValue: false)
+  bool get isDraftOrder;
+  @override
+  @JsonKey(name: 'BillingDocument', defaultValue: '')
+  String get billingDocument;
+  @override
+  @JsonKey(name: 'eZRxNumber', defaultValue: '')
+  String get eZRxNumber;
+  @override
+  @JsonKey(name: 'SoldToParty', defaultValue: '')
+  String get soldToParty;
+  @override
+  @JsonKey(name: 'ShipToParty', defaultValue: '')
+  String get shipToParty;
+  @override
+  @JsonKey(name: 'CompanyName', defaultValue: '')
+  String get companyName;
+  @override
+  @JsonKey(name: 'TotalOrderValue', defaultValue: 0)
+  num get totalOrderValue;
+  @override
+  @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
+  String get requestedDeliveryDate;
+  @override
+  @JsonKey(ignore: true)
+  _$$_SavedOrderDtoCopyWith<_$_SavedOrderDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}

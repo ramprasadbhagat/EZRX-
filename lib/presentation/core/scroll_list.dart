@@ -1,0 +1,124 @@
+import 'dart:async';
+
+import 'package:ezrxmobile/presentation/core/no_record.dart';
+
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter/material.dart';
+
+class ScrollList<T> extends StatefulWidget {
+  final VoidCallback onRefresh;
+  final VoidCallback onLoadingMore;
+  final bool isLoading;
+  final List<T> items;
+  final String emptyMessage;
+  final Widget Function(BuildContext context, int index, T item) itemBuilder;
+  const ScrollList({
+    Key? key,
+    required this.onRefresh,
+    required this.onLoadingMore,
+    required this.isLoading,
+    required this.itemBuilder,
+    required this.items,
+    required this.emptyMessage,
+  }) : super(key: key);
+
+  @override
+  State<ScrollList<T>> createState() => _ScrollListState<T>();
+}
+
+class _ScrollListState<T> extends State<ScrollList<T>> {
+  final ScrollController _controller = ScrollController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      child: RefreshIndicator(
+        color: ZPColors.primary,
+        onRefresh: () async => widget.onRefresh.call(),
+        child: CustomScrollView(
+          key: const Key('scrollList'),
+          controller: _controller
+            ..addListener(
+              () {
+                if (_controller.position.pixels >=
+                    _controller.position.maxScrollExtent) {
+                  widget.onLoadingMore.call();
+                }
+              },
+            ),
+          physics: const AlwaysScrollableScrollPhysics(),
+          slivers: [
+            widget.items.isEmpty && !widget.isLoading
+                ? SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: NoRecordFound.showMessage(
+                        message: widget.emptyMessage,
+                      ),
+                    ),
+                  )
+                : SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        final item = widget.items[index];
+
+                        return widget.itemBuilder(context, index, item);
+                      },
+                      childCount: widget.items.length,
+                    ),
+                  ),
+            if (widget.isLoading)
+              SliverToBoxAdapter(
+                key: const Key('loadIndicator'),
+                child: _LoadingMoreIndicator(
+                  controller: _controller,
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _LoadingMoreIndicator extends StatelessWidget {
+  const _LoadingMoreIndicator({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
+
+  final ScrollController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Builder(
+      builder: (context) {
+        Timer(
+          const Duration(milliseconds: 50),
+          () {
+            controller.jumpTo(controller.position.maxScrollExtent);
+          },
+        );
+
+        return Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 10,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              CircularProgressIndicator(),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}

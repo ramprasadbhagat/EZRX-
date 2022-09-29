@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/core/search/search_bloc.dart';
+import 'package:ezrxmobile/application/order/saved_order/saved_order_list/saved_order_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_query_mutation.dart';
@@ -53,9 +54,14 @@ import 'package:ezrxmobile/infrastructure/account/datasource/user_query_mutation
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/routes/router_observer.dart';
 import 'package:get_it/get_it.dart';
+
+import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_query_mutation.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -351,6 +357,44 @@ void setupLocator() {
   );
 
   //============================================================
+  //  Order
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => OrderQueryMutation());
+
+  locator.registerLazySingleton(() => OrderLocalDataSource());
+
+  locator.registerLazySingleton(
+    () => OrderRemoteDataSource(
+      httpService: locator<HttpService>(),
+      queryMutation: locator<OrderQueryMutation>(),
+      exceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => OrderRepository(
+      config: locator<Config>(),
+      localDataSource: locator<OrderLocalDataSource>(),
+      remoteDataSource: locator<OrderRemoteDataSource>(),
+    ),
+  );
+
+  //============================================================
+  // Saved Orders
+  //
+  //============================================================
+  locator.registerLazySingleton(
+    () => SavedOrderListBloc(
+      userBloc: locator<UserBloc>(),
+      salesOrgBloc: locator<SalesOrgBloc>(),
+      customerCodeBloc: locator<CustomerCodeBloc>(),
+      shipToCodeBloc: locator<ShipToCodeBloc>(),
+      repository: locator<OrderRepository>(),
+    ),
+  );
+
   //  Sales Rep
   //
   //============================================================

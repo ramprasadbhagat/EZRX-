@@ -1,0 +1,222 @@
+{
+  "data": {
+    "draftorders": [
+      {
+        "id": "2077372",
+        "itemlist": "{\n          \"value\": [\n            {\n              \"qty\": 2,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"242121\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000023245612\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"DE0008651\",\n              \"defaultMaterialDescription\": \"ATOPICLAIR CREAM 100ML TUBE BIOKOSMES\"\n            },\n            {\n              \"qty\": 1,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"199021\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000023245611\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"DE0008651\",\n              \"defaultMaterialDescription\": \"ATOPICLAIR CREAM 40ML TUBE BIOKOSMES\"\n            }\n          ]\n        }",
+        "draftorder": true,
+        "BillingDocument": "ZPPL-Changi",
+        "eZRxNumber": "",
+        "SoldToParty": "0000002610",
+        "ShipToParty": "0000002610",
+        "CompanyName": "ZPPL-Changi   ",
+        "TotalOrderValue": 0,
+        "requestedDeliveryDate": "2022-09-23"
+      },
+      {
+        "id": "1920599",
+        "itemlist":" {\n          \"value\": [\n            {\n              \"qty\": 1,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"22TSA015\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000021209747\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"NA\",\n              \"defaultMaterialDescription\": \"BIOGAIA STRAWBERRY TAB 3X10s SG\"\n            }\n          ]\n        }",
+        "draftorder": true,
+        "BillingDocument": "ZPPL-Changi",
+        "eZRxNumber": "",
+        "SoldToParty": "0000002610",
+        "ShipToParty": "0000002610",
+        "CompanyName": "ZPPL-Changi   ",
+        "TotalOrderValue": 0,
+        "requestedDeliveryDate": "2022-08-15"
+      },
+      {
+        "id": "2077372",
+        "itemlist": "{\n          \"value\": [\n            {\n              \"qty\": 2,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"242121\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000023245612\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"DE0008651\",\n              \"defaultMaterialDescription\": \"ATOPICLAIR CREAM 100ML TUBE BIOKOSMES\"\n            },\n            {\n              \"qty\": 1,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"199021\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000023245611\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"DE0008651\",\n              \"defaultMaterialDescription\": \"ATOPICLAIR CREAM 40ML TUBE BIOKOSMES\"\n            }\n          ]\n        }",
+        "draftorder": true,
+        "BillingDocument": "ZPPL-Changi",
+        "eZRxNumber": "",
+        "SoldToParty": "0000002610",
+        "ShipToParty": "0000002610",
+        "CompanyName": "ZPPL-Changi   ",
+        "TotalOrderValue": 0,
+        "requestedDeliveryDate": "2022-09-23"
+      },
+      {
+        "id": "1920599",
+        "itemlist":" {\n          \"value\": [\n            {\n              \"qty\": 1,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"22TSA015\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000021209747\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"NA\",\n              \"defaultMaterialDescription\": \"BIOGAIA STRAWBERRY TAB 3X10s SG\"\n            }\n          ]\n        }",
+        "draftorder": true,
+        "BillingDocument": "ZPPL-Changi",
+        "eZRxNumber": "",
+        "SoldToParty": "0000002610",
+        "ShipToParty": "0000002610",
+        "CompanyName": "ZPPL-Changi   ",
+        "TotalOrderValue": 0,
+        "requestedDeliveryDate": "2022-08-15"
+      },
+      {
+        "id": "2077372",
+        "itemlist": "{\n          \"value\": [\n            {\n              \"qty\": 2,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"242121\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000023245612\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"DE0008651\",\n              \"defaultMaterialDescription\": \"ATOPICLAIR CREAM 100ML TUBE BIOKOSMES\"\n            },\n            {\n              \"qty\": 1,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"199021\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000023245611\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"DE0008651\",\n              \"defaultMaterialDescription\": \"ATOPICLAIR CREAM 40ML TUBE BIOKOSMES\"\n            }\n          ]\n        }",
+        "draftorder": true,
+        "BillingDocument": "ZPPL-Changi",
+        "eZRxNumber": "",
+        "SoldToParty": "0000002610",
+        "ShipToParty": "0000002610",
+        "CompanyName": "ZPPL-Changi   ",
+        "TotalOrderValue": 0,
+        "requestedDeliveryDate": "2022-09-23"
+      },
+      {
+        "id": "1920599",
+        "itemlist":" {\n          \"value\": [\n            {\n              \"qty\": 1,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"22TSA015\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000021209747\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"NA\",\n              \"defaultMaterialDescription\": \"BIOGAIA STRAWBERRY TAB 3X10s SG\"\n            }\n          ]\n        }",
+        "draftorder": true,
+        "BillingDocument": "ZPPL-Changi",
+        "eZRxNumber": "",
+        "SoldToParty": "0000002610",
+        "ShipToParty": "0000002610",
+        "CompanyName": "ZPPL-Changi   ",
+        "TotalOrderValue": 0,
+        "requestedDeliveryDate": "2022-08-15"
+      },
+      {
+        "id": "2077372",
+        "itemlist": "{\n          \"value\": [\n            {\n              \"qty\": 2,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"242121\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000023245612\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"DE0008651\",\n              \"defaultMaterialDescription\": \"ATOPICLAIR CREAM 100ML TUBE BIOKOSMES\"\n            },\n            {\n              \"qty\": 1,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"199021\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000023245611\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"DE0008651\",\n              \"defaultMaterialDescription\": \"ATOPICLAIR CREAM 40ML TUBE BIOKOSMES\"\n            }\n          ]\n        }",
+        "draftorder": true,
+        "BillingDocument": "ZPPL-Changi",
+        "eZRxNumber": "",
+        "SoldToParty": "0000002610",
+        "ShipToParty": "0000002610",
+        "CompanyName": "ZPPL-Changi   ",
+        "TotalOrderValue": 0,
+        "requestedDeliveryDate": "2022-09-23"
+      },
+      {
+        "id": "1920599",
+        "itemlist":" {\n          \"value\": [\n            {\n              \"qty\": 1,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"22TSA015\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000021209747\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"NA\",\n              \"defaultMaterialDescription\": \"BIOGAIA STRAWBERRY TAB 3X10s SG\"\n            }\n          ]\n        }",
+        "draftorder": true,
+        "BillingDocument": "ZPPL-Changi",
+        "eZRxNumber": "",
+        "SoldToParty": "0000002610",
+        "ShipToParty": "0000002610",
+        "CompanyName": "ZPPL-Changi   ",
+        "TotalOrderValue": 0,
+        "requestedDeliveryDate": "2022-08-15"
+      },
+      {
+        "id": "2077372",
+        "itemlist": "{\n          \"value\": [\n            {\n              \"qty\": 2,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"242121\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000023245612\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"DE0008651\",\n              \"defaultMaterialDescription\": \"ATOPICLAIR CREAM 100ML TUBE BIOKOSMES\"\n            },\n            {\n              \"qty\": 1,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"199021\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000023245611\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"DE0008651\",\n              \"defaultMaterialDescription\": \"ATOPICLAIR CREAM 40ML TUBE BIOKOSMES\"\n            }\n          ]\n        }",
+        "draftorder": true,
+        "BillingDocument": "ZPPL-Changi",
+        "eZRxNumber": "",
+        "SoldToParty": "0000002610",
+        "ShipToParty": "0000002610",
+        "CompanyName": "ZPPL-Changi   ",
+        "TotalOrderValue": 0,
+        "requestedDeliveryDate": "2022-09-23"
+      },
+      {
+        "id": "1920599",
+        "itemlist":" {\n          \"value\": [\n            {\n              \"qty\": 1,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"22TSA015\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000021209747\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"NA\",\n              \"defaultMaterialDescription\": \"BIOGAIA STRAWBERRY TAB 3X10s SG\"\n            }\n          ]\n        }",
+        "draftorder": true,
+        "BillingDocument": "ZPPL-Changi",
+        "eZRxNumber": "",
+        "SoldToParty": "0000002610",
+        "ShipToParty": "0000002610",
+        "CompanyName": "ZPPL-Changi   ",
+        "TotalOrderValue": 0,
+        "requestedDeliveryDate": "2022-08-15"
+      },
+      {
+        "id": "2077372",
+        "itemlist": "{\n          \"value\": [\n            {\n              \"qty\": 2,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"242121\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000023245612\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"DE0008651\",\n              \"defaultMaterialDescription\": \"ATOPICLAIR CREAM 100ML TUBE BIOKOSMES\"\n            },\n            {\n              \"qty\": 1,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"199021\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000023245611\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"DE0008651\",\n              \"defaultMaterialDescription\": \"ATOPICLAIR CREAM 40ML TUBE BIOKOSMES\"\n            }\n          ]\n        }",
+        "draftorder": true,
+        "BillingDocument": "ZPPL-Changi",
+        "eZRxNumber": "",
+        "SoldToParty": "0000002610",
+        "ShipToParty": "0000002610",
+        "CompanyName": "ZPPL-Changi   ",
+        "TotalOrderValue": 0,
+        "requestedDeliveryDate": "2022-09-23"
+      },
+      {
+        "id": "1920599",
+        "itemlist":" {\n          \"value\": [\n            {\n              \"qty\": 1,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"22TSA015\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000021209747\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"NA\",\n              \"defaultMaterialDescription\": \"BIOGAIA STRAWBERRY TAB 3X10s SG\"\n            }\n          ]\n        }",
+        "draftorder": true,
+        "BillingDocument": "ZPPL-Changi",
+        "eZRxNumber": "",
+        "SoldToParty": "0000002610",
+        "ShipToParty": "0000002610",
+        "CompanyName": "ZPPL-Changi   ",
+        "TotalOrderValue": 0,
+        "requestedDeliveryDate": "2022-08-15"
+      },
+      {
+        "id": "2077372",
+        "itemlist": "{\n          \"value\": [\n            {\n              \"qty\": 2,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"242121\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000023245612\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"DE0008651\",\n              \"defaultMaterialDescription\": \"ATOPICLAIR CREAM 100ML TUBE BIOKOSMES\"\n            },\n            {\n              \"qty\": 1,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"199021\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000023245611\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"DE0008651\",\n              \"defaultMaterialDescription\": \"ATOPICLAIR CREAM 40ML TUBE BIOKOSMES\"\n            }\n          ]\n        }",
+        "draftorder": true,
+        "BillingDocument": "ZPPL-Changi",
+        "eZRxNumber": "",
+        "SoldToParty": "0000002610",
+        "ShipToParty": "0000002610",
+        "CompanyName": "ZPPL-Changi   ",
+        "TotalOrderValue": 0,
+        "requestedDeliveryDate": "2022-09-23"
+      },
+      {
+        "id": "1920599",
+        "itemlist":" {\n          \"value\": [\n            {\n              \"qty\": 1,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"22TSA015\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000021209747\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"NA\",\n              \"defaultMaterialDescription\": \"BIOGAIA STRAWBERRY TAB 3X10s SG\"\n            }\n          ]\n        }",
+        "draftorder": true,
+        "BillingDocument": "ZPPL-Changi",
+        "eZRxNumber": "",
+        "SoldToParty": "0000002610",
+        "ShipToParty": "0000002610",
+        "CompanyName": "ZPPL-Changi   ",
+        "TotalOrderValue": 0,
+        "requestedDeliveryDate": "2022-08-15"
+      },
+      {
+        "id": "2077372",
+        "itemlist": "{\n          \"value\": [\n            {\n              \"qty\": 2,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"242121\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000023245612\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"DE0008651\",\n              \"defaultMaterialDescription\": \"ATOPICLAIR CREAM 100ML TUBE BIOKOSMES\"\n            },\n            {\n              \"qty\": 1,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"199021\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000023245611\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"DE0008651\",\n              \"defaultMaterialDescription\": \"ATOPICLAIR CREAM 40ML TUBE BIOKOSMES\"\n            }\n          ]\n        }",
+        "draftorder": true,
+        "BillingDocument": "ZPPL-Changi",
+        "eZRxNumber": "",
+        "SoldToParty": "0000002610",
+        "ShipToParty": "0000002610",
+        "CompanyName": "ZPPL-Changi   ",
+        "TotalOrderValue": 0,
+        "requestedDeliveryDate": "2022-09-23"
+      },
+      {
+        "id": "1920599",
+        "itemlist":" {\n          \"value\": [\n            {\n              \"qty\": 1,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"22TSA015\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000021209747\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"NA\",\n              \"defaultMaterialDescription\": \"BIOGAIA STRAWBERRY TAB 3X10s SG\"\n            }\n          ]\n        }",
+        "draftorder": true,
+        "BillingDocument": "ZPPL-Changi",
+        "eZRxNumber": "",
+        "SoldToParty": "0000002610",
+        "ShipToParty": "0000002610",
+        "CompanyName": "ZPPL-Changi   ",
+        "TotalOrderValue": 0,
+        "requestedDeliveryDate": "2022-08-15"
+      },
+      {
+        "id": "2077372",
+        "itemlist": "{\n          \"value\": [\n            {\n              \"qty\": 2,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"242121\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000023245612\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"DE0008651\",\n              \"defaultMaterialDescription\": \"ATOPICLAIR CREAM 100ML TUBE BIOKOSMES\"\n            },\n            {\n              \"qty\": 1,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"199021\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000023245611\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"DE0008651\",\n              \"defaultMaterialDescription\": \"ATOPICLAIR CREAM 40ML TUBE BIOKOSMES\"\n            }\n          ]\n        }",
+        "draftorder": true,
+        "BillingDocument": "ZPPL-Changi",
+        "eZRxNumber": "",
+        "SoldToParty": "0000002610",
+        "ShipToParty": "0000002610",
+        "CompanyName": "ZPPL-Changi   ",
+        "TotalOrderValue": 0,
+        "requestedDeliveryDate": "2022-09-23"
+      },
+      {
+        "id": "1920599",
+        "itemlist":" {\n          \"value\": [\n            {\n              \"qty\": 1,\n              \"type\": \"Comm\",\n              \"comment\": \"\",\n              \"override\": {\n                \"reference\": null,\n                \"valueOverride\": [\n                  {\n                    \"code\": \"ZPO1\",\n                    \"price\": null,\n                    \"currency\": \"SGD\"\n                  }\n                ],\n                \"percentageOverride\": null\n              },\n              \"hidePrice\": false,\n              \"batchNumber\": \"22TSA015\",\n              \"zdp8Override\": false,\n              \"materialGroup2\": null,\n              \"materialGroup4\": \"6GS\",\n              \"materialNumber\": \"000000000021209747\",\n              \"overridenPrice\": null,\n              \"additionalBonus\": [],\n              \"unitOfMeasurement\": \"EA\",\n              \"itemRegistrationNumber\": \"NA\",\n              \"defaultMaterialDescription\": \"BIOGAIA STRAWBERRY TAB 3X10s SG\"\n            }\n          ]\n        }",
+        "draftorder": true,
+        "BillingDocument": "ZPPL-Changi",
+        "eZRxNumber": "",
+        "SoldToParty": "0000002610",
+        "ShipToParty": "0000002610",
+        "CompanyName": "ZPPL-Changi   ",
+        "TotalOrderValue": 0,
+        "requestedDeliveryDate": "2022-08-15"
+      }
+    ]
+  }
+}

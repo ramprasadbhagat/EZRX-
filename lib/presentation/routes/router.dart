@@ -9,6 +9,7 @@ import 'package:ezrxmobile/presentation/favorites/favorites_tab.dart';
 import 'package:ezrxmobile/presentation/history/history_tab.dart';
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:ezrxmobile/presentation/home_tab.dart';
+import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_list_page.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 
 @MaterialAutoRouter(
@@ -30,6 +31,7 @@ import 'package:ezrxmobile/presentation/splash/splash_page.dart';
         AutoRoute(page: AccountTab),
       ],
     ),
+    AutoRoute(path: 'saved_order_list', page: SavedOrderListPage),
   ],
 )
 class $AppRouter {}
