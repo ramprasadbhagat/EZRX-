@@ -10,10 +10,30 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
   const factory SalesOrganisationConfigs({
     required Currency currency,
     required bool hideCustomer,
+    required bool enableGimmickMaterial,
+    required bool languageFilter,
+    required String languageValue,
+    required bool disablePrincipals,
+    required List principalList,
+    required bool disableOrderType,
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
         currency: Currency(''),
         hideCustomer: false,
+        enableGimmickMaterial: false,
+        languageFilter: false,
+        languageValue: '',
+        disablePrincipals: false,
+        principalList: [],
+        disableOrderType: false,
       );
+
+  String get getConfigLangauge {
+    return languageFilter ? languageValue : '';
+  }
+
+  List get getExcludePrincipal {
+    return disablePrincipals ? [] : principalList;
+  }
 }

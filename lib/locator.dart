@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/core/search/search_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_list/saved_order_bloc.dart';
+import 'package:ezrxmobile/application/material/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_query_mutation.dart';
@@ -35,6 +36,7 @@ import 'package:ezrxmobile/infrastructure/banner/datasource/banner_local.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_remote.dart';
 import 'package:ezrxmobile/infrastructure/banner/repository/banner_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/common/app_method.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
@@ -56,6 +58,10 @@ import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
+import 'package:ezrxmobile/infrastructure/material/datasource/material_list_local.dart';
+import 'package:ezrxmobile/infrastructure/material/datasource/material_list_remote_datasource.dart';
+import 'package:ezrxmobile/infrastructure/material/datasource/materials_query.dart';
+import 'package:ezrxmobile/infrastructure/material/repository/material_list_repository.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/routes/router_observer.dart';
 import 'package:get_it/get_it.dart';
@@ -423,6 +429,49 @@ void setupLocator() {
     () => SalesRepBloc(
       userBloc: locator<UserBloc>(),
       salesRepRepository: locator<SalesRepRepository>(),
+    ),
+  );
+
+  //============================================================
+  //  Material List
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => AppMethods(
+      userBlocVal: locator<UserBloc>(),
+      salesOrgBlocVal: locator<SalesOrgBloc>(),
+    ),
+  );
+
+  locator.registerLazySingleton(() => MaterialsWithMetaQuery());
+
+  locator.registerLazySingleton(() => MaterialListLocalDataSource());
+
+  locator.registerLazySingleton(() => MaterialListRemoteDataSource(
+        httpService: locator<HttpService>(),
+        appMethods: locator<AppMethods>(),
+        materialListQuery: locator<MaterialsWithMetaQuery>(),
+        dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+        config: locator<Config>(),
+      ));
+
+  locator.registerLazySingleton(
+    () => MaterialListRepository(
+      config: locator<Config>(),
+      materialListLocalDataSource: locator<MaterialListLocalDataSource>(),
+      materialListRemoteDataSource: locator<MaterialListRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => MaterialListBloc(
+      userBloc: locator<UserBloc>(),
+      materialListRepository: locator<MaterialListRepository>(),
+      salesOrgBloc: locator<SalesOrgBloc>(),
+      customerCodeBloc: locator<CustomerCodeBloc>(),
+      shipToCodeBloc: locator<ShipToCodeBloc>(),
+      searchBloc: locator<SearchBloc>(),
     ),
   );
 }

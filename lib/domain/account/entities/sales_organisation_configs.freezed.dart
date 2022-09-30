@@ -18,6 +18,12 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SalesOrganisationConfigs {
   Currency get currency => throw _privateConstructorUsedError;
   bool get hideCustomer => throw _privateConstructorUsedError;
+  bool get enableGimmickMaterial => throw _privateConstructorUsedError;
+  bool get languageFilter => throw _privateConstructorUsedError;
+  String get languageValue => throw _privateConstructorUsedError;
+  bool get disablePrincipals => throw _privateConstructorUsedError;
+  List<dynamic> get principalList => throw _privateConstructorUsedError;
+  bool get disableOrderType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrganisationConfigsCopyWith<SalesOrganisationConfigs> get copyWith =>
@@ -29,7 +35,15 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
   factory $SalesOrganisationConfigsCopyWith(SalesOrganisationConfigs value,
           $Res Function(SalesOrganisationConfigs) then) =
       _$SalesOrganisationConfigsCopyWithImpl<$Res>;
-  $Res call({Currency currency, bool hideCustomer});
+  $Res call(
+      {Currency currency,
+      bool hideCustomer,
+      bool enableGimmickMaterial,
+      bool languageFilter,
+      String languageValue,
+      bool disablePrincipals,
+      List<dynamic> principalList,
+      bool disableOrderType});
 }
 
 /// @nodoc
@@ -45,6 +59,12 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res>
   $Res call({
     Object? currency = freezed,
     Object? hideCustomer = freezed,
+    Object? enableGimmickMaterial = freezed,
+    Object? languageFilter = freezed,
+    Object? languageValue = freezed,
+    Object? disablePrincipals = freezed,
+    Object? principalList = freezed,
+    Object? disableOrderType = freezed,
   }) {
     return _then(_value.copyWith(
       currency: currency == freezed
@@ -54,6 +74,30 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res>
       hideCustomer: hideCustomer == freezed
           ? _value.hideCustomer
           : hideCustomer // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableGimmickMaterial: enableGimmickMaterial == freezed
+          ? _value.enableGimmickMaterial
+          : enableGimmickMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
+      languageFilter: languageFilter == freezed
+          ? _value.languageFilter
+          : languageFilter // ignore: cast_nullable_to_non_nullable
+              as bool,
+      languageValue: languageValue == freezed
+          ? _value.languageValue
+          : languageValue // ignore: cast_nullable_to_non_nullable
+              as String,
+      disablePrincipals: disablePrincipals == freezed
+          ? _value.disablePrincipals
+          : disablePrincipals // ignore: cast_nullable_to_non_nullable
+              as bool,
+      principalList: principalList == freezed
+          ? _value.principalList
+          : principalList // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      disableOrderType: disableOrderType == freezed
+          ? _value.disableOrderType
+          : disableOrderType // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -67,7 +111,15 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
           $Res Function(_$_SalesOrganisationConfigs) then) =
       __$$_SalesOrganisationConfigsCopyWithImpl<$Res>;
   @override
-  $Res call({Currency currency, bool hideCustomer});
+  $Res call(
+      {Currency currency,
+      bool hideCustomer,
+      bool enableGimmickMaterial,
+      bool languageFilter,
+      String languageValue,
+      bool disablePrincipals,
+      List<dynamic> principalList,
+      bool disableOrderType});
 }
 
 /// @nodoc
@@ -86,6 +138,12 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
   $Res call({
     Object? currency = freezed,
     Object? hideCustomer = freezed,
+    Object? enableGimmickMaterial = freezed,
+    Object? languageFilter = freezed,
+    Object? languageValue = freezed,
+    Object? disablePrincipals = freezed,
+    Object? principalList = freezed,
+    Object? disableOrderType = freezed,
   }) {
     return _then(_$_SalesOrganisationConfigs(
       currency: currency == freezed
@@ -96,6 +154,30 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.hideCustomer
           : hideCustomer // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableGimmickMaterial: enableGimmickMaterial == freezed
+          ? _value.enableGimmickMaterial
+          : enableGimmickMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
+      languageFilter: languageFilter == freezed
+          ? _value.languageFilter
+          : languageFilter // ignore: cast_nullable_to_non_nullable
+              as bool,
+      languageValue: languageValue == freezed
+          ? _value.languageValue
+          : languageValue // ignore: cast_nullable_to_non_nullable
+              as String,
+      disablePrincipals: disablePrincipals == freezed
+          ? _value.disablePrincipals
+          : disablePrincipals // ignore: cast_nullable_to_non_nullable
+              as bool,
+      principalList: principalList == freezed
+          ? _value._principalList
+          : principalList // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      disableOrderType: disableOrderType == freezed
+          ? _value.disableOrderType
+          : disableOrderType // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -104,17 +186,42 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
 
 class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   const _$_SalesOrganisationConfigs(
-      {required this.currency, required this.hideCustomer})
-      : super._();
+      {required this.currency,
+      required this.hideCustomer,
+      required this.enableGimmickMaterial,
+      required this.languageFilter,
+      required this.languageValue,
+      required this.disablePrincipals,
+      required final List<dynamic> principalList,
+      required this.disableOrderType})
+      : _principalList = principalList,
+        super._();
 
   @override
   final Currency currency;
   @override
   final bool hideCustomer;
+  @override
+  final bool enableGimmickMaterial;
+  @override
+  final bool languageFilter;
+  @override
+  final String languageValue;
+  @override
+  final bool disablePrincipals;
+  final List<dynamic> _principalList;
+  @override
+  List<dynamic> get principalList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_principalList);
+  }
+
+  @override
+  final bool disableOrderType;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(currency: $currency, hideCustomer: $hideCustomer)';
+    return 'SalesOrganisationConfigs(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType)';
   }
 
   @override
@@ -124,14 +231,32 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
             other is _$_SalesOrganisationConfigs &&
             const DeepCollectionEquality().equals(other.currency, currency) &&
             const DeepCollectionEquality()
-                .equals(other.hideCustomer, hideCustomer));
+                .equals(other.hideCustomer, hideCustomer) &&
+            const DeepCollectionEquality()
+                .equals(other.enableGimmickMaterial, enableGimmickMaterial) &&
+            const DeepCollectionEquality()
+                .equals(other.languageFilter, languageFilter) &&
+            const DeepCollectionEquality()
+                .equals(other.languageValue, languageValue) &&
+            const DeepCollectionEquality()
+                .equals(other.disablePrincipals, disablePrincipals) &&
+            const DeepCollectionEquality()
+                .equals(other._principalList, _principalList) &&
+            const DeepCollectionEquality()
+                .equals(other.disableOrderType, disableOrderType));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(currency),
-      const DeepCollectionEquality().hash(hideCustomer));
+      const DeepCollectionEquality().hash(hideCustomer),
+      const DeepCollectionEquality().hash(enableGimmickMaterial),
+      const DeepCollectionEquality().hash(languageFilter),
+      const DeepCollectionEquality().hash(languageValue),
+      const DeepCollectionEquality().hash(disablePrincipals),
+      const DeepCollectionEquality().hash(_principalList),
+      const DeepCollectionEquality().hash(disableOrderType));
 
   @JsonKey(ignore: true)
   @override
@@ -143,13 +268,31 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
 abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   const factory _SalesOrganisationConfigs(
       {required final Currency currency,
-      required final bool hideCustomer}) = _$_SalesOrganisationConfigs;
+      required final bool hideCustomer,
+      required final bool enableGimmickMaterial,
+      required final bool languageFilter,
+      required final String languageValue,
+      required final bool disablePrincipals,
+      required final List<dynamic> principalList,
+      required final bool disableOrderType}) = _$_SalesOrganisationConfigs;
   const _SalesOrganisationConfigs._() : super._();
 
   @override
   Currency get currency;
   @override
   bool get hideCustomer;
+  @override
+  bool get enableGimmickMaterial;
+  @override
+  bool get languageFilter;
+  @override
+  String get languageValue;
+  @override
+  bool get disablePrincipals;
+  @override
+  List<dynamic> get principalList;
+  @override
+  bool get disableOrderType;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsCopyWith<_$_SalesOrganisationConfigs>

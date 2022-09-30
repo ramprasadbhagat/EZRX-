@@ -53,9 +53,6 @@ void main() {
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     customerMockData = await CustomerCodeLocalDataSource().getCustomerInfo(
-        salesOrg: fakeSaleOrg.salesOrg.getOrCrash(),
-        customerCode:
-            salesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
         loginUserType: fakeRole);
   });
 

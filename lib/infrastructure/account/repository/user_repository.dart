@@ -41,10 +41,10 @@ class UserRepository implements IUserRepository {
     try {
       final user = await remoteDataSource.getUser();
       await firebaseAnalyticsService.analytics.setUserId(id: user.id);
-      await firebaseAnalyticsService.analytics.setUserProperty(
-        name: user.username.getOrCrash(),
-        value: user.email.getOrCrash(),
-      );
+      // await firebaseAnalyticsService.analytics.setUserProperty(
+      //   name: user.username.getOrCrash(),
+      //   value: user.email.getOrCrash(),
+      // );
       await firebaseCrashlyticsService.crashlytics.setUserIdentifier(user.id);
 
       return Right(user);

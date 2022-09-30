@@ -25,6 +25,7 @@ class User with _$User {
     required Settings settings,
     required SettingTc settingTc,
     required SettingAup settingAup,
+    required bool enableOrderType,
   }) = _User;
 
   factory User.empty() => User(
@@ -48,5 +49,6 @@ class User with _$User {
           acceptAUP: false,
           acceptAUPTC: '',
         ),
+        enableOrderType: false,
       );
 }

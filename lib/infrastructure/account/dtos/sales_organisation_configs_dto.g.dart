@@ -10,7 +10,14 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
         Map<String, dynamic> json) =>
     _$_SalesOrganisationConfigsDto(
       currency: json['currency'] as String,
-      hideCustomer: json['hideCustomer'] as bool,
+      hideCustomer: json['hideCustomer'] as bool? ?? false,
+      enableGimmickMaterial: json['enableGimmickMaterial'] as bool? ?? false,
+      languageFilter: json['languageFilter'] as bool? ?? false,
+      languageValue: json['languageValue'] as String? ?? '',
+      disablePrincipals: json['disablePrincipals'] as bool? ?? false,
+      principalList: const _PrincipalListConverter()
+          .fromJson(json['principalList'] as Map<String, dynamic>),
+      disableOrderType: json['disableOrderType'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -18,4 +25,11 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
     <String, dynamic>{
       'currency': instance.currency,
       'hideCustomer': instance.hideCustomer,
+      'enableGimmickMaterial': instance.enableGimmickMaterial,
+      'languageFilter': instance.languageFilter,
+      'languageValue': instance.languageValue,
+      'disablePrincipals': instance.disablePrincipals,
+      'principalList':
+          const _PrincipalListConverter().toJson(instance.principalList),
+      'disableOrderType': instance.disableOrderType,
     };

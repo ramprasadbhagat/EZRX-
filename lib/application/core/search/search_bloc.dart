@@ -24,7 +24,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
             .where((SearchEvent event) => event is _SearchTextChanged)
             .debounceTime((const Duration(seconds: 3)))
             .switchMap(mapper);
-            
 
         return events.mergeWith([
           nonDebounceStream,

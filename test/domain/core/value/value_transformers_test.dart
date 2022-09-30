@@ -59,4 +59,62 @@ void main() {
       },
     );
   });
+
+  group('removeLeadingZero', () {
+    test(
+      'should return an String without zero',
+      () async {
+        const input = '000123';
+        final result = removeLeadingZero(input);
+        expect(result, '123');
+      },
+    );
+
+    test(
+      'should return an String without zero',
+      () async {
+        const input = '0234';
+        final result = removeLeadingZero(input);
+        expect(result, '234');
+      },
+    );
+
+    test(
+      'should return an String without zero',
+      () async {
+        const input = '45456';
+        final result = removeLeadingZero(input);
+        expect(result, '45456');
+      },
+    );
+  });
+
+  group('naIfEmpty', () {
+    test(
+      'should return an NA if is empty String',
+      () async {
+        const input = '';
+        final result = naIfEmpty(input);
+        expect(result, 'NA');
+      },
+    );
+
+    test(
+      'should return an String if not empty String',
+      () async {
+        const input = '0234';
+        final result = naIfEmpty(input);
+        expect(result, '0234');
+      },
+    );
+
+    test(
+      'should return an String if not empty String',
+      () async {
+        const input = 'ccc213fa';
+        final result = naIfEmpty(input);
+        expect(result, 'ccc213fa');
+      },
+    );
+  });
 }

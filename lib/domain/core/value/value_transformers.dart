@@ -16,3 +16,21 @@ String stringTitleCase(String text) {
       .map((word) => word[0].toUpperCase() + word.substring(1).toLowerCase())
       .join(' ');
 }
+
+String removeLeadingZero(String text) {
+  return text.isEmpty ? '' : text.replaceAll(RegExp(r'^0+(?=.)'), '');
+}
+
+String naIfEmpty(String text) {
+  return text.isEmpty ? 'NA' : text;
+}
+
+// String getParsedString(String textString) {
+//   if (textString.isEmpty) {
+//     return '';
+//   }
+//   var parsed = textString.toString();
+//   parsed = parsed.replaceAll('\'', '\\\'');
+
+//   return parsed.toString();
+// }

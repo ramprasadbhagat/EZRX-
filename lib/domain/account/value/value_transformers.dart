@@ -1,4 +1,3 @@
-
 String salesOrgBuName(String salesOrg) {
   // use map insted of switch statement to reduce cyclomatic complexity
   final salesOrgBuMap = {
@@ -168,13 +167,13 @@ String currencySymbol(String currency) {
   }
 }
 
-bool isAllCustomerCodeEnabled(String customerCode) {
-  switch (customerCode) {
-    case 'all':
-    case '-':
-    case '':
-      return true;
-    default:
-      return false;
-  }
-}
+// bool isAllCustomerCodeEnabled(String customerCode) {
+//   switch (customerCode) {
+//     case 'all':
+//     case '-':
+//     case '':
+//       return true;
+//     default:
+//       return false;
+//   }
+// }

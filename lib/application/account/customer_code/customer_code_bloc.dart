@@ -8,7 +8,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart'
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/repository/i_customer_code_repository.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -23,7 +22,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
   final SearchBloc searchBloc;
   final UserBloc userBloc;
   late final StreamSubscription _salesOrgBlocSubscription;
-  late final StreamSubscription _searchTextBlocSubscription;
+  // late final StreamSubscription _searchTextBlocSubscription;
   CustomerCodeBloc({
     required this.salesOrgBloc,
     required this.userBloc,
@@ -49,23 +48,23 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
       },
     );
 
-    _searchTextBlocSubscription = searchBloc.stream.listen(
-      (searchTextState) async {
-        if (!searchTextState.isSearchInProgress) return;
-        _selectCustomer(
-          salesOrgBloc.state,
-          searchTextState.searchText.isNotEmpty
-              ? [
-                  SalesOrgCustomerInfo(
-                    customerCodeSoldTo:
-                        CustomerCode(searchTextState.searchText),
-                    shipToInfos: [],
-                  ),
-                ]
-              : salesOrgBloc.state.salesOrganisation.customerInfos,
-        );
-      },
-    );
+    // _searchTextBlocSubscription = searchBloc.stream.listen(
+    //   (searchTextState) async {
+    //     if (!searchTextState.isSearchInProgress) return;
+    //     _selectCustomer(
+    //       salesOrgBloc.state,
+    //       searchTextState.searchText.isNotEmpty
+    //           ? [
+    //               SalesOrgCustomerInfo(
+    //                 customerCodeSoldTo:
+    //                     CustomerCode(searchTextState.searchText),
+    //                 shipToInfos: [],
+    //               ),
+    //             ]
+    //           : salesOrgBloc.state.salesOrganisation.customerInfos,
+    //     );
+    //   },
+    // );
   }
 
   Future<void> _onEvent(
@@ -171,7 +170,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
   @override
   Future<void> close() async {
     await _salesOrgBlocSubscription.cancel();
-    await _searchTextBlocSubscription.cancel();
+    // await _searchTextBlocSubscription.cancel();
 
     return super.close();
   }

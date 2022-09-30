@@ -45,7 +45,7 @@ class CustomerCodeRemoteDataSource {
       if (loginUserType != 'client') {
         variables.addEntries({MapEntry('username', userName)});
       }
-      
+
       final res = await httpService.request(
         method: 'POST',
         url: '${config.urlConstants}license',
@@ -56,8 +56,11 @@ class CustomerCodeRemoteDataSource {
       );
       _customerCodeExceptionChecker(res: res);
 
-      return List.from(res.data['data']['customerInformationSearch']
-              ['SoldToInformation'])
+      var finalData = loginUserType == 'client'
+          ? res.data['data']['customerInformationSearch']['SoldToInformation']
+          : res.data['data']['customerListForSalesRep'];
+
+      return List.from(finalData)
           .map((e) => CustomerCodeDto.fromJson(e).toDomain())
           .toList();
     });

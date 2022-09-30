@@ -8,8 +8,6 @@ class CustomerCodeLocalDataSource {
   CustomerCodeLocalDataSource();
 
   Future<List<CustomerCodeInfo>> getCustomerInfo({
-    required String salesOrg,
-    required String customerCode,
     required String loginUserType,
   }) async {
     final data = json.decode(

@@ -52,6 +52,8 @@ mixin _$UserDto {
   bool get acceptAUP => throw _privateConstructorUsedError;
   @JsonKey(name: 'acceptAUPTC')
   String get acceptAUPTC => throw _privateConstructorUsedError;
+  @JsonKey(name: 'enableOrderType')
+  bool get enableOrderType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -93,7 +95,9 @@ abstract class $UserDtoCopyWith<$Res> {
       @JsonKey(name: 'acceptAUP')
           bool acceptAUP,
       @JsonKey(name: 'acceptAUPTC')
-          String acceptAUPTC});
+          String acceptAUPTC,
+      @JsonKey(name: 'enableOrderType')
+          bool enableOrderType});
 
   $RoleDtoCopyWith<$Res> get role;
 }
@@ -123,6 +127,7 @@ class _$UserDtoCopyWithImpl<$Res> implements $UserDtoCopyWith<$Res> {
     Object? acceptTCTimestamp = freezed,
     Object? acceptAUP = freezed,
     Object? acceptAUPTC = freezed,
+    Object? enableOrderType = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -185,6 +190,10 @@ class _$UserDtoCopyWithImpl<$Res> implements $UserDtoCopyWith<$Res> {
           ? _value.acceptAUPTC
           : acceptAUPTC // ignore: cast_nullable_to_non_nullable
               as String,
+      enableOrderType: enableOrderType == freezed
+          ? _value.enableOrderType
+          : enableOrderType // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -233,7 +242,9 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       @JsonKey(name: 'acceptAUP')
           bool acceptAUP,
       @JsonKey(name: 'acceptAUPTC')
-          String acceptAUPTC});
+          String acceptAUPTC,
+      @JsonKey(name: 'enableOrderType')
+          bool enableOrderType});
 
   @override
   $RoleDtoCopyWith<$Res> get role;
@@ -265,6 +276,7 @@ class __$$_UserDtoCopyWithImpl<$Res> extends _$UserDtoCopyWithImpl<$Res>
     Object? acceptTCTimestamp = freezed,
     Object? acceptAUP = freezed,
     Object? acceptAUPTC = freezed,
+    Object? enableOrderType = freezed,
   }) {
     return _then(_$_UserDto(
       id: id == freezed
@@ -327,6 +339,10 @@ class __$$_UserDtoCopyWithImpl<$Res> extends _$UserDtoCopyWithImpl<$Res>
           ? _value.acceptAUPTC
           : acceptAUPTC // ignore: cast_nullable_to_non_nullable
               as String,
+      enableOrderType: enableOrderType == freezed
+          ? _value.enableOrderType
+          : enableOrderType // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -365,7 +381,9 @@ class _$_UserDto extends _UserDto {
       @JsonKey(name: 'acceptAUP')
           required this.acceptAUP,
       @JsonKey(name: 'acceptAUPTC')
-          required this.acceptAUPTC})
+          required this.acceptAUPTC,
+      @JsonKey(name: 'enableOrderType')
+          required this.enableOrderType})
       : _userSalesOrganisations = userSalesOrganisations,
         super._();
 
@@ -423,10 +441,13 @@ class _$_UserDto extends _UserDto {
   @override
   @JsonKey(name: 'acceptAUPTC')
   final String acceptAUPTC;
+  @override
+  @JsonKey(name: 'enableOrderType')
+  final bool enableOrderType;
 
   @override
   String toString() {
-    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, acceptTC: $acceptTC, acceptTCTimestamp: $acceptTCTimestamp, acceptAUP: $acceptAUP, acceptAUPTC: $acceptAUPTC)';
+    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, acceptTC: $acceptTC, acceptTCTimestamp: $acceptTCTimestamp, acceptAUP: $acceptAUP, acceptAUPTC: $acceptAUPTC, enableOrderType: $enableOrderType)';
   }
 
   @override
@@ -455,7 +476,9 @@ class _$_UserDto extends _UserDto {
                 .equals(other.acceptTCTimestamp, acceptTCTimestamp) &&
             const DeepCollectionEquality().equals(other.acceptAUP, acceptAUP) &&
             const DeepCollectionEquality()
-                .equals(other.acceptAUPTC, acceptAUPTC));
+                .equals(other.acceptAUPTC, acceptAUPTC) &&
+            const DeepCollectionEquality()
+                .equals(other.enableOrderType, enableOrderType));
   }
 
   @JsonKey(ignore: true)
@@ -476,7 +499,8 @@ class _$_UserDto extends _UserDto {
       const DeepCollectionEquality().hash(acceptTC),
       const DeepCollectionEquality().hash(acceptTCTimestamp),
       const DeepCollectionEquality().hash(acceptAUP),
-      const DeepCollectionEquality().hash(acceptAUPTC));
+      const DeepCollectionEquality().hash(acceptAUPTC),
+      const DeepCollectionEquality().hash(enableOrderType));
 
   @JsonKey(ignore: true)
   @override
@@ -523,7 +547,9 @@ abstract class _UserDto extends UserDto {
       @JsonKey(name: 'acceptAUP')
           required final bool acceptAUP,
       @JsonKey(name: 'acceptAUPTC')
-          required final String acceptAUPTC}) = _$_UserDto;
+          required final String acceptAUPTC,
+      @JsonKey(name: 'enableOrderType')
+          required final bool enableOrderType}) = _$_UserDto;
   const _UserDto._() : super._();
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$_UserDto.fromJson;
@@ -574,6 +600,9 @@ abstract class _UserDto extends UserDto {
   @override
   @JsonKey(name: 'acceptAUPTC')
   String get acceptAUPTC;
+  @override
+  @JsonKey(name: 'enableOrderType')
+  bool get enableOrderType;
   @override
   @JsonKey(ignore: true)
   _$$_UserDtoCopyWith<_$_UserDto> get copyWith =>

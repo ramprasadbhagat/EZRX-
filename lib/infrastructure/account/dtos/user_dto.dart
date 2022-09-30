@@ -38,6 +38,7 @@ class UserDto with _$UserDto {
     @JsonKey(name: 'acceptTCTimestamp') required String acceptTCTimestamp,
     @JsonKey(name: 'acceptAUP') required bool acceptAUP,
     @JsonKey(name: 'acceptAUPTC') required String acceptAUPTC,
+    @JsonKey(name: 'enableOrderType') required bool enableOrderType,
   }) = _UserDto;
 
   factory UserDto.fromDomain(User user) {
@@ -57,6 +58,7 @@ class UserDto with _$UserDto {
       acceptTCTimestamp: user.settingTc.acceptTCTimestamp,
       acceptAUP: user.settingAup.acceptAUP,
       acceptAUPTC: user.settingAup.acceptAUPTC,
+      enableOrderType: user.enableOrderType,
     );
   }
 
@@ -87,6 +89,7 @@ class UserDto with _$UserDto {
         acceptAUP: acceptAUP,
         acceptAUPTC: acceptAUPTC,
       ),
+      enableOrderType: enableOrderType,
     );
   }
 

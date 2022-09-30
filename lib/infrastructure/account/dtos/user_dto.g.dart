@@ -23,6 +23,7 @@ _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
       acceptTCTimestamp: json['acceptTCTimestamp'] as String,
       acceptAUP: json['acceptAUP'] as bool,
       acceptAUPTC: json['acceptAUPTC'] as String,
+      enableOrderType: json['enableOrderType'] as bool,
     );
 
 Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
@@ -43,4 +44,5 @@ Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
       'acceptTCTimestamp': instance.acceptTCTimestamp,
       'acceptAUP': instance.acceptAUP,
       'acceptAUPTC': instance.acceptAUPTC,
+      'enableOrderType': instance.enableOrderType,
     };

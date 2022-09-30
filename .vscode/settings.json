@@ -5,7 +5,7 @@
         "source.fixAll": true
     },
     "[plist]": {
-        "editor.formatOnSave": false,
+        "editor.formatOnSave": true,
     },
     // https://dartcode.org/docs/recommended-settings/
     "[dart]": {

@@ -23,8 +23,21 @@ SalesOrganisationConfigsDto _$SalesOrganisationConfigsDtoFromJson(
 mixin _$SalesOrganisationConfigsDto {
   @JsonKey(name: 'currency')
   String get currency => throw _privateConstructorUsedError;
-  @JsonKey(name: 'hideCustomer')
+  @JsonKey(name: 'hideCustomer', defaultValue: false)
   bool get hideCustomer => throw _privateConstructorUsedError;
+  @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
+  bool get enableGimmickMaterial => throw _privateConstructorUsedError;
+  @JsonKey(name: 'languageFilter', defaultValue: false)
+  bool get languageFilter => throw _privateConstructorUsedError;
+  @JsonKey(name: 'languageValue', defaultValue: '')
+  String get languageValue => throw _privateConstructorUsedError;
+  @JsonKey(name: 'disablePrincipals', defaultValue: false)
+  bool get disablePrincipals => throw _privateConstructorUsedError;
+  @_PrincipalListConverter()
+  @JsonKey(name: 'principalList')
+  List<dynamic> get principalList => throw _privateConstructorUsedError;
+  @JsonKey(name: 'disableOrderType', defaultValue: false)
+  bool get disableOrderType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,8 +52,23 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
           $Res Function(SalesOrganisationConfigsDto) then) =
       _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'currency') String currency,
-      @JsonKey(name: 'hideCustomer') bool hideCustomer});
+      {@JsonKey(name: 'currency')
+          String currency,
+      @JsonKey(name: 'hideCustomer', defaultValue: false)
+          bool hideCustomer,
+      @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
+          bool enableGimmickMaterial,
+      @JsonKey(name: 'languageFilter', defaultValue: false)
+          bool languageFilter,
+      @JsonKey(name: 'languageValue', defaultValue: '')
+          String languageValue,
+      @JsonKey(name: 'disablePrincipals', defaultValue: false)
+          bool disablePrincipals,
+      @_PrincipalListConverter()
+      @JsonKey(name: 'principalList')
+          List<dynamic> principalList,
+      @JsonKey(name: 'disableOrderType', defaultValue: false)
+          bool disableOrderType});
 }
 
 /// @nodoc
@@ -56,6 +84,12 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>
   $Res call({
     Object? currency = freezed,
     Object? hideCustomer = freezed,
+    Object? enableGimmickMaterial = freezed,
+    Object? languageFilter = freezed,
+    Object? languageValue = freezed,
+    Object? disablePrincipals = freezed,
+    Object? principalList = freezed,
+    Object? disableOrderType = freezed,
   }) {
     return _then(_value.copyWith(
       currency: currency == freezed
@@ -65,6 +99,30 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>
       hideCustomer: hideCustomer == freezed
           ? _value.hideCustomer
           : hideCustomer // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableGimmickMaterial: enableGimmickMaterial == freezed
+          ? _value.enableGimmickMaterial
+          : enableGimmickMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
+      languageFilter: languageFilter == freezed
+          ? _value.languageFilter
+          : languageFilter // ignore: cast_nullable_to_non_nullable
+              as bool,
+      languageValue: languageValue == freezed
+          ? _value.languageValue
+          : languageValue // ignore: cast_nullable_to_non_nullable
+              as String,
+      disablePrincipals: disablePrincipals == freezed
+          ? _value.disablePrincipals
+          : disablePrincipals // ignore: cast_nullable_to_non_nullable
+              as bool,
+      principalList: principalList == freezed
+          ? _value.principalList
+          : principalList // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      disableOrderType: disableOrderType == freezed
+          ? _value.disableOrderType
+          : disableOrderType // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -79,8 +137,23 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
       __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'currency') String currency,
-      @JsonKey(name: 'hideCustomer') bool hideCustomer});
+      {@JsonKey(name: 'currency')
+          String currency,
+      @JsonKey(name: 'hideCustomer', defaultValue: false)
+          bool hideCustomer,
+      @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
+          bool enableGimmickMaterial,
+      @JsonKey(name: 'languageFilter', defaultValue: false)
+          bool languageFilter,
+      @JsonKey(name: 'languageValue', defaultValue: '')
+          String languageValue,
+      @JsonKey(name: 'disablePrincipals', defaultValue: false)
+          bool disablePrincipals,
+      @_PrincipalListConverter()
+      @JsonKey(name: 'principalList')
+          List<dynamic> principalList,
+      @JsonKey(name: 'disableOrderType', defaultValue: false)
+          bool disableOrderType});
 }
 
 /// @nodoc
@@ -100,6 +173,12 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
   $Res call({
     Object? currency = freezed,
     Object? hideCustomer = freezed,
+    Object? enableGimmickMaterial = freezed,
+    Object? languageFilter = freezed,
+    Object? languageValue = freezed,
+    Object? disablePrincipals = freezed,
+    Object? principalList = freezed,
+    Object? disableOrderType = freezed,
   }) {
     return _then(_$_SalesOrganisationConfigsDto(
       currency: currency == freezed
@@ -110,6 +189,30 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.hideCustomer
           : hideCustomer // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableGimmickMaterial: enableGimmickMaterial == freezed
+          ? _value.enableGimmickMaterial
+          : enableGimmickMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
+      languageFilter: languageFilter == freezed
+          ? _value.languageFilter
+          : languageFilter // ignore: cast_nullable_to_non_nullable
+              as bool,
+      languageValue: languageValue == freezed
+          ? _value.languageValue
+          : languageValue // ignore: cast_nullable_to_non_nullable
+              as String,
+      disablePrincipals: disablePrincipals == freezed
+          ? _value.disablePrincipals
+          : disablePrincipals // ignore: cast_nullable_to_non_nullable
+              as bool,
+      principalList: principalList == freezed
+          ? _value._principalList
+          : principalList // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      disableOrderType: disableOrderType == freezed
+          ? _value.disableOrderType
+          : disableOrderType // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -118,9 +221,25 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   const _$_SalesOrganisationConfigsDto(
-      {@JsonKey(name: 'currency') required this.currency,
-      @JsonKey(name: 'hideCustomer') required this.hideCustomer})
-      : super._();
+      {@JsonKey(name: 'currency')
+          required this.currency,
+      @JsonKey(name: 'hideCustomer', defaultValue: false)
+          required this.hideCustomer,
+      @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
+          required this.enableGimmickMaterial,
+      @JsonKey(name: 'languageFilter', defaultValue: false)
+          required this.languageFilter,
+      @JsonKey(name: 'languageValue', defaultValue: '')
+          required this.languageValue,
+      @JsonKey(name: 'disablePrincipals', defaultValue: false)
+          required this.disablePrincipals,
+      @_PrincipalListConverter()
+      @JsonKey(name: 'principalList')
+          required final List<dynamic> principalList,
+      @JsonKey(name: 'disableOrderType', defaultValue: false)
+          required this.disableOrderType})
+      : _principalList = principalList,
+        super._();
 
   factory _$_SalesOrganisationConfigsDto.fromJson(Map<String, dynamic> json) =>
       _$$_SalesOrganisationConfigsDtoFromJson(json);
@@ -129,12 +248,36 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @JsonKey(name: 'currency')
   final String currency;
   @override
-  @JsonKey(name: 'hideCustomer')
+  @JsonKey(name: 'hideCustomer', defaultValue: false)
   final bool hideCustomer;
+  @override
+  @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
+  final bool enableGimmickMaterial;
+  @override
+  @JsonKey(name: 'languageFilter', defaultValue: false)
+  final bool languageFilter;
+  @override
+  @JsonKey(name: 'languageValue', defaultValue: '')
+  final String languageValue;
+  @override
+  @JsonKey(name: 'disablePrincipals', defaultValue: false)
+  final bool disablePrincipals;
+  final List<dynamic> _principalList;
+  @override
+  @_PrincipalListConverter()
+  @JsonKey(name: 'principalList')
+  List<dynamic> get principalList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_principalList);
+  }
+
+  @override
+  @JsonKey(name: 'disableOrderType', defaultValue: false)
+  final bool disableOrderType;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(currency: $currency, hideCustomer: $hideCustomer)';
+    return 'SalesOrganisationConfigsDto(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType)';
   }
 
   @override
@@ -144,7 +287,19 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
             other is _$_SalesOrganisationConfigsDto &&
             const DeepCollectionEquality().equals(other.currency, currency) &&
             const DeepCollectionEquality()
-                .equals(other.hideCustomer, hideCustomer));
+                .equals(other.hideCustomer, hideCustomer) &&
+            const DeepCollectionEquality()
+                .equals(other.enableGimmickMaterial, enableGimmickMaterial) &&
+            const DeepCollectionEquality()
+                .equals(other.languageFilter, languageFilter) &&
+            const DeepCollectionEquality()
+                .equals(other.languageValue, languageValue) &&
+            const DeepCollectionEquality()
+                .equals(other.disablePrincipals, disablePrincipals) &&
+            const DeepCollectionEquality()
+                .equals(other._principalList, _principalList) &&
+            const DeepCollectionEquality()
+                .equals(other.disableOrderType, disableOrderType));
   }
 
   @JsonKey(ignore: true)
@@ -152,7 +307,13 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(currency),
-      const DeepCollectionEquality().hash(hideCustomer));
+      const DeepCollectionEquality().hash(hideCustomer),
+      const DeepCollectionEquality().hash(enableGimmickMaterial),
+      const DeepCollectionEquality().hash(languageFilter),
+      const DeepCollectionEquality().hash(languageValue),
+      const DeepCollectionEquality().hash(disablePrincipals),
+      const DeepCollectionEquality().hash(_principalList),
+      const DeepCollectionEquality().hash(disableOrderType));
 
   @JsonKey(ignore: true)
   @override
@@ -171,8 +332,23 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
 abstract class _SalesOrganisationConfigsDto
     extends SalesOrganisationConfigsDto {
   const factory _SalesOrganisationConfigsDto(
-          {@JsonKey(name: 'currency') required final String currency,
-          @JsonKey(name: 'hideCustomer') required final bool hideCustomer}) =
+          {@JsonKey(name: 'currency')
+              required final String currency,
+          @JsonKey(name: 'hideCustomer', defaultValue: false)
+              required final bool hideCustomer,
+          @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
+              required final bool enableGimmickMaterial,
+          @JsonKey(name: 'languageFilter', defaultValue: false)
+              required final bool languageFilter,
+          @JsonKey(name: 'languageValue', defaultValue: '')
+              required final String languageValue,
+          @JsonKey(name: 'disablePrincipals', defaultValue: false)
+              required final bool disablePrincipals,
+          @_PrincipalListConverter()
+          @JsonKey(name: 'principalList')
+              required final List<dynamic> principalList,
+          @JsonKey(name: 'disableOrderType', defaultValue: false)
+              required final bool disableOrderType}) =
       _$_SalesOrganisationConfigsDto;
   const _SalesOrganisationConfigsDto._() : super._();
 
@@ -183,8 +359,27 @@ abstract class _SalesOrganisationConfigsDto
   @JsonKey(name: 'currency')
   String get currency;
   @override
-  @JsonKey(name: 'hideCustomer')
+  @JsonKey(name: 'hideCustomer', defaultValue: false)
   bool get hideCustomer;
+  @override
+  @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
+  bool get enableGimmickMaterial;
+  @override
+  @JsonKey(name: 'languageFilter', defaultValue: false)
+  bool get languageFilter;
+  @override
+  @JsonKey(name: 'languageValue', defaultValue: '')
+  String get languageValue;
+  @override
+  @JsonKey(name: 'disablePrincipals', defaultValue: false)
+  bool get disablePrincipals;
+  @override
+  @_PrincipalListConverter()
+  @JsonKey(name: 'principalList')
+  List<dynamic> get principalList;
+  @override
+  @JsonKey(name: 'disableOrderType', defaultValue: false)
+  bool get disableOrderType;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsDtoCopyWith<_$_SalesOrganisationConfigsDto>

@@ -26,11 +26,8 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
   Future<Either<ApiFailure, List<CustomerCodeInfo>>> getCustomerCode(SalesOrganisation salesOrganisation,String customerCode,bool hideCustomer,int pageIndex,String loginUserType,String userName,) async {
     final salesOrg = salesOrganisation.salesOrg.getOrCrash();
     if (config.appFlavor == Flavor.mock) {
-      final customerCode = salesOrganisation.customerInfos.first.customerCodeSoldTo.getOrCrash();
       try {
         final customerCodeInfo = await localCustomerCodeDataSource.getCustomerInfo(
-          salesOrg: salesOrg,
-          customerCode: customerCode,
           loginUserType: loginUserType,
         );
 
