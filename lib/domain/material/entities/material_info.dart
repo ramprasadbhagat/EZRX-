@@ -9,7 +9,7 @@ class MaterialInfo with _$MaterialInfo {
   const MaterialInfo._();
 
   const factory MaterialInfo({
-    required MaterialCode materialCode,
+    required MaterialNumber materialNumber,
     required String materialDescription,
     required String governmentMaterialCode,
     required String therapeuticClass,
@@ -28,20 +28,22 @@ class MaterialInfo with _$MaterialInfo {
   }) = _MaterialInfo;
 
   factory MaterialInfo.empty() => MaterialInfo(
-      materialCode: MaterialCode(''),
-      materialDescription: '',
-      governmentMaterialCode: '',
-      therapeuticClass: '',
-      itemBrand: '',
-      principalData: const PrincipalData(principalName: '', principalCode: ''),
-      taxClassification: '',
-      itemRegistrationNumber: '',
-      unitOfMeasurement: '',
-      materialGroup2: '',
-      materialGroup4: '',
-      isSampleMaterial: false,
-      hidePrice: false,
-      hasValidTenderContract: false,
-      hasMandatoryTenderContract: false,
-      taxes: [],);
+        materialNumber: MaterialNumber(''),
+        materialDescription: '',
+        governmentMaterialCode: '',
+        therapeuticClass: '',
+        itemBrand: '',
+        principalData:
+            const PrincipalData(principalName: '', principalCode: ''),
+        taxClassification: '',
+        itemRegistrationNumber: '',
+        unitOfMeasurement: '',
+        materialGroup2: '',
+        materialGroup4: '',
+        isSampleMaterial: false,
+        hidePrice: false,
+        hasValidTenderContract: false,
+        hasMandatoryTenderContract: false,
+        taxes: [],
+      );
 }

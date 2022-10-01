@@ -35,7 +35,7 @@ class MaterialDto with _$MaterialDto {
 
   factory MaterialDto.fromDomain(MaterialInfo materialInfo) {
     return MaterialDto(
-      materialNumber: materialInfo.materialCode.getOrCrash(),
+      materialNumber: materialInfo.materialNumber.getOrCrash(),
       materialDescription: materialInfo.materialDescription,
       governmentMaterialCode: materialInfo.governmentMaterialCode,
       therapeuticClass: materialInfo.therapeuticClass,
@@ -57,7 +57,7 @@ class MaterialDto with _$MaterialDto {
 
   MaterialInfo toDomain() {
     return MaterialInfo(
-      materialCode: MaterialCode(materialNumber),
+      materialNumber: MaterialNumber(materialNumber),
       materialDescription: materialDescription,
       governmentMaterialCode: governmentMaterialCode,
       therapeuticClass: therapeuticClass,

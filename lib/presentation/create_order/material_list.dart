@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/material/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/material/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -102,7 +104,7 @@ class _BodyContent extends StatelessWidget {
               ? LoadingShimmer.withChild(
                   child: Image.asset(
                     'assets/images/ezrxlogo.png',
-                    key: const Key('LaoderImage'),
+                    key: const Key('loaderImage'),
                     width: 80,
                     height: 80,
                   ),
@@ -130,38 +132,78 @@ class _ListContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: ZPColors.darkGray.withOpacity(0.15)),
-          color: const Color.fromARGB(255, 251, 251, 251),
+    return Card(
+      child: ListTile(
+        key: Key('materialOption${materialInfo.materialNumber.getOrCrash()}'),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              materialInfo.materialNumber.displayMatNo,
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
+            Text(
+              materialInfo.materialDescription,
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+            Text(
+              materialInfo.principalData.principalName,
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
+          ],
         ),
-        key: Key(
-          'materialOption${materialInfo.materialCode.getOrCrash()}',
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                materialInfo.materialCode.materialNumber,
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
-              Text(
-                materialInfo.materialDescription,
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              Text(
-                materialInfo.principalData.principalName,
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
-            ],
-          ),
-        ),
+        trailing: _FavoriteButton(materialInfo: materialInfo),
       ),
+    );
+  }
+}
+
+class _FavoriteButton extends StatelessWidget {
+  final MaterialInfo materialInfo;
+  const _FavoriteButton({Key? key, required this.materialInfo})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<FavouriteBloc, FavouriteState>(
+      listenWhen: (previous, current) => previous != current,
+      listener: (context, state) {},
+      buildWhen: (previous, current) => previous != current,
+      builder: (context, state) {
+        final favourite = state.favouriteItems.firstWhere(
+          (e) => e.materialNumber == materialInfo.materialNumber,
+          orElse: () => Favourite.empty(),
+        );
+
+        return favourite == Favourite.empty()
+            ? IconButton(
+                icon: const Icon(
+                  Icons.favorite_border_outlined,
+                  color: ZPColors.secondary,
+                ),
+                onPressed: () => context.read<FavouriteBloc>().add(
+                      FavouriteEvent.add(
+                        Favourite(
+                          id: '',
+                          materialNumber: materialInfo.materialNumber,
+                          isFOC: false,
+                          isTenderContract: false,
+                          materialDescription: materialInfo.materialDescription,
+                        ),
+                        false,
+                      ),
+                    ),
+              )
+            : IconButton(
+                icon: const Icon(
+                  Icons.favorite,
+                  color: ZPColors.secondary,
+                ),
+                onPressed: () => context
+                    .read<FavouriteBloc>()
+                    .add(FavouriteEvent.delete(favourite)),
+              );
+      },
     );
   }
 }

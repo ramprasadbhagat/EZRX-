@@ -4,17 +4,17 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 
-class MaterialCode extends ValueObject<String> {
+class MaterialNumber extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  factory MaterialCode(String input) {
-    return MaterialCode._(validateStringNotEmpty(input));
+  factory MaterialNumber(String input) {
+    return MaterialNumber._(validateStringNotEmpty(input));
   }
 
-  String get materialNumber {
+  String get displayMatNo {
     return naIfEmpty(removeLeadingZero(value.getOrElse(() => '')));
   }
 
-  const MaterialCode._(this.value);
+  const MaterialNumber._(this.value);
 }

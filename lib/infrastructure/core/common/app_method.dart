@@ -24,8 +24,10 @@ class AppMethods {
   //  Condition 2: If SG and MY user, then pickAndPack = "include"
   //  Condition 3: rest Cases pickAndPack = ""
 
-  String getPickAndPackValue(bool ispickandpackenabled,
-      {bool isFromBonusSearchAndValidate = false,}) {
+  String getPickAndPackValue(
+    bool ispickandpackenabled, {
+    bool isFromBonusSearchAndValidate = false,
+  }) {
     var country = salesOrgBloc.state.salesOrganisation.salesOrg.country;
     if (country == 'SG' ||
         (country == 'TH' && checkOrderTypeEnable) ||
@@ -49,7 +51,8 @@ class AppMethods {
     var salesOrgState = salesOrgBloc.state;
     if (myUser.role.type.loginUserType == 'salesRep' &&
         !salesOrgState.configs.disableOrderType) {
-      if (salesOrgState.salesOrganisation.salesOrg.country == 'TH' && !myUser.enableOrderType) {
+      if (salesOrgState.salesOrganisation.salesOrg.country == 'TH' &&
+          !myUser.enableOrderType) {
         return false;
       }
 

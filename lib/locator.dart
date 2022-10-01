@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/core/search/search_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_list/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/material/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_query_mutation.dart';
@@ -62,6 +63,10 @@ import 'package:ezrxmobile/infrastructure/material/datasource/material_list_loca
 import 'package:ezrxmobile/infrastructure/material/datasource/material_list_remote_datasource.dart';
 import 'package:ezrxmobile/infrastructure/material/datasource/materials_query.dart';
 import 'package:ezrxmobile/infrastructure/material/repository/material_list_repository.dart';
+import 'package:ezrxmobile/infrastructure/favourites/datasource/favourite_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/favourites/datasource/favourite_remote.dart';
+import 'package:ezrxmobile/infrastructure/favourites/datasource/favourites_local.dart';
+import 'package:ezrxmobile/infrastructure/favourites/repository/favourite_repository.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/routes/router_observer.dart';
 import 'package:get_it/get_it.dart';
@@ -242,6 +247,40 @@ void setupLocator() {
     ),
   );
 
+  //============================================================
+  //  Favourite
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => FavouriteLocalDataSource(),
+  );
+
+  locator.registerLazySingleton(
+    () => FavouriteQueryMutation(),
+  );
+  locator.registerLazySingleton(
+    () => FavouriteRemoteDataSource(
+      user: locator<UserBloc>(),
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      favouriteQueryMutation: locator<FavouriteQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => FavouriteRepository(
+      config: locator<Config>(),
+      localDataSource: locator<FavouriteLocalDataSource>(),
+      remoteDataSource: locator<FavouriteRemoteDataSource>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => FavouriteBloc(
+      favouriteRepository: locator<FavouriteRepository>(),
+      // shipToCodeBloc: locator<ShipToCodeBloc>(),
+    ),
+  );
   //============================================================
   //  Sales Org
   //

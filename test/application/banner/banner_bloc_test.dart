@@ -41,7 +41,6 @@ void main() {
   final salesOrganisation2601 = SalesOrganisation(
       salesOrg: salesOrg2601, customerInfos: <SalesOrgCustomerInfo>[]);
 
-
   setUpAll(() {
     locator = GetIt.instance;
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
