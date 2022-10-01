@@ -6,6 +6,7 @@ abstract class ZPColors {
   static const Color darkGreen = Color.fromRGBO(128, 128, 0, 1.0);
   static const Color darkerGreen = Color.fromRGBO(5, 38, 8, 1.0);
   static const Color lightGray = Color.fromRGBO(179, 179, 179, 1.0);
+  static const Color extraLightGray = Color.fromRGBO(242, 242, 242, 1.0);
   static const Color white = Color.fromRGBO(250, 250, 250, 1);
 
   static const Color error = Color.fromRGBO(227, 23, 16, 1);

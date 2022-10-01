@@ -35,8 +35,8 @@ class MaterialListRemoteDataSource {
     required SalesOrganisationConfigs salesOrgConfig,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required int first,
-    required int pageIndex,
+    required int pageSize,
+    required int offset,
     required String orderBy,
     required String searchKey,
   }) async {
@@ -49,8 +49,8 @@ class MaterialListRemoteDataSource {
         'salesOrganisation': salesOrganisation.salesOrg.getOrCrash(),
         'excludePrincipal': salesOrgConfig.getExcludePrincipal,
         'plants': [],
-        'first': first,
-        'after': pageIndex,
+        'first': pageSize,
+        'after': offset,
         'cached': true,
         'orderBy': orderBy,
         'language': salesOrgConfig.getConfigLangauge,
@@ -62,10 +62,7 @@ class MaterialListRemoteDataSource {
           MapEntry('customerSoldToCode', customerCodeInfo.customerCodeSoldTo),
           MapEntry('customerShipToCode', shipToInfo.shipToCustomerCode),
           MapEntry('gimmickMaterial', salesOrgConfig.enableGimmickMaterial),
-          MapEntry(
-            'pickAndPack',
-            appMethods.getPickAndPackValue(false),
-          ),
+          MapEntry('pickAndPack', appMethods.getPickAndPackValue(false)),
         ]);
       } else {
         variables.addEntries([

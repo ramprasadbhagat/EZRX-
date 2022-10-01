@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/core/search/search_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_list/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/material/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_query_mutation.dart';
@@ -57,16 +58,20 @@ import 'package:ezrxmobile/infrastructure/account/datasource/user_query_mutation
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
+import 'package:ezrxmobile/infrastructure/material/datasource/material_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
 import 'package:ezrxmobile/infrastructure/material/datasource/material_list_local.dart';
-import 'package:ezrxmobile/infrastructure/material/datasource/material_list_remote_datasource.dart';
 import 'package:ezrxmobile/infrastructure/material/datasource/materials_query.dart';
 import 'package:ezrxmobile/infrastructure/material/repository/material_list_repository.dart';
 import 'package:ezrxmobile/infrastructure/favourites/datasource/favourite_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/favourites/datasource/favourite_remote.dart';
 import 'package:ezrxmobile/infrastructure/favourites/datasource/favourites_local.dart';
 import 'package:ezrxmobile/infrastructure/favourites/repository/favourite_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_history_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_history_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_history_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/order_history_repository.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/routes/router_observer.dart';
 import 'package:get_it/get_it.dart';
@@ -379,11 +384,13 @@ void setupLocator() {
 
   locator.registerLazySingleton(() => AnnouncementQueryMutation());
 
-  locator.registerLazySingleton(() => AnnouncementRemoteDataSource(
-        httpService: locator<HttpService>(),
-        queryMutation: locator<AnnouncementQueryMutation>(),
-        exceptionHandler: locator<DataSourceExceptionHandler>(),
-      ));
+  locator.registerLazySingleton(
+    () => AnnouncementRemoteDataSource(
+      httpService: locator<HttpService>(),
+      queryMutation: locator<AnnouncementQueryMutation>(),
+      exceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
 
   locator.registerLazySingleton(() => AnnouncementLocalDataSource());
 
@@ -487,13 +494,15 @@ void setupLocator() {
 
   locator.registerLazySingleton(() => MaterialListLocalDataSource());
 
-  locator.registerLazySingleton(() => MaterialListRemoteDataSource(
-        httpService: locator<HttpService>(),
-        appMethods: locator<AppMethods>(),
-        materialListQuery: locator<MaterialsWithMetaQuery>(),
-        dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-        config: locator<Config>(),
-      ));
+  locator.registerLazySingleton(
+    () => MaterialListRemoteDataSource(
+      httpService: locator<HttpService>(),
+      appMethods: locator<AppMethods>(),
+      materialListQuery: locator<MaterialsWithMetaQuery>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      config: locator<Config>(),
+    ),
+  );
 
   locator.registerLazySingleton(
     () => MaterialListRepository(
@@ -511,6 +520,38 @@ void setupLocator() {
       customerCodeBloc: locator<CustomerCodeBloc>(),
       shipToCodeBloc: locator<ShipToCodeBloc>(),
       searchBloc: locator<SearchBloc>(),
+    ),
+  );
+
+  //============================================================
+  //  Order History
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => OrderHistoryLocalDataSource());
+  locator.registerLazySingleton(() => OrderHistoryQueryMutation());
+  locator.registerLazySingleton(
+    () => OrderHistoryRemoteDataSource(
+      config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      httpService: locator<HttpService>(),
+      orderHistoryQueryMutation: locator<OrderHistoryQueryMutation>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => OrderHistoryRepository(
+      config: locator<Config>(),
+      localDataSource: locator<OrderHistoryLocalDataSource>(),
+      orderHistoryRemoteDataSource: locator<OrderHistoryRemoteDataSource>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => OrderHistoryListBloc(
+      orderHistoryRepository: locator<OrderHistoryRepository>(),
+      customerCodeBloc: locator<CustomerCodeBloc>(),
+      shipToCodeBloc: locator<ShipToCodeBloc>(),
+      userBloc: locator<UserBloc>(),
     ),
   );
 }

@@ -1,6 +1,9 @@
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 
+//  This is the temporary solution
+//  Try to don't put new logic here
+//  Before adding new logic here please gain Auron approval
 class AppMethods {
   late UserBloc userBloc;
   late SalesOrgBloc salesOrgBloc;

@@ -11,7 +11,7 @@ final appThemeData = {
   AppTheme.light: ThemeData.light().copyWith(
     textTheme: ThemeData.light().textTheme.apply(fontFamily: 'Poppins'),
     primaryTextTheme: ThemeData.light().textTheme.apply(fontFamily: 'Poppins'),
-    scaffoldBackgroundColor: ZPColors.white,
+    scaffoldBackgroundColor: ZPColors.extraLightGray,
     primaryColor: ZPColors.primary,
     // primarySwatch: ZPColors.kPrimaryColor,
     // fontFamily: 'Poppins',
@@ -38,7 +38,9 @@ final appThemeData = {
       unselectedItemColor: ZPColors.lightGray,
     ),
     tabBarTheme: const TabBarTheme(
-      indicator: BoxDecoration(color: ZPColors.primary),
+      indicator: BoxDecoration(
+        color: ZPColors.primary,
+      ),
       labelColor: ZPColors.primary,
       unselectedLabelColor: ZPColors.lightGray,
       // labelStyle: TextStyle(
@@ -50,10 +52,14 @@ final appThemeData = {
       selectionHandleColor: ZPColors.primary,
     ),
     inputDecorationTheme: const InputDecorationTheme(
-      floatingLabelStyle: TextStyle(color: ZPColors.primary),
+      floatingLabelStyle: TextStyle(
+        color: ZPColors.primary,
+      ),
       // labelStyle: TextStyle(color: ZPColors.primary),
       focusedBorder: UnderlineInputBorder(
-        borderSide: BorderSide(color: ZPColors.primary),
+        borderSide: BorderSide(
+          color: ZPColors.primary,
+        ),
       ),
       // enabledBorder: UnderlineInputBorder(
       //   borderSide: BorderSide(color: ZPColors.primary),
@@ -70,10 +76,16 @@ final appThemeData = {
       // contentPadding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
     ),
     checkboxTheme: CheckboxThemeData(
-      checkColor: MaterialStateProperty.all(ZPColors.white),
-      fillColor: MaterialStateProperty.all(ZPColors.primary),
+      checkColor: MaterialStateProperty.all(
+        ZPColors.white,
+      ),
+      fillColor: MaterialStateProperty.all(
+        ZPColors.primary,
+      ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4.0),
+        borderRadius: BorderRadius.circular(
+          4.0,
+        ),
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -82,7 +94,9 @@ final appThemeData = {
         // onPrimary: AppColors.black80,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
-            Radius.circular(8.0),
+            Radius.circular(
+              8.0,
+            ),
           ),
         ), //const StadiumBorder(),
         // textStyle: ThemeData.light().textTheme.bodyText2,
@@ -95,13 +109,18 @@ final appThemeData = {
         //   borderRadius: BorderRadius.circular(8),
         // ),
         elevation: 0,
-        minimumSize: const Size(120, 40),
+        minimumSize: const Size(
+          120,
+          40,
+        ),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: ZPColors.primary,
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(
+          15,
+        ),
       ),
     ),
     buttonTheme: const ButtonThemeData(
@@ -109,23 +128,33 @@ final appThemeData = {
       textTheme: ButtonTextTheme.primary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(8.0),
+          Radius.circular(
+            8.0,
+          ),
         ),
       ),
     ),
     snackBarTheme: const SnackBarThemeData(
-      contentTextStyle: TextStyle(fontWeight: FontWeight.w600),
+      contentTextStyle: TextStyle(
+        fontWeight: FontWeight.w600,
+      ),
       behavior: SnackBarBehavior.floating,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+        borderRadius: BorderRadius.all(
+          Radius.circular(
+            8.0,
+          ),
+        ),
       ),
     ),
     cardTheme: const CardTheme(
       elevation: 0,
-      margin: EdgeInsets.zero,
+      margin: EdgeInsets.only(top: 8.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(8.0),
+          Radius.circular(
+            8.0,
+          ),
         ),
       ),
     ),

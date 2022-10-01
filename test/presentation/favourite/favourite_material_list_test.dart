@@ -6,7 +6,7 @@ import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/material/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-import 'package:ezrxmobile/presentation/favorites/favourite_list.dart';
+import 'package:ezrxmobile/presentation/favorites/favourite_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,8 +57,8 @@ void main() {
     });
 
     Widget getWUT(Config config) {
-      return FavouriteList(
-        item: mockFavourite1,
+      return FavouriteListTile(
+        favourite: mockFavourite1,
       );
     }
 
@@ -91,9 +91,9 @@ void main() {
       await tester.pumpWidget(getScopedWidget(config));
       await tester.pump();
 
-      final favouriteTile = find.byType(FavouriteList);
+      final favouriteListTile = find.byType(FavouriteListTile);
       expect(
-        favouriteTile,
+        favouriteListTile,
         findsOneWidget,
       );
     });

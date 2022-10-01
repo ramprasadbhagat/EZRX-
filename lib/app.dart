@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/core/search/search_bloc.dart';
 import 'package:ezrxmobile/application/material/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_list/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -134,6 +135,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<FavouriteBloc>(
           create: (context) => locator<FavouriteBloc>(),
+        ),
+        BlocProvider<OrderHistoryListBloc>(
+          create: (context) => locator<OrderHistoryListBloc>(),
         ),
       ],
       child: MaterialApp.router(

@@ -64,6 +64,7 @@ class SavedOrderListBloc
           state.copyWith(
             isFetching: true,
             savedOrders: [],
+            nextPageIndex: 0,
             apiFailureOrSuccessOption: none(),
           ),
         );
@@ -91,7 +92,7 @@ class SavedOrderListBloc
                 savedOrders: savedOrders,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
-                canLoadingMore: savedOrders.length >= _defaultPageSize,
+                canLoadMore: savedOrders.length >= _defaultPageSize,
                 nextPageIndex: 1,
               ),
             );
@@ -99,7 +100,7 @@ class SavedOrderListBloc
         );
       },
       loadMore: (_) async {
-        if (state.isFetching || !state.canLoadingMore) return;
+        if (state.isFetching || !state.canLoadMore) return;
         emit(
           state.copyWith(
             isFetching: true,
@@ -132,7 +133,7 @@ class SavedOrderListBloc
                 savedOrders: newSavedOrders,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
-                canLoadingMore: savedOrders.length >= _defaultPageSize,
+                canLoadMore: savedOrders.length >= _defaultPageSize,
                 nextPageIndex: state.nextPageIndex + 1,
               ),
             );

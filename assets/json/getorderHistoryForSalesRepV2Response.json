@@ -1,0 +1,94 @@
+
+{
+  "data": {
+    "orderHistoryForSalesRepV2": {
+      "OrderHistory": [
+        {
+          "OrderBasicInformation": {
+            "SoldTo": "0030026133",
+            "ShipTo": "0030026133",
+            "CompanyName": "Changi General Hospital Pte Ltd   "
+          },
+          "OrderItems": [
+            {
+              "MaterialCode": "000000000026175702",
+              "MaterialDescription": "BASELATE EXTRACTION BAR",
+              "Qty": 1,
+              "UnitPrice": 0,
+              "TotalPrice": 0,
+              "Status": "Failed",
+              "DeliveryDate": "",
+              "DeliveryTime": "",
+              "LineNumber": "000010",
+              "Tax": 0,
+              "OrderType": "ZPFB",
+              "OrderNumber": "a7f19a0a-afe0-4e6d-a674-ad5a36105489",
+              "EZRXNumber": "EZRX-7f0cf12",
+              "CreatedDate": "20220910",
+              "CreatedTime": "130454",
+              "OrderBy": "Hsiao Jiun Ho",
+              "PurchaseOrderType": "MRXR"
+            },
+            {
+              "MaterialCode": "000000000026175700",
+              "MaterialDescription": "COMPREHENSIVEMOD    CALCARPLANER 54MM",
+              "Qty": 1,
+              "UnitPrice": 0,
+              "TotalPrice": 0,
+              "Status": "Failed",
+              "DeliveryDate": "",
+              "DeliveryTime": "",
+              "LineNumber": "000020",
+              "Tax": 0,
+              "OrderType": "ZPOR",
+              "OrderNumber": "852a23d6-c51d-485b-bda8-0f3b2f7594e5",
+              "EZRXNumber": "EZRX-0ee4214",
+              "CreatedDate": "20220910",
+              "CreatedTime": "130420",
+              "OrderBy": "Hsiao Jiun Ho",
+              "PurchaseOrderType": "MRXR"
+            },
+            {
+              "MaterialCode": "000000000026175701",
+              "MaterialDescription": "COMPREHENSIVEMOD    CALCARPLANER 58MM",
+              "Qty": 1,
+              "UnitPrice": 0,
+              "TotalPrice": 0,
+              "Status": "Failed",
+              "DeliveryDate": "",
+              "DeliveryTime": "",
+              "LineNumber": "000030",
+              "Tax": 0,
+              "OrderType": "ZPOR",
+              "OrderNumber": "852a23d6-c51d-485b-bda8-0f3b2f7594e5",
+              "EZRXNumber": "EZRX-0ee4214",
+              "CreatedDate": "20220910",
+              "CreatedTime": "130420",
+              "OrderBy": "Hsiao Jiun Ho",
+              "PurchaseOrderType": "MRXR"
+            },
+            {
+              "MaterialCode": "000000000026175702",
+              "MaterialDescription": "BASELATE EXTRACTION BAR",
+              "Qty": 1,
+              "UnitPrice": 0,
+              "TotalPrice": 0,
+              "Status": "Failed",
+              "DeliveryDate": "",
+              "DeliveryTime": "",
+              "LineNumber": "000010",
+              "Tax": 0,
+              "OrderType": "ZPOR",
+              "OrderNumber": "852a23d6-c51d-485b-bda8-0f3b2f7594e5",
+              "EZRXNumber": "EZRX-0ee4214",
+              "CreatedDate": "20220910",
+              "CreatedTime": "130420",
+              "OrderBy": "Hsiao Jiun Ho",
+              "PurchaseOrderType": "MRXR"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

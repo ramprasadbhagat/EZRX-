@@ -145,8 +145,8 @@ void main() {
             salesOrgConfig: mockSalesOrganisationConfigs,
             customerCodeInfo: mockCustomerCodeInfo,
             shipToInfo: mockShipToInfo,
-            first: _defaultPageSize,
-            pageIndex: 0,
+            pageSize: _defaultPageSize,
+            offset: 0,
             orderBy: 'materialDescription_asc',
             searchKey: '')).thenAnswer(
           (invocation) async => const Left(
@@ -187,8 +187,8 @@ void main() {
             salesOrgConfig: mockSalesOrganisationConfigs,
             customerCodeInfo: mockCustomerCodeInfo,
             shipToInfo: mockShipToInfo,
-            first: _defaultPageSize,
-            pageIndex: 0,
+            pageSize: _defaultPageSize,
+            offset: 0,
             orderBy: 'materialDescription_asc',
             searchKey: '')).thenAnswer(
           (invocation) async => Right(materialListMock),
@@ -232,8 +232,8 @@ void main() {
             salesOrgConfig: mockSalesOrganisationConfigs,
             customerCodeInfo: mockCustomerCodeInfo,
             shipToInfo: mockShipToInfo,
-            first: _defaultPageSize,
-            pageIndex: 0,
+            pageSize: _defaultPageSize,
+            offset: 0,
             orderBy: 'materialDescription_asc',
             searchKey: '')).thenAnswer(
           (invocation) async => Right(materialListMock),
@@ -244,8 +244,8 @@ void main() {
             salesOrgConfig: mockSalesOrganisationConfigs,
             customerCodeInfo: mockCustomerCodeInfo,
             shipToInfo: mockShipToInfo,
-            first: _defaultPageSize,
-            pageIndex: materialListMock.length,
+            pageSize: _defaultPageSize,
+            offset: materialListMock.length,
             orderBy: 'materialDescription_asc',
             searchKey: '')).thenAnswer(
           (invocation) async => Right(materialListMock),
@@ -300,8 +300,8 @@ void main() {
             salesOrgConfig: mockSalesOrganisationConfigs,
             customerCodeInfo: mockCustomerCodeInfo,
             shipToInfo: mockShipToInfo,
-            first: _defaultPageSize,
-            pageIndex: 0,
+            pageSize: _defaultPageSize,
+            offset: 0,
             orderBy: 'materialDescription_asc',
             searchKey: '')).thenAnswer(
           (invocation) async => Right(materialListMock),
@@ -312,8 +312,8 @@ void main() {
             salesOrgConfig: mockSalesOrganisationConfigs,
             customerCodeInfo: mockCustomerCodeInfo,
             shipToInfo: mockShipToInfo,
-            first: _defaultPageSize,
-            pageIndex: materialListMock.length,
+            pageSize: _defaultPageSize,
+            offset: materialListMock.length,
             orderBy: 'materialDescription_asc',
             searchKey: '')).thenAnswer(
           (invocation) async => const Left(
@@ -360,7 +360,7 @@ void main() {
           shipToCodeBloc: shipToCodeMockBloc,
           searchBloc: searchMockBloc,
           materialListRepository: materialListMockRepository),
-       act: (MaterialListBloc bloc) {
+      act: (MaterialListBloc bloc) {
         bloc.add(const MaterialListEvent.fetch());
         bloc.add(const MaterialListEvent.loadMore());
       },
@@ -371,8 +371,8 @@ void main() {
             salesOrgConfig: mockSalesOrganisationConfigs,
             customerCodeInfo: mockCustomerCodeInfo,
             shipToInfo: mockShipToInfo,
-            first: _defaultPageSize,
-            pageIndex: 0,
+            pageSize: _defaultPageSize,
+            offset: 0,
             orderBy: 'materialDescription_asc',
             searchKey: '')).thenAnswer(
           (invocation) async => Right(materialListMock),
@@ -383,8 +383,8 @@ void main() {
             salesOrgConfig: mockSalesOrganisationConfigs,
             customerCodeInfo: mockCustomerCodeInfo,
             shipToInfo: mockShipToInfo,
-            first: _defaultPageSize,
-            pageIndex: materialListMock.length,
+            pageSize: _defaultPageSize,
+            offset: materialListMock.length,
             orderBy: 'materialDescription_asc',
             searchKey: '')).thenAnswer(
           (invocation) async => Right(materialListMock),

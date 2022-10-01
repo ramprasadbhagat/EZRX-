@@ -103,6 +103,6 @@ dart_code_metrics:
     - avoid-unnecessary-setstate
     - always-remove-listener
     - avoid-use-expanded-as-spacer
-    - prefer-correct-edge-insets-constructor
+    # - prefer-correct-edge-insets-constructor
     - avoid-returning-widgets
     

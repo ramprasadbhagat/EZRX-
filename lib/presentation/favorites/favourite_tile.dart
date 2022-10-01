@@ -5,14 +5,15 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FavouriteList extends StatelessWidget {
-  final Favourite item;
-  const FavouriteList({Key? key, required this.item}) : super(key: key);
+class FavouriteListTile extends StatelessWidget {
+  final Favourite favourite;
+  const FavouriteListTile({Key? key, required this.favourite})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      key: ValueKey(item.materialNumber),
+      key: ValueKey(favourite.materialNumber),
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Row(
@@ -37,8 +38,8 @@ class FavouriteList extends StatelessWidget {
                                 style: DefaultTextStyle.of(context).style,
                                 children: <TextSpan>[
                                   TextSpan(
-                                    text:
-                                        item.materialDescription.toUpperCase(),
+                                    text: favourite.materialDescription
+                                        .toUpperCase(),
                                     style: const TextStyle(
                                       color: ZPColors
                                           .darkerGreen, // zpDarkerGreenColor,
@@ -58,12 +59,12 @@ class FavouriteList extends StatelessWidget {
                             ),
                             onPressed: () => context
                                 .read<FavouriteBloc>()
-                                .add(FavouriteEvent.delete(item)),
+                                .add(FavouriteEvent.delete(favourite)),
                           ),
                         ],
                       ),
                       Text(
-                        "${'Mat No: '.tr()}${item.materialNumber.displayMatNo}",
+                        "${'Mat No: '.tr()}${favourite.materialNumber.displayMatNo}",
                         style: const TextStyle(
                           color: ZPColors.darkGray,
                           fontSize: 12,

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'saved_order_bloc.dart';
+part of 'order_history_list_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$SavedOrderListEvent {
+mixin _$OrderHistoryListEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
@@ -63,20 +63,20 @@ mixin _$SavedOrderListEvent {
 }
 
 /// @nodoc
-abstract class $SavedOrderListEventCopyWith<$Res> {
-  factory $SavedOrderListEventCopyWith(
-          SavedOrderListEvent value, $Res Function(SavedOrderListEvent) then) =
-      _$SavedOrderListEventCopyWithImpl<$Res>;
+abstract class $OrderHistoryListEventCopyWith<$Res> {
+  factory $OrderHistoryListEventCopyWith(OrderHistoryListEvent value,
+          $Res Function(OrderHistoryListEvent) then) =
+      _$OrderHistoryListEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$SavedOrderListEventCopyWithImpl<$Res>
-    implements $SavedOrderListEventCopyWith<$Res> {
-  _$SavedOrderListEventCopyWithImpl(this._value, this._then);
+class _$OrderHistoryListEventCopyWithImpl<$Res>
+    implements $OrderHistoryListEventCopyWith<$Res> {
+  _$OrderHistoryListEventCopyWithImpl(this._value, this._then);
 
-  final SavedOrderListEvent _value;
+  final OrderHistoryListEvent _value;
   // ignore: unused_field
-  final $Res Function(SavedOrderListEvent) _then;
+  final $Res Function(OrderHistoryListEvent) _then;
 }
 
 /// @nodoc
@@ -88,7 +88,7 @@ abstract class _$$_InitializedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitializedCopyWithImpl<$Res>
-    extends _$SavedOrderListEventCopyWithImpl<$Res>
+    extends _$OrderHistoryListEventCopyWithImpl<$Res>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
@@ -105,7 +105,7 @@ class _$_Initialized implements _Initialized {
 
   @override
   String toString() {
-    return 'SavedOrderListEvent.initialized()';
+    return 'OrderHistoryListEvent.initialized()';
   }
 
   @override
@@ -186,7 +186,7 @@ class _$_Initialized implements _Initialized {
   }
 }
 
-abstract class _Initialized implements SavedOrderListEvent {
+abstract class _Initialized implements OrderHistoryListEvent {
   const factory _Initialized() = _$_Initialized;
 }
 
@@ -198,7 +198,7 @@ abstract class _$$_FetchCopyWith<$Res> {
 
 /// @nodoc
 class __$$_FetchCopyWithImpl<$Res>
-    extends _$SavedOrderListEventCopyWithImpl<$Res>
+    extends _$OrderHistoryListEventCopyWithImpl<$Res>
     implements _$$_FetchCopyWith<$Res> {
   __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
       : super(_value, (v) => _then(v as _$_Fetch));
@@ -214,7 +214,7 @@ class _$_Fetch implements _Fetch {
 
   @override
   String toString() {
-    return 'SavedOrderListEvent.fetch()';
+    return 'OrderHistoryListEvent.fetch()';
   }
 
   @override
@@ -295,7 +295,7 @@ class _$_Fetch implements _Fetch {
   }
 }
 
-abstract class _Fetch implements SavedOrderListEvent {
+abstract class _Fetch implements OrderHistoryListEvent {
   const factory _Fetch() = _$_Fetch;
 }
 
@@ -308,7 +308,7 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
 
 /// @nodoc
 class __$$_LoadMoreCopyWithImpl<$Res>
-    extends _$SavedOrderListEventCopyWithImpl<$Res>
+    extends _$OrderHistoryListEventCopyWithImpl<$Res>
     implements _$$_LoadMoreCopyWith<$Res> {
   __$$_LoadMoreCopyWithImpl(
       _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
@@ -325,7 +325,7 @@ class _$_LoadMore implements _LoadMore {
 
   @override
   String toString() {
-    return 'SavedOrderListEvent.loadMore()';
+    return 'OrderHistoryListEvent.loadMore()';
   }
 
   @override
@@ -406,59 +406,59 @@ class _$_LoadMore implements _LoadMore {
   }
 }
 
-abstract class _LoadMore implements SavedOrderListEvent {
+abstract class _LoadMore implements OrderHistoryListEvent {
   const factory _LoadMore() = _$_LoadMore;
 }
 
 /// @nodoc
-mixin _$SavedOrderListState {
-  List<SavedOrder> get savedOrders => throw _privateConstructorUsedError;
+mixin _$OrderHistoryListState {
+  List<OrderHistory> get orderHistoryList => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
   int get nextPageIndex => throw _privateConstructorUsedError;
-  Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
+  Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SavedOrderListStateCopyWith<SavedOrderListState> get copyWith =>
+  $OrderHistoryListStateCopyWith<OrderHistoryListState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SavedOrderListStateCopyWith<$Res> {
-  factory $SavedOrderListStateCopyWith(
-          SavedOrderListState value, $Res Function(SavedOrderListState) then) =
-      _$SavedOrderListStateCopyWithImpl<$Res>;
+abstract class $OrderHistoryListStateCopyWith<$Res> {
+  factory $OrderHistoryListStateCopyWith(OrderHistoryListState value,
+          $Res Function(OrderHistoryListState) then) =
+      _$OrderHistoryListStateCopyWithImpl<$Res>;
   $Res call(
-      {List<SavedOrder> savedOrders,
+      {List<OrderHistory> orderHistoryList,
       bool canLoadMore,
       bool isFetching,
       int nextPageIndex,
-      Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 }
 
 /// @nodoc
-class _$SavedOrderListStateCopyWithImpl<$Res>
-    implements $SavedOrderListStateCopyWith<$Res> {
-  _$SavedOrderListStateCopyWithImpl(this._value, this._then);
+class _$OrderHistoryListStateCopyWithImpl<$Res>
+    implements $OrderHistoryListStateCopyWith<$Res> {
+  _$OrderHistoryListStateCopyWithImpl(this._value, this._then);
 
-  final SavedOrderListState _value;
+  final OrderHistoryListState _value;
   // ignore: unused_field
-  final $Res Function(SavedOrderListState) _then;
+  final $Res Function(OrderHistoryListState) _then;
 
   @override
   $Res call({
-    Object? savedOrders = freezed,
+    Object? orderHistoryList = freezed,
     Object? canLoadMore = freezed,
     Object? isFetching = freezed,
     Object? nextPageIndex = freezed,
-    Object? apiFailureOrSuccessOption = freezed,
+    Object? failureOrSuccessOption = freezed,
   }) {
     return _then(_value.copyWith(
-      savedOrders: savedOrders == freezed
-          ? _value.savedOrders
-          : savedOrders // ignore: cast_nullable_to_non_nullable
-              as List<SavedOrder>,
+      orderHistoryList: orderHistoryList == freezed
+          ? _value.orderHistoryList
+          : orderHistoryList // ignore: cast_nullable_to_non_nullable
+              as List<OrderHistory>,
       canLoadMore: canLoadMore == freezed
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
@@ -471,53 +471,54 @@ class _$SavedOrderListStateCopyWithImpl<$Res>
           ? _value.nextPageIndex
           : nextPageIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      apiFailureOrSuccessOption: apiFailureOrSuccessOption == freezed
-          ? _value.apiFailureOrSuccessOption
-          : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+      failureOrSuccessOption: failureOrSuccessOption == freezed
+          ? _value.failureOrSuccessOption
+          : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
     ));
   }
 }
 
 /// @nodoc
-abstract class _$$_SavedOrderListStateCopyWith<$Res>
-    implements $SavedOrderListStateCopyWith<$Res> {
-  factory _$$_SavedOrderListStateCopyWith(_$_SavedOrderListState value,
-          $Res Function(_$_SavedOrderListState) then) =
-      __$$_SavedOrderListStateCopyWithImpl<$Res>;
+abstract class _$$_OrderHistoryListStateCopyWith<$Res>
+    implements $OrderHistoryListStateCopyWith<$Res> {
+  factory _$$_OrderHistoryListStateCopyWith(_$_OrderHistoryListState value,
+          $Res Function(_$_OrderHistoryListState) then) =
+      __$$_OrderHistoryListStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {List<SavedOrder> savedOrders,
+      {List<OrderHistory> orderHistoryList,
       bool canLoadMore,
       bool isFetching,
       int nextPageIndex,
-      Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 }
 
 /// @nodoc
-class __$$_SavedOrderListStateCopyWithImpl<$Res>
-    extends _$SavedOrderListStateCopyWithImpl<$Res>
-    implements _$$_SavedOrderListStateCopyWith<$Res> {
-  __$$_SavedOrderListStateCopyWithImpl(_$_SavedOrderListState _value,
-      $Res Function(_$_SavedOrderListState) _then)
-      : super(_value, (v) => _then(v as _$_SavedOrderListState));
+class __$$_OrderHistoryListStateCopyWithImpl<$Res>
+    extends _$OrderHistoryListStateCopyWithImpl<$Res>
+    implements _$$_OrderHistoryListStateCopyWith<$Res> {
+  __$$_OrderHistoryListStateCopyWithImpl(_$_OrderHistoryListState _value,
+      $Res Function(_$_OrderHistoryListState) _then)
+      : super(_value, (v) => _then(v as _$_OrderHistoryListState));
 
   @override
-  _$_SavedOrderListState get _value => super._value as _$_SavedOrderListState;
+  _$_OrderHistoryListState get _value =>
+      super._value as _$_OrderHistoryListState;
 
   @override
   $Res call({
-    Object? savedOrders = freezed,
+    Object? orderHistoryList = freezed,
     Object? canLoadMore = freezed,
     Object? isFetching = freezed,
     Object? nextPageIndex = freezed,
-    Object? apiFailureOrSuccessOption = freezed,
+    Object? failureOrSuccessOption = freezed,
   }) {
-    return _then(_$_SavedOrderListState(
-      savedOrders: savedOrders == freezed
-          ? _value._savedOrders
-          : savedOrders // ignore: cast_nullable_to_non_nullable
-              as List<SavedOrder>,
+    return _then(_$_OrderHistoryListState(
+      orderHistoryList: orderHistoryList == freezed
+          ? _value._orderHistoryList
+          : orderHistoryList // ignore: cast_nullable_to_non_nullable
+              as List<OrderHistory>,
       canLoadMore: canLoadMore == freezed
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
@@ -530,9 +531,9 @@ class __$$_SavedOrderListStateCopyWithImpl<$Res>
           ? _value.nextPageIndex
           : nextPageIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      apiFailureOrSuccessOption: apiFailureOrSuccessOption == freezed
-          ? _value.apiFailureOrSuccessOption
-          : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+      failureOrSuccessOption: failureOrSuccessOption == freezed
+          ? _value.failureOrSuccessOption
+          : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
     ));
   }
@@ -540,21 +541,20 @@ class __$$_SavedOrderListStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SavedOrderListState extends _SavedOrderListState {
-  const _$_SavedOrderListState(
-      {required final List<SavedOrder> savedOrders,
+class _$_OrderHistoryListState implements _OrderHistoryListState {
+  const _$_OrderHistoryListState(
+      {required final List<OrderHistory> orderHistoryList,
       required this.canLoadMore,
       required this.isFetching,
       required this.nextPageIndex,
-      required this.apiFailureOrSuccessOption})
-      : _savedOrders = savedOrders,
-        super._();
+      required this.failureOrSuccessOption})
+      : _orderHistoryList = orderHistoryList;
 
-  final List<SavedOrder> _savedOrders;
+  final List<OrderHistory> _orderHistoryList;
   @override
-  List<SavedOrder> get savedOrders {
+  List<OrderHistory> get orderHistoryList {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_savedOrders);
+    return EqualUnmodifiableListView(_orderHistoryList);
   }
 
   @override
@@ -564,58 +564,57 @@ class _$_SavedOrderListState extends _SavedOrderListState {
   @override
   final int nextPageIndex;
   @override
-  final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
+  final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
 
   @override
   String toString() {
-    return 'SavedOrderListState(savedOrders: $savedOrders, canLoadMore: $canLoadMore, isFetching: $isFetching, nextPageIndex: $nextPageIndex, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
+    return 'OrderHistoryListState(orderHistoryList: $orderHistoryList, canLoadMore: $canLoadMore, isFetching: $isFetching, nextPageIndex: $nextPageIndex, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SavedOrderListState &&
+            other is _$_OrderHistoryListState &&
             const DeepCollectionEquality()
-                .equals(other._savedOrders, _savedOrders) &&
+                .equals(other._orderHistoryList, _orderHistoryList) &&
             const DeepCollectionEquality()
                 .equals(other.canLoadMore, canLoadMore) &&
             const DeepCollectionEquality()
                 .equals(other.isFetching, isFetching) &&
             const DeepCollectionEquality()
                 .equals(other.nextPageIndex, nextPageIndex) &&
-            const DeepCollectionEquality().equals(
-                other.apiFailureOrSuccessOption, apiFailureOrSuccessOption));
+            const DeepCollectionEquality()
+                .equals(other.failureOrSuccessOption, failureOrSuccessOption));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_savedOrders),
+      const DeepCollectionEquality().hash(_orderHistoryList),
       const DeepCollectionEquality().hash(canLoadMore),
       const DeepCollectionEquality().hash(isFetching),
       const DeepCollectionEquality().hash(nextPageIndex),
-      const DeepCollectionEquality().hash(apiFailureOrSuccessOption));
+      const DeepCollectionEquality().hash(failureOrSuccessOption));
 
   @JsonKey(ignore: true)
   @override
-  _$$_SavedOrderListStateCopyWith<_$_SavedOrderListState> get copyWith =>
-      __$$_SavedOrderListStateCopyWithImpl<_$_SavedOrderListState>(
+  _$$_OrderHistoryListStateCopyWith<_$_OrderHistoryListState> get copyWith =>
+      __$$_OrderHistoryListStateCopyWithImpl<_$_OrderHistoryListState>(
           this, _$identity);
 }
 
-abstract class _SavedOrderListState extends SavedOrderListState {
-  const factory _SavedOrderListState(
-      {required final List<SavedOrder> savedOrders,
+abstract class _OrderHistoryListState implements OrderHistoryListState {
+  const factory _OrderHistoryListState(
+      {required final List<OrderHistory> orderHistoryList,
       required final bool canLoadMore,
       required final bool isFetching,
       required final int nextPageIndex,
       required final Option<Either<ApiFailure, dynamic>>
-          apiFailureOrSuccessOption}) = _$_SavedOrderListState;
-  const _SavedOrderListState._() : super._();
+          failureOrSuccessOption}) = _$_OrderHistoryListState;
 
   @override
-  List<SavedOrder> get savedOrders;
+  List<OrderHistory> get orderHistoryList;
   @override
   bool get canLoadMore;
   @override
@@ -623,9 +622,9 @@ abstract class _SavedOrderListState extends SavedOrderListState {
   @override
   int get nextPageIndex;
   @override
-  Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
+  Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_SavedOrderListStateCopyWith<_$_SavedOrderListState> get copyWith =>
+  _$$_OrderHistoryListStateCopyWith<_$_OrderHistoryListState> get copyWith =>
       throw _privateConstructorUsedError;
 }

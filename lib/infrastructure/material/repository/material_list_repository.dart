@@ -10,7 +10,7 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/material/entities/material_info.dart';
 import 'package:ezrxmobile/domain/material/repository/i_material_list_repository.dart';
 import 'package:ezrxmobile/infrastructure/material/datasource/material_list_local.dart';
-import 'package:ezrxmobile/infrastructure/material/datasource/material_list_remote_datasource.dart';
+import 'package:ezrxmobile/infrastructure/material/datasource/material_list_remote.dart';
 
 class MaterialListRepository implements IMaterialListRepository {
   final Config config;
@@ -30,8 +30,8 @@ class MaterialListRepository implements IMaterialListRepository {
     required SalesOrganisationConfigs salesOrgConfig,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required int first,
-    required int pageIndex,
+    required int pageSize,
+    required int offset,
     required String orderBy,
     required String searchKey,
   }) async {
@@ -56,8 +56,8 @@ class MaterialListRepository implements IMaterialListRepository {
         salesOrgConfig: salesOrgConfig,
         customerCodeInfo: customerCodeInfo,
         shipToInfo: shipToInfo,
-        first: first,
-        pageIndex: pageIndex,
+        pageSize: pageSize,
+        offset: offset,
         orderBy: orderBy,
         searchKey: searchKey,
       );

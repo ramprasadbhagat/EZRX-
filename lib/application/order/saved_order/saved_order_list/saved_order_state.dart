@@ -5,7 +5,7 @@ class SavedOrderListState with _$SavedOrderListState {
   const SavedOrderListState._();
   const factory SavedOrderListState({
     required List<SavedOrder> savedOrders,
-    required bool canLoadingMore,
+    required bool canLoadMore,
     required bool isFetching,
     required int nextPageIndex,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
@@ -13,7 +13,7 @@ class SavedOrderListState with _$SavedOrderListState {
 
   factory SavedOrderListState.initial() => SavedOrderListState(
         savedOrders: <SavedOrder>[],
-        canLoadingMore: true,
+        canLoadMore: true,
         isFetching: false,
         nextPageIndex: 0,
         apiFailureOrSuccessOption: none(),

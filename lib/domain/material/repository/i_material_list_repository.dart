@@ -14,8 +14,8 @@ abstract class IMaterialListRepository {
     required SalesOrganisationConfigs salesOrgConfig,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required int first,
-    required int pageIndex,
+    required int pageSize,
+    required int offset,
     required String orderBy,
     required String searchKey,
   });

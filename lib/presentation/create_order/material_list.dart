@@ -13,27 +13,13 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-late ScrollController _scrollController;
-
-class MaterialListPage extends StatefulWidget {
+class MaterialListPage extends StatelessWidget {
   const MaterialListPage({Key? key}) : super(key: key);
-
-  @override
-  State<MaterialListPage> createState() => _MaterialListPageState();
-}
-
-class _MaterialListPageState extends State<MaterialListPage> {
-  @override
-  void initState() {
-    super.initState();
-    _scrollController = ScrollController();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: const Key('materialListPage'),
-      backgroundColor: ZPColors.white,
       appBar: PreferredSize(
         preferredSize: const Size(double.infinity, 60),
         child: AppSearchBar(
@@ -80,12 +66,6 @@ class _MaterialListPageState extends State<MaterialListPage> {
         },
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
   }
 }
 

@@ -90,7 +90,7 @@ void main() {
         SavedOrderListState.initial().copyWith(
           savedOrders: savedOrdersMock,
           nextPageIndex: 1,
-          canLoadingMore: true,
+          canLoadMore: true,
         ),
       );
 
@@ -118,7 +118,7 @@ void main() {
         SavedOrderListState.initial().copyWith(
           savedOrders: savedOrdersMock,
           nextPageIndex: 1,
-          canLoadingMore: true,
+          canLoadMore: true,
           isFetching: true,
         ),
       );

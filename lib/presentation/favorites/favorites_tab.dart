@@ -6,7 +6,7 @@ import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
-import 'package:ezrxmobile/presentation/favorites/favourite_list.dart';
+import 'package:ezrxmobile/presentation/favorites/favourite_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -61,8 +61,8 @@ class FavoritesTab extends StatelessWidget {
                         ),
                     isLoading: state.isLoading,
                     onLoadingMore: () {},
-                    itemBuilder: (context, index, item) => FavouriteList(
-                      item: item,
+                    itemBuilder: (context, index, item) => FavouriteListTile(
+                      favourite: item,
                     ),
                     items: state.favouriteItems,
                   );

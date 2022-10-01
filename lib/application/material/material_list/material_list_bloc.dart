@@ -17,7 +17,7 @@ part 'material_list_event.dart';
 part 'material_list_state.dart';
 part 'material_list_bloc.freezed.dart';
 
-const int _sizePerFetch = 10;
+const int _pageSize = 10;
 
 class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
   final IMaterialListRepository materialListRepository;
@@ -37,7 +37,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
     required this.materialListRepository,
   }) : super(MaterialListState.initial()) {
     on<MaterialListEvent>(_onEvent);
-    if(shipToCodeBloc.state.shipToInfo!=ShipToInfo.empty()){
+    if (shipToCodeBloc.state.shipToInfo != ShipToInfo.empty()) {
       add(const MaterialListEvent.fetch());
     }
     _shipToBlocSubscription = shipToCodeBloc.stream.listen((state) {
@@ -82,8 +82,8 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           salesOrgConfig: salesOrgBloc.state.configs,
           customerCodeInfo: customerCodeBloc.state.customeCodeInfo,
           shipToInfo: shipToCodeBloc.state.shipToInfo,
-          first: _sizePerFetch,
-          pageIndex: state.nextPageIndex,
+          pageSize: _pageSize,
+          offset: state.nextPageIndex,
           orderBy: 'materialDescription_asc',
           searchKey: state.searchKey,
         );
@@ -105,7 +105,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
                 materialList: materialList,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
-                canLoadMore: materialList.length >= _sizePerFetch,
+                canLoadMore: materialList.length >= _pageSize,
                 nextPageIndex: 1,
               ),
             );
@@ -115,7 +115,8 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
             // }
           },
         );
-      }, loadMore: (_) async {  
+      },
+      loadMore: (_) async {
         if (state.isFetching || !state.canLoadMore) return;
         emit(
           state.copyWith(
@@ -129,8 +130,8 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           salesOrgConfig: salesOrgBloc.state.configs,
           customerCodeInfo: customerCodeBloc.state.customeCodeInfo,
           shipToInfo: shipToCodeBloc.state.shipToInfo,
-          first: _sizePerFetch,
-          pageIndex: state.materialList.length,
+          pageSize: _pageSize,
+          offset: state.materialList.length,
           orderBy: 'materialDescription_asc',
           searchKey: state.searchKey,
         );
@@ -152,7 +153,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
                 materialList: newSavedOrders,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
-                canLoadMore: materialList.length >= _sizePerFetch,
+                canLoadMore: materialList.length >= _pageSize,
                 nextPageIndex: state.nextPageIndex + 1,
               ),
             );
