@@ -12,6 +12,7 @@ import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:ezrxmobile/presentation/home_tab.dart';
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_list_page.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
+import 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route,Tab',
@@ -21,6 +22,7 @@ import 'package:ezrxmobile/presentation/splash/splash_page.dart';
     AutoRoute(path: 'login_on_behalf', page: LoginOnBehalfPage),
     AutoRoute(path: 'settings', page: SettingsPage),
     AutoRoute(path: 'web_view_page', page: WebViewPage),
+    AutoRoute(path: 'change_password_page', page: ChangePasswordPage),
     AutoRoute(path: 'customer_search_page', page: CustomerSearchPage),
     AutoRoute(path: 'material_list_page', page: MaterialListPage),
     AutoRoute(

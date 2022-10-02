@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/core/search/search_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_list/saved_order_bloc.dart';
@@ -33,7 +34,10 @@ import 'package:ezrxmobile/infrastructure/announcement/repository/announcement_r
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
+import 'package:ezrxmobile/infrastructure/auth/datasource/change_password_local.dart';
+import 'package:ezrxmobile/infrastructure/auth/datasource/change_password_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
+import 'package:ezrxmobile/infrastructure/auth/repository/change_password_repository.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_local.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_remote.dart';
@@ -499,8 +503,8 @@ void setupLocator() {
       httpService: locator<HttpService>(),
       appMethods: locator<AppMethods>(),
       materialListQuery: locator<MaterialsWithMetaQuery>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
       config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
 
@@ -520,6 +524,36 @@ void setupLocator() {
       customerCodeBloc: locator<CustomerCodeBloc>(),
       shipToCodeBloc: locator<ShipToCodeBloc>(),
       searchBloc: locator<SearchBloc>(),
+    ),
+  );
+
+  //============================================================
+  //  Reset Password
+  //
+  //============================================================
+  locator.registerLazySingleton(() => ChangePasswordLocalDataSource());
+
+  locator.registerLazySingleton(
+    () => ChangePasswordRemoteDataSource(
+      httpService: locator<HttpService>(),
+      authQueryMutation: locator<AuthQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      config: locator<Config>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ChangePasswordRepository(
+      config: locator<Config>(),
+      localDataSource: locator<ChangePasswordLocalDataSource>(),
+      changePasswordRemoteDataSource: locator<ChangePasswordRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ResetPasswordBloc(
+      changePasswordRepository: locator<ChangePasswordRepository>(),
+      userBloc: locator<UserBloc>(),
     ),
   );
 

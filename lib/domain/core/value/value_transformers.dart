@@ -1,3 +1,5 @@
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+
 String stringCapitalize(String text) {
   if (text.isEmpty) return '';
   if (text.length == 1) return text;
@@ -34,3 +36,41 @@ String naIfEmpty(String text) {
 
 //   return parsed.toString();
 // }
+bool isMinTenCharacter({required String input, required int minLength}) =>
+    input.length >= minLength;
+
+bool isAtleastOneLowerCharacter({
+  required String input,
+}) =>
+    RegExp(r'[a-z]').hasMatch(input);
+
+bool isAtleastOneUpperCharacter({
+  required String input,
+}) =>
+    RegExp(r'[A-Z]').hasMatch(input);
+
+bool isAtleastOneNumericCharacter({
+  required String input,
+}) =>
+    RegExp(r'[0-9]').hasMatch(input);
+
+bool isAtleastOneSpecialCharacter({
+  required String input,
+}) =>
+    RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(input);
+
+bool isMustNotContainUserNameOrName({
+  required String input,
+  required User user,
+}) =>
+    input.isNotEmpty &&
+    (!input
+        .toLowerCase()
+        .contains(user.username.getValue().toLowerCase()) &&
+    !input
+        .toLowerCase()
+        .contains(user.fullName.firstName.toLowerCase()) &&
+    !input
+        .toLowerCase()
+        .contains(user.fullName.lastName.toLowerCase()));
+   

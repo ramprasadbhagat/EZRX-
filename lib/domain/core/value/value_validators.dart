@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 
 Either<ValueFailure<String>, String> validateMaxStringLength(
   String input,
@@ -40,4 +42,46 @@ Either<ValueFailure<String>, String> validatePassword(String input) {
   return RegExp(passwordRegex).hasMatch(input)
       ? right(input)
       : left(ValueFailure.passwordNotMatchRequirements(failedValue: input));
+}
+
+Either<ValueFailure<String>, String> validateMinStringLength(
+  String input,
+  int minLength,
+) {
+  return isMinTenCharacter(input: input, minLength: minLength)
+      ? right(input)
+      : left(ValueFailure.subceedLength(failedValue: input, min: minLength));
+}
+
+Either<ValueFailure<String>, String> atleastOneUpperCharacter(String input) {
+  return isAtleastOneUpperCharacter(input: input)
+      ? right(input)
+      : left(ValueFailure.mustOneUpperCaseCharacter(failedValue: input));
+}
+
+Either<ValueFailure<String>, String> atleastOneLowerCharacter(String input) {
+  return isAtleastOneLowerCharacter(input: input)
+      ? right(input)
+      : left(ValueFailure.mustOneLowerCaseCharacter(failedValue: input));
+}
+
+Either<ValueFailure<String>, String> atleastOneNumericCharacter(String input) {
+  return isAtleastOneNumericCharacter(input: input)
+      ? right(input)
+      : left(ValueFailure.mustOneNumericCharacter(failedValue: input));
+}
+
+Either<ValueFailure<String>, String> atleastOneSpecialCharacter(String input) {
+  return isAtleastOneSpecialCharacter(input: input)
+      ? right(input)
+      : left(ValueFailure.mustOneSpecialCharacter(failedValue: input));
+}
+
+Either<ValueFailure<String>, String> validateContainUserNameOrName(
+  String input,
+  User user,
+) {
+  return isMustNotContainUserNameOrName(input: input, user: user)
+      ? right(input)
+      : left(ValueFailure.mustNotContainUserName(failedValue: input));
 }

@@ -1,3 +1,10 @@
+import 'package:ezrxmobile/domain/account/entities/full_name.dart';
+import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/domain/account/entities/setting_aup.dart';
+import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
+import 'package:ezrxmobile/domain/account/entities/settings.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -370,6 +377,367 @@ void main() {
         final jwt = JWT(input);
         final result = jwt.issueTime;
         expect(result.isNegative, false);
+      },
+    );
+  });
+
+  group('Password for resetv2 value object', () {
+    test(
+      'should return an same input if the value satisfy all valid format',
+      () async {
+        const newPassword = 'Auron@2022!';
+        const oldPassword = 'Auron@2022';
+        var user = User(
+          id: '1',
+          username: Username('choo'),
+          email: EmailAddress('abc@gmail.com'),
+          fullName: const FullName(firstName: 'dipankar', lastName: 'das'),
+          role: Role(
+              id: '2',
+              description: 'Developer',
+              name: 'abc',
+              type: RoleType('Developer')),
+          customerCode: CustomerCode('2606'),
+          userSalesOrganisations: [],
+          settings: Settings.empty(),
+          settingTc: SettingTc.empty(),
+          settingAup: SettingAup.empty(),
+          enableOrderType: false,
+        );
+        final password = Password.resetV2(newPassword, oldPassword, user);
+        final result = password.isValid();
+        expect(result, true);
+      },
+    );
+
+    test(
+      'should return error message when the new password is empty',
+      () async {
+        const errorMessage = 'Enter New Password.';
+        const newPassword = '';
+        const oldPassword = 'Auron@2022';
+        var user = User(
+          id: '1',
+          username: Username('choo'),
+          email: EmailAddress('abc@gmail.com'),
+          fullName: const FullName(firstName: 'dipankar', lastName: 'das'),
+          role: Role(
+              id: '2',
+              description: 'Developer',
+              name: 'abc',
+              type: RoleType('Developer')),
+          customerCode: CustomerCode('2606'),
+          userSalesOrganisations: [],
+          settings: Settings.empty(),
+          settingTc: SettingTc.empty(),
+          settingAup: SettingAup.empty(),
+          enableOrderType: false,
+        );
+        final password = Password.resetV2(newPassword, oldPassword, user);
+        final result = password.value.fold(
+          (f) => f.maybeMap(
+            empty: (_) => errorMessage,
+            orElse: () => null,
+          ),
+          (_) => null,
+        );
+        expect(result, errorMessage);
+      },
+    );
+
+    test(
+      'should return error message when the new password contain atleast 10 characters',
+      () async {
+        const errorMessage = 'Minimum length of 10 characters';
+        const newPassword = 'Auron@222';
+        const oldPassword = 'Auron@2022';
+        var user = User(
+          id: '1',
+          username: Username('choo'),
+          email: EmailAddress('abc@gmail.com'),
+          fullName: const FullName(firstName: 'dipankar', lastName: 'das'),
+          role: Role(
+              id: '2',
+              description: 'Developer',
+              name: 'abc',
+              type: RoleType('Developer')),
+          customerCode: CustomerCode('2606'),
+          userSalesOrganisations: [],
+          settings: Settings.empty(),
+          settingTc: SettingTc.empty(),
+          settingAup: SettingAup.empty(),
+          enableOrderType: false,
+        );
+        final password = Password.resetV2(newPassword, oldPassword, user);
+        final result = password.value.fold(
+          (f) => f.maybeMap(
+            subceedLength: (_) => errorMessage,
+            orElse: () => null,
+          ),
+          (_) => null,
+        );
+        expect(result, errorMessage);
+      },
+    );
+
+    test(
+      'should return error message when the new password contain atleast 1 upper case characters',
+      () async {
+        const errorMessage = 'Contain at least 1 Upper case character (A to Z)';
+        const newPassword = 'auron@2022!';
+        const oldPassword = 'Auron@2022';
+        var user = User(
+          id: '1',
+          username: Username('choo'),
+          email: EmailAddress('abc@gmail.com'),
+          fullName: const FullName(firstName: 'dipankar', lastName: 'das'),
+          role: Role(
+              id: '2',
+              description: 'Developer',
+              name: 'abc',
+              type: RoleType('Developer')),
+          customerCode: CustomerCode('2606'),
+          userSalesOrganisations: [],
+          settings: Settings.empty(),
+          settingTc: SettingTc.empty(),
+          settingAup: SettingAup.empty(),
+          enableOrderType: false,
+        );
+        final password = Password.resetV2(newPassword, oldPassword, user);
+        final result = password.value.fold(
+          (f) => f.maybeMap(
+            mustOneUpperCaseCharacter: (_) => errorMessage,
+            orElse: () => null,
+          ),
+          (_) => null,
+        );
+        expect(result, errorMessage);
+      },
+    );
+
+    test(
+      'should return error message when the new password contain atleast 1 lower case characters',
+      () async {
+        const errorMessage = 'Contain at least 1 Lower case character (a to z)';
+        const newPassword = 'AURON@2022!';
+        const oldPassword = 'Auron@2022';
+        var user = User(
+          id: '1',
+          username: Username('choo'),
+          email: EmailAddress('abc@gmail.com'),
+          fullName: const FullName(firstName: 'dipankar', lastName: 'das'),
+          role: Role(
+              id: '2',
+              description: 'Developer',
+              name: 'abc',
+              type: RoleType('Developer')),
+          customerCode: CustomerCode('2606'),
+          userSalesOrganisations: [],
+          settings: Settings.empty(),
+          settingTc: SettingTc.empty(),
+          settingAup: SettingAup.empty(),
+          enableOrderType: false,
+        );
+        final password = Password.resetV2(newPassword, oldPassword, user);
+        final result = password.value.fold(
+          (f) => f.maybeMap(
+            mustOneLowerCaseCharacter: (_) => errorMessage,
+            orElse: () => null,
+          ),
+          (_) => null,
+        );
+        expect(result, errorMessage);
+      },
+    );
+
+    test(
+      'should return error message when the new password contain atleast a numeric character',
+      () async {
+        const errorMessage = 'Contain at least a numeric character (0 to 9)';
+        const newPassword = 'Auron@developer';
+        const oldPassword = 'Auron@2022';
+        var user = User(
+          id: '1',
+          username: Username('choo'),
+          email: EmailAddress('abc@gmail.com'),
+          fullName: const FullName(firstName: 'dipankar', lastName: 'das'),
+          role: Role(
+              id: '2',
+              description: 'Developer',
+              name: 'abc',
+              type: RoleType('Developer')),
+          customerCode: CustomerCode('2606'),
+          userSalesOrganisations: [],
+          settings: Settings.empty(),
+          settingTc: SettingTc.empty(),
+          settingAup: SettingAup.empty(),
+          enableOrderType: false,
+        );
+        final password = Password.resetV2(newPassword, oldPassword, user);
+        final result = password.value.fold(
+          (f) => f.maybeMap(
+            mustOneNumericCharacter: (_) => errorMessage,
+            orElse: () => null,
+          ),
+          (_) => null,
+        );
+        expect(result, errorMessage);
+      },
+    );
+
+    test(
+      'should return error message when the new password contain at least one special character ',
+      () async {
+        const errorMessage =
+            'Contain at least one special character from the list (i.e. _ , # , ? , ! , @ , \$ , % , ^ , & , *, - )';
+        const newPassword = 'Auron20222';
+        const oldPassword = 'Auron@2022';
+        var user = User(
+          id: '1',
+          username: Username('choo'),
+          email: EmailAddress('abc@gmail.com'),
+          fullName: const FullName(firstName: 'dipankar', lastName: 'das'),
+          role: Role(
+              id: '2',
+              description: 'Developer',
+              name: 'abc',
+              type: RoleType('Developer')),
+          customerCode: CustomerCode('2606'),
+          userSalesOrganisations: [],
+          settings: Settings.empty(),
+          settingTc: SettingTc.empty(),
+          settingAup: SettingAup.empty(),
+          enableOrderType: false,
+        );
+        final password = Password.resetV2(newPassword, oldPassword, user);
+        final result = password.value.fold(
+          (f) => f.maybeMap(
+            mustOneSpecialCharacter: (_) => errorMessage,
+            orElse: () => null,
+          ),
+          (_) => null,
+        );
+        expect(result, errorMessage);
+      },
+    );
+
+    test(
+      'should return error message when the new password must not contain any part of your username and/or name',
+      () async {
+        const errorMessage =
+            'Must not contain any part of your username and/or name';
+        const newPassword = 'Dipankar@2022';
+        const oldPassword = 'Auron@2022';
+        var user = User(
+          id: '1',
+          username: Username('choo'),
+          email: EmailAddress('abc@gmail.com'),
+          fullName: const FullName(firstName: 'dipankar', lastName: 'das'),
+          role: Role(
+              id: '2',
+              description: 'Developer',
+              name: 'abc',
+              type: RoleType('Developer')),
+          customerCode: CustomerCode('2606'),
+          userSalesOrganisations: [],
+          settings: Settings.empty(),
+          settingTc: SettingTc.empty(),
+          settingAup: SettingAup.empty(),
+          enableOrderType: false,
+        );
+        final password = Password.resetV2(newPassword, oldPassword, user);
+        final result = password.value.fold(
+          (f) => f.maybeMap(
+            mustNotContainUserName: (_) => errorMessage,
+            orElse: () => null,
+          ),
+          (_) => null,
+        );
+        expect(result, errorMessage);
+      },
+    );
+
+    test(
+      'should return error message when the new password cannot be same as old one',
+      () async {
+        const errorMessage = 'New password cannot be same as old one';
+        const newPassword = 'Auron@2022';
+        const oldPassword = 'Auron@2022';
+        var user = User(
+          id: '1',
+          username: Username('choo'),
+          email: EmailAddress('abc@gmail.com'),
+          fullName: const FullName(firstName: 'dipankar', lastName: 'das'),
+          role: Role(
+              id: '2',
+              description: 'Developer',
+              name: 'abc',
+              type: RoleType('Developer')),
+          customerCode: CustomerCode('2606'),
+          userSalesOrganisations: [],
+          settings: Settings.empty(),
+          settingTc: SettingTc.empty(),
+          settingAup: SettingAup.empty(),
+          enableOrderType: false,
+        );
+        final password = Password.resetV2(newPassword, oldPassword, user);
+        final result = password.value.fold(
+          (f) => f.maybeMap(
+            mustNotMatchOldPassword: (_) => errorMessage,
+            orElse: () => null,
+          ),
+          (_) => null,
+        );
+        expect(result, errorMessage);
+      },
+    );
+  });
+
+  group('Password for confirm value object', () {
+    test(
+      'should return true when confirm password satisfy all valid format',
+      () async {
+        const newPassword = 'Auron@2022';
+        const confirmPassword = 'Auron@2022';
+        final password = Password.comfirm(confirmPassword, newPassword);
+        final result = password.isValid();
+        expect(result, true);
+      },
+    );
+
+    test(
+      'should return error message when the confrim password cannot be empty',
+      () async {
+        const errorMessage = 'Enter Confirm Password.';
+        const newPassword = 'Auron@2022';
+        const confirmPassword = '';
+        final password = Password.comfirm(confirmPassword, newPassword);
+        final result = password.value.fold(
+          (f) => f.maybeMap(
+            empty: (_) => errorMessage,
+            orElse: () => null,
+          ),
+          (_) => null,
+        );
+        expect(result, errorMessage);
+      },
+    );
+
+    test(
+      'should return error message when the confrim password should same as new password',
+      () async {
+        const errorMessage = 'Password mismatch';
+        const newPassword = 'Auron@2022';
+        const confirmPassword = 'Auron@2022!';
+        final password = Password.comfirm(confirmPassword, newPassword);
+        final result = password.value.fold(
+          (f) => f.maybeMap(
+            mustMatchNewPassword: (_) => errorMessage,
+            orElse: () => null,
+          ),
+          (_) => null,
+        );
+        expect(result, errorMessage);
       },
     );
   });

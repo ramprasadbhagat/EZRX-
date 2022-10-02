@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/auth/value/value_validators.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 
 class Username extends ValueObject<String> {
@@ -39,6 +41,65 @@ class Password extends ValueObject<String> {
 
   factory Password.reset(String input) {
     return Password._(validateStringNotEmpty(input).flatMap(validatePassword));
+  }
+
+  factory Password.resetV2(String newPassword, String oldPassword, User user) {
+    return Password._(
+      validateStringNotEmpty(newPassword)
+          .flatMap(atleastOneLowerCharacter)
+          .flatMap(atleastOneUpperCharacter)
+          .flatMap(atleastOneNumericCharacter)
+          .flatMap(atleastOneSpecialCharacter)
+          .flatMap((input) => validateMinStringLength(input, 10))
+          .flatMap((input) => validateContainUserNameOrName(input, user))
+          .flatMap((input) => validateOldAndNewPassword(input, oldPassword)),
+    );
+  }
+
+  factory Password.comfirm(String confirmPassword, String newPassword) {
+    return Password._(
+      validateStringNotEmpty(confirmPassword).flatMap(
+        (input) => validateNewAndConfirmPassword(input, newPassword),
+      ),
+    );
+  }
+
+  bool matchMinTenCharacter() {
+    return isMinTenCharacter(
+      input: value.fold((l) => l.failedValue, (r) => r),
+      minLength: 10,
+    );
+  }
+
+  bool matchAtleastOneUpperCharacter() {
+    return isAtleastOneUpperCharacter(
+      input: value.fold((l) => l.failedValue, (r) => r),
+    );
+  }
+
+  bool matchAtleastOneLowerCharacter() {
+    return isAtleastOneLowerCharacter(
+      input: value.fold((l) => l.failedValue, (r) => r),
+    );
+  }
+
+  bool matchAtleastOneNumericCharacter() {
+    return isAtleastOneNumericCharacter(
+      input: value.fold((l) => l.failedValue, (r) => r),
+    );
+  }
+
+  bool matchAtleastOneSpeacialCharacter() {
+    return isAtleastOneSpecialCharacter(
+      input: value.fold((l) => l.failedValue, (r) => r),
+    );
+  }
+
+  bool matchMustNotContainUserNameOrName({required User user}) {
+    return isMustNotContainUserNameOrName(
+      input: value.fold((l) => l.failedValue, (r) => r),
+      user: user,
+    );
   }
 
   const Password._(this.value);

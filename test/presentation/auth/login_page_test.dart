@@ -70,14 +70,14 @@ void main() {
       final passwordTextField = find.byKey(const Key('loginPasswordField'));
       final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
       final ssoLoginButton = find.byKey(const Key('ssoLoginButton'));
-      final rememberPassWordCheckBox =
+      final rememberPasswordCheckBox =
           find.byKey(const Key('loginRememberPasswordCheckbox'));
 
       expect(userNameTextField, findsOneWidget);
       expect(passwordTextField, findsOneWidget);
       expect(loginSubmitButton, findsOneWidget);
       expect(ssoLoginButton, findsOneWidget);
-      expect(rememberPassWordCheckBox, findsOneWidget);
+      expect(rememberPasswordCheckBox, findsOneWidget);
     });
 
     testWidgets('Test login error', (tester) async {
@@ -163,14 +163,14 @@ void main() {
       final passwordTextField = find.byKey(const Key('loginPasswordField'));
       final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
       final ssoLoginButton = find.byKey(const Key('ssoLoginButton'));
-      final rememberPassWordCheckBox =
+      final rememberPasswordCheckBox =
           find.byKey(const Key('loginRememberPasswordCheckbox'));
 
       expect(userNameTextField, findsNothing);
       expect(passwordTextField, findsNothing);
       expect(loginSubmitButton, findsNothing);
       expect(ssoLoginButton, findsNothing);
-      expect(rememberPassWordCheckBox, findsNothing);
+      expect(rememberPasswordCheckBox, findsNothing);
     });
 
     testWidgets("Test don't have credential and have announcement",
@@ -202,14 +202,14 @@ void main() {
       final passwordTextField = find.byKey(const Key('loginPasswordField'));
       final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
       final ssoLoginButton = find.byKey(const Key('ssoLoginButton'));
-      final rememberPassWordCheckBox =
+      final rememberPasswordCheckBox =
           find.byKey(const Key('loginRememberPasswordCheckbox'));
 
       expect(userNameTextField, findsOneWidget);
       expect(passwordTextField, findsOneWidget);
       expect(loginSubmitButton, findsOneWidget);
       expect(ssoLoginButton, findsOneWidget);
-      expect(rememberPassWordCheckBox, findsOneWidget);
+      expect(rememberPasswordCheckBox, findsOneWidget);
 
       final loadingIndicator =
           find.byKey(const Key('announcementLoadingIndicator'));

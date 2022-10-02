@@ -1,4 +1,3 @@
-
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -54,10 +53,15 @@ class HomePageTile {
 
 const List<HomePageTile> homePageTiles = <HomePageTile>[
   HomePageTile(
-      title: 'Create Order',
-      icon: Icons.list,
-      pageRouteInfo: MaterialListPageRoute(),),
-  HomePageTile(title: 'Saved order', icon: Icons.list,pageRouteInfo: SavedOrderListPageRoute(),),
+    title: 'Create Order',
+    icon: Icons.list,
+    pageRouteInfo: MaterialListPageRoute(),
+  ),
+  HomePageTile(
+    title: 'Saved order',
+    icon: Icons.list,
+    pageRouteInfo: SavedOrderListPageRoute(),
+  ),
 ];
 
 class TileCard extends StatelessWidget {
@@ -69,7 +73,7 @@ class TileCard extends StatelessWidget {
     final textStyle = Theme.of(context).textTheme.subtitle2;
 
     return GestureDetector(
-      onTap: ()=> context.router.push(homePageTile.pageRouteInfo),
+      onTap: () => context.router.push(homePageTile.pageRouteInfo),
       child: Card(
         color: Colors.orange,
         child: Center(

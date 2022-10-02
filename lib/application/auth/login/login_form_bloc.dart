@@ -67,7 +67,6 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
             isSubmitting: true,
             authFailureOrSuccessOption: none(),
           ));
-
           final failureOrSuccess = await authRepository.login(
             username: state.username,
             password: state.password,

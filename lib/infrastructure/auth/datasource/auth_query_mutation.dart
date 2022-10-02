@@ -108,4 +108,15 @@ class AuthQueryMutation {
 //   }
 // }
 
+  String changePassword() {
+    return '''
+      mutation(\$username: String!, \$oldPassword: String!, \$newPassword : String!){
+        changePassword(username: \$username, oldPassword: \$oldPassword, newPassword: \$newPassword){
+          success
+          status
+        }
+      }
+    ''';
+  }
+
 }

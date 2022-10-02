@@ -15,6 +15,12 @@ abstract class ValueObject<T> {
     return value.fold((f) => throw UnexpectedValueError(f), id);
   }
 
+  T getOrDefaultValue(T defaultValue) {
+    return value.fold((f) => defaultValue, id);
+  }
+
+  T getValue() => value.fold((f) => f.failedValue, (r) => r);
+
   Either<ValueFailure<dynamic>, Unit> get failureOrUnit {
     return value.fold(
       (l) => left(l),
