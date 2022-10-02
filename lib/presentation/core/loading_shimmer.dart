@@ -21,6 +21,7 @@ class LoadingShimmer {
 
   static Widget tile({
     bool enabled = true,
+    int line = 1,
   }) {
     return Center(
       child: Shimmer.fromColors(
@@ -29,29 +30,21 @@ class LoadingShimmer {
         enabled: enabled,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              height: 8.0,
-              color: Colors.white,
+          children: List<Widget>.filled(
+            line,
+            Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 8.0,
+                  color: Colors.white,
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 2.0),
+                ),
+              ],
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 2.0),
-            ),
-            Container(
-              width: double.infinity,
-              height: 8.0,
-              color: Colors.white,
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 2.0),
-            ),
-            Container(
-              width: 40.0,
-              height: 8.0,
-              color: Colors.white,
-            ),
-          ],
+          ),
         ),
       ),
     );

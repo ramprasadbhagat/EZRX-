@@ -29,6 +29,10 @@ class MaterialListRemoteDataSource {
     required this.dataSourceExceptionHandler,
     required this.config,
   });
+
+  // TODO: Wasim
+  // No value_object / entities on this level, do on repository level
+  // Create two datasource functions, separate getMaterialList & getMaterialListSalesRep
   Future<List<MaterialInfo>> getMaterialList({
     required User user,
     required SalesOrganisation salesOrganisation,

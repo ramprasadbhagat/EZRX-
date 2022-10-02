@@ -6,7 +6,6 @@ import 'package:ezrxmobile/application/core/search/search_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/repository/i_customer_code_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

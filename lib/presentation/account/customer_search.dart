@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/search_bar.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -197,27 +198,33 @@ class _ListContent extends StatelessWidget {
       key: Key(
         'customerCodeOption${customerCodeInfo.customerCodeSoldTo}',
       ),
-      title: RichText(
-        text: TextSpan(
-          text: '(${customerCodeInfo.customerCodeSoldTo}) ',
-          style: Theme.of(context).textTheme.subtitle2,
-          children: [
-            TextSpan(
-              text: customerCodeInfo.customerName.toString(),
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            customerCodeInfo.customerCodeSoldTo,
+            style: Theme.of(context).textTheme.subtitle2?.apply(
+                  color: ZPColors.kPrimaryColor,
+                ),
+          ),
+          Text(
+            customerCodeInfo.customerName.toString(),
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
+          RichText(
+            text: TextSpan(
+              text: customerCodeInfo.customerAddress.toString(),
+              style: Theme.of(context).textTheme.subtitle2?.apply(
+                    color: ZPColors.lightGray,
+                  ),
+              children: [
+                TextSpan(
+                  text: customerCodeInfo.postalCode,
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-      subtitle: RichText(
-        text: TextSpan(
-          text: customerCodeInfo.customerAddress.toString(),
-          style: Theme.of(context).textTheme.subtitle2,
-          children: [
-            TextSpan(
-              text: customerCodeInfo.postalCode,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
       onTap: () {
         context.read<CustomerCodeBloc>().add(

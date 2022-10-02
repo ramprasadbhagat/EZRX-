@@ -656,7 +656,6 @@ abstract class _Fetch implements CustomerCodeEvent {
 /// @nodoc
 mixin _$CustomerCodeState {
   CustomerCodeInfo get customeCodeInfo => throw _privateConstructorUsedError;
-  ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
   List<CustomerCodeInfo> get customerCodeList =>
       throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
@@ -676,14 +675,12 @@ abstract class $CustomerCodeStateCopyWith<$Res> {
       _$CustomerCodeStateCopyWithImpl<$Res>;
   $Res call(
       {CustomerCodeInfo customeCodeInfo,
-      ShipToInfo shipToInfo,
       List<CustomerCodeInfo> customerCodeList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool isLoadMore,
       bool isFetching});
 
   $CustomerCodeInfoCopyWith<$Res> get customeCodeInfo;
-  $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
 
 /// @nodoc
@@ -698,7 +695,6 @@ class _$CustomerCodeStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? customeCodeInfo = freezed,
-    Object? shipToInfo = freezed,
     Object? customerCodeList = freezed,
     Object? apiFailureOrSuccessOption = freezed,
     Object? isLoadMore = freezed,
@@ -709,10 +705,6 @@ class _$CustomerCodeStateCopyWithImpl<$Res>
           ? _value.customeCodeInfo
           : customeCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
-      shipToInfo: shipToInfo == freezed
-          ? _value.shipToInfo
-          : shipToInfo // ignore: cast_nullable_to_non_nullable
-              as ShipToInfo,
       customerCodeList: customerCodeList == freezed
           ? _value.customerCodeList
           : customerCodeList // ignore: cast_nullable_to_non_nullable
@@ -738,13 +730,6 @@ class _$CustomerCodeStateCopyWithImpl<$Res>
       return _then(_value.copyWith(customeCodeInfo: value));
     });
   }
-
-  @override
-  $ShipToInfoCopyWith<$Res> get shipToInfo {
-    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
-      return _then(_value.copyWith(shipToInfo: value));
-    });
-  }
 }
 
 /// @nodoc
@@ -756,7 +741,6 @@ abstract class _$$_CustomerCodeStateCopyWith<$Res>
   @override
   $Res call(
       {CustomerCodeInfo customeCodeInfo,
-      ShipToInfo shipToInfo,
       List<CustomerCodeInfo> customerCodeList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool isLoadMore,
@@ -764,8 +748,6 @@ abstract class _$$_CustomerCodeStateCopyWith<$Res>
 
   @override
   $CustomerCodeInfoCopyWith<$Res> get customeCodeInfo;
-  @override
-  $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
 
 /// @nodoc
@@ -782,7 +764,6 @@ class __$$_CustomerCodeStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? customeCodeInfo = freezed,
-    Object? shipToInfo = freezed,
     Object? customerCodeList = freezed,
     Object? apiFailureOrSuccessOption = freezed,
     Object? isLoadMore = freezed,
@@ -793,10 +774,6 @@ class __$$_CustomerCodeStateCopyWithImpl<$Res>
           ? _value.customeCodeInfo
           : customeCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
-      shipToInfo: shipToInfo == freezed
-          ? _value.shipToInfo
-          : shipToInfo // ignore: cast_nullable_to_non_nullable
-              as ShipToInfo,
       customerCodeList: customerCodeList == freezed
           ? _value._customerCodeList
           : customerCodeList // ignore: cast_nullable_to_non_nullable
@@ -822,7 +799,6 @@ class __$$_CustomerCodeStateCopyWithImpl<$Res>
 class _$_CustomerCodeState implements _CustomerCodeState {
   const _$_CustomerCodeState(
       {required this.customeCodeInfo,
-      required this.shipToInfo,
       required final List<CustomerCodeInfo> customerCodeList,
       required this.apiFailureOrSuccessOption,
       required this.isLoadMore,
@@ -831,8 +807,6 @@ class _$_CustomerCodeState implements _CustomerCodeState {
 
   @override
   final CustomerCodeInfo customeCodeInfo;
-  @override
-  final ShipToInfo shipToInfo;
   final List<CustomerCodeInfo> _customerCodeList;
   @override
   List<CustomerCodeInfo> get customerCodeList {
@@ -849,7 +823,7 @@ class _$_CustomerCodeState implements _CustomerCodeState {
 
   @override
   String toString() {
-    return 'CustomerCodeState(customeCodeInfo: $customeCodeInfo, shipToInfo: $shipToInfo, customerCodeList: $customerCodeList, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isLoadMore: $isLoadMore, isFetching: $isFetching)';
+    return 'CustomerCodeState(customeCodeInfo: $customeCodeInfo, customerCodeList: $customerCodeList, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isLoadMore: $isLoadMore, isFetching: $isFetching)';
   }
 
   @override
@@ -859,8 +833,6 @@ class _$_CustomerCodeState implements _CustomerCodeState {
             other is _$_CustomerCodeState &&
             const DeepCollectionEquality()
                 .equals(other.customeCodeInfo, customeCodeInfo) &&
-            const DeepCollectionEquality()
-                .equals(other.shipToInfo, shipToInfo) &&
             const DeepCollectionEquality()
                 .equals(other._customerCodeList, _customerCodeList) &&
             const DeepCollectionEquality().equals(
@@ -875,7 +847,6 @@ class _$_CustomerCodeState implements _CustomerCodeState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(customeCodeInfo),
-      const DeepCollectionEquality().hash(shipToInfo),
       const DeepCollectionEquality().hash(_customerCodeList),
       const DeepCollectionEquality().hash(apiFailureOrSuccessOption),
       const DeepCollectionEquality().hash(isLoadMore),
@@ -891,7 +862,6 @@ class _$_CustomerCodeState implements _CustomerCodeState {
 abstract class _CustomerCodeState implements CustomerCodeState {
   const factory _CustomerCodeState(
       {required final CustomerCodeInfo customeCodeInfo,
-      required final ShipToInfo shipToInfo,
       required final List<CustomerCodeInfo> customerCodeList,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
@@ -900,8 +870,6 @@ abstract class _CustomerCodeState implements CustomerCodeState {
 
   @override
   CustomerCodeInfo get customeCodeInfo;
-  @override
-  ShipToInfo get shipToInfo;
   @override
   List<CustomerCodeInfo> get customerCodeList;
   @override

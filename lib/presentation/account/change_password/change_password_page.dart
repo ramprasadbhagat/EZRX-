@@ -5,7 +5,6 @@ import 'package:ezrxmobile/presentation/account/change_password/widgets/confirm_
 import 'package:ezrxmobile/presentation/account/change_password/widgets/new_password_field.dart';
 import 'package:ezrxmobile/presentation/account/change_password/widgets/old_password_field.dart';
 import 'package:ezrxmobile/presentation/account/change_password/widgets/change_password_validation.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,10 +15,7 @@ class ChangePasswordPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Change Password',
-          style: TextStyle(color: ZPColors.primary),
-        ).tr(),
+        title: const Text('Change Password').tr(),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -41,7 +37,7 @@ class ChangePasswordPage extends StatelessWidget {
                 height: 20,
               ),
               ResetPasswordButton(
-                key:Key('resetPasswordButton'),
+                key: Key('resetPasswordButton'),
               ),
             ],
           ),

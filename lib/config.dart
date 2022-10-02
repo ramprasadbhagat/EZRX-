@@ -13,7 +13,7 @@ class Config {
       case Flavor.dev:
         return 'https://dev.ezrx.com';
       case Flavor.uat:
-        return 'https://zpprodapiportalapimgmt.apimanagement.ap1.hana.ondemand.com';
+        return 'https://uat.ezrx.com';
       case Flavor.prod:
       default:
         return 'https://ezrx.com';
@@ -22,8 +22,7 @@ class Config {
 
   String get urlConstants {
     switch (appFlavor) {
-      case Flavor.uat:
-        return '/ezrxapi/api/';
+      case Flavor.uat: // return '/ezrxapi/api/';
       case Flavor.dev:
       case Flavor.prod:
         return '/api/';

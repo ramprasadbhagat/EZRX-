@@ -48,6 +48,8 @@ class OrderHistoryRepository implements IOrderHistoryRepository {
     }
 
     try {
+      // TODO: Jyoti
+      // loginUserType == 'client' use getOrderHistory else getOrderHistorySalesRep
       final orderHistoryItemList =
           await orderHistoryRemoteDataSource.getOrderHistory(
         loginUserType: user.role.type.loginUserType,

@@ -17,6 +17,9 @@ class FavouriteRemoteDataSource {
   Config config;
   UserBloc user;
 
+  // TODO: Mahendra
+  // NO BLOC INJECTION ALLOW ON DATASOURCE LAYER
+
   FavouriteRemoteDataSource({
     required this.config,
     required this.httpService,
@@ -50,6 +53,8 @@ class FavouriteRemoteDataSource {
     );
   }
 
+  // TODO: Mahendra
+  // No value_object / entities on this level, do on repository level
   Future<Favourite> addFavourite({
     required Favourite item,
     required isPackAndPick,

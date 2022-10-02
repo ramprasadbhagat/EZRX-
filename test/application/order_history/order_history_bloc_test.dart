@@ -2,21 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_address.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_name.dart';
-import 'package:ezrxmobile/domain/account/entities/full_name.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/setting_aup.dart';
-import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
-import 'package:ezrxmobile/domain/account/entities/settings.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_address.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_history_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -32,83 +17,83 @@ class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  late OrderHistoryRepository orderHistoryRepoMock = OrderHistoryRepoMock();
-  late CustomerCodeBloc customerCodeBloc = CustomerCodeMockBloc();
-  late ShipToCodeBloc shipToCodeBloc = ShipToCodeMocBloc();
-  late UserBloc userMockBloc = UserMockBloc();
-  final orderHistoryState = OrderHistoryListState.initial();
-  var fakeSort = 'desc';
-  var user = User(
-    id: '1',
-    username: Username(''),
-    email: EmailAddress(''),
-    fullName: const FullName(firstName: '', lastName: ''),
-    role: Role(id: '', description: '', name: '', type: RoleType('Developer')),
-    customerCode: CustomerCode(''),
-    userSalesOrganisations: [],
-    settings: Settings.empty(),
-    settingTc: SettingTc.empty(),
-    settingAup: SettingAup.empty(),
-    enableOrderType: false,
-  );
-  var fakePageSize = 20;
-  var fakeorderBy = 'orderDate';
-  var fakeFromDate = DateTime.parse('2022-09-16 00:00:00Z');
-  var fakeToDate = DateTime.parse('2022-09-23 00:00:00Z');
-  var shipToWithoutValue = ShipToInfo.empty();
-  var shipToWithValue = const ShipToInfo(
-    building: 'test',
-    city1: 'test',
-    city2: 'test',
-    defaultShipToAddress: false,
-    floor: 'test',
-    houseNumber1: 'test',
-    plant: 'test',
-    postalCode: 'test',
-    region: 'test',
-    shipToAddress: ShipToAddress(
-      street2: 'test',
-      street3: 'test',
-      street4: 'test',
-      street5: 'test',
-      street: 'test',
-    ),
-    shipToCustomerCode: '1111111111',
-    shipToName: ShipToName(
-      name1: 'test',
-      name2: 'test',
-      name3: 'test',
-      name4: 'test',
-    ),
-    status: 'test',
-    telephoneNumber: '12345',
-  );
-  var soldTo = CustomerCodeInfo(
-    customerCodeSoldTo: '',
-    customerAddress: CustomerAddress.empty(),
-    billToInfos: [],
-    customerClassification: '',
-    customerLocalGroup: '',
-    customerName: const CustomerName(
-      name1: '',
-      name2: '',
-      name3: '',
-      name4: '',
-    ),
-    paymentTermDescription: '',
-    postalCode: '',
-    shipToInfos: [],
-    status: '',
-  );
+  // late OrderHistoryRepository orderHistoryRepoMock = OrderHistoryRepoMock();
+  // late CustomerCodeBloc customerCodeBloc = CustomerCodeMockBloc();
+  // late ShipToCodeBloc shipToCodeBloc = ShipToCodeMocBloc();
+  // late UserBloc userMockBloc = UserMockBloc();
+  // final orderHistoryState = OrderHistoryListState.initial();
+  // var fakeSort = 'desc';
+  // var user = User(
+  //   id: '1',
+  //   username: Username(''),
+  //   email: EmailAddress(''),
+  //   fullName: const FullName(firstName: '', lastName: ''),
+  //   role: Role(id: '', description: '', name: '', type: RoleType('Developer')),
+  //   customerCode: CustomerCode(''),
+  //   userSalesOrganisations: [],
+  //   settings: Settings.empty(),
+  //   settingTc: SettingTc.empty(),
+  //   settingAup: SettingAup.empty(),
+  //   enableOrderType: false,
+  // );
+  // var fakePageSize = 20;
+  // var fakeorderBy = 'orderDate';
+  // var fakeFromDate = DateTime.parse('2022-09-16 00:00:00Z');
+  // var fakeToDate = DateTime.parse('2022-09-23 00:00:00Z');
+  // var shipToWithoutValue = ShipToInfo.empty();
+  // var shipToWithValue = const ShipToInfo(
+  //   building: 'test',
+  //   city1: 'test',
+  //   city2: 'test',
+  //   defaultShipToAddress: false,
+  //   floor: 'test',
+  //   houseNumber1: 'test',
+  //   plant: 'test',
+  //   postalCode: 'test',
+  //   region: 'test',
+  //   shipToAddress: ShipToAddress(
+  //     street2: 'test',
+  //     street3: 'test',
+  //     street4: 'test',
+  //     street5: 'test',
+  //     street: 'test',
+  //   ),
+  //   shipToCustomerCode: '1111111111',
+  //   shipToName: ShipToName(
+  //     name1: 'test',
+  //     name2: 'test',
+  //     name3: 'test',
+  //     name4: 'test',
+  //   ),
+  //   status: 'test',
+  //   telephoneNumber: '12345',
+  // );
+  // var soldTo = CustomerCodeInfo(
+  //   customerCodeSoldTo: '',
+  //   customerAddress: CustomerAddress.empty(),
+  //   billToInfos: [],
+  //   customerClassification: '',
+  //   customerLocalGroup: '',
+  //   customerName: const CustomerName(
+  //     name1: '',
+  //     name2: '',
+  //     name3: '',
+  //     name4: '',
+  //   ),
+  //   paymentTermDescription: '',
+  //   postalCode: '',
+  //   shipToInfos: [],
+  //   status: '',
+  // );
   // late CustomerCodeState customerCodeInitState;
   // late UserState userInitState;
   // late ShipToCodeState shipToInitState;
 
   setUpAll(() {
-    customerCodeBloc = CustomerCodeMockBloc();
-    orderHistoryRepoMock = OrderHistoryRepoMock();
-    shipToCodeBloc = ShipToCodeMocBloc();
-    userMockBloc = UserMockBloc();
+    // customerCodeBloc = CustomerCodeMockBloc();
+    // orderHistoryRepoMock = OrderHistoryRepoMock();
+    // shipToCodeBloc = ShipToCodeMocBloc();
+    // userMockBloc = UserMockBloc();
     // userInitState = UserState.initial();
     // customerCodeInitState = CustomerCodeState.initial();
     // shipToInitState = ShipToCodeState.initial();

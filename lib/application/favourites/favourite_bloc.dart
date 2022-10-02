@@ -14,6 +14,10 @@ part 'favourite_bloc.freezed.dart';
 
 class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
   final IFavouriteRepository favouriteRepository;
+
+  // TODO: Mahendra
+  // Inject UserBloc here, so you pass the entitiy to repository layer
+
   // final ShipToCodeBloc shipToCodeBloc;
   // late final StreamSubscription _shipToBlocSubscription;
   FavouriteBloc({

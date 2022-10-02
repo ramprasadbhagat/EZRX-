@@ -8,10 +8,7 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -127,8 +124,7 @@ void main() {
           BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
           BlocProvider<CustomerCodeBloc>(
               create: (context) => customerCodeBlocMock),
-          BlocProvider<ShipToCodeBloc>(
-              create: (context) => shipToCodeBlocMock),
+          BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBlocMock),
           BlocProvider<AuthBloc>(create: (context) => authBlocMock),
         ],
         child: const AccountTab(),
@@ -160,98 +156,100 @@ void main() {
       },
       variant: variants,
     );
-    testWidgets(
-      'Test Sales Org Selector tile',
-      (tester) async {
-        final expectedStates = [
-          SalesOrgState.initial().copyWith(
-              salesOrganisation: SalesOrganisation.empty()
-                  .copyWith(salesOrg: SalesOrg('FAKE-SALE-ORG'))),
-        ];
-        final expectedUserStates = [
-          UserState.initial().copyWith(
-              user: User.empty().copyWith(userSalesOrganisations: [
-            SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('FAKE-ZPMG'))
-          ])),
-          UserState.initial().copyWith(
-              user: User.empty().copyWith(userSalesOrganisations: [
-            SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('FAKE-TW'))
-          ]))
-        ];
-        whenListen(salesOrgBlocMock, Stream.fromIterable(expectedStates));
-        whenListen(userBlocMock, Stream.fromIterable(expectedUserStates));
 
-        await tester.pumpWidget(getScopedWidget());
-        whenListen(userBlocMock, Stream.fromIterable(expectedUserStates));
-        await tester.pump();
-        final salesOrgSelectTile = find.byKey(const Key('salesOrgSelect'));
-        await tester.tap(salesOrgSelectTile);
-        await tester.pump();
+    // TODO: need Wasim move this to home page test
+    // testWidgets(
+    //   'Test Sales Org Selector tile',
+    //   (tester) async {
+    //     final expectedStates = [
+    //       SalesOrgState.initial().copyWith(
+    //           salesOrganisation: SalesOrganisation.empty()
+    //               .copyWith(salesOrg: SalesOrg('FAKE-SALE-ORG'))),
+    //     ];
+    //     final expectedUserStates = [
+    //       UserState.initial().copyWith(
+    //           user: User.empty().copyWith(userSalesOrganisations: [
+    //         SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('FAKE-ZPMG'))
+    //       ])),
+    //       UserState.initial().copyWith(
+    //           user: User.empty().copyWith(userSalesOrganisations: [
+    //         SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('FAKE-TW'))
+    //       ]))
+    //     ];
+    //     whenListen(salesOrgBlocMock, Stream.fromIterable(expectedStates));
+    //     whenListen(userBlocMock, Stream.fromIterable(expectedUserStates));
 
-        if (salesOrgVariants.currentValue == SalesOrgVariant.onn) {
-          final salesOrgOption = find.byKey(const Key('salesOrgOptionFAKE-TW'));
-          expect(salesOrgOption, findsOneWidget);
-          await tester.tap(salesOrgOption);
-          await tester.pump();
-        }
-        expect(find.text('Please select a Sales Org'.tr()), findsOneWidget);
-      },
-      variant: salesOrgVariants,
-    );
+    //     await tester.pumpWidget(getScopedWidget());
+    //     whenListen(userBlocMock, Stream.fromIterable(expectedUserStates));
+    //     await tester.pump();
+    //     final salesOrgSelectTile = find.byKey(const Key('salesOrgSelect'));
+    //     await tester.tap(salesOrgSelectTile);
+    //     await tester.pump();
 
-    testWidgets(
-      'Test Customer Code Selector tile',
-      (tester) async {
-        final expectedStates = [
-          CustomerCodeState.initial().copyWith(
-              customeCodeInfo: CustomerCodeInfo.empty()
-                  .copyWith(customerCodeSoldTo: 'fake-customer-code')),
-        ];
-        whenListen(customerCodeBlocMock, Stream.fromIterable(expectedStates));
-        await tester.pumpWidget(getScopedWidget());
-        final customerCodeSelectTile =
-            find.byKey(const Key('customerCodeSelect'));
-        await tester.tap(customerCodeSelectTile);
-        await tester.pump();
-      },
-      variant: customerCodeVariants,
-    );
+    //     if (salesOrgVariants.currentValue == SalesOrgVariant.onn) {
+    //       final salesOrgOption = find.byKey(const Key('salesOrgOptionFAKE-TW'));
+    //       expect(salesOrgOption, findsOneWidget);
+    //       await tester.tap(salesOrgOption);
+    //       await tester.pump();
+    //     }
+    //     expect(find.text('Please select a Sales Org'.tr()), findsOneWidget);
+    //   },
+    //   variant: salesOrgVariants,
+    // );
 
-    testWidgets(
-      'Test Ship To Code Selector tile',
-      (tester) async {
-        final expectedStates = [
-          ShipToCodeState.initial().copyWith(
-              shipToInfo: ShipToInfo.empty()
-                  .copyWith(shipToCustomerCode: 'fake-ship_to-code')),
-        ];
-        final expectedOnShipToSelectStates = [
-          ShipToCodeState.initial().copyWith(
-              shipToInfo: ShipToInfo.empty()
-                  .copyWith(shipToCustomerCode: 'fake-123456')),
-        ];
-        whenListen(shipToCodeBlocMock, Stream.fromIterable(expectedStates));
-        whenListen(shipToCodeBlocMock,
-            Stream.fromIterable(expectedOnShipToSelectStates));
+    // testWidgets(
+    //   'Test Customer Code Selector tile',
+    //   (tester) async {
+    //     final expectedStates = [
+    //       CustomerCodeState.initial().copyWith(
+    //           customeCodeInfo: CustomerCodeInfo.empty()
+    //               .copyWith(customerCodeSoldTo: 'fake-customer-code')),
+    //     ];
+    //     whenListen(customerCodeBlocMock, Stream.fromIterable(expectedStates));
+    //     await tester.pumpWidget(getScopedWidget());
+    //     final customerCodeSelectTile =
+    //         find.byKey(const Key('customerCodeSelect'));
+    //     await tester.tap(customerCodeSelectTile);
+    //     await tester.pump();
+    //   },
+    //   variant: customerCodeVariants,
+    // );
 
-        await tester.pumpWidget(getScopedWidget());
-        whenListen(shipToCodeBlocMock, Stream.fromIterable(expectedOnShipToSelectStates));
-        await tester.pump();
-        final shipToCodeSelectTile =
-            find.byKey(const Key('shipToCodeSelect'));
-        await tester.tap(shipToCodeSelectTile);
-        await tester.pump();
+    // testWidgets(
+    //   'Test Ship To Code Selector tile',
+    //   (tester) async {
+    //     final expectedStates = [
+    //       ShipToCodeState.initial().copyWith(
+    //           shipToInfo: ShipToInfo.empty()
+    //               .copyWith(shipToCustomerCode: 'fake-ship_to-code')),
+    //     ];
+    //     final expectedOnShipToSelectStates = [
+    //       ShipToCodeState.initial().copyWith(
+    //           shipToInfo: ShipToInfo.empty()
+    //               .copyWith(shipToCustomerCode: 'fake-123456')),
+    //     ];
+    //     whenListen(shipToCodeBlocMock, Stream.fromIterable(expectedStates));
+    //     whenListen(shipToCodeBlocMock,
+    //         Stream.fromIterable(expectedOnShipToSelectStates));
 
-        if (shipToCodeVariants.currentValue == CustomerCodeVariant.onn) {
-          final shipToCodeOption = find.byKey(const Key('shipToOptionfake-123456'));
-          expect(shipToCodeOption, findsOneWidget);
-          await tester.tap(shipToCodeOption);
-          await tester.pump();
-        }
-        expect(find.text('Please select a shipping address'.tr()), findsOneWidget);
-      },
-      variant: shipToCodeVariants,
-    );
+    //     await tester.pumpWidget(getScopedWidget());
+    //     whenListen(shipToCodeBlocMock, Stream.fromIterable(expectedOnShipToSelectStates));
+    //     await tester.pump();
+    //     final shipToCodeSelectTile =
+    //         find.byKey(const Key('shipToCodeSelect'));
+    //     await tester.tap(shipToCodeSelectTile);
+    //     await tester.pump();
+
+    //     if (shipToCodeVariants.currentValue == CustomerCodeVariant.onn) {
+    //       final shipToCodeOption = find.byKey(const Key('shipToOptionfake-123456'));
+    //       expect(shipToCodeOption, findsOneWidget);
+    //       await tester.tap(shipToCodeOption);
+    //       await tester.pump();
+    //     }
+    //     expect(find.text('Please select a shipping address'.tr()), findsOneWidget);
+    //   },
+    //   variant: shipToCodeVariants,
+    // );
 
     testWidgets('Tap login_on_behalf', (tester) async {
       final expectedStates = [
