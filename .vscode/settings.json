@@ -44,5 +44,5 @@
         "coverage.xml",
         "jacoco.xml"
     ],
-    "terminal.integrated.fontWeight": "normal"
+    "terminal.integrated.fontWeight": "normal",
 }

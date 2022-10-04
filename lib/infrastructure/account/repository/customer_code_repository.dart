@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
@@ -21,13 +20,21 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
     required this.remoteDataSource,
     required this.localCustomerCodeDataSource,
   });
-  
+
   @override
-  Future<Either<ApiFailure, List<CustomerCodeInfo>>> getCustomerCode(SalesOrganisation salesOrganisation,String customerCode,bool hideCustomer,int pageIndex,String loginUserType,String userName,) async {
+  Future<Either<ApiFailure, List<CustomerCodeInfo>>> getCustomerCode(
+    SalesOrganisation salesOrganisation,
+    String customerCode,
+    bool hideCustomer,
+    int pageIndex,
+    String loginUserType,
+    String userName,
+  ) async {
     final salesOrg = salesOrganisation.salesOrg.getOrCrash();
     if (config.appFlavor == Flavor.mock) {
       try {
-        final customerCodeInfo = await localCustomerCodeDataSource.getCustomerInfo(
+        final customerCodeInfo =
+            await localCustomerCodeDataSource.getCustomerInfo(
           loginUserType: loginUserType,
         );
 

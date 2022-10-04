@@ -15,12 +15,12 @@ class BillToAddress with _$BillToAddress {
   }) = _BillToAddress;
 
   factory BillToAddress.empty() => const BillToAddress(
-    street: '',
-    street2: '',
-    street3: '',
-    street4: '',
-    street5: '',
-  );
+        street: '',
+        street2: '',
+        street3: '',
+        street4: '',
+        street5: '',
+      );
 
   @override
   String toString() => '$street $street2 $street3 $street4 $street5';

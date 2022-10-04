@@ -35,6 +35,18 @@ class SalesOrg extends ValueObject<String> {
     return salesOrgCountry(value.getOrElse(() => ''));
   }
 
+  String get contactEmail {
+    return salesOrgEmail(value.getOrElse(() => ''));
+  }
+
+  Contact get contact {
+    return salesOrgContact(value.getOrElse(() => ''));
+  }
+
+  String get contactPersonName {
+    return salesOrgContactPerson(value.getOrElse(() => ''));
+  }
+
   const SalesOrg._(this.value);
 }
 

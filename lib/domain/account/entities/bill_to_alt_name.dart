@@ -14,11 +14,11 @@ class BillToAltName with _$BillToAltName {
   }) = _BillToAltName;
 
   factory BillToAltName.empty() => const BillToAltName(
-    altName1: '',
-    altName2: '',
-    altName3: '',
-    altName4: '',
-  );
+        altName1: '',
+        altName2: '',
+        altName3: '',
+        altName4: '',
+      );
 
   @override
   String toString() => '$altName1 $altName2 $altName3 $altName4';

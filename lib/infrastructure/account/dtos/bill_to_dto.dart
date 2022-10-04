@@ -45,8 +45,10 @@ class BillToDto with _$BillToDto {
     @JsonKey(name: 'floor') required String floor,
     @JsonKey(name: 'plant') required String plant,
     @JsonKey(name: 'roomnumber') required String roomnumber,
-    @JsonKey(name: 'taxIncludedBySalesOrganization') required bool taxIncludedBySalesOrganization,
-    @JsonKey(name: 'customerClassification') required String customerClassification,
+    @JsonKey(name: 'taxIncludedBySalesOrganization')
+        required bool taxIncludedBySalesOrganization,
+    @JsonKey(name: 'customerClassification')
+        required String customerClassification,
     @JsonKey(name: 'customerLocalGroup') required String customerLocalGroup,
     @JsonKey(name: 'emailAddresses') required String emailAddresses,
   }) = _BillToDto;
@@ -142,8 +144,6 @@ class BillToDto with _$BillToDto {
       customerLocalGroup: customerLocalGroup,
     );
   }
-
-
 
   factory BillToDto.fromJson(Map<String, dynamic> json) =>
       _$BillToDtoFromJson(json);

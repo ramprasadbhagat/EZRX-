@@ -89,8 +89,6 @@ class ShipToDto with _$ShipToDto {
     );
   }
 
-
-
   factory ShipToDto.fromJson(Map<String, dynamic> json) =>
       _$ShipToDtoFromJson(json);
 }

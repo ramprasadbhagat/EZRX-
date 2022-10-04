@@ -43,11 +43,25 @@ class BillToInfo with _$BillToInfo {
   factory BillToInfo.empty() => const BillToInfo(
         defaulBillToAddress: false,
         billToCustomerCode: '',
-        billToName: BillToName(name1: '', name2: '', name3: '', name4: '',),
+        billToName: BillToName(
+          name1: '',
+          name2: '',
+          name3: '',
+          name4: '',
+        ),
         billToAddress: BillToAddress(
-            street: '', street2: '', street3: '', street4: '', street5: '',),
+          street: '',
+          street2: '',
+          street3: '',
+          street4: '',
+          street5: '',
+        ),
         billToAltName: BillToAltName(
-            altName1: '', altName2: '', altName3: '', altName4: '',),
+          altName1: '',
+          altName2: '',
+          altName3: '',
+          altName4: '',
+        ),
         emailAddresses: '',
         taxNumber: '',
         status: '',

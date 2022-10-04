@@ -82,6 +82,7 @@ dart_code_metrics:
     - long-method:
         exclude:
           - "**/*_bloc.dart"
+          - "**/value_transformers.dart"
     - long-parameter-list
   metrics:
     cyclomatic-complexity: 30

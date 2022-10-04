@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
@@ -25,6 +26,12 @@ class SettingsPage extends StatelessWidget {
                   const LanguageTile(),
                   const PrivacyPolicy(),
                   const ChangePasswordTile(),
+                  ListTile(
+                    key: const Key('contactUsTile'),
+                    leading: const Icon(Icons.contact_support_outlined),
+                    title: const Text('Contact Us').tr(),
+                    onTap: () => context.router.pushNamed('contact_us_page'),
+                  ),
                   ListTile(
                     key: const Key('logoutTile'),
                     leading: const Icon(Icons.logout_outlined),

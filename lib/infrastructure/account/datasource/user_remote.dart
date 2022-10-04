@@ -13,6 +13,7 @@ class UserRemoteDataSource {
   HttpService httpService;
   UserQueryMutation userQueryMutation;
   DataSourceExceptionHandler dataSourceExceptionHandler;
+
   UserRemoteDataSource({
     required this.httpService,
     required this.userQueryMutation,

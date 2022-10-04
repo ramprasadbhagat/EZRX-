@@ -15,6 +15,4 @@ class CustomerCodeEvent with _$CustomerCodeEvent {
     required String userRoleType,
     required String userName,
   }) = _Fetch;
-
-  
 }

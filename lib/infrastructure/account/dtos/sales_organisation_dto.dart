@@ -23,7 +23,8 @@ class SalesOrganisationDto with _$SalesOrganisationDto {
   }) {
     return SalesOrganisationDto(
       salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-      customerCode: salesOrganisation.customerInfos[index].customerCodeSoldTo.getOrCrash(),
+      customerCode: salesOrganisation.customerInfos[index].customerCodeSoldTo
+          .getOrCrash(),
       shipToCodes: salesOrganisation.customerInfos[index].shipToInfos
           .map((e) => e.shipToCustomerCode)
           .toList(),

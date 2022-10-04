@@ -1,3 +1,127 @@
+import 'dart:core';
+
+Contact salesOrgContact(String salesOrg) {
+  switch (salesOrg) {
+    case '2001':
+      return Contact(
+        instruction: 'Toll Free 1800 88 3711(Press 2)',
+        phoneNumbers: ['1800883711'],
+      );
+    case '2200':
+    case '2201':
+    case '2203':
+    case '2250':
+      return Contact(
+        instruction: '',
+        phoneNumbers: ['+9519345524', '+959797207000'],
+      );
+    case '2500':
+      return Contact(
+        instruction:
+            'Telephone Number: +632 8236-6488\nFax number: +63 2 822-6979',
+        phoneNumbers: ['+63282366488'],
+      );
+    case '2501':
+      return Contact(
+        instruction:
+            '(02) 84241228 (Manila Line)\n(049) 5598120 (Laguna Line)\nMobile: 09190560455',
+        phoneNumbers: ['0284241228', '0495598120', '09190560455'],
+      );
+    case '2601':
+      return Contact(
+        instruction: '',
+        phoneNumbers: ['+6565483190'],
+      );
+    case '2800':
+    case '2801':
+    case '2802':
+    case '2803':
+    case '2804':
+    case '2805':
+      return Contact(
+        instruction: '',
+        phoneNumbers: ['0809090887'],
+      );
+    case '2900':
+    case '2902':
+      return Contact(
+        instruction: '',
+        phoneNumbers: ['+6621231000', '1800500000'],
+      );
+    case '3070':
+    case '3000':
+    case '3001':
+    case '3050':
+    case '3072':
+    case '3090':
+      return Contact(
+        instruction:
+            'Số điện thoại miễn cước 1800 5555 58 và bấm số 3 để được hỗ trợ',
+        phoneNumbers: ['1800555558'],
+      );
+    default:
+      return Contact.empty();
+  }
+}
+
+String salesOrgEmail(String value) {
+  final contactEmailMap = {
+    '2001': 'myezrx@zuelligpharma.com',
+    '2200': 'Zinkohtay@zuelligpharma.com',
+    '2201': 'Zinkohtay@zuelligpharma.com',
+    '2203': 'Zinkohtay@zuelligpharma.com',
+    '2250': 'Zinkohtay@zuelligpharma.com',
+    '2500': 'PHZPCallCenter@zuelligpharma.com',
+    '2501': 'customerservice@metrodrug.com.ph',
+    '2601': 'SGZPSCallCenterMailbox@zuelligpharma.com',
+    '2800': 'ezrx4u@zuelligpharma.com',
+    '2801': 'ezrx4u@zuelligpharma.com',
+    '2802': 'ezrx4u@zuelligpharma.com',
+    '2803': 'ezrx4u@zuelligpharma.com',
+    '2804': 'ezrx4u@zuelligpharma.com',
+    '2805': 'ezrx4u@zuelligpharma.com',
+    '2900': 'ZPTH-CS-CRC@zuelligpharma.com',
+    '2902': 'ZPTH-CS-CRC@zuelligpharma.com',
+    '3070': 'dat.hang@ezrx.com.vn',
+    '3000': 'dat.hang@ezrx.com.vn',
+    '3001': 'dat.hang@ezrx.com.vn',
+    '3050': 'dat.hang@ezrx.com.vn',
+    '3072': 'dat.hang@ezrx.com.vn',
+    '3090': 'dat.hang@ezrx.com.vn',
+  };
+
+  return contactEmailMap[value] ?? '';
+}
+
+String salesOrgContactPerson(String value) {
+  final contactPersonMap = {
+    '2001': 'My eZRx Support Team',
+    '2200': 'Mr Zin Ko Htay, Trade Sales Team',
+    '2201': 'Mr Zin Ko Htay, Trade Sales Team',
+    '2203': 'Mr Zin Ko Htay, Trade Sales Team',
+    '2250': 'Mr Zin Ko Htay, Trade Sales Team',
+    '2500': 'ZPC Customer Service',
+    '2501': 'MDI Customer Service',
+    '2601': 'SG Customer Support',
+    '2800': 'eZRx Service Team',
+    '2801': 'eZRx Service Team',
+    '2802': 'eZRx Service Team',
+    '2803': 'eZRx Service Team',
+    '2804': 'eZRx Service Team',
+    '2805': 'eZRx Service Team',
+    '2900': 'ZP Thailand Customer Support',
+    '2902': 'ZP Thailand Customer Support',
+    '3070': 'Ty TNHH Thương Mại và Dược Phẩm Sang',
+    '3000': 'Ty TNHH Thương Mại và Dược Phẩm Sang',
+    '3001': 'Ty TNHH Thương Mại và Dược Phẩm Sang',
+    '3050': 'Ty TNHH Thương Mại và Dược Phẩm Sang',
+    '3072': 'Ty TNHH Thương Mại và Dược Phẩm Sang',
+    '3090': 'Ty TNHH Thương Mại và Dược Phẩm Sang',
+  };
+
+  return contactPersonMap[value] ?? '';
+}
+
 String salesOrgBuName(String salesOrg) {
   // use map insted of switch statement to reduce cyclomatic complexity
   final salesOrgBuMap = {
@@ -177,3 +301,10 @@ String currencySymbol(String currency) {
 //       return false;
 //   }
 // }
+
+class Contact {
+  String instruction;
+  List<String> phoneNumbers;
+  Contact({required this.instruction, required this.phoneNumbers});
+  factory Contact.empty() => Contact(instruction: '', phoneNumbers: <String>[]);
+}
