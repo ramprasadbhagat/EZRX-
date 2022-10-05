@@ -239,7 +239,8 @@ class _CustomerCodeSelector extends StatelessWidget {
         );
       },
       buildWhen: (previous, current) =>
-          previous.isFetching != current.isFetching,
+          previous.isFetching != current.isFetching ||
+          previous.customeCodeInfo != current.customeCodeInfo,
       builder: (context, state) {
         return _CustomSelector(
           key: const Key('customerCodeSelect'),
