@@ -27,6 +27,10 @@ mixin _$ApiFailure {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometirc,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,6 +44,10 @@ mixin _$ApiFailure {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -53,6 +61,10 @@ mixin _$ApiFailure {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -68,6 +80,13 @@ mixin _$ApiFailure {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_DeviceNotSupportBiometirc value)
+        deviceNotSupportBiometirc,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -82,6 +101,11 @@ mixin _$ApiFailure {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -96,6 +120,11 @@ mixin _$ApiFailure {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -188,6 +217,10 @@ class _$_Other implements _Other {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometirc,
   }) {
     return other(message);
   }
@@ -204,6 +237,10 @@ class _$_Other implements _Other {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
   }) {
     return other?.call(message);
   }
@@ -220,6 +257,10 @@ class _$_Other implements _Other {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -241,6 +282,13 @@ class _$_Other implements _Other {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_DeviceNotSupportBiometirc value)
+        deviceNotSupportBiometirc,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
   }) {
     return other(this);
   }
@@ -258,6 +306,11 @@ class _$_Other implements _Other {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
   }) {
     return other?.call(this);
   }
@@ -275,6 +328,11 @@ class _$_Other implements _Other {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -366,6 +424,10 @@ class _$_ServerError implements _ServerError {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometirc,
   }) {
     return serverError(message);
   }
@@ -382,6 +444,10 @@ class _$_ServerError implements _ServerError {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
   }) {
     return serverError?.call(message);
   }
@@ -398,6 +464,10 @@ class _$_ServerError implements _ServerError {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -419,6 +489,13 @@ class _$_ServerError implements _ServerError {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_DeviceNotSupportBiometirc value)
+        deviceNotSupportBiometirc,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
   }) {
     return serverError(this);
   }
@@ -436,6 +513,11 @@ class _$_ServerError implements _ServerError {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
   }) {
     return serverError?.call(this);
   }
@@ -453,6 +535,11 @@ class _$_ServerError implements _ServerError {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -521,6 +608,10 @@ class _$_PoorConnection implements _PoorConnection {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometirc,
   }) {
     return poorConnection();
   }
@@ -537,6 +628,10 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
   }) {
     return poorConnection?.call();
   }
@@ -553,6 +648,10 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -574,6 +673,13 @@ class _$_PoorConnection implements _PoorConnection {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_DeviceNotSupportBiometirc value)
+        deviceNotSupportBiometirc,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
   }) {
     return poorConnection(this);
   }
@@ -591,6 +697,11 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
   }) {
     return poorConnection?.call(this);
   }
@@ -608,6 +719,11 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -671,6 +787,10 @@ class _$_ServerTimeout implements _ServerTimeout {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometirc,
   }) {
     return serverTimeout();
   }
@@ -687,6 +807,10 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
   }) {
     return serverTimeout?.call();
   }
@@ -703,6 +827,10 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -724,6 +852,13 @@ class _$_ServerTimeout implements _ServerTimeout {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_DeviceNotSupportBiometirc value)
+        deviceNotSupportBiometirc,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
   }) {
     return serverTimeout(this);
   }
@@ -741,6 +876,11 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
   }) {
     return serverTimeout?.call(this);
   }
@@ -758,6 +898,11 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -820,6 +965,10 @@ class _$_UserNotFound implements _UserNotFound {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometirc,
   }) {
     return userNotFound();
   }
@@ -836,6 +985,10 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
   }) {
     return userNotFound?.call();
   }
@@ -852,6 +1005,10 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -873,6 +1030,13 @@ class _$_UserNotFound implements _UserNotFound {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_DeviceNotSupportBiometirc value)
+        deviceNotSupportBiometirc,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
   }) {
     return userNotFound(this);
   }
@@ -890,6 +1054,11 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
   }) {
     return userNotFound?.call(this);
   }
@@ -907,6 +1076,11 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -975,6 +1149,10 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometirc,
   }) {
     return invalidEmailAndPasswordCombination();
   }
@@ -991,6 +1169,10 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
   }) {
     return invalidEmailAndPasswordCombination?.call();
   }
@@ -1007,6 +1189,10 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -1028,6 +1214,13 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_DeviceNotSupportBiometirc value)
+        deviceNotSupportBiometirc,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
   }) {
     return invalidEmailAndPasswordCombination(this);
   }
@@ -1045,6 +1238,11 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
   }) {
     return invalidEmailAndPasswordCombination?.call(this);
   }
@@ -1062,6 +1260,11 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -1126,6 +1329,10 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometirc,
   }) {
     return accountLocked();
   }
@@ -1142,6 +1349,10 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
   }) {
     return accountLocked?.call();
   }
@@ -1158,6 +1369,10 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -1179,6 +1394,13 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_DeviceNotSupportBiometirc value)
+        deviceNotSupportBiometirc,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
   }) {
     return accountLocked(this);
   }
@@ -1196,6 +1418,11 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
   }) {
     return accountLocked?.call(this);
   }
@@ -1213,6 +1440,11 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -1276,6 +1508,10 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometirc,
   }) {
     return accountExpired();
   }
@@ -1292,6 +1528,10 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
   }) {
     return accountExpired?.call();
   }
@@ -1308,6 +1548,10 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -1329,6 +1573,13 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_DeviceNotSupportBiometirc value)
+        deviceNotSupportBiometirc,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
   }) {
     return accountExpired(this);
   }
@@ -1346,6 +1597,11 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
   }) {
     return accountExpired?.call(this);
   }
@@ -1363,6 +1619,11 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -1425,6 +1686,10 @@ class _$_TokenExpired implements _TokenExpired {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometirc,
   }) {
     return tokenExpired();
   }
@@ -1441,6 +1706,10 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
   }) {
     return tokenExpired?.call();
   }
@@ -1457,6 +1726,10 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -1478,6 +1751,13 @@ class _$_TokenExpired implements _TokenExpired {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_DeviceNotSupportBiometirc value)
+        deviceNotSupportBiometirc,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
   }) {
     return tokenExpired(this);
   }
@@ -1495,6 +1775,11 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
   }) {
     return tokenExpired?.call(this);
   }
@@ -1512,6 +1797,11 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -1523,4 +1813,726 @@ class _$_TokenExpired implements _TokenExpired {
 
 abstract class _TokenExpired implements ApiFailure {
   const factory _TokenExpired() = _$_TokenExpired;
+}
+
+/// @nodoc
+abstract class _$$_DeviceNotSupportBiometircCopyWith<$Res> {
+  factory _$$_DeviceNotSupportBiometircCopyWith(
+          _$_DeviceNotSupportBiometirc value,
+          $Res Function(_$_DeviceNotSupportBiometirc) then) =
+      __$$_DeviceNotSupportBiometircCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_DeviceNotSupportBiometircCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res>
+    implements _$$_DeviceNotSupportBiometircCopyWith<$Res> {
+  __$$_DeviceNotSupportBiometircCopyWithImpl(
+      _$_DeviceNotSupportBiometirc _value,
+      $Res Function(_$_DeviceNotSupportBiometirc) _then)
+      : super(_value, (v) => _then(v as _$_DeviceNotSupportBiometirc));
+
+  @override
+  _$_DeviceNotSupportBiometirc get _value =>
+      super._value as _$_DeviceNotSupportBiometirc;
+}
+
+/// @nodoc
+
+class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
+  const _$_DeviceNotSupportBiometirc();
+
+  @override
+  String toString() {
+    return 'ApiFailure.deviceNotSupportBiometirc()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DeviceNotSupportBiometirc);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometirc,
+  }) {
+    return deviceNotSupportBiometirc();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+  }) {
+    return deviceNotSupportBiometirc?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    required TResult orElse(),
+  }) {
+    if (deviceNotSupportBiometirc != null) {
+      return deviceNotSupportBiometirc();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_DeviceNotSupportBiometirc value)
+        deviceNotSupportBiometirc,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+  }) {
+    return deviceNotSupportBiometirc(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+  }) {
+    return deviceNotSupportBiometirc?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    required TResult orElse(),
+  }) {
+    if (deviceNotSupportBiometirc != null) {
+      return deviceNotSupportBiometirc(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeviceNotSupportBiometirc implements ApiFailure {
+  const factory _DeviceNotSupportBiometirc() = _$_DeviceNotSupportBiometirc;
+}
+
+/// @nodoc
+abstract class _$$_CannotCheckBiometricsCopyWith<$Res> {
+  factory _$$_CannotCheckBiometricsCopyWith(_$_CannotCheckBiometrics value,
+          $Res Function(_$_CannotCheckBiometrics) then) =
+      __$$_CannotCheckBiometricsCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_CannotCheckBiometricsCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res>
+    implements _$$_CannotCheckBiometricsCopyWith<$Res> {
+  __$$_CannotCheckBiometricsCopyWithImpl(_$_CannotCheckBiometrics _value,
+      $Res Function(_$_CannotCheckBiometrics) _then)
+      : super(_value, (v) => _then(v as _$_CannotCheckBiometrics));
+
+  @override
+  _$_CannotCheckBiometrics get _value =>
+      super._value as _$_CannotCheckBiometrics;
+}
+
+/// @nodoc
+
+class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
+  const _$_CannotCheckBiometrics();
+
+  @override
+  String toString() {
+    return 'ApiFailure.cannotCheckBiometrics()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_CannotCheckBiometrics);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometirc,
+  }) {
+    return cannotCheckBiometrics();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+  }) {
+    return cannotCheckBiometrics?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    required TResult orElse(),
+  }) {
+    if (cannotCheckBiometrics != null) {
+      return cannotCheckBiometrics();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_DeviceNotSupportBiometirc value)
+        deviceNotSupportBiometirc,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+  }) {
+    return cannotCheckBiometrics(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+  }) {
+    return cannotCheckBiometrics?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    required TResult orElse(),
+  }) {
+    if (cannotCheckBiometrics != null) {
+      return cannotCheckBiometrics(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CannotCheckBiometrics implements ApiFailure {
+  const factory _CannotCheckBiometrics() = _$_CannotCheckBiometrics;
+}
+
+/// @nodoc
+abstract class _$$_NoSupportedBiometricsCopyWith<$Res> {
+  factory _$$_NoSupportedBiometricsCopyWith(_$_NoSupportedBiometrics value,
+          $Res Function(_$_NoSupportedBiometrics) then) =
+      __$$_NoSupportedBiometricsCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_NoSupportedBiometricsCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res>
+    implements _$$_NoSupportedBiometricsCopyWith<$Res> {
+  __$$_NoSupportedBiometricsCopyWithImpl(_$_NoSupportedBiometrics _value,
+      $Res Function(_$_NoSupportedBiometrics) _then)
+      : super(_value, (v) => _then(v as _$_NoSupportedBiometrics));
+
+  @override
+  _$_NoSupportedBiometrics get _value =>
+      super._value as _$_NoSupportedBiometrics;
+}
+
+/// @nodoc
+
+class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
+  const _$_NoSupportedBiometrics();
+
+  @override
+  String toString() {
+    return 'ApiFailure.noSupportedBiometrics()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_NoSupportedBiometrics);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometirc,
+  }) {
+    return noSupportedBiometrics();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+  }) {
+    return noSupportedBiometrics?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    required TResult orElse(),
+  }) {
+    if (noSupportedBiometrics != null) {
+      return noSupportedBiometrics();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_DeviceNotSupportBiometirc value)
+        deviceNotSupportBiometirc,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+  }) {
+    return noSupportedBiometrics(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+  }) {
+    return noSupportedBiometrics?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    required TResult orElse(),
+  }) {
+    if (noSupportedBiometrics != null) {
+      return noSupportedBiometrics(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _NoSupportedBiometrics implements ApiFailure {
+  const factory _NoSupportedBiometrics() = _$_NoSupportedBiometrics;
+}
+
+/// @nodoc
+abstract class _$$_InvalidBiometircCopyWith<$Res> {
+  factory _$$_InvalidBiometircCopyWith(
+          _$_InvalidBiometirc value, $Res Function(_$_InvalidBiometirc) then) =
+      __$$_InvalidBiometircCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_InvalidBiometircCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res>
+    implements _$$_InvalidBiometircCopyWith<$Res> {
+  __$$_InvalidBiometircCopyWithImpl(
+      _$_InvalidBiometirc _value, $Res Function(_$_InvalidBiometirc) _then)
+      : super(_value, (v) => _then(v as _$_InvalidBiometirc));
+
+  @override
+  _$_InvalidBiometirc get _value => super._value as _$_InvalidBiometirc;
+}
+
+/// @nodoc
+
+class _$_InvalidBiometirc implements _InvalidBiometirc {
+  const _$_InvalidBiometirc();
+
+  @override
+  String toString() {
+    return 'ApiFailure.invalidBiometirc()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_InvalidBiometirc);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometirc,
+  }) {
+    return invalidBiometirc();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+  }) {
+    return invalidBiometirc?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    required TResult orElse(),
+  }) {
+    if (invalidBiometirc != null) {
+      return invalidBiometirc();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_DeviceNotSupportBiometirc value)
+        deviceNotSupportBiometirc,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+  }) {
+    return invalidBiometirc(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+  }) {
+    return invalidBiometirc?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    required TResult orElse(),
+  }) {
+    if (invalidBiometirc != null) {
+      return invalidBiometirc(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _InvalidBiometirc implements ApiFailure {
+  const factory _InvalidBiometirc() = _$_InvalidBiometirc;
 }

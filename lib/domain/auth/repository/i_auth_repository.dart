@@ -27,4 +27,6 @@ abstract class IAuthRepository {
   Future<Either<ApiFailure, Unit>> deleteCredential();
   Future<Either<ApiFailure, Cred>> loadCredential();
   Future<Either<ApiFailure, Login>> proxyLogin({required Username username});
+  Future<Either<ApiFailure, bool>> doBiometricAuthentication();
+  Future<Either<ApiFailure, bool>> canBeAuthenticatedAndBioAvailable();
 }

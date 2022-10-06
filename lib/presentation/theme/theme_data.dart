@@ -118,7 +118,9 @@ final appThemeData = {
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: ZPColors.primary,
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(
+          15,
+        ),
       ),
     ),
     buttonTheme: const ButtonThemeData(

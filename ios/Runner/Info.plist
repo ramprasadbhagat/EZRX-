@@ -109,5 +109,7 @@
     <string>tel</string>
     <string>mailto</string>
   </array>
+	<key>NSFaceIDUsageDescription</key>
+	<string>App wants to access faceid to secure account access for logged in user.</string>
 </dict>
 </plist>

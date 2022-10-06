@@ -11,7 +11,6 @@ part 'auth_bloc.freezed.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final IAuthRepository authRepository;
-
   AuthBloc({
     required this.authRepository,
   }) : super(const AuthState.initial()) {
@@ -27,11 +26,26 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await authRepository.initOkta();
         add(const AuthEvent.authCheck());
       },
+      bioCheck: (e) async {
+        final isBiometricPossibleResult =
+            await authRepository.canBeAuthenticatedAndBioAvailable();
+        await isBiometricPossibleResult.fold(
+          (error) async => emit(const AuthState.authenticated()),
+          (response) async {
+            final authResultEither =
+                await authRepository.doBiometricAuthentication();
+            await authResultEither.fold(
+              (error) async => emit(const AuthState.unauthenticated()),
+              (response) async => emit(const AuthState.authenticated()),
+            );
+          },
+        );
+      },
       authCheck: (e) async {
         final result = await authRepository.tokenValid();
         await result.fold(
           (invalid) async => add(const AuthEvent.refreshOktaToken()),
-          (valid) async => emit(const AuthState.authenticated()),
+          (valid) async => add(const AuthEvent.bioCheck()),
         );
       },
       refreshOktaToken: (e) async {
@@ -50,7 +64,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           (failure) async => emit(const AuthState.unauthenticated()),
           (login) async {
             await authRepository.storeJWT(jwt: login.jwt);
-            emit(const AuthState.authenticated());
+            add(const AuthEvent.bioCheck());
           },
         );
       },

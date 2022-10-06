@@ -19,6 +19,7 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() bioCheck,
     required TResult Function() authCheck,
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
@@ -28,6 +29,7 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? bioCheck,
     TResult Function()? authCheck,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
@@ -37,6 +39,7 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? bioCheck,
     TResult Function()? authCheck,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
@@ -47,6 +50,7 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AuthInit value) init,
+    required TResult Function(_BioCheck value) bioCheck,
     required TResult Function(_AuthCheck value) authCheck,
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
@@ -56,6 +60,7 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
     TResult Function(_AuthCheck value)? authCheck,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
@@ -65,6 +70,7 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
     TResult Function(_AuthCheck value)? authCheck,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
@@ -130,6 +136,7 @@ class _$_AuthInit implements _AuthInit {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() bioCheck,
     required TResult Function() authCheck,
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
@@ -142,6 +149,7 @@ class _$_AuthInit implements _AuthInit {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? bioCheck,
     TResult Function()? authCheck,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
@@ -154,6 +162,7 @@ class _$_AuthInit implements _AuthInit {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? bioCheck,
     TResult Function()? authCheck,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
@@ -170,6 +179,7 @@ class _$_AuthInit implements _AuthInit {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AuthInit value) init,
+    required TResult Function(_BioCheck value) bioCheck,
     required TResult Function(_AuthCheck value) authCheck,
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
@@ -182,6 +192,7 @@ class _$_AuthInit implements _AuthInit {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
     TResult Function(_AuthCheck value)? authCheck,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
@@ -194,6 +205,7 @@ class _$_AuthInit implements _AuthInit {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
     TResult Function(_AuthCheck value)? authCheck,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
@@ -209,6 +221,134 @@ class _$_AuthInit implements _AuthInit {
 
 abstract class _AuthInit implements AuthEvent {
   const factory _AuthInit() = _$_AuthInit;
+}
+
+/// @nodoc
+abstract class _$$_BioCheckCopyWith<$Res> {
+  factory _$$_BioCheckCopyWith(
+          _$_BioCheck value, $Res Function(_$_BioCheck) then) =
+      __$$_BioCheckCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_BioCheckCopyWithImpl<$Res> extends _$AuthEventCopyWithImpl<$Res>
+    implements _$$_BioCheckCopyWith<$Res> {
+  __$$_BioCheckCopyWithImpl(
+      _$_BioCheck _value, $Res Function(_$_BioCheck) _then)
+      : super(_value, (v) => _then(v as _$_BioCheck));
+
+  @override
+  _$_BioCheck get _value => super._value as _$_BioCheck;
+}
+
+/// @nodoc
+
+class _$_BioCheck implements _BioCheck {
+  const _$_BioCheck();
+
+  @override
+  String toString() {
+    return 'AuthEvent.bioCheck()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_BioCheck);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() bioCheck,
+    required TResult Function() authCheck,
+    required TResult Function() refreshOktaToken,
+    required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
+    required TResult Function() logout,
+  }) {
+    return bioCheck();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? bioCheck,
+    TResult Function()? authCheck,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult Function()? logout,
+  }) {
+    return bioCheck?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? bioCheck,
+    TResult Function()? authCheck,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult Function()? logout,
+    required TResult orElse(),
+  }) {
+    if (bioCheck != null) {
+      return bioCheck();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AuthInit value) init,
+    required TResult Function(_BioCheck value) bioCheck,
+    required TResult Function(_AuthCheck value) authCheck,
+    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
+    required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
+    required TResult Function(_Logout value) logout,
+  }) {
+    return bioCheck(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
+    TResult Function(_AuthCheck value)? authCheck,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
+    TResult Function(_Logout value)? logout,
+  }) {
+    return bioCheck?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
+    TResult Function(_AuthCheck value)? authCheck,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
+    TResult Function(_Logout value)? logout,
+    required TResult orElse(),
+  }) {
+    if (bioCheck != null) {
+      return bioCheck(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _BioCheck implements AuthEvent {
+  const factory _BioCheck() = _$_BioCheck;
 }
 
 /// @nodoc
@@ -252,6 +392,7 @@ class _$_AuthCheck implements _AuthCheck {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() bioCheck,
     required TResult Function() authCheck,
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
@@ -264,6 +405,7 @@ class _$_AuthCheck implements _AuthCheck {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? bioCheck,
     TResult Function()? authCheck,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
@@ -276,6 +418,7 @@ class _$_AuthCheck implements _AuthCheck {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? bioCheck,
     TResult Function()? authCheck,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
@@ -292,6 +435,7 @@ class _$_AuthCheck implements _AuthCheck {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AuthInit value) init,
+    required TResult Function(_BioCheck value) bioCheck,
     required TResult Function(_AuthCheck value) authCheck,
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
@@ -304,6 +448,7 @@ class _$_AuthCheck implements _AuthCheck {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
     TResult Function(_AuthCheck value)? authCheck,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
@@ -316,6 +461,7 @@ class _$_AuthCheck implements _AuthCheck {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
     TResult Function(_AuthCheck value)? authCheck,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
@@ -375,6 +521,7 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() bioCheck,
     required TResult Function() authCheck,
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
@@ -387,6 +534,7 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? bioCheck,
     TResult Function()? authCheck,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
@@ -399,6 +547,7 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? bioCheck,
     TResult Function()? authCheck,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
@@ -415,6 +564,7 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AuthInit value) init,
+    required TResult Function(_BioCheck value) bioCheck,
     required TResult Function(_AuthCheck value) authCheck,
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
@@ -427,6 +577,7 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
     TResult Function(_AuthCheck value)? authCheck,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
@@ -439,6 +590,7 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
     TResult Function(_AuthCheck value)? authCheck,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
@@ -523,6 +675,7 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() bioCheck,
     required TResult Function() authCheck,
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
@@ -535,6 +688,7 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? bioCheck,
     TResult Function()? authCheck,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
@@ -547,6 +701,7 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? bioCheck,
     TResult Function()? authCheck,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
@@ -563,6 +718,7 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AuthInit value) init,
+    required TResult Function(_BioCheck value) bioCheck,
     required TResult Function(_AuthCheck value) authCheck,
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
@@ -575,6 +731,7 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
     TResult Function(_AuthCheck value)? authCheck,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
@@ -587,6 +744,7 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
     TResult Function(_AuthCheck value)? authCheck,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
@@ -649,6 +807,7 @@ class _$_Logout implements _Logout {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() bioCheck,
     required TResult Function() authCheck,
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
@@ -661,6 +820,7 @@ class _$_Logout implements _Logout {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? bioCheck,
     TResult Function()? authCheck,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
@@ -673,6 +833,7 @@ class _$_Logout implements _Logout {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? bioCheck,
     TResult Function()? authCheck,
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
@@ -689,6 +850,7 @@ class _$_Logout implements _Logout {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AuthInit value) init,
+    required TResult Function(_BioCheck value) bioCheck,
     required TResult Function(_AuthCheck value) authCheck,
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
@@ -701,6 +863,7 @@ class _$_Logout implements _Logout {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
     TResult Function(_AuthCheck value)? authCheck,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
@@ -713,6 +876,7 @@ class _$_Logout implements _Logout {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
     TResult Function(_AuthCheck value)? authCheck,
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,

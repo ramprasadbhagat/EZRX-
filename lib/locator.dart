@@ -79,6 +79,10 @@ import 'package:ezrxmobile/infrastructure/order/repository/order_history_reposit
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/routes/router_observer.dart';
 import 'package:get_it/get_it.dart';
+import 'package:local_auth/local_auth.dart';
+
+import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_query_mutation.dart';
 
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_query_mutation.dart';
@@ -151,6 +155,8 @@ void setupLocator() {
 
   locator.registerLazySingleton(() => DataSourceExceptionHandler());
 
+  locator.registerLazySingleton(() => LocalAuthentication());
+
   //============================================================
   //  Auth
   //
@@ -175,6 +181,7 @@ void setupLocator() {
       credStorage: locator<CredStorage>(),
       oktaLoginServices: locator<OktaLoginServices>(),
       pushNotificationService: locator<PushNotificationService>(),
+      localAuthentication: locator<LocalAuthentication>(),
     ),
   );
 

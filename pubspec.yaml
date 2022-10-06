@@ -60,6 +60,7 @@ dependencies:
     git: https://github.com/easyhour/easy_localization_loader
   upgrader: ^4.6.1
   shared_preferences: ^2.0.15
+  local_auth: ^2.1.2
     
 
   # responsive_framework: ^0.2.0

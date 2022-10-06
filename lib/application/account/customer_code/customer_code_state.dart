@@ -2,7 +2,7 @@ part of 'customer_code_bloc.dart';
 
 @freezed
 class CustomerCodeState with _$CustomerCodeState {
- const factory CustomerCodeState({
+  const factory CustomerCodeState({
     required CustomerCodeInfo customeCodeInfo,
     required List<CustomerCodeInfo> customerCodeList,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,

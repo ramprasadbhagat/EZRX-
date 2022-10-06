@@ -7,14 +7,21 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:mocktail/mocktail.dart';
 
 class AuthRepoMock extends Mock implements AuthRepository {}
+
+final locator = GetIt.instance;
 
 void main() {
   final AuthRepository authRepoMock = AuthRepoMock();
   final fakeJWT = JWT('fake-success');
   group('Auth Bloc ', () {
+    setUpAll(() {
+      locator.registerLazySingleton(() => LocalAuthentication());
+    });
     blocTest(
       'Unauthenticated On Auth Check Test',
       build: () => AuthBloc(authRepository: authRepoMock),
@@ -45,8 +52,30 @@ void main() {
             (invocation) async => const Left(ApiFailure.other('fake-error')));
         when(() => authRepoMock.tokenValid())
             .thenAnswer((invocation) async => const Right(unit));
+        when(() => authRepoMock.canBeAuthenticatedAndBioAvailable()).thenAnswer(
+            (invocation) async =>
+                const Left(ApiFailure.deviceNotSupportBiometirc()));
       },
       expect: () => [const AuthState.authenticated()],
+    );
+    blocTest(
+      'Authenticated On Auth Check Test With Biometric Failure ',
+      build: () => AuthBloc(authRepository: authRepoMock),
+      setUp: () {
+        when(() => authRepoMock.initTokenStorage()).thenAnswer(
+            (invocation) async => const Left(ApiFailure.other('fake-error')));
+        when(() => authRepoMock.initCredStorage()).thenAnswer(
+            (invocation) async => const Left(ApiFailure.other('fake-error')));
+        when(() => authRepoMock.initOkta()).thenAnswer(
+            (invocation) async => const Left(ApiFailure.other('fake-error')));
+        when(() => authRepoMock.tokenValid())
+            .thenAnswer((invocation) async => const Right(unit));
+        when(() => authRepoMock.canBeAuthenticatedAndBioAvailable())
+            .thenAnswer((invocation) async => const Right(true));
+        when(() => authRepoMock.doBiometricAuthentication()).thenAnswer(
+            (invocation) async => const Left(ApiFailure.invalidBiometirc()));
+      },
+      expect: () => [const AuthState.unauthenticated()],
     );
     blocTest('Unauthenticated On Okta Token Test',
         build: () => AuthBloc(authRepository: authRepoMock),
@@ -99,6 +128,10 @@ void main() {
               .thenAnswer((invocation) async => Right(Login(jwt: fakeJWT)));
           when(() => authRepoMock.storeJWT(jwt: fakeJWT))
               .thenAnswer((invocation) async => const Right(unit));
+          when(() => authRepoMock.canBeAuthenticatedAndBioAvailable())
+              .thenAnswer((invocation) async => const Right(true));
+          when(() => authRepoMock.doBiometricAuthentication())
+              .thenAnswer((invocation) async => const Right(true));
         },
         expect: () =>
             [const AuthState.loading(), const AuthState.authenticated()]);

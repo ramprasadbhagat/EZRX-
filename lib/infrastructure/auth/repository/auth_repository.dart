@@ -16,6 +16,10 @@ import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
+import 'package:flutter/services.dart';
+import 'package:local_auth/local_auth.dart';
+import 'package:local_auth_android/local_auth_android.dart';
+import 'package:local_auth_ios/local_auth_ios.dart';
 
 class AuthRepository implements IAuthRepository {
   final Config config;
@@ -25,6 +29,7 @@ class AuthRepository implements IAuthRepository {
   final CredStorage credStorage;
   final OktaLoginServices oktaLoginServices;
   final PushNotificationService pushNotificationService;
+  final LocalAuthentication localAuthentication;
 
   AuthRepository({
     required this.config,
@@ -34,6 +39,7 @@ class AuthRepository implements IAuthRepository {
     required this.credStorage,
     required this.oktaLoginServices,
     required this.pushNotificationService,
+    required this.localAuthentication,
   });
 
   @override
@@ -251,6 +257,75 @@ class AuthRepository implements IAuthRepository {
 
       return Right(credDto.toDomain());
     } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, bool>> doBiometricAuthentication() async {
+    try {
+      final isLocalAuthSuccess = await localAuthentication.authenticate(
+        localizedReason: 'Complete the biometrics to continue',
+        authMessages: const <AuthMessages>[
+          AndroidAuthMessages(
+            signInTitle: 'Biometric authentication required!',
+            cancelButton: 'No thanks',
+            biometricNotRecognized: 'Failed Attempt',
+            biometricRequiredTitle: 'Supports Biometric, but not setup',
+            biometricSuccess: 'Recognised you',
+            goToSettingsButton: 'Let\'s setup biometric',
+            goToSettingsDescription: 'You can setupbiometric on settings',
+          ),
+          IOSAuthMessages(
+            cancelButton: 'No thanks',
+            goToSettingsButton: 'Let\'s setup biometric',
+            goToSettingsDescription: 'You can setupbiometric on settings',
+            lockOut: 'you have been locked out',
+            localizedFallbackTitle: 'Fallback',
+          ),
+        ],
+        options: const AuthenticationOptions(
+          biometricOnly: true,
+          useErrorDialogs: true,
+          stickyAuth: true,
+          sensitiveTransaction: true,
+        ),
+      );
+
+      if (!isLocalAuthSuccess) {
+        return const Left(ApiFailure.invalidBiometirc());
+      }
+
+      return const Right(true);
+    } on PlatformException catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, bool>> canBeAuthenticatedAndBioAvailable() async {
+    try {
+      if (!await localAuthentication.canCheckBiometrics) {
+        return const Left(ApiFailure.cannotCheckBiometrics());
+      }
+
+      if (!await localAuthentication.isDeviceSupported()) {
+        return const Left(ApiFailure.deviceNotSupportBiometirc());
+      }
+
+      final availableBiometrics =
+          await localAuthentication.getAvailableBiometrics();
+      final isBioAvailable =
+          availableBiometrics.contains(BiometricType.strong) ||
+              availableBiometrics.contains(BiometricType.face) ||
+              availableBiometrics.contains(BiometricType.fingerprint);
+
+      if (!isBioAvailable) {
+        return const Left(ApiFailure.noSupportedBiometrics());
+      }
+
+      return const Right(true);
+    } on PlatformException catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
   }

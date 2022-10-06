@@ -43,6 +43,8 @@ void main() {
       setUp: () {
         when(() => authRepoMock.loadCredential())
             .thenAnswer((invocation) async => Right(credMock));
+        when(() => authRepoMock.canBeAuthenticatedAndBioAvailable())
+            .thenAnswer((invocation) async => const Right(false));
       },
       expect: () => [
         loginFormState.copyWith(
@@ -286,6 +288,65 @@ void main() {
         loginFormState.copyWith(
           isSubmitting: false,
           showErrorMessages: true,
+          authFailureOrSuccessOption: optionOf(
+            Right(Login(jwt: fakeJWT)),
+          ),
+        ),
+      ],
+    );
+
+    blocTest(
+      'Login with email success with remember password',
+      build: () => LoginFormBloc(authRepository: authRepoMock),
+      setUp: () {
+        loginFormState = LoginFormState.initial();
+        when(() => authRepoMock.loadCredential()).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+
+        when(() =>
+                authRepoMock.login(username: fakeUser, password: fakePassword))
+            .thenAnswer(
+          (invocation) async => Right(Login(jwt: fakeJWT)),
+        );
+
+        when(() => authRepoMock.storeJWT(jwt: fakeJWT)).thenAnswer(
+          (invocation) async => const Right(unit),
+        );
+
+        when(() => authRepoMock.deleteCredential()).thenAnswer(
+          (invocation) async => const Right(unit),
+        );
+
+        when(() => authRepoMock.storeCredential(
+            username: fakeUser, password: fakePassword)).thenAnswer(
+          (invocation) async => const Right(unit),
+        );
+      },
+      act: (LoginFormBloc bloc) => bloc
+        ..add(const LoginFormEvent.usernameChanged('fake-user'))
+        ..add(const LoginFormEvent.passwordChanged('fake-password'))
+        ..add(const LoginFormEvent.rememberCheckChanged())
+        ..add(const LoginFormEvent.loginWithEmailAndPasswordPressed()),
+      expect: () => [
+        loginFormState = loginFormState.copyWith(username: fakeUser),
+        loginFormState = loginFormState.copyWith(password: fakePassword),
+        loginFormState.copyWith(
+          isSubmitting: false,
+          rememberPassword: true,
+          authFailureOrSuccessOption: none(),
+        ),
+        loginFormState.copyWith(
+          rememberPassword: true,
+          isSubmitting: true,
+          authFailureOrSuccessOption: none(),
+        ),
+        loginFormState.copyWith(
+          isSubmitting: false,
+          showErrorMessages: true,
+          rememberPassword: true,
           authFailureOrSuccessOption: optionOf(
             Right(Login(jwt: fakeJWT)),
           ),
