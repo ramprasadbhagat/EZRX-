@@ -108,10 +108,10 @@ class _SettingsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      key: const Key('settingsTile'),
-      leading: const Icon(Icons.settings_outlined),
-      title: const Text('Settings').tr(),
-      onTap: () => context.router.pushNamed('settings'),
-    );
+        key: const Key('settingsTile'),
+        leading: const Icon(Icons.settings_outlined),
+        title: const Text('Settings').tr(),
+        onTap: () => context.router.pushNamed('settings'),
+      );
   }
 }

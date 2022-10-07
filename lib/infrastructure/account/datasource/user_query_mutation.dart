@@ -128,19 +128,11 @@ class UserQueryMutation {
 
   String updateUAPQuery() {
     return '''
-      mutation updateUserMutation(\$input: updateUserInput!) {
+      mutation updateUserMutation(\$input: UpdateUserInput!) {
         updateUser(input: \$input) {
           user {
-              username
-              email
-              provider
-              role{
-                id
-              }
-              customerCode
-              shipToAddr
-              mobileNumber
-              acceptMobileTC
+            acceptAUP
+            acceptAUPTC
           }
         }
       }
@@ -149,19 +141,11 @@ class UserQueryMutation {
 
   String updateUserAcceptMobileTC() {
     return '''
-      mutation updateUserMutation(\$input: updateUserInput!) {
+      mutation updateUserMutation(\$input: UpdateUserInput!) {
         updateUser(input: \$input) {
           user {
-              username
-              email
-              provider
-              role{
-                id
-              }
-              customerCode
-              shipToAddr
-              mobileNumber
-              acceptMobileTC
+              acceptTC
+              acceptTCTimestamp
           }
         }
       }

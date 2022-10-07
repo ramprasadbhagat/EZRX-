@@ -27,7 +27,8 @@ final appThemeData = {
     appBarTheme: AppBarTheme(
       centerTitle: true,
       color: ZPColors.white,
-      titleTextStyle: ThemeData.light().textTheme.headline1,
+      titleTextStyle:
+          ThemeData.light().textTheme.headline1?.copyWith(fontSize: 21.sp),
       iconTheme: const IconThemeData(
         color: ZPColors.lightGray,
       ),

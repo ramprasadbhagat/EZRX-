@@ -8,11 +8,11 @@ class SettingAup with _$SettingAup {
 
   const factory SettingAup({
     required bool acceptAUP,
-    required String acceptAUPTC,
+    required DateTime acceptAUPTimestamp,
   }) = _SettingAup;
 
-  factory SettingAup.empty() => const SettingAup(
+  factory SettingAup.empty() => SettingAup(
         acceptAUP: false,
-        acceptAUPTC: '',
+        acceptAUPTimestamp: DateTime.parse('1970-01-01 00:00:00'),
       );
 }

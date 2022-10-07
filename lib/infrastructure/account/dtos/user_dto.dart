@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/role_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_dto.dart';
+import 'package:ezrxmobile/infrastructure/core/common/dto_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_dto.freezed.dart';
@@ -35,10 +36,12 @@ class UserDto with _$UserDto {
     @JsonKey(name: 'mobileNotifications') required bool mobileNotifications,
     @JsonKey(name: 'languagePreference') required String languagePreference,
     @JsonKey(name: 'acceptTC') required bool acceptTC,
-    @JsonKey(name: 'acceptTCTimestamp') required String acceptTCTimestamp,
+    @JsonKey(name: 'acceptTCTimestamp', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
+        required String acceptTCTimestamp,
     @JsonKey(name: 'acceptAUP') required bool acceptAUP,
-    @JsonKey(name: 'acceptAUPTC') required String acceptAUPTC,
     @JsonKey(name: 'enableOrderType') required bool enableOrderType,
+    @JsonKey(name: 'acceptAUPTC', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
+        required String acceptAUPTimestamp,
   }) = _UserDto;
 
   factory UserDto.fromDomain(User user) {
@@ -55,10 +58,10 @@ class UserDto with _$UserDto {
       mobileNotifications: user.settings.mobileNotifications,
       languagePreference: user.settings.languagePreference,
       acceptTC: user.settingTc.acceptTC,
-      acceptTCTimestamp: user.settingTc.acceptTCTimestamp,
+      acceptTCTimestamp: user.settingTc.acceptTCTimestamp.toIso8601String(),
       acceptAUP: user.settingAup.acceptAUP,
-      acceptAUPTC: user.settingAup.acceptAUPTC,
       enableOrderType: user.enableOrderType,
+      acceptAUPTimestamp: user.settingAup.acceptAUPTimestamp.toIso8601String(),
     );
   }
 
@@ -83,11 +86,11 @@ class UserDto with _$UserDto {
       ),
       settingTc: SettingTc(
         acceptTC: acceptTC,
-        acceptTCTimestamp: acceptTCTimestamp,
+        acceptTCTimestamp: DateTime.parse(acceptTCTimestamp),
       ),
       settingAup: SettingAup(
         acceptAUP: acceptAUP,
-        acceptAUPTC: acceptAUPTC,
+        acceptAUPTimestamp: DateTime.parse(acceptAUPTimestamp),
       ),
       enableOrderType: enableOrderType,
     );

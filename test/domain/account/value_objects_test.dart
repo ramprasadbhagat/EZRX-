@@ -1276,4 +1276,132 @@ void main() {
       expect(result, 'Ty TNHH Thương Mại và Dược Phẩm Sang');
     });
   });
+
+  group('Role type isAupAudience Text', () {
+    test(
+      'Test - internal_sales_rep',
+      () async {
+        const input = 'internal_sales_rep';
+        final roleType = RoleType(input);
+        expect(roleType.isAupAudience, true);
+      },
+    );
+
+    test(
+      'Test - external_sales_rep',
+      () async {
+        const input = 'external_sales_rep';
+        final roleType = RoleType(input);
+        expect(roleType.isAupAudience, true);
+      },
+    );
+
+    test(
+      'Test - root_admin',
+      () async {
+        const input = 'root_admin';
+        final roleType = RoleType(input);
+        expect(roleType.isAupAudience, true);
+      },
+    );
+
+    test(
+      'Test - zp_admin',
+      () async {
+        const input = 'zp_admin';
+        final roleType = RoleType(input);
+        expect(roleType.isAupAudience, true);
+      },
+    );
+
+    test(
+      'Test - client_admin',
+      () async {
+        const input = 'client_admin';
+        final roleType = RoleType(input);
+        expect(roleType.isAupAudience, false);
+      },
+    );
+
+    test(
+      'Test - client_admin',
+      () async {
+        const input = 'client_user';
+        final roleType = RoleType(input);
+        expect(roleType.isAupAudience, false);
+      },
+    );
+    test(
+      'Test - user',
+      () async {
+        const input = 'user';
+        final roleType = RoleType(input);
+        expect(roleType.isAupAudience, false);
+      },
+    );
+  });
+
+  group('Role type roleIsTcAudience Text', () {
+    test(
+      'Test - internal_sales_rep',
+      () async {
+        const input = 'internal_sales_rep';
+        final roleType = RoleType(input);
+        expect(roleType.isTcAudience, false);
+      },
+    );
+
+    test(
+      'Test - external_sales_rep',
+      () async {
+        const input = 'external_sales_rep';
+        final roleType = RoleType(input);
+        expect(roleType.isTcAudience, false);
+      },
+    );
+
+    test(
+      'Test - root_admin',
+      () async {
+        const input = 'root_admin';
+        final roleType = RoleType(input);
+        expect(roleType.isTcAudience, false);
+      },
+    );
+
+    test(
+      'Test - zp_admin',
+      () async {
+        const input = 'zp_admin';
+        final roleType = RoleType(input);
+        expect(roleType.isTcAudience, false);
+      },
+    );
+
+    test(
+      'Test - client_admin',
+      () async {
+        const input = 'client_admin';
+        final roleType = RoleType(input);
+        expect(roleType.isTcAudience, true);
+      },
+    );
+
+    test(
+      'Test - client_admin',
+      () async {
+        const input = 'client_user';
+        final roleType = RoleType(input);
+        expect(roleType.isTcAudience, true);
+      },
+    );
+    test(
+      'Test - user',
+      () async {
+        const input = 'user';
+        final roleType = RoleType(input);
+        expect(roleType.isTcAudience, true);
+      },
+    );
+  });
 }

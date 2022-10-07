@@ -38,17 +38,55 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       fetch: (e) async {
         final failureOrSuccess = await userRepository.getUser();
         failureOrSuccess.fold(
-          (failure) {
-            emit(state.copyWith(
-              user: User.empty(),
+          (failure) => emit(
+            state.copyWith(
               userFailureOrSuccessOption: optionOf(failureOrSuccess),
-            ));
-          },
-          (user) => emit(state.copyWith(
-            user: user,
-            userFailureOrSuccessOption: none(),
-          )),
+            ),
+          ),
+          (user) => emit(
+            state.copyWith(
+              user: user,
+              userFailureOrSuccessOption: none(),
+            ),
+          ),
         );
+      },
+      accptTnc: (e) async {
+        if (state.user.role.type.isAupAudience) {
+          final failureOrSuccess =
+              await userRepository.updateUserAup(state.user);
+
+          failureOrSuccess.fold(
+            (failure) => emit(
+              state.copyWith(
+                userFailureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            ),
+            (settingAup) => emit(
+              state.copyWith(
+                user: state.user.copyWith(settingAup: settingAup),
+                userFailureOrSuccessOption: none(),
+              ),
+            ),
+          );
+        } else {
+          final failureOrSuccess =
+              await userRepository.updateUserTc(state.user);
+
+          failureOrSuccess.fold(
+            (failure) => emit(
+              state.copyWith(
+                userFailureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            ),
+            (settingTc) => emit(
+              state.copyWith(
+                user: state.user.copyWith(settingTc: settingTc),
+                userFailureOrSuccessOption: none(),
+              ),
+            ),
+          );
+        }
       },
     );
   }
@@ -63,6 +101,5 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   @override
   void onChange(Change<UserState> change) {
     super.onChange(change);
-    // print(change);
   }
 }

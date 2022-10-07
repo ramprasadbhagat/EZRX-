@@ -20,18 +20,21 @@ mixin _$UserEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() fetch,
+    required TResult Function() accptTnc,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
+    TResult Function()? accptTnc,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
+    TResult Function()? accptTnc,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$UserEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_AccptTnc value) accptTnc,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_AccptTnc value)? accptTnc,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_AccptTnc value)? accptTnc,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,6 +119,7 @@ class _$_Initialized implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() fetch,
+    required TResult Function() accptTnc,
   }) {
     return initialized();
   }
@@ -122,6 +129,7 @@ class _$_Initialized implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
+    TResult Function()? accptTnc,
   }) {
     return initialized?.call();
   }
@@ -131,6 +139,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
+    TResult Function()? accptTnc,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -144,6 +153,7 @@ class _$_Initialized implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_AccptTnc value) accptTnc,
   }) {
     return initialized(this);
   }
@@ -153,6 +163,7 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_AccptTnc value)? accptTnc,
   }) {
     return initialized?.call(this);
   }
@@ -162,6 +173,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_AccptTnc value)? accptTnc,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -215,6 +227,7 @@ class _$_Fetch implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() fetch,
+    required TResult Function() accptTnc,
   }) {
     return fetch();
   }
@@ -224,6 +237,7 @@ class _$_Fetch implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
+    TResult Function()? accptTnc,
   }) {
     return fetch?.call();
   }
@@ -233,6 +247,7 @@ class _$_Fetch implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
+    TResult Function()? accptTnc,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -246,6 +261,7 @@ class _$_Fetch implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_AccptTnc value) accptTnc,
   }) {
     return fetch(this);
   }
@@ -255,6 +271,7 @@ class _$_Fetch implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_AccptTnc value)? accptTnc,
   }) {
     return fetch?.call(this);
   }
@@ -264,6 +281,7 @@ class _$_Fetch implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_AccptTnc value)? accptTnc,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -275,6 +293,116 @@ class _$_Fetch implements _Fetch {
 
 abstract class _Fetch implements UserEvent {
   const factory _Fetch() = _$_Fetch;
+}
+
+/// @nodoc
+abstract class _$$_AccptTncCopyWith<$Res> {
+  factory _$$_AccptTncCopyWith(
+          _$_AccptTnc value, $Res Function(_$_AccptTnc) then) =
+      __$$_AccptTncCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_AccptTncCopyWithImpl<$Res> extends _$UserEventCopyWithImpl<$Res>
+    implements _$$_AccptTncCopyWith<$Res> {
+  __$$_AccptTncCopyWithImpl(
+      _$_AccptTnc _value, $Res Function(_$_AccptTnc) _then)
+      : super(_value, (v) => _then(v as _$_AccptTnc));
+
+  @override
+  _$_AccptTnc get _value => super._value as _$_AccptTnc;
+}
+
+/// @nodoc
+
+class _$_AccptTnc implements _AccptTnc {
+  const _$_AccptTnc();
+
+  @override
+  String toString() {
+    return 'UserEvent.accptTnc()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_AccptTnc);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function() fetch,
+    required TResult Function() accptTnc,
+  }) {
+    return accptTnc();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function()? fetch,
+    TResult Function()? accptTnc,
+  }) {
+    return accptTnc?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function()? fetch,
+    TResult Function()? accptTnc,
+    required TResult orElse(),
+  }) {
+    if (accptTnc != null) {
+      return accptTnc();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_AccptTnc value) accptTnc,
+  }) {
+    return accptTnc(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_AccptTnc value)? accptTnc,
+  }) {
+    return accptTnc?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_AccptTnc value)? accptTnc,
+    required TResult orElse(),
+  }) {
+    if (accptTnc != null) {
+      return accptTnc(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AccptTnc implements UserEvent {
+  const factory _AccptTnc() = _$_AccptTnc;
 }
 
 /// @nodoc

@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/setting_aup.dart';
+import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -48,6 +50,48 @@ class UserRepository implements IUserRepository {
       await firebaseCrashlyticsService.crashlytics.setUserIdentifier(user.id);
 
       return Right(user);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, SettingAup>> updateUserAup(User userDetails) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final settingAup = await localDataSource.updateUserAup();
+
+        return Right(settingAup);
+      } on MockException catch (e) {
+        return Left(ApiFailure.other(e.message));
+      }
+    }
+    try {
+      final settingAup =
+          await remoteDataSource.updateUserAup(userId: userDetails.id);
+
+      return Right(settingAup);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, SettingTc>> updateUserTc(User userDetails) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final settingTc = await localDataSource.updateUserTC();
+
+        return Right(settingTc);
+      } on MockException catch (e) {
+        return Left(ApiFailure.other(e.message));
+      }
+    }
+    try {
+      final settingTc =
+          await remoteDataSource.updateUserTC(userId: userDetails.id);
+
+      return Right(settingTc);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

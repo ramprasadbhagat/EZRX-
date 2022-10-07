@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/announcement/bloc/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/core/search/search_bloc.dart';
 import 'package:ezrxmobile/application/material/material_list/material_list_bloc.dart';
@@ -142,6 +143,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ResetPasswordBloc>(
           create: (context) => locator<ResetPasswordBloc>(),
+        ),
+        BlocProvider<AupTcBloc>(
+          create: (context) => locator<AupTcBloc>(),
         ),
       ],
       child: MaterialApp.router(

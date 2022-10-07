@@ -64,13 +64,6 @@ bool isMustNotContainUserNameOrName({
   required User user,
 }) =>
     input.isNotEmpty &&
-    (!input
-        .toLowerCase()
-        .contains(user.username.getValue().toLowerCase()) &&
-    !input
-        .toLowerCase()
-        .contains(user.fullName.firstName.toLowerCase()) &&
-    !input
-        .toLowerCase()
-        .contains(user.fullName.lastName.toLowerCase()));
-   
+    (!input.toLowerCase().contains(user.username.getValue().toLowerCase()) &&
+        !input.toLowerCase().contains(user.fullName.firstName.toLowerCase()) &&
+        !input.toLowerCase().contains(user.fullName.lastName.toLowerCase()));

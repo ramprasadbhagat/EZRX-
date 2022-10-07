@@ -211,7 +211,7 @@ String salesOrgCountry(String salesOrg) {
 //  'zp_admin'
 //  'client_admin'
 //  'client_user'
-bool isAdminRole(String roleType) {
+bool roleCanLoginOnBehalf(String roleType) {
   switch (roleType) {
     case 'root_admin':
     case 'zp_admin':
@@ -221,7 +221,7 @@ bool isAdminRole(String roleType) {
   }
 }
 
-String userType(String roleType) {
+String roleUserType(String roleType) {
   switch (roleType) {
     case 'internal_sales_rep':
     case 'external_sales_rep':
@@ -231,7 +231,7 @@ String userType(String roleType) {
   }
 }
 
-String orderType(String roleType) {
+String roleOrderType(String roleType) {
   switch (roleType) {
     case 'internal_sales_rep':
       return 'MRXR';
@@ -243,7 +243,7 @@ String orderType(String roleType) {
 }
 
 // Is Acceptable Use Policy Audience
-bool isAupAudience(String roleType) {
+bool roleIsAupAudience(String roleType) {
   switch (roleType) {
     case 'internal_sales_rep':
     case 'external_sales_rep':
@@ -256,7 +256,7 @@ bool isAupAudience(String roleType) {
 }
 
 // Is TERMS OF USE Audience
-bool isTcAudience(String roleType) {
+bool roleIsTcAudience(String roleType) {
   switch (roleType) {
     case 'client_admin':
     case 'client_user':

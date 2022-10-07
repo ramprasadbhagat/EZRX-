@@ -47,6 +47,10 @@ class SalesOrg extends ValueObject<String> {
     return salesOrgContactPerson(value.getOrElse(() => ''));
   }
 
+  bool get isVN {
+    return country == 'VN';
+  }
+
   const SalesOrg._(this.value);
 }
 
@@ -59,11 +63,11 @@ class RoleType extends ValueObject<String> {
   }
 
   bool get canLoginOnBehalf {
-    return isAdminRole(value.getOrElse(() => ''));
+    return roleCanLoginOnBehalf(value.getOrElse(() => ''));
   }
 
   String get loginUserType {
-    return userType(value.getOrElse(() => ''));
+    return roleUserType(value.getOrElse(() => ''));
   }
 
   bool get isSalesRep {
@@ -71,7 +75,15 @@ class RoleType extends ValueObject<String> {
   }
 
   String get purchaseOrderType {
-    return orderType(value.getOrElse(() => ''));
+    return roleOrderType(value.getOrElse(() => ''));
+  }
+
+  bool get isAupAudience {
+    return roleIsAupAudience(value.getOrElse(() => ''));
+  }
+
+  bool get isTcAudience {
+    return roleIsTcAudience(value.getOrElse(() => ''));
   }
 
   const RoleType._(this.value);

@@ -41,13 +41,13 @@ class User with _$User {
           mobileNotifications: false,
           languagePreference: '',
         ),
-        settingTc: const SettingTc(
+        settingTc: SettingTc(
           acceptTC: false,
-          acceptTCTimestamp: '',
+          acceptTCTimestamp: DateTime.parse('1970-01-01 00:00:00'),
         ),
-        settingAup: const SettingAup(
+        settingAup: SettingAup(
           acceptAUP: false,
-          acceptAUPTC: '',
+          acceptAUPTimestamp: DateTime.parse('1970-01-01 00:00:00'),
         ),
         enableOrderType: false,
       );

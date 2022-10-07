@@ -1,7 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
+import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
@@ -12,66 +15,83 @@ class HomeNavigationTabbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: WillPopScope(
-        onWillPop: () async => false,
-        child: Stack(
-          children: [
-            SizerUtil.deviceType == DeviceType.mobile
-                ? AutoTabsScaffold(
-                    routes: _routesItems.map((item) => item.route).toList(),
-                    bottomNavigationBuilder: (_, tabsRouter) {
-                      return BottomNavigationBar(
-                        key: const Key('homeTabbar'),
-                        currentIndex: tabsRouter.activeIndex,
-                        onTap: tabsRouter.setActiveIndex,
-                        items: _routesItems
-                            .map(
-                              (item) => BottomNavigationBarItem(
-                                icon: item.icon,
-                                label: item.label.tr(),
-                              ),
+      body: BlocBuilder<AupTcBloc, AupTcState>(
+        buildWhen: (previous, current) =>
+            previous.showTermsAndConditon != current.showTermsAndConditon,
+        builder: (BuildContext context, AupTcState state) {
+          return state.showTermsAndConditon
+              ? const AupTCDialog(
+                  key: ValueKey('auptcscreen'),
+                )
+              : WillPopScope(
+                  onWillPop: () async => false,
+                  child: Stack(
+                    children: [
+                      SizerUtil.deviceType == DeviceType.mobile
+                          ? AutoTabsScaffold(
+                              routes: _routesItems
+                                  .map((item) => item.route)
+                                  .toList(),
+                              bottomNavigationBuilder: (_, tabsRouter) {
+                                return BottomNavigationBar(
+                                  key: const Key('homeTabbar'),
+                                  currentIndex: tabsRouter.activeIndex,
+                                  onTap: tabsRouter.setActiveIndex,
+                                  items: _routesItems
+                                      .map(
+                                        (item) => BottomNavigationBarItem(
+                                          icon: item.icon,
+                                          label: item.label.tr(),
+                                        ),
+                                      )
+                                      .toList(),
+                                );
+                              },
                             )
-                            .toList(),
-                      );
-                    },
-                  )
-                : AutoTabsRouter(
-                    routes: _routesItems.map((item) => item.route).toList(),
-                    builder: (context, child, animation) {
-                      var activeIndex = _routesItems.indexWhere(
-                        (d) =>
-                            context.tabsRouter.isRouteActive(d.route.routeName),
-                      );
-                      if (activeIndex == -1) {
-                        activeIndex = 0;
-                      }
+                          : AutoTabsRouter(
+                              routes: _routesItems
+                                  .map((item) => item.route)
+                                  .toList(),
+                              builder: (context, child, animation) {
+                                var activeIndex = _routesItems.indexWhere(
+                                  (d) => context.tabsRouter
+                                      .isRouteActive(d.route.routeName),
+                                );
+                                if (activeIndex == -1) {
+                                  activeIndex = 0;
+                                }
 
-                      return Row(
-                        children: [
-                          NavigationRail(
-                            key: const Key('homeTabbar'),
-                            destinations: _routesItems
-                                .map(
-                                  (item) => NavigationRailDestination(
-                                    icon: item.icon,
-                                    label: Text(item.label).tr(),
-                                  ),
-                                )
-                                .toList(),
-                            selectedIndex: activeIndex,
-                            onDestinationSelected: (index) {
-                              context.navigateTo(_routesItems[index].route);
-                            },
-                            labelType: NavigationRailLabelType.selected,
-                          ),
-                          Expanded(child: child),
-                        ],
-                      );
-                    },
+                                return Row(
+                                  children: [
+                                    NavigationRail(
+                                      key: const Key('homeTabbar'),
+                                      destinations: _routesItems
+                                          .map(
+                                            (item) => NavigationRailDestination(
+                                              icon: item.icon,
+                                              label: Text(item.label).tr(),
+                                            ),
+                                          )
+                                          .toList(),
+                                      selectedIndex: activeIndex,
+                                      onDestinationSelected: (index) {
+                                        context.navigateTo(
+                                          _routesItems[index].route,
+                                        );
+                                      },
+                                      labelType:
+                                          NavigationRailLabelType.selected,
+                                    ),
+                                    Expanded(child: child),
+                                  ],
+                                );
+                              },
+                            ),
+                      const AnnouncementWidget(),
+                    ],
                   ),
-            const AnnouncementWidget(),
-          ],
-        ),
+                );
+        },
       ),
     );
   }

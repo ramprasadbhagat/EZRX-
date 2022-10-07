@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SettingTc {
   bool get acceptTC => throw _privateConstructorUsedError;
-  String get acceptTCTimestamp => throw _privateConstructorUsedError;
+  DateTime get acceptTCTimestamp => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SettingTcCopyWith<SettingTc> get copyWith =>
@@ -28,7 +28,7 @@ mixin _$SettingTc {
 abstract class $SettingTcCopyWith<$Res> {
   factory $SettingTcCopyWith(SettingTc value, $Res Function(SettingTc) then) =
       _$SettingTcCopyWithImpl<$Res>;
-  $Res call({bool acceptTC, String acceptTCTimestamp});
+  $Res call({bool acceptTC, DateTime acceptTCTimestamp});
 }
 
 /// @nodoc
@@ -52,7 +52,7 @@ class _$SettingTcCopyWithImpl<$Res> implements $SettingTcCopyWith<$Res> {
       acceptTCTimestamp: acceptTCTimestamp == freezed
           ? _value.acceptTCTimestamp
           : acceptTCTimestamp // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
     ));
   }
 }
@@ -63,7 +63,7 @@ abstract class _$$_SettingTcCopyWith<$Res> implements $SettingTcCopyWith<$Res> {
           _$_SettingTc value, $Res Function(_$_SettingTc) then) =
       __$$_SettingTcCopyWithImpl<$Res>;
   @override
-  $Res call({bool acceptTC, String acceptTCTimestamp});
+  $Res call({bool acceptTC, DateTime acceptTCTimestamp});
 }
 
 /// @nodoc
@@ -89,7 +89,7 @@ class __$$_SettingTcCopyWithImpl<$Res> extends _$SettingTcCopyWithImpl<$Res>
       acceptTCTimestamp: acceptTCTimestamp == freezed
           ? _value.acceptTCTimestamp
           : acceptTCTimestamp // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
     ));
   }
 }
@@ -103,7 +103,7 @@ class _$_SettingTc extends _SettingTc {
   @override
   final bool acceptTC;
   @override
-  final String acceptTCTimestamp;
+  final DateTime acceptTCTimestamp;
 
   @override
   String toString() {
@@ -135,13 +135,13 @@ class _$_SettingTc extends _SettingTc {
 abstract class _SettingTc extends SettingTc {
   const factory _SettingTc(
       {required final bool acceptTC,
-      required final String acceptTCTimestamp}) = _$_SettingTc;
+      required final DateTime acceptTCTimestamp}) = _$_SettingTc;
   const _SettingTc._() : super._();
 
   @override
   bool get acceptTC;
   @override
-  String get acceptTCTimestamp;
+  DateTime get acceptTCTimestamp;
   @override
   @JsonKey(ignore: true)
   _$$_SettingTcCopyWith<_$_SettingTc> get copyWith =>

@@ -20,10 +20,14 @@ _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
       mobileNotifications: json['mobileNotifications'] as bool,
       languagePreference: json['languagePreference'] as String,
       acceptTC: json['acceptTC'] as bool,
-      acceptTCTimestamp: json['acceptTCTimestamp'] as String,
+      acceptTCTimestamp:
+          dateTimeStringFormatCheck(json, 'acceptTCTimestamp') as String? ??
+              '1970-01-01 00:00:00',
       acceptAUP: json['acceptAUP'] as bool,
-      acceptAUPTC: json['acceptAUPTC'] as String,
       enableOrderType: json['enableOrderType'] as bool,
+      acceptAUPTimestamp:
+          dateTimeStringFormatCheck(json, 'acceptAUPTC') as String? ??
+              '1970-01-01 00:00:00',
     );
 
 Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
@@ -43,6 +47,6 @@ Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
       'acceptTC': instance.acceptTC,
       'acceptTCTimestamp': instance.acceptTCTimestamp,
       'acceptAUP': instance.acceptAUP,
-      'acceptAUPTC': instance.acceptAUPTC,
       'enableOrderType': instance.enableOrderType,
+      'acceptAUPTC': instance.acceptAUPTimestamp,
     };

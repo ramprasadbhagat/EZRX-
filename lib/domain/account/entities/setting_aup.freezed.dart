@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SettingAup {
   bool get acceptAUP => throw _privateConstructorUsedError;
-  String get acceptAUPTC => throw _privateConstructorUsedError;
+  DateTime get acceptAUPTimestamp => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SettingAupCopyWith<SettingAup> get copyWith =>
@@ -29,7 +29,7 @@ abstract class $SettingAupCopyWith<$Res> {
   factory $SettingAupCopyWith(
           SettingAup value, $Res Function(SettingAup) then) =
       _$SettingAupCopyWithImpl<$Res>;
-  $Res call({bool acceptAUP, String acceptAUPTC});
+  $Res call({bool acceptAUP, DateTime acceptAUPTimestamp});
 }
 
 /// @nodoc
@@ -43,17 +43,17 @@ class _$SettingAupCopyWithImpl<$Res> implements $SettingAupCopyWith<$Res> {
   @override
   $Res call({
     Object? acceptAUP = freezed,
-    Object? acceptAUPTC = freezed,
+    Object? acceptAUPTimestamp = freezed,
   }) {
     return _then(_value.copyWith(
       acceptAUP: acceptAUP == freezed
           ? _value.acceptAUP
           : acceptAUP // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptAUPTC: acceptAUPTC == freezed
-          ? _value.acceptAUPTC
-          : acceptAUPTC // ignore: cast_nullable_to_non_nullable
-              as String,
+      acceptAUPTimestamp: acceptAUPTimestamp == freezed
+          ? _value.acceptAUPTimestamp
+          : acceptAUPTimestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -65,7 +65,7 @@ abstract class _$$_SettingAupCopyWith<$Res>
           _$_SettingAup value, $Res Function(_$_SettingAup) then) =
       __$$_SettingAupCopyWithImpl<$Res>;
   @override
-  $Res call({bool acceptAUP, String acceptAUPTC});
+  $Res call({bool acceptAUP, DateTime acceptAUPTimestamp});
 }
 
 /// @nodoc
@@ -81,17 +81,17 @@ class __$$_SettingAupCopyWithImpl<$Res> extends _$SettingAupCopyWithImpl<$Res>
   @override
   $Res call({
     Object? acceptAUP = freezed,
-    Object? acceptAUPTC = freezed,
+    Object? acceptAUPTimestamp = freezed,
   }) {
     return _then(_$_SettingAup(
       acceptAUP: acceptAUP == freezed
           ? _value.acceptAUP
           : acceptAUP // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptAUPTC: acceptAUPTC == freezed
-          ? _value.acceptAUPTC
-          : acceptAUPTC // ignore: cast_nullable_to_non_nullable
-              as String,
+      acceptAUPTimestamp: acceptAUPTimestamp == freezed
+          ? _value.acceptAUPTimestamp
+          : acceptAUPTimestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -99,17 +99,18 @@ class __$$_SettingAupCopyWithImpl<$Res> extends _$SettingAupCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SettingAup extends _SettingAup {
-  const _$_SettingAup({required this.acceptAUP, required this.acceptAUPTC})
+  const _$_SettingAup(
+      {required this.acceptAUP, required this.acceptAUPTimestamp})
       : super._();
 
   @override
   final bool acceptAUP;
   @override
-  final String acceptAUPTC;
+  final DateTime acceptAUPTimestamp;
 
   @override
   String toString() {
-    return 'SettingAup(acceptAUP: $acceptAUP, acceptAUPTC: $acceptAUPTC)';
+    return 'SettingAup(acceptAUP: $acceptAUP, acceptAUPTimestamp: $acceptAUPTimestamp)';
   }
 
   @override
@@ -119,14 +120,14 @@ class _$_SettingAup extends _SettingAup {
             other is _$_SettingAup &&
             const DeepCollectionEquality().equals(other.acceptAUP, acceptAUP) &&
             const DeepCollectionEquality()
-                .equals(other.acceptAUPTC, acceptAUPTC));
+                .equals(other.acceptAUPTimestamp, acceptAUPTimestamp));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(acceptAUP),
-      const DeepCollectionEquality().hash(acceptAUPTC));
+      const DeepCollectionEquality().hash(acceptAUPTimestamp));
 
   @JsonKey(ignore: true)
   @override
@@ -137,13 +138,13 @@ class _$_SettingAup extends _SettingAup {
 abstract class _SettingAup extends SettingAup {
   const factory _SettingAup(
       {required final bool acceptAUP,
-      required final String acceptAUPTC}) = _$_SettingAup;
+      required final DateTime acceptAUPTimestamp}) = _$_SettingAup;
   const _SettingAup._() : super._();
 
   @override
   bool get acceptAUP;
   @override
-  String get acceptAUPTC;
+  DateTime get acceptAUPTimestamp;
   @override
   @JsonKey(ignore: true)
   _$$_SettingAupCopyWith<_$_SettingAup> get copyWith =>

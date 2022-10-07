@@ -107,4 +107,100 @@ class Config {
         };
     }
   }
+
+  String get getTCUrl {
+    switch (appFlavor) {
+      case Flavor.dev:
+      case Flavor.uat:
+      case Flavor.prod:
+        return '$baseUrl/termsandconditions';
+      case Flavor.mock:
+      default:
+        return '';
+    }
+  }
+
+  String? get getTCFile {
+    switch (appFlavor) {
+      case Flavor.mock:
+        return 'assets/html/termsAndCondition.html';
+      case Flavor.dev:
+      case Flavor.uat:
+      case Flavor.prod:
+      default:
+        return null;
+    }
+  }
+
+  String get getTCVNUrl {
+    switch (appFlavor) {
+      case Flavor.dev:
+      case Flavor.uat:
+      case Flavor.prod:
+        return '$baseUrl/mobile/termsandconditionsvn';
+      case Flavor.mock:
+      default:
+        return '';
+    }
+  }
+
+  String? get getTCVNFile {
+    switch (appFlavor) {
+      case Flavor.mock:
+        return 'assets/html/termsAndConditionVN.html';
+      case Flavor.dev:
+      case Flavor.uat:
+      case Flavor.prod:
+      default:
+        return null;
+    }
+  }
+
+  String get getAUPUrl {
+    switch (appFlavor) {
+      case Flavor.dev:
+      case Flavor.uat:
+      case Flavor.prod:
+        return '$baseUrl/acceptableuserpolicy';
+      case Flavor.mock:
+      default:
+        return '';
+    }
+  }
+
+  String? get getAUPFile {
+    switch (appFlavor) {
+      case Flavor.mock:
+        return 'assets/html/aup.html';
+      case Flavor.dev:
+      case Flavor.uat:
+      case Flavor.prod:
+      default:
+        return null;
+    }
+  }
+
+  String get getAUPVNUrl {
+    switch (appFlavor) {
+      case Flavor.dev:
+      case Flavor.uat:
+      case Flavor.prod:
+        return '$baseUrl/mobile/acceptableuserpolicyvn';
+      case Flavor.mock:
+      default:
+        return '';
+    }
+  }
+
+  String? get getAUPVNFile {
+    switch (appFlavor) {
+      case Flavor.mock:
+        return 'assets/html/aupVN.html';
+      case Flavor.dev:
+      case Flavor.uat:
+      case Flavor.prod:
+      default:
+        return null;
+    }
+  }
 }

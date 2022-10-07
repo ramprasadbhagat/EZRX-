@@ -3,6 +3,7 @@ import 'package:ezrxmobile/presentation/account/account_tab.dart';
 import 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart';
 import 'package:ezrxmobile/presentation/account/customer_search.dart';
 import 'package:ezrxmobile/presentation/account/settings_page.dart';
+import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
 import 'package:ezrxmobile/presentation/auth/login_page.dart';
 import 'package:ezrxmobile/presentation/auth/proxy_login_page.dart';
 import 'package:ezrxmobile/presentation/core/webview_page.dart';
@@ -27,6 +28,7 @@ import 'package:ezrxmobile/presentation/account/change_password/change_password_
     AutoRoute(path: 'contact_us_page', page: ContactUsPage),
     AutoRoute(path: 'customer_search_page', page: CustomerSearchPage),
     AutoRoute(path: 'material_list_page', page: MaterialListPage),
+    AutoRoute(path: 'tos', page: AupTCDialog),
     AutoRoute(
       path: 'main_tabbar',
       page: HomeNavigationTabbar,

@@ -34,6 +34,7 @@ mixin _$ValueFailure<T> {
     required TResult Function(T failedValue) mustNotContainUserName,
     required TResult Function(T failedValue) mustNotMatchOldPassword,
     required TResult Function(T failedValue) mustMatchNewPassword,
+    required TResult Function(T failedValue) invalidDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -53,6 +54,7 @@ mixin _$ValueFailure<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,6 +74,7 @@ mixin _$ValueFailure<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -95,6 +98,7 @@ mixin _$ValueFailure<T> {
     required TResult Function(NotMatchOldPassword<T> value)
         mustNotMatchOldPassword,
     required TResult Function(MatchNewPassword<T> value) mustMatchNewPassword,
+    required TResult Function(InvalidDate<T> value) invalidDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -114,6 +118,7 @@ mixin _$ValueFailure<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -133,6 +138,7 @@ mixin _$ValueFailure<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -266,6 +272,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     required TResult Function(T failedValue) mustNotContainUserName,
     required TResult Function(T failedValue) mustNotMatchOldPassword,
     required TResult Function(T failedValue) mustMatchNewPassword,
+    required TResult Function(T failedValue) invalidDate,
   }) {
     return exceedingLength(failedValue, max);
   }
@@ -288,6 +295,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
   }) {
     return exceedingLength?.call(failedValue, max);
   }
@@ -310,6 +318,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
     required TResult orElse(),
   }) {
     if (exceedingLength != null) {
@@ -339,6 +348,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     required TResult Function(NotMatchOldPassword<T> value)
         mustNotMatchOldPassword,
     required TResult Function(MatchNewPassword<T> value) mustMatchNewPassword,
+    required TResult Function(InvalidDate<T> value) invalidDate,
   }) {
     return exceedingLength(this);
   }
@@ -361,6 +371,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
   }) {
     return exceedingLength?.call(this);
   }
@@ -383,6 +394,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
     required TResult orElse(),
   }) {
     if (exceedingLength != null) {
@@ -499,6 +511,7 @@ class _$SubceedLength<T> implements SubceedLength<T> {
     required TResult Function(T failedValue) mustNotContainUserName,
     required TResult Function(T failedValue) mustNotMatchOldPassword,
     required TResult Function(T failedValue) mustMatchNewPassword,
+    required TResult Function(T failedValue) invalidDate,
   }) {
     return subceedLength(failedValue, min);
   }
@@ -521,6 +534,7 @@ class _$SubceedLength<T> implements SubceedLength<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
   }) {
     return subceedLength?.call(failedValue, min);
   }
@@ -543,6 +557,7 @@ class _$SubceedLength<T> implements SubceedLength<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
     required TResult orElse(),
   }) {
     if (subceedLength != null) {
@@ -572,6 +587,7 @@ class _$SubceedLength<T> implements SubceedLength<T> {
     required TResult Function(NotMatchOldPassword<T> value)
         mustNotMatchOldPassword,
     required TResult Function(MatchNewPassword<T> value) mustMatchNewPassword,
+    required TResult Function(InvalidDate<T> value) invalidDate,
   }) {
     return subceedLength(this);
   }
@@ -594,6 +610,7 @@ class _$SubceedLength<T> implements SubceedLength<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
   }) {
     return subceedLength?.call(this);
   }
@@ -616,6 +633,7 @@ class _$SubceedLength<T> implements SubceedLength<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
     required TResult orElse(),
   }) {
     if (subceedLength != null) {
@@ -719,6 +737,7 @@ class _$Empty<T> implements Empty<T> {
     required TResult Function(T failedValue) mustNotContainUserName,
     required TResult Function(T failedValue) mustNotMatchOldPassword,
     required TResult Function(T failedValue) mustMatchNewPassword,
+    required TResult Function(T failedValue) invalidDate,
   }) {
     return empty(failedValue);
   }
@@ -741,6 +760,7 @@ class _$Empty<T> implements Empty<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
   }) {
     return empty?.call(failedValue);
   }
@@ -763,6 +783,7 @@ class _$Empty<T> implements Empty<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -792,6 +813,7 @@ class _$Empty<T> implements Empty<T> {
     required TResult Function(NotMatchOldPassword<T> value)
         mustNotMatchOldPassword,
     required TResult Function(MatchNewPassword<T> value) mustMatchNewPassword,
+    required TResult Function(InvalidDate<T> value) invalidDate,
   }) {
     return empty(this);
   }
@@ -814,6 +836,7 @@ class _$Empty<T> implements Empty<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
   }) {
     return empty?.call(this);
   }
@@ -836,6 +859,7 @@ class _$Empty<T> implements Empty<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -939,6 +963,7 @@ class _$Multiline<T> implements Multiline<T> {
     required TResult Function(T failedValue) mustNotContainUserName,
     required TResult Function(T failedValue) mustNotMatchOldPassword,
     required TResult Function(T failedValue) mustMatchNewPassword,
+    required TResult Function(T failedValue) invalidDate,
   }) {
     return multiline(failedValue);
   }
@@ -961,6 +986,7 @@ class _$Multiline<T> implements Multiline<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
   }) {
     return multiline?.call(failedValue);
   }
@@ -983,6 +1009,7 @@ class _$Multiline<T> implements Multiline<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
     required TResult orElse(),
   }) {
     if (multiline != null) {
@@ -1012,6 +1039,7 @@ class _$Multiline<T> implements Multiline<T> {
     required TResult Function(NotMatchOldPassword<T> value)
         mustNotMatchOldPassword,
     required TResult Function(MatchNewPassword<T> value) mustMatchNewPassword,
+    required TResult Function(InvalidDate<T> value) invalidDate,
   }) {
     return multiline(this);
   }
@@ -1034,6 +1062,7 @@ class _$Multiline<T> implements Multiline<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
   }) {
     return multiline?.call(this);
   }
@@ -1056,6 +1085,7 @@ class _$Multiline<T> implements Multiline<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
     required TResult orElse(),
   }) {
     if (multiline != null) {
@@ -1159,6 +1189,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     required TResult Function(T failedValue) mustNotContainUserName,
     required TResult Function(T failedValue) mustNotMatchOldPassword,
     required TResult Function(T failedValue) mustMatchNewPassword,
+    required TResult Function(T failedValue) invalidDate,
   }) {
     return invalidEmail(failedValue);
   }
@@ -1181,6 +1212,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
   }) {
     return invalidEmail?.call(failedValue);
   }
@@ -1203,6 +1235,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
     required TResult orElse(),
   }) {
     if (invalidEmail != null) {
@@ -1232,6 +1265,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     required TResult Function(NotMatchOldPassword<T> value)
         mustNotMatchOldPassword,
     required TResult Function(MatchNewPassword<T> value) mustMatchNewPassword,
+    required TResult Function(InvalidDate<T> value) invalidDate,
   }) {
     return invalidEmail(this);
   }
@@ -1254,6 +1288,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
   }) {
     return invalidEmail?.call(this);
   }
@@ -1276,6 +1311,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
     required TResult orElse(),
   }) {
     if (invalidEmail != null) {
@@ -1380,6 +1416,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     required TResult Function(T failedValue) mustNotContainUserName,
     required TResult Function(T failedValue) mustNotMatchOldPassword,
     required TResult Function(T failedValue) mustMatchNewPassword,
+    required TResult Function(T failedValue) invalidDate,
   }) {
     return passwordNotMatchRequirements(failedValue);
   }
@@ -1402,6 +1439,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
   }) {
     return passwordNotMatchRequirements?.call(failedValue);
   }
@@ -1424,6 +1462,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
     required TResult orElse(),
   }) {
     if (passwordNotMatchRequirements != null) {
@@ -1453,6 +1492,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     required TResult Function(NotMatchOldPassword<T> value)
         mustNotMatchOldPassword,
     required TResult Function(MatchNewPassword<T> value) mustMatchNewPassword,
+    required TResult Function(InvalidDate<T> value) invalidDate,
   }) {
     return passwordNotMatchRequirements(this);
   }
@@ -1475,6 +1515,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
   }) {
     return passwordNotMatchRequirements?.call(this);
   }
@@ -1497,6 +1538,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
     required TResult orElse(),
   }) {
     if (passwordNotMatchRequirements != null) {
@@ -1601,6 +1643,7 @@ class _$InvalidJWT<T> implements InvalidJWT<T> {
     required TResult Function(T failedValue) mustNotContainUserName,
     required TResult Function(T failedValue) mustNotMatchOldPassword,
     required TResult Function(T failedValue) mustMatchNewPassword,
+    required TResult Function(T failedValue) invalidDate,
   }) {
     return invalidJWT(failedValue);
   }
@@ -1623,6 +1666,7 @@ class _$InvalidJWT<T> implements InvalidJWT<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
   }) {
     return invalidJWT?.call(failedValue);
   }
@@ -1645,6 +1689,7 @@ class _$InvalidJWT<T> implements InvalidJWT<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
     required TResult orElse(),
   }) {
     if (invalidJWT != null) {
@@ -1674,6 +1719,7 @@ class _$InvalidJWT<T> implements InvalidJWT<T> {
     required TResult Function(NotMatchOldPassword<T> value)
         mustNotMatchOldPassword,
     required TResult Function(MatchNewPassword<T> value) mustMatchNewPassword,
+    required TResult Function(InvalidDate<T> value) invalidDate,
   }) {
     return invalidJWT(this);
   }
@@ -1696,6 +1742,7 @@ class _$InvalidJWT<T> implements InvalidJWT<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
   }) {
     return invalidJWT?.call(this);
   }
@@ -1718,6 +1765,7 @@ class _$InvalidJWT<T> implements InvalidJWT<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
     required TResult orElse(),
   }) {
     if (invalidJWT != null) {
@@ -1822,6 +1870,7 @@ class _$InvalidJWTPayload<T> implements InvalidJWTPayload<T> {
     required TResult Function(T failedValue) mustNotContainUserName,
     required TResult Function(T failedValue) mustNotMatchOldPassword,
     required TResult Function(T failedValue) mustMatchNewPassword,
+    required TResult Function(T failedValue) invalidDate,
   }) {
     return invalidJWTPayload(failedValue);
   }
@@ -1844,6 +1893,7 @@ class _$InvalidJWTPayload<T> implements InvalidJWTPayload<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
   }) {
     return invalidJWTPayload?.call(failedValue);
   }
@@ -1866,6 +1916,7 @@ class _$InvalidJWTPayload<T> implements InvalidJWTPayload<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
     required TResult orElse(),
   }) {
     if (invalidJWTPayload != null) {
@@ -1895,6 +1946,7 @@ class _$InvalidJWTPayload<T> implements InvalidJWTPayload<T> {
     required TResult Function(NotMatchOldPassword<T> value)
         mustNotMatchOldPassword,
     required TResult Function(MatchNewPassword<T> value) mustMatchNewPassword,
+    required TResult Function(InvalidDate<T> value) invalidDate,
   }) {
     return invalidJWTPayload(this);
   }
@@ -1917,6 +1969,7 @@ class _$InvalidJWTPayload<T> implements InvalidJWTPayload<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
   }) {
     return invalidJWTPayload?.call(this);
   }
@@ -1939,6 +1992,7 @@ class _$InvalidJWTPayload<T> implements InvalidJWTPayload<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
     required TResult orElse(),
   }) {
     if (invalidJWTPayload != null) {
@@ -2043,6 +2097,7 @@ class _$OneUpperCase<T> implements OneUpperCase<T> {
     required TResult Function(T failedValue) mustNotContainUserName,
     required TResult Function(T failedValue) mustNotMatchOldPassword,
     required TResult Function(T failedValue) mustMatchNewPassword,
+    required TResult Function(T failedValue) invalidDate,
   }) {
     return mustOneUpperCaseCharacter(failedValue);
   }
@@ -2065,6 +2120,7 @@ class _$OneUpperCase<T> implements OneUpperCase<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
   }) {
     return mustOneUpperCaseCharacter?.call(failedValue);
   }
@@ -2087,6 +2143,7 @@ class _$OneUpperCase<T> implements OneUpperCase<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
     required TResult orElse(),
   }) {
     if (mustOneUpperCaseCharacter != null) {
@@ -2116,6 +2173,7 @@ class _$OneUpperCase<T> implements OneUpperCase<T> {
     required TResult Function(NotMatchOldPassword<T> value)
         mustNotMatchOldPassword,
     required TResult Function(MatchNewPassword<T> value) mustMatchNewPassword,
+    required TResult Function(InvalidDate<T> value) invalidDate,
   }) {
     return mustOneUpperCaseCharacter(this);
   }
@@ -2138,6 +2196,7 @@ class _$OneUpperCase<T> implements OneUpperCase<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
   }) {
     return mustOneUpperCaseCharacter?.call(this);
   }
@@ -2160,6 +2219,7 @@ class _$OneUpperCase<T> implements OneUpperCase<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
     required TResult orElse(),
   }) {
     if (mustOneUpperCaseCharacter != null) {
@@ -2264,6 +2324,7 @@ class _$OneLowerCase<T> implements OneLowerCase<T> {
     required TResult Function(T failedValue) mustNotContainUserName,
     required TResult Function(T failedValue) mustNotMatchOldPassword,
     required TResult Function(T failedValue) mustMatchNewPassword,
+    required TResult Function(T failedValue) invalidDate,
   }) {
     return mustOneLowerCaseCharacter(failedValue);
   }
@@ -2286,6 +2347,7 @@ class _$OneLowerCase<T> implements OneLowerCase<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
   }) {
     return mustOneLowerCaseCharacter?.call(failedValue);
   }
@@ -2308,6 +2370,7 @@ class _$OneLowerCase<T> implements OneLowerCase<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
     required TResult orElse(),
   }) {
     if (mustOneLowerCaseCharacter != null) {
@@ -2337,6 +2400,7 @@ class _$OneLowerCase<T> implements OneLowerCase<T> {
     required TResult Function(NotMatchOldPassword<T> value)
         mustNotMatchOldPassword,
     required TResult Function(MatchNewPassword<T> value) mustMatchNewPassword,
+    required TResult Function(InvalidDate<T> value) invalidDate,
   }) {
     return mustOneLowerCaseCharacter(this);
   }
@@ -2359,6 +2423,7 @@ class _$OneLowerCase<T> implements OneLowerCase<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
   }) {
     return mustOneLowerCaseCharacter?.call(this);
   }
@@ -2381,6 +2446,7 @@ class _$OneLowerCase<T> implements OneLowerCase<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
     required TResult orElse(),
   }) {
     if (mustOneLowerCaseCharacter != null) {
@@ -2485,6 +2551,7 @@ class _$OneNumeric<T> implements OneNumeric<T> {
     required TResult Function(T failedValue) mustNotContainUserName,
     required TResult Function(T failedValue) mustNotMatchOldPassword,
     required TResult Function(T failedValue) mustMatchNewPassword,
+    required TResult Function(T failedValue) invalidDate,
   }) {
     return mustOneNumericCharacter(failedValue);
   }
@@ -2507,6 +2574,7 @@ class _$OneNumeric<T> implements OneNumeric<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
   }) {
     return mustOneNumericCharacter?.call(failedValue);
   }
@@ -2529,6 +2597,7 @@ class _$OneNumeric<T> implements OneNumeric<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
     required TResult orElse(),
   }) {
     if (mustOneNumericCharacter != null) {
@@ -2558,6 +2627,7 @@ class _$OneNumeric<T> implements OneNumeric<T> {
     required TResult Function(NotMatchOldPassword<T> value)
         mustNotMatchOldPassword,
     required TResult Function(MatchNewPassword<T> value) mustMatchNewPassword,
+    required TResult Function(InvalidDate<T> value) invalidDate,
   }) {
     return mustOneNumericCharacter(this);
   }
@@ -2580,6 +2650,7 @@ class _$OneNumeric<T> implements OneNumeric<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
   }) {
     return mustOneNumericCharacter?.call(this);
   }
@@ -2602,6 +2673,7 @@ class _$OneNumeric<T> implements OneNumeric<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
     required TResult orElse(),
   }) {
     if (mustOneNumericCharacter != null) {
@@ -2705,6 +2777,7 @@ class _$OneSpecial<T> implements OneSpecial<T> {
     required TResult Function(T failedValue) mustNotContainUserName,
     required TResult Function(T failedValue) mustNotMatchOldPassword,
     required TResult Function(T failedValue) mustMatchNewPassword,
+    required TResult Function(T failedValue) invalidDate,
   }) {
     return mustOneSpecialCharacter(failedValue);
   }
@@ -2727,6 +2800,7 @@ class _$OneSpecial<T> implements OneSpecial<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
   }) {
     return mustOneSpecialCharacter?.call(failedValue);
   }
@@ -2749,6 +2823,7 @@ class _$OneSpecial<T> implements OneSpecial<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
     required TResult orElse(),
   }) {
     if (mustOneSpecialCharacter != null) {
@@ -2778,6 +2853,7 @@ class _$OneSpecial<T> implements OneSpecial<T> {
     required TResult Function(NotMatchOldPassword<T> value)
         mustNotMatchOldPassword,
     required TResult Function(MatchNewPassword<T> value) mustMatchNewPassword,
+    required TResult Function(InvalidDate<T> value) invalidDate,
   }) {
     return mustOneSpecialCharacter(this);
   }
@@ -2800,6 +2876,7 @@ class _$OneSpecial<T> implements OneSpecial<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
   }) {
     return mustOneSpecialCharacter?.call(this);
   }
@@ -2822,6 +2899,7 @@ class _$OneSpecial<T> implements OneSpecial<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
     required TResult orElse(),
   }) {
     if (mustOneSpecialCharacter != null) {
@@ -2926,6 +3004,7 @@ class _$NotContainUserName<T> implements NotContainUserName<T> {
     required TResult Function(T failedValue) mustNotContainUserName,
     required TResult Function(T failedValue) mustNotMatchOldPassword,
     required TResult Function(T failedValue) mustMatchNewPassword,
+    required TResult Function(T failedValue) invalidDate,
   }) {
     return mustNotContainUserName(failedValue);
   }
@@ -2948,6 +3027,7 @@ class _$NotContainUserName<T> implements NotContainUserName<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
   }) {
     return mustNotContainUserName?.call(failedValue);
   }
@@ -2970,6 +3050,7 @@ class _$NotContainUserName<T> implements NotContainUserName<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
     required TResult orElse(),
   }) {
     if (mustNotContainUserName != null) {
@@ -2999,6 +3080,7 @@ class _$NotContainUserName<T> implements NotContainUserName<T> {
     required TResult Function(NotMatchOldPassword<T> value)
         mustNotMatchOldPassword,
     required TResult Function(MatchNewPassword<T> value) mustMatchNewPassword,
+    required TResult Function(InvalidDate<T> value) invalidDate,
   }) {
     return mustNotContainUserName(this);
   }
@@ -3021,6 +3103,7 @@ class _$NotContainUserName<T> implements NotContainUserName<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
   }) {
     return mustNotContainUserName?.call(this);
   }
@@ -3043,6 +3126,7 @@ class _$NotContainUserName<T> implements NotContainUserName<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
     required TResult orElse(),
   }) {
     if (mustNotContainUserName != null) {
@@ -3149,6 +3233,7 @@ class _$NotMatchOldPassword<T> implements NotMatchOldPassword<T> {
     required TResult Function(T failedValue) mustNotContainUserName,
     required TResult Function(T failedValue) mustNotMatchOldPassword,
     required TResult Function(T failedValue) mustMatchNewPassword,
+    required TResult Function(T failedValue) invalidDate,
   }) {
     return mustNotMatchOldPassword(failedValue);
   }
@@ -3171,6 +3256,7 @@ class _$NotMatchOldPassword<T> implements NotMatchOldPassword<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
   }) {
     return mustNotMatchOldPassword?.call(failedValue);
   }
@@ -3193,6 +3279,7 @@ class _$NotMatchOldPassword<T> implements NotMatchOldPassword<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
     required TResult orElse(),
   }) {
     if (mustNotMatchOldPassword != null) {
@@ -3222,6 +3309,7 @@ class _$NotMatchOldPassword<T> implements NotMatchOldPassword<T> {
     required TResult Function(NotMatchOldPassword<T> value)
         mustNotMatchOldPassword,
     required TResult Function(MatchNewPassword<T> value) mustMatchNewPassword,
+    required TResult Function(InvalidDate<T> value) invalidDate,
   }) {
     return mustNotMatchOldPassword(this);
   }
@@ -3244,6 +3332,7 @@ class _$NotMatchOldPassword<T> implements NotMatchOldPassword<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
   }) {
     return mustNotMatchOldPassword?.call(this);
   }
@@ -3266,6 +3355,7 @@ class _$NotMatchOldPassword<T> implements NotMatchOldPassword<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
     required TResult orElse(),
   }) {
     if (mustNotMatchOldPassword != null) {
@@ -3371,6 +3461,7 @@ class _$MatchNewPassword<T> implements MatchNewPassword<T> {
     required TResult Function(T failedValue) mustNotContainUserName,
     required TResult Function(T failedValue) mustNotMatchOldPassword,
     required TResult Function(T failedValue) mustMatchNewPassword,
+    required TResult Function(T failedValue) invalidDate,
   }) {
     return mustMatchNewPassword(failedValue);
   }
@@ -3393,6 +3484,7 @@ class _$MatchNewPassword<T> implements MatchNewPassword<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
   }) {
     return mustMatchNewPassword?.call(failedValue);
   }
@@ -3415,6 +3507,7 @@ class _$MatchNewPassword<T> implements MatchNewPassword<T> {
     TResult Function(T failedValue)? mustNotContainUserName,
     TResult Function(T failedValue)? mustNotMatchOldPassword,
     TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
     required TResult orElse(),
   }) {
     if (mustMatchNewPassword != null) {
@@ -3444,6 +3537,7 @@ class _$MatchNewPassword<T> implements MatchNewPassword<T> {
     required TResult Function(NotMatchOldPassword<T> value)
         mustNotMatchOldPassword,
     required TResult Function(MatchNewPassword<T> value) mustMatchNewPassword,
+    required TResult Function(InvalidDate<T> value) invalidDate,
   }) {
     return mustMatchNewPassword(this);
   }
@@ -3466,6 +3560,7 @@ class _$MatchNewPassword<T> implements MatchNewPassword<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
   }) {
     return mustMatchNewPassword?.call(this);
   }
@@ -3488,6 +3583,7 @@ class _$MatchNewPassword<T> implements MatchNewPassword<T> {
     TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
     TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
     TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
     required TResult orElse(),
   }) {
     if (mustMatchNewPassword != null) {
@@ -3506,5 +3602,231 @@ abstract class MatchNewPassword<T> implements ValueFailure<T> {
   @override
   @JsonKey(ignore: true)
   _$$MatchNewPasswordCopyWith<T, _$MatchNewPassword<T>> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$InvalidDateCopyWith<T, $Res>
+    implements $ValueFailureCopyWith<T, $Res> {
+  factory _$$InvalidDateCopyWith(
+          _$InvalidDate<T> value, $Res Function(_$InvalidDate<T>) then) =
+      __$$InvalidDateCopyWithImpl<T, $Res>;
+  @override
+  $Res call({T failedValue});
+}
+
+/// @nodoc
+class __$$InvalidDateCopyWithImpl<T, $Res>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
+    implements _$$InvalidDateCopyWith<T, $Res> {
+  __$$InvalidDateCopyWithImpl(
+      _$InvalidDate<T> _value, $Res Function(_$InvalidDate<T>) _then)
+      : super(_value, (v) => _then(v as _$InvalidDate<T>));
+
+  @override
+  _$InvalidDate<T> get _value => super._value as _$InvalidDate<T>;
+
+  @override
+  $Res call({
+    Object? failedValue = freezed,
+  }) {
+    return _then(_$InvalidDate<T>(
+      failedValue: failedValue == freezed
+          ? _value.failedValue
+          : failedValue // ignore: cast_nullable_to_non_nullable
+              as T,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$InvalidDate<T> implements InvalidDate<T> {
+  const _$InvalidDate({required this.failedValue});
+
+  @override
+  final T failedValue;
+
+  @override
+  String toString() {
+    return 'ValueFailure<$T>.invalidDate(failedValue: $failedValue)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$InvalidDate<T> &&
+            const DeepCollectionEquality()
+                .equals(other.failedValue, failedValue));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(failedValue));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$InvalidDateCopyWith<T, _$InvalidDate<T>> get copyWith =>
+      __$$InvalidDateCopyWithImpl<T, _$InvalidDate<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(T failedValue, int max) exceedingLength,
+    required TResult Function(T failedValue, int min) subceedLength,
+    required TResult Function(T failedValue) empty,
+    required TResult Function(T failedValue) multiline,
+    required TResult Function(T failedValue) invalidEmail,
+    required TResult Function(T failedValue) passwordNotMatchRequirements,
+    required TResult Function(T failedValue) invalidJWT,
+    required TResult Function(T failedValue) invalidJWTPayload,
+    required TResult Function(T failedValue) mustOneUpperCaseCharacter,
+    required TResult Function(T failedValue) mustOneLowerCaseCharacter,
+    required TResult Function(T failedValue) mustOneNumericCharacter,
+    required TResult Function(T failedValue) mustOneSpecialCharacter,
+    required TResult Function(T failedValue) mustNotContainUserName,
+    required TResult Function(T failedValue) mustNotMatchOldPassword,
+    required TResult Function(T failedValue) mustMatchNewPassword,
+    required TResult Function(T failedValue) invalidDate,
+  }) {
+    return invalidDate(failedValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, int min)? subceedLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue)? multiline,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? passwordNotMatchRequirements,
+    TResult Function(T failedValue)? invalidJWT,
+    TResult Function(T failedValue)? invalidJWTPayload,
+    TResult Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult Function(T failedValue)? mustOneNumericCharacter,
+    TResult Function(T failedValue)? mustOneSpecialCharacter,
+    TResult Function(T failedValue)? mustNotContainUserName,
+    TResult Function(T failedValue)? mustNotMatchOldPassword,
+    TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
+  }) {
+    return invalidDate?.call(failedValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, int min)? subceedLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue)? multiline,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? passwordNotMatchRequirements,
+    TResult Function(T failedValue)? invalidJWT,
+    TResult Function(T failedValue)? invalidJWTPayload,
+    TResult Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult Function(T failedValue)? mustOneNumericCharacter,
+    TResult Function(T failedValue)? mustOneSpecialCharacter,
+    TResult Function(T failedValue)? mustNotContainUserName,
+    TResult Function(T failedValue)? mustNotMatchOldPassword,
+    TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
+    required TResult orElse(),
+  }) {
+    if (invalidDate != null) {
+      return invalidDate(failedValue);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ExceedingLength<T> value) exceedingLength,
+    required TResult Function(SubceedLength<T> value) subceedLength,
+    required TResult Function(Empty<T> value) empty,
+    required TResult Function(Multiline<T> value) multiline,
+    required TResult Function(InvalidEmail<T> value) invalidEmail,
+    required TResult Function(ShortPassword<T> value)
+        passwordNotMatchRequirements,
+    required TResult Function(InvalidJWT<T> value) invalidJWT,
+    required TResult Function(InvalidJWTPayload<T> value) invalidJWTPayload,
+    required TResult Function(OneUpperCase<T> value) mustOneUpperCaseCharacter,
+    required TResult Function(OneLowerCase<T> value) mustOneLowerCaseCharacter,
+    required TResult Function(OneNumeric<T> value) mustOneNumericCharacter,
+    required TResult Function(OneSpecial<T> value) mustOneSpecialCharacter,
+    required TResult Function(NotContainUserName<T> value)
+        mustNotContainUserName,
+    required TResult Function(NotMatchOldPassword<T> value)
+        mustNotMatchOldPassword,
+    required TResult Function(MatchNewPassword<T> value) mustMatchNewPassword,
+    required TResult Function(InvalidDate<T> value) invalidDate,
+  }) {
+    return invalidDate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(SubceedLength<T> value)? subceedLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Multiline<T> value)? multiline,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult Function(InvalidJWT<T> value)? invalidJWT,
+    TResult Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
+  }) {
+    return invalidDate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(SubceedLength<T> value)? subceedLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Multiline<T> value)? multiline,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult Function(InvalidJWT<T> value)? invalidJWT,
+    TResult Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
+    required TResult orElse(),
+  }) {
+    if (invalidDate != null) {
+      return invalidDate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class InvalidDate<T> implements ValueFailure<T> {
+  const factory InvalidDate({required final T failedValue}) = _$InvalidDate<T>;
+
+  @override
+  T get failedValue;
+  @override
+  @JsonKey(ignore: true)
+  _$$InvalidDateCopyWith<T, _$InvalidDate<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

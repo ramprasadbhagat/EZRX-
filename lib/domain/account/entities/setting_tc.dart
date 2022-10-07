@@ -8,11 +8,11 @@ class SettingTc with _$SettingTc {
 
   const factory SettingTc({
     required bool acceptTC,
-    required String acceptTCTimestamp,
+    required DateTime acceptTCTimestamp,
   }) = _SettingTc;
 
-  factory SettingTc.empty() => const SettingTc(
+  factory SettingTc.empty() => SettingTc(
         acceptTC: false,
-        acceptTCTimestamp: '',
+        acceptTCTimestamp: DateTime.parse('1970-01-01 00:00:00'),
       );
 }

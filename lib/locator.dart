@@ -2,6 +2,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/announcement/bloc/announcement_bloc.dart';
+import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
@@ -31,6 +32,8 @@ import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_l
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_remote.dart';
 import 'package:ezrxmobile/infrastructure/announcement/repository/announcement_repository.dart';
+import 'package:ezrxmobile/infrastructure/aup_tc/datasource/tncdate_querymutation.dart';
+import 'package:ezrxmobile/infrastructure/aup_tc/datasource/tncdate_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
@@ -78,11 +81,10 @@ import 'package:ezrxmobile/infrastructure/order/datasource/order_history_remote.
 import 'package:ezrxmobile/infrastructure/order/repository/order_history_repository.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/routes/router_observer.dart';
+import 'package:ezrxmobile/infrastructure/aup_tc/repository/aup_tc_repository.dart';
+import 'package:ezrxmobile/infrastructure/aup_tc/datasource/tncdate_local.dart';
 import 'package:get_it/get_it.dart';
 import 'package:local_auth/local_auth.dart';
-
-import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_query_mutation.dart';
 
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_query_mutation.dart';
@@ -458,6 +460,7 @@ void setupLocator() {
     ),
   );
 
+  //============================================================
   //  Sales Rep
   //
   //============================================================
@@ -593,6 +596,36 @@ void setupLocator() {
       customerCodeBloc: locator<CustomerCodeBloc>(),
       shipToCodeBloc: locator<ShipToCodeBloc>(),
       userBloc: locator<UserBloc>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => AcceptanceDateLocalDataSource(),
+  );
+
+  locator.registerLazySingleton(() => TncQueryMutation());
+
+  locator.registerLazySingleton(
+    () => AcceptanceDateRemoteDataSource(
+      httpService: locator<HttpService>(),
+      exceptionHandler: locator<DataSourceExceptionHandler>(),
+      queryMutation: locator<TncQueryMutation>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => AupTcRepository(
+      config: locator<Config>(),
+      localDataSource: locator<AcceptanceDateLocalDataSource>(),
+      remoteDataSource: locator<AcceptanceDateRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => AupTcBloc(
+      aupTcRepository: locator<AupTcRepository>(),
+      userBloc: locator<UserBloc>(),
+      salesOrgBloc: locator<SalesOrgBloc>(),
+      config: locator<Config>(),
     ),
   );
 }

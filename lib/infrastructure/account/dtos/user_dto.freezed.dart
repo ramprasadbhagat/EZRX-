@@ -46,14 +46,20 @@ mixin _$UserDto {
   String get languagePreference => throw _privateConstructorUsedError;
   @JsonKey(name: 'acceptTC')
   bool get acceptTC => throw _privateConstructorUsedError;
-  @JsonKey(name: 'acceptTCTimestamp')
+  @JsonKey(
+      name: 'acceptTCTimestamp',
+      defaultValue: '1970-01-01 00:00:00',
+      readValue: dateTimeStringFormatCheck)
   String get acceptTCTimestamp => throw _privateConstructorUsedError;
   @JsonKey(name: 'acceptAUP')
   bool get acceptAUP => throw _privateConstructorUsedError;
-  @JsonKey(name: 'acceptAUPTC')
-  String get acceptAUPTC => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableOrderType')
   bool get enableOrderType => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'acceptAUPTC',
+      defaultValue: '1970-01-01 00:00:00',
+      readValue: dateTimeStringFormatCheck)
+  String get acceptAUPTimestamp => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -90,14 +96,14 @@ abstract class $UserDtoCopyWith<$Res> {
           String languagePreference,
       @JsonKey(name: 'acceptTC')
           bool acceptTC,
-      @JsonKey(name: 'acceptTCTimestamp')
+      @JsonKey(name: 'acceptTCTimestamp', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
           String acceptTCTimestamp,
       @JsonKey(name: 'acceptAUP')
           bool acceptAUP,
-      @JsonKey(name: 'acceptAUPTC')
-          String acceptAUPTC,
       @JsonKey(name: 'enableOrderType')
-          bool enableOrderType});
+          bool enableOrderType,
+      @JsonKey(name: 'acceptAUPTC', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
+          String acceptAUPTimestamp});
 
   $RoleDtoCopyWith<$Res> get role;
 }
@@ -126,8 +132,8 @@ class _$UserDtoCopyWithImpl<$Res> implements $UserDtoCopyWith<$Res> {
     Object? acceptTC = freezed,
     Object? acceptTCTimestamp = freezed,
     Object? acceptAUP = freezed,
-    Object? acceptAUPTC = freezed,
     Object? enableOrderType = freezed,
+    Object? acceptAUPTimestamp = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -186,14 +192,14 @@ class _$UserDtoCopyWithImpl<$Res> implements $UserDtoCopyWith<$Res> {
           ? _value.acceptAUP
           : acceptAUP // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptAUPTC: acceptAUPTC == freezed
-          ? _value.acceptAUPTC
-          : acceptAUPTC // ignore: cast_nullable_to_non_nullable
-              as String,
       enableOrderType: enableOrderType == freezed
           ? _value.enableOrderType
           : enableOrderType // ignore: cast_nullable_to_non_nullable
               as bool,
+      acceptAUPTimestamp: acceptAUPTimestamp == freezed
+          ? _value.acceptAUPTimestamp
+          : acceptAUPTimestamp // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -237,14 +243,14 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
           String languagePreference,
       @JsonKey(name: 'acceptTC')
           bool acceptTC,
-      @JsonKey(name: 'acceptTCTimestamp')
+      @JsonKey(name: 'acceptTCTimestamp', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
           String acceptTCTimestamp,
       @JsonKey(name: 'acceptAUP')
           bool acceptAUP,
-      @JsonKey(name: 'acceptAUPTC')
-          String acceptAUPTC,
       @JsonKey(name: 'enableOrderType')
-          bool enableOrderType});
+          bool enableOrderType,
+      @JsonKey(name: 'acceptAUPTC', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
+          String acceptAUPTimestamp});
 
   @override
   $RoleDtoCopyWith<$Res> get role;
@@ -275,8 +281,8 @@ class __$$_UserDtoCopyWithImpl<$Res> extends _$UserDtoCopyWithImpl<$Res>
     Object? acceptTC = freezed,
     Object? acceptTCTimestamp = freezed,
     Object? acceptAUP = freezed,
-    Object? acceptAUPTC = freezed,
     Object? enableOrderType = freezed,
+    Object? acceptAUPTimestamp = freezed,
   }) {
     return _then(_$_UserDto(
       id: id == freezed
@@ -335,14 +341,14 @@ class __$$_UserDtoCopyWithImpl<$Res> extends _$UserDtoCopyWithImpl<$Res>
           ? _value.acceptAUP
           : acceptAUP // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptAUPTC: acceptAUPTC == freezed
-          ? _value.acceptAUPTC
-          : acceptAUPTC // ignore: cast_nullable_to_non_nullable
-              as String,
       enableOrderType: enableOrderType == freezed
           ? _value.enableOrderType
           : enableOrderType // ignore: cast_nullable_to_non_nullable
               as bool,
+      acceptAUPTimestamp: acceptAUPTimestamp == freezed
+          ? _value.acceptAUPTimestamp
+          : acceptAUPTimestamp // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -376,14 +382,14 @@ class _$_UserDto extends _UserDto {
           required this.languagePreference,
       @JsonKey(name: 'acceptTC')
           required this.acceptTC,
-      @JsonKey(name: 'acceptTCTimestamp')
+      @JsonKey(name: 'acceptTCTimestamp', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
           required this.acceptTCTimestamp,
       @JsonKey(name: 'acceptAUP')
           required this.acceptAUP,
-      @JsonKey(name: 'acceptAUPTC')
-          required this.acceptAUPTC,
       @JsonKey(name: 'enableOrderType')
-          required this.enableOrderType})
+          required this.enableOrderType,
+      @JsonKey(name: 'acceptAUPTC', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
+          required this.acceptAUPTimestamp})
       : _userSalesOrganisations = userSalesOrganisations,
         super._();
 
@@ -433,21 +439,27 @@ class _$_UserDto extends _UserDto {
   @JsonKey(name: 'acceptTC')
   final bool acceptTC;
   @override
-  @JsonKey(name: 'acceptTCTimestamp')
+  @JsonKey(
+      name: 'acceptTCTimestamp',
+      defaultValue: '1970-01-01 00:00:00',
+      readValue: dateTimeStringFormatCheck)
   final String acceptTCTimestamp;
   @override
   @JsonKey(name: 'acceptAUP')
   final bool acceptAUP;
   @override
-  @JsonKey(name: 'acceptAUPTC')
-  final String acceptAUPTC;
-  @override
   @JsonKey(name: 'enableOrderType')
   final bool enableOrderType;
+  @override
+  @JsonKey(
+      name: 'acceptAUPTC',
+      defaultValue: '1970-01-01 00:00:00',
+      readValue: dateTimeStringFormatCheck)
+  final String acceptAUPTimestamp;
 
   @override
   String toString() {
-    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, acceptTC: $acceptTC, acceptTCTimestamp: $acceptTCTimestamp, acceptAUP: $acceptAUP, acceptAUPTC: $acceptAUPTC, enableOrderType: $enableOrderType)';
+    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, acceptTC: $acceptTC, acceptTCTimestamp: $acceptTCTimestamp, acceptAUP: $acceptAUP, enableOrderType: $enableOrderType, acceptAUPTimestamp: $acceptAUPTimestamp)';
   }
 
   @override
@@ -476,9 +488,9 @@ class _$_UserDto extends _UserDto {
                 .equals(other.acceptTCTimestamp, acceptTCTimestamp) &&
             const DeepCollectionEquality().equals(other.acceptAUP, acceptAUP) &&
             const DeepCollectionEquality()
-                .equals(other.acceptAUPTC, acceptAUPTC) &&
+                .equals(other.enableOrderType, enableOrderType) &&
             const DeepCollectionEquality()
-                .equals(other.enableOrderType, enableOrderType));
+                .equals(other.acceptAUPTimestamp, acceptAUPTimestamp));
   }
 
   @JsonKey(ignore: true)
@@ -499,8 +511,8 @@ class _$_UserDto extends _UserDto {
       const DeepCollectionEquality().hash(acceptTC),
       const DeepCollectionEquality().hash(acceptTCTimestamp),
       const DeepCollectionEquality().hash(acceptAUP),
-      const DeepCollectionEquality().hash(acceptAUPTC),
-      const DeepCollectionEquality().hash(enableOrderType));
+      const DeepCollectionEquality().hash(enableOrderType),
+      const DeepCollectionEquality().hash(acceptAUPTimestamp));
 
   @JsonKey(ignore: true)
   @override
@@ -542,14 +554,14 @@ abstract class _UserDto extends UserDto {
           required final String languagePreference,
       @JsonKey(name: 'acceptTC')
           required final bool acceptTC,
-      @JsonKey(name: 'acceptTCTimestamp')
+      @JsonKey(name: 'acceptTCTimestamp', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
           required final String acceptTCTimestamp,
       @JsonKey(name: 'acceptAUP')
           required final bool acceptAUP,
-      @JsonKey(name: 'acceptAUPTC')
-          required final String acceptAUPTC,
       @JsonKey(name: 'enableOrderType')
-          required final bool enableOrderType}) = _$_UserDto;
+          required final bool enableOrderType,
+      @JsonKey(name: 'acceptAUPTC', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
+          required final String acceptAUPTimestamp}) = _$_UserDto;
   const _UserDto._() : super._();
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$_UserDto.fromJson;
@@ -592,17 +604,23 @@ abstract class _UserDto extends UserDto {
   @JsonKey(name: 'acceptTC')
   bool get acceptTC;
   @override
-  @JsonKey(name: 'acceptTCTimestamp')
+  @JsonKey(
+      name: 'acceptTCTimestamp',
+      defaultValue: '1970-01-01 00:00:00',
+      readValue: dateTimeStringFormatCheck)
   String get acceptTCTimestamp;
   @override
   @JsonKey(name: 'acceptAUP')
   bool get acceptAUP;
   @override
-  @JsonKey(name: 'acceptAUPTC')
-  String get acceptAUPTC;
-  @override
   @JsonKey(name: 'enableOrderType')
   bool get enableOrderType;
+  @override
+  @JsonKey(
+      name: 'acceptAUPTC',
+      defaultValue: '1970-01-01 00:00:00',
+      readValue: dateTimeStringFormatCheck)
+  String get acceptAUPTimestamp;
   @override
   @JsonKey(ignore: true)
   _$$_UserDtoCopyWith<_$_UserDto> get copyWith =>
