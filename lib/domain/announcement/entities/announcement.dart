@@ -25,17 +25,7 @@ class Announcement with _$Announcement {
         active: false,
       );
 
-  bool get hasValidAnnouncement =>
-      this != Announcement.empty() &&
-      active &&
-      _endDateParser.isBefore(DateTime.now());
-
-  DateTime get _endDateParser {
-    var inputFormat = DateFormat('dd/MM/yyyy hh:mm');
-    var input = inputFormat.parse(endTime);
-
-    return input;
-  }
+  bool get hasValidAnnouncement => this != Announcement.empty() && active;
 
   String get descriptionDisplay {
     var newDescription = descriptionParsed;
