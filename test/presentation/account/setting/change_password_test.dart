@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
-import 'package:ezrxmobile/domain/auth/entities/reset_password_entities.dart';
+import 'package:ezrxmobile/domain/auth/entities/reset_password.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/change_password_repository.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -48,7 +48,7 @@ void main() {
       autoRouterMock = locator<AppRouter>();
     });
 
-     Future getScopedWidget(Widget home, WidgetTester tester) {
+    Future getScopedWidget(Widget home, WidgetTester tester) {
       return TesterUtils.setUpLocalizationWrapper(
         tester: tester,
         home: home,
@@ -63,11 +63,10 @@ void main() {
           ),
         ],
       );
-      
     }
 
     testWidgets('Tap Change Password', (tester) async {
-      await getScopedWidget( const SettingsPage(),tester);
+      await getScopedWidget(const SettingsPage(), tester);
       await tester.pump();
       final changepasswordOnTap = find.byKey(const Key('changePasswordTile'));
       expect(changepasswordOnTap, findsOneWidget);
@@ -82,7 +81,7 @@ void main() {
       when(() => resetPasswordBlocMock.state)
           .thenReturn(ResetPasswordState.initial());
       whenListen(resetPasswordBlocMock, Stream.fromIterable(expectedStates));
-      await getScopedWidget(const ChangePasswordPage(),tester);
+      await getScopedWidget(const ChangePasswordPage(), tester);
       final changePasswordForm = find.byKey(const Key('changePasswordFrom'));
       final resetPasswordValidation =
           find.byKey(const Key('resetPasswordValidation'));
@@ -106,7 +105,7 @@ void main() {
       whenListen(resetPasswordBlocMock, Stream.fromIterable(expectedStates));
 
       /// Finders for form fields ///
-      await getScopedWidget(const ChangePasswordPage(),tester);
+      await getScopedWidget(const ChangePasswordPage(), tester);
       final oldPasswordTextField =
           find.byKey(const Key('oldPasswordTextField'));
       final newPasswordTextField =
@@ -177,7 +176,7 @@ void main() {
           .thenReturn(ResetPasswordState.initial());
       whenListen(
           resetPasswordBlocMock, Stream.fromIterable(expectedfailureStates));
-      await getScopedWidget(const ChangePasswordPage(),tester);
+      await getScopedWidget(const ChangePasswordPage(), tester);
       await tester.pump();
       final changePasswordButton =
           find.byKey(const Key('changePasswordButton'));
@@ -190,15 +189,15 @@ void main() {
     testWidgets('Sucess Change Password Button', (tester) async {
       final expectedSuccessStates = [
         ResetPasswordState.initial().copyWith(
-            passwordResetFailureOrSuccessOption: optionOf(const Right(
-                ResetPasswordEntities(success: true, status: 'Success'))))
+            passwordResetFailureOrSuccessOption: optionOf(
+                const Right(ResetPassword(success: true, status: 'Success'))))
       ];
       when(() => mockUserBloc.state).thenReturn(UserState.initial());
       when(() => resetPasswordBlocMock.state)
           .thenReturn(ResetPasswordState.initial());
       whenListen(
           resetPasswordBlocMock, Stream.fromIterable(expectedSuccessStates));
-      await getScopedWidget(const ChangePasswordPage(),tester);
+      await getScopedWidget(const ChangePasswordPage(), tester);
       await tester.pump();
       final changePasswordButton =
           find.byKey(const Key('changePasswordButton'));

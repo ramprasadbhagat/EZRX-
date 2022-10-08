@@ -9,7 +9,7 @@ import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/entities/reset_password_entities.dart';
+import 'package:ezrxmobile/domain/auth/entities/reset_password.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/change_password_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -286,8 +286,8 @@ void main() {
                   oldPassword: Password.login('Auron@2022'),
                   userName: userBlocState.user.username,
                 ))
-            .thenAnswer((invocation) async => const Right(
-                ResetPasswordEntities(status: 'sucess', success: true)));
+            .thenAnswer((invocation) async =>
+                const Right(ResetPassword(status: 'sucess', success: true)));
       },
       act: (ResetPasswordBloc bloc) {
         bloc
@@ -333,7 +333,7 @@ void main() {
           isSubmitting: false,
           showErrorMessages: true,
           passwordResetFailureOrSuccessOption: optionOf(
-            const Right(ResetPasswordEntities(status: 'sucess', success: true)),
+            const Right(ResetPassword(status: 'sucess', success: true)),
           ),
         )
       ],

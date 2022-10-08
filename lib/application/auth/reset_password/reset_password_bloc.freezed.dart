@@ -684,7 +684,7 @@ mixin _$ResetPasswordState {
   Password get newPassword => throw _privateConstructorUsedError;
   Password get confirmPassword => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
-  Option<Either<ApiFailure, ResetPasswordEntities>>
+  Option<Either<ApiFailure, ResetPassword>>
       get passwordResetFailureOrSuccessOption =>
           throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
@@ -707,7 +707,7 @@ abstract class $ResetPasswordStateCopyWith<$Res> {
       Password newPassword,
       Password confirmPassword,
       bool isSubmitting,
-      Option<Either<ApiFailure, ResetPasswordEntities>>
+      Option<Either<ApiFailure, ResetPassword>>
           passwordResetFailureOrSuccessOption,
       bool showErrorMessages});
 }
@@ -766,7 +766,7 @@ class _$ResetPasswordStateCopyWithImpl<$Res>
               freezed
           ? _value.passwordResetFailureOrSuccessOption
           : passwordResetFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<ApiFailure, ResetPasswordEntities>>,
+              as Option<Either<ApiFailure, ResetPassword>>,
       showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -790,7 +790,7 @@ abstract class _$$_ResetPasswordCopyWith<$Res>
       Password newPassword,
       Password confirmPassword,
       bool isSubmitting,
-      Option<Either<ApiFailure, ResetPasswordEntities>>
+      Option<Either<ApiFailure, ResetPassword>>
           passwordResetFailureOrSuccessOption,
       bool showErrorMessages});
 }
@@ -851,7 +851,7 @@ class __$$_ResetPasswordCopyWithImpl<$Res>
               freezed
           ? _value.passwordResetFailureOrSuccessOption
           : passwordResetFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<ApiFailure, ResetPasswordEntities>>,
+              as Option<Either<ApiFailure, ResetPassword>>,
       showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -889,7 +889,7 @@ class _$_ResetPassword implements _ResetPassword {
   @override
   final bool isSubmitting;
   @override
-  final Option<Either<ApiFailure, ResetPasswordEntities>>
+  final Option<Either<ApiFailure, ResetPassword>>
       passwordResetFailureOrSuccessOption;
   @override
   final bool showErrorMessages;
@@ -953,7 +953,7 @@ abstract class _ResetPassword implements ResetPasswordState {
       required final Password newPassword,
       required final Password confirmPassword,
       required final bool isSubmitting,
-      required final Option<Either<ApiFailure, ResetPasswordEntities>>
+      required final Option<Either<ApiFailure, ResetPassword>>
           passwordResetFailureOrSuccessOption,
       required final bool showErrorMessages}) = _$_ResetPassword;
 
@@ -972,7 +972,7 @@ abstract class _ResetPassword implements ResetPasswordState {
   @override
   bool get isSubmitting;
   @override
-  Option<Either<ApiFailure, ResetPasswordEntities>>
+  Option<Either<ApiFailure, ResetPassword>>
       get passwordResetFailureOrSuccessOption;
   @override
   bool get showErrorMessages;

@@ -10,7 +10,7 @@ class ResetPasswordState with _$ResetPasswordState {
     required Password newPassword,
     required Password confirmPassword,
     required bool isSubmitting,
-    required Option<Either<ApiFailure, ResetPasswordEntities>>
+    required Option<Either<ApiFailure, ResetPassword>>
         passwordResetFailureOrSuccessOption,
     required bool showErrorMessages,
   }) = _ResetPassword;

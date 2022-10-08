@@ -20,7 +20,23 @@ class SavedOrder with _$SavedOrder {
     required SoldToParty soldToParty,
     required ShipToParty shipToParty,
     required CompanyName companyName,
+    // TODO: use float or int
     required num totalOrderValue,
     required String requestedDeliveryDate,
   }) = _SavedOrder;
+
+  factory SavedOrder.empty() => SavedOrder(
+        id: '',
+        items: <MaterialItem>[],
+        isDraftOrder: false,
+        isSelected: false,
+        isDeleted: false,
+        billingDocument: '',
+        eZRxNumber: '',
+        soldToParty: SoldToParty(''),
+        shipToParty: ShipToParty(''),
+        companyName: CompanyName(''),
+        totalOrderValue: 0.0,
+        requestedDeliveryDate: '',
+      );
 }

@@ -7,17 +7,25 @@ import 'package:flutter/services.dart';
 class MaterialListLocalDataSource {
   MaterialListLocalDataSource();
 
-  Future<List<MaterialInfo>> getMaterialList({
-    required String loginUserType,
-  }) async {
+  Future<List<MaterialInfo>> getMaterialList() async {
     final data = json.decode(
-      await rootBundle.loadString(loginUserType == 'client'
-          ? 'assets/json/getMaterialsWithMetaResponse.json'
-          : 'assets/json/getCustomerMaterialsForSalesRepResponse.json'),
+      await rootBundle
+          .loadString('assets/json/getMaterialsWithMetaResponse.json'),
     );
-    var finalData = loginUserType == 'client'
-        ? data['data']['materialsWithMeta']['materials']
-        : data['data']['customerMaterialsForSalesRep']['materials'];
+    final finalData = data['data']['materialsWithMeta']['materials'];
+
+    return List.from(finalData)
+        .map((e) => MaterialDto.fromJson(e).toDomain())
+        .toList();
+  }
+
+  Future<List<MaterialInfo>> getMaterialListSalesRep() async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/getCustomerMaterialsForSalesRepResponse.json',
+      ),
+    );
+    final finalData = data['data']['customerMaterialsForSalesRep']['materials'];
 
     return List.from(finalData)
         .map((e) => MaterialDto.fromJson(e).toDomain())

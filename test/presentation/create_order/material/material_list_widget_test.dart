@@ -7,9 +7,12 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/core/search/search_bloc.dart';
+import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/material/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/material/entities/material_info.dart';
+import 'package:ezrxmobile/domain/material/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/material/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/create_order/material_list.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -38,6 +41,9 @@ class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 class MaterialMockBloc extends MockBloc<MaterialListEvent, MaterialListState>
     implements MaterialListBloc {}
 
+class MockFavouriteBloc extends MockBloc<FavouriteEvent, FavouriteState>
+    implements FavouriteBloc {}
+
 class AutoRouterMock extends Mock implements AppRouter {}
 
 void main() {
@@ -49,6 +55,7 @@ void main() {
   late ShipToCodeBloc shipToCodeBlocMock;
   late UserBloc userBlocMock;
   late AppRouter autoRouterMock;
+  late MockFavouriteBloc mockFavouriteBloc;
 
   setUpAll(() async {
     setupLocator();
@@ -62,12 +69,14 @@ void main() {
       customerCodeBlocMock = CustomerCodeMockBloc();
       shipToCodeBlocMock = ShipToCodeMockBloc();
       userBlocMock = UserMockBloc();
+      mockFavouriteBloc = MockFavouriteBloc();
       autoRouterMock = locator<AppRouter>();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
       when(() => searchBlocMock.state).thenReturn(SearchState.initial());
+      when(() => mockFavouriteBloc.state).thenReturn(FavouriteState.initial());
     });
 
     Widget getScopedWidget(Widget child) {
@@ -93,6 +102,8 @@ void main() {
             BlocProvider<SearchBloc>(create: ((context) => searchBlocMock)),
             BlocProvider<MaterialListBloc>(
                 create: ((context) => materialListBlocMock)),
+            BlocProvider<FavouriteBloc>(
+                create: ((context) => mockFavouriteBloc)),
           ],
           child: child,
         ),
@@ -144,51 +155,50 @@ void main() {
       expect(loaderImage, findsOneWidget);
     });
 
-    // TODO: need Wasim help to solve this one
-    // testWidgets('Material List Body Content IsNotEmpty', (tester) async {
-    //   final expectedState = [
-    //     MaterialListState.initial().copyWith(isFetching: true),
-    //     MaterialListState.initial().copyWith(
-    //       apiFailureOrSuccessOption: none(),
-    //       isFetching: false,
-    //       materialList: <MaterialInfo>[
-    //         MaterialInfo(
-    //           materialNumber: MaterialNumber('000000000023168451'),
-    //           materialDescription: "Reag Cup 15ml 1'S",
-    //           governmentMaterialCode: '',
-    //           therapeuticClass: 'All other non-therapeutic products',
-    //           itemBrand: 'Item not listed in I',
-    //           principalData: const PrincipalData(
-    //             principalName: '台灣羅氏醫療診斷設備(股)公司',
-    //             principalCode: '0000102004',
-    //           ),
-    //           taxClassification: 'Product : Full Tax',
-    //           itemRegistrationNumber: 'NA',
-    //           unitOfMeasurement: 'EA',
-    //           materialGroup2: '',
-    //           materialGroup4: 'OTH',
-    //           isSampleMaterial: false,
-    //           hidePrice: false,
-    //           hasValidTenderContract: false,
-    //           hasMandatoryTenderContract: false,
-    //           taxes: ['5'],
-    //         )
-    //       ],
-    //     )
-    //   ];
-    //   when(() => materialListBlocMock.state)
-    //       .thenReturn(MaterialListState.initial());
-    //   whenListen(materialListBlocMock, Stream.fromIterable(expectedState));
-    //   await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
-    //   await tester.pump();
-    //   final materialList = find.byKey(const Key('scrollList'));
-    //   expect(materialList, findsOneWidget);
-    //   await tester.drag(materialList, const Offset(0.0, -300));
-    //   await tester.pump();
-    //   final listcontent = find.byKey(Key(
-    //       'materialOption${materialListBlocMock.state.materialList.first.materialNumber.getOrCrash()}'));
-    //   expect(listcontent, findsOneWidget);
-    // });
+    testWidgets('Material List Body Content IsNotEmpty', (tester) async {
+      final expectedState = [
+        MaterialListState.initial().copyWith(isFetching: true),
+        MaterialListState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          isFetching: false,
+          materialList: <MaterialInfo>[
+            MaterialInfo(
+              materialNumber: MaterialNumber('000000000023168451'),
+              materialDescription: "Reag Cup 15ml 1'S",
+              governmentMaterialCode: '',
+              therapeuticClass: 'All other non-therapeutic products',
+              itemBrand: 'Item not listed in I',
+              principalData: const PrincipalData(
+                principalName: '台灣羅氏醫療診斷設備(股)公司',
+                principalCode: '0000102004',
+              ),
+              taxClassification: 'Product : Full Tax',
+              itemRegistrationNumber: 'NA',
+              unitOfMeasurement: 'EA',
+              materialGroup2: MaterialGroup.two(''),
+              materialGroup4: MaterialGroup.four('OTH'),
+              isSampleMaterial: false,
+              hidePrice: false,
+              hasValidTenderContract: false,
+              hasMandatoryTenderContract: false,
+              taxes: ['5'],
+            )
+          ],
+        )
+      ];
+      when(() => materialListBlocMock.state)
+          .thenReturn(MaterialListState.initial());
+      whenListen(materialListBlocMock, Stream.fromIterable(expectedState));
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
+      await tester.pump();
+      final materialList = find.byKey(const Key('scrollList'));
+      expect(materialList, findsOneWidget);
+      await tester.drag(materialList, const Offset(0.0, -300));
+      await tester.pump();
+      final listcontent = find.byKey(Key(
+          'materialOption${materialListBlocMock.state.materialList.first.materialNumber.getOrCrash()}'));
+      expect(listcontent, findsOneWidget);
+    });
 
     testWidgets('Scroll List isEmpty', (tester) async {
       final expectedState = [

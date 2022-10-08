@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
+import 'package:ezrxmobile/domain/material/value/value_transformers.dart';
 
 class MaterialNumber extends ValueObject<String> {
   @override
@@ -17,4 +18,23 @@ class MaterialNumber extends ValueObject<String> {
   }
 
   const MaterialNumber._(this.value);
+}
+
+class MaterialGroup extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory MaterialGroup.two(String input) {
+    return MaterialGroup._(Right(input));
+  }
+
+  factory MaterialGroup.four(String input) {
+    return MaterialGroup._(Right(input));
+  }
+
+  bool get isFOC {
+    return materialIsFOC(value.getOrElse(() => ''));
+  }
+
+  const MaterialGroup._(this.value);
 }

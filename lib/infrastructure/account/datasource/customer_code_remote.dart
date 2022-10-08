@@ -21,18 +21,14 @@ class CustomerCodeRemoteDataSource {
     required this.config,
   });
 
-  Future<List<CustomerCodeInfo>> getCustomerCode({
+  Future<List<CustomerCodeInfo>> getCustomerCodeList({
     required String customerCode,
     required String salesOrg,
     required int paginate,
     required bool hidecustomer,
-    required String loginUserType,
-    required String userName,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = loginUserType == 'client'
-          ? customerCodeQueryMutation.getCustomerInfoBySearch()
-          : customerCodeQueryMutation.getCustomerListForSalesRep();
+      final queryData = customerCodeQueryMutation.getCustomerInfoBySearch();
 
       final variables = {
         'searchKey': customerCode,
@@ -41,10 +37,6 @@ class CustomerCodeRemoteDataSource {
         'after': paginate,
         'filterBlockCustomer': hidecustomer,
       };
-
-      if (loginUserType != 'client') {
-        variables.addEntries({MapEntry('username', userName)});
-      }
 
       final res = await httpService.request(
         method: 'POST',
@@ -56,9 +48,44 @@ class CustomerCodeRemoteDataSource {
       );
       _customerCodeExceptionChecker(res: res);
 
-      var finalData = loginUserType == 'client'
-          ? res.data['data']['customerInformationSearch']['SoldToInformation']
-          : res.data['data']['customerListForSalesRep'];
+      var finalData = res.data['data']['customerInformationSearch']['SoldToInformation'];
+
+      return List.from(finalData)
+          .map((e) => CustomerCodeDto.fromJson(e).toDomain())
+          .toList();
+    });
+  }
+
+  Future<List<CustomerCodeInfo>> getSalesRepCustomerCodeList({
+    required String customerCode,
+    required String salesOrg,
+    required int paginate,
+    required bool hidecustomer,
+    required String userName,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = customerCodeQueryMutation.getCustomerListForSalesRep();
+
+      final variables = {
+        'searchKey': customerCode,
+        'salesOrganisation': salesOrg,
+        'first': 20,
+        'after': paginate,
+        'filterBlockCustomer': hidecustomer,
+        'username': userName,
+      };
+
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}license',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': variables,
+        }),
+      );
+      _customerCodeExceptionChecker(res: res);
+
+      var finalData = res.data['data']['customerListForSalesRep'];
 
       return List.from(finalData)
           .map((e) => CustomerCodeDto.fromJson(e).toDomain())

@@ -49,7 +49,10 @@ class HomeTab extends StatelessWidget {
                   homePageTiles.length,
                   (index) {
                     return Center(
-                      child: TileCard(homePageTile: homePageTiles[index]),
+                      child: TileCard(
+                        key: const Key('HomeTileCard'),
+                        homePageTile: homePageTiles[index],
+                      ),
                     );
                   },
                 ),

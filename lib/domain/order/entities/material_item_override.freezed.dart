@@ -191,7 +191,7 @@ abstract class _MaterialItemOverride extends MaterialItemOverride {
 mixin _$ValueOverride {
   String get code => throw _privateConstructorUsedError;
   dynamic get price => throw _privateConstructorUsedError;
-  String get currency => throw _privateConstructorUsedError;
+  Currency get currency => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ValueOverrideCopyWith<ValueOverride> get copyWith =>
@@ -203,7 +203,7 @@ abstract class $ValueOverrideCopyWith<$Res> {
   factory $ValueOverrideCopyWith(
           ValueOverride value, $Res Function(ValueOverride) then) =
       _$ValueOverrideCopyWithImpl<$Res>;
-  $Res call({String code, dynamic price, String currency});
+  $Res call({String code, dynamic price, Currency currency});
 }
 
 /// @nodoc
@@ -233,7 +233,7 @@ class _$ValueOverrideCopyWithImpl<$Res>
       currency: currency == freezed
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Currency,
     ));
   }
 }
@@ -245,7 +245,7 @@ abstract class _$$_ValueOverrideCopyWith<$Res>
           _$_ValueOverride value, $Res Function(_$_ValueOverride) then) =
       __$$_ValueOverrideCopyWithImpl<$Res>;
   @override
-  $Res call({String code, dynamic price, String currency});
+  $Res call({String code, dynamic price, Currency currency});
 }
 
 /// @nodoc
@@ -277,7 +277,7 @@ class __$$_ValueOverrideCopyWithImpl<$Res>
       currency: currency == freezed
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Currency,
     ));
   }
 }
@@ -293,7 +293,7 @@ class _$_ValueOverride implements _ValueOverride {
   @override
   final dynamic price;
   @override
-  final String currency;
+  final Currency currency;
 
   @override
   String toString() {
@@ -327,14 +327,14 @@ abstract class _ValueOverride implements ValueOverride {
   const factory _ValueOverride(
       {required final String code,
       required final dynamic price,
-      required final String currency}) = _$_ValueOverride;
+      required final Currency currency}) = _$_ValueOverride;
 
   @override
   String get code;
   @override
   dynamic get price;
   @override
-  String get currency;
+  Currency get currency;
   @override
   @JsonKey(ignore: true)
   _$$_ValueOverrideCopyWith<_$_ValueOverride> get copyWith =>

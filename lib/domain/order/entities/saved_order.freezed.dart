@@ -25,7 +25,8 @@ mixin _$SavedOrder {
   String get eZRxNumber => throw _privateConstructorUsedError;
   SoldToParty get soldToParty => throw _privateConstructorUsedError;
   ShipToParty get shipToParty => throw _privateConstructorUsedError;
-  CompanyName get companyName => throw _privateConstructorUsedError;
+  CompanyName get companyName =>
+      throw _privateConstructorUsedError; // TODO: use float or int
   num get totalOrderValue => throw _privateConstructorUsedError;
   String get requestedDeliveryDate => throw _privateConstructorUsedError;
 
@@ -274,6 +275,7 @@ class _$_SavedOrder extends _SavedOrder {
   final ShipToParty shipToParty;
   @override
   final CompanyName companyName;
+// TODO: use float or int
   @override
   final num totalOrderValue;
   @override
@@ -370,7 +372,7 @@ abstract class _SavedOrder extends SavedOrder {
   ShipToParty get shipToParty;
   @override
   CompanyName get companyName;
-  @override
+  @override // TODO: use float or int
   num get totalOrderValue;
   @override
   String get requestedDeliveryDate;

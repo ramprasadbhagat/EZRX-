@@ -23,14 +23,14 @@ mixin _$MaterialItem {
   String get batchNumber => throw _privateConstructorUsedError;
   bool get zdp8Override => throw _privateConstructorUsedError;
   List<MaterialItemBonus> get bonuses => throw _privateConstructorUsedError;
-  String get materialGroup2 => throw _privateConstructorUsedError;
-  String get materialGroup4 => throw _privateConstructorUsedError;
-  String get materialNumber => throw _privateConstructorUsedError;
+  MaterialGroup get materialGroup2 => throw _privateConstructorUsedError;
+  MaterialGroup get materialGroup4 => throw _privateConstructorUsedError;
+  MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   double get overridenPrice => throw _privateConstructorUsedError;
   String get unitOfMeasurement => throw _privateConstructorUsedError;
   String get itemRegistrationNumber => throw _privateConstructorUsedError;
   String get materialDescription => throw _privateConstructorUsedError;
-  MaterialItemOverride? get overrideInfo => throw _privateConstructorUsedError;
+  MaterialItemOverride get overrideInfo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialItemCopyWith<MaterialItem> get copyWith =>
@@ -50,16 +50,16 @@ abstract class $MaterialItemCopyWith<$Res> {
       String batchNumber,
       bool zdp8Override,
       List<MaterialItemBonus> bonuses,
-      String materialGroup2,
-      String materialGroup4,
-      String materialNumber,
+      MaterialGroup materialGroup2,
+      MaterialGroup materialGroup4,
+      MaterialNumber materialNumber,
       double overridenPrice,
       String unitOfMeasurement,
       String itemRegistrationNumber,
       String materialDescription,
-      MaterialItemOverride? overrideInfo});
+      MaterialItemOverride overrideInfo});
 
-  $MaterialItemOverrideCopyWith<$Res>? get overrideInfo;
+  $MaterialItemOverrideCopyWith<$Res> get overrideInfo;
 }
 
 /// @nodoc
@@ -120,15 +120,15 @@ class _$MaterialItemCopyWithImpl<$Res> implements $MaterialItemCopyWith<$Res> {
       materialGroup2: materialGroup2 == freezed
           ? _value.materialGroup2
           : materialGroup2 // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialGroup,
       materialGroup4: materialGroup4 == freezed
           ? _value.materialGroup4
           : materialGroup4 // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialGroup,
       materialNumber: materialNumber == freezed
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialNumber,
       overridenPrice: overridenPrice == freezed
           ? _value.overridenPrice
           : overridenPrice // ignore: cast_nullable_to_non_nullable
@@ -148,17 +148,13 @@ class _$MaterialItemCopyWithImpl<$Res> implements $MaterialItemCopyWith<$Res> {
       overrideInfo: overrideInfo == freezed
           ? _value.overrideInfo
           : overrideInfo // ignore: cast_nullable_to_non_nullable
-              as MaterialItemOverride?,
+              as MaterialItemOverride,
     ));
   }
 
   @override
-  $MaterialItemOverrideCopyWith<$Res>? get overrideInfo {
-    if (_value.overrideInfo == null) {
-      return null;
-    }
-
-    return $MaterialItemOverrideCopyWith<$Res>(_value.overrideInfo!, (value) {
+  $MaterialItemOverrideCopyWith<$Res> get overrideInfo {
+    return $MaterialItemOverrideCopyWith<$Res>(_value.overrideInfo, (value) {
       return _then(_value.copyWith(overrideInfo: value));
     });
   }
@@ -179,17 +175,17 @@ abstract class _$$_MaterialItemCopyWith<$Res>
       String batchNumber,
       bool zdp8Override,
       List<MaterialItemBonus> bonuses,
-      String materialGroup2,
-      String materialGroup4,
-      String materialNumber,
+      MaterialGroup materialGroup2,
+      MaterialGroup materialGroup4,
+      MaterialNumber materialNumber,
       double overridenPrice,
       String unitOfMeasurement,
       String itemRegistrationNumber,
       String materialDescription,
-      MaterialItemOverride? overrideInfo});
+      MaterialItemOverride overrideInfo});
 
   @override
-  $MaterialItemOverrideCopyWith<$Res>? get overrideInfo;
+  $MaterialItemOverrideCopyWith<$Res> get overrideInfo;
 }
 
 /// @nodoc
@@ -253,15 +249,15 @@ class __$$_MaterialItemCopyWithImpl<$Res>
       materialGroup2: materialGroup2 == freezed
           ? _value.materialGroup2
           : materialGroup2 // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialGroup,
       materialGroup4: materialGroup4 == freezed
           ? _value.materialGroup4
           : materialGroup4 // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialGroup,
       materialNumber: materialNumber == freezed
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialNumber,
       overridenPrice: overridenPrice == freezed
           ? _value.overridenPrice
           : overridenPrice // ignore: cast_nullable_to_non_nullable
@@ -281,7 +277,7 @@ class __$$_MaterialItemCopyWithImpl<$Res>
       overrideInfo: overrideInfo == freezed
           ? _value.overrideInfo
           : overrideInfo // ignore: cast_nullable_to_non_nullable
-              as MaterialItemOverride?,
+              as MaterialItemOverride,
     ));
   }
 }
@@ -328,11 +324,11 @@ class _$_MaterialItem extends _MaterialItem {
   }
 
   @override
-  final String materialGroup2;
+  final MaterialGroup materialGroup2;
   @override
-  final String materialGroup4;
+  final MaterialGroup materialGroup4;
   @override
-  final String materialNumber;
+  final MaterialNumber materialNumber;
   @override
   final double overridenPrice;
   @override
@@ -342,7 +338,7 @@ class _$_MaterialItem extends _MaterialItem {
   @override
   final String materialDescription;
   @override
-  final MaterialItemOverride? overrideInfo;
+  final MaterialItemOverride overrideInfo;
 
   @override
   String toString() {
@@ -415,14 +411,14 @@ abstract class _MaterialItem extends MaterialItem {
       required final String batchNumber,
       required final bool zdp8Override,
       required final List<MaterialItemBonus> bonuses,
-      required final String materialGroup2,
-      required final String materialGroup4,
-      required final String materialNumber,
+      required final MaterialGroup materialGroup2,
+      required final MaterialGroup materialGroup4,
+      required final MaterialNumber materialNumber,
       required final double overridenPrice,
       required final String unitOfMeasurement,
       required final String itemRegistrationNumber,
       required final String materialDescription,
-      required final MaterialItemOverride? overrideInfo}) = _$_MaterialItem;
+      required final MaterialItemOverride overrideInfo}) = _$_MaterialItem;
   const _MaterialItem._() : super._();
 
   @override
@@ -440,11 +436,11 @@ abstract class _MaterialItem extends MaterialItem {
   @override
   List<MaterialItemBonus> get bonuses;
   @override
-  String get materialGroup2;
+  MaterialGroup get materialGroup2;
   @override
-  String get materialGroup4;
+  MaterialGroup get materialGroup4;
   @override
-  String get materialNumber;
+  MaterialNumber get materialNumber;
   @override
   double get overridenPrice;
   @override
@@ -454,7 +450,7 @@ abstract class _MaterialItem extends MaterialItem {
   @override
   String get materialDescription;
   @override
-  MaterialItemOverride? get overrideInfo;
+  MaterialItemOverride get overrideInfo;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialItemCopyWith<_$_MaterialItem> get copyWith =>

@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
-import 'package:ezrxmobile/domain/order/value/value_transformers.dart';
 
 class CompanyName extends ValueObject<String> {
   @override
@@ -13,7 +13,7 @@ class CompanyName extends ValueObject<String> {
   }
 
   String get name {
-    return displayName(value.getOrElse(() => ''));
+    return naIfEmpty(value.getOrElse(() => ''));
   }
 
   const CompanyName._(this.value);
@@ -28,7 +28,7 @@ class SoldToParty extends ValueObject<String> {
   }
 
   String get name {
-    return displayName(value.getOrElse(() => ''));
+    return naIfEmpty(value.getOrElse(() => ''));
   }
 
   const SoldToParty._(this.value);
@@ -43,7 +43,7 @@ class ShipToParty extends ValueObject<String> {
   }
 
   String get name {
-    return displayName(value.getOrElse(() => ''));
+    return naIfEmpty(value.getOrElse(() => ''));
   }
 
   const ShipToParty._(this.value);

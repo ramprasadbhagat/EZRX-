@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/favourites/repository/i_favourite_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,13 +16,14 @@ part 'favourite_bloc.freezed.dart';
 class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
   final IFavouriteRepository favouriteRepository;
 
-  // TODO: Mahendra
-  // Inject UserBloc here, so you pass the entitiy to repository layer
-
   // final ShipToCodeBloc shipToCodeBloc;
   // late final StreamSubscription _shipToBlocSubscription;
+
+  final UserBloc userBloc;
+
   FavouriteBloc({
     required this.favouriteRepository,
+    required this.userBloc,
     // required this.shipToCodeBloc,
   }) : super(FavouriteState.initial()) {
     on<FavouriteEvent>(_onEvent);
@@ -47,7 +49,9 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
       fetch: (_) async {
         emit(state.copyWith(failureOrSuccessOption: none(), isLoading: true));
 
-        final failureOrSuccess = await favouriteRepository.getFavourites();
+        final failureOrSuccess = await favouriteRepository.getFavourites(
+          user: userBloc.state.user,
+        );
         failureOrSuccess.fold(
           (failure) {
             state.copyWith(
@@ -70,6 +74,7 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
         emit(state.copyWith(failureOrSuccessOption: none(), isLoading: true));
 
         final failureOrSuccess = await favouriteRepository.addFavourites(
+          user: userBloc.state.user,
           isPackAndPick: e.isPackAndPick,
           item: e.item,
           favouriteItems: state.favouriteItems,

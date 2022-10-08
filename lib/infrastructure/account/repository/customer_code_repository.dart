@@ -44,14 +44,20 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
       }
     }
     try {
-      final customerCodeInfo = await remoteDataSource.getCustomerCode(
-        salesOrg: salesOrg,
-        customerCode: customerCode,
-        paginate: pageIndex,
-        hidecustomer: hideCustomer,
-        loginUserType: loginUserType,
-        userName: userName,
-      );
+      final customerCodeInfo = loginUserType == 'client'
+          ? await remoteDataSource.getCustomerCodeList(
+              salesOrg: salesOrg,
+              customerCode: customerCode,
+              paginate: pageIndex,
+              hidecustomer: hideCustomer,
+            )
+          : await remoteDataSource.getSalesRepCustomerCodeList(
+              salesOrg: salesOrg,
+              customerCode: customerCode,
+              paginate: pageIndex,
+              hidecustomer: hideCustomer,
+              userName: userName,
+            );
 
       return Right(customerCodeInfo);
     } catch (e) {

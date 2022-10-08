@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
@@ -15,20 +14,15 @@ class FavouriteRemoteDataSource {
   FavouriteQueryMutation favouriteQueryMutation;
   DataSourceExceptionHandler dataSourceExceptionHandler;
   Config config;
-  UserBloc user;
-
-  // TODO: Mahendra
-  // NO BLOC INJECTION ALLOW ON DATASOURCE LAYER
 
   FavouriteRemoteDataSource({
     required this.config,
     required this.httpService,
     required this.dataSourceExceptionHandler,
     required this.favouriteQueryMutation,
-    required this.user,
   });
 
-  Future<List<Favourite>> getFavouriteList() async {
+  Future<List<Favourite>> getFavouriteList({required String userId}) async {
     return await dataSourceExceptionHandler.handle(
       () async {
         final res = await httpService.request(
@@ -38,7 +32,7 @@ class FavouriteRemoteDataSource {
             {
               'query': favouriteQueryMutation.getFavourite(),
               'variables': {
-                'user': user.state.user.id.toString(),
+                'user': userId,
               },
             },
           ),
@@ -53,22 +47,16 @@ class FavouriteRemoteDataSource {
     );
   }
 
-  // TODO: Mahendra
-  // No value_object / entities on this level, do on repository level
   Future<Favourite> addFavourite({
-    required Favourite item,
-    required isPackAndPick,
+    required String materialNumber,
+    required String materialDescription,
+    required bool isFOC,
+    required bool isTenderContract,
+    required String userId,
+    required String type,
   }) async {
     return await dataSourceExceptionHandler.handle(
       () async {
-        String type;
-        if (isPackAndPick) {
-          type = 'P&P';
-        } else if (item.isFOC) {
-          type = '6A1';
-        } else {
-          type = 'Comm';
-        }
         final res = await httpService.request(
           method: 'POST',
           url: '${config.urlConstants}strapiEngine',
@@ -78,12 +66,12 @@ class FavouriteRemoteDataSource {
               'variables': {
                 'input': {
                   'data': {
-                    'user': user.state.user.id.toString(),
-                    'materialNumber': item.materialNumber.getOrCrash(),
-                    'materialDescription': item.materialDescription,
-                    'isFOC': item.isFOC,
+                    'user': userId,
+                    'materialNumber': materialNumber,
+                    'materialDescription': materialDescription,
+                    'isFOC': isFOC,
                     'type': type,
-                    'isTenderContract': item.isTenderContract,
+                    'isTenderContract': isTenderContract,
                   },
                 },
               },
@@ -100,7 +88,7 @@ class FavouriteRemoteDataSource {
     );
   }
 
-  Future<Favourite> deleteFavourite({required Favourite item}) async {
+  Future<Favourite> deleteFavourite({required String itemId}) async {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
@@ -109,9 +97,7 @@ class FavouriteRemoteDataSource {
           {
             'query': favouriteQueryMutation.deleteFavourite(),
             'variables': {
-              'input': {
-                'id': item.id.toString(),
-              },
+              'input': {'id': itemId},
             },
           },
         ),

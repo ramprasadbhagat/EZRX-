@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/announcement/bloc/announcement_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_local.dart';

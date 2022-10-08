@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:ezrxmobile/config.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
@@ -20,7 +21,9 @@ class FavouriteRepository implements IFavouriteRepository {
   });
 
   @override
-  Future<Either<ApiFailure, List<Favourite>>> getFavourites() async {
+  Future<Either<ApiFailure, List<Favourite>>> getFavourites({
+    required User user,
+  }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
         final favourite = await localDataSource.getFavouriteList();
@@ -33,7 +36,8 @@ class FavouriteRepository implements IFavouriteRepository {
       }
     }
     try {
-      final favourite = await remoteDataSource.getFavouriteList();
+      final favourite =
+          await remoteDataSource.getFavouriteList(userId: user.id);
 
       return Right(favourite);
     } catch (e) {
@@ -48,6 +52,7 @@ class FavouriteRepository implements IFavouriteRepository {
     required Favourite item,
     required List<Favourite> favouriteItems,
     required bool isPackAndPick,
+    required User user,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -66,9 +71,21 @@ class FavouriteRepository implements IFavouriteRepository {
       }
     }
     try {
+      String type;
+      if (isPackAndPick) {
+        type = 'P&P';
+      } else if (item.isFOC) {
+        type = '6A1';
+      } else {
+        type = 'Comm';
+      }
       final addedFavourite = await remoteDataSource.addFavourite(
-        isPackAndPick: isPackAndPick,
-        item: item,
+        type: type,
+        isFOC: item.isFOC,
+        isTenderContract: item.isTenderContract,
+        materialDescription: item.materialDescription,
+        materialNumber: item.materialNumber.getOrCrash(),
+        userId: user.id,
       );
       final newfavouriteItems = List<Favourite>.from(favouriteItems)
         ..insert(0, item.copyWith(id: addedFavourite.id));
@@ -102,9 +119,8 @@ class FavouriteRepository implements IFavouriteRepository {
       }
     }
     try {
-      final deletedFavourite = await remoteDataSource.deleteFavourite(
-        item: item,
-      );
+      final deletedFavourite =
+          await remoteDataSource.deleteFavourite(itemId: item.id);
       final newfavouriteItems = List<Favourite>.from(favouriteItems)
         ..removeWhere((element) => element.id == deletedFavourite.id);
 

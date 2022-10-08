@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/material/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -19,7 +20,7 @@ class MaterialItemBonusDto with _$MaterialItemBonusDto {
 
   MaterialItemBonus toDomain() {
     return MaterialItemBonus(
-      materialNumber: materialNumber,
+      materialNumber: MaterialNumber(materialNumber),
       qty: qty,
       comment: comment,
       materialDescription: materialDescription,

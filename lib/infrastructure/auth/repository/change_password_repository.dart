@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/auth/entities/reset_password_entities.dart';
+import 'package:ezrxmobile/domain/auth/entities/reset_password.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_change_password_repository.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -22,7 +22,7 @@ class ChangePasswordRepository implements IChangePasswordRepository {
   });
 
   @override
-  Future<Either<ApiFailure, ResetPasswordEntities>> setPassword({
+  Future<Either<ApiFailure, ResetPassword>> setPassword({
     required Password newPassword,
     required Password oldPassword,
     required Username userName,

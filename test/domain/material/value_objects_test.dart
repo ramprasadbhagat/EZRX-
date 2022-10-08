@@ -17,4 +17,20 @@ void main() {
       expect(result, 'NA');
     });
   });
+
+  group('Material Group 4 value object', () {
+    test('should return true when material group is 6A1', () async {
+      const input = '6A1';
+      final materialGroup = MaterialGroup.four(input);
+      final result = materialGroup.isFOC;
+      expect(result, true);
+    });
+
+    test('should return false when material group is 6GS', () async {
+      const input = '6GS';
+      final materialGroup = MaterialGroup.four(input);
+      final result = materialGroup.isFOC;
+      expect(result, false);
+    });
+  });
 }

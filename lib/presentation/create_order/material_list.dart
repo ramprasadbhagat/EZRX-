@@ -166,7 +166,7 @@ class _FavoriteButton extends StatelessWidget {
                         Favourite(
                           id: '',
                           materialNumber: materialInfo.materialNumber,
-                          isFOC: false,
+                          isFOC: materialInfo.materialGroup4.isFOC,
                           isTenderContract: false,
                           materialDescription: materialInfo.materialDescription,
                         ),

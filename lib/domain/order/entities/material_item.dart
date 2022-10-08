@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/material/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_override.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -15,13 +16,35 @@ class MaterialItem with _$MaterialItem {
     required String batchNumber,
     required bool zdp8Override,
     required List<MaterialItemBonus> bonuses,
-    required String materialGroup2,
-    required String materialGroup4,
-    required String materialNumber,
+    required MaterialGroup materialGroup2,
+    required MaterialGroup materialGroup4,
+    required MaterialNumber materialNumber,
     required double overridenPrice,
     required String unitOfMeasurement,
     required String itemRegistrationNumber,
     required String materialDescription,
-    required MaterialItemOverride? overrideInfo,
+    required MaterialItemOverride overrideInfo,
   }) = _MaterialItem;
+
+  factory MaterialItem.empty() => MaterialItem(
+        qty: 0,
+        type: '',
+        comment: '',
+        hidePrice: false,
+        batchNumber: '',
+        zdp8Override: false,
+        bonuses: <MaterialItemBonus>[],
+        materialGroup2: MaterialGroup.two(''),
+        materialGroup4: MaterialGroup.four(''),
+        materialNumber: MaterialNumber(''),
+        overridenPrice: 0.0,
+        unitOfMeasurement: '',
+        itemRegistrationNumber: '',
+        materialDescription: '',
+        overrideInfo: const MaterialItemOverride(
+          percentageOverride: '',
+          reference: '',
+          valueOverride: <ValueOverride>[],
+        ),
+      );
 }

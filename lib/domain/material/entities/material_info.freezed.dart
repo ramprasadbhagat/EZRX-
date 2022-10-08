@@ -25,8 +25,8 @@ mixin _$MaterialInfo {
   String get taxClassification => throw _privateConstructorUsedError;
   String get itemRegistrationNumber => throw _privateConstructorUsedError;
   String get unitOfMeasurement => throw _privateConstructorUsedError;
-  String get materialGroup2 => throw _privateConstructorUsedError;
-  String get materialGroup4 => throw _privateConstructorUsedError;
+  MaterialGroup get materialGroup2 => throw _privateConstructorUsedError;
+  MaterialGroup get materialGroup4 => throw _privateConstructorUsedError;
   bool get isSampleMaterial => throw _privateConstructorUsedError;
   bool get hidePrice => throw _privateConstructorUsedError;
   bool get hasValidTenderContract => throw _privateConstructorUsedError;
@@ -53,8 +53,8 @@ abstract class $MaterialInfoCopyWith<$Res> {
       String taxClassification,
       String itemRegistrationNumber,
       String unitOfMeasurement,
-      String materialGroup2,
-      String materialGroup4,
+      MaterialGroup materialGroup2,
+      MaterialGroup materialGroup4,
       bool isSampleMaterial,
       bool hidePrice,
       bool hasValidTenderContract,
@@ -131,11 +131,11 @@ class _$MaterialInfoCopyWithImpl<$Res> implements $MaterialInfoCopyWith<$Res> {
       materialGroup2: materialGroup2 == freezed
           ? _value.materialGroup2
           : materialGroup2 // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialGroup,
       materialGroup4: materialGroup4 == freezed
           ? _value.materialGroup4
           : materialGroup4 // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialGroup,
       isSampleMaterial: isSampleMaterial == freezed
           ? _value.isSampleMaterial
           : isSampleMaterial // ignore: cast_nullable_to_non_nullable
@@ -184,8 +184,8 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
       String taxClassification,
       String itemRegistrationNumber,
       String unitOfMeasurement,
-      String materialGroup2,
-      String materialGroup4,
+      MaterialGroup materialGroup2,
+      MaterialGroup materialGroup4,
       bool isSampleMaterial,
       bool hidePrice,
       bool hasValidTenderContract,
@@ -266,11 +266,11 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
       materialGroup2: materialGroup2 == freezed
           ? _value.materialGroup2
           : materialGroup2 // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialGroup,
       materialGroup4: materialGroup4 == freezed
           ? _value.materialGroup4
           : materialGroup4 // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialGroup,
       isSampleMaterial: isSampleMaterial == freezed
           ? _value.isSampleMaterial
           : isSampleMaterial // ignore: cast_nullable_to_non_nullable
@@ -337,9 +337,9 @@ class _$_MaterialInfo extends _MaterialInfo {
   @override
   final String unitOfMeasurement;
   @override
-  final String materialGroup2;
+  final MaterialGroup materialGroup2;
   @override
-  final String materialGroup4;
+  final MaterialGroup materialGroup4;
   @override
   final bool isSampleMaterial;
   @override
@@ -433,8 +433,8 @@ abstract class _MaterialInfo extends MaterialInfo {
       required final String taxClassification,
       required final String itemRegistrationNumber,
       required final String unitOfMeasurement,
-      required final String materialGroup2,
-      required final String materialGroup4,
+      required final MaterialGroup materialGroup2,
+      required final MaterialGroup materialGroup4,
       required final bool isSampleMaterial,
       required final bool hidePrice,
       required final bool hasValidTenderContract,
@@ -461,9 +461,9 @@ abstract class _MaterialInfo extends MaterialInfo {
   @override
   String get unitOfMeasurement;
   @override
-  String get materialGroup2;
+  MaterialGroup get materialGroup2;
   @override
-  String get materialGroup4;
+  MaterialGroup get materialGroup4;
   @override
   bool get isSampleMaterial;
   @override

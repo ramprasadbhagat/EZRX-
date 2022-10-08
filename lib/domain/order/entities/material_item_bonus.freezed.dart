@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MaterialItemBonus {
-  String get materialNumber => throw _privateConstructorUsedError;
+  MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   int get qty => throw _privateConstructorUsedError;
   String get comment => throw _privateConstructorUsedError;
   String get materialDescription => throw _privateConstructorUsedError;
@@ -32,7 +32,7 @@ abstract class $MaterialItemBonusCopyWith<$Res> {
           MaterialItemBonus value, $Res Function(MaterialItemBonus) then) =
       _$MaterialItemBonusCopyWithImpl<$Res>;
   $Res call(
-      {String materialNumber,
+      {MaterialNumber materialNumber,
       int qty,
       String comment,
       String materialDescription});
@@ -58,7 +58,7 @@ class _$MaterialItemBonusCopyWithImpl<$Res>
       materialNumber: materialNumber == freezed
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialNumber,
       qty: qty == freezed
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
@@ -83,7 +83,7 @@ abstract class _$$_MaterialItemBonusCopyWith<$Res>
       __$$_MaterialItemBonusCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String materialNumber,
+      {MaterialNumber materialNumber,
       int qty,
       String comment,
       String materialDescription});
@@ -111,7 +111,7 @@ class __$$_MaterialItemBonusCopyWithImpl<$Res>
       materialNumber: materialNumber == freezed
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialNumber,
       qty: qty == freezed
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
@@ -139,7 +139,7 @@ class _$_MaterialItemBonus extends _MaterialItemBonus {
       : super._();
 
   @override
-  final String materialNumber;
+  final MaterialNumber materialNumber;
   @override
   final int qty;
   @override
@@ -182,14 +182,14 @@ class _$_MaterialItemBonus extends _MaterialItemBonus {
 
 abstract class _MaterialItemBonus extends MaterialItemBonus {
   const factory _MaterialItemBonus(
-      {required final String materialNumber,
+      {required final MaterialNumber materialNumber,
       required final int qty,
       required final String comment,
       required final String materialDescription}) = _$_MaterialItemBonus;
   const _MaterialItemBonus._() : super._();
 
   @override
-  String get materialNumber;
+  MaterialNumber get materialNumber;
   @override
   int get qty;
   @override

@@ -103,8 +103,7 @@ void main() {
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    materialListMock = await MaterialListLocalDataSource()
-        .getMaterialList(loginUserType: fakeRole);
+    materialListMock = await MaterialListLocalDataSource().getMaterialList();
     when(() => salesOrgMockBloc.state)
         .thenAnswer((invocation) => SalesOrgState.initial());
     when(() => userMockBloc.state)

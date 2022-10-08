@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/auth/entities/reset_password_entities.dart';
+import 'package:ezrxmobile/domain/auth/entities/reset_password.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_query_mutation.dart';
@@ -22,7 +22,7 @@ class ChangePasswordRemoteDataSource {
     required this.config,
   });
 
-  Future<ResetPasswordEntities> setUserPassword(
+  Future<ResetPassword> setUserPassword(
     String username,
     String oldPassword,
     String newPassword,

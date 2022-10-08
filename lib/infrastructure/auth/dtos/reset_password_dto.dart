@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/auth/entities/reset_password_entities.dart';
+import 'package:ezrxmobile/domain/auth/entities/reset_password.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'reset_password_dto.freezed.dart';
@@ -11,19 +11,17 @@ class ResetPasswordDto with _$ResetPasswordDto {
   const factory ResetPasswordDto({
     @JsonKey(name: 'success') required bool success,
     @JsonKey(name: 'status') required String status,
-
   }) = _ResetPasswordDto;
 
-  factory ResetPasswordDto.fromDomain(ResetPasswordEntities resetPasswordEntities) {
+  factory ResetPasswordDto.fromDomain(ResetPassword resetPasswordEntities) {
     return ResetPasswordDto(
-        success: resetPasswordEntities.success,
-        status: resetPasswordEntities.status,
-      );
+      success: resetPasswordEntities.success,
+      status: resetPasswordEntities.status,
+    );
   }
 
-
-  ResetPasswordEntities toDomain() {
-    return ResetPasswordEntities(
+  ResetPassword toDomain() {
+    return ResetPassword(
       status: status,
       success: success,
     );

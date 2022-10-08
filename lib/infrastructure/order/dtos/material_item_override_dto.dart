@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_override.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -38,7 +39,7 @@ class ValueOverrideDto with _$ValueOverrideDto {
   ValueOverride toDomain() => ValueOverride(
         code: code,
         price: price,
-        currency: currency,
+        currency: Currency(currency),
       );
 
   factory ValueOverrideDto.fromJson(Map<String, dynamic> json) =>

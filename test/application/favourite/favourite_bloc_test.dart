@@ -1,8 +1,10 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/material/value/value_objects.dart';
@@ -10,9 +12,12 @@ import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dar
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/favourites/repository/favourite_repository.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
+
+class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class MockFavouriteBloc extends MockBloc<FavouriteEvent, FavouriteState>
     implements FavouriteBloc {}
@@ -27,9 +32,14 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 //     implements ShipToCodeBloc {}
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   late GetIt locator;
   late FavouriteRepository mockFavouriteRepository;
   // final shipToCodeMockBloc = ShipToCodeMockBloc();
+
+  final mockUserBloc = MockUserBloc();
+  final mockUser = User.empty();
+
   var favouriteItems = <Favourite>[
     Favourite(
       id: '',
@@ -42,6 +52,7 @@ void main() {
 
   setUpAll(() {
     locator = GetIt.instance;
+
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(
       () => CountlyService(),
@@ -53,6 +64,8 @@ void main() {
       ),
     );
     mockFavouriteRepository = MockFavouriteRepository();
+
+    when(() => mockUserBloc.state).thenReturn(UserState.initial());
   });
 
   group(
@@ -61,13 +74,16 @@ void main() {
       blocTest<FavouriteBloc, FavouriteState>(
         'Init Favourite Bloc and raise fetch event',
         build: () {
-          when(() => mockFavouriteRepository.getFavourites()).thenAnswer(
+          when(() => mockFavouriteRepository.getFavourites(
+                user: mockUser,
+              )).thenAnswer(
             (invocation) async => Right([Favourite.empty()]),
           );
           return FavouriteBloc(
-            favouriteRepository: mockFavouriteRepository,
-            // shipToCodeBloc: shipToCodeMockBloc,
-          );
+              favouriteRepository: mockFavouriteRepository,
+              userBloc: mockUserBloc
+              // shipToCodeBloc: shipToCodeMockBloc,
+              );
         },
         expect: () => [
           FavouriteState.initial().copyWith(isLoading: true),
@@ -90,13 +106,16 @@ void main() {
       blocTest<FavouriteBloc, FavouriteState>(
         'No favourite items found',
         build: () {
-          when(() => mockFavouriteRepository.getFavourites()).thenAnswer(
+          when(() => mockFavouriteRepository.getFavourites(
+                user: mockUser,
+              )).thenAnswer(
             (invocation) async => const Right([]),
           );
           return FavouriteBloc(
-            favouriteRepository: mockFavouriteRepository,
-            // shipToCodeBloc: shipToCodeMockBloc,
-          );
+              favouriteRepository: mockFavouriteRepository,
+              userBloc: mockUserBloc
+              // shipToCodeBloc: shipToCodeMockBloc,
+              );
         },
         expect: () => [
           FavouriteState.initial().copyWith(isLoading: true),
@@ -111,13 +130,17 @@ void main() {
         'delete favourite item ',
         build: () {
           return FavouriteBloc(
-            favouriteRepository: mockFavouriteRepository,
-            // shipToCodeBloc: shipToCodeMockBloc,
-          );
+              favouriteRepository: mockFavouriteRepository,
+              userBloc: mockUserBloc
+              // shipToCodeBloc: shipToCodeMockBloc,
+
+              );
         },
         setUp: () {
           when(
-            () => mockFavouriteRepository.getFavourites(),
+            () => mockFavouriteRepository.getFavourites(
+              user: mockUser,
+            ),
           ).thenAnswer((invocation) async => Right(favouriteItems));
           when(() => mockFavouriteRepository.deleteFavourites(
                 favouriteItems: favouriteItems,
@@ -143,13 +166,16 @@ void main() {
         'add favourite item ',
         build: () {
           return FavouriteBloc(
-            favouriteRepository: mockFavouriteRepository,
-            // shipToCodeBloc: shipToCodeMockBloc,
-          );
+              favouriteRepository: mockFavouriteRepository,
+              userBloc: mockUserBloc
+              // shipToCodeBloc: shipToCodeMockBloc,
+              );
         },
         setUp: () {
           when(
-            () => mockFavouriteRepository.getFavourites(),
+            () => mockFavouriteRepository.getFavourites(
+              user: mockUser,
+            ),
           ).thenAnswer((invocation) async => Right(favouriteItems));
           when(() => mockFavouriteRepository.addFavourites(
                 isPackAndPick: false,
@@ -161,6 +187,7 @@ void main() {
                   materialDescription: '',
                   materialNumber: MaterialNumber(''),
                 ),
+                user: mockUser,
               )).thenAnswer((invocation) async => Right(favouriteItems));
         },
         expect: () => [
@@ -176,9 +203,9 @@ void main() {
       blocTest(
         'Simulate error for add favourite item ',
         build: () => FavouriteBloc(
-          favouriteRepository: mockFavouriteRepository,
-          // shipToCodeBloc: shipToCodeMockBloc,
-        ),
+            favouriteRepository: mockFavouriteRepository, userBloc: mockUserBloc
+            // shipToCodeBloc: shipToCodeMockBloc,
+            ),
         setUp: () {
           when(
             () => mockFavouriteRepository.addFavourites(
@@ -191,6 +218,7 @@ void main() {
                 materialDescription: '',
                 materialNumber: MaterialNumber(''),
               ),
+              user: mockUser,
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -238,9 +266,9 @@ void main() {
       blocTest(
         'Simulate error for delete favourite item ',
         build: () => FavouriteBloc(
-          favouriteRepository: mockFavouriteRepository,
-          // shipToCodeBloc: shipToCodeMockBloc,
-        ),
+            favouriteRepository: mockFavouriteRepository, userBloc: mockUserBloc
+            // shipToCodeBloc: shipToCodeMockBloc,
+            ),
         setUp: () {
           when(
             () => mockFavouriteRepository.deleteFavourites(

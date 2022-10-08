@@ -1,7 +1,7 @@
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
-import 'package:ezrxmobile/application/announcement/bloc/announcement_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
@@ -289,7 +289,6 @@ void setupLocator() {
   );
   locator.registerLazySingleton(
     () => FavouriteRemoteDataSource(
-      user: locator<UserBloc>(),
       config: locator<Config>(),
       httpService: locator<HttpService>(),
       favouriteQueryMutation: locator<FavouriteQueryMutation>(),
@@ -306,6 +305,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => FavouriteBloc(
       favouriteRepository: locator<FavouriteRepository>(),
+      userBloc: locator<UserBloc>(),
       // shipToCodeBloc: locator<ShipToCodeBloc>(),
     ),
   );
@@ -521,7 +521,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => MaterialListRemoteDataSource(
       httpService: locator<HttpService>(),
-      appMethods: locator<AppMethods>(),
       materialListQuery: locator<MaterialsWithMetaQuery>(),
       config: locator<Config>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
@@ -531,6 +530,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => MaterialListRepository(
       config: locator<Config>(),
+      appMethods: locator<AppMethods>(),
       materialListLocalDataSource: locator<MaterialListLocalDataSource>(),
       materialListRemoteDataSource: locator<MaterialListRemoteDataSource>(),
     ),
