@@ -24,7 +24,7 @@ class SalesRepRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
-        url: '/api/strapiEngine',
+        url: '/api/license',
         data: jsonEncode({
           'query': salesRepQueryMutation.getSalesRepInfo(),
           'variables': {'userName': userName},

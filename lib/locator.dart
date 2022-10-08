@@ -15,6 +15,8 @@ import 'package:ezrxmobile/application/order/saved_order/saved_order_list/saved_
 import 'package:ezrxmobile/application/material/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
+import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
+import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_query_mutation.dart';
@@ -67,6 +69,7 @@ import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
 import 'package:ezrxmobile/infrastructure/material/datasource/material_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
 import 'package:ezrxmobile/infrastructure/material/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/material/datasource/materials_query.dart';
@@ -79,6 +82,13 @@ import 'package:ezrxmobile/infrastructure/order/datasource/order_history_local.d
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_history_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_querymutation.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_remote_datasource.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/payment_term_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/payment_term_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/payment_customer_information_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/payment_term_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/payment_term_remote.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/routes/router_observer.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/repository/aup_tc_repository.dart';
@@ -598,6 +608,50 @@ void setupLocator() {
       userBloc: locator<UserBloc>(),
     ),
   );
+
+  //============================================================
+  //  Payment Customer Information
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => PaymentCustomerInformationLocalDataSource(),
+  );
+
+  locator
+      .registerLazySingleton(() => PaymentCustomerInformationQueryMutation());
+
+  locator.registerLazySingleton(
+    () => PaymentCustomerInformationRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      paymentCustomerInformationQueryMutation:
+          locator<PaymentCustomerInformationQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => PaymentCustomerInformationRepository(
+      config: locator<Config>(),
+      remoteDataSource: locator<PaymentCustomerInformationRemoteDataSource>(),
+      localDataSource: locator<PaymentCustomerInformationLocalDataSource>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => PaymentCustomerInformationBloc(
+      paymentCustomerInformationRepository:
+          locator<PaymentCustomerInformationRepository>(),
+      salesOrgBloc: locator<SalesOrgBloc>(),
+      customerCodeBloc: locator<CustomerCodeBloc>(),
+    ),
+  );
+
+  //============================================================
+  //  T&C
+  //
+  //============================================================
+
   locator.registerLazySingleton(
     () => AcceptanceDateLocalDataSource(),
   );
@@ -626,6 +680,43 @@ void setupLocator() {
       userBloc: locator<UserBloc>(),
       salesOrgBloc: locator<SalesOrgBloc>(),
       config: locator<Config>(),
+    ),
+  );
+
+  //============================================================
+  //  Payment Terms
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => PaymentTermsQueryMutation());
+
+  locator.registerLazySingleton(() => PaymentTermLocalDataSource());
+
+  locator.registerLazySingleton(
+    () => PaymentTermsRemoteDataSource(
+      httpService: locator<HttpService>(),
+      config: locator<Config>(),
+      payemttTermsQueryMutation: locator<PaymentTermsQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => PaymentTermsRepository(
+      config: locator<Config>(),
+      localDataSource: locator<PaymentTermLocalDataSource>(),
+      remoteDataSource: locator<PaymentTermsRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => PaymentTermBloc(
+      paymentTermRepository: locator<PaymentTermsRepository>(),
+      salesOrgBloc: locator<SalesOrgBloc>(),
+      customerCodeBloc: locator<CustomerCodeBloc>(),
+      userBloc: locator<UserBloc>(),
+      salesRepBloc: locator<SalesRepBloc>(),
+      paymentCustomerInformationBloc: locator<PaymentCustomerInformationBloc>(),
     ),
   );
 }
