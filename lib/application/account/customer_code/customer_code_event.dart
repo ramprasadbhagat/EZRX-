@@ -8,11 +8,10 @@ class CustomerCodeEvent with _$CustomerCodeEvent {
   }) = _Selected;
 
   const factory CustomerCodeEvent.fetch({
-    required SalesOrganisation salesOrganisation,
-    required List<SalesOrgCustomerInfo> salesOrgCustomerInfo,
-    required int pageIndex,
+    @Default(false) bool isRefresh,
+    @Default('') String searchText,
     required bool hidecustomer,
-    required String userRoleType,
-    required String userName,
+    required User userInfo,
+    required SalesOrganisation selectedSalesOrg,
   }) = _Fetch;
 }

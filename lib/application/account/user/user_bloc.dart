@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/repository/i_user_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -14,22 +13,12 @@ part 'user_bloc.freezed.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final IUserRepository userRepository;
-  final AuthBloc authBloc;
-  late final StreamSubscription _authBlocSubscription;
+
   UserBloc({
-    required this.authBloc,
     required this.userRepository,
   }) : super(UserState.initial()) {
     on<UserEvent>(_onEvent);
     add(const UserEvent.fetch());
-    _authBlocSubscription = authBloc.stream.listen((state) {
-      state.map(
-        initial: (_) {},
-        loading: (_) {},
-        authenticated: (_) => add(const UserEvent.fetch()),
-        unauthenticated: (_) => add(const UserEvent.initialized()),
-      );
-    });
   }
 
   Future<void> _onEvent(UserEvent event, Emitter<UserState> emit) async {
@@ -89,13 +78,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         }
       },
     );
-  }
-
-  @override
-  Future<void> close() async {
-    await _authBlocSubscription.cancel();
-
-    return super.close();
   }
 
   @override

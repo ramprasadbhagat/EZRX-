@@ -19,22 +19,40 @@ mixin _$SavedOrderListEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
-    required TResult Function() loadMore,
+    required TResult Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)
+        fetch,
+    required TResult Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)
+        loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function()? loadMore,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        fetch,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function()? loadMore,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        fetch,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        loadMore,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -121,8 +139,18 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
-    required TResult Function() loadMore,
+    required TResult Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)
+        fetch,
+    required TResult Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)
+        loadMore,
   }) {
     return initialized();
   }
@@ -131,8 +159,12 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function()? loadMore,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        fetch,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        loadMore,
   }) {
     return initialized?.call();
   }
@@ -141,8 +173,12 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function()? loadMore,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        fetch,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        loadMore,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -194,6 +230,16 @@ abstract class _Initialized implements SavedOrderListEvent {
 abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
+  $Res call(
+      {User userInfo,
+      SalesOrganisation selectedSalesOrganisation,
+      CustomerCodeInfo selectedCustomerCode,
+      ShipToInfo selectedShipTo});
+
+  $UserCopyWith<$Res> get userInfo;
+  $SalesOrganisationCopyWith<$Res> get selectedSalesOrganisation;
+  $CustomerCodeInfoCopyWith<$Res> get selectedCustomerCode;
+  $ShipToInfoCopyWith<$Res> get selectedShipTo;
 }
 
 /// @nodoc
@@ -205,57 +251,166 @@ class __$$_FetchCopyWithImpl<$Res>
 
   @override
   _$_Fetch get _value => super._value as _$_Fetch;
+
+  @override
+  $Res call({
+    Object? userInfo = freezed,
+    Object? selectedSalesOrganisation = freezed,
+    Object? selectedCustomerCode = freezed,
+    Object? selectedShipTo = freezed,
+  }) {
+    return _then(_$_Fetch(
+      userInfo: userInfo == freezed
+          ? _value.userInfo
+          : userInfo // ignore: cast_nullable_to_non_nullable
+              as User,
+      selectedSalesOrganisation: selectedSalesOrganisation == freezed
+          ? _value.selectedSalesOrganisation
+          : selectedSalesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      selectedCustomerCode: selectedCustomerCode == freezed
+          ? _value.selectedCustomerCode
+          : selectedCustomerCode // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      selectedShipTo: selectedShipTo == freezed
+          ? _value.selectedShipTo
+          : selectedShipTo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+    ));
+  }
+
+  @override
+  $UserCopyWith<$Res> get userInfo {
+    return $UserCopyWith<$Res>(_value.userInfo, (value) {
+      return _then(_value.copyWith(userInfo: value));
+    });
+  }
+
+  @override
+  $SalesOrganisationCopyWith<$Res> get selectedSalesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.selectedSalesOrganisation,
+        (value) {
+      return _then(_value.copyWith(selectedSalesOrganisation: value));
+    });
+  }
+
+  @override
+  $CustomerCodeInfoCopyWith<$Res> get selectedCustomerCode {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.selectedCustomerCode,
+        (value) {
+      return _then(_value.copyWith(selectedCustomerCode: value));
+    });
+  }
+
+  @override
+  $ShipToInfoCopyWith<$Res> get selectedShipTo {
+    return $ShipToInfoCopyWith<$Res>(_value.selectedShipTo, (value) {
+      return _then(_value.copyWith(selectedShipTo: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  const _$_Fetch();
+  const _$_Fetch(
+      {required this.userInfo,
+      required this.selectedSalesOrganisation,
+      required this.selectedCustomerCode,
+      required this.selectedShipTo});
+
+  @override
+  final User userInfo;
+  @override
+  final SalesOrganisation selectedSalesOrganisation;
+  @override
+  final CustomerCodeInfo selectedCustomerCode;
+  @override
+  final ShipToInfo selectedShipTo;
 
   @override
   String toString() {
-    return 'SavedOrderListEvent.fetch()';
+    return 'SavedOrderListEvent.fetch(userInfo: $userInfo, selectedSalesOrganisation: $selectedSalesOrganisation, selectedCustomerCode: $selectedCustomerCode, selectedShipTo: $selectedShipTo)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Fetch);
+        (other.runtimeType == runtimeType &&
+            other is _$_Fetch &&
+            const DeepCollectionEquality().equals(other.userInfo, userInfo) &&
+            const DeepCollectionEquality().equals(
+                other.selectedSalesOrganisation, selectedSalesOrganisation) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedCustomerCode, selectedCustomerCode) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedShipTo, selectedShipTo));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(userInfo),
+      const DeepCollectionEquality().hash(selectedSalesOrganisation),
+      const DeepCollectionEquality().hash(selectedCustomerCode),
+      const DeepCollectionEquality().hash(selectedShipTo));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
-    required TResult Function() loadMore,
+    required TResult Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)
+        fetch,
+    required TResult Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)
+        loadMore,
   }) {
-    return fetch();
+    return fetch(userInfo, selectedSalesOrganisation, selectedCustomerCode,
+        selectedShipTo);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function()? loadMore,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        fetch,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        loadMore,
   }) {
-    return fetch?.call();
+    return fetch?.call(userInfo, selectedSalesOrganisation,
+        selectedCustomerCode, selectedShipTo);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function()? loadMore,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        fetch,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        loadMore,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch();
+      return fetch(userInfo, selectedSalesOrganisation, selectedCustomerCode,
+          selectedShipTo);
     }
     return orElse();
   }
@@ -296,7 +451,19 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements SavedOrderListEvent {
-  const factory _Fetch() = _$_Fetch;
+  const factory _Fetch(
+      {required final User userInfo,
+      required final SalesOrganisation selectedSalesOrganisation,
+      required final CustomerCodeInfo selectedCustomerCode,
+      required final ShipToInfo selectedShipTo}) = _$_Fetch;
+
+  User get userInfo;
+  SalesOrganisation get selectedSalesOrganisation;
+  CustomerCodeInfo get selectedCustomerCode;
+  ShipToInfo get selectedShipTo;
+  @JsonKey(ignore: true)
+  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -304,6 +471,16 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
   factory _$$_LoadMoreCopyWith(
           _$_LoadMore value, $Res Function(_$_LoadMore) then) =
       __$$_LoadMoreCopyWithImpl<$Res>;
+  $Res call(
+      {User userInfo,
+      SalesOrganisation selectedSalesOrganisation,
+      CustomerCodeInfo selectedCustomerCode,
+      ShipToInfo selectedShipTo});
+
+  $UserCopyWith<$Res> get userInfo;
+  $SalesOrganisationCopyWith<$Res> get selectedSalesOrganisation;
+  $CustomerCodeInfoCopyWith<$Res> get selectedCustomerCode;
+  $ShipToInfoCopyWith<$Res> get selectedShipTo;
 }
 
 /// @nodoc
@@ -316,57 +493,166 @@ class __$$_LoadMoreCopyWithImpl<$Res>
 
   @override
   _$_LoadMore get _value => super._value as _$_LoadMore;
+
+  @override
+  $Res call({
+    Object? userInfo = freezed,
+    Object? selectedSalesOrganisation = freezed,
+    Object? selectedCustomerCode = freezed,
+    Object? selectedShipTo = freezed,
+  }) {
+    return _then(_$_LoadMore(
+      userInfo: userInfo == freezed
+          ? _value.userInfo
+          : userInfo // ignore: cast_nullable_to_non_nullable
+              as User,
+      selectedSalesOrganisation: selectedSalesOrganisation == freezed
+          ? _value.selectedSalesOrganisation
+          : selectedSalesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      selectedCustomerCode: selectedCustomerCode == freezed
+          ? _value.selectedCustomerCode
+          : selectedCustomerCode // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      selectedShipTo: selectedShipTo == freezed
+          ? _value.selectedShipTo
+          : selectedShipTo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+    ));
+  }
+
+  @override
+  $UserCopyWith<$Res> get userInfo {
+    return $UserCopyWith<$Res>(_value.userInfo, (value) {
+      return _then(_value.copyWith(userInfo: value));
+    });
+  }
+
+  @override
+  $SalesOrganisationCopyWith<$Res> get selectedSalesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.selectedSalesOrganisation,
+        (value) {
+      return _then(_value.copyWith(selectedSalesOrganisation: value));
+    });
+  }
+
+  @override
+  $CustomerCodeInfoCopyWith<$Res> get selectedCustomerCode {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.selectedCustomerCode,
+        (value) {
+      return _then(_value.copyWith(selectedCustomerCode: value));
+    });
+  }
+
+  @override
+  $ShipToInfoCopyWith<$Res> get selectedShipTo {
+    return $ShipToInfoCopyWith<$Res>(_value.selectedShipTo, (value) {
+      return _then(_value.copyWith(selectedShipTo: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_LoadMore implements _LoadMore {
-  const _$_LoadMore();
+  const _$_LoadMore(
+      {required this.userInfo,
+      required this.selectedSalesOrganisation,
+      required this.selectedCustomerCode,
+      required this.selectedShipTo});
+
+  @override
+  final User userInfo;
+  @override
+  final SalesOrganisation selectedSalesOrganisation;
+  @override
+  final CustomerCodeInfo selectedCustomerCode;
+  @override
+  final ShipToInfo selectedShipTo;
 
   @override
   String toString() {
-    return 'SavedOrderListEvent.loadMore()';
+    return 'SavedOrderListEvent.loadMore(userInfo: $userInfo, selectedSalesOrganisation: $selectedSalesOrganisation, selectedCustomerCode: $selectedCustomerCode, selectedShipTo: $selectedShipTo)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_LoadMore);
+        (other.runtimeType == runtimeType &&
+            other is _$_LoadMore &&
+            const DeepCollectionEquality().equals(other.userInfo, userInfo) &&
+            const DeepCollectionEquality().equals(
+                other.selectedSalesOrganisation, selectedSalesOrganisation) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedCustomerCode, selectedCustomerCode) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedShipTo, selectedShipTo));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(userInfo),
+      const DeepCollectionEquality().hash(selectedSalesOrganisation),
+      const DeepCollectionEquality().hash(selectedCustomerCode),
+      const DeepCollectionEquality().hash(selectedShipTo));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
+      __$$_LoadMoreCopyWithImpl<_$_LoadMore>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
-    required TResult Function() loadMore,
+    required TResult Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)
+        fetch,
+    required TResult Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)
+        loadMore,
   }) {
-    return loadMore();
+    return loadMore(userInfo, selectedSalesOrganisation, selectedCustomerCode,
+        selectedShipTo);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function()? loadMore,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        fetch,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        loadMore,
   }) {
-    return loadMore?.call();
+    return loadMore?.call(userInfo, selectedSalesOrganisation,
+        selectedCustomerCode, selectedShipTo);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function()? loadMore,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        fetch,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        loadMore,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
-      return loadMore();
+      return loadMore(userInfo, selectedSalesOrganisation, selectedCustomerCode,
+          selectedShipTo);
     }
     return orElse();
   }
@@ -407,7 +693,19 @@ class _$_LoadMore implements _LoadMore {
 }
 
 abstract class _LoadMore implements SavedOrderListEvent {
-  const factory _LoadMore() = _$_LoadMore;
+  const factory _LoadMore(
+      {required final User userInfo,
+      required final SalesOrganisation selectedSalesOrganisation,
+      required final CustomerCodeInfo selectedCustomerCode,
+      required final ShipToInfo selectedShipTo}) = _$_LoadMore;
+
+  User get userInfo;
+  SalesOrganisation get selectedSalesOrganisation;
+  CustomerCodeInfo get selectedCustomerCode;
+  ShipToInfo get selectedShipTo;
+  @JsonKey(ignore: true)
+  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

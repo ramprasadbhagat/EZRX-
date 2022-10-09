@@ -1,6 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/application/order/saved_order/saved_order_list/saved_order_bloc.dart';
+import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -45,18 +49,45 @@ class SavedOrderListPage extends StatelessWidget {
           buildWhen: (previous, current) =>
               previous.isFetching != current.isFetching,
           builder: (context, state) {
-            return ScrollList<SavedOrder>(
-              emptyMessage: 'No saved order found',
-              onRefresh: () => context.read<SavedOrderListBloc>().add(
-                    const SavedOrderListEvent.fetch(),
-                  ),
-              onLoadingMore: () => context.read<SavedOrderListBloc>().add(
-                    const SavedOrderListEvent.loadMore(),
-                  ),
-              isLoading: state.isFetching,
-              itemBuilder: (context, index, item) =>
-                  OrderTemplateItem(order: item),
-              items: state.savedOrders,
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              child: ScrollList<SavedOrder>(
+                emptyMessage: 'No saved order found',
+                onRefresh: () => context.read<SavedOrderListBloc>().add(
+                      SavedOrderListEvent.fetch(
+                        userInfo: context.read<UserBloc>().state.user,
+                        selectedSalesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        selectedCustomerCode: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customeCodeInfo,
+                        selectedShipTo:
+                            context.read<ShipToCodeBloc>().state.shipToInfo,
+                      ),
+                    ),
+                onLoadingMore: () => context.read<SavedOrderListBloc>().add(
+                      SavedOrderListEvent.loadMore(
+                        userInfo: context.read<UserBloc>().state.user,
+                        selectedSalesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        selectedCustomerCode: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customeCodeInfo,
+                        selectedShipTo:
+                            context.read<ShipToCodeBloc>().state.shipToInfo,
+                      ),
+                    ),
+                isLoading: state.isFetching,
+                itemBuilder: (context, index, item) =>
+                    OrderTemplateItem(order: item),
+                items: state.savedOrders,
+              ),
             );
           },
         ),

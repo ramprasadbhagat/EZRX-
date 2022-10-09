@@ -11,7 +11,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/core/search/search_bloc.dart';
-import 'package:ezrxmobile/application/order/saved_order/saved_order_list/saved_order_bloc.dart';
+import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/material/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
@@ -238,7 +238,6 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => UserBloc(
-      authBloc: locator<AuthBloc>(),
       userRepository: locator<UserRepository>(),
     ),
   );
@@ -336,7 +335,6 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => SalesOrgBloc(
-      userBloc: locator<UserBloc>(),
       salesOrgRepository: locator<SalesOrgRepository>(),
     ),
   );
@@ -369,10 +367,7 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => CustomerCodeBloc(
-      userBloc: locator<UserBloc>(),
       customerCodeRepository: locator<CustomerCodeRepository>(),
-      salesOrgBloc: locator<SalesOrgBloc>(),
-      searchBloc: locator<SearchBloc>(),
     ),
   );
 
@@ -382,9 +377,7 @@ void setupLocator() {
   //============================================================
 
   locator.registerLazySingleton(
-    () => ShipToCodeBloc(
-      customerCodeBloc: locator<CustomerCodeBloc>(),
-    ),
+    () => ShipToCodeBloc(),
   );
 
   locator.registerLazySingleton(
@@ -462,10 +455,6 @@ void setupLocator() {
   //============================================================
   locator.registerLazySingleton(
     () => SavedOrderListBloc(
-      userBloc: locator<UserBloc>(),
-      salesOrgBloc: locator<SalesOrgBloc>(),
-      customerCodeBloc: locator<CustomerCodeBloc>(),
-      shipToCodeBloc: locator<ShipToCodeBloc>(),
       repository: locator<OrderRepository>(),
     ),
   );

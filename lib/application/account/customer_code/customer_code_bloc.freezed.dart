@@ -21,12 +21,11 @@ mixin _$CustomerCodeEvent {
     required TResult Function() initialized,
     required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
     required TResult Function(
-            SalesOrganisation salesOrganisation,
-            List<SalesOrgCustomerInfo> salesOrgCustomerInfo,
-            int pageIndex,
+            bool isRefresh,
+            String searchText,
             bool hidecustomer,
-            String userRoleType,
-            String userName)
+            User userInfo,
+            SalesOrganisation selectedSalesOrg)
         fetch,
   }) =>
       throw _privateConstructorUsedError;
@@ -34,13 +33,8 @@ mixin _$CustomerCodeEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            List<SalesOrgCustomerInfo> salesOrgCustomerInfo,
-            int pageIndex,
-            bool hidecustomer,
-            String userRoleType,
-            String userName)?
+    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
+            User userInfo, SalesOrganisation selectedSalesOrg)?
         fetch,
   }) =>
       throw _privateConstructorUsedError;
@@ -48,13 +42,8 @@ mixin _$CustomerCodeEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            List<SalesOrgCustomerInfo> salesOrgCustomerInfo,
-            int pageIndex,
-            bool hidecustomer,
-            String userRoleType,
-            String userName)?
+    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
+            User userInfo, SalesOrganisation selectedSalesOrg)?
         fetch,
     required TResult orElse(),
   }) =>
@@ -144,12 +133,11 @@ class _$_Initialized implements _Initialized {
     required TResult Function() initialized,
     required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
     required TResult Function(
-            SalesOrganisation salesOrganisation,
-            List<SalesOrgCustomerInfo> salesOrgCustomerInfo,
-            int pageIndex,
+            bool isRefresh,
+            String searchText,
             bool hidecustomer,
-            String userRoleType,
-            String userName)
+            User userInfo,
+            SalesOrganisation selectedSalesOrg)
         fetch,
   }) {
     return initialized();
@@ -160,13 +148,8 @@ class _$_Initialized implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            List<SalesOrgCustomerInfo> salesOrgCustomerInfo,
-            int pageIndex,
-            bool hidecustomer,
-            String userRoleType,
-            String userName)?
+    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
+            User userInfo, SalesOrganisation selectedSalesOrg)?
         fetch,
   }) {
     return initialized?.call();
@@ -177,13 +160,8 @@ class _$_Initialized implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            List<SalesOrgCustomerInfo> salesOrgCustomerInfo,
-            int pageIndex,
-            bool hidecustomer,
-            String userRoleType,
-            String userName)?
+    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
+            User userInfo, SalesOrganisation selectedSalesOrg)?
         fetch,
     required TResult orElse(),
   }) {
@@ -310,12 +288,11 @@ class _$_Selected implements _Selected {
     required TResult Function() initialized,
     required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
     required TResult Function(
-            SalesOrganisation salesOrganisation,
-            List<SalesOrgCustomerInfo> salesOrgCustomerInfo,
-            int pageIndex,
+            bool isRefresh,
+            String searchText,
             bool hidecustomer,
-            String userRoleType,
-            String userName)
+            User userInfo,
+            SalesOrganisation selectedSalesOrg)
         fetch,
   }) {
     return selected(customerCodeInfo);
@@ -326,13 +303,8 @@ class _$_Selected implements _Selected {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            List<SalesOrgCustomerInfo> salesOrgCustomerInfo,
-            int pageIndex,
-            bool hidecustomer,
-            String userRoleType,
-            String userName)?
+    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
+            User userInfo, SalesOrganisation selectedSalesOrg)?
         fetch,
   }) {
     return selected?.call(customerCodeInfo);
@@ -343,13 +315,8 @@ class _$_Selected implements _Selected {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            List<SalesOrgCustomerInfo> salesOrgCustomerInfo,
-            int pageIndex,
-            bool hidecustomer,
-            String userRoleType,
-            String userName)?
+    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
+            User userInfo, SalesOrganisation selectedSalesOrg)?
         fetch,
     required TResult orElse(),
   }) {
@@ -409,14 +376,14 @@ abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
   $Res call(
-      {SalesOrganisation salesOrganisation,
-      List<SalesOrgCustomerInfo> salesOrgCustomerInfo,
-      int pageIndex,
+      {bool isRefresh,
+      String searchText,
       bool hidecustomer,
-      String userRoleType,
-      String userName});
+      User userInfo,
+      SalesOrganisation selectedSalesOrg});
 
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $UserCopyWith<$Res> get userInfo;
+  $SalesOrganisationCopyWith<$Res> get selectedSalesOrg;
 }
 
 /// @nodoc
@@ -430,45 +397,47 @@ class __$$_FetchCopyWithImpl<$Res> extends _$CustomerCodeEventCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? salesOrganisation = freezed,
-    Object? salesOrgCustomerInfo = freezed,
-    Object? pageIndex = freezed,
+    Object? isRefresh = freezed,
+    Object? searchText = freezed,
     Object? hidecustomer = freezed,
-    Object? userRoleType = freezed,
-    Object? userName = freezed,
+    Object? userInfo = freezed,
+    Object? selectedSalesOrg = freezed,
   }) {
     return _then(_$_Fetch(
-      salesOrganisation: salesOrganisation == freezed
-          ? _value.salesOrganisation
-          : salesOrganisation // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
-      salesOrgCustomerInfo: salesOrgCustomerInfo == freezed
-          ? _value._salesOrgCustomerInfo
-          : salesOrgCustomerInfo // ignore: cast_nullable_to_non_nullable
-              as List<SalesOrgCustomerInfo>,
-      pageIndex: pageIndex == freezed
-          ? _value.pageIndex
-          : pageIndex // ignore: cast_nullable_to_non_nullable
-              as int,
+      isRefresh: isRefresh == freezed
+          ? _value.isRefresh
+          : isRefresh // ignore: cast_nullable_to_non_nullable
+              as bool,
+      searchText: searchText == freezed
+          ? _value.searchText
+          : searchText // ignore: cast_nullable_to_non_nullable
+              as String,
       hidecustomer: hidecustomer == freezed
           ? _value.hidecustomer
           : hidecustomer // ignore: cast_nullable_to_non_nullable
               as bool,
-      userRoleType: userRoleType == freezed
-          ? _value.userRoleType
-          : userRoleType // ignore: cast_nullable_to_non_nullable
-              as String,
-      userName: userName == freezed
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
-              as String,
+      userInfo: userInfo == freezed
+          ? _value.userInfo
+          : userInfo // ignore: cast_nullable_to_non_nullable
+              as User,
+      selectedSalesOrg: selectedSalesOrg == freezed
+          ? _value.selectedSalesOrg
+          : selectedSalesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
     ));
   }
 
   @override
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
+  $UserCopyWith<$Res> get userInfo {
+    return $UserCopyWith<$Res>(_value.userInfo, (value) {
+      return _then(_value.copyWith(userInfo: value));
+    });
+  }
+
+  @override
+  $SalesOrganisationCopyWith<$Res> get selectedSalesOrg {
+    return $SalesOrganisationCopyWith<$Res>(_value.selectedSalesOrg, (value) {
+      return _then(_value.copyWith(selectedSalesOrg: value));
     });
   }
 }
@@ -477,35 +446,28 @@ class __$$_FetchCopyWithImpl<$Res> extends _$CustomerCodeEventCopyWithImpl<$Res>
 
 class _$_Fetch implements _Fetch {
   const _$_Fetch(
-      {required this.salesOrganisation,
-      required final List<SalesOrgCustomerInfo> salesOrgCustomerInfo,
-      required this.pageIndex,
+      {this.isRefresh = false,
+      this.searchText = '',
       required this.hidecustomer,
-      required this.userRoleType,
-      required this.userName})
-      : _salesOrgCustomerInfo = salesOrgCustomerInfo;
+      required this.userInfo,
+      required this.selectedSalesOrg});
 
   @override
-  final SalesOrganisation salesOrganisation;
-  final List<SalesOrgCustomerInfo> _salesOrgCustomerInfo;
+  @JsonKey()
+  final bool isRefresh;
   @override
-  List<SalesOrgCustomerInfo> get salesOrgCustomerInfo {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_salesOrgCustomerInfo);
-  }
-
-  @override
-  final int pageIndex;
+  @JsonKey()
+  final String searchText;
   @override
   final bool hidecustomer;
   @override
-  final String userRoleType;
+  final User userInfo;
   @override
-  final String userName;
+  final SalesOrganisation selectedSalesOrg;
 
   @override
   String toString() {
-    return 'CustomerCodeEvent.fetch(salesOrganisation: $salesOrganisation, salesOrgCustomerInfo: $salesOrgCustomerInfo, pageIndex: $pageIndex, hidecustomer: $hidecustomer, userRoleType: $userRoleType, userName: $userName)';
+    return 'CustomerCodeEvent.fetch(isRefresh: $isRefresh, searchText: $searchText, hidecustomer: $hidecustomer, userInfo: $userInfo, selectedSalesOrg: $selectedSalesOrg)';
   }
 
   @override
@@ -513,27 +475,24 @@ class _$_Fetch implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
+            const DeepCollectionEquality().equals(other.isRefresh, isRefresh) &&
             const DeepCollectionEquality()
-                .equals(other.salesOrganisation, salesOrganisation) &&
-            const DeepCollectionEquality()
-                .equals(other._salesOrgCustomerInfo, _salesOrgCustomerInfo) &&
-            const DeepCollectionEquality().equals(other.pageIndex, pageIndex) &&
+                .equals(other.searchText, searchText) &&
             const DeepCollectionEquality()
                 .equals(other.hidecustomer, hidecustomer) &&
+            const DeepCollectionEquality().equals(other.userInfo, userInfo) &&
             const DeepCollectionEquality()
-                .equals(other.userRoleType, userRoleType) &&
-            const DeepCollectionEquality().equals(other.userName, userName));
+                .equals(other.selectedSalesOrg, selectedSalesOrg));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(salesOrganisation),
-      const DeepCollectionEquality().hash(_salesOrgCustomerInfo),
-      const DeepCollectionEquality().hash(pageIndex),
+      const DeepCollectionEquality().hash(isRefresh),
+      const DeepCollectionEquality().hash(searchText),
       const DeepCollectionEquality().hash(hidecustomer),
-      const DeepCollectionEquality().hash(userRoleType),
-      const DeepCollectionEquality().hash(userName));
+      const DeepCollectionEquality().hash(userInfo),
+      const DeepCollectionEquality().hash(selectedSalesOrg));
 
   @JsonKey(ignore: true)
   @override
@@ -546,16 +505,15 @@ class _$_Fetch implements _Fetch {
     required TResult Function() initialized,
     required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
     required TResult Function(
-            SalesOrganisation salesOrganisation,
-            List<SalesOrgCustomerInfo> salesOrgCustomerInfo,
-            int pageIndex,
+            bool isRefresh,
+            String searchText,
             bool hidecustomer,
-            String userRoleType,
-            String userName)
+            User userInfo,
+            SalesOrganisation selectedSalesOrg)
         fetch,
   }) {
-    return fetch(salesOrganisation, salesOrgCustomerInfo, pageIndex,
-        hidecustomer, userRoleType, userName);
+    return fetch(
+        isRefresh, searchText, hidecustomer, userInfo, selectedSalesOrg);
   }
 
   @override
@@ -563,17 +521,12 @@ class _$_Fetch implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            List<SalesOrgCustomerInfo> salesOrgCustomerInfo,
-            int pageIndex,
-            bool hidecustomer,
-            String userRoleType,
-            String userName)?
+    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
+            User userInfo, SalesOrganisation selectedSalesOrg)?
         fetch,
   }) {
-    return fetch?.call(salesOrganisation, salesOrgCustomerInfo, pageIndex,
-        hidecustomer, userRoleType, userName);
+    return fetch?.call(
+        isRefresh, searchText, hidecustomer, userInfo, selectedSalesOrg);
   }
 
   @override
@@ -581,19 +534,14 @@ class _$_Fetch implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            List<SalesOrgCustomerInfo> salesOrgCustomerInfo,
-            int pageIndex,
-            bool hidecustomer,
-            String userRoleType,
-            String userName)?
+    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
+            User userInfo, SalesOrganisation selectedSalesOrg)?
         fetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(salesOrganisation, salesOrgCustomerInfo, pageIndex,
-          hidecustomer, userRoleType, userName);
+      return fetch(
+          isRefresh, searchText, hidecustomer, userInfo, selectedSalesOrg);
     }
     return orElse();
   }
@@ -635,19 +583,17 @@ class _$_Fetch implements _Fetch {
 
 abstract class _Fetch implements CustomerCodeEvent {
   const factory _Fetch(
-      {required final SalesOrganisation salesOrganisation,
-      required final List<SalesOrgCustomerInfo> salesOrgCustomerInfo,
-      required final int pageIndex,
+      {final bool isRefresh,
+      final String searchText,
       required final bool hidecustomer,
-      required final String userRoleType,
-      required final String userName}) = _$_Fetch;
+      required final User userInfo,
+      required final SalesOrganisation selectedSalesOrg}) = _$_Fetch;
 
-  SalesOrganisation get salesOrganisation;
-  List<SalesOrgCustomerInfo> get salesOrgCustomerInfo;
-  int get pageIndex;
+  bool get isRefresh;
+  String get searchText;
   bool get hidecustomer;
-  String get userRoleType;
-  String get userName;
+  User get userInfo;
+  SalesOrganisation get selectedSalesOrg;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -660,7 +606,7 @@ mixin _$CustomerCodeState {
       throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
-  bool get isLoadMore => throw _privateConstructorUsedError;
+  bool get canLoadMore => throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -677,7 +623,7 @@ abstract class $CustomerCodeStateCopyWith<$Res> {
       {CustomerCodeInfo customeCodeInfo,
       List<CustomerCodeInfo> customerCodeList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
-      bool isLoadMore,
+      bool canLoadMore,
       bool isFetching});
 
   $CustomerCodeInfoCopyWith<$Res> get customeCodeInfo;
@@ -697,7 +643,7 @@ class _$CustomerCodeStateCopyWithImpl<$Res>
     Object? customeCodeInfo = freezed,
     Object? customerCodeList = freezed,
     Object? apiFailureOrSuccessOption = freezed,
-    Object? isLoadMore = freezed,
+    Object? canLoadMore = freezed,
     Object? isFetching = freezed,
   }) {
     return _then(_value.copyWith(
@@ -713,9 +659,9 @@ class _$CustomerCodeStateCopyWithImpl<$Res>
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      isLoadMore: isLoadMore == freezed
-          ? _value.isLoadMore
-          : isLoadMore // ignore: cast_nullable_to_non_nullable
+      canLoadMore: canLoadMore == freezed
+          ? _value.canLoadMore
+          : canLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
       isFetching: isFetching == freezed
           ? _value.isFetching
@@ -743,7 +689,7 @@ abstract class _$$_CustomerCodeStateCopyWith<$Res>
       {CustomerCodeInfo customeCodeInfo,
       List<CustomerCodeInfo> customerCodeList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
-      bool isLoadMore,
+      bool canLoadMore,
       bool isFetching});
 
   @override
@@ -766,7 +712,7 @@ class __$$_CustomerCodeStateCopyWithImpl<$Res>
     Object? customeCodeInfo = freezed,
     Object? customerCodeList = freezed,
     Object? apiFailureOrSuccessOption = freezed,
-    Object? isLoadMore = freezed,
+    Object? canLoadMore = freezed,
     Object? isFetching = freezed,
   }) {
     return _then(_$_CustomerCodeState(
@@ -782,9 +728,9 @@ class __$$_CustomerCodeStateCopyWithImpl<$Res>
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      isLoadMore: isLoadMore == freezed
-          ? _value.isLoadMore
-          : isLoadMore // ignore: cast_nullable_to_non_nullable
+      canLoadMore: canLoadMore == freezed
+          ? _value.canLoadMore
+          : canLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
       isFetching: isFetching == freezed
           ? _value.isFetching
@@ -796,14 +742,15 @@ class __$$_CustomerCodeStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CustomerCodeState implements _CustomerCodeState {
+class _$_CustomerCodeState extends _CustomerCodeState {
   const _$_CustomerCodeState(
       {required this.customeCodeInfo,
       required final List<CustomerCodeInfo> customerCodeList,
       required this.apiFailureOrSuccessOption,
-      required this.isLoadMore,
+      required this.canLoadMore,
       required this.isFetching})
-      : _customerCodeList = customerCodeList;
+      : _customerCodeList = customerCodeList,
+        super._();
 
   @override
   final CustomerCodeInfo customeCodeInfo;
@@ -817,13 +764,13 @@ class _$_CustomerCodeState implements _CustomerCodeState {
   @override
   final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
   @override
-  final bool isLoadMore;
+  final bool canLoadMore;
   @override
   final bool isFetching;
 
   @override
   String toString() {
-    return 'CustomerCodeState(customeCodeInfo: $customeCodeInfo, customerCodeList: $customerCodeList, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isLoadMore: $isLoadMore, isFetching: $isFetching)';
+    return 'CustomerCodeState(customeCodeInfo: $customeCodeInfo, customerCodeList: $customerCodeList, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, canLoadMore: $canLoadMore, isFetching: $isFetching)';
   }
 
   @override
@@ -838,7 +785,7 @@ class _$_CustomerCodeState implements _CustomerCodeState {
             const DeepCollectionEquality().equals(
                 other.apiFailureOrSuccessOption, apiFailureOrSuccessOption) &&
             const DeepCollectionEquality()
-                .equals(other.isLoadMore, isLoadMore) &&
+                .equals(other.canLoadMore, canLoadMore) &&
             const DeepCollectionEquality()
                 .equals(other.isFetching, isFetching));
   }
@@ -849,7 +796,7 @@ class _$_CustomerCodeState implements _CustomerCodeState {
       const DeepCollectionEquality().hash(customeCodeInfo),
       const DeepCollectionEquality().hash(_customerCodeList),
       const DeepCollectionEquality().hash(apiFailureOrSuccessOption),
-      const DeepCollectionEquality().hash(isLoadMore),
+      const DeepCollectionEquality().hash(canLoadMore),
       const DeepCollectionEquality().hash(isFetching));
 
   @JsonKey(ignore: true)
@@ -859,14 +806,15 @@ class _$_CustomerCodeState implements _CustomerCodeState {
           this, _$identity);
 }
 
-abstract class _CustomerCodeState implements CustomerCodeState {
+abstract class _CustomerCodeState extends CustomerCodeState {
   const factory _CustomerCodeState(
       {required final CustomerCodeInfo customeCodeInfo,
       required final List<CustomerCodeInfo> customerCodeList,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
-      required final bool isLoadMore,
+      required final bool canLoadMore,
       required final bool isFetching}) = _$_CustomerCodeState;
+  const _CustomerCodeState._() : super._();
 
   @override
   CustomerCodeInfo get customeCodeInfo;
@@ -875,7 +823,7 @@ abstract class _CustomerCodeState implements CustomerCodeState {
   @override
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override
-  bool get isLoadMore;
+  bool get canLoadMore;
   @override
   bool get isFetching;
   @override

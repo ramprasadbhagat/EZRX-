@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/core/search/search_bloc.dart';
+
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/repository/i_customer_code_repository.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -17,55 +18,14 @@ part 'customer_code_bloc.freezed.dart';
 
 class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
   final ICustomerCodeRepository customerCodeRepository;
-  final SalesOrgBloc salesOrgBloc;
-  final SearchBloc searchBloc;
-  final UserBloc userBloc;
-  late final StreamSubscription _salesOrgBlocSubscription;
-  // late final StreamSubscription _searchTextBlocSubscription;
+
   CustomerCodeBloc({
-    required this.salesOrgBloc,
-    required this.userBloc,
-    required this.searchBloc,
     required this.customerCodeRepository,
   }) : super(CustomerCodeState.initial()) {
     on<CustomerCodeEvent>(_onEvent);
-    if (salesOrgBloc.state.salesOrganisation != SalesOrganisation.empty()) {
-      _selectCustomer(
-        salesOrgBloc.state,
-        salesOrgBloc.state.salesOrganisation.customerInfos,
-      );
-    }
-
-    _salesOrgBlocSubscription = salesOrgBloc.stream.listen(
-      (salesOrgState) async {
-        if (salesOrgState.salesOrganisation != SalesOrganisation.empty()) {
-          _selectCustomer(
-            salesOrgState,
-            salesOrgBloc.state.salesOrganisation.customerInfos,
-          );
-        }
-      },
-    );
-
-    // _searchTextBlocSubscription = searchBloc.stream.listen(
-    //   (searchTextState) async {
-    //     if (!searchTextState.isSearchInProgress) return;
-    //     _selectCustomer(
-    //       salesOrgBloc.state,
-    //       searchTextState.searchText.isNotEmpty
-    //           ? [
-    //               SalesOrgCustomerInfo(
-    //                 customerCodeSoldTo:
-    //                     CustomerCode(searchTextState.searchText),
-    //                 shipToInfos: [],
-    //               ),
-    //             ]
-    //           : salesOrgBloc.state.salesOrganisation.customerInfos,
-    //     );
-    //   },
-    // );
   }
 
+  //TODO: Implement case have search text
   Future<void> _onEvent(
     CustomerCodeEvent event,
     Emitter<CustomerCodeState> emit,
@@ -85,41 +45,48 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         var canLoadMore = true;
         var finalCustomerCodeInfoList = <CustomerCodeInfo>[];
         var apiFailure = false;
-        if (e.pageIndex > 0) {
-          finalCustomerCodeInfoList.addAll(state.customerCodeList);
-        } else {
+        if (e.isRefresh) {
           emit(CustomerCodeState.initial());
+        } else {
+          finalCustomerCodeInfoList.addAll(state.customerCodeList);
         }
-        searchBloc.add(const SearchEvent.resetSearchInProgress(true));
         emit(state.copyWith(isFetching: true));
-        for (final customerItem in e.salesOrgCustomerInfo) {
+
+        final salesOrgCustomerInfo = e.searchText.isNotEmpty
+            ? [
+                SalesOrgCustomerInfo(
+                  customerCodeSoldTo: CustomerCode(
+                    e.searchText,
+                  ),
+                  shipToInfos: [],
+                ),
+              ]
+            : e.selectedSalesOrg.customerInfos;
+
+        for (final customerItem in salesOrgCustomerInfo) {
           final failureOrSuccess = await customerCodeRepository.getCustomerCode(
-            e.salesOrganisation,
+            e.selectedSalesOrg,
             customerItem.customerCodeSoldTo.getOrCrash(),
             e.hidecustomer,
-            e.pageIndex,
-            e.userRoleType,
-            e.userName,
+            state.customerCodeList.length,
+            e.userInfo,
           );
           failureOrSuccess.fold(
             (failure) {
               emit(
                 state.copyWith(
                   apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                  isLoadMore: false,
+                  canLoadMore: false,
                   isFetching: false,
                 ),
               );
-              if (searchBloc.state.isSearchInProgress) {
-                searchBloc.add(const SearchEvent.resetSearchInProgress(false));
-              }
               apiFailure = true;
             },
             (customerCodeList) {
               if (customerCodeList.length < 20) {
                 canLoadMore = false;
               }
-              if (e.pageIndex == 0) {
+              if (e.isRefresh) {
                 finalCustomerCodeInfoList = customerCodeList;
               } else {
                 for (var customerData in customerCodeList) {
@@ -133,45 +100,20 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
           }
         }
         if (!apiFailure) {
-          emit(state.copyWith(
-            customerCodeList: finalCustomerCodeInfoList,
-            apiFailureOrSuccessOption: none(),
-            isFetching: false,
-            isLoadMore: canLoadMore,
-            customeCodeInfo: finalCustomerCodeInfoList.isNotEmpty
-                ? finalCustomerCodeInfoList.first
-                : state.customeCodeInfo,
-          ));
-        }
-
-        if (searchBloc.state.isSearchInProgress) {
-          searchBloc.add(const SearchEvent.resetSearchInProgress(false));
+          emit(
+            state.copyWith(
+              customerCodeList: finalCustomerCodeInfoList,
+              apiFailureOrSuccessOption: none(),
+              isFetching: false,
+              canLoadMore: canLoadMore,
+              customeCodeInfo: finalCustomerCodeInfoList.isNotEmpty
+                  ? finalCustomerCodeInfoList.first
+                  : state.customeCodeInfo,
+            ),
+          );
         }
       },
     );
-  }
-
-  void _selectCustomer(
-    SalesOrgState salesOrgState,
-    List<SalesOrgCustomerInfo> salesOrgCustomerInfo,
-  ) {
-    // Always set first available CustomerCode as default selected Customer Code
-    add(CustomerCodeEvent.fetch(
-      salesOrganisation: salesOrgState.salesOrganisation,
-      hidecustomer: salesOrgBloc.state.configs.hideCustomer,
-      pageIndex: 0,
-      salesOrgCustomerInfo: salesOrgCustomerInfo,
-      userRoleType: userBloc.state.user.role.type.loginUserType,
-      userName: userBloc.state.user.username.getOrCrash(),
-    ));
-  }
-
-  @override
-  Future<void> close() async {
-    await _salesOrgBlocSubscription.cancel();
-    // await _searchTextBlocSubscription.cancel();
-
-    return super.close();
   }
 
   @override

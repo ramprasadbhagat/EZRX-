@@ -1,10 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_org_repository.dart';
@@ -13,27 +11,21 @@ import 'package:mocktail/mocktail.dart';
 
 class SalesOrgRepositoryMock extends Mock implements SalesOrgRepository {}
 
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
 void main() {
   late SalesOrgRepository salesOrgRepositoryMock;
-  late UserBloc userBlocMock;
   group('Sales_Org BLOC Testing', () {
     setUp(() {
       salesOrgRepositoryMock = SalesOrgRepositoryMock();
-      userBlocMock = UserBlocMock();
     });
     blocTest<SalesOrgBloc, SalesOrgState>(
       'For "initialized" Event',
-      build: () => SalesOrgBloc(
-          userBloc: userBlocMock, salesOrgRepository: salesOrgRepositoryMock),
+      build: () => SalesOrgBloc(salesOrgRepository: salesOrgRepositoryMock),
       act: (bloc) => bloc.add(const SalesOrgEvent.initialized()),
       expect: () => [SalesOrgState.initial()],
     );
     blocTest<SalesOrgBloc, SalesOrgState>(
       'For "selected" Event with Error',
-      build: () => SalesOrgBloc(
-          userBloc: userBlocMock, salesOrgRepository: salesOrgRepositoryMock),
+      build: () => SalesOrgBloc(salesOrgRepository: salesOrgRepositoryMock),
       setUp: () {
         when(() =>
             salesOrgRepositoryMock.getSalesOrganisationConfigs(
@@ -56,8 +48,7 @@ void main() {
     );
     blocTest<SalesOrgBloc, SalesOrgState>(
       'For "selected" Event with Data',
-      build: () => SalesOrgBloc(
-          userBloc: userBlocMock, salesOrgRepository: salesOrgRepositoryMock),
+      build: () => SalesOrgBloc(salesOrgRepository: salesOrgRepositoryMock),
       setUp: () {
         when(() => salesOrgRepositoryMock
             .getSalesOrganisationConfigs(SalesOrganisation.empty())).thenAnswer(
@@ -81,30 +72,30 @@ void main() {
         )
       ],
     );
-    blocTest<SalesOrgBloc, SalesOrgState>(
-      'For "Stream Listener"',
-      build: () => SalesOrgBloc(
-          userBloc: userBlocMock, salesOrgRepository: salesOrgRepositoryMock),
-      setUp: () {
-        when(() => userBlocMock.stream).thenAnswer((invocation) {
-          return Stream.value(UserState.initial().copyWith(
-              user: User.empty().copyWith(
-                  userSalesOrganisations: [SalesOrganisation.empty()])));
-        });
-        when(() => salesOrgRepositoryMock
-                .getSalesOrganisationConfigs(SalesOrganisation.empty()))
-            .thenAnswer(
-                (invocation) async => Right(SalesOrganisationConfigs.empty()));
-      },
-      act: (bloc) => bloc.add(
-          SalesOrgEvent.selected(salesOrganisation: SalesOrganisation.empty())),
-      expect: () => [
-        SalesOrgState.initial().copyWith(
-          salesOrganisation: SalesOrganisation.empty(),
-          configs: SalesOrganisationConfigs.empty(),
-          salesOrgFailureOrSuccessOption: none(),
-        )
-      ],
-    );
+    // blocTest<SalesOrgBloc, SalesOrgState>(
+    //   'For "Stream Listener"',
+    //   build: () => SalesOrgBloc(
+    //       userBloc: userBlocMock, salesOrgRepository: salesOrgRepositoryMock),
+    //   setUp: () {
+    //     when(() => userBlocMock.stream).thenAnswer((invocation) {
+    //       return Stream.value(UserState.initial().copyWith(
+    //           user: User.empty().copyWith(
+    //               userSalesOrganisations: [SalesOrganisation.empty()])));
+    //     });
+    //     when(() => salesOrgRepositoryMock
+    //             .getSalesOrganisationConfigs(SalesOrganisation.empty()))
+    //         .thenAnswer(
+    //             (invocation) async => Right(SalesOrganisationConfigs.empty()));
+    //   },
+    //   act: (bloc) => bloc.add(
+    //       SalesOrgEvent.selected(salesOrganisation: SalesOrganisation.empty())),
+    //   expect: () => [
+    //     SalesOrgState.initial().copyWith(
+    //       salesOrganisation: SalesOrganisation.empty(),
+    //       configs: SalesOrganisationConfigs.empty(),
+    //       salesOrgFailureOrSuccessOption: none(),
+    //     )
+    //   ],
+    // );
   });
 }

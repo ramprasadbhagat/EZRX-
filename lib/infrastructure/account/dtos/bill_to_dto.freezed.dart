@@ -95,7 +95,7 @@ mixin _$BillToDto {
   @JsonKey(name: 'customerLocalGroup')
   String get customerLocalGroup => throw _privateConstructorUsedError;
   @JsonKey(name: 'emailAddresses')
-  String get emailAddresses => throw _privateConstructorUsedError;
+  List<dynamic> get emailAddresses => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -183,7 +183,7 @@ abstract class $BillToDtoCopyWith<$Res> {
       @JsonKey(name: 'customerLocalGroup')
           String customerLocalGroup,
       @JsonKey(name: 'emailAddresses')
-          String emailAddresses});
+          List<dynamic> emailAddresses});
 }
 
 /// @nodoc
@@ -387,7 +387,7 @@ class _$BillToDtoCopyWithImpl<$Res> implements $BillToDtoCopyWith<$Res> {
       emailAddresses: emailAddresses == freezed
           ? _value.emailAddresses
           : emailAddresses // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<dynamic>,
     ));
   }
 }
@@ -474,7 +474,7 @@ abstract class _$$_BillToDtoCopyWith<$Res> implements $BillToDtoCopyWith<$Res> {
       @JsonKey(name: 'customerLocalGroup')
           String customerLocalGroup,
       @JsonKey(name: 'emailAddresses')
-          String emailAddresses});
+          List<dynamic> emailAddresses});
 }
 
 /// @nodoc
@@ -678,9 +678,9 @@ class __$$_BillToDtoCopyWithImpl<$Res> extends _$BillToDtoCopyWithImpl<$Res>
           : customerLocalGroup // ignore: cast_nullable_to_non_nullable
               as String,
       emailAddresses: emailAddresses == freezed
-          ? _value.emailAddresses
+          ? _value._emailAddresses
           : emailAddresses // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<dynamic>,
     ));
   }
 }
@@ -764,8 +764,9 @@ class _$_BillToDto extends _BillToDto {
       @JsonKey(name: 'customerLocalGroup')
           required this.customerLocalGroup,
       @JsonKey(name: 'emailAddresses')
-          required this.emailAddresses})
-      : super._();
+          required final List<dynamic> emailAddresses})
+      : _emailAddresses = emailAddresses,
+        super._();
 
   factory _$_BillToDto.fromJson(Map<String, dynamic> json) =>
       _$$_BillToDtoFromJson(json);
@@ -881,9 +882,13 @@ class _$_BillToDto extends _BillToDto {
   @override
   @JsonKey(name: 'customerLocalGroup')
   final String customerLocalGroup;
+  final List<dynamic> _emailAddresses;
   @override
   @JsonKey(name: 'emailAddresses')
-  final String emailAddresses;
+  List<dynamic> get emailAddresses {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_emailAddresses);
+  }
 
   @override
   String toString() {
@@ -947,7 +952,7 @@ class _$_BillToDto extends _BillToDto {
             const DeepCollectionEquality()
                 .equals(other.customerLocalGroup, customerLocalGroup) &&
             const DeepCollectionEquality()
-                .equals(other.emailAddresses, emailAddresses));
+                .equals(other._emailAddresses, _emailAddresses));
   }
 
   @JsonKey(ignore: true)
@@ -991,7 +996,7 @@ class _$_BillToDto extends _BillToDto {
         const DeepCollectionEquality().hash(taxIncludedBySalesOrganization),
         const DeepCollectionEquality().hash(customerClassification),
         const DeepCollectionEquality().hash(customerLocalGroup),
-        const DeepCollectionEquality().hash(emailAddresses)
+        const DeepCollectionEquality().hash(_emailAddresses)
       ]);
 
   @JsonKey(ignore: true)
@@ -1084,7 +1089,7 @@ abstract class _BillToDto extends BillToDto {
       @JsonKey(name: 'customerLocalGroup')
           required final String customerLocalGroup,
       @JsonKey(name: 'emailAddresses')
-          required final String emailAddresses}) = _$_BillToDto;
+          required final List<dynamic> emailAddresses}) = _$_BillToDto;
   const _BillToDto._() : super._();
 
   factory _BillToDto.fromJson(Map<String, dynamic> json) =
@@ -1203,7 +1208,7 @@ abstract class _BillToDto extends BillToDto {
   String get customerLocalGroup;
   @override
   @JsonKey(name: 'emailAddresses')
-  String get emailAddresses;
+  List<dynamic> get emailAddresses;
   @override
   @JsonKey(ignore: true)
   _$$_BillToDtoCopyWith<_$_BillToDto> get copyWith =>

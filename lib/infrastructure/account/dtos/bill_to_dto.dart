@@ -50,7 +50,7 @@ class BillToDto with _$BillToDto {
     @JsonKey(name: 'customerClassification')
         required String customerClassification,
     @JsonKey(name: 'customerLocalGroup') required String customerLocalGroup,
-    @JsonKey(name: 'emailAddresses') required String emailAddresses,
+    @JsonKey(name: 'emailAddresses') required List emailAddresses,
   }) = _BillToDto;
 
   factory BillToDto.fromDomain(BillToInfo billToInfo) {

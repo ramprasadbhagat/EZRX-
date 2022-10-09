@@ -7,17 +7,29 @@ import 'package:flutter/services.dart';
 class CustomerCodeLocalDataSource {
   CustomerCodeLocalDataSource();
 
-  Future<List<CustomerCodeInfo>> getCustomerInfo({
-    required String loginUserType,
-  }) async {
+  Future<List<CustomerCodeInfo>> getCustomerCodeList() async {
+    await Future.delayed(const Duration(seconds: 3));
     final data = json.decode(
-      await rootBundle.loadString(loginUserType == 'client'
-          ? 'assets/json/getCustomerInformationResponse.json'
-          : 'assets/json/getCustomerInformationResponseForSalesRep.json'),
+      await rootBundle.loadString(
+        'assets/json/getCustomerInformationResponse.json',
+      ),
     );
-    var finalData = loginUserType == 'client'
-        ? data['data']['customerInformationSearch']['SoldToInformation']
-        : data['data']['customerListForSalesRep'];
+    final finalData =
+        data['data']['customerInformationSearch']['SoldToInformation'];
+
+    return List.from(finalData)
+        .map((e) => CustomerCodeDto.fromJson(e).toDomain())
+        .toList();
+  }
+
+  Future<List<CustomerCodeInfo>> getSalesRepCustomerCodeList() async {
+    await Future.delayed(const Duration(seconds: 3));
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/getCustomerInformationResponseForSalesRep.json',
+      ),
+    );
+    final finalData = data['data']['customerListForSalesRep'];
 
     return List.from(finalData)
         .map((e) => CustomerCodeDto.fromJson(e).toDomain())

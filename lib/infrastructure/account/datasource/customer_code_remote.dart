@@ -48,7 +48,8 @@ class CustomerCodeRemoteDataSource {
       );
       _customerCodeExceptionChecker(res: res);
 
-      var finalData = res.data['data']['customerInformationSearch']['SoldToInformation'];
+      var finalData =
+          res.data['data']['customerInformationSearch']['SoldToInformation'];
 
       return List.from(finalData)
           .map((e) => CustomerCodeDto.fromJson(e).toDomain())

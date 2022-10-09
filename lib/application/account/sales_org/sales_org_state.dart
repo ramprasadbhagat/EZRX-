@@ -2,6 +2,7 @@ part of 'sales_org_bloc.dart';
 
 @freezed
 class SalesOrgState with _$SalesOrgState {
+  const SalesOrgState._();
   const factory SalesOrgState({
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs configs,
@@ -13,4 +14,7 @@ class SalesOrgState with _$SalesOrgState {
         configs: SalesOrganisationConfigs.empty(),
         salesOrgFailureOrSuccessOption: none(),
       );
+
+  bool get haveSelectedSalesOrganisation =>
+      salesOrganisation != SalesOrganisation.empty();
 }

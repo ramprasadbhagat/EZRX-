@@ -409,8 +409,8 @@ class __$$_ShipToCodeStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ShipToCodeState implements _ShipToCodeState {
-  const _$_ShipToCodeState({required this.shipToInfo});
+class _$_ShipToCodeState extends _ShipToCodeState {
+  const _$_ShipToCodeState({required this.shipToInfo}) : super._();
 
   @override
   final ShipToInfo shipToInfo;
@@ -439,9 +439,10 @@ class _$_ShipToCodeState implements _ShipToCodeState {
       __$$_ShipToCodeStateCopyWithImpl<_$_ShipToCodeState>(this, _$identity);
 }
 
-abstract class _ShipToCodeState implements ShipToCodeState {
+abstract class _ShipToCodeState extends ShipToCodeState {
   const factory _ShipToCodeState({required final ShipToInfo shipToInfo}) =
       _$_ShipToCodeState;
+  const _ShipToCodeState._() : super._();
 
   @override
   ShipToInfo get shipToInfo;

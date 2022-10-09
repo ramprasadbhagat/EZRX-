@@ -1,6 +1,10 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -24,6 +28,18 @@ class LoginFormBlocMock extends MockBloc<LoginFormEvent, LoginFormState>
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
+class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
+
+class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
+    implements SalesOrgBloc {}
+
+class CustomerCodeBlocMock
+    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
+    implements CustomerCodeBloc {}
+
+class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
+    implements ShipToCodeBloc {}
+
 class AnnnouncementBlocMock
     extends MockBloc<AnnouncementEvent, AnnouncementState>
     implements AnnouncementBloc {}
@@ -33,6 +49,10 @@ void main() {
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
   late Announcement announcementMock;
+  final UserBloc userBlocMock = UserBlocMock();
+  final SalesOrgBloc salesOrgBlocMock = SalesOrgBlocMock();
+  final CustomerCodeBloc customerCodeBlocMock = CustomerCodeBlocMock();
+  final ShipToCodeBloc shipToCodeBLocMock = ShipToCodeBlocMock();
 
   setUpAll(() async {
     GetIt.instance.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
@@ -48,6 +68,12 @@ void main() {
       when(() => loginBlocMock.state).thenReturn(LoginFormState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
+      when(() => userBlocMock.state).thenReturn(UserState.initial());
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+      when(() => customerCodeBlocMock.state)
+          .thenReturn(CustomerCodeState.initial());
+      when(() => shipToCodeBLocMock.state)
+          .thenReturn(ShipToCodeState.initial());
     });
     testWidgets("Test don't have credential", (tester) async {
       await tester.pumpWidget(
@@ -152,8 +178,24 @@ void main() {
       await tester.pump();
 
       await tester.pumpWidget(MaterialFrameWrapper(
-        child: BlocProvider(
-          create: (context) => authBlocMock,
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => authBlocMock,
+            ),
+            BlocProvider<UserBloc>(
+              create: (context) => userBlocMock,
+            ),
+            BlocProvider<SalesOrgBloc>(
+              create: (context) => salesOrgBlocMock,
+            ),
+            BlocProvider<CustomerCodeBloc>(
+              create: (context) => customerCodeBlocMock,
+            ),
+            BlocProvider<ShipToCodeBloc>(
+              create: (context) => shipToCodeBLocMock,
+            ),
+          ],
           child: const SplashPage(),
         ),
       ));

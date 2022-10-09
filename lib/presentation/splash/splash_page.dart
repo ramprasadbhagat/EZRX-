@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -15,26 +17,49 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthBloc, AuthState>(
-      listenWhen: (previous, current) => previous != current,
-      listener: (context, state) {
-        state.map(
-          initial: (_) => _showLoadingDialog(context),
-          loading: (_) => _showLoadingDialog(context),
-          authenticated: (_) {
-            context.router.replaceAll([
-              const SplashPageRoute(),
-              const HomeNavigationTabbarRoute(),
-            ]);
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<AuthBloc, AuthState>(
+          listenWhen: (previous, current) => previous != current,
+          listener: (context, state) {
+            state.map(
+              initial: (_) => _showLoadingDialog(context),
+              loading: (_) => _showLoadingDialog(context),
+              authenticated: (_) {
+                context.read<UserBloc>().add(const UserEvent.fetch());
+                context.router.replaceAll(
+                  [
+                    const SplashPageRoute(),
+                    const HomeNavigationTabbarRoute(),
+                  ],
+                );
+              },
+              unauthenticated: (_) {
+                context.read<UserBloc>().add(const UserEvent.initialized());
+                context.router.replaceAll(
+                  [
+                    const SplashPageRoute(),
+                    const LoginPageRoute(),
+                  ],
+                );
+              },
+            );
           },
-          unauthenticated: (_) {
-            context.router.replaceAll([
-              const SplashPageRoute(),
-              const LoginPageRoute(),
-            ]);
+        ),
+        BlocListener<UserBloc, UserState>(
+          listenWhen: (previous, current) => previous.user != current.user,
+          listener: (context, state) {
+            if (state.haveSalesOrganisation) {
+              context.read<SalesOrgBloc>().add(
+                    SalesOrgEvent.selected(
+                      salesOrganisation:
+                          state.user.userSalesOrganisations.first,
+                    ),
+                  );
+            }
           },
-        );
-      },
+        ),
+      ],
       child: UpgradeAlert(
         upgrader: Upgrader(
           messages: _UpgraderLocalizationMessage(),

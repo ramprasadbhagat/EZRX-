@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/repository/i_customer_code_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
@@ -27,16 +28,14 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
     String customerCode,
     bool hideCustomer,
     int pageIndex,
-    String loginUserType,
-    String userName,
+    User user,
   ) async {
     final salesOrg = salesOrganisation.salesOrg.getOrCrash();
     if (config.appFlavor == Flavor.mock) {
       try {
-        final customerCodeInfo =
-            await localCustomerCodeDataSource.getCustomerInfo(
-          loginUserType: loginUserType,
-        );
+        final customerCodeInfo = user.role.type.isSalesRep
+            ? await localCustomerCodeDataSource.getSalesRepCustomerCodeList()
+            : await localCustomerCodeDataSource.getCustomerCodeList();
 
         return Right(customerCodeInfo);
       } catch (e) {
@@ -44,19 +43,19 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
       }
     }
     try {
-      final customerCodeInfo = loginUserType == 'client'
-          ? await remoteDataSource.getCustomerCodeList(
+      final customerCodeInfo = user.role.type.isSalesRep
+          ? await remoteDataSource.getSalesRepCustomerCodeList(
               salesOrg: salesOrg,
               customerCode: customerCode,
               paginate: pageIndex,
               hidecustomer: hideCustomer,
+              userName: user.username.getOrCrash(),
             )
-          : await remoteDataSource.getSalesRepCustomerCodeList(
+          : await remoteDataSource.getCustomerCodeList(
               salesOrg: salesOrg,
               customerCode: customerCode,
               paginate: pageIndex,
               hidecustomer: hideCustomer,
-              userName: userName,
             );
 
       return Right(customerCodeInfo);

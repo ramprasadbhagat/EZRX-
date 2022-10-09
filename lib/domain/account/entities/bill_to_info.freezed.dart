@@ -21,7 +21,7 @@ mixin _$BillToInfo {
   BillToName get billToName => throw _privateConstructorUsedError;
   BillToAddress get billToAddress => throw _privateConstructorUsedError;
   BillToAltName get billToAltName => throw _privateConstructorUsedError;
-  String get emailAddresses => throw _privateConstructorUsedError;
+  List<dynamic> get emailAddresses => throw _privateConstructorUsedError;
   String get taxNumber => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   String get country => throw _privateConstructorUsedError;
@@ -61,7 +61,7 @@ abstract class $BillToInfoCopyWith<$Res> {
       BillToName billToName,
       BillToAddress billToAddress,
       BillToAltName billToAltName,
-      String emailAddresses,
+      List<dynamic> emailAddresses,
       String taxNumber,
       String status,
       String country,
@@ -153,7 +153,7 @@ class _$BillToInfoCopyWithImpl<$Res> implements $BillToInfoCopyWith<$Res> {
       emailAddresses: emailAddresses == freezed
           ? _value.emailAddresses
           : emailAddresses // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<dynamic>,
       taxNumber: taxNumber == freezed
           ? _value.taxNumber
           : taxNumber // ignore: cast_nullable_to_non_nullable
@@ -280,7 +280,7 @@ abstract class _$$_BillToInfoCopyWith<$Res>
       BillToName billToName,
       BillToAddress billToAddress,
       BillToAltName billToAltName,
-      String emailAddresses,
+      List<dynamic> emailAddresses,
       String taxNumber,
       String status,
       String country,
@@ -375,9 +375,9 @@ class __$$_BillToInfoCopyWithImpl<$Res> extends _$BillToInfoCopyWithImpl<$Res>
           : billToAltName // ignore: cast_nullable_to_non_nullable
               as BillToAltName,
       emailAddresses: emailAddresses == freezed
-          ? _value.emailAddresses
+          ? _value._emailAddresses
           : emailAddresses // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<dynamic>,
       taxNumber: taxNumber == freezed
           ? _value.taxNumber
           : taxNumber // ignore: cast_nullable_to_non_nullable
@@ -479,7 +479,7 @@ class _$_BillToInfo extends _BillToInfo {
       required this.billToName,
       required this.billToAddress,
       required this.billToAltName,
-      required this.emailAddresses,
+      required final List<dynamic> emailAddresses,
       required this.taxNumber,
       required this.status,
       required this.country,
@@ -502,7 +502,8 @@ class _$_BillToInfo extends _BillToInfo {
       required this.taxIncludedBySalesOrganization,
       required this.customerClassification,
       required this.customerLocalGroup})
-      : super._();
+      : _emailAddresses = emailAddresses,
+        super._();
 
   @override
   final bool defaulBillToAddress;
@@ -514,8 +515,13 @@ class _$_BillToInfo extends _BillToInfo {
   final BillToAddress billToAddress;
   @override
   final BillToAltName billToAltName;
+  final List<dynamic> _emailAddresses;
   @override
-  final String emailAddresses;
+  List<dynamic> get emailAddresses {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_emailAddresses);
+  }
+
   @override
   final String taxNumber;
   @override
@@ -582,7 +588,7 @@ class _$_BillToInfo extends _BillToInfo {
             const DeepCollectionEquality()
                 .equals(other.billToAltName, billToAltName) &&
             const DeepCollectionEquality()
-                .equals(other.emailAddresses, emailAddresses) &&
+                .equals(other._emailAddresses, _emailAddresses) &&
             const DeepCollectionEquality().equals(other.taxNumber, taxNumber) &&
             const DeepCollectionEquality().equals(other.status, status) &&
             const DeepCollectionEquality().equals(other.country, country) &&
@@ -627,7 +633,7 @@ class _$_BillToInfo extends _BillToInfo {
         const DeepCollectionEquality().hash(billToName),
         const DeepCollectionEquality().hash(billToAddress),
         const DeepCollectionEquality().hash(billToAltName),
-        const DeepCollectionEquality().hash(emailAddresses),
+        const DeepCollectionEquality().hash(_emailAddresses),
         const DeepCollectionEquality().hash(taxNumber),
         const DeepCollectionEquality().hash(status),
         const DeepCollectionEquality().hash(country),
@@ -665,7 +671,7 @@ abstract class _BillToInfo extends BillToInfo {
       required final BillToName billToName,
       required final BillToAddress billToAddress,
       required final BillToAltName billToAltName,
-      required final String emailAddresses,
+      required final List<dynamic> emailAddresses,
       required final String taxNumber,
       required final String status,
       required final String country,
@@ -701,7 +707,7 @@ abstract class _BillToInfo extends BillToInfo {
   @override
   BillToAltName get billToAltName;
   @override
-  String get emailAddresses;
+  List<dynamic> get emailAddresses;
   @override
   String get taxNumber;
   @override

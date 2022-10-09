@@ -21,7 +21,7 @@ class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
-    
+
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
@@ -75,8 +75,7 @@ void main() {
         providers: [
           BlocProvider<UserBloc>(create: (context) => userBlocMock),
           BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
-          BlocProvider<SearchBloc>(
-              create: (context) => searchBlocMock),
+          BlocProvider<SearchBloc>(create: (context) => searchBlocMock),
           BlocProvider<CustomerCodeBloc>(
               create: (context) => customerCodeBlocMock),
         ],
@@ -93,42 +92,33 @@ void main() {
     testWidgets(
       'Test Customer Code Selector tile and search',
       (tester) async {
-        final expectedStates = [
-          CustomerCodeState.initial().copyWith(
-              customeCodeInfo: CustomerCodeInfo.empty()
-                  .copyWith(customerCodeSoldTo: 'fake-customer-code')),
-        ];
-
         final expectedCustomerCodeListStates = [
+          CustomerCodeState.initial().copyWith(isFetching: true),
           CustomerCodeState.initial().copyWith(
-              customeCodeInfo: CustomerCodeInfo.empty()
-                  .copyWith(customerCodeSoldTo: 'fake-123456')),
-          CustomerCodeState.initial().copyWith(
-              customeCodeInfo: CustomerCodeInfo.empty()
-                  .copyWith(customerCodeSoldTo: 'fake-435322')),
+            isFetching: false,
+            customeCodeInfo: CustomerCodeInfo.empty()
+                .copyWith(customerCodeSoldTo: 'fake-123456'),
+            customerCodeList: [
+              CustomerCodeInfo.empty(),
+            ],
+          ),
         ];
 
-        final expectedCustomerSearchStates = [
-          SearchState.initial().copyWith(
-              searchText: 'fake-customer-code',),
-        ];
-        whenListen(customerCodeBlocMock, Stream.fromIterable(expectedStates));
-        whenListen(searchBlocMock, Stream.fromIterable(expectedCustomerSearchStates));
-         whenListen(customerCodeBlocMock, Stream.fromIterable(expectedCustomerCodeListStates));
+        whenListen(customerCodeBlocMock,
+            Stream.fromIterable(expectedCustomerCodeListStates));
         await tester.pumpWidget(getScopedWidget());
-        whenListen(customerCodeBlocMock, Stream.fromIterable(expectedCustomerCodeListStates));
-        await tester.pump();
-        final customerCodeListView = find.byKey(const Key('customerCodeSelect'));
-        await tester.tap(customerCodeListView);
-        await tester.pump();
+        await tester.pumpAndSettle(const Duration(seconds: 3));
+
+        expect(find.byKey(const Key('customerCodeSelect')), findsOneWidget);
+        expect(find.text('Please select a Customer Code'.tr()), findsOneWidget);
 
         if (salesOrgVariants.currentValue == SalesOrgVariant.onn) {
-          final customerCodeOption = find.byKey(const Key('customerCodeOptionfake-123456'));
+          final customerCodeOption =
+              find.byKey(const Key('customerCodeOptionfake-123456'));
           expect(customerCodeOption, findsOneWidget);
           await tester.tap(customerCodeOption);
           await tester.pump();
         }
-        expect(find.text('Please select a Customer Code'.tr()), findsOneWidget);
       },
       variant: customerCodeVariants,
     );

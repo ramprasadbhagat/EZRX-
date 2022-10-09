@@ -504,9 +504,10 @@ class __$$_UserStateCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UserState implements _UserState {
+class _$_UserState extends _UserState {
   const _$_UserState(
-      {required this.user, required this.userFailureOrSuccessOption});
+      {required this.user, required this.userFailureOrSuccessOption})
+      : super._();
 
   @override
   final User user;
@@ -540,11 +541,12 @@ class _$_UserState implements _UserState {
       __$$_UserStateCopyWithImpl<_$_UserState>(this, _$identity);
 }
 
-abstract class _UserState implements UserState {
+abstract class _UserState extends UserState {
   const factory _UserState(
       {required final User user,
       required final Option<Either<ApiFailure, dynamic>>
           userFailureOrSuccessOption}) = _$_UserState;
+  const _UserState._() : super._();
 
   @override
   User get user;

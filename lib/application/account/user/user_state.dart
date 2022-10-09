@@ -2,6 +2,8 @@ part of 'user_bloc.dart';
 
 @freezed
 class UserState with _$UserState {
+  const UserState._();
+
   const factory UserState({
     required User user,
     required Option<Either<ApiFailure, dynamic>> userFailureOrSuccessOption,
@@ -11,4 +13,6 @@ class UserState with _$UserState {
         user: User.empty(),
         userFailureOrSuccessOption: none(),
       );
+
+  bool get haveSalesOrganisation => user.userSalesOrganisations.isNotEmpty;
 }

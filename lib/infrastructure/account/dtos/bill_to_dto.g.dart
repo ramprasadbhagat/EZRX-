@@ -45,7 +45,7 @@ _$_BillToDto _$$_BillToDtoFromJson(Map<String, dynamic> json) => _$_BillToDto(
           json['taxIncludedBySalesOrganization'] as bool,
       customerClassification: json['customerClassification'] as String,
       customerLocalGroup: json['customerLocalGroup'] as String,
-      emailAddresses: json['emailAddresses'] as String,
+      emailAddresses: json['emailAddresses'] as List<dynamic>,
     );
 
 Map<String, dynamic> _$$_BillToDtoToJson(_$_BillToDto instance) =>

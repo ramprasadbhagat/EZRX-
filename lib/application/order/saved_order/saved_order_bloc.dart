@@ -5,7 +5,10 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,37 +23,12 @@ const int _defaultPageSize = 10;
 
 class SavedOrderListBloc
     extends Bloc<SavedOrderListEvent, SavedOrderListState> {
-  final UserBloc userBloc;
-  final SalesOrgBloc salesOrgBloc;
-  final CustomerCodeBloc customerCodeBloc;
-  final ShipToCodeBloc shipToCodeBloc;
   final IOrderRepository repository;
 
-  late final StreamSubscription _shipToBlocSubscription;
-
   SavedOrderListBloc({
-    required this.userBloc,
-    required this.salesOrgBloc,
-    required this.customerCodeBloc,
-    required this.shipToCodeBloc,
     required this.repository,
   }) : super(SavedOrderListState.initial()) {
     on<SavedOrderListEvent>(_onEvent);
-    add(const SavedOrderListEvent.fetch());
-    _shipToBlocSubscription = shipToCodeBloc.stream.listen((state) {
-      if (state.shipToInfo == ShipToInfo.empty()) {
-        add(const SavedOrderListEvent.initialized());
-      } else {
-        add(const SavedOrderListEvent.fetch());
-      }
-    });
-  }
-
-  @override
-  Future<void> close() async {
-    await _shipToBlocSubscription.cancel();
-
-    return super.close();
   }
 
   Future<void> _onEvent(
@@ -59,7 +37,7 @@ class SavedOrderListBloc
   ) async {
     await event.map(
       initialized: (e) async => emit(SavedOrderListState.initial()),
-      fetch: (_) async {
+      fetch: (e) async {
         emit(
           state.copyWith(
             isFetching: true,
@@ -69,10 +47,10 @@ class SavedOrderListBloc
           ),
         );
         final failureOrSuccess = await repository.getSavedOrder(
-          user: userBloc.state.user,
-          salesOrg: salesOrgBloc.state.salesOrganisation,
-          customerCode: customerCodeBloc.state.customeCodeInfo,
-          shipToCode: shipToCodeBloc.state.shipToInfo,
+          user: e.userInfo,
+          salesOrg: e.selectedSalesOrganisation,
+          customerCode: e.selectedCustomerCode,
+          shipToCode: e.selectedShipTo,
           pageSize: _defaultPageSize,
           offset: 0,
         );
@@ -99,7 +77,7 @@ class SavedOrderListBloc
           },
         );
       },
-      loadMore: (_) async {
+      loadMore: (e) async {
         if (state.isFetching || !state.canLoadMore) return;
         emit(
           state.copyWith(
@@ -108,10 +86,10 @@ class SavedOrderListBloc
           ),
         );
         final failureOrSuccess = await repository.getSavedOrder(
-          user: userBloc.state.user,
-          salesOrg: salesOrgBloc.state.salesOrganisation,
-          customerCode: customerCodeBloc.state.customeCodeInfo,
-          shipToCode: shipToCodeBloc.state.shipToInfo,
+          user: e.userInfo,
+          salesOrg: e.selectedSalesOrganisation,
+          customerCode: e.selectedCustomerCode,
+          shipToCode: e.selectedShipTo,
           pageSize: _defaultPageSize,
           offset: state.savedOrders.length,
         );

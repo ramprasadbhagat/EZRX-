@@ -76,6 +76,8 @@ linter:
     - constant_identifier_names
     - file_names
     - implementation_imports
+    - prefer_final_in_for_each
+    - prefer_final_locals
 
 dart_code_metrics:
   anti-patterns:

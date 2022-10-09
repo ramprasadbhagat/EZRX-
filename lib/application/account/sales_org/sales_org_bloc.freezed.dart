@@ -448,11 +448,12 @@ class __$$_SalesOrgStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SalesOrgState implements _SalesOrgState {
+class _$_SalesOrgState extends _SalesOrgState {
   const _$_SalesOrgState(
       {required this.salesOrganisation,
       required this.configs,
-      required this.salesOrgFailureOrSuccessOption});
+      required this.salesOrgFailureOrSuccessOption})
+      : super._();
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -492,12 +493,13 @@ class _$_SalesOrgState implements _SalesOrgState {
       __$$_SalesOrgStateCopyWithImpl<_$_SalesOrgState>(this, _$identity);
 }
 
-abstract class _SalesOrgState implements SalesOrgState {
+abstract class _SalesOrgState extends SalesOrgState {
   const factory _SalesOrgState(
       {required final SalesOrganisation salesOrganisation,
       required final SalesOrganisationConfigs configs,
       required final Option<Either<ApiFailure, dynamic>>
           salesOrgFailureOrSuccessOption}) = _$_SalesOrgState;
+  const _SalesOrgState._() : super._();
 
   @override
   SalesOrganisation get salesOrganisation;

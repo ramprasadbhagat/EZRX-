@@ -40,40 +40,35 @@ class _ProfileTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserBloc, UserState>(
+    return BlocConsumer<UserBloc, UserState>(
+      listenWhen: (previous, current) => previous.user != current.user,
+      listener: (context, state) {
+        state.userFailureOrSuccessOption.fold(
+          () {},
+          (either) => either.fold(
+            (failure) {
+              final failureMessage = failure.failureMessage;
+              showSnackBar(context: context, message: failureMessage.tr());
+              if (failureMessage == 'authentication failed') {
+                context.read<AuthBloc>().add(const AuthEvent.logout());
+              }
+            },
+            (_) {},
+          ),
+        );
+      },
       buildWhen: (previous, current) => previous.user != current.user,
       builder: (context, state) {
-        return BlocConsumer<UserBloc, UserState>(
-          listenWhen: (previous, current) => previous.user != current.user,
-          listener: (context, state) {
-            state.userFailureOrSuccessOption.fold(
-              () {},
-              (either) => either.fold(
-                (failure) {
-                  final failureMessage = failure.failureMessage;
-                  showSnackBar(context: context, message: failureMessage.tr());
-                  if (failureMessage == 'authentication failed') {
-                    context.read<AuthBloc>().add(const AuthEvent.logout());
-                  }
-                },
-                (_) {},
-              ),
-            );
-          },
-          buildWhen: (previous, current) => previous.user != current.user,
-          builder: (context, state) {
-            return ListTile(
-              key: const Key('profileTile'),
-              leading: const CircleAvatar(),
-              title: state.user == User.empty()
-                  ? LoadingShimmer.tile(line: 3)
-                  : Text(
-                      state.user.fullName.toString(),
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-              onTap: null,
-            );
-          },
+        return ListTile(
+          key: const Key('profileTile'),
+          leading: const CircleAvatar(),
+          title: state.user == User.empty()
+              ? LoadingShimmer.tile(line: 3)
+              : Text(
+                  state.user.fullName.toString(),
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+          onTap: null,
         );
       },
     );
@@ -108,10 +103,10 @@ class _SettingsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-        key: const Key('settingsTile'),
-        leading: const Icon(Icons.settings_outlined),
-        title: const Text('Settings').tr(),
-        onTap: () => context.router.pushNamed('settings'),
-      );
+      key: const Key('settingsTile'),
+      leading: const Icon(Icons.settings_outlined),
+      title: const Text('Settings').tr(),
+      onTap: () => context.router.pushNamed('settings'),
+    );
   }
 }

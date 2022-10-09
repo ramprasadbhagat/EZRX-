@@ -27,7 +27,6 @@ class SalesRepBloc extends Bloc<SalesRepEvent, SalesRepState> {
       }
     });
   }
-
   Future<void> _onEvent(
     SalesRepEvent event,
     Emitter<SalesRepState> emit,
