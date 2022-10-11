@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
@@ -31,6 +32,7 @@ class AutoRouterMock extends Mock implements AppRouter {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  EasyLocalization.logger.enableBuildModes = [];
 
   late ResetPasswordBloc resetPasswordBlocMock;
   late AuthBloc authBlocMock;

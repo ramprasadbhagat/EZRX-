@@ -11,11 +11,14 @@ import '../../../utils/material_frame_wrapper.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+
   setUpAll(() async {
     setupLocator();
   });
 
   testWidgets('Tap Privacy Policy', (tester) async {
+    EasyLocalization.logger.enableBuildModes = [];
+
     await tester.pumpWidget(EasyLocalization(
       supportedLocales: const [
         Locale('en', 'SG'),

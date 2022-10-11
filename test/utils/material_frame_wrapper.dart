@@ -24,6 +24,7 @@ class MaterialFrameWrapper extends StatelessWidget {
   }
 
   Widget _buildHome() {
+    EasyLocalization.logger.enableBuildModes = [];
     return MediaQuery(
       data: const MediaQueryData(size: Size(480, 900)),
       child: child,

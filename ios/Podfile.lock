@@ -178,6 +178,8 @@ PODS:
     - GoogleUtilities/Logger
   - integration_test (0.0.1):
     - Flutter
+  - local_auth_ios (0.0.1):
+    - Flutter
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
     - nanopb/encode (= 2.30909.0)
@@ -225,6 +227,7 @@ DEPENDENCIES:
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - integration_test (from `.symlinks/plugins/integration_test/ios`)
+  - local_auth_ios (from `.symlinks/plugins/local_auth_ios/ios`)
   - okta_oidc (from `.symlinks/plugins/okta_oidc/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
@@ -286,6 +289,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
   integration_test:
     :path: ".symlinks/plugins/integration_test/ios"
+  local_auth_ios:
+    :path: ".symlinks/plugins/local_auth_ios/ios"
   okta_oidc:
     :path: ".symlinks/plugins/okta_oidc/ios"
   package_info_plus:
@@ -334,6 +339,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 1c8145da7117bd68bbbed00cf304edb6a24de00f
   GoogleUtilities: 1d20a6ad97ef46f67bbdec158ce00563a671ebb7
   integration_test: a1e7d09bd98eca2fc37aefd79d4f41ad37bdbbe5
+  local_auth_ios: 0d333dde7780f669e66f19d2ff6005f3ea84008d
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   okta_oidc: bc6da484c380ea7f036b55db794a49ea7ea8153f
   OktaOidc: 15fb3d494103d4f07ba8a523b3347d02c4d30486
@@ -349,4 +355,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: cc1f88378b4bfcf93a6ce00d2c587857c6008d3b
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.10.2
