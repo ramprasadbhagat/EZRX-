@@ -86,7 +86,7 @@ void main() {
 
     testWidgets('Test that announcement loaded successfully and got translated',
         (tester) async {
-      var evaluatedText = const <String>[
+      const evaluatedText = <String>[
         'eZRx will be undergoing enhancements from ',
         'SGT on',
         'We apologize for the inconvenience and appreciate your patience.'
@@ -121,19 +121,19 @@ void main() {
       expect(announcementDescription, findsOneWidget);
       expect(closeIcon, findsOneWidget);
 
-      var descriptionTextWidget =
+      final descriptionTextWidget =
           announcementDescription.evaluate().single.widget as Text;
 
-      var descriptionText = descriptionTextWidget.data!;
+      final descriptionText = descriptionTextWidget.data!;
 
       if (needTranslatedAnnouncementMock.description.isNotEmpty) {
-        var isValidDescription = descriptionText.isNotEmpty;
+        final isValidDescription = descriptionText.isNotEmpty;
         expect(isValidDescription, true);
       }
 
-      for (var text in evaluatedText) {
+      for (final text in evaluatedText) {
         if (needTranslatedAnnouncementMock.descriptionParsed.contains(text)) {
-          var isValidDescription = descriptionText.contains(text.tr());
+          final isValidDescription = descriptionText.contains(text.tr());
           expect(isValidDescription, true);
         }
       }

@@ -152,13 +152,13 @@ void main() {
     testWidgets('Banner test 3 - Have mock cache file', (tester) async {
       final config = locator<Config>();
       config.appFlavor = Flavor.uat;
-      var fileSystem = const LocalFileSystem();
+      const fileSystem = LocalFileSystem();
 
       when(
         () => cacheManagerMock.getFileFromCache(mockUrl),
       ).thenAnswer(
         (invocation) async {
-          var fileInfo = FileInfo(
+          final fileInfo = FileInfo(
             fileSystem.file(
                 './assets/images/ezrxlogo.png'), // Return your image file path
             FileSource.Cache,

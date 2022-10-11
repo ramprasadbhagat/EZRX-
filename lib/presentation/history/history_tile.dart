@@ -112,13 +112,13 @@ class TextRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var keyTextStyle = const TextStyle(
+    const keyTextStyle = TextStyle(
       color: Colors.black,
       fontSize: 12.0,
       fontFamily: 'Poppins',
       fontWeight: FontWeight.w400,
     );
-    var valueTextStyle = const TextStyle(
+    const valueTextStyle = TextStyle(
       color: Colors.black,
       fontSize: 12.0,
       fontFamily: 'Poppins',

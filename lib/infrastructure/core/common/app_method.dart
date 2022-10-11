@@ -31,7 +31,7 @@ class AppMethods {
     bool ispickandpackenabled, {
     bool isFromBonusSearchAndValidate = false,
   }) {
-    var country = salesOrgBloc.state.salesOrganisation.salesOrg.country;
+    final country = salesOrgBloc.state.salesOrganisation.salesOrg.country;
     if (country == 'SG' ||
         (country == 'TH' && checkOrderTypeEnable) ||
         (isFromBonusSearchAndValidate &&
@@ -50,8 +50,8 @@ class AppMethods {
   ///Method to check if user is salesrep user Disable Order Type is false
   ///Also if selected sales org is TH and enableOrderType is true respect to the logged in user
   bool get checkOrderTypeEnable {
-    var myUser = userBloc.state.user;
-    var salesOrgState = salesOrgBloc.state;
+    final myUser = userBloc.state.user;
+    final salesOrgState = salesOrgBloc.state;
     if (myUser.role.type.loginUserType == 'salesRep' &&
         !salesOrgState.configs.disableOrderType) {
       if (salesOrgState.salesOrganisation.salesOrg.country == 'TH' &&

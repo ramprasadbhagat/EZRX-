@@ -30,13 +30,13 @@ class Announcement with _$Announcement {
   String get descriptionDisplay {
     var newDescription = descriptionParsed;
 
-    var textsNeedTranslated = const <String>[
+    const textsNeedTranslated =  <String>[
       'eZRx will be undergoing enhancements from ',
       'SGT on',
       'We apologize for the inconvenience and appreciate your patience.',
     ];
 
-    for (var text in textsNeedTranslated) {
+    for (final text in textsNeedTranslated) {
       if (newDescription.contains(text)) {
         newDescription = newDescription.replaceAll(text, text.tr());
       }
