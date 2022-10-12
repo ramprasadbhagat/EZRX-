@@ -61,14 +61,12 @@ dependencies:
   upgrader: ^4.6.1
   shared_preferences: ^2.0.15
   local_auth: ^2.1.2
-    
-
   # responsive_framework: ^0.2.0
   sizer: ^2.0.15
   smooth_page_indicator: ^1.0.0+2
   shimmer: ^2.0.0
   flutter_cache_manager: ^3.3.0
-  flutter_inappwebview: ^5.4.3+7
+  flutter_inappwebview: ^5.4.4+3
   countly_flutter: ^22.2.0
   loading_indicator: ^3.0.1
   file: 6.1.2
