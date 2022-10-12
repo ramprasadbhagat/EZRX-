@@ -592,9 +592,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => OrderHistoryListBloc(
       orderHistoryRepository: locator<OrderHistoryRepository>(),
-      customerCodeBloc: locator<CustomerCodeBloc>(),
-      shipToCodeBloc: locator<ShipToCodeBloc>(),
-      userBloc: locator<UserBloc>(),
     ),
   );
 

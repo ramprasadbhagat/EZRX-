@@ -71,6 +71,7 @@ class FavouriteRepository implements IFavouriteRepository {
       }
     }
     try {
+      // TODO: this is not a correct way, will revisit when we have full context
       String type;
       if (isPackAndPick) {
         type = 'P&P';

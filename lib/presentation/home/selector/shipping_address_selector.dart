@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
@@ -37,10 +38,28 @@ class ShipCodeSelector extends StatelessWidget {
                       selectedShipTo: state.shipToInfo,
                     ),
                   );
+
+              context.read<OrderHistoryListBloc>().add(
+                    OrderHistoryListEvent.fetch(
+                      customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customeCodeInfo,
+                      salesOrgConfigs:
+                          context.read<SalesOrgBloc>().state.configs,
+                      shipToInfo:
+                          context.read<ShipToCodeBloc>().state.shipToInfo,
+                      user: context.read<UserBloc>().state.user,
+                    ),
+                  );
             } else {
               context
                   .read<SavedOrderListBloc>()
                   .add(const SavedOrderListEvent.initialized());
+
+              context
+                  .read<OrderHistoryListBloc>()
+                  .add(const OrderHistoryListEvent.initialized());
             }
           },
           buildWhen: (previous, current) =>

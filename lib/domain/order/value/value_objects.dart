@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
+import 'package:ezrxmobile/domain/order/value/value_transformers.dart';
 
 class CompanyName extends ValueObject<String> {
   @override
@@ -47,4 +48,32 @@ class ShipToParty extends ValueObject<String> {
   }
 
   const ShipToParty._(this.value);
+}
+
+class ZpPrice extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory ZpPrice(String input) {
+    return ZpPrice._(validateStringNotEmpty(input));
+  }
+  double get zpPrice {
+    return totalPriceStringAsFixed(value.getOrElse(() => '0'));
+  }
+
+  const ZpPrice._(this.value);
+}
+
+class TotalPrice extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory TotalPrice(String input) {
+    return TotalPrice._(validateStringNotEmpty(input));
+  }
+  double get totalPrice {
+    return totalPriceStringAsFixed(value.getOrElse(() => '0'));
+  }
+
+  const TotalPrice._(this.value);
 }

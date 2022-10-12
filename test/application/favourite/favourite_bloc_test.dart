@@ -40,7 +40,7 @@ void main() {
   final mockUserBloc = MockUserBloc();
   final mockUser = User.empty();
 
-  var favouriteItems = <Favourite>[
+  final favouriteItems = <Favourite>[
     Favourite(
       id: '',
       isFOC: false,

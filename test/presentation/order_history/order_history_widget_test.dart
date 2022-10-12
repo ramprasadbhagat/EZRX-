@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -8,6 +9,8 @@ import 'package:ezrxmobile/application/order/order_history_list/order_history_li
 
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_basicInfo.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -45,76 +48,6 @@ void main() {
   final mockOrderHistoryListBloc = OrderHistoryListBlocMock();
   late MockHTTPService mockHTTPService;
   late AppRouter autoRouterMock;
-  // late OrderHistoryRepository orderHistoryRepoMock = OrderHistoryRepoMock();
-  // late CustomerCodeBloc customerCodeBloc = CustomerCodeMockBloc();
-  // late ShipToCodeBloc shipToCodeBloc = ShipToCodeMocBloc();
-  // late UserBloc userMockBloc = UserMockBloc();
-  // final orderHistoryState = OrderHistoryListState.initial();
-  // var fakeSort = 'desc';
-  // var user = User(
-  //   id: '1',
-  //   username: Username(''),
-  //   email: EmailAddress(''),
-  //   fullName: const FullName(firstName: '', lastName: ''),
-  //   role: Role(id: '', description: '', name: '', type: RoleType('Developer')),
-  //   customerCode: CustomerCode(''),
-  //   userSalesOrganisations: [],
-  //   settings: Settings.empty(),
-  //   settingTc: SettingTc.empty(),
-  //   settingAup: SettingAup.empty(),
-  // );
-  // var fakeorderBy = 'orderDate';
-  // var fakeFromDate = '20220916';
-  // var fakeToDate = '20220923';
-  // var shipToWithoutValue = ShipToInfo.empty();
-  // var shipToWithValue = const ShipToInfo(
-  //   building: 'test',
-  //   city1: 'test',
-  //   city2: 'test',
-  //   defaultShipToAddress: false,
-  //   floor: 'test',
-  //   houseNumber1: 'test',
-  //   plant: 'test',
-  //   postalCode: 'test',
-  //   region: 'test',
-  //   shipToAddress: ShipToAddress(
-  //     street2: 'test',
-  //     street3: 'test',
-  //     street4: 'test',
-  //     street5: 'test',
-  //     street: 'test',
-  //   ),
-  //   shipToCustomerCode: '1111111111',
-  //   shipToName: ShipToName(
-  //     name1: 'test',
-  //     name2: 'test',
-  //     name3: 'test',
-  //     name4: 'test',
-  //   ),
-  //   status: 'test',
-  //   telephoneNumber: '12345',
-  // );
-  // var soldTo = CustomerCodeInfo(
-  //   customerCodeSoldTo: '',
-  //   customerAddress: CustomerAddress.empty(),
-  //   billToInfos: [],
-  //   customerClassification: '',
-  //   customerLocalGroup: '',
-  //   customerName: const CustomerName(
-  //     name1: '',
-  //     name2: '',
-  //     name3: '',
-  //     name4: '',
-  //   ),
-  //   paymentTermDescription: '',
-  //   postalCode: '',
-  //   shipToInfos: [],
-  //   status: '',
-  // );
-  // late CustomerCodeState customerCodeInitState;
-  // late UserState userInitState;
-  // late ShipToCodeState shipToInitState;
-
   setUpAll(() {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator = GetIt.instance;
@@ -128,13 +61,6 @@ void main() {
     locator.registerLazySingleton<HttpService>(
       () => mockHTTPService,
     );
-    // customerCodeBloc = CustomerCodeMockBloc();
-    // orderHistoryRepoMock = OrderHistoryRepoMock();
-    // shipToCodeBloc = ShipToCodeMocBloc();
-    // userMockBloc = UserMockBloc();
-    // userInitState = UserState.initial();
-    // customerCodeInitState = CustomerCodeState.initial();
-    // shipToInitState = ShipToCodeState.initial();
   });
   group(
     'Order-History',
@@ -155,37 +81,50 @@ void main() {
       }
 
       testWidgets('Order History test', (tester) async {
-        final favouriteBloc = locator<OrderHistoryListBlocMock>();
-        when(() => favouriteBloc.stream).thenAnswer((invocation) {
+        final orderHistoryBloc = locator<OrderHistoryListBlocMock>();
+        when(() => orderHistoryBloc.stream).thenAnswer((invocation) {
           return Stream.fromIterable([
             OrderHistoryListState.initial().copyWith(
               failureOrSuccessOption: none(),
-              orderHistoryList: [],
+              orderHistoryList: OrderHistory(
+                orderBasicInformation: OrderHistoryBasicInfo.empty(),
+                orderHistoryItems: <OrderHistoryItem>[],
+              ),
+              isFetching: false,
+              canLoadMore: false,
+              nextPageIndex: 0,
             ),
           ]);
         });
         await tester.pumpWidget(getWUT());
-        await tester.pump();
-        final materialList = find.byKey(const Key('scrollList'));
-        expect(materialList, findsOneWidget);
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+        final orderList = find.byKey(const Key('scrollList'));
+        expect(orderList, findsOneWidget);
         final noRecordFound = find.text('No history found');
         expect(noRecordFound, findsOneWidget);
         await tester.pump();
       });
-      testWidgets('Load history_tab widget', (tester) async {
-        final favouriteBloc = locator<OrderHistoryListBlocMock>();
 
-        when(() => favouriteBloc.stream).thenAnswer((invocation) {
+      testWidgets('Load history_tab widget', (tester) async {
+        final orderHistoryBloc = locator<OrderHistoryListBlocMock>();
+
+        when(() => orderHistoryBloc.stream).thenAnswer((invocation) {
           return Stream.fromIterable([
             OrderHistoryListState.initial().copyWith(
               failureOrSuccessOption: none(),
-              orderHistoryList: [],
+              orderHistoryList: OrderHistory(
+                orderBasicInformation: OrderHistoryBasicInfo.empty(),
+                orderHistoryItems: <OrderHistoryItem>[],
+              ),
+              isFetching: false,
+              canLoadMore: false,
+              nextPageIndex: 0,
             ),
           ]);
         });
 
         await tester.pumpWidget(getWUT());
-        await tester.pump();
+        await tester.pumpAndSettle(const Duration(seconds: 1));
         // final titleFinder = find.text('History');
         expect(find.byType(AppBar), findsOneWidget);
         expect(find.byType(Scaffold), findsOneWidget);
@@ -193,42 +132,48 @@ void main() {
       });
 
       testWidgets('app bar test', (tester) async {
-        final favouriteBloc = locator<OrderHistoryListBlocMock>();
+        final orderHistoryBloc = locator<OrderHistoryListBlocMock>();
 
-        when(() => favouriteBloc.stream).thenAnswer((invocation) {
+        when(() => orderHistoryBloc.stream).thenAnswer((invocation) {
           return Stream.fromIterable([
             OrderHistoryListState.initial().copyWith(
               failureOrSuccessOption: none(),
-              orderHistoryList: [],
+              orderHistoryList: OrderHistory(
+                orderBasicInformation: OrderHistoryBasicInfo.empty(),
+                orderHistoryItems: <OrderHistoryItem>[],
+              ),
+              isFetching: false,
+              canLoadMore: false,
+              nextPageIndex: 0,
             ),
           ]);
         });
 
         await tester.pumpWidget(getWUT());
-        await tester.pump();
+        await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        expect(find.text('Order History'), findsOneWidget);
+        expect(find.text('Order History'.tr()), findsOneWidget);
 
         await tester.pump();
       });
 
       testWidgets('order Type test', (tester) async {
-        final favouriteBloc = locator<OrderHistoryListBlocMock>();
-
-        when(() => favouriteBloc.stream).thenAnswer((invocation) {
+        final orderHistoryBloc = locator<OrderHistoryListBlocMock>();
+        when(() => orderHistoryBloc.stream).thenAnswer((invocation) {
           return Stream.fromIterable([
             OrderHistoryListState.initial().copyWith(
               failureOrSuccessOption: none(),
-              orderHistoryList: [OrderHistory.empty()],
+              orderHistoryList: OrderHistory(
+                orderBasicInformation: OrderHistoryBasicInfo.empty(),
+                orderHistoryItems: <OrderHistoryItem>[],
+              ),
+              isFetching: false,
             ),
           ]);
         });
-
         await tester.pumpWidget(getWUT());
-        await tester.pump();
-
-        expect(find.byKey(const Key('orderTypeKey')), findsWidgets);
-
+        await tester.pumpAndSettle(const Duration(seconds: 3));
+        expect(find.byKey(const Key('OrderHistoryList')), findsWidgets);
         await tester.pump();
       });
     },

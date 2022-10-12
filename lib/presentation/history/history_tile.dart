@@ -1,11 +1,16 @@
-import 'package:ezrxmobile/domain/order/entities/order_history.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class OrderHistoryListTile extends StatelessWidget {
-  final OrderHistory orderHistory;
-  const OrderHistoryListTile({Key? key, required this.orderHistory})
-      : super(key: key);
+  final OrderHistoryItem orderHistoryItem;
+  final Currency currency;
+  const OrderHistoryListTile({
+    Key? key,
+    required this.orderHistoryItem,
+    required this.currency,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +26,7 @@ class OrderHistoryListTile extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: Text(
-                    'Order #${orderHistory.orderNumber}',
+                    'Order #${orderHistoryItem.orderNumber}',
                     softWrap: true,
                     style: const TextStyle(
                       fontSize: 14.0,
@@ -45,7 +50,7 @@ class OrderHistoryListTile extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      orderHistory.status,
+                      orderHistoryItem.status,
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 10,
@@ -60,38 +65,40 @@ class OrderHistoryListTile extends StatelessWidget {
             TextRow(
               key: const Key('orderTypeKey'),
               keyText: 'Order Type',
-              valueText: orderHistory.orderType,
+              valueText: orderHistoryItem.orderType,
             ),
             TextRow(
               keyText: 'Material ID',
-              valueText: orderHistory.materialCode,
+              valueText: orderHistoryItem.materialNumber.displayMatNo,
             ),
             TextRow(
               keyText: 'Material Name',
-              valueText: orderHistory.materialDescription,
+              valueText: orderHistoryItem.materialDescription,
             ),
-            const TextRow(
+            TextRow(
               keyText: 'Order Date',
-              valueText: '',
+              valueText: orderHistoryItem.createdDate,
             ),
-            const TextRow(
+            TextRow(
               keyText: 'Delivery Date/Time',
-              valueText: '',
+              valueText: orderHistoryItem.deliveryDate,
             ),
             TextRow(
               keyText: 'Quantity',
-              valueText: orderHistory.qty.toString(),
+              valueText: orderHistoryItem.qty.toString(),
             ),
 
             /// Need to clear about order value then i will calculate zp price
             /// if the price getting complicated, please consider using value_object transformation to mange it
-            const TextRow(
+            TextRow(
               keyText: 'ZP Price',
-              valueText: '',
+              valueText:
+                  '${currency.symbol}${orderHistoryItem.unitPrice.getOrCrash()}',
             ),
             TextRow(
               keyText: 'Total Price',
-              valueText: '\$${orderHistory.totalPrice.toStringAsFixed(2)}',
+              valueText:
+                  '${currency.symbol}${orderHistoryItem.totalPrice.getOrCrash()}',
             ),
           ],
         ),

@@ -21,10 +21,8 @@ class OrderHistoryRemoteDataSource {
     required this.config,
     required this.dataSourceExceptionHandler,
   });
-  // TODO: Jyoti
-  // NO BLOC INJECTION ALLOW ON DATASOURCE LAYER
-  // Create two datasource functions, separate getOrderHistory & getOrderHistorySalesRep
-  Future<List<OrderHistory>> getOrderHistory({
+
+  Future<OrderHistory> getOrderHistory({
     required String loginUserType,
     required String soldTo,
     required String shipTo,
@@ -32,16 +30,12 @@ class OrderHistoryRemoteDataSource {
     required String toDate,
     required int pageSize,
     required int offset,
-    String orderBy = 'orderDate',
-    String sort = 'desc',
-    String userName = '',
-    String language = 'E',
-    String companyName = '',
+    required String orderBy, // = 'orderDate',
+    required String sort, // = 'desc',
+    required String companyName,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = loginUserType == 'client'
-          ? orderHistoryQueryMutation.getOrderHistoryRep()
-          : orderHistoryQueryMutation.getOrderHistoryForSalesRep();
+      final queryData = orderHistoryQueryMutation.getOrderHistoryRep();
       final variables = {
         'soldTo': soldTo,
         'shipTo': [shipTo],
@@ -51,15 +45,8 @@ class OrderHistoryRemoteDataSource {
         'fromDate': fromDate,
         'toDate': toDate,
         'sort': sort,
+        'companyName': companyName,
       };
-      if (loginUserType == 'client') {
-        variables.addEntries({MapEntry('companyName', companyName)});
-      } else {
-        variables.addEntries({
-          MapEntry('userName', userName),
-          MapEntry('language', language),
-        });
-      }
 
       final res = await httpService.request(
         method: 'POST',
@@ -71,15 +58,64 @@ class OrderHistoryRemoteDataSource {
       );
 
       _orderHistoryExceptionChecker(res: res);
-      List orderHistory = List.from(loginUserType == 'client'
-              ? res.data['data']['orderHistoryV2']['OrderHistory'][0]
-                  ['OrderItems']
-              : res.data['data']['orderHistoryForSalesRepV2']['OrderHistory'][0]
-                  ['OrderItems'])
-          .map((e) => OrderHistoryDto.fromJson(e).toDomain())
-          .toList();
 
-      return orderHistory;
+      if (res.data['data']['orderHistoryV2']['OrderHistory'].isEmpty) {
+        return OrderHistory.empty();
+      }
+
+      return OrderHistoryDto.fromJson(
+        res.data['data']['orderHistoryV2']['OrderHistory'][0],
+      ).toDomain();
+    });
+  }
+
+  Future<OrderHistory> getOrderHistorySalesRep({
+    required String loginUserType,
+    required String soldTo,
+    required String shipTo,
+    required String fromDate,
+    required String toDate,
+    required int pageSize,
+    required int offset,
+    required String orderBy, // = 'orderDate',
+    required String sort, // = 'desc',
+    required String userName, // = '',
+    required String language, // = 'E',
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = orderHistoryQueryMutation.getOrderHistoryForSalesRep();
+      final variables = {
+        'soldTo': soldTo,
+        'shipTo': [shipTo],
+        'first': pageSize,
+        'after': offset,
+        'orderBy': orderBy,
+        'fromDate': fromDate,
+        'toDate': toDate,
+        'sort': sort,
+        'userName': userName,
+        'language': language,
+      };
+
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}order',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': variables,
+        }),
+      );
+
+      _orderHistoryExceptionChecker(res: res);
+
+      if (res
+          .data['data']['orderHistoryForSalesRepV2']['OrderHistory'].isEmpty) {
+        return OrderHistory.empty();
+      }
+
+      return OrderHistoryDto.fromJson(
+        res.data['data']['orderHistoryForSalesRepV2']['OrderHistory'][0],
+      ).toDomain();
     });
   }
 

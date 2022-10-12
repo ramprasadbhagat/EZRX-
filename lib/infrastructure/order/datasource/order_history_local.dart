@@ -5,22 +5,25 @@ import 'package:flutter/services.dart';
 
 class OrderHistoryLocalDataSource {
   OrderHistoryLocalDataSource();
-  Future<List<OrderHistory>> getOrderHistory({
-    required String loginUserType,
-  }) async {
+  Future<OrderHistory> getOrderHistory() async {
     final data = json.decode(
-      await rootBundle.loadString(loginUserType == 'client'
-          ? 'assets/json/getOrderHistoryV2Response.json'
-          : 'assets/json/getorderHistoryForSalesRepV2Response.json'),
+      await rootBundle.loadString('assets/json/getOrderHistoryV2Response.json'),
     );
 
-    final finalData = loginUserType == 'client'
-        ? data['data']['orderHistoryV2']['OrderHistory'][0]['OrderItems']
-        : data['data']['orderHistoryForSalesRepV2']['OrderHistory'][0]
-            ['OrderItems'];
+    final finalData = data['data']['orderHistoryV2']['OrderHistory'][0];
 
-    return List.from(finalData)
-        .map((e) => OrderHistoryDto.fromJson(e).toDomain())
-        .toList();
+    return OrderHistoryDto.fromJson(finalData).toDomain();
+  }
+
+  Future<OrderHistory> getOrderHistoryForSalesRep() async {
+    final data = json.decode(
+      await rootBundle
+          .loadString('assets/json/getorderHistoryForSalesRepV2Response.json'),
+    );
+
+    final finalData =
+        data['data']['orderHistoryForSalesRepV2']['OrderHistory'][0];
+
+    return OrderHistoryDto.fromJson(finalData).toDomain();
   }
 }
