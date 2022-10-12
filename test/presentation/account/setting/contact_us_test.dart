@@ -47,7 +47,7 @@ void main() {
     testWidgets('Load contact_us widget', (tester) async {
       await tester.pumpWidget(getScopedWidget());
       final titleFinder = find.text('Contact Us'.tr());
-      var finder = find.byWidgetPredicate((w) => w is ListTile);
+      final finder = find.byWidgetPredicate((w) => w is ListTile);
       expect(find.byType(Scaffold), findsOneWidget);
       expect(titleFinder, findsOneWidget);
       expect(finder, findsAtLeastNWidgets(2));

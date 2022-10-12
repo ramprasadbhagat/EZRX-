@@ -4,15 +4,15 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
 
-  var fakeSearchText = 'fake-search-text';
-  var searchState = SearchState.initial();
+  const fakeSearchText = 'fake-search-text';
+  final searchState = SearchState.initial();
   
   group('Search Bloc', () {
     blocTest(
      'Search Text Changed Test',
       build: () => SearchBloc(),
       act: (SearchBloc bloc) {
-        bloc.add(SearchEvent.searchTextChanged(fakeSearchText));
+        bloc.add(const SearchEvent.searchTextChanged(fakeSearchText));
       },
       expect: ()=>[
         searchState.copyWith(
@@ -25,7 +25,7 @@ void main() {
      'Search on Submit/Done clicked Test',
       build: () => SearchBloc(),
       act: (SearchBloc bloc) {
-        bloc.add(SearchEvent.searchTextSubmitted(fakeSearchText));
+        bloc.add(const SearchEvent.searchTextSubmitted(fakeSearchText));
       },
       expect: ()=>[
         searchState.copyWith(

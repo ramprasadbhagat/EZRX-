@@ -89,7 +89,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
               if (e.isRefresh) {
                 finalCustomerCodeInfoList = customerCodeList;
               } else {
-                for (var customerData in customerCodeList) {
+                for (final customerData in customerCodeList) {
                   finalCustomerCodeInfoList.add(customerData);
                 }
               }

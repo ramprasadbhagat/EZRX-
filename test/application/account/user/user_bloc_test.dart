@@ -14,7 +14,7 @@ class UserRepoMock extends Mock implements UserRepository {}
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  UserRepository userRepoMock = UserRepoMock();
+  final UserRepository userRepoMock = UserRepoMock();
 
   group('User Bloc Testing', () {
     blocTest<UserBloc, UserState>(

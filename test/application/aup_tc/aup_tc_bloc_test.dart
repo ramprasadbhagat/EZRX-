@@ -47,7 +47,7 @@ void main() {
     salesOrgBloc = MockSalesOrgBloc();
     aupTcRepository = MockAupTcRepository();
     aupTcRepository = MockAupTcRepository();
-    TokenStorage tokenStorage = MockTokenStorage();
+    final TokenStorage tokenStorage = MockTokenStorage();
     when(() => tokenStorage.get())
         .thenAnswer((invocation) async => JWTDto(access: ''));
     user = await UserLocalDataSource(tokenStorage: tokenStorage).getUser();

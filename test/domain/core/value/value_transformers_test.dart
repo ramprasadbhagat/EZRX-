@@ -309,7 +309,7 @@ void main() {
       'should return boolean true when input String must not contain username Or name',
       () async {
         const input = 'Apple@1';
-        var user = User(
+        final user = User(
           id: '1',
           username: Username('choo'),
           email: EmailAddress('abc@gmail.com'),
@@ -335,7 +335,7 @@ void main() {
       'should return failure when input contains name (first name)',
       () async {
         const input = 'Appledipankar@2022';
-        var user = User(
+        final user = User(
           id: '1',
           username: Username('choo'),
           email: EmailAddress('abc@gmail.com'),
@@ -361,7 +361,7 @@ void main() {
       'should return failure when input contains name (last name)',
       () async {
         const input = 'Appledas@2022';
-        var user = User(
+        final user = User(
           id: '1',
           username: Username('choo'),
           email: EmailAddress('abc@gmail.com'),
@@ -387,7 +387,7 @@ void main() {
       'should return failure when input contains name (username)',
       () async {
         const input = 'Applechoo@2022';
-        var user = User(
+        final user = User(
           id: '1',
           username: Username('choo'),
           email: EmailAddress('abc@gmail.com'),

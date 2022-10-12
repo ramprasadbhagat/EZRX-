@@ -14,7 +14,7 @@ class AnnouncementMockRepo extends Mock implements AnnouncementRepository {}
 void main() {
   late AnnouncementRepository repository;
   late Announcement announcementMock;
-  var announcementState = AnnouncementState.initial();
+  final announcementState = AnnouncementState.initial();
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();

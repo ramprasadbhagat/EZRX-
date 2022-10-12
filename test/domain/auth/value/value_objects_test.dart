@@ -387,7 +387,7 @@ void main() {
       () async {
         const newPassword = 'Auron@2022!';
         const oldPassword = 'Auron@2022';
-        var user = User(
+        final user = User(
           id: '1',
           username: Username('choo'),
           email: EmailAddress('abc@gmail.com'),
@@ -416,7 +416,7 @@ void main() {
         const errorMessage = 'Enter New Password.';
         const newPassword = '';
         const oldPassword = 'Auron@2022';
-        var user = User(
+        final user = User(
           id: '1',
           username: Username('choo'),
           email: EmailAddress('abc@gmail.com'),
@@ -451,7 +451,7 @@ void main() {
         const errorMessage = 'Minimum length of 10 characters';
         const newPassword = 'Auron@222';
         const oldPassword = 'Auron@2022';
-        var user = User(
+        final user = User(
           id: '1',
           username: Username('choo'),
           email: EmailAddress('abc@gmail.com'),
@@ -486,7 +486,7 @@ void main() {
         const errorMessage = 'Contain at least 1 Upper case character (A to Z)';
         const newPassword = 'auron@2022!';
         const oldPassword = 'Auron@2022';
-        var user = User(
+        final user = User(
           id: '1',
           username: Username('choo'),
           email: EmailAddress('abc@gmail.com'),
@@ -521,7 +521,7 @@ void main() {
         const errorMessage = 'Contain at least 1 Lower case character (a to z)';
         const newPassword = 'AURON@2022!';
         const oldPassword = 'Auron@2022';
-        var user = User(
+        final user = User(
           id: '1',
           username: Username('choo'),
           email: EmailAddress('abc@gmail.com'),
@@ -556,7 +556,7 @@ void main() {
         const errorMessage = 'Contain at least a numeric character (0 to 9)';
         const newPassword = 'Auron@developer';
         const oldPassword = 'Auron@2022';
-        var user = User(
+        final user = User(
           id: '1',
           username: Username('choo'),
           email: EmailAddress('abc@gmail.com'),
@@ -592,7 +592,7 @@ void main() {
             'Contain at least one special character from the list (i.e. _ , # , ? , ! , @ , \$ , % , ^ , & , *, - )';
         const newPassword = 'Auron20222';
         const oldPassword = 'Auron@2022';
-        var user = User(
+        final user = User(
           id: '1',
           username: Username('choo'),
           email: EmailAddress('abc@gmail.com'),
@@ -628,7 +628,7 @@ void main() {
             'Must not contain any part of your username and/or name';
         const newPassword = 'Dipankar@2022';
         const oldPassword = 'Auron@2022';
-        var user = User(
+        final user = User(
           id: '1',
           username: Username('choo'),
           email: EmailAddress('abc@gmail.com'),
@@ -663,7 +663,7 @@ void main() {
         const errorMessage = 'New password cannot be same as old one';
         const newPassword = 'Auron@2022';
         const oldPassword = 'Auron@2022';
-        var user = User(
+        final user = User(
           id: '1',
           username: Username('choo'),
           email: EmailAddress('abc@gmail.com'),

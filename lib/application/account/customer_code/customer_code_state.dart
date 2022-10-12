@@ -22,7 +22,7 @@ class CustomerCodeState with _$CustomerCodeState {
 
   ShipToInfo? get defaultShipToInfo {
     if (haveShipToInfo) {
-      var index = customeCodeInfo.shipToInfos
+      final index = customeCodeInfo.shipToInfos
           .indexWhere((element) => element.defaultShipToAddress);
 
       return index == -1

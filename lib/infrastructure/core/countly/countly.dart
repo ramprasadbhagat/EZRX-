@@ -7,7 +7,7 @@ class CountlyService {
   }
 
   Future<void> addCountlyEvent(String keyValue, {dynamic segmentation}) async {
-    var event = {'key': keyValue, 'count': 1};
+    final event = {'key': keyValue, 'count': 1};
     if (segmentation != null) {
       event['segmentation'] = segmentation;
     }

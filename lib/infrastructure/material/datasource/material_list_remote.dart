@@ -60,7 +60,7 @@ class MaterialListRemoteDataSource {
         }),
       );
       _materialListExceptionChecker(res: res);
-      var finalData = res.data['data']['materialsWithMeta']['materials'];
+      final finalData = res.data['data']['materialsWithMeta']['materials'];
 
       return List.from(finalData)
           .map((e) => MaterialDto.fromJson(e).toDomain())
@@ -109,7 +109,7 @@ class MaterialListRemoteDataSource {
         }),
       );
       _materialListExceptionChecker(res: res);
-      var finalData =
+      final finalData =
           res.data['data']['customerMaterialsForSalesRep']['materials'];
 
       return List.from(finalData)

@@ -57,8 +57,7 @@ void main() {
   final mockShipToInfo = ShipToInfo.empty();
 
   late final List<MaterialInfo> materialListMock;
-  var materialState = MaterialListState.initial();
-  var fakeRole = 'fake-role';
+  final materialState = MaterialListState.initial();
   // var fakeUser = 'fake-user';
   // var shipTo = const ShipToInfo(
   //     defaultShipToAddress: false,

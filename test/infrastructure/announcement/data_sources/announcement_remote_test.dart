@@ -30,7 +30,7 @@ void main() {
     ),
   );
   final dioAdapter = DioAdapter(dio: dio);
-  var service = HttpService.mockDio(dio);
+  final service = HttpService.mockDio(dio);
 
   setUpAll(
     () {

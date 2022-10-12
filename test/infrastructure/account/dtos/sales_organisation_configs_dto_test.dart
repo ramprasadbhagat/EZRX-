@@ -17,20 +17,20 @@ void main() {
       );
     });
     test('Test toDomain', () {
-      var configs = SalesOrganisationConfigsDto.fromJson(
+      final configs = SalesOrganisationConfigsDto.fromJson(
         data['data']['salesOrgConfigs'][0],
       ).toDomain();
       expect(configs.currency, Currency('myr'));
     });
     test('Test fromDomain', () {
-      var configsDto = SalesOrganisationConfigsDto.fromDomain(
+      final configsDto = SalesOrganisationConfigsDto.fromDomain(
           SalesOrganisationConfigsDto.fromJson(
         data['data']['salesOrgConfigs'][0],
       ).toDomain());
       expect(configsDto.currency, 'myr');
     });
     test('Test toJson', () {
-      var configsDtoMap = SalesOrganisationConfigsDto.fromDomain(
+      final configsDtoMap = SalesOrganisationConfigsDto.fromDomain(
               SalesOrganisationConfigsDto.fromJson(
         data['data']['salesOrgConfigs'][0],
       ).toDomain())
