@@ -632,8 +632,6 @@ void setupLocator() {
     () => PaymentCustomerInformationBloc(
       paymentCustomerInformationRepository:
           locator<PaymentCustomerInformationRepository>(),
-      salesOrgBloc: locator<SalesOrgBloc>(),
-      customerCodeBloc: locator<CustomerCodeBloc>(),
     ),
   );
 

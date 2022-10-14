@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:ezrxmobile/config.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
@@ -26,7 +26,7 @@ class PaymentCustomerInformationRepository
   @override
   Future<Either<ApiFailure, PaymentCustomerInformation>>
       getPaymentCustomerInformation({
-    required SalesOrg salesOrg,
+    required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
   }) async {
     if (config.appFlavor == Flavor.mock) {
@@ -43,7 +43,7 @@ class PaymentCustomerInformationRepository
         final paymentCustomerInformation =
             await remoteDataSource.getPaymentCustomerInformation(
           customer: customerCodeInfo.customerCodeSoldTo,
-          salesOrganisation: salesOrg.getOrCrash(),
+          salesOrganisation: salesOrganisation.salesOrg.getOrCrash(),
         );
 
         return Right(paymentCustomerInformation);

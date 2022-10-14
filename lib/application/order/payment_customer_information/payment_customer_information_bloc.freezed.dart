@@ -19,19 +19,25 @@ mixin _$PaymentCustomerInformationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(CustomerCodeInfo customeCodeInfo,
+            SalesOrganisation salesOrganisation)
+        fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(CustomerCodeInfo customeCodeInfo,
+            SalesOrganisation salesOrganisation)?
+        fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(CustomerCodeInfo customeCodeInfo,
+            SalesOrganisation salesOrganisation)?
+        fetch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -116,7 +122,9 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(CustomerCodeInfo customeCodeInfo,
+            SalesOrganisation salesOrganisation)
+        fetch,
   }) {
     return initialized();
   }
@@ -125,7 +133,9 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(CustomerCodeInfo customeCodeInfo,
+            SalesOrganisation salesOrganisation)?
+        fetch,
   }) {
     return initialized?.call();
   }
@@ -134,7 +144,9 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(CustomerCodeInfo customeCodeInfo,
+            SalesOrganisation salesOrganisation)?
+        fetch,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -183,6 +195,11 @@ abstract class _Initialized implements PaymentCustomerInformationEvent {
 abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
+  $Res call(
+      {CustomerCodeInfo customeCodeInfo, SalesOrganisation salesOrganisation});
+
+  $CustomerCodeInfoCopyWith<$Res> get customeCodeInfo;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
 
 /// @nodoc
@@ -194,54 +211,110 @@ class __$$_FetchCopyWithImpl<$Res>
 
   @override
   _$_Fetch get _value => super._value as _$_Fetch;
+
+  @override
+  $Res call({
+    Object? customeCodeInfo = freezed,
+    Object? salesOrganisation = freezed,
+  }) {
+    return _then(_$_Fetch(
+      customeCodeInfo: customeCodeInfo == freezed
+          ? _value.customeCodeInfo
+          : customeCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      salesOrganisation: salesOrganisation == freezed
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+    ));
+  }
+
+  @override
+  $CustomerCodeInfoCopyWith<$Res> get customeCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customeCodeInfo, (value) {
+      return _then(_value.copyWith(customeCodeInfo: value));
+    });
+  }
+
+  @override
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  const _$_Fetch();
+  const _$_Fetch(
+      {required this.customeCodeInfo, required this.salesOrganisation});
+
+  @override
+  final CustomerCodeInfo customeCodeInfo;
+  @override
+  final SalesOrganisation salesOrganisation;
 
   @override
   String toString() {
-    return 'PaymentCustomerInformationEvent.fetch()';
+    return 'PaymentCustomerInformationEvent.fetch(customeCodeInfo: $customeCodeInfo, salesOrganisation: $salesOrganisation)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Fetch);
+        (other.runtimeType == runtimeType &&
+            other is _$_Fetch &&
+            const DeepCollectionEquality()
+                .equals(other.customeCodeInfo, customeCodeInfo) &&
+            const DeepCollectionEquality()
+                .equals(other.salesOrganisation, salesOrganisation));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(customeCodeInfo),
+      const DeepCollectionEquality().hash(salesOrganisation));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(CustomerCodeInfo customeCodeInfo,
+            SalesOrganisation salesOrganisation)
+        fetch,
   }) {
-    return fetch();
+    return fetch(customeCodeInfo, salesOrganisation);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(CustomerCodeInfo customeCodeInfo,
+            SalesOrganisation salesOrganisation)?
+        fetch,
   }) {
-    return fetch?.call();
+    return fetch?.call(customeCodeInfo, salesOrganisation);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(CustomerCodeInfo customeCodeInfo,
+            SalesOrganisation salesOrganisation)?
+        fetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch();
+      return fetch(customeCodeInfo, salesOrganisation);
     }
     return orElse();
   }
@@ -279,7 +352,15 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements PaymentCustomerInformationEvent {
-  const factory _Fetch() = _$_Fetch;
+  const factory _Fetch(
+      {required final CustomerCodeInfo customeCodeInfo,
+      required final SalesOrganisation salesOrganisation}) = _$_Fetch;
+
+  CustomerCodeInfo get customeCodeInfo;
+  SalesOrganisation get salesOrganisation;
+  @JsonKey(ignore: true)
+  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

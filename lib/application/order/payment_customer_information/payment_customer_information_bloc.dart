@@ -1,5 +1,5 @@
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -15,12 +15,8 @@ class PaymentCustomerInformationBloc extends Bloc<
     PaymentCustomerInformationEvent, PaymentCustomerInformationState> {
   final IPaymentCustomerInformationRepository
       paymentCustomerInformationRepository;
-  final CustomerCodeBloc customerCodeBloc;
-  final SalesOrgBloc salesOrgBloc;
   PaymentCustomerInformationBloc({
     required this.paymentCustomerInformationRepository,
-    required this.customerCodeBloc,
-    required this.salesOrgBloc,
   }) : super(PaymentCustomerInformationState.initial()) {
     on<PaymentCustomerInformationEvent>(_onEvent);
   }
@@ -34,8 +30,8 @@ class PaymentCustomerInformationBloc extends Bloc<
       fetch: (e) async {
         final failureOrSuccess = await paymentCustomerInformationRepository
             .getPaymentCustomerInformation(
-          salesOrg: salesOrgBloc.state.salesOrganisation.salesOrg,
-          customerCodeInfo: customerCodeBloc.state.customeCodeInfo,
+          salesOrganisation: e.salesOrganisation,
+          customerCodeInfo: e.customeCodeInfo,
         );
 
         failureOrSuccess.fold(
