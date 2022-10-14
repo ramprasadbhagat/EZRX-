@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -54,6 +55,13 @@ class SplashPage extends StatelessWidget {
                     SalesOrgEvent.selected(
                       salesOrganisation:
                           state.user.userSalesOrganisations.first,
+                    ),
+                  );
+            }
+            if (state.isSalesRep) {
+              context.read<SalesRepBloc>().add(
+                    SalesRepEvent.fetch(
+                      user:state.user,
                     ),
                   );
             }

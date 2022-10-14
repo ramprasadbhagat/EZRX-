@@ -492,7 +492,6 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => SalesRepBloc(
-      userBloc: locator<UserBloc>(),
       salesRepRepository: locator<SalesRepRepository>(),
     ),
   );

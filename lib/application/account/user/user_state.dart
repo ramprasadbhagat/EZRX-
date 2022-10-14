@@ -15,4 +15,5 @@ class UserState with _$UserState {
       );
 
   bool get haveSalesOrganisation => user.userSalesOrganisations.isNotEmpty;
+  bool get isSalesRep => user.role.type.isSalesRep;
 }

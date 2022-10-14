@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_representative_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/repository/i_sales_rep_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,19 +13,13 @@ part 'sales_rep_state.dart';
 part 'sales_rep_bloc.freezed.dart';
 
 class SalesRepBloc extends Bloc<SalesRepEvent, SalesRepState> {
-  final UserBloc userBloc;
   final ISalesRepRepository salesRepRepository;
-  late final StreamSubscription _userBlocSubscription;
   SalesRepBloc({
-    required this.userBloc,
     required this.salesRepRepository,
   }) : super(SalesRepState.initial()) {
     on<SalesRepEvent>(_onEvent);
-    _userBlocSubscription = userBloc.stream.listen((userBlocState) {
-      if (userBlocState.user.role.type.isSalesRep) {
-        add(const SalesRepEvent.fetch());
-      }
-    });
+    //in presentation layer (not implemented yet)
+    //if user role type is SalesRep, then add(const SalesRepEvent.fetch())
   }
   Future<void> _onEvent(
     SalesRepEvent event,
@@ -35,7 +29,7 @@ class SalesRepBloc extends Bloc<SalesRepEvent, SalesRepState> {
       initialized: (e) async => emit(SalesRepState.initial()),
       fetch: (e) async {
         final failureOrSuccess = await salesRepRepository.getSalesRepInfo(
-          userName: userBloc.state.user.username,
+          user: e.user,
         );
         failureOrSuccess.fold(
           (failure) {
@@ -54,13 +48,6 @@ class SalesRepBloc extends Bloc<SalesRepEvent, SalesRepState> {
         );
       },
     );
-  }
-
-  @override
-  Future<void> close() async {
-    await _userBlocSubscription.cancel();
-
-    return super.close();
   }
 
   @override

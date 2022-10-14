@@ -1,7 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_representative_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -14,36 +13,32 @@ import 'package:mocktail/mocktail.dart';
 
 class SalesRepRepositoryMock extends Mock implements SalesRepRepository {}
 
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
 void main() {
   late SalesRepRepository salesRepRepositoryMock;
-  late UserBloc userBlocMock;
+  late User userData;
+  setUpAll(() {
+    userData = User.empty().copyWith(username: Username('hjho'));
+  });
+
   group('Sales Rep Bloc Testing', () {
     setUp(() {
       salesRepRepositoryMock = SalesRepRepositoryMock();
-      userBlocMock = UserBlocMock();
     });
     blocTest<SalesRepBloc, SalesRepState>(
       'For "initialized" Event',
-      build: () => SalesRepBloc(
-          userBloc: userBlocMock, salesRepRepository: salesRepRepositoryMock),
+      build: () => SalesRepBloc(salesRepRepository: salesRepRepositoryMock),
       act: (bloc) => bloc.add(const SalesRepEvent.initialized()),
       expect: () => [SalesRepState.initial()],
     );
     blocTest<SalesRepBloc, SalesRepState>(
       'For "fetch" Event with error',
-      build: () => SalesRepBloc(
-          userBloc: userBlocMock, salesRepRepository: salesRepRepositoryMock),
+      build: () => SalesRepBloc(salesRepRepository: salesRepRepositoryMock),
       setUp: () {
-        when(() => userBlocMock.state).thenReturn(UserState.initial()
-            .copyWith(user: User.empty().copyWith(username: Username('hjho'))));
-        when(() =>
-            salesRepRepositoryMock.getSalesRepInfo(
-                userName: Username('hjho'))).thenAnswer(
-            (invocation) async => const Left(ApiFailure.other('Fake Error')));
+        when(() => salesRepRepositoryMock.getSalesRepInfo(user: userData))
+            .thenAnswer((invocation) async =>
+                const Left(ApiFailure.other('Fake Error')));
       },
-      act: (bloc) => bloc.add(const SalesRepEvent.fetch()),
+      act: (bloc) => bloc.add(SalesRepEvent.fetch(user: userData)),
       expect: () => [
         SalesRepState.initial().copyWith(
           salesRepFailureOrSuccessOption: optionOf(
@@ -56,19 +51,16 @@ void main() {
     );
     blocTest<SalesRepBloc, SalesRepState>(
       'For "fetch" Event with Data',
-      build: () => SalesRepBloc(
-          userBloc: userBlocMock, salesRepRepository: salesRepRepositoryMock),
+      build: () => SalesRepBloc(salesRepRepository: salesRepRepositoryMock),
       setUp: () {
-        when(() => userBlocMock.state).thenReturn(UserState.initial()
-            .copyWith(user: User.empty().copyWith(username: Username('hjho'))));
-        when(() => salesRepRepositoryMock.getSalesRepInfo(
-            userName: Username('hjho'))).thenAnswer(
+        when(() => salesRepRepositoryMock.getSalesRepInfo(user: userData))
+            .thenAnswer(
           (invocation) async => Right(
             SalesRepresentativeInfo.empty().copyWith(count: 2),
           ),
         );
       },
-      act: (bloc) => bloc.add(const SalesRepEvent.fetch()),
+      act: (bloc) => bloc.add(SalesRepEvent.fetch(user: userData)),
       expect: () => [
         SalesRepState.initial().copyWith(
           salesRepInfo: SalesRepresentativeInfo.empty().copyWith(count: 2),
@@ -78,23 +70,15 @@ void main() {
     );
     blocTest<SalesRepBloc, SalesRepState>(
       'For "Stream Listener"',
-      build: () => SalesRepBloc(
-          userBloc: userBlocMock, salesRepRepository: salesRepRepositoryMock),
+      build: () => SalesRepBloc(salesRepRepository: salesRepRepositoryMock),
       setUp: () {
-        when(() => userBlocMock.state).thenReturn(UserState.initial()
-            .copyWith(user: User.empty().copyWith(username: Username('hjho'))));
-        when(() => userBlocMock.stream).thenAnswer((invocation) {
-          return Stream.value(UserState.initial().copyWith(
-              user: User.empty().copyWith(
-                  username: Username('hjho'),
-                  role: Role.empty()
-                      .copyWith(type: RoleType('internal_sales_rep')))));
-        });
-        when(() => salesRepRepositoryMock.getSalesRepInfo(
-                userName: Username('hjho')))
+        userData=userData.copyWith(
+            role: Role.empty().copyWith(type: RoleType('internal_sales_rep')));
+        when(() => salesRepRepositoryMock.getSalesRepInfo(user: userData))
             .thenAnswer(
                 (invocation) async => Right(SalesRepresentativeInfo.empty()));
       },
+      act: (bloc) => bloc.add(SalesRepEvent.fetch(user: userData)),
       expect: () => [
         SalesRepState.initial().copyWith(
           salesRepInfo: SalesRepresentativeInfo.empty(),

@@ -1,8 +1,8 @@
 import 'package:ezrxmobile/config.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_representative_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/repository/i_sales_rep_repository.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_rep_local.dart';
@@ -21,9 +21,9 @@ class SalesRepRepository implements ISalesRepRepository {
 
   @override
   Future<Either<ApiFailure, SalesRepresentativeInfo>> getSalesRepInfo({
-    required Username userName,
+    required User user,
   }) async {
-    final usernameStr = userName.getOrCrash();
+    final usernameStr = user.username.getOrCrash();
     if (config.appFlavor == Flavor.mock) {
       try {
         final salesRep = await localDataSource.getSalesRepInfo(
