@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/core/search/search_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/material/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
@@ -69,8 +70,12 @@ import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
 import 'package:ezrxmobile/infrastructure/material/datasource/material_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/material/datasource/material_price_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
 import 'package:ezrxmobile/infrastructure/material/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/material/datasource/materials_query.dart';
@@ -280,6 +285,40 @@ void setupLocator() {
     ),
   );
 
+  //============================================================
+  //  Additional bonus
+  //
+  //============================================================
+  locator.registerLazySingleton(
+    () => BonusMaterialLocalDataSource(),
+  );
+
+  locator.registerLazySingleton(
+    () => BonusMaterialRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      bonusQueryMutation: locator<BonusMaterialQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => BonusMaterialQueryMutation(),
+  );
+
+  locator.registerLazySingleton(
+    () => BonusMaterialRepository(
+      appMethods: locator<AppMethods>(),
+      remoteDataSource: locator<BonusMaterialRemoteDataSource>(),
+      config: locator<Config>(),
+      localDataSource: locator<BonusMaterialLocalDataSource>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => BonusMaterialBloc(
+      bonusMaterialRepository: locator<BonusMaterialRepository>(),
+    ),
+  );
   //============================================================
   //  Favourite
   //

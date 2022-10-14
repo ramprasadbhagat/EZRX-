@@ -1,0 +1,104 @@
+{
+    "data": {
+      "customerMaterialsForSalesRep": {
+        "rawMetaData": {
+          "count": 3
+        },
+        "processedMetaData": {
+          "count": 0
+        },
+        "materials": [
+          {
+            "isSampleMaterial": false,
+            "principalCode": "0000100358",
+            "principalName": "MULTICARE PHARMACEUTICALS",
+            "materialNumber": "000000000013025897",
+            "materialDescription": "RHINODEC TABLET 100'S",
+            "therapeuticClass": "Multivitamins with minerals",
+            "itemBrand": "RHINODEC TABLET 100'"
+          },
+          {
+            "isSampleMaterial": false,
+            "principalCode": "0000100486",
+            "principalName": "RECKITT BENCKISER (SINGAPORE) PTE",
+            "materialNumber": "000000000021000054",
+            "materialDescription": "10010320 HIGH HEEL ISOLES 'S",
+            "therapeuticClass": "Non-IMS classified",
+            "itemBrand": "SCHOLL"
+          },
+          {
+            "isSampleMaterial": false,
+            "principalCode": "0000104047",
+            "principalName": "JOHNSON & JOHNSON (PHILIPPINES) INC",
+            "materialNumber": "000000000023298527",
+            "materialDescription": "3544300 SILTEX RND HI-PROF GEL CI 300CC",
+            "therapeuticClass": "All other non-therapeutic products",
+            "itemBrand": ""
+          },
+          {
+            "isSampleMaterial": false,
+            "principalCode": "0000100414",
+            "principalName": "ELI LILLY (PHILIPPINES),",
+            "materialNumber": "000000000021000166",
+            "materialDescription": "HUMULIN  70/30 HI-710 1'S_testinterface",
+            "therapeuticClass": "Human insulins+analogues itmd.& f.acting",
+            "itemBrand": "HUMULIN"
+          },
+          {
+            "isSampleMaterial": false,
+            "principalCode": "0000100486",
+            "principalName": "RECKITT BENCKISER (SINGAPORE) PTE",
+            "materialNumber": "000000000021000051",
+            "materialDescription": "10002180 BALL OF FOO CUSHIN 1'S",
+            "therapeuticClass": "Non-IMS classified",
+            "itemBrand": "SCHOLL"
+          },
+          {
+            "isSampleMaterial": false,
+            "principalCode": "0000100482",
+            "principalName": "FRESENIUS KABI PHILIPPINES INC.",
+            "materialNumber": "000000000013024938",
+            "materialDescription": "THICK&EASY6.5FSACH100SINSTFTHICKNR",
+            "therapeuticClass": "All other non-therapeutic products",
+            "itemBrand": "THICK&EASY"
+          },
+          {
+            "isSampleMaterial": false,
+            "principalCode": "0000100414",
+            "principalName": "ELI LILLY (PHILIPPINES),",
+            "materialNumber": "000000000021210621",
+            "materialDescription": "HUMULIN  70/30 HI-710 1'S",
+            "therapeuticClass": "Human insulins+analogues itmd.& f.acting",
+            "itemBrand": "HUMULIN"
+          },
+          {
+            "isSampleMaterial": false,
+            "principalCode": "0000100294",
+            "principalName": "JELMA PHILIPPINES INC.",
+            "materialNumber": "000000000013010127",
+            "materialDescription": "WHITE FLWRCLASS#51.5ML12S",
+            "therapeuticClass": "Other therapeutic preparations",
+            "itemBrand": "WHITEFLOWER  C#5"
+          },
+          {
+            "isSampleMaterial": false,
+            "principalCode": "0000100408",
+            "principalName": "ADVANCED NUTRITIONAL TECHNOLOGIES",
+            "materialNumber": "000000000023000793",
+            "materialDescription": "EASIYO YOGURT MAKER WHITE",
+            "therapeuticClass": "Emollients, protectives",
+            "itemBrand": "EASIYO YOGURT MAKER"
+          },
+          {
+            "isSampleMaterial": false,
+            "principalCode": "0000100482",
+            "principalName": "FRESENIUS KABI PHILIPPINES INC.",
+            "materialNumber": "000000000013024939",
+            "materialDescription": "THICK&EASY 227GCAN  INSTFDTHICKNR",
+            "therapeuticClass": "All other non-therapeutic products",
+            "itemBrand": "THICK&EASY"
+          } 
+        ]
+      }
+    }
+  }

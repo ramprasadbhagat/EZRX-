@@ -57,9 +57,25 @@ class FavouriteListTile extends StatelessWidget {
                               Icons.favorite,
                               color: ZPColors.secondary,
                             ),
-                            onPressed: () => context
-                                .read<FavouriteBloc>()
-                                .add(FavouriteEvent.delete(favourite)),
+                            onPressed: () async =>
+                                context.read<FavouriteBloc>().add(
+                                      FavouriteEvent.delete(favourite),
+                                    ),
+
+                            // context.read<BonusMaterialBloc>().add(
+                            //       BonusMaterialEvent.fetch(
+                            //         pickandpack: true,
+                            //         searchKey: '',
+                            //         user: User.empty(),
+                            //         configs:
+                            //             SalesOrganisationConfigs.empty(),
+                            //         customerInfo:
+                            //             SalesOrgCustomerInfo.empty(),
+                            //         shipInfo: SalesOrgShipToInfo.empty(),
+                            //         salesOrganisation:
+                            //             SalesOrganisation.empty(),
+                            //       ),
+                            //     ),
                           ),
                         ],
                       ),

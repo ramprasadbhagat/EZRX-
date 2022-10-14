@@ -10,27 +10,37 @@ part 'material_dto.g.dart';
 class MaterialDto with _$MaterialDto {
   const MaterialDto._();
   const factory MaterialDto({
-    @JsonKey(name: 'materialNumber') required String materialNumber,
-    @JsonKey(name: 'materialDescription') required String materialDescription,
-    @JsonKey(name: 'governmentMaterialCode')
+    @JsonKey(name: 'materialNumber', defaultValue: '')
+        required String materialNumber,
+    @JsonKey(name: 'materialDescription', defaultValue: '')
+        required String materialDescription,
+    @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
         required String governmentMaterialCode,
-    @JsonKey(name: 'therapeuticClass') required String therapeuticClass,
-    @JsonKey(name: 'itemBrand') required String itemBrand,
-    @JsonKey(name: 'principalName') required String principalName,
-    @JsonKey(name: 'principalCode') required String principalCode,
-    @JsonKey(name: 'taxClassification') required String taxClassification,
-    @JsonKey(name: 'itemRegistrationNumber')
+    @JsonKey(name: 'therapeuticClass', defaultValue: '')
+        required String therapeuticClass,
+    @JsonKey(name: 'itemBrand', defaultValue: '') required String itemBrand,
+    @JsonKey(name: 'principalName', defaultValue: '')
+        required String principalName,
+    @JsonKey(name: 'principalCode', defaultValue: '')
+        required String principalCode,
+    @JsonKey(name: 'taxClassification', defaultValue: '')
+        required String taxClassification,
+    @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
         required String itemRegistrationNumber,
-    @JsonKey(name: 'unitOfMeasurement') required String unitOfMeasurement,
-    @JsonKey(name: 'materialGroup2') required String materialGroup2,
-    @JsonKey(name: 'materialGroup4') required String materialGroup4,
-    @JsonKey(name: 'isSampleMaterial') required bool isSampleMaterial,
-    @JsonKey(name: 'hidePrice') required bool hidePrice,
+    @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
+        required String unitOfMeasurement,
+    @JsonKey(name: 'materialGroup2', defaultValue: '')
+        required String materialGroup2,
+    @JsonKey(name: 'materialGroup4', defaultValue: '')
+        required String materialGroup4,
+    @JsonKey(name: 'isSampleMaterial', defaultValue: false)
+        required bool isSampleMaterial,
+    @JsonKey(name: 'hidePrice', defaultValue: false) required bool hidePrice,
     @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
         required bool hasValidTenderContract,
     @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
         required bool hasMandatoryTenderContract,
-    @JsonKey(name: 'taxes') required List<String> taxes,
+    @JsonKey(name: 'taxes', defaultValue: []) required List<String> taxes,
   }) = _MaterialDto;
 
   factory MaterialDto.fromDomain(MaterialInfo materialInfo) {
