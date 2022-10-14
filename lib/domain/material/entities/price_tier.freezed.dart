@@ -1,0 +1,353 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+
+part of 'price_tier.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
+/// @nodoc
+mixin _$PriceTier {
+  String get tier => throw _privateConstructorUsedError;
+  List<PriceTierItem> get items => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $PriceTierCopyWith<PriceTier> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PriceTierCopyWith<$Res> {
+  factory $PriceTierCopyWith(PriceTier value, $Res Function(PriceTier) then) =
+      _$PriceTierCopyWithImpl<$Res>;
+  $Res call({String tier, List<PriceTierItem> items});
+}
+
+/// @nodoc
+class _$PriceTierCopyWithImpl<$Res> implements $PriceTierCopyWith<$Res> {
+  _$PriceTierCopyWithImpl(this._value, this._then);
+
+  final PriceTier _value;
+  // ignore: unused_field
+  final $Res Function(PriceTier) _then;
+
+  @override
+  $Res call({
+    Object? tier = freezed,
+    Object? items = freezed,
+  }) {
+    return _then(_value.copyWith(
+      tier: tier == freezed
+          ? _value.tier
+          : tier // ignore: cast_nullable_to_non_nullable
+              as String,
+      items: items == freezed
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<PriceTierItem>,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_PriceTierCopyWith<$Res> implements $PriceTierCopyWith<$Res> {
+  factory _$$_PriceTierCopyWith(
+          _$_PriceTier value, $Res Function(_$_PriceTier) then) =
+      __$$_PriceTierCopyWithImpl<$Res>;
+  @override
+  $Res call({String tier, List<PriceTierItem> items});
+}
+
+/// @nodoc
+class __$$_PriceTierCopyWithImpl<$Res> extends _$PriceTierCopyWithImpl<$Res>
+    implements _$$_PriceTierCopyWith<$Res> {
+  __$$_PriceTierCopyWithImpl(
+      _$_PriceTier _value, $Res Function(_$_PriceTier) _then)
+      : super(_value, (v) => _then(v as _$_PriceTier));
+
+  @override
+  _$_PriceTier get _value => super._value as _$_PriceTier;
+
+  @override
+  $Res call({
+    Object? tier = freezed,
+    Object? items = freezed,
+  }) {
+    return _then(_$_PriceTier(
+      tier: tier == freezed
+          ? _value.tier
+          : tier // ignore: cast_nullable_to_non_nullable
+              as String,
+      items: items == freezed
+          ? _value._items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<PriceTierItem>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_PriceTier extends _PriceTier {
+  const _$_PriceTier(
+      {required this.tier, required final List<PriceTierItem> items})
+      : _items = items,
+        super._();
+
+  @override
+  final String tier;
+  final List<PriceTierItem> _items;
+  @override
+  List<PriceTierItem> get items {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_items);
+  }
+
+  @override
+  String toString() {
+    return 'PriceTier(tier: $tier, items: $items)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PriceTier &&
+            const DeepCollectionEquality().equals(other.tier, tier) &&
+            const DeepCollectionEquality().equals(other._items, _items));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(tier),
+      const DeepCollectionEquality().hash(_items));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_PriceTierCopyWith<_$_PriceTier> get copyWith =>
+      __$$_PriceTierCopyWithImpl<_$_PriceTier>(this, _$identity);
+}
+
+abstract class _PriceTier extends PriceTier {
+  const factory _PriceTier(
+      {required final String tier,
+      required final List<PriceTierItem> items}) = _$_PriceTier;
+  const _PriceTier._() : super._();
+
+  @override
+  String get tier;
+  @override
+  List<PriceTierItem> get items;
+  @override
+  @JsonKey(ignore: true)
+  _$$_PriceTierCopyWith<_$_PriceTier> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$PriceTierItem {
+  String get type => throw _privateConstructorUsedError;
+  bool get applyBonus => throw _privateConstructorUsedError;
+  int get sequence => throw _privateConstructorUsedError;
+  int get quantity => throw _privateConstructorUsedError;
+  double get rate => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $PriceTierItemCopyWith<PriceTierItem> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PriceTierItemCopyWith<$Res> {
+  factory $PriceTierItemCopyWith(
+          PriceTierItem value, $Res Function(PriceTierItem) then) =
+      _$PriceTierItemCopyWithImpl<$Res>;
+  $Res call(
+      {String type, bool applyBonus, int sequence, int quantity, double rate});
+}
+
+/// @nodoc
+class _$PriceTierItemCopyWithImpl<$Res>
+    implements $PriceTierItemCopyWith<$Res> {
+  _$PriceTierItemCopyWithImpl(this._value, this._then);
+
+  final PriceTierItem _value;
+  // ignore: unused_field
+  final $Res Function(PriceTierItem) _then;
+
+  @override
+  $Res call({
+    Object? type = freezed,
+    Object? applyBonus = freezed,
+    Object? sequence = freezed,
+    Object? quantity = freezed,
+    Object? rate = freezed,
+  }) {
+    return _then(_value.copyWith(
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      applyBonus: applyBonus == freezed
+          ? _value.applyBonus
+          : applyBonus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      sequence: sequence == freezed
+          ? _value.sequence
+          : sequence // ignore: cast_nullable_to_non_nullable
+              as int,
+      quantity: quantity == freezed
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as int,
+      rate: rate == freezed
+          ? _value.rate
+          : rate // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_PriceTierItemCopyWith<$Res>
+    implements $PriceTierItemCopyWith<$Res> {
+  factory _$$_PriceTierItemCopyWith(
+          _$_PriceTierItem value, $Res Function(_$_PriceTierItem) then) =
+      __$$_PriceTierItemCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String type, bool applyBonus, int sequence, int quantity, double rate});
+}
+
+/// @nodoc
+class __$$_PriceTierItemCopyWithImpl<$Res>
+    extends _$PriceTierItemCopyWithImpl<$Res>
+    implements _$$_PriceTierItemCopyWith<$Res> {
+  __$$_PriceTierItemCopyWithImpl(
+      _$_PriceTierItem _value, $Res Function(_$_PriceTierItem) _then)
+      : super(_value, (v) => _then(v as _$_PriceTierItem));
+
+  @override
+  _$_PriceTierItem get _value => super._value as _$_PriceTierItem;
+
+  @override
+  $Res call({
+    Object? type = freezed,
+    Object? applyBonus = freezed,
+    Object? sequence = freezed,
+    Object? quantity = freezed,
+    Object? rate = freezed,
+  }) {
+    return _then(_$_PriceTierItem(
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      applyBonus: applyBonus == freezed
+          ? _value.applyBonus
+          : applyBonus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      sequence: sequence == freezed
+          ? _value.sequence
+          : sequence // ignore: cast_nullable_to_non_nullable
+              as int,
+      quantity: quantity == freezed
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as int,
+      rate: rate == freezed
+          ? _value.rate
+          : rate // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_PriceTierItem extends _PriceTierItem {
+  const _$_PriceTierItem(
+      {required this.type,
+      required this.applyBonus,
+      required this.sequence,
+      required this.quantity,
+      required this.rate})
+      : super._();
+
+  @override
+  final String type;
+  @override
+  final bool applyBonus;
+  @override
+  final int sequence;
+  @override
+  final int quantity;
+  @override
+  final double rate;
+
+  @override
+  String toString() {
+    return 'PriceTierItem(type: $type, applyBonus: $applyBonus, sequence: $sequence, quantity: $quantity, rate: $rate)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PriceTierItem &&
+            const DeepCollectionEquality().equals(other.type, type) &&
+            const DeepCollectionEquality()
+                .equals(other.applyBonus, applyBonus) &&
+            const DeepCollectionEquality().equals(other.sequence, sequence) &&
+            const DeepCollectionEquality().equals(other.quantity, quantity) &&
+            const DeepCollectionEquality().equals(other.rate, rate));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(type),
+      const DeepCollectionEquality().hash(applyBonus),
+      const DeepCollectionEquality().hash(sequence),
+      const DeepCollectionEquality().hash(quantity),
+      const DeepCollectionEquality().hash(rate));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_PriceTierItemCopyWith<_$_PriceTierItem> get copyWith =>
+      __$$_PriceTierItemCopyWithImpl<_$_PriceTierItem>(this, _$identity);
+}
+
+abstract class _PriceTierItem extends PriceTierItem {
+  const factory _PriceTierItem(
+      {required final String type,
+      required final bool applyBonus,
+      required final int sequence,
+      required final int quantity,
+      required final double rate}) = _$_PriceTierItem;
+  const _PriceTierItem._() : super._();
+
+  @override
+  String get type;
+  @override
+  bool get applyBonus;
+  @override
+  int get sequence;
+  @override
+  int get quantity;
+  @override
+  double get rate;
+  @override
+  @JsonKey(ignore: true)
+  _$$_PriceTierItemCopyWith<_$_PriceTierItem> get copyWith =>
+      throw _privateConstructorUsedError;
+}

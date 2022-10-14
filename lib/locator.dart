@@ -68,6 +68,7 @@ import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
 import 'package:ezrxmobile/infrastructure/material/datasource/material_list_remote.dart';
+import 'package:ezrxmobile/infrastructure/material/datasource/material_price_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
@@ -98,6 +99,11 @@ import 'package:local_auth/local_auth.dart';
 
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_query_mutation.dart';
+
+import 'package:ezrxmobile/application/material/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/infrastructure/material/datasource/material_price_local.dart';
+import 'package:ezrxmobile/infrastructure/material/datasource/material_price_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/material/repository/material_price_repository.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -703,6 +709,38 @@ void setupLocator() {
       userBloc: locator<UserBloc>(),
       salesRepBloc: locator<SalesRepBloc>(),
       paymentCustomerInformationBloc: locator<PaymentCustomerInformationBloc>(),
+    ),
+  );
+
+  //============================================================
+  //  Material Price
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => MaterialPriceQueryMutation());
+
+  locator.registerLazySingleton(() => MaterialPriceLocalDataSource());
+
+  locator.registerLazySingleton(
+    () => MaterialPriceRemoteDataSource(
+      httpService: locator<HttpService>(),
+      queryMutation: locator<MaterialPriceQueryMutation>(),
+      config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => MaterialPriceRepository(
+      config: locator<Config>(),
+      localDataSource: locator<MaterialPriceLocalDataSource>(),
+      remoteDataSource: locator<MaterialPriceRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => MaterialPriceBloc(
+      repository: locator<MaterialPriceRepository>(),
     ),
   );
 }

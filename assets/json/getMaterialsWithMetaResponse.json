@@ -5,7 +5,7 @@
           "count": 20869
         },
         "processedMetaData": {
-          "count": 11
+          "count": 10
         },
         "materials": [
           {
@@ -204,27 +204,6 @@
             "governmentMaterialCode": "",
             "principalName": "台灣羅氏醫療診斷設備(股)公司",
             "principalCode": "0000102004",
-            "therapeuticClass": "All other diagnostic tests",
-            "itemBrand": "Item not listed in I",
-            "taxClassification": "Product : Full Tax",
-            "itemRegistrationNumber": "NA",
-            "unitOfMeasurement": "EA",
-            "materialGroup2": "",
-            "materialGroup4": "OTH",
-            "taxes": [
-              "5"
-            ],
-            "hidePrice": false,
-            "hasValidTenderContract": null,
-            "hasMandatoryTenderContract": null
-          },
-          {
-            "materialNumber": "000000000023022682",
-            "isSampleMaterial": false,
-            "materialDescription": "#984 std-B(BP1218)",
-            "governmentMaterialCode": "",
-            "principalName": "台灣羅氏醫療診斷設備股份有限",
-            "principalCode": "0000100925",
             "therapeuticClass": "All other diagnostic tests",
             "itemBrand": "Item not listed in I",
             "taxClassification": "Product : Full Tax",

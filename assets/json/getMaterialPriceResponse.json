@@ -1,0 +1,235 @@
+{
+  "data": {
+    "price": [
+      {
+        "MaterialNumber": "000000000021026761",
+        "OverridenRulePresent": false,
+        "ZDP5MaxQuota": "",
+        "ZDP5RemainingQuota": "",
+        "ZMGDiscount": false,
+        "ListPrice": 220,
+        "FinalIndividualPrice": 220,
+        "FinalTotalPrice": 0,
+        "AdditionalBonusEligible": true,
+        "PriceRules": [
+          {
+            "Type": "SGD",
+            "Rate": 220,
+            "Conditions": "ZLP0 - A901 - 0070471303",
+            "BonusEligible": true,
+            "ConditionNumber": "0070471303"
+          }
+        ],
+        "Bonuses": [],
+        "TieredPricing": [],
+        "Bundles": [],
+        "Valid": true
+      },
+      {
+        "MaterialNumber": "000000000026176030",
+        "OverridenRulePresent": false,
+        "ZDP5MaxQuota": "",
+        "ZDP5RemainingQuota": "",
+        "ZMGDiscount": false,
+        "ListPrice": 588.6,
+        "FinalIndividualPrice": 588.6,
+        "FinalTotalPrice": 0,
+        "AdditionalBonusEligible": true,
+        "PriceRules": [
+          {
+            "Type": "SGD",
+            "Rate": 588.6,
+            "Conditions": "ZLP0 - A901 - 0065263458",
+            "BonusEligible": true,
+            "ConditionNumber": "0065263458"
+          }
+        ],
+        "Bonuses": [],
+        "TieredPricing": [],
+        "Bundles": [],
+        "Valid": true
+      },
+      {
+        "MaterialNumber": "000000000023168451",
+        "OverridenRulePresent": false,
+        "ZDP5MaxQuota": "",
+        "ZDP5RemainingQuota": "",
+        "ZMGDiscount": false,
+        "ListPrice": 7,
+        "FinalIndividualPrice": 7,
+        "FinalTotalPrice": 0,
+        "AdditionalBonusEligible": true,
+        "PriceRules": [
+          {
+            "Type": "SGD",
+            "Rate": 7,
+            "Conditions": "ZLP0 - A901 - 0065263502",
+            "BonusEligible": true,
+            "ConditionNumber": "0065263502"
+          }
+        ],
+        "Bonuses": [],
+        "TieredPricing": [],
+        "Bundles": [],
+        "Valid": true
+      },
+      {
+        "MaterialNumber": "000000000023167583",
+        "OverridenRulePresent": false,
+        "ZDP5MaxQuota": "",
+        "ZDP5RemainingQuota": "",
+        "ZMGDiscount": false,
+        "ListPrice": 225,
+        "FinalIndividualPrice": 225,
+        "FinalTotalPrice": 0,
+        "AdditionalBonusEligible": true,
+        "PriceRules": [
+          {
+            "Type": "SGD",
+            "Rate": 225,
+            "Conditions": "ZLP0 - A901 - 0041867608",
+            "BonusEligible": true,
+            "ConditionNumber": "0041867608"
+          }
+        ],
+        "Bonuses": [],
+        "TieredPricing": [],
+        "Bundles": [],
+        "Valid": true
+      },
+      {
+        "MaterialNumber": "000000000023167634",
+        "OverridenRulePresent": false,
+        "ZDP5MaxQuota": "",
+        "ZDP5RemainingQuota": "",
+        "ZMGDiscount": false,
+        "ListPrice": 480,
+        "FinalIndividualPrice": 480,
+        "FinalTotalPrice": 0,
+        "AdditionalBonusEligible": true,
+        "PriceRules": [
+          {
+            "Type": "SGD",
+            "Rate": 480,
+            "Conditions": "ZLP0 - A901 - 0070471340",
+            "BonusEligible": true,
+            "ConditionNumber": "0070471340"
+          }
+        ],
+        "Bonuses": [],
+        "TieredPricing": [],
+        "Bundles": [],
+        "Valid": true
+      },
+      {
+        "MaterialNumber": "000000000021091528",
+        "OverridenRulePresent": false,
+        "ZDP5MaxQuota": "",
+        "ZDP5RemainingQuota": "",
+        "ZMGDiscount": false,
+        "ListPrice": 400,
+        "FinalIndividualPrice": 400,
+        "FinalTotalPrice": 0,
+        "AdditionalBonusEligible": true,
+        "PriceRules": [
+          {
+            "Type": "SGD",
+            "Rate": 400,
+            "Conditions": "ZLP0 - A901 - 0040379505",
+            "BonusEligible": true,
+            "ConditionNumber": "0040379505"
+          }
+        ],
+        "Bonuses": [],
+        "TieredPricing": [],
+        "Bundles": [],
+        "Valid": true
+      },
+      {
+        "MaterialNumber": "000000000023270009",
+        "OverridenRulePresent": false,
+        "ZDP5MaxQuota": "",
+        "ZDP5RemainingQuota": "",
+        "ZMGDiscount": false,
+        "ListPrice": 7,
+        "FinalIndividualPrice": 7,
+        "FinalTotalPrice": 0,
+        "AdditionalBonusEligible": true,
+        "PriceRules": [
+          {
+            "Type": "SGD",
+            "Rate": 7,
+            "Conditions": "ZLP0 - A901 - 0068029229",
+            "BonusEligible": true,
+            "ConditionNumber": "0068029229"
+          }
+        ],
+        "Bonuses": [],
+        "TieredPricing": [],
+        "Bundles": [],
+        "Valid": true
+      },
+      {
+        "MaterialNumber": "000000000023340340",
+        "OverridenRulePresent": false,
+        "ZDP5MaxQuota": "",
+        "ZDP5RemainingQuota": "",
+        "ZMGDiscount": false,
+        "ListPrice": 220,
+        "FinalIndividualPrice": 220,
+        "FinalTotalPrice": 0,
+        "AdditionalBonusEligible": true,
+        "PriceRules": [
+          {
+            "Type": "SGD",
+            "Rate": 220,
+            "Conditions": "ZLP0 - A901 - 0044334258",
+            "BonusEligible": true,
+            "ConditionNumber": "0044334258"
+          }
+        ],
+        "Bonuses": [],
+        "TieredPricing": [],
+        "Bundles": [],
+        "Valid": true
+      },
+      {
+        "MaterialNumber": "000000000023270018",
+        "OverridenRulePresent": false,
+        "ZDP5MaxQuota": "",
+        "ZDP5RemainingQuota": "",
+        "ZMGDiscount": false,
+        "ListPrice": 901,
+        "FinalIndividualPrice": 901,
+        "FinalTotalPrice": 0,
+        "AdditionalBonusEligible": false,
+        "PriceRules": [
+          {
+            "Type": "SGD",
+            "Rate": 901,
+            "Conditions": "ZLP0 - A901 - 0068068150",
+            "BonusEligible": false,
+            "ConditionNumber": "0068068150"
+          }
+        ],
+        "Bonuses": [],
+        "TieredPricing": [
+          {
+            "Tier": "C",
+            "PriceTier": [
+              {
+                "ApplyBonus": false,
+                "Sequence": 0,
+                "Quantity": 1,
+                "Type": "",
+                "Rate": 901
+              }
+            ]
+          }
+        ],
+        "Bundles": [],
+        "Valid": true
+      }
+    ]
+  }
+}

@@ -1,7 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/material/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/material/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/material/entities/material_info.dart';
@@ -36,32 +39,50 @@ class MaterialListPage extends StatelessWidget {
       ),
       body: BlocConsumer<MaterialListBloc, MaterialListState>(
         listenWhen: (previous, current) =>
+            previous.nextPageIndex != current.nextPageIndex ||
             previous.apiFailureOrSuccessOption !=
-            current.apiFailureOrSuccessOption,
+                current.apiFailureOrSuccessOption,
         listener: (context, state) {
-          state.apiFailureOrSuccessOption.fold(
-            () {},
-            (either) => either.fold(
-              (failure) {
-                final failureMessage = failure.failureMessage;
-                showSnackBar(
-                  context: context,
-                  message: failureMessage.tr(),
+          if (state.materialList.isNotEmpty) {
+            context.read<MaterialPriceBloc>().add(
+                  MaterialPriceEvent.fetch(
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    customerCode:
+                        context.read<CustomerCodeBloc>().state.customeCodeInfo,
+                    materialNumbers: state.materialList
+                        .map(
+                          (e) => e.materialNumber,
+                        )
+                        .toList(),
+                  ),
                 );
-              },
-              (_) {
-                context.read<AuthBloc>().add(const AuthEvent.authCheck());
-              },
-            ),
-          );
+          }
+          if (state.apiFailureOrSuccessOption.isSome()) {
+            state.apiFailureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  final failureMessage = failure.failureMessage;
+                  showSnackBar(
+                    context: context,
+                    message: failureMessage.tr(),
+                  );
+                },
+                (_) {
+                  context.read<AuthBloc>().add(
+                        const AuthEvent.authCheck(),
+                      );
+                },
+              ),
+            );
+          }
         },
         buildWhen: (previous, current) =>
             previous.isFetching != current.isFetching,
         builder: (context, state) {
-          return Column(
-            children: [
-              _BodyContent(materialListState: state),
-            ],
+          return _BodyContent(
+            materialListState: state,
           );
         },
       ),
@@ -78,31 +99,34 @@ class _BodyContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child:
-          materialListState.isFetching && materialListState.materialList.isEmpty
-              ? LoadingShimmer.withChild(
-                  child: Image.asset(
-                    'assets/images/ezrxlogo.png',
-                    key: const Key('loaderImage'),
-                    width: 80,
-                    height: 80,
-                  ),
-                )
-              : ScrollList<MaterialInfo>(
-                  emptyMessage: 'No material found',
-                  onRefresh: () => context.read<MaterialListBloc>().add(
-                        const MaterialListEvent.fetch(),
-                      ),
-                  onLoadingMore: () => context.read<MaterialListBloc>().add(
-                        const MaterialListEvent.loadMore(),
-                      ),
-                  isLoading: materialListState.isFetching,
-                  itemBuilder: (context, index, item) =>
-                      _ListContent(materialInfo: item),
-                  items: materialListState.materialList,
+    return materialListState.isFetching &&
+            materialListState.materialList.isEmpty
+        ? LoadingShimmer.withChild(
+            child: Image.asset(
+              'assets/images/ezrxlogo.png',
+              key: const Key('loaderImage'),
+              width: 80,
+              height: 80,
+            ),
+          )
+        : ScrollList<MaterialInfo>(
+            emptyMessage: 'No material found',
+            onRefresh: () {
+              context.read<MaterialPriceBloc>().add(
+                    const MaterialPriceEvent.initialized(),
+                  );
+              context.read<MaterialListBloc>().add(
+                    const MaterialListEvent.fetch(),
+                  );
+            },
+            onLoadingMore: () => context.read<MaterialListBloc>().add(
+                  const MaterialListEvent.loadMore(),
                 ),
-    );
+            isLoading: materialListState.isFetching,
+            itemBuilder: (context, index, item) =>
+                _ListContent(materialInfo: item),
+            items: materialListState.materialList,
+          );
   }
 }
 
@@ -129,6 +153,44 @@ class _ListContent extends StatelessWidget {
             Text(
               materialInfo.principalData.principalName,
               style: Theme.of(context).textTheme.bodyText2,
+            ),
+            BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
+              buildWhen: (previous, current) =>
+                  previous.isFetching != current.isFetching,
+              builder: (context, state) {
+                final itemPrice =
+                    state.materialPrice[materialInfo.materialNumber];
+
+                if (itemPrice != null) {
+                  final currentCurrency =
+                      context.read<SalesOrgBloc>().state.configs.currency;
+
+                  return Text(
+                    '${'Unit Price: '.tr()}${itemPrice.finalPrice.displayWithCurrency(currentCurrency)}',
+                    style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      color: ZPColors.primary,
+                    ),
+                  );
+                }
+                if (state.isFetching) {
+                  return SizedBox(
+                    key: const Key('price-loading'),
+                    width: 40,
+                    child: LoadingShimmer.tile(),
+                  );
+                }
+
+                return Text(
+                  '${'Unit Price: '.tr()}NA',
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: ZPColors.primary,
+                  ),
+                );
+              },
             ),
           ],
         ),

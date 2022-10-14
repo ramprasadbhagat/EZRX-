@@ -101,5 +101,9 @@ class Currency extends ValueObject<String> {
     return currencySymbol(value.getOrElse(() => ''));
   }
 
+  bool get isVN {
+    return value.getOrElse(() => '') == 'vnd';
+  }
+
   const Currency._(this.value);
 }

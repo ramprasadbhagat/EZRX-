@@ -30,6 +30,19 @@ class _ScrollListState<T> extends State<ScrollList<T>> {
   final ScrollController _controller = ScrollController();
 
   @override
+  void initState() {
+    _controller.addListener(
+      () {
+        if (_controller.position.pixels >=
+            _controller.position.maxScrollExtent) {
+          widget.onLoadingMore.call();
+        }
+      },
+    );
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
@@ -42,15 +55,7 @@ class _ScrollListState<T> extends State<ScrollList<T>> {
       onRefresh: () async => widget.onRefresh.call(),
       child: CustomScrollView(
         key: const Key('scrollList'),
-        controller: _controller
-          ..addListener(
-            () {
-              if (_controller.position.pixels >=
-                  _controller.position.maxScrollExtent) {
-                widget.onLoadingMore.call();
-              }
-            },
-          ),
+        controller: _controller,
         physics: const AlwaysScrollableScrollPhysics(),
         slivers: [
           widget.items.isEmpty && !widget.isLoading

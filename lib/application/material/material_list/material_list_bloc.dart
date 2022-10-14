@@ -83,7 +83,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           customerCodeInfo: customerCodeBloc.state.customeCodeInfo,
           shipToInfo: shipToCodeBloc.state.shipToInfo,
           pageSize: _pageSize,
-          offset: state.nextPageIndex,
+          offset: 0,
           orderBy: 'materialDescription_asc',
           searchKey: state.searchKey,
         );

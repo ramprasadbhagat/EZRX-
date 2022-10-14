@@ -9,8 +9,13 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/core/search/search_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/material/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/material/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/material/entities/material_info.dart';
+import 'package:ezrxmobile/domain/material/entities/price.dart';
 import 'package:ezrxmobile/domain/material/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/material/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -46,6 +51,10 @@ class MockFavouriteBloc extends MockBloc<FavouriteEvent, FavouriteState>
 
 class AutoRouterMock extends Mock implements AppRouter {}
 
+class MaterialPriceBlocMock
+    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
+    implements MaterialPriceBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialListBloc materialListBlocMock;
@@ -56,6 +65,9 @@ void main() {
   late UserBloc userBlocMock;
   late AppRouter autoRouterMock;
   late MockFavouriteBloc mockFavouriteBloc;
+  late MaterialPriceBloc materialPriceBlocMock;
+
+  final fakeMaterialNumber = MaterialNumber('000000000023168451');
 
   setUpAll(() async {
     setupLocator();
@@ -70,6 +82,7 @@ void main() {
       shipToCodeBlocMock = ShipToCodeMockBloc();
       userBlocMock = UserMockBloc();
       mockFavouriteBloc = MockFavouriteBloc();
+      materialPriceBlocMock = MaterialPriceBlocMock();
       autoRouterMock = locator<AppRouter>();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -77,6 +90,8 @@ void main() {
           .thenReturn(CustomerCodeState.initial());
       when(() => searchBlocMock.state).thenReturn(SearchState.initial());
       when(() => mockFavouriteBloc.state).thenReturn(FavouriteState.initial());
+      when(() => materialPriceBlocMock.state)
+          .thenReturn(MaterialPriceState.initial());
     });
 
     Widget getScopedWidget(Widget child) {
@@ -104,6 +119,8 @@ void main() {
                 create: ((context) => materialListBlocMock)),
             BlocProvider<FavouriteBloc>(
                 create: ((context) => mockFavouriteBloc)),
+            BlocProvider<MaterialPriceBloc>(
+                create: ((context) => materialPriceBlocMock)),
           ],
           child: child,
         ),
@@ -161,9 +178,10 @@ void main() {
         MaterialListState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
           isFetching: false,
+          nextPageIndex: 2,
           materialList: <MaterialInfo>[
             MaterialInfo(
-              materialNumber: MaterialNumber('000000000023168451'),
+              materialNumber: fakeMaterialNumber,
               materialDescription: "Reag Cup 15ml 1'S",
               governmentMaterialCode: '',
               therapeuticClass: 'All other non-therapeutic products',
@@ -218,6 +236,134 @@ void main() {
       expect(materialList, findsOneWidget);
       final noRecordFound = find.text('No material found');
       expect(noRecordFound, findsOneWidget);
+    });
+
+    testWidgets('Start to fetch price', (tester) async {
+      final fakeMaterial = MaterialInfo.empty().copyWith(
+        materialNumber: MaterialNumber('fake-number'),
+      );
+      final fakeCustomerCodeInfo =
+          CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: 'fake-code');
+      final fakeSalesOrg = SalesOrganisation.empty().copyWith(
+        salesOrg: SalesOrg('fake-name'),
+      );
+      final expectedState = [
+        MaterialListState.initial().copyWith(
+          nextPageIndex: 2,
+          materialList: [fakeMaterial],
+        )
+      ];
+      when(() => materialListBlocMock.state).thenReturn(
+        MaterialListState.initial(),
+      );
+      whenListen(
+        materialListBlocMock,
+        Stream.fromIterable(expectedState),
+      );
+      when(() => customerCodeBlocMock.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          customeCodeInfo: fakeCustomerCodeInfo,
+        ),
+      );
+      when(() => salesOrgBlocMock.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          salesOrganisation: fakeSalesOrg,
+        ),
+      );
+      await tester.pumpWidget(
+        getScopedWidget(
+          const MaterialListPage(),
+        ),
+      );
+      await tester.pump();
+
+      expect(customerCodeBlocMock.state.customeCodeInfo, fakeCustomerCodeInfo);
+      expect(salesOrgBlocMock.state.salesOrganisation, fakeSalesOrg);
+
+      verify(() => materialPriceBlocMock.add(MaterialPriceEvent.fetch(
+          customerCode: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrg,
+          materialNumbers: [MaterialNumber('fake-number')]))).called(1);
+    });
+
+    testWidgets('Material List show price properly', (tester) async {
+      final expectedState = [
+        MaterialListState.initial().copyWith(isFetching: true),
+        MaterialListState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          isFetching: false,
+          nextPageIndex: 2,
+          materialList: <MaterialInfo>[
+            MaterialInfo.empty().copyWith(materialNumber: fakeMaterialNumber)
+          ],
+        )
+      ];
+      when(() => materialListBlocMock.state)
+          .thenReturn(MaterialListState.initial());
+      whenListen(materialListBlocMock, Stream.fromIterable(expectedState));
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          isFetching: false,
+          materialPrice: {
+            fakeMaterialNumber: Price.empty().copyWith(
+              finalPrice: MaterialPrice(10),
+            )
+          },
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
+      await tester.pump();
+      final materialList = find.byKey(const Key('scrollList'));
+      expect(materialList, findsOneWidget);
+      await tester.drag(materialList, const Offset(0.0, -300));
+      await tester.pump();
+      final listContent = find.byKey(Key(
+          'materialOption${materialListBlocMock.state.materialList.first.materialNumber.getOrCrash()}'));
+      expect(listContent, findsOneWidget);
+      await tester.pump();
+      final price = find.text('${'Unit Price: '.tr()}\$10');
+      expect(price, findsOneWidget);
+    });
+
+    testWidgets('Material List show loading price', (tester) async {
+      final expectedState = [
+        MaterialListState.initial().copyWith(isFetching: true),
+        MaterialListState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          isFetching: false,
+          nextPageIndex: 2,
+          materialList: <MaterialInfo>[
+            MaterialInfo.empty().copyWith(materialNumber: fakeMaterialNumber)
+          ],
+        )
+      ];
+      when(() => materialListBlocMock.state)
+          .thenReturn(MaterialListState.initial());
+      whenListen(materialListBlocMock, Stream.fromIterable(expectedState));
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          isFetching: true,
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
+      await tester.pump();
+      final materialList = find.byKey(const Key('scrollList'));
+      expect(materialList, findsOneWidget);
+      await tester.drag(materialList, const Offset(0.0, -300));
+      await tester.pump();
+      final listContent = find.byKey(Key(
+          'materialOption${materialListBlocMock.state.materialList.first.materialNumber.getOrCrash()}'));
+      expect(listContent, findsOneWidget);
+      await tester.pump();
+      final loadingIndicator = find.byKey(const Key('price-loading'));
+      expect(loadingIndicator, findsOneWidget);
+
+      await tester.fling(listContent, const Offset(0, 300), 600);
+      await tester.pump(const Duration(seconds: 1));
+      await tester.pump(const Duration(seconds: 1));
+      verify(() =>
+              materialPriceBlocMock.add(const MaterialPriceEvent.initialized()))
+          .called(1);
     });
   });
 }

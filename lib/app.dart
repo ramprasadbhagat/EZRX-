@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/core/search/search_bloc.dart';
 import 'package:ezrxmobile/application/material/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/material/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
@@ -146,6 +147,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<AupTcBloc>(
           create: (context) => locator<AupTcBloc>(),
+        ),
+        BlocProvider<MaterialPriceBloc>(
+          create: (context) => locator<MaterialPriceBloc>(),
         ),
       ],
       child: MaterialApp.router(

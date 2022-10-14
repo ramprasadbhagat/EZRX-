@@ -1,0 +1,276 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+
+part of 'price_rule_dto.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
+PriceRuleDto _$PriceRuleDtoFromJson(Map<String, dynamic> json) {
+  return _PriceRuleDto.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PriceRuleDto {
+  @JsonKey(name: 'Type', defaultValue: '')
+  String get type => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Rate', defaultValue: 0)
+  double get rate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Conditions', defaultValue: '')
+  String get condition => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ConditionNumber', defaultValue: '')
+  String get conditionNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'BonusEligible', defaultValue: false)
+  bool get bonusEligible => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PriceRuleDtoCopyWith<PriceRuleDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PriceRuleDtoCopyWith<$Res> {
+  factory $PriceRuleDtoCopyWith(
+          PriceRuleDto value, $Res Function(PriceRuleDto) then) =
+      _$PriceRuleDtoCopyWithImpl<$Res>;
+  $Res call(
+      {@JsonKey(name: 'Type', defaultValue: '')
+          String type,
+      @JsonKey(name: 'Rate', defaultValue: 0)
+          double rate,
+      @JsonKey(name: 'Conditions', defaultValue: '')
+          String condition,
+      @JsonKey(name: 'ConditionNumber', defaultValue: '')
+          String conditionNumber,
+      @JsonKey(name: 'BonusEligible', defaultValue: false)
+          bool bonusEligible});
+}
+
+/// @nodoc
+class _$PriceRuleDtoCopyWithImpl<$Res> implements $PriceRuleDtoCopyWith<$Res> {
+  _$PriceRuleDtoCopyWithImpl(this._value, this._then);
+
+  final PriceRuleDto _value;
+  // ignore: unused_field
+  final $Res Function(PriceRuleDto) _then;
+
+  @override
+  $Res call({
+    Object? type = freezed,
+    Object? rate = freezed,
+    Object? condition = freezed,
+    Object? conditionNumber = freezed,
+    Object? bonusEligible = freezed,
+  }) {
+    return _then(_value.copyWith(
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      rate: rate == freezed
+          ? _value.rate
+          : rate // ignore: cast_nullable_to_non_nullable
+              as double,
+      condition: condition == freezed
+          ? _value.condition
+          : condition // ignore: cast_nullable_to_non_nullable
+              as String,
+      conditionNumber: conditionNumber == freezed
+          ? _value.conditionNumber
+          : conditionNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      bonusEligible: bonusEligible == freezed
+          ? _value.bonusEligible
+          : bonusEligible // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_PriceRuleDtoCopyWith<$Res>
+    implements $PriceRuleDtoCopyWith<$Res> {
+  factory _$$_PriceRuleDtoCopyWith(
+          _$_PriceRuleDto value, $Res Function(_$_PriceRuleDto) then) =
+      __$$_PriceRuleDtoCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {@JsonKey(name: 'Type', defaultValue: '')
+          String type,
+      @JsonKey(name: 'Rate', defaultValue: 0)
+          double rate,
+      @JsonKey(name: 'Conditions', defaultValue: '')
+          String condition,
+      @JsonKey(name: 'ConditionNumber', defaultValue: '')
+          String conditionNumber,
+      @JsonKey(name: 'BonusEligible', defaultValue: false)
+          bool bonusEligible});
+}
+
+/// @nodoc
+class __$$_PriceRuleDtoCopyWithImpl<$Res>
+    extends _$PriceRuleDtoCopyWithImpl<$Res>
+    implements _$$_PriceRuleDtoCopyWith<$Res> {
+  __$$_PriceRuleDtoCopyWithImpl(
+      _$_PriceRuleDto _value, $Res Function(_$_PriceRuleDto) _then)
+      : super(_value, (v) => _then(v as _$_PriceRuleDto));
+
+  @override
+  _$_PriceRuleDto get _value => super._value as _$_PriceRuleDto;
+
+  @override
+  $Res call({
+    Object? type = freezed,
+    Object? rate = freezed,
+    Object? condition = freezed,
+    Object? conditionNumber = freezed,
+    Object? bonusEligible = freezed,
+  }) {
+    return _then(_$_PriceRuleDto(
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      rate: rate == freezed
+          ? _value.rate
+          : rate // ignore: cast_nullable_to_non_nullable
+              as double,
+      condition: condition == freezed
+          ? _value.condition
+          : condition // ignore: cast_nullable_to_non_nullable
+              as String,
+      conditionNumber: conditionNumber == freezed
+          ? _value.conditionNumber
+          : conditionNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      bonusEligible: bonusEligible == freezed
+          ? _value.bonusEligible
+          : bonusEligible // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_PriceRuleDto extends _PriceRuleDto {
+  const _$_PriceRuleDto(
+      {@JsonKey(name: 'Type', defaultValue: '')
+          required this.type,
+      @JsonKey(name: 'Rate', defaultValue: 0)
+          required this.rate,
+      @JsonKey(name: 'Conditions', defaultValue: '')
+          required this.condition,
+      @JsonKey(name: 'ConditionNumber', defaultValue: '')
+          required this.conditionNumber,
+      @JsonKey(name: 'BonusEligible', defaultValue: false)
+          required this.bonusEligible})
+      : super._();
+
+  factory _$_PriceRuleDto.fromJson(Map<String, dynamic> json) =>
+      _$$_PriceRuleDtoFromJson(json);
+
+  @override
+  @JsonKey(name: 'Type', defaultValue: '')
+  final String type;
+  @override
+  @JsonKey(name: 'Rate', defaultValue: 0)
+  final double rate;
+  @override
+  @JsonKey(name: 'Conditions', defaultValue: '')
+  final String condition;
+  @override
+  @JsonKey(name: 'ConditionNumber', defaultValue: '')
+  final String conditionNumber;
+  @override
+  @JsonKey(name: 'BonusEligible', defaultValue: false)
+  final bool bonusEligible;
+
+  @override
+  String toString() {
+    return 'PriceRuleDto(type: $type, rate: $rate, condition: $condition, conditionNumber: $conditionNumber, bonusEligible: $bonusEligible)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PriceRuleDto &&
+            const DeepCollectionEquality().equals(other.type, type) &&
+            const DeepCollectionEquality().equals(other.rate, rate) &&
+            const DeepCollectionEquality().equals(other.condition, condition) &&
+            const DeepCollectionEquality()
+                .equals(other.conditionNumber, conditionNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.bonusEligible, bonusEligible));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(type),
+      const DeepCollectionEquality().hash(rate),
+      const DeepCollectionEquality().hash(condition),
+      const DeepCollectionEquality().hash(conditionNumber),
+      const DeepCollectionEquality().hash(bonusEligible));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_PriceRuleDtoCopyWith<_$_PriceRuleDto> get copyWith =>
+      __$$_PriceRuleDtoCopyWithImpl<_$_PriceRuleDto>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_PriceRuleDtoToJson(
+      this,
+    );
+  }
+}
+
+abstract class _PriceRuleDto extends PriceRuleDto {
+  const factory _PriceRuleDto(
+      {@JsonKey(name: 'Type', defaultValue: '')
+          required final String type,
+      @JsonKey(name: 'Rate', defaultValue: 0)
+          required final double rate,
+      @JsonKey(name: 'Conditions', defaultValue: '')
+          required final String condition,
+      @JsonKey(name: 'ConditionNumber', defaultValue: '')
+          required final String conditionNumber,
+      @JsonKey(name: 'BonusEligible', defaultValue: false)
+          required final bool bonusEligible}) = _$_PriceRuleDto;
+  const _PriceRuleDto._() : super._();
+
+  factory _PriceRuleDto.fromJson(Map<String, dynamic> json) =
+      _$_PriceRuleDto.fromJson;
+
+  @override
+  @JsonKey(name: 'Type', defaultValue: '')
+  String get type;
+  @override
+  @JsonKey(name: 'Rate', defaultValue: 0)
+  double get rate;
+  @override
+  @JsonKey(name: 'Conditions', defaultValue: '')
+  String get condition;
+  @override
+  @JsonKey(name: 'ConditionNumber', defaultValue: '')
+  String get conditionNumber;
+  @override
+  @JsonKey(name: 'BonusEligible', defaultValue: false)
+  bool get bonusEligible;
+  @override
+  @JsonKey(ignore: true)
+  _$$_PriceRuleDtoCopyWith<_$_PriceRuleDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
