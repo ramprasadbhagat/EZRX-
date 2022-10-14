@@ -568,7 +568,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ResetPasswordBloc(
       changePasswordRepository: locator<ChangePasswordRepository>(),
-      userBloc: locator<UserBloc>(),
     ),
   );
 

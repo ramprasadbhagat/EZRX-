@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_change_password_repository.dart';
@@ -16,10 +15,8 @@ part 'reset_password_bloc.freezed.dart';
 
 class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
   IChangePasswordRepository changePasswordRepository;
-  final UserBloc userBloc;
   ResetPasswordBloc({
     required this.changePasswordRepository,
-    required this.userBloc,
   }) : super(ResetPasswordState.initial()) {
     on<ResetPasswordEvent>(_onEvent);
   }
@@ -59,7 +56,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
               newPassword: Password.resetV2(
                 state.newPassword.getValue(),
                 e.newValue,
-                userBloc.state.user,
+                e.user,
               ),
               passwordResetFailureOrSuccessOption: none(),
             ));
@@ -69,7 +66,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
               newPassword: Password.resetV2(
                 e.newValue,
                 state.oldPassword.getValue(),
-                userBloc.state.user,
+                e.user,
               ),
               confirmPassword: Password.comfirm(
                 state.confirmPassword.getValue(),
@@ -104,7 +101,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
           final failureOrSuccess = await changePasswordRepository.setPassword(
             newPassword: state.newPassword,
             oldPassword: state.oldPassword,
-            userName: userBloc.state.user.username,
+            user: e.user,
           );
 
           failureOrSuccess.fold(

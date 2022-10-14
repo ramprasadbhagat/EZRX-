@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_change_password_repository.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
@@ -25,7 +26,7 @@ class ChangePasswordRepository implements IChangePasswordRepository {
   Future<Either<ApiFailure, ResetPassword>> setPassword({
     required Password newPassword,
     required Password oldPassword,
-    required Username userName,
+    required User user,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -39,7 +40,7 @@ class ChangePasswordRepository implements IChangePasswordRepository {
       try {
         final resetPasswordEntities =
             await changePasswordRemoteDataSource.setUserPassword(
-          userName.getOrCrash(),
+          user.username.getOrCrash(),
           oldPassword.getOrCrash(),
           newPassword.getOrCrash(),
         );

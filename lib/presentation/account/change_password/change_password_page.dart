@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/presentation/account/change_password/widgets/change_password_button.dart';
 import 'package:ezrxmobile/presentation/account/change_password/widgets/confirm_password_field.dart';
 import 'package:ezrxmobile/presentation/account/change_password/widgets/new_password_field.dart';
@@ -13,6 +15,8 @@ class ChangePasswordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userBloc = context.read<UserBloc>();
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('Change Password').tr(),
@@ -20,24 +24,26 @@ class ChangePasswordPage extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            children: const <Widget>[
+            children: <Widget>[
               _ChangePasswordForm(
-                key: Key('changePasswordFrom'),
+                key: const Key('changePasswordFrom'),
+                user: userBloc.state.user,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              ResetPasswordValidation(
+              const ResetPasswordValidation(
                 key: Key('resetPasswordValidation'),
               ),
-              _NoteText(
+              const _NoteText(
                 key: Key('noteText'),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               ResetPasswordButton(
-                key: Key('resetPasswordButton'),
+                key: const Key('resetPasswordButton'),
+                user: userBloc.state.user,
               ),
             ],
           ),
@@ -48,8 +54,10 @@ class ChangePasswordPage extends StatelessWidget {
 }
 
 class _ChangePasswordForm extends StatelessWidget {
+  final User user;
   const _ChangePasswordForm({
     Key? key,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -64,13 +72,13 @@ class _ChangePasswordForm extends StatelessWidget {
               : AutovalidateMode.disabled,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const <Widget>[
-              SizedBox(height: 40),
-              OldPasswordTextField(),
-              SizedBox(height: 20),
-              NewPasswordTextField(),
-              SizedBox(height: 20),
-              ConfirmPasswordTextField(),
+            children: <Widget>[
+              const SizedBox(height: 40),
+              OldPasswordTextField(user: user),
+              const SizedBox(height: 20),
+              NewPasswordTextField(user: user),
+              const SizedBox(height: 20),
+              ConfirmPasswordTextField(user: user),
             ],
           ),
         );

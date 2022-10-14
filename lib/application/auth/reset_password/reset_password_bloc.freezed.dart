@@ -20,9 +20,10 @@ mixin _$ResetPasswordEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(PasswordFieldType fieldType, bool toggleValue)
         togglePasswordVisibility,
-    required TResult Function(PasswordFieldType fieldType, String newValue)
+    required TResult Function(
+            PasswordFieldType fieldType, String newValue, User user)
         onTextChange,
-    required TResult Function() resetPasswordPressed,
+    required TResult Function(User user) resetPasswordPressed,
     required TResult Function() onRestart,
   }) =>
       throw _privateConstructorUsedError;
@@ -30,9 +31,9 @@ mixin _$ResetPasswordEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue)?
+    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
-    TResult Function()? resetPasswordPressed,
+    TResult Function(User user)? resetPasswordPressed,
     TResult Function()? onRestart,
   }) =>
       throw _privateConstructorUsedError;
@@ -40,9 +41,9 @@ mixin _$ResetPasswordEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue)?
+    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
-    TResult Function()? resetPasswordPressed,
+    TResult Function(User user)? resetPasswordPressed,
     TResult Function()? onRestart,
     required TResult orElse(),
   }) =>
@@ -171,9 +172,10 @@ class _$_PasswordVisibility implements _PasswordVisibility {
   TResult when<TResult extends Object?>({
     required TResult Function(PasswordFieldType fieldType, bool toggleValue)
         togglePasswordVisibility,
-    required TResult Function(PasswordFieldType fieldType, String newValue)
+    required TResult Function(
+            PasswordFieldType fieldType, String newValue, User user)
         onTextChange,
-    required TResult Function() resetPasswordPressed,
+    required TResult Function(User user) resetPasswordPressed,
     required TResult Function() onRestart,
   }) {
     return togglePasswordVisibility(fieldType, toggleValue);
@@ -184,9 +186,9 @@ class _$_PasswordVisibility implements _PasswordVisibility {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue)?
+    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
-    TResult Function()? resetPasswordPressed,
+    TResult Function(User user)? resetPasswordPressed,
     TResult Function()? onRestart,
   }) {
     return togglePasswordVisibility?.call(fieldType, toggleValue);
@@ -197,9 +199,9 @@ class _$_PasswordVisibility implements _PasswordVisibility {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue)?
+    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
-    TResult Function()? resetPasswordPressed,
+    TResult Function(User user)? resetPasswordPressed,
     TResult Function()? onRestart,
     required TResult orElse(),
   }) {
@@ -265,7 +267,9 @@ abstract class _$$_PasswordTextOnChangeCopyWith<$Res> {
   factory _$$_PasswordTextOnChangeCopyWith(_$_PasswordTextOnChange value,
           $Res Function(_$_PasswordTextOnChange) then) =
       __$$_PasswordTextOnChangeCopyWithImpl<$Res>;
-  $Res call({PasswordFieldType fieldType, String newValue});
+  $Res call({PasswordFieldType fieldType, String newValue, User user});
+
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -283,6 +287,7 @@ class __$$_PasswordTextOnChangeCopyWithImpl<$Res>
   $Res call({
     Object? fieldType = freezed,
     Object? newValue = freezed,
+    Object? user = freezed,
   }) {
     return _then(_$_PasswordTextOnChange(
       fieldType == freezed
@@ -293,23 +298,36 @@ class __$$_PasswordTextOnChangeCopyWithImpl<$Res>
           ? _value.newValue
           : newValue // ignore: cast_nullable_to_non_nullable
               as String,
+      user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ));
+  }
+
+  @override
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$_PasswordTextOnChange implements _PasswordTextOnChange {
-  const _$_PasswordTextOnChange(this.fieldType, this.newValue);
+  const _$_PasswordTextOnChange(this.fieldType, this.newValue, this.user);
 
   @override
   final PasswordFieldType fieldType;
   @override
   final String newValue;
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'ResetPasswordEvent.onTextChange(fieldType: $fieldType, newValue: $newValue)';
+    return 'ResetPasswordEvent.onTextChange(fieldType: $fieldType, newValue: $newValue, user: $user)';
   }
 
   @override
@@ -318,14 +336,16 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
         (other.runtimeType == runtimeType &&
             other is _$_PasswordTextOnChange &&
             const DeepCollectionEquality().equals(other.fieldType, fieldType) &&
-            const DeepCollectionEquality().equals(other.newValue, newValue));
+            const DeepCollectionEquality().equals(other.newValue, newValue) &&
+            const DeepCollectionEquality().equals(other.user, user));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(fieldType),
-      const DeepCollectionEquality().hash(newValue));
+      const DeepCollectionEquality().hash(newValue),
+      const DeepCollectionEquality().hash(user));
 
   @JsonKey(ignore: true)
   @override
@@ -338,12 +358,13 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
   TResult when<TResult extends Object?>({
     required TResult Function(PasswordFieldType fieldType, bool toggleValue)
         togglePasswordVisibility,
-    required TResult Function(PasswordFieldType fieldType, String newValue)
+    required TResult Function(
+            PasswordFieldType fieldType, String newValue, User user)
         onTextChange,
-    required TResult Function() resetPasswordPressed,
+    required TResult Function(User user) resetPasswordPressed,
     required TResult Function() onRestart,
   }) {
-    return onTextChange(fieldType, newValue);
+    return onTextChange(fieldType, newValue, user);
   }
 
   @override
@@ -351,12 +372,12 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue)?
+    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
-    TResult Function()? resetPasswordPressed,
+    TResult Function(User user)? resetPasswordPressed,
     TResult Function()? onRestart,
   }) {
-    return onTextChange?.call(fieldType, newValue);
+    return onTextChange?.call(fieldType, newValue, user);
   }
 
   @override
@@ -364,14 +385,14 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue)?
+    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
-    TResult Function()? resetPasswordPressed,
+    TResult Function(User user)? resetPasswordPressed,
     TResult Function()? onRestart,
     required TResult orElse(),
   }) {
     if (onTextChange != null) {
-      return onTextChange(fieldType, newValue);
+      return onTextChange(fieldType, newValue, user);
     }
     return orElse();
   }
@@ -416,12 +437,12 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
 }
 
 abstract class _PasswordTextOnChange implements ResetPasswordEvent {
-  const factory _PasswordTextOnChange(
-          final PasswordFieldType fieldType, final String newValue) =
-      _$_PasswordTextOnChange;
+  const factory _PasswordTextOnChange(final PasswordFieldType fieldType,
+      final String newValue, final User user) = _$_PasswordTextOnChange;
 
   PasswordFieldType get fieldType;
   String get newValue;
+  User get user;
   @JsonKey(ignore: true)
   _$$_PasswordTextOnChangeCopyWith<_$_PasswordTextOnChange> get copyWith =>
       throw _privateConstructorUsedError;
@@ -432,6 +453,9 @@ abstract class _$$_ResetPasswordPressedCopyWith<$Res> {
   factory _$$_ResetPasswordPressedCopyWith(_$_ResetPasswordPressed value,
           $Res Function(_$_ResetPasswordPressed) then) =
       __$$_ResetPasswordPressedCopyWithImpl<$Res>;
+  $Res call({User user});
+
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -444,38 +468,70 @@ class __$$_ResetPasswordPressedCopyWithImpl<$Res>
 
   @override
   _$_ResetPasswordPressed get _value => super._value as _$_ResetPasswordPressed;
+
+  @override
+  $Res call({
+    Object? user = freezed,
+  }) {
+    return _then(_$_ResetPasswordPressed(
+      user: user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+    ));
+  }
+
+  @override
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_ResetPasswordPressed implements _ResetPasswordPressed {
-  const _$_ResetPasswordPressed();
+  const _$_ResetPasswordPressed({required this.user});
+
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'ResetPasswordEvent.resetPasswordPressed()';
+    return 'ResetPasswordEvent.resetPasswordPressed(user: $user)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ResetPasswordPressed);
+        (other.runtimeType == runtimeType &&
+            other is _$_ResetPasswordPressed &&
+            const DeepCollectionEquality().equals(other.user, user));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_ResetPasswordPressedCopyWith<_$_ResetPasswordPressed> get copyWith =>
+      __$$_ResetPasswordPressedCopyWithImpl<_$_ResetPasswordPressed>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(PasswordFieldType fieldType, bool toggleValue)
         togglePasswordVisibility,
-    required TResult Function(PasswordFieldType fieldType, String newValue)
+    required TResult Function(
+            PasswordFieldType fieldType, String newValue, User user)
         onTextChange,
-    required TResult Function() resetPasswordPressed,
+    required TResult Function(User user) resetPasswordPressed,
     required TResult Function() onRestart,
   }) {
-    return resetPasswordPressed();
+    return resetPasswordPressed(user);
   }
 
   @override
@@ -483,12 +539,12 @@ class _$_ResetPasswordPressed implements _ResetPasswordPressed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue)?
+    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
-    TResult Function()? resetPasswordPressed,
+    TResult Function(User user)? resetPasswordPressed,
     TResult Function()? onRestart,
   }) {
-    return resetPasswordPressed?.call();
+    return resetPasswordPressed?.call(user);
   }
 
   @override
@@ -496,14 +552,14 @@ class _$_ResetPasswordPressed implements _ResetPasswordPressed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue)?
+    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
-    TResult Function()? resetPasswordPressed,
+    TResult Function(User user)? resetPasswordPressed,
     TResult Function()? onRestart,
     required TResult orElse(),
   }) {
     if (resetPasswordPressed != null) {
-      return resetPasswordPressed();
+      return resetPasswordPressed(user);
     }
     return orElse();
   }
@@ -548,7 +604,13 @@ class _$_ResetPasswordPressed implements _ResetPasswordPressed {
 }
 
 abstract class _ResetPasswordPressed implements ResetPasswordEvent {
-  const factory _ResetPasswordPressed() = _$_ResetPasswordPressed;
+  const factory _ResetPasswordPressed({required final User user}) =
+      _$_ResetPasswordPressed;
+
+  User get user;
+  @JsonKey(ignore: true)
+  _$$_ResetPasswordPressedCopyWith<_$_ResetPasswordPressed> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -594,9 +656,10 @@ class _$_OnRestart implements _OnRestart {
   TResult when<TResult extends Object?>({
     required TResult Function(PasswordFieldType fieldType, bool toggleValue)
         togglePasswordVisibility,
-    required TResult Function(PasswordFieldType fieldType, String newValue)
+    required TResult Function(
+            PasswordFieldType fieldType, String newValue, User user)
         onTextChange,
-    required TResult Function() resetPasswordPressed,
+    required TResult Function(User user) resetPasswordPressed,
     required TResult Function() onRestart,
   }) {
     return onRestart();
@@ -607,9 +670,9 @@ class _$_OnRestart implements _OnRestart {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue)?
+    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
-    TResult Function()? resetPasswordPressed,
+    TResult Function(User user)? resetPasswordPressed,
     TResult Function()? onRestart,
   }) {
     return onRestart?.call();
@@ -620,9 +683,9 @@ class _$_OnRestart implements _OnRestart {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue)?
+    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
-    TResult Function()? resetPasswordPressed,
+    TResult Function(User user)? resetPasswordPressed,
     TResult Function()? onRestart,
     required TResult orElse(),
   }) {

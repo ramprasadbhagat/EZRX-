@@ -10,9 +10,12 @@ class ResetPasswordEvent with _$ResetPasswordEvent {
   const factory ResetPasswordEvent.onTextChange(
     PasswordFieldType fieldType,
     String newValue,
+    User user,
   ) = _PasswordTextOnChange;
 
-  const factory ResetPasswordEvent.resetPasswordPressed() =
+  const factory ResetPasswordEvent.resetPasswordPressed({
+    required User user,
+  }) =
       _ResetPasswordPressed;
 
   const factory ResetPasswordEvent.onRestart() = _OnRestart;
