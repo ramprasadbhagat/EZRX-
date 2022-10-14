@@ -13,6 +13,8 @@ import 'package:ezrxmobile/presentation/history/history_tab.dart';
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:ezrxmobile/presentation/home_tab.dart';
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_list_page.dart';
+import 'package:ezrxmobile/presentation/order/order_template/order_template_detail_page.dart';
+import 'package:ezrxmobile/presentation/order/order_template/order_template_list_page.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 import 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
 
@@ -29,6 +31,11 @@ import 'package:ezrxmobile/presentation/account/change_password/change_password_
     AutoRoute(path: 'customer_search_page', page: CustomerSearchPage),
     AutoRoute(path: 'material_list_page', page: MaterialListPage),
     AutoRoute(path: 'tos', page: AupTCDialog),
+    AutoRoute(path: 'order_template_list_page', page: OrderTemplateListPage),
+    AutoRoute(
+      path: 'order_template_detail_page',
+      page: OrderTemplateDetailPage,
+    ),
     AutoRoute(
       path: 'main_tabbar',
       page: HomeNavigationTabbar,

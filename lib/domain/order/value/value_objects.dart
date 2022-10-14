@@ -77,3 +77,18 @@ class TotalPrice extends ValueObject<String> {
 
   const TotalPrice._(this.value);
 }
+
+class PrincipalName extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory PrincipalName(String input) {
+    return PrincipalName._(validateStringNotEmpty(input));
+  }
+
+  String get name {
+    return naIfEmpty(value.getOrElse(() => ''));
+  }
+
+  const PrincipalName._(this.value);
+}

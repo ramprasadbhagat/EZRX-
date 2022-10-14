@@ -18,6 +18,7 @@ import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
+import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_query_mutation.dart';
@@ -76,6 +77,11 @@ import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonu
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_template_local_datasource.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_template_query.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_template_remote_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
 import 'package:ezrxmobile/infrastructure/material/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/material/datasource/materials_query.dart';
@@ -95,15 +101,13 @@ import 'package:ezrxmobile/infrastructure/order/datasource/payment_term_query_mu
 import 'package:ezrxmobile/infrastructure/order/repository/payment_customer_information_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/payment_term_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_term_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/order_template_repository.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/routes/router_observer.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/repository/aup_tc_repository.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/datasource/tncdate_local.dart';
 import 'package:get_it/get_it.dart';
 import 'package:local_auth/local_auth.dart';
-
-import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_query_mutation.dart';
 
 import 'package:ezrxmobile/application/material/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/infrastructure/material/datasource/material_price_local.dart';
@@ -577,6 +581,36 @@ void setupLocator() {
       customerCodeBloc: locator<CustomerCodeBloc>(),
       shipToCodeBloc: locator<ShipToCodeBloc>(),
       searchBloc: locator<SearchBloc>(),
+    ),
+  );
+
+  //============================================================
+  //  Order Template List
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => OrderTemplateQueries());
+
+  locator.registerLazySingleton(() => OrderTemplateLocalDataSource());
+
+  locator.registerLazySingleton(() => OrderTemplateRemoteDataSource(
+        httpService: locator<HttpService>(),
+        orderTemplateQueries: locator<OrderTemplateQueries>(),
+        dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+        config: locator<Config>(),
+      ));
+
+  locator.registerLazySingleton(
+    () => OrderTemplateRepository(
+      config: locator<Config>(),
+      orderTemplateLocalDataSource: locator<OrderTemplateLocalDataSource>(),
+      orderTemplateRemoteDataSource: locator<OrderTemplateRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => OrderTemplateListBloc(
+      orderTemplateRepository: locator<OrderTemplateRepository>(),
     ),
   );
 

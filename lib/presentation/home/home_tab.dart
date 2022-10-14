@@ -73,9 +73,14 @@ const List<HomePageTile> homePageTiles = <HomePageTile>[
     routeName: 'material_list_page',
   ),
   HomePageTile(
-    title: 'Saved order',
+    title: 'Saved Order',
     icon: Icons.list,
     routeName: 'saved_order_list',
+  ),
+  HomePageTile(
+    title: 'Order Template',
+    icon: Icons.list,
+    routeName: 'order_template_list_page',
   ),
 ];
 

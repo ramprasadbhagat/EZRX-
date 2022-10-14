@@ -67,4 +67,25 @@ void main() {
       },
     );
   });
+
+  group('Principal Name Value Object', () {
+    test('should return PrincipalName when not empty', () {
+
+      const input = 'fake-principal-name';
+      final principalName = PrincipalName(input);
+      final result = principalName.name;
+      expect(result, 'fake-principal-name');
+
+    });
+
+    test(
+      'should return NA when empty',
+      () async {
+        const input = '';
+        final principalName = PrincipalName(input);
+        final result = principalName.name;
+        expect(result, 'NA');
+      },
+    );
+  });
 }
