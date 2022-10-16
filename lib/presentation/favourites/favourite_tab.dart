@@ -6,18 +6,18 @@ import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
-import 'package:ezrxmobile/presentation/favorites/favourite_tile.dart';
+import 'package:ezrxmobile/presentation/favourites/favourite_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FavoritesTab extends StatelessWidget {
-  const FavoritesTab({Key? key}) : super(key: key);
+class FavouritesTab extends StatelessWidget {
+  const FavouritesTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favorites').tr(),
+        title: const Text('Favourites').tr(),
         automaticallyImplyLeading: false,
       ),
       body: SafeArea(

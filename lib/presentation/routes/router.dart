@@ -8,7 +8,7 @@ import 'package:ezrxmobile/presentation/auth/login_page.dart';
 import 'package:ezrxmobile/presentation/auth/proxy_login_page.dart';
 import 'package:ezrxmobile/presentation/core/webview_page.dart';
 import 'package:ezrxmobile/presentation/create_order/material_list.dart';
-import 'package:ezrxmobile/presentation/favorites/favorites_tab.dart';
+import 'package:ezrxmobile/presentation/favourites/favourite_tab.dart';
 import 'package:ezrxmobile/presentation/history/history_tab.dart';
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:ezrxmobile/presentation/home_tab.dart';
@@ -42,7 +42,7 @@ import 'package:ezrxmobile/presentation/account/change_password/change_password_
       children: [
         AutoRoute(page: HomeTab),
         AutoRoute(page: HistoryTab),
-        AutoRoute(page: FavoritesTab),
+        AutoRoute(page: FavouritesTab),
         AutoRoute(page: AccountTab),
       ],
     ),

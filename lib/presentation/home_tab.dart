@@ -110,9 +110,9 @@ final _routesItems = [
     label: 'History',
   ),
   RouteItem(
-    route: const FavoritesTabRoute(),
+    route: const FavouritesTabRoute(),
     icon: const Icon(Icons.favorite_border_outlined, key: Key('favoritesTab')),
-    label: 'Favorites',
+    label: 'Favourites',
   ),
   // RouteItem(
   //   route: const ProductsTabRoute(),

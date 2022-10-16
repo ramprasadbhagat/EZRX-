@@ -24,7 +24,7 @@ import '../auth/login_page.dart' as _i2;
 import '../auth/proxy_login_page.dart' as _i3;
 import '../core/webview_page.dart' as _i5;
 import '../create_order/material_list.dart' as _i9;
-import '../favorites/favorites_tab.dart' as _i17;
+import '../favourites/favourite_tab.dart' as _i17;
 import '../history/history_tab.dart' as _i16;
 import '../home/home_tab.dart' as _i15;
 import '../home_tab.dart' as _i13;
@@ -114,9 +114,9 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i16.HistoryTab());
     },
-    FavoritesTabRoute.name: (routeData) {
+    FavouritesTabRoute.name: (routeData) {
       return _i19.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i17.FavoritesTab());
+          routeData: routeData, child: const _i17.FavouritesTab());
     },
     AccountTabRoute.name: (routeData) {
       return _i19.MaterialPageX<dynamic>(
@@ -152,8 +152,8 @@ class AppRouter extends _i19.RootStackRouter {
                   path: 'home-tab', parent: HomeNavigationTabbarRoute.name),
               _i19.RouteConfig(HistoryTabRoute.name,
                   path: 'history-tab', parent: HomeNavigationTabbarRoute.name),
-              _i19.RouteConfig(FavoritesTabRoute.name,
-                  path: 'favorites-tab',
+              _i19.RouteConfig(FavouritesTabRoute.name,
+                  path: 'favourites-tab',
                   parent: HomeNavigationTabbarRoute.name),
               _i19.RouteConfig(AccountTabRoute.name,
                   path: 'account-tab', parent: HomeNavigationTabbarRoute.name)
@@ -356,12 +356,12 @@ class HistoryTabRoute extends _i19.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i17.FavoritesTab]
-class FavoritesTabRoute extends _i19.PageRouteInfo<void> {
-  const FavoritesTabRoute()
-      : super(FavoritesTabRoute.name, path: 'favorites-tab');
+/// [_i17.FavouritesTab]
+class FavouritesTabRoute extends _i19.PageRouteInfo<void> {
+  const FavouritesTabRoute()
+      : super(FavouritesTabRoute.name, path: 'favourites-tab');
 
-  static const String name = 'FavoritesTabRoute';
+  static const String name = 'FavouritesTabRoute';
 }
 
 /// generated route for
