@@ -1,0 +1,11 @@
+{
+  "data": {
+    "stockInformation": {
+      "MaterialNumber": "000000000023245613",
+      "ExpiryDate": "20231217",
+      "Batch": "179171",
+      "InStock": "Yes",
+      "SalesDistrict": null
+    }
+  }
+}

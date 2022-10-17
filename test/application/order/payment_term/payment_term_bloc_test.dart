@@ -64,6 +64,7 @@ void main() {
     languageFilter: false,
     languageValue: '',
     principalList: [],
+    enableBatchNumber: false,
   );
 
   const customerCode = CustomerCodeInfo(

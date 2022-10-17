@@ -13,6 +13,7 @@ import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/core/search/search_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/application/material/stock_information/stock_information_bloc.dart';
 import 'package:ezrxmobile/application/material/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
@@ -74,6 +75,10 @@ import 'package:ezrxmobile/infrastructure/material/datasource/material_price_rem
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_remote.dart';
+import 'package:ezrxmobile/infrastructure/material/datasource/stock_info_local.dart';
+import 'package:ezrxmobile/infrastructure/material/datasource/stock_info_query.dart';
+import 'package:ezrxmobile/infrastructure/material/datasource/stock_info_remote.dart';
+import 'package:ezrxmobile/infrastructure/material/repository/stock_info_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_repository.dart';
@@ -810,6 +815,36 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => MaterialPriceBloc(
       repository: locator<MaterialPriceRepository>(),
+    ),
+  );
+
+  //============================================================
+  //  Stock Information
+  //
+  //============================================================
+  locator.registerLazySingleton(() => StockInfoLocalDataSource());
+  locator.registerLazySingleton(() => StockInfoQueryMutation());
+  
+  locator.registerLazySingleton(
+    () => StockInfoRemoteDataSource(
+      config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      httpService: locator<HttpService>(),
+      stockInfoQueryMutation: locator<StockInfoQueryMutation>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => StockInfoRepository(
+      config: locator<Config>(),
+      stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
+      stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => StockInformationBloc(
+      stockInfoRepository: locator<StockInfoRepository>(),
     ),
   );
 }

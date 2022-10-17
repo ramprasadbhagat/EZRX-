@@ -69,9 +69,8 @@ void main() {
         );
       },
       act: (bloc) => bloc.add(PaymentCustomerInformationEvent.fetch(
-        customeCodeInfo: fakeCustomerCodeInfo,
-        salesOrganisation: fakeSaleOrganisation
-      )),
+          customeCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSaleOrganisation)),
       expect: () => [
         PaymentCustomerInformationState.initial().copyWith(
           paymentCustomerInformation:
@@ -100,9 +99,8 @@ void main() {
         );
       },
       act: (bloc) => bloc.add(PaymentCustomerInformationEvent.fetch(
-        customeCodeInfo: fakeCustomerCodeInfo,
-        salesOrganisation: fakeSaleOrganisation
-      )),
+          customeCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSaleOrganisation)),
       expect: () => [
         PaymentCustomerInformationState.initial().copyWith(
           paymentCustomerInformation: paymentCustomerInformationMockData,

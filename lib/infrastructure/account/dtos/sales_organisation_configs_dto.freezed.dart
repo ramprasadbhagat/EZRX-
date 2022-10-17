@@ -38,6 +38,8 @@ mixin _$SalesOrganisationConfigsDto {
   List<dynamic> get principalList => throw _privateConstructorUsedError;
   @JsonKey(name: 'disableOrderType', defaultValue: false)
   bool get disableOrderType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'enableBatchNumber', defaultValue: false)
+  bool get enableBatchNumber => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -68,7 +70,9 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
       @JsonKey(name: 'principalList')
           List<dynamic> principalList,
       @JsonKey(name: 'disableOrderType', defaultValue: false)
-          bool disableOrderType});
+          bool disableOrderType,
+      @JsonKey(name: 'enableBatchNumber', defaultValue: false)
+          bool enableBatchNumber});
 }
 
 /// @nodoc
@@ -90,6 +94,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? disablePrincipals = freezed,
     Object? principalList = freezed,
     Object? disableOrderType = freezed,
+    Object? enableBatchNumber = freezed,
   }) {
     return _then(_value.copyWith(
       currency: currency == freezed
@@ -124,6 +129,10 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.disableOrderType
           : disableOrderType // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableBatchNumber: enableBatchNumber == freezed
+          ? _value.enableBatchNumber
+          : enableBatchNumber // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -153,7 +162,9 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
       @JsonKey(name: 'principalList')
           List<dynamic> principalList,
       @JsonKey(name: 'disableOrderType', defaultValue: false)
-          bool disableOrderType});
+          bool disableOrderType,
+      @JsonKey(name: 'enableBatchNumber', defaultValue: false)
+          bool enableBatchNumber});
 }
 
 /// @nodoc
@@ -179,6 +190,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? disablePrincipals = freezed,
     Object? principalList = freezed,
     Object? disableOrderType = freezed,
+    Object? enableBatchNumber = freezed,
   }) {
     return _then(_$_SalesOrganisationConfigsDto(
       currency: currency == freezed
@@ -213,6 +225,10 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.disableOrderType
           : disableOrderType // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableBatchNumber: enableBatchNumber == freezed
+          ? _value.enableBatchNumber
+          : enableBatchNumber // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -237,7 +253,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
       @JsonKey(name: 'principalList')
           required final List<dynamic> principalList,
       @JsonKey(name: 'disableOrderType', defaultValue: false)
-          required this.disableOrderType})
+          required this.disableOrderType,
+      @JsonKey(name: 'enableBatchNumber', defaultValue: false)
+          required this.enableBatchNumber})
       : _principalList = principalList,
         super._();
 
@@ -274,10 +292,13 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @override
   @JsonKey(name: 'disableOrderType', defaultValue: false)
   final bool disableOrderType;
+  @override
+  @JsonKey(name: 'enableBatchNumber', defaultValue: false)
+  final bool enableBatchNumber;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType)';
+    return 'SalesOrganisationConfigsDto(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber)';
   }
 
   @override
@@ -299,7 +320,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
             const DeepCollectionEquality()
                 .equals(other._principalList, _principalList) &&
             const DeepCollectionEquality()
-                .equals(other.disableOrderType, disableOrderType));
+                .equals(other.disableOrderType, disableOrderType) &&
+            const DeepCollectionEquality()
+                .equals(other.enableBatchNumber, enableBatchNumber));
   }
 
   @JsonKey(ignore: true)
@@ -313,7 +336,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
       const DeepCollectionEquality().hash(languageValue),
       const DeepCollectionEquality().hash(disablePrincipals),
       const DeepCollectionEquality().hash(_principalList),
-      const DeepCollectionEquality().hash(disableOrderType));
+      const DeepCollectionEquality().hash(disableOrderType),
+      const DeepCollectionEquality().hash(enableBatchNumber));
 
   @JsonKey(ignore: true)
   @override
@@ -348,7 +372,9 @@ abstract class _SalesOrganisationConfigsDto
           @JsonKey(name: 'principalList')
               required final List<dynamic> principalList,
           @JsonKey(name: 'disableOrderType', defaultValue: false)
-              required final bool disableOrderType}) =
+              required final bool disableOrderType,
+          @JsonKey(name: 'enableBatchNumber', defaultValue: false)
+              required final bool enableBatchNumber}) =
       _$_SalesOrganisationConfigsDto;
   const _SalesOrganisationConfigsDto._() : super._();
 
@@ -380,6 +406,9 @@ abstract class _SalesOrganisationConfigsDto
   @override
   @JsonKey(name: 'disableOrderType', defaultValue: false)
   bool get disableOrderType;
+  @override
+  @JsonKey(name: 'enableBatchNumber', defaultValue: false)
+  bool get enableBatchNumber;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsDtoCopyWith<_$_SalesOrganisationConfigsDto>

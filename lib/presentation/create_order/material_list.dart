@@ -249,3 +249,4 @@ class _FavoriteButton extends StatelessWidget {
     );
   }
 }
+
