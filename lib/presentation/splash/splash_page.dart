@@ -1,10 +1,13 @@
 import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
+import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -64,6 +67,32 @@ class SplashPage extends StatelessWidget {
                       user:state.user,
                     ),
                   );
+            }
+          },
+        ),
+        BlocListener<PaymentCustomerInformationBloc,
+            PaymentCustomerInformationState>(
+          listenWhen: (previous, current) =>
+              previous.paymentCustomerInformation !=
+              current.paymentCustomerInformation,
+          listener: (context, paymentCustomerInformationState) {
+            if (!paymentCustomerInformationState
+                .isPaymentCustomerInformationEmpty) {
+              context.read<PaymentTermBloc>().add(
+                PaymentTermEvent.fetch(
+                  customeCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customeCodeInfo,
+                  paymentCustomerInformation:
+                      paymentCustomerInformationState
+                          .paymentCustomerInformation,
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  salesOrganisationConfigs:
+                      context.read<SalesOrgBloc>().state.configs,
+                  salesRepresentativeInfo:
+                      context.read<SalesRepBloc>().state.salesRepInfo,
+                ),
+              );
             }
           },
         ),

@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
+import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
@@ -44,6 +45,10 @@ class AnnnouncementBlocMock
     extends MockBloc<AnnouncementEvent, AnnouncementState>
     implements AnnouncementBloc {}
 
+class PaymentCustomerInformationBlocMock
+    extends MockBloc<PaymentCustomerInformationEvent, PaymentCustomerInformationState>
+    implements PaymentCustomerInformationBloc {}    
+
 void main() {
   late LoginFormBloc loginBlocMock;
   late AuthBloc authBlocMock;
@@ -53,6 +58,8 @@ void main() {
   final SalesOrgBloc salesOrgBlocMock = SalesOrgBlocMock();
   final CustomerCodeBloc customerCodeBlocMock = CustomerCodeBlocMock();
   final ShipToCodeBloc shipToCodeBLocMock = ShipToCodeBlocMock();
+  final PaymentCustomerInformationBloc paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
+
 
   setUpAll(() async {
     GetIt.instance.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
@@ -74,6 +81,8 @@ void main() {
           .thenReturn(CustomerCodeState.initial());
       when(() => shipToCodeBLocMock.state)
           .thenReturn(ShipToCodeState.initial());
+      when(() => paymentCustomerInformationBlocMock.state)
+          .thenReturn(PaymentCustomerInformationState.initial());    
     });
     testWidgets("Test don't have credential", (tester) async {
       await tester.pumpWidget(
@@ -85,6 +94,9 @@ void main() {
               ),
               BlocProvider<AnnouncementBloc>(
                 create: (context) => announcementBlocMock,
+              ),
+              BlocProvider<PaymentCustomerInformationBloc>(
+                create: (context) => paymentCustomerInformationBlocMock,
               ),
             ],
             child: const LoginPage(),
@@ -128,6 +140,9 @@ void main() {
               BlocProvider<AnnouncementBloc>(
                 create: (context) => announcementBlocMock,
               ),
+              BlocProvider<PaymentCustomerInformationBloc>(
+                create: (context) => paymentCustomerInformationBlocMock,
+              ),
             ],
             child: const LoginPage(),
           ),
@@ -169,6 +184,9 @@ void main() {
               BlocProvider<AnnouncementBloc>(
                 create: (context) => announcementBlocMock,
               ),
+              BlocProvider<PaymentCustomerInformationBloc>(
+                create: (context) => paymentCustomerInformationBlocMock,
+              ),
             ],
             child: const LoginPage(),
           ),
@@ -195,6 +213,9 @@ void main() {
             BlocProvider<ShipToCodeBloc>(
               create: (context) => shipToCodeBLocMock,
             ),
+            BlocProvider<PaymentCustomerInformationBloc>(
+                create: (context) => paymentCustomerInformationBlocMock,
+              ),
           ],
           child: const SplashPage(),
         ),

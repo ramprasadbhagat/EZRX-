@@ -778,11 +778,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => PaymentTermBloc(
       paymentTermRepository: locator<PaymentTermsRepository>(),
-      salesOrgBloc: locator<SalesOrgBloc>(),
-      customerCodeBloc: locator<CustomerCodeBloc>(),
-      userBloc: locator<UserBloc>(),
-      salesRepBloc: locator<SalesRepBloc>(),
-      paymentCustomerInformationBloc: locator<PaymentCustomerInformationBloc>(),
     ),
   );
 

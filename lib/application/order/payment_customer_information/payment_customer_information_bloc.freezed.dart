@@ -478,10 +478,11 @@ class __$$_PaymentCustomerInformationStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_PaymentCustomerInformationState
-    implements _PaymentCustomerInformationState {
+    extends _PaymentCustomerInformationState {
   const _$_PaymentCustomerInformationState(
       {required this.paymentCustomerInformation,
-      required this.paymentCustomerInformationFailureOrSuccessOption});
+      required this.paymentCustomerInformationFailureOrSuccessOption})
+      : super._();
 
   @override
   final PaymentCustomerInformation paymentCustomerInformation;
@@ -522,12 +523,13 @@ class _$_PaymentCustomerInformationState
 }
 
 abstract class _PaymentCustomerInformationState
-    implements PaymentCustomerInformationState {
+    extends PaymentCustomerInformationState {
   const factory _PaymentCustomerInformationState(
           {required final PaymentCustomerInformation paymentCustomerInformation,
           required final Option<Either<ApiFailure, dynamic>>
               paymentCustomerInformationFailureOrSuccessOption}) =
       _$_PaymentCustomerInformationState;
+  const _PaymentCustomerInformationState._() : super._();
 
   @override
   PaymentCustomerInformation get paymentCustomerInformation;

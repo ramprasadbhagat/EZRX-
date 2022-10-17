@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -36,12 +37,18 @@ class SavedOrderBlocMock
     extends MockBloc<SavedOrderListEvent, SavedOrderListState>
     implements SavedOrderListBloc {}
 
+class PaymentCustomerInformationBlocMock
+    extends MockBloc<PaymentCustomerInformationEvent, PaymentCustomerInformationState>
+    implements PaymentCustomerInformationBloc {}    
+
 void main() {
   final AuthBloc authBlocMock = AuthBlocMock();
   final UserBloc userBlocMock = UserBlocMock();
   final SalesOrgBloc salesOrgBlocMock = SalesOrgBlocMock();
   final CustomerCodeBloc customerCodeBlocMock = CustomerCodeBlocMock();
   final ShipToCodeBloc shipToCodeBLocMock = ShipToCodeBlocMock();
+  final PaymentCustomerInformationBloc paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
+
 
   final SavedOrderListBloc savedOrderBlocMock = SavedOrderBlocMock();
 
@@ -63,6 +70,8 @@ void main() {
 
       when(() => savedOrderBlocMock.state)
           .thenReturn(SavedOrderListState.initial());
+      when(() => paymentCustomerInformationBlocMock.state)
+          .thenReturn(PaymentCustomerInformationState.initial());    
     });
 
     Widget splashPage() => WidgetUtils.getScopedWidget(
@@ -86,6 +95,9 @@ void main() {
             ),
             BlocProvider<SavedOrderListBloc>(
               create: (context) => savedOrderBlocMock,
+            ),
+            BlocProvider<PaymentCustomerInformationBloc>(
+              create: (context) => paymentCustomerInformationBlocMock,
             ),
           ],
         );
