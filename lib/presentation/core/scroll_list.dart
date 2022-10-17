@@ -59,12 +59,9 @@ class _ScrollListState<T> extends State<ScrollList<T>> {
         physics: const AlwaysScrollableScrollPhysics(),
         slivers: [
           widget.items.isEmpty && !widget.isLoading
-              ? SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: NoRecordFound.showMessage(
-                      message: widget.emptyMessage,
-                    ),
+              ? SliverFillRemaining(
+                  child: NoRecordFound.showMessage(
+                    message: widget.emptyMessage,
                   ),
                 )
               : SliverList(
