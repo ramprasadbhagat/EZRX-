@@ -201,7 +201,7 @@ Incorrect username and/or password.,Incorrect username and/or password.,ชื�
 Must not contain any part of your username and/or name,Must not contain any part of your username and/or name,ต้องไม่ประกอบด้วยส่วนหนึ่งของชื่อผู้ใช้ และ/หรือ ชื่อของคุณ,不能與您的使用者名稱或姓名部分或全部相符,အသုံးပြုသူအမည်နှင့်/သို့မဟုတ် အမည်၏ အစိတ်အပိုင်းတစ်ခုမျှ မပါဝင်ရပါ။,Không được chứa bất kỳ tên đăng nhập và / hoặc tên của bạn,មិនត្រូវមានផ្នែកណាមួយនៃឈ្មោះអ្នកប្រើប្រាស់ និង/ឬឈ្មោះរបស់អ្នកទេ។
 Note:,Note:,หมายเหตุ:,附註:,မှတ်စု:,Lưu ý:,ចំណាំ៖
 eZRx will be undergoing enhancements from ,eZRx will be undergoing enhancements from ,eZRx จะหยุดให้บริการชั่วคราวตามกำหนดการบริหารจัดการระบบตั้งแต่ ,eZRx將於台灣時間 ,ကြိုတင်စီစဉ်ထားသောပြုပြင်ထိန်းသိမ်းမှုအတွက် ,Hệ thống eZRx đang được nâng cấp từ,eZRx នឹងត្រូវស្ថិតក្រោមការធ្វើបច្ចុប្បនភាពពី
-eZRx will be unavailable from ,eZRx will be unavailable from ,บริการ eZRx ไม่สามารถใช้บริการได้ตั้งแต่ ,預計維護時間 ,eZRx သည် ,Hệ thống eZRx đang được bảo trì từ ,eZRx will be unavailable from 
+eZRx will be unavailable from ,eZRx will be unavailable from ,บริการ eZRx ไม่สามารถใช้บริการได้ตั้งแต่ ,預計維護時間 ,eZRx သည် ,Hệ thống eZRx đang được bảo trì từ ,eZRx will be unavailable from
 Payments Overview,Payments Overview,ภาพรวมการชําระเงิน,Payments Overview ,Payments Overview,Tổng quan về Thanh toán,ស្ថានភាពកុំម្ម៉ង់
 Payment,Payment,การชำระเงิน,Payment,Payment,Thanh toán,Payment
 Overview,Overview,ภาพรวม,Overview,Overview,Tổng quan,ទិដ្ឋភាពទូទៅ
@@ -320,7 +320,7 @@ Contract Reference,Contract Reference,Contract Reference,Contract Reference,Cont
 Contract Selection,Contract Selection,Contract Selection,Contract Selection,Contract Selection,Chọn số hợp đồng,Contract Selection
 VAT:,VAT:,VAT:,VAT:,VAT:,Tiền thuế GTGT:,VAT:
 My Farvourites,My Farvourites,My Farvourites,My Farvourites,My Farvourites,Sản phẩm yêu thích,My Farvourites
-Total Tax: ,Total Tax: ,Total Tax: ,Total Tax: ,Total Tax: ,Thuế: ,Total Tax: 
+Total Tax: ,Total Tax: ,Total Tax: ,Total Tax: ,Total Tax: ,Thuế: ,Total Tax:
 Total price before VAT : ,Total price before VAT : ,Total price before VAT : ,Total price before VAT : ,Total price before VAT : ,Tổng Tiền trước thuế GTGT : ,Total price before VAT :
 Additional Comments,Additional Comments,Additional Comments,Additional Comments,​Additional Comments,Thông tin bổ sung,​Additional Comments
 eZRx Number,eZRx Number,eZRx Number,eZRx Number,eZRx Number,Số  eZRx,eZRx Number
@@ -355,3 +355,19 @@ Contain at least a numeric character (0 to 9),Contain at least a numeric charact
 Contain at least one special character from the list (i.e. _ , # , ? , ! , @ , \$ , % , ^ , & , *, - ),Contain at least one special character from the list (i.e. _ , # , ? , ! , @ , \$ , % , ^ , & , *, - ),มีอักขระพิเศษอย่างน้อย 1 ตัวจากรายการ (เช่น _ , # , ? , ! , @ , \$ , % , ^ , & , *, - ),至少包含1個以上特殊字元 (如:   _ , # , ? , ! , @ , \$ , % , ^ , & , *, - ),ပေးထားသောစာရင်းမှ အနည်းဆုံး အထူးပုံစံတစ်ခု ပါဝင်ရမည် (ဆိုလိုသည်မှာ _ , # , ? , ! , @ , \$ , % , ^ , & , *, - ),Chứa ít nhất một ký tự đặc biệt từ danh sách (tức là _, #,?,!, @, \$,%, ^, &, *, -),មានតួអក្សរពិសេសយ៉ាងហោចណាស់មួយពីបញ្ជី (ឧ. _ , # , ? , ! , @ , \$ , % , ^ , & , *, - ),
 Unit Price: ,Unit Price: ,ราคาต่อหน่วย: ,實售價:,တစ်ခုချင်းစျေးနှုန်း: ,Giá sau thuế GTGT: ,តម្លៃក្នុង១ឯកតា
 Not Available,Not Available,ไม่พบข้อมูล,依業務報價,မရရှိနိုင်ပါ,Chưa có sẵn,មិនមាន
+Contact Us,Contact Us,,,,,
+Mat No:,Mat No:,,,,,
+Order History,Order History,,,,,
+No Customer,No Customer,,,,,
+No Shipping,No Shipping,,,,,
+Please select a Sales Org,Please select a Sales Org,,,,,
+Please select a Customer Code,Please select a Customer Code,,,,,
+Delete,Delete,,,,,
+No history found,No history found,,,,,
+Login On Behalf,Login On Behalf,,,,,
+Tos,Tos,,,,,
+Acceptable Use Policy,Acceptable Use Policy,,,,,
+Accept,Accept,,,,,
+Contain at least one special character from the list (i.e. _ , # , ? , ! , @ , $ , % , ^ , & , *, - ),Contain at least one special character from the list (i.e. _ , # , ? , ! , @ , $ , % , ^ , & , *, - ),,,,,
+Please select a language,Please select a language,,,,,
+SG Customer Support,SG Customer Support,,,,,
