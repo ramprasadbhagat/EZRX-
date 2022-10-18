@@ -146,7 +146,7 @@ class AcceptButton extends StatelessWidget {
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 16,
-                color: Colors.white,
+                color: ZPColors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),

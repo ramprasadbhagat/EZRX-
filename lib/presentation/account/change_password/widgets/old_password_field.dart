@@ -12,14 +12,15 @@ class OldPasswordTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
-      buildWhen: (previous, current) => 
-        previous.isOldPasswordObscure != current.isOldPasswordObscure ||
-        previous.oldPassword != current.oldPassword ,
+      buildWhen: (previous, current) =>
+          previous.isOldPasswordObscure != current.isOldPasswordObscure ||
+          previous.oldPassword != current.oldPassword,
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20,),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: TextFormField(
             key: const Key('oldPasswordTextField'),
+            autocorrect: false,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             style: const TextStyle(
               color: ZPColors.primary,

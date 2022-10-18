@@ -1,7 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
@@ -9,7 +7,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
 import 'package:ezrxmobile/infrastructure/banner/repository/banner_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -22,17 +19,9 @@ class MockBannerBloc extends MockBloc<BannerEvent, BannerState>
 
 class MockBannerRepository extends Mock implements BannerRepository {}
 
-class MockSalesOrgBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class UserRepoMock extends Mock implements UserRepository {}
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
 void main() {
   late GetIt locator;
   late BannerRepository mockBannerRepository;
-  late SalesOrgBloc mockSalesOrgBloc;
 
   final mockSalesOrg = SalesOrg('mock-salesOrg');
   final salesOrg2601 = SalesOrg('2601');
@@ -54,7 +43,6 @@ void main() {
       ),
     );
     mockBannerRepository = MockBannerRepository();
-    mockSalesOrgBloc = MockSalesOrgBloc();
   });
 
   group('Banner Bloc Test Group 1', () {
@@ -62,7 +50,6 @@ void main() {
       'Init Banner Bloc',
       build: () => BannerBloc(
         bannerRepository: mockBannerRepository,
-        salesOrgBloc: mockSalesOrgBloc,
       ),
       setUp: () {},
       expect: () => [],
@@ -72,7 +59,6 @@ void main() {
       'Init Banner Bloc and raise event Initialized',
       build: () => BannerBloc(
         bannerRepository: mockBannerRepository,
-        salesOrgBloc: mockSalesOrgBloc,
       ),
       setUp: () {},
       act: (bloc) {
@@ -85,7 +71,6 @@ void main() {
       'Simulate error during fetch banner',
       build: () => BannerBloc(
         bannerRepository: mockBannerRepository,
-        salesOrgBloc: mockSalesOrgBloc,
       ),
       setUp: () {
         when(() => mockBannerRepository.getBanner(
@@ -112,7 +97,6 @@ void main() {
       'Simulate successful fetch banner',
       build: () => BannerBloc(
         bannerRepository: mockBannerRepository,
-        salesOrgBloc: mockSalesOrgBloc,
       ),
       setUp: () {
         when(() => mockBannerRepository.getBanner(
@@ -140,12 +124,8 @@ void main() {
       'Test BannerBlocStream for SalesOrgState.initial',
       build: () => BannerBloc(
         bannerRepository: mockBannerRepository,
-        salesOrgBloc: mockSalesOrgBloc,
       ),
       setUp: () {
-        when(() => mockSalesOrgBloc.stream).thenAnswer((invocation) {
-          return Stream.value(SalesOrgState.initial());
-        });
         when(() => mockBannerRepository.getBanner(
               isPreSalesOrg: false,
               salesOrganisation: mockSalesOrganisation,
@@ -166,17 +146,8 @@ void main() {
       'Test BannerBlocStream for SalesOrg 2601',
       build: () => BannerBloc(
         bannerRepository: mockBannerRepository,
-        salesOrgBloc: mockSalesOrgBloc,
       ),
       setUp: () {
-        when(() => mockSalesOrgBloc.stream).thenAnswer((invocation) {
-          return Stream.fromIterable([
-            SalesOrgState.initial(),
-            SalesOrgState.initial().copyWith(
-              salesOrganisation: salesOrganisation2601,
-            ),
-          ]);
-        });
         when(() => mockBannerRepository.getBanner(
               isPreSalesOrg: false,
               salesOrganisation: mockSalesOrganisation,

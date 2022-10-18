@@ -14,4 +14,19 @@ class CustomerCodeEvent with _$CustomerCodeEvent {
     required User userInfo,
     required SalesOrganisation selectedSalesOrg,
   }) = _Fetch;
+
+  const factory CustomerCodeEvent.search({
+    required bool hidecustomer,
+    required User userInfo,
+    required SalesOrganisation selectedSalesOrg,
+  }) = _Search;
+
+  const factory CustomerCodeEvent.loadMore({
+    required bool hidecustomer,
+    required User userInfo,
+    required SalesOrganisation selectedSalesOrg,
+  }) = _LoadMore;
+
+  const factory CustomerCodeEvent.updateSearchKey(String searchKey) =
+      _UpdateSearchKey;
 }

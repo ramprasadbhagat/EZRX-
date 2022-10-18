@@ -52,7 +52,7 @@ class OrderHistoryListTile extends StatelessWidget {
                     child: Text(
                       orderHistoryItem.status,
                       style: const TextStyle(
-                        color: Colors.black,
+                        color: ZPColors.black,
                         fontSize: 10,
                         fontWeight: FontWeight.w400,
                       ),
@@ -120,13 +120,13 @@ class TextRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const keyTextStyle = TextStyle(
-      color: Colors.black,
+      color: ZPColors.black,
       fontSize: 12.0,
       fontFamily: 'Poppins',
       fontWeight: FontWeight.w400,
     );
     const valueTextStyle = TextStyle(
-      color: Colors.black,
+      color: ZPColors.black,
       fontSize: 12.0,
       fontFamily: 'Poppins',
       fontWeight: FontWeight.w600,

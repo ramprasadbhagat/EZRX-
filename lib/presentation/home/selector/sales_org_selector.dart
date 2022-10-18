@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
@@ -30,6 +31,12 @@ class SalesOrgSelector extends StatelessWidget {
                     selectedSalesOrg: state.salesOrganisation,
                     isRefresh: true,
                     userInfo: context.read<UserBloc>().state.user,
+                  ),
+                );
+            context.read<BannerBloc>().add(
+                  BannerEvent.fetch(
+                    isPreSalesOrg: false,
+                    salesOrganisation: state.salesOrganisation,
                   ),
                 );
           }

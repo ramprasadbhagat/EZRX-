@@ -9,7 +9,7 @@ import 'package:ezrxmobile/application/order/order_history_list/order_history_li
 
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_basicInfo.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';

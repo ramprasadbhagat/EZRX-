@@ -12,14 +12,16 @@ class ConfirmPasswordTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
-      buildWhen: (previous, current) => 
-        previous.isConfirmPasswordObscure != current.isConfirmPasswordObscure ||
-        previous.confirmPassword != current.confirmPassword ,
+      buildWhen: (previous, current) =>
+          previous.isConfirmPasswordObscure !=
+              current.isConfirmPasswordObscure ||
+          previous.confirmPassword != current.confirmPassword,
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: TextFormField(
-            key:const Key('confirmPasswordTextField'),
+            key: const Key('confirmPasswordTextField'),
+            autocorrect: false,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             style: const TextStyle(
               color: ZPColors.primary,

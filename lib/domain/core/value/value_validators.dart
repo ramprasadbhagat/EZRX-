@@ -48,7 +48,7 @@ Either<ValueFailure<String>, String> validateMinStringLength(
   String input,
   int minLength,
 ) {
-  return isMinTenCharacter(input: input, minLength: minLength)
+  return isMinCharacter(input: input, minLength: minLength)
       ? right(input)
       : left(ValueFailure.subceedLength(failedValue: input, min: minLength));
 }

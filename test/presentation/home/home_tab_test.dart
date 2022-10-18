@@ -7,11 +7,17 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
+import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -42,6 +48,18 @@ class CustomerCodeBlocMock
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
+class SavedOrderBlocMock
+    extends MockBloc<SavedOrderListEvent, SavedOrderListState>
+    implements SavedOrderListBloc {}
+
+class MaterialListBlocMock
+    extends MockBloc<MaterialListEvent, MaterialListState>
+    implements MaterialListBloc {}
+
+class OrderHistoryListBlocMock
+    extends MockBloc<OrderHistoryListEvent, OrderHistoryListState>
+    implements OrderHistoryListBloc {}
+
 class AutoRouterMock extends Mock implements AppRouter {}
 
 final locator = GetIt.instance;
@@ -68,6 +86,22 @@ void main() async {
   late CustomerCodeBloc customerCodeBlocMock;
   late ShipToCodeBloc shipToCodeBlocMock;
   late AppRouter autoRouterMock;
+  late SavedOrderListBloc savedOrderBlocMock;
+  late MaterialListBlocMock materialListBlocMock;
+  late OrderHistoryListBlocMock orderHistoryListBlocMock;
+
+  // final fakeSaleOrgConfig = SalesOrganisationConfigs(
+  //   currency: Currency(''),
+  //   hideCustomer: false,
+  //   disableOrderType: false,
+  //   disablePrincipals: false,
+  //   enableGimmickMaterial: false,
+  //   languageFilter: false,
+  //   languageValue: '',
+  //   principalList: [],
+  //   enableBatchNumber: false,
+  // );
+
   setUpAll(() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
@@ -84,6 +118,9 @@ void main() async {
       salesOrgBlocMock = SalesOrgBlocMock();
       customerCodeBlocMock = CustomerCodeBlocMock();
       shipToCodeBlocMock = ShipToCodeBlocMock();
+      savedOrderBlocMock = SavedOrderBlocMock();
+      materialListBlocMock = MaterialListBlocMock();
+      orderHistoryListBlocMock = OrderHistoryListBlocMock();
       autoRouterMock = locator<AppRouter>();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -92,6 +129,12 @@ void main() async {
           .thenReturn(CustomerCodeState.initial());
       when(() => shipToCodeBlocMock.state)
           .thenReturn(ShipToCodeState.initial());
+      when(() => savedOrderBlocMock.state)
+          .thenReturn(SavedOrderListState.initial());
+      when(() => materialListBlocMock.state)
+          .thenReturn(MaterialListState.initial());
+      when(() => orderHistoryListBlocMock.state)
+          .thenReturn(OrderHistoryListState.initial());
     });
 
     Widget getScopedWidget() {
@@ -115,6 +158,15 @@ void main() async {
             BlocProvider<ShipToCodeBloc>(
                 create: (context) => shipToCodeBlocMock),
             BlocProvider<BannerBloc>(create: (context) => mockBannerBloc),
+            BlocProvider<SavedOrderListBloc>(
+              create: (context) => savedOrderBlocMock,
+            ),
+            BlocProvider<MaterialListBloc>(
+              create: (context) => materialListBlocMock,
+            ),
+            BlocProvider<OrderHistoryListBloc>(
+              create: (context) => orderHistoryListBlocMock,
+            ),
           ],
           child: const HomeTab(),
         ),
@@ -200,48 +252,199 @@ void main() async {
       variant: customerCodeVariants,
     );
 
-    //TODO: Wasim fix this
+    // TODO: need Wasim help
     // testWidgets(
     //   'Test Ship To Code Selector tile',
     //   (tester) async {
-    //     final expectedCustomerState = [
-    //       CustomerCodeState.initial()
-    //           .copyWith(isFetching: false, apiFailureOrSuccessOption: none())
-    //     ];
     //     final expectedStates = [
     //       ShipToCodeState.initial().copyWith(
     //           shipToInfo: ShipToInfo.empty()
-    //               .copyWith(shipToCustomerCode: 'fake-ship_to-code')),
-    //     ];
-    //     final expectedOnShipToSelectStates = [
-    //       ShipToCodeState.initial().copyWith(
-    //           shipToInfo: ShipToInfo.empty()
-    //               .copyWith(shipToCustomerCode: 'fake-123456')),
+    //               .copyWith(shipToCustomerCode: 'fake-ship-to-code')),
     //     ];
     //     whenListen(shipToCodeBlocMock, Stream.fromIterable(expectedStates));
-    //     whenListen(customerCodeBlocMock, Stream.fromIterable(expectedCustomerState));
-    //     whenListen(shipToCodeBlocMock,
-    //         Stream.fromIterable(expectedOnShipToSelectStates));
-
     //     await tester.pumpWidget(getScopedWidget());
-    //     whenListen(shipToCodeBlocMock,
-    //         Stream.fromIterable(expectedOnShipToSelectStates));
-    //     await tester.pump();
-    //     final shipToCodeSelectTile =find.byKey(const Key('shipToCodeSelect')).last;
+    //     final shipToCodeSelectTile =
+    //         find.byKey(const Key('shipToCodeSelect')).last;
     //     await tester.tap(shipToCodeSelectTile);
     //     await tester.pump();
-
-    //     if (shipToCodeVariants.currentValue == CustomerCodeVariant.onn) {
-    //       final shipToCodeOption =
-    //           find.byKey(const Key('shipToOptionfake-123456'));
-    //       expect(shipToCodeOption, findsOneWidget);
-    //       await tester.tap(shipToCodeOption);
-    //       await tester.pump();
-    //     }
-    //     expect(
-    //         find.text('Please select a shipping address'.tr()), findsOneWidget);
     //   },
     //   variant: shipToCodeVariants,
     // );
+
+    testWidgets('Test when SalesOrg state change', (tester) async {
+      final fakeSalesOrganisation = SalesOrganisation.empty()
+          .copyWith(salesOrg: SalesOrg('fake-saleOrg'));
+
+      final fakeUser = User.empty().copyWith(username: Username('fake-name'));
+      final salesOrgStream = [
+        SalesOrgState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          configs:
+              SalesOrganisationConfigs.empty().copyWith(hideCustomer: true),
+        )
+      ];
+
+      when(() => userBlocMock.state)
+          .thenReturn(UserState.initial().copyWith(user: fakeUser));
+
+      whenListen(salesOrgBlocMock, Stream.fromIterable(salesOrgStream),
+          initialState: SalesOrgState.initial());
+
+      await tester.pumpWidget(getScopedWidget());
+
+      expect(salesOrgBlocMock.state.haveSelectedSalesOrganisation, true);
+      expect(salesOrgBlocMock.state.configs.hideCustomer, true);
+      expect(salesOrgBlocMock.state.salesOrganisation, fakeSalesOrganisation);
+      expect(userBlocMock.state.user, fakeUser);
+
+      verify(
+        () => customerCodeBlocMock.add(
+          CustomerCodeEvent.fetch(
+            hidecustomer: true,
+            userInfo: fakeUser,
+            selectedSalesOrg: fakeSalesOrganisation,
+            isRefresh: true,
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('Test when CustomerCode state change', (tester) async {
+      final fakeShipToInfo1 = ShipToInfo.empty()
+          .copyWith(defaultShipToAddress: false, building: 'fake-building1');
+      final fakeShipToInfo2 = ShipToInfo.empty()
+          .copyWith(defaultShipToAddress: true, building: 'fake-building2');
+      final customerCodeStream = [
+        CustomerCodeState.initial().copyWith(
+            customeCodeInfo: CustomerCodeInfo.empty()
+                .copyWith(shipToInfos: [fakeShipToInfo1, fakeShipToInfo2]))
+      ];
+
+      whenListen(customerCodeBlocMock, Stream.fromIterable(customerCodeStream),
+          initialState: CustomerCodeState.initial());
+
+      await tester.pumpWidget(getScopedWidget());
+
+      expect(
+        customerCodeBlocMock.state.defaultShipToInfo,
+        fakeShipToInfo2,
+      );
+
+      verify(
+        () => shipToCodeBlocMock
+            .add(ShipToCodeEvent.selected(shipToInfo: fakeShipToInfo2)),
+      ).called(1);
+    });
+
+    testWidgets('Test when ShipToCode state change', (tester) async {
+      final fakeShipToInfo1 = ShipToInfo.empty()
+          .copyWith(defaultShipToAddress: false, building: 'fake-building1');
+      final fakeShipToInfo2 = ShipToInfo.empty()
+          .copyWith(defaultShipToAddress: true, building: 'fake-building2');
+      final customerCodeStream = [
+        CustomerCodeState.initial().copyWith(
+            customeCodeInfo: CustomerCodeInfo.empty()
+                .copyWith(shipToInfos: [fakeShipToInfo1, fakeShipToInfo2]))
+      ];
+
+      whenListen(customerCodeBlocMock, Stream.fromIterable(customerCodeStream),
+          initialState: CustomerCodeState.initial());
+
+      await tester.pumpWidget(getScopedWidget());
+
+      expect(
+        customerCodeBlocMock.state.defaultShipToInfo,
+        fakeShipToInfo2,
+      );
+
+      verify(
+        () => shipToCodeBlocMock
+            .add(ShipToCodeEvent.selected(shipToInfo: fakeShipToInfo2)),
+      ).called(1);
+    });
+
+    // TODO: need Wasim help
+    // testWidgets(
+    //     'Test when ShipToCode state change and trigger Saved Order list fetch',
+    //     (tester) async {
+    //   final fakeUser = User.empty().copyWith(username: Username('fake-name'));
+    //   final fakeSaleOrg =
+    //       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('fake-name'));
+    //   final fakeCustomerCode =
+    //       CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: 'fake-name');
+    //   final fakeShipToCode = ShipToInfo.empty().copyWith(building: 'fake-name');
+    //   final shipToCodeStream = [
+    //     ShipToCodeState.initial().copyWith(shipToInfo: fakeShipToCode)
+    //   ];
+
+    //   whenListen(shipToCodeBlocMock, Stream.fromIterable(shipToCodeStream),
+    //       initialState: ShipToCodeState.initial());
+
+    //   when(() => userBlocMock.state)
+    //       .thenReturn(UserState.initial().copyWith(user: fakeUser));
+    //   when(() => salesOrgBlocMock.state).thenReturn(
+    //       SalesOrgState.initial().copyWith(salesOrganisation: fakeSaleOrg));
+    //   when(() => customerCodeBlocMock.state).thenReturn(
+    //       CustomerCodeState.initial()
+    //           .copyWith(customeCodeInfo: fakeCustomerCode));
+
+    //   await tester.pumpWidget(getScopedWidget());
+
+    //   expect(shipToCodeBlocMock.state.haveShipTo, true);
+    //   expect(userBlocMock.state.user, fakeUser);
+    //   expect(salesOrgBlocMock.state.salesOrganisation, fakeSaleOrg);
+    //   expect(customerCodeBlocMock.state.customeCodeInfo, fakeCustomerCode);
+    //   expect(shipToCodeBlocMock.state.shipToInfo, fakeShipToCode);
+
+    //   verify(() => savedOrderBlocMock.add(
+    //         SavedOrderListEvent.fetch(
+    //             userInfo: fakeUser,
+    //             selectedSalesOrganisation: fakeSaleOrg,
+    //             selectedCustomerCode: fakeCustomerCode,
+    //             selectedShipTo: fakeShipToCode),
+    //       )).called(1);
+    // });
+
+    // testWidgets(
+    //     'Test when ShipToCode state change and trigger Material list fetch',
+    //     (tester) async {
+    //   final fakeUser = User.empty().copyWith(username: Username('fake-name'));
+    //   final fakeSaleOrg =
+    //       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('fake-name'));
+    //   final fakeCustomerCode =
+    //       CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: 'fake-name');
+    //   final fakeShipToCode = ShipToInfo.empty().copyWith(building: 'fake-name');
+    //   final shipToCodeStream = [
+    //     ShipToCodeState.initial().copyWith(shipToInfo: fakeShipToCode)
+    //   ];
+
+    //   whenListen(shipToCodeBlocMock, Stream.fromIterable(shipToCodeStream),
+    //       initialState: ShipToCodeState.initial());
+
+    //   when(() => userBlocMock.state)
+    //       .thenReturn(UserState.initial().copyWith(user: fakeUser));
+    //   when(() => salesOrgBlocMock.state).thenReturn(
+    //       SalesOrgState.initial().copyWith(salesOrganisation: fakeSaleOrg));
+    //   when(() => customerCodeBlocMock.state).thenReturn(
+    //       CustomerCodeState.initial()
+    //           .copyWith(customeCodeInfo: fakeCustomerCode));
+
+    //   await tester.pumpWidget(getScopedWidget());
+
+    //   expect(shipToCodeBlocMock.state.haveShipTo, true);
+    //   expect(userBlocMock.state.user, fakeUser);
+    //   expect(salesOrgBlocMock.state.salesOrganisation, fakeSaleOrg);
+    //   expect(customerCodeBlocMock.state.customeCodeInfo, fakeCustomerCode);
+    //   expect(shipToCodeBlocMock.state.shipToInfo, fakeShipToCode);
+
+    //   verify(() => materialListBlocMock.add(
+    //         MaterialListEvent.fetch(
+    //             user: fakeUser,
+    //             salesOrganisation: fakeSaleOrg,
+    //             configs: fakeSaleOrgConfig,
+    //             customerCodeInfo: fakeCustomerCode,
+    //             shipToInfo: fakeShipToCode),
+    //       )).called(1);
+    // });
   });
 }

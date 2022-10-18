@@ -10,6 +10,8 @@ class CustomerCodeState with _$CustomerCodeState {
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required bool canLoadMore,
     required bool isFetching,
+    required bool isSearchActive,
+    required SearchKey searchKey,
   }) = _CustomerCodeState;
 
   factory CustomerCodeState.initial() => CustomerCodeState(
@@ -18,6 +20,8 @@ class CustomerCodeState with _$CustomerCodeState {
         apiFailureOrSuccessOption: none(),
         canLoadMore: true,
         isFetching: false,
+        isSearchActive: false,
+        searchKey: SearchKey(''),
       );
 
   ShipToInfo? get defaultShipToInfo {

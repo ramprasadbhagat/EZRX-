@@ -83,3 +83,10 @@ https://resocoder.com/2020/03/09/flutter-firebase-ddd-course-1-domain-driven-des
 3. ```fvm flutter test --coverage```
 4. ```genhtml coverage/lcov.info -o coverage/html```
 5. ```open coverage/html/index.html```
+
+### How to `bloc_test` the loading_more function
+Let's assume that we test loading_more fuction for load a page 2
+1. Use `seed` to setup a `state` with page 1 response for `bloc`
+2. Setup a mock `repository` with parameters and a `pageSize` equals to page 1 lenght
+3. Use `act` to add load_more `event` to `bloc`
+4. `expect` section will be the same as when we test the `fetch` function, except that the `state` will have both page 1 and page 2 response

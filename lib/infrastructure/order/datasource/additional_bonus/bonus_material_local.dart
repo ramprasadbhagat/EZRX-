@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:ezrxmobile/domain/material/entities/material_info.dart';
-import 'package:ezrxmobile/infrastructure/material/dtos/material_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/material/dtos/material_dto.dart';
 import 'package:flutter/services.dart';
 
 class BonusMaterialLocalDataSource {

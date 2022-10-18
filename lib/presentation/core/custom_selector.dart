@@ -23,12 +23,14 @@ class CustomSelector extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                title,
-                style: Theme.of(context)
-                    .textTheme
-                    .caption
-                    ?.apply(color: ZPColors.lightGray),
+              FittedBox(
+                child: Text(
+                  title,
+                  style: Theme.of(context)
+                      .textTheme
+                      .caption
+                      ?.apply(color: ZPColors.lightGray),
+                ),
               ),
               child,
             ],

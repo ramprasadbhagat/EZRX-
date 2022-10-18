@@ -131,7 +131,7 @@ void main() {
       'should return boolean true when input String is minimum n character long',
       () async {
         const input = 'APPLE CARE';
-        final result = isMinTenCharacter(input: input, minLength: 6);
+        final result = isMinCharacter(input: input, minLength: 6);
         expect(result, true);
       },
     );
@@ -140,7 +140,7 @@ void main() {
       'should return boolean true when input String is minimum n character long containing a new line',
       () async {
         const input = 'APPLE\nCARE';
-        final result = isMinTenCharacter(input: input, minLength: 10);
+        final result = isMinCharacter(input: input, minLength: 10);
         expect(result, true);
       },
     );
@@ -149,7 +149,7 @@ void main() {
       'should return boolean false when input String is empty',
       () async {
         const input = '';
-        final result = isMinTenCharacter(input: input, minLength: 6);
+        final result = isMinCharacter(input: input, minLength: 6);
         expect(result, false);
       },
     );
@@ -158,7 +158,7 @@ void main() {
       'should return boolean false when input String is less than minimum length',
       () async {
         const input = 'Zuellig Pharma';
-        final result = isMinTenCharacter(input: input, minLength: 16);
+        final result = isMinCharacter(input: input, minLength: 16);
         expect(result, false);
       },
     );

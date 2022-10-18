@@ -6,21 +6,145 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/core/search_bar.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CustomerSearchPage extends StatelessWidget {
+class CustomerSearchPage extends StatefulWidget {
   const CustomerSearchPage({Key? key}) : super(key: key);
+
+  @override
+  State<CustomerSearchPage> createState() => _CustomerSearchPage();
+}
+
+class _CustomerSearchPage extends State<CustomerSearchPage> {
+  late TextEditingController _searchController;
+  late CustomerCodeBloc customerCodeBloc;
+  late SalesOrgBloc salesOrgBloc;
+  late UserBloc userBloc;
+  // Timer? _debounce;
+  @override
+  void initState() {
+    _searchController = TextEditingController();
+    customerCodeBloc = context.read<CustomerCodeBloc>();
+    final searchText = customerCodeBloc.state.searchKey;
+    if (customerCodeBloc.state.isSearchActive && searchText.isValid()) {
+      _searchController.value = TextEditingValue(
+        text: searchText.getOrCrash(),
+        selection: TextSelection.collapsed(
+          offset: searchText.getOrCrash().length,
+        ),
+      );
+    }
+    salesOrgBloc = context.read<SalesOrgBloc>();
+    userBloc = context.read<UserBloc>();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: const Key('customerSearchPage'),
-      appBar: const PreferredSize(
-        preferredSize: Size(double.infinity, 60),
-        child: AppSearchBar(),
+      appBar: PreferredSize(
+        preferredSize: const Size(double.infinity, 60),
+        child: CustomAppBar(
+          child: BlocConsumer<CustomerCodeBloc, CustomerCodeState>(
+            listenWhen: (previous, current) =>
+                previous.searchKey != current.searchKey,
+            listener: (context, state) {
+              final searchText = state.searchKey.getValue();
+              _searchController.value = TextEditingValue(
+                text: searchText,
+                selection: TextSelection.collapsed(offset: searchText.length),
+              );
+            },
+            buildWhen: (previous, current) =>
+                previous.searchKey != current.searchKey ||
+                previous.isFetching != current.isFetching,
+            builder: (context, state) {
+              return Form(
+                child: TextFormField(
+                  key: const Key('customerCodeSearchField'),
+                  autocorrect: false,
+                  controller: _searchController,
+                  enabled: !state.isFetching,
+                  onChanged: (value) {
+                    customerCodeBloc
+                        .add(CustomerCodeEvent.updateSearchKey(value));
+                    //   if (_debounce?.isActive ?? false) _debounce?.cancel();
+                    //   _debounce = Timer(const Duration(seconds: 3), () {
+                    //     customerCodeBloc.add(
+                    //       CustomerCodeEvent.fetch(
+                    //         userInfo: userBloc.state.user,
+                    //         selectedSalesOrg: salesOrgBloc.state.salesOrganisation,
+                    //         isRefresh: true,
+                    //         hidecustomer: salesOrgBloc.state.configs.hideCustomer,
+                    //       ),
+                    //     );
+                    //   });
+                  },
+                  onFieldSubmitted: (value) {
+                    if (state.searchKey.isValid()) {
+                      customerCodeBloc.add(
+                        CustomerCodeEvent.search(
+                          userInfo: userBloc.state.user,
+                          selectedSalesOrg:
+                              salesOrgBloc.state.salesOrganisation,
+                          hidecustomer: salesOrgBloc.state.configs.hideCustomer,
+                        ),
+                      );
+                    } else {
+                      showSnackBar(
+                        context: context,
+                        message:
+                            'Search input must be greater than 4 characters.'
+                                .tr(),
+                      );
+                    }
+                  },
+                  // validator: (_) => customerCodeBloc.state.searchKey.value.fold(
+                  //   (f) => f.maybeMap(
+                  //     subceedLength: (f) =>
+                  //         'Search input must be greater than 4 characters.'
+                  //             .tr(),
+                  //     orElse: () => null,
+                  //   ),
+                  //   (_) => null,
+                  // ),
+                  decoration: InputDecoration(
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: ZPColors.primary),
+                    ),
+                    isDense: true,
+                    prefixIcon: const Icon(Icons.search),
+                    suffixIcon: IconButton(
+                      key: const Key('clearCustomerCodeSearch'),
+                      icon: const Icon(Icons.clear),
+                      onPressed: () {
+                        if(_searchController.text.isNotEmpty){
+                          customerCodeBloc.add(
+                            CustomerCodeEvent.fetch(
+                              userInfo: userBloc.state.user,
+                              selectedSalesOrg:
+                                  salesOrgBloc.state.salesOrganisation,
+                              isRefresh: true,
+                              hidecustomer:
+                                  salesOrgBloc.state.configs.hideCustomer,
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                    hintText: 'Search...',
+                    border: InputBorder.none,
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
       ),
       body: BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
         buildWhen: (previous, current) =>
@@ -39,6 +163,13 @@ class CustomerSearchPage extends StatelessWidget {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // _debounce?.cancel();
+    _searchController.dispose();
+    super.dispose();
   }
 }
 
@@ -73,7 +204,6 @@ class _BodyContent extends StatelessWidget {
       child: ScrollList<CustomerCodeInfo>(
         key: const Key('customerCodeSelect'),
         onRefresh: () {
-          //TODO: Implement case have search text
           context.read<CustomerCodeBloc>().add(
                 CustomerCodeEvent.fetch(
                   userInfo: userBloc.state.user,
@@ -84,16 +214,13 @@ class _BodyContent extends StatelessWidget {
               );
         },
         onLoadingMore: () {
-          //TODO: Implement case have search text
-          if (state.canLoadMore && !state.isFetching) {
-            context.read<CustomerCodeBloc>().add(
-                  CustomerCodeEvent.fetch(
-                    userInfo: userBloc.state.user,
-                    selectedSalesOrg: salesOrgBloc.state.salesOrganisation,
-                    hidecustomer: false,
-                  ),
-                );
-          }
+          context.read<CustomerCodeBloc>().add(
+                CustomerCodeEvent.loadMore(
+                  userInfo: userBloc.state.user,
+                  selectedSalesOrg: salesOrgBloc.state.salesOrganisation,
+                  hidecustomer: false,
+                ),
+              );
         },
         isLoading: state.isFetching,
         itemBuilder: (_, __, item) => _ListContent(customerCodeInfo: item),

@@ -36,7 +36,7 @@ String naIfEmpty(String text) {
 
 //   return parsed.toString();
 // }
-bool isMinTenCharacter({required String input, required int minLength}) =>
+bool isMinCharacter({required String input, required int minLength}) =>
     input.length >= minLength;
 
 bool isAtleastOneLowerCharacter({

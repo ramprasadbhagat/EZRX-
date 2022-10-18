@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/customer_code_repository.dart';
 import 'package:flutter/material.dart';
@@ -91,6 +92,7 @@ void main() {
             selectedSalesOrg: fakeSaleOrg));
       },
       expect: () => [
+        CustomerCodeState.initial(),
         CustomerCodeState.initial().copyWith(isFetching: true),
         CustomerCodeState.initial().copyWith(
           customerCodeList: [],
@@ -129,13 +131,14 @@ void main() {
             selectedSalesOrg: fakeSaleOrg));
       },
       expect: () => [
+        CustomerCodeState.initial(),
         CustomerCodeState.initial().copyWith(isFetching: true),
         CustomerCodeState.initial().copyWith(
           isFetching: false,
           customeCodeInfo: customerMockData.first,
           customerCodeList: customerMockData,
           apiFailureOrSuccessOption: none(),
-          canLoadMore: false,
+          canLoadMore: true,
         ),
       ],
       verify: (CustomerCodeBloc bloc) => expect(
@@ -168,5 +171,164 @@ void main() {
           fakeShipToInfo.copyWith(
               building: 'fakeBuilding2', defaultShipToAddress: true));
     });
+
+    blocTest(
+      'Customer Code Search Success',
+      build: () =>
+          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      setUp: () {
+        when(() => customerCodeMockRepo.getCustomerCode(
+            fakeSaleOrg, 'fake-customer-code', false, 0, fakeUser)).thenAnswer(
+          (invocation) async => Right(
+            [
+              CustomerCodeInfo.empty()
+                  .copyWith(customerCodeSoldTo: 'fake-customer-code')
+            ],
+          ),
+        );
+      },
+      act: (CustomerCodeBloc bloc) {
+        bloc.add(const CustomerCodeEvent.updateSearchKey('fake-customer-code'));
+        bloc.add(CustomerCodeEvent.search(
+            hidecustomer: false,
+            userInfo: fakeUser,
+            selectedSalesOrg: fakeSaleOrg));
+      },
+      expect: () => [
+        CustomerCodeState.initial()
+            .copyWith(searchKey: SearchKey('fake-customer-code')),
+        CustomerCodeState.initial().copyWith(
+            isSearchActive: true,
+            isFetching: true,
+            searchKey: SearchKey('fake-customer-code')),
+        CustomerCodeState.initial().copyWith(
+          customerCodeList: [
+            CustomerCodeInfo.empty()
+                .copyWith(customerCodeSoldTo: 'fake-customer-code')
+          ],
+          searchKey: SearchKey('fake-customer-code'),
+          canLoadMore: false,
+          isSearchActive: true,
+        )
+      ],
+    );
+
+    blocTest(
+      'Customer Code Search Failure',
+      build: () =>
+          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      setUp: () {
+        when(() => customerCodeMockRepo.getCustomerCode(
+            fakeSaleOrg, 'fake-customer-code', false, 0, fakeUser)).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+      },
+      act: (CustomerCodeBloc bloc) {
+        bloc.add(const CustomerCodeEvent.updateSearchKey('fake-customer-code'));
+        bloc.add(CustomerCodeEvent.search(
+            hidecustomer: false,
+            userInfo: fakeUser,
+            selectedSalesOrg: fakeSaleOrg));
+      },
+      expect: () => [
+        CustomerCodeState.initial()
+            .copyWith(searchKey: SearchKey('fake-customer-code')),
+        CustomerCodeState.initial().copyWith(
+            isSearchActive: true,
+            isFetching: true,
+            searchKey: SearchKey('fake-customer-code')),
+        CustomerCodeState.initial().copyWith(
+            customerCodeList: [],
+            customeCodeInfo: CustomerCodeInfo.empty(),
+            apiFailureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('fake-error'),
+              ),
+            ),
+            searchKey: SearchKey('fake-customer-code'),
+            canLoadMore: false,
+            isSearchActive: true),
+      ],
+    );
+
+    blocTest(
+      'Customer Code On Load More fail',
+      build: () =>
+          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      setUp: () {
+        when(() => customerCodeMockRepo.getCustomerCode(
+              fakeSaleOrg,
+              fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
+              false,
+              customerMockData.length,
+              fakeUser,
+            )).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+      },
+      seed: () => CustomerCodeState.initial().copyWith(
+        customerCodeList: customerMockData,
+      ),
+      act: (CustomerCodeBloc bloc) => bloc
+        ..add(CustomerCodeEvent.loadMore(
+            hidecustomer: false,
+            userInfo: fakeUser,
+            selectedSalesOrg: fakeSaleOrg)),
+      expect: () => [
+        CustomerCodeState.initial().copyWith(
+          isFetching: true,
+          customerCodeList: customerMockData,
+        ),
+        CustomerCodeState.initial().copyWith(
+          isFetching: false,
+          apiFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('fake-error'))),
+          canLoadMore: true,
+          customerCodeList: customerMockData,
+        )
+      ],
+    );
+    blocTest(
+      'Customer Code On Load More Success',
+      build: () =>
+          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      setUp: () {
+        when(() => customerCodeMockRepo.getCustomerCode(
+              fakeSaleOrg,
+              fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
+              false,
+              customerMockData.length,
+              fakeUser,
+            )).thenAnswer(
+          (invocation) async => Right(
+            customerMockData,
+          ),
+        );
+      },
+      seed: () => CustomerCodeState.initial().copyWith(
+        customerCodeList: customerMockData,
+      ),
+      act: (CustomerCodeBloc bloc) => bloc
+        ..add(CustomerCodeEvent.loadMore(
+            hidecustomer: false,
+            userInfo: fakeUser,
+            selectedSalesOrg: fakeSaleOrg)),
+      expect: () => [
+        CustomerCodeState.initial().copyWith(
+          isFetching: true,
+          customerCodeList: customerMockData,
+        ),
+        CustomerCodeState.initial().copyWith(
+          isFetching: false,
+          apiFailureOrSuccessOption: none(),
+          canLoadMore: true,
+          customerCodeList: [...customerMockData, ...customerMockData],
+        )
+      ],
+    );
   });
 }

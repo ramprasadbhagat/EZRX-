@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/banner/repository/i_banner_repository.dart';
@@ -15,19 +14,9 @@ part 'banner_bloc.freezed.dart';
 
 class BannerBloc extends Bloc<BannerEvent, BannerState> {
   final IBannerRepository bannerRepository;
-  final SalesOrgBloc salesOrgBloc;
-  late final StreamSubscription _salesOrgBlocSubscription;
-  BannerBloc({required this.bannerRepository, required this.salesOrgBloc})
+  BannerBloc({required this.bannerRepository})
       : super(BannerState.initial()) {
     on<BannerEvent>(_onEvent);
-    _salesOrgBlocSubscription = salesOrgBloc.stream.listen((state) {
-      if (state.salesOrganisation != SalesOrganisation.empty()) {
-        add(BannerEvent.fetch(
-          isPreSalesOrg: false,
-          salesOrganisation: state.salesOrganisation,
-        ));
-      }
-    });
   }
 
   Future<void> _onEvent(BannerEvent event, Emitter<BannerState> emit) async {
@@ -53,13 +42,6 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
         );
       },
     );
-  }
-
-  @override
-  Future<void> close() async {
-    await _salesOrgBlocSubscription.cancel();
-
-    return super.close();
   }
 
   @override

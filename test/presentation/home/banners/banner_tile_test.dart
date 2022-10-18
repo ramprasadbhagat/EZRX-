@@ -30,6 +30,7 @@ final options = RequestOptions(
 class MockHTTPService extends Mock implements HttpService {}
 
 class MockCacheManager extends Mock implements DefaultCacheManager {}
+
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
@@ -55,8 +56,8 @@ void main() {
   late DefaultCacheManager cacheManagerMock;
 
   setUpAll(() async {
-  TestWidgetsFlutterBinding.ensureInitialized();
-  WidgetsFlutterBinding.ensureInitialized();
+    TestWidgetsFlutterBinding.ensureInitialized();
+    WidgetsFlutterBinding.ensureInitialized();
     locator = GetIt.instance;
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());

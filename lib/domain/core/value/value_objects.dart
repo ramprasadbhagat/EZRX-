@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/errors.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -68,4 +69,20 @@ abstract class DateValueObject<T> {
 
   @override
   String toString() => 'Value($value)';
+}
+
+
+class SearchKey extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory SearchKey(String input) {
+    return SearchKey._(validateStringNotEmpty(input));
+  }
+
+  factory SearchKey.search(String searchText) {
+    return SearchKey._(validateStringNotEmpty(searchText).flatMap((input) => validateMinStringLength(input, 4)));
+  }
+
+  const SearchKey._(this.value);
 }

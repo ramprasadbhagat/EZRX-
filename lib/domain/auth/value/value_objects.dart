@@ -64,10 +64,10 @@ class Password extends ValueObject<String> {
     );
   }
 
-  bool matchMinTenCharacter() {
-    return isMinTenCharacter(
+  bool matchMinCharacter(int length) {
+    return isMinCharacter(
       input: value.fold((l) => l.failedValue, (r) => r),
-      minLength: 10,
+      minLength: length,
     );
   }
 

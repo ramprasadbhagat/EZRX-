@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
@@ -12,7 +13,6 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ShipCodeSelector extends StatelessWidget {
   const ShipCodeSelector({Key? key}) : super(key: key);
@@ -40,17 +40,30 @@ class ShipCodeSelector extends StatelessWidget {
                     ),
                   );
 
-              context.read<OrderHistoryListBloc>().add(
-                    OrderHistoryListEvent.fetch(
+              context.read<MaterialListBloc>().add(
+                    MaterialListEvent.fetch(
+                      user: context.read<UserBloc>().state.user,
+                      salesOrganisation:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      configs: context.read<SalesOrgBloc>().state.configs,
                       customerCodeInfo: context
                           .read<CustomerCodeBloc>()
                           .state
                           .customeCodeInfo,
+                      shipToInfo: state.shipToInfo,
+                    ),
+                  );
+
+              context.read<OrderHistoryListBloc>().add(
+                    OrderHistoryListEvent.fetch(
                       salesOrgConfigs:
                           context.read<SalesOrgBloc>().state.configs,
-                      shipToInfo:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
+                      shipToInfo: state.shipToInfo,
                       user: context.read<UserBloc>().state.user,
+                      customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customeCodeInfo,
                     ),
                   );
 
@@ -81,43 +94,7 @@ class ShipCodeSelector extends StatelessWidget {
               title: 'Shipping Address',
               onTap: customerCodeState.isFetching
                   ? null
-                  : () => showPlatformDialog(
-                        context: context,
-                        barrierDismissible: true,
-                        builder: (_) => PlatformAlertDialog(
-                          title: const Text('Please select a shipping address')
-                              .tr(),
-                          actions: customerCodeState.customeCodeInfo.shipToInfos
-                              .map(
-                                (shipToInfo) => PlatformDialogAction(
-                                  key: Key(
-                                    'shipToOption${shipToInfo.shipToCustomerCode}',
-                                  ),
-                                  child: Text(
-                                    shipToInfo.shipToCustomerCode,
-                                    style: TextStyle(
-                                      fontWeight:
-                                          shipToInfo.defaultShipToAddress
-                                              ? FontWeight.bold
-                                              : FontWeight.normal,
-                                      color: shipToInfo.defaultShipToAddress
-                                          ? ZPColors.secondary
-                                          : Colors.blueAccent,
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    context.read<ShipToCodeBloc>().add(
-                                          ShipToCodeEvent.selected(
-                                            shipToInfo: shipToInfo,
-                                          ),
-                                        );
-                                    context.router.pop();
-                                  },
-                                ),
-                              )
-                              .toList(),
-                        ),
-                      ),
+                  : () => context.router.pushNamed('ship_to_search_page'),
               child: customerCodeState.isFetching
                   ? LoadingShimmer.tile()
                   : Text(

@@ -37,7 +37,7 @@ class LoadingShimmer {
                 Container(
                   width: double.infinity,
                   height: 8.0,
-                  color: Colors.white,
+                  color: ZPColors.white,
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 2.0),

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,7 +26,7 @@ class ResetPasswordValidation extends StatelessWidget {
                 ),
               ),
               _ConditionText(
-                enableGreenTick: state.newPassword.matchMinTenCharacter(),
+                enableGreenTick: state.newPassword.matchMinCharacter(10),
                 msgText: 'Minimum length of 10 characters'.tr(),
               ),
               _ConditionText(
@@ -83,10 +84,10 @@ class _ConditionText extends StatelessWidget {
     return Row(
       children: [
         enableGreenTick
-            ? const Icon(Icons.check_circle_rounded, color: Colors.green)
+            ? const Icon(Icons.check_circle_rounded, color: ZPColors.green)
             : const Padding(
                 padding: EdgeInsets.all(9),
-                child: CircleAvatar(backgroundColor: Colors.black, radius: 3),
+                child: CircleAvatar(backgroundColor: ZPColors.black, radius: 3),
               ),
         const SizedBox(width: 8),
         Expanded(

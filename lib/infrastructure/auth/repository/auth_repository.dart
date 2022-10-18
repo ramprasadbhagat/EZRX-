@@ -18,7 +18,9 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart'
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
+// ignore: depend_on_referenced_packages
 import 'package:local_auth_android/local_auth_android.dart';
+// ignore: depend_on_referenced_packages
 import 'package:local_auth_ios/local_auth_ios.dart';
 
 class AuthRepository implements IAuthRepository {

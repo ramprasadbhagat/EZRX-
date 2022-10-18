@@ -41,6 +41,11 @@ class CustomerCodeSelector extends StatelessWidget {
         final defaultShipToInfo = state.defaultShipToInfo;
         if (defaultShipToInfo != null) {
           context.read<ShipToCodeBloc>().add(
+              ShipToCodeEvent.load(
+                shipToInfos: state.customeCodeInfo.shipToInfos,
+              ),
+            );
+          context.read<ShipToCodeBloc>().add(
                 ShipToCodeEvent.selected(
                   shipToInfo: defaultShipToInfo,
                 ),

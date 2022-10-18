@@ -103,7 +103,7 @@ final appThemeData = {
         // textStyle: ThemeData.light().textTheme.bodyText2,
         textStyle: TextStyle(
           fontSize: 21.sp,
-          color: Colors.white,
+          color: ZPColors.white,
           fontWeight: FontWeight.bold,
         ),
         // RoundedRectangleBorder(
