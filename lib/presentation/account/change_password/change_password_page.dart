@@ -16,7 +16,7 @@ class ChangePasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userBloc = context.read<UserBloc>();
-    
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Change Password').tr(),
@@ -73,7 +73,7 @@ class _ChangePasswordForm extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const SizedBox(height: 40),
+              const SizedBox(height: 10),
               OldPasswordTextField(user: user),
               const SizedBox(height: 20),
               NewPasswordTextField(user: user),

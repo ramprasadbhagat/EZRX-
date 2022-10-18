@@ -80,11 +80,12 @@ void main() {
             (invocation) async => Right([Favourite.empty()]),
           );
           return FavouriteBloc(
-              favouriteRepository: mockFavouriteRepository,
-              userBloc: mockUserBloc
-              // shipToCodeBloc: shipToCodeMockBloc,
-              );
+            favouriteRepository: mockFavouriteRepository,
+            // shipToCodeBloc: shipToCodeMockBloc,
+          );
         },
+        act: (FavouriteBloc bloc) =>
+            bloc.add(FavouriteEvent.fetch(user: mockUser)),
         expect: () => [
           FavouriteState.initial().copyWith(isLoading: true),
           FavouriteState.initial().copyWith(
@@ -112,11 +113,13 @@ void main() {
             (invocation) async => const Right([]),
           );
           return FavouriteBloc(
-              favouriteRepository: mockFavouriteRepository,
-              userBloc: mockUserBloc
-              // shipToCodeBloc: shipToCodeMockBloc,
-              );
+            favouriteRepository: mockFavouriteRepository,
+
+            // shipToCodeBloc: shipToCodeMockBloc,
+          );
         },
+        act: (FavouriteBloc bloc) =>
+            bloc.add(FavouriteEvent.fetch(user: mockUser)),
         expect: () => [
           FavouriteState.initial().copyWith(isLoading: true),
           FavouriteState.initial().copyWith(
@@ -130,11 +133,16 @@ void main() {
         'delete favourite item ',
         build: () {
           return FavouriteBloc(
-              favouriteRepository: mockFavouriteRepository,
-              userBloc: mockUserBloc
-              // shipToCodeBloc: shipToCodeMockBloc,
+            favouriteRepository: mockFavouriteRepository,
 
-              );
+            // shipToCodeBloc: shipToCodeMockBloc,
+          );
+        },
+        act: (FavouriteBloc bloc) {
+          bloc.add(FavouriteEvent.fetch(user: User.empty()));
+
+          bloc.add(FavouriteEvent.delete(
+              item: Favourite.empty(), user: User.empty()));
         },
         setUp: () {
           when(
@@ -142,19 +150,23 @@ void main() {
               user: mockUser,
             ),
           ).thenAnswer((invocation) async => Right(favouriteItems));
-          when(() => mockFavouriteRepository.deleteFavourites(
-                favouriteItems: favouriteItems,
-                item: Favourite(
-                  id: '1',
-                  isFOC: false,
-                  isTenderContract: false,
-                  materialDescription: '',
-                  materialNumber: MaterialNumber(''),
-                ),
-              )).thenAnswer((invocation) async => Right(favouriteItems));
+          when(
+            () => mockFavouriteRepository.deleteFavourites(
+                favouriteItems: favouriteItems, item: Favourite.empty()),
+          ).thenAnswer((invocation) async => Right(favouriteItems));
         },
         expect: () => [
           FavouriteState.initial().copyWith(isLoading: true),
+          FavouriteState.initial().copyWith(
+            failureOrSuccessOption: none(),
+            isLoading: false,
+            favouriteItems: favouriteItems,
+          ),
+          FavouriteState.initial().copyWith(
+            failureOrSuccessOption: none(),
+            isLoading: true,
+            favouriteItems: favouriteItems,
+          ),
           FavouriteState.initial().copyWith(
             failureOrSuccessOption: none(),
             isLoading: false,
@@ -166,10 +178,8 @@ void main() {
         'add favourite item ',
         build: () {
           return FavouriteBloc(
-              favouriteRepository: mockFavouriteRepository,
-              userBloc: mockUserBloc
-              // shipToCodeBloc: shipToCodeMockBloc,
-              );
+            favouriteRepository: mockFavouriteRepository,
+          );
         },
         setUp: () {
           when(
@@ -190,8 +200,31 @@ void main() {
                 user: mockUser,
               )).thenAnswer((invocation) async => Right(favouriteItems));
         },
+        act: (FavouriteBloc bloc) {
+          bloc.add(FavouriteEvent.fetch(user: mockUser));
+          bloc.add(FavouriteEvent.add(
+              user: mockUser,
+              item: Favourite(
+                id: '1',
+                isFOC: false,
+                isTenderContract: false,
+                materialDescription: '',
+                materialNumber: MaterialNumber(''),
+              ),
+              isPackAndPick: false));
+        },
         expect: () => [
           FavouriteState.initial().copyWith(isLoading: true),
+          FavouriteState.initial().copyWith(
+            failureOrSuccessOption: none(),
+            isLoading: false,
+            favouriteItems: favouriteItems,
+          ),
+          FavouriteState.initial().copyWith(
+            failureOrSuccessOption: none(),
+            isLoading: true,
+            favouriteItems: favouriteItems,
+          ),
           FavouriteState.initial().copyWith(
             failureOrSuccessOption: none(),
             isLoading: false,
@@ -202,22 +235,14 @@ void main() {
 
       blocTest(
         'Simulate error for add favourite item ',
-        build: () => FavouriteBloc(
-            favouriteRepository: mockFavouriteRepository, userBloc: mockUserBloc
-            // shipToCodeBloc: shipToCodeMockBloc,
-            ),
+        build: () =>
+            FavouriteBloc(favouriteRepository: mockFavouriteRepository),
         setUp: () {
           when(
             () => mockFavouriteRepository.addFavourites(
               isPackAndPick: false,
               favouriteItems: favouriteItems,
-              item: Favourite(
-                id: '1',
-                isFOC: false,
-                isTenderContract: false,
-                materialDescription: '',
-                materialNumber: MaterialNumber(''),
-              ),
+              item: Favourite.empty(),
               user: mockUser,
             ),
           ).thenAnswer(
@@ -226,17 +251,13 @@ void main() {
             ),
           );
         },
-        act: (FavouriteBloc bloc) => bloc.add(
-          FavouriteEvent.add(
-              Favourite(
-                id: '1',
-                isFOC: false,
-                isTenderContract: false,
-                materialDescription: '',
-                materialNumber: MaterialNumber(''),
-              ),
-              false),
-        ),
+        act: (FavouriteBloc bloc) {
+          bloc.add(FavouriteEvent.fetch(user: mockUser));
+          bloc.add(
+            FavouriteEvent.add(
+                item: Favourite.empty(), isPackAndPick: false, user: mockUser),
+          );
+        },
         expect: () => [
           FavouriteState.initial().copyWith(isLoading: true),
           FavouriteState.initial().copyWith(
@@ -265,37 +286,25 @@ void main() {
 
       blocTest(
         'Simulate error for delete favourite item ',
-        build: () => FavouriteBloc(
-            favouriteRepository: mockFavouriteRepository, userBloc: mockUserBloc
+        build: () => FavouriteBloc(favouriteRepository: mockFavouriteRepository
             // shipToCodeBloc: shipToCodeMockBloc,
             ),
         setUp: () {
           when(
             () => mockFavouriteRepository.deleteFavourites(
-              favouriteItems: favouriteItems,
-              item: Favourite(
-                id: '1',
-                isFOC: false,
-                isTenderContract: false,
-                materialDescription: '',
-                materialNumber: MaterialNumber(''),
-              ),
-            ),
+                favouriteItems: favouriteItems, item: Favourite.empty()),
           ).thenAnswer(
             (invocation) async => const Left(
               ApiFailure.other('fake-error'),
             ),
           );
         },
-        act: (FavouriteBloc bloc) => bloc.add(
-          FavouriteEvent.delete(Favourite(
-            id: '1',
-            isFOC: false,
-            isTenderContract: false,
-            materialDescription: '',
-            materialNumber: MaterialNumber(''),
-          )),
-        ),
+        act: (FavouriteBloc bloc) {
+          bloc.add(FavouriteEvent.fetch(user: mockUser));
+          bloc.add(
+            FavouriteEvent.delete(item: Favourite.empty(), user: mockUser),
+          );
+        },
         expect: () => [
           FavouriteState.initial().copyWith(isLoading: true),
           FavouriteState.initial().copyWith(

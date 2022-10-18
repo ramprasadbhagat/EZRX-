@@ -356,8 +356,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => FavouriteBloc(
       favouriteRepository: locator<FavouriteRepository>(),
-      userBloc: locator<UserBloc>(),
-      // shipToCodeBloc: locator<ShipToCodeBloc>(),
     ),
   );
   //============================================================

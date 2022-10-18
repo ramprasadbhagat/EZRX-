@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -57,7 +58,9 @@ class FavouritesTab extends StatelessWidget {
                 : ScrollList<Favourite>(
                     emptyMessage: 'No favorite found',
                     onRefresh: () => context.read<FavouriteBloc>().add(
-                          const FavouriteEvent.fetch(),
+                          FavouriteEvent.fetch(
+                            user: context.read<UserBloc>().state.user,
+                          ),
                         ),
                     isLoading: state.isLoading,
                     onLoadingMore: () {},

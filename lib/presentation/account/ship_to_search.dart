@@ -146,6 +146,9 @@ class AppBar extends StatelessWidget {
               //   (_) => null,
               // ),
               decoration: InputDecoration(
+                focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: ZPColors.primary),
+                ),
                 isDense: true,
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: IconButton(

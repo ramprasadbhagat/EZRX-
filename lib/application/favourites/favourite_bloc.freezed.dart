@@ -19,25 +19,26 @@ mixin _$FavouriteEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
-    required TResult Function(Favourite item, bool isPackAndPick) add,
-    required TResult Function(Favourite item) delete,
+    required TResult Function(User user) fetch,
+    required TResult Function(Favourite item, bool isPackAndPick, User user)
+        add,
+    required TResult Function(Favourite item, User user) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function(Favourite item, bool isPackAndPick)? add,
-    TResult Function(Favourite item)? delete,
+    TResult Function(User user)? fetch,
+    TResult Function(Favourite item, bool isPackAndPick, User user)? add,
+    TResult Function(Favourite item, User user)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function(Favourite item, bool isPackAndPick)? add,
-    TResult Function(Favourite item)? delete,
+    TResult Function(User user)? fetch,
+    TResult Function(Favourite item, bool isPackAndPick, User user)? add,
+    TResult Function(Favourite item, User user)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -127,9 +128,10 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
-    required TResult Function(Favourite item, bool isPackAndPick) add,
-    required TResult Function(Favourite item) delete,
+    required TResult Function(User user) fetch,
+    required TResult Function(Favourite item, bool isPackAndPick, User user)
+        add,
+    required TResult Function(Favourite item, User user) delete,
   }) {
     return initialized();
   }
@@ -138,9 +140,9 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function(Favourite item, bool isPackAndPick)? add,
-    TResult Function(Favourite item)? delete,
+    TResult Function(User user)? fetch,
+    TResult Function(Favourite item, bool isPackAndPick, User user)? add,
+    TResult Function(Favourite item, User user)? delete,
   }) {
     return initialized?.call();
   }
@@ -149,9 +151,9 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function(Favourite item, bool isPackAndPick)? add,
-    TResult Function(Favourite item)? delete,
+    TResult Function(User user)? fetch,
+    TResult Function(Favourite item, bool isPackAndPick, User user)? add,
+    TResult Function(Favourite item, User user)? delete,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -206,6 +208,9 @@ abstract class _Initialized implements FavouriteEvent {
 abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
+  $Res call({User user});
+
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -216,60 +221,91 @@ class __$$_FetchCopyWithImpl<$Res> extends _$FavouriteEventCopyWithImpl<$Res>
 
   @override
   _$_Fetch get _value => super._value as _$_Fetch;
+
+  @override
+  $Res call({
+    Object? user = freezed,
+  }) {
+    return _then(_$_Fetch(
+      user: user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+    ));
+  }
+
+  @override
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  const _$_Fetch();
+  const _$_Fetch({required this.user});
+
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'FavouriteEvent.fetch()';
+    return 'FavouriteEvent.fetch(user: $user)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Fetch);
+        (other.runtimeType == runtimeType &&
+            other is _$_Fetch &&
+            const DeepCollectionEquality().equals(other.user, user));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
-    required TResult Function(Favourite item, bool isPackAndPick) add,
-    required TResult Function(Favourite item) delete,
+    required TResult Function(User user) fetch,
+    required TResult Function(Favourite item, bool isPackAndPick, User user)
+        add,
+    required TResult Function(Favourite item, User user) delete,
   }) {
-    return fetch();
+    return fetch(user);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function(Favourite item, bool isPackAndPick)? add,
-    TResult Function(Favourite item)? delete,
+    TResult Function(User user)? fetch,
+    TResult Function(Favourite item, bool isPackAndPick, User user)? add,
+    TResult Function(Favourite item, User user)? delete,
   }) {
-    return fetch?.call();
+    return fetch?.call(user);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function(Favourite item, bool isPackAndPick)? add,
-    TResult Function(Favourite item)? delete,
+    TResult Function(User user)? fetch,
+    TResult Function(Favourite item, bool isPackAndPick, User user)? add,
+    TResult Function(Favourite item, User user)? delete,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch();
+      return fetch(user);
     }
     return orElse();
   }
@@ -313,16 +349,22 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements FavouriteEvent {
-  const factory _Fetch() = _$_Fetch;
+  const factory _Fetch({required final User user}) = _$_Fetch;
+
+  User get user;
+  @JsonKey(ignore: true)
+  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$_AddCopyWith<$Res> {
   factory _$$_AddCopyWith(_$_Add value, $Res Function(_$_Add) then) =
       __$$_AddCopyWithImpl<$Res>;
-  $Res call({Favourite item, bool isPackAndPick});
+  $Res call({Favourite item, bool isPackAndPick, User user});
 
   $FavouriteCopyWith<$Res> get item;
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -338,16 +380,21 @@ class __$$_AddCopyWithImpl<$Res> extends _$FavouriteEventCopyWithImpl<$Res>
   $Res call({
     Object? item = freezed,
     Object? isPackAndPick = freezed,
+    Object? user = freezed,
   }) {
     return _then(_$_Add(
-      item == freezed
+      item: item == freezed
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
               as Favourite,
-      isPackAndPick == freezed
+      isPackAndPick: isPackAndPick == freezed
           ? _value.isPackAndPick
           : isPackAndPick // ignore: cast_nullable_to_non_nullable
               as bool,
+      user: user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ));
   }
 
@@ -357,21 +404,31 @@ class __$$_AddCopyWithImpl<$Res> extends _$FavouriteEventCopyWithImpl<$Res>
       return _then(_value.copyWith(item: value));
     });
   }
+
+  @override
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_Add implements _Add {
-  const _$_Add(this.item, this.isPackAndPick);
+  const _$_Add(
+      {required this.item, required this.isPackAndPick, required this.user});
 
   @override
   final Favourite item;
   @override
   final bool isPackAndPick;
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'FavouriteEvent.add(item: $item, isPackAndPick: $isPackAndPick)';
+    return 'FavouriteEvent.add(item: $item, isPackAndPick: $isPackAndPick, user: $user)';
   }
 
   @override
@@ -381,14 +438,16 @@ class _$_Add implements _Add {
             other is _$_Add &&
             const DeepCollectionEquality().equals(other.item, item) &&
             const DeepCollectionEquality()
-                .equals(other.isPackAndPick, isPackAndPick));
+                .equals(other.isPackAndPick, isPackAndPick) &&
+            const DeepCollectionEquality().equals(other.user, user));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(item),
-      const DeepCollectionEquality().hash(isPackAndPick));
+      const DeepCollectionEquality().hash(isPackAndPick),
+      const DeepCollectionEquality().hash(user));
 
   @JsonKey(ignore: true)
   @override
@@ -399,35 +458,36 @@ class _$_Add implements _Add {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
-    required TResult Function(Favourite item, bool isPackAndPick) add,
-    required TResult Function(Favourite item) delete,
+    required TResult Function(User user) fetch,
+    required TResult Function(Favourite item, bool isPackAndPick, User user)
+        add,
+    required TResult Function(Favourite item, User user) delete,
   }) {
-    return add(item, isPackAndPick);
+    return add(item, isPackAndPick, user);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function(Favourite item, bool isPackAndPick)? add,
-    TResult Function(Favourite item)? delete,
+    TResult Function(User user)? fetch,
+    TResult Function(Favourite item, bool isPackAndPick, User user)? add,
+    TResult Function(Favourite item, User user)? delete,
   }) {
-    return add?.call(item, isPackAndPick);
+    return add?.call(item, isPackAndPick, user);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function(Favourite item, bool isPackAndPick)? add,
-    TResult Function(Favourite item)? delete,
+    TResult Function(User user)? fetch,
+    TResult Function(Favourite item, bool isPackAndPick, User user)? add,
+    TResult Function(Favourite item, User user)? delete,
     required TResult orElse(),
   }) {
     if (add != null) {
-      return add(item, isPackAndPick);
+      return add(item, isPackAndPick, user);
     }
     return orElse();
   }
@@ -471,10 +531,14 @@ class _$_Add implements _Add {
 }
 
 abstract class _Add implements FavouriteEvent {
-  const factory _Add(final Favourite item, final bool isPackAndPick) = _$_Add;
+  const factory _Add(
+      {required final Favourite item,
+      required final bool isPackAndPick,
+      required final User user}) = _$_Add;
 
   Favourite get item;
   bool get isPackAndPick;
+  User get user;
   @JsonKey(ignore: true)
   _$$_AddCopyWith<_$_Add> get copyWith => throw _privateConstructorUsedError;
 }
@@ -483,9 +547,10 @@ abstract class _Add implements FavouriteEvent {
 abstract class _$$_DeleteCopyWith<$Res> {
   factory _$$_DeleteCopyWith(_$_Delete value, $Res Function(_$_Delete) then) =
       __$$_DeleteCopyWithImpl<$Res>;
-  $Res call({Favourite item});
+  $Res call({Favourite item, User user});
 
   $FavouriteCopyWith<$Res> get item;
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -500,12 +565,17 @@ class __$$_DeleteCopyWithImpl<$Res> extends _$FavouriteEventCopyWithImpl<$Res>
   @override
   $Res call({
     Object? item = freezed,
+    Object? user = freezed,
   }) {
     return _then(_$_Delete(
-      item == freezed
+      item: item == freezed
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
               as Favourite,
+      user: user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ));
   }
 
@@ -515,19 +585,28 @@ class __$$_DeleteCopyWithImpl<$Res> extends _$FavouriteEventCopyWithImpl<$Res>
       return _then(_value.copyWith(item: value));
     });
   }
+
+  @override
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_Delete implements _Delete {
-  const _$_Delete(this.item);
+  const _$_Delete({required this.item, required this.user});
 
   @override
   final Favourite item;
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'FavouriteEvent.delete(item: $item)';
+    return 'FavouriteEvent.delete(item: $item, user: $user)';
   }
 
   @override
@@ -535,12 +614,15 @@ class _$_Delete implements _Delete {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Delete &&
-            const DeepCollectionEquality().equals(other.item, item));
+            const DeepCollectionEquality().equals(other.item, item) &&
+            const DeepCollectionEquality().equals(other.user, user));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(item));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(item),
+      const DeepCollectionEquality().hash(user));
 
   @JsonKey(ignore: true)
   @override
@@ -551,35 +633,36 @@ class _$_Delete implements _Delete {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
-    required TResult Function(Favourite item, bool isPackAndPick) add,
-    required TResult Function(Favourite item) delete,
+    required TResult Function(User user) fetch,
+    required TResult Function(Favourite item, bool isPackAndPick, User user)
+        add,
+    required TResult Function(Favourite item, User user) delete,
   }) {
-    return delete(item);
+    return delete(item, user);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function(Favourite item, bool isPackAndPick)? add,
-    TResult Function(Favourite item)? delete,
+    TResult Function(User user)? fetch,
+    TResult Function(Favourite item, bool isPackAndPick, User user)? add,
+    TResult Function(Favourite item, User user)? delete,
   }) {
-    return delete?.call(item);
+    return delete?.call(item, user);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function(Favourite item, bool isPackAndPick)? add,
-    TResult Function(Favourite item)? delete,
+    TResult Function(User user)? fetch,
+    TResult Function(Favourite item, bool isPackAndPick, User user)? add,
+    TResult Function(Favourite item, User user)? delete,
     required TResult orElse(),
   }) {
     if (delete != null) {
-      return delete(item);
+      return delete(item, user);
     }
     return orElse();
   }
@@ -623,9 +706,11 @@ class _$_Delete implements _Delete {
 }
 
 abstract class _Delete implements FavouriteEvent {
-  const factory _Delete(final Favourite item) = _$_Delete;
+  const factory _Delete(
+      {required final Favourite item, required final User user}) = _$_Delete;
 
   Favourite get item;
+  User get user;
   @JsonKey(ignore: true)
   _$$_DeleteCopyWith<_$_Delete> get copyWith =>
       throw _privateConstructorUsedError;

@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -57,10 +58,14 @@ class FavouriteListTile extends StatelessWidget {
                               Icons.favorite,
                               color: ZPColors.secondary,
                             ),
-                            onPressed: () async =>
-                                context.read<FavouriteBloc>().add(
-                                      FavouriteEvent.delete(favourite),
-                                    ),
+                            onPressed: () async => context
+                                .read<FavouriteBloc>()
+                                .add(
+                                  FavouriteEvent.delete(
+                                    item: favourite,
+                                    user: context.read<UserBloc>().state.user,
+                                  ),
+                                ),
 
                             // context.read<BonusMaterialBloc>().add(
                             //       BonusMaterialEvent.fetch(

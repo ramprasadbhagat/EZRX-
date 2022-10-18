@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/favourites/repository/i_favourite_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,28 +16,10 @@ part 'favourite_bloc.freezed.dart';
 class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
   final IFavouriteRepository favouriteRepository;
 
-  // final ShipToCodeBloc shipToCodeBloc;
-  // late final StreamSubscription _shipToBlocSubscription;
-
-  final UserBloc userBloc;
-
   FavouriteBloc({
     required this.favouriteRepository,
-    required this.userBloc,
-    // required this.shipToCodeBloc,
   }) : super(FavouriteState.initial()) {
     on<FavouriteEvent>(_onEvent);
-
-    // if (shipToCodeBloc.state.shipToInfo != ShipToInfo.empty()) {
-    add(const FavouriteEvent.fetch());
-    // }
-    // _shipToBlocSubscription = shipToCodeBloc.stream.listen((state) {
-    //   if (state.shipToInfo == ShipToInfo.empty()) {
-    //     add(const FavouriteEvent.initialized());
-    //   } else {
-    //     add(const FavouriteEvent.fetch());
-    //   }
-    // });
   }
 
   Future<void> _onEvent(
@@ -46,18 +28,18 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
   ) async {
     await event.map(
       initialized: (_) async => emit(FavouriteState.initial()),
-      fetch: (_) async {
+      fetch: (e) async {
         emit(state.copyWith(failureOrSuccessOption: none(), isLoading: true));
 
         final failureOrSuccess = await favouriteRepository.getFavourites(
-          user: userBloc.state.user,
+          user: e.user,
         );
         failureOrSuccess.fold(
           (failure) {
-            state.copyWith(
+            emit(state.copyWith(
               failureOrSuccessOption: optionOf(failureOrSuccess),
               isLoading: false,
-            );
+            ));
           },
           (favouriteItems) {
             emit(
@@ -74,7 +56,7 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
         emit(state.copyWith(failureOrSuccessOption: none(), isLoading: true));
 
         final failureOrSuccess = await favouriteRepository.addFavourites(
-          user: userBloc.state.user,
+          user: e.user, // userBloc.state.user,
           isPackAndPick: e.isPackAndPick,
           item: e.item,
           favouriteItems: state.favouriteItems,

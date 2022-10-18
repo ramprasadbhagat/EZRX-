@@ -28,7 +28,7 @@ final appThemeData = {
       centerTitle: true,
       color: ZPColors.white,
       titleTextStyle:
-          ThemeData.light().textTheme.headline1?.copyWith(fontSize: 21.sp),
+          ThemeData.light().textTheme.headline1?.copyWith(fontSize: 17.sp),
       iconTheme: const IconThemeData(
         color: ZPColors.lightGray,
       ),

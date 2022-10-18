@@ -282,14 +282,15 @@ class _FavoriteButton extends StatelessWidget {
                 ),
                 onPressed: () => context.read<FavouriteBloc>().add(
                       FavouriteEvent.add(
-                        Favourite(
+                        item: Favourite(
                           id: '',
                           materialNumber: materialInfo.materialNumber,
                           isFOC: materialInfo.materialGroup4.isFOC,
                           isTenderContract: false,
                           materialDescription: materialInfo.materialDescription,
                         ),
-                        false,
+                        isPackAndPick: false,
+                        user: context.read<UserBloc>().state.user,
                       ),
                     ),
               )
@@ -298,9 +299,12 @@ class _FavoriteButton extends StatelessWidget {
                   Icons.favorite,
                   color: ZPColors.secondary,
                 ),
-                onPressed: () => context
-                    .read<FavouriteBloc>()
-                    .add(FavouriteEvent.delete(favourite)),
+                onPressed: () => context.read<FavouriteBloc>().add(
+                      FavouriteEvent.delete(
+                        item: favourite,
+                        user: context.read<UserBloc>().state.user,
+                      ),
+                    ),
               );
       },
     );
