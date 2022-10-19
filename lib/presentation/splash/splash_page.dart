@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
@@ -64,7 +65,19 @@ class SplashPage extends StatelessWidget {
             if (state.isSalesRep) {
               context.read<SalesRepBloc>().add(
                     SalesRepEvent.fetch(
-                      user:state.user,
+                      user: state.user,
+                    ),
+                  );
+            }
+            if (state.isNotEmpty) {
+              context.read<AupTcBloc>().add(
+                    AupTcEvent.show(
+                      state.user,
+                      context
+                          .read<SalesOrgBloc>()
+                          .state
+                          .salesOrganisation
+                          .salesOrg,
                     ),
                   );
             }
@@ -79,20 +92,22 @@ class SplashPage extends StatelessWidget {
             if (!paymentCustomerInformationState
                 .isPaymentCustomerInformationEmpty) {
               context.read<PaymentTermBloc>().add(
-                PaymentTermEvent.fetch(
-                  customeCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customeCodeInfo,
-                  paymentCustomerInformation:
-                      paymentCustomerInformationState
-                          .paymentCustomerInformation,
-                  salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
-                  salesOrganisationConfigs:
-                      context.read<SalesOrgBloc>().state.configs,
-                  salesRepresentativeInfo:
-                      context.read<SalesRepBloc>().state.salesRepInfo,
-                ),
-              );
+                    PaymentTermEvent.fetch(
+                      customeCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customeCodeInfo,
+                      paymentCustomerInformation:
+                          paymentCustomerInformationState
+                              .paymentCustomerInformation,
+                      salesOrganisation:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      salesOrganisationConfigs:
+                          context.read<SalesOrgBloc>().state.configs,
+                      salesRepresentativeInfo:
+                          context.read<SalesRepBloc>().state.salesRepInfo,
+                    ),
+                  );
             }
           },
         ),

@@ -730,8 +730,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => AupTcBloc(
       aupTcRepository: locator<AupTcRepository>(),
-      userBloc: locator<UserBloc>(),
-      salesOrgBloc: locator<SalesOrgBloc>(),
       config: locator<Config>(),
     ),
   );

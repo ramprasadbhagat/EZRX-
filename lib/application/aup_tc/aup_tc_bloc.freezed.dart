@@ -16,19 +16,21 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AupTcEvent {
+  User get user => throw _privateConstructorUsedError;
+  SalesOrg get salesOrg => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() show,
+    required TResult Function(User user, SalesOrg salesOrg) show,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? show,
+    TResult Function(User user, SalesOrg salesOrg)? show,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? show,
+    TResult Function(User user, SalesOrg salesOrg)? show,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,6 +50,10 @@ mixin _$AupTcEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $AupTcEventCopyWith<AupTcEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -55,6 +61,9 @@ abstract class $AupTcEventCopyWith<$Res> {
   factory $AupTcEventCopyWith(
           AupTcEvent value, $Res Function(AupTcEvent) then) =
       _$AupTcEventCopyWithImpl<$Res>;
+  $Res call({User user, SalesOrg salesOrg});
+
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -64,12 +73,41 @@ class _$AupTcEventCopyWithImpl<$Res> implements $AupTcEventCopyWith<$Res> {
   final AupTcEvent _value;
   // ignore: unused_field
   final $Res Function(AupTcEvent) _then;
+
+  @override
+  $Res call({
+    Object? user = freezed,
+    Object? salesOrg = freezed,
+  }) {
+    return _then(_value.copyWith(
+      user: user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      salesOrg: salesOrg == freezed
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
+    ));
+  }
+
+  @override
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$_ShowCopyWith<$Res> {
+abstract class _$$_ShowCopyWith<$Res> implements $AupTcEventCopyWith<$Res> {
   factory _$$_ShowCopyWith(_$_Show value, $Res Function(_$_Show) then) =
       __$$_ShowCopyWithImpl<$Res>;
+  @override
+  $Res call({User user, SalesOrg salesOrg});
+
+  @override
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -80,51 +118,84 @@ class __$$_ShowCopyWithImpl<$Res> extends _$AupTcEventCopyWithImpl<$Res>
 
   @override
   _$_Show get _value => super._value as _$_Show;
+
+  @override
+  $Res call({
+    Object? user = freezed,
+    Object? salesOrg = freezed,
+  }) {
+    return _then(_$_Show(
+      user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      salesOrg == freezed
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Show implements _Show {
-  const _$_Show();
+  const _$_Show(this.user, this.salesOrg);
+
+  @override
+  final User user;
+  @override
+  final SalesOrg salesOrg;
 
   @override
   String toString() {
-    return 'AupTcEvent.show()';
+    return 'AupTcEvent.show(user: $user, salesOrg: $salesOrg)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Show);
+        (other.runtimeType == runtimeType &&
+            other is _$_Show &&
+            const DeepCollectionEquality().equals(other.user, user) &&
+            const DeepCollectionEquality().equals(other.salesOrg, salesOrg));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(user),
+      const DeepCollectionEquality().hash(salesOrg));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_ShowCopyWith<_$_Show> get copyWith =>
+      __$$_ShowCopyWithImpl<_$_Show>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() show,
+    required TResult Function(User user, SalesOrg salesOrg) show,
   }) {
-    return show();
+    return show(user, salesOrg);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? show,
+    TResult Function(User user, SalesOrg salesOrg)? show,
   }) {
-    return show?.call();
+    return show?.call(user, salesOrg);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? show,
+    TResult Function(User user, SalesOrg salesOrg)? show,
     required TResult orElse(),
   }) {
     if (show != null) {
-      return show();
+      return show(user, salesOrg);
     }
     return orElse();
   }
@@ -159,7 +230,15 @@ class _$_Show implements _Show {
 }
 
 abstract class _Show implements AupTcEvent {
-  const factory _Show() = _$_Show;
+  const factory _Show(final User user, final SalesOrg salesOrg) = _$_Show;
+
+  @override
+  User get user;
+  @override
+  SalesOrg get salesOrg;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ShowCopyWith<_$_Show> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

@@ -18,6 +18,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../utils/material_frame_wrapper.dart';
 import '../../utils/widget_utils.dart';
@@ -61,6 +62,12 @@ void main() {
     locator.registerLazySingleton(() => mockAuthBloc);
     locator.registerLazySingleton(() => PackageInfoService());
     autoRouterMock = locator<AppRouter>();
+    PackageInfo.setMockInitialValues(
+        appName: '',
+        packageName: '',
+        version: '',
+        buildNumber: '',
+        buildSignature: '');
   });
 
   group('AupTc Widget Show hide base on state.showTermsAndConditon true', () {
@@ -72,6 +79,110 @@ void main() {
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     });
+
+    testWidgets('Test - AupTc Widget Show AupTcBloc on loading',
+        (tester) async {
+      when(() => mockAupTcBloc.state).thenReturn(
+        AupTcState.initial().copyWith(
+          showTermsAndConditon: true,
+        ),
+      );
+      await tester.pumpWidget(
+        MaterialFrameWrapper(
+          child: MultiBlocProvider(
+            providers: [
+              BlocProvider<AupTcBloc>(
+                create: (context) => mockAupTcBloc,
+              ),
+              BlocProvider<UserBloc>(
+                create: (context) => userBlocMock,
+              ),
+            ],
+            child: const HomeNavigationTabbar(),
+          ),
+        ),
+      );
+      final auptcscreen = find.byKey(const Key('auptcscreen'));
+      expect(auptcscreen, findsOneWidget);
+
+      final auptcscreenElement = tester.state(auptcscreen) as AupTCDialogState;
+      auptcscreenElement.isLoading = true;
+      // ignore: invalid_use_of_protected_member
+      auptcscreenElement.setState(() {});
+      await tester.pump();
+      final auptcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
+      expect(auptcAcceptButton, findsNothing);
+    });
+
+    testWidgets('Test - AupTc Widget localization test', (tester) async {
+      when(() => mockAupTcBloc.state).thenReturn(
+        AupTcState.initial().copyWith(
+          showTermsAndConditon: true,
+        ),
+      );
+      await tester.pumpWidget(
+        MaterialFrameWrapper(
+          child: MultiBlocProvider(
+            providers: [
+              BlocProvider<AupTcBloc>(
+                create: (context) => mockAupTcBloc,
+              ),
+              BlocProvider<UserBloc>(
+                create: (context) => userBlocMock,
+              ),
+            ],
+            child: const HomeNavigationTabbar(),
+          ),
+        ),
+      );
+      await tester.pump();
+      final screenTitleFinder = find.text(mockAupTcBloc.state.title.tr());
+      expect(screenTitleFinder, findsOneWidget);
+      final acceptButtonTextFinder = find.text('Accept'.tr());
+      expect(acceptButtonTextFinder, findsOneWidget);
+      final auptcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+      await tester.tap(auptcAcceptButton);
+      await tester.pump();
+      final snackBarMsgFinder = find
+          .text('You Need To read full Terms and Condition before Accept'.tr());
+      expect(snackBarMsgFinder, findsOneWidget);
+    });
+
+    testWidgets('Setting screen toc tile', (tester) async {
+      await tester.pumpWidget(EasyLocalization(
+        supportedLocales: const [
+          Locale('en', 'SG'),
+        ],
+        path: 'assets/langs/langs.csv',
+        startLocale: const Locale('en', 'SG'),
+        fallbackLocale: const Locale('en', 'SG'),
+        saveLocale: true,
+        useOnlyLangCode: false,
+        assetLoader: CsvAssetLoader(),
+        child: WidgetUtils.getScopedWidget(
+          autoRouterMock: autoRouterMock,
+          providers: [
+            BlocProvider<AuthBloc>(
+              create: (context) => authBlocMock,
+            ),
+            BlocProvider<AupTcBloc>(
+              create: (context) => mockAupTcBloc,
+            ),
+          ],
+          child: const SettingsPage(),
+        ),
+      ));
+      await tester.pump();
+      final tosTile = find.byKey(const Key('tostile'));
+      expect(tosTile, findsOneWidget);
+      final tosTileTextFinder = find.text('Tos'.tr());
+      expect(tosTileTextFinder, findsOneWidget);
+      await tester.tap(tosTile);
+      await tester.pump();
+      expect(autoRouterMock.current.name, AupTCDialogRoute.name);
+    });
+
     testWidgets(
         'Test - AupTc Widget Show AupTcBloc state.showTermsAndConditon=true',
         (tester) async {
@@ -86,6 +197,9 @@ void main() {
             providers: [
               BlocProvider<AupTcBloc>(
                 create: (context) => mockAupTcBloc,
+              ),
+              BlocProvider<UserBloc>(
+                create: (context) => userBlocMock,
               ),
             ],
             child: const HomeNavigationTabbar(),
@@ -143,101 +257,5 @@ void main() {
     //   expect(autoRouterMock.current.name, HomeNavigationTabbarRoute.name);
     //   expect(auptcscreen, findsNothing);
     // });
-  });
-
-  testWidgets('Test - AupTc Widget Show AupTcBloc on loading', (tester) async {
-    when(() => mockAupTcBloc.state).thenReturn(
-      AupTcState.initial().copyWith(
-        showTermsAndConditon: true,
-      ),
-    );
-    await tester.pumpWidget(
-      MaterialFrameWrapper(
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider<AupTcBloc>(
-              create: (context) => mockAupTcBloc,
-            ),
-          ],
-          child: const HomeNavigationTabbar(),
-        ),
-      ),
-    );
-    final auptcscreen = find.byKey(const Key('auptcscreen'));
-    expect(auptcscreen, findsOneWidget);
-
-    final auptcscreenElement = tester.state(auptcscreen) as AupTCDialogState;
-    auptcscreenElement.isLoading = true;
-    // ignore: invalid_use_of_protected_member
-    auptcscreenElement.setState(() {});
-    await tester.pump();
-    final auptcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
-    expect(auptcAcceptButton, findsNothing);
-  });
-
-  testWidgets('Test - AupTc Widget localization test', (tester) async {
-    when(() => mockAupTcBloc.state).thenReturn(
-      AupTcState.initial().copyWith(
-        showTermsAndConditon: true,
-      ),
-    );
-    await tester.pumpWidget(
-      MaterialFrameWrapper(
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider<AupTcBloc>(
-              create: (context) => mockAupTcBloc,
-            ),
-          ],
-          child: const HomeNavigationTabbar(),
-        ),
-      ),
-    );
-    await tester.pump();
-    final screenTitleFinder = find.text(mockAupTcBloc.state.title.tr());
-    expect(screenTitleFinder, findsOneWidget);
-    final acceptButtonTextFinder = find.text('Accept'.tr());
-    expect(acceptButtonTextFinder, findsOneWidget);
-    final auptcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
-    await tester.pumpAndSettle(const Duration(seconds: 3));
-    await tester.tap(auptcAcceptButton);
-    await tester.pump();
-    final snackBarMsgFinder = find
-        .text('You Need To read full Terms and Condition before Accept'.tr());
-    expect(snackBarMsgFinder, findsOneWidget);
-  });
-
-  testWidgets('Setting screen toc tile', (tester) async {
-    await tester.pumpWidget(EasyLocalization(
-      supportedLocales: const [
-        Locale('en', 'SG'),
-      ],
-      path: 'assets/langs/langs.csv',
-      startLocale: const Locale('en', 'SG'),
-      fallbackLocale: const Locale('en', 'SG'),
-      saveLocale: true,
-      useOnlyLangCode: false,
-      assetLoader: CsvAssetLoader(),
-      child: WidgetUtils.getScopedWidget(
-        autoRouterMock: autoRouterMock,
-        providers: [
-          BlocProvider<AuthBloc>(
-            create: (context) => authBlocMock,
-          ),
-          BlocProvider<AupTcBloc>(
-            create: (context) => mockAupTcBloc,
-          ),
-        ],
-        child: const SettingsPage(),
-      ),
-    ));
-    await tester.pump();
-    final tosTile = find.byKey(const Key('tostile'));
-    expect(tosTile, findsOneWidget);
-    final tosTileTextFinder = find.text('Tos'.tr());
-    expect(tosTileTextFinder, findsOneWidget);
-    await tester.tap(tosTile);
-    await tester.pump();
-    expect(autoRouterMock.current.name, AupTCDialogRoute.name);
   });
 }

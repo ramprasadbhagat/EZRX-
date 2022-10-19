@@ -1,6 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -21,18 +20,12 @@ import 'package:mocktail/mocktail.dart';
 
 class MockAupTcRepository extends Mock implements AupTcRepository {}
 
-class MockSalesOrgBloc extends Mock implements SalesOrgBloc {}
-
-class MockUserBloc extends Mock implements UserBloc {}
-
 class MockTokenStorage extends Mock implements TokenStorage {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   late AupTcRepository aupTcRepository = MockAupTcRepository();
-  late SalesOrgBloc salesOrgBloc;
-  late UserBloc userBloc;
   late Config config;
   late User user;
   late SettingTc settingTc;
@@ -43,8 +36,6 @@ void main() {
 
   setUpAll(() async {
     config = Config()..appFlavor = Flavor.uat;
-    userBloc = MockUserBloc();
-    salesOrgBloc = MockSalesOrgBloc();
     aupTcRepository = MockAupTcRepository();
     aupTcRepository = MockAupTcRepository();
     final TokenStorage tokenStorage = MockTokenStorage();
@@ -64,35 +55,10 @@ void main() {
   });
 
   group('user state is empty state', () {
-    setUpAll(() {
-      when(() => userBloc.stream).thenAnswer(
-        (invocation) => Stream.value(UserState.initial()),
-      );
-    });
     blocTest(
       'user not loged in, AupTcBloc initial state',
-      build: () => AupTcBloc(
-          aupTcRepository: aupTcRepository,
-          config: config,
-          salesOrgBloc: salesOrgBloc,
-          userBloc: userBloc),
+      build: () => AupTcBloc(aupTcRepository: aupTcRepository, config: config),
       setUp: () {},
-      expect: () => [],
-    );
-
-    blocTest(
-      'Loged in and userbloc state is empty',
-      build: () => AupTcBloc(
-          aupTcRepository: aupTcRepository,
-          config: config,
-          salesOrgBloc: salesOrgBloc,
-          userBloc: userBloc),
-      setUp: () {
-        when(() => userBloc.stream).thenAnswer(
-          (invocation) =>
-              Stream.value(UserState.initial().copyWith(user: User.empty())),
-        );
-      },
       expect: () => [],
     );
   });
@@ -101,9 +67,6 @@ void main() {
     'UserLogin as salseorg=VN role=roleIsAupAudience',
     () {
       setUpAll(() {
-        when(() => userBloc.stream).thenAnswer(
-          (invocation) => Stream.value(UserState.initial()),
-        );
         salesOrganisation = user.userSalesOrganisations.first
             .copyWith(salesOrg: SalesOrg('3072'));
       });
@@ -112,34 +75,20 @@ void main() {
         '''Loged in and userbloc state is Not empty  salseorg=VN role=roleIsAupAudience , acceptAUP - false, acceptAUPTimestamp > tncDate
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingAup: settingAup.copyWith(
-                        acceptAUP: false, acceptAUPTimestamp: DateTime.now()),
-                    role: role.copyWith(type: RoleType('internal_sales_rep')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingAup: settingAup.copyWith(
-                            acceptAUP: false,
-                            acceptAUPTimestamp: DateTime.now()),
-                        role: role.copyWith(
-                            type: RoleType('internal_sales_rep')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => Right(tncDate),
           );
         },
+        act: (AupTcBloc aupTcBloc) => aupTcBloc.add(AupTcEvent.show(
+            user.copyWith(
+                settingAup: settingAup.copyWith(
+                    acceptAUP: false, acceptAUPTimestamp: DateTime.now()),
+                role: role.copyWith(type: RoleType('internal_sales_rep'))),
+            salesOrganisation.salesOrg)),
         expect: () => [
           AupTcState(
               showTermsAndConditon: true,
@@ -152,31 +101,19 @@ void main() {
         '''Loged in and userbloc state is Not empty salseorg=VN role=roleIsAupAudience, acceptAUP - true, acceptAUPTimestamp < tncDate
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingAup: settingAup.copyWith(acceptAUP: true),
-                    role: role.copyWith(type: RoleType('internal_sales_rep')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingAup: settingAup.copyWith(acceptAUP: true),
-                        role: role.copyWith(
-                            type: RoleType('internal_sales_rep')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => Right(tncDate.copyWith(date: DateTime.now())),
           );
         },
+        act: (AupTcBloc aupTcBloc) => aupTcBloc.add(AupTcEvent.show(
+            user.copyWith(
+                settingAup: settingAup.copyWith(acceptAUP: true),
+                role: role.copyWith(type: RoleType('internal_sales_rep'))),
+            salesOrganisation.salesOrg)),
         expect: () => [
           AupTcState(
               showTermsAndConditon: true,
@@ -189,34 +126,20 @@ void main() {
         '''Loged in and userbloc state is Not empty salseorg=VN role=roleIsAupAudience, acceptAUP - true, acceptAUPTimestamp > tncDate
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingAup: settingAup.copyWith(
-                        acceptAUP: true, acceptAUPTimestamp: DateTime.now()),
-                    role: role.copyWith(type: RoleType('internal_sales_rep')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingAup: settingAup.copyWith(
-                            acceptAUP: false,
-                            acceptAUPTimestamp: DateTime.now()),
-                        role: role.copyWith(
-                            type: RoleType('internal_sales_rep')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => Right(tncDate),
           );
         },
+        act: (AupTcBloc bloc) => bloc.add(AupTcEvent.show(
+            user.copyWith(
+                settingAup: settingAup.copyWith(
+                    acceptAUP: true, acceptAUPTimestamp: DateTime.now()),
+                role: role.copyWith(type: RoleType('internal_sales_rep'))),
+            salesOrganisation.salesOrg)),
         expect: () => [
           AupTcState(
               showTermsAndConditon: false,
@@ -229,34 +152,20 @@ void main() {
         '''Loged in and userbloc state is Not empty salseorg=VN role=roleIsAupAudience, acceptAUP - false, acceptAUPTimestamp < tncDate
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingAup: settingAup.copyWith(
-                        acceptAUP: false, acceptAUPTimestamp: DateTime.now()),
-                    role: role.copyWith(type: RoleType('internal_sales_rep')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingAup: settingAup.copyWith(
-                            acceptAUP: false,
-                            acceptAUPTimestamp: DateTime.now()),
-                        role: role.copyWith(
-                            type: RoleType('internal_sales_rep')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => Right(tncDate),
           );
         },
+        act: (AupTcBloc bloc) => bloc.add(AupTcEvent.show(
+            user.copyWith(
+                settingAup: settingAup.copyWith(
+                    acceptAUP: false, acceptAUPTimestamp: DateTime.now()),
+                role: role.copyWith(type: RoleType('internal_sales_rep'))),
+            salesOrganisation.salesOrg)),
         expect: () => [
           AupTcState(
               showTermsAndConditon: true,
@@ -270,34 +179,20 @@ void main() {
         '''Loged in and userbloc state is Not empty salseorg=VN role=roleIsAupAudience , acceptAUP - false, tncDate - error
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingAup: settingAup.copyWith(
-                        acceptAUP: false, acceptAUPTimestamp: DateTime.now()),
-                    role: role.copyWith(type: RoleType('internal_sales_rep')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingAup: settingAup.copyWith(
-                            acceptAUP: false,
-                            acceptAUPTimestamp: DateTime.now()),
-                        role: role.copyWith(
-                            type: RoleType('internal_sales_rep')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('fake-error')),
           );
         },
+        act: (AupTcBloc bloc) => bloc.add(AupTcEvent.show(
+            user.copyWith(
+                settingAup: settingAup.copyWith(
+                    acceptAUP: false, acceptAUPTimestamp: DateTime.now()),
+                role: role.copyWith(type: RoleType('internal_sales_rep'))),
+            salesOrganisation.salesOrg)),
         expect: () => [
           AupTcState(
               showTermsAndConditon: false,
@@ -312,34 +207,20 @@ void main() {
          tncDate - error
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingAup: settingAup.copyWith(
-                        acceptAUP: true, acceptAUPTimestamp: DateTime.now()),
-                    role: role.copyWith(type: RoleType('internal_sales_rep')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingAup: settingAup.copyWith(
-                            acceptAUP: false,
-                            acceptAUPTimestamp: DateTime.now()),
-                        role: role.copyWith(
-                            type: RoleType('internal_sales_rep')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('fake-error')),
           );
         },
+        act: (AupTcBloc bloc) => bloc.add(AupTcEvent.show(
+            user.copyWith(
+                settingAup: settingAup.copyWith(
+                    acceptAUP: true, acceptAUPTimestamp: DateTime.now()),
+                role: role.copyWith(type: RoleType('internal_sales_rep'))),
+            salesOrganisation.salesOrg)),
         expect: () => [
           AupTcState(
               showTermsAndConditon: false,
@@ -355,9 +236,6 @@ void main() {
     'UserLogin as salseorg=NotVN role=roleIsAupAudience',
     () {
       setUpAll(() {
-        when(() => userBloc.stream).thenAnswer(
-          (invocation) => Stream.value(UserState.initial()),
-        );
         salesOrganisation = user.userSalesOrganisations.first
             .copyWith(salesOrg: SalesOrg('3152'));
       });
@@ -366,34 +244,20 @@ void main() {
         '''Loged in and userbloc state is Not empty , salseorg=NotVN role=roleIsAupAudience, acceptAUP - false, acceptAUPTimestamp > tncDate
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingAup: settingAup.copyWith(
-                        acceptAUP: false, acceptAUPTimestamp: DateTime.now()),
-                    role: role.copyWith(type: RoleType('internal_sales_rep')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingAup: settingAup.copyWith(
-                            acceptAUP: false,
-                            acceptAUPTimestamp: DateTime.now()),
-                        role: role.copyWith(
-                            type: RoleType('internal_sales_rep')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => Right(tncDate),
           );
         },
+        act: (AupTcBloc bloc) => bloc.add(AupTcEvent.show(
+            user.copyWith(
+                settingAup: settingAup.copyWith(
+                    acceptAUP: false, acceptAUPTimestamp: DateTime.now()),
+                role: role.copyWith(type: RoleType('internal_sales_rep'))),
+            salesOrganisation.salesOrg)),
         expect: () => [
           AupTcState(
               showTermsAndConditon: true,
@@ -406,31 +270,19 @@ void main() {
         '''Loged in and userbloc state is Not empty , salseorg=NotVN role=roleIsAupAudience, acceptAUP - true, acceptAUPTimestamp < tncDate
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingAup: settingAup.copyWith(acceptAUP: true),
-                    role: role.copyWith(type: RoleType('internal_sales_rep')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingAup: settingAup.copyWith(acceptAUP: true),
-                        role: role.copyWith(
-                            type: RoleType('internal_sales_rep')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => Right(tncDate.copyWith(date: DateTime.now())),
           );
         },
+        act: (AupTcBloc bloc) => bloc.add(AupTcEvent.show(
+            user.copyWith(
+                settingAup: settingAup.copyWith(acceptAUP: true),
+                role: role.copyWith(type: RoleType('internal_sales_rep'))),
+            salesOrganisation.salesOrg)),
         expect: () => [
           AupTcState(
               showTermsAndConditon: true,
@@ -444,33 +296,21 @@ void main() {
          acceptAUPTimestamp > tncDate
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingAup: settingAup.copyWith(
-                        acceptAUP: true, acceptAUPTimestamp: DateTime.now()),
-                    role: role.copyWith(type: RoleType('internal_sales_rep')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingAup: settingAup.copyWith(
-                            acceptAUP: false,
-                            acceptAUPTimestamp: DateTime.now()),
-                        role: role.copyWith(
-                            type: RoleType('internal_sales_rep')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => Right(tncDate),
           );
+        },
+        act: (AupTcBloc bloc) {
+          bloc.add(AupTcEvent.show(
+              user.copyWith(
+                  settingAup: settingAup.copyWith(
+                      acceptAUP: true, acceptAUPTimestamp: DateTime.now()),
+                  role: role.copyWith(type: RoleType('internal_sales_rep'))),
+              salesOrganisation.salesOrg));
         },
         expect: () => [
           AupTcState(
@@ -484,32 +324,22 @@ void main() {
         '''Loged in and userbloc state is Not empty salseorg=NotVN role=roleIsAupAudience, acceptAUP - false, acceptAUPTimestamp < tncDate
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingAup: settingAup.copyWith(
-                      acceptAUP: false,
-                    ),
-                    role: role.copyWith(type: RoleType('internal_sales_rep')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingAup: settingAup.copyWith(acceptAUP: false),
-                        role: role.copyWith(
-                            type: RoleType('internal_sales_rep')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => Right(tncDate.copyWith(date: DateTime.now())),
           );
+        },
+        act: (AupTcBloc bloc) {
+          bloc.add(AupTcEvent.show(
+              user.copyWith(
+                  settingAup: settingAup.copyWith(
+                    acceptAUP: false,
+                  ),
+                  role: role.copyWith(type: RoleType('internal_sales_rep'))),
+              salesOrganisation.salesOrg));
         },
         expect: () => [
           AupTcState(
@@ -524,33 +354,21 @@ void main() {
         '''Loged in and userbloc state is Not empty, salseorg=NotVN role=roleIsAupAudience, sacceptAUP - false, tncDate - error
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingAup: settingAup.copyWith(
-                        acceptAUP: false, acceptAUPTimestamp: DateTime.now()),
-                    role: role.copyWith(type: RoleType('internal_sales_rep')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingAup: settingAup.copyWith(
-                            acceptAUP: false,
-                            acceptAUPTimestamp: DateTime.now()),
-                        role: role.copyWith(
-                            type: RoleType('internal_sales_rep')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('fake-error')),
           );
+        },
+        act: (AupTcBloc bloc) {
+          bloc.add(AupTcEvent.show(
+              user.copyWith(
+                  settingAup: settingAup.copyWith(
+                      acceptAUP: false, acceptAUPTimestamp: DateTime.now()),
+                  role: role.copyWith(type: RoleType('internal_sales_rep'))),
+              salesOrganisation.salesOrg));
         },
         expect: () => [
           AupTcState(
@@ -565,33 +383,21 @@ void main() {
         '''Loged in and userbloc state is Not empty, salseorg=NotVN role=roleIsAupAudience, acceptAUP - true, tncDate - error
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingAup: settingAup.copyWith(
-                        acceptAUP: true, acceptAUPTimestamp: DateTime.now()),
-                    role: role.copyWith(type: RoleType('internal_sales_rep')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingAup: settingAup.copyWith(
-                            acceptAUP: false,
-                            acceptAUPTimestamp: DateTime.now()),
-                        role: role.copyWith(
-                            type: RoleType('internal_sales_rep')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('fake-error')),
           );
+        },
+        act: (AupTcBloc bloc) {
+          bloc.add(AupTcEvent.show(
+              user.copyWith(
+                  settingAup: settingAup.copyWith(
+                      acceptAUP: true, acceptAUPTimestamp: DateTime.now()),
+                  role: role.copyWith(type: RoleType('internal_sales_rep'))),
+              salesOrganisation.salesOrg));
         },
         expect: () => [
           AupTcState(
@@ -607,9 +413,6 @@ void main() {
     'UserLogin as salseorg=VN role=roleIsTcAudience',
     () {
       setUpAll(() {
-        when(() => userBloc.stream).thenAnswer(
-          (invocation) => Stream.value(UserState.initial()),
-        );
         salesOrganisation = user.userSalesOrganisations.first
             .copyWith(salesOrg: SalesOrg('3000'));
       });
@@ -618,31 +421,21 @@ void main() {
         '''Loged in and userbloc state is Not empty , salseorg=VN role=roleIsTcAudience, acceptTC - false, acceptTCTimestamp > tncDate
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingTc: settingTc.copyWith(
-                        acceptTC: false, acceptTCTimestamp: DateTime.now()),
-                    role: role.copyWith(type: RoleType('client_admin')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingTc: settingTc.copyWith(
-                            acceptTC: false, acceptTCTimestamp: DateTime.now()),
-                        role: role.copyWith(type: RoleType('client_admin')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => Right(tncDate),
           );
+        },
+        act: (AupTcBloc bloc) {
+          bloc.add(AupTcEvent.show(
+              user.copyWith(
+                  settingTc: settingTc.copyWith(
+                      acceptTC: false, acceptTCTimestamp: DateTime.now()),
+                  role: role.copyWith(type: RoleType('client_admin'))),
+              salesOrganisation.salesOrg));
         },
         expect: () => [
           AupTcState(
@@ -656,33 +449,22 @@ void main() {
         '''Loged in and userbloc state is Not empty, salseorg=VN role=roleIsTcAudience, acceptTC - true, acceptTCTimestamp < tncDate
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingTc: settingTc.copyWith(
-                      acceptTC: true,
-                    ),
-                    role: role.copyWith(type: RoleType('client_admin')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingTc: settingTc.copyWith(
-                          acceptTC: true,
-                        ),
-                        role: role.copyWith(type: RoleType('client_admin')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => Right(tncDate.copyWith(date: DateTime.now())),
           );
+        },
+        act: (AupTcBloc bloc) {
+          bloc.add(AupTcEvent.show(
+              user.copyWith(
+                  settingTc: settingTc.copyWith(
+                    acceptTC: true,
+                  ),
+                  role: role.copyWith(type: RoleType('client_admin'))),
+              salesOrganisation.salesOrg));
         },
         expect: () => [
           AupTcState(
@@ -696,31 +478,21 @@ void main() {
         '''Loged in and userbloc state is Not empty, salseorg=VN role=roleIsTcAudience, acceptTC - false, acceptTCTimestamp > tncDate
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingTc: settingTc.copyWith(
-                        acceptTC: false, acceptTCTimestamp: DateTime.now()),
-                    role: role.copyWith(type: RoleType('client_admin')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingTc: settingTc.copyWith(
-                            acceptTC: false, acceptTCTimestamp: DateTime.now()),
-                        role: role.copyWith(type: RoleType('client_admin')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => Right(tncDate),
           );
+        },
+        act: (AupTcBloc bloc) {
+          bloc.add(AupTcEvent.show(
+              user.copyWith(
+                  settingTc: settingTc.copyWith(
+                      acceptTC: false, acceptTCTimestamp: DateTime.now()),
+                  role: role.copyWith(type: RoleType('client_admin'))),
+              salesOrganisation.salesOrg));
         },
         expect: () => [
           AupTcState(
@@ -734,29 +506,20 @@ void main() {
         '''Loged in and userbloc state is Not empty, salseorg=VN role=roleIsTcAudience, acceptTC - false, acceptTCTimestamp < tncDate
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingTc: settingTc.copyWith(acceptTC: false),
-                    role: role.copyWith(type: RoleType('client_admin')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingTc: settingTc.copyWith(acceptTC: false),
-                        role: role.copyWith(type: RoleType('client_admin')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => Right(tncDate.copyWith(date: DateTime.now())),
           );
+        },
+        act: (AupTcBloc bloc) {
+          bloc.add(AupTcEvent.show(
+              user.copyWith(
+                  settingTc: settingTc.copyWith(acceptTC: false),
+                  role: role.copyWith(type: RoleType('client_admin'))),
+              salesOrganisation.salesOrg));
         },
         expect: () => [
           AupTcState(
@@ -771,31 +534,21 @@ void main() {
         '''Loged in and userbloc state is Not empty, salseorg=VN role=roleIsTcAudience, acceptTC - false, acceptTCTimestamp - error
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingTc: settingTc.copyWith(
-                        acceptTC: false, acceptTCTimestamp: DateTime.now()),
-                    role: role.copyWith(type: RoleType('client_admin')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingTc: settingTc.copyWith(
-                            acceptTC: false, acceptTCTimestamp: DateTime.now()),
-                        role: role.copyWith(type: RoleType('client_admin')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('fake-error')),
           );
+        },
+        act: (AupTcBloc bloc) {
+          bloc.add(AupTcEvent.show(
+              user.copyWith(
+                  settingTc: settingTc.copyWith(
+                      acceptTC: false, acceptTCTimestamp: DateTime.now()),
+                  role: role.copyWith(type: RoleType('client_admin'))),
+              salesOrganisation.salesOrg));
         },
         expect: () => [
           AupTcState(
@@ -810,31 +563,21 @@ void main() {
         '''Loged in and userbloc state is Not empty, salseorg=VN role=roleIsTcAudience, acceptTC - true, acceptTCTimestamp - error
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingTc: settingTc.copyWith(
-                        acceptTC: false, acceptTCTimestamp: DateTime.now()),
-                    role: role.copyWith(type: RoleType('client_admin')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingTc: settingTc.copyWith(
-                            acceptTC: false, acceptTCTimestamp: DateTime.now()),
-                        role: role.copyWith(type: RoleType('client_admin')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('fake-error')),
           );
+        },
+        act: (AupTcBloc bloc) {
+          bloc.add(AupTcEvent.show(
+              user.copyWith(
+                  settingTc: settingTc.copyWith(
+                      acceptTC: false, acceptTCTimestamp: DateTime.now()),
+                  role: role.copyWith(type: RoleType('client_admin'))),
+              salesOrganisation.salesOrg));
         },
         expect: () => [
           AupTcState(
@@ -851,9 +594,6 @@ void main() {
     'UserLogin as salseorg=VNNOT role=roleIsTcAudience',
     () {
       setUpAll(() {
-        when(() => userBloc.stream).thenAnswer(
-          (invocation) => Stream.value(UserState.initial()),
-        );
         salesOrganisation = user.userSalesOrganisations.first
             .copyWith(salesOrg: SalesOrg('2500'));
       });
@@ -862,31 +602,21 @@ void main() {
         '''Loged in and userbloc state is Not empty, salseorg=VNNOT role=roleIsTcAudience, acceptTC - false, acceptTCTimestamp > tncDate
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingTc: settingTc.copyWith(
-                        acceptTC: false, acceptTCTimestamp: DateTime.now()),
-                    role: role.copyWith(type: RoleType('client_admin')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingTc: settingTc.copyWith(
-                            acceptTC: false, acceptTCTimestamp: DateTime.now()),
-                        role: role.copyWith(type: RoleType('client_admin')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => Right(tncDate.copyWith(date: DateTime.now())),
           );
+        },
+        act: (AupTcBloc bloc) {
+          bloc.add(AupTcEvent.show(
+              user.copyWith(
+                  settingTc: settingTc.copyWith(
+                      acceptTC: false, acceptTCTimestamp: DateTime.now()),
+                  role: role.copyWith(type: RoleType('client_admin'))),
+              salesOrganisation.salesOrg));
         },
         expect: () => [
           AupTcState(
@@ -900,33 +630,22 @@ void main() {
         '''Loged in and userbloc state is Not empty, salseorg=VNNOT role=roleIsTcAudience, acceptTC - true, acceptTCTimestamp < tncDate
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingTc: settingTc.copyWith(
-                      acceptTC: false,
-                    ),
-                    role: role.copyWith(type: RoleType('client_admin')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingTc: settingTc.copyWith(
-                          acceptTC: false,
-                        ),
-                        role: role.copyWith(type: RoleType('client_admin')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => Right(tncDate.copyWith(date: DateTime.now())),
           );
+        },
+        act: (AupTcBloc bloc) {
+          bloc.add(AupTcEvent.show(
+              user.copyWith(
+                  settingTc: settingTc.copyWith(
+                    acceptTC: false,
+                  ),
+                  role: role.copyWith(type: RoleType('client_admin'))),
+              salesOrganisation.salesOrg));
         },
         expect: () => [
           AupTcState(
@@ -940,30 +659,23 @@ void main() {
         '''Loged in and userbloc state is Not empty, salseorg=VNNOT role=roleIsTcAudience, acceptTC - true, acceptTCTimestamp > tncDate
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingTc: settingTc.copyWith(
-                        acceptTC: true, acceptTCTimestamp: DateTime.now()),
-                    role: role.copyWith(type: RoleType('client_admin')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingTc: settingTc.copyWith(acceptTC: true),
-                        role: role.copyWith(type: RoleType('client_admin')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => Right(tncDate.copyWith(date: DateTime.now())),
           );
+        },
+        act: (AupTcBloc bloc) {
+          bloc.add(AupTcEvent.show(
+              user.copyWith(
+                  settingTc: settingTc.copyWith(
+                      acceptTC: true,
+                      acceptTCTimestamp:
+                          DateTime.now().add(const Duration(seconds: 30))),
+                  role: role.copyWith(type: RoleType('client_admin'))),
+              salesOrganisation.salesOrg));
         },
         expect: () => [
           AupTcState(
@@ -977,33 +689,27 @@ void main() {
         '''Loged in and userbloc state is Not empty, salseorg=VNNOT role=roleIsTcAudience, acceptTC - false, acceptTCTimestamp < tncDate
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingTc: settingTc.copyWith(acceptTC: false),
-                    role: role.copyWith(type: RoleType('client_admin')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingTc: settingTc.copyWith(acceptTC: false),
-                        role: role.copyWith(type: RoleType('client_admin')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => Right(tncDate.copyWith(date: DateTime.now())),
           );
         },
+        act: (AupTcBloc bloc) {
+          return bloc.add(AupTcEvent.show(
+              user.copyWith(
+                  settingTc: settingTc.copyWith(
+                      acceptTC: true,
+                      acceptTCTimestamp:
+                          DateTime.now().add(const Duration(seconds: 30))),
+                  role: role.copyWith(type: RoleType('client_admin'))),
+              salesOrganisation.salesOrg));
+        },
         expect: () => [
           AupTcState(
-              showTermsAndConditon: true,
+              showTermsAndConditon: false,
               title: 'TERMS OF USE',
               url: config.getTCUrl,
               initialFile: config.getTCFile)
@@ -1014,31 +720,21 @@ void main() {
         '''Loged in and userbloc state is Not empty, salseorg=VNNOT role=roleIsTcAudience, acceptTC - false, acceptTCTimestamp - error
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingTc: settingTc.copyWith(
-                        acceptTC: false, acceptTCTimestamp: DateTime.now()),
-                    role: role.copyWith(type: RoleType('client_admin')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingTc: settingTc.copyWith(
-                            acceptTC: false, acceptTCTimestamp: DateTime.now()),
-                        role: role.copyWith(type: RoleType('client_admin')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('fake-error')),
           );
+        },
+        act: (AupTcBloc bloc) {
+          bloc.add(AupTcEvent.show(
+              user.copyWith(
+                  settingTc: settingTc.copyWith(
+                      acceptTC: false, acceptTCTimestamp: DateTime.now()),
+                  role: role.copyWith(type: RoleType('client_admin'))),
+              salesOrganisation.salesOrg));
         },
         expect: () => [
           AupTcState(
@@ -1053,31 +749,21 @@ void main() {
         '''Loged in and userbloc state is Not empty, salseorg=VNNOT role=roleIsTcAudience, acceptTC - true, acceptTCTimestamp - error
         ''',
         build: () => AupTcBloc(
-            aupTcRepository: aupTcRepository,
-            config: config,
-            salesOrgBloc: salesOrgBloc,
-            userBloc: userBloc),
+          aupTcRepository: aupTcRepository,
+          config: config,
+        ),
         setUp: () async {
-          when(() => userBloc.state).thenAnswer(
-            (invocation) => UserState.initial().copyWith(
-                user: user.copyWith(
-                    settingTc: settingTc.copyWith(
-                        acceptTC: false, acceptTCTimestamp: DateTime.now()),
-                    role: role.copyWith(type: RoleType('client_admin')))),
-          );
-          when(() => userBloc.stream).thenAnswer((invocation) => Stream.value(
-                UserState.initial().copyWith(
-                    user: user.copyWith(
-                        settingTc: settingTc.copyWith(
-                            acceptTC: false, acceptTCTimestamp: DateTime.now()),
-                        role: role.copyWith(type: RoleType('client_admin')))),
-              ));
-          when(() => salesOrgBloc.state).thenAnswer((invocation) =>
-              SalesOrgState.initial()
-                  .copyWith(salesOrganisation: salesOrganisation));
           when(() => aupTcRepository.getTncDate()).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('fake-error')),
           );
+        },
+        act: (AupTcBloc bloc) {
+          bloc.add(AupTcEvent.show(
+              user.copyWith(
+                  settingTc: settingTc.copyWith(
+                      acceptTC: false, acceptTCTimestamp: DateTime.now()),
+                  role: role.copyWith(type: RoleType('client_admin'))),
+              salesOrganisation.salesOrg));
         },
         expect: () => [
           AupTcState(
