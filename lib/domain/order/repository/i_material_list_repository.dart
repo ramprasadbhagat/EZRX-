@@ -5,7 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/material/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 
 abstract class IMaterialListRepository {
   Future<Either<ApiFailure, List<MaterialInfo>>> getMaterialList({

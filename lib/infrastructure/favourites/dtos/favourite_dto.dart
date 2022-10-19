@@ -1,5 +1,5 @@
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
-import 'package:ezrxmobile/domain/material/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'favourite_dto.freezed.dart';

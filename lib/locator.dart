@@ -12,7 +12,7 @@ import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.d
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
-import 'package:ezrxmobile/application/material/stock_information/stock_information_bloc.dart';
+import 'package:ezrxmobile/application/order/stock_information/stock_information_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
@@ -72,17 +72,17 @@ import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dar
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/material/datasource/material_list_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
-import 'package:ezrxmobile/infrastructure/order/material/datasource/material_price_local.dart';
-import 'package:ezrxmobile/infrastructure/order/material/datasource/material_price_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/order/material/datasource/material_price_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/material/datasource/stock_info_local.dart';
-import 'package:ezrxmobile/infrastructure/order/material/datasource/stock_info_query.dart';
-import 'package:ezrxmobile/infrastructure/order/material/datasource/stock_info_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/material/repository/material_price_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/material/repository/stock_info_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_price_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_price_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_query.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/material_price_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/stock_info_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_query_mutation.dart';
@@ -90,9 +90,9 @@ import 'package:ezrxmobile/infrastructure/order/datasource/order_template_local_
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_remote_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/material/datasource/material_list_local.dart';
-import 'package:ezrxmobile/infrastructure/order/material/datasource/materials_query.dart';
-import 'package:ezrxmobile/infrastructure/order/material/repository/material_list_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/materials_query.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
 import 'package:ezrxmobile/infrastructure/favourites/datasource/favourite_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/favourites/datasource/favourite_remote.dart';
 import 'package:ezrxmobile/infrastructure/favourites/datasource/favourites_local.dart';
@@ -116,7 +116,7 @@ import 'package:ezrxmobile/infrastructure/aup_tc/datasource/tncdate_local.dart';
 import 'package:get_it/get_it.dart';
 import 'package:local_auth/local_auth.dart';
 
-import 'package:ezrxmobile/application/material/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 
 GetIt locator = GetIt.instance;
 

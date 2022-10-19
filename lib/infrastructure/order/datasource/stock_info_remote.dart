@@ -4,10 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/domain/material/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-import 'package:ezrxmobile/infrastructure/order/material/datasource/stock_info_query.dart';
-import 'package:ezrxmobile/infrastructure/order/material/dtos/stock_info_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_query.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/stock_info_dto.dart';
 
 class StockInfoRemoteDataSource {
   HttpService httpService;

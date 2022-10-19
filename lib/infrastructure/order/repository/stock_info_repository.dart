@@ -6,11 +6,11 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
-import 'package:ezrxmobile/domain/material/entities/material_info.dart';
-import 'package:ezrxmobile/domain/material/entities/stock_info.dart';
-import 'package:ezrxmobile/domain/material/repository/i_stock_info_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/material/datasource/stock_info_local.dart';
-import 'package:ezrxmobile/infrastructure/order/material/datasource/stock_info_remote.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/repository/i_stock_info_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
 
 class StockInfoRepository implements IStockInfoRepository {
   final Config config;

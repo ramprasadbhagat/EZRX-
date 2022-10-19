@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/material/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_override.dart';
 

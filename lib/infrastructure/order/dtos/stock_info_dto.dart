@@ -1,5 +1,5 @@
-import 'package:ezrxmobile/domain/material/entities/stock_info.dart';
-import 'package:ezrxmobile/domain/material/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'stock_info_dto.freezed.dart';
@@ -14,8 +14,6 @@ class StockInfoDto with _$StockInfoDto {
     @JsonKey(name: 'Batch') required String batch,
     @JsonKey(name: 'InStock') required String inStock,
     @JsonKey(name: 'SalesDistrict') required String? salesDistrict,
-
-    
   }) = _StockInfoDto;
 
   factory StockInfoDto.fromDomain(StockInfo stockInfo) {

@@ -1,7 +1,7 @@
-import 'package:ezrxmobile/domain/material/entities/price_bonus.dart';
-import 'package:ezrxmobile/domain/material/entities/price_rule.dart';
-import 'package:ezrxmobile/domain/material/entities/price_tier.dart';
-import 'package:ezrxmobile/domain/material/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/price_rule.dart';
+import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'price.freezed.dart';

@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:ezrxmobile/domain/material/entities/price_rule.dart';
+import 'package:ezrxmobile/domain/order/entities/price_rule.dart';
 
 part 'price_rule_dto.freezed.dart';
 part 'price_rule_dto.g.dart';

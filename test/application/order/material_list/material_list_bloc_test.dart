@@ -7,21 +7,22 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/material/entities/material_info.dart';
-import 'package:ezrxmobile/infrastructure/order/material/datasource/material_list_local.dart';
-import 'package:ezrxmobile/infrastructure/order/material/repository/material_list_repository.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MaterialListMockRepo extends Mock implements MaterialListRepository {}
+
 const _defaultPageSize = 10;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   final MaterialListRepository materialListMockRepository =
       MaterialListMockRepo();
-      
+
   final mockUser = User.empty();
   final mockSalesOrg = SalesOrganisation.empty();
   final mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty();
@@ -47,8 +48,8 @@ void main() {
 
     blocTest(
       'Material List Fetch fail',
-      build: () => MaterialListBloc(
-          materialListRepository: materialListMockRepository),
+      build: () =>
+          MaterialListBloc(materialListRepository: materialListMockRepository),
       setUp: () {
         when(() => materialListMockRepository.getMaterialList(
             user: mockUser,
@@ -67,12 +68,11 @@ void main() {
       },
       act: (MaterialListBloc bloc) {
         bloc.add(MaterialListEvent.fetch(
-          user: mockUser,
-          salesOrganisation: mockSalesOrg,
-          configs: mockSalesOrganisationConfigs,
-          customerCodeInfo: mockCustomerCodeInfo,
-          shipToInfo: mockShipToInfo
-        ));
+            user: mockUser,
+            salesOrganisation: mockSalesOrg,
+            configs: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo));
       },
       expect: () => [
         materialState.copyWith(
@@ -90,8 +90,8 @@ void main() {
 
     blocTest(
       'Fetch material list success',
-      build: () => MaterialListBloc(
-          materialListRepository: materialListMockRepository),
+      build: () =>
+          MaterialListBloc(materialListRepository: materialListMockRepository),
       setUp: () {
         when(() => materialListMockRepository.getMaterialList(
             user: mockUser,
@@ -108,12 +108,11 @@ void main() {
       },
       act: (MaterialListBloc bloc) {
         bloc.add(MaterialListEvent.fetch(
-          user: mockUser,
-          salesOrganisation: mockSalesOrg,
-          configs: mockSalesOrganisationConfigs,
-          customerCodeInfo: mockCustomerCodeInfo,
-          shipToInfo: mockShipToInfo
-        ));
+            user: mockUser,
+            salesOrganisation: mockSalesOrg,
+            configs: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo));
       },
       expect: () => [
         materialState.copyWith(
@@ -132,19 +131,21 @@ void main() {
 
     blocTest(
       'Fetch material list success and load more success',
-      build: () => MaterialListBloc(
-          materialListRepository: materialListMockRepository),
+      build: () =>
+          MaterialListBloc(materialListRepository: materialListMockRepository),
       act: (MaterialListBloc bloc) {
-        bloc.add(MaterialListEvent.fetch(user: mockUser,
-          salesOrganisation: mockSalesOrg,
-          configs: mockSalesOrganisationConfigs,
-          customerCodeInfo: mockCustomerCodeInfo,
-          shipToInfo: mockShipToInfo));
-        bloc.add(MaterialListEvent.loadMore(user: mockUser,
-          salesOrganisation: mockSalesOrg,
-          configs: mockSalesOrganisationConfigs,
-          customerCodeInfo: mockCustomerCodeInfo,
-          shipToInfo: mockShipToInfo));
+        bloc.add(MaterialListEvent.fetch(
+            user: mockUser,
+            salesOrganisation: mockSalesOrg,
+            configs: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo));
+        bloc.add(MaterialListEvent.loadMore(
+            user: mockUser,
+            salesOrganisation: mockSalesOrg,
+            configs: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo));
       },
       setUp: () {
         when(() => materialListMockRepository.getMaterialList(
@@ -203,23 +204,21 @@ void main() {
 
     blocTest(
       'Fetch material list success and load more fail',
-      build: () => MaterialListBloc(
-          materialListRepository: materialListMockRepository),
+      build: () =>
+          MaterialListBloc(materialListRepository: materialListMockRepository),
       act: (MaterialListBloc bloc) {
         bloc.add(MaterialListEvent.fetch(
-          user: mockUser,
-          salesOrganisation: mockSalesOrg,
-          configs: mockSalesOrganisationConfigs,
-          customerCodeInfo: mockCustomerCodeInfo,
-          shipToInfo: mockShipToInfo
-        ));
+            user: mockUser,
+            salesOrganisation: mockSalesOrg,
+            configs: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo));
         bloc.add(MaterialListEvent.loadMore(
-          user: mockUser,
-          salesOrganisation: mockSalesOrg,
-          configs: mockSalesOrganisationConfigs,
-          customerCodeInfo: mockCustomerCodeInfo,
-          shipToInfo: mockShipToInfo
-        ));
+            user: mockUser,
+            salesOrganisation: mockSalesOrg,
+            configs: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo));
       },
       setUp: () {
         when(() => materialListMockRepository.getMaterialList(
@@ -281,23 +280,21 @@ void main() {
 
     blocTest(
       'Fetch material again after ShipToCode changed',
-      build: () => MaterialListBloc(
-          materialListRepository: materialListMockRepository),
+      build: () =>
+          MaterialListBloc(materialListRepository: materialListMockRepository),
       act: (MaterialListBloc bloc) {
         bloc.add(MaterialListEvent.fetch(
-          user: mockUser,
-          salesOrganisation: mockSalesOrg,
-          configs: mockSalesOrganisationConfigs,
-          customerCodeInfo: mockCustomerCodeInfo,
-          shipToInfo: mockShipToInfo
-        ));
+            user: mockUser,
+            salesOrganisation: mockSalesOrg,
+            configs: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo));
         bloc.add(MaterialListEvent.loadMore(
-          user: mockUser,
-          salesOrganisation: mockSalesOrg,
-          configs: mockSalesOrganisationConfigs,
-          customerCodeInfo: mockCustomerCodeInfo,
-          shipToInfo: mockShipToInfo
-        ));
+            user: mockUser,
+            salesOrganisation: mockSalesOrg,
+            configs: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo));
       },
       setUp: () {
         when(() => materialListMockRepository.getMaterialList(

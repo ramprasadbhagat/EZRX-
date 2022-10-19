@@ -4,10 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/domain/material/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-import 'package:ezrxmobile/infrastructure/order/material/datasource/material_price_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/order/material/dtos/price_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_price_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 
 class MaterialPriceRemoteDataSource {
   HttpService httpService;

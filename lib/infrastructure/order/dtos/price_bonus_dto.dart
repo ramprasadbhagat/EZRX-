@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/material/entities/price_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'price_bonus_dto.freezed.dart';

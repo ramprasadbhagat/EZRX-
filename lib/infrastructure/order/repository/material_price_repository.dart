@@ -4,11 +4,11 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
-import 'package:ezrxmobile/domain/material/entities/price.dart';
-import 'package:ezrxmobile/domain/material/repository/i_material_price_repository.dart';
-import 'package:ezrxmobile/domain/material/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/order/material/datasource/material_price_local.dart';
-import 'package:ezrxmobile/infrastructure/order/material/datasource/material_price_remote.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/repository/i_material_price_repository.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_price_remote.dart';
 
 class MaterialPriceRepository implements IMaterialPriceRepository {
   final Config config;
