@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
+import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/order/stock_information/stock_information_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -73,6 +74,10 @@ import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonu
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/customer_material_price_details_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_bundle_list_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_bundle_list_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_bundle_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
@@ -89,6 +94,8 @@ import 'package:ezrxmobile/infrastructure/order/datasource/order_query_mutation.
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_remote_datasource.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/customer_material_price_details_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/material_bundle_list_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/materials_query.dart';
@@ -603,6 +610,49 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => OrderTemplateListBloc(
       orderTemplateRepository: locator<OrderTemplateRepository>(),
+    ),
+  );
+
+  locator.registerLazySingleton(() => MaterialBundleQuery());
+
+  locator.registerLazySingleton(() => MaterialBundleListLocalDatasource());
+
+  locator.registerLazySingleton(
+    () => MaterialBundleListRemoteDataSource(
+      httpService: locator<HttpService>(),
+      materialBundleQuery: locator<MaterialBundleQuery>(),
+      config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => MaterialBundleListRepository(
+      config: locator<Config>(),
+      materialBundleListLocalDatasource:
+          locator<MaterialBundleListLocalDatasource>(),
+      materialBundleListRemoteDatasource:
+          locator<MaterialBundleListRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => MaterialBundleListBloc(
+      materialBundleListRepository: locator<MaterialBundleListRepository>(),
+      customerMaterialPriceDetailsRepository:
+          locator<CustomerMaterialPriceDetailsRepository>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => CustomerMaterialPriceDetailsLocalDataSource(),
+  );
+
+  locator.registerLazySingleton(
+    () => CustomerMaterialPriceDetailsRepository(
+      config: locator<Config>(),
+      customerMaterialPriceDetailsLocalDataSource:
+          locator<CustomerMaterialPriceDetailsLocalDataSource>(),
     ),
   );
 

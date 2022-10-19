@@ -17,6 +17,7 @@ import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_blo
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
+import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
@@ -137,6 +138,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<MaterialListBloc>(
           create: (context) => locator<MaterialListBloc>(),
+        ),
+        BlocProvider<MaterialBundleListBloc>(
+          create: (context) => locator<MaterialBundleListBloc>(),
         ),
         BlocProvider<FavouriteBloc>(
           create: (context) => locator<FavouriteBloc>(),

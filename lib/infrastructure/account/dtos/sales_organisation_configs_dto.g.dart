@@ -19,6 +19,7 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
           .fromJson(json['principalList'] as Map<String, dynamic>),
       disableOrderType: json['disableOrderType'] as bool? ?? false,
       enableBatchNumber: json['enableBatchNumber'] as bool? ?? false,
+      disableBundles: json['disableBundles'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -34,4 +35,5 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
           const _PrincipalListConverter().toJson(instance.principalList),
       'disableOrderType': instance.disableOrderType,
       'enableBatchNumber': instance.enableBatchNumber,
+      'disableBundles': instance.disableBundles,
     };

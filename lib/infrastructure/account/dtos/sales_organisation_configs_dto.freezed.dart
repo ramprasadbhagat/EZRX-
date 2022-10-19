@@ -40,6 +40,8 @@ mixin _$SalesOrganisationConfigsDto {
   bool get disableOrderType => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableBatchNumber', defaultValue: false)
   bool get enableBatchNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'disableBundles', defaultValue: false)
+  bool get disableBundles => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -72,7 +74,9 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
       @JsonKey(name: 'disableOrderType', defaultValue: false)
           bool disableOrderType,
       @JsonKey(name: 'enableBatchNumber', defaultValue: false)
-          bool enableBatchNumber});
+          bool enableBatchNumber,
+      @JsonKey(name: 'disableBundles', defaultValue: false)
+          bool disableBundles});
 }
 
 /// @nodoc
@@ -95,6 +99,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? principalList = freezed,
     Object? disableOrderType = freezed,
     Object? enableBatchNumber = freezed,
+    Object? disableBundles = freezed,
   }) {
     return _then(_value.copyWith(
       currency: currency == freezed
@@ -133,6 +138,10 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.enableBatchNumber
           : enableBatchNumber // ignore: cast_nullable_to_non_nullable
               as bool,
+      disableBundles: disableBundles == freezed
+          ? _value.disableBundles
+          : disableBundles // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -164,7 +173,9 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
       @JsonKey(name: 'disableOrderType', defaultValue: false)
           bool disableOrderType,
       @JsonKey(name: 'enableBatchNumber', defaultValue: false)
-          bool enableBatchNumber});
+          bool enableBatchNumber,
+      @JsonKey(name: 'disableBundles', defaultValue: false)
+          bool disableBundles});
 }
 
 /// @nodoc
@@ -191,6 +202,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? principalList = freezed,
     Object? disableOrderType = freezed,
     Object? enableBatchNumber = freezed,
+    Object? disableBundles = freezed,
   }) {
     return _then(_$_SalesOrganisationConfigsDto(
       currency: currency == freezed
@@ -229,6 +241,10 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.enableBatchNumber
           : enableBatchNumber // ignore: cast_nullable_to_non_nullable
               as bool,
+      disableBundles: disableBundles == freezed
+          ? _value.disableBundles
+          : disableBundles // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -255,7 +271,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
       @JsonKey(name: 'disableOrderType', defaultValue: false)
           required this.disableOrderType,
       @JsonKey(name: 'enableBatchNumber', defaultValue: false)
-          required this.enableBatchNumber})
+          required this.enableBatchNumber,
+      @JsonKey(name: 'disableBundles', defaultValue: false)
+          required this.disableBundles})
       : _principalList = principalList,
         super._();
 
@@ -295,10 +313,13 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @override
   @JsonKey(name: 'enableBatchNumber', defaultValue: false)
   final bool enableBatchNumber;
+  @override
+  @JsonKey(name: 'disableBundles', defaultValue: false)
+  final bool disableBundles;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber)';
+    return 'SalesOrganisationConfigsDto(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles)';
   }
 
   @override
@@ -322,7 +343,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
             const DeepCollectionEquality()
                 .equals(other.disableOrderType, disableOrderType) &&
             const DeepCollectionEquality()
-                .equals(other.enableBatchNumber, enableBatchNumber));
+                .equals(other.enableBatchNumber, enableBatchNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.disableBundles, disableBundles));
   }
 
   @JsonKey(ignore: true)
@@ -337,7 +360,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
       const DeepCollectionEquality().hash(disablePrincipals),
       const DeepCollectionEquality().hash(_principalList),
       const DeepCollectionEquality().hash(disableOrderType),
-      const DeepCollectionEquality().hash(enableBatchNumber));
+      const DeepCollectionEquality().hash(enableBatchNumber),
+      const DeepCollectionEquality().hash(disableBundles));
 
   @JsonKey(ignore: true)
   @override
@@ -356,26 +380,27 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
 abstract class _SalesOrganisationConfigsDto
     extends SalesOrganisationConfigsDto {
   const factory _SalesOrganisationConfigsDto(
-          {@JsonKey(name: 'currency')
-              required final String currency,
-          @JsonKey(name: 'hideCustomer', defaultValue: false)
-              required final bool hideCustomer,
-          @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
-              required final bool enableGimmickMaterial,
-          @JsonKey(name: 'languageFilter', defaultValue: false)
-              required final bool languageFilter,
-          @JsonKey(name: 'languageValue', defaultValue: '')
-              required final String languageValue,
-          @JsonKey(name: 'disablePrincipals', defaultValue: false)
-              required final bool disablePrincipals,
-          @_PrincipalListConverter()
-          @JsonKey(name: 'principalList')
-              required final List<dynamic> principalList,
-          @JsonKey(name: 'disableOrderType', defaultValue: false)
-              required final bool disableOrderType,
-          @JsonKey(name: 'enableBatchNumber', defaultValue: false)
-              required final bool enableBatchNumber}) =
-      _$_SalesOrganisationConfigsDto;
+      {@JsonKey(name: 'currency')
+          required final String currency,
+      @JsonKey(name: 'hideCustomer', defaultValue: false)
+          required final bool hideCustomer,
+      @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
+          required final bool enableGimmickMaterial,
+      @JsonKey(name: 'languageFilter', defaultValue: false)
+          required final bool languageFilter,
+      @JsonKey(name: 'languageValue', defaultValue: '')
+          required final String languageValue,
+      @JsonKey(name: 'disablePrincipals', defaultValue: false)
+          required final bool disablePrincipals,
+      @_PrincipalListConverter()
+      @JsonKey(name: 'principalList')
+          required final List<dynamic> principalList,
+      @JsonKey(name: 'disableOrderType', defaultValue: false)
+          required final bool disableOrderType,
+      @JsonKey(name: 'enableBatchNumber', defaultValue: false)
+          required final bool enableBatchNumber,
+      @JsonKey(name: 'disableBundles', defaultValue: false)
+          required final bool disableBundles}) = _$_SalesOrganisationConfigsDto;
   const _SalesOrganisationConfigsDto._() : super._();
 
   factory _SalesOrganisationConfigsDto.fromJson(Map<String, dynamic> json) =
@@ -409,6 +434,9 @@ abstract class _SalesOrganisationConfigsDto
   @override
   @JsonKey(name: 'enableBatchNumber', defaultValue: false)
   bool get enableBatchNumber;
+  @override
+  @JsonKey(name: 'disableBundles', defaultValue: false)
+  bool get disableBundles;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsDtoCopyWith<_$_SalesOrganisationConfigsDto>

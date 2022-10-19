@@ -52,8 +52,10 @@ mixin _$MaterialDto {
   bool get hasValidTenderContract => throw _privateConstructorUsedError;
   @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
   bool get hasMandatoryTenderContract => throw _privateConstructorUsedError;
-  @JsonKey(name: 'taxes', defaultValue: [])
+  @JsonKey(name: 'taxes', defaultValue: <String>[])
   List<String> get taxes => throw _privateConstructorUsedError;
+  @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
+  List<BundleDto> get bundles => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -99,8 +101,10 @@ abstract class $MaterialDtoCopyWith<$Res> {
           bool hasValidTenderContract,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
           bool hasMandatoryTenderContract,
-      @JsonKey(name: 'taxes', defaultValue: [])
-          List<String> taxes});
+      @JsonKey(name: 'taxes', defaultValue: <String>[])
+          List<String> taxes,
+      @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
+          List<BundleDto> bundles});
 }
 
 /// @nodoc
@@ -130,6 +134,7 @@ class _$MaterialDtoCopyWithImpl<$Res> implements $MaterialDtoCopyWith<$Res> {
     Object? hasValidTenderContract = freezed,
     Object? hasMandatoryTenderContract = freezed,
     Object? taxes = freezed,
+    Object? bundles = freezed,
   }) {
     return _then(_value.copyWith(
       materialNumber: materialNumber == freezed
@@ -200,6 +205,10 @@ class _$MaterialDtoCopyWithImpl<$Res> implements $MaterialDtoCopyWith<$Res> {
           ? _value.taxes
           : taxes // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      bundles: bundles == freezed
+          ? _value.bundles
+          : bundles // ignore: cast_nullable_to_non_nullable
+              as List<BundleDto>,
     ));
   }
 }
@@ -244,8 +253,10 @@ abstract class _$$_MaterialDtoCopyWith<$Res>
           bool hasValidTenderContract,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
           bool hasMandatoryTenderContract,
-      @JsonKey(name: 'taxes', defaultValue: [])
-          List<String> taxes});
+      @JsonKey(name: 'taxes', defaultValue: <String>[])
+          List<String> taxes,
+      @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
+          List<BundleDto> bundles});
 }
 
 /// @nodoc
@@ -277,6 +288,7 @@ class __$$_MaterialDtoCopyWithImpl<$Res> extends _$MaterialDtoCopyWithImpl<$Res>
     Object? hasValidTenderContract = freezed,
     Object? hasMandatoryTenderContract = freezed,
     Object? taxes = freezed,
+    Object? bundles = freezed,
   }) {
     return _then(_$_MaterialDto(
       materialNumber: materialNumber == freezed
@@ -347,6 +359,10 @@ class __$$_MaterialDtoCopyWithImpl<$Res> extends _$MaterialDtoCopyWithImpl<$Res>
           ? _value._taxes
           : taxes // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      bundles: bundles == freezed
+          ? _value._bundles
+          : bundles // ignore: cast_nullable_to_non_nullable
+              as List<BundleDto>,
     ));
   }
 }
@@ -387,9 +403,12 @@ class _$_MaterialDto extends _MaterialDto {
           required this.hasValidTenderContract,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
           required this.hasMandatoryTenderContract,
-      @JsonKey(name: 'taxes', defaultValue: [])
-          required final List<String> taxes})
+      @JsonKey(name: 'taxes', defaultValue: <String>[])
+          required final List<String> taxes,
+      @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
+          required final List<BundleDto> bundles})
       : _taxes = taxes,
+        _bundles = bundles,
         super._();
 
   factory _$_MaterialDto.fromJson(Map<String, dynamic> json) =>
@@ -445,15 +464,23 @@ class _$_MaterialDto extends _MaterialDto {
   final bool hasMandatoryTenderContract;
   final List<String> _taxes;
   @override
-  @JsonKey(name: 'taxes', defaultValue: [])
+  @JsonKey(name: 'taxes', defaultValue: <String>[])
   List<String> get taxes {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_taxes);
   }
 
+  final List<BundleDto> _bundles;
+  @override
+  @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
+  List<BundleDto> get bundles {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bundles);
+  }
+
   @override
   String toString() {
-    return 'MaterialDto(materialNumber: $materialNumber, materialDescription: $materialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, principalName: $principalName, principalCode: $principalCode, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hidePrice: $hidePrice, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes)';
+    return 'MaterialDto(materialNumber: $materialNumber, materialDescription: $materialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, principalName: $principalName, principalCode: $principalCode, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hidePrice: $hidePrice, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, bundles: $bundles)';
   }
 
   @override
@@ -491,7 +518,8 @@ class _$_MaterialDto extends _MaterialDto {
                 .equals(other.hasValidTenderContract, hasValidTenderContract) &&
             const DeepCollectionEquality().equals(
                 other.hasMandatoryTenderContract, hasMandatoryTenderContract) &&
-            const DeepCollectionEquality().equals(other._taxes, _taxes));
+            const DeepCollectionEquality().equals(other._taxes, _taxes) &&
+            const DeepCollectionEquality().equals(other._bundles, _bundles));
   }
 
   @JsonKey(ignore: true)
@@ -514,7 +542,8 @@ class _$_MaterialDto extends _MaterialDto {
       const DeepCollectionEquality().hash(hidePrice),
       const DeepCollectionEquality().hash(hasValidTenderContract),
       const DeepCollectionEquality().hash(hasMandatoryTenderContract),
-      const DeepCollectionEquality().hash(_taxes));
+      const DeepCollectionEquality().hash(_taxes),
+      const DeepCollectionEquality().hash(_bundles));
 
   @JsonKey(ignore: true)
   @override
@@ -563,8 +592,10 @@ abstract class _MaterialDto extends MaterialDto {
           required final bool hasValidTenderContract,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
           required final bool hasMandatoryTenderContract,
-      @JsonKey(name: 'taxes', defaultValue: [])
-          required final List<String> taxes}) = _$_MaterialDto;
+      @JsonKey(name: 'taxes', defaultValue: <String>[])
+          required final List<String> taxes,
+      @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
+          required final List<BundleDto> bundles}) = _$_MaterialDto;
   const _MaterialDto._() : super._();
 
   factory _MaterialDto.fromJson(Map<String, dynamic> json) =
@@ -619,8 +650,11 @@ abstract class _MaterialDto extends MaterialDto {
   @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
   bool get hasMandatoryTenderContract;
   @override
-  @JsonKey(name: 'taxes', defaultValue: [])
+  @JsonKey(name: 'taxes', defaultValue: <String>[])
   List<String> get taxes;
+  @override
+  @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
+  List<BundleDto> get bundles;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialDtoCopyWith<_$_MaterialDto> get copyWith =>

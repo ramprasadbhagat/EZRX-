@@ -35,7 +35,18 @@ void main() {
     salesOrg: SalesOrg('fake-1234'),
   );
 
-  final fakeSaleOrgConfig = SalesOrganisationConfigs.empty();
+  final fakeSaleOrgConfig = SalesOrganisationConfigs(
+    currency: Currency(''),
+    hideCustomer: false,
+    disableOrderType: false,
+    disablePrincipals: false,
+    enableGimmickMaterial: false,
+    languageFilter: false,
+    languageValue: '',
+    disableBundles: false,
+    principalList: [],
+    enableBatchNumber: false,
+  );
 
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(
     customerCodeSoldTo: 'fake-1234',
@@ -89,12 +100,11 @@ void main() {
         );
       },
       act: (bloc) => bloc.add(PaymentTermEvent.fetch(
-        customeCodeInfo: fakeCustomerCode,
-        salesOrganisation: fakeSaleOrganisation,
-        paymentCustomerInformation: fakepaymentCustomerInformation,
-        salesOrganisationConfigs: fakeSaleOrgConfig,
-        salesRepresentativeInfo: fakesalesRepInfo
-      )),
+          customeCodeInfo: fakeCustomerCode,
+          salesOrganisation: fakeSaleOrganisation,
+          paymentCustomerInformation: fakepaymentCustomerInformation,
+          salesOrganisationConfigs: fakeSaleOrgConfig,
+          salesRepresentativeInfo: fakesalesRepInfo)),
       expect: () => [
         PaymentTermState.initial().copyWith(
           paymentTermsFailureOrSuccessOption: optionOf(
@@ -119,16 +129,17 @@ void main() {
               paymentCustomerInfo: fakepaymentCustomerInformation,
               salesRepInfo: fakesalesRepInfo,
             )).thenAnswer(
-          (invocation) async => Right(paymentTermMockData,),
+          (invocation) async => Right(
+            paymentTermMockData,
+          ),
         );
       },
       act: (bloc) => bloc.add(PaymentTermEvent.fetch(
-        customeCodeInfo: fakeCustomerCode,
-        salesOrganisation: fakeSaleOrganisation,
-        paymentCustomerInformation: fakepaymentCustomerInformation,
-        salesOrganisationConfigs: fakeSaleOrgConfig,
-        salesRepresentativeInfo: fakesalesRepInfo
-      )),
+          customeCodeInfo: fakeCustomerCode,
+          salesOrganisation: fakeSaleOrganisation,
+          paymentCustomerInformation: fakepaymentCustomerInformation,
+          salesOrganisationConfigs: fakeSaleOrgConfig,
+          salesRepresentativeInfo: fakesalesRepInfo)),
       expect: () => [
         PaymentTermState.initial().copyWith(
           paymentTerms: paymentTermMockData,

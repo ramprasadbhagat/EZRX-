@@ -27,6 +27,15 @@ class MaterialItemBonusDto with _$MaterialItemBonusDto {
     );
   }
 
+  factory MaterialItemBonusDto.fromDomain(MaterialItemBonus bonus) {
+    return MaterialItemBonusDto(
+      materialDescription: bonus.materialDescription,
+      materialNumber: bonus.materialNumber.getOrCrash(),
+      qty: bonus.qty,
+      comment: bonus.comment,
+    );
+  }
+
   factory MaterialItemBonusDto.fromJson(Map<String, dynamic> json) =>
       _$MaterialItemBonusDtoFromJson(json);
 }

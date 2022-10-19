@@ -27,7 +27,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'disableOrderType', defaultValue: false)
         required bool disableOrderType,
     @JsonKey(name: 'enableBatchNumber', defaultValue: false)
-      required bool enableBatchNumber,    
+        required bool enableBatchNumber,
+    @JsonKey(name: 'disableBundles', defaultValue: false)
+        required bool disableBundles,
   }) = _SalesOrganisationConfigsDto;
   factory SalesOrganisationConfigsDto.fromDomain(
     SalesOrganisationConfigs configs,
@@ -42,6 +44,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       principalList: configs.principalList,
       disableOrderType: configs.disableOrderType,
       enableBatchNumber: configs.enableBatchNumber,
+      disableBundles: configs.disableBundles,
     );
   }
 
@@ -56,6 +59,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       principalList: principalList,
       disableOrderType: disableOrderType,
       enableBatchNumber: enableBatchNumber,
+      disableBundles: disableBundles,
     );
   }
 

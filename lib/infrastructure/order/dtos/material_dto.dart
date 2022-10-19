@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/bundle_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'material_dto.freezed.dart';
@@ -40,7 +41,10 @@ class MaterialDto with _$MaterialDto {
         required bool hasValidTenderContract,
     @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
         required bool hasMandatoryTenderContract,
-    @JsonKey(name: 'taxes', defaultValue: []) required List<String> taxes,
+    @JsonKey(name: 'taxes', defaultValue: <String>[])
+        required List<String> taxes,
+    @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
+        required List<BundleDto> bundles,
   }) = _MaterialDto;
 
   factory MaterialDto.fromDomain(MaterialInfo materialInfo) {
@@ -62,6 +66,8 @@ class MaterialDto with _$MaterialDto {
       hasValidTenderContract: materialInfo.hasValidTenderContract,
       hasMandatoryTenderContract: materialInfo.hasMandatoryTenderContract,
       taxes: materialInfo.taxes.map((e) => e.toString()).toList(),
+      bundles:
+          materialInfo.bundles.map((e) => BundleDto.fromDomain(e)).toList(),
     );
   }
 
@@ -86,6 +92,7 @@ class MaterialDto with _$MaterialDto {
       hasValidTenderContract: hasValidTenderContract,
       hasMandatoryTenderContract: hasMandatoryTenderContract,
       taxes: taxes.map((e) => e).toList(),
+      bundles: bundles.map((e) => e.toDomain()).toList(),
     );
   }
 

@@ -14,7 +14,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/material_list.dart';
+import 'package:ezrxmobile/presentation/create_order/material_root.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -118,7 +118,7 @@ void main() {
     testWidgets('Matrials List Page Initialized', (tester) async {
       when(() => materialListBlocMock.state)
           .thenReturn(MaterialListState.initial());
-      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
+      await tester.pumpWidget(getScopedWidget(const MaterialRoot()));
       final materialsListPage = find.byKey(const Key('materialListPage'));
       final searchButton = find.byKey(const Key('CartButton'));
       expect(materialsListPage, findsOneWidget);
@@ -137,7 +137,7 @@ void main() {
       when(() => materialListBlocMock.state)
           .thenReturn(MaterialListState.initial());
       whenListen(materialListBlocMock, Stream.fromIterable(expectedState));
-      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
+      await tester.pumpWidget(getScopedWidget(const MaterialRoot()));
     });
 
     testWidgets('Material List Body Content Empty', (tester) async {
@@ -154,7 +154,7 @@ void main() {
       // optionOf(const Right(<MaterialInfo>[])),
       when(() => materialListBlocMock.state)
           .thenReturn(MaterialListState.initial());
-      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
+      await tester.pumpWidget(getScopedWidget(const MaterialRoot()));
       whenListen(materialListBlocMock, Stream.fromIterable(expectedState));
       final loaderImage = find.byKey(const Key('loaderImage'));
       expect(loaderImage, findsOneWidget);
@@ -188,6 +188,7 @@ void main() {
               hasValidTenderContract: false,
               hasMandatoryTenderContract: false,
               taxes: ['5'],
+              bundles: [],
             )
           ],
         )
@@ -195,7 +196,7 @@ void main() {
       when(() => materialListBlocMock.state)
           .thenReturn(MaterialListState.initial());
       whenListen(materialListBlocMock, Stream.fromIterable(expectedState));
-      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
+      await tester.pumpWidget(getScopedWidget(const MaterialRoot()));
       await tester.pump();
       final materialList = find.byKey(const Key('scrollList'));
       expect(materialList, findsOneWidget);
@@ -218,7 +219,7 @@ void main() {
       when(() => materialListBlocMock.state)
           .thenReturn(MaterialListState.initial());
       whenListen(materialListBlocMock, Stream.fromIterable(expectedState));
-      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
+      await tester.pumpWidget(getScopedWidget(const MaterialRoot()));
       await tester.pump();
       final materialList = find.byKey(const Key('scrollList'));
       expect(materialList, findsOneWidget);

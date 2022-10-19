@@ -11,116 +11,18 @@ import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MaterialListPage extends StatefulWidget {
+class MaterialListPage extends StatelessWidget {
   const MaterialListPage({Key? key}) : super(key: key);
-
-  @override
-  State<MaterialListPage> createState() => _MaterialListPageState();
-}
-
-class _MaterialListPageState extends State<MaterialListPage> {
-  late TextEditingController _searchController;
-  late MaterialListBloc materialListBloc;
-
-  @override
-  void initState() {
-    _searchController = TextEditingController();
-    materialListBloc = context.read<MaterialListBloc>();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: const Key('materialListPage'),
-      appBar: PreferredSize(
-        preferredSize: const Size(double.infinity, 60),
-        child: CustomAppBar(
-          actionWidget: [
-            IconButton(
-              key: const Key('CartButton'),
-              onPressed: () {},
-              icon: const Icon(
-                Icons.shopping_cart_outlined,
-              ),
-            ),
-          ],
-          child: BlocConsumer<MaterialListBloc, MaterialListState>(
-            listenWhen: (previous, current) =>
-                previous.searchKey != current.searchKey,
-            listener: (context, state) {
-              final searchText = state.searchKey.getValue();
-              _searchController.value = TextEditingValue(
-                text: searchText,
-                selection: TextSelection.collapsed(offset: searchText.length),
-              );
-            },
-            buildWhen: (previous, current) =>
-                previous.searchKey != current.searchKey ||
-                previous.isFetching != current.isFetching,
-            builder: (context, state) {
-              return Form(
-                child: TextFormField(
-                  key: const Key('materialSearchField'),
-                  autocorrect: false,
-                  controller: _searchController,
-                  enabled: !state.isFetching,
-                  onChanged: (value) {
-                    materialListBloc.add(
-                      MaterialListEvent.updateSearchKey(value),
-                    );
-                  },
-                  onFieldSubmitted: (value) {
-                    if (state.searchKey.isValid()) {
-                      // search code goes here
-                    } else {
-                      showSnackBar(
-                        context: context,
-                        message:
-                            'Search input must be greater than 4 characters.'
-                                .tr(),
-                      );
-                    }
-                  },
-                  validator: (_) => state.searchKey.value.fold(
-                    (f) => f.maybeMap(
-                      subceedLength: (f) =>
-                          'Search input must be greater than 4 characters.'
-                              .tr(),
-                      orElse: () => null,
-                    ),
-                    (_) => null,
-                  ),
-                  decoration: InputDecoration(
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: ZPColors.primary),
-                    ),
-                    isDense: true,
-                    prefixIcon: const Icon(Icons.search),
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.clear),
-                      onPressed: () {
-                        materialListBloc.add(
-                          const MaterialListEvent.updateSearchKey(''),
-                        );
-                        // fetch code goes here
-                      },
-                    ),
-                    hintText: 'Search...',
-                    border: InputBorder.none,
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-      ),
       body: BlocConsumer<MaterialListBloc, MaterialListState>(
         listenWhen: (previous, current) =>
             previous.apiFailureOrSuccessOption !=
@@ -147,18 +49,13 @@ class _MaterialListPageState extends State<MaterialListPage> {
         builder: (context, state) {
           return Column(
             children: [
+              const _SearchBar(),
               _BodyContent(materialListState: state),
             ],
           );
         },
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
   }
 }
 
@@ -307,6 +204,108 @@ class _FavoriteButton extends StatelessWidget {
                     ),
               );
       },
+    );
+  }
+}
+
+class _SearchBar extends StatefulWidget {
+  const _SearchBar({Key? key}) : super(key: key);
+
+  @override
+  State<_SearchBar> createState() => _SearchBarState();
+}
+
+class _SearchBarState extends State<_SearchBar> {
+  late TextEditingController _searchController;
+
+  @override
+  void initState() {
+    _searchController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      color: ZPColors.white,
+      child: BlocConsumer<MaterialListBloc, MaterialListState>(
+        listenWhen: (previous, current) =>
+            previous.searchKey != current.searchKey,
+        listener: (context, state) {
+          final searchText = state.searchKey.getValue();
+          _searchController.value = TextEditingValue(
+            text: searchText,
+            selection: TextSelection.collapsed(offset: searchText.length),
+          );
+        },
+        buildWhen: (previous, current) =>
+            previous.searchKey != current.searchKey ||
+            previous.isFetching != current.isFetching,
+        builder: (context, state) {
+          return Form(
+            child: TextFormField(
+              key: const Key('materialSearchField'),
+              autocorrect: false,
+              controller: _searchController,
+              enabled: !state.isFetching,
+              onChanged: (value) {
+                context.read<MaterialListBloc>().add(
+                      MaterialListEvent.updateSearchKey(value),
+                    );
+              },
+              onFieldSubmitted: (value) {
+                if (state.searchKey.isValid()) {
+                  // search code goes here
+                } else {
+                  showSnackBar(
+                    context: context,
+                    message:
+                        'Search input must be greater than 4 characters.'.tr(),
+                  );
+                }
+              },
+              validator: (_) => state.searchKey.value.fold(
+                (f) => f.maybeMap(
+                  subceedLength: (f) =>
+                      'Search input must be greater than 4 characters.'.tr(),
+                  orElse: () => null,
+                ),
+                (_) => null,
+              ),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(color: ZPColors.primary),
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: ZPColors.primary),
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                isDense: true,
+                prefixIcon: const Icon(Icons.search),
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.clear),
+                  onPressed: () {
+                    context.read<MaterialListBloc>().add(
+                          const MaterialListEvent.updateSearchKey(''),
+                        );
+                    // fetch code goes here
+                  },
+                ),
+                hintText: 'Search...',
+                // border: InputBorder.none,
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

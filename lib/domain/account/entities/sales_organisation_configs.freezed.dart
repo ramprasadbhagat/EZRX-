@@ -25,6 +25,7 @@ mixin _$SalesOrganisationConfigs {
   List<dynamic> get principalList => throw _privateConstructorUsedError;
   bool get disableOrderType => throw _privateConstructorUsedError;
   bool get enableBatchNumber => throw _privateConstructorUsedError;
+  bool get disableBundles => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrganisationConfigsCopyWith<SalesOrganisationConfigs> get copyWith =>
@@ -45,7 +46,8 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       bool disablePrincipals,
       List<dynamic> principalList,
       bool disableOrderType,
-      bool enableBatchNumber});
+      bool enableBatchNumber,
+      bool disableBundles});
 }
 
 /// @nodoc
@@ -68,6 +70,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? principalList = freezed,
     Object? disableOrderType = freezed,
     Object? enableBatchNumber = freezed,
+    Object? disableBundles = freezed,
   }) {
     return _then(_value.copyWith(
       currency: currency == freezed
@@ -106,6 +109,10 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.enableBatchNumber
           : enableBatchNumber // ignore: cast_nullable_to_non_nullable
               as bool,
+      disableBundles: disableBundles == freezed
+          ? _value.disableBundles
+          : disableBundles // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -127,7 +134,8 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       bool disablePrincipals,
       List<dynamic> principalList,
       bool disableOrderType,
-      bool enableBatchNumber});
+      bool enableBatchNumber,
+      bool disableBundles});
 }
 
 /// @nodoc
@@ -153,6 +161,7 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? principalList = freezed,
     Object? disableOrderType = freezed,
     Object? enableBatchNumber = freezed,
+    Object? disableBundles = freezed,
   }) {
     return _then(_$_SalesOrganisationConfigs(
       currency: currency == freezed
@@ -191,6 +200,10 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.enableBatchNumber
           : enableBatchNumber // ignore: cast_nullable_to_non_nullable
               as bool,
+      disableBundles: disableBundles == freezed
+          ? _value.disableBundles
+          : disableBundles // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -207,7 +220,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       required this.disablePrincipals,
       required final List<dynamic> principalList,
       required this.disableOrderType,
-      required this.enableBatchNumber})
+      required this.enableBatchNumber,
+      required this.disableBundles})
       : _principalList = principalList,
         super._();
 
@@ -234,10 +248,12 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   final bool disableOrderType;
   @override
   final bool enableBatchNumber;
+  @override
+  final bool disableBundles;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber)';
+    return 'SalesOrganisationConfigs(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles)';
   }
 
   @override
@@ -261,7 +277,9 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
             const DeepCollectionEquality()
                 .equals(other.disableOrderType, disableOrderType) &&
             const DeepCollectionEquality()
-                .equals(other.enableBatchNumber, enableBatchNumber));
+                .equals(other.enableBatchNumber, enableBatchNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.disableBundles, disableBundles));
   }
 
   @override
@@ -275,7 +293,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       const DeepCollectionEquality().hash(disablePrincipals),
       const DeepCollectionEquality().hash(_principalList),
       const DeepCollectionEquality().hash(disableOrderType),
-      const DeepCollectionEquality().hash(enableBatchNumber));
+      const DeepCollectionEquality().hash(enableBatchNumber),
+      const DeepCollectionEquality().hash(disableBundles));
 
   @JsonKey(ignore: true)
   @override
@@ -294,7 +313,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final bool disablePrincipals,
       required final List<dynamic> principalList,
       required final bool disableOrderType,
-      required final bool enableBatchNumber}) = _$_SalesOrganisationConfigs;
+      required final bool enableBatchNumber,
+      required final bool disableBundles}) = _$_SalesOrganisationConfigs;
   const _SalesOrganisationConfigs._() : super._();
 
   @override
@@ -315,6 +335,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   bool get disableOrderType;
   @override
   bool get enableBatchNumber;
+  @override
+  bool get disableBundles;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsCopyWith<_$_SalesOrganisationConfigs>

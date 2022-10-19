@@ -24,13 +24,13 @@ import '../aup_tc/aup_tc.dart' as _i11;
 import '../auth/login_page.dart' as _i2;
 import '../auth/proxy_login_page.dart' as _i3;
 import '../core/webview_page.dart' as _i5;
+import '../create_order/material_root.dart' as _i10;
 import '../favourites/favourite_tab.dart' as _i18;
 import '../history/history_tab.dart' as _i17;
 import '../home/home_tab.dart' as _i16;
 import '../home_tab.dart' as _i14;
 import '../order/order_template/order_template_detail_page.dart' as _i13;
 import '../order/order_template/order_template_list_page.dart' as _i12;
-import '../orders/create_order/material_list.dart' as _i10;
 import '../orders/saved_order/saved_order_list_page.dart' as _i15;
 import '../splash/splash_page.dart' as _i1;
 
@@ -80,9 +80,9 @@ class AppRouter extends _i20.RootStackRouter {
       return _i20.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i9.ShiptToSearchPage());
     },
-    MaterialListPageRoute.name: (routeData) {
+    MaterialRootRoute.name: (routeData) {
       return _i20.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i10.MaterialListPage());
+          routeData: routeData, child: const _i10.MaterialRoot());
     },
     AupTCDialogRoute.name: (routeData) {
       final args = routeData.argsAs<AupTCDialogRouteArgs>(
@@ -145,8 +145,7 @@ class AppRouter extends _i20.RootStackRouter {
             path: 'customer_search_page'),
         _i20.RouteConfig(ShiptToSearchPageRoute.name,
             path: 'ship_to_search_page'),
-        _i20.RouteConfig(MaterialListPageRoute.name,
-            path: 'material_list_page'),
+        _i20.RouteConfig(MaterialRootRoute.name, path: 'material_list_page'),
         _i20.RouteConfig(AupTCDialogRoute.name, path: 'tos'),
         _i20.RouteConfig(OrderTemplateListPageRoute.name,
             path: 'order_template_list_page'),
@@ -266,12 +265,12 @@ class ShiptToSearchPageRoute extends _i20.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i10.MaterialListPage]
-class MaterialListPageRoute extends _i20.PageRouteInfo<void> {
-  const MaterialListPageRoute()
-      : super(MaterialListPageRoute.name, path: 'material_list_page');
+/// [_i10.MaterialRoot]
+class MaterialRootRoute extends _i20.PageRouteInfo<void> {
+  const MaterialRootRoute()
+      : super(MaterialRootRoute.name, path: 'material_list_page');
 
-  static const String name = 'MaterialListPageRoute';
+  static const String name = 'MaterialRootRoute';
 }
 
 /// generated route for

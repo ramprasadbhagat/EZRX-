@@ -32,6 +32,7 @@ mixin _$MaterialInfo {
   bool get hasValidTenderContract => throw _privateConstructorUsedError;
   bool get hasMandatoryTenderContract => throw _privateConstructorUsedError;
   List<String> get taxes => throw _privateConstructorUsedError;
+  List<Bundle> get bundles => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialInfoCopyWith<MaterialInfo> get copyWith =>
@@ -59,7 +60,8 @@ abstract class $MaterialInfoCopyWith<$Res> {
       bool hidePrice,
       bool hasValidTenderContract,
       bool hasMandatoryTenderContract,
-      List<String> taxes});
+      List<String> taxes,
+      List<Bundle> bundles});
 
   $PrincipalDataCopyWith<$Res> get principalData;
 }
@@ -90,6 +92,7 @@ class _$MaterialInfoCopyWithImpl<$Res> implements $MaterialInfoCopyWith<$Res> {
     Object? hasValidTenderContract = freezed,
     Object? hasMandatoryTenderContract = freezed,
     Object? taxes = freezed,
+    Object? bundles = freezed,
   }) {
     return _then(_value.copyWith(
       materialNumber: materialNumber == freezed
@@ -156,6 +159,10 @@ class _$MaterialInfoCopyWithImpl<$Res> implements $MaterialInfoCopyWith<$Res> {
           ? _value.taxes
           : taxes // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      bundles: bundles == freezed
+          ? _value.bundles
+          : bundles // ignore: cast_nullable_to_non_nullable
+              as List<Bundle>,
     ));
   }
 
@@ -190,7 +197,8 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
       bool hidePrice,
       bool hasValidTenderContract,
       bool hasMandatoryTenderContract,
-      List<String> taxes});
+      List<String> taxes,
+      List<Bundle> bundles});
 
   @override
   $PrincipalDataCopyWith<$Res> get principalData;
@@ -225,6 +233,7 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
     Object? hasValidTenderContract = freezed,
     Object? hasMandatoryTenderContract = freezed,
     Object? taxes = freezed,
+    Object? bundles = freezed,
   }) {
     return _then(_$_MaterialInfo(
       materialNumber: materialNumber == freezed
@@ -291,6 +300,10 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
           ? _value._taxes
           : taxes // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      bundles: bundles == freezed
+          ? _value._bundles
+          : bundles // ignore: cast_nullable_to_non_nullable
+              as List<Bundle>,
     ));
   }
 }
@@ -314,8 +327,10 @@ class _$_MaterialInfo extends _MaterialInfo {
       required this.hidePrice,
       required this.hasValidTenderContract,
       required this.hasMandatoryTenderContract,
-      required final List<String> taxes})
+      required final List<String> taxes,
+      required final List<Bundle> bundles})
       : _taxes = taxes,
+        _bundles = bundles,
         super._();
 
   @override
@@ -355,9 +370,16 @@ class _$_MaterialInfo extends _MaterialInfo {
     return EqualUnmodifiableListView(_taxes);
   }
 
+  final List<Bundle> _bundles;
+  @override
+  List<Bundle> get bundles {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bundles);
+  }
+
   @override
   String toString() {
-    return 'MaterialInfo(materialNumber: $materialNumber, materialDescription: $materialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, principalData: $principalData, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hidePrice: $hidePrice, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes)';
+    return 'MaterialInfo(materialNumber: $materialNumber, materialDescription: $materialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, principalData: $principalData, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hidePrice: $hidePrice, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, bundles: $bundles)';
   }
 
   @override
@@ -393,7 +415,8 @@ class _$_MaterialInfo extends _MaterialInfo {
                 .equals(other.hasValidTenderContract, hasValidTenderContract) &&
             const DeepCollectionEquality().equals(
                 other.hasMandatoryTenderContract, hasMandatoryTenderContract) &&
-            const DeepCollectionEquality().equals(other._taxes, _taxes));
+            const DeepCollectionEquality().equals(other._taxes, _taxes) &&
+            const DeepCollectionEquality().equals(other._bundles, _bundles));
   }
 
   @override
@@ -414,7 +437,8 @@ class _$_MaterialInfo extends _MaterialInfo {
       const DeepCollectionEquality().hash(hidePrice),
       const DeepCollectionEquality().hash(hasValidTenderContract),
       const DeepCollectionEquality().hash(hasMandatoryTenderContract),
-      const DeepCollectionEquality().hash(_taxes));
+      const DeepCollectionEquality().hash(_taxes),
+      const DeepCollectionEquality().hash(_bundles));
 
   @JsonKey(ignore: true)
   @override
@@ -439,7 +463,8 @@ abstract class _MaterialInfo extends MaterialInfo {
       required final bool hidePrice,
       required final bool hasValidTenderContract,
       required final bool hasMandatoryTenderContract,
-      required final List<String> taxes}) = _$_MaterialInfo;
+      required final List<String> taxes,
+      required final List<Bundle> bundles}) = _$_MaterialInfo;
   const _MaterialInfo._() : super._();
 
   @override
@@ -474,6 +499,8 @@ abstract class _MaterialInfo extends MaterialInfo {
   bool get hasMandatoryTenderContract;
   @override
   List<String> get taxes;
+  @override
+  List<Bundle> get bundles;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialInfoCopyWith<_$_MaterialInfo> get copyWith =>

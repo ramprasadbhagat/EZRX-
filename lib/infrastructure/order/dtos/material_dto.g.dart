@@ -28,6 +28,10 @@ _$_MaterialDto _$$_MaterialDtoFromJson(Map<String, dynamic> json) =>
       taxes:
           (json['taxes'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
+      bundles: (json['bundles'] as List<dynamic>?)
+              ?.map((e) => BundleDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$$_MaterialDtoToJson(_$_MaterialDto instance) =>
@@ -49,4 +53,5 @@ Map<String, dynamic> _$$_MaterialDtoToJson(_$_MaterialDto instance) =>
       'hasValidTenderContract': instance.hasValidTenderContract,
       'hasMandatoryTenderContract': instance.hasMandatoryTenderContract,
       'taxes': instance.taxes,
+      'bundles': instance.bundles,
     };

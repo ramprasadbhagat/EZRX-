@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
@@ -79,6 +80,20 @@ class ShipCodeSelector extends StatelessWidget {
                       user: context.read<UserBloc>().state.user,
                     ),
                   );
+
+              context.read<MaterialBundleListBloc>().add(
+                    MaterialBundleListEvent.fetch(
+                      user: context.read<UserBloc>().state.user,
+                      customerCode: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customeCodeInfo,
+                      shipToCode:
+                          context.read<ShipToCodeBloc>().state.shipToInfo,
+                      salesOrganisation:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                    ),
+                  );
             } else {
               context
                   .read<SavedOrderListBloc>()
@@ -95,6 +110,9 @@ class ShipCodeSelector extends StatelessWidget {
               context.read<FavouriteBloc>().add(
                     const FavouriteEvent.initialized(),
                   );
+              context
+                  .read<MaterialBundleListBloc>()
+                  .add(const MaterialBundleListEvent.initialized());
             }
           },
           buildWhen: (previous, current) =>

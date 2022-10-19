@@ -17,6 +17,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required List principalList,
     required bool disableOrderType,
     required bool enableBatchNumber,
+    required bool disableBundles,
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
@@ -29,6 +30,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         principalList: [],
         disableOrderType: false,
         enableBatchNumber: false,
+        disableBundles: false,
       );
 
   String get getConfigLangauge {

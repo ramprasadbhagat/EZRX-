@@ -40,7 +40,7 @@ final appThemeData = {
     ),
     tabBarTheme: const TabBarTheme(
       indicator: BoxDecoration(
-        color: ZPColors.primary,
+        color: ZPColors.lightGray,
       ),
       labelColor: ZPColors.primary,
       unselectedLabelColor: ZPColors.lightGray,
@@ -52,15 +52,16 @@ final appThemeData = {
       selectionColor: ZPColors.primary,
       selectionHandleColor: ZPColors.primary,
     ),
-    inputDecorationTheme: const InputDecorationTheme(
-      floatingLabelStyle: TextStyle(
+    inputDecorationTheme: InputDecorationTheme(
+      floatingLabelStyle: const TextStyle(
         color: ZPColors.primary,
       ),
       // labelStyle: TextStyle(color: ZPColors.primary),
       focusedBorder: UnderlineInputBorder(
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
           color: ZPColors.primary,
         ),
+        borderRadius: BorderRadius.circular(8.0),
       ),
       // enabledBorder: UnderlineInputBorder(
       //   borderSide: BorderSide(color: ZPColors.primary),
