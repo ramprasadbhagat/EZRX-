@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
@@ -14,6 +15,8 @@ import 'package:ezrxmobile/application/order/stock_information/stock_information
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
+import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
@@ -158,6 +161,15 @@ class App extends StatelessWidget {
         ),
         BlocProvider<StockInformationBloc>(
           create: (context) => locator<StockInformationBloc>(),
+        ),
+        BlocProvider<PaymentCustomerInformationBloc>(
+          create: (context) => locator<PaymentCustomerInformationBloc>(),
+        ),
+        BlocProvider<SalesRepBloc>(
+          create: (context) => locator<SalesRepBloc>(),
+        ),
+        BlocProvider<PaymentTermBloc>(
+          create: (context) => locator<PaymentTermBloc>(),
         ),
       ],
       child: MaterialApp.router(
