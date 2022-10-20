@@ -5,6 +5,7 @@ import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/account/settings/change_password_title.dart';
 import 'package:ezrxmobile/presentation/account/settings/language_tile.dart';
+import 'package:ezrxmobile/presentation/account/settings/notification_tile.dart';
 import 'package:ezrxmobile/presentation/account/settings/privacy_policy_tile.dart';
 import 'package:ezrxmobile/presentation/account/settings/tos_tile.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class SettingsPage extends StatelessWidget {
               children: ListTile.divideTiles(
                 context: context,
                 tiles: [
+                  const NotificationTile(),
                   const LanguageTile(),
                   const PrivacyPolicy(),
                   const ChangePasswordTile(),

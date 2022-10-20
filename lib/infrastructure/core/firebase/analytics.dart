@@ -1,11 +1,10 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 
 class FirebaseAnalyticsService {
-  static final _analytics = FirebaseAnalytics.instance;
-  FirebaseAnalytics get analytics => _analytics;
-  static final FirebaseAnalyticsObserver _observer =
-      FirebaseAnalyticsObserver(analytics: _analytics);
-  FirebaseAnalyticsObserver get observer => _observer;
+  late FirebaseAnalytics analytics;
+  late FirebaseAnalyticsObserver observer;
+
+  FirebaseAnalyticsService({required this.analytics, required this.observer});
 
   // Future<void> logEvent({
   //   required String eventName,

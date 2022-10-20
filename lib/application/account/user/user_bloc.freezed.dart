@@ -21,6 +21,9 @@ mixin _$UserEvent {
     required TResult Function() initialized,
     required TResult Function() fetch,
     required TResult Function() accptTnc,
+    required TResult Function(
+            String languagePreference, bool emailNotifications)
+        updateNotificationSettings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +31,8 @@ mixin _$UserEvent {
     TResult Function()? initialized,
     TResult Function()? fetch,
     TResult Function()? accptTnc,
+    TResult Function(String languagePreference, bool emailNotifications)?
+        updateNotificationSettings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +40,8 @@ mixin _$UserEvent {
     TResult Function()? initialized,
     TResult Function()? fetch,
     TResult Function()? accptTnc,
+    TResult Function(String languagePreference, bool emailNotifications)?
+        updateNotificationSettings,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +50,8 @@ mixin _$UserEvent {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_AccptTnc value) accptTnc,
+    required TResult Function(_UpdateNotificationSettings value)
+        updateNotificationSettings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +59,8 @@ mixin _$UserEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_AccptTnc value)? accptTnc,
+    TResult Function(_UpdateNotificationSettings value)?
+        updateNotificationSettings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +68,8 @@ mixin _$UserEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_AccptTnc value)? accptTnc,
+    TResult Function(_UpdateNotificationSettings value)?
+        updateNotificationSettings,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,6 +133,9 @@ class _$_Initialized implements _Initialized {
     required TResult Function() initialized,
     required TResult Function() fetch,
     required TResult Function() accptTnc,
+    required TResult Function(
+            String languagePreference, bool emailNotifications)
+        updateNotificationSettings,
   }) {
     return initialized();
   }
@@ -130,6 +146,8 @@ class _$_Initialized implements _Initialized {
     TResult Function()? initialized,
     TResult Function()? fetch,
     TResult Function()? accptTnc,
+    TResult Function(String languagePreference, bool emailNotifications)?
+        updateNotificationSettings,
   }) {
     return initialized?.call();
   }
@@ -140,6 +158,8 @@ class _$_Initialized implements _Initialized {
     TResult Function()? initialized,
     TResult Function()? fetch,
     TResult Function()? accptTnc,
+    TResult Function(String languagePreference, bool emailNotifications)?
+        updateNotificationSettings,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -154,6 +174,8 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_AccptTnc value) accptTnc,
+    required TResult Function(_UpdateNotificationSettings value)
+        updateNotificationSettings,
   }) {
     return initialized(this);
   }
@@ -164,6 +186,8 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_AccptTnc value)? accptTnc,
+    TResult Function(_UpdateNotificationSettings value)?
+        updateNotificationSettings,
   }) {
     return initialized?.call(this);
   }
@@ -174,6 +198,8 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_AccptTnc value)? accptTnc,
+    TResult Function(_UpdateNotificationSettings value)?
+        updateNotificationSettings,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -228,6 +254,9 @@ class _$_Fetch implements _Fetch {
     required TResult Function() initialized,
     required TResult Function() fetch,
     required TResult Function() accptTnc,
+    required TResult Function(
+            String languagePreference, bool emailNotifications)
+        updateNotificationSettings,
   }) {
     return fetch();
   }
@@ -238,6 +267,8 @@ class _$_Fetch implements _Fetch {
     TResult Function()? initialized,
     TResult Function()? fetch,
     TResult Function()? accptTnc,
+    TResult Function(String languagePreference, bool emailNotifications)?
+        updateNotificationSettings,
   }) {
     return fetch?.call();
   }
@@ -248,6 +279,8 @@ class _$_Fetch implements _Fetch {
     TResult Function()? initialized,
     TResult Function()? fetch,
     TResult Function()? accptTnc,
+    TResult Function(String languagePreference, bool emailNotifications)?
+        updateNotificationSettings,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -262,6 +295,8 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_AccptTnc value) accptTnc,
+    required TResult Function(_UpdateNotificationSettings value)
+        updateNotificationSettings,
   }) {
     return fetch(this);
   }
@@ -272,6 +307,8 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_AccptTnc value)? accptTnc,
+    TResult Function(_UpdateNotificationSettings value)?
+        updateNotificationSettings,
   }) {
     return fetch?.call(this);
   }
@@ -282,6 +319,8 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_AccptTnc value)? accptTnc,
+    TResult Function(_UpdateNotificationSettings value)?
+        updateNotificationSettings,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -338,6 +377,9 @@ class _$_AccptTnc implements _AccptTnc {
     required TResult Function() initialized,
     required TResult Function() fetch,
     required TResult Function() accptTnc,
+    required TResult Function(
+            String languagePreference, bool emailNotifications)
+        updateNotificationSettings,
   }) {
     return accptTnc();
   }
@@ -348,6 +390,8 @@ class _$_AccptTnc implements _AccptTnc {
     TResult Function()? initialized,
     TResult Function()? fetch,
     TResult Function()? accptTnc,
+    TResult Function(String languagePreference, bool emailNotifications)?
+        updateNotificationSettings,
   }) {
     return accptTnc?.call();
   }
@@ -358,6 +402,8 @@ class _$_AccptTnc implements _AccptTnc {
     TResult Function()? initialized,
     TResult Function()? fetch,
     TResult Function()? accptTnc,
+    TResult Function(String languagePreference, bool emailNotifications)?
+        updateNotificationSettings,
     required TResult orElse(),
   }) {
     if (accptTnc != null) {
@@ -372,6 +418,8 @@ class _$_AccptTnc implements _AccptTnc {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_AccptTnc value) accptTnc,
+    required TResult Function(_UpdateNotificationSettings value)
+        updateNotificationSettings,
   }) {
     return accptTnc(this);
   }
@@ -382,6 +430,8 @@ class _$_AccptTnc implements _AccptTnc {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_AccptTnc value)? accptTnc,
+    TResult Function(_UpdateNotificationSettings value)?
+        updateNotificationSettings,
   }) {
     return accptTnc?.call(this);
   }
@@ -392,6 +442,8 @@ class _$_AccptTnc implements _AccptTnc {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_AccptTnc value)? accptTnc,
+    TResult Function(_UpdateNotificationSettings value)?
+        updateNotificationSettings,
     required TResult orElse(),
   }) {
     if (accptTnc != null) {
@@ -403,6 +455,180 @@ class _$_AccptTnc implements _AccptTnc {
 
 abstract class _AccptTnc implements UserEvent {
   const factory _AccptTnc() = _$_AccptTnc;
+}
+
+/// @nodoc
+abstract class _$$_UpdateNotificationSettingsCopyWith<$Res> {
+  factory _$$_UpdateNotificationSettingsCopyWith(
+          _$_UpdateNotificationSettings value,
+          $Res Function(_$_UpdateNotificationSettings) then) =
+      __$$_UpdateNotificationSettingsCopyWithImpl<$Res>;
+  $Res call({String languagePreference, bool emailNotifications});
+}
+
+/// @nodoc
+class __$$_UpdateNotificationSettingsCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res>
+    implements _$$_UpdateNotificationSettingsCopyWith<$Res> {
+  __$$_UpdateNotificationSettingsCopyWithImpl(
+      _$_UpdateNotificationSettings _value,
+      $Res Function(_$_UpdateNotificationSettings) _then)
+      : super(_value, (v) => _then(v as _$_UpdateNotificationSettings));
+
+  @override
+  _$_UpdateNotificationSettings get _value =>
+      super._value as _$_UpdateNotificationSettings;
+
+  @override
+  $Res call({
+    Object? languagePreference = freezed,
+    Object? emailNotifications = freezed,
+  }) {
+    return _then(_$_UpdateNotificationSettings(
+      languagePreference: languagePreference == freezed
+          ? _value.languagePreference
+          : languagePreference // ignore: cast_nullable_to_non_nullable
+              as String,
+      emailNotifications: emailNotifications == freezed
+          ? _value.emailNotifications
+          : emailNotifications // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
+  const _$_UpdateNotificationSettings(
+      {required this.languagePreference, required this.emailNotifications});
+
+  @override
+  final String languagePreference;
+  @override
+  final bool emailNotifications;
+
+  @override
+  String toString() {
+    return 'UserEvent.updateNotificationSettings(languagePreference: $languagePreference, emailNotifications: $emailNotifications)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateNotificationSettings &&
+            const DeepCollectionEquality()
+                .equals(other.languagePreference, languagePreference) &&
+            const DeepCollectionEquality()
+                .equals(other.emailNotifications, emailNotifications));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(languagePreference),
+      const DeepCollectionEquality().hash(emailNotifications));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_UpdateNotificationSettingsCopyWith<_$_UpdateNotificationSettings>
+      get copyWith => __$$_UpdateNotificationSettingsCopyWithImpl<
+          _$_UpdateNotificationSettings>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function() fetch,
+    required TResult Function() accptTnc,
+    required TResult Function(
+            String languagePreference, bool emailNotifications)
+        updateNotificationSettings,
+  }) {
+    return updateNotificationSettings(languagePreference, emailNotifications);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function()? fetch,
+    TResult Function()? accptTnc,
+    TResult Function(String languagePreference, bool emailNotifications)?
+        updateNotificationSettings,
+  }) {
+    return updateNotificationSettings?.call(
+        languagePreference, emailNotifications);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function()? fetch,
+    TResult Function()? accptTnc,
+    TResult Function(String languagePreference, bool emailNotifications)?
+        updateNotificationSettings,
+    required TResult orElse(),
+  }) {
+    if (updateNotificationSettings != null) {
+      return updateNotificationSettings(languagePreference, emailNotifications);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_AccptTnc value) accptTnc,
+    required TResult Function(_UpdateNotificationSettings value)
+        updateNotificationSettings,
+  }) {
+    return updateNotificationSettings(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_AccptTnc value)? accptTnc,
+    TResult Function(_UpdateNotificationSettings value)?
+        updateNotificationSettings,
+  }) {
+    return updateNotificationSettings?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_AccptTnc value)? accptTnc,
+    TResult Function(_UpdateNotificationSettings value)?
+        updateNotificationSettings,
+    required TResult orElse(),
+  }) {
+    if (updateNotificationSettings != null) {
+      return updateNotificationSettings(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateNotificationSettings implements UserEvent {
+  const factory _UpdateNotificationSettings(
+      {required final String languagePreference,
+      required final bool emailNotifications}) = _$_UpdateNotificationSettings;
+
+  String get languagePreference;
+  bool get emailNotifications;
+  @JsonKey(ignore: true)
+  _$$_UpdateNotificationSettingsCopyWith<_$_UpdateNotificationSettings>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

@@ -20,40 +20,40 @@ UserDto _$UserDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserDto {
-  @JsonKey(name: 'id')
+  @JsonKey(name: 'id', defaultValue: '')
   String get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'username')
   String get username => throw _privateConstructorUsedError;
   @JsonKey(name: 'email')
   String get email => throw _privateConstructorUsedError;
-  @JsonKey(name: 'firstName')
+  @JsonKey(name: 'firstName', defaultValue: '')
   String get firstName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'lastName')
+  @JsonKey(name: 'lastName', defaultValue: '')
   String get lastName => throw _privateConstructorUsedError;
   @JsonKey(name: 'role')
   RoleDto get role => throw _privateConstructorUsedError;
   @JsonKey(name: 'customerCode')
   String get customerCode => throw _privateConstructorUsedError;
   @_SalesOrganisationListConverter()
-  @JsonKey(name: 'userSalesOrganisationList')
+  @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
   List<SalesOrganisationDto> get userSalesOrganisations =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'emailNotifications')
+  @JsonKey(name: 'emailNotifications', defaultValue: false)
   bool get emailNotifications => throw _privateConstructorUsedError;
-  @JsonKey(name: 'mobileNotifications')
+  @JsonKey(name: 'mobileNotifications', defaultValue: false)
   bool get mobileNotifications => throw _privateConstructorUsedError;
-  @JsonKey(name: 'languagePreference')
+  @JsonKey(name: 'languagePreference', defaultValue: 'en')
   String get languagePreference => throw _privateConstructorUsedError;
-  @JsonKey(name: 'acceptTC')
+  @JsonKey(name: 'acceptTC', defaultValue: false)
   bool get acceptTC => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'acceptTCTimestamp',
       defaultValue: '1970-01-01 00:00:00',
       readValue: dateTimeStringFormatCheck)
   String get acceptTCTimestamp => throw _privateConstructorUsedError;
-  @JsonKey(name: 'acceptAUP')
+  @JsonKey(name: 'acceptAUP', defaultValue: false)
   bool get acceptAUP => throw _privateConstructorUsedError;
-  @JsonKey(name: 'enableOrderType')
+  @JsonKey(name: 'enableOrderType', defaultValue: false)
   bool get enableOrderType => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'acceptAUPTC',
@@ -71,36 +71,36 @@ abstract class $UserDtoCopyWith<$Res> {
   factory $UserDtoCopyWith(UserDto value, $Res Function(UserDto) then) =
       _$UserDtoCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'id')
+      {@JsonKey(name: 'id', defaultValue: '')
           String id,
       @JsonKey(name: 'username')
           String username,
       @JsonKey(name: 'email')
           String email,
-      @JsonKey(name: 'firstName')
+      @JsonKey(name: 'firstName', defaultValue: '')
           String firstName,
-      @JsonKey(name: 'lastName')
+      @JsonKey(name: 'lastName', defaultValue: '')
           String lastName,
       @JsonKey(name: 'role')
           RoleDto role,
       @JsonKey(name: 'customerCode')
           String customerCode,
       @_SalesOrganisationListConverter()
-      @JsonKey(name: 'userSalesOrganisationList')
+      @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
           List<SalesOrganisationDto> userSalesOrganisations,
-      @JsonKey(name: 'emailNotifications')
+      @JsonKey(name: 'emailNotifications', defaultValue: false)
           bool emailNotifications,
-      @JsonKey(name: 'mobileNotifications')
+      @JsonKey(name: 'mobileNotifications', defaultValue: false)
           bool mobileNotifications,
-      @JsonKey(name: 'languagePreference')
+      @JsonKey(name: 'languagePreference', defaultValue: 'en')
           String languagePreference,
-      @JsonKey(name: 'acceptTC')
+      @JsonKey(name: 'acceptTC', defaultValue: false)
           bool acceptTC,
       @JsonKey(name: 'acceptTCTimestamp', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
           String acceptTCTimestamp,
-      @JsonKey(name: 'acceptAUP')
+      @JsonKey(name: 'acceptAUP', defaultValue: false)
           bool acceptAUP,
-      @JsonKey(name: 'enableOrderType')
+      @JsonKey(name: 'enableOrderType', defaultValue: false)
           bool enableOrderType,
       @JsonKey(name: 'acceptAUPTC', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
           String acceptAUPTimestamp});
@@ -218,36 +218,36 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       __$$_UserDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'id')
+      {@JsonKey(name: 'id', defaultValue: '')
           String id,
       @JsonKey(name: 'username')
           String username,
       @JsonKey(name: 'email')
           String email,
-      @JsonKey(name: 'firstName')
+      @JsonKey(name: 'firstName', defaultValue: '')
           String firstName,
-      @JsonKey(name: 'lastName')
+      @JsonKey(name: 'lastName', defaultValue: '')
           String lastName,
       @JsonKey(name: 'role')
           RoleDto role,
       @JsonKey(name: 'customerCode')
           String customerCode,
       @_SalesOrganisationListConverter()
-      @JsonKey(name: 'userSalesOrganisationList')
+      @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
           List<SalesOrganisationDto> userSalesOrganisations,
-      @JsonKey(name: 'emailNotifications')
+      @JsonKey(name: 'emailNotifications', defaultValue: false)
           bool emailNotifications,
-      @JsonKey(name: 'mobileNotifications')
+      @JsonKey(name: 'mobileNotifications', defaultValue: false)
           bool mobileNotifications,
-      @JsonKey(name: 'languagePreference')
+      @JsonKey(name: 'languagePreference', defaultValue: 'en')
           String languagePreference,
-      @JsonKey(name: 'acceptTC')
+      @JsonKey(name: 'acceptTC', defaultValue: false)
           bool acceptTC,
       @JsonKey(name: 'acceptTCTimestamp', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
           String acceptTCTimestamp,
-      @JsonKey(name: 'acceptAUP')
+      @JsonKey(name: 'acceptAUP', defaultValue: false)
           bool acceptAUP,
-      @JsonKey(name: 'enableOrderType')
+      @JsonKey(name: 'enableOrderType', defaultValue: false)
           bool enableOrderType,
       @JsonKey(name: 'acceptAUPTC', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
           String acceptAUPTimestamp});
@@ -357,36 +357,36 @@ class __$$_UserDtoCopyWithImpl<$Res> extends _$UserDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserDto extends _UserDto {
   const _$_UserDto(
-      {@JsonKey(name: 'id')
+      {@JsonKey(name: 'id', defaultValue: '')
           required this.id,
       @JsonKey(name: 'username')
           required this.username,
       @JsonKey(name: 'email')
           required this.email,
-      @JsonKey(name: 'firstName')
+      @JsonKey(name: 'firstName', defaultValue: '')
           required this.firstName,
-      @JsonKey(name: 'lastName')
+      @JsonKey(name: 'lastName', defaultValue: '')
           required this.lastName,
       @JsonKey(name: 'role')
           required this.role,
       @JsonKey(name: 'customerCode')
           required this.customerCode,
       @_SalesOrganisationListConverter()
-      @JsonKey(name: 'userSalesOrganisationList')
+      @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
           required final List<SalesOrganisationDto> userSalesOrganisations,
-      @JsonKey(name: 'emailNotifications')
+      @JsonKey(name: 'emailNotifications', defaultValue: false)
           required this.emailNotifications,
-      @JsonKey(name: 'mobileNotifications')
+      @JsonKey(name: 'mobileNotifications', defaultValue: false)
           required this.mobileNotifications,
-      @JsonKey(name: 'languagePreference')
+      @JsonKey(name: 'languagePreference', defaultValue: 'en')
           required this.languagePreference,
-      @JsonKey(name: 'acceptTC')
+      @JsonKey(name: 'acceptTC', defaultValue: false)
           required this.acceptTC,
       @JsonKey(name: 'acceptTCTimestamp', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
           required this.acceptTCTimestamp,
-      @JsonKey(name: 'acceptAUP')
+      @JsonKey(name: 'acceptAUP', defaultValue: false)
           required this.acceptAUP,
-      @JsonKey(name: 'enableOrderType')
+      @JsonKey(name: 'enableOrderType', defaultValue: false)
           required this.enableOrderType,
       @JsonKey(name: 'acceptAUPTC', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
           required this.acceptAUPTimestamp})
@@ -397,7 +397,7 @@ class _$_UserDto extends _UserDto {
       _$$_UserDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'id')
+  @JsonKey(name: 'id', defaultValue: '')
   final String id;
   @override
   @JsonKey(name: 'username')
@@ -406,10 +406,10 @@ class _$_UserDto extends _UserDto {
   @JsonKey(name: 'email')
   final String email;
   @override
-  @JsonKey(name: 'firstName')
+  @JsonKey(name: 'firstName', defaultValue: '')
   final String firstName;
   @override
-  @JsonKey(name: 'lastName')
+  @JsonKey(name: 'lastName', defaultValue: '')
   final String lastName;
   @override
   @JsonKey(name: 'role')
@@ -420,23 +420,23 @@ class _$_UserDto extends _UserDto {
   final List<SalesOrganisationDto> _userSalesOrganisations;
   @override
   @_SalesOrganisationListConverter()
-  @JsonKey(name: 'userSalesOrganisationList')
+  @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
   List<SalesOrganisationDto> get userSalesOrganisations {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_userSalesOrganisations);
   }
 
   @override
-  @JsonKey(name: 'emailNotifications')
+  @JsonKey(name: 'emailNotifications', defaultValue: false)
   final bool emailNotifications;
   @override
-  @JsonKey(name: 'mobileNotifications')
+  @JsonKey(name: 'mobileNotifications', defaultValue: false)
   final bool mobileNotifications;
   @override
-  @JsonKey(name: 'languagePreference')
+  @JsonKey(name: 'languagePreference', defaultValue: 'en')
   final String languagePreference;
   @override
-  @JsonKey(name: 'acceptTC')
+  @JsonKey(name: 'acceptTC', defaultValue: false)
   final bool acceptTC;
   @override
   @JsonKey(
@@ -445,10 +445,10 @@ class _$_UserDto extends _UserDto {
       readValue: dateTimeStringFormatCheck)
   final String acceptTCTimestamp;
   @override
-  @JsonKey(name: 'acceptAUP')
+  @JsonKey(name: 'acceptAUP', defaultValue: false)
   final bool acceptAUP;
   @override
-  @JsonKey(name: 'enableOrderType')
+  @JsonKey(name: 'enableOrderType', defaultValue: false)
   final bool enableOrderType;
   @override
   @JsonKey(
@@ -529,36 +529,36 @@ class _$_UserDto extends _UserDto {
 
 abstract class _UserDto extends UserDto {
   const factory _UserDto(
-      {@JsonKey(name: 'id')
+      {@JsonKey(name: 'id', defaultValue: '')
           required final String id,
       @JsonKey(name: 'username')
           required final String username,
       @JsonKey(name: 'email')
           required final String email,
-      @JsonKey(name: 'firstName')
+      @JsonKey(name: 'firstName', defaultValue: '')
           required final String firstName,
-      @JsonKey(name: 'lastName')
+      @JsonKey(name: 'lastName', defaultValue: '')
           required final String lastName,
       @JsonKey(name: 'role')
           required final RoleDto role,
       @JsonKey(name: 'customerCode')
           required final String customerCode,
       @_SalesOrganisationListConverter()
-      @JsonKey(name: 'userSalesOrganisationList')
+      @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
           required final List<SalesOrganisationDto> userSalesOrganisations,
-      @JsonKey(name: 'emailNotifications')
+      @JsonKey(name: 'emailNotifications', defaultValue: false)
           required final bool emailNotifications,
-      @JsonKey(name: 'mobileNotifications')
+      @JsonKey(name: 'mobileNotifications', defaultValue: false)
           required final bool mobileNotifications,
-      @JsonKey(name: 'languagePreference')
+      @JsonKey(name: 'languagePreference', defaultValue: 'en')
           required final String languagePreference,
-      @JsonKey(name: 'acceptTC')
+      @JsonKey(name: 'acceptTC', defaultValue: false)
           required final bool acceptTC,
       @JsonKey(name: 'acceptTCTimestamp', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
           required final String acceptTCTimestamp,
-      @JsonKey(name: 'acceptAUP')
+      @JsonKey(name: 'acceptAUP', defaultValue: false)
           required final bool acceptAUP,
-      @JsonKey(name: 'enableOrderType')
+      @JsonKey(name: 'enableOrderType', defaultValue: false)
           required final bool enableOrderType,
       @JsonKey(name: 'acceptAUPTC', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
           required final String acceptAUPTimestamp}) = _$_UserDto;
@@ -567,7 +567,7 @@ abstract class _UserDto extends UserDto {
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$_UserDto.fromJson;
 
   @override
-  @JsonKey(name: 'id')
+  @JsonKey(name: 'id', defaultValue: '')
   String get id;
   @override
   @JsonKey(name: 'username')
@@ -576,10 +576,10 @@ abstract class _UserDto extends UserDto {
   @JsonKey(name: 'email')
   String get email;
   @override
-  @JsonKey(name: 'firstName')
+  @JsonKey(name: 'firstName', defaultValue: '')
   String get firstName;
   @override
-  @JsonKey(name: 'lastName')
+  @JsonKey(name: 'lastName', defaultValue: '')
   String get lastName;
   @override
   @JsonKey(name: 'role')
@@ -589,19 +589,19 @@ abstract class _UserDto extends UserDto {
   String get customerCode;
   @override
   @_SalesOrganisationListConverter()
-  @JsonKey(name: 'userSalesOrganisationList')
+  @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
   List<SalesOrganisationDto> get userSalesOrganisations;
   @override
-  @JsonKey(name: 'emailNotifications')
+  @JsonKey(name: 'emailNotifications', defaultValue: false)
   bool get emailNotifications;
   @override
-  @JsonKey(name: 'mobileNotifications')
+  @JsonKey(name: 'mobileNotifications', defaultValue: false)
   bool get mobileNotifications;
   @override
-  @JsonKey(name: 'languagePreference')
+  @JsonKey(name: 'languagePreference', defaultValue: 'en')
   String get languagePreference;
   @override
-  @JsonKey(name: 'acceptTC')
+  @JsonKey(name: 'acceptTC', defaultValue: false)
   bool get acceptTC;
   @override
   @JsonKey(
@@ -610,10 +610,10 @@ abstract class _UserDto extends UserDto {
       readValue: dateTimeStringFormatCheck)
   String get acceptTCTimestamp;
   @override
-  @JsonKey(name: 'acceptAUP')
+  @JsonKey(name: 'acceptAUP', defaultValue: false)
   bool get acceptAUP;
   @override
-  @JsonKey(name: 'enableOrderType')
+  @JsonKey(name: 'enableOrderType', defaultValue: false)
   bool get enableOrderType;
   @override
   @JsonKey(

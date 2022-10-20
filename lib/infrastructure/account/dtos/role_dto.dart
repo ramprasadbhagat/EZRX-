@@ -11,9 +11,9 @@ class RoleDto with _$RoleDto {
 
   const factory RoleDto({
     @JsonKey(name: 'id') required String id,
-    @JsonKey(name: 'name') required String name,
-    @JsonKey(name: 'type') required String type,
-    @JsonKey(name: 'description') required String description,
+    @JsonKey(name: 'name', defaultValue: '') required String name,
+    @JsonKey(name: 'type', defaultValue: '') required String type,
+    @JsonKey(name: 'description', defaultValue: '') required String description,
   }) = _RoleDto;
 
   factory RoleDto.fromDomain(Role role) {

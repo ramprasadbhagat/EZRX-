@@ -104,4 +104,33 @@ class UserRemoteDataSource {
           .toDomain();
     });
   }
+
+  Future<User> updateUserNotificationAndLanguagePreference({
+    required String languagePreference,
+    required bool emailNotification,
+    required String userId,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final res = await httpService.request(
+        method: 'POST',
+        url: '/api/strapiEngineMutation',
+        data: jsonEncode({
+          'query': userQueryMutation.updateNotification(),
+          'variables': {
+            'input': {
+              'where': {'id': int.parse(userId)},
+              'data': {
+                'emailNotifications': emailNotification,
+                'languagePreference': languagePreference,
+              },
+            },
+          },
+        }),
+      );
+      _userExceptionChecker(res: res);
+
+      return UserDto.fromJson(res.data['data']['updateUser']['user'])
+          .toDomain();
+    });
+  }
 }

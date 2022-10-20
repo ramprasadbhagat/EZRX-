@@ -22,11 +22,11 @@ RoleDto _$RoleDtoFromJson(Map<String, dynamic> json) {
 mixin _$RoleDto {
   @JsonKey(name: 'id')
   String get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'name')
+  @JsonKey(name: 'name', defaultValue: '')
   String get name => throw _privateConstructorUsedError;
-  @JsonKey(name: 'type')
+  @JsonKey(name: 'type', defaultValue: '')
   String get type => throw _privateConstructorUsedError;
-  @JsonKey(name: 'description')
+  @JsonKey(name: 'description', defaultValue: '')
   String get description => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,9 +40,9 @@ abstract class $RoleDtoCopyWith<$Res> {
       _$RoleDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'id') String id,
-      @JsonKey(name: 'name') String name,
-      @JsonKey(name: 'type') String type,
-      @JsonKey(name: 'description') String description});
+      @JsonKey(name: 'name', defaultValue: '') String name,
+      @JsonKey(name: 'type', defaultValue: '') String type,
+      @JsonKey(name: 'description', defaultValue: '') String description});
 }
 
 /// @nodoc
@@ -89,9 +89,9 @@ abstract class _$$_RoleDtoCopyWith<$Res> implements $RoleDtoCopyWith<$Res> {
   @override
   $Res call(
       {@JsonKey(name: 'id') String id,
-      @JsonKey(name: 'name') String name,
-      @JsonKey(name: 'type') String type,
-      @JsonKey(name: 'description') String description});
+      @JsonKey(name: 'name', defaultValue: '') String name,
+      @JsonKey(name: 'type', defaultValue: '') String type,
+      @JsonKey(name: 'description', defaultValue: '') String description});
 }
 
 /// @nodoc
@@ -135,10 +135,14 @@ class __$$_RoleDtoCopyWithImpl<$Res> extends _$RoleDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_RoleDto extends _RoleDto {
   const _$_RoleDto(
-      {@JsonKey(name: 'id') required this.id,
-      @JsonKey(name: 'name') required this.name,
-      @JsonKey(name: 'type') required this.type,
-      @JsonKey(name: 'description') required this.description})
+      {@JsonKey(name: 'id')
+          required this.id,
+      @JsonKey(name: 'name', defaultValue: '')
+          required this.name,
+      @JsonKey(name: 'type', defaultValue: '')
+          required this.type,
+      @JsonKey(name: 'description', defaultValue: '')
+          required this.description})
       : super._();
 
   factory _$_RoleDto.fromJson(Map<String, dynamic> json) =>
@@ -148,13 +152,13 @@ class _$_RoleDto extends _RoleDto {
   @JsonKey(name: 'id')
   final String id;
   @override
-  @JsonKey(name: 'name')
+  @JsonKey(name: 'name', defaultValue: '')
   final String name;
   @override
-  @JsonKey(name: 'type')
+  @JsonKey(name: 'type', defaultValue: '')
   final String type;
   @override
-  @JsonKey(name: 'description')
+  @JsonKey(name: 'description', defaultValue: '')
   final String description;
 
   @override
@@ -198,11 +202,14 @@ class _$_RoleDto extends _RoleDto {
 
 abstract class _RoleDto extends RoleDto {
   const factory _RoleDto(
-          {@JsonKey(name: 'id') required final String id,
-          @JsonKey(name: 'name') required final String name,
-          @JsonKey(name: 'type') required final String type,
-          @JsonKey(name: 'description') required final String description}) =
-      _$_RoleDto;
+      {@JsonKey(name: 'id')
+          required final String id,
+      @JsonKey(name: 'name', defaultValue: '')
+          required final String name,
+      @JsonKey(name: 'type', defaultValue: '')
+          required final String type,
+      @JsonKey(name: 'description', defaultValue: '')
+          required final String description}) = _$_RoleDto;
   const _RoleDto._() : super._();
 
   factory _RoleDto.fromJson(Map<String, dynamic> json) = _$_RoleDto.fromJson;
@@ -211,13 +218,13 @@ abstract class _RoleDto extends RoleDto {
   @JsonKey(name: 'id')
   String get id;
   @override
-  @JsonKey(name: 'name')
+  @JsonKey(name: 'name', defaultValue: '')
   String get name;
   @override
-  @JsonKey(name: 'type')
+  @JsonKey(name: 'type', defaultValue: '')
   String get type;
   @override
-  @JsonKey(name: 'description')
+  @JsonKey(name: 'description', defaultValue: '')
   String get description;
   @override
   @JsonKey(ignore: true)

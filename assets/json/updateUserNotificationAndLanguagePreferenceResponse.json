@@ -1,0 +1,20 @@
+{
+    "data": {
+        "updateUser": {
+            "user": {
+                "username": "ezrxtest05",
+                "email": "bgarcia@zuelligpharma.com",
+                "provider": "local",
+                "role": {
+                    "id": "3"
+                },
+                "customerCode": "-",
+                "shipToAddr": "",
+                "mobileNumber": "-",
+                "acceptMobileTC": false,
+                "languagePreference": "TH",
+                "emailNotifications": false
+            }
+        }
+    }
+}

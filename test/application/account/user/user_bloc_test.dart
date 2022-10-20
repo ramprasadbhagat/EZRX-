@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/settings.dart';
 
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -19,7 +20,9 @@ void main() {
   group('User Bloc Testing', () {
     blocTest<UserBloc, UserState>(
       'Initialized',
-      build: () => UserBloc(userRepository: userRepoMock),
+      build: () => UserBloc(
+        userRepository: userRepoMock,
+      ),
       setUp: () {
         when(() => userRepoMock.getUser()).thenAnswer(
           (invocation) async => Right(
@@ -41,7 +44,9 @@ void main() {
 
     blocTest<UserBloc, UserState>(
       'Check if User have SalesOrganisation',
-      build: () => UserBloc(userRepository: userRepoMock),
+      build: () => UserBloc(
+        userRepository: userRepoMock,
+      ),
       act: (UserBloc bloc) => bloc.add(const UserEvent.initialized()),
       expect: () => [
         UserState.initial().copyWith(user: User.empty().copyWith(id: 'fakeId')),
@@ -51,7 +56,9 @@ void main() {
 
     blocTest<UserBloc, UserState>(
       'Create bloc and fetch',
-      build: () => UserBloc(userRepository: userRepoMock),
+      build: () => UserBloc(
+        userRepository: userRepoMock,
+      ),
       setUp: () {
         when(() => userRepoMock.getUser()).thenAnswer(
           (invocation) async => Right(
@@ -67,7 +74,9 @@ void main() {
 
     blocTest<UserBloc, UserState>(
       'Create bloc and failure on fetch',
-      build: () => UserBloc(userRepository: userRepoMock),
+      build: () => UserBloc(
+        userRepository: userRepoMock,
+      ),
       setUp: () {
         when(() => userRepoMock.getUser()).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('Fake Error')),
@@ -83,6 +92,63 @@ void main() {
             ),
           ),
         )
+      ],
+    );
+
+    blocTest<UserBloc, UserState>(
+      'on [updateNotificationSettings] emits successful user state',
+      build: () => UserBloc(
+        userRepository: userRepoMock,
+      ),
+      setUp: () {
+        when(() => userRepoMock.getUser()).thenAnswer(
+          (invocation) async => Right(
+            User.empty(),
+          ),
+        );
+        when(() => userRepoMock.updateNotificationSettings(User.empty()
+            .copyWith(
+                settings: Settings.empty().copyWith(
+                    languagePreference: 'en',
+                    emailNotifications: true)))).thenAnswer(
+          (invocation) async => Right(User.empty()),
+        );
+      },
+      act: (UserBloc bloc) => bloc.add(
+          const UserEvent.updateNotificationSettings(
+              languagePreference: 'en', emailNotifications: true)),
+      expect: () => [UserState.initial()],
+    );
+
+    blocTest<UserBloc, UserState>(
+      'on [updateNotifificationSettings] throws error',
+      build: () => UserBloc(
+        userRepository: userRepoMock,
+      ),
+      setUp: () {
+        when(() => userRepoMock.getUser()).thenAnswer(
+          (invocation) async => Right(
+            User.empty(),
+          ),
+        );
+        when(() => userRepoMock.updateNotificationSettings(User.empty()
+            .copyWith(
+                settings: Settings.empty().copyWith(
+                    languagePreference: 'en',
+                    emailNotifications: true)))).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('Fake Error'),
+          ),
+        );
+      },
+      act: (UserBloc bloc) => bloc.add(
+          const UserEvent.updateNotificationSettings(
+              languagePreference: 'en', emailNotifications: true)),
+      expect: () => [
+        UserState.initial(),
+        UserState.initial().copyWith(
+            userFailureOrSuccessOption:
+                some(const Left(ApiFailure.other('Fake Error'))))
       ],
     );
   });

@@ -96,4 +96,33 @@ class UserRepository implements IUserRepository {
       return Left(FailureHandler.handleFailure(e));
     }
   }
+
+  @override
+  Future<Either<ApiFailure, User>> updateNotificationSettings(
+    User userDetails,
+  ) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final user =
+            await localDataSource.updateUserNotificationAndLanguagePreference();
+
+        return Right(user);
+      } on MockException catch (e) {
+        return Left(ApiFailure.other(e.message));
+      }
+    } else {
+      try {
+        final user =
+            await remoteDataSource.updateUserNotificationAndLanguagePreference(
+          languagePreference: userDetails.settings.languagePreference,
+          emailNotification: userDetails.settings.emailNotifications,
+          userId: userDetails.id,
+        );
+
+        return Right(user);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+  }
 }

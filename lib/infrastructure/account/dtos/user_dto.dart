@@ -22,24 +22,28 @@ class UserDto with _$UserDto {
   const UserDto._();
 
   const factory UserDto({
-    @JsonKey(name: 'id') required String id,
+    @JsonKey(name: 'id', defaultValue: '') required String id,
     @JsonKey(name: 'username') required String username,
     @JsonKey(name: 'email') required String email,
-    @JsonKey(name: 'firstName') required String firstName,
-    @JsonKey(name: 'lastName') required String lastName,
+    @JsonKey(name: 'firstName', defaultValue: '') required String firstName,
+    @JsonKey(name: 'lastName', defaultValue: '') required String lastName,
     @JsonKey(name: 'role') required RoleDto role,
     @JsonKey(name: 'customerCode') required String customerCode,
     @_SalesOrganisationListConverter()
-    @JsonKey(name: 'userSalesOrganisationList')
+    @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
         required List<SalesOrganisationDto> userSalesOrganisations,
-    @JsonKey(name: 'emailNotifications') required bool emailNotifications,
-    @JsonKey(name: 'mobileNotifications') required bool mobileNotifications,
-    @JsonKey(name: 'languagePreference') required String languagePreference,
-    @JsonKey(name: 'acceptTC') required bool acceptTC,
+    @JsonKey(name: 'emailNotifications', defaultValue: false)
+        required bool emailNotifications,
+    @JsonKey(name: 'mobileNotifications', defaultValue: false)
+        required bool mobileNotifications,
+    @JsonKey(name: 'languagePreference', defaultValue: 'en')
+        required String languagePreference,
+    @JsonKey(name: 'acceptTC', defaultValue: false) required bool acceptTC,
     @JsonKey(name: 'acceptTCTimestamp', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
         required String acceptTCTimestamp,
-    @JsonKey(name: 'acceptAUP') required bool acceptAUP,
-    @JsonKey(name: 'enableOrderType') required bool enableOrderType,
+    @JsonKey(name: 'acceptAUP', defaultValue: false) required bool acceptAUP,
+    @JsonKey(name: 'enableOrderType', defaultValue: false)
+        required bool enableOrderType,
     @JsonKey(name: 'acceptAUPTC', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
         required String acceptAUPTimestamp,
   }) = _UserDto;

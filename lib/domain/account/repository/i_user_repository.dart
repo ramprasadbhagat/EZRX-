@@ -8,4 +8,5 @@ abstract class IUserRepository {
   Future<Either<ApiFailure, User>> getUser();
   Future<Either<ApiFailure, SettingAup>> updateUserAup(User user);
   Future<Either<ApiFailure, SettingTc>> updateUserTc(User user);
+  Future<Either<ApiFailure, User>> updateNotificationSettings(User user);
 }

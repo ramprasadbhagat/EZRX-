@@ -77,6 +77,35 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           );
         }
       },
+      updateNotificationSettings: (e) async {
+        final user = state.user.copyWith(
+          settings: state.user.settings.copyWith(
+            languagePreference: e.languagePreference,
+            emailNotifications: e.emailNotifications,
+          ),
+        );
+
+        final failureOrSuccess =
+            await userRepository.updateNotificationSettings(user);
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              userFailureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          ),
+          (user) => emit(
+            state.copyWith(
+              user: state.user.copyWith(
+                settings: state.user.settings.copyWith(
+                  emailNotifications: user.settings.emailNotifications,
+                  languagePreference: user.settings.languagePreference,
+                ),
+              ),
+              userFailureOrSuccessOption: none(),
+            ),
+          ),
+        );
+      },
     );
   }
 

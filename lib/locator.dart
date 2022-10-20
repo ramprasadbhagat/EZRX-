@@ -120,6 +120,8 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/routes/router_observer.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/repository/aup_tc_repository.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/datasource/tncdate_local.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:get_it/get_it.dart';
 import 'package:local_auth/local_auth.dart';
 
@@ -152,8 +154,14 @@ void setupLocator() {
     ),
   );
   locator.registerLazySingleton(() => PerformanceMonitorService());
-  locator.registerLazySingleton(() => FirebaseAnalyticsService());
-  locator.registerLazySingleton(() => FirebaseCrashlyticsService());
+  locator.registerLazySingleton(() => FirebaseAnalyticsService(
+        analytics: FirebaseAnalytics.instance,
+        observer:
+            FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
+      ));
+  locator.registerLazySingleton(() => FirebaseCrashlyticsService(
+        crashlytics: FirebaseCrashlytics.instance,
+      ));
   locator.registerLazySingleton(
     () => RouterObserver(
       firebaseAnalyticsService: locator<FirebaseAnalyticsService>(),
