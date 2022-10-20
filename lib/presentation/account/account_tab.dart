@@ -68,6 +68,11 @@ class _ProfileTile extends StatelessWidget {
                   state.user.fullName.toString(),
                   style: Theme.of(context).textTheme.headline6,
                 ),
+          subtitle: state.user == User.empty()
+              ? LoadingShimmer.tile(line: 1)
+              : Text(
+                  state.user.role.name,
+                ),
           onTap: null,
         );
       },
