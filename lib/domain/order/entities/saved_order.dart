@@ -39,4 +39,7 @@ class SavedOrder with _$SavedOrder {
         totalOrderValue: 0.0,
         requestedDeliveryDate: '',
       );
+
+  List<String> get allSavedOrderMaterialNumbers =>
+      items.map((e) => e.materialNumber.getOrCrash()).toList();
 }

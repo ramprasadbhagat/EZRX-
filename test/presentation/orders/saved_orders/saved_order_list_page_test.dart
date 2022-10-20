@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/application/order/valid_customer_material/valid_customer_material_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
@@ -33,6 +34,10 @@ class CustomerCodeBlocMock
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
+class MockValidCustomerMaterialBloc
+    extends MockBloc<ValidCustomerMaterialEvent, ValidCustomerMaterialState>
+    implements ValidCustomerMaterialBloc {}
+
 void main() {
   late SavedOrderListBloc savedOrderListBloc;
   final UserBloc userBlocMock = UserBlocMock();
@@ -40,6 +45,7 @@ void main() {
   final CustomerCodeBloc customerCodeBlocMock = CustomerCodeBlocMock();
   final ShipToCodeBloc shipToCodeBLocMock = ShipToCodeBlocMock();
   var savedOrdersMock = <SavedOrder>[];
+  final mockValidCustomerMaterialBloc = MockValidCustomerMaterialBloc();
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -55,6 +61,9 @@ void main() {
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
     when(() => shipToCodeBLocMock.state).thenReturn(ShipToCodeState.initial());
+    when(() => mockValidCustomerMaterialBloc.state).thenReturn(
+      ValidCustomerMaterialState.initial(),
+    );
   });
 
   group('Saved Order List Screen', () {
@@ -112,14 +121,23 @@ void main() {
         ),
       );
 
-      await tester.pumpWidget(
-        MaterialFrameWrapper(
-          child: BlocProvider<SavedOrderListBloc>(
-            create: (context) => savedOrderListBloc,
-            child: const SavedOrderListPage(),
+      await tester.runAsync(() async {
+        await tester.pumpWidget(
+          MaterialFrameWrapper(
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider<SavedOrderListBloc>(
+                  create: (context) => savedOrderListBloc,
+                ),
+                BlocProvider<ValidCustomerMaterialBloc>(
+                  create: (context) => mockValidCustomerMaterialBloc,
+                ),
+              ],
+              child: const SavedOrderListPage(),
+            ),
           ),
-        ),
-      );
+        );
+      });
 
       final noSavedOrder = find.text('No saved order found');
       final loadIndicator = find.byKey(const Key('loadIndicator'));
@@ -140,7 +158,9 @@ void main() {
           isFetching: true,
         ),
       );
-
+      when(() => mockValidCustomerMaterialBloc.state).thenReturn(
+        ValidCustomerMaterialState.initial(),
+      );
       await tester.runAsync(() async {
         await tester.pumpWidget(
           MaterialFrameWrapper(
@@ -161,6 +181,9 @@ void main() {
                 BlocProvider<SavedOrderListBloc>(
                   create: (context) => savedOrderListBloc,
                 ),
+                BlocProvider<ValidCustomerMaterialBloc>(
+                  create: (context) => mockValidCustomerMaterialBloc,
+                ),
               ],
               child: const SavedOrderListPage(),
             ),
@@ -174,9 +197,8 @@ void main() {
 
       final gesture = await tester
           .startGesture(const Offset(50, 100)); //Position of the scrollview
-      await gesture.moveBy(const Offset(50, -2000)); //How much to scroll by
+      await gesture.moveBy(const Offset(50, -3500)); //How much to scroll by
       await tester.pump(const Duration(seconds: 2));
-
       expect(loadIndicator, findsOneWidget);
       expect(noSavedOrder, findsNothing);
       expect(orderTemplateItem, findsAtLeastNWidgets(1));

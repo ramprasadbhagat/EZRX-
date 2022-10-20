@@ -20,6 +20,7 @@ import 'package:ezrxmobile/application/order/order_history_list/order_history_li
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
+import 'package:ezrxmobile/application/order/valid_customer_material/valid_customer_material_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_query_mutation.dart';
@@ -86,6 +87,9 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_price_remote
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/valid_customer_material_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/valid_customer_material_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/valid_customer_materials_query.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_price_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/stock_info_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_repository.dart';
@@ -116,6 +120,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/payment_customer_info
 import 'package:ezrxmobile/infrastructure/order/repository/payment_term_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_term_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_template_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/valid_customer_material_repository.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/routes/router_observer.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/repository/aup_tc_repository.dart';
@@ -883,6 +888,37 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => StockInformationBloc(
       stockInfoRepository: locator<StockInfoRepository>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ValidCustomMaterialQuery(),
+  );
+
+  locator.registerLazySingleton(
+    () => ValidCustomerMaterialLocalDataSource(),
+  );
+  locator.registerLazySingleton(
+    () => ValidCustomerMaterialRemoteDataSource(
+      httpService: locator<HttpService>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      validCustomMaterialQuery: ValidCustomMaterialQuery(),
+      config: locator<Config>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ValidCustomerMaterialRepository(
+      config: locator<Config>(),
+      appMethods: locator<AppMethods>(),
+      localDataSource: locator<ValidCustomerMaterialLocalDataSource>(),
+      remoteDataSource: locator<ValidCustomerMaterialRemoteDataSource>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => ValidCustomerMaterialBloc(
+      validCustomerMaterialRepository:
+          locator<ValidCustomerMaterialRepository>(),
     ),
   );
 }

@@ -22,6 +22,7 @@ import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
+import 'package:ezrxmobile/application/order/valid_customer_material/valid_customer_material_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -174,6 +175,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<PaymentTermBloc>(
           create: (context) => locator<PaymentTermBloc>(),
+        ),
+        BlocProvider<ValidCustomerMaterialBloc>(
+          create: (context) => locator<ValidCustomerMaterialBloc>(),
         ),
       ],
       child: MaterialApp.router(
