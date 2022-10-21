@@ -51,6 +51,13 @@ Duration getJWTRemainingTime(String token) {
   return expirationDate.difference(DateTime.now());
 }
 
+String getJwtUserId(String token) {
+   if (token.isEmpty) return '';
+  final decodedToken = getJWTPayload(token);
+  
+  return decodedToken['id'].toString();
+}
+
 /// Tells whether a token is expired.
 bool isJWTExpired(String token) {
   if (token.isEmpty) return true;

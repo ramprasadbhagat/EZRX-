@@ -53,13 +53,15 @@ class PaymentCustomerInformationRemoteDataSource {
     });
   }
 
-  void _paymentCustomerInformationExceptionChecker({required Response<dynamic> res}) {
+  void _paymentCustomerInformationExceptionChecker({
+    required Response<dynamic> res,
+  }) {
     if (res.statusCode != 200) {
       throw ServerException(
         code: res.statusCode ?? 0,
         message: res.statusMessage ?? '',
       );
-    } else if (res.data['errors'] != null && res.data['data'] == null) {
+    } else if (res.data['errors'] != null) {
       throw ServerException(message: res.data['errors'][0]['message']);
     }
   }

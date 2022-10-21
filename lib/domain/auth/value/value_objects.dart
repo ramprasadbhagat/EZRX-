@@ -124,6 +124,9 @@ class JWT extends ValueObject<String> {
   Duration get remainingTime {
     return getJWTRemainingTime(value.getOrElse(() => ''));
   }
+  String get userId {
+    return getJwtUserId(value.getOrElse(() => ''));
+  }
 
   bool get isExpired {
     return isJWTExpired(value.getOrElse(() => ''));

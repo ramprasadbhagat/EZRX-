@@ -95,7 +95,7 @@ class CustomerCodeRemoteDataSource {
   }
 
   void _customerCodeExceptionChecker({required Response<dynamic> res}) {
-    if (res.data['errors'] != null && res.data['data'] == null) {
+    if (res.data['errors'] != null) {
       throw ServerException(message: res.data['errors'][0]['message']);
     } else if (res.statusCode != 200) {
       throw ServerException(

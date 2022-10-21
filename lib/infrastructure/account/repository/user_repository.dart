@@ -13,6 +13,7 @@ import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 
 class UserRepository implements IUserRepository {
   final Config config;
@@ -20,6 +21,7 @@ class UserRepository implements IUserRepository {
   final UserLocalDataSource localDataSource;
   final FirebaseAnalyticsService firebaseAnalyticsService;
   final FirebaseCrashlyticsService firebaseCrashlyticsService;
+  final TokenStorage tokenStorage;
 
   UserRepository({
     required this.config,
@@ -27,6 +29,7 @@ class UserRepository implements IUserRepository {
     required this.localDataSource,
     required this.firebaseAnalyticsService,
     required this.firebaseCrashlyticsService,
+    required this.tokenStorage,
   });
 
   @override
@@ -41,7 +44,9 @@ class UserRepository implements IUserRepository {
       }
     }
     try {
-      final user = await remoteDataSource.getUser();
+      final token = await tokenStorage.get();
+      final user =
+          await remoteDataSource.getUser(userId: token.toDomain().userId);
       await firebaseAnalyticsService.analytics.setUserId(id: user.id);
       // await firebaseAnalyticsService.analytics.setUserProperty(
       //   name: user.username.getOrCrash(),

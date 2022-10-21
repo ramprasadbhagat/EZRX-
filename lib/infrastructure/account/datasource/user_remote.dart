@@ -24,16 +24,14 @@ class UserRemoteDataSource {
     required this.dataSourceExceptionHandler,
   });
 
-  Future<User> getUser() async {
+  Future<User> getUser({required String userId}) async {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
         url: '/api/strapiEngine',
         data: jsonEncode({
           'query': userQueryMutation.getUserQuery(),
-          'variables': {'id': '11461'},
-          //@@@@@@@ need to remove dependency // 47858
-          // 'variables': {'id': '486'}, //@@@@@@@ need to remove dependency
+          'variables': {'id': userId},
         }),
       );
       _userExceptionChecker(res: res);
@@ -43,7 +41,7 @@ class UserRemoteDataSource {
   }
 
   void _userExceptionChecker({required Response<dynamic> res}) {
-    if (res.data['errors'] != null && res.data['data'] == null) {
+    if (res.data['errors'] != null) {
       throw ServerException(message: res.data['errors'][0]['message']);
     } else if (res.statusCode == 404) {
       throw const UserException.userNotFound();

@@ -4,8 +4,10 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
+import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,6 +21,8 @@ class UserRemoteDataSourceMock extends Mock implements UserRemoteDataSource {}
 
 class FirebaseAnalyticsMock extends Mock implements FirebaseAnalytics {}
 
+class MockTokenStorage extends Mock implements TokenStorage {}
+
 class FirebaseAnalyticsObserverMock extends Mock
     implements FirebaseAnalyticsObserver {}
 
@@ -30,10 +34,13 @@ void main() {
   late UserLocalDataSource localDataSourceMock;
   late FirebaseAnalyticsService firebaseAnalyticsServiceMock;
   late UserRemoteDataSource remoteDataSourceMock;
+  late TokenStorage tokenStorageMock;
   late FirebaseCrashlyticsService firebaseCrashlyticsServiceMock;
   late FirebaseAnalytics firebaseAnalyticsMock;
   late FirebaseAnalyticsObserver firebaseAnalyticsObserverMock;
   late FirebaseCrashlytics firebaseCrashlyticsMock;
+  const rootAdminToken =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoidzl4cEFhQkRZUSIsImV4cCI6MTY2MzQwOTAzNiwiaWF0IjoxNjYzMzIyNjM2LCJpZCI6MTE0NjEsInJpZ2h0cyI6W3sidmFsdWUiOlt7ImN1c3RvbWVyQ29kZSI6ImFsbCIsInNhbGVzT3JnIjoiMjYwMSIsInNoaXBUb0NvZGUiOlsiYWxsIl19XX1dLCJyb2xlIjoiWlAgQWRtaW4iLCJzYWxlc09yZ3MiOlsiMjYwMSJdLCJ1c2VybmFtZSI6ImV6cnh0ZXN0MDUifQ.MakZTQ3JUVqeRuXQcBU1cUKmHZft5AmFPJDvuG4DjlA';
 
   setUpAll(
     () async {
@@ -46,7 +53,9 @@ void main() {
         observer: firebaseAnalyticsObserverMock,
       );
       firebaseCrashlyticsMock = FirebaseCrashlyticsMock();
+      tokenStorageMock = MockTokenStorage();
       remoteDataSourceMock = UserRemoteDataSourceMock();
+
       firebaseCrashlyticsServiceMock = FirebaseCrashlyticsService(
         crashlytics: firebaseCrashlyticsMock,
       );
@@ -56,6 +65,7 @@ void main() {
         remoteDataSource: remoteDataSourceMock,
         config: configMock,
         localDataSource: localDataSourceMock,
+        tokenStorage: tokenStorageMock,
       );
     },
   );
@@ -69,6 +79,7 @@ void main() {
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
+          tokenStorage: tokenStorageMock,
         );
 
         when(() => configMock.appFlavor)
@@ -93,6 +104,7 @@ void main() {
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
+          tokenStorage: tokenStorageMock,
         );
 
         when(() => configMock.appFlavor)
@@ -117,6 +129,7 @@ void main() {
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
+          tokenStorage: tokenStorageMock,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
@@ -143,6 +156,7 @@ void main() {
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
+          tokenStorage: tokenStorageMock,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
@@ -169,6 +183,7 @@ void main() {
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
+          tokenStorage: tokenStorageMock,
         );
 
         when(() => configMock.appFlavor)
@@ -191,6 +206,7 @@ void main() {
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
+          tokenStorage: tokenStorageMock,
         );
 
         when(() => configMock.appFlavor)
@@ -213,6 +229,7 @@ void main() {
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
+          tokenStorage: tokenStorageMock,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
@@ -235,6 +252,7 @@ void main() {
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
+          tokenStorage: tokenStorageMock,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
@@ -257,6 +275,7 @@ void main() {
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
+          tokenStorage: tokenStorageMock,
         );
 
         when(() => configMock.appFlavor)
@@ -279,6 +298,7 @@ void main() {
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
+          tokenStorage: tokenStorageMock,
         );
 
         when(() => configMock.appFlavor)
@@ -301,6 +321,7 @@ void main() {
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
+          tokenStorage: tokenStorageMock,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
@@ -323,6 +344,7 @@ void main() {
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
+          tokenStorage: tokenStorageMock,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
@@ -345,6 +367,7 @@ void main() {
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
+          tokenStorage: tokenStorageMock,
         );
 
         when(() => configMock.appFlavor)
@@ -367,6 +390,7 @@ void main() {
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
+          tokenStorage: tokenStorageMock,
         );
 
         when(() => configMock.appFlavor)
@@ -389,11 +413,13 @@ void main() {
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
+          tokenStorage: tokenStorageMock,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
-
-        when(() => remoteDataSourceMock.getUser())
+        when(() => tokenStorageMock.get())
+            .thenAnswer((invocation) async => JWTDto(access: rootAdminToken));
+        when(() => remoteDataSourceMock.getUser(userId: '11461'))
             .thenAnswer((invocation) async => User.empty());
 
         when(() => firebaseAnalyticsServiceMock.analytics
@@ -418,11 +444,13 @@ void main() {
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
+          tokenStorage: tokenStorageMock,
         );
-
+        when(() => tokenStorageMock.get())
+            .thenAnswer((invocation) async => JWTDto(access: ''));
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
 
-        when(() => remoteDataSourceMock.getUser()).thenThrow(Error());
+        when(() => remoteDataSourceMock.getUser(userId: '')).thenThrow(Error());
 
         final result = await repository.getUser();
         expect(result.isLeft(), true);
