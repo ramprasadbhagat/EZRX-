@@ -182,14 +182,14 @@ class _ListContent extends StatelessWidget {
             ' ' +
             'or more' +
             ' ' +
-            (rate.abs().toString() ?? 'NA') +
+            (rate.abs().toString()) +
             '%'
         : (quantity ?? 'NA') +
             ' ' +
             'or more' +
             ' ' +
             _getCurrencySymbol(currency: currency) +
-            (rate.toString() ?? 'NA');
+            (rate.toString());
 
     return 'Buy $offer';
   }

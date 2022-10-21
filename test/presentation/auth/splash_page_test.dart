@@ -6,13 +6,9 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:ezrxmobile/presentation/splash/splash_page.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
-import '../../utils/widget_utils.dart';
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
@@ -52,27 +48,27 @@ void main() {
           .thenReturn(ShipToCodeState.initial());
     });
 
-    Widget splashPage() => WidgetUtils.getScopedWidget(
-          child: const SplashPage(),
-          autoRouterMock: router,
-          providers: [
-            BlocProvider<AuthBloc>(
-              create: (context) => authBlocMock,
-            ),
-            BlocProvider<UserBloc>(
-              create: (context) => userBlocMock,
-            ),
-            BlocProvider<SalesOrgBloc>(
-              create: (context) => salesOrgBlocMock,
-            ),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock,
-            ),
-            BlocProvider<ShipToCodeBloc>(
-              create: (context) => shipToCodeBLocMock,
-            ),
-          ],
-        );
+    // Widget splashPage() => WidgetUtils.getScopedWidget(
+    //       child: const SplashPage(),
+    //       autoRouterMock: router,
+    //       providers: [
+    //         BlocProvider<AuthBloc>(
+    //           create: (context) => authBlocMock,
+    //         ),
+    //         BlocProvider<UserBloc>(
+    //           create: (context) => userBlocMock,
+    //         ),
+    //         BlocProvider<SalesOrgBloc>(
+    //           create: (context) => salesOrgBlocMock,
+    //         ),
+    //         BlocProvider<CustomerCodeBloc>(
+    //           create: (context) => customerCodeBlocMock,
+    //         ),
+    //         BlocProvider<ShipToCodeBloc>(
+    //           create: (context) => shipToCodeBLocMock,
+    //         ),
+    //       ],
+    //     );
     // TODO: need Wasim help
     // testWidgets('Test when in initial state', (tester) async {
     //   final expectedStates = [

@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
@@ -8,6 +9,7 @@ import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class OrderTemplateListItem extends StatelessWidget {
   final OrderTemplate orderTemplate;
@@ -19,9 +21,9 @@ class OrderTemplateListItem extends StatelessWidget {
     return BlocConsumer<OrderTemplateListBloc, OrderTemplateListState>(
       listener: (context, state) {
         state.apiFailureOrSuccessOption.fold(
-              () {},
-              (either) => either.fold(
-                (failure) {
+          () {},
+          (either) => either.fold(
+            (failure) {
               final failureMessage = failure.failureMessage;
               showSnackBar(
                 context: context,
@@ -31,7 +33,7 @@ class OrderTemplateListItem extends StatelessWidget {
                 context.read<AuthBloc>().add(const AuthEvent.logout());
               }
             },
-                (_) {
+            (_) {
               context.read<AuthBloc>().add(const AuthEvent.authCheck());
             },
           ),
@@ -74,11 +76,42 @@ class OrderTemplateListItem extends StatelessWidget {
                         text: 'Delete',
                         width: 72,
                         onTap: () {
-                          context.read<OrderTemplateListBloc>().add(
-                                OrderTemplateListEvent.delete(
-                                  orderTemplate,
+                          showPlatformDialog(
+                            context: context,
+                            barrierDismissible: true,
+                            builder: (context) => PlatformAlertDialog(
+                              title: const Text('Info').tr(),
+                              content: SingleChildScrollView(
+                                child: ListBody(
+                                  children: <Widget>[
+                                    const Text(
+                                      'This action will delete the item from your order templates.',
+                                    ).tr(),
+                                    const Text('Do you want to proceed?').tr(),
+                                  ],
                                 ),
-                              );
+                              ),
+                              actions: [
+                                PlatformDialogAction(
+                                  child: const Text('Cancel').tr(),
+                                  onPressed: () {
+                                    context.router.pop();
+                                  },
+                                ),
+                                PlatformDialogAction(
+                                  child: const Text('Confirm').tr(),
+                                  onPressed: () {
+                                    context.router.pop();
+                                    context.read<OrderTemplateListBloc>().add(
+                                          OrderTemplateListEvent.delete(
+                                            orderTemplate,
+                                          ),
+                                        );
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
                         },
                       ),
                     ],

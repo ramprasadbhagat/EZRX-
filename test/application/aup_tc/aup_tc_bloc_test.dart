@@ -1,6 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
