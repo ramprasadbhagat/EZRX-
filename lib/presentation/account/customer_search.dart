@@ -3,8 +3,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -54,6 +56,24 @@ class _CustomerSearchPage extends State<CustomerSearchPage> {
             listenWhen: (previous, current) =>
                 previous.searchKey != current.searchKey,
             listener: (context, state) {
+              state.apiFailureOrSuccessOption.fold(
+                    () {},
+                    (either) => either.fold(
+                      (failure) {
+                    final failureMessage = failure.failureMessage;
+                    showSnackBar(
+                      context: context,
+                      message: failureMessage.tr(),
+                    );
+                    if (failureMessage == 'authentication failed') {
+                      context.read<AuthBloc>().add(const AuthEvent.logout());
+                    }
+                  },
+                      (_) {
+                    context.read<AuthBloc>().add(const AuthEvent.authCheck());
+                  },
+                ),
+              );
               final searchText = state.searchKey.getValue();
               _searchController.value = TextEditingValue(
                 text: searchText,

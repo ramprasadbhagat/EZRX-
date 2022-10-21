@@ -37,6 +37,9 @@ class HistoryTab extends StatelessWidget {
                   context: context,
                   message: failureMessage.tr(),
                 );
+                if (failureMessage == 'authentication failed') {
+                  context.read<AuthBloc>().add(const AuthEvent.logout());
+                }
               },
               (_) {
                 context.read<AuthBloc>().add(const AuthEvent.authCheck());

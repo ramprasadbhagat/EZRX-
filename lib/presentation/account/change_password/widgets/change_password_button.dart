@@ -27,6 +27,9 @@ class ResetPasswordButton extends StatelessWidget {
                 context: context,
                 message: failureMessage.tr(),
               );
+              if (failureMessage == 'authentication failed') {
+                context.read<AuthBloc>().add(const AuthEvent.logout());
+              }
             },
             (_) {
               showSnackBar(

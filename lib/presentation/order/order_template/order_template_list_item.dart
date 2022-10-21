@@ -1,6 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/presentation/core/action_button.dart';
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,10 +19,21 @@ class OrderTemplateListItem extends StatelessWidget {
     return BlocConsumer<OrderTemplateListBloc, OrderTemplateListState>(
       listener: (context, state) {
         state.apiFailureOrSuccessOption.fold(
-          () {},
-          (either) => either.fold(
-            (failure) {},
-            (_) {},
+              () {},
+              (either) => either.fold(
+                (failure) {
+              final failureMessage = failure.failureMessage;
+              showSnackBar(
+                context: context,
+                message: failureMessage.tr(),
+              );
+              if (failureMessage == 'authentication failed') {
+                context.read<AuthBloc>().add(const AuthEvent.logout());
+              }
+            },
+                (_) {
+              context.read<AuthBloc>().add(const AuthEvent.authCheck());
+            },
           ),
         );
       },

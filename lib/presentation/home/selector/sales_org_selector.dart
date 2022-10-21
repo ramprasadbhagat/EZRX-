@@ -3,10 +3,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +27,24 @@ class SalesOrgSelector extends StatelessWidget {
         listenWhen: (previous, current) =>
             previous.salesOrganisation != current.salesOrganisation,
         listener: (context, state) {
+          state.salesOrgFailureOrSuccessOption.fold(
+                () {},
+                (either) => either.fold(
+                  (failure) {
+                final failureMessage = failure.failureMessage;
+                showSnackBar(
+                  context: context,
+                  message: failureMessage.tr(),
+                );
+                if (failureMessage == 'authentication failed') {
+                  context.read<AuthBloc>().add(const AuthEvent.logout());
+                }
+              },
+                  (_) {
+                context.read<AuthBloc>().add(const AuthEvent.authCheck());
+              },
+            ),
+          );
           if (state.haveSelectedSalesOrganisation) {
             context.read<CustomerCodeBloc>().add(
                   CustomerCodeEvent.fetch(
