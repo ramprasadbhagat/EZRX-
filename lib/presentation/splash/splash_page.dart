@@ -122,7 +122,14 @@ class SplashPage extends StatelessWidget {
               locator<Config>().appFlavor == Flavor.prod ? false : true,
           minAppVersion: '1.0.0',
         ),
-        child: const Scaffold(),
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          body: Image.asset(
+            'assets/images/splash.png',
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+          ),
+        ),
       ),
     );
   }
