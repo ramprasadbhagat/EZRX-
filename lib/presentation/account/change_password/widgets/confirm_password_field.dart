@@ -44,7 +44,7 @@ class ConfirmPasswordTextField extends StatelessWidget {
                   .value
                   .fold(
                     (f) => f.maybeMap(
-                      empty: (_) => 'Enter Confirm Password.'.tr(),
+                      empty: (_) => 'Confirm Password.'.tr(),
                       mustMatchNewPassword: (_) => 'Password mismatch'.tr(),
                       orElse: () => null,
                     ),

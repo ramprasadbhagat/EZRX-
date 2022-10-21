@@ -1,373 +1,512 @@
 str,en_SG,th_TH,zh_TW,my_MY,vi_VN,km_KH
-Username,Username,ชื่อผู้ใช้งาน,使用者名稱,အသုံးပြုသူအမည်,Tài khoản,ឈ្មោះអ្នកប្រើប្រាស់
-Password,Password,รหัสผ่าน,密碼,စကားဝှက်,Mật khẩu,លេខសម្ងាត់
-Login,Login,เข้าสู่ระบบ,登入,လော့ဂ်အင်,Đăng nhập,ចូលប្រើ
-Login with SSO,Login with SSO,เข้าสู่ระบบด้วย SSO,單一登入,SSO ဖြင့်ဝင်ရောက်ပါ။,Đăng nhập bằng SSO,เข้าสู่ระบบด้วย SSO
-Remember Password,Remember Password,จดจำรหัสผ่าน,記住密碼,စကားဝှက်ကိုသတိရပါ,Lưu mật khẩu,ចងចាំលេខសម្ងាត់
-Loading,Loading,กำลังโหลด,資料載入中,ဝင်ရန်ကြိုးစားနေသည်,Đang tải,កំពុងបើក
-History,History,ประวัติสั่งซื้อ,歷史紀錄,မှတ်တမ်း,Lịch sử,ប្រវត្តិនៃការប្រើប្រាស់
-Version,Version,เวอร์ชั่น,版本,ဗားရှင်း,Version,កំណែ
-Please select a customer code,Please select a customer code,เลือกร้าน,選擇客戶號,ဖောက်သည်၏ ကုဒ်နံပါတ်,Vui lòng chọn mã Khách Hàng,សូមជ្រើសរើសលេខកូដអតិថិជន
-Please select a shipping address,Please select a shipping address,เรื่องที่อยู่จัดส่ง,選擇送貨地址碼,ကုန်ပစ္စည်းပို့ရန် နံပါတ် ရွေးချယ်ပါ,Vui lòng chọn mã địa chỉ giao hàng,សូមជ្រើសរើសអាសយដ្ឋានដឹកជញ្ជូន
-Close,Close,ปิด,關閉,ပိတ်ရန်,Đóng,បិទ
-Material Number: ,Material Number: ,รหัสสินค้า: ,產品代碼搜尋: ,နံပါတ်: ,Mã Sản Phẩm: ,លេខកូដផលិតផល
-Qty: ,Qty: ,จำนวน: ,數量: ,အရေအတွက်: ,Số lượng: ,ចំនួន៖
-Quantity: ,Quantity: ,จำนวน: ,數量: ,အရေအတွက်: ,Số lượng: ,ចំនួន
-Material Qty: ,Material Qty: ,จำนวน: ,數量: ,အရေအတွက်: ,Số lượng sản phẩm: ,ចំនួនផលិតផល
-Cancel,Cancel,ยกเลิก,取消,ပယ်ဖျက်ပါ,Huỷ,បោះបង់
-Old Password,Old Password,รหัสผ่านเก่า,舊密碼,စကားဝှက်အဟောင်း,Mật khẩu cũ,លេខសម្ងាត់ចាស់
-New Password,New Password,รหัสผ่านใหม่,新密碼,စကားဝှက် အသစ်,Mật khẩu mới,លេខសម្ងាត់ថ្
-Confirm Password,Confirm Password,ใส่รหัสผ่านใหม่อีกครั้ง,重新輸入新密碼,စကားဝှက်အသစ်ကိုထပ်မံရိုက်ထည့်ပါ,Xác nhận mật khẩu,បញ្ជាក់លេខសម្ងាត់
-Clear,Clear,ลบข้อมูล,清除,ရှင်းလင်းပါ,Xoá,លុបចេញ
-Confirm,Confirm,ยืนยัน,確認,အတည်ပြုပါ,Xác nhận,បញ្ជាក់
-Change,Change,แก้ไข,修改,ပြောင်းလဲပါ,Thay đổi,ផ្លាស់ប្តូរ
-Change Password,Change Password,เปลี่ยนรหัสผ่าน,修改密碼,စကားဝှက်ကိုပြောင်းရန်,Thay đổi mật khẩu,ប្តូរលេខសម្ងាត់
-View more,View more,ดูเพิ่มเติม,更多,ပိုမို ကြည့်ရှုရန်,Xem thêm,មើលផ្សេងទៀត
-View,View,ดูเพิ่มเติม,更多,ပိုမို ကြည့်ရှုရန်,Xem,មើល
-Product Name,Product Name,ชื่อสินค้า,產品名稱,ကုန်ပစ္စည်း အမည်,Tên sản phẩm,ឈ្មោះផលិតផល
-All Items Loaded,All Items Loaded,โหลดข้อมูลทั้งหมดเรียบร้อยแล้ว,顯示所有項目,ကုန်ပစ္စည်း အားလုံးကိုပြထားသည်,Tất cả sản phẩm đã được tải,ផលិតផលទាំងអស់ត្រូវបានបង្ហាញ
-out of,out of,out of,第,ထဲက,Hết,អស់ពី
-Showing,Showing,Showing,顯示,ပြထားသည်,Hiện thị,បង្ហាញ
-Info,Info,Info,資訊,သတင်းအချက်အလက်,Thông tin,ព័ត៌មាន
-Total,Total,ยอดรวม,總計,စုစုပေါင်း,Tổng cộng giá trị,សរុប
-Bonus Qty,Bonus Qty,จำนวนสินค้าแถม,搭贈數量,အပိုဆု အရေအတွက်,Số lượng hàng tặng,ចំនួនដែលថែម
-Remove From Cart,Remove From Cart,นำออกจากตะกร้า,移除購物車項目,စျေးဝယ်လှည်းမှ ဖယ်ရှားပါ,Xoá khỏi giỏ hàng,ដកចេញពីរទេះផលិតផល
-Update Cart,Update Cart,อัพเดทตะกร้า,更新購物車,စျေးဝယ်လှည်းကို မွမ်းမံပါ,Cập nhật giỏ hàng,ធ្វើបច្ចុប្បន្នភាពរទេះផលិតផល
-Activate Biometric,Activate Biometric,เปิดใช้งาน Biometric,啟用指紋/臉部辨識,Biometric ကိုသက်ဝင်စေမည်,Kích hoặc vân tay,ដាក់ឱ្យដំណើរការទិន្ន័យជីវមាត្
-Please select a shipping address,Please select a shipping address,กรุณาเลือกที่อยู่จัดส่ง,請選擇送貨地址代碼,ကျေးဇူးပြု၍ ပို့ဆောင်ရန် လိပ်စာကိုရွေးချယ်ပါ,Vui lòng chọn địa chỉ giao hàng,សូមជ្រើសរើសអាសយដ្ឋានដឹកជញ្ជូន
-"Please Select Sales Org, CustomerCode, ShipTo From Sidemenu","Please Select Sales Org, CustomerCode, ShipTo From Sidemenu",กรุณาเลือก Sales Org ร้านค้า และที่อยู่จัดส่งจากแถบเมนูด้านข้าง,請至選單中點選銷售組織:2800、客戶號、送貨址代碼,"ဘေးဘက်မီနူး မှ အရောင်းအဖွဲ့အစည်း, ဖောက်သည်ကုဒ်နံပါတ်, ကုန်ပစ္စည်းပို့ရန်လိပ်စာ ကိုရွေးပါ","Vui lòng chọn Sales Org, mã Khách Hàng, mã giao hàng từ thẻ","សូមជ្រើសរើសអង្គភាពលក់​, លេខកូដអតិថិជន, លេខកូដដឹកជញ្ជូនទៅអតិថិជន នៅចំហៀងពីម៉ីនុយ"
-Are you sure to exit?,Are you sure to exit?,คุณต้องการออกจากระบบใช่หรือไม่?,請確認是否登出?,သင်ထွက်ဖို့သေချာပြီလား,Quý Khách Hàng có chắc chắn thoát không?,តើអ្នកប្រាកដទេថាចង់ចាកចេញ?
-All saved processed will be lost,All saved processed will be lost,All saved processed will be lost,放棄所有儲存,သိမ်းဆည်းထားသည့်လုပ်ငန်းများအားလုံးဆုံးရှုံးသွားမည်ဖြစ်သည်,Tất cả quá trình đã lưu sẽ bị mất,រាល់ដំណើរការដែលបានរក្សាទុកនឹងត្រូវបាត់បង់
-Fail to Get Shipping Address,Fail to Get Shipping Address,ไม่สามารถโหลดข้อมูลที่อยู่จัดส่งได้ในขณะนี้,Fail to Get Shipping Address,ကုန်ပစ္စည်းပို့ရန်လိပ်စာ ရရန်ပျက်ကွက်နေသည်,Lấy địa chỉ giao hàng chưa đúng,បរាជ័យក្នុងការទទួលអាសយដ្ឋានដឹកជញ្ជូន
-Please Login Again,Please Login Again,กรุณาเข้าสู่ระบบอีกครั้ง,請再登入一次,ကျေးဇူးပြုပြီး နောက်တစ်ကြိမ် ဝင်ရောက်ပါ,Vui lòng đăng nhập lại,សូមចុចចូលម្តងទៀត
-"Server timed out, please refresh the page.
-If this happens often, please logout and login again","Server timed out, please refresh the page.
-If this happens often, please logout and login again","Server timed out, please refresh the page.
-If this happens often, please logout and login again","Server timed out, please refresh the page.
-If this happens often, please logout and login again","Server timed out, please refresh the page.
-If this happens often, please logout and login again","Hệ thống hết thời gian chờ, vui lòng làm mới trang. 
- Nếu điều này xảy ra thường xuyên, vui lòng đăng xuất và đăng nhập lại.","អស់ពេលម៉ាស៊ីនមេ សូមផ្ទុកទំព័រឡើងវិញ។
-ប្រសិនបើរឿងនេះកើតឡើងញឹកញាប់ សូមចេញពីគណនី ហើយចូលម្តងទៀត"
-Login on behalf,Login on behalf,Login on behalf,代理登入,Login on behalf,Đăng nhập đại diện,ចូលក្នុងនាម
-You are not connected to internet,You are not connected to internet,You are not connected to internet,You are not connected to internet,You are not connected to internet,Quý Khách Hàng chưa có kết nối mạng,អ្នកមិនបានភ្ជាប់សេវាអ៊នធឺណិតទេ
-Server time out,Server time out,Server time out,Server time out,Server time out,Hệ thống hết thời gian chờ,Server អស់ម៉ោង
-Name,Name,Name,Name,Name,Tên,ឈ្មោ
-Poor Internet connection,Poor Internet connection,Poor Internet connection,Poor Internet connection,Poor Internet connection,Kết nối mạng yếu,សេវាអ៊ីនធឺណិតខ្សោយ
-No customer found,No customer found,ไม่พบชื่อร้านค้า,找不到此客戶,ဖောက်သည်ရှာမတွေ့ပါ,Không tìm thấy Khách Hàng,រកមិនឃើញអតិថិជន
-You Need To read full Terms and Condition before Accept,You Need To read full Terms and Condition before Accept,กรุณาศึกษาและยอมรับเงื่อนไขการใช้บริการก่อนเข้าสู่ระบบ,您需要先閱讀完整的條款和條件,လက်မခံမီ သတ်မှတ်ချက်များနှင့် အခြေအနေအပြည့်အစုံကို ဖတ်ရန်လိုအပ်သည်,Quý Khách Hàng cần đọc toàn bộ Điều khoản thoả thuận trước khi Chấp nhận.,អ្នកត្រូវអានលក្ខខណ្ឌទាំងអស់មុននឹងទទួលយក
-TERMS OF USE,TERMS OF USE,เงื่อนไขการใช้บริการ,使用政策,သတ်မှတ်ချက်များ,ĐIỀU KHOẢN SỬ DỤNG,លក្ខខណ្ឌនៃការប្រើប្រាស់
-Unable to Get Product Price,Unable to Get Product Price,ไม่พบราคาสินค้า,無法取得產品價格,ကုန်ပစ္စည်းဈေးနှုန်းမရနိုင်ပါ,Không thể nhận giá sản phẩm,មិនអាចទទួលបានតម្លៃផលិតផល
-Internal Server Error,Internal Server Error,เกิดความผิดพลาดภายในระบบ,請稍後再試或聯繫裕利,အတွင်းဆာဗာ မှားယွင်းမှု,Lỗi do hệ thống nội bộ,Server ខាងក្នុងមានបញ្ហា
-"Sorry, something went wrong. Please retry and if the problem persists please contact support.","Sorry, something went wrong. Please retry and if the problem persists please contact support.",เกิดข้อผิดพลาดที่ระบบ กรุณาลองใหม่อีกครั้ง หากยังพบปัญหาเดิมกรุณาติดต่อทีมงานผู้ดูแลระบบ,請稍後再試或聯繫裕利,ဝမ်းနည်းပါတယ် တစုံတခု မှားယွင်းသွားပါတယ် ကျေးဇူးပြု၍ နောက်တဖန် ကြိုးစားပြီး ပြဿနာ ဆက်ရှိနေပါက အကူအညီ ရယူပါ,"Xin lỗi, có lỗi xảy ra. Vui lòng thử lại và nếu sự cố vẫn tiếp diễn, vui lòng liên hệ với bộ phận hỗ trợ.",សូមអភ័យទោស មានអ្វីមួយខុសប្រក្រតី។ សូមព្យាយាមម្តងទៀត ហើយប្រសិនបើបញ្ហានៅតែបន្តកើតមាន សូមទាក់ទងផ្នែកជំនួយ។
-Your password will expire in,Your password will expire in,รหัสผ่านของคุณจะหมดอายุใน,您的密碼將於,သင်၏စကားဝှက်သည်,Mật khẩu của Quý Khách sẽ hết hạn trong,លេខសម្ងាត់របស់អ្នកនឹងផុតកំណត់ក្នុងរយៈពេល
-"days, Please update your password before it expires","days, Please update your password before it expires",วัน กรุณาเปลี่ยนรหัสผ่านของคุณก่อนวันหมดอายุ,過期，請更新您的密碼,ရက်အတွင်းကုန်ဆုံးပါမည်။ သင်၏စကားဝှက်ကို သက်တမ်း မကုန်မှီ ကျေးဇူးပြု၍ မွမ်းမံပါ,"ngày, vui lòng cập nhật mật khẩu trước khi hết hạn.",រាល់ថ្ងៃ សូមធ្វើបច្ចុប្បន្នភាព (ផ្លាស់ប្តូរ)​លេខសម្ងាត់របស់អ្នកមុនពេលវាផុតកំណត់
-Item count can't be greater than 999999,Item count can't be greater than 999999,Item count can't be greater than 999999,商品數量不能大於 999999,ပစ္စည်းအရေအတွက် ၉၉၉ ထက် ပိုကြီးသောကြောင့် မရပါ,Số lượng sản phẩm không được lớn hơn 999999,ចំនួនផលិតផលមិនអាចលើសពី ៩៩៩៩៩៩ បានទេ
-Bonus item successfully added to cart,Bonus item successfully added to cart,เพิ่มสินค้าแถมลงตะกร้าสำเร็จ,成功將贈品加至購物車,အပိုဆုပစ္စည်း စျေးဝယ်လှည်းသို့ အောင်မြင်စွာထည့်သွင်း ပြီးသွားပါပြီ,Đã thêm thành công hàng tặng vào giỏ hàng,ចំនួនដែលថែមត្រូវបានដាក់បញ្ចូលទៅក្នុងរទេះផលិតផលដោយជោគជ័យ
-Change sales organization,Change sales organization,แก้ไข sales organization,修改裕利銷售組織,အရောင်းအဖွဲ့အစည်း ပြောင်းလဲပါ,Thay đổi Sales Org,ប្តូរលេខកូដអង្គភាពលក់
-The progress on your cart is going to be lost. Do you want to proceed?,The progress on your cart is going to be lost. Do you want to proceed?,รายการสินค้าในตะกร้าของคุณจะถูกลบออก คุณต้องการดำเนินการต่อหรือไม่?,未儲存您的購物車產品，請確認是否繼續執行,သင်၏စျေးဝယ်လှည်းအတွင်းရှိတိုးတက်မှုများကိုဆုံးရှုံးလိမ့်မည်။ ဆက်လုပ်ချင်ပါသလား?,Những sản phẩm trong giỏ hàng sẽ bị mất. Quý Khách Hàng có muốn tiếp tục không?,វឌ្ឍនភាពនៅលើរទេះរបស់អ្នកនឹងត្រូវបាត់បង់។ តើអ្នកចង់បន្តទេ?
-Change Customer Code,Change Customer Code,แก้ไขรหัสร้านค้า,修改客戶號,ဖောက်သည်ကုဒ်နံပါတ် ပြောင်းလဲပါ,Thay đổi Mã Khách Hàng,ផ្លាស់ប្តូរលេខកូដអតិថិជន
-Change Shipping Address,Change Shipping Address,แก้ไขที่อยู่จัดส่ง,修改送貨地址,ပို့ဆောင်ရန် လိပ်စာကို ပြောင်းလဲပါ,Thay đổi Địa chỉ giao hàng,ផ្លាស់ប្តូរអាសយដ្ឋានដឹកជញ្ជូន
-Do you want to proceed?,Do you want to proceed?,ต้องการดำเนินการต่อหรือไม่?,請確認是否執行,ဆက်လုပ်ဆောင် ချင်ပါသလား?,Quý Khách Hàng có muốn tiếp tục không?,តើអ្នកចង់បន្តទេ?
-Items successfully added to cart,Items successfully added to cart,เพิ่มสินค้าลงตะกร้าเรียบร้อย,商品已成功加至購物車,ပစ္စည်းများလှည်းထဲသို့အောင်မြင်စွာထည့်သွင်း ပြီးပါပြီ,Thêm sản phẩm vào trong giỏ hàng thành công,ផលិតផលត្រូវបានដាក់បញ្ចូលទៅក្នុងរទេះផលិតផលដោយជោគជ័យ
-No order found,No order found,ไม่พบคำสั่งซื้อ,沒有訂單資料,ကုန်ပစ္စည်း အမှာစာမတွေ့ပါ,Không tìm thấy đơn hàng,រកមិនឃើញការបញ្ជាទិញ
-No items matched the search criteria,No items matched the search criteria,ไม่พบสินค้า,沒有符合搜索條件的項目,ရှာဖွေမှုသတ်မှတ်ချက်များနှင့် ကိုက်ညီသော ပစ္စည်းများမရှိပါ,Không có sản phẩm nào phù hợp với tiêu chí tìm kiếm,គ្មានផលិតផលដែលត្រូវនឹងលក្ខខណ្ឌទេ
-There are no results that match your search,There are no results that match your search,ไม่พบข้อมูลที่คุณต้องการค้นหา,沒有符合您搜索條件的結果,သင့်ရှာဖွေမှုနှင့်ကိုက်ညီသောရလဒ်မရှိပါ,Kết quả tìm kiếm không có phù hợp,មិនមានលទ្ធផលដែលត្រូវនឹងការស្វែងរករបស់អ្នកទេ
-This action will delete the item and bonuses from your cart.,This action will delete the item and bonuses from your cart.,สินค้าและของแถมจะถูกลบออกจากตะกร้า,將從您的購物車中刪除該產品和贈品,ဤလုပ်ဆောင်ချက်သည် သင်၏ လှည်းပေါ်မှ ပစ္စည်းနှင့် အပိုဆုများကို ဖျက်ပစ်လိမ့်မည်,Thao tác này sẽ xoá sản phẩm thường và hàng tặng khỏi giỏ hàng,សកម្មភាពនេះនឹងលុបផលិតផល និងផលិតផលដែមទិញ​និងផលិតផលដែលថែមចេញពីរទេះផលិតផលរបស់អ្នក។
-"Customer is suspended, please contact ZP Admin for support","Customer is suspended, please contact ZP Admin for support",ร้านค้านี้ถูกระงับ กรุณาติดต่อทีม ZP Admin,請與信用部聯繫,ဖောက်သည်အား ဆိုင်းငံ့ထားသည်။ ကျေးဇူးပြုပြီး ZP Admin ကို အကူအညီတောင်းပါ,"Mã Khách Hàng tạm ngừng, vui lòng liên hệ bộ phận chăm Khách Hàng để được hỗ trợ",លេខកូដអតិថិជនត្រូវបានផ្អាក សូមទាក់ទងផ្នែករដ្ឋបាល ZP ដើម្បីជួយ ត្រួតពិនិត្យ
-Customer PO Reference Required,Customer PO Reference Required,กรุณาใส่หมายเลข PO,客戶PO採購單號,ဖောက်သည် PO ရည်ညွှန်း ချက် လိုအပ်သည်,Yêu cầu PO (Mã mua hàng) tham chiếu,ការបញ្ជាទិញ របស់អតិថិជននិងឯកសារយោងរបស់ការបញ្ជាទិញដែលតំរូវអោយមាន
-Please select Requested Delivery Date,Please select Requested Delivery Date,กรุณาเลือกวันที่จัดส่งสินค้า,請選擇要求的交貨日期,ကျေးဇူးပြု၍ တောင်းဆိုသည့် ပစ္စည်းပို့ရန် နေ့စွဲကိုရွေးပါ,Vui lòng chọn ngày giao hàng yêu cầu,សូមជ្រើសរើសកាលបរិច្ឆេទស្នើសុំដឹកជញ្ជូនផលិតផលទៅកាន់អតិថិជន
-Order Placed Failed,Order Placed Failed,ส่งคำสั่งซื้อไม่สำเร็จ,未成功送出訂單,ကုန်ပစ္စည်း အမှာစာ တင်ခြင်း မအောင်မြင်ပါ,Đặt hàng không thành côngĐặt hàng không thành công,ការបញ្ជាទិញបានបរាជ័យ
-Order Placed Successfully,Order Placed Successfully,ส่งคำสั่งซื้อเรียบร้อยแล้ว,已成功下單,ကုန်ပစ္စည်း အမှာစာ တင်ခြင်း အောင်မြင်ပါပြီ,Đặt hàng thành công,ការបញ្ជាទិញត្រូវបានធ្វើឡើងដោយជោគជ័យ
-Submit Order Error,Submit Order Error,เกิดข้อผิดพลาดระหว่างส่งคำสั่งซื้อ,下單失敗，未成功送出訂單,ကုန်ပစ္စည်း အမှာစာ တင်ခြင်း မအောင်မြင်ပါ,Gửi đơn hàng bị lỗi,ការបញ្ជូនការបញ្ជាទិញមានបញ្ហា
-Requested Delivery,Requested Delivery,วันที่จัดส่ง,要求交貨,တောင်းဆိုသည့် ပစ္စည်းပို့ရန်,Giao hàng theo yêu cầu,ការដឹកជញ្ជូនផលិតផលទៅអតិថិជនត្រូវបានស្នើសុំ
-Batch,Batch,หมายเลข Batch,批號,အသုတ်,Sô lô,លេខឡូត៏
-Customer PO Reference (Max length: 35 Characters),Customer PO Reference (Max length: 35 Characters),หมายเลข PO (สูงสุด 35 ตัวอักษร),客戶採購單號，上限35 字元(不接受中文),ဖောက်သည် PO ရည်ညွှန်း ချက် (အများဆုံး စာလုံးရေ ၃၅ လုံး ),PO(Mã mua hàng) tham chiếu (Độ dài tối đa: 35 ký tự),លេខយោងនៃការបញ្ជាទិញ របស់អតិថិជន (វែងបំផុតត្រឹម៖ ៣៥ តួ)
-Special Instructions (Max length: 132 Characters),Special Instructions (Max length: 132 Characters),คำสั่งพิเศษอื่นๆ (สูงสุด 132 ตัวอักษร),訂單備註，上限132字元,အထူးညွှန်ကြားချက်များ (အများဆုံး စာလုံးရေ ၁၃၂ လုံး),Chỉ dẫn đặc biệt (Độ dài tối đa: 132 ký tự),សេចក្តីណែនាំពិសេស (វែងបំផុតត្រឹមតែ៖ ១៣២ តួ)
-Rejected Delivery,Rejected Delivery,ยกเลิกการส่งสินค้า,不同意配送,ကုန်ပစ္စည်း ပို့ဆောင်ချိန်တွင် ငြင်းပယ်ခဲ့ခြင်းများ,Huỷ giao hàng,ការដឹកជញ្ជូនត្រូវបានបដិសេធ
-Invoice Number,Invoice Number,หมายเลข Invoice,裕利發票號碼REF NO,ငွေတောင်းခံလွှာ နံပါတ်,Số hoá đơn,លេខវិក្កយបត្រ
-SAP Status: ,SAP Status: ,สถานะสินค้า: ,訂單狀態: ,SAP အခြေအနေ,Trạng thái của SAP: ,ស្ថានភាព SAP៖
-Quantity: ,Quantity: ,จำนวน: ,數量: ,အရေအတွက်: ,Số lượng: ,បរិមាណ
-Unit Price: ,Unit Price: ,ราคาต่อหน่วย: ,實售價: ,တစ်ခုချင်းစျေးနှုန်း: ,Giá sau thuế GTGT: ,តម្លៃក្នុង១ឯកតា
-Total Price: ,Total Price: ,ราคารวม: ,總計: ,စုစုပေါင်းစျေးနှုန်း: ,Tổng Giá trị đơn hàng: ,តម្លៃសរុប
-Tax: ,Tax: ,ภาษี: ,稅: ,အခွန်: ,Thuế: ,ពន្ធ
-Discount: ,Discount: ,ส่วนลด: ,折扣: ,လျှော့စျေး: ,Chiết khấu: ,បញ្ចុះតម្
-Payment: ,Payment: ,การชำระเงิน: ,付款: ,ငွေပေးချေမှု: ,Thanh toán: ,Payment
-Please Select Payment Term,Please Select Payment Term,กรุณาเลือกประเภทการชำระเงิน,請選擇付款方式,ကျေးဇူးပြု၍ ငွေပေးချေမှု ကာလကိုရွေးချယ်ပါ,Vui lòng chọn hình thức thanh toán,សូមជ្រើសរើសលក្ខខណ្ឌនៃការទូទាត់ប្រាក់
-Select Payment Term,Select Payment Term,ประเภทการชำระเงิน,選擇付款方式(必填),ငွေပေးချေမှု ကာလ,Chọn hình thức thanh toán,ជ្រើសរើសលក្ខខណ្ឌនៃការទូទាត់ប្រាក់
-Please select order document type,Please select order document type,กรุณาเลือกประเภทคำสั่งซื้อ,選擇訂單類型,ကျေးဇူးပြု၍ အော်ဒါစာရွက်အမျိုးအစားကိုရွေးချယ်ပါ,Vui lòng chọn loại đơn hàng,សូមជ្រើសរើសប្រភេទឯកសារបញ្ជាទិញ
-Select order document type,Select order document type,เลือกประเภทคำสั่งซื้อ,選擇訂單類型,အော်ဒါစာရွက်အမျိုးအစားကိုရွေးချယ်ပါ,Chọn loại đơn hàng,ជ្រើសរើសប្រភេទឯកសារបញ្ជាទិញ
+* Minimum order amount allowed is,* Minimum order amount allowed is,* สั่งซื้อขั้นต่ำที่ยอด,* 最小訂購金額為,* ခွင့်ပြုထားသော အနည်းဆုံး ကုန်ပစ္စည်း အမှာစာပမာဏမှာ,* Tổng đơn hàng tối thiểu là,* ចំនួនទឹកប្រាក់អប្បបរមាសម្រាប់ការបញ្ជាទិញដែលអនុញ្ញាតគឺ
 * Prices shown are exclusive of tax,* Prices shown are exclusive of tax,* ราคาไม่รวมภาษี,* 價格為含稅價,* ပြထားသောစျေးနှုန်းများသည်အကောက်ခွန် မပါဝင်ပါ,* Giá hiển thị trước thuế và sau thuế,* តម្លៃមិនរាប់បញ្ចូលពន្ធទេ
-* Minimum order amount allowed is,* Minimum order amount allowed is,* สั่งซื้อขั้นต่ำที่ยอด ,* 最小訂購金額為,* ခွင့်ပြုထားသော အနည်းဆုံး ကုန်ပစ္စည်း အမှာစာပမာဏမှာ,* Tổng đơn hàng tối thiểu là,* ចំនួនទឹកប្រាក់អប្បបរមាសម្រាប់ការបញ្ជាទិញដែលអនុញ្ញាតគឺ
-There are no materials in this customer code,There are no materials in this customer code,ไม่พบข้อมูลสินค้าภายใต้ร้านค้านี้,此客戶號沒有對應產品,ဒီဖောက်သည်ကုဒ်မှာပစ္စည်းမရှိပါ,Không có sản phẩm nào trong mã khách hàng này,មិនមានផលិតផលនៅក្នុងលេខកូដអតិថិជននេះទេ
-There are no results that match your search,There are no results that match your search,ไม่พบข้อมูลที่คุณต้องการค้นหา,沒有符合您搜索條件的結果,သင့်ရှာဖွေမှုနှင့်ကိုက်ညီသောရလဒ်မရှိပါ,Kết quả tìm kiếm không có phù hợp,មិនមានលទ្ធផលដែលត្រូវនឹងការស្វែងរករបស់អ្នកទេ
-There are no bundles under customer code,There are no bundles under customer code,ไม่พบข้อมูลสินค้า Bundle ภายใต้ร้านค้านี้,There are no bundles under customer code,ဖောက်သည်ကုဒ်အောက်တွင် ပစ္စည်းအစုအဝေးများ မရှိပါ,Không có gói nào trong mã khách hàng,មិនមានការបន្ថែមទៅលើលេខកូដអតិថិជននេះទេ
-Click the + in the label to have the bonus details,Click the + in the label to have the bonus details,Click the + in the label to have the bonus details,主+贈產品不相同，點選+確認搭贈內容,Click the + in the label to have the bonus details,Nhấp vào biểu tưởng +  để xem chi tiết hàng tặng,ចុចសញ្ញា + នៅក្នុងផ្លាកដើម្បីទទួលបានព័ត៌មានលម្អិតអំពីចំនួនដែលថែម
-Go To Order Summary,Go To Order Summary,Go To Order Summary,下一步,Go To Order Summary,Đi đến đơn hàng tổng,ចូលទៅសង្ខេបការបញ្ជាទិញ
-Order Summary,Order Summary,สรุปคำสั่งซื้อ,購物清單,အမှာစာ အကျဉ်းချုပ်,Tổng quan đơn hàng,សង្ខេបការបញ្ជាទិញ
-Picked Quantity: ,Picked Quantity: ,Picked Quantity: ,出貨數量: ,Picked Quantity: ,Số lượng áp dụng: ,ចំនួនដែលបានរៀបហើយ៖
-Customer Classification,Customer Classification,Customer Classification,客戶分類,Customer Classification,Phân loại Khách Hàng,ចំណាត់ថ្នាក់អតិថិជន
-Customer Local Group,Customer Local Group,Customer Local Group,客戶屬性,Customer Local Group,Kênh(Nhóm) Khách Hàng,ប្រភេទនៃអតិថិជន
-License,License,License,管證字號,License,Giấy phép ,អាជ្ញាប័ណ្ណ
-Company Name,Company Name,ชื่อร้านค้า,公司名稱,ကုမ္ပဏီအမည်,Tên Hãng Sản xuất,ឈ្មោះក្រុមហ៊ុន
-View license info,View license info,View license info,查詢管證資料,View license info,Xem thông tin giấy phép,មើលព័ត៌មានអាជ្ញាប័ណ្ណ
-License Number : ,License Number : ,License Number : ,許可證號 : ,License Number : ,Số giấy phép:,លេខអាជ្ញាប័ណ្ណ
-License Type : ,License Type : ,License Type : ,許可證類別 : ,License Type : ,Loại giấy phép : ,ប្រភេទអាជ្ញាប័ណ្ណ
-License Description : ,License Description : ,License Description : ,許可證說明 : ,License Description : ,Tên Giấy phép : ,ការពិពណ៌នាអំពីអាជ្ញាប័ណ្ណ
-Valid From : ,Valid From : ,Valid From : ,有效日期 自 : ,Valid From : ,Có hiệu lực từ : ,មានសុពលភាពពី
-Valid To : ,Valid To : ,Valid To : ,有效日期 止 : ,Valid To : ,Có hiệu lực đến : ,មានសុពលភាពរហូតដល់
-Manage Order Templates,Manage Order Templates,Manage Order Templates,Manage Order Templates,Manage Order Templates,Quản lý đơn hàng mẫu,គ្រប់គ្រងទម្រង់បញ្ជាទិញ
 *Prices shown are inclusive of tax,*Prices shown are inclusive of tax,*Prices shown are inclusive of tax,*價格已含稅,*Prices shown are inclusive of tax,* Giá hiển thị đã bao gồm thuế,* តម្លៃដែលបានបង្ហាញរួមបញ្ចូលទាំងតំលៃពន្ធ
-Subtotal:,Subtotal:,มูลค่ารวม (ไม่รวมภาษีมูลค่าเพิ่ม): ,小計 (未稅): ,စုစုပေါင်း (VAT မပါ): ,Tổng tiền trước thuế:,តំលៃសរុប៖
-Grand Total:,Grand Total:,Grand Total:,總計:,Grand Total:,Tổng trị giá:,តំលៃសរុបរួម៖
-Save Order,Save Order,Save Order,儲存訂單,Save Order,Lưu đơn hàng,រក្សាទុកការបញ្ជាទិញ
-Type,Type,Type,Type,Type,Loại sản phẩm,ប្រភេទ
-Unit of Measurement,Unit of Measurement,Unit of Measurement,單位,Unit of Measurement,Đơn vị,ឯកតានៃការវាស់វែង
-Deals: ,Deals: ,Deals: ,搭贈/價格條件: ,Deals: ,Chính sách bán hàng,ការផ្តល់ជូនពិសេស
-Order Details,Order Details,Order Details,訂單詳細內容,Order Details,Chi tiết đơn hàng,ព័ត៌មានលម្អិតនៃការបញ្ជាទិញ
-Ordered By,Ordered By,Ordered By,訂購人,Ordered By,Phụ trách đặt hàng: đặt hàng bởi,បញ្ជាទិញដោយ
-Created Date,Created Date,Created Date,訂單建立日期,Created Date,Ngày tạo đơn hàng,កាលបរិច្ឆេទដែលបានបង្កើត
-EZRX No.,EZRX No.,EZRX No.,eZRx訂單號碼,EZRX No.,số eZRx,លេខ EZRX
-PO Number,PO Number,PO Number,PO Number,PO Number,Số Đơn hàng,លេខបញ្ជាទិញ
-Contact Number,Contact Number,Contact Number,聯絡人電話,Contact Number,Số liên hệ,លេខទំនាក់ទំនង
-Payment Term,Payment Term,Payment Term,付款方式,Payment Term,Hình thức thanh toán,លក្ខខណ្ឌនៃការទូទាត់ប្រាក់
-Payment Term Description,Payment Term Description,Payment Term Description,預設付款方式,Payment Term Description,Hình thức thanh toán,ការពិពណ៌នាអំពីរយៈពេលទូទាត់ប្រាក់
-Price before VAT,Price before VAT,Price before VAT,未稅價,Price before VAT,Giá trước thuế GTGT,តម្លៃមុនអាករលើតម្លៃបន្ថែម
-eZRx will be undergoing enhancements from ,eZRx will be undergoing enhancements from ,eZRx จะหยุดให้บริการชั่วคราวตามกำหนดการบริหารจัดการระบบตั้งแต่ ,eZRx將於台灣時間 ,ကြိုတင်စီစဉ်ထားသောပြုပြင်ထိန်းသိမ်းမှုအတွက် ,Hệ thống eZRx đang được nâng cấp từ,eZRx នឹងត្រូវស្ថិតក្រោមការធ្វើបច្ចុប្បនភាពពី
-SGT on,SGT on,SGT ใน ,進行系統更新,SGT,giờ Singapore (GMT+8) vào,SGT នៅ
-We apologize for the inconvenience and appreciate your patience.,We apologize for the inconvenience and appreciate your patience.,เราขออภัยในความไม่สะดวก เราจะกลับมาเติมรอยยิ้มของคุณในอีกไม่นานเกินรอ,造成不便敬請見諒 ,အဆင်မပြေမှုအတွက်တောင်းပန်ပြီးသင်၏စိတ်ရှည်မှုကိုကျေးဇူးတင်ပါတယ်။,Chúng tôi thành thật xin lỗi vì sự bất tiện này và kính mong quý Khách Hàng thông cảm.,យើងសូមអភ័យទោសចំពោះភាពរអាក់រអួល និងសូមថ្លែងអំណរគុណចំពោះការអត់ធ្មត់របស់អ្នក។
-Successfully Saved Order,Successfully Saved Order,Successfully Saved Order,成功儲存訂單,Successfully Saved Order,Đơn hàng được lưu thành công,ការបញ្ជាទិញត្រូវបានរក្សាទុក ដោយជោគជ័យ
-Please enter contact person,Please enter contact person,Please enter contact person,請輸入訂單聯絡人,Please enter contact person,Please enter contact person,សូមបញ្ចូលបុគ្គលទំនាក់ទំនង
-Please enter valid mobile number,Please enter valid mobile number,Please enter valid mobile number,請輸入有效的手機號碼,Please enter valid mobile number,Please enter valid mobile number,សូមបញ្ចូលលេខទូរស័ព្ទដែលត្រឹមត្រូវ
-Please wait while we load data,Please wait while we load data,Please wait while we load data,資料讀取中，請稍候,Please wait while we load data,Please wait while we load data,សូមរង់ចាំ យើងកំពុងដំណើរការទិន្នន័យ
-Product Not Available,Product Not Available,Product Not Available,產品不可用,Product Not Available,Product Not Available,មិនមានផលិតផល
-Please wait fetching price,Please wait fetching price,Please wait fetching price,發生錯誤，請稍後再試或聯繫裕利。,Please wait fetching price,Please wait fetching price,សូមរង់ចាំ យើងកំពុងបង្ហាញតម្
-Order cannot be re-ordered! Please try later.,Order cannot be re-ordered! Please try later.,Order cannot be re-ordered! Please try later.,不可使用 '重新訂購' ， 請稍後再試。,Order cannot be re-ordered! Please try later.,Order cannot be re-ordered! Please try later.,ការបញ្ជាទិញមិនអាចបញ្ជាទិញឡើងវិញបានទេ! សូមព្យាយាមម្តងទៀតនៅពេលក្រោយ។
-Unable to fetch price. Try later,Unable to fetch price. Try later,Unable to fetch price. Try later,發生錯誤，請稍後再試或聯繫裕利。,Unable to fetch price. Try later,Unable to fetch price. Try later,មិនអាចទាញយកតម្លៃបានទេ។ សូមព្យាយាមនៅពេលក្រោយ
-Contact details not available,Contact details not available,Contact details not available,發生錯誤，請聯繫裕利。,Contact details not available,Contact details not available,មិនមានព័ត៌មានទំនាក់ទំនង
-Product is out of stock!,Product is out of stock!,สินค้าหมดชั่วคราว!,產品無庫存,Product is out of stock!,Product is out of stock!,ផលិតផលអស់ពីស្តុក
-Item(s) can't add to the cart!,Item(s) can't add to the cart!,Item(s) can't add to the cart!,產品無法加入購物車,Item(s) can't add to the cart!,Item(s) can't add to the cart!,ផលិតផលមិនអាចបញ្ចូលទៅក្នុងរទេះផលិតផលបានទេ!
-Create Return,Create Return,Create Return,Create Return,Create Return,Create Return,បង្កើតការបញ្ជូនផលិតផលត្រឡប់មកវិញ
-Track Return,Track Return,Track Return,Track Return,Track Return,Track Return,តាមដានការបញ្ជូនផលិតផលត្រឡប់មកវិញ
-Returns,Returns,การคืน,退貨,ကုန်ပစ္စည်းများကိုပြန်ပို့သည်,Trả hàng,បញ្ជូនផលិតផលត្រឡប់មកវិញ
-Pending Actions,Pending Actions,Pending Actions,Pending Actions,Pending Actions,Pending Actions,សកម្មភាពកំពុងរង់ចាំ
-Order Confirmation,Order Confirmation,Order Confirmation,訂單確認,Order Confirmation,Xác nhận đơn hàng,ការបញ្ជាក់ពីការបញ្ជាទិញ
-Thank You,Thank You,Thank You,已收到您的訂單,Thank You,Cảm ơn,សូមអរគុណ
-Your order has been received successfully,Your order has been received successfully,Your order has been received successfully,修改或取消請洽eZRx客服專線0809-090-887,Your order has been received successfully,Đơn hàng đã được xác nhận trên eZRx thành công và sẽ cập nhật về hệ thống,ការបញ្ជាទិញរបស់អ្នកត្រូវបានទទួលដោយជោគជ័យ
-Create New Order,Create New Order,Create New Order,建立新訂單,Create New Order,Tạo mới đơn hàng,បង្កើតការបញ្ជាទិញថ្មី
-Go to Order History,Go to Order History,Go to Order History,至訂單紀錄,Go to Order History,Lịch sử đơn hàng,ចូលទៅប្រវត្តិការបញ្ជាទិញ
-Bonus/tiered pricing for this material has been updated as a result of the changes you've made to your cart,Bonus/tiered pricing for this material has been updated as a result of the changes you've made to your cart,Bonus/tiered pricing for this material has been updated as a result of the changes you've made to your cart,因產品數量更改，已更新您的產品單價,Bonus/tiered pricing for this material has been updated as a result of the changes you've made to your cart,Bonus/tiered pricing for this material has been updated as a result of the changes you've made to your cart,ចំនួនដែលថែម/តម្លៃដែលបានបង្កើតសម្រាប់ផលិតផលនេះត្រូវបានធ្វើបច្ចុប្បន្នភាព ដោយសារការផ្លាស់ប្តូរដែលអ្នកបានធ្វើនៅក្នុងរទេះផលិតផលរបស់អ្នក
-Licenses,Licenses,Licenses,管證資料,Licenses,Licenses,អាជ្ញាប័ណ្ណ
-Notification Settings,Notification Settings,Notification Settings,Notification Settings,အသိပေးချက် ဆက်တင်များ,Cài đặt thông báo,ការកំណត់ការជូនដំណឹង
-Set Up Notifications,Set Up Notifications,ตั้งค่าการแจ้งเตือน,設定通知,အသိပေးချက်များကို သတ်မှတ်ပါ,Thiết lập thông báo,បង្កើតការការជូនដំណឹង
-Email will be sent in your language of choice,Email will be sent in your language of choice,อีเมล์จะถูกส่งให้คุณด้วยภาษาที่เลือก,將以您選擇的語言發送電子郵件,သင်ရွေးချယ်သောဘာသာစကားဖြင့် အီးမေးလ်များကိုပေးပို့လိမ့်မည်,Thư điện tử (email) sẽ được gửi theo ngôn ngữ của Quý Khách chọn,អ៊ីមែលនឹងត្រូវបានផ្ញើជាភាសាដែលអ្នកជ្រើសរើស
-Order Summary Update,Order Summary Update,อัปเดตสรุปคำสั่งซื้อ,下單資訊更新,အမှာစာအကျဉ်းချုပ် ,Cập nhật tổng đơn hàng,បច្ចុប្បន្នភាពព័ត៌មានសង្ខេបនៃការបញ្ជាទិញ
-Receive a notification of your order summary after placing an order on eZRx,Receive a notification of your order summary after placing an order on eZRx,รับการแจ้งเตือนสรุปคำสั่งซื้อของคุณหลังจากทำการสั่งซื้อบน eZRx,於eZRx下單後收到您的下單通知,eZRx တွင်မှာယူပြီးနောက် သင်၏အမှာစာအကျဉ်းချုပ်အသိပေးချက်ကိုရယူပါ,Nhận thông báo tổng đơn hàng của Quý Khách sau khi đặt hàng trên hệ thống eZRx,ទទួលបានការជូនដំណឹងអំពីព័ត៌មានសង្ខេបនៃការបញ្ជាទិញរបស់អ្នក បន្ទាប់ពីធ្វើការដាក់បញ្ជាទិញនៅលើ eZRx
-Filter,Filter,Filter,篩選,Filter,Bộ lọc,តម្រង
-Order Failed,Order Failed,Order Failed,訂單接收異常,Order Failed,Order Failed,ការបញ្ជាទិញបានបរាជ័យ
-Order Creating,Order Creating,Order Creating,訂單建立中，請稍候查詢,Order Creating,Order Creating,ការបង្កើតការបញ្ជាទិញ
-Invoice,Invoice,Invoice,發票資訊,Invoice,Thông tin hóa đơn,វិក្កយបត្រ
-Language Preferences,Language Preferences,ภาษาที่คุณเลือก,設定語言,ဘာသာစကားရွေးချယ်မှု,Tuỳ chọn ngôn ngữ,ជម្រើសភាសា
-Material Description,Material Description,ชื่อสินค้า,以產品品名,ကုန်ပစ္စည်းဖော်ပြချက်,Tên Sản phẩm,ការពិពណ៌នាអំពីផលិតផល៖
-Material Number,Material Number,รหัสสินค้า,產品代碼搜尋,နံပါတ်,Mã Sản Phẩm,លេខកូផលិតផល៖
-Oops! Search by material description /number is not available right now. You can continue searching by other criteria or try material search again later.,Oops! Search by material description /number is not available right now. You can continue searching by other criteria or try material search again later.,อ๊ะ! การค้นหาสินค้าด้วยชื่อสินค้า / รหัสสินค้าไม่สามารถใช้งานได้ในขณะนี้ คุณสามารถค้นหาสินค้าโดยใช้วิธีอื่นก่อนชั่วคราว หรือ ลองใหม่อีกครั้งในภายหลัง,查無此產品,ကုန်ပစ္စည်းဖော်ပြချက် / နံပါတ်အားဖြင့် ရှာဖွေခြင်းကို ယခုအချိန်တွင်မရနိုင်ပါ။ အခြားသတ်မှတ်ချက်များနှင့် ဆက်လက်ရှာဖွေနိုင်သည် (သို့)နောက်မှ တဖန် ရှာဖွေကြည့်ပါ။,Rất tiếc! Tìm kiếm theo tên sản phẩm/mã sản phẩm chưa có. Quý Khách Hàng vui lòng thử lại các điều kiện lọc khác hoặc thử lại sau.,ឱ! ស្វែងរកដោយការពិពណ៌នាសម្ភារៈ / លេខមិនមានទេឥឡូវនេះ។ អ្នកអាចបន្តការស្វែងរកតាមលក្ខណៈវិនិច្ឆ័យផ្សេងទៀត ឬព្យាយាមស្វែងរកសម្ភារៈម្តងទៀតនៅពេលក្រោយ។
-We'll be back soon. ,We'll be back soon. ,เราจะกลับมาให้บริการตามปกติในอีกไม่นาน,系統維護通知,ကျနော်တို့မကြာမီပြန်လာပါမယ်,Chúng tôi sẽ trở lại sớm.,យើងនឹងត្រលប់មកវិញឆាប់ៗនេះ។
-eZRx is unavailable at the moment.,eZRx is unavailable at the moment.,บริการ eZRx ไม่สามารถใช้บริการได้ขณะนี้,eZRx 目前正在進行系統更新,ယခုအချိန်တွင် eZRx အသုံးပြုရန် မရနိုင်ပါ။,Hệ thống eZRx hiện chưa có tính năng này.,eZRx មិនអាចប្រើបានទេនៅពេលនេះ។
-We will be up and running shortly in order to serve you better.,We will be up and running shortly in order to serve you better.,เราจะกลับมาให้บริการอีกไม่นานเพื่อเติมรอยยิ้มของคุณให้มากยิ่งขึ้นกว่าเดิม,維護期間將暫停服務,သင့်ကိုပိုမိုကောင်းမွန်စွာ ဝန်ဆောင်မှုပေးနိုင်ရန်အတွက်ကျွန်ုပ်တို့မကြာမီ လုပ်ဆောင်သွားပါမည်။,Chúng tôi sẽ sớm hoạt động để phục vụ Quý Khách tốt hơn.,យើងនឹងដំណើរការក្នុងពេលឆាប់ៗនេះ ដើម្បីបម្រើអ្នកឱ្យកាន់តែប្រសើរឡើង។
-"For urgent enquiries, please contact our customer service team.","For urgent enquiries, please contact our customer service team.",สำหรับคำถามเร่งด่วน กรุณาติดต่อฝ่ายลูกค้าสัมพันธ์ eZRx 02 053 0000,若有緊急需求，請撥打專線: 0809-090-887 或與LINE@客服溝通園地聯繫,အရေးပေါ်စုံစမ်းမေးမြန်းလိုပါက ကျေးဇူးပြု၍ ကျွန်ုပ်တို့၏ ၀ န်ဆောင်မှုအဖွဲ့ကိုဆက်သွယ်ပါ။,"Đối với các yêu cầu khẩn cấp, vui lòng liên hệ với trung tâm dịch vụ khách hàng của chúng tôi qua số điện thoại miễn cước 1800 5555 58 và bấm số 3 để được hỗ trợ.",សម្រាប់ការសាកសួរជាបន្ទាន់ សូមទាក់ទងក្រុមសេវាកម្មអតិថិជនរបស់យើង។
-Profile & Settings,Profile & Settings,โปรไฟล์และการตั้งค่า,帳戶資訊與設定,ကိုယ်ရေးအကျဉ်းနှင့်ဆက်တင်များ,Cài đặt thông tin,ប្រវត្តិរូប និងការកំណត់
-Profile,Profile,โปรไฟล์,帳戶資訊,ကိုယ်ရေးအကျဉ်း,Hồ sơ,ប្រវត្តិរូប
-Email,Email,อีเมล์,E-mail電子郵件,အီးမေးလ်,Nhận email: Địa chỉ email,អ៊ីមែល
-Off,Off,ปิด,關閉,ပိတ်,Tắt,បិទ
-On,On,เปิด,開啟,ဖွင့်,Mở,បើក
-Receive an email notification when you subscribe to an alert,Receive an email notification when you subscribe to an alert,รับอีเมลแจ้งเตือนเมื่อคุณสมัครรับการแจ้งเตือน,開啟訂閱以收到E-mail電子郵件通知,သတိပေးချက်တစ်ခုကိုရယူသောအခါ အီးမေးလ်အကြောင်းကြားစာကိုလက်ခံရယူပါ,Nhận thông báo qua thư điện tử (email) khi Quý Khách đăng ký nhận thông báo.,ទទួលបានការជូនដំណឹងតាមអ៊ីមែល នៅពេលអ្នកជាវការជូនដំណឹង
-Hello,Hello,สวัสดี,您好,ဟယ်လို,Xin chào,ជំរាបសួរ
-We have received order #,We have received order #,เราได้รับคำสั่งซื้อ #,裕利已收到訂單#,အမှာစာ # ကို လက်ခံရရှိပါပြီ,Chúng tôi đã nhận được đơn đặt hàng số,យើងបានទទួលការបញ្ជាទិញ #
-Check our order status here,Check our order status here,ตรวจสอบสถานะการสั่งซื้อของเราที่นี่,按此查詢訂單狀態,ဤနေရာတွင် သင်၏အမှာစာ အခြေအနေကိုစစ်ဆေးပါ,Kiểm tra trạng thái đơn hàng tại đây,ពិនិត្យស្ថានភាពការបញ្ជាទិញរបស់យើងនៅទីនេះ
-VAT at x%,VAT at x%,ภาษีมูลค่าเพิ่ม x%,稅率 x%,x% မှာ VAT,VAT là x%,VAT នៅ x%
-Bonus,Bonus,โบนัส,贈品,အပိုဆု,Hàng tặng,ប្រាក់រង្វាន់
-View more item in this order,View more item in this order,ดูรายการเพิ่มเติมในคำสั่งซื้อนี้,瀏覽此單內的更多產品,ဤအစီအစဉ်တွင် ပိုမိုသော အရာများကိုကြည့်ပါ,Xem chi tiết sản phẩm trong đơn đặt hàng này.,មើលធាតុបន្ថែមទៀតនៅក្នុងលំដាប់នេះ។
-Shipping Address: ,Shipping Address: ,ที่อยู่จัดส่ง: ,送貨地址: ,ကုန်ပစ္စည်းပို့ဆောင်ရမည့်လိပ်စာ:,Địa chỉ giao hàng:,អាសយដ្ឋានដឹកជញ្ជូន៖
-Billing Address: ,Billing Address: ,ที่อยู่สำหรับการเรียกเก็บเงิน: ,發票開立地址: ,ကျသင့်ငွေတောင်းခံလွှာပေးပို့မည့်လိပ်စာ: ,Địa chỉ xuất hoá đơn: ,អាសយដ្ឋានចេញវិក្កយបត្រ៖
-All rights reserved,All rights reserved,สงวนลิขสิทธิ์,保留所有權利,မူပိုင်ခွင့်များရယူပြီး,Đã đăng ký Bản quyền,រក្សា​រ​សិទ្ធ​គ្រប់យ៉ាង
-This email is automatically generated.,This email is automatically generated.,อีเมลนี้สร้างขึ้นโดยอัตโนมัติ,此為系統自動通知信,ဤအီးမေးလ်ကိုအလိုအလျောက်ပို့လွှတ်ပေးခြင်းဖြစ်သည်။,Thư điện tử (email) được tạo tự động.,អ៊ីមែលនេះត្រូវបានបង្កើតដោយស្វ័យប្រវត្តិ
-Please do not reply.,Please do not reply.,กรุณาอย่าตอบกลับ,請勿直接回信,ကျေးဇူးပြု၍ အီးမေးလ် မပြန်ပါနှင့်,Vui lòng không phản hồi,សូមកុំឆ្លើយតប។
-"If you need additional help, please write to support@ezrx.com","If you need additional help, please write to support@ezrx.com",หากคุณต้องการความช่วยเหลือเพิ่มเติมโปรดเขียนถึง support@ezrx.com,若您需要其他的協助，請反應至 ezrx4u@zuelligpharma.com,သင်အကူအညီ ထပ်မံ လိုအပ်လျှင် support@ezrx.com သို့ အီးမေးလ်ရေးပါ,Nếu Quý Khách cần hỗ trợ thêm vui lòng gửi thư điện tử (email) về địa chỉ dat.hang@ezrx.com.vn,ប្រសិនបើអ្នកត្រូវការជំនួយបន្ថែម សូមសរសេរទៅកាន់ support@ezrx.com
-THE SMARTER WAY TO ORDER.,THE SMARTER WAY TO ORDER.,ทางเลือกในการสั่งซื้อออนไลน์สำหรับคุณ,更聰慧的下單方式,အမှာစာ မှာယူရန် ပိုမိုကောင်းမွန်သောနည်းလမ်း,Đặt đơn hàng nhanh chóng.,មធ្យោបាយដ៏ឆ្លាតវៃក្នុងការបញ្ជាទិញ។
-"ANYTIME, ANYWHERE.","ANYTIME, ANYWHERE.",ทุกที่ ทุกเวลา,無論何時，無論何地,အချိန်မရွေး၊ နေရာမရွေး,"Bất cứ nơi đâu, bất cứ lúc nào.",គ្រប់ពេលវេលា គ្រប់ទីកន្លែង។
-CONTACT US TO SIGN UP NOW!,CONTACT US TO SIGN UP NOW!,ติดต่อเราเพื่อสมัครเริ่มใช้บริการ!,連絡我們以註冊,ယခုပင် စာရင်းသွင်းရန် ကျွန်ုပ်တို့ထံ ဆက်သွယ်ပါ,Liên lạc với Chúng tôi để mở tài khoản từ bây giờ!,ទាក់ទងមកយើងដើម្បីចុះឈ្មោះឥឡូវនេះ!
-Username cannot be empty.,Username cannot be empty.,กรุณาระบุชื่อผู้ใช้งาน,使用者名稱不得為空,အသုံးပြုသူအမည် အလွတ်မဖြစ်ရပါ,Tên tài khoản đăng nhập không được để trống,ឈ្មោះអ្នកប្រើមិនអាចទទេបានទេ។
-Password cannot be empty.,Password cannot be empty.,กรุณาระบุรหัสผ่าน,密碼不得為空,စကားဝှက် အလွတ်မဖြစ်ရပါ,Mật khẩu đăng nhập không được để trống,ពាក្យសម្ងាត់មិនអាចទទេបានទេ។
-Incorrect username and/or password.,Incorrect username and/or password.,ชื่ื่อผู้ใช้งาน และ/หรือ รหัสผ่านไม่ถูกต้อง,錯誤的使用者名稱或密碼,အသုံးပြုသူအမည် နှင့်/သို့မဟုတ် စကားဝှက် မမှန်ကန်ပါ,Tài khoản hoặc mật khẩu không đúng,ឈ្មោះអ្នកប្រើប្រាស់ និង/ឬពាក្យសម្ងាត់មិនត្រឹមត្រូវ។
-Must not contain any part of your username and/or name,Must not contain any part of your username and/or name,ต้องไม่ประกอบด้วยส่วนหนึ่งของชื่อผู้ใช้ และ/หรือ ชื่อของคุณ,不能與您的使用者名稱或姓名部分或全部相符,အသုံးပြုသူအမည်နှင့်/သို့မဟုတ် အမည်၏ အစိတ်အပိုင်းတစ်ခုမျှ မပါဝင်ရပါ။,Không được chứa bất kỳ tên đăng nhập và / hoặc tên của bạn,មិនត្រូវមានផ្នែកណាមួយនៃឈ្មោះអ្នកប្រើប្រាស់ និង/ឬឈ្មោះរបស់អ្នកទេ។
-Note:,Note:,หมายเหตุ:,附註:,မှတ်စု:,Lưu ý:,ចំណាំ៖
-eZRx will be undergoing enhancements from ,eZRx will be undergoing enhancements from ,eZRx จะหยุดให้บริการชั่วคราวตามกำหนดการบริหารจัดการระบบตั้งแต่ ,eZRx將於台灣時間 ,ကြိုတင်စီစဉ်ထားသောပြုပြင်ထိန်းသိမ်းမှုအတွက် ,Hệ thống eZRx đang được nâng cấp từ,eZRx នឹងត្រូវស្ថិតក្រោមការធ្វើបច្ចុប្បនភាពពី
-eZRx will be unavailable from ,eZRx will be unavailable from ,บริการ eZRx ไม่สามารถใช้บริการได้ตั้งแต่ ,預計維護時間 ,eZRx သည် ,Hệ thống eZRx đang được bảo trì từ ,eZRx will be unavailable from
-Payments Overview,Payments Overview,ภาพรวมการชําระเงิน,Payments Overview ,Payments Overview,Tổng quan về Thanh toán,ស្ថានភាពកុំម្ម៉ង់
-Payment,Payment,การชำระเงิน,Payment,Payment,Thanh toán,Payment
-Overview,Overview,ภาพรวม,Overview,Overview,Tổng quan,ទិដ្ឋភាពទូទៅ
-Invoices,Invoices,ใบแจ้งหนี้,Invoices,Invoices,Thông tin hóa đơn,Invoices
-Credit Notes,Credit Notes,ใบลดหนี้,Credit Notes,Credit Notes,Giấy báo có,Credit Notes
-Payment Summary,Payment Summary,สรุปการชําระเงิน,Payment Summary,Payment Summary,Tổng Thanh toán,Payment Summary
-Statement of Accounts,Statement of Accounts,ใบแจ้งยอดบัญชี,Statement of Accounts,Statement of Accounts,Sao kê tài khoản,Statement of Accounts
-Accounts Overview,Accounts Overview,ภาพรวมบัญชีของลูกค้า,Accounts Overview,Accounts Overview,Tổng quan về tài khoản,Accounts Overview
-Here is your Accounts summary,Here is your Accounts summary,นี่คือสรุปบัญชีของคุณ,Here is your Accounts summary,Here is your Accounts summary,Đây là bản tóm tắt Tài khoản của Quý Khách,Here is your Accounts summary
-Overdue,Overdue,เกินกำหนดชำระ,Overdue,Overdue,Quá hạn,Overdue
-Outstanding,Outstanding,ค้างชำระ,Outstanding,Outstanding,Chưa thanh toán,Outstanding
-Payments in Progress,Payments in Progress,การชําระเงินอยู่ระหว่างดําเนินการ,Payments in Progress,Payments in Progress,Đang tiến hành thanh toán,Payments in Progress
-Credit Remaining,Credit Remaining,ยอดใบลดหนี้คงเหลือ,Credit Remaining,Credit Remaining,Tín dụng còn lại,Credit Remaining
-New Payment,New Payment,การชําระเงินใหม่,New Payment,New Payment,Thanh toán mới,New Payment
-Your Invoices,Your Invoices,ใบแจ้งหนี้ของคุณ,Your Invoices,Your Invoices,Hóa đơn của Quý Khách,Your Invoices
-Due Date,Due Date,วันครบกําหนด,Due Date,Due Date,Ngày đáo hạn,Due Date
-Invoice Date,Invoice Date,หมายเลขใบแจ้งหนี้,發票日,Invoice Date,Ngày hóa đơn,កាលបរិច្ឆេទចេញវិក្កយបត្រ
-Invoice Amount,Invoice Amount,ยอดเงินที่ต้องชำระ,Invoice Amount,Invoice Amount,Số tiền trên hóa đơn,Invoice Amount
-Open,Open,ค้างชำระ,Open,Open,Mở,Open
-Closed,Closed,เสร็จสิ้น,Closed,Closed,Đã đóng,Closed
-Advice Expiry,Advice Expiry,วันหมดอายุของใบชําระเงิน,Advice Expiry,Advice Expiry,Chứng từ hết hạn,Advice Expiry
 1 day(s) left,1 day(s) left,เหลืออีก 1 วัน,1 day(s) left,1 day(s) left,Còn lại 1 ngày,1 day(s) left
-Expired 1 day(s) ago,Expired 1 day(s) ago,หมดอายุ 1 วันที่ผ่านมา,Expired 1 day(s) ago,Expired 1 day(s) ago,Đã hết hạn cách đây 1 ngày,Expired 1 day(s) ago
-Failed,Failed,ไม่่สำเร็จ,Failed,Failed,Không đúng,Failed
-In Progress,In Progress,กําลังดําเนินการ,In Progress,In Progress,Đang xử lý,In Progress
-Pending,Pending,รอดำเนินการ,條件確認中,Pending,Đang chờ,Pending
-View All,View All,ดูทั้งหมด,View All,View All,Xem tất cả,View All
-Your Payments,Your Payments,การชําระเงินของคุณ,Your Payments,Your Payments,Thanh toán của bạn,Your Payments
-Expired,Expired,หมดอายุ,Expired,Expired,Hết hạn,Expired
-View Less,View Less,ย่อรายการ,View Less,View Less,Rút gọn,View Less
-Order Status,Order Status,ไม่่สำเร็จ,Order Status,Order Status,Không đúng,ស្ថានភាពកុំម្ម៉ង់
+"100 Days from EOM, due EOM","100 Days from EOM, due EOM","100 Days from EOM, due EOM",發票日起100天內付款,"100 Days from EOM, due EOM","100 Days from EOM, due EOM","100 Days from EOM, due EOM"
+"120 Days from EOM, due EOM","120 Days from EOM, due EOM","120 Days from EOM, due EOM",發票日起120天內付款,"120 Days from EOM, due EOM","120 Days from EOM, due EOM","120 Days from EOM, due EOM"
+"120 Days from EOM, due EOM (GP 10 days)","120 Days from EOM, due EOM (GP 10 days)","120 Days from EOM, due EOM (GP 10 days)",發票日起120天內付款,"120 Days from EOM, due EOM (GP 10 days)","120 Days from EOM, due EOM (GP 10 days)","120 Days from EOM, due EOM (GP 10 days)"
+"120 Days from EOM, due EOM (GP 30 days)","120 Days from EOM, due EOM (GP 30 days)","120 Days from EOM, due EOM (GP 30 days)",發票日起120天內付款,"120 Days from EOM, due EOM (GP 30 days)","120 Days from EOM, due EOM (GP 30 days)","120 Days from EOM, due EOM (GP 30 days)"
+"120 Days from EOM, due EOM (GP 60 days)","120 Days from EOM, due EOM (GP 60 days)","120 Days from EOM, due EOM (GP 60 days)",發票日起120天內付款,"120 Days from EOM, due EOM (GP 60 days)","120 Days from EOM, due EOM (GP 60 days)","120 Days from EOM, due EOM (GP 60 days)"
+"30 Days from EOM, due EOM","30 Days from EOM, due EOM","30 Days from EOM, due EOM",發票日起30天內付款,"30 Days from EOM, due EOM","30 Days from EOM, due EOM","30 Days from EOM, due EOM"
+"30 Days from EOM, due EOM (GP 30 days)","30 Days from EOM, due EOM (GP 30 days)","30 Days from EOM, due EOM (GP 30 days)",發票日起30天內付款,"30 Days from EOM, due EOM (GP 30 days)","30 Days from EOM, due EOM (GP 30 days)","30 Days from EOM, due EOM (GP 30 days)"
+"30 Days from with 0.5% , due EOM","30 Days from with 0.5% , due EOM","30 Days from with 0.5% , due EOM",發票日起30天內付款折扣0.5%,"30 Days from with 0.5% , due EOM","30 Days from with 0.5% , due EOM","30 Days from with 0.5% , due EOM"
+"30 Days from with 1.15% , due EOM","30 Days from with 1.15% , due EOM","30 Days from with 1.15% , due EOM",發票日起30天內付款折扣1.15%,"30 Days from with 1.15% , due EOM","30 Days from with 1.15% , due EOM","30 Days from with 1.15% , due EOM"
+"30 Days from with 1.3% , due EOM","30 Days from with 1.3% , due EOM","30 Days from with 1.3% , due EOM",發票日起30天內付款折扣1.3%,"30 Days from with 1.3% , due EOM","30 Days from with 1.3% , due EOM","30 Days from with 1.3% , due EOM"
+"30 Days from with 3% , due EOM","30 Days from with 3% , due EOM","30 Days from with 3% , due EOM",發票日起30天內付款折扣3%,"30 Days from with 3% , due EOM","30 Days from with 3% , due EOM","30 Days from with 3% , due EOM"
+"45 Days from EOM, due EOM","45 Days from EOM, due EOM","45 Days from EOM, due EOM",發票日起45天內付款,"45 Days from EOM, due EOM","45 Days from EOM, due EOM","45 Days from EOM, due EOM"
+"60 Days from EOM, due EOM","60 Days from EOM, due EOM","60 Days from EOM, due EOM",發票日起60天內付款,"60 Days from EOM, due EOM","60 Days from EOM, due EOM","60 Days from EOM, due EOM"
+"62 Days from EOM, due 2 days from EOM","62 Days from EOM, due 2 days from EOM","62 Days from EOM, due 2 days from EOM",發票日起62天內付款,"62 Days from EOM, due 2 days from EOM","62 Days from EOM, due 2 days from EOM","62 Days from EOM, due 2 days from EOM"
+"65 Days from EOM, due EOM","65 Days from EOM, due EOM","65 Days from EOM, due EOM",發票日起65天內付款,"65 Days from EOM, due EOM","65 Days from EOM, due EOM","65 Days from EOM, due EOM"
+"67 Days from EOM, due EOM","67 Days from EOM, due EOM","67 Days from EOM, due EOM",發票日起67天內付款,"67 Days from EOM, due EOM","67 Days from EOM, due EOM","67 Days from EOM, due EOM"
+"70 Days from EOM, due EOM","70 Days from EOM, due EOM","70 Days from EOM, due EOM",發票日起70天內付款,"70 Days from EOM, due EOM","70 Days from EOM, due EOM","70 Days from EOM, due EOM"
+"90 Days from EOM, due EOM","90 Days from EOM, due EOM","90 Days from EOM, due EOM",發票日起90天內付款,"90 Days from EOM, due EOM","90 Days from EOM, due EOM","90 Days from EOM, due EOM"
+"90 Days from EOM, due EOM (GP 30 days)","90 Days from EOM, due EOM (GP 30 days)","90 Days from EOM, due EOM (GP 30 days)",發票日起90天內付款,"90 Days from EOM, due EOM (GP 30 days)","90 Days from EOM, due EOM (GP 30 days)","90 Days from EOM, due EOM (GP 30 days)"
+"97 Days from EOM, due EOM","97 Days from EOM, due EOM","97 Days from EOM, due EOM",發票日起97天內付款,"97 Days from EOM, due EOM","97 Days from EOM, due EOM","97 Days from EOM, due EOM"
+A new version of {{appName}} is available!,A new version of {{appName}} is available!,A new version of {{appName}} is available!,{{appName}} 有新版本了!,A new version of {{appName}} is available!,A new version of {{appName}} is available!,A new version of {{appName}} is available!
+Accept,Accept,ยอมรับ,同意,လက်ခံသည်,Chấp nhận,ទទួលយក
+Acceptable Use Policy,Acceptable Use Policy,นโยบายความมั่นคงปลอดภัยระบบสารสนเทศ,同意使用政策,Acceptable Use ပေါ်လစီ,Chấp nhận sử dụng theo Chính sách,គោលការណ៍ប្រើប្រាស់ដែលអាចទទួលយកបាន
+Account,Account,บัญชี,帳戶,အကောင့်,Tài khoản,គណនី
+Account is Expired,Account is Expired,บัญชีหมดอายุ,帳戶已過期,အကောင့်သက်တမ်းကုန်သွားပါပြီ။,Tài khoản đã hết hạn,គណនីត្រូវបានផុតកំណត់
+Account is Locked,Account is Locked,บัญชีถูกล็อค,帳戶被鎖定,အကောင့်လော့ခ်ချထားတယ်။,Tài khoản bị khoá,គណនីត្រូវបានចាក់សោ
+Accounts Overview,Accounts Overview,ภาพรวมบัญชีของลูกค้า,Accounts Overview,Accounts Overview,Tổng quan về tài khoản,Accounts Overview
+Activate Biometric,Activate Biometric,เปิดใช้งาน Biometric,啟用指紋/臉部辨識,Biometric ကိုသက်ဝင်စေမည်,Kích hoặc vân tay,ដាក់ឱ្យដំណើរការទិន្ន័យជីវមាត្
+ADD,ADD,เพิ่ม,增加,ထည့်သွင်းရန်,Thêm,បន្ថែម
+Add Bonus,Add Bonus,เพิ่มสินค้าแถม,增加贈品,အပိုဆုထည့်ပါ,Thêm hàng tặng,បន្ថែមនូវចំនួនដែលថែម
+Add Bundles,Add Bundles,เพิ่มสินค้า Bundles,Add Bundles,ကုန်ပစ္စည်း အစုအဝေးများ ထည့်ပါ,Thêm gói sản phẩm,បន្ថែមផលិតផលជាកញ្ចប់
+Add Materials,Add Materials,เพิ่มสินค้า,增加產品,ကုန်ပစ္စည်းများ ထည့်ပါ,Thông tin sản phẩm,បន្ថែមផលិតផល
+Add Remarks,Add Remarks,เพิ่มหมายเหตุ,增加備註,မှတ်ချက်ထည့်ပါ,Ghi chú thêm,បន្ថែមកំណត់សម្គាល់
+Add To Bonus,Add To Bonus,เพิ่มเข้าสินค้าแถม,增加搭贈,အပိုဆု သို့ထည့်ပါ,Thêm hàng tặng,បន្ថែមទៅជាចំនួនដែលថែម
+Add To Cart,Add To Cart,เพิ่มลงตะกร้า,加入購物車,စျေးဝယ်လှည်းထဲသို့ ထည့်ရန်,Thêm vào giỏ hàng,បញ្ចូលទៅក្នុងរទេះផលិតផល
+Additional Comments,Additional Comments,Additional Comments,Additional Comments,​Additional Comments,Thông tin bổ sung,​Additional Comments
+Additional Information,Additional Information,ข้อมูลเพิ่มเติม,更多資訊,နောက်ထပ်သတင်းအချက်အလက်များ,Thông tin bổ sung,ព័ត៌មានបន្ថែមទៀត
+Address,Address,ที่อยู่,地址,လိပ်စာ,Tên Địa chỉ,អាសយដ្ឋាន
+Advance Payment,Advance Payment,Advance Payment,款項已付清,Advance Payment,Advance Payment,Advance Payment
+Advance Payment w/ 0.6% discount,Advance Payment w/ 0.6% discount,Advance Payment w/ 0.6% discount,預付貨款折扣0.6%,Advance Payment w/ 0.6% discount,Advance Payment w/ 0.6% discount,Advance Payment w/ 0.6% discount
+Advance Payment w/ 1.15% discount - remittance,Advance Payment w/ 1.15% discount - remittance,Advance Payment w/ 1.15% discount - remittance,預付貨款折扣1.15%,Advance Payment w/ 1.15% discount - remittance,Advance Payment w/ 1.15% discount - remittance,Advance Payment w/ 1.15% discount - remittance
+Advance Payment w/ 1.5% discount - remittance,Advance Payment w/ 1.5% discount - remittance,Advance Payment w/ 1.5% discount - remittance,預付貨款折扣1.5%,Advance Payment w/ 1.5% discount - remittance,Advance Payment w/ 1.5% discount - remittance,Advance Payment w/ 1.5% discount - remittance
+Advance payment w/o discount – Credit card,Advance payment w/o discount – Credit card,Advance payment w/o discount – Credit card,信用卡付款不再另行收款,Advance payment w/o discount – Credit card,Advance payment w/o discount – Credit card,Advance payment w/o discount – Credit card
+Advance Payment with 2% discount - remittance,Advance Payment with 2% discount - remittance,Advance Payment with 2% discount - remittance,款項已付清折扣2%,Advance Payment with 2% discount - remittance,Advance Payment with 2% discount - remittance,Advance Payment with 2% discount - remittance
+Advance Payment with 3% discount - remittance,Advance Payment with 3% discount - remittance,Advance Payment with 3% discount - remittance,出貨前匯款折扣3%,Advance Payment with 3% discount - remittance,Advance Payment with 3% discount - remittance,Advance Payment with 3% discount - remittance
+Advice Expiry,Advice Expiry,วันหมดอายุของใบชําระเงิน,Advice Expiry,Advice Expiry,Chứng từ hết hạn,Advice Expiry
+All Items Loaded,All Items Loaded,โหลดข้อมูลทั้งหมดเรียบร้อยแล้ว,顯示所有項目,ကုန်ပစ္စည်း အားလုံးကိုပြထားသည်,Tất cả sản phẩm đã được tải,ផលិតផលទាំងអស់ត្រូវបានបង្ហាញ
+All rights reserved,All rights reserved,สงวนลิขสิทธิ์,保留所有權利,မူပိုင်ခွင့်များရယူပြီး,Đã đăng ký Bản quyền,រក្សា​រ​សិទ្ធ​គ្រប់យ៉ាង
+All saved processed will be lost,All saved processed will be lost,All saved processed will be lost,放棄所有儲存,သိမ်းဆည်းထားသည့်လုပ်ငန်းများအားလုံးဆုံးရှုံးသွားမည်ဖြစ်သည်,Tất cả quá trình đã lưu sẽ bị mất,រាល់ដំណើរការដែលបានរក្សាទុកនឹងត្រូវបាត់បង់
+Announcement Letter Number,Announcement Letter Number,Announcement Letter Number,Announcement Letter Number,Announcement Letter Number,Công văn thông báo số,Announcement Letter Number
+ANYTIME ANYWHERE.,ANYTIME ANYWHERE.,ทุกที่ ทุกเวลา,無論何時 無論何地,အချိန်မရွေး၊ နေရာမရွေး,Bất cứ nơi đâu bất cứ lúc nào.,គ្រប់ពេលវេលា គ្រប់ទីកន្លែង។
+"ANYTIME, ANYWHERE.","ANYTIME, ANYWHERE.",ทุกที่ ทุกเวลา,無論何時，無論何地,အချိန်မရွေး၊ နေရာမရွေး,"Bất cứ nơi đâu, bất cứ lúc nào.",គ្រប់ពេលវេលា គ្រប់ទីកន្លែង។
+Apply,Apply,ใช้งานการตั้งค่า,送出,လျှောက်ထားပါ,Áp dụng,អនុវត្ត
+Are you sure to exit?,Are you sure to exit?,คุณต้องการออกจากระบบใช่หรือไม่?,請確認是否登出?,သင်ထွက်ဖို့သေချာပြီလား,Quý Khách Hàng có chắc chắn thoát không?,តើអ្នកប្រាកដទេថាចង់ចាកចេញ?
+Batch,Batch,หมายเลข Batch,批號,အသုတ်,Sô lô,លេខឡូត៏
+Batch Number:,Batch Number:,หมายเลข Batch:,Batch Number:,ကုန်ပစ္စည်း အသုတ်နံပါတ်:,Số lô:,លេខឡូត៏
+Bill to Address,Bill to Address,Bill to Address,Bill to Address,Bill to Address,Thông tin hóa đơn,Bill to Address
+Bill to Customer Code,Bill to Customer Code,Bill to Customer Code,Bill to Customer Code,Bill to Customer Code,Mã Khách Hàng,Bill to Customer Code
+Bill to Customer Name,Bill to Customer Name,Bill to Customer Name,Bill to Customer Name,Bill to Customer Name,Tên Khách hàng,Bill to Customer Name
+Billing Address:,Billing Address:,ที่อยู่สำหรับการเรียกเก็บเงิน:,發票開立地址:,ကျသင့်ငွေတောင်းခံလွှာပေးပို့မည့်လိပ်စာ:,Địa chỉ xuất hoá đơn:,អាសយដ្ឋានចេញវិក្កយបត្រ៖
+Biometric,Biometric,Biometric,生物識別,ဇီဝဗေဒဆိုင်ရာအချက်အလက်,Vân tay,ជីវមាត្រ
+Bonus,Bonus,โบนัส,贈品,အပိုဆု,Hàng tặng,ប្រាក់រង្វាន់
+Bonus item successfully added to cart,Bonus item successfully added to cart,เพิ่มสินค้าแถมลงตะกร้าสำเร็จ,成功將贈品加至購物車,အပိုဆုပစ္စည်း စျေးဝယ်လှည်းသို့ အောင်မြင်စွာထည့်သွင်း ပြီးသွားပါပြီ,Đã thêm thành công hàng tặng vào giỏ hàng,ចំនួនដែលថែមត្រូវបានដាក់បញ្ចូលទៅក្នុងរទេះផលិតផលដោយជោគជ័យ
+Bonus Qty,Bonus Qty,จำนวนสินค้าแถม,搭贈數量,အပိုဆု အရေအတွက်,Số lượng hàng tặng,ចំនួនដែលថែម
+Bonus/tiered pricing for this material has been updated as a result of the changes you've made to your cart,Bonus/tiered pricing for this material has been updated as a result of the changes you've made to your cart,Bonus/tiered pricing for this material has been updated as a result of the changes you've made to your cart,因產品數量更改，已更新您的產品單價,Bonus/tiered pricing for this material has been updated as a result of the changes you've made to your cart,Bonus/tiered pricing for this material has been updated as a result of the changes you've made to your cart,ចំនួនដែលថែម/តម្លៃដែលបានបង្កើតសម្រាប់ផលិតផលនេះត្រូវបានធ្វើបច្ចុប្បន្នភាព ដោយសារការផ្លាស់ប្តូរដែលអ្នកបានធ្វើនៅក្នុងរទេះផលិតផលរបស់អ្នក
+Bonuses,Bonuses,สินค้าแถม,搭贈,အပိုဆု,Hàng tặng,ចំនួនបន្ថែម
+Brand,Brand,แบรนด์สินค้า,Brand,ကုန်အမှတ်တံဆိပ်,Chi nhánh,ម៉ាករបស់ផលិតផល
+Bundle Materials,Bundle Materials,Bundle Materials,Bundle Materials,ပစ္စည်းများအစုအဝေး,Gói sản phẩm,ផលិតផលជាកញ្ចប់
+Buy,Buy,ซื้อ,購買,ဝယ်ပါ,Mua,ទិញ
+Cancel,Cancel,ยกเลิก,取消,ပယ်ဖျက်ပါ,Huỷ,បោះបង់
 Cancelled,Cancelled,ยกเลิก,取消訂單,ပယ်ဖျက်သည်,Hủy,បានលុបចោល
 Cancelled - credit issue,Cancelled - credit issue,ยกเลิก - ปัญหาเครดิต,取消訂單,ပယ်ဖျက်သည် - အကြွေးပြဿနာ,Hủy - công nợ,បានលុបចោល-បញ្ហាឥណទាន
 Cancelled - duplicate order,Cancelled - duplicate order,ยกเลิก - คำสั่งซื้อซ้ำ,取消訂單,ပယ်ဖျက်သည် - မှာယူမှု ထပ်ခြင်း,Hủy - đơn hàng trùng,បានលុបចោល-ការបញ្ជាទិញផ្ទួនគ្នា
 Cancelled - license invalid / expired,Cancelled - license invalid / expired,ยกเลิก - ใบอนุญาตไม่ถูกต้อง / หมดอายุ,取消訂單,ပယ်ဖျက်သည် - လိုင်စင် အကျုံးမဝင်/ သက်တမ်းကုန်,Hủy - giấy phép không hợp lệ/hết hạn,បានលុបចោល-license
 Cancelled by buyer,Cancelled by buyer,ยกเลิกโดยผู้ซื้อ,取消訂單,ဝယ်သူမှ ပယ်ဖျက်သည်,Hủy - Khách Hàng,បានលុបចោលដោយអ្នកទិញ
 Cancelled by Seller,Cancelled by Seller,ยกเลิกโดยผู้ขาย,取消訂單,ရောင်းချသူမှ ပယ်ဖျက်သည်,Hủy - Nhân viên/Hãng,បានលុបចោលដោយអ្នកលក់
+Cart,Cart,ตะกร้าสินค้า,購物車,စျေးဝယ်လှည်း,Giỏ hàng,រទេះផលិតផល
+Cash on Delivery with 0.6% discount,Cash on Delivery with 0.6% discount,Cash on Delivery with 0.6% discount,貨到收款折扣0.6%,Cash on Delivery with 0.6% discount,Cash on Delivery with 0.6% discount,Cash on Delivery with 0.6% discount
+Catridge,Catridge,Cartridge,Catridge,Catridge,Ảnh chụp,បំពង់ទឹកថ្នាំ
+Change,Change,แก้ไข,修改,ပြောင်းလဲပါ,Thay đổi,ផ្លាស់ប្តូរ
+Change Customer Code,Change Customer Code,แก้ไขรหัสร้านค้า,修改客戶號,ဖောက်သည်ကုဒ်နံပါတ် ပြောင်းလဲပါ,Thay đổi Mã Khách Hàng,ផ្លាស់ប្តូរលេខកូដអតិថិជន
+Change Password,Change Password,เปลี่ยนรหัสผ่าน,修改密碼,စကားဝှက်ကိုပြောင်းရန်,Thay đổi mật khẩu,ប្តូរលេខសម្ងាត់
+Change sales organization,Change sales organization,แก้ไข sales organization,修改裕利銷售組織,အရောင်းအဖွဲ့အစည်း ပြောင်းလဲပါ,Thay đổi Sales Org,ប្តូរលេខកូដអង្គភាពលក់
+Change Shipping Address,Change Shipping Address,แก้ไขที่อยู่จัดส่ง,修改送貨地址,ပို့ဆောင်ရန် လိပ်စာကို ပြောင်းလဲပါ,Thay đổi Địa chỉ giao hàng,ផ្លាស់ប្តូរអាសយដ្ឋានដឹកជញ្ជូន
+Charge 14 days,Charge 14 days,Charge 14 days,發票日起14天內付款,Charge 14 days,Charge 14 days,Charge 14 days
+Charge 14 days with 2%,Charge 14 days with 2%,Charge 14 days with 2%,發票日起14天內付款,Charge 14 days with 2%,Charge 14 days with 2%,Charge 14 days with 2%
+Charge 15 days,Charge 15 days,Charge 15 days,發票日起15天內付款,Charge 15 days,Charge 15 days,Charge 15 days
+Charge 15 days with 0.7% discount,Charge 15 days with 0.7% discount,Charge 15 days with 0.7% discount,發票日起15天內付款折扣0.7%,Charge 15 days with 0.7% discount,Charge 15 days with 0.7% discount,Charge 15 days with 0.7% discount
+Charge 20 days,Charge 20 days,Charge 20 days,發票日起20天內付款,Charge 20 days,Charge 20 days,Charge 20 days
+Charge 30 days,Charge 30 days,Charge 30 days,發票日起30天內付款,Charge 30 days,Charge 30 days,Charge 30 days
+Charge 7 days,Charge 7 days,Charge 7 days,出貨前匯款折扣3%,Charge 7 days,Charge 7 days,Charge 7 days
+Charge 7 days,Charge 7 days,Charge 7 days,發票日起7天內付款,Charge 7 days,Charge 7 days,Charge 7 days
+Charge 7 days with 0.5% discount,Charge 7 days with 0.5% discount,Charge 7 days with 0.5% discount,發票日起7天內付款折扣0.5%,Charge 7 days with 0.5% discount,Charge 7 days with 0.5% discount,Charge 7 days with 0.5% discount
+Charge 7 days with 1.5% discount,Charge 7 days with 1.5% discount,Charge 7 days with 1.5% discount,發票7天內付款折扣1.5%,Charge 7 days with 1.5% discount,Charge 7 days with 1.5% discount,Charge 7 days with 1.5% discount
+Check on Delivery - 7 days,Check on Delivery - 7 days,Check on Delivery - 7 days,貨到收款,Check on Delivery - 7 days,Check on Delivery - 7 days,Check on Delivery - 7 days
+Check our order status here,Check our order status here,ตรวจสอบสถานะการสั่งซื้อของเราที่นี่,按此查詢訂單狀態,ဤနေရာတွင် သင်၏အမှာစာ အခြေအနေကိုစစ်ဆေးပါ,Kiểm tra trạng thái đơn hàng tại đây,ពិនិត្យស្ថានភាពការបញ្ជាទិញរបស់យើងនៅទីនេះ
+Check Out,Check Out,เช็คเอาท์,送出訂單,အတည်ပြု ထွက်ခွါရန်,Thanh toán,គិតលុយ
+Choose from Template,Choose from Template,Choose from Template,自常用訂單範本加入產品,Choose from Template,Choose from Template,Choose from Template
+Choose from Template,Choose from Template,Choose from Template,自常用訂單範本加入產品,Choose from Template,Tạo đơn hàng từ biểu mẫu,Choose from Template
+Choose your template,Choose your template,Choose your template,自常用訂單範本加入產品,Choose from template,Danh sách biểu mẫu,Choose your template
+Clear,Clear,ลบข้อมูล,清除,ရှင်းလင်းပါ,Xoá,លុបចេញ
+Clear,Clear,ลบทั้งหมด,清除,ရှင်းလင်းရန်,Xoá,លុបចេញ
+Click the + in the label to have the bonus details,Click the + in the label to have the bonus details,Click the + in the label to have the bonus details,主+贈產品不相同，點選+確認搭贈內容,Click the + in the label to have the bonus details,Nhấp vào biểu tưởng +  để xem chi tiết hàng tặng,ចុចសញ្ញា + នៅក្នុងផ្លាកដើម្បីទទួលបានព័ត៌មានលម្អិតអំពីចំនួនដែលថែម
+Close,Close,ปิด,關閉,ပိတ်ရန်,Đóng,បិទ
+CLOSE,CLOSE,CLOSE,取消,CLOSE,CLOSE,CLOSE
+Closed,Closed,เสร็จสิ้น,Closed,Closed,Đã đóng,Closed
+Collective Number (Max length: 135 Characters),Collective Number (Max length: 135 Characters),Collective Number (สูงสุด 135 ตัวอักษร),Collective Number(上限135字元),စုပေါင်းအရေအတွက်(အများဆုံး စာလုံးရေ ၁၃၅ လုံး),Số thu thập (Độ dài tối đa: 135 ký tự),លេខរួម (វែងបំផុតត្រឹមតែ៖ ១៣៥ តួ)
+Company Name,Company Name,ชื่อร้านค้า,公司名稱,ကုမ္ပဏီအမည်,Tên Hãng Sản xuất,ឈ្មោះក្រុមហ៊ុន
+Completed,Completed,เสร็จสมบูรณ์,已建立訂單,ပြီးစီးပါပြီ,Hoàn tất,បានបញ្ចប់
+Confirm,Confirm,ยืนยัน,確認,အတည်ပြုပါ,Xác nhận,បញ្ជាក់
+Confirm Password,Confirm Password,ใส่รหัสผ่านใหม่อีกครั้ง,重新輸入新密碼,စကားဝှက်အသစ်ကိုထပ်မံရိုက်ထည့်ပါ,Xác nhận mật khẩu,បញ្ជាក់លេខសម្ងាត់
+Contact details not available,Contact details not available,Contact details not available,發生錯誤，請聯繫裕利。,Contact details not available,Contact details not available,មិនមានព័ត៌មានទំនាក់ទំនង
+Contact Number,Contact Number,Contact Number,聯絡人電話,Contact Number,Số liên hệ,លេខទំនាក់ទំនង
+Contact Person,Contact Person,ชื่อร้านค้า,訂單聯絡人 (必填),ဖောက်သည်၏ နာမည်,Người liên hệ,បុគ្គលដែលត្រូវទាក់ទង
+Contact Us,Contact Us,ติดต่อเรา,聯絡我們,ကျွန်တော်တို့ကို ဆက်သွယ်ရန်,Liên hệ,ទាក់ទងមកយើងខ្ញុំ
+CONTACT US TO SIGN UP NOW!,CONTACT US TO SIGN UP NOW!,ติดต่อเราเพื่อสมัครเริ่มใช้บริการ!,連絡我們以註冊,ယခုပင် စာရင်းသွင်းရန် ကျွန်ုပ်တို့ထံ ဆက်သွယ်ပါ,Liên lạc với Chúng tôi để mở tài khoản từ bây giờ!,ទាក់ទងមកយើងដើម្បីចុះឈ្មោះឥឡូវនេះ!
+Contain at least 1 Lower case character (a to z),Contain at least 1 Lower case character (a to z),มีอักขระตัวพิมพ์เล็กอย่างน้อย 1 ตัว (a ถึง z),至少包含1個以上小寫英文字元(a-z),အနည်းဆုံး စာလုံးအသေး 1 လုံး (a မှ z) ပါဝင်ရမည်,Chứa ít nhất 1 ký tự chữ thường (a đến z),មានតួអក្សរអក្សរតូចយ៉ាងហោចណាស់ 1 (a ដល់ z)
+Contain at least 1 Upper case character (A to Z),Contain at least 1 Upper case character (A to Z),มีอักขระตัวพิมพ์ใหญ่อย่างน้อย 1 ตัว (A ถึง Z),至少包含1個以上大寫英文字元(A-Z),အနည်းဆုံး စာလုံးအကြီး 1 လုံး (A မှ Z) ပါဝင်ရမည်,Chứa ít nhất 1 ký tự chữ HOA (A đến Z),មានតួអក្សរអក្សរធំយ៉ាងហោចណាស់ 1 (A ដល់ Z)
+Contain at least a numeric character (0 to 9),Contain at least a numeric character (0 to 9),มีตัวเลขอย่างน้อย 1 ตัว (0 ถึง 9),至少包含1個以上數字(0-9),အနည်းဆုံး ဂဏန်းအက္ခရာ (0 မှ 9) အထိ ပါဝင်ရမည်,Chứa ít nhất một ký tự số (0 đến 9),យ៉ាងហោចណាស់មានតួអក្សរលេខ (0 ដល់ 9)
+Contain at least one special character from the list (i.e. _,#,?,!,@,\$,%
+Contract Expiry Date,Contract Expiry Date,Contract Expiry Date,Contract Expiry Date,Contract Expiry Date,Hợp đồng sẽ hết hiệu lực vào ngày,Contract Expiry Date
+Contract Number,Contract Number,Contract Number,Contract Number,Contract Number,Số hợp đồng,Contract Number
+Contract Quantity,Contract Quantity,Contract Quantity,Contract Quantity,Contract Quantity,Số lượng hợp đồng,Contract Quantity
+Contract Reference,Contract Reference,Contract Reference,Contract Reference,Contract Reference,Số tham chiếu hợp đồng,Contract Reference
+Contract Selection,Contract Selection,Contract Selection,Contract Selection,Contract Selection,Chọn số hợp đồng,Contract Selection
+Country,Country,ประเทศ,國家,နိုင်ငံ,Quốc gia,ប្រទេស
+Create New Order,Create New Order,Create New Order,建立新訂單,Create New Order,Tạo mới đơn hàng,បង្កើតការបញ្ជាទិញថ្មី
+Create Order,Create Order,สร้างคำสั่งซื้อ,建立新訂單,အမှာစာများ ဖန်တီးပါ,Tạo đơn hàng,បង្កើតការបញ្ជាទិញ
+Create Return,Create Return,Create Return,Create Return,Create Return,Create Return,បង្កើតការបញ្ជូនផលិតផលត្រឡប់មកវិញ
+Created Date,Created Date,Created Date,訂單建立日期,Created Date,Ngày tạo đơn hàng,កាលបរិច្ឆេទដែលបានបង្កើត
+Credit Notes,Credit Notes,ใบลดหนี้,Credit Notes,Credit Notes,Giấy báo có,Credit Notes
+Credit Remaining,Credit Remaining,ยอดใบลดหนี้คงเหลือ,Credit Remaining,Credit Remaining,Tín dụng còn lại,Credit Remaining
+Customer Classification,Customer Classification,Customer Classification,客戶分類,Customer Classification,Phân loại Khách Hàng,ចំណាត់ថ្នាក់អតិថិជន
+Customer Details,Customer Details,รายละเอียดร้านค้า,客戶資訊細項,ဖောက်သည်၏ အသေးစိတ်အချက်အလက်,Thông tin chi tiết Khách Hàng,ព័ត៌មានលម្អិតរបស់អតិថិជន
+Customer is suspended please contact ZP Admin for support,Customer is suspended please contact ZP Admin for support,ร้านค้านี้ถูกระงับ กรุณาติดต่อทีม ZP Admin,請與信用部聯繫,ဖောက်သည်အား ဆိုင်းငံ့ထားသည်။ ကျေးဇူးပြုပြီး ZP Admin ကို အကူအညီတောင်းပါ,Mã Khách Hàng tạm ngừng vui lòng liên hệ bộ phận chăm Khách Hàng để được hỗ trợ,លេខកូដអតិថិជនត្រូវបានផ្អាក សូមទាក់ទងផ្នែករដ្ឋបាល ZP ដើម្បីជួយ ត្រួតពិនិត្យ
+"Customer is suspended, please contact ZP Admin for support","Customer is suspended, please contact ZP Admin for support",ร้านค้านี้ถูกระงับ กรุณาติดต่อทีม ZP Admin,請與信用部聯繫,ဖောက်သည်အား ဆိုင်းငံ့ထားသည်။ ကျေးဇူးပြုပြီး ZP Admin ကို အကူအညီတောင်းပါ,"Mã Khách Hàng tạm ngừng, vui lòng liên hệ bộ phận chăm Khách Hàng để được hỗ trợ",លេខកូដអតិថិជនត្រូវបានផ្អាក សូមទាក់ទងផ្នែករដ្ឋបាល ZP ដើម្បីជួយ ត្រួតពិនិត្យ
+Customer Local Group,Customer Local Group,Customer Local Group,客戶屬性,Customer Local Group,Kênh(Nhóm) Khách Hàng,ប្រភេទនៃអតិថិជន
+Customer Name,Customer Name,ชื่อร้านค้า,客戶名稱,ဖောက်သည်၏ နာမည်,Tên Khách Hàng,ឈ្មោះអតិថិជន
+Customer PO Reference (Max length: 35 Characters),Customer PO Reference (Max length: 35 Characters),หมายเลข PO (สูงสุด 35 ตัวอักษร),客戶採購單號，上限35 字元(不接受中文),ဖောက်သည် PO ရည်ညွှန်း ချက် (အများဆုံး စာလုံးရေ ၃၅ လုံး ),PO(Mã mua hàng) tham chiếu (Độ dài tối đa: 35 ký tự),លេខយោងនៃការបញ្ជាទិញ របស់អតិថិជន (វែងបំផុតត្រឹម៖ ៣៥ តួ)
+Customer PO Reference Required,Customer PO Reference Required,กรุณาใส่หมายเลข PO,客戶PO採購單號,ဖောက်သည် PO ရည်ညွှန်း ချက် လိုအပ်သည်,Yêu cầu PO (Mã mua hàng) tham chiếu,ការបញ្ជាទិញ របស់អតិថិជននិងឯកសារយោងរបស់ការបញ្ជាទិញដែលតំរូវអោយមាន
+Customer ship to ID,Customer ship to ID,รหัสที่อยู่จัดส่งร้านค้า,客戶送貨地址代碼,ဖောက်သည်၏ ကုန်ပစ္စည်းပို့ရန်လိပ်စာနံပါတ်,Mã Địa chỉ giao hàng:,លេខសំគាល់អាស័យដ្ឌានដឹកជញ្ជូនទៅកាន់អតិថិជន
+Customer sold to ID,Customer sold to ID,รหัสร้านค้า,客戶代碼,ဖောက်သည်၏ အရောင်း လိပ်စာနံပါတ်,Mã Khách hàng:,លេខសំគាល់របស់អតិថិជនដែលលក់ទៅអោយ
+Date Filter,Date Filter,ตัวกรองวันที่,日期篩選,ရက်စွဲဖြင့်စစ်ထုတ်ရန်,Lọc theo ngày,តម្រងតាមកាលបរិច្ឆេទ
+"days, Please update your password before it expires","days, Please update your password before it expires",วัน กรุณาเปลี่ยนรหัสผ่านของคุณก่อนวันหมดอายุ,過期，請更新您的密碼,ရက်အတွင်းကုန်ဆုံးပါမည်။ သင်၏စကားဝှက်ကို သက်တမ်း မကုန်မှီ ကျေးဇူးပြု၍ မွမ်းမံပါ,"ngày, vui lòng cập nhật mật khẩu trước khi hết hạn.",រាល់ថ្ងៃ សូមធ្វើបច្ចុប្បន្នភាព (ផ្លាស់ប្តូរ)​លេខសម្ងាត់របស់អ្នកមុនពេលវាផុតកំណត់
+days. Please update your password before it expires,days. Please update your password before it expires,วัน กรุณาเปลี่ยนรหัสผ่านของคุณก่อนวันหมดอายุ,過期，請更新您的密碼,ရက်အတွင်းကုန်ဆုံးပါမည်။ သင်၏စကားဝှက်ကို သက်တမ်း မကုန်မှီ ကျေးဇူးပြု၍ မွမ်းမံပါ,ngày. vui lòng cập nhật mật khẩu trước khi hết hạn.,រាល់ថ្ងៃ សូមធ្វើបច្ចុប្បន្នភាព (ផ្លាស់ប្តូរ)​លេខសម្ងាត់របស់អ្នកមុនពេលវាផុតកំណត់
+Deals:,Deals:,Deals:,搭贈/價格條件:,Deals:,Chính sách bán hàng,ការផ្តល់ជូនពិសេស
 Delivered,Delivered,จัดส่งแล้ว,已配達,ပေးပို့သည်,Đã giao hàng,បានដឹកជញ្ចូន
 Delivered - partial rejection,Delivered - partial rejection,จัดส่งแล้ว - ปฏิเสธบางส่วน,取消-部分拒絕,ပေးပို့သည် - တစ်စိတ်တစ်ပိုင်း ငြင်းပယ်ခြင်း,Đã giao - một phần,បានដឹកជញ្ចូន-ការច្រានចោលជាផ្នែក
 Delivered - rejected upon delivery,Delivered - rejected upon delivery,จัดส่งแล้ว - ปฏิเสธการจัดส่ง,取消-拒收,ပေးပို့သည် - ပေးပို့ချိန်တွင် ငြင်းပယ်ခြင်း,Đã giao - trả hàng tại chỗ,បានដឹកជញ្ចូន-បានច្រានចោលនៅពេលដឹកជញ្ជូន
+Discount:,Discount:,ส่วนลด:,折扣:,လျှော့စျေး:,Chiết khấu:,បញ្ចុះតម្
+DO IT LATER,DO IT LATER,DO IT LATER,下次再提醒我,DO IT LATER,DO IT LATER,DO IT LATER
+Do you want to proceed?,Do you want to proceed?,ต้องการดำเนินการต่อหรือไม่?,請確認是否執行,ဆက်လုပ်ဆောင် ချင်ပါသလား?,Quý Khách Hàng có muốn tiếp tục không?,តើអ្នកចង់បន្តទេ?
+Done,Done,Done,完成,ပြီးပြီ,Hoàn thành,រួចរាល់
+Due Date,Due Date,วันครบกําหนด,Due Date,Due Date,Ngày đáo hạn,Due Date
+Email,Email,อีเมล์,E-mail電子郵件,အီးမေးလ်,Nhận email: Địa chỉ email,អ៊ីមែល
+Email will be sent in your language of choice,Email will be sent in your language of choice,อีเมล์จะถูกส่งให้คุณด้วยภาษาที่เลือก,將以您選擇的語言發送電子郵件,သင်ရွေးချယ်သောဘာသာစကားဖြင့် အီးမေးလ်များကိုပေးပို့လိမ့်မည်,Thư điện tử (email) sẽ được gửi theo ngôn ngữ của Quý Khách chọn,អ៊ីមែលនឹងត្រូវបានផ្ញើជាភាសាដែលអ្នកជ្រើសរើស
+Empty Cart,Empty Cart,ลบสินค้าในตะกร้า,未有選購產品,စျေးဝယ်လှည်းကို ရှင်းလင်းရန်,Giỏ hàng trống,រទេះផលិតផលទទេ
+Enter your text here,Enter your text here,กรุณาใส่ข้อความในช่องนี้,輸入文字,သင်၏စာသားကိုဒီမှာထည့်ပါ,Nhập thông tin ở đây,បញ្ចូលអត្ថបទរបស់អ្នកនៅទីនេះ
+Error,Error,Error,錯誤,အမှား,Lỗi,មានបញ្ហា
+Expired,Expired,หมดอายุ,Expired,Expired,Hết hạn,Expired
+Expired 1 day(s) ago,Expired 1 day(s) ago,หมดอายุ 1 วันที่ผ่านมา,Expired 1 day(s) ago,Expired 1 day(s) ago,Đã hết hạn cách đây 1 ngày,Expired 1 day(s) ago
+Expiry Date:,Expiry Date:,วันหมดอายุ:,有效日:,သက်တမ်းကုန်ဆုံးရက်:,Hạn dùng,កាលបរិច្ឆេទផុតកំណត់
+eZRx is unavailable at the moment.,eZRx is unavailable at the moment.,บริการ eZRx ไม่สามารถใช้บริการได้ขณะนี้,eZRx 目前正在進行系統更新,ယခုအချိန်တွင် eZRx အသုံးပြုရန် မရနိုင်ပါ။,Hệ thống eZRx hiện chưa có tính năng này.,eZRx មិនអាចប្រើបានទេនៅពេលនេះ។
+EZRX No.,EZRX No.,EZRX No.,eZRx訂單號碼,EZRX No.,số eZRx,លេខ EZRX
+eZRx Number,eZRx Number,eZRx Number,eZRx Number,eZRx Number,Số  eZRx,eZRx Number
+eZRx will be unavailable from,eZRx will be unavailable from,บริการ eZRx ไม่สามารถใช้บริการได้ตั้งแต่,預計維護時間,eZRx သည်,Hệ thống eZRx đang được bảo trì từ,eZRx will be unavailable from
+eZRx will be undergoing enhancements from,eZRx will be undergoing enhancements from,eZRx จะหยุดให้บริการชั่วคราวตามกำหนดการบริหารจัดการระบบตั้งแต่,eZRx將於台灣時間,ကြိုတင်စီစဉ်ထားသောပြုပြင်ထိန်းသိမ်းမှုအတွက်,Hệ thống eZRx đang được nâng cấp từ,eZRx នឹងត្រូវស្ថិតក្រោមការធ្វើបច្ចុប្បនភាពពី
+Fail to Get Shipping Address,Fail to Get Shipping Address,ไม่สามารถโหลดข้อมูลที่อยู่จัดส่งได้ในขณะนี้,Fail to Get Shipping Address,ကုန်ပစ္စည်းပို့ရန်လိပ်စာ ရရန်ပျက်ကွက်နေသည်,Lấy địa chỉ giao hàng chưa đúng,បរាជ័យក្នុងការទទួលអាសយដ្ឋានដឹកជញ្ជូន
+Failed,Failed,ไม่่สำเร็จ,Failed,Failed,Không đúng,Failed
+Favourites,Favourites,Favourites,我的最愛,Favourites,Favourites,Favourites
+Favourites,Favourites,Favourites,Favourites,Favourites,Yêu thích,Favourites
+Filter,Filter,Filter,篩選,Filter,Bộ lọc,តម្រង
+Filter,Filter,ตัวกรอง,篩選選,စစ်ထုတ်ရန်,Bộ lọc,តម្រង
+Final Price,Final Price,ราคารวม,價格,နောက်ဆုံးစျေး,Giá niêm yết,តម្លៃចុងក្រោយ
+First,First,First,First,ပထမ,Đầu tiên,ដំបូង
+For urgent enquiries please contact our customer service team.,For urgent enquiries please contact our customer service team.,สำหรับคำถามเร่งด่วน กรุณาติดต่อฝ่ายลูกค้าสัมพันธ์ eZRx 02 053 0000,若有緊急需求，請撥打專線: 0809-090-887 或與LINE@客服溝通園地聯繫,အရေးပေါ်စုံစမ်းမေးမြန်းလိုပါက ကျေးဇူးပြု၍ ကျွန်ုပ်တို့၏ ၀ န်ဆောင်မှုအဖွဲ့ကိုဆက်သွယ်ပါ။,Đối với các yêu cầu khẩn cấp vui lòng liên hệ với trung tâm dịch vụ khách hàng của chúng tôi qua số điện thoại miễn cước 1800 5555 58 và bấm số 3 để được hỗ trợ.,សម្រាប់ការសាកសួរជាបន្ទាន់ សូមទាក់ទងក្រុមសេវាកម្មអតិថិជនរបស់យើង។
+"For urgent enquiries, please contact our customer service team.","For urgent enquiries, please contact our customer service team.",สำหรับคำถามเร่งด่วน กรุณาติดต่อฝ่ายลูกค้าสัมพันธ์ eZRx 02 053 0000,若有緊急需求，請撥打專線: 0809-090-887 或與LINE@客服溝通園地聯繫,အရေးပေါ်စုံစမ်းမေးမြန်းလိုပါက ကျေးဇူးပြု၍ ကျွန်ုပ်တို့၏ ၀ န်ဆောင်မှုအဖွဲ့ကိုဆက်သွယ်ပါ။,"Đối với các yêu cầu khẩn cấp, vui lòng liên hệ với trung tâm dịch vụ khách hàng của chúng tôi qua số điện thoại miễn cước 1800 5555 58 và bấm số 3 để được hỗ trợ.",សម្រាប់ការសាកសួរជាបន្ទាន់ សូមទាក់ទងក្រុមសេវាកម្មអតិថិជនរបស់យើង។
+free,free,ฟรี,送,အခမဲ့,Tặng,ឥតគិតថ្
+get,get,ได้รับ,買,ရယူပါ,Mua,ទទួល
+Go to Order History,Go to Order History,Go to Order History,至訂單紀錄,Go to Order History,Lịch sử đơn hàng,ចូលទៅប្រវត្តិការបញ្ជាទិញ
+Go To Order Summary,Go To Order Summary,Go To Order Summary,下一步,Go To Order Summary,Đi đến đơn hàng tổng,ចូលទៅសង្ខេបការបញ្ជាទិញ
+Government Material Code:,Government Material Code:,Government Material Code:,健保碼:,အစိုးရကုန်ပစ္စည်း ကုဒ်နံပါတ်:,Mã sản phẩm của Hãng,លេខកូដផលិតផលរដ្ឋាភិបាល៖
+Grand Total:,Grand Total:,Grand Total:,總計:,Grand Total:,Tổng trị giá:,តំលៃសរុបរួម៖
+Hello,Hello,สวัสดี,您好,ဟယ်လို,Xin chào,ជំរាបសួរ
+Here is your Accounts summary,Here is your Accounts summary,นี่คือสรุปบัญชีของคุณ,Here is your Accounts summary,Here is your Accounts summary,Đây là bản tóm tắt Tài khoản của Quý Khách,Here is your Accounts summary
+History,History,ประวัติสั่งซื้อ,歷史紀錄,မှတ်တမ်း,Lịch sử,ប្រវត្តិនៃការប្រើប្រាស់
+Home,Home,หน้าหลัก,首頁,မူလစာမျက်နှာ,Trang chủ,ទំព័រដើម
+Identifier or password invalid.,Identifier or password invalid.,Identifier or password invalid.,識別或密碼無效,အမှတ်အသား သို့မဟုတ် စကားဝှက်မမှန်ကန်ပါ,Mã định danh hoặc mật khẩu không hợp lệ,អត្តសញ្ញាណ ឬលេខសម្ងាត់មិនត្រឹមត្រូវ។
+If you need additional help please write to support@ezrx.com,If you need additional help please write to support@ezrx.com,หากคุณต้องการความช่วยเหลือเพิ่มเติมโปรดเขียนถึง support@ezrx.com,若您需要其他的協助，請反應至 ezrx4u@zuelligpharma.com,သင်အကူအညီ ထပ်မံ လိုအပ်လျှင် support@ezrx.com သို့ အီးမေးလ်ရေးပါ,Nếu Quý Khách cần hỗ trợ thêm vui lòng gửi thư điện tử (email) về địa chỉ dat.hang@ezrx.com.vn,ប្រសិនបើអ្នកត្រូវការជំនួយបន្ថែម សូមសរសេរទៅកាន់ support@ezrx.com
+"If you need additional help, please write to support@ezrx.com","If you need additional help, please write to support@ezrx.com",หากคุณต้องการความช่วยเหลือเพิ่มเติมโปรดเขียนถึง support@ezrx.com,若您需要其他的協助，請反應至 ezrx4u@zuelligpharma.com,သင်အကူအညီ ထပ်မံ လိုအပ်လျှင် support@ezrx.com သို့ အီးမေးလ်ရေးပါ,Nếu Quý Khách cần hỗ trợ thêm vui lòng gửi thư điện tử (email) về địa chỉ dat.hang@ezrx.com.vn,ប្រសិនបើអ្នកត្រូវការជំនួយបន្ថែម សូមសរសេរទៅកាន់ support@ezrx.com
+Ignore,Ignore,ไม่สนใจ,忽略,လျစ်လျူရှုပါ။,Phớt lờ,មិនអើពើ
+In Process,In Process,อยู่ระหว่างดำเนินการ,訂單確認中,ဆက်လက်လုပ်ဆောင်နေသည်,Đang xử lý,កំពុងដំណើរការ
+In Progress,In Progress,กําลังดําเนินการ,In Progress,In Progress,Đang xử lý,In Progress
+In Stock:,In Stock:,สินค้าในสต๊อก:,*:,ကုန်ပစ္စည်းလက်ဝယ်ရှိ:,Còn hàng:,មាននៅក្នុងស្តុក
+Incorrect user credentials please try again.,Incorrect user credentials please try again.,ข้อมูลที่ใช้เข้าสู่ระบบไม่ถูกต้อง กรุณาตรวจสอบดูอีกครั้ง,請稍後再試或聯繫裕利,သုံးစွဲသူအထောက်အထားများ မမှန်ကန်ပါ၊ ထပ်မံကြိုးစားပါ,Thông tin đăng nhập người dùng không chính xác vui lòng thử lại.,អត្តសញ្ញាណអ្នកប្រើប្រាស់មិនត្រឹមត្រូវ សូមព្យាយាមម្តងទៀត។
+Incorrect username and/or password.,Incorrect username and/or password.,ชื่ื่อผู้ใช้งาน และ/หรือ รหัสผ่านไม่ถูกต้อง,錯誤的使用者名稱或密碼,အသုံးပြုသူအမည် နှင့်/သို့မဟုတ် စကားဝှက် မမှန်ကန်ပါ,Tài khoản hoặc mật khẩu không đúng,ឈ្មោះអ្នកប្រើប្រាស់ និង/ឬពាក្យសម្ងាត់មិនត្រឹមត្រូវ។
+Info,Info,Info,資訊,သတင်းအချက်အလက်,Thông tin,ព័ត៌មាន
+Inhaler,Inhaler,ยาพ่น,吸入器,ရှူရှိုက်ရသောဆေး,Ống hít,ឧបករណ៍ហឺត
+Internal Server Error,Internal Server Error,เกิดความผิดพลาดภายในระบบ,請稍後再試或聯繫裕利,အတွင်းဆာဗာ မှားယွင်းမှု,Lỗi do hệ thống nội bộ,Server ខាងក្នុងមានបញ្ហា
+Invoice,Invoice,Invoice,發票資訊,Invoice,Thông tin hóa đơn,វិក្កយបត្រ
+Invoice Amount,Invoice Amount,ยอดเงินที่ต้องชำระ,Invoice Amount,Invoice Amount,Số tiền trên hóa đơn,Invoice Amount
+Invoice Date,Invoice Date,หมายเลขใบแจ้งหนี้,發票日,Invoice Date,Ngày hóa đơn,កាលបរិច្ឆេទចេញវិក្កយបត្រ
+Invoice Number,Invoice Number,หมายเลข Invoice,裕利發票號碼REF NO,ငွေတောင်းခံလွှာ နံပါတ်,Số hoá đơn,លេខវិក្កយបត្រ
+Invoice Price,Invoice Price,Invoice Price,Invoice Price,Invoice Price,Giá tiền,Invoice Price
+Invoices,Invoices,ใบแจ้งหนี้,Invoices,Invoices,Thông tin hóa đơn,Invoices
+Item count can't be greater than 999999,Item count can't be greater than 999999,Item count can't be greater than 999999,商品數量不能大於 999999,ပစ္စည်းအရေအတွက် ၉၉၉ ထက် ပိုကြီးသောကြောင့် မရပါ,Số lượng sản phẩm không được lớn hơn 999999,ចំនួនផលិតផលមិនអាចលើសពី ៩៩៩៩៩៩ បានទេ
+Item(s) can't add to the cart!,Item(s) can't add to the cart!,Item(s) can't add to the cart!,產品無法加入購物車,Item(s) can't add to the cart!,Item(s) can't add to the cart!,ផលិតផលមិនអាចបញ្ចូលទៅក្នុងរទេះផលិតផលបានទេ!
+Items successfully added to cart,Items successfully added to cart,เพิ่มสินค้าลงตะกร้าเรียบร้อย,商品已成功加至購物車,ပစ္စည်းများလှည်းထဲသို့အောင်မြင်စွာထည့်သွင်း ပြီးပါပြီ,Thêm sản phẩm vào trong giỏ hàng thành công,ផលិតផលត្រូវបានដាក់បញ្ចូលទៅក្នុងរទេះផលិតផលដោយជោគជ័យ
+Language,Language,ภาษา,語言,ဘာသာစကား,Ngôn ngữ,ភាសា
+Language (Please enter your language in the box),Language (Please enter your language in the box),Thai =,語言（請輸入您選擇的語言）,Burmese =,Ngôn ngữ (Vui lòng chọn/nhập ngôn ngữ của Quý Khách vào ô),ភាសា (សូមបញ្ចូលភាសារបស់អ្នកក្នុងប្រអប់
+Language Preferences,Language Preferences,ภาษาที่คุณเลือก,設定語言,ဘာသာစကားရွေးချယ်မှု,Tuỳ chọn ngôn ngữ,ជម្រើសភាសា
+Later,Later,ภายหลัง,下次吧,နောက်တော့,Sau,ពេលក្រោយ
+License,License,License,管證字號,License,Giấy phép,អាជ្ញាប័ណ្ណ
+License Description :,License Description :,License Description :,許可證說明 :,License Description :,Tên Giấy phép :,ការពិពណ៌នាអំពីអាជ្ញាប័ណ្ណ
+License Number :,License Number :,License Number :,許可證號 :,License Number :,Số giấy phép:,លេខអាជ្ញាប័ណ្ណ
+License Type :,License Type :,License Type :,許可證類別 :,License Type :,Loại giấy phép :,ប្រភេទអាជ្ញាប័ណ្ណ
+Licenses,Licenses,Licenses,管證資料,Licenses,Licenses,អាជ្ញាប័ណ្ណ
+List Price:,List Price:,ราคาปลีก:,發票價:,စာရင်းမှစျေးနှုန်း:,Giá gốc:,តារាងតម្លៃ
+Loading,Loading,กำลังโหลด,資料載入中,ဝင်ရန်ကြိုးစားနေသည်,Đang tải,កំពុងបើក
+Login,Login,เข้าสู่ระบบ,登入,လော့ဂ်အင်,Đăng nhập,ចូលប្រើ
+Login on behalf,Login on behalf,Login on behalf,代理登入,Login on behalf,Đăng nhập đại diện,ចូលក្នុងនាម
+Login on behalf,Login on behalf,Login on behalf,Login on behalf,Login on behalf,Đăng nhập đại diện,ចូលក្នុងនាម
+Login to HomePage,Login to HomePage,เข้าสู่ระบบหน้าแรก,登入首頁,မူလစာမျက်နှာ သို့ဝင်ပါ,Đăng nhập vào Trang chủ,ចូលទៅទំព័រទំព័រដើម
+Login with SSO,Login with SSO,เข้าสู่ระบบด้วย SSO,單一登入,SSO ဖြင့်ဝင်ရောက်ပါ။,Đăng nhập bằng SSO,เข้าสู่ระบบด้วย SSO
+Logout,Logout,ออกจากระบบ,登出,ထွက်ပါ,Thoát,ចាកចេញ
+Manage Order Templates,Manage Order Templates,Manage Order Templates,Manage Order Templates,Manage Order Templates,Quản lý đơn hàng mẫu,គ្រប់គ្រងទម្រង់បញ្ជាទិញ
+Manage your Templates,Manage your Templates,คำสั่งซื้อแบบ Template,儲存的訂單範例,သင်၏ အမှာစာ ပုံစံ များကိုစီမံပါ,Quản lý đơn hàng mẫu,គ្រប់គ្រងទម្រង់របស់អ្នក
+MANDARIN,MANDARIN,MANDARIN,繁體中文,MANDARIN,MANDARIN,ភាសាចិន
+Mat No:,Mat No:,หมายเลขสินค้า:,產品代碼:,ကုန်ပစ္စည်း နံပါတ်:,Mã sản phẩm:,លេខកូដផលិតផល
+Material Description,Material Description,ชื่อสินค้า,以產品品名,ကုန်ပစ္စည်းဖော်ပြချက်,Tên Sản phẩm,ការពិពណ៌នាអំពីផលិតផល៖
+Material Number,Material Number,รหัสสินค้า,產品代碼搜尋,နံပါတ်,Mã Sản Phẩm,លេខកូផលិតផល៖
+Material Number:,Material Number:,รหัสสินค้า:,產品代碼搜尋:,နံပါတ်:,Mã Sản Phẩm:,លេខកូដផលិតផល
+Material Qty:,Material Qty:,จำนวน:,數量:,အရေအတွက်:,Số lượng sản phẩm:,ចំនួនផលិតផល
+Material Visa Number,Material Visa Number,Material Visa Number,Material Visa Number,Material Visa Number,Số Đăng kí lưu hành,Material Visa Number
+Minimum length of 10 characters,Minimum length of 10 characters,ความยาวขั้นต่ำ 10 ตัวอักษร,最少需10個字元,အနည်းဆုံး စာလုံး 10 အရှည် ပါဝင်ရမည်,Chiều dài ít nhất là 10 ký tự,ប្រវែងអប្បបរមា 10 តួអក្សរ
+Mobile Number,Mobile Number,เบอร์มือถือ,訂單聯絡人電話 (必填),လက်ကိုင်ဖုန်း နံပါတ်,Số Điện Thoại Di động,លេខទូរស័ព្ទដៃ
+Must not contain any part of your username and/or name,Must not contain any part of your username and/or name,ต้องไม่ประกอบด้วยส่วนหนึ่งของชื่อผู้ใช้ และ/หรือ ชื่อของคุณ,不能與您的使用者名稱或姓名部分或全部相符,အသုံးပြုသူအမည်နှင့်/သို့မဟုတ် အမည်၏ အစိတ်အပိုင်းတစ်ခုမျှ မပါဝင်ရပါ။,Không được chứa bất kỳ tên đăng nhập và / hoặc tên của bạn,មិនត្រូវមានផ្នែកណាមួយនៃឈ្មោះអ្នកប្រើប្រាស់ និង/ឬឈ្មោះរបស់អ្នកទេ។
+My Cart,My Cart,ตะกร้าสินค้า,我的購物車,စျေးဝယ်လှည်း,Giỏ hàng của tôi,រទេះផលិតផលរបស់ខ្ញុំ
+My Favourites,My Favourites,My Favourites,從我的最愛選購,My Favourites,Danh sách sản phẩm,My Favourites
+Name,Name,Name,Name,Name,Tên,ឈ្មោ
+New Password,New Password,รหัสผ่านใหม่,新密碼,စကားဝှက် အသစ်,Mật khẩu mới,លេខសម្ងាត់ថ្
+New Payment,New Payment,การชําระเงินใหม่,New Payment,New Payment,Thanh toán mới,New Payment
+No,No,No,No,မဟုတ်ပါ,Không,ទេ
+No customer found,No customer found,ไม่พบชื่อร้านค้า,找不到此客戶,ဖောက်သည်ရှာမတွေ့ပါ,Không tìm thấy Khách Hàng,រកមិនឃើញអតិថិជន
+No filter result,No filter result,ไม่พบข้อมูล,沒有篩選結果,စစ်ထုတ်ပြီး ရလဒ်မရှိပါ,Kết quả lọc không có,គ្មានលទ្ធផល
+No items matched the search criteria,No items matched the search criteria,ไม่พบสินค้า,沒有符合搜索條件的項目,ရှာဖွေမှုသတ်မှတ်ချက်များနှင့် ကိုက်ညီသော ပစ္စည်းများမရှိပါ,Không có sản phẩm nào phù hợp với tiêu chí tìm kiếm,គ្មានផលិតផលដែលត្រូវនឹងលក្ខខណ្ឌទេ
+No items matched the search criteria,No items matched the search criteria,ไม่พบสินค้า,No items matched the search criteria,ရှာဖွေမှုသတ်မှတ်ချက်များနှင့် ကိုက်ညီသော ပစ္စည်းများမရှိပါ,Không có sản phẩm nào phù hợp với tiêu chí tìm kiếm,គ្មានផលិតផលដែលត្រូវនឹងលក្ខខណ្ឌដែលអាចស្វែងរកឃើញទេ
+No materials added,No materials added,ไม่มีการเพิ่มสินค้าลงตะกร้า,未增加產品項目,မည်သည့် ကုန်ပစ္စည်း မှပေါင်းထည့် မထားပါ,Không có sản phẩm nào được thêm vào,គ្មានផលិតផលត្រូវបានដាក់បន្ថែមទេ
+No materials found.,No materials found.,ไม่พบสินค้า.,找不到此產品,ပစ္စည်းများရှာမတွေ့ပါ,Không tìm thấy sản phẩm,រកមិនឃើញផលិតផលនេះទេ។
+No order found,No order found,ไม่พบคำสั่งซื้อ,沒有訂單資料,ကုန်ပစ္စည်း အမှာစာမတွေ့ပါ,Không tìm thấy đơn hàng,រកមិនឃើញការបញ្ជាទិញ
+No order found,No order found,ไม่พบข้อมูลคำสั่งซื้อ,沒有訂單資料,ကုန်ပစ္စည်း အမှာစာ မတွေ့ပါ,Không tìm thấy đơn hàng,រកមិនឃើញការបញ្ជាទិញ
+Not Authorized!,Not Authorized!,ไม่ได้รับอนุญาตให้ใช้งาน!,未授權,ခွင့်ပြုချက်မရှိပါ,Chưa có quyền!,មិនអនុញ្ញាត!
+Not Available,Not Available,ไม่พบข้อมูล,依業務報價,မရရှိနိုင်ပါ,Chưa có sẵn,មិនមាន
+Note,Note,หมายเหตุ,備註,မှတ်စု,Lưu ý,កំណត់សំគាល់
+Notification Settings,Notification Settings,Notification Settings,Notification Settings,အသိပေးချက် ဆက်တင်များ,Cài đặt thông báo,ការកំណត់ការជូនដំណឹង
+Notifications,Notifications,การแจ้งเตือน,通知,အသိပေးချက်များ,Thông báo,ការជូនដំណឹង
+Off,Off,ปิด,關閉,ပိတ်,Tắt,បិទ
+Ok,Ok,ตกลง,Ok,Ok,Đồng ý,យល់ព្រម
+Old Password,Old Password,รหัสผ่านเก่า,舊密碼,စကားဝှက်အဟောင်း,Mật khẩu cũ,លេខសម្ងាត់ចាស់
+On,On,เปิด,開啟,ဖွင့်,Mở,បើក
+Oops! Search by material description /number is not available right now. You can continue searching by other criteria or try material search again later.,Oops! Search by material description /number is not available right now. You can continue searching by other criteria or try material search again later.,อ๊ะ! การค้นหาสินค้าด้วยชื่อสินค้า / รหัสสินค้าไม่สามารถใช้งานได้ในขณะนี้ คุณสามารถค้นหาสินค้าโดยใช้วิธีอื่นก่อนชั่วคราว หรือ ลองใหม่อีกครั้งในภายหลัง,查無此產品,ကုန်ပစ္စည်းဖော်ပြချက် / နံပါတ်အားဖြင့် ရှာဖွေခြင်းကို ယခုအချိန်တွင်မရနိုင်ပါ။ အခြားသတ်မှတ်ချက်များနှင့် ဆက်လက်ရှာဖွေနိုင်သည် (သို့)နောက်မှ တဖန် ရှာဖွေကြည့်ပါ။,Rất tiếc! Tìm kiếm theo tên sản phẩm/mã sản phẩm chưa có. Quý Khách Hàng vui lòng thử lại các điều kiện lọc khác hoặc thử lại sau.,ឱ! ស្វែងរកដោយការពិពណ៌នាសម្ភារៈ / លេខមិនមានទេឥឡូវនេះ។ អ្នកអាចបន្តការស្វែងរកតាមលក្ខណៈវិនិច្ឆ័យផ្សេងទៀត ឬព្យាយាមស្វែងរកសម្ភារៈម្តងទៀតនៅពេលក្រោយ។
+Open,Open,ค้างชำระ,Open,Open,Mở,Open
+or more,or more,หรือมากกว่า,或更多,သို့မဟုတ် ထိုထက်ပိုသည်,hoặc thêm,ឬច្រើនជាងនេះ
+Order,Order,สั่งซื้อสินค้า,訂單,ကုန်ပစ္စည်း အမှာစာ,Đơn hàng,ការបញ្ជាទិញ
+Order cannot be re-ordered! Please try later.,Order cannot be re-ordered! Please try later.,Order cannot be re-ordered! Please try later.,不可使用 '重新訂購' ， 請稍後再試。,Order cannot be re-ordered! Please try later.,Order cannot be re-ordered! Please try later.,ការបញ្ជាទិញមិនអាចបញ្ជាទិញឡើងវិញបានទេ! សូមព្យាយាមម្តងទៀតនៅពេលក្រោយ។
+Order Confirmation,Order Confirmation,Order Confirmation,訂單確認,Order Confirmation,Xác nhận đơn hàng,ការបញ្ជាក់ពីការបញ្ជាទិញ
+Order created,Order created,รับคำสั่งซื้อแล้ว,新增訂單,အမှာစာ ဖန်တီးသည်,Đã được tạo,ការបញ្ជារទិញត្រូវបានបង្កើត
+Order Creating,Order Creating,Order Creating,訂單建立中，請稍候查詢,Order Creating,Order Creating,ការបង្កើតការបញ្ជាទិញ
+Order Date:,Order Date:,วันที่สั่งซื้อ:,訂單日期:,ကုန်ပစ္စည်း အမှာစာ တင်သည့် ရက်စွဲ,Ngày đơn hàng:,កាលបរិច្ឆេទបញ្ជាទិញ
+Order Details,Order Details,Order Details,訂單詳細內容,Order Details,Chi tiết đơn hàng,ព័ត៌មានលម្អិតនៃការបញ្ជាទិញ
+Order Failed,Order Failed,Order Failed,訂單接收異常,Order Failed,Order Failed,ការបញ្ជាទិញបានបរាជ័យ
+Order History,Order History,ประวัติคำสั่งซื้อ,訂單記錄,ကုန်ပစ္စည်း အမှာစာ မှတ်တမ်း,Lịch sử đơn hàng,ប្រវត្តិនៃការបញ្ជាទិញ
+Order No:,Order No:,หมายเลขคำสั่งซื้อ:,訂單號碼:,ကုန်ပစ္စည်း အမှာစာ နံပါတ်,Số đơn hàng:,លេខបញ្ជាទិញ
+Order packed and ready for delivery,Order packed and ready for delivery,แพ๊คสินค้าเรียบร้อยและเตรียมจัดส่ง,撿貨作業,အမှာစာ ကို ထုပ်ပိုးပြီး ပို့ဆောင်ရန် အသင့်ဖြစ်နေပါပြီ။,Đã đóng gói,កុំម្ម៉ង់បានវេចខ្ចប់រួច និងរួចរាល់សំរាប់ដឹកចេញ
+Order Placed Failed,Order Placed Failed,ส่งคำสั่งซื้อไม่สำเร็จ,未成功送出訂單,ကုန်ပစ္စည်း အမှာစာ တင်ခြင်း မအောင်မြင်ပါ,Đặt hàng không thành côngĐặt hàng không thành công,ការបញ្ជាទិញបានបរាជ័យ
+Order Placed Successfully,Order Placed Successfully,ส่งคำสั่งซื้อเรียบร้อยแล้ว,已成功下單,ကုန်ပစ္စည်း အမှာစာ တင်ခြင်း အောင်မြင်ပါပြီ,Đặt hàng thành công,ការបញ្ជាទិញត្រូវបានធ្វើឡើងដោយជោគជ័យ
+Order Status,Order Status,ไม่่สำเร็จ,Order Status,Order Status,Không đúng,ស្ថានភាពកុំម្ម៉ង់
+Order Summary,Order Summary,สรุปคำสั่งซื้อ,購物清單,အမှာစာ အကျဉ်းချုပ်,Tổng quan đơn hàng,សង្ខេបការបញ្ជាទិញ
+Order Summary Update,Order Summary Update,อัปเดตสรุปคำสั่งซื้อ,下單資訊更新,အမှာစာအကျဉ်းချုပ်,Cập nhật tổng đơn hàng,បច្ចុប្បន្នភាពព័ត៌មានសង្ខេបនៃការបញ្ជាទិញ
+Order Type,Order Type,ประเภทคำสั่งซื้อ,訂單類型,ကုန်ပစ္စည်း အမှာစာ အမျိုးအစား,Loại đơn,ប្រភេទនៃការបញ្ជាទិញ
+Order Value,Order Value,ยอดสั่งซื้อ,訂單金額,ကုန်ပစ္စည်း အမှာစာ တန်ဖိုး,Giá trị đơn hàng,តម្លៃនៃការបញ្ជាទិញ
+Ordered By,Ordered By,Ordered By,訂購人,Ordered By,Phụ trách đặt hàng: đặt hàng bởi,បញ្ជាទិញដោយ
+Orders,Orders,การสั่งซื้อ,訂單,အမှာစာများ,Đơn hàng,ការបញ្ជាទិញ
 Out for delivery,Out for delivery,อยู่ระหว่างขนส่ง,配送中,ပေးပို့ရန် ထွက်လာပါပြီ။,Đang giao hàng,ដឹកចេញហើយ
 Out for redelivery,Out for redelivery,อยู่ระหว่างขนส่งอีกครั้ง,配送中,ပြန်လည်ပေးပို့ခြင်းအတွက် ထွက်လာပါပြီ။,Giao lại,ដឹកចេញសារឡើងវិញហើយ
-Picking in progress,Picking in progress,กำลังดําเนินการแพ๊คสินค้า,撿貨作業,ကောက်ယူနေဆဲဖြစ်သည်။,Đang đóng gói,ការរៀបចំកំពុងដំនើរការ
-Order packed and ready for delivery,Order packed and ready for delivery,แพ๊คสินค้าเรียบร้อยและเตรียมจัดส่ง,撿貨作業,အမှာစာ ကို ထုပ်ပိုးပြီး ပို့ဆောင်ရန် အသင့်ဖြစ်နေပါပြီ။,Đã đóng gói,កុំម្ម៉ង់បានវេចខ្ចប់រួច និងរួចរាល់សំរាប់ដឹកចេញ
-Order created,Order created,รับคำสั่งซื้อแล้ว,新增訂單,အမှာစာ ဖန်တီးသည်,Đã được tạo,ការបញ្ជារទិញត្រូវបានបង្កើត
+out of,out of,out of,第,ထဲက,Hết,អស់ពី
+Outstanding,Outstanding,ค้างชำระ,Outstanding,Outstanding,Chưa thanh toán,Outstanding
+Overdue,Overdue,เกินกำหนดชำระ,Overdue,Overdue,Quá hạn,Overdue
+Override Price,Override Price,แก้ไขราคา,修改價格,စျေးနှုန်း ပယ်ဖျက်ရန်,Ghi đè giá,លុបលើតម្លៃមុន
+Overview,Overview,ภาพรวม,Overview,Overview,Tổng quan,ទិដ្ឋភាពទូទៅ
+Password,Password,รหัสผ่าน,密碼,စကားဝှက်,Mật khẩu,លេខសម្ងាត់
+Password cannot be empty.,Password cannot be empty.,กรุณาระบุรหัสผ่าน,密碼不得為空,စကားဝှက် အလွတ်မဖြစ်ရပါ,Mật khẩu đăng nhập không được để trống,ពាក្យសម្ងាត់មិនអាចទទេបានទេ។
+Password must meet the following requirements:,Password must meet the following requirements:,รหัสผ่านต้องเป็นไปตามข้อกำหนดต่อไปนี้:,密碼需要符合下列規範:,စကားဝှက်သည် အောက်ပါလိုအပ်ချက်များနှင့် ကိုက်ညီရမည်,Mật khẩu phải đáp ứng các yêu cầu sau:,ពាក្យសម្ងាត់ត្រូវតែបំពេញតាមតម្រូវការខាងក្រោម៖
+Payment,Payment,การชำระเงิน,Payment,Payment,Thanh toán,Payment
+Payment Summary,Payment Summary,สรุปการชําระเงิน,Payment Summary,Payment Summary,Tổng Thanh toán,Payment Summary
+Payment Term,Payment Term,Payment Term,付款方式,Payment Term,Hình thức thanh toán,លក្ខខណ្ឌនៃការទូទាត់ប្រាក់
+Payment Term Description,Payment Term Description,Payment Term Description,預設付款方式,Payment Term Description,Hình thức thanh toán,ការពិពណ៌នាអំពីរយៈពេលទូទាត់ប្រាក់
+Payment:,Payment:,การชำระเงิน:,付款:,ငွေပေးချေမှု:,Thanh toán:,Payment
+Payments in Progress,Payments in Progress,การชําระเงินอยู่ระหว่างดําเนินการ,Payments in Progress,Payments in Progress,Đang tiến hành thanh toán,Payments in Progress
+Payments Overview,Payments Overview,ภาพรวมการชําระเงิน,Payments Overview,Payments Overview,Tổng quan về Thanh toán,ស្ថានភាពកុំម្ម៉ង់
+Pending,Pending,รอดำเนินการ,條件確認中,Pending,Đang chờ,Pending
+Pending Actions,Pending Actions,Pending Actions,Pending Actions,Pending Actions,Pending Actions,សកម្មភាពកំពុងរង់ចាំ
 Pending release,Pending release,รอการดำเนินการ,條件確認中,စောင့်ဆိုင်းနေသော ထုတ်ဝေမှု,Đang chờ,ការបញ្ចេញស្ថិតនៅក្នុងការរង់ចាំ
 Pending release - credit check,Pending release - credit check,รอการดำเนินการ - การตรวจสอบเครดิต,條件確認中,စောင့်ဆိုင်းနေသော ထုတ်ဝေမှု - အကြွေးစစ်ဆေးခြင်း,Đang chờ - kiểm tra công nợ,ការបញ្ចេញស្ថិតនៅក្នុងការរង់ចាំ-
 Pending release - license issue,Pending release - license issue,รอการดำเนินการ - ปัญหาใบอนุญาต,條件確認中,စောင့်ဆိုင်းနေသော ထုတ်ဝေမှု - လိုင်စင်ပြဿနာ,Đang chờ - giấy phép,ការបញ្ចេញស្ថិតនៅក្នុងការរង់ចាំ-
 Pending release - month end closing,Pending release - month end closing,รอการดำเนินการ - ปิดบัญชีสิ้นเดือน,條件確認中,စောင့်ဆိုင်းနေသော ထုတ်ဝေမှု - လကုန်ပိတ်ခြင်း,Đang chờ - đóng sổ cuối tháng,ការបញ្ចេញស្ថិតនៅក្នុងការរង់ចាំ-
-Pending release – on backorder,Pending release – on backorder,รอการดำเนินการ - ติด backorder,條件確認中,စောင့်ဆိုင်းနေသော ထုတ်ဝေမှု - ပြန်အမှာစာ,Đang chờ - chưa có hàng,ការបញ្ចេញស្ថិតនៅក្នុងការរង់ចាំ-
 Pending release - seller approval required,Pending release - seller approval required,รอการดำเนินการ - รอการอนุมัติจากผู้ขาย,條件確認中,စောင့်ဆိုင်းနေသော ထုတ်ဝေမှု - ရောင်းချသူ၏ အတည်ပြုချက် လိုအပ်ခြင်း,Đang chờ - Hãng duyệt,ការបញ្ចេញស្ថិតនៅក្នុងការរង់ចាំ- ទាមទារអោយមានការអនុមត័លើអ្នកលក់
-Please Update Your Password,Please Update Your Password,Please Update Your Password,請定期更改登入密碼,Please Update Your Password,Please Update Your Password,Please Update Your Password
-"To keep your account secure, we recommend that you update your password every 90 days.","To keep your account secure, we recommend that you update your password every 90 days.","To keep your account secure, we recommend that you update your password every 90 days.",為確保您帳戶安全，提醒您妥善保管密碼及定期更改密碼，我們建議您每90日更新一次密碼.,"To keep your account secure, we recommend that you update your password every 90 days.","To keep your account secure, we recommend that you update your password every 90 days.","To keep your account secure, we recommend that you update your password every 90 days."
-DO IT LATER,DO IT LATER,DO IT LATER,下次再提醒我,DO IT LATER,DO IT LATER,DO IT LATER
-UPDATE NOW,UPDATE NOW,UPDATE NOW,下次再提醒我,UPDATE NOW,UPDATE NOW,UPDATE NOW
-My Favourites,My Favourites,My Favourites,從我的最愛選購,My Favourites,My Favourites,My Favourites
-Favourites,Favourites,Favourites,我的最愛,Favourites,Favourites,Favourites
-Sold to Customer Name,Sold to Customer Name,Sold to Customer Name,客戶名稱,Sold to Customer Name,Tên đặt hàng,Sold to Customer Name
-Save as Template,Save as Template,Save as Template,儲存為常用訂單範本,Save as Template,Lưu dạng đơn hàng  biểu mẫu,Save as Template
-Choose from Template,Choose from Template,Choose from Template,自常用訂單範本加入產品,Choose from Template,Choose from Template,Choose from Template
-SAVE,SAVE,SAVE,儲存,SAVE,Lưu,SAVE
-CLOSE,CLOSE,CLOSE,取消,CLOSE,CLOSE,CLOSE
-Select,Select,Select,加至購物車,Select,Select,Select
-Advance Payment,Advance Payment,Advance Payment,款項已付清,Advance Payment,Advance Payment,Advance Payment
-Advance payment w/o discount – Credit card,Advance payment w/o discount – Credit card,Advance payment w/o discount – Credit card,信用卡付款不再另行收款,Advance payment w/o discount – Credit card,Advance payment w/o discount – Credit card,Advance payment w/o discount – Credit card
-Advance Payment w/ 0.6% discount,Advance Payment w/ 0.6% discount,Advance Payment w/ 0.6% discount,預付貨款折扣0.6%,Advance Payment w/ 0.6% discount,Advance Payment w/ 0.6% discount,Advance Payment w/ 0.6% discount
-Advance Payment w/ 1.5% discount - remittance,Advance Payment w/ 1.5% discount - remittance,Advance Payment w/ 1.5% discount - remittance,預付貨款折扣1.5%,Advance Payment w/ 1.5% discount - remittance,Advance Payment w/ 1.5% discount - remittance,Advance Payment w/ 1.5% discount - remittance
-Advance Payment w/ 1.15% discount - remittance,Advance Payment w/ 1.15% discount - remittance,Advance Payment w/ 1.15% discount - remittance,預付貨款折扣1.15%,Advance Payment w/ 1.15% discount - remittance,Advance Payment w/ 1.15% discount - remittance,Advance Payment w/ 1.15% discount - remittance
-Advance Payment with 2% discount - remittance,Advance Payment with 2% discount - remittance,Advance Payment with 2% discount - remittance,款項已付清折扣2%,Advance Payment with 2% discount - remittance,Advance Payment with 2% discount - remittance,Advance Payment with 2% discount - remittance
-Advance Payment with 3% discount - remittance,Advance Payment with 3% discount - remittance,Advance Payment with 3% discount - remittance,出貨前匯款折扣3%,Advance Payment with 3% discount - remittance,Advance Payment with 3% discount - remittance,Advance Payment with 3% discount - remittance
-Cash on Delivery with 0.6% discount,Cash on Delivery with 0.6% discount,Cash on Delivery with 0.6% discount,貨到收款折扣0.6%,Cash on Delivery with 0.6% discount,Cash on Delivery with 0.6% discount,Cash on Delivery with 0.6% discount
-Check on Delivery - 7 days,Check on Delivery - 7 days,Check on Delivery - 7 days,貨到收款,Check on Delivery - 7 days,Check on Delivery - 7 days,Check on Delivery - 7 days
-Charge 7 days,Charge 7 days,Charge 7 days,出貨前匯款折扣3%,Charge 7 days,Charge 7 days,Charge 7 days
-Charge 7 days with 0.5% discount,Charge 7 days with 0.5% discount,Charge 7 days with 0.5% discount,發票日起7天內付款折扣0.5%,Charge 7 days with 0.5% discount,Charge 7 days with 0.5% discount,Charge 7 days with 0.5% discount
-Charge 7 days with 1.5% discount,Charge 7 days with 1.5% discount,Charge 7 days with 1.5% discount,發票7天內付款折扣1.5%,Charge 7 days with 1.5% discount,Charge 7 days with 1.5% discount,Charge 7 days with 1.5% discount
-Post Dated Check - 5 days (GP 5 days),Post Dated Check - 5 days (GP 5 days),Post Dated Check - 5 days (GP 5 days),貨到收款折扣0.5%,Post Dated Check - 5 days (GP 5 days),Post Dated Check - 5 days (GP 5 days),Post Dated Check - 5 days (GP 5 days)
-Charge 14 days with 2%,Charge 14 days with 2%,Charge 14 days with 2%,發票日起14天內付款,Charge 14 days with 2%,Charge 14 days with 2%,Charge 14 days with 2%
-Charge 7 days,Charge 7 days,Charge 7 days,發票日起7天內付款,Charge 7 days,Charge 7 days,Charge 7 days
-Charge 14 days,Charge 14 days,Charge 14 days,發票日起14天內付款,Charge 14 days,Charge 14 days,Charge 14 days
-Charge 15 days,Charge 15 days,Charge 15 days,發票日起15天內付款,Charge 15 days,Charge 15 days,Charge 15 days
-Charge 15 days with 0.7% discount,Charge 15 days with 0.7% discount,Charge 15 days with 0.7% discount,發票日起15天內付款折扣0.7%,Charge 15 days with 0.7% discount,Charge 15 days with 0.7% discount,Charge 15 days with 0.7% discount
-Charge 15 days,Charge 15 days,Charge 15 days,發票日起15天內付款,Charge 15 days,Charge 15 days,Charge 15 days
-Charge 20 days,Charge 20 days,Charge 20 days,發票日起20天內付款,Charge 20 days,Charge 20 days,Charge 20 days
-Charge 30 days,Charge 30 days,Charge 30 days,發票日起30天內付款,Charge 30 days,Charge 30 days,Charge 30 days
-"30 Days from EOM, due EOM","30 Days from EOM, due EOM","30 Days from EOM, due EOM",發票日起30天內付款,"30 Days from EOM, due EOM","30 Days from EOM, due EOM","30 Days from EOM, due EOM"
-"45 Days from EOM, due EOM","45 Days from EOM, due EOM","45 Days from EOM, due EOM",發票日起45天內付款,"45 Days from EOM, due EOM","45 Days from EOM, due EOM","45 Days from EOM, due EOM"
-"30 Days from EOM, due EOM (GP 30 days)","30 Days from EOM, due EOM (GP 30 days)","30 Days from EOM, due EOM (GP 30 days)",發票日起30天內付款,"30 Days from EOM, due EOM (GP 30 days)","30 Days from EOM, due EOM (GP 30 days)","30 Days from EOM, due EOM (GP 30 days)"
-"30 Days from with 0.5% , due EOM","30 Days from with 0.5% , due EOM","30 Days from with 0.5% , due EOM",發票日起30天內付款折扣0.5%,"30 Days from with 0.5% , due EOM","30 Days from with 0.5% , due EOM","30 Days from with 0.5% , due EOM"
-"30 Days from with 1.15% , due EOM","30 Days from with 1.15% , due EOM","30 Days from with 1.15% , due EOM",發票日起30天內付款折扣1.15%,"30 Days from with 1.15% , due EOM","30 Days from with 1.15% , due EOM","30 Days from with 1.15% , due EOM"
-"30 Days from with 1.3% , due EOM","30 Days from with 1.3% , due EOM","30 Days from with 1.3% , due EOM",發票日起30天內付款折扣1.3%,"30 Days from with 1.3% , due EOM","30 Days from with 1.3% , due EOM","30 Days from with 1.3% , due EOM"
-"30 Days from with 3% , due EOM","30 Days from with 3% , due EOM","30 Days from with 3% , due EOM",發票日起30天內付款折扣3%,"30 Days from with 3% , due EOM","30 Days from with 3% , due EOM","30 Days from with 3% , due EOM"
-"60 Days from EOM, due EOM","60 Days from EOM, due EOM","60 Days from EOM, due EOM",發票日起60天內付款,"60 Days from EOM, due EOM","60 Days from EOM, due EOM","60 Days from EOM, due EOM"
-"65 Days from EOM, due EOM","65 Days from EOM, due EOM","65 Days from EOM, due EOM",發票日起65天內付款,"65 Days from EOM, due EOM","65 Days from EOM, due EOM","65 Days from EOM, due EOM"
-"67 Days from EOM, due EOM","67 Days from EOM, due EOM","67 Days from EOM, due EOM",發票日起67天內付款,"67 Days from EOM, due EOM","67 Days from EOM, due EOM","67 Days from EOM, due EOM"
-"70 Days from EOM, due EOM","70 Days from EOM, due EOM","70 Days from EOM, due EOM",發票日起70天內付款,"70 Days from EOM, due EOM","70 Days from EOM, due EOM","70 Days from EOM, due EOM"
-"90 Days from EOM, due EOM","90 Days from EOM, due EOM","90 Days from EOM, due EOM",發票日起90天內付款,"90 Days from EOM, due EOM","90 Days from EOM, due EOM","90 Days from EOM, due EOM"
-"120 Days from EOM, due EOM","120 Days from EOM, due EOM","120 Days from EOM, due EOM",發票日起120天內付款,"120 Days from EOM, due EOM","120 Days from EOM, due EOM","120 Days from EOM, due EOM"
-"100 Days from EOM, due EOM","100 Days from EOM, due EOM","100 Days from EOM, due EOM",發票日起100天內付款,"100 Days from EOM, due EOM","100 Days from EOM, due EOM","100 Days from EOM, due EOM"
-"90 Days from EOM, due EOM (GP 30 days)","90 Days from EOM, due EOM (GP 30 days)","90 Days from EOM, due EOM (GP 30 days)",發票日起90天內付款,"90 Days from EOM, due EOM (GP 30 days)","90 Days from EOM, due EOM (GP 30 days)","90 Days from EOM, due EOM (GP 30 days)"
-"97 Days from EOM, due EOM","97 Days from EOM, due EOM","97 Days from EOM, due EOM",發票日起97天內付款,"97 Days from EOM, due EOM","97 Days from EOM, due EOM","97 Days from EOM, due EOM"
-"120 Days from EOM, due EOM (GP 10 days)","120 Days from EOM, due EOM (GP 10 days)","120 Days from EOM, due EOM (GP 10 days)",發票日起120天內付款,"120 Days from EOM, due EOM (GP 10 days)","120 Days from EOM, due EOM (GP 10 days)","120 Days from EOM, due EOM (GP 10 days)"
-"120 Days from EOM, due EOM (GP 30 days)","120 Days from EOM, due EOM (GP 30 days)","120 Days from EOM, due EOM (GP 30 days)",發票日起120天內付款,"120 Days from EOM, due EOM (GP 30 days)","120 Days from EOM, due EOM (GP 30 days)","120 Days from EOM, due EOM (GP 30 days)"
-"120 Days from EOM, due EOM (GP 60 days)","120 Days from EOM, due EOM (GP 60 days)","120 Days from EOM, due EOM (GP 60 days)",發票日起120天內付款,"120 Days from EOM, due EOM (GP 60 days)","120 Days from EOM, due EOM (GP 60 days)","120 Days from EOM, due EOM (GP 60 days)"
-"62 Days from EOM, due 2 days from EOM","62 Days from EOM, due 2 days from EOM","62 Days from EOM, due 2 days from EOM",發票日起62天內付款,"62 Days from EOM, due 2 days from EOM","62 Days from EOM, due 2 days from EOM","62 Days from EOM, due 2 days from EOM"
-Contract Number,Contract Number,Contract Number,Contract Number,Contract Number,Số hợp đồng,Contract Number
-Material Visa Number,Material Visa Number,Material Visa Number,Material Visa Number,Material Visa Number,Số Đăng kí lưu hành,Material Visa Number
-Sales District,Sales District,Sales District,Sales District,Sales District,Khu vực bán hàng,Sales District
-Announcement Letter Number,Announcement Letter Number,Announcement Letter Number,Announcement Letter Number,Announcement Letter Number,Công văn thông báo số,Announcement Letter Number
-Tender Price,Tender Price,Tender Price,Tender Price,Tender Price,Giá trúng thầu,Tender Price
-Remaining Quantity,Remaining Quantity,Remaining Quantity,Remaining Quantity,Remaining Quantity,Số lượng còn lại,Remaining Quantity
-Contract Quantity,Contract Quantity,Contract Quantity,Contract Quantity,Contract Quantity,Số lượng hợp đồng,Contract Quantity
-Contract Expiry Date,Contract Expiry Date,Contract Expiry Date,Contract Expiry Date,Contract Expiry Date,Hợp đồng sẽ hết hiệu lực vào ngày,Contract Expiry Date
+Pending release – on backorder,Pending release – on backorder,รอการดำเนินการ - ติด backorder,條件確認中,စောင့်ဆိုင်းနေသော ထုတ်ဝေမှု - ပြန်အမှာစာ,Đang chờ - chưa có hàng,ការបញ្ចេញស្ថិតនៅក្នុងការរង់ចាំ-
+Phone,Phone,โทรศัพท์,聯繫電話,ဖုန်း,Điện thoại,ទូរស័ព្ទ
+Picked Quantity:,Picked Quantity:,Picked Quantity:,出貨數量:,Picked Quantity:,Số lượng áp dụng:,ចំនួនដែលបានរៀបហើយ៖
+Picking in progress,Picking in progress,กำลังดําเนินการแพ๊คสินค้า,撿貨作業,ကောက်ယူနေဆဲဖြစ်သည်။,Đang đóng gói,ការរៀបចំកំពុងដំនើរការ
+Please add some item in your cart first,Please add some item in your cart first,กรุณาเพิ่มสินค้าลงตะกร้าก่อน,請增加產品至購物車,ကျေးဇူးပြု၍ သင်၏စျေးဝယ်လှည်းတွင် ပထမဆုံး ပစ္စည်းအချို့ထည့်ပါ,Vui lòng thêm một số sản phẩm vào giỏ hàng trước,សូមបន្ថែមផលិតផលខ្លះទៅក្នុងរទេះផលិតផលរបស់អ្នកជាមុនសិន
+Please do not reply.,Please do not reply.,กรุณาอย่าตอบกลับ,請勿直接回信,ကျေးဇူးပြု၍ အီးမေးလ် မပြန်ပါနှင့်,Vui lòng không phản hồi,សូមកុំឆ្លើយតប។
 Please ensure that Order Quantity is less than or equal to Remaining Quantity of contract.,Please ensure that Order Quantity is less than or equal to Remaining Quantity of contract.,Please ensure that Order Quantity is less than or equal to Remaining Quantity of contract.,Please ensure that Order Quantity is less than or equal to Remaining Quantity of contract.,Please ensure that Order Quantity is less than or equal to Remaining Quantity of contract.,Số lượng đặt hàng không vượt quá số lượng còn lại chưa mua trong hợp đồng thầu,Please ensure that Order Quantity is less than or equal to Remaining Quantity of contract.
-Tender material 730 cannot be combined with other material,Tender material 730 cannot be combined with other material,Tender material 730 cannot be combined with other material,Tender material 730 cannot be combined with other material,Tender material 730 cannot be combined with other material,Đơn hàng mua theo Hợp đồng  Thầu không được đặt chung với đơn hàng ngoài Thầu,Tender material 730 cannot be combined with other material
-Contract Reference,Contract Reference,Contract Reference,Contract Reference,Contract Reference,Số tham chiếu hợp đồng,Contract Reference
-Contract Selection,Contract Selection,Contract Selection,Contract Selection,Contract Selection,Chọn số hợp đồng,Contract Selection
-VAT:,VAT:,VAT:,VAT:,VAT:,Tiền thuế GTGT:,VAT:
-My Farvourites,My Farvourites,My Farvourites,My Farvourites,My Farvourites,Sản phẩm yêu thích,My Farvourites
-Total Tax: ,Total Tax: ,Total Tax: ,Total Tax: ,Total Tax: ,Thuế: ,Total Tax:
-Total price before VAT : ,Total price before VAT : ,Total price before VAT : ,Total price before VAT : ,Total price before VAT : ,Tổng Tiền trước thuế GTGT : ,Total price before VAT :
-Additional Comments,Additional Comments,Additional Comments,Additional Comments,​Additional Comments,Thông tin bổ sung,​Additional Comments
-eZRx Number,eZRx Number,eZRx Number,eZRx Number,eZRx Number,Số  eZRx,eZRx Number
-ToS,ToS,ToS,ToS,ToS,Quy định và điều kiện,ToS
+Please enter contact person,Please enter contact person,Please enter contact person,請輸入訂單聯絡人,Please enter contact person,Please enter contact person,សូមបញ្ចូលបុគ្គលទំនាក់ទំនង
+Please enter valid mobile number,Please enter valid mobile number,Please enter valid mobile number,請輸入有效的手機號碼,Please enter valid mobile number,Please enter valid mobile number,សូមបញ្ចូលលេខទូរស័ព្ទដែលត្រឹមត្រូវ
+Please Login Again,Please Login Again,กรุณาเข้าสู่ระบบอีกครั้ง,請再登入一次,ကျေးဇူးပြုပြီး နောက်တစ်ကြိမ် ဝင်ရောက်ပါ,Vui lòng đăng nhập lại,សូមចុចចូលម្តងទៀត
+Please select a customer code,Please select a customer code,เลือกร้าน,選擇客戶號,ဖောက်သည်၏ ကုဒ်နံပါတ်,Vui lòng chọn mã Khách Hàng,សូមជ្រើសរើសលេខកូដអតិថិជន
+Please select a Sales Org,Please select a Sales Org,กรุณาเลือก Sales Org,請選擇2800,ကျေးဇူးပြုပြီးအရောင်း အဖွဲ့အစည်း ကိုရွေးပါ,Vui lòng chọn đơn vị bán hàng,សូមជ្រើសរើសលេខកូដក្រុមហ៊ុន
+Please select a shipping address,Please select a shipping address,เรื่องที่อยู่จัดส่ง,選擇送貨地址碼,ကုန်ပစ္စည်းပို့ရန် နံပါတ် ရွေးချယ်ပါ,Vui lòng chọn mã địa chỉ giao hàng,សូមជ្រើសរើសអាសយដ្ឋានដឹកជញ្ជូន
+Please select a shipping address,Please select a shipping address,กรุณาเลือกที่อยู่จัดส่ง,請選擇送貨地址代碼,ကျေးဇူးပြု၍ ပို့ဆောင်ရန် လိပ်စာကိုရွေးချယ်ပါ,Vui lòng chọn địa chỉ giao hàng,សូមជ្រើសរើសអាសយដ្ឋានដឹកជញ្ជូន
+Please Select Batch Number,Please Select Batch Number,กรุณาเลือก Batch,Please Select Batch Number,ကုန်ပစ္စည်း အသုတ်နံပါတ် ကိုရွေးချယ်ပါ,Vui lòng chọn số lô,សូមជ្រើសរើសលេខឡូត៏
+Please select order document type,Please select order document type,กรุณาเลือกประเภทคำสั่งซื้อ,選擇訂單類型,ကျေးဇူးပြု၍ အော်ဒါစာရွက်အမျိုးအစားကိုရွေးချယ်ပါ,Vui lòng chọn loại đơn hàng,សូមជ្រើសរើសប្រភេទឯកសារបញ្ជាទិញ
+Please Select Payment Term,Please Select Payment Term,กรุณาเลือกประเภทการชำระเงิน,請選擇付款方式,ကျေးဇူးပြု၍ ငွေပေးချေမှု ကာလကိုရွေးချယ်ပါ,Vui lòng chọn hình thức thanh toán,សូមជ្រើសរើសលក្ខខណ្ឌនៃការទូទាត់ប្រាក់
+Please select Requested Delivery Date,Please select Requested Delivery Date,กรุณาเลือกวันที่จัดส่งสินค้า,請選擇要求的交貨日期,ကျေးဇူးပြု၍ တောင်းဆိုသည့် ပစ္စည်းပို့ရန် နေ့စွဲကိုရွေးပါ,Vui lòng chọn ngày giao hàng yêu cầu,សូមជ្រើសរើសកាលបរិច្ឆេទស្នើសុំដឹកជញ្ជូនផលិតផលទៅកាន់អតិថិជន
+"Please Select Sales Org, CustomerCode, ShipTo From Sidemenu","Please Select Sales Org, CustomerCode, ShipTo From Sidemenu",กรุณาเลือก Sales Org ร้านค้า และที่อยู่จัดส่งจากแถบเมนูด้านข้าง,請至選單中點選銷售組織:2800、客戶號、送貨址代碼,"ဘေးဘက်မီနူး မှ အရောင်းအဖွဲ့အစည်း, ဖောက်သည်ကုဒ်နံပါတ်, ကုန်ပစ္စည်းပို့ရန်လိပ်စာ ကိုရွေးပါ","Vui lòng chọn Sales Org, mã Khách Hàng, mã giao hàng từ thẻ","សូមជ្រើសរើសអង្គភាពលក់​, លេខកូដអតិថិជន, លេខកូដដឹកជញ្ជូនទៅអតិថិជន នៅចំហៀងពីម៉ីនុយ"
+Please Try Again Later,Please Try Again Later,รบกวนลองใหม่อีกครั้ง,請稍後再試,ကျေးဇူးပြု၍ နောက်မှထပ်ကြိုးစားပါ,Vui long thử lại,សូមព្យាយាមម្តងទៀតនៅពេលក្រោយ
+Please Update Your Password,Please Update Your Password,Please Update Your Password,請定期更改登入密碼,Please Update Your Password,Please Update Your Password,Please Update Your Password
+Please wait fetching price,Please wait fetching price,Please wait fetching price,發生錯誤，請稍後再試或聯繫裕利。,Please wait fetching price,Please wait fetching price,សូមរង់ចាំ យើងកំពុងបង្ហាញតម្
+Please wait while we load data,Please wait while we load data,Please wait while we load data,資料讀取中，請稍候,Please wait while we load data,Please wait while we load data,សូមរង់ចាំ យើងកំពុងដំណើរការទិន្នន័យ
+PO No.,PO No.,หมายเลข PO.,客戶採購單號.,PO နံပါတ်.,số PO,លេខការបញ្ជាទិញ
+PO Number,PO Number,PO Number,PO Number,PO Number,Số Đơn hàng,លេខបញ្ជាទិញ
+Poor Internet connection,Poor Internet connection,Poor Internet connection,Poor Internet connection,Poor Internet connection,Kết nối mạng yếu,សេវាអ៊ីនធឺណិតខ្សោយ
+Post Dated Check - 5 days (GP 5 days),Post Dated Check - 5 days (GP 5 days),Post Dated Check - 5 days (GP 5 days),貨到收款折扣0.5%,Post Dated Check - 5 days (GP 5 days),Post Dated Check - 5 days (GP 5 days),Post Dated Check - 5 days (GP 5 days)
+Postal Code,Postal Code,รหัสไปรษณีย์,郵遞區號,စာတိုက်သင်္ကေတ နံပါတ်,Mã Vùng,លេខកូដតំបន់
+Previous eZRx passwords cannot be reused. For security reasons passwords can only be changed a maximum of three times for every 24 hours.,Previous eZRx passwords cannot be reused, For security reasons passwords can only be changed a maximum of three times for every 24 hours.,รหัสผ่าน eZRx ก่อนหน้าไม่สามารถใช้ซ้ำได้. ด้วยเหตุผลด้านความปลอดภัย รหัสผ่านสามารถเปลี่ยนได้สูงสุดสามครั้งต่อ 24 ชั่วโมงเท่านั้น. လုံခြုံရေးအရ၊ စကားဝှက်များကို 24 နာရီတိုင်းတွင် အများဆုံး သုံးကြိမ်သာ ပြောင်းလဲနိုင်သည်,先前的eZRx密碼不能被重複使用. 基於資安考量，密碼每24小時僅能被修改最多3次,ယခင် eZRx စကားဝှက်များကို ပြန်သုံး၍မရပါ။,Mật khẩu trước đây không được sử dụng lại. Vì lý do bảo mật mật khẩu chỉ có thể được thay đổi tối đa 3 lần trong 24 giờ.,ពាក្យសម្ងាត់ eZRx ពីមុនមិនអាចប្រើឡើងវិញបានទេ។. សម្រាប់ហេតុផលសុវត្ថិភាព ពាក្យសម្ងាត់អាចត្រូវបានផ្លាស់ប្តូរអតិបរមាត្រឹមតែ 3 ដងប៉ុណ្ណោះសម្រាប់រៀងរាល់ 24 ម៉ោងម្តង។
+Price before VAT,Price before VAT,Price before VAT,未稅價,Price before VAT,Giá trước thuế GTGT,តម្លៃមុនអាករលើតម្លៃបន្ថែម
+Prices are exclusive of tax,Prices are exclusive of tax,ราคาไม่รวมภาษี,價格含稅,စျေးနှုန်းများတွင်အခွန်မပါဝင်ပါ,Giá hiển thị trước thuế và sau thuế,តម្លៃមិនរាប់បញ្ចូលពន្ធ
+Principal,Principal,Principal,原廠,ကုမ္ပဏီ နာမည်,Hãng,ដៃគូរពាណិជ្ជកម្ម
+Principals Categories,Principals Categories,กลุ่ม Principals,Principals Categories,ကုမ္ပဏီ နာမည် အမျိုးအစားများ,Danh mục Hãng,ប្រភេទដៃគូរពាណិជ្ជកម្
 Privacy Policy,Privacy Policy,Privacy Policy,Privacy Policy,Privacy Policy,Quyền riêng tư,Privacy Policy
-Invoice Price,Invoice Price,Invoice Price,Invoice Price,Invoice Price,Giá tiền,Invoice Price
-The materials are now no longer available for the user to place the order,The materials are now no longer available for the user to place the order,The materials are now no longer available for the user to place the order,The materials are now no longer available for the user to place the order,The materials are now no longer available for the user to place the order,The materials are now no longer available for the user to place the order,The materials are now no longer available for the user to place the order
-Home,Home,หน้าหลัก,首頁,မူလစာမျက်နှာ,Trang chủ,ទំព័រដើម
+Processing Status,Processing Status,สถานะการสั่งซื้อ,系統接收狀態,လုပ်ဆောင်မှု အခြေအနေ,Trạng thái xử lý,ស្ថានភាពនៃដំណើរការ
+Product is out of stock!,Product is out of stock!,สินค้าหมดชั่วคราว!,產品無庫存,Product is out of stock!,Product is out of stock!,ផលិតផលអស់ពីស្តុក
+Product Name,Product Name,ชื่อสินค้า,產品名稱,ကုန်ပစ္စည်း အမည်,Tên sản phẩm,ឈ្មោះផលិតផល
+Product Not Available,Product Not Available,Product Not Available,產品不可用,Product Not Available,Product Not Available,មិនមានផលិតផល
 Products,Products,สินค้า,產品,ထုတ်ကုန်,Sản phẩm,ផលិតផល
-Orders,Orders,การสั่งซื้อ,訂單,အမှာစာများ,Đơn hàng,ការបញ្ជាទិញ
-Notifications,Notifications,การแจ้งเตือน,通知,အသိပေးချက်များ,Thông báo,ការជូនដំណឹង
-Account,Account,บัญชี,帳戶,အကောင့်,Tài khoản,គណនី
-Settings,Settings,การตั้งค่า,設定,ချိန်ညှိချက်များ,Cài đặt,ការកំណត់
-Language,Language,ภาษา,語言,ဘာသာစကား,Ngôn ngữ,ភាសា
-Logout,Logout,ออกจากระบบ,登出,ထွက်ပါ,Thoát,ចាកចេញ
-Server Error,Server Error,เซิร์ฟเวอร์ผิดพลาด,服務器錯誤,ဆာဗာ အမှား,Lỗi máy chủ,កំហុសម៉ាស៊ីនមេ
-Account is Locked,Account is Locked,บัญชีถูกล็อค,帳戶被鎖定,အကောင့်လော့ခ်ချထားတယ်။,Tài khoản bị khoá,គណនីត្រូវបានចាក់សោ
-Account is Expired,Account is Expired,บัญชีหมดอายุ,帳戶已過期,အကောင့်သက်တမ်းကုန်သွားပါပြီ။,Tài khoản đã hết hạn,គណនីត្រូវបានផុតកំណត់
-Session token is Expired,Session token is Expired,โทเค็นเซสชันหมดอายุ,登入憑證已過期,စက်ရှင် တိုကင်သည် သက်တမ်းကုန်သွားပါပြီ။,Mã thông báo phiên đã hết hạn,សញ្ញាសម្ងាត់សម័យគឺផុតកំណត់
-Ignore,Ignore,ไม่สนใจ,忽略,လျစ်လျူရှုပါ။,Phớt lờ,មិនអើពើ
-Later,Later,ภายหลัง,下次吧,နောက်တော့,Sau,ពេលក្រោយ
-Update Now,Update Now,อัพเดทตอนนี้,現在更新,ယခု အပ်ဒိတ်လုပ်ပါ။,Cập nhật bây giờ,ធ្វើបច្ចុប្បន្នភាពឥឡូវនេះ
-Want to update?,Want to update?,ต้องการที่จะปรับปรุง?,想要更新嗎？,အပ်ဒိတ်လုပ်လိုပါသလား။,Bạn muốn cập nhật?,ចង់អាប់ដេត?
+Products based on previous orders,Products based on previous orders,Products based on previous orders,依據之前訂單產品,ယခင်အမှာစာအပေါ်အခြေခံ ထားသောကုန်ပစ္စည်းများ,Sản phẩm dựa trên đơn đặt hàng trước,ផលិតផលផ្អែកលើការបញ្ជាទិញពីមុន
+Profile,Profile,โปรไฟล์,帳戶資訊,ကိုယ်ရေးအကျဉ်း,Hồ sơ,ប្រវត្តិរូប
+Profile & Settings,Profile & Settings,โปรไฟล์และการตั้งค่า,帳戶資訊與設定,ကိုယ်ရေးအကျဉ်းနှင့်ဆက်တင်များ,Cài đặt thông tin,ប្រវត្តិរូប និងការកំណត់
+Qty:,Qty:,จำนวน:,數量:,အရေအတွက်:,Số lượng:,ចំនួន៖
+Quantity:,Quantity:,จำนวน:,數量:,အရေအတွက်:,Số lượng:,ចំនួន
+Quantity:,Quantity:,จำนวน:,數量:,အရေအတွက်:,Số lượng:,បរិមាណ
+Receive a notification of your order summary after placing an order on eZRx,Receive a notification of your order summary after placing an order on eZRx,รับการแจ้งเตือนสรุปคำสั่งซื้อของคุณหลังจากทำการสั่งซื้อบน eZRx,於eZRx下單後收到您的下單通知,eZRx တွင်မှာယူပြီးနောက် သင်၏အမှာစာအကျဉ်းချုပ်အသိပေးချက်ကိုရယူပါ,Nhận thông báo tổng đơn hàng của Quý Khách sau khi đặt hàng trên hệ thống eZRx,ទទួលបានការជូនដំណឹងអំពីព័ត៌មានសង្ខេបនៃការបញ្ជាទិញរបស់អ្នក បន្ទាប់ពីធ្វើការដាក់បញ្ជាទិញនៅលើ eZRx
+Receive an email notification when you subscribe to an alert,Receive an email notification when you subscribe to an alert,รับอีเมลแจ้งเตือนเมื่อคุณสมัครรับการแจ้งเตือน,開啟訂閱以收到E-mail電子郵件通知,သတိပေးချက်တစ်ခုကိုရယူသောအခါ အီးမေးလ်အကြောင်းကြားစာကိုလက်ခံရယူပါ,Nhận thông báo qua thư điện tử (email) khi Quý Khách đăng ký nhận thông báo.,ទទួលបានការជូនដំណឹងតាមអ៊ីមែល នៅពេលអ្នកជាវការជូនដំណឹង
+Reference Note,Reference Note,หมายเหตุอ้างอิง,參考說明,ကိုးကားစရာမှတ်စု,Ghi chú tham khảo,កំណត់សម្គាល់ឯកសារយោង
+Regret,Regret,Regret,後悔,နောင်တရ,Rất tiếc,សោកស្តាយ
+Rejected,Rejected,รายการถูกยกเลิก,取消訂單,ပယ်ချခဲ့သည်,Huỷ,បានច្រានចោល
+Rejected Delivery,Rejected Delivery,ยกเลิกการส่งสินค้า,不同意配送,ကုန်ပစ္စည်း ပို့ဆောင်ချိန်တွင် ငြင်းပယ်ခဲ့ခြင်းများ,Huỷ giao hàng,ការដឹកជញ្ជូនត្រូវបានបដិសេធ
 Release Notes,Release Notes,บันทึกประจำรุ่น,發佈通知,ထုတ်ဝေမှုမှတ်စုများ,Ghi chú phát hành,កំណត់ចំណាំចេញផ្សាយ
+Remaining Quantity,Remaining Quantity,Remaining Quantity,Remaining Quantity,Remaining Quantity,Số lượng còn lại,Remaining Quantity
+Remark Text:,Remark Text:,หมายเหตุ:,備註:,စာသားမှတ်ချက်:,Nhập ghi chú:,សសេរកំណត់សម្គាល់
+Remarks:,Remarks:,หมายเหตุ:,備註:,မှတ်ချက်:,Ghi chú:,កំណត់សម្គាល់
+Remember Password,Remember Password,จดจำรหัสผ่าน,記住密碼,စကားဝှက်ကိုသတိရပါ,Lưu mật khẩu,ចងចាំលេខសម្ងាត់
+Remove Bonus,Remove Bonus,ลบสินค้าแถม,移除此搭贈,အပိုဆု ဖယ်ရှားပါ,Xoá hàng tặng,ដកចំនួនដែលថែមចេញ
+Remove From Cart,Remove From Cart,นำออกจากตะกร้า,移除購物車項目,စျေးဝယ်လှည်းမှ ဖယ်ရှားပါ,Xoá khỏi giỏ hàng,ដកចេញពីរទេះផលិតផល
+Reorder,Reorder,สั่งอีกครั้ง,再次訂購,ကုန်ပစ္စည်း အမှာစာ ထပ်တင်သွင်းပါ,Đặt lại hàng,បញ្ជាទិញឡើងវិញ
+Requested Delivery,Requested Delivery,วันที่จัดส่ง,要求交貨,တောင်းဆိုသည့် ပစ္စည်းပို့ရန်,Giao hàng theo yêu cầu,ការដឹកជញ្ជូនផលិតផលទៅអតិថិជនត្រូវបានស្នើសុំ
+Requested Delivery Date,Requested Delivery Date,วันที่ส่งสินค้า,要求的交貨日期,တောင်းဆိုသည့် ပစ္စည်းပို့ရန် နေ့စွဲ,Ngày giao hàng yêu cầu,កាលបរិច្ឆេទដែលបានស្នើសុំដឹកជញ្ជូនផលិតផលទៅកាន់អតិថិជន
+Returns,Returns,การคืน,退貨,ကုန်ပစ္စည်းများကိုပြန်ပို့သည်,Trả hàng,បញ្ជូនផលិតផលត្រឡប់មកវិញ
+Rewind and remember,Rewind and remember,Rewind and remember,回轉並記住,နောက်ပြန်လှည့်ပြီးသတိရပါ,Tua lại và ghi nhớ,ថយក្រោយ ហើយចងចាំ
+Sales District,Sales District,Sales District,Sales District,Sales District,Khu vực bán hàng,Sales District
+Sales Org:,Sales Org:,Sales Org:,裕利代號:,အရောင်းအဖွဲ့အစည်း:,Đơn vị bán hàng:,អង្គភាពលក់
+SAP Status:,SAP Status:,สถานะสินค้า:,訂單狀態:,SAP အခြေအနေ,Trạng thái của SAP:,ស្ថានភាព SAP៖
+SAVE,SAVE,SAVE,儲存,SAVE,Lưu,SAVE
+Save as Template,Save as Template,Save as Template,儲存為常用訂單範本,Save as Template,Lưu dạng đơn hàng  biểu mẫu,Save as Template
+Save Order,Save Order,Save Order,儲存訂單,Save Order,Lưu đơn hàng,រក្សាទុកការបញ្ជាទិញ
+Saved Orders,Saved Orders,คำสั่งซื้อที่บันทึกไว้,儲存訂單,သိမ်းဆည်းထားသော အမှာစာများ,Lưu đơn hàng,ការបញ្ជាទិញបានរក្សាទុក
+Search...,Search...,ค้นหา...,搜尋...,ရှာဖွေရန်...,Tìm kiếm...,ស្វែងរក ...
+Select,Select,Select,加至購物車,Select,Select,Select
+Select,Select,Select,加至購物車,Select,Chọn,Select
+Select All,Select All,เลือกทั้งหมด,全選,အားလုံးရွေးပါ,Chọn tất cả,ជ្រើសរើសទាំងអស់
+Select order document type,Select order document type,เลือกประเภทคำสั่งซื้อ,選擇訂單類型,အော်ဒါစာရွက်အမျိုးအစားကိုရွေးချယ်ပါ,Chọn loại đơn hàng,ជ្រើសរើសប្រភេទឯកសារបញ្ជាទិញ
+Select Payment Term,Select Payment Term,ประเภทการชำระเงิน,選擇付款方式(必填),ငွေပေးချေမှု ကာလ,Chọn hình thức thanh toán,ជ្រើសរើសលក្ខខណ្ឌនៃការទូទាត់ប្រាក់
+Select Principal,Select Principal,เลือก Principal,選擇原廠,ကုမ္ပဏီ နာမည် ရွေးချယ်ပါ,Chọn Hãng sản xuất,ជ្រើសរើសដៃគូរពាណិជ្ជកម្ម
+Select Therapeutic Class,Select Therapeutic Class,เลือกประเภทกลุ่มยา,選擇類別,ဆေးအမျိုးအစား အုပ်စု ရွေးချယ်ပါ,Chọn lớp trị liệu,ជ្រើសរើសកម្រិតព្យាបាល
+Server Error,Server Error,เซิร์ฟเวอร์ผิดพลาด,服務器錯誤,ဆာဗာ အမှား,Lỗi máy chủ,កំហុសម៉ាស៊ីនមេ
+Server time out,Server time out,Server time out,Server time out,Server time out,Hệ thống hết thời gian chờ,Server អស់ម៉ោង
+"Server timed out, please refresh the page.
+If this happens often, please logout and login again","Server timed out, please refresh the page.
+If this happens often, please logout and login again","Server timed out, please refresh the page.
+If this happens often, please logout and login again","Server timed out, please refresh the page.
+If this happens often, please logout and login again","Server timed out, please refresh the page.
+If this happens often, please logout and login again","Hệ thống hết thời gian chờ, vui lòng làm mới trang.
+ Nếu điều này xảy ra thường xuyên, vui lòng đăng xuất và đăng nhập lại.","អស់ពេលម៉ាស៊ីនមេ សូមផ្ទុកទំព័រឡើងវិញ។
+ប្រសិនបើរឿងនេះកើតឡើងញឹកញាប់ សូមចេញពីគណនី ហើយចូលម្តងទៀត"
+Session token is Expired,Session token is Expired,โทเค็นเซสชันหมดอายุ,登入憑證已過期,စက်ရှင် တိုကင်သည် သက်တမ်းကုန်သွားပါပြီ။,Mã thông báo phiên đã hết hạn,សញ្ញាសម្ងាត់សម័យគឺផុតកំណត់
+Set Up Notifications,Set Up Notifications,ตั้งค่าการแจ้งเตือน,設定通知,အသိပေးချက်များကို သတ်မှတ်ပါ,Thiết lập thông báo,បង្កើតការការជូនដំណឹង
+Settings,Settings,การตั้งค่า,設定,ချိန်ညှိချက်များ,Cài đặt,ការកំណត់
+SGT on,SGT on,SGT ใน,進行系統更新,SGT,giờ Singapore (GMT+8) vào,SGT នៅ
+Ship to Address,Ship to Address,ที่อยู่จัดส่ง,送貨地址,ကုန်ပစ္စည်းပို့ရန်လိပ်စာ,Thông tin giao hàng,អាសយដ្ឋានបញ្ជូនផលិតផលទៅ
+Ship to ID,Ship to ID,รหัสที่อยู่จัดส่ง,送貨址ID,ကုန်ပစ္စည်းပို့ရန်လိပ်စာနံပါတ်,Mã địa chỉ giao hàng,បញ្ជូនទៅលេខសម្គាល់
+Ship To IDs:,Ship To IDs:,รหัสที่อยู่จัดส่ง:,送貨址ID:,ကုန်ပစ္စည်းပို့ရန်လိပ်စာနံပါတ်:,Mã địa chỉ giao hàng:,បញ្ជូនទៅលេខសម្គាល់
+Shipping Address:,Shipping Address:,ที่อยู่จัดส่ง:,送貨地址:,ကုန်ပစ္စည်းပို့ဆောင်ရမည့်လိပ်စာ:,Địa chỉ giao hàng:,អាសយដ្ឋានដឹកជញ្ជូន៖
+Showing,Showing,Showing,顯示,ပြထားသည်,Hiện thị,បង្ហាញ
+Sign in with credentials instead,Sign in with credentials instead,เข้าสู่ระบบโดยใช้ชื่อผู้ใช้งาน,使用認證登入,အထောက်အထားများ ရိုက်ထည့်ပြီး ဝင်ရောက်ပါ,Đăng nhập bằng thông tin đăng nhập,ចូលដោយប្រើលេខសំគាល់ជំនួសវិញ
+Sold to Address,Sold to Address,ที่อยู่จัดส่ง,客戶地址,အရောင်း လိပ်စာ,Thông tin đặt hàng,បានលក់ទៅអោយអតិថិជនដែលមានអាសយដ្ឋាន
+Sold to Customer Name,Sold to Customer Name,Sold to Customer Name,客戶名稱,Sold to Customer Name,Tên đặt hàng,Sold to Customer Name
+Sold to ID,Sold to ID,รหัสร้านค้า,客戶代碼,အရောင်း လိပ်စာနံပါတ်,Mã đặt hàng,លេខសំគាល់ដែលបានលក់ទៅអោយ
+Sold To IDs:,Sold To IDs:,รหัสร้านค้า:,客戶代碼:,အရောင်း လိပ်စာနံပါတ်:,Mã Khách hàng:,លេខសំគាល់ដែលបានលក់ទៅអោយ
+Solution,Solution,Solution ยาน้ำ ของเหลว,解決方案,ဆေးအရည်,Giải pháp,ដំណោះស្រាយ
+Sorry something went wrong. Please retry and if the problem persists please contact support.,Sorry something went wrong. Please retry and if the problem persists please contact support.,เกิดข้อผิดพลาดที่ระบบ กรุณาลองใหม่อีกครั้ง หากยังพบปัญหาเดิมกรุณาติดต่อทีมงานผู้ดูแลระบบ,請稍後再試或聯繫裕利,ဝမ်းနည်းပါတယ် တစုံတခု မှားယွင်းသွားပါတယ် ကျေးဇူးပြု၍ နောက်တဖန် ကြိုးစားပြီး ပြဿနာ ဆက်ရှိနေပါက အကူအညီ ရယူပါ,Xin lỗi có lỗi xảy ra. Vui lòng thử lại và nếu sự cố vẫn tiếp diễn vui lòng liên hệ với bộ phận hỗ trợ.,សូមអភ័យទោស មានអ្វីមួយខុសប្រក្រតី។ សូមព្យាយាមម្តងទៀត ហើយប្រសិនបើបញ្ហានៅតែបន្តកើតមាន សូមទាក់ទងផ្នែកជំនួយ។
+"Sorry, something went wrong. Please retry and if the problem persists please contact support.","Sorry, something went wrong. Please retry and if the problem persists please contact support.",เกิดข้อผิดพลาดที่ระบบ กรุณาลองใหม่อีกครั้ง หากยังพบปัญหาเดิมกรุณาติดต่อทีมงานผู้ดูแลระบบ,請稍後再試或聯繫裕利,ဝမ်းနည်းပါတယ် တစုံတခု မှားယွင်းသွားပါတယ် ကျေးဇူးပြု၍ နောက်တဖန် ကြိုးစားပြီး ပြဿနာ ဆက်ရှိနေပါက အကူအညီ ရယူပါ,"Xin lỗi, có lỗi xảy ra. Vui lòng thử lại và nếu sự cố vẫn tiếp diễn, vui lòng liên hệ với bộ phận hỗ trợ.",សូមអភ័យទោស មានអ្វីមួយខុសប្រក្រតី។ សូមព្យាយាមម្តងទៀត ហើយប្រសិនបើបញ្ហានៅតែបន្តកើតមាន សូមទាក់ទងផ្នែកជំនួយ។
+Special Instructions,Special Instructions,คำสั่งพิเศษอื่นๆ,特殊配送指示,အထူးညွှန်ကြားချက်များ,Chỉ dẫn đặc biệt,សេចក្តីណែនាំពិសេស
+Special Instructions (Max length: 132 Characters),Special Instructions (Max length: 132 Characters),คำสั่งพิเศษอื่นๆ (สูงสุด 132 ตัวอักษร),訂單備註，上限132字元,အထူးညွှန်ကြားချက်များ (အများဆုံး စာလုံးရေ ၁၃၂ လုံး),Chỉ dẫn đặc biệt (Độ dài tối đa: 132 ký tự),សេចក្តីណែនាំពិសេស (វែងបំផុតត្រឹមតែ៖ ១៣២ តួ)
+Special prices,Special prices,ราคาพิเศษ,特惠價,အထူးစျေးနှုန်းများ,Giá đặc biệt,តម្លៃពិសេស
+Statement of Accounts,Statement of Accounts,ใบแจ้งยอดบัญชี,Statement of Accounts,Statement of Accounts,Sao kê tài khoản,Statement of Accounts
+Status:,Status:,สถานะ:,系統接收狀態:,အခြေအနေ,Tình trạng:,ស្ថានភាព
+Submit,Submit,ส่งคำสั่งซื้อ,送出,တင်သွင်းပါ,Gửi,បញ្ជូនការបញ្ជាទិញ
+Submit Order,Submit Order,ส่งคำสั่งซื้อ,送出訂單,အမှာစာတင်သွင်းပါ,Đặt hàng,បញ្ជូនការបញ្ជាទិញ
+Submit Order Error,Submit Order Error,เกิดข้อผิดพลาดระหว่างส่งคำสั่งซื้อ,下單失敗，未成功送出訂單,ကုန်ပစ္စည်း အမှာစာ တင်ခြင်း မအောင်မြင်ပါ,Gửi đơn hàng bị lỗi,ការបញ្ជូនការបញ្ជាទិញមានបញ្ហា
+Subtotal:,Subtotal:,มูลค่ารวม (ไม่รวมภาษีมูลค่าเพิ่ม):,小計 (未稅):,စုစုပေါင်း (VAT မပါ):,Tổng tiền trước thuế:,តំលៃសរុប៖
+Successfully Saved Order,Successfully Saved Order,Successfully Saved Order,成功儲存訂單,Successfully Saved Order,Đơn hàng được lưu thành công,ការបញ្ជាទិញត្រូវបានរក្សាទុក ដោយជោគជ័យ
+Tablet,Tablet,ยาเม็ด,片劑,ဆေးပြား,Máy tính bảng,ប្រភេទដូចកុំព្យូរទ័តែតូច
+Tax Number,Tax Number,Tax Number,Tax Number,Tax Number,Số thuế,Tax Number
+Tax:,Tax:,ภาษี:,稅:,အခွန်:,Thuế:,ពន្ធ
+Tender material 730 cannot be combined with other material,Tender material 730 cannot be combined with other material,Tender material 730 cannot be combined with other material,Tender material 730 cannot be combined with other material,Tender material 730 cannot be combined with other material,Đơn hàng mua theo Hợp đồng  Thầu không được đặt chung với đơn hàng ngoài Thầu,Tender material 730 cannot be combined with other material
+Tender Price,Tender Price,Tender Price,Tender Price,Tender Price,Giá trúng thầu,Tender Price
+TERMS OF USE,TERMS OF USE,เงื่อนไขการใช้บริการ,使用政策,သတ်မှတ်ချက်များ,ĐIỀU KHOẢN SỬ DỤNG,លក្ខខណ្ឌនៃការប្រើប្រាស់
+Thank You,Thank You,Thank You,已收到您的訂單,Thank You,Cảm ơn,សូមអរគុណ
+The materials are now no longer available for the user to place the order,The materials are now no longer available for the user to place the order,The materials are now no longer available for the user to place the order,The materials are now no longer available for the user to place the order,The materials are now no longer available for the user to place the order,The materials are now no longer available for the user to place the order,The materials are now no longer available for the user to place the order
+The progress on your cart is going to be lost. Do you want to proceed?,The progress on your cart is going to be lost. Do you want to proceed?,รายการสินค้าในตะกร้าของคุณจะถูกลบออก คุณต้องการดำเนินการต่อหรือไม่?,未儲存您的購物車產品，請確認是否繼續執行,သင်၏စျေးဝယ်လှည်းအတွင်းရှိတိုးတက်မှုများကိုဆုံးရှုံးလိမ့်မည်။ ဆက်လုပ်ချင်ပါသလား?,Những sản phẩm trong giỏ hàng sẽ bị mất. Quý Khách Hàng có muốn tiếp tục không?,វឌ្ឍនភាពនៅលើរទេះរបស់អ្នកនឹងត្រូវបាត់បង់។ តើអ្នកចង់បន្តទេ?
+THE SMARTER WAY TO ORDER.,THE SMARTER WAY TO ORDER.,ทางเลือกในการสั่งซื้อออนไลน์สำหรับคุณ,更聰慧的下單方式,အမှာစာ မှာယူရန် ပိုမိုကောင်းမွန်သောနည်းလမ်း,Đặt đơn hàng nhanh chóng.,មធ្យោបាយដ៏ឆ្លាតវៃក្នុងការបញ្ជាទិញ។
+Therapeutic Class Categories,Therapeutic Class Categories,ประเภทกลุ่มยา,產品分類,ဆေးအမျိုးအစား အုပ်စု အမျိုးအစားများ,Danh mục nhóm điều trị,ប្រភេទកម្រិតព្យាបាល
+There are no bundles under customer code,There are no bundles under customer code,ไม่พบข้อมูลสินค้า Bundle ภายใต้ร้านค้านี้,There are no bundles under customer code,ဖောက်သည်ကုဒ်အောက်တွင် ပစ္စည်းအစုအဝေးများ မရှိပါ,Không có gói nào trong mã khách hàng,មិនមានការបន្ថែមទៅលើលេខកូដអតិថិជននេះទេ
+There are no materials in this customer code,There are no materials in this customer code,ไม่พบข้อมูลสินค้าภายใต้ร้านค้านี้,此客戶號沒有對應產品,ဒီဖောက်သည်ကုဒ်မှာပစ္စည်းမရှိပါ,Không có sản phẩm nào trong mã khách hàng này,មិនមានផលិតផលនៅក្នុងលេខកូដអតិថិជននេះទេ
+There are no principals in this customer code,There are no principals in this customer code,ไม่พบข้อมูล Principal ภายใต้ร้านค้านี้,此客戶號沒有對應原廠,ဤ ဖောက်သည်ကုဒ်နံပါတ် တွင် ကုမ္ပဏီ နာမည် မရှိပါ,Không có Hãng nào trong mã khách hàng này,មិនមានដៃគូរពាណិជ្ជកម្មណាមួយនៅក្នុងកូដអតិថិជននេះទេ
+There are no results that match your search,There are no results that match your search,ไม่พบข้อมูลที่คุณต้องการค้นหา,沒有符合您搜索條件的結果,သင့်ရှာဖွေမှုနှင့်ကိုက်ညီသောရလဒ်မရှိပါ,Kết quả tìm kiếm không có phù hợp,មិនមានលទ្ធផលដែលត្រូវនឹងការស្វែងរករបស់អ្នកទេ
+There are no therapeutic class in this customer code,There are no therapeutic class in this customer code,ไม่พบกลุ่มยาดังกล่าวภายใต้ร้านค้านี้,此客戶號沒有對應產品分類,ဤ ဖောက်သည်ကုဒ်နံပါတ် တွင် ဆေးအမျိုးအစား အုပ်စု မရှိပါ,Không có hạng trị liệu nào trong mã khách hàng này,មិនមានកម្រិតព្យាបាលនៅក្នុងកូដអតិថិជននេះទេ
+This action will delete the item and bonuses from your cart.,This action will delete the item and bonuses from your cart.,สินค้าและของแถมจะถูกลบออกจากตะกร้า,將從您的購物車中刪除該產品和贈品,ဤလုပ်ဆောင်ချက်သည် သင်၏ လှည်းပေါ်မှ ပစ္စည်းနှင့် အပိုဆုများကို ဖျက်ပစ်လိမ့်မည်,Thao tác này sẽ xoá sản phẩm thường và hàng tặng khỏi giỏ hàng,សកម្មភាពនេះនឹងលុបផលិតផល និងផលិតផលដែមទិញ​និងផលិតផលដែលថែមចេញពីរទេះផលិតផលរបស់អ្នក។
+This email is automatically generated.,This email is automatically generated.,อีเมลนี้สร้างขึ้นโดยอัตโนมัติ,此為系統自動通知信,ဤအီးမေးလ်ကိုအလိုအလျောက်ပို့လွှတ်ပေးခြင်းဖြစ်သည်။,Thư điện tử (email) được tạo tự động.,អ៊ីមែលនេះត្រូវបានបង្កើតដោយស្វ័យប្រវត្តិ
+Tiered Pricing:,Tiered Pricing:,ลำดับขั้นราคา:,價格條件:,အဆင့်ဆင့် ခွဲထားသော စျေးနှုန်း:,Giá theo bậc:,តម្លៃតាមកម្រិត
+To keep your account secure we recommend that you update your password every 90 days.,To keep your account secure we recommend that you update your password every 90 days.,To keep your account secure we recommend that you update your password every 90 days.,為確保您帳戶安全，提醒您妥善保管密碼及定期更改密碼，我們建議您每90日更新一次密碼.,To keep your account secure we recommend that you update your password every 90 days.,To keep your account secure we recommend that you update your password every 90 days.,To keep your account secure we recommend that you update your password every 90 days.
+"To keep your account secure, we recommend that you update your password every 90 days.","To keep your account secure, we recommend that you update your password every 90 days.","To keep your account secure, we recommend that you update your password every 90 days.",為確保您帳戶安全，提醒您妥善保管密碼及定期更改密碼，我們建議您每90日更新一次密碼.,"To keep your account secure, we recommend that you update your password every 90 days.","To keep your account secure, we recommend that you update your password every 90 days.","To keep your account secure, we recommend that you update your password every 90 days."
+Top categories,Top categories,Top categories,熱門產品類別,ထိပ်တန်းအမျိုးအစားများ,Top danh mục,ប្រភេទពេញនិយមបំផុត
+ToS,ToS,ToS,ToS,ToS,Quy định và điều kiện,ToS
+Total,Total,ยอดรวม,總計,စုစုပေါင်း,Tổng cộng giá trị,សរុប
+Total Bundle Price,Total Bundle Price,ราคารวมสินค้า Bundle,Total Bundle Price,စုစုပေါင်း ကုန်ပစ္စည်း အစုအဝေး စျေးနှုန်း,Tổng giá gói sản phẩm,តម្លៃជាកញ្ចបសរុប
+Total Order Price:,Total Order Price:,ยอดสั่งซื้อรวมทั้งสิ้น:,訂單總額:,စုစုပေါင်းအမှာစာ စျေးနှုန်း,Tổng giá đơn hàng:,តម្លៃបញ្ជាទិញសរុប៖
+Total price before VAT :,Total price before VAT :,Total price before VAT :,Total price before VAT :,Total price before VAT :,Tổng Tiền trước thuế GTGT :,Total price before VAT :
+Total Price:,Total Price:,ราคารวม:,總計:,စုစုပေါင်းစျေးနှုန်း:,Tổng Giá trị đơn hàng:,តម្លៃសរុប
+Total Tax:,Total Tax:,Total Tax:,Total Tax:,Total Tax:,Thuế:,Total Tax:
+Touch your finger on the sensor to login,Touch your finger on the sensor to login,กรุณาแตะนิ้วเพื่อแสกนเข้าสู่ระบบ,再次使用手指觸摸傳感器以驗證您的身份,ဝင်ရောက်ရန် Sensor ပေါ်တွင်သင်၏လက်ချောင်းကို တို့ထိပါ,Sử dụng vân tay trên cảm biến để đăng nhập,ប្រើម្រាមដៃរបស់អ្នកប៉ះលើឧបករណ៍ចាប់សញ្ញាដើម្បីចូល
+Track Return,Track Return,Track Return,Track Return,Track Return,Track Return,តាមដានការបញ្ជូនផលិតផលត្រឡប់មកវិញ
+Type,Type,Type,Type,Type,Loại sản phẩm,ប្រភេទ
+Unable to fetch price. Try later,Unable to fetch price. Try later,Unable to fetch price. Try later,發生錯誤，請稍後再試或聯繫裕利。,Unable to fetch price. Try later,Unable to fetch price. Try later,មិនអាចទាញយកតម្លៃបានទេ។ សូមព្យាយាមនៅពេលក្រោយ
+Unable to Get Order History,Unable to Get Order History,ไม่สามารถดูประวัติสั่งซื้อได้ในขณะนี้,請稍後再試,ကုန်ပစ္စည်း အမှာစာ မှတ်တမ်း မရနိုင်ပါ,Không thể xem lịch sử đơn hàng,មិនអាចទទួលបានប្រវត្តិនៃការបញ្ជាទិញ
+Unable to Get Product Price,Unable to Get Product Price,ไม่พบราคาสินค้า,無法取得產品價格,ကုန်ပစ္စည်းဈေးနှုန်းမရနိုင်ပါ,Không thể nhận giá sản phẩm,មិនអាចទទួលបានតម្លៃផលិតផល
+Unable to process your request at the moment! Please try again later.,Unable to process your request at the moment! Please try again later.,ไม่สามารถดำเนินการได้ในขณะนี้ รบกวนลองใหม่อีกครั้ง,發生錯誤，請聯繫裕利,သင်၏တောင်းဆိုမှုကိုယခုအချိန်တွင်မလုပ်ဆောင်နိုင်ပါ။ ကျေးဇူးပြု၍ နောက်မှထပ်ကြိုးစားပါ,Không thể xử lý yêu cầu vào lúc này! Vui lòng thử lại sau.,មិនអាចដំណើរការសំណើរបស់អ្នកបានទេនៅពេលនេះ! សូម​ព្យាយាម​ម្តង​ទៀត​នៅ​ពេល​ក្រោយ។
+Unit of Measurement,Unit of Measurement,Unit of Measurement,單位,Unit of Measurement,Đơn vị,ឯកតានៃការវាស់វែង
+Unit Price:,Unit Price:,ราคาต่อหน่วย:,實售價:,တစ်ခုချင်းစျေးနှုန်း:,Giá sau thuế GTGT:,តម្លៃក្នុង១ឯកតា
 Update App?,Update App?,อัพเดทแอพ?,更新應用程序？,အက်ပ်ကို အပ်ဒိတ်လုပ်မလား။,Cập nhật ứng dụng?,អាប់ដេតកម្មវិធី?
-A new version of {{appName}} is available!,A new version of {{appName}} is available!,A new version of {{appName}} is available!,{{appName}} 有新版本了!,A new version of {{appName}} is available!,A new version of {{appName}} is available!,A new version of {{appName}} is available!
-Password must meet the following requirements: ,Password must meet the following requirements: ,รหัสผ่านต้องเป็นไปตามข้อกำหนดต่อไปนี้: ,密碼需要符合下列規範:,စကားဝှက်သည် အောက်ပါလိုအပ်ချက်များနှင့် ကိုက်ညီရမည်,Mật khẩu phải đáp ứng các yêu cầu sau:,ពាក្យសម្ងាត់ត្រូវតែបំពេញតាមតម្រូវការខាងក្រោម៖
-Minimum length of 10 characters,Minimum length of 10 characters,ความยาวขั้นต่ำ 10 ตัวอักษร,最少需10個字元,အနည်းဆုံး စာလုံး 10 အရှည် ပါဝင်ရမည်,Chiều dài ít nhất là 10 ký tự,ប្រវែងអប្បបរមា 10 តួអក្សរ
-Contain at least 1 Upper case character (A to Z),Contain at least 1 Upper case character (A to Z),มีอักขระตัวพิมพ์ใหญ่อย่างน้อย 1 ตัว (A ถึง Z),至少包含1個以上大寫英文字元(A-Z),အနည်းဆုံး စာလုံးအကြီး 1 လုံး (A မှ Z) ပါဝင်ရမည်,Chứa ít nhất 1 ký tự chữ HOA (A đến Z),មានតួអក្សរអក្សរធំយ៉ាងហោចណាស់ 1 (A ដល់ Z)
-Contain at least 1 Lower case character (a to z),Contain at least 1 Lower case character (a to z),มีอักขระตัวพิมพ์เล็กอย่างน้อย 1 ตัว (a ถึง z),至少包含1個以上小寫英文字元(a-z),အနည်းဆုံး စာလုံးအသေး 1 လုံး (a မှ z) ပါဝင်ရမည်,Chứa ít nhất 1 ký tự chữ thường (a đến z),មានតួអក្សរអក្សរតូចយ៉ាងហោចណាស់ 1 (a ដល់ z)
-Contain at least a numeric character (0 to 9),Contain at least a numeric character (0 to 9),มีตัวเลขอย่างน้อย 1 ตัว (0 ถึง 9),至少包含1個以上數字(0-9),အနည်းဆုံး ဂဏန်းအက္ခရာ (0 မှ 9) အထိ ပါဝင်ရမည်,Chứa ít nhất một ký tự số (0 đến 9),យ៉ាងហោចណាស់មានតួអក្សរលេខ (0 ដល់ 9)
-Contain at least one special character from the list (i.e. _ , # , ? , ! , @ , \$ , % , ^ , & , *, - ),Contain at least one special character from the list (i.e. _ , # , ? , ! , @ , \$ , % , ^ , & , *, - ),มีอักขระพิเศษอย่างน้อย 1 ตัวจากรายการ (เช่น _ , # , ? , ! , @ , \$ , % , ^ , & , *, - ),至少包含1個以上特殊字元 (如:   _ , # , ? , ! , @ , \$ , % , ^ , & , *, - ),ပေးထားသောစာရင်းမှ အနည်းဆုံး အထူးပုံစံတစ်ခု ပါဝင်ရမည် (ဆိုလိုသည်မှာ _ , # , ? , ! , @ , \$ , % , ^ , & , *, - ),Chứa ít nhất một ký tự đặc biệt từ danh sách (tức là _, #,?,!, @, \$,%, ^, &, *, -),មានតួអក្សរពិសេសយ៉ាងហោចណាស់មួយពីបញ្ជី (ឧ. _ , # , ? , ! , @ , \$ , % , ^ , & , *, - ),
-Unit Price: ,Unit Price: ,ราคาต่อหน่วย: ,實售價:,တစ်ခုချင်းစျေးနှုန်း: ,Giá sau thuế GTGT: ,តម្លៃក្នុង១ឯកតា
-Not Available,Not Available,ไม่พบข้อมูล,依業務報價,မရရှိနိုင်ပါ,Chưa có sẵn,មិនមាន
-Contact Us,Contact Us,,,,,
-Mat No:,Mat No:,,,,,
-Order History,Order History,,,,,
-No Customer,No Customer,,,,,
-No Shipping,No Shipping,,,,,
-Please select a Sales Org,Please select a Sales Org,,,,,
-Please select a Customer Code,Please select a Customer Code,,,,,
-Delete,Delete,,,,,
-No history found,No history found,,,,,
-Login On Behalf,Login On Behalf,,,,,
-Tos,Tos,,,,,
-Acceptable Use Policy,Acceptable Use Policy,,,,,
-Accept,Accept,,,,,
-Contain at least one special character from the list (i.e. _ , # , ? , ! , @ , $ , % , ^ , & , *, - ),Contain at least one special character from the list (i.e. _ , # , ? , ! , @ , $ , % , ^ , & , *, - ),,,,,
-Please select a language,Please select a language,,,,,
-SG Customer Support,SG Customer Support,,,,,
+Update Bonus,Update Bonus,อัพเดทสินค้าแถม,更新搭贈,အပိုဆု ပြောင်းလဲရန်,Cập nhật hàng tặng,ធ្វើបច្ចុប្បន្នភាពលើចំនួនដែលថែម
+Update Cart,Update Cart,อัพเดทตะกร้า,更新購物車,စျေးဝယ်လှည်းကို မွမ်းမံပါ,Cập nhật giỏ hàng,ធ្វើបច្ចុប្បន្នភាពរទេះផលិតផល
+UPDATE NOW,UPDATE NOW,UPDATE NOW,下次再提醒我,UPDATE NOW,UPDATE NOW,UPDATE NOW
+Update Now,Update Now,อัพเดทตอนนี้,現在更新,ယခု အပ်ဒိတ်လုပ်ပါ။,Cập nhật bây giờ,ធ្វើបច្ចុប្បន្នភាពឥឡូវនេះ
+Use Biometric,Use Biometric,เปิดใช้งาน Biometric,使用指紋/臉部辨識,Biometric ကိုသုံးပါ,Sử dụng vân tay,ប្រើជីវមាត្
+Username,Username,ชื่อผู้ใช้งาน,使用者名稱,အသုံးပြုသူအမည်,Tài khoản,ឈ្មោះអ្នកប្រើប្រាស់
+Username cannot be empty.,Username cannot be empty.,กรุณาระบุชื่อผู้ใช้งาน,使用者名稱不得為空,အသုံးပြုသူအမည် အလွတ်မဖြစ်ရပါ,Tên tài khoản đăng nhập không được để trống,ឈ្មោះអ្នកប្រើមិនអាចទទេបានទេ។
+Valid From :,Valid From :,Valid From :,有效日期 自 :,Valid From :,Có hiệu lực từ :,មានសុពលភាពពី
+Valid To :,Valid To :,Valid To :,有效日期 止 :,Valid To :,Có hiệu lực đến :,មានសុពលភាពរហូតដល់
+VAT at x%,VAT at x%,ภาษีมูลค่าเพิ่ม x%,稅率 x%,x% မှာ VAT,VAT là x%,VAT នៅ x%
+VAT:,VAT:,VAT:,VAT:,VAT:,Tiền thuế GTGT:,VAT:
+Version,Version,เวอร์ชั่น,版本,ဗားရှင်း,Phiên bản,កំណែ
+View,View,ดูเพิ่มเติม,更多,ပိုမို ကြည့်ရှုရန်,Xem,មើល
+View All,View All,ดูทั้งหมด,View All,View All,Xem tất cả,View All
+View Less,View Less,ย่อรายการ,View Less,View Less,Rút gọn,View Less
+View license info,View license info,View license info,查詢管證資料,View license info,Xem thông tin giấy phép,មើលព័ត៌មានអាជ្ញាប័ណ្ណ
+View more,View more,ดูเพิ่มเติม,更多,ပိုမို ကြည့်ရှုရန်,Xem thêm,មើលផ្សេងទៀត
+View more item in this order,View more item in this order,ดูรายการเพิ่มเติมในคำสั่งซื้อนี้,瀏覽此單內的更多產品,ဤအစီအစဉ်တွင် ပိုမိုသော အရာများကိုကြည့်ပါ,Xem chi tiết sản phẩm trong đơn đặt hàng này.,មើលធាតុបន្ថែមទៀតនៅក្នុងលំដាប់នេះ។
+Want to update?,Want to update?,ต้องการที่จะปรับปรุง?,想要更新嗎？,အပ်ဒိတ်လုပ်လိုပါသလား။,Bạn muốn cập nhật?,ចង់អាប់ដេត?
+We apologize for the inconvenience and appreciate your patience.,We apologize for the inconvenience and appreciate your patience.,เราขออภัยในความไม่สะดวก เราจะกลับมาเติมรอยยิ้มของคุณในอีกไม่นานเกินรอ,造成不便敬請見諒,အဆင်မပြေမှုအတွက်တောင်းပန်ပြီးသင်၏စိတ်ရှည်မှုကိုကျေးဇူးတင်ပါတယ်။,Chúng tôi thành thật xin lỗi vì sự bất tiện này và kính mong quý Khách Hàng thông cảm.,យើងសូមអភ័យទោសចំពោះភាពរអាក់រអួល និងសូមថ្លែងអំណរគុណចំពោះការអត់ធ្មត់របស់អ្នក។
+We have received order #,We have received order #,เราได้รับคำสั่งซื้อ #,裕利已收到訂單#,အမှာစာ # ကို လက်ခံရရှိပါပြီ,Chúng tôi đã nhận được đơn đặt hàng số,យើងបានទទួលការបញ្ជាទិញ #
+We will be up and running shortly in order to serve you better.,We will be up and running shortly in order to serve you better.,เราจะกลับมาให้บริการอีกไม่นานเพื่อเติมรอยยิ้มของคุณให้มากยิ่งขึ้นกว่าเดิม,維護期間將暫停服務,သင့်ကိုပိုမိုကောင်းမွန်စွာ ဝန်ဆောင်မှုပေးနိုင်ရန်အတွက်ကျွန်ုပ်တို့မကြာမီ လုပ်ဆောင်သွားပါမည်။,Chúng tôi sẽ sớm hoạt động để phục vụ Quý Khách tốt hơn.,យើងនឹងដំណើរការក្នុងពេលឆាប់ៗនេះ ដើម្បីបម្រើអ្នកឱ្យកាន់តែប្រសើរឡើង។
+We'll be back soon.,We'll be back soon.,เราจะกลับมาให้บริการตามปกติในอีกไม่นาน,系統維護通知,ကျနော်တို့မကြာမီပြန်လာပါမယ်,Chúng tôi sẽ trở lại sớm.,យើងនឹងត្រលប់មកវិញឆាប់ៗនេះ។
+Welcome back,Welcome back,ยินดีต้อนรับ,歡迎至eZRx,ပြန်လည်ကြိုဆိုပါတယ်,Chào mừng trở lại,សូមស្វាគមន៍ការត្រលប់មកវិញ
+Wrong Username and/or Password,Wrong Username and/or Password,ชื่อผู้ใช้งานหรือรหัสผ่านผิด,錯誤使用者名稱或密碼,အသုံးပြုသူအမည် (နှင့် /သို့မဟုတ်) စကားဝှက် မှားယွင်းနေပါတယ်,Sai tên tài khoản hoặc mật khẩu,ឈ្មោះអ្នកប្រើប្រាស់និង/ឬលេខសម្ងាត់ខុស
+Yes,Yes,Yes,Yes,ဟုတ်ပါတယ်,Có,បាទ/ចាស៎
+You are not connected to internet,You are not connected to internet,You are not connected to internet,You are not connected to internet,You are not connected to internet,Quý Khách Hàng chưa có kết nối mạng,អ្នកមិនបានភ្ជាប់សេវាអ៊នធឺណិតទេ
+You don't have access,You don't have access,คุณไม่ได้สิทธิเข้าใช้งาน,沒有權限登入,သင့်မှာဝင်ရောက်ခွင့်မရှိပါ,Khôn thể truy cập,អ្នកមិនមានសិទ្ធិចូលដំណើរការទេ
+You don't have any favourite products yet,You don't have any favourite products yet,คุณยังไม่มีสินค้าในรายการโปรด,尚無我的最愛產品項目,သင့်မှာအကြိုက်ဆုံးကုန်ပစ္စည်း မရှိသေးပါ,Bạn chưa có bất kỳ sản phẩm yêu thích nào,អ្នកមិនទាន់មានផលិតផលដែលបានរក្សាទុកជាការចូលចិត្តរបស់អ្នកនៅឡើយទេ
+You Need To read full Acceptable Use Policy before Accept,You Need To read full Acceptable Use Policy before Accept,กรุณาศึกษาและยอมรับนโยบายความมั่นคงปลอดภัยระบบสารสนเทศก่อนเข้าสู่ระบบ,請閱讀並同意本使用者條款,လက်မခံမီ Acceptable Use ပေါ်လစီအပြည့်အစုံကိုဖတ်ရန်လိုအပ်သည်,Bạn cần đọc đầy đủ Chấp nhận Chính sách sử dụng được trước khi chấp nhận,អ្នកត្រូវអាន គោលការណ៍ប្រើប្រាស់ដែលអាចទទួលយកបាន ទាំងអស់មុននឹងទទួលយក
+You Need To read full Terms and Condition before Accept,You Need To read full Terms and Condition before Accept,กรุณาศึกษาและยอมรับเงื่อนไขการใช้บริการก่อนเข้าสู่ระบบ,您需要先閱讀完整的條款和條件,လက်မခံမီ သတ်မှတ်ချက်များနှင့် အခြေအနေအပြည့်အစုံကို ဖတ်ရန်လိုအပ်သည်,Quý Khách Hàng cần đọc toàn bộ Điều khoản thoả thuận trước khi Chấp nhận.,អ្នកត្រូវអានលក្ខខណ្ឌទាំងអស់មុននឹងទទួលយក
+You will never be satisfied.,You will never be satisfied.,You will never be satisfied.,You will never be satisfied.,သင် ဘယ်တော့မှကျေနပ်မှာမဟုတ်ပါ,Quý Khách Hàng sẽ chưa bao giờ hài lòng,អ្នកនឹងមិនពេញចិត្តនឹងវាទេ។
+You’re like me. I’m never satisfied.,You’re like me. I’m never satisfied.,You’re like me. I’m never satisfied.,သင် က ကျွန်တော်လိုပဲ စိတ်ကျေနပ်မှု ဘယ်တော့မှ မရနိုင်ပါ,Giống như tôi,Tôi chưa bao giờ hài lòng,អ្នកក៏ដូចជាខ្ញុំដែរ។ ខ្ញុំមិនដែលពេញចិត្តនឹងវាទេ
+Your account is not activated for mobile devices yet.,Your account is not activated for mobile devices yet.,บัญชีผู้ใช้ของคุณยังไม่ได้สิทธิเข้าใช้งานผ่านแอปพลิเคชันมือถือ,您的帳號未授權於手機使用,သင့်အကောင့်ကို မိုဘိုင်းဖုန်း များအတွက် မဖွင့်ရသေးပါ,Tài khoản của bạn chưa được kích hoạt cho thiết bị di động.,គណនីរបស់អ្នកមិនទាន់ត្រូវបានដាក់ឱ្យដំណើរការសម្រាប់ឧបករណ៍ចល័តនៅឡើយទេ។
+Your favourites,Your favourites,สินค้ารายการโปรด,我的最愛,သင်အကြိုက်ဆုံးပစ္စည်းများ,Những sản phẩm yêu thích,រក្សាវាទុកជាការចូលចិត្តរបស់អ្នក
+Your Invoices,Your Invoices,ใบแจ้งหนี้ของคุณ,Your Invoices,Your Invoices,Hóa đơn của Quý Khách,Your Invoices
+Your order has been received successfully,Your order has been received successfully,Your order has been received successfully,修改或取消請洽eZRx客服專線0809-090-887,Your order has been received successfully,Đơn hàng đã được xác nhận trên eZRx thành công và sẽ cập nhật về hệ thống,ការបញ្ជាទិញរបស់អ្នកត្រូវបានទទួលដោយជោគជ័យ
+Your password will expire in,Your password will expire in,รหัสผ่านของคุณจะหมดอายุใน,您的密碼將於,သင်၏စကားဝှက်သည်,Mật khẩu của Quý Khách sẽ hết hạn trong,លេខសម្ងាត់របស់អ្នកនឹងផុតកំណត់ក្នុងរយៈពេល
+Your Payments,Your Payments,การชําระเงินของคุณ,Your Payments,Your Payments,Thanh toán của bạn,Your Payments
+YYYY-MM-DD,YYYY-MM-DD,YYYY-MM-DD,日期 YYYY-MM-DD,နှစ်၊ လ၊ ရက်,YYYY-MM-DD,ឆ្នាំ-ខែ-ថ្
+No Shipping,No Shipping,No Shipping,No Shipping,No Shipping,No Shipping,No Shipping
+Delete,Delete,Delete,Delete,Delete,Delete,Delete
+No history found,No history found,No history found,No history found,No history found,No history found,No history found
+Contain at least one special character from the list (i.e. _,#,?,!,@,$,%
+Please select a language,Please select a language,Please select a language,Please select a language,Please select a language,Please select a language,Please select a language
+SG Customer Support,SG Customer Support,SG Customer Support,SG Customer Support,SG Customer Support,SG Customer Support,SG Customer Support

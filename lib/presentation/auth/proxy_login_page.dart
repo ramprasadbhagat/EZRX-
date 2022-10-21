@@ -13,7 +13,7 @@ class LoginOnBehalfPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login On Behalf').tr()),
+      appBar: AppBar(title: const Text('Login on behalf').tr()),
       body: SafeArea(
         child: BlocConsumer<ProxyLoginFormBloc, ProxyLoginFormState>(
           listenWhen: (previous, current) =>

@@ -101,16 +101,16 @@ class _NoteText extends StatelessWidget {
             height: 10,
           ),
           Row(
-            children: const [
-              SizedBox(width: 8),
+            children:  [
+              const SizedBox(width: 8),
               Expanded(
-                child: Text(
-                  'Note:',
+                child: const Text(
+                  'Note',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
-                ),
+                ).tr(),
               ),
             ],
           ),
@@ -118,13 +118,13 @@ class _NoteText extends StatelessWidget {
             height: 5,
           ),
           Row(
-            children: const [
-              SizedBox(width: 16),
+            children:  [
+              const SizedBox(width: 16),
               Expanded(
-                child: Text(
-                  'Previous eZRx passwords cannot be reused. For security reasons, passwords can only be changed a maximum of three times for every 24 hours.',
+                child: const Text(
+                  'Previous eZRx passwords cannot be reused. For security reasons passwords can only be changed a maximum of three times for every 24 hours.',
                   style: TextStyle(fontSize: 12),
-                ),
+                ).tr(),
               ),
             ],
           ),

@@ -43,7 +43,7 @@ class NewPasswordTextField extends StatelessWidget {
                   .value
                   .fold(
                     (f) => f.maybeMap(
-                      empty: (_) => 'Enter New Password.'.tr(),
+                      empty: (_) => 'New Password.'.tr(),
                       subceedLength: (_) =>
                           'Minimum length of 10 characters'.tr(),
                       mustOneUpperCaseCharacter: (_) =>

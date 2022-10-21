@@ -28,7 +28,7 @@ class ContactUsPage extends StatelessWidget {
               tiles: [
                 ListTile(
                   key: const Key('nameTile'),
-                  title: Text(salesOrg.contactPersonName).tr(),
+                  title: Text(salesOrg.contactPersonName),
                 ),
                 if (salesOrg.contact.instruction.isNotEmpty)
                   ListTile(

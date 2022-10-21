@@ -59,7 +59,7 @@ class HistoryTab extends StatelessWidget {
                 )
               : ScrollList<OrderHistoryItem>(
                   key: const Key('OrderHistoryList'),
-                  emptyMessage: 'No history found',
+                  emptyMessage: 'No history found'.tr().toString(),
                   onRefresh: () => context.read<OrderHistoryListBloc>().add(
                         OrderHistoryListEvent.fetch(
                           customerCodeInfo: context

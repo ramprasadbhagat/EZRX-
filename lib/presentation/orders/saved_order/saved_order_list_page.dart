@@ -21,7 +21,7 @@ class SavedOrderListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Saved Orders'),
+        title: const Text('Saved Orders').tr(),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),

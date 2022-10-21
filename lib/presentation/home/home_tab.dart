@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/home/selector/sales_org_selector.dart';
@@ -73,7 +74,7 @@ const List<HomePageTile> homePageTiles = <HomePageTile>[
     routeName: 'material_list_page',
   ),
   HomePageTile(
-    title: 'Saved Order',
+    title: 'Saved Orders',
     icon: Icons.list,
     routeName: 'saved_order_list',
   ),
@@ -109,7 +110,7 @@ class TileCard extends StatelessWidget {
               Text(
                 homePageTile.title,
                 style: textStyle,
-              ),
+              ).tr(),
             ],
           ),
         ),

@@ -21,7 +21,7 @@ class ResetPasswordValidation extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.all(9),
                 child: Text(
-                  'Password must meet the following requirements: '.tr(),
+                  'Password must meet the following requirements:'.tr(),
                   style: const TextStyle(fontSize: 12),
                 ),
               ),

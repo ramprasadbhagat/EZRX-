@@ -70,7 +70,6 @@ dependencies:
   countly_flutter: ^22.2.0
   loading_indicator: ^3.0.1
   file: 6.1.2
-  flutter_switch: ^0.3.2
 
 
   # The following adds the Cupertino Icons font to your application.

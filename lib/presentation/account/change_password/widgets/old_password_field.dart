@@ -43,7 +43,7 @@ class OldPasswordTextField extends StatelessWidget {
                   .value
                   .fold(
                     (f) => f.maybeMap(
-                      empty: (_) => 'Enter Old Password.'.tr(),
+                      empty: (_) => 'Old Password.'.tr(),
                       orElse: () => null,
                     ),
                     (_) => null,

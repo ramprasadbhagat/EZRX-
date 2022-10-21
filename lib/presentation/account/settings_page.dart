@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/account/settings/change_password_title.dart';
 import 'package:ezrxmobile/presentation/account/settings/language_tile.dart';
 import 'package:ezrxmobile/presentation/account/settings/notification_tile.dart';
-import 'package:ezrxmobile/presentation/account/settings/privacy_policy_tile.dart';
-import 'package:ezrxmobile/presentation/account/settings/tos_tile.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,15 +27,46 @@ class SettingsPage extends StatelessWidget {
                 tiles: [
                   const NotificationTile(),
                   const LanguageTile(),
-                  const PrivacyPolicy(),
-                  const ChangePasswordTile(),
+                  ListTile(
+                    key: const Key('Privacy_Policy'),
+                    leading: const Icon(Icons.policy_outlined),
+                    title: const Text('Privacy Policy').tr(),
+                    onTap: () {
+                      final config = locator<Config>();
+                      context.router.push(
+                        WebViewPageRoute(
+                          url: config.getPrivacyUrl,
+                          initialFile: config.getPrivacyInitialFile,
+                        ),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    key: const Key('changePasswordTile'),
+                    leading: const Icon(
+                      Icons.vpn_key_outlined,
+                    ),
+                    title: const Text('Change Password').tr(),
+                    onTap: () {
+                      context
+                          .read<ResetPasswordBloc>()
+                          .add(const ResetPasswordEvent.onRestart());
+                      context.router.pushNamed('change_password_page');
+                    },
+                  ),
                   ListTile(
                     key: const Key('contactUsTile'),
                     leading: const Icon(Icons.contact_support_outlined),
                     title: const Text('Contact Us').tr(),
                     onTap: () => context.router.pushNamed('contact_us_page'),
                   ),
-                  const Tos(),
+                  ListTile(
+                    key: const Key('tostile'),
+                    leading: const Icon(Icons.policy_outlined),
+                    title: Text('ToS'.tr()),
+                    onTap: () => context.router
+                        .push(AupTCDialogRoute(fromSetting: true)),
+                  ),
                   ListTile(
                     key: const Key('logoutTile'),
                     leading: const Icon(Icons.logout_outlined),

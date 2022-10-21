@@ -6,7 +6,6 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 
 class NotificationSettingsPage extends StatelessWidget {
   const NotificationSettingsPage({Key? key}) : super(key: key);
@@ -16,7 +15,7 @@ class NotificationSettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Set Up Notifications'.tr(),
+          'Set Up Email Notifications'.tr(),
         ),
       ),
       body: Padding(
@@ -120,35 +119,35 @@ class NotificationSettingsPage extends StatelessWidget {
                   ),
                   trailing: Column(
                     children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Email'.tr(),
-                            style: const TextStyle(fontSize: 12),
-                          ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          GestureDetector(
-                            child: Icon(
-                              Icons.info_outline_rounded,
-                              size: 18.0,
-                              color: Theme.of(context).iconTheme.color,
-                            ),
-                            onTap: () {
-                              // if (overlayEntry.mounted) {
-                              //   overlayEntry.remove();
-                              // } else {
-                              //   Overlay.of(context).insert(overlayEntry);
-                              // }
-                            },
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
+                      // Row(
+                      //   mainAxisSize: MainAxisSize.min,
+                      //   children: [
+                      //     Text(
+                      //       'Email'.tr(),
+                      //       style: const TextStyle(fontSize: 12),
+                      //     ),
+                      //     const SizedBox(
+                      //       width: 4,
+                      //     ),
+                      //     GestureDetector(
+                      //       child: Icon(
+                      //         Icons.info_outline_rounded,
+                      //         size: 18.0,
+                      //         color: Theme.of(context).iconTheme.color,
+                      //       ),
+                      //       onTap: () {
+                      //         // if (overlayEntry.mounted) {
+                      //         //   overlayEntry.remove();
+                      //         // } else {
+                      //         //   Overlay.of(context).insert(overlayEntry);
+                      //         // }
+                      //       },
+                      //     ),
+                      //   ],
+                      // ),
+                      // const SizedBox(
+                      //   height: 5,
+                      // ),
                       Row(mainAxisSize: MainAxisSize.min, children: [
                         BlocBuilder<UserBloc, UserState>(
                           buildWhen: (previous, current) =>
@@ -157,16 +156,11 @@ class NotificationSettingsPage extends StatelessWidget {
                               (previous.user.settings.languagePreference !=
                                   current.user.settings.languagePreference),
                           builder: (context, state) {
-                            return FlutterSwitch(
+                            return PlatformSwitch(
                               key: const Key('flutterSwitch'),
-                              height: 26.0,
-                              width: 54.0,
-                              padding: 4.0,
-                              toggleSize: 20.0,
-                              borderRadius: 20.0,
                               activeColor: ZPColors.secondary,
                               value: state.user.settings.emailNotifications,
-                              onToggle: (bool value) {
+                              onChanged: (bool value) {
                                 context.read<UserBloc>().add(
                                       UserEvent.updateNotificationSettings(
                                         languagePreference: state

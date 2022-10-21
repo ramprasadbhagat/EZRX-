@@ -8,7 +8,7 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/account/notification_settings/notification_settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_switch/flutter_switch.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -41,7 +41,7 @@ void main() async {
 
     testWidgets('Load [NotificationSettingsPage] widgets', (tester) async {
       await _pumpWidget(tester, userBlocMock);
-      final titleFinder = find.text('Set Up Notifications'.tr());
+      final titleFinder = find.text('Set Up Email Notifications'.tr());
       final finder = find.byWidgetPredicate((w) => w is ListTile);
       expect(find.byType(Scaffold), findsOneWidget);
       expect(titleFinder, findsOneWidget);
@@ -74,7 +74,8 @@ void main() async {
         final switchFinder = find.byKey(const Key('flutterSwitch'));
         await tester.tap(switchFinder);
         await tester.pumpAndSettle();
-        final flutterSwitchCurrent = tester.widget<FlutterSwitch>(switchFinder);
+        final flutterSwitchCurrent =
+            tester.widget<PlatformSwitch>(switchFinder);
         expect(
           flutterSwitchCurrent.value,
           false,

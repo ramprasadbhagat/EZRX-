@@ -47,7 +47,7 @@ class OrderTemplateItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Company Name: ${order.companyName.name}',
+                  '${'Company Name'.tr()} : ${order.companyName.name}',
                   style: const TextStyle(
                     fontSize: 16.0,
                     color: ZPColors.primary,
@@ -58,7 +58,7 @@ class OrderTemplateItem extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  'Order No: ${order.id}',
+                  '${'Order No'.tr()} : ${order.id}',
                   style: const TextStyle(
                     color: ZPColors.lightGray,
                     overflow: TextOverflow.ellipsis,
@@ -67,7 +67,7 @@ class OrderTemplateItem extends StatelessWidget {
                   maxLines: 1,
                 ),
                 Text(
-                  'Sold To IDs: ${order.soldToParty.name}',
+                  '${'Sold to ID'.tr()} : ${order.soldToParty.name}',
                   style: const TextStyle(
                     color: ZPColors.lightGray,
                     overflow: TextOverflow.ellipsis,
@@ -76,7 +76,7 @@ class OrderTemplateItem extends StatelessWidget {
                   maxLines: 1,
                 ),
                 Text(
-                  'Ship To IDs: ${order.shipToParty.name}',
+                  '${'Ship to ID'.tr()} : ${order.shipToParty.name}',
                   style: const TextStyle(
                     color: ZPColors.lightGray,
                     overflow: TextOverflow.ellipsis,
@@ -87,9 +87,9 @@ class OrderTemplateItem extends StatelessWidget {
                 RichText(
                   text: TextSpan(
                     children: <TextSpan>[
-                      const TextSpan(
-                        text: 'Order Value: ',
-                        style: TextStyle(
+                      TextSpan(
+                        text: '${'Order Value'.tr()} : ',
+                        style: const TextStyle(
                           color: ZPColors.lightGray,
                           fontSize: 15.0,
                         ),
