@@ -1,10 +1,18 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/presentation/core/cart_button.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/home/selector/sales_org_selector.dart';
 import 'package:ezrxmobile/presentation/home/selector/shipping_address_selector.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({Key? key}) : super(key: key);
@@ -13,11 +21,23 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: const [
-            SalesOrgSelector(),
-            CustomerCodeSelector(),
-            ShipCodeSelector(),
+        toolbarHeight: 120,
+        title: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                _WelcomeUser(),
+                CartButton(),
+              ],
+            ),
+            Row(
+              children: const [
+                SalesOrgSelector(),
+                CustomerCodeSelector(),
+                ShipCodeSelector(),
+              ],
+            ),
           ],
         ),
         automaticallyImplyLeading: false,
@@ -40,7 +60,7 @@ class HomeTab extends StatelessWidget {
                   homePageTiles.length,
                   (index) {
                     return Center(
-                      child: TileCard(
+                      child: _TileCard(
                         key: const Key('HomeTileCard'),
                         homePageTile: homePageTiles[index],
                       ),
@@ -70,23 +90,23 @@ class HomePageTile {
 const List<HomePageTile> homePageTiles = <HomePageTile>[
   HomePageTile(
     title: 'Create Order',
-    icon: Icons.list,
+    icon: Icons.add_box_outlined,
     routeName: 'material_list_page',
   ),
   HomePageTile(
     title: 'Saved Orders',
-    icon: Icons.list,
+    icon: Icons.bookmark_border_outlined,
     routeName: 'saved_order_list',
   ),
   HomePageTile(
     title: 'Order Template',
-    icon: Icons.list,
+    icon: Icons.featured_play_list_outlined,
     routeName: 'order_template_list_page',
   ),
 ];
 
-class TileCard extends StatelessWidget {
-  const TileCard({Key? key, required this.homePageTile}) : super(key: key);
+class _TileCard extends StatelessWidget {
+  const _TileCard({Key? key, required this.homePageTile}) : super(key: key);
   final HomePageTile homePageTile;
 
   @override
@@ -115,6 +135,44 @@ class TileCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _WelcomeUser extends StatelessWidget {
+  const _WelcomeUser({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<UserBloc, UserState>(
+      listenWhen: (previous, current) => previous.user != current.user,
+      listener: (context, state) {
+        state.userFailureOrSuccessOption.fold(
+          () {},
+          (either) => either.fold(
+            (failure) {
+              final failureMessage = failure.failureMessage;
+              showSnackBar(context: context, message: failureMessage.tr());
+              if (failureMessage == 'authentication failed') {
+                context.read<AuthBloc>().add(const AuthEvent.logout());
+              }
+            },
+            (_) {},
+          ),
+        );
+      },
+      buildWhen: (previous, current) => previous.user != current.user,
+      builder: (context, state) {
+        return state.isNotEmpty
+            ? Text(
+                state.userFullName.toString(),
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6
+                    ?.apply(color: ZPColors.darkGray),
+              )
+            : LoadingShimmer.tile(line: 3);
+      },
     );
   }
 }

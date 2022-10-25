@@ -18,4 +18,10 @@ class FullName with _$FullName {
 
   @override
   String toString() => '$firstName, $lastName';
+
+  String shortForm() {
+    if (firstName.isEmpty) return '';
+    if (firstName.length <= 1 || lastName.length <= 1) return toString();
+    return '${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}';
+  }
 }

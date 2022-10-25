@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
+import 'package:ezrxmobile/presentation/core/cart_button.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -21,7 +22,8 @@ class OrderTemplateListPage extends StatelessWidget {
       key: const Key('OrderTemplateListPage'),
       backgroundColor: ZPColors.white,
       appBar: AppBar(
-        title: Text('Manage Order Templates'.tr()),
+        title: Text('Order Templates'.tr()),
+        actions: const [CartButton()],
       ),
       body: BlocConsumer<OrderTemplateListBloc, OrderTemplateListState>(
         listener: (context, state) {

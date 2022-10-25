@@ -102,8 +102,8 @@ final appThemeData = {
           ),
         ), //const StadiumBorder(),
         // textStyle: ThemeData.light().textTheme.bodyText2,
-        textStyle: TextStyle(
-          fontSize: 21.sp,
+        textStyle: const TextStyle(
+          // fontSize: 21.sp,
           color: ZPColors.white,
           fontWeight: FontWeight.bold,
         ),

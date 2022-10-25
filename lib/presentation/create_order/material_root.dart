@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/presentation/core/cart_button.dart';
 import 'package:ezrxmobile/presentation/core/tab_view.dart';
 import 'package:ezrxmobile/presentation/create_order/material_bundle_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_list.dart';
@@ -32,15 +33,7 @@ class MaterialRoot extends StatelessWidget {
             preferredSize: const Size(double.infinity, 60),
             child: AppBar(
               title: const Text('Create Order').tr(),
-              actions: [
-                IconButton(
-                  key: const Key('CartButton'),
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.shopping_cart_outlined,
-                  ),
-                ),
-              ],
+              actions: const [CartButton()],
             ),
           ),
           body: TabViewPage(

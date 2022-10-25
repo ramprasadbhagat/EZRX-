@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/presentation/core/cart_button.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -23,6 +24,7 @@ class HistoryTab extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Order History').tr(),
         automaticallyImplyLeading: false,
+        actions: const [CartButton()],
       ),
       body: BlocConsumer<OrderHistoryListBloc, OrderHistoryListState>(
         listenWhen: (previous, current) =>
