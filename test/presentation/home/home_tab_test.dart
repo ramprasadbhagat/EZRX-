@@ -239,7 +239,7 @@ void main() async {
       (tester) async {
         final expectedStates = [
           CustomerCodeState.initial().copyWith(
-              customeCodeInfo: CustomerCodeInfo.empty()
+              customerCodeInfo: CustomerCodeInfo.empty()
                   .copyWith(customerCodeSoldTo: 'fake-customer-code')),
         ];
         whenListen(customerCodeBlocMock, Stream.fromIterable(expectedStates));
@@ -316,7 +316,7 @@ void main() async {
           .copyWith(defaultShipToAddress: true, building: 'fake-building2');
       final customerCodeStream = [
         CustomerCodeState.initial().copyWith(
-            customeCodeInfo: CustomerCodeInfo.empty()
+            customerCodeInfo: CustomerCodeInfo.empty()
                 .copyWith(shipToInfos: [fakeShipToInfo1, fakeShipToInfo2]))
       ];
 
@@ -343,7 +343,7 @@ void main() async {
           .copyWith(defaultShipToAddress: true, building: 'fake-building2');
       final customerCodeStream = [
         CustomerCodeState.initial().copyWith(
-            customeCodeInfo: CustomerCodeInfo.empty()
+            customerCodeInfo: CustomerCodeInfo.empty()
                 .copyWith(shipToInfos: [fakeShipToInfo1, fakeShipToInfo2]))
       ];
 

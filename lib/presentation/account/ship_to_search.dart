@@ -124,7 +124,6 @@ class AppBar extends StatelessWidget {
                           shipToInfos: context
                               .read<CustomerCodeBloc>()
                               .state
-                              .customeCodeInfo
                               .shipToInfos,
                         ),
                       );
@@ -159,7 +158,6 @@ class AppBar extends StatelessWidget {
                           shipToInfos: context
                               .read<CustomerCodeBloc>()
                               .state
-                              .customeCodeInfo
                               .shipToInfos,
                         ));
                   },

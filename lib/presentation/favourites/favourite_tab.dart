@@ -67,7 +67,7 @@ class FavouritesTab extends StatelessWidget {
                         .toList(),
                     user: context.read<UserBloc>().state.user,
                     customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customeCodeInfo,
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
                     salesOrganisation:
                         context.read<SalesOrgBloc>().state.salesOrganisation,
                     shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,

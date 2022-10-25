@@ -13,10 +13,10 @@ class MaterialRoot extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SalesOrgBloc, SalesOrgState>(
       buildWhen: (previous, current) =>
-          previous.configs.disableBundles != current.configs.disableBundles,
+          previous.disableBundles != current.disableBundles,
       builder: (context, state) {
         final disableBundles =
-            context.read<SalesOrgBloc>().state.configs.disableBundles;
+            context.read<SalesOrgBloc>().state.disableBundles;
         final length = disableBundles ? 1 : 2;
         final headerText =
             disableBundles ? ['Add Material'] : ['Add Material', 'Add Bundle'];

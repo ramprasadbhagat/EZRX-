@@ -141,7 +141,7 @@ class OrderTemplateItem extends StatelessWidget {
                           customerCodeInfo: context
                               .read<CustomerCodeBloc>()
                               .state
-                              .customeCodeInfo,
+                              .customerCodeInfo,
                           salesOrganisation: context
                               .read<SalesOrgBloc>()
                               .state

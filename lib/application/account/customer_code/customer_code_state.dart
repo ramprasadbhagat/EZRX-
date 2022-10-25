@@ -5,7 +5,7 @@ class CustomerCodeState with _$CustomerCodeState {
   const CustomerCodeState._();
 
   const factory CustomerCodeState({
-    required CustomerCodeInfo customeCodeInfo,
+    required CustomerCodeInfo customerCodeInfo,
     required List<CustomerCodeInfo> customerCodeList,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required bool canLoadMore,
@@ -15,7 +15,7 @@ class CustomerCodeState with _$CustomerCodeState {
   }) = _CustomerCodeState;
 
   factory CustomerCodeState.initial() => CustomerCodeState(
-        customeCodeInfo: CustomerCodeInfo.empty(),
+        customerCodeInfo: CustomerCodeInfo.empty(),
         customerCodeList: [],
         apiFailureOrSuccessOption: none(),
         canLoadMore: true,
@@ -26,18 +26,22 @@ class CustomerCodeState with _$CustomerCodeState {
 
   ShipToInfo? get defaultShipToInfo {
     if (haveShipToInfo) {
-      final index = customeCodeInfo.shipToInfos
+      final index = customerCodeInfo.shipToInfos
           .indexWhere((element) => element.defaultShipToAddress);
 
       return index == -1
-          ? customeCodeInfo.shipToInfos.first
-          : customeCodeInfo.shipToInfos[index];
+          ? customerCodeInfo.shipToInfos.first
+          : customerCodeInfo.shipToInfos[index];
     } else {
       return null;
     }
   }
 
   bool get haveShipToInfo =>
-      customeCodeInfo != CustomerCodeInfo.empty() &&
-      customeCodeInfo.shipToInfos.isNotEmpty;
+      customerCodeInfo != CustomerCodeInfo.empty() &&
+      customerCodeInfo.shipToInfos.isNotEmpty;
+
+  List<ShipToInfo> get shipToInfos => customerCodeInfo.shipToInfos;
+
+  bool get apiSuccess => apiFailureOrSuccessOption.isNone();
 }

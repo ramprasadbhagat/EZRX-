@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/repository/i_sales_org_repository.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

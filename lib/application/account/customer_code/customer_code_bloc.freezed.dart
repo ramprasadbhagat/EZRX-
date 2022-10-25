@@ -1353,7 +1353,7 @@ abstract class _UpdateSearchKey implements CustomerCodeEvent {
 
 /// @nodoc
 mixin _$CustomerCodeState {
-  CustomerCodeInfo get customeCodeInfo => throw _privateConstructorUsedError;
+  CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
   List<CustomerCodeInfo> get customerCodeList =>
       throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
@@ -1374,7 +1374,7 @@ abstract class $CustomerCodeStateCopyWith<$Res> {
           CustomerCodeState value, $Res Function(CustomerCodeState) then) =
       _$CustomerCodeStateCopyWithImpl<$Res>;
   $Res call(
-      {CustomerCodeInfo customeCodeInfo,
+      {CustomerCodeInfo customerCodeInfo,
       List<CustomerCodeInfo> customerCodeList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool canLoadMore,
@@ -1382,7 +1382,7 @@ abstract class $CustomerCodeStateCopyWith<$Res> {
       bool isSearchActive,
       SearchKey searchKey});
 
-  $CustomerCodeInfoCopyWith<$Res> get customeCodeInfo;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
 }
 
 /// @nodoc
@@ -1396,7 +1396,7 @@ class _$CustomerCodeStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? customeCodeInfo = freezed,
+    Object? customerCodeInfo = freezed,
     Object? customerCodeList = freezed,
     Object? apiFailureOrSuccessOption = freezed,
     Object? canLoadMore = freezed,
@@ -1405,9 +1405,9 @@ class _$CustomerCodeStateCopyWithImpl<$Res>
     Object? searchKey = freezed,
   }) {
     return _then(_value.copyWith(
-      customeCodeInfo: customeCodeInfo == freezed
-          ? _value.customeCodeInfo
-          : customeCodeInfo // ignore: cast_nullable_to_non_nullable
+      customerCodeInfo: customerCodeInfo == freezed
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
       customerCodeList: customerCodeList == freezed
           ? _value.customerCodeList
@@ -1437,9 +1437,9 @@ class _$CustomerCodeStateCopyWithImpl<$Res>
   }
 
   @override
-  $CustomerCodeInfoCopyWith<$Res> get customeCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customeCodeInfo, (value) {
-      return _then(_value.copyWith(customeCodeInfo: value));
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
     });
   }
 }
@@ -1452,7 +1452,7 @@ abstract class _$$_CustomerCodeStateCopyWith<$Res>
       __$$_CustomerCodeStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {CustomerCodeInfo customeCodeInfo,
+      {CustomerCodeInfo customerCodeInfo,
       List<CustomerCodeInfo> customerCodeList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool canLoadMore,
@@ -1461,7 +1461,7 @@ abstract class _$$_CustomerCodeStateCopyWith<$Res>
       SearchKey searchKey});
 
   @override
-  $CustomerCodeInfoCopyWith<$Res> get customeCodeInfo;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
 }
 
 /// @nodoc
@@ -1477,7 +1477,7 @@ class __$$_CustomerCodeStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? customeCodeInfo = freezed,
+    Object? customerCodeInfo = freezed,
     Object? customerCodeList = freezed,
     Object? apiFailureOrSuccessOption = freezed,
     Object? canLoadMore = freezed,
@@ -1486,9 +1486,9 @@ class __$$_CustomerCodeStateCopyWithImpl<$Res>
     Object? searchKey = freezed,
   }) {
     return _then(_$_CustomerCodeState(
-      customeCodeInfo: customeCodeInfo == freezed
-          ? _value.customeCodeInfo
-          : customeCodeInfo // ignore: cast_nullable_to_non_nullable
+      customerCodeInfo: customerCodeInfo == freezed
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
       customerCodeList: customerCodeList == freezed
           ? _value._customerCodeList
@@ -1522,7 +1522,7 @@ class __$$_CustomerCodeStateCopyWithImpl<$Res>
 
 class _$_CustomerCodeState extends _CustomerCodeState {
   const _$_CustomerCodeState(
-      {required this.customeCodeInfo,
+      {required this.customerCodeInfo,
       required final List<CustomerCodeInfo> customerCodeList,
       required this.apiFailureOrSuccessOption,
       required this.canLoadMore,
@@ -1533,7 +1533,7 @@ class _$_CustomerCodeState extends _CustomerCodeState {
         super._();
 
   @override
-  final CustomerCodeInfo customeCodeInfo;
+  final CustomerCodeInfo customerCodeInfo;
   final List<CustomerCodeInfo> _customerCodeList;
   @override
   List<CustomerCodeInfo> get customerCodeList {
@@ -1554,7 +1554,7 @@ class _$_CustomerCodeState extends _CustomerCodeState {
 
   @override
   String toString() {
-    return 'CustomerCodeState(customeCodeInfo: $customeCodeInfo, customerCodeList: $customerCodeList, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, canLoadMore: $canLoadMore, isFetching: $isFetching, isSearchActive: $isSearchActive, searchKey: $searchKey)';
+    return 'CustomerCodeState(customerCodeInfo: $customerCodeInfo, customerCodeList: $customerCodeList, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, canLoadMore: $canLoadMore, isFetching: $isFetching, isSearchActive: $isSearchActive, searchKey: $searchKey)';
   }
 
   @override
@@ -1563,7 +1563,7 @@ class _$_CustomerCodeState extends _CustomerCodeState {
         (other.runtimeType == runtimeType &&
             other is _$_CustomerCodeState &&
             const DeepCollectionEquality()
-                .equals(other.customeCodeInfo, customeCodeInfo) &&
+                .equals(other.customerCodeInfo, customerCodeInfo) &&
             const DeepCollectionEquality()
                 .equals(other._customerCodeList, _customerCodeList) &&
             const DeepCollectionEquality().equals(
@@ -1580,7 +1580,7 @@ class _$_CustomerCodeState extends _CustomerCodeState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(customeCodeInfo),
+      const DeepCollectionEquality().hash(customerCodeInfo),
       const DeepCollectionEquality().hash(_customerCodeList),
       const DeepCollectionEquality().hash(apiFailureOrSuccessOption),
       const DeepCollectionEquality().hash(canLoadMore),
@@ -1597,7 +1597,7 @@ class _$_CustomerCodeState extends _CustomerCodeState {
 
 abstract class _CustomerCodeState extends CustomerCodeState {
   const factory _CustomerCodeState(
-      {required final CustomerCodeInfo customeCodeInfo,
+      {required final CustomerCodeInfo customerCodeInfo,
       required final List<CustomerCodeInfo> customerCodeList,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
@@ -1608,7 +1608,7 @@ abstract class _CustomerCodeState extends CustomerCodeState {
   const _CustomerCodeState._() : super._();
 
   @override
-  CustomerCodeInfo get customeCodeInfo;
+  CustomerCodeInfo get customerCodeInfo;
   @override
   List<CustomerCodeInfo> get customerCodeList;
   @override

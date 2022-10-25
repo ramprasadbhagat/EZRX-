@@ -65,7 +65,7 @@ void main() {
         },
         expect: () => [
               CustomerCodeState.initial()
-                  .copyWith(customeCodeInfo: fakeCustomerInfo)
+                  .copyWith(customerCodeInfo: fakeCustomerInfo)
             ]);
 
     blocTest(
@@ -96,7 +96,7 @@ void main() {
         CustomerCodeState.initial().copyWith(isFetching: true),
         CustomerCodeState.initial().copyWith(
           customerCodeList: [],
-          customeCodeInfo: CustomerCodeInfo.empty(),
+          customerCodeInfo: CustomerCodeInfo.empty(),
           apiFailureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),
@@ -135,7 +135,7 @@ void main() {
         CustomerCodeState.initial().copyWith(isFetching: true),
         CustomerCodeState.initial().copyWith(
           isFetching: false,
-          customeCodeInfo: customerMockData.first,
+          customerCodeInfo: customerMockData.first,
           customerCodeList: customerMockData,
           apiFailureOrSuccessOption: none(),
           canLoadMore: true,
@@ -155,13 +155,13 @@ void main() {
 
     test('Check if state has DefaultShipToInfo in first index', () {
       final customerCodeState = CustomerCodeState.initial()
-          .copyWith(customeCodeInfo: fakeCustomerInfo);
+          .copyWith(customerCodeInfo: fakeCustomerInfo);
       expect(customerCodeState.defaultShipToInfo, fakeShipToInfo);
     });
 
     test('Check if state has DefaultShipToInfo in predefined index', () {
       final customerCodeState = CustomerCodeState.initial().copyWith(
-          customeCodeInfo: fakeCustomerInfo.copyWith(shipToInfos: [
+          customerCodeInfo: fakeCustomerInfo.copyWith(shipToInfos: [
         fakeShipToInfo,
         fakeShipToInfo.copyWith(
             building: 'fakeBuilding2', defaultShipToAddress: true)
@@ -241,7 +241,7 @@ void main() {
             searchKey: SearchKey('fake-customer-code')),
         CustomerCodeState.initial().copyWith(
             customerCodeList: [],
-            customeCodeInfo: CustomerCodeInfo.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
             apiFailureOrSuccessOption: optionOf(
               const Left(
                 ApiFailure.other('fake-error'),

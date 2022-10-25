@@ -54,8 +54,8 @@ class NotificationSettingsPage extends StatelessWidget {
                               context.read<UserBloc>().add(
                                     UserEvent.updateNotificationSettings(
                                       languagePreference: locale.languageCode,
-                                      emailNotifications: state
-                                          .user.settings.emailNotifications,
+                                      emailNotifications:
+                                          state.emailNotifications,
                                     ),
                                   );
                               context.router.pop();
@@ -80,7 +80,7 @@ class NotificationSettingsPage extends StatelessWidget {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  state.user.settings.languagePreference
+                                  state.languagePreference
                                       .toLocale()
                                       .languageString(),
                                   style: const TextStyle(fontSize: 13),
@@ -151,20 +151,20 @@ class NotificationSettingsPage extends StatelessWidget {
                       Row(mainAxisSize: MainAxisSize.min, children: [
                         BlocBuilder<UserBloc, UserState>(
                           buildWhen: (previous, current) =>
-                              (previous.user.settings.emailNotifications !=
-                                  current.user.settings.emailNotifications) ||
-                              (previous.user.settings.languagePreference !=
-                                  current.user.settings.languagePreference),
+                              (previous.emailNotifications !=
+                                  current.emailNotifications) ||
+                              (previous.languagePreference !=
+                                  current.languagePreference),
                           builder: (context, state) {
                             return PlatformSwitch(
                               key: const Key('flutterSwitch'),
                               activeColor: ZPColors.secondary,
-                              value: state.user.settings.emailNotifications,
+                              value: state.emailNotifications,
                               onChanged: (bool value) {
                                 context.read<UserBloc>().add(
                                       UserEvent.updateNotificationSettings(
-                                        languagePreference: state
-                                            .user.settings.languagePreference,
+                                        languagePreference:
+                                            state.languagePreference,
                                         emailNotifications: value,
                                       ),
                                     );

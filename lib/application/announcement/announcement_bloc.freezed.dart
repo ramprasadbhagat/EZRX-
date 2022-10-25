@@ -389,11 +389,12 @@ class __$$_AnnouncementStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AnnouncementState implements _AnnouncementState {
+class _$_AnnouncementState extends _AnnouncementState {
   const _$_AnnouncementState(
       {required this.announcement,
       required this.isLoading,
-      required this.isClosed});
+      required this.isClosed})
+      : super._();
 
   @override
   final Announcement announcement;
@@ -432,11 +433,12 @@ class _$_AnnouncementState implements _AnnouncementState {
           this, _$identity);
 }
 
-abstract class _AnnouncementState implements AnnouncementState {
+abstract class _AnnouncementState extends AnnouncementState {
   const factory _AnnouncementState(
       {required final Announcement announcement,
       required final bool isLoading,
       required final bool isClosed}) = _$_AnnouncementState;
+  const _AnnouncementState._() : super._();
 
   @override
   Announcement get announcement;

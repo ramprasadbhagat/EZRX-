@@ -48,7 +48,7 @@ class SalesOrgSelector extends StatelessWidget {
           if (state.haveSelectedSalesOrganisation) {
             context.read<CustomerCodeBloc>().add(
                   CustomerCodeEvent.fetch(
-                    hidecustomer: state.configs.hideCustomer,
+                    hidecustomer: state.hideCustomer,
                     selectedSalesOrg: state.salesOrganisation,
                     isRefresh: true,
                     userInfo: context.read<UserBloc>().state.user,
@@ -68,7 +68,7 @@ class SalesOrgSelector extends StatelessWidget {
           return state.salesOrganisation == SalesOrganisation.empty()
               ? LoadingShimmer.tile()
               : Text(
-                  state.salesOrganisation.salesOrg.fullName,
+                  state.salesOrg.fullName,
                   style: Theme.of(context).textTheme.subtitle2?.apply(
                         color: ZPColors.primary,
                       ),
@@ -80,12 +80,11 @@ class SalesOrgSelector extends StatelessWidget {
         barrierDismissible: true,
         builder: (_) => BlocBuilder<UserBloc, UserState>(
           buildWhen: (previous, current) =>
-              previous.user.userSalesOrganisations !=
-              current.user.userSalesOrganisations,
+              previous.userSalesOrganisations != current.userSalesOrganisations,
           builder: (context, state) {
             return PlatformAlertDialog(
               title: const Text('Please select a Sales Org').tr(),
-              actions: state.user.userSalesOrganisations
+              actions: state.userSalesOrganisations
                   .map(
                     (e) => PlatformDialogAction(
                       key: Key('salesOrgOption${e.salesOrg.getOrCrash()}'),

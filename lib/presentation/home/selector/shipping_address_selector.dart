@@ -38,7 +38,7 @@ class ShipCodeSelector extends StatelessWidget {
                       selectedCustomerCode: context
                           .read<CustomerCodeBloc>()
                           .state
-                          .customeCodeInfo,
+                          .customerCodeInfo,
                       selectedShipTo: state.shipToInfo,
                     ),
                   );
@@ -52,7 +52,7 @@ class ShipCodeSelector extends StatelessWidget {
                       customerCodeInfo: context
                           .read<CustomerCodeBloc>()
                           .state
-                          .customeCodeInfo,
+                          .customerCodeInfo,
                       shipToInfo: state.shipToInfo,
                     ),
                   );
@@ -66,7 +66,7 @@ class ShipCodeSelector extends StatelessWidget {
                       customerCodeInfo: context
                           .read<CustomerCodeBloc>()
                           .state
-                          .customeCodeInfo,
+                          .customerCodeInfo,
                     ),
                   );
 
@@ -88,7 +88,7 @@ class ShipCodeSelector extends StatelessWidget {
                       customerCode: context
                           .read<CustomerCodeBloc>()
                           .state
-                          .customeCodeInfo,
+                          .customerCodeInfo,
                       shipToCode:
                           context.read<ShipToCodeBloc>().state.shipToInfo,
                       salesOrganisation:
@@ -133,7 +133,7 @@ class ShipCodeSelector extends StatelessWidget {
               child: customerCodeState.isFetching
                   ? LoadingShimmer.tile()
                   : Text(
-                      customerCodeState.apiFailureOrSuccessOption.isNone()
+                      customerCodeState.apiSuccess
                           ? state.shipToInfo.shipToCustomerCode
                           : 'No Shipping',
                       style: Theme.of(context).textTheme.subtitle2?.apply(

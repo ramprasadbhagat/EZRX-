@@ -92,7 +92,7 @@ void main() {
           CustomerCodeState.initial().copyWith(isFetching: true),
           CustomerCodeState.initial().copyWith(
             isFetching: false,
-            customeCodeInfo: CustomerCodeInfo.empty()
+            customerCodeInfo: CustomerCodeInfo.empty()
                 .copyWith(customerCodeSoldTo: 'fake-123456'),
             customerCodeList: [
               CustomerCodeInfo.empty(),
@@ -144,7 +144,7 @@ void main() {
           initialState: customerCodeBlocMock.state.copyWith(
             isFetching: false,
             canLoadMore: true,
-            customeCodeInfo: customerCodeListMock.first,
+            customerCodeInfo: customerCodeListMock.first,
             customerCodeList: customerCodeListMock,
           ));
 
@@ -167,12 +167,13 @@ void main() {
       expect(nocustomerFound, findsNothing);
     });
 
-    testWidgets('Test have customer code list and emit load more state include and found no data',
+    testWidgets(
+        'Test have customer code list and emit load more state include and found no data',
         (tester) async {
       final expectedCustomerCodeListStates = [
         CustomerCodeState.initial().copyWith(
           isFetching: false,
-           customerCodeList: [],
+          customerCodeList: [],
         ),
       ];
 
@@ -181,7 +182,7 @@ void main() {
           initialState: customerCodeBlocMock.state.copyWith(
             isFetching: true,
             canLoadMore: true,
-            customeCodeInfo: customerCodeListMock.first,
+            customerCodeInfo: customerCodeListMock.first,
             customerCodeList: customerCodeListMock,
           ));
 
@@ -208,7 +209,7 @@ void main() {
       final expectedCustomerCodeListStates = [
         CustomerCodeState.initial().copyWith(
           isFetching: false,
-           customerCodeList: [],
+          customerCodeList: [],
         ),
       ];
 
@@ -217,7 +218,7 @@ void main() {
           initialState: customerCodeBlocMock.state.copyWith(
             isFetching: true,
             canLoadMore: true,
-            customeCodeInfo: customerCodeListMock.first,
+            customerCodeInfo: customerCodeListMock.first,
             customerCodeList: customerCodeListMock,
           ));
 
@@ -226,16 +227,17 @@ void main() {
       });
 
       await tester.pump();
-      final clearCusromerCodeSearch = find.byKey(const Key('clearCustomerCodeSearch'));
+      final clearCusromerCodeSearch =
+          find.byKey(const Key('clearCustomerCodeSearch'));
       expect(clearCusromerCodeSearch, findsOneWidget);
       await tester.tap(clearCusromerCodeSearch);
     });
 
-     testWidgets('Field Submitted Customer code Search', (tester) async {
+    testWidgets('Field Submitted Customer code Search', (tester) async {
       final expectedCustomerCodeListStates = [
         CustomerCodeState.initial().copyWith(
           isFetching: false,
-           customerCodeList: [],
+          customerCodeList: [],
         ),
       ];
 
@@ -244,7 +246,7 @@ void main() {
           initialState: customerCodeBlocMock.state.copyWith(
             isFetching: true,
             canLoadMore: true,
-            customeCodeInfo: customerCodeListMock.first,
+            customerCodeInfo: customerCodeListMock.first,
             customerCodeList: customerCodeListMock,
           ));
 
@@ -253,7 +255,8 @@ void main() {
       });
 
       await tester.pump();
-      await tester.enterText(find.byKey(const Key('customerCodeSearchField')), 'a@b.c');
+      await tester.enterText(
+          find.byKey(const Key('customerCodeSearchField')), 'a@b.c');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('123'), findsNothing);
@@ -261,6 +264,5 @@ void main() {
       final errorMessage = find.byKey(const Key('snackBarMessage'));
       expect(errorMessage, findsOneWidget);
     });
-
   });
 }

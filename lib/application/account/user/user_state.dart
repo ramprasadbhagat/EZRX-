@@ -17,4 +17,11 @@ class UserState with _$UserState {
   bool get haveSalesOrganisation => user.userSalesOrganisations.isNotEmpty;
   bool get isSalesRep => user.role.type.isSalesRep;
   bool get isNotEmpty => user != User.empty();
+  String get userRoleName => user.role.name;
+  FullName get userFullName => user.fullName;
+  bool get userCanLoginOnBehalf => user.role.type.canLoginOnBehalf;
+  String get languagePreference => user.settings.languagePreference;
+  bool get emailNotifications => user.settings.emailNotifications;
+  List<SalesOrganisation> get userSalesOrganisations =>
+      user.userSalesOrganisations;
 }

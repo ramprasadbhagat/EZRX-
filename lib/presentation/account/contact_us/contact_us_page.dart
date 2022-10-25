@@ -16,11 +16,9 @@ class ContactUsPage extends StatelessWidget {
         title: const Text('Contact Us').tr(),
       ),
       body: BlocBuilder<SalesOrgBloc, SalesOrgState>(
-        buildWhen: (previous, current) =>
-            previous.salesOrganisation.salesOrg !=
-            current.salesOrganisation.salesOrg,
+        buildWhen: (previous, current) => previous.salesOrg != current.salesOrg,
         builder: (context, state) {
-          final salesOrg = state.salesOrganisation.salesOrg;
+          final salesOrg = state.salesOrg;
 
           return ListView(
             children: ListTile.divideTiles(

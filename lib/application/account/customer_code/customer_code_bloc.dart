@@ -37,15 +37,15 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         emit(state.copyWith(searchKey: SearchKey.search(e.searchKey)));
       },
       selected: (e) async {
-        emit(state.copyWith(customeCodeInfo: e.customerCodeInfo));
+        emit(state.copyWith(customerCodeInfo: e.customerCodeInfo));
       },
       search: (e) async {
         if (state.isFetching) return;
         final previousSearchKey = state.searchKey;
-        final previousCustomerCodeState = state.customeCodeInfo;
+        final previousCustomerCodeState = state.customerCodeInfo;
         emit(CustomerCodeState.initial().copyWith(
           searchKey: previousSearchKey,
-          customeCodeInfo: previousCustomerCodeState,
+          customerCodeInfo: previousCustomerCodeState,
           isSearchActive: true,
           isFetching: true,
         ));
@@ -135,9 +135,9 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
               apiFailureOrSuccessOption: none(),
               isFetching: false,
               canLoadMore: canLoadMore,
-              customeCodeInfo: finalCustomerCodeInfoList.isNotEmpty
+              customerCodeInfo: finalCustomerCodeInfoList.isNotEmpty
                   ? finalCustomerCodeInfoList.first
-                  : state.customeCodeInfo,
+                  : state.customerCodeInfo,
             ),
           );
         }

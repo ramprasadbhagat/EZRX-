@@ -20,7 +20,7 @@ class CustomerCodeSelector extends StatelessWidget {
       listenWhen: (previous, current) =>
           previous.apiFailureOrSuccessOption !=
               current.apiFailureOrSuccessOption ||
-          previous.customeCodeInfo != current.customeCodeInfo,
+          previous.customerCodeInfo != current.customerCodeInfo,
       listener: (context, state) {
         state.apiFailureOrSuccessOption.fold(
           () {},
@@ -44,10 +44,10 @@ class CustomerCodeSelector extends StatelessWidget {
         final defaultShipToInfo = state.defaultShipToInfo;
         if (defaultShipToInfo != null) {
           context.read<ShipToCodeBloc>().add(
-              ShipToCodeEvent.load(
-                shipToInfos: state.customeCodeInfo.shipToInfos,
-              ),
-            );
+                ShipToCodeEvent.load(
+                  shipToInfos: state.shipToInfos,
+                ),
+              );
           context.read<ShipToCodeBloc>().add(
                 ShipToCodeEvent.selected(
                   shipToInfo: defaultShipToInfo,
@@ -70,8 +70,8 @@ class CustomerCodeSelector extends StatelessWidget {
           child: state.isFetching
               ? LoadingShimmer.tile()
               : Text(
-                  state.apiFailureOrSuccessOption.isNone()
-                      ? state.customeCodeInfo.customerCodeSoldTo
+                  state.apiSuccess
+                      ? state.customerCodeInfo.customerCodeSoldTo
                       : 'No Customer',
                   style: Theme.of(context).textTheme.subtitle2?.apply(
                         color: ZPColors.primary,

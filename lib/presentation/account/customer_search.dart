@@ -112,7 +112,7 @@ class _CustomerSearchPage extends State<CustomerSearchPage> {
                           userInfo: userBloc.state.user,
                           selectedSalesOrg:
                               salesOrgBloc.state.salesOrganisation,
-                          hidecustomer: salesOrgBloc.state.configs.hideCustomer,
+                          hidecustomer: salesOrgBloc.state.hideCustomer,
                         ),
                       );
                     } else {
@@ -143,15 +143,14 @@ class _CustomerSearchPage extends State<CustomerSearchPage> {
                       key: const Key('clearCustomerCodeSearch'),
                       icon: const Icon(Icons.clear),
                       onPressed: () {
-                        if(_searchController.text.isNotEmpty){
+                        if (_searchController.text.isNotEmpty) {
                           customerCodeBloc.add(
                             CustomerCodeEvent.fetch(
                               userInfo: userBloc.state.user,
                               selectedSalesOrg:
                                   salesOrgBloc.state.salesOrganisation,
                               isRefresh: true,
-                              hidecustomer:
-                                  salesOrgBloc.state.configs.hideCustomer,
+                              hidecustomer: salesOrgBloc.state.hideCustomer,
                             ),
                           );
                         }

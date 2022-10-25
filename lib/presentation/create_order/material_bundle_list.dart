@@ -90,7 +90,7 @@ class _BodyContent extends StatelessWidget {
                         customerCode: context
                             .read<CustomerCodeBloc>()
                             .state
-                            .customeCodeInfo,
+                            .customerCodeInfo,
                         salesOrganisation: context
                             .read<SalesOrgBloc>()
                             .state
@@ -106,7 +106,7 @@ class _BodyContent extends StatelessWidget {
                       customerCode: context
                           .read<CustomerCodeBloc>()
                           .state
-                          .customeCodeInfo,
+                          .customerCodeInfo,
                       salesOrganisation:
                           context.read<SalesOrgBloc>().state.salesOrganisation,
                       shipToCode:
@@ -153,12 +153,8 @@ class _ListContent extends StatelessWidget {
             for (final bundleInfo in bundle.bundleInformation)
               Text(
                 _getOfferText(
-                  currency: context
-                      .read<SalesOrgBloc>()
-                      .state
-                      .configs
-                      .currency
-                      .getOrCrash(),
+                  currency:
+                      context.read<SalesOrgBloc>().state.currency.getOrCrash(),
                   quantity: bundleInfo.quantity.toString(),
                   rate: bundleInfo.rate,
                   type: bundleInfo.type,

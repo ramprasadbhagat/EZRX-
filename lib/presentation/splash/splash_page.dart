@@ -57,8 +57,7 @@ class SplashPage extends StatelessWidget {
             if (state.haveSalesOrganisation) {
               context.read<SalesOrgBloc>().add(
                     SalesOrgEvent.selected(
-                      salesOrganisation:
-                          state.user.userSalesOrganisations.first,
+                      salesOrganisation: state.userSalesOrganisations.first,
                     ),
                   );
             }
@@ -73,11 +72,7 @@ class SplashPage extends StatelessWidget {
               context.read<AupTcBloc>().add(
                     AupTcEvent.show(
                       state.user,
-                      context
-                          .read<SalesOrgBloc>()
-                          .state
-                          .salesOrganisation
-                          .salesOrg,
+                      context.read<SalesOrgBloc>().state.salesOrg,
                     ),
                   );
             }
@@ -96,7 +91,7 @@ class SplashPage extends StatelessWidget {
                       customeCodeInfo: context
                           .read<CustomerCodeBloc>()
                           .state
-                          .customeCodeInfo,
+                          .customerCodeInfo,
                       paymentCustomerInformation:
                           paymentCustomerInformationState
                               .paymentCustomerInformation,

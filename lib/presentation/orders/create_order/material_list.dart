@@ -93,7 +93,7 @@ class _BodyContent extends StatelessWidget {
                       customerCodeInfo: context
                           .read<CustomerCodeBloc>()
                           .state
-                          .customeCodeInfo,
+                          .customerCodeInfo,
                       shipToInfo:
                           context.read<ShipToCodeBloc>().state.shipToInfo,
                     ),
@@ -107,7 +107,7 @@ class _BodyContent extends StatelessWidget {
                       customerCodeInfo: context
                           .read<CustomerCodeBloc>()
                           .state
-                          .customeCodeInfo,
+                          .customerCodeInfo,
                       shipToInfo:
                           context.read<ShipToCodeBloc>().state.shipToInfo,
                     ),

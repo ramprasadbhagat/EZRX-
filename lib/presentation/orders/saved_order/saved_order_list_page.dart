@@ -66,7 +66,7 @@ class SavedOrderListPage extends StatelessWidget {
                         selectedCustomerCode: context
                             .read<CustomerCodeBloc>()
                             .state
-                            .customeCodeInfo,
+                            .customerCodeInfo,
                         selectedShipTo:
                             context.read<ShipToCodeBloc>().state.shipToInfo,
                       ),
@@ -81,7 +81,7 @@ class SavedOrderListPage extends StatelessWidget {
                         selectedCustomerCode: context
                             .read<CustomerCodeBloc>()
                             .state
-                            .customeCodeInfo,
+                            .customerCodeInfo,
                         selectedShipTo:
                             context.read<ShipToCodeBloc>().state.shipToInfo,
                       ),

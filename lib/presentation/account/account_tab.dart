@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -62,17 +61,17 @@ class _ProfileTile extends StatelessWidget {
         return ListTile(
           key: const Key('profileTile'),
           leading: const CircleAvatar(),
-          title: state.user == User.empty()
-              ? LoadingShimmer.tile(line: 3)
-              : Text(
-                  state.user.fullName.toString(),
+          title: state.isNotEmpty
+              ? Text(
+                  state.userFullName.toString(),
                   style: Theme.of(context).textTheme.headline6,
-                ),
-          subtitle: state.user == User.empty()
-              ? LoadingShimmer.tile(line: 1)
-              : Text(
-                  state.user.role.name,
-                ),
+                )
+              : LoadingShimmer.tile(line: 3),
+          subtitle: state.isNotEmpty
+              ? Text(
+                  state.userRoleName,
+                )
+              : LoadingShimmer.tile(line: 1),
           onTap: null,
         );
       },
@@ -89,7 +88,7 @@ class _LoginOnBehalfTile extends StatelessWidget {
       buildWhen: (previous, current) => previous.user != current.user,
       builder: (context, state) {
         return Visibility(
-          visible: state.user.role.type.canLoginOnBehalf,
+          visible: state.userCanLoginOnBehalf,
           child: ListTile(
             key: const Key('loginOnBehalfTile'),
             leading: const Icon(Icons.person_outline),

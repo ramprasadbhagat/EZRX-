@@ -14,7 +14,7 @@ class AnnouncementWidget extends StatelessWidget {
       child: BlocBuilder<AnnouncementBloc, AnnouncementState>(
         buildWhen: (previous, current) => previous != current,
         builder: (_, state) {
-          if (!state.announcement.hasValidAnnouncement) {
+          if (!state.hasValidAnnouncement) {
             return const SizedBox();
           }
 
@@ -56,7 +56,7 @@ class AnnouncementWidget extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8),
                       child: Text(
-                        state.announcement.descriptionDisplay,
+                        state.descriptionDisplay,
                         key: const Key('announcementDescription'),
                         textAlign: TextAlign.justify,
                         style: const TextStyle(

@@ -68,7 +68,7 @@ class HistoryTab extends StatelessWidget {
                           customerCodeInfo: context
                               .read<CustomerCodeBloc>()
                               .state
-                              .customeCodeInfo,
+                              .customerCodeInfo,
                           salesOrgConfigs:
                               context.read<SalesOrgBloc>().state.configs,
                           shipToInfo:
@@ -82,7 +82,7 @@ class HistoryTab extends StatelessWidget {
                           customerCodeInfo: context
                               .read<CustomerCodeBloc>()
                               .state
-                              .customeCodeInfo,
+                              .customerCodeInfo,
                           salesOrgConfigs:
                               context.read<SalesOrgBloc>().state.configs,
                           shipToInfo:
@@ -92,8 +92,7 @@ class HistoryTab extends StatelessWidget {
                       ),
                   itemBuilder: (context, index, item) => OrderHistoryListTile(
                     orderHistoryItem: item,
-                    currency:
-                        context.read<SalesOrgBloc>().state.configs.currency,
+                    currency: context.read<SalesOrgBloc>().state.currency,
                   ),
                   items: state.orderHistoryList.orderHistoryItems,
                 );
