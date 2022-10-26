@@ -5,25 +5,22 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
-
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
-
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_history_repository.dart';
 import 'package:ezrxmobile/presentation/history/history_tab.dart';
-
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
-
 import '../../utils/widget_utils.dart';
 
 class MockHTTPService extends Mock implements HttpService {}
@@ -42,10 +39,16 @@ class ShipToCodeMocBloc extends MockBloc<ShipToCodeEvent, ShipToCodeState>
 
 class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
+class OrderHistoryFilterMockBloc
+    extends MockBloc<OrderHistoryFilterEvent, OrderHistoryFilterState>
+    implements OrderHistoryFilterBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late GetIt locator;
   final mockOrderHistoryListBloc = OrderHistoryListBlocMock();
+  final mockOrderHistoryFilterBloc = OrderHistoryFilterMockBloc();
+  final mockShipToCodeBloc = ShipToCodeMocBloc();
   late MockHTTPService mockHTTPService;
   late AppRouter autoRouterMock;
   setUpAll(() {
@@ -56,6 +59,10 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => CountlyService());
     locator.registerLazySingleton(() => mockOrderHistoryListBloc);
+    locator.registerLazySingleton(() => mockOrderHistoryFilterBloc);
+    locator.registerLazySingleton(() => mockShipToCodeBloc);
+    
+
     autoRouterMock = locator<AppRouter>();
     mockHTTPService = MockHTTPService();
     locator.registerLazySingleton<HttpService>(
@@ -68,6 +75,10 @@ void main() {
       setUp(() {
         when(() => mockOrderHistoryListBloc.state)
             .thenReturn(OrderHistoryListState.initial());
+        when(() => mockOrderHistoryFilterBloc.state)
+            .thenReturn(OrderHistoryFilterState.initial());
+        when(() => mockShipToCodeBloc.state)
+            .thenReturn(ShipToCodeState.initial());
       });
       StackRouterScope getWUT() {
         return WidgetUtils.getScopedWidget(
@@ -75,8 +86,12 @@ void main() {
           providers: [
             BlocProvider<OrderHistoryListBloc>(
                 create: (context) => mockOrderHistoryListBloc),
+            BlocProvider<OrderHistoryFilterBloc>(
+                create: (context) => mockOrderHistoryFilterBloc),
+            BlocProvider<ShipToCodeBloc>(
+                create: (context) => mockShipToCodeBloc),
           ],
-          child: const HistoryTab(),
+          child: HistoryTab(),
         );
       }
 
@@ -175,6 +190,38 @@ void main() {
         await tester.pumpAndSettle(const Duration(seconds: 3));
         expect(find.byKey(const Key('OrderHistoryList')), findsWidgets);
         await tester.pump();
+      });
+
+      testWidgets('Filter button test', (tester) async {
+        final orderHistoryBloc = locator<OrderHistoryListBlocMock>();
+        when(() => orderHistoryBloc.stream).thenAnswer((invocation) {
+          return Stream.fromIterable([
+            OrderHistoryListState.initial().copyWith(
+              failureOrSuccessOption: none(),
+              orderHistoryList: OrderHistory(
+                orderBasicInformation: OrderHistoryBasicInfo.empty(),
+                orderHistoryItems: <OrderHistoryItem>[],
+              ),
+              isFetching: false,
+            ),
+          ]);
+        });
+        await tester.pumpWidget(getWUT());
+        await tester.pumpAndSettle(const Duration(seconds: 3));
+        expect(find.byKey(const Key('order_history_filter')), findsWidgets);
+        expect(find.byKey(const Key('Filter_list_not_empty')), findsNothing);
+        expect(find.byKey(const Key('filterButton')), findsOneWidget);
+      });
+
+      testWidgets('Filter button test filter on', (tester) async {
+        when(() => mockOrderHistoryListBloc.state)
+            .thenReturn(OrderHistoryListState.initial());
+        when(() => mockOrderHistoryFilterBloc.state).thenReturn(
+          OrderHistoryFilterState.initial().copyWith(isSubmitting: true),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+        expect(find.byKey(const Key('Filter_list_not_empty')), findsOneWidget);
       });
     },
   );

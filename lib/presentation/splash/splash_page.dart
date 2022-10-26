@@ -35,7 +35,7 @@ class SplashPage extends StatelessWidget {
                 context.router.replaceAll(
                   [
                     const SplashPageRoute(),
-                    const HomeNavigationTabbarRoute(),
+                     HomeNavigationTabbarRoute(),
                   ],
                 );
               },

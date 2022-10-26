@@ -110,8 +110,11 @@ class AppRouter extends _i21.RootStackRouter {
               key: args.key, orderTemplateInfo: args.orderTemplateInfo));
     },
     HomeNavigationTabbarRoute.name: (routeData) {
+      final args = routeData.argsAs<HomeNavigationTabbarRouteArgs>(
+          orElse: () => const HomeNavigationTabbarRouteArgs());
       return _i21.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i15.HomeNavigationTabbar());
+          routeData: routeData,
+          child: _i15.HomeNavigationTabbar(key: args.key));
     },
     SavedOrderListPageRoute.name: (routeData) {
       return _i21.MaterialPageX<dynamic>(
@@ -122,8 +125,10 @@ class AppRouter extends _i21.RootStackRouter {
           routeData: routeData, child: const _i17.HomeTab());
     },
     HistoryTabRoute.name: (routeData) {
+      final args = routeData.argsAs<HistoryTabRouteArgs>(
+          orElse: () => const HistoryTabRouteArgs());
       return _i21.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i18.HistoryTab());
+          routeData: routeData, child: _i18.HistoryTab(key: args.key));
     },
     FavouritesTabRoute.name: (routeData) {
       return _i21.MaterialPageX<dynamic>(
@@ -355,12 +360,26 @@ class OrderTemplateDetailPageRouteArgs {
 
 /// generated route for
 /// [_i15.HomeNavigationTabbar]
-class HomeNavigationTabbarRoute extends _i21.PageRouteInfo<void> {
-  const HomeNavigationTabbarRoute({List<_i21.PageRouteInfo>? children})
+class HomeNavigationTabbarRoute
+    extends _i21.PageRouteInfo<HomeNavigationTabbarRouteArgs> {
+  HomeNavigationTabbarRoute({_i22.Key? key, List<_i21.PageRouteInfo>? children})
       : super(HomeNavigationTabbarRoute.name,
-            path: 'main_tabbar', initialChildren: children);
+            path: 'main_tabbar',
+            args: HomeNavigationTabbarRouteArgs(key: key),
+            initialChildren: children);
 
   static const String name = 'HomeNavigationTabbarRoute';
+}
+
+class HomeNavigationTabbarRouteArgs {
+  const HomeNavigationTabbarRouteArgs({this.key});
+
+  final _i22.Key? key;
+
+  @override
+  String toString() {
+    return 'HomeNavigationTabbarRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for
@@ -382,10 +401,23 @@ class HomeTabRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i18.HistoryTab]
-class HistoryTabRoute extends _i21.PageRouteInfo<void> {
-  const HistoryTabRoute() : super(HistoryTabRoute.name, path: 'history-tab');
+class HistoryTabRoute extends _i21.PageRouteInfo<HistoryTabRouteArgs> {
+  HistoryTabRoute({_i22.Key? key})
+      : super(HistoryTabRoute.name,
+            path: 'history-tab', args: HistoryTabRouteArgs(key: key));
 
   static const String name = 'HistoryTabRoute';
+}
+
+class HistoryTabRouteArgs {
+  const HistoryTabRouteArgs({this.key});
+
+  final _i22.Key? key;
+
+  @override
+  String toString() {
+    return 'HistoryTabRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for

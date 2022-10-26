@@ -45,6 +45,8 @@ import 'package:upgrader/upgrader.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
+
 final _crashlytics = locator<FirebaseCrashlyticsService>().crashlytics;
 
 Future<void> _firebaseMessagingBackgroundHandler(
@@ -148,6 +150,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<OrderHistoryListBloc>(
           create: (context) => locator<OrderHistoryListBloc>(),
+        ),
+        BlocProvider<OrderHistoryFilterBloc>(
+          create: (context) => locator<OrderHistoryFilterBloc>(),
         ),
         BlocProvider<ResetPasswordBloc>(
           create: (context) => locator<ResetPasswordBloc>(),

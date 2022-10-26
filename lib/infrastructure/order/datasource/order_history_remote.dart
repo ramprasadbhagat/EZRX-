@@ -10,11 +10,13 @@ import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_dto.dart';
 
+
 class OrderHistoryRemoteDataSource {
   HttpService httpService;
   OrderHistoryQueryMutation orderHistoryQueryMutation;
   Config config;
   DataSourceExceptionHandler dataSourceExceptionHandler;
+
   OrderHistoryRemoteDataSource({
     required this.httpService,
     required this.orderHistoryQueryMutation,
@@ -33,20 +35,31 @@ class OrderHistoryRemoteDataSource {
     required String orderBy, // = 'orderDate',
     required String sort, // = 'desc',
     required String companyName,
+    required String orderId,
+    required String poNumber,
+    required String materialSearch,
+    required String principalSearch,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = orderHistoryQueryMutation.getOrderHistoryRep();
+
       final variables = {
         'soldTo': soldTo,
         'shipTo': [shipTo],
         'first': pageSize,
         'after': offset,
         'orderBy': orderBy,
-        'fromDate': fromDate,
-        'toDate': toDate,
+        'fromDate': fromDate,     // '20220906',
+        'toDate':  toDate,       //'20221008',
         'sort': sort,
+        'orderNumber': orderId,
+        'poReference': poNumber,
+        'materialSearch': materialSearch,
+        'principalSearch': principalSearch,
         'companyName': companyName,
       };
+
+     
 
       final res = await httpService.request(
         method: 'POST',
@@ -56,7 +69,7 @@ class OrderHistoryRemoteDataSource {
           'variables': variables,
         }),
       );
-
+     
       _orderHistoryExceptionChecker(res: res);
 
       if (res.data['data']['orderHistoryV2']['OrderHistory'].isEmpty) {
@@ -81,6 +94,10 @@ class OrderHistoryRemoteDataSource {
     required String sort, // = 'desc',
     required String userName, // = '',
     required String language, // = 'E',
+    required String orderId,
+    required String poNumber,
+    required String materialSearch,
+    required String principalSearch,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = orderHistoryQueryMutation.getOrderHistoryForSalesRep();
@@ -93,6 +110,10 @@ class OrderHistoryRemoteDataSource {
         'fromDate': fromDate,
         'toDate': toDate,
         'sort': sort,
+        'orderNumber': orderId,
+        'poReference': poNumber,
+        'materialSearch': materialSearch,
+        'principalSearch': principalSearch,
         'userName': userName,
         'language': language,
       };

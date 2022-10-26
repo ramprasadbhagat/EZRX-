@@ -11,6 +11,10 @@ class OrderHistoryQueryMutation {
       \$first: Int!,
       \$after: Int!,
       \$sort:String!
+      \$orderNumber:String! 
+     \$poReference:String!
+     \$materialSearch:String!
+     \$principalSearch:String!
       )
       {
       orderHistoryV2(
@@ -22,7 +26,11 @@ class OrderHistoryQueryMutation {
        companyName: \$companyName,
         after:\$after,
         first:\$first,
-        sort:\$sort){
+        sort:\$sort,
+        orderNumber:\$orderNumber,
+        poReference:\$poReference,
+        materialSearch:\$materialSearch,
+        principalSearch:\$principalSearch,){
           OrderHistory{
             OrderBasicInformation{ SoldTo ShipTo CompanyName }
             OrderItems {
@@ -60,15 +68,25 @@ class OrderHistoryQueryMutation {
       \$shipTo: [String],
       \$soldTo: String!,
       \$userName: String!,
+      \$sort:String!
+      \$orderNumber:String! 
+     \$poReference:String!
+     \$materialSearch:String!
+     \$principalSearch:String!
       ){
        orderHistoryForSalesRepV2(
         orderBy:\$orderBy,
-        language:  \$language,
-        shipTo: \$shipTo,
-        soldTo:  \$soldTo,
+        language:\$language,
+        shipTo:\$shipTo,
+        soldTo:\$soldTo,
         after:\$after,
         first:\$first, 
-        userName:\$userName
+        userName:\$userName,
+        sort:\$sort,
+        orderNumber:\$orderNumber,
+        poReference:\$poReference,
+        materialSearch:\$materialSearch,
+        principalSearch:\$principalSearch,
       ) {
             OrderHistory {
               OrderBasicInformation { SoldTo ShipTo CompanyName }

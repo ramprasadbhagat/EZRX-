@@ -9,7 +9,8 @@ import 'package:sizer/sizer.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 
 class HomeNavigationTabbar extends StatelessWidget {
-  const HomeNavigationTabbar({Key? key}) : super(key: key);
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  HomeNavigationTabbar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +100,7 @@ final _routesItems = [
   ),
 
   RouteItem(
-    route: const HistoryTabRoute(),
+    route:  HistoryTabRoute(),
     icon: const Icon(Icons.shopping_basket_outlined, key: Key('historyTab')),
     label: 'History',
   ),

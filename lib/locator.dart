@@ -132,6 +132,8 @@ import 'package:local_auth/local_auth.dart';
 
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 
+import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
+
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
@@ -724,10 +726,20 @@ void setupLocator() {
   );
   locator.registerLazySingleton(
     () => OrderHistoryListBloc(
+
       orderHistoryRepository: locator<OrderHistoryRepository>(),
+       
+
     ),
   );
+  //============================================================
+  //  Order History Filter
+  //
+  //============================================================
 
+  locator.registerLazySingleton(
+    () => OrderHistoryFilterBloc(),
+  );
   //============================================================
   //  Payment Customer Information
   //
