@@ -4,7 +4,9 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/application/order/valid_customer_material/valid_customer_material_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/presentation/core/cart_button.dart';
@@ -15,8 +17,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/presentation/orders/saved_order/order_template_item.dart';
 
-class SavedOrderListPage extends StatelessWidget {
+class SavedOrderListPage extends StatefulWidget {
   const SavedOrderListPage({Key? key}) : super(key: key);
+
+  @override
+  State<SavedOrderListPage> createState() => _SavedOrderListPageState();
+}
+
+class _SavedOrderListPageState extends State<SavedOrderListPage> {
+  @override
+  void initState() {
+    context.read<ValidCustomerMaterialBloc>().add(
+          const ValidCustomerMaterialEvent.initialized(),
+        );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,21 +73,29 @@ class SavedOrderListPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: ScrollList<SavedOrder>(
                 emptyMessage: 'No saved order found',
-                onRefresh: () => context.read<SavedOrderListBloc>().add(
-                      SavedOrderListEvent.fetch(
-                        userInfo: context.read<UserBloc>().state.user,
-                        selectedSalesOrganisation: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
-                        selectedCustomerCode: context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo,
-                        selectedShipTo:
-                            context.read<ShipToCodeBloc>().state.shipToInfo,
-                      ),
-                    ),
+                onRefresh: () {
+                  context.read<SavedOrderListBloc>().add(
+                        SavedOrderListEvent.fetch(
+                          userInfo: context.read<UserBloc>().state.user,
+                          selectedSalesOrganisation: context
+                              .read<SalesOrgBloc>()
+                              .state
+                              .salesOrganisation,
+                          selectedCustomerCode: context
+                              .read<CustomerCodeBloc>()
+                              .state
+                              .customerCodeInfo,
+                          selectedShipTo:
+                              context.read<ShipToCodeBloc>().state.shipToInfo,
+                        ),
+                      );
+                  context
+                      .read<MaterialPriceDetailBloc>()
+                      .add(const MaterialPriceDetailEvent.initialized());
+                  context
+                      .read<ValidCustomerMaterialBloc>()
+                      .add(const ValidCustomerMaterialEvent.initialized());
+                },
                 onLoadingMore: () => context.read<SavedOrderListBloc>().add(
                       SavedOrderListEvent.loadMore(
                         userInfo: context.read<UserBloc>().state.user,

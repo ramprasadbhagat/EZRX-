@@ -140,7 +140,22 @@ class MaterialPrice extends ValueObject<double> {
 
   const MaterialPrice._(this.value);
 
-  String displayWithCurrency(Currency currency) {
-    return currencyAlign(currency, value.getOrElse(() => 0));
+  String displayWithCurrency({
+    required Currency currency,
+    required bool hidePrice,
+  }) {
+    return currencyAlign(currency, hidePrice, value.getOrElse(() => 0));
   }
+}
+
+class MaterialQty extends ValueObject<int> {
+  @override
+  final Either<ValueFailure<int>, int> value;
+
+  factory MaterialQty(int input) => MaterialQty._(Right(input));
+
+  const MaterialQty._(this.value);
+
+  bool conformZDP5Rule(String zdp5Value) =>
+      materialQtyConformZDP5Rule(value.getOrElse(() => 0), zdp5Value);
 }

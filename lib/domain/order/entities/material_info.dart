@@ -12,11 +12,11 @@ class MaterialInfo with _$MaterialInfo {
   const factory MaterialInfo({
     required MaterialNumber materialNumber,
     required String materialDescription,
+    required String defaultMaterialDescription,
     required String governmentMaterialCode,
     required String therapeuticClass,
     required String itemBrand,
     required PrincipalData principalData,
-    required String taxClassification,
     required String itemRegistrationNumber,
     required String unitOfMeasurement,
     required MaterialGroup materialGroup2,
@@ -25,6 +25,7 @@ class MaterialInfo with _$MaterialInfo {
     required bool hidePrice,
     required bool hasValidTenderContract,
     required bool hasMandatoryTenderContract,
+    required String taxClassification,
     required List<String> taxes,
     required List<Bundle> bundles,
   }) = _MaterialInfo;
@@ -47,6 +48,7 @@ class MaterialInfo with _$MaterialInfo {
         hasValidTenderContract: false,
         hasMandatoryTenderContract: false,
         taxes: [],
+        defaultMaterialDescription: '',
         bundles: [],
       );
 }

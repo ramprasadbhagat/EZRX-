@@ -61,6 +61,8 @@ class FavouritesTab extends StatelessWidget {
               context
                   .read<ValidCustomerMaterialBloc>()
                   .add(ValidCustomerMaterialEvent.validate(
+                    //TODO: Implement validateId for favorite later
+                    validateId: '',
                     materialList: materialList
                         .map((Favourite e) => e.materialNumber)
                         .toList(),
@@ -83,12 +85,12 @@ class FavouritesTab extends StatelessWidget {
                 ValidCustomerMaterialState>(
               builder: (context, validatedMaterailState) {
                 final validatedFavouriteItems = state.favouriteItems
-                    .where((Favourite element) => element.materialNumber
-                        .isValidMaterial(validatedMaterailState
-                            .validMaterialList
-                            .map((MaterialNumber validatedMaterail) =>
-                                validatedMaterail.getOrCrash())
-                            .toList()))
+                    .where(
+                      (Favourite element) =>
+                          element.materialNumber.isValidMaterial(
+                        validatedMaterailState.validMaterialNumberList,
+                      ),
+                    )
                     .toList();
 
                 return state.isLoading && state.favouriteItems.isEmpty

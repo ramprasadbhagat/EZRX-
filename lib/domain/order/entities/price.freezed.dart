@@ -16,10 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Price {
-  String get materialNumber => throw _privateConstructorUsedError;
+  MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   List<PriceRule> get rules => throw _privateConstructorUsedError;
   List<PriceTier> get tiers => throw _privateConstructorUsedError;
   List<PriceBonus> get bonuses => throw _privateConstructorUsedError;
+  List<PriceBundle> get bundles => throw _privateConstructorUsedError;
   bool get overrideRulePresent => throw _privateConstructorUsedError;
   String get zdp5MaxQuota => throw _privateConstructorUsedError;
   String get zdp5RemainingQuota => throw _privateConstructorUsedError;
@@ -39,10 +40,11 @@ abstract class $PriceCopyWith<$Res> {
   factory $PriceCopyWith(Price value, $Res Function(Price) then) =
       _$PriceCopyWithImpl<$Res>;
   $Res call(
-      {String materialNumber,
+      {MaterialNumber materialNumber,
       List<PriceRule> rules,
       List<PriceTier> tiers,
       List<PriceBonus> bonuses,
+      List<PriceBundle> bundles,
       bool overrideRulePresent,
       String zdp5MaxQuota,
       String zdp5RemainingQuota,
@@ -68,6 +70,7 @@ class _$PriceCopyWithImpl<$Res> implements $PriceCopyWith<$Res> {
     Object? rules = freezed,
     Object? tiers = freezed,
     Object? bonuses = freezed,
+    Object? bundles = freezed,
     Object? overrideRulePresent = freezed,
     Object? zdp5MaxQuota = freezed,
     Object? zdp5RemainingQuota = freezed,
@@ -82,7 +85,7 @@ class _$PriceCopyWithImpl<$Res> implements $PriceCopyWith<$Res> {
       materialNumber: materialNumber == freezed
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialNumber,
       rules: rules == freezed
           ? _value.rules
           : rules // ignore: cast_nullable_to_non_nullable
@@ -95,6 +98,10 @@ class _$PriceCopyWithImpl<$Res> implements $PriceCopyWith<$Res> {
           ? _value.bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
               as List<PriceBonus>,
+      bundles: bundles == freezed
+          ? _value.bundles
+          : bundles // ignore: cast_nullable_to_non_nullable
+              as List<PriceBundle>,
       overrideRulePresent: overrideRulePresent == freezed
           ? _value.overrideRulePresent
           : overrideRulePresent // ignore: cast_nullable_to_non_nullable
@@ -141,10 +148,11 @@ abstract class _$$_PriceCopyWith<$Res> implements $PriceCopyWith<$Res> {
       __$$_PriceCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String materialNumber,
+      {MaterialNumber materialNumber,
       List<PriceRule> rules,
       List<PriceTier> tiers,
       List<PriceBonus> bonuses,
+      List<PriceBundle> bundles,
       bool overrideRulePresent,
       String zdp5MaxQuota,
       String zdp5RemainingQuota,
@@ -171,6 +179,7 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res>
     Object? rules = freezed,
     Object? tiers = freezed,
     Object? bonuses = freezed,
+    Object? bundles = freezed,
     Object? overrideRulePresent = freezed,
     Object? zdp5MaxQuota = freezed,
     Object? zdp5RemainingQuota = freezed,
@@ -185,7 +194,7 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res>
       materialNumber: materialNumber == freezed
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialNumber,
       rules: rules == freezed
           ? _value._rules
           : rules // ignore: cast_nullable_to_non_nullable
@@ -198,6 +207,10 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res>
           ? _value._bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
               as List<PriceBonus>,
+      bundles: bundles == freezed
+          ? _value._bundles
+          : bundles // ignore: cast_nullable_to_non_nullable
+              as List<PriceBundle>,
       overrideRulePresent: overrideRulePresent == freezed
           ? _value.overrideRulePresent
           : overrideRulePresent // ignore: cast_nullable_to_non_nullable
@@ -246,6 +259,7 @@ class _$_Price extends _Price {
       required final List<PriceRule> rules,
       required final List<PriceTier> tiers,
       required final List<PriceBonus> bonuses,
+      required final List<PriceBundle> bundles,
       required this.overrideRulePresent,
       required this.zdp5MaxQuota,
       required this.zdp5RemainingQuota,
@@ -258,10 +272,11 @@ class _$_Price extends _Price {
       : _rules = rules,
         _tiers = tiers,
         _bonuses = bonuses,
+        _bundles = bundles,
         super._();
 
   @override
-  final String materialNumber;
+  final MaterialNumber materialNumber;
   final List<PriceRule> _rules;
   @override
   List<PriceRule> get rules {
@@ -281,6 +296,13 @@ class _$_Price extends _Price {
   List<PriceBonus> get bonuses {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bonuses);
+  }
+
+  final List<PriceBundle> _bundles;
+  @override
+  List<PriceBundle> get bundles {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bundles);
   }
 
   @override
@@ -304,7 +326,7 @@ class _$_Price extends _Price {
 
   @override
   String toString() {
-    return 'Price(materialNumber: $materialNumber, rules: $rules, tiers: $tiers, bonuses: $bonuses, overrideRulePresent: $overrideRulePresent, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, zmgDiscount: $zmgDiscount, lastPrice: $lastPrice, finalPrice: $finalPrice, finalTotalPrice: $finalTotalPrice, additionalBonusEligible: $additionalBonusEligible, isValid: $isValid)';
+    return 'Price(materialNumber: $materialNumber, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, overrideRulePresent: $overrideRulePresent, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, zmgDiscount: $zmgDiscount, lastPrice: $lastPrice, finalPrice: $finalPrice, finalTotalPrice: $finalTotalPrice, additionalBonusEligible: $additionalBonusEligible, isValid: $isValid)';
   }
 
   @override
@@ -317,6 +339,7 @@ class _$_Price extends _Price {
             const DeepCollectionEquality().equals(other._rules, _rules) &&
             const DeepCollectionEquality().equals(other._tiers, _tiers) &&
             const DeepCollectionEquality().equals(other._bonuses, _bonuses) &&
+            const DeepCollectionEquality().equals(other._bundles, _bundles) &&
             const DeepCollectionEquality()
                 .equals(other.overrideRulePresent, overrideRulePresent) &&
             const DeepCollectionEquality()
@@ -342,6 +365,7 @@ class _$_Price extends _Price {
       const DeepCollectionEquality().hash(_rules),
       const DeepCollectionEquality().hash(_tiers),
       const DeepCollectionEquality().hash(_bonuses),
+      const DeepCollectionEquality().hash(_bundles),
       const DeepCollectionEquality().hash(overrideRulePresent),
       const DeepCollectionEquality().hash(zdp5MaxQuota),
       const DeepCollectionEquality().hash(zdp5RemainingQuota),
@@ -360,10 +384,11 @@ class _$_Price extends _Price {
 
 abstract class _Price extends Price {
   const factory _Price(
-      {required final String materialNumber,
+      {required final MaterialNumber materialNumber,
       required final List<PriceRule> rules,
       required final List<PriceTier> tiers,
       required final List<PriceBonus> bonuses,
+      required final List<PriceBundle> bundles,
       required final bool overrideRulePresent,
       required final String zdp5MaxQuota,
       required final String zdp5RemainingQuota,
@@ -376,13 +401,15 @@ abstract class _Price extends Price {
   const _Price._() : super._();
 
   @override
-  String get materialNumber;
+  MaterialNumber get materialNumber;
   @override
   List<PriceRule> get rules;
   @override
   List<PriceTier> get tiers;
   @override
   List<PriceBonus> get bonuses;
+  @override
+  List<PriceBundle> get bundles;
   @override
   bool get overrideRulePresent;
   @override

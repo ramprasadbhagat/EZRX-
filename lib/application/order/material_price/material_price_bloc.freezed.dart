@@ -19,30 +19,24 @@ mixin _$MaterialPriceEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            CustomerCodeInfo customerCode,
-            SalesOrganisation salesOrganisation,
-            List<MaterialNumber> materialNumbers)
+    required TResult Function(CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation, List<MaterialInfo> materials)
         fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            CustomerCodeInfo customerCode,
-            SalesOrganisation salesOrganisation,
-            List<MaterialNumber> materialNumbers)?
+    TResult Function(CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation, List<MaterialInfo> materials)?
         fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            CustomerCodeInfo customerCode,
-            SalesOrganisation salesOrganisation,
-            List<MaterialNumber> materialNumbers)?
+    TResult Function(CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation, List<MaterialInfo> materials)?
         fetch,
     required TResult orElse(),
   }) =>
@@ -127,10 +121,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            CustomerCodeInfo customerCode,
-            SalesOrganisation salesOrganisation,
-            List<MaterialNumber> materialNumbers)
+    required TResult Function(CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation, List<MaterialInfo> materials)
         fetch,
   }) {
     return initialized();
@@ -140,10 +132,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            CustomerCodeInfo customerCode,
-            SalesOrganisation salesOrganisation,
-            List<MaterialNumber> materialNumbers)?
+    TResult Function(CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation, List<MaterialInfo> materials)?
         fetch,
   }) {
     return initialized?.call();
@@ -153,10 +143,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            CustomerCodeInfo customerCode,
-            SalesOrganisation salesOrganisation,
-            List<MaterialNumber> materialNumbers)?
+    TResult Function(CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation, List<MaterialInfo> materials)?
         fetch,
     required TResult orElse(),
   }) {
@@ -209,7 +197,7 @@ abstract class _$$_FetchCopyWith<$Res> {
   $Res call(
       {CustomerCodeInfo customerCode,
       SalesOrganisation salesOrganisation,
-      List<MaterialNumber> materialNumbers});
+      List<MaterialInfo> materials});
 
   $CustomerCodeInfoCopyWith<$Res> get customerCode;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -229,7 +217,7 @@ class __$$_FetchCopyWithImpl<$Res>
   $Res call({
     Object? customerCode = freezed,
     Object? salesOrganisation = freezed,
-    Object? materialNumbers = freezed,
+    Object? materials = freezed,
   }) {
     return _then(_$_Fetch(
       customerCode: customerCode == freezed
@@ -240,10 +228,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      materialNumbers: materialNumbers == freezed
-          ? _value._materialNumbers
-          : materialNumbers // ignore: cast_nullable_to_non_nullable
-              as List<MaterialNumber>,
+      materials: materials == freezed
+          ? _value._materials
+          : materials // ignore: cast_nullable_to_non_nullable
+              as List<MaterialInfo>,
     ));
   }
 
@@ -268,23 +256,23 @@ class _$_Fetch implements _Fetch {
   const _$_Fetch(
       {required this.customerCode,
       required this.salesOrganisation,
-      required final List<MaterialNumber> materialNumbers})
-      : _materialNumbers = materialNumbers;
+      required final List<MaterialInfo> materials})
+      : _materials = materials;
 
   @override
   final CustomerCodeInfo customerCode;
   @override
   final SalesOrganisation salesOrganisation;
-  final List<MaterialNumber> _materialNumbers;
+  final List<MaterialInfo> _materials;
   @override
-  List<MaterialNumber> get materialNumbers {
+  List<MaterialInfo> get materials {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_materialNumbers);
+    return EqualUnmodifiableListView(_materials);
   }
 
   @override
   String toString() {
-    return 'MaterialPriceEvent.fetch(customerCode: $customerCode, salesOrganisation: $salesOrganisation, materialNumbers: $materialNumbers)';
+    return 'MaterialPriceEvent.fetch(customerCode: $customerCode, salesOrganisation: $salesOrganisation, materials: $materials)';
   }
 
   @override
@@ -297,7 +285,7 @@ class _$_Fetch implements _Fetch {
             const DeepCollectionEquality()
                 .equals(other.salesOrganisation, salesOrganisation) &&
             const DeepCollectionEquality()
-                .equals(other._materialNumbers, _materialNumbers));
+                .equals(other._materials, _materials));
   }
 
   @override
@@ -305,7 +293,7 @@ class _$_Fetch implements _Fetch {
       runtimeType,
       const DeepCollectionEquality().hash(customerCode),
       const DeepCollectionEquality().hash(salesOrganisation),
-      const DeepCollectionEquality().hash(_materialNumbers));
+      const DeepCollectionEquality().hash(_materials));
 
   @JsonKey(ignore: true)
   @override
@@ -316,41 +304,35 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            CustomerCodeInfo customerCode,
-            SalesOrganisation salesOrganisation,
-            List<MaterialNumber> materialNumbers)
+    required TResult Function(CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation, List<MaterialInfo> materials)
         fetch,
   }) {
-    return fetch(customerCode, salesOrganisation, materialNumbers);
+    return fetch(customerCode, salesOrganisation, materials);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            CustomerCodeInfo customerCode,
-            SalesOrganisation salesOrganisation,
-            List<MaterialNumber> materialNumbers)?
+    TResult Function(CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation, List<MaterialInfo> materials)?
         fetch,
   }) {
-    return fetch?.call(customerCode, salesOrganisation, materialNumbers);
+    return fetch?.call(customerCode, salesOrganisation, materials);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            CustomerCodeInfo customerCode,
-            SalesOrganisation salesOrganisation,
-            List<MaterialNumber> materialNumbers)?
+    TResult Function(CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation, List<MaterialInfo> materials)?
         fetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(customerCode, salesOrganisation, materialNumbers);
+      return fetch(customerCode, salesOrganisation, materials);
     }
     return orElse();
   }
@@ -391,11 +373,11 @@ abstract class _Fetch implements MaterialPriceEvent {
   const factory _Fetch(
       {required final CustomerCodeInfo customerCode,
       required final SalesOrganisation salesOrganisation,
-      required final List<MaterialNumber> materialNumbers}) = _$_Fetch;
+      required final List<MaterialInfo> materials}) = _$_Fetch;
 
   CustomerCodeInfo get customerCode;
   SalesOrganisation get salesOrganisation;
-  List<MaterialNumber> get materialNumbers;
+  List<MaterialInfo> get materials;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;

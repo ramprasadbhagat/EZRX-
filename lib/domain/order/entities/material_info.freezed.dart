@@ -18,11 +18,11 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$MaterialInfo {
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   String get materialDescription => throw _privateConstructorUsedError;
+  String get defaultMaterialDescription => throw _privateConstructorUsedError;
   String get governmentMaterialCode => throw _privateConstructorUsedError;
   String get therapeuticClass => throw _privateConstructorUsedError;
   String get itemBrand => throw _privateConstructorUsedError;
   PrincipalData get principalData => throw _privateConstructorUsedError;
-  String get taxClassification => throw _privateConstructorUsedError;
   String get itemRegistrationNumber => throw _privateConstructorUsedError;
   String get unitOfMeasurement => throw _privateConstructorUsedError;
   MaterialGroup get materialGroup2 => throw _privateConstructorUsedError;
@@ -31,6 +31,7 @@ mixin _$MaterialInfo {
   bool get hidePrice => throw _privateConstructorUsedError;
   bool get hasValidTenderContract => throw _privateConstructorUsedError;
   bool get hasMandatoryTenderContract => throw _privateConstructorUsedError;
+  String get taxClassification => throw _privateConstructorUsedError;
   List<String> get taxes => throw _privateConstructorUsedError;
   List<Bundle> get bundles => throw _privateConstructorUsedError;
 
@@ -47,11 +48,11 @@ abstract class $MaterialInfoCopyWith<$Res> {
   $Res call(
       {MaterialNumber materialNumber,
       String materialDescription,
+      String defaultMaterialDescription,
       String governmentMaterialCode,
       String therapeuticClass,
       String itemBrand,
       PrincipalData principalData,
-      String taxClassification,
       String itemRegistrationNumber,
       String unitOfMeasurement,
       MaterialGroup materialGroup2,
@@ -60,6 +61,7 @@ abstract class $MaterialInfoCopyWith<$Res> {
       bool hidePrice,
       bool hasValidTenderContract,
       bool hasMandatoryTenderContract,
+      String taxClassification,
       List<String> taxes,
       List<Bundle> bundles});
 
@@ -78,11 +80,11 @@ class _$MaterialInfoCopyWithImpl<$Res> implements $MaterialInfoCopyWith<$Res> {
   $Res call({
     Object? materialNumber = freezed,
     Object? materialDescription = freezed,
+    Object? defaultMaterialDescription = freezed,
     Object? governmentMaterialCode = freezed,
     Object? therapeuticClass = freezed,
     Object? itemBrand = freezed,
     Object? principalData = freezed,
-    Object? taxClassification = freezed,
     Object? itemRegistrationNumber = freezed,
     Object? unitOfMeasurement = freezed,
     Object? materialGroup2 = freezed,
@@ -91,6 +93,7 @@ class _$MaterialInfoCopyWithImpl<$Res> implements $MaterialInfoCopyWith<$Res> {
     Object? hidePrice = freezed,
     Object? hasValidTenderContract = freezed,
     Object? hasMandatoryTenderContract = freezed,
+    Object? taxClassification = freezed,
     Object? taxes = freezed,
     Object? bundles = freezed,
   }) {
@@ -102,6 +105,10 @@ class _$MaterialInfoCopyWithImpl<$Res> implements $MaterialInfoCopyWith<$Res> {
       materialDescription: materialDescription == freezed
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      defaultMaterialDescription: defaultMaterialDescription == freezed
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
       governmentMaterialCode: governmentMaterialCode == freezed
           ? _value.governmentMaterialCode
@@ -119,10 +126,6 @@ class _$MaterialInfoCopyWithImpl<$Res> implements $MaterialInfoCopyWith<$Res> {
           ? _value.principalData
           : principalData // ignore: cast_nullable_to_non_nullable
               as PrincipalData,
-      taxClassification: taxClassification == freezed
-          ? _value.taxClassification
-          : taxClassification // ignore: cast_nullable_to_non_nullable
-              as String,
       itemRegistrationNumber: itemRegistrationNumber == freezed
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
@@ -155,6 +158,10 @@ class _$MaterialInfoCopyWithImpl<$Res> implements $MaterialInfoCopyWith<$Res> {
           ? _value.hasMandatoryTenderContract
           : hasMandatoryTenderContract // ignore: cast_nullable_to_non_nullable
               as bool,
+      taxClassification: taxClassification == freezed
+          ? _value.taxClassification
+          : taxClassification // ignore: cast_nullable_to_non_nullable
+              as String,
       taxes: taxes == freezed
           ? _value.taxes
           : taxes // ignore: cast_nullable_to_non_nullable
@@ -184,11 +191,11 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
   $Res call(
       {MaterialNumber materialNumber,
       String materialDescription,
+      String defaultMaterialDescription,
       String governmentMaterialCode,
       String therapeuticClass,
       String itemBrand,
       PrincipalData principalData,
-      String taxClassification,
       String itemRegistrationNumber,
       String unitOfMeasurement,
       MaterialGroup materialGroup2,
@@ -197,6 +204,7 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
       bool hidePrice,
       bool hasValidTenderContract,
       bool hasMandatoryTenderContract,
+      String taxClassification,
       List<String> taxes,
       List<Bundle> bundles});
 
@@ -219,11 +227,11 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
   $Res call({
     Object? materialNumber = freezed,
     Object? materialDescription = freezed,
+    Object? defaultMaterialDescription = freezed,
     Object? governmentMaterialCode = freezed,
     Object? therapeuticClass = freezed,
     Object? itemBrand = freezed,
     Object? principalData = freezed,
-    Object? taxClassification = freezed,
     Object? itemRegistrationNumber = freezed,
     Object? unitOfMeasurement = freezed,
     Object? materialGroup2 = freezed,
@@ -232,6 +240,7 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
     Object? hidePrice = freezed,
     Object? hasValidTenderContract = freezed,
     Object? hasMandatoryTenderContract = freezed,
+    Object? taxClassification = freezed,
     Object? taxes = freezed,
     Object? bundles = freezed,
   }) {
@@ -243,6 +252,10 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
       materialDescription: materialDescription == freezed
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      defaultMaterialDescription: defaultMaterialDescription == freezed
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
       governmentMaterialCode: governmentMaterialCode == freezed
           ? _value.governmentMaterialCode
@@ -260,10 +273,6 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
           ? _value.principalData
           : principalData // ignore: cast_nullable_to_non_nullable
               as PrincipalData,
-      taxClassification: taxClassification == freezed
-          ? _value.taxClassification
-          : taxClassification // ignore: cast_nullable_to_non_nullable
-              as String,
       itemRegistrationNumber: itemRegistrationNumber == freezed
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
@@ -296,6 +305,10 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
           ? _value.hasMandatoryTenderContract
           : hasMandatoryTenderContract // ignore: cast_nullable_to_non_nullable
               as bool,
+      taxClassification: taxClassification == freezed
+          ? _value.taxClassification
+          : taxClassification // ignore: cast_nullable_to_non_nullable
+              as String,
       taxes: taxes == freezed
           ? _value._taxes
           : taxes // ignore: cast_nullable_to_non_nullable
@@ -314,11 +327,11 @@ class _$_MaterialInfo extends _MaterialInfo {
   const _$_MaterialInfo(
       {required this.materialNumber,
       required this.materialDescription,
+      required this.defaultMaterialDescription,
       required this.governmentMaterialCode,
       required this.therapeuticClass,
       required this.itemBrand,
       required this.principalData,
-      required this.taxClassification,
       required this.itemRegistrationNumber,
       required this.unitOfMeasurement,
       required this.materialGroup2,
@@ -327,6 +340,7 @@ class _$_MaterialInfo extends _MaterialInfo {
       required this.hidePrice,
       required this.hasValidTenderContract,
       required this.hasMandatoryTenderContract,
+      required this.taxClassification,
       required final List<String> taxes,
       required final List<Bundle> bundles})
       : _taxes = taxes,
@@ -338,6 +352,8 @@ class _$_MaterialInfo extends _MaterialInfo {
   @override
   final String materialDescription;
   @override
+  final String defaultMaterialDescription;
+  @override
   final String governmentMaterialCode;
   @override
   final String therapeuticClass;
@@ -345,8 +361,6 @@ class _$_MaterialInfo extends _MaterialInfo {
   final String itemBrand;
   @override
   final PrincipalData principalData;
-  @override
-  final String taxClassification;
   @override
   final String itemRegistrationNumber;
   @override
@@ -363,6 +377,8 @@ class _$_MaterialInfo extends _MaterialInfo {
   final bool hasValidTenderContract;
   @override
   final bool hasMandatoryTenderContract;
+  @override
+  final String taxClassification;
   final List<String> _taxes;
   @override
   List<String> get taxes {
@@ -379,7 +395,7 @@ class _$_MaterialInfo extends _MaterialInfo {
 
   @override
   String toString() {
-    return 'MaterialInfo(materialNumber: $materialNumber, materialDescription: $materialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, principalData: $principalData, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hidePrice: $hidePrice, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, bundles: $bundles)';
+    return 'MaterialInfo(materialNumber: $materialNumber, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, principalData: $principalData, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hidePrice: $hidePrice, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxClassification: $taxClassification, taxes: $taxes, bundles: $bundles)';
   }
 
   @override
@@ -391,6 +407,8 @@ class _$_MaterialInfo extends _MaterialInfo {
                 .equals(other.materialNumber, materialNumber) &&
             const DeepCollectionEquality()
                 .equals(other.materialDescription, materialDescription) &&
+            const DeepCollectionEquality().equals(
+                other.defaultMaterialDescription, defaultMaterialDescription) &&
             const DeepCollectionEquality()
                 .equals(other.governmentMaterialCode, governmentMaterialCode) &&
             const DeepCollectionEquality()
@@ -398,8 +416,6 @@ class _$_MaterialInfo extends _MaterialInfo {
             const DeepCollectionEquality().equals(other.itemBrand, itemBrand) &&
             const DeepCollectionEquality()
                 .equals(other.principalData, principalData) &&
-            const DeepCollectionEquality()
-                .equals(other.taxClassification, taxClassification) &&
             const DeepCollectionEquality()
                 .equals(other.itemRegistrationNumber, itemRegistrationNumber) &&
             const DeepCollectionEquality()
@@ -415,6 +431,8 @@ class _$_MaterialInfo extends _MaterialInfo {
                 .equals(other.hasValidTenderContract, hasValidTenderContract) &&
             const DeepCollectionEquality().equals(
                 other.hasMandatoryTenderContract, hasMandatoryTenderContract) &&
+            const DeepCollectionEquality()
+                .equals(other.taxClassification, taxClassification) &&
             const DeepCollectionEquality().equals(other._taxes, _taxes) &&
             const DeepCollectionEquality().equals(other._bundles, _bundles));
   }
@@ -424,11 +442,11 @@ class _$_MaterialInfo extends _MaterialInfo {
       runtimeType,
       const DeepCollectionEquality().hash(materialNumber),
       const DeepCollectionEquality().hash(materialDescription),
+      const DeepCollectionEquality().hash(defaultMaterialDescription),
       const DeepCollectionEquality().hash(governmentMaterialCode),
       const DeepCollectionEquality().hash(therapeuticClass),
       const DeepCollectionEquality().hash(itemBrand),
       const DeepCollectionEquality().hash(principalData),
-      const DeepCollectionEquality().hash(taxClassification),
       const DeepCollectionEquality().hash(itemRegistrationNumber),
       const DeepCollectionEquality().hash(unitOfMeasurement),
       const DeepCollectionEquality().hash(materialGroup2),
@@ -437,6 +455,7 @@ class _$_MaterialInfo extends _MaterialInfo {
       const DeepCollectionEquality().hash(hidePrice),
       const DeepCollectionEquality().hash(hasValidTenderContract),
       const DeepCollectionEquality().hash(hasMandatoryTenderContract),
+      const DeepCollectionEquality().hash(taxClassification),
       const DeepCollectionEquality().hash(_taxes),
       const DeepCollectionEquality().hash(_bundles));
 
@@ -450,11 +469,11 @@ abstract class _MaterialInfo extends MaterialInfo {
   const factory _MaterialInfo(
       {required final MaterialNumber materialNumber,
       required final String materialDescription,
+      required final String defaultMaterialDescription,
       required final String governmentMaterialCode,
       required final String therapeuticClass,
       required final String itemBrand,
       required final PrincipalData principalData,
-      required final String taxClassification,
       required final String itemRegistrationNumber,
       required final String unitOfMeasurement,
       required final MaterialGroup materialGroup2,
@@ -463,6 +482,7 @@ abstract class _MaterialInfo extends MaterialInfo {
       required final bool hidePrice,
       required final bool hasValidTenderContract,
       required final bool hasMandatoryTenderContract,
+      required final String taxClassification,
       required final List<String> taxes,
       required final List<Bundle> bundles}) = _$_MaterialInfo;
   const _MaterialInfo._() : super._();
@@ -472,6 +492,8 @@ abstract class _MaterialInfo extends MaterialInfo {
   @override
   String get materialDescription;
   @override
+  String get defaultMaterialDescription;
+  @override
   String get governmentMaterialCode;
   @override
   String get therapeuticClass;
@@ -479,8 +501,6 @@ abstract class _MaterialInfo extends MaterialInfo {
   String get itemBrand;
   @override
   PrincipalData get principalData;
-  @override
-  String get taxClassification;
   @override
   String get itemRegistrationNumber;
   @override
@@ -497,6 +517,8 @@ abstract class _MaterialInfo extends MaterialInfo {
   bool get hasValidTenderContract;
   @override
   bool get hasMandatoryTenderContract;
+  @override
+  String get taxClassification;
   @override
   List<String> get taxes;
   @override

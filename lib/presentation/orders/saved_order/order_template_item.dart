@@ -2,14 +2,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/application/order/valid_customer_material/valid_customer_material_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 
 class OrderTemplateItem extends StatelessWidget {
   const OrderTemplateItem({
@@ -22,138 +24,313 @@ class OrderTemplateItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<ValidCustomerMaterialBloc, ValidCustomerMaterialState>(
-      listenWhen: (previous, current) => previous != current,
+      listenWhen: (previous, current) =>
+          previous.validMaterialNumbers[order.id] !=
+          current.validMaterialNumbers[order.id],
       listener: (context, state) async {
-        final allInValidMaterail =
-            state.allInValidMaterail(order.allSavedOrderMaterialNumbers);
-        if (allInValidMaterail.isNotEmpty) {
-          await invalidItemAlert(context, allInValidMaterail);
+        final orderValidMaterialNumbers = state.validMaterialNumbers[order.id];
+        if (orderValidMaterialNumbers != null && !state.isValidating) {
+          context.read<MaterialPriceDetailBloc>().add(
+                MaterialPriceDetailEvent.fetch(
+                  customerCode:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  salesOrganisationConfigs:
+                      context.read<SalesOrgBloc>().state.configs,
+                  shipToCode: context.read<ShipToCodeBloc>().state.shipToInfo,
+                  materialInfos: order
+                      .validMaterialItems(orderValidMaterialNumbers)
+                      .map(
+                        (item) => MaterialQueryInfo.fromSavedOrder(
+                          orderMaterial: item,
+                        ),
+                      )
+                      .toList(),
+                ),
+              );
+          final invalidMaterialNumbers = state.filterInvalidMaterialNumber(
+            order.itemMaterialNumbers,
+          );
+          if (invalidMaterialNumbers.isNotEmpty) {
+            await invalidItemAlert(
+              context,
+              invalidMaterialNumbers,
+            );
+          }
         }
       },
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 5),
-        child: Card(
-          elevation: 1.0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              10.0,
-            ),
+      child: Card(
+        elevation: 1.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            10.0,
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(
-              10.0,
+        ),
+        child: Theme(
+          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+          child: ExpansionTile(
+            onExpansionChanged: (isExpanded) {
+              if (isExpanded) {
+                final materialList = <MaterialItem>[...order.items];
+                materialList.retainWhere(
+                  (element) => !element.materialGroup4.isFOC,
+                );
+                final focMaterialList = <MaterialItem>[...order.items];
+                focMaterialList.retainWhere(
+                  (element) => element.materialGroup4.isFOC,
+                );
+                context.read<ValidCustomerMaterialBloc>().add(
+                      ValidCustomerMaterialEvent.validate(
+                        validateId: order.id,
+                        materialList: materialList
+                            .map((MaterialItem e) => e.materialNumber)
+                            .toList(),
+                        focMaterialList: focMaterialList
+                            .map((MaterialItem e) => e.materialNumber)
+                            .toList(),
+                        user: context.read<UserBloc>().state.user,
+                        customerCodeInfo: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customerCodeInfo,
+                        salesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        shipToInfo:
+                            context.read<ShipToCodeBloc>().state.shipToInfo,
+                      ),
+                    );
+              }
+            },
+            expandedCrossAxisAlignment: CrossAxisAlignment.start,
+            title: Container(
+              margin: const EdgeInsets.only(bottom: 5),
+              child: Padding(
+                padding: const EdgeInsets.all(
+                  10.0,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Company Name: ${order.companyName.name}',
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                        color: ZPColors.primary,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      'Order No: ${order.id}',
+                      style: const TextStyle(
+                        color: ZPColors.lightGray,
+                        overflow: TextOverflow.ellipsis,
+                        fontSize: 15.0,
+                      ),
+                      maxLines: 1,
+                    ),
+                    Text(
+                      'Sold To IDs: ${order.soldToParty.name}',
+                      style: const TextStyle(
+                        color: ZPColors.lightGray,
+                        overflow: TextOverflow.ellipsis,
+                        fontSize: 15.0,
+                      ),
+                      maxLines: 1,
+                    ),
+                    Text(
+                      'Ship To IDs: ${order.shipToParty.name}',
+                      style: const TextStyle(
+                        color: ZPColors.lightGray,
+                        overflow: TextOverflow.ellipsis,
+                        fontSize: 15.0,
+                      ),
+                      maxLines: 1,
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        children: <TextSpan>[
+                          const TextSpan(
+                            text: 'Order Value: ',
+                            style: TextStyle(
+                              color: ZPColors.lightGray,
+                              fontSize: 15.0,
+                            ),
+                          ),
+                          const TextSpan(
+                            text: '\$',
+                            style: TextStyle(
+                              color: ZPColors.darkerGreen,
+                              fontSize: 15.0,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '${order.totalOrderValue}',
+                            style: const TextStyle(
+                              color: ZPColors.darkerGreen,
+                              fontSize: 13.0,
+                              fontFamily: 'Poppins',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '${'Company Name'.tr()} : ${order.companyName.name}',
-                  style: const TextStyle(
-                    fontSize: 16.0,
-                    color: ZPColors.primary,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  '${'Order No'.tr()} : ${order.id}',
-                  style: const TextStyle(
-                    color: ZPColors.lightGray,
-                    overflow: TextOverflow.ellipsis,
-                    fontSize: 15.0,
-                  ),
-                  maxLines: 1,
-                ),
-                Text(
-                  '${'Sold to ID'.tr()} : ${order.soldToParty.name}',
-                  style: const TextStyle(
-                    color: ZPColors.lightGray,
-                    overflow: TextOverflow.ellipsis,
-                    fontSize: 15.0,
-                  ),
-                  maxLines: 1,
-                ),
-                Text(
-                  '${'Ship to ID'.tr()} : ${order.shipToParty.name}',
-                  style: const TextStyle(
-                    color: ZPColors.lightGray,
-                    overflow: TextOverflow.ellipsis,
-                    fontSize: 15.0,
-                  ),
-                  maxLines: 1,
-                ),
-                RichText(
-                  text: TextSpan(
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: '${'Order Value'.tr()} : ',
-                        style: const TextStyle(
-                          color: ZPColors.lightGray,
-                          fontSize: 15.0,
+            childrenPadding: const EdgeInsets.only(left: 25),
+            children: [
+              BlocBuilder<ValidCustomerMaterialBloc,
+                  ValidCustomerMaterialState>(
+                buildWhen: (previous, current) =>
+                    previous.validMaterialNumbers[order.id] !=
+                    current.validMaterialNumbers[order.id],
+                builder: (context, state) {
+                  final orderValidMaterialNumbers =
+                      state.validMaterialNumbers[order.id];
+                  if (orderValidMaterialNumbers == null) {
+                    return const _MaterialItemShimmer();
+                  }
+
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ...order
+                          .validMaterialItems(orderValidMaterialNumbers)
+                          .map(
+                        (item) {
+                          final itemPriceQuery =
+                              MaterialQueryInfo.fromSavedOrder(
+                            orderMaterial: item,
+                          );
+
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  decoration: const BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        color: ZPColors.darkGray,
+                                        width: 2.0,
+                                      ),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'Material Description: ${item.materialDescription}',
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: ZPColors.darkerGreen,
+                                    ),
+                                  ),
+                                ),
+                                _MaterialItemInfo(
+                                  title: 'Material Number: '.tr(),
+                                  info: Text(
+                                    item.materialNumber.displayMatNo,
+                                    style: const TextStyle(
+                                      color: ZPColors.darkerGreen,
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                                _MaterialItemInfo(
+                                  title: 'Material Qty: '.tr(),
+                                  info: Text(
+                                    item.qty.toString(),
+                                    style: const TextStyle(
+                                      color: ZPColors.darkerGreen,
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                                _MaterialItemInfo(
+                                  title: 'Unit Price: '.tr(),
+                                  info: BlocBuilder<MaterialPriceDetailBloc,
+                                      MaterialPriceDetailState>(
+                                    buildWhen: (previous, current) =>
+                                        previous
+                                            .materialDetails[itemPriceQuery] !=
+                                        current.materialDetails[itemPriceQuery],
+                                    builder: (context, state) {
+                                      final itemInfo = state
+                                          .materialDetails[itemPriceQuery]
+                                          ?.price;
+
+                                      if (itemInfo != null) {
+                                        final currentCurrency = context
+                                            .read<SalesOrgBloc>()
+                                            .state
+                                            .configs
+                                            .currency;
+                                        final isHidePrice = item.hidePrice;
+
+                                        return Text(
+                                          itemInfo.finalPrice
+                                              .displayWithCurrency(
+                                            currency: currentCurrency,
+                                            hidePrice: isHidePrice,
+                                          ),
+                                          style: const TextStyle(
+                                            color: ZPColors.darkerGreen,
+                                            fontSize: 14.0,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        );
+                                      }
+                                      if (state.isFetching) {
+                                        return SizedBox(
+                                          key: const Key('price-loading'),
+                                          width: 40,
+                                          child: LoadingShimmer.tile(),
+                                        );
+                                      }
+
+                                      return const Text(
+                                        'NA',
+                                        style: TextStyle(
+                                          color: ZPColors.darkerGreen,
+                                          fontSize: 14.0,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                              ],
+                            ),
+                          );
+                        },
+                      ).toList(),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.all(double.minPositive),
+                          textStyle: const TextStyle(
+                            fontSize: 12,
+                          ),
                         ),
-                      ),
-                      const TextSpan(
-                        text: '\$',
-                        style: TextStyle(
-                          color: ZPColors.darkerGreen,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '${order.totalOrderValue}',
-                        style: const TextStyle(
-                          color: ZPColors.darkerGreen,
-                          fontSize: 13.0,
-                          fontFamily: 'Poppins',
-                        ),
+                        onPressed: () {
+                          //TODO: Implement Add to cart
+                        },
+                        child: const Text('Add to Cart').tr(),
                       ),
                     ],
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.all(double.minPositive),
-                    textStyle: const TextStyle(
-                      fontSize: 12,
-                    ),
-                  ),
-                  onPressed: () {
-                    final materialList = <MaterialItem>[...order.items];
-                    materialList.retainWhere(
-                      (element) => !element.materialGroup4.isFOC,
-                    );
-                    final focMaterialList = <MaterialItem>[...order.items];
-                    focMaterialList.retainWhere(
-                      (element) => element.materialGroup4.isFOC,
-                    );
-                    context
-                        .read<ValidCustomerMaterialBloc>()
-                        .add(ValidCustomerMaterialEvent.validate(
-                          materialList: materialList
-                              .map((MaterialItem e) => e.materialNumber)
-                              .toList(),
-                          focMaterialList: focMaterialList
-                              .map((MaterialItem e) => e.materialNumber)
-                              .toList(),
-                          user: context.read<UserBloc>().state.user,
-                          customerCodeInfo: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                          salesOrganisation: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrganisation,
-                          shipToInfo:
-                              context.read<ShipToCodeBloc>().state.shipToInfo,
-                        ));
-                  },
-                  child: const Text('Add to Cart').tr(),
-                ),
-              ],
-            ),
+                  );
+                },
+              ),
+            ],
           ),
         ),
       ),
@@ -204,6 +381,147 @@ class OrderTemplateItem extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+}
+
+class _MaterialItemInfo extends StatelessWidget {
+  final String title;
+  final Widget info;
+  const _MaterialItemInfo({
+    Key? key,
+    required this.title,
+    required this.info,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      color: ZPColors.darkerGreen,
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[info],
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _MaterialItemShimmer extends StatelessWidget {
+  const _MaterialItemShimmer({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 10),
+      child: Column(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: ZPColors.darkGray,
+                  width: 2.0,
+                ),
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                LoadingShimmer.tile(),
+                SizedBox(
+                  width: 200,
+                  child: LoadingShimmer.tile(),
+                ),
+              ],
+            ),
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      width: 120,
+                      child: LoadingShimmer.tile(),
+                    ),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      width: 100,
+                      child: LoadingShimmer.tile(),
+                    ),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      width: 90,
+                      child: LoadingShimmer.tile(),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      width: 100,
+                      child: LoadingShimmer.tile(),
+                    ),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      width: 10,
+                      child: LoadingShimmer.tile(),
+                    ),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      width: 60,
+                      child: LoadingShimmer.tile(),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              LoadingShimmer.withChild(
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: const SizedBox(),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

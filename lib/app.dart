@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.d
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/stock_information/stock_information_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
@@ -168,6 +169,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<OrderTemplateListBloc>(
           create: (context) => locator<OrderTemplateListBloc>(),
+        ),
+        BlocProvider<MaterialPriceDetailBloc>(
+          create: (context) => locator<MaterialPriceDetailBloc>(),
         ),
         BlocProvider<StockInformationBloc>(
           create: (context) => locator<StockInformationBloc>(),

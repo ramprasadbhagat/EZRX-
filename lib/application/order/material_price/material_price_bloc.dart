@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_price_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -22,14 +23,20 @@ class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
             MaterialPriceState.initial(),
           ),
           fetch: (e) async {
+            _filterFOCMaterial(
+              e.materials,
+              emit,
+            );
+
+            final materialNumbers =
+                e.materials.map((e) => e.materialNumber).toList();
             final queryMaterialNumber =
-                List<MaterialNumber>.from(e.materialNumbers)
+                List<MaterialNumber>.from(materialNumbers)
                   ..removeWhere(
                     (element) => state.materialPrice.containsKey(
                       element,
                     ),
                   );
-
             if (queryMaterialNumber.isEmpty) return;
 
             emit(
@@ -67,5 +74,34 @@ class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
         );
       },
     );
+  }
+
+  void _filterFOCMaterial(
+    List<MaterialInfo> materials,
+    Emitter<MaterialPriceState> emit,
+  ) {
+    final focMaterialDetails = <MaterialNumber, Price>{};
+    for (final material in materials) {
+      if (material.materialGroup4.isFOC) {
+        final materialNumber = material.materialNumber;
+        focMaterialDetails.addEntries(
+          {
+            materialNumber: Price.empty().copyWith(
+              materialNumber: materialNumber,
+            ),
+          }.entries,
+        );
+      }
+    }
+    if (focMaterialDetails.isNotEmpty) {
+      emit(
+        state.copyWith(
+          materialPrice: Map.from(state.materialPrice)
+            ..addAll(
+              focMaterialDetails,
+            ),
+        ),
+      );
+    }
   }
 }

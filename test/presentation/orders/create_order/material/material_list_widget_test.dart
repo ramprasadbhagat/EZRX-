@@ -189,6 +189,7 @@ void main() {
               hasMandatoryTenderContract: false,
               taxes: ['5'],
               bundles: [],
+              defaultMaterialDescription: '',
             )
           ],
         )

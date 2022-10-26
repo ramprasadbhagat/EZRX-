@@ -8,7 +8,6 @@
             "ZDP5MaxQuota": "",
             "ZDP5RemainingQuota": "",
             "ZMGDiscount": false,
-            "OldMaterialCode": "1326628-B3",
             "ListPrice": 95,
             "FinalIndividualPrice": 95,
             "FinalTotalPrice": 0,
@@ -40,8 +39,7 @@
                         "BonusRatio": 12,
                         "QualifyingQuantity": 12,
                         "BonusQuantity": 2,
-                        "ConditionId": "0000186710",
-                        "OldMaterialCode": "1326628-B3"
+                        "ConditionId": "0000186710"
                       }
                     ],
                     "Calculation": "915",
@@ -56,8 +54,7 @@
                         "BonusRatio": 25,
                         "QualifyingQuantity": 25,
                         "BonusQuantity": 6,
-                        "ConditionId": "0000186710",
-                        "OldMaterialCode": "1326628-B3"
+                        "ConditionId": "0000186710"
                       }
                     ],
                     "Calculation": "915",
@@ -72,9 +69,7 @@
                         "BonusRatio": 40,
                         "QualifyingQuantity": 40,
                         "BonusQuantity": 14,
-                        "ConditionId": "0000186710",
-                        "OldMaterialCode": "1326628-B3"
-                      }
+                        "ConditionId": "0000186710"                      }
                     ],
                     "Calculation": "915",
                     "QualifyingQuantity": 40
@@ -88,9 +83,7 @@
                         "BonusRatio": 60,
                         "QualifyingQuantity": 60,
                         "BonusQuantity": 30,
-                        "ConditionId": "0000186710",
-                        "OldMaterialCode": "1326628-B3"
-                      }
+                        "ConditionId": "0000186710"                      }
                     ],
                     "Calculation": "915",
                     "QualifyingQuantity": 60
@@ -112,8 +105,6 @@
             "MaterialDescription": "Singulair           Tab   4mg    28s",
             "TherapeuticClass": "Antileukotriene anti-asthmatics, sys.",
             "ItemBrand": "Singulair",
-            "OldMaterialCode": "1326628-B3",
-            "GenericMaterialName": "",
             "defaultMaterialDescription": "Singulair           Tab   4mg    28s",
             "hasMandatoryTenderContract": null,
             "hasValidTenderContract": null,
@@ -134,7 +125,6 @@
             "ZDP5MaxQuota": "",
             "ZDP5RemainingQuota": "",
             "ZMGDiscount": false,
-            "OldMaterialCode": "11369",
             "ListPrice": 100,
             "FinalIndividualPrice": 80,
             "FinalTotalPrice": 0,
@@ -176,8 +166,6 @@
             "MaterialDescription": "Joint RX Cap w       300s + 50g",
             "TherapeuticClass": "A-rheumatics, non-steroidal combination",
             "ItemBrand": "Joint RX Cap w",
-            "OldMaterialCode": "11369",
-            "GenericMaterialName": "",
             "defaultMaterialDescription": "Joint RX Cap w       300s + 50g",
             "hasMandatoryTenderContract": null,
             "hasValidTenderContract": null,
@@ -198,7 +186,6 @@
             "ZDP5MaxQuota": "",
             "ZDP5RemainingQuota": "",
             "ZMGDiscount": false,
-            "OldMaterialCode": "1326558-BG",
             "ListPrice": 71.4,
             "FinalIndividualPrice": 71.4,
             "FinalTotalPrice": 0,
@@ -230,8 +217,7 @@
                         "BonusRatio": 12,
                         "QualifyingQuantity": 12,
                         "BonusQuantity": 2,
-                        "ConditionId": "0000186714",
-                        "OldMaterialCode": "1326558-BG"
+                        "ConditionId": "0000186714"
                       }
                     ],
                     "Calculation": "915",
@@ -246,9 +232,7 @@
                         "BonusRatio": 25,
                         "QualifyingQuantity": 25,
                         "BonusQuantity": 6,
-                        "ConditionId": "0000186714",
-                        "OldMaterialCode": "1326558-BG"
-                      }
+                        "ConditionId": "0000186714"                      }
                     ],
                     "Calculation": "915",
                     "QualifyingQuantity": 25
@@ -262,9 +246,7 @@
                         "BonusRatio": 40,
                         "QualifyingQuantity": 40,
                         "BonusQuantity": 14,
-                        "ConditionId": "0000186714",
-                        "OldMaterialCode": "1326558-BG"
-                      }
+                        "ConditionId": "0000186714"                      }
                     ],
                     "Calculation": "915",
                     "QualifyingQuantity": 40
@@ -278,9 +260,7 @@
                         "BonusRatio": 60,
                         "QualifyingQuantity": 60,
                         "BonusQuantity": 30,
-                        "ConditionId": "0000186714",
-                        "OldMaterialCode": "1326558-BG"
-                      }
+                        "ConditionId": "0000186714"                      }
                     ],
                     "Calculation": "915",
                     "QualifyingQuantity": 60
@@ -302,8 +282,6 @@
             "MaterialDescription": "Singulair           Tab   10mg   28's",
             "TherapeuticClass": "Antileukotriene anti-asthmatics, sys.",
             "ItemBrand": "Singulair",
-            "OldMaterialCode": "1326558-BG",
-            "GenericMaterialName": "",
             "defaultMaterialDescription": "Singulair           Tab   10mg   28's",
             "hasMandatoryTenderContract": null,
             "hasValidTenderContract": null,

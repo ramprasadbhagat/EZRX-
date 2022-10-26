@@ -26,6 +26,7 @@ mixin _$SalesOrganisationConfigs {
   bool get disableOrderType => throw _privateConstructorUsedError;
   bool get enableBatchNumber => throw _privateConstructorUsedError;
   bool get disableBundles => throw _privateConstructorUsedError;
+  bool get enableZDP5 => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrganisationConfigsCopyWith<SalesOrganisationConfigs> get copyWith =>
@@ -47,7 +48,8 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       List<dynamic> principalList,
       bool disableOrderType,
       bool enableBatchNumber,
-      bool disableBundles});
+      bool disableBundles,
+      bool enableZDP5});
 }
 
 /// @nodoc
@@ -71,6 +73,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? disableOrderType = freezed,
     Object? enableBatchNumber = freezed,
     Object? disableBundles = freezed,
+    Object? enableZDP5 = freezed,
   }) {
     return _then(_value.copyWith(
       currency: currency == freezed
@@ -113,6 +116,10 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.disableBundles
           : disableBundles // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableZDP5: enableZDP5 == freezed
+          ? _value.enableZDP5
+          : enableZDP5 // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -135,7 +142,8 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       List<dynamic> principalList,
       bool disableOrderType,
       bool enableBatchNumber,
-      bool disableBundles});
+      bool disableBundles,
+      bool enableZDP5});
 }
 
 /// @nodoc
@@ -162,6 +170,7 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? disableOrderType = freezed,
     Object? enableBatchNumber = freezed,
     Object? disableBundles = freezed,
+    Object? enableZDP5 = freezed,
   }) {
     return _then(_$_SalesOrganisationConfigs(
       currency: currency == freezed
@@ -204,6 +213,10 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.disableBundles
           : disableBundles // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableZDP5: enableZDP5 == freezed
+          ? _value.enableZDP5
+          : enableZDP5 // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -221,7 +234,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       required final List<dynamic> principalList,
       required this.disableOrderType,
       required this.enableBatchNumber,
-      required this.disableBundles})
+      required this.disableBundles,
+      required this.enableZDP5})
       : _principalList = principalList,
         super._();
 
@@ -250,10 +264,12 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   final bool enableBatchNumber;
   @override
   final bool disableBundles;
+  @override
+  final bool enableZDP5;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles)';
+    return 'SalesOrganisationConfigs(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5)';
   }
 
   @override
@@ -279,7 +295,9 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
             const DeepCollectionEquality()
                 .equals(other.enableBatchNumber, enableBatchNumber) &&
             const DeepCollectionEquality()
-                .equals(other.disableBundles, disableBundles));
+                .equals(other.disableBundles, disableBundles) &&
+            const DeepCollectionEquality()
+                .equals(other.enableZDP5, enableZDP5));
   }
 
   @override
@@ -294,7 +312,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       const DeepCollectionEquality().hash(_principalList),
       const DeepCollectionEquality().hash(disableOrderType),
       const DeepCollectionEquality().hash(enableBatchNumber),
-      const DeepCollectionEquality().hash(disableBundles));
+      const DeepCollectionEquality().hash(disableBundles),
+      const DeepCollectionEquality().hash(enableZDP5));
 
   @JsonKey(ignore: true)
   @override
@@ -314,7 +333,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final List<dynamic> principalList,
       required final bool disableOrderType,
       required final bool enableBatchNumber,
-      required final bool disableBundles}) = _$_SalesOrganisationConfigs;
+      required final bool disableBundles,
+      required final bool enableZDP5}) = _$_SalesOrganisationConfigs;
   const _SalesOrganisationConfigs._() : super._();
 
   @override
@@ -337,6 +357,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   bool get enableBatchNumber;
   @override
   bool get disableBundles;
+  @override
+  bool get enableZDP5;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsCopyWith<_$_SalesOrganisationConfigs>

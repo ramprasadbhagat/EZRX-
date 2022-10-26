@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
@@ -71,6 +72,10 @@ import 'package:ezrxmobile/infrastructure/account/datasource/user_query_mutation
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/material_price_detail_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_remote.dart';
@@ -726,10 +731,7 @@ void setupLocator() {
   );
   locator.registerLazySingleton(
     () => OrderHistoryListBloc(
-
       orderHistoryRepository: locator<OrderHistoryRepository>(),
-       
-
     ),
   );
   //============================================================
@@ -875,34 +877,41 @@ void setupLocator() {
   );
 
   //============================================================
-  //  Stock Information
+  //  Material Detail
   //
   //============================================================
-  locator.registerLazySingleton(() => StockInfoLocalDataSource());
-  locator.registerLazySingleton(() => StockInfoQueryMutation());
+
+  locator.registerLazySingleton(() => MaterialPriceDetailQueryMutation());
+
+  locator.registerLazySingleton(() => MaterialPriceDetailLocalDataSource());
 
   locator.registerLazySingleton(
-    () => StockInfoRemoteDataSource(
+    () => MaterialPriceDetailRemoteDataSource(
       config: locator<Config>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
       httpService: locator<HttpService>(),
-      stockInfoQueryMutation: locator<StockInfoQueryMutation>(),
+      queryMutation: locator<MaterialPriceDetailQueryMutation>(),
     ),
   );
 
   locator.registerLazySingleton(
-    () => StockInfoRepository(
+    () => MaterialPriceDetailRepository(
       config: locator<Config>(),
-      stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
-      stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
+      localDataSource: locator<MaterialPriceDetailLocalDataSource>(),
+      remoteDataSource: locator<MaterialPriceDetailRemoteDataSource>(),
     ),
   );
 
   locator.registerLazySingleton(
-    () => StockInformationBloc(
-      stockInfoRepository: locator<StockInfoRepository>(),
+    () => MaterialPriceDetailBloc(
+      locator<MaterialPriceDetailRepository>(),
     ),
   );
+
+  //============================================================
+  //  Valid Customer Material
+  //
+  //============================================================
 
   locator.registerLazySingleton(
     () => ValidCustomMaterialQuery(),
@@ -932,6 +941,36 @@ void setupLocator() {
     () => ValidCustomerMaterialBloc(
       validCustomerMaterialRepository:
           locator<ValidCustomerMaterialRepository>(),
+    ),
+  );
+
+  //============================================================
+  //  Stock Information
+  //
+  //============================================================
+  locator.registerLazySingleton(() => StockInfoLocalDataSource());
+  locator.registerLazySingleton(() => StockInfoQueryMutation());
+
+  locator.registerLazySingleton(
+    () => StockInfoRemoteDataSource(
+      config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      httpService: locator<HttpService>(),
+      stockInfoQueryMutation: locator<StockInfoQueryMutation>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => StockInfoRepository(
+      config: locator<Config>(),
+      stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
+      stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => StockInformationBloc(
+      stockInfoRepository: locator<StockInfoRepository>(),
     ),
   );
 }

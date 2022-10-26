@@ -42,6 +42,8 @@ mixin _$SalesOrganisationConfigsDto {
   bool get enableBatchNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'disableBundles', defaultValue: false)
   bool get disableBundles => throw _privateConstructorUsedError;
+  @JsonKey(name: 'enableZDP5', defaultValue: false)
+  bool get enableZDP5 => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -76,7 +78,9 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
       @JsonKey(name: 'enableBatchNumber', defaultValue: false)
           bool enableBatchNumber,
       @JsonKey(name: 'disableBundles', defaultValue: false)
-          bool disableBundles});
+          bool disableBundles,
+      @JsonKey(name: 'enableZDP5', defaultValue: false)
+          bool enableZDP5});
 }
 
 /// @nodoc
@@ -100,6 +104,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? disableOrderType = freezed,
     Object? enableBatchNumber = freezed,
     Object? disableBundles = freezed,
+    Object? enableZDP5 = freezed,
   }) {
     return _then(_value.copyWith(
       currency: currency == freezed
@@ -142,6 +147,10 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.disableBundles
           : disableBundles // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableZDP5: enableZDP5 == freezed
+          ? _value.enableZDP5
+          : enableZDP5 // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -175,7 +184,9 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
       @JsonKey(name: 'enableBatchNumber', defaultValue: false)
           bool enableBatchNumber,
       @JsonKey(name: 'disableBundles', defaultValue: false)
-          bool disableBundles});
+          bool disableBundles,
+      @JsonKey(name: 'enableZDP5', defaultValue: false)
+          bool enableZDP5});
 }
 
 /// @nodoc
@@ -203,6 +214,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? disableOrderType = freezed,
     Object? enableBatchNumber = freezed,
     Object? disableBundles = freezed,
+    Object? enableZDP5 = freezed,
   }) {
     return _then(_$_SalesOrganisationConfigsDto(
       currency: currency == freezed
@@ -245,6 +257,10 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.disableBundles
           : disableBundles // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableZDP5: enableZDP5 == freezed
+          ? _value.enableZDP5
+          : enableZDP5 // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -273,7 +289,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
       @JsonKey(name: 'enableBatchNumber', defaultValue: false)
           required this.enableBatchNumber,
       @JsonKey(name: 'disableBundles', defaultValue: false)
-          required this.disableBundles})
+          required this.disableBundles,
+      @JsonKey(name: 'enableZDP5', defaultValue: false)
+          required this.enableZDP5})
       : _principalList = principalList,
         super._();
 
@@ -316,10 +334,13 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @override
   @JsonKey(name: 'disableBundles', defaultValue: false)
   final bool disableBundles;
+  @override
+  @JsonKey(name: 'enableZDP5', defaultValue: false)
+  final bool enableZDP5;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles)';
+    return 'SalesOrganisationConfigsDto(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5)';
   }
 
   @override
@@ -345,7 +366,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
             const DeepCollectionEquality()
                 .equals(other.enableBatchNumber, enableBatchNumber) &&
             const DeepCollectionEquality()
-                .equals(other.disableBundles, disableBundles));
+                .equals(other.disableBundles, disableBundles) &&
+            const DeepCollectionEquality()
+                .equals(other.enableZDP5, enableZDP5));
   }
 
   @JsonKey(ignore: true)
@@ -361,7 +384,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
       const DeepCollectionEquality().hash(_principalList),
       const DeepCollectionEquality().hash(disableOrderType),
       const DeepCollectionEquality().hash(enableBatchNumber),
-      const DeepCollectionEquality().hash(disableBundles));
+      const DeepCollectionEquality().hash(disableBundles),
+      const DeepCollectionEquality().hash(enableZDP5));
 
   @JsonKey(ignore: true)
   @override
@@ -400,7 +424,9 @@ abstract class _SalesOrganisationConfigsDto
       @JsonKey(name: 'enableBatchNumber', defaultValue: false)
           required final bool enableBatchNumber,
       @JsonKey(name: 'disableBundles', defaultValue: false)
-          required final bool disableBundles}) = _$_SalesOrganisationConfigsDto;
+          required final bool disableBundles,
+      @JsonKey(name: 'enableZDP5', defaultValue: false)
+          required final bool enableZDP5}) = _$_SalesOrganisationConfigsDto;
   const _SalesOrganisationConfigsDto._() : super._();
 
   factory _SalesOrganisationConfigsDto.fromJson(Map<String, dynamic> json) =
@@ -437,6 +463,9 @@ abstract class _SalesOrganisationConfigsDto
   @override
   @JsonKey(name: 'disableBundles', defaultValue: false)
   bool get disableBundles;
+  @override
+  @JsonKey(name: 'enableZDP5', defaultValue: false)
+  bool get enableZDP5;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsDtoCopyWith<_$_SalesOrganisationConfigsDto>

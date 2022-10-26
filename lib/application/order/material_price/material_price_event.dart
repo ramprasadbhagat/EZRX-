@@ -6,6 +6,6 @@ class MaterialPriceEvent with _$MaterialPriceEvent {
   const factory MaterialPriceEvent.fetch({
     required CustomerCodeInfo customerCode,
     required SalesOrganisation salesOrganisation,
-    required List<MaterialNumber> materialNumbers,
+    required List<MaterialInfo> materials,
   }) = _Fetch;
 }

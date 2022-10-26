@@ -20,11 +20,7 @@ PriceBonusDto _$PriceBonusDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PriceBonusDto {
-  @JsonKey(name: 'Calculation', defaultValue: '')
-  String get calculation => throw _privateConstructorUsedError;
-  @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-  int get qualifyingQuantity => throw _privateConstructorUsedError;
-  @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
+  @JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
   List<PriceBonusItemDto> get items => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,11 +35,7 @@ abstract class $PriceBonusDtoCopyWith<$Res> {
           PriceBonusDto value, $Res Function(PriceBonusDto) then) =
       _$PriceBonusDtoCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'Calculation', defaultValue: '')
-          String calculation,
-      @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-          int qualifyingQuantity,
-      @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
+      {@JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
           List<PriceBonusItemDto> items});
 }
 
@@ -58,19 +50,9 @@ class _$PriceBonusDtoCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? calculation = freezed,
-    Object? qualifyingQuantity = freezed,
     Object? items = freezed,
   }) {
     return _then(_value.copyWith(
-      calculation: calculation == freezed
-          ? _value.calculation
-          : calculation // ignore: cast_nullable_to_non_nullable
-              as String,
-      qualifyingQuantity: qualifyingQuantity == freezed
-          ? _value.qualifyingQuantity
-          : qualifyingQuantity // ignore: cast_nullable_to_non_nullable
-              as int,
       items: items == freezed
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
@@ -87,11 +69,7 @@ abstract class _$$_PriceBonusDtoCopyWith<$Res>
       __$$_PriceBonusDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'Calculation', defaultValue: '')
-          String calculation,
-      @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-          int qualifyingQuantity,
-      @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
+      {@JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
           List<PriceBonusItemDto> items});
 }
 
@@ -108,19 +86,9 @@ class __$$_PriceBonusDtoCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? calculation = freezed,
-    Object? qualifyingQuantity = freezed,
     Object? items = freezed,
   }) {
     return _then(_$_PriceBonusDto(
-      calculation: calculation == freezed
-          ? _value.calculation
-          : calculation // ignore: cast_nullable_to_non_nullable
-              as String,
-      qualifyingQuantity: qualifyingQuantity == freezed
-          ? _value.qualifyingQuantity
-          : qualifyingQuantity // ignore: cast_nullable_to_non_nullable
-              as int,
       items: items == freezed
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
@@ -133,11 +101,7 @@ class __$$_PriceBonusDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PriceBonusDto extends _PriceBonusDto {
   const _$_PriceBonusDto(
-      {@JsonKey(name: 'Calculation', defaultValue: '')
-          required this.calculation,
-      @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-          required this.qualifyingQuantity,
-      @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
+      {@JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
           required final List<PriceBonusItemDto> items})
       : _items = items,
         super._();
@@ -145,15 +109,9 @@ class _$_PriceBonusDto extends _PriceBonusDto {
   factory _$_PriceBonusDto.fromJson(Map<String, dynamic> json) =>
       _$$_PriceBonusDtoFromJson(json);
 
-  @override
-  @JsonKey(name: 'Calculation', defaultValue: '')
-  final String calculation;
-  @override
-  @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-  final int qualifyingQuantity;
   final List<PriceBonusItemDto> _items;
   @override
-  @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
+  @JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
   List<PriceBonusItemDto> get items {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_items);
@@ -161,7 +119,7 @@ class _$_PriceBonusDto extends _PriceBonusDto {
 
   @override
   String toString() {
-    return 'PriceBonusDto(calculation: $calculation, qualifyingQuantity: $qualifyingQuantity, items: $items)';
+    return 'PriceBonusDto(items: $items)';
   }
 
   @override
@@ -169,20 +127,13 @@ class _$_PriceBonusDto extends _PriceBonusDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PriceBonusDto &&
-            const DeepCollectionEquality()
-                .equals(other.calculation, calculation) &&
-            const DeepCollectionEquality()
-                .equals(other.qualifyingQuantity, qualifyingQuantity) &&
             const DeepCollectionEquality().equals(other._items, _items));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(calculation),
-      const DeepCollectionEquality().hash(qualifyingQuantity),
-      const DeepCollectionEquality().hash(_items));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_items));
 
   @JsonKey(ignore: true)
   @override
@@ -199,11 +150,7 @@ class _$_PriceBonusDto extends _PriceBonusDto {
 
 abstract class _PriceBonusDto extends PriceBonusDto {
   const factory _PriceBonusDto(
-      {@JsonKey(name: 'Calculation', defaultValue: '')
-          required final String calculation,
-      @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-          required final int qualifyingQuantity,
-      @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
+      {@JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
           required final List<PriceBonusItemDto> items}) = _$_PriceBonusDto;
   const _PriceBonusDto._() : super._();
 
@@ -211,13 +158,7 @@ abstract class _PriceBonusDto extends PriceBonusDto {
       _$_PriceBonusDto.fromJson;
 
   @override
-  @JsonKey(name: 'Calculation', defaultValue: '')
-  String get calculation;
-  @override
-  @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-  int get qualifyingQuantity;
-  @override
-  @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
+  @JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
   List<PriceBonusItemDto> get items;
   @override
   @JsonKey(ignore: true)
@@ -231,6 +172,221 @@ PriceBonusItemDto _$PriceBonusItemDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PriceBonusItemDto {
+  @JsonKey(name: 'Calculation', defaultValue: '')
+  String get calculation => throw _privateConstructorUsedError;
+  @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
+  int get qualifyingQuantity => throw _privateConstructorUsedError;
+  @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
+  List<BonusMaterialDto> get bonusMaterials =>
+      throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PriceBonusItemDtoCopyWith<PriceBonusItemDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PriceBonusItemDtoCopyWith<$Res> {
+  factory $PriceBonusItemDtoCopyWith(
+          PriceBonusItemDto value, $Res Function(PriceBonusItemDto) then) =
+      _$PriceBonusItemDtoCopyWithImpl<$Res>;
+  $Res call(
+      {@JsonKey(name: 'Calculation', defaultValue: '')
+          String calculation,
+      @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
+          int qualifyingQuantity,
+      @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
+          List<BonusMaterialDto> bonusMaterials});
+}
+
+/// @nodoc
+class _$PriceBonusItemDtoCopyWithImpl<$Res>
+    implements $PriceBonusItemDtoCopyWith<$Res> {
+  _$PriceBonusItemDtoCopyWithImpl(this._value, this._then);
+
+  final PriceBonusItemDto _value;
+  // ignore: unused_field
+  final $Res Function(PriceBonusItemDto) _then;
+
+  @override
+  $Res call({
+    Object? calculation = freezed,
+    Object? qualifyingQuantity = freezed,
+    Object? bonusMaterials = freezed,
+  }) {
+    return _then(_value.copyWith(
+      calculation: calculation == freezed
+          ? _value.calculation
+          : calculation // ignore: cast_nullable_to_non_nullable
+              as String,
+      qualifyingQuantity: qualifyingQuantity == freezed
+          ? _value.qualifyingQuantity
+          : qualifyingQuantity // ignore: cast_nullable_to_non_nullable
+              as int,
+      bonusMaterials: bonusMaterials == freezed
+          ? _value.bonusMaterials
+          : bonusMaterials // ignore: cast_nullable_to_non_nullable
+              as List<BonusMaterialDto>,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_PriceBonusItemDtoCopyWith<$Res>
+    implements $PriceBonusItemDtoCopyWith<$Res> {
+  factory _$$_PriceBonusItemDtoCopyWith(_$_PriceBonusItemDto value,
+          $Res Function(_$_PriceBonusItemDto) then) =
+      __$$_PriceBonusItemDtoCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {@JsonKey(name: 'Calculation', defaultValue: '')
+          String calculation,
+      @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
+          int qualifyingQuantity,
+      @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
+          List<BonusMaterialDto> bonusMaterials});
+}
+
+/// @nodoc
+class __$$_PriceBonusItemDtoCopyWithImpl<$Res>
+    extends _$PriceBonusItemDtoCopyWithImpl<$Res>
+    implements _$$_PriceBonusItemDtoCopyWith<$Res> {
+  __$$_PriceBonusItemDtoCopyWithImpl(
+      _$_PriceBonusItemDto _value, $Res Function(_$_PriceBonusItemDto) _then)
+      : super(_value, (v) => _then(v as _$_PriceBonusItemDto));
+
+  @override
+  _$_PriceBonusItemDto get _value => super._value as _$_PriceBonusItemDto;
+
+  @override
+  $Res call({
+    Object? calculation = freezed,
+    Object? qualifyingQuantity = freezed,
+    Object? bonusMaterials = freezed,
+  }) {
+    return _then(_$_PriceBonusItemDto(
+      calculation: calculation == freezed
+          ? _value.calculation
+          : calculation // ignore: cast_nullable_to_non_nullable
+              as String,
+      qualifyingQuantity: qualifyingQuantity == freezed
+          ? _value.qualifyingQuantity
+          : qualifyingQuantity // ignore: cast_nullable_to_non_nullable
+              as int,
+      bonusMaterials: bonusMaterials == freezed
+          ? _value._bonusMaterials
+          : bonusMaterials // ignore: cast_nullable_to_non_nullable
+              as List<BonusMaterialDto>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_PriceBonusItemDto extends _PriceBonusItemDto {
+  const _$_PriceBonusItemDto(
+      {@JsonKey(name: 'Calculation', defaultValue: '')
+          required this.calculation,
+      @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
+          required this.qualifyingQuantity,
+      @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
+          required final List<BonusMaterialDto> bonusMaterials})
+      : _bonusMaterials = bonusMaterials,
+        super._();
+
+  factory _$_PriceBonusItemDto.fromJson(Map<String, dynamic> json) =>
+      _$$_PriceBonusItemDtoFromJson(json);
+
+  @override
+  @JsonKey(name: 'Calculation', defaultValue: '')
+  final String calculation;
+  @override
+  @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
+  final int qualifyingQuantity;
+  final List<BonusMaterialDto> _bonusMaterials;
+  @override
+  @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
+  List<BonusMaterialDto> get bonusMaterials {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bonusMaterials);
+  }
+
+  @override
+  String toString() {
+    return 'PriceBonusItemDto(calculation: $calculation, qualifyingQuantity: $qualifyingQuantity, bonusMaterials: $bonusMaterials)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PriceBonusItemDto &&
+            const DeepCollectionEquality()
+                .equals(other.calculation, calculation) &&
+            const DeepCollectionEquality()
+                .equals(other.qualifyingQuantity, qualifyingQuantity) &&
+            const DeepCollectionEquality()
+                .equals(other._bonusMaterials, _bonusMaterials));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(calculation),
+      const DeepCollectionEquality().hash(qualifyingQuantity),
+      const DeepCollectionEquality().hash(_bonusMaterials));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_PriceBonusItemDtoCopyWith<_$_PriceBonusItemDto> get copyWith =>
+      __$$_PriceBonusItemDtoCopyWithImpl<_$_PriceBonusItemDto>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_PriceBonusItemDtoToJson(
+      this,
+    );
+  }
+}
+
+abstract class _PriceBonusItemDto extends PriceBonusItemDto {
+  const factory _PriceBonusItemDto(
+          {@JsonKey(name: 'Calculation', defaultValue: '')
+              required final String calculation,
+          @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
+              required final int qualifyingQuantity,
+          @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
+              required final List<BonusMaterialDto> bonusMaterials}) =
+      _$_PriceBonusItemDto;
+  const _PriceBonusItemDto._() : super._();
+
+  factory _PriceBonusItemDto.fromJson(Map<String, dynamic> json) =
+      _$_PriceBonusItemDto.fromJson;
+
+  @override
+  @JsonKey(name: 'Calculation', defaultValue: '')
+  String get calculation;
+  @override
+  @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
+  int get qualifyingQuantity;
+  @override
+  @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
+  List<BonusMaterialDto> get bonusMaterials;
+  @override
+  @JsonKey(ignore: true)
+  _$$_PriceBonusItemDtoCopyWith<_$_PriceBonusItemDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+BonusMaterialDto _$BonusMaterialDtoFromJson(Map<String, dynamic> json) {
+  return _BonusMaterialDto.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BonusMaterialDto {
   @JsonKey(name: 'MaterialNumber', defaultValue: '')
   String get materialNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'MaterialDescription', defaultValue: '')
@@ -246,15 +402,15 @@ mixin _$PriceBonusItemDto {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PriceBonusItemDtoCopyWith<PriceBonusItemDto> get copyWith =>
+  $BonusMaterialDtoCopyWith<BonusMaterialDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PriceBonusItemDtoCopyWith<$Res> {
-  factory $PriceBonusItemDtoCopyWith(
-          PriceBonusItemDto value, $Res Function(PriceBonusItemDto) then) =
-      _$PriceBonusItemDtoCopyWithImpl<$Res>;
+abstract class $BonusMaterialDtoCopyWith<$Res> {
+  factory $BonusMaterialDtoCopyWith(
+          BonusMaterialDto value, $Res Function(BonusMaterialDto) then) =
+      _$BonusMaterialDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'MaterialNumber', defaultValue: '')
           String materialNumber,
@@ -271,13 +427,13 @@ abstract class $PriceBonusItemDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PriceBonusItemDtoCopyWithImpl<$Res>
-    implements $PriceBonusItemDtoCopyWith<$Res> {
-  _$PriceBonusItemDtoCopyWithImpl(this._value, this._then);
+class _$BonusMaterialDtoCopyWithImpl<$Res>
+    implements $BonusMaterialDtoCopyWith<$Res> {
+  _$BonusMaterialDtoCopyWithImpl(this._value, this._then);
 
-  final PriceBonusItemDto _value;
+  final BonusMaterialDto _value;
   // ignore: unused_field
-  final $Res Function(PriceBonusItemDto) _then;
+  final $Res Function(BonusMaterialDto) _then;
 
   @override
   $Res call({
@@ -318,11 +474,11 @@ class _$PriceBonusItemDtoCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$_PriceBonusItemDtoCopyWith<$Res>
-    implements $PriceBonusItemDtoCopyWith<$Res> {
-  factory _$$_PriceBonusItemDtoCopyWith(_$_PriceBonusItemDto value,
-          $Res Function(_$_PriceBonusItemDto) then) =
-      __$$_PriceBonusItemDtoCopyWithImpl<$Res>;
+abstract class _$$_BonusMaterialDtoCopyWith<$Res>
+    implements $BonusMaterialDtoCopyWith<$Res> {
+  factory _$$_BonusMaterialDtoCopyWith(
+          _$_BonusMaterialDto value, $Res Function(_$_BonusMaterialDto) then) =
+      __$$_BonusMaterialDtoCopyWithImpl<$Res>;
   @override
   $Res call(
       {@JsonKey(name: 'MaterialNumber', defaultValue: '')
@@ -340,15 +496,15 @@ abstract class _$$_PriceBonusItemDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PriceBonusItemDtoCopyWithImpl<$Res>
-    extends _$PriceBonusItemDtoCopyWithImpl<$Res>
-    implements _$$_PriceBonusItemDtoCopyWith<$Res> {
-  __$$_PriceBonusItemDtoCopyWithImpl(
-      _$_PriceBonusItemDto _value, $Res Function(_$_PriceBonusItemDto) _then)
-      : super(_value, (v) => _then(v as _$_PriceBonusItemDto));
+class __$$_BonusMaterialDtoCopyWithImpl<$Res>
+    extends _$BonusMaterialDtoCopyWithImpl<$Res>
+    implements _$$_BonusMaterialDtoCopyWith<$Res> {
+  __$$_BonusMaterialDtoCopyWithImpl(
+      _$_BonusMaterialDto _value, $Res Function(_$_BonusMaterialDto) _then)
+      : super(_value, (v) => _then(v as _$_BonusMaterialDto));
 
   @override
-  _$_PriceBonusItemDto get _value => super._value as _$_PriceBonusItemDto;
+  _$_BonusMaterialDto get _value => super._value as _$_BonusMaterialDto;
 
   @override
   $Res call({
@@ -359,7 +515,7 @@ class __$$_PriceBonusItemDtoCopyWithImpl<$Res>
     Object? qualifyingQuantity = freezed,
     Object? bonusQuantity = freezed,
   }) {
-    return _then(_$_PriceBonusItemDto(
+    return _then(_$_BonusMaterialDto(
       materialNumber: materialNumber == freezed
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -390,8 +546,8 @@ class __$$_PriceBonusItemDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PriceBonusItemDto extends _PriceBonusItemDto {
-  const _$_PriceBonusItemDto(
+class _$_BonusMaterialDto extends _BonusMaterialDto {
+  const _$_BonusMaterialDto(
       {@JsonKey(name: 'MaterialNumber', defaultValue: '')
           required this.materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
@@ -406,8 +562,8 @@ class _$_PriceBonusItemDto extends _PriceBonusItemDto {
           required this.bonusQuantity})
       : super._();
 
-  factory _$_PriceBonusItemDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PriceBonusItemDtoFromJson(json);
+  factory _$_BonusMaterialDto.fromJson(Map<String, dynamic> json) =>
+      _$$_BonusMaterialDtoFromJson(json);
 
   @override
   @JsonKey(name: 'MaterialNumber', defaultValue: '')
@@ -430,14 +586,14 @@ class _$_PriceBonusItemDto extends _PriceBonusItemDto {
 
   @override
   String toString() {
-    return 'PriceBonusItemDto(materialNumber: $materialNumber, materialDescription: $materialDescription, calculation: $calculation, bonusRatio: $bonusRatio, qualifyingQuantity: $qualifyingQuantity, bonusQuantity: $bonusQuantity)';
+    return 'BonusMaterialDto(materialNumber: $materialNumber, materialDescription: $materialDescription, calculation: $calculation, bonusRatio: $bonusRatio, qualifyingQuantity: $qualifyingQuantity, bonusQuantity: $bonusQuantity)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PriceBonusItemDto &&
+            other is _$_BonusMaterialDto &&
             const DeepCollectionEquality()
                 .equals(other.materialNumber, materialNumber) &&
             const DeepCollectionEquality()
@@ -465,20 +621,19 @@ class _$_PriceBonusItemDto extends _PriceBonusItemDto {
 
   @JsonKey(ignore: true)
   @override
-  _$$_PriceBonusItemDtoCopyWith<_$_PriceBonusItemDto> get copyWith =>
-      __$$_PriceBonusItemDtoCopyWithImpl<_$_PriceBonusItemDto>(
-          this, _$identity);
+  _$$_BonusMaterialDtoCopyWith<_$_BonusMaterialDto> get copyWith =>
+      __$$_BonusMaterialDtoCopyWithImpl<_$_BonusMaterialDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PriceBonusItemDtoToJson(
+    return _$$_BonusMaterialDtoToJson(
       this,
     );
   }
 }
 
-abstract class _PriceBonusItemDto extends PriceBonusItemDto {
-  const factory _PriceBonusItemDto(
+abstract class _BonusMaterialDto extends BonusMaterialDto {
+  const factory _BonusMaterialDto(
       {@JsonKey(name: 'MaterialNumber', defaultValue: '')
           required final String materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
@@ -490,11 +645,11 @@ abstract class _PriceBonusItemDto extends PriceBonusItemDto {
       @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
           required final int qualifyingQuantity,
       @JsonKey(name: 'BonusQuantity', defaultValue: 0)
-          required final int bonusQuantity}) = _$_PriceBonusItemDto;
-  const _PriceBonusItemDto._() : super._();
+          required final int bonusQuantity}) = _$_BonusMaterialDto;
+  const _BonusMaterialDto._() : super._();
 
-  factory _PriceBonusItemDto.fromJson(Map<String, dynamic> json) =
-      _$_PriceBonusItemDto.fromJson;
+  factory _BonusMaterialDto.fromJson(Map<String, dynamic> json) =
+      _$_BonusMaterialDto.fromJson;
 
   @override
   @JsonKey(name: 'MaterialNumber', defaultValue: '')
@@ -516,6 +671,6 @@ abstract class _PriceBonusItemDto extends PriceBonusItemDto {
   int get bonusQuantity;
   @override
   @JsonKey(ignore: true)
-  _$$_PriceBonusItemDtoCopyWith<_$_PriceBonusItemDto> get copyWith =>
+  _$$_BonusMaterialDtoCopyWith<_$_BonusMaterialDto> get copyWith =>
       throw _privateConstructorUsedError;
 }

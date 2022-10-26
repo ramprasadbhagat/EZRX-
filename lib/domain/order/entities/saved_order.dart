@@ -40,6 +40,22 @@ class SavedOrder with _$SavedOrder {
         requestedDeliveryDate: '',
       );
 
-  List<String> get allSavedOrderMaterialNumbers =>
-      items.map((e) => e.materialNumber.getOrCrash()).toList();
+  List<MaterialItem> validMaterialItems(
+    List<MaterialNumber> validMaterialNumber,
+  ) =>
+      items
+          .where(
+            (item) => validMaterialNumber.contains(
+              item.materialNumber,
+            ),
+          )
+          .toList();
+
+  List<String> get itemMaterialNumbers => items
+      .map(
+        (e) => e.materialNumber.getOrDefaultValue(
+          '',
+        ),
+      )
+      .toList();
 }

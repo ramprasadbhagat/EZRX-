@@ -8,16 +8,11 @@ part 'price_bonus_dto.g.dart';
 class PriceBonusDto with _$PriceBonusDto {
   const PriceBonusDto._();
   const factory PriceBonusDto({
-    @JsonKey(name: 'Calculation', defaultValue: '') required String calculation,
-    @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-        required int qualifyingQuantity,
-    @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
+    @JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
         required List<PriceBonusItemDto> items,
   }) = _PriceBonusDto;
 
   PriceBonus toDomain() => PriceBonus(
-        calculation: calculation,
-        qualifyingQuantity: qualifyingQuantity,
         items: items.map((e) => e.toDomain()).toList(),
       );
 
@@ -29,6 +24,27 @@ class PriceBonusDto with _$PriceBonusDto {
 class PriceBonusItemDto with _$PriceBonusItemDto {
   const PriceBonusItemDto._();
   const factory PriceBonusItemDto({
+    @JsonKey(name: 'Calculation', defaultValue: '') required String calculation,
+    @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
+        required int qualifyingQuantity,
+    @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
+        required List<BonusMaterialDto> bonusMaterials,
+  }) = _PriceBonusItemDto;
+
+  PriceBonusItem toDomain() => PriceBonusItem(
+        calculation: calculation,
+        qualifyingQuantity: qualifyingQuantity,
+        bonusMaterials: bonusMaterials.map((e) => e.toDomain()).toList(),
+      );
+
+  factory PriceBonusItemDto.fromJson(Map<String, dynamic> json) =>
+      _$PriceBonusItemDtoFromJson(json);
+}
+
+@freezed
+class BonusMaterialDto with _$BonusMaterialDto {
+  const BonusMaterialDto._();
+  const factory BonusMaterialDto({
     @JsonKey(name: 'MaterialNumber', defaultValue: '')
         required String materialNumber,
     @JsonKey(name: 'MaterialDescription', defaultValue: '')
@@ -38,9 +54,9 @@ class PriceBonusItemDto with _$PriceBonusItemDto {
     @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
         required int qualifyingQuantity,
     @JsonKey(name: 'BonusQuantity', defaultValue: 0) required int bonusQuantity,
-  }) = _PriceBonusItemDto;
+  }) = _BonusMaterialDto;
 
-  PriceBonusItem toDomain() => PriceBonusItem(
+  BonusMaterial toDomain() => BonusMaterial(
         materialNumber: materialNumber,
         materialDescription: materialDescription,
         calculation: calculation,
@@ -49,6 +65,6 @@ class PriceBonusItemDto with _$PriceBonusItemDto {
         bonusQuantity: bonusQuantity,
       );
 
-  factory PriceBonusItemDto.fromJson(Map<String, dynamic> json) =>
-      _$PriceBonusItemDtoFromJson(json);
+  factory BonusMaterialDto.fromJson(Map<String, dynamic> json) =>
+      _$BonusMaterialDtoFromJson(json);
 }

@@ -16,8 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PriceBonus {
-  String get calculation => throw _privateConstructorUsedError;
-  int get qualifyingQuantity => throw _privateConstructorUsedError;
   List<PriceBonusItem> get items => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,8 +28,7 @@ abstract class $PriceBonusCopyWith<$Res> {
   factory $PriceBonusCopyWith(
           PriceBonus value, $Res Function(PriceBonus) then) =
       _$PriceBonusCopyWithImpl<$Res>;
-  $Res call(
-      {String calculation, int qualifyingQuantity, List<PriceBonusItem> items});
+  $Res call({List<PriceBonusItem> items});
 }
 
 /// @nodoc
@@ -44,19 +41,9 @@ class _$PriceBonusCopyWithImpl<$Res> implements $PriceBonusCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? calculation = freezed,
-    Object? qualifyingQuantity = freezed,
     Object? items = freezed,
   }) {
     return _then(_value.copyWith(
-      calculation: calculation == freezed
-          ? _value.calculation
-          : calculation // ignore: cast_nullable_to_non_nullable
-              as String,
-      qualifyingQuantity: qualifyingQuantity == freezed
-          ? _value.qualifyingQuantity
-          : qualifyingQuantity // ignore: cast_nullable_to_non_nullable
-              as int,
       items: items == freezed
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
@@ -72,8 +59,7 @@ abstract class _$$_PriceBonusCopyWith<$Res>
           _$_PriceBonus value, $Res Function(_$_PriceBonus) then) =
       __$$_PriceBonusCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {String calculation, int qualifyingQuantity, List<PriceBonusItem> items});
+  $Res call({List<PriceBonusItem> items});
 }
 
 /// @nodoc
@@ -88,19 +74,9 @@ class __$$_PriceBonusCopyWithImpl<$Res> extends _$PriceBonusCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? calculation = freezed,
-    Object? qualifyingQuantity = freezed,
     Object? items = freezed,
   }) {
     return _then(_$_PriceBonus(
-      calculation: calculation == freezed
-          ? _value.calculation
-          : calculation // ignore: cast_nullable_to_non_nullable
-              as String,
-      qualifyingQuantity: qualifyingQuantity == freezed
-          ? _value.qualifyingQuantity
-          : qualifyingQuantity // ignore: cast_nullable_to_non_nullable
-              as int,
       items: items == freezed
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
@@ -112,17 +88,10 @@ class __$$_PriceBonusCopyWithImpl<$Res> extends _$PriceBonusCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_PriceBonus extends _PriceBonus {
-  const _$_PriceBonus(
-      {required this.calculation,
-      required this.qualifyingQuantity,
-      required final List<PriceBonusItem> items})
+  const _$_PriceBonus({required final List<PriceBonusItem> items})
       : _items = items,
         super._();
 
-  @override
-  final String calculation;
-  @override
-  final int qualifyingQuantity;
   final List<PriceBonusItem> _items;
   @override
   List<PriceBonusItem> get items {
@@ -132,7 +101,7 @@ class _$_PriceBonus extends _PriceBonus {
 
   @override
   String toString() {
-    return 'PriceBonus(calculation: $calculation, qualifyingQuantity: $qualifyingQuantity, items: $items)';
+    return 'PriceBonus(items: $items)';
   }
 
   @override
@@ -140,19 +109,12 @@ class _$_PriceBonus extends _PriceBonus {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PriceBonus &&
-            const DeepCollectionEquality()
-                .equals(other.calculation, calculation) &&
-            const DeepCollectionEquality()
-                .equals(other.qualifyingQuantity, qualifyingQuantity) &&
             const DeepCollectionEquality().equals(other._items, _items));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(calculation),
-      const DeepCollectionEquality().hash(qualifyingQuantity),
-      const DeepCollectionEquality().hash(_items));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_items));
 
   @JsonKey(ignore: true)
   @override
@@ -161,16 +123,10 @@ class _$_PriceBonus extends _PriceBonus {
 }
 
 abstract class _PriceBonus extends PriceBonus {
-  const factory _PriceBonus(
-      {required final String calculation,
-      required final int qualifyingQuantity,
-      required final List<PriceBonusItem> items}) = _$_PriceBonus;
+  const factory _PriceBonus({required final List<PriceBonusItem> items}) =
+      _$_PriceBonus;
   const _PriceBonus._() : super._();
 
-  @override
-  String get calculation;
-  @override
-  int get qualifyingQuantity;
   @override
   List<PriceBonusItem> get items;
   @override
@@ -181,12 +137,9 @@ abstract class _PriceBonus extends PriceBonus {
 
 /// @nodoc
 mixin _$PriceBonusItem {
-  String get materialNumber => throw _privateConstructorUsedError;
-  String get materialDescription => throw _privateConstructorUsedError;
   String get calculation => throw _privateConstructorUsedError;
-  int get bonusRatio => throw _privateConstructorUsedError;
   int get qualifyingQuantity => throw _privateConstructorUsedError;
-  int get bonusQuantity => throw _privateConstructorUsedError;
+  List<BonusMaterial> get bonusMaterials => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PriceBonusItemCopyWith<PriceBonusItem> get copyWith =>
@@ -199,12 +152,9 @@ abstract class $PriceBonusItemCopyWith<$Res> {
           PriceBonusItem value, $Res Function(PriceBonusItem) then) =
       _$PriceBonusItemCopyWithImpl<$Res>;
   $Res call(
-      {String materialNumber,
-      String materialDescription,
-      String calculation,
-      int bonusRatio,
+      {String calculation,
       int qualifyingQuantity,
-      int bonusQuantity});
+      List<BonusMaterial> bonusMaterials});
 }
 
 /// @nodoc
@@ -215,6 +165,184 @@ class _$PriceBonusItemCopyWithImpl<$Res>
   final PriceBonusItem _value;
   // ignore: unused_field
   final $Res Function(PriceBonusItem) _then;
+
+  @override
+  $Res call({
+    Object? calculation = freezed,
+    Object? qualifyingQuantity = freezed,
+    Object? bonusMaterials = freezed,
+  }) {
+    return _then(_value.copyWith(
+      calculation: calculation == freezed
+          ? _value.calculation
+          : calculation // ignore: cast_nullable_to_non_nullable
+              as String,
+      qualifyingQuantity: qualifyingQuantity == freezed
+          ? _value.qualifyingQuantity
+          : qualifyingQuantity // ignore: cast_nullable_to_non_nullable
+              as int,
+      bonusMaterials: bonusMaterials == freezed
+          ? _value.bonusMaterials
+          : bonusMaterials // ignore: cast_nullable_to_non_nullable
+              as List<BonusMaterial>,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_PriceBonusItemCopyWith<$Res>
+    implements $PriceBonusItemCopyWith<$Res> {
+  factory _$$_PriceBonusItemCopyWith(
+          _$_PriceBonusItem value, $Res Function(_$_PriceBonusItem) then) =
+      __$$_PriceBonusItemCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String calculation,
+      int qualifyingQuantity,
+      List<BonusMaterial> bonusMaterials});
+}
+
+/// @nodoc
+class __$$_PriceBonusItemCopyWithImpl<$Res>
+    extends _$PriceBonusItemCopyWithImpl<$Res>
+    implements _$$_PriceBonusItemCopyWith<$Res> {
+  __$$_PriceBonusItemCopyWithImpl(
+      _$_PriceBonusItem _value, $Res Function(_$_PriceBonusItem) _then)
+      : super(_value, (v) => _then(v as _$_PriceBonusItem));
+
+  @override
+  _$_PriceBonusItem get _value => super._value as _$_PriceBonusItem;
+
+  @override
+  $Res call({
+    Object? calculation = freezed,
+    Object? qualifyingQuantity = freezed,
+    Object? bonusMaterials = freezed,
+  }) {
+    return _then(_$_PriceBonusItem(
+      calculation: calculation == freezed
+          ? _value.calculation
+          : calculation // ignore: cast_nullable_to_non_nullable
+              as String,
+      qualifyingQuantity: qualifyingQuantity == freezed
+          ? _value.qualifyingQuantity
+          : qualifyingQuantity // ignore: cast_nullable_to_non_nullable
+              as int,
+      bonusMaterials: bonusMaterials == freezed
+          ? _value._bonusMaterials
+          : bonusMaterials // ignore: cast_nullable_to_non_nullable
+              as List<BonusMaterial>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_PriceBonusItem extends _PriceBonusItem {
+  const _$_PriceBonusItem(
+      {required this.calculation,
+      required this.qualifyingQuantity,
+      required final List<BonusMaterial> bonusMaterials})
+      : _bonusMaterials = bonusMaterials,
+        super._();
+
+  @override
+  final String calculation;
+  @override
+  final int qualifyingQuantity;
+  final List<BonusMaterial> _bonusMaterials;
+  @override
+  List<BonusMaterial> get bonusMaterials {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bonusMaterials);
+  }
+
+  @override
+  String toString() {
+    return 'PriceBonusItem(calculation: $calculation, qualifyingQuantity: $qualifyingQuantity, bonusMaterials: $bonusMaterials)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PriceBonusItem &&
+            const DeepCollectionEquality()
+                .equals(other.calculation, calculation) &&
+            const DeepCollectionEquality()
+                .equals(other.qualifyingQuantity, qualifyingQuantity) &&
+            const DeepCollectionEquality()
+                .equals(other._bonusMaterials, _bonusMaterials));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(calculation),
+      const DeepCollectionEquality().hash(qualifyingQuantity),
+      const DeepCollectionEquality().hash(_bonusMaterials));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_PriceBonusItemCopyWith<_$_PriceBonusItem> get copyWith =>
+      __$$_PriceBonusItemCopyWithImpl<_$_PriceBonusItem>(this, _$identity);
+}
+
+abstract class _PriceBonusItem extends PriceBonusItem {
+  const factory _PriceBonusItem(
+      {required final String calculation,
+      required final int qualifyingQuantity,
+      required final List<BonusMaterial> bonusMaterials}) = _$_PriceBonusItem;
+  const _PriceBonusItem._() : super._();
+
+  @override
+  String get calculation;
+  @override
+  int get qualifyingQuantity;
+  @override
+  List<BonusMaterial> get bonusMaterials;
+  @override
+  @JsonKey(ignore: true)
+  _$$_PriceBonusItemCopyWith<_$_PriceBonusItem> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$BonusMaterial {
+  String get materialNumber => throw _privateConstructorUsedError;
+  String get materialDescription => throw _privateConstructorUsedError;
+  String get calculation => throw _privateConstructorUsedError;
+  int get bonusRatio => throw _privateConstructorUsedError;
+  int get qualifyingQuantity => throw _privateConstructorUsedError;
+  int get bonusQuantity => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $BonusMaterialCopyWith<BonusMaterial> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BonusMaterialCopyWith<$Res> {
+  factory $BonusMaterialCopyWith(
+          BonusMaterial value, $Res Function(BonusMaterial) then) =
+      _$BonusMaterialCopyWithImpl<$Res>;
+  $Res call(
+      {String materialNumber,
+      String materialDescription,
+      String calculation,
+      int bonusRatio,
+      int qualifyingQuantity,
+      int bonusQuantity});
+}
+
+/// @nodoc
+class _$BonusMaterialCopyWithImpl<$Res>
+    implements $BonusMaterialCopyWith<$Res> {
+  _$BonusMaterialCopyWithImpl(this._value, this._then);
+
+  final BonusMaterial _value;
+  // ignore: unused_field
+  final $Res Function(BonusMaterial) _then;
 
   @override
   $Res call({
@@ -255,11 +383,11 @@ class _$PriceBonusItemCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$_PriceBonusItemCopyWith<$Res>
-    implements $PriceBonusItemCopyWith<$Res> {
-  factory _$$_PriceBonusItemCopyWith(
-          _$_PriceBonusItem value, $Res Function(_$_PriceBonusItem) then) =
-      __$$_PriceBonusItemCopyWithImpl<$Res>;
+abstract class _$$_BonusMaterialCopyWith<$Res>
+    implements $BonusMaterialCopyWith<$Res> {
+  factory _$$_BonusMaterialCopyWith(
+          _$_BonusMaterial value, $Res Function(_$_BonusMaterial) then) =
+      __$$_BonusMaterialCopyWithImpl<$Res>;
   @override
   $Res call(
       {String materialNumber,
@@ -271,15 +399,15 @@ abstract class _$$_PriceBonusItemCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PriceBonusItemCopyWithImpl<$Res>
-    extends _$PriceBonusItemCopyWithImpl<$Res>
-    implements _$$_PriceBonusItemCopyWith<$Res> {
-  __$$_PriceBonusItemCopyWithImpl(
-      _$_PriceBonusItem _value, $Res Function(_$_PriceBonusItem) _then)
-      : super(_value, (v) => _then(v as _$_PriceBonusItem));
+class __$$_BonusMaterialCopyWithImpl<$Res>
+    extends _$BonusMaterialCopyWithImpl<$Res>
+    implements _$$_BonusMaterialCopyWith<$Res> {
+  __$$_BonusMaterialCopyWithImpl(
+      _$_BonusMaterial _value, $Res Function(_$_BonusMaterial) _then)
+      : super(_value, (v) => _then(v as _$_BonusMaterial));
 
   @override
-  _$_PriceBonusItem get _value => super._value as _$_PriceBonusItem;
+  _$_BonusMaterial get _value => super._value as _$_BonusMaterial;
 
   @override
   $Res call({
@@ -290,7 +418,7 @@ class __$$_PriceBonusItemCopyWithImpl<$Res>
     Object? qualifyingQuantity = freezed,
     Object? bonusQuantity = freezed,
   }) {
-    return _then(_$_PriceBonusItem(
+    return _then(_$_BonusMaterial(
       materialNumber: materialNumber == freezed
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -321,8 +449,8 @@ class __$$_PriceBonusItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PriceBonusItem extends _PriceBonusItem {
-  const _$_PriceBonusItem(
+class _$_BonusMaterial extends _BonusMaterial {
+  const _$_BonusMaterial(
       {required this.materialNumber,
       required this.materialDescription,
       required this.calculation,
@@ -346,14 +474,14 @@ class _$_PriceBonusItem extends _PriceBonusItem {
 
   @override
   String toString() {
-    return 'PriceBonusItem(materialNumber: $materialNumber, materialDescription: $materialDescription, calculation: $calculation, bonusRatio: $bonusRatio, qualifyingQuantity: $qualifyingQuantity, bonusQuantity: $bonusQuantity)';
+    return 'BonusMaterial(materialNumber: $materialNumber, materialDescription: $materialDescription, calculation: $calculation, bonusRatio: $bonusRatio, qualifyingQuantity: $qualifyingQuantity, bonusQuantity: $bonusQuantity)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PriceBonusItem &&
+            other is _$_BonusMaterial &&
             const DeepCollectionEquality()
                 .equals(other.materialNumber, materialNumber) &&
             const DeepCollectionEquality()
@@ -380,19 +508,19 @@ class _$_PriceBonusItem extends _PriceBonusItem {
 
   @JsonKey(ignore: true)
   @override
-  _$$_PriceBonusItemCopyWith<_$_PriceBonusItem> get copyWith =>
-      __$$_PriceBonusItemCopyWithImpl<_$_PriceBonusItem>(this, _$identity);
+  _$$_BonusMaterialCopyWith<_$_BonusMaterial> get copyWith =>
+      __$$_BonusMaterialCopyWithImpl<_$_BonusMaterial>(this, _$identity);
 }
 
-abstract class _PriceBonusItem extends PriceBonusItem {
-  const factory _PriceBonusItem(
+abstract class _BonusMaterial extends BonusMaterial {
+  const factory _BonusMaterial(
       {required final String materialNumber,
       required final String materialDescription,
       required final String calculation,
       required final int bonusRatio,
       required final int qualifyingQuantity,
-      required final int bonusQuantity}) = _$_PriceBonusItem;
-  const _PriceBonusItem._() : super._();
+      required final int bonusQuantity}) = _$_BonusMaterial;
+  const _BonusMaterial._() : super._();
 
   @override
   String get materialNumber;
@@ -408,6 +536,6 @@ abstract class _PriceBonusItem extends PriceBonusItem {
   int get bonusQuantity;
   @override
   @JsonKey(ignore: true)
-  _$$_PriceBonusItemCopyWith<_$_PriceBonusItem> get copyWith =>
+  _$$_BonusMaterialCopyWith<_$_BonusMaterial> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/presentation/core/cart_button.dart';
@@ -59,11 +60,16 @@ class OrderTemplateListPage extends StatelessWidget {
                 )
               : ScrollList<OrderTemplate>(
                   emptyMessage: 'No order template found',
-                  onRefresh: () => context.read<OrderTemplateListBloc>().add(
-                        OrderTemplateListEvent.fetch(
-                          context.read<UserBloc>().state.user,
-                        ),
-                      ),
+                  onRefresh: () {
+                    context.read<OrderTemplateListBloc>().add(
+                          OrderTemplateListEvent.fetch(
+                            context.read<UserBloc>().state.user,
+                          ),
+                        );
+                    context
+                        .read<MaterialPriceDetailBloc>()
+                        .add(const MaterialPriceDetailEvent.initialized());
+                  },
                   isLoading: false,
                   onLoadingMore: () {},
                   itemBuilder: (context, index, item) => OrderTemplateListItem(

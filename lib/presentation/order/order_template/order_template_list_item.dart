@@ -3,6 +3,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/presentation/core/action_button.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -73,6 +78,42 @@ class OrderTemplateListItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       ActionButton(
+                        text: 'View',
+                        width: 72,
+                        onTap: () {
+                          context.read<MaterialPriceDetailBloc>().add(
+                                MaterialPriceDetailEvent.fetch(
+                                  customerCode: context
+                                      .read<CustomerCodeBloc>()
+                                      .state
+                                      .customerCodeInfo,
+                                  salesOrganisation: context
+                                      .read<SalesOrgBloc>()
+                                      .state
+                                      .salesOrganisation,
+                                  salesOrganisationConfigs: context
+                                      .read<SalesOrgBloc>()
+                                      .state
+                                      .configs,
+                                  shipToCode: context
+                                      .read<ShipToCodeBloc>()
+                                      .state
+                                      .shipToInfo,
+                                  materialInfos: orderTemplate.cartItems
+                                      .map(
+                                        (item) =>
+                                            MaterialQueryInfo.fromOrderTemplate(
+                                          orderMaterial: item,
+                                        ),
+                                      )
+                                      .toList(),
+                                ),
+                              );
+                          //TODO: Navigate to Detail and handle Price UI logic
+                        },
+                      ),
+                      _sizedBoxW20,
+                      ActionButton(
                         text: 'Delete',
                         width: 72,
                         onTap: () {
@@ -124,6 +165,10 @@ class OrderTemplateListItem extends StatelessWidget {
       },
     );
   }
+
+  static const _sizedBoxW20 = SizedBox(
+    width: 20,
+  );
 
   static const _sizedBoxH20 = SizedBox(
     height: 20,

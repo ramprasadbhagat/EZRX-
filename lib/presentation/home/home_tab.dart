@@ -6,6 +6,10 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/core/cart_button.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/home/selector/sales_org_selector.dart';
@@ -46,26 +50,47 @@ class HomeTab extends StatelessWidget {
         child: ListView(
           children: [
             const HomeBanner(),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GridView.count(
-                physics:
-                    const NeverScrollableScrollPhysics(), // to disable GridView's scrolling
-                shrinkWrap: true,
-                crossAxisCount: 3,
-                crossAxisSpacing: 8.0,
-                mainAxisSpacing: 8.0,
-                childAspectRatio: (1 / .6),
-                children: List.generate(
-                  homePageTiles.length,
-                  (index) {
-                    return Center(
-                      child: _TileCard(
-                        key: const Key('HomeTileCard'),
-                        homePageTile: homePageTiles[index],
-                      ),
-                    );
-                  },
+            BlocListener<MaterialListBloc, MaterialListState>(
+              listenWhen: (previous, current) =>
+                  previous.nextPageIndex != current.nextPageIndex,
+              listener: (context, state) {
+                if (state.materialList.isNotEmpty) {
+                  context.read<MaterialPriceBloc>().add(
+                        MaterialPriceEvent.fetch(
+                          salesOrganisation: context
+                              .read<SalesOrgBloc>()
+                              .state
+                              .salesOrganisation,
+                          customerCode: context
+                              .read<CustomerCodeBloc>()
+                              .state
+                              .customerCodeInfo,
+                          materials: state.materialList,
+                        ),
+                      );
+                }
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GridView.count(
+                  physics:
+                      const NeverScrollableScrollPhysics(), // to disable GridView's scrolling
+                  shrinkWrap: true,
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 8.0,
+                  mainAxisSpacing: 8.0,
+                  childAspectRatio: (1 / .6),
+                  children: List.generate(
+                    homePageTiles.length,
+                    (index) {
+                      return Center(
+                        child: _TileCard(
+                          key: const Key('HomeTileCard'),
+                          homePageTile: homePageTiles[index],
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
             ),

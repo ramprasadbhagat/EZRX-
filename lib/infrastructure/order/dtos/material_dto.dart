@@ -93,6 +93,7 @@ class MaterialDto with _$MaterialDto {
       hasMandatoryTenderContract: hasMandatoryTenderContract,
       taxes: taxes.map((e) => e).toList(),
       bundles: bundles.map((e) => e.toDomain()).toList(),
+      defaultMaterialDescription: '',
     );
   }
 

@@ -1,0 +1,310 @@
+{
+  "data": {
+    "customerMaterialPriceDetails": [
+      {
+        "Price": {
+          "MaterialNumber": "000000000023210571",
+          "OverridenRulePresent": false,
+          "ZDP5MaxQuota": "",
+          "ZDP5RemainingQuota": "",
+          "ZMGDiscount": false,
+          "ListPrice": 60.4,
+          "FinalIndividualPrice": 60.4,
+          "FinalTotalPrice": 0,
+          "Valid": true,
+          "Bundles": [],
+          "AdditionalBonusEligible": false,
+          "PriceRules": [
+            {
+              "Type": "SGD",
+              "Rate": 60.4,
+              "Conditions": "ZLP0 - A901 - 0041764727",
+              "BonusEligible": true,
+              "ConditionNumber": "0041764727"
+            },
+            {
+              "Type": "SGD",
+              "Rate": 0,
+              "Conditions": "ZDP2 - A917 - 0055725431",
+              "BonusEligible": false,
+              "ConditionNumber": "0055725431"
+            }
+          ],
+          "Bonuses": [],
+          "TieredPricing": [
+            {
+              "Tier": "C",
+              "PriceTier": [
+                {
+                  "ApplyBonus": false,
+                  "Sequence": 0,
+                  "Quantity": 1,
+                  "Type": "",
+                  "Rate": 60.4
+                },
+                {
+                  "ApplyBonus": false,
+                  "Sequence": 0,
+                  "Quantity": 16,
+                  "Type": "",
+                  "Rate": 59
+                }
+              ]
+            }
+          ]
+        },
+        "MaterialInformation": {
+          "TaxClassification": "Product : Full Tax",
+          "Taxm1": "1",
+          "Taxes": [
+            "7"
+          ],
+          "PrincipalCode": "0000100813",
+          "PrincipalName": "A. Menarini Singapore Pte. Ltd.",
+          "MaterialNumber": "000000000023210571",
+          "MaterialDescription": "DERMATIX ULTRA GEL 15G TUBE (Redress)",
+          "TherapeuticClass": "Emollients, protectives",
+          "ItemBrand": "DERMATIX",
+          "defaultMaterialDescription": "DERMATIX ULTRA GEL 15G TUBE (Redress)",
+          "hasMandatoryTenderContract": null,
+          "hasValidTenderContract": null,
+          "hidePrice": false,
+          "GovernmentMaterialCode": "",
+          "IsSampleMaterial": false,
+          "ItemRegistrationNumber": "Class A MD",
+          "UnitOfMeasurement": "EA",
+          "MaterialGroup2": "",
+          "MaterialGroup4": "6GS"
+        },
+        "ValidMaterial": true
+      },
+      {
+        "Price": {
+          "MaterialNumber": "000000000023245612",
+          "OverridenRulePresent": false,
+          "ZDP5MaxQuota": "",
+          "ZDP5RemainingQuota": "",
+          "ZMGDiscount": false,
+          "ListPrice": 46.6,
+          "FinalIndividualPrice": 46.6,
+          "FinalTotalPrice": 0,
+          "Valid": true,
+          "Bundles": [],
+          "AdditionalBonusEligible": true,
+          "PriceRules": [
+            {
+              "Type": "SGD",
+              "Rate": 46.6,
+              "Conditions": "ZLP0 - A901 - 0071479176",
+              "BonusEligible": true,
+              "ConditionNumber": "0071479176"
+            }
+          ],
+          "Bonuses": [],
+          "TieredPricing": []
+        },
+        "MaterialInformation": {
+          "TaxClassification": "Product : Full Tax",
+          "Taxm1": "1",
+          "Taxes": [
+            "7"
+          ],
+          "PrincipalCode": "0000100813",
+          "PrincipalName": "A. Menarini Singapore Pte. Ltd.",
+          "MaterialNumber": "000000000023245612",
+          "MaterialDescription": "ATOPICLAIR CREAM 100ML TUBE BIOKOSMES",
+          "TherapeuticClass": "Other dermatological preparations",
+          "ItemBrand": "ATOPICLAIR CREAM 100",
+          "defaultMaterialDescription": "ATOPICLAIR CREAM 100ML TUBE BIOKOSMES",
+          "hasMandatoryTenderContract": null,
+          "hasValidTenderContract": null,
+          "hidePrice": false,
+          "GovernmentMaterialCode": "",
+          "IsSampleMaterial": false,
+          "ItemRegistrationNumber": "DE0008651",
+          "UnitOfMeasurement": "EA",
+          "MaterialGroup2": "",
+          "MaterialGroup4": "6GS"
+        },
+        "ValidMaterial": true
+      },
+      {
+        "Price": {
+          "MaterialNumber": "000000000023268597",
+          "OverridenRulePresent": false,
+          "ZDP5MaxQuota": "",
+          "ZDP5RemainingQuota": "",
+          "ZMGDiscount": false,
+          "ListPrice": 9.5,
+          "FinalIndividualPrice": 9.5,
+          "FinalTotalPrice": 0,
+          "Valid": true,
+          "Bundles": [],
+          "AdditionalBonusEligible": true,
+          "PriceRules": [
+            {
+              "Type": "SGD",
+              "Rate": 9.5,
+              "Conditions": "ZLP0 - A901 - 0072102522",
+              "BonusEligible": true,
+              "ConditionNumber": "0072102522"
+            }
+          ],
+          "Bonuses": [],
+          "TieredPricing": []
+        },
+        "MaterialInformation": {
+          "TaxClassification": "Product : Full Tax",
+          "Taxm1": "1",
+          "Taxes": [
+            "7"
+          ],
+          "PrincipalCode": "0000100813",
+          "PrincipalName": "A. Menarini Singapore Pte. Ltd.",
+          "MaterialNumber": "000000000023268597",
+          "MaterialDescription": "FASTUM MAX GEL 2.5% 50G TUBE (REDRESS)",
+          "TherapeuticClass": "Topical antirheumatics",
+          "ItemBrand": "FASTUM MAX GEL 2.5",
+          "defaultMaterialDescription": "FASTUM MAX GEL 2.5% 50G TUBE (REDRESS)",
+          "hasMandatoryTenderContract": null,
+          "hasValidTenderContract": null,
+          "hidePrice": false,
+          "GovernmentMaterialCode": "",
+          "IsSampleMaterial": false,
+          "ItemRegistrationNumber": "SIN15511P",
+          "UnitOfMeasurement": "EA",
+          "MaterialGroup2": "",
+          "MaterialGroup4": "6GS"
+        },
+        "ValidMaterial": true
+      },
+      {
+        "Price": {
+          "MaterialNumber": "000000000023245611",
+          "OverridenRulePresent": false,
+          "ZDP5MaxQuota": "",
+          "ZDP5RemainingQuota": "",
+          "ZMGDiscount": false,
+          "ListPrice": 31.55,
+          "FinalIndividualPrice": 31.55,
+          "FinalTotalPrice": 0,
+          "Valid": true,
+          "Bundles": [],
+          "AdditionalBonusEligible": true,
+          "PriceRules": [
+            {
+              "Type": "SGD",
+              "Rate": 31.55,
+              "Conditions": "ZLP0 - A901 - 0071479175",
+              "BonusEligible": true,
+              "ConditionNumber": "0071479175"
+            }
+          ],
+          "Bonuses": [],
+          "TieredPricing": []
+        },
+        "MaterialInformation": {
+          "TaxClassification": "Product : Full Tax",
+          "Taxm1": "1",
+          "Taxes": [
+            "7"
+          ],
+          "PrincipalCode": "0000100813",
+          "PrincipalName": "A. Menarini Singapore Pte. Ltd.",
+          "MaterialNumber": "000000000023245611",
+          "MaterialDescription": "ATOPICLAIR CREAM 40ML TUBE BIOKOSMES",
+          "TherapeuticClass": "Other dermatological preparations",
+          "ItemBrand": "ATOPICLAIR CREAM 40M",
+          "defaultMaterialDescription": "ATOPICLAIR CREAM 40ML TUBE BIOKOSMES",
+          "hasMandatoryTenderContract": null,
+          "hasValidTenderContract": null,
+          "hidePrice": false,
+          "GovernmentMaterialCode": "",
+          "IsSampleMaterial": false,
+          "ItemRegistrationNumber": "DE0008651",
+          "UnitOfMeasurement": "EA",
+          "MaterialGroup2": "",
+          "MaterialGroup4": "6GS"
+        },
+        "ValidMaterial": true
+      },
+      {
+        "Price": {
+          "MaterialNumber": "000000000023244223",
+          "OverridenRulePresent": false,
+          "ZDP5MaxQuota": "",
+          "ZDP5RemainingQuota": "",
+          "ZMGDiscount": false,
+          "ListPrice": 7.92,
+          "FinalIndividualPrice": 4.85,
+          "FinalTotalPrice": 0,
+          "Valid": true,
+          "Bundles": [],
+          "AdditionalBonusEligible": false,
+          "PriceRules": [
+            {
+              "Type": "SGD",
+              "Rate": 7.92,
+              "Conditions": "ZLP0 - A901 - 0054643168",
+              "BonusEligible": true,
+              "ConditionNumber": "0054643168"
+            },
+            {
+              "Type": "SGD",
+              "Rate": 0,
+              "Conditions": "ZDP2 - A917 - 0060799940",
+              "BonusEligible": false,
+              "ConditionNumber": "0060799940"
+            }
+          ],
+          "Bonuses": [],
+          "TieredPricing": [
+            {
+              "Tier": "C",
+              "PriceTier": [
+                {
+                  "ApplyBonus": false,
+                  "Sequence": 0,
+                  "Quantity": 1,
+                  "Type": "",
+                  "Rate": 4.85
+                },
+                {
+                  "ApplyBonus": false,
+                  "Sequence": 0,
+                  "Quantity": 30,
+                  "Type": "",
+                  "Rate": 4.75
+                }
+              ]
+            }
+          ]
+        },
+        "MaterialInformation": {
+          "TaxClassification": "Product : Full Tax",
+          "Taxm1": "1",
+          "Taxes": [
+            "7"
+          ],
+          "PrincipalCode": "0000100813",
+          "PrincipalName": "A. Menarini Singapore Pte. Ltd.",
+          "MaterialNumber": "000000000023244223",
+          "MaterialDescription": "BREACOL COUGH SYRUP 100MG/5ML 120ML BOTG",
+          "TherapeuticClass": "Expectorants",
+          "ItemBrand": "BREACOL",
+          "defaultMaterialDescription": "BREACOL COUGH SYRUP 100MG/5ML 120ML BOTG",
+          "hasMandatoryTenderContract": null,
+          "hasValidTenderContract": null,
+          "hidePrice": false,
+          "GovernmentMaterialCode": "",
+          "IsSampleMaterial": false,
+          "ItemRegistrationNumber": "SIN08411P",
+          "UnitOfMeasurement": "EA",
+          "MaterialGroup2": "",
+          "MaterialGroup4": "6GS"
+        },
+        "ValidMaterial": true
+      }
+    ]
+  }
+}

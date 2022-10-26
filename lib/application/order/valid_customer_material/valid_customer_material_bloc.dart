@@ -29,6 +29,10 @@ class ValidCustomerMaterialBloc
       initialized: (_Initialized e) async =>
           emit(ValidCustomerMaterialState.initial()),
       validate: (_Validate e) async {
+        if (state.validMaterialNumbers.containsKey(
+          e.validateId,
+        )) return;
+        emit(state.copyWith(isValidating: true));
         final failureOrSuccess =
             await validCustomerMaterialRepository.getValidMaterialList(
           user: e.user,
@@ -39,15 +43,25 @@ class ValidCustomerMaterialBloc
           focMaterialList: e.focMaterialList,
         );
         failureOrSuccess.fold(
-          (failure) {},
+          (failure) {
+            emit(state.copyWith(isValidating: false));
+          },
           (validMaterialList) {
-            final availableValidMaterialList =
-                Set<MaterialNumber>.from(state.validMaterialList);
-            availableValidMaterialList.addAll(validMaterialList);
+            // final availableValidMaterialList =
+            //     Set<MaterialNumber>.from(state.validMaterialList);
+            // availableValidMaterialList.addAll(validMaterialList);
+            // emit(
+            //   state.copyWith(
+            //     isValidating: false,
+            //     validMaterialList: availableValidMaterialList.toList()
+            //       ..shuffle(),
+            //   ),
+            // );
             emit(
               state.copyWith(
-                validMaterialList: availableValidMaterialList.toList()
-                  ..shuffle(),
+                isValidating: false,
+                validMaterialNumbers: Map.from(state.validMaterialNumbers)
+                  ..addAll({e.validateId: validMaterialList}),
               ),
             );
           },

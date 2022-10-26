@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
@@ -148,6 +149,48 @@ class _ListContent extends StatelessWidget {
               style: Theme.of(context).textTheme.subtitle2?.apply(
                     color: ZPColors.lightGray,
                   ),
+            ),
+            BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
+              buildWhen: (previous, current) =>
+                  previous.isFetching != current.isFetching,
+              builder: (context, state) {
+                final itemPrice =
+                    state.materialPrice[materialInfo.materialNumber];
+
+                if (itemPrice != null) {
+                  final currentCurrency =
+                      context.read<SalesOrgBloc>().state.configs.currency;
+                  final isHidePrice = materialInfo.hidePrice;
+
+                  return Text(
+                    '${'Unit Price: '.tr()}${itemPrice.finalPrice.displayWithCurrency(
+                      currency: currentCurrency,
+                      hidePrice: isHidePrice,
+                    )}',
+                    style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      color: ZPColors.primary,
+                    ),
+                  );
+                }
+                if (state.isFetching) {
+                  return SizedBox(
+                    key: const Key('price-loading'),
+                    width: 40,
+                    child: LoadingShimmer.tile(),
+                  );
+                }
+
+                return Text(
+                  '${'Unit Price: '.tr()}NA',
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: ZPColors.primary,
+                  ),
+                );
+              },
             ),
           ],
         ),

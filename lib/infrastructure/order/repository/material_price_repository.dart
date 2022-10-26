@@ -33,10 +33,7 @@ class MaterialPriceRepository implements IMaterialPriceRepository {
 
         return Right(
           {
-            for (var price in priceData)
-              MaterialNumber(
-                price.materialNumber,
-              ): price,
+            for (var price in priceData) price.materialNumber: price,
           },
         );
       } catch (e) {
@@ -59,10 +56,7 @@ class MaterialPriceRepository implements IMaterialPriceRepository {
 
       return Right(
         {
-          for (var price in priceData)
-            MaterialNumber(
-              price.materialNumber,
-            ): price,
+          for (var price in priceData) price.materialNumber: price,
         },
       );
     } catch (e) {

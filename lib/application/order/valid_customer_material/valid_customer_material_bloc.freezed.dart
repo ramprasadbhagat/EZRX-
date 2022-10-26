@@ -20,6 +20,7 @@ mixin _$ValidCustomerMaterialEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
+            String validateId,
             List<MaterialNumber> materialList,
             List<MaterialNumber> focMaterialList,
             User user,
@@ -33,6 +34,7 @@ mixin _$ValidCustomerMaterialEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
+            String validateId,
             List<MaterialNumber> materialList,
             List<MaterialNumber> focMaterialList,
             User user,
@@ -46,6 +48,7 @@ mixin _$ValidCustomerMaterialEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
+            String validateId,
             List<MaterialNumber> materialList,
             List<MaterialNumber> focMaterialList,
             User user,
@@ -137,6 +140,7 @@ class _$_Initialized implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
+            String validateId,
             List<MaterialNumber> materialList,
             List<MaterialNumber> focMaterialList,
             User user,
@@ -153,6 +157,7 @@ class _$_Initialized implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
+            String validateId,
             List<MaterialNumber> materialList,
             List<MaterialNumber> focMaterialList,
             User user,
@@ -169,6 +174,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
+            String validateId,
             List<MaterialNumber> materialList,
             List<MaterialNumber> focMaterialList,
             User user,
@@ -226,7 +232,8 @@ abstract class _$$_ValidateCopyWith<$Res> {
           _$_Validate value, $Res Function(_$_Validate) then) =
       __$$_ValidateCopyWithImpl<$Res>;
   $Res call(
-      {List<MaterialNumber> materialList,
+      {String validateId,
+      List<MaterialNumber> materialList,
       List<MaterialNumber> focMaterialList,
       User user,
       SalesOrganisation salesOrganisation,
@@ -252,6 +259,7 @@ class __$$_ValidateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? validateId = freezed,
     Object? materialList = freezed,
     Object? focMaterialList = freezed,
     Object? user = freezed,
@@ -260,6 +268,10 @@ class __$$_ValidateCopyWithImpl<$Res>
     Object? shipToInfo = freezed,
   }) {
     return _then(_$_Validate(
+      validateId: validateId == freezed
+          ? _value.validateId
+          : validateId // ignore: cast_nullable_to_non_nullable
+              as String,
       materialList: materialList == freezed
           ? _value._materialList
           : materialList // ignore: cast_nullable_to_non_nullable
@@ -320,7 +332,8 @@ class __$$_ValidateCopyWithImpl<$Res>
 
 class _$_Validate implements _Validate {
   const _$_Validate(
-      {required final List<MaterialNumber> materialList,
+      {required this.validateId,
+      required final List<MaterialNumber> materialList,
       required final List<MaterialNumber> focMaterialList,
       required this.user,
       required this.salesOrganisation,
@@ -329,6 +342,8 @@ class _$_Validate implements _Validate {
       : _materialList = materialList,
         _focMaterialList = focMaterialList;
 
+  @override
+  final String validateId;
   final List<MaterialNumber> _materialList;
   @override
   List<MaterialNumber> get materialList {
@@ -354,7 +369,7 @@ class _$_Validate implements _Validate {
 
   @override
   String toString() {
-    return 'ValidCustomerMaterialEvent.validate(materialList: $materialList, focMaterialList: $focMaterialList, user: $user, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo)';
+    return 'ValidCustomerMaterialEvent.validate(validateId: $validateId, materialList: $materialList, focMaterialList: $focMaterialList, user: $user, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo)';
   }
 
   @override
@@ -362,6 +377,8 @@ class _$_Validate implements _Validate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Validate &&
+            const DeepCollectionEquality()
+                .equals(other.validateId, validateId) &&
             const DeepCollectionEquality()
                 .equals(other._materialList, _materialList) &&
             const DeepCollectionEquality()
@@ -378,6 +395,7 @@ class _$_Validate implements _Validate {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(validateId),
       const DeepCollectionEquality().hash(_materialList),
       const DeepCollectionEquality().hash(_focMaterialList),
       const DeepCollectionEquality().hash(user),
@@ -395,6 +413,7 @@ class _$_Validate implements _Validate {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
+            String validateId,
             List<MaterialNumber> materialList,
             List<MaterialNumber> focMaterialList,
             User user,
@@ -403,8 +422,8 @@ class _$_Validate implements _Validate {
             ShipToInfo shipToInfo)
         validate,
   }) {
-    return validate(materialList, focMaterialList, user, salesOrganisation,
-        customerCodeInfo, shipToInfo);
+    return validate(validateId, materialList, focMaterialList, user,
+        salesOrganisation, customerCodeInfo, shipToInfo);
   }
 
   @override
@@ -412,6 +431,7 @@ class _$_Validate implements _Validate {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
+            String validateId,
             List<MaterialNumber> materialList,
             List<MaterialNumber> focMaterialList,
             User user,
@@ -420,7 +440,7 @@ class _$_Validate implements _Validate {
             ShipToInfo shipToInfo)?
         validate,
   }) {
-    return validate?.call(materialList, focMaterialList, user,
+    return validate?.call(validateId, materialList, focMaterialList, user,
         salesOrganisation, customerCodeInfo, shipToInfo);
   }
 
@@ -429,6 +449,7 @@ class _$_Validate implements _Validate {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
+            String validateId,
             List<MaterialNumber> materialList,
             List<MaterialNumber> focMaterialList,
             User user,
@@ -439,8 +460,8 @@ class _$_Validate implements _Validate {
     required TResult orElse(),
   }) {
     if (validate != null) {
-      return validate(materialList, focMaterialList, user, salesOrganisation,
-          customerCodeInfo, shipToInfo);
+      return validate(validateId, materialList, focMaterialList, user,
+          salesOrganisation, customerCodeInfo, shipToInfo);
     }
     return orElse();
   }
@@ -479,13 +500,15 @@ class _$_Validate implements _Validate {
 
 abstract class _Validate implements ValidCustomerMaterialEvent {
   const factory _Validate(
-      {required final List<MaterialNumber> materialList,
+      {required final String validateId,
+      required final List<MaterialNumber> materialList,
       required final List<MaterialNumber> focMaterialList,
       required final User user,
       required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo}) = _$_Validate;
 
+  String get validateId;
   List<MaterialNumber> get materialList;
   List<MaterialNumber> get focMaterialList;
   User get user;
@@ -499,8 +522,9 @@ abstract class _Validate implements ValidCustomerMaterialEvent {
 
 /// @nodoc
 mixin _$ValidCustomerMaterialState {
-  List<MaterialNumber> get validMaterialList =>
+  Map<String, List<MaterialNumber>> get validMaterialNumbers =>
       throw _privateConstructorUsedError;
+  bool get isValidating => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ValidCustomerMaterialStateCopyWith<ValidCustomerMaterialState>
@@ -512,7 +536,9 @@ abstract class $ValidCustomerMaterialStateCopyWith<$Res> {
   factory $ValidCustomerMaterialStateCopyWith(ValidCustomerMaterialState value,
           $Res Function(ValidCustomerMaterialState) then) =
       _$ValidCustomerMaterialStateCopyWithImpl<$Res>;
-  $Res call({List<MaterialNumber> validMaterialList});
+  $Res call(
+      {Map<String, List<MaterialNumber>> validMaterialNumbers,
+      bool isValidating});
 }
 
 /// @nodoc
@@ -526,13 +552,18 @@ class _$ValidCustomerMaterialStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? validMaterialList = freezed,
+    Object? validMaterialNumbers = freezed,
+    Object? isValidating = freezed,
   }) {
     return _then(_value.copyWith(
-      validMaterialList: validMaterialList == freezed
-          ? _value.validMaterialList
-          : validMaterialList // ignore: cast_nullable_to_non_nullable
-              as List<MaterialNumber>,
+      validMaterialNumbers: validMaterialNumbers == freezed
+          ? _value.validMaterialNumbers
+          : validMaterialNumbers // ignore: cast_nullable_to_non_nullable
+              as Map<String, List<MaterialNumber>>,
+      isValidating: isValidating == freezed
+          ? _value.isValidating
+          : isValidating // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -545,7 +576,9 @@ abstract class _$$_ValidCustomerMaterialStateCopyWith<$Res>
           $Res Function(_$_ValidCustomerMaterialState) then) =
       __$$_ValidCustomerMaterialStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<MaterialNumber> validMaterialList});
+  $Res call(
+      {Map<String, List<MaterialNumber>> validMaterialNumbers,
+      bool isValidating});
 }
 
 /// @nodoc
@@ -563,13 +596,18 @@ class __$$_ValidCustomerMaterialStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? validMaterialList = freezed,
+    Object? validMaterialNumbers = freezed,
+    Object? isValidating = freezed,
   }) {
     return _then(_$_ValidCustomerMaterialState(
-      validMaterialList: validMaterialList == freezed
-          ? _value._validMaterialList
-          : validMaterialList // ignore: cast_nullable_to_non_nullable
-              as List<MaterialNumber>,
+      validMaterialNumbers: validMaterialNumbers == freezed
+          ? _value._validMaterialNumbers
+          : validMaterialNumbers // ignore: cast_nullable_to_non_nullable
+              as Map<String, List<MaterialNumber>>,
+      isValidating: isValidating == freezed
+          ? _value.isValidating
+          : isValidating // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -578,20 +616,24 @@ class __$$_ValidCustomerMaterialStateCopyWithImpl<$Res>
 
 class _$_ValidCustomerMaterialState extends _ValidCustomerMaterialState {
   const _$_ValidCustomerMaterialState(
-      {required final List<MaterialNumber> validMaterialList})
-      : _validMaterialList = validMaterialList,
+      {required final Map<String, List<MaterialNumber>> validMaterialNumbers,
+      required this.isValidating})
+      : _validMaterialNumbers = validMaterialNumbers,
         super._();
 
-  final List<MaterialNumber> _validMaterialList;
+  final Map<String, List<MaterialNumber>> _validMaterialNumbers;
   @override
-  List<MaterialNumber> get validMaterialList {
+  Map<String, List<MaterialNumber>> get validMaterialNumbers {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_validMaterialList);
+    return EqualUnmodifiableMapView(_validMaterialNumbers);
   }
 
   @override
+  final bool isValidating;
+
+  @override
   String toString() {
-    return 'ValidCustomerMaterialState(validMaterialList: $validMaterialList)';
+    return 'ValidCustomerMaterialState(validMaterialNumbers: $validMaterialNumbers, isValidating: $isValidating)';
   }
 
   @override
@@ -600,12 +642,16 @@ class _$_ValidCustomerMaterialState extends _ValidCustomerMaterialState {
         (other.runtimeType == runtimeType &&
             other is _$_ValidCustomerMaterialState &&
             const DeepCollectionEquality()
-                .equals(other._validMaterialList, _validMaterialList));
+                .equals(other._validMaterialNumbers, _validMaterialNumbers) &&
+            const DeepCollectionEquality()
+                .equals(other.isValidating, isValidating));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_validMaterialList));
+      runtimeType,
+      const DeepCollectionEquality().hash(_validMaterialNumbers),
+      const DeepCollectionEquality().hash(isValidating));
 
   @JsonKey(ignore: true)
   @override
@@ -616,12 +662,14 @@ class _$_ValidCustomerMaterialState extends _ValidCustomerMaterialState {
 
 abstract class _ValidCustomerMaterialState extends ValidCustomerMaterialState {
   const factory _ValidCustomerMaterialState(
-          {required final List<MaterialNumber> validMaterialList}) =
-      _$_ValidCustomerMaterialState;
+      {required final Map<String, List<MaterialNumber>> validMaterialNumbers,
+      required final bool isValidating}) = _$_ValidCustomerMaterialState;
   const _ValidCustomerMaterialState._() : super._();
 
   @override
-  List<MaterialNumber> get validMaterialList;
+  Map<String, List<MaterialNumber>> get validMaterialNumbers;
+  @override
+  bool get isValidating;
   @override
   @JsonKey(ignore: true)
   _$$_ValidCustomerMaterialStateCopyWith<_$_ValidCustomerMaterialState>

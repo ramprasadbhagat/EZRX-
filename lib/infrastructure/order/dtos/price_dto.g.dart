@@ -16,8 +16,12 @@ _$_PriceDto _$$_PriceDtoFromJson(Map<String, dynamic> json) => _$_PriceDto(
               ?.map((e) => PriceTierDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      bonuses: (json['TieredBonus'] as List<dynamic>?)
+      bonuses: (json['Bonuses'] as List<dynamic>?)
               ?.map((e) => PriceBonusDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      bundles: (json['Bundles'] as List<dynamic>?)
+              ?.map((e) => PriceBundleDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
       overrideRulePresent: json['OverridenRulePresent'] as bool? ?? false,
@@ -38,7 +42,8 @@ Map<String, dynamic> _$$_PriceDtoToJson(_$_PriceDto instance) =>
       'MaterialNumber': instance.materialNumber,
       'PriceRules': instance.rules,
       'TieredPricing': instance.tiers,
-      'TieredBonus': instance.bonuses,
+      'Bonuses': instance.bonuses,
+      'Bundles': instance.bundles,
       'OverridenRulePresent': instance.overrideRulePresent,
       'ZDP5MaxQuota': instance.zdp5MaxQuota,
       'ZDP5RemainingQuota': instance.zdp5RemainingQuota,

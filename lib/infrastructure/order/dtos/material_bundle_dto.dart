@@ -48,6 +48,7 @@ class MaterialBundleDto with _$MaterialBundleDto {
       hasValidTenderContract: false,
       hasMandatoryTenderContract: false,
       taxes: [],
+      defaultMaterialDescription: '',
     );
   }
 

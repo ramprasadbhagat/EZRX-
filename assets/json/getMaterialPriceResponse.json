@@ -20,7 +20,8 @@
             "ConditionNumber": "0070471303"
           }
         ],
-        "Bonuses": [],
+        "Bonuses": [
+        ],
         "TieredPricing": [],
         "Bundles": [],
         "Valid": true
@@ -68,9 +69,118 @@
             "ConditionNumber": "0065263502"
           }
         ],
-        "Bonuses": [],
-        "TieredPricing": [],
-        "Bundles": [],
+        "Bonuses": [
+          {
+            "BonusTiers": [
+              {
+                "BonusMaterial": [
+                  {
+                    "MaterialNumber": "000000000023006010",
+                    "MaterialDescription": "Artelac Lipids SDU 0.6g 30s",
+                    "Calculation": "915",
+                    "BonusRatio": 1,
+                    "QualifyingQuantity": 12,
+                    "BonusQuantity": 2,
+                    "ConditionId": "0000609500"
+                  }
+                ],
+                "Calculation": "915",
+                "QualifyingQuantity": 12
+              },
+              {
+                "BonusMaterial": [
+                  {
+                    "MaterialNumber": "000000000023006010",
+                    "MaterialDescription": "Artelac Lipids SDU 0.6g 30s",
+                    "Calculation": "915",
+                    "BonusRatio": 1,
+                    "QualifyingQuantity": 24,
+                    "BonusQuantity": 5,
+                    "ConditionId": "0000609500"
+                  }
+                ],
+                "Calculation": "915",
+                "QualifyingQuantity": 24
+              },
+              {
+                "BonusMaterial": [
+                  {
+                    "MaterialNumber": "000000000023006010",
+                    "MaterialDescription": "Artelac Lipids SDU 0.6g 30s",
+                    "Calculation": "915",
+                    "BonusRatio": 1,
+                    "QualifyingQuantity": 50,
+                    "BonusQuantity": 12,
+                    "ConditionId": "0000609500"
+                  }
+                ],
+                "Calculation": "915",
+                "QualifyingQuantity": 50
+              },
+              {
+                "BonusMaterial": [
+                  {
+                    "MaterialNumber": "000000000023006010",
+                    "MaterialDescription": "Artelac Lipids SDU 0.6g 30s",
+                    "Calculation": "915",
+                    "BonusRatio": 1,
+                    "QualifyingQuantity": 100,
+                    "BonusQuantity": 30,
+                    "ConditionId": "0000609500"
+                  }
+                ],
+                "Calculation": "915",
+                "QualifyingQuantity": 100
+              }
+            ]
+          }
+        ],
+        "TieredPricing": [
+          {
+            "Tier": "C",
+            "PriceTier": [
+              {
+                "ApplyBonus": false,
+                "Sequence": 0,
+                "Quantity": 1,
+                "Type": "",
+                "Rate": 901
+              }
+            ]
+          }
+        ],
+        "Bundles": [
+          {
+            "BundleName": "Low Strength",
+            "BundleCode": "0047093349",
+            "BundleInformation": [
+              {
+                "Sequence": 1,
+                "Quantity": 1,
+                "Type": "SGD",
+                "Rate": 46.35
+              },
+              {
+                "Sequence": 4,
+                "Quantity": 15,
+                "Type": "SGD",
+                "Rate": 31
+              },
+              {
+                "Sequence": 7,
+                "Quantity": 30,
+                "Type": "SGD",
+                "Rate": 23.2
+              },
+              {
+                "Sequence": 10,
+                "Quantity": 70,
+                "Type": "SGD",
+                "Rate": 19.3
+              }
+            ]
+          }
+        ],
         "Valid": true
       },
       {

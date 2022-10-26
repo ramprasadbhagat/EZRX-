@@ -55,28 +55,50 @@ void main() {
     test('should return NA if zero', () async {
       const input = 0.0;
       final price = MaterialPrice(input);
-      final result = price.displayWithCurrency(Currency('fake-currency'));
+      final result = price.displayWithCurrency(
+        currency: Currency('fake-currency'),
+        hidePrice: false,
+      );
+      expect(result, 'NA');
+    });
+
+    test('should return NA if hide price enable', () async {
+      const input = 10.0;
+      final price = MaterialPrice(input);
+      final result = price.displayWithCurrency(
+        currency: Currency('fake-currency'),
+        hidePrice: true,
+      );
       expect(result, 'NA');
     });
 
     test('should remove trailing zero', () async {
       const input = 12.2000;
       final price = MaterialPrice(input);
-      final result = price.displayWithCurrency(Currency('fake-currency'));
+      final result = price.displayWithCurrency(
+        currency: Currency('fake-currency'),
+        hidePrice: false,
+      );
       expect(result, '\$12.2');
     });
 
     test('should align currency on the right with vnd currency', () async {
       const input = 12.23;
       final price = MaterialPrice(input);
-      final result = price.displayWithCurrency(Currency('vnd'));
+      final result = price.displayWithCurrency(
+        currency: Currency('vnd'),
+        hidePrice: false,
+      );
       expect(result, '12.23₫');
     });
 
     test('should align currency on the left with other currency', () async {
       const input = 12.23;
       final price = MaterialPrice(input);
-      final result = price.displayWithCurrency(Currency('fake-currency'));
+      final result = price.displayWithCurrency(
+        currency: Currency('fake-currency'),
+        hidePrice: false,
+      );
       expect(result, '\$12.23');
     });
   });

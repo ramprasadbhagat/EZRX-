@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/price_bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/price_rule.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -10,10 +11,11 @@ part 'price.freezed.dart';
 class Price with _$Price {
   const Price._();
   const factory Price({
-    required String materialNumber,
+    required MaterialNumber materialNumber,
     required List<PriceRule> rules,
     required List<PriceTier> tiers,
     required List<PriceBonus> bonuses,
+    required List<PriceBundle> bundles,
     required bool overrideRulePresent,
     required String zdp5MaxQuota,
     required String zdp5RemainingQuota,
@@ -26,7 +28,8 @@ class Price with _$Price {
   }) = _Price;
 
   factory Price.empty() => Price(
-        materialNumber: '',
+        materialNumber: MaterialNumber(''),
+        bundles: [],
         rules: [],
         tiers: [],
         bonuses: [],

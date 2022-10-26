@@ -1,8 +1,10 @@
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_bonus_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/price_bundle_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_rule_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_tier_dto.dart';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'price_dto.freezed.dart';
@@ -17,8 +19,10 @@ class PriceDto with _$PriceDto {
         required List<PriceRuleDto> rules,
     @JsonKey(name: 'TieredPricing', defaultValue: <PriceTierDto>[])
         required List<PriceTierDto> tiers,
-    @JsonKey(name: 'TieredBonus', defaultValue: <PriceBonusDto>[])
+    @JsonKey(name: 'Bonuses', defaultValue: <PriceBonusDto>[])
         required List<PriceBonusDto> bonuses,
+    @JsonKey(name: 'Bundles', defaultValue: <PriceBundleDto>[])
+        required List<PriceBundleDto> bundles,
     @JsonKey(name: 'OverridenRulePresent', defaultValue: false)
         required bool overrideRulePresent,
     @JsonKey(name: 'ZDP5MaxQuota', defaultValue: '')
@@ -38,10 +42,11 @@ class PriceDto with _$PriceDto {
   }) = _PriceDto;
 
   Price toDomain() => Price(
-        materialNumber: materialNumber,
+        materialNumber: MaterialNumber(materialNumber),
         rules: rules.map((e) => e.toDomain()).toList(),
         tiers: tiers.map((e) => e.toDomain()).toList(),
         bonuses: bonuses.map((e) => e.toDomain()).toList(),
+        bundles: bundles.map((e) => e.toDomain()).toList(),
         overrideRulePresent: overrideRulePresent,
         zdp5MaxQuota: zdp5MaxQuota,
         zdp5RemainingQuota: zdp5RemainingQuota,

@@ -26,8 +26,10 @@ mixin _$PriceDto {
   List<PriceRuleDto> get rules => throw _privateConstructorUsedError;
   @JsonKey(name: 'TieredPricing', defaultValue: <PriceTierDto>[])
   List<PriceTierDto> get tiers => throw _privateConstructorUsedError;
-  @JsonKey(name: 'TieredBonus', defaultValue: <PriceBonusDto>[])
+  @JsonKey(name: 'Bonuses', defaultValue: <PriceBonusDto>[])
   List<PriceBonusDto> get bonuses => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Bundles', defaultValue: <PriceBundleDto>[])
+  List<PriceBundleDto> get bundles => throw _privateConstructorUsedError;
   @JsonKey(name: 'OverridenRulePresent', defaultValue: false)
   bool get overrideRulePresent => throw _privateConstructorUsedError;
   @JsonKey(name: 'ZDP5MaxQuota', defaultValue: '')
@@ -64,8 +66,10 @@ abstract class $PriceDtoCopyWith<$Res> {
           List<PriceRuleDto> rules,
       @JsonKey(name: 'TieredPricing', defaultValue: <PriceTierDto>[])
           List<PriceTierDto> tiers,
-      @JsonKey(name: 'TieredBonus', defaultValue: <PriceBonusDto>[])
+      @JsonKey(name: 'Bonuses', defaultValue: <PriceBonusDto>[])
           List<PriceBonusDto> bonuses,
+      @JsonKey(name: 'Bundles', defaultValue: <PriceBundleDto>[])
+          List<PriceBundleDto> bundles,
       @JsonKey(name: 'OverridenRulePresent', defaultValue: false)
           bool overrideRulePresent,
       @JsonKey(name: 'ZDP5MaxQuota', defaultValue: '')
@@ -100,6 +104,7 @@ class _$PriceDtoCopyWithImpl<$Res> implements $PriceDtoCopyWith<$Res> {
     Object? rules = freezed,
     Object? tiers = freezed,
     Object? bonuses = freezed,
+    Object? bundles = freezed,
     Object? overrideRulePresent = freezed,
     Object? zdp5MaxQuota = freezed,
     Object? zdp5RemainingQuota = freezed,
@@ -127,6 +132,10 @@ class _$PriceDtoCopyWithImpl<$Res> implements $PriceDtoCopyWith<$Res> {
           ? _value.bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
               as List<PriceBonusDto>,
+      bundles: bundles == freezed
+          ? _value.bundles
+          : bundles // ignore: cast_nullable_to_non_nullable
+              as List<PriceBundleDto>,
       overrideRulePresent: overrideRulePresent == freezed
           ? _value.overrideRulePresent
           : overrideRulePresent // ignore: cast_nullable_to_non_nullable
@@ -180,8 +189,10 @@ abstract class _$$_PriceDtoCopyWith<$Res> implements $PriceDtoCopyWith<$Res> {
           List<PriceRuleDto> rules,
       @JsonKey(name: 'TieredPricing', defaultValue: <PriceTierDto>[])
           List<PriceTierDto> tiers,
-      @JsonKey(name: 'TieredBonus', defaultValue: <PriceBonusDto>[])
+      @JsonKey(name: 'Bonuses', defaultValue: <PriceBonusDto>[])
           List<PriceBonusDto> bonuses,
+      @JsonKey(name: 'Bundles', defaultValue: <PriceBundleDto>[])
+          List<PriceBundleDto> bundles,
       @JsonKey(name: 'OverridenRulePresent', defaultValue: false)
           bool overrideRulePresent,
       @JsonKey(name: 'ZDP5MaxQuota', defaultValue: '')
@@ -218,6 +229,7 @@ class __$$_PriceDtoCopyWithImpl<$Res> extends _$PriceDtoCopyWithImpl<$Res>
     Object? rules = freezed,
     Object? tiers = freezed,
     Object? bonuses = freezed,
+    Object? bundles = freezed,
     Object? overrideRulePresent = freezed,
     Object? zdp5MaxQuota = freezed,
     Object? zdp5RemainingQuota = freezed,
@@ -245,6 +257,10 @@ class __$$_PriceDtoCopyWithImpl<$Res> extends _$PriceDtoCopyWithImpl<$Res>
           ? _value._bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
               as List<PriceBonusDto>,
+      bundles: bundles == freezed
+          ? _value._bundles
+          : bundles // ignore: cast_nullable_to_non_nullable
+              as List<PriceBundleDto>,
       overrideRulePresent: overrideRulePresent == freezed
           ? _value.overrideRulePresent
           : overrideRulePresent // ignore: cast_nullable_to_non_nullable
@@ -295,8 +311,10 @@ class _$_PriceDto extends _PriceDto {
           required final List<PriceRuleDto> rules,
       @JsonKey(name: 'TieredPricing', defaultValue: <PriceTierDto>[])
           required final List<PriceTierDto> tiers,
-      @JsonKey(name: 'TieredBonus', defaultValue: <PriceBonusDto>[])
+      @JsonKey(name: 'Bonuses', defaultValue: <PriceBonusDto>[])
           required final List<PriceBonusDto> bonuses,
+      @JsonKey(name: 'Bundles', defaultValue: <PriceBundleDto>[])
+          required final List<PriceBundleDto> bundles,
       @JsonKey(name: 'OverridenRulePresent', defaultValue: false)
           required this.overrideRulePresent,
       @JsonKey(name: 'ZDP5MaxQuota', defaultValue: '')
@@ -318,6 +336,7 @@ class _$_PriceDto extends _PriceDto {
       : _rules = rules,
         _tiers = tiers,
         _bonuses = bonuses,
+        _bundles = bundles,
         super._();
 
   factory _$_PriceDto.fromJson(Map<String, dynamic> json) =>
@@ -344,10 +363,18 @@ class _$_PriceDto extends _PriceDto {
 
   final List<PriceBonusDto> _bonuses;
   @override
-  @JsonKey(name: 'TieredBonus', defaultValue: <PriceBonusDto>[])
+  @JsonKey(name: 'Bonuses', defaultValue: <PriceBonusDto>[])
   List<PriceBonusDto> get bonuses {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bonuses);
+  }
+
+  final List<PriceBundleDto> _bundles;
+  @override
+  @JsonKey(name: 'Bundles', defaultValue: <PriceBundleDto>[])
+  List<PriceBundleDto> get bundles {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bundles);
   }
 
   @override
@@ -380,7 +407,7 @@ class _$_PriceDto extends _PriceDto {
 
   @override
   String toString() {
-    return 'PriceDto(materialNumber: $materialNumber, rules: $rules, tiers: $tiers, bonuses: $bonuses, overrideRulePresent: $overrideRulePresent, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, zmgDiscount: $zmgDiscount, listPrice: $listPrice, finalIndividualPrice: $finalIndividualPrice, finalTotalPrice: $finalTotalPrice, additionalBonusEligible: $additionalBonusEligible, isValid: $isValid)';
+    return 'PriceDto(materialNumber: $materialNumber, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, overrideRulePresent: $overrideRulePresent, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, zmgDiscount: $zmgDiscount, listPrice: $listPrice, finalIndividualPrice: $finalIndividualPrice, finalTotalPrice: $finalTotalPrice, additionalBonusEligible: $additionalBonusEligible, isValid: $isValid)';
   }
 
   @override
@@ -393,6 +420,7 @@ class _$_PriceDto extends _PriceDto {
             const DeepCollectionEquality().equals(other._rules, _rules) &&
             const DeepCollectionEquality().equals(other._tiers, _tiers) &&
             const DeepCollectionEquality().equals(other._bonuses, _bonuses) &&
+            const DeepCollectionEquality().equals(other._bundles, _bundles) &&
             const DeepCollectionEquality()
                 .equals(other.overrideRulePresent, overrideRulePresent) &&
             const DeepCollectionEquality()
@@ -419,6 +447,7 @@ class _$_PriceDto extends _PriceDto {
       const DeepCollectionEquality().hash(_rules),
       const DeepCollectionEquality().hash(_tiers),
       const DeepCollectionEquality().hash(_bonuses),
+      const DeepCollectionEquality().hash(_bundles),
       const DeepCollectionEquality().hash(overrideRulePresent),
       const DeepCollectionEquality().hash(zdp5MaxQuota),
       const DeepCollectionEquality().hash(zdp5RemainingQuota),
@@ -450,8 +479,10 @@ abstract class _PriceDto extends PriceDto {
           required final List<PriceRuleDto> rules,
       @JsonKey(name: 'TieredPricing', defaultValue: <PriceTierDto>[])
           required final List<PriceTierDto> tiers,
-      @JsonKey(name: 'TieredBonus', defaultValue: <PriceBonusDto>[])
+      @JsonKey(name: 'Bonuses', defaultValue: <PriceBonusDto>[])
           required final List<PriceBonusDto> bonuses,
+      @JsonKey(name: 'Bundles', defaultValue: <PriceBundleDto>[])
+          required final List<PriceBundleDto> bundles,
       @JsonKey(name: 'OverridenRulePresent', defaultValue: false)
           required final bool overrideRulePresent,
       @JsonKey(name: 'ZDP5MaxQuota', defaultValue: '')
@@ -484,8 +515,11 @@ abstract class _PriceDto extends PriceDto {
   @JsonKey(name: 'TieredPricing', defaultValue: <PriceTierDto>[])
   List<PriceTierDto> get tiers;
   @override
-  @JsonKey(name: 'TieredBonus', defaultValue: <PriceBonusDto>[])
+  @JsonKey(name: 'Bonuses', defaultValue: <PriceBonusDto>[])
   List<PriceBonusDto> get bonuses;
+  @override
+  @JsonKey(name: 'Bundles', defaultValue: <PriceBundleDto>[])
+  List<PriceBundleDto> get bundles;
   @override
   @JsonKey(name: 'OverridenRulePresent', defaultValue: false)
   bool get overrideRulePresent;
