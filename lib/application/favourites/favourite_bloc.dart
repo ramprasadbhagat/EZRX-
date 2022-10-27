@@ -35,10 +35,12 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
         );
         failureOrSuccess.fold(
           (failure) {
-            emit(state.copyWith(
-              failureOrSuccessOption: optionOf(failureOrSuccess),
-              isLoading: false,
-            ));
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+                isLoading: false,
+              ),
+            );
           },
           (favouriteItems) {
             emit(

@@ -32,6 +32,9 @@ class MaterialListRemoteDataSource {
     required String orderBy,
     required String searchKey,
     required String language,
+    required List<String> principalNameList,
+    required List<String> therapeuticClassList,
+    required List<String> itemBrandList,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = materialListQuery.getCustomerMaterialList();
@@ -47,6 +50,9 @@ class MaterialListRemoteDataSource {
         'cached': true,
         'orderBy': orderBy,
         'language': language,
+        'principalNameList': principalNameList,
+        'therapeuticClassList': therapeuticClassList,
+        'itemBrandList': itemBrandList,
       };
       final res = await httpService.request(
         method: 'POST',
@@ -78,6 +84,9 @@ class MaterialListRemoteDataSource {
     required String language,
     required bool gimmickMaterial,
     required String pickAndPack,
+    required List<String> principalNameList,
+    required List<String> therapeuticClassList,
+    required List<String> itemBrandList,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = materialListQuery.getSalesRepMaterialList();
@@ -96,6 +105,9 @@ class MaterialListRemoteDataSource {
         'cached': true,
         'orderBy': orderBy,
         'language': language,
+        'principalNameList': principalNameList,
+        'therapeuticClassList': therapeuticClassList,
+        'itemBrandList': itemBrandList,
       };
       final res = await httpService.request(
         method: 'POST',

@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -15,7 +16,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/create_order/material_root.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/material_root.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,6 +53,10 @@ class MaterialPriceBlocMock
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
+class MockMaterialFilterBloc
+    extends MockBloc<MaterialFilterEvent, MaterialFilterState>
+    implements MaterialFilterBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialListBloc materialListBlocMock;
@@ -65,6 +70,7 @@ void main() {
   late CartBloc cartBlocMock;
 
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
+  late MaterialFilterBloc mockMaterialFilterBloc;
 
   setUpAll(() async {
     setupLocator();
@@ -80,6 +86,7 @@ void main() {
       mockFavouriteBloc = MockFavouriteBloc();
       materialPriceBlocMock = MaterialPriceBlocMock();
       cartBlocMock = CartBlocMock();
+      mockMaterialFilterBloc = MockMaterialFilterBloc();
       autoRouterMock = locator<AppRouter>();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -89,6 +96,8 @@ void main() {
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
+      when(() => mockMaterialFilterBloc.state)
+          .thenReturn(MaterialFilterState.initial());
     });
 
     Widget getScopedWidget(Widget child) {
@@ -118,6 +127,8 @@ void main() {
             BlocProvider<MaterialPriceBloc>(
                 create: ((context) => materialPriceBlocMock)),
             BlocProvider<CartBloc>(create: ((context) => cartBlocMock)),
+            BlocProvider<MaterialFilterBloc>(
+                create: ((context) => mockMaterialFilterBloc)),
           ],
           child: child,
         ),

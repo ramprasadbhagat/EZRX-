@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
@@ -57,6 +58,10 @@ class ShipCodeSelector extends StatelessWidget {
                           .state
                           .customerCodeInfo,
                       shipToInfo: state.shipToInfo,
+                      selectedMaterialFilter: context
+                          .read<MaterialFilterBloc>()
+                          .state
+                          .selectedMaterialFilter,
                     ),
                   );
 
@@ -101,6 +106,16 @@ class ShipCodeSelector extends StatelessWidget {
                   );
 
               context.read<CartBloc>().add(const CartEvent.fetch());
+
+              context.read<MaterialFilterBloc>().add(MaterialFilterEvent.fetch(
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    user: context.read<UserBloc>().state.user,
+                    salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                  ));
             } else {
               context
                   .read<SavedOrderListBloc>()

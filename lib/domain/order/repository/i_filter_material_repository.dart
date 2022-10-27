@@ -6,19 +6,17 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 
-abstract class IMaterialListRepository {
-  Future<Either<ApiFailure, List<MaterialInfo>>> getMaterialList({
-    required User user,
-    required SalesOrganisation salesOrganisation,
+abstract class IMaterialFilterRepository {
+  Future<Either<ApiFailure, MaterialFilter>> getMaterialFilterList({
     required SalesOrganisationConfigs salesOrgConfig,
+    required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required int pageSize,
-    required int offset,
-    required String orderBy,
-    required String searchKey,
-    required MaterialFilter  selectedMaterialFilter,
+    required User user,
+  });
+  List<String> updateSelectedList({
+    required List<String> selectedList,
+    required String name,
   });
 }

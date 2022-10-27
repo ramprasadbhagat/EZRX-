@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_list_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,6 +56,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           offset: 0,
           orderBy: 'materialDescription_asc',
           searchKey: state.searchKey.getValue(),
+          selectedMaterialFilter: e.selectedMaterialFilter,
         );
         failureOrSuccess.fold(
           (failure) {
@@ -96,6 +98,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           offset: state.materialList.length,
           orderBy: 'materialDescription_asc',
           searchKey: state.searchKey.getValue(),
+          selectedMaterialFilter: e.selectedMaterialFilter,
         );
 
         await failureOrSuccess.fold(

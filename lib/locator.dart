@@ -10,11 +10,14 @@ import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
-import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/application/order/stock_information/stock_information_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
@@ -22,8 +25,6 @@ import 'package:ezrxmobile/application/order/order_history_list/order_history_li
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
-import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
-import 'package:ezrxmobile/application/order/stock_information/stock_information_bloc.dart';
 import 'package:ezrxmobile/application/order/valid_customer_material/valid_customer_material_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
@@ -85,12 +86,15 @@ import 'package:ezrxmobile/infrastructure/favourites/repository/favourite_reposi
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_filter_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_filter_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_filter_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/customer_material_price_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_bundle_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_bundle_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_bundle_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_remote.dart';
@@ -120,6 +124,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/valid_customer_materi
 import 'package:ezrxmobile/infrastructure/order/datasource/valid_customer_material_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/valid_customer_materials_query.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/material_filter_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_price_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/stock_info_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_repository.dart';
@@ -949,6 +954,7 @@ void setupLocator() {
       remoteDataSource: locator<ValidCustomerMaterialRemoteDataSource>(),
     ),
   );
+
   locator.registerLazySingleton(
     () => ValidCustomerMaterialBloc(
       validCustomerMaterialRepository:
@@ -983,6 +989,39 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => StockInformationBloc(
       stockInfoRepository: locator<StockInfoRepository>(),
+    ),
+  );
+
+  //============================================================
+  //  Material Filter
+  //
+  //============================================================
+  
+  locator.registerLazySingleton(() => MaterialFilterQueryMutation());
+  locator.registerLazySingleton(() => MaterialFilterLocalDataSource());
+
+  locator.registerLazySingleton(
+    () => MaterialFilterRemoteDataSource(
+      httpService: locator<HttpService>(),
+      config: locator<Config>(),
+      materialFilterQueryMutation: locator<MaterialFilterQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+
+  locator.registerLazySingleton(
+    () => MaterialFilterRepository(
+      config: locator<Config>(),
+      appMethods: locator<AppMethods>(),
+      filterMaterialRemoteDataSource: locator<MaterialFilterRemoteDataSource>(),
+      filterMaterialLocalDataSource: locator<MaterialFilterLocalDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => MaterialFilterBloc(
+      materialFilterRepository: locator<MaterialFilterRepository>(),
     ),
   );
 }

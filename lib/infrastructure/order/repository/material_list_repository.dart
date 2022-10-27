@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_list_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/common/app_method.dart';
@@ -37,6 +38,7 @@ class MaterialListRepository implements IMaterialListRepository {
     required int offset,
     required String orderBy,
     required String searchKey,
+    required MaterialFilter selectedMaterialFilter,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -65,6 +67,9 @@ class MaterialListRepository implements IMaterialListRepository {
               language: salesOrgConfig.getConfigLangauge,
               gimmickMaterial: salesOrgConfig.enableGimmickMaterial,
               pickAndPack: appMethods.getPickAndPackValue(false),
+              itemBrandList: selectedMaterialFilter.uniqueItemBrand,
+              therapeuticClassList: selectedMaterialFilter.uniqueTherapeuticClass,
+              principalNameList: selectedMaterialFilter.uniquePrincipalName,
             )
           : await materialListRemoteDataSource.getMaterialList(
               salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
@@ -76,6 +81,9 @@ class MaterialListRepository implements IMaterialListRepository {
               orderBy: orderBy,
               searchKey: searchKey,
               language: salesOrgConfig.getConfigLangauge,
+              principalNameList: selectedMaterialFilter.uniquePrincipalName,
+              itemBrandList: selectedMaterialFilter.uniqueItemBrand,
+              therapeuticClassList: selectedMaterialFilter.uniqueTherapeuticClass,
             );
 
       return Right(materialListData);

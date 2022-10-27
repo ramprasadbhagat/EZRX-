@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -28,6 +29,7 @@ void main() {
   final mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty();
   final mockCustomerCodeInfo = CustomerCodeInfo.empty();
   final mockShipToInfo = ShipToInfo.empty();
+  final mockSelectedMaterialFilter = MaterialFilterState.initial().selectedMaterialFilter;
 
   late final List<MaterialInfo> materialListMock;
   final materialState = MaterialListState.initial();
@@ -60,7 +62,8 @@ void main() {
             pageSize: _defaultPageSize,
             offset: 0,
             orderBy: 'materialDescription_asc',
-            searchKey: '')).thenAnswer(
+            searchKey: '',
+            selectedMaterialFilter: mockSelectedMaterialFilter,)).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
@@ -72,7 +75,8 @@ void main() {
             salesOrganisation: mockSalesOrg,
             configs: mockSalesOrganisationConfigs,
             customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo));
+            shipToInfo: mockShipToInfo,
+            selectedMaterialFilter: mockSelectedMaterialFilter,));
       },
       expect: () => [
         materialState.copyWith(
@@ -102,7 +106,8 @@ void main() {
             pageSize: _defaultPageSize,
             offset: 0,
             orderBy: 'materialDescription_asc',
-            searchKey: '')).thenAnswer(
+            searchKey: '',
+            selectedMaterialFilter: mockSelectedMaterialFilter,)).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
       },
@@ -112,7 +117,8 @@ void main() {
             salesOrganisation: mockSalesOrg,
             configs: mockSalesOrganisationConfigs,
             customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo));
+            shipToInfo: mockShipToInfo,
+            selectedMaterialFilter: mockSelectedMaterialFilter,));
       },
       expect: () => [
         materialState.copyWith(
@@ -139,13 +145,15 @@ void main() {
             salesOrganisation: mockSalesOrg,
             configs: mockSalesOrganisationConfigs,
             customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo));
+            shipToInfo: mockShipToInfo,
+            selectedMaterialFilter: mockSelectedMaterialFilter,));
         bloc.add(MaterialListEvent.loadMore(
             user: mockUser,
             salesOrganisation: mockSalesOrg,
             configs: mockSalesOrganisationConfigs,
             customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo));
+            shipToInfo: mockShipToInfo,
+            selectedMaterialFilter: mockSelectedMaterialFilter,));
       },
       setUp: () {
         when(() => materialListMockRepository.getMaterialList(
@@ -157,7 +165,8 @@ void main() {
             pageSize: _defaultPageSize,
             offset: 0,
             orderBy: 'materialDescription_asc',
-            searchKey: '')).thenAnswer(
+            searchKey: '',
+            selectedMaterialFilter: mockSelectedMaterialFilter,)).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
         when(() => materialListMockRepository.getMaterialList(
@@ -169,7 +178,8 @@ void main() {
             pageSize: _defaultPageSize,
             offset: materialListMock.length,
             orderBy: 'materialDescription_asc',
-            searchKey: '')).thenAnswer(
+            searchKey: '',
+            selectedMaterialFilter: mockSelectedMaterialFilter,)).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
       },
@@ -212,13 +222,15 @@ void main() {
             salesOrganisation: mockSalesOrg,
             configs: mockSalesOrganisationConfigs,
             customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo));
+            shipToInfo: mockShipToInfo,
+            selectedMaterialFilter: mockSelectedMaterialFilter,));
         bloc.add(MaterialListEvent.loadMore(
             user: mockUser,
             salesOrganisation: mockSalesOrg,
             configs: mockSalesOrganisationConfigs,
             customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo));
+            shipToInfo: mockShipToInfo,
+            selectedMaterialFilter: mockSelectedMaterialFilter,));
       },
       setUp: () {
         when(() => materialListMockRepository.getMaterialList(
@@ -230,7 +242,8 @@ void main() {
             pageSize: _defaultPageSize,
             offset: 0,
             orderBy: 'materialDescription_asc',
-            searchKey: '')).thenAnswer(
+            searchKey: '',
+            selectedMaterialFilter: mockSelectedMaterialFilter,)).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
         when(() => materialListMockRepository.getMaterialList(
@@ -242,7 +255,8 @@ void main() {
             pageSize: _defaultPageSize,
             offset: materialListMock.length,
             orderBy: 'materialDescription_asc',
-            searchKey: '')).thenAnswer(
+            searchKey: '',
+            selectedMaterialFilter: mockSelectedMaterialFilter,)).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
@@ -288,13 +302,15 @@ void main() {
             salesOrganisation: mockSalesOrg,
             configs: mockSalesOrganisationConfigs,
             customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo));
+            shipToInfo: mockShipToInfo,
+            selectedMaterialFilter: mockSelectedMaterialFilter,));
         bloc.add(MaterialListEvent.loadMore(
             user: mockUser,
             salesOrganisation: mockSalesOrg,
             configs: mockSalesOrganisationConfigs,
             customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo));
+            shipToInfo: mockShipToInfo,
+            selectedMaterialFilter: mockSelectedMaterialFilter,));
       },
       setUp: () {
         when(() => materialListMockRepository.getMaterialList(
@@ -306,7 +322,8 @@ void main() {
             pageSize: _defaultPageSize,
             offset: 0,
             orderBy: 'materialDescription_asc',
-            searchKey: '')).thenAnswer(
+            searchKey: '',
+            selectedMaterialFilter: mockSelectedMaterialFilter,)).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
         when(() => materialListMockRepository.getMaterialList(
@@ -318,7 +335,8 @@ void main() {
             pageSize: _defaultPageSize,
             offset: materialListMock.length,
             orderBy: 'materialDescription_asc',
-            searchKey: '')).thenAnswer(
+            searchKey: '',
+            selectedMaterialFilter: mockSelectedMaterialFilter,)).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
       },

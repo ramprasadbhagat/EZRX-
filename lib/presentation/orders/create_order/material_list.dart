@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -5,14 +6,17 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
+import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -58,6 +62,7 @@ class MaterialListPage extends StatelessWidget {
           return Column(
             children: [
               const _SearchBar(),
+              const _MaterialFilters(),
               _BodyContent(
                 materialListState: state,
                 addToCart: addToCart,
@@ -106,6 +111,7 @@ class _BodyContent extends StatelessWidget {
                           .customerCodeInfo,
                       shipToInfo:
                           context.read<ShipToCodeBloc>().state.shipToInfo,
+                          selectedMaterialFilter: context.read<MaterialFilterBloc>().state.selectedMaterialFilter,
                     ),
                   ),
               onLoadingMore: () => context.read<MaterialListBloc>().add(
@@ -120,6 +126,7 @@ class _BodyContent extends StatelessWidget {
                           .customerCodeInfo,
                       shipToInfo:
                           context.read<ShipToCodeBloc>().state.shipToInfo,
+                      selectedMaterialFilter: context.read<MaterialFilterBloc>().state.selectedMaterialFilter,
                     ),
                   ),
               isLoading: materialListState.isFetching,
@@ -399,6 +406,80 @@ class _SearchBarState extends State<_SearchBar> {
           );
         },
       ),
+    );
+  }
+}
+
+class _MaterialFilters extends StatelessWidget {
+  const _MaterialFilters({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<MaterialFilterBloc, MaterialFilterState>(
+      builder: (context, state) {
+        return Container(
+          padding: const EdgeInsets.only(left: 10, top: 5),
+          decoration: const BoxDecoration(
+            color: ZPColors.white,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              CustomSelector(
+                title: 'Principal',
+                child: Text(
+                  state.getFilterLabel(MaterialFilterType.principal),
+                  maxLines: 1,
+                  style: Theme.of(context).textTheme.subtitle2?.apply(
+                        color: ZPColors.primary,
+                      ),
+                ),
+                onTap: () {
+                  context.router.push(
+                    MaterialFilterPageRoute(
+                      filterType: MaterialFilterType.principal,
+                    ),
+                  );
+                },
+              ),
+              CustomSelector(
+                title: 'Theraputic',
+                child: Text(
+                  state.getFilterLabel(MaterialFilterType.therapeutic),
+                  maxLines: 1,
+                  style: Theme.of(context).textTheme.subtitle2?.apply(
+                        color: ZPColors.primary,
+                      ),
+                ),
+                onTap: () {
+                  context.router.push(
+                    MaterialFilterPageRoute(
+                      filterType: MaterialFilterType.therapeutic,
+                    ),
+                  );
+                },
+              ),
+              CustomSelector(
+                title: 'Brand',
+                child: Text(
+                  state.getFilterLabel(MaterialFilterType.brand),
+                  maxLines: 1,
+                  style: Theme.of(context).textTheme.subtitle2?.apply(
+                        color: ZPColors.primary,
+                      ),
+                ),
+                onTap: () {
+                  context.router.push(
+                    MaterialFilterPageRoute(
+                      filterType: MaterialFilterType.brand,
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
