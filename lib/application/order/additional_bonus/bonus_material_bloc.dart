@@ -23,18 +23,6 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
     required this.bonusMaterialRepository,
   }) : super(BonusMaterialState.initial()) {
     on<BonusMaterialEvent>(_onEvent);
-    // add(
-    //   BonusMaterialEvent.fetch(
-    //     customerCode: '',
-    //     gimmickMaterial: true,
-    //     pickandpack: true,
-    //     salesOrg: '',
-    //     searchKey: '',
-    //     shipTo: '',
-    //     soldTo: '',
-    //     user: User.empty(),
-    //   ),
-    // );
   }
 
   Future<void> _onEvent(

@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -127,32 +126,8 @@ class AcceptButton extends StatelessWidget {
     return Positioned(
       right: 10,
       bottom: 10,
-      child: GestureDetector(
-        child: Container(
-          width: MediaQuery.of(context).size.width * 40 / 100,
-          height: 35,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(18.0),
-            gradient: const LinearGradient(
-              colors: <Color>[
-                ZPColors.primary,
-                ZPColors.gradient,
-              ],
-            ),
-          ),
-          child: Center(
-            child: Text(
-              'Accept'.tr(),
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 16,
-                color: ZPColors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ),
-        onTap: () {
+      child: ElevatedButton(
+        onPressed: () {
           if (!termsAndConditionReadtoEnd) {
             showSnackBar(
               context: context,
@@ -166,6 +141,7 @@ class AcceptButton extends StatelessWidget {
             }
           }
         },
+        child: const Text('Accept').tr(),
       ),
     );
   }

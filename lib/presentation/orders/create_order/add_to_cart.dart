@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/presentation/core/action_button.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -150,10 +149,9 @@ class _AddToCartState extends State<AddToCart> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ActionButton(
-                    text: 'Add to Cart'.tr(),
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    onTap: () => _addToCart(context),
+                  ElevatedButton(
+                    onPressed: () => _addToCart(context),
+                    child: const Text('Add to Cart').tr(),
                   ),
                 ],
               ),
@@ -168,20 +166,14 @@ class _AddToCartState extends State<AddToCart> {
     if (int.parse(_controller.text) > 0) {
       final cartItemList = context.read<CartBloc>().state.cartItemList;
       if (widget.materialInfo.materialGroup4.isFOC &&
-          cartItemList.indexWhere(
-                (element) => !element.materialInfo.materialGroup4.isFOC,
-              ) >
-              -1) {
+          cartItemList.any((e) => !e.materialInfo.materialGroup4.isFOC)) {
         showSnackBar(
           context: context,
           message: 'Covid material cannot be combined with commercial material.'
               .tr(),
         );
       } else if (!widget.materialInfo.materialGroup4.isFOC &&
-          cartItemList.indexWhere(
-                (element) => element.materialInfo.materialGroup4.isFOC,
-              ) >
-              -1) {
+          cartItemList.any((e) => e.materialInfo.materialGroup4.isFOC)) {
         showSnackBar(
           context: context,
           message: 'Commercial material cannot be combined with covid material.'
@@ -225,9 +217,7 @@ class _QuantityIcon extends StatelessWidget {
         style: OutlinedButton.styleFrom(
           padding: EdgeInsets.zero,
           backgroundColor: ZPColors.primary,
-          elevation: 20,
           minimumSize: const Size(100, 50),
-          shadowColor: ZPColors.darkGray,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
