@@ -69,6 +69,137 @@ void main() {
       // tester.printToConsole('Tap Banner');
       // await tester.tap(homeBanner);
 
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      //============================================================
+      //  Announcement Test
+      //
+      //============================================================
+      tester.printToConsole('close announecement tab');
+      final announcementCloseIcon =
+          find.byKey(const Key('announcementCloseIcon'));
+      await tester.tap(announcementCloseIcon);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      //============================================================
+      //  SalesOrg, Customer, Shipping Address Test
+      //
+      //============================================================
+
+      //Sales Org Selectos Tests
+      tester.printToConsole('Sales org selector test');
+      final salesOrgSelector = find.byKey(const Key('salesOrgSelect')).first;
+      expect(salesOrgSelector, findsOneWidget);
+
+      tester.printToConsole('Click sales org selector');
+      await tester.tap(salesOrgSelector);
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      final vnSalesOrg =
+          find.byKey(const Key('salesOrgOption3050')); // VN select Test
+      final sgSalesOrg =
+          find.byKey(const Key('salesOrgOption2601')); // SG select Test
+      final twSalesOrg =
+          find.byKey(const Key('salesOrgOption2800')); // TW select Test
+      final phSalesOrg =
+          find.byKey(const Key('salesOrgOption2500')); // PH select Test
+
+      expect(twSalesOrg, findsOneWidget);
+      expect(sgSalesOrg, findsOneWidget);
+      expect(vnSalesOrg, findsOneWidget);
+      expect(phSalesOrg, findsOneWidget);
+      await tester.tap(twSalesOrg);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      await tester.tap(salesOrgSelector);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      await tester.tap(phSalesOrg);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      await tester.tap(salesOrgSelector);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      await tester.tap(vnSalesOrg);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      await tester.tap(salesOrgSelector);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      await tester.tap(sgSalesOrg);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      final customerCodeSelector =
+          find.byKey(const Key('customerCodeSelect')).first;
+      expect(customerCodeSelector, findsOneWidget);
+      tester.printToConsole('Click Customer code selector');
+      await tester.tap(customerCodeSelector);
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+
+      final listFinder = find.byType(CustomScrollView);
+      final itemFinder = find.text('0030033396');
+
+      // Scroll until the item to be found appears
+      await tester.dragUntilVisible(
+          itemFinder,
+          listFinder, // widget you want to scroll
+          const Offset(0, -500), // delta to move
+          duration: const Duration(seconds: 1));
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      await tester.ensureVisible(itemFinder);
+
+      await tester.tap(itemFinder);
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+
+      final selectedShipToCodeValue = find.text('0070043865');
+      expect(selectedShipToCodeValue, findsOneWidget);
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      tester.printToConsole('Click Customer code selector');
+      await tester.tap(customerCodeSelector);
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+
+      final textSearchField = find.byKey(const Key('customerCodeSearchField'));
+      expect(textSearchField, findsOneWidget);
+      await tester.tap(textSearchField);
+      await tester.enterText(textSearchField, '5540');
+      await tester.pumpAndSettle(const Duration(microseconds: 200));
+
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+
+      final selectItem = find.byKey(const Key('customerCodeOption0030035540'));
+      await tester.tap(selectItem);
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      final selectedShipToCode = find.text('0070046018');
+      expect(selectedShipToCode, findsOneWidget);
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      tester.printToConsole('Click Customer code selector');
+      await tester.tap(customerCodeSelector);
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      final searchButton = find.byKey(const Key('clearCustomerCodeSearch'));
+      await tester.tap(searchButton);
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      final listTile = find.byKey(const Key('customerCodeOption0030031508'));
+      await tester.tap(listTile);
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      final shipToCodeSelector =
+          find.byKey(const Key('shipToCodeSelect')).first;
+      expect(shipToCodeSelector, findsOneWidget);
+      await tester.tap(shipToCodeSelector);
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      final shipToCode1 = find.text('0070046062');
+      final shipToCode2 = find.text('0070041907');
+      expect(shipToCode1, findsOneWidget);
+      expect(shipToCode2, findsOneWidget);
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      final backButton = find.byTooltip('Back');
+      await tester.tap(backButton);
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       //============================================================
@@ -181,6 +312,7 @@ void main() {
       expect(loginUsernameField, findsOneWidget);
       expect(loginPasswordField, findsOneWidget);
       expect(loginSubmitButton, findsOneWidget);
+      await tester.pumpAndSettle();
     });
   });
 }

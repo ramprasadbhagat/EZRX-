@@ -8,7 +8,7 @@ class NotificationTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      key: const Key('languageTile'),
+      key: const Key('notificationTile'),
       leading: const Icon(Icons.notifications_active_outlined),
       title: Text('Notifications'.tr()),
       onTap: () {
