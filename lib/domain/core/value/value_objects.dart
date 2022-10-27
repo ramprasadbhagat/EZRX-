@@ -71,7 +71,6 @@ abstract class DateValueObject<T> {
   String toString() => 'Value($value)';
 }
 
-
 class SearchKey extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -81,7 +80,8 @@ class SearchKey extends ValueObject<String> {
   }
 
   factory SearchKey.search(String searchText) {
-    return SearchKey._(validateStringNotEmpty(searchText).flatMap((input) => validateMinStringLength(input, 4)));
+    return SearchKey._(validateStringNotEmpty(searchText)
+        .flatMap((input) => validateMinStringLength(input, 4)));
   }
 
   const SearchKey._(this.value);

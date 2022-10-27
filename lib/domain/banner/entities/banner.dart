@@ -17,6 +17,8 @@ class BannerItem with _$BannerItem {
     required String buttonLabel,
     required String urlLink,
     required String salesOrg,
+    required bool isKeyword,
+    required String keyword,
   }) = _BannerItem;
 
   factory BannerItem.empty() => const BannerItem(
@@ -30,5 +32,7 @@ class BannerItem with _$BannerItem {
         buttonLabel: '',
         urlLink: '',
         salesOrg: '',
+        isKeyword: false,
+        keyword: '',
       );
 }

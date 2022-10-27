@@ -19,6 +19,8 @@ class BannerDto with _$BannerDto {
     @JsonKey(name: 'salesOrg') required String salesOrg,
     @JsonKey(name: 'serial') required int serial,
     @JsonKey(name: 'isCustomer') required bool isCustomer,
+    @JsonKey(name: 'isKeyword', defaultValue: false) required bool isKeyword,
+    @JsonKey(name: 'keyword', defaultValue: '') required String keyword,
   }) = _BannerDto;
 
   factory BannerDto.fromDomain(BannerItem banner) {
@@ -33,6 +35,8 @@ class BannerDto with _$BannerDto {
       salesOrg: banner.salesOrg,
       serial: banner.serial,
       isCustomer: banner.isCustomer,
+      isKeyword: banner.isKeyword,
+      keyword: banner.keyword,
     );
   }
 
@@ -48,6 +52,8 @@ class BannerDto with _$BannerDto {
       salesOrg: salesOrg,
       serial: serial,
       isCustomer: isCustomer,
+      isKeyword: isKeyword,
+      keyword: keyword,
     );
   }
 

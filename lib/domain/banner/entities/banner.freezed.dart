@@ -26,6 +26,8 @@ mixin _$BannerItem {
   String get buttonLabel => throw _privateConstructorUsedError;
   String get urlLink => throw _privateConstructorUsedError;
   String get salesOrg => throw _privateConstructorUsedError;
+  bool get isKeyword => throw _privateConstructorUsedError;
+  String get keyword => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BannerItemCopyWith<BannerItem> get copyWith =>
@@ -47,7 +49,9 @@ abstract class $BannerItemCopyWith<$Res> {
       String description,
       String buttonLabel,
       String urlLink,
-      String salesOrg});
+      String salesOrg,
+      bool isKeyword,
+      String keyword});
 }
 
 /// @nodoc
@@ -70,6 +74,8 @@ class _$BannerItemCopyWithImpl<$Res> implements $BannerItemCopyWith<$Res> {
     Object? buttonLabel = freezed,
     Object? urlLink = freezed,
     Object? salesOrg = freezed,
+    Object? isKeyword = freezed,
+    Object? keyword = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -112,6 +118,14 @@ class _$BannerItemCopyWithImpl<$Res> implements $BannerItemCopyWith<$Res> {
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as String,
+      isKeyword: isKeyword == freezed
+          ? _value.isKeyword
+          : isKeyword // ignore: cast_nullable_to_non_nullable
+              as bool,
+      keyword: keyword == freezed
+          ? _value.keyword
+          : keyword // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -133,7 +147,9 @@ abstract class _$$_BannerItemCopyWith<$Res>
       String description,
       String buttonLabel,
       String urlLink,
-      String salesOrg});
+      String salesOrg,
+      bool isKeyword,
+      String keyword});
 }
 
 /// @nodoc
@@ -158,6 +174,8 @@ class __$$_BannerItemCopyWithImpl<$Res> extends _$BannerItemCopyWithImpl<$Res>
     Object? buttonLabel = freezed,
     Object? urlLink = freezed,
     Object? salesOrg = freezed,
+    Object? isKeyword = freezed,
+    Object? keyword = freezed,
   }) {
     return _then(_$_BannerItem(
       id: id == freezed
@@ -200,6 +218,14 @@ class __$$_BannerItemCopyWithImpl<$Res> extends _$BannerItemCopyWithImpl<$Res>
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as String,
+      isKeyword: isKeyword == freezed
+          ? _value.isKeyword
+          : isKeyword // ignore: cast_nullable_to_non_nullable
+              as bool,
+      keyword: keyword == freezed
+          ? _value.keyword
+          : keyword // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -217,7 +243,9 @@ class _$_BannerItem extends _BannerItem {
       required this.description,
       required this.buttonLabel,
       required this.urlLink,
-      required this.salesOrg})
+      required this.salesOrg,
+      required this.isKeyword,
+      required this.keyword})
       : super._();
 
   @override
@@ -240,10 +268,14 @@ class _$_BannerItem extends _BannerItem {
   final String urlLink;
   @override
   final String salesOrg;
+  @override
+  final bool isKeyword;
+  @override
+  final String keyword;
 
   @override
   String toString() {
-    return 'BannerItem(id: $id, serial: $serial, isPreSalesOrg: $isPreSalesOrg, isCustomer: $isCustomer, url: $url, title: $title, description: $description, buttonLabel: $buttonLabel, urlLink: $urlLink, salesOrg: $salesOrg)';
+    return 'BannerItem(id: $id, serial: $serial, isPreSalesOrg: $isPreSalesOrg, isCustomer: $isCustomer, url: $url, title: $title, description: $description, buttonLabel: $buttonLabel, urlLink: $urlLink, salesOrg: $salesOrg, isKeyword: $isKeyword, keyword: $keyword)';
   }
 
   @override
@@ -264,7 +296,9 @@ class _$_BannerItem extends _BannerItem {
             const DeepCollectionEquality()
                 .equals(other.buttonLabel, buttonLabel) &&
             const DeepCollectionEquality().equals(other.urlLink, urlLink) &&
-            const DeepCollectionEquality().equals(other.salesOrg, salesOrg));
+            const DeepCollectionEquality().equals(other.salesOrg, salesOrg) &&
+            const DeepCollectionEquality().equals(other.isKeyword, isKeyword) &&
+            const DeepCollectionEquality().equals(other.keyword, keyword));
   }
 
   @override
@@ -279,7 +313,9 @@ class _$_BannerItem extends _BannerItem {
       const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(buttonLabel),
       const DeepCollectionEquality().hash(urlLink),
-      const DeepCollectionEquality().hash(salesOrg));
+      const DeepCollectionEquality().hash(salesOrg),
+      const DeepCollectionEquality().hash(isKeyword),
+      const DeepCollectionEquality().hash(keyword));
 
   @JsonKey(ignore: true)
   @override
@@ -298,7 +334,9 @@ abstract class _BannerItem extends BannerItem {
       required final String description,
       required final String buttonLabel,
       required final String urlLink,
-      required final String salesOrg}) = _$_BannerItem;
+      required final String salesOrg,
+      required final bool isKeyword,
+      required final String keyword}) = _$_BannerItem;
   const _BannerItem._() : super._();
 
   @override
@@ -321,6 +359,10 @@ abstract class _BannerItem extends BannerItem {
   String get urlLink;
   @override
   String get salesOrg;
+  @override
+  bool get isKeyword;
+  @override
+  String get keyword;
   @override
   @JsonKey(ignore: true)
   _$$_BannerItemCopyWith<_$_BannerItem> get copyWith =>

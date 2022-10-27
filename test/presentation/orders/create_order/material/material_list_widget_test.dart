@@ -15,7 +15,9 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/material_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_root.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -57,6 +59,10 @@ class MockMaterialFilterBloc
     extends MockBloc<MaterialFilterEvent, MaterialFilterState>
     implements MaterialFilterBloc {}
 
+class MaterialListBlocMock
+    extends MockBloc<MaterialListEvent, MaterialListState>
+    implements MaterialListBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialListBloc materialListBlocMock;
@@ -68,6 +74,7 @@ void main() {
   late MockFavouriteBloc mockFavouriteBloc;
   late MaterialPriceBloc materialPriceBlocMock;
   late CartBloc cartBlocMock;
+  late MaterialListBloc materialListBloc;
 
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
   late MaterialFilterBloc mockMaterialFilterBloc;
@@ -98,6 +105,8 @@ void main() {
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
       when(() => mockMaterialFilterBloc.state)
           .thenReturn(MaterialFilterState.initial());
+      when(() => materialListBlocMock.state)
+          .thenReturn(MaterialListState.initial());
     });
 
     Widget getScopedWidget(Widget child) {
@@ -129,6 +138,8 @@ void main() {
             BlocProvider<CartBloc>(create: ((context) => cartBlocMock)),
             BlocProvider<MaterialFilterBloc>(
                 create: ((context) => mockMaterialFilterBloc)),
+            BlocProvider<MaterialListBloc>(
+                create: ((context) => materialListBlocMock)),
           ],
           child: child,
         ),
@@ -248,7 +259,65 @@ void main() {
       expect(noRecordFound, findsOneWidget);
     });
 
+    testWidgets(
+      'Test material list search',
+      (tester) async {
+        final expectedCustomerCodeListStates = [
+          MaterialListState.initial().copyWith(isFetching: true),
+          MaterialListState.initial()
+              .copyWith(isFetching: false, searchKey: SearchKey('')),
+        ];
+
+        whenListen(materialListBlocMock,
+            Stream.fromIterable(expectedCustomerCodeListStates));
+        await tester.pumpWidget(getScopedWidget(
+          MaterialListPage(addToCart: () {}),
+        ));
+        await tester.pumpAndSettle(const Duration(seconds: 3));
+
+        expect(find.byKey(const Key('materialSearchField')), findsOneWidget);
+      },
+    );
+
+    testWidgets('Search input cannot be less than 3 characters.',
+        (tester) async {
+      await tester.pumpWidget(getScopedWidget(
+        MaterialListPage(addToCart: () {}),
+      ));
+      await tester.pump(const Duration(seconds: 4));
+      final txtForm = find.byType(TextFormField);
+      await tester.enterText(txtForm, '999');
+      expect(find.text('999'), findsNothing);
+    });
+
     // TODO: need Wasim help
+    // testWidgets('Clear material list Search', (tester) async {
+    //   final expectedMaterialListStates = [
+    //     MaterialListState.initial().copyWith(
+    //       isFetching: false,
+    //       materialList: [],
+    //     ),
+    //   ];
+
+    //   whenListen(
+    //       customerCodeBlocMock, Stream.fromIterable(expectedMaterialListStates),
+    //       initialState: materialListBlocMock.state.copyWith(
+    //           isFetching: true,
+    //           canLoadMore: true,
+    //           materialList: [MaterialInfo.empty()]));
+
+    //   await tester.runAsync(() async {
+    //     await tester.pumpWidget(getScopedWidget(
+    //       MaterialListPage(addToCart: () {}),
+    //     ));
+    //   });
+
+    //   await tester.pump();
+    //   final clearMaterialListSearch =
+    //       find.byKey(const Key('clearMaterialListSearch'));
+    //   expect(clearMaterialListSearch, findsOneWidget);
+    // });
+
     // testWidgets('Start to fetch price', (tester) async {
     //   final fakeMaterial = MaterialInfo.empty().copyWith(
     //     materialNumber: MaterialNumber('fake-number'),

@@ -19,6 +19,9 @@ class BannerQueryMutation {
             salesOrg    
             serial
             isCustomer
+            isKeyword  
+            keyword   
+ 
         }
     }
     ''';

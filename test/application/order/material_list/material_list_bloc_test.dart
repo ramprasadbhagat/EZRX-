@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -29,7 +30,8 @@ void main() {
   final mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty();
   final mockCustomerCodeInfo = CustomerCodeInfo.empty();
   final mockShipToInfo = ShipToInfo.empty();
-  final mockSelectedMaterialFilter = MaterialFilterState.initial().selectedMaterialFilter;
+  final mockSelectedMaterialFilter =
+      MaterialFilterState.initial().selectedMaterialFilter;
 
   late final List<MaterialInfo> materialListMock;
   final materialState = MaterialListState.initial();
@@ -49,21 +51,54 @@ void main() {
         expect: () => [MaterialListState.initial()]);
 
     blocTest(
+      'Material List search update',
+      build: () =>
+          MaterialListBloc(materialListRepository: materialListMockRepository),
+      act: (MaterialListBloc bloc) {
+        bloc.add(const MaterialListEvent.updateSearchKey(searchKey: '1234'));
+      },
+      expect: () => [
+        materialState.copyWith(
+          isFetching: true,
+          materialList: [],
+          searchKey: SearchKey('1234'),
+        ),
+      ],
+    );
+
+    blocTest(
+      'Material List search fails',
+      build: () =>
+          MaterialListBloc(materialListRepository: materialListMockRepository),
+      act: (MaterialListBloc bloc) {
+        bloc.add(const MaterialListEvent.updateSearchKey(searchKey: '999'));
+      },
+      expect: () => [
+        materialState.copyWith(
+          isFetching: true,
+          materialList: [],
+          searchKey: SearchKey.search('999'),
+        )
+      ],
+    );
+
+    blocTest(
       'Material List Fetch fail',
       build: () =>
           MaterialListBloc(materialListRepository: materialListMockRepository),
       setUp: () {
         when(() => materialListMockRepository.getMaterialList(
-            user: mockUser,
-            salesOrganisation: mockSalesOrg,
-            salesOrgConfig: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
-            pageSize: _defaultPageSize,
-            offset: 0,
-            orderBy: 'materialDescription_asc',
-            searchKey: '',
-            selectedMaterialFilter: mockSelectedMaterialFilter,)).thenAnswer(
+              user: mockUser,
+              salesOrganisation: mockSalesOrg,
+              salesOrgConfig: mockSalesOrganisationConfigs,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              pageSize: _defaultPageSize,
+              offset: 0,
+              orderBy: 'materialDescription_asc',
+              searchKey: '',
+              selectedMaterialFilter: mockSelectedMaterialFilter,
+            )).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
@@ -71,12 +106,13 @@ void main() {
       },
       act: (MaterialListBloc bloc) {
         bloc.add(MaterialListEvent.fetch(
-            user: mockUser,
-            salesOrganisation: mockSalesOrg,
-            configs: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
-            selectedMaterialFilter: mockSelectedMaterialFilter,));
+          user: mockUser,
+          salesOrganisation: mockSalesOrg,
+          configs: mockSalesOrganisationConfigs,
+          customerCodeInfo: mockCustomerCodeInfo,
+          shipToInfo: mockShipToInfo,
+          selectedMaterialFilter: mockSelectedMaterialFilter,
+        ));
       },
       expect: () => [
         materialState.copyWith(
@@ -98,27 +134,29 @@ void main() {
           MaterialListBloc(materialListRepository: materialListMockRepository),
       setUp: () {
         when(() => materialListMockRepository.getMaterialList(
-            user: mockUser,
-            salesOrganisation: mockSalesOrg,
-            salesOrgConfig: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
-            pageSize: _defaultPageSize,
-            offset: 0,
-            orderBy: 'materialDescription_asc',
-            searchKey: '',
-            selectedMaterialFilter: mockSelectedMaterialFilter,)).thenAnswer(
+              user: mockUser,
+              salesOrganisation: mockSalesOrg,
+              salesOrgConfig: mockSalesOrganisationConfigs,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              pageSize: _defaultPageSize,
+              offset: 0,
+              orderBy: 'materialDescription_asc',
+              searchKey: '',
+              selectedMaterialFilter: mockSelectedMaterialFilter,
+            )).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
       },
       act: (MaterialListBloc bloc) {
         bloc.add(MaterialListEvent.fetch(
-            user: mockUser,
-            salesOrganisation: mockSalesOrg,
-            configs: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
-            selectedMaterialFilter: mockSelectedMaterialFilter,));
+          user: mockUser,
+          salesOrganisation: mockSalesOrg,
+          configs: mockSalesOrganisationConfigs,
+          customerCodeInfo: mockCustomerCodeInfo,
+          shipToInfo: mockShipToInfo,
+          selectedMaterialFilter: mockSelectedMaterialFilter,
+        ));
       },
       expect: () => [
         materialState.copyWith(
@@ -141,45 +179,49 @@ void main() {
           MaterialListBloc(materialListRepository: materialListMockRepository),
       act: (MaterialListBloc bloc) {
         bloc.add(MaterialListEvent.fetch(
-            user: mockUser,
-            salesOrganisation: mockSalesOrg,
-            configs: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
-            selectedMaterialFilter: mockSelectedMaterialFilter,));
+          user: mockUser,
+          salesOrganisation: mockSalesOrg,
+          configs: mockSalesOrganisationConfigs,
+          customerCodeInfo: mockCustomerCodeInfo,
+          shipToInfo: mockShipToInfo,
+          selectedMaterialFilter: mockSelectedMaterialFilter,
+        ));
         bloc.add(MaterialListEvent.loadMore(
-            user: mockUser,
-            salesOrganisation: mockSalesOrg,
-            configs: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
-            selectedMaterialFilter: mockSelectedMaterialFilter,));
+          user: mockUser,
+          salesOrganisation: mockSalesOrg,
+          configs: mockSalesOrganisationConfigs,
+          customerCodeInfo: mockCustomerCodeInfo,
+          shipToInfo: mockShipToInfo,
+          selectedMaterialFilter: mockSelectedMaterialFilter,
+        ));
       },
       setUp: () {
         when(() => materialListMockRepository.getMaterialList(
-            user: mockUser,
-            salesOrganisation: mockSalesOrg,
-            salesOrgConfig: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
-            pageSize: _defaultPageSize,
-            offset: 0,
-            orderBy: 'materialDescription_asc',
-            searchKey: '',
-            selectedMaterialFilter: mockSelectedMaterialFilter,)).thenAnswer(
+              user: mockUser,
+              salesOrganisation: mockSalesOrg,
+              salesOrgConfig: mockSalesOrganisationConfigs,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              pageSize: _defaultPageSize,
+              offset: 0,
+              orderBy: 'materialDescription_asc',
+              searchKey: '',
+              selectedMaterialFilter: mockSelectedMaterialFilter,
+            )).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
         when(() => materialListMockRepository.getMaterialList(
-            user: mockUser,
-            salesOrganisation: mockSalesOrg,
-            salesOrgConfig: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
-            pageSize: _defaultPageSize,
-            offset: materialListMock.length,
-            orderBy: 'materialDescription_asc',
-            searchKey: '',
-            selectedMaterialFilter: mockSelectedMaterialFilter,)).thenAnswer(
+              user: mockUser,
+              salesOrganisation: mockSalesOrg,
+              salesOrgConfig: mockSalesOrganisationConfigs,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              pageSize: _defaultPageSize,
+              offset: materialListMock.length,
+              orderBy: 'materialDescription_asc',
+              searchKey: '',
+              selectedMaterialFilter: mockSelectedMaterialFilter,
+            )).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
       },
@@ -218,45 +260,49 @@ void main() {
           MaterialListBloc(materialListRepository: materialListMockRepository),
       act: (MaterialListBloc bloc) {
         bloc.add(MaterialListEvent.fetch(
-            user: mockUser,
-            salesOrganisation: mockSalesOrg,
-            configs: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
-            selectedMaterialFilter: mockSelectedMaterialFilter,));
+          user: mockUser,
+          salesOrganisation: mockSalesOrg,
+          configs: mockSalesOrganisationConfigs,
+          customerCodeInfo: mockCustomerCodeInfo,
+          shipToInfo: mockShipToInfo,
+          selectedMaterialFilter: mockSelectedMaterialFilter,
+        ));
         bloc.add(MaterialListEvent.loadMore(
-            user: mockUser,
-            salesOrganisation: mockSalesOrg,
-            configs: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
-            selectedMaterialFilter: mockSelectedMaterialFilter,));
+          user: mockUser,
+          salesOrganisation: mockSalesOrg,
+          configs: mockSalesOrganisationConfigs,
+          customerCodeInfo: mockCustomerCodeInfo,
+          shipToInfo: mockShipToInfo,
+          selectedMaterialFilter: mockSelectedMaterialFilter,
+        ));
       },
       setUp: () {
         when(() => materialListMockRepository.getMaterialList(
-            user: mockUser,
-            salesOrganisation: mockSalesOrg,
-            salesOrgConfig: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
-            pageSize: _defaultPageSize,
-            offset: 0,
-            orderBy: 'materialDescription_asc',
-            searchKey: '',
-            selectedMaterialFilter: mockSelectedMaterialFilter,)).thenAnswer(
+              user: mockUser,
+              salesOrganisation: mockSalesOrg,
+              salesOrgConfig: mockSalesOrganisationConfigs,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              pageSize: _defaultPageSize,
+              offset: 0,
+              orderBy: 'materialDescription_asc',
+              searchKey: '',
+              selectedMaterialFilter: mockSelectedMaterialFilter,
+            )).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
         when(() => materialListMockRepository.getMaterialList(
-            user: mockUser,
-            salesOrganisation: mockSalesOrg,
-            salesOrgConfig: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
-            pageSize: _defaultPageSize,
-            offset: materialListMock.length,
-            orderBy: 'materialDescription_asc',
-            searchKey: '',
-            selectedMaterialFilter: mockSelectedMaterialFilter,)).thenAnswer(
+              user: mockUser,
+              salesOrganisation: mockSalesOrg,
+              salesOrgConfig: mockSalesOrganisationConfigs,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              pageSize: _defaultPageSize,
+              offset: materialListMock.length,
+              orderBy: 'materialDescription_asc',
+              searchKey: '',
+              selectedMaterialFilter: mockSelectedMaterialFilter,
+            )).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
@@ -298,45 +344,49 @@ void main() {
           MaterialListBloc(materialListRepository: materialListMockRepository),
       act: (MaterialListBloc bloc) {
         bloc.add(MaterialListEvent.fetch(
-            user: mockUser,
-            salesOrganisation: mockSalesOrg,
-            configs: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
-            selectedMaterialFilter: mockSelectedMaterialFilter,));
+          user: mockUser,
+          salesOrganisation: mockSalesOrg,
+          configs: mockSalesOrganisationConfigs,
+          customerCodeInfo: mockCustomerCodeInfo,
+          shipToInfo: mockShipToInfo,
+          selectedMaterialFilter: mockSelectedMaterialFilter,
+        ));
         bloc.add(MaterialListEvent.loadMore(
-            user: mockUser,
-            salesOrganisation: mockSalesOrg,
-            configs: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
-            selectedMaterialFilter: mockSelectedMaterialFilter,));
+          user: mockUser,
+          salesOrganisation: mockSalesOrg,
+          configs: mockSalesOrganisationConfigs,
+          customerCodeInfo: mockCustomerCodeInfo,
+          shipToInfo: mockShipToInfo,
+          selectedMaterialFilter: mockSelectedMaterialFilter,
+        ));
       },
       setUp: () {
         when(() => materialListMockRepository.getMaterialList(
-            user: mockUser,
-            salesOrganisation: mockSalesOrg,
-            salesOrgConfig: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
-            pageSize: _defaultPageSize,
-            offset: 0,
-            orderBy: 'materialDescription_asc',
-            searchKey: '',
-            selectedMaterialFilter: mockSelectedMaterialFilter,)).thenAnswer(
+              user: mockUser,
+              salesOrganisation: mockSalesOrg,
+              salesOrgConfig: mockSalesOrganisationConfigs,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              pageSize: _defaultPageSize,
+              offset: 0,
+              orderBy: 'materialDescription_asc',
+              searchKey: '',
+              selectedMaterialFilter: mockSelectedMaterialFilter,
+            )).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
         when(() => materialListMockRepository.getMaterialList(
-            user: mockUser,
-            salesOrganisation: mockSalesOrg,
-            salesOrgConfig: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
-            pageSize: _defaultPageSize,
-            offset: materialListMock.length,
-            orderBy: 'materialDescription_asc',
-            searchKey: '',
-            selectedMaterialFilter: mockSelectedMaterialFilter,)).thenAnswer(
+              user: mockUser,
+              salesOrganisation: mockSalesOrg,
+              salesOrgConfig: mockSalesOrganisationConfigs,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              pageSize: _defaultPageSize,
+              offset: materialListMock.length,
+              orderBy: 'materialDescription_asc',
+              searchKey: '',
+              selectedMaterialFilter: mockSelectedMaterialFilter,
+            )).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
       },

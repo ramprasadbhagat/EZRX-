@@ -621,7 +621,7 @@ class __$$_UpdateSearchKeyCopyWithImpl<$Res>
     Object? searchKey = freezed,
   }) {
     return _then(_$_UpdateSearchKey(
-      searchKey == freezed
+      searchKey: searchKey == freezed
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as String,
@@ -632,7 +632,7 @@ class __$$_UpdateSearchKeyCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_UpdateSearchKey implements _UpdateSearchKey {
-  const _$_UpdateSearchKey(this.searchKey);
+  const _$_UpdateSearchKey({required this.searchKey});
 
   @override
   final String searchKey;
@@ -777,7 +777,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
 }
 
 abstract class _UpdateSearchKey implements MaterialListEvent {
-  const factory _UpdateSearchKey(final String searchKey) = _$_UpdateSearchKey;
+  const factory _UpdateSearchKey({required final String searchKey}) =
+      _$_UpdateSearchKey;
 
   String get searchKey;
   @JsonKey(ignore: true)

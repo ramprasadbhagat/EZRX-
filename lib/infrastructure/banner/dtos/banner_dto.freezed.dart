@@ -40,6 +40,10 @@ mixin _$BannerDto {
   int get serial => throw _privateConstructorUsedError;
   @JsonKey(name: 'isCustomer')
   bool get isCustomer => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isKeyword', defaultValue: false)
+  bool get isKeyword => throw _privateConstructorUsedError;
+  @JsonKey(name: 'keyword', defaultValue: '')
+  String get keyword => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -61,7 +65,9 @@ abstract class $BannerDtoCopyWith<$Res> {
       @JsonKey(name: 'isPreSalesOrg') bool isPreSalesOrg,
       @JsonKey(name: 'salesOrg') String salesOrg,
       @JsonKey(name: 'serial') int serial,
-      @JsonKey(name: 'isCustomer') bool isCustomer});
+      @JsonKey(name: 'isCustomer') bool isCustomer,
+      @JsonKey(name: 'isKeyword', defaultValue: false) bool isKeyword,
+      @JsonKey(name: 'keyword', defaultValue: '') String keyword});
 }
 
 /// @nodoc
@@ -84,6 +90,8 @@ class _$BannerDtoCopyWithImpl<$Res> implements $BannerDtoCopyWith<$Res> {
     Object? salesOrg = freezed,
     Object? serial = freezed,
     Object? isCustomer = freezed,
+    Object? isKeyword = freezed,
+    Object? keyword = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -126,6 +134,14 @@ class _$BannerDtoCopyWithImpl<$Res> implements $BannerDtoCopyWith<$Res> {
           ? _value.isCustomer
           : isCustomer // ignore: cast_nullable_to_non_nullable
               as bool,
+      isKeyword: isKeyword == freezed
+          ? _value.isKeyword
+          : isKeyword // ignore: cast_nullable_to_non_nullable
+              as bool,
+      keyword: keyword == freezed
+          ? _value.keyword
+          : keyword // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -146,7 +162,9 @@ abstract class _$$_BannerDtoCopyWith<$Res> implements $BannerDtoCopyWith<$Res> {
       @JsonKey(name: 'isPreSalesOrg') bool isPreSalesOrg,
       @JsonKey(name: 'salesOrg') String salesOrg,
       @JsonKey(name: 'serial') int serial,
-      @JsonKey(name: 'isCustomer') bool isCustomer});
+      @JsonKey(name: 'isCustomer') bool isCustomer,
+      @JsonKey(name: 'isKeyword', defaultValue: false) bool isKeyword,
+      @JsonKey(name: 'keyword', defaultValue: '') String keyword});
 }
 
 /// @nodoc
@@ -171,6 +189,8 @@ class __$$_BannerDtoCopyWithImpl<$Res> extends _$BannerDtoCopyWithImpl<$Res>
     Object? salesOrg = freezed,
     Object? serial = freezed,
     Object? isCustomer = freezed,
+    Object? isKeyword = freezed,
+    Object? keyword = freezed,
   }) {
     return _then(_$_BannerDto(
       id: id == freezed
@@ -213,6 +233,14 @@ class __$$_BannerDtoCopyWithImpl<$Res> extends _$BannerDtoCopyWithImpl<$Res>
           ? _value.isCustomer
           : isCustomer // ignore: cast_nullable_to_non_nullable
               as bool,
+      isKeyword: isKeyword == freezed
+          ? _value.isKeyword
+          : isKeyword // ignore: cast_nullable_to_non_nullable
+              as bool,
+      keyword: keyword == freezed
+          ? _value.keyword
+          : keyword // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -230,7 +258,9 @@ class _$_BannerDto extends _BannerDto {
       @JsonKey(name: 'isPreSalesOrg') required this.isPreSalesOrg,
       @JsonKey(name: 'salesOrg') required this.salesOrg,
       @JsonKey(name: 'serial') required this.serial,
-      @JsonKey(name: 'isCustomer') required this.isCustomer})
+      @JsonKey(name: 'isCustomer') required this.isCustomer,
+      @JsonKey(name: 'isKeyword', defaultValue: false) required this.isKeyword,
+      @JsonKey(name: 'keyword', defaultValue: '') required this.keyword})
       : super._();
 
   factory _$_BannerDto.fromJson(Map<String, dynamic> json) =>
@@ -266,10 +296,16 @@ class _$_BannerDto extends _BannerDto {
   @override
   @JsonKey(name: 'isCustomer')
   final bool isCustomer;
+  @override
+  @JsonKey(name: 'isKeyword', defaultValue: false)
+  final bool isKeyword;
+  @override
+  @JsonKey(name: 'keyword', defaultValue: '')
+  final String keyword;
 
   @override
   String toString() {
-    return 'BannerDto(id: $id, url: $url, title: $title, description: $description, buttonLabel: $buttonLabel, urlLink: $urlLink, isPreSalesOrg: $isPreSalesOrg, salesOrg: $salesOrg, serial: $serial, isCustomer: $isCustomer)';
+    return 'BannerDto(id: $id, url: $url, title: $title, description: $description, buttonLabel: $buttonLabel, urlLink: $urlLink, isPreSalesOrg: $isPreSalesOrg, salesOrg: $salesOrg, serial: $serial, isCustomer: $isCustomer, isKeyword: $isKeyword, keyword: $keyword)';
   }
 
   @override
@@ -290,7 +326,9 @@ class _$_BannerDto extends _BannerDto {
             const DeepCollectionEquality().equals(other.salesOrg, salesOrg) &&
             const DeepCollectionEquality().equals(other.serial, serial) &&
             const DeepCollectionEquality()
-                .equals(other.isCustomer, isCustomer));
+                .equals(other.isCustomer, isCustomer) &&
+            const DeepCollectionEquality().equals(other.isKeyword, isKeyword) &&
+            const DeepCollectionEquality().equals(other.keyword, keyword));
   }
 
   @JsonKey(ignore: true)
@@ -306,7 +344,9 @@ class _$_BannerDto extends _BannerDto {
       const DeepCollectionEquality().hash(isPreSalesOrg),
       const DeepCollectionEquality().hash(salesOrg),
       const DeepCollectionEquality().hash(serial),
-      const DeepCollectionEquality().hash(isCustomer));
+      const DeepCollectionEquality().hash(isCustomer),
+      const DeepCollectionEquality().hash(isKeyword),
+      const DeepCollectionEquality().hash(keyword));
 
   @JsonKey(ignore: true)
   @override
@@ -323,17 +363,30 @@ class _$_BannerDto extends _BannerDto {
 
 abstract class _BannerDto extends BannerDto {
   const factory _BannerDto(
-          {@JsonKey(name: 'id') required final int id,
-          @JsonKey(name: 'url') required final String url,
-          @JsonKey(name: 'title') required final String title,
-          @JsonKey(name: 'description') required final String description,
-          @JsonKey(name: 'buttonLabel') required final String buttonLabel,
-          @JsonKey(name: 'urlLink') required final String urlLink,
-          @JsonKey(name: 'isPreSalesOrg') required final bool isPreSalesOrg,
-          @JsonKey(name: 'salesOrg') required final String salesOrg,
-          @JsonKey(name: 'serial') required final int serial,
-          @JsonKey(name: 'isCustomer') required final bool isCustomer}) =
-      _$_BannerDto;
+      {@JsonKey(name: 'id')
+          required final int id,
+      @JsonKey(name: 'url')
+          required final String url,
+      @JsonKey(name: 'title')
+          required final String title,
+      @JsonKey(name: 'description')
+          required final String description,
+      @JsonKey(name: 'buttonLabel')
+          required final String buttonLabel,
+      @JsonKey(name: 'urlLink')
+          required final String urlLink,
+      @JsonKey(name: 'isPreSalesOrg')
+          required final bool isPreSalesOrg,
+      @JsonKey(name: 'salesOrg')
+          required final String salesOrg,
+      @JsonKey(name: 'serial')
+          required final int serial,
+      @JsonKey(name: 'isCustomer')
+          required final bool isCustomer,
+      @JsonKey(name: 'isKeyword', defaultValue: false)
+          required final bool isKeyword,
+      @JsonKey(name: 'keyword', defaultValue: '')
+          required final String keyword}) = _$_BannerDto;
   const _BannerDto._() : super._();
 
   factory _BannerDto.fromJson(Map<String, dynamic> json) =
@@ -369,6 +422,12 @@ abstract class _BannerDto extends BannerDto {
   @override
   @JsonKey(name: 'isCustomer')
   bool get isCustomer;
+  @override
+  @JsonKey(name: 'isKeyword', defaultValue: false)
+  bool get isKeyword;
+  @override
+  @JsonKey(name: 'keyword', defaultValue: '')
+  String get keyword;
   @override
   @JsonKey(ignore: true)
   _$$_BannerDtoCopyWith<_$_BannerDto> get copyWith =>

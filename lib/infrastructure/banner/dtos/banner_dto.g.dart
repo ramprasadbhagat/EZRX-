@@ -17,6 +17,8 @@ _$_BannerDto _$$_BannerDtoFromJson(Map<String, dynamic> json) => _$_BannerDto(
       salesOrg: json['salesOrg'] as String,
       serial: json['serial'] as int,
       isCustomer: json['isCustomer'] as bool,
+      isKeyword: json['isKeyword'] as bool? ?? false,
+      keyword: json['keyword'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_BannerDtoToJson(_$_BannerDto instance) =>
@@ -31,4 +33,6 @@ Map<String, dynamic> _$$_BannerDtoToJson(_$_BannerDto instance) =>
       'salesOrg': instance.salesOrg,
       'serial': instance.serial,
       'isCustomer': instance.isCustomer,
+      'isKeyword': instance.isKeyword,
+      'keyword': instance.keyword,
     };

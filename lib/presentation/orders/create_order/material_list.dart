@@ -23,10 +23,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MaterialListPage extends StatelessWidget {
   final Function addToCart;
-  const MaterialListPage({
-    Key? key,
-    required this.addToCart,
-  }) : super(key: key);
+  const MaterialListPage({Key? key, required this.addToCart}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +108,10 @@ class _BodyContent extends StatelessWidget {
                           .customerCodeInfo,
                       shipToInfo:
                           context.read<ShipToCodeBloc>().state.shipToInfo,
-                          selectedMaterialFilter: context.read<MaterialFilterBloc>().state.selectedMaterialFilter,
+                      selectedMaterialFilter: context
+                          .read<MaterialFilterBloc>()
+                          .state
+                          .selectedMaterialFilter,
                     ),
                   ),
               onLoadingMore: () => context.read<MaterialListBloc>().add(
@@ -126,7 +126,10 @@ class _BodyContent extends StatelessWidget {
                           .customerCodeInfo,
                       shipToInfo:
                           context.read<ShipToCodeBloc>().state.shipToInfo,
-                      selectedMaterialFilter: context.read<MaterialFilterBloc>().state.selectedMaterialFilter,
+                      selectedMaterialFilter: context
+                          .read<MaterialFilterBloc>()
+                          .state
+                          .selectedMaterialFilter,
                     ),
                   ),
               isLoading: materialListState.isFetching,
@@ -357,7 +360,7 @@ class _SearchBarState extends State<_SearchBar> {
               enabled: !state.isFetching,
               onChanged: (value) {
                 context.read<MaterialListBloc>().add(
-                      MaterialListEvent.updateSearchKey(value),
+                      MaterialListEvent.updateSearchKey(searchKey: value),
                     );
               },
               onFieldSubmitted: (value) {
@@ -394,7 +397,9 @@ class _SearchBarState extends State<_SearchBar> {
                   icon: const Icon(Icons.clear),
                   onPressed: () {
                     context.read<MaterialListBloc>().add(
-                          const MaterialListEvent.updateSearchKey(''),
+                          const MaterialListEvent.updateSearchKey(
+                            searchKey: '',
+                          ),
                         );
                     // fetch code goes here
                   },

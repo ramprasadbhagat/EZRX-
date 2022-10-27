@@ -34,8 +34,13 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
   ) async {
     await event.map(
       initialized: (e) async => emit(MaterialListState.initial()),
-      updateSearchKey: (e) async =>
-          emit(state.copyWith(searchKey: SearchKey.search(e.searchKey))),
+      updateSearchKey: (e) async {
+        emit(
+          state.copyWith(
+            searchKey: SearchKey.search(e.searchKey),
+          ),
+        );
+      },
       fetch: (e) async {
         // if (state.isFetching) return;
         emit(

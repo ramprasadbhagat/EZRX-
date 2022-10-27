@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dio/dio.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/config.dart' as c;
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
@@ -8,6 +9,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 // aware issue :
@@ -37,23 +39,22 @@ class BannerTile extends StatelessWidget {
           builder: (context, image) {
             return image.data != null
                 ? GestureDetector(
-                    onTap: banner.urlLink.isEmpty
-                        ? null
-                        : () {
-                            // await countlyService.addCountlyEvent('carousel_banner_clicked',
-                            //   segmentation: {
-                            //   'banner_id': banner.id,
-                            //   'landingPage':banner.urlLink,
-                            //   'selectedSalesOrg':preferenceData.getUserSalesOrg,
-                            //   'selectedCustomerCode':preferenceData.getUserCustomerCode,
-                            //   'selectedShipToAddress':preferenceData.getShipToCode,
-                            //   'userRole':preferenceData.getUserRoleType,
-                            //   },
-                            // );
-                            context.router.push(
-                              WebViewPageRoute(url: banner.urlLink),
+                    onTap: () async {
+                      if (banner.isKeyword && banner.keyword != '') {
+                        context.read<MaterialListBloc>().add(
+                              MaterialListEvent.updateSearchKey(
+                                searchKey: banner.keyword,
+                              ),
                             );
-                          },
+                        await context.router.pushNamed('material_list_page');
+                      } else if (banner.urlLink.isNotEmpty) {
+                        await context.router.push(
+                          WebViewPageRoute(
+                            url: banner.urlLink,
+                          ),
+                        );
+                      }
+                    },
                     child: Image.memory(
                       (image.data as Uint8List),
                       fit: BoxFit.fitWidth,
