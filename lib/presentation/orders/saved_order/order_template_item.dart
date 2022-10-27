@@ -1,17 +1,20 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
+import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/order/valid_customer_material/valid_customer_material_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item.dart';
+import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class OrderTemplateItem extends StatelessWidget {
   const OrderTemplateItem({
@@ -108,9 +111,7 @@ class OrderTemplateItem extends StatelessWidget {
             title: Container(
               margin: const EdgeInsets.only(bottom: 5),
               child: Padding(
-                padding: const EdgeInsets.all(
-                  10.0,
-                ),
+                padding: const EdgeInsets.all(5),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -184,7 +185,7 @@ class OrderTemplateItem extends StatelessWidget {
                 ),
               ),
             ),
-            childrenPadding: const EdgeInsets.only(left: 25),
+            childrenPadding: const EdgeInsets.only(left: 20, bottom: 15),
             children: [
               BlocBuilder<ValidCustomerMaterialBloc,
                   ValidCustomerMaterialState>(
@@ -314,17 +315,62 @@ class OrderTemplateItem extends StatelessWidget {
                           );
                         },
                       ).toList(),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.all(double.minPositive),
-                          textStyle: const TextStyle(
-                            fontSize: 12,
+                      Row(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              //TODO: Implement Add to cart
+                            },
+                            child: const Text('Add to Cart').tr(),
                           ),
-                        ),
-                        onPressed: () {
-                          //TODO: Implement Add to cart
-                        },
-                        child: const Text('Add to Cart').tr(),
+                          const SizedBox(width: 10),
+                          ElevatedButton(
+                            onPressed: () {
+                              showPlatformDialog(
+                                context: context,
+                                barrierDismissible: true,
+                                builder: (context) => PlatformAlertDialog(
+                                  title: const Text('Info').tr(),
+                                  content: SingleChildScrollView(
+                                    child: ListBody(
+                                      children: <Widget>[
+                                        const Text(
+                                          'This action will delete the item from your saved orders.',
+                                        ).tr(),
+                                        const Text('Do you want to proceed?')
+                                            .tr(),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: [
+                                    PlatformDialogAction(
+                                      child: const Text('Cancel').tr(),
+                                      onPressed: () {
+                                        context.router.pop();
+                                      },
+                                    ),
+                                    PlatformDialogAction(
+                                      child: const Text('Confirm').tr(),
+                                      onPressed: () {
+                                        context.router.pop();
+                                        context.read<SavedOrderListBloc>().add(
+                                              SavedOrderListEvent.delete(
+                                                order: order,
+                                                user: context
+                                                    .read<UserBloc>()
+                                                    .state
+                                                    .user,
+                                              ),
+                                            );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                            child: const Text('Delete').tr(),
+                          ),
+                        ],
                       ),
                     ],
                   );
@@ -339,7 +385,7 @@ class OrderTemplateItem extends StatelessWidget {
 
   Future<void> invalidItemAlert(
     BuildContext context,
-    List<String> allInValidMaterail,
+    List<String> allInValidMaterial,
   ) async {
     return showDialog<void>(
       context: context,
@@ -357,9 +403,9 @@ class OrderTemplateItem extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: List.generate(
-                    allInValidMaterail.length,
+                    allInValidMaterial.length,
                     (index) => Text(
-                      allInValidMaterail.elementAt(index).substring(10),
+                      allInValidMaterial.elementAt(index).substring(10),
                       style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w600,
@@ -388,6 +434,7 @@ class OrderTemplateItem extends StatelessWidget {
 class _MaterialItemInfo extends StatelessWidget {
   final String title;
   final Widget info;
+
   const _MaterialItemInfo({
     Key? key,
     required this.title,

@@ -31,6 +31,7 @@ mixin _$SavedOrderListEvent {
             CustomerCodeInfo selectedCustomerCode,
             ShipToInfo selectedShipTo)
         loadMore,
+    required TResult Function(SavedOrder order, User user) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -42,6 +43,7 @@ mixin _$SavedOrderListEvent {
     TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         loadMore,
+    TResult Function(SavedOrder order, User user)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -53,6 +55,7 @@ mixin _$SavedOrderListEvent {
     TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         loadMore,
+    TResult Function(SavedOrder order, User user)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,6 +64,7 @@ mixin _$SavedOrderListEvent {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_Delete value) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -68,6 +72,7 @@ mixin _$SavedOrderListEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_Delete value)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +80,7 @@ mixin _$SavedOrderListEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -151,6 +157,7 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo selectedCustomerCode,
             ShipToInfo selectedShipTo)
         loadMore,
+    required TResult Function(SavedOrder order, User user) delete,
   }) {
     return initialized();
   }
@@ -165,6 +172,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         loadMore,
+    TResult Function(SavedOrder order, User user)? delete,
   }) {
     return initialized?.call();
   }
@@ -179,6 +187,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         loadMore,
+    TResult Function(SavedOrder order, User user)? delete,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -193,6 +202,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_Delete value) delete,
   }) {
     return initialized(this);
   }
@@ -203,6 +213,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_Delete value)? delete,
   }) {
     return initialized?.call(this);
   }
@@ -213,6 +224,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -376,6 +388,7 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo selectedCustomerCode,
             ShipToInfo selectedShipTo)
         loadMore,
+    required TResult Function(SavedOrder order, User user) delete,
   }) {
     return fetch(userInfo, selectedSalesOrganisation, selectedCustomerCode,
         selectedShipTo);
@@ -391,6 +404,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         loadMore,
+    TResult Function(SavedOrder order, User user)? delete,
   }) {
     return fetch?.call(userInfo, selectedSalesOrganisation,
         selectedCustomerCode, selectedShipTo);
@@ -406,6 +420,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         loadMore,
+    TResult Function(SavedOrder order, User user)? delete,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -421,6 +436,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_Delete value) delete,
   }) {
     return fetch(this);
   }
@@ -431,6 +447,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_Delete value)? delete,
   }) {
     return fetch?.call(this);
   }
@@ -441,6 +458,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -618,6 +636,7 @@ class _$_LoadMore implements _LoadMore {
             CustomerCodeInfo selectedCustomerCode,
             ShipToInfo selectedShipTo)
         loadMore,
+    required TResult Function(SavedOrder order, User user) delete,
   }) {
     return loadMore(userInfo, selectedSalesOrganisation, selectedCustomerCode,
         selectedShipTo);
@@ -633,6 +652,7 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         loadMore,
+    TResult Function(SavedOrder order, User user)? delete,
   }) {
     return loadMore?.call(userInfo, selectedSalesOrganisation,
         selectedCustomerCode, selectedShipTo);
@@ -648,6 +668,7 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         loadMore,
+    TResult Function(SavedOrder order, User user)? delete,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -663,6 +684,7 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_Delete value) delete,
   }) {
     return loadMore(this);
   }
@@ -673,6 +695,7 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_Delete value)? delete,
   }) {
     return loadMore?.call(this);
   }
@@ -683,6 +706,7 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -705,6 +729,197 @@ abstract class _LoadMore implements SavedOrderListEvent {
   ShipToInfo get selectedShipTo;
   @JsonKey(ignore: true)
   _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_DeleteCopyWith<$Res> {
+  factory _$$_DeleteCopyWith(_$_Delete value, $Res Function(_$_Delete) then) =
+      __$$_DeleteCopyWithImpl<$Res>;
+  $Res call({SavedOrder order, User user});
+
+  $SavedOrderCopyWith<$Res> get order;
+  $UserCopyWith<$Res> get user;
+}
+
+/// @nodoc
+class __$$_DeleteCopyWithImpl<$Res>
+    extends _$SavedOrderListEventCopyWithImpl<$Res>
+    implements _$$_DeleteCopyWith<$Res> {
+  __$$_DeleteCopyWithImpl(_$_Delete _value, $Res Function(_$_Delete) _then)
+      : super(_value, (v) => _then(v as _$_Delete));
+
+  @override
+  _$_Delete get _value => super._value as _$_Delete;
+
+  @override
+  $Res call({
+    Object? order = freezed,
+    Object? user = freezed,
+  }) {
+    return _then(_$_Delete(
+      order: order == freezed
+          ? _value.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as SavedOrder,
+      user: user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+    ));
+  }
+
+  @override
+  $SavedOrderCopyWith<$Res> get order {
+    return $SavedOrderCopyWith<$Res>(_value.order, (value) {
+      return _then(_value.copyWith(order: value));
+    });
+  }
+
+  @override
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_Delete implements _Delete {
+  const _$_Delete({required this.order, required this.user});
+
+  @override
+  final SavedOrder order;
+  @override
+  final User user;
+
+  @override
+  String toString() {
+    return 'SavedOrderListEvent.delete(order: $order, user: $user)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Delete &&
+            const DeepCollectionEquality().equals(other.order, order) &&
+            const DeepCollectionEquality().equals(other.user, user));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(order),
+      const DeepCollectionEquality().hash(user));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_DeleteCopyWith<_$_Delete> get copyWith =>
+      __$$_DeleteCopyWithImpl<_$_Delete>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)
+        fetch,
+    required TResult Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)
+        loadMore,
+    required TResult Function(SavedOrder order, User user) delete,
+  }) {
+    return delete(order, user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        fetch,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        loadMore,
+    TResult Function(SavedOrder order, User user)? delete,
+  }) {
+    return delete?.call(order, user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        fetch,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        loadMore,
+    TResult Function(SavedOrder order, User user)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(order, user);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return delete(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_Delete value)? delete,
+  }) {
+    return delete?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Delete implements SavedOrderListEvent {
+  const factory _Delete(
+      {required final SavedOrder order, required final User user}) = _$_Delete;
+
+  SavedOrder get order;
+  User get user;
+  @JsonKey(ignore: true)
+  _$$_DeleteCopyWith<_$_Delete> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_basic_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_item_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'order_history_dto.freezed.dart';
 part 'order_history_dto.g.dart';
 

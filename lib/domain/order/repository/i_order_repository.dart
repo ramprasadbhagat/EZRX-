@@ -3,7 +3,6 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
-
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 
@@ -15,5 +14,10 @@ abstract class IOrderRepository {
     required ShipToInfo shipToCode,
     required int pageSize,
     required int offset,
+  });
+
+  Future<Either<ApiFailure, List<SavedOrder>>> deleteSavedOrder({
+    required SavedOrder orderItem,
+    required List<SavedOrder> ordersList,
   });
 }

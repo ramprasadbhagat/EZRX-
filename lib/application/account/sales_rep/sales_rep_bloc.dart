@@ -8,9 +8,9 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'sales_rep_bloc.freezed.dart';
 part 'sales_rep_event.dart';
 part 'sales_rep_state.dart';
-part 'sales_rep_bloc.freezed.dart';
 
 class SalesRepBloc extends Bloc<SalesRepEvent, SalesRepState> {
   final ISalesRepRepository salesRepRepository;

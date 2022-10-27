@@ -12,10 +12,9 @@ import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/presentation/core/cart_button.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/orders/saved_order/order_template_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ezrxmobile/presentation/orders/saved_order/order_template_item.dart';
 
 class SavedOrderListPage extends StatefulWidget {
   const SavedOrderListPage({Key? key}) : super(key: key);

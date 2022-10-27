@@ -1,9 +1,7 @@
 import 'dart:convert';
 
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
-
 import 'package:ezrxmobile/infrastructure/order/dtos/material_price_detail_dto.dart';
-
 import 'package:flutter/services.dart';
 
 class MaterialPriceDetailLocalDataSource {

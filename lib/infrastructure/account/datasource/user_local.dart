@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:ezrxmobile/domain/account/entities/setting_aup.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/user_dto.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/dtos/setting_aup_dto.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/dtos/setting_tc_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
-import 'package:ezrxmobile/infrastructure/account/dtos/user_dto.dart';
 import 'package:flutter/services.dart';
 
 class UserLocalDataSource {

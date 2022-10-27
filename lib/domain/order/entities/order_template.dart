@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'order_template.freezed.dart';
 
 @freezed

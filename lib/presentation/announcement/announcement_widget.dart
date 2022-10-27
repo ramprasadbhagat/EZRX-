@@ -1,8 +1,7 @@
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
 class AnnouncementWidget extends StatelessWidget {

@@ -1,13 +1,13 @@
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_auth_repository.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'proxy_login_form_bloc.freezed.dart';
 part 'proxy_login_form_event.dart';
 part 'proxy_login_form_state.dart';
-part 'proxy_login_form_bloc.freezed.dart';
 
 class ProxyLoginFormBloc
     extends Bloc<ProxyLoginFormEvent, ProxyLoginFormState> {

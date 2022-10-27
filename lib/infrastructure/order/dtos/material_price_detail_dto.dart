@@ -1,7 +1,7 @@
+import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/customer_material_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 
 part 'material_price_detail_dto.freezed.dart';
 part 'material_price_detail_dto.g.dart';

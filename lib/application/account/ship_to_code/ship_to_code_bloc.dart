@@ -5,9 +5,9 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'ship_to_code_bloc.freezed.dart';
 part 'ship_to_code_event.dart';
 part 'ship_to_code_state.dart';
-part 'ship_to_code_bloc.freezed.dart';
 
 class ShipToCodeBloc extends Bloc<ShipToCodeEvent, ShipToCodeState> {
   ShipToCodeBloc() : super(ShipToCodeState.initial()) {

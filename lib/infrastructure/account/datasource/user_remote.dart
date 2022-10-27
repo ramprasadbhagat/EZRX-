@@ -7,11 +7,11 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/error/user_exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/user_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/user_dto.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/dtos/setting_aup_dto.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/dtos/setting_tc_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/user_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/account/dtos/user_dto.dart';
 
 class UserRemoteDataSource {
   HttpService httpService;

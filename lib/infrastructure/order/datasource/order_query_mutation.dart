@@ -18,4 +18,17 @@ class OrderQueryMutation {
       }
    ''';
   }
+
+  String deleteSavedOrder() {
+    return '''
+      mutation deleteDraftOrder(\$input: DeleteDraftOrderInput!){
+        deleteDraftOrder (input :  \$input) {
+        draftOrder {
+          id
+          __typename
+        }
+        }
+    }
+    ''';
+  }
 }

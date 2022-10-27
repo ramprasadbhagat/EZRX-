@@ -8,9 +8,9 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/change_password_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/change_password_repository.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:flutter/material.dart';
 
 class MockResetPassword extends Mock implements ChangePasswordRepository {}
 

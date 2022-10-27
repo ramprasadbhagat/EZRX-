@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:dartz/dartz.dart';
 
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
@@ -11,9 +11,9 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'customer_code_bloc.freezed.dart';
 part 'customer_code_event.dart';
 part 'customer_code_state.dart';
-part 'customer_code_bloc.freezed.dart';
 
 const int _pageSize = 10;
 

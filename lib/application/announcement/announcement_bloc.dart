@@ -5,9 +5,9 @@ import 'package:ezrxmobile/domain/announcement/repository/i_announcement_reposit
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'announcement_bloc.freezed.dart';
 part 'announcement_event.dart';
 part 'announcement_state.dart';
-part 'announcement_bloc.freezed.dart';
 
 class AnnouncementBloc extends Bloc<AnnouncementEvent, AnnouncementState> {
   final IAnnouncementRepository announcementRepository;

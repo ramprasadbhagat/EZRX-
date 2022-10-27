@@ -9,9 +9,9 @@ import 'package:ezrxmobile/domain/order/repository/i_material_price_detail_repos
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'material_price_detail_bloc.freezed.dart';
 part 'material_price_detail_event.dart';
 part 'material_price_detail_state.dart';
-part 'material_price_detail_bloc.freezed.dart';
 
 class MaterialPriceDetailBloc
     extends Bloc<MaterialPriceDetailEvent, MaterialPriceDetailState> {

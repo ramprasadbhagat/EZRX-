@@ -1,18 +1,17 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
-
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/repository/i_sales_org_repository.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'sales_org_bloc.freezed.dart';
 part 'sales_org_event.dart';
 part 'sales_org_state.dart';
-part 'sales_org_bloc.freezed.dart';
 
 class SalesOrgBloc extends Bloc<SalesOrgEvent, SalesOrgState> {
   final ISalesOrgRepository salesOrgRepository;

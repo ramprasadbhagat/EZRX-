@@ -1,8 +1,6 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
-
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'saved_order.freezed.dart';
 

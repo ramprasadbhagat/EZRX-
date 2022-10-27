@@ -60,4 +60,35 @@ class OrderRepository implements IOrderRepository {
       return Left(FailureHandler.handleFailure(e));
     }
   }
+
+  @override
+  Future<Either<ApiFailure, List<SavedOrder>>> deleteSavedOrder({
+    required SavedOrder orderItem,
+    required List<SavedOrder> ordersList,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final newOrdersList = List<SavedOrder>.from(ordersList)
+          ..removeWhere((element) => element.id == orderItem.id);
+
+        return Right(newOrdersList);
+      } catch (e) {
+        return Left(
+          FailureHandler.handleFailure(e),
+        );
+      }
+    }
+    try {
+      final deletedOrderItem =
+      await remoteDataSource.deleteSavedOrder(itemId: orderItem.id);
+      final newOrdersList = List<SavedOrder>.from(ordersList)
+        ..removeWhere((element) => element.id == deletedOrderItem.id);
+
+      return Right(newOrdersList);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
+    }
+  }
 }

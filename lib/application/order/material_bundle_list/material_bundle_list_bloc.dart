@@ -12,9 +12,9 @@ import 'package:ezrxmobile/domain/order/repository/i_material_bundle_list_reposi
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'material_bundle_list_bloc.freezed.dart';
 part 'material_bundle_list_event.dart';
 part 'material_bundle_list_state.dart';
-part 'material_bundle_list_bloc.freezed.dart';
 
 const int _pageSize = 10;
 

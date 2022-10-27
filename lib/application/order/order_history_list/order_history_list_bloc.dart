@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -11,9 +12,10 @@ import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_history_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'order_history_list_bloc.freezed.dart';
 part 'order_history_list_event.dart';
 part 'order_history_list_state.dart';
-part 'order_history_list_bloc.freezed.dart';
 
 const int _pageSize = 10;
 

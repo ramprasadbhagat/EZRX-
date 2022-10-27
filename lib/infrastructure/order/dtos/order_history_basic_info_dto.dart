@@ -1,6 +1,7 @@
+import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
+
 part 'order_history_basic_info_dto.freezed.dart';
 part 'order_history_basic_info_dto.g.dart';
 

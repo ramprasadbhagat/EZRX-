@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:ezrxmobile/presentation/core/no_record.dart';
-
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 

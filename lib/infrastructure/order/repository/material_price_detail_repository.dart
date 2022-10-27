@@ -9,7 +9,6 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_price_detail_repository.dart';
-
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_remote.dart';
 

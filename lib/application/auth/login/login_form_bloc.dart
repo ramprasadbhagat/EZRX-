@@ -5,9 +5,9 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'login_form_bloc.freezed.dart';
 part 'login_form_event.dart';
 part 'login_form_state.dart';
-part 'login_form_bloc.freezed.dart';
 
 class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
   final IAuthRepository authRepository;

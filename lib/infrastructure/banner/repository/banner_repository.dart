@@ -1,9 +1,9 @@
 import 'dart:async';
 
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
-import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/banner/repository/i_banner_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';

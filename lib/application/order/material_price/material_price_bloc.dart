@@ -4,13 +4,12 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_price_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'material_price_bloc.freezed.dart';
 part 'material_price_event.dart';
 part 'material_price_state.dart';
-part 'material_price_bloc.freezed.dart';
 
 class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
   final IMaterialPriceRepository repository;

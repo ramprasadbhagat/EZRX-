@@ -12,9 +12,9 @@ import 'package:ezrxmobile/domain/order/repository/i_additional_bonus_repository
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'bonus_material_bloc.freezed.dart';
 part 'bonus_material_event.dart';
 part 'bonus_material_state.dart';
-part 'bonus_material_bloc.freezed.dart';
 
 class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
   final IBonusMaterialRepository bonusMaterialRepository;

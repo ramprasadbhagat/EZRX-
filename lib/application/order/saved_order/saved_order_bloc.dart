@@ -5,15 +5,15 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
+part 'saved_order_bloc.freezed.dart';
 part 'saved_order_event.dart';
 part 'saved_order_state.dart';
-part 'saved_order_bloc.freezed.dart';
 
 const int _defaultPageSize = 10;
 
@@ -109,6 +109,36 @@ class SavedOrderListBloc
                 isFetching: false,
                 canLoadMore: savedOrders.length >= _defaultPageSize,
                 nextPageIndex: state.nextPageIndex + 1,
+              ),
+            );
+          },
+        );
+      },
+      delete: (e) async {
+        emit(state.copyWith(
+          apiFailureOrSuccessOption: none(),
+          isFetching: true,
+        ));
+
+        final failureOrSuccess = await repository.deleteSavedOrder(
+          orderItem: e.order,
+          ordersList: state.savedOrders,
+        );
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (savedOrders) {
+            emit(
+              state.copyWith(
+                savedOrders: savedOrders,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
               ),
             );
           },

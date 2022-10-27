@@ -4,7 +4,6 @@ import 'package:ezrxmobile/infrastructure/order/dtos/price_bonus_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_bundle_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_rule_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_tier_dto.dart';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'price_dto.freezed.dart';

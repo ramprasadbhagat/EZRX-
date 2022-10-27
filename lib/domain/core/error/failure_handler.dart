@@ -3,11 +3,9 @@ import 'dart:io';
 
 import 'package:ezrxmobile/domain/account/error/user_exception.dart';
 import 'package:ezrxmobile/domain/auth/error/auth_exception.dart';
-
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:flutter/services.dart';
-
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
 class FailureHandler {
   static ApiFailure handleFailure(Object error) {

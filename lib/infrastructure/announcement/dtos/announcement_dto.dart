@@ -1,6 +1,5 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-
 import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'announcement_dto.freezed.dart';
 part 'announcement_dto.g.dart';

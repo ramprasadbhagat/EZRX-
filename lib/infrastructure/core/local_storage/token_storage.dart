@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/secure_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 
 class TokenStorage {
   static const _boxName = 'ezrx_token_box';

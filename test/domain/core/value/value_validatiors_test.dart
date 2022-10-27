@@ -8,8 +8,8 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('validateMaxStringLength', () {

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/presentation/account/account_tab.dart';
+import 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
 import 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart';
 import 'package:ezrxmobile/presentation/account/customer_search.dart';
 import 'package:ezrxmobile/presentation/account/notification_settings/notification_settings_page.dart';
@@ -9,16 +10,15 @@ import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
 import 'package:ezrxmobile/presentation/auth/login_page.dart';
 import 'package:ezrxmobile/presentation/auth/proxy_login_page.dart';
 import 'package:ezrxmobile/presentation/core/webview_page.dart';
-import 'package:ezrxmobile/presentation/favourites/favourite_tab.dart';
 import 'package:ezrxmobile/presentation/create_order/material_root.dart';
+import 'package:ezrxmobile/presentation/favourites/favourite_tab.dart';
 import 'package:ezrxmobile/presentation/history/history_tab.dart';
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:ezrxmobile/presentation/home_tab.dart';
-import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_list_page.dart';
 import 'package:ezrxmobile/presentation/order/order_template/order_template_detail_page.dart';
 import 'package:ezrxmobile/presentation/order/order_template/order_template_list_page.dart';
+import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_list_page.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
-import 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route,Tab',

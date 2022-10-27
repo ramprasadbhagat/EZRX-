@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
-import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/announcement/repository/i_announcement_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';

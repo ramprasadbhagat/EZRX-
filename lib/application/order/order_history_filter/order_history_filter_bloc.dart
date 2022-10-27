@@ -1,12 +1,12 @@
+import 'package:ezrxmobile/domain/order/entities/order_history.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 
+part 'order_history_filter_bloc.freezed.dart';
 part 'order_history_filter_event.dart';
 part 'order_history_filter_state.dart';
-part 'order_history_filter_bloc.freezed.dart';
 
 class OrderHistoryFilterBloc
     extends Bloc<OrderHistoryFilterEvent, OrderHistoryFilterState> {

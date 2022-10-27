@@ -1,16 +1,16 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/banner/repository/i_banner_repository.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'banner_bloc.freezed.dart';
 part 'banner_event.dart';
 part 'banner_state.dart';
-part 'banner_bloc.freezed.dart';
 
 class BannerBloc extends Bloc<BannerEvent, BannerState> {
   final IBannerRepository bannerRepository;

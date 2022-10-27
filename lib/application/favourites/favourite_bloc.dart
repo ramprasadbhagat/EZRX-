@@ -2,16 +2,15 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/favourites/repository/i_favourite_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-
+part 'favourite_bloc.freezed.dart';
 part 'favourite_event.dart';
 part 'favourite_state.dart';
-part 'favourite_bloc.freezed.dart';
 
 class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
   final IFavouriteRepository favouriteRepository;

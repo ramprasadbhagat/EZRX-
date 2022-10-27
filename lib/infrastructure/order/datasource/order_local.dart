@@ -17,4 +17,14 @@ class OrderLocalDataSource {
         .map((e) => SavedOrderDto.fromJson(e).toDomain())
         .toList();
   }
+
+  Future<SavedOrder> deleteSavedOrder({required SavedOrder item}) async {
+    final data = json.decode(
+      await rootBundle
+          .loadString('assets/json/deleteSavedOrderTemplateResponse.json'),
+    );
+
+    return SavedOrderDto.fromJson(data['data']['deleteDraftOrder']['draftOrder'])
+        .toDomain();
+  }
 }

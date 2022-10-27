@@ -7,18 +7,17 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/presentation/core/cart_button.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/presentation/core/cart_button.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/history/history_filter.dart';
 import 'package:ezrxmobile/presentation/history/history_tile.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
-
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 
 class HistoryTab extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();

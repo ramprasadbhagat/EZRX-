@@ -8,9 +8,9 @@ import 'package:ezrxmobile/domain/order/repository/i_order_template_repository.d
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'order_template_list_bloc.freezed.dart';
 part 'order_template_list_event.dart';
 part 'order_template_list_state.dart';
-part 'order_template_list_bloc.freezed.dart';
 
 class OrderTemplateListBloc
     extends Bloc<OrderTemplateListEvent, OrderTemplateListState> {

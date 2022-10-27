@@ -15,4 +15,8 @@ class SavedOrderListEvent with _$SavedOrderListEvent {
     required CustomerCodeInfo selectedCustomerCode,
     required ShipToInfo selectedShipTo,
   }) = _LoadMore;
+  const factory SavedOrderListEvent.delete({
+    required SavedOrder order,
+    required User user,
+  }) = _Delete;
 }

@@ -2,9 +2,8 @@ import 'dart:convert';
 
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_dto.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'saved_order_dto.freezed.dart';
 part 'saved_order_dto.g.dart';

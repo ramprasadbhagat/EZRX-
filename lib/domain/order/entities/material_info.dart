@@ -1,6 +1,6 @@
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'material_info.freezed.dart';

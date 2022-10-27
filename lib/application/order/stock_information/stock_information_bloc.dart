@@ -7,12 +7,12 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_stock_info_repository.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'stock_information_bloc.freezed.dart';
 part 'stock_information_event.dart';
 part 'stock_information_state.dart';
-part 'stock_information_bloc.freezed.dart';
 
 class StockInformationBloc
     extends Bloc<StockInformationEvent, StockInformationState> {

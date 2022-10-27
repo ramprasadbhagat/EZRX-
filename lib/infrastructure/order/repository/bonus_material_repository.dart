@@ -1,6 +1,7 @@
 import 'dart:async';
-import 'package:ezrxmobile/config.dart';
+
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';

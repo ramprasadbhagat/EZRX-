@@ -1,7 +1,6 @@
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_override.dart';
-
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_bonus_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -34,7 +33,7 @@ class MaterialItemDto with _$MaterialItemDto {
     @JsonKey(name: 'type', defaultValue: '') required String type,
     @JsonKey(name: 'comment', defaultValue: '') required String comment,
     @JsonKey(name: 'batchNumber', defaultValue: '') required String batchNumber,
-    @JsonKey(name: 'zdp8Override', defaultValue: false)
+    @JsonKey(name: 'zdp8Override', defaultValue: false, readValue: boolStringFormatCheck)
         required bool zdp8Override,
     // TODO: correct the overrideInfo
     // @JsonKey(name: 'override') MaterialItemOverrideDto overrideInfo,
@@ -63,3 +62,6 @@ class MaterialItemDto with _$MaterialItemDto {
   factory MaterialItemDto.fromJson(Map<String, dynamic> json) =>
       _$MaterialItemDtoFromJson(json);
 }
+
+bool boolStringFormatCheck(Map json, String key) =>
+    json[key] == '' ? false : json[key];

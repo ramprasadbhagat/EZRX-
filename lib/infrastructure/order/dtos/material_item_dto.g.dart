@@ -25,7 +25,8 @@ _$_MaterialItemDto _$$_MaterialItemDtoFromJson(Map<String, dynamic> json) =>
       type: json['type'] as String? ?? '',
       comment: json['comment'] as String? ?? '',
       batchNumber: json['batchNumber'] as String? ?? '',
-      zdp8Override: json['zdp8Override'] as bool? ?? false,
+      zdp8Override:
+          boolStringFormatCheck(json, 'zdp8Override') as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_MaterialItemDtoToJson(_$_MaterialItemDto instance) =>
