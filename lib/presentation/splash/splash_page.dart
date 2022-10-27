@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -75,6 +76,9 @@ class SplashPage extends StatelessWidget {
                       state.user,
                       context.read<SalesOrgBloc>().state.salesOrg,
                     ),
+                  );
+              context.read<CartBloc>().add(
+                    const CartEvent.initialized(),
                   );
             }
           },

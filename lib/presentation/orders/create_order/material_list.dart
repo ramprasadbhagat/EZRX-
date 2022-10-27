@@ -18,7 +18,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MaterialListPage extends StatelessWidget {
-  const MaterialListPage({Key? key}) : super(key: key);
+  final Function addToCart;
+  const MaterialListPage({
+    Key? key,
+    required this.addToCart,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +58,10 @@ class MaterialListPage extends StatelessWidget {
           return Column(
             children: [
               const _SearchBar(),
-              _BodyContent(materialListState: state),
+              _BodyContent(
+                materialListState: state,
+                addToCart: addToCart,
+              ),
             ],
           );
         },
@@ -65,9 +72,11 @@ class MaterialListPage extends StatelessWidget {
 
 class _BodyContent extends StatelessWidget {
   final MaterialListState materialListState;
+  final Function addToCart;
   const _BodyContent({
     Key? key,
     required this.materialListState,
+    required this.addToCart,
   }) : super(key: key);
 
   @override
@@ -114,8 +123,10 @@ class _BodyContent extends StatelessWidget {
                     ),
                   ),
               isLoading: materialListState.isFetching,
-              itemBuilder: (context, index, item) =>
-                  _ListContent(materialInfo: item),
+              itemBuilder: (context, index, item) => _ListContent(
+                materialInfo: item,
+                addToCart: addToCart,
+              ),
               items: materialListState.materialList,
             ),
     );
@@ -124,7 +135,12 @@ class _BodyContent extends StatelessWidget {
 
 class _ListContent extends StatelessWidget {
   final MaterialInfo materialInfo;
-  const _ListContent({Key? key, required this.materialInfo}) : super(key: key);
+  final Function addToCart;
+  const _ListContent({
+    Key? key,
+    required this.materialInfo,
+    required this.addToCart,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +210,28 @@ class _ListContent extends StatelessWidget {
             ),
           ],
         ),
-        trailing: _FavoriteButton(materialInfo: materialInfo),
+        trailing: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _FavoriteButton(materialInfo: materialInfo),
+            InkWell(
+              child: const SizedBox(
+                height: 20,
+                width: 20,
+                child: Icon(
+                  Icons.add_circle_outlined,
+                  color: ZPColors.primary,
+                ),
+              ),
+              onTap: () {
+                addToCart(
+                  context: context,
+                  materialInfo: materialInfo,
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -218,12 +255,17 @@ class _FavoriteButton extends StatelessWidget {
         );
 
         return favourite == Favourite.empty()
-            ? IconButton(
-                icon: const Icon(
-                  Icons.favorite_border_outlined,
-                  color: ZPColors.secondary,
+            ? InkWell(
+                child: const SizedBox(
+                  height: 15,
+                  width: 15,
+                  child: Icon(
+                    Icons.favorite_border_outlined,
+                    color: ZPColors.secondary,
+                    size: 20,
+                  ),
                 ),
-                onPressed: () => context.read<FavouriteBloc>().add(
+                onTap: () => context.read<FavouriteBloc>().add(
                       FavouriteEvent.add(
                         item: Favourite(
                           id: '',
@@ -237,12 +279,17 @@ class _FavoriteButton extends StatelessWidget {
                       ),
                     ),
               )
-            : IconButton(
-                icon: const Icon(
-                  Icons.favorite,
-                  color: ZPColors.secondary,
+            : InkWell(
+                child: const SizedBox(
+                  height: 15,
+                  width: 15,
+                  child: Icon(
+                    Icons.favorite,
+                    color: ZPColors.secondary,
+                    size: 20,
+                  ),
                 ),
-                onPressed: () => context.read<FavouriteBloc>().add(
+                onTap: () => context.read<FavouriteBloc>().add(
                       FavouriteEvent.delete(
                         item: favourite,
                         user: context.read<UserBloc>().state.user,

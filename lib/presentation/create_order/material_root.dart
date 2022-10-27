@@ -1,7 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/presentation/core/cart_button.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/tab_view.dart';
+import 'package:ezrxmobile/presentation/create_order/add_to_cart.dart';
 import 'package:ezrxmobile/presentation/create_order/material_bundle_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_list.dart';
 import 'package:flutter/material.dart';
@@ -22,9 +25,15 @@ class MaterialRoot extends StatelessWidget {
         final headerText =
             disableBundles ? ['Add Material'] : ['Add Material', 'Add Bundle'];
         final widgetList = disableBundles
-            ? [const MaterialListPage()]
+            ? [
+                MaterialListPage(
+                  addToCart: _showBottomSheet,
+                ),
+              ]
             : [
-                const MaterialListPage(),
+                MaterialListPage(
+                  addToCart: _showBottomSheet,
+                ),
                 const MaterialBundleListPage(),
               ];
 
@@ -41,6 +50,37 @@ class MaterialRoot extends StatelessWidget {
             tabHeaderText: headerText,
             tabWidgets: widgetList,
           ),
+        );
+      },
+    );
+  }
+
+  void _showBottomSheet({
+    required BuildContext context,
+    required MaterialInfo materialInfo,
+  }) {
+    final itemPrice = context
+        .read<MaterialPriceBloc>()
+        .state
+        .materialPrice[materialInfo.materialNumber];
+    final unitPrice = itemPrice != null
+        ? itemPrice.finalPrice.displayWithCurrency(
+            currency: context.read<SalesOrgBloc>().state.configs.currency,
+            hidePrice: materialInfo.hidePrice,
+          )
+        : 'NA';
+    showModalBottomSheet(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(15),
+          topRight: Radius.circular(15),
+        ),
+      ),
+      context: context,
+      builder: (builderContext) {
+        return AddToCart(
+          materialInfo: materialInfo,
+          unitPrice: unitPrice,
         );
       },
     );

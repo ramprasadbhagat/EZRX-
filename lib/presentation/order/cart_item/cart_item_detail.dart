@@ -23,7 +23,7 @@ class CartItemDetail extends StatelessWidget {
             color: const Color.fromARGB(255, 251, 251, 251),
           ),
           key: Key(
-            'materialOption${cartItemInfo.materialNumber}',
+            'materialOption${cartItemInfo.materialInfo.materialNumber}',
           ),
           child: Padding(
             padding: const EdgeInsets.all(10.0),
@@ -39,7 +39,8 @@ class CartItemDetail extends StatelessWidget {
                     ),
                     Expanded(
                       flex: 1,
-                      child: Text(cartItemInfo.materialNumber.displayMatNo),
+                      child: Text(cartItemInfo
+                          .materialInfo.materialNumber.displayMatNo),
                     ),
                   ],
                 ),
@@ -52,7 +53,8 @@ class CartItemDetail extends StatelessWidget {
                     ),
                     Expanded(
                       flex: 1,
-                      child: Text(cartItemInfo.materialDescription),
+                      child:
+                          Text(cartItemInfo.materialInfo.materialDescription),
                     ),
                   ],
                 ),
@@ -65,7 +67,7 @@ class CartItemDetail extends StatelessWidget {
                     ),
                     Expanded(
                       flex: 1,
-                      child: Text(cartItemInfo.materialQuantity.toString()),
+                      child: Text(cartItemInfo.quantity.toString()),
                     ),
                   ],
                 ),
@@ -79,7 +81,7 @@ class CartItemDetail extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child: Text(
-                        cartItemInfo.principalName.name,
+                        cartItemInfo.materialInfo.principalData.principalName,
                       ),
                     ),
                   ],

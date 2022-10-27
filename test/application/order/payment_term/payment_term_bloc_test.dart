@@ -47,6 +47,7 @@ void main() {
     principalList: [],
     enableBatchNumber: false,
     enableZDP5: false,
+    enableVat: false,
   );
 
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(

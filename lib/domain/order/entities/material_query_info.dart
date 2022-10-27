@@ -29,8 +29,8 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
     required CartItem orderMaterial,
   }) =>
       MaterialQueryInfo(
-        qty: MaterialQty(orderMaterial.materialQuantity),
-        value: orderMaterial.materialNumber,
+        qty: MaterialQty(orderMaterial.quantity),
+        value: orderMaterial.materialInfo.materialNumber,
         materialGroup2: MaterialGroup.two(''),
         materialGroup4: MaterialGroup.four(''),
       );

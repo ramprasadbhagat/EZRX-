@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
@@ -36,6 +37,8 @@ class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
+
+class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
@@ -78,6 +81,7 @@ void main() async {
   final mockBannerBloc = MockBannerBloc();
   late MockHTTPService mockHTTPService;
   late UserBloc userBlocMock;
+  late CartBloc cartBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late ShipToCodeBloc shipToCodeBlocMock;
@@ -111,6 +115,7 @@ void main() async {
   group('Home Tab Screen', () {
     setUp(() {
       userBlocMock = UserBlocMock();
+      cartBlocMock = CartBlocMock();
       salesOrgBlocMock = SalesOrgBlocMock();
       customerCodeBlocMock = CustomerCodeBlocMock();
       shipToCodeBlocMock = ShipToCodeBlocMock();
@@ -119,6 +124,7 @@ void main() async {
       orderHistoryListBlocMock = OrderHistoryListBlocMock();
       autoRouterMock = locator<AppRouter>();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
+      when(() => cartBlocMock.state).thenReturn(CartState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => mockBannerBloc.state).thenReturn(BannerState.initial());
       when(() => customerCodeBlocMock.state)
@@ -162,6 +168,9 @@ void main() async {
             ),
             BlocProvider<OrderHistoryListBloc>(
               create: (context) => orderHistoryListBlocMock,
+            ),
+            BlocProvider<CartBloc>(
+              create: (context) => cartBlocMock,
             ),
           ],
           child: const HomeTab(),

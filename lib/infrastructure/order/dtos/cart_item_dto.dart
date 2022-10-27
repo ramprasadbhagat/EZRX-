@@ -1,55 +1,32 @@
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
+import 'package:hive/hive.dart';
 
-part 'cart_item_dto.freezed.dart';
 part 'cart_item_dto.g.dart';
 
-@freezed
-class CartItemDto with _$CartItemDto {
-  const CartItemDto._();
-  const factory CartItemDto({
-    @JsonKey(name: 'materialNumber', defaultValue: '')
-        required String materialNumber,
-    @JsonKey(name: 'materialDescription', defaultValue: '')
-        required String materialDescription,
-    @JsonKey(name: 'type', defaultValue: '') required String materialType,
-    @JsonKey(name: 'qty', defaultValue: 0) required int materialQuantity,
-    @JsonKey(name: 'principalName', defaultValue: '')
-        required String principalName,
-    @JsonKey(name: 'taxClassification', defaultValue: '')
-        required String taxClassification,
-    @JsonKey(name: 'hidePrice', defaultValue: false) required bool hidePrice,
-    @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
-        required bool hasValidTenderContract,
-  }) = _CartItemDto;
+@HiveType(typeId: 2)
+class CartItemDto {
+  CartItemDto({
+    required this.materialDto,
+    required this.quantity,
+  });
 
-  factory CartItemDto.fromDomain(CartItem orderTemplateInfo) {
+  @HiveField(0)
+  MaterialDto materialDto;
+  @HiveField(1)
+  int quantity;
+
+  factory CartItemDto.fromDomain(CartItem cart) {
     return CartItemDto(
-      materialNumber: orderTemplateInfo.materialNumber.getOrCrash(),
-      materialQuantity: orderTemplateInfo.materialQuantity,
-      materialDescription: orderTemplateInfo.materialDescription,
-      materialType: orderTemplateInfo.materialType,
-      principalName: orderTemplateInfo.principalName.getOrCrash(),
-      taxClassification: orderTemplateInfo.taxClassification,
-      hidePrice: orderTemplateInfo.hidePrice,
-      hasValidTenderContract: orderTemplateInfo.hasValidTenderContract,
+      materialDto: MaterialDto.fromDomain(cart.materialInfo),
+      quantity: cart.quantity,
     );
   }
 
   CartItem toDomain() {
     return CartItem(
-      materialNumber: MaterialNumber(materialNumber),
-      materialQuantity: materialQuantity,
-      materialDescription: materialDescription,
-      materialType: materialType,
-      principalName: PrincipalName(principalName),
-      taxClassification: taxClassification,
-      hidePrice: hidePrice,
-      hasValidTenderContract: hasValidTenderContract,
+      materialInfo: materialDto.toDomain(),
+      quantity: quantity,
     );
   }
-
-  factory CartItemDto.fromJson(Map<String, dynamic> json) =>
-      _$CartItemDtoFromJson(json);
 }

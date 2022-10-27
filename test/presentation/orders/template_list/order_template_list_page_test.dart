@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
@@ -11,14 +12,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../utils/material_frame_wrapper.dart';
+import '../../../utils/multi_bloc_provider_frame_wrapper.dart';
 
 class OrderTemplateListBlocMock
     extends MockBloc<OrderTemplateListEvent, OrderTemplateListState>
     implements OrderTemplateListBloc {}
 
+class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
+
 void main() {
   late OrderTemplateListBloc orderTemplateListBloc;
+  late CartBloc cartBloc;
 
   var orderTemplatesMock = <OrderTemplate>[];
 
@@ -26,11 +30,13 @@ void main() {
     WidgetsFlutterBinding.ensureInitialized();
 
     orderTemplateListBloc = OrderTemplateListBlocMock();
+    cartBloc = CartBlocMock();
 
     orderTemplatesMock =
         await OrderTemplateLocalDataSource().getOrderTemplates();
     when(() => orderTemplateListBloc.state)
         .thenReturn(OrderTemplateListState.initial());
+    when(() => cartBloc.state).thenReturn(CartState.initial());
   });
 
   group('Order Template List Screen', () {
@@ -62,11 +68,16 @@ void main() {
       );
       await tester.runAsync(() async {
         await tester.pumpWidget(
-          MaterialFrameWrapper(
-            child: BlocProvider<OrderTemplateListBloc>(
-              create: (context) => orderTemplateListBloc,
-              child: const OrderTemplateListPage(),
-            ),
+          MultiBlocProviderFrameWrapper(
+            providers: [
+              BlocProvider<OrderTemplateListBloc>(
+                create: (context) => orderTemplateListBloc,
+              ),
+              BlocProvider<CartBloc>(
+                create: (context) => cartBloc,
+              ),
+            ],
+            child: const OrderTemplateListPage(),
           ),
         );
       });
@@ -86,11 +97,16 @@ void main() {
       );
 
       await tester.pumpWidget(
-        MaterialFrameWrapper(
-          child: BlocProvider<OrderTemplateListBloc>(
-            create: (context) => orderTemplateListBloc,
-            child: const OrderTemplateListPage(),
-          ),
+        MultiBlocProviderFrameWrapper(
+          providers: [
+            BlocProvider<OrderTemplateListBloc>(
+              create: (context) => orderTemplateListBloc,
+            ),
+            BlocProvider<CartBloc>(
+              create: (context) => cartBloc,
+            ),
+          ],
+          child: const OrderTemplateListPage(),
         ),
       );
 
@@ -124,11 +140,16 @@ void main() {
 
       await tester.runAsync(() async {
         await tester.pumpWidget(
-          MaterialFrameWrapper(
-            child: BlocProvider<OrderTemplateListBloc>(
-              create: (context) => orderTemplateListBloc,
-              child: const OrderTemplateListPage(),
-            ),
+          MultiBlocProviderFrameWrapper(
+            providers: [
+              BlocProvider<OrderTemplateListBloc>(
+                create: (context) => orderTemplateListBloc,
+              ),
+              BlocProvider<CartBloc>(
+                create: (context) => cartBloc,
+              ),
+            ],
+            child: const OrderTemplateListPage(),
           ),
         );
       });

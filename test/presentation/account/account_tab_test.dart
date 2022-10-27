@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -35,6 +36,8 @@ class CustomerCodeBlocMock
 
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
+
+class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
 class AutoRouterMock extends Mock implements AppRouter {}
 
@@ -95,6 +98,7 @@ void main() {
   late ShipToCodeBloc shipToCodeBlocMock;
   late AuthBloc authBlocMock;
   late AppRouter autoRouterMock;
+  late CartBloc cartBlocMock;
   setUpAll(() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
@@ -107,8 +111,10 @@ void main() {
       shipToCodeBlocMock = ShipToCodeBlocMock();
       authBlocMock = AuthBlocMock();
       autoRouterMock = locator<AppRouter>();
+      cartBlocMock = CartBlocMock();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+      when(() => cartBlocMock.state).thenReturn(CartState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
       when(() => shipToCodeBlocMock.state)
@@ -126,6 +132,7 @@ void main() {
               create: (context) => customerCodeBlocMock),
           BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBlocMock),
           BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<CartBloc>(create: (context) => cartBlocMock),
         ],
         child: const AccountTab(),
       );

@@ -3,29 +3,42 @@
 part of 'cart_item_dto.dart';
 
 // **************************************************************************
-// JsonSerializableGenerator
+// TypeAdapterGenerator
 // **************************************************************************
 
-_$_CartItemDto _$$_CartItemDtoFromJson(Map<String, dynamic> json) =>
-    _$_CartItemDto(
-      materialNumber: json['materialNumber'] as String? ?? '',
-      materialDescription: json['materialDescription'] as String? ?? '',
-      materialType: json['type'] as String? ?? '',
-      materialQuantity: json['qty'] as int? ?? 0,
-      principalName: json['principalName'] as String? ?? '',
-      taxClassification: json['taxClassification'] as String? ?? '',
-      hidePrice: json['hidePrice'] as bool? ?? false,
-      hasValidTenderContract: json['hasValidTenderContract'] as bool? ?? false,
-    );
+class CartItemDtoAdapter extends TypeAdapter<CartItemDto> {
+  @override
+  final int typeId = 2;
 
-Map<String, dynamic> _$$_CartItemDtoToJson(_$_CartItemDto instance) =>
-    <String, dynamic>{
-      'materialNumber': instance.materialNumber,
-      'materialDescription': instance.materialDescription,
-      'type': instance.materialType,
-      'qty': instance.materialQuantity,
-      'principalName': instance.principalName,
-      'taxClassification': instance.taxClassification,
-      'hidePrice': instance.hidePrice,
-      'hasValidTenderContract': instance.hasValidTenderContract,
+  @override
+  CartItemDto read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
+    return CartItemDto(
+      materialDto: fields[0] as MaterialDto,
+      quantity: fields[1] as int,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, CartItemDto obj) {
+    writer
+      ..writeByte(2)
+      ..writeByte(0)
+      ..write(obj.materialDto)
+      ..writeByte(1)
+      ..write(obj.quantity);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CartItemDtoAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}

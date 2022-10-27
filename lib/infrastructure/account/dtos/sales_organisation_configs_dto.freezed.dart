@@ -44,6 +44,8 @@ mixin _$SalesOrganisationConfigsDto {
   bool get disableBundles => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableZDP5', defaultValue: false)
   bool get enableZDP5 => throw _privateConstructorUsedError;
+  @JsonKey(name: 'enableVat', defaultValue: false)
+  bool get enableVat => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -80,7 +82,9 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
       @JsonKey(name: 'disableBundles', defaultValue: false)
           bool disableBundles,
       @JsonKey(name: 'enableZDP5', defaultValue: false)
-          bool enableZDP5});
+          bool enableZDP5,
+      @JsonKey(name: 'enableVat', defaultValue: false)
+          bool enableVat});
 }
 
 /// @nodoc
@@ -105,6 +109,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? enableBatchNumber = freezed,
     Object? disableBundles = freezed,
     Object? enableZDP5 = freezed,
+    Object? enableVat = freezed,
   }) {
     return _then(_value.copyWith(
       currency: currency == freezed
@@ -151,6 +156,10 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.enableZDP5
           : enableZDP5 // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableVat: enableVat == freezed
+          ? _value.enableVat
+          : enableVat // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -186,7 +195,9 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
       @JsonKey(name: 'disableBundles', defaultValue: false)
           bool disableBundles,
       @JsonKey(name: 'enableZDP5', defaultValue: false)
-          bool enableZDP5});
+          bool enableZDP5,
+      @JsonKey(name: 'enableVat', defaultValue: false)
+          bool enableVat});
 }
 
 /// @nodoc
@@ -215,6 +226,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? enableBatchNumber = freezed,
     Object? disableBundles = freezed,
     Object? enableZDP5 = freezed,
+    Object? enableVat = freezed,
   }) {
     return _then(_$_SalesOrganisationConfigsDto(
       currency: currency == freezed
@@ -261,6 +273,10 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.enableZDP5
           : enableZDP5 // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableVat: enableVat == freezed
+          ? _value.enableVat
+          : enableVat // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -291,7 +307,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
       @JsonKey(name: 'disableBundles', defaultValue: false)
           required this.disableBundles,
       @JsonKey(name: 'enableZDP5', defaultValue: false)
-          required this.enableZDP5})
+          required this.enableZDP5,
+      @JsonKey(name: 'enableVat', defaultValue: false)
+          required this.enableVat})
       : _principalList = principalList,
         super._();
 
@@ -337,10 +355,13 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @override
   @JsonKey(name: 'enableZDP5', defaultValue: false)
   final bool enableZDP5;
+  @override
+  @JsonKey(name: 'enableVat', defaultValue: false)
+  final bool enableVat;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5)';
+    return 'SalesOrganisationConfigsDto(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat)';
   }
 
   @override
@@ -368,7 +389,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
             const DeepCollectionEquality()
                 .equals(other.disableBundles, disableBundles) &&
             const DeepCollectionEquality()
-                .equals(other.enableZDP5, enableZDP5));
+                .equals(other.enableZDP5, enableZDP5) &&
+            const DeepCollectionEquality().equals(other.enableVat, enableVat));
   }
 
   @JsonKey(ignore: true)
@@ -385,7 +407,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
       const DeepCollectionEquality().hash(disableOrderType),
       const DeepCollectionEquality().hash(enableBatchNumber),
       const DeepCollectionEquality().hash(disableBundles),
-      const DeepCollectionEquality().hash(enableZDP5));
+      const DeepCollectionEquality().hash(enableZDP5),
+      const DeepCollectionEquality().hash(enableVat));
 
   @JsonKey(ignore: true)
   @override
@@ -426,7 +449,9 @@ abstract class _SalesOrganisationConfigsDto
       @JsonKey(name: 'disableBundles', defaultValue: false)
           required final bool disableBundles,
       @JsonKey(name: 'enableZDP5', defaultValue: false)
-          required final bool enableZDP5}) = _$_SalesOrganisationConfigsDto;
+          required final bool enableZDP5,
+      @JsonKey(name: 'enableVat', defaultValue: false)
+          required final bool enableVat}) = _$_SalesOrganisationConfigsDto;
   const _SalesOrganisationConfigsDto._() : super._();
 
   factory _SalesOrganisationConfigsDto.fromJson(Map<String, dynamic> json) =
@@ -466,6 +491,9 @@ abstract class _SalesOrganisationConfigsDto
   @override
   @JsonKey(name: 'enableZDP5', defaultValue: false)
   bool get enableZDP5;
+  @override
+  @JsonKey(name: 'enableVat', defaultValue: false)
+  bool get enableVat;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsDtoCopyWith<_$_SalesOrganisationConfigsDto>

@@ -21,6 +21,7 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       enableBatchNumber: json['enableBatchNumber'] as bool? ?? false,
       disableBundles: json['disableBundles'] as bool? ?? false,
       enableZDP5: json['enableZDP5'] as bool? ?? false,
+      enableVat: json['enableVat'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -38,4 +39,5 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'enableBatchNumber': instance.enableBatchNumber,
       'disableBundles': instance.disableBundles,
       'enableZDP5': instance.enableZDP5,
+      'enableVat': instance.enableVat,
     };

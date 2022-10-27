@@ -26,11 +26,7 @@ mixin _$OrderTemplateDto {
   String get templateName =>
       throw _privateConstructorUsedError; // TODO: use UserDto someday
   @JsonKey(name: 'user', defaultValue: <String, dynamic>{})
-  Map<String, dynamic> get user =>
-      throw _privateConstructorUsedError; // TODO: by right we no need this
-  @_CartItemListConverter()
-  @JsonKey(name: 'cartList', defaultValue: <CartItemDto>[])
-  List<CartItemDto> get cartItems => throw _privateConstructorUsedError;
+  Map<String, dynamic> get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,10 +45,7 @@ abstract class $OrderTemplateDtoCopyWith<$Res> {
       @JsonKey(name: 'name', defaultValue: '')
           String templateName,
       @JsonKey(name: 'user', defaultValue: <String, dynamic>{})
-          Map<String, dynamic> user,
-      @_CartItemListConverter()
-      @JsonKey(name: 'cartList', defaultValue: <CartItemDto>[])
-          List<CartItemDto> cartItems});
+          Map<String, dynamic> user});
 }
 
 /// @nodoc
@@ -69,7 +62,6 @@ class _$OrderTemplateDtoCopyWithImpl<$Res>
     Object? templateId = freezed,
     Object? templateName = freezed,
     Object? user = freezed,
-    Object? cartItems = freezed,
   }) {
     return _then(_value.copyWith(
       templateId: templateId == freezed
@@ -84,10 +76,6 @@ class _$OrderTemplateDtoCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
-      cartItems: cartItems == freezed
-          ? _value.cartItems
-          : cartItems // ignore: cast_nullable_to_non_nullable
-              as List<CartItemDto>,
     ));
   }
 }
@@ -105,10 +93,7 @@ abstract class _$$_OrderTemplateDtoCopyWith<$Res>
       @JsonKey(name: 'name', defaultValue: '')
           String templateName,
       @JsonKey(name: 'user', defaultValue: <String, dynamic>{})
-          Map<String, dynamic> user,
-      @_CartItemListConverter()
-      @JsonKey(name: 'cartList', defaultValue: <CartItemDto>[])
-          List<CartItemDto> cartItems});
+          Map<String, dynamic> user});
 }
 
 /// @nodoc
@@ -127,7 +112,6 @@ class __$$_OrderTemplateDtoCopyWithImpl<$Res>
     Object? templateId = freezed,
     Object? templateName = freezed,
     Object? user = freezed,
-    Object? cartItems = freezed,
   }) {
     return _then(_$_OrderTemplateDto(
       templateId: templateId == freezed
@@ -142,10 +126,6 @@ class __$$_OrderTemplateDtoCopyWithImpl<$Res>
           ? _value._user
           : user // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
-      cartItems: cartItems == freezed
-          ? _value._cartItems
-          : cartItems // ignore: cast_nullable_to_non_nullable
-              as List<CartItemDto>,
     ));
   }
 }
@@ -159,12 +139,8 @@ class _$_OrderTemplateDto extends _OrderTemplateDto {
       @JsonKey(name: 'name', defaultValue: '')
           required this.templateName,
       @JsonKey(name: 'user', defaultValue: <String, dynamic>{})
-          required final Map<String, dynamic> user,
-      @_CartItemListConverter()
-      @JsonKey(name: 'cartList', defaultValue: <CartItemDto>[])
-          required final List<CartItemDto> cartItems})
+          required final Map<String, dynamic> user})
       : _user = user,
-        _cartItems = cartItems,
         super._();
 
   factory _$_OrderTemplateDto.fromJson(Map<String, dynamic> json) =>
@@ -186,20 +162,9 @@ class _$_OrderTemplateDto extends _OrderTemplateDto {
     return EqualUnmodifiableMapView(_user);
   }
 
-// TODO: by right we no need this
-  final List<CartItemDto> _cartItems;
-// TODO: by right we no need this
-  @override
-  @_CartItemListConverter()
-  @JsonKey(name: 'cartList', defaultValue: <CartItemDto>[])
-  List<CartItemDto> get cartItems {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_cartItems);
-  }
-
   @override
   String toString() {
-    return 'OrderTemplateDto(templateId: $templateId, templateName: $templateName, user: $user, cartItems: $cartItems)';
+    return 'OrderTemplateDto(templateId: $templateId, templateName: $templateName, user: $user)';
   }
 
   @override
@@ -211,9 +176,7 @@ class _$_OrderTemplateDto extends _OrderTemplateDto {
                 .equals(other.templateId, templateId) &&
             const DeepCollectionEquality()
                 .equals(other.templateName, templateName) &&
-            const DeepCollectionEquality().equals(other._user, _user) &&
-            const DeepCollectionEquality()
-                .equals(other._cartItems, _cartItems));
+            const DeepCollectionEquality().equals(other._user, _user));
   }
 
   @JsonKey(ignore: true)
@@ -222,8 +185,7 @@ class _$_OrderTemplateDto extends _OrderTemplateDto {
       runtimeType,
       const DeepCollectionEquality().hash(templateId),
       const DeepCollectionEquality().hash(templateName),
-      const DeepCollectionEquality().hash(_user),
-      const DeepCollectionEquality().hash(_cartItems));
+      const DeepCollectionEquality().hash(_user));
 
   @JsonKey(ignore: true)
   @override
@@ -245,10 +207,7 @@ abstract class _OrderTemplateDto extends OrderTemplateDto {
       @JsonKey(name: 'name', defaultValue: '')
           required final String templateName,
       @JsonKey(name: 'user', defaultValue: <String, dynamic>{})
-          required final Map<String, dynamic> user,
-      @_CartItemListConverter()
-      @JsonKey(name: 'cartList', defaultValue: <CartItemDto>[])
-          required final List<CartItemDto> cartItems}) = _$_OrderTemplateDto;
+          required final Map<String, dynamic> user}) = _$_OrderTemplateDto;
   const _OrderTemplateDto._() : super._();
 
   factory _OrderTemplateDto.fromJson(Map<String, dynamic> json) =
@@ -263,10 +222,6 @@ abstract class _OrderTemplateDto extends OrderTemplateDto {
   @override // TODO: use UserDto someday
   @JsonKey(name: 'user', defaultValue: <String, dynamic>{})
   Map<String, dynamic> get user;
-  @override // TODO: by right we no need this
-  @_CartItemListConverter()
-  @JsonKey(name: 'cartList', defaultValue: <CartItemDto>[])
-  List<CartItemDto> get cartItems;
   @override
   @JsonKey(ignore: true)
   _$$_OrderTemplateDtoCopyWith<_$_OrderTemplateDto> get copyWith =>

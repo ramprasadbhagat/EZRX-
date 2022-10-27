@@ -5,9 +5,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
@@ -38,6 +40,8 @@ class CustomerCodeMockBloc extends Mock implements CustomerCodeBloc {}
 class ShipToCodeMocBloc extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
+class CartMocBloc extends MockBloc<CartEvent, CartState> implements CartBloc {}
+
 class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class OrderHistoryFilterMockBloc
@@ -50,6 +54,7 @@ void main() {
   final mockOrderHistoryListBloc = OrderHistoryListBlocMock();
   final mockOrderHistoryFilterBloc = OrderHistoryFilterMockBloc();
   final mockShipToCodeBloc = ShipToCodeMocBloc();
+  final mockCartBloc = CartMocBloc();
   late MockHTTPService mockHTTPService;
   late AppRouter autoRouterMock;
   setUpAll(() {
@@ -62,7 +67,7 @@ void main() {
     locator.registerLazySingleton(() => mockOrderHistoryListBloc);
     locator.registerLazySingleton(() => mockOrderHistoryFilterBloc);
     locator.registerLazySingleton(() => mockShipToCodeBloc);
-    
+    locator.registerLazySingleton(() => mockCartBloc);
 
     autoRouterMock = locator<AppRouter>();
     mockHTTPService = MockHTTPService();
@@ -80,6 +85,7 @@ void main() {
             .thenReturn(OrderHistoryFilterState.initial());
         when(() => mockShipToCodeBloc.state)
             .thenReturn(ShipToCodeState.initial());
+        when(() => mockCartBloc.state).thenReturn(CartState.initial());
       });
       StackRouterScope getWUT() {
         return WidgetUtils.getScopedWidget(
@@ -91,6 +97,7 @@ void main() {
                 create: (context) => mockOrderHistoryFilterBloc),
             BlocProvider<ShipToCodeBloc>(
                 create: (context) => mockShipToCodeBloc),
+            BlocProvider<CartBloc>(create: (context) => mockCartBloc),
           ],
           child: HistoryTab(),
         );
@@ -110,6 +117,12 @@ void main() {
               canLoadMore: false,
               nextPageIndex: 0,
             ),
+          ]);
+        });
+        final mockCartBloc = locator<CartMocBloc>();
+        when(() => mockCartBloc.stream).thenAnswer((invocation) {
+          return Stream.fromIterable([
+            CartState.initial().copyWith(cartItemList: <CartItem>[]),
           ]);
         });
         await tester.pumpWidget(getWUT());

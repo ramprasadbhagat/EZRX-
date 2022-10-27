@@ -22,7 +22,7 @@ class UserLocalDataSource {
           ? await rootBundle.loadString('assets/json/userResponse.json')
           : await rootBundle.loadString('assets/json/proxyUserResponse.json'),
     );
-    
+
     return UserDto.fromJson(data['data']['user']).toDomain();
   }
 
