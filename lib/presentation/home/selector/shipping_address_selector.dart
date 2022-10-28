@@ -117,9 +117,7 @@ class ShipCodeSelector extends StatelessWidget {
                           context.read<SalesOrgBloc>().state.salesOrganisation,
                     ),
                   );
-
               context.read<CartBloc>().add(const CartEvent.fetch());
-
               context.read<MaterialFilterBloc>().add(MaterialFilterEvent.fetch(
                     salesOrganisation:
                         context.read<SalesOrgBloc>().state.salesOrganisation,

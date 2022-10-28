@@ -18,6 +18,7 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: const Key('cartpage'),
       appBar: AppBar(
         title: Text(
           '${'My Cart'.tr()} ${context.read<CartBloc>().state.cartItemList.isNotEmpty ? '(' : ''}${context.read<CartBloc>().state.cartItemList.isNotEmpty ? context.read<CartBloc>().state.cartItemList.length.toString() : ''}${context.read<CartBloc>().state.cartItemList.isNotEmpty ? ')' : ''}',
@@ -96,8 +97,10 @@ class CartPage extends StatelessWidget {
           .read<MaterialPriceBloc>()
           .state
           .materialPrice[item.materialInfo.materialNumber];
-      final unitPrice = totalPrice!.finalPrice.getOrCrash();
-      sum += unitPrice * item.quantity;
+      if (null != totalPrice) {
+        final unitPrice = totalPrice.finalPrice.getOrCrash();
+        sum += unitPrice * item.quantity;
+      }
     }
 
     return sum.toStringAsFixed(2);
@@ -146,6 +149,7 @@ class _ListContent extends StatelessWidget {
             children: [
               Text(
                 cartItem.quantity.toString().padLeft(2, '0'),
+                key: Key('itemCount${cartItem.materialInfo.materialNumber}'),
                 style: Theme.of(context).textTheme.headline5,
               ),
               Flexible(

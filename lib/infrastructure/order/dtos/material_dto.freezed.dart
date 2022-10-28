@@ -423,7 +423,7 @@ class __$$_MaterialDtoCopyWithImpl<$Res> extends _$MaterialDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 3)
+@HiveType(typeId: 3, adapterName: 'MaterialDtoAdapter')
 class _$_MaterialDto extends _MaterialDto {
   const _$_MaterialDto(
       {@JsonKey(name: 'materialNumber', defaultValue: '')

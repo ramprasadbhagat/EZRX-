@@ -12,7 +12,7 @@ part 'material_dto.g.dart';
 class MaterialDto with _$MaterialDto {
   const MaterialDto._();
 
-  @HiveType(typeId: 3)
+  @HiveType(typeId: 3, adapterName: 'MaterialDtoAdapter')
   const factory MaterialDto({
     @JsonKey(name: 'materialNumber', defaultValue: '')
     @HiveField(0)
