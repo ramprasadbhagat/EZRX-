@@ -45,24 +45,46 @@ class MaterialFilterPage extends StatelessWidget {
         );
       },
       builder: (context, state) {
-        return Scaffold(
-          key: const Key('materialFilterPage'),
-          appBar: PreferredSize(
-            preferredSize: const Size(double.infinity, 50),
-            child: CustomAppBar(
-              child: MaterialFilterSearch(
-                onSearchMethod: (String value) {
-                  context.read<MaterialFilterBloc>().add(
-                        MaterialFilterEvent.updateSearchKey(value),
-                      );
-                },
-                searchText: context.read<MaterialFilterBloc>().state.searchKey,
+        return WillPopScope(
+          onWillPop: () async {
+            context.read<MaterialListBloc>().add(
+                  MaterialListEvent.fetch(
+                    user: context.read<UserBloc>().state.user,
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    configs: context.read<SalesOrgBloc>().state.configs,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    selectedMaterialFilter: context
+                        .read<MaterialFilterBloc>()
+                        .state
+                        .selectedMaterialFilter,
+                  ),
+                );
+
+            return true;
+          },
+          child: Scaffold(
+            key: const Key('materialFilterPage'),
+            appBar: PreferredSize(
+              preferredSize: const Size(double.infinity, 50),
+              child: CustomAppBar(
+                child: MaterialFilterSearch(
+                  onSearchMethod: (String value) {
+                    context.read<MaterialFilterBloc>().add(
+                          MaterialFilterEvent.updateSearchKey(value),
+                        );
+                  },
+                  searchText:
+                      context.read<MaterialFilterBloc>().state.searchKey,
+                ),
               ),
             ),
-          ),
-          body: _BodyContent(
-            state: state,
-            filterType: filterType,
+            body: _BodyContent(
+              state: state,
+              filterType: filterType,
+            ),
           ),
         );
       },

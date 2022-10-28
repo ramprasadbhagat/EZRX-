@@ -96,24 +96,32 @@ class _BodyContent extends StatelessWidget {
             )
           : ScrollList<MaterialInfo>(
               emptyMessage: 'No material found',
-              onRefresh: () => context.read<MaterialListBloc>().add(
-                    MaterialListEvent.fetch(
-                      user: context.read<UserBloc>().state.user,
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      configs: context.read<SalesOrgBloc>().state.configs,
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      shipToInfo:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
-                      selectedMaterialFilter: context
-                          .read<MaterialFilterBloc>()
-                          .state
-                          .selectedMaterialFilter,
-                    ),
-                  ),
+              onRefresh: () {
+                context
+                    .read<MaterialFilterBloc>()
+                    .add(const MaterialFilterEvent.clearSelected());
+
+                context.read<MaterialListBloc>().add(
+                      MaterialListEvent.fetch(
+                        user: context.read<UserBloc>().state.user,
+                        salesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        configs: context.read<SalesOrgBloc>().state.configs,
+                        customerCodeInfo: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customerCodeInfo,
+                        shipToInfo:
+                            context.read<ShipToCodeBloc>().state.shipToInfo,
+                        selectedMaterialFilter: context
+                            .read<MaterialFilterBloc>()
+                            .state
+                            .getEmptyMaterialFilter(),
+                      ),
+                    );
+              },
               onLoadingMore: () => context.read<MaterialListBloc>().add(
                     MaterialListEvent.loadMore(
                       user: context.read<UserBloc>().state.user,
@@ -336,7 +344,8 @@ class _SearchBarState extends State<_SearchBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      height: 50,
       color: ZPColors.white,
       child: BlocConsumer<MaterialListBloc, MaterialListState>(
         listenWhen: (previous, current) =>
@@ -391,6 +400,7 @@ class _SearchBarState extends State<_SearchBar> {
                   borderSide: const BorderSide(color: ZPColors.primary),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
+                contentPadding: const EdgeInsets.all(0),
                 isDense: true,
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: IconButton(
@@ -422,13 +432,10 @@ class _MaterialFilters extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MaterialFilterBloc, MaterialFilterState>(
       builder: (context, state) {
-        return Container(
-          padding: const EdgeInsets.only(left: 10, top: 5),
-          decoration: const BoxDecoration(
-            color: ZPColors.white,
-          ),
+        return ColoredBox(
+          color: ZPColors.white,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CustomSelector(
                 title: 'Principal',

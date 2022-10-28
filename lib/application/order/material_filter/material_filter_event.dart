@@ -2,6 +2,7 @@ part of 'material_filter_bloc.dart';
 
 @freezed
 class MaterialFilterEvent with _$MaterialFilterEvent {
+  const factory MaterialFilterEvent.initialized() = _Initialized;
   const factory MaterialFilterEvent.fetch({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
@@ -15,6 +16,7 @@ class MaterialFilterEvent with _$MaterialFilterEvent {
   ) = _updateMaterialSelected;
   const factory MaterialFilterEvent.updateSearchKey(String searchkey) =
       _updateSearchKey;
+  const factory MaterialFilterEvent.clearSelected() = _clearSelected;
 }
 
 enum MaterialFilterType {

@@ -27,15 +27,16 @@ class MaterialFilterBloc
     Emitter<MaterialFilterState> emit,
   ) async {
     await event.map(
+      initialized: (_) async => emit(MaterialFilterState.initial()),
       fetch: (e) async {
         final failureOrSuccess =
             await materialFilterRepository.getMaterialFilterList(
-              salesOrgConfig: e.salesOrgConfig,
-              salesOrganisation: e.salesOrganisation,
-              customerCodeInfo: e.customerCodeInfo,
-              shipToInfo: e.shipToInfo,
-              user: e.user,
-            );
+          salesOrgConfig: e.salesOrgConfig,
+          salesOrganisation: e.salesOrganisation,
+          customerCodeInfo: e.customerCodeInfo,
+          shipToInfo: e.shipToInfo,
+          user: e.user,
+        );
         failureOrSuccess.fold(
           (failure) {
             emit(
@@ -101,6 +102,15 @@ class MaterialFilterBloc
       },
       updateSearchKey: (e) async =>
           emit(state.copyWith(searchKey: e.searchkey)),
+      clearSelected: (_) async => emit(
+        state.copyWith(
+          selectedMaterialFilter: const MaterialFilter(
+            uniqueItemBrand: <String>[],
+            uniquePrincipalName: <String>[],
+            uniqueTherapeuticClass: <String>[],
+          ),
+        ),
+      ),
     );
   }
 }

@@ -319,6 +319,7 @@ abstract class _$$_AddToCartCopyWith<$Res> {
           _$_AddToCart value, $Res Function(_$_AddToCart) then) =
       __$$_AddToCartCopyWithImpl<$Res>;
   $Res call({CartItem item});
+
   $CartItemCopyWith<$Res> get item;
 }
 
@@ -459,6 +460,7 @@ class _$_AddToCart implements _AddToCart {
 
 abstract class _AddToCart implements CartEvent {
   const factory _AddToCart({required final CartItem item}) = _$_AddToCart;
+
   CartItem get item;
   @JsonKey(ignore: true)
   _$$_AddToCartCopyWith<_$_AddToCart> get copyWith =>
@@ -471,6 +473,7 @@ abstract class _$$_RemoveFromCartCopyWith<$Res> {
           _$_RemoveFromCart value, $Res Function(_$_RemoveFromCart) then) =
       __$$_RemoveFromCartCopyWithImpl<$Res>;
   $Res call({CartItem item});
+
   $CartItemCopyWith<$Res> get item;
 }
 
@@ -613,6 +616,7 @@ class _$_RemoveFromCart implements _RemoveFromCart {
 abstract class _RemoveFromCart implements CartEvent {
   const factory _RemoveFromCart({required final CartItem item}) =
       _$_RemoveFromCart;
+
   CartItem get item;
   @JsonKey(ignore: true)
   _$$_RemoveFromCartCopyWith<_$_RemoveFromCart> get copyWith =>

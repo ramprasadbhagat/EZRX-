@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$MaterialFilterEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
@@ -29,10 +30,12 @@ mixin _$MaterialFilterEvent {
             MaterialFilterType filterType, String selectedFilter)
         updateMaterialSelected,
     required TResult Function(String searchkey) updateSearchKey,
+    required TResult Function() clearSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initialized,
     TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
@@ -43,10 +46,12 @@ mixin _$MaterialFilterEvent {
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
         updateMaterialSelected,
     TResult Function(String searchkey)? updateSearchKey,
+    TResult Function()? clearSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
     TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
@@ -57,29 +62,36 @@ mixin _$MaterialFilterEvent {
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
         updateMaterialSelected,
     TResult Function(String searchkey)? updateSearchKey,
+    TResult Function()? clearSelected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_fetch value) fetch,
     required TResult Function(_updateMaterialSelected value)
         updateMaterialSelected,
     required TResult Function(_updateSearchKey value) updateSearchKey,
+    required TResult Function(_clearSelected value) clearSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_fetch value)? fetch,
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult Function(_updateSearchKey value)? updateSearchKey,
+    TResult Function(_clearSelected value)? clearSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_fetch value)? fetch,
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult Function(_updateSearchKey value)? updateSearchKey,
+    TResult Function(_clearSelected value)? clearSelected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -100,6 +112,152 @@ class _$MaterialFilterEventCopyWithImpl<$Res>
   final MaterialFilterEvent _value;
   // ignore: unused_field
   final $Res Function(MaterialFilterEvent) _then;
+}
+
+/// @nodoc
+abstract class _$$_InitializedCopyWith<$Res> {
+  factory _$$_InitializedCopyWith(
+          _$_Initialized value, $Res Function(_$_Initialized) then) =
+      __$$_InitializedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_InitializedCopyWithImpl<$Res>
+    extends _$MaterialFilterEventCopyWithImpl<$Res>
+    implements _$$_InitializedCopyWith<$Res> {
+  __$$_InitializedCopyWithImpl(
+      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+      : super(_value, (v) => _then(v as _$_Initialized));
+
+  @override
+  _$_Initialized get _value => super._value as _$_Initialized;
+}
+
+/// @nodoc
+
+class _$_Initialized implements _Initialized {
+  const _$_Initialized();
+
+  @override
+  String toString() {
+    return 'MaterialFilterEvent.initialized()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Initialized);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesOrgConfig)
+        fetch,
+    required TResult Function(
+            MaterialFilterType filterType, String selectedFilter)
+        updateMaterialSelected,
+    required TResult Function(String searchkey) updateSearchKey,
+    required TResult Function() clearSelected,
+  }) {
+    return initialized();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesOrgConfig)?
+        fetch,
+    TResult Function(MaterialFilterType filterType, String selectedFilter)?
+        updateMaterialSelected,
+    TResult Function(String searchkey)? updateSearchKey,
+    TResult Function()? clearSelected,
+  }) {
+    return initialized?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesOrgConfig)?
+        fetch,
+    TResult Function(MaterialFilterType filterType, String selectedFilter)?
+        updateMaterialSelected,
+    TResult Function(String searchkey)? updateSearchKey,
+    TResult Function()? clearSelected,
+    required TResult orElse(),
+  }) {
+    if (initialized != null) {
+      return initialized();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_fetch value) fetch,
+    required TResult Function(_updateMaterialSelected value)
+        updateMaterialSelected,
+    required TResult Function(_updateSearchKey value) updateSearchKey,
+    required TResult Function(_clearSelected value) clearSelected,
+  }) {
+    return initialized(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_fetch value)? fetch,
+    TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult Function(_updateSearchKey value)? updateSearchKey,
+    TResult Function(_clearSelected value)? clearSelected,
+  }) {
+    return initialized?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_fetch value)? fetch,
+    TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult Function(_updateSearchKey value)? updateSearchKey,
+    TResult Function(_clearSelected value)? clearSelected,
+    required TResult orElse(),
+  }) {
+    if (initialized != null) {
+      return initialized(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Initialized implements MaterialFilterEvent {
+  const factory _Initialized() = _$_Initialized;
 }
 
 /// @nodoc
@@ -258,6 +416,7 @@ class _$_fetch implements _fetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
@@ -269,6 +428,7 @@ class _$_fetch implements _fetch {
             MaterialFilterType filterType, String selectedFilter)
         updateMaterialSelected,
     required TResult Function(String searchkey) updateSearchKey,
+    required TResult Function() clearSelected,
   }) {
     return fetch(
         salesOrganisation, customerCodeInfo, shipToInfo, user, salesOrgConfig);
@@ -277,6 +437,7 @@ class _$_fetch implements _fetch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initialized,
     TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
@@ -287,6 +448,7 @@ class _$_fetch implements _fetch {
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
         updateMaterialSelected,
     TResult Function(String searchkey)? updateSearchKey,
+    TResult Function()? clearSelected,
   }) {
     return fetch?.call(
         salesOrganisation, customerCodeInfo, shipToInfo, user, salesOrgConfig);
@@ -295,6 +457,7 @@ class _$_fetch implements _fetch {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
     TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
@@ -305,6 +468,7 @@ class _$_fetch implements _fetch {
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
         updateMaterialSelected,
     TResult Function(String searchkey)? updateSearchKey,
+    TResult Function()? clearSelected,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -317,10 +481,12 @@ class _$_fetch implements _fetch {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_fetch value) fetch,
     required TResult Function(_updateMaterialSelected value)
         updateMaterialSelected,
     required TResult Function(_updateSearchKey value) updateSearchKey,
+    required TResult Function(_clearSelected value) clearSelected,
   }) {
     return fetch(this);
   }
@@ -328,9 +494,11 @@ class _$_fetch implements _fetch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_fetch value)? fetch,
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult Function(_updateSearchKey value)? updateSearchKey,
+    TResult Function(_clearSelected value)? clearSelected,
   }) {
     return fetch?.call(this);
   }
@@ -338,9 +506,11 @@ class _$_fetch implements _fetch {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_fetch value)? fetch,
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult Function(_updateSearchKey value)? updateSearchKey,
+    TResult Function(_clearSelected value)? clearSelected,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -447,6 +617,7 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
@@ -458,6 +629,7 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
             MaterialFilterType filterType, String selectedFilter)
         updateMaterialSelected,
     required TResult Function(String searchkey) updateSearchKey,
+    required TResult Function() clearSelected,
   }) {
     return updateMaterialSelected(filterType, selectedFilter);
   }
@@ -465,6 +637,7 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initialized,
     TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
@@ -475,6 +648,7 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
         updateMaterialSelected,
     TResult Function(String searchkey)? updateSearchKey,
+    TResult Function()? clearSelected,
   }) {
     return updateMaterialSelected?.call(filterType, selectedFilter);
   }
@@ -482,6 +656,7 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
     TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
@@ -492,6 +667,7 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
         updateMaterialSelected,
     TResult Function(String searchkey)? updateSearchKey,
+    TResult Function()? clearSelected,
     required TResult orElse(),
   }) {
     if (updateMaterialSelected != null) {
@@ -503,10 +679,12 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_fetch value) fetch,
     required TResult Function(_updateMaterialSelected value)
         updateMaterialSelected,
     required TResult Function(_updateSearchKey value) updateSearchKey,
+    required TResult Function(_clearSelected value) clearSelected,
   }) {
     return updateMaterialSelected(this);
   }
@@ -514,9 +692,11 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_fetch value)? fetch,
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult Function(_updateSearchKey value)? updateSearchKey,
+    TResult Function(_clearSelected value)? clearSelected,
   }) {
     return updateMaterialSelected?.call(this);
   }
@@ -524,9 +704,11 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_fetch value)? fetch,
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult Function(_updateSearchKey value)? updateSearchKey,
+    TResult Function(_clearSelected value)? clearSelected,
     required TResult orElse(),
   }) {
     if (updateMaterialSelected != null) {
@@ -613,6 +795,7 @@ class _$_updateSearchKey implements _updateSearchKey {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
     required TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
@@ -624,6 +807,7 @@ class _$_updateSearchKey implements _updateSearchKey {
             MaterialFilterType filterType, String selectedFilter)
         updateMaterialSelected,
     required TResult Function(String searchkey) updateSearchKey,
+    required TResult Function() clearSelected,
   }) {
     return updateSearchKey(searchkey);
   }
@@ -631,6 +815,7 @@ class _$_updateSearchKey implements _updateSearchKey {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initialized,
     TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
@@ -641,6 +826,7 @@ class _$_updateSearchKey implements _updateSearchKey {
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
         updateMaterialSelected,
     TResult Function(String searchkey)? updateSearchKey,
+    TResult Function()? clearSelected,
   }) {
     return updateSearchKey?.call(searchkey);
   }
@@ -648,6 +834,7 @@ class _$_updateSearchKey implements _updateSearchKey {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
     TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
@@ -658,6 +845,7 @@ class _$_updateSearchKey implements _updateSearchKey {
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
         updateMaterialSelected,
     TResult Function(String searchkey)? updateSearchKey,
+    TResult Function()? clearSelected,
     required TResult orElse(),
   }) {
     if (updateSearchKey != null) {
@@ -669,10 +857,12 @@ class _$_updateSearchKey implements _updateSearchKey {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_fetch value) fetch,
     required TResult Function(_updateMaterialSelected value)
         updateMaterialSelected,
     required TResult Function(_updateSearchKey value) updateSearchKey,
+    required TResult Function(_clearSelected value) clearSelected,
   }) {
     return updateSearchKey(this);
   }
@@ -680,9 +870,11 @@ class _$_updateSearchKey implements _updateSearchKey {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_fetch value)? fetch,
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult Function(_updateSearchKey value)? updateSearchKey,
+    TResult Function(_clearSelected value)? clearSelected,
   }) {
     return updateSearchKey?.call(this);
   }
@@ -690,9 +882,11 @@ class _$_updateSearchKey implements _updateSearchKey {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_fetch value)? fetch,
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult Function(_updateSearchKey value)? updateSearchKey,
+    TResult Function(_clearSelected value)? clearSelected,
     required TResult orElse(),
   }) {
     if (updateSearchKey != null) {
@@ -709,6 +903,152 @@ abstract class _updateSearchKey implements MaterialFilterEvent {
   @JsonKey(ignore: true)
   _$$_updateSearchKeyCopyWith<_$_updateSearchKey> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_clearSelectedCopyWith<$Res> {
+  factory _$$_clearSelectedCopyWith(
+          _$_clearSelected value, $Res Function(_$_clearSelected) then) =
+      __$$_clearSelectedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_clearSelectedCopyWithImpl<$Res>
+    extends _$MaterialFilterEventCopyWithImpl<$Res>
+    implements _$$_clearSelectedCopyWith<$Res> {
+  __$$_clearSelectedCopyWithImpl(
+      _$_clearSelected _value, $Res Function(_$_clearSelected) _then)
+      : super(_value, (v) => _then(v as _$_clearSelected));
+
+  @override
+  _$_clearSelected get _value => super._value as _$_clearSelected;
+}
+
+/// @nodoc
+
+class _$_clearSelected implements _clearSelected {
+  const _$_clearSelected();
+
+  @override
+  String toString() {
+    return 'MaterialFilterEvent.clearSelected()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_clearSelected);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesOrgConfig)
+        fetch,
+    required TResult Function(
+            MaterialFilterType filterType, String selectedFilter)
+        updateMaterialSelected,
+    required TResult Function(String searchkey) updateSearchKey,
+    required TResult Function() clearSelected,
+  }) {
+    return clearSelected();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesOrgConfig)?
+        fetch,
+    TResult Function(MaterialFilterType filterType, String selectedFilter)?
+        updateMaterialSelected,
+    TResult Function(String searchkey)? updateSearchKey,
+    TResult Function()? clearSelected,
+  }) {
+    return clearSelected?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesOrgConfig)?
+        fetch,
+    TResult Function(MaterialFilterType filterType, String selectedFilter)?
+        updateMaterialSelected,
+    TResult Function(String searchkey)? updateSearchKey,
+    TResult Function()? clearSelected,
+    required TResult orElse(),
+  }) {
+    if (clearSelected != null) {
+      return clearSelected();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_fetch value) fetch,
+    required TResult Function(_updateMaterialSelected value)
+        updateMaterialSelected,
+    required TResult Function(_updateSearchKey value) updateSearchKey,
+    required TResult Function(_clearSelected value) clearSelected,
+  }) {
+    return clearSelected(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_fetch value)? fetch,
+    TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult Function(_updateSearchKey value)? updateSearchKey,
+    TResult Function(_clearSelected value)? clearSelected,
+  }) {
+    return clearSelected?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_fetch value)? fetch,
+    TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult Function(_updateSearchKey value)? updateSearchKey,
+    TResult Function(_clearSelected value)? clearSelected,
+    required TResult orElse(),
+  }) {
+    if (clearSelected != null) {
+      return clearSelected(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _clearSelected implements MaterialFilterEvent {
+  const factory _clearSelected() = _$_clearSelected;
 }
 
 /// @nodoc

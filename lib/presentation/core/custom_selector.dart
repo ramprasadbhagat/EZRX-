@@ -18,8 +18,9 @@ class CustomSelector extends StatelessWidget {
       key: key,
       child: InkWell(
         onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(8),
+        child: Container(
+          color: ZPColors.white,
+          padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
