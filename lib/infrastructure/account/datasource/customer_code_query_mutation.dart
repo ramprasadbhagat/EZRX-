@@ -33,6 +33,7 @@ class CustomerCodeQueryMutation {
             city1
             city2
             customerAttr7
+            customerGrp4
             paymentTermDescription
             shipTo {
               defaultShipToAddress
@@ -139,6 +140,7 @@ class CustomerCodeQueryMutation {
               city1
               city2
               customerAttr7
+              customerGrp4
               distributionChannel
               district
               paymentTermDescription

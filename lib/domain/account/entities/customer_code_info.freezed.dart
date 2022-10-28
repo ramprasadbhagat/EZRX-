@@ -26,6 +26,8 @@ mixin _$CustomerCodeInfo {
   String get paymentTermDescription => throw _privateConstructorUsedError;
   List<ShipToInfo> get shipToInfos => throw _privateConstructorUsedError;
   List<BillToInfo> get billToInfos => throw _privateConstructorUsedError;
+  CustomerAttr7 get customerAttr7 => throw _privateConstructorUsedError;
+  CustomerGrp4 get customerGrp4 => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CustomerCodeInfoCopyWith<CustomerCodeInfo> get copyWith =>
@@ -47,7 +49,9 @@ abstract class $CustomerCodeInfoCopyWith<$Res> {
       String customerLocalGroup,
       String paymentTermDescription,
       List<ShipToInfo> shipToInfos,
-      List<BillToInfo> billToInfos});
+      List<BillToInfo> billToInfos,
+      CustomerAttr7 customerAttr7,
+      CustomerGrp4 customerGrp4});
 
   $CustomerNameCopyWith<$Res> get customerName;
   $CustomerAddressCopyWith<$Res> get customerAddress;
@@ -74,6 +78,8 @@ class _$CustomerCodeInfoCopyWithImpl<$Res>
     Object? paymentTermDescription = freezed,
     Object? shipToInfos = freezed,
     Object? billToInfos = freezed,
+    Object? customerAttr7 = freezed,
+    Object? customerGrp4 = freezed,
   }) {
     return _then(_value.copyWith(
       customerCodeSoldTo: customerCodeSoldTo == freezed
@@ -116,6 +122,14 @@ class _$CustomerCodeInfoCopyWithImpl<$Res>
           ? _value.billToInfos
           : billToInfos // ignore: cast_nullable_to_non_nullable
               as List<BillToInfo>,
+      customerAttr7: customerAttr7 == freezed
+          ? _value.customerAttr7
+          : customerAttr7 // ignore: cast_nullable_to_non_nullable
+              as CustomerAttr7,
+      customerGrp4: customerGrp4 == freezed
+          ? _value.customerGrp4
+          : customerGrp4 // ignore: cast_nullable_to_non_nullable
+              as CustomerGrp4,
     ));
   }
 
@@ -151,7 +165,9 @@ abstract class _$$_CustomerCodeInfoCopyWith<$Res>
       String customerLocalGroup,
       String paymentTermDescription,
       List<ShipToInfo> shipToInfos,
-      List<BillToInfo> billToInfos});
+      List<BillToInfo> billToInfos,
+      CustomerAttr7 customerAttr7,
+      CustomerGrp4 customerGrp4});
 
   @override
   $CustomerNameCopyWith<$Res> get customerName;
@@ -182,6 +198,8 @@ class __$$_CustomerCodeInfoCopyWithImpl<$Res>
     Object? paymentTermDescription = freezed,
     Object? shipToInfos = freezed,
     Object? billToInfos = freezed,
+    Object? customerAttr7 = freezed,
+    Object? customerGrp4 = freezed,
   }) {
     return _then(_$_CustomerCodeInfo(
       customerCodeSoldTo: customerCodeSoldTo == freezed
@@ -224,6 +242,14 @@ class __$$_CustomerCodeInfoCopyWithImpl<$Res>
           ? _value._billToInfos
           : billToInfos // ignore: cast_nullable_to_non_nullable
               as List<BillToInfo>,
+      customerAttr7: customerAttr7 == freezed
+          ? _value.customerAttr7
+          : customerAttr7 // ignore: cast_nullable_to_non_nullable
+              as CustomerAttr7,
+      customerGrp4: customerGrp4 == freezed
+          ? _value.customerGrp4
+          : customerGrp4 // ignore: cast_nullable_to_non_nullable
+              as CustomerGrp4,
     ));
   }
 }
@@ -241,7 +267,9 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
       required this.customerLocalGroup,
       required this.paymentTermDescription,
       required final List<ShipToInfo> shipToInfos,
-      required final List<BillToInfo> billToInfos})
+      required final List<BillToInfo> billToInfos,
+      required this.customerAttr7,
+      required this.customerGrp4})
       : _shipToInfos = shipToInfos,
         _billToInfos = billToInfos,
         super._();
@@ -277,8 +305,13 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
   }
 
   @override
+  final CustomerAttr7 customerAttr7;
+  @override
+  final CustomerGrp4 customerGrp4;
+
+  @override
   String toString() {
-    return 'CustomerCodeInfo(customerCodeSoldTo: $customerCodeSoldTo, customerName: $customerName, customerAddress: $customerAddress, status: $status, postalCode: $postalCode, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos)';
+    return 'CustomerCodeInfo(customerCodeSoldTo: $customerCodeSoldTo, customerName: $customerName, customerAddress: $customerAddress, status: $status, postalCode: $postalCode, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4)';
   }
 
   @override
@@ -304,7 +337,11 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
             const DeepCollectionEquality()
                 .equals(other._shipToInfos, _shipToInfos) &&
             const DeepCollectionEquality()
-                .equals(other._billToInfos, _billToInfos));
+                .equals(other._billToInfos, _billToInfos) &&
+            const DeepCollectionEquality()
+                .equals(other.customerAttr7, customerAttr7) &&
+            const DeepCollectionEquality()
+                .equals(other.customerGrp4, customerGrp4));
   }
 
   @override
@@ -319,7 +356,9 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
       const DeepCollectionEquality().hash(customerLocalGroup),
       const DeepCollectionEquality().hash(paymentTermDescription),
       const DeepCollectionEquality().hash(_shipToInfos),
-      const DeepCollectionEquality().hash(_billToInfos));
+      const DeepCollectionEquality().hash(_billToInfos),
+      const DeepCollectionEquality().hash(customerAttr7),
+      const DeepCollectionEquality().hash(customerGrp4));
 
   @JsonKey(ignore: true)
   @override
@@ -338,7 +377,9 @@ abstract class _CustomerCodeInfo extends CustomerCodeInfo {
       required final String customerLocalGroup,
       required final String paymentTermDescription,
       required final List<ShipToInfo> shipToInfos,
-      required final List<BillToInfo> billToInfos}) = _$_CustomerCodeInfo;
+      required final List<BillToInfo> billToInfos,
+      required final CustomerAttr7 customerAttr7,
+      required final CustomerGrp4 customerGrp4}) = _$_CustomerCodeInfo;
   const _CustomerCodeInfo._() : super._();
 
   @override
@@ -361,6 +402,10 @@ abstract class _CustomerCodeInfo extends CustomerCodeInfo {
   List<ShipToInfo> get shipToInfos;
   @override
   List<BillToInfo> get billToInfos;
+  @override
+  CustomerAttr7 get customerAttr7;
+  @override
+  CustomerGrp4 get customerGrp4;
   @override
   @JsonKey(ignore: true)
   _$$_CustomerCodeInfoCopyWith<_$_CustomerCodeInfo> get copyWith =>

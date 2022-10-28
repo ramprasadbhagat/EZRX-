@@ -54,6 +54,10 @@ mixin _$CustomerCodeDto {
   List<ShipToDto> get shipToInfos => throw _privateConstructorUsedError;
   @JsonKey(name: 'billTo')
   List<BillToDto> get billToInfos => throw _privateConstructorUsedError;
+  @JsonKey(name: 'customerAttr7')
+  String get customerAttr7 => throw _privateConstructorUsedError;
+  @JsonKey(name: 'customerGrp4')
+  String get customerGrp4 => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -83,7 +87,9 @@ abstract class $CustomerCodeDtoCopyWith<$Res> {
       @JsonKey(name: 'customerLocalGroup') String customerLocalGroup,
       @JsonKey(name: 'paymentTermDescription') String paymentTermDescription,
       @JsonKey(name: 'shipTo') List<ShipToDto> shipToInfos,
-      @JsonKey(name: 'billTo') List<BillToDto> billToInfos});
+      @JsonKey(name: 'billTo') List<BillToDto> billToInfos,
+      @JsonKey(name: 'customerAttr7') String customerAttr7,
+      @JsonKey(name: 'customerGrp4') String customerGrp4});
 }
 
 /// @nodoc
@@ -114,6 +120,8 @@ class _$CustomerCodeDtoCopyWithImpl<$Res>
     Object? paymentTermDescription = freezed,
     Object? shipToInfos = freezed,
     Object? billToInfos = freezed,
+    Object? customerAttr7 = freezed,
+    Object? customerGrp4 = freezed,
   }) {
     return _then(_value.copyWith(
       customerCodeSoldTo: customerCodeSoldTo == freezed
@@ -184,6 +192,14 @@ class _$CustomerCodeDtoCopyWithImpl<$Res>
           ? _value.billToInfos
           : billToInfos // ignore: cast_nullable_to_non_nullable
               as List<BillToDto>,
+      customerAttr7: customerAttr7 == freezed
+          ? _value.customerAttr7
+          : customerAttr7 // ignore: cast_nullable_to_non_nullable
+              as String,
+      customerGrp4: customerGrp4 == freezed
+          ? _value.customerGrp4
+          : customerGrp4 // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -212,7 +228,9 @@ abstract class _$$_CustomerCodeDtoCopyWith<$Res>
       @JsonKey(name: 'customerLocalGroup') String customerLocalGroup,
       @JsonKey(name: 'paymentTermDescription') String paymentTermDescription,
       @JsonKey(name: 'shipTo') List<ShipToDto> shipToInfos,
-      @JsonKey(name: 'billTo') List<BillToDto> billToInfos});
+      @JsonKey(name: 'billTo') List<BillToDto> billToInfos,
+      @JsonKey(name: 'customerAttr7') String customerAttr7,
+      @JsonKey(name: 'customerGrp4') String customerGrp4});
 }
 
 /// @nodoc
@@ -245,6 +263,8 @@ class __$$_CustomerCodeDtoCopyWithImpl<$Res>
     Object? paymentTermDescription = freezed,
     Object? shipToInfos = freezed,
     Object? billToInfos = freezed,
+    Object? customerAttr7 = freezed,
+    Object? customerGrp4 = freezed,
   }) {
     return _then(_$_CustomerCodeDto(
       customerCodeSoldTo: customerCodeSoldTo == freezed
@@ -315,6 +335,14 @@ class __$$_CustomerCodeDtoCopyWithImpl<$Res>
           ? _value._billToInfos
           : billToInfos // ignore: cast_nullable_to_non_nullable
               as List<BillToDto>,
+      customerAttr7: customerAttr7 == freezed
+          ? _value.customerAttr7
+          : customerAttr7 // ignore: cast_nullable_to_non_nullable
+              as String,
+      customerGrp4: customerGrp4 == freezed
+          ? _value.customerGrp4
+          : customerGrp4 // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -356,7 +384,11 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
       @JsonKey(name: 'shipTo')
           required final List<ShipToDto> shipToInfos,
       @JsonKey(name: 'billTo')
-          required final List<BillToDto> billToInfos})
+          required final List<BillToDto> billToInfos,
+      @JsonKey(name: 'customerAttr7')
+          required this.customerAttr7,
+      @JsonKey(name: 'customerGrp4')
+          required this.customerGrp4})
       : _shipToInfos = shipToInfos,
         _billToInfos = billToInfos,
         super._();
@@ -426,8 +458,15 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
   }
 
   @override
+  @JsonKey(name: 'customerAttr7')
+  final String customerAttr7;
+  @override
+  @JsonKey(name: 'customerGrp4')
+  final String customerGrp4;
+
+  @override
   String toString() {
-    return 'CustomerCodeDto(customerCodeSoldTo: $customerCodeSoldTo, name1: $name1, name2: $name2, name3: $name3, name4: $name4, status: $status, street1: $street1, street2: $street2, street3: $street3, street4: $street4, street5: $street5, postalCode: $postalCode, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos)';
+    return 'CustomerCodeDto(customerCodeSoldTo: $customerCodeSoldTo, name1: $name1, name2: $name2, name3: $name3, name4: $name4, status: $status, street1: $street1, street2: $street2, street3: $street3, street4: $street4, street5: $street5, postalCode: $postalCode, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4)';
   }
 
   @override
@@ -458,30 +497,37 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
             const DeepCollectionEquality()
                 .equals(other._shipToInfos, _shipToInfos) &&
             const DeepCollectionEquality()
-                .equals(other._billToInfos, _billToInfos));
+                .equals(other._billToInfos, _billToInfos) &&
+            const DeepCollectionEquality()
+                .equals(other.customerAttr7, customerAttr7) &&
+            const DeepCollectionEquality()
+                .equals(other.customerGrp4, customerGrp4));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(customerCodeSoldTo),
-      const DeepCollectionEquality().hash(name1),
-      const DeepCollectionEquality().hash(name2),
-      const DeepCollectionEquality().hash(name3),
-      const DeepCollectionEquality().hash(name4),
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(street1),
-      const DeepCollectionEquality().hash(street2),
-      const DeepCollectionEquality().hash(street3),
-      const DeepCollectionEquality().hash(street4),
-      const DeepCollectionEquality().hash(street5),
-      const DeepCollectionEquality().hash(postalCode),
-      const DeepCollectionEquality().hash(customerClassification),
-      const DeepCollectionEquality().hash(customerLocalGroup),
-      const DeepCollectionEquality().hash(paymentTermDescription),
-      const DeepCollectionEquality().hash(_shipToInfos),
-      const DeepCollectionEquality().hash(_billToInfos));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(customerCodeSoldTo),
+        const DeepCollectionEquality().hash(name1),
+        const DeepCollectionEquality().hash(name2),
+        const DeepCollectionEquality().hash(name3),
+        const DeepCollectionEquality().hash(name4),
+        const DeepCollectionEquality().hash(status),
+        const DeepCollectionEquality().hash(street1),
+        const DeepCollectionEquality().hash(street2),
+        const DeepCollectionEquality().hash(street3),
+        const DeepCollectionEquality().hash(street4),
+        const DeepCollectionEquality().hash(street5),
+        const DeepCollectionEquality().hash(postalCode),
+        const DeepCollectionEquality().hash(customerClassification),
+        const DeepCollectionEquality().hash(customerLocalGroup),
+        const DeepCollectionEquality().hash(paymentTermDescription),
+        const DeepCollectionEquality().hash(_shipToInfos),
+        const DeepCollectionEquality().hash(_billToInfos),
+        const DeepCollectionEquality().hash(customerAttr7),
+        const DeepCollectionEquality().hash(customerGrp4)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -531,7 +577,11 @@ abstract class _CustomerCodeDto extends CustomerCodeDto {
       @JsonKey(name: 'shipTo')
           required final List<ShipToDto> shipToInfos,
       @JsonKey(name: 'billTo')
-          required final List<BillToDto> billToInfos}) = _$_CustomerCodeDto;
+          required final List<BillToDto> billToInfos,
+      @JsonKey(name: 'customerAttr7')
+          required final String customerAttr7,
+      @JsonKey(name: 'customerGrp4')
+          required final String customerGrp4}) = _$_CustomerCodeDto;
   const _CustomerCodeDto._() : super._();
 
   factory _CustomerCodeDto.fromJson(Map<String, dynamic> json) =
@@ -588,6 +638,12 @@ abstract class _CustomerCodeDto extends CustomerCodeDto {
   @override
   @JsonKey(name: 'billTo')
   List<BillToDto> get billToInfos;
+  @override
+  @JsonKey(name: 'customerAttr7')
+  String get customerAttr7;
+  @override
+  @JsonKey(name: 'customerGrp4')
+  String get customerGrp4;
   @override
   @JsonKey(ignore: true)
   _$$_CustomerCodeDtoCopyWith<_$_CustomerCodeDto> get copyWith =>

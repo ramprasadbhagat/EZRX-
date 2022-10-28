@@ -19,6 +19,8 @@ abstract class IMaterialListRepository {
     required int offset,
     required String orderBy,
     required String searchKey,
-    required MaterialFilter  selectedMaterialFilter,
+    required MaterialFilter selectedMaterialFilter,
+    bool ispickandpackenabled = false,
+    bool isForFoc = false,
   });
 }

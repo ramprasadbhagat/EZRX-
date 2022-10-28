@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/presentation/core/cart_button.dart';
@@ -6,6 +7,11 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/tab_view.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/add_to_cart.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_bundle_list.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/covid_material_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,23 +25,25 @@ class MaterialRoot extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.disableBundles != current.disableBundles,
       builder: (context, state) {
-        final disableBundles =
-            context.read<SalesOrgBloc>().state.disableBundles;
-        final length = disableBundles ? 1 : 2;
-        final headerText =
-            disableBundles ? ['Add Material'] : ['Add Material', 'Add Bundle'];
-        final widgetList = disableBundles
-            ? [
-                MaterialListPage(
-                  addToCart: _showBottomSheet,
-                ),
-              ]
-            : [
-                MaterialListPage(
-                  addToCart: _showBottomSheet,
-                ),
-                const MaterialBundleListPage(),
-              ];
+        final disableBundles = state.configs.disableBundles;
+        final enableCovidMaterial = _canOrderCovidMaterial(
+          customerCodeInfo:
+              context.read<CustomerCodeBloc>().state.customerCodeInfo,
+          salesOrganisation:
+              context.read<SalesOrgBloc>().state.salesOrganisation,
+          role: context.read<UserBloc>().state.user.role,
+        );
+        final length = (disableBundles ? 1 : 2) + (enableCovidMaterial ? 1 : 0);
+        final headerText = [
+          'Material',
+          if (!disableBundles) 'Bundles',
+          if (enableCovidMaterial) 'COVID-19',
+        ];
+        final widgetList = [
+          MaterialListPage(addToCart: _showBottomSheet),
+          if (!disableBundles) const MaterialBundleListPage(),
+          if (enableCovidMaterial) const CovidMaterialListPage(),
+        ];
 
         return Scaffold(
           appBar: PreferredSize(
@@ -85,4 +93,20 @@ class MaterialRoot extends StatelessWidget {
       },
     );
   }
+}
+
+// TODO: will revisit and make this better
+bool _canOrderCovidMaterial({
+  required CustomerCodeInfo customerCodeInfo,
+  required SalesOrganisation salesOrganisation,
+  required Role role,
+}) {
+  // 1. SG Covid tab
+  // 2. Sample item
+  // 3. PH Covid tab
+  return (customerCodeInfo.customerAttr7.isZEV &&
+          role.type.isClient &&
+          salesOrganisation.salesOrg.isSg) ||
+      customerCodeInfo.customerGrp4.canOrderCovidMaterial ||
+      (role.type.isSalesRep && salesOrganisation.salesOrg.isPH);
 }

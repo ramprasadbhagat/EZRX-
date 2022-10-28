@@ -51,6 +51,18 @@ class SalesOrg extends ValueObject<String> {
     return country == 'VN';
   }
 
+  bool get isSg {
+    return country == 'SG';
+  }
+
+  bool get isVP {
+    return country == 'VP';
+  }
+
+  bool get isPH {
+    return country == 'PH';
+  }
+
   const SalesOrg._(this.value);
 }
 
@@ -86,6 +98,10 @@ class RoleType extends ValueObject<String> {
     return roleIsTcAudience(value.getOrElse(() => ''));
   }
 
+  bool get isClient {
+    return loginUserType == 'client';
+  }
+
   const RoleType._(this.value);
 }
 
@@ -106,4 +122,40 @@ class Currency extends ValueObject<String> {
   }
 
   const Currency._(this.value);
+}
+
+class CustomerAttr7 extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory CustomerAttr7(String input) {
+    return CustomerAttr7._(validateStringNotEmpty(input));
+  }
+
+  bool get isZEV {
+    return value.getOrElse(() => '') == 'ZEV';
+  }
+
+  const CustomerAttr7._(this.value);
+}
+
+class CustomerGrp4 extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory CustomerGrp4(String input) {
+    return CustomerGrp4._(validateStringNotEmpty(input));
+  }
+
+  bool get isVR {
+    return value.getOrElse(() => '') == 'VR';
+  }
+
+  bool get isVP {
+    return value.getOrElse(() => '') == 'VP';
+  }
+
+  bool get canOrderCovidMaterial => isVR || isVP;
+
+  const CustomerGrp4._(this.value);
 }

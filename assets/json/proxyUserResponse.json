@@ -80,7 +80,14 @@
                    "shipToCode":[
                       "all"
                    ]
-                }
+                },
+                {
+                  "salesOrg":"2900",
+                  "customerCode":"all",
+                  "shipToCode":[
+                     "all"
+                  ]
+               }
              ]
           },
           "passwordActionName":"Do It Later",

@@ -39,6 +39,8 @@ class MaterialListRepository implements IMaterialListRepository {
     required String orderBy,
     required String searchKey,
     required MaterialFilter selectedMaterialFilter,
+    bool ispickandpackenabled = false,
+    bool isForFoc = false,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -66,10 +68,11 @@ class MaterialListRepository implements IMaterialListRepository {
               searchKey: searchKey,
               language: salesOrgConfig.getConfigLangauge,
               gimmickMaterial: salesOrgConfig.enableGimmickMaterial,
-              pickAndPack: appMethods.getPickAndPackValue(false),
               itemBrandList: selectedMaterialFilter.uniqueItemBrand,
-              therapeuticClassList: selectedMaterialFilter.uniqueTherapeuticClass,
+              therapeuticClassList:
+                  selectedMaterialFilter.uniqueTherapeuticClass,
               principalNameList: selectedMaterialFilter.uniquePrincipalName,
+              pickAndPack: appMethods.getPickAndPackValue(ispickandpackenabled),
             )
           : await materialListRemoteDataSource.getMaterialList(
               salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
@@ -83,7 +86,9 @@ class MaterialListRepository implements IMaterialListRepository {
               language: salesOrgConfig.getConfigLangauge,
               principalNameList: selectedMaterialFilter.uniquePrincipalName,
               itemBrandList: selectedMaterialFilter.uniqueItemBrand,
-              therapeuticClassList: selectedMaterialFilter.uniqueTherapeuticClass,
+              therapeuticClassList:
+                  selectedMaterialFilter.uniqueTherapeuticClass,
+              isForFOC: isForFoc,
             );
 
       return Right(materialListData);

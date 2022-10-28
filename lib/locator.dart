@@ -10,6 +10,8 @@ import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
+import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
@@ -19,7 +21,6 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
@@ -621,6 +622,12 @@ void setupLocator() {
     ),
   );
 
+  locator.registerLazySingleton(
+    () => CovidMaterialListBloc(
+      materialListRepository: locator<MaterialListRepository>(),
+    ),
+  );
+
   //============================================================
   //  Order Template List
   //
@@ -996,7 +1003,7 @@ void setupLocator() {
   //  Material Filter
   //
   //============================================================
-  
+
   locator.registerLazySingleton(() => MaterialFilterQueryMutation());
   locator.registerLazySingleton(() => MaterialFilterLocalDataSource());
 
@@ -1008,7 +1015,6 @@ void setupLocator() {
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
-
 
   locator.registerLazySingleton(
     () => MaterialFilterRepository(

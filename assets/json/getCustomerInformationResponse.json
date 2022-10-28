@@ -23,6 +23,7 @@
                     "city1": "Shah Alam",
                     "city2": "",
                     "customerAttr7": "",
+                    "customerGrp4" : "",
                     "paymentTermDescription": "",
                     "shipTo": [
                         {
@@ -72,6 +73,7 @@
                     "city1": "Kota Kinabalu",
                     "city2": "",
                     "customerAttr7": "",
+                    "customerGrp4" : "",
                     "paymentTermDescription": "",
                     "shipTo": [
                         {
@@ -121,6 +123,7 @@
                     "city1": "Kuching",
                     "city2": "",
                     "customerAttr7": "",
+                    "customerGrp4" : "",
                     "paymentTermDescription": "",
                     "shipTo": [
                         {
@@ -170,6 +173,7 @@
                     "city1": "Shah Alam",
                     "city2": "",
                     "customerAttr7": "",
+                    "customerGrp4" : "",
                     "paymentTermDescription": "",
                     "shipTo": [
                         {
@@ -219,6 +223,7 @@
                     "city1": "",
                     "city2": "",
                     "customerAttr7": "",
+                    "customerGrp4" : "",
                     "paymentTermDescription": "Pay immediately (Standard SAP)",
                     "shipTo": [
                         {
@@ -268,6 +273,7 @@
                     "city1": "",
                     "city2": "",
                     "customerAttr7": "",
+                    "customerGrp4" : "",
                     "paymentTermDescription": "",
                     "shipTo": [
                         {
@@ -317,6 +323,7 @@
                     "city1": "",
                     "city2": "",
                     "customerAttr7": "",
+                    "customerGrp4" : "",
                     "paymentTermDescription": "",
                     "shipTo": [
                         {
@@ -366,6 +373,7 @@
                     "city1": "CKR",
                     "city2": "",
                     "customerAttr7": "",
+                    "customerGrp4" : "",
                     "paymentTermDescription": "Pay immediately (Standard SAP)",
                     "shipTo": [
                         {
@@ -415,6 +423,7 @@
                     "city1": "PETALING",
                     "city2": "PETALING JAYA",
                     "customerAttr7": "",
+                    "customerGrp4" : "",
                     "paymentTermDescription": "30 Days from EOM, due EOM",
                     "shipTo": [
                         {
@@ -464,6 +473,7 @@
                     "city1": "BANGKOK 1",
                     "city2": "BANGKAPI",
                     "customerAttr7": "",
+                    "customerGrp4" : "",
                     "paymentTermDescription": "Pay immediately (Standard SAP)",
                     "shipTo": [
                         {
@@ -513,6 +523,7 @@
                     "city1": "KUALA LUMPUR WEST",
                     "city2": "KUALA LUMPUR CENTRE",
                     "customerAttr7": "",
+                    "customerGrp4" : "",
                     "paymentTermDescription": "Pay immediately (Standard SAP)",
                     "shipTo": [
                         {

@@ -19,21 +19,8 @@ class TabViewPage extends StatelessWidget {
       length: length,
       child: Column(
         children: [
-          TabBar(
-            tabs: [
-              for (final header in tabHeaderText)
-                Tab(
-                  text: header.tr(),
-                ),
-            ],
-          ),
-          Expanded(
-            child: TabBarView(
-              children: [
-                for (final tabView in tabWidgets) tabView,
-              ],
-            ),
-          ),
+          TabBar(tabs: tabHeaderText.map((e) => Tab(text: e.tr())).toList()),
+          Expanded(child: TabBarView(children: tabWidgets)),
         ],
       ),
     );

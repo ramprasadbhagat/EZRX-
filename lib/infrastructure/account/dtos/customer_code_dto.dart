@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/account/entities/customer_address.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_name.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/bill_to_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/ship_to_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -31,6 +32,8 @@ class CustomerCodeDto with _$CustomerCodeDto {
         required String paymentTermDescription,
     @JsonKey(name: 'shipTo') required List<ShipToDto> shipToInfos,
     @JsonKey(name: 'billTo') required List<BillToDto> billToInfos,
+    @JsonKey(name: 'customerAttr7') required String customerAttr7,
+    @JsonKey(name: 'customerGrp4') required String customerGrp4,
   }) = _CustomerCodeDto;
 
   factory CustomerCodeDto.fromDomain(CustomerCodeInfo customerCodeInfo) {
@@ -56,6 +59,8 @@ class CustomerCodeDto with _$CustomerCodeDto {
       billToInfos: customerCodeInfo.billToInfos
           .map((e) => BillToDto.fromDomain(e))
           .toList(),
+      customerAttr7: customerCodeInfo.customerAttr7.getOrCrash(),
+      customerGrp4: customerCodeInfo.customerGrp4.getOrCrash(),
     );
   }
 
@@ -82,6 +87,8 @@ class CustomerCodeDto with _$CustomerCodeDto {
       paymentTermDescription: paymentTermDescription,
       shipToInfos: shipToInfos.map((e) => e.toDomain()).toList(),
       billToInfos: billToInfos.map((e) => e.toDomain()).toList(),
+      customerAttr7: CustomerAttr7(customerAttr7),
+      customerGrp4: CustomerGrp4(customerAttr7),
     );
   }
 

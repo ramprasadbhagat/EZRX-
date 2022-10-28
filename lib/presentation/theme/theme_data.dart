@@ -40,7 +40,7 @@ final appThemeData = {
     ),
     tabBarTheme: const TabBarTheme(
       indicator: BoxDecoration(
-        color: ZPColors.lightGray,
+        color: ZPColors.white,
       ),
       labelColor: ZPColors.primary,
       unselectedLabelColor: ZPColors.lightGray,

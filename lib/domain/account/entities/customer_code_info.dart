@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_address.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_name.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'customer_code_info.freezed.dart';
@@ -21,17 +22,19 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
     required String paymentTermDescription,
     required List<ShipToInfo> shipToInfos,
     required List<BillToInfo> billToInfos,
+    required CustomerAttr7 customerAttr7,
+    required CustomerGrp4 customerGrp4,
   }) = _CustomerCodeInfo;
 
-  factory CustomerCodeInfo.empty() => const CustomerCodeInfo(
+  factory CustomerCodeInfo.empty() => CustomerCodeInfo(
         customerCodeSoldTo: '',
-        customerName: CustomerName(
+        customerName: const CustomerName(
           name1: '',
           name2: '',
           name3: '',
           name4: '',
         ),
-        customerAddress: CustomerAddress(
+        customerAddress: const CustomerAddress(
           street1: '',
           street2: '',
           street3: '',
@@ -45,5 +48,7 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
         paymentTermDescription: '',
         shipToInfos: <ShipToInfo>[],
         billToInfos: <BillToInfo>[],
+        customerAttr7: CustomerAttr7(''),
+        customerGrp4: CustomerGrp4(''),
       );
 }
