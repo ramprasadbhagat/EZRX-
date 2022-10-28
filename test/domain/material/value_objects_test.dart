@@ -101,5 +101,19 @@ void main() {
       );
       expect(result, '\$12.23');
     });
+
+    test('should conform ZDP5 Rule', () async {
+      const input = 10;
+      final price = MaterialQty(input);
+      final result = price.conformZDP5Rule('5');
+      expect(result, true);
+    });
+
+    test('should not conform when ZDP5 value is invalid', () async {
+      const input = 10;
+      final price = MaterialQty(input);
+      final result = price.conformZDP5Rule('fake-value');
+      expect(result, false);
+    });
   });
 }

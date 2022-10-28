@@ -26,7 +26,6 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
     on<CustomerCodeEvent>(_onEvent);
   }
 
-  //TODO: Implement case have search text
   Future<void> _onEvent(
     CustomerCodeEvent event,
     Emitter<CustomerCodeState> emit,

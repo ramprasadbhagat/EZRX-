@@ -522,9 +522,8 @@ abstract class _Validate implements ValidCustomerMaterialEvent {
 
 /// @nodoc
 mixin _$ValidCustomerMaterialState {
-  Map<String, List<MaterialNumber>> get validMaterialNumbers =>
+  Map<String, ValidCustomerMaterialViewModel> get validMaterialState =>
       throw _privateConstructorUsedError;
-  bool get isValidating => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ValidCustomerMaterialStateCopyWith<ValidCustomerMaterialState>
@@ -536,9 +535,7 @@ abstract class $ValidCustomerMaterialStateCopyWith<$Res> {
   factory $ValidCustomerMaterialStateCopyWith(ValidCustomerMaterialState value,
           $Res Function(ValidCustomerMaterialState) then) =
       _$ValidCustomerMaterialStateCopyWithImpl<$Res>;
-  $Res call(
-      {Map<String, List<MaterialNumber>> validMaterialNumbers,
-      bool isValidating});
+  $Res call({Map<String, ValidCustomerMaterialViewModel> validMaterialState});
 }
 
 /// @nodoc
@@ -552,18 +549,13 @@ class _$ValidCustomerMaterialStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? validMaterialNumbers = freezed,
-    Object? isValidating = freezed,
+    Object? validMaterialState = freezed,
   }) {
     return _then(_value.copyWith(
-      validMaterialNumbers: validMaterialNumbers == freezed
-          ? _value.validMaterialNumbers
-          : validMaterialNumbers // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<MaterialNumber>>,
-      isValidating: isValidating == freezed
-          ? _value.isValidating
-          : isValidating // ignore: cast_nullable_to_non_nullable
-              as bool,
+      validMaterialState: validMaterialState == freezed
+          ? _value.validMaterialState
+          : validMaterialState // ignore: cast_nullable_to_non_nullable
+              as Map<String, ValidCustomerMaterialViewModel>,
     ));
   }
 }
@@ -576,9 +568,7 @@ abstract class _$$_ValidCustomerMaterialStateCopyWith<$Res>
           $Res Function(_$_ValidCustomerMaterialState) then) =
       __$$_ValidCustomerMaterialStateCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {Map<String, List<MaterialNumber>> validMaterialNumbers,
-      bool isValidating});
+  $Res call({Map<String, ValidCustomerMaterialViewModel> validMaterialState});
 }
 
 /// @nodoc
@@ -596,18 +586,13 @@ class __$$_ValidCustomerMaterialStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? validMaterialNumbers = freezed,
-    Object? isValidating = freezed,
+    Object? validMaterialState = freezed,
   }) {
     return _then(_$_ValidCustomerMaterialState(
-      validMaterialNumbers: validMaterialNumbers == freezed
-          ? _value._validMaterialNumbers
-          : validMaterialNumbers // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<MaterialNumber>>,
-      isValidating: isValidating == freezed
-          ? _value.isValidating
-          : isValidating // ignore: cast_nullable_to_non_nullable
-              as bool,
+      validMaterialState: validMaterialState == freezed
+          ? _value._validMaterialState
+          : validMaterialState // ignore: cast_nullable_to_non_nullable
+              as Map<String, ValidCustomerMaterialViewModel>,
     ));
   }
 }
@@ -616,24 +601,21 @@ class __$$_ValidCustomerMaterialStateCopyWithImpl<$Res>
 
 class _$_ValidCustomerMaterialState extends _ValidCustomerMaterialState {
   const _$_ValidCustomerMaterialState(
-      {required final Map<String, List<MaterialNumber>> validMaterialNumbers,
-      required this.isValidating})
-      : _validMaterialNumbers = validMaterialNumbers,
+      {required final Map<String, ValidCustomerMaterialViewModel>
+          validMaterialState})
+      : _validMaterialState = validMaterialState,
         super._();
 
-  final Map<String, List<MaterialNumber>> _validMaterialNumbers;
+  final Map<String, ValidCustomerMaterialViewModel> _validMaterialState;
   @override
-  Map<String, List<MaterialNumber>> get validMaterialNumbers {
+  Map<String, ValidCustomerMaterialViewModel> get validMaterialState {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_validMaterialNumbers);
+    return EqualUnmodifiableMapView(_validMaterialState);
   }
 
   @override
-  final bool isValidating;
-
-  @override
   String toString() {
-    return 'ValidCustomerMaterialState(validMaterialNumbers: $validMaterialNumbers, isValidating: $isValidating)';
+    return 'ValidCustomerMaterialState(validMaterialState: $validMaterialState)';
   }
 
   @override
@@ -642,16 +624,12 @@ class _$_ValidCustomerMaterialState extends _ValidCustomerMaterialState {
         (other.runtimeType == runtimeType &&
             other is _$_ValidCustomerMaterialState &&
             const DeepCollectionEquality()
-                .equals(other._validMaterialNumbers, _validMaterialNumbers) &&
-            const DeepCollectionEquality()
-                .equals(other.isValidating, isValidating));
+                .equals(other._validMaterialState, _validMaterialState));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_validMaterialNumbers),
-      const DeepCollectionEquality().hash(isValidating));
+      runtimeType, const DeepCollectionEquality().hash(_validMaterialState));
 
   @JsonKey(ignore: true)
   @override
@@ -662,14 +640,12 @@ class _$_ValidCustomerMaterialState extends _ValidCustomerMaterialState {
 
 abstract class _ValidCustomerMaterialState extends ValidCustomerMaterialState {
   const factory _ValidCustomerMaterialState(
-      {required final Map<String, List<MaterialNumber>> validMaterialNumbers,
-      required final bool isValidating}) = _$_ValidCustomerMaterialState;
+      {required final Map<String, ValidCustomerMaterialViewModel>
+          validMaterialState}) = _$_ValidCustomerMaterialState;
   const _ValidCustomerMaterialState._() : super._();
 
   @override
-  Map<String, List<MaterialNumber>> get validMaterialNumbers;
-  @override
-  bool get isValidating;
+  Map<String, ValidCustomerMaterialViewModel> get validMaterialState;
   @override
   @JsonKey(ignore: true)
   _$$_ValidCustomerMaterialStateCopyWith<_$_ValidCustomerMaterialState>

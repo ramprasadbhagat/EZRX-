@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/application/order/valid_customer_material/valid_customer_material_view_model.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
@@ -29,10 +30,49 @@ class ValidCustomerMaterialBloc
       initialized: (_Initialized e) async =>
           emit(ValidCustomerMaterialState.initial()),
       validate: (_Validate e) async {
-        if (state.validMaterialNumbers.containsKey(
-          e.validateId,
-        )) return;
-        emit(state.copyWith(isValidating: true));
+        final validatingState = state.validMaterialState[e.validateId];
+        if (validatingState != null &&
+            validatingState.status == ValidatingStatus.success) {
+          emit(
+            state.copyWith(
+              validMaterialState: Map.from(state.validMaterialState)
+                ..addEntries(
+                  {
+                    e.validateId: validatingState.copyWith(
+                      status: ValidatingStatus.loading,
+                    ),
+                  }.entries,
+                ),
+            ),
+          );
+          emit(
+            state.copyWith(
+              validMaterialState: Map.from(state.validMaterialState)
+                ..addEntries(
+                  {
+                    e.validateId: validatingState.copyWith(
+                      status: ValidatingStatus.success,
+                    ),
+                  }.entries,
+                ),
+            ),
+          );
+
+          return;
+        }
+
+        emit(
+          state.copyWith(
+            validMaterialState: Map.from(state.validMaterialState)
+              ..addEntries(
+                {
+                  e.validateId: const ValidCustomerMaterialViewModel(
+                    status: ValidatingStatus.loading,
+                  ),
+                }.entries,
+              ),
+          ),
+        );
         final failureOrSuccess =
             await validCustomerMaterialRepository.getValidMaterialList(
           user: e.user,
@@ -44,24 +84,31 @@ class ValidCustomerMaterialBloc
         );
         failureOrSuccess.fold(
           (failure) {
-            emit(state.copyWith(isValidating: false));
-          },
-          (validMaterialList) {
-            // final availableValidMaterialList =
-            //     Set<MaterialNumber>.from(state.validMaterialList);
-            // availableValidMaterialList.addAll(validMaterialList);
-            // emit(
-            //   state.copyWith(
-            //     isValidating: false,
-            //     validMaterialList: availableValidMaterialList.toList()
-            //       ..shuffle(),
-            //   ),
-            // );
             emit(
               state.copyWith(
-                isValidating: false,
-                validMaterialNumbers: Map.from(state.validMaterialNumbers)
-                  ..addAll({e.validateId: validMaterialList}),
+                validMaterialState: Map.from(state.validMaterialState)
+                  ..addEntries(
+                    {
+                      e.validateId: const ValidCustomerMaterialViewModel(
+                        status: ValidatingStatus.failure,
+                      ),
+                    }.entries,
+                  ),
+              ),
+            );
+          },
+          (validMaterialList) {
+            emit(
+              state.copyWith(
+                validMaterialState: Map.from(state.validMaterialState)
+                  ..addEntries(
+                    {
+                      e.validateId: ValidCustomerMaterialViewModel(
+                        status: ValidatingStatus.success,
+                        validMaterialNumbers: validMaterialList,
+                      ),
+                    }.entries,
+                  ),
               ),
             );
           },
