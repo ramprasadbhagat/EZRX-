@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_bundle_list_local.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_bundle_list.dart';
@@ -170,34 +171,34 @@ void main() {
         'Test have material bundle list and emit load more state include',
         (tester) async {
       final bundleInfoList = [
-        const BundleInfo(
+        BundleInfo(
           sequence: 1,
           quantity: 1,
-          type: '%',
+          type: MaterialBundleType('%'),
           rate: -10,
         ),
-        const BundleInfo(
+        BundleInfo(
           sequence: 4,
           quantity: 10,
-          type: '%',
+          type: MaterialBundleType('%'),
           rate: -15,
         ),
-        const BundleInfo(
+        BundleInfo(
           sequence: 7,
           quantity: 15,
-          type: '%',
+          type: MaterialBundleType('%'),
           rate: -20,
         ),
-        const BundleInfo(
+        BundleInfo(
           sequence: 13,
           quantity: 50,
-          type: '%',
+          type: MaterialBundleType('%'),
           rate: -30,
         ),
-        const BundleInfo(
+        BundleInfo(
           sequence: 10,
           quantity: 20,
-          type: '%',
+          type: MaterialBundleType('%'),
           rate: -25,
         ),
       ];

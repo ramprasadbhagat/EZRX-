@@ -21,45 +21,28 @@ class OrderHistoryFilterDrawer extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 const _FilterHeader(),
-                const SizedBox(
-                  height: 16,
-                ),
+                const SizedBox(height: 16),
                 const _OrderIdByFilter(),
-                const SizedBox(
-                  height: 16,
-                ),
+                const SizedBox(height: 16),
                 const _PoNumberFilter(),
-                const SizedBox(
-                  height: 16,
-                ),
+                const SizedBox(height: 16),
                 const _MaterialSearchByFilter(),
-                const SizedBox(
-                  height: 16,
-                ),
+                const SizedBox(height: 16),
                 const _PrincipleSearchByFilter(),
-                const SizedBox(
-                  height: 16,
-                ),
+                const SizedBox(height: 16),
                 Row(children: const [
                   _OrderFromDateByFilter(),
                   Padding(
                     padding: EdgeInsets.all(4.0),
-                    child: Text(
-                      'to',
-                      style: TextStyle(fontSize: 16),
-                    ),
+                    child: Text('to', style: TextStyle(fontSize: 12)),
                   ),
                   _OrderToDateByFilter(),
                 ]),
-                const SizedBox(
-                  height: 16,
-                ),
+                const SizedBox(height: 16),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
                     _ClearButton(),
-                    SizedBox(
-                      width: 30,
-                    ),
                     _ApplyButton(),
                   ],
                 ),
@@ -89,7 +72,7 @@ class _FilterHeader extends StatelessWidget {
             'Filter Order History',
             style: TextStyle(
               fontSize: 16,
-              color: ZPColors.kPrimaryColor,
+              color: ZPColors.black,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -121,48 +104,52 @@ class _OrderIdByFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OrderHistoryFilterBloc, OrderHistoryFilterState>(
-        buildWhen: (previous, current) =>
-            previous.orderHistoryFilterList.orderId !=
-            current.orderHistoryFilterList.orderId,
-        builder: (context, state,) {
-          return TextFormField(
-            key: const Key('filterorderidField'),
-            initialValue: state.orderHistoryFilterList.orderId,
-            onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
-                  OrderHistoryFilterEvent.orderIdChanged(
-                    value,
-                  ),
+      buildWhen: (previous, current) =>
+          previous.orderHistoryFilterList.orderId !=
+          current.orderHistoryFilterList.orderId,
+      builder: (
+        context,
+        state,
+      ) {
+        return TextFormField(
+          key: const Key('filterorderidField'),
+          initialValue: state.orderHistoryFilterList.orderId,
+          onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
+                OrderHistoryFilterEvent.orderIdChanged(
+                  value,
                 ),
-            keyboardType: TextInputType.text,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
+              ),
+          keyboardType: TextInputType.text,
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+          ),
+          decoration: const InputDecoration(
+            contentPadding: EdgeInsets.symmetric(
+              vertical: 5.0,
+              horizontal: 10.0,
             ),
-            decoration: const InputDecoration(
-              contentPadding: EdgeInsets.symmetric(
-                vertical: 5.0,
-                horizontal: 10.0,
-              ),
-              border: InputBorder.none,
-              labelText: 'Order ID',
-              labelStyle: TextStyle(
-                fontSize: 12.0,
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: ZPColors.kPrimaryColor,
-                  width: 1.0,
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: ZPColors.lightGray,
-                  width: 1.0,
-                ),
+            border: InputBorder.none,
+            labelText: 'Order ID',
+            labelStyle: TextStyle(
+              fontSize: 12.0,
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: ZPColors.kPrimaryColor,
+                width: 1.0,
               ),
             ),
-          );
-        },);
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: ZPColors.lightGray,
+                width: 1.0,
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -171,48 +158,52 @@ class _PoNumberFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OrderHistoryFilterBloc, OrderHistoryFilterState>(
-        buildWhen: (previous, current) =>
-            previous.orderHistoryFilterList.poNumber !=
-            current.orderHistoryFilterList.poNumber,
-        builder: (context, state,) {
-          return TextFormField(
-            key: const Key('filterponumberField'),
-            initialValue: state.orderHistoryFilterList.poNumber,
-            onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
-                  OrderHistoryFilterEvent.poNumberChanged(
-                    value,
-                  ),
+      buildWhen: (previous, current) =>
+          previous.orderHistoryFilterList.poNumber !=
+          current.orderHistoryFilterList.poNumber,
+      builder: (
+        context,
+        state,
+      ) {
+        return TextFormField(
+          key: const Key('filterponumberField'),
+          initialValue: state.orderHistoryFilterList.poNumber,
+          onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
+                OrderHistoryFilterEvent.poNumberChanged(
+                  value,
                 ),
-            keyboardType: TextInputType.text,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
+              ),
+          keyboardType: TextInputType.text,
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+          ),
+          decoration: const InputDecoration(
+            contentPadding: EdgeInsets.symmetric(
+              vertical: 5.0,
+              horizontal: 10.0,
             ),
-            decoration: const InputDecoration(
-              contentPadding: EdgeInsets.symmetric(
-                vertical: 5.0,
-                horizontal: 10.0,
-              ),
-              border: InputBorder.none,
-              labelText: 'PO Number',
-              labelStyle: TextStyle(
-                fontSize: 12.0,
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: ZPColors.kPrimaryColor,
-                  width: 1.0,
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: ZPColors.lightGray,
-                  width: 1.0,
-                ),
+            border: InputBorder.none,
+            labelText: 'PO Number',
+            labelStyle: TextStyle(
+              fontSize: 12.0,
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: ZPColors.kPrimaryColor,
+                width: 1.0,
               ),
             ),
-          );
-        },);
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: ZPColors.lightGray,
+                width: 1.0,
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -221,49 +212,53 @@ class _MaterialSearchByFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OrderHistoryFilterBloc, OrderHistoryFilterState>(
-        buildWhen: (previous, current) =>
-            previous.orderHistoryFilterList.materialSearch !=
-            current.orderHistoryFilterList.materialSearch,
-        builder: (context, state,) {
-          return TextFormField(
-            key: const Key('filtermaterialsearchField'),
-            initialValue: state.orderHistoryFilterList.materialSearch
-                .getOrDefaultValue(''),
-            onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
-                  OrderHistoryFilterEvent.materialSearchChanged(
-                    MaterialNumber(value),
-                  ),
+      buildWhen: (previous, current) =>
+          previous.orderHistoryFilterList.materialSearch !=
+          current.orderHistoryFilterList.materialSearch,
+      builder: (
+        context,
+        state,
+      ) {
+        return TextFormField(
+          key: const Key('filtermaterialsearchField'),
+          initialValue:
+              state.orderHistoryFilterList.materialSearch.getOrDefaultValue(''),
+          onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
+                OrderHistoryFilterEvent.materialSearchChanged(
+                  MaterialNumber(value),
                 ),
-            keyboardType: TextInputType.text,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
+              ),
+          keyboardType: TextInputType.text,
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+          ),
+          decoration: const InputDecoration(
+            contentPadding: EdgeInsets.symmetric(
+              vertical: 5.0,
+              horizontal: 10.0,
             ),
-            decoration: const InputDecoration(
-              contentPadding: EdgeInsets.symmetric(
-                vertical: 5.0,
-                horizontal: 10.0,
-              ),
-              border: InputBorder.none,
-              labelText: 'Material ID/Name',
-              labelStyle: TextStyle(
-                fontSize: 12.0,
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: ZPColors.kPrimaryColor,
-                  width: 1.0,
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: ZPColors.lightGray,
-                  width: 1.0,
-                ),
+            border: InputBorder.none,
+            labelText: 'Material ID/Name',
+            labelStyle: TextStyle(
+              fontSize: 12.0,
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: ZPColors.kPrimaryColor,
+                width: 1.0,
               ),
             ),
-          );
-        },);
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: ZPColors.lightGray,
+                width: 1.0,
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -272,51 +267,58 @@ class _PrincipleSearchByFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OrderHistoryFilterBloc, OrderHistoryFilterState>(
-        buildWhen: (previous, current) =>
-            previous.orderHistoryFilterList.principalSearch !=
-            current.orderHistoryFilterList.principalSearch,
-        builder: (context, state,) {
-          return TextFormField(
-            key: const Key('filterprinciplesearchField'),
-            initialValue: state.orderHistoryFilterList.principalSearch,
-            onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
-                  OrderHistoryFilterEvent.principalSearchChanged(value),
-                ),
-            keyboardType: TextInputType.text,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
+      buildWhen: (previous, current) =>
+          previous.orderHistoryFilterList.principalSearch !=
+          current.orderHistoryFilterList.principalSearch,
+      builder: (
+        context,
+        state,
+      ) {
+        return TextFormField(
+          key: const Key('filterprinciplesearchField'),
+          initialValue: state.orderHistoryFilterList.principalSearch,
+          onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
+                OrderHistoryFilterEvent.principalSearchChanged(value),
+              ),
+          keyboardType: TextInputType.text,
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+          ),
+          decoration: const InputDecoration(
+            contentPadding: EdgeInsets.symmetric(
+              vertical: 5.0,
+              horizontal: 10.0,
             ),
-            decoration: const InputDecoration(
-              contentPadding: EdgeInsets.symmetric(
-                vertical: 5.0,
-                horizontal: 10.0,
-              ),
-              border: InputBorder.none,
-              labelText: 'Principle Code/Name',
-              labelStyle: TextStyle(
-                fontSize: 12.0,
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: ZPColors.kPrimaryColor,
-                  width: 1.0,
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: ZPColors.lightGray,
-                  width: 1.0,
-                ),
+            border: InputBorder.none,
+            labelText: 'Principle Code/Name',
+            labelStyle: TextStyle(
+              fontSize: 12.0,
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: ZPColors.kPrimaryColor,
+                width: 1.0,
               ),
             ),
-          );
-        },);
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: ZPColors.lightGray,
+                width: 1.0,
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
 
 Future<DateTime?> shoDatePicker(
-        initialDate, selectedDateType, BuildContext context,) =>
+  initialDate,
+  selectedDateType,
+  BuildContext context,
+) =>
     showDatePicker(
       context: context,
       initialDate: initialDate,
@@ -360,64 +362,66 @@ class __OrderFromDateByFilterState extends State<_OrderFromDateByFilter> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OrderHistoryFilterBloc, OrderHistoryFilterState>(
-        buildWhen: (previous, current) =>
-            previous.orderHistoryFilterList.fromDate !=
-            current.orderHistoryFilterList.fromDate,
-        builder: (context, state,) {
-          return Expanded(
-            child: TextFormField(
-              key: const Key('filtefromdateField'),
-              onTap: () async {
-                final orderDate = await shoDatePicker(
-                    state.orderHistoryFilterList.fromDate,
-                    'startDate',
-                    context,);
-                if (mounted) {
-                  context.read<OrderHistoryFilterBloc>().add(
-                        OrderHistoryFilterEvent.setfromDate(
-                          fromDate: orderDate!,
-                        ),
-                      );
-                }
-              },
-              readOnly: true,
-              controller: txtfromDateController
-                ..text = DateFormat('dd/MM/yyyy')
-                    .format(state.orderHistoryFilterList.fromDate),
-              keyboardType: TextInputType.text,
-              style: const TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.w400,
+      buildWhen: (previous, current) =>
+          previous.orderHistoryFilterList.fromDate !=
+          current.orderHistoryFilterList.fromDate,
+      builder: (context, state) {
+        return Expanded(
+          child: TextFormField(
+            key: const Key('filtefromdateField'),
+            onTap: () async {
+              final orderDate = await shoDatePicker(
+                state.orderHistoryFilterList.fromDate,
+                'startDate',
+                context,
+              );
+              if (mounted) {
+                context.read<OrderHistoryFilterBloc>().add(
+                      OrderHistoryFilterEvent.setfromDate(
+                        fromDate: orderDate!,
+                      ),
+                    );
+              }
+            },
+            readOnly: true,
+            controller: txtfromDateController
+              ..text = DateFormat('dd/MM/yyyy')
+                  .format(state.orderHistoryFilterList.fromDate),
+            keyboardType: TextInputType.text,
+            style: const TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w400,
+            ),
+            decoration: const InputDecoration(
+              contentPadding: EdgeInsets.symmetric(
+                vertical: 5.0,
+                horizontal: 4.0,
               ),
-              decoration: const InputDecoration(
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: 5.0,
-                  horizontal: 4.0,
+              border: InputBorder.none,
+              labelText: 'From Date',
+              labelStyle: TextStyle(
+                fontSize: 12.0,
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: ZPColors.kPrimaryColor,
+                  width: 1.0,
                 ),
-                border: InputBorder.none,
-                labelText: 'From Date',
-                labelStyle: TextStyle(
-                  fontSize: 12.0,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: ZPColors.lightGray,
+                  width: 1.0,
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: ZPColors.kPrimaryColor,
-                    width: 1.0,
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: ZPColors.lightGray,
-                    width: 1.0,
-                  ),
-                ),
-                suffixIcon: Icon(
-                  Icons.calendar_month,
-                ),
+              ),
+              suffixIcon: Icon(
+                Icons.calendar_month,
               ),
             ),
-          );
-        },);
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -445,62 +449,66 @@ class __OrderToDateByFilterState extends State<_OrderToDateByFilter> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OrderHistoryFilterBloc, OrderHistoryFilterState>(
-        buildWhen: (previous, current) =>
-            previous.orderHistoryFilterList.toDate !=
-            current.orderHistoryFilterList.toDate,
-        builder: (context, state,) {
-          return Expanded(
-            child: TextFormField(
-              key: const Key('filtertodateField'),
-              onTap: () async {
-                final orderDate = await shoDatePicker(
-                    state.orderHistoryFilterList.toDate, 'endDate', context,);
-                if (mounted) {
-                  context.read<OrderHistoryFilterBloc>().add(
-                        OrderHistoryFilterEvent.setToDate(
-                          toDate: orderDate!,
-                        ),
-                      );
-                }
-              },
-              readOnly: true,
-              controller: txttoDateController
-                ..text = DateFormat('dd/MM/yyyy')
-                    .format(state.orderHistoryFilterList.toDate),
-              keyboardType: TextInputType.text,
-              style: const TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.w400,
+      buildWhen: (previous, current) =>
+          previous.orderHistoryFilterList.toDate !=
+          current.orderHistoryFilterList.toDate,
+      builder: (context, state) {
+        return Expanded(
+          child: TextFormField(
+            key: const Key('filtertodateField'),
+            onTap: () async {
+              final orderDate = await shoDatePicker(
+                state.orderHistoryFilterList.toDate,
+                'endDate',
+                context,
+              );
+              if (mounted) {
+                context.read<OrderHistoryFilterBloc>().add(
+                      OrderHistoryFilterEvent.setToDate(
+                        toDate: orderDate!,
+                      ),
+                    );
+              }
+            },
+            readOnly: true,
+            controller: txttoDateController
+              ..text = DateFormat('dd/MM/yyyy')
+                  .format(state.orderHistoryFilterList.toDate),
+            keyboardType: TextInputType.text,
+            style: const TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w400,
+            ),
+            decoration: const InputDecoration(
+              contentPadding: EdgeInsets.symmetric(
+                vertical: 5.0,
+                horizontal: 4.0,
               ),
-              decoration: const InputDecoration(
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: 5.0,
-                  horizontal: 4.0,
+              border: InputBorder.none,
+              labelText: 'To Date',
+              labelStyle: TextStyle(
+                fontSize: 12.0,
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: ZPColors.kPrimaryColor,
+                  width: 1.0,
                 ),
-                border: InputBorder.none,
-                labelText: 'To Date',
-                labelStyle: TextStyle(
-                  fontSize: 12.0,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: ZPColors.lightGray,
+                  width: 1.0,
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: ZPColors.kPrimaryColor,
-                    width: 1.0,
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: ZPColors.lightGray,
-                    width: 1.0,
-                  ),
-                ),
-                suffixIcon: Icon(
-                  Icons.calendar_month,
-                ),
+              ),
+              suffixIcon: Icon(
+                Icons.calendar_month,
               ),
             ),
-          );
-        },);
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -526,9 +534,7 @@ class _ClearButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(
               3.0,
             ),
-            side: const BorderSide(
-              color: ZPColors.darkGreen,
-            ),
+            side: const BorderSide(color: ZPColors.primary),
           ),
         ),
       ),
@@ -541,7 +547,7 @@ class _ClearButton extends StatelessWidget {
       child: const Text(
         'Clear',
         style: TextStyle(
-          color: ZPColors.darkGreen,
+          color: ZPColors.primary,
           fontWeight: FontWeight.w700,
           fontSize: 16,
         ),
@@ -559,7 +565,7 @@ class _ApplyButton extends StatelessWidget {
       key: const Key('filterapplyButton'),
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.resolveWith(
-          (states) => ZPColors.secondary,
+          (states) => ZPColors.primary,
         ),
         padding: MaterialStateProperty.resolveWith(
           (states) => const EdgeInsets.symmetric(
@@ -585,7 +591,7 @@ class _ApplyButton extends StatelessWidget {
       child: const Text(
         'Apply',
         style: TextStyle(
-          color: ZPColors.darkGreen,
+          color: ZPColors.white,
           fontWeight: FontWeight.w700,
           fontSize: 16,
         ),

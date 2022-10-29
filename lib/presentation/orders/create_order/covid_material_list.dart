@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -151,10 +152,57 @@ class _ListContent extends StatelessWidget {
                     color: ZPColors.lightGray,
                   ),
             ),
+            _PriceLabel(materialInfo: materialInfo),
           ],
         ),
         trailing: _FavoriteButton(materialInfo: materialInfo),
       ),
+    );
+  }
+}
+
+class _PriceLabel extends StatelessWidget {
+  final MaterialInfo materialInfo;
+  const _PriceLabel({Key? key, required this.materialInfo}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
+      buildWhen: (previous, current) =>
+          previous.isFetching != current.isFetching,
+      builder: (context, state) {
+        final itemPrice = state.materialPrice[materialInfo.materialNumber];
+
+        if (itemPrice != null) {
+          final currentCurrency =
+              context.read<SalesOrgBloc>().state.configs.currency;
+          final isHidePrice = materialInfo.hidePrice;
+
+          return Text(
+            '${'Unit Price: '.tr()}${itemPrice.finalPrice.displayWithCurrency(
+              currency: currentCurrency,
+              hidePrice: isHidePrice,
+            )}',
+            style: Theme.of(context).textTheme.bodyText1?.apply(
+                  color: ZPColors.black,
+                ),
+          );
+        }
+        if (state.isFetching) {
+          return SizedBox(
+            key: const Key('price-loading'),
+            width: 40,
+            child: LoadingShimmer.tile(),
+          );
+        }
+
+        return Text(
+          '${'Unit Price: '.tr()}NA',
+          style: Theme.of(context).textTheme.bodyText1?.apply(
+                color: ZPColors.black,
+              ),
+        );
+      },
     );
   }
 }
@@ -238,7 +286,8 @@ class _SearchBarState extends State<_SearchBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      height: 50,
       color: ZPColors.white,
       child: BlocConsumer<CovidMaterialListBloc, CovidMaterialListState>(
         listenWhen: (previous, current) =>
@@ -294,6 +343,7 @@ class _SearchBarState extends State<_SearchBar> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 isDense: true,
+                contentPadding: const EdgeInsets.all(0),
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.clear),

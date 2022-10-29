@@ -128,68 +128,68 @@ class _BodyContent extends StatelessWidget {
             );
           }),
         ),
-        Positioned(
-          bottom: 10,
-          right: 8,
-          child: Row(
-            children: <Widget>[
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
-                      (states) => RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                    ),
-                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                      (states) => ZPColors.primary,
-                    ),
-                    padding:
-                        MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
-                      (states) => const EdgeInsets.symmetric(
-                        vertical: 10.0,
-                        horizontal: 10.0,
-                      ),
-                    ),
-                  ),
-                  onPressed: () {
-                    context.read<MaterialListBloc>().add(
-                          MaterialListEvent.fetch(
-                            user: context.read<UserBloc>().state.user,
-                            salesOrganisation: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
-                            configs: context.read<SalesOrgBloc>().state.configs,
-                            customerCodeInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .customerCodeInfo,
-                            shipToInfo:
-                                context.read<ShipToCodeBloc>().state.shipToInfo,
-                            selectedMaterialFilter: context
-                                .read<MaterialFilterBloc>()
-                                .state
-                                .selectedMaterialFilter,
-                          ),
-                        );
-                    Navigator.pop(context);
-                  },
-                  child: const Text(
-                    'Apply',
-                    key: Key('materialFilterApply'),
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 19,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+        // Positioned(
+        //   bottom: 10,
+        //   right: 8,
+        //   child: Row(
+        //     children: <Widget>[
+        //       Container(
+        //         margin: const EdgeInsets.symmetric(horizontal: 10.0),
+        //         child: ElevatedButton(
+        //           style: ButtonStyle(
+        //             shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
+        //               (states) => RoundedRectangleBorder(
+        //                 borderRadius: BorderRadius.circular(30.0),
+        //               ),
+        //             ),
+        //             backgroundColor: MaterialStateProperty.resolveWith<Color>(
+        //               (states) => ZPColors.primary,
+        //             ),
+        //             padding:
+        //                 MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
+        //               (states) => const EdgeInsets.symmetric(
+        //                 vertical: 10.0,
+        //                 horizontal: 10.0,
+        //               ),
+        //             ),
+        //           ),
+        //           onPressed: () {
+        //             context.read<MaterialListBloc>().add(
+        //                   MaterialListEvent.fetch(
+        //                     user: context.read<UserBloc>().state.user,
+        //                     salesOrganisation: context
+        //                         .read<SalesOrgBloc>()
+        //                         .state
+        //                         .salesOrganisation,
+        //                     configs: context.read<SalesOrgBloc>().state.configs,
+        //                     customerCodeInfo: context
+        //                         .read<CustomerCodeBloc>()
+        //                         .state
+        //                         .customerCodeInfo,
+        //                     shipToInfo:
+        //                         context.read<ShipToCodeBloc>().state.shipToInfo,
+        //                     selectedMaterialFilter: context
+        //                         .read<MaterialFilterBloc>()
+        //                         .state
+        //                         .selectedMaterialFilter,
+        //                   ),
+        //                 );
+        //             Navigator.pop(context);
+        //           },
+        //           child: const Text(
+        //             'Apply',
+        //             key: Key('materialFilterApply'),
+        //             style: TextStyle(
+        //               color: Colors.white,
+        //               fontWeight: FontWeight.bold,
+        //               fontSize: 19,
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
       ],
     );
   }

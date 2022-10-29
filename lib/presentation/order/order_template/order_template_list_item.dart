@@ -65,7 +65,7 @@ class OrderTemplateListItem extends StatelessWidget {
                       Expanded(
                         flex: 1,
                         child: Text(
-                          'Template Name : ${orderTemplate.templateName}',
+                          orderTemplate.templateName,
                           softWrap: true,
                           style: _textStyle,
                         ),
@@ -174,8 +174,8 @@ class OrderTemplateListItem extends StatelessWidget {
     height: 20,
   );
   static const _textStyle = TextStyle(
-    fontSize: 15.0,
-    color: ZPColors.primary,
-    fontWeight: FontWeight.w500,
+    fontSize: 18.0,
+    color: ZPColors.black,
+    fontWeight: FontWeight.w600,
   );
 }

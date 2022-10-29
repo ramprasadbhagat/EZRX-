@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 import 'package:ezrxmobile/domain/order/value/value_transformers.dart';
+import 'package:ezrxmobile/domain/order/value/value_validators.dart';
 
 class CompanyName extends ValueObject<String> {
   @override
@@ -158,4 +159,19 @@ class MaterialQty extends ValueObject<int> {
 
   bool conformZDP5Rule(String zdp5Value) =>
       materialQtyConformZDP5Rule(value.getOrElse(() => 0), zdp5Value);
+}
+
+class MaterialBundleType extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory MaterialBundleType(String input) {
+    return MaterialBundleType._(Right(input));
+  }
+
+  const MaterialBundleType._(this.value);
+
+  bool isPercent() {
+    return materialBundleTypeIsPercent(value.getOrElse(() => ''));
+  }
 }

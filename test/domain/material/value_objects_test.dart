@@ -79,7 +79,7 @@ void main() {
         currency: Currency('fake-currency'),
         hidePrice: false,
       );
-      expect(result, '\$12.2');
+      expect(result, 'FAKE-CURRENCY 12.2');
     });
 
     test('should align currency on the right with vnd currency', () async {
@@ -89,7 +89,7 @@ void main() {
         currency: Currency('vnd'),
         hidePrice: false,
       );
-      expect(result, '12.23₫');
+      expect(result, 'VND 12.23');
     });
 
     test('should align currency on the left with other currency', () async {
@@ -99,7 +99,7 @@ void main() {
         currency: Currency('fake-currency'),
         hidePrice: false,
       );
-      expect(result, '\$12.23');
+      expect(result, 'FAKE-CURRENCY 12.23');
     });
 
     test('should conform ZDP5 Rule', () async {

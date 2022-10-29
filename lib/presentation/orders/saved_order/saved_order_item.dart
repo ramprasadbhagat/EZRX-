@@ -124,7 +124,8 @@ class SavedOrderItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Company Name: ${order.companyName.name}',
+                      // 'Company Name: ${order.companyName.name}',
+                      order.companyName.name,
                       style: const TextStyle(
                         fontSize: 16.0,
                         color: ZPColors.primary,
@@ -171,15 +172,9 @@ class SavedOrderItem extends StatelessWidget {
                               fontSize: 15.0,
                             ),
                           ),
-                          const TextSpan(
-                            text: '\$',
-                            style: TextStyle(
-                              color: ZPColors.darkerGreen,
-                              fontSize: 15.0,
-                            ),
-                          ),
                           TextSpan(
-                            text: '${order.totalOrderValue}',
+                            text:
+                                '${context.read<SalesOrgBloc>().state.configs.currency.code} ${order.totalOrderValue}',
                             style: const TextStyle(
                               color: ZPColors.darkerGreen,
                               fontSize: 13.0,

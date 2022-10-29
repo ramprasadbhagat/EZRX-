@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'bundle_info.freezed.dart';
@@ -9,14 +10,14 @@ class BundleInfo with _$BundleInfo {
   const factory BundleInfo({
     required int sequence,
     required int quantity,
-    required String type,
+    required MaterialBundleType type,
     required double rate,
   }) = _BundleInfo;
 
-  factory BundleInfo.empty() => const BundleInfo(
+  factory BundleInfo.empty() => BundleInfo(
         sequence: 1,
         quantity: 1,
-        type: '%',
+        type: MaterialBundleType('%'),
         rate: -10,
       );
 }

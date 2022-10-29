@@ -264,11 +264,9 @@ class _ListContent extends StatelessWidget {
                       currency: currentCurrency,
                       hidePrice: isHidePrice,
                     )}',
-                    style: const TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w500,
-                      color: ZPColors.primary,
-                    ),
+                    style: Theme.of(context).textTheme.bodyText1?.apply(
+                          color: ZPColors.black,
+                        ),
                   );
                 }
                 if (state.isFetching) {
@@ -281,11 +279,9 @@ class _ListContent extends StatelessWidget {
 
                 return Text(
                   '${'Unit Price: '.tr()}NA',
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                    color: ZPColors.primary,
-                  ),
+                  style: Theme.of(context).textTheme.bodyText1?.apply(
+                        color: ZPColors.black,
+                      ),
                 );
               },
             ),

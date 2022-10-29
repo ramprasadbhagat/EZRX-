@@ -117,6 +117,10 @@ class Currency extends ValueObject<String> {
     return currencySymbol(value.getOrElse(() => ''));
   }
 
+  String get code {
+    return currencyCode(value.getOrElse(() => ''));
+  }
+
   bool get isVN {
     return value.getOrElse(() => '') == 'vnd';
   }

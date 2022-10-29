@@ -23,7 +23,8 @@ class MaterialRoot extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SalesOrgBloc, SalesOrgState>(
       buildWhen: (previous, current) =>
-          previous.disableBundles != current.disableBundles,
+          previous.disableBundles != current.disableBundles ||
+          previous.salesOrg != current.salesOrg,
       builder: (context, state) {
         final disableBundles = state.configs.disableBundles;
         final enableCovidMaterial = _canOrderCovidMaterial(
@@ -34,16 +35,6 @@ class MaterialRoot extends StatelessWidget {
           role: context.read<UserBloc>().state.user.role,
         );
         final length = (disableBundles ? 1 : 2) + (enableCovidMaterial ? 1 : 0);
-        final headerText = [
-          'Material',
-          if (!disableBundles) 'Bundles',
-          if (enableCovidMaterial) 'COVID-19',
-        ];
-        final widgetList = [
-          MaterialListPage(addToCart: _showBottomSheet),
-          if (!disableBundles) const MaterialBundleListPage(),
-          if (enableCovidMaterial) const CovidMaterialListPage(),
-        ];
 
         return Scaffold(
           appBar: PreferredSize(
@@ -53,11 +44,21 @@ class MaterialRoot extends StatelessWidget {
               actions: const [CartButton()],
             ),
           ),
-          body: TabViewPage(
-            length: length,
-            tabHeaderText: headerText,
-            tabWidgets: widgetList,
-          ),
+          body: length == 1
+              ? MaterialListPage(addToCart: _showBottomSheet)
+              : TabViewPage(
+                  length: length,
+                  tabHeaderText: [
+                    'Material',
+                    if (!disableBundles) 'Bundles',
+                    if (enableCovidMaterial) 'COVID-19',
+                  ],
+                  tabWidgets: [
+                    MaterialListPage(addToCart: _showBottomSheet),
+                    if (!disableBundles) const MaterialBundleListPage(),
+                    if (enableCovidMaterial) const CovidMaterialListPage(),
+                  ],
+                ),
         );
       },
     );

@@ -291,6 +291,10 @@ String currencySymbol(String currency) {
   }
 }
 
+String currencyCode(String currency) {
+  return currency.isEmpty ? 'NA' : currency.toUpperCase();
+}
+
 // bool isAllCustomerCodeEnabled(String customerCode) {
 //   switch (customerCode) {
 //     case 'all':

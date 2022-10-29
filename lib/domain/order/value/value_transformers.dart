@@ -12,11 +12,13 @@ bool materialIsFOC(String materialGroup) {
 String currencyAlign(Currency currency, bool hidePrice, double value) {
   if (value == 0 || hidePrice) return 'NA';
   final formattedPrice = formatAsFixed(value, 2);
-  if (currency.isVN) {
-    return '$formattedPrice${currency.symbol}';
-  }
 
-  return '${currency.symbol}$formattedPrice';
+  return '${currency.code} $formattedPrice';
+  // if (currency.isVN) {
+  //   return '$formattedPrice${currency.symbol}';
+  // }
+
+  // return '${currency.symbol}$formattedPrice';
 }
 
 String formatAsFixed(double value, int numberAfterDecimal) {

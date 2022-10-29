@@ -68,35 +68,11 @@ class _SavedOrderListPageState extends State<SavedOrderListPage> {
           buildWhen: (previous, current) =>
               previous.isFetching != current.isFetching,
           builder: (context, state) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              child: ScrollList<SavedOrder>(
-                emptyMessage: 'No saved order found',
-                onRefresh: () {
-                  context.read<SavedOrderListBloc>().add(
-                        SavedOrderListEvent.fetch(
-                          userInfo: context.read<UserBloc>().state.user,
-                          selectedSalesOrganisation: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrganisation,
-                          selectedCustomerCode: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                          selectedShipTo:
-                              context.read<ShipToCodeBloc>().state.shipToInfo,
-                        ),
-                      );
-                  context
-                      .read<MaterialPriceDetailBloc>()
-                      .add(const MaterialPriceDetailEvent.initialized());
-                  context
-                      .read<ValidCustomerMaterialBloc>()
-                      .add(const ValidCustomerMaterialEvent.initialized());
-                },
-                onLoadingMore: () => context.read<SavedOrderListBloc>().add(
-                      SavedOrderListEvent.loadMore(
+            return ScrollList<SavedOrder>(
+              emptyMessage: 'No saved order found',
+              onRefresh: () {
+                context.read<SavedOrderListBloc>().add(
+                      SavedOrderListEvent.fetch(
                         userInfo: context.read<UserBloc>().state.user,
                         selectedSalesOrganisation: context
                             .read<SalesOrgBloc>()
@@ -109,12 +85,31 @@ class _SavedOrderListPageState extends State<SavedOrderListPage> {
                         selectedShipTo:
                             context.read<ShipToCodeBloc>().state.shipToInfo,
                       ),
+                    );
+                context
+                    .read<MaterialPriceDetailBloc>()
+                    .add(const MaterialPriceDetailEvent.initialized());
+                context
+                    .read<ValidCustomerMaterialBloc>()
+                    .add(const ValidCustomerMaterialEvent.initialized());
+              },
+              onLoadingMore: () => context.read<SavedOrderListBloc>().add(
+                    SavedOrderListEvent.loadMore(
+                      userInfo: context.read<UserBloc>().state.user,
+                      selectedSalesOrganisation:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      selectedCustomerCode: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                      selectedShipTo:
+                          context.read<ShipToCodeBloc>().state.shipToInfo,
                     ),
-                isLoading: state.isFetching,
-                itemBuilder: (context, index, item) =>
-                    SavedOrderItem(order: item),
-                items: state.savedOrders,
-              ),
+                  ),
+              isLoading: state.isFetching,
+              itemBuilder: (context, index, item) =>
+                  SavedOrderItem(order: item),
+              items: state.savedOrders,
             );
           },
         ),

@@ -165,6 +165,12 @@ class _ListContent extends StatelessWidget {
     return Card(
       child: ListTile(
         key: Key('materialOption${materialInfo.materialNumber.getOrCrash()}'),
+        onTap: () {
+          addToCart(
+            context: context,
+            materialInfo: materialInfo,
+          );
+        },
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -184,73 +190,57 @@ class _ListContent extends StatelessWidget {
                     color: ZPColors.lightGray,
                   ),
             ),
-            BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
-              buildWhen: (previous, current) =>
-                  previous.isFetching != current.isFetching,
-              builder: (context, state) {
-                final itemPrice =
-                    state.materialPrice[materialInfo.materialNumber];
-
-                if (itemPrice != null) {
-                  final currentCurrency =
-                      context.read<SalesOrgBloc>().state.configs.currency;
-                  final isHidePrice = materialInfo.hidePrice;
-
-                  return Text(
-                    '${'Unit Price: '.tr()}${itemPrice.finalPrice.displayWithCurrency(
-                      currency: currentCurrency,
-                      hidePrice: isHidePrice,
-                    )}',
-                    style: const TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w500,
-                      color: ZPColors.primary,
-                    ),
-                  );
-                }
-                if (state.isFetching) {
-                  return SizedBox(
-                    key: const Key('price-loading'),
-                    width: 40,
-                    child: LoadingShimmer.tile(),
-                  );
-                }
-
-                return Text(
-                  '${'Unit Price: '.tr()}NA',
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                    color: ZPColors.primary,
-                  ),
-                );
-              },
-            ),
+            _PriceLabel(materialInfo: materialInfo),
           ],
         ),
-        trailing: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _FavoriteButton(materialInfo: materialInfo),
-            InkWell(
-              child: const SizedBox(
-                height: 20,
-                width: 20,
-                child: Icon(
-                  Icons.add_circle_outlined,
-                  color: ZPColors.primary,
-                ),
-              ),
-              onTap: () {
-                addToCart(
-                  context: context,
-                  materialInfo: materialInfo,
-                );
-              },
-            ),
-          ],
-        ),
+        trailing: _FavoriteButton(materialInfo: materialInfo),
       ),
+    );
+  }
+}
+
+class _PriceLabel extends StatelessWidget {
+  final MaterialInfo materialInfo;
+  const _PriceLabel({Key? key, required this.materialInfo}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
+      buildWhen: (previous, current) =>
+          previous.isFetching != current.isFetching,
+      builder: (context, state) {
+        final itemPrice = state.materialPrice[materialInfo.materialNumber];
+
+        if (itemPrice != null) {
+          final currentCurrency =
+              context.read<SalesOrgBloc>().state.configs.currency;
+          final isHidePrice = materialInfo.hidePrice;
+
+          return Text(
+            '${'Unit Price: '.tr()}${itemPrice.finalPrice.displayWithCurrency(
+              currency: currentCurrency,
+              hidePrice: isHidePrice,
+            )}',
+            style: Theme.of(context).textTheme.bodyText1?.apply(
+                  color: ZPColors.black,
+                ),
+          );
+        }
+        if (state.isFetching) {
+          return SizedBox(
+            key: const Key('price-loading'),
+            width: 40,
+            child: LoadingShimmer.tile(),
+          );
+        }
+
+        return Text(
+          '${'Unit Price: '.tr()}NA',
+          style: Theme.of(context).textTheme.bodyText1?.apply(
+                color: ZPColors.black,
+              ),
+        );
+      },
     );
   }
 }
@@ -280,7 +270,7 @@ class _FavoriteButton extends StatelessWidget {
                   child: Icon(
                     Icons.favorite_border_outlined,
                     color: ZPColors.secondary,
-                    size: 20,
+                    // size: 20,
                   ),
                 ),
                 onTap: () => context.read<FavouriteBloc>().add(
@@ -304,7 +294,7 @@ class _FavoriteButton extends StatelessWidget {
                   child: Icon(
                     Icons.favorite,
                     color: ZPColors.secondary,
-                    size: 20,
+                    // size: 20,
                   ),
                 ),
                 onTap: () => context.read<FavouriteBloc>().add(

@@ -24,14 +24,15 @@ class CartButton extends StatelessWidget {
           return Badge(
             badgeContent: Text(
               state.cartItemList.length.toString(),
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: ZPColors.white,
                   ),
             ),
+            badgeColor: ZPColors.red,
             showBadge: state.cartItemList.isNotEmpty,
             elevation: 0,
             position: BadgePosition.topEnd(top: 0, end: 3),
-            animationType: BadgeAnimationType.slide,
+            animationType: BadgeAnimationType.fade,
             child: const IconButton(
               key: Key('CartButton'),
               icon: Icon(Icons.shopping_cart_outlined),

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +61,7 @@ class _ScrollListState<T> extends State<ScrollList<T>> {
           widget.items.isEmpty && !widget.isLoading
               ? SliverFillRemaining(
                   child: NoRecordFound.showMessage(
-                    message: widget.emptyMessage,
+                    message: widget.emptyMessage.tr(),
                   ),
                 )
               : SliverList(

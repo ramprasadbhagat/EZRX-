@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'bundle_info_dto.freezed.dart';
@@ -19,7 +20,7 @@ class BundleInfoDto with _$BundleInfoDto {
     return BundleInfo(
       sequence: sequence,
       quantity: quantity,
-      type: type,
+      type: MaterialBundleType(type),
       rate: rate,
     );
   }
@@ -28,7 +29,7 @@ class BundleInfoDto with _$BundleInfoDto {
     return BundleInfoDto(
       sequence: bundleInfo.sequence,
       quantity: bundleInfo.quantity,
-      type: bundleInfo.type,
+      type: bundleInfo.type.getOrCrash(),
       rate: bundleInfo.rate,
     );
   }

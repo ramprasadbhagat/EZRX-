@@ -24,9 +24,9 @@ class OrderHistoryListTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Expanded(
-                  flex: 2,
+                  flex: 1,
                   child: Text(
-                    'Order #${orderHistoryItem.orderNumber}',
+                    '#${orderHistoryItem.orderNumber}',
                     softWrap: true,
                     style: const TextStyle(
                       fontSize: 14.0,
@@ -52,9 +52,9 @@ class OrderHistoryListTile extends StatelessWidget {
                     child: Text(
                       orderHistoryItem.status,
                       style: const TextStyle(
-                        color: ZPColors.black,
+                        color: ZPColors.white,
                         fontSize: 10,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w600,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -93,12 +93,12 @@ class OrderHistoryListTile extends StatelessWidget {
             TextRow(
               keyText: 'ZP Price',
               valueText:
-                  '${currency.symbol}${orderHistoryItem.unitPrice.getOrCrash()}',
+                  '${currency.code} ${orderHistoryItem.unitPrice.getOrCrash()}',
             ),
             TextRow(
               keyText: 'Total Price',
               valueText:
-                  '${currency.symbol}${orderHistoryItem.totalPrice.getOrCrash()}',
+                  '${currency.code} ${orderHistoryItem.totalPrice.getOrCrash()}',
             ),
           ],
         ),
@@ -120,7 +120,7 @@ class TextRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const keyTextStyle = TextStyle(
-      color: ZPColors.black,
+      color: ZPColors.darkGray,
       fontSize: 12.0,
       fontFamily: 'Poppins',
       fontWeight: FontWeight.w400,
