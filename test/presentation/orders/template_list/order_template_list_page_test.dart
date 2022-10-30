@@ -5,8 +5,8 @@ import 'package:ezrxmobile/application/order/order_template_list/order_template_
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_local_datasource.dart';
-import 'package:ezrxmobile/presentation/order/order_template/order_template_list_item.dart';
-import 'package:ezrxmobile/presentation/order/order_template/order_template_list_page.dart';
+import 'package:ezrxmobile/presentation/orders/order_template/order_template_list_item.dart';
+import 'package:ezrxmobile/presentation/orders/order_template/order_template_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';

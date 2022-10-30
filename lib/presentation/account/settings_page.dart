@@ -26,21 +26,6 @@ class SettingsPage extends StatelessWidget {
                 context: context,
                 tiles: [
                   const NotificationTile(),
-                  const LanguageTile(),
-                  ListTile(
-                    key: const Key('Privacy_Policy'),
-                    leading: const Icon(Icons.policy_outlined),
-                    title: const Text('Privacy Policy').tr(),
-                    onTap: () {
-                      final config = locator<Config>();
-                      context.router.push(
-                        WebViewPageRoute(
-                          url: config.getPrivacyUrl,
-                          initialFile: config.getPrivacyInitialFile,
-                        ),
-                      );
-                    },
-                  ),
                   ListTile(
                     key: const Key('changePasswordTile'),
                     leading: const Icon(
@@ -54,6 +39,7 @@ class SettingsPage extends StatelessWidget {
                       context.router.pushNamed('change_password_page');
                     },
                   ),
+                  const LanguageTile(),
                   ListTile(
                     key: const Key('contactUsTile'),
                     leading: const Icon(Icons.contact_support_outlined),
@@ -66,6 +52,20 @@ class SettingsPage extends StatelessWidget {
                     title: Text('ToS'.tr()),
                     onTap: () => context.router
                         .push(AupTCDialogRoute(fromSetting: true)),
+                  ),
+                  ListTile(
+                    key: const Key('Privacy_Policy'),
+                    leading: const Icon(Icons.policy_outlined),
+                    title: const Text('Privacy Policy').tr(),
+                    onTap: () {
+                      final config = locator<Config>();
+                      context.router.push(
+                        WebViewPageRoute(
+                          url: config.getPrivacyUrl,
+                          initialFile: config.getPrivacyInitialFile,
+                        ),
+                      );
+                    },
                   ),
                   ListTile(
                     key: const Key('logoutTile'),
