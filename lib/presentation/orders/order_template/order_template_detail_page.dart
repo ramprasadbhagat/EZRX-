@@ -1,5 +1,4 @@
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
-import 'package:ezrxmobile/presentation/order/cart_item/cart_item_detail.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -22,9 +21,7 @@ class OrderTemplateDetailPage extends StatelessWidget {
       body: ListView.builder(
         itemCount: orderTemplateInfo.cartItems.length,
         itemBuilder: (context, index) {
-          return CartItemDetail(
-            cartItemInfo: orderTemplateInfo.cartItems[index],
-          );
+          return Container();
         },
       ),
     );

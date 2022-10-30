@@ -9,7 +9,7 @@ import 'package:ezrxmobile/presentation/core/cart_button.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
-import 'package:ezrxmobile/presentation/order/order_template/order_template_list_item.dart';
+import 'package:ezrxmobile/presentation/orders/order_template/order_template_list_item.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

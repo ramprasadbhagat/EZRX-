@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -16,7 +15,6 @@ import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_material_
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class SavedOrderItem extends StatelessWidget {
   const SavedOrderItem({
@@ -224,50 +222,59 @@ class SavedOrderItem extends StatelessWidget {
                               const SizedBox(width: 10),
                               ElevatedButton(
                                 onPressed: () {
-                                  showPlatformDialog(
-                                    context: context,
-                                    barrierDismissible: true,
-                                    builder: (context) => PlatformAlertDialog(
-                                      title: const Text('Info').tr(),
-                                      content: SingleChildScrollView(
-                                        child: ListBody(
-                                          children: <Widget>[
-                                            const Text(
-                                              'This action will delete the item from your saved orders.',
-                                            ).tr(),
-                                            const Text(
-                                              'Do you want to proceed?',
-                                            ).tr(),
-                                          ],
+                                  context.read<SavedOrderListBloc>().add(
+                                        SavedOrderListEvent.delete(
+                                          order: order,
+                                          user: context
+                                              .read<UserBloc>()
+                                              .state
+                                              .user,
                                         ),
-                                      ),
-                                      actions: [
-                                        PlatformDialogAction(
-                                          child: const Text('Cancel').tr(),
-                                          onPressed: () {
-                                            context.router.pop();
-                                          },
-                                        ),
-                                        PlatformDialogAction(
-                                          child: const Text('Confirm').tr(),
-                                          onPressed: () {
-                                            context.router.pop();
-                                            context
-                                                .read<SavedOrderListBloc>()
-                                                .add(
-                                                  SavedOrderListEvent.delete(
-                                                    order: order,
-                                                    user: context
-                                                        .read<UserBloc>()
-                                                        .state
-                                                        .user,
-                                                  ),
-                                                );
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  );
+                                      );
+                                  // showPlatformDialog(
+                                  //   context: context,
+                                  //   barrierDismissible: true,
+                                  //   builder: (context) => PlatformAlertDialog(
+                                  //     title: const Text('Info').tr(),
+                                  //     content: SingleChildScrollView(
+                                  //       child: ListBody(
+                                  //         children: <Widget>[
+                                  //           const Text(
+                                  //             'This action will delete the item from your saved orders.',
+                                  //           ).tr(),
+                                  //           const Text(
+                                  //             'Do you want to proceed?',
+                                  //           ).tr(),
+                                  //         ],
+                                  //       ),
+                                  //     ),
+                                  //     actions: [
+                                  //       PlatformDialogAction(
+                                  //         child: const Text('Cancel').tr(),
+                                  //         onPressed: () {
+                                  //           context.router.pop();
+                                  //         },
+                                  //       ),
+                                  //       PlatformDialogAction(
+                                  //         child: const Text('Confirm').tr(),
+                                  //         onPressed: () {
+                                  //           context.router.pop();
+                                  //           context
+                                  //               .read<SavedOrderListBloc>()
+                                  //               .add(
+                                  //                 SavedOrderListEvent.delete(
+                                  //                   order: order,
+                                  //                   user: context
+                                  //                       .read<UserBloc>()
+                                  //                       .state
+                                  //                       .user,
+                                  //                 ),
+                                  //               );
+                                  //         },
+                                  //       ),
+                                  //     ],
+                                  //   ),
+                                  // );
                                 },
                                 child: const Text('Delete').tr(),
                               ),

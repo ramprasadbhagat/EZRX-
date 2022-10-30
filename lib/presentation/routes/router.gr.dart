@@ -32,12 +32,12 @@ import '../favourites/favourite_tab.dart' as _i22;
 import '../history/history_tab.dart' as _i21;
 import '../home/home_tab.dart' as _i20;
 import '../home_tab.dart' as _i18;
-import '../order/order_template/order_template_detail_page.dart' as _i17;
-import '../order/order_template/order_template_list_page.dart' as _i15;
 import '../orders/cart/cart_page.dart' as _i16;
 import '../orders/create_order/material_filter.dart' as _i13;
 import '../orders/create_order/material_list.dart' as _i12;
 import '../orders/create_order/material_root.dart' as _i11;
+import '../orders/order_template/order_template_detail_page.dart' as _i17;
+import '../orders/order_template/order_template_list_page.dart' as _i15;
 import '../orders/saved_order/saved_order_list_page.dart' as _i19;
 import '../splash/splash_page.dart' as _i1;
 

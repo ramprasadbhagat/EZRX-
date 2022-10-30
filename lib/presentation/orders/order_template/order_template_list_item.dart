@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -14,7 +13,6 @@ import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class OrderTemplateListItem extends StatelessWidget {
   final OrderTemplate orderTemplate;
@@ -117,42 +115,47 @@ class OrderTemplateListItem extends StatelessWidget {
                         text: 'Delete',
                         width: 72,
                         onTap: () {
-                          showPlatformDialog(
-                            context: context,
-                            barrierDismissible: true,
-                            builder: (context) => PlatformAlertDialog(
-                              title: const Text('Info').tr(),
-                              content: SingleChildScrollView(
-                                child: ListBody(
-                                  children: <Widget>[
-                                    const Text(
-                                      'This action will delete the item from your order templates.',
-                                    ).tr(),
-                                    const Text('Do you want to proceed?').tr(),
-                                  ],
+                          context.read<OrderTemplateListBloc>().add(
+                                OrderTemplateListEvent.delete(
+                                  orderTemplate,
                                 ),
-                              ),
-                              actions: [
-                                PlatformDialogAction(
-                                  child: const Text('Cancel').tr(),
-                                  onPressed: () {
-                                    context.router.pop();
-                                  },
-                                ),
-                                PlatformDialogAction(
-                                  child: const Text('Confirm').tr(),
-                                  onPressed: () {
-                                    context.router.pop();
-                                    context.read<OrderTemplateListBloc>().add(
-                                          OrderTemplateListEvent.delete(
-                                            orderTemplate,
-                                          ),
-                                        );
-                                  },
-                                ),
-                              ],
-                            ),
-                          );
+                              );
+                          // showPlatformDialog(
+                          //   context: context,
+                          //   barrierDismissible: true,
+                          //   builder: (context) => PlatformAlertDialog(
+                          //     title: const Text('Info').tr(),
+                          //     content: SingleChildScrollView(
+                          //       child: ListBody(
+                          //         children: <Widget>[
+                          //           const Text(
+                          //             'This action will delete the item from your order templates.',
+                          //           ).tr(),
+                          //           const Text('Do you want to proceed?').tr(),
+                          //         ],
+                          //       ),
+                          //     ),
+                          //     actions: [
+                          //       PlatformDialogAction(
+                          //         child: const Text('Cancel').tr(),
+                          //         onPressed: () {
+                          //           context.router.pop();
+                          //         },
+                          //       ),
+                          //       PlatformDialogAction(
+                          //         child: const Text('Confirm').tr(),
+                          //         onPressed: () {
+                          //           context.router.pop();
+                          //           context.read<OrderTemplateListBloc>().add(
+                          //                 OrderTemplateListEvent.delete(
+                          //                   orderTemplate,
+                          //                 ),
+                          //               );
+                          //         },
+                          //       ),
+                          //     ],
+                          //   ),
+                          // );
                         },
                       ),
                     ],
