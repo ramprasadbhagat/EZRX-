@@ -1,7 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/presentation/core/cart_button.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/tab_view.dart';
@@ -72,12 +75,12 @@ class MaterialRoot extends StatelessWidget {
         .read<MaterialPriceBloc>()
         .state
         .materialPrice[materialInfo.materialNumber];
-    final unitPrice = itemPrice != null
-        ? itemPrice.finalPrice.displayWithCurrency(
-            currency: context.read<SalesOrgBloc>().state.configs.currency,
-            hidePrice: materialInfo.hidePrice,
-          )
-        : 'NA';
+    // final unitPrice = itemPrice != null
+    //     ? itemPrice.finalPrice.displayWithCurrency(
+    //         currency: context.read<SalesOrgBloc>().state.configs.currency,
+    //         hidePrice: materialInfo.hidePrice,
+    //       )
+    //     : 'NA';
     showModalBottomSheet(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -86,11 +89,19 @@ class MaterialRoot extends StatelessWidget {
         ),
       ),
       context: context,
-      builder: (builderContext) {
-        return AddToCart(
-          materialInfo: materialInfo,
-          unitPrice: unitPrice,
-        );
+      builder: (_) {
+        context.read<AddToCartBloc>().add(
+              AddToCartEvent.setCartItem(
+                CartItem(
+                  price: itemPrice ?? Price.empty(),
+                  materialInfo: materialInfo,
+                  salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                  quantity: 1,
+                ),
+              ),
+            );
+
+        return const AddToCart();
       },
     );
   }

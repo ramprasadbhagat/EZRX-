@@ -13,6 +13,14 @@ class PriceTierDto with _$PriceTierDto {
         required List<PriceTierItemDto> items,
   }) = _PriceTierDto;
 
+  factory PriceTierDto.fromDomain(PriceTier priceTier) {
+    return PriceTierDto(
+      tier: priceTier.tier,
+      items:
+          priceTier.items.map((e) => PriceTierItemDto.fromDomain(e)).toList(),
+    );
+  }
+
   PriceTier toDomain() {
     final sortedItem = items.map((e) => e.toDomain()).toList()
       ..sort((a, b) => a.quantity.compareTo(b.quantity));
@@ -37,6 +45,16 @@ class PriceTierItemDto with _$PriceTierItemDto {
     @JsonKey(name: 'Quantity', defaultValue: 0) required int quantity,
     @JsonKey(name: 'Rate', defaultValue: 0) required double rate,
   }) = _PriceTierItemDto;
+
+  factory PriceTierItemDto.fromDomain(PriceTierItem priceTierItem) {
+    return PriceTierItemDto(
+      type: priceTierItem.type,
+      applyBonus: priceTierItem.applyBonus,
+      sequence: priceTierItem.sequence,
+      quantity: priceTierItem.quantity,
+      rate: priceTierItem.rate,
+    );
+  }
 
   PriceTierItem toDomain() => PriceTierItem(
         type: type,

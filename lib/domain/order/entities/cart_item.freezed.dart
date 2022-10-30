@@ -16,7 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CartItem {
+  Price get price => throw _privateConstructorUsedError;
   MaterialInfo get materialInfo => throw _privateConstructorUsedError;
+  SalesOrganisationConfigs get salesOrgConfig =>
+      throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -28,9 +31,15 @@ mixin _$CartItem {
 abstract class $CartItemCopyWith<$Res> {
   factory $CartItemCopyWith(CartItem value, $Res Function(CartItem) then) =
       _$CartItemCopyWithImpl<$Res>;
-  $Res call({MaterialInfo materialInfo, int quantity});
+  $Res call(
+      {Price price,
+      MaterialInfo materialInfo,
+      SalesOrganisationConfigs salesOrgConfig,
+      int quantity});
 
+  $PriceCopyWith<$Res> get price;
   $MaterialInfoCopyWith<$Res> get materialInfo;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
 }
 
 /// @nodoc
@@ -43,14 +52,24 @@ class _$CartItemCopyWithImpl<$Res> implements $CartItemCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? price = freezed,
     Object? materialInfo = freezed,
+    Object? salesOrgConfig = freezed,
     Object? quantity = freezed,
   }) {
     return _then(_value.copyWith(
+      price: price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as Price,
       materialInfo: materialInfo == freezed
           ? _value.materialInfo
           : materialInfo // ignore: cast_nullable_to_non_nullable
               as MaterialInfo,
+      salesOrgConfig: salesOrgConfig == freezed
+          ? _value.salesOrgConfig
+          : salesOrgConfig // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
       quantity: quantity == freezed
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
@@ -59,9 +78,24 @@ class _$CartItemCopyWithImpl<$Res> implements $CartItemCopyWith<$Res> {
   }
 
   @override
+  $PriceCopyWith<$Res> get price {
+    return $PriceCopyWith<$Res>(_value.price, (value) {
+      return _then(_value.copyWith(price: value));
+    });
+  }
+
+  @override
   $MaterialInfoCopyWith<$Res> get materialInfo {
     return $MaterialInfoCopyWith<$Res>(_value.materialInfo, (value) {
       return _then(_value.copyWith(materialInfo: value));
+    });
+  }
+
+  @override
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfig,
+        (value) {
+      return _then(_value.copyWith(salesOrgConfig: value));
     });
   }
 }
@@ -72,10 +106,18 @@ abstract class _$$_CartItemCopyWith<$Res> implements $CartItemCopyWith<$Res> {
           _$_CartItem value, $Res Function(_$_CartItem) then) =
       __$$_CartItemCopyWithImpl<$Res>;
   @override
-  $Res call({MaterialInfo materialInfo, int quantity});
+  $Res call(
+      {Price price,
+      MaterialInfo materialInfo,
+      SalesOrganisationConfigs salesOrgConfig,
+      int quantity});
 
   @override
+  $PriceCopyWith<$Res> get price;
+  @override
   $MaterialInfoCopyWith<$Res> get materialInfo;
+  @override
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
 }
 
 /// @nodoc
@@ -90,14 +132,24 @@ class __$$_CartItemCopyWithImpl<$Res> extends _$CartItemCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? price = freezed,
     Object? materialInfo = freezed,
+    Object? salesOrgConfig = freezed,
     Object? quantity = freezed,
   }) {
     return _then(_$_CartItem(
+      price: price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as Price,
       materialInfo: materialInfo == freezed
           ? _value.materialInfo
           : materialInfo // ignore: cast_nullable_to_non_nullable
               as MaterialInfo,
+      salesOrgConfig: salesOrgConfig == freezed
+          ? _value.salesOrgConfig
+          : salesOrgConfig // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
       quantity: quantity == freezed
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
@@ -109,17 +161,25 @@ class __$$_CartItemCopyWithImpl<$Res> extends _$CartItemCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_CartItem extends _CartItem {
-  const _$_CartItem({required this.materialInfo, required this.quantity})
+  const _$_CartItem(
+      {required this.price,
+      required this.materialInfo,
+      required this.salesOrgConfig,
+      required this.quantity})
       : super._();
 
   @override
+  final Price price;
+  @override
   final MaterialInfo materialInfo;
+  @override
+  final SalesOrganisationConfigs salesOrgConfig;
   @override
   final int quantity;
 
   @override
   String toString() {
-    return 'CartItem(materialInfo: $materialInfo, quantity: $quantity)';
+    return 'CartItem(price: $price, materialInfo: $materialInfo, salesOrgConfig: $salesOrgConfig, quantity: $quantity)';
   }
 
   @override
@@ -127,15 +187,20 @@ class _$_CartItem extends _CartItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CartItem &&
+            const DeepCollectionEquality().equals(other.price, price) &&
             const DeepCollectionEquality()
                 .equals(other.materialInfo, materialInfo) &&
+            const DeepCollectionEquality()
+                .equals(other.salesOrgConfig, salesOrgConfig) &&
             const DeepCollectionEquality().equals(other.quantity, quantity));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(price),
       const DeepCollectionEquality().hash(materialInfo),
+      const DeepCollectionEquality().hash(salesOrgConfig),
       const DeepCollectionEquality().hash(quantity));
 
   @JsonKey(ignore: true)
@@ -146,12 +211,18 @@ class _$_CartItem extends _CartItem {
 
 abstract class _CartItem extends CartItem {
   const factory _CartItem(
-      {required final MaterialInfo materialInfo,
+      {required final Price price,
+      required final MaterialInfo materialInfo,
+      required final SalesOrganisationConfigs salesOrgConfig,
       required final int quantity}) = _$_CartItem;
   const _CartItem._() : super._();
 
   @override
+  Price get price;
+  @override
   MaterialInfo get materialInfo;
+  @override
+  SalesOrganisationConfigs get salesOrgConfig;
   @override
   int get quantity;
   @override

@@ -59,6 +59,7 @@ void main() {
     enableBatchNumber: false,
     enableVat: false,
     enableZDP5: false,
+    vatValue: 0,
   );
 
   const fakeSelectedFilterCategory = MaterialFilterType.principal;

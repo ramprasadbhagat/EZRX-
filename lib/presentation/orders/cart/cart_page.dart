@@ -17,37 +17,37 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: const Key('cartpage'),
-      appBar: AppBar(
-        title: Text(
-          '${'My Cart'.tr()} ${context.read<CartBloc>().state.cartItemList.isNotEmpty ? '(' : ''}${context.read<CartBloc>().state.cartItemList.isNotEmpty ? context.read<CartBloc>().state.cartItemList.length.toString() : ''}${context.read<CartBloc>().state.cartItemList.isNotEmpty ? ')' : ''}',
-        ),
-      ),
-      body: BlocConsumer<CartBloc, CartState>(
-        listenWhen: (previous, current) =>
-            previous.apiFailureOrSuccessOption !=
-            current.apiFailureOrSuccessOption,
-        listener: (context, state) {
-          state.apiFailureOrSuccessOption.fold(
-            () {},
-            (either) => either.fold(
-              (failure) {
-                final failureMessage = failure.failureMessage;
-                showSnackBar(
-                  context: context,
-                  message: failureMessage.tr(),
-                );
-              },
-              (_) {
-                context.read<AuthBloc>().add(const AuthEvent.authCheck());
-              },
+    return BlocConsumer<CartBloc, CartState>(
+      listenWhen: (previous, current) =>
+          previous.apiFailureOrSuccessOption !=
+          current.apiFailureOrSuccessOption,
+      listener: (context, state) {
+        state.apiFailureOrSuccessOption.fold(
+          () {},
+          (either) => either.fold(
+            (failure) {
+              final failureMessage = failure.failureMessage;
+              showSnackBar(
+                context: context,
+                message: failureMessage.tr(),
+              );
+            },
+            (_) {
+              context.read<AuthBloc>().add(const AuthEvent.authCheck());
+            },
+          ),
+        );
+      },
+      buildWhen: (previous, current) => previous != current,
+      builder: (context, state) {
+        return Scaffold(
+          key: const Key('cartpage'),
+          appBar: AppBar(
+            title: Text(
+              '${'My Cart'.tr()} (${state.cartItemList.length})',
             ),
-          );
-        },
-        buildWhen: (previous, current) => previous != current,
-        builder: (context, state) {
-          return Column(
+          ),
+          body: Column(
             children: [
               Expanded(
                 child: Padding(
@@ -55,8 +55,16 @@ class CartPage extends StatelessWidget {
                     horizontal: 10,
                     vertical: 5,
                   ),
-                  child: _BodyContent(
-                    cartState: state,
+                  child: ScrollList<CartItem>(
+                    emptyMessage: 'Cart is Empty',
+                    onRefresh: () {
+                      context.read<CartBloc>().add(const CartEvent.fetch());
+                    },
+                    onLoadingMore: () {},
+                    isLoading: state.isFetching,
+                    itemBuilder: (context, index, item) =>
+                        _ListContent(cartItem: item),
+                    items: state.cartItemList,
                   ),
                 ),
               ),
@@ -84,9 +92,9 @@ class CartPage extends StatelessWidget {
                 ),
               ),
             ],
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 
@@ -104,30 +112,6 @@ class CartPage extends StatelessWidget {
     }
 
     return sum.toStringAsFixed(2);
-  }
-}
-
-class _BodyContent extends StatelessWidget {
-  final CartState cartState;
-  const _BodyContent({
-    Key? key,
-    required this.cartState,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ScrollList<CartItem>(
-      emptyMessage: 'Cart is Empty',
-      onRefresh: () {
-        context.read<CartBloc>().add(
-              const CartEvent.fetch(),
-            );
-      },
-      onLoadingMore: () {},
-      isLoading: cartState.isFetching,
-      itemBuilder: (context, index, item) => _ListContent(cartItem: item),
-      items: cartState.cartItemList,
-    );
   }
 }
 
@@ -161,19 +145,12 @@ class _ListContent extends StatelessWidget {
                           if (cartItem.quantity > 1) {
                             context.read<CartBloc>().add(
                                   CartEvent.addToCart(
-                                    item: CartItem.empty().copyWith(
-                                      materialInfo: cartItem.materialInfo,
-                                      quantity: -1,
-                                    ),
+                                    item: cartItem.copyWith(quantity: -1),
                                   ),
                                 );
                           } else {
                             context.read<CartBloc>().add(
-                                  CartEvent.removeFromCart(
-                                    item: CartItem.empty().copyWith(
-                                      materialInfo: cartItem.materialInfo,
-                                    ),
-                                  ),
+                                  CartEvent.removeFromCart(item: cartItem),
                                 );
                           }
                         },
@@ -198,10 +175,7 @@ class _ListContent extends StatelessWidget {
                         onTap: () {
                           context.read<CartBloc>().add(
                                 CartEvent.addToCart(
-                                  item: CartItem.empty().copyWith(
-                                    materialInfo: cartItem.materialInfo,
-                                    quantity: 1,
-                                  ),
+                                  item: cartItem.copyWith(quantity: 1),
                                 ),
                               );
                         },
@@ -247,6 +221,21 @@ class _ListContent extends StatelessWidget {
                     color: ZPColors.lightGray,
                   ),
             ),
+
+            // Text(
+            //   '${'Unit price before GST: '.tr()}${cartItem.listPrice()}',
+            //   style: Theme.of(context).textTheme.bodyText1?.apply(
+            //         color: ZPColors.lightGray,
+            //       ),
+            // ),
+
+            // Text(
+            //   '${'Unit price: '.tr()}${cartItem.unitPrice()}',
+            //   style: Theme.of(context).textTheme.bodyText1?.apply(
+            //         color: ZPColors.black,
+            //       ),
+            // ),
+
             BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
               buildWhen: (previous, current) =>
                   previous.isFetching != current.isFetching,
@@ -290,11 +279,9 @@ class _ListContent extends StatelessWidget {
         isThreeLine: true,
         trailing: IconButton(
           onPressed: () {
-            context.read<CartBloc>().add(
-                  CartEvent.removeFromCart(
-                    item: cartItem,
-                  ),
-                );
+            context
+                .read<CartBloc>()
+                .add(CartEvent.removeFromCart(item: cartItem));
           },
           icon: const Icon(Icons.delete),
         ),

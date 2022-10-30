@@ -147,6 +147,16 @@ class MaterialPrice extends ValueObject<double> {
   }) {
     return currencyAlign(currency, hidePrice, value.getOrElse(() => 0));
   }
+
+  String displayTotal({
+    required Currency currency,
+    required bool hidePrice,
+    required int quantity,
+  }) {
+    return totalPrice(currency, hidePrice, value.getOrElse(() => 0), quantity);
+  }
+
+  bool isEmpty() => value.getOrElse(() => 0) == 0;
 }
 
 class MaterialQty extends ValueObject<int> {

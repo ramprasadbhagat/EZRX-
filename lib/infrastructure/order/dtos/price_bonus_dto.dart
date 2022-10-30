@@ -12,6 +12,13 @@ class PriceBonusDto with _$PriceBonusDto {
         required List<PriceBonusItemDto> items,
   }) = _PriceBonusDto;
 
+  factory PriceBonusDto.fromDomain(PriceBonus priceBonus) {
+    return PriceBonusDto(
+      items:
+          priceBonus.items.map((e) => PriceBonusItemDto.fromDomain(e)).toList(),
+    );
+  }
+
   PriceBonus toDomain() => PriceBonus(
         items: items.map((e) => e.toDomain()).toList(),
       );
@@ -30,6 +37,16 @@ class PriceBonusItemDto with _$PriceBonusItemDto {
     @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
         required List<BonusMaterialDto> bonusMaterials,
   }) = _PriceBonusItemDto;
+
+  factory PriceBonusItemDto.fromDomain(PriceBonusItem priceBonusItem) {
+    return PriceBonusItemDto(
+      calculation: priceBonusItem.calculation,
+      qualifyingQuantity: priceBonusItem.qualifyingQuantity,
+      bonusMaterials: priceBonusItem.bonusMaterials
+          .map((e) => BonusMaterialDto.fromDomain(e))
+          .toList(),
+    );
+  }
 
   PriceBonusItem toDomain() => PriceBonusItem(
         calculation: calculation,
@@ -55,6 +72,17 @@ class BonusMaterialDto with _$BonusMaterialDto {
         required int qualifyingQuantity,
     @JsonKey(name: 'BonusQuantity', defaultValue: 0) required int bonusQuantity,
   }) = _BonusMaterialDto;
+
+  factory BonusMaterialDto.fromDomain(BonusMaterial bonusMaterial) {
+    return BonusMaterialDto(
+      materialNumber: bonusMaterial.materialNumber,
+      materialDescription: bonusMaterial.materialDescription,
+      calculation: bonusMaterial.calculation,
+      bonusRatio: bonusMaterial.bonusRatio,
+      qualifyingQuantity: bonusMaterial.qualifyingQuantity,
+      bonusQuantity: bonusMaterial.bonusQuantity,
+    );
+  }
 
   BonusMaterial toDomain() => BonusMaterial(
         materialNumber: materialNumber,

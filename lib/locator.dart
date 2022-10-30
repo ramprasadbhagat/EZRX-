@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
@@ -271,6 +272,10 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => CartBloc(cartRepository: locator<CartRepository>()),
+  );
+
+  locator.registerLazySingleton(
+    () => AddToCartBloc(),
   );
 
   //============================================================

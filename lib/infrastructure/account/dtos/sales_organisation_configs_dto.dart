@@ -32,6 +32,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
         required bool disableBundles,
     @JsonKey(name: 'enableZDP5', defaultValue: false) required bool enableZDP5,
     @JsonKey(name: 'enableVat', defaultValue: false) required bool enableVat,
+    @JsonKey(name: 'vatValue', defaultValue: 0) required int vatValue,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -50,6 +51,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       disableBundles: configs.disableBundles,
       enableZDP5: configs.enableZDP5,
       enableVat: configs.enableVat,
+      vatValue: configs.vatValue,
     );
   }
 
@@ -67,6 +69,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       disableBundles: disableBundles,
       enableZDP5: enableZDP5,
       enableVat: enableVat,
+      vatValue: vatValue,
     );
   }
 

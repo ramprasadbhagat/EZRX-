@@ -20,6 +20,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool disableBundles,
     required bool enableZDP5,
     required bool enableVat,
+    required int vatValue,
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
@@ -35,6 +36,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         disableBundles: false,
         enableZDP5: false,
         enableVat: false,
+        vatValue: 0,
       );
 
   String get getConfigLangauge {

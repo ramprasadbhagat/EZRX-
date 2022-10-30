@@ -48,6 +48,7 @@ void main() {
     enableBatchNumber: false,
     enableZDP5: false,
     enableVat: false,
+    vatValue: 0,
   );
 
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(

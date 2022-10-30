@@ -22,6 +22,7 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       disableBundles: json['disableBundles'] as bool? ?? false,
       enableZDP5: json['enableZDP5'] as bool? ?? false,
       enableVat: json['enableVat'] as bool? ?? false,
+      vatValue: json['vatValue'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -40,4 +41,5 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'disableBundles': instance.disableBundles,
       'enableZDP5': instance.enableZDP5,
       'enableVat': instance.enableVat,
+      'vatValue': instance.vatValue,
     };

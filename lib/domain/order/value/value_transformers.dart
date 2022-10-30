@@ -21,6 +21,19 @@ String currencyAlign(Currency currency, bool hidePrice, double value) {
   // return '${currency.symbol}$formattedPrice';
 }
 
+String totalPrice(
+  Currency currency,
+  bool hidePrice,
+  double value,
+  int quantity,
+) {
+  if (value == 0 || hidePrice) return 'NA';
+  final total = value * quantity;
+  final formattedPrice = formatAsFixed(total, 2);
+
+  return '${currency.code} $formattedPrice';
+}
+
 String formatAsFixed(double value, int numberAfterDecimal) {
   final numberFormatter = NumberFormat.decimalPattern();
   final formattedPrice = numberFormatter.format(

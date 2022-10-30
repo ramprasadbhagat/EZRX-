@@ -17,6 +17,16 @@ class PriceRuleDto with _$PriceRuleDto {
         required bool bonusEligible,
   }) = _PriceRuleDto;
 
+  factory PriceRuleDto.fromDomain(PriceRule priceRule) {
+    return PriceRuleDto(
+      type: priceRule.type,
+      rate: priceRule.rate,
+      condition: priceRule.condition,
+      conditionNumber: priceRule.conditionNumber,
+      bonusEligible: priceRule.bonusEligible,
+    );
+  }
+
   PriceRule toDomain() => PriceRule(
         type: type,
         rate: rate,

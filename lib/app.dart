@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
@@ -198,6 +199,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<CartBloc>(
           create: (context) => locator<CartBloc>(),
+        ),
+        BlocProvider<AddToCartBloc>(
+          create: (context) => locator<AddToCartBloc>(),
         ),
       ],
       child: MaterialApp.router(

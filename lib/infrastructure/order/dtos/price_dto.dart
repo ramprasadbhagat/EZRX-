@@ -12,6 +12,7 @@ part 'price_dto.g.dart';
 @freezed
 class PriceDto with _$PriceDto {
   const PriceDto._();
+
   const factory PriceDto({
     @JsonKey(name: 'MaterialNumber') required String materialNumber,
     @JsonKey(name: 'PriceRules', defaultValue: <PriceRuleDto>[])
@@ -56,6 +57,25 @@ class PriceDto with _$PriceDto {
         additionalBonusEligible: additionalBonusEligible,
         isValid: isValid,
       );
+
+  factory PriceDto.fromDomain(Price price) {
+    return PriceDto(
+      materialNumber: price.materialNumber.getOrCrash(),
+      rules: price.rules.map((e) => PriceRuleDto.fromDomain(e)).toList(),
+      tiers: price.tiers.map((e) => PriceTierDto.fromDomain(e)).toList(),
+      bonuses: price.bonuses.map((e) => PriceBonusDto.fromDomain(e)).toList(),
+      bundles: price.bundles.map((e) => PriceBundleDto.fromDomain(e)).toList(),
+      overrideRulePresent: price.overrideRulePresent,
+      zdp5MaxQuota: price.zdp5MaxQuota,
+      zdp5RemainingQuota: price.zdp5RemainingQuota,
+      zmgDiscount: price.zmgDiscount,
+      listPrice: price.lastPrice.getOrCrash(),
+      finalIndividualPrice: price.finalPrice.getOrCrash(),
+      finalTotalPrice: price.finalTotalPrice.getOrCrash(),
+      additionalBonusEligible: price.additionalBonusEligible,
+      isValid: price.isValid,
+    );
+  }
 
   factory PriceDto.fromJson(Map<String, dynamic> json) =>
       _$PriceDtoFromJson(json);
