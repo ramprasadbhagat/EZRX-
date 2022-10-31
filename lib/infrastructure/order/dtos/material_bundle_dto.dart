@@ -38,7 +38,7 @@ class MaterialBundleDto with _$MaterialBundleDto {
         principalName: '',
         principalCode: '',
       ),
-      taxClassification: '',
+      taxClassification:  MaterialTaxClassification(''),
       itemRegistrationNumber: '',
       unitOfMeasurement: '',
       materialGroup2: MaterialGroup.two(''),

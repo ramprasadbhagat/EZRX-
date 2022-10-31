@@ -209,7 +209,7 @@ void main() {
                 principalName: '台灣羅氏醫療診斷設備(股)公司',
                 principalCode: '0000102004',
               ),
-              taxClassification: 'Product : Full Tax',
+              taxClassification:  MaterialTaxClassification('Product : Full Tax'),
               itemRegistrationNumber: 'NA',
               unitOfMeasurement: 'EA',
               materialGroup2: MaterialGroup.two(''),

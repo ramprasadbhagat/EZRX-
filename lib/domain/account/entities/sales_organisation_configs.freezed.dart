@@ -28,6 +28,7 @@ mixin _$SalesOrganisationConfigs {
   bool get disableBundles => throw _privateConstructorUsedError;
   bool get enableZDP5 => throw _privateConstructorUsedError;
   bool get enableVat => throw _privateConstructorUsedError;
+  bool get enableTaxClassification => throw _privateConstructorUsedError;
   int get vatValue => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -53,6 +54,7 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       bool disableBundles,
       bool enableZDP5,
       bool enableVat,
+      bool enableTaxClassification,
       int vatValue});
 }
 
@@ -79,6 +81,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? disableBundles = freezed,
     Object? enableZDP5 = freezed,
     Object? enableVat = freezed,
+    Object? enableTaxClassification = freezed,
     Object? vatValue = freezed,
   }) {
     return _then(_value.copyWith(
@@ -130,6 +133,10 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.enableVat
           : enableVat // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableTaxClassification: enableTaxClassification == freezed
+          ? _value.enableTaxClassification
+          : enableTaxClassification // ignore: cast_nullable_to_non_nullable
+              as bool,
       vatValue: vatValue == freezed
           ? _value.vatValue
           : vatValue // ignore: cast_nullable_to_non_nullable
@@ -159,6 +166,7 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       bool disableBundles,
       bool enableZDP5,
       bool enableVat,
+      bool enableTaxClassification,
       int vatValue});
 }
 
@@ -188,6 +196,7 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? disableBundles = freezed,
     Object? enableZDP5 = freezed,
     Object? enableVat = freezed,
+    Object? enableTaxClassification = freezed,
     Object? vatValue = freezed,
   }) {
     return _then(_$_SalesOrganisationConfigs(
@@ -239,6 +248,10 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.enableVat
           : enableVat // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableTaxClassification: enableTaxClassification == freezed
+          ? _value.enableTaxClassification
+          : enableTaxClassification // ignore: cast_nullable_to_non_nullable
+              as bool,
       vatValue: vatValue == freezed
           ? _value.vatValue
           : vatValue // ignore: cast_nullable_to_non_nullable
@@ -263,6 +276,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       required this.disableBundles,
       required this.enableZDP5,
       required this.enableVat,
+      required this.enableTaxClassification,
       required this.vatValue})
       : _principalList = principalList,
         super._();
@@ -297,11 +311,13 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   @override
   final bool enableVat;
   @override
+  final bool enableTaxClassification;
+  @override
   final int vatValue;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, vatValue: $vatValue)';
+    return 'SalesOrganisationConfigs(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue)';
   }
 
   @override
@@ -331,6 +347,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
             const DeepCollectionEquality()
                 .equals(other.enableZDP5, enableZDP5) &&
             const DeepCollectionEquality().equals(other.enableVat, enableVat) &&
+            const DeepCollectionEquality().equals(
+                other.enableTaxClassification, enableTaxClassification) &&
             const DeepCollectionEquality().equals(other.vatValue, vatValue));
   }
 
@@ -349,6 +367,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       const DeepCollectionEquality().hash(disableBundles),
       const DeepCollectionEquality().hash(enableZDP5),
       const DeepCollectionEquality().hash(enableVat),
+      const DeepCollectionEquality().hash(enableTaxClassification),
       const DeepCollectionEquality().hash(vatValue));
 
   @JsonKey(ignore: true)
@@ -372,6 +391,7 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final bool disableBundles,
       required final bool enableZDP5,
       required final bool enableVat,
+      required final bool enableTaxClassification,
       required final int vatValue}) = _$_SalesOrganisationConfigs;
   const _SalesOrganisationConfigs._() : super._();
 
@@ -399,6 +419,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   bool get enableZDP5;
   @override
   bool get enableVat;
+  @override
+  bool get enableTaxClassification;
   @override
   int get vatValue;
   @override

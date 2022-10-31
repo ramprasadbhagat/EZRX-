@@ -59,6 +59,7 @@ class ZpPrice extends ValueObject<String> {
   factory ZpPrice(String input) {
     return ZpPrice._(validateStringNotEmpty(input));
   }
+
   double get zpPrice {
     return totalPriceStringAsFixed(value.getOrElse(() => '0'));
   }
@@ -73,6 +74,7 @@ class TotalPrice extends ValueObject<String> {
   factory TotalPrice(String input) {
     return TotalPrice._(validateStringNotEmpty(input));
   }
+
   double get totalPrice {
     return totalPriceStringAsFixed(value.getOrElse(() => '0'));
   }
@@ -141,6 +143,29 @@ class MaterialPrice extends ValueObject<double> {
 
   const MaterialPrice._(this.value);
 
+  String displayUnitPrice({
+    required Currency currency,
+    required bool hidePrice,
+    required bool isVNUser,
+    required bool enableVat,
+    required bool enableTaxClassification,
+    required int vatValue,
+    required MaterialTaxClassification taxClassification,
+    required List taxes,
+  }) {
+    return unitPrice(
+      currency,
+      hidePrice,
+      isVNUser,
+      enableVat,
+      enableTaxClassification,
+      vatValue,
+      taxClassification,
+      taxes,
+      value.getOrElse(() => 0),
+    );
+  }
+
   String displayWithCurrency({
     required Currency currency,
     required bool hidePrice,
@@ -183,5 +208,24 @@ class MaterialBundleType extends ValueObject<String> {
 
   bool isPercent() {
     return materialBundleTypeIsPercent(value.getOrElse(() => ''));
+  }
+}
+
+class MaterialTaxClassification extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory MaterialTaxClassification(String input) {
+    return MaterialTaxClassification._(Right(input));
+  }
+
+  const MaterialTaxClassification._(this.value);
+
+  bool isNoTax() {
+    return materialTaxClassificationIsNoTax(value.getOrElse(() => ''));
+  }
+
+  bool isExempt() {
+    return materialTaxClassificationIsExempt(value.getOrElse(() => ''));
   }
 }

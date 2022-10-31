@@ -31,6 +31,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'disableBundles', defaultValue: false)
         required bool disableBundles,
     @JsonKey(name: 'enableZDP5', defaultValue: false) required bool enableZDP5,
+    @JsonKey(name: 'enableTaxClassification', defaultValue: false) required bool enableTaxClassification,
     @JsonKey(name: 'enableVat', defaultValue: false) required bool enableVat,
     @JsonKey(name: 'vatValue', defaultValue: 0) required int vatValue,
   }) = _SalesOrganisationConfigsDto;
@@ -50,6 +51,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableBatchNumber: configs.enableBatchNumber,
       disableBundles: configs.disableBundles,
       enableZDP5: configs.enableZDP5,
+      enableTaxClassification: configs.enableTaxClassification,
       enableVat: configs.enableVat,
       vatValue: configs.vatValue,
     );
@@ -68,6 +70,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableBatchNumber: enableBatchNumber,
       disableBundles: disableBundles,
       enableZDP5: enableZDP5,
+      enableTaxClassification: enableTaxClassification,
       enableVat: enableVat,
       vatValue: vatValue,
     );

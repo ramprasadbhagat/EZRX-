@@ -25,7 +25,7 @@ class MaterialInfo with _$MaterialInfo {
     required bool hidePrice,
     required bool hasValidTenderContract,
     required bool hasMandatoryTenderContract,
-    required String taxClassification,
+    required MaterialTaxClassification taxClassification,
     required List<String> taxes,
     required List<Bundle> bundles,
   }) = _MaterialInfo;
@@ -38,7 +38,7 @@ class MaterialInfo with _$MaterialInfo {
         itemBrand: '',
         principalData:
             const PrincipalData(principalName: '', principalCode: ''),
-        taxClassification: '',
+        taxClassification: MaterialTaxClassification(''),
         itemRegistrationNumber: '',
         unitOfMeasurement: '',
         materialGroup2: MaterialGroup.two(''),

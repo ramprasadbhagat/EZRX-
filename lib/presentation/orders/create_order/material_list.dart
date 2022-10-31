@@ -23,6 +23,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MaterialListPage extends StatelessWidget {
   final Function addToCart;
+
   const MaterialListPage({Key? key, required this.addToCart}) : super(key: key);
 
   @override
@@ -75,6 +76,7 @@ class MaterialListPage extends StatelessWidget {
 class _BodyContent extends StatelessWidget {
   final MaterialListState materialListState;
   final Function addToCart;
+
   const _BodyContent({
     Key? key,
     required this.materialListState,
@@ -154,6 +156,7 @@ class _BodyContent extends StatelessWidget {
 class _ListContent extends StatelessWidget {
   final MaterialInfo materialInfo;
   final Function addToCart;
+
   const _ListContent({
     Key? key,
     required this.materialInfo,
@@ -201,6 +204,7 @@ class _ListContent extends StatelessWidget {
 
 class _PriceLabel extends StatelessWidget {
   final MaterialInfo materialInfo;
+
   const _PriceLabel({Key? key, required this.materialInfo}) : super(key: key);
 
   @override
@@ -210,20 +214,50 @@ class _PriceLabel extends StatelessWidget {
           previous.isFetching != current.isFetching,
       builder: (context, state) {
         final itemPrice = state.materialPrice[materialInfo.materialNumber];
-
         if (itemPrice != null) {
           final currentCurrency =
               context.read<SalesOrgBloc>().state.configs.currency;
           final isHidePrice = materialInfo.hidePrice;
+          final isVNUser = context.read<SalesOrgBloc>().state.salesOrg.isVN;
+          final enabledVat =
+              context.read<SalesOrgBloc>().state.configs.enableVat;
+          final enableTaxClassification = context
+              .read<SalesOrgBloc>()
+              .state
+              .configs
+              .enableTaxClassification;
+          final taxClassification = materialInfo.taxClassification;
+          final taxes = materialInfo.taxes;
+          final vatValue = context.read<SalesOrgBloc>().state.configs.vatValue;
 
-          return Text(
-            '${'Unit Price: '.tr()}${itemPrice.finalPrice.displayWithCurrency(
-              currency: currentCurrency,
-              hidePrice: isHidePrice,
-            )}',
-            style: Theme.of(context).textTheme.bodyText1?.apply(
-                  color: ZPColors.black,
-                ),
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${'List Price: '.tr()}${itemPrice.finalPrice.displayWithCurrency(
+                  currency: currentCurrency,
+                  hidePrice: isHidePrice,
+                )}',
+                style: Theme.of(context).textTheme.bodyText1?.apply(
+                      color: ZPColors.darkGray,
+                    ),
+              ),
+              Text(
+                '${'Unit Price: '.tr()}${itemPrice.finalPrice.displayUnitPrice(
+                  currency: currentCurrency,
+                  hidePrice: isHidePrice,
+                  isVNUser: isVNUser,
+                  enableVat: enabledVat,
+                  enableTaxClassification: enableTaxClassification,
+                  vatValue: vatValue,
+                  taxClassification: taxClassification,
+                  taxes: taxes,
+                )}',
+                style: Theme.of(context).textTheme.bodyText1?.apply(
+                      color: ZPColors.black,
+                    ),
+              ),
+            ],
           );
         }
         if (state.isFetching) {
@@ -247,6 +281,7 @@ class _PriceLabel extends StatelessWidget {
 
 class _FavoriteButton extends StatelessWidget {
   final MaterialInfo materialInfo;
+
   const _FavoriteButton({Key? key, required this.materialInfo})
       : super(key: key);
 

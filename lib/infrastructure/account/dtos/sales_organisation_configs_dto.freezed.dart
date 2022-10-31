@@ -44,6 +44,8 @@ mixin _$SalesOrganisationConfigsDto {
   bool get disableBundles => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableZDP5', defaultValue: false)
   bool get enableZDP5 => throw _privateConstructorUsedError;
+  @JsonKey(name: 'enableTaxClassification', defaultValue: false)
+  bool get enableTaxClassification => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableVat', defaultValue: false)
   bool get enableVat => throw _privateConstructorUsedError;
   @JsonKey(name: 'vatValue', defaultValue: 0)
@@ -85,6 +87,8 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
           bool disableBundles,
       @JsonKey(name: 'enableZDP5', defaultValue: false)
           bool enableZDP5,
+      @JsonKey(name: 'enableTaxClassification', defaultValue: false)
+          bool enableTaxClassification,
       @JsonKey(name: 'enableVat', defaultValue: false)
           bool enableVat,
       @JsonKey(name: 'vatValue', defaultValue: 0)
@@ -113,6 +117,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? enableBatchNumber = freezed,
     Object? disableBundles = freezed,
     Object? enableZDP5 = freezed,
+    Object? enableTaxClassification = freezed,
     Object? enableVat = freezed,
     Object? vatValue = freezed,
   }) {
@@ -161,6 +166,10 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.enableZDP5
           : enableZDP5 // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableTaxClassification: enableTaxClassification == freezed
+          ? _value.enableTaxClassification
+          : enableTaxClassification // ignore: cast_nullable_to_non_nullable
+              as bool,
       enableVat: enableVat == freezed
           ? _value.enableVat
           : enableVat // ignore: cast_nullable_to_non_nullable
@@ -205,6 +214,8 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
           bool disableBundles,
       @JsonKey(name: 'enableZDP5', defaultValue: false)
           bool enableZDP5,
+      @JsonKey(name: 'enableTaxClassification', defaultValue: false)
+          bool enableTaxClassification,
       @JsonKey(name: 'enableVat', defaultValue: false)
           bool enableVat,
       @JsonKey(name: 'vatValue', defaultValue: 0)
@@ -237,6 +248,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? enableBatchNumber = freezed,
     Object? disableBundles = freezed,
     Object? enableZDP5 = freezed,
+    Object? enableTaxClassification = freezed,
     Object? enableVat = freezed,
     Object? vatValue = freezed,
   }) {
@@ -285,6 +297,10 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.enableZDP5
           : enableZDP5 // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableTaxClassification: enableTaxClassification == freezed
+          ? _value.enableTaxClassification
+          : enableTaxClassification // ignore: cast_nullable_to_non_nullable
+              as bool,
       enableVat: enableVat == freezed
           ? _value.enableVat
           : enableVat // ignore: cast_nullable_to_non_nullable
@@ -324,6 +340,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
           required this.disableBundles,
       @JsonKey(name: 'enableZDP5', defaultValue: false)
           required this.enableZDP5,
+      @JsonKey(name: 'enableTaxClassification', defaultValue: false)
+          required this.enableTaxClassification,
       @JsonKey(name: 'enableVat', defaultValue: false)
           required this.enableVat,
       @JsonKey(name: 'vatValue', defaultValue: 0)
@@ -374,6 +392,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @JsonKey(name: 'enableZDP5', defaultValue: false)
   final bool enableZDP5;
   @override
+  @JsonKey(name: 'enableTaxClassification', defaultValue: false)
+  final bool enableTaxClassification;
+  @override
   @JsonKey(name: 'enableVat', defaultValue: false)
   final bool enableVat;
   @override
@@ -382,7 +403,7 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, vatValue: $vatValue)';
+    return 'SalesOrganisationConfigsDto(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue)';
   }
 
   @override
@@ -411,6 +432,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
                 .equals(other.disableBundles, disableBundles) &&
             const DeepCollectionEquality()
                 .equals(other.enableZDP5, enableZDP5) &&
+            const DeepCollectionEquality().equals(
+                other.enableTaxClassification, enableTaxClassification) &&
             const DeepCollectionEquality().equals(other.enableVat, enableVat) &&
             const DeepCollectionEquality().equals(other.vatValue, vatValue));
   }
@@ -430,6 +453,7 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
       const DeepCollectionEquality().hash(enableBatchNumber),
       const DeepCollectionEquality().hash(disableBundles),
       const DeepCollectionEquality().hash(enableZDP5),
+      const DeepCollectionEquality().hash(enableTaxClassification),
       const DeepCollectionEquality().hash(enableVat),
       const DeepCollectionEquality().hash(vatValue));
 
@@ -473,6 +497,8 @@ abstract class _SalesOrganisationConfigsDto
           required final bool disableBundles,
       @JsonKey(name: 'enableZDP5', defaultValue: false)
           required final bool enableZDP5,
+      @JsonKey(name: 'enableTaxClassification', defaultValue: false)
+          required final bool enableTaxClassification,
       @JsonKey(name: 'enableVat', defaultValue: false)
           required final bool enableVat,
       @JsonKey(name: 'vatValue', defaultValue: 0)
@@ -516,6 +542,9 @@ abstract class _SalesOrganisationConfigsDto
   @override
   @JsonKey(name: 'enableZDP5', defaultValue: false)
   bool get enableZDP5;
+  @override
+  @JsonKey(name: 'enableTaxClassification', defaultValue: false)
+  bool get enableTaxClassification;
   @override
   @JsonKey(name: 'enableVat', defaultValue: false)
   bool get enableVat;

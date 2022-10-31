@@ -47,6 +47,7 @@ void main() {
     principalList: [],
     enableBatchNumber: false,
     enableZDP5: false,
+    enableTaxClassification: false,
     enableVat: false,
     vatValue: 0,
   );

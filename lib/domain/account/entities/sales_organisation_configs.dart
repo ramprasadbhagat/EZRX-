@@ -20,10 +20,12 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool disableBundles,
     required bool enableZDP5,
     required bool enableVat,
+    required bool enableTaxClassification,
     required int vatValue,
   }) = _SalesOrganisationConfigs;
 
-  factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
+  factory SalesOrganisationConfigs.empty() =>
+      SalesOrganisationConfigs(
         currency: Currency(''),
         hideCustomer: false,
         enableGimmickMaterial: false,
@@ -35,6 +37,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         enableBatchNumber: false,
         disableBundles: false,
         enableZDP5: false,
+        enableTaxClassification: false,
         enableVat: false,
         vatValue: 0,
       );

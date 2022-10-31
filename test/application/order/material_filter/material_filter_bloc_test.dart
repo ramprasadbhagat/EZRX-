@@ -57,6 +57,7 @@ void main() {
     disableBundles: false,
     principalList: [],
     enableBatchNumber: false,
+    enableTaxClassification: false,
     enableVat: false,
     enableZDP5: false,
     vatValue: 0,

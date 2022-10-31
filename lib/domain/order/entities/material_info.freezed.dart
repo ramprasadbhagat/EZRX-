@@ -31,7 +31,8 @@ mixin _$MaterialInfo {
   bool get hidePrice => throw _privateConstructorUsedError;
   bool get hasValidTenderContract => throw _privateConstructorUsedError;
   bool get hasMandatoryTenderContract => throw _privateConstructorUsedError;
-  String get taxClassification => throw _privateConstructorUsedError;
+  MaterialTaxClassification get taxClassification =>
+      throw _privateConstructorUsedError;
   List<String> get taxes => throw _privateConstructorUsedError;
   List<Bundle> get bundles => throw _privateConstructorUsedError;
 
@@ -61,7 +62,7 @@ abstract class $MaterialInfoCopyWith<$Res> {
       bool hidePrice,
       bool hasValidTenderContract,
       bool hasMandatoryTenderContract,
-      String taxClassification,
+      MaterialTaxClassification taxClassification,
       List<String> taxes,
       List<Bundle> bundles});
 
@@ -161,7 +162,7 @@ class _$MaterialInfoCopyWithImpl<$Res> implements $MaterialInfoCopyWith<$Res> {
       taxClassification: taxClassification == freezed
           ? _value.taxClassification
           : taxClassification // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialTaxClassification,
       taxes: taxes == freezed
           ? _value.taxes
           : taxes // ignore: cast_nullable_to_non_nullable
@@ -204,7 +205,7 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
       bool hidePrice,
       bool hasValidTenderContract,
       bool hasMandatoryTenderContract,
-      String taxClassification,
+      MaterialTaxClassification taxClassification,
       List<String> taxes,
       List<Bundle> bundles});
 
@@ -308,7 +309,7 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
       taxClassification: taxClassification == freezed
           ? _value.taxClassification
           : taxClassification // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialTaxClassification,
       taxes: taxes == freezed
           ? _value._taxes
           : taxes // ignore: cast_nullable_to_non_nullable
@@ -378,7 +379,7 @@ class _$_MaterialInfo extends _MaterialInfo {
   @override
   final bool hasMandatoryTenderContract;
   @override
-  final String taxClassification;
+  final MaterialTaxClassification taxClassification;
   final List<String> _taxes;
   @override
   List<String> get taxes {
@@ -482,7 +483,7 @@ abstract class _MaterialInfo extends MaterialInfo {
       required final bool hidePrice,
       required final bool hasValidTenderContract,
       required final bool hasMandatoryTenderContract,
-      required final String taxClassification,
+      required final MaterialTaxClassification taxClassification,
       required final List<String> taxes,
       required final List<Bundle> bundles}) = _$_MaterialInfo;
   const _MaterialInfo._() : super._();
@@ -518,7 +519,7 @@ abstract class _MaterialInfo extends MaterialInfo {
   @override
   bool get hasMandatoryTenderContract;
   @override
-  String get taxClassification;
+  MaterialTaxClassification get taxClassification;
   @override
   List<String> get taxes;
   @override

@@ -69,7 +69,7 @@ class CustomerMaterialDto with _$CustomerMaterialDto {
         hidePrice: hidePrice,
         hasValidTenderContract: hasValidTenderContract,
         hasMandatoryTenderContract: hasMandatoryTenderContract,
-        taxClassification: taxClassification,
+        taxClassification: MaterialTaxClassification(taxClassification),
         taxes: taxes,
         bundles: [],
       );
