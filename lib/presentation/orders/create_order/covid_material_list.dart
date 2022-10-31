@@ -18,7 +18,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CovidMaterialListPage extends StatelessWidget {
-  const CovidMaterialListPage({Key? key}) : super(key: key);
+  final Function addToCart;
+
+  const CovidMaterialListPage({
+    Key? key,
+    required this.addToCart,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +59,10 @@ class CovidMaterialListPage extends StatelessWidget {
           return Column(
             children: [
               const _SearchBar(),
-              _BodyContent(covidMaterialListState: state),
+              _BodyContent(
+                covidMaterialListState: state,
+                addToCart: addToCart,
+              ),
             ],
           );
         },
@@ -65,9 +73,11 @@ class CovidMaterialListPage extends StatelessWidget {
 
 class _BodyContent extends StatelessWidget {
   final CovidMaterialListState covidMaterialListState;
+  final Function addToCart;
   const _BodyContent({
     Key? key,
     required this.covidMaterialListState,
+    required this.addToCart,
   }) : super(key: key);
 
   @override
@@ -115,7 +125,7 @@ class _BodyContent extends StatelessWidget {
                   ),
               isLoading: covidMaterialListState.isFetching,
               itemBuilder: (context, index, item) =>
-                  _ListContent(materialInfo: item),
+                  _ListContent(materialInfo: item, addToCart: addToCart),
               items: covidMaterialListState.materialList,
             ),
     );
@@ -124,7 +134,13 @@ class _BodyContent extends StatelessWidget {
 
 class _ListContent extends StatelessWidget {
   final MaterialInfo materialInfo;
-  const _ListContent({Key? key, required this.materialInfo}) : super(key: key);
+  final Function addToCart;
+
+  const _ListContent({
+    Key? key,
+    required this.materialInfo,
+    required this.addToCart,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -133,6 +149,12 @@ class _ListContent extends StatelessWidget {
         key: Key(
           'covidMaterialOption${materialInfo.materialNumber.getOrCrash()}',
         ),
+        onTap: () {
+          addToCart(
+            context: context,
+            materialInfo: materialInfo,
+          );
+        },
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -225,12 +247,17 @@ class _FavoriteButton extends StatelessWidget {
         );
 
         return favourite == Favourite.empty()
-            ? IconButton(
-                icon: const Icon(
-                  Icons.favorite_border_outlined,
-                  color: ZPColors.secondary,
+            ? InkWell(
+                child: const SizedBox(
+                  height: 15,
+                  width: 15,
+                  child: Icon(
+                    Icons.favorite_border_outlined,
+                    color: ZPColors.secondary,
+                    // size: 20,
+                  ),
                 ),
-                onPressed: () => context.read<FavouriteBloc>().add(
+                onTap: () => context.read<FavouriteBloc>().add(
                       FavouriteEvent.add(
                         item: Favourite(
                           id: '',
@@ -244,12 +271,17 @@ class _FavoriteButton extends StatelessWidget {
                       ),
                     ),
               )
-            : IconButton(
-                icon: const Icon(
-                  Icons.favorite,
-                  color: ZPColors.secondary,
+            : InkWell(
+                child: const SizedBox(
+                  height: 15,
+                  width: 15,
+                  child: Icon(
+                    Icons.favorite,
+                    color: ZPColors.secondary,
+                    // size: 20,
+                  ),
                 ),
-                onPressed: () => context.read<FavouriteBloc>().add(
+                onTap: () => context.read<FavouriteBloc>().add(
                       FavouriteEvent.delete(
                         item: favourite,
                         user: context.read<UserBloc>().state.user,
@@ -286,8 +318,7 @@ class _SearchBarState extends State<_SearchBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      height: 50,
+      padding: const EdgeInsets.all(8),
       color: ZPColors.white,
       child: BlocConsumer<CovidMaterialListBloc, CovidMaterialListState>(
         listenWhen: (previous, current) =>
@@ -311,7 +342,7 @@ class _SearchBarState extends State<_SearchBar> {
               enabled: !state.isFetching,
               onChanged: (value) {
                 context.read<CovidMaterialListBloc>().add(
-                      CovidMaterialListEvent.updateSearchKey(value),
+                      CovidMaterialListEvent.updateSearchKey(searchKey: value),
                     );
               },
               onFieldSubmitted: (value) {
@@ -349,7 +380,9 @@ class _SearchBarState extends State<_SearchBar> {
                   icon: const Icon(Icons.clear),
                   onPressed: () {
                     context.read<CovidMaterialListBloc>().add(
-                          const CovidMaterialListEvent.updateSearchKey(''),
+                          const CovidMaterialListEvent.updateSearchKey(
+                            searchKey: '',
+                          ),
                         );
                     // fetch code goes here
                   },

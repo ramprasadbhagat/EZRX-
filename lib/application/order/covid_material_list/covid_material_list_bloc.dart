@@ -35,8 +35,11 @@ class CovidMaterialListBloc
   ) async {
     await event.map(
       initialized: (e) async => emit(CovidMaterialListState.initial()),
-      updateSearchKey: (e) async =>
-          emit(state.copyWith(searchKey: SearchKey.search(e.searchKey))),
+      updateSearchKey: (e) async => emit(
+        state.copyWith(
+          searchKey: SearchKey.search(e.searchKey),
+        ),
+      ),
       fetch: (e) async {
         emit(
           state.copyWith(

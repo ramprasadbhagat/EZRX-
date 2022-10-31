@@ -12,8 +12,9 @@ class CovidMaterialListEvent with _$CovidMaterialListEvent {
     required ShipToInfo shipToInfo,
   }) = _Fetch;
 
-  const factory CovidMaterialListEvent.updateSearchKey(String searchKey) =
-      _UpdateSearchKey;
+  const factory CovidMaterialListEvent.updateSearchKey({
+    required String searchKey,
+  }) = _UpdateSearchKey;
 
   const factory CovidMaterialListEvent.loadMore({
     required User user,

@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -49,26 +50,51 @@ class HomeTab extends StatelessWidget {
         child: ListView(
           children: [
             const HomeBanner(),
-            BlocListener<MaterialListBloc, MaterialListState>(
-              listenWhen: (previous, current) =>
-                  previous.nextPageIndex != current.nextPageIndex,
-              listener: (context, state) {
-                if (state.materialList.isNotEmpty) {
-                  context.read<MaterialPriceBloc>().add(
-                        MaterialPriceEvent.fetch(
-                          salesOrganisation: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrganisation,
-                          customerCode: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                          materials: state.materialList,
-                        ),
-                      );
-                }
-              },
+            MultiBlocListener(
+              listeners: [
+                BlocListener<MaterialListBloc, MaterialListState>(
+                  listenWhen: (previous, current) =>
+                      previous.nextPageIndex != current.nextPageIndex,
+                  listener: (context, state) {
+                    if (state.materialList.isNotEmpty) {
+                      context.read<MaterialPriceBloc>().add(
+                            MaterialPriceEvent.fetch(
+                              salesOrganisation: context
+                                  .read<SalesOrgBloc>()
+                                  .state
+                                  .salesOrganisation,
+                              customerCode: context
+                                  .read<CustomerCodeBloc>()
+                                  .state
+                                  .customerCodeInfo,
+                              materials: state.materialList,
+                            ),
+                          );
+                    }
+                  },
+                ),
+                BlocListener<CovidMaterialListBloc, CovidMaterialListState>(
+                  listenWhen: (previous, current) =>
+                      previous.nextPageIndex != current.nextPageIndex,
+                  listener: (context, state) {
+                    if (state.materialList.isNotEmpty) {
+                      context.read<MaterialPriceBloc>().add(
+                            MaterialPriceEvent.fetch(
+                              salesOrganisation: context
+                                  .read<SalesOrgBloc>()
+                                  .state
+                                  .salesOrganisation,
+                              customerCode: context
+                                  .read<CustomerCodeBloc>()
+                                  .state
+                                  .customerCodeInfo,
+                              materials: state.materialList,
+                            ),
+                          );
+                    }
+                  },
+                ),
+              ],
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GridView.count(

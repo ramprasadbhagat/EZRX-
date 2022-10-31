@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
@@ -75,6 +76,10 @@ final customerCodeVariants = ValueVariant({...CustomerCodeVariant.values});
 
 final shipToCodeVariants = ValueVariant({...ShipToCodeVariant.values});
 
+class CovidMaterialListBlocMock
+    extends MockBloc<CovidMaterialListEvent, CovidMaterialListState>
+    implements CovidMaterialListBloc {}
+
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -89,6 +94,7 @@ void main() async {
   late SavedOrderListBloc savedOrderBlocMock;
   late MaterialListBlocMock materialListBlocMock;
   late OrderHistoryListBlocMock orderHistoryListBlocMock;
+  late CovidMaterialListBloc covidMaterialListBlocMock;
 
   // final fakeSaleOrgConfig = SalesOrganisationConfigs(
   //   currency: Currency(''),
@@ -122,6 +128,7 @@ void main() async {
       savedOrderBlocMock = SavedOrderBlocMock();
       materialListBlocMock = MaterialListBlocMock();
       orderHistoryListBlocMock = OrderHistoryListBlocMock();
+      covidMaterialListBlocMock = CovidMaterialListBlocMock();
       autoRouterMock = locator<AppRouter>();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
@@ -137,6 +144,8 @@ void main() async {
           .thenReturn(MaterialListState.initial());
       when(() => orderHistoryListBlocMock.state)
           .thenReturn(OrderHistoryListState.initial());
+      when(() => covidMaterialListBlocMock.state)
+          .thenReturn(CovidMaterialListState.initial());
     });
 
     Widget getScopedWidget() {
@@ -172,6 +181,8 @@ void main() async {
             BlocProvider<CartBloc>(
               create: (context) => cartBlocMock,
             ),
+            BlocProvider<CovidMaterialListBloc>(
+                create: ((context) => covidMaterialListBlocMock)),
           ],
           child: const HomeTab(),
         ),

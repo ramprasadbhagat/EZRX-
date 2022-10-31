@@ -197,6 +197,9 @@ class App extends StatelessWidget {
         BlocProvider<ValidCustomerMaterialBloc>(
           create: (context) => locator<ValidCustomerMaterialBloc>(),
         ),
+        BlocProvider<CovidMaterialListBloc>(
+          create: (context) => locator<CovidMaterialListBloc>(),
+        ),
         BlocProvider<CartBloc>(
           create: (context) => locator<CartBloc>(),
         ),

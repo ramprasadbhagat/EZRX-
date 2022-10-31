@@ -92,6 +92,17 @@ void main() {
         expect(result, 'VN');
       },
     );
+
+    test(
+      'should return PH when get country with SalesOrg 2500',
+      () async {
+        const input = '2500';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.country;
+        expect(result, 'PH');
+        expect(salesOrg.isPH, true);
+      },
+    );
   });
 
   group('RoleType value object', () {

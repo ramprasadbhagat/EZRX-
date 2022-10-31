@@ -55,10 +55,6 @@ class SalesOrg extends ValueObject<String> {
     return country == 'SG';
   }
 
-  bool get isVP {
-    return country == 'VP';
-  }
-
   bool get isPH {
     return country == 'PH';
   }

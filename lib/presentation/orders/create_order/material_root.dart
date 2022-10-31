@@ -38,6 +38,17 @@ class MaterialRoot extends StatelessWidget {
           role: context.read<UserBloc>().state.user.role,
         );
         final length = (disableBundles ? 1 : 2) + (enableCovidMaterial ? 1 : 0);
+        final headerText = [
+          'Material',
+          if (!disableBundles) 'Bundles',
+          if (enableCovidMaterial) 'COVID-19',
+        ];
+        final widgetList = [
+          MaterialListPage(addToCart: _showBottomSheet),
+          if (!disableBundles) const MaterialBundleListPage(),
+          if (enableCovidMaterial)
+            CovidMaterialListPage(addToCart: _showBottomSheet),
+        ];
 
         return Scaffold(
           appBar: PreferredSize(
@@ -59,7 +70,8 @@ class MaterialRoot extends StatelessWidget {
                   tabWidgets: [
                     MaterialListPage(addToCart: _showBottomSheet),
                     if (!disableBundles) const MaterialBundleListPage(),
-                    if (enableCovidMaterial) const CovidMaterialListPage(),
+                    if (enableCovidMaterial)
+                      CovidMaterialListPage(addToCart: _showBottomSheet),
                   ],
                 ),
         );
