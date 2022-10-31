@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:ezrxmobile/app.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -55,6 +56,7 @@ void main() {
 
       tester.printToConsole('Redirect to home page tabbar');
       expect(find.byKey(const Key('homeTabbar')), findsOneWidget);
+
       //============================================================
       //  Banner Test
       //
@@ -75,9 +77,12 @@ void main() {
       //  Announcement Test
       //
       //============================================================
-      tester.printToConsole('close announecement tab');
+      tester.printToConsole('Home Screen announcement Close');
+      await tester.pumpAndSettle(const Duration(seconds: 1));
       final announcementCloseIcon =
           find.byKey(const Key('announcementCloseIcon'));
+      expect(announcementCloseIcon, findsOneWidget);
+      await tester.pumpAndSettle(const Duration(milliseconds: 100));
       await tester.tap(announcementCloseIcon);
       await tester.pumpAndSettle(const Duration(seconds: 1));
 
@@ -220,6 +225,87 @@ void main() {
       tester.printToConsole('Redirect to setting page');
 
       //============================================================
+      //  Notification Test
+      //
+      //============================================================
+
+      tester.printToConsole('Click notification tile');
+      final notificationTile = find.byKey(const Key('NotificationTile'));
+      await tester.tap(notificationTile);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      final languagePicker = find.byKey(const Key('gestureDetectorForLanguagePicker'));
+      await tester.tap(languagePicker);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      tester.printToConsole('Click thaiLanguageTile tile');
+      final thaiLanguageTile = find.byKey(const Key('thaiLanguageTile'));
+      await tester.tap(thaiLanguageTile);
+      await tester.pumpAndSettle(const Duration(milliseconds: 100));
+      expect(find.text('Set Up Email Notifications'), findsOneWidget);
+
+      tester.printToConsole('Click language preferences');
+      await tester.tap(languagePicker);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      tester.printToConsole('Click mandarinLanguageTile tile');
+      final mandarLanguageTile = find.byKey(const Key('mandarinLanguageTile'));
+      await tester.tap(mandarLanguageTile);
+      await tester.pumpAndSettle(const Duration(milliseconds: 100));
+      expect(find.text('Set Up Email Notifications'), findsOneWidget);
+
+      tester.printToConsole('Click language preferences');
+      await tester.tap(languagePicker);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      tester.printToConsole('Click burmeseLanguageTile tile');
+      final burmeseLanguageTile = find.byKey(const Key('burmeseLanguageTile'));
+      await tester.tap(burmeseLanguageTile);
+      await tester.pumpAndSettle(const Duration(milliseconds: 100));
+      expect(find.text('Set Up Email Notifications'), findsOneWidget);
+
+      tester.printToConsole('Click language preferences');
+      await tester.tap(languagePicker);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      tester.printToConsole('Click vietnameseLanguageTile tile');
+      final vietLanguageTile = find.byKey(const Key('vietnameseLanguageTile'));
+      await tester.tap(vietLanguageTile);
+      await tester.pumpAndSettle(const Duration(milliseconds: 100));
+      expect(find.text('Set Up Email Notifications'), findsOneWidget);
+
+      tester.printToConsole('Click language preferences');
+      await tester.tap(languagePicker);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      tester.printToConsole('Click khmerLanguageTile tile');
+      final khmerLanguageTile = find.byKey(const Key('khmerLanguageTile'));
+      await tester.tap(khmerLanguageTile);
+      await tester.pumpAndSettle(const Duration(milliseconds: 100));
+      expect(find.text('Set Up Email Notifications'), findsOneWidget);
+
+      tester.printToConsole('Click languageTile tile');
+      await tester.tap(languagePicker);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      tester.printToConsole('Click englishLanguageTile tile');
+      final englishLanguageTile = find.byKey(const Key('englishLanguageTile'));
+      await tester.tap(englishLanguageTile);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      tester.printToConsole('Click order summary update switch on');
+      final flutterSwitch = find.byKey(const Key('flutterSwitch'));
+      await tester.tap(flutterSwitch);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      tester.printToConsole('Click order summary update switch');
+      await tester.tap(flutterSwitch);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      await tester.tap(find.byType(BackButton));
+      await tester.pumpAndSettle(const Duration(milliseconds: 300));
+
+      //============================================================
       //  Localization Test
       //
       //============================================================
@@ -230,7 +316,6 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 1));
 
       tester.printToConsole('Click thaiLanguageTile tile');
-      final thaiLanguageTile = find.byKey(const Key('thaiLanguageTile'));
       await tester.tap(thaiLanguageTile);
       await tester.pumpAndSettle(const Duration(milliseconds: 100));
       expect(find.text('ออกจากระบบ'), findsOneWidget);
@@ -242,7 +327,6 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 1));
 
       tester.printToConsole('Click mandarinLanguageTile tile');
-      final mandarLanguageTile = find.byKey(const Key('mandarinLanguageTile'));
       await tester.tap(mandarLanguageTile);
       await tester.pumpAndSettle(const Duration(milliseconds: 100));
       expect(find.text('設定'), findsOneWidget);
@@ -254,7 +338,6 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 1));
 
       tester.printToConsole('Click burmeseLanguageTile tile');
-      final burmeseLanguageTile = find.byKey(const Key('burmeseLanguageTile'));
       await tester.tap(burmeseLanguageTile);
       await tester.pumpAndSettle(const Duration(milliseconds: 100));
       expect(find.text('ချိန်ညှိချက်များ'), findsOneWidget);
@@ -266,7 +349,6 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 1));
 
       tester.printToConsole('Click vietnameseLanguageTile tile');
-      final vietLanguageTile = find.byKey(const Key('vietnameseLanguageTile'));
       await tester.tap(vietLanguageTile);
       await tester.pumpAndSettle(const Duration(milliseconds: 100));
       expect(find.text('Cài đặt'), findsOneWidget);
@@ -278,7 +360,6 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 1));
 
       tester.printToConsole('Click khmerLanguageTile tile');
-      final khmerLanguageTile = find.byKey(const Key('khmerLanguageTile'));
       await tester.tap(khmerLanguageTile);
       await tester.pumpAndSettle(const Duration(milliseconds: 100));
       expect(find.text('ការកំណត់'), findsOneWidget);
@@ -290,12 +371,107 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 1));
 
       tester.printToConsole('Click englishLanguageTile tile');
-      final englishLanguageTile = find.byKey(const Key('englishLanguageTile'));
       await tester.tap(englishLanguageTile);
       await tester.pumpAndSettle(const Duration(milliseconds: 100));
       expect(find.text('Settings'), findsOneWidget);
       expect(find.text('Language'), findsOneWidget);
       expect(find.text('Logout'), findsOneWidget);
+
+      //============================================================
+      //  change password Test
+      //
+      //============================================================
+      tester.printToConsole('Click the Change Password');
+      final changePasswordTile = find.byKey(const Key('changePasswordTile'));
+      await tester.tap(changePasswordTile);
+      await tester.pumpAndSettle(const Duration(milliseconds: 100));
+
+      final oldPasswordField = find.byKey(const Key('oldPasswordTextField'));
+      expect(oldPasswordField, findsOneWidget);
+      final newPasswordField = find.byKey(const Key('newPasswordTextField'));
+      expect(newPasswordField, findsOneWidget);
+      final confrimPasswordField =
+          find.byKey(const Key('confirmPasswordTextField'));
+      expect(confrimPasswordField, findsOneWidget);
+
+      tester.printToConsole('Old password input text');
+      await tester.tap(oldPasswordField);
+      await tester.enterText(oldPasswordField, 'Stays@fe2022!');
+      await tester.pumpAndSettle(const Duration(milliseconds: 100));
+
+      tester.printToConsole('New password input text');
+      await tester.tap(newPasswordField);
+      await tester.enterText(newPasswordField, 'Stays@fe2022');
+      await tester.pumpAndSettle(const Duration(milliseconds: 100));
+
+      tester.printToConsole('Confrim password input text');
+      await tester.tap(confrimPasswordField);
+      await tester.enterText(confrimPasswordField, 'Stays@fe2022');
+      await tester.pumpAndSettle(const Duration(milliseconds: 200));
+
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      await tester.tap(find.byType(BackButton));
+      await tester.pumpAndSettle(const Duration(milliseconds: 300));
+      expect(find.text('Settings'), findsOneWidget);
+
+      //============================================================
+      //  contact us Test
+      //
+      //============================================================
+
+      tester.printToConsole('Click the Contact Us');
+      final contactUsTile = find.byKey(const Key('contactUsTile'));
+      await tester.tap(contactUsTile);
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+
+      await tester.tap(find.byType(BackButton));
+      await tester.pumpAndSettle(const Duration(milliseconds: 300));
+      expect(find.text('Settings'), findsOneWidget);
+
+      //============================================================
+      //  Accept Use Policy Test
+      //
+      //============================================================
+      tester.printToConsole('Click the Tos');
+      final tostile = find.byKey(const Key('tostile'));
+      expect(tostile, findsOneWidget);
+      await tester.pumpAndSettle(const Duration(milliseconds: 200));
+      await tester.tap(tostile);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      final auptcappBar = find.byKey(const Key('auptcappBar'));
+      expect(auptcappBar, findsOneWidget);
+
+      await tester.pumpAndSettle(const Duration(seconds: 8));
+      if(Platform.isAndroid){
+        await tester.dragFrom(const Offset(100, 100), const Offset(100, -1000));
+        await tester.pumpAndSettle(const Duration(seconds: 3));
+        await tester.dragFrom(const Offset(100, 100), const Offset(100, -1000));
+
+        await tester.pumpAndSettle(const Duration(seconds: 2));
+        final auptcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
+        await tester.tap(auptcAcceptButton);
+      }else if(Platform.isIOS){
+        await tester.tap(find.byType(BackButton));
+      }
+
+      await tester.pumpAndSettle(const Duration(milliseconds: 300));
+      expect(find.text('Settings'), findsOneWidget);
+
+      //============================================================
+      //  privacy policy Test
+      //
+      //============================================================
+      tester.printToConsole('Click the privacy policy');
+      final privacyPolicyTile = find.byKey(const Key('Privacy_Policy'));
+      expect(privacyPolicyTile, findsOneWidget);
+      await tester.pumpAndSettle(const Duration(milliseconds: 100));
+      await tester.tap(privacyPolicyTile);
+      await tester.pumpAndSettle(const Duration(seconds: 4));
+      await tester.tap(find.byType(BackButton));
+      await tester.pumpAndSettle(const Duration(milliseconds: 300));
+      expect(find.text('Settings'), findsOneWidget);
 
       //============================================================
       //  Logout Test
