@@ -1,6 +1,5 @@
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 part 'material_filter_dto.freezed.dart';
 part 'material_filter_dto.g.dart';
 

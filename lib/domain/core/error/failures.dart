@@ -54,4 +54,7 @@ class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.invalidDate({
     required T failedValue,
   }) = InvalidDate<T>;
+  const factory ValueFailure.isEmpty({
+    required T failedValue,
+  }) = isEmpty<T>;
 }

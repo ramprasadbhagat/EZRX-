@@ -1,9 +1,8 @@
-import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
+import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 
 class OrderHistoryFilterDrawer extends StatelessWidget {
   const OrderHistoryFilterDrawer({Key? key}) : super(key: key);
@@ -18,35 +17,73 @@ class OrderHistoryFilterDrawer extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(16.0),
             height: MediaQuery.of(context).size.height,
-            child: Column(
-              children: <Widget>[
-                const _FilterHeader(),
-                const SizedBox(height: 16),
-                const _OrderIdByFilter(),
-                const SizedBox(height: 16),
-                const _PoNumberFilter(),
-                const SizedBox(height: 16),
-                const _MaterialSearchByFilter(),
-                const SizedBox(height: 16),
-                const _PrincipleSearchByFilter(),
-                const SizedBox(height: 16),
-                Row(children: const [
-                  _OrderFromDateByFilter(),
-                  Padding(
-                    padding: EdgeInsets.all(4.0),
-                    child: Text('to', style: TextStyle(fontSize: 12)),
+            child:
+                BlocConsumer<OrderHistoryFilterBloc, OrderHistoryFilterState>(
+              listenWhen: (previous, current) =>
+                  previous.isSubmitting != current.isSubmitting,
+              listener: (context, state) {
+                if (state.isSubmitting) {
+                  Navigator.pop(context);
+                }
+              },
+              builder: (context, state) {
+                return Form(
+                  autovalidateMode: state.showErrorMessages
+                      ? AutovalidateMode.always
+                      : AutovalidateMode.disabled,
+                  child: Column(
+                    children: [
+                      Column(
+                        children: <Widget>[
+                          const _FilterHeader(),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          const _OrderIdByFilter(),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          const _PoNumberFilter(),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          const _MaterialSearchByFilter(),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          const _PrincipleSearchByFilter(),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Row(children: const [
+                            _OrderFromDateByFilter(),
+                            Padding(
+                              padding: EdgeInsets.all(4.0),
+                              child: Text(
+                                'to',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ),
+                            _OrderToDateByFilter(),
+                          ]),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Row(
+                            children: const [
+                              _ClearButton(),
+                              SizedBox(
+                                width: 30,
+                              ),
+                              _ApplyButton(),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                  _OrderToDateByFilter(),
-                ]),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    _ClearButton(),
-                    _ApplyButton(),
-                  ],
-                ),
-              ],
+                );
+              },
             ),
           ),
         ),
@@ -63,7 +100,7 @@ class _FilterHeader extends StatelessWidget {
       padding: EdgeInsets.only(
         top: MediaQuery.of(context).padding.top,
         bottom: 0.0,
-        left: 20,
+        left: 20.0,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -113,12 +150,21 @@ class _OrderIdByFilter extends StatelessWidget {
       ) {
         return TextFormField(
           key: const Key('filterorderidField'),
-          initialValue: state.orderHistoryFilterList.orderId,
+          initialValue:
+              state.orderHistoryFilterList.orderId.getOrDefaultValue(''),
           onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
                 OrderHistoryFilterEvent.orderIdChanged(
                   value,
                 ),
               ),
+          validator: (_) => state.orderHistoryFilterList.orderId.value.fold(
+            (f) => f.maybeMap(
+              subceedLength: (f) =>
+                  'Search input must be greater than 4 characters.'.tr(),
+              orElse: () => null,
+            ),
+            (_) => null,
+          ),
           keyboardType: TextInputType.text,
           style: const TextStyle(
             fontSize: 14,
@@ -129,7 +175,7 @@ class _OrderIdByFilter extends StatelessWidget {
               vertical: 5.0,
               horizontal: 10.0,
             ),
-            border: InputBorder.none,
+            // border: InputBorder.none,
             labelText: 'Order ID',
             labelStyle: TextStyle(
               fontSize: 12.0,
@@ -140,10 +186,28 @@ class _OrderIdByFilter extends StatelessWidget {
                 width: 1.0,
               ),
             ),
+
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 color: ZPColors.lightGray,
                 width: 1.0,
+              ),
+            ),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                width: 1,
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                width: 1,
+                color: ZPColors.kPrimaryColor,
+              ),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                width: 1,
+                color: ZPColors.kPrimaryColor,
               ),
             ),
           ),
@@ -167,12 +231,21 @@ class _PoNumberFilter extends StatelessWidget {
       ) {
         return TextFormField(
           key: const Key('filterponumberField'),
-          initialValue: state.orderHistoryFilterList.poNumber,
+          initialValue:
+              state.orderHistoryFilterList.poNumber.getOrDefaultValue(''),
           onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
                 OrderHistoryFilterEvent.poNumberChanged(
                   value,
                 ),
               ),
+          validator: (_) => state.orderHistoryFilterList.poNumber.value.fold(
+            (f) => f.maybeMap(
+              subceedLength: (f) =>
+                  'Search input must be greater than 4 characters.'.tr(),
+              orElse: () => null,
+            ),
+            (_) => null,
+          ),
           keyboardType: TextInputType.text,
           style: const TextStyle(
             fontSize: 14,
@@ -183,7 +256,23 @@ class _PoNumberFilter extends StatelessWidget {
               vertical: 5.0,
               horizontal: 10.0,
             ),
-            border: InputBorder.none,
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                width: 1,
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                width: 1,
+                color: ZPColors.kPrimaryColor,
+              ),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                width: 1,
+                color: ZPColors.kPrimaryColor,
+              ),
+            ),
             labelText: 'PO Number',
             labelStyle: TextStyle(
               fontSize: 12.0,
@@ -225,9 +314,18 @@ class _MaterialSearchByFilter extends StatelessWidget {
               state.orderHistoryFilterList.materialSearch.getOrDefaultValue(''),
           onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
                 OrderHistoryFilterEvent.materialSearchChanged(
-                  MaterialNumber(value),
+                  value,
                 ),
               ),
+          validator: (_) =>
+              state.orderHistoryFilterList.materialSearch.value.fold(
+            (f) => f.maybeMap(
+              subceedLength: (f) =>
+                  'Search input must be greater than 4 characters.'.tr(),
+              orElse: () => null,
+            ),
+            (_) => null,
+          ),
           keyboardType: TextInputType.text,
           style: const TextStyle(
             fontSize: 14,
@@ -238,7 +336,23 @@ class _MaterialSearchByFilter extends StatelessWidget {
               vertical: 5.0,
               horizontal: 10.0,
             ),
-            border: InputBorder.none,
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                width: 1,
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                width: 1,
+                color: ZPColors.kPrimaryColor,
+              ),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                width: 1,
+                color: ZPColors.kPrimaryColor,
+              ),
+            ),
             labelText: 'Material ID/Name',
             labelStyle: TextStyle(
               fontSize: 12.0,
@@ -276,10 +390,20 @@ class _PrincipleSearchByFilter extends StatelessWidget {
       ) {
         return TextFormField(
           key: const Key('filterprinciplesearchField'),
-          initialValue: state.orderHistoryFilterList.principalSearch,
+          initialValue: state.orderHistoryFilterList.principalSearch
+              .getOrDefaultValue(''),
           onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
                 OrderHistoryFilterEvent.principalSearchChanged(value),
               ),
+          validator: (_) =>
+              state.orderHistoryFilterList.principalSearch.value.fold(
+            (f) => f.maybeMap(
+              subceedLength: (f) =>
+                  'Search input must be greater than 4 characters.'.tr(),
+              orElse: () => null,
+            ),
+            (_) => null,
+          ),
           keyboardType: TextInputType.text,
           style: const TextStyle(
             fontSize: 14,
@@ -290,7 +414,23 @@ class _PrincipleSearchByFilter extends StatelessWidget {
               vertical: 5.0,
               horizontal: 10.0,
             ),
-            border: InputBorder.none,
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                width: 1,
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                width: 1,
+                color: ZPColors.kPrimaryColor,
+              ),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                width: 1,
+                color: ZPColors.kPrimaryColor,
+              ),
+            ),
             labelText: 'Principle Code/Name',
             labelStyle: TextStyle(
               fontSize: 12.0,
@@ -365,7 +505,10 @@ class __OrderFromDateByFilterState extends State<_OrderFromDateByFilter> {
       buildWhen: (previous, current) =>
           previous.orderHistoryFilterList.fromDate !=
           current.orderHistoryFilterList.fromDate,
-      builder: (context, state) {
+      builder: (
+        context,
+        state,
+      ) {
         return Expanded(
           child: TextFormField(
             key: const Key('filtefromdateField'),
@@ -452,7 +595,10 @@ class __OrderToDateByFilterState extends State<_OrderToDateByFilter> {
       buildWhen: (previous, current) =>
           previous.orderHistoryFilterList.toDate !=
           current.orderHistoryFilterList.toDate,
-      builder: (context, state) {
+      builder: (
+        context,
+        state,
+      ) {
         return Expanded(
           child: TextFormField(
             key: const Key('filtertodateField'),
@@ -542,6 +688,7 @@ class _ClearButton extends StatelessWidget {
         context.read<OrderHistoryFilterBloc>().add(
               const OrderHistoryFilterEvent.initialized(),
             );
+
         Navigator.of(context).pop();
       },
       child: const Text(
@@ -585,8 +732,6 @@ class _ApplyButton extends StatelessWidget {
         context.read<OrderHistoryFilterBloc>().add(
               const OrderHistoryFilterEvent.filterOrderHistory(),
             );
-
-        Navigator.of(context).pop();
       },
       child: const Text(
         'Apply',

@@ -70,9 +70,9 @@ class HistoryTab extends StatelessWidget {
                       BlocBuilder<OrderHistoryFilterBloc,
                           OrderHistoryFilterState>(
                         buildWhen: (previous, current) =>
-                            previous.isSubmitting != current.isSubmitting,
+                            previous.isAppliedFilter != current.isAppliedFilter,
                         builder: (context, state) {
-                          if (state.isSubmitting) {
+                          if (state.isAppliedFilter) {
                             return Positioned(
                               key: const ValueKey('Filter_list_not_empty'),
                               right: 0,
@@ -101,9 +101,9 @@ class HistoryTab extends StatelessWidget {
       endDrawer: const Drawer(child: OrderHistoryFilterDrawer()),
       body: BlocListener<OrderHistoryFilterBloc, OrderHistoryFilterState>(
         listenWhen: (previous, current) =>
-            previous.isSubmitting != current.isSubmitting
-            && !scaffoldKey.currentState!.isEndDrawerOpen,
-
+            previous.isSubmitting != current.isSubmitting &&
+                current.isSubmitting ||
+            !scaffoldKey.currentState!.isEndDrawerOpen,
         listener: (context, state) {
           context.read<OrderHistoryListBloc>().add(
                 OrderHistoryListEvent.fetch(

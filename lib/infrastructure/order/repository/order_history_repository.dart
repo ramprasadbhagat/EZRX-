@@ -64,9 +64,9 @@ class OrderHistoryRepository implements IOrderHistoryRepository {
               orderBy: orderBy,
               sort: sort,
               materialSearch: orderHistoryFilter.materialSearch.getOrDefaultValue(''),
-              orderId: orderHistoryFilter.orderId,
-              poNumber: orderHistoryFilter.poNumber,
-              principalSearch: orderHistoryFilter.principalSearch,
+              orderId: orderHistoryFilter.orderId.getOrDefaultValue(''),
+              poNumber: orderHistoryFilter.poNumber.getOrDefaultValue(''),
+              principalSearch: orderHistoryFilter.principalSearch.getOrDefaultValue(''),
             )
           : await orderHistoryRemoteDataSource.getOrderHistory(
               loginUserType: user.role.type.loginUserType,
@@ -80,9 +80,9 @@ class OrderHistoryRepository implements IOrderHistoryRepository {
               orderBy: orderBy,
               sort: sort,
               materialSearch: orderHistoryFilter.materialSearch.getOrDefaultValue(''),
-              orderId: orderHistoryFilter.orderId,
-              poNumber: orderHistoryFilter.poNumber,
-              principalSearch: orderHistoryFilter.principalSearch,
+              orderId: orderHistoryFilter.orderId.getOrDefaultValue(''),
+              poNumber: orderHistoryFilter.poNumber.getOrDefaultValue(''),
+              principalSearch: orderHistoryFilter.principalSearch.getOrDefaultValue(''),
             );
 
       return Right(orderHistoryItemList);

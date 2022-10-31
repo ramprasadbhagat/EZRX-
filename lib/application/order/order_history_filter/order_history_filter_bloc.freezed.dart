@@ -25,8 +25,7 @@ mixin _$OrderHistoryFilterEvent {
     required TResult Function(String orderId) orderIdChanged,
     required TResult Function(String poNumber) poNumberChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
-    required TResult Function(MaterialNumber materialSearch)
-        materialSearchChanged,
+    required TResult Function(String materialSearch) materialSearchChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,7 +37,7 @@ mixin _$OrderHistoryFilterEvent {
     TResult Function(String orderId)? orderIdChanged,
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(MaterialNumber materialSearch)? materialSearchChanged,
+    TResult Function(String materialSearch)? materialSearchChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,7 +49,7 @@ mixin _$OrderHistoryFilterEvent {
     TResult Function(String orderId)? orderIdChanged,
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(MaterialNumber materialSearch)? materialSearchChanged,
+    TResult Function(String materialSearch)? materialSearchChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -160,8 +159,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(String orderId) orderIdChanged,
     required TResult Function(String poNumber) poNumberChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
-    required TResult Function(MaterialNumber materialSearch)
-        materialSearchChanged,
+    required TResult Function(String materialSearch) materialSearchChanged,
   }) {
     return initialized();
   }
@@ -176,7 +174,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(String orderId)? orderIdChanged,
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(MaterialNumber materialSearch)? materialSearchChanged,
+    TResult Function(String materialSearch)? materialSearchChanged,
   }) {
     return initialized?.call();
   }
@@ -191,7 +189,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(String orderId)? orderIdChanged,
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(MaterialNumber materialSearch)? materialSearchChanged,
+    TResult Function(String materialSearch)? materialSearchChanged,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -304,8 +302,7 @@ class _$_FilterOrderHistory implements _FilterOrderHistory {
     required TResult Function(String orderId) orderIdChanged,
     required TResult Function(String poNumber) poNumberChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
-    required TResult Function(MaterialNumber materialSearch)
-        materialSearchChanged,
+    required TResult Function(String materialSearch) materialSearchChanged,
   }) {
     return filterOrderHistory();
   }
@@ -320,7 +317,7 @@ class _$_FilterOrderHistory implements _FilterOrderHistory {
     TResult Function(String orderId)? orderIdChanged,
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(MaterialNumber materialSearch)? materialSearchChanged,
+    TResult Function(String materialSearch)? materialSearchChanged,
   }) {
     return filterOrderHistory?.call();
   }
@@ -335,7 +332,7 @@ class _$_FilterOrderHistory implements _FilterOrderHistory {
     TResult Function(String orderId)? orderIdChanged,
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(MaterialNumber materialSearch)? materialSearchChanged,
+    TResult Function(String materialSearch)? materialSearchChanged,
     required TResult orElse(),
   }) {
     if (filterOrderHistory != null) {
@@ -472,8 +469,7 @@ class _$_SetfromDate implements _SetfromDate {
     required TResult Function(String orderId) orderIdChanged,
     required TResult Function(String poNumber) poNumberChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
-    required TResult Function(MaterialNumber materialSearch)
-        materialSearchChanged,
+    required TResult Function(String materialSearch) materialSearchChanged,
   }) {
     return setfromDate(fromDate);
   }
@@ -488,7 +484,7 @@ class _$_SetfromDate implements _SetfromDate {
     TResult Function(String orderId)? orderIdChanged,
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(MaterialNumber materialSearch)? materialSearchChanged,
+    TResult Function(String materialSearch)? materialSearchChanged,
   }) {
     return setfromDate?.call(fromDate);
   }
@@ -503,7 +499,7 @@ class _$_SetfromDate implements _SetfromDate {
     TResult Function(String orderId)? orderIdChanged,
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(MaterialNumber materialSearch)? materialSearchChanged,
+    TResult Function(String materialSearch)? materialSearchChanged,
     required TResult orElse(),
   }) {
     if (setfromDate != null) {
@@ -646,8 +642,7 @@ class _$_SetToDate implements _SetToDate {
     required TResult Function(String orderId) orderIdChanged,
     required TResult Function(String poNumber) poNumberChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
-    required TResult Function(MaterialNumber materialSearch)
-        materialSearchChanged,
+    required TResult Function(String materialSearch) materialSearchChanged,
   }) {
     return setToDate(toDate);
   }
@@ -662,7 +657,7 @@ class _$_SetToDate implements _SetToDate {
     TResult Function(String orderId)? orderIdChanged,
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(MaterialNumber materialSearch)? materialSearchChanged,
+    TResult Function(String materialSearch)? materialSearchChanged,
   }) {
     return setToDate?.call(toDate);
   }
@@ -677,7 +672,7 @@ class _$_SetToDate implements _SetToDate {
     TResult Function(String orderId)? orderIdChanged,
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(MaterialNumber materialSearch)? materialSearchChanged,
+    TResult Function(String materialSearch)? materialSearchChanged,
     required TResult orElse(),
   }) {
     if (setToDate != null) {
@@ -819,8 +814,7 @@ class _$_OrderIdChanged implements _OrderIdChanged {
     required TResult Function(String orderId) orderIdChanged,
     required TResult Function(String poNumber) poNumberChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
-    required TResult Function(MaterialNumber materialSearch)
-        materialSearchChanged,
+    required TResult Function(String materialSearch) materialSearchChanged,
   }) {
     return orderIdChanged(orderId);
   }
@@ -835,7 +829,7 @@ class _$_OrderIdChanged implements _OrderIdChanged {
     TResult Function(String orderId)? orderIdChanged,
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(MaterialNumber materialSearch)? materialSearchChanged,
+    TResult Function(String materialSearch)? materialSearchChanged,
   }) {
     return orderIdChanged?.call(orderId);
   }
@@ -850,7 +844,7 @@ class _$_OrderIdChanged implements _OrderIdChanged {
     TResult Function(String orderId)? orderIdChanged,
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(MaterialNumber materialSearch)? materialSearchChanged,
+    TResult Function(String materialSearch)? materialSearchChanged,
     required TResult orElse(),
   }) {
     if (orderIdChanged != null) {
@@ -992,8 +986,7 @@ class _$_PoNumberChanged implements _PoNumberChanged {
     required TResult Function(String orderId) orderIdChanged,
     required TResult Function(String poNumber) poNumberChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
-    required TResult Function(MaterialNumber materialSearch)
-        materialSearchChanged,
+    required TResult Function(String materialSearch) materialSearchChanged,
   }) {
     return poNumberChanged(poNumber);
   }
@@ -1008,7 +1001,7 @@ class _$_PoNumberChanged implements _PoNumberChanged {
     TResult Function(String orderId)? orderIdChanged,
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(MaterialNumber materialSearch)? materialSearchChanged,
+    TResult Function(String materialSearch)? materialSearchChanged,
   }) {
     return poNumberChanged?.call(poNumber);
   }
@@ -1023,7 +1016,7 @@ class _$_PoNumberChanged implements _PoNumberChanged {
     TResult Function(String orderId)? orderIdChanged,
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(MaterialNumber materialSearch)? materialSearchChanged,
+    TResult Function(String materialSearch)? materialSearchChanged,
     required TResult orElse(),
   }) {
     if (poNumberChanged != null) {
@@ -1168,8 +1161,7 @@ class _$_PrincipalSearchChanged implements _PrincipalSearchChanged {
     required TResult Function(String orderId) orderIdChanged,
     required TResult Function(String poNumber) poNumberChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
-    required TResult Function(MaterialNumber materialSearch)
-        materialSearchChanged,
+    required TResult Function(String materialSearch) materialSearchChanged,
   }) {
     return principalSearchChanged(principalSearch);
   }
@@ -1184,7 +1176,7 @@ class _$_PrincipalSearchChanged implements _PrincipalSearchChanged {
     TResult Function(String orderId)? orderIdChanged,
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(MaterialNumber materialSearch)? materialSearchChanged,
+    TResult Function(String materialSearch)? materialSearchChanged,
   }) {
     return principalSearchChanged?.call(principalSearch);
   }
@@ -1199,7 +1191,7 @@ class _$_PrincipalSearchChanged implements _PrincipalSearchChanged {
     TResult Function(String orderId)? orderIdChanged,
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(MaterialNumber materialSearch)? materialSearchChanged,
+    TResult Function(String materialSearch)? materialSearchChanged,
     required TResult orElse(),
   }) {
     if (principalSearchChanged != null) {
@@ -1275,7 +1267,7 @@ abstract class _$$_MaterialSearchChangedCopyWith<$Res> {
   factory _$$_MaterialSearchChangedCopyWith(_$_MaterialSearchChanged value,
           $Res Function(_$_MaterialSearchChanged) then) =
       __$$_MaterialSearchChangedCopyWithImpl<$Res>;
-  $Res call({MaterialNumber materialSearch});
+  $Res call({String materialSearch});
 }
 
 /// @nodoc
@@ -1298,7 +1290,7 @@ class __$$_MaterialSearchChangedCopyWithImpl<$Res>
       materialSearch == freezed
           ? _value.materialSearch
           : materialSearch // ignore: cast_nullable_to_non_nullable
-              as MaterialNumber,
+              as String,
     ));
   }
 }
@@ -1309,7 +1301,7 @@ class _$_MaterialSearchChanged implements _MaterialSearchChanged {
   const _$_MaterialSearchChanged(this.materialSearch);
 
   @override
-  final MaterialNumber materialSearch;
+  final String materialSearch;
 
   @override
   String toString() {
@@ -1345,8 +1337,7 @@ class _$_MaterialSearchChanged implements _MaterialSearchChanged {
     required TResult Function(String orderId) orderIdChanged,
     required TResult Function(String poNumber) poNumberChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
-    required TResult Function(MaterialNumber materialSearch)
-        materialSearchChanged,
+    required TResult Function(String materialSearch) materialSearchChanged,
   }) {
     return materialSearchChanged(materialSearch);
   }
@@ -1361,7 +1352,7 @@ class _$_MaterialSearchChanged implements _MaterialSearchChanged {
     TResult Function(String orderId)? orderIdChanged,
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(MaterialNumber materialSearch)? materialSearchChanged,
+    TResult Function(String materialSearch)? materialSearchChanged,
   }) {
     return materialSearchChanged?.call(materialSearch);
   }
@@ -1376,7 +1367,7 @@ class _$_MaterialSearchChanged implements _MaterialSearchChanged {
     TResult Function(String orderId)? orderIdChanged,
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(MaterialNumber materialSearch)? materialSearchChanged,
+    TResult Function(String materialSearch)? materialSearchChanged,
     required TResult orElse(),
   }) {
     if (materialSearchChanged != null) {
@@ -1438,10 +1429,10 @@ class _$_MaterialSearchChanged implements _MaterialSearchChanged {
 }
 
 abstract class _MaterialSearchChanged implements OrderHistoryFilterEvent {
-  const factory _MaterialSearchChanged(final MaterialNumber materialSearch) =
+  const factory _MaterialSearchChanged(final String materialSearch) =
       _$_MaterialSearchChanged;
 
-  MaterialNumber get materialSearch;
+  String get materialSearch;
   @JsonKey(ignore: true)
   _$$_MaterialSearchChangedCopyWith<_$_MaterialSearchChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1452,8 +1443,8 @@ mixin _$OrderHistoryFilterState {
   OrderHistoryFilter get orderHistoryFilterList =>
       throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
-  bool get errorMessage => throw _privateConstructorUsedError;
-  OrderHistory get orderHistoryFilter => throw _privateConstructorUsedError;
+  bool get showErrorMessages => throw _privateConstructorUsedError;
+  bool get isAppliedFilter => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryFilterStateCopyWith<OrderHistoryFilterState> get copyWith =>
@@ -1468,11 +1459,10 @@ abstract class $OrderHistoryFilterStateCopyWith<$Res> {
   $Res call(
       {OrderHistoryFilter orderHistoryFilterList,
       bool isSubmitting,
-      bool errorMessage,
-      OrderHistory orderHistoryFilter});
+      bool showErrorMessages,
+      bool isAppliedFilter});
 
   $OrderHistoryFilterCopyWith<$Res> get orderHistoryFilterList;
-  $OrderHistoryCopyWith<$Res> get orderHistoryFilter;
 }
 
 /// @nodoc
@@ -1488,8 +1478,8 @@ class _$OrderHistoryFilterStateCopyWithImpl<$Res>
   $Res call({
     Object? orderHistoryFilterList = freezed,
     Object? isSubmitting = freezed,
-    Object? errorMessage = freezed,
-    Object? orderHistoryFilter = freezed,
+    Object? showErrorMessages = freezed,
+    Object? isAppliedFilter = freezed,
   }) {
     return _then(_value.copyWith(
       orderHistoryFilterList: orderHistoryFilterList == freezed
@@ -1500,14 +1490,14 @@ class _$OrderHistoryFilterStateCopyWithImpl<$Res>
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
-      errorMessage: errorMessage == freezed
-          ? _value.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
+      showErrorMessages: showErrorMessages == freezed
+          ? _value.showErrorMessages
+          : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
-      orderHistoryFilter: orderHistoryFilter == freezed
-          ? _value.orderHistoryFilter
-          : orderHistoryFilter // ignore: cast_nullable_to_non_nullable
-              as OrderHistory,
+      isAppliedFilter: isAppliedFilter == freezed
+          ? _value.isAppliedFilter
+          : isAppliedFilter // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -1516,13 +1506,6 @@ class _$OrderHistoryFilterStateCopyWithImpl<$Res>
     return $OrderHistoryFilterCopyWith<$Res>(_value.orderHistoryFilterList,
         (value) {
       return _then(_value.copyWith(orderHistoryFilterList: value));
-    });
-  }
-
-  @override
-  $OrderHistoryCopyWith<$Res> get orderHistoryFilter {
-    return $OrderHistoryCopyWith<$Res>(_value.orderHistoryFilter, (value) {
-      return _then(_value.copyWith(orderHistoryFilter: value));
     });
   }
 }
@@ -1537,13 +1520,11 @@ abstract class _$$_OrderHistoryFilterStateCopyWith<$Res>
   $Res call(
       {OrderHistoryFilter orderHistoryFilterList,
       bool isSubmitting,
-      bool errorMessage,
-      OrderHistory orderHistoryFilter});
+      bool showErrorMessages,
+      bool isAppliedFilter});
 
   @override
   $OrderHistoryFilterCopyWith<$Res> get orderHistoryFilterList;
-  @override
-  $OrderHistoryCopyWith<$Res> get orderHistoryFilter;
 }
 
 /// @nodoc
@@ -1562,8 +1543,8 @@ class __$$_OrderHistoryFilterStateCopyWithImpl<$Res>
   $Res call({
     Object? orderHistoryFilterList = freezed,
     Object? isSubmitting = freezed,
-    Object? errorMessage = freezed,
-    Object? orderHistoryFilter = freezed,
+    Object? showErrorMessages = freezed,
+    Object? isAppliedFilter = freezed,
   }) {
     return _then(_$_OrderHistoryFilterState(
       orderHistoryFilterList: orderHistoryFilterList == freezed
@@ -1574,14 +1555,14 @@ class __$$_OrderHistoryFilterStateCopyWithImpl<$Res>
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
-      errorMessage: errorMessage == freezed
-          ? _value.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
+      showErrorMessages: showErrorMessages == freezed
+          ? _value.showErrorMessages
+          : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
-      orderHistoryFilter: orderHistoryFilter == freezed
-          ? _value.orderHistoryFilter
-          : orderHistoryFilter // ignore: cast_nullable_to_non_nullable
-              as OrderHistory,
+      isAppliedFilter: isAppliedFilter == freezed
+          ? _value.isAppliedFilter
+          : isAppliedFilter // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1592,8 +1573,8 @@ class _$_OrderHistoryFilterState extends _OrderHistoryFilterState {
   const _$_OrderHistoryFilterState(
       {required this.orderHistoryFilterList,
       required this.isSubmitting,
-      required this.errorMessage,
-      required this.orderHistoryFilter})
+      required this.showErrorMessages,
+      required this.isAppliedFilter})
       : super._();
 
   @override
@@ -1601,13 +1582,13 @@ class _$_OrderHistoryFilterState extends _OrderHistoryFilterState {
   @override
   final bool isSubmitting;
   @override
-  final bool errorMessage;
+  final bool showErrorMessages;
   @override
-  final OrderHistory orderHistoryFilter;
+  final bool isAppliedFilter;
 
   @override
   String toString() {
-    return 'OrderHistoryFilterState(orderHistoryFilterList: $orderHistoryFilterList, isSubmitting: $isSubmitting, errorMessage: $errorMessage, orderHistoryFilter: $orderHistoryFilter)';
+    return 'OrderHistoryFilterState(orderHistoryFilterList: $orderHistoryFilterList, isSubmitting: $isSubmitting, showErrorMessages: $showErrorMessages, isAppliedFilter: $isAppliedFilter)';
   }
 
   @override
@@ -1620,9 +1601,9 @@ class _$_OrderHistoryFilterState extends _OrderHistoryFilterState {
             const DeepCollectionEquality()
                 .equals(other.isSubmitting, isSubmitting) &&
             const DeepCollectionEquality()
-                .equals(other.errorMessage, errorMessage) &&
+                .equals(other.showErrorMessages, showErrorMessages) &&
             const DeepCollectionEquality()
-                .equals(other.orderHistoryFilter, orderHistoryFilter));
+                .equals(other.isAppliedFilter, isAppliedFilter));
   }
 
   @override
@@ -1630,8 +1611,8 @@ class _$_OrderHistoryFilterState extends _OrderHistoryFilterState {
       runtimeType,
       const DeepCollectionEquality().hash(orderHistoryFilterList),
       const DeepCollectionEquality().hash(isSubmitting),
-      const DeepCollectionEquality().hash(errorMessage),
-      const DeepCollectionEquality().hash(orderHistoryFilter));
+      const DeepCollectionEquality().hash(showErrorMessages),
+      const DeepCollectionEquality().hash(isAppliedFilter));
 
   @JsonKey(ignore: true)
   @override
@@ -1643,11 +1624,10 @@ class _$_OrderHistoryFilterState extends _OrderHistoryFilterState {
 
 abstract class _OrderHistoryFilterState extends OrderHistoryFilterState {
   const factory _OrderHistoryFilterState(
-          {required final OrderHistoryFilter orderHistoryFilterList,
-          required final bool isSubmitting,
-          required final bool errorMessage,
-          required final OrderHistory orderHistoryFilter}) =
-      _$_OrderHistoryFilterState;
+      {required final OrderHistoryFilter orderHistoryFilterList,
+      required final bool isSubmitting,
+      required final bool showErrorMessages,
+      required final bool isAppliedFilter}) = _$_OrderHistoryFilterState;
   const _OrderHistoryFilterState._() : super._();
 
   @override
@@ -1655,9 +1635,9 @@ abstract class _OrderHistoryFilterState extends OrderHistoryFilterState {
   @override
   bool get isSubmitting;
   @override
-  bool get errorMessage;
+  bool get showErrorMessages;
   @override
-  OrderHistory get orderHistoryFilter;
+  bool get isAppliedFilter;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryFilterStateCopyWith<_$_OrderHistoryFilterState>

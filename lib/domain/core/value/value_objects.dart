@@ -84,5 +84,14 @@ class SearchKey extends ValueObject<String> {
         .flatMap((input) => validateMinStringLength(input, 4)));
   }
 
+  factory SearchKey.orderHistoryFilter(String searchText) {
+    return SearchKey._(
+      validateStringIsEmpty(searchText).fold(
+        (l) => validateMinStringLength(l.failedValue, 4),
+        (r) => Right(r),
+      ),
+    );
+  }
+
   const SearchKey._(this.value);
 }

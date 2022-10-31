@@ -1,165 +1,139 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
-import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
-import 'package:ezrxmobile/presentation/history/history_filter.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
-import 'package:mocktail/mocktail.dart';
-
-import '../../utils/widget_utils.dart';
-
-class OrderHistoryFilterMockBloc
-    extends MockBloc<OrderHistoryFilterEvent, OrderHistoryFilterState>
-    implements OrderHistoryFilterBloc {}
+import 'package:intl/intl.dart';
 
 void main() {
-  late GetIt locator;
-  final mockOrderHistoryFilterBloc = OrderHistoryFilterMockBloc();
-  final mockOrderHistoryFilter = OrderHistoryFilter.empty();
-  late AppRouter autoRouterMock;
-  setUpAll(() {
-    TestWidgetsFlutterBinding.ensureInitialized();
-    locator = GetIt.instance;
-    locator.registerLazySingleton(() => AppRouter());
-    autoRouterMock = locator<AppRouter>();
-    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
-    locator.registerLazySingleton(() => mockOrderHistoryFilter);
+  TestWidgetsFlutterBinding.ensureInitialized();
+  var mockOrderHistoryFilter = OrderHistoryFilter.empty();
+  var orderHistoryFilterState = OrderHistoryFilterState.initial();
+  final fakeFromDate = DateTime.parse(DateFormat('yyyyMMdd')
+      .format((DateTime.now().subtract(const Duration(days: 7)))));
 
-    locator.registerLazySingleton(() => mockOrderHistoryFilterBloc);
-  });
-  group('Order-History Filter', () {
-    setUp(() {
-      when(() => mockOrderHistoryFilterBloc.state)
-          .thenReturn(OrderHistoryFilterState.initial());
-    });
-    StackRouterScope getWUT() {
-      return WidgetUtils.getScopedWidget(
-        autoRouterMock: autoRouterMock,
-        providers: [
-          BlocProvider<OrderHistoryFilterBloc>(
-              create: (context) => mockOrderHistoryFilterBloc),
-        ],
-        child: const OrderHistoryFilterDrawer(),
-      );
-    }
+  final fakeToDate =
+      DateTime.parse(DateFormat('yyyyMMdd').format(DateTime.now()));
 
-    testWidgets('Order History Filter test ', (tester) async {
-      final orderHistoryFilterBloc = locator<OrderHistoryFilterMockBloc>();
-      when(() => orderHistoryFilterBloc.stream).thenAnswer((invocation) {
-        return Stream.fromIterable([
-          OrderHistoryFilterState.initial().copyWith(
-              isSubmitting: true,
-              orderHistoryFilterList: mockOrderHistoryFilter),
-        ]);
-      });
-      await tester.pumpWidget(getWUT());
-      await tester.pumpAndSettle(const Duration(seconds: 1));
-      final orderFilterList = find.byKey(const Key('Order History Filter'));
-      final orderIdTextField = find.byKey(const Key('filterorderidField'));
-      final poNumberField = find.byKey(const Key('filterponumberField'));
-      final princeplesearchField =
-          find.byKey(const Key('filterprinciplesearchField'));
-      final materialsearchField =
-          find.byKey(const Key('filtermaterialsearchField'));
-      final fromdateField = find.byKey(const Key('filtefromdateField'));
-      final todateField = find.byKey(const Key('filtertodateField'));
-      final filterclearButton = find.byKey(const Key('filterclearButton'));
-      final filterapplyButton = find.byKey(const Key('filterapplyButton'));
-      final filtercrossButton = find.byKey(const Key('filtercrossbutton'));
-      expect(orderFilterList, findsOneWidget);
-      expect(orderIdTextField, findsOneWidget);
-      expect(poNumberField, findsOneWidget);
-      expect(princeplesearchField, findsOneWidget);
-      expect(poNumberField, findsOneWidget);
-      expect(materialsearchField, findsOneWidget);
-      expect(fromdateField, findsOneWidget);
-      expect(todateField, findsOneWidget);
-      expect(filterclearButton, findsOneWidget);
-      expect(filterapplyButton, findsOneWidget);
-      expect(filtercrossButton, findsOneWidget);
-    });
+  const fakeOrderId = '0200190077';
+  const fakePoNumber = '1000';
+  const fakeMaterialSearch = '1990';
+  const fakePrincipleSearch = '1880';
+  mockOrderHistoryFilter = mockOrderHistoryFilter.copyWith(
+      fromDate: fakeFromDate, toDate: fakeToDate);
+  orderHistoryFilterState = orderHistoryFilterState.copyWith(
+      orderHistoryFilterList: mockOrderHistoryFilter);
 
-    testWidgets(' test apply Order History Filter  ', (tester) async {
-      when(() => mockOrderHistoryFilterBloc.state)
-          .thenReturn(OrderHistoryFilterState.initial());
-      when(() => mockOrderHistoryFilterBloc.state).thenReturn(
-        OrderHistoryFilterState.initial().copyWith(isSubmitting: true),
-      );
-      await tester.pumpWidget(getWUT());
-      await tester.pump();
-      final filterapplyButton = find.byKey(const Key('filterapplyButton'));
-      expect(filterapplyButton, findsOneWidget);
-      await tester.tap(filterapplyButton);
-      await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(filterapplyButton, findsNothing);
-    });
-    testWidgets(' test clear Order History Filter  ', (tester) async {
-      when(() => mockOrderHistoryFilterBloc.state)
-          .thenReturn(OrderHistoryFilterState.initial());
-      when(() => mockOrderHistoryFilterBloc.state).thenReturn(
-        OrderHistoryFilterState.initial()
-            .copyWith(orderHistoryFilterList: mockOrderHistoryFilter),
-      );
-      await tester.pumpWidget(getWUT());
-      await tester.pump();
-      final filterclearButton = find.byKey(const Key('filterclearButton'));
-      expect(filterclearButton, findsOneWidget);
-      await tester.tap(filterclearButton);
-      await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(filterclearButton, findsNothing);
-    });
+  group(' Order History Filter Bloc', () {
+    blocTest('setFromDate',
+        build: (() => OrderHistoryFilterBloc()),
+        seed: () => OrderHistoryFilterState.initial().copyWith(
+                orderHistoryFilterList: OrderHistoryFilter.empty().copyWith(
+              toDate: fakeToDate,
+            )),
+        act: (OrderHistoryFilterBloc bloc) {
+          bloc.add(OrderHistoryFilterEvent.setfromDate(
+            fromDate: fakeFromDate,
+          ));
+        },
+        expect: () => [
+              OrderHistoryFilterState.initial().copyWith(
+                  orderHistoryFilterList:
+                      mockOrderHistoryFilter.copyWith(fromDate: fakeFromDate)),
+            ]);
 
-    testWidgets(' test filtefromdateField date picker test ', (tester) async {
-      when(() => mockOrderHistoryFilterBloc.state)
-          .thenReturn(OrderHistoryFilterState.initial());
-      when(() => mockOrderHistoryFilterBloc.state).thenReturn(
-        OrderHistoryFilterState.initial()
-            .copyWith(orderHistoryFilterList: mockOrderHistoryFilter),
-      );
-      await tester.pumpWidget(getWUT());
-      await tester.pump();
-      final fromdateField = find.byKey(const Key('filtefromdateField'));
-      expect(fromdateField, findsOneWidget);
-      await tester.tap(fromdateField);
-      await tester.pump();
-      expect(find.byType(DatePickerDialog), findsOneWidget);
-    });
+    blocTest('setToDate',
+        build: (() => OrderHistoryFilterBloc()),
+        seed: () => OrderHistoryFilterState.initial().copyWith(
+                orderHistoryFilterList: OrderHistoryFilter.empty().copyWith(
+              fromDate: fakeFromDate,
+            )),
+        act: (OrderHistoryFilterBloc bloc) =>
+            bloc.add(OrderHistoryFilterEvent.setToDate(toDate: fakeToDate)),
+        expect: () => [
+              orderHistoryFilterState.copyWith(
+                  orderHistoryFilterList:
+                      mockOrderHistoryFilter.copyWith(toDate: fakeToDate))
+            ]);
 
-    testWidgets(' test filtertodateField date picker test ', (tester) async {
-      when(() => mockOrderHistoryFilterBloc.state)
-          .thenReturn(OrderHistoryFilterState.initial());
-      when(() => mockOrderHistoryFilterBloc.state).thenReturn(
-        OrderHistoryFilterState.initial()
-            .copyWith(orderHistoryFilterList: mockOrderHistoryFilter),
-      );
-      await tester.pumpWidget(getWUT());
-      await tester.pump();
-      final fromdateField = find.byKey(const Key('filtertodateField'));
-      expect(fromdateField, findsOneWidget);
-      await tester.tap(fromdateField);
-      await tester.pump();
-      expect(find.byType(DatePickerDialog), findsOneWidget);
-    });
-
-    testWidgets(' test close button History Filter  ', (tester) async {
-      when(() => mockOrderHistoryFilterBloc.state)
-          .thenReturn(OrderHistoryFilterState.initial());
-      when(() => mockOrderHistoryFilterBloc.state).thenReturn(
-        OrderHistoryFilterState.initial().copyWith(isSubmitting: true),
-      );
-      await tester.pumpWidget(getWUT());
-      await tester.pump();
-      // final filterapplyButton = find.byKey(const Key('filterapplyButton'));
-      // expect(filterapplyButton, findsOneWidget);
-      final filtercrossButton = find.byKey(const Key('filtercrossbutton'));
-      await tester.tap(filtercrossButton);
-      await tester.pumpAndSettle(const Duration(milliseconds: 50));
-      expect(filtercrossButton, findsNothing);
-    });
+    blocTest('orderIdChanged',
+        build: (() => OrderHistoryFilterBloc()),
+        seed: () => OrderHistoryFilterState.initial().copyWith(
+            orderHistoryFilterList: OrderHistoryFilter.empty()
+                .copyWith(fromDate: fakeFromDate, toDate: fakeToDate)),
+        act: (OrderHistoryFilterBloc bloc) => bloc.add(
+            OrderHistoryFilterEvent.orderIdChanged(
+                SearchKey.orderHistoryFilter(fakeOrderId)
+                    .getOrDefaultValue(''))),
+        expect: () => [
+              OrderHistoryFilterState.initial().copyWith(
+                  orderHistoryFilterList: OrderHistoryFilter.empty().copyWith(
+                      fromDate: fakeFromDate,
+                      toDate: fakeToDate,
+                      orderId: SearchKey.orderHistoryFilter(fakeOrderId)))
+            ]);
+    blocTest('poNumberChanged',
+        build: (() => OrderHistoryFilterBloc()),
+        seed: () => OrderHistoryFilterState.initial().copyWith(
+            orderHistoryFilterList: OrderHistoryFilter.empty()
+                .copyWith(fromDate: fakeFromDate, toDate: fakeToDate)),
+        act: (OrderHistoryFilterBloc bloc) => bloc.add(
+            OrderHistoryFilterEvent.poNumberChanged(
+                SearchKey.orderHistoryFilter(fakePoNumber)
+                    .getOrDefaultValue(''))),
+        expect: () => [
+              OrderHistoryFilterState.initial().copyWith(
+                  orderHistoryFilterList: OrderHistoryFilter.empty().copyWith(
+                      fromDate: fakeFromDate,
+                      toDate: fakeToDate,
+                      poNumber: SearchKey.orderHistoryFilter(fakePoNumber)))
+            ]);
+    blocTest('principalSearchChanged',
+        build: (() => OrderHistoryFilterBloc()),
+        seed: () => OrderHistoryFilterState.initial().copyWith(
+            orderHistoryFilterList: OrderHistoryFilter.empty()
+                .copyWith(fromDate: fakeFromDate, toDate: fakeToDate)),
+        act: (OrderHistoryFilterBloc bloc) => bloc.add(
+            OrderHistoryFilterEvent.principalSearchChanged(
+                SearchKey.orderHistoryFilter(fakePrincipleSearch)
+                    .getOrCrash())),
+        expect: () => [
+              OrderHistoryFilterState.initial().copyWith(
+                  orderHistoryFilterList: OrderHistoryFilter.empty().copyWith(
+                      fromDate: fakeFromDate,
+                      toDate: fakeToDate,
+                      principalSearch:
+                          SearchKey.orderHistoryFilter(fakePrincipleSearch)))
+            ]);
+    blocTest('materialSearchChanged',
+        build: (() => OrderHistoryFilterBloc()),
+        seed: () => OrderHistoryFilterState.initial().copyWith(
+            orderHistoryFilterList: OrderHistoryFilter.empty()
+                .copyWith(fromDate: fakeFromDate, toDate: fakeToDate)),
+        act: (OrderHistoryFilterBloc bloc) => bloc.add(
+            OrderHistoryFilterEvent.materialSearchChanged(
+                SearchKey.orderHistoryFilter(fakeMaterialSearch)
+                    .getOrDefaultValue(''))),
+        expect: () => [
+              OrderHistoryFilterState.initial().copyWith(
+                  orderHistoryFilterList: OrderHistoryFilter.empty().copyWith(
+                      fromDate: fakeFromDate,
+                      toDate: fakeToDate,
+                      materialSearch:
+                          SearchKey.orderHistoryFilter(fakeMaterialSearch)))
+            ]);
+    blocTest('filterOrderHistory',
+        build: (() => OrderHistoryFilterBloc()),
+        seed: () => OrderHistoryFilterState.initial().copyWith(
+            orderHistoryFilterList: OrderHistoryFilter.empty()
+                .copyWith(fromDate: fakeFromDate, toDate: fakeToDate)),
+        act: (OrderHistoryFilterBloc bloc) =>
+            bloc.add(const OrderHistoryFilterEvent.filterOrderHistory()),
+        expect: () => [
+              orderHistoryFilterState.copyWith(
+                isSubmitting: true,
+                isAppliedFilter: true,
+              )
+            ]);
   });
 }

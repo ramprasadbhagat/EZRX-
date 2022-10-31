@@ -6,16 +6,18 @@ class OrderHistoryFilterState with _$OrderHistoryFilterState {
 
   const factory OrderHistoryFilterState({
     required OrderHistoryFilter orderHistoryFilterList,
-    required bool isSubmitting,
-    required bool errorMessage,
-    required OrderHistory orderHistoryFilter,
-    
+    required bool isSubmitting, 
+    required bool showErrorMessages,
+    required bool isAppliedFilter,
+   
   }) = _OrderHistoryFilterState;
 
   factory OrderHistoryFilterState.initial() => OrderHistoryFilterState(
-        isSubmitting: false,
-        errorMessage: false,
-        orderHistoryFilter: OrderHistory.empty(),      
+        isSubmitting: false,   
         orderHistoryFilterList: OrderHistoryFilter.empty(),
+        showErrorMessages: false,
+        isAppliedFilter: false,
+        
+      
       );
 }

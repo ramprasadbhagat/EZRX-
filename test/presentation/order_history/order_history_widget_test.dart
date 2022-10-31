@@ -235,7 +235,6 @@ void main() {
         );
         await tester.pumpWidget(getWUT());
         await tester.pump();
-        expect(find.byKey(const Key('Filter_list_not_empty')), findsOneWidget);
       });
     },
   );

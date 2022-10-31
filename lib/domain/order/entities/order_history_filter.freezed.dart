@@ -16,10 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$OrderHistoryFilter {
-  String get orderId => throw _privateConstructorUsedError;
-  String get poNumber => throw _privateConstructorUsedError;
-  MaterialNumber get materialSearch => throw _privateConstructorUsedError;
-  String get principalSearch => throw _privateConstructorUsedError;
+  SearchKey get orderId => throw _privateConstructorUsedError;
+  SearchKey get poNumber => throw _privateConstructorUsedError;
+  SearchKey get materialSearch => throw _privateConstructorUsedError;
+  SearchKey get principalSearch => throw _privateConstructorUsedError;
   DateTime get toDate => throw _privateConstructorUsedError;
   DateTime get fromDate => throw _privateConstructorUsedError;
 
@@ -34,10 +34,10 @@ abstract class $OrderHistoryFilterCopyWith<$Res> {
           OrderHistoryFilter value, $Res Function(OrderHistoryFilter) then) =
       _$OrderHistoryFilterCopyWithImpl<$Res>;
   $Res call(
-      {String orderId,
-      String poNumber,
-      MaterialNumber materialSearch,
-      String principalSearch,
+      {SearchKey orderId,
+      SearchKey poNumber,
+      SearchKey materialSearch,
+      SearchKey principalSearch,
       DateTime toDate,
       DateTime fromDate});
 }
@@ -64,19 +64,19 @@ class _$OrderHistoryFilterCopyWithImpl<$Res>
       orderId: orderId == freezed
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SearchKey,
       poNumber: poNumber == freezed
           ? _value.poNumber
           : poNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SearchKey,
       materialSearch: materialSearch == freezed
           ? _value.materialSearch
           : materialSearch // ignore: cast_nullable_to_non_nullable
-              as MaterialNumber,
+              as SearchKey,
       principalSearch: principalSearch == freezed
           ? _value.principalSearch
           : principalSearch // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SearchKey,
       toDate: toDate == freezed
           ? _value.toDate
           : toDate // ignore: cast_nullable_to_non_nullable
@@ -97,10 +97,10 @@ abstract class _$$_OrderHistoryFilterCopyWith<$Res>
       __$$_OrderHistoryFilterCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String orderId,
-      String poNumber,
-      MaterialNumber materialSearch,
-      String principalSearch,
+      {SearchKey orderId,
+      SearchKey poNumber,
+      SearchKey materialSearch,
+      SearchKey principalSearch,
       DateTime toDate,
       DateTime fromDate});
 }
@@ -129,19 +129,19 @@ class __$$_OrderHistoryFilterCopyWithImpl<$Res>
       orderId: orderId == freezed
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SearchKey,
       poNumber: poNumber == freezed
           ? _value.poNumber
           : poNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SearchKey,
       materialSearch: materialSearch == freezed
           ? _value.materialSearch
           : materialSearch // ignore: cast_nullable_to_non_nullable
-              as MaterialNumber,
+              as SearchKey,
       principalSearch: principalSearch == freezed
           ? _value.principalSearch
           : principalSearch // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SearchKey,
       toDate: toDate == freezed
           ? _value.toDate
           : toDate // ignore: cast_nullable_to_non_nullable
@@ -167,13 +167,13 @@ class _$_OrderHistoryFilter extends _OrderHistoryFilter {
       : super._();
 
   @override
-  final String orderId;
+  final SearchKey orderId;
   @override
-  final String poNumber;
+  final SearchKey poNumber;
   @override
-  final MaterialNumber materialSearch;
+  final SearchKey materialSearch;
   @override
-  final String principalSearch;
+  final SearchKey principalSearch;
   @override
   final DateTime toDate;
   @override
@@ -218,22 +218,22 @@ class _$_OrderHistoryFilter extends _OrderHistoryFilter {
 
 abstract class _OrderHistoryFilter extends OrderHistoryFilter {
   factory _OrderHistoryFilter(
-      {required final String orderId,
-      required final String poNumber,
-      required final MaterialNumber materialSearch,
-      required final String principalSearch,
+      {required final SearchKey orderId,
+      required final SearchKey poNumber,
+      required final SearchKey materialSearch,
+      required final SearchKey principalSearch,
       required final DateTime toDate,
       required final DateTime fromDate}) = _$_OrderHistoryFilter;
   _OrderHistoryFilter._() : super._();
 
   @override
-  String get orderId;
+  SearchKey get orderId;
   @override
-  String get poNumber;
+  SearchKey get poNumber;
   @override
-  MaterialNumber get materialSearch;
+  SearchKey get materialSearch;
   @override
-  String get principalSearch;
+  SearchKey get principalSearch;
   @override
   DateTime get toDate;
   @override

@@ -85,3 +85,8 @@ Either<ValueFailure<String>, String> validateContainUserNameOrName(
       ? right(input)
       : left(ValueFailure.mustNotContainUserName(failedValue: input));
 }
+Either<ValueFailure<String>, String> validateStringIsEmpty(String input) {
+  return input.isEmpty
+      ? right(input)
+      : left(ValueFailure.empty(failedValue: input));
+}

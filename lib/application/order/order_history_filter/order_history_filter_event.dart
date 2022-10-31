@@ -22,6 +22,6 @@ class OrderHistoryFilterEvent with _$OrderHistoryFilterEvent {
     String principalSearch,
   ) = _PrincipalSearchChanged;
   const factory OrderHistoryFilterEvent.materialSearchChanged(
-    MaterialNumber materialSearch,
+    String materialSearch,
   ) = _MaterialSearchChanged;
 }
