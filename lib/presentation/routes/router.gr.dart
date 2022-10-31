@@ -141,7 +141,8 @@ class AppRouter extends _i24.RootStackRouter {
     },
     SavedOrderListPageRoute.name: (routeData) {
       return _i24.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i19.SavedOrderListPage());
+          routeData: routeData,
+          child: _i24.WrappedRoute(child: const _i19.SavedOrderListPage()));
     },
     HomeTabRoute.name: (routeData) {
       return _i24.MaterialPageX<dynamic>(

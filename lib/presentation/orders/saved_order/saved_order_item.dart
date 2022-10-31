@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/order/valid_customer_material/valid_custo
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
+import 'package:ezrxmobile/presentation/core/invalid_material_number_dialog.dart';
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_material_item.dart';
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_material_item_shimmer.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -60,9 +61,9 @@ class SavedOrderItem extends StatelessWidget {
             order.itemMaterialNumbers,
           );
           if (invalidMaterialNumbers.isNotEmpty) {
-            await invalidItemAlert(
-              context,
-              invalidMaterialNumbers,
+            await InvalidMaterialNumberDialog.show(
+              context: context,
+              invalidMaterialNumbers: invalidMaterialNumbers,
             );
           }
         } else {
@@ -298,53 +299,6 @@ class SavedOrderItem extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  Future<void> invalidItemAlert(
-    BuildContext context,
-    List<String> allInValidMaterial,
-  ) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Info').tr(),
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-          ),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                const Text('These invalid items cannot be added to cart.').tr(),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: List.generate(
-                    allInValidMaterial.length,
-                    (index) => Text(
-                      allInValidMaterial.elementAt(index).substring(10),
-                      style: const TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w600,
-                        color: ZPColors.darkGreen,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Confirm').tr(),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
     );
   }
 }

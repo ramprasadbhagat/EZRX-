@@ -967,7 +967,7 @@ void setupLocator() {
     ),
   );
 
-  locator.registerLazySingleton(
+  locator.registerFactory(
     () => ValidCustomerMaterialBloc(
       validCustomerMaterialRepository:
           locator<ValidCustomerMaterialRepository>(),

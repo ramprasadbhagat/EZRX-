@@ -5,10 +5,14 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/valid_customer_material/valid_customer_material_bloc.dart';
+import 'package:ezrxmobile/application/order/valid_customer_material/valid_customer_material_view_model.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
+import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/presentation/core/cart_button.dart';
+import 'package:ezrxmobile/presentation/core/invalid_material_number_dialog.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -32,8 +36,7 @@ class FavouritesTab extends StatelessWidget {
           listenWhen: (previous, current) {
             return previous.failureOrSuccessOption !=
                     current.failureOrSuccessOption ||
-                (previous.favouriteItems.isEmpty &&
-                    current.favouriteItems.isNotEmpty);
+                (previous.isLoading != current.isLoading);
           },
           listener: (context, state) {
             state.failureOrSuccessOption.fold(
@@ -52,7 +55,7 @@ class FavouritesTab extends StatelessWidget {
                 (_) {},
               ),
             );
-            if (state.favouriteItems.isNotEmpty) {
+            if (state.favouriteItems.isNotEmpty && !state.isLoading) {
               final materialList = <Favourite>[...state.favouriteItems];
               materialList.retainWhere((element) => !element.isFOC);
               final focMaterialList = <Favourite>[...state.favouriteItems];
@@ -60,8 +63,7 @@ class FavouritesTab extends StatelessWidget {
               context
                   .read<ValidCustomerMaterialBloc>()
                   .add(ValidCustomerMaterialEvent.validate(
-                    //TODO: Implement validateId for favorite later
-                    validateId: '',
+                    validateId: validateFavoriteMaterialId,
                     materialList: materialList
                         .map((Favourite e) => e.materialNumber)
                         .toList(),
@@ -78,44 +80,134 @@ class FavouritesTab extends StatelessWidget {
             }
           },
           buildWhen: (previous, current) =>
-              previous.favouriteItems != current.favouriteItems,
+              previous.isLoading != current.isLoading,
           builder: (context, state) {
-            return BlocBuilder<ValidCustomerMaterialBloc,
-                ValidCustomerMaterialState>(
-              builder: (context, validatedMaterailState) {
-                final validatedFavouriteItems = state.favouriteItems
-                    .where(
-                      (Favourite element) =>
-                          element.materialNumber.isValidMaterial(
-                        validatedMaterailState.validMaterialNumberList,
-                      ),
-                    )
-                    .toList();
+            if (state.isLoading) {
+              return LoadingShimmer.withChild(
+                child: Image.asset(
+                  'assets/images/ezrxlogo.png',
+                  key: const Key('LoaderImage'),
+                  width: 80,
+                  height: 80,
+                ),
+              );
+            }
 
-                return state.isLoading && state.favouriteItems.isEmpty
-                    ? LoadingShimmer.withChild(
-                        child: Image.asset(
-                          'assets/images/ezrxlogo.png',
-                          key: const Key('LoaderImage'),
-                          width: 80,
-                          height: 80,
+            return BlocConsumer<ValidCustomerMaterialBloc,
+                ValidCustomerMaterialState>(
+              listenWhen: (previous, current) =>
+                  previous.validatingStatusById(validateFavoriteMaterialId) !=
+                      current
+                          .validatingStatusById(validateFavoriteMaterialId) &&
+                  current.validatingStatusById(validateFavoriteMaterialId) !=
+                      ValidatingStatus.loading,
+              listener: (context, validMaterialState) async {
+                if (validMaterialState
+                        .validatingStatusById(validateFavoriteMaterialId) ==
+                    ValidatingStatus.success) {
+                  final validFavouriteMaterials = state.favouriteItems
+                      .where(
+                        (Favourite element) =>
+                            element.materialNumber.isValidMaterial(
+                          validMaterialState.validMaterialNumberById(
+                            validateFavoriteMaterialId,
+                          ),
                         ),
                       )
-                    : ScrollList<Favourite>(
-                        emptyMessage: 'No favorite found',
-                        onRefresh: () => context.read<FavouriteBloc>().add(
+                      .toList();
+                  context.read<MaterialPriceDetailBloc>().add(
+                        MaterialPriceDetailEvent.fetch(
+                          customerCode: context
+                              .read<CustomerCodeBloc>()
+                              .state
+                              .customerCodeInfo,
+                          salesOrganisation: context
+                              .read<SalesOrgBloc>()
+                              .state
+                              .salesOrganisation,
+                          salesOrganisationConfigs:
+                              context.read<SalesOrgBloc>().state.configs,
+                          shipToCode:
+                              context.read<ShipToCodeBloc>().state.shipToInfo,
+                          materialInfos: validFavouriteMaterials
+                              .map(
+                                (item) => MaterialQueryInfo.fromFavorite(
+                                  material: item,
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      );
+                  final invalidMaterialNumbers =
+                      validMaterialState.filterInvalidMaterialNumber(
+                    state.favouriteItems
+                        .map((e) => e.materialNumber.getOrDefaultValue(''))
+                        .toList(),
+                  );
+                  if (invalidMaterialNumbers.isNotEmpty) {
+                    await InvalidMaterialNumberDialog.show(
+                      context: context,
+                      invalidMaterialNumbers: invalidMaterialNumbers,
+                    );
+                  }
+                } else {
+                  //TODO: Show SnackBar when calling API failure
+                }
+              },
+              buildWhen: (previous, current) =>
+                  previous.validatingStatusById(validateFavoriteMaterialId) !=
+                  current.validatingStatusById(validateFavoriteMaterialId),
+              builder: (context, validMaterialState) {
+                switch (validMaterialState
+                    .validatingStatusById(validateFavoriteMaterialId)) {
+                  case ValidatingStatus.failure:
+                  case ValidatingStatus.success:
+                    final validFavouriteMaterials = state.favouriteItems
+                        .where(
+                          (Favourite element) =>
+                              element.materialNumber.isValidMaterial(
+                            validMaterialState.validMaterialNumberById(
+                              validateFavoriteMaterialId,
+                            ),
+                          ),
+                        )
+                        .toList();
+
+                    return ScrollList<Favourite>(
+                      emptyMessage: 'No favorite found',
+                      onRefresh: () {
+                        context.read<FavouriteBloc>().add(
                               FavouriteEvent.fetch(
                                 user: context.read<UserBloc>().state.user,
                               ),
-                            ),
-                        isLoading: state.isLoading,
-                        onLoadingMore: () {},
-                        itemBuilder: (context, index, item) =>
-                            FavouriteListTile(
-                          favourite: item,
-                        ),
-                        items: validatedFavouriteItems,
-                      );
+                            );
+                        context
+                            .read<MaterialPriceDetailBloc>()
+                            .add(const MaterialPriceDetailEvent.initialized());
+                        context.read<ValidCustomerMaterialBloc>().add(
+                              const ValidCustomerMaterialEvent.initialized(),
+                            );
+                      },
+                      isLoading: state.isLoading,
+                      onLoadingMore: () {},
+                      itemBuilder: (context, index, item) => FavouriteListTile(
+                        favourite: item,
+                      ),
+                      items: validFavouriteMaterials,
+                    );
+
+                  case ValidatingStatus.loading:
+                    return LoadingShimmer.withChild(
+                      child: Image.asset(
+                        'assets/images/ezrxlogo.png',
+                        key: const Key('LoaderImage'),
+                        width: 80,
+                        height: 80,
+                      ),
+                    );
+                  default:
+                    return const SizedBox();
+                }
               },
             );
           },

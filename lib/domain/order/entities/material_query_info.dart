@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -33,6 +34,17 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
         value: orderMaterial.materialInfo.materialNumber,
         materialGroup2: MaterialGroup.two(''),
         materialGroup4: MaterialGroup.four(''),
+      );
+
+  factory MaterialQueryInfo.fromFavorite({
+    required Favourite material,
+  }) =>
+      MaterialQueryInfo(
+        qty: MaterialQty(1),
+        value: material.materialNumber,
+        materialGroup2: MaterialGroup.two(''),
+        materialGroup4:
+            material.isFOC ? MaterialGroup.four('6A1') : MaterialGroup.four(''),
       );
 
   factory MaterialQueryInfo.empty() => MaterialQueryInfo(

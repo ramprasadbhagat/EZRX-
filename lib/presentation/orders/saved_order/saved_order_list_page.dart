@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/order/valid_customer_material/valid_customer_material_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/cart_button.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -16,20 +18,15 @@ import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_item.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SavedOrderListPage extends StatefulWidget {
+class SavedOrderListPage extends StatelessWidget with AutoRouteWrapper {
   const SavedOrderListPage({Key? key}) : super(key: key);
 
   @override
-  State<SavedOrderListPage> createState() => _SavedOrderListPageState();
-}
-
-class _SavedOrderListPageState extends State<SavedOrderListPage> {
-  @override
-  void initState() {
-    context.read<ValidCustomerMaterialBloc>().add(
-          const ValidCustomerMaterialEvent.initialized(),
-        );
-    super.initState();
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider(
+      create: (context) => locator<ValidCustomerMaterialBloc>(),
+      child: this,
+    );
   }
 
   @override

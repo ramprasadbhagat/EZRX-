@@ -150,7 +150,7 @@ void main() {
         () => validCustomerMaterialBlocMock.add(
           const ValidCustomerMaterialEvent.initialized(),
         ),
-      ).called(2);
+      ).called(1);
     });
 
     testWidgets('Test that screen has been initialized', (tester) async {

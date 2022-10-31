@@ -107,8 +107,8 @@ class MaterialNumber extends ValueObject<String> {
     return naIfEmpty(removeLeadingZero(value.getOrElse(() => '')));
   }
 
-  bool isValidMaterial(List<String> validMaterialNumbers) {
-    return validMaterialNumbers.contains(value.getOrElse(() => ''));
+  bool isValidMaterial(List<MaterialNumber> validMaterialNumbers) {
+    return validMaterialNumbers.contains(this);
   }
 
   const MaterialNumber._(this.value);

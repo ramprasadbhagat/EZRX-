@@ -28,6 +28,7 @@ class HomeNavigationTabbar extends StatelessWidget {
                   children: [
                     SizerUtil.deviceType == DeviceType.mobile
                         ? AutoTabsScaffold(
+                            lazyLoad: false,
                             routes:
                                 _routesItems.map((item) => item.route).toList(),
                             bottomNavigationBuilder: (_, tabsRouter) {
@@ -47,6 +48,7 @@ class HomeNavigationTabbar extends StatelessWidget {
                             },
                           )
                         : AutoTabsRouter(
+                            lazyLoad: false,
                             routes:
                                 _routesItems.map((item) => item.route).toList(),
                             builder: (context, child, animation) {
@@ -100,7 +102,7 @@ final _routesItems = [
   ),
 
   RouteItem(
-    route:  HistoryTabRoute(),
+    route: HistoryTabRoute(),
     icon: const Icon(Icons.shopping_basket_outlined, key: Key('historyTab')),
     label: 'History',
   ),

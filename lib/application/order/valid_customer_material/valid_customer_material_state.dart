@@ -1,5 +1,7 @@
 part of 'valid_customer_material_bloc.dart';
 
+const validateFavoriteMaterialId = 'validateFavoriteMaterialId';
+
 @freezed
 class ValidCustomerMaterialState with _$ValidCustomerMaterialState {
   const ValidCustomerMaterialState._();

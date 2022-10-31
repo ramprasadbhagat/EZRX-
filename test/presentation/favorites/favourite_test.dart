@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/valid_customer_material/valid_customer_material_bloc.dart';
 import 'package:ezrxmobile/application/order/valid_customer_material/valid_customer_material_view_model.dart';
 import 'package:ezrxmobile/config.dart';
@@ -55,6 +56,10 @@ class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
 
 class CartMockBloc extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
+class MaterialPriceDetailMockBloc
+    extends MockBloc<MaterialPriceDetailEvent, MaterialPriceDetailState>
+    implements MaterialPriceDetailBloc {}
+
 void main() {
   late GetIt locator;
   final mockFavouriteBloc = MockFavouriteBloc();
@@ -66,6 +71,7 @@ void main() {
   final customerCodeMockBloc = CustomerCodeMockBloc();
   final salesOrgMockBloc = SalesOrgMockBloc();
   final cartMockBloc = CartMockBloc();
+  final mockMaterialPriceDetailBloc = MaterialPriceDetailMockBloc();
 
   final mockFavourite1 = Favourite.empty().copyWith(
     id: '1',
@@ -92,7 +98,7 @@ void main() {
     );
     when(() => mockValidCustomerMaterialBloc.state).thenReturn(
       ValidCustomerMaterialState.initial().copyWith(validMaterialState: {
-        'fake-id': ValidCustomerMaterialViewModel(
+        validateFavoriteMaterialId: ValidCustomerMaterialViewModel(
           status: ValidatingStatus.success,
           validMaterialNumbers: [mockFavourite1.materialNumber],
         )
@@ -104,6 +110,8 @@ void main() {
     when(() => shipToCodeMockBloc.state).thenReturn(ShipToCodeState.initial());
     when(() => userBlocMock.state).thenReturn(UserState.initial());
     when(() => cartMockBloc.state).thenReturn(CartState.initial());
+    when(() => mockMaterialPriceDetailBloc.state)
+        .thenReturn(MaterialPriceDetailState.initial());
   });
 
   group(
@@ -128,6 +136,9 @@ void main() {
             BlocProvider<ValidCustomerMaterialBloc>(
                 create: (context) => mockValidCustomerMaterialBloc),
             BlocProvider<CartBloc>(create: (context) => cartMockBloc),
+            BlocProvider<MaterialPriceDetailBloc>(
+              create: (context) => mockMaterialPriceDetailBloc,
+            ),
           ],
           child: const Scaffold(body: FavouritesTab()),
         );
@@ -156,6 +167,21 @@ void main() {
         expect(favouriteListTile, findsAtLeastNWidgets(1));
 
         await tester.pump();
+        final deleteIcon = find.byKey(
+          const Key('deleteFavouriteFavPage'),
+        );
+        expect(
+          deleteIcon,
+          findsOneWidget,
+        );
+
+        final gestureDetector = find.byKey(
+          const Key('itemClicked'),
+        );
+        expect(
+          gestureDetector,
+          findsOneWidget,
+        );
       });
 
       testWidgets('Favourite test - is Snackbar shown?', (tester) async {
@@ -248,8 +274,12 @@ void main() {
         'Favourite test - No validate Favourite item found',
         (tester) async {
           when(() => mockValidCustomerMaterialBloc.state).thenReturn(
-            ValidCustomerMaterialState.initial()
-                .copyWith(validMaterialState: {}),
+            ValidCustomerMaterialState.initial().copyWith(validMaterialState: {
+              validateFavoriteMaterialId: const ValidCustomerMaterialViewModel(
+                status: ValidatingStatus.failure,
+                validMaterialNumbers: [],
+              )
+            }),
           );
           final favouriteBloc = locator<MockFavouriteBloc>();
           when(() => favouriteBloc.stream).thenAnswer(
