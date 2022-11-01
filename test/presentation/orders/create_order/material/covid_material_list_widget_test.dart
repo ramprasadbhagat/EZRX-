@@ -372,6 +372,12 @@ void main() {
           find.textContaining(covidMaterialListBlocMock
               .state.materialList.first.principalData.principalName),
           findsOneWidget);
+      expect(
+          find.textContaining('List Price: '),
+          findsOneWidget);
+      expect(
+          find.textContaining('Unit Price: '),
+          findsOneWidget);
     });
   });
 }

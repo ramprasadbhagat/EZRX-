@@ -115,5 +115,101 @@ void main() {
       final result = price.conformZDP5Rule('fake-value');
       expect(result, false);
     });
+
+    test('should add vatValue if isVNUser is false', () async {
+      const input = 10.00;
+      final price = MaterialPrice(input);
+      final result = price.displayUnitPrice(
+        currency: Currency('sgd'),
+        hidePrice: false,
+        isVNUser: false,
+        vatValue: 8,
+        enableTaxClassification: true,
+        enableVat: true,
+        taxClassification: MaterialTaxClassification('Full Tax'),
+        taxes: ['10'],
+      );
+      expect(result, 'SGD 10.8');
+    });
+
+    test('should add taxes if isVNUser is true', () async {
+      const input = 10.00;
+      final price = MaterialPrice(input);
+      final result = price.displayUnitPrice(
+        currency: Currency('sgd'),
+        hidePrice: false,
+        isVNUser: true,
+        vatValue: 8,
+        enableTaxClassification: true,
+        enableVat: true,
+        taxClassification: MaterialTaxClassification('Full Tax'),
+        taxes: ['10'],
+      );
+      expect(result, 'SGD 11');
+    });
+
+    test('should add nothing if taxClassification is noTax', () async {
+      const input = 10.00;
+      final price = MaterialPrice(input);
+      final result = price.displayUnitPrice(
+        currency: Currency('sgd'),
+        hidePrice: false,
+        isVNUser: false,
+        vatValue: 8,
+        enableTaxClassification: true,
+        enableVat: true,
+        taxClassification: MaterialTaxClassification('noTax'),
+        taxes: ['10'],
+      );
+      expect(result, 'SGD 10');
+    });
+
+    test('should add nothing if taxClassification is Exempt', () async {
+      const input = 10.00;
+      final price = MaterialPrice(input);
+      final result = price.displayUnitPrice(
+        currency: Currency('sgd'),
+        hidePrice: false,
+        isVNUser: false,
+        vatValue: 8,
+        enableTaxClassification: true,
+        enableVat: true,
+        taxClassification: MaterialTaxClassification('Exempt'),
+        taxes: ['10'],
+      );
+      expect(result, 'SGD 10');
+    });
+
+    test('should add nothing if enableTaxClassification is false', () async {
+      const input = 10.00;
+      final price = MaterialPrice(input);
+      final result = price.displayUnitPrice(
+        currency: Currency('sgd'),
+        hidePrice: false,
+        isVNUser: false,
+        vatValue: 8,
+        enableTaxClassification: false,
+        enableVat: true,
+        taxClassification: MaterialTaxClassification('Exempt'),
+        taxes: ['10'],
+      );
+      expect(result, 'SGD 10');
+    });
+
+    test('should add nothing if enableVat is false', () async {
+      const input = 10.00;
+      final price = MaterialPrice(input);
+      final result = price.displayUnitPrice(
+        currency: Currency('sgd'),
+        hidePrice: false,
+        isVNUser: false,
+        vatValue: 8,
+        enableTaxClassification: true,
+        enableVat: false,
+        taxClassification: MaterialTaxClassification('Exempt'),
+        taxes: ['10'],
+      );
+      expect(result, 'SGD 10');
+    });
   });
 }
