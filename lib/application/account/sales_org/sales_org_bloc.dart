@@ -27,9 +27,38 @@ class SalesOrgBloc extends Bloc<SalesOrgEvent, SalesOrgState> {
     Emitter<SalesOrgState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(SalesOrgState.initial()),
+      loadSavedOrganisation: (e) async {
+        final failureOrSuccess = await salesOrgRepository.getSalesOrg();
+        final salesOrganisations = e.salesOrganisations;
+
+        // found last selected from local storage => apply
+        // not found last selected from local storage => use first one of the current list
+        final salesOrg = failureOrSuccess.fold(
+          (_) {
+            return e.salesOrganisations.first;
+          },
+          (accountSelector) {
+            return salesOrganisations.firstWhere(
+              (e) => e.salesOrg.fullName == accountSelector.salesOrg,
+              orElse: () => salesOrganisations.first,
+            );
+          },
+        );
+        add(
+          SalesOrgEvent.selected(
+            salesOrganisation: salesOrg,
+          ),
+        );
+      },
+      initialized: (e) async {
+        await salesOrgRepository.initSalesOrgStorage();
+        emit(SalesOrgState.initial());
+      },
       selected: (e) async {
         emit(state.copyWith(salesOrganisation: e.salesOrganisation));
+        await salesOrgRepository.storeSalesOrg(
+          salesOrg: e.salesOrganisation.salesOrg.fullName,
+        );
         final failureOrSuccess = await salesOrgRepository
             .getSalesOrganisationConfigs(e.salesOrganisation);
         failureOrSuccess.fold(

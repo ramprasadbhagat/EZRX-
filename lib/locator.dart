@@ -36,6 +36,7 @@ import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_remot
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_rep_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_rep_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_rep_remote.dart';
@@ -46,6 +47,7 @@ import 'package:ezrxmobile/infrastructure/account/repository/customer_code_repos
 import 'package:ezrxmobile/infrastructure/account/repository/sales_org_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_rep_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
+import 'package:ezrxmobile/infrastructure/account/repository/ship_to_code_repository.dart';
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_local.dart';
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_remote.dart';
@@ -145,6 +147,7 @@ import 'package:ezrxmobile/presentation/routes/router_observer.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hive/hive.dart';
 import 'package:local_auth/local_auth.dart';
 
 GetIt locator = GetIt.instance;
@@ -241,6 +244,7 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => AuthRepository(
+      accountSelectorStorage: locator<AccountSelectorStorage>(),
       config: locator<Config>(),
       remoteDataSource: locator<AuthRemoteDataSource>(),
       localDataSource: locator<AuthLocalDataSource>(),
@@ -418,6 +422,8 @@ void setupLocator() {
 
   locator.registerLazySingleton(() => SalesOrgLocalDataSource());
 
+  locator.registerLazySingleton(() => AccountSelectorStorage(hive: Hive));
+
   locator.registerLazySingleton(
     () => SalesOrgRemoteDataSource(
       httpService: locator<HttpService>(),
@@ -428,6 +434,7 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => SalesOrgRepository(
+      accountSelectorStorage: locator<AccountSelectorStorage>(),
       config: locator<Config>(),
       localDataSource: locator<SalesOrgLocalDataSource>(),
       remoteDataSource: locator<SalesOrgRemoteDataSource>(),
@@ -444,7 +451,6 @@ void setupLocator() {
   //  Customer Code
   //
   //============================================================
-
   locator.registerLazySingleton(() => CustomerCodeQueryMutation());
 
   locator.registerLazySingleton(() => CustomerCodeLocalDataSource());
@@ -463,6 +469,7 @@ void setupLocator() {
       config: locator<Config>(),
       remoteDataSource: locator<CustomerCodeRemoteDataSource>(),
       localCustomerCodeDataSource: locator<CustomerCodeLocalDataSource>(),
+      accountSelectorStorage: locator<AccountSelectorStorage>(),
     ),
   );
 
@@ -478,7 +485,15 @@ void setupLocator() {
   //============================================================
 
   locator.registerLazySingleton(
-    () => ShipToCodeBloc(),
+    () => ShipToCodeRepository(
+      accountSelectorStorage: locator<AccountSelectorStorage>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ShipToCodeBloc(
+      shipToCodeRepository: locator<ShipToCodeRepository>(),
+    ),
   );
 
   //============================================================

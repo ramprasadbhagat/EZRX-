@@ -20,18 +20,24 @@ mixin _$SalesOrgEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(SalesOrganisation salesOrganisation) selected,
+    required TResult Function(List<SalesOrganisation> salesOrganisations)
+        loadSavedOrganisation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(SalesOrganisation salesOrganisation)? selected,
+    TResult Function(List<SalesOrganisation> salesOrganisations)?
+        loadSavedOrganisation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(SalesOrganisation salesOrganisation)? selected,
+    TResult Function(List<SalesOrganisation> salesOrganisations)?
+        loadSavedOrganisation,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +45,22 @@ mixin _$SalesOrgEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Selected value) selected,
+    required TResult Function(_LoadSavedOrganisation value)
+        loadSavedOrganisation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Selected value)? selected,
+    TResult Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Selected value)? selected,
+    TResult Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -116,6 +126,8 @@ class _$_Initialized implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(SalesOrganisation salesOrganisation) selected,
+    required TResult Function(List<SalesOrganisation> salesOrganisations)
+        loadSavedOrganisation,
   }) {
     return initialized();
   }
@@ -125,6 +137,8 @@ class _$_Initialized implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(SalesOrganisation salesOrganisation)? selected,
+    TResult Function(List<SalesOrganisation> salesOrganisations)?
+        loadSavedOrganisation,
   }) {
     return initialized?.call();
   }
@@ -134,6 +148,8 @@ class _$_Initialized implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(SalesOrganisation salesOrganisation)? selected,
+    TResult Function(List<SalesOrganisation> salesOrganisations)?
+        loadSavedOrganisation,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -147,6 +163,8 @@ class _$_Initialized implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Selected value) selected,
+    required TResult Function(_LoadSavedOrganisation value)
+        loadSavedOrganisation,
   }) {
     return initialized(this);
   }
@@ -156,6 +174,7 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Selected value)? selected,
+    TResult Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
   }) {
     return initialized?.call(this);
   }
@@ -165,6 +184,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Selected value)? selected,
+    TResult Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -254,6 +274,8 @@ class _$_Selected implements _Selected {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(SalesOrganisation salesOrganisation) selected,
+    required TResult Function(List<SalesOrganisation> salesOrganisations)
+        loadSavedOrganisation,
   }) {
     return selected(salesOrganisation);
   }
@@ -263,6 +285,8 @@ class _$_Selected implements _Selected {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(SalesOrganisation salesOrganisation)? selected,
+    TResult Function(List<SalesOrganisation> salesOrganisations)?
+        loadSavedOrganisation,
   }) {
     return selected?.call(salesOrganisation);
   }
@@ -272,6 +296,8 @@ class _$_Selected implements _Selected {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(SalesOrganisation salesOrganisation)? selected,
+    TResult Function(List<SalesOrganisation> salesOrganisations)?
+        loadSavedOrganisation,
     required TResult orElse(),
   }) {
     if (selected != null) {
@@ -285,6 +311,8 @@ class _$_Selected implements _Selected {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Selected value) selected,
+    required TResult Function(_LoadSavedOrganisation value)
+        loadSavedOrganisation,
   }) {
     return selected(this);
   }
@@ -294,6 +322,7 @@ class _$_Selected implements _Selected {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Selected value)? selected,
+    TResult Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
   }) {
     return selected?.call(this);
   }
@@ -303,6 +332,7 @@ class _$_Selected implements _Selected {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Selected value)? selected,
+    TResult Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
     required TResult orElse(),
   }) {
     if (selected != null) {
@@ -319,6 +349,161 @@ abstract class _Selected implements SalesOrgEvent {
   SalesOrganisation get salesOrganisation;
   @JsonKey(ignore: true)
   _$$_SelectedCopyWith<_$_Selected> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_LoadSavedOrganisationCopyWith<$Res> {
+  factory _$$_LoadSavedOrganisationCopyWith(_$_LoadSavedOrganisation value,
+          $Res Function(_$_LoadSavedOrganisation) then) =
+      __$$_LoadSavedOrganisationCopyWithImpl<$Res>;
+  $Res call({List<SalesOrganisation> salesOrganisations});
+}
+
+/// @nodoc
+class __$$_LoadSavedOrganisationCopyWithImpl<$Res>
+    extends _$SalesOrgEventCopyWithImpl<$Res>
+    implements _$$_LoadSavedOrganisationCopyWith<$Res> {
+  __$$_LoadSavedOrganisationCopyWithImpl(_$_LoadSavedOrganisation _value,
+      $Res Function(_$_LoadSavedOrganisation) _then)
+      : super(_value, (v) => _then(v as _$_LoadSavedOrganisation));
+
+  @override
+  _$_LoadSavedOrganisation get _value =>
+      super._value as _$_LoadSavedOrganisation;
+
+  @override
+  $Res call({
+    Object? salesOrganisations = freezed,
+  }) {
+    return _then(_$_LoadSavedOrganisation(
+      salesOrganisations: salesOrganisations == freezed
+          ? _value._salesOrganisations
+          : salesOrganisations // ignore: cast_nullable_to_non_nullable
+              as List<SalesOrganisation>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_LoadSavedOrganisation implements _LoadSavedOrganisation {
+  const _$_LoadSavedOrganisation(
+      {required final List<SalesOrganisation> salesOrganisations})
+      : _salesOrganisations = salesOrganisations;
+
+  final List<SalesOrganisation> _salesOrganisations;
+  @override
+  List<SalesOrganisation> get salesOrganisations {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_salesOrganisations);
+  }
+
+  @override
+  String toString() {
+    return 'SalesOrgEvent.loadSavedOrganisation(salesOrganisations: $salesOrganisations)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_LoadSavedOrganisation &&
+            const DeepCollectionEquality()
+                .equals(other._salesOrganisations, _salesOrganisations));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_salesOrganisations));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_LoadSavedOrganisationCopyWith<_$_LoadSavedOrganisation> get copyWith =>
+      __$$_LoadSavedOrganisationCopyWithImpl<_$_LoadSavedOrganisation>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation) selected,
+    required TResult Function(List<SalesOrganisation> salesOrganisations)
+        loadSavedOrganisation,
+  }) {
+    return loadSavedOrganisation(salesOrganisations);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation)? selected,
+    TResult Function(List<SalesOrganisation> salesOrganisations)?
+        loadSavedOrganisation,
+  }) {
+    return loadSavedOrganisation?.call(salesOrganisations);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation)? selected,
+    TResult Function(List<SalesOrganisation> salesOrganisations)?
+        loadSavedOrganisation,
+    required TResult orElse(),
+  }) {
+    if (loadSavedOrganisation != null) {
+      return loadSavedOrganisation(salesOrganisations);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Selected value) selected,
+    required TResult Function(_LoadSavedOrganisation value)
+        loadSavedOrganisation,
+  }) {
+    return loadSavedOrganisation(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
+  }) {
+    return loadSavedOrganisation?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
+    required TResult orElse(),
+  }) {
+    if (loadSavedOrganisation != null) {
+      return loadSavedOrganisation(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadSavedOrganisation implements SalesOrgEvent {
+  const factory _LoadSavedOrganisation(
+          {required final List<SalesOrganisation> salesOrganisations}) =
+      _$_LoadSavedOrganisation;
+
+  List<SalesOrganisation> get salesOrganisations;
+  @JsonKey(ignore: true)
+  _$$_LoadSavedOrganisationCopyWith<_$_LoadSavedOrganisation> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

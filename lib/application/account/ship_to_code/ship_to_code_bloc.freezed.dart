@@ -23,6 +23,9 @@ mixin _$ShipToCodeEvent {
     required TResult Function(List<ShipToInfo> shipToInfos) load,
     required TResult Function(List<ShipToInfo> shipToInfos) search,
     required TResult Function(String searchKey) updateSearchKey,
+    required TResult Function(
+            List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)
+        loadSavedShipToCode,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +35,9 @@ mixin _$ShipToCodeEvent {
     TResult Function(List<ShipToInfo> shipToInfos)? load,
     TResult Function(List<ShipToInfo> shipToInfos)? search,
     TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
+            List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)?
+        loadSavedShipToCode,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +47,9 @@ mixin _$ShipToCodeEvent {
     TResult Function(List<ShipToInfo> shipToInfos)? load,
     TResult Function(List<ShipToInfo> shipToInfos)? search,
     TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
+            List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)?
+        loadSavedShipToCode,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,6 +60,7 @@ mixin _$ShipToCodeEvent {
     required TResult Function(_Load value) load,
     required TResult Function(_Search value) search,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
+    required TResult Function(LoadShipToCode value) loadSavedShipToCode,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +70,7 @@ mixin _$ShipToCodeEvent {
     TResult Function(_Load value)? load,
     TResult Function(_Search value)? search,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(LoadShipToCode value)? loadSavedShipToCode,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +80,7 @@ mixin _$ShipToCodeEvent {
     TResult Function(_Load value)? load,
     TResult Function(_Search value)? search,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(LoadShipToCode value)? loadSavedShipToCode,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -137,6 +149,9 @@ class _$_Initialized implements _Initialized {
     required TResult Function(List<ShipToInfo> shipToInfos) load,
     required TResult Function(List<ShipToInfo> shipToInfos) search,
     required TResult Function(String searchKey) updateSearchKey,
+    required TResult Function(
+            List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)
+        loadSavedShipToCode,
   }) {
     return initialized();
   }
@@ -149,6 +164,9 @@ class _$_Initialized implements _Initialized {
     TResult Function(List<ShipToInfo> shipToInfos)? load,
     TResult Function(List<ShipToInfo> shipToInfos)? search,
     TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
+            List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)?
+        loadSavedShipToCode,
   }) {
     return initialized?.call();
   }
@@ -161,6 +179,9 @@ class _$_Initialized implements _Initialized {
     TResult Function(List<ShipToInfo> shipToInfos)? load,
     TResult Function(List<ShipToInfo> shipToInfos)? search,
     TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
+            List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)?
+        loadSavedShipToCode,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -177,6 +198,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Load value) load,
     required TResult Function(_Search value) search,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
+    required TResult Function(LoadShipToCode value) loadSavedShipToCode,
   }) {
     return initialized(this);
   }
@@ -189,6 +211,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Load value)? load,
     TResult Function(_Search value)? search,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(LoadShipToCode value)? loadSavedShipToCode,
   }) {
     return initialized?.call(this);
   }
@@ -201,6 +224,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Load value)? load,
     TResult Function(_Search value)? search,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(LoadShipToCode value)? loadSavedShipToCode,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -294,6 +318,9 @@ class _$_Selected implements _Selected {
     required TResult Function(List<ShipToInfo> shipToInfos) load,
     required TResult Function(List<ShipToInfo> shipToInfos) search,
     required TResult Function(String searchKey) updateSearchKey,
+    required TResult Function(
+            List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)
+        loadSavedShipToCode,
   }) {
     return selected(shipToInfo);
   }
@@ -306,6 +333,9 @@ class _$_Selected implements _Selected {
     TResult Function(List<ShipToInfo> shipToInfos)? load,
     TResult Function(List<ShipToInfo> shipToInfos)? search,
     TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
+            List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)?
+        loadSavedShipToCode,
   }) {
     return selected?.call(shipToInfo);
   }
@@ -318,6 +348,9 @@ class _$_Selected implements _Selected {
     TResult Function(List<ShipToInfo> shipToInfos)? load,
     TResult Function(List<ShipToInfo> shipToInfos)? search,
     TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
+            List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)?
+        loadSavedShipToCode,
     required TResult orElse(),
   }) {
     if (selected != null) {
@@ -334,6 +367,7 @@ class _$_Selected implements _Selected {
     required TResult Function(_Load value) load,
     required TResult Function(_Search value) search,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
+    required TResult Function(LoadShipToCode value) loadSavedShipToCode,
   }) {
     return selected(this);
   }
@@ -346,6 +380,7 @@ class _$_Selected implements _Selected {
     TResult Function(_Load value)? load,
     TResult Function(_Search value)? search,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(LoadShipToCode value)? loadSavedShipToCode,
   }) {
     return selected?.call(this);
   }
@@ -358,6 +393,7 @@ class _$_Selected implements _Selected {
     TResult Function(_Load value)? load,
     TResult Function(_Search value)? search,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(LoadShipToCode value)? loadSavedShipToCode,
     required TResult orElse(),
   }) {
     if (selected != null) {
@@ -449,6 +485,9 @@ class _$_Load implements _Load {
     required TResult Function(List<ShipToInfo> shipToInfos) load,
     required TResult Function(List<ShipToInfo> shipToInfos) search,
     required TResult Function(String searchKey) updateSearchKey,
+    required TResult Function(
+            List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)
+        loadSavedShipToCode,
   }) {
     return load(shipToInfos);
   }
@@ -461,6 +500,9 @@ class _$_Load implements _Load {
     TResult Function(List<ShipToInfo> shipToInfos)? load,
     TResult Function(List<ShipToInfo> shipToInfos)? search,
     TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
+            List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)?
+        loadSavedShipToCode,
   }) {
     return load?.call(shipToInfos);
   }
@@ -473,6 +515,9 @@ class _$_Load implements _Load {
     TResult Function(List<ShipToInfo> shipToInfos)? load,
     TResult Function(List<ShipToInfo> shipToInfos)? search,
     TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
+            List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)?
+        loadSavedShipToCode,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -489,6 +534,7 @@ class _$_Load implements _Load {
     required TResult Function(_Load value) load,
     required TResult Function(_Search value) search,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
+    required TResult Function(LoadShipToCode value) loadSavedShipToCode,
   }) {
     return load(this);
   }
@@ -501,6 +547,7 @@ class _$_Load implements _Load {
     TResult Function(_Load value)? load,
     TResult Function(_Search value)? search,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(LoadShipToCode value)? loadSavedShipToCode,
   }) {
     return load?.call(this);
   }
@@ -513,6 +560,7 @@ class _$_Load implements _Load {
     TResult Function(_Load value)? load,
     TResult Function(_Search value)? search,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(LoadShipToCode value)? loadSavedShipToCode,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -603,6 +651,9 @@ class _$_Search implements _Search {
     required TResult Function(List<ShipToInfo> shipToInfos) load,
     required TResult Function(List<ShipToInfo> shipToInfos) search,
     required TResult Function(String searchKey) updateSearchKey,
+    required TResult Function(
+            List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)
+        loadSavedShipToCode,
   }) {
     return search(shipToInfos);
   }
@@ -615,6 +666,9 @@ class _$_Search implements _Search {
     TResult Function(List<ShipToInfo> shipToInfos)? load,
     TResult Function(List<ShipToInfo> shipToInfos)? search,
     TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
+            List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)?
+        loadSavedShipToCode,
   }) {
     return search?.call(shipToInfos);
   }
@@ -627,6 +681,9 @@ class _$_Search implements _Search {
     TResult Function(List<ShipToInfo> shipToInfos)? load,
     TResult Function(List<ShipToInfo> shipToInfos)? search,
     TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
+            List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)?
+        loadSavedShipToCode,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -643,6 +700,7 @@ class _$_Search implements _Search {
     required TResult Function(_Load value) load,
     required TResult Function(_Search value) search,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
+    required TResult Function(LoadShipToCode value) loadSavedShipToCode,
   }) {
     return search(this);
   }
@@ -655,6 +713,7 @@ class _$_Search implements _Search {
     TResult Function(_Load value)? load,
     TResult Function(_Search value)? search,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(LoadShipToCode value)? loadSavedShipToCode,
   }) {
     return search?.call(this);
   }
@@ -667,6 +726,7 @@ class _$_Search implements _Search {
     TResult Function(_Load value)? load,
     TResult Function(_Search value)? search,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(LoadShipToCode value)? loadSavedShipToCode,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -756,6 +816,9 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     required TResult Function(List<ShipToInfo> shipToInfos) load,
     required TResult Function(List<ShipToInfo> shipToInfos) search,
     required TResult Function(String searchKey) updateSearchKey,
+    required TResult Function(
+            List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)
+        loadSavedShipToCode,
   }) {
     return updateSearchKey(searchKey);
   }
@@ -768,6 +831,9 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     TResult Function(List<ShipToInfo> shipToInfos)? load,
     TResult Function(List<ShipToInfo> shipToInfos)? search,
     TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
+            List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)?
+        loadSavedShipToCode,
   }) {
     return updateSearchKey?.call(searchKey);
   }
@@ -780,6 +846,9 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     TResult Function(List<ShipToInfo> shipToInfos)? load,
     TResult Function(List<ShipToInfo> shipToInfos)? search,
     TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
+            List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)?
+        loadSavedShipToCode,
     required TResult orElse(),
   }) {
     if (updateSearchKey != null) {
@@ -796,6 +865,7 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     required TResult Function(_Load value) load,
     required TResult Function(_Search value) search,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
+    required TResult Function(LoadShipToCode value) loadSavedShipToCode,
   }) {
     return updateSearchKey(this);
   }
@@ -808,6 +878,7 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     TResult Function(_Load value)? load,
     TResult Function(_Search value)? search,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(LoadShipToCode value)? loadSavedShipToCode,
   }) {
     return updateSearchKey?.call(this);
   }
@@ -820,6 +891,7 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     TResult Function(_Load value)? load,
     TResult Function(_Search value)? search,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(LoadShipToCode value)? loadSavedShipToCode,
     required TResult orElse(),
   }) {
     if (updateSearchKey != null) {
@@ -835,6 +907,202 @@ abstract class _UpdateSearchKey implements ShipToCodeEvent {
   String get searchKey;
   @JsonKey(ignore: true)
   _$$_UpdateSearchKeyCopyWith<_$_UpdateSearchKey> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadShipToCodeCopyWith<$Res> {
+  factory _$$LoadShipToCodeCopyWith(
+          _$LoadShipToCode value, $Res Function(_$LoadShipToCode) then) =
+      __$$LoadShipToCodeCopyWithImpl<$Res>;
+  $Res call({List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo});
+
+  $ShipToInfoCopyWith<$Res> get defaultShipToInfo;
+}
+
+/// @nodoc
+class __$$LoadShipToCodeCopyWithImpl<$Res>
+    extends _$ShipToCodeEventCopyWithImpl<$Res>
+    implements _$$LoadShipToCodeCopyWith<$Res> {
+  __$$LoadShipToCodeCopyWithImpl(
+      _$LoadShipToCode _value, $Res Function(_$LoadShipToCode) _then)
+      : super(_value, (v) => _then(v as _$LoadShipToCode));
+
+  @override
+  _$LoadShipToCode get _value => super._value as _$LoadShipToCode;
+
+  @override
+  $Res call({
+    Object? shipToInfos = freezed,
+    Object? defaultShipToInfo = freezed,
+  }) {
+    return _then(_$LoadShipToCode(
+      shipToInfos: shipToInfos == freezed
+          ? _value._shipToInfos
+          : shipToInfos // ignore: cast_nullable_to_non_nullable
+              as List<ShipToInfo>,
+      defaultShipToInfo: defaultShipToInfo == freezed
+          ? _value.defaultShipToInfo
+          : defaultShipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+    ));
+  }
+
+  @override
+  $ShipToInfoCopyWith<$Res> get defaultShipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.defaultShipToInfo, (value) {
+      return _then(_value.copyWith(defaultShipToInfo: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$LoadShipToCode implements LoadShipToCode {
+  const _$LoadShipToCode(
+      {required final List<ShipToInfo> shipToInfos,
+      required this.defaultShipToInfo})
+      : _shipToInfos = shipToInfos;
+
+  final List<ShipToInfo> _shipToInfos;
+  @override
+  List<ShipToInfo> get shipToInfos {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_shipToInfos);
+  }
+
+  @override
+  final ShipToInfo defaultShipToInfo;
+
+  @override
+  String toString() {
+    return 'ShipToCodeEvent.loadSavedShipToCode(shipToInfos: $shipToInfos, defaultShipToInfo: $defaultShipToInfo)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadShipToCode &&
+            const DeepCollectionEquality()
+                .equals(other._shipToInfos, _shipToInfos) &&
+            const DeepCollectionEquality()
+                .equals(other.defaultShipToInfo, defaultShipToInfo));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_shipToInfos),
+      const DeepCollectionEquality().hash(defaultShipToInfo));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$LoadShipToCodeCopyWith<_$LoadShipToCode> get copyWith =>
+      __$$LoadShipToCodeCopyWithImpl<_$LoadShipToCode>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(ShipToInfo shipToInfo) selected,
+    required TResult Function(List<ShipToInfo> shipToInfos) load,
+    required TResult Function(List<ShipToInfo> shipToInfos) search,
+    required TResult Function(String searchKey) updateSearchKey,
+    required TResult Function(
+            List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)
+        loadSavedShipToCode,
+  }) {
+    return loadSavedShipToCode(shipToInfos, defaultShipToInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(ShipToInfo shipToInfo)? selected,
+    TResult Function(List<ShipToInfo> shipToInfos)? load,
+    TResult Function(List<ShipToInfo> shipToInfos)? search,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
+            List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)?
+        loadSavedShipToCode,
+  }) {
+    return loadSavedShipToCode?.call(shipToInfos, defaultShipToInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(ShipToInfo shipToInfo)? selected,
+    TResult Function(List<ShipToInfo> shipToInfos)? load,
+    TResult Function(List<ShipToInfo> shipToInfos)? search,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
+            List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)?
+        loadSavedShipToCode,
+    required TResult orElse(),
+  }) {
+    if (loadSavedShipToCode != null) {
+      return loadSavedShipToCode(shipToInfos, defaultShipToInfo);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Selected value) selected,
+    required TResult Function(_Load value) load,
+    required TResult Function(_Search value) search,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
+    required TResult Function(LoadShipToCode value) loadSavedShipToCode,
+  }) {
+    return loadSavedShipToCode(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_Load value)? load,
+    TResult Function(_Search value)? search,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(LoadShipToCode value)? loadSavedShipToCode,
+  }) {
+    return loadSavedShipToCode?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_Load value)? load,
+    TResult Function(_Search value)? search,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(LoadShipToCode value)? loadSavedShipToCode,
+    required TResult orElse(),
+  }) {
+    if (loadSavedShipToCode != null) {
+      return loadSavedShipToCode(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoadShipToCode implements ShipToCodeEvent {
+  const factory LoadShipToCode(
+      {required final List<ShipToInfo> shipToInfos,
+      required final ShipToInfo defaultShipToInfo}) = _$LoadShipToCode;
+
+  List<ShipToInfo> get shipToInfos;
+  ShipToInfo get defaultShipToInfo;
+  @JsonKey(ignore: true)
+  _$$LoadShipToCodeCopyWith<_$LoadShipToCode> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

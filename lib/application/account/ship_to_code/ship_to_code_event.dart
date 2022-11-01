@@ -17,4 +17,9 @@ class ShipToCodeEvent with _$ShipToCodeEvent {
 
   const factory ShipToCodeEvent.updateSearchKey(String searchKey) =
       _UpdateSearchKey;
+
+  const factory ShipToCodeEvent.loadSavedShipToCode({
+    required List<ShipToInfo> shipToInfos,
+    required ShipToInfo defaultShipToInfo,
+  }) = LoadShipToCode;
 }

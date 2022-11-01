@@ -129,7 +129,8 @@ class App extends StatelessWidget {
         BlocProvider<UserBloc>(create: (context) => locator<UserBloc>()),
         BlocProvider<BannerBloc>(create: (context) => locator<BannerBloc>()),
         BlocProvider<SalesOrgBloc>(
-          create: (context) => locator<SalesOrgBloc>(),
+          create: (context) =>
+              locator<SalesOrgBloc>()..add(const SalesOrgEvent.initialized()),
         ),
         BlocProvider<CustomerCodeBloc>(
           create: (context) => locator<CustomerCodeBloc>(),

@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
@@ -27,6 +28,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../application/order/bonus_materials/bonus_materials_bloc_test.dart';
 import '../../utils/widget_utils.dart';
 
 class MockHTTPService extends Mock implements HttpService {}
@@ -95,6 +97,7 @@ void main() async {
   late MaterialListBlocMock materialListBlocMock;
   late OrderHistoryListBlocMock orderHistoryListBlocMock;
   late CovidMaterialListBloc covidMaterialListBlocMock;
+  late AuthBlocMock authBlocMock;
 
   // final fakeSaleOrgConfig = SalesOrganisationConfigs(
   //   currency: Currency(''),
@@ -120,6 +123,7 @@ void main() async {
   });
   group('Home Tab Screen', () {
     setUp(() {
+      authBlocMock = AuthBlocMock();
       userBlocMock = UserBlocMock();
       cartBlocMock = CartBlocMock();
       salesOrgBlocMock = SalesOrgBlocMock();
@@ -130,6 +134,7 @@ void main() async {
       orderHistoryListBlocMock = OrderHistoryListBlocMock();
       covidMaterialListBlocMock = CovidMaterialListBlocMock();
       autoRouterMock = locator<AppRouter>();
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -183,6 +188,9 @@ void main() async {
             ),
             BlocProvider<CovidMaterialListBloc>(
                 create: ((context) => covidMaterialListBlocMock)),
+            BlocProvider<AuthBloc>(
+              create: (context) => authBlocMock,
+            ),
           ],
           child: const HomeTab(),
         ),

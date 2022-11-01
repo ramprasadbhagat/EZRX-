@@ -49,8 +49,9 @@ class CustomerCodeSelector extends StatelessWidget {
                 ),
               );
           context.read<ShipToCodeBloc>().add(
-                ShipToCodeEvent.selected(
-                  shipToInfo: defaultShipToInfo,
+                ShipToCodeEvent.loadSavedShipToCode(
+                  shipToInfos: state.shipToInfos,
+                  defaultShipToInfo: defaultShipToInfo,
                 ),
               );
         } else {

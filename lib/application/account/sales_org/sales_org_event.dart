@@ -6,4 +6,7 @@ class SalesOrgEvent with _$SalesOrgEvent {
   const factory SalesOrgEvent.selected({
     required SalesOrganisation salesOrganisation,
   }) = _Selected;
+  const factory SalesOrgEvent.loadSavedOrganisation({
+    required List<SalesOrganisation> salesOrganisations,
+  }) = _LoadSavedOrganisation;
 }

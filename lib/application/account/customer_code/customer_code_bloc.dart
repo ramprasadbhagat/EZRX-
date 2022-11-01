@@ -31,11 +31,16 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
     Emitter<CustomerCodeState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(CustomerCodeState.initial()),
+      initialized: (e) async {
+        emit(CustomerCodeState.initial());
+      },
       updateSearchKey: (e) {
         emit(state.copyWith(searchKey: SearchKey.search(e.searchKey)));
       },
       selected: (e) async {
+        await customerCodeRepository.storeCustomerCode(
+          customerCode: e.customerCodeInfo.customerCodeSoldTo,
+        );
         emit(state.copyWith(customerCodeInfo: e.customerCodeInfo));
       },
       search: (e) async {
@@ -128,15 +133,33 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
           }
         }
         if (!apiFailure) {
+          final getCustomerCodeFailureOrSuccess =
+              await customerCodeRepository.getCustomerCodeStorage();
+
+          // found last selected from local storage => apply
+          // not found last selected from local storage => use first one of the current list
+          final customerCode = getCustomerCodeFailureOrSuccess.fold(
+            (_) {
+              return finalCustomerCodeInfoList.isNotEmpty
+                  ? finalCustomerCodeInfoList.first
+                  : state.customerCodeInfo;
+            },
+            (accountSelector) {
+              final customerCodeSoldTo = accountSelector.customerCode;
+
+              return finalCustomerCodeInfoList.firstWhere(
+                (e) => e.customerCodeSoldTo == customerCodeSoldTo,
+                orElse: () => finalCustomerCodeInfoList.first,
+              );
+            },
+          );
           emit(
             state.copyWith(
               customerCodeList: finalCustomerCodeInfoList,
               apiFailureOrSuccessOption: none(),
               isFetching: false,
               canLoadMore: canLoadMore,
-              customerCodeInfo: finalCustomerCodeInfoList.isNotEmpty
-                  ? finalCustomerCodeInfoList.first
-                  : state.customerCodeInfo,
+              customerCodeInfo: customerCode,
             ),
           );
         }

@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/account_selector.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
@@ -59,6 +60,12 @@ void main() {
     blocTest('Customer Code Selected',
         build: () =>
             CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+        setUp: () {
+          when(
+            () => customerCodeMockRepo.storeCustomerCode(
+                customerCode: fakeCustomerInfo.customerCodeSoldTo),
+          ).thenAnswer((invocation) async => const Right(unit));
+        },
         act: (CustomerCodeBloc bloc) {
           bloc.add(
               CustomerCodeEvent.selected(customerCodeInfo: fakeCustomerInfo));
@@ -73,6 +80,19 @@ void main() {
       build: () =>
           CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
       setUp: () {
+        when(
+          () => customerCodeMockRepo.storeCustomerCode(
+              customerCode: fakeCustomerInfo.customerCodeSoldTo),
+        ).thenAnswer((invocation) async => const Right(unit));
+
+        when(
+          () => customerCodeMockRepo.getCustomerCodeStorage(),
+        ).thenAnswer(
+          (invocation) async => Right(
+            AccountSelector.empty(),
+          ),
+        );
+
         when(() => customerCodeMockRepo.getCustomerCode(
               fakeSaleOrg,
               fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
@@ -113,6 +133,20 @@ void main() {
       build: () =>
           CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
       setUp: () {
+        when(
+          () => customerCodeMockRepo.storeCustomerCode(
+            customerCode: customerMockData.first.customerCodeSoldTo,
+          ),
+        ).thenAnswer((invocation) async => const Right(unit));
+
+        when(
+          () => customerCodeMockRepo.getCustomerCodeStorage(),
+        ).thenAnswer(
+          (invocation) async => Right(
+            AccountSelector.empty(),
+          ),
+        );
+
         when(() => customerCodeMockRepo.getCustomerCode(
             fakeSaleOrg,
             fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
@@ -262,7 +296,7 @@ void main() {
               fakeSaleOrg,
               fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
               false,
-              customerMockData.length,
+              0,
               fakeUser,
             )).thenAnswer(
           (invocation) async => const Left(
@@ -270,25 +304,27 @@ void main() {
           ),
         );
       },
-      seed: () => CustomerCodeState.initial().copyWith(
-        customerCodeList: customerMockData,
-      ),
-      act: (CustomerCodeBloc bloc) => bloc
-        ..add(CustomerCodeEvent.loadMore(
-            hidecustomer: false,
-            userInfo: fakeUser,
-            selectedSalesOrg: fakeSaleOrg)),
+      // seed: () => CustomerCodeState.initial().copyWith(
+      //   customerCodeList: customerMockData,
+      // ),
+      act: (CustomerCodeBloc bloc) {
+        bloc.add(CustomerCodeEvent.loadMore(
+          hidecustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
+        ));
+      },
       expect: () => [
         CustomerCodeState.initial().copyWith(
           isFetching: true,
-          customerCodeList: customerMockData,
+          // customerCodeList: customerMockData,
         ),
         CustomerCodeState.initial().copyWith(
           isFetching: false,
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('fake-error'))),
           canLoadMore: true,
-          customerCodeList: customerMockData,
+          // customerCodeList: customerMockData,
         )
       ],
     );
@@ -301,7 +337,7 @@ void main() {
               fakeSaleOrg,
               fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
               false,
-              customerMockData.length,
+              0,
               fakeUser,
             )).thenAnswer(
           (invocation) async => Right(
@@ -309,9 +345,9 @@ void main() {
           ),
         );
       },
-      seed: () => CustomerCodeState.initial().copyWith(
-        customerCodeList: customerMockData,
-      ),
+      // seed: () => CustomerCodeState.initial().copyWith(
+      //   customerCodeList: customerMockData,
+      // ),
       act: (CustomerCodeBloc bloc) => bloc
         ..add(CustomerCodeEvent.loadMore(
             hidecustomer: false,
@@ -320,13 +356,15 @@ void main() {
       expect: () => [
         CustomerCodeState.initial().copyWith(
           isFetching: true,
-          customerCodeList: customerMockData,
+          // customerCodeList: customerMockData,
         ),
         CustomerCodeState.initial().copyWith(
           isFetching: false,
           apiFailureOrSuccessOption: none(),
           canLoadMore: true,
-          customerCodeList: [...customerMockData, ...customerMockData],
+          customerCodeList: [
+            ...customerMockData,
+          ],
         )
       ],
     );

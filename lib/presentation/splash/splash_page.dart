@@ -58,8 +58,8 @@ class SplashPage extends StatelessWidget {
           listener: (context, state) {
             if (state.haveSalesOrganisation) {
               context.read<SalesOrgBloc>().add(
-                    SalesOrgEvent.selected(
-                      salesOrganisation: state.userSalesOrganisations.first,
+                    SalesOrgEvent.loadSavedOrganisation(
+                      salesOrganisations: state.userSalesOrganisations,
                     ),
                   );
             }

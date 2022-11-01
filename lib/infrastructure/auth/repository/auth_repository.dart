@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/auth/repository/i_auth_repository.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/cred_dto.dart';
@@ -29,6 +30,7 @@ class AuthRepository implements IAuthRepository {
   final AuthLocalDataSource localDataSource;
   final TokenStorage tokenStorage;
   final CredStorage credStorage;
+  final AccountSelectorStorage accountSelectorStorage;
   final OktaLoginServices oktaLoginServices;
   final PushNotificationService pushNotificationService;
   final LocalAuthentication localAuthentication;
@@ -42,6 +44,7 @@ class AuthRepository implements IAuthRepository {
     required this.oktaLoginServices,
     required this.pushNotificationService,
     required this.localAuthentication,
+    required this.accountSelectorStorage,
   });
 
   @override
@@ -204,6 +207,7 @@ class AuthRepository implements IAuthRepository {
     try {
       await tokenStorage.clear();
       await oktaLoginServices.logout();
+      await accountSelectorStorage.delete();
 
       return const Right(unit);
     } catch (e) {

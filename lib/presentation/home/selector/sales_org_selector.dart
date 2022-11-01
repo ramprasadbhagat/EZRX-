@@ -28,9 +28,9 @@ class SalesOrgSelector extends StatelessWidget {
             previous.salesOrganisation != current.salesOrganisation,
         listener: (context, state) {
           state.salesOrgFailureOrSuccessOption.fold(
-                () {},
-                (either) => either.fold(
-                  (failure) {
+            () {},
+            (either) => either.fold(
+              (failure) {
                 final failureMessage = failure.failureMessage;
                 showSnackBar(
                   context: context,
@@ -40,7 +40,7 @@ class SalesOrgSelector extends StatelessWidget {
                   context.read<AuthBloc>().add(const AuthEvent.logout());
                 }
               },
-                  (_) {
+              (_) {
                 context.read<AuthBloc>().add(const AuthEvent.authCheck());
               },
             ),
