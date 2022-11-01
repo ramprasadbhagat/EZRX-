@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/presentation/core/action_button.dart';
+import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -52,115 +53,130 @@ class OrderTemplateListItem extends StatelessWidget {
           child: Card(
             elevation: 1.0,
             margin: const EdgeInsets.all(10.0),
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Text(
-                          orderTemplate.templateName,
-                          softWrap: true,
-                          style: _textStyle,
+            child: CustomSlidable(
+              endActionPaneActions: [
+                CustomSlidableAction(
+                  label: 'Delete', 
+                  icon: Icons.delete_outline, 
+                  onPressed: (context) => 
+                    context.read<OrderTemplateListBloc>().add(
+                      OrderTemplateListEvent.delete(
+                        orderTemplate,
+                      ),
+                    ),
+                ),
+              ],
+              borderRadius: 10,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            orderTemplate.templateName,
+                            softWrap: true,
+                            style: _textStyle,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  _sizedBoxH20,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ActionButton(
-                        text: 'View',
-                        width: 72,
-                        onTap: () {
-                          context.read<MaterialPriceDetailBloc>().add(
-                                MaterialPriceDetailEvent.fetch(
-                                  customerCode: context
-                                      .read<CustomerCodeBloc>()
-                                      .state
-                                      .customerCodeInfo,
-                                  salesOrganisation: context
-                                      .read<SalesOrgBloc>()
-                                      .state
-                                      .salesOrganisation,
-                                  salesOrganisationConfigs: context
-                                      .read<SalesOrgBloc>()
-                                      .state
-                                      .configs,
-                                  shipToCode: context
-                                      .read<ShipToCodeBloc>()
-                                      .state
-                                      .shipToInfo,
-                                  materialInfos: orderTemplate.cartItems
-                                      .map(
-                                        (item) =>
-                                            MaterialQueryInfo.fromOrderTemplate(
-                                          orderMaterial: item,
-                                        ),
-                                      )
-                                      .toList(),
-                                ),
-                              );
-                          //TODO: Navigate to Detail and handle Price UI logic
-                        },
-                      ),
-                      _sizedBoxW20,
-                      ActionButton(
-                        text: 'Delete',
-                        width: 72,
-                        onTap: () {
-                          context.read<OrderTemplateListBloc>().add(
-                                OrderTemplateListEvent.delete(
-                                  orderTemplate,
-                                ),
-                              );
-                          // showPlatformDialog(
-                          //   context: context,
-                          //   barrierDismissible: true,
-                          //   builder: (context) => PlatformAlertDialog(
-                          //     title: const Text('Info').tr(),
-                          //     content: SingleChildScrollView(
-                          //       child: ListBody(
-                          //         children: <Widget>[
-                          //           const Text(
-                          //             'This action will delete the item from your order templates.',
-                          //           ).tr(),
-                          //           const Text('Do you want to proceed?').tr(),
-                          //         ],
-                          //       ),
-                          //     ),
-                          //     actions: [
-                          //       PlatformDialogAction(
-                          //         child: const Text('Cancel').tr(),
-                          //         onPressed: () {
-                          //           context.router.pop();
-                          //         },
-                          //       ),
-                          //       PlatformDialogAction(
-                          //         child: const Text('Confirm').tr(),
-                          //         onPressed: () {
-                          //           context.router.pop();
-                          //           context.read<OrderTemplateListBloc>().add(
-                          //                 OrderTemplateListEvent.delete(
-                          //                   orderTemplate,
-                          //                 ),
-                          //               );
-                          //         },
-                          //       ),
-                          //     ],
-                          //   ),
-                          // );
-                        },
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                    _sizedBoxH20,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ActionButton(
+                          text: 'View',
+                          width: 72,
+                          onTap: () {
+                            context.read<MaterialPriceDetailBloc>().add(
+                                  MaterialPriceDetailEvent.fetch(
+                                    customerCode: context
+                                        .read<CustomerCodeBloc>()
+                                        .state
+                                        .customerCodeInfo,
+                                    salesOrganisation: context
+                                        .read<SalesOrgBloc>()
+                                        .state
+                                        .salesOrganisation,
+                                    salesOrganisationConfigs: context
+                                        .read<SalesOrgBloc>()
+                                        .state
+                                        .configs,
+                                    shipToCode: context
+                                        .read<ShipToCodeBloc>()
+                                        .state
+                                        .shipToInfo,
+                                    materialInfos: orderTemplate.cartItems
+                                        .map(
+                                          (item) =>
+                                              MaterialQueryInfo.fromOrderTemplate(
+                                            orderMaterial: item,
+                                          ),
+                                        )
+                                        .toList(),
+                                  ),
+                                );
+                            //TODO: Navigate to Detail and handle Price UI logic
+                          },
+                        ),
+                        _sizedBoxW20,
+                        ActionButton(
+                          text: 'Delete',
+                          width: 72,
+                          onTap: () {
+                            context.read<OrderTemplateListBloc>().add(
+                                  OrderTemplateListEvent.delete(
+                                    orderTemplate,
+                                  ),
+                                );
+                            // showPlatformDialog(
+                            //   context: context,
+                            //   barrierDismissible: true,
+                            //   builder: (context) => PlatformAlertDialog(
+                            //     title: const Text('Info').tr(),
+                            //     content: SingleChildScrollView(
+                            //       child: ListBody(
+                            //         children: <Widget>[
+                            //           const Text(
+                            //             'This action will delete the item from your order templates.',
+                            //           ).tr(),
+                            //           const Text('Do you want to proceed?').tr(),
+                            //         ],
+                            //       ),
+                            //     ),
+                            //     actions: [
+                            //       PlatformDialogAction(
+                            //         child: const Text('Cancel').tr(),
+                            //         onPressed: () {
+                            //           context.router.pop();
+                            //         },
+                            //       ),
+                            //       PlatformDialogAction(
+                            //         child: const Text('Confirm').tr(),
+                            //         onPressed: () {
+                            //           context.router.pop();
+                            //           context.read<OrderTemplateListBloc>().add(
+                            //                 OrderTemplateListEvent.delete(
+                            //                   orderTemplate,
+                            //                 ),
+                            //               );
+                            //         },
+                            //       ),
+                            //     ],
+                            //   ),
+                            // );
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

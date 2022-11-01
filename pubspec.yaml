@@ -71,6 +71,7 @@ dependencies:
   loading_indicator: ^3.0.1
   file: 6.1.2
   badges: ^2.0.3
+  flutter_slidable: ^2.0.0
 
 
   # The following adds the Cupertino Icons font to your application.

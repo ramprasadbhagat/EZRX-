@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -122,168 +123,180 @@ class _ListContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: ListTile(
-        key: Key(
-          'cartItem${cartItem.materialInfo.materialNumber}',
-        ),
-        leading: SizedBox(
-          width: 50,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                cartItem.quantity.toString().padLeft(2, '0'),
-                key: Key('itemCount${cartItem.materialInfo.materialNumber}'),
-                style: Theme.of(context).textTheme.headline5,
-              ),
-              Flexible(
-                child: Row(
-                  children: [
-                    Flexible(
-                      child: GestureDetector(
-                        onTap: () {
-                          if (cartItem.quantity > 1) {
+      child: CustomSlidable(
+        endActionPaneActions: [
+          CustomSlidableAction(
+            label: 'Delete', 
+            icon: Icons.delete_outline, 
+            onPressed: (context) => context
+              .read<CartBloc>()
+              .add(CartEvent.removeFromCart(item: cartItem)),
+          ),
+        ],
+        borderRadius: 4,
+        child: ListTile(
+          key: Key(
+            'cartItem${cartItem.materialInfo.materialNumber}',
+          ),
+          leading: SizedBox(
+            width: 50,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  cartItem.quantity.toString().padLeft(2, '0'),
+                  key: Key('itemCount${cartItem.materialInfo.materialNumber}'),
+                  style: Theme.of(context).textTheme.headline5,
+                ),
+                Flexible(
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: GestureDetector(
+                          onTap: () {
+                            if (cartItem.quantity > 1) {
+                              context.read<CartBloc>().add(
+                                    CartEvent.addToCart(
+                                      item: cartItem.copyWith(quantity: -1),
+                                    ),
+                                  );
+                            } else {
+                              context.read<CartBloc>().add(
+                                    CartEvent.removeFromCart(item: cartItem),
+                                  );
+                            }
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(3),
+                            decoration: const BoxDecoration(
+                              color: ZPColors.primary,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.remove,
+                                size: 15,
+                                color: ZPColors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        child: GestureDetector(
+                          onTap: () {
                             context.read<CartBloc>().add(
                                   CartEvent.addToCart(
-                                    item: cartItem.copyWith(quantity: -1),
+                                    item: cartItem.copyWith(quantity: 1),
                                   ),
                                 );
-                          } else {
-                            context.read<CartBloc>().add(
-                                  CartEvent.removeFromCart(item: cartItem),
-                                );
-                          }
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(3),
-                          decoration: const BoxDecoration(
-                            color: ZPColors.primary,
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Center(
-                            child: Icon(
-                              Icons.remove,
-                              size: 15,
-                              color: ZPColors.white,
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(3),
+                            decoration: const BoxDecoration(
+                              color: ZPColors.primary,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.add,
+                                size: 15,
+                                color: ZPColors.white,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Flexible(
-                      child: GestureDetector(
-                        onTap: () {
-                          context.read<CartBloc>().add(
-                                CartEvent.addToCart(
-                                  item: cartItem.copyWith(quantity: 1),
-                                ),
-                              );
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(3),
-                          decoration: const BoxDecoration(
-                            color: ZPColors.primary,
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Center(
-                            child: Icon(
-                              Icons.add,
-                              size: 15,
-                              color: ZPColors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        title: Text(
-          cartItem.materialInfo.materialNumber.displayMatNo,
-          style: Theme.of(context).textTheme.subtitle2?.apply(
-                color: ZPColors.kPrimaryColor,
-              ),
-        ),
-        subtitle: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              cartItem.materialInfo.materialDescription,
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
-            Text(
-              cartItem.materialInfo.principalData.principalName,
-              style: Theme.of(context).textTheme.subtitle2?.apply(
-                    color: ZPColors.lightGray,
+                    ],
                   ),
+                ),
+              ],
             ),
+          ),
+          title: Text(
+            cartItem.materialInfo.materialNumber.displayMatNo,
+            style: Theme.of(context).textTheme.subtitle2?.apply(
+                  color: ZPColors.kPrimaryColor,
+                ),
+          ),
+          subtitle: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                cartItem.materialInfo.materialDescription,
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              Text(
+                cartItem.materialInfo.principalData.principalName,
+                style: Theme.of(context).textTheme.subtitle2?.apply(
+                      color: ZPColors.lightGray,
+                    ),
+              ),
 
-            // Text(
-            //   '${'Unit price before GST: '.tr()}${cartItem.listPrice()}',
-            //   style: Theme.of(context).textTheme.bodyText1?.apply(
-            //         color: ZPColors.lightGray,
-            //       ),
-            // ),
+              // Text(
+              //   '${'Unit price before GST: '.tr()}${cartItem.listPrice()}',
+              //   style: Theme.of(context).textTheme.bodyText1?.apply(
+              //         color: ZPColors.lightGray,
+              //       ),
+              // ),
 
-            // Text(
-            //   '${'Unit price: '.tr()}${cartItem.unitPrice()}',
-            //   style: Theme.of(context).textTheme.bodyText1?.apply(
-            //         color: ZPColors.black,
-            //       ),
-            // ),
+              // Text(
+              //   '${'Unit price: '.tr()}${cartItem.unitPrice()}',
+              //   style: Theme.of(context).textTheme.bodyText1?.apply(
+              //         color: ZPColors.black,
+              //       ),
+              // ),
 
-            BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
-              buildWhen: (previous, current) =>
-                  previous.isFetching != current.isFetching,
-              builder: (context, state) {
-                final itemPrice =
-                    state.materialPrice[cartItem.materialInfo.materialNumber];
+              BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
+                buildWhen: (previous, current) =>
+                    previous.isFetching != current.isFetching,
+                builder: (context, state) {
+                  final itemPrice =
+                      state.materialPrice[cartItem.materialInfo.materialNumber];
 
-                if (itemPrice != null) {
-                  final currentCurrency =
-                      context.read<SalesOrgBloc>().state.configs.currency;
-                  final isHidePrice = cartItem.materialInfo.hidePrice;
+                  if (itemPrice != null) {
+                    final currentCurrency =
+                        context.read<SalesOrgBloc>().state.configs.currency;
+                    final isHidePrice = cartItem.materialInfo.hidePrice;
+
+                    return Text(
+                      '${'Unit Price: '.tr()}${itemPrice.finalPrice.displayWithCurrency(
+                        currency: currentCurrency,
+                        hidePrice: isHidePrice,
+                      )}',
+                      style: Theme.of(context).textTheme.bodyText1?.apply(
+                            color: ZPColors.black,
+                          ),
+                    );
+                  }
+                  if (state.isFetching) {
+                    return SizedBox(
+                      key: const Key('price-loading'),
+                      width: 40,
+                      child: LoadingShimmer.tile(),
+                    );
+                  }
 
                   return Text(
-                    '${'Unit Price: '.tr()}${itemPrice.finalPrice.displayWithCurrency(
-                      currency: currentCurrency,
-                      hidePrice: isHidePrice,
-                    )}',
+                    '${'Unit Price: '.tr()}NA',
                     style: Theme.of(context).textTheme.bodyText1?.apply(
                           color: ZPColors.black,
                         ),
                   );
-                }
-                if (state.isFetching) {
-                  return SizedBox(
-                    key: const Key('price-loading'),
-                    width: 40,
-                    child: LoadingShimmer.tile(),
-                  );
-                }
-
-                return Text(
-                  '${'Unit Price: '.tr()}NA',
-                  style: Theme.of(context).textTheme.bodyText1?.apply(
-                        color: ZPColors.black,
-                      ),
-                );
-              },
-            ),
-          ],
-        ),
-        isThreeLine: true,
-        trailing: IconButton(
-          onPressed: () {
-            context
-                .read<CartBloc>()
-                .add(CartEvent.removeFromCart(item: cartItem));
-          },
-          icon: const Icon(Icons.delete),
+                },
+              ),
+            ],
+          ),
+          isThreeLine: true,
+          trailing: IconButton(
+            onPressed: () {
+              context
+                  .read<CartBloc>()
+                  .add(CartEvent.removeFromCart(item: cartItem));
+            },
+            icon: const Icon(Icons.delete),
+          ),
         ),
       ),
     );
