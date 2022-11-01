@@ -88,7 +88,7 @@ class CustomerCodeDto with _$CustomerCodeDto {
       shipToInfos: shipToInfos.map((e) => e.toDomain()).toList(),
       billToInfos: billToInfos.map((e) => e.toDomain()).toList(),
       customerAttr7: CustomerAttr7(customerAttr7),
-      customerGrp4: CustomerGrp4(customerAttr7),
+      customerGrp4: CustomerGrp4(customerGrp4),
     );
   }
 

@@ -194,20 +194,50 @@ class _PriceLabel extends StatelessWidget {
           previous.isFetching != current.isFetching,
       builder: (context, state) {
         final itemPrice = state.materialPrice[materialInfo.materialNumber];
-
         if (itemPrice != null) {
           final currentCurrency =
               context.read<SalesOrgBloc>().state.configs.currency;
           final isHidePrice = materialInfo.hidePrice;
+          final isVNUser = context.read<SalesOrgBloc>().state.salesOrg.isVN;
+          final enabledVat =
+              context.read<SalesOrgBloc>().state.configs.enableVat;
+          final enableTaxClassification = context
+              .read<SalesOrgBloc>()
+              .state
+              .configs
+              .enableTaxClassification;
+          final taxClassification = materialInfo.taxClassification;
+          final taxes = materialInfo.taxes;
+          final vatValue = context.read<SalesOrgBloc>().state.configs.vatValue;
 
-          return Text(
-            '${'Unit Price: '.tr()}${itemPrice.finalPrice.displayWithCurrency(
-              currency: currentCurrency,
-              hidePrice: isHidePrice,
-            )}',
-            style: Theme.of(context).textTheme.bodyText1?.apply(
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${'List Price: '.tr()}${itemPrice.finalPrice.displayWithCurrency(
+                  currency: currentCurrency,
+                  hidePrice: isHidePrice,
+                )}',
+                style: Theme.of(context).textTheme.bodyText1?.apply(
+                  color: ZPColors.darkGray,
+                ),
+              ),
+              Text(
+                '${'Unit Price: '.tr()}${itemPrice.finalPrice.displayUnitPrice(
+                  currency: currentCurrency,
+                  hidePrice: isHidePrice,
+                  isVNUser: isVNUser,
+                  enableVat: enabledVat,
+                  enableTaxClassification: enableTaxClassification,
+                  vatValue: vatValue,
+                  taxClassification: taxClassification,
+                  taxes: taxes,
+                )}',
+                style: Theme.of(context).textTheme.bodyText1?.apply(
                   color: ZPColors.black,
                 ),
+              ),
+            ],
           );
         }
         if (state.isFetching) {
