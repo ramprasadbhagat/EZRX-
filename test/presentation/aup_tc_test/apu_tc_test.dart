@@ -43,7 +43,7 @@ class AutoRouterMock extends Mock implements AppRouter {}
 void main() {
   late GetIt locator;
   late AuthBloc mockAuthBloc;
-  late AppRouter autoRouterMock;
+  // late AppRouter autoRouterMock;
   late MockAupTcBloc mockAupTcBloc;
   late UserBloc userBlocMock;
   late AuthBloc authBlocMock;
@@ -57,15 +57,15 @@ void main() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => mockAuthBloc);
     locator.registerLazySingleton(() => PackageInfoService());
-    autoRouterMock = locator<AppRouter>();
+    // autoRouterMock = locator<AppRouter>();
   });
 
   group('AupTc Widget Show hide base on state.showTermsAndConditon true', () {
     setUp(() {
-      autoRouterMock = locator<AppRouter>();
+      // autoRouterMock = locator<AppRouter>();
       userBlocMock = UserBlocMock();
       authBlocMock = AuthBlocMock();
-      autoRouterMock = locator<AppRouter>();
+      // autoRouterMock = locator<AppRouter>();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     });

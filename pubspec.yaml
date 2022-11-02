@@ -51,6 +51,7 @@ dependencies:
   firebase_dynamic_links: ^4.3.6
   firebase_performance: ^0.8.2
   firebase_messaging: ^13.0.0
+  firebase_remote_config: ^2.0.20
   flutter_local_notifications: ^9.9.0
   permission_handler: ^10.0.0
   package_info_plus: ^1.4.3+1
@@ -72,6 +73,7 @@ dependencies:
   file: 6.1.2
   badges: ^2.0.3
   flutter_slidable: ^2.0.0
+  
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -17,7 +17,12 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart'
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockAupTcRepository extends Mock implements AupTcRepository {}
+class MockAupTcRepository extends Mock implements AupTcRepository {
+  @override
+  bool getTncConfig() {
+    return true;
+  }
+}
 
 class MockTokenStorage extends Mock implements TokenStorage {}
 

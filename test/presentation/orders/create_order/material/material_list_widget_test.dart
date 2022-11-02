@@ -9,14 +9,14 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
-import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_root.dart';
@@ -75,7 +75,7 @@ void main() {
   late MockFavouriteBloc mockFavouriteBloc;
   late MaterialPriceBloc materialPriceBlocMock;
   late CartBloc cartBlocMock;
-  late MaterialListBloc materialListBloc;
+  // late MaterialListBloc materialListBloc;
 
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
   final fakeMaterialPrice = MaterialPrice(10.0);
@@ -212,7 +212,8 @@ void main() {
                 principalName: '台灣羅氏醫療診斷設備(股)公司',
                 principalCode: '0000102004',
               ),
-              taxClassification:  MaterialTaxClassification('Product : Full Tax'),
+              taxClassification:
+                  MaterialTaxClassification('Product : Full Tax'),
               itemRegistrationNumber: 'NA',
               unitOfMeasurement: 'EA',
               materialGroup2: MaterialGroup.two(''),
@@ -490,6 +491,5 @@ void main() {
       final unitPrice = find.textContaining('Unit Price: '.tr());
       expect(unitPrice, findsOneWidget);
     });
-
   });
 }

@@ -75,6 +75,7 @@ import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/dynamic_links.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/performance_monitor.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/http/interceptor/auth_interceptor.dart';
 import 'package:ezrxmobile/infrastructure/core/http/interceptor/performance_interceptor.dart';
@@ -186,6 +187,10 @@ void setupLocator() {
   locator.registerLazySingleton(() => FirebaseCrashlyticsService(
         crashlytics: FirebaseCrashlytics.instance,
       ));
+  locator.registerLazySingleton(
+    () => RemoteConfigService(),
+  );
+
   locator.registerLazySingleton(
     () => RouterObserver(
       firebaseAnalyticsService: locator<FirebaseAnalyticsService>(),
@@ -851,6 +856,7 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<AcceptanceDateLocalDataSource>(),
       remoteDataSource: locator<AcceptanceDateRemoteDataSource>(),
+      remoteConfigService: locator<RemoteConfigService>(),
     ),
   );
 

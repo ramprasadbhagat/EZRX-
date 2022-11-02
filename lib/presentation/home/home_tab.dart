@@ -2,19 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/home/selector/sales_org_selector.dart';
 import 'package:ezrxmobile/presentation/home/selector/shipping_address_selector.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -189,40 +183,40 @@ class _TileCard extends StatelessWidget {
   }
 }
 
-class _WelcomeUser extends StatelessWidget {
-  const _WelcomeUser({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<UserBloc, UserState>(
-      listenWhen: (previous, current) => previous.user != current.user,
-      listener: (context, state) {
-        state.userFailureOrSuccessOption.fold(
-          () {},
-          (either) => either.fold(
-            (failure) {
-              final failureMessage = failure.failureMessage;
-              showSnackBar(context: context, message: failureMessage.tr());
-              if (failureMessage == 'authentication failed') {
-                context.read<AuthBloc>().add(const AuthEvent.logout());
-              }
-            },
-            (_) {},
-          ),
-        );
-      },
-      buildWhen: (previous, current) => previous.user != current.user,
-      builder: (context, state) {
-        return state.isNotEmpty
-            ? Text(
-                state.userFullName.toString(),
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6
-                    ?.apply(color: ZPColors.darkGray),
-              )
-            : LoadingShimmer.tile(line: 3);
-      },
-    );
-  }
-}
+// class _WelcomeUser extends StatelessWidget {
+//   const _WelcomeUser({Key? key}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocConsumer<UserBloc, UserState>(
+//       listenWhen: (previous, current) => previous.user != current.user,
+//       listener: (context, state) {
+//         state.userFailureOrSuccessOption.fold(
+//           () {},
+//           (either) => either.fold(
+//             (failure) {
+//               final failureMessage = failure.failureMessage;
+//               showSnackBar(context: context, message: failureMessage.tr());
+//               if (failureMessage == 'authentication failed') {
+//                 context.read<AuthBloc>().add(const AuthEvent.logout());
+//               }
+//             },
+//             (_) {},
+//           ),
+//         );
+//       },
+//       buildWhen: (previous, current) => previous.user != current.user,
+//       builder: (context, state) {
+//         return state.isNotEmpty
+//             ? Text(
+//                 state.userFullName.toString(),
+//                 style: Theme.of(context)
+//                     .textTheme
+//                     .headline6
+//                     ?.apply(color: ZPColors.darkGray),
+//               )
+//             : LoadingShimmer.tile(line: 3);
+//       },
+//     );
+//   }
+// }

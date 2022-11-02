@@ -5,7 +5,6 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
@@ -31,14 +30,14 @@ void main() {
   final CustomerCodeBloc customerCodeBlocMock = CustomerCodeBlocMock();
   final ShipToCodeBloc shipToCodeBLocMock = ShipToCodeBlocMock();
 
-  late AppRouter router;
+  // late AppRouter router;
   setUpAll(() {
     GetIt.instance.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
   });
 
   group('Splash Screen', () {
     setUp(() {
-      router = AppRouter();
+      // router = AppRouter();
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());

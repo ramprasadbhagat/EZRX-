@@ -1,7 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
-import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -34,8 +33,8 @@ void main() {
 
   late final List<MaterialInfo> materialListMock;
   final covidMaterialState = CovidMaterialListState.initial();
-  final mockSelectedMaterialFilter =
-      MaterialFilterState.initial().selectedMaterialFilter;
+  // final mockSelectedMaterialFilter =
+  //     MaterialFilterState.initial().selectedMaterialFilter;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();

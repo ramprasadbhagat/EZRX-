@@ -60,6 +60,9 @@ class AupTcBloc extends Bloc<AupTcEvent, AupTcState> {
   }
 
   Future<bool> _showTermsAndConditon(User user) async {
+    final isTncEnabled = aupTcRepository.getTncConfig();
+    if (!isTncEnabled) return false;
+
     final failureOrSuccess = await aupTcRepository.getTncDate();
 
     return failureOrSuccess.fold(
