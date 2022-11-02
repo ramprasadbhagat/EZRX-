@@ -25,6 +25,15 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
           json['enableTaxClassification'] as bool? ?? false,
       enableVat: json['enableVat'] as bool? ?? false,
       vatValue: json['vatValue'] as int? ?? 0,
+      enableSpecialInstructions:
+          json['enableSpecialInstructions'] as bool? ?? false,
+      enableReferenceNote: json['enableReferenceNote'] as bool? ?? false,
+      enableCollectiveNumber: json['enableCollectiveNumber'] as bool? ?? false,
+      enableMobileNumber: json['enableMobileNumber'] as bool? ?? false,
+      enableFutureDeliveryDay:
+          json['enableFutureDeliveryDay'] as bool? ?? false,
+      enablePaymentTerms: json['enablePaymentTerms'] as bool? ?? false,
+      futureDeliveryDay: json['futureDeliveryDay'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -45,4 +54,11 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'enableTaxClassification': instance.enableTaxClassification,
       'enableVat': instance.enableVat,
       'vatValue': instance.vatValue,
+      'enableSpecialInstructions': instance.enableSpecialInstructions,
+      'enableReferenceNote': instance.enableReferenceNote,
+      'enableCollectiveNumber': instance.enableCollectiveNumber,
+      'enableMobileNumber': instance.enableMobileNumber,
+      'enableFutureDeliveryDay': instance.enableFutureDeliveryDay,
+      'enablePaymentTerms': instance.enablePaymentTerms,
+      'futureDeliveryDay': instance.futureDeliveryDay,
     };

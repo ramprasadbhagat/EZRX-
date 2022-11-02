@@ -22,10 +22,16 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool enableVat,
     required bool enableTaxClassification,
     required int vatValue,
+    required bool enableSpecialInstructions,
+    required bool enableReferenceNote,
+    required bool enableCollectiveNumber,
+    required bool enableMobileNumber,
+    required bool enableFutureDeliveryDay,
+    required bool enablePaymentTerms,
+    required String futureDeliveryDay,
   }) = _SalesOrganisationConfigs;
 
-  factory SalesOrganisationConfigs.empty() =>
-      SalesOrganisationConfigs(
+  factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
         currency: Currency(''),
         hideCustomer: false,
         enableGimmickMaterial: false,
@@ -40,6 +46,13 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         enableTaxClassification: false,
         enableVat: false,
         vatValue: 0,
+        enableSpecialInstructions: false,
+        enableReferenceNote: false,
+        enableCollectiveNumber: false,
+        enableMobileNumber: false,
+        enableFutureDeliveryDay: false,
+        enablePaymentTerms: false,
+        futureDeliveryDay: '',
       );
 
   String get getConfigLangauge {

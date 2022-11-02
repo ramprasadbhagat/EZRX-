@@ -61,6 +61,13 @@ void main() {
     enableVat: false,
     enableZDP5: false,
     vatValue: 0,
+    enableCollectiveNumber: false,
+    enableFutureDeliveryDay: false,
+    enableMobileNumber: false,
+    enablePaymentTerms: false,
+    enableReferenceNote: false,
+    enableSpecialInstructions: false,
+    futureDeliveryDay: '',
   );
 
   const fakeSelectedFilterCategory = MaterialFilterType.principal;

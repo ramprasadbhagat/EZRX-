@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -83,13 +84,24 @@ class CartPage extends StatelessWidget {
                   ],
                   color: ZPColors.white,
                 ),
-                child: Text(
-                  '${'Grand Total : '.tr()}${_getTotalPrice(context, state.cartItemList)}   ',
-                  textAlign: TextAlign.right,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(color: ZPColors.primary),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        context.router.pushNamed('order_summary');
+                      },
+                      child: const Text('Order Summary').tr(),
+                    ),
+                    Text(
+                      '${'Grand Total : '.tr()}${_getTotalPrice(context, state.cartItemList)}   ',
+                      textAlign: TextAlign.right,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(color: ZPColors.primary),
+                    ),
+                  ],
                 ),
               ),
             ],

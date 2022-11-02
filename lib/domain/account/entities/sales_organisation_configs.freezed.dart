@@ -30,6 +30,13 @@ mixin _$SalesOrganisationConfigs {
   bool get enableVat => throw _privateConstructorUsedError;
   bool get enableTaxClassification => throw _privateConstructorUsedError;
   int get vatValue => throw _privateConstructorUsedError;
+  bool get enableSpecialInstructions => throw _privateConstructorUsedError;
+  bool get enableReferenceNote => throw _privateConstructorUsedError;
+  bool get enableCollectiveNumber => throw _privateConstructorUsedError;
+  bool get enableMobileNumber => throw _privateConstructorUsedError;
+  bool get enableFutureDeliveryDay => throw _privateConstructorUsedError;
+  bool get enablePaymentTerms => throw _privateConstructorUsedError;
+  String get futureDeliveryDay => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrganisationConfigsCopyWith<SalesOrganisationConfigs> get copyWith =>
@@ -55,7 +62,14 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       bool enableZDP5,
       bool enableVat,
       bool enableTaxClassification,
-      int vatValue});
+      int vatValue,
+      bool enableSpecialInstructions,
+      bool enableReferenceNote,
+      bool enableCollectiveNumber,
+      bool enableMobileNumber,
+      bool enableFutureDeliveryDay,
+      bool enablePaymentTerms,
+      String futureDeliveryDay});
 }
 
 /// @nodoc
@@ -83,6 +97,13 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? enableVat = freezed,
     Object? enableTaxClassification = freezed,
     Object? vatValue = freezed,
+    Object? enableSpecialInstructions = freezed,
+    Object? enableReferenceNote = freezed,
+    Object? enableCollectiveNumber = freezed,
+    Object? enableMobileNumber = freezed,
+    Object? enableFutureDeliveryDay = freezed,
+    Object? enablePaymentTerms = freezed,
+    Object? futureDeliveryDay = freezed,
   }) {
     return _then(_value.copyWith(
       currency: currency == freezed
@@ -141,6 +162,34 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.vatValue
           : vatValue // ignore: cast_nullable_to_non_nullable
               as int,
+      enableSpecialInstructions: enableSpecialInstructions == freezed
+          ? _value.enableSpecialInstructions
+          : enableSpecialInstructions // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableReferenceNote: enableReferenceNote == freezed
+          ? _value.enableReferenceNote
+          : enableReferenceNote // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableCollectiveNumber: enableCollectiveNumber == freezed
+          ? _value.enableCollectiveNumber
+          : enableCollectiveNumber // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableMobileNumber: enableMobileNumber == freezed
+          ? _value.enableMobileNumber
+          : enableMobileNumber // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableFutureDeliveryDay: enableFutureDeliveryDay == freezed
+          ? _value.enableFutureDeliveryDay
+          : enableFutureDeliveryDay // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enablePaymentTerms: enablePaymentTerms == freezed
+          ? _value.enablePaymentTerms
+          : enablePaymentTerms // ignore: cast_nullable_to_non_nullable
+              as bool,
+      futureDeliveryDay: futureDeliveryDay == freezed
+          ? _value.futureDeliveryDay
+          : futureDeliveryDay // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -167,7 +216,14 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       bool enableZDP5,
       bool enableVat,
       bool enableTaxClassification,
-      int vatValue});
+      int vatValue,
+      bool enableSpecialInstructions,
+      bool enableReferenceNote,
+      bool enableCollectiveNumber,
+      bool enableMobileNumber,
+      bool enableFutureDeliveryDay,
+      bool enablePaymentTerms,
+      String futureDeliveryDay});
 }
 
 /// @nodoc
@@ -198,6 +254,13 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? enableVat = freezed,
     Object? enableTaxClassification = freezed,
     Object? vatValue = freezed,
+    Object? enableSpecialInstructions = freezed,
+    Object? enableReferenceNote = freezed,
+    Object? enableCollectiveNumber = freezed,
+    Object? enableMobileNumber = freezed,
+    Object? enableFutureDeliveryDay = freezed,
+    Object? enablePaymentTerms = freezed,
+    Object? futureDeliveryDay = freezed,
   }) {
     return _then(_$_SalesOrganisationConfigs(
       currency: currency == freezed
@@ -256,6 +319,34 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.vatValue
           : vatValue // ignore: cast_nullable_to_non_nullable
               as int,
+      enableSpecialInstructions: enableSpecialInstructions == freezed
+          ? _value.enableSpecialInstructions
+          : enableSpecialInstructions // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableReferenceNote: enableReferenceNote == freezed
+          ? _value.enableReferenceNote
+          : enableReferenceNote // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableCollectiveNumber: enableCollectiveNumber == freezed
+          ? _value.enableCollectiveNumber
+          : enableCollectiveNumber // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableMobileNumber: enableMobileNumber == freezed
+          ? _value.enableMobileNumber
+          : enableMobileNumber // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableFutureDeliveryDay: enableFutureDeliveryDay == freezed
+          ? _value.enableFutureDeliveryDay
+          : enableFutureDeliveryDay // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enablePaymentTerms: enablePaymentTerms == freezed
+          ? _value.enablePaymentTerms
+          : enablePaymentTerms // ignore: cast_nullable_to_non_nullable
+              as bool,
+      futureDeliveryDay: futureDeliveryDay == freezed
+          ? _value.futureDeliveryDay
+          : futureDeliveryDay // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -277,7 +368,14 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       required this.enableZDP5,
       required this.enableVat,
       required this.enableTaxClassification,
-      required this.vatValue})
+      required this.vatValue,
+      required this.enableSpecialInstructions,
+      required this.enableReferenceNote,
+      required this.enableCollectiveNumber,
+      required this.enableMobileNumber,
+      required this.enableFutureDeliveryDay,
+      required this.enablePaymentTerms,
+      required this.futureDeliveryDay})
       : _principalList = principalList,
         super._();
 
@@ -314,10 +412,24 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   final bool enableTaxClassification;
   @override
   final int vatValue;
+  @override
+  final bool enableSpecialInstructions;
+  @override
+  final bool enableReferenceNote;
+  @override
+  final bool enableCollectiveNumber;
+  @override
+  final bool enableMobileNumber;
+  @override
+  final bool enableFutureDeliveryDay;
+  @override
+  final bool enablePaymentTerms;
+  @override
+  final String futureDeliveryDay;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue)';
+    return 'SalesOrganisationConfigs(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay)';
   }
 
   @override
@@ -349,26 +461,48 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
             const DeepCollectionEquality().equals(other.enableVat, enableVat) &&
             const DeepCollectionEquality().equals(
                 other.enableTaxClassification, enableTaxClassification) &&
-            const DeepCollectionEquality().equals(other.vatValue, vatValue));
+            const DeepCollectionEquality().equals(other.vatValue, vatValue) &&
+            const DeepCollectionEquality().equals(
+                other.enableSpecialInstructions, enableSpecialInstructions) &&
+            const DeepCollectionEquality()
+                .equals(other.enableReferenceNote, enableReferenceNote) &&
+            const DeepCollectionEquality()
+                .equals(other.enableCollectiveNumber, enableCollectiveNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.enableMobileNumber, enableMobileNumber) &&
+            const DeepCollectionEquality().equals(
+                other.enableFutureDeliveryDay, enableFutureDeliveryDay) &&
+            const DeepCollectionEquality()
+                .equals(other.enablePaymentTerms, enablePaymentTerms) &&
+            const DeepCollectionEquality()
+                .equals(other.futureDeliveryDay, futureDeliveryDay));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(currency),
-      const DeepCollectionEquality().hash(hideCustomer),
-      const DeepCollectionEquality().hash(enableGimmickMaterial),
-      const DeepCollectionEquality().hash(languageFilter),
-      const DeepCollectionEquality().hash(languageValue),
-      const DeepCollectionEquality().hash(disablePrincipals),
-      const DeepCollectionEquality().hash(_principalList),
-      const DeepCollectionEquality().hash(disableOrderType),
-      const DeepCollectionEquality().hash(enableBatchNumber),
-      const DeepCollectionEquality().hash(disableBundles),
-      const DeepCollectionEquality().hash(enableZDP5),
-      const DeepCollectionEquality().hash(enableVat),
-      const DeepCollectionEquality().hash(enableTaxClassification),
-      const DeepCollectionEquality().hash(vatValue));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(currency),
+        const DeepCollectionEquality().hash(hideCustomer),
+        const DeepCollectionEquality().hash(enableGimmickMaterial),
+        const DeepCollectionEquality().hash(languageFilter),
+        const DeepCollectionEquality().hash(languageValue),
+        const DeepCollectionEquality().hash(disablePrincipals),
+        const DeepCollectionEquality().hash(_principalList),
+        const DeepCollectionEquality().hash(disableOrderType),
+        const DeepCollectionEquality().hash(enableBatchNumber),
+        const DeepCollectionEquality().hash(disableBundles),
+        const DeepCollectionEquality().hash(enableZDP5),
+        const DeepCollectionEquality().hash(enableVat),
+        const DeepCollectionEquality().hash(enableTaxClassification),
+        const DeepCollectionEquality().hash(vatValue),
+        const DeepCollectionEquality().hash(enableSpecialInstructions),
+        const DeepCollectionEquality().hash(enableReferenceNote),
+        const DeepCollectionEquality().hash(enableCollectiveNumber),
+        const DeepCollectionEquality().hash(enableMobileNumber),
+        const DeepCollectionEquality().hash(enableFutureDeliveryDay),
+        const DeepCollectionEquality().hash(enablePaymentTerms),
+        const DeepCollectionEquality().hash(futureDeliveryDay)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -392,7 +526,14 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final bool enableZDP5,
       required final bool enableVat,
       required final bool enableTaxClassification,
-      required final int vatValue}) = _$_SalesOrganisationConfigs;
+      required final int vatValue,
+      required final bool enableSpecialInstructions,
+      required final bool enableReferenceNote,
+      required final bool enableCollectiveNumber,
+      required final bool enableMobileNumber,
+      required final bool enableFutureDeliveryDay,
+      required final bool enablePaymentTerms,
+      required final String futureDeliveryDay}) = _$_SalesOrganisationConfigs;
   const _SalesOrganisationConfigs._() : super._();
 
   @override
@@ -423,6 +564,20 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   bool get enableTaxClassification;
   @override
   int get vatValue;
+  @override
+  bool get enableSpecialInstructions;
+  @override
+  bool get enableReferenceNote;
+  @override
+  bool get enableCollectiveNumber;
+  @override
+  bool get enableMobileNumber;
+  @override
+  bool get enableFutureDeliveryDay;
+  @override
+  bool get enablePaymentTerms;
+  @override
+  String get futureDeliveryDay;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsCopyWith<_$_SalesOrganisationConfigs>

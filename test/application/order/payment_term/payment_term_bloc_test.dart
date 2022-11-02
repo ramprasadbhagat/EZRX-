@@ -50,6 +50,13 @@ void main() {
     enableTaxClassification: false,
     enableVat: false,
     vatValue: 0,
+    enableCollectiveNumber: false,
+    enableFutureDeliveryDay: false,
+    enableMobileNumber: false,
+    enablePaymentTerms: false,
+    enableReferenceNote: false,
+    enableSpecialInstructions: false,
+    futureDeliveryDay: '',
   );
 
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(

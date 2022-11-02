@@ -31,9 +31,24 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'disableBundles', defaultValue: false)
         required bool disableBundles,
     @JsonKey(name: 'enableZDP5', defaultValue: false) required bool enableZDP5,
-    @JsonKey(name: 'enableTaxClassification', defaultValue: false) required bool enableTaxClassification,
+    @JsonKey(name: 'enableTaxClassification', defaultValue: false)
+        required bool enableTaxClassification,
     @JsonKey(name: 'enableVat', defaultValue: false) required bool enableVat,
     @JsonKey(name: 'vatValue', defaultValue: 0) required int vatValue,
+    @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
+        required bool enableSpecialInstructions,
+    @JsonKey(name: 'enableReferenceNote', defaultValue: false)
+        required bool enableReferenceNote,
+    @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
+        required bool enableCollectiveNumber,
+    @JsonKey(name: 'enableMobileNumber', defaultValue: false)
+        required bool enableMobileNumber,
+    @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
+        required bool enableFutureDeliveryDay,
+    @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
+        required bool enablePaymentTerms,
+    @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
+        required String futureDeliveryDay,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -54,6 +69,13 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableTaxClassification: configs.enableTaxClassification,
       enableVat: configs.enableVat,
       vatValue: configs.vatValue,
+      enableSpecialInstructions: configs.enableSpecialInstructions,
+      enableReferenceNote: configs.enableReferenceNote,
+      enableCollectiveNumber: configs.enableCollectiveNumber,
+      enableMobileNumber: configs.enableMobileNumber,
+      enableFutureDeliveryDay: configs.enableFutureDeliveryDay,
+      enablePaymentTerms: configs.enablePaymentTerms,
+      futureDeliveryDay: configs.futureDeliveryDay,
     );
   }
 
@@ -73,6 +95,13 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableTaxClassification: enableTaxClassification,
       enableVat: enableVat,
       vatValue: vatValue,
+      enableSpecialInstructions: enableSpecialInstructions,
+      enableReferenceNote: enableReferenceNote,
+      enableCollectiveNumber: enableCollectiveNumber,
+      enableMobileNumber: enableMobileNumber,
+      enableFutureDeliveryDay: enableFutureDeliveryDay,
+      enablePaymentTerms: enablePaymentTerms,
+      futureDeliveryDay: futureDeliveryDay,
     );
   }
 
