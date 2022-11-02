@@ -144,6 +144,36 @@ void main() {
         );
       }
 
+      testWidgets('Favourite test  - delete favorite item',
+          (tester) async {
+        final favouriteBloc = locator<MockFavouriteBloc>();
+        when(() => favouriteBloc.stream).thenAnswer((invocation) {
+          return Stream.fromIterable([
+            FavouriteState.initial().copyWith(
+              isLoading: false,
+              failureOrSuccessOption: none(),
+              favouriteItems: [mockFavourite1],
+            ),
+          ]);
+        });
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+
+        expect(
+          find.byKey(const Key('scrollList')),
+          findsOneWidget,
+        );
+        final favouriteListTile = find.byType(FavouriteListTile);
+        expect(favouriteListTile, findsAtLeastNWidgets(1));
+        await tester.drag(find.byKey(const Key('slidable')), const Offset(-300, 0.0));
+        await tester.pump();
+
+        final removeWidget = tester.widget(find.byIcon(Icons.delete_outline));
+        await tester.tap(find.byWidget(removeWidget));
+        await tester.pump();
+       
+      });
+
       testWidgets('Favourite test  - valid Many items for favourite',
           (tester) async {
         final favouriteBloc = locator<MockFavouriteBloc>();

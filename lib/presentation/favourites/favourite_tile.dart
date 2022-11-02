@@ -27,17 +27,16 @@ class FavouriteListTile extends StatelessWidget {
       child: CustomSlidable(
         endActionPaneActions: [
           CustomSlidableAction(
-            label: 'Delete', 
-            icon: Icons.delete_outline, 
-            onPressed: (context) =>
-              context.read<FavouriteBloc>().add(
-                FavouriteEvent.delete(
-                  item: favourite,
-                  user: context.read<UserBloc>().state.user,
+            label: 'Delete',
+            icon: Icons.delete_outline,
+            onPressed: (context) => context.read<FavouriteBloc>().add(
+                  FavouriteEvent.delete(
+                    item: favourite,
+                    user: context.read<UserBloc>().state.user,
+                  ),
                 ),
-              ),
           ),
-        ],  
+        ],
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: GestureDetector(
@@ -58,10 +57,11 @@ class FavouriteListTile extends StatelessWidget {
                             style: DefaultTextStyle.of(context).style,
                             children: <TextSpan>[
                               TextSpan(
-                                text: favourite.materialDescription.toUpperCase(),
+                                text:
+                                    favourite.materialDescription.toUpperCase(),
                                 style: const TextStyle(
-                                  color: 
-                                      ZPColors.darkerGreen, // zpDarkerGreenColor,
+                                  color: ZPColors
+                                      .darkerGreen, // zpDarkerGreenColor,
                                   fontWeight: FontWeight.w500,
                                   fontSize: 14,
                                 ),
@@ -76,7 +76,8 @@ class FavouriteListTile extends StatelessWidget {
                           Icons.favorite,
                           color: ZPColors.secondary,
                         ),
-                        onPressed: () async => context.read<FavouriteBloc>().add(
+                        onPressed: () async =>
+                            context.read<FavouriteBloc>().add(
                                   FavouriteEvent.delete(
                                     item: favourite,
                                     user: context.read<UserBloc>().state.user,
@@ -107,7 +108,8 @@ class FavouriteListTile extends StatelessWidget {
                       fontSize: 12,
                     ),
                   ),
-                  BlocBuilder<MaterialPriceDetailBloc, MaterialPriceDetailState>(
+                  BlocBuilder<MaterialPriceDetailBloc,
+                      MaterialPriceDetailState>(
                     buildWhen: (previous, current) =>
                         previous.materialDetails[itemPriceQuery] !=
                         current.materialDetails[itemPriceQuery],

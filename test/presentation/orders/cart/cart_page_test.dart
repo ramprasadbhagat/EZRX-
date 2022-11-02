@@ -221,6 +221,38 @@ void main() {
         await tester.pump(const Duration(seconds: 1));
         await tester.pump(const Duration(seconds: 1));
       });
+
+      testWidgets('Test have cart item list add and slide and remove item',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItemList: mockCartItemWithDataList,
+            isFetching: true,
+          ),
+        );
+
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
+
+        await tester.pump();
+        final item = find.byKey(Key(
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+        expect(item, findsOneWidget);
+        final listWidget = find.byWidgetPredicate((w) => w is ListTile);
+        expect(listWidget, findsOneWidget);
+        final addWidget = tester.widget(find.byIcon(Icons.add));
+        await tester.tap(find.byWidget(addWidget));
+        await tester.pump();
+
+        await tester.drag(find.byKey(const Key('slidable')), const Offset(-300, 0.0));
+        await tester.pump();
+
+        final removeWidget = tester.widget(find.byIcon(Icons.delete_outline));
+        await tester.tap(find.byWidget(removeWidget));
+        await tester.pump();
+      });
+
       testWidgets('Test have cart item list add and decrease item',
           (tester) async {
         when(() => cartBloc.state).thenReturn(

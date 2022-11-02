@@ -126,11 +126,11 @@ class _ListContent extends StatelessWidget {
       child: CustomSlidable(
         endActionPaneActions: [
           CustomSlidableAction(
-            label: 'Delete', 
-            icon: Icons.delete_outline, 
+            label: 'Delete',
+            icon: Icons.delete_outline,
             onPressed: (context) => context
-              .read<CartBloc>()
-              .add(CartEvent.removeFromCart(item: cartItem)),
+                .read<CartBloc>()
+                .add(CartEvent.removeFromCart(item: cartItem)),
           ),
         ],
         borderRadius: 4,

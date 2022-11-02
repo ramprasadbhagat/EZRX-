@@ -15,8 +15,10 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_item.dart';
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_list_page.dart';
@@ -426,61 +428,134 @@ void main() {
     });
 
     // TODO: need Hob help
-    // testWidgets(
-    //     'Order Item is validating success and load price success on each material items',
-    //     (tester) async {
-    //   final order = savedOrdersMock.first;
-    //   final orderId = order.id;
+    testWidgets(
+        'Order Item is validating success and load price success on each material items',
+        (tester) async {
+      final order = savedOrdersMock.first;
+      final orderId = order.id;
 
-    //   when(() => savedOrderListBloc.state).thenReturn(
-    //     SavedOrderListState.initial().copyWith(
-    //       savedOrders: savedOrdersMock.getRange(0, 1).toList(),
-    //       nextPageIndex: 1,
-    //       canLoadMore: true,
-    //     ),
-    //   );
+      when(() => savedOrderListBloc.state).thenReturn(
+        SavedOrderListState.initial().copyWith(
+          savedOrders: savedOrdersMock.getRange(0, 1).toList(),
+          nextPageIndex: 1,
+          canLoadMore: true,
+        ),
+      );
 
-    //   final expectedValidCustomerMaterialStates = [
-    //     ValidCustomerMaterialState.initial().copyWith(validMaterialState: {
-    //       orderId: const ValidCustomerMaterialViewModel(
-    //         status: ValidatingStatus.loading,
-    //       )
-    //     }),
-    //     ValidCustomerMaterialState.initial().copyWith(validMaterialState: {
-    //       orderId: ValidCustomerMaterialViewModel(
-    //         validMaterialNumbers:
-    //             order.items.map((e) => e.materialNumber).toList(),
-    //         status: ValidatingStatus.success,
-    //       )
-    //     }),
-    //   ];
+      final expectedValidCustomerMaterialStates = [
+        ValidCustomerMaterialState.initial().copyWith(validMaterialState: {
+          orderId: const ValidCustomerMaterialViewModel(
+            status: ValidatingStatus.loading,
+          )
+        }),
+        ValidCustomerMaterialState.initial().copyWith(validMaterialState: {
+          orderId: ValidCustomerMaterialViewModel(
+            validMaterialNumbers:
+                order.items.map((e) => e.materialNumber).toList(),
+            status: ValidatingStatus.success,
+          )
+        }),
+      ];
 
-    //   whenListen(validCustomerMaterialBlocMock,
-    //       Stream.fromIterable(expectedValidCustomerMaterialStates));
+      whenListen(validCustomerMaterialBlocMock,
+          Stream.fromIterable(expectedValidCustomerMaterialStates));
 
-    //   when(() => materialPriceDetailBlocMock.state).thenReturn(
-    //     MaterialPriceDetailState.initial().copyWith(materialDetails: {
-    //       for (final material in order.items)
-    //         MaterialQueryInfo.fromSavedOrder(orderMaterial: material):
-    //             MaterialPriceDetail.empty()
-    //                 .copyWith
-    //                 .price(finalPrice: MaterialPrice(10))
-    //     }),
-    //   );
-    //   await tester.runAsync(() async {
-    //     await tester.pumpWidget(savedOrderPage());
-    //   });
-    //   final orderTemplateItem = find.byType(SavedOrderItem);
-    //   expect(orderTemplateItem, findsOneWidget);
-    //   await tester.tap(orderTemplateItem);
-    //   await tester.pump();
+      when(() => materialPriceDetailBlocMock.state).thenReturn(
+        MaterialPriceDetailState.initial().copyWith(materialDetails: {
+          for (final material in order.items)
+            MaterialQueryInfo.fromSavedOrder(orderMaterial: material):
+                MaterialPriceDetail.empty()
+                    .copyWith
+                    .price(finalPrice: MaterialPrice(10))
+        }),
+      );
+      await tester.runAsync(() async {
+        await tester.pumpWidget(savedOrderPage());
+      });
+      final orderTemplateItem = find.byType(SavedOrderItem);
+      expect(orderTemplateItem, findsOneWidget);
+      await tester.tap(orderTemplateItem);
+      await tester.pump();
 
-    //   expect(
-    //     find.text('10'),
-    //     findsNWidgets(
-    //       order.items.length,
-    //     ),
-    //   );
-    // });
+      final savedOrderItem = find.byKey(
+          Key('saved_order_${savedOrderListBloc.state.savedOrders.first.id}'));
+      expect(
+        savedOrderItem,
+        findsOneWidget,
+      );
+
+      final deleteSavedOrderItem = find.byKey(Key(
+          'saved_order_delete_${savedOrderListBloc.state.savedOrders.first.id}'));
+      expect(deleteSavedOrderItem, findsOneWidget);
+      await tester.ensureVisible(deleteSavedOrderItem);
+      await tester.pumpAndSettle();
+      await tester.tap(deleteSavedOrderItem);
+      await tester.pump();
+    });
+
+    testWidgets(
+        'Order Item is validating success and load price success on each material items and delete first item',
+        (tester) async {
+      final order = savedOrdersMock.first;
+      final orderId = order.id;
+
+      when(() => savedOrderListBloc.state).thenReturn(
+        SavedOrderListState.initial().copyWith(
+          savedOrders: savedOrdersMock.getRange(0, 1).toList(),
+          nextPageIndex: 1,
+          canLoadMore: true,
+        ),
+      );
+
+      final expectedValidCustomerMaterialStates = [
+        ValidCustomerMaterialState.initial().copyWith(validMaterialState: {
+          orderId: const ValidCustomerMaterialViewModel(
+            status: ValidatingStatus.loading,
+          )
+        }),
+        ValidCustomerMaterialState.initial().copyWith(validMaterialState: {
+          orderId: ValidCustomerMaterialViewModel(
+            validMaterialNumbers:
+                order.items.map((e) => e.materialNumber).toList(),
+            status: ValidatingStatus.success,
+          )
+        }),
+      ];
+
+      whenListen(validCustomerMaterialBlocMock,
+          Stream.fromIterable(expectedValidCustomerMaterialStates));
+
+      when(() => materialPriceDetailBlocMock.state).thenReturn(
+        MaterialPriceDetailState.initial().copyWith(materialDetails: {
+          for (final material in order.items)
+            MaterialQueryInfo.fromSavedOrder(orderMaterial: material):
+                MaterialPriceDetail.empty()
+                    .copyWith
+                    .price(finalPrice: MaterialPrice(10))
+        }),
+      );
+      await tester.runAsync(() async {
+        await tester.pumpWidget(savedOrderPage());
+      });
+      final orderTemplateItem = find.byType(SavedOrderItem);
+      expect(orderTemplateItem, findsOneWidget);
+      await tester.tap(orderTemplateItem);
+      await tester.pump();
+
+      final savedOrderItem = find.byKey(
+          Key('saved_order_${savedOrderListBloc.state.savedOrders.first.id}'));
+      expect(
+        savedOrderItem,
+        findsOneWidget,
+      );
+
+      await tester.drag(
+          find.byKey(const Key('slidable')), const Offset(-300, 0.0));
+      await tester.pump();
+
+      final removeWidget = tester.widget(find.byIcon(Icons.delete_outline));
+      await tester.tap(find.byWidget(removeWidget));
+      await tester.pump();
+    });
   });
 }

@@ -164,4 +164,44 @@ void main() {
       expect(errorMessage, findsOneWidget);
     });
   });
+  testWidgets('Test order templates deletion', (tester) async {
+    when(() => orderTemplateListBloc.state).thenReturn(
+      OrderTemplateListState.initial().copyWith(
+        orderTemplateList: orderTemplatesMock,
+      ),
+    );
+
+    await tester.pumpWidget(
+      MultiBlocProviderFrameWrapper(
+        providers: [
+          BlocProvider<OrderTemplateListBloc>(
+            create: (context) => orderTemplateListBloc,
+          ),
+          BlocProvider<CartBloc>(
+            create: (context) => cartBloc,
+          ),
+        ],
+        child: const OrderTemplateListPage(),
+      ),
+    );
+
+    final noOrderTemplate = find.text('No order template found');
+    final orderTemplateItem = find.byType(OrderTemplateListItem);
+
+    expect(noOrderTemplate, findsNothing);
+    expect(orderTemplateItem, findsAtLeastNWidgets(1));
+
+    final oneSlidableItem = find.byKey(
+      Key('materialOption${orderTemplateListBloc
+        .state.orderTemplateList.first.templateId}'
+      )
+    );
+    expect(oneSlidableItem, findsOneWidget);
+    await tester.drag(oneSlidableItem, const Offset(-300, 0.0));
+    await tester.pump();
+    
+    final removeWidget = tester.widget(find.byIcon(Icons.delete_outline));
+    await tester.tap(find.byWidget(removeWidget));
+    await tester.pump();
+  });
 }

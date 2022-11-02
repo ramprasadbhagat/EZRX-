@@ -56,14 +56,14 @@ class OrderTemplateListItem extends StatelessWidget {
             child: CustomSlidable(
               endActionPaneActions: [
                 CustomSlidableAction(
-                  label: 'Delete', 
-                  icon: Icons.delete_outline, 
-                  onPressed: (context) => 
-                    context.read<OrderTemplateListBloc>().add(
-                      OrderTemplateListEvent.delete(
-                        orderTemplate,
-                      ),
-                    ),
+                  label: 'Delete',
+                  icon: Icons.delete_outline,
+                  onPressed: (context) =>
+                      context.read<OrderTemplateListBloc>().add(
+                            OrderTemplateListEvent.delete(
+                              orderTemplate,
+                            ),
+                          ),
                 ),
               ],
               borderRadius: 10,
@@ -114,8 +114,8 @@ class OrderTemplateListItem extends StatelessWidget {
                                         .shipToInfo,
                                     materialInfos: orderTemplate.cartItems
                                         .map(
-                                          (item) =>
-                                              MaterialQueryInfo.fromOrderTemplate(
+                                          (item) => MaterialQueryInfo
+                                              .fromOrderTemplate(
                                             orderMaterial: item,
                                           ),
                                         )

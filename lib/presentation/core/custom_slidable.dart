@@ -21,44 +21,51 @@ class CustomSlidable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!enabled) return Center(child: child);
-    
+
     return Slidable(
-      key: const ValueKey(0),
-      startActionPane: startActionPaneActions.isEmpty ?  null :
-        ActionPane(
-          motion: const ScrollMotion(),
-          children: endActionPaneActions.map((e) => 
-            SlidableAction(
-              onPressed: e.onPressed,
-              backgroundColor: e.backgroundColor,
-              foregroundColor: e.foregroundColor,
-              icon: e.icon,
-              label: e.label,
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(borderRadius),
-                bottomRight: Radius.circular(borderRadius),
-              ),
+      key: const Key('slidable'),
+      startActionPane: startActionPaneActions.isEmpty
+          ? null
+          : ActionPane(
+              motion: const ScrollMotion(),
+              children: endActionPaneActions
+                  .map(
+                    (e) => SlidableAction(
+                      onPressed: e.onPressed,
+                      backgroundColor: e.backgroundColor,
+                      foregroundColor: e.foregroundColor,
+                      icon: e.icon,
+                      label: e.label,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(borderRadius),
+                        bottomRight: Radius.circular(borderRadius),
+                      ),
+                    ),
+                  )
+                  .toList(),
             ),
-          ).toList(),
-        ),
-      endActionPane: endActionPaneActions.isEmpty ?  null :
-        ActionPane(
-          motion: const ScrollMotion(),
-          children: endActionPaneActions.map((e) => 
-            SlidableAction(
-              onPressed: e.onPressed,
-              backgroundColor: e.backgroundColor,
-              foregroundColor: e.foregroundColor,
-              icon: e.icon,
-              label: e.label,
-              borderRadius: endActionPaneActions.last == e ? 
-                BorderRadius.only(
-                  topRight: Radius.circular(borderRadius),
-                  bottomRight: Radius.circular(borderRadius),
-                ) : BorderRadius.zero,
-              ),
-          ).toList(),
-        ),
+      endActionPane: endActionPaneActions.isEmpty
+          ? null
+          : ActionPane(
+              motion: const ScrollMotion(),
+              children: endActionPaneActions
+                  .map(
+                    (e) => SlidableAction(
+                      onPressed: e.onPressed,
+                      backgroundColor: e.backgroundColor,
+                      foregroundColor: e.foregroundColor,
+                      icon: e.icon,
+                      label: e.label,
+                      borderRadius: endActionPaneActions.last == e
+                          ? BorderRadius.only(
+                              topRight: Radius.circular(borderRadius),
+                              bottomRight: Radius.circular(borderRadius),
+                            )
+                          : BorderRadius.zero,
+                    ),
+                  )
+                  .toList(),
+            ),
       child: child,
     );
   }

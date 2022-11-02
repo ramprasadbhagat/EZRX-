@@ -72,30 +72,27 @@ class SavedOrderItem extends StatelessWidget {
         }
       },
       child: Card(
+        key: Key('saved_order_${order.id}'),
         elevation: 1.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
             10.0,
           ),
         ),
-        child: CustomSlidable( 
-        endActionPaneActions: [
-          CustomSlidableAction(
-            label: 'Delete', 
-            icon: Icons.delete_outline, 
-            onPressed: (context) => 
-              context.read<SavedOrderListBloc>().add(
-                SavedOrderListEvent.delete(
-                  order: order,
-                  user: context
-                      .read<UserBloc>()
-                      .state
-                      .user,
-                ),
-              ),
-          ),
-        ],
-        borderRadius: 10,  
+        child: CustomSlidable(
+          endActionPaneActions: [
+            CustomSlidableAction(
+              label: 'Delete',
+              icon: Icons.delete_outline,
+              onPressed: (context) => context.read<SavedOrderListBloc>().add(
+                    SavedOrderListEvent.delete(
+                      order: order,
+                      user: context.read<UserBloc>().state.user,
+                    ),
+                  ),
+            ),
+          ],
+          borderRadius: 10,
           child: Theme(
             data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
             child: ExpansionTile(
@@ -241,6 +238,7 @@ class SavedOrderItem extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 10),
                                 ElevatedButton(
+                                  key: Key('saved_order_delete_${order.id}'),
                                   onPressed: () {
                                     context.read<SavedOrderListBloc>().add(
                                           SavedOrderListEvent.delete(
@@ -305,10 +303,10 @@ class SavedOrderItem extends StatelessWidget {
                       case ValidatingStatus.failure:
                         //TODO: Create a retry button to call Valid API again
                         return const Text('Some error happens');
-        
+
                       case ValidatingStatus.loading:
                         return const MaterialItemShimmer();
-        
+
                       default:
                         return const SizedBox();
                     }
