@@ -41,61 +41,72 @@ class HistoryTab extends StatelessWidget {
           preferredSize: const Size.fromHeight(
             30.0,
           ),
-          child: GestureDetector(
-            key: const Key('filterButton'),
-            onTap: () {
-              scaffoldKey.currentState!.openEndDrawer();
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                const Text(
-                  'Filter',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: ZPColors.kPrimaryColor,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ).tr(),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Stack(
-                    children: <Widget>[
-                      const FittedBox(
-                        key: ValueKey('order_history_filter'),
-                        child: Icon(
-                          Icons.filter_alt,
-                        ),
-                      ),
-                      BlocBuilder<OrderHistoryFilterBloc,
-                          OrderHistoryFilterState>(
-                        buildWhen: (previous, current) =>
-                            previous.isAppliedFilter != current.isAppliedFilter,
-                        builder: (context, state) {
-                          if (state.isAppliedFilter) {
-                            return Positioned(
-                              key: const ValueKey('Filter_list_not_empty'),
-                              right: 0,
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: ZPColors.kPrimaryColor,
+          child: BlocBuilder<ShipToCodeBloc, ShipToCodeState>(
+            buildWhen: (previous, current) =>
+                previous.haveShipTo != current.haveShipTo,
+            builder: (context, state) {
+              return state.haveShipTo
+                  ? GestureDetector(
+                      key: const Key('filterButton'),
+                      onTap: () {
+                        scaffoldKey.currentState!.openEndDrawer();
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          const Text(
+                            'Filter',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: ZPColors.kPrimaryColor,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ).tr(),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0,),
+                            child: Stack(
+                              children: <Widget>[
+                                const FittedBox(
+                                  key: ValueKey('order_history_filter'),
+                                  child: Icon(
+                                    Icons.filter_alt,
+                                  ),
                                 ),
-                                width: radius / 2,
-                                height: radius / 2,
-                              ),
-                            );
-                          }
+                                BlocBuilder<OrderHistoryFilterBloc,
+                                    OrderHistoryFilterState>(
+                                  buildWhen: (previous, current) =>
+                                      previous.isAppliedFilter !=
+                                      current.isAppliedFilter,
+                                  builder: (context, state) {
+                                    if (state.isAppliedFilter) {
+                                      return Positioned(
+                                        key: const ValueKey(
+                                            'Filter_list_not_empty',),
+                                        right: 0,
+                                        child: Container(
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: ZPColors.kPrimaryColor,
+                                          ),
+                                          width: radius / 2,
+                                          height: radius / 2,
+                                        ),
+                                      );
+                                    }
 
-                          return const SizedBox.shrink();
-                        },
+                                    return const SizedBox.shrink();
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+                    )
+                  : const SizedBox.shrink();
+            },
           ),
+          // : const SizedBox.shrink(),
         ),
       ),
       endDrawer: const Drawer(child: OrderHistoryFilterDrawer()),
@@ -155,20 +166,26 @@ class HistoryTab extends StatelessWidget {
                 : ScrollList<OrderHistoryItem>(
                     key: const Key('OrderHistoryList'),
                     emptyMessage: 'No history found',
-                    onRefresh: () => context.read<OrderHistoryListBloc>().add(
-                          OrderHistoryListEvent.fetch(
-                            customerCodeInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .customerCodeInfo,
-                            salesOrgConfigs:
-                                context.read<SalesOrgBloc>().state.configs,
-                            shipToInfo:
-                                context.read<ShipToCodeBloc>().state.shipToInfo,
-                            user: context.read<UserBloc>().state.user,
-                            orderHistoryFilter: OrderHistoryFilter.empty(),
-                          ),
-                        ),
+                    onRefresh: () {
+                      if (context.read<ShipToCodeBloc>().state.haveShipTo) {
+                        context.read<OrderHistoryListBloc>().add(
+                              OrderHistoryListEvent.fetch(
+                                customerCodeInfo: context
+                                    .read<CustomerCodeBloc>()
+                                    .state
+                                    .customerCodeInfo,
+                                salesOrgConfigs:
+                                    context.read<SalesOrgBloc>().state.configs,
+                                shipToInfo: context
+                                    .read<ShipToCodeBloc>()
+                                    .state
+                                    .shipToInfo,
+                                user: context.read<UserBloc>().state.user,
+                                orderHistoryFilter: OrderHistoryFilter.empty(),
+                              ),
+                            );
+                      }
+                    },
                     isLoading: state.isFetching,
                     onLoadingMore: () =>
                         context.read<OrderHistoryListBloc>().add(
@@ -189,6 +206,14 @@ class HistoryTab extends StatelessWidget {
                             ),
                     itemBuilder: (context, index, item) => OrderHistoryListTile(
                       orderHistoryItem: item,
+                      customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                      shipToInfo:
+                          context.read<ShipToCodeBloc>().state.shipToInfo,
+                      orderHistoryBasicInfo:
+                          state.orderHistoryList.orderBasicInformation,
                       currency:
                           context.read<SalesOrgBloc>().state.configs.currency,
                     ),
