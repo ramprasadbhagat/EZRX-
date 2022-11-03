@@ -30,6 +30,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool enableFutureDeliveryDay,
     required bool enablePaymentTerms,
     required String futureDeliveryDay,
+    required bool enableGMC,
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
@@ -55,6 +56,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         enableFutureDeliveryDay: false,
         enablePaymentTerms: false,
         futureDeliveryDay: '',
+        enableGMC: false,
       );
 
   String get getConfigLangauge {

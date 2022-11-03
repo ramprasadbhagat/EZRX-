@@ -174,11 +174,37 @@ class _ListContent extends StatelessWidget {
                     color: ZPColors.lightGray,
                   ),
             ),
+            _GovermentMaterialCode(materialInfo: materialInfo),
             _PriceLabel(materialInfo: materialInfo),
           ],
         ),
         trailing: _FavoriteButton(materialInfo: materialInfo),
       ),
+    );
+  }
+}
+
+class _GovermentMaterialCode extends StatelessWidget {
+  final MaterialInfo materialInfo;
+
+  const _GovermentMaterialCode({Key? key, required this.materialInfo})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SalesOrgBloc, SalesOrgState>(
+      builder: (context, state) {
+        return state.configs.enableGMC &&
+                materialInfo.governmentMaterialCode.isNotEmpty
+            ? Text(
+                '${'Government Material Code:'.tr()} ${materialInfo.governmentMaterialCode}',
+                style: Theme.of(context).textTheme.subtitle2?.apply(
+                      color: ZPColors.lightGray,
+                    ),
+                overflow: TextOverflow.ellipsis,
+              )
+            : const SizedBox.shrink();
+      },
     );
   }
 }
@@ -219,8 +245,8 @@ class _PriceLabel extends StatelessWidget {
                   hidePrice: isHidePrice,
                 )}',
                 style: Theme.of(context).textTheme.bodyText1?.apply(
-                  color: ZPColors.darkGray,
-                ),
+                      color: ZPColors.darkGray,
+                    ),
               ),
               Text(
                 '${'Unit Price: '.tr()}${itemPrice.finalPrice.displayUnitPrice(
@@ -234,8 +260,8 @@ class _PriceLabel extends StatelessWidget {
                   taxes: taxes,
                 )}',
                 style: Theme.of(context).textTheme.bodyText1?.apply(
-                  color: ZPColors.black,
-                ),
+                      color: ZPColors.black,
+                    ),
               ),
             ],
           );

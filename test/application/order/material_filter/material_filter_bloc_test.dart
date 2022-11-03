@@ -69,6 +69,7 @@ void main() {
     enableReferenceNote: false,
     enableSpecialInstructions: false,
     futureDeliveryDay: '',
+    enableGMC: false,
   );
 
   const fakeSelectedFilterCategory = MaterialFilterType.principal;

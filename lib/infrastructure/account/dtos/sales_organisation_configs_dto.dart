@@ -51,6 +51,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
         required bool enablePaymentTerms,
     @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
         required String futureDeliveryDay,
+    @JsonKey(name: 'enableGMC', defaultValue: false)
+        required bool enableGMC,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -79,6 +81,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableFutureDeliveryDay: configs.enableFutureDeliveryDay,
       enablePaymentTerms: configs.enablePaymentTerms,
       futureDeliveryDay: configs.futureDeliveryDay,
+      enableGMC: configs.enableGMC,
     );
   }
 
@@ -106,6 +109,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableFutureDeliveryDay: enableFutureDeliveryDay,
       enablePaymentTerms: enablePaymentTerms,
       futureDeliveryDay: futureDeliveryDay,
+      enableGMC: enableGMC,
     );
   }
 

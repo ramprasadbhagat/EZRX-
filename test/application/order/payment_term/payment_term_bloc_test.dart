@@ -58,6 +58,7 @@ void main() {
     enableReferenceNote: false,
     enableSpecialInstructions: false,
     futureDeliveryDay: '',
+    enableGMC: false,
   );
 
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(

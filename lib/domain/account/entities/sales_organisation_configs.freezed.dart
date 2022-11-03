@@ -38,6 +38,7 @@ mixin _$SalesOrganisationConfigs {
   bool get enableFutureDeliveryDay => throw _privateConstructorUsedError;
   bool get enablePaymentTerms => throw _privateConstructorUsedError;
   String get futureDeliveryDay => throw _privateConstructorUsedError;
+  bool get enableGMC => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrganisationConfigsCopyWith<SalesOrganisationConfigs> get copyWith =>
@@ -71,7 +72,8 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       bool enableMobileNumber,
       bool enableFutureDeliveryDay,
       bool enablePaymentTerms,
-      String futureDeliveryDay});
+      String futureDeliveryDay,
+      bool enableGMC});
 }
 
 /// @nodoc
@@ -107,6 +109,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? enableFutureDeliveryDay = freezed,
     Object? enablePaymentTerms = freezed,
     Object? futureDeliveryDay = freezed,
+    Object? enableGMC = freezed,
   }) {
     return _then(_value.copyWith(
       disableProcessingStatus: disableProcessingStatus == freezed
@@ -197,6 +200,10 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.futureDeliveryDay
           : futureDeliveryDay // ignore: cast_nullable_to_non_nullable
               as String,
+      enableGMC: enableGMC == freezed
+          ? _value.enableGMC
+          : enableGMC // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -231,7 +238,8 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       bool enableMobileNumber,
       bool enableFutureDeliveryDay,
       bool enablePaymentTerms,
-      String futureDeliveryDay});
+      String futureDeliveryDay,
+      bool enableGMC});
 }
 
 /// @nodoc
@@ -270,6 +278,7 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? enableFutureDeliveryDay = freezed,
     Object? enablePaymentTerms = freezed,
     Object? futureDeliveryDay = freezed,
+    Object? enableGMC = freezed,
   }) {
     return _then(_$_SalesOrganisationConfigs(
       disableProcessingStatus: disableProcessingStatus == freezed
@@ -360,6 +369,10 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.futureDeliveryDay
           : futureDeliveryDay // ignore: cast_nullable_to_non_nullable
               as String,
+      enableGMC: enableGMC == freezed
+          ? _value.enableGMC
+          : enableGMC // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -389,7 +402,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       required this.enableMobileNumber,
       required this.enableFutureDeliveryDay,
       required this.enablePaymentTerms,
-      required this.futureDeliveryDay})
+      required this.futureDeliveryDay,
+      required this.enableGMC})
       : _principalList = principalList,
         super._();
 
@@ -442,10 +456,12 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   final bool enablePaymentTerms;
   @override
   final String futureDeliveryDay;
+  @override
+  final bool enableGMC;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay)';
+    return 'SalesOrganisationConfigs(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC)';
   }
 
   @override
@@ -493,7 +509,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
             const DeepCollectionEquality()
                 .equals(other.enablePaymentTerms, enablePaymentTerms) &&
             const DeepCollectionEquality()
-                .equals(other.futureDeliveryDay, futureDeliveryDay));
+                .equals(other.futureDeliveryDay, futureDeliveryDay) &&
+            const DeepCollectionEquality().equals(other.enableGMC, enableGMC));
   }
 
   @override
@@ -520,7 +537,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
         const DeepCollectionEquality().hash(enableMobileNumber),
         const DeepCollectionEquality().hash(enableFutureDeliveryDay),
         const DeepCollectionEquality().hash(enablePaymentTerms),
-        const DeepCollectionEquality().hash(futureDeliveryDay)
+        const DeepCollectionEquality().hash(futureDeliveryDay),
+        const DeepCollectionEquality().hash(enableGMC)
       ]);
 
   @JsonKey(ignore: true)
@@ -553,7 +571,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final bool enableMobileNumber,
       required final bool enableFutureDeliveryDay,
       required final bool enablePaymentTerms,
-      required final String futureDeliveryDay}) = _$_SalesOrganisationConfigs;
+      required final String futureDeliveryDay,
+      required final bool enableGMC}) = _$_SalesOrganisationConfigs;
   const _SalesOrganisationConfigs._() : super._();
 
   @override
@@ -600,6 +619,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   bool get enablePaymentTerms;
   @override
   String get futureDeliveryDay;
+  @override
+  bool get enableGMC;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsCopyWith<_$_SalesOrganisationConfigs>
