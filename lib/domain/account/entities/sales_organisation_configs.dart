@@ -8,6 +8,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
   const SalesOrganisationConfigs._();
 
   const factory SalesOrganisationConfigs({
+    required bool disableProcessingStatus,
     required Currency currency,
     required bool hideCustomer,
     required bool enableGimmickMaterial,
@@ -32,6 +33,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
+        disableProcessingStatus: false,
         currency: Currency(''),
         hideCustomer: false,
         enableGimmickMaterial: false,

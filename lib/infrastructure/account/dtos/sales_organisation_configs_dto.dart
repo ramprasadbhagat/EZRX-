@@ -10,6 +10,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
   const SalesOrganisationConfigsDto._();
 
   const factory SalesOrganisationConfigsDto({
+    @JsonKey(name: 'disableProcessingStatus')
+        required bool disableProcessingStatus,
     @JsonKey(name: 'currency') required String currency,
     @JsonKey(name: 'hideCustomer', defaultValue: false)
         required bool hideCustomer,
@@ -55,6 +57,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     SalesOrganisationConfigs configs,
   ) {
     return SalesOrganisationConfigsDto(
+      disableProcessingStatus: configs.disableProcessingStatus,
       currency: configs.currency.getOrCrash(),
       hideCustomer: configs.hideCustomer,
       enableGimmickMaterial: configs.enableGimmickMaterial,
@@ -81,6 +84,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
 
   SalesOrganisationConfigs toDomain() {
     return SalesOrganisationConfigs(
+      disableProcessingStatus: disableProcessingStatus,
       currency: Currency(currency),
       hideCustomer: hideCustomer,
       enableGimmickMaterial: enableGimmickMaterial,

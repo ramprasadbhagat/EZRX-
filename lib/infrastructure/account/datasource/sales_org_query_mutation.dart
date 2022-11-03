@@ -77,6 +77,7 @@ class SalesOrgQueryMutation {
           created_at
           updated_at
           enableLoyaltyScheme
+          disableProcessingStatus
        }
       }
     ''';

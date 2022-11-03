@@ -21,6 +21,8 @@ SalesOrganisationConfigsDto _$SalesOrganisationConfigsDtoFromJson(
 
 /// @nodoc
 mixin _$SalesOrganisationConfigsDto {
+  @JsonKey(name: 'disableProcessingStatus')
+  bool get disableProcessingStatus => throw _privateConstructorUsedError;
   @JsonKey(name: 'currency')
   String get currency => throw _privateConstructorUsedError;
   @JsonKey(name: 'hideCustomer', defaultValue: false)
@@ -78,7 +80,9 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
           $Res Function(SalesOrganisationConfigsDto) then) =
       _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'currency')
+      {@JsonKey(name: 'disableProcessingStatus')
+          bool disableProcessingStatus,
+      @JsonKey(name: 'currency')
           String currency,
       @JsonKey(name: 'hideCustomer', defaultValue: false)
           bool hideCustomer,
@@ -134,6 +138,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? disableProcessingStatus = freezed,
     Object? currency = freezed,
     Object? hideCustomer = freezed,
     Object? enableGimmickMaterial = freezed,
@@ -157,6 +162,10 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? futureDeliveryDay = freezed,
   }) {
     return _then(_value.copyWith(
+      disableProcessingStatus: disableProcessingStatus == freezed
+          ? _value.disableProcessingStatus
+          : disableProcessingStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
       currency: currency == freezed
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
@@ -254,7 +263,9 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
       __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'currency')
+      {@JsonKey(name: 'disableProcessingStatus')
+          bool disableProcessingStatus,
+      @JsonKey(name: 'currency')
           String currency,
       @JsonKey(name: 'hideCustomer', defaultValue: false)
           bool hideCustomer,
@@ -314,6 +325,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? disableProcessingStatus = freezed,
     Object? currency = freezed,
     Object? hideCustomer = freezed,
     Object? enableGimmickMaterial = freezed,
@@ -337,6 +349,10 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? futureDeliveryDay = freezed,
   }) {
     return _then(_$_SalesOrganisationConfigsDto(
+      disableProcessingStatus: disableProcessingStatus == freezed
+          ? _value.disableProcessingStatus
+          : disableProcessingStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
       currency: currency == freezed
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
@@ -429,7 +445,9 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   const _$_SalesOrganisationConfigsDto(
-      {@JsonKey(name: 'currency')
+      {@JsonKey(name: 'disableProcessingStatus')
+          required this.disableProcessingStatus,
+      @JsonKey(name: 'currency')
           required this.currency,
       @JsonKey(name: 'hideCustomer', defaultValue: false)
           required this.hideCustomer,
@@ -478,6 +496,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   factory _$_SalesOrganisationConfigsDto.fromJson(Map<String, dynamic> json) =>
       _$$_SalesOrganisationConfigsDtoFromJson(json);
 
+  @override
+  @JsonKey(name: 'disableProcessingStatus')
+  final bool disableProcessingStatus;
   @override
   @JsonKey(name: 'currency')
   final String currency;
@@ -550,7 +571,7 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay)';
   }
 
   @override
@@ -558,6 +579,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SalesOrganisationConfigsDto &&
+            const DeepCollectionEquality().equals(
+                other.disableProcessingStatus, disableProcessingStatus) &&
             const DeepCollectionEquality().equals(other.currency, currency) &&
             const DeepCollectionEquality()
                 .equals(other.hideCustomer, hideCustomer) &&
@@ -603,6 +626,7 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
+        const DeepCollectionEquality().hash(disableProcessingStatus),
         const DeepCollectionEquality().hash(currency),
         const DeepCollectionEquality().hash(hideCustomer),
         const DeepCollectionEquality().hash(enableGimmickMaterial),
@@ -643,7 +667,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
 abstract class _SalesOrganisationConfigsDto
     extends SalesOrganisationConfigsDto {
   const factory _SalesOrganisationConfigsDto(
-          {@JsonKey(name: 'currency')
+          {@JsonKey(name: 'disableProcessingStatus')
+              required final bool disableProcessingStatus,
+          @JsonKey(name: 'currency')
               required final String currency,
           @JsonKey(name: 'hideCustomer', defaultValue: false)
               required final bool hideCustomer,
@@ -692,6 +718,9 @@ abstract class _SalesOrganisationConfigsDto
   factory _SalesOrganisationConfigsDto.fromJson(Map<String, dynamic> json) =
       _$_SalesOrganisationConfigsDto.fromJson;
 
+  @override
+  @JsonKey(name: 'disableProcessingStatus')
+  bool get disableProcessingStatus;
   @override
   @JsonKey(name: 'currency')
   String get currency;

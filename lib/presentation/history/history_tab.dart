@@ -63,7 +63,9 @@ class HistoryTab extends StatelessWidget {
                             ),
                           ).tr(),
                           Padding(
-                            padding: const EdgeInsets.all(8.0,),
+                            padding: const EdgeInsets.all(
+                              8.0,
+                            ),
                             child: Stack(
                               children: <Widget>[
                                 const FittedBox(
@@ -81,7 +83,8 @@ class HistoryTab extends StatelessWidget {
                                     if (state.isAppliedFilter) {
                                       return Positioned(
                                         key: const ValueKey(
-                                            'Filter_list_not_empty',),
+                                          'Filter_list_not_empty',
+                                        ),
                                         right: 0,
                                         child: Container(
                                           decoration: const BoxDecoration(
@@ -216,6 +219,8 @@ class HistoryTab extends StatelessWidget {
                           state.orderHistoryList.orderBasicInformation,
                       currency:
                           context.read<SalesOrgBloc>().state.configs.currency,
+                      salesOrgConfigs:
+                          context.read<SalesOrgBloc>().state.configs,
                     ),
                     items: state.orderHistoryList.orderHistoryItems,
                   );

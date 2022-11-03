@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SalesOrganisationConfigs {
+  bool get disableProcessingStatus => throw _privateConstructorUsedError;
   Currency get currency => throw _privateConstructorUsedError;
   bool get hideCustomer => throw _privateConstructorUsedError;
   bool get enableGimmickMaterial => throw _privateConstructorUsedError;
@@ -49,7 +50,8 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
           $Res Function(SalesOrganisationConfigs) then) =
       _$SalesOrganisationConfigsCopyWithImpl<$Res>;
   $Res call(
-      {Currency currency,
+      {bool disableProcessingStatus,
+      Currency currency,
       bool hideCustomer,
       bool enableGimmickMaterial,
       bool languageFilter,
@@ -83,6 +85,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? disableProcessingStatus = freezed,
     Object? currency = freezed,
     Object? hideCustomer = freezed,
     Object? enableGimmickMaterial = freezed,
@@ -106,6 +109,10 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? futureDeliveryDay = freezed,
   }) {
     return _then(_value.copyWith(
+      disableProcessingStatus: disableProcessingStatus == freezed
+          ? _value.disableProcessingStatus
+          : disableProcessingStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
       currency: currency == freezed
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
@@ -203,7 +210,8 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       __$$_SalesOrganisationConfigsCopyWithImpl<$Res>;
   @override
   $Res call(
-      {Currency currency,
+      {bool disableProcessingStatus,
+      Currency currency,
       bool hideCustomer,
       bool enableGimmickMaterial,
       bool languageFilter,
@@ -240,6 +248,7 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? disableProcessingStatus = freezed,
     Object? currency = freezed,
     Object? hideCustomer = freezed,
     Object? enableGimmickMaterial = freezed,
@@ -263,6 +272,10 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? futureDeliveryDay = freezed,
   }) {
     return _then(_$_SalesOrganisationConfigs(
+      disableProcessingStatus: disableProcessingStatus == freezed
+          ? _value.disableProcessingStatus
+          : disableProcessingStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
       currency: currency == freezed
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
@@ -355,7 +368,8 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
 
 class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   const _$_SalesOrganisationConfigs(
-      {required this.currency,
+      {required this.disableProcessingStatus,
+      required this.currency,
       required this.hideCustomer,
       required this.enableGimmickMaterial,
       required this.languageFilter,
@@ -379,6 +393,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       : _principalList = principalList,
         super._();
 
+  @override
+  final bool disableProcessingStatus;
   @override
   final Currency currency;
   @override
@@ -429,7 +445,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay)';
+    return 'SalesOrganisationConfigs(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay)';
   }
 
   @override
@@ -437,6 +453,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SalesOrganisationConfigs &&
+            const DeepCollectionEquality().equals(
+                other.disableProcessingStatus, disableProcessingStatus) &&
             const DeepCollectionEquality().equals(other.currency, currency) &&
             const DeepCollectionEquality()
                 .equals(other.hideCustomer, hideCustomer) &&
@@ -481,6 +499,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
+        const DeepCollectionEquality().hash(disableProcessingStatus),
         const DeepCollectionEquality().hash(currency),
         const DeepCollectionEquality().hash(hideCustomer),
         const DeepCollectionEquality().hash(enableGimmickMaterial),
@@ -513,7 +532,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
 
 abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   const factory _SalesOrganisationConfigs(
-      {required final Currency currency,
+      {required final bool disableProcessingStatus,
+      required final Currency currency,
       required final bool hideCustomer,
       required final bool enableGimmickMaterial,
       required final bool languageFilter,
@@ -536,6 +556,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final String futureDeliveryDay}) = _$_SalesOrganisationConfigs;
   const _SalesOrganisationConfigs._() : super._();
 
+  @override
+  bool get disableProcessingStatus;
   @override
   Currency get currency;
   @override

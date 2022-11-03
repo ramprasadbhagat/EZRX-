@@ -36,6 +36,7 @@ void main() {
   );
 
   final fakeSaleOrgConfig = SalesOrganisationConfigs(
+    disableProcessingStatus: false,
     currency: Currency(''),
     hideCustomer: false,
     disableOrderType: false,
