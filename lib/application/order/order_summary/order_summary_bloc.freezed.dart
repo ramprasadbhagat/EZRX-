@@ -21,7 +21,7 @@ mixin _$OrderSummaryEvent {
     required TResult Function() initialized,
     required TResult Function() stepContinue,
     required TResult Function() stepCancel,
-    required TResult Function() fetch,
+    required TResult Function(int step) stepTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +29,7 @@ mixin _$OrderSummaryEvent {
     TResult Function()? initialized,
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
-    TResult Function()? fetch,
+    TResult Function(int step)? stepTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +37,7 @@ mixin _$OrderSummaryEvent {
     TResult Function()? initialized,
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
-    TResult Function()? fetch,
+    TResult Function(int step)? stepTapped,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ mixin _$OrderSummaryEvent {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_StepContinue value) stepContinue,
     required TResult Function(_StepCancel value) stepCancel,
-    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_StepTapped value) stepTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,7 +54,7 @@ mixin _$OrderSummaryEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_StepContinue value)? stepContinue,
     TResult Function(_StepCancel value)? stepCancel,
-    TResult Function(_Fetch value)? fetch,
+    TResult Function(_StepTapped value)? stepTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,7 +62,7 @@ mixin _$OrderSummaryEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_StepContinue value)? stepContinue,
     TResult Function(_StepCancel value)? stepCancel,
-    TResult Function(_Fetch value)? fetch,
+    TResult Function(_StepTapped value)? stepTapped,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -129,7 +129,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function() initialized,
     required TResult Function() stepContinue,
     required TResult Function() stepCancel,
-    required TResult Function() fetch,
+    required TResult Function(int step) stepTapped,
   }) {
     return initialized();
   }
@@ -140,7 +140,7 @@ class _$_Initialized implements _Initialized {
     TResult Function()? initialized,
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
-    TResult Function()? fetch,
+    TResult Function(int step)? stepTapped,
   }) {
     return initialized?.call();
   }
@@ -151,7 +151,7 @@ class _$_Initialized implements _Initialized {
     TResult Function()? initialized,
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
-    TResult Function()? fetch,
+    TResult Function(int step)? stepTapped,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -166,7 +166,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_StepContinue value) stepContinue,
     required TResult Function(_StepCancel value) stepCancel,
-    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_StepTapped value) stepTapped,
   }) {
     return initialized(this);
   }
@@ -177,7 +177,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_StepContinue value)? stepContinue,
     TResult Function(_StepCancel value)? stepCancel,
-    TResult Function(_Fetch value)? fetch,
+    TResult Function(_StepTapped value)? stepTapped,
   }) {
     return initialized?.call(this);
   }
@@ -188,7 +188,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_StepContinue value)? stepContinue,
     TResult Function(_StepCancel value)? stepCancel,
-    TResult Function(_Fetch value)? fetch,
+    TResult Function(_StepTapped value)? stepTapped,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -246,7 +246,7 @@ class _$_StepContinue implements _StepContinue {
     required TResult Function() initialized,
     required TResult Function() stepContinue,
     required TResult Function() stepCancel,
-    required TResult Function() fetch,
+    required TResult Function(int step) stepTapped,
   }) {
     return stepContinue();
   }
@@ -257,7 +257,7 @@ class _$_StepContinue implements _StepContinue {
     TResult Function()? initialized,
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
-    TResult Function()? fetch,
+    TResult Function(int step)? stepTapped,
   }) {
     return stepContinue?.call();
   }
@@ -268,7 +268,7 @@ class _$_StepContinue implements _StepContinue {
     TResult Function()? initialized,
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
-    TResult Function()? fetch,
+    TResult Function(int step)? stepTapped,
     required TResult orElse(),
   }) {
     if (stepContinue != null) {
@@ -283,7 +283,7 @@ class _$_StepContinue implements _StepContinue {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_StepContinue value) stepContinue,
     required TResult Function(_StepCancel value) stepCancel,
-    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_StepTapped value) stepTapped,
   }) {
     return stepContinue(this);
   }
@@ -294,7 +294,7 @@ class _$_StepContinue implements _StepContinue {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_StepContinue value)? stepContinue,
     TResult Function(_StepCancel value)? stepCancel,
-    TResult Function(_Fetch value)? fetch,
+    TResult Function(_StepTapped value)? stepTapped,
   }) {
     return stepContinue?.call(this);
   }
@@ -305,7 +305,7 @@ class _$_StepContinue implements _StepContinue {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_StepContinue value)? stepContinue,
     TResult Function(_StepCancel value)? stepCancel,
-    TResult Function(_Fetch value)? fetch,
+    TResult Function(_StepTapped value)? stepTapped,
     required TResult orElse(),
   }) {
     if (stepContinue != null) {
@@ -363,7 +363,7 @@ class _$_StepCancel implements _StepCancel {
     required TResult Function() initialized,
     required TResult Function() stepContinue,
     required TResult Function() stepCancel,
-    required TResult Function() fetch,
+    required TResult Function(int step) stepTapped,
   }) {
     return stepCancel();
   }
@@ -374,7 +374,7 @@ class _$_StepCancel implements _StepCancel {
     TResult Function()? initialized,
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
-    TResult Function()? fetch,
+    TResult Function(int step)? stepTapped,
   }) {
     return stepCancel?.call();
   }
@@ -385,7 +385,7 @@ class _$_StepCancel implements _StepCancel {
     TResult Function()? initialized,
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
-    TResult Function()? fetch,
+    TResult Function(int step)? stepTapped,
     required TResult orElse(),
   }) {
     if (stepCancel != null) {
@@ -400,7 +400,7 @@ class _$_StepCancel implements _StepCancel {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_StepContinue value) stepContinue,
     required TResult Function(_StepCancel value) stepCancel,
-    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_StepTapped value) stepTapped,
   }) {
     return stepCancel(this);
   }
@@ -411,7 +411,7 @@ class _$_StepCancel implements _StepCancel {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_StepContinue value)? stepContinue,
     TResult Function(_StepCancel value)? stepCancel,
-    TResult Function(_Fetch value)? fetch,
+    TResult Function(_StepTapped value)? stepTapped,
   }) {
     return stepCancel?.call(this);
   }
@@ -422,7 +422,7 @@ class _$_StepCancel implements _StepCancel {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_StepContinue value)? stepContinue,
     TResult Function(_StepCancel value)? stepCancel,
-    TResult Function(_Fetch value)? fetch,
+    TResult Function(_StepTapped value)? stepTapped,
     required TResult orElse(),
   }) {
     if (stepCancel != null) {
@@ -437,39 +437,66 @@ abstract class _StepCancel implements OrderSummaryEvent {
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$_StepTappedCopyWith<$Res> {
+  factory _$$_StepTappedCopyWith(
+          _$_StepTapped value, $Res Function(_$_StepTapped) then) =
+      __$$_StepTappedCopyWithImpl<$Res>;
+  $Res call({int step});
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res> extends _$OrderSummaryEventCopyWithImpl<$Res>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
-      : super(_value, (v) => _then(v as _$_Fetch));
+class __$$_StepTappedCopyWithImpl<$Res>
+    extends _$OrderSummaryEventCopyWithImpl<$Res>
+    implements _$$_StepTappedCopyWith<$Res> {
+  __$$_StepTappedCopyWithImpl(
+      _$_StepTapped _value, $Res Function(_$_StepTapped) _then)
+      : super(_value, (v) => _then(v as _$_StepTapped));
 
   @override
-  _$_Fetch get _value => super._value as _$_Fetch;
+  _$_StepTapped get _value => super._value as _$_StepTapped;
+
+  @override
+  $Res call({
+    Object? step = freezed,
+  }) {
+    return _then(_$_StepTapped(
+      step: step == freezed
+          ? _value.step
+          : step // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch();
+class _$_StepTapped implements _StepTapped {
+  const _$_StepTapped({required this.step});
+
+  @override
+  final int step;
 
   @override
   String toString() {
-    return 'OrderSummaryEvent.fetch()';
+    return 'OrderSummaryEvent.stepTapped(step: $step)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Fetch);
+        (other.runtimeType == runtimeType &&
+            other is _$_StepTapped &&
+            const DeepCollectionEquality().equals(other.step, step));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(step));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_StepTappedCopyWith<_$_StepTapped> get copyWith =>
+      __$$_StepTappedCopyWithImpl<_$_StepTapped>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -477,9 +504,9 @@ class _$_Fetch implements _Fetch {
     required TResult Function() initialized,
     required TResult Function() stepContinue,
     required TResult Function() stepCancel,
-    required TResult Function() fetch,
+    required TResult Function(int step) stepTapped,
   }) {
-    return fetch();
+    return stepTapped(step);
   }
 
   @override
@@ -488,9 +515,9 @@ class _$_Fetch implements _Fetch {
     TResult Function()? initialized,
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
-    TResult Function()? fetch,
+    TResult Function(int step)? stepTapped,
   }) {
-    return fetch?.call();
+    return stepTapped?.call(step);
   }
 
   @override
@@ -499,11 +526,11 @@ class _$_Fetch implements _Fetch {
     TResult Function()? initialized,
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
-    TResult Function()? fetch,
+    TResult Function(int step)? stepTapped,
     required TResult orElse(),
   }) {
-    if (fetch != null) {
-      return fetch();
+    if (stepTapped != null) {
+      return stepTapped(step);
     }
     return orElse();
   }
@@ -514,9 +541,9 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_StepContinue value) stepContinue,
     required TResult Function(_StepCancel value) stepCancel,
-    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_StepTapped value) stepTapped,
   }) {
-    return fetch(this);
+    return stepTapped(this);
   }
 
   @override
@@ -525,9 +552,9 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_StepContinue value)? stepContinue,
     TResult Function(_StepCancel value)? stepCancel,
-    TResult Function(_Fetch value)? fetch,
+    TResult Function(_StepTapped value)? stepTapped,
   }) {
-    return fetch?.call(this);
+    return stepTapped?.call(this);
   }
 
   @override
@@ -536,18 +563,23 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_StepContinue value)? stepContinue,
     TResult Function(_StepCancel value)? stepCancel,
-    TResult Function(_Fetch value)? fetch,
+    TResult Function(_StepTapped value)? stepTapped,
     required TResult orElse(),
   }) {
-    if (fetch != null) {
-      return fetch(this);
+    if (stepTapped != null) {
+      return stepTapped(this);
     }
     return orElse();
   }
 }
 
-abstract class _Fetch implements OrderSummaryEvent {
-  const factory _Fetch() = _$_Fetch;
+abstract class _StepTapped implements OrderSummaryEvent {
+  const factory _StepTapped({required final int step}) = _$_StepTapped;
+
+  int get step;
+  @JsonKey(ignore: true)
+  _$$_StepTappedCopyWith<_$_StepTapped> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

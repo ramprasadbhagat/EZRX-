@@ -24,6 +24,7 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
     required List<BillToInfo> billToInfos,
     required CustomerAttr7 customerAttr7,
     required CustomerGrp4 customerGrp4,
+    required String region,
   }) = _CustomerCodeInfo;
 
   factory CustomerCodeInfo.empty() => CustomerCodeInfo(
@@ -50,5 +51,6 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
         billToInfos: <BillToInfo>[],
         customerAttr7: CustomerAttr7(''),
         customerGrp4: CustomerGrp4(''),
+        region: '',
       );
 }

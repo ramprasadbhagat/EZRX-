@@ -13,6 +13,6 @@ class OrderSummaryState with _$OrderSummaryState {
   factory OrderSummaryState.initial() => OrderSummaryState(
         apiFailureOrSuccessOption: none(),
         step: 0,
-        maxSteps: 4,
+        maxSteps: 5,
       );
 }

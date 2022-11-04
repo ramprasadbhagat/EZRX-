@@ -35,7 +35,12 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
           step: state.step - 1 >= 0 ? state.step - 1 : 0,
         ));
       },
-      fetch: (value) {},
+      stepTapped: (value) async {
+        emit(OrderSummaryState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          step: value.step,
+        ));
+      },
     );
   }
 }

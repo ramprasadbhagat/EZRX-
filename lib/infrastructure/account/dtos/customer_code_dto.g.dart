@@ -31,6 +31,7 @@ _$_CustomerCodeDto _$$_CustomerCodeDtoFromJson(Map<String, dynamic> json) =>
           .toList(),
       customerAttr7: json['customerAttr7'] as String,
       customerGrp4: json['customerGrp4'] as String,
+      region: json['region'] as String,
     );
 
 Map<String, dynamic> _$$_CustomerCodeDtoToJson(_$_CustomerCodeDto instance) =>
@@ -54,4 +55,5 @@ Map<String, dynamic> _$$_CustomerCodeDtoToJson(_$_CustomerCodeDto instance) =>
       'billTo': instance.billToInfos,
       'customerAttr7': instance.customerAttr7,
       'customerGrp4': instance.customerGrp4,
+      'region': instance.region,
     };

@@ -5,5 +5,7 @@ class OrderSummaryEvent with _$OrderSummaryEvent {
   const factory OrderSummaryEvent.initialized() = _Initialized;
   const factory OrderSummaryEvent.stepContinue() = _StepContinue;
   const factory OrderSummaryEvent.stepCancel() = _StepCancel;
-  const factory OrderSummaryEvent.fetch() = _Fetch;
+  const factory OrderSummaryEvent.stepTapped({
+    required int step,
+  }) = _StepTapped;
 }

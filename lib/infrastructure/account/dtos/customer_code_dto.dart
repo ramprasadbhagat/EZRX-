@@ -34,6 +34,7 @@ class CustomerCodeDto with _$CustomerCodeDto {
     @JsonKey(name: 'billTo') required List<BillToDto> billToInfos,
     @JsonKey(name: 'customerAttr7') required String customerAttr7,
     @JsonKey(name: 'customerGrp4') required String customerGrp4,
+    @JsonKey(name: 'region') required String region,
   }) = _CustomerCodeDto;
 
   factory CustomerCodeDto.fromDomain(CustomerCodeInfo customerCodeInfo) {
@@ -61,6 +62,7 @@ class CustomerCodeDto with _$CustomerCodeDto {
           .toList(),
       customerAttr7: customerCodeInfo.customerAttr7.getOrCrash(),
       customerGrp4: customerCodeInfo.customerGrp4.getOrCrash(),
+      region: customerCodeInfo.region,
     );
   }
 
@@ -89,6 +91,7 @@ class CustomerCodeDto with _$CustomerCodeDto {
       billToInfos: billToInfos.map((e) => e.toDomain()).toList(),
       customerAttr7: CustomerAttr7(customerAttr7),
       customerGrp4: CustomerGrp4(customerGrp4),
+      region: region,
     );
   }
 

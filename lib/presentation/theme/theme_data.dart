@@ -13,6 +13,12 @@ final appThemeData = {
     primaryTextTheme: ThemeData.light().textTheme.apply(fontFamily: 'Poppins'),
     scaffoldBackgroundColor: ZPColors.extraLightGray,
     primaryColor: ZPColors.primary,
+    canvasColor: ZPColors.white,
+    colorScheme: const ColorScheme.light().copyWith(
+      primary: ZPColors.primary,
+      background: ZPColors.white,
+      secondary: ZPColors.secondary,
+    ),
     // primarySwatch: ZPColors.kPrimaryColor,
     // fontFamily: 'Poppins',
     iconTheme: const IconThemeData(
