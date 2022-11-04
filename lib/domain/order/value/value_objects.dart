@@ -152,9 +152,11 @@ class MaterialPrice extends ValueObject<double> {
     required int vatValue,
     required MaterialTaxClassification taxClassification,
     required List taxes,
+    required bool isFoc,
   }) {
     return unitPrice(
       currency,
+      isFoc,
       hidePrice,
       isVNUser,
       enableVat,
@@ -169,16 +171,29 @@ class MaterialPrice extends ValueObject<double> {
   String displayWithCurrency({
     required Currency currency,
     required bool hidePrice,
+    required bool isFoc,
   }) {
-    return currencyAlign(currency, hidePrice, value.getOrElse(() => 0));
+    return currencyAlign(
+      currency,
+      hidePrice,
+      value.getOrElse(() => 0),
+      isFoc,
+    );
   }
 
   String displayTotal({
     required Currency currency,
     required bool hidePrice,
     required int quantity,
+    required bool isFoc,
   }) {
-    return totalPrice(currency, hidePrice, value.getOrElse(() => 0), quantity);
+    return totalPrice(
+      currency,
+      isFoc,
+      hidePrice,
+      value.getOrElse(() => 0),
+      quantity,
+    );
   }
 
   bool isEmpty() => value.getOrElse(() => 0) == 0;

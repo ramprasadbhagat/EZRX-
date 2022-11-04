@@ -151,8 +151,7 @@ class AppRouter extends _i26.RootStackRouter {
     },
     SavedOrderListPageRoute.name: (routeData) {
       return _i26.MaterialPageX<dynamic>(
-          routeData: routeData,
-          child: _i26.WrappedRoute(child: const _i20.SavedOrderListPage()));
+          routeData: routeData, child: const _i20.SavedOrderListPage());
     },
     HistoryDetailsRoute.name: (routeData) {
       final args = routeData.argsAs<HistoryDetailsRouteArgs>();

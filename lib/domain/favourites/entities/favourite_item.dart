@@ -13,6 +13,7 @@ class Favourite with _$Favourite {
     required bool isFOC,
     required bool isTenderContract,
     required String materialDescription,
+    @Default(false) bool isWaitingStatusUpdate,
   }) = _Favourite;
 
   factory Favourite.empty() => Favourite(

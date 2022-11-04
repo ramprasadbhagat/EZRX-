@@ -76,7 +76,6 @@ class SavedOrderMaterialItem extends StatelessWidget {
                   current.materialDetails[itemPriceQuery],
               builder: (context, state) {
                 final itemInfo = state.materialDetails[itemPriceQuery]?.price;
-
                 if (itemInfo != null) {
                   final currentCurrency =
                       context.read<SalesOrgBloc>().state.configs.currency;
@@ -84,6 +83,7 @@ class SavedOrderMaterialItem extends StatelessWidget {
 
                   return Text(
                     itemInfo.finalPrice.displayWithCurrency(
+                      isFoc: itemInfo.isFOC,
                       currency: currentCurrency,
                       hidePrice: isHidePrice,
                     ),

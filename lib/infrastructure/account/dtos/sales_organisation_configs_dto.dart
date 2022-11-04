@@ -37,6 +37,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
         required bool enableTaxClassification,
     @JsonKey(name: 'enableVat', defaultValue: false) required bool enableVat,
     @JsonKey(name: 'vatValue', defaultValue: 0) required int vatValue,
+    @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
+        required bool materialWithoutPrice,
     @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
         required bool enableSpecialInstructions,
     @JsonKey(name: 'enableReferenceNote', defaultValue: false)
@@ -74,6 +76,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableTaxClassification: configs.enableTaxClassification,
       enableVat: configs.enableVat,
       vatValue: configs.vatValue,
+      materialWithoutPrice: configs.materialWithoutPrice,
       enableSpecialInstructions: configs.enableSpecialInstructions,
       enableReferenceNote: configs.enableReferenceNote,
       enableCollectiveNumber: configs.enableCollectiveNumber,
@@ -102,6 +105,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableTaxClassification: enableTaxClassification,
       enableVat: enableVat,
       vatValue: vatValue,
+      materialWithoutPrice: materialWithoutPrice,
       enableSpecialInstructions: enableSpecialInstructions,
       enableReferenceNote: enableReferenceNote,
       enableCollectiveNumber: enableCollectiveNumber,

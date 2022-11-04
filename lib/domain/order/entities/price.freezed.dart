@@ -30,6 +30,7 @@ mixin _$Price {
   MaterialPrice get finalTotalPrice => throw _privateConstructorUsedError;
   bool get additionalBonusEligible => throw _privateConstructorUsedError;
   bool get isValid => throw _privateConstructorUsedError;
+  bool get isFOC => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PriceCopyWith<Price> get copyWith => throw _privateConstructorUsedError;
@@ -53,7 +54,8 @@ abstract class $PriceCopyWith<$Res> {
       MaterialPrice finalPrice,
       MaterialPrice finalTotalPrice,
       bool additionalBonusEligible,
-      bool isValid});
+      bool isValid,
+      bool isFOC});
 }
 
 /// @nodoc
@@ -80,6 +82,7 @@ class _$PriceCopyWithImpl<$Res> implements $PriceCopyWith<$Res> {
     Object? finalTotalPrice = freezed,
     Object? additionalBonusEligible = freezed,
     Object? isValid = freezed,
+    Object? isFOC = freezed,
   }) {
     return _then(_value.copyWith(
       materialNumber: materialNumber == freezed
@@ -138,6 +141,10 @@ class _$PriceCopyWithImpl<$Res> implements $PriceCopyWith<$Res> {
           ? _value.isValid
           : isValid // ignore: cast_nullable_to_non_nullable
               as bool,
+      isFOC: isFOC == freezed
+          ? _value.isFOC
+          : isFOC // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -161,7 +168,8 @@ abstract class _$$_PriceCopyWith<$Res> implements $PriceCopyWith<$Res> {
       MaterialPrice finalPrice,
       MaterialPrice finalTotalPrice,
       bool additionalBonusEligible,
-      bool isValid});
+      bool isValid,
+      bool isFOC});
 }
 
 /// @nodoc
@@ -189,6 +197,7 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res>
     Object? finalTotalPrice = freezed,
     Object? additionalBonusEligible = freezed,
     Object? isValid = freezed,
+    Object? isFOC = freezed,
   }) {
     return _then(_$_Price(
       materialNumber: materialNumber == freezed
@@ -247,6 +256,10 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res>
           ? _value.isValid
           : isValid // ignore: cast_nullable_to_non_nullable
               as bool,
+      isFOC: isFOC == freezed
+          ? _value.isFOC
+          : isFOC // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -268,7 +281,8 @@ class _$_Price extends _Price {
       required this.finalPrice,
       required this.finalTotalPrice,
       required this.additionalBonusEligible,
-      required this.isValid})
+      this.isValid = true,
+      this.isFOC = false})
       : _rules = rules,
         _tiers = tiers,
         _bonuses = bonuses,
@@ -322,11 +336,15 @@ class _$_Price extends _Price {
   @override
   final bool additionalBonusEligible;
   @override
+  @JsonKey()
   final bool isValid;
+  @override
+  @JsonKey()
+  final bool isFOC;
 
   @override
   String toString() {
-    return 'Price(materialNumber: $materialNumber, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, overrideRulePresent: $overrideRulePresent, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, zmgDiscount: $zmgDiscount, lastPrice: $lastPrice, finalPrice: $finalPrice, finalTotalPrice: $finalTotalPrice, additionalBonusEligible: $additionalBonusEligible, isValid: $isValid)';
+    return 'Price(materialNumber: $materialNumber, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, overrideRulePresent: $overrideRulePresent, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, zmgDiscount: $zmgDiscount, lastPrice: $lastPrice, finalPrice: $finalPrice, finalTotalPrice: $finalTotalPrice, additionalBonusEligible: $additionalBonusEligible, isValid: $isValid, isFOC: $isFOC)';
   }
 
   @override
@@ -355,7 +373,8 @@ class _$_Price extends _Price {
                 .equals(other.finalTotalPrice, finalTotalPrice) &&
             const DeepCollectionEquality().equals(
                 other.additionalBonusEligible, additionalBonusEligible) &&
-            const DeepCollectionEquality().equals(other.isValid, isValid));
+            const DeepCollectionEquality().equals(other.isValid, isValid) &&
+            const DeepCollectionEquality().equals(other.isFOC, isFOC));
   }
 
   @override
@@ -374,7 +393,8 @@ class _$_Price extends _Price {
       const DeepCollectionEquality().hash(finalPrice),
       const DeepCollectionEquality().hash(finalTotalPrice),
       const DeepCollectionEquality().hash(additionalBonusEligible),
-      const DeepCollectionEquality().hash(isValid));
+      const DeepCollectionEquality().hash(isValid),
+      const DeepCollectionEquality().hash(isFOC));
 
   @JsonKey(ignore: true)
   @override
@@ -397,7 +417,8 @@ abstract class _Price extends Price {
       required final MaterialPrice finalPrice,
       required final MaterialPrice finalTotalPrice,
       required final bool additionalBonusEligible,
-      required final bool isValid}) = _$_Price;
+      final bool isValid,
+      final bool isFOC}) = _$_Price;
   const _Price._() : super._();
 
   @override
@@ -428,6 +449,8 @@ abstract class _Price extends Price {
   bool get additionalBonusEligible;
   @override
   bool get isValid;
+  @override
+  bool get isFOC;
   @override
   @JsonKey(ignore: true)
   _$$_PriceCopyWith<_$_Price> get copyWith =>

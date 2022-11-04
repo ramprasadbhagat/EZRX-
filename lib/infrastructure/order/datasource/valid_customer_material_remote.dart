@@ -40,7 +40,7 @@ class ValidCustomerMaterialRemoteDataSource {
           'variables': {
             'input': {
               'customerShipToCode': customerCode,
-              'customerSoldToCode': customerCode,
+              'customerSoldToCode': shipToCode,
               'salesOrganisation': salesOrganisation,
               'materialNumberList': materialList,
               'focMaterialNumberList': focMaterialList,

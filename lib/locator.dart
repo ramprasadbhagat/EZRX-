@@ -28,7 +28,6 @@ import 'package:ezrxmobile/application/order/order_history_list/order_history_li
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
-import 'package:ezrxmobile/application/order/valid_customer_material/valid_customer_material_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
@@ -959,7 +958,8 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => MaterialPriceDetailBloc(
-      locator<MaterialPriceDetailRepository>(),
+      priceRepository: locator<MaterialPriceDetailRepository>(),
+      validateRepository: locator<ValidCustomerMaterialRepository>(),
     ),
   );
 
@@ -990,13 +990,6 @@ void setupLocator() {
       appMethods: locator<AppMethods>(),
       localDataSource: locator<ValidCustomerMaterialLocalDataSource>(),
       remoteDataSource: locator<ValidCustomerMaterialRemoteDataSource>(),
-    ),
-  );
-
-  locator.registerFactory(
-    () => ValidCustomerMaterialBloc(
-      validCustomerMaterialRepository:
-          locator<ValidCustomerMaterialRepository>(),
     ),
   );
 

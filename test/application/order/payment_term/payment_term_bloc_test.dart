@@ -51,6 +51,7 @@ void main() {
     enableTaxClassification: false,
     enableVat: false,
     vatValue: 0,
+    materialWithoutPrice: false,
     enableCollectiveNumber: false,
     enableFutureDeliveryDay: false,
     enableMobileNumber: false,

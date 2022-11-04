@@ -2,10 +2,12 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_price_detail_repository.dart';
+import 'package:ezrxmobile/domain/order/repository/i_valid_customer_material_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -15,97 +17,242 @@ part 'material_price_detail_state.dart';
 
 class MaterialPriceDetailBloc
     extends Bloc<MaterialPriceDetailEvent, MaterialPriceDetailState> {
-  final IMaterialPriceDetailRepository repository;
-  MaterialPriceDetailBloc(this.repository)
-      : super(MaterialPriceDetailState.initial()) {
+  final IMaterialPriceDetailRepository priceRepository;
+  final IValidCustomerMaterialRepository validateRepository;
+
+  MaterialPriceDetailBloc({
+    required this.priceRepository,
+    required this.validateRepository,
+  }) : super(MaterialPriceDetailState.initial()) {
     on<MaterialPriceDetailEvent>((event, emit) async {
       await event.map(
         initialized: (_) async => emit(
           MaterialPriceDetailState.initial(),
         ),
         fetch: (e) async {
-          _filterFOCMaterial(
-            e.materialInfos,
-            emit,
+          final queryMaterials = _getMissingPriceDetailMaterials(
+            materials: e.materialInfoList,
           );
 
-          final queryMaterialInfo =
-              List<MaterialQueryInfo>.from(e.materialInfos)
-                ..removeWhere(
-                  (element) => state.materialDetails.containsKey(
-                    element,
-                  ),
-                );
+          if (queryMaterials.isEmpty) return;
 
-          if (queryMaterialInfo.isEmpty) return;
+          emit(
+            state.copyWith(isValidating: true),
+          );
+
+          final validMaterials = await _getValidMaterials(
+            materials: queryMaterials,
+            event: e,
+          );
+
+          final invalidMaterials = _getInvalidMaterials(
+            materials: queryMaterials,
+            validMaterials: validMaterials,
+          );
+
+          _setPriceForMaterials(
+            materials: validMaterials,
+            value: Price.empty().copyWith(
+              isValid: true,
+              isFOC: false,
+            ),
+            emit: emit,
+          );
+
+          _setPriceForMaterials(
+            materials: invalidMaterials,
+            value: Price.empty().copyWith(
+              isValid: false,
+              isFOC: false,
+            ),
+            emit: emit,
+          );
 
           emit(
             state.copyWith(
+              isValidating: false,
               isFetching: true,
             ),
           );
-          final failureOrSuccess = await repository.getMaterialDetail(
-            salesOrganisation: e.salesOrganisation,
-            salesOrganisationConfigs: e.salesOrganisationConfigs,
-            customerCodeInfo: e.customerCode,
-            shipToCodeInfo: e.shipToCode,
-            materialQueryList: queryMaterialInfo.toSet().toList(),
+
+          final nonFocValidMaterials = _getNonFOCMaterials(
+            materials: validMaterials,
           );
 
-          await failureOrSuccess.fold(
-            (_) async {
-              emit(
-                state.copyWith(
-                  isFetching: false,
-                ),
-              );
-            },
-            (newDetailsFetched) async {
-              final newMaterialDetails =
-                  Map<MaterialQueryInfo, MaterialPriceDetail>.from(
-                state.materialDetails,
-              )..addAll(
-                      newDetailsFetched,
-                    );
-              emit(
-                state.copyWith(
-                  isFetching: false,
-                  materialDetails: newMaterialDetails,
-                ),
-              );
-            },
+          final focValidMaterials = _getFOCMaterials(
+            materials: validMaterials,
+          );
+
+          _setPriceForMaterials(
+            materials: focValidMaterials,
+            value: Price.empty().copyWith(
+              isValid: true,
+              isFOC: true,
+            ),
+            emit: emit,
+          );
+
+          _setPriceForMaterials(
+            materials: nonFocValidMaterials,
+            value: Price.empty().copyWith(
+              isValid: true,
+              isFOC: false,
+            ),
+            emit: emit,
+          );
+
+          if (nonFocValidMaterials.isEmpty) {
+            emit(
+              state.copyWith(
+                isFetching: false,
+              ),
+            );
+
+            return;
+          }
+
+          final newMaterialPriceDetails = await _getMaterialPriceDetails(
+            event: e,
+            materials: nonFocValidMaterials,
+          );
+
+          if (newMaterialPriceDetails.isEmpty) {
+            emit(
+              state.copyWith(
+                isFetching: false,
+              ),
+            );
+          }
+          emit(
+            state.copyWith(
+              isFetching: false,
+              materialDetails: Map.from(state.materialDetails)
+                ..addAll(newMaterialPriceDetails),
+            ),
           );
         },
       );
     });
   }
 
-  void _filterFOCMaterial(
-    List<MaterialQueryInfo> materials,
-    Emitter<MaterialPriceDetailState> emit,
-  ) {
-    final focMaterialDetails = <MaterialQueryInfo, MaterialPriceDetail>{};
-    for (final material in materials) {
-      if (material.materialGroup4.isFOC) {
-        focMaterialDetails.addEntries(
-          {
-            material: MaterialPriceDetail.empty().copyWith(
-              price: Price.empty().copyWith(materialNumber: material.value),
-            ),
-          }.entries,
-        );
-      }
-    }
+  List<MaterialQueryInfo> _getMissingPriceDetailMaterials({
+    required List<MaterialQueryInfo> materials,
+  }) {
+    final materialDetails = Map<MaterialQueryInfo, MaterialPriceDetail>.from(
+      state.materialDetails,
+    )..removeWhere(
+        (key, value) => value == MaterialPriceDetail.empty(),
+      );
 
-    if (focMaterialDetails.isNotEmpty) {
+    return Set<MaterialQueryInfo>.from(materials).toList()
+      ..removeWhere((info) => materialDetails.containsKey(info));
+  }
+
+  Future<List<MaterialQueryInfo>> _getValidMaterials({
+    required _Fetch event,
+    required List<MaterialQueryInfo> materials,
+  }) async {
+    final nonFocMaterialNumbers = materials
+        .where((material) => !material.materialGroup4.isFOC)
+        .map((material) => material.value)
+        .toList();
+    final focMaterialNumbers = materials
+        .where((material) => material.materialGroup4.isFOC)
+        .map((material) => material.value)
+        .toList();
+
+    final failureOrSuccess = await validateRepository.getValidMaterialList(
+      user: event.user,
+      salesOrganisation: event.salesOrganisation,
+      customerCodeInfo: event.customerCode,
+      shipToInfo: event.shipToCode,
+      materialList: nonFocMaterialNumbers,
+      focMaterialList: focMaterialNumbers,
+    );
+
+    return failureOrSuccess.fold(
+      (failure) => [],
+      (validMaterialNumbers) async {
+        final validMaterials = materials
+            .where(
+              (material) => validMaterialNumbers.contains(material.value),
+            )
+            .toList();
+
+        return validMaterials;
+      },
+    );
+  }
+
+  List<MaterialQueryInfo> _getInvalidMaterials({
+    required List<MaterialQueryInfo> materials,
+    required List<MaterialQueryInfo> validMaterials,
+  }) =>
+      materials
+          .where(
+            (material) => !validMaterials.contains(
+              material,
+            ),
+          )
+          .toList();
+
+  List<MaterialQueryInfo> _getNonFOCMaterials({
+    required List<MaterialQueryInfo> materials,
+  }) =>
+      materials
+          .where(
+            (material) => !material.materialGroup4.isFOC,
+          )
+          .toList();
+
+  List<MaterialQueryInfo> _getFOCMaterials({
+    required List<MaterialQueryInfo> materials,
+  }) =>
+      materials
+          .where(
+            (material) => material.materialGroup4.isFOC,
+          )
+          .toList();
+
+  void _setPriceForMaterials({
+    required List<MaterialQueryInfo> materials,
+    required Price value,
+    required Emitter<MaterialPriceDetailState> emit,
+  }) {
+    final unavailableMaterialDetails = {
+      for (final material in materials)
+        material: MaterialPriceDetail.empty().copyWith(
+          price: value,
+        ),
+    };
+
+    if (unavailableMaterialDetails.isNotEmpty) {
       emit(
         state.copyWith(
           materialDetails: Map.from(state.materialDetails)
             ..addAll(
-              focMaterialDetails,
+              unavailableMaterialDetails,
             ),
         ),
       );
     }
+  }
+
+  Future<Map<MaterialQueryInfo, MaterialPriceDetail>> _getMaterialPriceDetails({
+    required _Fetch event,
+    required List<MaterialQueryInfo> materials,
+  }) async {
+    final failureOrSuccess = await priceRepository.getMaterialDetail(
+      salesOrganisation: event.salesOrganisation,
+      salesOrganisationConfigs: event.salesOrganisationConfigs,
+      customerCodeInfo: event.customerCode,
+      shipToCodeInfo: event.shipToCode,
+      materialQueryList: materials,
+    );
+
+    return failureOrSuccess.fold(
+      (_) => {},
+      (newDetailsFetched) => newDetailsFetched,
+    );
   }
 }

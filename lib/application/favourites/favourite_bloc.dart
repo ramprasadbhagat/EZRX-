@@ -54,7 +54,10 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
         );
       },
       add: (e) async {
-        emit(state.copyWith(failureOrSuccessOption: none(), isLoading: true));
+        emit(state.copyWith(
+          failureOrSuccessOption: none(),
+          isLoading: true,
+        ));
 
         final failureOrSuccess = await favouriteRepository.addFavourites(
           user: e.user, // userBloc.state.user,
@@ -83,7 +86,19 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
         );
       },
       delete: (e) async {
-        emit(state.copyWith(failureOrSuccessOption: none(), isLoading: true));
+        final favouritesItems = state.favouriteItems;
+        final favouritesItemsInDeleteProgress = state.favouriteItems
+            .map((item) => item.id == e.item.id
+                ? item.copyWith(isWaitingStatusUpdate: true)
+                : item)
+            .toList();
+
+        emit(
+          state.copyWith(
+            failureOrSuccessOption: none(),
+            favouriteItems: favouritesItemsInDeleteProgress,
+          ),
+        );
 
         final failureOrSuccess = await favouriteRepository.deleteFavourites(
           item: e.item,
@@ -94,16 +109,15 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
             emit(
               state.copyWith(
                 failureOrSuccessOption: optionOf(failureOrSuccess),
-                isLoading: false,
+                favouriteItems: favouritesItems,
               ),
             );
           },
-          (favouriteItems) {
+          (newFavouriteItems) {
             emit(
               state.copyWith(
-                favouriteItems: favouriteItems,
+                favouriteItems: newFavouriteItems,
                 failureOrSuccessOption: none(),
-                isLoading: false,
               ),
             );
           },

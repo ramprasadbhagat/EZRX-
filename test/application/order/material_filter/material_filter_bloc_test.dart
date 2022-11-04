@@ -62,6 +62,7 @@ void main() {
     enableVat: false,
     enableZDP5: false,
     vatValue: 0,
+    materialWithoutPrice: false,
     enableCollectiveNumber: false,
     enableFutureDeliveryDay: false,
     enableMobileNumber: false,

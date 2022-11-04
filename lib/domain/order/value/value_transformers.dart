@@ -10,8 +10,13 @@ bool materialIsFOC(String materialGroup) {
   return materialGroup == '6A1';
 }
 
-String currencyAlign(Currency currency, bool hidePrice, double value) {
-  if (value == 0 || hidePrice) return 'NA';
+String currencyAlign(
+  Currency currency,
+  bool hidePrice,
+  double value,
+  bool isFoc,
+) {
+  if (hidePrice || isFoc) return 'NA';
   final formattedPrice = formatAsFixed(value, 2);
 
   return '${currency.code} $formattedPrice';
@@ -24,11 +29,12 @@ String currencyAlign(Currency currency, bool hidePrice, double value) {
 
 String totalPrice(
   Currency currency,
+  bool isFoc,
   bool hidePrice,
   double value,
   int quantity,
 ) {
-  if (value == 0 || hidePrice) return 'NA';
+  if (hidePrice || isFoc) return 'NA';
   final total = value * quantity;
   final formattedPrice = formatAsFixed(total, 2);
 
@@ -37,6 +43,7 @@ String totalPrice(
 
 String unitPrice(
   Currency currency,
+  bool isFoc,
   bool hidePrice,
   bool isVNUser,
   bool enableVat,
@@ -46,11 +53,19 @@ String unitPrice(
   List taxes,
   double value,
 ) {
-  if (value == 0 || hidePrice) return 'NA';
+  if (hidePrice || isFoc) return 'NA';
 
   var finalPrice = value;
-  finalPrice = isVNUser ? enableVat && enableTaxClassification ? value +
-          (value * ((taxes).isNotEmpty ? double.parse(taxes[0]) * 0.01 : 0)) : value : enableTaxClassification && !taxClassification.isExempt() ? !taxClassification.isNoTax() ? value + (value * vatValue * 0.01) : value : value;
+  finalPrice = isVNUser
+      ? enableVat && enableTaxClassification
+          ? value +
+              (value * ((taxes).isNotEmpty ? double.parse(taxes[0]) * 0.01 : 0))
+          : value
+      : enableTaxClassification && !taxClassification.isExempt()
+          ? !taxClassification.isNoTax()
+              ? value + (value * vatValue * 0.01)
+              : value
+          : value;
 
   final formattedPrice = formatAsFixed(finalPrice, 2);
 

@@ -262,6 +262,7 @@ class _PriceLabel extends StatelessWidget {
             children: [
               Text(
                 '${'List Price: '.tr()}${itemPrice.finalPrice.displayWithCurrency(
+                  isFoc: itemPrice.isFOC,
                   currency: currentCurrency,
                   hidePrice: isHidePrice,
                 )}',
@@ -271,6 +272,7 @@ class _PriceLabel extends StatelessWidget {
               ),
               Text(
                 '${'Unit Price: '.tr()}${itemPrice.finalPrice.displayUnitPrice(
+                  isFoc: itemPrice.isFOC,
                   currency: currentCurrency,
                   hidePrice: isHidePrice,
                   isVNUser: isVNUser,

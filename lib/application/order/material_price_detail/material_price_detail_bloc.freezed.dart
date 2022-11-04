@@ -20,11 +20,12 @@ mixin _$MaterialPriceDetailEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
+            User user,
             CustomerCodeInfo customerCode,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
-            List<MaterialQueryInfo> materialInfos)
+            List<MaterialQueryInfo> materialInfoList)
         fetch,
   }) =>
       throw _privateConstructorUsedError;
@@ -32,11 +33,12 @@ mixin _$MaterialPriceDetailEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
+            User user,
             CustomerCodeInfo customerCode,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
-            List<MaterialQueryInfo> materialInfos)?
+            List<MaterialQueryInfo> materialInfoList)?
         fetch,
   }) =>
       throw _privateConstructorUsedError;
@@ -44,11 +46,12 @@ mixin _$MaterialPriceDetailEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
+            User user,
             CustomerCodeInfo customerCode,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
-            List<MaterialQueryInfo> materialInfos)?
+            List<MaterialQueryInfo> materialInfoList)?
         fetch,
     required TResult orElse(),
   }) =>
@@ -134,11 +137,12 @@ class _$_Initialized implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
+            User user,
             CustomerCodeInfo customerCode,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
-            List<MaterialQueryInfo> materialInfos)
+            List<MaterialQueryInfo> materialInfoList)
         fetch,
   }) {
     return initialized();
@@ -149,11 +153,12 @@ class _$_Initialized implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
+            User user,
             CustomerCodeInfo customerCode,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
-            List<MaterialQueryInfo> materialInfos)?
+            List<MaterialQueryInfo> materialInfoList)?
         fetch,
   }) {
     return initialized?.call();
@@ -164,11 +169,12 @@ class _$_Initialized implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
+            User user,
             CustomerCodeInfo customerCode,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
-            List<MaterialQueryInfo> materialInfos)?
+            List<MaterialQueryInfo> materialInfoList)?
         fetch,
     required TResult orElse(),
   }) {
@@ -219,12 +225,14 @@ abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
   $Res call(
-      {CustomerCodeInfo customerCode,
+      {User user,
+      CustomerCodeInfo customerCode,
       SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs salesOrganisationConfigs,
       ShipToInfo shipToCode,
-      List<MaterialQueryInfo> materialInfos});
+      List<MaterialQueryInfo> materialInfoList});
 
+  $UserCopyWith<$Res> get user;
   $CustomerCodeInfoCopyWith<$Res> get customerCode;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
@@ -243,13 +251,18 @@ class __$$_FetchCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? user = freezed,
     Object? customerCode = freezed,
     Object? salesOrganisation = freezed,
     Object? salesOrganisationConfigs = freezed,
     Object? shipToCode = freezed,
-    Object? materialInfos = freezed,
+    Object? materialInfoList = freezed,
   }) {
     return _then(_$_Fetch(
+      user: user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       customerCode: customerCode == freezed
           ? _value.customerCode
           : customerCode // ignore: cast_nullable_to_non_nullable
@@ -266,11 +279,18 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.shipToCode
           : shipToCode // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
-      materialInfos: materialInfos == freezed
-          ? _value._materialInfos
-          : materialInfos // ignore: cast_nullable_to_non_nullable
+      materialInfoList: materialInfoList == freezed
+          ? _value._materialInfoList
+          : materialInfoList // ignore: cast_nullable_to_non_nullable
               as List<MaterialQueryInfo>,
     ));
+  }
+
+  @override
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
   }
 
   @override
@@ -307,13 +327,16 @@ class __$$_FetchCopyWithImpl<$Res>
 
 class _$_Fetch implements _Fetch {
   const _$_Fetch(
-      {required this.customerCode,
+      {required this.user,
+      required this.customerCode,
       required this.salesOrganisation,
       required this.salesOrganisationConfigs,
       required this.shipToCode,
-      required final List<MaterialQueryInfo> materialInfos})
-      : _materialInfos = materialInfos;
+      required final List<MaterialQueryInfo> materialInfoList})
+      : _materialInfoList = materialInfoList;
 
+  @override
+  final User user;
   @override
   final CustomerCodeInfo customerCode;
   @override
@@ -322,16 +345,16 @@ class _$_Fetch implements _Fetch {
   final SalesOrganisationConfigs salesOrganisationConfigs;
   @override
   final ShipToInfo shipToCode;
-  final List<MaterialQueryInfo> _materialInfos;
+  final List<MaterialQueryInfo> _materialInfoList;
   @override
-  List<MaterialQueryInfo> get materialInfos {
+  List<MaterialQueryInfo> get materialInfoList {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_materialInfos);
+    return EqualUnmodifiableListView(_materialInfoList);
   }
 
   @override
   String toString() {
-    return 'MaterialPriceDetailEvent.fetch(customerCode: $customerCode, salesOrganisation: $salesOrganisation, salesOrganisationConfigs: $salesOrganisationConfigs, shipToCode: $shipToCode, materialInfos: $materialInfos)';
+    return 'MaterialPriceDetailEvent.fetch(user: $user, customerCode: $customerCode, salesOrganisation: $salesOrganisation, salesOrganisationConfigs: $salesOrganisationConfigs, shipToCode: $shipToCode, materialInfoList: $materialInfoList)';
   }
 
   @override
@@ -339,6 +362,7 @@ class _$_Fetch implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
+            const DeepCollectionEquality().equals(other.user, user) &&
             const DeepCollectionEquality()
                 .equals(other.customerCode, customerCode) &&
             const DeepCollectionEquality()
@@ -348,17 +372,18 @@ class _$_Fetch implements _Fetch {
             const DeepCollectionEquality()
                 .equals(other.shipToCode, shipToCode) &&
             const DeepCollectionEquality()
-                .equals(other._materialInfos, _materialInfos));
+                .equals(other._materialInfoList, _materialInfoList));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(user),
       const DeepCollectionEquality().hash(customerCode),
       const DeepCollectionEquality().hash(salesOrganisation),
       const DeepCollectionEquality().hash(salesOrganisationConfigs),
       const DeepCollectionEquality().hash(shipToCode),
-      const DeepCollectionEquality().hash(_materialInfos));
+      const DeepCollectionEquality().hash(_materialInfoList));
 
   @JsonKey(ignore: true)
   @override
@@ -370,15 +395,16 @@ class _$_Fetch implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
+            User user,
             CustomerCodeInfo customerCode,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
-            List<MaterialQueryInfo> materialInfos)
+            List<MaterialQueryInfo> materialInfoList)
         fetch,
   }) {
-    return fetch(customerCode, salesOrganisation, salesOrganisationConfigs,
-        shipToCode, materialInfos);
+    return fetch(user, customerCode, salesOrganisation,
+        salesOrganisationConfigs, shipToCode, materialInfoList);
   }
 
   @override
@@ -386,15 +412,16 @@ class _$_Fetch implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
+            User user,
             CustomerCodeInfo customerCode,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
-            List<MaterialQueryInfo> materialInfos)?
+            List<MaterialQueryInfo> materialInfoList)?
         fetch,
   }) {
-    return fetch?.call(customerCode, salesOrganisation,
-        salesOrganisationConfigs, shipToCode, materialInfos);
+    return fetch?.call(user, customerCode, salesOrganisation,
+        salesOrganisationConfigs, shipToCode, materialInfoList);
   }
 
   @override
@@ -402,17 +429,18 @@ class _$_Fetch implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(
+            User user,
             CustomerCodeInfo customerCode,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
-            List<MaterialQueryInfo> materialInfos)?
+            List<MaterialQueryInfo> materialInfoList)?
         fetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(customerCode, salesOrganisation, salesOrganisationConfigs,
-          shipToCode, materialInfos);
+      return fetch(user, customerCode, salesOrganisation,
+          salesOrganisationConfigs, shipToCode, materialInfoList);
     }
     return orElse();
   }
@@ -451,17 +479,19 @@ class _$_Fetch implements _Fetch {
 
 abstract class _Fetch implements MaterialPriceDetailEvent {
   const factory _Fetch(
-      {required final CustomerCodeInfo customerCode,
+      {required final User user,
+      required final CustomerCodeInfo customerCode,
       required final SalesOrganisation salesOrganisation,
       required final SalesOrganisationConfigs salesOrganisationConfigs,
       required final ShipToInfo shipToCode,
-      required final List<MaterialQueryInfo> materialInfos}) = _$_Fetch;
+      required final List<MaterialQueryInfo> materialInfoList}) = _$_Fetch;
 
+  User get user;
   CustomerCodeInfo get customerCode;
   SalesOrganisation get salesOrganisation;
   SalesOrganisationConfigs get salesOrganisationConfigs;
   ShipToInfo get shipToCode;
-  List<MaterialQueryInfo> get materialInfos;
+  List<MaterialQueryInfo> get materialInfoList;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -472,6 +502,7 @@ mixin _$MaterialPriceDetailState {
   Map<MaterialQueryInfo, MaterialPriceDetail> get materialDetails =>
       throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
+  bool get isValidating => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialPriceDetailStateCopyWith<MaterialPriceDetailState> get copyWith =>
@@ -485,7 +516,8 @@ abstract class $MaterialPriceDetailStateCopyWith<$Res> {
       _$MaterialPriceDetailStateCopyWithImpl<$Res>;
   $Res call(
       {Map<MaterialQueryInfo, MaterialPriceDetail> materialDetails,
-      bool isFetching});
+      bool isFetching,
+      bool isValidating});
 }
 
 /// @nodoc
@@ -501,6 +533,7 @@ class _$MaterialPriceDetailStateCopyWithImpl<$Res>
   $Res call({
     Object? materialDetails = freezed,
     Object? isFetching = freezed,
+    Object? isValidating = freezed,
   }) {
     return _then(_value.copyWith(
       materialDetails: materialDetails == freezed
@@ -510,6 +543,10 @@ class _$MaterialPriceDetailStateCopyWithImpl<$Res>
       isFetching: isFetching == freezed
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isValidating: isValidating == freezed
+          ? _value.isValidating
+          : isValidating // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -525,7 +562,8 @@ abstract class _$$_MaterialPriceDetailStateCopyWith<$Res>
   @override
   $Res call(
       {Map<MaterialQueryInfo, MaterialPriceDetail> materialDetails,
-      bool isFetching});
+      bool isFetching,
+      bool isValidating});
 }
 
 /// @nodoc
@@ -544,6 +582,7 @@ class __$$_MaterialPriceDetailStateCopyWithImpl<$Res>
   $Res call({
     Object? materialDetails = freezed,
     Object? isFetching = freezed,
+    Object? isValidating = freezed,
   }) {
     return _then(_$_MaterialPriceDetailState(
       materialDetails: materialDetails == freezed
@@ -554,18 +593,24 @@ class __$$_MaterialPriceDetailStateCopyWithImpl<$Res>
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
+      isValidating: isValidating == freezed
+          ? _value.isValidating
+          : isValidating // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_MaterialPriceDetailState implements _MaterialPriceDetailState {
+class _$_MaterialPriceDetailState extends _MaterialPriceDetailState {
   const _$_MaterialPriceDetailState(
       {required final Map<MaterialQueryInfo, MaterialPriceDetail>
           materialDetails,
-      required this.isFetching})
-      : _materialDetails = materialDetails;
+      required this.isFetching,
+      required this.isValidating})
+      : _materialDetails = materialDetails,
+        super._();
 
   final Map<MaterialQueryInfo, MaterialPriceDetail> _materialDetails;
   @override
@@ -576,10 +621,12 @@ class _$_MaterialPriceDetailState implements _MaterialPriceDetailState {
 
   @override
   final bool isFetching;
+  @override
+  final bool isValidating;
 
   @override
   String toString() {
-    return 'MaterialPriceDetailState(materialDetails: $materialDetails, isFetching: $isFetching)';
+    return 'MaterialPriceDetailState(materialDetails: $materialDetails, isFetching: $isFetching, isValidating: $isValidating)';
   }
 
   @override
@@ -590,14 +637,17 @@ class _$_MaterialPriceDetailState implements _MaterialPriceDetailState {
             const DeepCollectionEquality()
                 .equals(other._materialDetails, _materialDetails) &&
             const DeepCollectionEquality()
-                .equals(other.isFetching, isFetching));
+                .equals(other.isFetching, isFetching) &&
+            const DeepCollectionEquality()
+                .equals(other.isValidating, isValidating));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_materialDetails),
-      const DeepCollectionEquality().hash(isFetching));
+      const DeepCollectionEquality().hash(isFetching),
+      const DeepCollectionEquality().hash(isValidating));
 
   @JsonKey(ignore: true)
   @override
@@ -606,16 +656,20 @@ class _$_MaterialPriceDetailState implements _MaterialPriceDetailState {
           _$_MaterialPriceDetailState>(this, _$identity);
 }
 
-abstract class _MaterialPriceDetailState implements MaterialPriceDetailState {
+abstract class _MaterialPriceDetailState extends MaterialPriceDetailState {
   const factory _MaterialPriceDetailState(
       {required final Map<MaterialQueryInfo, MaterialPriceDetail>
           materialDetails,
-      required final bool isFetching}) = _$_MaterialPriceDetailState;
+      required final bool isFetching,
+      required final bool isValidating}) = _$_MaterialPriceDetailState;
+  const _MaterialPriceDetailState._() : super._();
 
   @override
   Map<MaterialQueryInfo, MaterialPriceDetail> get materialDetails;
   @override
   bool get isFetching;
+  @override
+  bool get isValidating;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialPriceDetailStateCopyWith<_$_MaterialPriceDetailState>

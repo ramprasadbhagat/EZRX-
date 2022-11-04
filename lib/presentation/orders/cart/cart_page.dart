@@ -274,6 +274,7 @@ class _ListContent extends StatelessWidget {
 
                     return Text(
                       '${'Unit Price: '.tr()}${itemPrice.finalPrice.displayWithCurrency(
+                        isFoc: itemPrice.isFOC,
                         currency: currentCurrency,
                         hidePrice: isHidePrice,
                       )}',

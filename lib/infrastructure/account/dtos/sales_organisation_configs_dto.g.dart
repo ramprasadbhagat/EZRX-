@@ -26,6 +26,7 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
           json['enableTaxClassification'] as bool? ?? false,
       enableVat: json['enableVat'] as bool? ?? false,
       vatValue: json['vatValue'] as int? ?? 0,
+      materialWithoutPrice: json['materialWithoutPrice'] as bool? ?? false,
       enableSpecialInstructions:
           json['enableSpecialInstructions'] as bool? ?? false,
       enableReferenceNote: json['enableReferenceNote'] as bool? ?? false,
@@ -57,6 +58,7 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'enableTaxClassification': instance.enableTaxClassification,
       'enableVat': instance.enableVat,
       'vatValue': instance.vatValue,
+      'materialWithoutPrice': instance.materialWithoutPrice,
       'enableSpecialInstructions': instance.enableSpecialInstructions,
       'enableReferenceNote': instance.enableReferenceNote,
       'enableCollectiveNumber': instance.enableCollectiveNumber,

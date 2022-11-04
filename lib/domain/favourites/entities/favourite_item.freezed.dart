@@ -21,6 +21,7 @@ mixin _$Favourite {
   bool get isFOC => throw _privateConstructorUsedError;
   bool get isTenderContract => throw _privateConstructorUsedError;
   String get materialDescription => throw _privateConstructorUsedError;
+  bool get isWaitingStatusUpdate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FavouriteCopyWith<Favourite> get copyWith =>
@@ -36,7 +37,8 @@ abstract class $FavouriteCopyWith<$Res> {
       MaterialNumber materialNumber,
       bool isFOC,
       bool isTenderContract,
-      String materialDescription});
+      String materialDescription,
+      bool isWaitingStatusUpdate});
 }
 
 /// @nodoc
@@ -54,6 +56,7 @@ class _$FavouriteCopyWithImpl<$Res> implements $FavouriteCopyWith<$Res> {
     Object? isFOC = freezed,
     Object? isTenderContract = freezed,
     Object? materialDescription = freezed,
+    Object? isWaitingStatusUpdate = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -76,6 +79,10 @@ class _$FavouriteCopyWithImpl<$Res> implements $FavouriteCopyWith<$Res> {
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
+      isWaitingStatusUpdate: isWaitingStatusUpdate == freezed
+          ? _value.isWaitingStatusUpdate
+          : isWaitingStatusUpdate // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -91,7 +98,8 @@ abstract class _$$_FavouriteCopyWith<$Res> implements $FavouriteCopyWith<$Res> {
       MaterialNumber materialNumber,
       bool isFOC,
       bool isTenderContract,
-      String materialDescription});
+      String materialDescription,
+      bool isWaitingStatusUpdate});
 }
 
 /// @nodoc
@@ -111,6 +119,7 @@ class __$$_FavouriteCopyWithImpl<$Res> extends _$FavouriteCopyWithImpl<$Res>
     Object? isFOC = freezed,
     Object? isTenderContract = freezed,
     Object? materialDescription = freezed,
+    Object? isWaitingStatusUpdate = freezed,
   }) {
     return _then(_$_Favourite(
       id: id == freezed
@@ -133,6 +142,10 @@ class __$$_FavouriteCopyWithImpl<$Res> extends _$FavouriteCopyWithImpl<$Res>
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
+      isWaitingStatusUpdate: isWaitingStatusUpdate == freezed
+          ? _value.isWaitingStatusUpdate
+          : isWaitingStatusUpdate // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -145,7 +158,8 @@ class _$_Favourite extends _Favourite {
       required this.materialNumber,
       required this.isFOC,
       required this.isTenderContract,
-      required this.materialDescription})
+      required this.materialDescription,
+      this.isWaitingStatusUpdate = false})
       : super._();
 
   @override
@@ -158,10 +172,13 @@ class _$_Favourite extends _Favourite {
   final bool isTenderContract;
   @override
   final String materialDescription;
+  @override
+  @JsonKey()
+  final bool isWaitingStatusUpdate;
 
   @override
   String toString() {
-    return 'Favourite(id: $id, materialNumber: $materialNumber, isFOC: $isFOC, isTenderContract: $isTenderContract, materialDescription: $materialDescription)';
+    return 'Favourite(id: $id, materialNumber: $materialNumber, isFOC: $isFOC, isTenderContract: $isTenderContract, materialDescription: $materialDescription, isWaitingStatusUpdate: $isWaitingStatusUpdate)';
   }
 
   @override
@@ -176,7 +193,9 @@ class _$_Favourite extends _Favourite {
             const DeepCollectionEquality()
                 .equals(other.isTenderContract, isTenderContract) &&
             const DeepCollectionEquality()
-                .equals(other.materialDescription, materialDescription));
+                .equals(other.materialDescription, materialDescription) &&
+            const DeepCollectionEquality()
+                .equals(other.isWaitingStatusUpdate, isWaitingStatusUpdate));
   }
 
   @override
@@ -186,7 +205,8 @@ class _$_Favourite extends _Favourite {
       const DeepCollectionEquality().hash(materialNumber),
       const DeepCollectionEquality().hash(isFOC),
       const DeepCollectionEquality().hash(isTenderContract),
-      const DeepCollectionEquality().hash(materialDescription));
+      const DeepCollectionEquality().hash(materialDescription),
+      const DeepCollectionEquality().hash(isWaitingStatusUpdate));
 
   @JsonKey(ignore: true)
   @override
@@ -200,7 +220,8 @@ abstract class _Favourite extends Favourite {
       required final MaterialNumber materialNumber,
       required final bool isFOC,
       required final bool isTenderContract,
-      required final String materialDescription}) = _$_Favourite;
+      required final String materialDescription,
+      final bool isWaitingStatusUpdate}) = _$_Favourite;
   const _Favourite._() : super._();
 
   @override
@@ -213,6 +234,8 @@ abstract class _Favourite extends Favourite {
   bool get isTenderContract;
   @override
   String get materialDescription;
+  @override
+  bool get isWaitingStatusUpdate;
   @override
   @JsonKey(ignore: true)
   _$$_FavouriteCopyWith<_$_Favourite> get copyWith =>

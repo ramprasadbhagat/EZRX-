@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
@@ -96,6 +97,7 @@ class OrderTemplateListItem extends StatelessWidget {
                           onTap: () {
                             context.read<MaterialPriceDetailBloc>().add(
                                   MaterialPriceDetailEvent.fetch(
+                                    user: context.read<UserBloc>().state.user,
                                     customerCode: context
                                         .read<CustomerCodeBloc>()
                                         .state
@@ -112,7 +114,7 @@ class OrderTemplateListItem extends StatelessWidget {
                                         .read<ShipToCodeBloc>()
                                         .state
                                         .shipToInfo,
-                                    materialInfos: orderTemplate.cartItems
+                                    materialInfoList: orderTemplate.cartItems
                                         .map(
                                           (item) => MaterialQueryInfo
                                               .fromOrderTemplate(

@@ -24,7 +24,8 @@ class Price with _$Price {
     required MaterialPrice finalPrice,
     required MaterialPrice finalTotalPrice,
     required bool additionalBonusEligible,
-    required bool isValid,
+    @Default(true) bool isValid,
+    @Default(false) bool isFOC,
   }) = _Price;
 
   factory Price.empty() => Price(
@@ -41,6 +42,5 @@ class Price with _$Price {
         finalPrice: MaterialPrice(0),
         finalTotalPrice: MaterialPrice(0),
         additionalBonusEligible: false,
-        isValid: false,
       );
 }

@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
+import 'package:ezrxmobile/presentation/core/action_button.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -13,12 +14,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FavouriteListTile extends StatelessWidget {
   final Favourite favourite;
-  const FavouriteListTile({Key? key, required this.favourite})
-      : super(key: key);
-
-  MaterialQueryInfo get itemPriceQuery => MaterialQueryInfo.fromFavorite(
-        material: favourite,
-      );
+  const FavouriteListTile({
+    Key? key,
+    required this.favourite,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -70,35 +69,46 @@ class FavouriteListTile extends StatelessWidget {
                           ),
                         ),
                       ),
-                      IconButton(
-                        key: const Key('deleteFavouriteFavPage'),
-                        icon: const Icon(
-                          Icons.favorite,
-                          color: ZPColors.secondary,
-                        ),
-                        onPressed: () async =>
-                            context.read<FavouriteBloc>().add(
-                                  FavouriteEvent.delete(
-                                    item: favourite,
-                                    user: context.read<UserBloc>().state.user,
-                                  ),
+                      favourite.isWaitingStatusUpdate
+                          ? LoadingShimmer.withChild(
+                              child: IconButton(
+                                icon: const Icon(
+                                  Icons.favorite,
+                                  color: ZPColors.secondary,
                                 ),
+                                onPressed: () {},
+                              ),
+                            )
+                          : IconButton(
+                              key: const Key('deleteFavouriteFavPage'),
+                              icon: const Icon(
+                                Icons.favorite,
+                                color: ZPColors.secondary,
+                              ),
+                              onPressed: () async => context
+                                  .read<FavouriteBloc>()
+                                  .add(
+                                    FavouriteEvent.delete(
+                                      item: favourite,
+                                      user: context.read<UserBloc>().state.user,
+                                    ),
+                                  ),
 
-                        // context.read<BonusMaterialBloc>().add(
-                        //       BonusMaterialEvent.fetch(
-                        //         pickandpack: true,
-                        //         searchKey: '',
-                        //         user: User.empty(),
-                        //         configs:
-                        //             SalesOrganisationConfigs.empty(),
-                        //         customerInfo:
-                        //             SalesOrgCustomerInfo.empty(),
-                        //         shipInfo: SalesOrgShipToInfo.empty(),
-                        //         salesOrganisation:
-                        //             SalesOrganisation.empty(),
-                        //       ),
-                        //     ),
-                      ),
+                              // context.read<BonusMaterialBloc>().add(
+                              //       BonusMaterialEvent.fetch(
+                              //         pickandpack: true,
+                              //         searchKey: '',
+                              //         user: User.empty(),
+                              //         configs:
+                              //             SalesOrganisationConfigs.empty(),
+                              //         customerInfo:
+                              //             SalesOrgCustomerInfo.empty(),
+                              //         shipInfo: SalesOrgShipToInfo.empty(),
+                              //         salesOrganisation:
+                              //             SalesOrganisation.empty(),
+                              //       ),
+                              //     ),
+                            ),
                     ],
                   ),
                   Text(
@@ -111,29 +121,12 @@ class FavouriteListTile extends StatelessWidget {
                   BlocBuilder<MaterialPriceDetailBloc,
                       MaterialPriceDetailState>(
                     buildWhen: (previous, current) =>
-                        previous.materialDetails[itemPriceQuery] !=
-                        current.materialDetails[itemPriceQuery],
+                        previous.isFetching != current.isFetching,
                     builder: (context, state) {
-                      final itemInfo =
-                          state.materialDetails[itemPriceQuery]?.price;
-
-                      if (itemInfo != null) {
-                        final currentCurrency =
-                            context.read<SalesOrgBloc>().state.configs.currency;
-
-                        return Text(
-                          '${'Unit Price: '.tr()}${itemInfo.finalPrice.displayWithCurrency(
-                            currency: currentCurrency,
-                            hidePrice: false,
-                          )}',
-                          style: const TextStyle(
-                            color: ZPColors.darkerGreen,
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        );
-                      }
-                      if (state.isFetching) {
+                      final queryInfo =
+                          MaterialQueryInfo.fromFavorite(material: favourite);
+                      final priceDetail = state.materialDetails[queryInfo];
+                      if (state.isFetching || priceDetail == null) {
                         return SizedBox(
                           key: const Key('price-loading'),
                           width: 40,
@@ -141,13 +134,46 @@ class FavouriteListTile extends StatelessWidget {
                         );
                       }
 
-                      return Text(
-                        '${'Unit Price: '.tr()}NA',
-                        style: const TextStyle(
-                          color: ZPColors.darkerGreen,
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w400,
-                        ),
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '${'Unit Price: '.tr()}${priceDetail.price.finalPrice.displayWithCurrency(
+                              isFoc: priceDetail.price.isFOC,
+                              currency: context
+                                  .read<SalesOrgBloc>()
+                                  .state
+                                  .configs
+                                  .currency,
+                              hidePrice: false,
+                            )}',
+                            style: const TextStyle(
+                              color: ZPColors.darkerGreen,
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          BlocBuilder<SalesOrgBloc, SalesOrgState>(
+                            buildWhen: (previous, current) =>
+                                previous.configs != current.configs,
+                            builder: (context, state) {
+                              final hidePrice = priceDetail.info.hidePrice;
+                              final itemPrice = priceDetail.price.finalPrice;
+                              if ((hidePrice || itemPrice.isEmpty()) &&
+                                  !state.configs.materialWithoutPrice) {
+                                return const SizedBox();
+                              }
+
+                              return ActionButton(
+                                width: 120,
+                                onTap: () {
+                                  //TODO: Implement Add to cart
+                                },
+                                text: 'Add to Cart'.tr(),
+                              );
+                            },
+                          ),
+                        ],
                       );
                     },
                   ),

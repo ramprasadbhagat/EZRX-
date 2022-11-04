@@ -31,6 +31,7 @@ mixin _$SalesOrganisationConfigs {
   bool get enableVat => throw _privateConstructorUsedError;
   bool get enableTaxClassification => throw _privateConstructorUsedError;
   int get vatValue => throw _privateConstructorUsedError;
+  bool get materialWithoutPrice => throw _privateConstructorUsedError;
   bool get enableSpecialInstructions => throw _privateConstructorUsedError;
   bool get enableReferenceNote => throw _privateConstructorUsedError;
   bool get enableCollectiveNumber => throw _privateConstructorUsedError;
@@ -66,6 +67,7 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       bool enableVat,
       bool enableTaxClassification,
       int vatValue,
+      bool materialWithoutPrice,
       bool enableSpecialInstructions,
       bool enableReferenceNote,
       bool enableCollectiveNumber,
@@ -102,6 +104,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? enableVat = freezed,
     Object? enableTaxClassification = freezed,
     Object? vatValue = freezed,
+    Object? materialWithoutPrice = freezed,
     Object? enableSpecialInstructions = freezed,
     Object? enableReferenceNote = freezed,
     Object? enableCollectiveNumber = freezed,
@@ -172,6 +175,10 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.vatValue
           : vatValue // ignore: cast_nullable_to_non_nullable
               as int,
+      materialWithoutPrice: materialWithoutPrice == freezed
+          ? _value.materialWithoutPrice
+          : materialWithoutPrice // ignore: cast_nullable_to_non_nullable
+              as bool,
       enableSpecialInstructions: enableSpecialInstructions == freezed
           ? _value.enableSpecialInstructions
           : enableSpecialInstructions // ignore: cast_nullable_to_non_nullable
@@ -232,6 +239,7 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       bool enableVat,
       bool enableTaxClassification,
       int vatValue,
+      bool materialWithoutPrice,
       bool enableSpecialInstructions,
       bool enableReferenceNote,
       bool enableCollectiveNumber,
@@ -271,6 +279,7 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? enableVat = freezed,
     Object? enableTaxClassification = freezed,
     Object? vatValue = freezed,
+    Object? materialWithoutPrice = freezed,
     Object? enableSpecialInstructions = freezed,
     Object? enableReferenceNote = freezed,
     Object? enableCollectiveNumber = freezed,
@@ -341,6 +350,10 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.vatValue
           : vatValue // ignore: cast_nullable_to_non_nullable
               as int,
+      materialWithoutPrice: materialWithoutPrice == freezed
+          ? _value.materialWithoutPrice
+          : materialWithoutPrice // ignore: cast_nullable_to_non_nullable
+              as bool,
       enableSpecialInstructions: enableSpecialInstructions == freezed
           ? _value.enableSpecialInstructions
           : enableSpecialInstructions // ignore: cast_nullable_to_non_nullable
@@ -396,6 +409,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       required this.enableVat,
       required this.enableTaxClassification,
       required this.vatValue,
+      required this.materialWithoutPrice,
       required this.enableSpecialInstructions,
       required this.enableReferenceNote,
       required this.enableCollectiveNumber,
@@ -443,6 +457,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   @override
   final int vatValue;
   @override
+  final bool materialWithoutPrice;
+  @override
   final bool enableSpecialInstructions;
   @override
   final bool enableReferenceNote;
@@ -461,7 +477,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC)';
+    return 'SalesOrganisationConfigs(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC)';
   }
 
   @override
@@ -496,6 +512,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
             const DeepCollectionEquality().equals(
                 other.enableTaxClassification, enableTaxClassification) &&
             const DeepCollectionEquality().equals(other.vatValue, vatValue) &&
+            const DeepCollectionEquality()
+                .equals(other.materialWithoutPrice, materialWithoutPrice) &&
             const DeepCollectionEquality().equals(
                 other.enableSpecialInstructions, enableSpecialInstructions) &&
             const DeepCollectionEquality()
@@ -531,6 +549,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
         const DeepCollectionEquality().hash(enableVat),
         const DeepCollectionEquality().hash(enableTaxClassification),
         const DeepCollectionEquality().hash(vatValue),
+        const DeepCollectionEquality().hash(materialWithoutPrice),
         const DeepCollectionEquality().hash(enableSpecialInstructions),
         const DeepCollectionEquality().hash(enableReferenceNote),
         const DeepCollectionEquality().hash(enableCollectiveNumber),
@@ -565,6 +584,7 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final bool enableVat,
       required final bool enableTaxClassification,
       required final int vatValue,
+      required final bool materialWithoutPrice,
       required final bool enableSpecialInstructions,
       required final bool enableReferenceNote,
       required final bool enableCollectiveNumber,
@@ -605,6 +625,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   bool get enableTaxClassification;
   @override
   int get vatValue;
+  @override
+  bool get materialWithoutPrice;
   @override
   bool get enableSpecialInstructions;
   @override

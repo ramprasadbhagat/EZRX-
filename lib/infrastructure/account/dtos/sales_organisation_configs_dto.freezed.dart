@@ -52,6 +52,8 @@ mixin _$SalesOrganisationConfigsDto {
   bool get enableVat => throw _privateConstructorUsedError;
   @JsonKey(name: 'vatValue', defaultValue: 0)
   int get vatValue => throw _privateConstructorUsedError;
+  @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
+  bool get materialWithoutPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
   bool get enableSpecialInstructions => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableReferenceNote', defaultValue: false)
@@ -113,6 +115,8 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
           bool enableVat,
       @JsonKey(name: 'vatValue', defaultValue: 0)
           int vatValue,
+      @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
+          bool materialWithoutPrice,
       @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
           bool enableSpecialInstructions,
       @JsonKey(name: 'enableReferenceNote', defaultValue: false)
@@ -157,6 +161,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? enableTaxClassification = freezed,
     Object? enableVat = freezed,
     Object? vatValue = freezed,
+    Object? materialWithoutPrice = freezed,
     Object? enableSpecialInstructions = freezed,
     Object? enableReferenceNote = freezed,
     Object? enableCollectiveNumber = freezed,
@@ -227,6 +232,10 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.vatValue
           : vatValue // ignore: cast_nullable_to_non_nullable
               as int,
+      materialWithoutPrice: materialWithoutPrice == freezed
+          ? _value.materialWithoutPrice
+          : materialWithoutPrice // ignore: cast_nullable_to_non_nullable
+              as bool,
       enableSpecialInstructions: enableSpecialInstructions == freezed
           ? _value.enableSpecialInstructions
           : enableSpecialInstructions // ignore: cast_nullable_to_non_nullable
@@ -303,6 +312,8 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
           bool enableVat,
       @JsonKey(name: 'vatValue', defaultValue: 0)
           int vatValue,
+      @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
+          bool materialWithoutPrice,
       @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
           bool enableSpecialInstructions,
       @JsonKey(name: 'enableReferenceNote', defaultValue: false)
@@ -351,6 +362,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? enableTaxClassification = freezed,
     Object? enableVat = freezed,
     Object? vatValue = freezed,
+    Object? materialWithoutPrice = freezed,
     Object? enableSpecialInstructions = freezed,
     Object? enableReferenceNote = freezed,
     Object? enableCollectiveNumber = freezed,
@@ -421,6 +433,10 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.vatValue
           : vatValue // ignore: cast_nullable_to_non_nullable
               as int,
+      materialWithoutPrice: materialWithoutPrice == freezed
+          ? _value.materialWithoutPrice
+          : materialWithoutPrice // ignore: cast_nullable_to_non_nullable
+              as bool,
       enableSpecialInstructions: enableSpecialInstructions == freezed
           ? _value.enableSpecialInstructions
           : enableSpecialInstructions // ignore: cast_nullable_to_non_nullable
@@ -492,6 +508,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
           required this.enableVat,
       @JsonKey(name: 'vatValue', defaultValue: 0)
           required this.vatValue,
+      @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
+          required this.materialWithoutPrice,
       @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
           required this.enableSpecialInstructions,
       @JsonKey(name: 'enableReferenceNote', defaultValue: false)
@@ -566,6 +584,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @JsonKey(name: 'vatValue', defaultValue: 0)
   final int vatValue;
   @override
+  @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
+  final bool materialWithoutPrice;
+  @override
   @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
   final bool enableSpecialInstructions;
   @override
@@ -592,7 +613,7 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC)';
   }
 
   @override
@@ -627,6 +648,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
                 other.enableTaxClassification, enableTaxClassification) &&
             const DeepCollectionEquality().equals(other.enableVat, enableVat) &&
             const DeepCollectionEquality().equals(other.vatValue, vatValue) &&
+            const DeepCollectionEquality()
+                .equals(other.materialWithoutPrice, materialWithoutPrice) &&
             const DeepCollectionEquality().equals(
                 other.enableSpecialInstructions, enableSpecialInstructions) &&
             const DeepCollectionEquality()
@@ -663,6 +686,7 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
         const DeepCollectionEquality().hash(enableTaxClassification),
         const DeepCollectionEquality().hash(enableVat),
         const DeepCollectionEquality().hash(vatValue),
+        const DeepCollectionEquality().hash(materialWithoutPrice),
         const DeepCollectionEquality().hash(enableSpecialInstructions),
         const DeepCollectionEquality().hash(enableReferenceNote),
         const DeepCollectionEquality().hash(enableCollectiveNumber),
@@ -721,6 +745,8 @@ abstract class _SalesOrganisationConfigsDto
           required final bool enableVat,
       @JsonKey(name: 'vatValue', defaultValue: 0)
           required final int vatValue,
+      @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
+          required final bool materialWithoutPrice,
       @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
           required final bool enableSpecialInstructions,
       @JsonKey(name: 'enableReferenceNote', defaultValue: false)
@@ -788,6 +814,9 @@ abstract class _SalesOrganisationConfigsDto
   @override
   @JsonKey(name: 'vatValue', defaultValue: 0)
   int get vatValue;
+  @override
+  @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
+  bool get materialWithoutPrice;
   @override
   @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
   bool get enableSpecialInstructions;
