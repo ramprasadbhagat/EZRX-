@@ -37,6 +37,7 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       enablePaymentTerms: json['enablePaymentTerms'] as bool? ?? false,
       futureDeliveryDay: json['futureDeliveryDay'] as String? ?? '',
       enableGMC: json['enableGMC'] as bool? ?? false,
+      enableListPrice: json['enableListPrice'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -67,4 +68,5 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'enablePaymentTerms': instance.enablePaymentTerms,
       'futureDeliveryDay': instance.futureDeliveryDay,
       'enableGMC': instance.enableGMC,
+      'enableListPrice': instance.enableListPrice,
     };

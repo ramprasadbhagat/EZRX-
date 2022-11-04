@@ -232,25 +232,21 @@ class _PriceLabel extends StatelessWidget {
       builder: (context, state) {
         final itemPrice = state.materialPrice[materialInfo.materialNumber];
         if (itemPrice != null) {
-          final currentCurrency =
-              context.read<SalesOrgBloc>().state.configs.currency;
+          final salesOrgConfig = context.read<SalesOrgBloc>().state.configs;
+          final currentCurrency =salesOrgConfig.currency;
           final isHidePrice = materialInfo.hidePrice;
           final isVNUser = context.read<SalesOrgBloc>().state.salesOrg.isVN;
-          final enabledVat =
-              context.read<SalesOrgBloc>().state.configs.enableVat;
-          final enableTaxClassification = context
-              .read<SalesOrgBloc>()
-              .state
-              .configs
-              .enableTaxClassification;
+          final enabledVat =salesOrgConfig.enableVat;
+          final enableTaxClassification = salesOrgConfig.enableTaxClassification;
           final taxClassification = materialInfo.taxClassification;
           final taxes = materialInfo.taxes;
-          final vatValue = context.read<SalesOrgBloc>().state.configs.vatValue;
+          final vatValue = salesOrgConfig.vatValue;
+          final enableListPrice = salesOrgConfig.enableListPrice;
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+            enableListPrice ?  Text(
                 '${'List Price: '.tr()}${itemPrice.finalPrice.displayWithCurrency(
                   isFoc: itemPrice.isFOC,
                   currency: currentCurrency,
@@ -259,7 +255,7 @@ class _PriceLabel extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyText1?.apply(
                       color: ZPColors.darkGray,
                     ),
-              ),
+              ):const SizedBox.shrink(),
               Text(
                 '${'Unit Price: '.tr()}${itemPrice.finalPrice.displayUnitPrice(
                   isFoc: itemPrice.isFOC,

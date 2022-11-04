@@ -71,6 +71,7 @@ void main() {
     enableSpecialInstructions: false,
     futureDeliveryDay: '',
     enableGMC: false,
+    enableListPrice: false,
   );
 
   const fakeSelectedFilterCategory = MaterialFilterType.principal;

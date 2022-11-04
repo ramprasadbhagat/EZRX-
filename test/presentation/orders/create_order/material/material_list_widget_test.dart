@@ -487,7 +487,9 @@ void main() {
           'materialOption${materialListBlocMock.state.materialList.first.materialNumber.getOrCrash()}'));
       expect(listContent, findsOneWidget);
       final listPrice = find.textContaining('List Price: '.tr());
-      expect(listPrice, findsOneWidget);
+      if (salesOrgBlocMock.state.configs.enableListPrice) {
+        expect(listPrice, findsOneWidget);
+      }
       final unitPrice = find.textContaining('Unit Price: '.tr());
       expect(unitPrice, findsOneWidget);
     });

@@ -70,6 +70,8 @@ mixin _$SalesOrganisationConfigsDto {
   String get futureDeliveryDay => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableGMC', defaultValue: false)
   bool get enableGMC => throw _privateConstructorUsedError;
+  @JsonKey(name: 'enableListPrice', defaultValue: false)
+  bool get enableListPrice => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -132,7 +134,9 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
       @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
           String futureDeliveryDay,
       @JsonKey(name: 'enableGMC', defaultValue: false)
-          bool enableGMC});
+          bool enableGMC,
+      @JsonKey(name: 'enableListPrice', defaultValue: false)
+          bool enableListPrice});
 }
 
 /// @nodoc
@@ -170,6 +174,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? enablePaymentTerms = freezed,
     Object? futureDeliveryDay = freezed,
     Object? enableGMC = freezed,
+    Object? enableListPrice = freezed,
   }) {
     return _then(_value.copyWith(
       disableProcessingStatus: disableProcessingStatus == freezed
@@ -268,6 +273,10 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.enableGMC
           : enableGMC // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableListPrice: enableListPrice == freezed
+          ? _value.enableListPrice
+          : enableListPrice // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -329,7 +338,9 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
       @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
           String futureDeliveryDay,
       @JsonKey(name: 'enableGMC', defaultValue: false)
-          bool enableGMC});
+          bool enableGMC,
+      @JsonKey(name: 'enableListPrice', defaultValue: false)
+          bool enableListPrice});
 }
 
 /// @nodoc
@@ -371,6 +382,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? enablePaymentTerms = freezed,
     Object? futureDeliveryDay = freezed,
     Object? enableGMC = freezed,
+    Object? enableListPrice = freezed,
   }) {
     return _then(_$_SalesOrganisationConfigsDto(
       disableProcessingStatus: disableProcessingStatus == freezed
@@ -469,6 +481,10 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.enableGMC
           : enableGMC // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableListPrice: enableListPrice == freezed
+          ? _value.enableListPrice
+          : enableListPrice // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -525,7 +541,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
       @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
           required this.futureDeliveryDay,
       @JsonKey(name: 'enableGMC', defaultValue: false)
-          required this.enableGMC})
+          required this.enableGMC,
+      @JsonKey(name: 'enableListPrice', defaultValue: false)
+          required this.enableListPrice})
       : _principalList = principalList,
         super._();
 
@@ -610,10 +628,13 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @override
   @JsonKey(name: 'enableGMC', defaultValue: false)
   final bool enableGMC;
+  @override
+  @JsonKey(name: 'enableListPrice', defaultValue: false)
+  final bool enableListPrice;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice)';
   }
 
   @override
@@ -664,7 +685,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
                 .equals(other.enablePaymentTerms, enablePaymentTerms) &&
             const DeepCollectionEquality()
                 .equals(other.futureDeliveryDay, futureDeliveryDay) &&
-            const DeepCollectionEquality().equals(other.enableGMC, enableGMC));
+            const DeepCollectionEquality().equals(other.enableGMC, enableGMC) &&
+            const DeepCollectionEquality()
+                .equals(other.enableListPrice, enableListPrice));
   }
 
   @JsonKey(ignore: true)
@@ -694,7 +717,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
         const DeepCollectionEquality().hash(enableFutureDeliveryDay),
         const DeepCollectionEquality().hash(enablePaymentTerms),
         const DeepCollectionEquality().hash(futureDeliveryDay),
-        const DeepCollectionEquality().hash(enableGMC)
+        const DeepCollectionEquality().hash(enableGMC),
+        const DeepCollectionEquality().hash(enableListPrice)
       ]);
 
   @JsonKey(ignore: true)
@@ -714,55 +738,58 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
 abstract class _SalesOrganisationConfigsDto
     extends SalesOrganisationConfigsDto {
   const factory _SalesOrganisationConfigsDto(
-      {@JsonKey(name: 'disableProcessingStatus')
-          required final bool disableProcessingStatus,
-      @JsonKey(name: 'currency')
-          required final String currency,
-      @JsonKey(name: 'hideCustomer', defaultValue: false)
-          required final bool hideCustomer,
-      @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
-          required final bool enableGimmickMaterial,
-      @JsonKey(name: 'languageFilter', defaultValue: false)
-          required final bool languageFilter,
-      @JsonKey(name: 'languageValue', defaultValue: '')
-          required final String languageValue,
-      @JsonKey(name: 'disablePrincipals', defaultValue: false)
-          required final bool disablePrincipals,
-      @_PrincipalListConverter()
-      @JsonKey(name: 'principalList')
-          required final List<dynamic> principalList,
-      @JsonKey(name: 'disableOrderType', defaultValue: false)
-          required final bool disableOrderType,
-      @JsonKey(name: 'enableBatchNumber', defaultValue: false)
-          required final bool enableBatchNumber,
-      @JsonKey(name: 'disableBundles', defaultValue: false)
-          required final bool disableBundles,
-      @JsonKey(name: 'enableZDP5', defaultValue: false)
-          required final bool enableZDP5,
-      @JsonKey(name: 'enableTaxClassification', defaultValue: false)
-          required final bool enableTaxClassification,
-      @JsonKey(name: 'enableVat', defaultValue: false)
-          required final bool enableVat,
-      @JsonKey(name: 'vatValue', defaultValue: 0)
-          required final int vatValue,
-      @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
-          required final bool materialWithoutPrice,
-      @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
-          required final bool enableSpecialInstructions,
-      @JsonKey(name: 'enableReferenceNote', defaultValue: false)
-          required final bool enableReferenceNote,
-      @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
-          required final bool enableCollectiveNumber,
-      @JsonKey(name: 'enableMobileNumber', defaultValue: false)
-          required final bool enableMobileNumber,
-      @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
-          required final bool enableFutureDeliveryDay,
-      @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
-          required final bool enablePaymentTerms,
-      @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
-          required final String futureDeliveryDay,
-      @JsonKey(name: 'enableGMC', defaultValue: false)
-          required final bool enableGMC}) = _$_SalesOrganisationConfigsDto;
+          {@JsonKey(name: 'disableProcessingStatus')
+              required final bool disableProcessingStatus,
+          @JsonKey(name: 'currency')
+              required final String currency,
+          @JsonKey(name: 'hideCustomer', defaultValue: false)
+              required final bool hideCustomer,
+          @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
+              required final bool enableGimmickMaterial,
+          @JsonKey(name: 'languageFilter', defaultValue: false)
+              required final bool languageFilter,
+          @JsonKey(name: 'languageValue', defaultValue: '')
+              required final String languageValue,
+          @JsonKey(name: 'disablePrincipals', defaultValue: false)
+              required final bool disablePrincipals,
+          @_PrincipalListConverter()
+          @JsonKey(name: 'principalList')
+              required final List<dynamic> principalList,
+          @JsonKey(name: 'disableOrderType', defaultValue: false)
+              required final bool disableOrderType,
+          @JsonKey(name: 'enableBatchNumber', defaultValue: false)
+              required final bool enableBatchNumber,
+          @JsonKey(name: 'disableBundles', defaultValue: false)
+              required final bool disableBundles,
+          @JsonKey(name: 'enableZDP5', defaultValue: false)
+              required final bool enableZDP5,
+          @JsonKey(name: 'enableTaxClassification', defaultValue: false)
+              required final bool enableTaxClassification,
+          @JsonKey(name: 'enableVat', defaultValue: false)
+              required final bool enableVat,
+          @JsonKey(name: 'vatValue', defaultValue: 0)
+              required final int vatValue,
+          @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
+              required final bool materialWithoutPrice,
+          @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
+              required final bool enableSpecialInstructions,
+          @JsonKey(name: 'enableReferenceNote', defaultValue: false)
+              required final bool enableReferenceNote,
+          @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
+              required final bool enableCollectiveNumber,
+          @JsonKey(name: 'enableMobileNumber', defaultValue: false)
+              required final bool enableMobileNumber,
+          @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
+              required final bool enableFutureDeliveryDay,
+          @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
+              required final bool enablePaymentTerms,
+          @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
+              required final String futureDeliveryDay,
+          @JsonKey(name: 'enableGMC', defaultValue: false)
+              required final bool enableGMC,
+          @JsonKey(name: 'enableListPrice', defaultValue: false)
+              required final bool enableListPrice}) =
+      _$_SalesOrganisationConfigsDto;
   const _SalesOrganisationConfigsDto._() : super._();
 
   factory _SalesOrganisationConfigsDto.fromJson(Map<String, dynamic> json) =
@@ -841,6 +868,9 @@ abstract class _SalesOrganisationConfigsDto
   @override
   @JsonKey(name: 'enableGMC', defaultValue: false)
   bool get enableGMC;
+  @override
+  @JsonKey(name: 'enableListPrice', defaultValue: false)
+  bool get enableListPrice;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsDtoCopyWith<_$_SalesOrganisationConfigsDto>
