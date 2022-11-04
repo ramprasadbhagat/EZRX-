@@ -47,21 +47,47 @@ class MaterialFilterPage extends StatelessWidget {
       builder: (context, state) {
         return WillPopScope(
           onWillPop: () async {
-            context.read<MaterialListBloc>().add(
-                  MaterialListEvent.fetch(
-                    user: context.read<UserBloc>().state.user,
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    configs: context.read<SalesOrgBloc>().state.configs,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-                    selectedMaterialFilter: context
-                        .read<MaterialFilterBloc>()
-                        .state
-                        .selectedMaterialFilter,
-                  ),
-                );
+            context.read<MaterialListBloc>().state.searchKey.isValid()
+                ? context.read<MaterialListBloc>().add(
+                      MaterialListEvent.searchMaterialList(
+                        user: context.read<UserBloc>().state.user,
+                        salesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        configs: context.read<SalesOrgBloc>().state.configs,
+                        customerCodeInfo: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customerCodeInfo,
+                        shipToInfo:
+                            context.read<ShipToCodeBloc>().state.shipToInfo,
+                        selectedMaterialFilter: context
+                            .read<MaterialFilterBloc>()
+                            .state
+                            .selectedMaterialFilter,
+                      ),
+                    )
+                : context.read<MaterialListBloc>().add(
+                      MaterialListEvent.fetch(
+                        user: context.read<UserBloc>().state.user,
+                        salesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        configs: context.read<SalesOrgBloc>().state.configs,
+                        customerCodeInfo: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customerCodeInfo,
+                        shipToInfo:
+                            context.read<ShipToCodeBloc>().state.shipToInfo,
+                        selectedMaterialFilter: context
+                            .read<MaterialFilterBloc>()
+                            .state
+                            .selectedMaterialFilter,
+                      ),
+                    );
 
             return true;
           },

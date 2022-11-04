@@ -59,8 +59,8 @@ class CovidMaterialListBloc
           offset: 0,
           orderBy: 'materialDescription_asc',
           searchKey: state.searchKey.getValue(),
-          ispickandpackenabled: true,
-          isForFoc: true,
+          ispickandpackenabled: e.user.role.type.isSalesRep ? true : false,
+          isForFoc: e.user.role.type.isSalesRep ? false : true,
           selectedMaterialFilter: MaterialFilter.empty(),
         );
         failureOrSuccess.fold(
@@ -103,8 +103,8 @@ class CovidMaterialListBloc
           offset: state.materialList.length,
           orderBy: 'materialDescription_asc',
           searchKey: state.searchKey.getValue(),
-          ispickandpackenabled: true,
-          isForFoc: true,
+          ispickandpackenabled: e.user.role.type.isSalesRep ? true : false,
+          isForFoc: e.user.role.type.isSalesRep ? false : true,
           selectedMaterialFilter: MaterialFilter.empty(),
         );
 
@@ -123,6 +123,45 @@ class CovidMaterialListBloc
             emit(
               state.copyWith(
                 materialList: newSavedOrders,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+                canLoadMore: materialList.length >= _pageSize,
+                nextPageIndex: state.nextPageIndex + 1,
+              ),
+            );
+          },
+        );
+      },
+      searchMaterialList: (e) async {
+        final failureOrSuccess =
+            await materialListRepository.searchMaterialList(
+          user: e.user,
+          salesOrganisation: e.salesOrganisation,
+          salesOrgConfig: e.configs,
+          customerCodeInfo: e.customerCodeInfo,
+          shipToInfo: e.shipToInfo,
+          pageSize: _pageSize,
+          offset: 0, //state.materialList.length,
+          orderBy: 'materialDescription_asc',
+          searchKey: state.searchKey.getValue(),
+          selectedMaterialFilter: e.selectedMaterialFilter,
+
+          ispickandpackenabled: e.user.role.type.isSalesRep ? true : false,
+          isForFoc: e.user.role.type.isSalesRep ? false : true,
+        );
+        await failureOrSuccess.fold(
+          (failure) async {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (materialList) async {
+            emit(
+              state.copyWith(
+                materialList: materialList,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
                 canLoadMore: materialList.length >= _pageSize,

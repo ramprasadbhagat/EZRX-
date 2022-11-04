@@ -54,7 +54,8 @@ class MaterialListPage extends StatelessWidget {
           );
         },
         buildWhen: (previous, current) =>
-            previous.isFetching != current.isFetching,
+            previous.isFetching != current.isFetching ||
+            previous.materialList != current.materialList,
         builder: (context, state) {
           return Column(
             children: [
@@ -102,6 +103,9 @@ class _BodyContent extends StatelessWidget {
                     .read<MaterialFilterBloc>()
                     .add(const MaterialFilterEvent.clearSelected());
 
+                context.read<MaterialListBloc>().add(
+                      const MaterialListEvent.updateSearchKey(searchKey: ''),
+                    );
                 context.read<MaterialListBloc>().add(
                       MaterialListEvent.fetch(
                         user: context.read<UserBloc>().state.user,
@@ -387,6 +391,31 @@ class _SearchBarState extends State<_SearchBar> {
   void initState() {
     _searchController = TextEditingController();
     super.initState();
+    final searchText = context.read<MaterialListBloc>().state.searchKey;
+    if (searchText.isValid()) {
+      _searchController.value = TextEditingValue(
+        text: searchText.getOrCrash(),
+        selection: TextSelection.collapsed(
+          offset: searchText.getOrCrash().length,
+        ),
+      );
+      context.read<MaterialListBloc>().add(
+            MaterialListEvent.searchMaterialList(
+              user: context.read<UserBloc>().state.user,
+              salesOrganisation:
+                  context.read<SalesOrgBloc>().state.salesOrganisation,
+              configs: context.read<SalesOrgBloc>().state.configs,
+              customerCodeInfo:
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
+              shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+              selectedMaterialFilter: context
+                  .read<MaterialFilterBloc>()
+                  .state
+                  .selectedMaterialFilter,
+            ),
+          );
+    }
+    super.initState();
   }
 
   @override
@@ -429,6 +458,26 @@ class _SearchBarState extends State<_SearchBar> {
               onFieldSubmitted: (value) {
                 if (state.searchKey.isValid()) {
                   // search code goes here
+                  context.read<MaterialListBloc>().add(
+                        MaterialListEvent.searchMaterialList(
+                          user: context.read<UserBloc>().state.user,
+                          salesOrganisation: context
+                              .read<SalesOrgBloc>()
+                              .state
+                              .salesOrganisation,
+                          configs: context.read<SalesOrgBloc>().state.configs,
+                          customerCodeInfo: context
+                              .read<CustomerCodeBloc>()
+                              .state
+                              .customerCodeInfo,
+                          shipToInfo:
+                              context.read<ShipToCodeBloc>().state.shipToInfo,
+                          selectedMaterialFilter: context
+                              .read<MaterialFilterBloc>()
+                              .state
+                              .selectedMaterialFilter,
+                        ),
+                      );
                 } else {
                   showSnackBar(
                     context: context,
@@ -466,6 +515,26 @@ class _SearchBarState extends State<_SearchBar> {
                           ),
                         );
                     // fetch code goes here
+                    context
+                        .read<MaterialListBloc>()
+                        .add(MaterialListEvent.fetch(
+                          user: context.read<UserBloc>().state.user,
+                          salesOrganisation: context
+                              .read<SalesOrgBloc>()
+                              .state
+                              .salesOrganisation,
+                          configs: context.read<SalesOrgBloc>().state.configs,
+                          customerCodeInfo: context
+                              .read<CustomerCodeBloc>()
+                              .state
+                              .customerCodeInfo,
+                          shipToInfo:
+                              context.read<ShipToCodeBloc>().state.shipToInfo,
+                          selectedMaterialFilter: context
+                              .read<MaterialFilterBloc>()
+                              .state
+                              .getEmptyMaterialFilter(),
+                        ));
                   },
                 ),
                 hintText: 'Search...',

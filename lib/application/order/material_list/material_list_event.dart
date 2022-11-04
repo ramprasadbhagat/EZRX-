@@ -11,6 +11,15 @@ class MaterialListEvent with _$MaterialListEvent {
     required ShipToInfo shipToInfo,
     required MaterialFilter selectedMaterialFilter,
   }) = _Fetch;
+
+  const factory MaterialListEvent.searchMaterialList({
+    required User user,
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs configs,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required MaterialFilter selectedMaterialFilter,
+  }) = _SearchMagerialList;
   const factory MaterialListEvent.updateSearchKey({required String searchKey}) =
       _UpdateSearchKey;
   const factory MaterialListEvent.loadMore({

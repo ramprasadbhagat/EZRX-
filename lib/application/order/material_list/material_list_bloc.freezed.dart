@@ -27,6 +27,14 @@ mixin _$MaterialListEvent {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter)
         fetch,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
+        searchMaterialList,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
             User user,
@@ -49,6 +57,14 @@ mixin _$MaterialListEvent {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter)?
         fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
             User user,
@@ -71,6 +87,14 @@ mixin _$MaterialListEvent {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter)?
         fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
             User user,
@@ -87,6 +111,7 @@ mixin _$MaterialListEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SearchMagerialList value) searchMaterialList,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
   }) =>
@@ -95,6 +120,7 @@ mixin _$MaterialListEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_SearchMagerialList value)? searchMaterialList,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
   }) =>
@@ -103,6 +129,7 @@ mixin _$MaterialListEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_SearchMagerialList value)? searchMaterialList,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
@@ -177,6 +204,14 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter)
         fetch,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
+        searchMaterialList,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
             User user,
@@ -202,6 +237,14 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter)?
         fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
             User user,
@@ -227,6 +270,14 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter)?
         fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
             User user,
@@ -249,6 +300,7 @@ class _$_Initialized implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SearchMagerialList value) searchMaterialList,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
   }) {
@@ -260,6 +312,7 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_SearchMagerialList value)? searchMaterialList,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
   }) {
@@ -271,6 +324,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_SearchMagerialList value)? searchMaterialList,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
@@ -469,6 +523,14 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter)
         fetch,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
+        searchMaterialList,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
             User user,
@@ -495,6 +557,14 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter)?
         fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
             User user,
@@ -521,6 +591,14 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter)?
         fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
             User user,
@@ -544,6 +622,7 @@ class _$_Fetch implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SearchMagerialList value) searchMaterialList,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
   }) {
@@ -555,6 +634,7 @@ class _$_Fetch implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_SearchMagerialList value)? searchMaterialList,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
   }) {
@@ -566,6 +646,7 @@ class _$_Fetch implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_SearchMagerialList value)? searchMaterialList,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
@@ -594,6 +675,349 @@ abstract class _Fetch implements MaterialListEvent {
   MaterialFilter get selectedMaterialFilter;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SearchMagerialListCopyWith<$Res> {
+  factory _$$_SearchMagerialListCopyWith(_$_SearchMagerialList value,
+          $Res Function(_$_SearchMagerialList) then) =
+      __$$_SearchMagerialListCopyWithImpl<$Res>;
+  $Res call(
+      {User user,
+      SalesOrganisation salesOrganisation,
+      SalesOrganisationConfigs configs,
+      CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
+      MaterialFilter selectedMaterialFilter});
+
+  $UserCopyWith<$Res> get user;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $SalesOrganisationConfigsCopyWith<$Res> get configs;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $MaterialFilterCopyWith<$Res> get selectedMaterialFilter;
+}
+
+/// @nodoc
+class __$$_SearchMagerialListCopyWithImpl<$Res>
+    extends _$MaterialListEventCopyWithImpl<$Res>
+    implements _$$_SearchMagerialListCopyWith<$Res> {
+  __$$_SearchMagerialListCopyWithImpl(
+      _$_SearchMagerialList _value, $Res Function(_$_SearchMagerialList) _then)
+      : super(_value, (v) => _then(v as _$_SearchMagerialList));
+
+  @override
+  _$_SearchMagerialList get _value => super._value as _$_SearchMagerialList;
+
+  @override
+  $Res call({
+    Object? user = freezed,
+    Object? salesOrganisation = freezed,
+    Object? configs = freezed,
+    Object? customerCodeInfo = freezed,
+    Object? shipToInfo = freezed,
+    Object? selectedMaterialFilter = freezed,
+  }) {
+    return _then(_$_SearchMagerialList(
+      user: user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      salesOrganisation: salesOrganisation == freezed
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      configs: configs == freezed
+          ? _value.configs
+          : configs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      customerCodeInfo: customerCodeInfo == freezed
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      shipToInfo: shipToInfo == freezed
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      selectedMaterialFilter: selectedMaterialFilter == freezed
+          ? _value.selectedMaterialFilter
+          : selectedMaterialFilter // ignore: cast_nullable_to_non_nullable
+              as MaterialFilter,
+    ));
+  }
+
+  @override
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+
+  @override
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+
+  @override
+  $SalesOrganisationConfigsCopyWith<$Res> get configs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.configs, (value) {
+      return _then(_value.copyWith(configs: value));
+    });
+  }
+
+  @override
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
+
+  @override
+  $MaterialFilterCopyWith<$Res> get selectedMaterialFilter {
+    return $MaterialFilterCopyWith<$Res>(_value.selectedMaterialFilter,
+        (value) {
+      return _then(_value.copyWith(selectedMaterialFilter: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_SearchMagerialList implements _SearchMagerialList {
+  const _$_SearchMagerialList(
+      {required this.user,
+      required this.salesOrganisation,
+      required this.configs,
+      required this.customerCodeInfo,
+      required this.shipToInfo,
+      required this.selectedMaterialFilter});
+
+  @override
+  final User user;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final SalesOrganisationConfigs configs;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final ShipToInfo shipToInfo;
+  @override
+  final MaterialFilter selectedMaterialFilter;
+
+  @override
+  String toString() {
+    return 'MaterialListEvent.searchMaterialList(user: $user, salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, selectedMaterialFilter: $selectedMaterialFilter)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SearchMagerialList &&
+            const DeepCollectionEquality().equals(other.user, user) &&
+            const DeepCollectionEquality()
+                .equals(other.salesOrganisation, salesOrganisation) &&
+            const DeepCollectionEquality().equals(other.configs, configs) &&
+            const DeepCollectionEquality()
+                .equals(other.customerCodeInfo, customerCodeInfo) &&
+            const DeepCollectionEquality()
+                .equals(other.shipToInfo, shipToInfo) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedMaterialFilter, selectedMaterialFilter));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(user),
+      const DeepCollectionEquality().hash(salesOrganisation),
+      const DeepCollectionEquality().hash(configs),
+      const DeepCollectionEquality().hash(customerCodeInfo),
+      const DeepCollectionEquality().hash(shipToInfo),
+      const DeepCollectionEquality().hash(selectedMaterialFilter));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_SearchMagerialListCopyWith<_$_SearchMagerialList> get copyWith =>
+      __$$_SearchMagerialListCopyWithImpl<_$_SearchMagerialList>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
+        fetch,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
+        searchMaterialList,
+    required TResult Function(String searchKey) updateSearchKey,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
+        loadMore,
+  }) {
+    return searchMaterialList(user, salesOrganisation, configs,
+        customerCodeInfo, shipToInfo, selectedMaterialFilter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        searchMaterialList,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        loadMore,
+  }) {
+    return searchMaterialList?.call(user, salesOrganisation, configs,
+        customerCodeInfo, shipToInfo, selectedMaterialFilter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        searchMaterialList,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        loadMore,
+    required TResult orElse(),
+  }) {
+    if (searchMaterialList != null) {
+      return searchMaterialList(user, salesOrganisation, configs,
+          customerCodeInfo, shipToInfo, selectedMaterialFilter);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SearchMagerialList value) searchMaterialList,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
+    required TResult Function(_LoadMore value) loadMore,
+  }) {
+    return searchMaterialList(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_SearchMagerialList value)? searchMaterialList,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(_LoadMore value)? loadMore,
+  }) {
+    return searchMaterialList?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_SearchMagerialList value)? searchMaterialList,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(_LoadMore value)? loadMore,
+    required TResult orElse(),
+  }) {
+    if (searchMaterialList != null) {
+      return searchMaterialList(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SearchMagerialList implements MaterialListEvent {
+  const factory _SearchMagerialList(
+          {required final User user,
+          required final SalesOrganisation salesOrganisation,
+          required final SalesOrganisationConfigs configs,
+          required final CustomerCodeInfo customerCodeInfo,
+          required final ShipToInfo shipToInfo,
+          required final MaterialFilter selectedMaterialFilter}) =
+      _$_SearchMagerialList;
+
+  User get user;
+  SalesOrganisation get salesOrganisation;
+  SalesOrganisationConfigs get configs;
+  CustomerCodeInfo get customerCodeInfo;
+  ShipToInfo get shipToInfo;
+  MaterialFilter get selectedMaterialFilter;
+  @JsonKey(ignore: true)
+  _$$_SearchMagerialListCopyWith<_$_SearchMagerialList> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -671,6 +1095,14 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter)
         fetch,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
+        searchMaterialList,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
             User user,
@@ -696,6 +1128,14 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter)?
         fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
             User user,
@@ -721,6 +1161,14 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter)?
         fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
             User user,
@@ -743,6 +1191,7 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SearchMagerialList value) searchMaterialList,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
   }) {
@@ -754,6 +1203,7 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_SearchMagerialList value)? searchMaterialList,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
   }) {
@@ -765,6 +1215,7 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_SearchMagerialList value)? searchMaterialList,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
@@ -972,6 +1423,14 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter)
         fetch,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)
+        searchMaterialList,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
             User user,
@@ -998,6 +1457,14 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter)?
         fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
             User user,
@@ -1024,6 +1491,14 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter)?
         fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialFilter selectedMaterialFilter)?
+        searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
             User user,
@@ -1047,6 +1522,7 @@ class _$_LoadMore implements _LoadMore {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SearchMagerialList value) searchMaterialList,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
   }) {
@@ -1058,6 +1534,7 @@ class _$_LoadMore implements _LoadMore {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_SearchMagerialList value)? searchMaterialList,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
   }) {
@@ -1069,6 +1546,7 @@ class _$_LoadMore implements _LoadMore {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_SearchMagerialList value)? searchMaterialList,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),

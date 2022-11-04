@@ -18,7 +18,7 @@ part 'material_list_bloc.freezed.dart';
 part 'material_list_event.dart';
 part 'material_list_state.dart';
 
-const int _pageSize = 10;
+int _pageSize = 10;
 
 class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
   final IMaterialListRepository materialListRepository;
@@ -121,6 +121,43 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
             emit(
               state.copyWith(
                 materialList: newSavedOrders,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+                canLoadMore: materialList.length >= _pageSize,
+                nextPageIndex: state.nextPageIndex + 1,
+              ),
+            );
+          },
+        );
+      },
+      searchMaterialList: (e) async {
+        print(_pageSize);
+        final failureOrSuccess =
+            await materialListRepository.searchMaterialList(
+          user: e.user,
+          salesOrganisation: e.salesOrganisation,
+          salesOrgConfig: e.configs,
+          customerCodeInfo: e.customerCodeInfo,
+          shipToInfo: e.shipToInfo,
+          pageSize: _pageSize,
+          offset: 0, //state.materialList.length,
+          orderBy: 'materialDescription_asc',
+          searchKey: state.searchKey.getValue(),
+          selectedMaterialFilter: e.selectedMaterialFilter,
+        );
+        await failureOrSuccess.fold(
+          (failure) async {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (materialList) async {
+            emit(
+              state.copyWith(
+                materialList: materialList,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
                 canLoadMore: materialList.length >= _pageSize,

@@ -132,4 +132,147 @@ class MaterialsWithMetaQuery {
     }
     ''';
   }
+
+//   String getItemsFilteredSalesRep({
+//     required String username,
+//     required String custCode,
+//     required String shipToCode,
+//     required String salesOrg,
+//     required int paginate,
+//     required String languageActive,
+//     required List excludePrincipal,
+//     required String searchKeyActive,
+//     required String orderBy,
+//     required bool gimmickMaterial,
+//     required String pickandpack,
+//     required List<String> principalNameList,
+//     required List<String> itemBrandList,
+//     required List<String> therapeuticClassList,
+//     required int offset,
+//   }) {
+//     // final filterKey =
+//     //     searchKeyActiveFilter.isEmpty ? '' : searchKeyActiveFilter;
+//     var language = '';
+//     if (languageActive != '') {
+//       language = ''', language: "$languageActive" ''';
+//     }
+
+//     final searchKey = searchKeyActive.isEmpty ? '' : searchKeyActive;
+
+//     return '''
+//     {
+//       customerMaterialsForSalesRep(username: "$username",
+//       customerSoldToCode: "$custCode", customerShipToCode: "$shipToCode",
+//       salesOrganisation: "$salesOrg" ,language:$language , orderBy: "$orderBy",
+//       excludePrincipal: $excludePrincipal ,$searchKey,
+//        first:  $paginate ,after: $offset,gimmickMaterial:$gimmickMaterial true}) {
+//         rawMetaData{
+//           count
+//         }
+//         processedMetaData{
+//           count
+//         }
+//         materials {
+//           materialNumber
+//           isSampleMaterial
+//           isFOCMaterial
+//           materialDescription
+//           governmentMaterialCode
+//           principalName
+//           principalCode
+//           therapeuticClass
+//           itemBrand
+//           taxClassification
+//           itemRegistrationNumber
+//           unitOfMeasurement
+//           materialGroup2
+//           materialGroup4
+//           taxes
+//           hidePrice
+//           hasValidTenderContract
+//           hasMandatoryTenderContract
+//         }
+//       }
+//     }
+//     ''';
+//   }
+
+// ////////////queryyyyyyyyyyyy
+
+//   String getMaterialList({
+//     required String custCode,
+//     required String shipToCode,
+//     required String salesOrg,
+//     required int paginate,
+//     required String languageActive,
+//     required List excludePrincipal,
+//     required String searchKeyActive,
+//     required String orderBy,
+//     required MaterialFilter searchKeyActiveFilter,
+//     required List<String> principalNameList,
+//     required List<String> itemBrandList,
+//     required List<String> therapeuticClassList,
+//     required int offset,
+//   }) {
+//     var language = '';
+//     var searchKey = '';
+//     if (searchKeyActive != '') {
+//       searchKey = ''', searchKey: "$searchKeyActive" ''';
+//     }
+//     if (languageActive != '') {
+//       language = ''', language: "$languageActive" ''';
+//     }
+//     var orderBy = '';
+//     orderBy = ''', orderBy: "$orderBy" ''';
+//     final principalName = principalNameList.isEmpty
+//         ? ''
+//         : ''',principalName:"$principalNameList"''';
+//     final itemBrand =
+//         itemBrandList.isEmpty ? '' : ''',itemBrand:"$itemBrandList"''';
+
+//     final therapeuticClass = therapeuticClassList.isEmpty
+//         ? ''
+//         : ''',therapeuticClass:"$therapeuticClassList"''';
+
+//     return '''{
+//             materialsWithMeta(customer: "$custCode",
+//              shipToCustomer: "$shipToCode",salesOrganisation: "$salesOrg",
+//              excludePrincipal: $excludePrincipal $searchKey,first: $paginate ,after:$offset,
+//  $principalName
+//  $therapeuticClass
+// $itemBrand
+
+// )
+
+// {
+//               rawMetaData{
+//                 count
+//               }
+//               processedMetaData{
+//                 count
+//               }
+//               materials {
+//                 materialNumber
+//                 isSampleMaterial
+//                 isFOCMaterial
+//                 materialDescription
+//                 governmentMaterialCode
+//                 principalName
+//                 principalCode
+//                 therapeuticClass
+//                 itemBrand
+//                 taxClassification
+//                 itemRegistrationNumber
+//                 unitOfMeasurement
+//                 materialGroup2
+//                 materialGroup4
+//                 taxes
+//                 hidePrice
+//                 hasValidTenderContract
+//                 hasMandatoryTenderContract
+//               }
+//             }
+//           }
+// ''';
+//   }
 }

@@ -96,4 +96,73 @@ class MaterialListRepository implements IMaterialListRepository {
       return Left(FailureHandler.handleFailure(e));
     }
   }
+
+  @override
+  Future<Either<ApiFailure, List<MaterialInfo>>> searchMaterialList({
+    required User user,
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesOrgConfig,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required int pageSize,
+    required int offset,
+    required String orderBy,
+    required String searchKey,
+    required MaterialFilter selectedMaterialFilter,
+    bool ispickandpackenabled = false,
+    bool isForFoc = false,
+  }) async {
+    // if (config.appFlavor == Flavor.mock) {
+    //   try {
+    // final materialListData = user.role.type.isSalesRep
+    //     ? await materialListLocalDataSource.getMaterialListSalesRep()
+    //     : await materialListLocalDataSource.getMaterialList();
+
+    //     return Right(materialListData);
+    //   } catch (e) {
+    //     return Left(FailureHandler.handleFailure(e));
+    //   }
+    // }
+
+    try {
+      final materialListData = user.role.type.isSalesRep
+          ? await materialListRemoteDataSource.searchMaterialListSalesRep(
+              userName: user.username.getOrCrash(),
+              pickAndPack: appMethods.getPickAndPackValue(ispickandpackenabled),
+              salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
+              excludePrincipal: salesOrgConfig.getExcludePrincipal,
+              customerCode: customerCodeInfo.customerCodeSoldTo,
+              shipToCode: shipToInfo.shipToCustomerCode,
+              pageSize: pageSize,
+              offset: offset,
+              orderBy: orderBy,
+              searchKey: searchKey,
+              language: salesOrgConfig.getConfigLangauge,
+              gimmickMaterial: salesOrgConfig.enableGimmickMaterial,
+              isForFOC: isForFoc,
+              selectedMaterialFilter: selectedMaterialFilter,
+            )
+          : await materialListRemoteDataSource.searchMaterialList(
+              salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
+              excludePrincipal: salesOrgConfig.getExcludePrincipal,
+              customerCode: customerCodeInfo.customerCodeSoldTo,
+              shipToCode: shipToInfo.shipToCustomerCode,
+              pageSize: pageSize,
+              offset: offset,
+              orderBy: orderBy,
+              searchKey: searchKey,
+              language: salesOrgConfig.getConfigLangauge,
+              principalNameList: selectedMaterialFilter.uniquePrincipalName,
+              itemBrandList: selectedMaterialFilter.uniqueItemBrand,
+              therapeuticClassList:
+                  selectedMaterialFilter.uniqueTherapeuticClass,
+              isForFOC: isForFoc,
+              selectedMaterialFilter: selectedMaterialFilter,
+            );
+
+      return Right(materialListData);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
 }

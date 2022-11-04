@@ -101,8 +101,9 @@ void main() {
               offset: 0,
               orderBy: 'materialDescription_asc',
               searchKey: '',
-              ispickandpackenabled: true,
-              isForFoc: true,
+              ispickandpackenabled:
+                  mockUser.role.type.isSalesRep ? true : false,
+              isForFoc: mockUser.role.type.isSalesRep ? false : true,
               selectedMaterialFilter: MaterialFilter.empty(),
             )).thenAnswer(
           (invocation) async => const Left(
@@ -140,18 +141,20 @@ void main() {
           materialListRepository: materialListMockRepository),
       setUp: () {
         when(() => materialListMockRepository.getMaterialList(
-            user: mockUser,
-            salesOrganisation: mockSalesOrg,
-            salesOrgConfig: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
-            pageSize: _defaultPageSize,
-            offset: 0,
-            orderBy: 'materialDescription_asc',
-            searchKey: '',
-            selectedMaterialFilter: MaterialFilter.empty(),
-            isForFoc: true,
-            ispickandpackenabled: true)).thenAnswer(
+              user: mockUser,
+              salesOrganisation: mockSalesOrg,
+              salesOrgConfig: mockSalesOrganisationConfigs,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              pageSize: _defaultPageSize,
+              offset: 0,
+              orderBy: 'materialDescription_asc',
+              searchKey: '',
+              selectedMaterialFilter: MaterialFilter.empty(),
+              ispickandpackenabled:
+                  mockUser.role.type.isSalesRep ? true : false,
+              isForFoc: mockUser.role.type.isSalesRep ? false : true,
+            )).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
       },
@@ -210,8 +213,9 @@ void main() {
               offset: 0,
               orderBy: 'materialDescription_asc',
               searchKey: '',
-              isForFoc: true,
-              ispickandpackenabled: true,
+              ispickandpackenabled:
+                  mockUser.role.type.isSalesRep ? true : false,
+              isForFoc: mockUser.role.type.isSalesRep ? false : true,
               selectedMaterialFilter: MaterialFilter.empty(),
             )).thenAnswer(
           (invocation) async => Right(materialListMock),
@@ -224,8 +228,9 @@ void main() {
               shipToInfo: mockShipToInfo,
               pageSize: _defaultPageSize,
               offset: materialListMock.length,
-              isForFoc: true,
-              ispickandpackenabled: true,
+              ispickandpackenabled:
+                  mockUser.role.type.isSalesRep ? true : false,
+              isForFoc: mockUser.role.type.isSalesRep ? false : true,
               orderBy: 'materialDescription_asc',
               searchKey: '',
               selectedMaterialFilter: MaterialFilter.empty(),
@@ -292,8 +297,9 @@ void main() {
               offset: 0,
               orderBy: 'materialDescription_asc',
               searchKey: '',
-              isForFoc: true,
-              ispickandpackenabled: true,
+              ispickandpackenabled:
+                  mockUser.role.type.isSalesRep ? true : false,
+              isForFoc: mockUser.role.type.isSalesRep ? false : true,
               selectedMaterialFilter: MaterialFilter.empty(),
             )).thenAnswer(
           (invocation) async => Right(materialListMock),
@@ -308,8 +314,9 @@ void main() {
               offset: materialListMock.length,
               orderBy: 'materialDescription_asc',
               searchKey: '',
-              isForFoc: true,
-              ispickandpackenabled: true,
+              ispickandpackenabled:
+                  mockUser.role.type.isSalesRep ? true : false,
+              isForFoc: mockUser.role.type.isSalesRep ? false : true,
               selectedMaterialFilter: MaterialFilter.empty(),
             )).thenAnswer(
           (invocation) async => const Left(
@@ -376,8 +383,9 @@ void main() {
               shipToInfo: mockShipToInfo,
               pageSize: _defaultPageSize,
               offset: 0,
-              isForFoc: true,
-              ispickandpackenabled: true,
+              ispickandpackenabled:
+                  mockUser.role.type.isSalesRep ? true : false,
+              isForFoc: mockUser.role.type.isSalesRep ? false : true,
               orderBy: 'materialDescription_asc',
               searchKey: '',
               selectedMaterialFilter: MaterialFilter.empty(),
@@ -394,8 +402,9 @@ void main() {
               offset: materialListMock.length,
               orderBy: 'materialDescription_asc',
               searchKey: '',
-              isForFoc: true,
-              ispickandpackenabled: true,
+              ispickandpackenabled:
+                  mockUser.role.type.isSalesRep ? true : false,
+              isForFoc: mockUser.role.type.isSalesRep ? false : true,
               selectedMaterialFilter: MaterialFilter.empty(),
             )).thenAnswer(
           (invocation) async => Right(materialListMock),

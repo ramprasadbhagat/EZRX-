@@ -23,4 +23,18 @@ abstract class IMaterialListRepository {
     bool ispickandpackenabled = false,
     bool isForFoc = false,
   });
+  Future<Either<ApiFailure, List<MaterialInfo>>> searchMaterialList({
+    required User user,
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesOrgConfig,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required int pageSize,
+    required int offset,
+    required String orderBy,
+    required String searchKey,
+    required MaterialFilter selectedMaterialFilter,
+    bool ispickandpackenabled = false,
+    bool isForFoc = false,
+  });
 }

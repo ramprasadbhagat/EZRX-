@@ -12,10 +12,17 @@ class CovidMaterialListEvent with _$CovidMaterialListEvent {
     required ShipToInfo shipToInfo,
   }) = _Fetch;
 
+  const factory CovidMaterialListEvent.searchMaterialList({
+    required User user,
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs configs,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required MaterialFilter selectedMaterialFilter,
+  }) = _SearchMagerialList;
   const factory CovidMaterialListEvent.updateSearchKey({
     required String searchKey,
   }) = _UpdateSearchKey;
-
   const factory CovidMaterialListEvent.loadMore({
     required User user,
     required SalesOrganisation salesOrganisation,
