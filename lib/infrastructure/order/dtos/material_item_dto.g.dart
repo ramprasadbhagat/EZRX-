@@ -27,6 +27,8 @@ _$_MaterialItemDto _$$_MaterialItemDtoFromJson(Map<String, dynamic> json) =>
       batchNumber: json['batchNumber'] as String? ?? '',
       zdp8Override:
           boolStringFormatCheck(json, 'zdp8Override') as bool? ?? false,
+      overrideInfo: MaterialItemOverrideDto.fromJson(
+          materialItemOverride(json, 'override') as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_MaterialItemDtoToJson(_$_MaterialItemDto instance) =>
@@ -45,4 +47,5 @@ Map<String, dynamic> _$$_MaterialItemDtoToJson(_$_MaterialItemDto instance) =>
       'comment': instance.comment,
       'batchNumber': instance.batchNumber,
       'zdp8Override': instance.zdp8Override,
+      'override': instance.overrideInfo,
     };

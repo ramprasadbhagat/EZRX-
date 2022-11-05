@@ -1,7 +1,7 @@
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item_override.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_bonus_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'material_item_dto.freezed.dart';
@@ -35,8 +35,8 @@ class MaterialItemDto with _$MaterialItemDto {
     @JsonKey(name: 'batchNumber', defaultValue: '') required String batchNumber,
     @JsonKey(name: 'zdp8Override', defaultValue: false, readValue: boolStringFormatCheck)
         required bool zdp8Override,
-    // TODO: correct the overrideInfo
-    // @JsonKey(name: 'override') MaterialItemOverrideDto overrideInfo,
+    @JsonKey(name: 'override', readValue: materialItemOverride)
+        required MaterialItemOverrideDto overrideInfo,
   }) = _MaterialItemDto;
 
   MaterialItem toDomain() {
@@ -48,7 +48,6 @@ class MaterialItemDto with _$MaterialItemDto {
       batchNumber: batchNumber,
       zdp8Override: zdp8Override,
       bonuses: bonuses.map((e) => e.toDomain()).toList(),
-      overrideInfo: MaterialItemOverride.empty(),
       materialGroup2: MaterialGroup.two(materialGroup2),
       materialGroup4: MaterialGroup.four(materialGroup4),
       materialNumber: MaterialNumber(materialNumber),
@@ -56,6 +55,7 @@ class MaterialItemDto with _$MaterialItemDto {
       unitOfMeasurement: unitOfMeasurement,
       itemRegistrationNumber: itemRegistrationNumber,
       materialDescription: materialDescription,
+      overrideInfo: overrideInfo.toDomain(),
     );
   }
 
@@ -65,3 +65,6 @@ class MaterialItemDto with _$MaterialItemDto {
 
 bool boolStringFormatCheck(Map json, String key) =>
     json[key] == '' ? false : json[key];
+
+Map<String, dynamic> materialItemOverride(Map json, String key) =>
+    json[key] ?? {};
