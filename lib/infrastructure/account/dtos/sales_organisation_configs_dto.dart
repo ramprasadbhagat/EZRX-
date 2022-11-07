@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive/hive.dart';
 
 part 'sales_organisation_configs_dto.freezed.dart';
 part 'sales_organisation_configs_dto.g.dart';
@@ -9,53 +10,84 @@ part 'sales_organisation_configs_dto.g.dart';
 class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
   const SalesOrganisationConfigsDto._();
 
+  @HiveType(typeId: 5, adapterName: 'SalesOrganisationConfigsDtoAdapter')
   const factory SalesOrganisationConfigsDto({
     @JsonKey(name: 'disableProcessingStatus')
+    @HiveField(100)
         required bool disableProcessingStatus,
-    @JsonKey(name: 'currency') required String currency,
+    @JsonKey(name: 'currency')
+    @HiveField(101)
+        required String currency,
     @JsonKey(name: 'hideCustomer', defaultValue: false)
+    @HiveField(102)
         required bool hideCustomer,
     @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
+    @HiveField(103)
         required bool enableGimmickMaterial,
     @JsonKey(name: 'languageFilter', defaultValue: false)
+    @HiveField(104)
         required bool languageFilter,
     @JsonKey(name: 'languageValue', defaultValue: '')
+    @HiveField(105)
         required String languageValue,
     @JsonKey(name: 'disablePrincipals', defaultValue: false)
+    @HiveField(106)
         required bool disablePrincipals,
     @_PrincipalListConverter()
     @JsonKey(name: 'principalList')
+    @HiveField(7)
+        // TODO: Wasim , need data type here instead of List<dynamic>
         required List principalList,
     @JsonKey(name: 'disableOrderType', defaultValue: false)
+    @HiveField(108)
         required bool disableOrderType,
     @JsonKey(name: 'enableBatchNumber', defaultValue: false)
+    @HiveField(109)
         required bool enableBatchNumber,
     @JsonKey(name: 'disableBundles', defaultValue: false)
+    @HiveField(110)
         required bool disableBundles,
-    @JsonKey(name: 'enableZDP5', defaultValue: false) required bool enableZDP5,
+    @JsonKey(name: 'enableZDP5', defaultValue: false)
+    @HiveField(111)
+        required bool enableZDP5,
     @JsonKey(name: 'enableTaxClassification', defaultValue: false)
+    @HiveField(112)
         required bool enableTaxClassification,
-    @JsonKey(name: 'enableVat', defaultValue: false) required bool enableVat,
-    @JsonKey(name: 'vatValue', defaultValue: 0) required int vatValue,
+    @JsonKey(name: 'enableVat', defaultValue: false)
+    @HiveField(113)
+        required bool enableVat,
+    @JsonKey(name: 'vatValue', defaultValue: 0)
+    @HiveField(114)
+        required int vatValue,
     @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
+    @HiveField(115)
         required bool materialWithoutPrice,
     @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
+    @HiveField(116)
         required bool enableSpecialInstructions,
     @JsonKey(name: 'enableReferenceNote', defaultValue: false)
+    @HiveField(117)
         required bool enableReferenceNote,
     @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
+    @HiveField(118)
         required bool enableCollectiveNumber,
     @JsonKey(name: 'enableMobileNumber', defaultValue: false)
+    @HiveField(119)
         required bool enableMobileNumber,
     @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
+    @HiveField(120)
         required bool enableFutureDeliveryDay,
     @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
+    @HiveField(121)
         required bool enablePaymentTerms,
     @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
+    @HiveField(122)
         required String futureDeliveryDay,
     @JsonKey(name: 'enableGMC', defaultValue: false)
+    @HiveField(123)
         required bool enableGMC,
     @JsonKey(name: 'enableListPrice', defaultValue: false)
+    @HiveField(124)
         required bool enableListPrice,
   }) = _SalesOrganisationConfigsDto;
 

@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 part 'bundle_info_dto.freezed.dart';
 part 'bundle_info_dto.g.dart';
@@ -8,12 +9,12 @@ part 'bundle_info_dto.g.dart';
 @freezed
 class BundleInfoDto with _$BundleInfoDto {
   const BundleInfoDto._();
-
+  @HiveType(typeId: 16, adapterName: 'BundleInfoDtoAdapter')
   const factory BundleInfoDto({
-    @JsonKey(name: 'sequence') required int sequence,
-    @JsonKey(name: 'quantity') required int quantity,
-    @JsonKey(name: 'type') required String type,
-    @JsonKey(name: 'rate') required double rate,
+    @JsonKey(name: 'sequence') @HiveField(21) required int sequence,
+    @JsonKey(name: 'quantity') @HiveField(22) required int quantity,
+    @JsonKey(name: 'type') @HiveField(23) required String type,
+    @JsonKey(name: 'rate') @HiveField(24) required double rate,
   }) = _BundleInfoDto;
 
   BundleInfo toDomain() {

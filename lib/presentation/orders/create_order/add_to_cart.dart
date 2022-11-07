@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -44,6 +45,11 @@ class _AddToCartState extends State<AddToCart> {
           child: BlocBuilder<AddToCartBloc, AddToCartState>(
             buildWhen: (previous, current) => previous != current,
             builder: (context, state) {
+              final taxCode =
+                  context.read<SalesOrgBloc>().state.salesOrg.taxCode;
+              final enableVat =
+                  context.read<SalesOrgBloc>().state.configs.enableVat;
+
               return ListView(
                 children: [
                   Center(
@@ -139,38 +145,45 @@ class _AddToCartState extends State<AddToCart> {
                   const SizedBox(
                     height: 15,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: BalanceTextRow(
-                      keyText: 'Unit price before GST'.tr(),
-                      valueText: state.cartItem.listPrice(),
-                      keyFlex: 1,
-                      valueFlex: 1,
-                    ),
-                  ),
+                  enableVat
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: BalanceTextRow(
+                            keyText: 'Unit price before $taxCode'.tr(),
+                            valueText:
+                                state.cartItem.display(PriceType.listPrice),
+                            keyFlex: 1,
+                            valueFlex: 1,
+                          ),
+                        )
+                      : const SizedBox.shrink(),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: BalanceTextRow(
                       keyText: 'Unit Price'.tr(),
-                      valueText: state.cartItem.unitPrice(),
+                      valueText: state.cartItem.display(PriceType.unitPrice),
                       keyFlex: 1,
                       valueFlex: 1,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: BalanceTextRow(
-                      keyText: 'Total price before GST'.tr(),
-                      valueText: state.cartItem.listPriceTotal(),
-                      keyFlex: 1,
-                      valueFlex: 1,
-                    ),
-                  ),
+                  enableVat
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: BalanceTextRow(
+                            keyText: 'Total price before $taxCode'.tr(),
+                            valueText: state.cartItem
+                                .display(PriceType.listPriceTotal),
+                            keyFlex: 1,
+                            valueFlex: 1,
+                          ),
+                        )
+                      : const SizedBox.shrink(),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: BalanceTextRow(
                       keyText: 'Total price'.tr(),
-                      valueText: state.cartItem.unitPriceTotal(),
+                      valueText:
+                          state.cartItem.display(PriceType.unitPriceTotal),
                       keyFlex: 1,
                       valueFlex: 1,
                     ),
@@ -210,7 +223,7 @@ class _AddToCartState extends State<AddToCart> {
     );
   }
 
-  void _addToCart(BuildContext context, CartItem cartItem) {
+  void _addToCart(BuildContext context, PriceAggregate cartItem) {
     if (int.parse(_controller.text) > 0) {
       final cartItemList = context.read<CartBloc>().state.cartItemList;
       if (cartItem.materialInfo.materialGroup4.isFOC &&

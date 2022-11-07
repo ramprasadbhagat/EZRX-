@@ -68,7 +68,7 @@ mixin _$MaterialDto {
   @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
   @HiveField(15)
   bool get hasMandatoryTenderContract => throw _privateConstructorUsedError;
-  @JsonKey(name: 'taxes', defaultValue: <String>[])
+  @JsonKey(name: 'taxes', defaultValue: <String>['0'])
   @HiveField(16)
   List<String> get taxes => throw _privateConstructorUsedError;
   @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
@@ -135,7 +135,7 @@ abstract class $MaterialDtoCopyWith<$Res> {
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
       @HiveField(15)
           bool hasMandatoryTenderContract,
-      @JsonKey(name: 'taxes', defaultValue: <String>[])
+      @JsonKey(name: 'taxes', defaultValue: <String>['0'])
       @HiveField(16)
           List<String> taxes,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
@@ -305,7 +305,7 @@ abstract class _$$_MaterialDtoCopyWith<$Res>
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
       @HiveField(15)
           bool hasMandatoryTenderContract,
-      @JsonKey(name: 'taxes', defaultValue: <String>[])
+      @JsonKey(name: 'taxes', defaultValue: <String>['0'])
       @HiveField(16)
           List<String> taxes,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
@@ -474,7 +474,7 @@ class _$_MaterialDto extends _MaterialDto {
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
       @HiveField(15)
           required this.hasMandatoryTenderContract,
-      @JsonKey(name: 'taxes', defaultValue: <String>[])
+      @JsonKey(name: 'taxes', defaultValue: <String>['0'])
       @HiveField(16)
           required final List<String> taxes,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
@@ -553,7 +553,7 @@ class _$_MaterialDto extends _MaterialDto {
   final bool hasMandatoryTenderContract;
   final List<String> _taxes;
   @override
-  @JsonKey(name: 'taxes', defaultValue: <String>[])
+  @JsonKey(name: 'taxes', defaultValue: <String>['0'])
   @HiveField(16)
   List<String> get taxes {
     // ignore: implicit_dynamic_type
@@ -699,7 +699,7 @@ abstract class _MaterialDto extends MaterialDto {
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
       @HiveField(15)
           required final bool hasMandatoryTenderContract,
-      @JsonKey(name: 'taxes', defaultValue: <String>[])
+      @JsonKey(name: 'taxes', defaultValue: <String>['0'])
       @HiveField(16)
           required final List<String> taxes,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
@@ -775,7 +775,7 @@ abstract class _MaterialDto extends MaterialDto {
   @HiveField(15)
   bool get hasMandatoryTenderContract;
   @override
-  @JsonKey(name: 'taxes', defaultValue: <String>[])
+  @JsonKey(name: 'taxes', defaultValue: <String>['0'])
   @HiveField(16)
   List<String> get taxes;
   @override

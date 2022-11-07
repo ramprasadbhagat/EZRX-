@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_list_tile.dart';
@@ -40,6 +42,9 @@ class CartPage extends StatelessWidget {
       },
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
+        final salesOrgConfig = context.read<SalesOrgBloc>().state.configs;
+        final taxCode = context.read<SalesOrgBloc>().state.salesOrg.taxCode;
+
         return Scaffold(
           key: const Key('cartpage'),
           appBar: AppBar(
@@ -55,7 +60,7 @@ class CartPage extends StatelessWidget {
                     horizontal: 10,
                     vertical: 5,
                   ),
-                  child: ScrollList<CartItem>(
+                  child: ScrollList<PriceAggregate>(
                     emptyMessage: 'Cart is Empty',
                     onRefresh: () {
                       context.read<CartBloc>().add(const CartEvent.fetch());
@@ -68,62 +73,74 @@ class CartPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(10.0),
-                height: MediaQuery.of(context).size.height * 0.1,
-                decoration: const BoxDecoration(
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                      color: Colors.black54,
-                      blurRadius: 15.0,
-                      offset: Offset(0.0, 0.75),
+              state.cartItemList.isEmpty
+                  ? const SizedBox.shrink()
+                  : Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(10.0),
+                      decoration: const BoxDecoration(
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            color: Colors.black54,
+                            blurRadius: 15.0,
+                            offset: Offset(0.0, 0.75),
+                          ),
+                        ],
+                        color: ZPColors.white,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          BalanceTextRow(
+                            keyText: 'Subtotal'.tr(),
+                            valueText:
+                                _displayPrice(salesOrgConfig, state.subtotal),
+                          ),
+                          salesOrgConfig.enableVat
+                              ? BalanceTextRow(
+                                  keyText: '$taxCode in %'.tr(),
+                                  valueText: '${salesOrgConfig.vatValue}%',
+                                )
+                              : const SizedBox.shrink(),
+                          salesOrgConfig.enableVat
+                              ? BalanceTextRow(
+                                  keyText: taxCode.tr(),
+                                  valueText: _displayPrice(
+                                    salesOrgConfig,
+                                    state.vatTotal,
+                                  ),
+                                )
+                              : const SizedBox.shrink(),
+                          BalanceTextRow(
+                            keyText: 'Grand Total'.tr(),
+                            valueText: _displayPrice(
+                              salesOrgConfig,
+                              state.grandTotal,
+                            ),
+                          ),
+                          state.cartItemList.isNotEmpty
+                              ? ElevatedButton(
+                                  onPressed: () {
+                                    context.router.pushNamed('order_summary');
+                                  },
+                                  child: const Text('Order Summary').tr(),
+                                )
+                              : const SizedBox.shrink(),
+                        ],
+                      ),
                     ),
-                  ],
-                  color: ZPColors.white,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    state.cartItemList.isNotEmpty
-                        ? ElevatedButton(
-                            onPressed: () {
-                              context.router.pushNamed('order_summary');
-                            },
-                            child: const Text('Order Summary').tr(),
-                          )
-                        : const SizedBox.shrink(),
-                    Text(
-                      '${'Grand Total : '.tr()}${_getTotalPrice(context, state.cartItemList)}   ',
-                      textAlign: TextAlign.right,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium!
-                          .copyWith(color: ZPColors.primary),
-                    ),
-                  ],
-                ),
-              ),
             ],
           ),
         );
       },
     );
   }
+}
 
-  String _getTotalPrice(BuildContext context, List<CartItem> cartItemList) {
-    var sum = 0.0;
-    for (final item in cartItemList) {
-      final totalPrice = context
-          .read<MaterialPriceBloc>()
-          .state
-          .materialPrice[item.materialInfo.materialNumber];
-      if (null != totalPrice) {
-        final unitPrice = totalPrice.finalPrice.getOrCrash();
-        sum += unitPrice * item.quantity;
-      }
-    }
-
-    return sum.toStringAsFixed(2);
+String _displayPrice(SalesOrganisationConfigs salesOrgConfig, double price) {
+  if (salesOrgConfig.currency.isVN) {
+    return '${price.toStringAsFixed(2)} ${salesOrgConfig.currency.code}';
   }
+
+  return '${salesOrgConfig.currency.code} ${price.toStringAsFixed(2)}';
 }

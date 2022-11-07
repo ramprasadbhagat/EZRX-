@@ -22,55 +22,80 @@ SalesOrganisationConfigsDto _$SalesOrganisationConfigsDtoFromJson(
 /// @nodoc
 mixin _$SalesOrganisationConfigsDto {
   @JsonKey(name: 'disableProcessingStatus')
+  @HiveField(100)
   bool get disableProcessingStatus => throw _privateConstructorUsedError;
   @JsonKey(name: 'currency')
+  @HiveField(101)
   String get currency => throw _privateConstructorUsedError;
   @JsonKey(name: 'hideCustomer', defaultValue: false)
+  @HiveField(102)
   bool get hideCustomer => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
+  @HiveField(103)
   bool get enableGimmickMaterial => throw _privateConstructorUsedError;
   @JsonKey(name: 'languageFilter', defaultValue: false)
+  @HiveField(104)
   bool get languageFilter => throw _privateConstructorUsedError;
   @JsonKey(name: 'languageValue', defaultValue: '')
+  @HiveField(105)
   String get languageValue => throw _privateConstructorUsedError;
   @JsonKey(name: 'disablePrincipals', defaultValue: false)
+  @HiveField(106)
   bool get disablePrincipals => throw _privateConstructorUsedError;
   @_PrincipalListConverter()
   @JsonKey(name: 'principalList')
+  @HiveField(7)
   List<dynamic> get principalList => throw _privateConstructorUsedError;
   @JsonKey(name: 'disableOrderType', defaultValue: false)
+  @HiveField(108)
   bool get disableOrderType => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableBatchNumber', defaultValue: false)
+  @HiveField(109)
   bool get enableBatchNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'disableBundles', defaultValue: false)
+  @HiveField(110)
   bool get disableBundles => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableZDP5', defaultValue: false)
+  @HiveField(111)
   bool get enableZDP5 => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableTaxClassification', defaultValue: false)
+  @HiveField(112)
   bool get enableTaxClassification => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableVat', defaultValue: false)
+  @HiveField(113)
   bool get enableVat => throw _privateConstructorUsedError;
   @JsonKey(name: 'vatValue', defaultValue: 0)
+  @HiveField(114)
   int get vatValue => throw _privateConstructorUsedError;
   @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
+  @HiveField(115)
   bool get materialWithoutPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
+  @HiveField(116)
   bool get enableSpecialInstructions => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableReferenceNote', defaultValue: false)
+  @HiveField(117)
   bool get enableReferenceNote => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
+  @HiveField(118)
   bool get enableCollectiveNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableMobileNumber', defaultValue: false)
+  @HiveField(119)
   bool get enableMobileNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
+  @HiveField(120)
   bool get enableFutureDeliveryDay => throw _privateConstructorUsedError;
   @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
+  @HiveField(121)
   bool get enablePaymentTerms => throw _privateConstructorUsedError;
   @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
+  @HiveField(122)
   String get futureDeliveryDay => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableGMC', defaultValue: false)
+  @HiveField(123)
   bool get enableGMC => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableListPrice', defaultValue: false)
+  @HiveField(124)
   bool get enableListPrice => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -87,55 +112,80 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
       _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'disableProcessingStatus')
+      @HiveField(100)
           bool disableProcessingStatus,
       @JsonKey(name: 'currency')
+      @HiveField(101)
           String currency,
       @JsonKey(name: 'hideCustomer', defaultValue: false)
+      @HiveField(102)
           bool hideCustomer,
       @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
+      @HiveField(103)
           bool enableGimmickMaterial,
       @JsonKey(name: 'languageFilter', defaultValue: false)
+      @HiveField(104)
           bool languageFilter,
       @JsonKey(name: 'languageValue', defaultValue: '')
+      @HiveField(105)
           String languageValue,
       @JsonKey(name: 'disablePrincipals', defaultValue: false)
+      @HiveField(106)
           bool disablePrincipals,
       @_PrincipalListConverter()
       @JsonKey(name: 'principalList')
+      @HiveField(7)
           List<dynamic> principalList,
       @JsonKey(name: 'disableOrderType', defaultValue: false)
+      @HiveField(108)
           bool disableOrderType,
       @JsonKey(name: 'enableBatchNumber', defaultValue: false)
+      @HiveField(109)
           bool enableBatchNumber,
       @JsonKey(name: 'disableBundles', defaultValue: false)
+      @HiveField(110)
           bool disableBundles,
       @JsonKey(name: 'enableZDP5', defaultValue: false)
+      @HiveField(111)
           bool enableZDP5,
       @JsonKey(name: 'enableTaxClassification', defaultValue: false)
+      @HiveField(112)
           bool enableTaxClassification,
       @JsonKey(name: 'enableVat', defaultValue: false)
+      @HiveField(113)
           bool enableVat,
       @JsonKey(name: 'vatValue', defaultValue: 0)
+      @HiveField(114)
           int vatValue,
       @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
+      @HiveField(115)
           bool materialWithoutPrice,
       @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
+      @HiveField(116)
           bool enableSpecialInstructions,
       @JsonKey(name: 'enableReferenceNote', defaultValue: false)
+      @HiveField(117)
           bool enableReferenceNote,
       @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
+      @HiveField(118)
           bool enableCollectiveNumber,
       @JsonKey(name: 'enableMobileNumber', defaultValue: false)
+      @HiveField(119)
           bool enableMobileNumber,
       @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
+      @HiveField(120)
           bool enableFutureDeliveryDay,
       @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
+      @HiveField(121)
           bool enablePaymentTerms,
       @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
+      @HiveField(122)
           String futureDeliveryDay,
       @JsonKey(name: 'enableGMC', defaultValue: false)
+      @HiveField(123)
           bool enableGMC,
       @JsonKey(name: 'enableListPrice', defaultValue: false)
+      @HiveField(124)
           bool enableListPrice});
 }
 
@@ -291,55 +341,80 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
   @override
   $Res call(
       {@JsonKey(name: 'disableProcessingStatus')
+      @HiveField(100)
           bool disableProcessingStatus,
       @JsonKey(name: 'currency')
+      @HiveField(101)
           String currency,
       @JsonKey(name: 'hideCustomer', defaultValue: false)
+      @HiveField(102)
           bool hideCustomer,
       @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
+      @HiveField(103)
           bool enableGimmickMaterial,
       @JsonKey(name: 'languageFilter', defaultValue: false)
+      @HiveField(104)
           bool languageFilter,
       @JsonKey(name: 'languageValue', defaultValue: '')
+      @HiveField(105)
           String languageValue,
       @JsonKey(name: 'disablePrincipals', defaultValue: false)
+      @HiveField(106)
           bool disablePrincipals,
       @_PrincipalListConverter()
       @JsonKey(name: 'principalList')
+      @HiveField(7)
           List<dynamic> principalList,
       @JsonKey(name: 'disableOrderType', defaultValue: false)
+      @HiveField(108)
           bool disableOrderType,
       @JsonKey(name: 'enableBatchNumber', defaultValue: false)
+      @HiveField(109)
           bool enableBatchNumber,
       @JsonKey(name: 'disableBundles', defaultValue: false)
+      @HiveField(110)
           bool disableBundles,
       @JsonKey(name: 'enableZDP5', defaultValue: false)
+      @HiveField(111)
           bool enableZDP5,
       @JsonKey(name: 'enableTaxClassification', defaultValue: false)
+      @HiveField(112)
           bool enableTaxClassification,
       @JsonKey(name: 'enableVat', defaultValue: false)
+      @HiveField(113)
           bool enableVat,
       @JsonKey(name: 'vatValue', defaultValue: 0)
+      @HiveField(114)
           int vatValue,
       @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
+      @HiveField(115)
           bool materialWithoutPrice,
       @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
+      @HiveField(116)
           bool enableSpecialInstructions,
       @JsonKey(name: 'enableReferenceNote', defaultValue: false)
+      @HiveField(117)
           bool enableReferenceNote,
       @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
+      @HiveField(118)
           bool enableCollectiveNumber,
       @JsonKey(name: 'enableMobileNumber', defaultValue: false)
+      @HiveField(119)
           bool enableMobileNumber,
       @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
+      @HiveField(120)
           bool enableFutureDeliveryDay,
       @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
+      @HiveField(121)
           bool enablePaymentTerms,
       @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
+      @HiveField(122)
           String futureDeliveryDay,
       @JsonKey(name: 'enableGMC', defaultValue: false)
+      @HiveField(123)
           bool enableGMC,
       @JsonKey(name: 'enableListPrice', defaultValue: false)
+      @HiveField(124)
           bool enableListPrice});
 }
 
@@ -491,58 +566,84 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
+@HiveType(typeId: 5, adapterName: 'SalesOrganisationConfigsDtoAdapter')
 class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   const _$_SalesOrganisationConfigsDto(
       {@JsonKey(name: 'disableProcessingStatus')
+      @HiveField(100)
           required this.disableProcessingStatus,
       @JsonKey(name: 'currency')
+      @HiveField(101)
           required this.currency,
       @JsonKey(name: 'hideCustomer', defaultValue: false)
+      @HiveField(102)
           required this.hideCustomer,
       @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
+      @HiveField(103)
           required this.enableGimmickMaterial,
       @JsonKey(name: 'languageFilter', defaultValue: false)
+      @HiveField(104)
           required this.languageFilter,
       @JsonKey(name: 'languageValue', defaultValue: '')
+      @HiveField(105)
           required this.languageValue,
       @JsonKey(name: 'disablePrincipals', defaultValue: false)
+      @HiveField(106)
           required this.disablePrincipals,
       @_PrincipalListConverter()
       @JsonKey(name: 'principalList')
+      @HiveField(7)
           required final List<dynamic> principalList,
       @JsonKey(name: 'disableOrderType', defaultValue: false)
+      @HiveField(108)
           required this.disableOrderType,
       @JsonKey(name: 'enableBatchNumber', defaultValue: false)
+      @HiveField(109)
           required this.enableBatchNumber,
       @JsonKey(name: 'disableBundles', defaultValue: false)
+      @HiveField(110)
           required this.disableBundles,
       @JsonKey(name: 'enableZDP5', defaultValue: false)
+      @HiveField(111)
           required this.enableZDP5,
       @JsonKey(name: 'enableTaxClassification', defaultValue: false)
+      @HiveField(112)
           required this.enableTaxClassification,
       @JsonKey(name: 'enableVat', defaultValue: false)
+      @HiveField(113)
           required this.enableVat,
       @JsonKey(name: 'vatValue', defaultValue: 0)
+      @HiveField(114)
           required this.vatValue,
       @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
+      @HiveField(115)
           required this.materialWithoutPrice,
       @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
+      @HiveField(116)
           required this.enableSpecialInstructions,
       @JsonKey(name: 'enableReferenceNote', defaultValue: false)
+      @HiveField(117)
           required this.enableReferenceNote,
       @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
+      @HiveField(118)
           required this.enableCollectiveNumber,
       @JsonKey(name: 'enableMobileNumber', defaultValue: false)
+      @HiveField(119)
           required this.enableMobileNumber,
       @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
+      @HiveField(120)
           required this.enableFutureDeliveryDay,
       @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
+      @HiveField(121)
           required this.enablePaymentTerms,
       @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
+      @HiveField(122)
           required this.futureDeliveryDay,
       @JsonKey(name: 'enableGMC', defaultValue: false)
+      @HiveField(123)
           required this.enableGMC,
       @JsonKey(name: 'enableListPrice', defaultValue: false)
+      @HiveField(124)
           required this.enableListPrice})
       : _principalList = principalList,
         super._();
@@ -552,29 +653,37 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
 
   @override
   @JsonKey(name: 'disableProcessingStatus')
+  @HiveField(100)
   final bool disableProcessingStatus;
   @override
   @JsonKey(name: 'currency')
+  @HiveField(101)
   final String currency;
   @override
   @JsonKey(name: 'hideCustomer', defaultValue: false)
+  @HiveField(102)
   final bool hideCustomer;
   @override
   @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
+  @HiveField(103)
   final bool enableGimmickMaterial;
   @override
   @JsonKey(name: 'languageFilter', defaultValue: false)
+  @HiveField(104)
   final bool languageFilter;
   @override
   @JsonKey(name: 'languageValue', defaultValue: '')
+  @HiveField(105)
   final String languageValue;
   @override
   @JsonKey(name: 'disablePrincipals', defaultValue: false)
+  @HiveField(106)
   final bool disablePrincipals;
   final List<dynamic> _principalList;
   @override
   @_PrincipalListConverter()
   @JsonKey(name: 'principalList')
+  @HiveField(7)
   List<dynamic> get principalList {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_principalList);
@@ -582,54 +691,71 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
 
   @override
   @JsonKey(name: 'disableOrderType', defaultValue: false)
+  @HiveField(108)
   final bool disableOrderType;
   @override
   @JsonKey(name: 'enableBatchNumber', defaultValue: false)
+  @HiveField(109)
   final bool enableBatchNumber;
   @override
   @JsonKey(name: 'disableBundles', defaultValue: false)
+  @HiveField(110)
   final bool disableBundles;
   @override
   @JsonKey(name: 'enableZDP5', defaultValue: false)
+  @HiveField(111)
   final bool enableZDP5;
   @override
   @JsonKey(name: 'enableTaxClassification', defaultValue: false)
+  @HiveField(112)
   final bool enableTaxClassification;
   @override
   @JsonKey(name: 'enableVat', defaultValue: false)
+  @HiveField(113)
   final bool enableVat;
   @override
   @JsonKey(name: 'vatValue', defaultValue: 0)
+  @HiveField(114)
   final int vatValue;
   @override
   @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
+  @HiveField(115)
   final bool materialWithoutPrice;
   @override
   @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
+  @HiveField(116)
   final bool enableSpecialInstructions;
   @override
   @JsonKey(name: 'enableReferenceNote', defaultValue: false)
+  @HiveField(117)
   final bool enableReferenceNote;
   @override
   @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
+  @HiveField(118)
   final bool enableCollectiveNumber;
   @override
   @JsonKey(name: 'enableMobileNumber', defaultValue: false)
+  @HiveField(119)
   final bool enableMobileNumber;
   @override
   @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
+  @HiveField(120)
   final bool enableFutureDeliveryDay;
   @override
   @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
+  @HiveField(121)
   final bool enablePaymentTerms;
   @override
   @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
+  @HiveField(122)
   final String futureDeliveryDay;
   @override
   @JsonKey(name: 'enableGMC', defaultValue: false)
+  @HiveField(123)
   final bool enableGMC;
   @override
   @JsonKey(name: 'enableListPrice', defaultValue: false)
+  @HiveField(124)
   final bool enableListPrice;
 
   @override
@@ -739,55 +865,80 @@ abstract class _SalesOrganisationConfigsDto
     extends SalesOrganisationConfigsDto {
   const factory _SalesOrganisationConfigsDto(
           {@JsonKey(name: 'disableProcessingStatus')
+          @HiveField(100)
               required final bool disableProcessingStatus,
           @JsonKey(name: 'currency')
+          @HiveField(101)
               required final String currency,
           @JsonKey(name: 'hideCustomer', defaultValue: false)
+          @HiveField(102)
               required final bool hideCustomer,
           @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
+          @HiveField(103)
               required final bool enableGimmickMaterial,
           @JsonKey(name: 'languageFilter', defaultValue: false)
+          @HiveField(104)
               required final bool languageFilter,
           @JsonKey(name: 'languageValue', defaultValue: '')
+          @HiveField(105)
               required final String languageValue,
           @JsonKey(name: 'disablePrincipals', defaultValue: false)
+          @HiveField(106)
               required final bool disablePrincipals,
           @_PrincipalListConverter()
           @JsonKey(name: 'principalList')
+          @HiveField(7)
               required final List<dynamic> principalList,
           @JsonKey(name: 'disableOrderType', defaultValue: false)
+          @HiveField(108)
               required final bool disableOrderType,
           @JsonKey(name: 'enableBatchNumber', defaultValue: false)
+          @HiveField(109)
               required final bool enableBatchNumber,
           @JsonKey(name: 'disableBundles', defaultValue: false)
+          @HiveField(110)
               required final bool disableBundles,
           @JsonKey(name: 'enableZDP5', defaultValue: false)
+          @HiveField(111)
               required final bool enableZDP5,
           @JsonKey(name: 'enableTaxClassification', defaultValue: false)
+          @HiveField(112)
               required final bool enableTaxClassification,
           @JsonKey(name: 'enableVat', defaultValue: false)
+          @HiveField(113)
               required final bool enableVat,
           @JsonKey(name: 'vatValue', defaultValue: 0)
+          @HiveField(114)
               required final int vatValue,
           @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
+          @HiveField(115)
               required final bool materialWithoutPrice,
           @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
+          @HiveField(116)
               required final bool enableSpecialInstructions,
           @JsonKey(name: 'enableReferenceNote', defaultValue: false)
+          @HiveField(117)
               required final bool enableReferenceNote,
           @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
+          @HiveField(118)
               required final bool enableCollectiveNumber,
           @JsonKey(name: 'enableMobileNumber', defaultValue: false)
+          @HiveField(119)
               required final bool enableMobileNumber,
           @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
+          @HiveField(120)
               required final bool enableFutureDeliveryDay,
           @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
+          @HiveField(121)
               required final bool enablePaymentTerms,
           @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
+          @HiveField(122)
               required final String futureDeliveryDay,
           @JsonKey(name: 'enableGMC', defaultValue: false)
+          @HiveField(123)
               required final bool enableGMC,
           @JsonKey(name: 'enableListPrice', defaultValue: false)
+          @HiveField(124)
               required final bool enableListPrice}) =
       _$_SalesOrganisationConfigsDto;
   const _SalesOrganisationConfigsDto._() : super._();
@@ -797,79 +948,104 @@ abstract class _SalesOrganisationConfigsDto
 
   @override
   @JsonKey(name: 'disableProcessingStatus')
+  @HiveField(100)
   bool get disableProcessingStatus;
   @override
   @JsonKey(name: 'currency')
+  @HiveField(101)
   String get currency;
   @override
   @JsonKey(name: 'hideCustomer', defaultValue: false)
+  @HiveField(102)
   bool get hideCustomer;
   @override
   @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
+  @HiveField(103)
   bool get enableGimmickMaterial;
   @override
   @JsonKey(name: 'languageFilter', defaultValue: false)
+  @HiveField(104)
   bool get languageFilter;
   @override
   @JsonKey(name: 'languageValue', defaultValue: '')
+  @HiveField(105)
   String get languageValue;
   @override
   @JsonKey(name: 'disablePrincipals', defaultValue: false)
+  @HiveField(106)
   bool get disablePrincipals;
   @override
   @_PrincipalListConverter()
   @JsonKey(name: 'principalList')
+  @HiveField(7)
   List<dynamic> get principalList;
   @override
   @JsonKey(name: 'disableOrderType', defaultValue: false)
+  @HiveField(108)
   bool get disableOrderType;
   @override
   @JsonKey(name: 'enableBatchNumber', defaultValue: false)
+  @HiveField(109)
   bool get enableBatchNumber;
   @override
   @JsonKey(name: 'disableBundles', defaultValue: false)
+  @HiveField(110)
   bool get disableBundles;
   @override
   @JsonKey(name: 'enableZDP5', defaultValue: false)
+  @HiveField(111)
   bool get enableZDP5;
   @override
   @JsonKey(name: 'enableTaxClassification', defaultValue: false)
+  @HiveField(112)
   bool get enableTaxClassification;
   @override
   @JsonKey(name: 'enableVat', defaultValue: false)
+  @HiveField(113)
   bool get enableVat;
   @override
   @JsonKey(name: 'vatValue', defaultValue: 0)
+  @HiveField(114)
   int get vatValue;
   @override
   @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
+  @HiveField(115)
   bool get materialWithoutPrice;
   @override
   @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
+  @HiveField(116)
   bool get enableSpecialInstructions;
   @override
   @JsonKey(name: 'enableReferenceNote', defaultValue: false)
+  @HiveField(117)
   bool get enableReferenceNote;
   @override
   @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
+  @HiveField(118)
   bool get enableCollectiveNumber;
   @override
   @JsonKey(name: 'enableMobileNumber', defaultValue: false)
+  @HiveField(119)
   bool get enableMobileNumber;
   @override
   @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
+  @HiveField(120)
   bool get enableFutureDeliveryDay;
   @override
   @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
+  @HiveField(121)
   bool get enablePaymentTerms;
   @override
   @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
+  @HiveField(122)
   String get futureDeliveryDay;
   @override
   @JsonKey(name: 'enableGMC', defaultValue: false)
+  @HiveField(123)
   bool get enableGMC;
   @override
   @JsonKey(name: 'enableListPrice', defaultValue: false)
+  @HiveField(124)
   bool get enableListPrice;
   @override
   @JsonKey(ignore: true)

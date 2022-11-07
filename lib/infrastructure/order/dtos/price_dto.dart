@@ -5,6 +5,7 @@ import 'package:ezrxmobile/infrastructure/order/dtos/price_bundle_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_rule_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_tier_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 part 'price_dto.freezed.dart';
 part 'price_dto.g.dart';
@@ -13,32 +14,50 @@ part 'price_dto.g.dart';
 class PriceDto with _$PriceDto {
   const PriceDto._();
 
+  @HiveType(typeId: 6, adapterName: 'PriceDtoAdapter')
   const factory PriceDto({
-    @JsonKey(name: 'MaterialNumber') required String materialNumber,
+    @JsonKey(name: 'MaterialNumber')
+    @HiveField(0)
+        required String materialNumber,
     @JsonKey(name: 'PriceRules', defaultValue: <PriceRuleDto>[])
+    @HiveField(1)
         required List<PriceRuleDto> rules,
     @JsonKey(name: 'TieredPricing', defaultValue: <PriceTierDto>[])
+    @HiveField(2)
         required List<PriceTierDto> tiers,
     @JsonKey(name: 'Bonuses', defaultValue: <PriceBonusDto>[])
+    @HiveField(3)
         required List<PriceBonusDto> bonuses,
     @JsonKey(name: 'Bundles', defaultValue: <PriceBundleDto>[])
+    @HiveField(4)
         required List<PriceBundleDto> bundles,
     @JsonKey(name: 'OverridenRulePresent', defaultValue: false)
+    @HiveField(5)
         required bool overrideRulePresent,
     @JsonKey(name: 'ZDP5MaxQuota', defaultValue: '')
+    @HiveField(6)
         required String zdp5MaxQuota,
     @JsonKey(name: 'ZDP5RemainingQuota', defaultValue: '')
+    @HiveField(7)
         required String zdp5RemainingQuota,
     @JsonKey(name: 'ZMGDiscount', defaultValue: false)
+    @HiveField(8)
         required bool zmgDiscount,
-    @JsonKey(name: 'ListPrice', defaultValue: 0) required double listPrice,
+    @JsonKey(name: 'ListPrice', defaultValue: 0)
+    @HiveField(9)
+        required double listPrice,
     @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0)
+    @HiveField(10)
         required double finalIndividualPrice,
     @JsonKey(name: 'FinalTotalPrice', defaultValue: 0)
+    @HiveField(11)
         required double finalTotalPrice,
     @JsonKey(name: 'AdditionalBonusEligible', defaultValue: false)
+    @HiveField(12)
         required bool additionalBonusEligible,
-    @JsonKey(name: 'Valid', defaultValue: false) required bool isValid,
+    @JsonKey(name: 'Valid', defaultValue: false)
+    @HiveField(13)
+        required bool isValid,
   }) = _PriceDto;
 
   Price toDomain() => Price(

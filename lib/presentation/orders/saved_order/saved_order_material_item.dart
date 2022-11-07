@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
@@ -77,16 +79,17 @@ class SavedOrderMaterialItem extends StatelessWidget {
               builder: (context, state) {
                 final itemInfo = state.materialDetails[itemPriceQuery]?.price;
                 if (itemInfo != null) {
-                  final currentCurrency =
-                      context.read<SalesOrgBloc>().state.configs.currency;
-                  final isHidePrice = material.hidePrice;
+                  final priceAggregate = PriceAggregate(
+                    price: itemInfo,
+                    materialInfo: material.toMaterialInfo(),
+                    salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                    quantity: 1,
+                    zmgMaterialCountOnCart:
+                        context.read<CartBloc>().state.zmgMaterialCount,
+                  );
 
                   return Text(
-                    itemInfo.finalPrice.displayWithCurrency(
-                      isFoc: itemInfo.isFOC,
-                      currency: currentCurrency,
-                      hidePrice: isHidePrice,
-                    ),
+                    priceAggregate.display(PriceType.unitPrice),
                     style: const TextStyle(
                       color: ZPColors.darkerGreen,
                       fontSize: 14.0,

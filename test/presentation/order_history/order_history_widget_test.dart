@@ -9,7 +9,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
@@ -122,7 +122,7 @@ void main() {
         final mockCartBloc = locator<CartMocBloc>();
         when(() => mockCartBloc.stream).thenAnswer((invocation) {
           return Stream.fromIterable([
-            CartState.initial().copyWith(cartItemList: <CartItem>[]),
+            CartState.initial().copyWith(cartItemList: <PriceAggregate>[]),
           ]);
         });
         await tester.pumpWidget(getWUT());
@@ -223,7 +223,7 @@ void main() {
         await tester.pumpWidget(getWUT());
         // await tester.pumpAndSettle(const Duration(seconds: 3));
         // expect(find.byKey(const Key('order_history_filter')), findsWidgets);
-         expect(find.byKey(const Key('Filter_list_not_empty')), findsNothing);
+        expect(find.byKey(const Key('Filter_list_not_empty')), findsNothing);
         // expect(find.byKey(const Key('filterButton')), findsOneWidget);
       });
 

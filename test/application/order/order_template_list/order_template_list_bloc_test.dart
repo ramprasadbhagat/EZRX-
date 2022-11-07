@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_template_repository.dart';
@@ -93,7 +93,7 @@ void main() {
     const tempObj = OrderTemplate(
         templateId: '1231',
         templateName: 'fake-name',
-        cartItems: <CartItem>[],
+        cartItems: <PriceAggregate>[],
         user: <String, dynamic>{});
 
     blocTest(

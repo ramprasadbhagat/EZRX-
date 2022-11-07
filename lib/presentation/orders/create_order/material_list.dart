@@ -6,11 +6,13 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
@@ -246,46 +248,28 @@ class _PriceLabel extends StatelessWidget {
       builder: (context, state) {
         final itemPrice = state.materialPrice[materialInfo.materialNumber];
         if (itemPrice != null) {
-          final salesOrgConfig = context.read<SalesOrgBloc>().state.configs;
-          final currentCurrency = salesOrgConfig.currency;
-          final isHidePrice = materialInfo.hidePrice;
-          final isVNUser = context.read<SalesOrgBloc>().state.salesOrg.isVN;
-          final enabledVat =
-              salesOrgConfig.enableVat;
-          final enableTaxClassification = salesOrgConfig
-              .enableTaxClassification;
-          final taxClassification = materialInfo.taxClassification;
-          final taxes = materialInfo.taxes;
-          final vatValue = salesOrgConfig.vatValue;
-          final enableListPrice =salesOrgConfig.enableListPrice;
+          final priceAggregate = PriceAggregate(
+            price: itemPrice,
+            materialInfo: materialInfo,
+            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+            quantity: 1,
+            zmgMaterialCountOnCart:
+                context.read<CartBloc>().state.zmgMaterialCount,
+          );
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              enableListPrice
+              context.read<SalesOrgBloc>().state.configs.enableListPrice
                   ? Text(
-                      '${'List Price: '.tr()}${itemPrice.finalPrice.displayWithCurrency(
-                        isFoc: itemPrice.isFOC,
-                        currency: currentCurrency,
-                        hidePrice: isHidePrice,
-                      )}',
+                      '${'List Price: '.tr()}${priceAggregate.display(PriceType.listPrice)}',
                       style: Theme.of(context).textTheme.bodyText1?.apply(
-                            color: ZPColors.darkGray,
+                            color: ZPColors.lightGray,
                           ),
                     )
                   : const SizedBox.shrink(),
               Text(
-                '${'Unit Price: '.tr()}${itemPrice.finalPrice.displayUnitPrice(
-                  isFoc: itemPrice.isFOC,
-                  currency: currentCurrency,
-                  hidePrice: isHidePrice,
-                  isVNUser: isVNUser,
-                  enableVat: enabledVat,
-                  enableTaxClassification: enableTaxClassification,
-                  vatValue: vatValue,
-                  taxClassification: taxClassification,
-                  taxes: taxes,
-                )}',
+                '${'Unit Price: '.tr()}${priceAggregate.display(PriceType.unitPrice)}',
                 style: Theme.of(context).textTheme.bodyText1?.apply(
                       color: ZPColors.black,
                     ),

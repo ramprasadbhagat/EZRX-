@@ -47,6 +47,10 @@ class SalesOrg extends ValueObject<String> {
     return salesOrgContactPerson(value.getOrElse(() => ''));
   }
 
+  String get taxCode {
+    return salesOrgTaxCode(country);
+  }
+
   bool get isVN {
     return country == 'VN';
   }

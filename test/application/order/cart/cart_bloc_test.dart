@@ -2,7 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -15,7 +15,7 @@ class CartRepositoryMock extends Mock implements CartRepository {}
 void main() {
   late CartRepository cartRepositoryMock;
   final mockCartItemList = [
-    CartItem.empty().copyWith(
+    PriceAggregate.empty().copyWith(
       quantity: 1,
       materialInfo: MaterialInfo.empty().copyWith(
         materialNumber: MaterialNumber('000000000023168451'),
@@ -39,20 +39,20 @@ void main() {
         'Initialize CartBloc',
         build: () => CartBloc(cartRepository: cartRepositoryMock),
         setUp: () {
-          when(() => cartRepositoryMock.fetchCartItems())
-              .thenAnswer((invocation) async => const Right(<CartItem>[]));
+          when(() => cartRepositoryMock.fetchCartItems()).thenAnswer(
+              (invocation) async => const Right(<PriceAggregate>[]));
         },
         act: (bloc) => bloc.add(const CartEvent.initialized()),
         expect: () => [
           CartState.initial(),
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: none(),
-            cartItemList: <CartItem>[],
+            cartItemList: <PriceAggregate>[],
             isFetching: true,
           ),
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: none(),
-            cartItemList: <CartItem>[],
+            cartItemList: <PriceAggregate>[],
             isFetching: false,
           ),
         ],
@@ -68,7 +68,7 @@ void main() {
         expect: () => [
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: none(),
-            cartItemList: <CartItem>[],
+            cartItemList: <PriceAggregate>[],
             isFetching: true,
           ),
           CartState.initial().copyWith(
@@ -89,7 +89,7 @@ void main() {
         expect: () => [
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: none(),
-            cartItemList: <CartItem>[],
+            cartItemList: <PriceAggregate>[],
             isFetching: true,
           ),
           CartState.initial().copyWith(
@@ -106,12 +106,14 @@ void main() {
         'Add to Cart Success CartBloc',
         build: () => CartBloc(cartRepository: cartRepositoryMock),
         setUp: () {
-          when(() => cartRepositoryMock.addToCart(cartItem: CartItem.empty()))
+          when(() => cartRepositoryMock.addToCart(
+                  cartItem: PriceAggregate.empty()))
               .thenAnswer((invocation) async => Right(mockCartItemList));
           when(() => cartRepositoryMock.fetchCartItems())
               .thenAnswer((invocation) async => Right(mockCartItemList));
         },
-        act: (bloc) => bloc.add(CartEvent.addToCart(item: CartItem.empty())),
+        act: (bloc) =>
+            bloc.add(CartEvent.addToCart(item: PriceAggregate.empty())),
         expect: () => [
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: none(),
@@ -128,13 +130,15 @@ void main() {
         'Add to Cart Failure CartBloc',
         build: () => CartBloc(cartRepository: cartRepositoryMock),
         setUp: () {
-          when(() => cartRepositoryMock.addToCart(cartItem: CartItem.empty()))
-              .thenAnswer((invocation) async =>
-                  const Left(ApiFailure.other('Fake-Error')));
+          when(() =>
+              cartRepositoryMock.addToCart(
+                  cartItem: PriceAggregate.empty())).thenAnswer(
+              (invocation) async => const Left(ApiFailure.other('Fake-Error')));
           when(() => cartRepositoryMock.fetchCartItems()).thenAnswer(
               (invocation) async => const Left(ApiFailure.other('Fake-Error')));
         },
-        act: (bloc) => bloc.add(CartEvent.addToCart(item: CartItem.empty())),
+        act: (bloc) =>
+            bloc.add(CartEvent.addToCart(item: PriceAggregate.empty())),
         expect: () => [
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: none(),
@@ -154,18 +158,19 @@ void main() {
         'Remove from Cart Success CartBloc',
         build: () => CartBloc(cartRepository: cartRepositoryMock),
         setUp: () {
-          when(() =>
-                  cartRepositoryMock.deleteFromCart(cartItem: CartItem.empty()))
-              .thenAnswer((invocation) async => Right([CartItem.empty()]));
-          when(() => cartRepositoryMock.fetchCartItems())
-              .thenAnswer((invocation) async => Right([CartItem.empty()]));
+          when(() => cartRepositoryMock.deleteFromCart(
+                  cartItem: PriceAggregate.empty()))
+              .thenAnswer(
+                  (invocation) async => Right([PriceAggregate.empty()]));
+          when(() => cartRepositoryMock.fetchCartItems()).thenAnswer(
+              (invocation) async => Right([PriceAggregate.empty()]));
         },
         act: (bloc) =>
-            bloc.add(CartEvent.removeFromCart(item: CartItem.empty())),
+            bloc.add(CartEvent.removeFromCart(item: PriceAggregate.empty())),
         expect: () => [
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: none(),
-            cartItemList: [CartItem.empty()],
+            cartItemList: [PriceAggregate.empty()],
             isFetching: false,
           ),
         ],
@@ -175,14 +180,14 @@ void main() {
         build: () => CartBloc(cartRepository: cartRepositoryMock),
         setUp: () {
           when(() =>
-                  cartRepositoryMock.deleteFromCart(cartItem: CartItem.empty()))
-              .thenAnswer((invocation) async =>
-                  const Left(ApiFailure.other('Fake-Error')));
+              cartRepositoryMock.deleteFromCart(
+                  cartItem: PriceAggregate.empty())).thenAnswer(
+              (invocation) async => const Left(ApiFailure.other('Fake-Error')));
           when(() => cartRepositoryMock.fetchCartItems()).thenAnswer(
               (invocation) async => const Left(ApiFailure.other('Fake-Error')));
         },
         act: (bloc) =>
-            bloc.add(CartEvent.removeFromCart(item: CartItem.empty())),
+            bloc.add(CartEvent.removeFromCart(item: PriceAggregate.empty())),
         expect: () => [
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: optionOf(

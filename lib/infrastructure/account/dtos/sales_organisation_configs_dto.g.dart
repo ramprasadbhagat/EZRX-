@@ -3,6 +3,117 @@
 part of 'sales_organisation_configs_dto.dart';
 
 // **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class SalesOrganisationConfigsDtoAdapter
+    extends TypeAdapter<_$_SalesOrganisationConfigsDto> {
+  @override
+  final int typeId = 5;
+
+  @override
+  _$_SalesOrganisationConfigsDto read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return _$_SalesOrganisationConfigsDto(
+      disableProcessingStatus: fields[100] as bool,
+      currency: fields[101] as String,
+      hideCustomer: fields[102] as bool,
+      enableGimmickMaterial: fields[103] as bool,
+      languageFilter: fields[104] as bool,
+      languageValue: fields[105] as String,
+      disablePrincipals: fields[106] as bool,
+      principalList: (fields[7] as List).cast<dynamic>(),
+      disableOrderType: fields[108] as bool,
+      enableBatchNumber: fields[109] as bool,
+      disableBundles: fields[110] as bool,
+      enableZDP5: fields[111] as bool,
+      enableTaxClassification: fields[112] as bool,
+      enableVat: fields[113] as bool,
+      vatValue: fields[114] as int,
+      materialWithoutPrice: fields[115] as bool,
+      enableSpecialInstructions: fields[116] as bool,
+      enableReferenceNote: fields[117] as bool,
+      enableCollectiveNumber: fields[118] as bool,
+      enableMobileNumber: fields[119] as bool,
+      enableFutureDeliveryDay: fields[120] as bool,
+      enablePaymentTerms: fields[121] as bool,
+      futureDeliveryDay: fields[122] as String,
+      enableGMC: fields[123] as bool,
+      enableListPrice: fields[124] as bool,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, _$_SalesOrganisationConfigsDto obj) {
+    writer
+      ..writeByte(25)
+      ..writeByte(100)
+      ..write(obj.disableProcessingStatus)
+      ..writeByte(101)
+      ..write(obj.currency)
+      ..writeByte(102)
+      ..write(obj.hideCustomer)
+      ..writeByte(103)
+      ..write(obj.enableGimmickMaterial)
+      ..writeByte(104)
+      ..write(obj.languageFilter)
+      ..writeByte(105)
+      ..write(obj.languageValue)
+      ..writeByte(106)
+      ..write(obj.disablePrincipals)
+      ..writeByte(108)
+      ..write(obj.disableOrderType)
+      ..writeByte(109)
+      ..write(obj.enableBatchNumber)
+      ..writeByte(110)
+      ..write(obj.disableBundles)
+      ..writeByte(111)
+      ..write(obj.enableZDP5)
+      ..writeByte(112)
+      ..write(obj.enableTaxClassification)
+      ..writeByte(113)
+      ..write(obj.enableVat)
+      ..writeByte(114)
+      ..write(obj.vatValue)
+      ..writeByte(115)
+      ..write(obj.materialWithoutPrice)
+      ..writeByte(116)
+      ..write(obj.enableSpecialInstructions)
+      ..writeByte(117)
+      ..write(obj.enableReferenceNote)
+      ..writeByte(118)
+      ..write(obj.enableCollectiveNumber)
+      ..writeByte(119)
+      ..write(obj.enableMobileNumber)
+      ..writeByte(120)
+      ..write(obj.enableFutureDeliveryDay)
+      ..writeByte(121)
+      ..write(obj.enablePaymentTerms)
+      ..writeByte(122)
+      ..write(obj.futureDeliveryDay)
+      ..writeByte(123)
+      ..write(obj.enableGMC)
+      ..writeByte(124)
+      ..write(obj.enableListPrice)
+      ..writeByte(7)
+      ..write(obj.principalList);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SalesOrganisationConfigsDtoAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 

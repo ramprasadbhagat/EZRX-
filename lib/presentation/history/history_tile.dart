@@ -122,13 +122,17 @@ class OrderHistoryListTile extends StatelessWidget {
               /// if the price getting complicated, please consider using value_object transformation to mange it
               BalanceTextRow(
                 keyText: 'ZP Price',
-                valueText:
-                    '${salesOrgConfigs.currency.code} ${orderHistoryItem.unitPrice.getOrCrash()}',
+                valueText: _displayPrice(
+                  salesOrgConfigs,
+                  orderHistoryItem.unitPrice.zpPrice,
+                ),
               ),
               BalanceTextRow(
                 keyText: 'Total Price',
-                valueText:
-                    '${salesOrgConfigs.currency.code} ${orderHistoryItem.totalPrice.getOrCrash()}',
+                valueText: _displayPrice(
+                  salesOrgConfigs,
+                  orderHistoryItem.totalPrice.totalPrice,
+                ),
               ),
             ],
           ),
@@ -136,4 +140,12 @@ class OrderHistoryListTile extends StatelessWidget {
       ),
     );
   }
+}
+
+String _displayPrice(SalesOrganisationConfigs salesOrgConfig, double price) {
+  if (salesOrgConfig.currency.isVN) {
+    return '${price.toStringAsFixed(2)} ${salesOrgConfig.currency.code}';
+  }
+
+  return '${salesOrgConfig.currency.code} ${price.toStringAsFixed(2)}';
 }

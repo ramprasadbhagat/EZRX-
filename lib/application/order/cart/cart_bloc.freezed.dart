@@ -20,24 +20,24 @@ mixin _$CartEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() fetch,
-    required TResult Function(CartItem item) addToCart,
-    required TResult Function(CartItem item) removeFromCart,
+    required TResult Function(PriceAggregate item) addToCart,
+    required TResult Function(PriceAggregate item) removeFromCart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
-    TResult Function(CartItem item)? addToCart,
-    TResult Function(CartItem item)? removeFromCart,
+    TResult Function(PriceAggregate item)? addToCart,
+    TResult Function(PriceAggregate item)? removeFromCart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
-    TResult Function(CartItem item)? addToCart,
-    TResult Function(CartItem item)? removeFromCart,
+    TResult Function(PriceAggregate item)? addToCart,
+    TResult Function(PriceAggregate item)? removeFromCart,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -125,8 +125,8 @@ class _$_Initialized implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() fetch,
-    required TResult Function(CartItem item) addToCart,
-    required TResult Function(CartItem item) removeFromCart,
+    required TResult Function(PriceAggregate item) addToCart,
+    required TResult Function(PriceAggregate item) removeFromCart,
   }) {
     return initialized();
   }
@@ -136,8 +136,8 @@ class _$_Initialized implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
-    TResult Function(CartItem item)? addToCart,
-    TResult Function(CartItem item)? removeFromCart,
+    TResult Function(PriceAggregate item)? addToCart,
+    TResult Function(PriceAggregate item)? removeFromCart,
   }) {
     return initialized?.call();
   }
@@ -147,8 +147,8 @@ class _$_Initialized implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
-    TResult Function(CartItem item)? addToCart,
-    TResult Function(CartItem item)? removeFromCart,
+    TResult Function(PriceAggregate item)? addToCart,
+    TResult Function(PriceAggregate item)? removeFromCart,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -239,8 +239,8 @@ class _$_Fetch implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() fetch,
-    required TResult Function(CartItem item) addToCart,
-    required TResult Function(CartItem item) removeFromCart,
+    required TResult Function(PriceAggregate item) addToCart,
+    required TResult Function(PriceAggregate item) removeFromCart,
   }) {
     return fetch();
   }
@@ -250,8 +250,8 @@ class _$_Fetch implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
-    TResult Function(CartItem item)? addToCart,
-    TResult Function(CartItem item)? removeFromCart,
+    TResult Function(PriceAggregate item)? addToCart,
+    TResult Function(PriceAggregate item)? removeFromCart,
   }) {
     return fetch?.call();
   }
@@ -261,8 +261,8 @@ class _$_Fetch implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
-    TResult Function(CartItem item)? addToCart,
-    TResult Function(CartItem item)? removeFromCart,
+    TResult Function(PriceAggregate item)? addToCart,
+    TResult Function(PriceAggregate item)? removeFromCart,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -318,9 +318,9 @@ abstract class _$$_AddToCartCopyWith<$Res> {
   factory _$$_AddToCartCopyWith(
           _$_AddToCart value, $Res Function(_$_AddToCart) then) =
       __$$_AddToCartCopyWithImpl<$Res>;
-  $Res call({CartItem item});
+  $Res call({PriceAggregate item});
 
-  $CartItemCopyWith<$Res> get item;
+  $PriceAggregateCopyWith<$Res> get item;
 }
 
 /// @nodoc
@@ -341,13 +341,13 @@ class __$$_AddToCartCopyWithImpl<$Res> extends _$CartEventCopyWithImpl<$Res>
       item: item == freezed
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
-              as CartItem,
+              as PriceAggregate,
     ));
   }
 
   @override
-  $CartItemCopyWith<$Res> get item {
-    return $CartItemCopyWith<$Res>(_value.item, (value) {
+  $PriceAggregateCopyWith<$Res> get item {
+    return $PriceAggregateCopyWith<$Res>(_value.item, (value) {
       return _then(_value.copyWith(item: value));
     });
   }
@@ -359,7 +359,7 @@ class _$_AddToCart implements _AddToCart {
   const _$_AddToCart({required this.item});
 
   @override
-  final CartItem item;
+  final PriceAggregate item;
 
   @override
   String toString() {
@@ -388,8 +388,8 @@ class _$_AddToCart implements _AddToCart {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() fetch,
-    required TResult Function(CartItem item) addToCart,
-    required TResult Function(CartItem item) removeFromCart,
+    required TResult Function(PriceAggregate item) addToCart,
+    required TResult Function(PriceAggregate item) removeFromCart,
   }) {
     return addToCart(item);
   }
@@ -399,8 +399,8 @@ class _$_AddToCart implements _AddToCart {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
-    TResult Function(CartItem item)? addToCart,
-    TResult Function(CartItem item)? removeFromCart,
+    TResult Function(PriceAggregate item)? addToCart,
+    TResult Function(PriceAggregate item)? removeFromCart,
   }) {
     return addToCart?.call(item);
   }
@@ -410,8 +410,8 @@ class _$_AddToCart implements _AddToCart {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
-    TResult Function(CartItem item)? addToCart,
-    TResult Function(CartItem item)? removeFromCart,
+    TResult Function(PriceAggregate item)? addToCart,
+    TResult Function(PriceAggregate item)? removeFromCart,
     required TResult orElse(),
   }) {
     if (addToCart != null) {
@@ -459,9 +459,9 @@ class _$_AddToCart implements _AddToCart {
 }
 
 abstract class _AddToCart implements CartEvent {
-  const factory _AddToCart({required final CartItem item}) = _$_AddToCart;
+  const factory _AddToCart({required final PriceAggregate item}) = _$_AddToCart;
 
-  CartItem get item;
+  PriceAggregate get item;
   @JsonKey(ignore: true)
   _$$_AddToCartCopyWith<_$_AddToCart> get copyWith =>
       throw _privateConstructorUsedError;
@@ -472,9 +472,9 @@ abstract class _$$_RemoveFromCartCopyWith<$Res> {
   factory _$$_RemoveFromCartCopyWith(
           _$_RemoveFromCart value, $Res Function(_$_RemoveFromCart) then) =
       __$$_RemoveFromCartCopyWithImpl<$Res>;
-  $Res call({CartItem item});
+  $Res call({PriceAggregate item});
 
-  $CartItemCopyWith<$Res> get item;
+  $PriceAggregateCopyWith<$Res> get item;
 }
 
 /// @nodoc
@@ -496,13 +496,13 @@ class __$$_RemoveFromCartCopyWithImpl<$Res>
       item: item == freezed
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
-              as CartItem,
+              as PriceAggregate,
     ));
   }
 
   @override
-  $CartItemCopyWith<$Res> get item {
-    return $CartItemCopyWith<$Res>(_value.item, (value) {
+  $PriceAggregateCopyWith<$Res> get item {
+    return $PriceAggregateCopyWith<$Res>(_value.item, (value) {
       return _then(_value.copyWith(item: value));
     });
   }
@@ -514,7 +514,7 @@ class _$_RemoveFromCart implements _RemoveFromCart {
   const _$_RemoveFromCart({required this.item});
 
   @override
-  final CartItem item;
+  final PriceAggregate item;
 
   @override
   String toString() {
@@ -543,8 +543,8 @@ class _$_RemoveFromCart implements _RemoveFromCart {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() fetch,
-    required TResult Function(CartItem item) addToCart,
-    required TResult Function(CartItem item) removeFromCart,
+    required TResult Function(PriceAggregate item) addToCart,
+    required TResult Function(PriceAggregate item) removeFromCart,
   }) {
     return removeFromCart(item);
   }
@@ -554,8 +554,8 @@ class _$_RemoveFromCart implements _RemoveFromCart {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
-    TResult Function(CartItem item)? addToCart,
-    TResult Function(CartItem item)? removeFromCart,
+    TResult Function(PriceAggregate item)? addToCart,
+    TResult Function(PriceAggregate item)? removeFromCart,
   }) {
     return removeFromCart?.call(item);
   }
@@ -565,8 +565,8 @@ class _$_RemoveFromCart implements _RemoveFromCart {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? fetch,
-    TResult Function(CartItem item)? addToCart,
-    TResult Function(CartItem item)? removeFromCart,
+    TResult Function(PriceAggregate item)? addToCart,
+    TResult Function(PriceAggregate item)? removeFromCart,
     required TResult orElse(),
   }) {
     if (removeFromCart != null) {
@@ -614,10 +614,10 @@ class _$_RemoveFromCart implements _RemoveFromCart {
 }
 
 abstract class _RemoveFromCart implements CartEvent {
-  const factory _RemoveFromCart({required final CartItem item}) =
+  const factory _RemoveFromCart({required final PriceAggregate item}) =
       _$_RemoveFromCart;
 
-  CartItem get item;
+  PriceAggregate get item;
   @JsonKey(ignore: true)
   _$$_RemoveFromCartCopyWith<_$_RemoveFromCart> get copyWith =>
       throw _privateConstructorUsedError;
@@ -625,7 +625,7 @@ abstract class _RemoveFromCart implements CartEvent {
 
 /// @nodoc
 mixin _$CartState {
-  List<CartItem> get cartItemList => throw _privateConstructorUsedError;
+  List<PriceAggregate> get cartItemList => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
@@ -640,7 +640,7 @@ abstract class $CartStateCopyWith<$Res> {
   factory $CartStateCopyWith(CartState value, $Res Function(CartState) then) =
       _$CartStateCopyWithImpl<$Res>;
   $Res call(
-      {List<CartItem> cartItemList,
+      {List<PriceAggregate> cartItemList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool isFetching});
 }
@@ -663,7 +663,7 @@ class _$CartStateCopyWithImpl<$Res> implements $CartStateCopyWith<$Res> {
       cartItemList: cartItemList == freezed
           ? _value.cartItemList
           : cartItemList // ignore: cast_nullable_to_non_nullable
-              as List<CartItem>,
+              as List<PriceAggregate>,
       apiFailureOrSuccessOption: apiFailureOrSuccessOption == freezed
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -683,7 +683,7 @@ abstract class _$$_CartStateCopyWith<$Res> implements $CartStateCopyWith<$Res> {
       __$$_CartStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {List<CartItem> cartItemList,
+      {List<PriceAggregate> cartItemList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool isFetching});
 }
@@ -708,7 +708,7 @@ class __$$_CartStateCopyWithImpl<$Res> extends _$CartStateCopyWithImpl<$Res>
       cartItemList: cartItemList == freezed
           ? _value._cartItemList
           : cartItemList // ignore: cast_nullable_to_non_nullable
-              as List<CartItem>,
+              as List<PriceAggregate>,
       apiFailureOrSuccessOption: apiFailureOrSuccessOption == freezed
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -725,15 +725,15 @@ class __$$_CartStateCopyWithImpl<$Res> extends _$CartStateCopyWithImpl<$Res>
 
 class _$_CartState extends _CartState {
   const _$_CartState(
-      {required final List<CartItem> cartItemList,
+      {required final List<PriceAggregate> cartItemList,
       required this.apiFailureOrSuccessOption,
       required this.isFetching})
       : _cartItemList = cartItemList,
         super._();
 
-  final List<CartItem> _cartItemList;
+  final List<PriceAggregate> _cartItemList;
   @override
-  List<CartItem> get cartItemList {
+  List<PriceAggregate> get cartItemList {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_cartItemList);
   }
@@ -776,14 +776,14 @@ class _$_CartState extends _CartState {
 
 abstract class _CartState extends CartState {
   const factory _CartState(
-      {required final List<CartItem> cartItemList,
+      {required final List<PriceAggregate> cartItemList,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
       required final bool isFetching}) = _$_CartState;
   const _CartState._() : super._();
 
   @override
-  List<CartItem> get cartItemList;
+  List<PriceAggregate> get cartItemList;
   @override
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override

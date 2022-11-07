@@ -5,12 +5,12 @@ class AddToCartState with _$AddToCartState {
   const AddToCartState._();
 
   const factory AddToCartState({
-    required CartItem cartItem,
+    required PriceAggregate cartItem,
     required int quantity,
   }) = _AddToCartState;
 
   factory AddToCartState.initial() => AddToCartState(
-        cartItem: CartItem.empty(),
+        cartItem: PriceAggregate.empty(),
         quantity: 1,
       );
 }

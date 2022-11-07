@@ -116,7 +116,7 @@ _$_MaterialDto _$$_MaterialDtoFromJson(Map<String, dynamic> json) =>
           json['hasMandatoryTenderContract'] as bool? ?? false,
       taxes:
           (json['taxes'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-              [],
+              ['0'],
       bundles: (json['bundles'] as List<dynamic>?)
               ?.map((e) => BundleDto.fromJson(e as Map<String, dynamic>))
               .toList() ??

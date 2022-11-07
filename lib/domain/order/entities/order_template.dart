@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'order_template.freezed.dart';
@@ -10,14 +10,14 @@ class OrderTemplate with _$OrderTemplate {
   const factory OrderTemplate({
     required String templateId,
     required String templateName,
-    required List<CartItem> cartItems,
+    required List<PriceAggregate> cartItems,
     required Map<String, dynamic> user,
   }) = _OrderTemplate;
 
   factory OrderTemplate.empty() => const OrderTemplate(
         templateId: '',
         templateName: '',
-        cartItems: <CartItem>[],
+        cartItems: <PriceAggregate>[],
         user: <String, dynamic>{},
       );
 }

@@ -5,9 +5,9 @@ class CartEvent with _$CartEvent {
   const factory CartEvent.initialized() = _Initialized;
   const factory CartEvent.fetch() = _Fetch;
   const factory CartEvent.addToCart({
-    required CartItem item,
+    required PriceAggregate item,
   }) = _AddToCart;
   const factory CartEvent.removeFromCart({
-    required CartItem item,
+    required PriceAggregate item,
   }) = _RemoveFromCart;
 }

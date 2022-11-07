@@ -4,6 +4,8 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/presentation/core/action_button.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
@@ -126,6 +128,7 @@ class FavouriteListTile extends StatelessWidget {
                       final queryInfo =
                           MaterialQueryInfo.fromFavorite(material: favourite);
                       final priceDetail = state.materialDetails[queryInfo];
+
                       if (state.isFetching || priceDetail == null) {
                         return SizedBox(
                           key: const Key('price-loading'),
@@ -134,24 +137,24 @@ class FavouriteListTile extends StatelessWidget {
                         );
                       }
 
+                      final priceAggregate = PriceAggregate(
+                        price: priceDetail.price,
+                        materialInfo:
+                            MaterialInfo.empty().copyWith(hidePrice: false),
+                        salesOrgConfig:
+                            context.read<SalesOrgBloc>().state.configs,
+                        quantity: 1,
+                        zmgMaterialCountOnCart: 0,
+                      );
+
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '${'Unit Price: '.tr()}${priceDetail.price.finalPrice.displayWithCurrency(
-                              isFoc: priceDetail.price.isFOC,
-                              currency: context
-                                  .read<SalesOrgBloc>()
-                                  .state
-                                  .configs
-                                  .currency,
-                              hidePrice: false,
-                            )}',
-                            style: const TextStyle(
-                              color: ZPColors.darkerGreen,
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w400,
-                            ),
+                            '${'Unit Price: '.tr()}${priceAggregate.display(PriceType.unitPrice)}',
+                            style: Theme.of(context).textTheme.bodyText1?.apply(
+                                  color: ZPColors.black,
+                                ),
                           ),
                           BlocBuilder<SalesOrgBloc, SalesOrgState>(
                             buildWhen: (previous, current) =>

@@ -3,6 +3,93 @@
 part of 'price_tier_dto.dart';
 
 // **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class PriceTierDtoAdapter extends TypeAdapter<_$_PriceTierDto> {
+  @override
+  final int typeId = 8;
+
+  @override
+  _$_PriceTierDto read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return _$_PriceTierDto(
+      tier: fields[19] as String,
+      items: (fields[20] as List).cast<PriceTierItemDto>(),
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, _$_PriceTierDto obj) {
+    writer
+      ..writeByte(2)
+      ..writeByte(19)
+      ..write(obj.tier)
+      ..writeByte(20)
+      ..write(obj.items);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PriceTierDtoAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class PriceTierItemDtoAdapter extends TypeAdapter<_$_PriceTierItemDto> {
+  @override
+  final int typeId = 9;
+
+  @override
+  _$_PriceTierItemDto read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return _$_PriceTierItemDto(
+      type: fields[21] as String,
+      applyBonus: fields[22] as bool,
+      sequence: fields[23] as int,
+      quantity: fields[24] as int,
+      rate: fields[6] as double,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, _$_PriceTierItemDto obj) {
+    writer
+      ..writeByte(5)
+      ..writeByte(21)
+      ..write(obj.type)
+      ..writeByte(22)
+      ..write(obj.applyBonus)
+      ..writeByte(23)
+      ..write(obj.sequence)
+      ..writeByte(24)
+      ..write(obj.quantity)
+      ..writeByte(6)
+      ..write(obj.rate);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PriceTierItemDtoAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 

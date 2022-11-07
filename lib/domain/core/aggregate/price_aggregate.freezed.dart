@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'cart_item.dart';
+part of 'price_aggregate.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,27 +15,30 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$CartItem {
+mixin _$PriceAggregate {
   Price get price => throw _privateConstructorUsedError;
   MaterialInfo get materialInfo => throw _privateConstructorUsedError;
   SalesOrganisationConfigs get salesOrgConfig =>
       throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
+  int get zmgMaterialCountOnCart => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $CartItemCopyWith<CartItem> get copyWith =>
+  $PriceAggregateCopyWith<PriceAggregate> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CartItemCopyWith<$Res> {
-  factory $CartItemCopyWith(CartItem value, $Res Function(CartItem) then) =
-      _$CartItemCopyWithImpl<$Res>;
+abstract class $PriceAggregateCopyWith<$Res> {
+  factory $PriceAggregateCopyWith(
+          PriceAggregate value, $Res Function(PriceAggregate) then) =
+      _$PriceAggregateCopyWithImpl<$Res>;
   $Res call(
       {Price price,
       MaterialInfo materialInfo,
       SalesOrganisationConfigs salesOrgConfig,
-      int quantity});
+      int quantity,
+      int zmgMaterialCountOnCart});
 
   $PriceCopyWith<$Res> get price;
   $MaterialInfoCopyWith<$Res> get materialInfo;
@@ -43,12 +46,13 @@ abstract class $CartItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CartItemCopyWithImpl<$Res> implements $CartItemCopyWith<$Res> {
-  _$CartItemCopyWithImpl(this._value, this._then);
+class _$PriceAggregateCopyWithImpl<$Res>
+    implements $PriceAggregateCopyWith<$Res> {
+  _$PriceAggregateCopyWithImpl(this._value, this._then);
 
-  final CartItem _value;
+  final PriceAggregate _value;
   // ignore: unused_field
-  final $Res Function(CartItem) _then;
+  final $Res Function(PriceAggregate) _then;
 
   @override
   $Res call({
@@ -56,6 +60,7 @@ class _$CartItemCopyWithImpl<$Res> implements $CartItemCopyWith<$Res> {
     Object? materialInfo = freezed,
     Object? salesOrgConfig = freezed,
     Object? quantity = freezed,
+    Object? zmgMaterialCountOnCart = freezed,
   }) {
     return _then(_value.copyWith(
       price: price == freezed
@@ -73,6 +78,10 @@ class _$CartItemCopyWithImpl<$Res> implements $CartItemCopyWith<$Res> {
       quantity: quantity == freezed
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
+              as int,
+      zmgMaterialCountOnCart: zmgMaterialCountOnCart == freezed
+          ? _value.zmgMaterialCountOnCart
+          : zmgMaterialCountOnCart // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -101,16 +110,18 @@ class _$CartItemCopyWithImpl<$Res> implements $CartItemCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_CartItemCopyWith<$Res> implements $CartItemCopyWith<$Res> {
-  factory _$$_CartItemCopyWith(
-          _$_CartItem value, $Res Function(_$_CartItem) then) =
-      __$$_CartItemCopyWithImpl<$Res>;
+abstract class _$$_PriceAggregateCopyWith<$Res>
+    implements $PriceAggregateCopyWith<$Res> {
+  factory _$$_PriceAggregateCopyWith(
+          _$_PriceAggregate value, $Res Function(_$_PriceAggregate) then) =
+      __$$_PriceAggregateCopyWithImpl<$Res>;
   @override
   $Res call(
       {Price price,
       MaterialInfo materialInfo,
       SalesOrganisationConfigs salesOrgConfig,
-      int quantity});
+      int quantity,
+      int zmgMaterialCountOnCart});
 
   @override
   $PriceCopyWith<$Res> get price;
@@ -121,14 +132,15 @@ abstract class _$$_CartItemCopyWith<$Res> implements $CartItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_CartItemCopyWithImpl<$Res> extends _$CartItemCopyWithImpl<$Res>
-    implements _$$_CartItemCopyWith<$Res> {
-  __$$_CartItemCopyWithImpl(
-      _$_CartItem _value, $Res Function(_$_CartItem) _then)
-      : super(_value, (v) => _then(v as _$_CartItem));
+class __$$_PriceAggregateCopyWithImpl<$Res>
+    extends _$PriceAggregateCopyWithImpl<$Res>
+    implements _$$_PriceAggregateCopyWith<$Res> {
+  __$$_PriceAggregateCopyWithImpl(
+      _$_PriceAggregate _value, $Res Function(_$_PriceAggregate) _then)
+      : super(_value, (v) => _then(v as _$_PriceAggregate));
 
   @override
-  _$_CartItem get _value => super._value as _$_CartItem;
+  _$_PriceAggregate get _value => super._value as _$_PriceAggregate;
 
   @override
   $Res call({
@@ -136,8 +148,9 @@ class __$$_CartItemCopyWithImpl<$Res> extends _$CartItemCopyWithImpl<$Res>
     Object? materialInfo = freezed,
     Object? salesOrgConfig = freezed,
     Object? quantity = freezed,
+    Object? zmgMaterialCountOnCart = freezed,
   }) {
-    return _then(_$_CartItem(
+    return _then(_$_PriceAggregate(
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -154,18 +167,23 @@ class __$$_CartItemCopyWithImpl<$Res> extends _$CartItemCopyWithImpl<$Res>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
+      zmgMaterialCountOnCart: zmgMaterialCountOnCart == freezed
+          ? _value.zmgMaterialCountOnCart
+          : zmgMaterialCountOnCart // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_CartItem extends _CartItem {
-  const _$_CartItem(
+class _$_PriceAggregate extends _PriceAggregate {
+  const _$_PriceAggregate(
       {required this.price,
       required this.materialInfo,
       required this.salesOrgConfig,
-      required this.quantity})
+      required this.quantity,
+      required this.zmgMaterialCountOnCart})
       : super._();
 
   @override
@@ -176,23 +194,27 @@ class _$_CartItem extends _CartItem {
   final SalesOrganisationConfigs salesOrgConfig;
   @override
   final int quantity;
+  @override
+  final int zmgMaterialCountOnCart;
 
   @override
   String toString() {
-    return 'CartItem(price: $price, materialInfo: $materialInfo, salesOrgConfig: $salesOrgConfig, quantity: $quantity)';
+    return 'PriceAggregate(price: $price, materialInfo: $materialInfo, salesOrgConfig: $salesOrgConfig, quantity: $quantity, zmgMaterialCountOnCart: $zmgMaterialCountOnCart)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CartItem &&
+            other is _$_PriceAggregate &&
             const DeepCollectionEquality().equals(other.price, price) &&
             const DeepCollectionEquality()
                 .equals(other.materialInfo, materialInfo) &&
             const DeepCollectionEquality()
                 .equals(other.salesOrgConfig, salesOrgConfig) &&
-            const DeepCollectionEquality().equals(other.quantity, quantity));
+            const DeepCollectionEquality().equals(other.quantity, quantity) &&
+            const DeepCollectionEquality()
+                .equals(other.zmgMaterialCountOnCart, zmgMaterialCountOnCart));
   }
 
   @override
@@ -201,21 +223,23 @@ class _$_CartItem extends _CartItem {
       const DeepCollectionEquality().hash(price),
       const DeepCollectionEquality().hash(materialInfo),
       const DeepCollectionEquality().hash(salesOrgConfig),
-      const DeepCollectionEquality().hash(quantity));
+      const DeepCollectionEquality().hash(quantity),
+      const DeepCollectionEquality().hash(zmgMaterialCountOnCart));
 
   @JsonKey(ignore: true)
   @override
-  _$$_CartItemCopyWith<_$_CartItem> get copyWith =>
-      __$$_CartItemCopyWithImpl<_$_CartItem>(this, _$identity);
+  _$$_PriceAggregateCopyWith<_$_PriceAggregate> get copyWith =>
+      __$$_PriceAggregateCopyWithImpl<_$_PriceAggregate>(this, _$identity);
 }
 
-abstract class _CartItem extends CartItem {
-  const factory _CartItem(
+abstract class _PriceAggregate extends PriceAggregate {
+  const factory _PriceAggregate(
       {required final Price price,
       required final MaterialInfo materialInfo,
       required final SalesOrganisationConfigs salesOrgConfig,
-      required final int quantity}) = _$_CartItem;
-  const _CartItem._() : super._();
+      required final int quantity,
+      required final int zmgMaterialCountOnCart}) = _$_PriceAggregate;
+  const _PriceAggregate._() : super._();
 
   @override
   Price get price;
@@ -226,7 +250,9 @@ abstract class _CartItem extends CartItem {
   @override
   int get quantity;
   @override
+  int get zmgMaterialCountOnCart;
+  @override
   @JsonKey(ignore: true)
-  _$$_CartItemCopyWith<_$_CartItem> get copyWith =>
+  _$$_PriceAggregateCopyWith<_$_PriceAggregate> get copyWith =>
       throw _privateConstructorUsedError;
 }

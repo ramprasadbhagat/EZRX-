@@ -4,7 +4,6 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-
 import 'package:hive/hive.dart';
 part 'material_dto.freezed.dart';
 part 'material_dto.g.dart';
@@ -17,58 +16,58 @@ class MaterialDto with _$MaterialDto {
   const factory MaterialDto({
     @JsonKey(name: 'materialNumber', defaultValue: '')
     @HiveField(0)
-    required String materialNumber,
+        required String materialNumber,
     @JsonKey(name: 'materialDescription', defaultValue: '')
     @HiveField(1)
-    required String materialDescription,
+        required String materialDescription,
     @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
     @HiveField(2)
-    required String governmentMaterialCode,
+        required String governmentMaterialCode,
     @JsonKey(name: 'therapeuticClass', defaultValue: '')
     @HiveField(3)
-    required String therapeuticClass,
+        required String therapeuticClass,
     @JsonKey(name: 'itemBrand', defaultValue: '')
     @HiveField(4)
-    required String itemBrand,
+        required String itemBrand,
     @JsonKey(name: 'principalName', defaultValue: '')
     @HiveField(5)
-    required String principalName,
+        required String principalName,
     @JsonKey(name: 'principalCode', defaultValue: '')
     @HiveField(6)
-    required String principalCode,
+        required String principalCode,
     @JsonKey(name: 'taxClassification', defaultValue: '')
     @HiveField(7)
-    required String taxClassification,
+        required String taxClassification,
     @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
     @HiveField(8)
-    required String itemRegistrationNumber,
+        required String itemRegistrationNumber,
     @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
     @HiveField(9)
-    required String unitOfMeasurement,
+        required String unitOfMeasurement,
     @JsonKey(name: 'materialGroup2', defaultValue: '')
     @HiveField(10)
-    required String materialGroup2,
+        required String materialGroup2,
     @JsonKey(name: 'materialGroup4', defaultValue: '')
     @HiveField(11)
-    required String materialGroup4,
+        required String materialGroup4,
     @JsonKey(name: 'isSampleMaterial', defaultValue: false)
     @HiveField(12)
-    required bool isSampleMaterial,
+        required bool isSampleMaterial,
     @JsonKey(name: 'hidePrice', defaultValue: false)
     @HiveField(13)
-    required bool hidePrice,
+        required bool hidePrice,
     @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
     @HiveField(14)
-    required bool hasValidTenderContract,
+        required bool hasValidTenderContract,
     @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
     @HiveField(15)
-    required bool hasMandatoryTenderContract,
-    @JsonKey(name: 'taxes', defaultValue: <String>[])
+        required bool hasMandatoryTenderContract,
+    @JsonKey(name: 'taxes', defaultValue: <String>['0'])
     @HiveField(16)
-    required List<String> taxes,
+        required List<String> taxes,
     @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
     @HiveField(17)
-    required List<BundleDto> bundles,
+        required List<BundleDto> bundles,
   }) = _MaterialDto;
 
   factory MaterialDto.fromDomain(MaterialInfo materialInfo) {
@@ -91,7 +90,7 @@ class MaterialDto with _$MaterialDto {
       hasMandatoryTenderContract: materialInfo.hasMandatoryTenderContract,
       taxes: materialInfo.taxes.map((e) => e.toString()).toList(),
       bundles:
-      materialInfo.bundles.map((e) => BundleDto.fromDomain(e)).toList(),
+          materialInfo.bundles.map((e) => BundleDto.fromDomain(e)).toList(),
     );
   }
 
@@ -106,7 +105,7 @@ class MaterialDto with _$MaterialDto {
         principalName: principalName,
         principalCode: principalCode,
       ),
-      taxClassification:  MaterialTaxClassification(taxClassification),
+      taxClassification: MaterialTaxClassification(taxClassification),
       itemRegistrationNumber: itemRegistrationNumber,
       unitOfMeasurement: unitOfMeasurement,
       materialGroup2: MaterialGroup.two(materialGroup2),

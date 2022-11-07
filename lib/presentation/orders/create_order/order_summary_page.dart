@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_list_tile.dart';
@@ -437,36 +438,30 @@ class _CartDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CartBloc, CartState>(
       builder: (context, state) {
+        final salesOrgConfig = context.read<SalesOrgBloc>().state.configs;
+        final taxCode = context.read<SalesOrgBloc>().state.salesOrg.taxCode;
+
         return Column(
           children: [
-            Text(
-              '${'Subtotal: '.tr()} ${_isSpecialOrderType(context) ? '' : _getCurrencyPrice(context)}',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(color: ZPColors.primary),
+            BalanceTextRow(
+              keyText: 'Subtotal'.tr(),
+              valueText: _displayPrice(salesOrgConfig, state.subtotal),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            context.read<SalesOrgBloc>().state.configs.enableVat
-                ? Text(
-                    '${'VAT in % : '.tr()} VAT_VALUE',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(color: ZPColors.primary),
+            salesOrgConfig.enableVat
+                ? BalanceTextRow(
+                    keyText: '$taxCode in %'.tr(),
+                    valueText: '${salesOrgConfig.vatValue}%',
                   )
                 : const SizedBox.shrink(),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              '${'Grand Total: '.tr()} ${_isSpecialOrderType(context) ? '' : _getCurrencyPrice(context)}',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(color: ZPColors.primary),
+            salesOrgConfig.enableVat
+                ? BalanceTextRow(
+                    keyText: taxCode.tr(),
+                    valueText: _displayPrice(salesOrgConfig, state.vatTotal),
+                  )
+                : const SizedBox.shrink(),
+            BalanceTextRow(
+              keyText: 'Grand Total'.tr(),
+              valueText: _displayPrice(salesOrgConfig, state.grandTotal),
             ),
             const SizedBox(
               height: 20,
@@ -520,6 +515,14 @@ class _CartDetails extends StatelessWidget {
       return false;
     }
   }
+}
+
+String _displayPrice(SalesOrganisationConfigs salesOrgConfig, double price) {
+  if (salesOrgConfig.currency.isVN) {
+    return '${price.toStringAsFixed(2)} ${salesOrgConfig.currency.code}';
+  }
+
+  return '${salesOrgConfig.currency.code} ${price.toStringAsFixed(2)}';
 }
 
 class _TextFormField extends StatelessWidget {

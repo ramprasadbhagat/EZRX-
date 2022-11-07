@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OrderTemplate {
   String get templateId => throw _privateConstructorUsedError;
   String get templateName => throw _privateConstructorUsedError;
-  List<CartItem> get cartItems => throw _privateConstructorUsedError;
+  List<PriceAggregate> get cartItems => throw _privateConstructorUsedError;
   Map<String, dynamic> get user => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -34,7 +34,7 @@ abstract class $OrderTemplateCopyWith<$Res> {
   $Res call(
       {String templateId,
       String templateName,
-      List<CartItem> cartItems,
+      List<PriceAggregate> cartItems,
       Map<String, dynamic> user});
 }
 
@@ -66,7 +66,7 @@ class _$OrderTemplateCopyWithImpl<$Res>
       cartItems: cartItems == freezed
           ? _value.cartItems
           : cartItems // ignore: cast_nullable_to_non_nullable
-              as List<CartItem>,
+              as List<PriceAggregate>,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -85,7 +85,7 @@ abstract class _$$_OrderTemplateCopyWith<$Res>
   $Res call(
       {String templateId,
       String templateName,
-      List<CartItem> cartItems,
+      List<PriceAggregate> cartItems,
       Map<String, dynamic> user});
 }
 
@@ -119,7 +119,7 @@ class __$$_OrderTemplateCopyWithImpl<$Res>
       cartItems: cartItems == freezed
           ? _value._cartItems
           : cartItems // ignore: cast_nullable_to_non_nullable
-              as List<CartItem>,
+              as List<PriceAggregate>,
       user: user == freezed
           ? _value._user
           : user // ignore: cast_nullable_to_non_nullable
@@ -134,7 +134,7 @@ class _$_OrderTemplate extends _OrderTemplate {
   const _$_OrderTemplate(
       {required this.templateId,
       required this.templateName,
-      required final List<CartItem> cartItems,
+      required final List<PriceAggregate> cartItems,
       required final Map<String, dynamic> user})
       : _cartItems = cartItems,
         _user = user,
@@ -144,9 +144,9 @@ class _$_OrderTemplate extends _OrderTemplate {
   final String templateId;
   @override
   final String templateName;
-  final List<CartItem> _cartItems;
+  final List<PriceAggregate> _cartItems;
   @override
-  List<CartItem> get cartItems {
+  List<PriceAggregate> get cartItems {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_cartItems);
   }
@@ -195,7 +195,7 @@ abstract class _OrderTemplate extends OrderTemplate {
   const factory _OrderTemplate(
       {required final String templateId,
       required final String templateName,
-      required final List<CartItem> cartItems,
+      required final List<PriceAggregate> cartItems,
       required final Map<String, dynamic> user}) = _$_OrderTemplate;
   const _OrderTemplate._() : super._();
 
@@ -204,7 +204,7 @@ abstract class _OrderTemplate extends OrderTemplate {
   @override
   String get templateName;
   @override
-  List<CartItem> get cartItems;
+  List<PriceAggregate> get cartItems;
   @override
   Map<String, dynamic> get user;
   @override

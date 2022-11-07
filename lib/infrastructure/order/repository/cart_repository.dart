@@ -1,10 +1,10 @@
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/cart_item_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/price_aggregate_dto.dart';
 
 class CartRepository implements ICartRepository {
   final CartStorage cartStorage;
@@ -25,11 +25,11 @@ class CartRepository implements ICartRepository {
   }
 
   @override
-  Future<Either<ApiFailure, List<CartItem>>> addToCart({
-    required CartItem cartItem,
+  Future<Either<ApiFailure, List<PriceAggregate>>> addToCart({
+    required PriceAggregate cartItem,
   }) async {
     try {
-      await cartStorage.add(CartItemDto.fromDomain(cartItem));
+      await cartStorage.add(PriceAggregateDto.fromDomain(cartItem));
 
       return fetchCartItems();
     } catch (e) {
@@ -38,8 +38,8 @@ class CartRepository implements ICartRepository {
   }
 
   @override
-  Future<Either<ApiFailure, List<CartItem>>> deleteFromCart({
-    required CartItem cartItem,
+  Future<Either<ApiFailure, List<PriceAggregate>>> deleteFromCart({
+    required PriceAggregate cartItem,
   }) async {
     try {
       await cartStorage.delete(
@@ -53,7 +53,7 @@ class CartRepository implements ICartRepository {
   }
 
   @override
-  Future<Either<ApiFailure, List<CartItem>>> fetchCartItems() async {
+  Future<Either<ApiFailure, List<PriceAggregate>>> fetchCartItems() async {
     try {
       final cartItemDtoList = await cartStorage.get();
       final cartItemList = cartItemDtoList.map((e) => e.toDomain()).toList();

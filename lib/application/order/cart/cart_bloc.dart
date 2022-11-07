@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -32,7 +32,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           state.copyWith(
             isFetching: true,
             apiFailureOrSuccessOption: none(),
-            cartItemList: <CartItem>[],
+            cartItemList: <PriceAggregate>[],
           ),
         );
         final failureOrSuccess = await cartRepository.fetchCartItems();

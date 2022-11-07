@@ -1,16 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartItemListTile extends StatelessWidget {
-  final CartItem cartItem;
+  final PriceAggregate cartItem;
   const CartItemListTile({Key? key, required this.cartItem}) : super(key: key);
 
   @override
@@ -31,7 +28,7 @@ class CartItemListTile extends StatelessWidget {
           key: Key(
             'cartItem${cartItem.materialInfo.materialNumber}',
           ),
-          leading: SizedBox(
+          trailing: SizedBox(
             width: 50,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -126,56 +123,29 @@ class CartItemListTile extends StatelessWidget {
                       color: ZPColors.lightGray,
                     ),
               ),
-              BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
-                buildWhen: (previous, current) =>
-                    previous.isFetching != current.isFetching,
-                builder: (context, state) {
-                  final itemPrice =
-                      state.materialPrice[cartItem.materialInfo.materialNumber];
-
-                  if (itemPrice != null) {
-                    final currentCurrency =
-                        context.read<SalesOrgBloc>().state.configs.currency;
-                    final isHidePrice = cartItem.materialInfo.hidePrice;
-
-                    return Text(
-                      '${'Unit Price: '.tr()}${itemPrice.finalPrice.displayWithCurrency(
-                        isFoc: itemPrice.isFOC,
-                        currency: currentCurrency,
-                        hidePrice: isHidePrice,
-                      )}',
-                      style: Theme.of(context).textTheme.bodyText1?.apply(
-                            color: ZPColors.black,
-                          ),
-                    );
-                  }
-                  if (state.isFetching) {
-                    return SizedBox(
-                      key: const Key('price-loading'),
-                      width: 40,
-                      child: LoadingShimmer.tile(),
-                    );
-                  }
-
-                  return Text(
-                    '${'Unit Price: '.tr()}NA',
-                    style: Theme.of(context).textTheme.bodyText1?.apply(
-                          color: ZPColors.black,
-                        ),
-                  );
-                },
+              Text(
+                '${'List Price: '.tr()}${cartItem.display(PriceType.listPrice)}',
+                style: Theme.of(context).textTheme.bodyText1?.apply(
+                      color: ZPColors.lightGray,
+                    ),
+              ),
+              Text(
+                '${'Unit Price: '.tr()}${cartItem.display(PriceType.unitPrice)}',
+                style: Theme.of(context).textTheme.bodyText1?.apply(
+                      color: ZPColors.black,
+                    ),
               ),
             ],
           ),
           isThreeLine: true,
-          trailing: IconButton(
-            onPressed: () {
-              context
-                  .read<CartBloc>()
-                  .add(CartEvent.removeFromCart(item: cartItem));
-            },
-            icon: const Icon(Icons.delete),
-          ),
+          // trailing: IconButton(
+          //   onPressed: () {
+          //     context
+          //         .read<CartBloc>()
+          //         .add(CartEvent.removeFromCart(item: cartItem));
+          //   },
+          //   icon: const Icon(Icons.delete),
+          // ),
         ),
       ),
     );

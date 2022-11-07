@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
@@ -142,59 +141,6 @@ class MaterialPrice extends ValueObject<double> {
   factory MaterialPrice(double input) => MaterialPrice._(Right(input));
 
   const MaterialPrice._(this.value);
-
-  String displayUnitPrice({
-    required Currency currency,
-    required bool hidePrice,
-    required bool isVNUser,
-    required bool enableVat,
-    required bool enableTaxClassification,
-    required int vatValue,
-    required MaterialTaxClassification taxClassification,
-    required List taxes,
-    required bool isFoc,
-  }) {
-    return unitPrice(
-      currency,
-      isFoc,
-      hidePrice,
-      isVNUser,
-      enableVat,
-      enableTaxClassification,
-      vatValue,
-      taxClassification,
-      taxes,
-      value.getOrElse(() => 0),
-    );
-  }
-
-  String displayWithCurrency({
-    required Currency currency,
-    required bool hidePrice,
-    required bool isFoc,
-  }) {
-    return currencyAlign(
-      currency,
-      hidePrice,
-      value.getOrElse(() => 0),
-      isFoc,
-    );
-  }
-
-  String displayTotal({
-    required Currency currency,
-    required bool hidePrice,
-    required int quantity,
-    required bool isFoc,
-  }) {
-    return totalPrice(
-      currency,
-      isFoc,
-      hidePrice,
-      value.getOrElse(() => 0),
-      quantity,
-    );
-  }
 
   bool isEmpty() => value.getOrElse(() => 0) == 0;
 }

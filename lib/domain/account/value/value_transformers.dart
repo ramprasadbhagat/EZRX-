@@ -295,6 +295,16 @@ String currencyCode(String currency) {
   return currency.isEmpty ? 'NA' : currency.toUpperCase();
 }
 
+String salesOrgTaxCode(String country) {
+  switch (country) {
+    case 'SG':
+      return 'GST';
+    case 'TH':
+    default:
+      return 'VAT';
+  }
+}
+
 // bool isAllCustomerCodeEnabled(String customerCode) {
 //   switch (customerCode) {
 //     case 'all':

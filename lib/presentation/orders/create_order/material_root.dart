@@ -3,11 +3,12 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/presentation/core/cart_button.dart';
@@ -93,11 +94,13 @@ class MaterialRoot extends StatelessWidget {
       builder: (_) {
         context.read<AddToCartBloc>().add(
               AddToCartEvent.setCartItem(
-                CartItem(
+                PriceAggregate(
                   price: itemPrice ?? Price.empty(),
                   materialInfo: materialInfo,
                   salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
                   quantity: 1,
+                  zmgMaterialCountOnCart:
+                      context.read<CartBloc>().state.zmgMaterialCount,
                 ),
               ),
             );

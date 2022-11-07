@@ -1,5 +1,5 @@
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -27,7 +27,7 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
       );
 
   factory MaterialQueryInfo.fromOrderTemplate({
-    required CartItem orderMaterial,
+    required PriceAggregate orderMaterial,
   }) =>
       MaterialQueryInfo(
         qty: MaterialQty(orderMaterial.quantity),
