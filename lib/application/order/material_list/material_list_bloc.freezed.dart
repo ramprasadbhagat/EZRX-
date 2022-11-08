@@ -1587,6 +1587,7 @@ mixin _$MaterialListState {
   bool get isFetching => throw _privateConstructorUsedError;
   int get nextPageIndex => throw _privateConstructorUsedError;
   SearchKey get searchKey => throw _privateConstructorUsedError;
+  MaterialFilter get selectedFilters => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialListStateCopyWith<MaterialListState> get copyWith =>
@@ -1604,7 +1605,10 @@ abstract class $MaterialListStateCopyWith<$Res> {
       bool canLoadMore,
       bool isFetching,
       int nextPageIndex,
-      SearchKey searchKey});
+      SearchKey searchKey,
+      MaterialFilter selectedFilters});
+
+  $MaterialFilterCopyWith<$Res> get selectedFilters;
 }
 
 /// @nodoc
@@ -1624,6 +1628,7 @@ class _$MaterialListStateCopyWithImpl<$Res>
     Object? isFetching = freezed,
     Object? nextPageIndex = freezed,
     Object? searchKey = freezed,
+    Object? selectedFilters = freezed,
   }) {
     return _then(_value.copyWith(
       materialList: materialList == freezed
@@ -1650,7 +1655,18 @@ class _$MaterialListStateCopyWithImpl<$Res>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      selectedFilters: selectedFilters == freezed
+          ? _value.selectedFilters
+          : selectedFilters // ignore: cast_nullable_to_non_nullable
+              as MaterialFilter,
     ));
+  }
+
+  @override
+  $MaterialFilterCopyWith<$Res> get selectedFilters {
+    return $MaterialFilterCopyWith<$Res>(_value.selectedFilters, (value) {
+      return _then(_value.copyWith(selectedFilters: value));
+    });
   }
 }
 
@@ -1667,7 +1683,11 @@ abstract class _$$_MaterialListStateCopyWith<$Res>
       bool canLoadMore,
       bool isFetching,
       int nextPageIndex,
-      SearchKey searchKey});
+      SearchKey searchKey,
+      MaterialFilter selectedFilters});
+
+  @override
+  $MaterialFilterCopyWith<$Res> get selectedFilters;
 }
 
 /// @nodoc
@@ -1689,6 +1709,7 @@ class __$$_MaterialListStateCopyWithImpl<$Res>
     Object? isFetching = freezed,
     Object? nextPageIndex = freezed,
     Object? searchKey = freezed,
+    Object? selectedFilters = freezed,
   }) {
     return _then(_$_MaterialListState(
       materialList: materialList == freezed
@@ -1715,6 +1736,10 @@ class __$$_MaterialListStateCopyWithImpl<$Res>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      selectedFilters: selectedFilters == freezed
+          ? _value.selectedFilters
+          : selectedFilters // ignore: cast_nullable_to_non_nullable
+              as MaterialFilter,
     ));
   }
 }
@@ -1728,7 +1753,8 @@ class _$_MaterialListState implements _MaterialListState {
       required this.canLoadMore,
       required this.isFetching,
       required this.nextPageIndex,
-      required this.searchKey})
+      required this.searchKey,
+      required this.selectedFilters})
       : _materialList = materialList;
 
   final List<MaterialInfo> _materialList;
@@ -1748,10 +1774,12 @@ class _$_MaterialListState implements _MaterialListState {
   final int nextPageIndex;
   @override
   final SearchKey searchKey;
+  @override
+  final MaterialFilter selectedFilters;
 
   @override
   String toString() {
-    return 'MaterialListState(materialList: $materialList, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, canLoadMore: $canLoadMore, isFetching: $isFetching, nextPageIndex: $nextPageIndex, searchKey: $searchKey)';
+    return 'MaterialListState(materialList: $materialList, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, canLoadMore: $canLoadMore, isFetching: $isFetching, nextPageIndex: $nextPageIndex, searchKey: $searchKey, selectedFilters: $selectedFilters)';
   }
 
   @override
@@ -1769,7 +1797,9 @@ class _$_MaterialListState implements _MaterialListState {
                 .equals(other.isFetching, isFetching) &&
             const DeepCollectionEquality()
                 .equals(other.nextPageIndex, nextPageIndex) &&
-            const DeepCollectionEquality().equals(other.searchKey, searchKey));
+            const DeepCollectionEquality().equals(other.searchKey, searchKey) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedFilters, selectedFilters));
   }
 
   @override
@@ -1780,7 +1810,8 @@ class _$_MaterialListState implements _MaterialListState {
       const DeepCollectionEquality().hash(canLoadMore),
       const DeepCollectionEquality().hash(isFetching),
       const DeepCollectionEquality().hash(nextPageIndex),
-      const DeepCollectionEquality().hash(searchKey));
+      const DeepCollectionEquality().hash(searchKey),
+      const DeepCollectionEquality().hash(selectedFilters));
 
   @JsonKey(ignore: true)
   @override
@@ -1797,7 +1828,8 @@ abstract class _MaterialListState implements MaterialListState {
       required final bool canLoadMore,
       required final bool isFetching,
       required final int nextPageIndex,
-      required final SearchKey searchKey}) = _$_MaterialListState;
+      required final SearchKey searchKey,
+      required final MaterialFilter selectedFilters}) = _$_MaterialListState;
 
   @override
   List<MaterialInfo> get materialList;
@@ -1811,6 +1843,8 @@ abstract class _MaterialListState implements MaterialListState {
   int get nextPageIndex;
   @override
   SearchKey get searchKey;
+  @override
+  MaterialFilter get selectedFilters;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialListStateCopyWith<_$_MaterialListState> get copyWith =>

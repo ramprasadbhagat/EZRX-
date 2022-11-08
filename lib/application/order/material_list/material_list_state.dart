@@ -9,6 +9,7 @@ class MaterialListState with _$MaterialListState {
     required bool isFetching,
     required int nextPageIndex,
     required SearchKey searchKey,
+    required MaterialFilter selectedFilters,
   }) = _MaterialListState;
 
   factory MaterialListState.initial() => MaterialListState(
@@ -18,5 +19,6 @@ class MaterialListState with _$MaterialListState {
         isFetching: true,
         nextPageIndex: 0,
         searchKey: SearchKey(''),
+        selectedFilters: MaterialFilter.empty(),
       );
 }

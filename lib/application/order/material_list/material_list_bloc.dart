@@ -80,6 +80,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
                 isFetching: false,
                 canLoadMore: materialList.length >= _pageSize,
                 nextPageIndex: 1,
+                selectedFilters: e.selectedMaterialFilter,
               ),
             );
           },

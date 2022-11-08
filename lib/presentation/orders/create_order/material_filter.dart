@@ -16,6 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MaterialFilterPage extends StatelessWidget {
   final MaterialFilterType filterType;
+
   const MaterialFilterPage({
     Key? key,
     required this.filterType,
@@ -68,26 +69,32 @@ class MaterialFilterPage extends StatelessWidget {
                             .selectedMaterialFilter,
                       ),
                     )
-                : context.read<MaterialListBloc>().add(
-                      MaterialListEvent.fetch(
-                        user: context.read<UserBloc>().state.user,
-                        salesOrganisation: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
-                        configs: context.read<SalesOrgBloc>().state.configs,
-                        customerCodeInfo: context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo,
-                        shipToInfo:
-                            context.read<ShipToCodeBloc>().state.shipToInfo,
-                        selectedMaterialFilter: context
+                : context.read<MaterialListBloc>().state.selectedFilters !=
+                        context
                             .read<MaterialFilterBloc>()
                             .state
-                            .selectedMaterialFilter,
-                      ),
-                    );
+                            .selectedMaterialFilter
+                    ? context.read<MaterialListBloc>().add(
+                          MaterialListEvent.fetch(
+                            user: context.read<UserBloc>().state.user,
+                            salesOrganisation: context
+                                .read<SalesOrgBloc>()
+                                .state
+                                .salesOrganisation,
+                            configs: context.read<SalesOrgBloc>().state.configs,
+                            customerCodeInfo: context
+                                .read<CustomerCodeBloc>()
+                                .state
+                                .customerCodeInfo,
+                            shipToInfo:
+                                context.read<ShipToCodeBloc>().state.shipToInfo,
+                            selectedMaterialFilter: context
+                                .read<MaterialFilterBloc>()
+                                .state
+                                .selectedMaterialFilter,
+                          ),
+                        )
+                    : true;
 
             return true;
           },
@@ -121,6 +128,7 @@ class MaterialFilterPage extends StatelessWidget {
 class _BodyContent extends StatelessWidget {
   final MaterialFilterState state;
   final MaterialFilterType filterType;
+
   const _BodyContent({
     Key? key,
     required this.state,
