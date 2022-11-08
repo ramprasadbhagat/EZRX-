@@ -282,16 +282,30 @@ void main() {
         expect(find.byKey(const Key('materialSearchField')), findsOneWidget);
       },
     );
+    testWidgets('Search input must be greater than 3 characters.',
+        (WidgetTester tester) async {
+      final expectedCustomerCodeListStates = [
+        MaterialListState.initial().copyWith(isFetching: true),
+        MaterialListState.initial()
+            .copyWith(isFetching: false, searchKey: SearchKey('')),
+      ];
 
-    testWidgets('Search input cannot be less than 3 characters.',
-        (tester) async {
+      whenListen(materialListBlocMock,
+          Stream.fromIterable(expectedCustomerCodeListStates));
       await tester.pumpWidget(getScopedWidget(
         MaterialListPage(addToCart: () {}),
       ));
-      await tester.pump(const Duration(seconds: 4));
-      final txtForm = find.byType(TextFormField);
-      await tester.enterText(txtForm, '999');
-      expect(find.text('999'), findsNothing);
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+
+      final textField = find.byType(TextField);
+
+      await tester.enterText(textField, '1234');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      expect(textField, findsOneWidget);
+      expect(
+          find.text('123'), findsNothing); // 3 characters shouldn't be allowed
+
+      expect(find.text('1234'), findsOneWidget);
     });
 
     // TODO: need Wasim help

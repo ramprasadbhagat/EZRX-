@@ -132,7 +132,6 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
         );
       },
       searchMaterialList: (e) async {
-        print(_pageSize);
         final failureOrSuccess =
             await materialListRepository.searchMaterialList(
           user: e.user,

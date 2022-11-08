@@ -195,6 +195,18 @@ void main() {
       expect(searchField, findsOneWidget);
     });
 
+    testWidgets('Search input cannot be less than 3 characters.',
+        (tester) async {
+      await tester.pumpWidget(getScopedWidget(const MaterialRoot()));
+      final covidTabTitle = find.text('COVID-19');
+      expect(covidTabTitle, findsOneWidget);
+      await tester.tap(covidTabTitle);
+      await tester.pump(const Duration(seconds: 4));
+      final txtForm = find.byType(TextFormField);
+      await tester.enterText(txtForm, '999');
+      expect(find.text('999'), findsNothing);
+    });
+
     testWidgets('Covid Material List Failed To Load', (tester) async {
       when(() => covidMaterialListBlocMock.state).thenReturn(
           CovidMaterialListState.initial().copyWith(
@@ -373,12 +385,10 @@ void main() {
               .state.materialList.first.principalData.principalName),
           findsOneWidget);
 
-       if (salesOrgBlocMock.state.configs.enableListPrice) {
+      if (salesOrgBlocMock.state.configs.enableListPrice) {
         expect(find.textContaining('List Price: '), findsOneWidget);
       }
-      expect(
-          find.textContaining('Unit Price: '),
-          findsOneWidget);
+      expect(find.textContaining('Unit Price: '), findsOneWidget);
     });
   });
 }

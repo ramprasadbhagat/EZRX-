@@ -67,6 +67,75 @@ void main() {
     );
 
     blocTest(
+      'Material List search fetch',
+      build: () =>
+          MaterialListBloc(materialListRepository: materialListMockRepository),
+      setUp: () {
+        when(() => materialListMockRepository.searchMaterialList(
+              user: mockUser,
+              salesOrganisation: mockSalesOrg,
+              salesOrgConfig: mockSalesOrganisationConfigs,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              pageSize: _defaultPageSize,
+              offset: 0,
+              orderBy: 'materialDescription_asc',
+              searchKey: '1763',
+              selectedMaterialFilter: mockSelectedMaterialFilter,
+            )).thenAnswer(
+          (invocation) async => Right(materialListMock),
+        );
+      },
+      act: (MaterialListBloc bloc) {
+        bloc.add(
+          const MaterialListEvent.updateSearchKey(
+            searchKey: '1763',
+          ),
+        );
+        bloc.add(
+          MaterialListEvent.searchMaterialList(
+            user: mockUser,
+            salesOrganisation: mockSalesOrg,
+            configs: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            selectedMaterialFilter: mockSelectedMaterialFilter,
+          ),
+        );
+      },
+      expect: () => [
+        materialState.copyWith(
+          isFetching: true,
+          materialList: [],
+          searchKey: SearchKey('1763'),
+        ),
+        materialState.copyWith(
+          isFetching: false,
+          materialList: materialListMock,
+          apiFailureOrSuccessOption: none(),
+          canLoadMore: materialListMock.length >= _defaultPageSize,
+          nextPageIndex: 1,
+          searchKey: SearchKey('1763'),
+        ),
+      ],
+    );
+
+    blocTest(
+      'Clear Material List search key',
+      build: () =>
+          MaterialListBloc(materialListRepository: materialListMockRepository),
+      act: (MaterialListBloc bloc) {
+        bloc.add(const MaterialListEvent.updateSearchKey(searchKey: ''));
+      },
+      expect: () => [
+        materialState.copyWith(
+          isFetching: true,
+          materialList: [],
+          searchKey: SearchKey.search(''),
+        )
+      ],
+    );
+    blocTest(
       'Material List search fails',
       build: () =>
           MaterialListBloc(materialListRepository: materialListMockRepository),
@@ -419,4 +488,85 @@ void main() {
       ],
     );
   });
+
+  // blocTest(
+  //   'Fetch material again after ShipToCode changed',
+  //   build: () =>
+  //       MaterialListBloc(materialListRepository: materialListMockRepository),
+  //   act: (MaterialListBloc bloc) {
+  //     bloc.add(MaterialListEvent.fetch(
+  //       user: mockUser,
+  //       salesOrganisation: mockSalesOrg,
+  //       configs: mockSalesOrganisationConfigs,
+  //       customerCodeInfo: mockCustomerCodeInfo,
+  //       shipToInfo: mockShipToInfo,
+  //       selectedMaterialFilter: mockSelectedMaterialFilter,
+  //     ));
+  //     bloc.add(MaterialListEvent.loadMore(
+  //       user: mockUser,
+  //       salesOrganisation: mockSalesOrg,
+  //       configs: mockSalesOrganisationConfigs,
+  //       customerCodeInfo: mockCustomerCodeInfo,
+  //       shipToInfo: mockShipToInfo,
+  //       selectedMaterialFilter: mockSelectedMaterialFilter,
+  //     ));
+  //   },
+  //   setUp: () {
+  //     when(() => materialListMockRepository.getMaterialList(
+  //           user: mockUser,
+  //           salesOrganisation: mockSalesOrg,
+  //           salesOrgConfig: mockSalesOrganisationConfigs,
+  //           customerCodeInfo: mockCustomerCodeInfo,
+  //           shipToInfo: mockShipToInfo,
+  //           pageSize: _defaultPageSize,
+  //           offset: 0,
+  //           orderBy: 'materialDescription_asc',
+  //           searchKey: '',
+  //           selectedMaterialFilter: mockSelectedMaterialFilter,
+  //         )).thenAnswer(
+  //       (invocation) async => Right(materialListMock),
+  //     );
+  //     when(() => materialListMockRepository.getMaterialList(
+  //           user: mockUser,
+  //           salesOrganisation: mockSalesOrg,
+  //           salesOrgConfig: mockSalesOrganisationConfigs,
+  //           customerCodeInfo: mockCustomerCodeInfo,
+  //           shipToInfo: mockShipToInfo,
+  //           pageSize: _defaultPageSize,
+  //           offset: materialListMock.length,
+  //           orderBy: 'materialDescription_asc',
+  //           searchKey: '',
+  //           selectedMaterialFilter: mockSelectedMaterialFilter,
+  //         )).thenAnswer(
+  //       (invocation) async => Right(materialListMock),
+  //     );
+  //   },
+  //   expect: () => [
+  //     materialState.copyWith(
+  //       isFetching: true,
+  //       apiFailureOrSuccessOption: none(),
+  //     ),
+  //     materialState.copyWith(
+  //       isFetching: false,
+  //       materialList: materialListMock,
+  //       apiFailureOrSuccessOption: none(),
+  //       canLoadMore: true,
+  //       nextPageIndex: 1,
+  //     ),
+  //     materialState.copyWith(
+  //       isFetching: true,
+  //       materialList: materialListMock,
+  //       apiFailureOrSuccessOption: none(),
+  //       canLoadMore: true,
+  //       nextPageIndex: 1,
+  //     ),
+  //     materialState.copyWith(
+  //       isFetching: false,
+  //       materialList: [...materialListMock, ...materialListMock],
+  //       apiFailureOrSuccessOption: none(),
+  //       canLoadMore: true,
+  //       nextPageIndex: 2,
+  //     ),
+  //   ],
+  // );
 }

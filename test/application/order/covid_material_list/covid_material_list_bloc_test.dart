@@ -68,7 +68,77 @@ void main() {
         ),
       ],
     );
-
+    blocTest(
+      'Material List search fetch',
+      build: () => CovidMaterialListBloc(
+          materialListRepository: materialListMockRepository),
+      setUp: () {
+        when(() => materialListMockRepository.searchMaterialList(
+              user: mockUser,
+              salesOrganisation: mockSalesOrg,
+              salesOrgConfig: mockSalesOrganisationConfigs,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              pageSize: _defaultPageSize,
+              offset: 0,
+              orderBy: 'materialDescription_asc',
+              searchKey: '1763',
+              selectedMaterialFilter: MaterialFilter.empty(),
+              ispickandpackenabled:
+                  mockUser.role.type.isSalesRep ? true : false,
+              isForFoc: mockUser.role.type.isSalesRep ? false : true,
+            )).thenAnswer(
+          (invocation) async => Right(materialListMock),
+        );
+      },
+      act: (CovidMaterialListBloc bloc) {
+        bloc.add(
+          const CovidMaterialListEvent.updateSearchKey(
+            searchKey: '1763',
+          ),
+        );
+        bloc.add(
+          CovidMaterialListEvent.searchMaterialList(
+            user: mockUser,
+            salesOrganisation: mockSalesOrg,
+            configs: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            selectedMaterialFilter: MaterialFilter.empty(),
+          ),
+        );
+      },
+      expect: () => [
+        covidMaterialState.copyWith(
+          isFetching: true,
+          materialList: [],
+          searchKey: SearchKey('1763'),
+        ),
+        covidMaterialState.copyWith(
+          isFetching: false,
+          materialList: materialListMock,
+          apiFailureOrSuccessOption: none(),
+          canLoadMore: materialListMock.length >= _defaultPageSize,
+          nextPageIndex: 1,
+          searchKey: SearchKey('1763'),
+        ),
+      ],
+    );
+    blocTest(
+      'Clear Covid Material List search key',
+      build: () => CovidMaterialListBloc(
+          materialListRepository: materialListMockRepository),
+      act: (CovidMaterialListBloc bloc) {
+        bloc.add(const CovidMaterialListEvent.updateSearchKey(searchKey: ''));
+      },
+      expect: () => [
+        covidMaterialState.copyWith(
+          isFetching: true,
+          materialList: [],
+          searchKey: SearchKey.search(''),
+        )
+      ],
+    );
     blocTest(
       'Covid Material List search fails',
       build: () => CovidMaterialListBloc(
