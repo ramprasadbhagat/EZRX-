@@ -195,4 +195,8 @@ class MaterialTaxClassification extends ValueObject<String> {
   bool isExempt() {
     return materialTaxClassificationIsExempt(value.getOrElse(() => ''));
   }
+
+  bool get isFullTax {
+    return materialTaxClassificationIsFullTax(value.getOrElse(() => ''));
+  }
 }

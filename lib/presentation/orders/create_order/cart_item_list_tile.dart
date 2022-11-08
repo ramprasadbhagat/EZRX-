@@ -8,7 +8,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartItemListTile extends StatelessWidget {
   final PriceAggregate cartItem;
-  const CartItemListTile({Key? key, required this.cartItem}) : super(key: key);
+  final String taxCode;
+  const CartItemListTile({
+    Key? key,
+    required this.cartItem,
+    this.taxCode = 'VAT',
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -123,6 +128,14 @@ class CartItemListTile extends StatelessWidget {
                       color: ZPColors.lightGray,
                     ),
               ),
+              cartItem.isEnableVat
+                  ? Text(
+                      '${'Price before $taxCode: '.tr()}${cartItem.display(PriceType.unitPriceBeforeGst)}',
+                      style: Theme.of(context).textTheme.bodyText1?.apply(
+                            color: ZPColors.lightGray,
+                          ),
+                    )
+                  : const SizedBox.shrink(),
               Text(
                 '${'List Price: '.tr()}${cartItem.display(PriceType.listPrice)}',
                 style: Theme.of(context).textTheme.bodyText1?.apply(

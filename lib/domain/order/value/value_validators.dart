@@ -9,3 +9,7 @@ bool materialTaxClassificationIsNoTax(String taxClassification) {
 bool materialTaxClassificationIsExempt(String taxClassification) {
   return taxClassification == 'Exempt';
 }
+
+bool materialTaxClassificationIsFullTax(String taxClassification) {
+  return taxClassification == 'Product : Full Tax';
+}

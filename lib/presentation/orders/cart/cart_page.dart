@@ -67,8 +67,10 @@ class CartPage extends StatelessWidget {
                     },
                     onLoadingMore: () {},
                     isLoading: state.isFetching,
-                    itemBuilder: (context, index, item) =>
-                        CartItemListTile(cartItem: item),
+                    itemBuilder: (context, index, item) => CartItemListTile(
+                      cartItem: item,
+                      taxCode: taxCode,
+                    ),
                     items: state.cartItemList,
                   ),
                 ),

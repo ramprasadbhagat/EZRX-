@@ -54,6 +54,22 @@ class PriceAggregate with _$PriceAggregate {
     //     : value;
   }
 
+  double get priceBeforeGst {
+    if (salesOrgConfig.currency.isVN &&
+        salesOrgConfig.enableTaxClassification) {
+      return listPrice / (1 + double.parse(materialInfo.taxes[0]) * 0.01);
+    } else if (!salesOrgConfig.currency.isVN &&
+        materialInfo.taxClassification.isFullTax) {
+      return listPrice / (1 + salesOrgConfig.vatValue * 0.01);
+    }
+
+    return listPrice;
+  }
+
+  bool get isEnableVat {
+    return salesOrgConfig.enableVat;
+  }
+
   double get listPriceTotal {
     return listPrice * quantity;
   }
@@ -79,6 +95,9 @@ class PriceAggregate with _$PriceAggregate {
       case PriceType.unitPriceTotal:
         result = unitPriceTotal;
         break;
+      case PriceType.unitPriceBeforeGst:
+        result = priceBeforeGst;
+        break;
       case PriceType.listPrice:
       default:
         result = listPrice;
@@ -98,4 +117,5 @@ enum PriceType {
   unitPrice,
   listPriceTotal,
   unitPriceTotal,
+  unitPriceBeforeGst,
 }
