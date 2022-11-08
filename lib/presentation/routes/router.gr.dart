@@ -10,17 +10,18 @@
 //
 // ignore_for_file: type=lint
 
-import 'package:auto_route/auto_route.dart' as _i26;
-import 'package:flutter/material.dart' as _i27;
+import 'package:auto_route/auto_route.dart' as _i27;
+import 'package:flutter/material.dart' as _i28;
 
 import '../../application/order/material_filter/material_filter_bloc.dart'
-    as _i28;
-import '../../domain/account/entities/customer_code_info.dart' as _i31;
-import '../../domain/account/entities/ship_to_info.dart' as _i32;
-import '../../domain/order/entities/order_history_basic_info.dart' as _i33;
-import '../../domain/order/entities/order_history_item.dart' as _i30;
-import '../../domain/order/entities/order_template.dart' as _i29;
-import '../account/account_tab.dart' as _i25;
+    as _i29;
+import '../../domain/account/entities/customer_code_info.dart' as _i33;
+import '../../domain/account/entities/ship_to_info.dart' as _i34;
+import '../../domain/order/entities/order_history_basic_info.dart' as _i35;
+import '../../domain/order/entities/order_history_item.dart' as _i32;
+import '../../domain/order/entities/order_template.dart' as _i30;
+import '../../domain/order/entities/saved_order.dart' as _i31;
+import '../account/account_tab.dart' as _i26;
 import '../account/change_password/change_password_page.dart' as _i6;
 import '../account/contact_us/contact_us_page.dart' as _i7;
 import '../account/customer_search.dart' as _i9;
@@ -32,10 +33,10 @@ import '../aup_tc/aup_tc.dart' as _i14;
 import '../auth/login_page.dart' as _i2;
 import '../auth/proxy_login_page.dart' as _i3;
 import '../core/webview_page.dart' as _i5;
-import '../favourites/favourite_tab.dart' as _i24;
-import '../history/history_details.dart' as _i21;
-import '../history/history_tab.dart' as _i23;
-import '../home/home_tab.dart' as _i22;
+import '../favourites/favourite_tab.dart' as _i25;
+import '../history/history_details.dart' as _i22;
+import '../history/history_tab.dart' as _i24;
+import '../home/home_tab.dart' as _i23;
 import '../home_tab.dart' as _i19;
 import '../orders/cart/cart_page.dart' as _i16;
 import '../orders/create_order/material_filter.dart' as _i13;
@@ -44,73 +45,74 @@ import '../orders/create_order/material_root.dart' as _i11;
 import '../orders/create_order/order_summary_page.dart' as _i17;
 import '../orders/order_template/order_template_detail_page.dart' as _i18;
 import '../orders/order_template/order_template_list_page.dart' as _i15;
+import '../orders/saved_order/saved_order_detail_page.dart' as _i21;
 import '../orders/saved_order/saved_order_list_page.dart' as _i20;
 import '../splash/splash_page.dart' as _i1;
 
-class AppRouter extends _i26.RootStackRouter {
-  AppRouter([_i27.GlobalKey<_i27.NavigatorState>? navigatorKey])
+class AppRouter extends _i27.RootStackRouter {
+  AppRouter([_i28.GlobalKey<_i28.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i26.PageFactory> pagesMap = {
+  final Map<String, _i27.PageFactory> pagesMap = {
     SplashPageRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
+      return _i27.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i1.SplashPage());
     },
     LoginPageRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
+      return _i27.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i2.LoginPage());
     },
     LoginOnBehalfPageRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
+      return _i27.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i3.LoginOnBehalfPage());
     },
     SettingsPageRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
+      return _i27.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i4.SettingsPage());
     },
     WebViewPageRoute.name: (routeData) {
       final args = routeData.argsAs<WebViewPageRouteArgs>(
           orElse: () => const WebViewPageRouteArgs());
-      return _i26.MaterialPageX<dynamic>(
+      return _i27.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i5.WebViewPage(
               key: args.key, url: args.url, initialFile: args.initialFile));
     },
     ChangePasswordPageRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
+      return _i27.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i6.ChangePasswordPage());
     },
     ContactUsPageRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
+      return _i27.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i7.ContactUsPage());
     },
     NotificationSettingsPageRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
+      return _i27.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i8.NotificationSettingsPage());
     },
     CustomerSearchPageRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
+      return _i27.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i9.CustomerSearchPage());
     },
     ShiptToSearchPageRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
+      return _i27.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i10.ShiptToSearchPage());
     },
     MaterialRootRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
+      return _i27.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i11.MaterialRoot());
     },
     MaterialListPageRoute.name: (routeData) {
       final args = routeData.argsAs<MaterialListPageRouteArgs>();
-      return _i26.MaterialPageX<dynamic>(
+      return _i27.MaterialPageX<dynamic>(
           routeData: routeData,
           child:
               _i12.MaterialListPage(key: args.key, addToCart: args.addToCart));
     },
     MaterialFilterPageRoute.name: (routeData) {
       final args = routeData.argsAs<MaterialFilterPageRouteArgs>();
-      return _i26.MaterialPageX<dynamic>(
+      return _i27.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i13.MaterialFilterPage(
               key: args.key, filterType: args.filterType));
@@ -118,26 +120,26 @@ class AppRouter extends _i26.RootStackRouter {
     AupTCDialogRoute.name: (routeData) {
       final args = routeData.argsAs<AupTCDialogRouteArgs>(
           orElse: () => const AupTCDialogRouteArgs());
-      return _i26.MaterialPageX<dynamic>(
+      return _i27.MaterialPageX<dynamic>(
           routeData: routeData,
           child:
               _i14.AupTCDialog(key: args.key, fromSetting: args.fromSetting));
     },
     OrderTemplateListPageRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
+      return _i27.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i15.OrderTemplateListPage());
     },
     CartPageRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
+      return _i27.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i16.CartPage());
     },
     OrderSummaryPageRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
+      return _i27.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i17.OrderSummaryPage());
     },
     OrderTemplateDetailPageRoute.name: (routeData) {
       final args = routeData.argsAs<OrderTemplateDetailPageRouteArgs>();
-      return _i26.MaterialPageX<dynamic>(
+      return _i27.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i18.OrderTemplateDetailPage(
               key: args.key, orderTemplateInfo: args.orderTemplateInfo));
@@ -145,19 +147,25 @@ class AppRouter extends _i26.RootStackRouter {
     HomeNavigationTabbarRoute.name: (routeData) {
       final args = routeData.argsAs<HomeNavigationTabbarRouteArgs>(
           orElse: () => const HomeNavigationTabbarRouteArgs());
-      return _i26.MaterialPageX<dynamic>(
+      return _i27.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i19.HomeNavigationTabbar(key: args.key));
     },
     SavedOrderListPageRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
+      return _i27.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i20.SavedOrderListPage());
+    },
+    SavedOrderDetailPageRoute.name: (routeData) {
+      final args = routeData.argsAs<SavedOrderDetailPageRouteArgs>();
+      return _i27.MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: _i21.SavedOrderDetailPage(key: args.key, order: args.order));
     },
     HistoryDetailsRoute.name: (routeData) {
       final args = routeData.argsAs<HistoryDetailsRouteArgs>();
-      return _i26.MaterialPageX<dynamic>(
+      return _i27.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i21.HistoryDetails(
+          child: _i22.HistoryDetails(
               key: args.key,
               orderHistoryItem: args.orderHistoryItem,
               customerCodeInfo: args.customerCodeInfo,
@@ -165,77 +173,80 @@ class AppRouter extends _i26.RootStackRouter {
               orderHistoryBasicInfo: args.orderHistoryBasicInfo));
     },
     HomeTabRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i22.HomeTab());
+      return _i27.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i23.HomeTab());
     },
     HistoryTabRoute.name: (routeData) {
       final args = routeData.argsAs<HistoryTabRouteArgs>(
           orElse: () => const HistoryTabRouteArgs());
-      return _i26.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i23.HistoryTab(key: args.key));
+      return _i27.MaterialPageX<dynamic>(
+          routeData: routeData, child: _i24.HistoryTab(key: args.key));
     },
     FavouritesTabRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i24.FavouritesTab());
+      return _i27.MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: _i27.WrappedRoute(child: const _i25.FavouritesTab()));
     },
     AccountTabRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i25.AccountTab());
+      return _i27.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i26.AccountTab());
     }
   };
 
   @override
-  List<_i26.RouteConfig> get routes => [
-        _i26.RouteConfig('/#redirect',
+  List<_i27.RouteConfig> get routes => [
+        _i27.RouteConfig('/#redirect',
             path: '/', redirectTo: 'splash', fullMatch: true),
-        _i26.RouteConfig(SplashPageRoute.name, path: 'splash'),
-        _i26.RouteConfig(LoginPageRoute.name, path: 'login'),
-        _i26.RouteConfig(LoginOnBehalfPageRoute.name, path: 'login_on_behalf'),
-        _i26.RouteConfig(SettingsPageRoute.name, path: 'settings'),
-        _i26.RouteConfig(WebViewPageRoute.name, path: 'web_view_page'),
-        _i26.RouteConfig(ChangePasswordPageRoute.name,
+        _i27.RouteConfig(SplashPageRoute.name, path: 'splash'),
+        _i27.RouteConfig(LoginPageRoute.name, path: 'login'),
+        _i27.RouteConfig(LoginOnBehalfPageRoute.name, path: 'login_on_behalf'),
+        _i27.RouteConfig(SettingsPageRoute.name, path: 'settings'),
+        _i27.RouteConfig(WebViewPageRoute.name, path: 'web_view_page'),
+        _i27.RouteConfig(ChangePasswordPageRoute.name,
             path: 'change_password_page'),
-        _i26.RouteConfig(ContactUsPageRoute.name, path: 'contact_us_page'),
-        _i26.RouteConfig(NotificationSettingsPageRoute.name,
+        _i27.RouteConfig(ContactUsPageRoute.name, path: 'contact_us_page'),
+        _i27.RouteConfig(NotificationSettingsPageRoute.name,
             path: 'notification_settings_page'),
-        _i26.RouteConfig(CustomerSearchPageRoute.name,
+        _i27.RouteConfig(CustomerSearchPageRoute.name,
             path: 'customer_search_page'),
-        _i26.RouteConfig(ShiptToSearchPageRoute.name,
+        _i27.RouteConfig(ShiptToSearchPageRoute.name,
             path: 'ship_to_search_page'),
-        _i26.RouteConfig(MaterialRootRoute.name, path: 'material_list_page'),
-        _i26.RouteConfig(MaterialListPageRoute.name,
+        _i27.RouteConfig(MaterialRootRoute.name, path: 'material_list_page'),
+        _i27.RouteConfig(MaterialListPageRoute.name,
             path: 'material_list_page'),
-        _i26.RouteConfig(MaterialFilterPageRoute.name,
+        _i27.RouteConfig(MaterialFilterPageRoute.name,
             path: 'material_filter_page'),
-        _i26.RouteConfig(AupTCDialogRoute.name, path: 'tos'),
-        _i26.RouteConfig(OrderTemplateListPageRoute.name,
+        _i27.RouteConfig(AupTCDialogRoute.name, path: 'tos'),
+        _i27.RouteConfig(OrderTemplateListPageRoute.name,
             path: 'order_template_list_page'),
-        _i26.RouteConfig(CartPageRoute.name, path: 'cart_page'),
-        _i26.RouteConfig(OrderSummaryPageRoute.name, path: 'order_summary'),
-        _i26.RouteConfig(OrderTemplateDetailPageRoute.name,
+        _i27.RouteConfig(CartPageRoute.name, path: 'cart_page'),
+        _i27.RouteConfig(OrderSummaryPageRoute.name, path: 'order_summary'),
+        _i27.RouteConfig(OrderTemplateDetailPageRoute.name,
             path: 'order_template_detail_page'),
-        _i26.RouteConfig(HomeNavigationTabbarRoute.name,
+        _i27.RouteConfig(HomeNavigationTabbarRoute.name,
             path: 'main_tabbar',
             children: [
-              _i26.RouteConfig(HomeTabRoute.name,
+              _i27.RouteConfig(HomeTabRoute.name,
                   path: 'home-tab', parent: HomeNavigationTabbarRoute.name),
-              _i26.RouteConfig(HistoryTabRoute.name,
+              _i27.RouteConfig(HistoryTabRoute.name,
                   path: 'history-tab', parent: HomeNavigationTabbarRoute.name),
-              _i26.RouteConfig(FavouritesTabRoute.name,
+              _i27.RouteConfig(FavouritesTabRoute.name,
                   path: 'favourites-tab',
                   parent: HomeNavigationTabbarRoute.name),
-              _i26.RouteConfig(AccountTabRoute.name,
+              _i27.RouteConfig(AccountTabRoute.name,
                   path: 'account-tab', parent: HomeNavigationTabbarRoute.name)
             ]),
-        _i26.RouteConfig(SavedOrderListPageRoute.name,
+        _i27.RouteConfig(SavedOrderListPageRoute.name,
             path: 'saved_order_list'),
-        _i26.RouteConfig(HistoryDetailsRoute.name, path: 'history_details')
+        _i27.RouteConfig(SavedOrderDetailPageRoute.name,
+            path: 'saved_order_detail'),
+        _i27.RouteConfig(HistoryDetailsRoute.name, path: 'history_details')
       ];
 }
 
 /// generated route for
 /// [_i1.SplashPage]
-class SplashPageRoute extends _i26.PageRouteInfo<void> {
+class SplashPageRoute extends _i27.PageRouteInfo<void> {
   const SplashPageRoute() : super(SplashPageRoute.name, path: 'splash');
 
   static const String name = 'SplashPageRoute';
@@ -243,7 +254,7 @@ class SplashPageRoute extends _i26.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.LoginPage]
-class LoginPageRoute extends _i26.PageRouteInfo<void> {
+class LoginPageRoute extends _i27.PageRouteInfo<void> {
   const LoginPageRoute() : super(LoginPageRoute.name, path: 'login');
 
   static const String name = 'LoginPageRoute';
@@ -251,7 +262,7 @@ class LoginPageRoute extends _i26.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.LoginOnBehalfPage]
-class LoginOnBehalfPageRoute extends _i26.PageRouteInfo<void> {
+class LoginOnBehalfPageRoute extends _i27.PageRouteInfo<void> {
   const LoginOnBehalfPageRoute()
       : super(LoginOnBehalfPageRoute.name, path: 'login_on_behalf');
 
@@ -260,7 +271,7 @@ class LoginOnBehalfPageRoute extends _i26.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.SettingsPage]
-class SettingsPageRoute extends _i26.PageRouteInfo<void> {
+class SettingsPageRoute extends _i27.PageRouteInfo<void> {
   const SettingsPageRoute() : super(SettingsPageRoute.name, path: 'settings');
 
   static const String name = 'SettingsPageRoute';
@@ -268,8 +279,8 @@ class SettingsPageRoute extends _i26.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.WebViewPage]
-class WebViewPageRoute extends _i26.PageRouteInfo<WebViewPageRouteArgs> {
-  WebViewPageRoute({_i27.Key? key, String url = '', String? initialFile})
+class WebViewPageRoute extends _i27.PageRouteInfo<WebViewPageRouteArgs> {
+  WebViewPageRoute({_i28.Key? key, String url = '', String? initialFile})
       : super(WebViewPageRoute.name,
             path: 'web_view_page',
             args: WebViewPageRouteArgs(
@@ -281,7 +292,7 @@ class WebViewPageRoute extends _i26.PageRouteInfo<WebViewPageRouteArgs> {
 class WebViewPageRouteArgs {
   const WebViewPageRouteArgs({this.key, this.url = '', this.initialFile});
 
-  final _i27.Key? key;
+  final _i28.Key? key;
 
   final String url;
 
@@ -295,7 +306,7 @@ class WebViewPageRouteArgs {
 
 /// generated route for
 /// [_i6.ChangePasswordPage]
-class ChangePasswordPageRoute extends _i26.PageRouteInfo<void> {
+class ChangePasswordPageRoute extends _i27.PageRouteInfo<void> {
   const ChangePasswordPageRoute()
       : super(ChangePasswordPageRoute.name, path: 'change_password_page');
 
@@ -304,7 +315,7 @@ class ChangePasswordPageRoute extends _i26.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.ContactUsPage]
-class ContactUsPageRoute extends _i26.PageRouteInfo<void> {
+class ContactUsPageRoute extends _i27.PageRouteInfo<void> {
   const ContactUsPageRoute()
       : super(ContactUsPageRoute.name, path: 'contact_us_page');
 
@@ -313,7 +324,7 @@ class ContactUsPageRoute extends _i26.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i8.NotificationSettingsPage]
-class NotificationSettingsPageRoute extends _i26.PageRouteInfo<void> {
+class NotificationSettingsPageRoute extends _i27.PageRouteInfo<void> {
   const NotificationSettingsPageRoute()
       : super(NotificationSettingsPageRoute.name,
             path: 'notification_settings_page');
@@ -323,7 +334,7 @@ class NotificationSettingsPageRoute extends _i26.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i9.CustomerSearchPage]
-class CustomerSearchPageRoute extends _i26.PageRouteInfo<void> {
+class CustomerSearchPageRoute extends _i27.PageRouteInfo<void> {
   const CustomerSearchPageRoute()
       : super(CustomerSearchPageRoute.name, path: 'customer_search_page');
 
@@ -332,7 +343,7 @@ class CustomerSearchPageRoute extends _i26.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i10.ShiptToSearchPage]
-class ShiptToSearchPageRoute extends _i26.PageRouteInfo<void> {
+class ShiptToSearchPageRoute extends _i27.PageRouteInfo<void> {
   const ShiptToSearchPageRoute()
       : super(ShiptToSearchPageRoute.name, path: 'ship_to_search_page');
 
@@ -341,7 +352,7 @@ class ShiptToSearchPageRoute extends _i26.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i11.MaterialRoot]
-class MaterialRootRoute extends _i26.PageRouteInfo<void> {
+class MaterialRootRoute extends _i27.PageRouteInfo<void> {
   const MaterialRootRoute()
       : super(MaterialRootRoute.name, path: 'material_list_page');
 
@@ -351,8 +362,8 @@ class MaterialRootRoute extends _i26.PageRouteInfo<void> {
 /// generated route for
 /// [_i12.MaterialListPage]
 class MaterialListPageRoute
-    extends _i26.PageRouteInfo<MaterialListPageRouteArgs> {
-  MaterialListPageRoute({_i27.Key? key, required Function addToCart})
+    extends _i27.PageRouteInfo<MaterialListPageRouteArgs> {
+  MaterialListPageRoute({_i28.Key? key, required Function addToCart})
       : super(MaterialListPageRoute.name,
             path: 'material_list_page',
             args: MaterialListPageRouteArgs(key: key, addToCart: addToCart));
@@ -363,7 +374,7 @@ class MaterialListPageRoute
 class MaterialListPageRouteArgs {
   const MaterialListPageRouteArgs({this.key, required this.addToCart});
 
-  final _i27.Key? key;
+  final _i28.Key? key;
 
   final Function addToCart;
 
@@ -376,9 +387,9 @@ class MaterialListPageRouteArgs {
 /// generated route for
 /// [_i13.MaterialFilterPage]
 class MaterialFilterPageRoute
-    extends _i26.PageRouteInfo<MaterialFilterPageRouteArgs> {
+    extends _i27.PageRouteInfo<MaterialFilterPageRouteArgs> {
   MaterialFilterPageRoute(
-      {_i27.Key? key, required _i28.MaterialFilterType filterType})
+      {_i28.Key? key, required _i29.MaterialFilterType filterType})
       : super(MaterialFilterPageRoute.name,
             path: 'material_filter_page',
             args:
@@ -390,9 +401,9 @@ class MaterialFilterPageRoute
 class MaterialFilterPageRouteArgs {
   const MaterialFilterPageRouteArgs({this.key, required this.filterType});
 
-  final _i27.Key? key;
+  final _i28.Key? key;
 
-  final _i28.MaterialFilterType filterType;
+  final _i29.MaterialFilterType filterType;
 
   @override
   String toString() {
@@ -402,8 +413,8 @@ class MaterialFilterPageRouteArgs {
 
 /// generated route for
 /// [_i14.AupTCDialog]
-class AupTCDialogRoute extends _i26.PageRouteInfo<AupTCDialogRouteArgs> {
-  AupTCDialogRoute({_i27.Key? key, bool fromSetting = false})
+class AupTCDialogRoute extends _i27.PageRouteInfo<AupTCDialogRouteArgs> {
+  AupTCDialogRoute({_i28.Key? key, bool fromSetting = false})
       : super(AupTCDialogRoute.name,
             path: 'tos',
             args: AupTCDialogRouteArgs(key: key, fromSetting: fromSetting));
@@ -414,7 +425,7 @@ class AupTCDialogRoute extends _i26.PageRouteInfo<AupTCDialogRouteArgs> {
 class AupTCDialogRouteArgs {
   const AupTCDialogRouteArgs({this.key, this.fromSetting = false});
 
-  final _i27.Key? key;
+  final _i28.Key? key;
 
   final bool fromSetting;
 
@@ -426,7 +437,7 @@ class AupTCDialogRouteArgs {
 
 /// generated route for
 /// [_i15.OrderTemplateListPage]
-class OrderTemplateListPageRoute extends _i26.PageRouteInfo<void> {
+class OrderTemplateListPageRoute extends _i27.PageRouteInfo<void> {
   const OrderTemplateListPageRoute()
       : super(OrderTemplateListPageRoute.name,
             path: 'order_template_list_page');
@@ -436,7 +447,7 @@ class OrderTemplateListPageRoute extends _i26.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i16.CartPage]
-class CartPageRoute extends _i26.PageRouteInfo<void> {
+class CartPageRoute extends _i27.PageRouteInfo<void> {
   const CartPageRoute() : super(CartPageRoute.name, path: 'cart_page');
 
   static const String name = 'CartPageRoute';
@@ -444,7 +455,7 @@ class CartPageRoute extends _i26.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i17.OrderSummaryPage]
-class OrderSummaryPageRoute extends _i26.PageRouteInfo<void> {
+class OrderSummaryPageRoute extends _i27.PageRouteInfo<void> {
   const OrderSummaryPageRoute()
       : super(OrderSummaryPageRoute.name, path: 'order_summary');
 
@@ -454,9 +465,9 @@ class OrderSummaryPageRoute extends _i26.PageRouteInfo<void> {
 /// generated route for
 /// [_i18.OrderTemplateDetailPage]
 class OrderTemplateDetailPageRoute
-    extends _i26.PageRouteInfo<OrderTemplateDetailPageRouteArgs> {
+    extends _i27.PageRouteInfo<OrderTemplateDetailPageRouteArgs> {
   OrderTemplateDetailPageRoute(
-      {_i27.Key? key, required _i29.OrderTemplate orderTemplateInfo})
+      {_i28.Key? key, required _i30.OrderTemplate orderTemplateInfo})
       : super(OrderTemplateDetailPageRoute.name,
             path: 'order_template_detail_page',
             args: OrderTemplateDetailPageRouteArgs(
@@ -469,9 +480,9 @@ class OrderTemplateDetailPageRouteArgs {
   const OrderTemplateDetailPageRouteArgs(
       {this.key, required this.orderTemplateInfo});
 
-  final _i27.Key? key;
+  final _i28.Key? key;
 
-  final _i29.OrderTemplate orderTemplateInfo;
+  final _i30.OrderTemplate orderTemplateInfo;
 
   @override
   String toString() {
@@ -482,8 +493,8 @@ class OrderTemplateDetailPageRouteArgs {
 /// generated route for
 /// [_i19.HomeNavigationTabbar]
 class HomeNavigationTabbarRoute
-    extends _i26.PageRouteInfo<HomeNavigationTabbarRouteArgs> {
-  HomeNavigationTabbarRoute({_i27.Key? key, List<_i26.PageRouteInfo>? children})
+    extends _i27.PageRouteInfo<HomeNavigationTabbarRouteArgs> {
+  HomeNavigationTabbarRoute({_i28.Key? key, List<_i27.PageRouteInfo>? children})
       : super(HomeNavigationTabbarRoute.name,
             path: 'main_tabbar',
             args: HomeNavigationTabbarRouteArgs(key: key),
@@ -495,7 +506,7 @@ class HomeNavigationTabbarRoute
 class HomeNavigationTabbarRouteArgs {
   const HomeNavigationTabbarRouteArgs({this.key});
 
-  final _i27.Key? key;
+  final _i28.Key? key;
 
   @override
   String toString() {
@@ -505,7 +516,7 @@ class HomeNavigationTabbarRouteArgs {
 
 /// generated route for
 /// [_i20.SavedOrderListPage]
-class SavedOrderListPageRoute extends _i26.PageRouteInfo<void> {
+class SavedOrderListPageRoute extends _i27.PageRouteInfo<void> {
   const SavedOrderListPageRoute()
       : super(SavedOrderListPageRoute.name, path: 'saved_order_list');
 
@@ -513,14 +524,39 @@ class SavedOrderListPageRoute extends _i26.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i21.HistoryDetails]
-class HistoryDetailsRoute extends _i26.PageRouteInfo<HistoryDetailsRouteArgs> {
+/// [_i21.SavedOrderDetailPage]
+class SavedOrderDetailPageRoute
+    extends _i27.PageRouteInfo<SavedOrderDetailPageRouteArgs> {
+  SavedOrderDetailPageRoute({_i28.Key? key, required _i31.SavedOrder order})
+      : super(SavedOrderDetailPageRoute.name,
+            path: 'saved_order_detail',
+            args: SavedOrderDetailPageRouteArgs(key: key, order: order));
+
+  static const String name = 'SavedOrderDetailPageRoute';
+}
+
+class SavedOrderDetailPageRouteArgs {
+  const SavedOrderDetailPageRouteArgs({this.key, required this.order});
+
+  final _i28.Key? key;
+
+  final _i31.SavedOrder order;
+
+  @override
+  String toString() {
+    return 'SavedOrderDetailPageRouteArgs{key: $key, order: $order}';
+  }
+}
+
+/// generated route for
+/// [_i22.HistoryDetails]
+class HistoryDetailsRoute extends _i27.PageRouteInfo<HistoryDetailsRouteArgs> {
   HistoryDetailsRoute(
-      {_i27.Key? key,
-      required _i30.OrderHistoryItem orderHistoryItem,
-      required _i31.CustomerCodeInfo customerCodeInfo,
-      required _i32.ShipToInfo shipToInfo,
-      required _i33.OrderHistoryBasicInfo orderHistoryBasicInfo})
+      {_i28.Key? key,
+      required _i32.OrderHistoryItem orderHistoryItem,
+      required _i33.CustomerCodeInfo customerCodeInfo,
+      required _i34.ShipToInfo shipToInfo,
+      required _i35.OrderHistoryBasicInfo orderHistoryBasicInfo})
       : super(HistoryDetailsRoute.name,
             path: 'history_details',
             args: HistoryDetailsRouteArgs(
@@ -541,15 +577,15 @@ class HistoryDetailsRouteArgs {
       required this.shipToInfo,
       required this.orderHistoryBasicInfo});
 
-  final _i27.Key? key;
+  final _i28.Key? key;
 
-  final _i30.OrderHistoryItem orderHistoryItem;
+  final _i32.OrderHistoryItem orderHistoryItem;
 
-  final _i31.CustomerCodeInfo customerCodeInfo;
+  final _i33.CustomerCodeInfo customerCodeInfo;
 
-  final _i32.ShipToInfo shipToInfo;
+  final _i34.ShipToInfo shipToInfo;
 
-  final _i33.OrderHistoryBasicInfo orderHistoryBasicInfo;
+  final _i35.OrderHistoryBasicInfo orderHistoryBasicInfo;
 
   @override
   String toString() {
@@ -558,17 +594,17 @@ class HistoryDetailsRouteArgs {
 }
 
 /// generated route for
-/// [_i22.HomeTab]
-class HomeTabRoute extends _i26.PageRouteInfo<void> {
+/// [_i23.HomeTab]
+class HomeTabRoute extends _i27.PageRouteInfo<void> {
   const HomeTabRoute() : super(HomeTabRoute.name, path: 'home-tab');
 
   static const String name = 'HomeTabRoute';
 }
 
 /// generated route for
-/// [_i23.HistoryTab]
-class HistoryTabRoute extends _i26.PageRouteInfo<HistoryTabRouteArgs> {
-  HistoryTabRoute({_i27.Key? key})
+/// [_i24.HistoryTab]
+class HistoryTabRoute extends _i27.PageRouteInfo<HistoryTabRouteArgs> {
+  HistoryTabRoute({_i28.Key? key})
       : super(HistoryTabRoute.name,
             path: 'history-tab', args: HistoryTabRouteArgs(key: key));
 
@@ -578,7 +614,7 @@ class HistoryTabRoute extends _i26.PageRouteInfo<HistoryTabRouteArgs> {
 class HistoryTabRouteArgs {
   const HistoryTabRouteArgs({this.key});
 
-  final _i27.Key? key;
+  final _i28.Key? key;
 
   @override
   String toString() {
@@ -587,8 +623,8 @@ class HistoryTabRouteArgs {
 }
 
 /// generated route for
-/// [_i24.FavouritesTab]
-class FavouritesTabRoute extends _i26.PageRouteInfo<void> {
+/// [_i25.FavouritesTab]
+class FavouritesTabRoute extends _i27.PageRouteInfo<void> {
   const FavouritesTabRoute()
       : super(FavouritesTabRoute.name, path: 'favourites-tab');
 
@@ -596,8 +632,8 @@ class FavouritesTabRoute extends _i26.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i25.AccountTab]
-class AccountTabRoute extends _i26.PageRouteInfo<void> {
+/// [_i26.AccountTab]
+class AccountTabRoute extends _i27.PageRouteInfo<void> {
   const AccountTabRoute() : super(AccountTabRoute.name, path: 'account-tab');
 
   static const String name = 'AccountTabRoute';

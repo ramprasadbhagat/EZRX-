@@ -26,12 +26,28 @@ mixin _$MaterialPriceDetailEvent {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList)
+        refresh,
+    required TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialQueryInfo> materialInfoList)
         fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
+    TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialQueryInfo> materialInfoList)?
+        refresh,
     TResult Function(
             User user,
             CustomerCodeInfo customerCode,
@@ -52,6 +68,14 @@ mixin _$MaterialPriceDetailEvent {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList)?
+        refresh,
+    TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialQueryInfo> materialInfoList)?
         fetch,
     required TResult orElse(),
   }) =>
@@ -59,18 +83,21 @@ mixin _$MaterialPriceDetailEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Refresh value) refresh,
     required TResult Function(_Fetch value) fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_Refresh value)? refresh,
     TResult Function(_Fetch value)? fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_Refresh value)? refresh,
     TResult Function(_Fetch value)? fetch,
     required TResult orElse(),
   }) =>
@@ -143,6 +170,14 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList)
+        refresh,
+    required TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialQueryInfo> materialInfoList)
         fetch,
   }) {
     return initialized();
@@ -152,6 +187,14 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
+    TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialQueryInfo> materialInfoList)?
+        refresh,
     TResult Function(
             User user,
             CustomerCodeInfo customerCode,
@@ -175,6 +218,14 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList)?
+        refresh,
+    TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialQueryInfo> materialInfoList)?
         fetch,
     required TResult orElse(),
   }) {
@@ -188,6 +239,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Refresh value) refresh,
     required TResult Function(_Fetch value) fetch,
   }) {
     return initialized(this);
@@ -197,6 +249,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_Refresh value)? refresh,
     TResult Function(_Fetch value)? fetch,
   }) {
     return initialized?.call(this);
@@ -206,6 +259,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_Refresh value)? refresh,
     TResult Function(_Fetch value)? fetch,
     required TResult orElse(),
   }) {
@@ -218,6 +272,311 @@ class _$_Initialized implements _Initialized {
 
 abstract class _Initialized implements MaterialPriceDetailEvent {
   const factory _Initialized() = _$_Initialized;
+}
+
+/// @nodoc
+abstract class _$$_RefreshCopyWith<$Res> {
+  factory _$$_RefreshCopyWith(
+          _$_Refresh value, $Res Function(_$_Refresh) then) =
+      __$$_RefreshCopyWithImpl<$Res>;
+  $Res call(
+      {User user,
+      CustomerCodeInfo customerCode,
+      SalesOrganisation salesOrganisation,
+      SalesOrganisationConfigs salesOrganisationConfigs,
+      ShipToInfo shipToCode,
+      List<MaterialQueryInfo> materialInfoList});
+
+  $UserCopyWith<$Res> get user;
+  $CustomerCodeInfoCopyWith<$Res> get customerCode;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
+  $ShipToInfoCopyWith<$Res> get shipToCode;
+}
+
+/// @nodoc
+class __$$_RefreshCopyWithImpl<$Res>
+    extends _$MaterialPriceDetailEventCopyWithImpl<$Res>
+    implements _$$_RefreshCopyWith<$Res> {
+  __$$_RefreshCopyWithImpl(_$_Refresh _value, $Res Function(_$_Refresh) _then)
+      : super(_value, (v) => _then(v as _$_Refresh));
+
+  @override
+  _$_Refresh get _value => super._value as _$_Refresh;
+
+  @override
+  $Res call({
+    Object? user = freezed,
+    Object? customerCode = freezed,
+    Object? salesOrganisation = freezed,
+    Object? salesOrganisationConfigs = freezed,
+    Object? shipToCode = freezed,
+    Object? materialInfoList = freezed,
+  }) {
+    return _then(_$_Refresh(
+      user: user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      customerCode: customerCode == freezed
+          ? _value.customerCode
+          : customerCode // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      salesOrganisation: salesOrganisation == freezed
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      salesOrganisationConfigs: salesOrganisationConfigs == freezed
+          ? _value.salesOrganisationConfigs
+          : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      shipToCode: shipToCode == freezed
+          ? _value.shipToCode
+          : shipToCode // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      materialInfoList: materialInfoList == freezed
+          ? _value._materialInfoList
+          : materialInfoList // ignore: cast_nullable_to_non_nullable
+              as List<MaterialQueryInfo>,
+    ));
+  }
+
+  @override
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+
+  @override
+  $CustomerCodeInfoCopyWith<$Res> get customerCode {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCode, (value) {
+      return _then(_value.copyWith(customerCode: value));
+    });
+  }
+
+  @override
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+
+  @override
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(
+        _value.salesOrganisationConfigs, (value) {
+      return _then(_value.copyWith(salesOrganisationConfigs: value));
+    });
+  }
+
+  @override
+  $ShipToInfoCopyWith<$Res> get shipToCode {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToCode, (value) {
+      return _then(_value.copyWith(shipToCode: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_Refresh implements _Refresh {
+  const _$_Refresh(
+      {required this.user,
+      required this.customerCode,
+      required this.salesOrganisation,
+      required this.salesOrganisationConfigs,
+      required this.shipToCode,
+      required final List<MaterialQueryInfo> materialInfoList})
+      : _materialInfoList = materialInfoList;
+
+  @override
+  final User user;
+  @override
+  final CustomerCodeInfo customerCode;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final SalesOrganisationConfigs salesOrganisationConfigs;
+  @override
+  final ShipToInfo shipToCode;
+  final List<MaterialQueryInfo> _materialInfoList;
+  @override
+  List<MaterialQueryInfo> get materialInfoList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_materialInfoList);
+  }
+
+  @override
+  String toString() {
+    return 'MaterialPriceDetailEvent.refresh(user: $user, customerCode: $customerCode, salesOrganisation: $salesOrganisation, salesOrganisationConfigs: $salesOrganisationConfigs, shipToCode: $shipToCode, materialInfoList: $materialInfoList)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Refresh &&
+            const DeepCollectionEquality().equals(other.user, user) &&
+            const DeepCollectionEquality()
+                .equals(other.customerCode, customerCode) &&
+            const DeepCollectionEquality()
+                .equals(other.salesOrganisation, salesOrganisation) &&
+            const DeepCollectionEquality().equals(
+                other.salesOrganisationConfigs, salesOrganisationConfigs) &&
+            const DeepCollectionEquality()
+                .equals(other.shipToCode, shipToCode) &&
+            const DeepCollectionEquality()
+                .equals(other._materialInfoList, _materialInfoList));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(user),
+      const DeepCollectionEquality().hash(customerCode),
+      const DeepCollectionEquality().hash(salesOrganisation),
+      const DeepCollectionEquality().hash(salesOrganisationConfigs),
+      const DeepCollectionEquality().hash(shipToCode),
+      const DeepCollectionEquality().hash(_materialInfoList));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_RefreshCopyWith<_$_Refresh> get copyWith =>
+      __$$_RefreshCopyWithImpl<_$_Refresh>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialQueryInfo> materialInfoList)
+        refresh,
+    required TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialQueryInfo> materialInfoList)
+        fetch,
+  }) {
+    return refresh(user, customerCode, salesOrganisation,
+        salesOrganisationConfigs, shipToCode, materialInfoList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialQueryInfo> materialInfoList)?
+        refresh,
+    TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialQueryInfo> materialInfoList)?
+        fetch,
+  }) {
+    return refresh?.call(user, customerCode, salesOrganisation,
+        salesOrganisationConfigs, shipToCode, materialInfoList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialQueryInfo> materialInfoList)?
+        refresh,
+    TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialQueryInfo> materialInfoList)?
+        fetch,
+    required TResult orElse(),
+  }) {
+    if (refresh != null) {
+      return refresh(user, customerCode, salesOrganisation,
+          salesOrganisationConfigs, shipToCode, materialInfoList);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Refresh value) refresh,
+    required TResult Function(_Fetch value) fetch,
+  }) {
+    return refresh(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Refresh value)? refresh,
+    TResult Function(_Fetch value)? fetch,
+  }) {
+    return refresh?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Refresh value)? refresh,
+    TResult Function(_Fetch value)? fetch,
+    required TResult orElse(),
+  }) {
+    if (refresh != null) {
+      return refresh(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Refresh implements MaterialPriceDetailEvent {
+  const factory _Refresh(
+      {required final User user,
+      required final CustomerCodeInfo customerCode,
+      required final SalesOrganisation salesOrganisation,
+      required final SalesOrganisationConfigs salesOrganisationConfigs,
+      required final ShipToInfo shipToCode,
+      required final List<MaterialQueryInfo> materialInfoList}) = _$_Refresh;
+
+  User get user;
+  CustomerCodeInfo get customerCode;
+  SalesOrganisation get salesOrganisation;
+  SalesOrganisationConfigs get salesOrganisationConfigs;
+  ShipToInfo get shipToCode;
+  List<MaterialQueryInfo> get materialInfoList;
+  @JsonKey(ignore: true)
+  _$$_RefreshCopyWith<_$_Refresh> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -401,6 +760,14 @@ class _$_Fetch implements _Fetch {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList)
+        refresh,
+    required TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialQueryInfo> materialInfoList)
         fetch,
   }) {
     return fetch(user, customerCode, salesOrganisation,
@@ -411,6 +778,14 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
+    TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialQueryInfo> materialInfoList)?
+        refresh,
     TResult Function(
             User user,
             CustomerCodeInfo customerCode,
@@ -435,6 +810,14 @@ class _$_Fetch implements _Fetch {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList)?
+        refresh,
+    TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialQueryInfo> materialInfoList)?
         fetch,
     required TResult orElse(),
   }) {
@@ -449,6 +832,7 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Refresh value) refresh,
     required TResult Function(_Fetch value) fetch,
   }) {
     return fetch(this);
@@ -458,6 +842,7 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_Refresh value)? refresh,
     TResult Function(_Fetch value)? fetch,
   }) {
     return fetch?.call(this);
@@ -467,6 +852,7 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_Refresh value)? refresh,
     TResult Function(_Fetch value)? fetch,
     required TResult orElse(),
   }) {

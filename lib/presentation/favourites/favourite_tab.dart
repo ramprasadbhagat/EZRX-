@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:ezrxmobile/application/order/material_price_detail/material_pric
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/cart_button.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -17,8 +19,16 @@ import 'package:ezrxmobile/presentation/favourites/favourite_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FavouritesTab extends StatelessWidget {
+class FavouritesTab extends StatelessWidget with AutoRouteWrapper {
   const FavouritesTab({Key? key}) : super(key: key);
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider(
+      create: (_) => locator<MaterialPriceDetailBloc>(),
+      child: this,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +119,7 @@ class FavouritesTab extends StatelessWidget {
                 }
                 final validFavoriteItems = favoriteState.favouriteItems
                     .where(
-                      (item) => priceState.priceAvailable(
+                      (item) => priceState.isValidMaterial(
                         query: MaterialQueryInfo.fromFavorite(material: item),
                       ),
                     )

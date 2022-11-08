@@ -64,7 +64,9 @@ class PriceAggregate with _$PriceAggregate {
 
   String display(PriceType priceType) {
     if (price.isFOC) return 'FOC';
-    if (price.finalPrice.isEmpty() || materialInfo.hidePrice) return 'NA';
+    if (price.finalPrice.isUnavailable() ||
+        materialInfo.hidePrice ||
+        !price.isValid) return 'NA';
 
     double result;
     switch (priceType) {

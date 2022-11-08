@@ -24,100 +24,145 @@ class SavedOrderMaterialItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: ZPColors.darkGray,
-                  width: 2.0,
+    return Card(
+      elevation: 1.0,
+      margin: const EdgeInsets.all(10.0),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: ZPColors.darkGray,
+                    width: 2.0,
+                  ),
+                ),
+              ),
+              child: Text(
+                'Material Description: ${material.materialDescription}',
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: ZPColors.darkerGreen,
                 ),
               ),
             ),
-            child: Text(
-              'Material Description: ${material.materialDescription}',
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                color: ZPColors.darkerGreen,
-              ),
-            ),
-          ),
-          _MaterialItemInfo(
-            title: 'Material Number: '.tr(),
-            info: Text(
-              material.materialNumber.displayMatNo,
-              style: const TextStyle(
-                color: ZPColors.darkerGreen,
-                fontSize: 14.0,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-          _MaterialItemInfo(
-            title: 'Material Qty: '.tr(),
-            info: Text(
-              material.qty.toString(),
-              style: const TextStyle(
-                color: ZPColors.darkerGreen,
-                fontSize: 14.0,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-          _MaterialItemInfo(
-            title: 'Unit Price: '.tr(),
-            info:
-                BlocBuilder<MaterialPriceDetailBloc, MaterialPriceDetailState>(
-              buildWhen: (previous, current) =>
-                  previous.materialDetails[itemPriceQuery] !=
-                  current.materialDetails[itemPriceQuery],
-              builder: (context, state) {
-                final itemInfo = state.materialDetails[itemPriceQuery]?.price;
-                if (itemInfo != null) {
-                  final priceAggregate = PriceAggregate(
-                    price: itemInfo,
-                    materialInfo: material.toMaterialInfo(),
-                    salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                    quantity: 1,
-                    zmgMaterialCountOnCart:
-                        context.read<CartBloc>().state.zmgMaterialCount,
-                  );
-
-                  return Text(
-                    priceAggregate.display(PriceType.unitPrice),
+            _MaterialItemInfo(
+              title: 'Material Number: '.tr(),
+              info: Row(
+                children: [
+                  Text(
+                    material.materialNumber.displayMatNo,
                     style: const TextStyle(
                       color: ZPColors.darkerGreen,
                       fontSize: 14.0,
                       fontWeight: FontWeight.w400,
                     ),
-                  );
-                }
-                if (state.isFetching) {
-                  return SizedBox(
-                    key: const Key('price-loading'),
-                    width: 40,
-                    child: LoadingShimmer.tile(),
-                  );
-                }
-
-                return const Text(
-                  'NA',
-                  style: TextStyle(
-                    color: ZPColors.darkerGreen,
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w400,
                   ),
-                );
-              },
+                  const SizedBox(
+                    width: 30,
+                  ),
+                  BlocBuilder<MaterialPriceDetailBloc,
+                      MaterialPriceDetailState>(
+                    buildWhen: (previous, current) =>
+                        previous.isValidating != current.isValidating,
+                    builder: (context, state) {
+                      final isValidMaterial = state.isValidMaterial(
+                        query: MaterialQueryInfo.fromSavedOrder(
+                          orderMaterial: material,
+                        ),
+                      );
+                      if (!state.isValidating && !isValidMaterial) {
+                        return Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                          ),
+                          decoration: BoxDecoration(
+                            color: ZPColors.secondary,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Text(
+                            'Invalid'.tr(),
+                            style: const TextStyle(
+                              color: ZPColors.primary,
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        );
+                      }
+
+                      return const SizedBox();
+                    },
+                  ),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(height: 5),
-        ],
+            _MaterialItemInfo(
+              title: 'Material Qty: '.tr(),
+              info: Text(
+                material.qty.toString(),
+                style: const TextStyle(
+                  color: ZPColors.darkerGreen,
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+            _MaterialItemInfo(
+              title: 'Unit Price: '.tr(),
+              info: BlocBuilder<MaterialPriceDetailBloc,
+                  MaterialPriceDetailState>(
+                buildWhen: (previous, current) =>
+                    previous.isFetching != current.isFetching ||
+                    previous.isValidating != current.isValidating,
+                builder: (context, state) {
+                  final itemInfo = state.materialDetails[itemPriceQuery]?.price;
+                  if (state.isFetching || state.isValidating) {
+                    return SizedBox(
+                      key: const Key('price-loading'),
+                      width: 40,
+                      child: LoadingShimmer.tile(),
+                    );
+                  }
+                  if (itemInfo != null) {
+                    final priceAggregate = PriceAggregate(
+                      price: itemInfo,
+                      materialInfo: material.toMaterialInfo(),
+                      salesOrgConfig:
+                          context.read<SalesOrgBloc>().state.configs,
+                      quantity: 1,
+                      zmgMaterialCountOnCart:
+                          context.read<CartBloc>().state.zmgMaterialCount,
+                    );
+
+                    return Text(
+                      priceAggregate.display(PriceType.unitPrice),
+                      style: const TextStyle(
+                        color: ZPColors.darkerGreen,
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    );
+                  }
+
+                  return const Text(
+                    'NA',
+                    style: TextStyle(
+                      color: ZPColors.darkerGreen,
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 5),
+          ],
+        ),
       ),
     );
   }

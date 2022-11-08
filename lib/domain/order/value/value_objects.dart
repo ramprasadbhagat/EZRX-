@@ -135,14 +135,20 @@ class MaterialGroup extends ValueObject<String> {
 }
 
 class MaterialPrice extends ValueObject<double> {
+  static const unavailablePriceValue = -1.0;
   @override
   final Either<ValueFailure<double>, double> value;
 
   factory MaterialPrice(double input) => MaterialPrice._(Right(input));
 
+  factory MaterialPrice.unavailable() =>
+      const MaterialPrice._(Right(unavailablePriceValue));
+
   const MaterialPrice._(this.value);
 
   bool isEmpty() => value.getOrElse(() => 0) == 0;
+
+  bool isUnavailable() => value.getOrElse(() => 0) == unavailablePriceValue;
 }
 
 class MaterialQty extends ValueObject<int> {

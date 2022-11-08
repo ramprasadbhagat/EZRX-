@@ -125,22 +125,20 @@ class FavouriteListTile extends StatelessWidget {
                     buildWhen: (previous, current) =>
                         previous.isFetching != current.isFetching,
                     builder: (context, state) {
-                      final queryInfo =
-                          MaterialQueryInfo.fromFavorite(material: favourite);
-                      final priceDetail = state.materialDetails[queryInfo];
-
-                      if (state.isFetching || priceDetail == null) {
+                      if (state.isFetching) {
                         return SizedBox(
                           key: const Key('price-loading'),
                           width: 40,
                           child: LoadingShimmer.tile(),
                         );
                       }
+                      final queryInfo =
+                          MaterialQueryInfo.fromFavorite(material: favourite);
+                      final priceDetail = state.materialDetails[queryInfo]!;
 
                       final priceAggregate = PriceAggregate(
                         price: priceDetail.price,
-                        materialInfo:
-                            MaterialInfo.empty().copyWith(hidePrice: false),
+                        materialInfo: priceDetail.info,
                         salesOrgConfig:
                             context.read<SalesOrgBloc>().state.configs,
                         quantity: 1,

@@ -57,6 +57,9 @@ class SavedOrderListPage extends StatelessWidget {
             return ScrollList<SavedOrder>(
               emptyMessage: 'No saved order found',
               onRefresh: () {
+                context
+                    .read<MaterialPriceDetailBloc>()
+                    .add(const MaterialPriceDetailEvent.initialized());
                 context.read<SavedOrderListBloc>().add(
                       SavedOrderListEvent.fetch(
                         userInfo: context.read<UserBloc>().state.user,
@@ -72,9 +75,6 @@ class SavedOrderListPage extends StatelessWidget {
                             context.read<ShipToCodeBloc>().state.shipToInfo,
                       ),
                     );
-                context
-                    .read<MaterialPriceDetailBloc>()
-                    .add(const MaterialPriceDetailEvent.initialized());
               },
               onLoadingMore: () => context.read<SavedOrderListBloc>().add(
                     SavedOrderListEvent.loadMore(

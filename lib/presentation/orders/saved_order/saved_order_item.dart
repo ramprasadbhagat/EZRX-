@@ -1,4 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
@@ -8,7 +8,7 @@ import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
-import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_material_item.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,56 +23,53 @@ class SavedOrderItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 1.0,
-      margin: const EdgeInsets.all(10.0),
-      child: CustomSlidable(
-        endActionPaneActions: [
-          CustomSlidableAction(
-            label: 'Delete',
-            icon: Icons.delete_outline,
-            onPressed: (context) => context.read<SavedOrderListBloc>().add(
-                  SavedOrderListEvent.delete(
-                    order: order,
-                    user: context.read<UserBloc>().state.user,
-                  ),
-                ),
-          ),
-        ],
-        borderRadius: 10,
-        child: Theme(
-          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-          child: ExpansionTile(
-            onExpansionChanged: (isExpanded) {
-              if (isExpanded) {
-                context.read<MaterialPriceDetailBloc>().add(
-                      MaterialPriceDetailEvent.fetch(
-                        user: context.read<UserBloc>().state.user,
-                        customerCode: context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo,
-                        salesOrganisation: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
-                        salesOrganisationConfigs:
-                            context.read<SalesOrgBloc>().state.configs,
-                        shipToCode:
-                            context.read<ShipToCodeBloc>().state.shipToInfo,
-                        materialInfoList: order.items
-                            .map(
-                              (item) => MaterialQueryInfo.fromSavedOrder(
-                                orderMaterial: item,
-                              ),
-                            )
-                            .toList(),
+    return GestureDetector(
+      onTap: () {
+        context.read<MaterialPriceDetailBloc>().add(
+              MaterialPriceDetailEvent.fetch(
+                user: context.read<UserBloc>().state.user,
+                customerCode:
+                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                salesOrganisation:
+                    context.read<SalesOrgBloc>().state.salesOrganisation,
+                salesOrganisationConfigs:
+                    context.read<SalesOrgBloc>().state.configs,
+                shipToCode: context.read<ShipToCodeBloc>().state.shipToInfo,
+                materialInfoList: order.items
+                    .map(
+                      (item) => MaterialQueryInfo.fromSavedOrder(
+                        orderMaterial: item,
                       ),
-                    );
-              }
-            },
-            expandedCrossAxisAlignment: CrossAxisAlignment.start,
-            title: Container(
+                    )
+                    .toList(),
+              ),
+            );
+        context.router.push(
+          SavedOrderDetailPageRoute(
+            order: order,
+          ),
+        );
+      },
+      child: Card(
+        elevation: 1.0,
+        margin: const EdgeInsets.all(10.0),
+        child: CustomSlidable(
+          endActionPaneActions: [
+            CustomSlidableAction(
+              label: 'Delete',
+              icon: Icons.delete_outline,
+              onPressed: (context) => context.read<SavedOrderListBloc>().add(
+                    SavedOrderListEvent.delete(
+                      order: order,
+                      user: context.read<UserBloc>().state.user,
+                    ),
+                  ),
+            ),
+          ],
+          borderRadius: 10,
+          child: Theme(
+            data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+            child: Container(
               margin: const EdgeInsets.only(bottom: 5),
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -144,87 +141,6 @@ class SavedOrderItem extends StatelessWidget {
                 ),
               ),
             ),
-            childrenPadding: const EdgeInsets.only(left: 20, bottom: 15),
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ...order.items
-                      .map(
-                        (item) => SavedOrderMaterialItem(
-                          material: item,
-                        ),
-                      )
-                      .toList(),
-                  Row(
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          //TODO: Implement Add to cart
-                        },
-                        child: const Text('Add to Cart').tr(),
-                      ),
-                      const SizedBox(width: 10),
-                      ElevatedButton(
-                        onPressed: () {
-                          context.read<SavedOrderListBloc>().add(
-                                SavedOrderListEvent.delete(
-                                  order: order,
-                                  user: context.read<UserBloc>().state.user,
-                                ),
-                              );
-                          // showPlatformDialog(
-                          //   context: context,
-                          //   barrierDismissible: true,
-                          //   builder: (context) => PlatformAlertDialog(
-                          //     title: const Text('Info').tr(),
-                          //     content: SingleChildScrollView(
-                          //       child: ListBody(
-                          //         children: <Widget>[
-                          //           const Text(
-                          //             'This action will delete the item from your saved orders.',
-                          //           ).tr(),
-                          //           const Text(
-                          //             'Do you want to proceed?',
-                          //           ).tr(),
-                          //         ],
-                          //       ),
-                          //     ),
-                          //     actions: [
-                          //       PlatformDialogAction(
-                          //         child: const Text('Cancel').tr(),
-                          //         onPressed: () {
-                          //           context.router.pop();
-                          //         },
-                          //       ),
-                          //       PlatformDialogAction(
-                          //         child: const Text('Confirm').tr(),
-                          //         onPressed: () {
-                          //           context.router.pop();
-                          //           context
-                          //               .read<SavedOrderListBloc>()
-                          //               .add(
-                          //                 SavedOrderListEvent.delete(
-                          //                   order: order,
-                          //                   user: context
-                          //                       .read<UserBloc>()
-                          //                       .state
-                          //                       .user,
-                          //                 ),
-                          //               );
-                          //         },
-                          //       ),
-                          //     ],
-                          //   ),
-                          // );
-                        },
-                        child: const Text('Delete').tr(),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
           ),
         ),
       ),

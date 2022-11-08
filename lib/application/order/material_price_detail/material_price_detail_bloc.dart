@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_price_detail_repository.dart';
 import 'package:ezrxmobile/domain/order/repository/i_valid_customer_material_repository.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -29,6 +30,26 @@ class MaterialPriceDetailBloc
         initialized: (_) async => emit(
           MaterialPriceDetailState.initial(),
         ),
+        refresh: (e) async {
+          emit(
+            state.copyWith(
+              materialDetails: Map.from(state.materialDetails)
+                ..removeWhere(
+                  (key, _) => e.materialInfoList.contains(key),
+                ),
+            ),
+          );
+          add(
+            MaterialPriceDetailEvent.fetch(
+              user: e.user,
+              customerCode: e.customerCode,
+              salesOrganisation: e.salesOrganisation,
+              salesOrganisationConfigs: e.salesOrganisationConfigs,
+              shipToCode: e.shipToCode,
+              materialInfoList: e.materialInfoList,
+            ),
+          );
+        },
         fetch: (e) async {
           final queryMaterials = _getMissingPriceDetailMaterials(
             materials: e.materialInfoList,
@@ -97,6 +118,7 @@ class MaterialPriceDetailBloc
             value: Price.empty().copyWith(
               isValid: true,
               isFOC: false,
+              finalPrice: MaterialPrice.unavailable(),
             ),
             emit: emit,
           );
@@ -141,7 +163,15 @@ class MaterialPriceDetailBloc
     final materialDetails = Map<MaterialQueryInfo, MaterialPriceDetail>.from(
       state.materialDetails,
     )..removeWhere(
-        (key, value) => value == MaterialPriceDetail.empty(),
+        (key, value) =>
+            value ==
+            MaterialPriceDetail.empty().copyWith(
+              price: Price.empty().copyWith(
+                isValid: true,
+                isFOC: false,
+                finalPrice: MaterialPrice.unavailable(),
+              ),
+            ),
       );
 
     return Set<MaterialQueryInfo>.from(materials).toList()

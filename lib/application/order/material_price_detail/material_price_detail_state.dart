@@ -15,7 +15,7 @@ class MaterialPriceDetailState with _$MaterialPriceDetailState {
         materialDetails: {},
       );
 
-  bool priceAvailable({required MaterialQueryInfo query}) {
+  bool isValidMaterial({required MaterialQueryInfo query}) {
     final itemDetail = materialDetails[query];
     if (itemDetail != null && itemDetail.price.isValid) {
       return true;
