@@ -25,6 +25,7 @@
                     "customerAttr7": "",
                     "customerGrp4" : "",
                     "paymentTermDescription": "",
+                    "emailAddresses": ["mintharam23452@gmail.com","mintharam234567@outlook.com"],
                     "shipTo": [
                         {
                             "defaultShipToAddress": false,

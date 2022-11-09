@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_address.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_name.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/bill_to_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/ship_to_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -35,6 +36,8 @@ class CustomerCodeDto with _$CustomerCodeDto {
     @JsonKey(name: 'customerAttr7') required String customerAttr7,
     @JsonKey(name: 'customerGrp4') required String customerGrp4,
     @JsonKey(name: 'region') required String region,
+    @JsonKey(name: 'emailAddresses', defaultValue: [])
+        required List<String> emailAddresses,
   }) = _CustomerCodeDto;
 
   factory CustomerCodeDto.fromDomain(CustomerCodeInfo customerCodeInfo) {
@@ -63,6 +66,9 @@ class CustomerCodeDto with _$CustomerCodeDto {
       customerAttr7: customerCodeInfo.customerAttr7.getOrCrash(),
       customerGrp4: customerCodeInfo.customerGrp4.getOrCrash(),
       region: customerCodeInfo.region,
+      emailAddresses: customerCodeInfo.emailAddresses
+          .map((e) => e.value.getOrElse(() => ''))
+          .toList(),
     );
   }
 
@@ -92,6 +98,8 @@ class CustomerCodeDto with _$CustomerCodeDto {
       customerAttr7: CustomerAttr7(customerAttr7),
       customerGrp4: CustomerGrp4(customerGrp4),
       region: region,
+      emailAddresses: emailAddresses.map((e) => EmailAddress(e)).toList(),
+    
     );
   }
 

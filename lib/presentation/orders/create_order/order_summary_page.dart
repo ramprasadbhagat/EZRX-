@@ -154,11 +154,16 @@ class _OrderSummaryDetails {
 List<_OrderSummaryDetails> _getTextRowLevelsForCustomerInfo(
   CustomerCodeInfo customer,
 ) {
-  return [
+ 
+ return [
     _OrderSummaryDetails(
       key: 'Customer Name',
       value:
           '${customer.customerName.name1} ${customer.customerName.name2} ${customer.customerName.name3} ${customer.customerName.name4}',
+    ),
+    _OrderSummaryDetails(
+      key: 'Customer Email',
+      value: customer.customerEmailAddress,
     ),
     _OrderSummaryDetails(
       key: 'Customer ship to ID',

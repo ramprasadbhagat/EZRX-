@@ -35,6 +35,7 @@ class CustomerCodeQueryMutation {
             customerAttr7
             customerGrp4
             paymentTermDescription
+            emailAddresses
             shipTo {
               defaultShipToAddress
               shipToCustomerCode

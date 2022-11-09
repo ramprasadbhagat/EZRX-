@@ -60,6 +60,8 @@ mixin _$CustomerCodeDto {
   String get customerGrp4 => throw _privateConstructorUsedError;
   @JsonKey(name: 'region')
   String get region => throw _privateConstructorUsedError;
+  @JsonKey(name: 'emailAddresses', defaultValue: [])
+  List<String> get emailAddresses => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -73,26 +75,48 @@ abstract class $CustomerCodeDtoCopyWith<$Res> {
           CustomerCodeDto value, $Res Function(CustomerCodeDto) then) =
       _$CustomerCodeDtoCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'customerCodeSoldTo') String customerCodeSoldTo,
-      @JsonKey(name: 'name1') String name1,
-      @JsonKey(name: 'name2') String name2,
-      @JsonKey(name: 'name3') String name3,
-      @JsonKey(name: 'name4') String name4,
-      @JsonKey(name: 'status') String status,
-      @JsonKey(name: 'street1') String street1,
-      @JsonKey(name: 'street2') String street2,
-      @JsonKey(name: 'street3') String street3,
-      @JsonKey(name: 'street4') String street4,
-      @JsonKey(name: 'street5') String street5,
-      @JsonKey(name: 'postalCode') String postalCode,
-      @JsonKey(name: 'customerClassification') String customerClassification,
-      @JsonKey(name: 'customerLocalGroup') String customerLocalGroup,
-      @JsonKey(name: 'paymentTermDescription') String paymentTermDescription,
-      @JsonKey(name: 'shipTo') List<ShipToDto> shipToInfos,
-      @JsonKey(name: 'billTo') List<BillToDto> billToInfos,
-      @JsonKey(name: 'customerAttr7') String customerAttr7,
-      @JsonKey(name: 'customerGrp4') String customerGrp4,
-      @JsonKey(name: 'region') String region});
+      {@JsonKey(name: 'customerCodeSoldTo')
+          String customerCodeSoldTo,
+      @JsonKey(name: 'name1')
+          String name1,
+      @JsonKey(name: 'name2')
+          String name2,
+      @JsonKey(name: 'name3')
+          String name3,
+      @JsonKey(name: 'name4')
+          String name4,
+      @JsonKey(name: 'status')
+          String status,
+      @JsonKey(name: 'street1')
+          String street1,
+      @JsonKey(name: 'street2')
+          String street2,
+      @JsonKey(name: 'street3')
+          String street3,
+      @JsonKey(name: 'street4')
+          String street4,
+      @JsonKey(name: 'street5')
+          String street5,
+      @JsonKey(name: 'postalCode')
+          String postalCode,
+      @JsonKey(name: 'customerClassification')
+          String customerClassification,
+      @JsonKey(name: 'customerLocalGroup')
+          String customerLocalGroup,
+      @JsonKey(name: 'paymentTermDescription')
+          String paymentTermDescription,
+      @JsonKey(name: 'shipTo')
+          List<ShipToDto> shipToInfos,
+      @JsonKey(name: 'billTo')
+          List<BillToDto> billToInfos,
+      @JsonKey(name: 'customerAttr7')
+          String customerAttr7,
+      @JsonKey(name: 'customerGrp4')
+          String customerGrp4,
+      @JsonKey(name: 'region')
+          String region,
+      @JsonKey(name: 'emailAddresses', defaultValue: [])
+          List<String> emailAddresses});
 }
 
 /// @nodoc
@@ -126,6 +150,7 @@ class _$CustomerCodeDtoCopyWithImpl<$Res>
     Object? customerAttr7 = freezed,
     Object? customerGrp4 = freezed,
     Object? region = freezed,
+    Object? emailAddresses = freezed,
   }) {
     return _then(_value.copyWith(
       customerCodeSoldTo: customerCodeSoldTo == freezed
@@ -208,6 +233,10 @@ class _$CustomerCodeDtoCopyWithImpl<$Res>
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
               as String,
+      emailAddresses: emailAddresses == freezed
+          ? _value.emailAddresses
+          : emailAddresses // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -220,26 +249,48 @@ abstract class _$$_CustomerCodeDtoCopyWith<$Res>
       __$$_CustomerCodeDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'customerCodeSoldTo') String customerCodeSoldTo,
-      @JsonKey(name: 'name1') String name1,
-      @JsonKey(name: 'name2') String name2,
-      @JsonKey(name: 'name3') String name3,
-      @JsonKey(name: 'name4') String name4,
-      @JsonKey(name: 'status') String status,
-      @JsonKey(name: 'street1') String street1,
-      @JsonKey(name: 'street2') String street2,
-      @JsonKey(name: 'street3') String street3,
-      @JsonKey(name: 'street4') String street4,
-      @JsonKey(name: 'street5') String street5,
-      @JsonKey(name: 'postalCode') String postalCode,
-      @JsonKey(name: 'customerClassification') String customerClassification,
-      @JsonKey(name: 'customerLocalGroup') String customerLocalGroup,
-      @JsonKey(name: 'paymentTermDescription') String paymentTermDescription,
-      @JsonKey(name: 'shipTo') List<ShipToDto> shipToInfos,
-      @JsonKey(name: 'billTo') List<BillToDto> billToInfos,
-      @JsonKey(name: 'customerAttr7') String customerAttr7,
-      @JsonKey(name: 'customerGrp4') String customerGrp4,
-      @JsonKey(name: 'region') String region});
+      {@JsonKey(name: 'customerCodeSoldTo')
+          String customerCodeSoldTo,
+      @JsonKey(name: 'name1')
+          String name1,
+      @JsonKey(name: 'name2')
+          String name2,
+      @JsonKey(name: 'name3')
+          String name3,
+      @JsonKey(name: 'name4')
+          String name4,
+      @JsonKey(name: 'status')
+          String status,
+      @JsonKey(name: 'street1')
+          String street1,
+      @JsonKey(name: 'street2')
+          String street2,
+      @JsonKey(name: 'street3')
+          String street3,
+      @JsonKey(name: 'street4')
+          String street4,
+      @JsonKey(name: 'street5')
+          String street5,
+      @JsonKey(name: 'postalCode')
+          String postalCode,
+      @JsonKey(name: 'customerClassification')
+          String customerClassification,
+      @JsonKey(name: 'customerLocalGroup')
+          String customerLocalGroup,
+      @JsonKey(name: 'paymentTermDescription')
+          String paymentTermDescription,
+      @JsonKey(name: 'shipTo')
+          List<ShipToDto> shipToInfos,
+      @JsonKey(name: 'billTo')
+          List<BillToDto> billToInfos,
+      @JsonKey(name: 'customerAttr7')
+          String customerAttr7,
+      @JsonKey(name: 'customerGrp4')
+          String customerGrp4,
+      @JsonKey(name: 'region')
+          String region,
+      @JsonKey(name: 'emailAddresses', defaultValue: [])
+          List<String> emailAddresses});
 }
 
 /// @nodoc
@@ -275,6 +326,7 @@ class __$$_CustomerCodeDtoCopyWithImpl<$Res>
     Object? customerAttr7 = freezed,
     Object? customerGrp4 = freezed,
     Object? region = freezed,
+    Object? emailAddresses = freezed,
   }) {
     return _then(_$_CustomerCodeDto(
       customerCodeSoldTo: customerCodeSoldTo == freezed
@@ -357,6 +409,10 @@ class __$$_CustomerCodeDtoCopyWithImpl<$Res>
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
               as String,
+      emailAddresses: emailAddresses == freezed
+          ? _value._emailAddresses
+          : emailAddresses // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -404,9 +460,12 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
       @JsonKey(name: 'customerGrp4')
           required this.customerGrp4,
       @JsonKey(name: 'region')
-          required this.region})
+          required this.region,
+      @JsonKey(name: 'emailAddresses', defaultValue: [])
+          required final List<String> emailAddresses})
       : _shipToInfos = shipToInfos,
         _billToInfos = billToInfos,
+        _emailAddresses = emailAddresses,
         super._();
 
   factory _$_CustomerCodeDto.fromJson(Map<String, dynamic> json) =>
@@ -482,10 +541,17 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
   @override
   @JsonKey(name: 'region')
   final String region;
+  final List<String> _emailAddresses;
+  @override
+  @JsonKey(name: 'emailAddresses', defaultValue: [])
+  List<String> get emailAddresses {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_emailAddresses);
+  }
 
   @override
   String toString() {
-    return 'CustomerCodeDto(customerCodeSoldTo: $customerCodeSoldTo, name1: $name1, name2: $name2, name3: $name3, name4: $name4, status: $status, street1: $street1, street2: $street2, street3: $street3, street4: $street4, street5: $street5, postalCode: $postalCode, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region)';
+    return 'CustomerCodeDto(customerCodeSoldTo: $customerCodeSoldTo, name1: $name1, name2: $name2, name3: $name3, name4: $name4, status: $status, street1: $street1, street2: $street2, street3: $street3, street4: $street4, street5: $street5, postalCode: $postalCode, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region, emailAddresses: $emailAddresses)';
   }
 
   @override
@@ -521,7 +587,9 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
                 .equals(other.customerAttr7, customerAttr7) &&
             const DeepCollectionEquality()
                 .equals(other.customerGrp4, customerGrp4) &&
-            const DeepCollectionEquality().equals(other.region, region));
+            const DeepCollectionEquality().equals(other.region, region) &&
+            const DeepCollectionEquality()
+                .equals(other._emailAddresses, _emailAddresses));
   }
 
   @JsonKey(ignore: true)
@@ -547,7 +615,8 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
         const DeepCollectionEquality().hash(_billToInfos),
         const DeepCollectionEquality().hash(customerAttr7),
         const DeepCollectionEquality().hash(customerGrp4),
-        const DeepCollectionEquality().hash(region)
+        const DeepCollectionEquality().hash(region),
+        const DeepCollectionEquality().hash(_emailAddresses)
       ]);
 
   @JsonKey(ignore: true)
@@ -604,7 +673,9 @@ abstract class _CustomerCodeDto extends CustomerCodeDto {
       @JsonKey(name: 'customerGrp4')
           required final String customerGrp4,
       @JsonKey(name: 'region')
-          required final String region}) = _$_CustomerCodeDto;
+          required final String region,
+      @JsonKey(name: 'emailAddresses', defaultValue: [])
+          required final List<String> emailAddresses}) = _$_CustomerCodeDto;
   const _CustomerCodeDto._() : super._();
 
   factory _CustomerCodeDto.fromJson(Map<String, dynamic> json) =
@@ -670,6 +741,9 @@ abstract class _CustomerCodeDto extends CustomerCodeDto {
   @override
   @JsonKey(name: 'region')
   String get region;
+  @override
+  @JsonKey(name: 'emailAddresses', defaultValue: [])
+  List<String> get emailAddresses;
   @override
   @JsonKey(ignore: true)
   _$$_CustomerCodeDtoCopyWith<_$_CustomerCodeDto> get copyWith =>

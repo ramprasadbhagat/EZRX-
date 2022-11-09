@@ -1,3 +1,4 @@
+
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -98,6 +99,10 @@ class HistoryDetails extends StatelessWidget {
                     BalanceTextRow(
                       keyText: 'Customer Name',
                       valueText: customerCodeInfo.customerName.toString(),
+                    ),
+                    BalanceTextRow(
+                      keyText: 'Customer Email',
+                      valueText: customerCodeInfo.customerEmailAddress,
                     ),
                     BalanceTextRow(
                       keyText: 'Created Date',
