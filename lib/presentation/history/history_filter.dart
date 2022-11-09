@@ -3,6 +3,7 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class OrderHistoryFilterDrawer extends StatelessWidget {
   const OrderHistoryFilterDrawer({Key? key}) : super(key: key);
@@ -454,26 +455,28 @@ class _PrincipleSearchByFilter extends StatelessWidget {
   }
 }
 
-Future<DateTime?> shoDatePicker(
+Future<DateTime?> viewDatePicker(
   initialDate,
   selectedDateType,
   BuildContext context,
 ) =>
-    showDatePicker(
+    showPlatformDatePicker(
       context: context,
       initialDate: initialDate,
-      firstDate: DateTime(2018),
-      lastDate: DateTime(2030),
-      selectableDayPredicate: (DateTime day) => selectedDateType == 'startDate'
-          ? day.isBefore(DateTime.now())
-          : day.isAfter(DateTime.now().subtract(
-                const Duration(
-                  days: 7,
-                ),
-              )) &&
-              day.isBefore(
-                DateTime.now(),
+      firstDate: selectedDateType == 'startDate'
+          ? DateTime(2018)
+          : initialDate.subtract(
+              const Duration(
+                days: 6,
               ),
+            ),
+      lastDate: selectedDateType == 'startDate'
+          ? initialDate.add(
+              const Duration(
+                days: 7,
+              ),
+            )
+          : initialDate,
     );
 
 class _OrderFromDateByFilter extends StatefulWidget {
@@ -513,7 +516,7 @@ class __OrderFromDateByFilterState extends State<_OrderFromDateByFilter> {
           child: TextFormField(
             key: const Key('filtefromdateField'),
             onTap: () async {
-              final orderDate = await shoDatePicker(
+              final orderDate = await viewDatePicker(
                 state.orderHistoryFilterList.fromDate,
                 'startDate',
                 context,
@@ -603,7 +606,7 @@ class __OrderToDateByFilterState extends State<_OrderToDateByFilter> {
           child: TextFormField(
             key: const Key('filtertodateField'),
             onTap: () async {
-              final orderDate = await shoDatePicker(
+              final orderDate = await viewDatePicker(
                 state.orderHistoryFilterList.toDate,
                 'endDate',
                 context,
