@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/order_template_material_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'order_template_dto.freezed.dart';
@@ -13,10 +16,9 @@ class OrderTemplateDto with _$OrderTemplateDto {
     // TODO: use UserDto someday
     @JsonKey(name: 'user', defaultValue: <String, dynamic>{})
         required Map<String, dynamic> user,
-    // TODO: by right we no need this
-    //@_CartItemListConverter()
-    //@JsonKey(name: 'cartList', defaultValue: <CartItemDto>[])
-    // required List<CartItemDto> cartItems,
+    @_CartItemListConverter()
+    @JsonKey(name: 'cartList', defaultValue: <OrderTemplateMaterialDto>[])
+        required List<OrderTemplateMaterialDto> items,
   }) = _OrderTemplateDto;
 
   factory OrderTemplateDto.fromDomain(OrderTemplate orderTemplate) {
@@ -24,9 +26,9 @@ class OrderTemplateDto with _$OrderTemplateDto {
       templateId: orderTemplate.templateId,
       templateName: orderTemplate.templateName,
       user: orderTemplate.user,
-      // cartItems: orderTemplate.cartItems
-      // .map((e) => CartItemDto.fromDomain(e))
-      // .toList(),
+      items: orderTemplate.items
+          .map((e) => OrderTemplateMaterialDto.fromDomain(e))
+          .toList(),
     );
   }
 
@@ -35,7 +37,7 @@ class OrderTemplateDto with _$OrderTemplateDto {
       templateId: templateId,
       templateName: templateName,
       user: user,
-      cartItems: [],
+      items: items.map((e) => e.toDomain()).toList(),
     );
   }
 
@@ -43,18 +45,19 @@ class OrderTemplateDto with _$OrderTemplateDto {
       _$OrderTemplateDtoFromJson(json);
 }
 
-/*class _CartItemListConverter extends JsonConverter<List<CartItemDto>, String> {
+class _CartItemListConverter
+    extends JsonConverter<List<OrderTemplateMaterialDto>, String> {
   const _CartItemListConverter();
 
   @override
-  List<CartItemDto> fromJson(String json) {
-    //return List.from(jsonDecode(json))
-       // .map((e) => CartItemDto.fromJson(e))
-       // .toList();
+  List<OrderTemplateMaterialDto> fromJson(String json) {
+    return List.from(jsonDecode(json))
+        .map((e) => OrderTemplateMaterialDto.fromJson(e))
+        .toList();
   }
 
   @override
-  String toJson(List<CartItemDto> object) {
-    //return object.map((e) => e.toJson()).toList().toString();
+  String toJson(List<OrderTemplateMaterialDto> object) {
+    return object.map((e) => e.toJson()).toList().toString();
   }
-}*/
+}

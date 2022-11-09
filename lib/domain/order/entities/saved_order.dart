@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
+import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -38,22 +39,9 @@ class SavedOrder with _$SavedOrder {
         requestedDeliveryDate: '',
       );
 
-  List<MaterialItem> validMaterialItems(
-    List<MaterialNumber> validMaterialNumber,
-  ) =>
-      items
-          .where(
-            (item) => validMaterialNumber.contains(
-              item.materialNumber,
-            ),
-          )
-          .toList();
-
-  List<String> get itemMaterialNumbers => items
+  List<MaterialQueryInfo> get allMaterialQueryInfo => items
       .map(
-        (e) => e.materialNumber.getOrDefaultValue(
-          '',
-        ),
+        (item) => item.queryInfo,
       )
       .toList();
 }

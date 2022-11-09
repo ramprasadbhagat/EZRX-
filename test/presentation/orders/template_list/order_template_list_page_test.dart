@@ -5,7 +5,7 @@ import 'package:ezrxmobile/application/order/order_template_list/order_template_
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_local_datasource.dart';
-import 'package:ezrxmobile/presentation/orders/order_template/order_template_list_item.dart';
+import 'package:ezrxmobile/presentation/orders/order_template/order_template_item.dart';
 import 'package:ezrxmobile/presentation/orders/order_template/order_template_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -83,7 +83,7 @@ void main() {
       });
 
       final noOrderTemplate = find.text('No order template found');
-      final orderTemplateItem = find.byType(OrderTemplateListItem);
+      final orderTemplateItem = find.byType(OrderTemplateItem);
 
       expect(noOrderTemplate, findsNothing);
       expect(orderTemplateItem, findsNothing);
@@ -111,7 +111,7 @@ void main() {
       );
 
       final noOrderTemplate = find.text('No order template found');
-      final orderTemplateItem = find.byType(OrderTemplateListItem);
+      final orderTemplateItem = find.byType(OrderTemplateItem);
 
       expect(noOrderTemplate, findsNothing);
       expect(orderTemplateItem, findsAtLeastNWidgets(1));
@@ -155,7 +155,7 @@ void main() {
       });
 
       final noOrderTemplate = find.text('No order template found');
-      final orderTemplateItem = find.byType(OrderTemplateListItem);
+      final orderTemplateItem = find.byType(OrderTemplateItem);
 
       expect(noOrderTemplate, findsOneWidget);
       expect(orderTemplateItem, findsNothing);
@@ -186,20 +186,17 @@ void main() {
     );
 
     final noOrderTemplate = find.text('No order template found');
-    final orderTemplateItem = find.byType(OrderTemplateListItem);
+    final orderTemplateItem = find.byType(OrderTemplateItem);
 
     expect(noOrderTemplate, findsNothing);
     expect(orderTemplateItem, findsAtLeastNWidgets(1));
 
-    final oneSlidableItem = find.byKey(
-      Key('materialOption${orderTemplateListBloc
-        .state.orderTemplateList.first.templateId}'
-      )
-    );
+    final oneSlidableItem = find.byKey(Key(
+        'materialOption${orderTemplateListBloc.state.orderTemplateList.first.templateId}'));
     expect(oneSlidableItem, findsOneWidget);
     await tester.drag(oneSlidableItem, const Offset(-300, 0.0));
     await tester.pump();
-    
+
     final removeWidget = tester.widget(find.byIcon(Icons.delete_outline));
     await tester.tap(find.byWidget(removeWidget));
     await tester.pump();

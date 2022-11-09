@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OrderTemplate {
   String get templateId => throw _privateConstructorUsedError;
   String get templateName => throw _privateConstructorUsedError;
-  List<PriceAggregate> get cartItems => throw _privateConstructorUsedError;
+  List<OrderTemplateMaterial> get items =>
+      throw _privateConstructorUsedError; // TODO: User entity , not map
   Map<String, dynamic> get user => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -34,7 +35,7 @@ abstract class $OrderTemplateCopyWith<$Res> {
   $Res call(
       {String templateId,
       String templateName,
-      List<PriceAggregate> cartItems,
+      List<OrderTemplateMaterial> items,
       Map<String, dynamic> user});
 }
 
@@ -51,7 +52,7 @@ class _$OrderTemplateCopyWithImpl<$Res>
   $Res call({
     Object? templateId = freezed,
     Object? templateName = freezed,
-    Object? cartItems = freezed,
+    Object? items = freezed,
     Object? user = freezed,
   }) {
     return _then(_value.copyWith(
@@ -63,10 +64,10 @@ class _$OrderTemplateCopyWithImpl<$Res>
           ? _value.templateName
           : templateName // ignore: cast_nullable_to_non_nullable
               as String,
-      cartItems: cartItems == freezed
-          ? _value.cartItems
-          : cartItems // ignore: cast_nullable_to_non_nullable
-              as List<PriceAggregate>,
+      items: items == freezed
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<OrderTemplateMaterial>,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -85,7 +86,7 @@ abstract class _$$_OrderTemplateCopyWith<$Res>
   $Res call(
       {String templateId,
       String templateName,
-      List<PriceAggregate> cartItems,
+      List<OrderTemplateMaterial> items,
       Map<String, dynamic> user});
 }
 
@@ -104,7 +105,7 @@ class __$$_OrderTemplateCopyWithImpl<$Res>
   $Res call({
     Object? templateId = freezed,
     Object? templateName = freezed,
-    Object? cartItems = freezed,
+    Object? items = freezed,
     Object? user = freezed,
   }) {
     return _then(_$_OrderTemplate(
@@ -116,10 +117,10 @@ class __$$_OrderTemplateCopyWithImpl<$Res>
           ? _value.templateName
           : templateName // ignore: cast_nullable_to_non_nullable
               as String,
-      cartItems: cartItems == freezed
-          ? _value._cartItems
-          : cartItems // ignore: cast_nullable_to_non_nullable
-              as List<PriceAggregate>,
+      items: items == freezed
+          ? _value._items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<OrderTemplateMaterial>,
       user: user == freezed
           ? _value._user
           : user // ignore: cast_nullable_to_non_nullable
@@ -134,9 +135,9 @@ class _$_OrderTemplate extends _OrderTemplate {
   const _$_OrderTemplate(
       {required this.templateId,
       required this.templateName,
-      required final List<PriceAggregate> cartItems,
+      required final List<OrderTemplateMaterial> items,
       required final Map<String, dynamic> user})
-      : _cartItems = cartItems,
+      : _items = items,
         _user = user,
         super._();
 
@@ -144,14 +145,16 @@ class _$_OrderTemplate extends _OrderTemplate {
   final String templateId;
   @override
   final String templateName;
-  final List<PriceAggregate> _cartItems;
+  final List<OrderTemplateMaterial> _items;
   @override
-  List<PriceAggregate> get cartItems {
+  List<OrderTemplateMaterial> get items {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_cartItems);
+    return EqualUnmodifiableListView(_items);
   }
 
+// TODO: User entity , not map
   final Map<String, dynamic> _user;
+// TODO: User entity , not map
   @override
   Map<String, dynamic> get user {
     // ignore: implicit_dynamic_type
@@ -160,7 +163,7 @@ class _$_OrderTemplate extends _OrderTemplate {
 
   @override
   String toString() {
-    return 'OrderTemplate(templateId: $templateId, templateName: $templateName, cartItems: $cartItems, user: $user)';
+    return 'OrderTemplate(templateId: $templateId, templateName: $templateName, items: $items, user: $user)';
   }
 
   @override
@@ -172,8 +175,7 @@ class _$_OrderTemplate extends _OrderTemplate {
                 .equals(other.templateId, templateId) &&
             const DeepCollectionEquality()
                 .equals(other.templateName, templateName) &&
-            const DeepCollectionEquality()
-                .equals(other._cartItems, _cartItems) &&
+            const DeepCollectionEquality().equals(other._items, _items) &&
             const DeepCollectionEquality().equals(other._user, _user));
   }
 
@@ -182,7 +184,7 @@ class _$_OrderTemplate extends _OrderTemplate {
       runtimeType,
       const DeepCollectionEquality().hash(templateId),
       const DeepCollectionEquality().hash(templateName),
-      const DeepCollectionEquality().hash(_cartItems),
+      const DeepCollectionEquality().hash(_items),
       const DeepCollectionEquality().hash(_user));
 
   @JsonKey(ignore: true)
@@ -195,7 +197,7 @@ abstract class _OrderTemplate extends OrderTemplate {
   const factory _OrderTemplate(
       {required final String templateId,
       required final String templateName,
-      required final List<PriceAggregate> cartItems,
+      required final List<OrderTemplateMaterial> items,
       required final Map<String, dynamic> user}) = _$_OrderTemplate;
   const _OrderTemplate._() : super._();
 
@@ -204,8 +206,8 @@ abstract class _OrderTemplate extends OrderTemplate {
   @override
   String get templateName;
   @override
-  List<PriceAggregate> get cartItems;
-  @override
+  List<OrderTemplateMaterial> get items;
+  @override // TODO: User entity , not map
   Map<String, dynamic> get user;
   @override
   @JsonKey(ignore: true)

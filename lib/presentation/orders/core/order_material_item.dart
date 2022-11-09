@@ -3,26 +3,24 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SavedOrderMaterialItem extends StatelessWidget {
-  const SavedOrderMaterialItem({
+class OrderMaterialItem extends StatelessWidget {
+  final MaterialQueryInfo materialQueryInfo;
+  final String description;
+  final String materialNumber;
+  final String qty;
+  const OrderMaterialItem({
     Key? key,
-    required this.material,
-    required this.enableDefaultMD,
+    required this.materialQueryInfo,
+    required this.description,
+    required this.materialNumber,
+    required this.qty,
   }) : super(key: key);
-
-  final MaterialItem material;
-  final bool enableDefaultMD;
-
-  MaterialQueryInfo get itemPriceQuery => MaterialQueryInfo.fromSavedOrder(
-        orderMaterial: material,
-      );
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +42,7 @@ class SavedOrderMaterialItem extends StatelessWidget {
                 ),
               ),
               child: Text(
-                'Material Description: ${material.materialDescription}',
+                'Material Description: $description',
                 style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
@@ -57,7 +55,7 @@ class SavedOrderMaterialItem extends StatelessWidget {
               info: Row(
                 children: [
                   Text(
-                    material.materialNumber.displayMatNo,
+                    materialNumber,
                     style: const TextStyle(
                       color: ZPColors.darkerGreen,
                       fontSize: 14.0,
@@ -73,9 +71,7 @@ class SavedOrderMaterialItem extends StatelessWidget {
                         previous.isValidating != current.isValidating,
                     builder: (context, state) {
                       final isValidMaterial = state.isValidMaterial(
-                        query: MaterialQueryInfo.fromSavedOrder(
-                          orderMaterial: material,
-                        ),
+                        query: materialQueryInfo,
                       );
                       if (!state.isValidating && !isValidMaterial) {
                         return Container(
@@ -103,23 +99,10 @@ class SavedOrderMaterialItem extends StatelessWidget {
                 ],
               ),
             ),
-            (enableDefaultMD && material.defaultMaterialDescription.isNotEmpty)
-                ? _MaterialItemInfo(
-                    title: 'Default Material Description: '.tr(),
-                    info: Text(
-                      material.defaultMaterialDescription,
-                      style: const TextStyle(
-                        color: ZPColors.darkerGreen,
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  )
-                : const SizedBox.shrink(),
             _MaterialItemInfo(
               title: 'Material Qty: '.tr(),
               info: Text(
-                material.qty.toString(),
+                qty,
                 style: const TextStyle(
                   color: ZPColors.darkerGreen,
                   fontSize: 14.0,
@@ -135,7 +118,7 @@ class SavedOrderMaterialItem extends StatelessWidget {
                     previous.isFetching != current.isFetching ||
                     previous.isValidating != current.isValidating,
                 builder: (context, state) {
-                  final itemInfo = state.materialDetails[itemPriceQuery]?.price;
+                  final itemInfo = state.materialDetails[materialQueryInfo];
                   if (state.isFetching || state.isValidating) {
                     return SizedBox(
                       key: const Key('price-loading'),
@@ -145,8 +128,8 @@ class SavedOrderMaterialItem extends StatelessWidget {
                   }
                   if (itemInfo != null) {
                     final priceAggregate = PriceAggregate(
-                      price: itemInfo,
-                      materialInfo: material.toMaterialInfo(),
+                      price: itemInfo.price,
+                      materialInfo: itemInfo.info,
                       salesOrgConfig:
                           context.read<SalesOrgBloc>().state.configs,
                       quantity: 1,

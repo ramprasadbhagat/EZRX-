@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
@@ -7,8 +6,9 @@ import 'package:ezrxmobile/application/order/material_price_detail/material_pric
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_material_item.dart';
+import 'package:ezrxmobile/presentation/orders/core/order_action_button.dart';
+import 'package:ezrxmobile/presentation/orders/core/order_invalid_warning.dart';
+import 'package:ezrxmobile/presentation/orders/core/order_material_item.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,173 +55,65 @@ class SavedOrderDetailPage extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
-              child: _InvalidMaterialWarning(order: order),
+              child: BlocBuilder<MaterialPriceDetailBloc,
+                  MaterialPriceDetailState>(
+                buildWhen: (previous, current) =>
+                    previous.isValidating != current.isValidating,
+                builder: (context, state) {
+                  return OrderInvalidWarning(
+                    isLoading: state.isValidating,
+                    isInvalidOrder: order.allMaterialQueryInfo.every(
+                      (item) => !state.isValidMaterial(
+                        query: item,
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
-                  final item = order.items[index];
+                  final material = order.items[index];
 
-                  return SavedOrderMaterialItem(
-                    enableDefaultMD: context
-                        .read<SalesOrgBloc>()
-                        .state
-                        .configs
-                        .enableDefaultMD,
-                    material: item,
+                  return OrderMaterialItem(
+                    materialQueryInfo: material.queryInfo,
+                    description: material.materialDescription,
+                    materialNumber: material.materialNumber.displayMatNo,
+                    qty: material.qty.toString(),
                   );
                 },
                 childCount: order.items.length,
               ),
             ),
             SliverToBoxAdapter(
-              child: _ActionButtonSet(order: order),
+              child: BlocBuilder<MaterialPriceDetailBloc,
+                  MaterialPriceDetailState>(
+                buildWhen: (previous, current) =>
+                    previous.isValidating != current.isValidating,
+                builder: (context, state) {
+                  return OrderActionButton(
+                    onAddToCartPressed: () {},
+                    onDeletePressed: () =>
+                        context.read<SavedOrderListBloc>().add(
+                              SavedOrderListEvent.delete(
+                                order: order,
+                                user: context.read<UserBloc>().state.user,
+                              ),
+                            ),
+                    enableAddToCart: order.allMaterialQueryInfo.any(
+                      (item) => state.isValidMaterial(
+                        query: item,
+                      ),
+                    ),
+                    isLoading: state.isValidating,
+                  );
+                },
+              ),
             ),
           ],
         ),
       ),
-    );
-  }
-}
-
-class _ActionButtonSet extends StatelessWidget {
-  const _ActionButtonSet({
-    Key? key,
-    required this.order,
-  }) : super(key: key);
-
-  final SavedOrder order;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<MaterialPriceDetailBloc, MaterialPriceDetailState>(
-      buildWhen: (previous, current) =>
-          previous.isValidating != current.isValidating,
-      builder: (context, state) {
-        if (state.isValidating) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              LoadingShimmer.withChild(
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: const SizedBox(),
-                ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              LoadingShimmer.withChild(
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: const SizedBox(),
-                ),
-              ),
-            ],
-          );
-        }
-
-        final enableAddToCart = order.items.any(
-          (item) => state.isValidMaterial(
-            query: MaterialQueryInfo.fromSavedOrder(
-              orderMaterial: item,
-            ),
-          ),
-        );
-
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              //TODO: Implement Add to cart
-              onPressed: () {},
-              style: enableAddToCart
-                  ? null
-                  : ElevatedButton.styleFrom(
-                      backgroundColor: ZPColors.darkGray,
-                    ),
-              child: const Text('Add to Cart').tr(),
-            ),
-            const SizedBox(width: 10),
-            ElevatedButton(
-              onPressed: () {
-                context.read<SavedOrderListBloc>().add(
-                      SavedOrderListEvent.delete(
-                        order: order,
-                        user: context.read<UserBloc>().state.user,
-                      ),
-                    );
-              },
-              child: const Text('Delete').tr(),
-            ),
-          ],
-        );
-      },
-    );
-  }
-}
-
-class _InvalidMaterialWarning extends StatelessWidget {
-  const _InvalidMaterialWarning({
-    Key? key,
-    required this.order,
-  }) : super(key: key);
-
-  final SavedOrder order;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<MaterialPriceDetailBloc, MaterialPriceDetailState>(
-      buildWhen: (previous, current) =>
-          previous.isValidating != current.isValidating,
-      builder: (context, state) {
-        if (state.isValidating) {
-          return const SizedBox();
-        }
-
-        final isAllMaterialInvalid = order.items.every(
-          (item) => !state.isValidMaterial(
-            query: MaterialQueryInfo.fromSavedOrder(
-              orderMaterial: item,
-            ),
-          ),
-        );
-        if (isAllMaterialInvalid) {
-          return Padding(
-            padding: const EdgeInsets.only(
-              right: 10,
-              left: 10,
-              top: 5,
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Icon(
-                  Icons.info_outlined,
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 2,
-                      ),
-                      Text(
-                        'All materials are invalid and can not be added to cart!'
-                            .tr(),
-                        style: const TextStyle(
-                          fontStyle: FontStyle.italic,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          );
-        }
-
-        return const SizedBox();
-      },
     );
   }
 }

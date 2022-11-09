@@ -141,8 +141,8 @@ class AppRouter extends _i27.RootStackRouter {
       final args = routeData.argsAs<OrderTemplateDetailPageRouteArgs>();
       return _i27.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i18.OrderTemplateDetailPage(
-              key: args.key, orderTemplateInfo: args.orderTemplateInfo));
+          child:
+              _i18.OrderTemplateDetailPage(key: args.key, order: args.order));
     },
     HomeNavigationTabbarRoute.name: (routeData) {
       final args = routeData.argsAs<HomeNavigationTabbarRouteArgs>(
@@ -467,26 +467,24 @@ class OrderSummaryPageRoute extends _i27.PageRouteInfo<void> {
 class OrderTemplateDetailPageRoute
     extends _i27.PageRouteInfo<OrderTemplateDetailPageRouteArgs> {
   OrderTemplateDetailPageRoute(
-      {_i28.Key? key, required _i30.OrderTemplate orderTemplateInfo})
+      {_i28.Key? key, required _i30.OrderTemplate order})
       : super(OrderTemplateDetailPageRoute.name,
             path: 'order_template_detail_page',
-            args: OrderTemplateDetailPageRouteArgs(
-                key: key, orderTemplateInfo: orderTemplateInfo));
+            args: OrderTemplateDetailPageRouteArgs(key: key, order: order));
 
   static const String name = 'OrderTemplateDetailPageRoute';
 }
 
 class OrderTemplateDetailPageRouteArgs {
-  const OrderTemplateDetailPageRouteArgs(
-      {this.key, required this.orderTemplateInfo});
+  const OrderTemplateDetailPageRouteArgs({this.key, required this.order});
 
   final _i28.Key? key;
 
-  final _i30.OrderTemplate orderTemplateInfo;
+  final _i30.OrderTemplate order;
 
   @override
   String toString() {
-    return 'OrderTemplateDetailPageRouteArgs{key: $key, orderTemplateInfo: $orderTemplateInfo}';
+    return 'OrderTemplateDetailPageRouteArgs{key: $key, order: $order}';
   }
 }
 
