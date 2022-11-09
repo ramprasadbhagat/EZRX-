@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 
 abstract class IMaterialListRepository {
   Future<Either<ApiFailure, List<MaterialInfo>>> getMaterialList({
@@ -22,6 +23,7 @@ abstract class IMaterialListRepository {
     required MaterialFilter selectedMaterialFilter,
     bool ispickandpackenabled = false,
     bool isForFoc = false,
+    required OrderDocumentType orderDocumentType,
   });
   Future<Either<ApiFailure, List<MaterialInfo>>> searchMaterialList({
     required User user,

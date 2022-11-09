@@ -10,6 +10,8 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/domain/core/aggregate/order_type_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -19,6 +21,7 @@ import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/order_type_selector.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -60,15 +63,72 @@ class MaterialListPage extends StatelessWidget {
             previous.isFetching != current.isFetching ||
             previous.materialList != current.materialList,
         builder: (context, state) {
-          return Column(
-            children: [
-              const _SearchBar(),
-              const _MaterialFilters(),
-              _BodyContent(
-                materialListState: state,
-                addToCart: addToCart,
-              ),
-            ],
+          final orderDocumentTypeAggregate = OrderDocumentTypeAggregate(
+            user: context.read<UserBloc>().state.user,
+            salesOrganisationConfigs:
+                context.read<SalesOrgBloc>().state.configs,
+            salesOrganisation:
+                context.read<SalesOrgBloc>().state.salesOrganisation,
+            isError: context.read<OrderDocumentTypeBloc>()
+                .state.orderDocumentTypeList.isNotEmpty,   
+          );
+
+          return BlocListener<OrderDocumentTypeBloc, OrderDocumentTypeState>(
+            listenWhen: (previous, current) =>
+                previous.selectedOrderType != current.selectedOrderType ||
+                previous.isSubmitting != current.isSubmitting,
+            listener: (context, orderDocumentTypeState) {
+              orderDocumentTypeState.orderDocumentTypeListFailureOrSuccessOption
+                  .fold(
+                () {},
+                (either) => either.fold(
+                  (failure) {
+                    showSnackBar(
+                      context: context,
+                      message: 'Unable to fetch Order Type',
+                    );
+                  },
+                  (_) {
+                    context.read<MaterialListBloc>().add(
+                          MaterialListEvent.fetch(
+                            user: context.read<UserBloc>().state.user,
+                            salesOrganisation: context
+                                .read<SalesOrgBloc>()
+                                .state
+                                .salesOrganisation,
+                            configs: context.read<SalesOrgBloc>().state.configs,
+                            customerCodeInfo: context
+                                .read<CustomerCodeBloc>()
+                                .state
+                                .customerCodeInfo,
+                            shipToInfo:
+                                context.read<ShipToCodeBloc>().state.shipToInfo,
+                            selectedMaterialFilter: context
+                                .read<MaterialFilterBloc>()
+                                .state
+                                .selectedMaterialFilter,
+                            orderDocumentType: context
+                                .read<OrderDocumentTypeBloc>()
+                                .state
+                                .selectedOrderType,
+                          ),
+                        );
+                  },
+                ),
+              );
+            },
+            child: Column(
+              children: [
+                const _SearchBar(),
+                if (orderDocumentTypeAggregate.checkOrderTypeEnable) 
+                  const OrderTypeSelector(),
+                const _MaterialFilters(),
+                _BodyContent(
+                  materialListState: state,
+                  addToCart: addToCart,
+                ),
+              ],
+            ),
           );
         },
       ),
@@ -127,6 +187,10 @@ class _BodyContent extends StatelessWidget {
                             .read<MaterialFilterBloc>()
                             .state
                             .getEmptyMaterialFilter(),
+                        orderDocumentType: context
+                            .read<OrderDocumentTypeBloc>()
+                            .state
+                            .selectedOrderType,
                       ),
                     );
               },
@@ -146,6 +210,10 @@ class _BodyContent extends StatelessWidget {
                           .read<MaterialFilterBloc>()
                           .state
                           .selectedMaterialFilter,
+                      orderDocumentType: context
+                          .read<OrderDocumentTypeBloc>()
+                          .state
+                          .selectedOrderType,
                     ),
                   ),
               isLoading: materialListState.isFetching,
@@ -557,6 +625,10 @@ class _SearchBarState extends State<_SearchBar> {
                               .read<MaterialFilterBloc>()
                               .state
                               .getEmptyMaterialFilter(),
+                          orderDocumentType: context
+                              .read<OrderDocumentTypeBloc>()
+                              .state
+                              .selectedOrderType,
                         ));
                   },
                 ),

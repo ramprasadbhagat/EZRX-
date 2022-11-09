@@ -62,6 +62,10 @@ class SalesOrg extends ValueObject<String> {
   bool get isPH {
     return country == 'PH';
   }
+  
+  bool get isOrderTypeEligible {
+    return countrySupportOrderType(country);
+  }
 
   const SalesOrg._(this.value);
 }

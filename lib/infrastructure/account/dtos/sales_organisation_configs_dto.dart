@@ -2,7 +2,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
-
 part 'sales_organisation_configs_dto.freezed.dart';
 part 'sales_organisation_configs_dto.g.dart';
 

@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -64,6 +65,10 @@ class MaterialListBlocMock
     extends MockBloc<MaterialListEvent, MaterialListState>
     implements MaterialListBloc {}
 
+class OrderDocumentTypeBlocMock
+    extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
+    implements OrderDocumentTypeBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialListBloc materialListBlocMock;
@@ -76,6 +81,7 @@ void main() {
   late MaterialPriceBloc materialPriceBlocMock;
   late CartBloc cartBlocMock;
   // late MaterialListBloc materialListBloc;
+  late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
 
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
   final fakeMaterialPrice = MaterialPrice(10.0);
@@ -97,6 +103,7 @@ void main() {
       materialPriceBlocMock = MaterialPriceBlocMock();
       cartBlocMock = CartBlocMock();
       mockMaterialFilterBloc = MockMaterialFilterBloc();
+      orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       autoRouterMock = locator<AppRouter>();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -110,6 +117,8 @@ void main() {
           .thenReturn(MaterialFilterState.initial());
       when(() => materialListBlocMock.state)
           .thenReturn(MaterialListState.initial());
+      when(() => orderDocumentTypeBlocMock.state)
+          .thenReturn(OrderDocumentTypeState.initial());
     });
 
     Widget getScopedWidget(Widget child) {
@@ -143,6 +152,8 @@ void main() {
                 create: ((context) => mockMaterialFilterBloc)),
             BlocProvider<MaterialListBloc>(
                 create: ((context) => materialListBlocMock)),
+            BlocProvider<OrderDocumentTypeBloc>(
+                create: ((context) => orderDocumentTypeBlocMock)),
           ],
           child: child,
         ),

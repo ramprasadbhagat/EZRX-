@@ -1,0 +1,3 @@
+{
+    "query":"    {\n      orderDocumentType(request: {salesOrg:\"2601\"})\n      {\n          documentTypes{\n              salesOrg\n              documentType\n              description\n              shippingCondition\n              orderReason\n          }\n      }\n    }\n   "
+}

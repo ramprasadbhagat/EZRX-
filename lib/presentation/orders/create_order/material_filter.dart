@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_filter_search.dart';
@@ -91,7 +92,10 @@ class MaterialFilterPage extends StatelessWidget {
                             selectedMaterialFilter: context
                                 .read<MaterialFilterBloc>()
                                 .state
-                                .selectedMaterialFilter,
+                                .selectedMaterialFilter, 
+                            orderDocumentType: context
+                                .read<OrderDocumentTypeBloc>()
+                                .state.selectedOrderType,
                           ),
                         )
                     : true;

@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -32,6 +33,8 @@ void main() {
   final mockShipToInfo = ShipToInfo.empty();
   final mockSelectedMaterialFilter =
       MaterialFilterState.initial().selectedMaterialFilter;
+  final mockSelectedOrderDocumentType =
+      OrderDocumentTypeState.initial().selectedOrderType;    
 
   late final List<MaterialInfo> materialListMock;
   final materialState = MaterialListState.initial();
@@ -167,6 +170,7 @@ void main() {
               orderBy: 'materialDescription_asc',
               searchKey: '',
               selectedMaterialFilter: mockSelectedMaterialFilter,
+              orderDocumentType: mockSelectedOrderDocumentType,
             )).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
@@ -181,6 +185,7 @@ void main() {
           customerCodeInfo: mockCustomerCodeInfo,
           shipToInfo: mockShipToInfo,
           selectedMaterialFilter: mockSelectedMaterialFilter,
+          orderDocumentType: mockSelectedOrderDocumentType,
         ));
       },
       expect: () => [
@@ -213,6 +218,8 @@ void main() {
               orderBy: 'materialDescription_asc',
               searchKey: '',
               selectedMaterialFilter: mockSelectedMaterialFilter,
+              orderDocumentType: mockSelectedOrderDocumentType,
+
             )).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
@@ -225,6 +232,7 @@ void main() {
           customerCodeInfo: mockCustomerCodeInfo,
           shipToInfo: mockShipToInfo,
           selectedMaterialFilter: mockSelectedMaterialFilter,
+          orderDocumentType: mockSelectedOrderDocumentType,
         ));
       },
       expect: () => [
@@ -254,6 +262,7 @@ void main() {
           customerCodeInfo: mockCustomerCodeInfo,
           shipToInfo: mockShipToInfo,
           selectedMaterialFilter: mockSelectedMaterialFilter,
+          orderDocumentType: mockSelectedOrderDocumentType,
         ));
         bloc.add(MaterialListEvent.loadMore(
           user: mockUser,
@@ -262,6 +271,7 @@ void main() {
           customerCodeInfo: mockCustomerCodeInfo,
           shipToInfo: mockShipToInfo,
           selectedMaterialFilter: mockSelectedMaterialFilter,
+          orderDocumentType: mockSelectedOrderDocumentType,
         ));
       },
       setUp: () {
@@ -276,6 +286,7 @@ void main() {
               orderBy: 'materialDescription_asc',
               searchKey: '',
               selectedMaterialFilter: mockSelectedMaterialFilter,
+              orderDocumentType: mockSelectedOrderDocumentType,
             )).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
@@ -290,6 +301,7 @@ void main() {
               orderBy: 'materialDescription_asc',
               searchKey: '',
               selectedMaterialFilter: mockSelectedMaterialFilter,
+              orderDocumentType: mockSelectedOrderDocumentType,
             )).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
@@ -335,6 +347,7 @@ void main() {
           customerCodeInfo: mockCustomerCodeInfo,
           shipToInfo: mockShipToInfo,
           selectedMaterialFilter: mockSelectedMaterialFilter,
+          orderDocumentType: mockSelectedOrderDocumentType,
         ));
         bloc.add(MaterialListEvent.loadMore(
           user: mockUser,
@@ -343,6 +356,7 @@ void main() {
           customerCodeInfo: mockCustomerCodeInfo,
           shipToInfo: mockShipToInfo,
           selectedMaterialFilter: mockSelectedMaterialFilter,
+          orderDocumentType: mockSelectedOrderDocumentType,
         ));
       },
       setUp: () {
@@ -357,6 +371,7 @@ void main() {
               orderBy: 'materialDescription_asc',
               searchKey: '',
               selectedMaterialFilter: mockSelectedMaterialFilter,
+              orderDocumentType: mockSelectedOrderDocumentType,
             )).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
@@ -371,6 +386,7 @@ void main() {
               orderBy: 'materialDescription_asc',
               searchKey: '',
               selectedMaterialFilter: mockSelectedMaterialFilter,
+              orderDocumentType: mockSelectedOrderDocumentType,
             )).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
@@ -419,6 +435,7 @@ void main() {
           customerCodeInfo: mockCustomerCodeInfo,
           shipToInfo: mockShipToInfo,
           selectedMaterialFilter: mockSelectedMaterialFilter,
+          orderDocumentType: mockSelectedOrderDocumentType,
         ));
         bloc.add(MaterialListEvent.loadMore(
           user: mockUser,
@@ -427,6 +444,7 @@ void main() {
           customerCodeInfo: mockCustomerCodeInfo,
           shipToInfo: mockShipToInfo,
           selectedMaterialFilter: mockSelectedMaterialFilter,
+          orderDocumentType: mockSelectedOrderDocumentType,
         ));
       },
       setUp: () {
@@ -441,6 +459,7 @@ void main() {
               orderBy: 'materialDescription_asc',
               searchKey: '',
               selectedMaterialFilter: mockSelectedMaterialFilter,
+              orderDocumentType: mockSelectedOrderDocumentType,
             )).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
@@ -455,6 +474,7 @@ void main() {
               orderBy: 'materialDescription_asc',
               searchKey: '',
               selectedMaterialFilter: mockSelectedMaterialFilter,
+              orderDocumentType: mockSelectedOrderDocumentType,
             )).thenAnswer(
           (invocation) async => Right(materialListMock),
         );

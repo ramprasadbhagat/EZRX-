@@ -17,6 +17,7 @@ import 'package:ezrxmobile/application/order/material_price_detail/material_pric
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/stock_information/stock_information_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -208,6 +209,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<OrderSummaryBloc>(
           create: (context) => locator<OrderSummaryBloc>(),
+        ),
+        BlocProvider<OrderDocumentTypeBloc>(
+          create: (context) => locator<OrderDocumentTypeBloc>(),
         ),
       ],
       child: MaterialApp.router(

@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/order/covid_material_list/covid_material_
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
@@ -74,6 +75,10 @@ class ShipCodeSelector extends StatelessWidget {
                           .read<MaterialFilterBloc>()
                           .state
                           .selectedMaterialFilter,
+                      orderDocumentType: context
+                          .read<OrderDocumentTypeBloc>()
+                          .state
+                          .selectedOrderType,
                     ),
                   );
               if (enableCovidMaterial) {

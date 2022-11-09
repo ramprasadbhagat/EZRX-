@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
 import 'package:flutter/material.dart';
@@ -175,6 +176,7 @@ void main() {
                   mockUser.role.type.isSalesRep ? true : false,
               isForFoc: mockUser.role.type.isSalesRep ? false : true,
               selectedMaterialFilter: MaterialFilter.empty(),
+              orderDocumentType: OrderDocumentType.empty(),
             )).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
@@ -211,20 +213,20 @@ void main() {
           materialListRepository: materialListMockRepository),
       setUp: () {
         when(() => materialListMockRepository.getMaterialList(
-              user: mockUser,
-              salesOrganisation: mockSalesOrg,
-              salesOrgConfig: mockSalesOrganisationConfigs,
-              customerCodeInfo: mockCustomerCodeInfo,
-              shipToInfo: mockShipToInfo,
-              pageSize: _defaultPageSize,
-              offset: 0,
-              orderBy: 'materialDescription_asc',
-              searchKey: '',
-              selectedMaterialFilter: MaterialFilter.empty(),
-              ispickandpackenabled:
-                  mockUser.role.type.isSalesRep ? true : false,
-              isForFoc: mockUser.role.type.isSalesRep ? false : true,
-            )).thenAnswer(
+            user: mockUser,
+            salesOrganisation: mockSalesOrg,
+            salesOrgConfig: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            pageSize: _defaultPageSize,
+            offset: 0,
+            orderBy: 'materialDescription_asc',
+            searchKey: '',
+            selectedMaterialFilter: MaterialFilter.empty(),
+            orderDocumentType: OrderDocumentType.empty(),
+            ispickandpackenabled:
+            mockUser.role.type.isSalesRep ? true : false,
+            isForFoc: mockUser.role.type.isSalesRep ? false : true,)).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
       },
@@ -286,6 +288,7 @@ void main() {
               ispickandpackenabled:
                   mockUser.role.type.isSalesRep ? true : false,
               isForFoc: mockUser.role.type.isSalesRep ? false : true,
+              orderDocumentType: OrderDocumentType.empty(),
               selectedMaterialFilter: MaterialFilter.empty(),
             )).thenAnswer(
           (invocation) async => Right(materialListMock),
@@ -304,6 +307,7 @@ void main() {
               orderBy: 'materialDescription_asc',
               searchKey: '',
               selectedMaterialFilter: MaterialFilter.empty(),
+              orderDocumentType: OrderDocumentType.empty(),
             )).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
@@ -371,6 +375,7 @@ void main() {
                   mockUser.role.type.isSalesRep ? true : false,
               isForFoc: mockUser.role.type.isSalesRep ? false : true,
               selectedMaterialFilter: MaterialFilter.empty(),
+              orderDocumentType: OrderDocumentType.empty(),
             )).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
@@ -388,6 +393,7 @@ void main() {
                   mockUser.role.type.isSalesRep ? true : false,
               isForFoc: mockUser.role.type.isSalesRep ? false : true,
               selectedMaterialFilter: MaterialFilter.empty(),
+              orderDocumentType: OrderDocumentType.empty(),
             )).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
@@ -459,6 +465,7 @@ void main() {
               orderBy: 'materialDescription_asc',
               searchKey: '',
               selectedMaterialFilter: MaterialFilter.empty(),
+              orderDocumentType: OrderDocumentType.empty(),
             )).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
@@ -476,6 +483,7 @@ void main() {
                   mockUser.role.type.isSalesRep ? true : false,
               isForFoc: mockUser.role.type.isSalesRep ? false : true,
               selectedMaterialFilter: MaterialFilter.empty(),
+              orderDocumentType: OrderDocumentType.empty(),
             )).thenAnswer(
           (invocation) async => Right(materialListMock),
         );

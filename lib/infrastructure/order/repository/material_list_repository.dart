@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_list_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/common/app_method.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
@@ -41,6 +42,7 @@ class MaterialListRepository implements IMaterialListRepository {
     required MaterialFilter selectedMaterialFilter,
     bool ispickandpackenabled = false,
     bool isForFoc = false,
+    required OrderDocumentType orderDocumentType,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -73,6 +75,8 @@ class MaterialListRepository implements IMaterialListRepository {
                   selectedMaterialFilter.uniqueTherapeuticClass,
               principalNameList: selectedMaterialFilter.uniquePrincipalName,
               pickAndPack: appMethods.getPickAndPackValue(ispickandpackenabled),
+              isSample: orderDocumentType.isZPFB,
+              isForFOC: orderDocumentType.isZPFC,
             )
           : await materialListRemoteDataSource.getMaterialList(
               salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),

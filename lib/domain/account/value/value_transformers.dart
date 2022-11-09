@@ -305,6 +305,18 @@ String salesOrgTaxCode(String country) {
   }
 }
 
+bool countrySupportOrderType(country) {
+  switch (country) {
+    case 'TH':
+    case 'SG':
+    case 'TW':
+    case 'MY':
+      return true;
+    default:
+      return false;
+  }
+}
+
 // bool isAllCustomerCodeEnabled(String customerCode) {
 //   switch (customerCode) {
 //     case 'all':

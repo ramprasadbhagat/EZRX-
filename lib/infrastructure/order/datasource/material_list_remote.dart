@@ -213,6 +213,8 @@ class MaterialListRemoteDataSource {
     required List<String> principalNameList,
     required List<String> therapeuticClassList,
     required List<String> itemBrandList,
+    required bool isSample,
+    required bool isForFOC,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = materialListQuery.getSalesRepMaterialList();
@@ -234,6 +236,8 @@ class MaterialListRemoteDataSource {
         'principalNameList': principalNameList,
         'therapeuticClassList': therapeuticClassList,
         'itemBrandList': itemBrandList,
+        'isSample' : isSample,
+        'isForFOC' : isForFOC,
       };
       final res = await httpService.request(
         method: 'POST',

@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
@@ -60,6 +61,10 @@ class SalesOrgSelector extends StatelessWidget {
                     salesOrganisation: state.salesOrganisation,
                   ),
                 );
+            context
+              .read<OrderDocumentTypeBloc>()
+              .add(OrderDocumentTypeEvent.fetch(salesOrganisation: state.salesOrganisation,),
+            );
           }
         },
         buildWhen: (previous, current) =>

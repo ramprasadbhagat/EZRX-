@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -73,6 +74,10 @@ class CovidMaterialListBlocMock
     extends MockBloc<CovidMaterialListEvent, CovidMaterialListState>
     implements CovidMaterialListBloc {}
 
+class OrderDocumentTypeBlocMock
+    extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
+    implements OrderDocumentTypeBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialListBloc materialListBlocMock;
@@ -87,6 +92,7 @@ void main() {
   late CovidMaterialListBloc covidMaterialListBlocMock;
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
   late MaterialFilterBloc mockMaterialFilterBloc;
+  late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
 
   setUpAll(() async {
     setupLocator();
@@ -105,6 +111,7 @@ void main() {
       mockMaterialFilterBloc = MockMaterialFilterBloc();
       autoRouterMock = locator<AppRouter>();
       covidMaterialListBlocMock = CovidMaterialListBlocMock();
+      orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
           user: User.empty().copyWith(
         role: Role(
@@ -135,6 +142,8 @@ void main() {
           .thenReturn(MaterialListState.initial());
       when(() => covidMaterialListBlocMock.state)
           .thenReturn(CovidMaterialListState.initial());
+      when(() => orderDocumentTypeBlocMock.state)
+          .thenReturn(OrderDocumentTypeState.initial());
     });
 
     Widget getScopedWidget(Widget child) {
@@ -170,6 +179,8 @@ void main() {
                 create: ((context) => materialListBlocMock)),
             BlocProvider<CovidMaterialListBloc>(
                 create: ((context) => covidMaterialListBlocMock)),
+            BlocProvider<OrderDocumentTypeBloc>(
+                create: ((context) => orderDocumentTypeBlocMock)),
           ],
           child: child,
         ),
