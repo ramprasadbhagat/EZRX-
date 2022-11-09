@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_representative_info.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
@@ -30,6 +31,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late PaymentTermsRepository paymentTermsRepositoryMock;
   late List<PaymentTerm> paymentTermMockData;
+  late List<String> paymentTermDisplayLevelMockData;
 
   final fakeSaleOrganisation = SalesOrganisation.empty().copyWith(
     salesOrg: SalesOrg('fake-1234'),
@@ -77,6 +79,7 @@ void main() {
 
   const fakepaymentCustomerInformation = PaymentCustomerInformation(
     paymentTerm: 'fake-term',
+    shipToInfoList: <ShipToInfo>[],
   );
 
   group('Payment Terms Bloc', () {
@@ -84,6 +87,13 @@ void main() {
       paymentTermsRepositoryMock = PaymentTermsRepoMock();
       paymentTermMockData =
           await PaymentTermLocalDataSource().getPaymentTerms();
+      paymentTermDisplayLevelMockData = paymentTermMockData
+          .where((element) => element.paymentTermCode.isNotEmpty)
+          .map((e) {
+            return '${e.paymentTermCode}-${e.paymentTermDescription}';
+          })
+          .toSet()
+          .toList();
       WidgetsFlutterBinding.ensureInitialized();
     });
     blocTest<PaymentTermBloc, PaymentTermState>(
@@ -159,6 +169,7 @@ void main() {
       expect: () => [
         PaymentTermState.initial().copyWith(
           paymentTerms: paymentTermMockData,
+          paymentTermsDisplayLevels: paymentTermDisplayLevelMockData,
           paymentTermsFailureOrSuccessOption: none(),
         )
       ],

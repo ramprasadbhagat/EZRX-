@@ -5,12 +5,13 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
+import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/order/entities/license_info.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_list_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -215,6 +216,37 @@ List<_OrderSummaryDetails> _getTextRowLevelsForSoldToInfo(
   ];
 }
 
+List<_OrderSummaryDetails> _getTextRowLevelsForLicense(
+  List<LicenseInfo> licenses,
+) {
+  final finalList = licenses.map((license) {
+    return [
+      _OrderSummaryDetails(
+        key: 'License Number'.tr(),
+        value: license.licenseNumber,
+      ),
+      _OrderSummaryDetails(
+        key: 'License Type'.tr(),
+        value: license.licenceType,
+      ),
+      _OrderSummaryDetails(
+        key: 'License Description'.tr(),
+        value: license.licenseDescription,
+      ),
+      _OrderSummaryDetails(
+        key: 'Valid From'.tr(),
+        value: license.validFrom,
+      ),
+      _OrderSummaryDetails(
+        key: 'Valid To'.tr(),
+        value: license.validTo,
+      ),
+    ];
+  }).toList();
+
+  return finalList.expand((element) => element).toList();
+}
+
 List<_OrderSummaryDetails> _getTextRowLevelsForShipToInfo(ShipToInfo ship) {
   return [
     _OrderSummaryDetails(
@@ -238,9 +270,9 @@ List<_OrderSummaryDetails> _getTextRowLevelsForShipToInfo(ShipToInfo ship) {
       key: 'Phone',
       value: ship.telephoneNumber,
     ),
-    const _OrderSummaryDetails(
+    _OrderSummaryDetails(
       key: 'License',
-      value: 'NA',
+      value: 'View license info'.tr(),
     ),
   ];
 }
@@ -316,15 +348,81 @@ class _ShipToAddressStep extends StatelessWidget {
           children: [
             ..._getTextRowLevelsForShipToInfo(state.shipToInfo).map(
               (e) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: BalanceTextRow(
-                    keyText: e.key,
-                    valueText: e.value,
-                    keyFlex: 1,
-                    valueFlex: 1,
-                  ),
-                );
+                return e.key != 'License'
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: BalanceTextRow(
+                          keyText: e.key,
+                          valueText: e.value,
+                          keyFlex: 1,
+                          valueFlex: 1,
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 2.0,
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Text(
+                                  e.key,
+                                  style: const TextStyle(
+                                    color: ZPColors.darkGray,
+                                    fontSize: 12.0,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      builder: (_) {
+                                        return SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.6,
+                                          child: const _LicenseModal(),
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Wrap(children: [
+                                    const Text(
+                                      ': ',
+                                      style: TextStyle(
+                                        color: ZPColors.black,
+                                        fontSize: 12.0,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    Text(
+                                      e.value,
+                                      style: const TextStyle(
+                                        color: ZPColors.secondary,
+                                        fontSize: 12.0,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w600,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
+                                  ]),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
               },
             ),
           ],
@@ -475,46 +573,6 @@ class _CartDetails extends StatelessWidget {
       },
     );
   }
-
-  String _getCurrencyPrice(BuildContext context) {
-    final salesOrg = context.read<SalesOrgBloc>().state.salesOrg;
-    final config = context.read<SalesOrgBloc>().state.configs;
-    final cartItemList = context.read<CartBloc>().state.cartItemList;
-    var sum = 0.0;
-    for (final item in cartItemList) {
-      final totalPrice = context
-          .read<MaterialPriceBloc>()
-          .state
-          .materialPrice[item.materialInfo.materialNumber];
-      if (null != totalPrice) {
-        final unitPrice = totalPrice.finalPrice.getOrCrash();
-        sum += unitPrice * item.quantity;
-      }
-    }
-    final price = salesOrg.country == 'VN'
-        ? '${sum.toStringAsFixed(2)} ${config.currency.getOrCrash()}'
-        : '${config.currency.getOrCrash()} ${sum.toStringAsFixed(2)}';
-
-    return price;
-  }
-
-  bool _isSpecialOrderType(BuildContext context) {
-    final selectedSalesOrg =
-        context.read<SalesOrgBloc>().state.salesOrg.country;
-    //Need To have the orderType
-    const orderType = '';
-    if (selectedSalesOrg != 'TH' &&
-        orderType.isNotEmpty &&
-        orderType.contains('ZPFB')) {
-      return true;
-    } else if (selectedSalesOrg != 'TH' &&
-        orderType.isNotEmpty &&
-        orderType.contains('ZPFC')) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 }
 
 String _displayPrice(SalesOrganisationConfigs salesOrgConfig, double price) {
@@ -572,80 +630,74 @@ class _TextFormField extends StatelessWidget {
   }
 }
 
-class _PaymentTerm extends StatelessWidget {
+class _PaymentTerm extends StatefulWidget {
   const _PaymentTerm({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<_PaymentTerm> createState() => _PaymentTermState();
+}
+
+class _PaymentTermState extends State<_PaymentTerm> {
+  late TextEditingController _controller;
+  @override
+  void initState() {
+    _controller = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PaymentTermBloc, PaymentTermState>(
       builder: (context, state) {
-        return Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: ZPColors.darkGray, width: 2.0),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(10.0),
-            ),
-          ),
-          child: TextButton(
-            onPressed: () => showCupertinoModalPopup<void>(
-              context: context,
-              builder: (BuildContext context) {
-                return PlatformAlertDialog(
-                  title: Text(
-                    'Please Select Payment Term'.tr(),
-                    style: Theme.of(context).textTheme.headline5,
-                  ),
-                  actions: state.paymentTerms
-                      .map<CupertinoActionSheetAction>(
-                        (i) => CupertinoActionSheetAction(
-                          child: Text(
-                            '${i.paymentTermCode}-${i.paymentTermDescription}',
-                            style: const TextStyle(
-                              color: ZPColors.primary,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14,
-                            ),
-                          ),
-                          onPressed: () {
-                            final event = {
-                              'key': 'Select Payment Term',
-                              'count': 1,
-                            };
-                            context.router.pop();
-                            //_changeorderPaymentTerm(i);
+        return TextFormField(
+          controller: _controller,
+          onTap: () => showCupertinoModalPopup<void>(
+            context: context,
+            builder: (BuildContext context) {
+              return PlatformAlertDialog(
+                title: const Text('Please Select Payment Term').tr(),
+                actions: state.paymentTermsDisplayLevels.map((e) {
+                  return e.isNotEmpty
+                      ? PlatformDialogAction(
+                          key: Key('paymentterm-$e'),
+                          child: Text(e),
+                          onPressed: () async {
+                            _controller.text = e;
+                            await context.router.pop();
                           },
-                        ),
-                      )
-                      .toList(),
-                );
-              },
+                        )
+                      : const SizedBox.shrink();
+                }).toList(),
+              );
+            },
+          ),
+          readOnly: true,
+          decoration: InputDecoration(
+            floatingLabelBehavior: FloatingLabelBehavior.never,
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+            border: InputBorder.none,
+            labelText: 'Select Payment Term'.tr(),
+            labelStyle: const TextStyle(fontSize: 12.0),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: ZPColors.primary, width: 2.0),
+              borderRadius: BorderRadius.all(
+                Radius.circular(10.0),
+              ),
             ),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'Select Payment Term'.tr(),
-                              style: const TextStyle(
-                                color: ZPColors.lightGray,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 12,
-                                fontFamily: 'Poppins',
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: ZPColors.darkGray, width: 2.0),
+              borderRadius: BorderRadius.all(
+                Radius.circular(10.0),
+              ),
             ),
           ),
         );
@@ -666,11 +718,11 @@ class _DatePickerField extends StatefulWidget {
 }
 
 class _DatePickerFieldState extends State<_DatePickerField> {
-  late TextEditingController _controller;
+  late TextEditingController controller;
 
   @override
   void initState() {
-    _controller = TextEditingController.fromValue(TextEditingValue(
+    controller = TextEditingController.fromValue(TextEditingValue(
       text: widget.futureDeliveryDay.isEmpty
           ? DateFormat('yyyy-MM-dd')
               .format(DateTime.now().add(const Duration(days: 1)))
@@ -682,7 +734,7 @@ class _DatePickerFieldState extends State<_DatePickerField> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    controller.dispose();
     super.dispose();
   }
 
@@ -697,13 +749,13 @@ class _DatePickerFieldState extends State<_DatePickerField> {
               widget.futureDeliveryDay,
               context,
             );
-            _controller.text = DateFormat('yyyy-MM-dd').format(dateTime);
+            controller.text = DateFormat('yyyy-MM-dd').format(dateTime);
           },
           child: IgnorePointer(
             child: TextFormField(
               enabled: true,
               keyboardType: TextInputType.datetime,
-              controller: _controller,
+              controller: controller,
               decoration: InputDecoration(
                 floatingLabelBehavior: FloatingLabelBehavior.never,
                 contentPadding: const EdgeInsets.symmetric(
@@ -739,23 +791,6 @@ class _DatePickerFieldState extends State<_DatePickerField> {
     );
   }
 
-  bool dateSelectionPredicate(day, enableFutureDevlieryDay, futureDeliveryDay) {
-    if (enableFutureDevlieryDay) {
-      if (day.difference(DateTime.now()).inDays <=
-          int.parse(futureDeliveryDay) - 1) {
-        return true;
-      }
-
-      return false;
-    } else {
-      if (day.difference(DateTime.now()).inDays == 0) {
-        return true;
-      }
-
-      return false;
-    }
-  }
-
   Future<DateTime> getDateFromDatePicker(
     enableFutureDevlieryDay,
     futureDeliveryDay,
@@ -767,21 +802,57 @@ class _DatePickerFieldState extends State<_DatePickerField> {
       lastDate: DateTime.now().add(const Duration(days: 100)),
       initialDate: DateTime.now(),
     );
-    /*final orderDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(), //checkoutdate
-      firstDate: DateTime.now().subtract(const Duration(days: 0)),
-      lastDate: DateTime(2030),
-      selectableDayPredicate: (DateTime day) => dateSelectionPredicate(
-        day,
-        enableFutureDevlieryDay,
-        futureDeliveryDay,
-      ),
-      builder: (context, child) {
-        return child!;
-      },
-    );*/
 
     return orderDate ?? DateTime.now();
+  }
+}
+
+class _LicenseModal extends StatelessWidget {
+  const _LicenseModal({
+    Key? key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        title: Text(
+          'Licenses'.tr(),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: BlocBuilder<PaymentCustomerInformationBloc,
+            PaymentCustomerInformationState>(
+          buildWhen: (previous, current) => previous != current,
+          builder: (context, state) {
+            return ListView.separated(
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                  ),
+                  child: BalanceTextRow(
+                    keyText:
+                        _getTextRowLevelsForLicense(state.licenses)[index].key,
+                    valueText:
+                        _getTextRowLevelsForLicense(state.licenses)[index]
+                            .value,
+                    keyFlex: 1,
+                    valueFlex: 1,
+                  ),
+                );
+              },
+              separatorBuilder: (context, index) {
+                return (index + 1) % 5 == 0
+                    ? const Divider()
+                    : const SizedBox.shrink();
+              },
+              itemCount: _getTextRowLevelsForLicense(state.licenses).length,
+            );
+          },
+        ),
+      ),
+    );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/account/entities/ship_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
+import 'package:ezrxmobile/domain/order/entities/license_info.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'ship_to_info.freezed.dart';
@@ -23,6 +24,7 @@ class ShipToInfo with _$ShipToInfo {
     required String region,
     required String floor,
     required String plant,
+    required List<LicenseInfo> licenses,
   }) = _ShipToInfo;
 
   factory ShipToInfo.empty() => const ShipToInfo(
@@ -51,5 +53,6 @@ class ShipToInfo with _$ShipToInfo {
         city2: '',
         floor: '',
         building: '',
+        licenses: <LicenseInfo>[],
       );
 }

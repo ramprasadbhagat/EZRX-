@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$PaymentCustomerInformation {
   String get paymentTerm => throw _privateConstructorUsedError;
+  List<ShipToInfo> get shipToInfoList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PaymentCustomerInformationCopyWith<PaymentCustomerInformation>
@@ -28,7 +29,7 @@ abstract class $PaymentCustomerInformationCopyWith<$Res> {
   factory $PaymentCustomerInformationCopyWith(PaymentCustomerInformation value,
           $Res Function(PaymentCustomerInformation) then) =
       _$PaymentCustomerInformationCopyWithImpl<$Res>;
-  $Res call({String paymentTerm});
+  $Res call({String paymentTerm, List<ShipToInfo> shipToInfoList});
 }
 
 /// @nodoc
@@ -43,12 +44,17 @@ class _$PaymentCustomerInformationCopyWithImpl<$Res>
   @override
   $Res call({
     Object? paymentTerm = freezed,
+    Object? shipToInfoList = freezed,
   }) {
     return _then(_value.copyWith(
       paymentTerm: paymentTerm == freezed
           ? _value.paymentTerm
           : paymentTerm // ignore: cast_nullable_to_non_nullable
               as String,
+      shipToInfoList: shipToInfoList == freezed
+          ? _value.shipToInfoList
+          : shipToInfoList // ignore: cast_nullable_to_non_nullable
+              as List<ShipToInfo>,
     ));
   }
 }
@@ -61,7 +67,7 @@ abstract class _$$_PaymentCustomerInformationCopyWith<$Res>
           $Res Function(_$_PaymentCustomerInformation) then) =
       __$$_PaymentCustomerInformationCopyWithImpl<$Res>;
   @override
-  $Res call({String paymentTerm});
+  $Res call({String paymentTerm, List<ShipToInfo> shipToInfoList});
 }
 
 /// @nodoc
@@ -80,12 +86,17 @@ class __$$_PaymentCustomerInformationCopyWithImpl<$Res>
   @override
   $Res call({
     Object? paymentTerm = freezed,
+    Object? shipToInfoList = freezed,
   }) {
     return _then(_$_PaymentCustomerInformation(
       paymentTerm: paymentTerm == freezed
           ? _value.paymentTerm
           : paymentTerm // ignore: cast_nullable_to_non_nullable
               as String,
+      shipToInfoList: shipToInfoList == freezed
+          ? _value._shipToInfoList
+          : shipToInfoList // ignore: cast_nullable_to_non_nullable
+              as List<ShipToInfo>,
     ));
   }
 }
@@ -93,14 +104,24 @@ class __$$_PaymentCustomerInformationCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_PaymentCustomerInformation extends _PaymentCustomerInformation {
-  const _$_PaymentCustomerInformation({required this.paymentTerm}) : super._();
+  const _$_PaymentCustomerInformation(
+      {required this.paymentTerm,
+      required final List<ShipToInfo> shipToInfoList})
+      : _shipToInfoList = shipToInfoList,
+        super._();
 
   @override
   final String paymentTerm;
+  final List<ShipToInfo> _shipToInfoList;
+  @override
+  List<ShipToInfo> get shipToInfoList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_shipToInfoList);
+  }
 
   @override
   String toString() {
-    return 'PaymentCustomerInformation(paymentTerm: $paymentTerm)';
+    return 'PaymentCustomerInformation(paymentTerm: $paymentTerm, shipToInfoList: $shipToInfoList)';
   }
 
   @override
@@ -109,12 +130,16 @@ class _$_PaymentCustomerInformation extends _PaymentCustomerInformation {
         (other.runtimeType == runtimeType &&
             other is _$_PaymentCustomerInformation &&
             const DeepCollectionEquality()
-                .equals(other.paymentTerm, paymentTerm));
+                .equals(other.paymentTerm, paymentTerm) &&
+            const DeepCollectionEquality()
+                .equals(other._shipToInfoList, _shipToInfoList));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(paymentTerm));
+      runtimeType,
+      const DeepCollectionEquality().hash(paymentTerm),
+      const DeepCollectionEquality().hash(_shipToInfoList));
 
   @JsonKey(ignore: true)
   @override
@@ -125,11 +150,15 @@ class _$_PaymentCustomerInformation extends _PaymentCustomerInformation {
 
 abstract class _PaymentCustomerInformation extends PaymentCustomerInformation {
   const factory _PaymentCustomerInformation(
-      {required final String paymentTerm}) = _$_PaymentCustomerInformation;
+          {required final String paymentTerm,
+          required final List<ShipToInfo> shipToInfoList}) =
+      _$_PaymentCustomerInformation;
   const _PaymentCustomerInformation._() : super._();
 
   @override
   String get paymentTerm;
+  @override
+  List<ShipToInfo> get shipToInfoList;
   @override
   @JsonKey(ignore: true)
   _$$_PaymentCustomerInformationCopyWith<_$_PaymentCustomerInformation>

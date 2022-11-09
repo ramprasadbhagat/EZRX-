@@ -30,6 +30,7 @@ mixin _$ShipToInfo {
   String get region => throw _privateConstructorUsedError;
   String get floor => throw _privateConstructorUsedError;
   String get plant => throw _privateConstructorUsedError;
+  List<LicenseInfo> get licenses => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ShipToInfoCopyWith<ShipToInfo> get copyWith =>
@@ -55,7 +56,8 @@ abstract class $ShipToInfoCopyWith<$Res> {
       String telephoneNumber,
       String region,
       String floor,
-      String plant});
+      String plant,
+      List<LicenseInfo> licenses});
 
   $ShipToNameCopyWith<$Res> get shipToName;
   $ShipToAddressCopyWith<$Res> get shipToAddress;
@@ -85,6 +87,7 @@ class _$ShipToInfoCopyWithImpl<$Res> implements $ShipToInfoCopyWith<$Res> {
     Object? region = freezed,
     Object? floor = freezed,
     Object? plant = freezed,
+    Object? licenses = freezed,
   }) {
     return _then(_value.copyWith(
       defaultShipToAddress: defaultShipToAddress == freezed
@@ -143,6 +146,10 @@ class _$ShipToInfoCopyWithImpl<$Res> implements $ShipToInfoCopyWith<$Res> {
           ? _value.plant
           : plant // ignore: cast_nullable_to_non_nullable
               as String,
+      licenses: licenses == freezed
+          ? _value.licenses
+          : licenses // ignore: cast_nullable_to_non_nullable
+              as List<LicenseInfo>,
     ));
   }
 
@@ -182,7 +189,8 @@ abstract class _$$_ShipToInfoCopyWith<$Res>
       String telephoneNumber,
       String region,
       String floor,
-      String plant});
+      String plant,
+      List<LicenseInfo> licenses});
 
   @override
   $ShipToNameCopyWith<$Res> get shipToName;
@@ -216,6 +224,7 @@ class __$$_ShipToInfoCopyWithImpl<$Res> extends _$ShipToInfoCopyWithImpl<$Res>
     Object? region = freezed,
     Object? floor = freezed,
     Object? plant = freezed,
+    Object? licenses = freezed,
   }) {
     return _then(_$_ShipToInfo(
       defaultShipToAddress: defaultShipToAddress == freezed
@@ -274,6 +283,10 @@ class __$$_ShipToInfoCopyWithImpl<$Res> extends _$ShipToInfoCopyWithImpl<$Res>
           ? _value.plant
           : plant // ignore: cast_nullable_to_non_nullable
               as String,
+      licenses: licenses == freezed
+          ? _value._licenses
+          : licenses // ignore: cast_nullable_to_non_nullable
+              as List<LicenseInfo>,
     ));
   }
 }
@@ -295,8 +308,10 @@ class _$_ShipToInfo extends _ShipToInfo {
       required this.telephoneNumber,
       required this.region,
       required this.floor,
-      required this.plant})
-      : super._();
+      required this.plant,
+      required final List<LicenseInfo> licenses})
+      : _licenses = licenses,
+        super._();
 
   @override
   final bool defaultShipToAddress;
@@ -326,10 +341,16 @@ class _$_ShipToInfo extends _ShipToInfo {
   final String floor;
   @override
   final String plant;
+  final List<LicenseInfo> _licenses;
+  @override
+  List<LicenseInfo> get licenses {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_licenses);
+  }
 
   @override
   String toString() {
-    return 'ShipToInfo(defaultShipToAddress: $defaultShipToAddress, shipToCustomerCode: $shipToCustomerCode, shipToName: $shipToName, shipToAddress: $shipToAddress, status: $status, building: $building, city1: $city1, city2: $city2, postalCode: $postalCode, houseNumber1: $houseNumber1, telephoneNumber: $telephoneNumber, region: $region, floor: $floor, plant: $plant)';
+    return 'ShipToInfo(defaultShipToAddress: $defaultShipToAddress, shipToCustomerCode: $shipToCustomerCode, shipToName: $shipToName, shipToAddress: $shipToAddress, status: $status, building: $building, city1: $city1, city2: $city2, postalCode: $postalCode, houseNumber1: $houseNumber1, telephoneNumber: $telephoneNumber, region: $region, floor: $floor, plant: $plant, licenses: $licenses)';
   }
 
   @override
@@ -357,7 +378,8 @@ class _$_ShipToInfo extends _ShipToInfo {
                 .equals(other.telephoneNumber, telephoneNumber) &&
             const DeepCollectionEquality().equals(other.region, region) &&
             const DeepCollectionEquality().equals(other.floor, floor) &&
-            const DeepCollectionEquality().equals(other.plant, plant));
+            const DeepCollectionEquality().equals(other.plant, plant) &&
+            const DeepCollectionEquality().equals(other._licenses, _licenses));
   }
 
   @override
@@ -376,7 +398,8 @@ class _$_ShipToInfo extends _ShipToInfo {
       const DeepCollectionEquality().hash(telephoneNumber),
       const DeepCollectionEquality().hash(region),
       const DeepCollectionEquality().hash(floor),
-      const DeepCollectionEquality().hash(plant));
+      const DeepCollectionEquality().hash(plant),
+      const DeepCollectionEquality().hash(_licenses));
 
   @JsonKey(ignore: true)
   @override
@@ -399,7 +422,8 @@ abstract class _ShipToInfo extends ShipToInfo {
       required final String telephoneNumber,
       required final String region,
       required final String floor,
-      required final String plant}) = _$_ShipToInfo;
+      required final String plant,
+      required final List<LicenseInfo> licenses}) = _$_ShipToInfo;
   const _ShipToInfo._() : super._();
 
   @override
@@ -430,6 +454,8 @@ abstract class _ShipToInfo extends ShipToInfo {
   String get floor;
   @override
   String get plant;
+  @override
+  List<LicenseInfo> get licenses;
   @override
   @JsonKey(ignore: true)
   _$$_ShipToInfoCopyWith<_$_ShipToInfo> get copyWith =>

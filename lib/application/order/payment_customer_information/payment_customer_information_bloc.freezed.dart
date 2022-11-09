@@ -20,7 +20,7 @@ mixin _$PaymentCustomerInformationEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(CustomerCodeInfo customeCodeInfo,
-            SalesOrganisation salesOrganisation)
+            SalesOrganisation salesOrganisation, String selectedShipToCode)
         fetch,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$PaymentCustomerInformationEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customeCodeInfo,
-            SalesOrganisation salesOrganisation)?
+            SalesOrganisation salesOrganisation, String selectedShipToCode)?
         fetch,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$PaymentCustomerInformationEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customeCodeInfo,
-            SalesOrganisation salesOrganisation)?
+            SalesOrganisation salesOrganisation, String selectedShipToCode)?
         fetch,
     required TResult orElse(),
   }) =>
@@ -123,7 +123,7 @@ class _$_Initialized implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(CustomerCodeInfo customeCodeInfo,
-            SalesOrganisation salesOrganisation)
+            SalesOrganisation salesOrganisation, String selectedShipToCode)
         fetch,
   }) {
     return initialized();
@@ -134,7 +134,7 @@ class _$_Initialized implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customeCodeInfo,
-            SalesOrganisation salesOrganisation)?
+            SalesOrganisation salesOrganisation, String selectedShipToCode)?
         fetch,
   }) {
     return initialized?.call();
@@ -145,7 +145,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customeCodeInfo,
-            SalesOrganisation salesOrganisation)?
+            SalesOrganisation salesOrganisation, String selectedShipToCode)?
         fetch,
     required TResult orElse(),
   }) {
@@ -196,7 +196,9 @@ abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
   $Res call(
-      {CustomerCodeInfo customeCodeInfo, SalesOrganisation salesOrganisation});
+      {CustomerCodeInfo customeCodeInfo,
+      SalesOrganisation salesOrganisation,
+      String selectedShipToCode});
 
   $CustomerCodeInfoCopyWith<$Res> get customeCodeInfo;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -216,6 +218,7 @@ class __$$_FetchCopyWithImpl<$Res>
   $Res call({
     Object? customeCodeInfo = freezed,
     Object? salesOrganisation = freezed,
+    Object? selectedShipToCode = freezed,
   }) {
     return _then(_$_Fetch(
       customeCodeInfo: customeCodeInfo == freezed
@@ -226,6 +229,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
+      selectedShipToCode: selectedShipToCode == freezed
+          ? _value.selectedShipToCode
+          : selectedShipToCode // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -248,16 +255,20 @@ class __$$_FetchCopyWithImpl<$Res>
 
 class _$_Fetch implements _Fetch {
   const _$_Fetch(
-      {required this.customeCodeInfo, required this.salesOrganisation});
+      {required this.customeCodeInfo,
+      required this.salesOrganisation,
+      required this.selectedShipToCode});
 
   @override
   final CustomerCodeInfo customeCodeInfo;
   @override
   final SalesOrganisation salesOrganisation;
+  @override
+  final String selectedShipToCode;
 
   @override
   String toString() {
-    return 'PaymentCustomerInformationEvent.fetch(customeCodeInfo: $customeCodeInfo, salesOrganisation: $salesOrganisation)';
+    return 'PaymentCustomerInformationEvent.fetch(customeCodeInfo: $customeCodeInfo, salesOrganisation: $salesOrganisation, selectedShipToCode: $selectedShipToCode)';
   }
 
   @override
@@ -268,14 +279,17 @@ class _$_Fetch implements _Fetch {
             const DeepCollectionEquality()
                 .equals(other.customeCodeInfo, customeCodeInfo) &&
             const DeepCollectionEquality()
-                .equals(other.salesOrganisation, salesOrganisation));
+                .equals(other.salesOrganisation, salesOrganisation) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedShipToCode, selectedShipToCode));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(customeCodeInfo),
-      const DeepCollectionEquality().hash(salesOrganisation));
+      const DeepCollectionEquality().hash(salesOrganisation),
+      const DeepCollectionEquality().hash(selectedShipToCode));
 
   @JsonKey(ignore: true)
   @override
@@ -287,10 +301,10 @@ class _$_Fetch implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(CustomerCodeInfo customeCodeInfo,
-            SalesOrganisation salesOrganisation)
+            SalesOrganisation salesOrganisation, String selectedShipToCode)
         fetch,
   }) {
-    return fetch(customeCodeInfo, salesOrganisation);
+    return fetch(customeCodeInfo, salesOrganisation, selectedShipToCode);
   }
 
   @override
@@ -298,10 +312,10 @@ class _$_Fetch implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customeCodeInfo,
-            SalesOrganisation salesOrganisation)?
+            SalesOrganisation salesOrganisation, String selectedShipToCode)?
         fetch,
   }) {
-    return fetch?.call(customeCodeInfo, salesOrganisation);
+    return fetch?.call(customeCodeInfo, salesOrganisation, selectedShipToCode);
   }
 
   @override
@@ -309,12 +323,12 @@ class _$_Fetch implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customeCodeInfo,
-            SalesOrganisation salesOrganisation)?
+            SalesOrganisation salesOrganisation, String selectedShipToCode)?
         fetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(customeCodeInfo, salesOrganisation);
+      return fetch(customeCodeInfo, salesOrganisation, selectedShipToCode);
     }
     return orElse();
   }
@@ -354,10 +368,12 @@ class _$_Fetch implements _Fetch {
 abstract class _Fetch implements PaymentCustomerInformationEvent {
   const factory _Fetch(
       {required final CustomerCodeInfo customeCodeInfo,
-      required final SalesOrganisation salesOrganisation}) = _$_Fetch;
+      required final SalesOrganisation salesOrganisation,
+      required final String selectedShipToCode}) = _$_Fetch;
 
   CustomerCodeInfo get customeCodeInfo;
   SalesOrganisation get salesOrganisation;
+  String get selectedShipToCode;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -367,6 +383,7 @@ abstract class _Fetch implements PaymentCustomerInformationEvent {
 mixin _$PaymentCustomerInformationState {
   PaymentCustomerInformation get paymentCustomerInformation =>
       throw _privateConstructorUsedError;
+  List<LicenseInfo> get licenses => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>>
       get paymentCustomerInformationFailureOrSuccessOption =>
           throw _privateConstructorUsedError;
@@ -384,6 +401,7 @@ abstract class $PaymentCustomerInformationStateCopyWith<$Res> {
       _$PaymentCustomerInformationStateCopyWithImpl<$Res>;
   $Res call(
       {PaymentCustomerInformation paymentCustomerInformation,
+      List<LicenseInfo> licenses,
       Option<Either<ApiFailure, dynamic>>
           paymentCustomerInformationFailureOrSuccessOption});
 
@@ -402,6 +420,7 @@ class _$PaymentCustomerInformationStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? paymentCustomerInformation = freezed,
+    Object? licenses = freezed,
     Object? paymentCustomerInformationFailureOrSuccessOption = freezed,
   }) {
     return _then(_value.copyWith(
@@ -409,6 +428,10 @@ class _$PaymentCustomerInformationStateCopyWithImpl<$Res>
           ? _value.paymentCustomerInformation
           : paymentCustomerInformation // ignore: cast_nullable_to_non_nullable
               as PaymentCustomerInformation,
+      licenses: licenses == freezed
+          ? _value.licenses
+          : licenses // ignore: cast_nullable_to_non_nullable
+              as List<LicenseInfo>,
       paymentCustomerInformationFailureOrSuccessOption:
           paymentCustomerInformationFailureOrSuccessOption == freezed
               ? _value.paymentCustomerInformationFailureOrSuccessOption
@@ -436,6 +459,7 @@ abstract class _$$_PaymentCustomerInformationStateCopyWith<$Res>
   @override
   $Res call(
       {PaymentCustomerInformation paymentCustomerInformation,
+      List<LicenseInfo> licenses,
       Option<Either<ApiFailure, dynamic>>
           paymentCustomerInformationFailureOrSuccessOption});
 
@@ -459,6 +483,7 @@ class __$$_PaymentCustomerInformationStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? paymentCustomerInformation = freezed,
+    Object? licenses = freezed,
     Object? paymentCustomerInformationFailureOrSuccessOption = freezed,
   }) {
     return _then(_$_PaymentCustomerInformationState(
@@ -466,6 +491,10 @@ class __$$_PaymentCustomerInformationStateCopyWithImpl<$Res>
           ? _value.paymentCustomerInformation
           : paymentCustomerInformation // ignore: cast_nullable_to_non_nullable
               as PaymentCustomerInformation,
+      licenses: licenses == freezed
+          ? _value._licenses
+          : licenses // ignore: cast_nullable_to_non_nullable
+              as List<LicenseInfo>,
       paymentCustomerInformationFailureOrSuccessOption:
           paymentCustomerInformationFailureOrSuccessOption == freezed
               ? _value.paymentCustomerInformationFailureOrSuccessOption
@@ -481,18 +510,27 @@ class _$_PaymentCustomerInformationState
     extends _PaymentCustomerInformationState {
   const _$_PaymentCustomerInformationState(
       {required this.paymentCustomerInformation,
+      required final List<LicenseInfo> licenses,
       required this.paymentCustomerInformationFailureOrSuccessOption})
-      : super._();
+      : _licenses = licenses,
+        super._();
 
   @override
   final PaymentCustomerInformation paymentCustomerInformation;
+  final List<LicenseInfo> _licenses;
+  @override
+  List<LicenseInfo> get licenses {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_licenses);
+  }
+
   @override
   final Option<Either<ApiFailure, dynamic>>
       paymentCustomerInformationFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'PaymentCustomerInformationState(paymentCustomerInformation: $paymentCustomerInformation, paymentCustomerInformationFailureOrSuccessOption: $paymentCustomerInformationFailureOrSuccessOption)';
+    return 'PaymentCustomerInformationState(paymentCustomerInformation: $paymentCustomerInformation, licenses: $licenses, paymentCustomerInformationFailureOrSuccessOption: $paymentCustomerInformationFailureOrSuccessOption)';
   }
 
   @override
@@ -502,6 +540,7 @@ class _$_PaymentCustomerInformationState
             other is _$_PaymentCustomerInformationState &&
             const DeepCollectionEquality().equals(
                 other.paymentCustomerInformation, paymentCustomerInformation) &&
+            const DeepCollectionEquality().equals(other._licenses, _licenses) &&
             const DeepCollectionEquality().equals(
                 other.paymentCustomerInformationFailureOrSuccessOption,
                 paymentCustomerInformationFailureOrSuccessOption));
@@ -511,6 +550,7 @@ class _$_PaymentCustomerInformationState
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(paymentCustomerInformation),
+      const DeepCollectionEquality().hash(_licenses),
       const DeepCollectionEquality()
           .hash(paymentCustomerInformationFailureOrSuccessOption));
 
@@ -526,6 +566,7 @@ abstract class _PaymentCustomerInformationState
     extends PaymentCustomerInformationState {
   const factory _PaymentCustomerInformationState(
           {required final PaymentCustomerInformation paymentCustomerInformation,
+          required final List<LicenseInfo> licenses,
           required final Option<Either<ApiFailure, dynamic>>
               paymentCustomerInformationFailureOrSuccessOption}) =
       _$_PaymentCustomerInformationState;
@@ -533,6 +574,8 @@ abstract class _PaymentCustomerInformationState
 
   @override
   PaymentCustomerInformation get paymentCustomerInformation;
+  @override
+  List<LicenseInfo> get licenses;
   @override
   Option<Either<ApiFailure, dynamic>>
       get paymentCustomerInformationFailureOrSuccessOption;

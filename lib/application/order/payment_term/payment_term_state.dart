@@ -4,6 +4,7 @@ part of 'payment_term_bloc.dart';
 class PaymentTermState with _$PaymentTermState {
   const factory PaymentTermState({
     required List<PaymentTerm> paymentTerms,
+    required List<String> paymentTermsDisplayLevels,
     required bool isFetching,
     required Option<Either<ApiFailure, dynamic>>
         paymentTermsFailureOrSuccessOption,
@@ -11,6 +12,7 @@ class PaymentTermState with _$PaymentTermState {
 
   factory PaymentTermState.initial() => PaymentTermState(
         paymentTerms: <PaymentTerm>[],
+        paymentTermsDisplayLevels: <String>[],
         isFetching: false,
         paymentTermsFailureOrSuccessOption: none(),
       );

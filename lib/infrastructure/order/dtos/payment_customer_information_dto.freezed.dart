@@ -23,6 +23,8 @@ PaymentCustomerInformationDto _$PaymentCustomerInformationDtoFromJson(
 mixin _$PaymentCustomerInformationDto {
   @JsonKey(name: 'paymentTerm')
   String get paymentTerm => throw _privateConstructorUsedError;
+  @JsonKey(name: 'shipTo')
+  List<ShipToDto> get shipToDtoList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +38,9 @@ abstract class $PaymentCustomerInformationDtoCopyWith<$Res> {
           PaymentCustomerInformationDto value,
           $Res Function(PaymentCustomerInformationDto) then) =
       _$PaymentCustomerInformationDtoCopyWithImpl<$Res>;
-  $Res call({@JsonKey(name: 'paymentTerm') String paymentTerm});
+  $Res call(
+      {@JsonKey(name: 'paymentTerm') String paymentTerm,
+      @JsonKey(name: 'shipTo') List<ShipToDto> shipToDtoList});
 }
 
 /// @nodoc
@@ -51,12 +55,17 @@ class _$PaymentCustomerInformationDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? paymentTerm = freezed,
+    Object? shipToDtoList = freezed,
   }) {
     return _then(_value.copyWith(
       paymentTerm: paymentTerm == freezed
           ? _value.paymentTerm
           : paymentTerm // ignore: cast_nullable_to_non_nullable
               as String,
+      shipToDtoList: shipToDtoList == freezed
+          ? _value.shipToDtoList
+          : shipToDtoList // ignore: cast_nullable_to_non_nullable
+              as List<ShipToDto>,
     ));
   }
 }
@@ -69,7 +78,9 @@ abstract class _$$_PaymentCustomerInformationDtoCopyWith<$Res>
           $Res Function(_$_PaymentCustomerInformationDto) then) =
       __$$_PaymentCustomerInformationDtoCopyWithImpl<$Res>;
   @override
-  $Res call({@JsonKey(name: 'paymentTerm') String paymentTerm});
+  $Res call(
+      {@JsonKey(name: 'paymentTerm') String paymentTerm,
+      @JsonKey(name: 'shipTo') List<ShipToDto> shipToDtoList});
 }
 
 /// @nodoc
@@ -88,12 +99,17 @@ class __$$_PaymentCustomerInformationDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? paymentTerm = freezed,
+    Object? shipToDtoList = freezed,
   }) {
     return _then(_$_PaymentCustomerInformationDto(
       paymentTerm: paymentTerm == freezed
           ? _value.paymentTerm
           : paymentTerm // ignore: cast_nullable_to_non_nullable
               as String,
+      shipToDtoList: shipToDtoList == freezed
+          ? _value._shipToDtoList
+          : shipToDtoList // ignore: cast_nullable_to_non_nullable
+              as List<ShipToDto>,
     ));
   }
 }
@@ -102,8 +118,10 @@ class __$$_PaymentCustomerInformationDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PaymentCustomerInformationDto extends _PaymentCustomerInformationDto {
   const _$_PaymentCustomerInformationDto(
-      {@JsonKey(name: 'paymentTerm') required this.paymentTerm})
-      : super._();
+      {@JsonKey(name: 'paymentTerm') required this.paymentTerm,
+      @JsonKey(name: 'shipTo') required final List<ShipToDto> shipToDtoList})
+      : _shipToDtoList = shipToDtoList,
+        super._();
 
   factory _$_PaymentCustomerInformationDto.fromJson(
           Map<String, dynamic> json) =>
@@ -112,10 +130,17 @@ class _$_PaymentCustomerInformationDto extends _PaymentCustomerInformationDto {
   @override
   @JsonKey(name: 'paymentTerm')
   final String paymentTerm;
+  final List<ShipToDto> _shipToDtoList;
+  @override
+  @JsonKey(name: 'shipTo')
+  List<ShipToDto> get shipToDtoList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_shipToDtoList);
+  }
 
   @override
   String toString() {
-    return 'PaymentCustomerInformationDto(paymentTerm: $paymentTerm)';
+    return 'PaymentCustomerInformationDto(paymentTerm: $paymentTerm, shipToDtoList: $shipToDtoList)';
   }
 
   @override
@@ -124,13 +149,17 @@ class _$_PaymentCustomerInformationDto extends _PaymentCustomerInformationDto {
         (other.runtimeType == runtimeType &&
             other is _$_PaymentCustomerInformationDto &&
             const DeepCollectionEquality()
-                .equals(other.paymentTerm, paymentTerm));
+                .equals(other.paymentTerm, paymentTerm) &&
+            const DeepCollectionEquality()
+                .equals(other._shipToDtoList, _shipToDtoList));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(paymentTerm));
+      runtimeType,
+      const DeepCollectionEquality().hash(paymentTerm),
+      const DeepCollectionEquality().hash(_shipToDtoList));
 
   @JsonKey(ignore: true)
   @override
@@ -149,7 +178,10 @@ class _$_PaymentCustomerInformationDto extends _PaymentCustomerInformationDto {
 abstract class _PaymentCustomerInformationDto
     extends PaymentCustomerInformationDto {
   const factory _PaymentCustomerInformationDto(
-          {@JsonKey(name: 'paymentTerm') required final String paymentTerm}) =
+          {@JsonKey(name: 'paymentTerm')
+              required final String paymentTerm,
+          @JsonKey(name: 'shipTo')
+              required final List<ShipToDto> shipToDtoList}) =
       _$_PaymentCustomerInformationDto;
   const _PaymentCustomerInformationDto._() : super._();
 
@@ -159,6 +191,9 @@ abstract class _PaymentCustomerInformationDto
   @override
   @JsonKey(name: 'paymentTerm')
   String get paymentTerm;
+  @override
+  @JsonKey(name: 'shipTo')
+  List<ShipToDto> get shipToDtoList;
   @override
   @JsonKey(ignore: true)
   _$$_PaymentCustomerInformationDtoCopyWith<_$_PaymentCustomerInformationDto>

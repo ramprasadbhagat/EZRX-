@@ -24,10 +24,14 @@ _$_ShipToDto _$$_ShipToDtoFromJson(Map<String, dynamic> json) => _$_ShipToDto(
       city2: json['city2'] as String,
       telephoneNumber: json['telephoneNumber'] as String,
       houseNumber1: json['houseNumber1'] as String,
-      building: json['building'] as String,
-      region: json['region'] as String,
-      floor: json['floor'] as String,
+      building: json['building'] as String? ?? '',
+      region: json['region'] as String? ?? '',
+      floor: json['floor'] as String? ?? '',
       plant: json['plant'] as String,
+      licenseDtoList: (json['licenses'] as List<dynamic>?)
+              ?.map((e) => LicenseDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$$_ShipToDtoToJson(_$_ShipToDto instance) =>
@@ -53,4 +57,5 @@ Map<String, dynamic> _$$_ShipToDtoToJson(_$_ShipToDto instance) =>
       'region': instance.region,
       'floor': instance.floor,
       'plant': instance.plant,
+      'licenses': instance.licenseDtoList,
     };

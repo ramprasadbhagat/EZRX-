@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
@@ -24,6 +25,8 @@ void main() {
   late SalesOrganisation fakeSaleOrganisation;
 
   late CustomerCodeInfo fakeCustomerCodeInfo;
+
+  late String fakeshipToCustomerCode;
   setUpAll(() {
     WidgetsFlutterBinding.ensureInitialized();
     paymentCustomerInformationRepositoryMock = PaymentCustomerInfoRepoMock();
@@ -33,6 +36,7 @@ void main() {
     fakeSaleOrganisation = SalesOrganisation.empty().copyWith(
       salesOrg: SalesOrg('fake-1234'),
     );
+    fakeshipToCustomerCode = 'fake-1234';
   });
 
   group('Payment Customer Information Bloc', () {
@@ -69,12 +73,16 @@ void main() {
         );
       },
       act: (bloc) => bloc.add(PaymentCustomerInformationEvent.fetch(
-          customeCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSaleOrganisation)),
+        customeCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeSaleOrganisation,
+        selectedShipToCode: fakeshipToCustomerCode,
+      )),
       expect: () => [
         PaymentCustomerInformationState.initial().copyWith(
-          paymentCustomerInformation:
-              const PaymentCustomerInformation(paymentTerm: ''),
+          paymentCustomerInformation: const PaymentCustomerInformation(
+            paymentTerm: '',
+            shipToInfoList: <ShipToInfo>[],
+          ),
           paymentCustomerInformationFailureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),
@@ -99,8 +107,10 @@ void main() {
         );
       },
       act: (bloc) => bloc.add(PaymentCustomerInformationEvent.fetch(
-          customeCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSaleOrganisation)),
+        customeCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeSaleOrganisation,
+        selectedShipToCode: fakeshipToCustomerCode,
+      )),
       expect: () => [
         PaymentCustomerInformationState.initial().copyWith(
           paymentCustomerInformation: paymentCustomerInformationMockData,

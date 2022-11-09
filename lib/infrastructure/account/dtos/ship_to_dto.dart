@@ -1,6 +1,8 @@
 import 'package:ezrxmobile/domain/account/entities/ship_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
+import 'package:ezrxmobile/domain/order/entities/license_info.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/license_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'ship_to_dto.freezed.dart';
@@ -27,10 +29,12 @@ class ShipToDto with _$ShipToDto {
     @JsonKey(name: 'city2') required String city2,
     @JsonKey(name: 'telephoneNumber') required String telephoneNumber,
     @JsonKey(name: 'houseNumber1') required String houseNumber1,
-    @JsonKey(name: 'building') required String building,
-    @JsonKey(name: 'region') required String region,
-    @JsonKey(name: 'floor') required String floor,
+    @JsonKey(name: 'building', defaultValue: '') required String building,
+    @JsonKey(name: 'region', defaultValue: '') required String region,
+    @JsonKey(name: 'floor', defaultValue: '') required String floor,
     @JsonKey(name: 'plant') required String plant,
+    @JsonKey(name: 'licenses', defaultValue: <LicenseDto>[])
+        required List<LicenseDto> licenseDtoList,
   }) = _ShipToDto;
 
   factory ShipToDto.fromDomain(ShipToInfo shipToInfo) {
@@ -56,6 +60,8 @@ class ShipToDto with _$ShipToDto {
       region: shipToInfo.region,
       floor: shipToInfo.floor,
       plant: shipToInfo.plant,
+      licenseDtoList:
+          shipToInfo.licenses.map((e) => LicenseDto.fromDomain(e)).toList(),
     );
   }
 
@@ -86,6 +92,9 @@ class ShipToDto with _$ShipToDto {
       region: region,
       floor: floor,
       plant: plant,
+      licenses: licenseDtoList.isNotEmpty
+          ? licenseDtoList.map((e) => e.toDomain()).toList()
+          : <LicenseInfo>[],
     );
   }
 

@@ -54,14 +54,16 @@ mixin _$ShipToDto {
   String get telephoneNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'houseNumber1')
   String get houseNumber1 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'building')
+  @JsonKey(name: 'building', defaultValue: '')
   String get building => throw _privateConstructorUsedError;
-  @JsonKey(name: 'region')
+  @JsonKey(name: 'region', defaultValue: '')
   String get region => throw _privateConstructorUsedError;
-  @JsonKey(name: 'floor')
+  @JsonKey(name: 'floor', defaultValue: '')
   String get floor => throw _privateConstructorUsedError;
   @JsonKey(name: 'plant')
   String get plant => throw _privateConstructorUsedError;
+  @JsonKey(name: 'licenses', defaultValue: <LicenseDto>[])
+  List<LicenseDto> get licenseDtoList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -74,27 +76,50 @@ abstract class $ShipToDtoCopyWith<$Res> {
   factory $ShipToDtoCopyWith(ShipToDto value, $Res Function(ShipToDto) then) =
       _$ShipToDtoCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'shipToCustomerCode') String shipToCustomerCode,
-      @JsonKey(name: 'defaultShipToAddress') bool defaultShipToAddress,
-      @JsonKey(name: 'name1') String name1,
-      @JsonKey(name: 'name2') String name2,
-      @JsonKey(name: 'name3') String name3,
-      @JsonKey(name: 'name4') String name4,
-      @JsonKey(name: 'status') String status,
-      @JsonKey(name: 'street') String street,
-      @JsonKey(name: 'street2') String street2,
-      @JsonKey(name: 'street3') String street3,
-      @JsonKey(name: 'street4') String street4,
-      @JsonKey(name: 'street5') String street5,
-      @JsonKey(name: 'postalCode') String postalCode,
-      @JsonKey(name: 'city1') String city1,
-      @JsonKey(name: 'city2') String city2,
-      @JsonKey(name: 'telephoneNumber') String telephoneNumber,
-      @JsonKey(name: 'houseNumber1') String houseNumber1,
-      @JsonKey(name: 'building') String building,
-      @JsonKey(name: 'region') String region,
-      @JsonKey(name: 'floor') String floor,
-      @JsonKey(name: 'plant') String plant});
+      {@JsonKey(name: 'shipToCustomerCode')
+          String shipToCustomerCode,
+      @JsonKey(name: 'defaultShipToAddress')
+          bool defaultShipToAddress,
+      @JsonKey(name: 'name1')
+          String name1,
+      @JsonKey(name: 'name2')
+          String name2,
+      @JsonKey(name: 'name3')
+          String name3,
+      @JsonKey(name: 'name4')
+          String name4,
+      @JsonKey(name: 'status')
+          String status,
+      @JsonKey(name: 'street')
+          String street,
+      @JsonKey(name: 'street2')
+          String street2,
+      @JsonKey(name: 'street3')
+          String street3,
+      @JsonKey(name: 'street4')
+          String street4,
+      @JsonKey(name: 'street5')
+          String street5,
+      @JsonKey(name: 'postalCode')
+          String postalCode,
+      @JsonKey(name: 'city1')
+          String city1,
+      @JsonKey(name: 'city2')
+          String city2,
+      @JsonKey(name: 'telephoneNumber')
+          String telephoneNumber,
+      @JsonKey(name: 'houseNumber1')
+          String houseNumber1,
+      @JsonKey(name: 'building', defaultValue: '')
+          String building,
+      @JsonKey(name: 'region', defaultValue: '')
+          String region,
+      @JsonKey(name: 'floor', defaultValue: '')
+          String floor,
+      @JsonKey(name: 'plant')
+          String plant,
+      @JsonKey(name: 'licenses', defaultValue: <LicenseDto>[])
+          List<LicenseDto> licenseDtoList});
 }
 
 /// @nodoc
@@ -128,6 +153,7 @@ class _$ShipToDtoCopyWithImpl<$Res> implements $ShipToDtoCopyWith<$Res> {
     Object? region = freezed,
     Object? floor = freezed,
     Object? plant = freezed,
+    Object? licenseDtoList = freezed,
   }) {
     return _then(_value.copyWith(
       shipToCustomerCode: shipToCustomerCode == freezed
@@ -214,6 +240,10 @@ class _$ShipToDtoCopyWithImpl<$Res> implements $ShipToDtoCopyWith<$Res> {
           ? _value.plant
           : plant // ignore: cast_nullable_to_non_nullable
               as String,
+      licenseDtoList: licenseDtoList == freezed
+          ? _value.licenseDtoList
+          : licenseDtoList // ignore: cast_nullable_to_non_nullable
+              as List<LicenseDto>,
     ));
   }
 }
@@ -225,27 +255,50 @@ abstract class _$$_ShipToDtoCopyWith<$Res> implements $ShipToDtoCopyWith<$Res> {
       __$$_ShipToDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'shipToCustomerCode') String shipToCustomerCode,
-      @JsonKey(name: 'defaultShipToAddress') bool defaultShipToAddress,
-      @JsonKey(name: 'name1') String name1,
-      @JsonKey(name: 'name2') String name2,
-      @JsonKey(name: 'name3') String name3,
-      @JsonKey(name: 'name4') String name4,
-      @JsonKey(name: 'status') String status,
-      @JsonKey(name: 'street') String street,
-      @JsonKey(name: 'street2') String street2,
-      @JsonKey(name: 'street3') String street3,
-      @JsonKey(name: 'street4') String street4,
-      @JsonKey(name: 'street5') String street5,
-      @JsonKey(name: 'postalCode') String postalCode,
-      @JsonKey(name: 'city1') String city1,
-      @JsonKey(name: 'city2') String city2,
-      @JsonKey(name: 'telephoneNumber') String telephoneNumber,
-      @JsonKey(name: 'houseNumber1') String houseNumber1,
-      @JsonKey(name: 'building') String building,
-      @JsonKey(name: 'region') String region,
-      @JsonKey(name: 'floor') String floor,
-      @JsonKey(name: 'plant') String plant});
+      {@JsonKey(name: 'shipToCustomerCode')
+          String shipToCustomerCode,
+      @JsonKey(name: 'defaultShipToAddress')
+          bool defaultShipToAddress,
+      @JsonKey(name: 'name1')
+          String name1,
+      @JsonKey(name: 'name2')
+          String name2,
+      @JsonKey(name: 'name3')
+          String name3,
+      @JsonKey(name: 'name4')
+          String name4,
+      @JsonKey(name: 'status')
+          String status,
+      @JsonKey(name: 'street')
+          String street,
+      @JsonKey(name: 'street2')
+          String street2,
+      @JsonKey(name: 'street3')
+          String street3,
+      @JsonKey(name: 'street4')
+          String street4,
+      @JsonKey(name: 'street5')
+          String street5,
+      @JsonKey(name: 'postalCode')
+          String postalCode,
+      @JsonKey(name: 'city1')
+          String city1,
+      @JsonKey(name: 'city2')
+          String city2,
+      @JsonKey(name: 'telephoneNumber')
+          String telephoneNumber,
+      @JsonKey(name: 'houseNumber1')
+          String houseNumber1,
+      @JsonKey(name: 'building', defaultValue: '')
+          String building,
+      @JsonKey(name: 'region', defaultValue: '')
+          String region,
+      @JsonKey(name: 'floor', defaultValue: '')
+          String floor,
+      @JsonKey(name: 'plant')
+          String plant,
+      @JsonKey(name: 'licenses', defaultValue: <LicenseDto>[])
+          List<LicenseDto> licenseDtoList});
 }
 
 /// @nodoc
@@ -281,6 +334,7 @@ class __$$_ShipToDtoCopyWithImpl<$Res> extends _$ShipToDtoCopyWithImpl<$Res>
     Object? region = freezed,
     Object? floor = freezed,
     Object? plant = freezed,
+    Object? licenseDtoList = freezed,
   }) {
     return _then(_$_ShipToDto(
       shipToCustomerCode: shipToCustomerCode == freezed
@@ -367,6 +421,10 @@ class __$$_ShipToDtoCopyWithImpl<$Res> extends _$ShipToDtoCopyWithImpl<$Res>
           ? _value.plant
           : plant // ignore: cast_nullable_to_non_nullable
               as String,
+      licenseDtoList: licenseDtoList == freezed
+          ? _value._licenseDtoList
+          : licenseDtoList // ignore: cast_nullable_to_non_nullable
+              as List<LicenseDto>,
     ));
   }
 }
@@ -375,28 +433,52 @@ class __$$_ShipToDtoCopyWithImpl<$Res> extends _$ShipToDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ShipToDto extends _ShipToDto {
   const _$_ShipToDto(
-      {@JsonKey(name: 'shipToCustomerCode') required this.shipToCustomerCode,
-      @JsonKey(name: 'defaultShipToAddress') required this.defaultShipToAddress,
-      @JsonKey(name: 'name1') required this.name1,
-      @JsonKey(name: 'name2') required this.name2,
-      @JsonKey(name: 'name3') required this.name3,
-      @JsonKey(name: 'name4') required this.name4,
-      @JsonKey(name: 'status') required this.status,
-      @JsonKey(name: 'street') required this.street,
-      @JsonKey(name: 'street2') required this.street2,
-      @JsonKey(name: 'street3') required this.street3,
-      @JsonKey(name: 'street4') required this.street4,
-      @JsonKey(name: 'street5') required this.street5,
-      @JsonKey(name: 'postalCode') required this.postalCode,
-      @JsonKey(name: 'city1') required this.city1,
-      @JsonKey(name: 'city2') required this.city2,
-      @JsonKey(name: 'telephoneNumber') required this.telephoneNumber,
-      @JsonKey(name: 'houseNumber1') required this.houseNumber1,
-      @JsonKey(name: 'building') required this.building,
-      @JsonKey(name: 'region') required this.region,
-      @JsonKey(name: 'floor') required this.floor,
-      @JsonKey(name: 'plant') required this.plant})
-      : super._();
+      {@JsonKey(name: 'shipToCustomerCode')
+          required this.shipToCustomerCode,
+      @JsonKey(name: 'defaultShipToAddress')
+          required this.defaultShipToAddress,
+      @JsonKey(name: 'name1')
+          required this.name1,
+      @JsonKey(name: 'name2')
+          required this.name2,
+      @JsonKey(name: 'name3')
+          required this.name3,
+      @JsonKey(name: 'name4')
+          required this.name4,
+      @JsonKey(name: 'status')
+          required this.status,
+      @JsonKey(name: 'street')
+          required this.street,
+      @JsonKey(name: 'street2')
+          required this.street2,
+      @JsonKey(name: 'street3')
+          required this.street3,
+      @JsonKey(name: 'street4')
+          required this.street4,
+      @JsonKey(name: 'street5')
+          required this.street5,
+      @JsonKey(name: 'postalCode')
+          required this.postalCode,
+      @JsonKey(name: 'city1')
+          required this.city1,
+      @JsonKey(name: 'city2')
+          required this.city2,
+      @JsonKey(name: 'telephoneNumber')
+          required this.telephoneNumber,
+      @JsonKey(name: 'houseNumber1')
+          required this.houseNumber1,
+      @JsonKey(name: 'building', defaultValue: '')
+          required this.building,
+      @JsonKey(name: 'region', defaultValue: '')
+          required this.region,
+      @JsonKey(name: 'floor', defaultValue: '')
+          required this.floor,
+      @JsonKey(name: 'plant')
+          required this.plant,
+      @JsonKey(name: 'licenses', defaultValue: <LicenseDto>[])
+          required final List<LicenseDto> licenseDtoList})
+      : _licenseDtoList = licenseDtoList,
+        super._();
 
   factory _$_ShipToDto.fromJson(Map<String, dynamic> json) =>
       _$$_ShipToDtoFromJson(json);
@@ -453,21 +535,28 @@ class _$_ShipToDto extends _ShipToDto {
   @JsonKey(name: 'houseNumber1')
   final String houseNumber1;
   @override
-  @JsonKey(name: 'building')
+  @JsonKey(name: 'building', defaultValue: '')
   final String building;
   @override
-  @JsonKey(name: 'region')
+  @JsonKey(name: 'region', defaultValue: '')
   final String region;
   @override
-  @JsonKey(name: 'floor')
+  @JsonKey(name: 'floor', defaultValue: '')
   final String floor;
   @override
   @JsonKey(name: 'plant')
   final String plant;
+  final List<LicenseDto> _licenseDtoList;
+  @override
+  @JsonKey(name: 'licenses', defaultValue: <LicenseDto>[])
+  List<LicenseDto> get licenseDtoList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_licenseDtoList);
+  }
 
   @override
   String toString() {
-    return 'ShipToDto(shipToCustomerCode: $shipToCustomerCode, defaultShipToAddress: $defaultShipToAddress, name1: $name1, name2: $name2, name3: $name3, name4: $name4, status: $status, street: $street, street2: $street2, street3: $street3, street4: $street4, street5: $street5, postalCode: $postalCode, city1: $city1, city2: $city2, telephoneNumber: $telephoneNumber, houseNumber1: $houseNumber1, building: $building, region: $region, floor: $floor, plant: $plant)';
+    return 'ShipToDto(shipToCustomerCode: $shipToCustomerCode, defaultShipToAddress: $defaultShipToAddress, name1: $name1, name2: $name2, name3: $name3, name4: $name4, status: $status, street: $street, street2: $street2, street3: $street3, street4: $street4, street5: $street5, postalCode: $postalCode, city1: $city1, city2: $city2, telephoneNumber: $telephoneNumber, houseNumber1: $houseNumber1, building: $building, region: $region, floor: $floor, plant: $plant, licenseDtoList: $licenseDtoList)';
   }
 
   @override
@@ -500,7 +589,9 @@ class _$_ShipToDto extends _ShipToDto {
             const DeepCollectionEquality().equals(other.building, building) &&
             const DeepCollectionEquality().equals(other.region, region) &&
             const DeepCollectionEquality().equals(other.floor, floor) &&
-            const DeepCollectionEquality().equals(other.plant, plant));
+            const DeepCollectionEquality().equals(other.plant, plant) &&
+            const DeepCollectionEquality()
+                .equals(other._licenseDtoList, _licenseDtoList));
   }
 
   @JsonKey(ignore: true)
@@ -527,7 +618,8 @@ class _$_ShipToDto extends _ShipToDto {
         const DeepCollectionEquality().hash(building),
         const DeepCollectionEquality().hash(region),
         const DeepCollectionEquality().hash(floor),
-        const DeepCollectionEquality().hash(plant)
+        const DeepCollectionEquality().hash(plant),
+        const DeepCollectionEquality().hash(_licenseDtoList)
       ]);
 
   @JsonKey(ignore: true)
@@ -579,14 +671,16 @@ abstract class _ShipToDto extends ShipToDto {
           required final String telephoneNumber,
       @JsonKey(name: 'houseNumber1')
           required final String houseNumber1,
-      @JsonKey(name: 'building')
+      @JsonKey(name: 'building', defaultValue: '')
           required final String building,
-      @JsonKey(name: 'region')
+      @JsonKey(name: 'region', defaultValue: '')
           required final String region,
-      @JsonKey(name: 'floor')
+      @JsonKey(name: 'floor', defaultValue: '')
           required final String floor,
       @JsonKey(name: 'plant')
-          required final String plant}) = _$_ShipToDto;
+          required final String plant,
+      @JsonKey(name: 'licenses', defaultValue: <LicenseDto>[])
+          required final List<LicenseDto> licenseDtoList}) = _$_ShipToDto;
   const _ShipToDto._() : super._();
 
   factory _ShipToDto.fromJson(Map<String, dynamic> json) =
@@ -644,17 +738,20 @@ abstract class _ShipToDto extends ShipToDto {
   @JsonKey(name: 'houseNumber1')
   String get houseNumber1;
   @override
-  @JsonKey(name: 'building')
+  @JsonKey(name: 'building', defaultValue: '')
   String get building;
   @override
-  @JsonKey(name: 'region')
+  @JsonKey(name: 'region', defaultValue: '')
   String get region;
   @override
-  @JsonKey(name: 'floor')
+  @JsonKey(name: 'floor', defaultValue: '')
   String get floor;
   @override
   @JsonKey(name: 'plant')
   String get plant;
+  @override
+  @JsonKey(name: 'licenses', defaultValue: <LicenseDto>[])
+  List<LicenseDto> get licenseDtoList;
   @override
   @JsonKey(ignore: true)
   _$$_ShipToDtoCopyWith<_$_ShipToDto> get copyWith =>

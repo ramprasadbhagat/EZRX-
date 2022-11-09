@@ -34,8 +34,7 @@ class PaymentTermBloc extends Bloc<PaymentTermEvent, PaymentTermState> {
         final failureOrSuccess = await paymentTermRepository.getPaymentTerms(
           salesOrganisation: e.salesOrganisation,
           customerCodeInfo: e.customeCodeInfo,
-          paymentCustomerInfo:
-              e.paymentCustomerInformation,
+          paymentCustomerInfo: e.paymentCustomerInformation,
           salesOrgConfig: e.salesOrganisationConfigs,
           salesRepInfo: e.salesRepresentativeInfo,
         );
@@ -45,17 +44,26 @@ class PaymentTermBloc extends Bloc<PaymentTermEvent, PaymentTermState> {
               paymentTermsFailureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
-          (paymentTerms) => emit(
-            state.copyWith(
-              paymentTermsFailureOrSuccessOption: none(),
-              paymentTerms: paymentTerms,
-            ),
-          ),
+          (paymentTerms) {
+            final paymentTermsDisplayLevels = paymentTerms
+                .where((element) => element.paymentTermCode.isNotEmpty)
+                .map((e) {
+                  return '${e.paymentTermCode}-${e.paymentTermDescription}';
+                })
+                .toSet()
+                .toList();
+            emit(
+              state.copyWith(
+                paymentTermsFailureOrSuccessOption: none(),
+                paymentTerms: paymentTerms,
+                paymentTermsDisplayLevels: paymentTermsDisplayLevels,
+              ),
+            );
+          },
         );
       },
     );
   }
-
 
   @override
   void onChange(Change<PaymentTermState> change) {

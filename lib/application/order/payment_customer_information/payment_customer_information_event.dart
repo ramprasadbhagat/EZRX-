@@ -6,5 +6,6 @@ class PaymentCustomerInformationEvent with _$PaymentCustomerInformationEvent {
   const factory PaymentCustomerInformationEvent.fetch({
     required CustomerCodeInfo customeCodeInfo,
     required SalesOrganisation salesOrganisation,
+    required String selectedShipToCode,
   }) = _Fetch;
 }

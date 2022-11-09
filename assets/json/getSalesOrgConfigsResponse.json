@@ -28,7 +28,7 @@
             "languageFilter": false,
             "languageValue": "",
             "materialWithoutPrice": false,
-            "enablePaymentTerms": false,
+            "enablePaymentTerms": true,
             "enableBatchNumber": false,
             "enableOHPrice": true,
             "enableSpecialInstructions": true,
