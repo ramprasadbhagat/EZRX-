@@ -14,6 +14,9 @@ import 'package:ezrxmobile/application/order/order_history_filter/order_history_
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
@@ -33,6 +36,15 @@ class ShipCodeSelector extends StatelessWidget {
           listenWhen: (previous, current) =>
               previous.shipToInfo != current.shipToInfo,
           listener: (context, state) {
+            final enableBundles =
+                !(context.read<SalesOrgBloc>().state.configs.disableBundles);
+            final enableCovidMaterial = _canOrderCovidMaterial(
+              customerCodeInfo:
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
+              salesOrganisation:
+                  context.read<SalesOrgBloc>().state.salesOrganisation,
+              role: context.read<UserBloc>().state.user.role,
+            );
             if (state.haveShipTo) {
               context.read<SavedOrderListBloc>().add(
                     SavedOrderListEvent.fetch(
@@ -64,19 +76,23 @@ class ShipCodeSelector extends StatelessWidget {
                           .selectedMaterialFilter,
                     ),
                   );
-              context.read<CovidMaterialListBloc>().add(
-                    CovidMaterialListEvent.fetch(
-                      user: context.read<UserBloc>().state.user,
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      configs: context.read<SalesOrgBloc>().state.configs,
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      shipToInfo: state.shipToInfo,
-                    ),
-                  );
+              if (enableCovidMaterial) {
+                context.read<CovidMaterialListBloc>().add(
+                      CovidMaterialListEvent.fetch(
+                        user: context.read<UserBloc>().state.user,
+                        salesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        configs: context.read<SalesOrgBloc>().state.configs,
+                        customerCodeInfo: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customerCodeInfo,
+                        shipToInfo: state.shipToInfo,
+                      ),
+                    );
+              }
               context.read<OrderHistoryListBloc>().add(
                     OrderHistoryListEvent.fetch(
                       salesOrgConfigs:
@@ -103,19 +119,23 @@ class ShipCodeSelector extends StatelessWidget {
                     ),
                   );
 
-              context.read<MaterialBundleListBloc>().add(
-                    MaterialBundleListEvent.fetch(
-                      user: context.read<UserBloc>().state.user,
-                      customerCode: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      shipToCode:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                    ),
-                  );
+              if (enableBundles) {
+                context.read<MaterialBundleListBloc>().add(
+                      MaterialBundleListEvent.fetch(
+                        user: context.read<UserBloc>().state.user,
+                        customerCode: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customerCodeInfo,
+                        shipToCode:
+                            context.read<ShipToCodeBloc>().state.shipToInfo,
+                        salesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                      ),
+                    );
+              }
               context.read<CartBloc>().add(const CartEvent.fetch());
               context.read<MaterialFilterBloc>().add(MaterialFilterEvent.fetch(
                     salesOrganisation:
@@ -143,9 +163,17 @@ class ShipCodeSelector extends StatelessWidget {
                   .read<FavouriteBloc>()
                   .add(const FavouriteEvent.initialized());
 
-              context
-                  .read<MaterialBundleListBloc>()
-                  .add(const MaterialBundleListEvent.initialized());
+              if (enableBundles) {
+                context
+                    .read<MaterialBundleListBloc>()
+                    .add(const MaterialBundleListEvent.initialized());
+              }
+
+              if (enableCovidMaterial) {
+                context
+                    .read<CovidMaterialListBloc>()
+                    .add(const CovidMaterialListEvent.initialized());
+              }
 
               context
                   .read<OrderHistoryFilterBloc>()
@@ -176,5 +204,17 @@ class ShipCodeSelector extends StatelessWidget {
         );
       },
     );
+  }
+
+  bool _canOrderCovidMaterial({
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
+    required Role role,
+  }) {
+    return (customerCodeInfo.customerAttr7.isZEV &&
+            role.type.isClient &&
+            salesOrganisation.salesOrg.isSg) ||
+        customerCodeInfo.customerGrp4.canOrderCovidMaterial ||
+        (role.type.isSalesRep && salesOrganisation.salesOrg.isPH);
   }
 }
