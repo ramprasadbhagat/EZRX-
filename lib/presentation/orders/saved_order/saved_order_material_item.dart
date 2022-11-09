@@ -14,9 +14,11 @@ class SavedOrderMaterialItem extends StatelessWidget {
   const SavedOrderMaterialItem({
     Key? key,
     required this.material,
+    required this.enableDefaultMD,
   }) : super(key: key);
 
   final MaterialItem material;
+  final bool enableDefaultMD;
 
   MaterialQueryInfo get itemPriceQuery => MaterialQueryInfo.fromSavedOrder(
         orderMaterial: material,
@@ -101,6 +103,19 @@ class SavedOrderMaterialItem extends StatelessWidget {
                 ],
               ),
             ),
+            (enableDefaultMD && material.defaultMaterialDescription.isNotEmpty)
+                ? _MaterialItemInfo(
+                    title: 'Default Material Description: '.tr(),
+                    info: Text(
+                      material.defaultMaterialDescription,
+                      style: const TextStyle(
+                        color: ZPColors.darkerGreen,
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  )
+                : const SizedBox.shrink(),
             _MaterialItemInfo(
               title: 'Material Qty: '.tr(),
               info: Text(

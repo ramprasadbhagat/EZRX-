@@ -47,6 +47,7 @@ void main() {
           Role(type: RoleType('fakeRole'), description: '', id: '', name: ''));
 
   final fakeSaleOrgConfig = SalesOrganisationConfigs(
+    enableDefaultMD: false,
     disableProcessingStatus: false,
     currency: Currency(''),
     hideCustomer: false,

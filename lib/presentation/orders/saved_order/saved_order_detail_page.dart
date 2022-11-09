@@ -5,11 +5,9 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_material_item.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +63,11 @@ class SavedOrderDetailPage extends StatelessWidget {
                   final item = order.items[index];
 
                   return SavedOrderMaterialItem(
+                    enableDefaultMD: context
+                        .read<SalesOrgBloc>()
+                        .state
+                        .configs
+                        .enableDefaultMD,
                     material: item,
                   );
                 },

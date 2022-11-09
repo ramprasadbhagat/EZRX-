@@ -1,6 +1,8 @@
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderTemplateDetailPage extends StatelessWidget {
   final OrderTemplate orderTemplateInfo;
@@ -21,6 +23,14 @@ class OrderTemplateDetailPage extends StatelessWidget {
       body: ListView.builder(
         itemCount: orderTemplateInfo.cartItems.length,
         itemBuilder: (context, index) {
+          final salesOrgConfigs = context.read<SalesOrgBloc>().state.configs;
+          final defaultMaterialDescription = orderTemplateInfo
+              .cartItems[index].materialInfo.defaultMaterialDescription;
+          if (salesOrgConfigs.enableDefaultMD &&
+              defaultMaterialDescription.isNotEmpty) {
+            return Text(defaultMaterialDescription);
+          }
+
           return Container();
         },
       ),

@@ -29,6 +29,8 @@ class MaterialItemDto with _$MaterialItemDto {
     @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
         required String itemRegistrationNumber,
     @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+        required String defaultMaterialDescription,
+    @JsonKey(name: 'materialDescription', defaultValue: '')
         required String materialDescription,
     @JsonKey(name: 'type', defaultValue: '') required String type,
     @JsonKey(name: 'comment', defaultValue: '') required String comment,
@@ -41,6 +43,7 @@ class MaterialItemDto with _$MaterialItemDto {
 
   MaterialItem toDomain() {
     return MaterialItem(
+      defaultMaterialDescription: defaultMaterialDescription,
       qty: qty,
       type: type,
       comment: comment,

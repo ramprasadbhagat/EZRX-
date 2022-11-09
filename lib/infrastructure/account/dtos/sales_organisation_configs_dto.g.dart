@@ -43,13 +43,14 @@ class SalesOrganisationConfigsDtoAdapter
       futureDeliveryDay: fields[122] as String,
       enableGMC: fields[123] as bool,
       enableListPrice: fields[124] as bool,
+      enableDefaultMD: fields[125] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_SalesOrganisationConfigsDto obj) {
     writer
-      ..writeByte(25)
+      ..writeByte(26)
       ..writeByte(100)
       ..write(obj.disableProcessingStatus)
       ..writeByte(101)
@@ -98,6 +99,8 @@ class SalesOrganisationConfigsDtoAdapter
       ..write(obj.enableGMC)
       ..writeByte(124)
       ..write(obj.enableListPrice)
+      ..writeByte(125)
+      ..write(obj.enableDefaultMD)
       ..writeByte(7)
       ..write(obj.principalList);
   }
@@ -149,6 +152,7 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       futureDeliveryDay: json['futureDeliveryDay'] as String? ?? '',
       enableGMC: json['enableGMC'] as bool? ?? false,
       enableListPrice: json['enableListPrice'] as bool? ?? false,
+      enableDefaultMD: json['enableDefaultMD'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -180,4 +184,5 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'futureDeliveryDay': instance.futureDeliveryDay,
       'enableGMC': instance.enableGMC,
       'enableListPrice': instance.enableListPrice,
+      'enableDefaultMD': instance.enableDefaultMD,
     };

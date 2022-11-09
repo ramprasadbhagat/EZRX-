@@ -5,7 +5,6 @@ import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/presentation/core/action_button.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
@@ -16,9 +15,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FavouriteListTile extends StatelessWidget {
   final Favourite favourite;
+  final bool enableDefaultMD;
+
   const FavouriteListTile({
     Key? key,
     required this.favourite,
+    required this.enableDefaultMD,
   }) : super(key: key);
 
   @override
@@ -135,6 +137,8 @@ class FavouriteListTile extends StatelessWidget {
                       final queryInfo =
                           MaterialQueryInfo.fromFavorite(material: favourite);
                       final priceDetail = state.materialDetails[queryInfo]!;
+                      final defaultMaterialDescription =
+                          priceDetail.info.defaultMaterialDescription;
 
                       final priceAggregate = PriceAggregate(
                         price: priceDetail.price,
@@ -145,34 +149,53 @@ class FavouriteListTile extends StatelessWidget {
                         zmgMaterialCountOnCart: 0,
                       );
 
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            '${'Unit Price: '.tr()}${priceAggregate.display(PriceType.unitPrice)}',
-                            style: Theme.of(context).textTheme.bodyText1?.apply(
-                                  color: ZPColors.black,
-                                ),
-                          ),
-                          BlocBuilder<SalesOrgBloc, SalesOrgState>(
-                            buildWhen: (previous, current) =>
-                                previous.configs != current.configs,
-                            builder: (context, state) {
-                              final hidePrice = priceDetail.info.hidePrice;
-                              final itemPrice = priceDetail.price.finalPrice;
-                              if ((hidePrice || itemPrice.isEmpty()) &&
-                                  !state.configs.materialWithoutPrice) {
-                                return const SizedBox();
-                              }
+                          (enableDefaultMD &&
+                                  defaultMaterialDescription.isNotEmpty)
+                              ? Text(
+                                  "${'Mat Default Description: '.tr()}$defaultMaterialDescription",
+                                  style: const TextStyle(
+                                    color: ZPColors.darkGray,
+                                    fontSize: 12,
+                                  ),
+                                )
+                              : const SizedBox.shrink(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                '${'Unit Price: '.tr()}${priceAggregate.display(PriceType.unitPrice)}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1
+                                    ?.apply(
+                                      color: ZPColors.black,
+                                    ),
+                              ),
+                              BlocBuilder<SalesOrgBloc, SalesOrgState>(
+                                buildWhen: (previous, current) =>
+                                    previous.configs != current.configs,
+                                builder: (context, state) {
+                                  final hidePrice = priceDetail.info.hidePrice;
+                                  final itemPrice =
+                                      priceDetail.price.finalPrice;
+                                  if ((hidePrice || itemPrice.isEmpty()) &&
+                                      !state.configs.materialWithoutPrice) {
+                                    return const SizedBox();
+                                  }
 
-                              return ActionButton(
-                                width: 120,
-                                onTap: () {
-                                  //TODO: Implement Add to cart
+                                  return ActionButton(
+                                    width: 120,
+                                    onTap: () {
+                                      //TODO: Implement Add to cart
+                                    },
+                                    text: 'Add to Cart'.tr(),
+                                  );
                                 },
-                                text: 'Add to Cart'.tr(),
-                              );
-                            },
+                              ),
+                            ],
                           ),
                         ],
                       );

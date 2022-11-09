@@ -68,10 +68,14 @@ class MaterialDto with _$MaterialDto {
     @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
     @HiveField(17)
         required List<BundleDto> bundles,
+    @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+    @HiveField(18)
+        required String defaultMaterialDescription,
   }) = _MaterialDto;
 
   factory MaterialDto.fromDomain(MaterialInfo materialInfo) {
     return MaterialDto(
+      defaultMaterialDescription: materialInfo.defaultMaterialDescription,
       materialNumber: materialInfo.materialNumber.getOrCrash(),
       materialDescription: materialInfo.materialDescription,
       governmentMaterialCode: materialInfo.governmentMaterialCode,
@@ -116,7 +120,7 @@ class MaterialDto with _$MaterialDto {
       hasMandatoryTenderContract: hasMandatoryTenderContract,
       taxes: taxes.map((e) => e).toList(),
       bundles: bundles.map((e) => e.toDomain()).toList(),
-      defaultMaterialDescription: '',
+      defaultMaterialDescription: defaultMaterialDescription,
     );
   }
 

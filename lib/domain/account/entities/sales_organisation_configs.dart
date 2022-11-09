@@ -8,6 +8,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
   const SalesOrganisationConfigs._();
 
   const factory SalesOrganisationConfigs({
+    required bool enableDefaultMD,
     required bool disableProcessingStatus,
     required Currency currency,
     required bool hideCustomer,
@@ -36,6 +37,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
+        enableDefaultMD: false,
         disableProcessingStatus: false,
         currency: Currency(''),
         hideCustomer: false,

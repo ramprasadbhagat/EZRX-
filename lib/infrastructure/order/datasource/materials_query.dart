@@ -43,6 +43,7 @@ class MaterialsWithMetaQuery {
           materialNumber
           isSampleMaterial
           materialDescription
+          defaultMaterialDescription
           governmentMaterialCode
           principalName
           principalCode
@@ -113,6 +114,7 @@ class MaterialsWithMetaQuery {
           materialNumber
           isSampleMaterial
           materialDescription
+          defaultMaterialDescription
           governmentMaterialCode
           principalName
           principalCode

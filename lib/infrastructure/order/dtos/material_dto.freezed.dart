@@ -74,6 +74,9 @@ mixin _$MaterialDto {
   @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
   @HiveField(17)
   List<BundleDto> get bundles => throw _privateConstructorUsedError;
+  @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+  @HiveField(18)
+  String get defaultMaterialDescription => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -140,7 +143,10 @@ abstract class $MaterialDtoCopyWith<$Res> {
           List<String> taxes,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
       @HiveField(17)
-          List<BundleDto> bundles});
+          List<BundleDto> bundles,
+      @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+      @HiveField(18)
+          String defaultMaterialDescription});
 }
 
 /// @nodoc
@@ -171,6 +177,7 @@ class _$MaterialDtoCopyWithImpl<$Res> implements $MaterialDtoCopyWith<$Res> {
     Object? hasMandatoryTenderContract = freezed,
     Object? taxes = freezed,
     Object? bundles = freezed,
+    Object? defaultMaterialDescription = freezed,
   }) {
     return _then(_value.copyWith(
       materialNumber: materialNumber == freezed
@@ -245,6 +252,10 @@ class _$MaterialDtoCopyWithImpl<$Res> implements $MaterialDtoCopyWith<$Res> {
           ? _value.bundles
           : bundles // ignore: cast_nullable_to_non_nullable
               as List<BundleDto>,
+      defaultMaterialDescription: defaultMaterialDescription == freezed
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -310,7 +321,10 @@ abstract class _$$_MaterialDtoCopyWith<$Res>
           List<String> taxes,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
       @HiveField(17)
-          List<BundleDto> bundles});
+          List<BundleDto> bundles,
+      @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+      @HiveField(18)
+          String defaultMaterialDescription});
 }
 
 /// @nodoc
@@ -343,6 +357,7 @@ class __$$_MaterialDtoCopyWithImpl<$Res> extends _$MaterialDtoCopyWithImpl<$Res>
     Object? hasMandatoryTenderContract = freezed,
     Object? taxes = freezed,
     Object? bundles = freezed,
+    Object? defaultMaterialDescription = freezed,
   }) {
     return _then(_$_MaterialDto(
       materialNumber: materialNumber == freezed
@@ -417,6 +432,10 @@ class __$$_MaterialDtoCopyWithImpl<$Res> extends _$MaterialDtoCopyWithImpl<$Res>
           ? _value._bundles
           : bundles // ignore: cast_nullable_to_non_nullable
               as List<BundleDto>,
+      defaultMaterialDescription: defaultMaterialDescription == freezed
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -479,7 +498,10 @@ class _$_MaterialDto extends _MaterialDto {
           required final List<String> taxes,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
       @HiveField(17)
-          required final List<BundleDto> bundles})
+          required final List<BundleDto> bundles,
+      @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+      @HiveField(18)
+          required this.defaultMaterialDescription})
       : _taxes = taxes,
         _bundles = bundles,
         super._();
@@ -570,8 +592,13 @@ class _$_MaterialDto extends _MaterialDto {
   }
 
   @override
+  @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+  @HiveField(18)
+  final String defaultMaterialDescription;
+
+  @override
   String toString() {
-    return 'MaterialDto(materialNumber: $materialNumber, materialDescription: $materialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, principalName: $principalName, principalCode: $principalCode, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hidePrice: $hidePrice, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, bundles: $bundles)';
+    return 'MaterialDto(materialNumber: $materialNumber, materialDescription: $materialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, principalName: $principalName, principalCode: $principalCode, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hidePrice: $hidePrice, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, bundles: $bundles, defaultMaterialDescription: $defaultMaterialDescription)';
   }
 
   @override
@@ -610,31 +637,35 @@ class _$_MaterialDto extends _MaterialDto {
             const DeepCollectionEquality().equals(
                 other.hasMandatoryTenderContract, hasMandatoryTenderContract) &&
             const DeepCollectionEquality().equals(other._taxes, _taxes) &&
-            const DeepCollectionEquality().equals(other._bundles, _bundles));
+            const DeepCollectionEquality().equals(other._bundles, _bundles) &&
+            const DeepCollectionEquality().equals(
+                other.defaultMaterialDescription, defaultMaterialDescription));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(materialNumber),
-      const DeepCollectionEquality().hash(materialDescription),
-      const DeepCollectionEquality().hash(governmentMaterialCode),
-      const DeepCollectionEquality().hash(therapeuticClass),
-      const DeepCollectionEquality().hash(itemBrand),
-      const DeepCollectionEquality().hash(principalName),
-      const DeepCollectionEquality().hash(principalCode),
-      const DeepCollectionEquality().hash(taxClassification),
-      const DeepCollectionEquality().hash(itemRegistrationNumber),
-      const DeepCollectionEquality().hash(unitOfMeasurement),
-      const DeepCollectionEquality().hash(materialGroup2),
-      const DeepCollectionEquality().hash(materialGroup4),
-      const DeepCollectionEquality().hash(isSampleMaterial),
-      const DeepCollectionEquality().hash(hidePrice),
-      const DeepCollectionEquality().hash(hasValidTenderContract),
-      const DeepCollectionEquality().hash(hasMandatoryTenderContract),
-      const DeepCollectionEquality().hash(_taxes),
-      const DeepCollectionEquality().hash(_bundles));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(materialNumber),
+        const DeepCollectionEquality().hash(materialDescription),
+        const DeepCollectionEquality().hash(governmentMaterialCode),
+        const DeepCollectionEquality().hash(therapeuticClass),
+        const DeepCollectionEquality().hash(itemBrand),
+        const DeepCollectionEquality().hash(principalName),
+        const DeepCollectionEquality().hash(principalCode),
+        const DeepCollectionEquality().hash(taxClassification),
+        const DeepCollectionEquality().hash(itemRegistrationNumber),
+        const DeepCollectionEquality().hash(unitOfMeasurement),
+        const DeepCollectionEquality().hash(materialGroup2),
+        const DeepCollectionEquality().hash(materialGroup4),
+        const DeepCollectionEquality().hash(isSampleMaterial),
+        const DeepCollectionEquality().hash(hidePrice),
+        const DeepCollectionEquality().hash(hasValidTenderContract),
+        const DeepCollectionEquality().hash(hasMandatoryTenderContract),
+        const DeepCollectionEquality().hash(_taxes),
+        const DeepCollectionEquality().hash(_bundles),
+        const DeepCollectionEquality().hash(defaultMaterialDescription)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -704,7 +735,10 @@ abstract class _MaterialDto extends MaterialDto {
           required final List<String> taxes,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
       @HiveField(17)
-          required final List<BundleDto> bundles}) = _$_MaterialDto;
+          required final List<BundleDto> bundles,
+      @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+      @HiveField(18)
+          required final String defaultMaterialDescription}) = _$_MaterialDto;
   const _MaterialDto._() : super._();
 
   factory _MaterialDto.fromJson(Map<String, dynamic> json) =
@@ -782,6 +816,10 @@ abstract class _MaterialDto extends MaterialDto {
   @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
   @HiveField(17)
   List<BundleDto> get bundles;
+  @override
+  @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+  @HiveField(18)
+  String get defaultMaterialDescription;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialDtoCopyWith<_$_MaterialDto> get copyWith =>

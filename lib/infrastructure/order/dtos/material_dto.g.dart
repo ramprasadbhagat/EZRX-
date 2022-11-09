@@ -35,13 +35,14 @@ class MaterialDtoAdapter extends TypeAdapter<_$_MaterialDto> {
       hasMandatoryTenderContract: fields[15] as bool,
       taxes: (fields[16] as List).cast<String>(),
       bundles: (fields[17] as List).cast<BundleDto>(),
+      defaultMaterialDescription: fields[18] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_MaterialDto obj) {
     writer
-      ..writeByte(18)
+      ..writeByte(19)
       ..writeByte(0)
       ..write(obj.materialNumber)
       ..writeByte(1)
@@ -74,6 +75,8 @@ class MaterialDtoAdapter extends TypeAdapter<_$_MaterialDto> {
       ..write(obj.hasValidTenderContract)
       ..writeByte(15)
       ..write(obj.hasMandatoryTenderContract)
+      ..writeByte(18)
+      ..write(obj.defaultMaterialDescription)
       ..writeByte(16)
       ..write(obj.taxes)
       ..writeByte(17)
@@ -121,6 +124,8 @@ _$_MaterialDto _$$_MaterialDtoFromJson(Map<String, dynamic> json) =>
               ?.map((e) => BundleDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      defaultMaterialDescription:
+          json['defaultMaterialDescription'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_MaterialDtoToJson(_$_MaterialDto instance) =>
@@ -143,4 +148,5 @@ Map<String, dynamic> _$$_MaterialDtoToJson(_$_MaterialDto instance) =>
       'hasMandatoryTenderContract': instance.hasMandatoryTenderContract,
       'taxes': instance.taxes,
       'bundles': instance.bundles,
+      'defaultMaterialDescription': instance.defaultMaterialDescription,
     };

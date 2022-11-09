@@ -148,10 +148,16 @@ class _BodyContent extends StatelessWidget {
                     ),
                   ),
               isLoading: materialListState.isFetching,
-              itemBuilder: (context, index, item) => _ListContent(
-                materialInfo: item,
-                addToCart: addToCart,
-              ),
+              itemBuilder: (context, index, item) {
+                final enableDefaultMD =
+                    context.read<SalesOrgBloc>().state.configs.enableDefaultMD;
+
+                return _ListContent(
+                  enableDefaultMD: enableDefaultMD,
+                  materialInfo: item,
+                  addToCart: addToCart,
+                );
+              },
               items: materialListState.materialList,
             ),
     );
@@ -161,11 +167,13 @@ class _BodyContent extends StatelessWidget {
 class _ListContent extends StatelessWidget {
   final MaterialInfo materialInfo;
   final Function addToCart;
+  final bool enableDefaultMD;
 
   const _ListContent({
     Key? key,
     required this.materialInfo,
     required this.addToCart,
+    required this.enableDefaultMD,
   }) : super(key: key);
 
   @override
@@ -192,6 +200,13 @@ class _ListContent extends StatelessWidget {
               materialInfo.materialDescription,
               style: Theme.of(context).textTheme.bodyText1,
             ),
+            (enableDefaultMD &&
+                    materialInfo.defaultMaterialDescription.isNotEmpty)
+                ? Text(
+                    materialInfo.defaultMaterialDescription,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  )
+                : const SizedBox.shrink(),
             Text(
               materialInfo.principalData.principalName,
               style: Theme.of(context).textTheme.subtitle2?.apply(

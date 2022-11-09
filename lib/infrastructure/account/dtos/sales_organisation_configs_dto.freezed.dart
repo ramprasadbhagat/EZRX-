@@ -97,6 +97,9 @@ mixin _$SalesOrganisationConfigsDto {
   @JsonKey(name: 'enableListPrice', defaultValue: false)
   @HiveField(124)
   bool get enableListPrice => throw _privateConstructorUsedError;
+  @JsonKey(name: 'enableDefaultMD', defaultValue: false)
+  @HiveField(125)
+  bool get enableDefaultMD => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -186,7 +189,10 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
           bool enableGMC,
       @JsonKey(name: 'enableListPrice', defaultValue: false)
       @HiveField(124)
-          bool enableListPrice});
+          bool enableListPrice,
+      @JsonKey(name: 'enableDefaultMD', defaultValue: false)
+      @HiveField(125)
+          bool enableDefaultMD});
 }
 
 /// @nodoc
@@ -225,6 +231,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? futureDeliveryDay = freezed,
     Object? enableGMC = freezed,
     Object? enableListPrice = freezed,
+    Object? enableDefaultMD = freezed,
   }) {
     return _then(_value.copyWith(
       disableProcessingStatus: disableProcessingStatus == freezed
@@ -327,6 +334,10 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.enableListPrice
           : enableListPrice // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableDefaultMD: enableDefaultMD == freezed
+          ? _value.enableDefaultMD
+          : enableDefaultMD // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -415,7 +426,10 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
           bool enableGMC,
       @JsonKey(name: 'enableListPrice', defaultValue: false)
       @HiveField(124)
-          bool enableListPrice});
+          bool enableListPrice,
+      @JsonKey(name: 'enableDefaultMD', defaultValue: false)
+      @HiveField(125)
+          bool enableDefaultMD});
 }
 
 /// @nodoc
@@ -458,6 +472,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? futureDeliveryDay = freezed,
     Object? enableGMC = freezed,
     Object? enableListPrice = freezed,
+    Object? enableDefaultMD = freezed,
   }) {
     return _then(_$_SalesOrganisationConfigsDto(
       disableProcessingStatus: disableProcessingStatus == freezed
@@ -560,6 +575,10 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.enableListPrice
           : enableListPrice // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableDefaultMD: enableDefaultMD == freezed
+          ? _value.enableDefaultMD
+          : enableDefaultMD // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -644,7 +663,10 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
           required this.enableGMC,
       @JsonKey(name: 'enableListPrice', defaultValue: false)
       @HiveField(124)
-          required this.enableListPrice})
+          required this.enableListPrice,
+      @JsonKey(name: 'enableDefaultMD', defaultValue: false)
+      @HiveField(125)
+          required this.enableDefaultMD})
       : _principalList = principalList,
         super._();
 
@@ -757,10 +779,14 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @JsonKey(name: 'enableListPrice', defaultValue: false)
   @HiveField(124)
   final bool enableListPrice;
+  @override
+  @JsonKey(name: 'enableDefaultMD', defaultValue: false)
+  @HiveField(125)
+  final bool enableDefaultMD;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD)';
   }
 
   @override
@@ -813,7 +839,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
                 .equals(other.futureDeliveryDay, futureDeliveryDay) &&
             const DeepCollectionEquality().equals(other.enableGMC, enableGMC) &&
             const DeepCollectionEquality()
-                .equals(other.enableListPrice, enableListPrice));
+                .equals(other.enableListPrice, enableListPrice) &&
+            const DeepCollectionEquality()
+                .equals(other.enableDefaultMD, enableDefaultMD));
   }
 
   @JsonKey(ignore: true)
@@ -844,7 +872,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
         const DeepCollectionEquality().hash(enablePaymentTerms),
         const DeepCollectionEquality().hash(futureDeliveryDay),
         const DeepCollectionEquality().hash(enableGMC),
-        const DeepCollectionEquality().hash(enableListPrice)
+        const DeepCollectionEquality().hash(enableListPrice),
+        const DeepCollectionEquality().hash(enableDefaultMD)
       ]);
 
   @JsonKey(ignore: true)
@@ -939,7 +968,10 @@ abstract class _SalesOrganisationConfigsDto
               required final bool enableGMC,
           @JsonKey(name: 'enableListPrice', defaultValue: false)
           @HiveField(124)
-              required final bool enableListPrice}) =
+              required final bool enableListPrice,
+          @JsonKey(name: 'enableDefaultMD', defaultValue: false)
+          @HiveField(125)
+              required final bool enableDefaultMD}) =
       _$_SalesOrganisationConfigsDto;
   const _SalesOrganisationConfigsDto._() : super._();
 
@@ -1047,6 +1079,10 @@ abstract class _SalesOrganisationConfigsDto
   @JsonKey(name: 'enableListPrice', defaultValue: false)
   @HiveField(124)
   bool get enableListPrice;
+  @override
+  @JsonKey(name: 'enableDefaultMD', defaultValue: false)
+  @HiveField(125)
+  bool get enableDefaultMD;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsDtoCopyWith<_$_SalesOrganisationConfigsDto>

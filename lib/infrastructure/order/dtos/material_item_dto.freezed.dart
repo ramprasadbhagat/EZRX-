@@ -39,6 +39,8 @@ mixin _$MaterialItemDto {
   @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
   String get itemRegistrationNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+  String get defaultMaterialDescription => throw _privateConstructorUsedError;
+  @JsonKey(name: 'materialDescription', defaultValue: '')
   String get materialDescription => throw _privateConstructorUsedError;
   @JsonKey(name: 'type', defaultValue: '')
   String get type => throw _privateConstructorUsedError;
@@ -86,6 +88,8 @@ abstract class $MaterialItemDtoCopyWith<$Res> {
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
           String itemRegistrationNumber,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+          String defaultMaterialDescription,
+      @JsonKey(name: 'materialDescription', defaultValue: '')
           String materialDescription,
       @JsonKey(name: 'type', defaultValue: '')
           String type,
@@ -121,6 +125,7 @@ class _$MaterialItemDtoCopyWithImpl<$Res>
     Object? overridenPrice = freezed,
     Object? unitOfMeasurement = freezed,
     Object? itemRegistrationNumber = freezed,
+    Object? defaultMaterialDescription = freezed,
     Object? materialDescription = freezed,
     Object? type = freezed,
     Object? comment = freezed,
@@ -164,6 +169,10 @@ class _$MaterialItemDtoCopyWithImpl<$Res>
       itemRegistrationNumber: itemRegistrationNumber == freezed
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      defaultMaterialDescription: defaultMaterialDescription == freezed
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
       materialDescription: materialDescription == freezed
           ? _value.materialDescription
@@ -227,6 +236,8 @@ abstract class _$$_MaterialItemDtoCopyWith<$Res>
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
           String itemRegistrationNumber,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+          String defaultMaterialDescription,
+      @JsonKey(name: 'materialDescription', defaultValue: '')
           String materialDescription,
       @JsonKey(name: 'type', defaultValue: '')
           String type,
@@ -265,6 +276,7 @@ class __$$_MaterialItemDtoCopyWithImpl<$Res>
     Object? overridenPrice = freezed,
     Object? unitOfMeasurement = freezed,
     Object? itemRegistrationNumber = freezed,
+    Object? defaultMaterialDescription = freezed,
     Object? materialDescription = freezed,
     Object? type = freezed,
     Object? comment = freezed,
@@ -308,6 +320,10 @@ class __$$_MaterialItemDtoCopyWithImpl<$Res>
       itemRegistrationNumber: itemRegistrationNumber == freezed
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      defaultMaterialDescription: defaultMaterialDescription == freezed
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
       materialDescription: materialDescription == freezed
           ? _value.materialDescription
@@ -360,6 +376,8 @@ class _$_MaterialItemDto extends _MaterialItemDto {
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
           required this.itemRegistrationNumber,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+          required this.defaultMaterialDescription,
+      @JsonKey(name: 'materialDescription', defaultValue: '')
           required this.materialDescription,
       @JsonKey(name: 'type', defaultValue: '')
           required this.type,
@@ -411,6 +429,9 @@ class _$_MaterialItemDto extends _MaterialItemDto {
   final String itemRegistrationNumber;
   @override
   @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+  final String defaultMaterialDescription;
+  @override
+  @JsonKey(name: 'materialDescription', defaultValue: '')
   final String materialDescription;
   @override
   @JsonKey(name: 'type', defaultValue: '')
@@ -433,7 +454,7 @@ class _$_MaterialItemDto extends _MaterialItemDto {
 
   @override
   String toString() {
-    return 'MaterialItemDto(qty: $qty, hidePrice: $hidePrice, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, materialDescription: $materialDescription, type: $type, comment: $comment, batchNumber: $batchNumber, zdp8Override: $zdp8Override, overrideInfo: $overrideInfo)';
+    return 'MaterialItemDto(qty: $qty, hidePrice: $hidePrice, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, defaultMaterialDescription: $defaultMaterialDescription, materialDescription: $materialDescription, type: $type, comment: $comment, batchNumber: $batchNumber, zdp8Override: $zdp8Override, overrideInfo: $overrideInfo)';
   }
 
   @override
@@ -456,6 +477,8 @@ class _$_MaterialItemDto extends _MaterialItemDto {
                 .equals(other.unitOfMeasurement, unitOfMeasurement) &&
             const DeepCollectionEquality()
                 .equals(other.itemRegistrationNumber, itemRegistrationNumber) &&
+            const DeepCollectionEquality().equals(
+                other.defaultMaterialDescription, defaultMaterialDescription) &&
             const DeepCollectionEquality()
                 .equals(other.materialDescription, materialDescription) &&
             const DeepCollectionEquality().equals(other.type, type) &&
@@ -481,6 +504,7 @@ class _$_MaterialItemDto extends _MaterialItemDto {
       const DeepCollectionEquality().hash(overridenPrice),
       const DeepCollectionEquality().hash(unitOfMeasurement),
       const DeepCollectionEquality().hash(itemRegistrationNumber),
+      const DeepCollectionEquality().hash(defaultMaterialDescription),
       const DeepCollectionEquality().hash(materialDescription),
       const DeepCollectionEquality().hash(type),
       const DeepCollectionEquality().hash(comment),
@@ -522,6 +546,8 @@ abstract class _MaterialItemDto extends MaterialItemDto {
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
           required final String itemRegistrationNumber,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+          required final String defaultMaterialDescription,
+      @JsonKey(name: 'materialDescription', defaultValue: '')
           required final String materialDescription,
       @JsonKey(name: 'type', defaultValue: '')
           required final String type,
@@ -567,6 +593,9 @@ abstract class _MaterialItemDto extends MaterialItemDto {
   String get itemRegistrationNumber;
   @override
   @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+  String get defaultMaterialDescription;
+  @override
+  @JsonKey(name: 'materialDescription', defaultValue: '')
   String get materialDescription;
   @override
   @JsonKey(name: 'type', defaultValue: '')

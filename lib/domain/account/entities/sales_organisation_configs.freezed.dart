@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SalesOrganisationConfigs {
+  bool get enableDefaultMD => throw _privateConstructorUsedError;
   bool get disableProcessingStatus => throw _privateConstructorUsedError;
   Currency get currency => throw _privateConstructorUsedError;
   bool get hideCustomer => throw _privateConstructorUsedError;
@@ -53,7 +54,8 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
           $Res Function(SalesOrganisationConfigs) then) =
       _$SalesOrganisationConfigsCopyWithImpl<$Res>;
   $Res call(
-      {bool disableProcessingStatus,
+      {bool enableDefaultMD,
+      bool disableProcessingStatus,
       Currency currency,
       bool hideCustomer,
       bool enableGimmickMaterial,
@@ -91,6 +93,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? enableDefaultMD = freezed,
     Object? disableProcessingStatus = freezed,
     Object? currency = freezed,
     Object? hideCustomer = freezed,
@@ -118,6 +121,10 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? enableListPrice = freezed,
   }) {
     return _then(_value.copyWith(
+      enableDefaultMD: enableDefaultMD == freezed
+          ? _value.enableDefaultMD
+          : enableDefaultMD // ignore: cast_nullable_to_non_nullable
+              as bool,
       disableProcessingStatus: disableProcessingStatus == freezed
           ? _value.disableProcessingStatus
           : disableProcessingStatus // ignore: cast_nullable_to_non_nullable
@@ -231,7 +238,8 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       __$$_SalesOrganisationConfigsCopyWithImpl<$Res>;
   @override
   $Res call(
-      {bool disableProcessingStatus,
+      {bool enableDefaultMD,
+      bool disableProcessingStatus,
       Currency currency,
       bool hideCustomer,
       bool enableGimmickMaterial,
@@ -272,6 +280,7 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? enableDefaultMD = freezed,
     Object? disableProcessingStatus = freezed,
     Object? currency = freezed,
     Object? hideCustomer = freezed,
@@ -299,6 +308,10 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? enableListPrice = freezed,
   }) {
     return _then(_$_SalesOrganisationConfigs(
+      enableDefaultMD: enableDefaultMD == freezed
+          ? _value.enableDefaultMD
+          : enableDefaultMD // ignore: cast_nullable_to_non_nullable
+              as bool,
       disableProcessingStatus: disableProcessingStatus == freezed
           ? _value.disableProcessingStatus
           : disableProcessingStatus // ignore: cast_nullable_to_non_nullable
@@ -407,7 +420,8 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
 
 class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   const _$_SalesOrganisationConfigs(
-      {required this.disableProcessingStatus,
+      {required this.enableDefaultMD,
+      required this.disableProcessingStatus,
       required this.currency,
       required this.hideCustomer,
       required this.enableGimmickMaterial,
@@ -435,6 +449,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       : _principalList = principalList,
         super._();
 
+  @override
+  final bool enableDefaultMD;
   @override
   final bool disableProcessingStatus;
   @override
@@ -493,7 +509,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice)';
+    return 'SalesOrganisationConfigs(enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice)';
   }
 
   @override
@@ -501,6 +517,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SalesOrganisationConfigs &&
+            const DeepCollectionEquality()
+                .equals(other.enableDefaultMD, enableDefaultMD) &&
             const DeepCollectionEquality().equals(
                 other.disableProcessingStatus, disableProcessingStatus) &&
             const DeepCollectionEquality().equals(other.currency, currency) &&
@@ -552,6 +570,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
+        const DeepCollectionEquality().hash(enableDefaultMD),
         const DeepCollectionEquality().hash(disableProcessingStatus),
         const DeepCollectionEquality().hash(currency),
         const DeepCollectionEquality().hash(hideCustomer),
@@ -588,7 +607,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
 
 abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   const factory _SalesOrganisationConfigs(
-      {required final bool disableProcessingStatus,
+      {required final bool enableDefaultMD,
+      required final bool disableProcessingStatus,
       required final Currency currency,
       required final bool hideCustomer,
       required final bool enableGimmickMaterial,
@@ -615,6 +635,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final bool enableListPrice}) = _$_SalesOrganisationConfigs;
   const _SalesOrganisationConfigs._() : super._();
 
+  @override
+  bool get enableDefaultMD;
   @override
   bool get disableProcessingStatus;
   @override

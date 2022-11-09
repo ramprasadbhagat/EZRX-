@@ -21,6 +21,7 @@ class MaterialItem with _$MaterialItem {
     required MaterialGroup materialGroup2,
     required MaterialGroup materialGroup4,
     required MaterialNumber materialNumber,
+    required String defaultMaterialDescription,
     required double overridenPrice,
     required String unitOfMeasurement,
     required String itemRegistrationNumber,
@@ -32,6 +33,7 @@ class MaterialItem with _$MaterialItem {
         qty: 0,
         type: '',
         comment: '',
+        defaultMaterialDescription: '',
         hidePrice: false,
         batchNumber: '',
         zdp8Override: false,
@@ -68,7 +70,7 @@ class MaterialItem with _$MaterialItem {
       hasValidTenderContract: false,
       hasMandatoryTenderContract: false,
       taxes: [],
-      defaultMaterialDescription: '',
+      defaultMaterialDescription: defaultMaterialDescription,
       bundles: [],
     );
   }

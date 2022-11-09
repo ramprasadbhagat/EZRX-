@@ -36,6 +36,7 @@ void main() {
   );
 
   final fakeSaleOrgConfig = SalesOrganisationConfigs(
+    enableDefaultMD: false,
     disableProcessingStatus: false,
     currency: Currency(''),
     hideCustomer: false,

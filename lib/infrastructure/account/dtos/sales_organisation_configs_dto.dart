@@ -89,12 +89,16 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'enableListPrice', defaultValue: false)
     @HiveField(124)
         required bool enableListPrice,
+    @JsonKey(name: 'enableDefaultMD', defaultValue: false)
+    @HiveField(125)
+        required bool enableDefaultMD,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
     SalesOrganisationConfigs configs,
   ) {
     return SalesOrganisationConfigsDto(
+      enableDefaultMD: configs.enableDefaultMD,
       disableProcessingStatus: configs.disableProcessingStatus,
       currency: configs.currency.getOrCrash(),
       hideCustomer: configs.hideCustomer,
@@ -125,6 +129,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
 
   SalesOrganisationConfigs toDomain() {
     return SalesOrganisationConfigs(
+      enableDefaultMD: enableDefaultMD,
       disableProcessingStatus: disableProcessingStatus,
       currency: Currency(currency),
       hideCustomer: hideCustomer,

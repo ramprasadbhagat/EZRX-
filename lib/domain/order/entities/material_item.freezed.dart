@@ -26,6 +26,7 @@ mixin _$MaterialItem {
   MaterialGroup get materialGroup2 => throw _privateConstructorUsedError;
   MaterialGroup get materialGroup4 => throw _privateConstructorUsedError;
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
+  String get defaultMaterialDescription => throw _privateConstructorUsedError;
   double get overridenPrice => throw _privateConstructorUsedError;
   String get unitOfMeasurement => throw _privateConstructorUsedError;
   String get itemRegistrationNumber => throw _privateConstructorUsedError;
@@ -53,6 +54,7 @@ abstract class $MaterialItemCopyWith<$Res> {
       MaterialGroup materialGroup2,
       MaterialGroup materialGroup4,
       MaterialNumber materialNumber,
+      String defaultMaterialDescription,
       double overridenPrice,
       String unitOfMeasurement,
       String itemRegistrationNumber,
@@ -82,6 +84,7 @@ class _$MaterialItemCopyWithImpl<$Res> implements $MaterialItemCopyWith<$Res> {
     Object? materialGroup2 = freezed,
     Object? materialGroup4 = freezed,
     Object? materialNumber = freezed,
+    Object? defaultMaterialDescription = freezed,
     Object? overridenPrice = freezed,
     Object? unitOfMeasurement = freezed,
     Object? itemRegistrationNumber = freezed,
@@ -129,6 +132,10 @@ class _$MaterialItemCopyWithImpl<$Res> implements $MaterialItemCopyWith<$Res> {
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
+      defaultMaterialDescription: defaultMaterialDescription == freezed
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
       overridenPrice: overridenPrice == freezed
           ? _value.overridenPrice
           : overridenPrice // ignore: cast_nullable_to_non_nullable
@@ -178,6 +185,7 @@ abstract class _$$_MaterialItemCopyWith<$Res>
       MaterialGroup materialGroup2,
       MaterialGroup materialGroup4,
       MaterialNumber materialNumber,
+      String defaultMaterialDescription,
       double overridenPrice,
       String unitOfMeasurement,
       String itemRegistrationNumber,
@@ -211,6 +219,7 @@ class __$$_MaterialItemCopyWithImpl<$Res>
     Object? materialGroup2 = freezed,
     Object? materialGroup4 = freezed,
     Object? materialNumber = freezed,
+    Object? defaultMaterialDescription = freezed,
     Object? overridenPrice = freezed,
     Object? unitOfMeasurement = freezed,
     Object? itemRegistrationNumber = freezed,
@@ -258,6 +267,10 @@ class __$$_MaterialItemCopyWithImpl<$Res>
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
+      defaultMaterialDescription: defaultMaterialDescription == freezed
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
       overridenPrice: overridenPrice == freezed
           ? _value.overridenPrice
           : overridenPrice // ignore: cast_nullable_to_non_nullable
@@ -296,6 +309,7 @@ class _$_MaterialItem extends _MaterialItem {
       required this.materialGroup2,
       required this.materialGroup4,
       required this.materialNumber,
+      required this.defaultMaterialDescription,
       required this.overridenPrice,
       required this.unitOfMeasurement,
       required this.itemRegistrationNumber,
@@ -330,6 +344,8 @@ class _$_MaterialItem extends _MaterialItem {
   @override
   final MaterialNumber materialNumber;
   @override
+  final String defaultMaterialDescription;
+  @override
   final double overridenPrice;
   @override
   final String unitOfMeasurement;
@@ -342,7 +358,7 @@ class _$_MaterialItem extends _MaterialItem {
 
   @override
   String toString() {
-    return 'MaterialItem(qty: $qty, type: $type, comment: $comment, hidePrice: $hidePrice, batchNumber: $batchNumber, zdp8Override: $zdp8Override, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, materialDescription: $materialDescription, overrideInfo: $overrideInfo)';
+    return 'MaterialItem(qty: $qty, type: $type, comment: $comment, hidePrice: $hidePrice, batchNumber: $batchNumber, zdp8Override: $zdp8Override, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, defaultMaterialDescription: $defaultMaterialDescription, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, materialDescription: $materialDescription, overrideInfo: $overrideInfo)';
   }
 
   @override
@@ -365,6 +381,8 @@ class _$_MaterialItem extends _MaterialItem {
                 .equals(other.materialGroup4, materialGroup4) &&
             const DeepCollectionEquality()
                 .equals(other.materialNumber, materialNumber) &&
+            const DeepCollectionEquality().equals(
+                other.defaultMaterialDescription, defaultMaterialDescription) &&
             const DeepCollectionEquality()
                 .equals(other.overridenPrice, overridenPrice) &&
             const DeepCollectionEquality()
@@ -390,6 +408,7 @@ class _$_MaterialItem extends _MaterialItem {
       const DeepCollectionEquality().hash(materialGroup2),
       const DeepCollectionEquality().hash(materialGroup4),
       const DeepCollectionEquality().hash(materialNumber),
+      const DeepCollectionEquality().hash(defaultMaterialDescription),
       const DeepCollectionEquality().hash(overridenPrice),
       const DeepCollectionEquality().hash(unitOfMeasurement),
       const DeepCollectionEquality().hash(itemRegistrationNumber),
@@ -414,6 +433,7 @@ abstract class _MaterialItem extends MaterialItem {
       required final MaterialGroup materialGroup2,
       required final MaterialGroup materialGroup4,
       required final MaterialNumber materialNumber,
+      required final String defaultMaterialDescription,
       required final double overridenPrice,
       required final String unitOfMeasurement,
       required final String itemRegistrationNumber,
@@ -441,6 +461,8 @@ abstract class _MaterialItem extends MaterialItem {
   MaterialGroup get materialGroup4;
   @override
   MaterialNumber get materialNumber;
+  @override
+  String get defaultMaterialDescription;
   @override
   double get overridenPrice;
   @override
