@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/presentation/core/custom_label.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -36,19 +37,22 @@ class CartItemListTile extends StatelessWidget {
           ),
           trailing: SizedBox(
             width: 50,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+            child: Wrap(
               children: [
-                Text(
-                  cartItem.quantity.toString().padLeft(2, '0'),
-                  key: Key('itemCount${cartItem.materialInfo.materialNumber}'),
-                  style: Theme.of(context).textTheme.headline5,
-                ),
-                Flexible(
-                  child: Row(
-                    children: [
-                      Flexible(
-                        child: GestureDetector(
+                Column(
+                  // mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      cartItem.quantity.toString().padLeft(2, '0'),
+                      key: Key(
+                        'itemCount${cartItem.materialInfo.materialNumber}',
+                      ),
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
                           onTap: () {
                             if (cartItem.quantity > 1) {
                               context.read<CartBloc>().add(
@@ -77,9 +81,7 @@ class CartItemListTile extends StatelessWidget {
                             ),
                           ),
                         ),
-                      ),
-                      Flexible(
-                        child: GestureDetector(
+                        GestureDetector(
                           onTap: () {
                             context.read<CartBloc>().add(
                                   CartEvent.addToCart(
@@ -102,9 +104,18 @@ class CartItemListTile extends StatelessWidget {
                             ),
                           ),
                         ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    if (cartItem.price.zmgDiscount)
+                      const CustomLabel(
+                        textValue: 'Discount',
+                        height: 12,
+                        mainColor: ZPColors.secondary,
                       ),
-                    ],
-                  ),
+                  ],
                 ),
               ],
             ),

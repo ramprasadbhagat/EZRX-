@@ -24,7 +24,11 @@ class AddToCartBloc extends Bloc<AddToCartEvent, AddToCartState> {
       updateQuantity: (e) async {
         emit(
           state.copyWith(
-            cartItem: state.cartItem.copyWith(quantity: e.quantity),
+            cartItem: state.cartItem.copyWith(
+              quantity: e.quantity,
+              zmgMaterialCountOnCart: e.zmgMaterialCountOnCart +
+                  (state.cartItem.price.zmgDiscount ? e.quantity : 0),
+            ),
             quantity: e.quantity,
           ),
         );

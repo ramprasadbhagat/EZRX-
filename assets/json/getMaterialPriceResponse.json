@@ -22,7 +22,34 @@
         ],
         "Bonuses": [
         ],
-        "TieredPricing": [],
+        "TieredPricing": [
+          {
+            "Tier": "C", 
+            "PriceTier": [
+              {
+                "ApplyBonus": true, 
+                "Sequence": 0, 
+                "Quantity": 1, 
+                "Type": "", 
+                "Rate": 5300
+              }, 
+              {
+                "ApplyBonus": true, 
+                "Sequence": 0,
+                "Quantity": 3, 
+                "Type": "", 
+                "Rate": 4800
+              }, 
+              {
+                "ApplyBonus": true, 
+                "Sequence": 0, 
+                "Quantity": 5, 
+                "Type": "", 
+                "Rate": 4650
+              }
+            ]
+          }
+        ],
         "Bundles": [],
         "Valid": true
       },
@@ -55,7 +82,7 @@
         "OverridenRulePresent": false,
         "ZDP5MaxQuota": "",
         "ZDP5RemainingQuota": "",
-        "ZMGDiscount": false,
+        "ZMGDiscount": true,
         "ListPrice": 7,
         "FinalIndividualPrice": 7,
         "FinalTotalPrice": 0,
@@ -137,14 +164,28 @@
         ],
         "TieredPricing": [
           {
-            "Tier": "C",
+            "Tier": "C", 
             "PriceTier": [
               {
-                "ApplyBonus": false,
+                "ApplyBonus": true, 
+                "Sequence": 0, 
+                "Quantity": 5, 
+                "Type": "", 
+                "Rate": 4650
+              },
+              {
+                "ApplyBonus": true, 
+                "Sequence": 0, 
+                "Quantity": 1, 
+                "Type": "", 
+                "Rate": 5300
+              }, 
+              {
+                "ApplyBonus": true, 
                 "Sequence": 0,
-                "Quantity": 1,
-                "Type": "",
-                "Rate": 901
+                "Quantity": 3, 
+                "Type": "", 
+                "Rate": 4800
               }
             ]
           }
@@ -188,7 +229,7 @@
         "OverridenRulePresent": false,
         "ZDP5MaxQuota": "",
         "ZDP5RemainingQuota": "",
-        "ZMGDiscount": false,
+        "ZMGDiscount": true,
         "ListPrice": 225,
         "FinalIndividualPrice": 225,
         "FinalTotalPrice": 0,
@@ -203,7 +244,34 @@
           }
         ],
         "Bonuses": [],
-        "TieredPricing": [],
+        "TieredPricing": [
+          {
+            "Tier": "C", 
+            "PriceTier": [
+              {
+                "ApplyBonus": true, 
+                "Sequence": 0, 
+                "Quantity": 1, 
+                "Type": "", 
+                "Rate": 4700
+              }, 
+              {
+                "ApplyBonus": true, 
+                "Sequence": 0, 
+                "Quantity": 5, 
+                "Type": "", 
+                "Rate": 4150
+              },
+              {
+                "ApplyBonus": true, 
+                "Sequence": 0,
+                "Quantity": 3, 
+                "Type": "", 
+                "Rate": 4500
+              }
+            ]
+          }
+        ],
         "Bundles": [],
         "Valid": true
       },

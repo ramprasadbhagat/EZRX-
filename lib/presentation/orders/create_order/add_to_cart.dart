@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -24,7 +25,10 @@ class _AddToCartState extends State<AddToCart> {
   void initState() {
     _controller = TextEditingController();
     _controller.text = '1';
-    context.read<AddToCartBloc>().add(const AddToCartEvent.updateQuantity(1));
+    context.read<AddToCartBloc>().add(AddToCartEvent.updateQuantity(
+          1,
+          context.read<CartBloc>().state.zmgMaterialCount,
+        ));
     super.initState();
   }
 
@@ -76,6 +80,24 @@ class _AddToCartState extends State<AddToCart> {
                           ),
                     ),
                   ),
+                  if (state.cartItem.price.zmgDiscount)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Tiered Pricing:'),
+                        const SizedBox(width: 10),
+                        Column(
+                          children: state.cartItem.price.tiers.first.items
+                              .map(
+                                (e) => _PriceTierLable(
+                                  priceTierItem: e,
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      ],
+                    ),
 
                   const SizedBox(
                     height: 15,
@@ -94,7 +116,13 @@ class _AddToCartState extends State<AddToCart> {
                             final value = int.parse(_controller.text) - 1;
                             _controller.text = value.toString();
                             context.read<AddToCartBloc>().add(
-                                  AddToCartEvent.updateQuantity(value),
+                                  AddToCartEvent.updateQuantity(
+                                    value,
+                                    context
+                                        .read<CartBloc>()
+                                        .state
+                                        .zmgMaterialCount,
+                                  ),
                                 );
                           }
                         },
@@ -120,6 +148,10 @@ class _AddToCartState extends State<AddToCart> {
                               context.read<AddToCartBloc>().add(
                                     AddToCartEvent.updateQuantity(
                                       int.parse(_controller.text),
+                                      context
+                                          .read<CartBloc>()
+                                          .state
+                                          .zmgMaterialCount,
                                     ),
                                   );
                             },
@@ -135,7 +167,13 @@ class _AddToCartState extends State<AddToCart> {
                           final value = int.parse(_controller.text) + 1;
                           _controller.text = value.toString();
                           context.read<AddToCartBloc>().add(
-                                AddToCartEvent.updateQuantity(value),
+                                AddToCartEvent.updateQuantity(
+                                  value,
+                                  context
+                                      .read<CartBloc>()
+                                      .state
+                                      .zmgMaterialCount,
+                                ),
                               );
                         },
                         icon: Icons.add,
@@ -282,6 +320,69 @@ class _QuantityIcon extends StatelessWidget {
         child: Icon(
           icon,
           color: ZPColors.white,
+        ),
+      ),
+    );
+  }
+}
+
+class _PriceTierLable extends StatelessWidget {
+  final PriceTierItem priceTierItem;
+  const _PriceTierLable({
+    Key? key,
+    required this.priceTierItem,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 180,
+      alignment: Alignment.center,
+      margin: const EdgeInsets.only(bottom: 5),
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(
+            'assets/images/tierpriceback.png',
+          ),
+          fit: BoxFit.fill,
+        ),
+      ),
+      child: RichText(
+        text: TextSpan(
+          children: <TextSpan>[
+            TextSpan(
+              text: 'Buy ${priceTierItem.quantity.toString()} or more ',
+              style: const TextStyle(
+                fontSize: 11,
+                color: Colors.white,
+                fontFamily: 'Poppins',
+              ),
+            ),
+            TextSpan(
+              text: context.read<SalesOrgBloc>().state.currency.code,
+              style: const TextStyle(
+                fontSize: 11,
+                color: Colors.white,
+                fontFamily: 'Roboto',
+              ),
+            ),
+            const TextSpan(
+              text: ' ',
+              style: TextStyle(
+                fontSize: 11,
+                color: Colors.white,
+                fontFamily: 'Poppins',
+              ),
+            ),
+            TextSpan(
+              text: priceTierItem.rate.toStringAsFixed(2),
+              style: const TextStyle(
+                fontSize: 11,
+                color: Colors.white,
+                fontFamily: 'Poppins',
+              ),
+            ),
+          ],
         ),
       ),
     );

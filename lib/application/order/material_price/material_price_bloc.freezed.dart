@@ -470,11 +470,12 @@ class __$$_MaterialPriceStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MaterialPriceState implements _MaterialPriceState {
+class _$_MaterialPriceState extends _MaterialPriceState {
   const _$_MaterialPriceState(
       {required final Map<MaterialNumber, Price> materialPrice,
       required this.isFetching})
-      : _materialPrice = materialPrice;
+      : _materialPrice = materialPrice,
+        super._();
 
   final Map<MaterialNumber, Price> _materialPrice;
   @override
@@ -515,10 +516,11 @@ class _$_MaterialPriceState implements _MaterialPriceState {
           this, _$identity);
 }
 
-abstract class _MaterialPriceState implements MaterialPriceState {
+abstract class _MaterialPriceState extends MaterialPriceState {
   const factory _MaterialPriceState(
       {required final Map<MaterialNumber, Price> materialPrice,
       required final bool isFetching}) = _$_MaterialPriceState;
+  const _MaterialPriceState._() : super._();
 
   @override
   Map<MaterialNumber, Price> get materialPrice;

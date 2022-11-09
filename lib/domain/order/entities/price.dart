@@ -43,4 +43,7 @@ class Price with _$Price {
         finalTotalPrice: MaterialPrice(0),
         additionalBonusEligible: false,
       );
+
+  List<PriceTierItem> get priceTireItem =>
+      tiers.isNotEmpty ? tiers.first.getItems : <PriceTierItem>[];
 }

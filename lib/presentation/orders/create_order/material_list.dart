@@ -14,6 +14,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/presentation/core/custom_label.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -219,7 +220,29 @@ class _ListContent extends StatelessWidget {
             _PriceLabel(materialInfo: materialInfo),
           ],
         ),
-        trailing: _FavoriteButton(materialInfo: materialInfo),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
+              builder: (context, materialPriceState) {
+                final itemPrice = materialPriceState
+                    .getPriceForMaterial(materialInfo.materialNumber);
+                if (itemPrice.zmgDiscount) {
+                  return const CustomLabel(
+                    textValue: 'Discount',
+                    mainColor: ZPColors.secondary,
+                  );
+                }
+
+                return const SizedBox.shrink();
+              },
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            _FavoriteButton(materialInfo: materialInfo),
+          ],
+        ),
       ),
     );
   }
@@ -268,8 +291,9 @@ class _PriceLabel extends StatelessWidget {
             materialInfo: materialInfo,
             salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
             quantity: 1,
-            zmgMaterialCountOnCart:
-                context.read<CartBloc>().state.zmgMaterialCount,
+            zmgMaterialCountOnCart: itemPrice.zmgDiscount
+                ? context.watch<CartBloc>().state.zmgMaterialCount
+                : context.read<CartBloc>().state.zmgMaterialCount,
           );
 
           return Column(

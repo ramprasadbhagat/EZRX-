@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'price_aggregate.freezed.dart';
@@ -25,6 +26,8 @@ class PriceAggregate with _$PriceAggregate {
       );
 
   double get listPrice {
+    if (price.zmgDiscount) return tirePriceforZMG;
+
     return price.finalPrice.getOrDefaultValue(0);
   }
 
@@ -77,6 +80,16 @@ class PriceAggregate with _$PriceAggregate {
   double get unitPriceTotal {
     return unitPrice * quantity;
   }
+
+  double get tirePriceforZMG => price.priceTireItem
+      .firstWhere(
+        (element) => zmgMaterialTotalCount >= element.quantity,
+        orElse: () => PriceTierItem.empty(),
+      )
+      .rate;
+
+  int get zmgMaterialTotalCount =>
+      zmgMaterialCountOnCart != 0 ? zmgMaterialCountOnCart : quantity;
 
   String display(PriceType priceType) {
     if (price.isFOC) return 'FOC';
