@@ -122,7 +122,10 @@ class HistoryTab extends StatelessWidget {
                 current.isSubmitting ||
             !scaffoldKey.currentState!.isEndDrawerOpen,
         listener: (context, state) {
-          context.read<OrderHistoryListBloc>().add(
+          final hasCustomerCodeInfo = context.read<CustomerCodeBloc>().state.customerCodeInfo.customerCodeSoldTo.isNotEmpty;
+          final hasShipToInfo = context.read<ShipToCodeBloc>().state.shipToInfo.shipToCustomerCode.isNotEmpty;
+          if(hasCustomerCodeInfo && hasShipToInfo) {
+            context.read<OrderHistoryListBloc>().add(
                 OrderHistoryListEvent.fetch(
                   customerCodeInfo:
                       context.read<CustomerCodeBloc>().state.customerCodeInfo,
@@ -132,6 +135,7 @@ class HistoryTab extends StatelessWidget {
                   orderHistoryFilter: state.orderHistoryFilterList,
                 ),
               );
+          }
         },
         child: BlocConsumer<OrderHistoryListBloc, OrderHistoryListState>(
           listenWhen: (previous, current) =>

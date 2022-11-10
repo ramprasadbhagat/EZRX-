@@ -29,12 +29,12 @@ class OrderHistoryListBloc
   }
 
   Future<void> _onEvent(
-    OrderHistoryListEvent event,
-    Emitter<OrderHistoryListState> emit,
-  ) async {
+      OrderHistoryListEvent event,
+      Emitter<OrderHistoryListState> emit,
+      ) async {
     await event.map(
       initialized: (e) async => emit(OrderHistoryListState.initial()),
-      fetch: (e) async { 
+      fetch: (e) async {
         emit(
           state.copyWith(
             isFetching: true,
@@ -58,9 +58,9 @@ class OrderHistoryListBloc
           orderHistoryFilter: e.orderHistoryFilter,
         );
 
-       
+
         failureOrSuccess.fold(
-          (failure) {
+              (failure) {
             emit(
               state.copyWith(
                 failureOrSuccessOption: optionOf(failureOrSuccess),
@@ -68,14 +68,14 @@ class OrderHistoryListBloc
               ),
             );
           },
-          (orderHistoryList) {
+              (orderHistoryList) {
             emit(
               state.copyWith(
                 orderHistoryList: orderHistoryList,
                 failureOrSuccessOption: none(),
                 isFetching: false,
                 canLoadMore:
-                    orderHistoryList.orderHistoryItems.length >= _pageSize,
+                orderHistoryList.orderHistoryItems.length >= _pageSize,
                 nextPageIndex: 1,
               ),
             );
@@ -104,7 +104,7 @@ class OrderHistoryListBloc
         );
 
         await failureOrSuccess.fold(
-          (failure) async {
+              (failure) async {
             emit(
               state.copyWith(
                 failureOrSuccessOption: optionOf(failureOrSuccess),
@@ -112,7 +112,7 @@ class OrderHistoryListBloc
               ),
             );
           },
-          (orderHistoryList) async {
+              (orderHistoryList) async {
             final newOrderHistoryList = List<OrderHistoryItem>.from(
               state.orderHistoryList.orderHistoryItems,
             )..addAll(orderHistoryList.orderHistoryItems);
@@ -125,7 +125,7 @@ class OrderHistoryListBloc
                 failureOrSuccessOption: none(),
                 isFetching: false,
                 canLoadMore:
-                    orderHistoryList.orderHistoryItems.length >= _pageSize,
+                orderHistoryList.orderHistoryItems.length >= _pageSize,
                 nextPageIndex: state.nextPageIndex + 1,
               ),
             );

@@ -23,8 +23,8 @@ void main() {
   final orderHistoryRepository = OrderHistoryRepoMock();
   final mockUser = User.empty();
   final mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty();
-  final mockCustomerCodeInfo = CustomerCodeInfo.empty();
-  final mockShipToInfo = ShipToInfo.empty();
+  final mockCustomerCodeInfo = CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: 'fake-customer-code');
+  final mockShipToInfo =  ShipToInfo.empty().copyWith(building: 'fakeBuilding', shipToCustomerCode: 'fake-ship-to-customer-code');
   final mockOrderHistoryFilter = OrderHistoryFilter.empty();
   late final OrderHistory orderHistoryListMock;
   const fakeSort = 'desc';
