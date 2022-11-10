@@ -62,7 +62,7 @@ class MaterialDto with _$MaterialDto {
     @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
     @HiveField(15)
         required bool hasMandatoryTenderContract,
-    @JsonKey(name: 'taxes', defaultValue: <String>['0'])
+    @JsonKey(name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
     @HiveField(16)
         required List<String> taxes,
     @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
@@ -126,4 +126,12 @@ class MaterialDto with _$MaterialDto {
 
   factory MaterialDto.fromJson(Map<String, dynamic> json) =>
       _$MaterialDtoFromJson(json);
+}
+
+List handleEmptyTaxList(Map json, String key) {
+  if (json[key] == null || json[key].isEmpty) {
+    return ['0'];
+  }
+
+  return json[key];
 }

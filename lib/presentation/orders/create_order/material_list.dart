@@ -69,8 +69,11 @@ class MaterialListPage extends StatelessWidget {
                 context.read<SalesOrgBloc>().state.configs,
             salesOrganisation:
                 context.read<SalesOrgBloc>().state.salesOrganisation,
-            isError: context.read<OrderDocumentTypeBloc>()
-                .state.orderDocumentTypeList.isNotEmpty,   
+            isError: context
+                .read<OrderDocumentTypeBloc>()
+                .state
+                .orderDocumentTypeList
+                .isNotEmpty,
           );
 
           return BlocListener<OrderDocumentTypeBloc, OrderDocumentTypeState>(
@@ -120,7 +123,7 @@ class MaterialListPage extends StatelessWidget {
             child: Column(
               children: [
                 const _SearchBar(),
-                if (orderDocumentTypeAggregate.checkOrderTypeEnable) 
+                if (orderDocumentTypeAggregate.checkOrderTypeEnable)
                   const OrderTypeSelector(),
                 const _MaterialFilters(),
                 _BodyContent(
@@ -273,7 +276,9 @@ class _ListContent extends StatelessWidget {
                     materialInfo.defaultMaterialDescription.isNotEmpty)
                 ? Text(
                     materialInfo.defaultMaterialDescription,
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.subtitle2?.apply(
+                          color: ZPColors.lightGray,
+                        ),
                   )
                 : const SizedBox.shrink(),
             Text(

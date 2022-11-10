@@ -195,7 +195,9 @@ class _ListContent extends StatelessWidget {
                     materialInfo.defaultMaterialDescription.isNotEmpty)
                 ? Text(
                     materialInfo.defaultMaterialDescription,
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.subtitle2?.apply(
+                          color: ZPColors.lightGray,
+                        ),
                   )
                 : const SizedBox.shrink(),
             Text(
