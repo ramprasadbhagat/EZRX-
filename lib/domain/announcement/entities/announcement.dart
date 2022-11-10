@@ -48,25 +48,9 @@ class Announcement with _$Announcement {
   String get descriptionParsed {
     return description.isNotEmpty
         ? description
-            .replaceAll('\${startTime}', _startTimeConvert)
-            .replaceAll('\${endTime}', _endTimeConvert)
+            .replaceAll('\${startTime}', startTime)
+            .replaceAll('\${endTime}', endTime)
             .replaceAll('\${day}', startTime.split(' ')[0])
         : '';
-  }
-
-  String get _startTimeConvert {
-    if (startTime.isEmpty) return '';
-
-    return startTime.split(' ').length > 2
-        ? "${startTime.split(' ')[1]} ${startTime.split(' ')[2]}"
-        : startTime.split(' ')[1];
-  }
-
-  String get _endTimeConvert {
-    if (endTime.isEmpty) return '';
-
-    return endTime.split(' ').length > 2
-        ? "${endTime.split(' ')[1]} ${endTime.split(' ')[2]}"
-        : endTime.split(' ')[1];
   }
 }
