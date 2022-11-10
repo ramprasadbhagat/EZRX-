@@ -8,8 +8,9 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/customer_material_price_details_repository.dart';
+
 import 'package:ezrxmobile/infrastructure/order/repository/material_bundle_list_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/material_price_detail_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -17,12 +18,11 @@ class MaterialBundleListRepositoryMock extends Mock
     implements MaterialBundleListRepository {}
 
 class CustomerMaterialPriceDetailsRepositoryMock extends Mock
-    implements CustomerMaterialPriceDetailsRepository {}
+    implements MaterialPriceDetailRepository {}
 
 void main() {
   late MaterialBundleListRepository materialBundleListRepositoryMock;
-  late CustomerMaterialPriceDetailsRepository
-      customerMaterialPriceDetailsRepositoryMock;
+  late MaterialPriceDetailRepository customerMaterialPriceDetailsRepositoryMock;
 
   final mockUser = User.empty();
   final mockSalesOrg = SalesOrganisation.empty();

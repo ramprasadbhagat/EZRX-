@@ -96,7 +96,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_filter_local
 import 'package:ezrxmobile/infrastructure/order/datasource/material_filter_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_filter_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/customer_material_price_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_bundle_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_bundle_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_bundle_query.dart';
@@ -136,7 +135,6 @@ import 'package:ezrxmobile/infrastructure/order/repository/material_price_reposi
 import 'package:ezrxmobile/infrastructure/order/repository/order_document_type_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/stock_info_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/customer_material_price_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_bundle_list_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_price_detail_repository.dart';
@@ -717,19 +715,7 @@ void setupLocator() {
     () => MaterialBundleListBloc(
       materialBundleListRepository: locator<MaterialBundleListRepository>(),
       customerMaterialPriceDetailsRepository:
-          locator<CustomerMaterialPriceDetailsRepository>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => CustomerMaterialPriceDetailsLocalDataSource(),
-  );
-
-  locator.registerLazySingleton(
-    () => CustomerMaterialPriceDetailsRepository(
-      config: locator<Config>(),
-      customerMaterialPriceDetailsLocalDataSource:
-          locator<CustomerMaterialPriceDetailsLocalDataSource>(),
+          locator<MaterialPriceDetailRepository>(),
     ),
   );
 

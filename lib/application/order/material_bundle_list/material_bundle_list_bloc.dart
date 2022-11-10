@@ -7,8 +7,8 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
-import 'package:ezrxmobile/domain/order/repository/i_customer_material_price_details_repository.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_bundle_list_repository.dart';
+import 'package:ezrxmobile/domain/order/repository/i_material_price_detail_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -21,8 +21,7 @@ const int _pageSize = 10;
 class MaterialBundleListBloc
     extends Bloc<MaterialBundleListEvent, MaterialBundleListState> {
   final IMaterialBundleListRepository materialBundleListRepository;
-  final ICustomerMaterialPriceDetailsRepository
-      customerMaterialPriceDetailsRepository;
+  final IMaterialPriceDetailRepository customerMaterialPriceDetailsRepository;
 
   MaterialBundleListBloc({
     required this.materialBundleListRepository,
