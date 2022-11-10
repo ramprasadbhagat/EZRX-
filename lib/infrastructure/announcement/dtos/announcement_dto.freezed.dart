@@ -20,11 +20,23 @@ AnnouncementDto _$AnnouncementDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AnnouncementDto {
+  @JsonKey(
+      name: 'startTime',
+      defaultValue: '',
+      readValue: announcementDateTimeFormatCheck)
   String get startTime => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'endTime',
+      defaultValue: '',
+      readValue: announcementDateTimeFormatCheck)
   String get endTime => throw _privateConstructorUsedError;
+  @JsonKey(name: 'description', defaultValue: '')
   String get description => throw _privateConstructorUsedError;
+  @JsonKey(name: 'id', defaultValue: '')
   String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'type', defaultValue: '')
   String get type => throw _privateConstructorUsedError;
+  @JsonKey(name: 'active', defaultValue: false)
   bool get active => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -38,12 +50,18 @@ abstract class $AnnouncementDtoCopyWith<$Res> {
           AnnouncementDto value, $Res Function(AnnouncementDto) then) =
       _$AnnouncementDtoCopyWithImpl<$Res>;
   $Res call(
-      {String startTime,
-      String endTime,
-      String description,
-      String id,
-      String type,
-      bool active});
+      {@JsonKey(name: 'startTime', defaultValue: '', readValue: announcementDateTimeFormatCheck)
+          String startTime,
+      @JsonKey(name: 'endTime', defaultValue: '', readValue: announcementDateTimeFormatCheck)
+          String endTime,
+      @JsonKey(name: 'description', defaultValue: '')
+          String description,
+      @JsonKey(name: 'id', defaultValue: '')
+          String id,
+      @JsonKey(name: 'type', defaultValue: '')
+          String type,
+      @JsonKey(name: 'active', defaultValue: false)
+          bool active});
 }
 
 /// @nodoc
@@ -101,12 +119,18 @@ abstract class _$$_AnnouncementDtoCopyWith<$Res>
       __$$_AnnouncementDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String startTime,
-      String endTime,
-      String description,
-      String id,
-      String type,
-      bool active});
+      {@JsonKey(name: 'startTime', defaultValue: '', readValue: announcementDateTimeFormatCheck)
+          String startTime,
+      @JsonKey(name: 'endTime', defaultValue: '', readValue: announcementDateTimeFormatCheck)
+          String endTime,
+      @JsonKey(name: 'description', defaultValue: '')
+          String description,
+      @JsonKey(name: 'id', defaultValue: '')
+          String id,
+      @JsonKey(name: 'type', defaultValue: '')
+          String type,
+      @JsonKey(name: 'active', defaultValue: false)
+          bool active});
 }
 
 /// @nodoc
@@ -162,28 +186,46 @@ class __$$_AnnouncementDtoCopyWithImpl<$Res>
 @JsonSerializable(createToJson: false)
 class _$_AnnouncementDto extends _AnnouncementDto {
   const _$_AnnouncementDto(
-      {required this.startTime,
-      required this.endTime,
-      required this.description,
-      required this.id,
-      required this.type,
-      required this.active})
+      {@JsonKey(name: 'startTime', defaultValue: '', readValue: announcementDateTimeFormatCheck)
+          required this.startTime,
+      @JsonKey(name: 'endTime', defaultValue: '', readValue: announcementDateTimeFormatCheck)
+          required this.endTime,
+      @JsonKey(name: 'description', defaultValue: '')
+          required this.description,
+      @JsonKey(name: 'id', defaultValue: '')
+          required this.id,
+      @JsonKey(name: 'type', defaultValue: '')
+          required this.type,
+      @JsonKey(name: 'active', defaultValue: false)
+          required this.active})
       : super._();
 
   factory _$_AnnouncementDto.fromJson(Map<String, dynamic> json) =>
       _$$_AnnouncementDtoFromJson(json);
 
   @override
+  @JsonKey(
+      name: 'startTime',
+      defaultValue: '',
+      readValue: announcementDateTimeFormatCheck)
   final String startTime;
   @override
+  @JsonKey(
+      name: 'endTime',
+      defaultValue: '',
+      readValue: announcementDateTimeFormatCheck)
   final String endTime;
   @override
+  @JsonKey(name: 'description', defaultValue: '')
   final String description;
   @override
+  @JsonKey(name: 'id', defaultValue: '')
   final String id;
   @override
+  @JsonKey(name: 'type', defaultValue: '')
   final String type;
   @override
+  @JsonKey(name: 'active', defaultValue: false)
   final bool active;
 
   @override
@@ -224,28 +266,46 @@ class _$_AnnouncementDto extends _AnnouncementDto {
 
 abstract class _AnnouncementDto extends AnnouncementDto {
   const factory _AnnouncementDto(
-      {required final String startTime,
-      required final String endTime,
-      required final String description,
-      required final String id,
-      required final String type,
-      required final bool active}) = _$_AnnouncementDto;
+      {@JsonKey(name: 'startTime', defaultValue: '', readValue: announcementDateTimeFormatCheck)
+          required final String startTime,
+      @JsonKey(name: 'endTime', defaultValue: '', readValue: announcementDateTimeFormatCheck)
+          required final String endTime,
+      @JsonKey(name: 'description', defaultValue: '')
+          required final String description,
+      @JsonKey(name: 'id', defaultValue: '')
+          required final String id,
+      @JsonKey(name: 'type', defaultValue: '')
+          required final String type,
+      @JsonKey(name: 'active', defaultValue: false)
+          required final bool active}) = _$_AnnouncementDto;
   const _AnnouncementDto._() : super._();
 
   factory _AnnouncementDto.fromJson(Map<String, dynamic> json) =
       _$_AnnouncementDto.fromJson;
 
   @override
+  @JsonKey(
+      name: 'startTime',
+      defaultValue: '',
+      readValue: announcementDateTimeFormatCheck)
   String get startTime;
   @override
+  @JsonKey(
+      name: 'endTime',
+      defaultValue: '',
+      readValue: announcementDateTimeFormatCheck)
   String get endTime;
   @override
+  @JsonKey(name: 'description', defaultValue: '')
   String get description;
   @override
+  @JsonKey(name: 'id', defaultValue: '')
   String get id;
   @override
+  @JsonKey(name: 'type', defaultValue: '')
   String get type;
   @override
+  @JsonKey(name: 'active', defaultValue: false)
   bool get active;
   @override
   @JsonKey(ignore: true)

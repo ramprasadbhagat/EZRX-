@@ -6,14 +6,17 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_document_type_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_document_type_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_document_type_remote.dart';
 
 class OrderDocumentTypeRepository implements IOrderDocumentTypeRepository {
   final Config config;
   final OrderDocumentTypeLocalDataSource orderDocumentTypLocalDataSource;
+  final OrderDocumentTypeRemoteDataSource orderDocumentTypRemoteDataSource;
 
   OrderDocumentTypeRepository({
     required this.config,
     required this.orderDocumentTypLocalDataSource,
+    required this.orderDocumentTypRemoteDataSource,
   });
 
   @override
@@ -30,7 +33,17 @@ class OrderDocumentTypeRepository implements IOrderDocumentTypeRepository {
         return Left(FailureHandler.handleFailure(e));
       }
     }
-    
-    return Left(FailureHandler.handleFailure('dev not implemented'));
+
+    try {
+      final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
+      final orderDocumentTypList =
+          await orderDocumentTypRemoteDataSource.getOrderDocumentTypList(
+        salesOrgCode: salesOrgCode,
+      );
+
+      return Right(orderDocumentTypList);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
   }
 }

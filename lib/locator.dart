@@ -110,6 +110,8 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_price_remote
 import 'package:ezrxmobile/infrastructure/order/datasource/materials_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_document_type_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_details_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_document_type_mutation.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_document_type_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_remote.dart';
@@ -1071,12 +1073,24 @@ void setupLocator() {
   //============================================================
 
   locator.registerLazySingleton(() => OrderDocumentTypeLocalDataSource());
+  locator.registerLazySingleton(() => OrderDocumentTypeQueryMutation());
+
+  locator.registerLazySingleton(
+    () => OrderDocumentTypeRemoteDataSource(
+      httpService: locator<HttpService>(),
+      config: locator<Config>(),
+      queryMutation: locator<OrderDocumentTypeQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
 
   locator.registerLazySingleton(
     () => OrderDocumentTypeRepository(
       config: locator<Config>(),
       orderDocumentTypLocalDataSource:
           locator<OrderDocumentTypeLocalDataSource>(),
+      orderDocumentTypRemoteDataSource:
+          locator<OrderDocumentTypeRemoteDataSource>(),
     ),
   );
 
