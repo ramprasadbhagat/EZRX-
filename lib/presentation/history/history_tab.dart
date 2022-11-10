@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
@@ -26,6 +27,8 @@ class HistoryTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const radius = 16.0;
+    final buildToInformation =
+        context.read<CustomerCodeBloc>().state.customerCodeInfo.billToInfos;
 
     return Scaffold(
       key: scaffoldKey,
@@ -221,6 +224,9 @@ class HistoryTab extends StatelessWidget {
                           context.read<SalesOrgBloc>().state.configs.currency,
                       salesOrgConfigs:
                           context.read<SalesOrgBloc>().state.configs,
+                      billToInfo: buildToInformation.isNotEmpty
+                          ? buildToInformation.first
+                          : BillToInfo.empty(),
                     ),
                     items: state.orderHistoryList.orderHistoryItems,
                   );

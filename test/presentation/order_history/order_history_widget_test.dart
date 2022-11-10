@@ -25,6 +25,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../utils/widget_utils.dart';
+import '../orders/material_bundle_list/material_bundle_list_test.dart';
 
 class MockHTTPService extends Mock implements HttpService {}
 
@@ -55,6 +56,7 @@ void main() {
   final mockOrderHistoryFilterBloc = OrderHistoryFilterMockBloc();
   final mockShipToCodeBloc = ShipToCodeMocBloc();
   final mockCartBloc = CartMocBloc();
+  late CustomerCodeBloc customerCodeBlocMock;
   late MockHTTPService mockHTTPService;
   late AppRouter autoRouterMock;
   setUpAll(() {
@@ -71,6 +73,7 @@ void main() {
 
     autoRouterMock = locator<AppRouter>();
     mockHTTPService = MockHTTPService();
+    customerCodeBlocMock = CustomerCodeBlocMock();
     locator.registerLazySingleton<HttpService>(
       () => mockHTTPService,
     );
@@ -86,6 +89,8 @@ void main() {
         when(() => mockShipToCodeBloc.state)
             .thenReturn(ShipToCodeState.initial());
         when(() => mockCartBloc.state).thenReturn(CartState.initial());
+        when(() => customerCodeBlocMock.state)
+            .thenReturn(CustomerCodeState.initial());
       });
       StackRouterScope getWUT() {
         return WidgetUtils.getScopedWidget(
@@ -98,6 +103,8 @@ void main() {
             BlocProvider<ShipToCodeBloc>(
                 create: (context) => mockShipToCodeBloc),
             BlocProvider<CartBloc>(create: (context) => mockCartBloc),
+            BlocProvider<CustomerCodeBloc>(
+              create: (context) => customerCodeBlocMock),
           ],
           child: HistoryTab(),
         );

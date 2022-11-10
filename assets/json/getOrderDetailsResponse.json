@@ -1,0 +1,70 @@
+{
+    "data": {
+      "orderDetails": {
+        "OrderHeader": {
+          "TotalTax": 0.0,
+          "RequestedDeliveryDate": "2022-10-31",
+          "POReference": "Test1",
+          "OrderBy": "Siddique Md Faizan",
+          "Type": "ZPOR",
+          "TelephoneNumber": "",
+          "EZRXNumber": "EZRX-dc70b03",
+          "OrderValue": 0.0,
+          "CreatedDate":"2022-10-30"
+        },
+        "ShippingInformation": {
+          "Address": "",
+          "POReference": "Test1",
+          "InvoiceNumber": "",
+          "InvoiceDate": "",
+          "Invoices": [],
+          "PostalCode":"117406",
+          "Country":"",
+          "Phone":"",
+          "Fax":""
+
+        },
+        "OrderItems": [
+          {
+            "MaterialCode": "000000000021211474",
+            "MaterialDescription": "?Genotropin GQ 5.3MG SFDPO 1xPTCC DEMO",
+            "TotalPrice": 0.0,
+            "Tax": 0,
+            "SAPStatus": "",
+            "PlannedDeliveryDate": "",
+            "Qty": 1,
+            "PickedQuantity": 0,
+            "UnitPrice": 0,
+            "Type": "Comm",
+            "LineNumber": "000010",
+            "Batch": "",
+            "ExpiryDate": "",
+            "LineReferenceNotes": "",
+            "Details": [],
+            "IsTenderContractMaterial": false,
+            "TenderContractDetails": {
+              "TenderContractNumber":"",
+        "TenderContractReference":"",
+        "TenderPackageDescription":""
+            }
+          }
+        ],
+        "PaymentTerm": {
+          "PaymentTermCode": "",
+          "PaymentTermDescription": ""
+        },
+        "SpecialInstructions": "",
+        "PODocuments": [],
+        "Messages": [
+          {
+            "Type": "E",
+            "Message": "No pricing procedure could be determined"
+          },
+          {
+            "Type": "E",
+            "Message": "Sales document  was not changed"
+          }
+        ]
+      }
+    }
+  }

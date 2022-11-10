@@ -18,6 +18,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/order/stock_information/stock_information_bloc.dart';
@@ -108,6 +109,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_price_query_
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/materials_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_document_type_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_remote.dart';
@@ -133,6 +135,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart'
 import 'package:ezrxmobile/infrastructure/order/repository/material_filter_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_price_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_document_type_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/order_history_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/stock_info_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_bundle_list_repository.dart';
@@ -785,6 +788,24 @@ void setupLocator() {
     () => OrderHistoryFilterBloc(),
   );
   //============================================================
+  //  Order History Details
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => OrderHistoryDetailsLocalDataSource());
+  locator.registerLazySingleton(
+    () => OrderHistoryDetailsRepository(
+      localDataSource: locator<OrderHistoryDetailsLocalDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => OrderHistoryDetailsBloc(
+      orderHistoryDetailsRepository: locator<OrderHistoryDetailsRepository>(),
+    ),
+  );
+
+  //============================================================
   //  Payment Customer Information
   //
   //============================================================
@@ -1044,7 +1065,6 @@ void setupLocator() {
     ),
   );
 
-
   //============================================================
   //  Order Document Type
   //
@@ -1055,7 +1075,8 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => OrderDocumentTypeRepository(
       config: locator<Config>(),
-      orderDocumentTypLocalDataSource: locator<OrderDocumentTypeLocalDataSource>(),
+      orderDocumentTypLocalDataSource:
+          locator<OrderDocumentTypeLocalDataSource>(),
     ),
   );
 

@@ -15,9 +15,7 @@ import 'package:flutter/material.dart' as _i28;
 
 import '../../application/order/material_filter/material_filter_bloc.dart'
     as _i29;
-import '../../domain/account/entities/customer_code_info.dart' as _i33;
-import '../../domain/account/entities/ship_to_info.dart' as _i34;
-import '../../domain/order/entities/order_history_basic_info.dart' as _i35;
+import '../../domain/account/entities/bill_to_info.dart' as _i33;
 import '../../domain/order/entities/order_history_item.dart' as _i32;
 import '../../domain/order/entities/order_template.dart' as _i30;
 import '../../domain/order/entities/saved_order.dart' as _i31;
@@ -168,9 +166,7 @@ class AppRouter extends _i27.RootStackRouter {
           child: _i22.HistoryDetails(
               key: args.key,
               orderHistoryItem: args.orderHistoryItem,
-              customerCodeInfo: args.customerCodeInfo,
-              shipToInfo: args.shipToInfo,
-              orderHistoryBasicInfo: args.orderHistoryBasicInfo));
+              billToInfo: args.billToInfo));
     },
     HomeTabRoute.name: (routeData) {
       return _i27.MaterialPageX<dynamic>(
@@ -552,42 +548,30 @@ class HistoryDetailsRoute extends _i27.PageRouteInfo<HistoryDetailsRouteArgs> {
   HistoryDetailsRoute(
       {_i28.Key? key,
       required _i32.OrderHistoryItem orderHistoryItem,
-      required _i33.CustomerCodeInfo customerCodeInfo,
-      required _i34.ShipToInfo shipToInfo,
-      required _i35.OrderHistoryBasicInfo orderHistoryBasicInfo})
+      required _i33.BillToInfo billToInfo})
       : super(HistoryDetailsRoute.name,
             path: 'history_details',
             args: HistoryDetailsRouteArgs(
                 key: key,
                 orderHistoryItem: orderHistoryItem,
-                customerCodeInfo: customerCodeInfo,
-                shipToInfo: shipToInfo,
-                orderHistoryBasicInfo: orderHistoryBasicInfo));
+                billToInfo: billToInfo));
 
   static const String name = 'HistoryDetailsRoute';
 }
 
 class HistoryDetailsRouteArgs {
   const HistoryDetailsRouteArgs(
-      {this.key,
-      required this.orderHistoryItem,
-      required this.customerCodeInfo,
-      required this.shipToInfo,
-      required this.orderHistoryBasicInfo});
+      {this.key, required this.orderHistoryItem, required this.billToInfo});
 
   final _i28.Key? key;
 
   final _i32.OrderHistoryItem orderHistoryItem;
 
-  final _i33.CustomerCodeInfo customerCodeInfo;
-
-  final _i34.ShipToInfo shipToInfo;
-
-  final _i35.OrderHistoryBasicInfo orderHistoryBasicInfo;
+  final _i33.BillToInfo billToInfo;
 
   @override
   String toString() {
-    return 'HistoryDetailsRouteArgs{key: $key, orderHistoryItem: $orderHistoryItem, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, orderHistoryBasicInfo: $orderHistoryBasicInfo}';
+    return 'HistoryDetailsRouteArgs{key: $key, orderHistoryItem: $orderHistoryItem, billToInfo: $billToInfo}';
   }
 }
 

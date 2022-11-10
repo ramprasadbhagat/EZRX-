@@ -1,4 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
@@ -6,11 +9,10 @@ import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
-
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderHistoryListTile extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
@@ -19,6 +21,7 @@ class OrderHistoryListTile extends StatelessWidget {
   final ShipToInfo shipToInfo;
   final OrderHistoryBasicInfo orderHistoryBasicInfo;
   final SalesOrganisationConfigs salesOrgConfigs;
+  final BillToInfo billToInfo;
   const OrderHistoryListTile({
     Key? key,
     required this.orderHistoryItem,
@@ -27,20 +30,22 @@ class OrderHistoryListTile extends StatelessWidget {
     required this.shipToInfo,
     required this.orderHistoryBasicInfo,
     required this.salesOrgConfigs,
+    required this.billToInfo,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.router.push(
-          HistoryDetailsRoute(
-            orderHistoryItem: orderHistoryItem,
-            customerCodeInfo: customerCodeInfo,
-            shipToInfo: shipToInfo,
-            orderHistoryBasicInfo: orderHistoryBasicInfo,
-          ),
-        );
+        context.read<OrderHistoryDetailsBloc>().add(OrderHistoryDetailsEvent.fetch(
+              user: context.read<UserBloc>().state.user,
+              orderHistoryItem: orderHistoryItem,
+            ));
+
+        context.router.push(HistoryDetailsRoute(
+          orderHistoryItem: orderHistoryItem,
+          billToInfo: billToInfo,
+        ));
       },
       child: Card(
         child: Padding(
@@ -117,9 +122,6 @@ class OrderHistoryListTile extends StatelessWidget {
                 keyText: 'Quantity',
                 valueText: orderHistoryItem.qty.toString(),
               ),
-
-              /// Need to clear about order value then i will calculate zp price
-              /// if the price getting complicated, please consider using value_object transformation to mange it
               BalanceTextRow(
                 keyText: 'ZP Price',
                 valueText: _displayPrice(

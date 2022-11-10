@@ -9,7 +9,7 @@ part 'order_history_dto.freezed.dart';
 part 'order_history_dto.g.dart';
 
 @freezed
-class OrderHistoryDto with _$OrderHistoryDto {
+class  OrderHistoryDto with _$OrderHistoryDto {
   const OrderHistoryDto._();
   const factory OrderHistoryDto({
     @JsonKey(name: 'OrderBasicInformation')
