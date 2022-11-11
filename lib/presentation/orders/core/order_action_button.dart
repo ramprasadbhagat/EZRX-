@@ -52,6 +52,7 @@ class _ActionButtonShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      key: const Key('OrderActionButtonShimmer'),
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         LoadingShimmer.withChild(

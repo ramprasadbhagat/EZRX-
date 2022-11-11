@@ -18,6 +18,7 @@ class OrderInvalidWarning extends StatelessWidget {
 
     if (isInvalidOrder) {
       return Padding(
+        key: const Key('InvalidOrderWarning'),
         padding: const EdgeInsets.only(
           right: 10,
           left: 10,
