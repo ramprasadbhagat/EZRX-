@@ -97,20 +97,21 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 isFetching: false,
               ),
             );
-
-            emit(
-              state.copyWith(
-                cartItemList: cartItemList
-                    .map(
-                      (PriceAggregate element) => element.copyWith(
-                        zmgMaterialCountOnCart: state.zmgMaterialCount,
-                      ),
-                    )
-                    .toList(),
-                apiFailureOrSuccessOption: none(),
-                isFetching: false,
-              ),
-            );
+            if (e.item.price.zmgDiscount) {
+              emit(
+                state.copyWith(
+                  cartItemList: cartItemList
+                      .map(
+                        (PriceAggregate element) => element.copyWith(
+                          zmgMaterialCountOnCart: state.zmgMaterialCount,
+                        ),
+                      )
+                      .toList(),
+                  apiFailureOrSuccessOption: none(),
+                  isFetching: false,
+                ),
+              );
+            }
           },
         );
       },
@@ -136,6 +137,21 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 isFetching: false,
               ),
             );
+            if (e.item.price.zmgDiscount) {
+              emit(
+                state.copyWith(
+                  cartItemList: cartItemList
+                      .map(
+                        (PriceAggregate element) => element.copyWith(
+                          zmgMaterialCountOnCart: state.zmgMaterialCount,
+                        ),
+                      )
+                      .toList(),
+                  apiFailureOrSuccessOption: none(),
+                  isFetching: false,
+                ),
+              );
+            }
           },
         );
       },

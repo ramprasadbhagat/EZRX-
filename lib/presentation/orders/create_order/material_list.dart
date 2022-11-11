@@ -26,6 +26,7 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MaterialListPage extends StatelessWidget {
   final Function addToCart;
@@ -293,28 +294,37 @@ class _ListContent extends StatelessWidget {
             _PriceLabel(materialInfo: materialInfo),
           ],
         ),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
-              builder: (context, materialPriceState) {
-                final itemPrice = materialPriceState
-                    .getPriceForMaterial(materialInfo.materialNumber);
-                if (itemPrice.zmgDiscount) {
-                  return const CustomLabel(
-                    textValue: 'Discount',
-                    mainColor: ZPColors.secondary,
-                  );
-                }
+        trailing: BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
+          builder: (context, materialPriceState) {
+            final itemPrice = materialPriceState
+                .getPriceForMaterial(materialInfo.materialNumber);
 
-                return const SizedBox.shrink();
-              },
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            _FavoriteButton(materialInfo: materialInfo),
-          ],
+            return Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (!materialInfo.hidePrice && itemPrice.bonuses.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SvgPicture.asset('assets/svg/bonus.svg'),
+                  ),
+                if (!materialInfo.hidePrice && itemPrice.tiers.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: SvgPicture.asset('assets/svg/tieredPricing.svg'),
+                  ),
+                if (itemPrice.zmgDiscount)
+                  const CustomLabel(
+                    key: ValueKey('zmgDiscountLable'),
+                    textValue: 'ZMG',
+                    mainColor: ZPColors.secondary,
+                  ),
+                const SizedBox(
+                  width: 10,
+                ),
+                _FavoriteButton(materialInfo: materialInfo),
+              ],
+            );
+          },
         ),
       ),
     );
