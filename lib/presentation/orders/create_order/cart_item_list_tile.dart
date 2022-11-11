@@ -112,6 +112,7 @@ class CartItemListTile extends StatelessWidget {
                     if (cartItem.price.zmgDiscount)
                       const CustomLabel(
                         textValue: 'ZMG',
+                        key: ValueKey('zmgDiscountLable'),
                         height: 12,
                         mainColor: ZPColors.secondary,
                       ),

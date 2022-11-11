@@ -305,12 +305,18 @@ class _ListContent extends StatelessWidget {
                 if (!materialInfo.hidePrice && itemPrice.bonuses.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: SvgPicture.asset('assets/svg/bonus.svg'),
+                    child: SvgPicture.asset(
+                      'assets/svg/bonus.svg',
+                      key: const ValueKey('bonusLogo'),
+                    ),
                   ),
                 if (!materialInfo.hidePrice && itemPrice.tiers.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.all(4.0),
-                    child: SvgPicture.asset('assets/svg/tieredPricing.svg'),
+                    child: SvgPicture.asset(
+                      'assets/svg/tieredPricing.svg',
+                      key: const ValueKey('tieredPricingLogo'),
+                    ),
                   ),
                 if (itemPrice.zmgDiscount)
                   const CustomLabel(

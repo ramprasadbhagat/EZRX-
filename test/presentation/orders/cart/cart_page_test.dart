@@ -138,15 +138,6 @@ void main() {
         },
       );
       testWidgets(
-        'Load Cart Page with Data',
-        (tester) async {
-          await tester.pumpWidget(getWidget());
-          await tester.pump();
-          final cartPage = find.byKey(const Key('cartpage'));
-          expect(cartPage, findsOneWidget);
-        },
-      );
-      testWidgets(
         'Load Cart Page with Error',
         (tester) async {
           when(() => cartBloc.state).thenReturn(CartState.initial().copyWith(
@@ -425,6 +416,25 @@ void main() {
         expect(listWidget, findsOneWidget);
         final finder = find.byKey(const Key('price-loading'));
         expect(finder, findsNothing);
+      });
+
+      testWidgets('Test have zmg Discount cart item', (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItemList: [
+              mockCartItemWithDataList2.first.copyWith(
+                price: Price.empty().copyWith(
+                  zmgDiscount: true,
+                ),
+              )
+            ],
+            isFetching: false,
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        final zmgDiscountLable = find.byKey(const Key('zmgDiscountLable'));
+        expect(zmgDiscountLable, findsOneWidget);
       });
     },
   );

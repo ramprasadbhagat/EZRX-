@@ -16,6 +16,8 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -517,6 +519,119 @@ void main() {
       }
       final unitPrice = find.textContaining('Unit Price: '.tr());
       expect(unitPrice, findsOneWidget);
+    });
+
+    testWidgets('zmg discount lable', (tester) async {
+      final expectedState = [
+        MaterialListState.initial().copyWith(isFetching: true),
+        MaterialListState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          isFetching: false,
+          nextPageIndex: 2,
+          materialList: <MaterialInfo>[
+            MaterialInfo.empty().copyWith(materialNumber: fakeMaterialNumber)
+          ],
+        )
+      ];
+      whenListen(materialListBlocMock, Stream.fromIterable(expectedState));
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          isFetching: false,
+          materialPrice: {
+            fakeMaterialNumber: Price.empty().copyWith(
+              zmgDiscount: true,
+            )
+          },
+        ),
+      );
+      await tester
+          .pumpWidget(getScopedWidget(MaterialListPage(addToCart: () {})));
+      await tester.pump();
+      final listContent = find.byKey(Key(
+          'materialOption${materialListBlocMock.state.materialList.first.materialNumber.getOrCrash()}'));
+      expect(listContent, findsOneWidget);
+      final zmgDiscountLable = find.byKey(const Key('zmgDiscountLable'));
+      expect(zmgDiscountLable, findsOneWidget);
+    });
+
+    testWidgets('test Bonus Logo', (tester) async {
+      final expectedState = [
+        MaterialListState.initial().copyWith(isFetching: true),
+        MaterialListState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          isFetching: false,
+          nextPageIndex: 2,
+          materialList: <MaterialInfo>[
+            MaterialInfo.empty().copyWith(materialNumber: fakeMaterialNumber)
+          ],
+        )
+      ];
+      whenListen(materialListBlocMock, Stream.fromIterable(expectedState));
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          isFetching: false,
+          materialPrice: {
+            fakeMaterialNumber: Price.empty().copyWith(
+              zmgDiscount: true,
+              bonuses: [
+                PriceBonus.empty().copyWith(
+                  items: [
+                    PriceBonusItem.empty(),
+                  ],
+                ),
+              ],
+            )
+          },
+        ),
+      );
+      await tester
+          .pumpWidget(getScopedWidget(MaterialListPage(addToCart: () {})));
+      await tester.pump();
+      final listContent = find.byKey(Key(
+          'materialOption${materialListBlocMock.state.materialList.first.materialNumber.getOrCrash()}'));
+      expect(listContent, findsOneWidget);
+      final zmgDiscountLable = find.byKey(const Key('bonusLogo'));
+      expect(zmgDiscountLable, findsOneWidget);
+    });
+
+    testWidgets('test TieredPricing Logo', (tester) async {
+      final expectedState = [
+        MaterialListState.initial().copyWith(isFetching: true),
+        MaterialListState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          isFetching: false,
+          nextPageIndex: 2,
+          materialList: <MaterialInfo>[
+            MaterialInfo.empty().copyWith(materialNumber: fakeMaterialNumber)
+          ],
+        )
+      ];
+      whenListen(materialListBlocMock, Stream.fromIterable(expectedState));
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          isFetching: false,
+          materialPrice: {
+            fakeMaterialNumber: Price.empty().copyWith(
+              zmgDiscount: true,
+              tiers: [
+                PriceTier.empty().copyWith(
+                  items: [
+                    PriceTierItem.empty(),
+                  ],
+                ),
+              ],
+            )
+          },
+        ),
+      );
+      await tester
+          .pumpWidget(getScopedWidget(MaterialListPage(addToCart: () {})));
+      await tester.pump();
+      final listContent = find.byKey(Key(
+          'materialOption${materialListBlocMock.state.materialList.first.materialNumber.getOrCrash()}'));
+      expect(listContent, findsOneWidget);
+      final zmgDiscountLable = find.byKey(const Key('tieredPricingLogo'));
+      expect(zmgDiscountLable, findsOneWidget);
     });
   });
 }

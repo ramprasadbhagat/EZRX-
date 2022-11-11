@@ -85,7 +85,7 @@ class _AddToCartState extends State<AddToCart> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Tiered Pricing:'),
+                        const Text('Tiered Pricing:').tr(),
                         const SizedBox(width: 10),
                         Column(
                           children: state.cartItem.price.tiers.first.items
@@ -336,6 +336,7 @@ class _PriceTierLable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: const ValueKey('pricelable'),
       width: 180,
       alignment: Alignment.center,
       margin: const EdgeInsets.only(bottom: 5),

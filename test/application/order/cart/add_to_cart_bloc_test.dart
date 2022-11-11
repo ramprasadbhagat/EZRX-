@@ -1,0 +1,250 @@
+import 'package:bloc_test/bloc_test.dart';
+import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+
+class AddToCartBlocMock extends Mock implements AddToCartBloc {}
+
+void main() {
+  final priceTierItem1 = PriceTierItem.empty().copyWith(
+    type: '',
+    applyBonus: false,
+    sequence: 1,
+    quantity: 1,
+    rate: 5230,
+  );
+  final priceTierItem2 = PriceTierItem.empty().copyWith(
+    type: '',
+    applyBonus: false,
+    sequence: 1,
+    quantity: 3,
+    rate: 5530,
+  );
+  final priceTierItem3 = PriceTierItem.empty().copyWith(
+    type: '',
+    applyBonus: false,
+    sequence: 1,
+    quantity: 5,
+    rate: 5730,
+  );
+
+  final mockCartItemList = [
+    PriceAggregate.empty().copyWith(
+      quantity: 1,
+      materialInfo: MaterialInfo.empty().copyWith(
+        materialNumber: MaterialNumber('000000000023168451'),
+        materialDescription: ' Triglyceride Mosys D',
+        principalData: PrincipalData.empty().copyWith(
+          principalName: '台灣拜耳股份有限公司',
+        ),
+      ),
+      price: Price.empty().copyWith(
+        materialNumber: MaterialNumber('000000000023168451'),
+        tiers: [
+          PriceTier.empty().copyWith(
+            tier: '',
+            items: [
+              priceTierItem1,
+              priceTierItem2,
+              priceTierItem3,
+            ],
+          )
+        ],
+        zmgDiscount: false,
+        finalPrice: MaterialPrice(5200),
+      ),
+    ),
+  ];
+
+  var addToCartQuantity = 0;
+  var onCartZmgProductQuantity = 0;
+
+  group(
+    'Testing CartBloc',
+    () {
+      blocTest<AddToCartBloc, AddToCartState>(
+        'Initialize AddToCartBloc',
+        build: () => AddToCartBloc(),
+        act: (bloc) => bloc.add(const AddToCartEvent.initialized()),
+        expect: () => [
+          AddToCartState.initial(),
+        ],
+      );
+
+      blocTest<AddToCartBloc, AddToCartState>(
+        'Fetch AddToCartBloc',
+        build: () => AddToCartBloc(),
+        act: (bloc) => bloc.add(const AddToCartEvent.fetch()),
+        expect: () => [],
+      );
+
+      blocTest<AddToCartBloc, AddToCartState>(
+        'SetCartItem AddToCartBloc',
+        build: () => AddToCartBloc(),
+        act: (bloc) =>
+            bloc.add(AddToCartEvent.setCartItem(mockCartItemList.first)),
+        expect: () => [
+          AddToCartState.initial().copyWith(cartItem: mockCartItemList.first)
+        ],
+        verify: (AddToCartBloc bloc) {
+          expect(
+            bloc.state.cartItem.listPrice,
+            mockCartItemList.first.price.finalPrice.getOrCrash(),
+          );
+        },
+      );
+
+      blocTest<AddToCartBloc, AddToCartState>(
+        'UpdateQuantity AddToCartBloc for Materail',
+        setUp: () {
+          addToCartQuantity = 2;
+          onCartZmgProductQuantity = 0;
+        },
+        build: () => AddToCartBloc(),
+        seed: () =>
+            AddToCartState.initial().copyWith(cartItem: mockCartItemList.first),
+        act: (bloc) => bloc.add(AddToCartEvent.updateQuantity(
+          addToCartQuantity,
+          onCartZmgProductQuantity,
+        )),
+        expect: () => [
+          AddToCartState.initial().copyWith(
+            cartItem: mockCartItemList.first.copyWith(
+              zmgMaterialCountOnCart: onCartZmgProductQuantity,
+              quantity: addToCartQuantity,
+            ),
+            quantity: addToCartQuantity,
+          ),
+        ],
+        verify: (AddToCartBloc bloc) {
+          expect(
+            bloc.state.cartItem.listPrice,
+            mockCartItemList.first.price.finalPrice.getOrCrash(),
+          );
+          expect(
+            bloc.state.cartItem.listPriceTotal,
+            (mockCartItemList.first
+                    .copyWith(quantity: addToCartQuantity)
+                    .price
+                    .finalPrice
+                    .getOrCrash() *
+                2),
+          );
+        },
+      );
+
+      blocTest<AddToCartBloc, AddToCartState>(
+        'UpdateQuantity AddToCartBloc for Materail with zmg discount enable with empty cart',
+        setUp: () {
+          addToCartQuantity = 5;
+          onCartZmgProductQuantity = 0;
+        },
+        build: () => AddToCartBloc(),
+        seed: () => AddToCartState.initial().copyWith(
+          cartItem: mockCartItemList.first.copyWith(
+            price: mockCartItemList.first.price.copyWith(
+              zmgDiscount: true,
+            ),
+          ),
+        ),
+        act: (bloc) => bloc.add(AddToCartEvent.updateQuantity(
+          addToCartQuantity,
+          onCartZmgProductQuantity,
+        )),
+        expect: () => [
+          AddToCartState.initial().copyWith(
+            cartItem: mockCartItemList.first.copyWith(
+              zmgMaterialCountOnCart: addToCartQuantity,
+              quantity: addToCartQuantity,
+              price: mockCartItemList.first.price.copyWith(
+                zmgDiscount: true,
+              ),
+            ),
+            quantity: addToCartQuantity,
+          ),
+        ],
+        verify: (AddToCartBloc bloc) {
+          expect(
+            bloc.state.cartItem.listPrice,
+            mockCartItemList.first.price
+                .copyWith(zmgDiscount: true)
+                .priceTireItem
+                .first
+                .rate,
+          );
+          expect(
+            bloc.state.cartItem.listPriceTotal,
+            mockCartItemList.first.price
+                    .copyWith(zmgDiscount: true)
+                    .priceTireItem
+                    .first
+                    .rate *
+                addToCartQuantity,
+          );
+        },
+      );
+
+      blocTest<AddToCartBloc, AddToCartState>(
+        'UpdateQuantity AddToCartBloc for Materail with zmg discount enable with zmg discount Material on cart',
+        setUp: () {
+          addToCartQuantity = 2;
+          onCartZmgProductQuantity = 3;
+        },
+        build: () => AddToCartBloc(),
+        seed: () => AddToCartState.initial().copyWith(
+          cartItem: mockCartItemList.first.copyWith(
+            price: mockCartItemList.first.price.copyWith(
+              zmgDiscount: true,
+            ),
+          ),
+        ),
+        act: (bloc) => bloc.add(AddToCartEvent.updateQuantity(
+            addToCartQuantity, onCartZmgProductQuantity)),
+        expect: () => [
+          AddToCartState.initial().copyWith(
+            cartItem: mockCartItemList.first.copyWith(
+              zmgMaterialCountOnCart:
+                  (addToCartQuantity + onCartZmgProductQuantity),
+              quantity: addToCartQuantity,
+              price: mockCartItemList.first.price.copyWith(
+                zmgDiscount: true,
+              ),
+            ),
+            quantity: addToCartQuantity,
+          ),
+        ],
+        verify: (AddToCartBloc bloc) {
+          expect(
+            bloc.state.cartItem.listPrice,
+            mockCartItemList.first.price
+                .copyWith(zmgDiscount: true)
+                .priceTireItem
+                .first
+                .rate,
+          );
+          expect(
+            bloc.state.cartItem.listPriceTotal,
+            mockCartItemList.first
+                    .copyWith(
+                      zmgMaterialCountOnCart:
+                          (addToCartQuantity + onCartZmgProductQuantity),
+                      quantity: addToCartQuantity,
+                    )
+                    .price
+                    .copyWith(zmgDiscount: true)
+                    .priceTireItem
+                    .first
+                    .rate *
+                addToCartQuantity,
+          );
+        },
+      );
+    },
+  );
+}
