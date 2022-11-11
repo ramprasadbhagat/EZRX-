@@ -26,7 +26,6 @@ class FavouriteListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      key: ValueKey(favourite.materialNumber),
       child: CustomSlidable(
         endActionPaneActions: [
           CustomSlidableAction(
@@ -42,167 +41,158 @@ class FavouriteListTile extends StatelessWidget {
         ],
         child: Padding(
           padding: const EdgeInsets.all(10),
-          child: GestureDetector(
-            key: const Key('itemClicked'),
-            onTap: () {},
-            child: Padding(
-              padding: const EdgeInsets.only(left: 5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        flex: 1,
-                        child: RichText(
-                          overflow: TextOverflow.visible,
-                          text: TextSpan(
-                            style: DefaultTextStyle.of(context).style,
-                            children: <TextSpan>[
-                              TextSpan(
-                                text:
-                                    favourite.materialDescription.toUpperCase(),
-                                style: const TextStyle(
-                                  color: ZPColors
-                                      .darkerGreen, // zpDarkerGreenColor,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14,
-                                ),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: RichText(
+                        overflow: TextOverflow.visible,
+                        text: TextSpan(
+                          style: DefaultTextStyle.of(context).style,
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: favourite.materialDescription.toUpperCase(),
+                              style: const TextStyle(
+                                color:
+                                    ZPColors.darkerGreen, // zpDarkerGreenColor,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
-                      favourite.isWaitingStatusUpdate
-                          ? LoadingShimmer.withChild(
-                              child: IconButton(
-                                icon: const Icon(
-                                  Icons.favorite,
-                                  color: ZPColors.secondary,
-                                ),
-                                onPressed: () {},
-                              ),
-                            )
-                          : IconButton(
-                              key: const Key('deleteFavouriteFavPage'),
+                    ),
+                    favourite.isWaitingStatusUpdate
+                        ? LoadingShimmer.withChild(
+                            child: IconButton(
                               icon: const Icon(
                                 Icons.favorite,
                                 color: ZPColors.secondary,
                               ),
-                              onPressed: () async => context
-                                  .read<FavouriteBloc>()
-                                  .add(
-                                    FavouriteEvent.delete(
-                                      item: favourite,
-                                      user: context.read<UserBloc>().state.user,
-                                    ),
-                                  ),
-
-                              // context.read<BonusMaterialBloc>().add(
-                              //       BonusMaterialEvent.fetch(
-                              //         pickandpack: true,
-                              //         searchKey: '',
-                              //         user: User.empty(),
-                              //         configs:
-                              //             SalesOrganisationConfigs.empty(),
-                              //         customerInfo:
-                              //             SalesOrgCustomerInfo.empty(),
-                              //         shipInfo: SalesOrgShipToInfo.empty(),
-                              //         salesOrganisation:
-                              //             SalesOrganisation.empty(),
-                              //       ),
-                              //     ),
+                              onPressed: () {},
                             ),
-                    ],
-                  ),
-                  Text(
-                    "${'Mat No: '.tr()}${favourite.materialNumber.displayMatNo}",
-                    style: const TextStyle(
-                      color: ZPColors.darkGray,
-                      fontSize: 12,
-                    ),
-                  ),
-                  BlocBuilder<MaterialPriceDetailBloc,
-                      MaterialPriceDetailState>(
-                    buildWhen: (previous, current) =>
-                        previous.isFetching != current.isFetching,
-                    builder: (context, state) {
-                      if (state.isFetching) {
-                        return SizedBox(
-                          key: const Key('price-loading'),
-                          width: 40,
-                          child: LoadingShimmer.tile(),
-                        );
-                      }
-                      final queryInfo =
-                          MaterialQueryInfo.fromFavorite(material: favourite);
-                      final priceDetail = state.materialDetails[queryInfo]!;
-                      final defaultMaterialDescription =
-                          priceDetail.info.defaultMaterialDescription;
-
-                      final priceAggregate = PriceAggregate(
-                        price: priceDetail.price,
-                        materialInfo: priceDetail.info,
-                        salesOrgConfig:
-                            context.read<SalesOrgBloc>().state.configs,
-                        quantity: 1,
-                        zmgMaterialCountOnCart: 0,
-                      );
-
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          (enableDefaultMD &&
-                                  defaultMaterialDescription.isNotEmpty)
-                              ? Text(
-                                  "${'Mat Default Description: '.tr()}$defaultMaterialDescription",
-                                  style: const TextStyle(
-                                    color: ZPColors.darkGray,
-                                    fontSize: 12,
+                          )
+                        : IconButton(
+                            key: const Key('deleteFavouriteFavPage'),
+                            icon: const Icon(
+                              Icons.favorite,
+                              color: ZPColors.secondary,
+                            ),
+                            onPressed: () async => context
+                                .read<FavouriteBloc>()
+                                .add(
+                                  FavouriteEvent.delete(
+                                    item: favourite,
+                                    user: context.read<UserBloc>().state.user,
                                   ),
-                                )
-                              : const SizedBox.shrink(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                '${'Unit Price: '.tr()}${priceAggregate.display(PriceType.unitPrice)}',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1
-                                    ?.apply(
-                                      color: ZPColors.black,
-                                    ),
-                              ),
-                              BlocBuilder<SalesOrgBloc, SalesOrgState>(
-                                buildWhen: (previous, current) =>
-                                    previous.configs != current.configs,
-                                builder: (context, state) {
-                                  final hidePrice = priceDetail.info.hidePrice;
-                                  final itemPrice =
-                                      priceDetail.price.finalPrice;
-                                  if ((hidePrice || itemPrice.isEmpty()) &&
-                                      !state.configs.materialWithoutPrice) {
-                                    return const SizedBox();
-                                  }
+                                ),
 
-                                  return ActionButton(
-                                    width: 120,
-                                    onTap: () {
-                                      //TODO: Implement Add to cart
-                                    },
-                                    text: 'Add to Cart'.tr(),
-                                  );
-                                },
-                              ),
-                            ],
+                            // context.read<BonusMaterialBloc>().add(
+                            //       BonusMaterialEvent.fetch(
+                            //         pickandpack: true,
+                            //         searchKey: '',
+                            //         user: User.empty(),
+                            //         configs:
+                            //             SalesOrganisationConfigs.empty(),
+                            //         customerInfo:
+                            //             SalesOrgCustomerInfo.empty(),
+                            //         shipInfo: SalesOrgShipToInfo.empty(),
+                            //         salesOrganisation:
+                            //             SalesOrganisation.empty(),
+                            //       ),
+                            //     ),
                           ),
-                        ],
-                      );
-                    },
+                  ],
+                ),
+                Text(
+                  "${'Mat No: '.tr()}${favourite.materialNumber.displayMatNo}",
+                  style: const TextStyle(
+                    color: ZPColors.darkGray,
+                    fontSize: 12,
                   ),
-                ],
-              ),
+                ),
+                BlocBuilder<MaterialPriceDetailBloc, MaterialPriceDetailState>(
+                  buildWhen: (previous, current) =>
+                      previous.isFetching != current.isFetching,
+                  builder: (context, state) {
+                    if (state.isFetching) {
+                      return SizedBox(
+                        key: const Key('price-loading'),
+                        width: 40,
+                        child: LoadingShimmer.tile(),
+                      );
+                    }
+                    final queryInfo =
+                        MaterialQueryInfo.fromFavorite(material: favourite);
+                    final priceDetail = state.materialDetails[queryInfo]!;
+                    final defaultMaterialDescription =
+                        priceDetail.info.defaultMaterialDescription;
+
+                    final priceAggregate = PriceAggregate(
+                      price: priceDetail.price,
+                      materialInfo: priceDetail.info,
+                      salesOrgConfig:
+                          context.read<SalesOrgBloc>().state.configs,
+                      quantity: 1,
+                      zmgMaterialCountOnCart: 0,
+                    );
+
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        (enableDefaultMD &&
+                                defaultMaterialDescription.isNotEmpty)
+                            ? Text(
+                                "${'Mat Default Description: '.tr()}$defaultMaterialDescription",
+                                style: const TextStyle(
+                                  color: ZPColors.darkGray,
+                                  fontSize: 12,
+                                ),
+                              )
+                            : const SizedBox.shrink(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '${'Unit Price: '.tr()}${priceAggregate.display(PriceType.unitPrice)}',
+                              style:
+                                  Theme.of(context).textTheme.bodyText1?.apply(
+                                        color: ZPColors.black,
+                                      ),
+                            ),
+                            BlocBuilder<SalesOrgBloc, SalesOrgState>(
+                              buildWhen: (previous, current) =>
+                                  previous.configs != current.configs,
+                              builder: (context, state) {
+                                final hidePrice = priceDetail.info.hidePrice;
+                                final itemPrice = priceDetail.price.finalPrice;
+                                if ((hidePrice || itemPrice.isEmpty()) &&
+                                    !state.configs.materialWithoutPrice) {
+                                  return const SizedBox();
+                                }
+
+                                return ActionButton(
+                                  width: 120,
+                                  onTap: () {
+                                    //TODO: Implement Add to cart
+                                  },
+                                  text: 'Add to Cart'.tr(),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ],
             ),
           ),
         ),

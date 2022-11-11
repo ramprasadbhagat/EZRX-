@@ -102,7 +102,7 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
 
         final failureOrSuccess = await favouriteRepository.deleteFavourites(
           item: e.item,
-          favouriteItems: state.favouriteItems,
+          favouriteItems: favouritesItems,
         );
         failureOrSuccess.fold(
           (failure) {
