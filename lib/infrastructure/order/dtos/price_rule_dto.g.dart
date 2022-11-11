@@ -17,10 +17,10 @@ class PriceRuleDtoAdapter extends TypeAdapter<_$_PriceRuleDto> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return _$_PriceRuleDto(
-      type: fields[14] as String,
-      rate: fields[15] as double,
-      condition: fields[16] as String,
-      conditionNumber: fields[17] as String,
+      type: fields[14] == null ? '' : fields[14] as String,
+      rate: fields[15] == null ? 0 : fields[15] as double,
+      condition: fields[16] == null ? '' : fields[16] as String,
+      conditionNumber: fields[17] == null ? '' : fields[17] as String,
       bonusEligible: fields[18] as bool,
     );
   }

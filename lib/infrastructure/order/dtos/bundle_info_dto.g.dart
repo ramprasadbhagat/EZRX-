@@ -17,10 +17,10 @@ class BundleInfoDtoAdapter extends TypeAdapter<_$_BundleInfoDto> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return _$_BundleInfoDto(
-      sequence: fields[21] as int,
-      quantity: fields[22] as int,
+      sequence: fields[21] == null ? 1 : fields[21] as int,
+      quantity: fields[22] == null ? 1 : fields[22] as int,
       type: fields[23] as String,
-      rate: fields[24] as double,
+      rate: fields[24] == null ? -10 : fields[24] as double,
     );
   }
 

@@ -21,61 +21,61 @@ MaterialDto _$MaterialDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$MaterialDto {
   @JsonKey(name: 'materialNumber', defaultValue: '')
-  @HiveField(0)
+  @HiveField(0, defaultValue: '')
   String get materialNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'materialDescription', defaultValue: '')
-  @HiveField(1)
+  @HiveField(1, defaultValue: '')
   String get materialDescription => throw _privateConstructorUsedError;
   @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-  @HiveField(2)
+  @HiveField(2, defaultValue: '')
   String get governmentMaterialCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'therapeuticClass', defaultValue: '')
-  @HiveField(3)
+  @HiveField(3, defaultValue: '')
   String get therapeuticClass => throw _privateConstructorUsedError;
   @JsonKey(name: 'itemBrand', defaultValue: '')
-  @HiveField(4)
+  @HiveField(4, defaultValue: '')
   String get itemBrand => throw _privateConstructorUsedError;
   @JsonKey(name: 'principalName', defaultValue: '')
-  @HiveField(5)
+  @HiveField(5, defaultValue: '')
   String get principalName => throw _privateConstructorUsedError;
   @JsonKey(name: 'principalCode', defaultValue: '')
-  @HiveField(6)
+  @HiveField(6, defaultValue: '')
   String get principalCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'taxClassification', defaultValue: '')
-  @HiveField(7)
+  @HiveField(7, defaultValue: '')
   String get taxClassification => throw _privateConstructorUsedError;
   @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-  @HiveField(8)
+  @HiveField(8, defaultValue: '')
   String get itemRegistrationNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-  @HiveField(9)
+  @HiveField(9, defaultValue: '')
   String get unitOfMeasurement => throw _privateConstructorUsedError;
   @JsonKey(name: 'materialGroup2', defaultValue: '')
-  @HiveField(10)
+  @HiveField(10, defaultValue: '')
   String get materialGroup2 => throw _privateConstructorUsedError;
   @JsonKey(name: 'materialGroup4', defaultValue: '')
-  @HiveField(11)
+  @HiveField(11, defaultValue: '')
   String get materialGroup4 => throw _privateConstructorUsedError;
   @JsonKey(name: 'isSampleMaterial', defaultValue: false)
-  @HiveField(12)
+  @HiveField(12, defaultValue: false)
   bool get isSampleMaterial => throw _privateConstructorUsedError;
   @JsonKey(name: 'hidePrice', defaultValue: false)
-  @HiveField(13)
+  @HiveField(13, defaultValue: false)
   bool get hidePrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
-  @HiveField(14)
+  @HiveField(14, defaultValue: false)
   bool get hasValidTenderContract => throw _privateConstructorUsedError;
   @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
-  @HiveField(15)
+  @HiveField(15, defaultValue: false)
   bool get hasMandatoryTenderContract => throw _privateConstructorUsedError;
   @JsonKey(name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
-  @HiveField(16)
+  @HiveField(16, defaultValue: ['0'])
   List<String> get taxes => throw _privateConstructorUsedError;
   @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
-  @HiveField(17)
+  @HiveField(17, defaultValue: <BundleDto>[])
   List<BundleDto> get bundles => throw _privateConstructorUsedError;
   @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-  @HiveField(18)
+  @HiveField(18, defaultValue: '')
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -91,62 +91,62 @@ abstract class $MaterialDtoCopyWith<$Res> {
       _$MaterialDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
-      @HiveField(0)
+      @HiveField(0, defaultValue: '')
           String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-      @HiveField(1)
+      @HiveField(1, defaultValue: '')
           String materialDescription,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-      @HiveField(2)
+      @HiveField(2, defaultValue: '')
           String governmentMaterialCode,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
-      @HiveField(3)
+      @HiveField(3, defaultValue: '')
           String therapeuticClass,
       @JsonKey(name: 'itemBrand', defaultValue: '')
-      @HiveField(4)
+      @HiveField(4, defaultValue: '')
           String itemBrand,
       @JsonKey(name: 'principalName', defaultValue: '')
-      @HiveField(5)
+      @HiveField(5, defaultValue: '')
           String principalName,
       @JsonKey(name: 'principalCode', defaultValue: '')
-      @HiveField(6)
+      @HiveField(6, defaultValue: '')
           String principalCode,
       @JsonKey(name: 'taxClassification', defaultValue: '')
-      @HiveField(7)
+      @HiveField(7, defaultValue: '')
           String taxClassification,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-      @HiveField(8)
+      @HiveField(8, defaultValue: '')
           String itemRegistrationNumber,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-      @HiveField(9)
+      @HiveField(9, defaultValue: '')
           String unitOfMeasurement,
       @JsonKey(name: 'materialGroup2', defaultValue: '')
-      @HiveField(10)
+      @HiveField(10, defaultValue: '')
           String materialGroup2,
       @JsonKey(name: 'materialGroup4', defaultValue: '')
-      @HiveField(11)
+      @HiveField(11, defaultValue: '')
           String materialGroup4,
       @JsonKey(name: 'isSampleMaterial', defaultValue: false)
-      @HiveField(12)
+      @HiveField(12, defaultValue: false)
           bool isSampleMaterial,
       @JsonKey(name: 'hidePrice', defaultValue: false)
-      @HiveField(13)
+      @HiveField(13, defaultValue: false)
           bool hidePrice,
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
-      @HiveField(14)
+      @HiveField(14, defaultValue: false)
           bool hasValidTenderContract,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
-      @HiveField(15)
+      @HiveField(15, defaultValue: false)
           bool hasMandatoryTenderContract,
       @JsonKey(
           name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
-      @HiveField(16)
+      @HiveField(16, defaultValue: ['0'])
           List<String> taxes,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
-      @HiveField(17)
+      @HiveField(17, defaultValue: <BundleDto>[])
           List<BundleDto> bundles,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-      @HiveField(18)
+      @HiveField(18, defaultValue: '')
           String defaultMaterialDescription});
 }
 
@@ -270,62 +270,62 @@ abstract class _$$_MaterialDtoCopyWith<$Res>
   @override
   $Res call(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
-      @HiveField(0)
+      @HiveField(0, defaultValue: '')
           String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-      @HiveField(1)
+      @HiveField(1, defaultValue: '')
           String materialDescription,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-      @HiveField(2)
+      @HiveField(2, defaultValue: '')
           String governmentMaterialCode,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
-      @HiveField(3)
+      @HiveField(3, defaultValue: '')
           String therapeuticClass,
       @JsonKey(name: 'itemBrand', defaultValue: '')
-      @HiveField(4)
+      @HiveField(4, defaultValue: '')
           String itemBrand,
       @JsonKey(name: 'principalName', defaultValue: '')
-      @HiveField(5)
+      @HiveField(5, defaultValue: '')
           String principalName,
       @JsonKey(name: 'principalCode', defaultValue: '')
-      @HiveField(6)
+      @HiveField(6, defaultValue: '')
           String principalCode,
       @JsonKey(name: 'taxClassification', defaultValue: '')
-      @HiveField(7)
+      @HiveField(7, defaultValue: '')
           String taxClassification,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-      @HiveField(8)
+      @HiveField(8, defaultValue: '')
           String itemRegistrationNumber,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-      @HiveField(9)
+      @HiveField(9, defaultValue: '')
           String unitOfMeasurement,
       @JsonKey(name: 'materialGroup2', defaultValue: '')
-      @HiveField(10)
+      @HiveField(10, defaultValue: '')
           String materialGroup2,
       @JsonKey(name: 'materialGroup4', defaultValue: '')
-      @HiveField(11)
+      @HiveField(11, defaultValue: '')
           String materialGroup4,
       @JsonKey(name: 'isSampleMaterial', defaultValue: false)
-      @HiveField(12)
+      @HiveField(12, defaultValue: false)
           bool isSampleMaterial,
       @JsonKey(name: 'hidePrice', defaultValue: false)
-      @HiveField(13)
+      @HiveField(13, defaultValue: false)
           bool hidePrice,
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
-      @HiveField(14)
+      @HiveField(14, defaultValue: false)
           bool hasValidTenderContract,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
-      @HiveField(15)
+      @HiveField(15, defaultValue: false)
           bool hasMandatoryTenderContract,
       @JsonKey(
           name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
-      @HiveField(16)
+      @HiveField(16, defaultValue: ['0'])
           List<String> taxes,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
-      @HiveField(17)
+      @HiveField(17, defaultValue: <BundleDto>[])
           List<BundleDto> bundles,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-      @HiveField(18)
+      @HiveField(18, defaultValue: '')
           String defaultMaterialDescription});
 }
 
@@ -448,62 +448,62 @@ class __$$_MaterialDtoCopyWithImpl<$Res> extends _$MaterialDtoCopyWithImpl<$Res>
 class _$_MaterialDto extends _MaterialDto {
   const _$_MaterialDto(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
-      @HiveField(0)
+      @HiveField(0, defaultValue: '')
           required this.materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-      @HiveField(1)
+      @HiveField(1, defaultValue: '')
           required this.materialDescription,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-      @HiveField(2)
+      @HiveField(2, defaultValue: '')
           required this.governmentMaterialCode,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
-      @HiveField(3)
+      @HiveField(3, defaultValue: '')
           required this.therapeuticClass,
       @JsonKey(name: 'itemBrand', defaultValue: '')
-      @HiveField(4)
+      @HiveField(4, defaultValue: '')
           required this.itemBrand,
       @JsonKey(name: 'principalName', defaultValue: '')
-      @HiveField(5)
+      @HiveField(5, defaultValue: '')
           required this.principalName,
       @JsonKey(name: 'principalCode', defaultValue: '')
-      @HiveField(6)
+      @HiveField(6, defaultValue: '')
           required this.principalCode,
       @JsonKey(name: 'taxClassification', defaultValue: '')
-      @HiveField(7)
+      @HiveField(7, defaultValue: '')
           required this.taxClassification,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-      @HiveField(8)
+      @HiveField(8, defaultValue: '')
           required this.itemRegistrationNumber,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-      @HiveField(9)
+      @HiveField(9, defaultValue: '')
           required this.unitOfMeasurement,
       @JsonKey(name: 'materialGroup2', defaultValue: '')
-      @HiveField(10)
+      @HiveField(10, defaultValue: '')
           required this.materialGroup2,
       @JsonKey(name: 'materialGroup4', defaultValue: '')
-      @HiveField(11)
+      @HiveField(11, defaultValue: '')
           required this.materialGroup4,
       @JsonKey(name: 'isSampleMaterial', defaultValue: false)
-      @HiveField(12)
+      @HiveField(12, defaultValue: false)
           required this.isSampleMaterial,
       @JsonKey(name: 'hidePrice', defaultValue: false)
-      @HiveField(13)
+      @HiveField(13, defaultValue: false)
           required this.hidePrice,
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
-      @HiveField(14)
+      @HiveField(14, defaultValue: false)
           required this.hasValidTenderContract,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
-      @HiveField(15)
+      @HiveField(15, defaultValue: false)
           required this.hasMandatoryTenderContract,
       @JsonKey(
           name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
-      @HiveField(16)
+      @HiveField(16, defaultValue: ['0'])
           required final List<String> taxes,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
-      @HiveField(17)
+      @HiveField(17, defaultValue: <BundleDto>[])
           required final List<BundleDto> bundles,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-      @HiveField(18)
+      @HiveField(18, defaultValue: '')
           required this.defaultMaterialDescription})
       : _taxes = taxes,
         _bundles = bundles,
@@ -514,72 +514,72 @@ class _$_MaterialDto extends _MaterialDto {
 
   @override
   @JsonKey(name: 'materialNumber', defaultValue: '')
-  @HiveField(0)
+  @HiveField(0, defaultValue: '')
   final String materialNumber;
   @override
   @JsonKey(name: 'materialDescription', defaultValue: '')
-  @HiveField(1)
+  @HiveField(1, defaultValue: '')
   final String materialDescription;
   @override
   @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-  @HiveField(2)
+  @HiveField(2, defaultValue: '')
   final String governmentMaterialCode;
   @override
   @JsonKey(name: 'therapeuticClass', defaultValue: '')
-  @HiveField(3)
+  @HiveField(3, defaultValue: '')
   final String therapeuticClass;
   @override
   @JsonKey(name: 'itemBrand', defaultValue: '')
-  @HiveField(4)
+  @HiveField(4, defaultValue: '')
   final String itemBrand;
   @override
   @JsonKey(name: 'principalName', defaultValue: '')
-  @HiveField(5)
+  @HiveField(5, defaultValue: '')
   final String principalName;
   @override
   @JsonKey(name: 'principalCode', defaultValue: '')
-  @HiveField(6)
+  @HiveField(6, defaultValue: '')
   final String principalCode;
   @override
   @JsonKey(name: 'taxClassification', defaultValue: '')
-  @HiveField(7)
+  @HiveField(7, defaultValue: '')
   final String taxClassification;
   @override
   @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-  @HiveField(8)
+  @HiveField(8, defaultValue: '')
   final String itemRegistrationNumber;
   @override
   @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-  @HiveField(9)
+  @HiveField(9, defaultValue: '')
   final String unitOfMeasurement;
   @override
   @JsonKey(name: 'materialGroup2', defaultValue: '')
-  @HiveField(10)
+  @HiveField(10, defaultValue: '')
   final String materialGroup2;
   @override
   @JsonKey(name: 'materialGroup4', defaultValue: '')
-  @HiveField(11)
+  @HiveField(11, defaultValue: '')
   final String materialGroup4;
   @override
   @JsonKey(name: 'isSampleMaterial', defaultValue: false)
-  @HiveField(12)
+  @HiveField(12, defaultValue: false)
   final bool isSampleMaterial;
   @override
   @JsonKey(name: 'hidePrice', defaultValue: false)
-  @HiveField(13)
+  @HiveField(13, defaultValue: false)
   final bool hidePrice;
   @override
   @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
-  @HiveField(14)
+  @HiveField(14, defaultValue: false)
   final bool hasValidTenderContract;
   @override
   @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
-  @HiveField(15)
+  @HiveField(15, defaultValue: false)
   final bool hasMandatoryTenderContract;
   final List<String> _taxes;
   @override
   @JsonKey(name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
-  @HiveField(16)
+  @HiveField(16, defaultValue: ['0'])
   List<String> get taxes {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_taxes);
@@ -588,7 +588,7 @@ class _$_MaterialDto extends _MaterialDto {
   final List<BundleDto> _bundles;
   @override
   @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
-  @HiveField(17)
+  @HiveField(17, defaultValue: <BundleDto>[])
   List<BundleDto> get bundles {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bundles);
@@ -596,7 +596,7 @@ class _$_MaterialDto extends _MaterialDto {
 
   @override
   @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-  @HiveField(18)
+  @HiveField(18, defaultValue: '')
   final String defaultMaterialDescription;
 
   @override
@@ -686,62 +686,62 @@ class _$_MaterialDto extends _MaterialDto {
 abstract class _MaterialDto extends MaterialDto {
   const factory _MaterialDto(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
-      @HiveField(0)
+      @HiveField(0, defaultValue: '')
           required final String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-      @HiveField(1)
+      @HiveField(1, defaultValue: '')
           required final String materialDescription,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-      @HiveField(2)
+      @HiveField(2, defaultValue: '')
           required final String governmentMaterialCode,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
-      @HiveField(3)
+      @HiveField(3, defaultValue: '')
           required final String therapeuticClass,
       @JsonKey(name: 'itemBrand', defaultValue: '')
-      @HiveField(4)
+      @HiveField(4, defaultValue: '')
           required final String itemBrand,
       @JsonKey(name: 'principalName', defaultValue: '')
-      @HiveField(5)
+      @HiveField(5, defaultValue: '')
           required final String principalName,
       @JsonKey(name: 'principalCode', defaultValue: '')
-      @HiveField(6)
+      @HiveField(6, defaultValue: '')
           required final String principalCode,
       @JsonKey(name: 'taxClassification', defaultValue: '')
-      @HiveField(7)
+      @HiveField(7, defaultValue: '')
           required final String taxClassification,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-      @HiveField(8)
+      @HiveField(8, defaultValue: '')
           required final String itemRegistrationNumber,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-      @HiveField(9)
+      @HiveField(9, defaultValue: '')
           required final String unitOfMeasurement,
       @JsonKey(name: 'materialGroup2', defaultValue: '')
-      @HiveField(10)
+      @HiveField(10, defaultValue: '')
           required final String materialGroup2,
       @JsonKey(name: 'materialGroup4', defaultValue: '')
-      @HiveField(11)
+      @HiveField(11, defaultValue: '')
           required final String materialGroup4,
       @JsonKey(name: 'isSampleMaterial', defaultValue: false)
-      @HiveField(12)
+      @HiveField(12, defaultValue: false)
           required final bool isSampleMaterial,
       @JsonKey(name: 'hidePrice', defaultValue: false)
-      @HiveField(13)
+      @HiveField(13, defaultValue: false)
           required final bool hidePrice,
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
-      @HiveField(14)
+      @HiveField(14, defaultValue: false)
           required final bool hasValidTenderContract,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
-      @HiveField(15)
+      @HiveField(15, defaultValue: false)
           required final bool hasMandatoryTenderContract,
       @JsonKey(
           name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
-      @HiveField(16)
+      @HiveField(16, defaultValue: ['0'])
           required final List<String> taxes,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
-      @HiveField(17)
+      @HiveField(17, defaultValue: <BundleDto>[])
           required final List<BundleDto> bundles,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-      @HiveField(18)
+      @HiveField(18, defaultValue: '')
           required final String defaultMaterialDescription}) = _$_MaterialDto;
   const _MaterialDto._() : super._();
 
@@ -750,79 +750,79 @@ abstract class _MaterialDto extends MaterialDto {
 
   @override
   @JsonKey(name: 'materialNumber', defaultValue: '')
-  @HiveField(0)
+  @HiveField(0, defaultValue: '')
   String get materialNumber;
   @override
   @JsonKey(name: 'materialDescription', defaultValue: '')
-  @HiveField(1)
+  @HiveField(1, defaultValue: '')
   String get materialDescription;
   @override
   @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-  @HiveField(2)
+  @HiveField(2, defaultValue: '')
   String get governmentMaterialCode;
   @override
   @JsonKey(name: 'therapeuticClass', defaultValue: '')
-  @HiveField(3)
+  @HiveField(3, defaultValue: '')
   String get therapeuticClass;
   @override
   @JsonKey(name: 'itemBrand', defaultValue: '')
-  @HiveField(4)
+  @HiveField(4, defaultValue: '')
   String get itemBrand;
   @override
   @JsonKey(name: 'principalName', defaultValue: '')
-  @HiveField(5)
+  @HiveField(5, defaultValue: '')
   String get principalName;
   @override
   @JsonKey(name: 'principalCode', defaultValue: '')
-  @HiveField(6)
+  @HiveField(6, defaultValue: '')
   String get principalCode;
   @override
   @JsonKey(name: 'taxClassification', defaultValue: '')
-  @HiveField(7)
+  @HiveField(7, defaultValue: '')
   String get taxClassification;
   @override
   @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-  @HiveField(8)
+  @HiveField(8, defaultValue: '')
   String get itemRegistrationNumber;
   @override
   @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-  @HiveField(9)
+  @HiveField(9, defaultValue: '')
   String get unitOfMeasurement;
   @override
   @JsonKey(name: 'materialGroup2', defaultValue: '')
-  @HiveField(10)
+  @HiveField(10, defaultValue: '')
   String get materialGroup2;
   @override
   @JsonKey(name: 'materialGroup4', defaultValue: '')
-  @HiveField(11)
+  @HiveField(11, defaultValue: '')
   String get materialGroup4;
   @override
   @JsonKey(name: 'isSampleMaterial', defaultValue: false)
-  @HiveField(12)
+  @HiveField(12, defaultValue: false)
   bool get isSampleMaterial;
   @override
   @JsonKey(name: 'hidePrice', defaultValue: false)
-  @HiveField(13)
+  @HiveField(13, defaultValue: false)
   bool get hidePrice;
   @override
   @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
-  @HiveField(14)
+  @HiveField(14, defaultValue: false)
   bool get hasValidTenderContract;
   @override
   @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
-  @HiveField(15)
+  @HiveField(15, defaultValue: false)
   bool get hasMandatoryTenderContract;
   @override
   @JsonKey(name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
-  @HiveField(16)
+  @HiveField(16, defaultValue: ['0'])
   List<String> get taxes;
   @override
   @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
-  @HiveField(17)
+  @HiveField(17, defaultValue: <BundleDto>[])
   List<BundleDto> get bundles;
   @override
   @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-  @HiveField(18)
+  @HiveField(18, defaultValue: '')
   String get defaultMaterialDescription;
   @override
   @JsonKey(ignore: true)

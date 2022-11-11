@@ -17,8 +17,8 @@ class BundleDtoAdapter extends TypeAdapter<_$_BundleDto> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return _$_BundleDto(
-      bundleName: fields[18] as String,
-      bundleCode: fields[19] as String,
+      bundleName: fields[18] == null ? '' : fields[18] as String,
+      bundleCode: fields[19] == null ? '' : fields[19] as String,
       bundleInformation: (fields[20] as List).cast<BundleInfoDto>(),
     );
   }

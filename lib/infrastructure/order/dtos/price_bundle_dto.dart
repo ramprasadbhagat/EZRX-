@@ -11,13 +11,13 @@ class PriceBundleDto with _$PriceBundleDto {
   @HiveType(typeId: 13, adapterName: 'PriceBundleDtoAdapter')
   const factory PriceBundleDto({
     @JsonKey(name: 'BundleName', defaultValue: '')
-    @HiveField(35)
+    @HiveField(35, defaultValue: '')
         required String name,
     @JsonKey(name: 'BundleCode', defaultValue: '')
-    @HiveField(36)
+    @HiveField(36, defaultValue: '')
         required String code,
     @JsonKey(name: 'BundleInformation', defaultValue: <PriceBundleItemDto>[])
-    @HiveField(37)
+    @HiveField(37, defaultValue: <PriceBundleItemDto>[])
         required List<PriceBundleItemDto> information,
   }) = _PriceBundleDto;
 
@@ -47,15 +47,17 @@ class PriceBundleItemDto with _$PriceBundleItemDto {
   @HiveType(typeId: 14, adapterName: 'PriceBundleItemDtoAdapter')
   const factory PriceBundleItemDto({
     @JsonKey(name: 'Type', defaultValue: '')
-    @HiveField(38)
+    @HiveField(38, defaultValue: '')
         required String type,
     @JsonKey(name: 'Sequence', defaultValue: 0)
-    @HiveField(39)
+    @HiveField(39, defaultValue: 0)
         required int sequence,
     @JsonKey(name: 'Quantity', defaultValue: 0)
-    @HiveField(40)
+    @HiveField(40, defaultValue: 0)
         required int quantity,
-    @JsonKey(name: 'Rate', defaultValue: 0) @HiveField(41) required double rate,
+    @JsonKey(name: 'Rate', defaultValue: 0)
+    @HiveField(41, defaultValue: 0)
+        required double rate,
   }) = _PriceBundleItemDto;
 
   factory PriceBundleItemDto.fromDomain(PriceBundleItem priceBundleItem) {

@@ -11,17 +11,19 @@ class PriceRuleDto with _$PriceRuleDto {
   @HiveType(typeId: 7, adapterName: 'PriceRuleDtoAdapter')
   const factory PriceRuleDto({
     @JsonKey(name: 'Type', defaultValue: '')
-    @HiveField(14)
+    @HiveField(14, defaultValue: '')
         required String type,
-    @JsonKey(name: 'Rate', defaultValue: 0) @HiveField(15) required double rate,
+    @JsonKey(name: 'Rate', defaultValue: 0)
+    @HiveField(15, defaultValue: 0)
+        required double rate,
     @JsonKey(name: 'Conditions', defaultValue: '')
-    @HiveField(16)
+    @HiveField(16, defaultValue: '')
         required String condition,
     @JsonKey(name: 'ConditionNumber', defaultValue: '')
-    @HiveField(17)
+    @HiveField(17, defaultValue: '')
         required String conditionNumber,
     @JsonKey(name: 'BonusEligible', defaultValue: false)
-    @HiveField(18)
+    @HiveField(18, defaultValue: false)
         required bool bonusEligible,
   }) = _PriceRuleDto;
 

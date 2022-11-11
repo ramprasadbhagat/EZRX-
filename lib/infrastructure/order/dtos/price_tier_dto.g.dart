@@ -17,8 +17,10 @@ class PriceTierDtoAdapter extends TypeAdapter<_$_PriceTierDto> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return _$_PriceTierDto(
-      tier: fields[19] as String,
-      items: (fields[20] as List).cast<PriceTierItemDto>(),
+      tier: fields[19] == null ? '' : fields[19] as String,
+      items: fields[20] == null
+          ? []
+          : (fields[20] as List).cast<PriceTierItemDto>(),
     );
   }
 

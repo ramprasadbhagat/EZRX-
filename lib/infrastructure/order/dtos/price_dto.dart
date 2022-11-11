@@ -17,46 +17,46 @@ class PriceDto with _$PriceDto {
   @HiveType(typeId: 6, adapterName: 'PriceDtoAdapter')
   const factory PriceDto({
     @JsonKey(name: 'MaterialNumber')
-    @HiveField(0)
+    @HiveField(0, defaultValue: '')
         required String materialNumber,
     @JsonKey(name: 'PriceRules', defaultValue: <PriceRuleDto>[])
-    @HiveField(1)
+    @HiveField(1, defaultValue: <PriceRuleDto>[])
         required List<PriceRuleDto> rules,
     @JsonKey(name: 'TieredPricing', defaultValue: <PriceTierDto>[])
-    @HiveField(2)
+    @HiveField(2, defaultValue: <PriceTierDto>[])
         required List<PriceTierDto> tiers,
     @JsonKey(name: 'Bonuses', defaultValue: <PriceBonusDto>[])
-    @HiveField(3)
+    @HiveField(3, defaultValue: <PriceBonusDto>[])
         required List<PriceBonusDto> bonuses,
     @JsonKey(name: 'Bundles', defaultValue: <PriceBundleDto>[])
-    @HiveField(4)
+    @HiveField(4, defaultValue: <PriceBundleDto>[])
         required List<PriceBundleDto> bundles,
     @JsonKey(name: 'OverridenRulePresent', defaultValue: false)
-    @HiveField(5)
+    @HiveField(5, defaultValue: false)
         required bool overrideRulePresent,
     @JsonKey(name: 'ZDP5MaxQuota', defaultValue: '')
-    @HiveField(6)
+    @HiveField(6, defaultValue: '')
         required String zdp5MaxQuota,
     @JsonKey(name: 'ZDP5RemainingQuota', defaultValue: '')
-    @HiveField(7)
+    @HiveField(7, defaultValue: '')
         required String zdp5RemainingQuota,
     @JsonKey(name: 'ZMGDiscount', defaultValue: false)
-    @HiveField(8)
+    @HiveField(8, defaultValue: false)
         required bool zmgDiscount,
     @JsonKey(name: 'ListPrice', defaultValue: 0)
-    @HiveField(9)
+    @HiveField(9, defaultValue: 0)
         required double listPrice,
     @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0)
-    @HiveField(10)
+    @HiveField(10, defaultValue: 0)
         required double finalIndividualPrice,
     @JsonKey(name: 'FinalTotalPrice', defaultValue: 0)
-    @HiveField(11)
+    @HiveField(11, defaultValue: 0)
         required double finalTotalPrice,
     @JsonKey(name: 'AdditionalBonusEligible', defaultValue: false)
-    @HiveField(12)
+    @HiveField(12, defaultValue: false)
         required bool additionalBonusEligible,
     @JsonKey(name: 'Valid', defaultValue: false)
-    @HiveField(13)
+    @HiveField(13, defaultValue: false)
         required bool isValid,
   }) = _PriceDto;
 

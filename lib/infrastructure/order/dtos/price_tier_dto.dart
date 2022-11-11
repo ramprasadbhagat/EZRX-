@@ -11,10 +11,10 @@ class PriceTierDto with _$PriceTierDto {
   @HiveType(typeId: 8, adapterName: 'PriceTierDtoAdapter')
   const factory PriceTierDto({
     @JsonKey(name: 'Tier', defaultValue: '')
-    @HiveField(19)
+    @HiveField(19, defaultValue: '')
         required String tier,
     @JsonKey(name: 'PriceTier', defaultValue: <PriceTierItemDto>[])
-    @HiveField(20)
+    @HiveField(20, defaultValue: <PriceTierItemDto>[])
         required List<PriceTierItemDto> items,
   }) = _PriceTierDto;
 
@@ -46,18 +46,20 @@ class PriceTierItemDto with _$PriceTierItemDto {
   @HiveType(typeId: 9, adapterName: 'PriceTierItemDtoAdapter')
   const factory PriceTierItemDto({
     @JsonKey(name: 'Type', defaultValue: '')
-    @HiveField(21)
+    @HiveField(21, defaultValue: '')
         required String type,
     @JsonKey(name: 'ApplyBonus', defaultValue: false)
-    @HiveField(22)
+    @HiveField(22, defaultValue: 0)
         required bool applyBonus,
     @JsonKey(name: 'Sequence', defaultValue: 0)
-    @HiveField(23)
+    @HiveField(23, defaultValue: 0)
         required int sequence,
     @JsonKey(name: 'Quantity', defaultValue: 0)
-    @HiveField(24)
+    @HiveField(24, defaultValue: 0)
         required int quantity,
-    @JsonKey(name: 'Rate', defaultValue: 0) @HiveField(6) required double rate,
+    @JsonKey(name: 'Rate', defaultValue: 0)
+    @HiveField(6, defaultValue: 0)
+        required double rate,
   }) = _PriceTierItemDto;
 
   factory PriceTierItemDto.fromDomain(PriceTierItem priceTierItem) {

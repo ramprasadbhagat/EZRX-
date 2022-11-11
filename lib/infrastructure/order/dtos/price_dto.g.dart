@@ -17,20 +17,22 @@ class PriceDtoAdapter extends TypeAdapter<_$_PriceDto> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return _$_PriceDto(
-      materialNumber: fields[0] as String,
-      rules: (fields[1] as List).cast<PriceRuleDto>(),
-      tiers: (fields[2] as List).cast<PriceTierDto>(),
-      bonuses: (fields[3] as List).cast<PriceBonusDto>(),
-      bundles: (fields[4] as List).cast<PriceBundleDto>(),
-      overrideRulePresent: fields[5] as bool,
-      zdp5MaxQuota: fields[6] as String,
-      zdp5RemainingQuota: fields[7] as String,
-      zmgDiscount: fields[8] as bool,
-      listPrice: fields[9] as double,
-      finalIndividualPrice: fields[10] as double,
-      finalTotalPrice: fields[11] as double,
-      additionalBonusEligible: fields[12] as bool,
-      isValid: fields[13] as bool,
+      materialNumber: fields[0] == null ? '' : fields[0] as String,
+      rules: fields[1] == null ? [] : (fields[1] as List).cast<PriceRuleDto>(),
+      tiers: fields[2] == null ? [] : (fields[2] as List).cast<PriceTierDto>(),
+      bonuses:
+          fields[3] == null ? [] : (fields[3] as List).cast<PriceBonusDto>(),
+      bundles:
+          fields[4] == null ? [] : (fields[4] as List).cast<PriceBundleDto>(),
+      overrideRulePresent: fields[5] == null ? false : fields[5] as bool,
+      zdp5MaxQuota: fields[6] == null ? '' : fields[6] as String,
+      zdp5RemainingQuota: fields[7] == null ? '' : fields[7] as String,
+      zmgDiscount: fields[8] == null ? false : fields[8] as bool,
+      listPrice: fields[9] == null ? 0 : fields[9] as double,
+      finalIndividualPrice: fields[10] == null ? 0 : fields[10] as double,
+      finalTotalPrice: fields[11] == null ? 0 : fields[11] as double,
+      additionalBonusEligible: fields[12] == null ? false : fields[12] as bool,
+      isValid: fields[13] == null ? false : fields[13] as bool,
     );
   }
 

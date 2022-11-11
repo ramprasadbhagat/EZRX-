@@ -21,13 +21,13 @@ BundleDto _$BundleDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$BundleDto {
   @JsonKey(name: 'bundleName')
-  @HiveField(18)
+  @HiveField(18, defaultValue: '')
   String get bundleName => throw _privateConstructorUsedError;
   @JsonKey(name: 'bundleCode')
-  @HiveField(19)
+  @HiveField(19, defaultValue: '')
   String get bundleCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
-  @HiveField(20)
+  @HiveField(20, defaultValue: <BundleInfoDto>[])
   List<BundleInfoDto> get bundleInformation =>
       throw _privateConstructorUsedError;
 
@@ -43,13 +43,13 @@ abstract class $BundleDtoCopyWith<$Res> {
       _$BundleDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'bundleName')
-      @HiveField(18)
+      @HiveField(18, defaultValue: '')
           String bundleName,
       @JsonKey(name: 'bundleCode')
-      @HiveField(19)
+      @HiveField(19, defaultValue: '')
           String bundleCode,
       @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
-      @HiveField(20)
+      @HiveField(20, defaultValue: <BundleInfoDto>[])
           List<BundleInfoDto> bundleInformation});
 }
 
@@ -92,13 +92,13 @@ abstract class _$$_BundleDtoCopyWith<$Res> implements $BundleDtoCopyWith<$Res> {
   @override
   $Res call(
       {@JsonKey(name: 'bundleName')
-      @HiveField(18)
+      @HiveField(18, defaultValue: '')
           String bundleName,
       @JsonKey(name: 'bundleCode')
-      @HiveField(19)
+      @HiveField(19, defaultValue: '')
           String bundleCode,
       @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
-      @HiveField(20)
+      @HiveField(20, defaultValue: <BundleInfoDto>[])
           List<BundleInfoDto> bundleInformation});
 }
 
@@ -141,13 +141,13 @@ class __$$_BundleDtoCopyWithImpl<$Res> extends _$BundleDtoCopyWithImpl<$Res>
 class _$_BundleDto extends _BundleDto {
   const _$_BundleDto(
       {@JsonKey(name: 'bundleName')
-      @HiveField(18)
+      @HiveField(18, defaultValue: '')
           required this.bundleName,
       @JsonKey(name: 'bundleCode')
-      @HiveField(19)
+      @HiveField(19, defaultValue: '')
           required this.bundleCode,
       @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
-      @HiveField(20)
+      @HiveField(20, defaultValue: <BundleInfoDto>[])
           required final List<BundleInfoDto> bundleInformation})
       : _bundleInformation = bundleInformation,
         super._();
@@ -157,16 +157,16 @@ class _$_BundleDto extends _BundleDto {
 
   @override
   @JsonKey(name: 'bundleName')
-  @HiveField(18)
+  @HiveField(18, defaultValue: '')
   final String bundleName;
   @override
   @JsonKey(name: 'bundleCode')
-  @HiveField(19)
+  @HiveField(19, defaultValue: '')
   final String bundleCode;
   final List<BundleInfoDto> _bundleInformation;
   @override
   @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
-  @HiveField(20)
+  @HiveField(20, defaultValue: <BundleInfoDto>[])
   List<BundleInfoDto> get bundleInformation {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bundleInformation);
@@ -214,13 +214,13 @@ class _$_BundleDto extends _BundleDto {
 abstract class _BundleDto extends BundleDto {
   const factory _BundleDto(
       {@JsonKey(name: 'bundleName')
-      @HiveField(18)
+      @HiveField(18, defaultValue: '')
           required final String bundleName,
       @JsonKey(name: 'bundleCode')
-      @HiveField(19)
+      @HiveField(19, defaultValue: '')
           required final String bundleCode,
       @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
-      @HiveField(20)
+      @HiveField(20, defaultValue: <BundleInfoDto>[])
           required final List<BundleInfoDto> bundleInformation}) = _$_BundleDto;
   const _BundleDto._() : super._();
 
@@ -229,15 +229,15 @@ abstract class _BundleDto extends BundleDto {
 
   @override
   @JsonKey(name: 'bundleName')
-  @HiveField(18)
+  @HiveField(18, defaultValue: '')
   String get bundleName;
   @override
   @JsonKey(name: 'bundleCode')
-  @HiveField(19)
+  @HiveField(19, defaultValue: '')
   String get bundleCode;
   @override
   @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
-  @HiveField(20)
+  @HiveField(20, defaultValue: <BundleInfoDto>[])
   List<BundleInfoDto> get bundleInformation;
   @override
   @JsonKey(ignore: true)

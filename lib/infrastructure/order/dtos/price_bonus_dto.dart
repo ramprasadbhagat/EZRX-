@@ -11,7 +11,7 @@ class PriceBonusDto with _$PriceBonusDto {
   @HiveType(typeId: 10, adapterName: 'PriceBonusDtoAdapter')
   const factory PriceBonusDto({
     @JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
-    @HiveField(25)
+    @HiveField(25, defaultValue: <PriceBonusItemDto>[])
         required List<PriceBonusItemDto> items,
   }) = _PriceBonusDto;
 
@@ -36,13 +36,13 @@ class PriceBonusItemDto with _$PriceBonusItemDto {
   @HiveType(typeId: 11, adapterName: 'PriceBonusItemDtoAdapter')
   const factory PriceBonusItemDto({
     @JsonKey(name: 'Calculation', defaultValue: '')
-    @HiveField(26)
+    @HiveField(26, defaultValue: '')
         required String calculation,
     @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-    @HiveField(27)
+    @HiveField(27, defaultValue: 0)
         required int qualifyingQuantity,
-    @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
-    @HiveField(28)
+    @JsonKey(name: 'BonusMaterial', defaultValue: <BonusMaterialDto>[])
+    @HiveField(28, defaultValue: <BonusMaterialDto>[])
         required List<BonusMaterialDto> bonusMaterials,
   }) = _PriceBonusItemDto;
 
@@ -72,22 +72,22 @@ class BonusMaterialDto with _$BonusMaterialDto {
   @HiveType(typeId: 12, adapterName: 'BonusMaterialDtoAdapter')
   const factory BonusMaterialDto({
     @JsonKey(name: 'MaterialNumber', defaultValue: '')
-    @HiveField(29)
+    @HiveField(29, defaultValue: '')
         required String materialNumber,
     @JsonKey(name: 'MaterialDescription', defaultValue: '')
-    @HiveField(30)
+    @HiveField(30, defaultValue: '')
         required String materialDescription,
     @JsonKey(name: 'Calculation', defaultValue: '')
-    @HiveField(31)
+    @HiveField(31, defaultValue: '')
         required String calculation,
     @JsonKey(name: 'BonusRatio', defaultValue: 0)
-    @HiveField(32)
+    @HiveField(32, defaultValue: 0)
         required int bonusRatio,
     @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-    @HiveField(33)
+    @HiveField(33, defaultValue: 0)
         required int qualifyingQuantity,
     @JsonKey(name: 'BonusQuantity', defaultValue: 0)
-    @HiveField(34)
+    @HiveField(34, defaultValue: 0)
         required int bonusQuantity,
   }) = _BonusMaterialDto;
 

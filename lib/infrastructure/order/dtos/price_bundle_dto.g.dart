@@ -57,10 +57,10 @@ class PriceBundleItemDtoAdapter extends TypeAdapter<_$_PriceBundleItemDto> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return _$_PriceBundleItemDto(
-      type: fields[38] as String,
-      sequence: fields[39] as int,
-      quantity: fields[40] as int,
-      rate: fields[41] as double,
+      type: fields[38] == null ? '' : fields[38] as String,
+      sequence: fields[39] == null ? 0 : fields[39] as int,
+      quantity: fields[40] == null ? 0 : fields[40] as int,
+      rate: fields[41] == null ? 0 : fields[41] as double,
     );
   }
 

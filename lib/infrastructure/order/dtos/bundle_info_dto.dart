@@ -11,10 +11,18 @@ class BundleInfoDto with _$BundleInfoDto {
   const BundleInfoDto._();
   @HiveType(typeId: 16, adapterName: 'BundleInfoDtoAdapter')
   const factory BundleInfoDto({
-    @JsonKey(name: 'sequence') @HiveField(21) required int sequence,
-    @JsonKey(name: 'quantity') @HiveField(22) required int quantity,
-    @JsonKey(name: 'type') @HiveField(23) required String type,
-    @JsonKey(name: 'rate') @HiveField(24) required double rate,
+    @JsonKey(name: 'sequence')
+    @HiveField(21, defaultValue: 1)
+        required int sequence,
+    @JsonKey(name: 'quantity')
+    @HiveField(22, defaultValue: 1)
+        required int quantity,
+    @JsonKey(name: 'type')
+    @HiveField(23, defaultValue: '%')
+        required String type,
+    @JsonKey(name: 'rate')
+    @HiveField(24, defaultValue: -10)
+        required double rate,
   }) = _BundleInfoDto;
 
   BundleInfo toDomain() {

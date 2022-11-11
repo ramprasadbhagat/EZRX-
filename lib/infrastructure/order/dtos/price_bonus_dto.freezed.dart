@@ -21,7 +21,7 @@ PriceBonusDto _$PriceBonusDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PriceBonusDto {
   @JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
-  @HiveField(25)
+  @HiveField(25, defaultValue: <PriceBonusItemDto>[])
   List<PriceBonusItemDto> get items => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +37,7 @@ abstract class $PriceBonusDtoCopyWith<$Res> {
       _$PriceBonusDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
-      @HiveField(25)
+      @HiveField(25, defaultValue: <PriceBonusItemDto>[])
           List<PriceBonusItemDto> items});
 }
 
@@ -72,7 +72,7 @@ abstract class _$$_PriceBonusDtoCopyWith<$Res>
   @override
   $Res call(
       {@JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
-      @HiveField(25)
+      @HiveField(25, defaultValue: <PriceBonusItemDto>[])
           List<PriceBonusItemDto> items});
 }
 
@@ -106,7 +106,7 @@ class __$$_PriceBonusDtoCopyWithImpl<$Res>
 class _$_PriceBonusDto extends _PriceBonusDto {
   const _$_PriceBonusDto(
       {@JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
-      @HiveField(25)
+      @HiveField(25, defaultValue: <PriceBonusItemDto>[])
           required final List<PriceBonusItemDto> items})
       : _items = items,
         super._();
@@ -117,7 +117,7 @@ class _$_PriceBonusDto extends _PriceBonusDto {
   final List<PriceBonusItemDto> _items;
   @override
   @JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
-  @HiveField(25)
+  @HiveField(25, defaultValue: <PriceBonusItemDto>[])
   List<PriceBonusItemDto> get items {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_items);
@@ -157,7 +157,7 @@ class _$_PriceBonusDto extends _PriceBonusDto {
 abstract class _PriceBonusDto extends PriceBonusDto {
   const factory _PriceBonusDto(
       {@JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
-      @HiveField(25)
+      @HiveField(25, defaultValue: <PriceBonusItemDto>[])
           required final List<PriceBonusItemDto> items}) = _$_PriceBonusDto;
   const _PriceBonusDto._() : super._();
 
@@ -166,7 +166,7 @@ abstract class _PriceBonusDto extends PriceBonusDto {
 
   @override
   @JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
-  @HiveField(25)
+  @HiveField(25, defaultValue: <PriceBonusItemDto>[])
   List<PriceBonusItemDto> get items;
   @override
   @JsonKey(ignore: true)
@@ -181,13 +181,13 @@ PriceBonusItemDto _$PriceBonusItemDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PriceBonusItemDto {
   @JsonKey(name: 'Calculation', defaultValue: '')
-  @HiveField(26)
+  @HiveField(26, defaultValue: '')
   String get calculation => throw _privateConstructorUsedError;
   @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-  @HiveField(27)
+  @HiveField(27, defaultValue: 0)
   int get qualifyingQuantity => throw _privateConstructorUsedError;
-  @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
-  @HiveField(28)
+  @JsonKey(name: 'BonusMaterial', defaultValue: <BonusMaterialDto>[])
+  @HiveField(28, defaultValue: <BonusMaterialDto>[])
   List<BonusMaterialDto> get bonusMaterials =>
       throw _privateConstructorUsedError;
 
@@ -204,13 +204,13 @@ abstract class $PriceBonusItemDtoCopyWith<$Res> {
       _$PriceBonusItemDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'Calculation', defaultValue: '')
-      @HiveField(26)
+      @HiveField(26, defaultValue: '')
           String calculation,
       @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-      @HiveField(27)
+      @HiveField(27, defaultValue: 0)
           int qualifyingQuantity,
-      @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
-      @HiveField(28)
+      @JsonKey(name: 'BonusMaterial', defaultValue: <BonusMaterialDto>[])
+      @HiveField(28, defaultValue: <BonusMaterialDto>[])
           List<BonusMaterialDto> bonusMaterials});
 }
 
@@ -255,13 +255,13 @@ abstract class _$$_PriceBonusItemDtoCopyWith<$Res>
   @override
   $Res call(
       {@JsonKey(name: 'Calculation', defaultValue: '')
-      @HiveField(26)
+      @HiveField(26, defaultValue: '')
           String calculation,
       @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-      @HiveField(27)
+      @HiveField(27, defaultValue: 0)
           int qualifyingQuantity,
-      @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
-      @HiveField(28)
+      @JsonKey(name: 'BonusMaterial', defaultValue: <BonusMaterialDto>[])
+      @HiveField(28, defaultValue: <BonusMaterialDto>[])
           List<BonusMaterialDto> bonusMaterials});
 }
 
@@ -305,13 +305,13 @@ class __$$_PriceBonusItemDtoCopyWithImpl<$Res>
 class _$_PriceBonusItemDto extends _PriceBonusItemDto {
   const _$_PriceBonusItemDto(
       {@JsonKey(name: 'Calculation', defaultValue: '')
-      @HiveField(26)
+      @HiveField(26, defaultValue: '')
           required this.calculation,
       @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-      @HiveField(27)
+      @HiveField(27, defaultValue: 0)
           required this.qualifyingQuantity,
-      @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
-      @HiveField(28)
+      @JsonKey(name: 'BonusMaterial', defaultValue: <BonusMaterialDto>[])
+      @HiveField(28, defaultValue: <BonusMaterialDto>[])
           required final List<BonusMaterialDto> bonusMaterials})
       : _bonusMaterials = bonusMaterials,
         super._();
@@ -321,16 +321,16 @@ class _$_PriceBonusItemDto extends _PriceBonusItemDto {
 
   @override
   @JsonKey(name: 'Calculation', defaultValue: '')
-  @HiveField(26)
+  @HiveField(26, defaultValue: '')
   final String calculation;
   @override
   @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-  @HiveField(27)
+  @HiveField(27, defaultValue: 0)
   final int qualifyingQuantity;
   final List<BonusMaterialDto> _bonusMaterials;
   @override
-  @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
-  @HiveField(28)
+  @JsonKey(name: 'BonusMaterial', defaultValue: <BonusMaterialDto>[])
+  @HiveField(28, defaultValue: <BonusMaterialDto>[])
   List<BonusMaterialDto> get bonusMaterials {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bonusMaterials);
@@ -379,13 +379,13 @@ class _$_PriceBonusItemDto extends _PriceBonusItemDto {
 abstract class _PriceBonusItemDto extends PriceBonusItemDto {
   const factory _PriceBonusItemDto(
           {@JsonKey(name: 'Calculation', defaultValue: '')
-          @HiveField(26)
+          @HiveField(26, defaultValue: '')
               required final String calculation,
           @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-          @HiveField(27)
+          @HiveField(27, defaultValue: 0)
               required final int qualifyingQuantity,
-          @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
-          @HiveField(28)
+          @JsonKey(name: 'BonusMaterial', defaultValue: <BonusMaterialDto>[])
+          @HiveField(28, defaultValue: <BonusMaterialDto>[])
               required final List<BonusMaterialDto> bonusMaterials}) =
       _$_PriceBonusItemDto;
   const _PriceBonusItemDto._() : super._();
@@ -395,15 +395,15 @@ abstract class _PriceBonusItemDto extends PriceBonusItemDto {
 
   @override
   @JsonKey(name: 'Calculation', defaultValue: '')
-  @HiveField(26)
+  @HiveField(26, defaultValue: '')
   String get calculation;
   @override
   @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-  @HiveField(27)
+  @HiveField(27, defaultValue: 0)
   int get qualifyingQuantity;
   @override
-  @JsonKey(name: 'BonusMaterial', defaultValue: <PriceBonusItemDto>[])
-  @HiveField(28)
+  @JsonKey(name: 'BonusMaterial', defaultValue: <BonusMaterialDto>[])
+  @HiveField(28, defaultValue: <BonusMaterialDto>[])
   List<BonusMaterialDto> get bonusMaterials;
   @override
   @JsonKey(ignore: true)
@@ -418,22 +418,22 @@ BonusMaterialDto _$BonusMaterialDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$BonusMaterialDto {
   @JsonKey(name: 'MaterialNumber', defaultValue: '')
-  @HiveField(29)
+  @HiveField(29, defaultValue: '')
   String get materialNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'MaterialDescription', defaultValue: '')
-  @HiveField(30)
+  @HiveField(30, defaultValue: '')
   String get materialDescription => throw _privateConstructorUsedError;
   @JsonKey(name: 'Calculation', defaultValue: '')
-  @HiveField(31)
+  @HiveField(31, defaultValue: '')
   String get calculation => throw _privateConstructorUsedError;
   @JsonKey(name: 'BonusRatio', defaultValue: 0)
-  @HiveField(32)
+  @HiveField(32, defaultValue: 0)
   int get bonusRatio => throw _privateConstructorUsedError;
   @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-  @HiveField(33)
+  @HiveField(33, defaultValue: 0)
   int get qualifyingQuantity => throw _privateConstructorUsedError;
   @JsonKey(name: 'BonusQuantity', defaultValue: 0)
-  @HiveField(34)
+  @HiveField(34, defaultValue: 0)
   int get bonusQuantity => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -449,22 +449,22 @@ abstract class $BonusMaterialDtoCopyWith<$Res> {
       _$BonusMaterialDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'MaterialNumber', defaultValue: '')
-      @HiveField(29)
+      @HiveField(29, defaultValue: '')
           String materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-      @HiveField(30)
+      @HiveField(30, defaultValue: '')
           String materialDescription,
       @JsonKey(name: 'Calculation', defaultValue: '')
-      @HiveField(31)
+      @HiveField(31, defaultValue: '')
           String calculation,
       @JsonKey(name: 'BonusRatio', defaultValue: 0)
-      @HiveField(32)
+      @HiveField(32, defaultValue: 0)
           int bonusRatio,
       @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-      @HiveField(33)
+      @HiveField(33, defaultValue: 0)
           int qualifyingQuantity,
       @JsonKey(name: 'BonusQuantity', defaultValue: 0)
-      @HiveField(34)
+      @HiveField(34, defaultValue: 0)
           int bonusQuantity});
 }
 
@@ -524,22 +524,22 @@ abstract class _$$_BonusMaterialDtoCopyWith<$Res>
   @override
   $Res call(
       {@JsonKey(name: 'MaterialNumber', defaultValue: '')
-      @HiveField(29)
+      @HiveField(29, defaultValue: '')
           String materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-      @HiveField(30)
+      @HiveField(30, defaultValue: '')
           String materialDescription,
       @JsonKey(name: 'Calculation', defaultValue: '')
-      @HiveField(31)
+      @HiveField(31, defaultValue: '')
           String calculation,
       @JsonKey(name: 'BonusRatio', defaultValue: 0)
-      @HiveField(32)
+      @HiveField(32, defaultValue: 0)
           int bonusRatio,
       @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-      @HiveField(33)
+      @HiveField(33, defaultValue: 0)
           int qualifyingQuantity,
       @JsonKey(name: 'BonusQuantity', defaultValue: 0)
-      @HiveField(34)
+      @HiveField(34, defaultValue: 0)
           int bonusQuantity});
 }
 
@@ -598,22 +598,22 @@ class __$$_BonusMaterialDtoCopyWithImpl<$Res>
 class _$_BonusMaterialDto extends _BonusMaterialDto {
   const _$_BonusMaterialDto(
       {@JsonKey(name: 'MaterialNumber', defaultValue: '')
-      @HiveField(29)
+      @HiveField(29, defaultValue: '')
           required this.materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-      @HiveField(30)
+      @HiveField(30, defaultValue: '')
           required this.materialDescription,
       @JsonKey(name: 'Calculation', defaultValue: '')
-      @HiveField(31)
+      @HiveField(31, defaultValue: '')
           required this.calculation,
       @JsonKey(name: 'BonusRatio', defaultValue: 0)
-      @HiveField(32)
+      @HiveField(32, defaultValue: 0)
           required this.bonusRatio,
       @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-      @HiveField(33)
+      @HiveField(33, defaultValue: 0)
           required this.qualifyingQuantity,
       @JsonKey(name: 'BonusQuantity', defaultValue: 0)
-      @HiveField(34)
+      @HiveField(34, defaultValue: 0)
           required this.bonusQuantity})
       : super._();
 
@@ -622,27 +622,27 @@ class _$_BonusMaterialDto extends _BonusMaterialDto {
 
   @override
   @JsonKey(name: 'MaterialNumber', defaultValue: '')
-  @HiveField(29)
+  @HiveField(29, defaultValue: '')
   final String materialNumber;
   @override
   @JsonKey(name: 'MaterialDescription', defaultValue: '')
-  @HiveField(30)
+  @HiveField(30, defaultValue: '')
   final String materialDescription;
   @override
   @JsonKey(name: 'Calculation', defaultValue: '')
-  @HiveField(31)
+  @HiveField(31, defaultValue: '')
   final String calculation;
   @override
   @JsonKey(name: 'BonusRatio', defaultValue: 0)
-  @HiveField(32)
+  @HiveField(32, defaultValue: 0)
   final int bonusRatio;
   @override
   @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-  @HiveField(33)
+  @HiveField(33, defaultValue: 0)
   final int qualifyingQuantity;
   @override
   @JsonKey(name: 'BonusQuantity', defaultValue: 0)
-  @HiveField(34)
+  @HiveField(34, defaultValue: 0)
   final int bonusQuantity;
 
   @override
@@ -696,22 +696,22 @@ class _$_BonusMaterialDto extends _BonusMaterialDto {
 abstract class _BonusMaterialDto extends BonusMaterialDto {
   const factory _BonusMaterialDto(
       {@JsonKey(name: 'MaterialNumber', defaultValue: '')
-      @HiveField(29)
+      @HiveField(29, defaultValue: '')
           required final String materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-      @HiveField(30)
+      @HiveField(30, defaultValue: '')
           required final String materialDescription,
       @JsonKey(name: 'Calculation', defaultValue: '')
-      @HiveField(31)
+      @HiveField(31, defaultValue: '')
           required final String calculation,
       @JsonKey(name: 'BonusRatio', defaultValue: 0)
-      @HiveField(32)
+      @HiveField(32, defaultValue: 0)
           required final int bonusRatio,
       @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-      @HiveField(33)
+      @HiveField(33, defaultValue: 0)
           required final int qualifyingQuantity,
       @JsonKey(name: 'BonusQuantity', defaultValue: 0)
-      @HiveField(34)
+      @HiveField(34, defaultValue: 0)
           required final int bonusQuantity}) = _$_BonusMaterialDto;
   const _BonusMaterialDto._() : super._();
 
@@ -720,27 +720,27 @@ abstract class _BonusMaterialDto extends BonusMaterialDto {
 
   @override
   @JsonKey(name: 'MaterialNumber', defaultValue: '')
-  @HiveField(29)
+  @HiveField(29, defaultValue: '')
   String get materialNumber;
   @override
   @JsonKey(name: 'MaterialDescription', defaultValue: '')
-  @HiveField(30)
+  @HiveField(30, defaultValue: '')
   String get materialDescription;
   @override
   @JsonKey(name: 'Calculation', defaultValue: '')
-  @HiveField(31)
+  @HiveField(31, defaultValue: '')
   String get calculation;
   @override
   @JsonKey(name: 'BonusRatio', defaultValue: 0)
-  @HiveField(32)
+  @HiveField(32, defaultValue: 0)
   int get bonusRatio;
   @override
   @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-  @HiveField(33)
+  @HiveField(33, defaultValue: 0)
   int get qualifyingQuantity;
   @override
   @JsonKey(name: 'BonusQuantity', defaultValue: 0)
-  @HiveField(34)
+  @HiveField(34, defaultValue: 0)
   int get bonusQuantity;
   @override
   @JsonKey(ignore: true)

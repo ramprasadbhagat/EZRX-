@@ -11,10 +11,14 @@ class BundleDto with _$BundleDto {
   const BundleDto._();
   @HiveType(typeId: 15, adapterName: 'BundleDtoAdapter')
   const factory BundleDto({
-    @JsonKey(name: 'bundleName') @HiveField(18) required String bundleName,
-    @JsonKey(name: 'bundleCode') @HiveField(19) required String bundleCode,
+    @JsonKey(name: 'bundleName')
+    @HiveField(18, defaultValue: '')
+        required String bundleName,
+    @JsonKey(name: 'bundleCode')
+    @HiveField(19, defaultValue: '')
+        required String bundleCode,
     @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
-    @HiveField(20)
+    @HiveField(20, defaultValue: <BundleInfoDto>[])
         required List<BundleInfoDto> bundleInformation,
   }) = _BundleDto;
 

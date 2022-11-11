@@ -17,7 +17,9 @@ class PriceBonusDtoAdapter extends TypeAdapter<_$_PriceBonusDto> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return _$_PriceBonusDto(
-      items: (fields[25] as List).cast<PriceBonusItemDto>(),
+      items: fields[25] == null
+          ? []
+          : (fields[25] as List).cast<PriceBonusItemDto>(),
     );
   }
 
@@ -51,9 +53,11 @@ class PriceBonusItemDtoAdapter extends TypeAdapter<_$_PriceBonusItemDto> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return _$_PriceBonusItemDto(
-      calculation: fields[26] as String,
-      qualifyingQuantity: fields[27] as int,
-      bonusMaterials: (fields[28] as List).cast<BonusMaterialDto>(),
+      calculation: fields[26] == null ? '' : fields[26] as String,
+      qualifyingQuantity: fields[27] == null ? 0 : fields[27] as int,
+      bonusMaterials: fields[28] == null
+          ? []
+          : (fields[28] as List).cast<BonusMaterialDto>(),
     );
   }
 
@@ -91,11 +95,11 @@ class BonusMaterialDtoAdapter extends TypeAdapter<_$_BonusMaterialDto> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return _$_BonusMaterialDto(
-      materialNumber: fields[29] as String,
-      materialDescription: fields[30] as String,
-      calculation: fields[31] as String,
-      bonusRatio: fields[32] as int,
-      qualifyingQuantity: fields[33] as int,
+      materialNumber: fields[29] == null ? '' : fields[29] as String,
+      materialDescription: fields[30] == null ? '' : fields[30] as String,
+      calculation: fields[31] == null ? '' : fields[31] as String,
+      bonusRatio: fields[32] == null ? 0 : fields[32] as int,
+      qualifyingQuantity: fields[33] == null ? 0 : fields[33] as int,
       bonusQuantity: fields[34] as int,
     );
   }

@@ -21,19 +21,19 @@ PriceRuleDto _$PriceRuleDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PriceRuleDto {
   @JsonKey(name: 'Type', defaultValue: '')
-  @HiveField(14)
+  @HiveField(14, defaultValue: '')
   String get type => throw _privateConstructorUsedError;
   @JsonKey(name: 'Rate', defaultValue: 0)
-  @HiveField(15)
+  @HiveField(15, defaultValue: 0)
   double get rate => throw _privateConstructorUsedError;
   @JsonKey(name: 'Conditions', defaultValue: '')
-  @HiveField(16)
+  @HiveField(16, defaultValue: '')
   String get condition => throw _privateConstructorUsedError;
   @JsonKey(name: 'ConditionNumber', defaultValue: '')
-  @HiveField(17)
+  @HiveField(17, defaultValue: '')
   String get conditionNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'BonusEligible', defaultValue: false)
-  @HiveField(18)
+  @HiveField(18, defaultValue: false)
   bool get bonusEligible => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,19 +49,19 @@ abstract class $PriceRuleDtoCopyWith<$Res> {
       _$PriceRuleDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'Type', defaultValue: '')
-      @HiveField(14)
+      @HiveField(14, defaultValue: '')
           String type,
       @JsonKey(name: 'Rate', defaultValue: 0)
-      @HiveField(15)
+      @HiveField(15, defaultValue: 0)
           double rate,
       @JsonKey(name: 'Conditions', defaultValue: '')
-      @HiveField(16)
+      @HiveField(16, defaultValue: '')
           String condition,
       @JsonKey(name: 'ConditionNumber', defaultValue: '')
-      @HiveField(17)
+      @HiveField(17, defaultValue: '')
           String conditionNumber,
       @JsonKey(name: 'BonusEligible', defaultValue: false)
-      @HiveField(18)
+      @HiveField(18, defaultValue: false)
           bool bonusEligible});
 }
 
@@ -115,19 +115,19 @@ abstract class _$$_PriceRuleDtoCopyWith<$Res>
   @override
   $Res call(
       {@JsonKey(name: 'Type', defaultValue: '')
-      @HiveField(14)
+      @HiveField(14, defaultValue: '')
           String type,
       @JsonKey(name: 'Rate', defaultValue: 0)
-      @HiveField(15)
+      @HiveField(15, defaultValue: 0)
           double rate,
       @JsonKey(name: 'Conditions', defaultValue: '')
-      @HiveField(16)
+      @HiveField(16, defaultValue: '')
           String condition,
       @JsonKey(name: 'ConditionNumber', defaultValue: '')
-      @HiveField(17)
+      @HiveField(17, defaultValue: '')
           String conditionNumber,
       @JsonKey(name: 'BonusEligible', defaultValue: false)
-      @HiveField(18)
+      @HiveField(18, defaultValue: false)
           bool bonusEligible});
 }
 
@@ -181,19 +181,19 @@ class __$$_PriceRuleDtoCopyWithImpl<$Res>
 class _$_PriceRuleDto extends _PriceRuleDto {
   const _$_PriceRuleDto(
       {@JsonKey(name: 'Type', defaultValue: '')
-      @HiveField(14)
+      @HiveField(14, defaultValue: '')
           required this.type,
       @JsonKey(name: 'Rate', defaultValue: 0)
-      @HiveField(15)
+      @HiveField(15, defaultValue: 0)
           required this.rate,
       @JsonKey(name: 'Conditions', defaultValue: '')
-      @HiveField(16)
+      @HiveField(16, defaultValue: '')
           required this.condition,
       @JsonKey(name: 'ConditionNumber', defaultValue: '')
-      @HiveField(17)
+      @HiveField(17, defaultValue: '')
           required this.conditionNumber,
       @JsonKey(name: 'BonusEligible', defaultValue: false)
-      @HiveField(18)
+      @HiveField(18, defaultValue: false)
           required this.bonusEligible})
       : super._();
 
@@ -202,23 +202,23 @@ class _$_PriceRuleDto extends _PriceRuleDto {
 
   @override
   @JsonKey(name: 'Type', defaultValue: '')
-  @HiveField(14)
+  @HiveField(14, defaultValue: '')
   final String type;
   @override
   @JsonKey(name: 'Rate', defaultValue: 0)
-  @HiveField(15)
+  @HiveField(15, defaultValue: 0)
   final double rate;
   @override
   @JsonKey(name: 'Conditions', defaultValue: '')
-  @HiveField(16)
+  @HiveField(16, defaultValue: '')
   final String condition;
   @override
   @JsonKey(name: 'ConditionNumber', defaultValue: '')
-  @HiveField(17)
+  @HiveField(17, defaultValue: '')
   final String conditionNumber;
   @override
   @JsonKey(name: 'BonusEligible', defaultValue: false)
-  @HiveField(18)
+  @HiveField(18, defaultValue: false)
   final bool bonusEligible;
 
   @override
@@ -266,19 +266,19 @@ class _$_PriceRuleDto extends _PriceRuleDto {
 abstract class _PriceRuleDto extends PriceRuleDto {
   const factory _PriceRuleDto(
       {@JsonKey(name: 'Type', defaultValue: '')
-      @HiveField(14)
+      @HiveField(14, defaultValue: '')
           required final String type,
       @JsonKey(name: 'Rate', defaultValue: 0)
-      @HiveField(15)
+      @HiveField(15, defaultValue: 0)
           required final double rate,
       @JsonKey(name: 'Conditions', defaultValue: '')
-      @HiveField(16)
+      @HiveField(16, defaultValue: '')
           required final String condition,
       @JsonKey(name: 'ConditionNumber', defaultValue: '')
-      @HiveField(17)
+      @HiveField(17, defaultValue: '')
           required final String conditionNumber,
       @JsonKey(name: 'BonusEligible', defaultValue: false)
-      @HiveField(18)
+      @HiveField(18, defaultValue: false)
           required final bool bonusEligible}) = _$_PriceRuleDto;
   const _PriceRuleDto._() : super._();
 
@@ -287,23 +287,23 @@ abstract class _PriceRuleDto extends PriceRuleDto {
 
   @override
   @JsonKey(name: 'Type', defaultValue: '')
-  @HiveField(14)
+  @HiveField(14, defaultValue: '')
   String get type;
   @override
   @JsonKey(name: 'Rate', defaultValue: 0)
-  @HiveField(15)
+  @HiveField(15, defaultValue: 0)
   double get rate;
   @override
   @JsonKey(name: 'Conditions', defaultValue: '')
-  @HiveField(16)
+  @HiveField(16, defaultValue: '')
   String get condition;
   @override
   @JsonKey(name: 'ConditionNumber', defaultValue: '')
-  @HiveField(17)
+  @HiveField(17, defaultValue: '')
   String get conditionNumber;
   @override
   @JsonKey(name: 'BonusEligible', defaultValue: false)
-  @HiveField(18)
+  @HiveField(18, defaultValue: false)
   bool get bonusEligible;
   @override
   @JsonKey(ignore: true)
