@@ -8,7 +8,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class OrderTypeSelector extends StatelessWidget {
-  const OrderTypeSelector({Key? key}) : super(key: key);
+  final bool hideReasonField;
+  const OrderTypeSelector({
+    Key? key,
+    this.hideReasonField=false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +38,7 @@ class OrderTypeSelector extends StatelessWidget {
                 dropDownTitle: 'Please select order type',
                 orderDocumentTypeState: state,
               ),
-              if (state.isReasonFieldEnable)
+              if (!hideReasonField && state.isReasonFieldEnable)
                 Container(
                   margin: const EdgeInsets.only(top: 12),
                   child: OrderTypeSelectorField(

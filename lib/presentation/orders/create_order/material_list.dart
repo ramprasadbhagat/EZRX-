@@ -125,7 +125,7 @@ class MaterialListPage extends StatelessWidget {
               children: [
                 const _SearchBar(),
                 if (orderDocumentTypeAggregate.checkOrderTypeEnable)
-                  const OrderTypeSelector(),
+                  const OrderTypeSelector(hideReasonField: true),
                 const _MaterialFilters(),
                 _BodyContent(
                   materialListState: state,
