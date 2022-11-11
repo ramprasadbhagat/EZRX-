@@ -21,9 +21,7 @@ _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
       emailNotifications: json['emailNotifications'] as bool? ?? false,
       mobileNotifications: json['mobileNotifications'] as bool? ?? false,
       languagePreference:
-          handleEmptyLanguagePreference(json, 'languagePreference')
-                  as String? ??
-              'en',
+          handleEmptyLanguagePreference(json, 'languagePreference') as String,
       acceptTC: json['acceptTC'] as bool? ?? false,
       acceptTCTimestamp:
           dateTimeStringFormatCheck(json, 'acceptTCTimestamp') as String? ??
