@@ -20,12 +20,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _onEvent(AuthEvent event, Emitter<AuthState> emit) async {
     await event.map(
-      init: (e) async {
-        await authRepository.initTokenStorage();
-        await authRepository.initCredStorage();
-        await authRepository.initOkta();
-        add(const AuthEvent.authCheck());
-      },
+      init: (e) async => add(const AuthEvent.authCheck()),
       bioCheck: (e) async {
         final isBiometricPossibleResult =
             await authRepository.canBeAuthenticatedAndBioAvailable();

@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 class RemoteConfigService {
   final remoteConfig = FirebaseRemoteConfig.instance;
 
-  Future<void> initializeRemoteConfig() async {
+  Future<void> init() async {
     await setConfigForDevelopment();
     await setInAppDefaultValues();
     await remoteConfig.fetchAndActivate();

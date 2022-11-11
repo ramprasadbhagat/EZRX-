@@ -31,7 +31,12 @@ import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -81,7 +86,12 @@ Future<void> initialSetup() async {
   await Wakelock.enable();
   await Firebase.initializeApp();
   setupLocator();
-  await locator<RemoteConfigService>().initializeRemoteConfig();
+  await locator<RemoteConfigService>().init();
+  await locator<TokenStorage>().init();
+  await locator<CredStorage>().init();
+  await locator<OktaLoginServices>().init();
+  await locator<AccountSelectorStorage>().init();
+  await locator<CartStorage>().init();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 }
 

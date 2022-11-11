@@ -27,6 +27,7 @@ class SalesOrgBloc extends Bloc<SalesOrgEvent, SalesOrgState> {
     Emitter<SalesOrgState> emit,
   ) async {
     await event.map(
+      initialized: (e) async => emit(SalesOrgState.initial()),
       loadSavedOrganisation: (e) async {
         final failureOrSuccess = await salesOrgRepository.getSalesOrg();
         final salesOrganisations = e.salesOrganisations;
@@ -49,10 +50,6 @@ class SalesOrgBloc extends Bloc<SalesOrgEvent, SalesOrgState> {
             salesOrganisation: salesOrg,
           ),
         );
-      },
-      initialized: (e) async {
-        await salesOrgRepository.initSalesOrgStorage();
-        emit(SalesOrgState.initial());
       },
       selected: (e) async {
         emit(state.copyWith(salesOrganisation: e.salesOrganisation));
