@@ -18,9 +18,8 @@ class SalesRepBloc extends Bloc<SalesRepEvent, SalesRepState> {
     required this.salesRepRepository,
   }) : super(SalesRepState.initial()) {
     on<SalesRepEvent>(_onEvent);
-    //in presentation layer (not implemented yet)
-    //if user role type is SalesRep, then add(const SalesRepEvent.fetch())
   }
+
   Future<void> _onEvent(
     SalesRepEvent event,
     Emitter<SalesRepState> emit,

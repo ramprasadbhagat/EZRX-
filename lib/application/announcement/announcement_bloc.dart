@@ -16,7 +16,6 @@ class AnnouncementBloc extends Bloc<AnnouncementEvent, AnnouncementState> {
     required this.announcementRepository,
   }) : super(AnnouncementState.initial()) {
     on<AnnouncementEvent>(_onEvent);
-    add(const AnnouncementEvent.getAnnouncement());
   }
 
   Future<FutureOr<void>> _onEvent(

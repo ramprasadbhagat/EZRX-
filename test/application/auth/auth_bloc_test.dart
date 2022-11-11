@@ -36,6 +36,7 @@ void main() {
         when(() => authRepoMock.getOktaAccessToken()).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('fake-error')));
       },
+      act: (AuthBloc bloc) async => bloc.add(const AuthEvent.authCheck()),
       expect: () =>
           [const AuthState.loading(), const AuthState.unauthenticated()],
     );
@@ -55,6 +56,7 @@ void main() {
             (invocation) async =>
                 const Left(ApiFailure.deviceNotSupportBiometirc()));
       },
+      act: (AuthBloc bloc) async => bloc.add(const AuthEvent.authCheck()),
       expect: () => [const AuthState.authenticated()],
     );
     blocTest(
@@ -74,6 +76,7 @@ void main() {
         when(() => authRepoMock.doBiometricAuthentication()).thenAnswer(
             (invocation) async => const Left(ApiFailure.invalidBiometirc()));
       },
+      act: (AuthBloc bloc) async => bloc.add(const AuthEvent.authCheck()),
       expect: () => [const AuthState.unauthenticated()],
     );
     blocTest('Unauthenticated On Okta Token Test',
@@ -90,6 +93,7 @@ void main() {
           when(() => authRepoMock.getOktaAccessToken()).thenAnswer(
               (invocation) async => const Left(ApiFailure.other('fake-error')));
         },
+        act: (AuthBloc bloc) async => bloc.add(const AuthEvent.authCheck()),
         expect: () =>
             [const AuthState.loading(), const AuthState.unauthenticated()]);
     blocTest('Unauthenticated On EZRX JWT Test',
@@ -108,6 +112,7 @@ void main() {
           when(() => authRepoMock.getEZRXJWT(fakeJWT)).thenAnswer(
               (invocation) async => const Left(ApiFailure.other('fake-error')));
         },
+        act: (AuthBloc bloc) async => bloc.add(const AuthEvent.authCheck()),
         expect: () =>
             [const AuthState.loading(), const AuthState.unauthenticated()]);
     blocTest('Authenticated On EZRX JWT Test',
@@ -132,6 +137,7 @@ void main() {
           when(() => authRepoMock.doBiometricAuthentication())
               .thenAnswer((invocation) async => const Right(true));
         },
+        act: (AuthBloc bloc) async => bloc.add(const AuthEvent.authCheck()),
         expect: () =>
             [const AuthState.loading(), const AuthState.authenticated()]);
 
@@ -146,10 +152,14 @@ void main() {
               (invocation) async => const Left(ApiFailure.other('fake-error')));
           when(() => authRepoMock.tokenValid())
               .thenAnswer((invocation) async => const Right(unit));
+          when(() => authRepoMock.canBeAuthenticatedAndBioAvailable())
+              .thenAnswer((invocation) async =>
+                  const Left(ApiFailure.deviceNotSupportBiometirc()));
           when(() => authRepoMock.logout())
               .thenAnswer((invocation) async => const Right(unit));
         },
         act: (AuthBloc bloc) async {
+          bloc.add(const AuthEvent.authCheck());
           await Future.delayed(const Duration(milliseconds: 0));
           bloc.add(const AuthEvent.logout());
         },

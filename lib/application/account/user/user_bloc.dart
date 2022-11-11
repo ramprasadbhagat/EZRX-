@@ -20,7 +20,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     required this.userRepository,
   }) : super(UserState.initial()) {
     on<UserEvent>(_onEvent);
-    add(const UserEvent.fetch());
   }
 
   Future<void> _onEvent(UserEvent event, Emitter<UserState> emit) async {

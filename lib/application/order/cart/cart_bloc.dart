@@ -22,10 +22,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     Emitter<CartState> emit,
   ) async {
     await event.map(
-      initialized: (e) async {
-        emit(CartState.initial());
-        add(const CartEvent.fetch());
-      },
+      initialized: (e) async => emit(CartState.initial()),
       fetch: (e) async {
         emit(
           state.copyWith(

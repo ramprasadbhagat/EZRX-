@@ -34,6 +34,8 @@ void main() {
           ),
         );
       },
+      act: (AnnouncementBloc bloc) =>
+          bloc..add(const AnnouncementEvent.getAnnouncement()),
       expect: () => [
         announcementState.copyWith(isLoading: true),
         announcementState.copyWith(
@@ -53,6 +55,8 @@ void main() {
           ),
         );
       },
+      act: (AnnouncementBloc bloc) =>
+          bloc..add(const AnnouncementEvent.getAnnouncement()),
       expect: () => [
         announcementState.copyWith(isLoading: true),
         announcementState.copyWith(
@@ -76,8 +80,9 @@ void main() {
           ),
         );
       },
-      act: (AnnouncementBloc bloc) =>
-          bloc..add(const AnnouncementEvent.close()),
+      act: (AnnouncementBloc bloc) => bloc
+        ..add(const AnnouncementEvent.getAnnouncement())
+        ..add(const AnnouncementEvent.close()),
       expect: () => [
         announcementState.copyWith(isLoading: true),
         announcementState.copyWith(

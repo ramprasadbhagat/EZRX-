@@ -21,6 +21,15 @@ void main() {
       build: () => UserBloc(
         userRepository: userRepoMock,
       ),
+      act: (UserBloc bloc) => bloc.add(const UserEvent.initialized()),
+      expect: () => [UserState.initial()],
+    );
+
+    blocTest<UserBloc, UserState>(
+      'Fetch user',
+      build: () => UserBloc(
+        userRepository: userRepoMock,
+      ),
       setUp: () {
         when(() => userRepoMock.getUser()).thenAnswer(
           (invocation) async => Right(
@@ -28,10 +37,9 @@ void main() {
           ),
         );
       },
-      act: (UserBloc bloc) => bloc.add(const UserEvent.initialized()),
+      act: (UserBloc bloc) => bloc.add(const UserEvent.fetch()),
       expect: () => [
         UserState.initial().copyWith(user: User.empty().copyWith(id: 'fakeId')),
-        UserState.initial()
       ],
     );
 
@@ -39,18 +47,6 @@ void main() {
       final userState = UserState.initial();
       expect(userState.haveSalesOrganisation, false);
     });
-
-    blocTest<UserBloc, UserState>(
-      'Check if User have SalesOrganisation',
-      build: () => UserBloc(
-        userRepository: userRepoMock,
-      ),
-      act: (UserBloc bloc) => bloc.add(const UserEvent.initialized()),
-      expect: () => [
-        UserState.initial().copyWith(user: User.empty().copyWith(id: 'fakeId')),
-        UserState.initial()
-      ],
-    );
 
     blocTest<UserBloc, UserState>(
       'Create bloc and fetch',
@@ -143,7 +139,6 @@ void main() {
           const UserEvent.updateNotificationSettings(
               languagePreference: 'en', emailNotifications: true)),
       expect: () => [
-        UserState.initial(),
         UserState.initial().copyWith(
             userFailureOrSuccessOption:
                 some(const Left(ApiFailure.other('Fake Error'))))

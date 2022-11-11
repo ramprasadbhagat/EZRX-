@@ -133,9 +133,12 @@ class App extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AuthBloc>(create: (context) => locator<AuthBloc>()),
+        BlocProvider<AuthBloc>(
+          create: (context) => locator<AuthBloc>()..add(const AuthEvent.init()),
+        ),
         BlocProvider<LoginFormBloc>(
-          create: (context) => locator<LoginFormBloc>(),
+          create: (context) => locator<LoginFormBloc>()
+            ..add(const LoginFormEvent.loadLastSavedCred()),
         ),
         BlocProvider<ProxyLoginFormBloc>(
           create: (context) => locator<ProxyLoginFormBloc>(),
@@ -153,7 +156,8 @@ class App extends StatelessWidget {
           create: (context) => locator<ShipToCodeBloc>(),
         ),
         BlocProvider<AnnouncementBloc>(
-          create: (context) => locator<AnnouncementBloc>(),
+          create: (context) => locator<AnnouncementBloc>()
+            ..add(const AnnouncementEvent.getAnnouncement()),
         ),
         BlocProvider<SavedOrderListBloc>(
           create: (context) => locator<SavedOrderListBloc>(),
@@ -213,7 +217,8 @@ class App extends StatelessWidget {
           create: (context) => locator<CovidMaterialListBloc>(),
         ),
         BlocProvider<CartBloc>(
-          create: (context) => locator<CartBloc>(),
+          create: (context) =>
+              locator<CartBloc>()..add(const CartEvent.fetch()),
         ),
         BlocProvider<AddToCartBloc>(
           create: (context) => locator<AddToCartBloc>(),

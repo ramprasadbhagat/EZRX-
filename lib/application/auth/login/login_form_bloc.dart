@@ -16,7 +16,6 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
     required this.authRepository,
   }) : super(LoginFormState.initial()) {
     on<LoginFormEvent>(_onEvent);
-    add(const LoginFormEvent.loadLastSavedCred());
   }
 
   Future<void> _onEvent(

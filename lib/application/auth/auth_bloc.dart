@@ -15,7 +15,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required this.authRepository,
   }) : super(const AuthState.initial()) {
     on<AuthEvent>(_onEvent);
-    add(const AuthEvent.init());
   }
 
   Future<void> _onEvent(AuthEvent event, Emitter<AuthState> emit) async {

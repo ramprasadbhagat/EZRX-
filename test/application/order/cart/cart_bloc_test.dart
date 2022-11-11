@@ -36,13 +36,15 @@ void main() {
             .thenAnswer((invocation) async => const Right(unit));
       });
       blocTest<CartBloc, CartState>(
-        'Initialize CartBloc',
+        'Initialize CartBloc adn fetch',
         build: () => CartBloc(cartRepository: cartRepositoryMock),
         setUp: () {
           when(() => cartRepositoryMock.fetchCartItems()).thenAnswer(
               (invocation) async => const Right(<PriceAggregate>[]));
         },
-        act: (bloc) => bloc.add(const CartEvent.initialized()),
+        act: (bloc) => bloc
+          ..add(const CartEvent.initialized())
+          ..add(const CartEvent.fetch()),
         expect: () => [
           CartState.initial(),
           CartState.initial().copyWith(

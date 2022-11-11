@@ -46,6 +46,8 @@ void main() {
         when(() => authRepoMock.canBeAuthenticatedAndBioAvailable())
             .thenAnswer((invocation) async => const Right(false));
       },
+      act: (LoginFormBloc bloc) =>
+          bloc.add(const LoginFormEvent.loadLastSavedCred()),
       expect: () => [
         loginFormState.copyWith(
           username: credMock.username,
