@@ -3,7 +3,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
-import 'package:ezrxmobile/domain/order/repository/i_order_history__details_repository.dart';
+import 'package:ezrxmobile/domain/order/repository/i_order_history_details_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'order_history_details_event.dart';
@@ -35,6 +35,7 @@ class OrderHistoryDetailsBloc extends Bloc<OrderHistoryDetailsEvent, OrderHistor
        
         final failureOrSuccess = await orderHistoryDetailsRepository.getOrderHistoryDetails(
           user: e.user,
+          orderHistoryItem: e.orderHistoryItem,
         );
 
         failureOrSuccess.fold(

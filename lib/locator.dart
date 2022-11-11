@@ -109,9 +109,11 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_price_query_
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/materials_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_document_type_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_document_type_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_document_type_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_remote.dart';
@@ -795,15 +797,30 @@ void setupLocator() {
   //============================================================
 
   locator.registerLazySingleton(() => OrderHistoryDetailsLocalDataSource());
+
+  locator.registerLazySingleton(() => OrderHistoryDetailsQueryMutation());
+
   locator.registerLazySingleton(
     () => OrderHistoryDetailsRepository(
+      config: locator<Config>(),
       localDataSource: locator<OrderHistoryDetailsLocalDataSource>(),
+      orderHistoryDetailsRemoteDataSource:
+          locator<OrderHistoryDetailsRemoteDataSource>(),
     ),
   );
 
   locator.registerLazySingleton(
     () => OrderHistoryDetailsBloc(
       orderHistoryDetailsRepository: locator<OrderHistoryDetailsRepository>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => OrderHistoryDetailsRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      orderHistoryDetailsQueryMutation:
+          locator<OrderHistoryDetailsQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
 

@@ -1,7 +1,9 @@
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -13,10 +15,14 @@ import 'package:ezrxmobile/presentation/history/widgets/history_details_expanion
 class HistoryDetails extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
   final BillToInfo billToInfo;
+  final CustomerCodeInfo customerCodeInfo;
+  final OrderHistoryBasicInfo orderHistoryBasicInfo;
   const HistoryDetails({
     Key? key,
     required this.orderHistoryItem,
     required this.billToInfo,
+    required this.customerCodeInfo,
+    required this.orderHistoryBasicInfo,
   }) : super(key: key);
 
   @override
@@ -66,7 +72,7 @@ class HistoryDetails extends StatelessWidget {
               ),
             );
           }
-
+          
           return Container(
             padding: const EdgeInsets.only(
               left: 15,
@@ -82,15 +88,20 @@ class HistoryDetails extends StatelessWidget {
                   children: [
                     if (state.orderHistoryDetails.orderHistoryDetailsMessages
                         .isNotEmpty)
-                      const _SystemMessage(),
-                    _OrderDetails(orderDetails: orderDetails),
-                    _SoldToAddress(orderDetails: orderDetails),
+                      _SystemMessage(
+                        orderDetails: orderDetails,
+                      ),
+                    _OrderDetails(
+                      orderDetails: orderDetails,
+                      customerCodeInfo: customerCodeInfo,
+                    ),
+                    _SoldToAddress(
+                      orderDetails: orderDetails,
+                      customerCodeInfo: customerCodeInfo,
+                      orderHistoryBasicInfo: orderHistoryBasicInfo,
+                    ),
                     _ShipToAddress(orderDetails: orderDetails),
-                    context.read<OrderHistoryListBloc>()
-                                .state
-                                .orderHistoryList
-                                .orderBasicInformation
-                                .soldTo !=
+                    orderHistoryBasicInfo.soldTo !=
                             billToInfo.billToCustomerCode
                         ? _BillToAddress(
                             billToInfo: billToInfo,
@@ -115,7 +126,7 @@ class HistoryDetails extends StatelessWidget {
                       children: state
                           .orderHistoryDetails.orderHistoryDetailsOrderItem
                           .map((orderItem) {
-                        return const Card(); ///// need to implement bonusList
+                        return const Card(); 
                       }).toList(),
                     ),
                   ],
@@ -130,7 +141,9 @@ class HistoryDetails extends StatelessWidget {
 }
 
 class _SystemMessage extends StatelessWidget {
-  const _SystemMessage({Key? key}) : super(key: key);
+  final OrderHistoryDetails orderDetails;
+  const _SystemMessage({Key? key, required this.orderDetails})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -156,12 +169,7 @@ class _SystemMessage extends StatelessWidget {
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: context
-                  .read<OrderHistoryDetailsBloc>()
-                  .state
-                  .orderHistoryDetails
-                  .orderHistoryDetailsMessages
-                  .map((e) {
+              children: orderDetails.orderHistoryDetailsMessages.map((e) {
                 return Text(
                   e.message,
                   textAlign: TextAlign.justify,
@@ -181,7 +189,12 @@ class _SystemMessage extends StatelessWidget {
 
 class _OrderDetails extends StatelessWidget {
   final OrderHistoryDetails orderDetails;
-  const _OrderDetails({Key? key, required this.orderDetails}) : super(key: key);
+  final CustomerCodeInfo customerCodeInfo;
+  const _OrderDetails({
+    Key? key,
+    required this.orderDetails,
+    required this.customerCodeInfo,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -203,7 +216,7 @@ class _OrderDetails extends StatelessWidget {
                   .orderHistoryDetailsOrderHeader.totalTax
                   .toString())
               .toStringAsFixed(2),
-          // state.orderDetails.orderHeader.totalTax.getOrCrash(), /// need create value object for that
+         
         ),
         BalanceTextRow(
           keyText: 'Type',
@@ -211,12 +224,7 @@ class _OrderDetails extends StatelessWidget {
         ),
         BalanceTextRow(
           keyText: 'Customer Name',
-          valueText: context
-              .read<CustomerCodeBloc>()
-              .state
-              .customerCodeInfo
-              .customerName
-              .toString(),
+          valueText: customerCodeInfo.customerName.toString(),
         ),
         BalanceTextRow(
           keyText: 'Created Date',
@@ -250,19 +258,11 @@ class _OrderDetails extends StatelessWidget {
         ),
         BalanceTextRow(
           keyText: 'Customer Classification',
-          valueText: context
-              .read<CustomerCodeBloc>()
-              .state
-              .customerCodeInfo
-              .customerClassification,
+          valueText: customerCodeInfo.customerClassification,
         ),
         BalanceTextRow(
           keyText: 'Customer Local Group',
-          valueText: context
-              .read<CustomerCodeBloc>()
-              .state
-              .customerCodeInfo
-              .customerLocalGroup,
+          valueText: customerCodeInfo.customerLocalGroup,
         ),
         BalanceTextRow(
           keyText: 'Payment Term Description',
@@ -276,8 +276,14 @@ class _OrderDetails extends StatelessWidget {
 
 class _SoldToAddress extends StatelessWidget {
   final OrderHistoryDetails orderDetails;
-  const _SoldToAddress({Key? key, required this.orderDetails})
-      : super(key: key);
+  final CustomerCodeInfo customerCodeInfo;
+  final OrderHistoryBasicInfo orderHistoryBasicInfo;
+  const _SoldToAddress({
+    Key? key,
+    required this.orderDetails,
+    required this.customerCodeInfo,
+    required this.orderHistoryBasicInfo,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return CustomExpansionTile(
@@ -285,39 +291,19 @@ class _SoldToAddress extends StatelessWidget {
       items: [
         BalanceTextRow(
           keyText: 'Sold to ID',
-          valueText: context
-              .read<OrderHistoryListBloc>()
-              .state
-              .orderHistoryList
-              .orderBasicInformation
-              .soldTo,
+          valueText: orderHistoryBasicInfo.soldTo,
         ),
         BalanceTextRow(
           keyText: 'Sold to Customer Name',
-          valueText: context
-              .read<OrderHistoryListBloc>()
-              .state
-              .orderHistoryList
-              .orderBasicInformation
-              .companyName
-              .name,
+          valueText: orderHistoryBasicInfo.companyName.name,
         ),
         BalanceTextRow(
           keyText: 'Address',
-          valueText: context
-              .read<CustomerCodeBloc>()
-              .state
-              .customerCodeInfo
-              .customerAddress
-              .toString(),
+          valueText: customerCodeInfo.customerAddress.toString(),
         ),
         BalanceTextRow(
           keyText: 'Postal Code',
-          valueText: context
-              .read<CustomerCodeBloc>()
-              .state
-              .customerCodeInfo
-              .postalCode,
+          valueText: customerCodeInfo.postalCode,
         ),
         const BalanceTextRow(
           keyText: 'Country',
@@ -335,7 +321,8 @@ class _SoldToAddress extends StatelessWidget {
 
 class _ShipToAddress extends StatelessWidget {
   final OrderHistoryDetails orderDetails;
-  const _ShipToAddress({Key? key, required this.orderDetails}) : super(key: key);
+  const _ShipToAddress({Key? key, required this.orderDetails})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -513,7 +500,7 @@ class _AdditionalComments extends StatelessWidget {
                                   : const SizedBox(),
                               InkWell(
                                 onTap: () {
-                                  ////
+                                  
                                 },
                                 child: Row(
                                   children: const [

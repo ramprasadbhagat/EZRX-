@@ -45,6 +45,8 @@ class OrderHistoryListTile extends StatelessWidget {
         context.router.push(HistoryDetailsRoute(
           orderHistoryItem: orderHistoryItem,
           billToInfo: billToInfo,
+          customerCodeInfo: customerCodeInfo,
+          orderHistoryBasicInfo: orderHistoryBasicInfo,
         ));
       },
       child: Card(
