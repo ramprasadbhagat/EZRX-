@@ -42,7 +42,10 @@ mixin _$UserDto {
   bool get emailNotifications => throw _privateConstructorUsedError;
   @JsonKey(name: 'mobileNotifications', defaultValue: false)
   bool get mobileNotifications => throw _privateConstructorUsedError;
-  @JsonKey(name: 'languagePreference', defaultValue: 'en')
+  @JsonKey(
+      name: 'languagePreference',
+      defaultValue: 'en',
+      readValue: handleEmptyLanguagePreference)
   String get languagePreference => throw _privateConstructorUsedError;
   @JsonKey(name: 'acceptTC', defaultValue: false)
   bool get acceptTC => throw _privateConstructorUsedError;
@@ -92,7 +95,7 @@ abstract class $UserDtoCopyWith<$Res> {
           bool emailNotifications,
       @JsonKey(name: 'mobileNotifications', defaultValue: false)
           bool mobileNotifications,
-      @JsonKey(name: 'languagePreference', defaultValue: 'en')
+      @JsonKey(name: 'languagePreference', defaultValue: 'en', readValue: handleEmptyLanguagePreference)
           String languagePreference,
       @JsonKey(name: 'acceptTC', defaultValue: false)
           bool acceptTC,
@@ -239,7 +242,7 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
           bool emailNotifications,
       @JsonKey(name: 'mobileNotifications', defaultValue: false)
           bool mobileNotifications,
-      @JsonKey(name: 'languagePreference', defaultValue: 'en')
+      @JsonKey(name: 'languagePreference', defaultValue: 'en', readValue: handleEmptyLanguagePreference)
           String languagePreference,
       @JsonKey(name: 'acceptTC', defaultValue: false)
           bool acceptTC,
@@ -378,7 +381,7 @@ class _$_UserDto extends _UserDto {
           required this.emailNotifications,
       @JsonKey(name: 'mobileNotifications', defaultValue: false)
           required this.mobileNotifications,
-      @JsonKey(name: 'languagePreference', defaultValue: 'en')
+      @JsonKey(name: 'languagePreference', defaultValue: 'en', readValue: handleEmptyLanguagePreference)
           required this.languagePreference,
       @JsonKey(name: 'acceptTC', defaultValue: false)
           required this.acceptTC,
@@ -433,7 +436,10 @@ class _$_UserDto extends _UserDto {
   @JsonKey(name: 'mobileNotifications', defaultValue: false)
   final bool mobileNotifications;
   @override
-  @JsonKey(name: 'languagePreference', defaultValue: 'en')
+  @JsonKey(
+      name: 'languagePreference',
+      defaultValue: 'en',
+      readValue: handleEmptyLanguagePreference)
   final String languagePreference;
   @override
   @JsonKey(name: 'acceptTC', defaultValue: false)
@@ -550,7 +556,7 @@ abstract class _UserDto extends UserDto {
           required final bool emailNotifications,
       @JsonKey(name: 'mobileNotifications', defaultValue: false)
           required final bool mobileNotifications,
-      @JsonKey(name: 'languagePreference', defaultValue: 'en')
+      @JsonKey(name: 'languagePreference', defaultValue: 'en', readValue: handleEmptyLanguagePreference)
           required final String languagePreference,
       @JsonKey(name: 'acceptTC', defaultValue: false)
           required final bool acceptTC,
@@ -598,7 +604,10 @@ abstract class _UserDto extends UserDto {
   @JsonKey(name: 'mobileNotifications', defaultValue: false)
   bool get mobileNotifications;
   @override
-  @JsonKey(name: 'languagePreference', defaultValue: 'en')
+  @JsonKey(
+      name: 'languagePreference',
+      defaultValue: 'en',
+      readValue: handleEmptyLanguagePreference)
   String get languagePreference;
   @override
   @JsonKey(name: 'acceptTC', defaultValue: false)

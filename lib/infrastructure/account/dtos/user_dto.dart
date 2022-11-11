@@ -36,7 +36,7 @@ class UserDto with _$UserDto {
         required bool emailNotifications,
     @JsonKey(name: 'mobileNotifications', defaultValue: false)
         required bool mobileNotifications,
-    @JsonKey(name: 'languagePreference', defaultValue: 'en')
+    @JsonKey(name: 'languagePreference', defaultValue: 'en', readValue: handleEmptyLanguagePreference)
         required String languagePreference,
     @JsonKey(name: 'acceptTC', defaultValue: false) required bool acceptTC,
     @JsonKey(name: 'acceptTCTimestamp', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
@@ -188,4 +188,13 @@ List<SalesOrganisationDto> _splitSalesOrg(
   }
 
   return saleOrgs;
+}
+
+String handleEmptyLanguagePreference(Map json, String key) {
+  final String languagePreference = json[key];
+  if (languagePreference.isEmpty) {
+    return 'en';
+  }
+
+  return languagePreference;
 }

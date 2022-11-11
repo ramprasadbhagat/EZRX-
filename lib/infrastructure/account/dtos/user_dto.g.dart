@@ -20,7 +20,10 @@ _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
               json['userSalesOrganisationList'] as Map<String, dynamic>),
       emailNotifications: json['emailNotifications'] as bool? ?? false,
       mobileNotifications: json['mobileNotifications'] as bool? ?? false,
-      languagePreference: json['languagePreference'] as String? ?? 'en',
+      languagePreference:
+          handleEmptyLanguagePreference(json, 'languagePreference')
+                  as String? ??
+              'en',
       acceptTC: json['acceptTC'] as bool? ?? false,
       acceptTCTimestamp:
           dateTimeStringFormatCheck(json, 'acceptTCTimestamp') as String? ??
