@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
@@ -48,7 +49,7 @@ class AuthInterceptor extends Interceptor {
       debugPrint('load token failure: ${e.message}');
     }
     options.headers['Content-Type'] = 'application/json; charset=UTF-8';
-    // options.headers['Accept-Language'] = 'en';
+    options.headers['Accept-Language'] = tr('en');
 
     return super.onRequest(options, handler);
   }
