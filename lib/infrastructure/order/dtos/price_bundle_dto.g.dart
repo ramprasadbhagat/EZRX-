@@ -8,7 +8,7 @@ part of 'price_bundle_dto.dart';
 
 class PriceBundleDtoAdapter extends TypeAdapter<_$_PriceBundleDto> {
   @override
-  final int typeId = 13;
+  final int typeId = 110;
 
   @override
   _$_PriceBundleDto read(BinaryReader reader) {
@@ -17,9 +17,11 @@ class PriceBundleDtoAdapter extends TypeAdapter<_$_PriceBundleDto> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return _$_PriceBundleDto(
-      name: fields[35] as String,
-      code: fields[36] as String,
-      information: (fields[37] as List).cast<PriceBundleItemDto>(),
+      name: fields[35] == null ? '' : fields[35] as String,
+      code: fields[36] == null ? '' : fields[36] as String,
+      information: fields[37] == null
+          ? []
+          : (fields[37] as List).cast<PriceBundleItemDto>(),
     );
   }
 
@@ -48,7 +50,7 @@ class PriceBundleDtoAdapter extends TypeAdapter<_$_PriceBundleDto> {
 
 class PriceBundleItemDtoAdapter extends TypeAdapter<_$_PriceBundleItemDto> {
   @override
-  final int typeId = 14;
+  final int typeId = 111;
 
   @override
   _$_PriceBundleItemDto read(BinaryReader reader) {

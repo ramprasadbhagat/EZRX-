@@ -27,10 +27,10 @@ mixin _$FavouriteEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(User user)? fetch,
-    TResult Function(Favourite item, bool isPackAndPick, User user)? add,
-    TResult Function(Favourite item, User user)? delete,
+    TResult? Function()? initialized,
+    TResult? Function(User user)? fetch,
+    TResult? Function(Favourite item, bool isPackAndPick, User user)? add,
+    TResult? Function(Favourite item, User user)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -52,10 +52,10 @@ mixin _$FavouriteEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_Add value)? add,
-    TResult Function(_Delete value)? delete,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_Delete value)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -73,17 +73,18 @@ mixin _$FavouriteEvent {
 abstract class $FavouriteEventCopyWith<$Res> {
   factory $FavouriteEventCopyWith(
           FavouriteEvent value, $Res Function(FavouriteEvent) then) =
-      _$FavouriteEventCopyWithImpl<$Res>;
+      _$FavouriteEventCopyWithImpl<$Res, FavouriteEvent>;
 }
 
 /// @nodoc
-class _$FavouriteEventCopyWithImpl<$Res>
+class _$FavouriteEventCopyWithImpl<$Res, $Val extends FavouriteEvent>
     implements $FavouriteEventCopyWith<$Res> {
   _$FavouriteEventCopyWithImpl(this._value, this._then);
 
-  final FavouriteEvent _value;
   // ignore: unused_field
-  final $Res Function(FavouriteEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -95,14 +96,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitializedCopyWithImpl<$Res>
-    extends _$FavouriteEventCopyWithImpl<$Res>
+    extends _$FavouriteEventCopyWithImpl<$Res, _$_Initialized>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, (v) => _then(v as _$_Initialized));
-
-  @override
-  _$_Initialized get _value => super._value as _$_Initialized;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -139,10 +137,10 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(User user)? fetch,
-    TResult Function(Favourite item, bool isPackAndPick, User user)? add,
-    TResult Function(Favourite item, User user)? delete,
+    TResult? Function()? initialized,
+    TResult? Function(User user)? fetch,
+    TResult? Function(Favourite item, bool isPackAndPick, User user)? add,
+    TResult? Function(Favourite item, User user)? delete,
   }) {
     return initialized?.call();
   }
@@ -176,10 +174,10 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_Add value)? add,
-    TResult Function(_Delete value)? delete,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_Delete value)? delete,
   }) {
     return initialized?.call(this);
   }
@@ -208,26 +206,26 @@ abstract class _Initialized implements FavouriteEvent {
 abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
+  @useResult
   $Res call({User user});
 
   $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res> extends _$FavouriteEventCopyWithImpl<$Res>
+class __$$_FetchCopyWithImpl<$Res>
+    extends _$FavouriteEventCopyWithImpl<$Res, _$_Fetch>
     implements _$$_FetchCopyWith<$Res> {
   __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
-      : super(_value, (v) => _then(v as _$_Fetch));
+      : super(_value, _then);
 
-  @override
-  _$_Fetch get _value => super._value as _$_Fetch;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
+    Object? user = null,
   }) {
     return _then(_$_Fetch(
-      user: user == freezed
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
@@ -235,6 +233,7 @@ class __$$_FetchCopyWithImpl<$Res> extends _$FavouriteEventCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value));
@@ -260,15 +259,15 @@ class _$_Fetch implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
-            const DeepCollectionEquality().equals(other.user, user));
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
+  int get hashCode => Object.hash(runtimeType, user);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
 
@@ -287,10 +286,10 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(User user)? fetch,
-    TResult Function(Favourite item, bool isPackAndPick, User user)? add,
-    TResult Function(Favourite item, User user)? delete,
+    TResult? Function()? initialized,
+    TResult? Function(User user)? fetch,
+    TResult? Function(Favourite item, bool isPackAndPick, User user)? add,
+    TResult? Function(Favourite item, User user)? delete,
   }) {
     return fetch?.call(user);
   }
@@ -324,10 +323,10 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_Add value)? add,
-    TResult Function(_Delete value)? delete,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_Delete value)? delete,
   }) {
     return fetch?.call(this);
   }
@@ -361,6 +360,7 @@ abstract class _Fetch implements FavouriteEvent {
 abstract class _$$_AddCopyWith<$Res> {
   factory _$$_AddCopyWith(_$_Add value, $Res Function(_$_Add) then) =
       __$$_AddCopyWithImpl<$Res>;
+  @useResult
   $Res call({Favourite item, bool isPackAndPick, User user});
 
   $FavouriteCopyWith<$Res> get item;
@@ -368,30 +368,29 @@ abstract class _$$_AddCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_AddCopyWithImpl<$Res> extends _$FavouriteEventCopyWithImpl<$Res>
+class __$$_AddCopyWithImpl<$Res>
+    extends _$FavouriteEventCopyWithImpl<$Res, _$_Add>
     implements _$$_AddCopyWith<$Res> {
   __$$_AddCopyWithImpl(_$_Add _value, $Res Function(_$_Add) _then)
-      : super(_value, (v) => _then(v as _$_Add));
+      : super(_value, _then);
 
-  @override
-  _$_Add get _value => super._value as _$_Add;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? item = freezed,
-    Object? isPackAndPick = freezed,
-    Object? user = freezed,
+    Object? item = null,
+    Object? isPackAndPick = null,
+    Object? user = null,
   }) {
     return _then(_$_Add(
-      item: item == freezed
+      item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
               as Favourite,
-      isPackAndPick: isPackAndPick == freezed
+      isPackAndPick: null == isPackAndPick
           ? _value.isPackAndPick
           : isPackAndPick // ignore: cast_nullable_to_non_nullable
               as bool,
-      user: user == freezed
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
@@ -399,6 +398,7 @@ class __$$_AddCopyWithImpl<$Res> extends _$FavouriteEventCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $FavouriteCopyWith<$Res> get item {
     return $FavouriteCopyWith<$Res>(_value.item, (value) {
       return _then(_value.copyWith(item: value));
@@ -406,6 +406,7 @@ class __$$_AddCopyWithImpl<$Res> extends _$FavouriteEventCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value));
@@ -436,21 +437,18 @@ class _$_Add implements _Add {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Add &&
-            const DeepCollectionEquality().equals(other.item, item) &&
-            const DeepCollectionEquality()
-                .equals(other.isPackAndPick, isPackAndPick) &&
-            const DeepCollectionEquality().equals(other.user, user));
+            (identical(other.item, item) || other.item == item) &&
+            (identical(other.isPackAndPick, isPackAndPick) ||
+                other.isPackAndPick == isPackAndPick) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(item),
-      const DeepCollectionEquality().hash(isPackAndPick),
-      const DeepCollectionEquality().hash(user));
+  int get hashCode => Object.hash(runtimeType, item, isPackAndPick, user);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AddCopyWith<_$_Add> get copyWith =>
       __$$_AddCopyWithImpl<_$_Add>(this, _$identity);
 
@@ -469,10 +467,10 @@ class _$_Add implements _Add {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(User user)? fetch,
-    TResult Function(Favourite item, bool isPackAndPick, User user)? add,
-    TResult Function(Favourite item, User user)? delete,
+    TResult? Function()? initialized,
+    TResult? Function(User user)? fetch,
+    TResult? Function(Favourite item, bool isPackAndPick, User user)? add,
+    TResult? Function(Favourite item, User user)? delete,
   }) {
     return add?.call(item, isPackAndPick, user);
   }
@@ -506,10 +504,10 @@ class _$_Add implements _Add {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_Add value)? add,
-    TResult Function(_Delete value)? delete,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_Delete value)? delete,
   }) {
     return add?.call(this);
   }
@@ -547,6 +545,7 @@ abstract class _Add implements FavouriteEvent {
 abstract class _$$_DeleteCopyWith<$Res> {
   factory _$$_DeleteCopyWith(_$_Delete value, $Res Function(_$_Delete) then) =
       __$$_DeleteCopyWithImpl<$Res>;
+  @useResult
   $Res call({Favourite item, User user});
 
   $FavouriteCopyWith<$Res> get item;
@@ -554,25 +553,24 @@ abstract class _$$_DeleteCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_DeleteCopyWithImpl<$Res> extends _$FavouriteEventCopyWithImpl<$Res>
+class __$$_DeleteCopyWithImpl<$Res>
+    extends _$FavouriteEventCopyWithImpl<$Res, _$_Delete>
     implements _$$_DeleteCopyWith<$Res> {
   __$$_DeleteCopyWithImpl(_$_Delete _value, $Res Function(_$_Delete) _then)
-      : super(_value, (v) => _then(v as _$_Delete));
+      : super(_value, _then);
 
-  @override
-  _$_Delete get _value => super._value as _$_Delete;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? item = freezed,
-    Object? user = freezed,
+    Object? item = null,
+    Object? user = null,
   }) {
     return _then(_$_Delete(
-      item: item == freezed
+      item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
               as Favourite,
-      user: user == freezed
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
@@ -580,6 +578,7 @@ class __$$_DeleteCopyWithImpl<$Res> extends _$FavouriteEventCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $FavouriteCopyWith<$Res> get item {
     return $FavouriteCopyWith<$Res>(_value.item, (value) {
       return _then(_value.copyWith(item: value));
@@ -587,6 +586,7 @@ class __$$_DeleteCopyWithImpl<$Res> extends _$FavouriteEventCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value));
@@ -614,18 +614,16 @@ class _$_Delete implements _Delete {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Delete &&
-            const DeepCollectionEquality().equals(other.item, item) &&
-            const DeepCollectionEquality().equals(other.user, user));
+            (identical(other.item, item) || other.item == item) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(item),
-      const DeepCollectionEquality().hash(user));
+  int get hashCode => Object.hash(runtimeType, item, user);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_DeleteCopyWith<_$_Delete> get copyWith =>
       __$$_DeleteCopyWithImpl<_$_Delete>(this, _$identity);
 
@@ -644,10 +642,10 @@ class _$_Delete implements _Delete {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(User user)? fetch,
-    TResult Function(Favourite item, bool isPackAndPick, User user)? add,
-    TResult Function(Favourite item, User user)? delete,
+    TResult? Function()? initialized,
+    TResult? Function(User user)? fetch,
+    TResult? Function(Favourite item, bool isPackAndPick, User user)? add,
+    TResult? Function(Favourite item, User user)? delete,
   }) {
     return delete?.call(item, user);
   }
@@ -681,10 +679,10 @@ class _$_Delete implements _Delete {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_Add value)? add,
-    TResult Function(_Delete value)? delete,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_Delete value)? delete,
   }) {
     return delete?.call(this);
   }
@@ -732,7 +730,8 @@ mixin _$FavouriteState {
 abstract class $FavouriteStateCopyWith<$Res> {
   factory $FavouriteStateCopyWith(
           FavouriteState value, $Res Function(FavouriteState) then) =
-      _$FavouriteStateCopyWithImpl<$Res>;
+      _$FavouriteStateCopyWithImpl<$Res, FavouriteState>;
+  @useResult
   $Res call(
       {List<Favourite> favouriteItems,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
@@ -740,34 +739,36 @@ abstract class $FavouriteStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$FavouriteStateCopyWithImpl<$Res>
+class _$FavouriteStateCopyWithImpl<$Res, $Val extends FavouriteState>
     implements $FavouriteStateCopyWith<$Res> {
   _$FavouriteStateCopyWithImpl(this._value, this._then);
 
-  final FavouriteState _value;
   // ignore: unused_field
-  final $Res Function(FavouriteState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? favouriteItems = freezed,
-    Object? failureOrSuccessOption = freezed,
-    Object? isLoading = freezed,
+    Object? favouriteItems = null,
+    Object? failureOrSuccessOption = null,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
-      favouriteItems: favouriteItems == freezed
+      favouriteItems: null == favouriteItems
           ? _value.favouriteItems
           : favouriteItems // ignore: cast_nullable_to_non_nullable
               as List<Favourite>,
-      failureOrSuccessOption: failureOrSuccessOption == freezed
+      failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -778,6 +779,7 @@ abstract class _$$_FavouriteStateCopyWith<$Res>
           _$_FavouriteState value, $Res Function(_$_FavouriteState) then) =
       __$$_FavouriteStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {List<Favourite> favouriteItems,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
@@ -786,31 +788,29 @@ abstract class _$$_FavouriteStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_FavouriteStateCopyWithImpl<$Res>
-    extends _$FavouriteStateCopyWithImpl<$Res>
+    extends _$FavouriteStateCopyWithImpl<$Res, _$_FavouriteState>
     implements _$$_FavouriteStateCopyWith<$Res> {
   __$$_FavouriteStateCopyWithImpl(
       _$_FavouriteState _value, $Res Function(_$_FavouriteState) _then)
-      : super(_value, (v) => _then(v as _$_FavouriteState));
+      : super(_value, _then);
 
-  @override
-  _$_FavouriteState get _value => super._value as _$_FavouriteState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? favouriteItems = freezed,
-    Object? failureOrSuccessOption = freezed,
-    Object? isLoading = freezed,
+    Object? favouriteItems = null,
+    Object? failureOrSuccessOption = null,
+    Object? isLoading = null,
   }) {
     return _then(_$_FavouriteState(
-      favouriteItems: favouriteItems == freezed
+      favouriteItems: null == favouriteItems
           ? _value._favouriteItems
           : favouriteItems // ignore: cast_nullable_to_non_nullable
               as List<Favourite>,
-      failureOrSuccessOption: failureOrSuccessOption == freezed
+      failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -851,20 +851,22 @@ class _$_FavouriteState implements _FavouriteState {
             other is _$_FavouriteState &&
             const DeepCollectionEquality()
                 .equals(other._favouriteItems, _favouriteItems) &&
-            const DeepCollectionEquality()
-                .equals(other.failureOrSuccessOption, failureOrSuccessOption) &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading));
+            (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
+                other.failureOrSuccessOption == failureOrSuccessOption) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_favouriteItems),
-      const DeepCollectionEquality().hash(failureOrSuccessOption),
-      const DeepCollectionEquality().hash(isLoading));
+      failureOrSuccessOption,
+      isLoading);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_FavouriteStateCopyWith<_$_FavouriteState> get copyWith =>
       __$$_FavouriteStateCopyWithImpl<_$_FavouriteState>(this, _$identity);
 }

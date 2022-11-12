@@ -31,7 +31,9 @@ mixin _$OrderDocumentTypeAggregate {
 abstract class $OrderDocumentTypeAggregateCopyWith<$Res> {
   factory $OrderDocumentTypeAggregateCopyWith(OrderDocumentTypeAggregate value,
           $Res Function(OrderDocumentTypeAggregate) then) =
-      _$OrderDocumentTypeAggregateCopyWithImpl<$Res>;
+      _$OrderDocumentTypeAggregateCopyWithImpl<$Res,
+          OrderDocumentTypeAggregate>;
+  @useResult
   $Res call(
       {User user,
       SalesOrganisationConfigs salesOrganisationConfigs,
@@ -44,60 +46,66 @@ abstract class $OrderDocumentTypeAggregateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OrderDocumentTypeAggregateCopyWithImpl<$Res>
+class _$OrderDocumentTypeAggregateCopyWithImpl<$Res,
+        $Val extends OrderDocumentTypeAggregate>
     implements $OrderDocumentTypeAggregateCopyWith<$Res> {
   _$OrderDocumentTypeAggregateCopyWithImpl(this._value, this._then);
 
-  final OrderDocumentTypeAggregate _value;
   // ignore: unused_field
-  final $Res Function(OrderDocumentTypeAggregate) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
-    Object? salesOrganisationConfigs = freezed,
-    Object? salesOrganisation = freezed,
-    Object? isError = freezed,
+    Object? user = null,
+    Object? salesOrganisationConfigs = null,
+    Object? salesOrganisation = null,
+    Object? isError = null,
   }) {
     return _then(_value.copyWith(
-      user: user == freezed
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      salesOrganisationConfigs: salesOrganisationConfigs == freezed
+      salesOrganisationConfigs: null == salesOrganisationConfigs
           ? _value.salesOrganisationConfigs
           : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
-      salesOrganisation: salesOrganisation == freezed
+      salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      isError: isError == freezed
+      isError: null == isError
           ? _value.isError
           : isError // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
+      return _then(_value.copyWith(user: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs {
     return $SalesOrganisationConfigsCopyWith<$Res>(
         _value.salesOrganisationConfigs, (value) {
-      return _then(_value.copyWith(salesOrganisationConfigs: value));
+      return _then(_value.copyWith(salesOrganisationConfigs: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SalesOrganisationCopyWith<$Res> get salesOrganisation {
     return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
+      return _then(_value.copyWith(salesOrganisation: value) as $Val);
     });
   }
 }
@@ -110,6 +118,7 @@ abstract class _$$_OrderDocumentTypeAggregateCopyWith<$Res>
           $Res Function(_$_OrderDocumentTypeAggregate) then) =
       __$$_OrderDocumentTypeAggregateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {User user,
       SalesOrganisationConfigs salesOrganisationConfigs,
@@ -126,38 +135,36 @@ abstract class _$$_OrderDocumentTypeAggregateCopyWith<$Res>
 
 /// @nodoc
 class __$$_OrderDocumentTypeAggregateCopyWithImpl<$Res>
-    extends _$OrderDocumentTypeAggregateCopyWithImpl<$Res>
+    extends _$OrderDocumentTypeAggregateCopyWithImpl<$Res,
+        _$_OrderDocumentTypeAggregate>
     implements _$$_OrderDocumentTypeAggregateCopyWith<$Res> {
   __$$_OrderDocumentTypeAggregateCopyWithImpl(
       _$_OrderDocumentTypeAggregate _value,
       $Res Function(_$_OrderDocumentTypeAggregate) _then)
-      : super(_value, (v) => _then(v as _$_OrderDocumentTypeAggregate));
+      : super(_value, _then);
 
-  @override
-  _$_OrderDocumentTypeAggregate get _value =>
-      super._value as _$_OrderDocumentTypeAggregate;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
-    Object? salesOrganisationConfigs = freezed,
-    Object? salesOrganisation = freezed,
-    Object? isError = freezed,
+    Object? user = null,
+    Object? salesOrganisationConfigs = null,
+    Object? salesOrganisation = null,
+    Object? isError = null,
   }) {
     return _then(_$_OrderDocumentTypeAggregate(
-      user: user == freezed
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      salesOrganisationConfigs: salesOrganisationConfigs == freezed
+      salesOrganisationConfigs: null == salesOrganisationConfigs
           ? _value.salesOrganisationConfigs
           : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
-      salesOrganisation: salesOrganisation == freezed
+      salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      isError: isError == freezed
+      isError: null == isError
           ? _value.isError
           : isError // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -194,24 +201,22 @@ class _$_OrderDocumentTypeAggregate extends _OrderDocumentTypeAggregate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderDocumentTypeAggregate &&
-            const DeepCollectionEquality().equals(other.user, user) &&
-            const DeepCollectionEquality().equals(
-                other.salesOrganisationConfigs, salesOrganisationConfigs) &&
-            const DeepCollectionEquality()
-                .equals(other.salesOrganisation, salesOrganisation) &&
-            const DeepCollectionEquality().equals(other.isError, isError));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(
+                    other.salesOrganisationConfigs, salesOrganisationConfigs) ||
+                other.salesOrganisationConfigs == salesOrganisationConfigs) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.isError, isError) || other.isError == isError));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(user),
-      const DeepCollectionEquality().hash(salesOrganisationConfigs),
-      const DeepCollectionEquality().hash(salesOrganisation),
-      const DeepCollectionEquality().hash(isError));
+      runtimeType, user, salesOrganisationConfigs, salesOrganisation, isError);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OrderDocumentTypeAggregateCopyWith<_$_OrderDocumentTypeAggregate>
       get copyWith => __$$_OrderDocumentTypeAggregateCopyWithImpl<
           _$_OrderDocumentTypeAggregate>(this, _$identity);

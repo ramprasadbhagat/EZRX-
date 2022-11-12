@@ -23,21 +23,21 @@ OrderHistoryDetailsOrderHeadersDto _$OrderHistoryDetailsOrderHeadersDtoFromJson(
 mixin _$OrderHistoryDetailsOrderHeadersDto {
   @JsonKey(name: 'TotalTax', defaultValue: 0.0)
   double get totalTax => throw _privateConstructorUsedError;
-  @JsonKey(name: 'RequestedDeliveryDate')
+  @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
   String get requestedDeliveryDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'POReference')
+  @JsonKey(name: 'POReference', defaultValue: '')
   String get pOReference => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Type')
+  @JsonKey(name: 'Type', defaultValue: '')
   String get type => throw _privateConstructorUsedError;
-  @JsonKey(name: 'TelephoneNumber')
+  @JsonKey(name: 'TelephoneNumber', defaultValue: '')
   String get telephoneNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'OrderValue', defaultValue: 0.0)
   double get orderValue => throw _privateConstructorUsedError;
-  @JsonKey(name: 'CreatedDate')
+  @JsonKey(name: 'CreatedDate', defaultValue: '')
   String get createdDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'EZRXNumber')
+  @JsonKey(name: 'EZRXNumber', defaultValue: '')
   String get eZRXNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'OrderBy')
+  @JsonKey(name: 'OrderBy', defaultValue: '')
   String get orderBy => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -52,78 +52,92 @@ abstract class $OrderHistoryDetailsOrderHeadersDtoCopyWith<$Res> {
   factory $OrderHistoryDetailsOrderHeadersDtoCopyWith(
           OrderHistoryDetailsOrderHeadersDto value,
           $Res Function(OrderHistoryDetailsOrderHeadersDto) then) =
-      _$OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<$Res>;
+      _$OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<$Res,
+          OrderHistoryDetailsOrderHeadersDto>;
+  @useResult
   $Res call(
-      {@JsonKey(name: 'TotalTax', defaultValue: 0.0) double totalTax,
-      @JsonKey(name: 'RequestedDeliveryDate') String requestedDeliveryDate,
-      @JsonKey(name: 'POReference') String pOReference,
-      @JsonKey(name: 'Type') String type,
-      @JsonKey(name: 'TelephoneNumber') String telephoneNumber,
-      @JsonKey(name: 'OrderValue', defaultValue: 0.0) double orderValue,
-      @JsonKey(name: 'CreatedDate') String createdDate,
-      @JsonKey(name: 'EZRXNumber') String eZRXNumber,
-      @JsonKey(name: 'OrderBy') String orderBy});
+      {@JsonKey(name: 'TotalTax', defaultValue: 0.0)
+          double totalTax,
+      @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
+          String requestedDeliveryDate,
+      @JsonKey(name: 'POReference', defaultValue: '')
+          String pOReference,
+      @JsonKey(name: 'Type', defaultValue: '')
+          String type,
+      @JsonKey(name: 'TelephoneNumber', defaultValue: '')
+          String telephoneNumber,
+      @JsonKey(name: 'OrderValue', defaultValue: 0.0)
+          double orderValue,
+      @JsonKey(name: 'CreatedDate', defaultValue: '')
+          String createdDate,
+      @JsonKey(name: 'EZRXNumber', defaultValue: '')
+          String eZRXNumber,
+      @JsonKey(name: 'OrderBy', defaultValue: '')
+          String orderBy});
 }
 
 /// @nodoc
-class _$OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<$Res>
+class _$OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<$Res,
+        $Val extends OrderHistoryDetailsOrderHeadersDto>
     implements $OrderHistoryDetailsOrderHeadersDtoCopyWith<$Res> {
   _$OrderHistoryDetailsOrderHeadersDtoCopyWithImpl(this._value, this._then);
 
-  final OrderHistoryDetailsOrderHeadersDto _value;
   // ignore: unused_field
-  final $Res Function(OrderHistoryDetailsOrderHeadersDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? totalTax = freezed,
-    Object? requestedDeliveryDate = freezed,
-    Object? pOReference = freezed,
-    Object? type = freezed,
-    Object? telephoneNumber = freezed,
-    Object? orderValue = freezed,
-    Object? createdDate = freezed,
-    Object? eZRXNumber = freezed,
-    Object? orderBy = freezed,
+    Object? totalTax = null,
+    Object? requestedDeliveryDate = null,
+    Object? pOReference = null,
+    Object? type = null,
+    Object? telephoneNumber = null,
+    Object? orderValue = null,
+    Object? createdDate = null,
+    Object? eZRXNumber = null,
+    Object? orderBy = null,
   }) {
     return _then(_value.copyWith(
-      totalTax: totalTax == freezed
+      totalTax: null == totalTax
           ? _value.totalTax
           : totalTax // ignore: cast_nullable_to_non_nullable
               as double,
-      requestedDeliveryDate: requestedDeliveryDate == freezed
+      requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
               as String,
-      pOReference: pOReference == freezed
+      pOReference: null == pOReference
           ? _value.pOReference
           : pOReference // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      telephoneNumber: telephoneNumber == freezed
+      telephoneNumber: null == telephoneNumber
           ? _value.telephoneNumber
           : telephoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      orderValue: orderValue == freezed
+      orderValue: null == orderValue
           ? _value.orderValue
           : orderValue // ignore: cast_nullable_to_non_nullable
               as double,
-      createdDate: createdDate == freezed
+      createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
               as String,
-      eZRXNumber: eZRXNumber == freezed
+      eZRXNumber: null == eZRXNumber
           ? _value.eZRXNumber
           : eZRXNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      orderBy: orderBy == freezed
+      orderBy: null == orderBy
           ? _value.orderBy
           : orderBy // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -135,77 +149,85 @@ abstract class _$$_OrderHistoryDetailsOrderHeadersDtoCopyWith<$Res>
           $Res Function(_$_OrderHistoryDetailsOrderHeadersDto) then) =
       __$$_OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
-      {@JsonKey(name: 'TotalTax', defaultValue: 0.0) double totalTax,
-      @JsonKey(name: 'RequestedDeliveryDate') String requestedDeliveryDate,
-      @JsonKey(name: 'POReference') String pOReference,
-      @JsonKey(name: 'Type') String type,
-      @JsonKey(name: 'TelephoneNumber') String telephoneNumber,
-      @JsonKey(name: 'OrderValue', defaultValue: 0.0) double orderValue,
-      @JsonKey(name: 'CreatedDate') String createdDate,
-      @JsonKey(name: 'EZRXNumber') String eZRXNumber,
-      @JsonKey(name: 'OrderBy') String orderBy});
+      {@JsonKey(name: 'TotalTax', defaultValue: 0.0)
+          double totalTax,
+      @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
+          String requestedDeliveryDate,
+      @JsonKey(name: 'POReference', defaultValue: '')
+          String pOReference,
+      @JsonKey(name: 'Type', defaultValue: '')
+          String type,
+      @JsonKey(name: 'TelephoneNumber', defaultValue: '')
+          String telephoneNumber,
+      @JsonKey(name: 'OrderValue', defaultValue: 0.0)
+          double orderValue,
+      @JsonKey(name: 'CreatedDate', defaultValue: '')
+          String createdDate,
+      @JsonKey(name: 'EZRXNumber', defaultValue: '')
+          String eZRXNumber,
+      @JsonKey(name: 'OrderBy', defaultValue: '')
+          String orderBy});
 }
 
 /// @nodoc
 class __$$_OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<$Res>
-    extends _$OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<$Res>
+    extends _$OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<$Res,
+        _$_OrderHistoryDetailsOrderHeadersDto>
     implements _$$_OrderHistoryDetailsOrderHeadersDtoCopyWith<$Res> {
   __$$_OrderHistoryDetailsOrderHeadersDtoCopyWithImpl(
       _$_OrderHistoryDetailsOrderHeadersDto _value,
       $Res Function(_$_OrderHistoryDetailsOrderHeadersDto) _then)
-      : super(_value, (v) => _then(v as _$_OrderHistoryDetailsOrderHeadersDto));
+      : super(_value, _then);
 
-  @override
-  _$_OrderHistoryDetailsOrderHeadersDto get _value =>
-      super._value as _$_OrderHistoryDetailsOrderHeadersDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? totalTax = freezed,
-    Object? requestedDeliveryDate = freezed,
-    Object? pOReference = freezed,
-    Object? type = freezed,
-    Object? telephoneNumber = freezed,
-    Object? orderValue = freezed,
-    Object? createdDate = freezed,
-    Object? eZRXNumber = freezed,
-    Object? orderBy = freezed,
+    Object? totalTax = null,
+    Object? requestedDeliveryDate = null,
+    Object? pOReference = null,
+    Object? type = null,
+    Object? telephoneNumber = null,
+    Object? orderValue = null,
+    Object? createdDate = null,
+    Object? eZRXNumber = null,
+    Object? orderBy = null,
   }) {
     return _then(_$_OrderHistoryDetailsOrderHeadersDto(
-      totalTax: totalTax == freezed
+      totalTax: null == totalTax
           ? _value.totalTax
           : totalTax // ignore: cast_nullable_to_non_nullable
               as double,
-      requestedDeliveryDate: requestedDeliveryDate == freezed
+      requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
               as String,
-      pOReference: pOReference == freezed
+      pOReference: null == pOReference
           ? _value.pOReference
           : pOReference // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      telephoneNumber: telephoneNumber == freezed
+      telephoneNumber: null == telephoneNumber
           ? _value.telephoneNumber
           : telephoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      orderValue: orderValue == freezed
+      orderValue: null == orderValue
           ? _value.orderValue
           : orderValue // ignore: cast_nullable_to_non_nullable
               as double,
-      createdDate: createdDate == freezed
+      createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
               as String,
-      eZRXNumber: eZRXNumber == freezed
+      eZRXNumber: null == eZRXNumber
           ? _value.eZRXNumber
           : eZRXNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      orderBy: orderBy == freezed
+      orderBy: null == orderBy
           ? _value.orderBy
           : orderBy // ignore: cast_nullable_to_non_nullable
               as String,
@@ -220,21 +242,21 @@ class _$_OrderHistoryDetailsOrderHeadersDto
   const _$_OrderHistoryDetailsOrderHeadersDto(
       {@JsonKey(name: 'TotalTax', defaultValue: 0.0)
           required this.totalTax,
-      @JsonKey(name: 'RequestedDeliveryDate')
+      @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
           required this.requestedDeliveryDate,
-      @JsonKey(name: 'POReference')
+      @JsonKey(name: 'POReference', defaultValue: '')
           required this.pOReference,
-      @JsonKey(name: 'Type')
+      @JsonKey(name: 'Type', defaultValue: '')
           required this.type,
-      @JsonKey(name: 'TelephoneNumber')
+      @JsonKey(name: 'TelephoneNumber', defaultValue: '')
           required this.telephoneNumber,
       @JsonKey(name: 'OrderValue', defaultValue: 0.0)
           required this.orderValue,
-      @JsonKey(name: 'CreatedDate')
+      @JsonKey(name: 'CreatedDate', defaultValue: '')
           required this.createdDate,
-      @JsonKey(name: 'EZRXNumber')
+      @JsonKey(name: 'EZRXNumber', defaultValue: '')
           required this.eZRXNumber,
-      @JsonKey(name: 'OrderBy')
+      @JsonKey(name: 'OrderBy', defaultValue: '')
           required this.orderBy})
       : super._();
 
@@ -246,28 +268,28 @@ class _$_OrderHistoryDetailsOrderHeadersDto
   @JsonKey(name: 'TotalTax', defaultValue: 0.0)
   final double totalTax;
   @override
-  @JsonKey(name: 'RequestedDeliveryDate')
+  @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
   final String requestedDeliveryDate;
   @override
-  @JsonKey(name: 'POReference')
+  @JsonKey(name: 'POReference', defaultValue: '')
   final String pOReference;
   @override
-  @JsonKey(name: 'Type')
+  @JsonKey(name: 'Type', defaultValue: '')
   final String type;
   @override
-  @JsonKey(name: 'TelephoneNumber')
+  @JsonKey(name: 'TelephoneNumber', defaultValue: '')
   final String telephoneNumber;
   @override
   @JsonKey(name: 'OrderValue', defaultValue: 0.0)
   final double orderValue;
   @override
-  @JsonKey(name: 'CreatedDate')
+  @JsonKey(name: 'CreatedDate', defaultValue: '')
   final String createdDate;
   @override
-  @JsonKey(name: 'EZRXNumber')
+  @JsonKey(name: 'EZRXNumber', defaultValue: '')
   final String eZRXNumber;
   @override
-  @JsonKey(name: 'OrderBy')
+  @JsonKey(name: 'OrderBy', defaultValue: '')
   final String orderBy;
 
   @override
@@ -280,39 +302,41 @@ class _$_OrderHistoryDetailsOrderHeadersDto
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryDetailsOrderHeadersDto &&
-            const DeepCollectionEquality().equals(other.totalTax, totalTax) &&
-            const DeepCollectionEquality()
-                .equals(other.requestedDeliveryDate, requestedDeliveryDate) &&
-            const DeepCollectionEquality()
-                .equals(other.pOReference, pOReference) &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality()
-                .equals(other.telephoneNumber, telephoneNumber) &&
-            const DeepCollectionEquality()
-                .equals(other.orderValue, orderValue) &&
-            const DeepCollectionEquality()
-                .equals(other.createdDate, createdDate) &&
-            const DeepCollectionEquality()
-                .equals(other.eZRXNumber, eZRXNumber) &&
-            const DeepCollectionEquality().equals(other.orderBy, orderBy));
+            (identical(other.totalTax, totalTax) ||
+                other.totalTax == totalTax) &&
+            (identical(other.requestedDeliveryDate, requestedDeliveryDate) ||
+                other.requestedDeliveryDate == requestedDeliveryDate) &&
+            (identical(other.pOReference, pOReference) ||
+                other.pOReference == pOReference) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.telephoneNumber, telephoneNumber) ||
+                other.telephoneNumber == telephoneNumber) &&
+            (identical(other.orderValue, orderValue) ||
+                other.orderValue == orderValue) &&
+            (identical(other.createdDate, createdDate) ||
+                other.createdDate == createdDate) &&
+            (identical(other.eZRXNumber, eZRXNumber) ||
+                other.eZRXNumber == eZRXNumber) &&
+            (identical(other.orderBy, orderBy) || other.orderBy == orderBy));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(totalTax),
-      const DeepCollectionEquality().hash(requestedDeliveryDate),
-      const DeepCollectionEquality().hash(pOReference),
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(telephoneNumber),
-      const DeepCollectionEquality().hash(orderValue),
-      const DeepCollectionEquality().hash(createdDate),
-      const DeepCollectionEquality().hash(eZRXNumber),
-      const DeepCollectionEquality().hash(orderBy));
+      totalTax,
+      requestedDeliveryDate,
+      pOReference,
+      type,
+      telephoneNumber,
+      orderValue,
+      createdDate,
+      eZRXNumber,
+      orderBy);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OrderHistoryDetailsOrderHeadersDtoCopyWith<
           _$_OrderHistoryDetailsOrderHeadersDto>
       get copyWith => __$$_OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<
@@ -331,21 +355,21 @@ abstract class _OrderHistoryDetailsOrderHeadersDto
   const factory _OrderHistoryDetailsOrderHeadersDto(
           {@JsonKey(name: 'TotalTax', defaultValue: 0.0)
               required final double totalTax,
-          @JsonKey(name: 'RequestedDeliveryDate')
+          @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
               required final String requestedDeliveryDate,
-          @JsonKey(name: 'POReference')
+          @JsonKey(name: 'POReference', defaultValue: '')
               required final String pOReference,
-          @JsonKey(name: 'Type')
+          @JsonKey(name: 'Type', defaultValue: '')
               required final String type,
-          @JsonKey(name: 'TelephoneNumber')
+          @JsonKey(name: 'TelephoneNumber', defaultValue: '')
               required final String telephoneNumber,
           @JsonKey(name: 'OrderValue', defaultValue: 0.0)
               required final double orderValue,
-          @JsonKey(name: 'CreatedDate')
+          @JsonKey(name: 'CreatedDate', defaultValue: '')
               required final String createdDate,
-          @JsonKey(name: 'EZRXNumber')
+          @JsonKey(name: 'EZRXNumber', defaultValue: '')
               required final String eZRXNumber,
-          @JsonKey(name: 'OrderBy')
+          @JsonKey(name: 'OrderBy', defaultValue: '')
               required final String orderBy}) =
       _$_OrderHistoryDetailsOrderHeadersDto;
   const _OrderHistoryDetailsOrderHeadersDto._() : super._();
@@ -358,28 +382,28 @@ abstract class _OrderHistoryDetailsOrderHeadersDto
   @JsonKey(name: 'TotalTax', defaultValue: 0.0)
   double get totalTax;
   @override
-  @JsonKey(name: 'RequestedDeliveryDate')
+  @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
   String get requestedDeliveryDate;
   @override
-  @JsonKey(name: 'POReference')
+  @JsonKey(name: 'POReference', defaultValue: '')
   String get pOReference;
   @override
-  @JsonKey(name: 'Type')
+  @JsonKey(name: 'Type', defaultValue: '')
   String get type;
   @override
-  @JsonKey(name: 'TelephoneNumber')
+  @JsonKey(name: 'TelephoneNumber', defaultValue: '')
   String get telephoneNumber;
   @override
   @JsonKey(name: 'OrderValue', defaultValue: 0.0)
   double get orderValue;
   @override
-  @JsonKey(name: 'CreatedDate')
+  @JsonKey(name: 'CreatedDate', defaultValue: '')
   String get createdDate;
   @override
-  @JsonKey(name: 'EZRXNumber')
+  @JsonKey(name: 'EZRXNumber', defaultValue: '')
   String get eZRXNumber;
   @override
-  @JsonKey(name: 'OrderBy')
+  @JsonKey(name: 'OrderBy', defaultValue: '')
   String get orderBy;
   @override
   @JsonKey(ignore: true)

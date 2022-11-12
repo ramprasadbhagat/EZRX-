@@ -10,9 +10,11 @@ _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto
     _$$_OrderHistoryDetailsOrderItemTenderContractDetailsDtoFromJson(
             Map<String, dynamic> json) =>
         _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto(
-          tenderContractNumber: json['TenderContractNumber'] as String,
-          tenderContractReference: json['TenderContractReference'] as String,
-          tenderPackageDescription: json['TenderPackageDescription'] as String,
+          tenderContractNumber: json['TenderContractNumber'] as String? ?? '',
+          tenderContractReference:
+              json['TenderContractReference'] as String? ?? '',
+          tenderPackageDescription:
+              json['TenderPackageDescription'] as String? ?? '',
         );
 
 Map<String, dynamic>

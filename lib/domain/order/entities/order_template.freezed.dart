@@ -31,7 +31,8 @@ mixin _$OrderTemplate {
 abstract class $OrderTemplateCopyWith<$Res> {
   factory $OrderTemplateCopyWith(
           OrderTemplate value, $Res Function(OrderTemplate) then) =
-      _$OrderTemplateCopyWithImpl<$Res>;
+      _$OrderTemplateCopyWithImpl<$Res, OrderTemplate>;
+  @useResult
   $Res call(
       {String templateId,
       String templateName,
@@ -40,39 +41,41 @@ abstract class $OrderTemplateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OrderTemplateCopyWithImpl<$Res>
+class _$OrderTemplateCopyWithImpl<$Res, $Val extends OrderTemplate>
     implements $OrderTemplateCopyWith<$Res> {
   _$OrderTemplateCopyWithImpl(this._value, this._then);
 
-  final OrderTemplate _value;
   // ignore: unused_field
-  final $Res Function(OrderTemplate) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? templateId = freezed,
-    Object? templateName = freezed,
-    Object? items = freezed,
-    Object? user = freezed,
+    Object? templateId = null,
+    Object? templateName = null,
+    Object? items = null,
+    Object? user = null,
   }) {
     return _then(_value.copyWith(
-      templateId: templateId == freezed
+      templateId: null == templateId
           ? _value.templateId
           : templateId // ignore: cast_nullable_to_non_nullable
               as String,
-      templateName: templateName == freezed
+      templateName: null == templateName
           ? _value.templateName
           : templateName // ignore: cast_nullable_to_non_nullable
               as String,
-      items: items == freezed
+      items: null == items
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
               as List<OrderTemplateMaterial>,
-      user: user == freezed
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -83,6 +86,7 @@ abstract class _$$_OrderTemplateCopyWith<$Res>
           _$_OrderTemplate value, $Res Function(_$_OrderTemplate) then) =
       __$$_OrderTemplateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String templateId,
       String templateName,
@@ -92,36 +96,34 @@ abstract class _$$_OrderTemplateCopyWith<$Res>
 
 /// @nodoc
 class __$$_OrderTemplateCopyWithImpl<$Res>
-    extends _$OrderTemplateCopyWithImpl<$Res>
+    extends _$OrderTemplateCopyWithImpl<$Res, _$_OrderTemplate>
     implements _$$_OrderTemplateCopyWith<$Res> {
   __$$_OrderTemplateCopyWithImpl(
       _$_OrderTemplate _value, $Res Function(_$_OrderTemplate) _then)
-      : super(_value, (v) => _then(v as _$_OrderTemplate));
+      : super(_value, _then);
 
-  @override
-  _$_OrderTemplate get _value => super._value as _$_OrderTemplate;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? templateId = freezed,
-    Object? templateName = freezed,
-    Object? items = freezed,
-    Object? user = freezed,
+    Object? templateId = null,
+    Object? templateName = null,
+    Object? items = null,
+    Object? user = null,
   }) {
     return _then(_$_OrderTemplate(
-      templateId: templateId == freezed
+      templateId: null == templateId
           ? _value.templateId
           : templateId // ignore: cast_nullable_to_non_nullable
               as String,
-      templateName: templateName == freezed
+      templateName: null == templateName
           ? _value.templateName
           : templateName // ignore: cast_nullable_to_non_nullable
               as String,
-      items: items == freezed
+      items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
               as List<OrderTemplateMaterial>,
-      user: user == freezed
+      user: null == user
           ? _value._user
           : user // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
@@ -171,10 +173,10 @@ class _$_OrderTemplate extends _OrderTemplate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderTemplate &&
-            const DeepCollectionEquality()
-                .equals(other.templateId, templateId) &&
-            const DeepCollectionEquality()
-                .equals(other.templateName, templateName) &&
+            (identical(other.templateId, templateId) ||
+                other.templateId == templateId) &&
+            (identical(other.templateName, templateName) ||
+                other.templateName == templateName) &&
             const DeepCollectionEquality().equals(other._items, _items) &&
             const DeepCollectionEquality().equals(other._user, _user));
   }
@@ -182,13 +184,14 @@ class _$_OrderTemplate extends _OrderTemplate {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(templateId),
-      const DeepCollectionEquality().hash(templateName),
+      templateId,
+      templateName,
       const DeepCollectionEquality().hash(_items),
       const DeepCollectionEquality().hash(_user));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OrderTemplateCopyWith<_$_OrderTemplate> get copyWith =>
       __$$_OrderTemplateCopyWithImpl<_$_OrderTemplate>(this, _$identity);
 }

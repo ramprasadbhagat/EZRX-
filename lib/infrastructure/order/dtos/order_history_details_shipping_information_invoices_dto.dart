@@ -6,9 +6,9 @@ part 'order_history_details_shipping_information_invoices_dto.g.dart';
 class OrderHistoryDetailsInvoicesDto with _$OrderHistoryDetailsInvoicesDto {
   const OrderHistoryDetailsInvoicesDto._();
   const factory OrderHistoryDetailsInvoicesDto({
-    @JsonKey(name: 'InvoiceNumber') required String invoiceNumber,
-    @JsonKey(name: 'InvoiceDate') required String invoiceDate, 
-    @JsonKey(name: 'InvoicePrice') required String invoicePrice,
+    @JsonKey(name: 'InvoiceNumber',defaultValue: '') required String invoiceNumber,
+    @JsonKey(name: 'InvoiceDate',defaultValue: '') required String invoiceDate, 
+    @JsonKey(name: 'InvoicePrice',defaultValue: '') required String invoicePrice,
 
   }) = _OrderHistoryDetailsInvoicesDto;
   factory OrderHistoryDetailsInvoicesDto.fromDomain(OrderHistoryDetailsShippingInformationInvoices invoices) {

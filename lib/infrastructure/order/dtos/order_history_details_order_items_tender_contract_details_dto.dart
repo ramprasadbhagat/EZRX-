@@ -6,9 +6,9 @@ part 'order_history_details_order_items_tender_contract_details_dto.g.dart';
 class OrderHistoryDetailsOrderItemTenderContractDetailsDto with _$OrderHistoryDetailsOrderItemTenderContractDetailsDto {
   const OrderHistoryDetailsOrderItemTenderContractDetailsDto._();
   const factory OrderHistoryDetailsOrderItemTenderContractDetailsDto({
-    @JsonKey(name: 'TenderContractNumber') required String tenderContractNumber,
-    @JsonKey(name: 'TenderContractReference') required String tenderContractReference, 
-    @JsonKey(name: 'TenderPackageDescription') required String tenderPackageDescription,
+    @JsonKey(name: 'TenderContractNumber',defaultValue: '') required String tenderContractNumber,
+    @JsonKey(name: 'TenderContractReference',defaultValue: '') required String tenderContractReference, 
+    @JsonKey(name: 'TenderPackageDescription',defaultValue: '') required String tenderPackageDescription,
 
   }) = _OrderHistoryDetailsOrderItemTenderContractDetailsDto;
   factory OrderHistoryDetailsOrderItemTenderContractDetailsDto.fromDomain(OrderHistoryDetailsOrderItemTenderContractDetails tenderContractDetails) {

@@ -27,33 +27,37 @@ mixin _$FullName {
 /// @nodoc
 abstract class $FullNameCopyWith<$Res> {
   factory $FullNameCopyWith(FullName value, $Res Function(FullName) then) =
-      _$FullNameCopyWithImpl<$Res>;
+      _$FullNameCopyWithImpl<$Res, FullName>;
+  @useResult
   $Res call({String firstName, String lastName});
 }
 
 /// @nodoc
-class _$FullNameCopyWithImpl<$Res> implements $FullNameCopyWith<$Res> {
+class _$FullNameCopyWithImpl<$Res, $Val extends FullName>
+    implements $FullNameCopyWith<$Res> {
   _$FullNameCopyWithImpl(this._value, this._then);
 
-  final FullName _value;
   // ignore: unused_field
-  final $Res Function(FullName) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? firstName = freezed,
-    Object? lastName = freezed,
+    Object? firstName = null,
+    Object? lastName = null,
   }) {
     return _then(_value.copyWith(
-      firstName: firstName == freezed
+      firstName: null == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
               as String,
-      lastName: lastName == freezed
+      lastName: null == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -63,30 +67,30 @@ abstract class _$$_FullNameCopyWith<$Res> implements $FullNameCopyWith<$Res> {
           _$_FullName value, $Res Function(_$_FullName) then) =
       __$$_FullNameCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String firstName, String lastName});
 }
 
 /// @nodoc
-class __$$_FullNameCopyWithImpl<$Res> extends _$FullNameCopyWithImpl<$Res>
+class __$$_FullNameCopyWithImpl<$Res>
+    extends _$FullNameCopyWithImpl<$Res, _$_FullName>
     implements _$$_FullNameCopyWith<$Res> {
   __$$_FullNameCopyWithImpl(
       _$_FullName _value, $Res Function(_$_FullName) _then)
-      : super(_value, (v) => _then(v as _$_FullName));
+      : super(_value, _then);
 
-  @override
-  _$_FullName get _value => super._value as _$_FullName;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? firstName = freezed,
-    Object? lastName = freezed,
+    Object? firstName = null,
+    Object? lastName = null,
   }) {
     return _then(_$_FullName(
-      firstName: firstName == freezed
+      firstName: null == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
               as String,
-      lastName: lastName == freezed
+      lastName: null == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
@@ -110,18 +114,18 @@ class _$_FullName extends _FullName {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_FullName &&
-            const DeepCollectionEquality().equals(other.firstName, firstName) &&
-            const DeepCollectionEquality().equals(other.lastName, lastName));
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(firstName),
-      const DeepCollectionEquality().hash(lastName));
+  int get hashCode => Object.hash(runtimeType, firstName, lastName);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_FullNameCopyWith<_$_FullName> get copyWith =>
       __$$_FullNameCopyWithImpl<_$_FullName>(this, _$identity);
 }

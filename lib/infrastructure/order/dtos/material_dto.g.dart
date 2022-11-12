@@ -24,7 +24,7 @@ class MaterialDtoAdapter extends TypeAdapter<_$_MaterialDto> {
       itemBrand: fields[4] == null ? '' : fields[4] as String,
       principalName: fields[5] == null ? '' : fields[5] as String,
       principalCode: fields[6] == null ? '' : fields[6] as String,
-      taxClassification: fields[7] as String,
+      taxClassification: fields[7] == null ? '' : fields[7] as String,
       itemRegistrationNumber: fields[8] == null ? '' : fields[8] as String,
       unitOfMeasurement: fields[9] == null ? '' : fields[9] as String,
       materialGroup2: fields[10] == null ? '' : fields[10] as String,

@@ -36,14 +36,20 @@ mixin _$SavedOrderListEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
-            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+    TResult? Function()? initialized,
+    TResult? Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)?
         fetch,
-    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
-            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+    TResult? Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)?
         loadMore,
-    TResult Function(SavedOrder order, User user)? delete,
+    TResult? Function(SavedOrder order, User user)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,10 +75,10 @@ mixin _$SavedOrderListEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_LoadMore value)? loadMore,
-    TResult Function(_Delete value)? delete,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_Delete value)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -90,17 +96,18 @@ mixin _$SavedOrderListEvent {
 abstract class $SavedOrderListEventCopyWith<$Res> {
   factory $SavedOrderListEventCopyWith(
           SavedOrderListEvent value, $Res Function(SavedOrderListEvent) then) =
-      _$SavedOrderListEventCopyWithImpl<$Res>;
+      _$SavedOrderListEventCopyWithImpl<$Res, SavedOrderListEvent>;
 }
 
 /// @nodoc
-class _$SavedOrderListEventCopyWithImpl<$Res>
+class _$SavedOrderListEventCopyWithImpl<$Res, $Val extends SavedOrderListEvent>
     implements $SavedOrderListEventCopyWith<$Res> {
   _$SavedOrderListEventCopyWithImpl(this._value, this._then);
 
-  final SavedOrderListEvent _value;
   // ignore: unused_field
-  final $Res Function(SavedOrderListEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -112,14 +119,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitializedCopyWithImpl<$Res>
-    extends _$SavedOrderListEventCopyWithImpl<$Res>
+    extends _$SavedOrderListEventCopyWithImpl<$Res, _$_Initialized>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, (v) => _then(v as _$_Initialized));
-
-  @override
-  _$_Initialized get _value => super._value as _$_Initialized;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -165,14 +169,20 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
-            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+    TResult? Function()? initialized,
+    TResult? Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)?
         fetch,
-    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
-            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+    TResult? Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)?
         loadMore,
-    TResult Function(SavedOrder order, User user)? delete,
+    TResult? Function(SavedOrder order, User user)? delete,
   }) {
     return initialized?.call();
   }
@@ -210,10 +220,10 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_LoadMore value)? loadMore,
-    TResult Function(_Delete value)? delete,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_Delete value)? delete,
   }) {
     return initialized?.call(this);
   }
@@ -242,6 +252,7 @@ abstract class _Initialized implements SavedOrderListEvent {
 abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
+  @useResult
   $Res call(
       {User userInfo,
       SalesOrganisation selectedSalesOrganisation,
@@ -256,35 +267,33 @@ abstract class _$$_FetchCopyWith<$Res> {
 
 /// @nodoc
 class __$$_FetchCopyWithImpl<$Res>
-    extends _$SavedOrderListEventCopyWithImpl<$Res>
+    extends _$SavedOrderListEventCopyWithImpl<$Res, _$_Fetch>
     implements _$$_FetchCopyWith<$Res> {
   __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
-      : super(_value, (v) => _then(v as _$_Fetch));
+      : super(_value, _then);
 
-  @override
-  _$_Fetch get _value => super._value as _$_Fetch;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userInfo = freezed,
-    Object? selectedSalesOrganisation = freezed,
-    Object? selectedCustomerCode = freezed,
-    Object? selectedShipTo = freezed,
+    Object? userInfo = null,
+    Object? selectedSalesOrganisation = null,
+    Object? selectedCustomerCode = null,
+    Object? selectedShipTo = null,
   }) {
     return _then(_$_Fetch(
-      userInfo: userInfo == freezed
+      userInfo: null == userInfo
           ? _value.userInfo
           : userInfo // ignore: cast_nullable_to_non_nullable
               as User,
-      selectedSalesOrganisation: selectedSalesOrganisation == freezed
+      selectedSalesOrganisation: null == selectedSalesOrganisation
           ? _value.selectedSalesOrganisation
           : selectedSalesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      selectedCustomerCode: selectedCustomerCode == freezed
+      selectedCustomerCode: null == selectedCustomerCode
           ? _value.selectedCustomerCode
           : selectedCustomerCode // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
-      selectedShipTo: selectedShipTo == freezed
+      selectedShipTo: null == selectedShipTo
           ? _value.selectedShipTo
           : selectedShipTo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
@@ -292,6 +301,7 @@ class __$$_FetchCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get userInfo {
     return $UserCopyWith<$Res>(_value.userInfo, (value) {
       return _then(_value.copyWith(userInfo: value));
@@ -299,6 +309,7 @@ class __$$_FetchCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SalesOrganisationCopyWith<$Res> get selectedSalesOrganisation {
     return $SalesOrganisationCopyWith<$Res>(_value.selectedSalesOrganisation,
         (value) {
@@ -307,6 +318,7 @@ class __$$_FetchCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $CustomerCodeInfoCopyWith<$Res> get selectedCustomerCode {
     return $CustomerCodeInfoCopyWith<$Res>(_value.selectedCustomerCode,
         (value) {
@@ -315,6 +327,7 @@ class __$$_FetchCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $ShipToInfoCopyWith<$Res> get selectedShipTo {
     return $ShipToInfoCopyWith<$Res>(_value.selectedShipTo, (value) {
       return _then(_value.copyWith(selectedShipTo: value));
@@ -350,25 +363,24 @@ class _$_Fetch implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
-            const DeepCollectionEquality().equals(other.userInfo, userInfo) &&
-            const DeepCollectionEquality().equals(
-                other.selectedSalesOrganisation, selectedSalesOrganisation) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedCustomerCode, selectedCustomerCode) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedShipTo, selectedShipTo));
+            (identical(other.userInfo, userInfo) ||
+                other.userInfo == userInfo) &&
+            (identical(other.selectedSalesOrganisation,
+                    selectedSalesOrganisation) ||
+                other.selectedSalesOrganisation == selectedSalesOrganisation) &&
+            (identical(other.selectedCustomerCode, selectedCustomerCode) ||
+                other.selectedCustomerCode == selectedCustomerCode) &&
+            (identical(other.selectedShipTo, selectedShipTo) ||
+                other.selectedShipTo == selectedShipTo));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(userInfo),
-      const DeepCollectionEquality().hash(selectedSalesOrganisation),
-      const DeepCollectionEquality().hash(selectedCustomerCode),
-      const DeepCollectionEquality().hash(selectedShipTo));
+  int get hashCode => Object.hash(runtimeType, userInfo,
+      selectedSalesOrganisation, selectedCustomerCode, selectedShipTo);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
 
@@ -397,14 +409,20 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
-            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+    TResult? Function()? initialized,
+    TResult? Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)?
         fetch,
-    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
-            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+    TResult? Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)?
         loadMore,
-    TResult Function(SavedOrder order, User user)? delete,
+    TResult? Function(SavedOrder order, User user)? delete,
   }) {
     return fetch?.call(userInfo, selectedSalesOrganisation,
         selectedCustomerCode, selectedShipTo);
@@ -444,10 +462,10 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_LoadMore value)? loadMore,
-    TResult Function(_Delete value)? delete,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_Delete value)? delete,
   }) {
     return fetch?.call(this);
   }
@@ -489,6 +507,7 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
   factory _$$_LoadMoreCopyWith(
           _$_LoadMore value, $Res Function(_$_LoadMore) then) =
       __$$_LoadMoreCopyWithImpl<$Res>;
+  @useResult
   $Res call(
       {User userInfo,
       SalesOrganisation selectedSalesOrganisation,
@@ -503,36 +522,34 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
 
 /// @nodoc
 class __$$_LoadMoreCopyWithImpl<$Res>
-    extends _$SavedOrderListEventCopyWithImpl<$Res>
+    extends _$SavedOrderListEventCopyWithImpl<$Res, _$_LoadMore>
     implements _$$_LoadMoreCopyWith<$Res> {
   __$$_LoadMoreCopyWithImpl(
       _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
-      : super(_value, (v) => _then(v as _$_LoadMore));
+      : super(_value, _then);
 
-  @override
-  _$_LoadMore get _value => super._value as _$_LoadMore;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userInfo = freezed,
-    Object? selectedSalesOrganisation = freezed,
-    Object? selectedCustomerCode = freezed,
-    Object? selectedShipTo = freezed,
+    Object? userInfo = null,
+    Object? selectedSalesOrganisation = null,
+    Object? selectedCustomerCode = null,
+    Object? selectedShipTo = null,
   }) {
     return _then(_$_LoadMore(
-      userInfo: userInfo == freezed
+      userInfo: null == userInfo
           ? _value.userInfo
           : userInfo // ignore: cast_nullable_to_non_nullable
               as User,
-      selectedSalesOrganisation: selectedSalesOrganisation == freezed
+      selectedSalesOrganisation: null == selectedSalesOrganisation
           ? _value.selectedSalesOrganisation
           : selectedSalesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      selectedCustomerCode: selectedCustomerCode == freezed
+      selectedCustomerCode: null == selectedCustomerCode
           ? _value.selectedCustomerCode
           : selectedCustomerCode // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
-      selectedShipTo: selectedShipTo == freezed
+      selectedShipTo: null == selectedShipTo
           ? _value.selectedShipTo
           : selectedShipTo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
@@ -540,6 +557,7 @@ class __$$_LoadMoreCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get userInfo {
     return $UserCopyWith<$Res>(_value.userInfo, (value) {
       return _then(_value.copyWith(userInfo: value));
@@ -547,6 +565,7 @@ class __$$_LoadMoreCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SalesOrganisationCopyWith<$Res> get selectedSalesOrganisation {
     return $SalesOrganisationCopyWith<$Res>(_value.selectedSalesOrganisation,
         (value) {
@@ -555,6 +574,7 @@ class __$$_LoadMoreCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $CustomerCodeInfoCopyWith<$Res> get selectedCustomerCode {
     return $CustomerCodeInfoCopyWith<$Res>(_value.selectedCustomerCode,
         (value) {
@@ -563,6 +583,7 @@ class __$$_LoadMoreCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $ShipToInfoCopyWith<$Res> get selectedShipTo {
     return $ShipToInfoCopyWith<$Res>(_value.selectedShipTo, (value) {
       return _then(_value.copyWith(selectedShipTo: value));
@@ -598,25 +619,24 @@ class _$_LoadMore implements _LoadMore {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoadMore &&
-            const DeepCollectionEquality().equals(other.userInfo, userInfo) &&
-            const DeepCollectionEquality().equals(
-                other.selectedSalesOrganisation, selectedSalesOrganisation) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedCustomerCode, selectedCustomerCode) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedShipTo, selectedShipTo));
+            (identical(other.userInfo, userInfo) ||
+                other.userInfo == userInfo) &&
+            (identical(other.selectedSalesOrganisation,
+                    selectedSalesOrganisation) ||
+                other.selectedSalesOrganisation == selectedSalesOrganisation) &&
+            (identical(other.selectedCustomerCode, selectedCustomerCode) ||
+                other.selectedCustomerCode == selectedCustomerCode) &&
+            (identical(other.selectedShipTo, selectedShipTo) ||
+                other.selectedShipTo == selectedShipTo));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(userInfo),
-      const DeepCollectionEquality().hash(selectedSalesOrganisation),
-      const DeepCollectionEquality().hash(selectedCustomerCode),
-      const DeepCollectionEquality().hash(selectedShipTo));
+  int get hashCode => Object.hash(runtimeType, userInfo,
+      selectedSalesOrganisation, selectedCustomerCode, selectedShipTo);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
       __$$_LoadMoreCopyWithImpl<_$_LoadMore>(this, _$identity);
 
@@ -645,14 +665,20 @@ class _$_LoadMore implements _LoadMore {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
-            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+    TResult? Function()? initialized,
+    TResult? Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)?
         fetch,
-    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
-            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+    TResult? Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)?
         loadMore,
-    TResult Function(SavedOrder order, User user)? delete,
+    TResult? Function(SavedOrder order, User user)? delete,
   }) {
     return loadMore?.call(userInfo, selectedSalesOrganisation,
         selectedCustomerCode, selectedShipTo);
@@ -692,10 +718,10 @@ class _$_LoadMore implements _LoadMore {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_LoadMore value)? loadMore,
-    TResult Function(_Delete value)? delete,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_Delete value)? delete,
   }) {
     return loadMore?.call(this);
   }
@@ -736,6 +762,7 @@ abstract class _LoadMore implements SavedOrderListEvent {
 abstract class _$$_DeleteCopyWith<$Res> {
   factory _$$_DeleteCopyWith(_$_Delete value, $Res Function(_$_Delete) then) =
       __$$_DeleteCopyWithImpl<$Res>;
+  @useResult
   $Res call({SavedOrder order, User user});
 
   $SavedOrderCopyWith<$Res> get order;
@@ -744,25 +771,23 @@ abstract class _$$_DeleteCopyWith<$Res> {
 
 /// @nodoc
 class __$$_DeleteCopyWithImpl<$Res>
-    extends _$SavedOrderListEventCopyWithImpl<$Res>
+    extends _$SavedOrderListEventCopyWithImpl<$Res, _$_Delete>
     implements _$$_DeleteCopyWith<$Res> {
   __$$_DeleteCopyWithImpl(_$_Delete _value, $Res Function(_$_Delete) _then)
-      : super(_value, (v) => _then(v as _$_Delete));
+      : super(_value, _then);
 
-  @override
-  _$_Delete get _value => super._value as _$_Delete;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? order = freezed,
-    Object? user = freezed,
+    Object? order = null,
+    Object? user = null,
   }) {
     return _then(_$_Delete(
-      order: order == freezed
+      order: null == order
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
               as SavedOrder,
-      user: user == freezed
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
@@ -770,6 +795,7 @@ class __$$_DeleteCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SavedOrderCopyWith<$Res> get order {
     return $SavedOrderCopyWith<$Res>(_value.order, (value) {
       return _then(_value.copyWith(order: value));
@@ -777,6 +803,7 @@ class __$$_DeleteCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value));
@@ -804,18 +831,16 @@ class _$_Delete implements _Delete {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Delete &&
-            const DeepCollectionEquality().equals(other.order, order) &&
-            const DeepCollectionEquality().equals(other.user, user));
+            (identical(other.order, order) || other.order == order) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(order),
-      const DeepCollectionEquality().hash(user));
+  int get hashCode => Object.hash(runtimeType, order, user);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_DeleteCopyWith<_$_Delete> get copyWith =>
       __$$_DeleteCopyWithImpl<_$_Delete>(this, _$identity);
 
@@ -843,14 +868,20 @@ class _$_Delete implements _Delete {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
-            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+    TResult? Function()? initialized,
+    TResult? Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)?
         fetch,
-    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
-            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+    TResult? Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)?
         loadMore,
-    TResult Function(SavedOrder order, User user)? delete,
+    TResult? Function(SavedOrder order, User user)? delete,
   }) {
     return delete?.call(order, user);
   }
@@ -888,10 +919,10 @@ class _$_Delete implements _Delete {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_LoadMore value)? loadMore,
-    TResult Function(_Delete value)? delete,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_Delete value)? delete,
   }) {
     return delete?.call(this);
   }
@@ -941,7 +972,8 @@ mixin _$SavedOrderListState {
 abstract class $SavedOrderListStateCopyWith<$Res> {
   factory $SavedOrderListStateCopyWith(
           SavedOrderListState value, $Res Function(SavedOrderListState) then) =
-      _$SavedOrderListStateCopyWithImpl<$Res>;
+      _$SavedOrderListStateCopyWithImpl<$Res, SavedOrderListState>;
+  @useResult
   $Res call(
       {List<SavedOrder> savedOrders,
       bool canLoadMore,
@@ -951,44 +983,46 @@ abstract class $SavedOrderListStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SavedOrderListStateCopyWithImpl<$Res>
+class _$SavedOrderListStateCopyWithImpl<$Res, $Val extends SavedOrderListState>
     implements $SavedOrderListStateCopyWith<$Res> {
   _$SavedOrderListStateCopyWithImpl(this._value, this._then);
 
-  final SavedOrderListState _value;
   // ignore: unused_field
-  final $Res Function(SavedOrderListState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? savedOrders = freezed,
-    Object? canLoadMore = freezed,
-    Object? isFetching = freezed,
-    Object? nextPageIndex = freezed,
-    Object? apiFailureOrSuccessOption = freezed,
+    Object? savedOrders = null,
+    Object? canLoadMore = null,
+    Object? isFetching = null,
+    Object? nextPageIndex = null,
+    Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
-      savedOrders: savedOrders == freezed
+      savedOrders: null == savedOrders
           ? _value.savedOrders
           : savedOrders // ignore: cast_nullable_to_non_nullable
               as List<SavedOrder>,
-      canLoadMore: canLoadMore == freezed
+      canLoadMore: null == canLoadMore
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
-      isFetching: isFetching == freezed
+      isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
-      nextPageIndex: nextPageIndex == freezed
+      nextPageIndex: null == nextPageIndex
           ? _value.nextPageIndex
           : nextPageIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      apiFailureOrSuccessOption: apiFailureOrSuccessOption == freezed
+      apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -999,6 +1033,7 @@ abstract class _$$_SavedOrderListStateCopyWith<$Res>
           $Res Function(_$_SavedOrderListState) then) =
       __$$_SavedOrderListStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {List<SavedOrder> savedOrders,
       bool canLoadMore,
@@ -1009,41 +1044,39 @@ abstract class _$$_SavedOrderListStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_SavedOrderListStateCopyWithImpl<$Res>
-    extends _$SavedOrderListStateCopyWithImpl<$Res>
+    extends _$SavedOrderListStateCopyWithImpl<$Res, _$_SavedOrderListState>
     implements _$$_SavedOrderListStateCopyWith<$Res> {
   __$$_SavedOrderListStateCopyWithImpl(_$_SavedOrderListState _value,
       $Res Function(_$_SavedOrderListState) _then)
-      : super(_value, (v) => _then(v as _$_SavedOrderListState));
+      : super(_value, _then);
 
-  @override
-  _$_SavedOrderListState get _value => super._value as _$_SavedOrderListState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? savedOrders = freezed,
-    Object? canLoadMore = freezed,
-    Object? isFetching = freezed,
-    Object? nextPageIndex = freezed,
-    Object? apiFailureOrSuccessOption = freezed,
+    Object? savedOrders = null,
+    Object? canLoadMore = null,
+    Object? isFetching = null,
+    Object? nextPageIndex = null,
+    Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_$_SavedOrderListState(
-      savedOrders: savedOrders == freezed
+      savedOrders: null == savedOrders
           ? _value._savedOrders
           : savedOrders // ignore: cast_nullable_to_non_nullable
               as List<SavedOrder>,
-      canLoadMore: canLoadMore == freezed
+      canLoadMore: null == canLoadMore
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
-      isFetching: isFetching == freezed
+      isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
-      nextPageIndex: nextPageIndex == freezed
+      nextPageIndex: null == nextPageIndex
           ? _value.nextPageIndex
           : nextPageIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      apiFailureOrSuccessOption: apiFailureOrSuccessOption == freezed
+      apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
@@ -1091,27 +1124,29 @@ class _$_SavedOrderListState extends _SavedOrderListState {
             other is _$_SavedOrderListState &&
             const DeepCollectionEquality()
                 .equals(other._savedOrders, _savedOrders) &&
-            const DeepCollectionEquality()
-                .equals(other.canLoadMore, canLoadMore) &&
-            const DeepCollectionEquality()
-                .equals(other.isFetching, isFetching) &&
-            const DeepCollectionEquality()
-                .equals(other.nextPageIndex, nextPageIndex) &&
-            const DeepCollectionEquality().equals(
-                other.apiFailureOrSuccessOption, apiFailureOrSuccessOption));
+            (identical(other.canLoadMore, canLoadMore) ||
+                other.canLoadMore == canLoadMore) &&
+            (identical(other.isFetching, isFetching) ||
+                other.isFetching == isFetching) &&
+            (identical(other.nextPageIndex, nextPageIndex) ||
+                other.nextPageIndex == nextPageIndex) &&
+            (identical(other.apiFailureOrSuccessOption,
+                    apiFailureOrSuccessOption) ||
+                other.apiFailureOrSuccessOption == apiFailureOrSuccessOption));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_savedOrders),
-      const DeepCollectionEquality().hash(canLoadMore),
-      const DeepCollectionEquality().hash(isFetching),
-      const DeepCollectionEquality().hash(nextPageIndex),
-      const DeepCollectionEquality().hash(apiFailureOrSuccessOption));
+      canLoadMore,
+      isFetching,
+      nextPageIndex,
+      apiFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SavedOrderListStateCopyWith<_$_SavedOrderListState> get copyWith =>
       __$$_SavedOrderListStateCopyWithImpl<_$_SavedOrderListState>(
           this, _$identity);

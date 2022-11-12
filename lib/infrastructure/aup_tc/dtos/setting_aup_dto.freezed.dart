@@ -37,7 +37,8 @@ mixin _$SettingAupDto {
 abstract class $SettingAupDtoCopyWith<$Res> {
   factory $SettingAupDtoCopyWith(
           SettingAupDto value, $Res Function(SettingAupDto) then) =
-      _$SettingAupDtoCopyWithImpl<$Res>;
+      _$SettingAupDtoCopyWithImpl<$Res, SettingAupDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'acceptAUP')
           bool acceptAUP,
@@ -46,29 +47,31 @@ abstract class $SettingAupDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SettingAupDtoCopyWithImpl<$Res>
+class _$SettingAupDtoCopyWithImpl<$Res, $Val extends SettingAupDto>
     implements $SettingAupDtoCopyWith<$Res> {
   _$SettingAupDtoCopyWithImpl(this._value, this._then);
 
-  final SettingAupDto _value;
   // ignore: unused_field
-  final $Res Function(SettingAupDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? acceptAUP = freezed,
-    Object? acceptAUPTimestamp = freezed,
+    Object? acceptAUP = null,
+    Object? acceptAUPTimestamp = null,
   }) {
     return _then(_value.copyWith(
-      acceptAUP: acceptAUP == freezed
+      acceptAUP: null == acceptAUP
           ? _value.acceptAUP
           : acceptAUP // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptAUPTimestamp: acceptAUPTimestamp == freezed
+      acceptAUPTimestamp: null == acceptAUPTimestamp
           ? _value.acceptAUPTimestamp
           : acceptAUPTimestamp // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -79,6 +82,7 @@ abstract class _$$_SettingAupDtoCopyWith<$Res>
           _$_SettingAupDto value, $Res Function(_$_SettingAupDto) then) =
       __$$_SettingAupDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'acceptAUP')
           bool acceptAUP,
@@ -88,26 +92,24 @@ abstract class _$$_SettingAupDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_SettingAupDtoCopyWithImpl<$Res>
-    extends _$SettingAupDtoCopyWithImpl<$Res>
+    extends _$SettingAupDtoCopyWithImpl<$Res, _$_SettingAupDto>
     implements _$$_SettingAupDtoCopyWith<$Res> {
   __$$_SettingAupDtoCopyWithImpl(
       _$_SettingAupDto _value, $Res Function(_$_SettingAupDto) _then)
-      : super(_value, (v) => _then(v as _$_SettingAupDto));
+      : super(_value, _then);
 
-  @override
-  _$_SettingAupDto get _value => super._value as _$_SettingAupDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? acceptAUP = freezed,
-    Object? acceptAUPTimestamp = freezed,
+    Object? acceptAUP = null,
+    Object? acceptAUPTimestamp = null,
   }) {
     return _then(_$_SettingAupDto(
-      acceptAUP: acceptAUP == freezed
+      acceptAUP: null == acceptAUP
           ? _value.acceptAUP
           : acceptAUP // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptAUPTimestamp: acceptAUPTimestamp == freezed
+      acceptAUPTimestamp: null == acceptAUPTimestamp
           ? _value.acceptAUPTimestamp
           : acceptAUPTimestamp // ignore: cast_nullable_to_non_nullable
               as String,
@@ -148,20 +150,19 @@ class _$_SettingAupDto extends _SettingAupDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SettingAupDto &&
-            const DeepCollectionEquality().equals(other.acceptAUP, acceptAUP) &&
-            const DeepCollectionEquality()
-                .equals(other.acceptAUPTimestamp, acceptAUPTimestamp));
+            (identical(other.acceptAUP, acceptAUP) ||
+                other.acceptAUP == acceptAUP) &&
+            (identical(other.acceptAUPTimestamp, acceptAUPTimestamp) ||
+                other.acceptAUPTimestamp == acceptAUPTimestamp));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(acceptAUP),
-      const DeepCollectionEquality().hash(acceptAUPTimestamp));
+  int get hashCode => Object.hash(runtimeType, acceptAUP, acceptAUPTimestamp);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SettingAupDtoCopyWith<_$_SettingAupDto> get copyWith =>
       __$$_SettingAupDtoCopyWithImpl<_$_SettingAupDto>(this, _$identity);
 }

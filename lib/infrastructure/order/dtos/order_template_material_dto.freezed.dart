@@ -46,7 +46,8 @@ mixin _$OrderTemplateMaterialDto {
 abstract class $OrderTemplateMaterialDtoCopyWith<$Res> {
   factory $OrderTemplateMaterialDtoCopyWith(OrderTemplateMaterialDto value,
           $Res Function(OrderTemplateMaterialDto) then) =
-      _$OrderTemplateMaterialDtoCopyWithImpl<$Res>;
+      _$OrderTemplateMaterialDtoCopyWithImpl<$Res, OrderTemplateMaterialDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
           String materialNumber,
@@ -65,54 +66,57 @@ abstract class $OrderTemplateMaterialDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OrderTemplateMaterialDtoCopyWithImpl<$Res>
+class _$OrderTemplateMaterialDtoCopyWithImpl<$Res,
+        $Val extends OrderTemplateMaterialDto>
     implements $OrderTemplateMaterialDtoCopyWith<$Res> {
   _$OrderTemplateMaterialDtoCopyWithImpl(this._value, this._then);
 
-  final OrderTemplateMaterialDto _value;
   // ignore: unused_field
-  final $Res Function(OrderTemplateMaterialDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialNumber = freezed,
-    Object? qty = freezed,
-    Object? type = freezed,
-    Object? principalName = freezed,
-    Object? materialDescription = freezed,
-    Object? hidePrice = freezed,
-    Object? taxClassification = freezed,
+    Object? materialNumber = null,
+    Object? qty = null,
+    Object? type = null,
+    Object? principalName = null,
+    Object? materialDescription = null,
+    Object? hidePrice = null,
+    Object? taxClassification = null,
   }) {
     return _then(_value.copyWith(
-      materialNumber: materialNumber == freezed
+      materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      qty: qty == freezed
+      qty: null == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
               as int,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      principalName: principalName == freezed
+      principalName: null == principalName
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
               as String,
-      materialDescription: materialDescription == freezed
+      materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      hidePrice: hidePrice == freezed
+      hidePrice: null == hidePrice
           ? _value.hidePrice
           : hidePrice // ignore: cast_nullable_to_non_nullable
               as bool,
-      taxClassification: taxClassification == freezed
+      taxClassification: null == taxClassification
           ? _value.taxClassification
           : taxClassification // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -124,6 +128,7 @@ abstract class _$$_OrderTemplateMaterialDtoCopyWith<$Res>
           $Res Function(_$_OrderTemplateMaterialDto) then) =
       __$$_OrderTemplateMaterialDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
           String materialNumber,
@@ -143,52 +148,50 @@ abstract class _$$_OrderTemplateMaterialDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_OrderTemplateMaterialDtoCopyWithImpl<$Res>
-    extends _$OrderTemplateMaterialDtoCopyWithImpl<$Res>
+    extends _$OrderTemplateMaterialDtoCopyWithImpl<$Res,
+        _$_OrderTemplateMaterialDto>
     implements _$$_OrderTemplateMaterialDtoCopyWith<$Res> {
   __$$_OrderTemplateMaterialDtoCopyWithImpl(_$_OrderTemplateMaterialDto _value,
       $Res Function(_$_OrderTemplateMaterialDto) _then)
-      : super(_value, (v) => _then(v as _$_OrderTemplateMaterialDto));
+      : super(_value, _then);
 
-  @override
-  _$_OrderTemplateMaterialDto get _value =>
-      super._value as _$_OrderTemplateMaterialDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialNumber = freezed,
-    Object? qty = freezed,
-    Object? type = freezed,
-    Object? principalName = freezed,
-    Object? materialDescription = freezed,
-    Object? hidePrice = freezed,
-    Object? taxClassification = freezed,
+    Object? materialNumber = null,
+    Object? qty = null,
+    Object? type = null,
+    Object? principalName = null,
+    Object? materialDescription = null,
+    Object? hidePrice = null,
+    Object? taxClassification = null,
   }) {
     return _then(_$_OrderTemplateMaterialDto(
-      materialNumber: materialNumber == freezed
+      materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      qty: qty == freezed
+      qty: null == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
               as int,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      principalName: principalName == freezed
+      principalName: null == principalName
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
               as String,
-      materialDescription: materialDescription == freezed
+      materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      hidePrice: hidePrice == freezed
+      hidePrice: null == hidePrice
           ? _value.hidePrice
           : hidePrice // ignore: cast_nullable_to_non_nullable
               as bool,
-      taxClassification: taxClassification == freezed
+      taxClassification: null == taxClassification
           ? _value.taxClassification
           : taxClassification // ignore: cast_nullable_to_non_nullable
               as String,
@@ -251,33 +254,28 @@ class _$_OrderTemplateMaterialDto extends _OrderTemplateMaterialDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderTemplateMaterialDto &&
-            const DeepCollectionEquality()
-                .equals(other.materialNumber, materialNumber) &&
-            const DeepCollectionEquality().equals(other.qty, qty) &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality()
-                .equals(other.principalName, principalName) &&
-            const DeepCollectionEquality()
-                .equals(other.materialDescription, materialDescription) &&
-            const DeepCollectionEquality().equals(other.hidePrice, hidePrice) &&
-            const DeepCollectionEquality()
-                .equals(other.taxClassification, taxClassification));
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber) &&
+            (identical(other.qty, qty) || other.qty == qty) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.principalName, principalName) ||
+                other.principalName == principalName) &&
+            (identical(other.materialDescription, materialDescription) ||
+                other.materialDescription == materialDescription) &&
+            (identical(other.hidePrice, hidePrice) ||
+                other.hidePrice == hidePrice) &&
+            (identical(other.taxClassification, taxClassification) ||
+                other.taxClassification == taxClassification));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(materialNumber),
-      const DeepCollectionEquality().hash(qty),
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(principalName),
-      const DeepCollectionEquality().hash(materialDescription),
-      const DeepCollectionEquality().hash(hidePrice),
-      const DeepCollectionEquality().hash(taxClassification));
+  int get hashCode => Object.hash(runtimeType, materialNumber, qty, type,
+      principalName, materialDescription, hidePrice, taxClassification);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OrderTemplateMaterialDtoCopyWith<_$_OrderTemplateMaterialDto>
       get copyWith => __$$_OrderTemplateMaterialDtoCopyWithImpl<
           _$_OrderTemplateMaterialDto>(this, _$identity);

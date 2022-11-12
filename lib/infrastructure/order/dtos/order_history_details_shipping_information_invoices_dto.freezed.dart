@@ -21,11 +21,11 @@ OrderHistoryDetailsInvoicesDto _$OrderHistoryDetailsInvoicesDtoFromJson(
 
 /// @nodoc
 mixin _$OrderHistoryDetailsInvoicesDto {
-  @JsonKey(name: 'InvoiceNumber')
+  @JsonKey(name: 'InvoiceNumber', defaultValue: '')
   String get invoiceNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'InvoiceDate')
+  @JsonKey(name: 'InvoiceDate', defaultValue: '')
   String get invoiceDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'InvoicePrice')
+  @JsonKey(name: 'InvoicePrice', defaultValue: '')
   String get invoicePrice => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,42 +39,47 @@ abstract class $OrderHistoryDetailsInvoicesDtoCopyWith<$Res> {
   factory $OrderHistoryDetailsInvoicesDtoCopyWith(
           OrderHistoryDetailsInvoicesDto value,
           $Res Function(OrderHistoryDetailsInvoicesDto) then) =
-      _$OrderHistoryDetailsInvoicesDtoCopyWithImpl<$Res>;
+      _$OrderHistoryDetailsInvoicesDtoCopyWithImpl<$Res,
+          OrderHistoryDetailsInvoicesDto>;
+  @useResult
   $Res call(
-      {@JsonKey(name: 'InvoiceNumber') String invoiceNumber,
-      @JsonKey(name: 'InvoiceDate') String invoiceDate,
-      @JsonKey(name: 'InvoicePrice') String invoicePrice});
+      {@JsonKey(name: 'InvoiceNumber', defaultValue: '') String invoiceNumber,
+      @JsonKey(name: 'InvoiceDate', defaultValue: '') String invoiceDate,
+      @JsonKey(name: 'InvoicePrice', defaultValue: '') String invoicePrice});
 }
 
 /// @nodoc
-class _$OrderHistoryDetailsInvoicesDtoCopyWithImpl<$Res>
+class _$OrderHistoryDetailsInvoicesDtoCopyWithImpl<$Res,
+        $Val extends OrderHistoryDetailsInvoicesDto>
     implements $OrderHistoryDetailsInvoicesDtoCopyWith<$Res> {
   _$OrderHistoryDetailsInvoicesDtoCopyWithImpl(this._value, this._then);
 
-  final OrderHistoryDetailsInvoicesDto _value;
   // ignore: unused_field
-  final $Res Function(OrderHistoryDetailsInvoicesDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? invoiceNumber = freezed,
-    Object? invoiceDate = freezed,
-    Object? invoicePrice = freezed,
+    Object? invoiceNumber = null,
+    Object? invoiceDate = null,
+    Object? invoicePrice = null,
   }) {
     return _then(_value.copyWith(
-      invoiceNumber: invoiceNumber == freezed
+      invoiceNumber: null == invoiceNumber
           ? _value.invoiceNumber
           : invoiceNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      invoiceDate: invoiceDate == freezed
+      invoiceDate: null == invoiceDate
           ? _value.invoiceDate
           : invoiceDate // ignore: cast_nullable_to_non_nullable
               as String,
-      invoicePrice: invoicePrice == freezed
+      invoicePrice: null == invoicePrice
           ? _value.invoicePrice
           : invoicePrice // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -86,41 +91,40 @@ abstract class _$$_OrderHistoryDetailsInvoicesDtoCopyWith<$Res>
           $Res Function(_$_OrderHistoryDetailsInvoicesDto) then) =
       __$$_OrderHistoryDetailsInvoicesDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
-      {@JsonKey(name: 'InvoiceNumber') String invoiceNumber,
-      @JsonKey(name: 'InvoiceDate') String invoiceDate,
-      @JsonKey(name: 'InvoicePrice') String invoicePrice});
+      {@JsonKey(name: 'InvoiceNumber', defaultValue: '') String invoiceNumber,
+      @JsonKey(name: 'InvoiceDate', defaultValue: '') String invoiceDate,
+      @JsonKey(name: 'InvoicePrice', defaultValue: '') String invoicePrice});
 }
 
 /// @nodoc
 class __$$_OrderHistoryDetailsInvoicesDtoCopyWithImpl<$Res>
-    extends _$OrderHistoryDetailsInvoicesDtoCopyWithImpl<$Res>
+    extends _$OrderHistoryDetailsInvoicesDtoCopyWithImpl<$Res,
+        _$_OrderHistoryDetailsInvoicesDto>
     implements _$$_OrderHistoryDetailsInvoicesDtoCopyWith<$Res> {
   __$$_OrderHistoryDetailsInvoicesDtoCopyWithImpl(
       _$_OrderHistoryDetailsInvoicesDto _value,
       $Res Function(_$_OrderHistoryDetailsInvoicesDto) _then)
-      : super(_value, (v) => _then(v as _$_OrderHistoryDetailsInvoicesDto));
+      : super(_value, _then);
 
-  @override
-  _$_OrderHistoryDetailsInvoicesDto get _value =>
-      super._value as _$_OrderHistoryDetailsInvoicesDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? invoiceNumber = freezed,
-    Object? invoiceDate = freezed,
-    Object? invoicePrice = freezed,
+    Object? invoiceNumber = null,
+    Object? invoiceDate = null,
+    Object? invoicePrice = null,
   }) {
     return _then(_$_OrderHistoryDetailsInvoicesDto(
-      invoiceNumber: invoiceNumber == freezed
+      invoiceNumber: null == invoiceNumber
           ? _value.invoiceNumber
           : invoiceNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      invoiceDate: invoiceDate == freezed
+      invoiceDate: null == invoiceDate
           ? _value.invoiceDate
           : invoiceDate // ignore: cast_nullable_to_non_nullable
               as String,
-      invoicePrice: invoicePrice == freezed
+      invoicePrice: null == invoicePrice
           ? _value.invoicePrice
           : invoicePrice // ignore: cast_nullable_to_non_nullable
               as String,
@@ -133,9 +137,12 @@ class __$$_OrderHistoryDetailsInvoicesDtoCopyWithImpl<$Res>
 class _$_OrderHistoryDetailsInvoicesDto
     extends _OrderHistoryDetailsInvoicesDto {
   const _$_OrderHistoryDetailsInvoicesDto(
-      {@JsonKey(name: 'InvoiceNumber') required this.invoiceNumber,
-      @JsonKey(name: 'InvoiceDate') required this.invoiceDate,
-      @JsonKey(name: 'InvoicePrice') required this.invoicePrice})
+      {@JsonKey(name: 'InvoiceNumber', defaultValue: '')
+          required this.invoiceNumber,
+      @JsonKey(name: 'InvoiceDate', defaultValue: '')
+          required this.invoiceDate,
+      @JsonKey(name: 'InvoicePrice', defaultValue: '')
+          required this.invoicePrice})
       : super._();
 
   factory _$_OrderHistoryDetailsInvoicesDto.fromJson(
@@ -143,13 +150,13 @@ class _$_OrderHistoryDetailsInvoicesDto
       _$$_OrderHistoryDetailsInvoicesDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'InvoiceNumber')
+  @JsonKey(name: 'InvoiceNumber', defaultValue: '')
   final String invoiceNumber;
   @override
-  @JsonKey(name: 'InvoiceDate')
+  @JsonKey(name: 'InvoiceDate', defaultValue: '')
   final String invoiceDate;
   @override
-  @JsonKey(name: 'InvoicePrice')
+  @JsonKey(name: 'InvoicePrice', defaultValue: '')
   final String invoicePrice;
 
   @override
@@ -162,24 +169,22 @@ class _$_OrderHistoryDetailsInvoicesDto
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryDetailsInvoicesDto &&
-            const DeepCollectionEquality()
-                .equals(other.invoiceNumber, invoiceNumber) &&
-            const DeepCollectionEquality()
-                .equals(other.invoiceDate, invoiceDate) &&
-            const DeepCollectionEquality()
-                .equals(other.invoicePrice, invoicePrice));
+            (identical(other.invoiceNumber, invoiceNumber) ||
+                other.invoiceNumber == invoiceNumber) &&
+            (identical(other.invoiceDate, invoiceDate) ||
+                other.invoiceDate == invoiceDate) &&
+            (identical(other.invoicePrice, invoicePrice) ||
+                other.invoicePrice == invoicePrice));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(invoiceNumber),
-      const DeepCollectionEquality().hash(invoiceDate),
-      const DeepCollectionEquality().hash(invoicePrice));
+  int get hashCode =>
+      Object.hash(runtimeType, invoiceNumber, invoiceDate, invoicePrice);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OrderHistoryDetailsInvoicesDtoCopyWith<_$_OrderHistoryDetailsInvoicesDto>
       get copyWith => __$$_OrderHistoryDetailsInvoicesDtoCopyWithImpl<
           _$_OrderHistoryDetailsInvoicesDto>(this, _$identity);
@@ -195,9 +200,12 @@ class _$_OrderHistoryDetailsInvoicesDto
 abstract class _OrderHistoryDetailsInvoicesDto
     extends OrderHistoryDetailsInvoicesDto {
   const factory _OrderHistoryDetailsInvoicesDto(
-          {@JsonKey(name: 'InvoiceNumber') required final String invoiceNumber,
-          @JsonKey(name: 'InvoiceDate') required final String invoiceDate,
-          @JsonKey(name: 'InvoicePrice') required final String invoicePrice}) =
+          {@JsonKey(name: 'InvoiceNumber', defaultValue: '')
+              required final String invoiceNumber,
+          @JsonKey(name: 'InvoiceDate', defaultValue: '')
+              required final String invoiceDate,
+          @JsonKey(name: 'InvoicePrice', defaultValue: '')
+              required final String invoicePrice}) =
       _$_OrderHistoryDetailsInvoicesDto;
   const _OrderHistoryDetailsInvoicesDto._() : super._();
 
@@ -205,13 +213,13 @@ abstract class _OrderHistoryDetailsInvoicesDto
       _$_OrderHistoryDetailsInvoicesDto.fromJson;
 
   @override
-  @JsonKey(name: 'InvoiceNumber')
+  @JsonKey(name: 'InvoiceNumber', defaultValue: '')
   String get invoiceNumber;
   @override
-  @JsonKey(name: 'InvoiceDate')
+  @JsonKey(name: 'InvoiceDate', defaultValue: '')
   String get invoiceDate;
   @override
-  @JsonKey(name: 'InvoicePrice')
+  @JsonKey(name: 'InvoicePrice', defaultValue: '')
   String get invoicePrice;
   @override
   @JsonKey(ignore: true)

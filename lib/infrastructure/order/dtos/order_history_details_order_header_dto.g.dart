@@ -10,14 +10,14 @@ _$_OrderHistoryDetailsOrderHeadersDto
     _$$_OrderHistoryDetailsOrderHeadersDtoFromJson(Map<String, dynamic> json) =>
         _$_OrderHistoryDetailsOrderHeadersDto(
           totalTax: (json['TotalTax'] as num?)?.toDouble() ?? 0.0,
-          requestedDeliveryDate: json['RequestedDeliveryDate'] as String,
-          pOReference: json['POReference'] as String,
-          type: json['Type'] as String,
-          telephoneNumber: json['TelephoneNumber'] as String,
+          requestedDeliveryDate: json['RequestedDeliveryDate'] as String? ?? '',
+          pOReference: json['POReference'] as String? ?? '',
+          type: json['Type'] as String? ?? '',
+          telephoneNumber: json['TelephoneNumber'] as String? ?? '',
           orderValue: (json['OrderValue'] as num?)?.toDouble() ?? 0.0,
-          createdDate: json['CreatedDate'] as String,
-          eZRXNumber: json['EZRXNumber'] as String,
-          orderBy: json['OrderBy'] as String,
+          createdDate: json['CreatedDate'] as String? ?? '',
+          eZRXNumber: json['EZRXNumber'] as String? ?? '',
+          orderBy: json['OrderBy'] as String? ?? '',
         );
 
 Map<String, dynamic> _$$_OrderHistoryDetailsOrderHeadersDtoToJson(

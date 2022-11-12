@@ -9,20 +9,24 @@ part of 'order_history_details_order_items_dto.dart';
 _$_OrderHistoryDetailsOrderItemDto _$$_OrderHistoryDetailsOrderItemDtoFromJson(
         Map<String, dynamic> json) =>
     _$_OrderHistoryDetailsOrderItemDto(
-      sAPStatus: json['SAPStatus'] as String,
-      plannedDeliveryDate: json['PlannedDeliveryDate'] as String,
-      pickedQuantity: json['PickedQuantity'] as int,
-      batch: json['Batch'] as String,
-      expiryDate: json['ExpiryDate'] as String,
-      lineReferenceNotes: json['LineReferenceNotes'] as String,
-      isTenderContractMaterial: json['IsTenderContractMaterial'] as bool,
-      details: (json['Details'] as List<dynamic>)
-          .map((e) => OrderHistoryDetailsOrderItemDetailsDto.fromJson(
-              e as Map<String, dynamic>))
-          .toList(),
+      sAPStatus: json['SAPStatus'] as String? ?? '',
+      plannedDeliveryDate: json['PlannedDeliveryDate'] as String? ?? '',
+      pickedQuantity: json['PickedQuantity'] as int? ?? 0,
+      batch: json['Batch'] as String? ?? '',
+      expiryDate: json['ExpiryDate'] as String? ?? '',
+      lineReferenceNotes: json['LineReferenceNotes'] as String? ?? '',
+      isTenderContractMaterial:
+          boolStringFormatCheck(json, 'IsTenderContractMaterial') as bool? ??
+              false,
+      details: (json['Details'] as List<dynamic>?)
+              ?.map((e) => OrderHistoryDetailsOrderItemDetailsDto.fromJson(
+                  e as Map<String, dynamic>))
+              .toList() ??
+          [],
       tenderContractDetails:
           OrderHistoryDetailsOrderItemTenderContractDetailsDto.fromJson(
-              json['TenderContractDetails'] as Map<String, dynamic>),
+              orderHistoryDetailsOrderItemTenderContractDetailsOverride(
+                  json, 'TenderContractDetails') as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_OrderHistoryDetailsOrderItemDtoToJson(

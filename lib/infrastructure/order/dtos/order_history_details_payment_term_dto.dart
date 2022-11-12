@@ -7,8 +7,8 @@ part 'order_history_details_payment_term_dto.g.dart';
 class OrderHistoryDetailsPaymentTermDto with _$OrderHistoryDetailsPaymentTermDto {
   const OrderHistoryDetailsPaymentTermDto._();
   const factory OrderHistoryDetailsPaymentTermDto({
-    @JsonKey(name: 'PaymentTermCode') required String paymentTermCode,
-    @JsonKey(name: 'PaymentTermDescription') required String paymentTermDescription,
+    @JsonKey(name: 'PaymentTermCode',defaultValue: '') required String paymentTermCode,
+    @JsonKey(name: 'PaymentTermDescription',defaultValue: '') required String paymentTermDescription,
   }) = _OrderHistoryDetailsPaymentTermDto;
   factory OrderHistoryDetailsPaymentTermDto.fromDomain( OrderHistoryDetailsPaymentTerm orderHistoryDetailsPaymentTerm) {
     return  OrderHistoryDetailsPaymentTermDto(

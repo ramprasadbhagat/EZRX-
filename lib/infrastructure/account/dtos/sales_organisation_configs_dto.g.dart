@@ -9,7 +9,7 @@ part of 'sales_organisation_configs_dto.dart';
 class SalesOrganisationConfigsDtoAdapter
     extends TypeAdapter<_$_SalesOrganisationConfigsDto> {
   @override
-  final int typeId = 5;
+  final int typeId = 13;
 
   @override
   _$_SalesOrganisationConfigsDto read(BinaryReader reader) {

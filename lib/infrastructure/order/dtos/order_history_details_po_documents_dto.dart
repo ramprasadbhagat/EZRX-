@@ -8,8 +8,8 @@ part 'order_history_details_po_documents_dto.g.dart';
 class OrderHistoryDetailsPODocumentsDto with _$OrderHistoryDetailsPODocumentsDto {
   const OrderHistoryDetailsPODocumentsDto._();
   const factory OrderHistoryDetailsPODocumentsDto({
-    @JsonKey(name: 'Url') required String url,
-    @JsonKey(name: 'Name') required String name,
+    @JsonKey(name: 'Url',defaultValue: '') required String url,
+    @JsonKey(name: 'Name',defaultValue: '') required String name,
   }) = _OrderHistoryDetailsPODocumentsDto;
   factory OrderHistoryDetailsPODocumentsDto.fromDomain( OrderHistoryDetailsPODocuments orderHistoryDetailsPODocuments) {
     return  OrderHistoryDetailsPODocumentsDto(

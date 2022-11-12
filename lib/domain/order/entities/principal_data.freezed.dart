@@ -28,34 +28,37 @@ mixin _$PrincipalData {
 abstract class $PrincipalDataCopyWith<$Res> {
   factory $PrincipalDataCopyWith(
           PrincipalData value, $Res Function(PrincipalData) then) =
-      _$PrincipalDataCopyWithImpl<$Res>;
+      _$PrincipalDataCopyWithImpl<$Res, PrincipalData>;
+  @useResult
   $Res call({String principalName, String principalCode});
 }
 
 /// @nodoc
-class _$PrincipalDataCopyWithImpl<$Res>
+class _$PrincipalDataCopyWithImpl<$Res, $Val extends PrincipalData>
     implements $PrincipalDataCopyWith<$Res> {
   _$PrincipalDataCopyWithImpl(this._value, this._then);
 
-  final PrincipalData _value;
   // ignore: unused_field
-  final $Res Function(PrincipalData) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? principalName = freezed,
-    Object? principalCode = freezed,
+    Object? principalName = null,
+    Object? principalCode = null,
   }) {
     return _then(_value.copyWith(
-      principalName: principalName == freezed
+      principalName: null == principalName
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
               as String,
-      principalCode: principalCode == freezed
+      principalCode: null == principalCode
           ? _value.principalCode
           : principalCode // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -66,31 +69,30 @@ abstract class _$$_PrincipalDataCopyWith<$Res>
           _$_PrincipalData value, $Res Function(_$_PrincipalData) then) =
       __$$_PrincipalDataCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String principalName, String principalCode});
 }
 
 /// @nodoc
 class __$$_PrincipalDataCopyWithImpl<$Res>
-    extends _$PrincipalDataCopyWithImpl<$Res>
+    extends _$PrincipalDataCopyWithImpl<$Res, _$_PrincipalData>
     implements _$$_PrincipalDataCopyWith<$Res> {
   __$$_PrincipalDataCopyWithImpl(
       _$_PrincipalData _value, $Res Function(_$_PrincipalData) _then)
-      : super(_value, (v) => _then(v as _$_PrincipalData));
+      : super(_value, _then);
 
-  @override
-  _$_PrincipalData get _value => super._value as _$_PrincipalData;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? principalName = freezed,
-    Object? principalCode = freezed,
+    Object? principalName = null,
+    Object? principalCode = null,
   }) {
     return _then(_$_PrincipalData(
-      principalName: principalName == freezed
+      principalName: null == principalName
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
               as String,
-      principalCode: principalCode == freezed
+      principalCode: null == principalCode
           ? _value.principalCode
           : principalCode // ignore: cast_nullable_to_non_nullable
               as String,
@@ -120,20 +122,18 @@ class _$_PrincipalData extends _PrincipalData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PrincipalData &&
-            const DeepCollectionEquality()
-                .equals(other.principalName, principalName) &&
-            const DeepCollectionEquality()
-                .equals(other.principalCode, principalCode));
+            (identical(other.principalName, principalName) ||
+                other.principalName == principalName) &&
+            (identical(other.principalCode, principalCode) ||
+                other.principalCode == principalCode));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(principalName),
-      const DeepCollectionEquality().hash(principalCode));
+  int get hashCode => Object.hash(runtimeType, principalName, principalCode);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PrincipalDataCopyWith<_$_PrincipalData> get copyWith =>
       __$$_PrincipalDataCopyWithImpl<_$_PrincipalData>(this, _$identity);
 }

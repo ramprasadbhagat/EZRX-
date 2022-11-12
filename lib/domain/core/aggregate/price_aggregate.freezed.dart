@@ -32,7 +32,8 @@ mixin _$PriceAggregate {
 abstract class $PriceAggregateCopyWith<$Res> {
   factory $PriceAggregateCopyWith(
           PriceAggregate value, $Res Function(PriceAggregate) then) =
-      _$PriceAggregateCopyWithImpl<$Res>;
+      _$PriceAggregateCopyWithImpl<$Res, PriceAggregate>;
+  @useResult
   $Res call(
       {Price price,
       MaterialInfo materialInfo,
@@ -46,65 +47,70 @@ abstract class $PriceAggregateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PriceAggregateCopyWithImpl<$Res>
+class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
     implements $PriceAggregateCopyWith<$Res> {
   _$PriceAggregateCopyWithImpl(this._value, this._then);
 
-  final PriceAggregate _value;
   // ignore: unused_field
-  final $Res Function(PriceAggregate) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? price = freezed,
-    Object? materialInfo = freezed,
-    Object? salesOrgConfig = freezed,
-    Object? quantity = freezed,
-    Object? zmgMaterialCountOnCart = freezed,
+    Object? price = null,
+    Object? materialInfo = null,
+    Object? salesOrgConfig = null,
+    Object? quantity = null,
+    Object? zmgMaterialCountOnCart = null,
   }) {
     return _then(_value.copyWith(
-      price: price == freezed
+      price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as Price,
-      materialInfo: materialInfo == freezed
+      materialInfo: null == materialInfo
           ? _value.materialInfo
           : materialInfo // ignore: cast_nullable_to_non_nullable
               as MaterialInfo,
-      salesOrgConfig: salesOrgConfig == freezed
+      salesOrgConfig: null == salesOrgConfig
           ? _value.salesOrgConfig
           : salesOrgConfig // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
-      quantity: quantity == freezed
+      quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      zmgMaterialCountOnCart: zmgMaterialCountOnCart == freezed
+      zmgMaterialCountOnCart: null == zmgMaterialCountOnCart
           ? _value.zmgMaterialCountOnCart
           : zmgMaterialCountOnCart // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $PriceCopyWith<$Res> get price {
     return $PriceCopyWith<$Res>(_value.price, (value) {
-      return _then(_value.copyWith(price: value));
+      return _then(_value.copyWith(price: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $MaterialInfoCopyWith<$Res> get materialInfo {
     return $MaterialInfoCopyWith<$Res>(_value.materialInfo, (value) {
-      return _then(_value.copyWith(materialInfo: value));
+      return _then(_value.copyWith(materialInfo: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig {
     return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfig,
         (value) {
-      return _then(_value.copyWith(salesOrgConfig: value));
+      return _then(_value.copyWith(salesOrgConfig: value) as $Val);
     });
   }
 }
@@ -116,6 +122,7 @@ abstract class _$$_PriceAggregateCopyWith<$Res>
           _$_PriceAggregate value, $Res Function(_$_PriceAggregate) then) =
       __$$_PriceAggregateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {Price price,
       MaterialInfo materialInfo,
@@ -133,41 +140,39 @@ abstract class _$$_PriceAggregateCopyWith<$Res>
 
 /// @nodoc
 class __$$_PriceAggregateCopyWithImpl<$Res>
-    extends _$PriceAggregateCopyWithImpl<$Res>
+    extends _$PriceAggregateCopyWithImpl<$Res, _$_PriceAggregate>
     implements _$$_PriceAggregateCopyWith<$Res> {
   __$$_PriceAggregateCopyWithImpl(
       _$_PriceAggregate _value, $Res Function(_$_PriceAggregate) _then)
-      : super(_value, (v) => _then(v as _$_PriceAggregate));
+      : super(_value, _then);
 
-  @override
-  _$_PriceAggregate get _value => super._value as _$_PriceAggregate;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? price = freezed,
-    Object? materialInfo = freezed,
-    Object? salesOrgConfig = freezed,
-    Object? quantity = freezed,
-    Object? zmgMaterialCountOnCart = freezed,
+    Object? price = null,
+    Object? materialInfo = null,
+    Object? salesOrgConfig = null,
+    Object? quantity = null,
+    Object? zmgMaterialCountOnCart = null,
   }) {
     return _then(_$_PriceAggregate(
-      price: price == freezed
+      price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as Price,
-      materialInfo: materialInfo == freezed
+      materialInfo: null == materialInfo
           ? _value.materialInfo
           : materialInfo // ignore: cast_nullable_to_non_nullable
               as MaterialInfo,
-      salesOrgConfig: salesOrgConfig == freezed
+      salesOrgConfig: null == salesOrgConfig
           ? _value.salesOrgConfig
           : salesOrgConfig // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
-      quantity: quantity == freezed
+      quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      zmgMaterialCountOnCart: zmgMaterialCountOnCart == freezed
+      zmgMaterialCountOnCart: null == zmgMaterialCountOnCart
           ? _value.zmgMaterialCountOnCart
           : zmgMaterialCountOnCart // ignore: cast_nullable_to_non_nullable
               as int,
@@ -207,27 +212,24 @@ class _$_PriceAggregate extends _PriceAggregate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PriceAggregate &&
-            const DeepCollectionEquality().equals(other.price, price) &&
-            const DeepCollectionEquality()
-                .equals(other.materialInfo, materialInfo) &&
-            const DeepCollectionEquality()
-                .equals(other.salesOrgConfig, salesOrgConfig) &&
-            const DeepCollectionEquality().equals(other.quantity, quantity) &&
-            const DeepCollectionEquality()
-                .equals(other.zmgMaterialCountOnCart, zmgMaterialCountOnCart));
+            (identical(other.price, price) || other.price == price) &&
+            (identical(other.materialInfo, materialInfo) ||
+                other.materialInfo == materialInfo) &&
+            (identical(other.salesOrgConfig, salesOrgConfig) ||
+                other.salesOrgConfig == salesOrgConfig) &&
+            (identical(other.quantity, quantity) ||
+                other.quantity == quantity) &&
+            (identical(other.zmgMaterialCountOnCart, zmgMaterialCountOnCart) ||
+                other.zmgMaterialCountOnCart == zmgMaterialCountOnCart));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(price),
-      const DeepCollectionEquality().hash(materialInfo),
-      const DeepCollectionEquality().hash(salesOrgConfig),
-      const DeepCollectionEquality().hash(quantity),
-      const DeepCollectionEquality().hash(zmgMaterialCountOnCart));
+  int get hashCode => Object.hash(runtimeType, price, materialInfo,
+      salesOrgConfig, quantity, zmgMaterialCountOnCart);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PriceAggregateCopyWith<_$_PriceAggregate> get copyWith =>
       __$$_PriceAggregateCopyWithImpl<_$_PriceAggregate>(this, _$identity);
 }

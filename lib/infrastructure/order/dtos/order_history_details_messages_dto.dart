@@ -6,8 +6,8 @@ part 'order_history_details_messages_dto.g.dart';
 class OrderHistoryDetailsMessagesDto with _$OrderHistoryDetailsMessagesDto {
   const OrderHistoryDetailsMessagesDto._();
   const factory OrderHistoryDetailsMessagesDto({
-    @JsonKey(name: 'Type') required String type,
-    @JsonKey(name: 'Message') required String message,
+    @JsonKey(name: 'Type',defaultValue: '') required String type,
+    @JsonKey(name: 'Message',defaultValue: '') required String message,
   }) = _OrderHistoryDetailsMessagesDto;
   factory OrderHistoryDetailsMessagesDto.fromDomain(OrderHistoryDetailsMessages orderHistoryDetailsMessages) {
     return OrderHistoryDetailsMessagesDto(

@@ -29,11 +29,11 @@ mixin _$MaterialBundleListEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(User user, CustomerCodeInfo customerCode,
+    TResult? Function()? initialized,
+    TResult? Function(User user, CustomerCodeInfo customerCode,
             ShipToInfo shipToCode, SalesOrganisation salesOrganisation)?
         fetch,
-    TResult Function(User user, CustomerCodeInfo customerCode,
+    TResult? Function(User user, CustomerCodeInfo customerCode,
             ShipToInfo shipToCode, SalesOrganisation salesOrganisation)?
         loadMore,
   }) =>
@@ -59,9 +59,9 @@ mixin _$MaterialBundleListEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_LoadMore value)? loadMore,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -78,17 +78,19 @@ mixin _$MaterialBundleListEvent {
 abstract class $MaterialBundleListEventCopyWith<$Res> {
   factory $MaterialBundleListEventCopyWith(MaterialBundleListEvent value,
           $Res Function(MaterialBundleListEvent) then) =
-      _$MaterialBundleListEventCopyWithImpl<$Res>;
+      _$MaterialBundleListEventCopyWithImpl<$Res, MaterialBundleListEvent>;
 }
 
 /// @nodoc
-class _$MaterialBundleListEventCopyWithImpl<$Res>
+class _$MaterialBundleListEventCopyWithImpl<$Res,
+        $Val extends MaterialBundleListEvent>
     implements $MaterialBundleListEventCopyWith<$Res> {
   _$MaterialBundleListEventCopyWithImpl(this._value, this._then);
 
-  final MaterialBundleListEvent _value;
   // ignore: unused_field
-  final $Res Function(MaterialBundleListEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -100,14 +102,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitializedCopyWithImpl<$Res>
-    extends _$MaterialBundleListEventCopyWithImpl<$Res>
+    extends _$MaterialBundleListEventCopyWithImpl<$Res, _$_Initialized>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, (v) => _then(v as _$_Initialized));
-
-  @override
-  _$_Initialized get _value => super._value as _$_Initialized;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -146,11 +145,11 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(User user, CustomerCodeInfo customerCode,
+    TResult? Function()? initialized,
+    TResult? Function(User user, CustomerCodeInfo customerCode,
             ShipToInfo shipToCode, SalesOrganisation salesOrganisation)?
         fetch,
-    TResult Function(User user, CustomerCodeInfo customerCode,
+    TResult? Function(User user, CustomerCodeInfo customerCode,
             ShipToInfo shipToCode, SalesOrganisation salesOrganisation)?
         loadMore,
   }) {
@@ -188,9 +187,9 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_LoadMore value)? loadMore,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
   }) {
     return initialized?.call(this);
   }
@@ -218,6 +217,7 @@ abstract class _Initialized implements MaterialBundleListEvent {
 abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
+  @useResult
   $Res call(
       {User user,
       CustomerCodeInfo customerCode,
@@ -232,35 +232,33 @@ abstract class _$$_FetchCopyWith<$Res> {
 
 /// @nodoc
 class __$$_FetchCopyWithImpl<$Res>
-    extends _$MaterialBundleListEventCopyWithImpl<$Res>
+    extends _$MaterialBundleListEventCopyWithImpl<$Res, _$_Fetch>
     implements _$$_FetchCopyWith<$Res> {
   __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
-      : super(_value, (v) => _then(v as _$_Fetch));
+      : super(_value, _then);
 
-  @override
-  _$_Fetch get _value => super._value as _$_Fetch;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
-    Object? customerCode = freezed,
-    Object? shipToCode = freezed,
-    Object? salesOrganisation = freezed,
+    Object? user = null,
+    Object? customerCode = null,
+    Object? shipToCode = null,
+    Object? salesOrganisation = null,
   }) {
     return _then(_$_Fetch(
-      user: user == freezed
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      customerCode: customerCode == freezed
+      customerCode: null == customerCode
           ? _value.customerCode
           : customerCode // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
-      shipToCode: shipToCode == freezed
+      shipToCode: null == shipToCode
           ? _value.shipToCode
           : shipToCode // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
-      salesOrganisation: salesOrganisation == freezed
+      salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
@@ -268,6 +266,7 @@ class __$$_FetchCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value));
@@ -275,6 +274,7 @@ class __$$_FetchCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $CustomerCodeInfoCopyWith<$Res> get customerCode {
     return $CustomerCodeInfoCopyWith<$Res>(_value.customerCode, (value) {
       return _then(_value.copyWith(customerCode: value));
@@ -282,6 +282,7 @@ class __$$_FetchCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $ShipToInfoCopyWith<$Res> get shipToCode {
     return $ShipToInfoCopyWith<$Res>(_value.shipToCode, (value) {
       return _then(_value.copyWith(shipToCode: value));
@@ -289,6 +290,7 @@ class __$$_FetchCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SalesOrganisationCopyWith<$Res> get salesOrganisation {
     return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
       return _then(_value.copyWith(salesOrganisation: value));
@@ -324,25 +326,22 @@ class _$_Fetch implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
-            const DeepCollectionEquality().equals(other.user, user) &&
-            const DeepCollectionEquality()
-                .equals(other.customerCode, customerCode) &&
-            const DeepCollectionEquality()
-                .equals(other.shipToCode, shipToCode) &&
-            const DeepCollectionEquality()
-                .equals(other.salesOrganisation, salesOrganisation));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.customerCode, customerCode) ||
+                other.customerCode == customerCode) &&
+            (identical(other.shipToCode, shipToCode) ||
+                other.shipToCode == shipToCode) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(user),
-      const DeepCollectionEquality().hash(customerCode),
-      const DeepCollectionEquality().hash(shipToCode),
-      const DeepCollectionEquality().hash(salesOrganisation));
+      runtimeType, user, customerCode, shipToCode, salesOrganisation);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
 
@@ -363,11 +362,11 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(User user, CustomerCodeInfo customerCode,
+    TResult? Function()? initialized,
+    TResult? Function(User user, CustomerCodeInfo customerCode,
             ShipToInfo shipToCode, SalesOrganisation salesOrganisation)?
         fetch,
-    TResult Function(User user, CustomerCodeInfo customerCode,
+    TResult? Function(User user, CustomerCodeInfo customerCode,
             ShipToInfo shipToCode, SalesOrganisation salesOrganisation)?
         loadMore,
   }) {
@@ -405,9 +404,9 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_LoadMore value)? loadMore,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
   }) {
     return fetch?.call(this);
   }
@@ -448,6 +447,7 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
   factory _$$_LoadMoreCopyWith(
           _$_LoadMore value, $Res Function(_$_LoadMore) then) =
       __$$_LoadMoreCopyWithImpl<$Res>;
+  @useResult
   $Res call(
       {User user,
       CustomerCodeInfo customerCode,
@@ -462,36 +462,34 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
 
 /// @nodoc
 class __$$_LoadMoreCopyWithImpl<$Res>
-    extends _$MaterialBundleListEventCopyWithImpl<$Res>
+    extends _$MaterialBundleListEventCopyWithImpl<$Res, _$_LoadMore>
     implements _$$_LoadMoreCopyWith<$Res> {
   __$$_LoadMoreCopyWithImpl(
       _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
-      : super(_value, (v) => _then(v as _$_LoadMore));
+      : super(_value, _then);
 
-  @override
-  _$_LoadMore get _value => super._value as _$_LoadMore;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
-    Object? customerCode = freezed,
-    Object? shipToCode = freezed,
-    Object? salesOrganisation = freezed,
+    Object? user = null,
+    Object? customerCode = null,
+    Object? shipToCode = null,
+    Object? salesOrganisation = null,
   }) {
     return _then(_$_LoadMore(
-      user: user == freezed
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      customerCode: customerCode == freezed
+      customerCode: null == customerCode
           ? _value.customerCode
           : customerCode // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
-      shipToCode: shipToCode == freezed
+      shipToCode: null == shipToCode
           ? _value.shipToCode
           : shipToCode // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
-      salesOrganisation: salesOrganisation == freezed
+      salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
@@ -499,6 +497,7 @@ class __$$_LoadMoreCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value));
@@ -506,6 +505,7 @@ class __$$_LoadMoreCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $CustomerCodeInfoCopyWith<$Res> get customerCode {
     return $CustomerCodeInfoCopyWith<$Res>(_value.customerCode, (value) {
       return _then(_value.copyWith(customerCode: value));
@@ -513,6 +513,7 @@ class __$$_LoadMoreCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $ShipToInfoCopyWith<$Res> get shipToCode {
     return $ShipToInfoCopyWith<$Res>(_value.shipToCode, (value) {
       return _then(_value.copyWith(shipToCode: value));
@@ -520,6 +521,7 @@ class __$$_LoadMoreCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SalesOrganisationCopyWith<$Res> get salesOrganisation {
     return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
       return _then(_value.copyWith(salesOrganisation: value));
@@ -555,25 +557,22 @@ class _$_LoadMore implements _LoadMore {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoadMore &&
-            const DeepCollectionEquality().equals(other.user, user) &&
-            const DeepCollectionEquality()
-                .equals(other.customerCode, customerCode) &&
-            const DeepCollectionEquality()
-                .equals(other.shipToCode, shipToCode) &&
-            const DeepCollectionEquality()
-                .equals(other.salesOrganisation, salesOrganisation));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.customerCode, customerCode) ||
+                other.customerCode == customerCode) &&
+            (identical(other.shipToCode, shipToCode) ||
+                other.shipToCode == shipToCode) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(user),
-      const DeepCollectionEquality().hash(customerCode),
-      const DeepCollectionEquality().hash(shipToCode),
-      const DeepCollectionEquality().hash(salesOrganisation));
+      runtimeType, user, customerCode, shipToCode, salesOrganisation);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
       __$$_LoadMoreCopyWithImpl<_$_LoadMore>(this, _$identity);
 
@@ -594,11 +593,11 @@ class _$_LoadMore implements _LoadMore {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(User user, CustomerCodeInfo customerCode,
+    TResult? Function()? initialized,
+    TResult? Function(User user, CustomerCodeInfo customerCode,
             ShipToInfo shipToCode, SalesOrganisation salesOrganisation)?
         fetch,
-    TResult Function(User user, CustomerCodeInfo customerCode,
+    TResult? Function(User user, CustomerCodeInfo customerCode,
             ShipToInfo shipToCode, SalesOrganisation salesOrganisation)?
         loadMore,
   }) {
@@ -636,9 +635,9 @@ class _$_LoadMore implements _LoadMore {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_LoadMore value)? loadMore,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
   }) {
     return loadMore?.call(this);
   }
@@ -693,7 +692,8 @@ mixin _$MaterialBundleListState {
 abstract class $MaterialBundleListStateCopyWith<$Res> {
   factory $MaterialBundleListStateCopyWith(MaterialBundleListState value,
           $Res Function(MaterialBundleListState) then) =
-      _$MaterialBundleListStateCopyWithImpl<$Res>;
+      _$MaterialBundleListStateCopyWithImpl<$Res, MaterialBundleListState>;
+  @useResult
   $Res call(
       {List<Bundle> bundleList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
@@ -704,49 +704,52 @@ abstract class $MaterialBundleListStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MaterialBundleListStateCopyWithImpl<$Res>
+class _$MaterialBundleListStateCopyWithImpl<$Res,
+        $Val extends MaterialBundleListState>
     implements $MaterialBundleListStateCopyWith<$Res> {
   _$MaterialBundleListStateCopyWithImpl(this._value, this._then);
 
-  final MaterialBundleListState _value;
   // ignore: unused_field
-  final $Res Function(MaterialBundleListState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bundleList = freezed,
-    Object? apiFailureOrSuccessOption = freezed,
-    Object? canLoadMore = freezed,
-    Object? isFetching = freezed,
-    Object? nextPageIndex = freezed,
-    Object? searchKey = freezed,
+    Object? bundleList = null,
+    Object? apiFailureOrSuccessOption = null,
+    Object? canLoadMore = null,
+    Object? isFetching = null,
+    Object? nextPageIndex = null,
+    Object? searchKey = null,
   }) {
     return _then(_value.copyWith(
-      bundleList: bundleList == freezed
+      bundleList: null == bundleList
           ? _value.bundleList
           : bundleList // ignore: cast_nullable_to_non_nullable
               as List<Bundle>,
-      apiFailureOrSuccessOption: apiFailureOrSuccessOption == freezed
+      apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      canLoadMore: canLoadMore == freezed
+      canLoadMore: null == canLoadMore
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
-      isFetching: isFetching == freezed
+      isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
-      nextPageIndex: nextPageIndex == freezed
+      nextPageIndex: null == nextPageIndex
           ? _value.nextPageIndex
           : nextPageIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      searchKey: searchKey == freezed
+      searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -757,6 +760,7 @@ abstract class _$$_MaterialBundleListStateCopyWith<$Res>
           $Res Function(_$_MaterialBundleListState) then) =
       __$$_MaterialBundleListStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {List<Bundle> bundleList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
@@ -768,47 +772,45 @@ abstract class _$$_MaterialBundleListStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_MaterialBundleListStateCopyWithImpl<$Res>
-    extends _$MaterialBundleListStateCopyWithImpl<$Res>
+    extends _$MaterialBundleListStateCopyWithImpl<$Res,
+        _$_MaterialBundleListState>
     implements _$$_MaterialBundleListStateCopyWith<$Res> {
   __$$_MaterialBundleListStateCopyWithImpl(_$_MaterialBundleListState _value,
       $Res Function(_$_MaterialBundleListState) _then)
-      : super(_value, (v) => _then(v as _$_MaterialBundleListState));
+      : super(_value, _then);
 
-  @override
-  _$_MaterialBundleListState get _value =>
-      super._value as _$_MaterialBundleListState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bundleList = freezed,
-    Object? apiFailureOrSuccessOption = freezed,
-    Object? canLoadMore = freezed,
-    Object? isFetching = freezed,
-    Object? nextPageIndex = freezed,
-    Object? searchKey = freezed,
+    Object? bundleList = null,
+    Object? apiFailureOrSuccessOption = null,
+    Object? canLoadMore = null,
+    Object? isFetching = null,
+    Object? nextPageIndex = null,
+    Object? searchKey = null,
   }) {
     return _then(_$_MaterialBundleListState(
-      bundleList: bundleList == freezed
+      bundleList: null == bundleList
           ? _value._bundleList
           : bundleList // ignore: cast_nullable_to_non_nullable
               as List<Bundle>,
-      apiFailureOrSuccessOption: apiFailureOrSuccessOption == freezed
+      apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      canLoadMore: canLoadMore == freezed
+      canLoadMore: null == canLoadMore
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
-      isFetching: isFetching == freezed
+      isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
-      nextPageIndex: nextPageIndex == freezed
+      nextPageIndex: null == nextPageIndex
           ? _value.nextPageIndex
           : nextPageIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      searchKey: searchKey == freezed
+      searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as String,
@@ -859,29 +861,32 @@ class _$_MaterialBundleListState extends _MaterialBundleListState {
             other is _$_MaterialBundleListState &&
             const DeepCollectionEquality()
                 .equals(other._bundleList, _bundleList) &&
-            const DeepCollectionEquality().equals(
-                other.apiFailureOrSuccessOption, apiFailureOrSuccessOption) &&
-            const DeepCollectionEquality()
-                .equals(other.canLoadMore, canLoadMore) &&
-            const DeepCollectionEquality()
-                .equals(other.isFetching, isFetching) &&
-            const DeepCollectionEquality()
-                .equals(other.nextPageIndex, nextPageIndex) &&
-            const DeepCollectionEquality().equals(other.searchKey, searchKey));
+            (identical(other.apiFailureOrSuccessOption,
+                    apiFailureOrSuccessOption) ||
+                other.apiFailureOrSuccessOption == apiFailureOrSuccessOption) &&
+            (identical(other.canLoadMore, canLoadMore) ||
+                other.canLoadMore == canLoadMore) &&
+            (identical(other.isFetching, isFetching) ||
+                other.isFetching == isFetching) &&
+            (identical(other.nextPageIndex, nextPageIndex) ||
+                other.nextPageIndex == nextPageIndex) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_bundleList),
-      const DeepCollectionEquality().hash(apiFailureOrSuccessOption),
-      const DeepCollectionEquality().hash(canLoadMore),
-      const DeepCollectionEquality().hash(isFetching),
-      const DeepCollectionEquality().hash(nextPageIndex),
-      const DeepCollectionEquality().hash(searchKey));
+      apiFailureOrSuccessOption,
+      canLoadMore,
+      isFetching,
+      nextPageIndex,
+      searchKey);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MaterialBundleListStateCopyWith<_$_MaterialBundleListState>
       get copyWith =>
           __$$_MaterialBundleListStateCopyWithImpl<_$_MaterialBundleListState>(

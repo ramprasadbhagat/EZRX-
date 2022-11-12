@@ -41,7 +41,8 @@ mixin _$ShipToInfo {
 abstract class $ShipToInfoCopyWith<$Res> {
   factory $ShipToInfoCopyWith(
           ShipToInfo value, $Res Function(ShipToInfo) then) =
-      _$ShipToInfoCopyWithImpl<$Res>;
+      _$ShipToInfoCopyWithImpl<$Res, ShipToInfo>;
+  @useResult
   $Res call(
       {bool defaultShipToAddress,
       String shipToCustomerCode,
@@ -64,106 +65,111 @@ abstract class $ShipToInfoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ShipToInfoCopyWithImpl<$Res> implements $ShipToInfoCopyWith<$Res> {
+class _$ShipToInfoCopyWithImpl<$Res, $Val extends ShipToInfo>
+    implements $ShipToInfoCopyWith<$Res> {
   _$ShipToInfoCopyWithImpl(this._value, this._then);
 
-  final ShipToInfo _value;
   // ignore: unused_field
-  final $Res Function(ShipToInfo) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? defaultShipToAddress = freezed,
-    Object? shipToCustomerCode = freezed,
-    Object? shipToName = freezed,
-    Object? shipToAddress = freezed,
-    Object? status = freezed,
-    Object? building = freezed,
-    Object? city1 = freezed,
-    Object? city2 = freezed,
-    Object? postalCode = freezed,
-    Object? houseNumber1 = freezed,
-    Object? telephoneNumber = freezed,
-    Object? region = freezed,
-    Object? floor = freezed,
-    Object? plant = freezed,
-    Object? licenses = freezed,
+    Object? defaultShipToAddress = null,
+    Object? shipToCustomerCode = null,
+    Object? shipToName = null,
+    Object? shipToAddress = null,
+    Object? status = null,
+    Object? building = null,
+    Object? city1 = null,
+    Object? city2 = null,
+    Object? postalCode = null,
+    Object? houseNumber1 = null,
+    Object? telephoneNumber = null,
+    Object? region = null,
+    Object? floor = null,
+    Object? plant = null,
+    Object? licenses = null,
   }) {
     return _then(_value.copyWith(
-      defaultShipToAddress: defaultShipToAddress == freezed
+      defaultShipToAddress: null == defaultShipToAddress
           ? _value.defaultShipToAddress
           : defaultShipToAddress // ignore: cast_nullable_to_non_nullable
               as bool,
-      shipToCustomerCode: shipToCustomerCode == freezed
+      shipToCustomerCode: null == shipToCustomerCode
           ? _value.shipToCustomerCode
           : shipToCustomerCode // ignore: cast_nullable_to_non_nullable
               as String,
-      shipToName: shipToName == freezed
+      shipToName: null == shipToName
           ? _value.shipToName
           : shipToName // ignore: cast_nullable_to_non_nullable
               as ShipToName,
-      shipToAddress: shipToAddress == freezed
+      shipToAddress: null == shipToAddress
           ? _value.shipToAddress
           : shipToAddress // ignore: cast_nullable_to_non_nullable
               as ShipToAddress,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      building: building == freezed
+      building: null == building
           ? _value.building
           : building // ignore: cast_nullable_to_non_nullable
               as String,
-      city1: city1 == freezed
+      city1: null == city1
           ? _value.city1
           : city1 // ignore: cast_nullable_to_non_nullable
               as String,
-      city2: city2 == freezed
+      city2: null == city2
           ? _value.city2
           : city2 // ignore: cast_nullable_to_non_nullable
               as String,
-      postalCode: postalCode == freezed
+      postalCode: null == postalCode
           ? _value.postalCode
           : postalCode // ignore: cast_nullable_to_non_nullable
               as String,
-      houseNumber1: houseNumber1 == freezed
+      houseNumber1: null == houseNumber1
           ? _value.houseNumber1
           : houseNumber1 // ignore: cast_nullable_to_non_nullable
               as String,
-      telephoneNumber: telephoneNumber == freezed
+      telephoneNumber: null == telephoneNumber
           ? _value.telephoneNumber
           : telephoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      region: region == freezed
+      region: null == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
               as String,
-      floor: floor == freezed
+      floor: null == floor
           ? _value.floor
           : floor // ignore: cast_nullable_to_non_nullable
               as String,
-      plant: plant == freezed
+      plant: null == plant
           ? _value.plant
           : plant // ignore: cast_nullable_to_non_nullable
               as String,
-      licenses: licenses == freezed
+      licenses: null == licenses
           ? _value.licenses
           : licenses // ignore: cast_nullable_to_non_nullable
               as List<LicenseInfo>,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $ShipToNameCopyWith<$Res> get shipToName {
     return $ShipToNameCopyWith<$Res>(_value.shipToName, (value) {
-      return _then(_value.copyWith(shipToName: value));
+      return _then(_value.copyWith(shipToName: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $ShipToAddressCopyWith<$Res> get shipToAddress {
     return $ShipToAddressCopyWith<$Res>(_value.shipToAddress, (value) {
-      return _then(_value.copyWith(shipToAddress: value));
+      return _then(_value.copyWith(shipToAddress: value) as $Val);
     });
   }
 }
@@ -175,6 +181,7 @@ abstract class _$$_ShipToInfoCopyWith<$Res>
           _$_ShipToInfo value, $Res Function(_$_ShipToInfo) then) =
       __$$_ShipToInfoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {bool defaultShipToAddress,
       String shipToCustomerCode,
@@ -199,91 +206,90 @@ abstract class _$$_ShipToInfoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ShipToInfoCopyWithImpl<$Res> extends _$ShipToInfoCopyWithImpl<$Res>
+class __$$_ShipToInfoCopyWithImpl<$Res>
+    extends _$ShipToInfoCopyWithImpl<$Res, _$_ShipToInfo>
     implements _$$_ShipToInfoCopyWith<$Res> {
   __$$_ShipToInfoCopyWithImpl(
       _$_ShipToInfo _value, $Res Function(_$_ShipToInfo) _then)
-      : super(_value, (v) => _then(v as _$_ShipToInfo));
+      : super(_value, _then);
 
-  @override
-  _$_ShipToInfo get _value => super._value as _$_ShipToInfo;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? defaultShipToAddress = freezed,
-    Object? shipToCustomerCode = freezed,
-    Object? shipToName = freezed,
-    Object? shipToAddress = freezed,
-    Object? status = freezed,
-    Object? building = freezed,
-    Object? city1 = freezed,
-    Object? city2 = freezed,
-    Object? postalCode = freezed,
-    Object? houseNumber1 = freezed,
-    Object? telephoneNumber = freezed,
-    Object? region = freezed,
-    Object? floor = freezed,
-    Object? plant = freezed,
-    Object? licenses = freezed,
+    Object? defaultShipToAddress = null,
+    Object? shipToCustomerCode = null,
+    Object? shipToName = null,
+    Object? shipToAddress = null,
+    Object? status = null,
+    Object? building = null,
+    Object? city1 = null,
+    Object? city2 = null,
+    Object? postalCode = null,
+    Object? houseNumber1 = null,
+    Object? telephoneNumber = null,
+    Object? region = null,
+    Object? floor = null,
+    Object? plant = null,
+    Object? licenses = null,
   }) {
     return _then(_$_ShipToInfo(
-      defaultShipToAddress: defaultShipToAddress == freezed
+      defaultShipToAddress: null == defaultShipToAddress
           ? _value.defaultShipToAddress
           : defaultShipToAddress // ignore: cast_nullable_to_non_nullable
               as bool,
-      shipToCustomerCode: shipToCustomerCode == freezed
+      shipToCustomerCode: null == shipToCustomerCode
           ? _value.shipToCustomerCode
           : shipToCustomerCode // ignore: cast_nullable_to_non_nullable
               as String,
-      shipToName: shipToName == freezed
+      shipToName: null == shipToName
           ? _value.shipToName
           : shipToName // ignore: cast_nullable_to_non_nullable
               as ShipToName,
-      shipToAddress: shipToAddress == freezed
+      shipToAddress: null == shipToAddress
           ? _value.shipToAddress
           : shipToAddress // ignore: cast_nullable_to_non_nullable
               as ShipToAddress,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      building: building == freezed
+      building: null == building
           ? _value.building
           : building // ignore: cast_nullable_to_non_nullable
               as String,
-      city1: city1 == freezed
+      city1: null == city1
           ? _value.city1
           : city1 // ignore: cast_nullable_to_non_nullable
               as String,
-      city2: city2 == freezed
+      city2: null == city2
           ? _value.city2
           : city2 // ignore: cast_nullable_to_non_nullable
               as String,
-      postalCode: postalCode == freezed
+      postalCode: null == postalCode
           ? _value.postalCode
           : postalCode // ignore: cast_nullable_to_non_nullable
               as String,
-      houseNumber1: houseNumber1 == freezed
+      houseNumber1: null == houseNumber1
           ? _value.houseNumber1
           : houseNumber1 // ignore: cast_nullable_to_non_nullable
               as String,
-      telephoneNumber: telephoneNumber == freezed
+      telephoneNumber: null == telephoneNumber
           ? _value.telephoneNumber
           : telephoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      region: region == freezed
+      region: null == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
               as String,
-      floor: floor == freezed
+      floor: null == floor
           ? _value.floor
           : floor // ignore: cast_nullable_to_non_nullable
               as String,
-      plant: plant == freezed
+      plant: null == plant
           ? _value.plant
           : plant // ignore: cast_nullable_to_non_nullable
               as String,
-      licenses: licenses == freezed
+      licenses: null == licenses
           ? _value._licenses
           : licenses // ignore: cast_nullable_to_non_nullable
               as List<LicenseInfo>,
@@ -358,51 +364,53 @@ class _$_ShipToInfo extends _ShipToInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ShipToInfo &&
-            const DeepCollectionEquality()
-                .equals(other.defaultShipToAddress, defaultShipToAddress) &&
-            const DeepCollectionEquality()
-                .equals(other.shipToCustomerCode, shipToCustomerCode) &&
-            const DeepCollectionEquality()
-                .equals(other.shipToName, shipToName) &&
-            const DeepCollectionEquality()
-                .equals(other.shipToAddress, shipToAddress) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality().equals(other.building, building) &&
-            const DeepCollectionEquality().equals(other.city1, city1) &&
-            const DeepCollectionEquality().equals(other.city2, city2) &&
-            const DeepCollectionEquality()
-                .equals(other.postalCode, postalCode) &&
-            const DeepCollectionEquality()
-                .equals(other.houseNumber1, houseNumber1) &&
-            const DeepCollectionEquality()
-                .equals(other.telephoneNumber, telephoneNumber) &&
-            const DeepCollectionEquality().equals(other.region, region) &&
-            const DeepCollectionEquality().equals(other.floor, floor) &&
-            const DeepCollectionEquality().equals(other.plant, plant) &&
+            (identical(other.defaultShipToAddress, defaultShipToAddress) ||
+                other.defaultShipToAddress == defaultShipToAddress) &&
+            (identical(other.shipToCustomerCode, shipToCustomerCode) ||
+                other.shipToCustomerCode == shipToCustomerCode) &&
+            (identical(other.shipToName, shipToName) ||
+                other.shipToName == shipToName) &&
+            (identical(other.shipToAddress, shipToAddress) ||
+                other.shipToAddress == shipToAddress) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.building, building) ||
+                other.building == building) &&
+            (identical(other.city1, city1) || other.city1 == city1) &&
+            (identical(other.city2, city2) || other.city2 == city2) &&
+            (identical(other.postalCode, postalCode) ||
+                other.postalCode == postalCode) &&
+            (identical(other.houseNumber1, houseNumber1) ||
+                other.houseNumber1 == houseNumber1) &&
+            (identical(other.telephoneNumber, telephoneNumber) ||
+                other.telephoneNumber == telephoneNumber) &&
+            (identical(other.region, region) || other.region == region) &&
+            (identical(other.floor, floor) || other.floor == floor) &&
+            (identical(other.plant, plant) || other.plant == plant) &&
             const DeepCollectionEquality().equals(other._licenses, _licenses));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(defaultShipToAddress),
-      const DeepCollectionEquality().hash(shipToCustomerCode),
-      const DeepCollectionEquality().hash(shipToName),
-      const DeepCollectionEquality().hash(shipToAddress),
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(building),
-      const DeepCollectionEquality().hash(city1),
-      const DeepCollectionEquality().hash(city2),
-      const DeepCollectionEquality().hash(postalCode),
-      const DeepCollectionEquality().hash(houseNumber1),
-      const DeepCollectionEquality().hash(telephoneNumber),
-      const DeepCollectionEquality().hash(region),
-      const DeepCollectionEquality().hash(floor),
-      const DeepCollectionEquality().hash(plant),
+      defaultShipToAddress,
+      shipToCustomerCode,
+      shipToName,
+      shipToAddress,
+      status,
+      building,
+      city1,
+      city2,
+      postalCode,
+      houseNumber1,
+      telephoneNumber,
+      region,
+      floor,
+      plant,
       const DeepCollectionEquality().hash(_licenses));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ShipToInfoCopyWith<_$_ShipToInfo> get copyWith =>
       __$$_ShipToInfoCopyWithImpl<_$_ShipToInfo>(this, _$identity);
 }

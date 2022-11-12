@@ -11,27 +11,31 @@ _$_OrderHistoryDetailsDto _$$_OrderHistoryDetailsDtoFromJson(
     _$_OrderHistoryDetailsDto(
       orderHistoryDetailsOrderHeader:
           OrderHistoryDetailsOrderHeadersDto.fromJson(
-              json['OrderHeader'] as Map<String, dynamic>),
+              orderHeaderOverride(json, 'OrderHeader') as Map<String, dynamic>),
       orderHistoryDetailsShippingInformation:
           OrderHistoryDetailsShippingInformationDto.fromJson(
-              json['ShippingInformation'] as Map<String, dynamic>),
-      orderHistoryDetailsOrderItem: (json['OrderItems'] as List<dynamic>)
-          .map((e) => OrderHistoryDetailsOrderItemDto.fromJson(
-              e as Map<String, dynamic>))
-          .toList(),
+              shippingInformationOverride(json, 'ShippingInformation')
+                  as Map<String, dynamic>),
+      orderHistoryDetailsOrderItem: (json['OrderItems'] as List<dynamic>?)
+              ?.map((e) => OrderHistoryDetailsOrderItemDto.fromJson(
+                  e as Map<String, dynamic>))
+              .toList() ??
+          [],
       orderHistoryDetailsPaymentTerm:
           OrderHistoryDetailsPaymentTermDto.fromJson(
-              json['PaymentTerm'] as Map<String, dynamic>),
+              paymentTermOverride(json, 'PaymentTerm') as Map<String, dynamic>),
       orderHistoryDetailsSpecialInstructions:
-          json['SpecialInstructions'] as String,
-      orderHistoryDetailsPoDocuments: (json['PODocuments'] as List<dynamic>)
-          .map((e) => OrderHistoryDetailsPODocumentsDto.fromJson(
-              e as Map<String, dynamic>))
-          .toList(),
-      orderHistoryDetailsMessages: (json['Messages'] as List<dynamic>)
-          .map((e) => OrderHistoryDetailsMessagesDto.fromJson(
-              e as Map<String, dynamic>))
-          .toList(),
+          json['SpecialInstructions'] as String? ?? '',
+      orderHistoryDetailsPoDocuments: (json['PODocuments'] as List<dynamic>?)
+              ?.map((e) => OrderHistoryDetailsPODocumentsDto.fromJson(
+                  e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      orderHistoryDetailsMessages: (json['Messages'] as List<dynamic>?)
+              ?.map((e) => OrderHistoryDetailsMessagesDto.fromJson(
+                  e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$$_OrderHistoryDetailsDtoToJson(

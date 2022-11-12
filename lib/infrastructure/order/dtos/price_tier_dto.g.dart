@@ -8,7 +8,7 @@ part of 'price_tier_dto.dart';
 
 class PriceTierDtoAdapter extends TypeAdapter<_$_PriceTierDto> {
   @override
-  final int typeId = 8;
+  final int typeId = 1118;
 
   @override
   _$_PriceTierDto read(BinaryReader reader) {
@@ -56,11 +56,11 @@ class PriceTierItemDtoAdapter extends TypeAdapter<_$_PriceTierItemDto> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return _$_PriceTierItemDto(
-      type: fields[21] as String,
-      applyBonus: fields[22] as bool,
-      sequence: fields[23] as int,
-      quantity: fields[24] as int,
-      rate: fields[6] as double,
+      type: fields[21] == null ? '' : fields[21] as String,
+      applyBonus: fields[22] == null ? false : fields[22] as bool,
+      sequence: fields[23] == null ? 0 : fields[23] as int,
+      quantity: fields[24] == null ? 0 : fields[24] as int,
+      rate: fields[6] == null ? 0 : fields[6] as double,
     );
   }
 

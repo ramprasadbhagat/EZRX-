@@ -25,28 +25,32 @@ mixin _$Login {
 /// @nodoc
 abstract class $LoginCopyWith<$Res> {
   factory $LoginCopyWith(Login value, $Res Function(Login) then) =
-      _$LoginCopyWithImpl<$Res>;
+      _$LoginCopyWithImpl<$Res, Login>;
+  @useResult
   $Res call({JWT jwt});
 }
 
 /// @nodoc
-class _$LoginCopyWithImpl<$Res> implements $LoginCopyWith<$Res> {
+class _$LoginCopyWithImpl<$Res, $Val extends Login>
+    implements $LoginCopyWith<$Res> {
   _$LoginCopyWithImpl(this._value, this._then);
 
-  final Login _value;
   // ignore: unused_field
-  final $Res Function(Login) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? jwt = freezed,
+    Object? jwt = null,
   }) {
     return _then(_value.copyWith(
-      jwt: jwt == freezed
+      jwt: null == jwt
           ? _value.jwt
           : jwt // ignore: cast_nullable_to_non_nullable
               as JWT,
-    ));
+    ) as $Val);
   }
 }
 
@@ -55,24 +59,23 @@ abstract class _$$_LoginCopyWith<$Res> implements $LoginCopyWith<$Res> {
   factory _$$_LoginCopyWith(_$_Login value, $Res Function(_$_Login) then) =
       __$$_LoginCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({JWT jwt});
 }
 
 /// @nodoc
-class __$$_LoginCopyWithImpl<$Res> extends _$LoginCopyWithImpl<$Res>
+class __$$_LoginCopyWithImpl<$Res> extends _$LoginCopyWithImpl<$Res, _$_Login>
     implements _$$_LoginCopyWith<$Res> {
   __$$_LoginCopyWithImpl(_$_Login _value, $Res Function(_$_Login) _then)
-      : super(_value, (v) => _then(v as _$_Login));
+      : super(_value, _then);
 
-  @override
-  _$_Login get _value => super._value as _$_Login;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? jwt = freezed,
+    Object? jwt = null,
   }) {
     return _then(_$_Login(
-      jwt: jwt == freezed
+      jwt: null == jwt
           ? _value.jwt
           : jwt // ignore: cast_nullable_to_non_nullable
               as JWT,
@@ -98,15 +101,15 @@ class _$_Login extends _Login {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Login &&
-            const DeepCollectionEquality().equals(other.jwt, jwt));
+            (identical(other.jwt, jwt) || other.jwt == jwt));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(jwt));
+  int get hashCode => Object.hash(runtimeType, jwt);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LoginCopyWith<_$_Login> get copyWith =>
       __$$_LoginCopyWithImpl<_$_Login>(this, _$identity);
 }

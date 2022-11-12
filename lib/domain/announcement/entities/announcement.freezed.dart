@@ -32,7 +32,8 @@ mixin _$Announcement {
 abstract class $AnnouncementCopyWith<$Res> {
   factory $AnnouncementCopyWith(
           Announcement value, $Res Function(Announcement) then) =
-      _$AnnouncementCopyWithImpl<$Res>;
+      _$AnnouncementCopyWithImpl<$Res, Announcement>;
+  @useResult
   $Res call(
       {String startTime,
       String endTime,
@@ -43,48 +44,51 @@ abstract class $AnnouncementCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AnnouncementCopyWithImpl<$Res> implements $AnnouncementCopyWith<$Res> {
+class _$AnnouncementCopyWithImpl<$Res, $Val extends Announcement>
+    implements $AnnouncementCopyWith<$Res> {
   _$AnnouncementCopyWithImpl(this._value, this._then);
 
-  final Announcement _value;
   // ignore: unused_field
-  final $Res Function(Announcement) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? startTime = freezed,
-    Object? endTime = freezed,
-    Object? description = freezed,
-    Object? id = freezed,
-    Object? type = freezed,
-    Object? active = freezed,
+    Object? startTime = null,
+    Object? endTime = null,
+    Object? description = null,
+    Object? id = null,
+    Object? type = null,
+    Object? active = null,
   }) {
     return _then(_value.copyWith(
-      startTime: startTime == freezed
+      startTime: null == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as String,
-      endTime: endTime == freezed
+      endTime: null == endTime
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
               as String,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      active: active == freezed
+      active: null == active
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -95,6 +99,7 @@ abstract class _$$_AnnouncementCopyWith<$Res>
           _$_Announcement value, $Res Function(_$_Announcement) then) =
       __$$_AnnouncementCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String startTime,
       String endTime,
@@ -106,46 +111,44 @@ abstract class _$$_AnnouncementCopyWith<$Res>
 
 /// @nodoc
 class __$$_AnnouncementCopyWithImpl<$Res>
-    extends _$AnnouncementCopyWithImpl<$Res>
+    extends _$AnnouncementCopyWithImpl<$Res, _$_Announcement>
     implements _$$_AnnouncementCopyWith<$Res> {
   __$$_AnnouncementCopyWithImpl(
       _$_Announcement _value, $Res Function(_$_Announcement) _then)
-      : super(_value, (v) => _then(v as _$_Announcement));
+      : super(_value, _then);
 
-  @override
-  _$_Announcement get _value => super._value as _$_Announcement;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? startTime = freezed,
-    Object? endTime = freezed,
-    Object? description = freezed,
-    Object? id = freezed,
-    Object? type = freezed,
-    Object? active = freezed,
+    Object? startTime = null,
+    Object? endTime = null,
+    Object? description = null,
+    Object? id = null,
+    Object? type = null,
+    Object? active = null,
   }) {
     return _then(_$_Announcement(
-      startTime: startTime == freezed
+      startTime: null == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as String,
-      endTime: endTime == freezed
+      endTime: null == endTime
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
               as String,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      active: active == freezed
+      active: null == active
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -188,27 +191,23 @@ class _$_Announcement extends _Announcement {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Announcement &&
-            const DeepCollectionEquality().equals(other.startTime, startTime) &&
-            const DeepCollectionEquality().equals(other.endTime, endTime) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.active, active));
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
+            (identical(other.endTime, endTime) || other.endTime == endTime) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.active, active) || other.active == active));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(startTime),
-      const DeepCollectionEquality().hash(endTime),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(active));
+      runtimeType, startTime, endTime, description, id, type, active);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AnnouncementCopyWith<_$_Announcement> get copyWith =>
       __$$_AnnouncementCopyWithImpl<_$_Announcement>(this, _$identity);
 }

@@ -37,7 +37,8 @@ mixin _$SettingTcDto {
 abstract class $SettingTcDtoCopyWith<$Res> {
   factory $SettingTcDtoCopyWith(
           SettingTcDto value, $Res Function(SettingTcDto) then) =
-      _$SettingTcDtoCopyWithImpl<$Res>;
+      _$SettingTcDtoCopyWithImpl<$Res, SettingTcDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'acceptTC')
           bool acceptTC,
@@ -46,28 +47,31 @@ abstract class $SettingTcDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SettingTcDtoCopyWithImpl<$Res> implements $SettingTcDtoCopyWith<$Res> {
+class _$SettingTcDtoCopyWithImpl<$Res, $Val extends SettingTcDto>
+    implements $SettingTcDtoCopyWith<$Res> {
   _$SettingTcDtoCopyWithImpl(this._value, this._then);
 
-  final SettingTcDto _value;
   // ignore: unused_field
-  final $Res Function(SettingTcDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? acceptTC = freezed,
-    Object? acceptTCTimestamp = freezed,
+    Object? acceptTC = null,
+    Object? acceptTCTimestamp = null,
   }) {
     return _then(_value.copyWith(
-      acceptTC: acceptTC == freezed
+      acceptTC: null == acceptTC
           ? _value.acceptTC
           : acceptTC // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptTCTimestamp: acceptTCTimestamp == freezed
+      acceptTCTimestamp: null == acceptTCTimestamp
           ? _value.acceptTCTimestamp
           : acceptTCTimestamp // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -78,6 +82,7 @@ abstract class _$$_SettingTcDtoCopyWith<$Res>
           _$_SettingTcDto value, $Res Function(_$_SettingTcDto) then) =
       __$$_SettingTcDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'acceptTC')
           bool acceptTC,
@@ -87,26 +92,24 @@ abstract class _$$_SettingTcDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_SettingTcDtoCopyWithImpl<$Res>
-    extends _$SettingTcDtoCopyWithImpl<$Res>
+    extends _$SettingTcDtoCopyWithImpl<$Res, _$_SettingTcDto>
     implements _$$_SettingTcDtoCopyWith<$Res> {
   __$$_SettingTcDtoCopyWithImpl(
       _$_SettingTcDto _value, $Res Function(_$_SettingTcDto) _then)
-      : super(_value, (v) => _then(v as _$_SettingTcDto));
+      : super(_value, _then);
 
-  @override
-  _$_SettingTcDto get _value => super._value as _$_SettingTcDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? acceptTC = freezed,
-    Object? acceptTCTimestamp = freezed,
+    Object? acceptTC = null,
+    Object? acceptTCTimestamp = null,
   }) {
     return _then(_$_SettingTcDto(
-      acceptTC: acceptTC == freezed
+      acceptTC: null == acceptTC
           ? _value.acceptTC
           : acceptTC // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptTCTimestamp: acceptTCTimestamp == freezed
+      acceptTCTimestamp: null == acceptTCTimestamp
           ? _value.acceptTCTimestamp
           : acceptTCTimestamp // ignore: cast_nullable_to_non_nullable
               as String,
@@ -147,20 +150,19 @@ class _$_SettingTcDto extends _SettingTcDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SettingTcDto &&
-            const DeepCollectionEquality().equals(other.acceptTC, acceptTC) &&
-            const DeepCollectionEquality()
-                .equals(other.acceptTCTimestamp, acceptTCTimestamp));
+            (identical(other.acceptTC, acceptTC) ||
+                other.acceptTC == acceptTC) &&
+            (identical(other.acceptTCTimestamp, acceptTCTimestamp) ||
+                other.acceptTCTimestamp == acceptTCTimestamp));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(acceptTC),
-      const DeepCollectionEquality().hash(acceptTCTimestamp));
+  int get hashCode => Object.hash(runtimeType, acceptTC, acceptTCTimestamp);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SettingTcDtoCopyWith<_$_SettingTcDto> get copyWith =>
       __$$_SettingTcDtoCopyWithImpl<_$_SettingTcDto>(this, _$identity);
 }

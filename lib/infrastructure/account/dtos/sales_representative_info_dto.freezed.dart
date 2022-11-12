@@ -41,7 +41,9 @@ mixin _$SalesRepresentativeInfoDto {
 abstract class $SalesRepresentativeInfoDtoCopyWith<$Res> {
   factory $SalesRepresentativeInfoDtoCopyWith(SalesRepresentativeInfoDto value,
           $Res Function(SalesRepresentativeInfoDto) then) =
-      _$SalesRepresentativeInfoDtoCopyWithImpl<$Res>;
+      _$SalesRepresentativeInfoDtoCopyWithImpl<$Res,
+          SalesRepresentativeInfoDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'count')
           int count,
@@ -54,39 +56,42 @@ abstract class $SalesRepresentativeInfoDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SalesRepresentativeInfoDtoCopyWithImpl<$Res>
+class _$SalesRepresentativeInfoDtoCopyWithImpl<$Res,
+        $Val extends SalesRepresentativeInfoDto>
     implements $SalesRepresentativeInfoDtoCopyWith<$Res> {
   _$SalesRepresentativeInfoDtoCopyWithImpl(this._value, this._then);
 
-  final SalesRepresentativeInfoDto _value;
   // ignore: unused_field
-  final $Res Function(SalesRepresentativeInfoDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? count = freezed,
-    Object? uniquePrincipalGroups = freezed,
-    Object? uniquePrincipalNumbers = freezed,
-    Object? uniqueSalesOrganisations = freezed,
+    Object? count = null,
+    Object? uniquePrincipalGroups = null,
+    Object? uniquePrincipalNumbers = null,
+    Object? uniqueSalesOrganisations = null,
   }) {
     return _then(_value.copyWith(
-      count: count == freezed
+      count: null == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as int,
-      uniquePrincipalGroups: uniquePrincipalGroups == freezed
+      uniquePrincipalGroups: null == uniquePrincipalGroups
           ? _value.uniquePrincipalGroups
           : uniquePrincipalGroups // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      uniquePrincipalNumbers: uniquePrincipalNumbers == freezed
+      uniquePrincipalNumbers: null == uniquePrincipalNumbers
           ? _value.uniquePrincipalNumbers
           : uniquePrincipalNumbers // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      uniqueSalesOrganisations: uniqueSalesOrganisations == freezed
+      uniqueSalesOrganisations: null == uniqueSalesOrganisations
           ? _value.uniqueSalesOrganisations
           : uniqueSalesOrganisations // ignore: cast_nullable_to_non_nullable
               as List<String>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -98,6 +103,7 @@ abstract class _$$_SalesRepresentativeInfoDtoCopyWith<$Res>
           $Res Function(_$_SalesRepresentativeInfoDto) then) =
       __$$_SalesRepresentativeInfoDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'count')
           int count,
@@ -111,38 +117,36 @@ abstract class _$$_SalesRepresentativeInfoDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_SalesRepresentativeInfoDtoCopyWithImpl<$Res>
-    extends _$SalesRepresentativeInfoDtoCopyWithImpl<$Res>
+    extends _$SalesRepresentativeInfoDtoCopyWithImpl<$Res,
+        _$_SalesRepresentativeInfoDto>
     implements _$$_SalesRepresentativeInfoDtoCopyWith<$Res> {
   __$$_SalesRepresentativeInfoDtoCopyWithImpl(
       _$_SalesRepresentativeInfoDto _value,
       $Res Function(_$_SalesRepresentativeInfoDto) _then)
-      : super(_value, (v) => _then(v as _$_SalesRepresentativeInfoDto));
+      : super(_value, _then);
 
-  @override
-  _$_SalesRepresentativeInfoDto get _value =>
-      super._value as _$_SalesRepresentativeInfoDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? count = freezed,
-    Object? uniquePrincipalGroups = freezed,
-    Object? uniquePrincipalNumbers = freezed,
-    Object? uniqueSalesOrganisations = freezed,
+    Object? count = null,
+    Object? uniquePrincipalGroups = null,
+    Object? uniquePrincipalNumbers = null,
+    Object? uniqueSalesOrganisations = null,
   }) {
     return _then(_$_SalesRepresentativeInfoDto(
-      count: count == freezed
+      count: null == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as int,
-      uniquePrincipalGroups: uniquePrincipalGroups == freezed
+      uniquePrincipalGroups: null == uniquePrincipalGroups
           ? _value._uniquePrincipalGroups
           : uniquePrincipalGroups // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      uniquePrincipalNumbers: uniquePrincipalNumbers == freezed
+      uniquePrincipalNumbers: null == uniquePrincipalNumbers
           ? _value._uniquePrincipalNumbers
           : uniquePrincipalNumbers // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      uniqueSalesOrganisations: uniqueSalesOrganisations == freezed
+      uniqueSalesOrganisations: null == uniqueSalesOrganisations
           ? _value._uniqueSalesOrganisations
           : uniqueSalesOrganisations // ignore: cast_nullable_to_non_nullable
               as List<String>,
@@ -207,7 +211,7 @@ class _$_SalesRepresentativeInfoDto extends _SalesRepresentativeInfoDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SalesRepresentativeInfoDto &&
-            const DeepCollectionEquality().equals(other.count, count) &&
+            (identical(other.count, count) || other.count == count) &&
             const DeepCollectionEquality()
                 .equals(other._uniquePrincipalGroups, _uniquePrincipalGroups) &&
             const DeepCollectionEquality().equals(
@@ -220,13 +224,14 @@ class _$_SalesRepresentativeInfoDto extends _SalesRepresentativeInfoDto {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(count),
+      count,
       const DeepCollectionEquality().hash(_uniquePrincipalGroups),
       const DeepCollectionEquality().hash(_uniquePrincipalNumbers),
       const DeepCollectionEquality().hash(_uniqueSalesOrganisations));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SalesRepresentativeInfoDtoCopyWith<_$_SalesRepresentativeInfoDto>
       get copyWith => __$$_SalesRepresentativeInfoDtoCopyWithImpl<
           _$_SalesRepresentativeInfoDto>(this, _$identity);

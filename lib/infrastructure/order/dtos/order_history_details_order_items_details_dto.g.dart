@@ -10,9 +10,9 @@ _$_OrderHistoryDetailsOrderItemDetailsDto
     _$$_OrderHistoryDetailsOrderItemDetailsDtoFromJson(
             Map<String, dynamic> json) =>
         _$_OrderHistoryDetailsOrderItemDetailsDto(
-          discountCode: json['DiscountCode'] as String,
-          discountDescription: json['DiscountDescription'] as String,
-          rate: json['Rate'] as String,
+          discountCode: json['DiscountCode'] as String? ?? '',
+          discountDescription: json['DiscountDescription'] as String? ?? '',
+          rate: json['Rate'] as String? ?? '',
         );
 
 Map<String, dynamic> _$$_OrderHistoryDetailsOrderItemDetailsDtoToJson(

@@ -37,7 +37,8 @@ mixin _$PriceTierDto {
 abstract class $PriceTierDtoCopyWith<$Res> {
   factory $PriceTierDtoCopyWith(
           PriceTierDto value, $Res Function(PriceTierDto) then) =
-      _$PriceTierDtoCopyWithImpl<$Res>;
+      _$PriceTierDtoCopyWithImpl<$Res, PriceTierDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'Tier', defaultValue: '')
       @HiveField(19, defaultValue: '')
@@ -48,28 +49,31 @@ abstract class $PriceTierDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PriceTierDtoCopyWithImpl<$Res> implements $PriceTierDtoCopyWith<$Res> {
+class _$PriceTierDtoCopyWithImpl<$Res, $Val extends PriceTierDto>
+    implements $PriceTierDtoCopyWith<$Res> {
   _$PriceTierDtoCopyWithImpl(this._value, this._then);
 
-  final PriceTierDto _value;
   // ignore: unused_field
-  final $Res Function(PriceTierDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tier = freezed,
-    Object? items = freezed,
+    Object? tier = null,
+    Object? items = null,
   }) {
     return _then(_value.copyWith(
-      tier: tier == freezed
+      tier: null == tier
           ? _value.tier
           : tier // ignore: cast_nullable_to_non_nullable
               as String,
-      items: items == freezed
+      items: null == items
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
               as List<PriceTierItemDto>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -80,6 +84,7 @@ abstract class _$$_PriceTierDtoCopyWith<$Res>
           _$_PriceTierDto value, $Res Function(_$_PriceTierDto) then) =
       __$$_PriceTierDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'Tier', defaultValue: '')
       @HiveField(19, defaultValue: '')
@@ -91,26 +96,24 @@ abstract class _$$_PriceTierDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_PriceTierDtoCopyWithImpl<$Res>
-    extends _$PriceTierDtoCopyWithImpl<$Res>
+    extends _$PriceTierDtoCopyWithImpl<$Res, _$_PriceTierDto>
     implements _$$_PriceTierDtoCopyWith<$Res> {
   __$$_PriceTierDtoCopyWithImpl(
       _$_PriceTierDto _value, $Res Function(_$_PriceTierDto) _then)
-      : super(_value, (v) => _then(v as _$_PriceTierDto));
+      : super(_value, _then);
 
-  @override
-  _$_PriceTierDto get _value => super._value as _$_PriceTierDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tier = freezed,
-    Object? items = freezed,
+    Object? tier = null,
+    Object? items = null,
   }) {
     return _then(_$_PriceTierDto(
-      tier: tier == freezed
+      tier: null == tier
           ? _value.tier
           : tier // ignore: cast_nullable_to_non_nullable
               as String,
-      items: items == freezed
+      items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
               as List<PriceTierItemDto>,
@@ -158,19 +161,18 @@ class _$_PriceTierDto extends _PriceTierDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PriceTierDto &&
-            const DeepCollectionEquality().equals(other.tier, tier) &&
+            (identical(other.tier, tier) || other.tier == tier) &&
             const DeepCollectionEquality().equals(other._items, _items));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(tier),
-      const DeepCollectionEquality().hash(_items));
+      runtimeType, tier, const DeepCollectionEquality().hash(_items));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PriceTierDtoCopyWith<_$_PriceTierDto> get copyWith =>
       __$$_PriceTierDtoCopyWithImpl<_$_PriceTierDto>(this, _$identity);
 
@@ -219,7 +221,7 @@ mixin _$PriceTierItemDto {
   @HiveField(21, defaultValue: '')
   String get type => throw _privateConstructorUsedError;
   @JsonKey(name: 'ApplyBonus', defaultValue: false)
-  @HiveField(22, defaultValue: 0)
+  @HiveField(22, defaultValue: false)
   bool get applyBonus => throw _privateConstructorUsedError;
   @JsonKey(name: 'Sequence', defaultValue: 0)
   @HiveField(23, defaultValue: 0)
@@ -241,13 +243,14 @@ mixin _$PriceTierItemDto {
 abstract class $PriceTierItemDtoCopyWith<$Res> {
   factory $PriceTierItemDtoCopyWith(
           PriceTierItemDto value, $Res Function(PriceTierItemDto) then) =
-      _$PriceTierItemDtoCopyWithImpl<$Res>;
+      _$PriceTierItemDtoCopyWithImpl<$Res, PriceTierItemDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'Type', defaultValue: '')
       @HiveField(21, defaultValue: '')
           String type,
       @JsonKey(name: 'ApplyBonus', defaultValue: false)
-      @HiveField(22, defaultValue: 0)
+      @HiveField(22, defaultValue: false)
           bool applyBonus,
       @JsonKey(name: 'Sequence', defaultValue: 0)
       @HiveField(23, defaultValue: 0)
@@ -261,44 +264,46 @@ abstract class $PriceTierItemDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PriceTierItemDtoCopyWithImpl<$Res>
+class _$PriceTierItemDtoCopyWithImpl<$Res, $Val extends PriceTierItemDto>
     implements $PriceTierItemDtoCopyWith<$Res> {
   _$PriceTierItemDtoCopyWithImpl(this._value, this._then);
 
-  final PriceTierItemDto _value;
   // ignore: unused_field
-  final $Res Function(PriceTierItemDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? applyBonus = freezed,
-    Object? sequence = freezed,
-    Object? quantity = freezed,
-    Object? rate = freezed,
+    Object? type = null,
+    Object? applyBonus = null,
+    Object? sequence = null,
+    Object? quantity = null,
+    Object? rate = null,
   }) {
     return _then(_value.copyWith(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      applyBonus: applyBonus == freezed
+      applyBonus: null == applyBonus
           ? _value.applyBonus
           : applyBonus // ignore: cast_nullable_to_non_nullable
               as bool,
-      sequence: sequence == freezed
+      sequence: null == sequence
           ? _value.sequence
           : sequence // ignore: cast_nullable_to_non_nullable
               as int,
-      quantity: quantity == freezed
+      quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      rate: rate == freezed
+      rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
-    ));
+    ) as $Val);
   }
 }
 
@@ -309,12 +314,13 @@ abstract class _$$_PriceTierItemDtoCopyWith<$Res>
           _$_PriceTierItemDto value, $Res Function(_$_PriceTierItemDto) then) =
       __$$_PriceTierItemDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'Type', defaultValue: '')
       @HiveField(21, defaultValue: '')
           String type,
       @JsonKey(name: 'ApplyBonus', defaultValue: false)
-      @HiveField(22, defaultValue: 0)
+      @HiveField(22, defaultValue: false)
           bool applyBonus,
       @JsonKey(name: 'Sequence', defaultValue: 0)
       @HiveField(23, defaultValue: 0)
@@ -329,41 +335,39 @@ abstract class _$$_PriceTierItemDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_PriceTierItemDtoCopyWithImpl<$Res>
-    extends _$PriceTierItemDtoCopyWithImpl<$Res>
+    extends _$PriceTierItemDtoCopyWithImpl<$Res, _$_PriceTierItemDto>
     implements _$$_PriceTierItemDtoCopyWith<$Res> {
   __$$_PriceTierItemDtoCopyWithImpl(
       _$_PriceTierItemDto _value, $Res Function(_$_PriceTierItemDto) _then)
-      : super(_value, (v) => _then(v as _$_PriceTierItemDto));
+      : super(_value, _then);
 
-  @override
-  _$_PriceTierItemDto get _value => super._value as _$_PriceTierItemDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? applyBonus = freezed,
-    Object? sequence = freezed,
-    Object? quantity = freezed,
-    Object? rate = freezed,
+    Object? type = null,
+    Object? applyBonus = null,
+    Object? sequence = null,
+    Object? quantity = null,
+    Object? rate = null,
   }) {
     return _then(_$_PriceTierItemDto(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      applyBonus: applyBonus == freezed
+      applyBonus: null == applyBonus
           ? _value.applyBonus
           : applyBonus // ignore: cast_nullable_to_non_nullable
               as bool,
-      sequence: sequence == freezed
+      sequence: null == sequence
           ? _value.sequence
           : sequence // ignore: cast_nullable_to_non_nullable
               as int,
-      quantity: quantity == freezed
+      quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      rate: rate == freezed
+      rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
@@ -380,7 +384,7 @@ class _$_PriceTierItemDto extends _PriceTierItemDto {
       @HiveField(21, defaultValue: '')
           required this.type,
       @JsonKey(name: 'ApplyBonus', defaultValue: false)
-      @HiveField(22, defaultValue: 0)
+      @HiveField(22, defaultValue: false)
           required this.applyBonus,
       @JsonKey(name: 'Sequence', defaultValue: 0)
       @HiveField(23, defaultValue: 0)
@@ -402,7 +406,7 @@ class _$_PriceTierItemDto extends _PriceTierItemDto {
   final String type;
   @override
   @JsonKey(name: 'ApplyBonus', defaultValue: false)
-  @HiveField(22, defaultValue: 0)
+  @HiveField(22, defaultValue: false)
   final bool applyBonus;
   @override
   @JsonKey(name: 'Sequence', defaultValue: 0)
@@ -427,26 +431,24 @@ class _$_PriceTierItemDto extends _PriceTierItemDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PriceTierItemDto &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality()
-                .equals(other.applyBonus, applyBonus) &&
-            const DeepCollectionEquality().equals(other.sequence, sequence) &&
-            const DeepCollectionEquality().equals(other.quantity, quantity) &&
-            const DeepCollectionEquality().equals(other.rate, rate));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.applyBonus, applyBonus) ||
+                other.applyBonus == applyBonus) &&
+            (identical(other.sequence, sequence) ||
+                other.sequence == sequence) &&
+            (identical(other.quantity, quantity) ||
+                other.quantity == quantity) &&
+            (identical(other.rate, rate) || other.rate == rate));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(applyBonus),
-      const DeepCollectionEquality().hash(sequence),
-      const DeepCollectionEquality().hash(quantity),
-      const DeepCollectionEquality().hash(rate));
+  int get hashCode =>
+      Object.hash(runtimeType, type, applyBonus, sequence, quantity, rate);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PriceTierItemDtoCopyWith<_$_PriceTierItemDto> get copyWith =>
       __$$_PriceTierItemDtoCopyWithImpl<_$_PriceTierItemDto>(this, _$identity);
 
@@ -464,7 +466,7 @@ abstract class _PriceTierItemDto extends PriceTierItemDto {
       @HiveField(21, defaultValue: '')
           required final String type,
       @JsonKey(name: 'ApplyBonus', defaultValue: false)
-      @HiveField(22, defaultValue: 0)
+      @HiveField(22, defaultValue: false)
           required final bool applyBonus,
       @JsonKey(name: 'Sequence', defaultValue: 0)
       @HiveField(23, defaultValue: 0)
@@ -486,7 +488,7 @@ abstract class _PriceTierItemDto extends PriceTierItemDto {
   String get type;
   @override
   @JsonKey(name: 'ApplyBonus', defaultValue: false)
-  @HiveField(22, defaultValue: 0)
+  @HiveField(22, defaultValue: false)
   bool get applyBonus;
   @override
   @JsonKey(name: 'Sequence', defaultValue: 0)

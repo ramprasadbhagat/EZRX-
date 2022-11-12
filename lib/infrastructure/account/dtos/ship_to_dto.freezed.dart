@@ -74,7 +74,8 @@ mixin _$ShipToDto {
 /// @nodoc
 abstract class $ShipToDtoCopyWith<$Res> {
   factory $ShipToDtoCopyWith(ShipToDto value, $Res Function(ShipToDto) then) =
-      _$ShipToDtoCopyWithImpl<$Res>;
+      _$ShipToDtoCopyWithImpl<$Res, ShipToDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'shipToCustomerCode')
           String shipToCustomerCode,
@@ -123,128 +124,131 @@ abstract class $ShipToDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ShipToDtoCopyWithImpl<$Res> implements $ShipToDtoCopyWith<$Res> {
+class _$ShipToDtoCopyWithImpl<$Res, $Val extends ShipToDto>
+    implements $ShipToDtoCopyWith<$Res> {
   _$ShipToDtoCopyWithImpl(this._value, this._then);
 
-  final ShipToDto _value;
   // ignore: unused_field
-  final $Res Function(ShipToDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? shipToCustomerCode = freezed,
-    Object? defaultShipToAddress = freezed,
-    Object? name1 = freezed,
-    Object? name2 = freezed,
-    Object? name3 = freezed,
-    Object? name4 = freezed,
-    Object? status = freezed,
-    Object? street = freezed,
-    Object? street2 = freezed,
-    Object? street3 = freezed,
-    Object? street4 = freezed,
-    Object? street5 = freezed,
-    Object? postalCode = freezed,
-    Object? city1 = freezed,
-    Object? city2 = freezed,
-    Object? telephoneNumber = freezed,
-    Object? houseNumber1 = freezed,
-    Object? building = freezed,
-    Object? region = freezed,
-    Object? floor = freezed,
-    Object? plant = freezed,
-    Object? licenseDtoList = freezed,
+    Object? shipToCustomerCode = null,
+    Object? defaultShipToAddress = null,
+    Object? name1 = null,
+    Object? name2 = null,
+    Object? name3 = null,
+    Object? name4 = null,
+    Object? status = null,
+    Object? street = null,
+    Object? street2 = null,
+    Object? street3 = null,
+    Object? street4 = null,
+    Object? street5 = null,
+    Object? postalCode = null,
+    Object? city1 = null,
+    Object? city2 = null,
+    Object? telephoneNumber = null,
+    Object? houseNumber1 = null,
+    Object? building = null,
+    Object? region = null,
+    Object? floor = null,
+    Object? plant = null,
+    Object? licenseDtoList = null,
   }) {
     return _then(_value.copyWith(
-      shipToCustomerCode: shipToCustomerCode == freezed
+      shipToCustomerCode: null == shipToCustomerCode
           ? _value.shipToCustomerCode
           : shipToCustomerCode // ignore: cast_nullable_to_non_nullable
               as String,
-      defaultShipToAddress: defaultShipToAddress == freezed
+      defaultShipToAddress: null == defaultShipToAddress
           ? _value.defaultShipToAddress
           : defaultShipToAddress // ignore: cast_nullable_to_non_nullable
               as bool,
-      name1: name1 == freezed
+      name1: null == name1
           ? _value.name1
           : name1 // ignore: cast_nullable_to_non_nullable
               as String,
-      name2: name2 == freezed
+      name2: null == name2
           ? _value.name2
           : name2 // ignore: cast_nullable_to_non_nullable
               as String,
-      name3: name3 == freezed
+      name3: null == name3
           ? _value.name3
           : name3 // ignore: cast_nullable_to_non_nullable
               as String,
-      name4: name4 == freezed
+      name4: null == name4
           ? _value.name4
           : name4 // ignore: cast_nullable_to_non_nullable
               as String,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      street: street == freezed
+      street: null == street
           ? _value.street
           : street // ignore: cast_nullable_to_non_nullable
               as String,
-      street2: street2 == freezed
+      street2: null == street2
           ? _value.street2
           : street2 // ignore: cast_nullable_to_non_nullable
               as String,
-      street3: street3 == freezed
+      street3: null == street3
           ? _value.street3
           : street3 // ignore: cast_nullable_to_non_nullable
               as String,
-      street4: street4 == freezed
+      street4: null == street4
           ? _value.street4
           : street4 // ignore: cast_nullable_to_non_nullable
               as String,
-      street5: street5 == freezed
+      street5: null == street5
           ? _value.street5
           : street5 // ignore: cast_nullable_to_non_nullable
               as String,
-      postalCode: postalCode == freezed
+      postalCode: null == postalCode
           ? _value.postalCode
           : postalCode // ignore: cast_nullable_to_non_nullable
               as String,
-      city1: city1 == freezed
+      city1: null == city1
           ? _value.city1
           : city1 // ignore: cast_nullable_to_non_nullable
               as String,
-      city2: city2 == freezed
+      city2: null == city2
           ? _value.city2
           : city2 // ignore: cast_nullable_to_non_nullable
               as String,
-      telephoneNumber: telephoneNumber == freezed
+      telephoneNumber: null == telephoneNumber
           ? _value.telephoneNumber
           : telephoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      houseNumber1: houseNumber1 == freezed
+      houseNumber1: null == houseNumber1
           ? _value.houseNumber1
           : houseNumber1 // ignore: cast_nullable_to_non_nullable
               as String,
-      building: building == freezed
+      building: null == building
           ? _value.building
           : building // ignore: cast_nullable_to_non_nullable
               as String,
-      region: region == freezed
+      region: null == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
               as String,
-      floor: floor == freezed
+      floor: null == floor
           ? _value.floor
           : floor // ignore: cast_nullable_to_non_nullable
               as String,
-      plant: plant == freezed
+      plant: null == plant
           ? _value.plant
           : plant // ignore: cast_nullable_to_non_nullable
               as String,
-      licenseDtoList: licenseDtoList == freezed
+      licenseDtoList: null == licenseDtoList
           ? _value.licenseDtoList
           : licenseDtoList // ignore: cast_nullable_to_non_nullable
               as List<LicenseDto>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -254,6 +258,7 @@ abstract class _$$_ShipToDtoCopyWith<$Res> implements $ShipToDtoCopyWith<$Res> {
           _$_ShipToDto value, $Res Function(_$_ShipToDto) then) =
       __$$_ShipToDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'shipToCustomerCode')
           String shipToCustomerCode,
@@ -302,126 +307,125 @@ abstract class _$$_ShipToDtoCopyWith<$Res> implements $ShipToDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ShipToDtoCopyWithImpl<$Res> extends _$ShipToDtoCopyWithImpl<$Res>
+class __$$_ShipToDtoCopyWithImpl<$Res>
+    extends _$ShipToDtoCopyWithImpl<$Res, _$_ShipToDto>
     implements _$$_ShipToDtoCopyWith<$Res> {
   __$$_ShipToDtoCopyWithImpl(
       _$_ShipToDto _value, $Res Function(_$_ShipToDto) _then)
-      : super(_value, (v) => _then(v as _$_ShipToDto));
+      : super(_value, _then);
 
-  @override
-  _$_ShipToDto get _value => super._value as _$_ShipToDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? shipToCustomerCode = freezed,
-    Object? defaultShipToAddress = freezed,
-    Object? name1 = freezed,
-    Object? name2 = freezed,
-    Object? name3 = freezed,
-    Object? name4 = freezed,
-    Object? status = freezed,
-    Object? street = freezed,
-    Object? street2 = freezed,
-    Object? street3 = freezed,
-    Object? street4 = freezed,
-    Object? street5 = freezed,
-    Object? postalCode = freezed,
-    Object? city1 = freezed,
-    Object? city2 = freezed,
-    Object? telephoneNumber = freezed,
-    Object? houseNumber1 = freezed,
-    Object? building = freezed,
-    Object? region = freezed,
-    Object? floor = freezed,
-    Object? plant = freezed,
-    Object? licenseDtoList = freezed,
+    Object? shipToCustomerCode = null,
+    Object? defaultShipToAddress = null,
+    Object? name1 = null,
+    Object? name2 = null,
+    Object? name3 = null,
+    Object? name4 = null,
+    Object? status = null,
+    Object? street = null,
+    Object? street2 = null,
+    Object? street3 = null,
+    Object? street4 = null,
+    Object? street5 = null,
+    Object? postalCode = null,
+    Object? city1 = null,
+    Object? city2 = null,
+    Object? telephoneNumber = null,
+    Object? houseNumber1 = null,
+    Object? building = null,
+    Object? region = null,
+    Object? floor = null,
+    Object? plant = null,
+    Object? licenseDtoList = null,
   }) {
     return _then(_$_ShipToDto(
-      shipToCustomerCode: shipToCustomerCode == freezed
+      shipToCustomerCode: null == shipToCustomerCode
           ? _value.shipToCustomerCode
           : shipToCustomerCode // ignore: cast_nullable_to_non_nullable
               as String,
-      defaultShipToAddress: defaultShipToAddress == freezed
+      defaultShipToAddress: null == defaultShipToAddress
           ? _value.defaultShipToAddress
           : defaultShipToAddress // ignore: cast_nullable_to_non_nullable
               as bool,
-      name1: name1 == freezed
+      name1: null == name1
           ? _value.name1
           : name1 // ignore: cast_nullable_to_non_nullable
               as String,
-      name2: name2 == freezed
+      name2: null == name2
           ? _value.name2
           : name2 // ignore: cast_nullable_to_non_nullable
               as String,
-      name3: name3 == freezed
+      name3: null == name3
           ? _value.name3
           : name3 // ignore: cast_nullable_to_non_nullable
               as String,
-      name4: name4 == freezed
+      name4: null == name4
           ? _value.name4
           : name4 // ignore: cast_nullable_to_non_nullable
               as String,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      street: street == freezed
+      street: null == street
           ? _value.street
           : street // ignore: cast_nullable_to_non_nullable
               as String,
-      street2: street2 == freezed
+      street2: null == street2
           ? _value.street2
           : street2 // ignore: cast_nullable_to_non_nullable
               as String,
-      street3: street3 == freezed
+      street3: null == street3
           ? _value.street3
           : street3 // ignore: cast_nullable_to_non_nullable
               as String,
-      street4: street4 == freezed
+      street4: null == street4
           ? _value.street4
           : street4 // ignore: cast_nullable_to_non_nullable
               as String,
-      street5: street5 == freezed
+      street5: null == street5
           ? _value.street5
           : street5 // ignore: cast_nullable_to_non_nullable
               as String,
-      postalCode: postalCode == freezed
+      postalCode: null == postalCode
           ? _value.postalCode
           : postalCode // ignore: cast_nullable_to_non_nullable
               as String,
-      city1: city1 == freezed
+      city1: null == city1
           ? _value.city1
           : city1 // ignore: cast_nullable_to_non_nullable
               as String,
-      city2: city2 == freezed
+      city2: null == city2
           ? _value.city2
           : city2 // ignore: cast_nullable_to_non_nullable
               as String,
-      telephoneNumber: telephoneNumber == freezed
+      telephoneNumber: null == telephoneNumber
           ? _value.telephoneNumber
           : telephoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      houseNumber1: houseNumber1 == freezed
+      houseNumber1: null == houseNumber1
           ? _value.houseNumber1
           : houseNumber1 // ignore: cast_nullable_to_non_nullable
               as String,
-      building: building == freezed
+      building: null == building
           ? _value.building
           : building // ignore: cast_nullable_to_non_nullable
               as String,
-      region: region == freezed
+      region: null == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
               as String,
-      floor: floor == freezed
+      floor: null == floor
           ? _value.floor
           : floor // ignore: cast_nullable_to_non_nullable
               as String,
-      plant: plant == freezed
+      plant: null == plant
           ? _value.plant
           : plant // ignore: cast_nullable_to_non_nullable
               as String,
-      licenseDtoList: licenseDtoList == freezed
+      licenseDtoList: null == licenseDtoList
           ? _value._licenseDtoList
           : licenseDtoList // ignore: cast_nullable_to_non_nullable
               as List<LicenseDto>,
@@ -564,32 +568,33 @@ class _$_ShipToDto extends _ShipToDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ShipToDto &&
-            const DeepCollectionEquality()
-                .equals(other.shipToCustomerCode, shipToCustomerCode) &&
-            const DeepCollectionEquality()
-                .equals(other.defaultShipToAddress, defaultShipToAddress) &&
-            const DeepCollectionEquality().equals(other.name1, name1) &&
-            const DeepCollectionEquality().equals(other.name2, name2) &&
-            const DeepCollectionEquality().equals(other.name3, name3) &&
-            const DeepCollectionEquality().equals(other.name4, name4) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality().equals(other.street, street) &&
-            const DeepCollectionEquality().equals(other.street2, street2) &&
-            const DeepCollectionEquality().equals(other.street3, street3) &&
-            const DeepCollectionEquality().equals(other.street4, street4) &&
-            const DeepCollectionEquality().equals(other.street5, street5) &&
-            const DeepCollectionEquality()
-                .equals(other.postalCode, postalCode) &&
-            const DeepCollectionEquality().equals(other.city1, city1) &&
-            const DeepCollectionEquality().equals(other.city2, city2) &&
-            const DeepCollectionEquality()
-                .equals(other.telephoneNumber, telephoneNumber) &&
-            const DeepCollectionEquality()
-                .equals(other.houseNumber1, houseNumber1) &&
-            const DeepCollectionEquality().equals(other.building, building) &&
-            const DeepCollectionEquality().equals(other.region, region) &&
-            const DeepCollectionEquality().equals(other.floor, floor) &&
-            const DeepCollectionEquality().equals(other.plant, plant) &&
+            (identical(other.shipToCustomerCode, shipToCustomerCode) ||
+                other.shipToCustomerCode == shipToCustomerCode) &&
+            (identical(other.defaultShipToAddress, defaultShipToAddress) ||
+                other.defaultShipToAddress == defaultShipToAddress) &&
+            (identical(other.name1, name1) || other.name1 == name1) &&
+            (identical(other.name2, name2) || other.name2 == name2) &&
+            (identical(other.name3, name3) || other.name3 == name3) &&
+            (identical(other.name4, name4) || other.name4 == name4) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.street, street) || other.street == street) &&
+            (identical(other.street2, street2) || other.street2 == street2) &&
+            (identical(other.street3, street3) || other.street3 == street3) &&
+            (identical(other.street4, street4) || other.street4 == street4) &&
+            (identical(other.street5, street5) || other.street5 == street5) &&
+            (identical(other.postalCode, postalCode) ||
+                other.postalCode == postalCode) &&
+            (identical(other.city1, city1) || other.city1 == city1) &&
+            (identical(other.city2, city2) || other.city2 == city2) &&
+            (identical(other.telephoneNumber, telephoneNumber) ||
+                other.telephoneNumber == telephoneNumber) &&
+            (identical(other.houseNumber1, houseNumber1) ||
+                other.houseNumber1 == houseNumber1) &&
+            (identical(other.building, building) ||
+                other.building == building) &&
+            (identical(other.region, region) || other.region == region) &&
+            (identical(other.floor, floor) || other.floor == floor) &&
+            (identical(other.plant, plant) || other.plant == plant) &&
             const DeepCollectionEquality()
                 .equals(other._licenseDtoList, _licenseDtoList));
   }
@@ -598,32 +603,33 @@ class _$_ShipToDto extends _ShipToDto {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        const DeepCollectionEquality().hash(shipToCustomerCode),
-        const DeepCollectionEquality().hash(defaultShipToAddress),
-        const DeepCollectionEquality().hash(name1),
-        const DeepCollectionEquality().hash(name2),
-        const DeepCollectionEquality().hash(name3),
-        const DeepCollectionEquality().hash(name4),
-        const DeepCollectionEquality().hash(status),
-        const DeepCollectionEquality().hash(street),
-        const DeepCollectionEquality().hash(street2),
-        const DeepCollectionEquality().hash(street3),
-        const DeepCollectionEquality().hash(street4),
-        const DeepCollectionEquality().hash(street5),
-        const DeepCollectionEquality().hash(postalCode),
-        const DeepCollectionEquality().hash(city1),
-        const DeepCollectionEquality().hash(city2),
-        const DeepCollectionEquality().hash(telephoneNumber),
-        const DeepCollectionEquality().hash(houseNumber1),
-        const DeepCollectionEquality().hash(building),
-        const DeepCollectionEquality().hash(region),
-        const DeepCollectionEquality().hash(floor),
-        const DeepCollectionEquality().hash(plant),
+        shipToCustomerCode,
+        defaultShipToAddress,
+        name1,
+        name2,
+        name3,
+        name4,
+        status,
+        street,
+        street2,
+        street3,
+        street4,
+        street5,
+        postalCode,
+        city1,
+        city2,
+        telephoneNumber,
+        houseNumber1,
+        building,
+        region,
+        floor,
+        plant,
         const DeepCollectionEquality().hash(_licenseDtoList)
       ]);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ShipToDtoCopyWith<_$_ShipToDto> get copyWith =>
       __$$_ShipToDtoCopyWithImpl<_$_ShipToDto>(this, _$identity);
 

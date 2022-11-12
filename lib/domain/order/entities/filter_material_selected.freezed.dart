@@ -29,7 +29,8 @@ mixin _$FilterMaterialSelected {
 abstract class $FilterMaterialSelectedCopyWith<$Res> {
   factory $FilterMaterialSelectedCopyWith(FilterMaterialSelected value,
           $Res Function(FilterMaterialSelected) then) =
-      _$FilterMaterialSelectedCopyWithImpl<$Res>;
+      _$FilterMaterialSelectedCopyWithImpl<$Res, FilterMaterialSelected>;
+  @useResult
   $Res call(
       {List<String> uniquePrincipalName,
       List<String> uniqueTherapeuticClass,
@@ -37,34 +38,37 @@ abstract class $FilterMaterialSelectedCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$FilterMaterialSelectedCopyWithImpl<$Res>
+class _$FilterMaterialSelectedCopyWithImpl<$Res,
+        $Val extends FilterMaterialSelected>
     implements $FilterMaterialSelectedCopyWith<$Res> {
   _$FilterMaterialSelectedCopyWithImpl(this._value, this._then);
 
-  final FilterMaterialSelected _value;
   // ignore: unused_field
-  final $Res Function(FilterMaterialSelected) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uniquePrincipalName = freezed,
-    Object? uniqueTherapeuticClass = freezed,
-    Object? uniqueItemBrand = freezed,
+    Object? uniquePrincipalName = null,
+    Object? uniqueTherapeuticClass = null,
+    Object? uniqueItemBrand = null,
   }) {
     return _then(_value.copyWith(
-      uniquePrincipalName: uniquePrincipalName == freezed
+      uniquePrincipalName: null == uniquePrincipalName
           ? _value.uniquePrincipalName
           : uniquePrincipalName // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      uniqueTherapeuticClass: uniqueTherapeuticClass == freezed
+      uniqueTherapeuticClass: null == uniqueTherapeuticClass
           ? _value.uniqueTherapeuticClass
           : uniqueTherapeuticClass // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      uniqueItemBrand: uniqueItemBrand == freezed
+      uniqueItemBrand: null == uniqueItemBrand
           ? _value.uniqueItemBrand
           : uniqueItemBrand // ignore: cast_nullable_to_non_nullable
               as List<String>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -75,6 +79,7 @@ abstract class _$$_FilterMaterialSelectedCopyWith<$Res>
           $Res Function(_$_FilterMaterialSelected) then) =
       __$$_FilterMaterialSelectedCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {List<String> uniquePrincipalName,
       List<String> uniqueTherapeuticClass,
@@ -83,32 +88,30 @@ abstract class _$$_FilterMaterialSelectedCopyWith<$Res>
 
 /// @nodoc
 class __$$_FilterMaterialSelectedCopyWithImpl<$Res>
-    extends _$FilterMaterialSelectedCopyWithImpl<$Res>
+    extends _$FilterMaterialSelectedCopyWithImpl<$Res,
+        _$_FilterMaterialSelected>
     implements _$$_FilterMaterialSelectedCopyWith<$Res> {
   __$$_FilterMaterialSelectedCopyWithImpl(_$_FilterMaterialSelected _value,
       $Res Function(_$_FilterMaterialSelected) _then)
-      : super(_value, (v) => _then(v as _$_FilterMaterialSelected));
+      : super(_value, _then);
 
-  @override
-  _$_FilterMaterialSelected get _value =>
-      super._value as _$_FilterMaterialSelected;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uniquePrincipalName = freezed,
-    Object? uniqueTherapeuticClass = freezed,
-    Object? uniqueItemBrand = freezed,
+    Object? uniquePrincipalName = null,
+    Object? uniqueTherapeuticClass = null,
+    Object? uniqueItemBrand = null,
   }) {
     return _then(_$_FilterMaterialSelected(
-      uniquePrincipalName: uniquePrincipalName == freezed
+      uniquePrincipalName: null == uniquePrincipalName
           ? _value._uniquePrincipalName
           : uniquePrincipalName // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      uniqueTherapeuticClass: uniqueTherapeuticClass == freezed
+      uniqueTherapeuticClass: null == uniqueTherapeuticClass
           ? _value._uniqueTherapeuticClass
           : uniqueTherapeuticClass // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      uniqueItemBrand: uniqueItemBrand == freezed
+      uniqueItemBrand: null == uniqueItemBrand
           ? _value._uniqueItemBrand
           : uniqueItemBrand // ignore: cast_nullable_to_non_nullable
               as List<String>,
@@ -176,6 +179,7 @@ class _$_FilterMaterialSelected extends _FilterMaterialSelected {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_FilterMaterialSelectedCopyWith<_$_FilterMaterialSelected> get copyWith =>
       __$$_FilterMaterialSelectedCopyWithImpl<_$_FilterMaterialSelected>(
           this, _$identity);

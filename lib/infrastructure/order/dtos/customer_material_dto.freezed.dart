@@ -69,7 +69,8 @@ mixin _$CustomerMaterialDto {
 abstract class $CustomerMaterialDtoCopyWith<$Res> {
   factory $CustomerMaterialDtoCopyWith(
           CustomerMaterialDto value, $Res Function(CustomerMaterialDto) then) =
-      _$CustomerMaterialDtoCopyWithImpl<$Res>;
+      _$CustomerMaterialDtoCopyWithImpl<$Res, CustomerMaterialDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'Taxes', defaultValue: [])
           List<String> taxes,
@@ -112,114 +113,116 @@ abstract class $CustomerMaterialDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CustomerMaterialDtoCopyWithImpl<$Res>
+class _$CustomerMaterialDtoCopyWithImpl<$Res, $Val extends CustomerMaterialDto>
     implements $CustomerMaterialDtoCopyWith<$Res> {
   _$CustomerMaterialDtoCopyWithImpl(this._value, this._then);
 
-  final CustomerMaterialDto _value;
   // ignore: unused_field
-  final $Res Function(CustomerMaterialDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? taxes = freezed,
-    Object? taxm1 = freezed,
-    Object? taxClassification = freezed,
-    Object? materialNumber = freezed,
-    Object? materialDescription = freezed,
-    Object? defaultMaterialDescription = freezed,
-    Object? principalName = freezed,
-    Object? principalCode = freezed,
-    Object? therapeuticClass = freezed,
-    Object? itemBrand = freezed,
-    Object? hasValidTenderContract = freezed,
-    Object? hasMandatoryTenderContract = freezed,
-    Object? hidePrice = freezed,
-    Object? governmentMaterialCode = freezed,
-    Object? isSampleMaterial = freezed,
-    Object? itemRegistrationNumber = freezed,
-    Object? unitOfMeasurement = freezed,
-    Object? materialGroup2 = freezed,
-    Object? materialGroup4 = freezed,
+    Object? taxes = null,
+    Object? taxm1 = null,
+    Object? taxClassification = null,
+    Object? materialNumber = null,
+    Object? materialDescription = null,
+    Object? defaultMaterialDescription = null,
+    Object? principalName = null,
+    Object? principalCode = null,
+    Object? therapeuticClass = null,
+    Object? itemBrand = null,
+    Object? hasValidTenderContract = null,
+    Object? hasMandatoryTenderContract = null,
+    Object? hidePrice = null,
+    Object? governmentMaterialCode = null,
+    Object? isSampleMaterial = null,
+    Object? itemRegistrationNumber = null,
+    Object? unitOfMeasurement = null,
+    Object? materialGroup2 = null,
+    Object? materialGroup4 = null,
   }) {
     return _then(_value.copyWith(
-      taxes: taxes == freezed
+      taxes: null == taxes
           ? _value.taxes
           : taxes // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      taxm1: taxm1 == freezed
+      taxm1: null == taxm1
           ? _value.taxm1
           : taxm1 // ignore: cast_nullable_to_non_nullable
               as String,
-      taxClassification: taxClassification == freezed
+      taxClassification: null == taxClassification
           ? _value.taxClassification
           : taxClassification // ignore: cast_nullable_to_non_nullable
               as String,
-      materialNumber: materialNumber == freezed
+      materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      materialDescription: materialDescription == freezed
+      materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      defaultMaterialDescription: defaultMaterialDescription == freezed
+      defaultMaterialDescription: null == defaultMaterialDescription
           ? _value.defaultMaterialDescription
           : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      principalName: principalName == freezed
+      principalName: null == principalName
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
               as String,
-      principalCode: principalCode == freezed
+      principalCode: null == principalCode
           ? _value.principalCode
           : principalCode // ignore: cast_nullable_to_non_nullable
               as String,
-      therapeuticClass: therapeuticClass == freezed
+      therapeuticClass: null == therapeuticClass
           ? _value.therapeuticClass
           : therapeuticClass // ignore: cast_nullable_to_non_nullable
               as String,
-      itemBrand: itemBrand == freezed
+      itemBrand: null == itemBrand
           ? _value.itemBrand
           : itemBrand // ignore: cast_nullable_to_non_nullable
               as String,
-      hasValidTenderContract: hasValidTenderContract == freezed
+      hasValidTenderContract: null == hasValidTenderContract
           ? _value.hasValidTenderContract
           : hasValidTenderContract // ignore: cast_nullable_to_non_nullable
               as bool,
-      hasMandatoryTenderContract: hasMandatoryTenderContract == freezed
+      hasMandatoryTenderContract: null == hasMandatoryTenderContract
           ? _value.hasMandatoryTenderContract
           : hasMandatoryTenderContract // ignore: cast_nullable_to_non_nullable
               as bool,
-      hidePrice: hidePrice == freezed
+      hidePrice: null == hidePrice
           ? _value.hidePrice
           : hidePrice // ignore: cast_nullable_to_non_nullable
               as bool,
-      governmentMaterialCode: governmentMaterialCode == freezed
+      governmentMaterialCode: null == governmentMaterialCode
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
               as String,
-      isSampleMaterial: isSampleMaterial == freezed
+      isSampleMaterial: null == isSampleMaterial
           ? _value.isSampleMaterial
           : isSampleMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-      itemRegistrationNumber: itemRegistrationNumber == freezed
+      itemRegistrationNumber: null == itemRegistrationNumber
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      unitOfMeasurement: unitOfMeasurement == freezed
+      unitOfMeasurement: null == unitOfMeasurement
           ? _value.unitOfMeasurement
           : unitOfMeasurement // ignore: cast_nullable_to_non_nullable
               as String,
-      materialGroup2: materialGroup2 == freezed
+      materialGroup2: null == materialGroup2
           ? _value.materialGroup2
           : materialGroup2 // ignore: cast_nullable_to_non_nullable
               as String,
-      materialGroup4: materialGroup4 == freezed
+      materialGroup4: null == materialGroup4
           ? _value.materialGroup4
           : materialGroup4 // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -230,6 +233,7 @@ abstract class _$$_CustomerMaterialDtoCopyWith<$Res>
           $Res Function(_$_CustomerMaterialDto) then) =
       __$$_CustomerMaterialDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'Taxes', defaultValue: [])
           List<String> taxes,
@@ -273,111 +277,109 @@ abstract class _$$_CustomerMaterialDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_CustomerMaterialDtoCopyWithImpl<$Res>
-    extends _$CustomerMaterialDtoCopyWithImpl<$Res>
+    extends _$CustomerMaterialDtoCopyWithImpl<$Res, _$_CustomerMaterialDto>
     implements _$$_CustomerMaterialDtoCopyWith<$Res> {
   __$$_CustomerMaterialDtoCopyWithImpl(_$_CustomerMaterialDto _value,
       $Res Function(_$_CustomerMaterialDto) _then)
-      : super(_value, (v) => _then(v as _$_CustomerMaterialDto));
+      : super(_value, _then);
 
-  @override
-  _$_CustomerMaterialDto get _value => super._value as _$_CustomerMaterialDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? taxes = freezed,
-    Object? taxm1 = freezed,
-    Object? taxClassification = freezed,
-    Object? materialNumber = freezed,
-    Object? materialDescription = freezed,
-    Object? defaultMaterialDescription = freezed,
-    Object? principalName = freezed,
-    Object? principalCode = freezed,
-    Object? therapeuticClass = freezed,
-    Object? itemBrand = freezed,
-    Object? hasValidTenderContract = freezed,
-    Object? hasMandatoryTenderContract = freezed,
-    Object? hidePrice = freezed,
-    Object? governmentMaterialCode = freezed,
-    Object? isSampleMaterial = freezed,
-    Object? itemRegistrationNumber = freezed,
-    Object? unitOfMeasurement = freezed,
-    Object? materialGroup2 = freezed,
-    Object? materialGroup4 = freezed,
+    Object? taxes = null,
+    Object? taxm1 = null,
+    Object? taxClassification = null,
+    Object? materialNumber = null,
+    Object? materialDescription = null,
+    Object? defaultMaterialDescription = null,
+    Object? principalName = null,
+    Object? principalCode = null,
+    Object? therapeuticClass = null,
+    Object? itemBrand = null,
+    Object? hasValidTenderContract = null,
+    Object? hasMandatoryTenderContract = null,
+    Object? hidePrice = null,
+    Object? governmentMaterialCode = null,
+    Object? isSampleMaterial = null,
+    Object? itemRegistrationNumber = null,
+    Object? unitOfMeasurement = null,
+    Object? materialGroup2 = null,
+    Object? materialGroup4 = null,
   }) {
     return _then(_$_CustomerMaterialDto(
-      taxes: taxes == freezed
+      taxes: null == taxes
           ? _value._taxes
           : taxes // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      taxm1: taxm1 == freezed
+      taxm1: null == taxm1
           ? _value.taxm1
           : taxm1 // ignore: cast_nullable_to_non_nullable
               as String,
-      taxClassification: taxClassification == freezed
+      taxClassification: null == taxClassification
           ? _value.taxClassification
           : taxClassification // ignore: cast_nullable_to_non_nullable
               as String,
-      materialNumber: materialNumber == freezed
+      materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      materialDescription: materialDescription == freezed
+      materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      defaultMaterialDescription: defaultMaterialDescription == freezed
+      defaultMaterialDescription: null == defaultMaterialDescription
           ? _value.defaultMaterialDescription
           : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      principalName: principalName == freezed
+      principalName: null == principalName
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
               as String,
-      principalCode: principalCode == freezed
+      principalCode: null == principalCode
           ? _value.principalCode
           : principalCode // ignore: cast_nullable_to_non_nullable
               as String,
-      therapeuticClass: therapeuticClass == freezed
+      therapeuticClass: null == therapeuticClass
           ? _value.therapeuticClass
           : therapeuticClass // ignore: cast_nullable_to_non_nullable
               as String,
-      itemBrand: itemBrand == freezed
+      itemBrand: null == itemBrand
           ? _value.itemBrand
           : itemBrand // ignore: cast_nullable_to_non_nullable
               as String,
-      hasValidTenderContract: hasValidTenderContract == freezed
+      hasValidTenderContract: null == hasValidTenderContract
           ? _value.hasValidTenderContract
           : hasValidTenderContract // ignore: cast_nullable_to_non_nullable
               as bool,
-      hasMandatoryTenderContract: hasMandatoryTenderContract == freezed
+      hasMandatoryTenderContract: null == hasMandatoryTenderContract
           ? _value.hasMandatoryTenderContract
           : hasMandatoryTenderContract // ignore: cast_nullable_to_non_nullable
               as bool,
-      hidePrice: hidePrice == freezed
+      hidePrice: null == hidePrice
           ? _value.hidePrice
           : hidePrice // ignore: cast_nullable_to_non_nullable
               as bool,
-      governmentMaterialCode: governmentMaterialCode == freezed
+      governmentMaterialCode: null == governmentMaterialCode
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
               as String,
-      isSampleMaterial: isSampleMaterial == freezed
+      isSampleMaterial: null == isSampleMaterial
           ? _value.isSampleMaterial
           : isSampleMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-      itemRegistrationNumber: itemRegistrationNumber == freezed
+      itemRegistrationNumber: null == itemRegistrationNumber
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      unitOfMeasurement: unitOfMeasurement == freezed
+      unitOfMeasurement: null == unitOfMeasurement
           ? _value.unitOfMeasurement
           : unitOfMeasurement // ignore: cast_nullable_to_non_nullable
               as String,
-      materialGroup2: materialGroup2 == freezed
+      materialGroup2: null == materialGroup2
           ? _value.materialGroup2
           : materialGroup2 // ignore: cast_nullable_to_non_nullable
               as String,
-      materialGroup4: materialGroup4 == freezed
+      materialGroup4: null == materialGroup4
           ? _value.materialGroup4
           : materialGroup4 // ignore: cast_nullable_to_non_nullable
               as String,
@@ -507,39 +509,45 @@ class _$_CustomerMaterialDto extends _CustomerMaterialDto {
         (other.runtimeType == runtimeType &&
             other is _$_CustomerMaterialDto &&
             const DeepCollectionEquality().equals(other._taxes, _taxes) &&
-            const DeepCollectionEquality().equals(other.taxm1, taxm1) &&
-            const DeepCollectionEquality()
-                .equals(other.taxClassification, taxClassification) &&
-            const DeepCollectionEquality()
-                .equals(other.materialNumber, materialNumber) &&
-            const DeepCollectionEquality()
-                .equals(other.materialDescription, materialDescription) &&
-            const DeepCollectionEquality().equals(
-                other.defaultMaterialDescription, defaultMaterialDescription) &&
-            const DeepCollectionEquality()
-                .equals(other.principalName, principalName) &&
-            const DeepCollectionEquality()
-                .equals(other.principalCode, principalCode) &&
-            const DeepCollectionEquality()
-                .equals(other.therapeuticClass, therapeuticClass) &&
-            const DeepCollectionEquality().equals(other.itemBrand, itemBrand) &&
-            const DeepCollectionEquality()
-                .equals(other.hasValidTenderContract, hasValidTenderContract) &&
-            const DeepCollectionEquality().equals(
-                other.hasMandatoryTenderContract, hasMandatoryTenderContract) &&
-            const DeepCollectionEquality().equals(other.hidePrice, hidePrice) &&
-            const DeepCollectionEquality()
-                .equals(other.governmentMaterialCode, governmentMaterialCode) &&
-            const DeepCollectionEquality()
-                .equals(other.isSampleMaterial, isSampleMaterial) &&
-            const DeepCollectionEquality()
-                .equals(other.itemRegistrationNumber, itemRegistrationNumber) &&
-            const DeepCollectionEquality()
-                .equals(other.unitOfMeasurement, unitOfMeasurement) &&
-            const DeepCollectionEquality()
-                .equals(other.materialGroup2, materialGroup2) &&
-            const DeepCollectionEquality()
-                .equals(other.materialGroup4, materialGroup4));
+            (identical(other.taxm1, taxm1) || other.taxm1 == taxm1) &&
+            (identical(other.taxClassification, taxClassification) ||
+                other.taxClassification == taxClassification) &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber) &&
+            (identical(other.materialDescription, materialDescription) ||
+                other.materialDescription == materialDescription) &&
+            (identical(other.defaultMaterialDescription,
+                    defaultMaterialDescription) ||
+                other.defaultMaterialDescription ==
+                    defaultMaterialDescription) &&
+            (identical(other.principalName, principalName) ||
+                other.principalName == principalName) &&
+            (identical(other.principalCode, principalCode) ||
+                other.principalCode == principalCode) &&
+            (identical(other.therapeuticClass, therapeuticClass) ||
+                other.therapeuticClass == therapeuticClass) &&
+            (identical(other.itemBrand, itemBrand) ||
+                other.itemBrand == itemBrand) &&
+            (identical(other.hasValidTenderContract, hasValidTenderContract) ||
+                other.hasValidTenderContract == hasValidTenderContract) &&
+            (identical(other.hasMandatoryTenderContract,
+                    hasMandatoryTenderContract) ||
+                other.hasMandatoryTenderContract ==
+                    hasMandatoryTenderContract) &&
+            (identical(other.hidePrice, hidePrice) ||
+                other.hidePrice == hidePrice) &&
+            (identical(other.governmentMaterialCode, governmentMaterialCode) ||
+                other.governmentMaterialCode == governmentMaterialCode) &&
+            (identical(other.isSampleMaterial, isSampleMaterial) ||
+                other.isSampleMaterial == isSampleMaterial) &&
+            (identical(other.itemRegistrationNumber, itemRegistrationNumber) ||
+                other.itemRegistrationNumber == itemRegistrationNumber) &&
+            (identical(other.unitOfMeasurement, unitOfMeasurement) ||
+                other.unitOfMeasurement == unitOfMeasurement) &&
+            (identical(other.materialGroup2, materialGroup2) ||
+                other.materialGroup2 == materialGroup2) &&
+            (identical(other.materialGroup4, materialGroup4) ||
+                other.materialGroup4 == materialGroup4));
   }
 
   @JsonKey(ignore: true)
@@ -547,28 +555,29 @@ class _$_CustomerMaterialDto extends _CustomerMaterialDto {
   int get hashCode => Object.hashAll([
         runtimeType,
         const DeepCollectionEquality().hash(_taxes),
-        const DeepCollectionEquality().hash(taxm1),
-        const DeepCollectionEquality().hash(taxClassification),
-        const DeepCollectionEquality().hash(materialNumber),
-        const DeepCollectionEquality().hash(materialDescription),
-        const DeepCollectionEquality().hash(defaultMaterialDescription),
-        const DeepCollectionEquality().hash(principalName),
-        const DeepCollectionEquality().hash(principalCode),
-        const DeepCollectionEquality().hash(therapeuticClass),
-        const DeepCollectionEquality().hash(itemBrand),
-        const DeepCollectionEquality().hash(hasValidTenderContract),
-        const DeepCollectionEquality().hash(hasMandatoryTenderContract),
-        const DeepCollectionEquality().hash(hidePrice),
-        const DeepCollectionEquality().hash(governmentMaterialCode),
-        const DeepCollectionEquality().hash(isSampleMaterial),
-        const DeepCollectionEquality().hash(itemRegistrationNumber),
-        const DeepCollectionEquality().hash(unitOfMeasurement),
-        const DeepCollectionEquality().hash(materialGroup2),
-        const DeepCollectionEquality().hash(materialGroup4)
+        taxm1,
+        taxClassification,
+        materialNumber,
+        materialDescription,
+        defaultMaterialDescription,
+        principalName,
+        principalCode,
+        therapeuticClass,
+        itemBrand,
+        hasValidTenderContract,
+        hasMandatoryTenderContract,
+        hidePrice,
+        governmentMaterialCode,
+        isSampleMaterial,
+        itemRegistrationNumber,
+        unitOfMeasurement,
+        materialGroup2,
+        materialGroup4
       ]);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_CustomerMaterialDtoCopyWith<_$_CustomerMaterialDto> get copyWith =>
       __$$_CustomerMaterialDtoCopyWithImpl<_$_CustomerMaterialDto>(
           this, _$identity);

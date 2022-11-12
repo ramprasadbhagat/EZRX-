@@ -52,7 +52,8 @@ mixin _$SavedOrderDto {
 abstract class $SavedOrderDtoCopyWith<$Res> {
   factory $SavedOrderDtoCopyWith(
           SavedOrderDto value, $Res Function(SavedOrderDto) then) =
-      _$SavedOrderDtoCopyWithImpl<$Res>;
+      _$SavedOrderDtoCopyWithImpl<$Res, SavedOrderDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'id', defaultValue: '')
           String id,
@@ -78,69 +79,71 @@ abstract class $SavedOrderDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SavedOrderDtoCopyWithImpl<$Res>
+class _$SavedOrderDtoCopyWithImpl<$Res, $Val extends SavedOrderDto>
     implements $SavedOrderDtoCopyWith<$Res> {
   _$SavedOrderDtoCopyWithImpl(this._value, this._then);
 
-  final SavedOrderDto _value;
   // ignore: unused_field
-  final $Res Function(SavedOrderDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? items = freezed,
-    Object? isDraftOrder = freezed,
-    Object? billingDocument = freezed,
-    Object? eZRxNumber = freezed,
-    Object? soldToParty = freezed,
-    Object? shipToParty = freezed,
-    Object? companyName = freezed,
-    Object? totalOrderValue = freezed,
-    Object? requestedDeliveryDate = freezed,
+    Object? id = null,
+    Object? items = null,
+    Object? isDraftOrder = null,
+    Object? billingDocument = null,
+    Object? eZRxNumber = null,
+    Object? soldToParty = null,
+    Object? shipToParty = null,
+    Object? companyName = null,
+    Object? totalOrderValue = null,
+    Object? requestedDeliveryDate = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      items: items == freezed
+      items: null == items
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
               as List<MaterialItemDto>,
-      isDraftOrder: isDraftOrder == freezed
+      isDraftOrder: null == isDraftOrder
           ? _value.isDraftOrder
           : isDraftOrder // ignore: cast_nullable_to_non_nullable
               as bool,
-      billingDocument: billingDocument == freezed
+      billingDocument: null == billingDocument
           ? _value.billingDocument
           : billingDocument // ignore: cast_nullable_to_non_nullable
               as String,
-      eZRxNumber: eZRxNumber == freezed
+      eZRxNumber: null == eZRxNumber
           ? _value.eZRxNumber
           : eZRxNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      soldToParty: soldToParty == freezed
+      soldToParty: null == soldToParty
           ? _value.soldToParty
           : soldToParty // ignore: cast_nullable_to_non_nullable
               as String,
-      shipToParty: shipToParty == freezed
+      shipToParty: null == shipToParty
           ? _value.shipToParty
           : shipToParty // ignore: cast_nullable_to_non_nullable
               as String,
-      companyName: companyName == freezed
+      companyName: null == companyName
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
               as String,
-      totalOrderValue: totalOrderValue == freezed
+      totalOrderValue: null == totalOrderValue
           ? _value.totalOrderValue
           : totalOrderValue // ignore: cast_nullable_to_non_nullable
               as num,
-      requestedDeliveryDate: requestedDeliveryDate == freezed
+      requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -151,6 +154,7 @@ abstract class _$$_SavedOrderDtoCopyWith<$Res>
           _$_SavedOrderDto value, $Res Function(_$_SavedOrderDto) then) =
       __$$_SavedOrderDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'id', defaultValue: '')
           String id,
@@ -177,66 +181,64 @@ abstract class _$$_SavedOrderDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_SavedOrderDtoCopyWithImpl<$Res>
-    extends _$SavedOrderDtoCopyWithImpl<$Res>
+    extends _$SavedOrderDtoCopyWithImpl<$Res, _$_SavedOrderDto>
     implements _$$_SavedOrderDtoCopyWith<$Res> {
   __$$_SavedOrderDtoCopyWithImpl(
       _$_SavedOrderDto _value, $Res Function(_$_SavedOrderDto) _then)
-      : super(_value, (v) => _then(v as _$_SavedOrderDto));
+      : super(_value, _then);
 
-  @override
-  _$_SavedOrderDto get _value => super._value as _$_SavedOrderDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? items = freezed,
-    Object? isDraftOrder = freezed,
-    Object? billingDocument = freezed,
-    Object? eZRxNumber = freezed,
-    Object? soldToParty = freezed,
-    Object? shipToParty = freezed,
-    Object? companyName = freezed,
-    Object? totalOrderValue = freezed,
-    Object? requestedDeliveryDate = freezed,
+    Object? id = null,
+    Object? items = null,
+    Object? isDraftOrder = null,
+    Object? billingDocument = null,
+    Object? eZRxNumber = null,
+    Object? soldToParty = null,
+    Object? shipToParty = null,
+    Object? companyName = null,
+    Object? totalOrderValue = null,
+    Object? requestedDeliveryDate = null,
   }) {
     return _then(_$_SavedOrderDto(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      items: items == freezed
+      items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
               as List<MaterialItemDto>,
-      isDraftOrder: isDraftOrder == freezed
+      isDraftOrder: null == isDraftOrder
           ? _value.isDraftOrder
           : isDraftOrder // ignore: cast_nullable_to_non_nullable
               as bool,
-      billingDocument: billingDocument == freezed
+      billingDocument: null == billingDocument
           ? _value.billingDocument
           : billingDocument // ignore: cast_nullable_to_non_nullable
               as String,
-      eZRxNumber: eZRxNumber == freezed
+      eZRxNumber: null == eZRxNumber
           ? _value.eZRxNumber
           : eZRxNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      soldToParty: soldToParty == freezed
+      soldToParty: null == soldToParty
           ? _value.soldToParty
           : soldToParty // ignore: cast_nullable_to_non_nullable
               as String,
-      shipToParty: shipToParty == freezed
+      shipToParty: null == shipToParty
           ? _value.shipToParty
           : shipToParty // ignore: cast_nullable_to_non_nullable
               as String,
-      companyName: companyName == freezed
+      companyName: null == companyName
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
               as String,
-      totalOrderValue: totalOrderValue == freezed
+      totalOrderValue: null == totalOrderValue
           ? _value.totalOrderValue
           : totalOrderValue // ignore: cast_nullable_to_non_nullable
               as num,
-      requestedDeliveryDate: requestedDeliveryDate == freezed
+      requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
               as String,
@@ -322,43 +324,44 @@ class _$_SavedOrderDto extends _SavedOrderDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SavedOrderDto &&
-            const DeepCollectionEquality().equals(other.id, id) &&
+            (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other._items, _items) &&
-            const DeepCollectionEquality()
-                .equals(other.isDraftOrder, isDraftOrder) &&
-            const DeepCollectionEquality()
-                .equals(other.billingDocument, billingDocument) &&
-            const DeepCollectionEquality()
-                .equals(other.eZRxNumber, eZRxNumber) &&
-            const DeepCollectionEquality()
-                .equals(other.soldToParty, soldToParty) &&
-            const DeepCollectionEquality()
-                .equals(other.shipToParty, shipToParty) &&
-            const DeepCollectionEquality()
-                .equals(other.companyName, companyName) &&
-            const DeepCollectionEquality()
-                .equals(other.totalOrderValue, totalOrderValue) &&
-            const DeepCollectionEquality()
-                .equals(other.requestedDeliveryDate, requestedDeliveryDate));
+            (identical(other.isDraftOrder, isDraftOrder) ||
+                other.isDraftOrder == isDraftOrder) &&
+            (identical(other.billingDocument, billingDocument) ||
+                other.billingDocument == billingDocument) &&
+            (identical(other.eZRxNumber, eZRxNumber) ||
+                other.eZRxNumber == eZRxNumber) &&
+            (identical(other.soldToParty, soldToParty) ||
+                other.soldToParty == soldToParty) &&
+            (identical(other.shipToParty, shipToParty) ||
+                other.shipToParty == shipToParty) &&
+            (identical(other.companyName, companyName) ||
+                other.companyName == companyName) &&
+            (identical(other.totalOrderValue, totalOrderValue) ||
+                other.totalOrderValue == totalOrderValue) &&
+            (identical(other.requestedDeliveryDate, requestedDeliveryDate) ||
+                other.requestedDeliveryDate == requestedDeliveryDate));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(id),
+      id,
       const DeepCollectionEquality().hash(_items),
-      const DeepCollectionEquality().hash(isDraftOrder),
-      const DeepCollectionEquality().hash(billingDocument),
-      const DeepCollectionEquality().hash(eZRxNumber),
-      const DeepCollectionEquality().hash(soldToParty),
-      const DeepCollectionEquality().hash(shipToParty),
-      const DeepCollectionEquality().hash(companyName),
-      const DeepCollectionEquality().hash(totalOrderValue),
-      const DeepCollectionEquality().hash(requestedDeliveryDate));
+      isDraftOrder,
+      billingDocument,
+      eZRxNumber,
+      soldToParty,
+      shipToParty,
+      companyName,
+      totalOrderValue,
+      requestedDeliveryDate);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SavedOrderDtoCopyWith<_$_SavedOrderDto> get copyWith =>
       __$$_SavedOrderDtoCopyWithImpl<_$_SavedOrderDto>(this, _$identity);
 

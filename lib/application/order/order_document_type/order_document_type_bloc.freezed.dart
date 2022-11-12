@@ -27,9 +27,9 @@ mixin _$OrderDocumentTypeEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrganisation salesOrganisation)? fetch,
-    TResult Function(
+    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult? Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)?
         selectedOrderType,
   }) =>
@@ -53,9 +53,9 @@ mixin _$OrderDocumentTypeEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_FetchOrderDocumentType value)? fetch,
-    TResult Function(_SelectedOrderType value)? selectedOrderType,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchOrderDocumentType value)? fetch,
+    TResult? Function(_SelectedOrderType value)? selectedOrderType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,17 +72,19 @@ mixin _$OrderDocumentTypeEvent {
 abstract class $OrderDocumentTypeEventCopyWith<$Res> {
   factory $OrderDocumentTypeEventCopyWith(OrderDocumentTypeEvent value,
           $Res Function(OrderDocumentTypeEvent) then) =
-      _$OrderDocumentTypeEventCopyWithImpl<$Res>;
+      _$OrderDocumentTypeEventCopyWithImpl<$Res, OrderDocumentTypeEvent>;
 }
 
 /// @nodoc
-class _$OrderDocumentTypeEventCopyWithImpl<$Res>
+class _$OrderDocumentTypeEventCopyWithImpl<$Res,
+        $Val extends OrderDocumentTypeEvent>
     implements $OrderDocumentTypeEventCopyWith<$Res> {
   _$OrderDocumentTypeEventCopyWithImpl(this._value, this._then);
 
-  final OrderDocumentTypeEvent _value;
   // ignore: unused_field
-  final $Res Function(OrderDocumentTypeEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -94,14 +96,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitializedCopyWithImpl<$Res>
-    extends _$OrderDocumentTypeEventCopyWithImpl<$Res>
+    extends _$OrderDocumentTypeEventCopyWithImpl<$Res, _$_Initialized>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, (v) => _then(v as _$_Initialized));
-
-  @override
-  _$_Initialized get _value => super._value as _$_Initialized;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -138,9 +137,9 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrganisation salesOrganisation)? fetch,
-    TResult Function(
+    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult? Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)?
         selectedOrderType,
   }) {
@@ -176,9 +175,9 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_FetchOrderDocumentType value)? fetch,
-    TResult Function(_SelectedOrderType value)? selectedOrderType,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchOrderDocumentType value)? fetch,
+    TResult? Function(_SelectedOrderType value)? selectedOrderType,
   }) {
     return initialized?.call(this);
   }
@@ -207,6 +206,7 @@ abstract class _$$_FetchOrderDocumentTypeCopyWith<$Res> {
   factory _$$_FetchOrderDocumentTypeCopyWith(_$_FetchOrderDocumentType value,
           $Res Function(_$_FetchOrderDocumentType) then) =
       __$$_FetchOrderDocumentTypeCopyWithImpl<$Res>;
+  @useResult
   $Res call({SalesOrganisation salesOrganisation});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -214,22 +214,20 @@ abstract class _$$_FetchOrderDocumentTypeCopyWith<$Res> {
 
 /// @nodoc
 class __$$_FetchOrderDocumentTypeCopyWithImpl<$Res>
-    extends _$OrderDocumentTypeEventCopyWithImpl<$Res>
+    extends _$OrderDocumentTypeEventCopyWithImpl<$Res,
+        _$_FetchOrderDocumentType>
     implements _$$_FetchOrderDocumentTypeCopyWith<$Res> {
   __$$_FetchOrderDocumentTypeCopyWithImpl(_$_FetchOrderDocumentType _value,
       $Res Function(_$_FetchOrderDocumentType) _then)
-      : super(_value, (v) => _then(v as _$_FetchOrderDocumentType));
+      : super(_value, _then);
 
-  @override
-  _$_FetchOrderDocumentType get _value =>
-      super._value as _$_FetchOrderDocumentType;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? salesOrganisation = freezed,
+    Object? salesOrganisation = null,
   }) {
     return _then(_$_FetchOrderDocumentType(
-      salesOrganisation: salesOrganisation == freezed
+      salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
@@ -237,6 +235,7 @@ class __$$_FetchOrderDocumentTypeCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SalesOrganisationCopyWith<$Res> get salesOrganisation {
     return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
       return _then(_value.copyWith(salesOrganisation: value));
@@ -262,16 +261,16 @@ class _$_FetchOrderDocumentType implements _FetchOrderDocumentType {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_FetchOrderDocumentType &&
-            const DeepCollectionEquality()
-                .equals(other.salesOrganisation, salesOrganisation));
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(salesOrganisation));
+  int get hashCode => Object.hash(runtimeType, salesOrganisation);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_FetchOrderDocumentTypeCopyWith<_$_FetchOrderDocumentType> get copyWith =>
       __$$_FetchOrderDocumentTypeCopyWithImpl<_$_FetchOrderDocumentType>(
           this, _$identity);
@@ -291,9 +290,9 @@ class _$_FetchOrderDocumentType implements _FetchOrderDocumentType {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrganisation salesOrganisation)? fetch,
-    TResult Function(
+    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult? Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)?
         selectedOrderType,
   }) {
@@ -329,9 +328,9 @@ class _$_FetchOrderDocumentType implements _FetchOrderDocumentType {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_FetchOrderDocumentType value)? fetch,
-    TResult Function(_SelectedOrderType value)? selectedOrderType,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchOrderDocumentType value)? fetch,
+    TResult? Function(_SelectedOrderType value)? selectedOrderType,
   }) {
     return fetch?.call(this);
   }
@@ -367,6 +366,7 @@ abstract class _$$_SelectedOrderTypeCopyWith<$Res> {
   factory _$$_SelectedOrderTypeCopyWith(_$_SelectedOrderType value,
           $Res Function(_$_SelectedOrderType) then) =
       __$$_SelectedOrderTypeCopyWithImpl<$Res>;
+  @useResult
   $Res call({OrderDocumentType selectedOrderType, bool isReasonSelected});
 
   $OrderDocumentTypeCopyWith<$Res> get selectedOrderType;
@@ -374,26 +374,24 @@ abstract class _$$_SelectedOrderTypeCopyWith<$Res> {
 
 /// @nodoc
 class __$$_SelectedOrderTypeCopyWithImpl<$Res>
-    extends _$OrderDocumentTypeEventCopyWithImpl<$Res>
+    extends _$OrderDocumentTypeEventCopyWithImpl<$Res, _$_SelectedOrderType>
     implements _$$_SelectedOrderTypeCopyWith<$Res> {
   __$$_SelectedOrderTypeCopyWithImpl(
       _$_SelectedOrderType _value, $Res Function(_$_SelectedOrderType) _then)
-      : super(_value, (v) => _then(v as _$_SelectedOrderType));
+      : super(_value, _then);
 
-  @override
-  _$_SelectedOrderType get _value => super._value as _$_SelectedOrderType;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? selectedOrderType = freezed,
-    Object? isReasonSelected = freezed,
+    Object? selectedOrderType = null,
+    Object? isReasonSelected = null,
   }) {
     return _then(_$_SelectedOrderType(
-      selectedOrderType: selectedOrderType == freezed
+      selectedOrderType: null == selectedOrderType
           ? _value.selectedOrderType
           : selectedOrderType // ignore: cast_nullable_to_non_nullable
               as OrderDocumentType,
-      isReasonSelected: isReasonSelected == freezed
+      isReasonSelected: null == isReasonSelected
           ? _value.isReasonSelected
           : isReasonSelected // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -401,6 +399,7 @@ class __$$_SelectedOrderTypeCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $OrderDocumentTypeCopyWith<$Res> get selectedOrderType {
     return $OrderDocumentTypeCopyWith<$Res>(_value.selectedOrderType, (value) {
       return _then(_value.copyWith(selectedOrderType: value));
@@ -429,20 +428,19 @@ class _$_SelectedOrderType implements _SelectedOrderType {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SelectedOrderType &&
-            const DeepCollectionEquality()
-                .equals(other.selectedOrderType, selectedOrderType) &&
-            const DeepCollectionEquality()
-                .equals(other.isReasonSelected, isReasonSelected));
+            (identical(other.selectedOrderType, selectedOrderType) ||
+                other.selectedOrderType == selectedOrderType) &&
+            (identical(other.isReasonSelected, isReasonSelected) ||
+                other.isReasonSelected == isReasonSelected));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(selectedOrderType),
-      const DeepCollectionEquality().hash(isReasonSelected));
+  int get hashCode =>
+      Object.hash(runtimeType, selectedOrderType, isReasonSelected);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SelectedOrderTypeCopyWith<_$_SelectedOrderType> get copyWith =>
       __$$_SelectedOrderTypeCopyWithImpl<_$_SelectedOrderType>(
           this, _$identity);
@@ -462,9 +460,9 @@ class _$_SelectedOrderType implements _SelectedOrderType {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrganisation salesOrganisation)? fetch,
-    TResult Function(
+    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult? Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)?
         selectedOrderType,
   }) {
@@ -500,9 +498,9 @@ class _$_SelectedOrderType implements _SelectedOrderType {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_FetchOrderDocumentType value)? fetch,
-    TResult Function(_SelectedOrderType value)? selectedOrderType,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchOrderDocumentType value)? fetch,
+    TResult? Function(_SelectedOrderType value)? selectedOrderType,
   }) {
     return selectedOrderType?.call(this);
   }
@@ -556,7 +554,8 @@ mixin _$OrderDocumentTypeState {
 abstract class $OrderDocumentTypeStateCopyWith<$Res> {
   factory $OrderDocumentTypeStateCopyWith(OrderDocumentTypeState value,
           $Res Function(OrderDocumentTypeState) then) =
-      _$OrderDocumentTypeStateCopyWithImpl<$Res>;
+      _$OrderDocumentTypeStateCopyWithImpl<$Res, OrderDocumentTypeState>;
+  @useResult
   $Res call(
       {bool isSubmitting,
       Option<Either<ApiFailure, List<OrderDocumentType>>>
@@ -572,68 +571,73 @@ abstract class $OrderDocumentTypeStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OrderDocumentTypeStateCopyWithImpl<$Res>
+class _$OrderDocumentTypeStateCopyWithImpl<$Res,
+        $Val extends OrderDocumentTypeState>
     implements $OrderDocumentTypeStateCopyWith<$Res> {
   _$OrderDocumentTypeStateCopyWithImpl(this._value, this._then);
 
-  final OrderDocumentTypeState _value;
   // ignore: unused_field
-  final $Res Function(OrderDocumentTypeState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isSubmitting = freezed,
-    Object? orderDocumentTypeListFailureOrSuccessOption = freezed,
-    Object? orderDocumentTypeList = freezed,
-    Object? isOrderTypeSelected = freezed,
-    Object? selectedOrderType = freezed,
-    Object? isReasonSelected = freezed,
-    Object? selectedReason = freezed,
+    Object? isSubmitting = null,
+    Object? orderDocumentTypeListFailureOrSuccessOption = null,
+    Object? orderDocumentTypeList = null,
+    Object? isOrderTypeSelected = null,
+    Object? selectedOrderType = null,
+    Object? isReasonSelected = null,
+    Object? selectedReason = null,
   }) {
     return _then(_value.copyWith(
-      isSubmitting: isSubmitting == freezed
+      isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
-      orderDocumentTypeListFailureOrSuccessOption:
-          orderDocumentTypeListFailureOrSuccessOption == freezed
-              ? _value.orderDocumentTypeListFailureOrSuccessOption
-              : orderDocumentTypeListFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-                  as Option<Either<ApiFailure, List<OrderDocumentType>>>,
-      orderDocumentTypeList: orderDocumentTypeList == freezed
+      orderDocumentTypeListFailureOrSuccessOption: null ==
+              orderDocumentTypeListFailureOrSuccessOption
+          ? _value.orderDocumentTypeListFailureOrSuccessOption
+          : orderDocumentTypeListFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiFailure, List<OrderDocumentType>>>,
+      orderDocumentTypeList: null == orderDocumentTypeList
           ? _value.orderDocumentTypeList
           : orderDocumentTypeList // ignore: cast_nullable_to_non_nullable
               as List<OrderDocumentType>,
-      isOrderTypeSelected: isOrderTypeSelected == freezed
+      isOrderTypeSelected: null == isOrderTypeSelected
           ? _value.isOrderTypeSelected
           : isOrderTypeSelected // ignore: cast_nullable_to_non_nullable
               as bool,
-      selectedOrderType: selectedOrderType == freezed
+      selectedOrderType: null == selectedOrderType
           ? _value.selectedOrderType
           : selectedOrderType // ignore: cast_nullable_to_non_nullable
               as OrderDocumentType,
-      isReasonSelected: isReasonSelected == freezed
+      isReasonSelected: null == isReasonSelected
           ? _value.isReasonSelected
           : isReasonSelected // ignore: cast_nullable_to_non_nullable
               as bool,
-      selectedReason: selectedReason == freezed
+      selectedReason: null == selectedReason
           ? _value.selectedReason
           : selectedReason // ignore: cast_nullable_to_non_nullable
               as OrderDocumentType,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $OrderDocumentTypeCopyWith<$Res> get selectedOrderType {
     return $OrderDocumentTypeCopyWith<$Res>(_value.selectedOrderType, (value) {
-      return _then(_value.copyWith(selectedOrderType: value));
+      return _then(_value.copyWith(selectedOrderType: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $OrderDocumentTypeCopyWith<$Res> get selectedReason {
     return $OrderDocumentTypeCopyWith<$Res>(_value.selectedReason, (value) {
-      return _then(_value.copyWith(selectedReason: value));
+      return _then(_value.copyWith(selectedReason: value) as $Val);
     });
   }
 }
@@ -645,6 +649,7 @@ abstract class _$$_OrderDocumentTypeStateCopyWith<$Res>
           $Res Function(_$_OrderDocumentTypeState) then) =
       __$$_OrderDocumentTypeStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {bool isSubmitting,
       Option<Either<ApiFailure, List<OrderDocumentType>>>
@@ -663,53 +668,51 @@ abstract class _$$_OrderDocumentTypeStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_OrderDocumentTypeStateCopyWithImpl<$Res>
-    extends _$OrderDocumentTypeStateCopyWithImpl<$Res>
+    extends _$OrderDocumentTypeStateCopyWithImpl<$Res,
+        _$_OrderDocumentTypeState>
     implements _$$_OrderDocumentTypeStateCopyWith<$Res> {
   __$$_OrderDocumentTypeStateCopyWithImpl(_$_OrderDocumentTypeState _value,
       $Res Function(_$_OrderDocumentTypeState) _then)
-      : super(_value, (v) => _then(v as _$_OrderDocumentTypeState));
+      : super(_value, _then);
 
-  @override
-  _$_OrderDocumentTypeState get _value =>
-      super._value as _$_OrderDocumentTypeState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isSubmitting = freezed,
-    Object? orderDocumentTypeListFailureOrSuccessOption = freezed,
-    Object? orderDocumentTypeList = freezed,
-    Object? isOrderTypeSelected = freezed,
-    Object? selectedOrderType = freezed,
-    Object? isReasonSelected = freezed,
-    Object? selectedReason = freezed,
+    Object? isSubmitting = null,
+    Object? orderDocumentTypeListFailureOrSuccessOption = null,
+    Object? orderDocumentTypeList = null,
+    Object? isOrderTypeSelected = null,
+    Object? selectedOrderType = null,
+    Object? isReasonSelected = null,
+    Object? selectedReason = null,
   }) {
     return _then(_$_OrderDocumentTypeState(
-      isSubmitting: isSubmitting == freezed
+      isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
-      orderDocumentTypeListFailureOrSuccessOption:
-          orderDocumentTypeListFailureOrSuccessOption == freezed
-              ? _value.orderDocumentTypeListFailureOrSuccessOption
-              : orderDocumentTypeListFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-                  as Option<Either<ApiFailure, List<OrderDocumentType>>>,
-      orderDocumentTypeList: orderDocumentTypeList == freezed
+      orderDocumentTypeListFailureOrSuccessOption: null ==
+              orderDocumentTypeListFailureOrSuccessOption
+          ? _value.orderDocumentTypeListFailureOrSuccessOption
+          : orderDocumentTypeListFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiFailure, List<OrderDocumentType>>>,
+      orderDocumentTypeList: null == orderDocumentTypeList
           ? _value._orderDocumentTypeList
           : orderDocumentTypeList // ignore: cast_nullable_to_non_nullable
               as List<OrderDocumentType>,
-      isOrderTypeSelected: isOrderTypeSelected == freezed
+      isOrderTypeSelected: null == isOrderTypeSelected
           ? _value.isOrderTypeSelected
           : isOrderTypeSelected // ignore: cast_nullable_to_non_nullable
               as bool,
-      selectedOrderType: selectedOrderType == freezed
+      selectedOrderType: null == selectedOrderType
           ? _value.selectedOrderType
           : selectedOrderType // ignore: cast_nullable_to_non_nullable
               as OrderDocumentType,
-      isReasonSelected: isReasonSelected == freezed
+      isReasonSelected: null == isReasonSelected
           ? _value.isReasonSelected
           : isReasonSelected // ignore: cast_nullable_to_non_nullable
               as bool,
-      selectedReason: selectedReason == freezed
+      selectedReason: null == selectedReason
           ? _value.selectedReason
           : selectedReason // ignore: cast_nullable_to_non_nullable
               as OrderDocumentType,
@@ -762,37 +765,38 @@ class _$_OrderDocumentTypeState extends _OrderDocumentTypeState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderDocumentTypeState &&
-            const DeepCollectionEquality()
-                .equals(other.isSubmitting, isSubmitting) &&
-            const DeepCollectionEquality().equals(
-                other.orderDocumentTypeListFailureOrSuccessOption,
-                orderDocumentTypeListFailureOrSuccessOption) &&
+            (identical(other.isSubmitting, isSubmitting) ||
+                other.isSubmitting == isSubmitting) &&
+            (identical(other.orderDocumentTypeListFailureOrSuccessOption,
+                    orderDocumentTypeListFailureOrSuccessOption) ||
+                other.orderDocumentTypeListFailureOrSuccessOption ==
+                    orderDocumentTypeListFailureOrSuccessOption) &&
             const DeepCollectionEquality()
                 .equals(other._orderDocumentTypeList, _orderDocumentTypeList) &&
-            const DeepCollectionEquality()
-                .equals(other.isOrderTypeSelected, isOrderTypeSelected) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedOrderType, selectedOrderType) &&
-            const DeepCollectionEquality()
-                .equals(other.isReasonSelected, isReasonSelected) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedReason, selectedReason));
+            (identical(other.isOrderTypeSelected, isOrderTypeSelected) ||
+                other.isOrderTypeSelected == isOrderTypeSelected) &&
+            (identical(other.selectedOrderType, selectedOrderType) ||
+                other.selectedOrderType == selectedOrderType) &&
+            (identical(other.isReasonSelected, isReasonSelected) ||
+                other.isReasonSelected == isReasonSelected) &&
+            (identical(other.selectedReason, selectedReason) ||
+                other.selectedReason == selectedReason));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(isSubmitting),
-      const DeepCollectionEquality()
-          .hash(orderDocumentTypeListFailureOrSuccessOption),
+      isSubmitting,
+      orderDocumentTypeListFailureOrSuccessOption,
       const DeepCollectionEquality().hash(_orderDocumentTypeList),
-      const DeepCollectionEquality().hash(isOrderTypeSelected),
-      const DeepCollectionEquality().hash(selectedOrderType),
-      const DeepCollectionEquality().hash(isReasonSelected),
-      const DeepCollectionEquality().hash(selectedReason));
+      isOrderTypeSelected,
+      selectedOrderType,
+      isReasonSelected,
+      selectedReason);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OrderDocumentTypeStateCopyWith<_$_OrderDocumentTypeState> get copyWith =>
       __$$_OrderDocumentTypeStateCopyWithImpl<_$_OrderDocumentTypeState>(
           this, _$identity);

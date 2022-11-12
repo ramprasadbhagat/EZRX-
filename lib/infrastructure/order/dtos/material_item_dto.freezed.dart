@@ -67,7 +67,8 @@ mixin _$MaterialItemDto {
 abstract class $MaterialItemDtoCopyWith<$Res> {
   factory $MaterialItemDtoCopyWith(
           MaterialItemDto value, $Res Function(MaterialItemDto) then) =
-      _$MaterialItemDtoCopyWithImpl<$Res>;
+      _$MaterialItemDtoCopyWithImpl<$Res, MaterialItemDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'qty', defaultValue: 0)
           int qty,
@@ -106,105 +107,108 @@ abstract class $MaterialItemDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MaterialItemDtoCopyWithImpl<$Res>
+class _$MaterialItemDtoCopyWithImpl<$Res, $Val extends MaterialItemDto>
     implements $MaterialItemDtoCopyWith<$Res> {
   _$MaterialItemDtoCopyWithImpl(this._value, this._then);
 
-  final MaterialItemDto _value;
   // ignore: unused_field
-  final $Res Function(MaterialItemDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? qty = freezed,
-    Object? hidePrice = freezed,
-    Object? bonuses = freezed,
-    Object? materialGroup2 = freezed,
-    Object? materialGroup4 = freezed,
-    Object? materialNumber = freezed,
-    Object? overridenPrice = freezed,
-    Object? unitOfMeasurement = freezed,
-    Object? itemRegistrationNumber = freezed,
-    Object? defaultMaterialDescription = freezed,
-    Object? materialDescription = freezed,
-    Object? type = freezed,
-    Object? comment = freezed,
-    Object? batchNumber = freezed,
-    Object? zdp8Override = freezed,
-    Object? overrideInfo = freezed,
+    Object? qty = null,
+    Object? hidePrice = null,
+    Object? bonuses = null,
+    Object? materialGroup2 = null,
+    Object? materialGroup4 = null,
+    Object? materialNumber = null,
+    Object? overridenPrice = null,
+    Object? unitOfMeasurement = null,
+    Object? itemRegistrationNumber = null,
+    Object? defaultMaterialDescription = null,
+    Object? materialDescription = null,
+    Object? type = null,
+    Object? comment = null,
+    Object? batchNumber = null,
+    Object? zdp8Override = null,
+    Object? overrideInfo = null,
   }) {
     return _then(_value.copyWith(
-      qty: qty == freezed
+      qty: null == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
               as int,
-      hidePrice: hidePrice == freezed
+      hidePrice: null == hidePrice
           ? _value.hidePrice
           : hidePrice // ignore: cast_nullable_to_non_nullable
               as bool,
-      bonuses: bonuses == freezed
+      bonuses: null == bonuses
           ? _value.bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
               as List<MaterialItemBonusDto>,
-      materialGroup2: materialGroup2 == freezed
+      materialGroup2: null == materialGroup2
           ? _value.materialGroup2
           : materialGroup2 // ignore: cast_nullable_to_non_nullable
               as String,
-      materialGroup4: materialGroup4 == freezed
+      materialGroup4: null == materialGroup4
           ? _value.materialGroup4
           : materialGroup4 // ignore: cast_nullable_to_non_nullable
               as String,
-      materialNumber: materialNumber == freezed
+      materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      overridenPrice: overridenPrice == freezed
+      overridenPrice: null == overridenPrice
           ? _value.overridenPrice
           : overridenPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      unitOfMeasurement: unitOfMeasurement == freezed
+      unitOfMeasurement: null == unitOfMeasurement
           ? _value.unitOfMeasurement
           : unitOfMeasurement // ignore: cast_nullable_to_non_nullable
               as String,
-      itemRegistrationNumber: itemRegistrationNumber == freezed
+      itemRegistrationNumber: null == itemRegistrationNumber
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      defaultMaterialDescription: defaultMaterialDescription == freezed
+      defaultMaterialDescription: null == defaultMaterialDescription
           ? _value.defaultMaterialDescription
           : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      materialDescription: materialDescription == freezed
+      materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      comment: comment == freezed
+      comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
               as String,
-      batchNumber: batchNumber == freezed
+      batchNumber: null == batchNumber
           ? _value.batchNumber
           : batchNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      zdp8Override: zdp8Override == freezed
+      zdp8Override: null == zdp8Override
           ? _value.zdp8Override
           : zdp8Override // ignore: cast_nullable_to_non_nullable
               as bool,
-      overrideInfo: overrideInfo == freezed
+      overrideInfo: null == overrideInfo
           ? _value.overrideInfo
           : overrideInfo // ignore: cast_nullable_to_non_nullable
               as MaterialItemOverrideDto,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $MaterialItemOverrideDtoCopyWith<$Res> get overrideInfo {
     return $MaterialItemOverrideDtoCopyWith<$Res>(_value.overrideInfo, (value) {
-      return _then(_value.copyWith(overrideInfo: value));
+      return _then(_value.copyWith(overrideInfo: value) as $Val);
     });
   }
 }
@@ -216,6 +220,7 @@ abstract class _$$_MaterialItemDtoCopyWith<$Res>
           _$_MaterialItemDto value, $Res Function(_$_MaterialItemDto) then) =
       __$$_MaterialItemDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'qty', defaultValue: 0)
           int qty,
@@ -256,96 +261,94 @@ abstract class _$$_MaterialItemDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_MaterialItemDtoCopyWithImpl<$Res>
-    extends _$MaterialItemDtoCopyWithImpl<$Res>
+    extends _$MaterialItemDtoCopyWithImpl<$Res, _$_MaterialItemDto>
     implements _$$_MaterialItemDtoCopyWith<$Res> {
   __$$_MaterialItemDtoCopyWithImpl(
       _$_MaterialItemDto _value, $Res Function(_$_MaterialItemDto) _then)
-      : super(_value, (v) => _then(v as _$_MaterialItemDto));
+      : super(_value, _then);
 
-  @override
-  _$_MaterialItemDto get _value => super._value as _$_MaterialItemDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? qty = freezed,
-    Object? hidePrice = freezed,
-    Object? bonuses = freezed,
-    Object? materialGroup2 = freezed,
-    Object? materialGroup4 = freezed,
-    Object? materialNumber = freezed,
-    Object? overridenPrice = freezed,
-    Object? unitOfMeasurement = freezed,
-    Object? itemRegistrationNumber = freezed,
-    Object? defaultMaterialDescription = freezed,
-    Object? materialDescription = freezed,
-    Object? type = freezed,
-    Object? comment = freezed,
-    Object? batchNumber = freezed,
-    Object? zdp8Override = freezed,
-    Object? overrideInfo = freezed,
+    Object? qty = null,
+    Object? hidePrice = null,
+    Object? bonuses = null,
+    Object? materialGroup2 = null,
+    Object? materialGroup4 = null,
+    Object? materialNumber = null,
+    Object? overridenPrice = null,
+    Object? unitOfMeasurement = null,
+    Object? itemRegistrationNumber = null,
+    Object? defaultMaterialDescription = null,
+    Object? materialDescription = null,
+    Object? type = null,
+    Object? comment = null,
+    Object? batchNumber = null,
+    Object? zdp8Override = null,
+    Object? overrideInfo = null,
   }) {
     return _then(_$_MaterialItemDto(
-      qty: qty == freezed
+      qty: null == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
               as int,
-      hidePrice: hidePrice == freezed
+      hidePrice: null == hidePrice
           ? _value.hidePrice
           : hidePrice // ignore: cast_nullable_to_non_nullable
               as bool,
-      bonuses: bonuses == freezed
+      bonuses: null == bonuses
           ? _value._bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
               as List<MaterialItemBonusDto>,
-      materialGroup2: materialGroup2 == freezed
+      materialGroup2: null == materialGroup2
           ? _value.materialGroup2
           : materialGroup2 // ignore: cast_nullable_to_non_nullable
               as String,
-      materialGroup4: materialGroup4 == freezed
+      materialGroup4: null == materialGroup4
           ? _value.materialGroup4
           : materialGroup4 // ignore: cast_nullable_to_non_nullable
               as String,
-      materialNumber: materialNumber == freezed
+      materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      overridenPrice: overridenPrice == freezed
+      overridenPrice: null == overridenPrice
           ? _value.overridenPrice
           : overridenPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      unitOfMeasurement: unitOfMeasurement == freezed
+      unitOfMeasurement: null == unitOfMeasurement
           ? _value.unitOfMeasurement
           : unitOfMeasurement // ignore: cast_nullable_to_non_nullable
               as String,
-      itemRegistrationNumber: itemRegistrationNumber == freezed
+      itemRegistrationNumber: null == itemRegistrationNumber
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      defaultMaterialDescription: defaultMaterialDescription == freezed
+      defaultMaterialDescription: null == defaultMaterialDescription
           ? _value.defaultMaterialDescription
           : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      materialDescription: materialDescription == freezed
+      materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      comment: comment == freezed
+      comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
               as String,
-      batchNumber: batchNumber == freezed
+      batchNumber: null == batchNumber
           ? _value.batchNumber
           : batchNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      zdp8Override: zdp8Override == freezed
+      zdp8Override: null == zdp8Override
           ? _value.zdp8Override
           : zdp8Override // ignore: cast_nullable_to_non_nullable
               as bool,
-      overrideInfo: overrideInfo == freezed
+      overrideInfo: null == overrideInfo
           ? _value.overrideInfo
           : overrideInfo // ignore: cast_nullable_to_non_nullable
               as MaterialItemOverrideDto,
@@ -462,58 +465,62 @@ class _$_MaterialItemDto extends _MaterialItemDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MaterialItemDto &&
-            const DeepCollectionEquality().equals(other.qty, qty) &&
-            const DeepCollectionEquality().equals(other.hidePrice, hidePrice) &&
+            (identical(other.qty, qty) || other.qty == qty) &&
+            (identical(other.hidePrice, hidePrice) ||
+                other.hidePrice == hidePrice) &&
             const DeepCollectionEquality().equals(other._bonuses, _bonuses) &&
-            const DeepCollectionEquality()
-                .equals(other.materialGroup2, materialGroup2) &&
-            const DeepCollectionEquality()
-                .equals(other.materialGroup4, materialGroup4) &&
-            const DeepCollectionEquality()
-                .equals(other.materialNumber, materialNumber) &&
-            const DeepCollectionEquality()
-                .equals(other.overridenPrice, overridenPrice) &&
-            const DeepCollectionEquality()
-                .equals(other.unitOfMeasurement, unitOfMeasurement) &&
-            const DeepCollectionEquality()
-                .equals(other.itemRegistrationNumber, itemRegistrationNumber) &&
-            const DeepCollectionEquality().equals(
-                other.defaultMaterialDescription, defaultMaterialDescription) &&
-            const DeepCollectionEquality()
-                .equals(other.materialDescription, materialDescription) &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.comment, comment) &&
-            const DeepCollectionEquality()
-                .equals(other.batchNumber, batchNumber) &&
-            const DeepCollectionEquality()
-                .equals(other.zdp8Override, zdp8Override) &&
-            const DeepCollectionEquality()
-                .equals(other.overrideInfo, overrideInfo));
+            (identical(other.materialGroup2, materialGroup2) ||
+                other.materialGroup2 == materialGroup2) &&
+            (identical(other.materialGroup4, materialGroup4) ||
+                other.materialGroup4 == materialGroup4) &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber) &&
+            (identical(other.overridenPrice, overridenPrice) ||
+                other.overridenPrice == overridenPrice) &&
+            (identical(other.unitOfMeasurement, unitOfMeasurement) ||
+                other.unitOfMeasurement == unitOfMeasurement) &&
+            (identical(other.itemRegistrationNumber, itemRegistrationNumber) ||
+                other.itemRegistrationNumber == itemRegistrationNumber) &&
+            (identical(other.defaultMaterialDescription,
+                    defaultMaterialDescription) ||
+                other.defaultMaterialDescription ==
+                    defaultMaterialDescription) &&
+            (identical(other.materialDescription, materialDescription) ||
+                other.materialDescription == materialDescription) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.comment, comment) || other.comment == comment) &&
+            (identical(other.batchNumber, batchNumber) ||
+                other.batchNumber == batchNumber) &&
+            (identical(other.zdp8Override, zdp8Override) ||
+                other.zdp8Override == zdp8Override) &&
+            (identical(other.overrideInfo, overrideInfo) ||
+                other.overrideInfo == overrideInfo));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(qty),
-      const DeepCollectionEquality().hash(hidePrice),
+      qty,
+      hidePrice,
       const DeepCollectionEquality().hash(_bonuses),
-      const DeepCollectionEquality().hash(materialGroup2),
-      const DeepCollectionEquality().hash(materialGroup4),
-      const DeepCollectionEquality().hash(materialNumber),
-      const DeepCollectionEquality().hash(overridenPrice),
-      const DeepCollectionEquality().hash(unitOfMeasurement),
-      const DeepCollectionEquality().hash(itemRegistrationNumber),
-      const DeepCollectionEquality().hash(defaultMaterialDescription),
-      const DeepCollectionEquality().hash(materialDescription),
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(comment),
-      const DeepCollectionEquality().hash(batchNumber),
-      const DeepCollectionEquality().hash(zdp8Override),
-      const DeepCollectionEquality().hash(overrideInfo));
+      materialGroup2,
+      materialGroup4,
+      materialNumber,
+      overridenPrice,
+      unitOfMeasurement,
+      itemRegistrationNumber,
+      defaultMaterialDescription,
+      materialDescription,
+      type,
+      comment,
+      batchNumber,
+      zdp8Override,
+      overrideInfo);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MaterialItemDtoCopyWith<_$_MaterialItemDto> get copyWith =>
       __$$_MaterialItemDtoCopyWithImpl<_$_MaterialItemDto>(this, _$identity);
 

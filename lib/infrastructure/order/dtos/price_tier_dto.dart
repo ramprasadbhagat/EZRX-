@@ -49,7 +49,7 @@ class PriceTierItemDto with _$PriceTierItemDto {
     @HiveField(21, defaultValue: '')
         required String type,
     @JsonKey(name: 'ApplyBonus', defaultValue: false)
-    @HiveField(22, defaultValue: 0)
+    @HiveField(22, defaultValue: false)
         required bool applyBonus,
     @JsonKey(name: 'Sequence', defaultValue: 0)
     @HiveField(23, defaultValue: 0)

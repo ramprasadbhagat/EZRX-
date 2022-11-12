@@ -25,9 +25,9 @@ mixin _$OrderTemplateListEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(User user)? fetch,
-    TResult Function(OrderTemplate tempItem)? delete,
+    TResult? Function()? initialized,
+    TResult? Function(User user)? fetch,
+    TResult? Function(OrderTemplate tempItem)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,9 +47,9 @@ mixin _$OrderTemplateListEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DeleteOrderTemplate value)? delete,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_DeleteOrderTemplate value)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,17 +66,19 @@ mixin _$OrderTemplateListEvent {
 abstract class $OrderTemplateListEventCopyWith<$Res> {
   factory $OrderTemplateListEventCopyWith(OrderTemplateListEvent value,
           $Res Function(OrderTemplateListEvent) then) =
-      _$OrderTemplateListEventCopyWithImpl<$Res>;
+      _$OrderTemplateListEventCopyWithImpl<$Res, OrderTemplateListEvent>;
 }
 
 /// @nodoc
-class _$OrderTemplateListEventCopyWithImpl<$Res>
+class _$OrderTemplateListEventCopyWithImpl<$Res,
+        $Val extends OrderTemplateListEvent>
     implements $OrderTemplateListEventCopyWith<$Res> {
   _$OrderTemplateListEventCopyWithImpl(this._value, this._then);
 
-  final OrderTemplateListEvent _value;
   // ignore: unused_field
-  final $Res Function(OrderTemplateListEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -88,14 +90,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitializedCopyWithImpl<$Res>
-    extends _$OrderTemplateListEventCopyWithImpl<$Res>
+    extends _$OrderTemplateListEventCopyWithImpl<$Res, _$_Initialized>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, (v) => _then(v as _$_Initialized));
-
-  @override
-  _$_Initialized get _value => super._value as _$_Initialized;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -130,9 +129,9 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(User user)? fetch,
-    TResult Function(OrderTemplate tempItem)? delete,
+    TResult? Function()? initialized,
+    TResult? Function(User user)? fetch,
+    TResult? Function(OrderTemplate tempItem)? delete,
   }) {
     return initialized?.call();
   }
@@ -164,9 +163,9 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DeleteOrderTemplate value)? delete,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_DeleteOrderTemplate value)? delete,
   }) {
     return initialized?.call(this);
   }
@@ -194,6 +193,7 @@ abstract class _Initialized implements OrderTemplateListEvent {
 abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
+  @useResult
   $Res call({User user});
 
   $UserCopyWith<$Res> get user;
@@ -201,20 +201,18 @@ abstract class _$$_FetchCopyWith<$Res> {
 
 /// @nodoc
 class __$$_FetchCopyWithImpl<$Res>
-    extends _$OrderTemplateListEventCopyWithImpl<$Res>
+    extends _$OrderTemplateListEventCopyWithImpl<$Res, _$_Fetch>
     implements _$$_FetchCopyWith<$Res> {
   __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
-      : super(_value, (v) => _then(v as _$_Fetch));
+      : super(_value, _then);
 
-  @override
-  _$_Fetch get _value => super._value as _$_Fetch;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
+    Object? user = null,
   }) {
     return _then(_$_Fetch(
-      user == freezed
+      null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
@@ -222,6 +220,7 @@ class __$$_FetchCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value));
@@ -247,15 +246,15 @@ class _$_Fetch implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
-            const DeepCollectionEquality().equals(other.user, user));
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
+  int get hashCode => Object.hash(runtimeType, user);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
 
@@ -272,9 +271,9 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(User user)? fetch,
-    TResult Function(OrderTemplate tempItem)? delete,
+    TResult? Function()? initialized,
+    TResult? Function(User user)? fetch,
+    TResult? Function(OrderTemplate tempItem)? delete,
   }) {
     return fetch?.call(user);
   }
@@ -306,9 +305,9 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DeleteOrderTemplate value)? delete,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_DeleteOrderTemplate value)? delete,
   }) {
     return fetch?.call(this);
   }
@@ -342,6 +341,7 @@ abstract class _$$_DeleteOrderTemplateCopyWith<$Res> {
   factory _$$_DeleteOrderTemplateCopyWith(_$_DeleteOrderTemplate value,
           $Res Function(_$_DeleteOrderTemplate) then) =
       __$$_DeleteOrderTemplateCopyWithImpl<$Res>;
+  @useResult
   $Res call({OrderTemplate tempItem});
 
   $OrderTemplateCopyWith<$Res> get tempItem;
@@ -349,21 +349,19 @@ abstract class _$$_DeleteOrderTemplateCopyWith<$Res> {
 
 /// @nodoc
 class __$$_DeleteOrderTemplateCopyWithImpl<$Res>
-    extends _$OrderTemplateListEventCopyWithImpl<$Res>
+    extends _$OrderTemplateListEventCopyWithImpl<$Res, _$_DeleteOrderTemplate>
     implements _$$_DeleteOrderTemplateCopyWith<$Res> {
   __$$_DeleteOrderTemplateCopyWithImpl(_$_DeleteOrderTemplate _value,
       $Res Function(_$_DeleteOrderTemplate) _then)
-      : super(_value, (v) => _then(v as _$_DeleteOrderTemplate));
+      : super(_value, _then);
 
-  @override
-  _$_DeleteOrderTemplate get _value => super._value as _$_DeleteOrderTemplate;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tempItem = freezed,
+    Object? tempItem = null,
   }) {
     return _then(_$_DeleteOrderTemplate(
-      tempItem == freezed
+      null == tempItem
           ? _value.tempItem
           : tempItem // ignore: cast_nullable_to_non_nullable
               as OrderTemplate,
@@ -371,6 +369,7 @@ class __$$_DeleteOrderTemplateCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $OrderTemplateCopyWith<$Res> get tempItem {
     return $OrderTemplateCopyWith<$Res>(_value.tempItem, (value) {
       return _then(_value.copyWith(tempItem: value));
@@ -396,15 +395,16 @@ class _$_DeleteOrderTemplate implements _DeleteOrderTemplate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DeleteOrderTemplate &&
-            const DeepCollectionEquality().equals(other.tempItem, tempItem));
+            (identical(other.tempItem, tempItem) ||
+                other.tempItem == tempItem));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(tempItem));
+  int get hashCode => Object.hash(runtimeType, tempItem);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_DeleteOrderTemplateCopyWith<_$_DeleteOrderTemplate> get copyWith =>
       __$$_DeleteOrderTemplateCopyWithImpl<_$_DeleteOrderTemplate>(
           this, _$identity);
@@ -422,9 +422,9 @@ class _$_DeleteOrderTemplate implements _DeleteOrderTemplate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(User user)? fetch,
-    TResult Function(OrderTemplate tempItem)? delete,
+    TResult? Function()? initialized,
+    TResult? Function(User user)? fetch,
+    TResult? Function(OrderTemplate tempItem)? delete,
   }) {
     return delete?.call(tempItem);
   }
@@ -456,9 +456,9 @@ class _$_DeleteOrderTemplate implements _DeleteOrderTemplate {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_DeleteOrderTemplate value)? delete,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_DeleteOrderTemplate value)? delete,
   }) {
     return delete?.call(this);
   }
@@ -505,7 +505,8 @@ mixin _$OrderTemplateListState {
 abstract class $OrderTemplateListStateCopyWith<$Res> {
   factory $OrderTemplateListStateCopyWith(OrderTemplateListState value,
           $Res Function(OrderTemplateListState) then) =
-      _$OrderTemplateListStateCopyWithImpl<$Res>;
+      _$OrderTemplateListStateCopyWithImpl<$Res, OrderTemplateListState>;
+  @useResult
   $Res call(
       {List<OrderTemplate> orderTemplateList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
@@ -513,34 +514,37 @@ abstract class $OrderTemplateListStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OrderTemplateListStateCopyWithImpl<$Res>
+class _$OrderTemplateListStateCopyWithImpl<$Res,
+        $Val extends OrderTemplateListState>
     implements $OrderTemplateListStateCopyWith<$Res> {
   _$OrderTemplateListStateCopyWithImpl(this._value, this._then);
 
-  final OrderTemplateListState _value;
   // ignore: unused_field
-  final $Res Function(OrderTemplateListState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderTemplateList = freezed,
-    Object? apiFailureOrSuccessOption = freezed,
-    Object? isFetching = freezed,
+    Object? orderTemplateList = null,
+    Object? apiFailureOrSuccessOption = null,
+    Object? isFetching = null,
   }) {
     return _then(_value.copyWith(
-      orderTemplateList: orderTemplateList == freezed
+      orderTemplateList: null == orderTemplateList
           ? _value.orderTemplateList
           : orderTemplateList // ignore: cast_nullable_to_non_nullable
               as List<OrderTemplate>,
-      apiFailureOrSuccessOption: apiFailureOrSuccessOption == freezed
+      apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      isFetching: isFetching == freezed
+      isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -551,6 +555,7 @@ abstract class _$$_OrderTemplateListStateCopyWith<$Res>
           $Res Function(_$_OrderTemplateListState) then) =
       __$$_OrderTemplateListStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {List<OrderTemplate> orderTemplateList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
@@ -559,32 +564,30 @@ abstract class _$$_OrderTemplateListStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_OrderTemplateListStateCopyWithImpl<$Res>
-    extends _$OrderTemplateListStateCopyWithImpl<$Res>
+    extends _$OrderTemplateListStateCopyWithImpl<$Res,
+        _$_OrderTemplateListState>
     implements _$$_OrderTemplateListStateCopyWith<$Res> {
   __$$_OrderTemplateListStateCopyWithImpl(_$_OrderTemplateListState _value,
       $Res Function(_$_OrderTemplateListState) _then)
-      : super(_value, (v) => _then(v as _$_OrderTemplateListState));
+      : super(_value, _then);
 
-  @override
-  _$_OrderTemplateListState get _value =>
-      super._value as _$_OrderTemplateListState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderTemplateList = freezed,
-    Object? apiFailureOrSuccessOption = freezed,
-    Object? isFetching = freezed,
+    Object? orderTemplateList = null,
+    Object? apiFailureOrSuccessOption = null,
+    Object? isFetching = null,
   }) {
     return _then(_$_OrderTemplateListState(
-      orderTemplateList: orderTemplateList == freezed
+      orderTemplateList: null == orderTemplateList
           ? _value._orderTemplateList
           : orderTemplateList // ignore: cast_nullable_to_non_nullable
               as List<OrderTemplate>,
-      apiFailureOrSuccessOption: apiFailureOrSuccessOption == freezed
+      apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      isFetching: isFetching == freezed
+      isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -625,21 +628,23 @@ class _$_OrderTemplateListState implements _OrderTemplateListState {
             other is _$_OrderTemplateListState &&
             const DeepCollectionEquality()
                 .equals(other._orderTemplateList, _orderTemplateList) &&
-            const DeepCollectionEquality().equals(
-                other.apiFailureOrSuccessOption, apiFailureOrSuccessOption) &&
-            const DeepCollectionEquality()
-                .equals(other.isFetching, isFetching));
+            (identical(other.apiFailureOrSuccessOption,
+                    apiFailureOrSuccessOption) ||
+                other.apiFailureOrSuccessOption == apiFailureOrSuccessOption) &&
+            (identical(other.isFetching, isFetching) ||
+                other.isFetching == isFetching));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_orderTemplateList),
-      const DeepCollectionEquality().hash(apiFailureOrSuccessOption),
-      const DeepCollectionEquality().hash(isFetching));
+      apiFailureOrSuccessOption,
+      isFetching);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OrderTemplateListStateCopyWith<_$_OrderTemplateListState> get copyWith =>
       __$$_OrderTemplateListStateCopyWithImpl<_$_OrderTemplateListState>(
           this, _$identity);

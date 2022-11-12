@@ -72,7 +72,8 @@ mixin _$PriceDto {
 /// @nodoc
 abstract class $PriceDtoCopyWith<$Res> {
   factory $PriceDtoCopyWith(PriceDto value, $Res Function(PriceDto) then) =
-      _$PriceDtoCopyWithImpl<$Res>;
+      _$PriceDtoCopyWithImpl<$Res, PriceDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'MaterialNumber')
       @HiveField(0, defaultValue: '')
@@ -119,88 +120,91 @@ abstract class $PriceDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PriceDtoCopyWithImpl<$Res> implements $PriceDtoCopyWith<$Res> {
+class _$PriceDtoCopyWithImpl<$Res, $Val extends PriceDto>
+    implements $PriceDtoCopyWith<$Res> {
   _$PriceDtoCopyWithImpl(this._value, this._then);
 
-  final PriceDto _value;
   // ignore: unused_field
-  final $Res Function(PriceDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialNumber = freezed,
-    Object? rules = freezed,
-    Object? tiers = freezed,
-    Object? bonuses = freezed,
-    Object? bundles = freezed,
-    Object? overrideRulePresent = freezed,
-    Object? zdp5MaxQuota = freezed,
-    Object? zdp5RemainingQuota = freezed,
-    Object? zmgDiscount = freezed,
-    Object? listPrice = freezed,
-    Object? finalIndividualPrice = freezed,
-    Object? finalTotalPrice = freezed,
-    Object? additionalBonusEligible = freezed,
-    Object? isValid = freezed,
+    Object? materialNumber = null,
+    Object? rules = null,
+    Object? tiers = null,
+    Object? bonuses = null,
+    Object? bundles = null,
+    Object? overrideRulePresent = null,
+    Object? zdp5MaxQuota = null,
+    Object? zdp5RemainingQuota = null,
+    Object? zmgDiscount = null,
+    Object? listPrice = null,
+    Object? finalIndividualPrice = null,
+    Object? finalTotalPrice = null,
+    Object? additionalBonusEligible = null,
+    Object? isValid = null,
   }) {
     return _then(_value.copyWith(
-      materialNumber: materialNumber == freezed
+      materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      rules: rules == freezed
+      rules: null == rules
           ? _value.rules
           : rules // ignore: cast_nullable_to_non_nullable
               as List<PriceRuleDto>,
-      tiers: tiers == freezed
+      tiers: null == tiers
           ? _value.tiers
           : tiers // ignore: cast_nullable_to_non_nullable
               as List<PriceTierDto>,
-      bonuses: bonuses == freezed
+      bonuses: null == bonuses
           ? _value.bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
               as List<PriceBonusDto>,
-      bundles: bundles == freezed
+      bundles: null == bundles
           ? _value.bundles
           : bundles // ignore: cast_nullable_to_non_nullable
               as List<PriceBundleDto>,
-      overrideRulePresent: overrideRulePresent == freezed
+      overrideRulePresent: null == overrideRulePresent
           ? _value.overrideRulePresent
           : overrideRulePresent // ignore: cast_nullable_to_non_nullable
               as bool,
-      zdp5MaxQuota: zdp5MaxQuota == freezed
+      zdp5MaxQuota: null == zdp5MaxQuota
           ? _value.zdp5MaxQuota
           : zdp5MaxQuota // ignore: cast_nullable_to_non_nullable
               as String,
-      zdp5RemainingQuota: zdp5RemainingQuota == freezed
+      zdp5RemainingQuota: null == zdp5RemainingQuota
           ? _value.zdp5RemainingQuota
           : zdp5RemainingQuota // ignore: cast_nullable_to_non_nullable
               as String,
-      zmgDiscount: zmgDiscount == freezed
+      zmgDiscount: null == zmgDiscount
           ? _value.zmgDiscount
           : zmgDiscount // ignore: cast_nullable_to_non_nullable
               as bool,
-      listPrice: listPrice == freezed
+      listPrice: null == listPrice
           ? _value.listPrice
           : listPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      finalIndividualPrice: finalIndividualPrice == freezed
+      finalIndividualPrice: null == finalIndividualPrice
           ? _value.finalIndividualPrice
           : finalIndividualPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      finalTotalPrice: finalTotalPrice == freezed
+      finalTotalPrice: null == finalTotalPrice
           ? _value.finalTotalPrice
           : finalTotalPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      additionalBonusEligible: additionalBonusEligible == freezed
+      additionalBonusEligible: null == additionalBonusEligible
           ? _value.additionalBonusEligible
           : additionalBonusEligible // ignore: cast_nullable_to_non_nullable
               as bool,
-      isValid: isValid == freezed
+      isValid: null == isValid
           ? _value.isValid
           : isValid // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -210,6 +214,7 @@ abstract class _$$_PriceDtoCopyWith<$Res> implements $PriceDtoCopyWith<$Res> {
           _$_PriceDto value, $Res Function(_$_PriceDto) then) =
       __$$_PriceDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'MaterialNumber')
       @HiveField(0, defaultValue: '')
@@ -256,86 +261,85 @@ abstract class _$$_PriceDtoCopyWith<$Res> implements $PriceDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_PriceDtoCopyWithImpl<$Res> extends _$PriceDtoCopyWithImpl<$Res>
+class __$$_PriceDtoCopyWithImpl<$Res>
+    extends _$PriceDtoCopyWithImpl<$Res, _$_PriceDto>
     implements _$$_PriceDtoCopyWith<$Res> {
   __$$_PriceDtoCopyWithImpl(
       _$_PriceDto _value, $Res Function(_$_PriceDto) _then)
-      : super(_value, (v) => _then(v as _$_PriceDto));
+      : super(_value, _then);
 
-  @override
-  _$_PriceDto get _value => super._value as _$_PriceDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialNumber = freezed,
-    Object? rules = freezed,
-    Object? tiers = freezed,
-    Object? bonuses = freezed,
-    Object? bundles = freezed,
-    Object? overrideRulePresent = freezed,
-    Object? zdp5MaxQuota = freezed,
-    Object? zdp5RemainingQuota = freezed,
-    Object? zmgDiscount = freezed,
-    Object? listPrice = freezed,
-    Object? finalIndividualPrice = freezed,
-    Object? finalTotalPrice = freezed,
-    Object? additionalBonusEligible = freezed,
-    Object? isValid = freezed,
+    Object? materialNumber = null,
+    Object? rules = null,
+    Object? tiers = null,
+    Object? bonuses = null,
+    Object? bundles = null,
+    Object? overrideRulePresent = null,
+    Object? zdp5MaxQuota = null,
+    Object? zdp5RemainingQuota = null,
+    Object? zmgDiscount = null,
+    Object? listPrice = null,
+    Object? finalIndividualPrice = null,
+    Object? finalTotalPrice = null,
+    Object? additionalBonusEligible = null,
+    Object? isValid = null,
   }) {
     return _then(_$_PriceDto(
-      materialNumber: materialNumber == freezed
+      materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      rules: rules == freezed
+      rules: null == rules
           ? _value._rules
           : rules // ignore: cast_nullable_to_non_nullable
               as List<PriceRuleDto>,
-      tiers: tiers == freezed
+      tiers: null == tiers
           ? _value._tiers
           : tiers // ignore: cast_nullable_to_non_nullable
               as List<PriceTierDto>,
-      bonuses: bonuses == freezed
+      bonuses: null == bonuses
           ? _value._bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
               as List<PriceBonusDto>,
-      bundles: bundles == freezed
+      bundles: null == bundles
           ? _value._bundles
           : bundles // ignore: cast_nullable_to_non_nullable
               as List<PriceBundleDto>,
-      overrideRulePresent: overrideRulePresent == freezed
+      overrideRulePresent: null == overrideRulePresent
           ? _value.overrideRulePresent
           : overrideRulePresent // ignore: cast_nullable_to_non_nullable
               as bool,
-      zdp5MaxQuota: zdp5MaxQuota == freezed
+      zdp5MaxQuota: null == zdp5MaxQuota
           ? _value.zdp5MaxQuota
           : zdp5MaxQuota // ignore: cast_nullable_to_non_nullable
               as String,
-      zdp5RemainingQuota: zdp5RemainingQuota == freezed
+      zdp5RemainingQuota: null == zdp5RemainingQuota
           ? _value.zdp5RemainingQuota
           : zdp5RemainingQuota // ignore: cast_nullable_to_non_nullable
               as String,
-      zmgDiscount: zmgDiscount == freezed
+      zmgDiscount: null == zmgDiscount
           ? _value.zmgDiscount
           : zmgDiscount // ignore: cast_nullable_to_non_nullable
               as bool,
-      listPrice: listPrice == freezed
+      listPrice: null == listPrice
           ? _value.listPrice
           : listPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      finalIndividualPrice: finalIndividualPrice == freezed
+      finalIndividualPrice: null == finalIndividualPrice
           ? _value.finalIndividualPrice
           : finalIndividualPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      finalTotalPrice: finalTotalPrice == freezed
+      finalTotalPrice: null == finalTotalPrice
           ? _value.finalTotalPrice
           : finalTotalPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      additionalBonusEligible: additionalBonusEligible == freezed
+      additionalBonusEligible: null == additionalBonusEligible
           ? _value.additionalBonusEligible
           : additionalBonusEligible // ignore: cast_nullable_to_non_nullable
               as bool,
-      isValid: isValid == freezed
+      isValid: null == isValid
           ? _value.isValid
           : isValid // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -486,51 +490,54 @@ class _$_PriceDto extends _PriceDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PriceDto &&
-            const DeepCollectionEquality()
-                .equals(other.materialNumber, materialNumber) &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber) &&
             const DeepCollectionEquality().equals(other._rules, _rules) &&
             const DeepCollectionEquality().equals(other._tiers, _tiers) &&
             const DeepCollectionEquality().equals(other._bonuses, _bonuses) &&
             const DeepCollectionEquality().equals(other._bundles, _bundles) &&
-            const DeepCollectionEquality()
-                .equals(other.overrideRulePresent, overrideRulePresent) &&
-            const DeepCollectionEquality()
-                .equals(other.zdp5MaxQuota, zdp5MaxQuota) &&
-            const DeepCollectionEquality()
-                .equals(other.zdp5RemainingQuota, zdp5RemainingQuota) &&
-            const DeepCollectionEquality()
-                .equals(other.zmgDiscount, zmgDiscount) &&
-            const DeepCollectionEquality().equals(other.listPrice, listPrice) &&
-            const DeepCollectionEquality()
-                .equals(other.finalIndividualPrice, finalIndividualPrice) &&
-            const DeepCollectionEquality()
-                .equals(other.finalTotalPrice, finalTotalPrice) &&
-            const DeepCollectionEquality().equals(
-                other.additionalBonusEligible, additionalBonusEligible) &&
-            const DeepCollectionEquality().equals(other.isValid, isValid));
+            (identical(other.overrideRulePresent, overrideRulePresent) ||
+                other.overrideRulePresent == overrideRulePresent) &&
+            (identical(other.zdp5MaxQuota, zdp5MaxQuota) ||
+                other.zdp5MaxQuota == zdp5MaxQuota) &&
+            (identical(other.zdp5RemainingQuota, zdp5RemainingQuota) ||
+                other.zdp5RemainingQuota == zdp5RemainingQuota) &&
+            (identical(other.zmgDiscount, zmgDiscount) ||
+                other.zmgDiscount == zmgDiscount) &&
+            (identical(other.listPrice, listPrice) ||
+                other.listPrice == listPrice) &&
+            (identical(other.finalIndividualPrice, finalIndividualPrice) ||
+                other.finalIndividualPrice == finalIndividualPrice) &&
+            (identical(other.finalTotalPrice, finalTotalPrice) ||
+                other.finalTotalPrice == finalTotalPrice) &&
+            (identical(
+                    other.additionalBonusEligible, additionalBonusEligible) ||
+                other.additionalBonusEligible == additionalBonusEligible) &&
+            (identical(other.isValid, isValid) || other.isValid == isValid));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(materialNumber),
+      materialNumber,
       const DeepCollectionEquality().hash(_rules),
       const DeepCollectionEquality().hash(_tiers),
       const DeepCollectionEquality().hash(_bonuses),
       const DeepCollectionEquality().hash(_bundles),
-      const DeepCollectionEquality().hash(overrideRulePresent),
-      const DeepCollectionEquality().hash(zdp5MaxQuota),
-      const DeepCollectionEquality().hash(zdp5RemainingQuota),
-      const DeepCollectionEquality().hash(zmgDiscount),
-      const DeepCollectionEquality().hash(listPrice),
-      const DeepCollectionEquality().hash(finalIndividualPrice),
-      const DeepCollectionEquality().hash(finalTotalPrice),
-      const DeepCollectionEquality().hash(additionalBonusEligible),
-      const DeepCollectionEquality().hash(isValid));
+      overrideRulePresent,
+      zdp5MaxQuota,
+      zdp5RemainingQuota,
+      zmgDiscount,
+      listPrice,
+      finalIndividualPrice,
+      finalTotalPrice,
+      additionalBonusEligible,
+      isValid);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PriceDtoCopyWith<_$_PriceDto> get copyWith =>
       __$$_PriceDtoCopyWithImpl<_$_PriceDto>(this, _$identity);
 

@@ -6,9 +6,9 @@ part 'order_history_details_order_items_details_dto.g.dart';
 class OrderHistoryDetailsOrderItemDetailsDto with _$OrderHistoryDetailsOrderItemDetailsDto {
   const OrderHistoryDetailsOrderItemDetailsDto._();
   const factory OrderHistoryDetailsOrderItemDetailsDto({
-    @JsonKey(name: 'DiscountCode') required String discountCode,
-    @JsonKey(name: 'DiscountDescription') required String discountDescription, 
-    @JsonKey(name: 'Rate') required String rate,
+    @JsonKey(name: 'DiscountCode',defaultValue: '') required String discountCode,
+    @JsonKey(name: 'DiscountDescription',defaultValue: '') required String discountDescription, 
+    @JsonKey(name: 'Rate',defaultValue: '') required String rate,
 
   }) = _OrderHistoryDetailsOrderItemDetailsDto;
   factory OrderHistoryDetailsOrderItemDetailsDto.fromDomain(OrderHistoryDetailsOrderItemDetails details) {

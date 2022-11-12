@@ -26,10 +26,10 @@ mixin _$OrderSummaryEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? stepContinue,
-    TResult Function()? stepCancel,
-    TResult Function(int step)? stepTapped,
+    TResult? Function()? initialized,
+    TResult? Function()? stepContinue,
+    TResult? Function()? stepCancel,
+    TResult? Function(int step)? stepTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,10 +51,10 @@ mixin _$OrderSummaryEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_StepContinue value)? stepContinue,
-    TResult Function(_StepCancel value)? stepCancel,
-    TResult Function(_StepTapped value)? stepTapped,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_StepContinue value)? stepContinue,
+    TResult? Function(_StepCancel value)? stepCancel,
+    TResult? Function(_StepTapped value)? stepTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,17 +72,18 @@ mixin _$OrderSummaryEvent {
 abstract class $OrderSummaryEventCopyWith<$Res> {
   factory $OrderSummaryEventCopyWith(
           OrderSummaryEvent value, $Res Function(OrderSummaryEvent) then) =
-      _$OrderSummaryEventCopyWithImpl<$Res>;
+      _$OrderSummaryEventCopyWithImpl<$Res, OrderSummaryEvent>;
 }
 
 /// @nodoc
-class _$OrderSummaryEventCopyWithImpl<$Res>
+class _$OrderSummaryEventCopyWithImpl<$Res, $Val extends OrderSummaryEvent>
     implements $OrderSummaryEventCopyWith<$Res> {
   _$OrderSummaryEventCopyWithImpl(this._value, this._then);
 
-  final OrderSummaryEvent _value;
   // ignore: unused_field
-  final $Res Function(OrderSummaryEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -94,14 +95,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitializedCopyWithImpl<$Res>
-    extends _$OrderSummaryEventCopyWithImpl<$Res>
+    extends _$OrderSummaryEventCopyWithImpl<$Res, _$_Initialized>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, (v) => _then(v as _$_Initialized));
-
-  @override
-  _$_Initialized get _value => super._value as _$_Initialized;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -137,10 +135,10 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? stepContinue,
-    TResult Function()? stepCancel,
-    TResult Function(int step)? stepTapped,
+    TResult? Function()? initialized,
+    TResult? Function()? stepContinue,
+    TResult? Function()? stepCancel,
+    TResult? Function(int step)? stepTapped,
   }) {
     return initialized?.call();
   }
@@ -174,10 +172,10 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_StepContinue value)? stepContinue,
-    TResult Function(_StepCancel value)? stepCancel,
-    TResult Function(_StepTapped value)? stepTapped,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_StepContinue value)? stepContinue,
+    TResult? Function(_StepCancel value)? stepCancel,
+    TResult? Function(_StepTapped value)? stepTapped,
   }) {
     return initialized?.call(this);
   }
@@ -211,14 +209,11 @@ abstract class _$$_StepContinueCopyWith<$Res> {
 
 /// @nodoc
 class __$$_StepContinueCopyWithImpl<$Res>
-    extends _$OrderSummaryEventCopyWithImpl<$Res>
+    extends _$OrderSummaryEventCopyWithImpl<$Res, _$_StepContinue>
     implements _$$_StepContinueCopyWith<$Res> {
   __$$_StepContinueCopyWithImpl(
       _$_StepContinue _value, $Res Function(_$_StepContinue) _then)
-      : super(_value, (v) => _then(v as _$_StepContinue));
-
-  @override
-  _$_StepContinue get _value => super._value as _$_StepContinue;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -254,10 +249,10 @@ class _$_StepContinue implements _StepContinue {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? stepContinue,
-    TResult Function()? stepCancel,
-    TResult Function(int step)? stepTapped,
+    TResult? Function()? initialized,
+    TResult? Function()? stepContinue,
+    TResult? Function()? stepCancel,
+    TResult? Function(int step)? stepTapped,
   }) {
     return stepContinue?.call();
   }
@@ -291,10 +286,10 @@ class _$_StepContinue implements _StepContinue {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_StepContinue value)? stepContinue,
-    TResult Function(_StepCancel value)? stepCancel,
-    TResult Function(_StepTapped value)? stepTapped,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_StepContinue value)? stepContinue,
+    TResult? Function(_StepCancel value)? stepCancel,
+    TResult? Function(_StepTapped value)? stepTapped,
   }) {
     return stepContinue?.call(this);
   }
@@ -328,14 +323,11 @@ abstract class _$$_StepCancelCopyWith<$Res> {
 
 /// @nodoc
 class __$$_StepCancelCopyWithImpl<$Res>
-    extends _$OrderSummaryEventCopyWithImpl<$Res>
+    extends _$OrderSummaryEventCopyWithImpl<$Res, _$_StepCancel>
     implements _$$_StepCancelCopyWith<$Res> {
   __$$_StepCancelCopyWithImpl(
       _$_StepCancel _value, $Res Function(_$_StepCancel) _then)
-      : super(_value, (v) => _then(v as _$_StepCancel));
-
-  @override
-  _$_StepCancel get _value => super._value as _$_StepCancel;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -371,10 +363,10 @@ class _$_StepCancel implements _StepCancel {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? stepContinue,
-    TResult Function()? stepCancel,
-    TResult Function(int step)? stepTapped,
+    TResult? Function()? initialized,
+    TResult? Function()? stepContinue,
+    TResult? Function()? stepCancel,
+    TResult? Function(int step)? stepTapped,
   }) {
     return stepCancel?.call();
   }
@@ -408,10 +400,10 @@ class _$_StepCancel implements _StepCancel {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_StepContinue value)? stepContinue,
-    TResult Function(_StepCancel value)? stepCancel,
-    TResult Function(_StepTapped value)? stepTapped,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_StepContinue value)? stepContinue,
+    TResult? Function(_StepCancel value)? stepCancel,
+    TResult? Function(_StepTapped value)? stepTapped,
   }) {
     return stepCancel?.call(this);
   }
@@ -441,26 +433,25 @@ abstract class _$$_StepTappedCopyWith<$Res> {
   factory _$$_StepTappedCopyWith(
           _$_StepTapped value, $Res Function(_$_StepTapped) then) =
       __$$_StepTappedCopyWithImpl<$Res>;
+  @useResult
   $Res call({int step});
 }
 
 /// @nodoc
 class __$$_StepTappedCopyWithImpl<$Res>
-    extends _$OrderSummaryEventCopyWithImpl<$Res>
+    extends _$OrderSummaryEventCopyWithImpl<$Res, _$_StepTapped>
     implements _$$_StepTappedCopyWith<$Res> {
   __$$_StepTappedCopyWithImpl(
       _$_StepTapped _value, $Res Function(_$_StepTapped) _then)
-      : super(_value, (v) => _then(v as _$_StepTapped));
+      : super(_value, _then);
 
-  @override
-  _$_StepTapped get _value => super._value as _$_StepTapped;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? step = freezed,
+    Object? step = null,
   }) {
     return _then(_$_StepTapped(
-      step: step == freezed
+      step: null == step
           ? _value.step
           : step // ignore: cast_nullable_to_non_nullable
               as int,
@@ -486,15 +477,15 @@ class _$_StepTapped implements _StepTapped {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_StepTapped &&
-            const DeepCollectionEquality().equals(other.step, step));
+            (identical(other.step, step) || other.step == step));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(step));
+  int get hashCode => Object.hash(runtimeType, step);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_StepTappedCopyWith<_$_StepTapped> get copyWith =>
       __$$_StepTappedCopyWithImpl<_$_StepTapped>(this, _$identity);
 
@@ -512,10 +503,10 @@ class _$_StepTapped implements _StepTapped {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? stepContinue,
-    TResult Function()? stepCancel,
-    TResult Function(int step)? stepTapped,
+    TResult? Function()? initialized,
+    TResult? Function()? stepContinue,
+    TResult? Function()? stepCancel,
+    TResult? Function(int step)? stepTapped,
   }) {
     return stepTapped?.call(step);
   }
@@ -549,10 +540,10 @@ class _$_StepTapped implements _StepTapped {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_StepContinue value)? stepContinue,
-    TResult Function(_StepCancel value)? stepCancel,
-    TResult Function(_StepTapped value)? stepTapped,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_StepContinue value)? stepContinue,
+    TResult? Function(_StepCancel value)? stepCancel,
+    TResult? Function(_StepTapped value)? stepTapped,
   }) {
     return stepTapped?.call(this);
   }
@@ -598,7 +589,8 @@ mixin _$OrderSummaryState {
 abstract class $OrderSummaryStateCopyWith<$Res> {
   factory $OrderSummaryStateCopyWith(
           OrderSummaryState value, $Res Function(OrderSummaryState) then) =
-      _$OrderSummaryStateCopyWithImpl<$Res>;
+      _$OrderSummaryStateCopyWithImpl<$Res, OrderSummaryState>;
+  @useResult
   $Res call(
       {Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       int step,
@@ -606,34 +598,36 @@ abstract class $OrderSummaryStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OrderSummaryStateCopyWithImpl<$Res>
+class _$OrderSummaryStateCopyWithImpl<$Res, $Val extends OrderSummaryState>
     implements $OrderSummaryStateCopyWith<$Res> {
   _$OrderSummaryStateCopyWithImpl(this._value, this._then);
 
-  final OrderSummaryState _value;
   // ignore: unused_field
-  final $Res Function(OrderSummaryState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? apiFailureOrSuccessOption = freezed,
-    Object? step = freezed,
-    Object? maxSteps = freezed,
+    Object? apiFailureOrSuccessOption = null,
+    Object? step = null,
+    Object? maxSteps = null,
   }) {
     return _then(_value.copyWith(
-      apiFailureOrSuccessOption: apiFailureOrSuccessOption == freezed
+      apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      step: step == freezed
+      step: null == step
           ? _value.step
           : step // ignore: cast_nullable_to_non_nullable
               as int,
-      maxSteps: maxSteps == freezed
+      maxSteps: null == maxSteps
           ? _value.maxSteps
           : maxSteps // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -644,6 +638,7 @@ abstract class _$$_OrderSummaryStateCopyWith<$Res>
           $Res Function(_$_OrderSummaryState) then) =
       __$$_OrderSummaryStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       int step,
@@ -652,31 +647,29 @@ abstract class _$$_OrderSummaryStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_OrderSummaryStateCopyWithImpl<$Res>
-    extends _$OrderSummaryStateCopyWithImpl<$Res>
+    extends _$OrderSummaryStateCopyWithImpl<$Res, _$_OrderSummaryState>
     implements _$$_OrderSummaryStateCopyWith<$Res> {
   __$$_OrderSummaryStateCopyWithImpl(
       _$_OrderSummaryState _value, $Res Function(_$_OrderSummaryState) _then)
-      : super(_value, (v) => _then(v as _$_OrderSummaryState));
+      : super(_value, _then);
 
-  @override
-  _$_OrderSummaryState get _value => super._value as _$_OrderSummaryState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? apiFailureOrSuccessOption = freezed,
-    Object? step = freezed,
-    Object? maxSteps = freezed,
+    Object? apiFailureOrSuccessOption = null,
+    Object? step = null,
+    Object? maxSteps = null,
   }) {
     return _then(_$_OrderSummaryState(
-      apiFailureOrSuccessOption: apiFailureOrSuccessOption == freezed
+      apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      step: step == freezed
+      step: null == step
           ? _value.step
           : step // ignore: cast_nullable_to_non_nullable
               as int,
-      maxSteps: maxSteps == freezed
+      maxSteps: null == maxSteps
           ? _value.maxSteps
           : maxSteps // ignore: cast_nullable_to_non_nullable
               as int,
@@ -710,21 +703,21 @@ class _$_OrderSummaryState extends _OrderSummaryState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderSummaryState &&
-            const DeepCollectionEquality().equals(
-                other.apiFailureOrSuccessOption, apiFailureOrSuccessOption) &&
-            const DeepCollectionEquality().equals(other.step, step) &&
-            const DeepCollectionEquality().equals(other.maxSteps, maxSteps));
+            (identical(other.apiFailureOrSuccessOption,
+                    apiFailureOrSuccessOption) ||
+                other.apiFailureOrSuccessOption == apiFailureOrSuccessOption) &&
+            (identical(other.step, step) || other.step == step) &&
+            (identical(other.maxSteps, maxSteps) ||
+                other.maxSteps == maxSteps));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(apiFailureOrSuccessOption),
-      const DeepCollectionEquality().hash(step),
-      const DeepCollectionEquality().hash(maxSteps));
+  int get hashCode =>
+      Object.hash(runtimeType, apiFailureOrSuccessOption, step, maxSteps);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OrderSummaryStateCopyWith<_$_OrderSummaryState> get copyWith =>
       __$$_OrderSummaryStateCopyWithImpl<_$_OrderSummaryState>(
           this, _$identity);

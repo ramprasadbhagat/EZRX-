@@ -31,40 +31,45 @@ abstract class $OrderHistoryDetailsShippingInformationInvoicesCopyWith<$Res> {
   factory $OrderHistoryDetailsShippingInformationInvoicesCopyWith(
           OrderHistoryDetailsShippingInformationInvoices value,
           $Res Function(OrderHistoryDetailsShippingInformationInvoices) then) =
-      _$OrderHistoryDetailsShippingInformationInvoicesCopyWithImpl<$Res>;
+      _$OrderHistoryDetailsShippingInformationInvoicesCopyWithImpl<$Res,
+          OrderHistoryDetailsShippingInformationInvoices>;
+  @useResult
   $Res call({String invoiceNumber, String invoiceDate, String invoicePrice});
 }
 
 /// @nodoc
-class _$OrderHistoryDetailsShippingInformationInvoicesCopyWithImpl<$Res>
+class _$OrderHistoryDetailsShippingInformationInvoicesCopyWithImpl<$Res,
+        $Val extends OrderHistoryDetailsShippingInformationInvoices>
     implements $OrderHistoryDetailsShippingInformationInvoicesCopyWith<$Res> {
   _$OrderHistoryDetailsShippingInformationInvoicesCopyWithImpl(
       this._value, this._then);
 
-  final OrderHistoryDetailsShippingInformationInvoices _value;
   // ignore: unused_field
-  final $Res Function(OrderHistoryDetailsShippingInformationInvoices) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? invoiceNumber = freezed,
-    Object? invoiceDate = freezed,
-    Object? invoicePrice = freezed,
+    Object? invoiceNumber = null,
+    Object? invoiceDate = null,
+    Object? invoicePrice = null,
   }) {
     return _then(_value.copyWith(
-      invoiceNumber: invoiceNumber == freezed
+      invoiceNumber: null == invoiceNumber
           ? _value.invoiceNumber
           : invoiceNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      invoiceDate: invoiceDate == freezed
+      invoiceDate: null == invoiceDate
           ? _value.invoiceDate
           : invoiceDate // ignore: cast_nullable_to_non_nullable
               as String,
-      invoicePrice: invoicePrice == freezed
+      invoicePrice: null == invoicePrice
           ? _value.invoicePrice
           : invoicePrice // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -77,42 +82,38 @@ abstract class _$$_OrderHistoryDetailsShippingInformationInvoicesCopyWith<$Res>
               then) =
       __$$_OrderHistoryDetailsShippingInformationInvoicesCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String invoiceNumber, String invoiceDate, String invoicePrice});
 }
 
 /// @nodoc
 class __$$_OrderHistoryDetailsShippingInformationInvoicesCopyWithImpl<$Res>
-    extends _$OrderHistoryDetailsShippingInformationInvoicesCopyWithImpl<$Res>
+    extends _$OrderHistoryDetailsShippingInformationInvoicesCopyWithImpl<$Res,
+        _$_OrderHistoryDetailsShippingInformationInvoices>
     implements
         _$$_OrderHistoryDetailsShippingInformationInvoicesCopyWith<$Res> {
   __$$_OrderHistoryDetailsShippingInformationInvoicesCopyWithImpl(
       _$_OrderHistoryDetailsShippingInformationInvoices _value,
       $Res Function(_$_OrderHistoryDetailsShippingInformationInvoices) _then)
-      : super(
-            _value,
-            (v) =>
-                _then(v as _$_OrderHistoryDetailsShippingInformationInvoices));
+      : super(_value, _then);
 
-  @override
-  _$_OrderHistoryDetailsShippingInformationInvoices get _value =>
-      super._value as _$_OrderHistoryDetailsShippingInformationInvoices;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? invoiceNumber = freezed,
-    Object? invoiceDate = freezed,
-    Object? invoicePrice = freezed,
+    Object? invoiceNumber = null,
+    Object? invoiceDate = null,
+    Object? invoicePrice = null,
   }) {
     return _then(_$_OrderHistoryDetailsShippingInformationInvoices(
-      invoiceNumber: invoiceNumber == freezed
+      invoiceNumber: null == invoiceNumber
           ? _value.invoiceNumber
           : invoiceNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      invoiceDate: invoiceDate == freezed
+      invoiceDate: null == invoiceDate
           ? _value.invoiceDate
           : invoiceDate // ignore: cast_nullable_to_non_nullable
               as String,
-      invoicePrice: invoicePrice == freezed
+      invoicePrice: null == invoicePrice
           ? _value.invoicePrice
           : invoicePrice // ignore: cast_nullable_to_non_nullable
               as String,
@@ -147,23 +148,21 @@ class _$_OrderHistoryDetailsShippingInformationInvoices
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryDetailsShippingInformationInvoices &&
-            const DeepCollectionEquality()
-                .equals(other.invoiceNumber, invoiceNumber) &&
-            const DeepCollectionEquality()
-                .equals(other.invoiceDate, invoiceDate) &&
-            const DeepCollectionEquality()
-                .equals(other.invoicePrice, invoicePrice));
+            (identical(other.invoiceNumber, invoiceNumber) ||
+                other.invoiceNumber == invoiceNumber) &&
+            (identical(other.invoiceDate, invoiceDate) ||
+                other.invoiceDate == invoiceDate) &&
+            (identical(other.invoicePrice, invoicePrice) ||
+                other.invoicePrice == invoicePrice));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(invoiceNumber),
-      const DeepCollectionEquality().hash(invoiceDate),
-      const DeepCollectionEquality().hash(invoicePrice));
+  int get hashCode =>
+      Object.hash(runtimeType, invoiceNumber, invoiceDate, invoicePrice);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OrderHistoryDetailsShippingInformationInvoicesCopyWith<
           _$_OrderHistoryDetailsShippingInformationInvoices>
       get copyWith =>

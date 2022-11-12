@@ -28,43 +28,47 @@ mixin _$Role {
 /// @nodoc
 abstract class $RoleCopyWith<$Res> {
   factory $RoleCopyWith(Role value, $Res Function(Role) then) =
-      _$RoleCopyWithImpl<$Res>;
+      _$RoleCopyWithImpl<$Res, Role>;
+  @useResult
   $Res call({String id, String name, RoleType type, String description});
 }
 
 /// @nodoc
-class _$RoleCopyWithImpl<$Res> implements $RoleCopyWith<$Res> {
+class _$RoleCopyWithImpl<$Res, $Val extends Role>
+    implements $RoleCopyWith<$Res> {
   _$RoleCopyWithImpl(this._value, this._then);
 
-  final Role _value;
   // ignore: unused_field
-  final $Res Function(Role) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? type = freezed,
-    Object? description = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? type = null,
+    Object? description = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as RoleType,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -73,39 +77,38 @@ abstract class _$$_RoleCopyWith<$Res> implements $RoleCopyWith<$Res> {
   factory _$$_RoleCopyWith(_$_Role value, $Res Function(_$_Role) then) =
       __$$_RoleCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String id, String name, RoleType type, String description});
 }
 
 /// @nodoc
-class __$$_RoleCopyWithImpl<$Res> extends _$RoleCopyWithImpl<$Res>
+class __$$_RoleCopyWithImpl<$Res> extends _$RoleCopyWithImpl<$Res, _$_Role>
     implements _$$_RoleCopyWith<$Res> {
   __$$_RoleCopyWithImpl(_$_Role _value, $Res Function(_$_Role) _then)
-      : super(_value, (v) => _then(v as _$_Role));
+      : super(_value, _then);
 
-  @override
-  _$_Role get _value => super._value as _$_Role;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? type = freezed,
-    Object? description = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? type = null,
+    Object? description = null,
   }) {
     return _then(_$_Role(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as RoleType,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
@@ -142,23 +145,19 @@ class _$_Role extends _Role {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Role &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.description, description) ||
+                other.description == description));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(description));
+  int get hashCode => Object.hash(runtimeType, id, name, type, description);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_RoleCopyWith<_$_Role> get copyWith =>
       __$$_RoleCopyWithImpl<_$_Role>(this, _$identity);
 }

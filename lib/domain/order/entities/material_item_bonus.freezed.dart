@@ -30,7 +30,8 @@ mixin _$MaterialItemBonus {
 abstract class $MaterialItemBonusCopyWith<$Res> {
   factory $MaterialItemBonusCopyWith(
           MaterialItemBonus value, $Res Function(MaterialItemBonus) then) =
-      _$MaterialItemBonusCopyWithImpl<$Res>;
+      _$MaterialItemBonusCopyWithImpl<$Res, MaterialItemBonus>;
+  @useResult
   $Res call(
       {MaterialNumber materialNumber,
       int qty,
@@ -39,39 +40,41 @@ abstract class $MaterialItemBonusCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MaterialItemBonusCopyWithImpl<$Res>
+class _$MaterialItemBonusCopyWithImpl<$Res, $Val extends MaterialItemBonus>
     implements $MaterialItemBonusCopyWith<$Res> {
   _$MaterialItemBonusCopyWithImpl(this._value, this._then);
 
-  final MaterialItemBonus _value;
   // ignore: unused_field
-  final $Res Function(MaterialItemBonus) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialNumber = freezed,
-    Object? qty = freezed,
-    Object? comment = freezed,
-    Object? materialDescription = freezed,
+    Object? materialNumber = null,
+    Object? qty = null,
+    Object? comment = null,
+    Object? materialDescription = null,
   }) {
     return _then(_value.copyWith(
-      materialNumber: materialNumber == freezed
+      materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
-      qty: qty == freezed
+      qty: null == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
               as int,
-      comment: comment == freezed
+      comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
               as String,
-      materialDescription: materialDescription == freezed
+      materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -82,6 +85,7 @@ abstract class _$$_MaterialItemBonusCopyWith<$Res>
           $Res Function(_$_MaterialItemBonus) then) =
       __$$_MaterialItemBonusCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {MaterialNumber materialNumber,
       int qty,
@@ -91,36 +95,34 @@ abstract class _$$_MaterialItemBonusCopyWith<$Res>
 
 /// @nodoc
 class __$$_MaterialItemBonusCopyWithImpl<$Res>
-    extends _$MaterialItemBonusCopyWithImpl<$Res>
+    extends _$MaterialItemBonusCopyWithImpl<$Res, _$_MaterialItemBonus>
     implements _$$_MaterialItemBonusCopyWith<$Res> {
   __$$_MaterialItemBonusCopyWithImpl(
       _$_MaterialItemBonus _value, $Res Function(_$_MaterialItemBonus) _then)
-      : super(_value, (v) => _then(v as _$_MaterialItemBonus));
+      : super(_value, _then);
 
-  @override
-  _$_MaterialItemBonus get _value => super._value as _$_MaterialItemBonus;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialNumber = freezed,
-    Object? qty = freezed,
-    Object? comment = freezed,
-    Object? materialDescription = freezed,
+    Object? materialNumber = null,
+    Object? qty = null,
+    Object? comment = null,
+    Object? materialDescription = null,
   }) {
     return _then(_$_MaterialItemBonus(
-      materialNumber: materialNumber == freezed
+      materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
-      qty: qty == freezed
+      qty: null == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
               as int,
-      comment: comment == freezed
+      comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
               as String,
-      materialDescription: materialDescription == freezed
+      materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
@@ -157,24 +159,21 @@ class _$_MaterialItemBonus extends _MaterialItemBonus {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MaterialItemBonus &&
-            const DeepCollectionEquality()
-                .equals(other.materialNumber, materialNumber) &&
-            const DeepCollectionEquality().equals(other.qty, qty) &&
-            const DeepCollectionEquality().equals(other.comment, comment) &&
-            const DeepCollectionEquality()
-                .equals(other.materialDescription, materialDescription));
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber) &&
+            (identical(other.qty, qty) || other.qty == qty) &&
+            (identical(other.comment, comment) || other.comment == comment) &&
+            (identical(other.materialDescription, materialDescription) ||
+                other.materialDescription == materialDescription));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(materialNumber),
-      const DeepCollectionEquality().hash(qty),
-      const DeepCollectionEquality().hash(comment),
-      const DeepCollectionEquality().hash(materialDescription));
+      runtimeType, materialNumber, qty, comment, materialDescription);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MaterialItemBonusCopyWith<_$_MaterialItemBonus> get copyWith =>
       __$$_MaterialItemBonusCopyWithImpl<_$_MaterialItemBonus>(
           this, _$identity);

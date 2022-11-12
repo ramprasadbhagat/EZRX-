@@ -30,43 +30,47 @@ mixin _$BundleInfo {
 abstract class $BundleInfoCopyWith<$Res> {
   factory $BundleInfoCopyWith(
           BundleInfo value, $Res Function(BundleInfo) then) =
-      _$BundleInfoCopyWithImpl<$Res>;
+      _$BundleInfoCopyWithImpl<$Res, BundleInfo>;
+  @useResult
   $Res call({int sequence, int quantity, MaterialBundleType type, double rate});
 }
 
 /// @nodoc
-class _$BundleInfoCopyWithImpl<$Res> implements $BundleInfoCopyWith<$Res> {
+class _$BundleInfoCopyWithImpl<$Res, $Val extends BundleInfo>
+    implements $BundleInfoCopyWith<$Res> {
   _$BundleInfoCopyWithImpl(this._value, this._then);
 
-  final BundleInfo _value;
   // ignore: unused_field
-  final $Res Function(BundleInfo) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sequence = freezed,
-    Object? quantity = freezed,
-    Object? type = freezed,
-    Object? rate = freezed,
+    Object? sequence = null,
+    Object? quantity = null,
+    Object? type = null,
+    Object? rate = null,
   }) {
     return _then(_value.copyWith(
-      sequence: sequence == freezed
+      sequence: null == sequence
           ? _value.sequence
           : sequence // ignore: cast_nullable_to_non_nullable
               as int,
-      quantity: quantity == freezed
+      quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as MaterialBundleType,
-      rate: rate == freezed
+      rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
-    ));
+    ) as $Val);
   }
 }
 
@@ -77,40 +81,40 @@ abstract class _$$_BundleInfoCopyWith<$Res>
           _$_BundleInfo value, $Res Function(_$_BundleInfo) then) =
       __$$_BundleInfoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({int sequence, int quantity, MaterialBundleType type, double rate});
 }
 
 /// @nodoc
-class __$$_BundleInfoCopyWithImpl<$Res> extends _$BundleInfoCopyWithImpl<$Res>
+class __$$_BundleInfoCopyWithImpl<$Res>
+    extends _$BundleInfoCopyWithImpl<$Res, _$_BundleInfo>
     implements _$$_BundleInfoCopyWith<$Res> {
   __$$_BundleInfoCopyWithImpl(
       _$_BundleInfo _value, $Res Function(_$_BundleInfo) _then)
-      : super(_value, (v) => _then(v as _$_BundleInfo));
+      : super(_value, _then);
 
-  @override
-  _$_BundleInfo get _value => super._value as _$_BundleInfo;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sequence = freezed,
-    Object? quantity = freezed,
-    Object? type = freezed,
-    Object? rate = freezed,
+    Object? sequence = null,
+    Object? quantity = null,
+    Object? type = null,
+    Object? rate = null,
   }) {
     return _then(_$_BundleInfo(
-      sequence: sequence == freezed
+      sequence: null == sequence
           ? _value.sequence
           : sequence // ignore: cast_nullable_to_non_nullable
               as int,
-      quantity: quantity == freezed
+      quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as MaterialBundleType,
-      rate: rate == freezed
+      rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
@@ -147,22 +151,20 @@ class _$_BundleInfo extends _BundleInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BundleInfo &&
-            const DeepCollectionEquality().equals(other.sequence, sequence) &&
-            const DeepCollectionEquality().equals(other.quantity, quantity) &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.rate, rate));
+            (identical(other.sequence, sequence) ||
+                other.sequence == sequence) &&
+            (identical(other.quantity, quantity) ||
+                other.quantity == quantity) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.rate, rate) || other.rate == rate));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(sequence),
-      const DeepCollectionEquality().hash(quantity),
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(rate));
+  int get hashCode => Object.hash(runtimeType, sequence, quantity, type, rate);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_BundleInfoCopyWith<_$_BundleInfo> get copyWith =>
       __$$_BundleInfoCopyWithImpl<_$_BundleInfo>(this, _$identity);
 }

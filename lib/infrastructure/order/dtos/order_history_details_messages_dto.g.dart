@@ -9,8 +9,8 @@ part of 'order_history_details_messages_dto.dart';
 _$_OrderHistoryDetailsMessagesDto _$$_OrderHistoryDetailsMessagesDtoFromJson(
         Map<String, dynamic> json) =>
     _$_OrderHistoryDetailsMessagesDto(
-      type: json['Type'] as String,
-      message: json['Message'] as String,
+      type: json['Type'] as String? ?? '',
+      message: json['Message'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_OrderHistoryDetailsMessagesDtoToJson(

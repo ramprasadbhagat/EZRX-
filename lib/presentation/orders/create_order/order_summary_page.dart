@@ -6,13 +6,12 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
-import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/order/entities/license_info.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
+import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_list_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/cupertino.dart';
@@ -117,11 +116,11 @@ class _BodyContent extends StatelessWidget {
             ),
             Step(
               title: Text('Sold to Address'.tr()),
-              content: const _SoldToAddressStep(),
+              content: const SoldToAddressInfo(),
             ),
             Step(
               title: Text('Ship to Address'.tr()),
-              content: const _ShipToAddressStep(),
+              content: const ShipToAddressInfo(),
             ),
             Step(
               title: Text('Additional Information'.tr()),
@@ -187,100 +186,6 @@ List<_OrderSummaryDetails> _getTextRowLevelsForCustomerInfo(
   ];
 }
 
-List<_OrderSummaryDetails> _getTextRowLevelsForSoldToInfo(
-  CustomerCodeInfo customer,
-) {
-  return [
-    _OrderSummaryDetails(
-      key: 'Sold to ID',
-      value: customer.customerCodeSoldTo,
-    ),
-    _OrderSummaryDetails(
-      key: 'Sold to Customer Name',
-      value:
-          '${customer.customerName.name1} ${customer.customerName.name2} ${customer.customerName.name3} ${customer.customerName.name4}',
-    ),
-    _OrderSummaryDetails(
-      key: 'Address',
-      value:
-          '${customer.customerAddress.street1} ${customer.customerAddress.street2} ${customer.customerAddress.street3} ${customer.customerAddress.street4} ${customer.customerAddress.street5}',
-    ),
-    _OrderSummaryDetails(
-      key: 'Postal Code',
-      value: customer.postalCode,
-    ),
-    _OrderSummaryDetails(
-      key: 'Country',
-      value: customer.region,
-    ),
-    const _OrderSummaryDetails(
-      key: 'Phone',
-      value: 'NA',
-    ),
-  ];
-}
-
-List<_OrderSummaryDetails> _getTextRowLevelsForLicense(
-  List<LicenseInfo> licenses,
-) {
-  final finalList = licenses.map((license) {
-    return [
-      _OrderSummaryDetails(
-        key: 'License Number'.tr(),
-        value: license.licenseNumber,
-      ),
-      _OrderSummaryDetails(
-        key: 'License Type'.tr(),
-        value: license.licenceType,
-      ),
-      _OrderSummaryDetails(
-        key: 'License Description'.tr(),
-        value: license.licenseDescription,
-      ),
-      _OrderSummaryDetails(
-        key: 'Valid From'.tr(),
-        value: license.validFrom,
-      ),
-      _OrderSummaryDetails(
-        key: 'Valid To'.tr(),
-        value: license.validTo,
-      ),
-    ];
-  }).toList();
-
-  return finalList.expand((element) => element).toList();
-}
-
-List<_OrderSummaryDetails> _getTextRowLevelsForShipToInfo(ShipToInfo ship) {
-  return [
-    _OrderSummaryDetails(
-      key: 'Ship to ID',
-      value: ship.shipToCustomerCode,
-    ),
-    _OrderSummaryDetails(
-      key: 'Address',
-      value:
-          '${ship.shipToAddress.street} ${ship.shipToAddress.street2} ${ship.shipToAddress.street3} ${ship.shipToAddress.street4} ${ship.shipToAddress.street5} ${ship.city2} ${ship.city1}',
-    ),
-    _OrderSummaryDetails(
-      key: 'Postal Code',
-      value: ship.postalCode,
-    ),
-    _OrderSummaryDetails(
-      key: 'Country',
-      value: ship.region,
-    ),
-    _OrderSummaryDetails(
-      key: 'Phone',
-      value: ship.telephoneNumber,
-    ),
-    _OrderSummaryDetails(
-      key: 'License',
-      value: 'View license info'.tr(),
-    ),
-  ];
-}
-
 class _CustomerDetailsStep extends StatelessWidget {
   const _CustomerDetailsStep({
     Key? key,
@@ -305,136 +210,6 @@ class _CustomerDetailsStep extends StatelessWidget {
                 ),
               );
             }),
-          ],
-        );
-      },
-    );
-  }
-}
-
-class _SoldToAddressStep extends StatelessWidget {
-  const _SoldToAddressStep({
-    Key? key,
-  }) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
-      buildWhen: (previous, current) =>
-          previous.customerCodeInfo != current.customerCodeInfo,
-      builder: (context, state) {
-        return Column(
-          children: [
-            ..._getTextRowLevelsForSoldToInfo(state.customerCodeInfo).map(
-              (e) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: BalanceTextRow(
-                    keyText: e.key,
-                    valueText: e.value,
-                    keyFlex: 1,
-                    valueFlex: 1,
-                  ),
-                );
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-}
-
-class _ShipToAddressStep extends StatelessWidget {
-  const _ShipToAddressStep({
-    Key? key,
-  }) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ShipToCodeBloc, ShipToCodeState>(
-      buildWhen: (previous, current) =>
-          previous.shipToInfo != current.shipToInfo,
-      builder: (context, state) {
-        return Column(
-          children: [
-            ..._getTextRowLevelsForShipToInfo(state.shipToInfo).map(
-              (e) {
-                return e.key != 'License'
-                    ? Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: BalanceTextRow(
-                          keyText: e.key,
-                          valueText: e.value,
-                          keyFlex: 1,
-                          valueFlex: 1,
-                        ),
-                      )
-                    : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 2.0,
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Text(
-                                  e.key,
-                                  style: const TextStyle(
-                                    color: ZPColors.darkGray,
-                                    fontSize: 12.0,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    showModalBottomSheet(
-                                      context: context,
-                                      builder: (_) {
-                                        return SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.6,
-                                          child: const _LicenseModal(),
-                                        );
-                                      },
-                                    );
-                                  },
-                                  child: Wrap(children: [
-                                    const Text(
-                                      ': ',
-                                      style: TextStyle(
-                                        color: ZPColors.black,
-                                        fontSize: 12.0,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    Text(
-                                      e.value,
-                                      style: const TextStyle(
-                                        color: ZPColors.secondary,
-                                        fontSize: 12.0,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w600,
-                                        decoration: TextDecoration.underline,
-                                      ),
-                                    ),
-                                  ]),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-              },
-            ),
           ],
         );
       },
@@ -816,55 +591,5 @@ class _DatePickerFieldState extends State<_DatePickerField> {
     );
 
     return orderDate ?? DateTime.now();
-  }
-}
-
-class _LicenseModal extends StatelessWidget {
-  const _LicenseModal({
-    Key? key,
-  }) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        title: Text(
-          'Licenses'.tr(),
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<PaymentCustomerInformationBloc,
-            PaymentCustomerInformationState>(
-          buildWhen: (previous, current) => previous != current,
-          builder: (context, state) {
-            return ListView.separated(
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                  ),
-                  child: BalanceTextRow(
-                    keyText:
-                        _getTextRowLevelsForLicense(state.licenses)[index].key,
-                    valueText:
-                        _getTextRowLevelsForLicense(state.licenses)[index]
-                            .value,
-                    keyFlex: 1,
-                    valueFlex: 1,
-                  ),
-                );
-              },
-              separatorBuilder: (context, index) {
-                return (index + 1) % 5 == 0
-                    ? const Divider()
-                    : const SizedBox.shrink();
-              },
-              itemCount: _getTextRowLevelsForLicense(state.licenses).length,
-            );
-          },
-        ),
-      ),
-    );
   }
 }

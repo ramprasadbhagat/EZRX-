@@ -8,7 +8,7 @@ part of 'bundle_info_dto.dart';
 
 class BundleInfoDtoAdapter extends TypeAdapter<_$_BundleInfoDto> {
   @override
-  final int typeId = 16;
+  final int typeId = 10;
 
   @override
   _$_BundleInfoDto read(BinaryReader reader) {
@@ -19,7 +19,7 @@ class BundleInfoDtoAdapter extends TypeAdapter<_$_BundleInfoDto> {
     return _$_BundleInfoDto(
       sequence: fields[21] == null ? 1 : fields[21] as int,
       quantity: fields[22] == null ? 1 : fields[22] as int,
-      type: fields[23] as String,
+      type: fields[23] == null ? '%' : fields[23] as String,
       rate: fields[24] == null ? -10 : fields[24] as double,
     );
   }

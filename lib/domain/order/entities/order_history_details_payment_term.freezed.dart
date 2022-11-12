@@ -29,34 +29,39 @@ abstract class $OrderHistoryDetailsPaymentTermCopyWith<$Res> {
   factory $OrderHistoryDetailsPaymentTermCopyWith(
           OrderHistoryDetailsPaymentTerm value,
           $Res Function(OrderHistoryDetailsPaymentTerm) then) =
-      _$OrderHistoryDetailsPaymentTermCopyWithImpl<$Res>;
+      _$OrderHistoryDetailsPaymentTermCopyWithImpl<$Res,
+          OrderHistoryDetailsPaymentTerm>;
+  @useResult
   $Res call({String paymentTermCode, String paymentTermDescription});
 }
 
 /// @nodoc
-class _$OrderHistoryDetailsPaymentTermCopyWithImpl<$Res>
+class _$OrderHistoryDetailsPaymentTermCopyWithImpl<$Res,
+        $Val extends OrderHistoryDetailsPaymentTerm>
     implements $OrderHistoryDetailsPaymentTermCopyWith<$Res> {
   _$OrderHistoryDetailsPaymentTermCopyWithImpl(this._value, this._then);
 
-  final OrderHistoryDetailsPaymentTerm _value;
   // ignore: unused_field
-  final $Res Function(OrderHistoryDetailsPaymentTerm) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? paymentTermCode = freezed,
-    Object? paymentTermDescription = freezed,
+    Object? paymentTermCode = null,
+    Object? paymentTermDescription = null,
   }) {
     return _then(_value.copyWith(
-      paymentTermCode: paymentTermCode == freezed
+      paymentTermCode: null == paymentTermCode
           ? _value.paymentTermCode
           : paymentTermCode // ignore: cast_nullable_to_non_nullable
               as String,
-      paymentTermDescription: paymentTermDescription == freezed
+      paymentTermDescription: null == paymentTermDescription
           ? _value.paymentTermDescription
           : paymentTermDescription // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -68,33 +73,32 @@ abstract class _$$_OrderHistoryDetailsPaymentTermCopyWith<$Res>
           $Res Function(_$_OrderHistoryDetailsPaymentTerm) then) =
       __$$_OrderHistoryDetailsPaymentTermCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String paymentTermCode, String paymentTermDescription});
 }
 
 /// @nodoc
 class __$$_OrderHistoryDetailsPaymentTermCopyWithImpl<$Res>
-    extends _$OrderHistoryDetailsPaymentTermCopyWithImpl<$Res>
+    extends _$OrderHistoryDetailsPaymentTermCopyWithImpl<$Res,
+        _$_OrderHistoryDetailsPaymentTerm>
     implements _$$_OrderHistoryDetailsPaymentTermCopyWith<$Res> {
   __$$_OrderHistoryDetailsPaymentTermCopyWithImpl(
       _$_OrderHistoryDetailsPaymentTerm _value,
       $Res Function(_$_OrderHistoryDetailsPaymentTerm) _then)
-      : super(_value, (v) => _then(v as _$_OrderHistoryDetailsPaymentTerm));
+      : super(_value, _then);
 
-  @override
-  _$_OrderHistoryDetailsPaymentTerm get _value =>
-      super._value as _$_OrderHistoryDetailsPaymentTerm;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? paymentTermCode = freezed,
-    Object? paymentTermDescription = freezed,
+    Object? paymentTermCode = null,
+    Object? paymentTermDescription = null,
   }) {
     return _then(_$_OrderHistoryDetailsPaymentTerm(
-      paymentTermCode: paymentTermCode == freezed
+      paymentTermCode: null == paymentTermCode
           ? _value.paymentTermCode
           : paymentTermCode // ignore: cast_nullable_to_non_nullable
               as String,
-      paymentTermDescription: paymentTermDescription == freezed
+      paymentTermDescription: null == paymentTermDescription
           ? _value.paymentTermDescription
           : paymentTermDescription // ignore: cast_nullable_to_non_nullable
               as String,
@@ -125,20 +129,19 @@ class _$_OrderHistoryDetailsPaymentTerm
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryDetailsPaymentTerm &&
-            const DeepCollectionEquality()
-                .equals(other.paymentTermCode, paymentTermCode) &&
-            const DeepCollectionEquality()
-                .equals(other.paymentTermDescription, paymentTermDescription));
+            (identical(other.paymentTermCode, paymentTermCode) ||
+                other.paymentTermCode == paymentTermCode) &&
+            (identical(other.paymentTermDescription, paymentTermDescription) ||
+                other.paymentTermDescription == paymentTermDescription));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(paymentTermCode),
-      const DeepCollectionEquality().hash(paymentTermDescription));
+  int get hashCode =>
+      Object.hash(runtimeType, paymentTermCode, paymentTermDescription);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OrderHistoryDetailsPaymentTermCopyWith<_$_OrderHistoryDetailsPaymentTerm>
       get copyWith => __$$_OrderHistoryDetailsPaymentTermCopyWithImpl<
           _$_OrderHistoryDetailsPaymentTerm>(this, _$identity);

@@ -28,34 +28,39 @@ mixin _$PaymentCustomerInformation {
 abstract class $PaymentCustomerInformationCopyWith<$Res> {
   factory $PaymentCustomerInformationCopyWith(PaymentCustomerInformation value,
           $Res Function(PaymentCustomerInformation) then) =
-      _$PaymentCustomerInformationCopyWithImpl<$Res>;
+      _$PaymentCustomerInformationCopyWithImpl<$Res,
+          PaymentCustomerInformation>;
+  @useResult
   $Res call({String paymentTerm, List<ShipToInfo> shipToInfoList});
 }
 
 /// @nodoc
-class _$PaymentCustomerInformationCopyWithImpl<$Res>
+class _$PaymentCustomerInformationCopyWithImpl<$Res,
+        $Val extends PaymentCustomerInformation>
     implements $PaymentCustomerInformationCopyWith<$Res> {
   _$PaymentCustomerInformationCopyWithImpl(this._value, this._then);
 
-  final PaymentCustomerInformation _value;
   // ignore: unused_field
-  final $Res Function(PaymentCustomerInformation) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? paymentTerm = freezed,
-    Object? shipToInfoList = freezed,
+    Object? paymentTerm = null,
+    Object? shipToInfoList = null,
   }) {
     return _then(_value.copyWith(
-      paymentTerm: paymentTerm == freezed
+      paymentTerm: null == paymentTerm
           ? _value.paymentTerm
           : paymentTerm // ignore: cast_nullable_to_non_nullable
               as String,
-      shipToInfoList: shipToInfoList == freezed
+      shipToInfoList: null == shipToInfoList
           ? _value.shipToInfoList
           : shipToInfoList // ignore: cast_nullable_to_non_nullable
               as List<ShipToInfo>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -67,33 +72,32 @@ abstract class _$$_PaymentCustomerInformationCopyWith<$Res>
           $Res Function(_$_PaymentCustomerInformation) then) =
       __$$_PaymentCustomerInformationCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String paymentTerm, List<ShipToInfo> shipToInfoList});
 }
 
 /// @nodoc
 class __$$_PaymentCustomerInformationCopyWithImpl<$Res>
-    extends _$PaymentCustomerInformationCopyWithImpl<$Res>
+    extends _$PaymentCustomerInformationCopyWithImpl<$Res,
+        _$_PaymentCustomerInformation>
     implements _$$_PaymentCustomerInformationCopyWith<$Res> {
   __$$_PaymentCustomerInformationCopyWithImpl(
       _$_PaymentCustomerInformation _value,
       $Res Function(_$_PaymentCustomerInformation) _then)
-      : super(_value, (v) => _then(v as _$_PaymentCustomerInformation));
+      : super(_value, _then);
 
-  @override
-  _$_PaymentCustomerInformation get _value =>
-      super._value as _$_PaymentCustomerInformation;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? paymentTerm = freezed,
-    Object? shipToInfoList = freezed,
+    Object? paymentTerm = null,
+    Object? shipToInfoList = null,
   }) {
     return _then(_$_PaymentCustomerInformation(
-      paymentTerm: paymentTerm == freezed
+      paymentTerm: null == paymentTerm
           ? _value.paymentTerm
           : paymentTerm // ignore: cast_nullable_to_non_nullable
               as String,
-      shipToInfoList: shipToInfoList == freezed
+      shipToInfoList: null == shipToInfoList
           ? _value._shipToInfoList
           : shipToInfoList // ignore: cast_nullable_to_non_nullable
               as List<ShipToInfo>,
@@ -129,20 +133,19 @@ class _$_PaymentCustomerInformation extends _PaymentCustomerInformation {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PaymentCustomerInformation &&
-            const DeepCollectionEquality()
-                .equals(other.paymentTerm, paymentTerm) &&
+            (identical(other.paymentTerm, paymentTerm) ||
+                other.paymentTerm == paymentTerm) &&
             const DeepCollectionEquality()
                 .equals(other._shipToInfoList, _shipToInfoList));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(paymentTerm),
+  int get hashCode => Object.hash(runtimeType, paymentTerm,
       const DeepCollectionEquality().hash(_shipToInfoList));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PaymentCustomerInformationCopyWith<_$_PaymentCustomerInformation>
       get copyWith => __$$_PaymentCustomerInformationCopyWithImpl<
           _$_PaymentCustomerInformation>(this, _$identity);

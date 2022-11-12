@@ -28,33 +28,37 @@ mixin _$SettingAup {
 abstract class $SettingAupCopyWith<$Res> {
   factory $SettingAupCopyWith(
           SettingAup value, $Res Function(SettingAup) then) =
-      _$SettingAupCopyWithImpl<$Res>;
+      _$SettingAupCopyWithImpl<$Res, SettingAup>;
+  @useResult
   $Res call({bool acceptAUP, DateTime acceptAUPTimestamp});
 }
 
 /// @nodoc
-class _$SettingAupCopyWithImpl<$Res> implements $SettingAupCopyWith<$Res> {
+class _$SettingAupCopyWithImpl<$Res, $Val extends SettingAup>
+    implements $SettingAupCopyWith<$Res> {
   _$SettingAupCopyWithImpl(this._value, this._then);
 
-  final SettingAup _value;
   // ignore: unused_field
-  final $Res Function(SettingAup) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? acceptAUP = freezed,
-    Object? acceptAUPTimestamp = freezed,
+    Object? acceptAUP = null,
+    Object? acceptAUPTimestamp = null,
   }) {
     return _then(_value.copyWith(
-      acceptAUP: acceptAUP == freezed
+      acceptAUP: null == acceptAUP
           ? _value.acceptAUP
           : acceptAUP // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptAUPTimestamp: acceptAUPTimestamp == freezed
+      acceptAUPTimestamp: null == acceptAUPTimestamp
           ? _value.acceptAUPTimestamp
           : acceptAUPTimestamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
-    ));
+    ) as $Val);
   }
 }
 
@@ -65,30 +69,30 @@ abstract class _$$_SettingAupCopyWith<$Res>
           _$_SettingAup value, $Res Function(_$_SettingAup) then) =
       __$$_SettingAupCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({bool acceptAUP, DateTime acceptAUPTimestamp});
 }
 
 /// @nodoc
-class __$$_SettingAupCopyWithImpl<$Res> extends _$SettingAupCopyWithImpl<$Res>
+class __$$_SettingAupCopyWithImpl<$Res>
+    extends _$SettingAupCopyWithImpl<$Res, _$_SettingAup>
     implements _$$_SettingAupCopyWith<$Res> {
   __$$_SettingAupCopyWithImpl(
       _$_SettingAup _value, $Res Function(_$_SettingAup) _then)
-      : super(_value, (v) => _then(v as _$_SettingAup));
+      : super(_value, _then);
 
-  @override
-  _$_SettingAup get _value => super._value as _$_SettingAup;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? acceptAUP = freezed,
-    Object? acceptAUPTimestamp = freezed,
+    Object? acceptAUP = null,
+    Object? acceptAUPTimestamp = null,
   }) {
     return _then(_$_SettingAup(
-      acceptAUP: acceptAUP == freezed
+      acceptAUP: null == acceptAUP
           ? _value.acceptAUP
           : acceptAUP // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptAUPTimestamp: acceptAUPTimestamp == freezed
+      acceptAUPTimestamp: null == acceptAUPTimestamp
           ? _value.acceptAUPTimestamp
           : acceptAUPTimestamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -118,19 +122,18 @@ class _$_SettingAup extends _SettingAup {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SettingAup &&
-            const DeepCollectionEquality().equals(other.acceptAUP, acceptAUP) &&
-            const DeepCollectionEquality()
-                .equals(other.acceptAUPTimestamp, acceptAUPTimestamp));
+            (identical(other.acceptAUP, acceptAUP) ||
+                other.acceptAUP == acceptAUP) &&
+            (identical(other.acceptAUPTimestamp, acceptAUPTimestamp) ||
+                other.acceptAUPTimestamp == acceptAUPTimestamp));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(acceptAUP),
-      const DeepCollectionEquality().hash(acceptAUPTimestamp));
+  int get hashCode => Object.hash(runtimeType, acceptAUP, acceptAUPTimestamp);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SettingAupCopyWith<_$_SettingAup> get copyWith =>
       __$$_SettingAupCopyWithImpl<_$_SettingAup>(this, _$identity);
 }

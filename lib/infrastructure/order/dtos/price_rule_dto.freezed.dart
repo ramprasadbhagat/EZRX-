@@ -46,7 +46,8 @@ mixin _$PriceRuleDto {
 abstract class $PriceRuleDtoCopyWith<$Res> {
   factory $PriceRuleDtoCopyWith(
           PriceRuleDto value, $Res Function(PriceRuleDto) then) =
-      _$PriceRuleDtoCopyWithImpl<$Res>;
+      _$PriceRuleDtoCopyWithImpl<$Res, PriceRuleDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'Type', defaultValue: '')
       @HiveField(14, defaultValue: '')
@@ -66,43 +67,46 @@ abstract class $PriceRuleDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PriceRuleDtoCopyWithImpl<$Res> implements $PriceRuleDtoCopyWith<$Res> {
+class _$PriceRuleDtoCopyWithImpl<$Res, $Val extends PriceRuleDto>
+    implements $PriceRuleDtoCopyWith<$Res> {
   _$PriceRuleDtoCopyWithImpl(this._value, this._then);
 
-  final PriceRuleDto _value;
   // ignore: unused_field
-  final $Res Function(PriceRuleDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? rate = freezed,
-    Object? condition = freezed,
-    Object? conditionNumber = freezed,
-    Object? bonusEligible = freezed,
+    Object? type = null,
+    Object? rate = null,
+    Object? condition = null,
+    Object? conditionNumber = null,
+    Object? bonusEligible = null,
   }) {
     return _then(_value.copyWith(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      rate: rate == freezed
+      rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
-      condition: condition == freezed
+      condition: null == condition
           ? _value.condition
           : condition // ignore: cast_nullable_to_non_nullable
               as String,
-      conditionNumber: conditionNumber == freezed
+      conditionNumber: null == conditionNumber
           ? _value.conditionNumber
           : conditionNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      bonusEligible: bonusEligible == freezed
+      bonusEligible: null == bonusEligible
           ? _value.bonusEligible
           : bonusEligible // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -113,6 +117,7 @@ abstract class _$$_PriceRuleDtoCopyWith<$Res>
           _$_PriceRuleDto value, $Res Function(_$_PriceRuleDto) then) =
       __$$_PriceRuleDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'Type', defaultValue: '')
       @HiveField(14, defaultValue: '')
@@ -133,41 +138,39 @@ abstract class _$$_PriceRuleDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_PriceRuleDtoCopyWithImpl<$Res>
-    extends _$PriceRuleDtoCopyWithImpl<$Res>
+    extends _$PriceRuleDtoCopyWithImpl<$Res, _$_PriceRuleDto>
     implements _$$_PriceRuleDtoCopyWith<$Res> {
   __$$_PriceRuleDtoCopyWithImpl(
       _$_PriceRuleDto _value, $Res Function(_$_PriceRuleDto) _then)
-      : super(_value, (v) => _then(v as _$_PriceRuleDto));
+      : super(_value, _then);
 
-  @override
-  _$_PriceRuleDto get _value => super._value as _$_PriceRuleDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? rate = freezed,
-    Object? condition = freezed,
-    Object? conditionNumber = freezed,
-    Object? bonusEligible = freezed,
+    Object? type = null,
+    Object? rate = null,
+    Object? condition = null,
+    Object? conditionNumber = null,
+    Object? bonusEligible = null,
   }) {
     return _then(_$_PriceRuleDto(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      rate: rate == freezed
+      rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
-      condition: condition == freezed
+      condition: null == condition
           ? _value.condition
           : condition // ignore: cast_nullable_to_non_nullable
               as String,
-      conditionNumber: conditionNumber == freezed
+      conditionNumber: null == conditionNumber
           ? _value.conditionNumber
           : conditionNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      bonusEligible: bonusEligible == freezed
+      bonusEligible: null == bonusEligible
           ? _value.bonusEligible
           : bonusEligible // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -231,27 +234,24 @@ class _$_PriceRuleDto extends _PriceRuleDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PriceRuleDto &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.rate, rate) &&
-            const DeepCollectionEquality().equals(other.condition, condition) &&
-            const DeepCollectionEquality()
-                .equals(other.conditionNumber, conditionNumber) &&
-            const DeepCollectionEquality()
-                .equals(other.bonusEligible, bonusEligible));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.rate, rate) || other.rate == rate) &&
+            (identical(other.condition, condition) ||
+                other.condition == condition) &&
+            (identical(other.conditionNumber, conditionNumber) ||
+                other.conditionNumber == conditionNumber) &&
+            (identical(other.bonusEligible, bonusEligible) ||
+                other.bonusEligible == bonusEligible));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(rate),
-      const DeepCollectionEquality().hash(condition),
-      const DeepCollectionEquality().hash(conditionNumber),
-      const DeepCollectionEquality().hash(bonusEligible));
+      runtimeType, type, rate, condition, conditionNumber, bonusEligible);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PriceRuleDtoCopyWith<_$_PriceRuleDto> get copyWith =>
       __$$_PriceRuleDtoCopyWithImpl<_$_PriceRuleDto>(this, _$identity);
 

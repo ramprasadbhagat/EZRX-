@@ -26,10 +26,10 @@ mixin _$CartEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function(PriceAggregate item)? addToCart,
-    TResult Function(PriceAggregate item)? removeFromCart,
+    TResult? Function()? initialized,
+    TResult? Function()? fetch,
+    TResult? Function(PriceAggregate item)? addToCart,
+    TResult? Function(PriceAggregate item)? removeFromCart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,10 +51,10 @@ mixin _$CartEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_AddToCart value)? addToCart,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AddToCart value)? addToCart,
+    TResult? Function(_RemoveFromCart value)? removeFromCart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -71,16 +71,18 @@ mixin _$CartEvent {
 /// @nodoc
 abstract class $CartEventCopyWith<$Res> {
   factory $CartEventCopyWith(CartEvent value, $Res Function(CartEvent) then) =
-      _$CartEventCopyWithImpl<$Res>;
+      _$CartEventCopyWithImpl<$Res, CartEvent>;
 }
 
 /// @nodoc
-class _$CartEventCopyWithImpl<$Res> implements $CartEventCopyWith<$Res> {
+class _$CartEventCopyWithImpl<$Res, $Val extends CartEvent>
+    implements $CartEventCopyWith<$Res> {
   _$CartEventCopyWithImpl(this._value, this._then);
 
-  final CartEvent _value;
   // ignore: unused_field
-  final $Res Function(CartEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -91,14 +93,12 @@ abstract class _$$_InitializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res> extends _$CartEventCopyWithImpl<$Res>
+class __$$_InitializedCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$_Initialized>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, (v) => _then(v as _$_Initialized));
-
-  @override
-  _$_Initialized get _value => super._value as _$_Initialized;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -134,10 +134,10 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function(PriceAggregate item)? addToCart,
-    TResult Function(PriceAggregate item)? removeFromCart,
+    TResult? Function()? initialized,
+    TResult? Function()? fetch,
+    TResult? Function(PriceAggregate item)? addToCart,
+    TResult? Function(PriceAggregate item)? removeFromCart,
   }) {
     return initialized?.call();
   }
@@ -171,10 +171,10 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_AddToCart value)? addToCart,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AddToCart value)? addToCart,
+    TResult? Function(_RemoveFromCart value)? removeFromCart,
   }) {
     return initialized?.call(this);
   }
@@ -206,13 +206,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res> extends _$CartEventCopyWithImpl<$Res>
+class __$$_FetchCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$_Fetch>
     implements _$$_FetchCopyWith<$Res> {
   __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
-      : super(_value, (v) => _then(v as _$_Fetch));
-
-  @override
-  _$_Fetch get _value => super._value as _$_Fetch;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -248,10 +246,10 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function(PriceAggregate item)? addToCart,
-    TResult Function(PriceAggregate item)? removeFromCart,
+    TResult? Function()? initialized,
+    TResult? Function()? fetch,
+    TResult? Function(PriceAggregate item)? addToCart,
+    TResult? Function(PriceAggregate item)? removeFromCart,
   }) {
     return fetch?.call();
   }
@@ -285,10 +283,10 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_AddToCart value)? addToCart,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AddToCart value)? addToCart,
+    TResult? Function(_RemoveFromCart value)? removeFromCart,
   }) {
     return fetch?.call(this);
   }
@@ -318,27 +316,27 @@ abstract class _$$_AddToCartCopyWith<$Res> {
   factory _$$_AddToCartCopyWith(
           _$_AddToCart value, $Res Function(_$_AddToCart) then) =
       __$$_AddToCartCopyWithImpl<$Res>;
+  @useResult
   $Res call({PriceAggregate item});
 
   $PriceAggregateCopyWith<$Res> get item;
 }
 
 /// @nodoc
-class __$$_AddToCartCopyWithImpl<$Res> extends _$CartEventCopyWithImpl<$Res>
+class __$$_AddToCartCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$_AddToCart>
     implements _$$_AddToCartCopyWith<$Res> {
   __$$_AddToCartCopyWithImpl(
       _$_AddToCart _value, $Res Function(_$_AddToCart) _then)
-      : super(_value, (v) => _then(v as _$_AddToCart));
+      : super(_value, _then);
 
-  @override
-  _$_AddToCart get _value => super._value as _$_AddToCart;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? item = freezed,
+    Object? item = null,
   }) {
     return _then(_$_AddToCart(
-      item: item == freezed
+      item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
               as PriceAggregate,
@@ -346,6 +344,7 @@ class __$$_AddToCartCopyWithImpl<$Res> extends _$CartEventCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $PriceAggregateCopyWith<$Res> get item {
     return $PriceAggregateCopyWith<$Res>(_value.item, (value) {
       return _then(_value.copyWith(item: value));
@@ -371,15 +370,15 @@ class _$_AddToCart implements _AddToCart {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AddToCart &&
-            const DeepCollectionEquality().equals(other.item, item));
+            (identical(other.item, item) || other.item == item));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(item));
+  int get hashCode => Object.hash(runtimeType, item);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AddToCartCopyWith<_$_AddToCart> get copyWith =>
       __$$_AddToCartCopyWithImpl<_$_AddToCart>(this, _$identity);
 
@@ -397,10 +396,10 @@ class _$_AddToCart implements _AddToCart {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function(PriceAggregate item)? addToCart,
-    TResult Function(PriceAggregate item)? removeFromCart,
+    TResult? Function()? initialized,
+    TResult? Function()? fetch,
+    TResult? Function(PriceAggregate item)? addToCart,
+    TResult? Function(PriceAggregate item)? removeFromCart,
   }) {
     return addToCart?.call(item);
   }
@@ -434,10 +433,10 @@ class _$_AddToCart implements _AddToCart {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_AddToCart value)? addToCart,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AddToCart value)? addToCart,
+    TResult? Function(_RemoveFromCart value)? removeFromCart,
   }) {
     return addToCart?.call(this);
   }
@@ -472,6 +471,7 @@ abstract class _$$_RemoveFromCartCopyWith<$Res> {
   factory _$$_RemoveFromCartCopyWith(
           _$_RemoveFromCart value, $Res Function(_$_RemoveFromCart) then) =
       __$$_RemoveFromCartCopyWithImpl<$Res>;
+  @useResult
   $Res call({PriceAggregate item});
 
   $PriceAggregateCopyWith<$Res> get item;
@@ -479,21 +479,19 @@ abstract class _$$_RemoveFromCartCopyWith<$Res> {
 
 /// @nodoc
 class __$$_RemoveFromCartCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$_RemoveFromCart>
     implements _$$_RemoveFromCartCopyWith<$Res> {
   __$$_RemoveFromCartCopyWithImpl(
       _$_RemoveFromCart _value, $Res Function(_$_RemoveFromCart) _then)
-      : super(_value, (v) => _then(v as _$_RemoveFromCart));
+      : super(_value, _then);
 
-  @override
-  _$_RemoveFromCart get _value => super._value as _$_RemoveFromCart;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? item = freezed,
+    Object? item = null,
   }) {
     return _then(_$_RemoveFromCart(
-      item: item == freezed
+      item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
               as PriceAggregate,
@@ -501,6 +499,7 @@ class __$$_RemoveFromCartCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $PriceAggregateCopyWith<$Res> get item {
     return $PriceAggregateCopyWith<$Res>(_value.item, (value) {
       return _then(_value.copyWith(item: value));
@@ -526,15 +525,15 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_RemoveFromCart &&
-            const DeepCollectionEquality().equals(other.item, item));
+            (identical(other.item, item) || other.item == item));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(item));
+  int get hashCode => Object.hash(runtimeType, item);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_RemoveFromCartCopyWith<_$_RemoveFromCart> get copyWith =>
       __$$_RemoveFromCartCopyWithImpl<_$_RemoveFromCart>(this, _$identity);
 
@@ -552,10 +551,10 @@ class _$_RemoveFromCart implements _RemoveFromCart {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function(PriceAggregate item)? addToCart,
-    TResult Function(PriceAggregate item)? removeFromCart,
+    TResult? Function()? initialized,
+    TResult? Function()? fetch,
+    TResult? Function(PriceAggregate item)? addToCart,
+    TResult? Function(PriceAggregate item)? removeFromCart,
   }) {
     return removeFromCart?.call(item);
   }
@@ -589,10 +588,10 @@ class _$_RemoveFromCart implements _RemoveFromCart {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_AddToCart value)? addToCart,
-    TResult Function(_RemoveFromCart value)? removeFromCart,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AddToCart value)? addToCart,
+    TResult? Function(_RemoveFromCart value)? removeFromCart,
   }) {
     return removeFromCart?.call(this);
   }
@@ -638,7 +637,8 @@ mixin _$CartState {
 /// @nodoc
 abstract class $CartStateCopyWith<$Res> {
   factory $CartStateCopyWith(CartState value, $Res Function(CartState) then) =
-      _$CartStateCopyWithImpl<$Res>;
+      _$CartStateCopyWithImpl<$Res, CartState>;
+  @useResult
   $Res call(
       {List<PriceAggregate> cartItemList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
@@ -646,33 +646,36 @@ abstract class $CartStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CartStateCopyWithImpl<$Res> implements $CartStateCopyWith<$Res> {
+class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
+    implements $CartStateCopyWith<$Res> {
   _$CartStateCopyWithImpl(this._value, this._then);
 
-  final CartState _value;
   // ignore: unused_field
-  final $Res Function(CartState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cartItemList = freezed,
-    Object? apiFailureOrSuccessOption = freezed,
-    Object? isFetching = freezed,
+    Object? cartItemList = null,
+    Object? apiFailureOrSuccessOption = null,
+    Object? isFetching = null,
   }) {
     return _then(_value.copyWith(
-      cartItemList: cartItemList == freezed
+      cartItemList: null == cartItemList
           ? _value.cartItemList
           : cartItemList // ignore: cast_nullable_to_non_nullable
               as List<PriceAggregate>,
-      apiFailureOrSuccessOption: apiFailureOrSuccessOption == freezed
+      apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      isFetching: isFetching == freezed
+      isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -682,6 +685,7 @@ abstract class _$$_CartStateCopyWith<$Res> implements $CartStateCopyWith<$Res> {
           _$_CartState value, $Res Function(_$_CartState) then) =
       __$$_CartStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {List<PriceAggregate> cartItemList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
@@ -689,31 +693,30 @@ abstract class _$$_CartStateCopyWith<$Res> implements $CartStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_CartStateCopyWithImpl<$Res> extends _$CartStateCopyWithImpl<$Res>
+class __$$_CartStateCopyWithImpl<$Res>
+    extends _$CartStateCopyWithImpl<$Res, _$_CartState>
     implements _$$_CartStateCopyWith<$Res> {
   __$$_CartStateCopyWithImpl(
       _$_CartState _value, $Res Function(_$_CartState) _then)
-      : super(_value, (v) => _then(v as _$_CartState));
+      : super(_value, _then);
 
-  @override
-  _$_CartState get _value => super._value as _$_CartState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cartItemList = freezed,
-    Object? apiFailureOrSuccessOption = freezed,
-    Object? isFetching = freezed,
+    Object? cartItemList = null,
+    Object? apiFailureOrSuccessOption = null,
+    Object? isFetching = null,
   }) {
     return _then(_$_CartState(
-      cartItemList: cartItemList == freezed
+      cartItemList: null == cartItemList
           ? _value._cartItemList
           : cartItemList // ignore: cast_nullable_to_non_nullable
               as List<PriceAggregate>,
-      apiFailureOrSuccessOption: apiFailureOrSuccessOption == freezed
+      apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      isFetching: isFetching == freezed
+      isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -755,21 +758,23 @@ class _$_CartState extends _CartState {
             other is _$_CartState &&
             const DeepCollectionEquality()
                 .equals(other._cartItemList, _cartItemList) &&
-            const DeepCollectionEquality().equals(
-                other.apiFailureOrSuccessOption, apiFailureOrSuccessOption) &&
-            const DeepCollectionEquality()
-                .equals(other.isFetching, isFetching));
+            (identical(other.apiFailureOrSuccessOption,
+                    apiFailureOrSuccessOption) ||
+                other.apiFailureOrSuccessOption == apiFailureOrSuccessOption) &&
+            (identical(other.isFetching, isFetching) ||
+                other.isFetching == isFetching));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_cartItemList),
-      const DeepCollectionEquality().hash(apiFailureOrSuccessOption),
-      const DeepCollectionEquality().hash(isFetching));
+      apiFailureOrSuccessOption,
+      isFetching);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_CartStateCopyWith<_$_CartState> get copyWith =>
       __$$_CartStateCopyWithImpl<_$_CartState>(this, _$identity);
 }

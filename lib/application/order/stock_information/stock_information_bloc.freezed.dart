@@ -30,8 +30,8 @@ mixin _$StockInformationEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
+    TResult? Function()? initialized,
+    TResult? Function(
             MaterialInfo material,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -61,8 +61,8 @@ mixin _$StockInformationEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_FetchInfo value)? fetch,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchInfo value)? fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -78,17 +78,19 @@ mixin _$StockInformationEvent {
 abstract class $StockInformationEventCopyWith<$Res> {
   factory $StockInformationEventCopyWith(StockInformationEvent value,
           $Res Function(StockInformationEvent) then) =
-      _$StockInformationEventCopyWithImpl<$Res>;
+      _$StockInformationEventCopyWithImpl<$Res, StockInformationEvent>;
 }
 
 /// @nodoc
-class _$StockInformationEventCopyWithImpl<$Res>
+class _$StockInformationEventCopyWithImpl<$Res,
+        $Val extends StockInformationEvent>
     implements $StockInformationEventCopyWith<$Res> {
   _$StockInformationEventCopyWithImpl(this._value, this._then);
 
-  final StockInformationEvent _value;
   // ignore: unused_field
-  final $Res Function(StockInformationEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -100,14 +102,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitializedCopyWithImpl<$Res>
-    extends _$StockInformationEventCopyWithImpl<$Res>
+    extends _$StockInformationEventCopyWithImpl<$Res, _$_Initialized>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, (v) => _then(v as _$_Initialized));
-
-  @override
-  _$_Initialized get _value => super._value as _$_Initialized;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -147,8 +146,8 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
+    TResult? Function()? initialized,
+    TResult? Function(
             MaterialInfo material,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -190,8 +189,8 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_FetchInfo value)? fetch,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchInfo value)? fetch,
   }) {
     return initialized?.call(this);
   }
@@ -219,6 +218,7 @@ abstract class _$$_FetchInfoCopyWith<$Res> {
   factory _$$_FetchInfoCopyWith(
           _$_FetchInfo value, $Res Function(_$_FetchInfo) then) =
       __$$_FetchInfoCopyWithImpl<$Res>;
+  @useResult
   $Res call(
       {MaterialInfo material,
       CustomerCodeInfo customerCodeInfo,
@@ -235,41 +235,39 @@ abstract class _$$_FetchInfoCopyWith<$Res> {
 
 /// @nodoc
 class __$$_FetchInfoCopyWithImpl<$Res>
-    extends _$StockInformationEventCopyWithImpl<$Res>
+    extends _$StockInformationEventCopyWithImpl<$Res, _$_FetchInfo>
     implements _$$_FetchInfoCopyWith<$Res> {
   __$$_FetchInfoCopyWithImpl(
       _$_FetchInfo _value, $Res Function(_$_FetchInfo) _then)
-      : super(_value, (v) => _then(v as _$_FetchInfo));
+      : super(_value, _then);
 
-  @override
-  _$_FetchInfo get _value => super._value as _$_FetchInfo;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? material = freezed,
-    Object? customerCodeInfo = freezed,
-    Object? salesOrganisationConfigs = freezed,
-    Object? salesOrganisation = freezed,
-    Object? shipToInfo = freezed,
+    Object? material = null,
+    Object? customerCodeInfo = null,
+    Object? salesOrganisationConfigs = null,
+    Object? salesOrganisation = null,
+    Object? shipToInfo = null,
   }) {
     return _then(_$_FetchInfo(
-      material: material == freezed
+      material: null == material
           ? _value.material
           : material // ignore: cast_nullable_to_non_nullable
               as MaterialInfo,
-      customerCodeInfo: customerCodeInfo == freezed
+      customerCodeInfo: null == customerCodeInfo
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
-      salesOrganisationConfigs: salesOrganisationConfigs == freezed
+      salesOrganisationConfigs: null == salesOrganisationConfigs
           ? _value.salesOrganisationConfigs
           : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
-      salesOrganisation: salesOrganisation == freezed
+      salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      shipToInfo: shipToInfo == freezed
+      shipToInfo: null == shipToInfo
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
@@ -277,6 +275,7 @@ class __$$_FetchInfoCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $MaterialInfoCopyWith<$Res> get material {
     return $MaterialInfoCopyWith<$Res>(_value.material, (value) {
       return _then(_value.copyWith(material: value));
@@ -284,6 +283,7 @@ class __$$_FetchInfoCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
     return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
       return _then(_value.copyWith(customerCodeInfo: value));
@@ -291,6 +291,7 @@ class __$$_FetchInfoCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs {
     return $SalesOrganisationConfigsCopyWith<$Res>(
         _value.salesOrganisationConfigs, (value) {
@@ -299,6 +300,7 @@ class __$$_FetchInfoCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SalesOrganisationCopyWith<$Res> get salesOrganisation {
     return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
       return _then(_value.copyWith(salesOrganisation: value));
@@ -306,6 +308,7 @@ class __$$_FetchInfoCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $ShipToInfoCopyWith<$Res> get shipToInfo {
     return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
       return _then(_value.copyWith(shipToInfo: value));
@@ -344,28 +347,26 @@ class _$_FetchInfo implements _FetchInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_FetchInfo &&
-            const DeepCollectionEquality().equals(other.material, material) &&
-            const DeepCollectionEquality()
-                .equals(other.customerCodeInfo, customerCodeInfo) &&
-            const DeepCollectionEquality().equals(
-                other.salesOrganisationConfigs, salesOrganisationConfigs) &&
-            const DeepCollectionEquality()
-                .equals(other.salesOrganisation, salesOrganisation) &&
-            const DeepCollectionEquality()
-                .equals(other.shipToInfo, shipToInfo));
+            (identical(other.material, material) ||
+                other.material == material) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(
+                    other.salesOrganisationConfigs, salesOrganisationConfigs) ||
+                other.salesOrganisationConfigs == salesOrganisationConfigs) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(material),
-      const DeepCollectionEquality().hash(customerCodeInfo),
-      const DeepCollectionEquality().hash(salesOrganisationConfigs),
-      const DeepCollectionEquality().hash(salesOrganisation),
-      const DeepCollectionEquality().hash(shipToInfo));
+  int get hashCode => Object.hash(runtimeType, material, customerCodeInfo,
+      salesOrganisationConfigs, salesOrganisation, shipToInfo);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_FetchInfoCopyWith<_$_FetchInfo> get copyWith =>
       __$$_FetchInfoCopyWithImpl<_$_FetchInfo>(this, _$identity);
 
@@ -388,8 +389,8 @@ class _$_FetchInfo implements _FetchInfo {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
+    TResult? Function()? initialized,
+    TResult? Function(
             MaterialInfo material,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -433,8 +434,8 @@ class _$_FetchInfo implements _FetchInfo {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_FetchInfo value)? fetch,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchInfo value)? fetch,
   }) {
     return fetch?.call(this);
   }
@@ -489,7 +490,8 @@ mixin _$StockInformationState {
 abstract class $StockInformationStateCopyWith<$Res> {
   factory $StockInformationStateCopyWith(StockInformationState value,
           $Res Function(StockInformationState) then) =
-      _$StockInformationStateCopyWithImpl<$Res>;
+      _$StockInformationStateCopyWithImpl<$Res, StockInformationState>;
+  @useResult
   $Res call(
       {bool isSubmitting,
       bool showErrorMessages,
@@ -499,40 +501,43 @@ abstract class $StockInformationStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$StockInformationStateCopyWithImpl<$Res>
+class _$StockInformationStateCopyWithImpl<$Res,
+        $Val extends StockInformationState>
     implements $StockInformationStateCopyWith<$Res> {
   _$StockInformationStateCopyWithImpl(this._value, this._then);
 
-  final StockInformationState _value;
   // ignore: unused_field
-  final $Res Function(StockInformationState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isSubmitting = freezed,
-    Object? showErrorMessages = freezed,
-    Object? stockInfoListFailureOrSuccessOption = freezed,
-    Object? stockInfoList = freezed,
+    Object? isSubmitting = null,
+    Object? showErrorMessages = null,
+    Object? stockInfoListFailureOrSuccessOption = null,
+    Object? stockInfoList = null,
   }) {
     return _then(_value.copyWith(
-      isSubmitting: isSubmitting == freezed
+      isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
-      showErrorMessages: showErrorMessages == freezed
+      showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
-      stockInfoListFailureOrSuccessOption: stockInfoListFailureOrSuccessOption ==
-              freezed
+      stockInfoListFailureOrSuccessOption: null ==
+              stockInfoListFailureOrSuccessOption
           ? _value.stockInfoListFailureOrSuccessOption
           : stockInfoListFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, List<StockInfo>>>,
-      stockInfoList: stockInfoList == freezed
+      stockInfoList: null == stockInfoList
           ? _value.stockInfoList
           : stockInfoList // ignore: cast_nullable_to_non_nullable
               as List<StockInfo>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -543,6 +548,7 @@ abstract class _$$_StockInformationStateCopyWith<$Res>
           $Res Function(_$_StockInformationState) then) =
       __$$_StockInformationStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {bool isSubmitting,
       bool showErrorMessages,
@@ -553,38 +559,35 @@ abstract class _$$_StockInformationStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_StockInformationStateCopyWithImpl<$Res>
-    extends _$StockInformationStateCopyWithImpl<$Res>
+    extends _$StockInformationStateCopyWithImpl<$Res, _$_StockInformationState>
     implements _$$_StockInformationStateCopyWith<$Res> {
   __$$_StockInformationStateCopyWithImpl(_$_StockInformationState _value,
       $Res Function(_$_StockInformationState) _then)
-      : super(_value, (v) => _then(v as _$_StockInformationState));
+      : super(_value, _then);
 
-  @override
-  _$_StockInformationState get _value =>
-      super._value as _$_StockInformationState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isSubmitting = freezed,
-    Object? showErrorMessages = freezed,
-    Object? stockInfoListFailureOrSuccessOption = freezed,
-    Object? stockInfoList = freezed,
+    Object? isSubmitting = null,
+    Object? showErrorMessages = null,
+    Object? stockInfoListFailureOrSuccessOption = null,
+    Object? stockInfoList = null,
   }) {
     return _then(_$_StockInformationState(
-      isSubmitting: isSubmitting == freezed
+      isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
-      showErrorMessages: showErrorMessages == freezed
+      showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
-      stockInfoListFailureOrSuccessOption: stockInfoListFailureOrSuccessOption ==
-              freezed
+      stockInfoListFailureOrSuccessOption: null ==
+              stockInfoListFailureOrSuccessOption
           ? _value.stockInfoListFailureOrSuccessOption
           : stockInfoListFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, List<StockInfo>>>,
-      stockInfoList: stockInfoList == freezed
+      stockInfoList: null == stockInfoList
           ? _value._stockInfoList
           : stockInfoList // ignore: cast_nullable_to_non_nullable
               as List<StockInfo>,
@@ -626,13 +629,14 @@ class _$_StockInformationState implements _StockInformationState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_StockInformationState &&
-            const DeepCollectionEquality()
-                .equals(other.isSubmitting, isSubmitting) &&
-            const DeepCollectionEquality()
-                .equals(other.showErrorMessages, showErrorMessages) &&
-            const DeepCollectionEquality().equals(
-                other.stockInfoListFailureOrSuccessOption,
-                stockInfoListFailureOrSuccessOption) &&
+            (identical(other.isSubmitting, isSubmitting) ||
+                other.isSubmitting == isSubmitting) &&
+            (identical(other.showErrorMessages, showErrorMessages) ||
+                other.showErrorMessages == showErrorMessages) &&
+            (identical(other.stockInfoListFailureOrSuccessOption,
+                    stockInfoListFailureOrSuccessOption) ||
+                other.stockInfoListFailureOrSuccessOption ==
+                    stockInfoListFailureOrSuccessOption) &&
             const DeepCollectionEquality()
                 .equals(other._stockInfoList, _stockInfoList));
   }
@@ -640,13 +644,14 @@ class _$_StockInformationState implements _StockInformationState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(isSubmitting),
-      const DeepCollectionEquality().hash(showErrorMessages),
-      const DeepCollectionEquality().hash(stockInfoListFailureOrSuccessOption),
+      isSubmitting,
+      showErrorMessages,
+      stockInfoListFailureOrSuccessOption,
       const DeepCollectionEquality().hash(_stockInfoList));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_StockInformationStateCopyWith<_$_StockInformationState> get copyWith =>
       __$$_StockInformationStateCopyWithImpl<_$_StockInformationState>(
           this, _$identity);

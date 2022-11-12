@@ -69,7 +69,8 @@ mixin _$UserDto {
 /// @nodoc
 abstract class $UserDtoCopyWith<$Res> {
   factory $UserDtoCopyWith(UserDto value, $Res Function(UserDto) then) =
-      _$UserDtoCopyWithImpl<$Res>;
+      _$UserDtoCopyWithImpl<$Res, UserDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'id', defaultValue: '')
           String id,
@@ -109,104 +110,108 @@ abstract class $UserDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserDtoCopyWithImpl<$Res> implements $UserDtoCopyWith<$Res> {
+class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
+    implements $UserDtoCopyWith<$Res> {
   _$UserDtoCopyWithImpl(this._value, this._then);
 
-  final UserDto _value;
   // ignore: unused_field
-  final $Res Function(UserDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? username = freezed,
-    Object? email = freezed,
-    Object? firstName = freezed,
-    Object? lastName = freezed,
-    Object? role = freezed,
-    Object? customerCode = freezed,
-    Object? userSalesOrganisations = freezed,
-    Object? emailNotifications = freezed,
-    Object? mobileNotifications = freezed,
-    Object? languagePreference = freezed,
-    Object? acceptTC = freezed,
-    Object? acceptTCTimestamp = freezed,
-    Object? acceptAUP = freezed,
-    Object? enableOrderType = freezed,
-    Object? acceptAUPTimestamp = freezed,
+    Object? id = null,
+    Object? username = null,
+    Object? email = null,
+    Object? firstName = null,
+    Object? lastName = null,
+    Object? role = null,
+    Object? customerCode = null,
+    Object? userSalesOrganisations = null,
+    Object? emailNotifications = null,
+    Object? mobileNotifications = null,
+    Object? languagePreference = null,
+    Object? acceptTC = null,
+    Object? acceptTCTimestamp = null,
+    Object? acceptAUP = null,
+    Object? enableOrderType = null,
+    Object? acceptAUPTimestamp = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      username: username == freezed
+      username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      firstName: firstName == freezed
+      firstName: null == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
               as String,
-      lastName: lastName == freezed
+      lastName: null == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
-      role: role == freezed
+      role: null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as RoleDto,
-      customerCode: customerCode == freezed
+      customerCode: null == customerCode
           ? _value.customerCode
           : customerCode // ignore: cast_nullable_to_non_nullable
               as String,
-      userSalesOrganisations: userSalesOrganisations == freezed
+      userSalesOrganisations: null == userSalesOrganisations
           ? _value.userSalesOrganisations
           : userSalesOrganisations // ignore: cast_nullable_to_non_nullable
               as List<SalesOrganisationDto>,
-      emailNotifications: emailNotifications == freezed
+      emailNotifications: null == emailNotifications
           ? _value.emailNotifications
           : emailNotifications // ignore: cast_nullable_to_non_nullable
               as bool,
-      mobileNotifications: mobileNotifications == freezed
+      mobileNotifications: null == mobileNotifications
           ? _value.mobileNotifications
           : mobileNotifications // ignore: cast_nullable_to_non_nullable
               as bool,
-      languagePreference: languagePreference == freezed
+      languagePreference: null == languagePreference
           ? _value.languagePreference
           : languagePreference // ignore: cast_nullable_to_non_nullable
               as String,
-      acceptTC: acceptTC == freezed
+      acceptTC: null == acceptTC
           ? _value.acceptTC
           : acceptTC // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptTCTimestamp: acceptTCTimestamp == freezed
+      acceptTCTimestamp: null == acceptTCTimestamp
           ? _value.acceptTCTimestamp
           : acceptTCTimestamp // ignore: cast_nullable_to_non_nullable
               as String,
-      acceptAUP: acceptAUP == freezed
+      acceptAUP: null == acceptAUP
           ? _value.acceptAUP
           : acceptAUP // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableOrderType: enableOrderType == freezed
+      enableOrderType: null == enableOrderType
           ? _value.enableOrderType
           : enableOrderType // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptAUPTimestamp: acceptAUPTimestamp == freezed
+      acceptAUPTimestamp: null == acceptAUPTimestamp
           ? _value.acceptAUPTimestamp
           : acceptAUPTimestamp // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $RoleDtoCopyWith<$Res> get role {
     return $RoleDtoCopyWith<$Res>(_value.role, (value) {
-      return _then(_value.copyWith(role: value));
+      return _then(_value.copyWith(role: value) as $Val);
     });
   }
 }
@@ -217,6 +222,7 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
           _$_UserDto value, $Res Function(_$_UserDto) then) =
       __$$_UserDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'id', defaultValue: '')
           String id,
@@ -257,95 +263,94 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UserDtoCopyWithImpl<$Res> extends _$UserDtoCopyWithImpl<$Res>
+class __$$_UserDtoCopyWithImpl<$Res>
+    extends _$UserDtoCopyWithImpl<$Res, _$_UserDto>
     implements _$$_UserDtoCopyWith<$Res> {
   __$$_UserDtoCopyWithImpl(_$_UserDto _value, $Res Function(_$_UserDto) _then)
-      : super(_value, (v) => _then(v as _$_UserDto));
+      : super(_value, _then);
 
-  @override
-  _$_UserDto get _value => super._value as _$_UserDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? username = freezed,
-    Object? email = freezed,
-    Object? firstName = freezed,
-    Object? lastName = freezed,
-    Object? role = freezed,
-    Object? customerCode = freezed,
-    Object? userSalesOrganisations = freezed,
-    Object? emailNotifications = freezed,
-    Object? mobileNotifications = freezed,
-    Object? languagePreference = freezed,
-    Object? acceptTC = freezed,
-    Object? acceptTCTimestamp = freezed,
-    Object? acceptAUP = freezed,
-    Object? enableOrderType = freezed,
-    Object? acceptAUPTimestamp = freezed,
+    Object? id = null,
+    Object? username = null,
+    Object? email = null,
+    Object? firstName = null,
+    Object? lastName = null,
+    Object? role = null,
+    Object? customerCode = null,
+    Object? userSalesOrganisations = null,
+    Object? emailNotifications = null,
+    Object? mobileNotifications = null,
+    Object? languagePreference = null,
+    Object? acceptTC = null,
+    Object? acceptTCTimestamp = null,
+    Object? acceptAUP = null,
+    Object? enableOrderType = null,
+    Object? acceptAUPTimestamp = null,
   }) {
     return _then(_$_UserDto(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      username: username == freezed
+      username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      firstName: firstName == freezed
+      firstName: null == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
               as String,
-      lastName: lastName == freezed
+      lastName: null == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
-      role: role == freezed
+      role: null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as RoleDto,
-      customerCode: customerCode == freezed
+      customerCode: null == customerCode
           ? _value.customerCode
           : customerCode // ignore: cast_nullable_to_non_nullable
               as String,
-      userSalesOrganisations: userSalesOrganisations == freezed
+      userSalesOrganisations: null == userSalesOrganisations
           ? _value._userSalesOrganisations
           : userSalesOrganisations // ignore: cast_nullable_to_non_nullable
               as List<SalesOrganisationDto>,
-      emailNotifications: emailNotifications == freezed
+      emailNotifications: null == emailNotifications
           ? _value.emailNotifications
           : emailNotifications // ignore: cast_nullable_to_non_nullable
               as bool,
-      mobileNotifications: mobileNotifications == freezed
+      mobileNotifications: null == mobileNotifications
           ? _value.mobileNotifications
           : mobileNotifications // ignore: cast_nullable_to_non_nullable
               as bool,
-      languagePreference: languagePreference == freezed
+      languagePreference: null == languagePreference
           ? _value.languagePreference
           : languagePreference // ignore: cast_nullable_to_non_nullable
               as String,
-      acceptTC: acceptTC == freezed
+      acceptTC: null == acceptTC
           ? _value.acceptTC
           : acceptTC // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptTCTimestamp: acceptTCTimestamp == freezed
+      acceptTCTimestamp: null == acceptTCTimestamp
           ? _value.acceptTCTimestamp
           : acceptTCTimestamp // ignore: cast_nullable_to_non_nullable
               as String,
-      acceptAUP: acceptAUP == freezed
+      acceptAUP: null == acceptAUP
           ? _value.acceptAUP
           : acceptAUP // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableOrderType: enableOrderType == freezed
+      enableOrderType: null == enableOrderType
           ? _value.enableOrderType
           : enableOrderType // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptAUPTimestamp: acceptAUPTimestamp == freezed
+      acceptAUPTimestamp: null == acceptAUPTimestamp
           ? _value.acceptAUPTimestamp
           : acceptAUPTimestamp // ignore: cast_nullable_to_non_nullable
               as String,
@@ -467,55 +472,61 @@ class _$_UserDto extends _UserDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserDto &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.username, username) &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.firstName, firstName) &&
-            const DeepCollectionEquality().equals(other.lastName, lastName) &&
-            const DeepCollectionEquality().equals(other.role, role) &&
-            const DeepCollectionEquality()
-                .equals(other.customerCode, customerCode) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.customerCode, customerCode) ||
+                other.customerCode == customerCode) &&
             const DeepCollectionEquality().equals(
                 other._userSalesOrganisations, _userSalesOrganisations) &&
-            const DeepCollectionEquality()
-                .equals(other.emailNotifications, emailNotifications) &&
-            const DeepCollectionEquality()
-                .equals(other.mobileNotifications, mobileNotifications) &&
-            const DeepCollectionEquality()
-                .equals(other.languagePreference, languagePreference) &&
-            const DeepCollectionEquality().equals(other.acceptTC, acceptTC) &&
-            const DeepCollectionEquality()
-                .equals(other.acceptTCTimestamp, acceptTCTimestamp) &&
-            const DeepCollectionEquality().equals(other.acceptAUP, acceptAUP) &&
-            const DeepCollectionEquality()
-                .equals(other.enableOrderType, enableOrderType) &&
-            const DeepCollectionEquality()
-                .equals(other.acceptAUPTimestamp, acceptAUPTimestamp));
+            (identical(other.emailNotifications, emailNotifications) ||
+                other.emailNotifications == emailNotifications) &&
+            (identical(other.mobileNotifications, mobileNotifications) ||
+                other.mobileNotifications == mobileNotifications) &&
+            (identical(other.languagePreference, languagePreference) ||
+                other.languagePreference == languagePreference) &&
+            (identical(other.acceptTC, acceptTC) ||
+                other.acceptTC == acceptTC) &&
+            (identical(other.acceptTCTimestamp, acceptTCTimestamp) ||
+                other.acceptTCTimestamp == acceptTCTimestamp) &&
+            (identical(other.acceptAUP, acceptAUP) ||
+                other.acceptAUP == acceptAUP) &&
+            (identical(other.enableOrderType, enableOrderType) ||
+                other.enableOrderType == enableOrderType) &&
+            (identical(other.acceptAUPTimestamp, acceptAUPTimestamp) ||
+                other.acceptAUPTimestamp == acceptAUPTimestamp));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(username),
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(firstName),
-      const DeepCollectionEquality().hash(lastName),
-      const DeepCollectionEquality().hash(role),
-      const DeepCollectionEquality().hash(customerCode),
+      id,
+      username,
+      email,
+      firstName,
+      lastName,
+      role,
+      customerCode,
       const DeepCollectionEquality().hash(_userSalesOrganisations),
-      const DeepCollectionEquality().hash(emailNotifications),
-      const DeepCollectionEquality().hash(mobileNotifications),
-      const DeepCollectionEquality().hash(languagePreference),
-      const DeepCollectionEquality().hash(acceptTC),
-      const DeepCollectionEquality().hash(acceptTCTimestamp),
-      const DeepCollectionEquality().hash(acceptAUP),
-      const DeepCollectionEquality().hash(enableOrderType),
-      const DeepCollectionEquality().hash(acceptAUPTimestamp));
+      emailNotifications,
+      mobileNotifications,
+      languagePreference,
+      acceptTC,
+      acceptTCTimestamp,
+      acceptAUP,
+      enableOrderType,
+      acceptAUPTimestamp);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UserDtoCopyWith<_$_UserDto> get copyWith =>
       __$$_UserDtoCopyWithImpl<_$_UserDto>(this, _$identity);
 

@@ -40,7 +40,8 @@ mixin _$BundleDto {
 /// @nodoc
 abstract class $BundleDtoCopyWith<$Res> {
   factory $BundleDtoCopyWith(BundleDto value, $Res Function(BundleDto) then) =
-      _$BundleDtoCopyWithImpl<$Res>;
+      _$BundleDtoCopyWithImpl<$Res, BundleDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'bundleName')
       @HiveField(18, defaultValue: '')
@@ -54,33 +55,36 @@ abstract class $BundleDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BundleDtoCopyWithImpl<$Res> implements $BundleDtoCopyWith<$Res> {
+class _$BundleDtoCopyWithImpl<$Res, $Val extends BundleDto>
+    implements $BundleDtoCopyWith<$Res> {
   _$BundleDtoCopyWithImpl(this._value, this._then);
 
-  final BundleDto _value;
   // ignore: unused_field
-  final $Res Function(BundleDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bundleName = freezed,
-    Object? bundleCode = freezed,
-    Object? bundleInformation = freezed,
+    Object? bundleName = null,
+    Object? bundleCode = null,
+    Object? bundleInformation = null,
   }) {
     return _then(_value.copyWith(
-      bundleName: bundleName == freezed
+      bundleName: null == bundleName
           ? _value.bundleName
           : bundleName // ignore: cast_nullable_to_non_nullable
               as String,
-      bundleCode: bundleCode == freezed
+      bundleCode: null == bundleCode
           ? _value.bundleCode
           : bundleCode // ignore: cast_nullable_to_non_nullable
               as String,
-      bundleInformation: bundleInformation == freezed
+      bundleInformation: null == bundleInformation
           ? _value.bundleInformation
           : bundleInformation // ignore: cast_nullable_to_non_nullable
               as List<BundleInfoDto>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -90,6 +94,7 @@ abstract class _$$_BundleDtoCopyWith<$Res> implements $BundleDtoCopyWith<$Res> {
           _$_BundleDto value, $Res Function(_$_BundleDto) then) =
       __$$_BundleDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'bundleName')
       @HiveField(18, defaultValue: '')
@@ -103,31 +108,30 @@ abstract class _$$_BundleDtoCopyWith<$Res> implements $BundleDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_BundleDtoCopyWithImpl<$Res> extends _$BundleDtoCopyWithImpl<$Res>
+class __$$_BundleDtoCopyWithImpl<$Res>
+    extends _$BundleDtoCopyWithImpl<$Res, _$_BundleDto>
     implements _$$_BundleDtoCopyWith<$Res> {
   __$$_BundleDtoCopyWithImpl(
       _$_BundleDto _value, $Res Function(_$_BundleDto) _then)
-      : super(_value, (v) => _then(v as _$_BundleDto));
+      : super(_value, _then);
 
-  @override
-  _$_BundleDto get _value => super._value as _$_BundleDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bundleName = freezed,
-    Object? bundleCode = freezed,
-    Object? bundleInformation = freezed,
+    Object? bundleName = null,
+    Object? bundleCode = null,
+    Object? bundleInformation = null,
   }) {
     return _then(_$_BundleDto(
-      bundleName: bundleName == freezed
+      bundleName: null == bundleName
           ? _value.bundleName
           : bundleName // ignore: cast_nullable_to_non_nullable
               as String,
-      bundleCode: bundleCode == freezed
+      bundleCode: null == bundleCode
           ? _value.bundleCode
           : bundleCode // ignore: cast_nullable_to_non_nullable
               as String,
-      bundleInformation: bundleInformation == freezed
+      bundleInformation: null == bundleInformation
           ? _value._bundleInformation
           : bundleInformation // ignore: cast_nullable_to_non_nullable
               as List<BundleInfoDto>,
@@ -182,24 +186,22 @@ class _$_BundleDto extends _BundleDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BundleDto &&
-            const DeepCollectionEquality()
-                .equals(other.bundleName, bundleName) &&
-            const DeepCollectionEquality()
-                .equals(other.bundleCode, bundleCode) &&
+            (identical(other.bundleName, bundleName) ||
+                other.bundleName == bundleName) &&
+            (identical(other.bundleCode, bundleCode) ||
+                other.bundleCode == bundleCode) &&
             const DeepCollectionEquality()
                 .equals(other._bundleInformation, _bundleInformation));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(bundleName),
-      const DeepCollectionEquality().hash(bundleCode),
+  int get hashCode => Object.hash(runtimeType, bundleName, bundleCode,
       const DeepCollectionEquality().hash(_bundleInformation));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_BundleDtoCopyWith<_$_BundleDto> get copyWith =>
       __$$_BundleDtoCopyWithImpl<_$_BundleDto>(this, _$identity);
 

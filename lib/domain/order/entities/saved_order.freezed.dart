@@ -39,7 +39,8 @@ mixin _$SavedOrder {
 abstract class $SavedOrderCopyWith<$Res> {
   factory $SavedOrderCopyWith(
           SavedOrder value, $Res Function(SavedOrder) then) =
-      _$SavedOrderCopyWithImpl<$Res>;
+      _$SavedOrderCopyWithImpl<$Res, SavedOrder>;
+  @useResult
   $Res call(
       {String id,
       List<MaterialItem> items,
@@ -56,78 +57,81 @@ abstract class $SavedOrderCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SavedOrderCopyWithImpl<$Res> implements $SavedOrderCopyWith<$Res> {
+class _$SavedOrderCopyWithImpl<$Res, $Val extends SavedOrder>
+    implements $SavedOrderCopyWith<$Res> {
   _$SavedOrderCopyWithImpl(this._value, this._then);
 
-  final SavedOrder _value;
   // ignore: unused_field
-  final $Res Function(SavedOrder) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? items = freezed,
-    Object? isDraftOrder = freezed,
-    Object? isSelected = freezed,
-    Object? isDeleted = freezed,
-    Object? billingDocument = freezed,
-    Object? eZRxNumber = freezed,
-    Object? soldToParty = freezed,
-    Object? shipToParty = freezed,
-    Object? companyName = freezed,
-    Object? totalOrderValue = freezed,
-    Object? requestedDeliveryDate = freezed,
+    Object? id = null,
+    Object? items = null,
+    Object? isDraftOrder = null,
+    Object? isSelected = null,
+    Object? isDeleted = null,
+    Object? billingDocument = null,
+    Object? eZRxNumber = null,
+    Object? soldToParty = null,
+    Object? shipToParty = null,
+    Object? companyName = null,
+    Object? totalOrderValue = null,
+    Object? requestedDeliveryDate = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      items: items == freezed
+      items: null == items
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
               as List<MaterialItem>,
-      isDraftOrder: isDraftOrder == freezed
+      isDraftOrder: null == isDraftOrder
           ? _value.isDraftOrder
           : isDraftOrder // ignore: cast_nullable_to_non_nullable
               as bool,
-      isSelected: isSelected == freezed
+      isSelected: null == isSelected
           ? _value.isSelected
           : isSelected // ignore: cast_nullable_to_non_nullable
               as bool,
-      isDeleted: isDeleted == freezed
+      isDeleted: null == isDeleted
           ? _value.isDeleted
           : isDeleted // ignore: cast_nullable_to_non_nullable
               as bool,
-      billingDocument: billingDocument == freezed
+      billingDocument: null == billingDocument
           ? _value.billingDocument
           : billingDocument // ignore: cast_nullable_to_non_nullable
               as String,
-      eZRxNumber: eZRxNumber == freezed
+      eZRxNumber: null == eZRxNumber
           ? _value.eZRxNumber
           : eZRxNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      soldToParty: soldToParty == freezed
+      soldToParty: null == soldToParty
           ? _value.soldToParty
           : soldToParty // ignore: cast_nullable_to_non_nullable
               as SoldToParty,
-      shipToParty: shipToParty == freezed
+      shipToParty: null == shipToParty
           ? _value.shipToParty
           : shipToParty // ignore: cast_nullable_to_non_nullable
               as ShipToParty,
-      companyName: companyName == freezed
+      companyName: null == companyName
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
               as CompanyName,
-      totalOrderValue: totalOrderValue == freezed
+      totalOrderValue: null == totalOrderValue
           ? _value.totalOrderValue
           : totalOrderValue // ignore: cast_nullable_to_non_nullable
               as num,
-      requestedDeliveryDate: requestedDeliveryDate == freezed
+      requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -138,6 +142,7 @@ abstract class _$$_SavedOrderCopyWith<$Res>
           _$_SavedOrder value, $Res Function(_$_SavedOrder) then) =
       __$$_SavedOrderCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       List<MaterialItem> items,
@@ -154,76 +159,75 @@ abstract class _$$_SavedOrderCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SavedOrderCopyWithImpl<$Res> extends _$SavedOrderCopyWithImpl<$Res>
+class __$$_SavedOrderCopyWithImpl<$Res>
+    extends _$SavedOrderCopyWithImpl<$Res, _$_SavedOrder>
     implements _$$_SavedOrderCopyWith<$Res> {
   __$$_SavedOrderCopyWithImpl(
       _$_SavedOrder _value, $Res Function(_$_SavedOrder) _then)
-      : super(_value, (v) => _then(v as _$_SavedOrder));
+      : super(_value, _then);
 
-  @override
-  _$_SavedOrder get _value => super._value as _$_SavedOrder;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? items = freezed,
-    Object? isDraftOrder = freezed,
-    Object? isSelected = freezed,
-    Object? isDeleted = freezed,
-    Object? billingDocument = freezed,
-    Object? eZRxNumber = freezed,
-    Object? soldToParty = freezed,
-    Object? shipToParty = freezed,
-    Object? companyName = freezed,
-    Object? totalOrderValue = freezed,
-    Object? requestedDeliveryDate = freezed,
+    Object? id = null,
+    Object? items = null,
+    Object? isDraftOrder = null,
+    Object? isSelected = null,
+    Object? isDeleted = null,
+    Object? billingDocument = null,
+    Object? eZRxNumber = null,
+    Object? soldToParty = null,
+    Object? shipToParty = null,
+    Object? companyName = null,
+    Object? totalOrderValue = null,
+    Object? requestedDeliveryDate = null,
   }) {
     return _then(_$_SavedOrder(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      items: items == freezed
+      items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
               as List<MaterialItem>,
-      isDraftOrder: isDraftOrder == freezed
+      isDraftOrder: null == isDraftOrder
           ? _value.isDraftOrder
           : isDraftOrder // ignore: cast_nullable_to_non_nullable
               as bool,
-      isSelected: isSelected == freezed
+      isSelected: null == isSelected
           ? _value.isSelected
           : isSelected // ignore: cast_nullable_to_non_nullable
               as bool,
-      isDeleted: isDeleted == freezed
+      isDeleted: null == isDeleted
           ? _value.isDeleted
           : isDeleted // ignore: cast_nullable_to_non_nullable
               as bool,
-      billingDocument: billingDocument == freezed
+      billingDocument: null == billingDocument
           ? _value.billingDocument
           : billingDocument // ignore: cast_nullable_to_non_nullable
               as String,
-      eZRxNumber: eZRxNumber == freezed
+      eZRxNumber: null == eZRxNumber
           ? _value.eZRxNumber
           : eZRxNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      soldToParty: soldToParty == freezed
+      soldToParty: null == soldToParty
           ? _value.soldToParty
           : soldToParty // ignore: cast_nullable_to_non_nullable
               as SoldToParty,
-      shipToParty: shipToParty == freezed
+      shipToParty: null == shipToParty
           ? _value.shipToParty
           : shipToParty // ignore: cast_nullable_to_non_nullable
               as ShipToParty,
-      companyName: companyName == freezed
+      companyName: null == companyName
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
               as CompanyName,
-      totalOrderValue: totalOrderValue == freezed
+      totalOrderValue: null == totalOrderValue
           ? _value.totalOrderValue
           : totalOrderValue // ignore: cast_nullable_to_non_nullable
               as num,
-      requestedDeliveryDate: requestedDeliveryDate == freezed
+      requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
               as String,
@@ -291,47 +295,49 @@ class _$_SavedOrder extends _SavedOrder {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SavedOrder &&
-            const DeepCollectionEquality().equals(other.id, id) &&
+            (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other._items, _items) &&
-            const DeepCollectionEquality()
-                .equals(other.isDraftOrder, isDraftOrder) &&
-            const DeepCollectionEquality()
-                .equals(other.isSelected, isSelected) &&
-            const DeepCollectionEquality().equals(other.isDeleted, isDeleted) &&
-            const DeepCollectionEquality()
-                .equals(other.billingDocument, billingDocument) &&
-            const DeepCollectionEquality()
-                .equals(other.eZRxNumber, eZRxNumber) &&
-            const DeepCollectionEquality()
-                .equals(other.soldToParty, soldToParty) &&
-            const DeepCollectionEquality()
-                .equals(other.shipToParty, shipToParty) &&
-            const DeepCollectionEquality()
-                .equals(other.companyName, companyName) &&
-            const DeepCollectionEquality()
-                .equals(other.totalOrderValue, totalOrderValue) &&
-            const DeepCollectionEquality()
-                .equals(other.requestedDeliveryDate, requestedDeliveryDate));
+            (identical(other.isDraftOrder, isDraftOrder) ||
+                other.isDraftOrder == isDraftOrder) &&
+            (identical(other.isSelected, isSelected) ||
+                other.isSelected == isSelected) &&
+            (identical(other.isDeleted, isDeleted) ||
+                other.isDeleted == isDeleted) &&
+            (identical(other.billingDocument, billingDocument) ||
+                other.billingDocument == billingDocument) &&
+            (identical(other.eZRxNumber, eZRxNumber) ||
+                other.eZRxNumber == eZRxNumber) &&
+            (identical(other.soldToParty, soldToParty) ||
+                other.soldToParty == soldToParty) &&
+            (identical(other.shipToParty, shipToParty) ||
+                other.shipToParty == shipToParty) &&
+            (identical(other.companyName, companyName) ||
+                other.companyName == companyName) &&
+            (identical(other.totalOrderValue, totalOrderValue) ||
+                other.totalOrderValue == totalOrderValue) &&
+            (identical(other.requestedDeliveryDate, requestedDeliveryDate) ||
+                other.requestedDeliveryDate == requestedDeliveryDate));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(id),
+      id,
       const DeepCollectionEquality().hash(_items),
-      const DeepCollectionEquality().hash(isDraftOrder),
-      const DeepCollectionEquality().hash(isSelected),
-      const DeepCollectionEquality().hash(isDeleted),
-      const DeepCollectionEquality().hash(billingDocument),
-      const DeepCollectionEquality().hash(eZRxNumber),
-      const DeepCollectionEquality().hash(soldToParty),
-      const DeepCollectionEquality().hash(shipToParty),
-      const DeepCollectionEquality().hash(companyName),
-      const DeepCollectionEquality().hash(totalOrderValue),
-      const DeepCollectionEquality().hash(requestedDeliveryDate));
+      isDraftOrder,
+      isSelected,
+      isDeleted,
+      billingDocument,
+      eZRxNumber,
+      soldToParty,
+      shipToParty,
+      companyName,
+      totalOrderValue,
+      requestedDeliveryDate);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SavedOrderCopyWith<_$_SavedOrder> get copyWith =>
       __$$_SavedOrderCopyWithImpl<_$_SavedOrder>(this, _$identity);
 }

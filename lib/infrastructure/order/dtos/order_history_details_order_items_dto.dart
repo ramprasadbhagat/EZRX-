@@ -10,16 +10,16 @@ part 'order_history_details_order_items_dto.g.dart';
 class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
   const OrderHistoryDetailsOrderItemDto._();
   const factory OrderHistoryDetailsOrderItemDto({
-    @JsonKey(name: 'SAPStatus') required String sAPStatus,
-    @JsonKey(name: 'PlannedDeliveryDate') required String plannedDeliveryDate,
-    @JsonKey(name: 'PickedQuantity') required int pickedQuantity,
-    @JsonKey(name: 'Batch') required String batch,
-    @JsonKey(name: 'ExpiryDate') required String expiryDate,
-    @JsonKey(name: 'LineReferenceNotes') required String lineReferenceNotes,
-    @JsonKey(name: 'IsTenderContractMaterial')
+    @JsonKey(name: 'SAPStatus',defaultValue: '') required String sAPStatus,
+    @JsonKey(name: 'PlannedDeliveryDate',defaultValue: '') required String plannedDeliveryDate,
+    @JsonKey(name: 'PickedQuantity',defaultValue: 0) required int pickedQuantity,
+    @JsonKey(name: 'Batch',defaultValue: '') required String batch,
+    @JsonKey(name: 'ExpiryDate',defaultValue: '') required String expiryDate,
+    @JsonKey(name: 'LineReferenceNotes',defaultValue: '') required String lineReferenceNotes,
+    @JsonKey(name: 'IsTenderContractMaterial',defaultValue: false,readValue: boolStringFormatCheck)
         required bool isTenderContractMaterial,
-    @JsonKey(name: 'Details') required List<OrderHistoryDetailsOrderItemDetailsDto> details,
-    @JsonKey(name: 'TenderContractDetails')
+    @JsonKey(name: 'Details',defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[]) required List<OrderHistoryDetailsOrderItemDetailsDto> details,
+    @JsonKey(name: 'TenderContractDetails',readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
         required OrderHistoryDetailsOrderItemTenderContractDetailsDto tenderContractDetails,
   }) = _OrderHistoryDetailsOrderItemDto;
   factory OrderHistoryDetailsOrderItemDto.fromDomain(OrderHistoryDetailsOrderItem orderHistoryDetailsOrderItem) {
@@ -61,3 +61,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
   factory OrderHistoryDetailsOrderItemDto.fromJson(Map<String, dynamic> json) =>
       _$OrderHistoryDetailsOrderItemDtoFromJson(json);
 }
+Map<String, dynamic> orderHistoryDetailsOrderItemTenderContractDetailsOverride(Map json, String key) =>
+    json[key] ?? {};
+    bool boolStringFormatCheck(Map json, String key) =>
+    json[key] == '' ? false : json[key];

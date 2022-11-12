@@ -30,7 +30,8 @@ mixin _$MaterialQueryInfo {
 abstract class $MaterialQueryInfoCopyWith<$Res> {
   factory $MaterialQueryInfoCopyWith(
           MaterialQueryInfo value, $Res Function(MaterialQueryInfo) then) =
-      _$MaterialQueryInfoCopyWithImpl<$Res>;
+      _$MaterialQueryInfoCopyWithImpl<$Res, MaterialQueryInfo>;
+  @useResult
   $Res call(
       {MaterialNumber value,
       MaterialGroup materialGroup2,
@@ -39,39 +40,41 @@ abstract class $MaterialQueryInfoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MaterialQueryInfoCopyWithImpl<$Res>
+class _$MaterialQueryInfoCopyWithImpl<$Res, $Val extends MaterialQueryInfo>
     implements $MaterialQueryInfoCopyWith<$Res> {
   _$MaterialQueryInfoCopyWithImpl(this._value, this._then);
 
-  final MaterialQueryInfo _value;
   // ignore: unused_field
-  final $Res Function(MaterialQueryInfo) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? value = freezed,
-    Object? materialGroup2 = freezed,
-    Object? materialGroup4 = freezed,
-    Object? qty = freezed,
+    Object? value = null,
+    Object? materialGroup2 = null,
+    Object? materialGroup4 = null,
+    Object? qty = null,
   }) {
     return _then(_value.copyWith(
-      value: value == freezed
+      value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
-      materialGroup2: materialGroup2 == freezed
+      materialGroup2: null == materialGroup2
           ? _value.materialGroup2
           : materialGroup2 // ignore: cast_nullable_to_non_nullable
               as MaterialGroup,
-      materialGroup4: materialGroup4 == freezed
+      materialGroup4: null == materialGroup4
           ? _value.materialGroup4
           : materialGroup4 // ignore: cast_nullable_to_non_nullable
               as MaterialGroup,
-      qty: qty == freezed
+      qty: null == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
               as MaterialQty,
-    ));
+    ) as $Val);
   }
 }
 
@@ -82,6 +85,7 @@ abstract class _$$_MaterialQueryInfoCopyWith<$Res>
           $Res Function(_$_MaterialQueryInfo) then) =
       __$$_MaterialQueryInfoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {MaterialNumber value,
       MaterialGroup materialGroup2,
@@ -91,36 +95,34 @@ abstract class _$$_MaterialQueryInfoCopyWith<$Res>
 
 /// @nodoc
 class __$$_MaterialQueryInfoCopyWithImpl<$Res>
-    extends _$MaterialQueryInfoCopyWithImpl<$Res>
+    extends _$MaterialQueryInfoCopyWithImpl<$Res, _$_MaterialQueryInfo>
     implements _$$_MaterialQueryInfoCopyWith<$Res> {
   __$$_MaterialQueryInfoCopyWithImpl(
       _$_MaterialQueryInfo _value, $Res Function(_$_MaterialQueryInfo) _then)
-      : super(_value, (v) => _then(v as _$_MaterialQueryInfo));
+      : super(_value, _then);
 
-  @override
-  _$_MaterialQueryInfo get _value => super._value as _$_MaterialQueryInfo;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? value = freezed,
-    Object? materialGroup2 = freezed,
-    Object? materialGroup4 = freezed,
-    Object? qty = freezed,
+    Object? value = null,
+    Object? materialGroup2 = null,
+    Object? materialGroup4 = null,
+    Object? qty = null,
   }) {
     return _then(_$_MaterialQueryInfo(
-      value: value == freezed
+      value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
-      materialGroup2: materialGroup2 == freezed
+      materialGroup2: null == materialGroup2
           ? _value.materialGroup2
           : materialGroup2 // ignore: cast_nullable_to_non_nullable
               as MaterialGroup,
-      materialGroup4: materialGroup4 == freezed
+      materialGroup4: null == materialGroup4
           ? _value.materialGroup4
           : materialGroup4 // ignore: cast_nullable_to_non_nullable
               as MaterialGroup,
-      qty: qty == freezed
+      qty: null == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
               as MaterialQty,
@@ -157,24 +159,21 @@ class _$_MaterialQueryInfo extends _MaterialQueryInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MaterialQueryInfo &&
-            const DeepCollectionEquality().equals(other.value, value) &&
-            const DeepCollectionEquality()
-                .equals(other.materialGroup2, materialGroup2) &&
-            const DeepCollectionEquality()
-                .equals(other.materialGroup4, materialGroup4) &&
-            const DeepCollectionEquality().equals(other.qty, qty));
+            (identical(other.value, value) || other.value == value) &&
+            (identical(other.materialGroup2, materialGroup2) ||
+                other.materialGroup2 == materialGroup2) &&
+            (identical(other.materialGroup4, materialGroup4) ||
+                other.materialGroup4 == materialGroup4) &&
+            (identical(other.qty, qty) || other.qty == qty));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(value),
-      const DeepCollectionEquality().hash(materialGroup2),
-      const DeepCollectionEquality().hash(materialGroup4),
-      const DeepCollectionEquality().hash(qty));
+  int get hashCode =>
+      Object.hash(runtimeType, value, materialGroup2, materialGroup4, qty);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MaterialQueryInfoCopyWith<_$_MaterialQueryInfo> get copyWith =>
       __$$_MaterialQueryInfoCopyWithImpl<_$_MaterialQueryInfo>(
           this, _$identity);

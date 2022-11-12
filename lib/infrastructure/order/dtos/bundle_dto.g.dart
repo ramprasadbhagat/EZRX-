@@ -19,7 +19,8 @@ class BundleDtoAdapter extends TypeAdapter<_$_BundleDto> {
     return _$_BundleDto(
       bundleName: fields[18] == null ? '' : fields[18] as String,
       bundleCode: fields[19] == null ? '' : fields[19] as String,
-      bundleInformation: (fields[20] as List).cast<BundleInfoDto>(),
+      bundleInformation:
+          fields[20] == null ? [] : (fields[20] as List).cast<BundleInfoDto>(),
     );
   }
 

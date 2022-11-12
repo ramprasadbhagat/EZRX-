@@ -21,24 +21,30 @@ OrderHistoryDetailsOrderItemDto _$OrderHistoryDetailsOrderItemDtoFromJson(
 
 /// @nodoc
 mixin _$OrderHistoryDetailsOrderItemDto {
-  @JsonKey(name: 'SAPStatus')
+  @JsonKey(name: 'SAPStatus', defaultValue: '')
   String get sAPStatus => throw _privateConstructorUsedError;
-  @JsonKey(name: 'PlannedDeliveryDate')
+  @JsonKey(name: 'PlannedDeliveryDate', defaultValue: '')
   String get plannedDeliveryDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'PickedQuantity')
+  @JsonKey(name: 'PickedQuantity', defaultValue: 0)
   int get pickedQuantity => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Batch')
+  @JsonKey(name: 'Batch', defaultValue: '')
   String get batch => throw _privateConstructorUsedError;
-  @JsonKey(name: 'ExpiryDate')
+  @JsonKey(name: 'ExpiryDate', defaultValue: '')
   String get expiryDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'LineReferenceNotes')
+  @JsonKey(name: 'LineReferenceNotes', defaultValue: '')
   String get lineReferenceNotes => throw _privateConstructorUsedError;
-  @JsonKey(name: 'IsTenderContractMaterial')
+  @JsonKey(
+      name: 'IsTenderContractMaterial',
+      defaultValue: false,
+      readValue: boolStringFormatCheck)
   bool get isTenderContractMaterial => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Details')
+  @JsonKey(
+      name: 'Details', defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[])
   List<OrderHistoryDetailsOrderItemDetailsDto> get details =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'TenderContractDetails')
+  @JsonKey(
+      name: 'TenderContractDetails',
+      readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
   OrderHistoryDetailsOrderItemTenderContractDetailsDto
       get tenderContractDetails => throw _privateConstructorUsedError;
 
@@ -53,99 +59,104 @@ abstract class $OrderHistoryDetailsOrderItemDtoCopyWith<$Res> {
   factory $OrderHistoryDetailsOrderItemDtoCopyWith(
           OrderHistoryDetailsOrderItemDto value,
           $Res Function(OrderHistoryDetailsOrderItemDto) then) =
-      _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>;
+      _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
+          OrderHistoryDetailsOrderItemDto>;
+  @useResult
   $Res call(
-      {@JsonKey(name: 'SAPStatus')
+      {@JsonKey(name: 'SAPStatus', defaultValue: '')
           String sAPStatus,
-      @JsonKey(name: 'PlannedDeliveryDate')
+      @JsonKey(name: 'PlannedDeliveryDate', defaultValue: '')
           String plannedDeliveryDate,
-      @JsonKey(name: 'PickedQuantity')
+      @JsonKey(name: 'PickedQuantity', defaultValue: 0)
           int pickedQuantity,
-      @JsonKey(name: 'Batch')
+      @JsonKey(name: 'Batch', defaultValue: '')
           String batch,
-      @JsonKey(name: 'ExpiryDate')
+      @JsonKey(name: 'ExpiryDate', defaultValue: '')
           String expiryDate,
-      @JsonKey(name: 'LineReferenceNotes')
+      @JsonKey(name: 'LineReferenceNotes', defaultValue: '')
           String lineReferenceNotes,
-      @JsonKey(name: 'IsTenderContractMaterial')
+      @JsonKey(name: 'IsTenderContractMaterial', defaultValue: false, readValue: boolStringFormatCheck)
           bool isTenderContractMaterial,
-      @JsonKey(name: 'Details')
+      @JsonKey(name: 'Details', defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[])
           List<OrderHistoryDetailsOrderItemDetailsDto> details,
-      @JsonKey(name: 'TenderContractDetails')
-          OrderHistoryDetailsOrderItemTenderContractDetailsDto
-              tenderContractDetails});
+      @JsonKey(name: 'TenderContractDetails', readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
+          OrderHistoryDetailsOrderItemTenderContractDetailsDto tenderContractDetails});
 
   $OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<$Res>
       get tenderContractDetails;
 }
 
 /// @nodoc
-class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
+class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
+        $Val extends OrderHistoryDetailsOrderItemDto>
     implements $OrderHistoryDetailsOrderItemDtoCopyWith<$Res> {
   _$OrderHistoryDetailsOrderItemDtoCopyWithImpl(this._value, this._then);
 
-  final OrderHistoryDetailsOrderItemDto _value;
   // ignore: unused_field
-  final $Res Function(OrderHistoryDetailsOrderItemDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sAPStatus = freezed,
-    Object? plannedDeliveryDate = freezed,
-    Object? pickedQuantity = freezed,
-    Object? batch = freezed,
-    Object? expiryDate = freezed,
-    Object? lineReferenceNotes = freezed,
-    Object? isTenderContractMaterial = freezed,
-    Object? details = freezed,
-    Object? tenderContractDetails = freezed,
+    Object? sAPStatus = null,
+    Object? plannedDeliveryDate = null,
+    Object? pickedQuantity = null,
+    Object? batch = null,
+    Object? expiryDate = null,
+    Object? lineReferenceNotes = null,
+    Object? isTenderContractMaterial = null,
+    Object? details = null,
+    Object? tenderContractDetails = null,
   }) {
     return _then(_value.copyWith(
-      sAPStatus: sAPStatus == freezed
+      sAPStatus: null == sAPStatus
           ? _value.sAPStatus
           : sAPStatus // ignore: cast_nullable_to_non_nullable
               as String,
-      plannedDeliveryDate: plannedDeliveryDate == freezed
+      plannedDeliveryDate: null == plannedDeliveryDate
           ? _value.plannedDeliveryDate
           : plannedDeliveryDate // ignore: cast_nullable_to_non_nullable
               as String,
-      pickedQuantity: pickedQuantity == freezed
+      pickedQuantity: null == pickedQuantity
           ? _value.pickedQuantity
           : pickedQuantity // ignore: cast_nullable_to_non_nullable
               as int,
-      batch: batch == freezed
+      batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
               as String,
-      expiryDate: expiryDate == freezed
+      expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
               as String,
-      lineReferenceNotes: lineReferenceNotes == freezed
+      lineReferenceNotes: null == lineReferenceNotes
           ? _value.lineReferenceNotes
           : lineReferenceNotes // ignore: cast_nullable_to_non_nullable
               as String,
-      isTenderContractMaterial: isTenderContractMaterial == freezed
+      isTenderContractMaterial: null == isTenderContractMaterial
           ? _value.isTenderContractMaterial
           : isTenderContractMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-      details: details == freezed
+      details: null == details
           ? _value.details
           : details // ignore: cast_nullable_to_non_nullable
               as List<OrderHistoryDetailsOrderItemDetailsDto>,
-      tenderContractDetails: tenderContractDetails == freezed
+      tenderContractDetails: null == tenderContractDetails
           ? _value.tenderContractDetails
           : tenderContractDetails // ignore: cast_nullable_to_non_nullable
               as OrderHistoryDetailsOrderItemTenderContractDetailsDto,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<$Res>
       get tenderContractDetails {
     return $OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<$Res>(
         _value.tenderContractDetails, (value) {
-      return _then(_value.copyWith(tenderContractDetails: value));
+      return _then(_value.copyWith(tenderContractDetails: value) as $Val);
     });
   }
 }
@@ -158,26 +169,26 @@ abstract class _$$_OrderHistoryDetailsOrderItemDtoCopyWith<$Res>
           $Res Function(_$_OrderHistoryDetailsOrderItemDto) then) =
       __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
-      {@JsonKey(name: 'SAPStatus')
+      {@JsonKey(name: 'SAPStatus', defaultValue: '')
           String sAPStatus,
-      @JsonKey(name: 'PlannedDeliveryDate')
+      @JsonKey(name: 'PlannedDeliveryDate', defaultValue: '')
           String plannedDeliveryDate,
-      @JsonKey(name: 'PickedQuantity')
+      @JsonKey(name: 'PickedQuantity', defaultValue: 0)
           int pickedQuantity,
-      @JsonKey(name: 'Batch')
+      @JsonKey(name: 'Batch', defaultValue: '')
           String batch,
-      @JsonKey(name: 'ExpiryDate')
+      @JsonKey(name: 'ExpiryDate', defaultValue: '')
           String expiryDate,
-      @JsonKey(name: 'LineReferenceNotes')
+      @JsonKey(name: 'LineReferenceNotes', defaultValue: '')
           String lineReferenceNotes,
-      @JsonKey(name: 'IsTenderContractMaterial')
+      @JsonKey(name: 'IsTenderContractMaterial', defaultValue: false, readValue: boolStringFormatCheck)
           bool isTenderContractMaterial,
-      @JsonKey(name: 'Details')
+      @JsonKey(name: 'Details', defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[])
           List<OrderHistoryDetailsOrderItemDetailsDto> details,
-      @JsonKey(name: 'TenderContractDetails')
-          OrderHistoryDetailsOrderItemTenderContractDetailsDto
-              tenderContractDetails});
+      @JsonKey(name: 'TenderContractDetails', readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
+          OrderHistoryDetailsOrderItemTenderContractDetailsDto tenderContractDetails});
 
   @override
   $OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<$Res>
@@ -186,63 +197,61 @@ abstract class _$$_OrderHistoryDetailsOrderItemDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
-    extends _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
+    extends _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
+        _$_OrderHistoryDetailsOrderItemDto>
     implements _$$_OrderHistoryDetailsOrderItemDtoCopyWith<$Res> {
   __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl(
       _$_OrderHistoryDetailsOrderItemDto _value,
       $Res Function(_$_OrderHistoryDetailsOrderItemDto) _then)
-      : super(_value, (v) => _then(v as _$_OrderHistoryDetailsOrderItemDto));
+      : super(_value, _then);
 
-  @override
-  _$_OrderHistoryDetailsOrderItemDto get _value =>
-      super._value as _$_OrderHistoryDetailsOrderItemDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sAPStatus = freezed,
-    Object? plannedDeliveryDate = freezed,
-    Object? pickedQuantity = freezed,
-    Object? batch = freezed,
-    Object? expiryDate = freezed,
-    Object? lineReferenceNotes = freezed,
-    Object? isTenderContractMaterial = freezed,
-    Object? details = freezed,
-    Object? tenderContractDetails = freezed,
+    Object? sAPStatus = null,
+    Object? plannedDeliveryDate = null,
+    Object? pickedQuantity = null,
+    Object? batch = null,
+    Object? expiryDate = null,
+    Object? lineReferenceNotes = null,
+    Object? isTenderContractMaterial = null,
+    Object? details = null,
+    Object? tenderContractDetails = null,
   }) {
     return _then(_$_OrderHistoryDetailsOrderItemDto(
-      sAPStatus: sAPStatus == freezed
+      sAPStatus: null == sAPStatus
           ? _value.sAPStatus
           : sAPStatus // ignore: cast_nullable_to_non_nullable
               as String,
-      plannedDeliveryDate: plannedDeliveryDate == freezed
+      plannedDeliveryDate: null == plannedDeliveryDate
           ? _value.plannedDeliveryDate
           : plannedDeliveryDate // ignore: cast_nullable_to_non_nullable
               as String,
-      pickedQuantity: pickedQuantity == freezed
+      pickedQuantity: null == pickedQuantity
           ? _value.pickedQuantity
           : pickedQuantity // ignore: cast_nullable_to_non_nullable
               as int,
-      batch: batch == freezed
+      batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
               as String,
-      expiryDate: expiryDate == freezed
+      expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
               as String,
-      lineReferenceNotes: lineReferenceNotes == freezed
+      lineReferenceNotes: null == lineReferenceNotes
           ? _value.lineReferenceNotes
           : lineReferenceNotes // ignore: cast_nullable_to_non_nullable
               as String,
-      isTenderContractMaterial: isTenderContractMaterial == freezed
+      isTenderContractMaterial: null == isTenderContractMaterial
           ? _value.isTenderContractMaterial
           : isTenderContractMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-      details: details == freezed
+      details: null == details
           ? _value._details
           : details // ignore: cast_nullable_to_non_nullable
               as List<OrderHistoryDetailsOrderItemDetailsDto>,
-      tenderContractDetails: tenderContractDetails == freezed
+      tenderContractDetails: null == tenderContractDetails
           ? _value.tenderContractDetails
           : tenderContractDetails // ignore: cast_nullable_to_non_nullable
               as OrderHistoryDetailsOrderItemTenderContractDetailsDto,
@@ -255,23 +264,23 @@ class __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
 class _$_OrderHistoryDetailsOrderItemDto
     extends _OrderHistoryDetailsOrderItemDto {
   const _$_OrderHistoryDetailsOrderItemDto(
-      {@JsonKey(name: 'SAPStatus')
+      {@JsonKey(name: 'SAPStatus', defaultValue: '')
           required this.sAPStatus,
-      @JsonKey(name: 'PlannedDeliveryDate')
+      @JsonKey(name: 'PlannedDeliveryDate', defaultValue: '')
           required this.plannedDeliveryDate,
-      @JsonKey(name: 'PickedQuantity')
+      @JsonKey(name: 'PickedQuantity', defaultValue: 0)
           required this.pickedQuantity,
-      @JsonKey(name: 'Batch')
+      @JsonKey(name: 'Batch', defaultValue: '')
           required this.batch,
-      @JsonKey(name: 'ExpiryDate')
+      @JsonKey(name: 'ExpiryDate', defaultValue: '')
           required this.expiryDate,
-      @JsonKey(name: 'LineReferenceNotes')
+      @JsonKey(name: 'LineReferenceNotes', defaultValue: '')
           required this.lineReferenceNotes,
-      @JsonKey(name: 'IsTenderContractMaterial')
+      @JsonKey(name: 'IsTenderContractMaterial', defaultValue: false, readValue: boolStringFormatCheck)
           required this.isTenderContractMaterial,
-      @JsonKey(name: 'Details')
+      @JsonKey(name: 'Details', defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[])
           required final List<OrderHistoryDetailsOrderItemDetailsDto> details,
-      @JsonKey(name: 'TenderContractDetails')
+      @JsonKey(name: 'TenderContractDetails', readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
           required this.tenderContractDetails})
       : _details = details,
         super._();
@@ -281,36 +290,42 @@ class _$_OrderHistoryDetailsOrderItemDto
       _$$_OrderHistoryDetailsOrderItemDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'SAPStatus')
+  @JsonKey(name: 'SAPStatus', defaultValue: '')
   final String sAPStatus;
   @override
-  @JsonKey(name: 'PlannedDeliveryDate')
+  @JsonKey(name: 'PlannedDeliveryDate', defaultValue: '')
   final String plannedDeliveryDate;
   @override
-  @JsonKey(name: 'PickedQuantity')
+  @JsonKey(name: 'PickedQuantity', defaultValue: 0)
   final int pickedQuantity;
   @override
-  @JsonKey(name: 'Batch')
+  @JsonKey(name: 'Batch', defaultValue: '')
   final String batch;
   @override
-  @JsonKey(name: 'ExpiryDate')
+  @JsonKey(name: 'ExpiryDate', defaultValue: '')
   final String expiryDate;
   @override
-  @JsonKey(name: 'LineReferenceNotes')
+  @JsonKey(name: 'LineReferenceNotes', defaultValue: '')
   final String lineReferenceNotes;
   @override
-  @JsonKey(name: 'IsTenderContractMaterial')
+  @JsonKey(
+      name: 'IsTenderContractMaterial',
+      defaultValue: false,
+      readValue: boolStringFormatCheck)
   final bool isTenderContractMaterial;
   final List<OrderHistoryDetailsOrderItemDetailsDto> _details;
   @override
-  @JsonKey(name: 'Details')
+  @JsonKey(
+      name: 'Details', defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[])
   List<OrderHistoryDetailsOrderItemDetailsDto> get details {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_details);
   }
 
   @override
-  @JsonKey(name: 'TenderContractDetails')
+  @JsonKey(
+      name: 'TenderContractDetails',
+      readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
   final OrderHistoryDetailsOrderItemTenderContractDetailsDto
       tenderContractDetails;
 
@@ -324,39 +339,42 @@ class _$_OrderHistoryDetailsOrderItemDto
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryDetailsOrderItemDto &&
-            const DeepCollectionEquality().equals(other.sAPStatus, sAPStatus) &&
-            const DeepCollectionEquality()
-                .equals(other.plannedDeliveryDate, plannedDeliveryDate) &&
-            const DeepCollectionEquality()
-                .equals(other.pickedQuantity, pickedQuantity) &&
-            const DeepCollectionEquality().equals(other.batch, batch) &&
-            const DeepCollectionEquality()
-                .equals(other.expiryDate, expiryDate) &&
-            const DeepCollectionEquality()
-                .equals(other.lineReferenceNotes, lineReferenceNotes) &&
-            const DeepCollectionEquality().equals(
-                other.isTenderContractMaterial, isTenderContractMaterial) &&
+            (identical(other.sAPStatus, sAPStatus) ||
+                other.sAPStatus == sAPStatus) &&
+            (identical(other.plannedDeliveryDate, plannedDeliveryDate) ||
+                other.plannedDeliveryDate == plannedDeliveryDate) &&
+            (identical(other.pickedQuantity, pickedQuantity) ||
+                other.pickedQuantity == pickedQuantity) &&
+            (identical(other.batch, batch) || other.batch == batch) &&
+            (identical(other.expiryDate, expiryDate) ||
+                other.expiryDate == expiryDate) &&
+            (identical(other.lineReferenceNotes, lineReferenceNotes) ||
+                other.lineReferenceNotes == lineReferenceNotes) &&
+            (identical(
+                    other.isTenderContractMaterial, isTenderContractMaterial) ||
+                other.isTenderContractMaterial == isTenderContractMaterial) &&
             const DeepCollectionEquality().equals(other._details, _details) &&
-            const DeepCollectionEquality()
-                .equals(other.tenderContractDetails, tenderContractDetails));
+            (identical(other.tenderContractDetails, tenderContractDetails) ||
+                other.tenderContractDetails == tenderContractDetails));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(sAPStatus),
-      const DeepCollectionEquality().hash(plannedDeliveryDate),
-      const DeepCollectionEquality().hash(pickedQuantity),
-      const DeepCollectionEquality().hash(batch),
-      const DeepCollectionEquality().hash(expiryDate),
-      const DeepCollectionEquality().hash(lineReferenceNotes),
-      const DeepCollectionEquality().hash(isTenderContractMaterial),
+      sAPStatus,
+      plannedDeliveryDate,
+      pickedQuantity,
+      batch,
+      expiryDate,
+      lineReferenceNotes,
+      isTenderContractMaterial,
       const DeepCollectionEquality().hash(_details),
-      const DeepCollectionEquality().hash(tenderContractDetails));
+      tenderContractDetails);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OrderHistoryDetailsOrderItemDtoCopyWith<
           _$_OrderHistoryDetailsOrderItemDto>
       get copyWith => __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<
@@ -373,56 +391,61 @@ class _$_OrderHistoryDetailsOrderItemDto
 abstract class _OrderHistoryDetailsOrderItemDto
     extends OrderHistoryDetailsOrderItemDto {
   const factory _OrderHistoryDetailsOrderItemDto(
-      {@JsonKey(name: 'SAPStatus')
+      {@JsonKey(name: 'SAPStatus', defaultValue: '')
           required final String sAPStatus,
-      @JsonKey(name: 'PlannedDeliveryDate')
+      @JsonKey(name: 'PlannedDeliveryDate', defaultValue: '')
           required final String plannedDeliveryDate,
-      @JsonKey(name: 'PickedQuantity')
+      @JsonKey(name: 'PickedQuantity', defaultValue: 0)
           required final int pickedQuantity,
-      @JsonKey(name: 'Batch')
+      @JsonKey(name: 'Batch', defaultValue: '')
           required final String batch,
-      @JsonKey(name: 'ExpiryDate')
+      @JsonKey(name: 'ExpiryDate', defaultValue: '')
           required final String expiryDate,
-      @JsonKey(name: 'LineReferenceNotes')
+      @JsonKey(name: 'LineReferenceNotes', defaultValue: '')
           required final String lineReferenceNotes,
-      @JsonKey(name: 'IsTenderContractMaterial')
+      @JsonKey(name: 'IsTenderContractMaterial', defaultValue: false, readValue: boolStringFormatCheck)
           required final bool isTenderContractMaterial,
-      @JsonKey(name: 'Details')
+      @JsonKey(name: 'Details', defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[])
           required final List<OrderHistoryDetailsOrderItemDetailsDto> details,
-      @JsonKey(name: 'TenderContractDetails')
-          required final OrderHistoryDetailsOrderItemTenderContractDetailsDto
-              tenderContractDetails}) = _$_OrderHistoryDetailsOrderItemDto;
+      @JsonKey(name: 'TenderContractDetails', readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
+          required final OrderHistoryDetailsOrderItemTenderContractDetailsDto tenderContractDetails}) = _$_OrderHistoryDetailsOrderItemDto;
   const _OrderHistoryDetailsOrderItemDto._() : super._();
 
   factory _OrderHistoryDetailsOrderItemDto.fromJson(Map<String, dynamic> json) =
       _$_OrderHistoryDetailsOrderItemDto.fromJson;
 
   @override
-  @JsonKey(name: 'SAPStatus')
+  @JsonKey(name: 'SAPStatus', defaultValue: '')
   String get sAPStatus;
   @override
-  @JsonKey(name: 'PlannedDeliveryDate')
+  @JsonKey(name: 'PlannedDeliveryDate', defaultValue: '')
   String get plannedDeliveryDate;
   @override
-  @JsonKey(name: 'PickedQuantity')
+  @JsonKey(name: 'PickedQuantity', defaultValue: 0)
   int get pickedQuantity;
   @override
-  @JsonKey(name: 'Batch')
+  @JsonKey(name: 'Batch', defaultValue: '')
   String get batch;
   @override
-  @JsonKey(name: 'ExpiryDate')
+  @JsonKey(name: 'ExpiryDate', defaultValue: '')
   String get expiryDate;
   @override
-  @JsonKey(name: 'LineReferenceNotes')
+  @JsonKey(name: 'LineReferenceNotes', defaultValue: '')
   String get lineReferenceNotes;
   @override
-  @JsonKey(name: 'IsTenderContractMaterial')
+  @JsonKey(
+      name: 'IsTenderContractMaterial',
+      defaultValue: false,
+      readValue: boolStringFormatCheck)
   bool get isTenderContractMaterial;
   @override
-  @JsonKey(name: 'Details')
+  @JsonKey(
+      name: 'Details', defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[])
   List<OrderHistoryDetailsOrderItemDetailsDto> get details;
   @override
-  @JsonKey(name: 'TenderContractDetails')
+  @JsonKey(
+      name: 'TenderContractDetails',
+      readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
   OrderHistoryDetailsOrderItemTenderContractDetailsDto
       get tenderContractDetails;
   @override

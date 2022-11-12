@@ -9,8 +9,8 @@ part of 'order_history_details_po_documents_dto.dart';
 _$_OrderHistoryDetailsPODocumentsDto
     _$$_OrderHistoryDetailsPODocumentsDtoFromJson(Map<String, dynamic> json) =>
         _$_OrderHistoryDetailsPODocumentsDto(
-          url: json['Url'] as String,
-          name: json['Name'] as String,
+          url: json['Url'] as String? ?? '',
+          name: json['Name'] as String? ?? '',
         );
 
 Map<String, dynamic> _$$_OrderHistoryDetailsPODocumentsDtoToJson(

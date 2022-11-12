@@ -7,14 +7,14 @@ class OrderHistoryDetailsOrderHeadersDto with _$OrderHistoryDetailsOrderHeadersD
   const OrderHistoryDetailsOrderHeadersDto._();
   const factory OrderHistoryDetailsOrderHeadersDto({
     @JsonKey(name: 'TotalTax',defaultValue: 0.0) required double totalTax,
-    @JsonKey(name: 'RequestedDeliveryDate') required String requestedDeliveryDate,
-    @JsonKey(name: 'POReference') required String pOReference,
-    @JsonKey(name: 'Type') required String type,
-     @JsonKey(name: 'TelephoneNumber') required String telephoneNumber,
+    @JsonKey(name: 'RequestedDeliveryDate',defaultValue: '') required String requestedDeliveryDate,
+    @JsonKey(name: 'POReference',defaultValue: '') required String pOReference,
+    @JsonKey(name: 'Type',defaultValue: '') required String type,
+     @JsonKey(name: 'TelephoneNumber',defaultValue: '') required String telephoneNumber,
       @JsonKey(name: 'OrderValue',defaultValue: 0.0) required double orderValue,
-      @JsonKey(name: 'CreatedDate') required String createdDate,
-      @JsonKey(name: 'EZRXNumber') required String eZRXNumber,
-      @JsonKey(name: 'OrderBy') required String orderBy,
+      @JsonKey(name: 'CreatedDate',defaultValue: '') required String createdDate,
+      @JsonKey(name: 'EZRXNumber',defaultValue: '') required String eZRXNumber,
+      @JsonKey(name: 'OrderBy',defaultValue: '') required String orderBy,
   }) = _OrderHistoryDetailsOrderHeadersDto;
   factory OrderHistoryDetailsOrderHeadersDto.fromDomain(OrderHistoryDetailsOrderHeader orderHistoryDetailsOrderHeader) {
     return  OrderHistoryDetailsOrderHeadersDto(

@@ -9,9 +9,9 @@ part of 'order_history_details_shipping_information_invoices_dto.dart';
 _$_OrderHistoryDetailsInvoicesDto _$$_OrderHistoryDetailsInvoicesDtoFromJson(
         Map<String, dynamic> json) =>
     _$_OrderHistoryDetailsInvoicesDto(
-      invoiceNumber: json['InvoiceNumber'] as String,
-      invoiceDate: json['InvoiceDate'] as String,
-      invoicePrice: json['InvoicePrice'] as String,
+      invoiceNumber: json['InvoiceNumber'] as String? ?? '',
+      invoiceDate: json['InvoiceDate'] as String? ?? '',
+      invoicePrice: json['InvoicePrice'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_OrderHistoryDetailsInvoicesDtoToJson(

@@ -30,14 +30,14 @@ mixin _$OrderHistoryFilterEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? filterOrderHistory,
-    TResult Function(DateTime fromDate)? setfromDate,
-    TResult Function(DateTime toDate)? setToDate,
-    TResult Function(String orderId)? orderIdChanged,
-    TResult Function(String poNumber)? poNumberChanged,
-    TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(String materialSearch)? materialSearchChanged,
+    TResult? Function()? initialized,
+    TResult? Function()? filterOrderHistory,
+    TResult? Function(DateTime fromDate)? setfromDate,
+    TResult? Function(DateTime toDate)? setToDate,
+    TResult? Function(String orderId)? orderIdChanged,
+    TResult? Function(String poNumber)? poNumberChanged,
+    TResult? Function(String principalSearch)? principalSearchChanged,
+    TResult? Function(String materialSearch)? materialSearchChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,14 +69,14 @@ mixin _$OrderHistoryFilterEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_FilterOrderHistory value)? filterOrderHistory,
-    TResult Function(_SetfromDate value)? setfromDate,
-    TResult Function(_SetToDate value)? setToDate,
-    TResult Function(_OrderIdChanged value)? orderIdChanged,
-    TResult Function(_PoNumberChanged value)? poNumberChanged,
-    TResult Function(_PrincipalSearchChanged value)? principalSearchChanged,
-    TResult Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult? Function(_SetfromDate value)? setfromDate,
+    TResult? Function(_SetToDate value)? setToDate,
+    TResult? Function(_OrderIdChanged value)? orderIdChanged,
+    TResult? Function(_PoNumberChanged value)? poNumberChanged,
+    TResult? Function(_PrincipalSearchChanged value)? principalSearchChanged,
+    TResult? Function(_MaterialSearchChanged value)? materialSearchChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -98,17 +98,19 @@ mixin _$OrderHistoryFilterEvent {
 abstract class $OrderHistoryFilterEventCopyWith<$Res> {
   factory $OrderHistoryFilterEventCopyWith(OrderHistoryFilterEvent value,
           $Res Function(OrderHistoryFilterEvent) then) =
-      _$OrderHistoryFilterEventCopyWithImpl<$Res>;
+      _$OrderHistoryFilterEventCopyWithImpl<$Res, OrderHistoryFilterEvent>;
 }
 
 /// @nodoc
-class _$OrderHistoryFilterEventCopyWithImpl<$Res>
+class _$OrderHistoryFilterEventCopyWithImpl<$Res,
+        $Val extends OrderHistoryFilterEvent>
     implements $OrderHistoryFilterEventCopyWith<$Res> {
   _$OrderHistoryFilterEventCopyWithImpl(this._value, this._then);
 
-  final OrderHistoryFilterEvent _value;
   // ignore: unused_field
-  final $Res Function(OrderHistoryFilterEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -120,14 +122,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitializedCopyWithImpl<$Res>
-    extends _$OrderHistoryFilterEventCopyWithImpl<$Res>
+    extends _$OrderHistoryFilterEventCopyWithImpl<$Res, _$_Initialized>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, (v) => _then(v as _$_Initialized));
-
-  @override
-  _$_Initialized get _value => super._value as _$_Initialized;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -167,14 +166,14 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? filterOrderHistory,
-    TResult Function(DateTime fromDate)? setfromDate,
-    TResult Function(DateTime toDate)? setToDate,
-    TResult Function(String orderId)? orderIdChanged,
-    TResult Function(String poNumber)? poNumberChanged,
-    TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(String materialSearch)? materialSearchChanged,
+    TResult? Function()? initialized,
+    TResult? Function()? filterOrderHistory,
+    TResult? Function(DateTime fromDate)? setfromDate,
+    TResult? Function(DateTime toDate)? setToDate,
+    TResult? Function(String orderId)? orderIdChanged,
+    TResult? Function(String poNumber)? poNumberChanged,
+    TResult? Function(String principalSearch)? principalSearchChanged,
+    TResult? Function(String materialSearch)? materialSearchChanged,
   }) {
     return initialized?.call();
   }
@@ -218,14 +217,14 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_FilterOrderHistory value)? filterOrderHistory,
-    TResult Function(_SetfromDate value)? setfromDate,
-    TResult Function(_SetToDate value)? setToDate,
-    TResult Function(_OrderIdChanged value)? orderIdChanged,
-    TResult Function(_PoNumberChanged value)? poNumberChanged,
-    TResult Function(_PrincipalSearchChanged value)? principalSearchChanged,
-    TResult Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult? Function(_SetfromDate value)? setfromDate,
+    TResult? Function(_SetToDate value)? setToDate,
+    TResult? Function(_OrderIdChanged value)? orderIdChanged,
+    TResult? Function(_PoNumberChanged value)? poNumberChanged,
+    TResult? Function(_PrincipalSearchChanged value)? principalSearchChanged,
+    TResult? Function(_MaterialSearchChanged value)? materialSearchChanged,
   }) {
     return initialized?.call(this);
   }
@@ -263,14 +262,11 @@ abstract class _$$_FilterOrderHistoryCopyWith<$Res> {
 
 /// @nodoc
 class __$$_FilterOrderHistoryCopyWithImpl<$Res>
-    extends _$OrderHistoryFilterEventCopyWithImpl<$Res>
+    extends _$OrderHistoryFilterEventCopyWithImpl<$Res, _$_FilterOrderHistory>
     implements _$$_FilterOrderHistoryCopyWith<$Res> {
   __$$_FilterOrderHistoryCopyWithImpl(
       _$_FilterOrderHistory _value, $Res Function(_$_FilterOrderHistory) _then)
-      : super(_value, (v) => _then(v as _$_FilterOrderHistory));
-
-  @override
-  _$_FilterOrderHistory get _value => super._value as _$_FilterOrderHistory;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -310,14 +306,14 @@ class _$_FilterOrderHistory implements _FilterOrderHistory {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? filterOrderHistory,
-    TResult Function(DateTime fromDate)? setfromDate,
-    TResult Function(DateTime toDate)? setToDate,
-    TResult Function(String orderId)? orderIdChanged,
-    TResult Function(String poNumber)? poNumberChanged,
-    TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(String materialSearch)? materialSearchChanged,
+    TResult? Function()? initialized,
+    TResult? Function()? filterOrderHistory,
+    TResult? Function(DateTime fromDate)? setfromDate,
+    TResult? Function(DateTime toDate)? setToDate,
+    TResult? Function(String orderId)? orderIdChanged,
+    TResult? Function(String poNumber)? poNumberChanged,
+    TResult? Function(String principalSearch)? principalSearchChanged,
+    TResult? Function(String materialSearch)? materialSearchChanged,
   }) {
     return filterOrderHistory?.call();
   }
@@ -361,14 +357,14 @@ class _$_FilterOrderHistory implements _FilterOrderHistory {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_FilterOrderHistory value)? filterOrderHistory,
-    TResult Function(_SetfromDate value)? setfromDate,
-    TResult Function(_SetToDate value)? setToDate,
-    TResult Function(_OrderIdChanged value)? orderIdChanged,
-    TResult Function(_PoNumberChanged value)? poNumberChanged,
-    TResult Function(_PrincipalSearchChanged value)? principalSearchChanged,
-    TResult Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult? Function(_SetfromDate value)? setfromDate,
+    TResult? Function(_SetToDate value)? setToDate,
+    TResult? Function(_OrderIdChanged value)? orderIdChanged,
+    TResult? Function(_PoNumberChanged value)? poNumberChanged,
+    TResult? Function(_PrincipalSearchChanged value)? principalSearchChanged,
+    TResult? Function(_MaterialSearchChanged value)? materialSearchChanged,
   }) {
     return filterOrderHistory?.call(this);
   }
@@ -402,26 +398,25 @@ abstract class _$$_SetfromDateCopyWith<$Res> {
   factory _$$_SetfromDateCopyWith(
           _$_SetfromDate value, $Res Function(_$_SetfromDate) then) =
       __$$_SetfromDateCopyWithImpl<$Res>;
+  @useResult
   $Res call({DateTime fromDate});
 }
 
 /// @nodoc
 class __$$_SetfromDateCopyWithImpl<$Res>
-    extends _$OrderHistoryFilterEventCopyWithImpl<$Res>
+    extends _$OrderHistoryFilterEventCopyWithImpl<$Res, _$_SetfromDate>
     implements _$$_SetfromDateCopyWith<$Res> {
   __$$_SetfromDateCopyWithImpl(
       _$_SetfromDate _value, $Res Function(_$_SetfromDate) _then)
-      : super(_value, (v) => _then(v as _$_SetfromDate));
+      : super(_value, _then);
 
-  @override
-  _$_SetfromDate get _value => super._value as _$_SetfromDate;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? fromDate = freezed,
+    Object? fromDate = null,
   }) {
     return _then(_$_SetfromDate(
-      fromDate: fromDate == freezed
+      fromDate: null == fromDate
           ? _value.fromDate
           : fromDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -447,15 +442,16 @@ class _$_SetfromDate implements _SetfromDate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SetfromDate &&
-            const DeepCollectionEquality().equals(other.fromDate, fromDate));
+            (identical(other.fromDate, fromDate) ||
+                other.fromDate == fromDate));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(fromDate));
+  int get hashCode => Object.hash(runtimeType, fromDate);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SetfromDateCopyWith<_$_SetfromDate> get copyWith =>
       __$$_SetfromDateCopyWithImpl<_$_SetfromDate>(this, _$identity);
 
@@ -477,14 +473,14 @@ class _$_SetfromDate implements _SetfromDate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? filterOrderHistory,
-    TResult Function(DateTime fromDate)? setfromDate,
-    TResult Function(DateTime toDate)? setToDate,
-    TResult Function(String orderId)? orderIdChanged,
-    TResult Function(String poNumber)? poNumberChanged,
-    TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(String materialSearch)? materialSearchChanged,
+    TResult? Function()? initialized,
+    TResult? Function()? filterOrderHistory,
+    TResult? Function(DateTime fromDate)? setfromDate,
+    TResult? Function(DateTime toDate)? setToDate,
+    TResult? Function(String orderId)? orderIdChanged,
+    TResult? Function(String poNumber)? poNumberChanged,
+    TResult? Function(String principalSearch)? principalSearchChanged,
+    TResult? Function(String materialSearch)? materialSearchChanged,
   }) {
     return setfromDate?.call(fromDate);
   }
@@ -528,14 +524,14 @@ class _$_SetfromDate implements _SetfromDate {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_FilterOrderHistory value)? filterOrderHistory,
-    TResult Function(_SetfromDate value)? setfromDate,
-    TResult Function(_SetToDate value)? setToDate,
-    TResult Function(_OrderIdChanged value)? orderIdChanged,
-    TResult Function(_PoNumberChanged value)? poNumberChanged,
-    TResult Function(_PrincipalSearchChanged value)? principalSearchChanged,
-    TResult Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult? Function(_SetfromDate value)? setfromDate,
+    TResult? Function(_SetToDate value)? setToDate,
+    TResult? Function(_OrderIdChanged value)? orderIdChanged,
+    TResult? Function(_PoNumberChanged value)? poNumberChanged,
+    TResult? Function(_PrincipalSearchChanged value)? principalSearchChanged,
+    TResult? Function(_MaterialSearchChanged value)? materialSearchChanged,
   }) {
     return setfromDate?.call(this);
   }
@@ -575,26 +571,25 @@ abstract class _$$_SetToDateCopyWith<$Res> {
   factory _$$_SetToDateCopyWith(
           _$_SetToDate value, $Res Function(_$_SetToDate) then) =
       __$$_SetToDateCopyWithImpl<$Res>;
+  @useResult
   $Res call({DateTime toDate});
 }
 
 /// @nodoc
 class __$$_SetToDateCopyWithImpl<$Res>
-    extends _$OrderHistoryFilterEventCopyWithImpl<$Res>
+    extends _$OrderHistoryFilterEventCopyWithImpl<$Res, _$_SetToDate>
     implements _$$_SetToDateCopyWith<$Res> {
   __$$_SetToDateCopyWithImpl(
       _$_SetToDate _value, $Res Function(_$_SetToDate) _then)
-      : super(_value, (v) => _then(v as _$_SetToDate));
+      : super(_value, _then);
 
-  @override
-  _$_SetToDate get _value => super._value as _$_SetToDate;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? toDate = freezed,
+    Object? toDate = null,
   }) {
     return _then(_$_SetToDate(
-      toDate: toDate == freezed
+      toDate: null == toDate
           ? _value.toDate
           : toDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -620,15 +615,15 @@ class _$_SetToDate implements _SetToDate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SetToDate &&
-            const DeepCollectionEquality().equals(other.toDate, toDate));
+            (identical(other.toDate, toDate) || other.toDate == toDate));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(toDate));
+  int get hashCode => Object.hash(runtimeType, toDate);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SetToDateCopyWith<_$_SetToDate> get copyWith =>
       __$$_SetToDateCopyWithImpl<_$_SetToDate>(this, _$identity);
 
@@ -650,14 +645,14 @@ class _$_SetToDate implements _SetToDate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? filterOrderHistory,
-    TResult Function(DateTime fromDate)? setfromDate,
-    TResult Function(DateTime toDate)? setToDate,
-    TResult Function(String orderId)? orderIdChanged,
-    TResult Function(String poNumber)? poNumberChanged,
-    TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(String materialSearch)? materialSearchChanged,
+    TResult? Function()? initialized,
+    TResult? Function()? filterOrderHistory,
+    TResult? Function(DateTime fromDate)? setfromDate,
+    TResult? Function(DateTime toDate)? setToDate,
+    TResult? Function(String orderId)? orderIdChanged,
+    TResult? Function(String poNumber)? poNumberChanged,
+    TResult? Function(String principalSearch)? principalSearchChanged,
+    TResult? Function(String materialSearch)? materialSearchChanged,
   }) {
     return setToDate?.call(toDate);
   }
@@ -701,14 +696,14 @@ class _$_SetToDate implements _SetToDate {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_FilterOrderHistory value)? filterOrderHistory,
-    TResult Function(_SetfromDate value)? setfromDate,
-    TResult Function(_SetToDate value)? setToDate,
-    TResult Function(_OrderIdChanged value)? orderIdChanged,
-    TResult Function(_PoNumberChanged value)? poNumberChanged,
-    TResult Function(_PrincipalSearchChanged value)? principalSearchChanged,
-    TResult Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult? Function(_SetfromDate value)? setfromDate,
+    TResult? Function(_SetToDate value)? setToDate,
+    TResult? Function(_OrderIdChanged value)? orderIdChanged,
+    TResult? Function(_PoNumberChanged value)? poNumberChanged,
+    TResult? Function(_PrincipalSearchChanged value)? principalSearchChanged,
+    TResult? Function(_MaterialSearchChanged value)? materialSearchChanged,
   }) {
     return setToDate?.call(this);
   }
@@ -747,26 +742,25 @@ abstract class _$$_OrderIdChangedCopyWith<$Res> {
   factory _$$_OrderIdChangedCopyWith(
           _$_OrderIdChanged value, $Res Function(_$_OrderIdChanged) then) =
       __$$_OrderIdChangedCopyWithImpl<$Res>;
+  @useResult
   $Res call({String orderId});
 }
 
 /// @nodoc
 class __$$_OrderIdChangedCopyWithImpl<$Res>
-    extends _$OrderHistoryFilterEventCopyWithImpl<$Res>
+    extends _$OrderHistoryFilterEventCopyWithImpl<$Res, _$_OrderIdChanged>
     implements _$$_OrderIdChangedCopyWith<$Res> {
   __$$_OrderIdChangedCopyWithImpl(
       _$_OrderIdChanged _value, $Res Function(_$_OrderIdChanged) _then)
-      : super(_value, (v) => _then(v as _$_OrderIdChanged));
+      : super(_value, _then);
 
-  @override
-  _$_OrderIdChanged get _value => super._value as _$_OrderIdChanged;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderId = freezed,
+    Object? orderId = null,
   }) {
     return _then(_$_OrderIdChanged(
-      orderId == freezed
+      null == orderId
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
               as String,
@@ -792,15 +786,15 @@ class _$_OrderIdChanged implements _OrderIdChanged {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderIdChanged &&
-            const DeepCollectionEquality().equals(other.orderId, orderId));
+            (identical(other.orderId, orderId) || other.orderId == orderId));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(orderId));
+  int get hashCode => Object.hash(runtimeType, orderId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OrderIdChangedCopyWith<_$_OrderIdChanged> get copyWith =>
       __$$_OrderIdChangedCopyWithImpl<_$_OrderIdChanged>(this, _$identity);
 
@@ -822,14 +816,14 @@ class _$_OrderIdChanged implements _OrderIdChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? filterOrderHistory,
-    TResult Function(DateTime fromDate)? setfromDate,
-    TResult Function(DateTime toDate)? setToDate,
-    TResult Function(String orderId)? orderIdChanged,
-    TResult Function(String poNumber)? poNumberChanged,
-    TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(String materialSearch)? materialSearchChanged,
+    TResult? Function()? initialized,
+    TResult? Function()? filterOrderHistory,
+    TResult? Function(DateTime fromDate)? setfromDate,
+    TResult? Function(DateTime toDate)? setToDate,
+    TResult? Function(String orderId)? orderIdChanged,
+    TResult? Function(String poNumber)? poNumberChanged,
+    TResult? Function(String principalSearch)? principalSearchChanged,
+    TResult? Function(String materialSearch)? materialSearchChanged,
   }) {
     return orderIdChanged?.call(orderId);
   }
@@ -873,14 +867,14 @@ class _$_OrderIdChanged implements _OrderIdChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_FilterOrderHistory value)? filterOrderHistory,
-    TResult Function(_SetfromDate value)? setfromDate,
-    TResult Function(_SetToDate value)? setToDate,
-    TResult Function(_OrderIdChanged value)? orderIdChanged,
-    TResult Function(_PoNumberChanged value)? poNumberChanged,
-    TResult Function(_PrincipalSearchChanged value)? principalSearchChanged,
-    TResult Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult? Function(_SetfromDate value)? setfromDate,
+    TResult? Function(_SetToDate value)? setToDate,
+    TResult? Function(_OrderIdChanged value)? orderIdChanged,
+    TResult? Function(_PoNumberChanged value)? poNumberChanged,
+    TResult? Function(_PrincipalSearchChanged value)? principalSearchChanged,
+    TResult? Function(_MaterialSearchChanged value)? materialSearchChanged,
   }) {
     return orderIdChanged?.call(this);
   }
@@ -919,26 +913,25 @@ abstract class _$$_PoNumberChangedCopyWith<$Res> {
   factory _$$_PoNumberChangedCopyWith(
           _$_PoNumberChanged value, $Res Function(_$_PoNumberChanged) then) =
       __$$_PoNumberChangedCopyWithImpl<$Res>;
+  @useResult
   $Res call({String poNumber});
 }
 
 /// @nodoc
 class __$$_PoNumberChangedCopyWithImpl<$Res>
-    extends _$OrderHistoryFilterEventCopyWithImpl<$Res>
+    extends _$OrderHistoryFilterEventCopyWithImpl<$Res, _$_PoNumberChanged>
     implements _$$_PoNumberChangedCopyWith<$Res> {
   __$$_PoNumberChangedCopyWithImpl(
       _$_PoNumberChanged _value, $Res Function(_$_PoNumberChanged) _then)
-      : super(_value, (v) => _then(v as _$_PoNumberChanged));
+      : super(_value, _then);
 
-  @override
-  _$_PoNumberChanged get _value => super._value as _$_PoNumberChanged;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? poNumber = freezed,
+    Object? poNumber = null,
   }) {
     return _then(_$_PoNumberChanged(
-      poNumber == freezed
+      null == poNumber
           ? _value.poNumber
           : poNumber // ignore: cast_nullable_to_non_nullable
               as String,
@@ -964,15 +957,16 @@ class _$_PoNumberChanged implements _PoNumberChanged {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PoNumberChanged &&
-            const DeepCollectionEquality().equals(other.poNumber, poNumber));
+            (identical(other.poNumber, poNumber) ||
+                other.poNumber == poNumber));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(poNumber));
+  int get hashCode => Object.hash(runtimeType, poNumber);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PoNumberChangedCopyWith<_$_PoNumberChanged> get copyWith =>
       __$$_PoNumberChangedCopyWithImpl<_$_PoNumberChanged>(this, _$identity);
 
@@ -994,14 +988,14 @@ class _$_PoNumberChanged implements _PoNumberChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? filterOrderHistory,
-    TResult Function(DateTime fromDate)? setfromDate,
-    TResult Function(DateTime toDate)? setToDate,
-    TResult Function(String orderId)? orderIdChanged,
-    TResult Function(String poNumber)? poNumberChanged,
-    TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(String materialSearch)? materialSearchChanged,
+    TResult? Function()? initialized,
+    TResult? Function()? filterOrderHistory,
+    TResult? Function(DateTime fromDate)? setfromDate,
+    TResult? Function(DateTime toDate)? setToDate,
+    TResult? Function(String orderId)? orderIdChanged,
+    TResult? Function(String poNumber)? poNumberChanged,
+    TResult? Function(String principalSearch)? principalSearchChanged,
+    TResult? Function(String materialSearch)? materialSearchChanged,
   }) {
     return poNumberChanged?.call(poNumber);
   }
@@ -1045,14 +1039,14 @@ class _$_PoNumberChanged implements _PoNumberChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_FilterOrderHistory value)? filterOrderHistory,
-    TResult Function(_SetfromDate value)? setfromDate,
-    TResult Function(_SetToDate value)? setToDate,
-    TResult Function(_OrderIdChanged value)? orderIdChanged,
-    TResult Function(_PoNumberChanged value)? poNumberChanged,
-    TResult Function(_PrincipalSearchChanged value)? principalSearchChanged,
-    TResult Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult? Function(_SetfromDate value)? setfromDate,
+    TResult? Function(_SetToDate value)? setToDate,
+    TResult? Function(_OrderIdChanged value)? orderIdChanged,
+    TResult? Function(_PoNumberChanged value)? poNumberChanged,
+    TResult? Function(_PrincipalSearchChanged value)? principalSearchChanged,
+    TResult? Function(_MaterialSearchChanged value)? materialSearchChanged,
   }) {
     return poNumberChanged?.call(this);
   }
@@ -1091,27 +1085,26 @@ abstract class _$$_PrincipalSearchChangedCopyWith<$Res> {
   factory _$$_PrincipalSearchChangedCopyWith(_$_PrincipalSearchChanged value,
           $Res Function(_$_PrincipalSearchChanged) then) =
       __$$_PrincipalSearchChangedCopyWithImpl<$Res>;
+  @useResult
   $Res call({String principalSearch});
 }
 
 /// @nodoc
 class __$$_PrincipalSearchChangedCopyWithImpl<$Res>
-    extends _$OrderHistoryFilterEventCopyWithImpl<$Res>
+    extends _$OrderHistoryFilterEventCopyWithImpl<$Res,
+        _$_PrincipalSearchChanged>
     implements _$$_PrincipalSearchChangedCopyWith<$Res> {
   __$$_PrincipalSearchChangedCopyWithImpl(_$_PrincipalSearchChanged _value,
       $Res Function(_$_PrincipalSearchChanged) _then)
-      : super(_value, (v) => _then(v as _$_PrincipalSearchChanged));
+      : super(_value, _then);
 
-  @override
-  _$_PrincipalSearchChanged get _value =>
-      super._value as _$_PrincipalSearchChanged;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? principalSearch = freezed,
+    Object? principalSearch = null,
   }) {
     return _then(_$_PrincipalSearchChanged(
-      principalSearch == freezed
+      null == principalSearch
           ? _value.principalSearch
           : principalSearch // ignore: cast_nullable_to_non_nullable
               as String,
@@ -1137,16 +1130,16 @@ class _$_PrincipalSearchChanged implements _PrincipalSearchChanged {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PrincipalSearchChanged &&
-            const DeepCollectionEquality()
-                .equals(other.principalSearch, principalSearch));
+            (identical(other.principalSearch, principalSearch) ||
+                other.principalSearch == principalSearch));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(principalSearch));
+  int get hashCode => Object.hash(runtimeType, principalSearch);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PrincipalSearchChangedCopyWith<_$_PrincipalSearchChanged> get copyWith =>
       __$$_PrincipalSearchChangedCopyWithImpl<_$_PrincipalSearchChanged>(
           this, _$identity);
@@ -1169,14 +1162,14 @@ class _$_PrincipalSearchChanged implements _PrincipalSearchChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? filterOrderHistory,
-    TResult Function(DateTime fromDate)? setfromDate,
-    TResult Function(DateTime toDate)? setToDate,
-    TResult Function(String orderId)? orderIdChanged,
-    TResult Function(String poNumber)? poNumberChanged,
-    TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(String materialSearch)? materialSearchChanged,
+    TResult? Function()? initialized,
+    TResult? Function()? filterOrderHistory,
+    TResult? Function(DateTime fromDate)? setfromDate,
+    TResult? Function(DateTime toDate)? setToDate,
+    TResult? Function(String orderId)? orderIdChanged,
+    TResult? Function(String poNumber)? poNumberChanged,
+    TResult? Function(String principalSearch)? principalSearchChanged,
+    TResult? Function(String materialSearch)? materialSearchChanged,
   }) {
     return principalSearchChanged?.call(principalSearch);
   }
@@ -1220,14 +1213,14 @@ class _$_PrincipalSearchChanged implements _PrincipalSearchChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_FilterOrderHistory value)? filterOrderHistory,
-    TResult Function(_SetfromDate value)? setfromDate,
-    TResult Function(_SetToDate value)? setToDate,
-    TResult Function(_OrderIdChanged value)? orderIdChanged,
-    TResult Function(_PoNumberChanged value)? poNumberChanged,
-    TResult Function(_PrincipalSearchChanged value)? principalSearchChanged,
-    TResult Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult? Function(_SetfromDate value)? setfromDate,
+    TResult? Function(_SetToDate value)? setToDate,
+    TResult? Function(_OrderIdChanged value)? orderIdChanged,
+    TResult? Function(_PoNumberChanged value)? poNumberChanged,
+    TResult? Function(_PrincipalSearchChanged value)? principalSearchChanged,
+    TResult? Function(_MaterialSearchChanged value)? materialSearchChanged,
   }) {
     return principalSearchChanged?.call(this);
   }
@@ -1267,27 +1260,26 @@ abstract class _$$_MaterialSearchChangedCopyWith<$Res> {
   factory _$$_MaterialSearchChangedCopyWith(_$_MaterialSearchChanged value,
           $Res Function(_$_MaterialSearchChanged) then) =
       __$$_MaterialSearchChangedCopyWithImpl<$Res>;
+  @useResult
   $Res call({String materialSearch});
 }
 
 /// @nodoc
 class __$$_MaterialSearchChangedCopyWithImpl<$Res>
-    extends _$OrderHistoryFilterEventCopyWithImpl<$Res>
+    extends _$OrderHistoryFilterEventCopyWithImpl<$Res,
+        _$_MaterialSearchChanged>
     implements _$$_MaterialSearchChangedCopyWith<$Res> {
   __$$_MaterialSearchChangedCopyWithImpl(_$_MaterialSearchChanged _value,
       $Res Function(_$_MaterialSearchChanged) _then)
-      : super(_value, (v) => _then(v as _$_MaterialSearchChanged));
+      : super(_value, _then);
 
-  @override
-  _$_MaterialSearchChanged get _value =>
-      super._value as _$_MaterialSearchChanged;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialSearch = freezed,
+    Object? materialSearch = null,
   }) {
     return _then(_$_MaterialSearchChanged(
-      materialSearch == freezed
+      null == materialSearch
           ? _value.materialSearch
           : materialSearch // ignore: cast_nullable_to_non_nullable
               as String,
@@ -1313,16 +1305,16 @@ class _$_MaterialSearchChanged implements _MaterialSearchChanged {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MaterialSearchChanged &&
-            const DeepCollectionEquality()
-                .equals(other.materialSearch, materialSearch));
+            (identical(other.materialSearch, materialSearch) ||
+                other.materialSearch == materialSearch));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(materialSearch));
+  int get hashCode => Object.hash(runtimeType, materialSearch);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MaterialSearchChangedCopyWith<_$_MaterialSearchChanged> get copyWith =>
       __$$_MaterialSearchChangedCopyWithImpl<_$_MaterialSearchChanged>(
           this, _$identity);
@@ -1345,14 +1337,14 @@ class _$_MaterialSearchChanged implements _MaterialSearchChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? filterOrderHistory,
-    TResult Function(DateTime fromDate)? setfromDate,
-    TResult Function(DateTime toDate)? setToDate,
-    TResult Function(String orderId)? orderIdChanged,
-    TResult Function(String poNumber)? poNumberChanged,
-    TResult Function(String principalSearch)? principalSearchChanged,
-    TResult Function(String materialSearch)? materialSearchChanged,
+    TResult? Function()? initialized,
+    TResult? Function()? filterOrderHistory,
+    TResult? Function(DateTime fromDate)? setfromDate,
+    TResult? Function(DateTime toDate)? setToDate,
+    TResult? Function(String orderId)? orderIdChanged,
+    TResult? Function(String poNumber)? poNumberChanged,
+    TResult? Function(String principalSearch)? principalSearchChanged,
+    TResult? Function(String materialSearch)? materialSearchChanged,
   }) {
     return materialSearchChanged?.call(materialSearch);
   }
@@ -1396,14 +1388,14 @@ class _$_MaterialSearchChanged implements _MaterialSearchChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_FilterOrderHistory value)? filterOrderHistory,
-    TResult Function(_SetfromDate value)? setfromDate,
-    TResult Function(_SetToDate value)? setToDate,
-    TResult Function(_OrderIdChanged value)? orderIdChanged,
-    TResult Function(_PoNumberChanged value)? poNumberChanged,
-    TResult Function(_PrincipalSearchChanged value)? principalSearchChanged,
-    TResult Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult? Function(_SetfromDate value)? setfromDate,
+    TResult? Function(_SetToDate value)? setToDate,
+    TResult? Function(_OrderIdChanged value)? orderIdChanged,
+    TResult? Function(_PoNumberChanged value)? poNumberChanged,
+    TResult? Function(_PrincipalSearchChanged value)? principalSearchChanged,
+    TResult? Function(_MaterialSearchChanged value)? materialSearchChanged,
   }) {
     return materialSearchChanged?.call(this);
   }
@@ -1455,7 +1447,8 @@ mixin _$OrderHistoryFilterState {
 abstract class $OrderHistoryFilterStateCopyWith<$Res> {
   factory $OrderHistoryFilterStateCopyWith(OrderHistoryFilterState value,
           $Res Function(OrderHistoryFilterState) then) =
-      _$OrderHistoryFilterStateCopyWithImpl<$Res>;
+      _$OrderHistoryFilterStateCopyWithImpl<$Res, OrderHistoryFilterState>;
+  @useResult
   $Res call(
       {OrderHistoryFilter orderHistoryFilterList,
       bool isSubmitting,
@@ -1466,46 +1459,50 @@ abstract class $OrderHistoryFilterStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OrderHistoryFilterStateCopyWithImpl<$Res>
+class _$OrderHistoryFilterStateCopyWithImpl<$Res,
+        $Val extends OrderHistoryFilterState>
     implements $OrderHistoryFilterStateCopyWith<$Res> {
   _$OrderHistoryFilterStateCopyWithImpl(this._value, this._then);
 
-  final OrderHistoryFilterState _value;
   // ignore: unused_field
-  final $Res Function(OrderHistoryFilterState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderHistoryFilterList = freezed,
-    Object? isSubmitting = freezed,
-    Object? showErrorMessages = freezed,
-    Object? isAppliedFilter = freezed,
+    Object? orderHistoryFilterList = null,
+    Object? isSubmitting = null,
+    Object? showErrorMessages = null,
+    Object? isAppliedFilter = null,
   }) {
     return _then(_value.copyWith(
-      orderHistoryFilterList: orderHistoryFilterList == freezed
+      orderHistoryFilterList: null == orderHistoryFilterList
           ? _value.orderHistoryFilterList
           : orderHistoryFilterList // ignore: cast_nullable_to_non_nullable
               as OrderHistoryFilter,
-      isSubmitting: isSubmitting == freezed
+      isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
-      showErrorMessages: showErrorMessages == freezed
+      showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
-      isAppliedFilter: isAppliedFilter == freezed
+      isAppliedFilter: null == isAppliedFilter
           ? _value.isAppliedFilter
           : isAppliedFilter // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $OrderHistoryFilterCopyWith<$Res> get orderHistoryFilterList {
     return $OrderHistoryFilterCopyWith<$Res>(_value.orderHistoryFilterList,
         (value) {
-      return _then(_value.copyWith(orderHistoryFilterList: value));
+      return _then(_value.copyWith(orderHistoryFilterList: value) as $Val);
     });
   }
 }
@@ -1517,6 +1514,7 @@ abstract class _$$_OrderHistoryFilterStateCopyWith<$Res>
           $Res Function(_$_OrderHistoryFilterState) then) =
       __$$_OrderHistoryFilterStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {OrderHistoryFilter orderHistoryFilterList,
       bool isSubmitting,
@@ -1529,37 +1527,35 @@ abstract class _$$_OrderHistoryFilterStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_OrderHistoryFilterStateCopyWithImpl<$Res>
-    extends _$OrderHistoryFilterStateCopyWithImpl<$Res>
+    extends _$OrderHistoryFilterStateCopyWithImpl<$Res,
+        _$_OrderHistoryFilterState>
     implements _$$_OrderHistoryFilterStateCopyWith<$Res> {
   __$$_OrderHistoryFilterStateCopyWithImpl(_$_OrderHistoryFilterState _value,
       $Res Function(_$_OrderHistoryFilterState) _then)
-      : super(_value, (v) => _then(v as _$_OrderHistoryFilterState));
+      : super(_value, _then);
 
-  @override
-  _$_OrderHistoryFilterState get _value =>
-      super._value as _$_OrderHistoryFilterState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderHistoryFilterList = freezed,
-    Object? isSubmitting = freezed,
-    Object? showErrorMessages = freezed,
-    Object? isAppliedFilter = freezed,
+    Object? orderHistoryFilterList = null,
+    Object? isSubmitting = null,
+    Object? showErrorMessages = null,
+    Object? isAppliedFilter = null,
   }) {
     return _then(_$_OrderHistoryFilterState(
-      orderHistoryFilterList: orderHistoryFilterList == freezed
+      orderHistoryFilterList: null == orderHistoryFilterList
           ? _value.orderHistoryFilterList
           : orderHistoryFilterList // ignore: cast_nullable_to_non_nullable
               as OrderHistoryFilter,
-      isSubmitting: isSubmitting == freezed
+      isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
-      showErrorMessages: showErrorMessages == freezed
+      showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
-      isAppliedFilter: isAppliedFilter == freezed
+      isAppliedFilter: null == isAppliedFilter
           ? _value.isAppliedFilter
           : isAppliedFilter // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -1596,26 +1592,23 @@ class _$_OrderHistoryFilterState extends _OrderHistoryFilterState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryFilterState &&
-            const DeepCollectionEquality()
-                .equals(other.orderHistoryFilterList, orderHistoryFilterList) &&
-            const DeepCollectionEquality()
-                .equals(other.isSubmitting, isSubmitting) &&
-            const DeepCollectionEquality()
-                .equals(other.showErrorMessages, showErrorMessages) &&
-            const DeepCollectionEquality()
-                .equals(other.isAppliedFilter, isAppliedFilter));
+            (identical(other.orderHistoryFilterList, orderHistoryFilterList) ||
+                other.orderHistoryFilterList == orderHistoryFilterList) &&
+            (identical(other.isSubmitting, isSubmitting) ||
+                other.isSubmitting == isSubmitting) &&
+            (identical(other.showErrorMessages, showErrorMessages) ||
+                other.showErrorMessages == showErrorMessages) &&
+            (identical(other.isAppliedFilter, isAppliedFilter) ||
+                other.isAppliedFilter == isAppliedFilter));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(orderHistoryFilterList),
-      const DeepCollectionEquality().hash(isSubmitting),
-      const DeepCollectionEquality().hash(showErrorMessages),
-      const DeepCollectionEquality().hash(isAppliedFilter));
+  int get hashCode => Object.hash(runtimeType, orderHistoryFilterList,
+      isSubmitting, showErrorMessages, isAppliedFilter);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OrderHistoryFilterStateCopyWith<_$_OrderHistoryFilterState>
       get copyWith =>
           __$$_OrderHistoryFilterStateCopyWithImpl<_$_OrderHistoryFilterState>(

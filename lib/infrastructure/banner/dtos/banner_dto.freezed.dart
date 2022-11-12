@@ -54,7 +54,8 @@ mixin _$BannerDto {
 /// @nodoc
 abstract class $BannerDtoCopyWith<$Res> {
   factory $BannerDtoCopyWith(BannerDto value, $Res Function(BannerDto) then) =
-      _$BannerDtoCopyWithImpl<$Res>;
+      _$BannerDtoCopyWithImpl<$Res, BannerDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'id') int id,
       @JsonKey(name: 'url') String url,
@@ -71,78 +72,81 @@ abstract class $BannerDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BannerDtoCopyWithImpl<$Res> implements $BannerDtoCopyWith<$Res> {
+class _$BannerDtoCopyWithImpl<$Res, $Val extends BannerDto>
+    implements $BannerDtoCopyWith<$Res> {
   _$BannerDtoCopyWithImpl(this._value, this._then);
 
-  final BannerDto _value;
   // ignore: unused_field
-  final $Res Function(BannerDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? url = freezed,
-    Object? title = freezed,
-    Object? description = freezed,
-    Object? buttonLabel = freezed,
-    Object? urlLink = freezed,
-    Object? isPreSalesOrg = freezed,
-    Object? salesOrg = freezed,
-    Object? serial = freezed,
-    Object? isCustomer = freezed,
-    Object? isKeyword = freezed,
-    Object? keyword = freezed,
+    Object? id = null,
+    Object? url = null,
+    Object? title = null,
+    Object? description = null,
+    Object? buttonLabel = null,
+    Object? urlLink = null,
+    Object? isPreSalesOrg = null,
+    Object? salesOrg = null,
+    Object? serial = null,
+    Object? isCustomer = null,
+    Object? isKeyword = null,
+    Object? keyword = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      buttonLabel: buttonLabel == freezed
+      buttonLabel: null == buttonLabel
           ? _value.buttonLabel
           : buttonLabel // ignore: cast_nullable_to_non_nullable
               as String,
-      urlLink: urlLink == freezed
+      urlLink: null == urlLink
           ? _value.urlLink
           : urlLink // ignore: cast_nullable_to_non_nullable
               as String,
-      isPreSalesOrg: isPreSalesOrg == freezed
+      isPreSalesOrg: null == isPreSalesOrg
           ? _value.isPreSalesOrg
           : isPreSalesOrg // ignore: cast_nullable_to_non_nullable
               as bool,
-      salesOrg: salesOrg == freezed
+      salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as String,
-      serial: serial == freezed
+      serial: null == serial
           ? _value.serial
           : serial // ignore: cast_nullable_to_non_nullable
               as int,
-      isCustomer: isCustomer == freezed
+      isCustomer: null == isCustomer
           ? _value.isCustomer
           : isCustomer // ignore: cast_nullable_to_non_nullable
               as bool,
-      isKeyword: isKeyword == freezed
+      isKeyword: null == isKeyword
           ? _value.isKeyword
           : isKeyword // ignore: cast_nullable_to_non_nullable
               as bool,
-      keyword: keyword == freezed
+      keyword: null == keyword
           ? _value.keyword
           : keyword // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -152,6 +156,7 @@ abstract class _$$_BannerDtoCopyWith<$Res> implements $BannerDtoCopyWith<$Res> {
           _$_BannerDto value, $Res Function(_$_BannerDto) then) =
       __$$_BannerDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'id') int id,
       @JsonKey(name: 'url') String url,
@@ -168,76 +173,75 @@ abstract class _$$_BannerDtoCopyWith<$Res> implements $BannerDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_BannerDtoCopyWithImpl<$Res> extends _$BannerDtoCopyWithImpl<$Res>
+class __$$_BannerDtoCopyWithImpl<$Res>
+    extends _$BannerDtoCopyWithImpl<$Res, _$_BannerDto>
     implements _$$_BannerDtoCopyWith<$Res> {
   __$$_BannerDtoCopyWithImpl(
       _$_BannerDto _value, $Res Function(_$_BannerDto) _then)
-      : super(_value, (v) => _then(v as _$_BannerDto));
+      : super(_value, _then);
 
-  @override
-  _$_BannerDto get _value => super._value as _$_BannerDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? url = freezed,
-    Object? title = freezed,
-    Object? description = freezed,
-    Object? buttonLabel = freezed,
-    Object? urlLink = freezed,
-    Object? isPreSalesOrg = freezed,
-    Object? salesOrg = freezed,
-    Object? serial = freezed,
-    Object? isCustomer = freezed,
-    Object? isKeyword = freezed,
-    Object? keyword = freezed,
+    Object? id = null,
+    Object? url = null,
+    Object? title = null,
+    Object? description = null,
+    Object? buttonLabel = null,
+    Object? urlLink = null,
+    Object? isPreSalesOrg = null,
+    Object? salesOrg = null,
+    Object? serial = null,
+    Object? isCustomer = null,
+    Object? isKeyword = null,
+    Object? keyword = null,
   }) {
     return _then(_$_BannerDto(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      buttonLabel: buttonLabel == freezed
+      buttonLabel: null == buttonLabel
           ? _value.buttonLabel
           : buttonLabel // ignore: cast_nullable_to_non_nullable
               as String,
-      urlLink: urlLink == freezed
+      urlLink: null == urlLink
           ? _value.urlLink
           : urlLink // ignore: cast_nullable_to_non_nullable
               as String,
-      isPreSalesOrg: isPreSalesOrg == freezed
+      isPreSalesOrg: null == isPreSalesOrg
           ? _value.isPreSalesOrg
           : isPreSalesOrg // ignore: cast_nullable_to_non_nullable
               as bool,
-      salesOrg: salesOrg == freezed
+      salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as String,
-      serial: serial == freezed
+      serial: null == serial
           ? _value.serial
           : serial // ignore: cast_nullable_to_non_nullable
               as int,
-      isCustomer: isCustomer == freezed
+      isCustomer: null == isCustomer
           ? _value.isCustomer
           : isCustomer // ignore: cast_nullable_to_non_nullable
               as bool,
-      isKeyword: isKeyword == freezed
+      isKeyword: null == isKeyword
           ? _value.isKeyword
           : isKeyword // ignore: cast_nullable_to_non_nullable
               as bool,
-      keyword: keyword == freezed
+      keyword: null == keyword
           ? _value.keyword
           : keyword // ignore: cast_nullable_to_non_nullable
               as String,
@@ -313,43 +317,46 @@ class _$_BannerDto extends _BannerDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BannerDto &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.url, url) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
-            const DeepCollectionEquality()
-                .equals(other.buttonLabel, buttonLabel) &&
-            const DeepCollectionEquality().equals(other.urlLink, urlLink) &&
-            const DeepCollectionEquality()
-                .equals(other.isPreSalesOrg, isPreSalesOrg) &&
-            const DeepCollectionEquality().equals(other.salesOrg, salesOrg) &&
-            const DeepCollectionEquality().equals(other.serial, serial) &&
-            const DeepCollectionEquality()
-                .equals(other.isCustomer, isCustomer) &&
-            const DeepCollectionEquality().equals(other.isKeyword, isKeyword) &&
-            const DeepCollectionEquality().equals(other.keyword, keyword));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.url, url) || other.url == url) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.buttonLabel, buttonLabel) ||
+                other.buttonLabel == buttonLabel) &&
+            (identical(other.urlLink, urlLink) || other.urlLink == urlLink) &&
+            (identical(other.isPreSalesOrg, isPreSalesOrg) ||
+                other.isPreSalesOrg == isPreSalesOrg) &&
+            (identical(other.salesOrg, salesOrg) ||
+                other.salesOrg == salesOrg) &&
+            (identical(other.serial, serial) || other.serial == serial) &&
+            (identical(other.isCustomer, isCustomer) ||
+                other.isCustomer == isCustomer) &&
+            (identical(other.isKeyword, isKeyword) ||
+                other.isKeyword == isKeyword) &&
+            (identical(other.keyword, keyword) || other.keyword == keyword));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(url),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(buttonLabel),
-      const DeepCollectionEquality().hash(urlLink),
-      const DeepCollectionEquality().hash(isPreSalesOrg),
-      const DeepCollectionEquality().hash(salesOrg),
-      const DeepCollectionEquality().hash(serial),
-      const DeepCollectionEquality().hash(isCustomer),
-      const DeepCollectionEquality().hash(isKeyword),
-      const DeepCollectionEquality().hash(keyword));
+      id,
+      url,
+      title,
+      description,
+      buttonLabel,
+      urlLink,
+      isPreSalesOrg,
+      salesOrg,
+      serial,
+      isCustomer,
+      isKeyword,
+      keyword);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_BannerDtoCopyWith<_$_BannerDto> get copyWith =>
       __$$_BannerDtoCopyWithImpl<_$_BannerDto>(this, _$identity);
 

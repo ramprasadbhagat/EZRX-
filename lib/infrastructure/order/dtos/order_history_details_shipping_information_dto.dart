@@ -11,15 +11,15 @@ class OrderHistoryDetailsShippingInformationDto
     with _$OrderHistoryDetailsShippingInformationDto {
   const OrderHistoryDetailsShippingInformationDto._();
   const factory OrderHistoryDetailsShippingInformationDto({
-    @JsonKey(name: 'Address') required String address,
-    @JsonKey(name: 'POReference') required String pOReference,
-    @JsonKey(name: 'InvoiceNumber') required String invoiceNumber,
-    @JsonKey(name: 'InvoiceDate') required String invoiceDate,
-    @JsonKey(name: 'PostalCode') required String postalCode,
-    @JsonKey(name: 'Country') required String country,
-    @JsonKey(name: 'Phone') required String phone,
-    @JsonKey(name: 'Fax') required String fax,
-    @JsonKey(name: 'Invoices') required List<OrderHistoryDetailsInvoicesDto> invoices,
+    @JsonKey(name: 'Address',defaultValue: '') required String address,
+    @JsonKey(name: 'POReference',defaultValue: '') required String pOReference,
+    @JsonKey(name: 'InvoiceNumber',defaultValue: '') required String invoiceNumber,
+    @JsonKey(name: 'InvoiceDate',defaultValue: '') required String invoiceDate,
+    @JsonKey(name: 'PostalCode',defaultValue: '') required String postalCode,
+    @JsonKey(name: 'Country',defaultValue: '') required String country,
+    @JsonKey(name: 'Phone',defaultValue: '') required String phone,
+    @JsonKey(name: 'Fax',defaultValue: '') required String fax,
+    @JsonKey(name: 'Invoices',defaultValue: <OrderHistoryDetailsInvoicesDto>[]) required List<OrderHistoryDetailsInvoicesDto> invoices,
   }) = _OrderHistoryDetailsShippingInformationDto;
   factory OrderHistoryDetailsShippingInformationDto.fromDomain(
       OrderHistoryDetailsShippingInformation orderHistoryDetailsShippingInformation,) {

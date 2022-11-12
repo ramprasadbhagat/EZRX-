@@ -10,18 +10,19 @@ _$_OrderHistoryDetailsShippingInformationDto
     _$$_OrderHistoryDetailsShippingInformationDtoFromJson(
             Map<String, dynamic> json) =>
         _$_OrderHistoryDetailsShippingInformationDto(
-          address: json['Address'] as String,
-          pOReference: json['POReference'] as String,
-          invoiceNumber: json['InvoiceNumber'] as String,
-          invoiceDate: json['InvoiceDate'] as String,
-          postalCode: json['PostalCode'] as String,
-          country: json['Country'] as String,
-          phone: json['Phone'] as String,
-          fax: json['Fax'] as String,
-          invoices: (json['Invoices'] as List<dynamic>)
-              .map((e) => OrderHistoryDetailsInvoicesDto.fromJson(
-                  e as Map<String, dynamic>))
-              .toList(),
+          address: json['Address'] as String? ?? '',
+          pOReference: json['POReference'] as String? ?? '',
+          invoiceNumber: json['InvoiceNumber'] as String? ?? '',
+          invoiceDate: json['InvoiceDate'] as String? ?? '',
+          postalCode: json['PostalCode'] as String? ?? '',
+          country: json['Country'] as String? ?? '',
+          phone: json['Phone'] as String? ?? '',
+          fax: json['Fax'] as String? ?? '',
+          invoices: (json['Invoices'] as List<dynamic>?)
+                  ?.map((e) => OrderHistoryDetailsInvoicesDto.fromJson(
+                      e as Map<String, dynamic>))
+                  .toList() ??
+              [],
         );
 
 Map<String, dynamic> _$$_OrderHistoryDetailsShippingInformationDtoToJson(

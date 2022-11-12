@@ -31,7 +31,8 @@ mixin _$Favourite {
 /// @nodoc
 abstract class $FavouriteCopyWith<$Res> {
   factory $FavouriteCopyWith(Favourite value, $Res Function(Favourite) then) =
-      _$FavouriteCopyWithImpl<$Res>;
+      _$FavouriteCopyWithImpl<$Res, Favourite>;
+  @useResult
   $Res call(
       {String id,
       MaterialNumber materialNumber,
@@ -42,48 +43,51 @@ abstract class $FavouriteCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$FavouriteCopyWithImpl<$Res> implements $FavouriteCopyWith<$Res> {
+class _$FavouriteCopyWithImpl<$Res, $Val extends Favourite>
+    implements $FavouriteCopyWith<$Res> {
   _$FavouriteCopyWithImpl(this._value, this._then);
 
-  final Favourite _value;
   // ignore: unused_field
-  final $Res Function(Favourite) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? materialNumber = freezed,
-    Object? isFOC = freezed,
-    Object? isTenderContract = freezed,
-    Object? materialDescription = freezed,
-    Object? isWaitingStatusUpdate = freezed,
+    Object? id = null,
+    Object? materialNumber = null,
+    Object? isFOC = null,
+    Object? isTenderContract = null,
+    Object? materialDescription = null,
+    Object? isWaitingStatusUpdate = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      materialNumber: materialNumber == freezed
+      materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
-      isFOC: isFOC == freezed
+      isFOC: null == isFOC
           ? _value.isFOC
           : isFOC // ignore: cast_nullable_to_non_nullable
               as bool,
-      isTenderContract: isTenderContract == freezed
+      isTenderContract: null == isTenderContract
           ? _value.isTenderContract
           : isTenderContract // ignore: cast_nullable_to_non_nullable
               as bool,
-      materialDescription: materialDescription == freezed
+      materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      isWaitingStatusUpdate: isWaitingStatusUpdate == freezed
+      isWaitingStatusUpdate: null == isWaitingStatusUpdate
           ? _value.isWaitingStatusUpdate
           : isWaitingStatusUpdate // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -93,6 +97,7 @@ abstract class _$$_FavouriteCopyWith<$Res> implements $FavouriteCopyWith<$Res> {
           _$_Favourite value, $Res Function(_$_Favourite) then) =
       __$$_FavouriteCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       MaterialNumber materialNumber,
@@ -103,46 +108,45 @@ abstract class _$$_FavouriteCopyWith<$Res> implements $FavouriteCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FavouriteCopyWithImpl<$Res> extends _$FavouriteCopyWithImpl<$Res>
+class __$$_FavouriteCopyWithImpl<$Res>
+    extends _$FavouriteCopyWithImpl<$Res, _$_Favourite>
     implements _$$_FavouriteCopyWith<$Res> {
   __$$_FavouriteCopyWithImpl(
       _$_Favourite _value, $Res Function(_$_Favourite) _then)
-      : super(_value, (v) => _then(v as _$_Favourite));
+      : super(_value, _then);
 
-  @override
-  _$_Favourite get _value => super._value as _$_Favourite;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? materialNumber = freezed,
-    Object? isFOC = freezed,
-    Object? isTenderContract = freezed,
-    Object? materialDescription = freezed,
-    Object? isWaitingStatusUpdate = freezed,
+    Object? id = null,
+    Object? materialNumber = null,
+    Object? isFOC = null,
+    Object? isTenderContract = null,
+    Object? materialDescription = null,
+    Object? isWaitingStatusUpdate = null,
   }) {
     return _then(_$_Favourite(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      materialNumber: materialNumber == freezed
+      materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
-      isFOC: isFOC == freezed
+      isFOC: null == isFOC
           ? _value.isFOC
           : isFOC // ignore: cast_nullable_to_non_nullable
               as bool,
-      isTenderContract: isTenderContract == freezed
+      isTenderContract: null == isTenderContract
           ? _value.isTenderContract
           : isTenderContract // ignore: cast_nullable_to_non_nullable
               as bool,
-      materialDescription: materialDescription == freezed
+      materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      isWaitingStatusUpdate: isWaitingStatusUpdate == freezed
+      isWaitingStatusUpdate: null == isWaitingStatusUpdate
           ? _value.isWaitingStatusUpdate
           : isWaitingStatusUpdate // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -186,30 +190,25 @@ class _$_Favourite extends _Favourite {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Favourite &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality()
-                .equals(other.materialNumber, materialNumber) &&
-            const DeepCollectionEquality().equals(other.isFOC, isFOC) &&
-            const DeepCollectionEquality()
-                .equals(other.isTenderContract, isTenderContract) &&
-            const DeepCollectionEquality()
-                .equals(other.materialDescription, materialDescription) &&
-            const DeepCollectionEquality()
-                .equals(other.isWaitingStatusUpdate, isWaitingStatusUpdate));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber) &&
+            (identical(other.isFOC, isFOC) || other.isFOC == isFOC) &&
+            (identical(other.isTenderContract, isTenderContract) ||
+                other.isTenderContract == isTenderContract) &&
+            (identical(other.materialDescription, materialDescription) ||
+                other.materialDescription == materialDescription) &&
+            (identical(other.isWaitingStatusUpdate, isWaitingStatusUpdate) ||
+                other.isWaitingStatusUpdate == isWaitingStatusUpdate));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(materialNumber),
-      const DeepCollectionEquality().hash(isFOC),
-      const DeepCollectionEquality().hash(isTenderContract),
-      const DeepCollectionEquality().hash(materialDescription),
-      const DeepCollectionEquality().hash(isWaitingStatusUpdate));
+  int get hashCode => Object.hash(runtimeType, id, materialNumber, isFOC,
+      isTenderContract, materialDescription, isWaitingStatusUpdate);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_FavouriteCopyWith<_$_Favourite> get copyWith =>
       __$$_FavouriteCopyWithImpl<_$_Favourite>(this, _$identity);
 }

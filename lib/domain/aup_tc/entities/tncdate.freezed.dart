@@ -25,28 +25,32 @@ mixin _$TncDate {
 /// @nodoc
 abstract class $TncDateCopyWith<$Res> {
   factory $TncDateCopyWith(TncDate value, $Res Function(TncDate) then) =
-      _$TncDateCopyWithImpl<$Res>;
+      _$TncDateCopyWithImpl<$Res, TncDate>;
+  @useResult
   $Res call({DateTime date});
 }
 
 /// @nodoc
-class _$TncDateCopyWithImpl<$Res> implements $TncDateCopyWith<$Res> {
+class _$TncDateCopyWithImpl<$Res, $Val extends TncDate>
+    implements $TncDateCopyWith<$Res> {
   _$TncDateCopyWithImpl(this._value, this._then);
 
-  final TncDate _value;
   // ignore: unused_field
-  final $Res Function(TncDate) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? date = freezed,
+    Object? date = null,
   }) {
     return _then(_value.copyWith(
-      date: date == freezed
+      date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
-    ));
+    ) as $Val);
   }
 }
 
@@ -56,24 +60,24 @@ abstract class _$$_TncDateCopyWith<$Res> implements $TncDateCopyWith<$Res> {
           _$_TncDate value, $Res Function(_$_TncDate) then) =
       __$$_TncDateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({DateTime date});
 }
 
 /// @nodoc
-class __$$_TncDateCopyWithImpl<$Res> extends _$TncDateCopyWithImpl<$Res>
+class __$$_TncDateCopyWithImpl<$Res>
+    extends _$TncDateCopyWithImpl<$Res, _$_TncDate>
     implements _$$_TncDateCopyWith<$Res> {
   __$$_TncDateCopyWithImpl(_$_TncDate _value, $Res Function(_$_TncDate) _then)
-      : super(_value, (v) => _then(v as _$_TncDate));
+      : super(_value, _then);
 
-  @override
-  _$_TncDate get _value => super._value as _$_TncDate;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? date = freezed,
+    Object? date = null,
   }) {
     return _then(_$_TncDate(
-      date: date == freezed
+      date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -99,15 +103,15 @@ class _$_TncDate extends _TncDate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TncDate &&
-            const DeepCollectionEquality().equals(other.date, date));
+            (identical(other.date, date) || other.date == date));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(date));
+  int get hashCode => Object.hash(runtimeType, date);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_TncDateCopyWith<_$_TncDate> get copyWith =>
       __$$_TncDateCopyWithImpl<_$_TncDate>(this, _$identity);
 }
