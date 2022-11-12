@@ -5,7 +5,6 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -13,20 +12,19 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/order_type_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/presentation/core/custom_label.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/bonus_discount_label.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/favorite_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_type_selector.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class MaterialListPage extends StatelessWidget {
   final Function addToCart;
@@ -263,11 +261,17 @@ class _ListContent extends StatelessWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              materialInfo.materialNumber.displayMatNo,
-              style: Theme.of(context).textTheme.subtitle2?.apply(
-                    color: ZPColors.kPrimaryColor,
-                  ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  materialInfo.materialNumber.displayMatNo,
+                  style: Theme.of(context).textTheme.subtitle2?.apply(
+                        color: ZPColors.kPrimaryColor,
+                      ),
+                ),
+                BonusDiscountLabel(materialInfo: materialInfo),
+              ],
             ),
             Text(
               materialInfo.materialDescription,
@@ -291,46 +295,14 @@ class _ListContent extends StatelessWidget {
             _GovermentMaterialCode(
               materialInfo: materialInfo,
             ),
-            _PriceLabel(materialInfo: materialInfo),
-          ],
-        ),
-        trailing: BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
-          builder: (context, materialPriceState) {
-            final itemPrice = materialPriceState
-                .getPriceForMaterial(materialInfo.materialNumber);
-
-            return Row(
-              mainAxisSize: MainAxisSize.min,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                if (!materialInfo.hidePrice && itemPrice.bonuses.isNotEmpty)
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SvgPicture.asset(
-                      'assets/svg/bonus.svg',
-                      key: const ValueKey('bonusLogo'),
-                    ),
-                  ),
-                if (!materialInfo.hidePrice && itemPrice.tiers.isNotEmpty)
-                  Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: SvgPicture.asset(
-                      'assets/svg/tieredPricing.svg',
-                      key: const ValueKey('tieredPricingLogo'),
-                    ),
-                  ),
-                if (itemPrice.zmgDiscount)
-                  const CustomLabel(
-                    key: ValueKey('zmgDiscountLable'),
-                    textValue: 'ZMG',
-                    mainColor: ZPColors.secondary,
-                  ),
-                const SizedBox(
-                  width: 10,
-                ),
-                _FavoriteButton(materialInfo: materialInfo),
+                _PriceLabel(materialInfo: materialInfo),
+                FavoriteButton(materialInfo: materialInfo),
               ],
-            );
-          },
+            ),
+          ],
         ),
       ),
     );
@@ -419,71 +391,6 @@ class _PriceLabel extends StatelessWidget {
                 color: ZPColors.black,
               ),
         );
-      },
-    );
-  }
-}
-
-class _FavoriteButton extends StatelessWidget {
-  final MaterialInfo materialInfo;
-
-  const _FavoriteButton({Key? key, required this.materialInfo})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<FavouriteBloc, FavouriteState>(
-      listenWhen: (previous, current) => previous != current,
-      listener: (context, state) {},
-      buildWhen: (previous, current) => previous != current,
-      builder: (context, state) {
-        final favourite = state.favouriteItems.firstWhere(
-          (e) => e.materialNumber == materialInfo.materialNumber,
-          orElse: () => Favourite.empty(),
-        );
-
-        return favourite == Favourite.empty()
-            ? InkWell(
-                child: const SizedBox(
-                  height: 15,
-                  width: 15,
-                  child: Icon(
-                    Icons.favorite_border_outlined,
-                    color: ZPColors.secondary,
-                    // size: 20,
-                  ),
-                ),
-                onTap: () => context.read<FavouriteBloc>().add(
-                      FavouriteEvent.add(
-                        item: Favourite(
-                          id: '',
-                          materialNumber: materialInfo.materialNumber,
-                          isFOC: materialInfo.materialGroup4.isFOC,
-                          isTenderContract: false,
-                          materialDescription: materialInfo.materialDescription,
-                        ),
-                        isPackAndPick: false,
-                        user: context.read<UserBloc>().state.user,
-                      ),
-                    ),
-              )
-            : InkWell(
-                child: const SizedBox(
-                  height: 15,
-                  width: 15,
-                  child: Icon(
-                    Icons.favorite,
-                    color: ZPColors.secondary,
-                    // size: 20,
-                  ),
-                ),
-                onTap: () => context.read<FavouriteBloc>().add(
-                      FavouriteEvent.delete(
-                        item: favourite,
-                        user: context.read<UserBloc>().state.user,
-                      ),
-                    ),
-              );
       },
     );
   }

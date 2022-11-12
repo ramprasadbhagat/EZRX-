@@ -123,6 +123,11 @@ class PriceAggregate with _$PriceAggregate {
 
     return '${salesOrgConfig.currency.code} ${result.toStringAsFixed(2)}';
   }
+
+  bool get isDefaultMDEnabled {
+    return salesOrgConfig.enableDefaultMD &&
+        materialInfo.defaultMaterialDescription.isNotEmpty;
+  }
 }
 
 enum PriceType {

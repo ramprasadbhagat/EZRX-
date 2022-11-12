@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,7 +42,7 @@ class _AddToCartState extends State<AddToCart> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.6,
+      height: MediaQuery.of(context).size.height * 0.7,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Padding(
@@ -81,108 +82,43 @@ class _AddToCartState extends State<AddToCart> {
                     ),
                   ),
                   if (state.cartItem.price.zmgDiscount)
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    Column(
                       children: [
-                        const Text('Tiered Pricing:').tr(),
-                        const SizedBox(width: 10),
-                        Column(
-                          children: state.cartItem.price.tiers.first.items
-                              .map(
-                                (e) => _PriceTierLable(
-                                  priceTierItem: e,
-                                ),
-                              )
-                              .toList(),
-                        ),
+                        // const Text('Tiered Pricing:').tr(),
+                        ...state.cartItem.price.tiers.first.items
+                            .map((e) => _PriceTierLable(priceTierItem: e))
+                            .toList(),
                       ],
                     ),
-
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      _QuantityIcon(
-                        pressed: () {
-                          //todo
-                          //If salesOrg is 'VN', quantity must be less than zDP5RemainingQuota
-                          //context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg.isVN
-                          //Get the final Price
-                          if (int.parse(_controller.text) > 1) {
-                            final value = int.parse(_controller.text) - 1;
-                            _controller.text = value.toString();
-                            context.read<AddToCartBloc>().add(
-                                  AddToCartEvent.updateQuantity(
-                                    value,
-                                    context
-                                        .read<CartBloc>()
-                                        .state
-                                        .zmgMaterialCount,
-                                  ),
-                                );
-                          }
-                        },
-                        icon: Icons.remove,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 2.0,
-                          vertical: 10.0,
-                        ),
-                        child: SizedBox(
-                          width: 80.0,
-                          height: 30.0,
-                          child: TextField(
-                            keyboardType: TextInputType.number,
-                            textAlign: TextAlign.center,
-                            controller: _controller,
-                            style: const TextStyle(
-                              fontSize: 18.0,
-                              color: Colors.black,
+                  // const SizedBox(height: 8),
+                  QuantityInput(
+                    controller: _controller,
+                    onFieldChange: (int value) {
+                      context.read<AddToCartBloc>().add(
+                            AddToCartEvent.updateQuantity(
+                              value,
+                              context.read<CartBloc>().state.zmgMaterialCount,
                             ),
-                            onChanged: (value) {
-                              context.read<AddToCartBloc>().add(
-                                    AddToCartEvent.updateQuantity(
-                                      int.parse(_controller.text),
-                                      context
-                                          .read<CartBloc>()
-                                          .state
-                                          .zmgMaterialCount,
-                                    ),
-                                  );
-                            },
-                          ),
-                        ),
-                      ),
-                      _QuantityIcon(
-                        pressed: () {
-                          //todo
-                          //If salesOrg is 'VN', quantity must be less than zDP5RemainingQuota
-                          //context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg.isVN
-                          //Get the final Price
-                          final value = int.parse(_controller.text) + 1;
-                          _controller.text = value.toString();
-                          context.read<AddToCartBloc>().add(
-                                AddToCartEvent.updateQuantity(
-                                  value,
-                                  context
-                                      .read<CartBloc>()
-                                      .state
-                                      .zmgMaterialCount,
-                                ),
-                              );
-                        },
-                        icon: Icons.add,
-                      ),
-                    ],
+                          );
+                    },
+                    minusPressed: (int value) {
+                      context.read<AddToCartBloc>().add(
+                            AddToCartEvent.updateQuantity(
+                              value,
+                              context.read<CartBloc>().state.zmgMaterialCount,
+                            ),
+                          );
+                    },
+                    addPressed: (int value) {
+                      context.read<AddToCartBloc>().add(
+                            AddToCartEvent.updateQuantity(
+                              value,
+                              context.read<CartBloc>().state.zmgMaterialCount,
+                            ),
+                          );
+                    },
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  const SizedBox(height: 15),
                   enableVat
                       ? Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -226,31 +162,10 @@ class _AddToCartState extends State<AddToCart> {
                       valueFlex: 1,
                     ),
                   ),
-
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  //check if VAT is enabled
-                  /*Column(
-                children: const [
-                  //if vat is enabled : context.read<SalesOrgBloc>().state.configs.enableVat
-                  //-----// if finalPrice is 0.0 || widget.materialInfo.hidePrice || (selectedSalesOrg != 'TH'&&selectedorderType!=null && (selectedorderType.contains("ZPFC") || selectedorderType.contains("ZPFB")))
-                  //-----//-----//Shrink
-                  //-----// else
-                  //-----//-----//Price before VAT :
-                  // Unit Price
-                ],
-              ),*/
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () => _addToCart(context, state.cartItem),
-                        child: const Text('Add to Cart').tr(),
-                      ),
-                    ],
+                  const SizedBox(height: 15),
+                  ElevatedButton(
+                    onPressed: () => _addToCart(context, state.cartItem),
+                    child: const Text('Add to Cart').tr(),
                   ),
                 ],
               );
@@ -261,68 +176,26 @@ class _AddToCartState extends State<AddToCart> {
     );
   }
 
-  void _addToCart(BuildContext context, PriceAggregate cartItem) {
-    if (int.parse(_controller.text) > 0) {
-      final cartItemList = context.read<CartBloc>().state.cartItemList;
-      if (cartItem.materialInfo.materialGroup4.isFOC &&
-          cartItemList.any((e) => !e.materialInfo.materialGroup4.isFOC)) {
-        showSnackBar(
-          context: context,
-          message: 'Covid material cannot be combined with commercial material.'
-              .tr(),
-        );
-      } else if (!cartItem.materialInfo.materialGroup4.isFOC &&
-          cartItemList.any((e) => e.materialInfo.materialGroup4.isFOC)) {
-        showSnackBar(
-          context: context,
-          message: 'Commercial material cannot be combined with covid material.'
-              .tr(),
-        );
-      } else {
-        context.read<CartBloc>().add(CartEvent.addToCart(item: cartItem));
-        context.router.pop();
-      }
-    } else {
+  void _addToCart(BuildContext context, PriceAggregate selectedCartItem) {
+    final cartState = context.read<CartBloc>().state;
+    if (selectedCartItem.materialInfo.materialGroup4.isFOC &&
+        cartState.containNonFocMaterial) {
       showSnackBar(
         context: context,
-        message: 'Min quantity 1'.tr(),
+        message:
+            'Covid material cannot be combined with commercial material.'.tr(),
       );
+    } else if (!selectedCartItem.materialInfo.materialGroup4.isFOC &&
+        cartState.containFocMaterial) {
+      showSnackBar(
+        context: context,
+        message:
+            'Commercial material cannot be combined with covid material.'.tr(),
+      );
+    } else {
+      context.read<CartBloc>().add(CartEvent.addToCart(item: selectedCartItem));
+      context.router.pop();
     }
-  }
-}
-
-class _QuantityIcon extends StatelessWidget {
-  final Function pressed;
-  final IconData icon;
-  const _QuantityIcon({
-    Key? key,
-    required this.pressed,
-    required this.icon,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 30,
-      height: 30,
-      child: OutlinedButton(
-        style: OutlinedButton.styleFrom(
-          padding: EdgeInsets.zero,
-          backgroundColor: ZPColors.primary,
-          minimumSize: const Size(100, 50),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-        ),
-        onPressed: () {
-          pressed();
-        },
-        child: Icon(
-          icon,
-          color: ZPColors.white,
-        ),
-      ),
-    );
   }
 }
 
@@ -336,7 +209,7 @@ class _PriceTierLable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      key: const ValueKey('pricelable'),
+      key: const ValueKey('priceTierLable'),
       width: 180,
       alignment: Alignment.center,
       margin: const EdgeInsets.only(bottom: 5),

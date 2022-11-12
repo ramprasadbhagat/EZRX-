@@ -1,9 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/presentation/core/custom_label.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/bonus_discount_label.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +29,7 @@ class CartItemListTile extends StatelessWidget {
                 .add(CartEvent.removeFromCart(item: cartItem)),
           ),
         ],
-        borderRadius: 4,
+        borderRadius: 8,
         child: ListTile(
           key: Key(
             'cartItem${cartItem.materialInfo.materialNumber}',
@@ -106,26 +105,22 @@ class CartItemListTile extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    if (cartItem.price.zmgDiscount)
-                      const CustomLabel(
-                        textValue: 'ZMG',
-                        key: ValueKey('zmgDiscountLable'),
-                        height: 12,
-                        mainColor: ZPColors.secondary,
-                      ),
                   ],
                 ),
               ],
             ),
           ),
-          title: Text(
-            cartItem.materialInfo.materialNumber.displayMatNo,
-            style: Theme.of(context).textTheme.subtitle2?.apply(
-                  color: ZPColors.kPrimaryColor,
-                ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                cartItem.materialInfo.materialNumber.displayMatNo,
+                style: Theme.of(context).textTheme.subtitle2?.apply(
+                      color: ZPColors.kPrimaryColor,
+                    ),
+              ),
+              BonusDiscountLabel(materialInfo: cartItem.materialInfo),
+            ],
           ),
           subtitle: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -135,10 +130,12 @@ class CartItemListTile extends StatelessWidget {
                 cartItem.materialInfo.materialDescription,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
-              (_isDefaultMDEnabled(context))
+              cartItem.isDefaultMDEnabled
                   ? Text(
                       cartItem.materialInfo.defaultMaterialDescription,
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.subtitle2?.apply(
+                            color: ZPColors.lightGray,
+                          ),
                     )
                   : const SizedBox.shrink(),
               Text(
@@ -181,10 +178,5 @@ class CartItemListTile extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  bool _isDefaultMDEnabled(BuildContext context) {
-    return context.read<SalesOrgBloc>().state.configs.enableDefaultMD &&
-        cartItem.materialInfo.defaultMaterialDescription.isNotEmpty;
   }
 }

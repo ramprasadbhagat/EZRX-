@@ -38,15 +38,15 @@ class OrderSummaryPage extends StatelessWidget {
 }
 
 class _BodyContent extends StatelessWidget {
-  const _BodyContent({
-    Key? key,
-  }) : super(key: key);
+  const _BodyContent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OrderSummaryBloc, OrderSummaryState>(
+      buildWhen: (previous, current) => previous.step != current.step,
       builder: (context, state) {
         return Stepper(
+          margin: const EdgeInsets.fromLTRB(50, 10, 10, 10),
           controlsBuilder: (context, details) {
             return Padding(
               padding: const EdgeInsets.only(top: 20),
@@ -55,7 +55,7 @@ class _BodyContent extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      if (details.currentStep == 5) {
+                      if (details.currentStep == state.maxSteps) {
                         //code to submit
                       } else {
                         context
@@ -63,7 +63,7 @@ class _BodyContent extends StatelessWidget {
                             .add(const OrderSummaryEvent.stepContinue());
                       }
                     },
-                    child: details.currentStep == 5
+                    child: details.currentStep == state.maxSteps
                         ? const Text('Submit').tr()
                         : const Text('Continue').tr(),
                   ),
@@ -75,7 +75,7 @@ class _BodyContent extends StatelessWidget {
                               ),
                             ),
                     onPressed: () {
-                      if (details.currentStep == 5) {
+                      if (details.currentStep == state.maxSteps) {
                         //code to save
                       } else {
                         context
@@ -83,7 +83,7 @@ class _BodyContent extends StatelessWidget {
                             .add(const OrderSummaryEvent.stepCancel());
                       }
                     },
-                    child: details.currentStep == 5
+                    child: details.currentStep == state.maxSteps
                         ? const Text('Save').tr()
                         : const Text('Cancel').tr(),
                   ),
@@ -154,8 +154,7 @@ class _OrderSummaryDetails {
 List<_OrderSummaryDetails> _getTextRowLevelsForCustomerInfo(
   CustomerCodeInfo customer,
 ) {
- 
- return [
+  return [
     _OrderSummaryDetails(
       key: 'Customer Name',
       value:
@@ -289,6 +288,8 @@ class _CustomerDetailsStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
+      buildWhen: (previous, current) =>
+          previous.customerCodeInfo != current.customerCodeInfo,
       builder: (context, state) {
         return Column(
           children: [
@@ -318,6 +319,8 @@ class _SoldToAddressStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
+      buildWhen: (previous, current) =>
+          previous.customerCodeInfo != current.customerCodeInfo,
       builder: (context, state) {
         return Column(
           children: [
@@ -348,6 +351,8 @@ class _ShipToAddressStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ShipToCodeBloc, ShipToCodeState>(
+      buildWhen: (previous, current) =>
+          previous.shipToInfo != current.shipToInfo,
       builder: (context, state) {
         return Column(
           children: [
@@ -443,31 +448,35 @@ class _AdditionalInformationStep extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    // TODO: Biswaranjan - can we use SalesOrgBloc builder here instead of ShipToCodeBloc
     return BlocBuilder<ShipToCodeBloc, ShipToCodeState>(
+      buildWhen: (previous, current) =>
+          previous.shipToInfo != current.shipToInfo,
       builder: (context, state) {
         return Column(
           children: [
             const _TextFormField(
-              labelText: 'Customer PO Reference (Max length: 35 Characters)',
+              labelText: 'Customer PO Reference',
               maxLength: 35,
             ),
             context.read<SalesOrgBloc>().state.configs.enableSpecialInstructions
                 ? const _TextFormField(
-                    labelText:
-                        'Special Instructions (Max length: 132 Characters)',
+                    labelText: 'Special Instructions',
                     maxLength: 132,
+                    keyboardType: TextInputType.multiline,
                   )
                 : const SizedBox.shrink(),
             context.read<SalesOrgBloc>().state.configs.enableReferenceNote
                 ? const _TextFormField(
                     labelText: 'Reference Note',
                     maxLength: 50,
+                    keyboardType: TextInputType.multiline,
                   )
                 : const SizedBox.shrink(),
             context.read<SalesOrgBloc>().state.configs.enableCollectiveNumber &&
                     context.read<UserBloc>().state.user.role.type.isSalesRep
                 ? const _TextFormField(
-                    labelText: 'Collective Number (Max length: 10 Characters)',
+                    labelText: 'Collective Number',
                     maxLength: 10,
                   )
                 : const SizedBox.shrink(),
@@ -512,8 +521,7 @@ class _Disclaimer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg.country ==
-                    'SG' &&
+        context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg.isSg &&
                 !context.read<UserBloc>().state.user.role.type.isSalesRep
             ? RichText(
                 text: TextSpan(
@@ -539,7 +547,16 @@ class _CartDetails extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CartBloc, CartState>(
+    return BlocConsumer<CartBloc, CartState>(
+      listenWhen: (previous, current) =>
+          previous.cartItemList != current.cartItemList,
+      listener: (context, state) {
+        if (state.cartItemList.isEmpty) {
+          context.router.pop();
+        }
+      },
+      buildWhen: (previous, current) =>
+          previous.cartItemList != current.cartItemList,
       builder: (context, state) {
         final salesOrgConfig = context.read<SalesOrgBloc>().state.configs;
         final taxCode = context.read<SalesOrgBloc>().state.salesOrg.taxCode;
@@ -591,11 +608,11 @@ String _displayPrice(SalesOrganisationConfigs salesOrgConfig, double price) {
 class _TextFormField extends StatelessWidget {
   final String labelText;
   final int maxLength;
-  final TextInputType? keyboardType;
+  final TextInputType keyboardType;
   const _TextFormField({
     required this.labelText,
     required this.maxLength,
-    this.keyboardType,
+    this.keyboardType = TextInputType.text,
     Key? key,
   }) : super(key: key);
   @override
@@ -603,16 +620,14 @@ class _TextFormField extends StatelessWidget {
     return Column(
       children: [
         TextFormField(
-          keyboardType: keyboardType ?? TextInputType.text,
+          keyboardType: keyboardType,
           initialValue: '',
           maxLength: maxLength,
+          maxLines: keyboardType == TextInputType.multiline ? null : 1,
           decoration: InputDecoration(
-            floatingLabelBehavior: FloatingLabelBehavior.never,
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
-            border: InputBorder.none,
+            // border: InputBorder.none,
             labelText: labelText.tr(),
-            labelStyle: const TextStyle(fontSize: 12.0),
+            // labelStyle: const TextStyle(fontSize: 12.0),
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: ZPColors.primary, width: 2.0),
               borderRadius: BorderRadius.all(
@@ -686,12 +701,9 @@ class _PaymentTermState extends State<_PaymentTerm> {
           ),
           readOnly: true,
           decoration: InputDecoration(
-            floatingLabelBehavior: FloatingLabelBehavior.never,
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
             border: InputBorder.none,
             labelText: 'Select Payment Term'.tr(),
-            labelStyle: const TextStyle(fontSize: 12.0),
+            // labelStyle: const TextStyle(fontSize: 12.0),
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: ZPColors.primary, width: 2.0),
               borderRadius: BorderRadius.all(
@@ -762,14 +774,9 @@ class _DatePickerFieldState extends State<_DatePickerField> {
               keyboardType: TextInputType.datetime,
               controller: controller,
               decoration: InputDecoration(
-                floatingLabelBehavior: FloatingLabelBehavior.never,
-                contentPadding: const EdgeInsets.symmetric(
-                  vertical: 5.0,
-                  horizontal: 10.0,
-                ),
                 border: InputBorder.none,
-                labelText: 'YYYY-MM-DD'.tr(),
-                labelStyle: const TextStyle(fontSize: 12.0),
+                labelText: 'Requested Delivery Date'.tr(),
+                // labelStyle: const TextStyle(fontSize: 12.0),
                 suffixIcon: const Icon(
                   Icons.calendar_month,
                 ),

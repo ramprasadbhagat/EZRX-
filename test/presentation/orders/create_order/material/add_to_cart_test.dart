@@ -154,9 +154,9 @@ void main() {
                   .copyWith(salesOrg: SalesOrg('SG'))));
       await tester.pumpWidget(getScopedWidget(const AddToCart()));
       await tester.pump();
-      final listcontent = find.textContaining('Tiered Pricing:'.tr());
-      expect(listcontent, findsOneWidget);
-      final tirePriceLable = find.byKey(const Key('pricelable'));
+      // final listcontent = find.textContaining('Tiered Pricing:'.tr());
+      // expect(listcontent, findsOneWidget);
+      final tirePriceLable = find.byKey(const Key('priceTierLable'));
 
       expect(
         tirePriceLable,

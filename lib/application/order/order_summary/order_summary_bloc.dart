@@ -18,25 +18,25 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
   ) async {
     await event.map(
       initialized: (value) {
-        emit(OrderSummaryState.initial().copyWith(
+        emit(state.copyWith(
           maxSteps: 4,
           step: 0,
         ));
       },
       stepContinue: (value) async {
-        emit(OrderSummaryState.initial().copyWith(
+        emit(state.copyWith(
           apiFailureOrSuccessOption: none(),
           step: state.step < state.maxSteps ? state.step + 1 : 0,
         ));
       },
       stepCancel: (value) {
-        emit(OrderSummaryState.initial().copyWith(
+        emit(state.copyWith(
           apiFailureOrSuccessOption: none(),
           step: state.step - 1 >= 0 ? state.step - 1 : 0,
         ));
       },
       stepTapped: (value) async {
-        emit(OrderSummaryState.initial().copyWith(
+        emit(state.copyWith(
           apiFailureOrSuccessOption: none(),
           step: value.step,
         ));

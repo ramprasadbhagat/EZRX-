@@ -28,4 +28,10 @@ class CartState with _$CartState {
         0,
         (sum, item) => sum + (item.price.zmgDiscount ? item.quantity : 0),
       );
+
+  bool get containFocMaterial =>
+      cartItemList.any((e) => e.materialInfo.materialGroup4.isFOC);
+
+  bool get containNonFocMaterial =>
+      cartItemList.any((e) => !e.materialInfo.materialGroup4.isFOC);
 }

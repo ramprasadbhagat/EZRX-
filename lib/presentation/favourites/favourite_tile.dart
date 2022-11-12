@@ -15,13 +15,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FavouriteListTile extends StatelessWidget {
   final Favourite favourite;
-  final bool enableDefaultMD;
 
-  const FavouriteListTile({
-    Key? key,
-    required this.favourite,
-    required this.enableDefaultMD,
-  }) : super(key: key);
+  const FavouriteListTile({Key? key, required this.favourite})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -131,8 +127,6 @@ class FavouriteListTile extends StatelessWidget {
                     final queryInfo =
                         MaterialQueryInfo.fromFavorite(material: favourite);
                     final priceDetail = state.materialDetails[queryInfo]!;
-                    final defaultMaterialDescription =
-                        priceDetail.info.defaultMaterialDescription;
 
                     final priceAggregate = PriceAggregate(
                       price: priceDetail.price,
@@ -146,14 +140,13 @@ class FavouriteListTile extends StatelessWidget {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        (enableDefaultMD &&
-                                defaultMaterialDescription.isNotEmpty)
+                        priceAggregate.isDefaultMDEnabled
                             ? Text(
-                                "${'Mat Default Description: '.tr()}$defaultMaterialDescription",
-                                style: const TextStyle(
-                                  color: ZPColors.darkGray,
-                                  fontSize: 12,
-                                ),
+                                "${'Mat Default Description: '.tr()}${priceAggregate.materialInfo.defaultMaterialDescription}",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle2
+                                    ?.apply(color: ZPColors.lightGray),
                               )
                             : const SizedBox.shrink(),
                         Row(

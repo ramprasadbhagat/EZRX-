@@ -59,6 +59,7 @@ final appThemeData = {
       selectionHandleColor: ZPColors.primary,
     ),
     inputDecorationTheme: InputDecorationTheme(
+      contentPadding: const EdgeInsets.all(10),
       floatingLabelStyle: const TextStyle(
         color: ZPColors.primary,
       ),
@@ -75,6 +76,7 @@ final appThemeData = {
       // border: UnderlineInputBorder(
       //   borderSide: BorderSide(color: ZPColors.primary),
       // ),
+
       iconColor: ZPColors.primary,
       focusColor: ZPColors.primary,
       hoverColor: ZPColors.primary,
@@ -172,6 +174,13 @@ final appThemeData = {
       indent: 24,
       endIndent: 24,
       thickness: 1.5,
+    ),
+    chipTheme: ChipThemeData(
+      backgroundColor: ZPColors.secondary,
+      labelStyle: TextStyle(color: ZPColors.primary, fontSize: 8.sp),
+      labelPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+      padding: EdgeInsets.zero,
+      shape: const StadiumBorder(),
     ),
     errorColor: ZPColors.error,
   ),

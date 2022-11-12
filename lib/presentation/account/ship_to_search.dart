@@ -223,10 +223,7 @@ class _ListContent extends StatelessWidget {
             'shipToOption${shipToInfo.shipToCustomerCode}',
           ),
           trailing: shipToInfo.defaultShipToAddress
-              ? const CustomLabel(
-                  textValue: 'Default',
-                  mainColor: ZPColors.secondary,
-                )
+              ? const CustomLabel(textValue: 'Default')
               : const SizedBox.shrink(),
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
