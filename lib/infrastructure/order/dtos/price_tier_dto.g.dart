@@ -8,7 +8,7 @@ part of 'price_tier_dto.dart';
 
 class PriceTierDtoAdapter extends TypeAdapter<_$_PriceTierDto> {
   @override
-  final int typeId = 1118;
+  final int typeId = 8;
 
   @override
   _$_PriceTierDto read(BinaryReader reader) {

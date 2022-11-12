@@ -8,7 +8,7 @@ part of 'price_bundle_dto.dart';
 
 class PriceBundleDtoAdapter extends TypeAdapter<_$_PriceBundleDto> {
   @override
-  final int typeId = 110;
+  final int typeId = 13;
 
   @override
   _$_PriceBundleDto read(BinaryReader reader) {
@@ -50,7 +50,7 @@ class PriceBundleDtoAdapter extends TypeAdapter<_$_PriceBundleDto> {
 
 class PriceBundleItemDtoAdapter extends TypeAdapter<_$_PriceBundleItemDto> {
   @override
-  final int typeId = 111;
+  final int typeId = 14;
 
   @override
   _$_PriceBundleItemDto read(BinaryReader reader) {

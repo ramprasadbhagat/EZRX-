@@ -8,7 +8,7 @@ part of 'price_bonus_dto.dart';
 
 class PriceBonusDtoAdapter extends TypeAdapter<_$_PriceBonusDto> {
   @override
-  final int typeId = 107;
+  final int typeId = 10;
 
   @override
   _$_PriceBonusDto read(BinaryReader reader) {
@@ -44,7 +44,7 @@ class PriceBonusDtoAdapter extends TypeAdapter<_$_PriceBonusDto> {
 
 class PriceBonusItemDtoAdapter extends TypeAdapter<_$_PriceBonusItemDto> {
   @override
-  final int typeId = 108;
+  final int typeId = 11;
 
   @override
   _$_PriceBonusItemDto read(BinaryReader reader) {
@@ -86,7 +86,7 @@ class PriceBonusItemDtoAdapter extends TypeAdapter<_$_PriceBonusItemDto> {
 
 class BonusMaterialDtoAdapter extends TypeAdapter<_$_BonusMaterialDto> {
   @override
-  final int typeId = 109;
+  final int typeId = 12;
 
   @override
   _$_BonusMaterialDto read(BinaryReader reader) {

@@ -8,7 +8,7 @@ part of 'bundle_info_dto.dart';
 
 class BundleInfoDtoAdapter extends TypeAdapter<_$_BundleInfoDto> {
   @override
-  final int typeId = 10;
+  final int typeId = 16;
 
   @override
   _$_BundleInfoDto read(BinaryReader reader) {
