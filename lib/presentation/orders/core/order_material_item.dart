@@ -135,6 +135,7 @@ class OrderMaterialItem extends StatelessWidget {
                       quantity: 1,
                       zmgMaterialCountOnCart:
                           context.read<CartBloc>().state.zmgMaterialCount,
+                      isOverride: false,
                     );
 
                     return Text(

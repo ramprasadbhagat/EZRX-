@@ -3,13 +3,17 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bonus_discount_label.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/price_override_bottomsheet.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
+
 class CartItemListTile extends StatelessWidget {
   final PriceAggregate cartItem;
   final String taxCode;
+
   const CartItemListTile({
     Key? key,
     required this.cartItem,
@@ -144,28 +148,73 @@ class CartItemListTile extends StatelessWidget {
                       color: ZPColors.lightGray,
                     ),
               ),
-              cartItem.isEnableVat
-                  ? Text(
-                      '${'Price before $taxCode: '.tr()}${cartItem.display(PriceType.unitPriceBeforeGst)}',
+              GestureDetector(
+                onTap: () {
+                  showModalBottomSheet<void>(
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    builder: (BuildContext context) {
+                      return PriceSheet(
+                        item: cartItem,
+                        onTap: (double newPrice) {
+                          if (cartItem.salesOrgConfig.priceOverride) {
+                            context.read<PriceOverrideBloc>().add(
+                                  PriceOverrideEvent.fetch(item: cartItem),
+                                );
+                          }
+                        },
+                      );
+                    },
+                  );
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    cartItem.isEnableVat
+                        ? Text(
+                            '${'Price before $taxCode: '.tr()}${cartItem.display(PriceType.unitPriceBeforeGst)}',
+                            style: Theme.of(context).textTheme.bodyText1?.apply(
+                                  color: cartItem.isOverride
+                                      ? ZPColors.red
+                                      : ZPColors.lightGray,
+                                  decoration:
+                                      cartItem.salesOrgConfig.priceOverride
+                                          ? TextDecoration.underline
+                                          : TextDecoration.none,
+                                ),
+                          )
+                        : const SizedBox.shrink(),
+                    Text(
+                      '${'List Price: '.tr()}${cartItem.display(PriceType.listPrice)}',
                       style: Theme.of(context).textTheme.bodyText1?.apply(
-                            color: ZPColors.lightGray,
+                            color: cartItem.isOverride
+                                ? ZPColors.red
+                                : ZPColors.lightGray,
+                            decoration: cartItem.salesOrgConfig.priceOverride
+                                ? TextDecoration.underline
+                                : TextDecoration.none,
                           ),
-                    )
-                  : const SizedBox.shrink(),
-              Text(
-                '${'List Price: '.tr()}${cartItem.display(PriceType.listPrice)}',
-                style: Theme.of(context).textTheme.bodyText1?.apply(
-                      color: ZPColors.lightGray,
                     ),
-              ),
-              Text(
-                '${'Unit Price: '.tr()}${cartItem.display(PriceType.unitPrice)}',
-                style: Theme.of(context).textTheme.bodyText1?.apply(
-                      color: ZPColors.black,
+                    //.state.salesOrganisation.p
+                    Text(
+                      '${'Unit Price: '.tr()}${cartItem.display(PriceType.unitPrice)}',
+                      style: Theme.of(context).textTheme.bodyText1?.apply(
+                            color: cartItem.isOverride
+                                ? ZPColors.red
+                                : ZPColors.black,
+                            decoration: cartItem.salesOrgConfig.priceOverride
+                                ? TextDecoration.underline
+                                : TextDecoration.none,
+                          ),
                     ),
+                  ],
+                ),
               ),
             ],
           ),
+
           isThreeLine: true,
           // trailing: IconButton(
           //   onPressed: () {

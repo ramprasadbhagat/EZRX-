@@ -350,9 +350,11 @@ class _PriceLabel extends StatelessWidget {
             materialInfo: materialInfo,
             salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
             quantity: 1,
+            // TODO: will revisit and enhance this
             zmgMaterialCountOnCart: itemPrice.zmgDiscount
                 ? context.watch<CartBloc>().state.zmgMaterialCount
                 : context.read<CartBloc>().state.zmgMaterialCount,
+            isOverride: false,
           );
 
           return Column(

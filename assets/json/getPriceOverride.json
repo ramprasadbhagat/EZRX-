@@ -1,0 +1,37 @@
+{
+    "data": {
+      "price": [
+        {
+          "MaterialNumber": "000000000023168451",
+          "OverridenRulePresent": false,
+          "ZDP5MaxQuota": "",
+          "ZDP5RemainingQuota": "",
+          "ZMGDiscount": false,
+          "ListPrice": 90,
+          "FinalIndividualPrice": 90,
+          "FinalTotalPrice": 0,
+          "AdditionalBonusEligible": true,
+          "PriceRules": [
+            {
+              "Type": "SGD",
+              "Rate": 10,
+              "Conditions": "ZLP0 - A936 - 0009924089",
+              "BonusEligible": true,
+              "ConditionNumber": "0009924089"
+            },
+            {
+              "Type": "SGD",
+              "Rate": 90,
+              "Conditions": "ZPO1",
+              "BonusEligible": true,
+              "ConditionNumber": ""
+            }
+          ],
+          "Bonuses": [],
+          "TieredPricing": [],
+          "Bundles": [],
+          "Valid": true
+        }
+      ]
+    }
+  }

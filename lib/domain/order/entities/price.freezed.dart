@@ -31,6 +31,7 @@ mixin _$Price {
   bool get additionalBonusEligible => throw _privateConstructorUsedError;
   bool get isValid => throw _privateConstructorUsedError;
   bool get isFOC => throw _privateConstructorUsedError;
+  bool get isOverride => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PriceCopyWith<Price> get copyWith => throw _privateConstructorUsedError;
@@ -56,7 +57,8 @@ abstract class $PriceCopyWith<$Res> {
       MaterialPrice finalTotalPrice,
       bool additionalBonusEligible,
       bool isValid,
-      bool isFOC});
+      bool isFOC,
+      bool isOverride});
 }
 
 /// @nodoc
@@ -87,6 +89,7 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
     Object? additionalBonusEligible = null,
     Object? isValid = null,
     Object? isFOC = null,
+    Object? isOverride = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -149,6 +152,10 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
           ? _value.isFOC
           : isFOC // ignore: cast_nullable_to_non_nullable
               as bool,
+      isOverride: null == isOverride
+          ? _value.isOverride
+          : isOverride // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -174,7 +181,8 @@ abstract class _$$_PriceCopyWith<$Res> implements $PriceCopyWith<$Res> {
       MaterialPrice finalTotalPrice,
       bool additionalBonusEligible,
       bool isValid,
-      bool isFOC});
+      bool isFOC,
+      bool isOverride});
 }
 
 /// @nodoc
@@ -201,6 +209,7 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res, _$_Price>
     Object? additionalBonusEligible = null,
     Object? isValid = null,
     Object? isFOC = null,
+    Object? isOverride = null,
   }) {
     return _then(_$_Price(
       materialNumber: null == materialNumber
@@ -263,6 +272,10 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res, _$_Price>
           ? _value.isFOC
           : isFOC // ignore: cast_nullable_to_non_nullable
               as bool,
+      isOverride: null == isOverride
+          ? _value.isOverride
+          : isOverride // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -285,7 +298,8 @@ class _$_Price extends _Price {
       required this.finalTotalPrice,
       required this.additionalBonusEligible,
       this.isValid = true,
-      this.isFOC = false})
+      this.isFOC = false,
+      this.isOverride = false})
       : _rules = rules,
         _tiers = tiers,
         _bonuses = bonuses,
@@ -344,10 +358,13 @@ class _$_Price extends _Price {
   @override
   @JsonKey()
   final bool isFOC;
+  @override
+  @JsonKey()
+  final bool isOverride;
 
   @override
   String toString() {
-    return 'Price(materialNumber: $materialNumber, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, overrideRulePresent: $overrideRulePresent, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, zmgDiscount: $zmgDiscount, lastPrice: $lastPrice, finalPrice: $finalPrice, finalTotalPrice: $finalTotalPrice, additionalBonusEligible: $additionalBonusEligible, isValid: $isValid, isFOC: $isFOC)';
+    return 'Price(materialNumber: $materialNumber, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, overrideRulePresent: $overrideRulePresent, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, zmgDiscount: $zmgDiscount, lastPrice: $lastPrice, finalPrice: $finalPrice, finalTotalPrice: $finalTotalPrice, additionalBonusEligible: $additionalBonusEligible, isValid: $isValid, isFOC: $isFOC, isOverride: $isOverride)';
   }
 
   @override
@@ -379,7 +396,9 @@ class _$_Price extends _Price {
                     other.additionalBonusEligible, additionalBonusEligible) ||
                 other.additionalBonusEligible == additionalBonusEligible) &&
             (identical(other.isValid, isValid) || other.isValid == isValid) &&
-            (identical(other.isFOC, isFOC) || other.isFOC == isFOC));
+            (identical(other.isFOC, isFOC) || other.isFOC == isFOC) &&
+            (identical(other.isOverride, isOverride) ||
+                other.isOverride == isOverride));
   }
 
   @override
@@ -399,7 +418,8 @@ class _$_Price extends _Price {
       finalTotalPrice,
       additionalBonusEligible,
       isValid,
-      isFOC);
+      isFOC,
+      isOverride);
 
   @JsonKey(ignore: true)
   @override
@@ -424,7 +444,8 @@ abstract class _Price extends Price {
       required final MaterialPrice finalTotalPrice,
       required final bool additionalBonusEligible,
       final bool isValid,
-      final bool isFOC}) = _$_Price;
+      final bool isFOC,
+      final bool isOverride}) = _$_Price;
   const _Price._() : super._();
 
   @override
@@ -457,6 +478,8 @@ abstract class _Price extends Price {
   bool get isValid;
   @override
   bool get isFOC;
+  @override
+  bool get isOverride;
   @override
   @JsonKey(ignore: true)
   _$$_PriceCopyWith<_$_Price> get copyWith =>

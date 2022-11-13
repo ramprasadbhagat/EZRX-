@@ -91,6 +91,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'enableDefaultMD', defaultValue: false)
     @HiveField(125, defaultValue: false)
         required bool enableDefaultMD,
+    @JsonKey(name: 'priceOverride', defaultValue: false)
+    @HiveField(126, defaultValue: false)
+        required bool priceOverride,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -98,6 +101,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
   ) {
     return SalesOrganisationConfigsDto(
       enableDefaultMD: configs.enableDefaultMD,
+      priceOverride: configs.priceOverride,
       disableProcessingStatus: configs.disableProcessingStatus,
       currency: configs.currency.getOrCrash(),
       hideCustomer: configs.hideCustomer,
@@ -154,6 +158,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       futureDeliveryDay: futureDeliveryDay,
       enableGMC: enableGMC,
       enableListPrice: enableListPrice,
+      priceOverride: priceOverride,
     );
   }
 

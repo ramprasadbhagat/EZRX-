@@ -14,6 +14,7 @@ class PriceAggregateDto {
     required this.priceDto,
     required this.salesOrganisationConfigsDto,
     required this.zmgMaterialCountOnCart,
+    required this.isOverride,
   });
 
   @HiveField(0, defaultValue: _emptyConstMaterialDto)
@@ -26,6 +27,8 @@ class PriceAggregateDto {
   SalesOrganisationConfigsDto salesOrganisationConfigsDto;
   @HiveField(4, defaultValue: 0)
   int zmgMaterialCountOnCart;
+  @HiveField(5, defaultValue: false)
+  bool isOverride;
 
   factory PriceAggregateDto.fromDomain(PriceAggregate cart) {
     return PriceAggregateDto(
@@ -36,6 +39,7 @@ class PriceAggregateDto {
         cart.salesOrgConfig,
       ),
       zmgMaterialCountOnCart: cart.zmgMaterialCountOnCart,
+      isOverride: cart.isOverride,
     );
   }
 
@@ -48,6 +52,7 @@ class PriceAggregateDto {
       salesOrgConfig: salesOrganisationConfigsDto.toDomain(),
       // salesOrgConfig: SalesOrganisationConfigs.empty(),
       zmgMaterialCountOnCart: zmgMaterialCountOnCart,
+      isOverride: isOverride,
     );
   }
 }
@@ -119,4 +124,5 @@ const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
   materialWithoutPrice: false,
   principalList: [],
   vatValue: 0,
+  priceOverride: false,
 );

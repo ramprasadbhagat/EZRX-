@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.da
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
@@ -129,6 +130,9 @@ import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_info
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_term_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_term_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_term_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/price_override/price_override_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/price_override/price_override_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/price_override/price_override_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
@@ -140,6 +144,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/material_filter_repos
 import 'package:ezrxmobile/infrastructure/order/repository/material_price_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_document_type_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_history_details_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/price_override_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/stock_info_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_bundle_list_repository.dart';
@@ -270,7 +275,10 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
-    () => CartRepository(cartStorage: locator<CartStorage>()),
+    () => CartRepository(
+      cartStorage: locator<CartStorage>(),
+      config: locator<Config>(),
+    ),
   );
 
   locator.registerLazySingleton(
@@ -396,6 +404,39 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => BonusMaterialBloc(
       bonusMaterialRepository: locator<BonusMaterialRepository>(),
+    ),
+  );
+  //============================================================
+  //  Price Override
+  //
+  //============================================================
+  locator.registerLazySingleton(
+    () => PriceOverrideLocalDataSource(),
+  );
+
+  locator.registerLazySingleton(
+    () => PriceOverrideRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      priceOverrideQueryMutation: locator<PriceOverrideQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => PriceOverrideQueryMutation(),
+  );
+
+  locator.registerLazySingleton(
+    () => PriceOverrideRepository(
+      remoteDataSource: locator<PriceOverrideRemoteDataSource>(),
+      config: locator<Config>(),
+      localDataSource: locator<PriceOverrideLocalDataSource>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => PriceOverrideBloc(
+      priceOverrideRepository: locator<PriceOverrideRepository>(),
     ),
   );
   //============================================================

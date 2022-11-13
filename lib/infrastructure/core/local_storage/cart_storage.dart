@@ -71,6 +71,29 @@ class CartStorage {
       throw CacheException(message: e.toString());
     }
   }
+//Replacing the item for price override
+
+  Future update({
+    required PriceDto cartDto,
+    required String materialNumber,
+    required bool isMock,
+  }) async {
+    try {
+      for (final entry in _cartBox.toMap().entries) {
+        final existingItem = entry.value as PriceAggregateDto;
+
+        if (existingItem.materialDto.materialNumber == materialNumber) {
+          existingItem.priceDto = cartDto;
+          existingItem.isOverride = true;
+
+          await _cartBox.put(entry.key, existingItem);
+          break;
+        }
+      }
+    } catch (e) {
+      throw CacheException(message: e.toString());
+    }
+  }
 
   Future delete(String materialNumber) async {
     try {

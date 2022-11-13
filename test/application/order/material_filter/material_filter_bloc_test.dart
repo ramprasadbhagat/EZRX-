@@ -73,6 +73,7 @@ void main() {
     futureDeliveryDay: '',
     enableGMC: false,
     enableListPrice: false,
+    priceOverride: false,
   );
 
   const fakeSelectedFilterCategory = MaterialFilterType.principal;

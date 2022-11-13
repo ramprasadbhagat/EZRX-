@@ -84,16 +84,18 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
               languageFilter: false,
               materialWithoutPrice: false,
               principalList: [],
-              vatValue: 0)
+              vatValue: 0,
+              priceOverride: false)
           : fields[3] as SalesOrganisationConfigsDto,
       zmgMaterialCountOnCart: fields[4] == null ? 0 : fields[4] as int,
+      isOverride: fields[5] == null ? false : fields[5] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, PriceAggregateDto obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.materialDto)
       ..writeByte(1)
@@ -103,7 +105,9 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
       ..writeByte(3)
       ..write(obj.salesOrganisationConfigsDto)
       ..writeByte(4)
-      ..write(obj.zmgMaterialCountOnCart);
+      ..write(obj.zmgMaterialCountOnCart)
+      ..writeByte(5)
+      ..write(obj.isOverride);
   }
 
   @override

@@ -361,7 +361,9 @@ class _CartDetails extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            ...state.cartItemList.map((e) => CartItemListTile(cartItem: e)),
+            ...state.cartItemList.map((e) => CartItemListTile(
+                  cartItem: e,
+                )),
             const SizedBox(
               height: 20,
             ),

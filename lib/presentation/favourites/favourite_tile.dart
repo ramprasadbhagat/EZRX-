@@ -135,6 +135,7 @@ class FavouriteListTile extends StatelessWidget {
                           context.read<SalesOrgBloc>().state.configs,
                       quantity: 1,
                       zmgMaterialCountOnCart: 0,
+                      isOverride: false,
                     );
 
                     return Column(

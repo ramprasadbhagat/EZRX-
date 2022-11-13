@@ -15,6 +15,7 @@ class PriceAggregate with _$PriceAggregate {
     required SalesOrganisationConfigs salesOrgConfig,
     required int quantity,
     required int zmgMaterialCountOnCart,
+    required bool isOverride,
   }) = _PriceAggregate;
 
   factory PriceAggregate.empty() => PriceAggregate(
@@ -23,6 +24,7 @@ class PriceAggregate with _$PriceAggregate {
         salesOrgConfig: SalesOrganisationConfigs.empty(),
         quantity: 1,
         zmgMaterialCountOnCart: 0,
+        isOverride: false,
       );
 
   double get listPrice {
@@ -90,6 +92,18 @@ class PriceAggregate with _$PriceAggregate {
 
   int get zmgMaterialTotalCount =>
       zmgMaterialCountOnCart != 0 ? zmgMaterialCountOnCart : quantity;
+
+  double getNewPrice() {
+    final newPrice = materialInfo.taxClassification.isExempt()
+        ? price.finalPrice.getOrCrash()
+        : ((price.finalPrice.getOrCrash()) /
+            (1 +
+                (materialInfo.taxClassification.isNoTax()
+                    ? salesOrgConfig.vatValue
+                    : 0)));
+
+    return newPrice;
+  }
 
   String display(PriceType priceType) {
     if (price.isFOC) return 'FOC';

@@ -26,6 +26,7 @@ class Price with _$Price {
     required bool additionalBonusEligible,
     @Default(true) bool isValid,
     @Default(false) bool isFOC,
+    @Default(false) bool isOverride,
   }) = _Price;
 
   factory Price.empty() => Price(
