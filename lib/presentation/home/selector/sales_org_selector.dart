@@ -41,9 +41,7 @@ class SalesOrgSelector extends StatelessWidget {
                   context.read<AuthBloc>().add(const AuthEvent.logout());
                 }
               },
-              (_) {
-                context.read<AuthBloc>().add(const AuthEvent.authCheck());
-              },
+              (_) {},
             ),
           );
           if (state.haveSelectedSalesOrganisation) {
@@ -61,9 +59,8 @@ class SalesOrgSelector extends StatelessWidget {
                     salesOrganisation: state.salesOrganisation,
                   ),
                 );
-            context
-              .read<OrderDocumentTypeBloc>()
-                .add(OrderDocumentTypeEvent.fetch(
+            context.read<OrderDocumentTypeBloc>().add(
+                  OrderDocumentTypeEvent.fetch(
                     salesOrganisation: state.salesOrganisation,
                   ),
                 );

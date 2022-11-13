@@ -49,9 +49,7 @@ class CovidMaterialListPage extends StatelessWidget {
                   context.read<AuthBloc>().add(const AuthEvent.logout());
                 }
               },
-              (_) {
-                context.read<AuthBloc>().add(const AuthEvent.authCheck());
-              },
+              (_) {},
             ),
           );
         },

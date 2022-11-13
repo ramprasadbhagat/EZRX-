@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
@@ -88,12 +89,14 @@ class OrderTemplateDetailPage extends StatelessWidget {
                 builder: (context, state) {
                   return OrderActionButton(
                     onAddToCartPressed: () {},
-                    onDeletePressed: () =>
-                        context.read<OrderTemplateListBloc>().add(
-                              OrderTemplateListEvent.delete(
-                                order,
-                              ),
+                    onDeletePressed: () {
+                      context.read<OrderTemplateListBloc>().add(
+                            OrderTemplateListEvent.delete(
+                              order,
                             ),
+                          );
+                      context.router.pop();
+                    },
                     enableAddToCart: order.allMaterialQueryInfo.any(
                       (item) => state.isValidMaterial(
                         query: item,

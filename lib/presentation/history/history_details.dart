@@ -35,14 +35,7 @@ class HistoryDetails extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_ios_new_sharp),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text(
-          'Order#${orderHistoryItem.orderNumber}'.tr(),
-          style: const TextStyle(
-            color: ZPColors.kPrimaryColor,
-            fontSize: 18,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
+        title: Text('#${orderHistoryItem.orderNumber}'.tr()),
         actions: <Widget>[
           TextButton(
             child: Text(

@@ -25,59 +25,39 @@ class SavedOrderListPage extends StatelessWidget {
         title: const Text('Saved Orders').tr(),
         actions: const [CartButton()],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        child: BlocConsumer<SavedOrderListBloc, SavedOrderListState>(
-          listenWhen: (previous, current) =>
-              previous.apiFailureOrSuccessOption !=
-              current.apiFailureOrSuccessOption,
-          listener: (context, state) {
-            state.apiFailureOrSuccessOption.fold(
-              () {},
-              (either) => either.fold(
-                (failure) {
-                  final failureMessage = failure.failureMessage;
-                  showSnackBar(
-                    context: context,
-                    message: failureMessage.tr(),
-                  );
-                  if (failureMessage == 'authentication failed') {
-                    context.read<AuthBloc>().add(const AuthEvent.logout());
-                  }
-                },
-                (_) {
-                  context.read<AuthBloc>().add(const AuthEvent.authCheck());
-                },
-              ),
-            );
-          },
-          buildWhen: (previous, current) =>
-              previous.isFetching != current.isFetching,
-          builder: (context, state) {
-            return ScrollList<SavedOrder>(
-              emptyMessage: 'No saved order found',
-              onRefresh: () {
-                context
-                    .read<MaterialPriceDetailBloc>()
-                    .add(const MaterialPriceDetailEvent.initialized());
-                context.read<SavedOrderListBloc>().add(
-                      SavedOrderListEvent.fetch(
-                        userInfo: context.read<UserBloc>().state.user,
-                        selectedSalesOrganisation: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
-                        selectedCustomerCode: context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo,
-                        selectedShipTo:
-                            context.read<ShipToCodeBloc>().state.shipToInfo,
-                      ),
-                    );
+      body: BlocConsumer<SavedOrderListBloc, SavedOrderListState>(
+        listenWhen: (previous, current) =>
+            previous.apiFailureOrSuccessOption !=
+            current.apiFailureOrSuccessOption,
+        listener: (context, state) {
+          state.apiFailureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) {
+                final failureMessage = failure.failureMessage;
+                showSnackBar(
+                  context: context,
+                  message: failureMessage.tr(),
+                );
+                if (failureMessage == 'authentication failed') {
+                  context.read<AuthBloc>().add(const AuthEvent.logout());
+                }
               },
-              onLoadingMore: () => context.read<SavedOrderListBloc>().add(
-                    SavedOrderListEvent.loadMore(
+              (_) {},
+            ),
+          );
+        },
+        buildWhen: (previous, current) =>
+            previous.isFetching != current.isFetching,
+        builder: (context, state) {
+          return ScrollList<SavedOrder>(
+            emptyMessage: 'No saved order found',
+            onRefresh: () {
+              context
+                  .read<MaterialPriceDetailBloc>()
+                  .add(const MaterialPriceDetailEvent.initialized());
+              context.read<SavedOrderListBloc>().add(
+                    SavedOrderListEvent.fetch(
                       userInfo: context.read<UserBloc>().state.user,
                       selectedSalesOrganisation:
                           context.read<SalesOrgBloc>().state.salesOrganisation,
@@ -88,14 +68,24 @@ class SavedOrderListPage extends StatelessWidget {
                       selectedShipTo:
                           context.read<ShipToCodeBloc>().state.shipToInfo,
                     ),
+                  );
+            },
+            onLoadingMore: () => context.read<SavedOrderListBloc>().add(
+                  SavedOrderListEvent.loadMore(
+                    userInfo: context.read<UserBloc>().state.user,
+                    selectedSalesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    selectedCustomerCode:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    selectedShipTo:
+                        context.read<ShipToCodeBloc>().state.shipToInfo,
                   ),
-              isLoading: state.isFetching,
-              itemBuilder: (context, index, item) =>
-                  SavedOrderItem(order: item),
-              items: state.savedOrders,
-            );
-          },
-        ),
+                ),
+            isLoading: state.isFetching,
+            itemBuilder: (context, index, item) => SavedOrderItem(order: item),
+            items: state.savedOrders,
+          );
+        },
       ),
     );
   }

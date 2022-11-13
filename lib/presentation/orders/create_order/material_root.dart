@@ -37,7 +37,7 @@ class MaterialRoot extends StatelessWidget {
           salesOrganisation:
               context.read<SalesOrgBloc>().state.salesOrganisation,
           role: context.read<UserBloc>().state.user.role,
-        );       
+        );
         final length = (disableBundles ? 1 : 2) + (enableCovidMaterial ? 1 : 0);
 
         return Scaffold(
@@ -49,21 +49,21 @@ class MaterialRoot extends StatelessWidget {
             ),
           ),
           body: length == 1
-          ? MaterialListPage(addToCart: _showBottomSheet)
-          : TabViewPage(
-            length: length,
-            tabHeaderText: [
-              'Material',
-              if (!disableBundles) 'Bundles',
-              if (enableCovidMaterial) 'COVID-19',
-            ],
-            tabWidgets: [
-              MaterialListPage(addToCart: _showBottomSheet),
-              if (!disableBundles) const MaterialBundleListPage(),
-              if (enableCovidMaterial)
-                CovidMaterialListPage(addToCart: _showBottomSheet),
-            ],
-          ),
+              ? MaterialListPage(addToCart: _showBottomSheet)
+              : TabViewPage(
+                  length: length,
+                  tabHeaderText: [
+                    'Material',
+                    if (!disableBundles) 'Bundles',
+                    if (enableCovidMaterial) 'COVID-19',
+                  ],
+                  tabWidgets: [
+                    MaterialListPage(addToCart: _showBottomSheet),
+                    if (!disableBundles) const MaterialBundleListPage(),
+                    if (enableCovidMaterial)
+                      CovidMaterialListPage(addToCart: _showBottomSheet),
+                  ],
+                ),
         );
       },
     );
@@ -77,12 +77,7 @@ class MaterialRoot extends StatelessWidget {
         .read<MaterialPriceBloc>()
         .state
         .materialPrice[materialInfo.materialNumber];
-    // final unitPrice = itemPrice != null
-    //     ? itemPrice.finalPrice.displayWithCurrency(
-    //         currency: context.read<SalesOrgBloc>().state.configs.currency,
-    //         hidePrice: materialInfo.hidePrice,
-    //       )
-    //     : 'NA';
+
     showModalBottomSheet(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -126,4 +121,3 @@ bool _canOrderCovidMaterial({
       customerCodeInfo.customerGrp4.canOrderCovidMaterial ||
       (role.type.isSalesRep && salesOrganisation.salesOrg.isPH);
 }
-

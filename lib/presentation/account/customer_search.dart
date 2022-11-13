@@ -56,9 +56,9 @@ class _CustomerSearchPage extends State<CustomerSearchPage> {
                 previous.searchKey != current.searchKey,
             listener: (context, state) {
               state.apiFailureOrSuccessOption.fold(
-                    () {},
-                    (either) => either.fold(
-                      (failure) {
+                () {},
+                (either) => either.fold(
+                  (failure) {
                     final failureMessage = failure.failureMessage;
                     showSnackBar(
                       context: context,
@@ -68,9 +68,7 @@ class _CustomerSearchPage extends State<CustomerSearchPage> {
                       context.read<AuthBloc>().add(const AuthEvent.logout());
                     }
                   },
-                      (_) {
-                    context.read<AuthBloc>().add(const AuthEvent.authCheck());
-                  },
+                  (_) {},
                 ),
               );
               final searchText = state.searchKey.getValue();

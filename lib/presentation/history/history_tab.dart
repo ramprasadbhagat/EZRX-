@@ -122,19 +122,29 @@ class HistoryTab extends StatelessWidget {
                 current.isSubmitting ||
             !scaffoldKey.currentState!.isEndDrawerOpen,
         listener: (context, state) {
-          final hasCustomerCodeInfo = context.read<CustomerCodeBloc>().state.customerCodeInfo.customerCodeSoldTo.isNotEmpty;
-          final hasShipToInfo = context.read<ShipToCodeBloc>().state.shipToInfo.shipToCustomerCode.isNotEmpty;
-          if(hasCustomerCodeInfo && hasShipToInfo) {
+          final hasCustomerCodeInfo = context
+              .read<CustomerCodeBloc>()
+              .state
+              .customerCodeInfo
+              .customerCodeSoldTo
+              .isNotEmpty;
+          final hasShipToInfo = context
+              .read<ShipToCodeBloc>()
+              .state
+              .shipToInfo
+              .shipToCustomerCode
+              .isNotEmpty;
+          if (hasCustomerCodeInfo && hasShipToInfo) {
             context.read<OrderHistoryListBloc>().add(
-                OrderHistoryListEvent.fetch(
-                  customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                  salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-                  shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-                  user: context.read<UserBloc>().state.user,
-                  orderHistoryFilter: state.orderHistoryFilterList,
-                ),
-              );
+                  OrderHistoryListEvent.fetch(
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    user: context.read<UserBloc>().state.user,
+                    orderHistoryFilter: state.orderHistoryFilterList,
+                  ),
+                );
           }
         },
         child: BlocConsumer<OrderHistoryListBloc, OrderHistoryListState>(
@@ -154,9 +164,7 @@ class HistoryTab extends StatelessWidget {
                     context.read<AuthBloc>().add(const AuthEvent.logout());
                   }
                 },
-                (_) {
-                  context.read<AuthBloc>().add(const AuthEvent.authCheck());
-                },
+                (_) {},
               ),
             );
           },

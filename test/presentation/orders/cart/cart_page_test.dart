@@ -187,7 +187,7 @@ void main() {
         await tester.runAsync(() async {
           await tester.pumpWidget(getWidget());
         });
-        verify(() => authBlocMock.add(const AuthEvent.authCheck()));
+        // verify(() => authBlocMock.add(const AuthEvent.authCheck()));
       });
       testWidgets('Test have cart item list and Refresh', (tester) async {
         when(() => cartBloc.state).thenReturn(

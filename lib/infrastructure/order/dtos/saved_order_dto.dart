@@ -26,7 +26,7 @@ class SavedOrderDto with _$SavedOrderDto {
     @JsonKey(name: 'ShipToParty', defaultValue: '') required String shipToParty,
     @JsonKey(name: 'CompanyName', defaultValue: '') required String companyName,
     @JsonKey(name: 'TotalOrderValue', defaultValue: 0)
-        required num totalOrderValue,
+        required double totalOrderValue,
     @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
         required String requestedDeliveryDate,
   }) = _SavedOrderDto;

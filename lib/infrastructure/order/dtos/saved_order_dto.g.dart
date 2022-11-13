@@ -19,7 +19,7 @@ _$_SavedOrderDto _$$_SavedOrderDtoFromJson(Map<String, dynamic> json) =>
       soldToParty: json['SoldToParty'] as String? ?? '',
       shipToParty: json['ShipToParty'] as String? ?? '',
       companyName: json['CompanyName'] as String? ?? '',
-      totalOrderValue: json['TotalOrderValue'] as num? ?? 0,
+      totalOrderValue: (json['TotalOrderValue'] as num?)?.toDouble() ?? 0,
       requestedDeliveryDate: json['requestedDeliveryDate'] as String? ?? '',
     );
 

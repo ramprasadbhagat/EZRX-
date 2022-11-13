@@ -104,7 +104,7 @@ void main() {
       (tester) async {
         await tester.pumpWidget(savedOrderDetailPage());
         expect(find.byKey(const Key('SavedOrderDetailPage')), findsOneWidget);
-        expect(find.text(orderMock.companyName.name), findsOneWidget);
+        expect(find.text('#${orderMock.id}'), findsOneWidget);
         expect(find.byType(OrderMaterialItem), findsAtLeastNWidgets(1));
         expect(find.text('Add to Cart'), findsOneWidget);
         expect(find.text('Delete'), findsOneWidget);

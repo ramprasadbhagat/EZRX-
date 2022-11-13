@@ -140,15 +140,15 @@ class FavouriteListTile extends StatelessWidget {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        priceAggregate.isDefaultMDEnabled
-                            ? Text(
-                                "${'Mat Default Description: '.tr()}${priceAggregate.materialInfo.defaultMaterialDescription}",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .subtitle2
-                                    ?.apply(color: ZPColors.lightGray),
-                              )
-                            : const SizedBox.shrink(),
+                        // priceAggregate.isDefaultMDEnabled
+                        //     ? Text(
+                        //         "${'Mat Default Description: '.tr()}${priceAggregate.materialInfo.defaultMaterialDescription}",
+                        //         style: Theme.of(context)
+                        //             .textTheme
+                        //             .subtitle2
+                        //             ?.apply(color: ZPColors.lightGray),
+                        //       )
+                        //     : const SizedBox.shrink(),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

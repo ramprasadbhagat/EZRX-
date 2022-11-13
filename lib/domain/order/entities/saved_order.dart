@@ -19,8 +19,7 @@ class SavedOrder with _$SavedOrder {
     required SoldToParty soldToParty,
     required ShipToParty shipToParty,
     required CompanyName companyName,
-    // TODO: use float or int
-    required num totalOrderValue,
+    required double totalOrderValue,
     required String requestedDeliveryDate,
   }) = _SavedOrder;
 

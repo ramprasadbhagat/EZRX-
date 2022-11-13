@@ -25,9 +25,8 @@ mixin _$SavedOrder {
   String get eZRxNumber => throw _privateConstructorUsedError;
   SoldToParty get soldToParty => throw _privateConstructorUsedError;
   ShipToParty get shipToParty => throw _privateConstructorUsedError;
-  CompanyName get companyName =>
-      throw _privateConstructorUsedError; // TODO: use float or int
-  num get totalOrderValue => throw _privateConstructorUsedError;
+  CompanyName get companyName => throw _privateConstructorUsedError;
+  double get totalOrderValue => throw _privateConstructorUsedError;
   String get requestedDeliveryDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -52,7 +51,7 @@ abstract class $SavedOrderCopyWith<$Res> {
       SoldToParty soldToParty,
       ShipToParty shipToParty,
       CompanyName companyName,
-      num totalOrderValue,
+      double totalOrderValue,
       String requestedDeliveryDate});
 }
 
@@ -126,7 +125,7 @@ class _$SavedOrderCopyWithImpl<$Res, $Val extends SavedOrder>
       totalOrderValue: null == totalOrderValue
           ? _value.totalOrderValue
           : totalOrderValue // ignore: cast_nullable_to_non_nullable
-              as num,
+              as double,
       requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
@@ -154,7 +153,7 @@ abstract class _$$_SavedOrderCopyWith<$Res>
       SoldToParty soldToParty,
       ShipToParty shipToParty,
       CompanyName companyName,
-      num totalOrderValue,
+      double totalOrderValue,
       String requestedDeliveryDate});
 }
 
@@ -226,7 +225,7 @@ class __$$_SavedOrderCopyWithImpl<$Res>
       totalOrderValue: null == totalOrderValue
           ? _value.totalOrderValue
           : totalOrderValue // ignore: cast_nullable_to_non_nullable
-              as num,
+              as double,
       requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
@@ -279,9 +278,8 @@ class _$_SavedOrder extends _SavedOrder {
   final ShipToParty shipToParty;
   @override
   final CompanyName companyName;
-// TODO: use float or int
   @override
-  final num totalOrderValue;
+  final double totalOrderValue;
   @override
   final String requestedDeliveryDate;
 
@@ -354,7 +352,7 @@ abstract class _SavedOrder extends SavedOrder {
       required final SoldToParty soldToParty,
       required final ShipToParty shipToParty,
       required final CompanyName companyName,
-      required final num totalOrderValue,
+      required final double totalOrderValue,
       required final String requestedDeliveryDate}) = _$_SavedOrder;
   const _SavedOrder._() : super._();
 
@@ -378,8 +376,8 @@ abstract class _SavedOrder extends SavedOrder {
   ShipToParty get shipToParty;
   @override
   CompanyName get companyName;
-  @override // TODO: use float or int
-  num get totalOrderValue;
+  @override
+  double get totalOrderValue;
   @override
   String get requestedDeliveryDate;
   @override

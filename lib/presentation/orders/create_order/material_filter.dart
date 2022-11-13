@@ -3,7 +3,6 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
@@ -40,9 +39,7 @@ class MaterialFilterPage extends StatelessWidget {
                 message: failureMessage.tr(),
               );
             },
-            (_) {
-              context.read<AuthBloc>().add(const AuthEvent.authCheck());
-            },
+            (_) {},
           ),
         );
       },
@@ -92,10 +89,11 @@ class MaterialFilterPage extends StatelessWidget {
                             selectedMaterialFilter: context
                                 .read<MaterialFilterBloc>()
                                 .state
-                                .selectedMaterialFilter, 
+                                .selectedMaterialFilter,
                             orderDocumentType: context
                                 .read<OrderDocumentTypeBloc>()
-                                .state.selectedOrderType,
+                                .state
+                                .selectedOrderType,
                           ),
                         )
                     : true;

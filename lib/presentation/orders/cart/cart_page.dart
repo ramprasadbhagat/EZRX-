@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -34,9 +33,7 @@ class CartPage extends StatelessWidget {
                 message: failureMessage.tr(),
               );
             },
-            (_) {
-              context.read<AuthBloc>().add(const AuthEvent.authCheck());
-            },
+            (_) {},
           ),
         );
       },

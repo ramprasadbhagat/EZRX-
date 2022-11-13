@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
@@ -28,7 +29,7 @@ class SavedOrderDetailPage extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size(double.infinity, 60),
         child: AppBar(
-          title: Text(order.companyName.name),
+          title: Text('#${order.id}'),
         ),
       ),
       body: RefreshIndicator(
@@ -94,13 +95,15 @@ class SavedOrderDetailPage extends StatelessWidget {
                 builder: (context, state) {
                   return OrderActionButton(
                     onAddToCartPressed: () {},
-                    onDeletePressed: () =>
-                        context.read<SavedOrderListBloc>().add(
-                              SavedOrderListEvent.delete(
-                                order: order,
-                                user: context.read<UserBloc>().state.user,
-                              ),
+                    onDeletePressed: () {
+                      context.read<SavedOrderListBloc>().add(
+                            SavedOrderListEvent.delete(
+                              order: order,
+                              user: context.read<UserBloc>().state.user,
                             ),
+                          );
+                      context.router.pop();
+                    },
                     enableAddToCart: order.allMaterialQueryInfo.any(
                       (item) => state.isValidMaterial(
                         query: item,

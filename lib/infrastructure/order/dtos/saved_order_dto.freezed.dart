@@ -38,7 +38,7 @@ mixin _$SavedOrderDto {
   @JsonKey(name: 'CompanyName', defaultValue: '')
   String get companyName => throw _privateConstructorUsedError;
   @JsonKey(name: 'TotalOrderValue', defaultValue: 0)
-  num get totalOrderValue => throw _privateConstructorUsedError;
+  double get totalOrderValue => throw _privateConstructorUsedError;
   @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
   String get requestedDeliveryDate => throw _privateConstructorUsedError;
 
@@ -73,7 +73,7 @@ abstract class $SavedOrderDtoCopyWith<$Res> {
       @JsonKey(name: 'CompanyName', defaultValue: '')
           String companyName,
       @JsonKey(name: 'TotalOrderValue', defaultValue: 0)
-          num totalOrderValue,
+          double totalOrderValue,
       @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
           String requestedDeliveryDate});
 }
@@ -138,7 +138,7 @@ class _$SavedOrderDtoCopyWithImpl<$Res, $Val extends SavedOrderDto>
       totalOrderValue: null == totalOrderValue
           ? _value.totalOrderValue
           : totalOrderValue // ignore: cast_nullable_to_non_nullable
-              as num,
+              as double,
       requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
@@ -174,7 +174,7 @@ abstract class _$$_SavedOrderDtoCopyWith<$Res>
       @JsonKey(name: 'CompanyName', defaultValue: '')
           String companyName,
       @JsonKey(name: 'TotalOrderValue', defaultValue: 0)
-          num totalOrderValue,
+          double totalOrderValue,
       @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
           String requestedDeliveryDate});
 }
@@ -237,7 +237,7 @@ class __$$_SavedOrderDtoCopyWithImpl<$Res>
       totalOrderValue: null == totalOrderValue
           ? _value.totalOrderValue
           : totalOrderValue // ignore: cast_nullable_to_non_nullable
-              as num,
+              as double,
       requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
@@ -309,7 +309,7 @@ class _$_SavedOrderDto extends _SavedOrderDto {
   final String companyName;
   @override
   @JsonKey(name: 'TotalOrderValue', defaultValue: 0)
-  final num totalOrderValue;
+  final double totalOrderValue;
   @override
   @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
   final String requestedDeliveryDate;
@@ -393,7 +393,7 @@ abstract class _SavedOrderDto extends SavedOrderDto {
       @JsonKey(name: 'CompanyName', defaultValue: '')
           required final String companyName,
       @JsonKey(name: 'TotalOrderValue', defaultValue: 0)
-          required final num totalOrderValue,
+          required final double totalOrderValue,
       @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
           required final String requestedDeliveryDate}) = _$_SavedOrderDto;
   const _SavedOrderDto._() : super._();
@@ -428,7 +428,7 @@ abstract class _SavedOrderDto extends SavedOrderDto {
   String get companyName;
   @override
   @JsonKey(name: 'TotalOrderValue', defaultValue: 0)
-  num get totalOrderValue;
+  double get totalOrderValue;
   @override
   @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
   String get requestedDeliveryDate;
