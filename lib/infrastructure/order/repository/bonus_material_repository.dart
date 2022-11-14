@@ -11,7 +11,6 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_additional_bonus_repository.dart';
-import 'package:ezrxmobile/infrastructure/core/common/app_method.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_remote.dart';
 
@@ -19,12 +18,10 @@ class BonusMaterialRepository implements IBonusMaterialRepository {
   final Config config;
   final BonusMaterialLocalDataSource localDataSource;
   final BonusMaterialRemoteDataSource remoteDataSource;
-  AppMethods appMethods;
 
   BonusMaterialRepository({
     required this.config,
     required this.localDataSource,
-    required this.appMethods,
     required this.remoteDataSource,
   });
 
@@ -36,7 +33,7 @@ class BonusMaterialRepository implements IBonusMaterialRepository {
     required SalesOrgCustomerInfo customerInfo,
     required SalesOrgShipToInfo shipInfo,
     required SalesOrganisation salesOrganisation,
-    required bool pickandpack,
+    required String pickAndPack,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -59,7 +56,7 @@ class BonusMaterialRepository implements IBonusMaterialRepository {
           ? await remoteDataSource.customerMaterialsForSalesRep(
               gimmickMaterial:
                   configs.enableGimmickMaterial, // gimmickMaterial,
-              pickandpack: appMethods.getPickAndPackValue(pickandpack),
+              pickandpack: pickAndPack,
               salesOrganisation: salesOrganisation.salesOrg.getOrCrash(),
               searchKey: searchKey,
               username: user.username.getValue(),

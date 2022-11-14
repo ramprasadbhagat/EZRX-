@@ -9,6 +9,7 @@ class MaterialFilterEvent with _$MaterialFilterEvent {
     required ShipToInfo shipToInfo,
     required User user,
     required SalesOrganisationConfigs salesOrgConfig,
+    required String pickAndPack,
   }) = _fetch;
   const factory MaterialFilterEvent.updateMaterialSelected(
     MaterialFilterType filterType,

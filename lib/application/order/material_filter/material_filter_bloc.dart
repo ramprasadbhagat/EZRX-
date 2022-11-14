@@ -36,6 +36,7 @@ class MaterialFilterBloc
           customerCodeInfo: e.customerCodeInfo,
           shipToInfo: e.shipToInfo,
           user: e.user,
+          pickAndPack: e.pickAndPack,
         );
         failureOrSuccess.fold(
           (failure) {

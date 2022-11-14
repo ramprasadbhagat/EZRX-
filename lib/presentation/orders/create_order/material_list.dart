@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -10,7 +11,6 @@ import 'package:ezrxmobile/application/order/material_filter/material_filter_blo
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
-import 'package:ezrxmobile/domain/core/aggregate/order_type_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -60,19 +60,6 @@ class MaterialListPage extends StatelessWidget {
             previous.isFetching != current.isFetching ||
             previous.materialList != current.materialList,
         builder: (context, state) {
-          final orderDocumentTypeAggregate = OrderDocumentTypeAggregate(
-            user: context.read<UserBloc>().state.user,
-            salesOrganisationConfigs:
-                context.read<SalesOrgBloc>().state.configs,
-            salesOrganisation:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
-            isError: context
-                .read<OrderDocumentTypeBloc>()
-                .state
-                .orderDocumentTypeList
-                .isNotEmpty,
-          );
-
           return BlocListener<OrderDocumentTypeBloc, OrderDocumentTypeState>(
             listenWhen: (previous, current) =>
                 previous.selectedOrderType != current.selectedOrderType ||
@@ -111,6 +98,10 @@ class MaterialListPage extends StatelessWidget {
                                 .read<OrderDocumentTypeBloc>()
                                 .state
                                 .selectedOrderType,
+                            pickAndPack: context
+                                .read<EligibilityBloc>()
+                                .state
+                                .getPNPValueMaterial,
                           ),
                         );
                   },
@@ -120,7 +111,7 @@ class MaterialListPage extends StatelessWidget {
             child: Column(
               children: [
                 const _SearchBar(),
-                if (orderDocumentTypeAggregate.checkOrderTypeEnable)
+                if (context.read<EligibilityBloc>().state.isOrderTypeEnable)
                   const OrderTypeSelector(hideReasonField: true),
                 const _MaterialFilters(),
                 _BodyContent(
@@ -195,6 +186,10 @@ class _BodyContent extends StatelessWidget {
                             .read<OrderDocumentTypeBloc>()
                             .state
                             .selectedOrderType,
+                        pickAndPack: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .getPNPValueMaterial,
                       ),
                     );
               },
@@ -218,6 +213,10 @@ class _BodyContent extends StatelessWidget {
                           .read<OrderDocumentTypeBloc>()
                           .state
                           .selectedOrderType,
+                      pickAndPack: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .getPNPValueMaterial,
                     ),
                   ),
               isLoading: materialListState.isFetching,
@@ -435,6 +434,8 @@ class _SearchBarState extends State<_SearchBar> {
                   .read<MaterialFilterBloc>()
                   .state
                   .selectedMaterialFilter,
+              pickAndPack:
+                  context.read<EligibilityBloc>().state.getPNPValueMaterial,
             ),
           );
     }
@@ -499,6 +500,10 @@ class _SearchBarState extends State<_SearchBar> {
                               .read<MaterialFilterBloc>()
                               .state
                               .selectedMaterialFilter,
+                          pickAndPack: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .getPNPValueMaterial,
                         ),
                       );
                 } else {
@@ -561,6 +566,10 @@ class _SearchBarState extends State<_SearchBar> {
                               .read<OrderDocumentTypeBloc>()
                               .state
                               .selectedOrderType,
+                          pickAndPack: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .getPNPValueMaterial,
                         ));
                   },
                 ),

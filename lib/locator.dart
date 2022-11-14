@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
@@ -70,7 +71,6 @@ import 'package:ezrxmobile/infrastructure/banner/datasource/banner_local.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_remote.dart';
 import 'package:ezrxmobile/infrastructure/banner/repository/banner_repository.dart';
-import 'package:ezrxmobile/infrastructure/core/common/app_method.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
@@ -395,7 +395,6 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => BonusMaterialRepository(
-      appMethods: locator<AppMethods>(),
       remoteDataSource: locator<BonusMaterialRemoteDataSource>(),
       config: locator<Config>(),
       localDataSource: locator<BonusMaterialLocalDataSource>(),
@@ -555,6 +554,15 @@ void setupLocator() {
   );
 
   //============================================================
+  //  Eligibility
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => EligibilityBloc(),
+  );
+
+  //============================================================
   //  Countly
   //
   //============================================================
@@ -665,13 +673,6 @@ void setupLocator() {
   //
   //============================================================
 
-  locator.registerLazySingleton(
-    () => AppMethods(
-      userBlocVal: locator<UserBloc>(),
-      salesOrgBlocVal: locator<SalesOrgBloc>(),
-    ),
-  );
-
   locator.registerLazySingleton(() => MaterialsWithMetaQuery());
 
   locator.registerLazySingleton(() => MaterialListLocalDataSource());
@@ -688,7 +689,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => MaterialListRepository(
       config: locator<Config>(),
-      appMethods: locator<AppMethods>(),
       materialListLocalDataSource: locator<MaterialListLocalDataSource>(),
       materialListRemoteDataSource: locator<MaterialListRemoteDataSource>(),
     ),
@@ -1057,7 +1057,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ValidCustomerMaterialRepository(
       config: locator<Config>(),
-      appMethods: locator<AppMethods>(),
       localDataSource: locator<ValidCustomerMaterialLocalDataSource>(),
       remoteDataSource: locator<ValidCustomerMaterialRemoteDataSource>(),
     ),
@@ -1113,7 +1112,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => MaterialFilterRepository(
       config: locator<Config>(),
-      appMethods: locator<AppMethods>(),
       filterMaterialRemoteDataSource: locator<MaterialFilterRemoteDataSource>(),
       filterMaterialLocalDataSource: locator<MaterialFilterLocalDataSource>(),
     ),

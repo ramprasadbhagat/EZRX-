@@ -9,13 +9,11 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/repository/i_filter_material_repository.dart';
-import 'package:ezrxmobile/infrastructure/core/common/app_method.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_filter_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_filter_remote.dart';
 
 class MaterialFilterRepository implements IMaterialFilterRepository {
   final Config config;
-  AppMethods appMethods;
   final MaterialFilterRemoteDataSource filterMaterialRemoteDataSource;
   final MaterialFilterLocalDataSource filterMaterialLocalDataSource;
 
@@ -23,7 +21,6 @@ class MaterialFilterRepository implements IMaterialFilterRepository {
     required this.filterMaterialLocalDataSource,
     required this.config,
     required this.filterMaterialRemoteDataSource,
-    required this.appMethods,
   });
 
   @override
@@ -33,13 +30,13 @@ class MaterialFilterRepository implements IMaterialFilterRepository {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required User user,
+    required String pickAndPack,
   }) async {
     final salesOrg = salesOrganisation.salesOrg.getOrCrash();
     final customerCode = customerCodeInfo.customerCodeSoldTo;
     final shipToCode = shipToInfo.shipToCustomerCode;
     final userName = user.username.getOrCrash();
     final gimmickMaterial = salesOrgConfig.enableGimmickMaterial;
-    final pickAndPack = appMethods.getPickAndPackValue(false);
     final language = salesOrgConfig.getConfigLangauge;
 
     if (config.appFlavor == Flavor.mock) {
@@ -61,14 +58,15 @@ class MaterialFilterRepository implements IMaterialFilterRepository {
                 gimmickMaterial: gimmickMaterial,
                 pickAndPack: pickAndPack,
                 language: language,
-                userName: userName,)
+                userName: userName,
+              )
             : await filterMaterialRemoteDataSource.getFilters(
                 salesOrganisation: salesOrg,
                 shipToCustomerCode: shipToCode,
                 soldToCustomerCode: customerCode,
                 language: language,
               );
-        
+
         return Right(filterMaterialData);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));

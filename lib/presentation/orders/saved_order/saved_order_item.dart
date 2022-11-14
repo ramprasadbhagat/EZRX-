@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -58,6 +59,10 @@ class SavedOrderItem extends StatelessWidget {
                           ),
                         )
                         .toList(),
+                    pickAndPack: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .getPNPValueMaterial,
                   ),
                 );
             context.router.push(SavedOrderDetailPageRoute(order: order));

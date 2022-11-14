@@ -1,13 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -25,19 +21,11 @@ class MaterialRoot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SalesOrgBloc, SalesOrgState>(
-      buildWhen: (previous, current) =>
-          previous.disableBundles != current.disableBundles ||
-          previous.salesOrg != current.salesOrg,
+    return BlocBuilder<EligibilityBloc, EligibilityState>(
+      buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
-        final disableBundles = state.configs.disableBundles;
-        final enableCovidMaterial = _canOrderCovidMaterial(
-          customerCodeInfo:
-              context.read<CustomerCodeBloc>().state.customerCodeInfo,
-          salesOrganisation:
-              context.read<SalesOrgBloc>().state.salesOrganisation,
-          role: context.read<UserBloc>().state.user.role,
-        );
+        final disableBundles = state.salesOrgConfigs.disableBundles;
+        final enableCovidMaterial = state.isCovidMaterialEnable;
         final length = (disableBundles ? 1 : 2) + (enableCovidMaterial ? 1 : 0);
 
         return Scaffold(
@@ -105,20 +93,4 @@ class MaterialRoot extends StatelessWidget {
       },
     );
   }
-}
-
-// TODO: will revisit and make this better
-bool _canOrderCovidMaterial({
-  required CustomerCodeInfo customerCodeInfo,
-  required SalesOrganisation salesOrganisation,
-  required Role role,
-}) {
-  // 1. SG Covid tab
-  // 2. Sample item
-  // 3. PH Covid tab
-  return (customerCodeInfo.customerAttr7.isZEV &&
-          role.type.isClient &&
-          salesOrganisation.salesOrg.isSg) ||
-      customerCodeInfo.customerGrp4.canOrderCovidMaterial ||
-      (role.type.isSalesRep && salesOrganisation.salesOrg.isPH);
 }

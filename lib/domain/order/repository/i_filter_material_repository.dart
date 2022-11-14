@@ -14,6 +14,7 @@ abstract class IMaterialFilterRepository {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required User user,
+    required String pickAndPack,
   });
   List<String> updateSelectedList({
     required List<String> selectedList,

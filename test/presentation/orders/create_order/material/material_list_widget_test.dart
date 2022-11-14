@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -71,6 +72,9 @@ class OrderDocumentTypeBlocMock
     extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
     implements OrderDocumentTypeBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialListBloc materialListBlocMock;
@@ -84,6 +88,7 @@ void main() {
   late CartBloc cartBlocMock;
   // late MaterialListBloc materialListBloc;
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
+  late EligibilityBlocMock eligibilityBlocMock;
 
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
   final fakeMaterialPrice = MaterialPrice(10.0);
@@ -107,6 +112,7 @@ void main() {
       mockMaterialFilterBloc = MockMaterialFilterBloc();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       autoRouterMock = locator<AppRouter>();
+      eligibilityBlocMock = EligibilityBlocMock();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => customerCodeBlocMock.state)
@@ -121,6 +127,8 @@ void main() {
           .thenReturn(MaterialListState.initial());
       when(() => orderDocumentTypeBlocMock.state)
           .thenReturn(OrderDocumentTypeState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
     });
 
     Widget getScopedWidget(Widget child) {
@@ -156,6 +164,8 @@ void main() {
                 create: ((context) => materialListBlocMock)),
             BlocProvider<OrderDocumentTypeBloc>(
                 create: ((context) => orderDocumentTypeBlocMock)),
+            BlocProvider<EligibilityBloc>(
+                create: ((context) => eligibilityBlocMock)),
           ],
           child: child,
         ),

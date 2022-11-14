@@ -10,6 +10,7 @@ class CovidMaterialListEvent with _$CovidMaterialListEvent {
     required SalesOrganisationConfigs configs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
+    required String pickAndPack,
   }) = _Fetch;
 
   const factory CovidMaterialListEvent.searchMaterialList({
@@ -19,6 +20,7 @@ class CovidMaterialListEvent with _$CovidMaterialListEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required MaterialFilter selectedMaterialFilter,
+    required String pickAndPack,
   }) = _SearchMagerialList;
   const factory CovidMaterialListEvent.updateSearchKey({
     required String searchKey,
@@ -29,5 +31,6 @@ class CovidMaterialListEvent with _$CovidMaterialListEvent {
     required SalesOrganisationConfigs configs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
+    required String pickAndPack,
   }) = _LoadMore;
 }

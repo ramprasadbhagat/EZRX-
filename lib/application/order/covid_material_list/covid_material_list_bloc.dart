@@ -60,7 +60,7 @@ class CovidMaterialListBloc
           offset: 0,
           orderBy: 'materialDescription_asc',
           searchKey: state.searchKey.getValue(),
-          ispickandpackenabled: e.user.role.type.isSalesRep ? true : false,
+          pickAndPack: e.pickAndPack,
           isForFoc: e.user.role.type.isSalesRep ? false : true,
           selectedMaterialFilter: MaterialFilter.empty(),
           orderDocumentType: OrderDocumentType.empty(),
@@ -105,7 +105,7 @@ class CovidMaterialListBloc
           offset: state.materialList.length,
           orderBy: 'materialDescription_asc',
           searchKey: state.searchKey.getValue(),
-          ispickandpackenabled: e.user.role.type.isSalesRep ? true : false,
+          pickAndPack: e.pickAndPack,
           isForFoc: e.user.role.type.isSalesRep ? false : true,
           selectedMaterialFilter: MaterialFilter.empty(),
           orderDocumentType: OrderDocumentType.empty(),
@@ -149,7 +149,7 @@ class CovidMaterialListBloc
           searchKey: state.searchKey.getValue(),
           selectedMaterialFilter: e.selectedMaterialFilter,
 
-          ispickandpackenabled: e.user.role.type.isSalesRep ? true : false,
+          pickAndPack: e.pickAndPack,
           isForFoc: e.user.role.type.isSalesRep ? false : true,
         );
         await failureOrSuccess.fold(

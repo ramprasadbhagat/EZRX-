@@ -11,6 +11,7 @@ class MaterialListEvent with _$MaterialListEvent {
     required ShipToInfo shipToInfo,
     required MaterialFilter selectedMaterialFilter,
     required OrderDocumentType orderDocumentType,
+    required String pickAndPack,
   }) = _Fetch;
 
   const factory MaterialListEvent.searchMaterialList({
@@ -20,6 +21,7 @@ class MaterialListEvent with _$MaterialListEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required MaterialFilter selectedMaterialFilter,
+    required String pickAndPack,
   }) = _SearchMagerialList;
   const factory MaterialListEvent.updateSearchKey({required String searchKey}) =
       _UpdateSearchKey;
@@ -31,5 +33,6 @@ class MaterialListEvent with _$MaterialListEvent {
     required ShipToInfo shipToInfo,
     required MaterialFilter selectedMaterialFilter,
     required OrderDocumentType orderDocumentType,
+    required String pickAndPack,
   }) = _LoadMore;
 }

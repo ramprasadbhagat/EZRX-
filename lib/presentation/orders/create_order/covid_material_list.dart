@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -116,6 +117,10 @@ class _BodyContent extends StatelessWidget {
                             .customerCodeInfo,
                         shipToInfo:
                             context.read<ShipToCodeBloc>().state.shipToInfo,
+                        pickAndPack: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .getPNPValueCovidMaterial,
                       ),
                     );
               },
@@ -131,6 +136,10 @@ class _BodyContent extends StatelessWidget {
                           .customerCodeInfo,
                       shipToInfo:
                           context.read<ShipToCodeBloc>().state.shipToInfo,
+                      pickAndPack: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .getPNPValueCovidMaterial,
                     ),
                   ),
               isLoading: covidMaterialListState.isFetching,
@@ -372,6 +381,10 @@ class _SearchBarState extends State<_SearchBar> {
                               .read<MaterialFilterBloc>()
                               .state
                               .selectedMaterialFilter,
+                          pickAndPack: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .getPNPValueCovidMaterial,
                         ),
                       );
                 } else {
@@ -425,6 +438,10 @@ class _SearchBarState extends State<_SearchBar> {
                                 .customerCodeInfo,
                             shipToInfo:
                                 context.read<ShipToCodeBloc>().state.shipToInfo,
+                            pickAndPack: context
+                                .read<EligibilityBloc>()
+                                .state
+                                .getPNPValueCovidMaterial,
                           ),
                         );
                   },

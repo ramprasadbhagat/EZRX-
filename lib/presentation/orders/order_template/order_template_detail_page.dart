@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -43,6 +44,8 @@ class OrderTemplateDetailPage extends StatelessWidget {
                     context.read<SalesOrgBloc>().state.configs,
                 shipToCode: context.read<ShipToCodeBloc>().state.shipToInfo,
                 materialInfoList: order.allMaterialQueryInfo,
+                pickAndPack:
+                    context.read<EligibilityBloc>().state.getPNPValueMaterial,
               ),
             ),
         child: CustomScrollView(

@@ -41,7 +41,7 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
         final failureOrSuccess = await bonusMaterialRepository.getMaterialBonus(
           user: e.user,
           configs: e.configs,
-          pickandpack: e.pickandpack,
+          pickAndPack: e.pickAndPack,
           salesOrganisation: e.salesOrganisation,
           searchKey: e.searchKey,
           shipInfo: e.shipInfo,

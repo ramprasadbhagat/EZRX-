@@ -10,6 +10,7 @@ class MaterialPriceDetailEvent with _$MaterialPriceDetailEvent {
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required ShipToInfo shipToCode,
     required List<MaterialQueryInfo> materialInfoList,
+    required String pickAndPack,
   }) = _Refresh;
   const factory MaterialPriceDetailEvent.fetch({
     required User user,
@@ -18,5 +19,6 @@ class MaterialPriceDetailEvent with _$MaterialPriceDetailEvent {
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required ShipToInfo shipToCode,
     required List<MaterialQueryInfo> materialInfoList,
+    required String pickAndPack,
   }) = _Fetch;
 }

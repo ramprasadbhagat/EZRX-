@@ -14,5 +14,6 @@ abstract class IValidCustomerMaterialRepository {
     required ShipToInfo shipToInfo,
     required List<MaterialNumber> materialList,
     required List<MaterialNumber> focMaterialList,
+    required String pickAndPack,
   });
 }

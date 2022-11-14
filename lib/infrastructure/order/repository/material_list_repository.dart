@@ -11,19 +11,16 @@ import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_list_repository.dart';
-import 'package:ezrxmobile/infrastructure/core/common/app_method.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
 
 class MaterialListRepository implements IMaterialListRepository {
   final Config config;
-  AppMethods appMethods;
   final MaterialListLocalDataSource materialListLocalDataSource;
   final MaterialListRemoteDataSource materialListRemoteDataSource;
 
   MaterialListRepository({
     required this.config,
-    required this.appMethods,
     required this.materialListLocalDataSource,
     required this.materialListRemoteDataSource,
   });
@@ -40,7 +37,7 @@ class MaterialListRepository implements IMaterialListRepository {
     required String orderBy,
     required String searchKey,
     required MaterialFilter selectedMaterialFilter,
-    bool ispickandpackenabled = false,
+    required String pickAndPack,
     bool isForFoc = false,
     required OrderDocumentType orderDocumentType,
   }) async {
@@ -74,7 +71,7 @@ class MaterialListRepository implements IMaterialListRepository {
               therapeuticClassList:
                   selectedMaterialFilter.uniqueTherapeuticClass,
               principalNameList: selectedMaterialFilter.uniquePrincipalName,
-              pickAndPack: appMethods.getPickAndPackValue(ispickandpackenabled),
+              pickAndPack: pickAndPack,
               isSample: orderDocumentType.isZPFB,
               isForFOC: orderDocumentType.isZPFC,
             )
@@ -113,7 +110,7 @@ class MaterialListRepository implements IMaterialListRepository {
     required String orderBy,
     required String searchKey,
     required MaterialFilter selectedMaterialFilter,
-    bool ispickandpackenabled = false,
+    required String pickAndPack,
     bool isForFoc = false,
   }) async {
     // if (config.appFlavor == Flavor.mock) {
@@ -132,7 +129,7 @@ class MaterialListRepository implements IMaterialListRepository {
       final materialListData = user.role.type.isSalesRep
           ? await materialListRemoteDataSource.searchMaterialListSalesRep(
               userName: user.username.getOrCrash(),
-              pickAndPack: appMethods.getPickAndPackValue(ispickandpackenabled),
+              pickAndPack: pickAndPack,
               salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
               excludePrincipal: salesOrgConfig.getExcludePrincipal,
               customerCode: customerCodeInfo.customerCodeSoldTo,

@@ -24,7 +24,8 @@ mixin _$MaterialFilterEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig)
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)
         fetch,
     required TResult Function(
             MaterialFilterType filterType, String selectedFilter)
@@ -41,7 +42,8 @@ mixin _$MaterialFilterEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)?
         fetch,
     TResult? Function(MaterialFilterType filterType, String selectedFilter)?
         updateMaterialSelected,
@@ -57,7 +59,8 @@ mixin _$MaterialFilterEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)?
         fetch,
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
         updateMaterialSelected,
@@ -159,7 +162,8 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig)
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)
         fetch,
     required TResult Function(
             MaterialFilterType filterType, String selectedFilter)
@@ -179,7 +183,8 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)?
         fetch,
     TResult? Function(MaterialFilterType filterType, String selectedFilter)?
         updateMaterialSelected,
@@ -198,7 +203,8 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)?
         fetch,
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
         updateMaterialSelected,
@@ -268,7 +274,8 @@ abstract class _$$_fetchCopyWith<$Res> {
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
       User user,
-      SalesOrganisationConfigs salesOrgConfig});
+      SalesOrganisationConfigs salesOrgConfig,
+      String pickAndPack});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
@@ -292,6 +299,7 @@ class __$$_fetchCopyWithImpl<$Res>
     Object? shipToInfo = null,
     Object? user = null,
     Object? salesOrgConfig = null,
+    Object? pickAndPack = null,
   }) {
     return _then(_$_fetch(
       salesOrganisation: null == salesOrganisation
@@ -314,6 +322,10 @@ class __$$_fetchCopyWithImpl<$Res>
           ? _value.salesOrgConfig
           : salesOrgConfig // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
+      pickAndPack: null == pickAndPack
+          ? _value.pickAndPack
+          : pickAndPack // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -367,7 +379,8 @@ class _$_fetch implements _fetch {
       required this.customerCodeInfo,
       required this.shipToInfo,
       required this.user,
-      required this.salesOrgConfig});
+      required this.salesOrgConfig,
+      required this.pickAndPack});
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -379,10 +392,12 @@ class _$_fetch implements _fetch {
   final User user;
   @override
   final SalesOrganisationConfigs salesOrgConfig;
+  @override
+  final String pickAndPack;
 
   @override
   String toString() {
-    return 'MaterialFilterEvent.fetch(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, salesOrgConfig: $salesOrgConfig)';
+    return 'MaterialFilterEvent.fetch(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, salesOrgConfig: $salesOrgConfig, pickAndPack: $pickAndPack)';
   }
 
   @override
@@ -398,12 +413,14 @@ class _$_fetch implements _fetch {
                 other.shipToInfo == shipToInfo) &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.salesOrgConfig, salesOrgConfig) ||
-                other.salesOrgConfig == salesOrgConfig));
+                other.salesOrgConfig == salesOrgConfig) &&
+            (identical(other.pickAndPack, pickAndPack) ||
+                other.pickAndPack == pickAndPack));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, salesOrganisation,
-      customerCodeInfo, shipToInfo, user, salesOrgConfig);
+      customerCodeInfo, shipToInfo, user, salesOrgConfig, pickAndPack);
 
   @JsonKey(ignore: true)
   @override
@@ -420,7 +437,8 @@ class _$_fetch implements _fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig)
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)
         fetch,
     required TResult Function(
             MaterialFilterType filterType, String selectedFilter)
@@ -428,8 +446,8 @@ class _$_fetch implements _fetch {
     required TResult Function(String searchkey) updateSearchKey,
     required TResult Function() clearSelected,
   }) {
-    return fetch(
-        salesOrganisation, customerCodeInfo, shipToInfo, user, salesOrgConfig);
+    return fetch(salesOrganisation, customerCodeInfo, shipToInfo, user,
+        salesOrgConfig, pickAndPack);
   }
 
   @override
@@ -441,15 +459,16 @@ class _$_fetch implements _fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)?
         fetch,
     TResult? Function(MaterialFilterType filterType, String selectedFilter)?
         updateMaterialSelected,
     TResult? Function(String searchkey)? updateSearchKey,
     TResult? Function()? clearSelected,
   }) {
-    return fetch?.call(
-        salesOrganisation, customerCodeInfo, shipToInfo, user, salesOrgConfig);
+    return fetch?.call(salesOrganisation, customerCodeInfo, shipToInfo, user,
+        salesOrgConfig, pickAndPack);
   }
 
   @override
@@ -461,7 +480,8 @@ class _$_fetch implements _fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)?
         fetch,
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
         updateMaterialSelected,
@@ -471,7 +491,7 @@ class _$_fetch implements _fetch {
   }) {
     if (fetch != null) {
       return fetch(salesOrganisation, customerCodeInfo, shipToInfo, user,
-          salesOrgConfig);
+          salesOrgConfig, pickAndPack);
     }
     return orElse();
   }
@@ -524,13 +544,15 @@ abstract class _fetch implements MaterialFilterEvent {
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
       required final User user,
-      required final SalesOrganisationConfigs salesOrgConfig}) = _$_fetch;
+      required final SalesOrganisationConfigs salesOrgConfig,
+      required final String pickAndPack}) = _$_fetch;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
   User get user;
   SalesOrganisationConfigs get salesOrgConfig;
+  String get pickAndPack;
   @JsonKey(ignore: true)
   _$$_fetchCopyWith<_$_fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -617,7 +639,8 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig)
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)
         fetch,
     required TResult Function(
             MaterialFilterType filterType, String selectedFilter)
@@ -637,7 +660,8 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)?
         fetch,
     TResult? Function(MaterialFilterType filterType, String selectedFilter)?
         updateMaterialSelected,
@@ -656,7 +680,8 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)?
         fetch,
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
         updateMaterialSelected,
@@ -795,7 +820,8 @@ class _$_updateSearchKey implements _updateSearchKey {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig)
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)
         fetch,
     required TResult Function(
             MaterialFilterType filterType, String selectedFilter)
@@ -815,7 +841,8 @@ class _$_updateSearchKey implements _updateSearchKey {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)?
         fetch,
     TResult? Function(MaterialFilterType filterType, String selectedFilter)?
         updateMaterialSelected,
@@ -834,7 +861,8 @@ class _$_updateSearchKey implements _updateSearchKey {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)?
         fetch,
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
         updateMaterialSelected,
@@ -943,7 +971,8 @@ class _$_clearSelected implements _clearSelected {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig)
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)
         fetch,
     required TResult Function(
             MaterialFilterType filterType, String selectedFilter)
@@ -963,7 +992,8 @@ class _$_clearSelected implements _clearSelected {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)?
         fetch,
     TResult? Function(MaterialFilterType filterType, String selectedFilter)?
         updateMaterialSelected,
@@ -982,7 +1012,8 @@ class _$_clearSelected implements _clearSelected {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            SalesOrganisationConfigs salesOrgConfig)?
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)?
         fetch,
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
         updateMaterialSelected,

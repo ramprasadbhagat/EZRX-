@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -16,9 +17,6 @@ import 'package:ezrxmobile/application/order/order_history_list/order_history_li
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
@@ -40,13 +38,9 @@ class ShipCodeSelector extends StatelessWidget {
           listener: (context, state) {
             final enableBundles =
                 !(context.read<SalesOrgBloc>().state.configs.disableBundles);
-            final enableCovidMaterial = _canOrderCovidMaterial(
-              customerCodeInfo:
-                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
-              salesOrganisation:
-                  context.read<SalesOrgBloc>().state.salesOrganisation,
-              role: context.read<UserBloc>().state.user.role,
-            );
+            final enableCovidMaterial =
+                context.read<EligibilityBloc>().state.isCovidMaterialEnable;
+
             if (state.haveShipTo) {
               context.read<SavedOrderListBloc>().add(
                     SavedOrderListEvent.fetch(
@@ -80,6 +74,10 @@ class ShipCodeSelector extends StatelessWidget {
                           .read<OrderDocumentTypeBloc>()
                           .state
                           .selectedOrderType,
+                      pickAndPack: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .getPNPValueMaterial,
                     ),
                   );
               if (enableCovidMaterial) {
@@ -96,6 +94,10 @@ class ShipCodeSelector extends StatelessWidget {
                             .state
                             .customerCodeInfo,
                         shipToInfo: state.shipToInfo,
+                        pickAndPack: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .getPNPValueMaterial,
                       ),
                     );
               }
@@ -151,6 +153,10 @@ class ShipCodeSelector extends StatelessWidget {
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
                     user: context.read<UserBloc>().state.user,
                     salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                    pickAndPack: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .getPNPValueMaterial,
                   ));
 
               context
@@ -224,17 +230,5 @@ class ShipCodeSelector extends StatelessWidget {
         );
       },
     );
-  }
-
-  bool _canOrderCovidMaterial({
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisation salesOrganisation,
-    required Role role,
-  }) {
-    return (customerCodeInfo.customerAttr7.isZEV &&
-            role.type.isClient &&
-            salesOrganisation.salesOrg.isSg) ||
-        customerCodeInfo.customerGrp4.canOrderCovidMaterial ||
-        (role.type.isSalesRep && salesOrganisation.salesOrg.isPH);
   }
 }

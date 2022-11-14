@@ -62,7 +62,19 @@ class SalesOrg extends ValueObject<String> {
   bool get isPH {
     return country == 'PH';
   }
-  
+
+  bool get isTH {
+    return country == 'TH';
+  }
+
+  bool get isMY {
+    return country == 'MY';
+  }
+
+  bool get isTW {
+    return country == 'TW';
+  }
+
   bool get isOrderTypeEligible {
     return countrySupportOrderType(country);
   }

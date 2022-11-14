@@ -47,6 +47,7 @@ class MaterialPriceDetailBloc
               salesOrganisationConfigs: e.salesOrganisationConfigs,
               shipToCode: e.shipToCode,
               materialInfoList: e.materialInfoList,
+              pickAndPack: e.pickAndPack,
             ),
           );
         },
@@ -198,6 +199,7 @@ class MaterialPriceDetailBloc
       shipToInfo: event.shipToCode,
       materialList: nonFocMaterialNumbers,
       focMaterialList: focMaterialNumbers,
+      pickAndPack: event.pickAndPack,
     );
 
     return failureOrSuccess.fold(

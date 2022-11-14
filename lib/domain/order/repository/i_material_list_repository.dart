@@ -21,7 +21,7 @@ abstract class IMaterialListRepository {
     required String orderBy,
     required String searchKey,
     required MaterialFilter selectedMaterialFilter,
-    bool ispickandpackenabled = false,
+    required String pickAndPack,
     bool isForFoc = false,
     required OrderDocumentType orderDocumentType,
   });
@@ -36,7 +36,7 @@ abstract class IMaterialListRepository {
     required String orderBy,
     required String searchKey,
     required MaterialFilter selectedMaterialFilter,
-    bool ispickandpackenabled = false,
+    required String pickAndPack,
     bool isForFoc = false,
   });
 }

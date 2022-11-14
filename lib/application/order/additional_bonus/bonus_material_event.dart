@@ -10,6 +10,6 @@ class BonusMaterialEvent with _$BonusMaterialEvent {
     required SalesOrgCustomerInfo customerInfo,
     required SalesOrgShipToInfo shipInfo,
     required SalesOrganisation salesOrganisation,
-    required bool pickandpack,
+    required String pickAndPack,
   }) = _Fetch;
 }

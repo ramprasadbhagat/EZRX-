@@ -64,6 +64,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           searchKey: state.searchKey.getValue(),
           selectedMaterialFilter: e.selectedMaterialFilter,
           orderDocumentType: e.orderDocumentType,
+          pickAndPack: e.pickAndPack,
         );
         failureOrSuccess.fold(
           (failure) {
@@ -108,6 +109,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           searchKey: state.searchKey.getValue(),
           selectedMaterialFilter: e.selectedMaterialFilter,
           orderDocumentType: e.orderDocumentType,
+          pickAndPack: e.pickAndPack,
         );
 
         await failureOrSuccess.fold(
@@ -147,6 +149,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           orderBy: 'materialDescription_asc',
           searchKey: state.searchKey.getValue(),
           selectedMaterialFilter: e.selectedMaterialFilter,
+          pickAndPack: e.pickAndPack,
         );
         await failureOrSuccess.fold(
           (failure) async {

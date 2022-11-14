@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:flutter/material.dart';
@@ -78,6 +79,9 @@ class OrderDocumentTypeBlocMock
     extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
     implements OrderDocumentTypeBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialListBloc materialListBlocMock;
@@ -93,6 +97,7 @@ void main() {
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
   late MaterialFilterBloc mockMaterialFilterBloc;
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
+  late EligibilityBlocMock eligibilityBlocMock;
 
   setUpAll(() async {
     setupLocator();
@@ -112,6 +117,7 @@ void main() {
       autoRouterMock = locator<AppRouter>();
       covidMaterialListBlocMock = CovidMaterialListBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
+      eligibilityBlocMock = EligibilityBlocMock();
       when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
           user: User.empty().copyWith(
         role: Role(
@@ -144,6 +150,22 @@ void main() {
           .thenReturn(CovidMaterialListState.initial());
       when(() => orderDocumentTypeBlocMock.state)
           .thenReturn(OrderDocumentTypeState.initial());
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+            user: User.empty().copyWith(
+              role: Role(
+                description: '',
+                name: '',
+                id: '',
+                type: RoleType('client'),
+              ),
+            ),
+            salesOrganisation:
+                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('SG')),
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+                customerAttr7: CustomerAttr7('ZEV'),
+                customerGrp4: CustomerGrp4('VR'))),
+      );
     });
 
     Widget getScopedWidget(Widget child) {
@@ -181,6 +203,8 @@ void main() {
                 create: ((context) => covidMaterialListBlocMock)),
             BlocProvider<OrderDocumentTypeBloc>(
                 create: ((context) => orderDocumentTypeBlocMock)),
+            BlocProvider<EligibilityBloc>(
+                create: ((context) => eligibilityBlocMock)),
           ],
           child: child,
         ),

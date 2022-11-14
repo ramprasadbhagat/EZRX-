@@ -5,6 +5,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
@@ -155,6 +156,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ShipToCodeBloc>(
           create: (context) => locator<ShipToCodeBloc>(),
+        ),
+        BlocProvider<EligibilityBloc>(
+          create: (context) => locator<EligibilityBloc>(),
         ),
         BlocProvider<AnnouncementBloc>(
           create: (context) => locator<AnnouncementBloc>()

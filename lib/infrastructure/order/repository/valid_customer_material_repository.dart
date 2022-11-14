@@ -8,19 +8,16 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/repository/i_valid_customer_material_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/common/app_method.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/valid_customer_material_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/valid_customer_material_remote.dart';
 
 class ValidCustomerMaterialRepository
     implements IValidCustomerMaterialRepository {
   final Config config;
-  final AppMethods appMethods;
   final ValidCustomerMaterialLocalDataSource localDataSource;
   final ValidCustomerMaterialRemoteDataSource remoteDataSource;
   ValidCustomerMaterialRepository({
     required this.config,
-    required this.appMethods,
     required this.localDataSource,
     required this.remoteDataSource,
   });
@@ -32,6 +29,7 @@ class ValidCustomerMaterialRepository
     required ShipToInfo shipToInfo,
     required List<MaterialNumber> materialList,
     required List<MaterialNumber> focMaterialList,
+    required String pickAndPack,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -40,7 +38,7 @@ class ValidCustomerMaterialRepository
           salesOrganisation: salesOrganisation.salesOrg.getOrCrash(),
           customerCode: customerCodeInfo.customerCodeSoldTo,
           shipToCode: shipToInfo.shipToCustomerCode,
-          pickAndPackValue: appMethods.getPickAndPackValue(true),
+          pickAndPackValue: pickAndPack,
           materialList:
               materialList.map((MaterialNumber e) => e.getOrCrash()).toList(),
           focMaterialList: focMaterialList
@@ -59,7 +57,7 @@ class ValidCustomerMaterialRepository
         salesOrganisation: salesOrganisation.salesOrg.getOrCrash(),
         customerCode: customerCodeInfo.customerCodeSoldTo,
         shipToCode: shipToInfo.shipToCustomerCode,
-        pickAndPackValue: appMethods.getPickAndPackValue(true),
+        pickAndPackValue: pickAndPack,
         materialList:
             materialList.map((MaterialNumber e) => e.getOrCrash()).toList(),
         focMaterialList:

@@ -26,7 +26,7 @@ mixin _$BonusMaterialEvent {
             SalesOrgCustomerInfo customerInfo,
             SalesOrgShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            bool pickandpack)
+            String pickAndPack)
         fetch,
   }) =>
       throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ mixin _$BonusMaterialEvent {
             SalesOrgCustomerInfo customerInfo,
             SalesOrgShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            bool pickandpack)?
+            String pickAndPack)?
         fetch,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,7 +54,7 @@ mixin _$BonusMaterialEvent {
             SalesOrgCustomerInfo customerInfo,
             SalesOrgShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            bool pickandpack)?
+            String pickAndPack)?
         fetch,
     required TResult orElse(),
   }) =>
@@ -144,7 +144,7 @@ class _$_Initialized implements _Initialized {
             SalesOrgCustomerInfo customerInfo,
             SalesOrgShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            bool pickandpack)
+            String pickAndPack)
         fetch,
   }) {
     return initialized();
@@ -161,7 +161,7 @@ class _$_Initialized implements _Initialized {
             SalesOrgCustomerInfo customerInfo,
             SalesOrgShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            bool pickandpack)?
+            String pickAndPack)?
         fetch,
   }) {
     return initialized?.call();
@@ -178,7 +178,7 @@ class _$_Initialized implements _Initialized {
             SalesOrgCustomerInfo customerInfo,
             SalesOrgShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            bool pickandpack)?
+            String pickAndPack)?
         fetch,
     required TResult orElse(),
   }) {
@@ -236,7 +236,7 @@ abstract class _$$_FetchCopyWith<$Res> {
       SalesOrgCustomerInfo customerInfo,
       SalesOrgShipToInfo shipInfo,
       SalesOrganisation salesOrganisation,
-      bool pickandpack});
+      String pickAndPack});
 
   $UserCopyWith<$Res> get user;
   $SalesOrganisationConfigsCopyWith<$Res> get configs;
@@ -261,7 +261,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? customerInfo = null,
     Object? shipInfo = null,
     Object? salesOrganisation = null,
-    Object? pickandpack = null,
+    Object? pickAndPack = null,
   }) {
     return _then(_$_Fetch(
       user: null == user
@@ -288,10 +288,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      pickandpack: null == pickandpack
-          ? _value.pickandpack
-          : pickandpack // ignore: cast_nullable_to_non_nullable
-              as bool,
+      pickAndPack: null == pickAndPack
+          ? _value.pickAndPack
+          : pickAndPack // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -346,7 +346,7 @@ class _$_Fetch implements _Fetch {
       required this.customerInfo,
       required this.shipInfo,
       required this.salesOrganisation,
-      required this.pickandpack});
+      required this.pickAndPack});
 
   @override
   final User user;
@@ -361,11 +361,11 @@ class _$_Fetch implements _Fetch {
   @override
   final SalesOrganisation salesOrganisation;
   @override
-  final bool pickandpack;
+  final String pickAndPack;
 
   @override
   String toString() {
-    return 'BonusMaterialEvent.fetch(user: $user, configs: $configs, searchKey: $searchKey, customerInfo: $customerInfo, shipInfo: $shipInfo, salesOrganisation: $salesOrganisation, pickandpack: $pickandpack)';
+    return 'BonusMaterialEvent.fetch(user: $user, configs: $configs, searchKey: $searchKey, customerInfo: $customerInfo, shipInfo: $shipInfo, salesOrganisation: $salesOrganisation, pickAndPack: $pickAndPack)';
   }
 
   @override
@@ -383,13 +383,13 @@ class _$_Fetch implements _Fetch {
                 other.shipInfo == shipInfo) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
-            (identical(other.pickandpack, pickandpack) ||
-                other.pickandpack == pickandpack));
+            (identical(other.pickAndPack, pickAndPack) ||
+                other.pickAndPack == pickAndPack));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, user, configs, searchKey,
-      customerInfo, shipInfo, salesOrganisation, pickandpack);
+      customerInfo, shipInfo, salesOrganisation, pickAndPack);
 
   @JsonKey(ignore: true)
   @override
@@ -408,11 +408,11 @@ class _$_Fetch implements _Fetch {
             SalesOrgCustomerInfo customerInfo,
             SalesOrgShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            bool pickandpack)
+            String pickAndPack)
         fetch,
   }) {
     return fetch(user, configs, searchKey, customerInfo, shipInfo,
-        salesOrganisation, pickandpack);
+        salesOrganisation, pickAndPack);
   }
 
   @override
@@ -426,11 +426,11 @@ class _$_Fetch implements _Fetch {
             SalesOrgCustomerInfo customerInfo,
             SalesOrgShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            bool pickandpack)?
+            String pickAndPack)?
         fetch,
   }) {
     return fetch?.call(user, configs, searchKey, customerInfo, shipInfo,
-        salesOrganisation, pickandpack);
+        salesOrganisation, pickAndPack);
   }
 
   @override
@@ -444,13 +444,13 @@ class _$_Fetch implements _Fetch {
             SalesOrgCustomerInfo customerInfo,
             SalesOrgShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            bool pickandpack)?
+            String pickAndPack)?
         fetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
       return fetch(user, configs, searchKey, customerInfo, shipInfo,
-          salesOrganisation, pickandpack);
+          salesOrganisation, pickAndPack);
     }
     return orElse();
   }
@@ -495,7 +495,7 @@ abstract class _Fetch implements BonusMaterialEvent {
       required final SalesOrgCustomerInfo customerInfo,
       required final SalesOrgShipToInfo shipInfo,
       required final SalesOrganisation salesOrganisation,
-      required final bool pickandpack}) = _$_Fetch;
+      required final String pickAndPack}) = _$_Fetch;
 
   User get user;
   SalesOrganisationConfigs get configs;
@@ -503,7 +503,7 @@ abstract class _Fetch implements BonusMaterialEvent {
   SalesOrgCustomerInfo get customerInfo;
   SalesOrgShipToInfo get shipInfo;
   SalesOrganisation get salesOrganisation;
-  bool get pickandpack;
+  String get pickAndPack;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;

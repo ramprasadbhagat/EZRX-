@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -65,6 +66,10 @@ class MaterialFilterPage extends StatelessWidget {
                             .read<MaterialFilterBloc>()
                             .state
                             .selectedMaterialFilter,
+                        pickAndPack: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .getPNPValueMaterial,
                       ),
                     )
                 : context.read<MaterialListBloc>().state.selectedFilters !=
@@ -94,6 +99,10 @@ class MaterialFilterPage extends StatelessWidget {
                                 .read<OrderDocumentTypeBloc>()
                                 .state
                                 .selectedOrderType,
+                            pickAndPack: context
+                                .read<EligibilityBloc>()
+                                .state
+                                .getPNPValueMaterial,
                           ),
                         )
                     : true;

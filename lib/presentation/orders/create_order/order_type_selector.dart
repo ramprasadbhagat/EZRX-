@@ -11,7 +11,7 @@ class OrderTypeSelector extends StatelessWidget {
   final bool hideReasonField;
   const OrderTypeSelector({
     Key? key,
-    this.hideReasonField=false,
+    this.hideReasonField = false,
   }) : super(key: key);
 
   @override
@@ -25,6 +25,9 @@ class OrderTypeSelector extends StatelessWidget {
             previous.selectedOrderType != current.selectedOrderType ||
             previous.selectedReason != current.selectedReason,
         builder: (context, state) {
+          if (state.uniqueOrderTypeList.isEmpty) {
+            return const SizedBox.shrink();
+          }
 
           return Column(
             children: [
@@ -110,7 +113,11 @@ class OrderTypeSelectorField extends StatelessWidget {
                   right: 20,
                 ),
                 padding: const EdgeInsets.only(
-                    left: 11, right: 2, top: 4, bottom: 6,),
+                  left: 11,
+                  right: 2,
+                  top: 4,
+                  bottom: 6,
+                ),
                 decoration: const BoxDecoration(
                   color: ZPColors.white,
                   borderRadius: BorderRadius.all(
@@ -146,11 +153,12 @@ class OrderTypeSelectorField extends StatelessWidget {
                                   ),
                                   onPressed: () {
                                     context.read<OrderDocumentTypeBloc>().add(
-                                      OrderDocumentTypeEvent
-                                        .selectedOrderType(
+                                          OrderDocumentTypeEvent
+                                              .selectedOrderType(
                                             selectedOrderType: i,
-                                            isReasonSelected: isReason,),
-                                    );
+                                            isReasonSelected: isReason,
+                                          ),
+                                        );
                                     Navigator.pop(context);
                                   },
                                 );
