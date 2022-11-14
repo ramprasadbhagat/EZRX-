@@ -186,6 +186,9 @@ class HistoryTab extends StatelessWidget {
                     emptyMessage: 'No history found',
                     onRefresh: () {
                       if (context.read<ShipToCodeBloc>().state.haveShipTo) {
+                        context.read<OrderHistoryFilterBloc>().add(
+                              const OrderHistoryFilterEvent.initialized(),
+                            );
                         context.read<OrderHistoryListBloc>().add(
                               OrderHistoryListEvent.fetch(
                                 customerCodeInfo: context
