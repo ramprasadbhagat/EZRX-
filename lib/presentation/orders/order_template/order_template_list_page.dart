@@ -54,6 +54,7 @@ class OrderTemplateListPage extends StatelessWidget {
               ? LoadingShimmer.withChild(
                   child: Image.asset(
                     'assets/images/ezrxlogo.png',
+                    key: const Key('loading-shimmer'),
                     width: 80,
                     height: 80,
                   ),

@@ -117,8 +117,7 @@ void main() {
       expect(find.byType(SavedOrderItem), findsNothing);
       await tester.fling(
           find.byType(CustomScrollView), const Offset(0, 300), 600);
-      await tester.pump(const Duration(seconds: 2));
-      await tester.pump(const Duration(seconds: 1));
+      await tester.pumpAndSettle(const Duration(seconds: 2));
       verify(
         () => savedOrderListBlocMock.add(
           SavedOrderListEvent.fetch(
