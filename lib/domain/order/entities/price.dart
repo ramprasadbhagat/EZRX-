@@ -24,7 +24,8 @@ class Price with _$Price {
     required MaterialPrice finalPrice,
     required MaterialPrice finalTotalPrice,
     required bool additionalBonusEligible,
-    @Default(true) bool isValid,
+    required bool isValid,
+    @Default(true) bool isValidMaterial,
     @Default(false) bool isFOC,
     @Default(false) bool isOverride,
   }) = _Price;
@@ -43,6 +44,7 @@ class Price with _$Price {
         finalPrice: MaterialPrice(0),
         finalTotalPrice: MaterialPrice(0),
         additionalBonusEligible: false,
+        isValid: true,
       );
 
   List<PriceTierItem> get priceTireItem =>

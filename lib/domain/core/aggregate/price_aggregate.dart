@@ -109,7 +109,8 @@ class PriceAggregate with _$PriceAggregate {
     if (price.isFOC) return 'FOC';
     if (price.finalPrice.isUnavailable() ||
         materialInfo.hidePrice ||
-        !price.isValid) return 'NA';
+        !price.isValid ||
+        !price.isValidMaterial) return 'NA';
 
     double result;
     switch (priceType) {

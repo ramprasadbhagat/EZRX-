@@ -184,7 +184,7 @@ void main() {
                 for (final material in fakeQuery)
                   material: MaterialPriceDetail.empty().copyWith(
                       price: Price.empty().copyWith(
-                    isValid: false,
+                    isValidMaterial: false,
                     isFOC: false,
                   ))
               }),
@@ -195,7 +195,7 @@ void main() {
                     for (final material in fakeQuery)
                       material: MaterialPriceDetail.empty().copyWith(
                           price: Price.empty().copyWith(
-                        isValid: false,
+                        isValidMaterial: false,
                         isFOC: false,
                       ))
                   }),
@@ -206,7 +206,7 @@ void main() {
                     for (final material in fakeQuery)
                       material: MaterialPriceDetail.empty().copyWith(
                           price: Price.empty().copyWith(
-                        isValid: false,
+                        isValidMaterial: false,
                         isFOC: false,
                       ))
                   }),
@@ -252,7 +252,7 @@ void main() {
                   for (final material in fakeQueryFOC)
                     material: MaterialPriceDetail.empty().copyWith(
                       price: Price.empty().copyWith(
-                        isValid: true,
+                        isValidMaterial: true,
                         isFOC: false,
                       ),
                     )
@@ -265,7 +265,7 @@ void main() {
                   for (final material in fakeQueryFOC)
                     material: MaterialPriceDetail.empty().copyWith(
                       price: Price.empty().copyWith(
-                        isValid: true,
+                        isValidMaterial: true,
                         isFOC: false,
                       ),
                     )
@@ -278,7 +278,7 @@ void main() {
                   for (final material in fakeQueryFOC)
                     material: MaterialPriceDetail.empty().copyWith(
                         price: Price.empty().copyWith(
-                      isValid: true,
+                      isValidMaterial: true,
                       isFOC: true,
                     ))
                 },
@@ -290,7 +290,7 @@ void main() {
                   for (final material in fakeQueryFOC)
                     material: MaterialPriceDetail.empty().copyWith(
                         price: Price.empty().copyWith(
-                      isValid: true,
+                      isValidMaterial: true,
                       isFOC: true,
                     ))
                 },
@@ -349,7 +349,7 @@ void main() {
             for (final material in fakeQuery)
               material: MaterialPriceDetail.empty().copyWith(
                 price: Price.empty().copyWith(
-                  isValid: true,
+                  isValidMaterial: true,
                   isFOC: false,
                 ),
               )
@@ -362,7 +362,7 @@ void main() {
             for (final material in fakeQuery)
               material: MaterialPriceDetail.empty().copyWith(
                 price: Price.empty().copyWith(
-                  isValid: true,
+                  isValidMaterial: true,
                   isFOC: false,
                 ),
               )
@@ -375,7 +375,7 @@ void main() {
             for (final material in fakeQuery)
               material: MaterialPriceDetail.empty().copyWith(
                   price: Price.empty().copyWith(
-                isValid: true,
+                isValidMaterial: true,
                 isFOC: false,
                 finalPrice: MaterialPrice.unavailable(),
               ))
@@ -388,7 +388,7 @@ void main() {
             for (final material in fakeQuery)
               material: MaterialPriceDetail.empty().copyWith(
                   price: Price.empty().copyWith(
-                isValid: true,
+                isValidMaterial: true,
                 isFOC: false,
                 finalPrice: MaterialPrice.unavailable(),
               ))
@@ -445,7 +445,7 @@ void main() {
                   for (final material in fakeQuery)
                     material: MaterialPriceDetail.empty().copyWith(
                       price: Price.empty().copyWith(
-                        isValid: true,
+                        isValidMaterial: true,
                         isFOC: false,
                       ),
                     )
@@ -458,7 +458,7 @@ void main() {
                   for (final material in fakeQuery)
                     material: MaterialPriceDetail.empty().copyWith(
                       price: Price.empty().copyWith(
-                        isValid: true,
+                        isValidMaterial: true,
                         isFOC: false,
                       ),
                     )
@@ -471,7 +471,7 @@ void main() {
                   for (final material in fakeQuery)
                     material: MaterialPriceDetail.empty().copyWith(
                         price: Price.empty().copyWith(
-                      isValid: true,
+                      isValidMaterial: true,
                       isFOC: false,
                       finalPrice: MaterialPrice.unavailable(),
                     ))
@@ -484,7 +484,7 @@ void main() {
                   for (final material in fakeQuery)
                     material: MaterialPriceDetail.empty().copyWith(
                         price: Price.empty().copyWith(
-                      isValid: true,
+                      isValidMaterial: true,
                       isFOC: false,
                       finalPrice: MaterialPrice.unavailable(),
                     ))
@@ -540,7 +540,7 @@ void main() {
               for (final material in fakeQuery)
                 material: MaterialPriceDetail.empty().copyWith(
                     price: Price.empty().copyWith(
-                  isValid: false,
+                  isValidMaterial: false,
                   isFOC: false,
                 ))
             }),
@@ -553,7 +553,7 @@ void main() {
               for (final material in fakeQuery)
                 material: MaterialPriceDetail.empty().copyWith(
                     price: Price.empty().copyWith(
-                  isValid: false,
+                  isValidMaterial: false,
                   isFOC: false,
                 ))
             }),
@@ -566,7 +566,7 @@ void main() {
               for (final material in fakeQuery)
                 material: MaterialPriceDetail.empty().copyWith(
                     price: Price.empty().copyWith(
-                  isValid: false,
+                  isValidMaterial: false,
                   isFOC: false,
                 ))
             }),

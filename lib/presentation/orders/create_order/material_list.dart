@@ -162,6 +162,10 @@ class _BodyContent extends StatelessWidget {
           : ScrollList<MaterialInfo>(
               emptyMessage: 'No material found',
               onRefresh: () {
+                context.read<MaterialPriceBloc>().add(
+                      const MaterialPriceEvent.initialized(),
+                    );
+
                 context
                     .read<MaterialFilterBloc>()
                     .add(const MaterialFilterEvent.clearSelected());

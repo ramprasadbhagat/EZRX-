@@ -74,6 +74,7 @@ class PriceDto with _$PriceDto {
         finalPrice: MaterialPrice(finalIndividualPrice),
         finalTotalPrice: MaterialPrice(finalTotalPrice),
         additionalBonusEligible: additionalBonusEligible,
+        isValid: isValid,
       );
 
   factory PriceDto.fromDomain(Price price) {

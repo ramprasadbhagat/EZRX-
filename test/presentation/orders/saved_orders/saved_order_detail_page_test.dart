@@ -119,7 +119,9 @@ void main() {
             materialDetails: {
               for (final material in orderMockItems)
                 MaterialQueryInfo.fromSavedOrder(orderMaterial: material):
-                    MaterialPriceDetail.empty().copyWith.price(isValid: false),
+                    MaterialPriceDetail.empty()
+                        .copyWith
+                        .price(isValidMaterial: false),
             },
           ),
         );
@@ -158,7 +160,7 @@ void main() {
               for (final material in orderMockItems)
                 MaterialQueryInfo.fromSavedOrder(orderMaterial: material):
                     MaterialPriceDetail.empty().copyWith.price(
-                          isValid: true,
+                          isValidMaterial: true,
                           isFOC: true,
                         ),
             },

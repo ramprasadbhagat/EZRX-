@@ -74,7 +74,7 @@ class MaterialPriceDetailBloc
           _setPriceForMaterials(
             materials: validMaterials,
             value: Price.empty().copyWith(
-              isValid: true,
+              isValidMaterial: true,
               isFOC: false,
             ),
             emit: emit,
@@ -83,7 +83,7 @@ class MaterialPriceDetailBloc
           _setPriceForMaterials(
             materials: invalidMaterials,
             value: Price.empty().copyWith(
-              isValid: false,
+              isValidMaterial: false,
               isFOC: false,
             ),
             emit: emit,
@@ -107,7 +107,7 @@ class MaterialPriceDetailBloc
           _setPriceForMaterials(
             materials: focValidMaterials,
             value: Price.empty().copyWith(
-              isValid: true,
+              isValidMaterial: true,
               isFOC: true,
             ),
             emit: emit,
@@ -116,7 +116,7 @@ class MaterialPriceDetailBloc
           _setPriceForMaterials(
             materials: nonFocValidMaterials,
             value: Price.empty().copyWith(
-              isValid: true,
+              isValidMaterial: true,
               isFOC: false,
               finalPrice: MaterialPrice.unavailable(),
             ),
@@ -167,7 +167,7 @@ class MaterialPriceDetailBloc
             value ==
             MaterialPriceDetail.empty().copyWith(
               price: Price.empty().copyWith(
-                isValid: true,
+                isValidMaterial: true,
                 isFOC: false,
                 finalPrice: MaterialPrice.unavailable(),
               ),
