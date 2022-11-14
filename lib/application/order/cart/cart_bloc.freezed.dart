@@ -24,6 +24,7 @@ mixin _$CartEvent {
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(PriceAggregate item) removeFromCart,
+    required TResult Function() clearCart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,6 +34,7 @@ mixin _$CartEvent {
     TResult? Function(PriceAggregate item)? addToCart,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(PriceAggregate item)? removeFromCart,
+    TResult? Function()? clearCart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -42,6 +44,7 @@ mixin _$CartEvent {
     TResult Function(PriceAggregate item)? addToCart,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(PriceAggregate item)? removeFromCart,
+    TResult Function()? clearCart,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -52,6 +55,7 @@ mixin _$CartEvent {
     required TResult Function(_AddToCart value) addToCart,
     required TResult Function(_UpdateCart value) updateCart,
     required TResult Function(_RemoveFromCart value) removeFromCart,
+    required TResult Function(_ClearCart value) clearCart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,6 +65,7 @@ mixin _$CartEvent {
     TResult? Function(_AddToCart value)? addToCart,
     TResult? Function(_UpdateCart value)? updateCart,
     TResult? Function(_RemoveFromCart value)? removeFromCart,
+    TResult? Function(_ClearCart value)? clearCart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,6 +75,7 @@ mixin _$CartEvent {
     TResult Function(_AddToCart value)? addToCart,
     TResult Function(_UpdateCart value)? updateCart,
     TResult Function(_RemoveFromCart value)? removeFromCart,
+    TResult Function(_ClearCart value)? clearCart,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -136,6 +142,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(PriceAggregate item) removeFromCart,
+    required TResult Function() clearCart,
   }) {
     return initialized();
   }
@@ -148,6 +155,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(PriceAggregate item)? addToCart,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(PriceAggregate item)? removeFromCart,
+    TResult? Function()? clearCart,
   }) {
     return initialized?.call();
   }
@@ -160,6 +168,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(PriceAggregate item)? addToCart,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(PriceAggregate item)? removeFromCart,
+    TResult Function()? clearCart,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -176,6 +185,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_AddToCart value) addToCart,
     required TResult Function(_UpdateCart value) updateCart,
     required TResult Function(_RemoveFromCart value) removeFromCart,
+    required TResult Function(_ClearCart value) clearCart,
   }) {
     return initialized(this);
   }
@@ -188,6 +198,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_AddToCart value)? addToCart,
     TResult? Function(_UpdateCart value)? updateCart,
     TResult? Function(_RemoveFromCart value)? removeFromCart,
+    TResult? Function(_ClearCart value)? clearCart,
   }) {
     return initialized?.call(this);
   }
@@ -200,6 +211,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_AddToCart value)? addToCart,
     TResult Function(_UpdateCart value)? updateCart,
     TResult Function(_RemoveFromCart value)? removeFromCart,
+    TResult Function(_ClearCart value)? clearCart,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -255,6 +267,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(PriceAggregate item) removeFromCart,
+    required TResult Function() clearCart,
   }) {
     return fetch();
   }
@@ -267,6 +280,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(PriceAggregate item)? addToCart,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(PriceAggregate item)? removeFromCart,
+    TResult? Function()? clearCart,
   }) {
     return fetch?.call();
   }
@@ -279,6 +293,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(PriceAggregate item)? addToCart,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(PriceAggregate item)? removeFromCart,
+    TResult Function()? clearCart,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -295,6 +310,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_AddToCart value) addToCart,
     required TResult Function(_UpdateCart value) updateCart,
     required TResult Function(_RemoveFromCart value) removeFromCart,
+    required TResult Function(_ClearCart value) clearCart,
   }) {
     return fetch(this);
   }
@@ -307,6 +323,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_AddToCart value)? addToCart,
     TResult? Function(_UpdateCart value)? updateCart,
     TResult? Function(_RemoveFromCart value)? removeFromCart,
+    TResult? Function(_ClearCart value)? clearCart,
   }) {
     return fetch?.call(this);
   }
@@ -319,6 +336,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_AddToCart value)? addToCart,
     TResult Function(_UpdateCart value)? updateCart,
     TResult Function(_RemoveFromCart value)? removeFromCart,
+    TResult Function(_ClearCart value)? clearCart,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -412,6 +430,7 @@ class _$_AddToCart implements _AddToCart {
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(PriceAggregate item) removeFromCart,
+    required TResult Function() clearCart,
   }) {
     return addToCart(item);
   }
@@ -424,6 +443,7 @@ class _$_AddToCart implements _AddToCart {
     TResult? Function(PriceAggregate item)? addToCart,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(PriceAggregate item)? removeFromCart,
+    TResult? Function()? clearCart,
   }) {
     return addToCart?.call(item);
   }
@@ -436,6 +456,7 @@ class _$_AddToCart implements _AddToCart {
     TResult Function(PriceAggregate item)? addToCart,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(PriceAggregate item)? removeFromCart,
+    TResult Function()? clearCart,
     required TResult orElse(),
   }) {
     if (addToCart != null) {
@@ -452,6 +473,7 @@ class _$_AddToCart implements _AddToCart {
     required TResult Function(_AddToCart value) addToCart,
     required TResult Function(_UpdateCart value) updateCart,
     required TResult Function(_RemoveFromCart value) removeFromCart,
+    required TResult Function(_ClearCart value) clearCart,
   }) {
     return addToCart(this);
   }
@@ -464,6 +486,7 @@ class _$_AddToCart implements _AddToCart {
     TResult? Function(_AddToCart value)? addToCart,
     TResult? Function(_UpdateCart value)? updateCart,
     TResult? Function(_RemoveFromCart value)? removeFromCart,
+    TResult? Function(_ClearCart value)? clearCart,
   }) {
     return addToCart?.call(this);
   }
@@ -476,6 +499,7 @@ class _$_AddToCart implements _AddToCart {
     TResult Function(_AddToCart value)? addToCart,
     TResult Function(_UpdateCart value)? updateCart,
     TResult Function(_RemoveFromCart value)? removeFromCart,
+    TResult Function(_ClearCart value)? clearCart,
     required TResult orElse(),
   }) {
     if (addToCart != null) {
@@ -581,6 +605,7 @@ class _$_UpdateCart implements _UpdateCart {
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(PriceAggregate item) removeFromCart,
+    required TResult Function() clearCart,
   }) {
     return updateCart(item, materialNumber);
   }
@@ -593,6 +618,7 @@ class _$_UpdateCart implements _UpdateCart {
     TResult? Function(PriceAggregate item)? addToCart,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(PriceAggregate item)? removeFromCart,
+    TResult? Function()? clearCart,
   }) {
     return updateCart?.call(item, materialNumber);
   }
@@ -605,6 +631,7 @@ class _$_UpdateCart implements _UpdateCart {
     TResult Function(PriceAggregate item)? addToCart,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(PriceAggregate item)? removeFromCart,
+    TResult Function()? clearCart,
     required TResult orElse(),
   }) {
     if (updateCart != null) {
@@ -621,6 +648,7 @@ class _$_UpdateCart implements _UpdateCart {
     required TResult Function(_AddToCart value) addToCart,
     required TResult Function(_UpdateCart value) updateCart,
     required TResult Function(_RemoveFromCart value) removeFromCart,
+    required TResult Function(_ClearCart value) clearCart,
   }) {
     return updateCart(this);
   }
@@ -633,6 +661,7 @@ class _$_UpdateCart implements _UpdateCart {
     TResult? Function(_AddToCart value)? addToCart,
     TResult? Function(_UpdateCart value)? updateCart,
     TResult? Function(_RemoveFromCart value)? removeFromCart,
+    TResult? Function(_ClearCart value)? clearCart,
   }) {
     return updateCart?.call(this);
   }
@@ -645,6 +674,7 @@ class _$_UpdateCart implements _UpdateCart {
     TResult Function(_AddToCart value)? addToCart,
     TResult Function(_UpdateCart value)? updateCart,
     TResult Function(_RemoveFromCart value)? removeFromCart,
+    TResult Function(_ClearCart value)? clearCart,
     required TResult orElse(),
   }) {
     if (updateCart != null) {
@@ -746,6 +776,7 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(PriceAggregate item) removeFromCart,
+    required TResult Function() clearCart,
   }) {
     return removeFromCart(item);
   }
@@ -758,6 +789,7 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     TResult? Function(PriceAggregate item)? addToCart,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(PriceAggregate item)? removeFromCart,
+    TResult? Function()? clearCart,
   }) {
     return removeFromCart?.call(item);
   }
@@ -770,6 +802,7 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     TResult Function(PriceAggregate item)? addToCart,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(PriceAggregate item)? removeFromCart,
+    TResult Function()? clearCart,
     required TResult orElse(),
   }) {
     if (removeFromCart != null) {
@@ -786,6 +819,7 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     required TResult Function(_AddToCart value) addToCart,
     required TResult Function(_UpdateCart value) updateCart,
     required TResult Function(_RemoveFromCart value) removeFromCart,
+    required TResult Function(_ClearCart value) clearCart,
   }) {
     return removeFromCart(this);
   }
@@ -798,6 +832,7 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     TResult? Function(_AddToCart value)? addToCart,
     TResult? Function(_UpdateCart value)? updateCart,
     TResult? Function(_RemoveFromCart value)? removeFromCart,
+    TResult? Function(_ClearCart value)? clearCart,
   }) {
     return removeFromCart?.call(this);
   }
@@ -810,6 +845,7 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     TResult Function(_AddToCart value)? addToCart,
     TResult Function(_UpdateCart value)? updateCart,
     TResult Function(_RemoveFromCart value)? removeFromCart,
+    TResult Function(_ClearCart value)? clearCart,
     required TResult orElse(),
   }) {
     if (removeFromCart != null) {
@@ -827,6 +863,133 @@ abstract class _RemoveFromCart implements CartEvent {
   @JsonKey(ignore: true)
   _$$_RemoveFromCartCopyWith<_$_RemoveFromCart> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ClearCartCopyWith<$Res> {
+  factory _$$_ClearCartCopyWith(
+          _$_ClearCart value, $Res Function(_$_ClearCart) then) =
+      __$$_ClearCartCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ClearCartCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$_ClearCart>
+    implements _$$_ClearCartCopyWith<$Res> {
+  __$$_ClearCartCopyWithImpl(
+      _$_ClearCart _value, $Res Function(_$_ClearCart) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ClearCart implements _ClearCart {
+  const _$_ClearCart();
+
+  @override
+  String toString() {
+    return 'CartEvent.clearCart()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ClearCart);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function() fetch,
+    required TResult Function(PriceAggregate item) addToCart,
+    required TResult Function(List<Price> item, String materialNumber)
+        updateCart,
+    required TResult Function(PriceAggregate item) removeFromCart,
+    required TResult Function() clearCart,
+  }) {
+    return clearCart();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function()? fetch,
+    TResult? Function(PriceAggregate item)? addToCart,
+    TResult? Function(List<Price> item, String materialNumber)? updateCart,
+    TResult? Function(PriceAggregate item)? removeFromCart,
+    TResult? Function()? clearCart,
+  }) {
+    return clearCart?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function()? fetch,
+    TResult Function(PriceAggregate item)? addToCart,
+    TResult Function(List<Price> item, String materialNumber)? updateCart,
+    TResult Function(PriceAggregate item)? removeFromCart,
+    TResult Function()? clearCart,
+    required TResult orElse(),
+  }) {
+    if (clearCart != null) {
+      return clearCart();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_AddToCart value) addToCart,
+    required TResult Function(_UpdateCart value) updateCart,
+    required TResult Function(_RemoveFromCart value) removeFromCart,
+    required TResult Function(_ClearCart value) clearCart,
+  }) {
+    return clearCart(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AddToCart value)? addToCart,
+    TResult? Function(_UpdateCart value)? updateCart,
+    TResult? Function(_RemoveFromCart value)? removeFromCart,
+    TResult? Function(_ClearCart value)? clearCart,
+  }) {
+    return clearCart?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_AddToCart value)? addToCart,
+    TResult Function(_UpdateCart value)? updateCart,
+    TResult Function(_RemoveFromCart value)? removeFromCart,
+    TResult Function(_ClearCart value)? clearCart,
+    required TResult orElse(),
+  }) {
+    if (clearCart != null) {
+      return clearCart(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ClearCart implements CartEvent {
+  const factory _ClearCart() = _$_ClearCart;
 }
 
 /// @nodoc

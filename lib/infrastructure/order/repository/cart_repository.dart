@@ -97,9 +97,9 @@ class CartRepository implements ICartRepository {
   }
 
   @override
-  Future<Either<ApiFailure, Unit>> close() async {
+  Future<Either<ApiFailure, Unit>> clear() async {
     try {
-      await cartStorage.close();
+      await cartStorage.clear();
 
       return const Right(unit);
     } catch (e) {

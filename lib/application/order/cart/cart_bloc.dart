@@ -1,14 +1,14 @@
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'cart_bloc.freezed.dart';
 part 'cart_event.dart';
 part 'cart_state.dart';
-part 'cart_bloc.freezed.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
   final ICartRepository cartRepository;
@@ -184,6 +184,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
           },
         );
+      },
+      clearCart: (_ClearCart value) async {
+        await cartRepository.clear();
+        emit(CartState.initial());
       },
     );
   }

@@ -2,8 +2,8 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_configs_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_info_dto.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/price_aggregate_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/price_aggregate_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_bonus_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_bundle_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
@@ -111,11 +111,10 @@ class CartStorage {
     }
   }
 
-  Future close() async {
+  Future clear() async {
     try {
       await _cartBox.flush();
       await _cartBox.clear();
-      await _cartBox.close();
     } catch (e) {
       throw CacheException(message: e.toString());
     }

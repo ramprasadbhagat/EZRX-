@@ -1,8 +1,9 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/custom_label.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -254,12 +255,23 @@ class _ListContent extends StatelessWidget {
             ],
           ),
           onTap: () {
-            context.read<ShipToCodeBloc>().add(
-                  ShipToCodeEvent.selected(
-                    shipToInfo: shipToInfo,
-                  ),
-                );
-            context.router.pop();
+            ConfirmClearCartDialog.show(
+              context: context,
+              skipDialog: (shipToInfo ==
+                      context.read<ShipToCodeBloc>().state.shipToInfo) ||
+                  (context.read<CartBloc>().state.cartItemList.isEmpty),
+              title: 'Change Shipping Address'.tr(),
+              description:
+                  'The progress on your cart is going to be lost. Do you want to proceed?'
+                      .tr(),
+              onConfirmed: () {
+                context.read<ShipToCodeBloc>().add(
+                      ShipToCodeEvent.selected(
+                        shipToInfo: shipToInfo,
+                      ),
+                    );
+              },
+            );
           },
         ),
         const Divider(
