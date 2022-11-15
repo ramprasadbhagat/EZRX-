@@ -19,19 +19,34 @@ mixin _$PriceOverrideEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(PriceAggregate item) fetch,
+    required TResult Function(
+            PriceAggregate item,
+            String newPrice,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(PriceAggregate item)? fetch,
+    TResult? Function(
+            PriceAggregate item,
+            String newPrice,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(PriceAggregate item)? fetch,
+    TResult Function(
+            PriceAggregate item,
+            String newPrice,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,7 +128,12 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(PriceAggregate item) fetch,
+    required TResult Function(
+            PriceAggregate item,
+            String newPrice,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        fetch,
   }) {
     return initialized();
   }
@@ -122,7 +142,12 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(PriceAggregate item)? fetch,
+    TResult? Function(
+            PriceAggregate item,
+            String newPrice,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
   }) {
     return initialized?.call();
   }
@@ -131,7 +156,12 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(PriceAggregate item)? fetch,
+    TResult Function(
+            PriceAggregate item,
+            String newPrice,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -181,9 +211,15 @@ abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
   @useResult
-  $Res call({PriceAggregate item});
+  $Res call(
+      {PriceAggregate item,
+      String newPrice,
+      SalesOrganisation salesOrganisation,
+      CustomerCodeInfo customerCodeInfo});
 
   $PriceAggregateCopyWith<$Res> get item;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
 }
 
 /// @nodoc
@@ -197,12 +233,27 @@ class __$$_FetchCopyWithImpl<$Res>
   @override
   $Res call({
     Object? item = null,
+    Object? newPrice = null,
+    Object? salesOrganisation = null,
+    Object? customerCodeInfo = null,
   }) {
     return _then(_$_Fetch(
       item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
               as PriceAggregate,
+      newPrice: null == newPrice
+          ? _value.newPrice
+          : newPrice // ignore: cast_nullable_to_non_nullable
+              as String,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
     ));
   }
 
@@ -213,19 +264,45 @@ class __$$_FetchCopyWithImpl<$Res>
       return _then(_value.copyWith(item: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.item});
+  const _$_Fetch(
+      {required this.item,
+      required this.newPrice,
+      required this.salesOrganisation,
+      required this.customerCodeInfo});
 
   @override
   final PriceAggregate item;
+  @override
+  final String newPrice;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
 
   @override
   String toString() {
-    return 'PriceOverrideEvent.fetch(item: $item)';
+    return 'PriceOverrideEvent.fetch(item: $item, newPrice: $newPrice, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo)';
   }
 
   @override
@@ -233,11 +310,18 @@ class _$_Fetch implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
-            (identical(other.item, item) || other.item == item));
+            (identical(other.item, item) || other.item == item) &&
+            (identical(other.newPrice, newPrice) ||
+                other.newPrice == newPrice) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, item);
+  int get hashCode => Object.hash(
+      runtimeType, item, newPrice, salesOrganisation, customerCodeInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -249,29 +333,44 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(PriceAggregate item) fetch,
+    required TResult Function(
+            PriceAggregate item,
+            String newPrice,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        fetch,
   }) {
-    return fetch(item);
+    return fetch(item, newPrice, salesOrganisation, customerCodeInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(PriceAggregate item)? fetch,
+    TResult? Function(
+            PriceAggregate item,
+            String newPrice,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
   }) {
-    return fetch?.call(item);
+    return fetch?.call(item, newPrice, salesOrganisation, customerCodeInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(PriceAggregate item)? fetch,
+    TResult Function(
+            PriceAggregate item,
+            String newPrice,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(item);
+      return fetch(item, newPrice, salesOrganisation, customerCodeInfo);
     }
     return orElse();
   }
@@ -309,9 +408,16 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements PriceOverrideEvent {
-  const factory _Fetch({required final PriceAggregate item}) = _$_Fetch;
+  const factory _Fetch(
+      {required final PriceAggregate item,
+      required final String newPrice,
+      required final SalesOrganisation salesOrganisation,
+      required final CustomerCodeInfo customerCodeInfo}) = _$_Fetch;
 
   PriceAggregate get item;
+  String get newPrice;
+  SalesOrganisation get salesOrganisation;
+  CustomerCodeInfo get customerCodeInfo;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;

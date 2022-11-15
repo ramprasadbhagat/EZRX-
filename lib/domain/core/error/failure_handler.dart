@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:ezrxmobile/domain/account/error/price_override_exception.dart';
 import 'package:ezrxmobile/domain/account/error/user_exception.dart';
 import 'package:ezrxmobile/domain/auth/error/auth_exception.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -15,6 +16,14 @@ class FailureHandler {
             const ApiFailure.invalidEmailAndPasswordCombination(),
         accountLocked: (_) => const ApiFailure.accountLocked(),
         accountExpired: (_) => const ApiFailure.accountExpired(),
+      );
+    } else if (error is UserException) {
+      return error.map(
+        userNotFound: (_) => const ApiFailure.userNotFound(),
+      );
+    } else if (error is PriceException) {
+      return error.map(
+        priceNotFound: (_) => const ApiFailure.priceOverrideNotFound(),
       );
     } else {
       switch (error.runtimeType) {
@@ -32,8 +41,7 @@ class FailureHandler {
           return ApiFailure.other('${(error as PlatformException).message}');
         case OtherException:
           return ApiFailure.other((error as OtherException).message);
-        case UserException:
-          return const ApiFailure.userNotFound();
+
         default:
           return ApiFailure.other(error.toString());
       }

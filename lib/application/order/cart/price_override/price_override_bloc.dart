@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -31,8 +33,12 @@ class PriceOverrideBloc extends Bloc<PriceOverrideEvent, PriceOverrideState> {
             isFetching: true,
           ),
         );
-        final failureOrSuccess =
-            await priceOverrideRepository.updateItemPrice();
+        final failureOrSuccess = await priceOverrideRepository.updateItemPrice(
+          newPrice: value.newPrice,
+          customerCodeInfo: value.customerCodeInfo,
+          item: value.item,
+          salesOrganisation: value.salesOrganisation,
+        );
         failureOrSuccess.fold(
           (failure) {
             emit(
@@ -43,14 +49,11 @@ class PriceOverrideBloc extends Bloc<PriceOverrideEvent, PriceOverrideState> {
             );
           },
           (itemPrice) {
-            //update the cart with latest item
-            // itemPrice.isOverride = true;
-
             emit(
               state.copyWith(
-                cartItemList: itemPrice,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
+                cartItemList: itemPrice,
               ),
             );
           },

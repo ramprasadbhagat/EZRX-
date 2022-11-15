@@ -3,18 +3,21 @@
 // in each and every query we require for the functionality
 
 class PriceOverrideQueryMutation {
-  String getItemPriceOverride(
-    String custCode,
-    String salesOrg,
-    String materialNumber,
-    zpo1,
-    zdp8,
-  ) {
+  String getItemPriceOverride() {
     return '''
+
+
+query price(
+        \$customer: String! 
+        \$salesOrganisation: String!
+        \$request:[PriceRequest!]!
+      ) {
+        price(
+          customer: \$customer 
+          salesOrganisation: \$salesOrganisation
+          request: \$request
+        ) 
     {
-      price(customer:"$custCode", salesOrganisation:"$salesOrg",
-        request:{MaterialNumber:"$materialNumber"$zpo1,$zdp8})
-        {
         MaterialNumber
         OverridenRulePresent
         ZDP5MaxQuota

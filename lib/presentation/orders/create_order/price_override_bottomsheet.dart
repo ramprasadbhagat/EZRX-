@@ -1,14 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loading_indicator/loading_indicator.dart';
 
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 
 class PriceSheet extends StatefulWidget {
@@ -82,7 +82,7 @@ class _PriceSheetState extends State<PriceSheet> {
                         Container(
                           margin: const EdgeInsets.only(right: 2),
                           child: Text(
-                            widget.item.salesOrgConfig.currency.symbol,
+                            widget.item.salesOrgConfig.currency.code,
                             style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
@@ -148,14 +148,29 @@ class _PriceSheetState extends State<PriceSheet> {
                   state,
                 ) {
                   state.apiFailureOrSuccessOption.fold(
-                    () {},
+                    () {
+                      if (!state.isFetching) {
+                        context.read<CartBloc>().add(
+                              CartEvent.updateCart(
+                                item: state.cartItemList,
+                                materialNumber: widget
+                                    .item.materialInfo.materialNumber
+                                    .getOrCrash(),
+                              ),
+                            );
+
+                        Navigator.pop(context);
+                      }
+                    },
                     (either) => either.fold(
                       (failure) {
                         final failureMessage = failure.failureMessage;
+
                         showSnackBar(
                           context: context,
                           message: failureMessage.tr(),
                         );
+                        Navigator.of(context).pop();
                         if (failureMessage == 'authentication failed') {
                           context.read<AuthBloc>().add(
                                 const AuthEvent.logout(),
@@ -165,18 +180,6 @@ class _PriceSheetState extends State<PriceSheet> {
                       (_) {},
                     ),
                   );
-
-                  if (state.cartItemList.isNotEmpty &&
-                      state.apiFailureOrSuccessOption.isNone()) {
-                    context.read<CartBloc>().add(
-                          CartEvent.updateCart(
-                            item: state.cartItemList,
-                            materialNumber: widget
-                                .item.materialInfo.materialNumber
-                                .getOrCrash(),
-                          ),
-                        );
-                  }
                 },
                 buildWhen: (previous, current) =>
                     previous.isFetching != current.isFetching,
@@ -184,20 +187,17 @@ class _PriceSheetState extends State<PriceSheet> {
                   return Padding(
                     padding: const EdgeInsets.only(top: 6.0),
                     child: state.isFetching
-                        ? const SizedBox(
-                            height: 20,
-                            width: 80,
-                            child: LoadingIndicator(
-                              indicatorType: Indicator.ballPulse,
-                              colors: [
-                                ZPColors.secondary,
-                              ],
+                        ? SizedBox(
+                            width: MediaQuery.of(context).size.width * 60 / 100,
+                            height: 35,
+                            child: LoadingShimmer.withChild(
+                              enabled: true,
+                              child: const Text('Override Price').tr(),
                             ),
                           )
                         : GestureDetector(
                             onTap: () async {
                               widget.onTap(newPrice);
-                              Navigator.pop(context);
                             },
                             child: Container(
                               width:

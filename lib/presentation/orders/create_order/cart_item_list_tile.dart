@@ -1,4 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
@@ -160,7 +162,18 @@ class CartItemListTile extends StatelessWidget {
                         onTap: (double newPrice) {
                           if (cartItem.salesOrgConfig.priceOverride) {
                             context.read<PriceOverrideBloc>().add(
-                                  PriceOverrideEvent.fetch(item: cartItem),
+                                  PriceOverrideEvent.fetch(
+                                    item: cartItem,
+                                    newPrice: newPrice.toString(),
+                                    salesOrganisation: context
+                                        .read<SalesOrgBloc>()
+                                        .state
+                                        .salesOrganisation,
+                                    customerCodeInfo: context
+                                        .read<CustomerCodeBloc>()
+                                        .state
+                                        .customerCodeInfo,
+                                  ),
                                 );
                           }
                         },

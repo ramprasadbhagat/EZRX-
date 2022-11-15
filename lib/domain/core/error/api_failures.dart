@@ -25,6 +25,7 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.cannotCheckBiometrics() = _CannotCheckBiometrics;
   const factory ApiFailure.noSupportedBiometrics() = _NoSupportedBiometrics;
   const factory ApiFailure.invalidBiometirc() = _InvalidBiometirc;
+  const factory ApiFailure.priceOverrideNotFound() = _PriceOverrideNotFound;
 }
 
 extension ApiFailureExt on ApiFailure {
@@ -44,6 +45,7 @@ extension ApiFailureExt on ApiFailure {
       cannotCheckBiometrics: (_) => 'Unable to check your biometric',
       noSupportedBiometrics: (_) => 'No supported biometric',
       invalidBiometirc: (_) => 'Incorrect biometric',
+      priceOverrideNotFound: (_) => 'Price override not found!',
     );
 
     return failureMessage;

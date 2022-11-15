@@ -1,4 +1,7 @@
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
@@ -19,7 +22,12 @@ class PriceOverrideRepository implements IPriceOverrideRepository {
     required this.remoteDataSource,
   });
   @override
-  Future<Either<ApiFailure, List<Price>>> updateItemPrice() async {
+  Future<Either<ApiFailure, List<Price>>> updateItemPrice({
+    required PriceAggregate item,
+    required String newPrice,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+  }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
         final price = await localDataSource.getOverridePrice();
@@ -32,8 +40,17 @@ class PriceOverrideRepository implements IPriceOverrideRepository {
       }
     }
 
-    return Left(
-      FailureHandler.handleFailure('e'),
-    );
+    try {
+      final price = await remoteDataSource.getOverridePrice(
+        price: newPrice,
+        custCode: customerCodeInfo.customerCodeSoldTo,
+        materialNumber: item.materialInfo.materialNumber.getOrCrash(),
+        salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+      );
+
+      return Right(price);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
   }
 }

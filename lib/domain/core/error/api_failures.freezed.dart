@@ -31,6 +31,7 @@ mixin _$ApiFailure {
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
+    required TResult Function() priceOverrideNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -48,6 +49,7 @@ mixin _$ApiFailure {
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
+    TResult? Function()? priceOverrideNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +67,7 @@ mixin _$ApiFailure {
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -87,6 +90,8 @@ mixin _$ApiFailure {
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -106,6 +111,7 @@ mixin _$ApiFailure {
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -125,6 +131,7 @@ mixin _$ApiFailure {
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -223,6 +230,7 @@ class _$_Other implements _Other {
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
+    required TResult Function() priceOverrideNotFound,
   }) {
     return other(message);
   }
@@ -243,6 +251,7 @@ class _$_Other implements _Other {
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
+    TResult? Function()? priceOverrideNotFound,
   }) {
     return other?.call(message);
   }
@@ -263,6 +272,7 @@ class _$_Other implements _Other {
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -291,6 +301,8 @@ class _$_Other implements _Other {
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
   }) {
     return other(this);
   }
@@ -313,6 +325,7 @@ class _$_Other implements _Other {
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return other?.call(this);
   }
@@ -335,6 +348,7 @@ class _$_Other implements _Other {
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -430,6 +444,7 @@ class _$_ServerError implements _ServerError {
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
+    required TResult Function() priceOverrideNotFound,
   }) {
     return serverError(message);
   }
@@ -450,6 +465,7 @@ class _$_ServerError implements _ServerError {
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
+    TResult? Function()? priceOverrideNotFound,
   }) {
     return serverError?.call(message);
   }
@@ -470,6 +486,7 @@ class _$_ServerError implements _ServerError {
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -498,6 +515,8 @@ class _$_ServerError implements _ServerError {
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
   }) {
     return serverError(this);
   }
@@ -520,6 +539,7 @@ class _$_ServerError implements _ServerError {
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return serverError?.call(this);
   }
@@ -542,6 +562,7 @@ class _$_ServerError implements _ServerError {
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -611,6 +632,7 @@ class _$_PoorConnection implements _PoorConnection {
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
+    required TResult Function() priceOverrideNotFound,
   }) {
     return poorConnection();
   }
@@ -631,6 +653,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
+    TResult? Function()? priceOverrideNotFound,
   }) {
     return poorConnection?.call();
   }
@@ -651,6 +674,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -679,6 +703,8 @@ class _$_PoorConnection implements _PoorConnection {
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
   }) {
     return poorConnection(this);
   }
@@ -701,6 +727,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return poorConnection?.call(this);
   }
@@ -723,6 +750,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -787,6 +815,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
+    required TResult Function() priceOverrideNotFound,
   }) {
     return serverTimeout();
   }
@@ -807,6 +836,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
+    TResult? Function()? priceOverrideNotFound,
   }) {
     return serverTimeout?.call();
   }
@@ -827,6 +857,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -855,6 +886,8 @@ class _$_ServerTimeout implements _ServerTimeout {
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
   }) {
     return serverTimeout(this);
   }
@@ -877,6 +910,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return serverTimeout?.call(this);
   }
@@ -899,6 +933,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -963,6 +998,7 @@ class _$_UserNotFound implements _UserNotFound {
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
+    required TResult Function() priceOverrideNotFound,
   }) {
     return userNotFound();
   }
@@ -983,6 +1019,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
+    TResult? Function()? priceOverrideNotFound,
   }) {
     return userNotFound?.call();
   }
@@ -1003,6 +1040,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -1031,6 +1069,8 @@ class _$_UserNotFound implements _UserNotFound {
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
   }) {
     return userNotFound(this);
   }
@@ -1053,6 +1093,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return userNotFound?.call(this);
   }
@@ -1075,6 +1116,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -1144,6 +1186,7 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
+    required TResult Function() priceOverrideNotFound,
   }) {
     return invalidEmailAndPasswordCombination();
   }
@@ -1164,6 +1207,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
+    TResult? Function()? priceOverrideNotFound,
   }) {
     return invalidEmailAndPasswordCombination?.call();
   }
@@ -1184,6 +1228,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -1212,6 +1257,8 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
   }) {
     return invalidEmailAndPasswordCombination(this);
   }
@@ -1234,6 +1281,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return invalidEmailAndPasswordCombination?.call(this);
   }
@@ -1256,6 +1304,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -1321,6 +1370,7 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
+    required TResult Function() priceOverrideNotFound,
   }) {
     return accountLocked();
   }
@@ -1341,6 +1391,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
+    TResult? Function()? priceOverrideNotFound,
   }) {
     return accountLocked?.call();
   }
@@ -1361,6 +1412,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -1389,6 +1441,8 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
   }) {
     return accountLocked(this);
   }
@@ -1411,6 +1465,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return accountLocked?.call(this);
   }
@@ -1433,6 +1488,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -1497,6 +1553,7 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
+    required TResult Function() priceOverrideNotFound,
   }) {
     return accountExpired();
   }
@@ -1517,6 +1574,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
+    TResult? Function()? priceOverrideNotFound,
   }) {
     return accountExpired?.call();
   }
@@ -1537,6 +1595,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -1565,6 +1624,8 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
   }) {
     return accountExpired(this);
   }
@@ -1587,6 +1648,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return accountExpired?.call(this);
   }
@@ -1609,6 +1671,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -1673,6 +1736,7 @@ class _$_TokenExpired implements _TokenExpired {
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
+    required TResult Function() priceOverrideNotFound,
   }) {
     return tokenExpired();
   }
@@ -1693,6 +1757,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
+    TResult? Function()? priceOverrideNotFound,
   }) {
     return tokenExpired?.call();
   }
@@ -1713,6 +1778,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -1741,6 +1807,8 @@ class _$_TokenExpired implements _TokenExpired {
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
   }) {
     return tokenExpired(this);
   }
@@ -1763,6 +1831,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return tokenExpired?.call(this);
   }
@@ -1785,6 +1854,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -1852,6 +1922,7 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
+    required TResult Function() priceOverrideNotFound,
   }) {
     return deviceNotSupportBiometirc();
   }
@@ -1872,6 +1943,7 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
+    TResult? Function()? priceOverrideNotFound,
   }) {
     return deviceNotSupportBiometirc?.call();
   }
@@ -1892,6 +1964,7 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (deviceNotSupportBiometirc != null) {
@@ -1920,6 +1993,8 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
   }) {
     return deviceNotSupportBiometirc(this);
   }
@@ -1942,6 +2017,7 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return deviceNotSupportBiometirc?.call(this);
   }
@@ -1964,6 +2040,7 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (deviceNotSupportBiometirc != null) {
@@ -2028,6 +2105,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
+    required TResult Function() priceOverrideNotFound,
   }) {
     return cannotCheckBiometrics();
   }
@@ -2048,6 +2126,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
+    TResult? Function()? priceOverrideNotFound,
   }) {
     return cannotCheckBiometrics?.call();
   }
@@ -2068,6 +2147,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (cannotCheckBiometrics != null) {
@@ -2096,6 +2176,8 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
   }) {
     return cannotCheckBiometrics(this);
   }
@@ -2118,6 +2200,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return cannotCheckBiometrics?.call(this);
   }
@@ -2140,6 +2223,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (cannotCheckBiometrics != null) {
@@ -2204,6 +2288,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
+    required TResult Function() priceOverrideNotFound,
   }) {
     return noSupportedBiometrics();
   }
@@ -2224,6 +2309,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
+    TResult? Function()? priceOverrideNotFound,
   }) {
     return noSupportedBiometrics?.call();
   }
@@ -2244,6 +2330,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (noSupportedBiometrics != null) {
@@ -2272,6 +2359,8 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
   }) {
     return noSupportedBiometrics(this);
   }
@@ -2294,6 +2383,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return noSupportedBiometrics?.call(this);
   }
@@ -2316,6 +2406,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (noSupportedBiometrics != null) {
@@ -2380,6 +2471,7 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
+    required TResult Function() priceOverrideNotFound,
   }) {
     return invalidBiometirc();
   }
@@ -2400,6 +2492,7 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
+    TResult? Function()? priceOverrideNotFound,
   }) {
     return invalidBiometirc?.call();
   }
@@ -2420,6 +2513,7 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (invalidBiometirc != null) {
@@ -2448,6 +2542,8 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
   }) {
     return invalidBiometirc(this);
   }
@@ -2470,6 +2566,7 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return invalidBiometirc?.call(this);
   }
@@ -2492,6 +2589,7 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     required TResult orElse(),
   }) {
     if (invalidBiometirc != null) {
@@ -2503,4 +2601,187 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
 
 abstract class _InvalidBiometirc implements ApiFailure {
   const factory _InvalidBiometirc() = _$_InvalidBiometirc;
+}
+
+/// @nodoc
+abstract class _$$_PriceOverrideNotFoundCopyWith<$Res> {
+  factory _$$_PriceOverrideNotFoundCopyWith(_$_PriceOverrideNotFound value,
+          $Res Function(_$_PriceOverrideNotFound) then) =
+      __$$_PriceOverrideNotFoundCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_PriceOverrideNotFoundCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res, _$_PriceOverrideNotFound>
+    implements _$$_PriceOverrideNotFoundCopyWith<$Res> {
+  __$$_PriceOverrideNotFoundCopyWithImpl(_$_PriceOverrideNotFound _value,
+      $Res Function(_$_PriceOverrideNotFound) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
+  const _$_PriceOverrideNotFound();
+
+  @override
+  String toString() {
+    return 'ApiFailure.priceOverrideNotFound()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_PriceOverrideNotFound);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometirc,
+    required TResult Function() priceOverrideNotFound,
+  }) {
+    return priceOverrideNotFound();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? other,
+    TResult? Function(String message)? serverError,
+    TResult? Function()? poorConnection,
+    TResult? Function()? serverTimeout,
+    TResult? Function()? userNotFound,
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? tokenExpired,
+    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? cannotCheckBiometrics,
+    TResult? Function()? noSupportedBiometrics,
+    TResult? Function()? invalidBiometirc,
+    TResult? Function()? priceOverrideNotFound,
+  }) {
+    return priceOverrideNotFound?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
+    required TResult orElse(),
+  }) {
+    if (priceOverrideNotFound != null) {
+      return priceOverrideNotFound();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_DeviceNotSupportBiometirc value)
+        deviceNotSupportBiometirc,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
+  }) {
+    return priceOverrideNotFound(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Other value)? other,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_PoorConnection value)? poorConnection,
+    TResult? Function(_ServerTimeout value)? serverTimeout,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+  }) {
+    return priceOverrideNotFound?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    required TResult orElse(),
+  }) {
+    if (priceOverrideNotFound != null) {
+      return priceOverrideNotFound(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PriceOverrideNotFound implements ApiFailure {
+  const factory _PriceOverrideNotFound() = _$_PriceOverrideNotFound;
 }
