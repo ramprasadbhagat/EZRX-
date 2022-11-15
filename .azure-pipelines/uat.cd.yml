@@ -61,7 +61,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          fvm flutter build ipa --flavor uat -t lib/main_stage.dart --release --export-options-plist=ios/config/uat/exportOptions.plist
+          fvm flutter build ipa --flavor uat -t lib/main_uat.dart --release --export-options-plist=ios/config/uat/exportOptions.plist
 
     - task: AppStoreRelease@1
       displayName: 'Upload to the App Store TestFlight track'
@@ -133,7 +133,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          fvm flutter build appbundle --flavor uat -t lib/main_stage.dart --release
+          fvm flutter build appbundle --flavor uat -t lib/main_uat.dart --release
 
     - task: AppCenterDistribute@3
       displayName: Upload to Microsoft Appcenter
