@@ -119,4 +119,12 @@ class CartStorage {
       throw CacheException(message: e.toString());
     }
   }
+
+  Future addAll(List<PriceAggregateDto> cartItemsDto) async {
+    try {
+      await _cartBox.addAll(cartItemsDto);
+    } catch (e) {
+      throw CacheException(message: e.toString());
+    }
+  }
 }

@@ -106,4 +106,19 @@ class CartRepository implements ICartRepository {
       return Left(FailureHandler.handleFailure(e));
     }
   }
+
+  @override
+  Future<Either<ApiFailure, List<PriceAggregate>>> addToCartList({
+    required List<PriceAggregate> items,
+  }) async {
+    try {
+      final cartItemsDto =
+          items.map((e) => PriceAggregateDto.fromDomain(e)).toList();
+      await cartStorage.addAll(cartItemsDto);
+
+      return fetchCartItems();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
 }

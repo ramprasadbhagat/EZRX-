@@ -18,4 +18,8 @@ abstract class ICartRepository {
     required PriceAggregate cartItem,
   });
   Future<Either<ApiFailure, Unit>> clear();
+
+  Future<Either<ApiFailure, List<PriceAggregate>>> addToCartList({
+    required List<PriceAggregate> items,
+  });
 }

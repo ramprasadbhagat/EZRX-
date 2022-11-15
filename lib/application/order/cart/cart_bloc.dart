@@ -189,6 +189,36 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         await cartRepository.clear();
         emit(CartState.initial());
       },
+      addToCartFromList: (e) async {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetching: false,
+          ),
+        );
+
+        final failureOrSuccess =
+            await cartRepository.addToCartList(items: e.items);
+        failureOrSuccess.fold(
+          (apiFailure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (cartItemList) {
+            emit(
+              state.copyWith(
+                cartItemList: cartItemList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

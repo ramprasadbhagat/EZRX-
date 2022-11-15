@@ -7,6 +7,9 @@ class CartEvent with _$CartEvent {
   const factory CartEvent.addToCart({
     required PriceAggregate item,
   }) = _AddToCart;
+  const factory CartEvent.addToCartFromList({
+    required List<PriceAggregate> items,
+  }) = _AddToCartFromList;
   const factory CartEvent.updateCart({
     required List<Price> item,
     required String materialNumber,

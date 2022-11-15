@@ -4,8 +4,10 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_action_button.dart';
@@ -94,10 +96,11 @@ class SavedOrderDetailPage extends StatelessWidget {
               child: BlocBuilder<MaterialPriceDetailBloc,
                   MaterialPriceDetailState>(
                 buildWhen: (previous, current) =>
-                    previous.isValidating != current.isValidating,
+                    previous.isValidating != current.isValidating ||
+                    previous.isFetching != current.isFetching,
                 builder: (context, state) {
                   return OrderActionButton(
-                    onAddToCartPressed: () {},
+                    onAddToCartPressed: () => _addToCartPressed(context, state),
                     onDeletePressed: () {
                       context.read<SavedOrderListBloc>().add(
                             SavedOrderListEvent.delete(
@@ -112,7 +115,7 @@ class SavedOrderDetailPage extends StatelessWidget {
                         query: item,
                       ),
                     ),
-                    isLoading: state.isValidating,
+                    isLoading: state.isFetching || state.isValidating,
                   );
                 },
               ),
@@ -121,5 +124,31 @@ class SavedOrderDetailPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _addToCartPressed(BuildContext context, MaterialPriceDetailState state) {
+    final cartBloc = context.read<CartBloc>();
+    final priceAggregateList = order.items.map((material) {
+      final itemInfo = state.materialDetails[material.queryInfo];
+      if (itemInfo != null) {
+        final priceAggregate = PriceAggregate(
+          price: itemInfo.price,
+          materialInfo: itemInfo.info,
+          salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+          quantity: material.qty,
+          zmgMaterialCountOnCart: cartBloc.state.zmgMaterialCount,
+          isOverride: false,
+        );
+
+        return priceAggregate;
+      }
+
+      return PriceAggregate.empty();
+    }).toList();
+
+    cartBloc.add(CartEvent.addToCartFromList(items: priceAggregateList));
+
+    //TODO: Will revisit
+    context.router.pushNamed('cart_page');
   }
 }
