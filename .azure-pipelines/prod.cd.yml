@@ -10,7 +10,7 @@ resources:
 - repo: self
 
 pool:
-  vmImage: 'macos-latest'
+  vmImage: 'macos-12'
 
 variables:
   - group: "eZRx mobile CICD"
