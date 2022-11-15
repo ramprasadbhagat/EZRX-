@@ -73,4 +73,25 @@ class EligibilityState with _$EligibilityState {
         ? 'include'
         : '';
   }
+
+  bool get isPaymentTermDescriptionEnable {
+    return !user.role.type.isSalesRep &&
+        !salesOrgConfigs.disablePaymentTermsDisplay;
+  }
+
+  bool get isPaymentTermEnable {
+    return salesOrgConfigs.enablePaymentTerms;
+  }
+
+  bool get isSpecialInstructions {
+    return salesOrganisation.salesOrg.isVN;
+  }
+
+  bool get isRequestedDeliveryDate {
+    return salesOrgConfigs.disableDeliveryDate;
+  }
+
+  bool get isBillToenable {
+    return salesOrgConfigs.enableBillTo;
+  }
 }

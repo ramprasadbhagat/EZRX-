@@ -94,6 +94,15 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'priceOverride', defaultValue: false)
     @HiveField(126, defaultValue: false)
         required bool priceOverride,
+    @JsonKey(name: 'disablePaymentTermsDisplay', defaultValue: false)
+    @HiveField(127, defaultValue: false)
+        required bool disablePaymentTermsDisplay,
+    @JsonKey(name: 'disableDeliveryDate', defaultValue: false)
+    @HiveField(128, defaultValue: false)
+        required bool disableDeliveryDate,
+        @JsonKey(name: 'enableBillTo', defaultValue: false)
+    @HiveField(129, defaultValue: false)
+        required bool enableBillTo,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -127,6 +136,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       futureDeliveryDay: configs.futureDeliveryDay,
       enableGMC: configs.enableGMC,
       enableListPrice: configs.enableListPrice,
+      disablePaymentTermsDisplay: configs.disablePaymentTermsDisplay,
+      disableDeliveryDate:configs.disableDeliveryDate,
+      enableBillTo:configs.enableBillTo,
     );
   }
 
@@ -159,6 +171,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableGMC: enableGMC,
       enableListPrice: enableListPrice,
       priceOverride: priceOverride,
+      disablePaymentTermsDisplay: disablePaymentTermsDisplay,
+      disableDeliveryDate: disableDeliveryDate,
+      enableBillTo:enableBillTo,
     );
   }
 

@@ -1,7 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
@@ -90,8 +94,9 @@ class HistoryDetails extends StatelessWidget {
                     ),
                     const _SoldToAddress(),
                     const _ShipToAddress(),
-                    orderHistoryBasicInfo.soldTo !=
-                            billToInfo.billToCustomerCode
+                    context.read<EligibilityBloc>().state.isBillToenable &&
+                            orderHistoryBasicInfo.soldTo !=
+                                billToInfo.billToCustomerCode
                         ? _BillToAddress(
                             billToInfo: billToInfo,
                           )
@@ -208,7 +213,10 @@ class _OrderDetails extends StatelessWidget {
             ),
             BalanceTextRow(
               keyText: 'Grand Total'.tr(),
-              valueText: '',
+              valueText: _displayPrice(
+                context.read<SalesOrgBloc>().state.configs,
+                context.read<CartBloc>().state.grandTotal,
+              ),
               keyFlex: 1,
               valueFlex: 1,
               valueTextLoading: state.isLoading,
@@ -251,21 +259,26 @@ class _OrderDetails extends StatelessWidget {
               keyFlex: 1,
               valueFlex: 1,
             ),
-            BalanceTextRow(
-              keyText: 'Requested Delivery Date'.tr(),
-              valueText: orderDetails
-                  .orderHistoryDetailsOrderHeader.requestedDeliveryDate,
-              valueTextLoading: state.isLoading,
-              keyFlex: 1,
-              valueFlex: 1,
-            ),
-            BalanceTextRow(
-              keyText: 'Special Instructions'.tr(),
-              valueText: orderDetails.orderHistoryDetailsSpecialInstructions,
-              valueTextLoading: state.isLoading,
-              keyFlex: 1,
-              valueFlex: 1,
-            ),
+            !context.read<EligibilityBloc>().state.isRequestedDeliveryDate
+                ? BalanceTextRow(
+                    keyText: 'Requested Delivery Date'.tr(),
+                    valueText: orderDetails
+                        .orderHistoryDetailsOrderHeader.requestedDeliveryDate,
+                    valueTextLoading: state.isLoading,
+                    keyFlex: 1,
+                    valueFlex: 1,
+                  )
+                : const SizedBox.shrink(),
+            !context.read<EligibilityBloc>().state.isSpecialInstructions
+                ? BalanceTextRow(
+                    keyText: 'Special Instructions'.tr(),
+                    valueText:
+                        orderDetails.orderHistoryDetailsSpecialInstructions,
+                    valueTextLoading: state.isLoading,
+                    keyFlex: 1,
+                    valueFlex: 1,
+                  )
+                : const SizedBox.shrink(),
             BalanceTextRow(
               keyText: 'PO No.'.tr(),
               valueText:
@@ -301,18 +314,38 @@ class _OrderDetails extends StatelessWidget {
               keyFlex: 1,
               valueFlex: 1,
             ),
-            BalanceTextRow(
-              keyText: 'Payment Term Description'.tr(),
-              valueText: orderDetails
-                  .orderHistoryDetailsPaymentTerm.paymentTermDescription,
-              valueTextLoading: state.isLoading,
-              keyFlex: 1,
-              valueFlex: 1,
-            ),
+            context.read<EligibilityBloc>().state.isPaymentTermEnable
+                ? BalanceTextRow(
+                    keyText: 'Payment Term '.tr(),
+                    valueText: orderDetails
+                        .orderHistoryDetailsPaymentTerm.paymentTermCode,
+                    valueTextLoading: state.isLoading,
+                    keyFlex: 1,
+                    valueFlex: 1,
+                  )
+                : const SizedBox.shrink(),
+            context.read<EligibilityBloc>().state.isPaymentTermDescriptionEnable
+                ? BalanceTextRow(
+                    keyText: 'Payment Term Description'.tr(),
+                    valueText: orderDetails
+                        .orderHistoryDetailsPaymentTerm.paymentTermDescription,
+                    valueTextLoading: state.isLoading,
+                    keyFlex: 1,
+                    valueFlex: 1,
+                  )
+                : const SizedBox.shrink(),
           ],
         );
       },
     );
+  }
+
+  String _displayPrice(SalesOrganisationConfigs salesOrgConfig, double price) {
+    if (salesOrgConfig.currency.isVN) {
+      return '${price.toStringAsFixed(2)} ${salesOrgConfig.currency.code}';
+    }
+
+    return '${salesOrgConfig.currency.code} ${price.toStringAsFixed(2)}';
   }
 }
 

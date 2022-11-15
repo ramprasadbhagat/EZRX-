@@ -73,6 +73,9 @@ void main() {
     enableGMC: false,
     enableListPrice: false,
     priceOverride: false,
+    disablePaymentTermsDisplay: false,
+    disableDeliveryDate: false,
+    enableBillTo:false,
   );
 
   const fakeSelectedFilterCategory = MaterialFilterType.principal;

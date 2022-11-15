@@ -125,4 +125,7 @@ const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
   principalList: [],
   vatValue: 0,
   priceOverride: false,
+  disablePaymentTermsDisplay: false,
+  disableDeliveryDate:false,
+  enableBillTo:false,
 );

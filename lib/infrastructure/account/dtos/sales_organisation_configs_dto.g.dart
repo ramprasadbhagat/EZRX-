@@ -50,13 +50,17 @@ class SalesOrganisationConfigsDtoAdapter
       enableListPrice: fields[124] == null ? false : fields[124] as bool,
       enableDefaultMD: fields[125] == null ? false : fields[125] as bool,
       priceOverride: fields[126] == null ? false : fields[126] as bool,
+      disablePaymentTermsDisplay:
+          fields[127] == null ? false : fields[127] as bool,
+      disableDeliveryDate: fields[128] == null ? false : fields[128] as bool,
+      enableBillTo: fields[129] == null ? false : fields[129] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_SalesOrganisationConfigsDto obj) {
     writer
-      ..writeByte(27)
+      ..writeByte(30)
       ..writeByte(100)
       ..write(obj.disableProcessingStatus)
       ..writeByte(101)
@@ -109,6 +113,12 @@ class SalesOrganisationConfigsDtoAdapter
       ..write(obj.enableDefaultMD)
       ..writeByte(126)
       ..write(obj.priceOverride)
+      ..writeByte(127)
+      ..write(obj.disablePaymentTermsDisplay)
+      ..writeByte(128)
+      ..write(obj.disableDeliveryDate)
+      ..writeByte(129)
+      ..write(obj.enableBillTo)
       ..writeByte(7)
       ..write(obj.principalList);
   }
@@ -162,6 +172,10 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       enableListPrice: json['enableListPrice'] as bool? ?? false,
       enableDefaultMD: json['enableDefaultMD'] as bool? ?? false,
       priceOverride: json['priceOverride'] as bool? ?? false,
+      disablePaymentTermsDisplay:
+          json['disablePaymentTermsDisplay'] as bool? ?? false,
+      disableDeliveryDate: json['disableDeliveryDate'] as bool? ?? false,
+      enableBillTo: json['enableBillTo'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -195,4 +209,7 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'enableListPrice': instance.enableListPrice,
       'enableDefaultMD': instance.enableDefaultMD,
       'priceOverride': instance.priceOverride,
+      'disablePaymentTermsDisplay': instance.disablePaymentTermsDisplay,
+      'disableDeliveryDate': instance.disableDeliveryDate,
+      'enableBillTo': instance.enableBillTo,
     };

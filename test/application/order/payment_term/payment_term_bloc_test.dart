@@ -65,6 +65,9 @@ void main() {
     enableGMC: false,
     enableListPrice: false,
     priceOverride: false,
+    disablePaymentTermsDisplay: false,
+    disableDeliveryDate: false,
+    enableBillTo:false,
   );
 
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(

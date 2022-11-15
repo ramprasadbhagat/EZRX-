@@ -103,6 +103,15 @@ mixin _$SalesOrganisationConfigsDto {
   @JsonKey(name: 'priceOverride', defaultValue: false)
   @HiveField(126, defaultValue: false)
   bool get priceOverride => throw _privateConstructorUsedError;
+  @JsonKey(name: 'disablePaymentTermsDisplay', defaultValue: false)
+  @HiveField(127, defaultValue: false)
+  bool get disablePaymentTermsDisplay => throw _privateConstructorUsedError;
+  @JsonKey(name: 'disableDeliveryDate', defaultValue: false)
+  @HiveField(128, defaultValue: false)
+  bool get disableDeliveryDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'enableBillTo', defaultValue: false)
+  @HiveField(129, defaultValue: false)
+  bool get enableBillTo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -200,7 +209,16 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
           bool enableDefaultMD,
       @JsonKey(name: 'priceOverride', defaultValue: false)
       @HiveField(126, defaultValue: false)
-          bool priceOverride});
+          bool priceOverride,
+      @JsonKey(name: 'disablePaymentTermsDisplay', defaultValue: false)
+      @HiveField(127, defaultValue: false)
+          bool disablePaymentTermsDisplay,
+      @JsonKey(name: 'disableDeliveryDate', defaultValue: false)
+      @HiveField(128, defaultValue: false)
+          bool disableDeliveryDate,
+      @JsonKey(name: 'enableBillTo', defaultValue: false)
+      @HiveField(129, defaultValue: false)
+          bool enableBillTo});
 }
 
 /// @nodoc
@@ -244,6 +262,9 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
     Object? enableListPrice = null,
     Object? enableDefaultMD = null,
     Object? priceOverride = null,
+    Object? disablePaymentTermsDisplay = null,
+    Object? disableDeliveryDate = null,
+    Object? enableBillTo = null,
   }) {
     return _then(_value.copyWith(
       disableProcessingStatus: null == disableProcessingStatus
@@ -354,6 +375,18 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
           ? _value.priceOverride
           : priceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
+      disablePaymentTermsDisplay: null == disablePaymentTermsDisplay
+          ? _value.disablePaymentTermsDisplay
+          : disablePaymentTermsDisplay // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disableDeliveryDate: null == disableDeliveryDate
+          ? _value.disableDeliveryDate
+          : disableDeliveryDate // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableBillTo: null == enableBillTo
+          ? _value.enableBillTo
+          : enableBillTo // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -449,7 +482,16 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
           bool enableDefaultMD,
       @JsonKey(name: 'priceOverride', defaultValue: false)
       @HiveField(126, defaultValue: false)
-          bool priceOverride});
+          bool priceOverride,
+      @JsonKey(name: 'disablePaymentTermsDisplay', defaultValue: false)
+      @HiveField(127, defaultValue: false)
+          bool disablePaymentTermsDisplay,
+      @JsonKey(name: 'disableDeliveryDate', defaultValue: false)
+      @HiveField(128, defaultValue: false)
+          bool disableDeliveryDate,
+      @JsonKey(name: 'enableBillTo', defaultValue: false)
+      @HiveField(129, defaultValue: false)
+          bool enableBillTo});
 }
 
 /// @nodoc
@@ -492,6 +534,9 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? enableListPrice = null,
     Object? enableDefaultMD = null,
     Object? priceOverride = null,
+    Object? disablePaymentTermsDisplay = null,
+    Object? disableDeliveryDate = null,
+    Object? enableBillTo = null,
   }) {
     return _then(_$_SalesOrganisationConfigsDto(
       disableProcessingStatus: null == disableProcessingStatus
@@ -602,6 +647,18 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.priceOverride
           : priceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
+      disablePaymentTermsDisplay: null == disablePaymentTermsDisplay
+          ? _value.disablePaymentTermsDisplay
+          : disablePaymentTermsDisplay // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disableDeliveryDate: null == disableDeliveryDate
+          ? _value.disableDeliveryDate
+          : disableDeliveryDate // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableBillTo: null == enableBillTo
+          ? _value.enableBillTo
+          : enableBillTo // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -692,7 +749,16 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
           required this.enableDefaultMD,
       @JsonKey(name: 'priceOverride', defaultValue: false)
       @HiveField(126, defaultValue: false)
-          required this.priceOverride})
+          required this.priceOverride,
+      @JsonKey(name: 'disablePaymentTermsDisplay', defaultValue: false)
+      @HiveField(127, defaultValue: false)
+          required this.disablePaymentTermsDisplay,
+      @JsonKey(name: 'disableDeliveryDate', defaultValue: false)
+      @HiveField(128, defaultValue: false)
+          required this.disableDeliveryDate,
+      @JsonKey(name: 'enableBillTo', defaultValue: false)
+      @HiveField(129, defaultValue: false)
+          required this.enableBillTo})
       : _principalList = principalList,
         super._();
 
@@ -813,10 +879,22 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @JsonKey(name: 'priceOverride', defaultValue: false)
   @HiveField(126, defaultValue: false)
   final bool priceOverride;
+  @override
+  @JsonKey(name: 'disablePaymentTermsDisplay', defaultValue: false)
+  @HiveField(127, defaultValue: false)
+  final bool disablePaymentTermsDisplay;
+  @override
+  @JsonKey(name: 'disableDeliveryDate', defaultValue: false)
+  @HiveField(128, defaultValue: false)
+  final bool disableDeliveryDate;
+  @override
+  @JsonKey(name: 'enableBillTo', defaultValue: false)
+  @HiveField(129, defaultValue: false)
+  final bool enableBillTo;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo)';
   }
 
   @override
@@ -864,8 +942,7 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
                 other.enableCollectiveNumber == enableCollectiveNumber) &&
             (identical(other.enableMobileNumber, enableMobileNumber) ||
                 other.enableMobileNumber == enableMobileNumber) &&
-            (identical(
-                    other.enableFutureDeliveryDay, enableFutureDeliveryDay) ||
+            (identical(other.enableFutureDeliveryDay, enableFutureDeliveryDay) ||
                 other.enableFutureDeliveryDay == enableFutureDeliveryDay) &&
             (identical(other.enablePaymentTerms, enablePaymentTerms) ||
                 other.enablePaymentTerms == enablePaymentTerms) &&
@@ -878,7 +955,12 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
             (identical(other.enableDefaultMD, enableDefaultMD) ||
                 other.enableDefaultMD == enableDefaultMD) &&
             (identical(other.priceOverride, priceOverride) ||
-                other.priceOverride == priceOverride));
+                other.priceOverride == priceOverride) &&
+            (identical(other.disablePaymentTermsDisplay, disablePaymentTermsDisplay) ||
+                other.disablePaymentTermsDisplay ==
+                    disablePaymentTermsDisplay) &&
+            (identical(other.disableDeliveryDate, disableDeliveryDate) || other.disableDeliveryDate == disableDeliveryDate) &&
+            (identical(other.enableBillTo, enableBillTo) || other.enableBillTo == enableBillTo));
   }
 
   @JsonKey(ignore: true)
@@ -911,7 +993,10 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
         enableGMC,
         enableListPrice,
         enableDefaultMD,
-        priceOverride
+        priceOverride,
+        disablePaymentTermsDisplay,
+        disableDeliveryDate,
+        enableBillTo
       ]);
 
   @JsonKey(ignore: true)
@@ -1013,7 +1098,16 @@ abstract class _SalesOrganisationConfigsDto
           required final bool enableDefaultMD,
       @JsonKey(name: 'priceOverride', defaultValue: false)
       @HiveField(126, defaultValue: false)
-          required final bool priceOverride}) = _$_SalesOrganisationConfigsDto;
+          required final bool priceOverride,
+      @JsonKey(name: 'disablePaymentTermsDisplay', defaultValue: false)
+      @HiveField(127, defaultValue: false)
+          required final bool disablePaymentTermsDisplay,
+      @JsonKey(name: 'disableDeliveryDate', defaultValue: false)
+      @HiveField(128, defaultValue: false)
+          required final bool disableDeliveryDate,
+      @JsonKey(name: 'enableBillTo', defaultValue: false)
+      @HiveField(129, defaultValue: false)
+          required final bool enableBillTo}) = _$_SalesOrganisationConfigsDto;
   const _SalesOrganisationConfigsDto._() : super._();
 
   factory _SalesOrganisationConfigsDto.fromJson(Map<String, dynamic> json) =
@@ -1128,6 +1222,18 @@ abstract class _SalesOrganisationConfigsDto
   @JsonKey(name: 'priceOverride', defaultValue: false)
   @HiveField(126, defaultValue: false)
   bool get priceOverride;
+  @override
+  @JsonKey(name: 'disablePaymentTermsDisplay', defaultValue: false)
+  @HiveField(127, defaultValue: false)
+  bool get disablePaymentTermsDisplay;
+  @override
+  @JsonKey(name: 'disableDeliveryDate', defaultValue: false)
+  @HiveField(128, defaultValue: false)
+  bool get disableDeliveryDate;
+  @override
+  @JsonKey(name: 'enableBillTo', defaultValue: false)
+  @HiveField(129, defaultValue: false)
+  bool get enableBillTo;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsDtoCopyWith<_$_SalesOrganisationConfigsDto>

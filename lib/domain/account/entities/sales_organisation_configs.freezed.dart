@@ -43,6 +43,9 @@ mixin _$SalesOrganisationConfigs {
   bool get enableGMC => throw _privateConstructorUsedError;
   bool get enableListPrice => throw _privateConstructorUsedError;
   bool get priceOverride => throw _privateConstructorUsedError;
+  bool get disablePaymentTermsDisplay => throw _privateConstructorUsedError;
+  bool get disableDeliveryDate => throw _privateConstructorUsedError;
+  bool get enableBillTo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrganisationConfigsCopyWith<SalesOrganisationConfigs> get copyWith =>
@@ -82,7 +85,10 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       String futureDeliveryDay,
       bool enableGMC,
       bool enableListPrice,
-      bool priceOverride});
+      bool priceOverride,
+      bool disablePaymentTermsDisplay,
+      bool disableDeliveryDate,
+      bool enableBillTo});
 }
 
 /// @nodoc
@@ -126,6 +132,9 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
     Object? enableGMC = null,
     Object? enableListPrice = null,
     Object? priceOverride = null,
+    Object? disablePaymentTermsDisplay = null,
+    Object? disableDeliveryDate = null,
+    Object? enableBillTo = null,
   }) {
     return _then(_value.copyWith(
       enableDefaultMD: null == enableDefaultMD
@@ -236,6 +245,18 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
           ? _value.priceOverride
           : priceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
+      disablePaymentTermsDisplay: null == disablePaymentTermsDisplay
+          ? _value.disablePaymentTermsDisplay
+          : disablePaymentTermsDisplay // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disableDeliveryDate: null == disableDeliveryDate
+          ? _value.disableDeliveryDate
+          : disableDeliveryDate // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableBillTo: null == enableBillTo
+          ? _value.enableBillTo
+          : enableBillTo // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -276,7 +297,10 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       String futureDeliveryDay,
       bool enableGMC,
       bool enableListPrice,
-      bool priceOverride});
+      bool priceOverride,
+      bool disablePaymentTermsDisplay,
+      bool disableDeliveryDate,
+      bool enableBillTo});
 }
 
 /// @nodoc
@@ -318,6 +342,9 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? enableGMC = null,
     Object? enableListPrice = null,
     Object? priceOverride = null,
+    Object? disablePaymentTermsDisplay = null,
+    Object? disableDeliveryDate = null,
+    Object? enableBillTo = null,
   }) {
     return _then(_$_SalesOrganisationConfigs(
       enableDefaultMD: null == enableDefaultMD
@@ -428,6 +455,18 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.priceOverride
           : priceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
+      disablePaymentTermsDisplay: null == disablePaymentTermsDisplay
+          ? _value.disablePaymentTermsDisplay
+          : disablePaymentTermsDisplay // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disableDeliveryDate: null == disableDeliveryDate
+          ? _value.disableDeliveryDate
+          : disableDeliveryDate // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableBillTo: null == enableBillTo
+          ? _value.enableBillTo
+          : enableBillTo // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -462,7 +501,10 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       required this.futureDeliveryDay,
       required this.enableGMC,
       required this.enableListPrice,
-      required this.priceOverride})
+      required this.priceOverride,
+      required this.disablePaymentTermsDisplay,
+      required this.disableDeliveryDate,
+      required this.enableBillTo})
       : _principalList = principalList,
         super._();
 
@@ -525,10 +567,16 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   final bool enableListPrice;
   @override
   final bool priceOverride;
+  @override
+  final bool disablePaymentTermsDisplay;
+  @override
+  final bool disableDeliveryDate;
+  @override
+  final bool enableBillTo;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride)';
+    return 'SalesOrganisationConfigs(enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo)';
   }
 
   @override
@@ -570,8 +618,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
                 other.vatValue == vatValue) &&
             (identical(other.materialWithoutPrice, materialWithoutPrice) ||
                 other.materialWithoutPrice == materialWithoutPrice) &&
-            (identical(other.enableSpecialInstructions,
-                    enableSpecialInstructions) ||
+            (identical(other.enableSpecialInstructions, enableSpecialInstructions) ||
                 other.enableSpecialInstructions == enableSpecialInstructions) &&
             (identical(other.enableReferenceNote, enableReferenceNote) ||
                 other.enableReferenceNote == enableReferenceNote) &&
@@ -590,7 +637,12 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
             (identical(other.enableListPrice, enableListPrice) ||
                 other.enableListPrice == enableListPrice) &&
             (identical(other.priceOverride, priceOverride) ||
-                other.priceOverride == priceOverride));
+                other.priceOverride == priceOverride) &&
+            (identical(
+                    other.disablePaymentTermsDisplay, disablePaymentTermsDisplay) ||
+                other.disablePaymentTermsDisplay == disablePaymentTermsDisplay) &&
+            (identical(other.disableDeliveryDate, disableDeliveryDate) || other.disableDeliveryDate == disableDeliveryDate) &&
+            (identical(other.enableBillTo, enableBillTo) || other.enableBillTo == enableBillTo));
   }
 
   @override
@@ -622,7 +674,10 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
         futureDeliveryDay,
         enableGMC,
         enableListPrice,
-        priceOverride
+        priceOverride,
+        disablePaymentTermsDisplay,
+        disableDeliveryDate,
+        enableBillTo
       ]);
 
   @JsonKey(ignore: true)
@@ -661,7 +716,10 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final String futureDeliveryDay,
       required final bool enableGMC,
       required final bool enableListPrice,
-      required final bool priceOverride}) = _$_SalesOrganisationConfigs;
+      required final bool priceOverride,
+      required final bool disablePaymentTermsDisplay,
+      required final bool disableDeliveryDate,
+      required final bool enableBillTo}) = _$_SalesOrganisationConfigs;
   const _SalesOrganisationConfigs._() : super._();
 
   @override
@@ -718,6 +776,12 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   bool get enableListPrice;
   @override
   bool get priceOverride;
+  @override
+  bool get disablePaymentTermsDisplay;
+  @override
+  bool get disableDeliveryDate;
+  @override
+  bool get enableBillTo;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsCopyWith<_$_SalesOrganisationConfigs>
