@@ -10,7 +10,6 @@ import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_dto.dart';
 
-
 class OrderHistoryRemoteDataSource {
   HttpService httpService;
   OrderHistoryQueryMutation orderHistoryQueryMutation;
@@ -49,17 +48,15 @@ class OrderHistoryRemoteDataSource {
         'first': pageSize,
         'after': offset,
         'orderBy': orderBy,
-        'fromDate': fromDate ,   //'20220906',
-        'toDate':  toDate,   //'20221008',
+        'fromDate': fromDate, //'20220906',
+        'toDate': toDate, //'20221008',
         'sort': sort,
-        'orderNumber': orderId,
-        'poReference': poNumber,
-        'materialSearch': materialSearch,
-        'principalSearch': principalSearch,
+        'orderNumber': orderId.isEmpty ? null : orderId,
+        'poReference': poNumber.isEmpty ? null : poNumber,
+        'materialSearch': materialSearch.isEmpty ? null : materialSearch,
+        'principalSearch': principalSearch.isEmpty ? null : principalSearch,
         'companyName': companyName,
       };
-
-     
 
       final res = await httpService.request(
         method: 'POST',
@@ -69,7 +66,7 @@ class OrderHistoryRemoteDataSource {
           'variables': variables,
         }),
       );
-     
+
       _orderHistoryExceptionChecker(res: res);
 
       if (res.data['data']['orderHistoryV2']['OrderHistory'].isEmpty) {
@@ -110,10 +107,10 @@ class OrderHistoryRemoteDataSource {
         'fromDate': fromDate,
         'toDate': toDate,
         'sort': sort,
-        'orderNumber': orderId,
-        'poReference': poNumber,
-        'materialSearch': materialSearch,
-        'principalSearch': principalSearch,
+        'orderNumber': orderId.isEmpty ? null : orderId,
+        'poReference': poNumber.isEmpty ? null : poNumber,
+        'materialSearch': materialSearch.isEmpty ? null : materialSearch,
+        'principalSearch': principalSearch.isEmpty ? null : principalSearch,
         'userName': userName,
         'language': language,
       };

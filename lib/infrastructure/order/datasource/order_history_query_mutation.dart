@@ -11,10 +11,10 @@ class OrderHistoryQueryMutation {
       \$first: Int!,
       \$after: Int!,
       \$sort:String!
-      \$orderNumber:String! 
-     \$poReference:String!
-     \$materialSearch:String!
-     \$principalSearch:String!
+      \$orderNumber:String
+     \$poReference:String
+     \$materialSearch:String
+     \$principalSearch:String
       )
       {
       orderHistoryV2(
@@ -69,10 +69,10 @@ class OrderHistoryQueryMutation {
       \$soldTo: String!,
       \$userName: String!,
       \$sort:String!
-      \$orderNumber:String! 
-     \$poReference:String!
-     \$materialSearch:String!
-     \$principalSearch:String!
+      \$orderNumber:String
+     \$poReference:String
+     \$materialSearch:String
+     \$principalSearch:String
       ){
        orderHistoryForSalesRepV2(
         orderBy:\$orderBy,
