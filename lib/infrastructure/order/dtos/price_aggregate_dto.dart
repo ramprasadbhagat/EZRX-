@@ -77,6 +77,7 @@ const MaterialDto _emptyConstMaterialDto = MaterialDto(
   taxes: [],
   therapeuticClass: '',
   unitOfMeasurement: '',
+  isFOCMaterial: false,
 );
 
 const PriceDto _emptyPriceDto = PriceDto(

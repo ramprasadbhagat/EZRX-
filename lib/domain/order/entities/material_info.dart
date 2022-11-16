@@ -28,6 +28,7 @@ class MaterialInfo with _$MaterialInfo {
     required MaterialTaxClassification taxClassification,
     required List<String> taxes,
     required List<Bundle> bundles,
+    required bool isFOCMaterial,
   }) = _MaterialInfo;
 
   factory MaterialInfo.empty() => MaterialInfo(
@@ -50,5 +51,6 @@ class MaterialInfo with _$MaterialInfo {
         taxes: [],
         defaultMaterialDescription: '',
         bundles: [],
+        isFOCMaterial : false,
       );
 }

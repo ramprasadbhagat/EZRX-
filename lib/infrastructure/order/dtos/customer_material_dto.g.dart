@@ -32,6 +32,7 @@ _$_CustomerMaterialDto _$$_CustomerMaterialDtoFromJson(
       unitOfMeasurement: json['UnitOfMeasurement'] as String? ?? '',
       materialGroup2: json['MaterialGroup2'] as String? ?? '',
       materialGroup4: json['MaterialGroup4'] as String? ?? '',
+      isFOCMaterial: json['IsFOCMaterial'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_CustomerMaterialDtoToJson(
@@ -56,4 +57,5 @@ Map<String, dynamic> _$$_CustomerMaterialDtoToJson(
       'UnitOfMeasurement': instance.unitOfMeasurement,
       'MaterialGroup2': instance.materialGroup2,
       'MaterialGroup4': instance.materialGroup4,
+      'IsFOCMaterial': instance.isFOCMaterial,
     };

@@ -3,6 +3,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/presentation/account/ship_to_search.dart';
@@ -22,6 +23,9 @@ class CustomerCodeBlocMock
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
+class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
+
+
 class AutoRouterMock extends Mock implements AppRouter {}
 
 enum CustomerCodeVariant { onn, off }
@@ -40,6 +44,8 @@ void main() {
   late CustomerCodeBlocMock customerCodeBlocMock;
   late ShipToCodeBlocMock shipToCodeBlocMock;
   late AppRouter autoRouterMock;
+  late CartBloc cartBlocMock;
+
 
   setUpAll(() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
@@ -51,10 +57,13 @@ void main() {
       customerCodeBlocMock = CustomerCodeBlocMock();
       shipToCodeBlocMock = ShipToCodeBlocMock();
       autoRouterMock = locator<AppRouter>();
+      cartBlocMock = CartBlocMock();
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
       when(() => shipToCodeBlocMock.state)
           .thenReturn(ShipToCodeState.initial());
+      when(() => cartBlocMock.state).thenReturn(CartState.initial());
+
     });
 
     StackRouterScope getScopedWidget() {
@@ -64,6 +73,8 @@ void main() {
           BlocProvider<CustomerCodeBloc>(
               create: (context) => customerCodeBlocMock),
           BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBlocMock),
+          BlocProvider<CartBloc>(
+              create: (context) => cartBlocMock), 
         ],
         child: const ShiptToSearchPage(),
       );

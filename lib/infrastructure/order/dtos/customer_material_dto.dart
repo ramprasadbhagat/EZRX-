@@ -44,6 +44,8 @@ class CustomerMaterialDto with _$CustomerMaterialDto {
         required String materialGroup2,
     @JsonKey(name: 'MaterialGroup4', defaultValue: '')
         required String materialGroup4,
+    @JsonKey(name: 'IsFOCMaterial', defaultValue: false)
+        required bool isFOCMaterial,    
   }) = _CustomerMaterialDto;
 
   MaterialInfo toDomain() => MaterialInfo(
@@ -72,6 +74,7 @@ class CustomerMaterialDto with _$CustomerMaterialDto {
         taxClassification: MaterialTaxClassification(taxClassification),
         taxes: taxes,
         bundles: [],
+        isFOCMaterial: isFOCMaterial,
       );
 
   factory CustomerMaterialDto.fromJson(Map<String, dynamic> json) =>

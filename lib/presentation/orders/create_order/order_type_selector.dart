@@ -1,6 +1,10 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
+import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +38,7 @@ class OrderTypeSelector extends StatelessWidget {
               const SizedBox(
                 height: 8,
               ),
-              OrderTypeSelectorField(
+              _OrderTypeSelectorField(
                 itemList: state.uniqueOrderTypeList,
                 leadingText: 'Order Type',
                 intialDropdownText: 'Please Select Order Type',
@@ -44,7 +48,7 @@ class OrderTypeSelector extends StatelessWidget {
               if (!hideReasonField && state.isReasonFieldEnable)
                 Container(
                   margin: const EdgeInsets.only(top: 12),
-                  child: OrderTypeSelectorField(
+                  child: _OrderTypeSelectorField(
                     itemList: state.reasonList,
                     leadingText: 'Reason',
                     intialDropdownText: 'Please Select Reason',
@@ -64,14 +68,14 @@ class OrderTypeSelector extends StatelessWidget {
   }
 }
 
-class OrderTypeSelectorField extends StatelessWidget {
+class _OrderTypeSelectorField extends StatelessWidget {
   final List<OrderDocumentType> itemList;
   final String leadingText;
   final String intialDropdownText;
   final String dropDownTitle;
   final OrderDocumentTypeState orderDocumentTypeState;
   final bool isReason;
-  const OrderTypeSelectorField({
+  const _OrderTypeSelectorField({
     Key? key,
     required this.itemList,
     required this.leadingText,
@@ -127,45 +131,7 @@ class OrderTypeSelectorField extends StatelessWidget {
                 child: InkWell(
                   onTap: () async => orderDocumentTypeState.isSubmitting
                       ? null
-                      : await showCupertinoModalPopup<void>(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return PlatformAlertDialog(
-                              title: Text(
-                                dropDownTitle,
-                                style: const TextStyle(fontFamily: 'Poppins'),
-                              ),
-                              actions:
-                                  itemList.map<CupertinoActionSheetAction>((i) {
-                                final displayText = isReason
-                                    ? i.displayReasonText
-                                    : i.documentType;
-
-                                return CupertinoActionSheetAction(
-                                  child: Text(
-                                    displayText,
-                                    style: const TextStyle(
-                                      color: ZPColors.primary,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    context.read<OrderDocumentTypeBloc>().add(
-                                          OrderDocumentTypeEvent
-                                              .selectedOrderType(
-                                            selectedOrderType: i,
-                                            isReasonSelected: isReason,
-                                          ),
-                                        );
-                                    Navigator.pop(context);
-                                  },
-                                );
-                              }).toList(),
-                            );
-                          },
-                        ),
+                      : await showOrderDocumentTypedialog(context: context),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -201,4 +167,82 @@ class OrderTypeSelectorField extends StatelessWidget {
       : orderDocumentTypeState.isOrderTypeSelected
           ? orderDocumentTypeState.selectedOrderType.documentType
           : intialDropdownText;
+
+  Future<void> showOrderDocumentTypedialog({
+    required BuildContext context,
+  }) async {
+    await showDialog<void>(
+      context: context,
+      builder: (BuildContext ctx) {
+        return PlatformAlertDialog(
+          title: Text(
+            dropDownTitle,
+            style: const TextStyle(fontFamily: 'Poppins'),
+          ),
+          actions: itemList.map<CupertinoActionSheetAction>((i) {
+            final displayText = isReason ? i.displayReasonText : i.documentType;
+
+            return CupertinoActionSheetAction(
+              child: Text(
+                displayText,
+                style: const TextStyle(
+                  color: ZPColors.primary,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14,
+                ),
+              ),
+              onPressed: () async {
+                Navigator.pop(ctx);
+                final validationText = getValidationText(
+                    orderDocumentTypeState.selectedOrderType,
+                    i,
+                    context.read<CartBloc>().state,);
+                if((context.read<CartBloc>().state.cartItemList.isEmpty ||
+                  validationText.isEmpty)){
+                    context.read<OrderDocumentTypeBloc>().add(
+                      OrderDocumentTypeEvent.selectedOrderType(
+                        selectedOrderType: i,
+                        isReasonSelected: isReason,
+                      ),
+                    );
+                  }else{
+                      ConfirmClearDialog.show(
+                      context: context,
+                      title: validationText.first ,
+                      description: validationText.last,
+                      onCancel: () {context.router.pop();},
+                      onConfirmed: () {
+                        context.read<CartBloc>().add(const CartEvent.clearCart());
+                        context.router.popUntilRouteWithName(MaterialRootRoute.name);
+                        context.read<OrderDocumentTypeBloc>().add(
+                          OrderDocumentTypeEvent.selectedOrderType(
+                            selectedOrderType: i,
+                            isReasonSelected: isReason,
+                          ),
+                        );
+                      },
+                    );
+
+                  }
+               
+              },
+            );
+          }).toList(),
+        );
+      },
+    );
+  }
+}
+
+List<String> getValidationText(OrderDocumentType initial,
+    OrderDocumentType selected, CartState cartState,) {
+  final list = <String>[];
+  if(initial != selected && cartState.showDialog(selected) && cartState.dialogContent.isNotEmpty){
+    list.add('Changing order type to ${selected.documentType}!');
+    list.add(
+      'Your cart includes ${cartState.dialogContent} materials, changing the order type will clear all items in your cart. Please confirm if you want to proceed',);
+  }
+  
+  return list;
 }

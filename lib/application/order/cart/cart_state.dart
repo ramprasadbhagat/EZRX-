@@ -34,4 +34,32 @@ class CartState with _$CartState {
 
   bool get containNonFocMaterial =>
       cartItemList.any((e) => !e.materialInfo.materialGroup4.isFOC);
+
+  bool get containNonFocMaterialOT =>
+      cartItemList.any((e) => !e.materialInfo.isFOCMaterial);
+
+  bool get containSampleMaterial =>
+      cartItemList.any((e) => e.materialInfo.isSampleMaterial);
+
+  bool get containNonSampleMaterial =>
+      cartItemList.any((element) => !element.materialInfo.isSampleMaterial);
+
+  bool get containNonRegularMaterial => cartItemList.any((element) =>
+      !element.materialInfo.isFOCMaterial ||
+      !element.materialInfo.isSampleMaterial);
+
+  String get dialogContent => containNonSampleMaterial
+      ? 'non-sample'
+      : containNonFocMaterialOT
+          ? 'non-FOC'
+          : containNonRegularMaterial
+            ? 'only sample and/or FOC'
+            : '';
+
+  bool showDialog(OrderDocumentType orderType){
+    return orderType.isZPFB ? containNonSampleMaterial
+      : orderType.isZPFC ? containNonFocMaterialOT
+      : orderType.isZPOR ?containNonRegularMaterial
+          : false;
+  }
 }

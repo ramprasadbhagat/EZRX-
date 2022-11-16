@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +24,9 @@ class SalesOrgSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final salesOrgBloc = context.read<SalesOrgBloc>();
+    final cartBloc = context.read<CartBloc>();
+    
     return CustomSelector(
       key: const Key('salesOrgSelect'),
       title: 'Sales Org',
@@ -95,30 +100,37 @@ class SalesOrgSelector extends StatelessWidget {
                       key: Key('salesOrgOption${e.salesOrg.getOrCrash()}'),
                       child: Text(e.salesOrg.fullName),
                       onPressed: () {
-                        ConfirmClearCartDialog.show(
-                          context: context,
-                          skipDialog: (e ==
-                                  context
-                                      .read<SalesOrgBloc>()
-                                      .state
-                                      .salesOrganisation) ||
-                              (context
-                                  .read<CartBloc>()
-                                  .state
-                                  .cartItemList
-                                  .isEmpty),
-                          title: 'Change sales organization'.tr(),
-                          description:
-                              'The progress on your cart is going to be lost. Do you want to proceed?'
-                                  .tr(),
-                          onConfirmed: () {
-                            context.read<SalesOrgBloc>().add(
-                                  SalesOrgEvent.selected(
-                                    salesOrganisation: e,
-                                  ),
-                                );
-                          },
-                        );
+                        if (e != salesOrgBloc.state.salesOrganisation &&
+                            cartBloc.state.cartItemList.isNotEmpty) {
+                          ConfirmClearDialog.show(
+                            context: context,
+                            title: 'Change sales organization'.tr(),
+                            description:
+                                'The progress on your cart is going to be lost. Do you want to proceed?'
+                                    .tr(),
+                            onCancel: () {
+                              context.router.pop();
+                            },
+                            onConfirmed: () {
+                              cartBloc.add(const CartEvent.clearCart());
+                              context.router.popUntilRouteWithName(
+                                  HomeNavigationTabbarRoute.name,);
+                              salesOrgBloc.add(
+                                SalesOrgEvent.selected(
+                                  salesOrganisation: e,
+                                ),
+                              );
+                            },
+                          );
+                        } else {
+                          context.router.popUntilRouteWithName(
+                              HomeNavigationTabbarRoute.name,);
+                          salesOrgBloc.add(
+                            SalesOrgEvent.selected(
+                              salesOrganisation: e,
+                            ),
+                          );
+                        }
                       },
                     ),
                   )

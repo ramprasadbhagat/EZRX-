@@ -38,13 +38,14 @@ class MaterialDtoAdapter extends TypeAdapter<_$_MaterialDto> {
       bundles: fields[17] == null ? [] : (fields[17] as List).cast<BundleDto>(),
       defaultMaterialDescription:
           fields[18] == null ? '' : fields[18] as String,
+      isFOCMaterial: fields[19] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_MaterialDto obj) {
     writer
-      ..writeByte(19)
+      ..writeByte(20)
       ..writeByte(0)
       ..write(obj.materialNumber)
       ..writeByte(1)
@@ -79,6 +80,8 @@ class MaterialDtoAdapter extends TypeAdapter<_$_MaterialDto> {
       ..write(obj.hasMandatoryTenderContract)
       ..writeByte(18)
       ..write(obj.defaultMaterialDescription)
+      ..writeByte(19)
+      ..write(obj.isFOCMaterial)
       ..writeByte(16)
       ..write(obj.taxes)
       ..writeByte(17)
@@ -129,6 +132,7 @@ _$_MaterialDto _$$_MaterialDtoFromJson(Map<String, dynamic> json) =>
           [],
       defaultMaterialDescription:
           json['defaultMaterialDescription'] as String? ?? '',
+      isFOCMaterial: json['isFOCMaterial'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_MaterialDtoToJson(_$_MaterialDto instance) =>
@@ -152,4 +156,5 @@ Map<String, dynamic> _$$_MaterialDtoToJson(_$_MaterialDto instance) =>
       'taxes': instance.taxes,
       'bundles': instance.bundles,
       'defaultMaterialDescription': instance.defaultMaterialDescription,
+      'isFOCMaterial': instance.isFOCMaterial,
     };

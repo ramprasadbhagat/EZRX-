@@ -73,6 +73,7 @@ class MaterialItem with _$MaterialItem {
       taxes: [],
       defaultMaterialDescription: defaultMaterialDescription,
       bundles: [],
+      isFOCMaterial: false,
     );
   }
 

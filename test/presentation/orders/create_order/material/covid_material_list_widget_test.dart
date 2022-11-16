@@ -307,6 +307,7 @@ void main() {
             taxes: ['5'],
             bundles: [],
             defaultMaterialDescription: '',
+            isFOCMaterial: false
           )
         ],
       ));
@@ -385,6 +386,7 @@ void main() {
             taxes: ['5'],
             bundles: [],
             defaultMaterialDescription: '',
+            isFOCMaterial: false
           )
         ],
       ));

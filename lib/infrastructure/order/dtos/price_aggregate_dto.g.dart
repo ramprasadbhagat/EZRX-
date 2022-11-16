@@ -37,7 +37,8 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
               taxClassification: '',
               taxes: [],
               therapeuticClass: '',
-              unitOfMeasurement: '')
+              unitOfMeasurement: '',
+              isFOCMaterial: false)
           : fields[0] as MaterialDto,
       quantity: fields[1] == null ? 1 : fields[1] as int,
       priceDto: fields[2] == null

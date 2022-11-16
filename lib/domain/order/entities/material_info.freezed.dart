@@ -35,6 +35,7 @@ mixin _$MaterialInfo {
       throw _privateConstructorUsedError;
   List<String> get taxes => throw _privateConstructorUsedError;
   List<Bundle> get bundles => throw _privateConstructorUsedError;
+  bool get isFOCMaterial => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialInfoCopyWith<MaterialInfo> get copyWith =>
@@ -65,7 +66,8 @@ abstract class $MaterialInfoCopyWith<$Res> {
       bool hasMandatoryTenderContract,
       MaterialTaxClassification taxClassification,
       List<String> taxes,
-      List<Bundle> bundles});
+      List<Bundle> bundles,
+      bool isFOCMaterial});
 
   $PrincipalDataCopyWith<$Res> get principalData;
 }
@@ -101,6 +103,7 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
     Object? taxClassification = null,
     Object? taxes = null,
     Object? bundles = null,
+    Object? isFOCMaterial = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -175,6 +178,10 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
           ? _value.bundles
           : bundles // ignore: cast_nullable_to_non_nullable
               as List<Bundle>,
+      isFOCMaterial: null == isFOCMaterial
+          ? _value.isFOCMaterial
+          : isFOCMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -213,7 +220,8 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
       bool hasMandatoryTenderContract,
       MaterialTaxClassification taxClassification,
       List<String> taxes,
-      List<Bundle> bundles});
+      List<Bundle> bundles,
+      bool isFOCMaterial});
 
   @override
   $PrincipalDataCopyWith<$Res> get principalData;
@@ -248,6 +256,7 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
     Object? taxClassification = null,
     Object? taxes = null,
     Object? bundles = null,
+    Object? isFOCMaterial = null,
   }) {
     return _then(_$_MaterialInfo(
       materialNumber: null == materialNumber
@@ -322,6 +331,10 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
           ? _value._bundles
           : bundles // ignore: cast_nullable_to_non_nullable
               as List<Bundle>,
+      isFOCMaterial: null == isFOCMaterial
+          ? _value.isFOCMaterial
+          : isFOCMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -347,7 +360,8 @@ class _$_MaterialInfo extends _MaterialInfo {
       required this.hasMandatoryTenderContract,
       required this.taxClassification,
       required final List<String> taxes,
-      required final List<Bundle> bundles})
+      required final List<Bundle> bundles,
+      required this.isFOCMaterial})
       : _taxes = taxes,
         _bundles = bundles,
         super._();
@@ -399,8 +413,11 @@ class _$_MaterialInfo extends _MaterialInfo {
   }
 
   @override
+  final bool isFOCMaterial;
+
+  @override
   String toString() {
-    return 'MaterialInfo(materialNumber: $materialNumber, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, principalData: $principalData, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hidePrice: $hidePrice, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxClassification: $taxClassification, taxes: $taxes, bundles: $bundles)';
+    return 'MaterialInfo(materialNumber: $materialNumber, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, principalData: $principalData, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hidePrice: $hidePrice, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxClassification: $taxClassification, taxes: $taxes, bundles: $bundles, isFOCMaterial: $isFOCMaterial)';
   }
 
   @override
@@ -445,30 +462,34 @@ class _$_MaterialInfo extends _MaterialInfo {
             (identical(other.taxClassification, taxClassification) ||
                 other.taxClassification == taxClassification) &&
             const DeepCollectionEquality().equals(other._taxes, _taxes) &&
-            const DeepCollectionEquality().equals(other._bundles, _bundles));
+            const DeepCollectionEquality().equals(other._bundles, _bundles) &&
+            (identical(other.isFOCMaterial, isFOCMaterial) ||
+                other.isFOCMaterial == isFOCMaterial));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      materialNumber,
-      materialDescription,
-      defaultMaterialDescription,
-      governmentMaterialCode,
-      therapeuticClass,
-      itemBrand,
-      principalData,
-      itemRegistrationNumber,
-      unitOfMeasurement,
-      materialGroup2,
-      materialGroup4,
-      isSampleMaterial,
-      hidePrice,
-      hasValidTenderContract,
-      hasMandatoryTenderContract,
-      taxClassification,
-      const DeepCollectionEquality().hash(_taxes),
-      const DeepCollectionEquality().hash(_bundles));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        materialNumber,
+        materialDescription,
+        defaultMaterialDescription,
+        governmentMaterialCode,
+        therapeuticClass,
+        itemBrand,
+        principalData,
+        itemRegistrationNumber,
+        unitOfMeasurement,
+        materialGroup2,
+        materialGroup4,
+        isSampleMaterial,
+        hidePrice,
+        hasValidTenderContract,
+        hasMandatoryTenderContract,
+        taxClassification,
+        const DeepCollectionEquality().hash(_taxes),
+        const DeepCollectionEquality().hash(_bundles),
+        isFOCMaterial
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -496,7 +517,8 @@ abstract class _MaterialInfo extends MaterialInfo {
       required final bool hasMandatoryTenderContract,
       required final MaterialTaxClassification taxClassification,
       required final List<String> taxes,
-      required final List<Bundle> bundles}) = _$_MaterialInfo;
+      required final List<Bundle> bundles,
+      required final bool isFOCMaterial}) = _$_MaterialInfo;
   const _MaterialInfo._() : super._();
 
   @override
@@ -535,6 +557,8 @@ abstract class _MaterialInfo extends MaterialInfo {
   List<String> get taxes;
   @override
   List<Bundle> get bundles;
+  @override
+  bool get isFOCMaterial;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialInfoCopyWith<_$_MaterialInfo> get copyWith =>

@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
@@ -26,6 +27,8 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
+class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
+
 enum SalesOrgVariant { onn, off }
 
 enum CustomerCodeVariant { onn, off }
@@ -46,6 +49,7 @@ void main() {
   late CustomerCodeBloc customerCodeBlocMock;
   late AppRouter autoRouterMock;
   late List<CustomerCodeInfo> customerCodeListMock;
+  late CartBloc cartBlocMock;
 
   setUpAll(() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
@@ -57,6 +61,7 @@ void main() {
       userBlocMock = UserBlocMock();
       salesOrgBlocMock = SalesOrgBlocMock();
       customerCodeBlocMock = CustomerCodeBlocMock();
+      cartBlocMock = CartBlocMock();
       autoRouterMock = locator<AppRouter>();
       customerCodeListMock =
           await CustomerCodeLocalDataSource().getCustomerCodeList();
@@ -64,6 +69,7 @@ void main() {
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
+      when(() => cartBlocMock.state).thenReturn(CartState.initial());
     });
 
     StackRouterScope getScopedWidget() {
@@ -74,6 +80,8 @@ void main() {
           BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
           BlocProvider<CustomerCodeBloc>(
               create: (context) => customerCodeBlocMock),
+          BlocProvider<CartBloc>(
+              create: (context) => cartBlocMock),    
         ],
         child: const CustomerSearchPage(),
       );

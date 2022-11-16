@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
@@ -8,6 +9,7 @@ import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/custom_label.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -217,6 +219,9 @@ class _ListContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final shipToBloc = context.read<ShipToCodeBloc>();
+    final cartBloc = context.read<CartBloc>();
+    
     return Column(
       children: [
         ListTile(
@@ -255,23 +260,37 @@ class _ListContent extends StatelessWidget {
             ],
           ),
           onTap: () {
-            ConfirmClearCartDialog.show(
-              context: context,
-              skipDialog: (shipToInfo ==
-                      context.read<ShipToCodeBloc>().state.shipToInfo) ||
-                  (context.read<CartBloc>().state.cartItemList.isEmpty),
-              title: 'Change Shipping Address'.tr(),
-              description:
-                  'The progress on your cart is going to be lost. Do you want to proceed?'
-                      .tr(),
-              onConfirmed: () {
-                context.read<ShipToCodeBloc>().add(
-                      ShipToCodeEvent.selected(
-                        shipToInfo: shipToInfo,
-                      ),
-                    );
-              },
-            );
+            if (shipToInfo != shipToBloc.state.shipToInfo &&
+                cartBloc.state.cartItemList.isNotEmpty) {
+              ConfirmClearDialog.show(
+                context: context,
+                title: 'Change Shipping Address'.tr(),
+                description:
+                    'The progress on your cart is going to be lost. Do you want to proceed?'
+                        .tr(),
+                onCancel: () {
+                  context.router.pop();
+                },
+                onConfirmed: () {
+                  cartBloc.add(const CartEvent.clearCart());
+                  context.router
+                      .popUntilRouteWithName(HomeNavigationTabbarRoute.name);
+                  shipToBloc.add(
+                        ShipToCodeEvent.selected(
+                          shipToInfo: shipToInfo,
+                        ),
+                      );
+                },
+              );
+            } else {
+              context.router
+                  .popUntilRouteWithName(HomeNavigationTabbarRoute.name);
+              context.read<ShipToCodeBloc>().add(
+                    ShipToCodeEvent.selected(
+                      shipToInfo: shipToInfo,
+                    ),
+                  );
+            }
           },
         ),
         const Divider(

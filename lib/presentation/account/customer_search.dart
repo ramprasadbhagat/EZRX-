@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -13,6 +14,8 @@ import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 class CustomerSearchPage extends StatefulWidget {
   const CustomerSearchPage({Key? key}) : super(key: key);
@@ -255,6 +258,9 @@ class _ListContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final customerBloc = context.read<CustomerCodeBloc>();
+    final cartBloc = context.read<CartBloc>();
+
     return Column(
       children: [
         ListTile(
@@ -290,26 +296,37 @@ class _ListContent extends StatelessWidget {
             ],
           ),
           onTap: () {
-            ConfirmClearCartDialog.show(
-              context: context,
-              skipDialog: (customerCodeInfo ==
-                      context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo) ||
-                  (context.read<CartBloc>().state.cartItemList.isEmpty),
-              title: 'Change Customer Code'.tr(),
-              description:
-                  'The progress on your cart is going to be lost. Do you want to proceed?'
-                      .tr(),
-              onConfirmed: () {
-                context.read<CustomerCodeBloc>().add(
-                      CustomerCodeEvent.selected(
-                        customerCodeInfo: customerCodeInfo,
-                      ),
-                    );
-              },
-            );
+            if (customerCodeInfo != customerBloc.state.customerCodeInfo &&
+                cartBloc.state.cartItemList.isNotEmpty) {
+              ConfirmClearDialog.show(
+                context: context,
+                onCancel: () {
+                  context.router.pop();
+                },
+                title: 'Change Customer Code'.tr(),
+                description:
+                    'The progress on your cart is going to be lost. Do you want to proceed?'
+                        .tr(),
+                onConfirmed: () {
+                  context.read<CartBloc>().add(const CartEvent.clearCart());
+                  context.router
+                      .popUntilRouteWithName(HomeNavigationTabbarRoute.name);
+                  context.read<CustomerCodeBloc>().add(
+                        CustomerCodeEvent.selected(
+                          customerCodeInfo: customerCodeInfo,
+                        ),
+                      );
+                },
+              );
+            } else {
+              context.router
+                  .popUntilRouteWithName(HomeNavigationTabbarRoute.name);
+              customerBloc.add(
+                CustomerCodeEvent.selected(
+                  customerCodeInfo: customerCodeInfo,
+                ),
+              );
+            }
           },
         ),
         const Divider(

@@ -129,6 +129,7 @@ class MaterialsWithMetaQuery {
           hidePrice
           hasValidTenderContract
           hasMandatoryTenderContract
+          isFOCMaterial
         }
       }
     }

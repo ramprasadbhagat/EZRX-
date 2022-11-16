@@ -49,6 +49,7 @@ class MaterialBundleDto with _$MaterialBundleDto {
       hasMandatoryTenderContract: false,
       taxes: [],
       defaultMaterialDescription: '',
+      isFOCMaterial: false,
     );
   }
 

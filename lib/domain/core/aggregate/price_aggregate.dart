@@ -139,6 +139,7 @@ class PriceAggregate with _$PriceAggregate {
     return '${salesOrgConfig.currency.code} ${result.toStringAsFixed(2)}';
   }
 
+  MaterialInfo get getMaterialInfo => materialInfo;
   bool get isDefaultMDEnabled {
     return salesOrgConfig.enableDefaultMD &&
         materialInfo.defaultMaterialDescription.isNotEmpty;
