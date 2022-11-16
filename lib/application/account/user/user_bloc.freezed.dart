@@ -28,10 +28,10 @@ mixin _$UserEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function()? accptTnc,
-    TResult Function(String languagePreference, bool emailNotifications)?
+    TResult? Function()? initialized,
+    TResult? Function()? fetch,
+    TResult? Function()? accptTnc,
+    TResult? Function(String languagePreference, bool emailNotifications)?
         updateNotificationSettings,
   }) =>
       throw _privateConstructorUsedError;
@@ -56,10 +56,10 @@ mixin _$UserEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_AccptTnc value)? accptTnc,
-    TResult Function(_UpdateNotificationSettings value)?
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AccptTnc value)? accptTnc,
+    TResult? Function(_UpdateNotificationSettings value)?
         updateNotificationSettings,
   }) =>
       throw _privateConstructorUsedError;
@@ -78,16 +78,18 @@ mixin _$UserEvent {
 /// @nodoc
 abstract class $UserEventCopyWith<$Res> {
   factory $UserEventCopyWith(UserEvent value, $Res Function(UserEvent) then) =
-      _$UserEventCopyWithImpl<$Res>;
+      _$UserEventCopyWithImpl<$Res, UserEvent>;
 }
 
 /// @nodoc
-class _$UserEventCopyWithImpl<$Res> implements $UserEventCopyWith<$Res> {
+class _$UserEventCopyWithImpl<$Res, $Val extends UserEvent>
+    implements $UserEventCopyWith<$Res> {
   _$UserEventCopyWithImpl(this._value, this._then);
 
-  final UserEvent _value;
   // ignore: unused_field
-  final $Res Function(UserEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -98,14 +100,12 @@ abstract class _$$_InitializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res> extends _$UserEventCopyWithImpl<$Res>
+class __$$_InitializedCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$_Initialized>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, (v) => _then(v as _$_Initialized));
-
-  @override
-  _$_Initialized get _value => super._value as _$_Initialized;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -143,10 +143,10 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function()? accptTnc,
-    TResult Function(String languagePreference, bool emailNotifications)?
+    TResult? Function()? initialized,
+    TResult? Function()? fetch,
+    TResult? Function()? accptTnc,
+    TResult? Function(String languagePreference, bool emailNotifications)?
         updateNotificationSettings,
   }) {
     return initialized?.call();
@@ -183,10 +183,10 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_AccptTnc value)? accptTnc,
-    TResult Function(_UpdateNotificationSettings value)?
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AccptTnc value)? accptTnc,
+    TResult? Function(_UpdateNotificationSettings value)?
         updateNotificationSettings,
   }) {
     return initialized?.call(this);
@@ -220,13 +220,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res> extends _$UserEventCopyWithImpl<$Res>
+class __$$_FetchCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$_Fetch>
     implements _$$_FetchCopyWith<$Res> {
   __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
-      : super(_value, (v) => _then(v as _$_Fetch));
-
-  @override
-  _$_Fetch get _value => super._value as _$_Fetch;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -264,10 +262,10 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function()? accptTnc,
-    TResult Function(String languagePreference, bool emailNotifications)?
+    TResult? Function()? initialized,
+    TResult? Function()? fetch,
+    TResult? Function()? accptTnc,
+    TResult? Function(String languagePreference, bool emailNotifications)?
         updateNotificationSettings,
   }) {
     return fetch?.call();
@@ -304,10 +302,10 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_AccptTnc value)? accptTnc,
-    TResult Function(_UpdateNotificationSettings value)?
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AccptTnc value)? accptTnc,
+    TResult? Function(_UpdateNotificationSettings value)?
         updateNotificationSettings,
   }) {
     return fetch?.call(this);
@@ -342,14 +340,12 @@ abstract class _$$_AccptTncCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_AccptTncCopyWithImpl<$Res> extends _$UserEventCopyWithImpl<$Res>
+class __$$_AccptTncCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$_AccptTnc>
     implements _$$_AccptTncCopyWith<$Res> {
   __$$_AccptTncCopyWithImpl(
       _$_AccptTnc _value, $Res Function(_$_AccptTnc) _then)
-      : super(_value, (v) => _then(v as _$_AccptTnc));
-
-  @override
-  _$_AccptTnc get _value => super._value as _$_AccptTnc;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -387,10 +383,10 @@ class _$_AccptTnc implements _AccptTnc {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function()? accptTnc,
-    TResult Function(String languagePreference, bool emailNotifications)?
+    TResult? Function()? initialized,
+    TResult? Function()? fetch,
+    TResult? Function()? accptTnc,
+    TResult? Function(String languagePreference, bool emailNotifications)?
         updateNotificationSettings,
   }) {
     return accptTnc?.call();
@@ -427,10 +423,10 @@ class _$_AccptTnc implements _AccptTnc {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_AccptTnc value)? accptTnc,
-    TResult Function(_UpdateNotificationSettings value)?
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AccptTnc value)? accptTnc,
+    TResult? Function(_UpdateNotificationSettings value)?
         updateNotificationSettings,
   }) {
     return accptTnc?.call(this);
@@ -463,33 +459,31 @@ abstract class _$$_UpdateNotificationSettingsCopyWith<$Res> {
           _$_UpdateNotificationSettings value,
           $Res Function(_$_UpdateNotificationSettings) then) =
       __$$_UpdateNotificationSettingsCopyWithImpl<$Res>;
+  @useResult
   $Res call({String languagePreference, bool emailNotifications});
 }
 
 /// @nodoc
 class __$$_UpdateNotificationSettingsCopyWithImpl<$Res>
-    extends _$UserEventCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$_UpdateNotificationSettings>
     implements _$$_UpdateNotificationSettingsCopyWith<$Res> {
   __$$_UpdateNotificationSettingsCopyWithImpl(
       _$_UpdateNotificationSettings _value,
       $Res Function(_$_UpdateNotificationSettings) _then)
-      : super(_value, (v) => _then(v as _$_UpdateNotificationSettings));
+      : super(_value, _then);
 
-  @override
-  _$_UpdateNotificationSettings get _value =>
-      super._value as _$_UpdateNotificationSettings;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? languagePreference = freezed,
-    Object? emailNotifications = freezed,
+    Object? languagePreference = null,
+    Object? emailNotifications = null,
   }) {
     return _then(_$_UpdateNotificationSettings(
-      languagePreference: languagePreference == freezed
+      languagePreference: null == languagePreference
           ? _value.languagePreference
           : languagePreference // ignore: cast_nullable_to_non_nullable
               as String,
-      emailNotifications: emailNotifications == freezed
+      emailNotifications: null == emailNotifications
           ? _value.emailNotifications
           : emailNotifications // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -518,20 +512,19 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UpdateNotificationSettings &&
-            const DeepCollectionEquality()
-                .equals(other.languagePreference, languagePreference) &&
-            const DeepCollectionEquality()
-                .equals(other.emailNotifications, emailNotifications));
+            (identical(other.languagePreference, languagePreference) ||
+                other.languagePreference == languagePreference) &&
+            (identical(other.emailNotifications, emailNotifications) ||
+                other.emailNotifications == emailNotifications));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(languagePreference),
-      const DeepCollectionEquality().hash(emailNotifications));
+  int get hashCode =>
+      Object.hash(runtimeType, languagePreference, emailNotifications);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UpdateNotificationSettingsCopyWith<_$_UpdateNotificationSettings>
       get copyWith => __$$_UpdateNotificationSettingsCopyWithImpl<
           _$_UpdateNotificationSettings>(this, _$identity);
@@ -552,10 +545,10 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? fetch,
-    TResult Function()? accptTnc,
-    TResult Function(String languagePreference, bool emailNotifications)?
+    TResult? Function()? initialized,
+    TResult? Function()? fetch,
+    TResult? Function()? accptTnc,
+    TResult? Function(String languagePreference, bool emailNotifications)?
         updateNotificationSettings,
   }) {
     return updateNotificationSettings?.call(
@@ -593,10 +586,10 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_AccptTnc value)? accptTnc,
-    TResult Function(_UpdateNotificationSettings value)?
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AccptTnc value)? accptTnc,
+    TResult? Function(_UpdateNotificationSettings value)?
         updateNotificationSettings,
   }) {
     return updateNotificationSettings?.call(this);
@@ -645,7 +638,8 @@ mixin _$UserState {
 /// @nodoc
 abstract class $UserStateCopyWith<$Res> {
   factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
-      _$UserStateCopyWithImpl<$Res>;
+      _$UserStateCopyWithImpl<$Res, UserState>;
+  @useResult
   $Res call(
       {User user,
       Option<Either<ApiFailure, dynamic>> userFailureOrSuccessOption});
@@ -654,34 +648,38 @@ abstract class $UserStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserStateCopyWithImpl<$Res> implements $UserStateCopyWith<$Res> {
+class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
+    implements $UserStateCopyWith<$Res> {
   _$UserStateCopyWithImpl(this._value, this._then);
 
-  final UserState _value;
   // ignore: unused_field
-  final $Res Function(UserState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
-    Object? userFailureOrSuccessOption = freezed,
+    Object? user = null,
+    Object? userFailureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
-      user: user == freezed
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      userFailureOrSuccessOption: userFailureOrSuccessOption == freezed
+      userFailureOrSuccessOption: null == userFailureOrSuccessOption
           ? _value.userFailureOrSuccessOption
           : userFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
+      return _then(_value.copyWith(user: value) as $Val);
     });
   }
 }
@@ -692,6 +690,7 @@ abstract class _$$_UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
           _$_UserState value, $Res Function(_$_UserState) then) =
       __$$_UserStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {User user,
       Option<Either<ApiFailure, dynamic>> userFailureOrSuccessOption});
@@ -701,26 +700,25 @@ abstract class _$$_UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UserStateCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
+class __$$_UserStateCopyWithImpl<$Res>
+    extends _$UserStateCopyWithImpl<$Res, _$_UserState>
     implements _$$_UserStateCopyWith<$Res> {
   __$$_UserStateCopyWithImpl(
       _$_UserState _value, $Res Function(_$_UserState) _then)
-      : super(_value, (v) => _then(v as _$_UserState));
+      : super(_value, _then);
 
-  @override
-  _$_UserState get _value => super._value as _$_UserState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
-    Object? userFailureOrSuccessOption = freezed,
+    Object? user = null,
+    Object? userFailureOrSuccessOption = null,
   }) {
     return _then(_$_UserState(
-      user: user == freezed
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      userFailureOrSuccessOption: userFailureOrSuccessOption == freezed
+      userFailureOrSuccessOption: null == userFailureOrSuccessOption
           ? _value.userFailureOrSuccessOption
           : userFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
@@ -750,19 +748,20 @@ class _$_UserState extends _UserState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserState &&
-            const DeepCollectionEquality().equals(other.user, user) &&
-            const DeepCollectionEquality().equals(
-                other.userFailureOrSuccessOption, userFailureOrSuccessOption));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.userFailureOrSuccessOption,
+                    userFailureOrSuccessOption) ||
+                other.userFailureOrSuccessOption ==
+                    userFailureOrSuccessOption));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(user),
-      const DeepCollectionEquality().hash(userFailureOrSuccessOption));
+  int get hashCode =>
+      Object.hash(runtimeType, user, userFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UserStateCopyWith<_$_UserState> get copyWith =>
       __$$_UserStateCopyWithImpl<_$_UserState>(this, _$identity);
 }

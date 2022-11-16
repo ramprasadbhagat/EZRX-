@@ -73,7 +73,8 @@ mixin _$CustomerCodeDto {
 abstract class $CustomerCodeDtoCopyWith<$Res> {
   factory $CustomerCodeDtoCopyWith(
           CustomerCodeDto value, $Res Function(CustomerCodeDto) then) =
-      _$CustomerCodeDtoCopyWithImpl<$Res>;
+      _$CustomerCodeDtoCopyWithImpl<$Res, CustomerCodeDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'customerCodeSoldTo')
           String customerCodeSoldTo,
@@ -120,124 +121,126 @@ abstract class $CustomerCodeDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CustomerCodeDtoCopyWithImpl<$Res>
+class _$CustomerCodeDtoCopyWithImpl<$Res, $Val extends CustomerCodeDto>
     implements $CustomerCodeDtoCopyWith<$Res> {
   _$CustomerCodeDtoCopyWithImpl(this._value, this._then);
 
-  final CustomerCodeDto _value;
   // ignore: unused_field
-  final $Res Function(CustomerCodeDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? customerCodeSoldTo = freezed,
-    Object? name1 = freezed,
-    Object? name2 = freezed,
-    Object? name3 = freezed,
-    Object? name4 = freezed,
-    Object? status = freezed,
-    Object? street1 = freezed,
-    Object? street2 = freezed,
-    Object? street3 = freezed,
-    Object? street4 = freezed,
-    Object? street5 = freezed,
-    Object? postalCode = freezed,
-    Object? customerClassification = freezed,
-    Object? customerLocalGroup = freezed,
-    Object? paymentTermDescription = freezed,
-    Object? shipToInfos = freezed,
-    Object? billToInfos = freezed,
-    Object? customerAttr7 = freezed,
-    Object? customerGrp4 = freezed,
-    Object? region = freezed,
-    Object? emailAddresses = freezed,
+    Object? customerCodeSoldTo = null,
+    Object? name1 = null,
+    Object? name2 = null,
+    Object? name3 = null,
+    Object? name4 = null,
+    Object? status = null,
+    Object? street1 = null,
+    Object? street2 = null,
+    Object? street3 = null,
+    Object? street4 = null,
+    Object? street5 = null,
+    Object? postalCode = null,
+    Object? customerClassification = null,
+    Object? customerLocalGroup = null,
+    Object? paymentTermDescription = null,
+    Object? shipToInfos = null,
+    Object? billToInfos = null,
+    Object? customerAttr7 = null,
+    Object? customerGrp4 = null,
+    Object? region = null,
+    Object? emailAddresses = null,
   }) {
     return _then(_value.copyWith(
-      customerCodeSoldTo: customerCodeSoldTo == freezed
+      customerCodeSoldTo: null == customerCodeSoldTo
           ? _value.customerCodeSoldTo
           : customerCodeSoldTo // ignore: cast_nullable_to_non_nullable
               as String,
-      name1: name1 == freezed
+      name1: null == name1
           ? _value.name1
           : name1 // ignore: cast_nullable_to_non_nullable
               as String,
-      name2: name2 == freezed
+      name2: null == name2
           ? _value.name2
           : name2 // ignore: cast_nullable_to_non_nullable
               as String,
-      name3: name3 == freezed
+      name3: null == name3
           ? _value.name3
           : name3 // ignore: cast_nullable_to_non_nullable
               as String,
-      name4: name4 == freezed
+      name4: null == name4
           ? _value.name4
           : name4 // ignore: cast_nullable_to_non_nullable
               as String,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      street1: street1 == freezed
+      street1: null == street1
           ? _value.street1
           : street1 // ignore: cast_nullable_to_non_nullable
               as String,
-      street2: street2 == freezed
+      street2: null == street2
           ? _value.street2
           : street2 // ignore: cast_nullable_to_non_nullable
               as String,
-      street3: street3 == freezed
+      street3: null == street3
           ? _value.street3
           : street3 // ignore: cast_nullable_to_non_nullable
               as String,
-      street4: street4 == freezed
+      street4: null == street4
           ? _value.street4
           : street4 // ignore: cast_nullable_to_non_nullable
               as String,
-      street5: street5 == freezed
+      street5: null == street5
           ? _value.street5
           : street5 // ignore: cast_nullable_to_non_nullable
               as String,
-      postalCode: postalCode == freezed
+      postalCode: null == postalCode
           ? _value.postalCode
           : postalCode // ignore: cast_nullable_to_non_nullable
               as String,
-      customerClassification: customerClassification == freezed
+      customerClassification: null == customerClassification
           ? _value.customerClassification
           : customerClassification // ignore: cast_nullable_to_non_nullable
               as String,
-      customerLocalGroup: customerLocalGroup == freezed
+      customerLocalGroup: null == customerLocalGroup
           ? _value.customerLocalGroup
           : customerLocalGroup // ignore: cast_nullable_to_non_nullable
               as String,
-      paymentTermDescription: paymentTermDescription == freezed
+      paymentTermDescription: null == paymentTermDescription
           ? _value.paymentTermDescription
           : paymentTermDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      shipToInfos: shipToInfos == freezed
+      shipToInfos: null == shipToInfos
           ? _value.shipToInfos
           : shipToInfos // ignore: cast_nullable_to_non_nullable
               as List<ShipToDto>,
-      billToInfos: billToInfos == freezed
+      billToInfos: null == billToInfos
           ? _value.billToInfos
           : billToInfos // ignore: cast_nullable_to_non_nullable
               as List<BillToDto>,
-      customerAttr7: customerAttr7 == freezed
+      customerAttr7: null == customerAttr7
           ? _value.customerAttr7
           : customerAttr7 // ignore: cast_nullable_to_non_nullable
               as String,
-      customerGrp4: customerGrp4 == freezed
+      customerGrp4: null == customerGrp4
           ? _value.customerGrp4
           : customerGrp4 // ignore: cast_nullable_to_non_nullable
               as String,
-      region: region == freezed
+      region: null == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
               as String,
-      emailAddresses: emailAddresses == freezed
+      emailAddresses: null == emailAddresses
           ? _value.emailAddresses
           : emailAddresses // ignore: cast_nullable_to_non_nullable
               as List<String>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -248,6 +251,7 @@ abstract class _$$_CustomerCodeDtoCopyWith<$Res>
           _$_CustomerCodeDto value, $Res Function(_$_CustomerCodeDto) then) =
       __$$_CustomerCodeDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'customerCodeSoldTo')
           String customerCodeSoldTo,
@@ -295,121 +299,119 @@ abstract class _$$_CustomerCodeDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_CustomerCodeDtoCopyWithImpl<$Res>
-    extends _$CustomerCodeDtoCopyWithImpl<$Res>
+    extends _$CustomerCodeDtoCopyWithImpl<$Res, _$_CustomerCodeDto>
     implements _$$_CustomerCodeDtoCopyWith<$Res> {
   __$$_CustomerCodeDtoCopyWithImpl(
       _$_CustomerCodeDto _value, $Res Function(_$_CustomerCodeDto) _then)
-      : super(_value, (v) => _then(v as _$_CustomerCodeDto));
+      : super(_value, _then);
 
-  @override
-  _$_CustomerCodeDto get _value => super._value as _$_CustomerCodeDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? customerCodeSoldTo = freezed,
-    Object? name1 = freezed,
-    Object? name2 = freezed,
-    Object? name3 = freezed,
-    Object? name4 = freezed,
-    Object? status = freezed,
-    Object? street1 = freezed,
-    Object? street2 = freezed,
-    Object? street3 = freezed,
-    Object? street4 = freezed,
-    Object? street5 = freezed,
-    Object? postalCode = freezed,
-    Object? customerClassification = freezed,
-    Object? customerLocalGroup = freezed,
-    Object? paymentTermDescription = freezed,
-    Object? shipToInfos = freezed,
-    Object? billToInfos = freezed,
-    Object? customerAttr7 = freezed,
-    Object? customerGrp4 = freezed,
-    Object? region = freezed,
-    Object? emailAddresses = freezed,
+    Object? customerCodeSoldTo = null,
+    Object? name1 = null,
+    Object? name2 = null,
+    Object? name3 = null,
+    Object? name4 = null,
+    Object? status = null,
+    Object? street1 = null,
+    Object? street2 = null,
+    Object? street3 = null,
+    Object? street4 = null,
+    Object? street5 = null,
+    Object? postalCode = null,
+    Object? customerClassification = null,
+    Object? customerLocalGroup = null,
+    Object? paymentTermDescription = null,
+    Object? shipToInfos = null,
+    Object? billToInfos = null,
+    Object? customerAttr7 = null,
+    Object? customerGrp4 = null,
+    Object? region = null,
+    Object? emailAddresses = null,
   }) {
     return _then(_$_CustomerCodeDto(
-      customerCodeSoldTo: customerCodeSoldTo == freezed
+      customerCodeSoldTo: null == customerCodeSoldTo
           ? _value.customerCodeSoldTo
           : customerCodeSoldTo // ignore: cast_nullable_to_non_nullable
               as String,
-      name1: name1 == freezed
+      name1: null == name1
           ? _value.name1
           : name1 // ignore: cast_nullable_to_non_nullable
               as String,
-      name2: name2 == freezed
+      name2: null == name2
           ? _value.name2
           : name2 // ignore: cast_nullable_to_non_nullable
               as String,
-      name3: name3 == freezed
+      name3: null == name3
           ? _value.name3
           : name3 // ignore: cast_nullable_to_non_nullable
               as String,
-      name4: name4 == freezed
+      name4: null == name4
           ? _value.name4
           : name4 // ignore: cast_nullable_to_non_nullable
               as String,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      street1: street1 == freezed
+      street1: null == street1
           ? _value.street1
           : street1 // ignore: cast_nullable_to_non_nullable
               as String,
-      street2: street2 == freezed
+      street2: null == street2
           ? _value.street2
           : street2 // ignore: cast_nullable_to_non_nullable
               as String,
-      street3: street3 == freezed
+      street3: null == street3
           ? _value.street3
           : street3 // ignore: cast_nullable_to_non_nullable
               as String,
-      street4: street4 == freezed
+      street4: null == street4
           ? _value.street4
           : street4 // ignore: cast_nullable_to_non_nullable
               as String,
-      street5: street5 == freezed
+      street5: null == street5
           ? _value.street5
           : street5 // ignore: cast_nullable_to_non_nullable
               as String,
-      postalCode: postalCode == freezed
+      postalCode: null == postalCode
           ? _value.postalCode
           : postalCode // ignore: cast_nullable_to_non_nullable
               as String,
-      customerClassification: customerClassification == freezed
+      customerClassification: null == customerClassification
           ? _value.customerClassification
           : customerClassification // ignore: cast_nullable_to_non_nullable
               as String,
-      customerLocalGroup: customerLocalGroup == freezed
+      customerLocalGroup: null == customerLocalGroup
           ? _value.customerLocalGroup
           : customerLocalGroup // ignore: cast_nullable_to_non_nullable
               as String,
-      paymentTermDescription: paymentTermDescription == freezed
+      paymentTermDescription: null == paymentTermDescription
           ? _value.paymentTermDescription
           : paymentTermDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      shipToInfos: shipToInfos == freezed
+      shipToInfos: null == shipToInfos
           ? _value._shipToInfos
           : shipToInfos // ignore: cast_nullable_to_non_nullable
               as List<ShipToDto>,
-      billToInfos: billToInfos == freezed
+      billToInfos: null == billToInfos
           ? _value._billToInfos
           : billToInfos // ignore: cast_nullable_to_non_nullable
               as List<BillToDto>,
-      customerAttr7: customerAttr7 == freezed
+      customerAttr7: null == customerAttr7
           ? _value.customerAttr7
           : customerAttr7 // ignore: cast_nullable_to_non_nullable
               as String,
-      customerGrp4: customerGrp4 == freezed
+      customerGrp4: null == customerGrp4
           ? _value.customerGrp4
           : customerGrp4 // ignore: cast_nullable_to_non_nullable
               as String,
-      region: region == freezed
+      region: null == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
               as String,
-      emailAddresses: emailAddresses == freezed
+      emailAddresses: null == emailAddresses
           ? _value._emailAddresses
           : emailAddresses // ignore: cast_nullable_to_non_nullable
               as List<String>,
@@ -559,35 +561,35 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CustomerCodeDto &&
-            const DeepCollectionEquality()
-                .equals(other.customerCodeSoldTo, customerCodeSoldTo) &&
-            const DeepCollectionEquality().equals(other.name1, name1) &&
-            const DeepCollectionEquality().equals(other.name2, name2) &&
-            const DeepCollectionEquality().equals(other.name3, name3) &&
-            const DeepCollectionEquality().equals(other.name4, name4) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality().equals(other.street1, street1) &&
-            const DeepCollectionEquality().equals(other.street2, street2) &&
-            const DeepCollectionEquality().equals(other.street3, street3) &&
-            const DeepCollectionEquality().equals(other.street4, street4) &&
-            const DeepCollectionEquality().equals(other.street5, street5) &&
-            const DeepCollectionEquality()
-                .equals(other.postalCode, postalCode) &&
-            const DeepCollectionEquality()
-                .equals(other.customerClassification, customerClassification) &&
-            const DeepCollectionEquality()
-                .equals(other.customerLocalGroup, customerLocalGroup) &&
-            const DeepCollectionEquality()
-                .equals(other.paymentTermDescription, paymentTermDescription) &&
+            (identical(other.customerCodeSoldTo, customerCodeSoldTo) ||
+                other.customerCodeSoldTo == customerCodeSoldTo) &&
+            (identical(other.name1, name1) || other.name1 == name1) &&
+            (identical(other.name2, name2) || other.name2 == name2) &&
+            (identical(other.name3, name3) || other.name3 == name3) &&
+            (identical(other.name4, name4) || other.name4 == name4) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.street1, street1) || other.street1 == street1) &&
+            (identical(other.street2, street2) || other.street2 == street2) &&
+            (identical(other.street3, street3) || other.street3 == street3) &&
+            (identical(other.street4, street4) || other.street4 == street4) &&
+            (identical(other.street5, street5) || other.street5 == street5) &&
+            (identical(other.postalCode, postalCode) ||
+                other.postalCode == postalCode) &&
+            (identical(other.customerClassification, customerClassification) ||
+                other.customerClassification == customerClassification) &&
+            (identical(other.customerLocalGroup, customerLocalGroup) ||
+                other.customerLocalGroup == customerLocalGroup) &&
+            (identical(other.paymentTermDescription, paymentTermDescription) ||
+                other.paymentTermDescription == paymentTermDescription) &&
             const DeepCollectionEquality()
                 .equals(other._shipToInfos, _shipToInfos) &&
             const DeepCollectionEquality()
                 .equals(other._billToInfos, _billToInfos) &&
-            const DeepCollectionEquality()
-                .equals(other.customerAttr7, customerAttr7) &&
-            const DeepCollectionEquality()
-                .equals(other.customerGrp4, customerGrp4) &&
-            const DeepCollectionEquality().equals(other.region, region) &&
+            (identical(other.customerAttr7, customerAttr7) ||
+                other.customerAttr7 == customerAttr7) &&
+            (identical(other.customerGrp4, customerGrp4) ||
+                other.customerGrp4 == customerGrp4) &&
+            (identical(other.region, region) || other.region == region) &&
             const DeepCollectionEquality()
                 .equals(other._emailAddresses, _emailAddresses));
   }
@@ -596,31 +598,32 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        const DeepCollectionEquality().hash(customerCodeSoldTo),
-        const DeepCollectionEquality().hash(name1),
-        const DeepCollectionEquality().hash(name2),
-        const DeepCollectionEquality().hash(name3),
-        const DeepCollectionEquality().hash(name4),
-        const DeepCollectionEquality().hash(status),
-        const DeepCollectionEquality().hash(street1),
-        const DeepCollectionEquality().hash(street2),
-        const DeepCollectionEquality().hash(street3),
-        const DeepCollectionEquality().hash(street4),
-        const DeepCollectionEquality().hash(street5),
-        const DeepCollectionEquality().hash(postalCode),
-        const DeepCollectionEquality().hash(customerClassification),
-        const DeepCollectionEquality().hash(customerLocalGroup),
-        const DeepCollectionEquality().hash(paymentTermDescription),
+        customerCodeSoldTo,
+        name1,
+        name2,
+        name3,
+        name4,
+        status,
+        street1,
+        street2,
+        street3,
+        street4,
+        street5,
+        postalCode,
+        customerClassification,
+        customerLocalGroup,
+        paymentTermDescription,
         const DeepCollectionEquality().hash(_shipToInfos),
         const DeepCollectionEquality().hash(_billToInfos),
-        const DeepCollectionEquality().hash(customerAttr7),
-        const DeepCollectionEquality().hash(customerGrp4),
-        const DeepCollectionEquality().hash(region),
+        customerAttr7,
+        customerGrp4,
+        region,
         const DeepCollectionEquality().hash(_emailAddresses)
       ]);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_CustomerCodeDtoCopyWith<_$_CustomerCodeDto> get copyWith =>
       __$$_CustomerCodeDtoCopyWithImpl<_$_CustomerCodeDto>(this, _$identity);
 

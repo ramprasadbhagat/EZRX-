@@ -25,8 +25,8 @@ mixin _$OrderHistoryDetailsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(User user, OrderHistoryItem orderHistoryItem)? fetch,
+    TResult? Function()? initialized,
+    TResult? Function(User user, OrderHistoryItem orderHistoryItem)? fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,8 +44,8 @@ mixin _$OrderHistoryDetailsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,17 +61,19 @@ mixin _$OrderHistoryDetailsEvent {
 abstract class $OrderHistoryDetailsEventCopyWith<$Res> {
   factory $OrderHistoryDetailsEventCopyWith(OrderHistoryDetailsEvent value,
           $Res Function(OrderHistoryDetailsEvent) then) =
-      _$OrderHistoryDetailsEventCopyWithImpl<$Res>;
+      _$OrderHistoryDetailsEventCopyWithImpl<$Res, OrderHistoryDetailsEvent>;
 }
 
 /// @nodoc
-class _$OrderHistoryDetailsEventCopyWithImpl<$Res>
+class _$OrderHistoryDetailsEventCopyWithImpl<$Res,
+        $Val extends OrderHistoryDetailsEvent>
     implements $OrderHistoryDetailsEventCopyWith<$Res> {
   _$OrderHistoryDetailsEventCopyWithImpl(this._value, this._then);
 
-  final OrderHistoryDetailsEvent _value;
   // ignore: unused_field
-  final $Res Function(OrderHistoryDetailsEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -83,14 +85,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitializedCopyWithImpl<$Res>
-    extends _$OrderHistoryDetailsEventCopyWithImpl<$Res>
+    extends _$OrderHistoryDetailsEventCopyWithImpl<$Res, _$_Initialized>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, (v) => _then(v as _$_Initialized));
-
-  @override
-  _$_Initialized get _value => super._value as _$_Initialized;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -125,8 +124,8 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(User user, OrderHistoryItem orderHistoryItem)? fetch,
+    TResult? Function()? initialized,
+    TResult? Function(User user, OrderHistoryItem orderHistoryItem)? fetch,
   }) {
     return initialized?.call();
   }
@@ -156,8 +155,8 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
   }) {
     return initialized?.call(this);
   }
@@ -184,6 +183,7 @@ abstract class _Initialized implements OrderHistoryDetailsEvent {
 abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
+  @useResult
   $Res call({User user, OrderHistoryItem orderHistoryItem});
 
   $UserCopyWith<$Res> get user;
@@ -192,25 +192,23 @@ abstract class _$$_FetchCopyWith<$Res> {
 
 /// @nodoc
 class __$$_FetchCopyWithImpl<$Res>
-    extends _$OrderHistoryDetailsEventCopyWithImpl<$Res>
+    extends _$OrderHistoryDetailsEventCopyWithImpl<$Res, _$_Fetch>
     implements _$$_FetchCopyWith<$Res> {
   __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
-      : super(_value, (v) => _then(v as _$_Fetch));
+      : super(_value, _then);
 
-  @override
-  _$_Fetch get _value => super._value as _$_Fetch;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
-    Object? orderHistoryItem = freezed,
+    Object? user = null,
+    Object? orderHistoryItem = null,
   }) {
     return _then(_$_Fetch(
-      user: user == freezed
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      orderHistoryItem: orderHistoryItem == freezed
+      orderHistoryItem: null == orderHistoryItem
           ? _value.orderHistoryItem
           : orderHistoryItem // ignore: cast_nullable_to_non_nullable
               as OrderHistoryItem,
@@ -218,6 +216,7 @@ class __$$_FetchCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value));
@@ -225,6 +224,7 @@ class __$$_FetchCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $OrderHistoryItemCopyWith<$Res> get orderHistoryItem {
     return $OrderHistoryItemCopyWith<$Res>(_value.orderHistoryItem, (value) {
       return _then(_value.copyWith(orderHistoryItem: value));
@@ -252,19 +252,17 @@ class _$_Fetch implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
-            const DeepCollectionEquality().equals(other.user, user) &&
-            const DeepCollectionEquality()
-                .equals(other.orderHistoryItem, orderHistoryItem));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.orderHistoryItem, orderHistoryItem) ||
+                other.orderHistoryItem == orderHistoryItem));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(user),
-      const DeepCollectionEquality().hash(orderHistoryItem));
+  int get hashCode => Object.hash(runtimeType, user, orderHistoryItem);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
 
@@ -281,8 +279,8 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(User user, OrderHistoryItem orderHistoryItem)? fetch,
+    TResult? Function()? initialized,
+    TResult? Function(User user, OrderHistoryItem orderHistoryItem)? fetch,
   }) {
     return fetch?.call(user, orderHistoryItem);
   }
@@ -312,8 +310,8 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
   }) {
     return fetch?.call(this);
   }
@@ -362,7 +360,8 @@ mixin _$OrderHistoryDetailsState {
 abstract class $OrderHistoryDetailsStateCopyWith<$Res> {
   factory $OrderHistoryDetailsStateCopyWith(OrderHistoryDetailsState value,
           $Res Function(OrderHistoryDetailsState) then) =
-      _$OrderHistoryDetailsStateCopyWithImpl<$Res>;
+      _$OrderHistoryDetailsStateCopyWithImpl<$Res, OrderHistoryDetailsState>;
+  @useResult
   $Res call(
       {OrderHistoryDetails orderHistoryDetails,
       bool isLoading,
@@ -373,46 +372,50 @@ abstract class $OrderHistoryDetailsStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OrderHistoryDetailsStateCopyWithImpl<$Res>
+class _$OrderHistoryDetailsStateCopyWithImpl<$Res,
+        $Val extends OrderHistoryDetailsState>
     implements $OrderHistoryDetailsStateCopyWith<$Res> {
   _$OrderHistoryDetailsStateCopyWithImpl(this._value, this._then);
 
-  final OrderHistoryDetailsState _value;
   // ignore: unused_field
-  final $Res Function(OrderHistoryDetailsState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderHistoryDetails = freezed,
-    Object? isLoading = freezed,
-    Object? showErrorMessage = freezed,
-    Object? failureOrSuccessOption = freezed,
+    Object? orderHistoryDetails = null,
+    Object? isLoading = null,
+    Object? showErrorMessage = null,
+    Object? failureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
-      orderHistoryDetails: orderHistoryDetails == freezed
+      orderHistoryDetails: null == orderHistoryDetails
           ? _value.orderHistoryDetails
           : orderHistoryDetails // ignore: cast_nullable_to_non_nullable
               as OrderHistoryDetails,
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      showErrorMessage: showErrorMessage == freezed
+      showErrorMessage: null == showErrorMessage
           ? _value.showErrorMessage
           : showErrorMessage // ignore: cast_nullable_to_non_nullable
               as bool,
-      failureOrSuccessOption: failureOrSuccessOption == freezed
+      failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $OrderHistoryDetailsCopyWith<$Res> get orderHistoryDetails {
     return $OrderHistoryDetailsCopyWith<$Res>(_value.orderHistoryDetails,
         (value) {
-      return _then(_value.copyWith(orderHistoryDetails: value));
+      return _then(_value.copyWith(orderHistoryDetails: value) as $Val);
     });
   }
 }
@@ -425,6 +428,7 @@ abstract class _$$_OrderHistoryDetailsStateCopyWith<$Res>
           $Res Function(_$_OrderHistoryDetailsState) then) =
       __$$_OrderHistoryDetailsStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {OrderHistoryDetails orderHistoryDetails,
       bool isLoading,
@@ -437,37 +441,35 @@ abstract class _$$_OrderHistoryDetailsStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_OrderHistoryDetailsStateCopyWithImpl<$Res>
-    extends _$OrderHistoryDetailsStateCopyWithImpl<$Res>
+    extends _$OrderHistoryDetailsStateCopyWithImpl<$Res,
+        _$_OrderHistoryDetailsState>
     implements _$$_OrderHistoryDetailsStateCopyWith<$Res> {
   __$$_OrderHistoryDetailsStateCopyWithImpl(_$_OrderHistoryDetailsState _value,
       $Res Function(_$_OrderHistoryDetailsState) _then)
-      : super(_value, (v) => _then(v as _$_OrderHistoryDetailsState));
+      : super(_value, _then);
 
-  @override
-  _$_OrderHistoryDetailsState get _value =>
-      super._value as _$_OrderHistoryDetailsState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderHistoryDetails = freezed,
-    Object? isLoading = freezed,
-    Object? showErrorMessage = freezed,
-    Object? failureOrSuccessOption = freezed,
+    Object? orderHistoryDetails = null,
+    Object? isLoading = null,
+    Object? showErrorMessage = null,
+    Object? failureOrSuccessOption = null,
   }) {
     return _then(_$_OrderHistoryDetailsState(
-      orderHistoryDetails: orderHistoryDetails == freezed
+      orderHistoryDetails: null == orderHistoryDetails
           ? _value.orderHistoryDetails
           : orderHistoryDetails // ignore: cast_nullable_to_non_nullable
               as OrderHistoryDetails,
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      showErrorMessage: showErrorMessage == freezed
+      showErrorMessage: null == showErrorMessage
           ? _value.showErrorMessage
           : showErrorMessage // ignore: cast_nullable_to_non_nullable
               as bool,
-      failureOrSuccessOption: failureOrSuccessOption == freezed
+      failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
@@ -503,25 +505,23 @@ class _$_OrderHistoryDetailsState implements _OrderHistoryDetailsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryDetailsState &&
-            const DeepCollectionEquality()
-                .equals(other.orderHistoryDetails, orderHistoryDetails) &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
-            const DeepCollectionEquality()
-                .equals(other.showErrorMessage, showErrorMessage) &&
-            const DeepCollectionEquality()
-                .equals(other.failureOrSuccessOption, failureOrSuccessOption));
+            (identical(other.orderHistoryDetails, orderHistoryDetails) ||
+                other.orderHistoryDetails == orderHistoryDetails) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.showErrorMessage, showErrorMessage) ||
+                other.showErrorMessage == showErrorMessage) &&
+            (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
+                other.failureOrSuccessOption == failureOrSuccessOption));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(orderHistoryDetails),
-      const DeepCollectionEquality().hash(isLoading),
-      const DeepCollectionEquality().hash(showErrorMessage),
-      const DeepCollectionEquality().hash(failureOrSuccessOption));
+  int get hashCode => Object.hash(runtimeType, orderHistoryDetails, isLoading,
+      showErrorMessage, failureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OrderHistoryDetailsStateCopyWith<_$_OrderHistoryDetailsState>
       get copyWith => __$$_OrderHistoryDetailsStateCopyWithImpl<
           _$_OrderHistoryDetailsState>(this, _$identity);

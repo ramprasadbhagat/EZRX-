@@ -20,13 +20,16 @@ SettingTcDto _$SettingTcDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SettingTcDto {
-  @JsonKey(name: 'acceptTC')
-  bool get acceptTC => throw _privateConstructorUsedError;
+  @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+  bool get acceptPrivacyPolicy => throw _privateConstructorUsedError;
   @JsonKey(
-      name: 'acceptTCTimestamp',
+      name: 'acceptPrivacyPolicyTime',
       defaultValue: '1970-01-01 00:00:00',
       readValue: dateTimeStringFormatCheck)
-  String get acceptTCTimestamp => throw _privateConstructorUsedError;
+  String get acceptPrivacyPolicyTime => throw _privateConstructorUsedError;
+  @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
+  String get privacyPolicyAcceptedPlatform =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SettingTcDtoCopyWith<SettingTcDto> get copyWith =>
@@ -37,37 +40,48 @@ mixin _$SettingTcDto {
 abstract class $SettingTcDtoCopyWith<$Res> {
   factory $SettingTcDtoCopyWith(
           SettingTcDto value, $Res Function(SettingTcDto) then) =
-      _$SettingTcDtoCopyWithImpl<$Res>;
+      _$SettingTcDtoCopyWithImpl<$Res, SettingTcDto>;
+  @useResult
   $Res call(
-      {@JsonKey(name: 'acceptTC')
-          bool acceptTC,
-      @JsonKey(name: 'acceptTCTimestamp', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
-          String acceptTCTimestamp});
+      {@JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+          bool acceptPrivacyPolicy,
+      @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
+          String acceptPrivacyPolicyTime,
+      @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
+          String privacyPolicyAcceptedPlatform});
 }
 
 /// @nodoc
-class _$SettingTcDtoCopyWithImpl<$Res> implements $SettingTcDtoCopyWith<$Res> {
+class _$SettingTcDtoCopyWithImpl<$Res, $Val extends SettingTcDto>
+    implements $SettingTcDtoCopyWith<$Res> {
   _$SettingTcDtoCopyWithImpl(this._value, this._then);
 
-  final SettingTcDto _value;
   // ignore: unused_field
-  final $Res Function(SettingTcDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? acceptTC = freezed,
-    Object? acceptTCTimestamp = freezed,
+    Object? acceptPrivacyPolicy = null,
+    Object? acceptPrivacyPolicyTime = null,
+    Object? privacyPolicyAcceptedPlatform = null,
   }) {
     return _then(_value.copyWith(
-      acceptTC: acceptTC == freezed
-          ? _value.acceptTC
-          : acceptTC // ignore: cast_nullable_to_non_nullable
+      acceptPrivacyPolicy: null == acceptPrivacyPolicy
+          ? _value.acceptPrivacyPolicy
+          : acceptPrivacyPolicy // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptTCTimestamp: acceptTCTimestamp == freezed
-          ? _value.acceptTCTimestamp
-          : acceptTCTimestamp // ignore: cast_nullable_to_non_nullable
+      acceptPrivacyPolicyTime: null == acceptPrivacyPolicyTime
+          ? _value.acceptPrivacyPolicyTime
+          : acceptPrivacyPolicyTime // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+      privacyPolicyAcceptedPlatform: null == privacyPolicyAcceptedPlatform
+          ? _value.privacyPolicyAcceptedPlatform
+          : privacyPolicyAcceptedPlatform // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
@@ -78,37 +92,43 @@ abstract class _$$_SettingTcDtoCopyWith<$Res>
           _$_SettingTcDto value, $Res Function(_$_SettingTcDto) then) =
       __$$_SettingTcDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
-      {@JsonKey(name: 'acceptTC')
-          bool acceptTC,
-      @JsonKey(name: 'acceptTCTimestamp', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
-          String acceptTCTimestamp});
+      {@JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+          bool acceptPrivacyPolicy,
+      @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
+          String acceptPrivacyPolicyTime,
+      @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
+          String privacyPolicyAcceptedPlatform});
 }
 
 /// @nodoc
 class __$$_SettingTcDtoCopyWithImpl<$Res>
-    extends _$SettingTcDtoCopyWithImpl<$Res>
+    extends _$SettingTcDtoCopyWithImpl<$Res, _$_SettingTcDto>
     implements _$$_SettingTcDtoCopyWith<$Res> {
   __$$_SettingTcDtoCopyWithImpl(
       _$_SettingTcDto _value, $Res Function(_$_SettingTcDto) _then)
-      : super(_value, (v) => _then(v as _$_SettingTcDto));
+      : super(_value, _then);
 
-  @override
-  _$_SettingTcDto get _value => super._value as _$_SettingTcDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? acceptTC = freezed,
-    Object? acceptTCTimestamp = freezed,
+    Object? acceptPrivacyPolicy = null,
+    Object? acceptPrivacyPolicyTime = null,
+    Object? privacyPolicyAcceptedPlatform = null,
   }) {
     return _then(_$_SettingTcDto(
-      acceptTC: acceptTC == freezed
-          ? _value.acceptTC
-          : acceptTC // ignore: cast_nullable_to_non_nullable
+      acceptPrivacyPolicy: null == acceptPrivacyPolicy
+          ? _value.acceptPrivacyPolicy
+          : acceptPrivacyPolicy // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptTCTimestamp: acceptTCTimestamp == freezed
-          ? _value.acceptTCTimestamp
-          : acceptTCTimestamp // ignore: cast_nullable_to_non_nullable
+      acceptPrivacyPolicyTime: null == acceptPrivacyPolicyTime
+          ? _value.acceptPrivacyPolicyTime
+          : acceptPrivacyPolicyTime // ignore: cast_nullable_to_non_nullable
+              as String,
+      privacyPolicyAcceptedPlatform: null == privacyPolicyAcceptedPlatform
+          ? _value.privacyPolicyAcceptedPlatform
+          : privacyPolicyAcceptedPlatform // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -118,28 +138,33 @@ class __$$_SettingTcDtoCopyWithImpl<$Res>
 @JsonSerializable(createToJson: false)
 class _$_SettingTcDto extends _SettingTcDto {
   const _$_SettingTcDto(
-      {@JsonKey(name: 'acceptTC')
-          required this.acceptTC,
-      @JsonKey(name: 'acceptTCTimestamp', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
-          required this.acceptTCTimestamp})
+      {@JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+          required this.acceptPrivacyPolicy,
+      @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
+          required this.acceptPrivacyPolicyTime,
+      @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
+          required this.privacyPolicyAcceptedPlatform})
       : super._();
 
   factory _$_SettingTcDto.fromJson(Map<String, dynamic> json) =>
       _$$_SettingTcDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'acceptTC')
-  final bool acceptTC;
+  @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+  final bool acceptPrivacyPolicy;
   @override
   @JsonKey(
-      name: 'acceptTCTimestamp',
+      name: 'acceptPrivacyPolicyTime',
       defaultValue: '1970-01-01 00:00:00',
       readValue: dateTimeStringFormatCheck)
-  final String acceptTCTimestamp;
+  final String acceptPrivacyPolicyTime;
+  @override
+  @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
+  final String privacyPolicyAcceptedPlatform;
 
   @override
   String toString() {
-    return 'SettingTcDto(acceptTC: $acceptTC, acceptTCTimestamp: $acceptTCTimestamp)';
+    return 'SettingTcDto(acceptPrivacyPolicy: $acceptPrivacyPolicy, acceptPrivacyPolicyTime: $acceptPrivacyPolicyTime, privacyPolicyAcceptedPlatform: $privacyPolicyAcceptedPlatform)';
   }
 
   @override
@@ -147,44 +172,54 @@ class _$_SettingTcDto extends _SettingTcDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SettingTcDto &&
-            const DeepCollectionEquality().equals(other.acceptTC, acceptTC) &&
-            const DeepCollectionEquality()
-                .equals(other.acceptTCTimestamp, acceptTCTimestamp));
+            (identical(other.acceptPrivacyPolicy, acceptPrivacyPolicy) ||
+                other.acceptPrivacyPolicy == acceptPrivacyPolicy) &&
+            (identical(
+                    other.acceptPrivacyPolicyTime, acceptPrivacyPolicyTime) ||
+                other.acceptPrivacyPolicyTime == acceptPrivacyPolicyTime) &&
+            (identical(other.privacyPolicyAcceptedPlatform,
+                    privacyPolicyAcceptedPlatform) ||
+                other.privacyPolicyAcceptedPlatform ==
+                    privacyPolicyAcceptedPlatform));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(acceptTC),
-      const DeepCollectionEquality().hash(acceptTCTimestamp));
+  int get hashCode => Object.hash(runtimeType, acceptPrivacyPolicy,
+      acceptPrivacyPolicyTime, privacyPolicyAcceptedPlatform);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SettingTcDtoCopyWith<_$_SettingTcDto> get copyWith =>
       __$$_SettingTcDtoCopyWithImpl<_$_SettingTcDto>(this, _$identity);
 }
 
 abstract class _SettingTcDto extends SettingTcDto {
   const factory _SettingTcDto(
-      {@JsonKey(name: 'acceptTC')
-          required final bool acceptTC,
-      @JsonKey(name: 'acceptTCTimestamp', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
-          required final String acceptTCTimestamp}) = _$_SettingTcDto;
+      {@JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+          required final bool acceptPrivacyPolicy,
+      @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
+          required final String acceptPrivacyPolicyTime,
+      @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
+          required final String privacyPolicyAcceptedPlatform}) = _$_SettingTcDto;
   const _SettingTcDto._() : super._();
 
   factory _SettingTcDto.fromJson(Map<String, dynamic> json) =
       _$_SettingTcDto.fromJson;
 
   @override
-  @JsonKey(name: 'acceptTC')
-  bool get acceptTC;
+  @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+  bool get acceptPrivacyPolicy;
   @override
   @JsonKey(
-      name: 'acceptTCTimestamp',
+      name: 'acceptPrivacyPolicyTime',
       defaultValue: '1970-01-01 00:00:00',
       readValue: dateTimeStringFormatCheck)
-  String get acceptTCTimestamp;
+  String get acceptPrivacyPolicyTime;
+  @override
+  @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
+  String get privacyPolicyAcceptedPlatform;
   @override
   @JsonKey(ignore: true)
   _$$_SettingTcDtoCopyWith<_$_SettingTcDto> get copyWith =>

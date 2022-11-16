@@ -47,7 +47,7 @@ class Config {
   String? get getPrivacyInitialFile {
     switch (appFlavor) {
       case Flavor.mock:
-        return 'assets/html/privacy_policy.html';
+        return 'assets/html/eZRx-privacy_policy.html';
       case Flavor.dev:
       case Flavor.uat:
       case Flavor.prod:
@@ -108,7 +108,7 @@ class Config {
     }
   }
 
-  String get getTCUrl {
+  String get getTCENUrl {
     switch (appFlavor) {
       case Flavor.dev:
       case Flavor.uat:
@@ -120,10 +120,10 @@ class Config {
     }
   }
 
-  String? get getTCFile {
+  String? get getTCENFile {
     switch (appFlavor) {
       case Flavor.mock:
-        return 'assets/html/termsAndCondition.html';
+        return 'assets/html/eZRx-termsandConditions-en.html';
       case Flavor.dev:
       case Flavor.uat:
       case Flavor.prod:
@@ -147,7 +147,7 @@ class Config {
   String? get getTCVNFile {
     switch (appFlavor) {
       case Flavor.mock:
-        return 'assets/html/termsAndConditionVN.html';
+        return 'assets/html/termsandConditions-vn.html';
       case Flavor.dev:
       case Flavor.uat:
       case Flavor.prod:
@@ -156,22 +156,22 @@ class Config {
     }
   }
 
-  String get getAUPUrl {
+  String get getTCTWUrl {
     switch (appFlavor) {
       case Flavor.dev:
       case Flavor.uat:
       case Flavor.prod:
-        return '$baseUrl/acceptableuserpolicy';
+        return '$baseUrl/mobile/termsandconditionstw';
       case Flavor.mock:
       default:
         return '';
     }
   }
 
-  String? get getAUPFile {
+  String? get getTCTWFile {
     switch (appFlavor) {
       case Flavor.mock:
-        return 'assets/html/aup.html';
+        return 'assets/html/termsandConditions-tw.html';
       case Flavor.dev:
       case Flavor.uat:
       case Flavor.prod:
@@ -180,22 +180,70 @@ class Config {
     }
   }
 
-  String get getAUPVNUrl {
+  String get getTCTHUrl {
     switch (appFlavor) {
       case Flavor.dev:
       case Flavor.uat:
       case Flavor.prod:
-        return '$baseUrl/mobile/acceptableuserpolicyvn';
+        return '$baseUrl/mobile/termsandconditionsth';
       case Flavor.mock:
       default:
         return '';
     }
   }
 
-  String? get getAUPVNFile {
+  String? get getTCTHFile {
     switch (appFlavor) {
       case Flavor.mock:
-        return 'assets/html/aupVN.html';
+        return 'assets/html/termsandConditions-th.html';
+      case Flavor.dev:
+      case Flavor.uat:
+      case Flavor.prod:
+      default:
+        return null;
+    }
+  }
+
+  String get getTCMMUrl {
+    switch (appFlavor) {
+      case Flavor.dev:
+      case Flavor.uat:
+      case Flavor.prod:
+        return '$baseUrl/mobile/termsandconditionsmm';
+      case Flavor.mock:
+      default:
+        return '';
+    }
+  }
+
+  String? get getTCMMFile {
+    switch (appFlavor) {
+      case Flavor.mock:
+        return 'assets/html/termsandConditions-mm.html';
+      case Flavor.dev:
+      case Flavor.uat:
+      case Flavor.prod:
+      default:
+        return null;
+    }
+  }
+
+  String get getTCKHUrl {
+    switch (appFlavor) {
+      case Flavor.dev:
+      case Flavor.uat:
+      case Flavor.prod:
+        return '$baseUrl/mobile/termsandconditionskh';
+      case Flavor.mock:
+      default:
+        return '';
+    }
+  }
+
+  String? get getTCKHFile {
+    switch (appFlavor) {
+      case Flavor.mock:
+        return 'assets/html/termsandConditions-kh.html';
       case Flavor.dev:
       case Flavor.uat:
       case Flavor.prod:

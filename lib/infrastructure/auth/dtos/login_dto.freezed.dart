@@ -32,28 +32,32 @@ mixin _$LoginDto {
 /// @nodoc
 abstract class $LoginDtoCopyWith<$Res> {
   factory $LoginDtoCopyWith(LoginDto value, $Res Function(LoginDto) then) =
-      _$LoginDtoCopyWithImpl<$Res>;
+      _$LoginDtoCopyWithImpl<$Res, LoginDto>;
+  @useResult
   $Res call({@JsonKey(name: 'eZRxJWT') String access});
 }
 
 /// @nodoc
-class _$LoginDtoCopyWithImpl<$Res> implements $LoginDtoCopyWith<$Res> {
+class _$LoginDtoCopyWithImpl<$Res, $Val extends LoginDto>
+    implements $LoginDtoCopyWith<$Res> {
   _$LoginDtoCopyWithImpl(this._value, this._then);
 
-  final LoginDto _value;
   // ignore: unused_field
-  final $Res Function(LoginDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? access = freezed,
+    Object? access = null,
   }) {
     return _then(_value.copyWith(
-      access: access == freezed
+      access: null == access
           ? _value.access
           : access // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -63,25 +67,25 @@ abstract class _$$_LoginDtoCopyWith<$Res> implements $LoginDtoCopyWith<$Res> {
           _$_LoginDto value, $Res Function(_$_LoginDto) then) =
       __$$_LoginDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({@JsonKey(name: 'eZRxJWT') String access});
 }
 
 /// @nodoc
-class __$$_LoginDtoCopyWithImpl<$Res> extends _$LoginDtoCopyWithImpl<$Res>
+class __$$_LoginDtoCopyWithImpl<$Res>
+    extends _$LoginDtoCopyWithImpl<$Res, _$_LoginDto>
     implements _$$_LoginDtoCopyWith<$Res> {
   __$$_LoginDtoCopyWithImpl(
       _$_LoginDto _value, $Res Function(_$_LoginDto) _then)
-      : super(_value, (v) => _then(v as _$_LoginDto));
+      : super(_value, _then);
 
-  @override
-  _$_LoginDto get _value => super._value as _$_LoginDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? access = freezed,
+    Object? access = null,
   }) {
     return _then(_$_LoginDto(
-      access: access == freezed
+      access: null == access
           ? _value.access
           : access // ignore: cast_nullable_to_non_nullable
               as String,
@@ -112,16 +116,16 @@ class _$_LoginDto extends _LoginDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoginDto &&
-            const DeepCollectionEquality().equals(other.access, access));
+            (identical(other.access, access) || other.access == access));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(access));
+  int get hashCode => Object.hash(runtimeType, access);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LoginDtoCopyWith<_$_LoginDto> get copyWith =>
       __$$_LoginDtoCopyWithImpl<_$_LoginDto>(this, _$identity);
 

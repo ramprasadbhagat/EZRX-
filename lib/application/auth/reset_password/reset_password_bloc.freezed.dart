@@ -29,12 +29,12 @@ mixin _$ResetPasswordEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(PasswordFieldType fieldType, bool toggleValue)?
+    TResult? Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
+    TResult? Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
-    TResult Function(User user)? resetPasswordPressed,
-    TResult Function()? onRestart,
+    TResult? Function(User user)? resetPasswordPressed,
+    TResult? Function()? onRestart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,10 +59,10 @@ mixin _$ResetPasswordEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_PasswordVisibility value)? togglePasswordVisibility,
-    TResult Function(_PasswordTextOnChange value)? onTextChange,
-    TResult Function(_ResetPasswordPressed value)? resetPasswordPressed,
-    TResult Function(_OnRestart value)? onRestart,
+    TResult? Function(_PasswordVisibility value)? togglePasswordVisibility,
+    TResult? Function(_PasswordTextOnChange value)? onTextChange,
+    TResult? Function(_ResetPasswordPressed value)? resetPasswordPressed,
+    TResult? Function(_OnRestart value)? onRestart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -80,17 +80,18 @@ mixin _$ResetPasswordEvent {
 abstract class $ResetPasswordEventCopyWith<$Res> {
   factory $ResetPasswordEventCopyWith(
           ResetPasswordEvent value, $Res Function(ResetPasswordEvent) then) =
-      _$ResetPasswordEventCopyWithImpl<$Res>;
+      _$ResetPasswordEventCopyWithImpl<$Res, ResetPasswordEvent>;
 }
 
 /// @nodoc
-class _$ResetPasswordEventCopyWithImpl<$Res>
+class _$ResetPasswordEventCopyWithImpl<$Res, $Val extends ResetPasswordEvent>
     implements $ResetPasswordEventCopyWith<$Res> {
   _$ResetPasswordEventCopyWithImpl(this._value, this._then);
 
-  final ResetPasswordEvent _value;
   // ignore: unused_field
-  final $Res Function(ResetPasswordEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -98,31 +99,30 @@ abstract class _$$_PasswordVisibilityCopyWith<$Res> {
   factory _$$_PasswordVisibilityCopyWith(_$_PasswordVisibility value,
           $Res Function(_$_PasswordVisibility) then) =
       __$$_PasswordVisibilityCopyWithImpl<$Res>;
+  @useResult
   $Res call({PasswordFieldType fieldType, bool toggleValue});
 }
 
 /// @nodoc
 class __$$_PasswordVisibilityCopyWithImpl<$Res>
-    extends _$ResetPasswordEventCopyWithImpl<$Res>
+    extends _$ResetPasswordEventCopyWithImpl<$Res, _$_PasswordVisibility>
     implements _$$_PasswordVisibilityCopyWith<$Res> {
   __$$_PasswordVisibilityCopyWithImpl(
       _$_PasswordVisibility _value, $Res Function(_$_PasswordVisibility) _then)
-      : super(_value, (v) => _then(v as _$_PasswordVisibility));
+      : super(_value, _then);
 
-  @override
-  _$_PasswordVisibility get _value => super._value as _$_PasswordVisibility;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? fieldType = freezed,
-    Object? toggleValue = freezed,
+    Object? fieldType = null,
+    Object? toggleValue = null,
   }) {
     return _then(_$_PasswordVisibility(
-      fieldType == freezed
+      null == fieldType
           ? _value.fieldType
           : fieldType // ignore: cast_nullable_to_non_nullable
               as PasswordFieldType,
-      toggleValue == freezed
+      null == toggleValue
           ? _value.toggleValue
           : toggleValue // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -150,19 +150,18 @@ class _$_PasswordVisibility implements _PasswordVisibility {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PasswordVisibility &&
-            const DeepCollectionEquality().equals(other.fieldType, fieldType) &&
-            const DeepCollectionEquality()
-                .equals(other.toggleValue, toggleValue));
+            (identical(other.fieldType, fieldType) ||
+                other.fieldType == fieldType) &&
+            (identical(other.toggleValue, toggleValue) ||
+                other.toggleValue == toggleValue));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(fieldType),
-      const DeepCollectionEquality().hash(toggleValue));
+  int get hashCode => Object.hash(runtimeType, fieldType, toggleValue);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PasswordVisibilityCopyWith<_$_PasswordVisibility> get copyWith =>
       __$$_PasswordVisibilityCopyWithImpl<_$_PasswordVisibility>(
           this, _$identity);
@@ -184,12 +183,12 @@ class _$_PasswordVisibility implements _PasswordVisibility {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(PasswordFieldType fieldType, bool toggleValue)?
+    TResult? Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
+    TResult? Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
-    TResult Function(User user)? resetPasswordPressed,
-    TResult Function()? onRestart,
+    TResult? Function(User user)? resetPasswordPressed,
+    TResult? Function()? onRestart,
   }) {
     return togglePasswordVisibility?.call(fieldType, toggleValue);
   }
@@ -226,10 +225,10 @@ class _$_PasswordVisibility implements _PasswordVisibility {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_PasswordVisibility value)? togglePasswordVisibility,
-    TResult Function(_PasswordTextOnChange value)? onTextChange,
-    TResult Function(_ResetPasswordPressed value)? resetPasswordPressed,
-    TResult Function(_OnRestart value)? onRestart,
+    TResult? Function(_PasswordVisibility value)? togglePasswordVisibility,
+    TResult? Function(_PasswordTextOnChange value)? onTextChange,
+    TResult? Function(_ResetPasswordPressed value)? resetPasswordPressed,
+    TResult? Function(_OnRestart value)? onRestart,
   }) {
     return togglePasswordVisibility?.call(this);
   }
@@ -267,6 +266,7 @@ abstract class _$$_PasswordTextOnChangeCopyWith<$Res> {
   factory _$$_PasswordTextOnChangeCopyWith(_$_PasswordTextOnChange value,
           $Res Function(_$_PasswordTextOnChange) then) =
       __$$_PasswordTextOnChangeCopyWithImpl<$Res>;
+  @useResult
   $Res call({PasswordFieldType fieldType, String newValue, User user});
 
   $UserCopyWith<$Res> get user;
@@ -274,31 +274,29 @@ abstract class _$$_PasswordTextOnChangeCopyWith<$Res> {
 
 /// @nodoc
 class __$$_PasswordTextOnChangeCopyWithImpl<$Res>
-    extends _$ResetPasswordEventCopyWithImpl<$Res>
+    extends _$ResetPasswordEventCopyWithImpl<$Res, _$_PasswordTextOnChange>
     implements _$$_PasswordTextOnChangeCopyWith<$Res> {
   __$$_PasswordTextOnChangeCopyWithImpl(_$_PasswordTextOnChange _value,
       $Res Function(_$_PasswordTextOnChange) _then)
-      : super(_value, (v) => _then(v as _$_PasswordTextOnChange));
+      : super(_value, _then);
 
-  @override
-  _$_PasswordTextOnChange get _value => super._value as _$_PasswordTextOnChange;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? fieldType = freezed,
-    Object? newValue = freezed,
-    Object? user = freezed,
+    Object? fieldType = null,
+    Object? newValue = null,
+    Object? user = null,
   }) {
     return _then(_$_PasswordTextOnChange(
-      fieldType == freezed
+      null == fieldType
           ? _value.fieldType
           : fieldType // ignore: cast_nullable_to_non_nullable
               as PasswordFieldType,
-      newValue == freezed
+      null == newValue
           ? _value.newValue
           : newValue // ignore: cast_nullable_to_non_nullable
               as String,
-      user == freezed
+      null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
@@ -306,6 +304,7 @@ class __$$_PasswordTextOnChangeCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value));
@@ -335,20 +334,19 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PasswordTextOnChange &&
-            const DeepCollectionEquality().equals(other.fieldType, fieldType) &&
-            const DeepCollectionEquality().equals(other.newValue, newValue) &&
-            const DeepCollectionEquality().equals(other.user, user));
+            (identical(other.fieldType, fieldType) ||
+                other.fieldType == fieldType) &&
+            (identical(other.newValue, newValue) ||
+                other.newValue == newValue) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(fieldType),
-      const DeepCollectionEquality().hash(newValue),
-      const DeepCollectionEquality().hash(user));
+  int get hashCode => Object.hash(runtimeType, fieldType, newValue, user);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PasswordTextOnChangeCopyWith<_$_PasswordTextOnChange> get copyWith =>
       __$$_PasswordTextOnChangeCopyWithImpl<_$_PasswordTextOnChange>(
           this, _$identity);
@@ -370,12 +368,12 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(PasswordFieldType fieldType, bool toggleValue)?
+    TResult? Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
+    TResult? Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
-    TResult Function(User user)? resetPasswordPressed,
-    TResult Function()? onRestart,
+    TResult? Function(User user)? resetPasswordPressed,
+    TResult? Function()? onRestart,
   }) {
     return onTextChange?.call(fieldType, newValue, user);
   }
@@ -412,10 +410,10 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_PasswordVisibility value)? togglePasswordVisibility,
-    TResult Function(_PasswordTextOnChange value)? onTextChange,
-    TResult Function(_ResetPasswordPressed value)? resetPasswordPressed,
-    TResult Function(_OnRestart value)? onRestart,
+    TResult? Function(_PasswordVisibility value)? togglePasswordVisibility,
+    TResult? Function(_PasswordTextOnChange value)? onTextChange,
+    TResult? Function(_ResetPasswordPressed value)? resetPasswordPressed,
+    TResult? Function(_OnRestart value)? onRestart,
   }) {
     return onTextChange?.call(this);
   }
@@ -453,6 +451,7 @@ abstract class _$$_ResetPasswordPressedCopyWith<$Res> {
   factory _$$_ResetPasswordPressedCopyWith(_$_ResetPasswordPressed value,
           $Res Function(_$_ResetPasswordPressed) then) =
       __$$_ResetPasswordPressedCopyWithImpl<$Res>;
+  @useResult
   $Res call({User user});
 
   $UserCopyWith<$Res> get user;
@@ -460,21 +459,19 @@ abstract class _$$_ResetPasswordPressedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_ResetPasswordPressedCopyWithImpl<$Res>
-    extends _$ResetPasswordEventCopyWithImpl<$Res>
+    extends _$ResetPasswordEventCopyWithImpl<$Res, _$_ResetPasswordPressed>
     implements _$$_ResetPasswordPressedCopyWith<$Res> {
   __$$_ResetPasswordPressedCopyWithImpl(_$_ResetPasswordPressed _value,
       $Res Function(_$_ResetPasswordPressed) _then)
-      : super(_value, (v) => _then(v as _$_ResetPasswordPressed));
+      : super(_value, _then);
 
-  @override
-  _$_ResetPasswordPressed get _value => super._value as _$_ResetPasswordPressed;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
+    Object? user = null,
   }) {
     return _then(_$_ResetPasswordPressed(
-      user: user == freezed
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
@@ -482,6 +479,7 @@ class __$$_ResetPasswordPressedCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value));
@@ -507,15 +505,15 @@ class _$_ResetPasswordPressed implements _ResetPasswordPressed {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ResetPasswordPressed &&
-            const DeepCollectionEquality().equals(other.user, user));
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
+  int get hashCode => Object.hash(runtimeType, user);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ResetPasswordPressedCopyWith<_$_ResetPasswordPressed> get copyWith =>
       __$$_ResetPasswordPressedCopyWithImpl<_$_ResetPasswordPressed>(
           this, _$identity);
@@ -537,12 +535,12 @@ class _$_ResetPasswordPressed implements _ResetPasswordPressed {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(PasswordFieldType fieldType, bool toggleValue)?
+    TResult? Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
+    TResult? Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
-    TResult Function(User user)? resetPasswordPressed,
-    TResult Function()? onRestart,
+    TResult? Function(User user)? resetPasswordPressed,
+    TResult? Function()? onRestart,
   }) {
     return resetPasswordPressed?.call(user);
   }
@@ -579,10 +577,10 @@ class _$_ResetPasswordPressed implements _ResetPasswordPressed {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_PasswordVisibility value)? togglePasswordVisibility,
-    TResult Function(_PasswordTextOnChange value)? onTextChange,
-    TResult Function(_ResetPasswordPressed value)? resetPasswordPressed,
-    TResult Function(_OnRestart value)? onRestart,
+    TResult? Function(_PasswordVisibility value)? togglePasswordVisibility,
+    TResult? Function(_PasswordTextOnChange value)? onTextChange,
+    TResult? Function(_ResetPasswordPressed value)? resetPasswordPressed,
+    TResult? Function(_OnRestart value)? onRestart,
   }) {
     return resetPasswordPressed?.call(this);
   }
@@ -622,14 +620,11 @@ abstract class _$$_OnRestartCopyWith<$Res> {
 
 /// @nodoc
 class __$$_OnRestartCopyWithImpl<$Res>
-    extends _$ResetPasswordEventCopyWithImpl<$Res>
+    extends _$ResetPasswordEventCopyWithImpl<$Res, _$_OnRestart>
     implements _$$_OnRestartCopyWith<$Res> {
   __$$_OnRestartCopyWithImpl(
       _$_OnRestart _value, $Res Function(_$_OnRestart) _then)
-      : super(_value, (v) => _then(v as _$_OnRestart));
-
-  @override
-  _$_OnRestart get _value => super._value as _$_OnRestart;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -668,12 +663,12 @@ class _$_OnRestart implements _OnRestart {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(PasswordFieldType fieldType, bool toggleValue)?
+    TResult? Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
+    TResult? Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
-    TResult Function(User user)? resetPasswordPressed,
-    TResult Function()? onRestart,
+    TResult? Function(User user)? resetPasswordPressed,
+    TResult? Function()? onRestart,
   }) {
     return onRestart?.call();
   }
@@ -710,10 +705,10 @@ class _$_OnRestart implements _OnRestart {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_PasswordVisibility value)? togglePasswordVisibility,
-    TResult Function(_PasswordTextOnChange value)? onTextChange,
-    TResult Function(_ResetPasswordPressed value)? resetPasswordPressed,
-    TResult Function(_OnRestart value)? onRestart,
+    TResult? Function(_PasswordVisibility value)? togglePasswordVisibility,
+    TResult? Function(_PasswordTextOnChange value)? onTextChange,
+    TResult? Function(_ResetPasswordPressed value)? resetPasswordPressed,
+    TResult? Function(_OnRestart value)? onRestart,
   }) {
     return onRestart?.call(this);
   }
@@ -761,7 +756,8 @@ mixin _$ResetPasswordState {
 abstract class $ResetPasswordStateCopyWith<$Res> {
   factory $ResetPasswordStateCopyWith(
           ResetPasswordState value, $Res Function(ResetPasswordState) then) =
-      _$ResetPasswordStateCopyWithImpl<$Res>;
+      _$ResetPasswordStateCopyWithImpl<$Res, ResetPasswordState>;
+  @useResult
   $Res call(
       {bool isOldPasswordObscure,
       bool isNewPasswordObscure,
@@ -776,65 +772,67 @@ abstract class $ResetPasswordStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ResetPasswordStateCopyWithImpl<$Res>
+class _$ResetPasswordStateCopyWithImpl<$Res, $Val extends ResetPasswordState>
     implements $ResetPasswordStateCopyWith<$Res> {
   _$ResetPasswordStateCopyWithImpl(this._value, this._then);
 
-  final ResetPasswordState _value;
   // ignore: unused_field
-  final $Res Function(ResetPasswordState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isOldPasswordObscure = freezed,
-    Object? isNewPasswordObscure = freezed,
-    Object? isConfirmPasswordObscure = freezed,
-    Object? oldPassword = freezed,
-    Object? newPassword = freezed,
-    Object? confirmPassword = freezed,
-    Object? isSubmitting = freezed,
-    Object? passwordResetFailureOrSuccessOption = freezed,
-    Object? showErrorMessages = freezed,
+    Object? isOldPasswordObscure = null,
+    Object? isNewPasswordObscure = null,
+    Object? isConfirmPasswordObscure = null,
+    Object? oldPassword = null,
+    Object? newPassword = null,
+    Object? confirmPassword = null,
+    Object? isSubmitting = null,
+    Object? passwordResetFailureOrSuccessOption = null,
+    Object? showErrorMessages = null,
   }) {
     return _then(_value.copyWith(
-      isOldPasswordObscure: isOldPasswordObscure == freezed
+      isOldPasswordObscure: null == isOldPasswordObscure
           ? _value.isOldPasswordObscure
           : isOldPasswordObscure // ignore: cast_nullable_to_non_nullable
               as bool,
-      isNewPasswordObscure: isNewPasswordObscure == freezed
+      isNewPasswordObscure: null == isNewPasswordObscure
           ? _value.isNewPasswordObscure
           : isNewPasswordObscure // ignore: cast_nullable_to_non_nullable
               as bool,
-      isConfirmPasswordObscure: isConfirmPasswordObscure == freezed
+      isConfirmPasswordObscure: null == isConfirmPasswordObscure
           ? _value.isConfirmPasswordObscure
           : isConfirmPasswordObscure // ignore: cast_nullable_to_non_nullable
               as bool,
-      oldPassword: oldPassword == freezed
+      oldPassword: null == oldPassword
           ? _value.oldPassword
           : oldPassword // ignore: cast_nullable_to_non_nullable
               as Password,
-      newPassword: newPassword == freezed
+      newPassword: null == newPassword
           ? _value.newPassword
           : newPassword // ignore: cast_nullable_to_non_nullable
               as Password,
-      confirmPassword: confirmPassword == freezed
+      confirmPassword: null == confirmPassword
           ? _value.confirmPassword
           : confirmPassword // ignore: cast_nullable_to_non_nullable
               as Password,
-      isSubmitting: isSubmitting == freezed
+      isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
-      passwordResetFailureOrSuccessOption: passwordResetFailureOrSuccessOption ==
-              freezed
+      passwordResetFailureOrSuccessOption: null ==
+              passwordResetFailureOrSuccessOption
           ? _value.passwordResetFailureOrSuccessOption
           : passwordResetFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, ResetPassword>>,
-      showErrorMessages: showErrorMessages == freezed
+      showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -845,6 +843,7 @@ abstract class _$$_ResetPasswordCopyWith<$Res>
           _$_ResetPassword value, $Res Function(_$_ResetPassword) then) =
       __$$_ResetPasswordCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {bool isOldPasswordObscure,
       bool isNewPasswordObscure,
@@ -860,62 +859,60 @@ abstract class _$$_ResetPasswordCopyWith<$Res>
 
 /// @nodoc
 class __$$_ResetPasswordCopyWithImpl<$Res>
-    extends _$ResetPasswordStateCopyWithImpl<$Res>
+    extends _$ResetPasswordStateCopyWithImpl<$Res, _$_ResetPassword>
     implements _$$_ResetPasswordCopyWith<$Res> {
   __$$_ResetPasswordCopyWithImpl(
       _$_ResetPassword _value, $Res Function(_$_ResetPassword) _then)
-      : super(_value, (v) => _then(v as _$_ResetPassword));
+      : super(_value, _then);
 
-  @override
-  _$_ResetPassword get _value => super._value as _$_ResetPassword;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isOldPasswordObscure = freezed,
-    Object? isNewPasswordObscure = freezed,
-    Object? isConfirmPasswordObscure = freezed,
-    Object? oldPassword = freezed,
-    Object? newPassword = freezed,
-    Object? confirmPassword = freezed,
-    Object? isSubmitting = freezed,
-    Object? passwordResetFailureOrSuccessOption = freezed,
-    Object? showErrorMessages = freezed,
+    Object? isOldPasswordObscure = null,
+    Object? isNewPasswordObscure = null,
+    Object? isConfirmPasswordObscure = null,
+    Object? oldPassword = null,
+    Object? newPassword = null,
+    Object? confirmPassword = null,
+    Object? isSubmitting = null,
+    Object? passwordResetFailureOrSuccessOption = null,
+    Object? showErrorMessages = null,
   }) {
     return _then(_$_ResetPassword(
-      isOldPasswordObscure: isOldPasswordObscure == freezed
+      isOldPasswordObscure: null == isOldPasswordObscure
           ? _value.isOldPasswordObscure
           : isOldPasswordObscure // ignore: cast_nullable_to_non_nullable
               as bool,
-      isNewPasswordObscure: isNewPasswordObscure == freezed
+      isNewPasswordObscure: null == isNewPasswordObscure
           ? _value.isNewPasswordObscure
           : isNewPasswordObscure // ignore: cast_nullable_to_non_nullable
               as bool,
-      isConfirmPasswordObscure: isConfirmPasswordObscure == freezed
+      isConfirmPasswordObscure: null == isConfirmPasswordObscure
           ? _value.isConfirmPasswordObscure
           : isConfirmPasswordObscure // ignore: cast_nullable_to_non_nullable
               as bool,
-      oldPassword: oldPassword == freezed
+      oldPassword: null == oldPassword
           ? _value.oldPassword
           : oldPassword // ignore: cast_nullable_to_non_nullable
               as Password,
-      newPassword: newPassword == freezed
+      newPassword: null == newPassword
           ? _value.newPassword
           : newPassword // ignore: cast_nullable_to_non_nullable
               as Password,
-      confirmPassword: confirmPassword == freezed
+      confirmPassword: null == confirmPassword
           ? _value.confirmPassword
           : confirmPassword // ignore: cast_nullable_to_non_nullable
               as Password,
-      isSubmitting: isSubmitting == freezed
+      isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
-      passwordResetFailureOrSuccessOption: passwordResetFailureOrSuccessOption ==
-              freezed
+      passwordResetFailureOrSuccessOption: null ==
+              passwordResetFailureOrSuccessOption
           ? _value.passwordResetFailureOrSuccessOption
           : passwordResetFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, ResetPassword>>,
-      showErrorMessages: showErrorMessages == freezed
+      showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -967,42 +964,45 @@ class _$_ResetPassword implements _ResetPassword {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ResetPassword &&
-            const DeepCollectionEquality()
-                .equals(other.isOldPasswordObscure, isOldPasswordObscure) &&
-            const DeepCollectionEquality()
-                .equals(other.isNewPasswordObscure, isNewPasswordObscure) &&
-            const DeepCollectionEquality().equals(
-                other.isConfirmPasswordObscure, isConfirmPasswordObscure) &&
-            const DeepCollectionEquality()
-                .equals(other.oldPassword, oldPassword) &&
-            const DeepCollectionEquality()
-                .equals(other.newPassword, newPassword) &&
-            const DeepCollectionEquality()
-                .equals(other.confirmPassword, confirmPassword) &&
-            const DeepCollectionEquality()
-                .equals(other.isSubmitting, isSubmitting) &&
-            const DeepCollectionEquality().equals(
-                other.passwordResetFailureOrSuccessOption,
-                passwordResetFailureOrSuccessOption) &&
-            const DeepCollectionEquality()
-                .equals(other.showErrorMessages, showErrorMessages));
+            (identical(other.isOldPasswordObscure, isOldPasswordObscure) ||
+                other.isOldPasswordObscure == isOldPasswordObscure) &&
+            (identical(other.isNewPasswordObscure, isNewPasswordObscure) ||
+                other.isNewPasswordObscure == isNewPasswordObscure) &&
+            (identical(
+                    other.isConfirmPasswordObscure, isConfirmPasswordObscure) ||
+                other.isConfirmPasswordObscure == isConfirmPasswordObscure) &&
+            (identical(other.oldPassword, oldPassword) ||
+                other.oldPassword == oldPassword) &&
+            (identical(other.newPassword, newPassword) ||
+                other.newPassword == newPassword) &&
+            (identical(other.confirmPassword, confirmPassword) ||
+                other.confirmPassword == confirmPassword) &&
+            (identical(other.isSubmitting, isSubmitting) ||
+                other.isSubmitting == isSubmitting) &&
+            (identical(other.passwordResetFailureOrSuccessOption,
+                    passwordResetFailureOrSuccessOption) ||
+                other.passwordResetFailureOrSuccessOption ==
+                    passwordResetFailureOrSuccessOption) &&
+            (identical(other.showErrorMessages, showErrorMessages) ||
+                other.showErrorMessages == showErrorMessages));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(isOldPasswordObscure),
-      const DeepCollectionEquality().hash(isNewPasswordObscure),
-      const DeepCollectionEquality().hash(isConfirmPasswordObscure),
-      const DeepCollectionEquality().hash(oldPassword),
-      const DeepCollectionEquality().hash(newPassword),
-      const DeepCollectionEquality().hash(confirmPassword),
-      const DeepCollectionEquality().hash(isSubmitting),
-      const DeepCollectionEquality().hash(passwordResetFailureOrSuccessOption),
-      const DeepCollectionEquality().hash(showErrorMessages));
+      isOldPasswordObscure,
+      isNewPasswordObscure,
+      isConfirmPasswordObscure,
+      oldPassword,
+      newPassword,
+      confirmPassword,
+      isSubmitting,
+      passwordResetFailureOrSuccessOption,
+      showErrorMessages);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ResetPasswordCopyWith<_$_ResetPassword> get copyWith =>
       __$$_ResetPasswordCopyWithImpl<_$_ResetPassword>(this, _$identity);
 }

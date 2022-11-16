@@ -25,7 +25,7 @@ mixin _$AupTcEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(User user, SalesOrg salesOrg)? show,
+    TResult? Function(User user, SalesOrg salesOrg)? show,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,7 +41,7 @@ mixin _$AupTcEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Show value)? show,
+    TResult? Function(_Show value)? show,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,41 +60,46 @@ mixin _$AupTcEvent {
 abstract class $AupTcEventCopyWith<$Res> {
   factory $AupTcEventCopyWith(
           AupTcEvent value, $Res Function(AupTcEvent) then) =
-      _$AupTcEventCopyWithImpl<$Res>;
+      _$AupTcEventCopyWithImpl<$Res, AupTcEvent>;
+  @useResult
   $Res call({User user, SalesOrg salesOrg});
 
   $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
-class _$AupTcEventCopyWithImpl<$Res> implements $AupTcEventCopyWith<$Res> {
+class _$AupTcEventCopyWithImpl<$Res, $Val extends AupTcEvent>
+    implements $AupTcEventCopyWith<$Res> {
   _$AupTcEventCopyWithImpl(this._value, this._then);
 
-  final AupTcEvent _value;
   // ignore: unused_field
-  final $Res Function(AupTcEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
-    Object? salesOrg = freezed,
+    Object? user = null,
+    Object? salesOrg = null,
   }) {
     return _then(_value.copyWith(
-      user: user == freezed
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      salesOrg: salesOrg == freezed
+      salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as SalesOrg,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
+      return _then(_value.copyWith(user: value) as $Val);
     });
   }
 }
@@ -104,6 +109,7 @@ abstract class _$$_ShowCopyWith<$Res> implements $AupTcEventCopyWith<$Res> {
   factory _$$_ShowCopyWith(_$_Show value, $Res Function(_$_Show) then) =
       __$$_ShowCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({User user, SalesOrg salesOrg});
 
   @override
@@ -111,25 +117,24 @@ abstract class _$$_ShowCopyWith<$Res> implements $AupTcEventCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ShowCopyWithImpl<$Res> extends _$AupTcEventCopyWithImpl<$Res>
+class __$$_ShowCopyWithImpl<$Res>
+    extends _$AupTcEventCopyWithImpl<$Res, _$_Show>
     implements _$$_ShowCopyWith<$Res> {
   __$$_ShowCopyWithImpl(_$_Show _value, $Res Function(_$_Show) _then)
-      : super(_value, (v) => _then(v as _$_Show));
+      : super(_value, _then);
 
-  @override
-  _$_Show get _value => super._value as _$_Show;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
-    Object? salesOrg = freezed,
+    Object? user = null,
+    Object? salesOrg = null,
   }) {
     return _then(_$_Show(
-      user == freezed
+      null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      salesOrg == freezed
+      null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as SalesOrg,
@@ -157,18 +162,17 @@ class _$_Show implements _Show {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Show &&
-            const DeepCollectionEquality().equals(other.user, user) &&
-            const DeepCollectionEquality().equals(other.salesOrg, salesOrg));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.salesOrg, salesOrg) ||
+                other.salesOrg == salesOrg));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(user),
-      const DeepCollectionEquality().hash(salesOrg));
+  int get hashCode => Object.hash(runtimeType, user, salesOrg);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ShowCopyWith<_$_Show> get copyWith =>
       __$$_ShowCopyWithImpl<_$_Show>(this, _$identity);
 
@@ -183,7 +187,7 @@ class _$_Show implements _Show {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(User user, SalesOrg salesOrg)? show,
+    TResult? Function(User user, SalesOrg salesOrg)? show,
   }) {
     return show?.call(user, salesOrg);
   }
@@ -211,7 +215,7 @@ class _$_Show implements _Show {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Show value)? show,
+    TResult? Function(_Show value)? show,
   }) {
     return show?.call(this);
   }
@@ -257,7 +261,8 @@ mixin _$AupTcState {
 abstract class $AupTcStateCopyWith<$Res> {
   factory $AupTcStateCopyWith(
           AupTcState value, $Res Function(AupTcState) then) =
-      _$AupTcStateCopyWithImpl<$Res>;
+      _$AupTcStateCopyWithImpl<$Res, AupTcState>;
+  @useResult
   $Res call(
       {bool showTermsAndConditon,
       String title,
@@ -266,38 +271,41 @@ abstract class $AupTcStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AupTcStateCopyWithImpl<$Res> implements $AupTcStateCopyWith<$Res> {
+class _$AupTcStateCopyWithImpl<$Res, $Val extends AupTcState>
+    implements $AupTcStateCopyWith<$Res> {
   _$AupTcStateCopyWithImpl(this._value, this._then);
 
-  final AupTcState _value;
   // ignore: unused_field
-  final $Res Function(AupTcState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? showTermsAndConditon = freezed,
-    Object? title = freezed,
+    Object? showTermsAndConditon = null,
+    Object? title = null,
     Object? initialFile = freezed,
-    Object? url = freezed,
+    Object? url = null,
   }) {
     return _then(_value.copyWith(
-      showTermsAndConditon: showTermsAndConditon == freezed
+      showTermsAndConditon: null == showTermsAndConditon
           ? _value.showTermsAndConditon
           : showTermsAndConditon // ignore: cast_nullable_to_non_nullable
               as bool,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      initialFile: initialFile == freezed
+      initialFile: freezed == initialFile
           ? _value.initialFile
           : initialFile // ignore: cast_nullable_to_non_nullable
               as String?,
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -308,6 +316,7 @@ abstract class _$$_AupTcStateCopyWith<$Res>
           _$_AupTcState value, $Res Function(_$_AupTcState) then) =
       __$$_AupTcStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {bool showTermsAndConditon,
       String title,
@@ -316,36 +325,35 @@ abstract class _$$_AupTcStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AupTcStateCopyWithImpl<$Res> extends _$AupTcStateCopyWithImpl<$Res>
+class __$$_AupTcStateCopyWithImpl<$Res>
+    extends _$AupTcStateCopyWithImpl<$Res, _$_AupTcState>
     implements _$$_AupTcStateCopyWith<$Res> {
   __$$_AupTcStateCopyWithImpl(
       _$_AupTcState _value, $Res Function(_$_AupTcState) _then)
-      : super(_value, (v) => _then(v as _$_AupTcState));
+      : super(_value, _then);
 
-  @override
-  _$_AupTcState get _value => super._value as _$_AupTcState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? showTermsAndConditon = freezed,
-    Object? title = freezed,
+    Object? showTermsAndConditon = null,
+    Object? title = null,
     Object? initialFile = freezed,
-    Object? url = freezed,
+    Object? url = null,
   }) {
     return _then(_$_AupTcState(
-      showTermsAndConditon: showTermsAndConditon == freezed
+      showTermsAndConditon: null == showTermsAndConditon
           ? _value.showTermsAndConditon
           : showTermsAndConditon // ignore: cast_nullable_to_non_nullable
               as bool,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      initialFile: initialFile == freezed
+      initialFile: freezed == initialFile
           ? _value.initialFile
           : initialFile // ignore: cast_nullable_to_non_nullable
               as String?,
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
@@ -381,24 +389,21 @@ class _$_AupTcState implements _AupTcState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AupTcState &&
-            const DeepCollectionEquality()
-                .equals(other.showTermsAndConditon, showTermsAndConditon) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality()
-                .equals(other.initialFile, initialFile) &&
-            const DeepCollectionEquality().equals(other.url, url));
+            (identical(other.showTermsAndConditon, showTermsAndConditon) ||
+                other.showTermsAndConditon == showTermsAndConditon) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.initialFile, initialFile) ||
+                other.initialFile == initialFile) &&
+            (identical(other.url, url) || other.url == url));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(showTermsAndConditon),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(initialFile),
-      const DeepCollectionEquality().hash(url));
+  int get hashCode =>
+      Object.hash(runtimeType, showTermsAndConditon, title, initialFile, url);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AupTcStateCopyWith<_$_AupTcState> get copyWith =>
       __$$_AupTcStateCopyWithImpl<_$_AupTcState>(this, _$identity);
 }

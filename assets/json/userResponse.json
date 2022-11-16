@@ -75,6 +75,9 @@
           "acceptAUPTC": null,
           "emailNotifications":true,
           "mobileNotifications":true,
+          "acceptPrivacyPolicy":false,
+          "acceptPrivacyPolicyTime":"2021-12-01T07:22:01Z",
+          "privacyPolicyAcceptedPlatform":"mobile",
           "mobileToken":[
              {
                 "token":"fSpw3D5gS_SQkNR_gt_xE1:APA91bFwhc_bzS1_6nyPxe5WJ2wiIEdqxEdVxvPlTOBG5M5xl478dFiU1_Pm59smSKnj2zkz9v9-eMwIk9hGG5ex9OjEbr4x6p_r2iYBRQQ0FmGDdeSUykDN3LL8uPTBA3_hE7expeIn",

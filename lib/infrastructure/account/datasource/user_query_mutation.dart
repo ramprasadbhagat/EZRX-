@@ -125,33 +125,6 @@ class UserQueryMutation {
     }
     ''';
   }
-
-  String updateUAPQuery() {
-    return '''
-      mutation updateUserMutation(\$input: UpdateUserInput!) {
-        updateUser(input: \$input) {
-          user {
-            acceptAUP
-            acceptAUPTC
-          }
-        }
-      }
-    ''';
-  }
-
-  String updateUserAcceptMobileTC() {
-    return '''
-      mutation updateUserMutation(\$input: UpdateUserInput!) {
-        updateUser(input: \$input) {
-          user {
-              acceptTC
-              acceptTCTimestamp
-          }
-        }
-      }
-    ''';
-  }
-
   /* Query for updation of the users's notification preference accordingly for their language preference  */
 
   String updateNotification() {
@@ -170,6 +143,22 @@ class UserQueryMutation {
               mobileNumber
               emailNotifications
               languagePreference
+          }
+        }
+      }
+    ''';
+  }
+
+  String updatePrivacyPolicy() {
+    return '''
+      mutation updateUserMutation(\$input: UpdateUserInput!) {
+        updateUser(input: \$input) {
+          user {
+            username
+            email
+            acceptPrivacyPolicy
+            acceptPrivacyPolicyTime
+            privacyPolicyAcceptedPlatform
           }
         }
       }

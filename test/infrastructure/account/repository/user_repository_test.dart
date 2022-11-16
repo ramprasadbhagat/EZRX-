@@ -174,97 +174,97 @@ void main() {
       },
     );
 
-    test(
-      'update user aup from local datasource successfully with mock',
-      () async {
-        repository = UserRepository(
-          firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
-          firebaseAnalyticsService: firebaseAnalyticsServiceMock,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-        );
+    // test(
+    //   'update user aup from local datasource successfully with mock',
+    //   () async {
+    //     repository = UserRepository(
+    //       firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
+    //       firebaseAnalyticsService: firebaseAnalyticsServiceMock,
+    //       remoteDataSource: remoteDataSourceMock,
+    //       config: configMock,
+    //       localDataSource: localDataSourceMock,
+    //       tokenStorage: tokenStorageMock,
+    //     );
 
-        when(() => configMock.appFlavor)
-            .thenAnswer((invocation) => Flavor.mock);
+    //     when(() => configMock.appFlavor)
+    //         .thenAnswer((invocation) => Flavor.mock);
 
-        when(() => localDataSourceMock.updateUserAup())
-            .thenAnswer((invocation) async => User.empty().settingAup);
+    //     when(() => localDataSourceMock.updateUserAup())
+    //         .thenAnswer((invocation) async => User.empty().settingAup);
 
-        final result = await repository.updateUserAup(User.empty());
-        expect(result.isRight(), true);
-      },
-    );
+    //     final result = await repository.updateUserAup(User.empty());
+    //     expect(result.isRight(), true);
+    //   },
+    // );
 
-    test(
-      'update user aup from local datasource throws error with mock',
-      () async {
-        repository = UserRepository(
-          firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
-          firebaseAnalyticsService: firebaseAnalyticsServiceMock,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-        );
+    // test(
+    //   'update user aup from local datasource throws error with mock',
+    //   () async {
+    //     repository = UserRepository(
+    //       firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
+    //       firebaseAnalyticsService: firebaseAnalyticsServiceMock,
+    //       remoteDataSource: remoteDataSourceMock,
+    //       config: configMock,
+    //       localDataSource: localDataSourceMock,
+    //       tokenStorage: tokenStorageMock,
+    //     );
 
-        when(() => configMock.appFlavor)
-            .thenAnswer((invocation) => Flavor.mock);
+    //     when(() => configMock.appFlavor)
+    //         .thenAnswer((invocation) => Flavor.mock);
 
-        when(() => localDataSourceMock.updateUserAup())
-            .thenThrow(MockException(message: 'mockException'));
+    //     when(() => localDataSourceMock.updateUserAup())
+    //         .thenThrow(MockException(message: 'mockException'));
 
-        final result = await repository.updateUserAup(User.empty());
-        expect(result.isLeft(), true);
-      },
-    );
+    //     final result = await repository.updateUserAup(User.empty());
+    //     expect(result.isLeft(), true);
+    //   },
+    // );
 
-    test(
-      'update user aup from remote datasource successfully with uat',
-      () async {
-        repository = UserRepository(
-          firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
-          firebaseAnalyticsService: firebaseAnalyticsServiceMock,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-        );
+    // test(
+    //   'update user aup from remote datasource successfully with uat',
+    //   () async {
+    //     repository = UserRepository(
+    //       firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
+    //       firebaseAnalyticsService: firebaseAnalyticsServiceMock,
+    //       remoteDataSource: remoteDataSourceMock,
+    //       config: configMock,
+    //       localDataSource: localDataSourceMock,
+    //       tokenStorage: tokenStorageMock,
+    //     );
 
-        when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
+    //     when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
 
-        when(() => remoteDataSourceMock.updateUserAup(
-              userId: User.empty().id,
-            )).thenAnswer((invocation) async => User.empty().settingAup);
+    //     when(() => remoteDataSourceMock.updateUserAup(
+    //           userId: User.empty().id,
+    //         )).thenAnswer((invocation) async => User.empty().settingAup);
 
-        final result = await repository.updateUserAup(User.empty());
-        expect(result.isRight(), true);
-      },
-    );
+    //     final result = await repository.updateUserAup(User.empty());
+    //     expect(result.isRight(), true);
+    //   },
+    // );
 
-    test(
-      'update user aup from remote datasource throws error with uat',
-      () async {
-        repository = UserRepository(
-          firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
-          firebaseAnalyticsService: firebaseAnalyticsServiceMock,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-        );
+    // test(
+    //   'update user aup from remote datasource throws error with uat',
+    //   () async {
+    //     repository = UserRepository(
+    //       firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
+    //       firebaseAnalyticsService: firebaseAnalyticsServiceMock,
+    //       remoteDataSource: remoteDataSourceMock,
+    //       config: configMock,
+    //       localDataSource: localDataSourceMock,
+    //       tokenStorage: tokenStorageMock,
+    //     );
 
-        when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
+    //     when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
 
-        when(() => remoteDataSourceMock.updateUserAup(
-              userId: User.empty().id,
-            )).thenThrow(Error());
+    //     when(() => remoteDataSourceMock.updateUserAup(
+    //           userId: User.empty().id,
+    //         )).thenThrow(Error());
 
-        final result = await repository.updateUserAup(User.empty());
-        expect(result.isLeft(), true);
-      },
-    );
+    //     final result = await repository.updateUserAup(User.empty());
+    //     expect(result.isLeft(), true);
+    //   },
+    // );
 
     test(
       'update user tc from local datasource successfully with mock',

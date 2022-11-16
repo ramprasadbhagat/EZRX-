@@ -29,39 +29,43 @@ mixin _$OrderHistoryBasicInfo {
 abstract class $OrderHistoryBasicInfoCopyWith<$Res> {
   factory $OrderHistoryBasicInfoCopyWith(OrderHistoryBasicInfo value,
           $Res Function(OrderHistoryBasicInfo) then) =
-      _$OrderHistoryBasicInfoCopyWithImpl<$Res>;
+      _$OrderHistoryBasicInfoCopyWithImpl<$Res, OrderHistoryBasicInfo>;
+  @useResult
   $Res call({String soldTo, String shipTo, CompanyName companyName});
 }
 
 /// @nodoc
-class _$OrderHistoryBasicInfoCopyWithImpl<$Res>
+class _$OrderHistoryBasicInfoCopyWithImpl<$Res,
+        $Val extends OrderHistoryBasicInfo>
     implements $OrderHistoryBasicInfoCopyWith<$Res> {
   _$OrderHistoryBasicInfoCopyWithImpl(this._value, this._then);
 
-  final OrderHistoryBasicInfo _value;
   // ignore: unused_field
-  final $Res Function(OrderHistoryBasicInfo) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? soldTo = freezed,
-    Object? shipTo = freezed,
-    Object? companyName = freezed,
+    Object? soldTo = null,
+    Object? shipTo = null,
+    Object? companyName = null,
   }) {
     return _then(_value.copyWith(
-      soldTo: soldTo == freezed
+      soldTo: null == soldTo
           ? _value.soldTo
           : soldTo // ignore: cast_nullable_to_non_nullable
               as String,
-      shipTo: shipTo == freezed
+      shipTo: null == shipTo
           ? _value.shipTo
           : shipTo // ignore: cast_nullable_to_non_nullable
               as String,
-      companyName: companyName == freezed
+      companyName: null == companyName
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
               as CompanyName,
-    ));
+    ) as $Val);
   }
 }
 
@@ -72,37 +76,35 @@ abstract class _$$_OrderHistoryBasicInfoCopyWith<$Res>
           $Res Function(_$_OrderHistoryBasicInfo) then) =
       __$$_OrderHistoryBasicInfoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String soldTo, String shipTo, CompanyName companyName});
 }
 
 /// @nodoc
 class __$$_OrderHistoryBasicInfoCopyWithImpl<$Res>
-    extends _$OrderHistoryBasicInfoCopyWithImpl<$Res>
+    extends _$OrderHistoryBasicInfoCopyWithImpl<$Res, _$_OrderHistoryBasicInfo>
     implements _$$_OrderHistoryBasicInfoCopyWith<$Res> {
   __$$_OrderHistoryBasicInfoCopyWithImpl(_$_OrderHistoryBasicInfo _value,
       $Res Function(_$_OrderHistoryBasicInfo) _then)
-      : super(_value, (v) => _then(v as _$_OrderHistoryBasicInfo));
+      : super(_value, _then);
 
-  @override
-  _$_OrderHistoryBasicInfo get _value =>
-      super._value as _$_OrderHistoryBasicInfo;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? soldTo = freezed,
-    Object? shipTo = freezed,
-    Object? companyName = freezed,
+    Object? soldTo = null,
+    Object? shipTo = null,
+    Object? companyName = null,
   }) {
     return _then(_$_OrderHistoryBasicInfo(
-      soldTo: soldTo == freezed
+      soldTo: null == soldTo
           ? _value.soldTo
           : soldTo // ignore: cast_nullable_to_non_nullable
               as String,
-      shipTo: shipTo == freezed
+      shipTo: null == shipTo
           ? _value.shipTo
           : shipTo // ignore: cast_nullable_to_non_nullable
               as String,
-      companyName: companyName == freezed
+      companyName: null == companyName
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
               as CompanyName,
@@ -134,21 +136,18 @@ class _$_OrderHistoryBasicInfo extends _OrderHistoryBasicInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryBasicInfo &&
-            const DeepCollectionEquality().equals(other.soldTo, soldTo) &&
-            const DeepCollectionEquality().equals(other.shipTo, shipTo) &&
-            const DeepCollectionEquality()
-                .equals(other.companyName, companyName));
+            (identical(other.soldTo, soldTo) || other.soldTo == soldTo) &&
+            (identical(other.shipTo, shipTo) || other.shipTo == shipTo) &&
+            (identical(other.companyName, companyName) ||
+                other.companyName == companyName));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(soldTo),
-      const DeepCollectionEquality().hash(shipTo),
-      const DeepCollectionEquality().hash(companyName));
+  int get hashCode => Object.hash(runtimeType, soldTo, shipTo, companyName);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OrderHistoryBasicInfoCopyWith<_$_OrderHistoryBasicInfo> get copyWith =>
       __$$_OrderHistoryBasicInfoCopyWithImpl<_$_OrderHistoryBasicInfo>(
           this, _$identity);

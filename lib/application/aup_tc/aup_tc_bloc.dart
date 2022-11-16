@@ -29,9 +29,9 @@ class AupTcBloc extends Bloc<AupTcEvent, AupTcState> {
             title: e.user.role.type.isAupAudience
                 ? 'Acceptable Use Policy'
                 : 'TERMS OF USE',
-            initialFile: _getInitialFile(e.user, e.salesOrg),
+            initialFile: _getInitialFile(e.salesOrg),
             showTermsAndConditon: await _showTermsAndConditon(e.user),
-            url: _getLink(e.user, e.salesOrg),
+            url: _getLink(e.salesOrg),
           ),
         );
       },
@@ -43,49 +43,50 @@ class AupTcBloc extends Bloc<AupTcEvent, AupTcState> {
     return super.close();
   }
 
-  String? _getInitialFile(User user, SalesOrg salesOrg) {
-    final salesOrgIsVN = salesOrg.isVN;
+  String? _getInitialFile(SalesOrg salesOrg) {
+    final salesOrgCountry = salesOrg.country;
 
-    return user.role.type.isAupAudience
-        ? (salesOrgIsVN ? config.getAUPVNFile : config.getAUPFile)
-        : (salesOrgIsVN ? config.getTCVNFile : config.getTCFile);
+    switch (salesOrgCountry) {
+      case 'VN':
+        return config.getTCVNFile;
+      case 'TH':
+        return config.getTCTHFile;
+      case 'KH':
+        return config.getTCKHFile;
+      case 'MM':
+        return config.getTCMMFile;
+      case 'TW':
+        return config.getTCTWFile;
+      default:
+        return config.getTCENFile;
+    }
   }
 
-  String _getLink(User user, SalesOrg salesOrg) {
-    final salesOrgIsVN = salesOrg.isVN;
+  String _getLink(SalesOrg salesOrg) {
+    final salesOrgCountry = salesOrg.country;
 
-    return user.role.type.isAupAudience
-        ? (salesOrgIsVN ? config.getAUPVNUrl : config.getAUPUrl)
-        : (salesOrgIsVN ? config.getTCVNUrl : config.getTCUrl);
+    switch (salesOrgCountry) {
+      case 'VN':
+        return config.getTCVNUrl;
+      case 'TH':
+        return config.getTCTHUrl;
+      case 'KH':
+        return config.getTCKHUrl;
+      case 'MM':
+        return config.getTCMMUrl;
+      case 'TW':
+        return config.getTCTWUrl;
+      default:
+        return config.getTCENUrl;
+    }
   }
 
   Future<bool> _showTermsAndConditon(User user) async {
     final isTncEnabled = aupTcRepository.getTncConfig();
     if (!isTncEnabled) return false;
 
-    final failureOrSuccess = await aupTcRepository.getTncDate();
+    final acceptPrivacyPolicy = user.settingTc.acceptPrivacyPolicy;
 
-    return failureOrSuccess.fold(
-      (failure) => false,
-      (aupTcAcceptDate) {
-        if (user.role.type.isAupAudience) {
-          final acceptAUP = user.settingAup.acceptAUP;
-          final acceptAUPTimestamp = user.settingAup.acceptAUPTimestamp;
-          if (!acceptAUP || acceptAUPTimestamp.isBefore(aupTcAcceptDate.date)) {
-            return true;
-          }
-
-          return false;
-        } else {
-          final acceptTC = user.settingTc.acceptTC;
-          final acceptTCTimestamp = user.settingTc.acceptTCTimestamp;
-          if (!acceptTC || acceptTCTimestamp.isBefore(aupTcAcceptDate.date)) {
-            return true;
-          }
-
-          return false;
-        }
-      },
-    );
+    return acceptPrivacyPolicy ? false : true;
   }
 }

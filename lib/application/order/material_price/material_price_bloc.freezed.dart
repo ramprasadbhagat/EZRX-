@@ -26,8 +26,8 @@ mixin _$MaterialPriceEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(CustomerCodeInfo customerCode,
+    TResult? Function()? initialized,
+    TResult? Function(CustomerCodeInfo customerCode,
             SalesOrganisation salesOrganisation, List<MaterialInfo> materials)?
         fetch,
   }) =>
@@ -49,8 +49,8 @@ mixin _$MaterialPriceEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,17 +66,18 @@ mixin _$MaterialPriceEvent {
 abstract class $MaterialPriceEventCopyWith<$Res> {
   factory $MaterialPriceEventCopyWith(
           MaterialPriceEvent value, $Res Function(MaterialPriceEvent) then) =
-      _$MaterialPriceEventCopyWithImpl<$Res>;
+      _$MaterialPriceEventCopyWithImpl<$Res, MaterialPriceEvent>;
 }
 
 /// @nodoc
-class _$MaterialPriceEventCopyWithImpl<$Res>
+class _$MaterialPriceEventCopyWithImpl<$Res, $Val extends MaterialPriceEvent>
     implements $MaterialPriceEventCopyWith<$Res> {
   _$MaterialPriceEventCopyWithImpl(this._value, this._then);
 
-  final MaterialPriceEvent _value;
   // ignore: unused_field
-  final $Res Function(MaterialPriceEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -88,14 +89,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitializedCopyWithImpl<$Res>
-    extends _$MaterialPriceEventCopyWithImpl<$Res>
+    extends _$MaterialPriceEventCopyWithImpl<$Res, _$_Initialized>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, (v) => _then(v as _$_Initialized));
-
-  @override
-  _$_Initialized get _value => super._value as _$_Initialized;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -131,8 +129,8 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(CustomerCodeInfo customerCode,
+    TResult? Function()? initialized,
+    TResult? Function(CustomerCodeInfo customerCode,
             SalesOrganisation salesOrganisation, List<MaterialInfo> materials)?
         fetch,
   }) {
@@ -166,8 +164,8 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
   }) {
     return initialized?.call(this);
   }
@@ -194,6 +192,7 @@ abstract class _Initialized implements MaterialPriceEvent {
 abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
+  @useResult
   $Res call(
       {CustomerCodeInfo customerCode,
       SalesOrganisation salesOrganisation,
@@ -205,30 +204,28 @@ abstract class _$$_FetchCopyWith<$Res> {
 
 /// @nodoc
 class __$$_FetchCopyWithImpl<$Res>
-    extends _$MaterialPriceEventCopyWithImpl<$Res>
+    extends _$MaterialPriceEventCopyWithImpl<$Res, _$_Fetch>
     implements _$$_FetchCopyWith<$Res> {
   __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
-      : super(_value, (v) => _then(v as _$_Fetch));
+      : super(_value, _then);
 
-  @override
-  _$_Fetch get _value => super._value as _$_Fetch;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? customerCode = freezed,
-    Object? salesOrganisation = freezed,
-    Object? materials = freezed,
+    Object? customerCode = null,
+    Object? salesOrganisation = null,
+    Object? materials = null,
   }) {
     return _then(_$_Fetch(
-      customerCode: customerCode == freezed
+      customerCode: null == customerCode
           ? _value.customerCode
           : customerCode // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
-      salesOrganisation: salesOrganisation == freezed
+      salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      materials: materials == freezed
+      materials: null == materials
           ? _value._materials
           : materials // ignore: cast_nullable_to_non_nullable
               as List<MaterialInfo>,
@@ -236,6 +233,7 @@ class __$$_FetchCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $CustomerCodeInfoCopyWith<$Res> get customerCode {
     return $CustomerCodeInfoCopyWith<$Res>(_value.customerCode, (value) {
       return _then(_value.copyWith(customerCode: value));
@@ -243,6 +241,7 @@ class __$$_FetchCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SalesOrganisationCopyWith<$Res> get salesOrganisation {
     return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
       return _then(_value.copyWith(salesOrganisation: value));
@@ -280,23 +279,21 @@ class _$_Fetch implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
-            const DeepCollectionEquality()
-                .equals(other.customerCode, customerCode) &&
-            const DeepCollectionEquality()
-                .equals(other.salesOrganisation, salesOrganisation) &&
+            (identical(other.customerCode, customerCode) ||
+                other.customerCode == customerCode) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
             const DeepCollectionEquality()
                 .equals(other._materials, _materials));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(customerCode),
-      const DeepCollectionEquality().hash(salesOrganisation),
+  int get hashCode => Object.hash(runtimeType, customerCode, salesOrganisation,
       const DeepCollectionEquality().hash(_materials));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
 
@@ -314,8 +311,8 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(CustomerCodeInfo customerCode,
+    TResult? Function()? initialized,
+    TResult? Function(CustomerCodeInfo customerCode,
             SalesOrganisation salesOrganisation, List<MaterialInfo> materials)?
         fetch,
   }) {
@@ -349,8 +346,8 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
   }) {
     return fetch?.call(this);
   }
@@ -398,34 +395,37 @@ mixin _$MaterialPriceState {
 abstract class $MaterialPriceStateCopyWith<$Res> {
   factory $MaterialPriceStateCopyWith(
           MaterialPriceState value, $Res Function(MaterialPriceState) then) =
-      _$MaterialPriceStateCopyWithImpl<$Res>;
+      _$MaterialPriceStateCopyWithImpl<$Res, MaterialPriceState>;
+  @useResult
   $Res call({Map<MaterialNumber, Price> materialPrice, bool isFetching});
 }
 
 /// @nodoc
-class _$MaterialPriceStateCopyWithImpl<$Res>
+class _$MaterialPriceStateCopyWithImpl<$Res, $Val extends MaterialPriceState>
     implements $MaterialPriceStateCopyWith<$Res> {
   _$MaterialPriceStateCopyWithImpl(this._value, this._then);
 
-  final MaterialPriceState _value;
   // ignore: unused_field
-  final $Res Function(MaterialPriceState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialPrice = freezed,
-    Object? isFetching = freezed,
+    Object? materialPrice = null,
+    Object? isFetching = null,
   }) {
     return _then(_value.copyWith(
-      materialPrice: materialPrice == freezed
+      materialPrice: null == materialPrice
           ? _value.materialPrice
           : materialPrice // ignore: cast_nullable_to_non_nullable
               as Map<MaterialNumber, Price>,
-      isFetching: isFetching == freezed
+      isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -436,31 +436,30 @@ abstract class _$$_MaterialPriceStateCopyWith<$Res>
           $Res Function(_$_MaterialPriceState) then) =
       __$$_MaterialPriceStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({Map<MaterialNumber, Price> materialPrice, bool isFetching});
 }
 
 /// @nodoc
 class __$$_MaterialPriceStateCopyWithImpl<$Res>
-    extends _$MaterialPriceStateCopyWithImpl<$Res>
+    extends _$MaterialPriceStateCopyWithImpl<$Res, _$_MaterialPriceState>
     implements _$$_MaterialPriceStateCopyWith<$Res> {
   __$$_MaterialPriceStateCopyWithImpl(
       _$_MaterialPriceState _value, $Res Function(_$_MaterialPriceState) _then)
-      : super(_value, (v) => _then(v as _$_MaterialPriceState));
+      : super(_value, _then);
 
-  @override
-  _$_MaterialPriceState get _value => super._value as _$_MaterialPriceState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialPrice = freezed,
-    Object? isFetching = freezed,
+    Object? materialPrice = null,
+    Object? isFetching = null,
   }) {
     return _then(_$_MaterialPriceState(
-      materialPrice: materialPrice == freezed
+      materialPrice: null == materialPrice
           ? _value._materialPrice
           : materialPrice // ignore: cast_nullable_to_non_nullable
               as Map<MaterialNumber, Price>,
-      isFetching: isFetching == freezed
+      isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -499,18 +498,17 @@ class _$_MaterialPriceState extends _MaterialPriceState {
             other is _$_MaterialPriceState &&
             const DeepCollectionEquality()
                 .equals(other._materialPrice, _materialPrice) &&
-            const DeepCollectionEquality()
-                .equals(other.isFetching, isFetching));
+            (identical(other.isFetching, isFetching) ||
+                other.isFetching == isFetching));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_materialPrice),
-      const DeepCollectionEquality().hash(isFetching));
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_materialPrice), isFetching);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MaterialPriceStateCopyWith<_$_MaterialPriceState> get copyWith =>
       __$$_MaterialPriceStateCopyWithImpl<_$_MaterialPriceState>(
           this, _$identity);

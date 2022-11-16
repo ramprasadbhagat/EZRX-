@@ -26,7 +26,6 @@ mixin _$User {
       throw _privateConstructorUsedError;
   Settings get settings => throw _privateConstructorUsedError;
   SettingTc get settingTc => throw _privateConstructorUsedError;
-  SettingAup get settingAup => throw _privateConstructorUsedError;
   bool get enableOrderType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -36,7 +35,8 @@ mixin _$User {
 /// @nodoc
 abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
-      _$UserCopyWithImpl<$Res>;
+      _$UserCopyWithImpl<$Res, User>;
+  @useResult
   $Res call(
       {String id,
       Username username,
@@ -47,118 +47,111 @@ abstract class $UserCopyWith<$Res> {
       List<SalesOrganisation> userSalesOrganisations,
       Settings settings,
       SettingTc settingTc,
-      SettingAup settingAup,
       bool enableOrderType});
 
   $FullNameCopyWith<$Res> get fullName;
   $RoleCopyWith<$Res> get role;
   $SettingsCopyWith<$Res> get settings;
   $SettingTcCopyWith<$Res> get settingTc;
-  $SettingAupCopyWith<$Res> get settingAup;
 }
 
 /// @nodoc
-class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
+class _$UserCopyWithImpl<$Res, $Val extends User>
+    implements $UserCopyWith<$Res> {
   _$UserCopyWithImpl(this._value, this._then);
 
-  final User _value;
   // ignore: unused_field
-  final $Res Function(User) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? username = freezed,
-    Object? email = freezed,
-    Object? fullName = freezed,
-    Object? role = freezed,
-    Object? customerCode = freezed,
-    Object? userSalesOrganisations = freezed,
-    Object? settings = freezed,
-    Object? settingTc = freezed,
-    Object? settingAup = freezed,
-    Object? enableOrderType = freezed,
+    Object? id = null,
+    Object? username = null,
+    Object? email = null,
+    Object? fullName = null,
+    Object? role = null,
+    Object? customerCode = null,
+    Object? userSalesOrganisations = null,
+    Object? settings = null,
+    Object? settingTc = null,
+    Object? enableOrderType = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      username: username == freezed
+      username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as Username,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as EmailAddress,
-      fullName: fullName == freezed
+      fullName: null == fullName
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as FullName,
-      role: role == freezed
+      role: null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as Role,
-      customerCode: customerCode == freezed
+      customerCode: null == customerCode
           ? _value.customerCode
           : customerCode // ignore: cast_nullable_to_non_nullable
               as CustomerCode,
-      userSalesOrganisations: userSalesOrganisations == freezed
+      userSalesOrganisations: null == userSalesOrganisations
           ? _value.userSalesOrganisations
           : userSalesOrganisations // ignore: cast_nullable_to_non_nullable
               as List<SalesOrganisation>,
-      settings: settings == freezed
+      settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as Settings,
-      settingTc: settingTc == freezed
+      settingTc: null == settingTc
           ? _value.settingTc
           : settingTc // ignore: cast_nullable_to_non_nullable
               as SettingTc,
-      settingAup: settingAup == freezed
-          ? _value.settingAup
-          : settingAup // ignore: cast_nullable_to_non_nullable
-              as SettingAup,
-      enableOrderType: enableOrderType == freezed
+      enableOrderType: null == enableOrderType
           ? _value.enableOrderType
           : enableOrderType // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $FullNameCopyWith<$Res> get fullName {
     return $FullNameCopyWith<$Res>(_value.fullName, (value) {
-      return _then(_value.copyWith(fullName: value));
+      return _then(_value.copyWith(fullName: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $RoleCopyWith<$Res> get role {
     return $RoleCopyWith<$Res>(_value.role, (value) {
-      return _then(_value.copyWith(role: value));
+      return _then(_value.copyWith(role: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SettingsCopyWith<$Res> get settings {
     return $SettingsCopyWith<$Res>(_value.settings, (value) {
-      return _then(_value.copyWith(settings: value));
+      return _then(_value.copyWith(settings: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SettingTcCopyWith<$Res> get settingTc {
     return $SettingTcCopyWith<$Res>(_value.settingTc, (value) {
-      return _then(_value.copyWith(settingTc: value));
-    });
-  }
-
-  @override
-  $SettingAupCopyWith<$Res> get settingAup {
-    return $SettingAupCopyWith<$Res>(_value.settingAup, (value) {
-      return _then(_value.copyWith(settingAup: value));
+      return _then(_value.copyWith(settingTc: value) as $Val);
     });
   }
 }
@@ -168,6 +161,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$$_UserCopyWith(_$_User value, $Res Function(_$_User) then) =
       __$$_UserCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       Username username,
@@ -178,7 +172,6 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       List<SalesOrganisation> userSalesOrganisations,
       Settings settings,
       SettingTc settingTc,
-      SettingAup settingAup,
       bool enableOrderType});
 
   @override
@@ -189,75 +182,66 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   $SettingsCopyWith<$Res> get settings;
   @override
   $SettingTcCopyWith<$Res> get settingTc;
-  @override
-  $SettingAupCopyWith<$Res> get settingAup;
 }
 
 /// @nodoc
-class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
+class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     implements _$$_UserCopyWith<$Res> {
   __$$_UserCopyWithImpl(_$_User _value, $Res Function(_$_User) _then)
-      : super(_value, (v) => _then(v as _$_User));
+      : super(_value, _then);
 
-  @override
-  _$_User get _value => super._value as _$_User;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? username = freezed,
-    Object? email = freezed,
-    Object? fullName = freezed,
-    Object? role = freezed,
-    Object? customerCode = freezed,
-    Object? userSalesOrganisations = freezed,
-    Object? settings = freezed,
-    Object? settingTc = freezed,
-    Object? settingAup = freezed,
-    Object? enableOrderType = freezed,
+    Object? id = null,
+    Object? username = null,
+    Object? email = null,
+    Object? fullName = null,
+    Object? role = null,
+    Object? customerCode = null,
+    Object? userSalesOrganisations = null,
+    Object? settings = null,
+    Object? settingTc = null,
+    Object? enableOrderType = null,
   }) {
     return _then(_$_User(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      username: username == freezed
+      username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as Username,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as EmailAddress,
-      fullName: fullName == freezed
+      fullName: null == fullName
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as FullName,
-      role: role == freezed
+      role: null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as Role,
-      customerCode: customerCode == freezed
+      customerCode: null == customerCode
           ? _value.customerCode
           : customerCode // ignore: cast_nullable_to_non_nullable
               as CustomerCode,
-      userSalesOrganisations: userSalesOrganisations == freezed
+      userSalesOrganisations: null == userSalesOrganisations
           ? _value._userSalesOrganisations
           : userSalesOrganisations // ignore: cast_nullable_to_non_nullable
               as List<SalesOrganisation>,
-      settings: settings == freezed
+      settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as Settings,
-      settingTc: settingTc == freezed
+      settingTc: null == settingTc
           ? _value.settingTc
           : settingTc // ignore: cast_nullable_to_non_nullable
               as SettingTc,
-      settingAup: settingAup == freezed
-          ? _value.settingAup
-          : settingAup // ignore: cast_nullable_to_non_nullable
-              as SettingAup,
-      enableOrderType: enableOrderType == freezed
+      enableOrderType: null == enableOrderType
           ? _value.enableOrderType
           : enableOrderType // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -278,7 +262,6 @@ class _$_User extends _User {
       required final List<SalesOrganisation> userSalesOrganisations,
       required this.settings,
       required this.settingTc,
-      required this.settingAup,
       required this.enableOrderType})
       : _userSalesOrganisations = userSalesOrganisations,
         super._();
@@ -307,13 +290,11 @@ class _$_User extends _User {
   @override
   final SettingTc settingTc;
   @override
-  final SettingAup settingAup;
-  @override
   final bool enableOrderType;
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, settings: $settings, settingTc: $settingTc, settingAup: $settingAup, enableOrderType: $enableOrderType)';
+    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, settings: $settings, settingTc: $settingTc, enableOrderType: $enableOrderType)';
   }
 
   @override
@@ -321,40 +302,42 @@ class _$_User extends _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_User &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.username, username) &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.fullName, fullName) &&
-            const DeepCollectionEquality().equals(other.role, role) &&
-            const DeepCollectionEquality()
-                .equals(other.customerCode, customerCode) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.fullName, fullName) ||
+                other.fullName == fullName) &&
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.customerCode, customerCode) ||
+                other.customerCode == customerCode) &&
             const DeepCollectionEquality().equals(
                 other._userSalesOrganisations, _userSalesOrganisations) &&
-            const DeepCollectionEquality().equals(other.settings, settings) &&
-            const DeepCollectionEquality().equals(other.settingTc, settingTc) &&
-            const DeepCollectionEquality()
-                .equals(other.settingAup, settingAup) &&
-            const DeepCollectionEquality()
-                .equals(other.enableOrderType, enableOrderType));
+            (identical(other.settings, settings) ||
+                other.settings == settings) &&
+            (identical(other.settingTc, settingTc) ||
+                other.settingTc == settingTc) &&
+            (identical(other.enableOrderType, enableOrderType) ||
+                other.enableOrderType == enableOrderType));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(username),
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(fullName),
-      const DeepCollectionEquality().hash(role),
-      const DeepCollectionEquality().hash(customerCode),
+      id,
+      username,
+      email,
+      fullName,
+      role,
+      customerCode,
       const DeepCollectionEquality().hash(_userSalesOrganisations),
-      const DeepCollectionEquality().hash(settings),
-      const DeepCollectionEquality().hash(settingTc),
-      const DeepCollectionEquality().hash(settingAup),
-      const DeepCollectionEquality().hash(enableOrderType));
+      settings,
+      settingTc,
+      enableOrderType);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UserCopyWith<_$_User> get copyWith =>
       __$$_UserCopyWithImpl<_$_User>(this, _$identity);
 }
@@ -370,7 +353,6 @@ abstract class _User extends User {
       required final List<SalesOrganisation> userSalesOrganisations,
       required final Settings settings,
       required final SettingTc settingTc,
-      required final SettingAup settingAup,
       required final bool enableOrderType}) = _$_User;
   const _User._() : super._();
 
@@ -392,8 +374,6 @@ abstract class _User extends User {
   Settings get settings;
   @override
   SettingTc get settingTc;
-  @override
-  SettingAup get settingAup;
   @override
   bool get enableOrderType;
   @override

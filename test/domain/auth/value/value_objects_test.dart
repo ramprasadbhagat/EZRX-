@@ -1,6 +1,5 @@
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/setting_aup.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -401,7 +400,6 @@ void main() {
           userSalesOrganisations: [],
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
-          settingAup: SettingAup.empty(),
           enableOrderType: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
@@ -430,7 +428,6 @@ void main() {
           userSalesOrganisations: [],
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
-          settingAup: SettingAup.empty(),
           enableOrderType: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
@@ -465,7 +462,6 @@ void main() {
           userSalesOrganisations: [],
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
-          settingAup: SettingAup.empty(),
           enableOrderType: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
@@ -500,7 +496,6 @@ void main() {
           userSalesOrganisations: [],
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
-          settingAup: SettingAup.empty(),
           enableOrderType: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
@@ -535,7 +530,6 @@ void main() {
           userSalesOrganisations: [],
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
-          settingAup: SettingAup.empty(),
           enableOrderType: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
@@ -570,7 +564,6 @@ void main() {
           userSalesOrganisations: [],
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
-          settingAup: SettingAup.empty(),
           enableOrderType: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
@@ -606,7 +599,6 @@ void main() {
           userSalesOrganisations: [],
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
-          settingAup: SettingAup.empty(),
           enableOrderType: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
@@ -642,7 +634,6 @@ void main() {
           userSalesOrganisations: [],
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
-          settingAup: SettingAup.empty(),
           enableOrderType: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
@@ -677,7 +668,6 @@ void main() {
           userSalesOrganisations: [],
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
-          settingAup: SettingAup.empty(),
           enableOrderType: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);

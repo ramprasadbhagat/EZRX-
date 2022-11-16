@@ -44,22 +44,18 @@ mixin _$UserDto {
   bool get mobileNotifications => throw _privateConstructorUsedError;
   @JsonKey(name: 'languagePreference', readValue: handleEmptyLanguagePreference)
   String get languagePreference => throw _privateConstructorUsedError;
-  @JsonKey(name: 'acceptTC', defaultValue: false)
-  bool get acceptTC => throw _privateConstructorUsedError;
-  @JsonKey(
-      name: 'acceptTCTimestamp',
-      defaultValue: '1970-01-01 00:00:00',
-      readValue: dateTimeStringFormatCheck)
-  String get acceptTCTimestamp => throw _privateConstructorUsedError;
-  @JsonKey(name: 'acceptAUP', defaultValue: false)
-  bool get acceptAUP => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableOrderType', defaultValue: false)
   bool get enableOrderType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+  bool get acceptPrivacyPolicy => throw _privateConstructorUsedError;
   @JsonKey(
-      name: 'acceptAUPTC',
+      name: 'acceptPrivacyPolicyTime',
       defaultValue: '1970-01-01 00:00:00',
       readValue: dateTimeStringFormatCheck)
-  String get acceptAUPTimestamp => throw _privateConstructorUsedError;
+  String get acceptPrivacyPolicyTime => throw _privateConstructorUsedError;
+  @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
+  String get privacyPolicyAcceptedPlatform =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -69,7 +65,8 @@ mixin _$UserDto {
 /// @nodoc
 abstract class $UserDtoCopyWith<$Res> {
   factory $UserDtoCopyWith(UserDto value, $Res Function(UserDto) then) =
-      _$UserDtoCopyWithImpl<$Res>;
+      _$UserDtoCopyWithImpl<$Res, UserDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'id', defaultValue: '')
           String id,
@@ -94,119 +91,116 @@ abstract class $UserDtoCopyWith<$Res> {
           bool mobileNotifications,
       @JsonKey(name: 'languagePreference', readValue: handleEmptyLanguagePreference)
           String languagePreference,
-      @JsonKey(name: 'acceptTC', defaultValue: false)
-          bool acceptTC,
-      @JsonKey(name: 'acceptTCTimestamp', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
-          String acceptTCTimestamp,
-      @JsonKey(name: 'acceptAUP', defaultValue: false)
-          bool acceptAUP,
       @JsonKey(name: 'enableOrderType', defaultValue: false)
           bool enableOrderType,
-      @JsonKey(name: 'acceptAUPTC', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
-          String acceptAUPTimestamp});
+      @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+          bool acceptPrivacyPolicy,
+      @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
+          String acceptPrivacyPolicyTime,
+      @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
+          String privacyPolicyAcceptedPlatform});
 
   $RoleDtoCopyWith<$Res> get role;
 }
 
 /// @nodoc
-class _$UserDtoCopyWithImpl<$Res> implements $UserDtoCopyWith<$Res> {
+class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
+    implements $UserDtoCopyWith<$Res> {
   _$UserDtoCopyWithImpl(this._value, this._then);
 
-  final UserDto _value;
   // ignore: unused_field
-  final $Res Function(UserDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? username = freezed,
-    Object? email = freezed,
-    Object? firstName = freezed,
-    Object? lastName = freezed,
-    Object? role = freezed,
-    Object? customerCode = freezed,
-    Object? userSalesOrganisations = freezed,
-    Object? emailNotifications = freezed,
-    Object? mobileNotifications = freezed,
-    Object? languagePreference = freezed,
-    Object? acceptTC = freezed,
-    Object? acceptTCTimestamp = freezed,
-    Object? acceptAUP = freezed,
-    Object? enableOrderType = freezed,
-    Object? acceptAUPTimestamp = freezed,
+    Object? id = null,
+    Object? username = null,
+    Object? email = null,
+    Object? firstName = null,
+    Object? lastName = null,
+    Object? role = null,
+    Object? customerCode = null,
+    Object? userSalesOrganisations = null,
+    Object? emailNotifications = null,
+    Object? mobileNotifications = null,
+    Object? languagePreference = null,
+    Object? enableOrderType = null,
+    Object? acceptPrivacyPolicy = null,
+    Object? acceptPrivacyPolicyTime = null,
+    Object? privacyPolicyAcceptedPlatform = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      username: username == freezed
+      username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      firstName: firstName == freezed
+      firstName: null == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
               as String,
-      lastName: lastName == freezed
+      lastName: null == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
-      role: role == freezed
+      role: null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as RoleDto,
-      customerCode: customerCode == freezed
+      customerCode: null == customerCode
           ? _value.customerCode
           : customerCode // ignore: cast_nullable_to_non_nullable
               as String,
-      userSalesOrganisations: userSalesOrganisations == freezed
+      userSalesOrganisations: null == userSalesOrganisations
           ? _value.userSalesOrganisations
           : userSalesOrganisations // ignore: cast_nullable_to_non_nullable
               as List<SalesOrganisationDto>,
-      emailNotifications: emailNotifications == freezed
+      emailNotifications: null == emailNotifications
           ? _value.emailNotifications
           : emailNotifications // ignore: cast_nullable_to_non_nullable
               as bool,
-      mobileNotifications: mobileNotifications == freezed
+      mobileNotifications: null == mobileNotifications
           ? _value.mobileNotifications
           : mobileNotifications // ignore: cast_nullable_to_non_nullable
               as bool,
-      languagePreference: languagePreference == freezed
+      languagePreference: null == languagePreference
           ? _value.languagePreference
           : languagePreference // ignore: cast_nullable_to_non_nullable
               as String,
-      acceptTC: acceptTC == freezed
-          ? _value.acceptTC
-          : acceptTC // ignore: cast_nullable_to_non_nullable
-              as bool,
-      acceptTCTimestamp: acceptTCTimestamp == freezed
-          ? _value.acceptTCTimestamp
-          : acceptTCTimestamp // ignore: cast_nullable_to_non_nullable
-              as String,
-      acceptAUP: acceptAUP == freezed
-          ? _value.acceptAUP
-          : acceptAUP // ignore: cast_nullable_to_non_nullable
-              as bool,
-      enableOrderType: enableOrderType == freezed
+      enableOrderType: null == enableOrderType
           ? _value.enableOrderType
           : enableOrderType // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptAUPTimestamp: acceptAUPTimestamp == freezed
-          ? _value.acceptAUPTimestamp
-          : acceptAUPTimestamp // ignore: cast_nullable_to_non_nullable
+      acceptPrivacyPolicy: null == acceptPrivacyPolicy
+          ? _value.acceptPrivacyPolicy
+          : acceptPrivacyPolicy // ignore: cast_nullable_to_non_nullable
+              as bool,
+      acceptPrivacyPolicyTime: null == acceptPrivacyPolicyTime
+          ? _value.acceptPrivacyPolicyTime
+          : acceptPrivacyPolicyTime // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+      privacyPolicyAcceptedPlatform: null == privacyPolicyAcceptedPlatform
+          ? _value.privacyPolicyAcceptedPlatform
+          : privacyPolicyAcceptedPlatform // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $RoleDtoCopyWith<$Res> get role {
     return $RoleDtoCopyWith<$Res>(_value.role, (value) {
-      return _then(_value.copyWith(role: value));
+      return _then(_value.copyWith(role: value) as $Val);
     });
   }
 }
@@ -217,6 +211,7 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
           _$_UserDto value, $Res Function(_$_UserDto) then) =
       __$$_UserDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'id', defaultValue: '')
           String id,
@@ -241,113 +236,105 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
           bool mobileNotifications,
       @JsonKey(name: 'languagePreference', readValue: handleEmptyLanguagePreference)
           String languagePreference,
-      @JsonKey(name: 'acceptTC', defaultValue: false)
-          bool acceptTC,
-      @JsonKey(name: 'acceptTCTimestamp', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
-          String acceptTCTimestamp,
-      @JsonKey(name: 'acceptAUP', defaultValue: false)
-          bool acceptAUP,
       @JsonKey(name: 'enableOrderType', defaultValue: false)
           bool enableOrderType,
-      @JsonKey(name: 'acceptAUPTC', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
-          String acceptAUPTimestamp});
+      @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+          bool acceptPrivacyPolicy,
+      @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
+          String acceptPrivacyPolicyTime,
+      @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
+          String privacyPolicyAcceptedPlatform});
 
   @override
   $RoleDtoCopyWith<$Res> get role;
 }
 
 /// @nodoc
-class __$$_UserDtoCopyWithImpl<$Res> extends _$UserDtoCopyWithImpl<$Res>
+class __$$_UserDtoCopyWithImpl<$Res>
+    extends _$UserDtoCopyWithImpl<$Res, _$_UserDto>
     implements _$$_UserDtoCopyWith<$Res> {
   __$$_UserDtoCopyWithImpl(_$_UserDto _value, $Res Function(_$_UserDto) _then)
-      : super(_value, (v) => _then(v as _$_UserDto));
+      : super(_value, _then);
 
-  @override
-  _$_UserDto get _value => super._value as _$_UserDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? username = freezed,
-    Object? email = freezed,
-    Object? firstName = freezed,
-    Object? lastName = freezed,
-    Object? role = freezed,
-    Object? customerCode = freezed,
-    Object? userSalesOrganisations = freezed,
-    Object? emailNotifications = freezed,
-    Object? mobileNotifications = freezed,
-    Object? languagePreference = freezed,
-    Object? acceptTC = freezed,
-    Object? acceptTCTimestamp = freezed,
-    Object? acceptAUP = freezed,
-    Object? enableOrderType = freezed,
-    Object? acceptAUPTimestamp = freezed,
+    Object? id = null,
+    Object? username = null,
+    Object? email = null,
+    Object? firstName = null,
+    Object? lastName = null,
+    Object? role = null,
+    Object? customerCode = null,
+    Object? userSalesOrganisations = null,
+    Object? emailNotifications = null,
+    Object? mobileNotifications = null,
+    Object? languagePreference = null,
+    Object? enableOrderType = null,
+    Object? acceptPrivacyPolicy = null,
+    Object? acceptPrivacyPolicyTime = null,
+    Object? privacyPolicyAcceptedPlatform = null,
   }) {
     return _then(_$_UserDto(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      username: username == freezed
+      username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      firstName: firstName == freezed
+      firstName: null == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
               as String,
-      lastName: lastName == freezed
+      lastName: null == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
-      role: role == freezed
+      role: null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as RoleDto,
-      customerCode: customerCode == freezed
+      customerCode: null == customerCode
           ? _value.customerCode
           : customerCode // ignore: cast_nullable_to_non_nullable
               as String,
-      userSalesOrganisations: userSalesOrganisations == freezed
+      userSalesOrganisations: null == userSalesOrganisations
           ? _value._userSalesOrganisations
           : userSalesOrganisations // ignore: cast_nullable_to_non_nullable
               as List<SalesOrganisationDto>,
-      emailNotifications: emailNotifications == freezed
+      emailNotifications: null == emailNotifications
           ? _value.emailNotifications
           : emailNotifications // ignore: cast_nullable_to_non_nullable
               as bool,
-      mobileNotifications: mobileNotifications == freezed
+      mobileNotifications: null == mobileNotifications
           ? _value.mobileNotifications
           : mobileNotifications // ignore: cast_nullable_to_non_nullable
               as bool,
-      languagePreference: languagePreference == freezed
+      languagePreference: null == languagePreference
           ? _value.languagePreference
           : languagePreference // ignore: cast_nullable_to_non_nullable
               as String,
-      acceptTC: acceptTC == freezed
-          ? _value.acceptTC
-          : acceptTC // ignore: cast_nullable_to_non_nullable
-              as bool,
-      acceptTCTimestamp: acceptTCTimestamp == freezed
-          ? _value.acceptTCTimestamp
-          : acceptTCTimestamp // ignore: cast_nullable_to_non_nullable
-              as String,
-      acceptAUP: acceptAUP == freezed
-          ? _value.acceptAUP
-          : acceptAUP // ignore: cast_nullable_to_non_nullable
-              as bool,
-      enableOrderType: enableOrderType == freezed
+      enableOrderType: null == enableOrderType
           ? _value.enableOrderType
           : enableOrderType // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptAUPTimestamp: acceptAUPTimestamp == freezed
-          ? _value.acceptAUPTimestamp
-          : acceptAUPTimestamp // ignore: cast_nullable_to_non_nullable
+      acceptPrivacyPolicy: null == acceptPrivacyPolicy
+          ? _value.acceptPrivacyPolicy
+          : acceptPrivacyPolicy // ignore: cast_nullable_to_non_nullable
+              as bool,
+      acceptPrivacyPolicyTime: null == acceptPrivacyPolicyTime
+          ? _value.acceptPrivacyPolicyTime
+          : acceptPrivacyPolicyTime // ignore: cast_nullable_to_non_nullable
+              as String,
+      privacyPolicyAcceptedPlatform: null == privacyPolicyAcceptedPlatform
+          ? _value.privacyPolicyAcceptedPlatform
+          : privacyPolicyAcceptedPlatform // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -380,16 +367,14 @@ class _$_UserDto extends _UserDto {
           required this.mobileNotifications,
       @JsonKey(name: 'languagePreference', readValue: handleEmptyLanguagePreference)
           required this.languagePreference,
-      @JsonKey(name: 'acceptTC', defaultValue: false)
-          required this.acceptTC,
-      @JsonKey(name: 'acceptTCTimestamp', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
-          required this.acceptTCTimestamp,
-      @JsonKey(name: 'acceptAUP', defaultValue: false)
-          required this.acceptAUP,
       @JsonKey(name: 'enableOrderType', defaultValue: false)
           required this.enableOrderType,
-      @JsonKey(name: 'acceptAUPTC', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
-          required this.acceptAUPTimestamp})
+      @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+          required this.acceptPrivacyPolicy,
+      @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
+          required this.acceptPrivacyPolicyTime,
+      @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
+          required this.privacyPolicyAcceptedPlatform})
       : _userSalesOrganisations = userSalesOrganisations,
         super._();
 
@@ -436,30 +421,24 @@ class _$_UserDto extends _UserDto {
   @JsonKey(name: 'languagePreference', readValue: handleEmptyLanguagePreference)
   final String languagePreference;
   @override
-  @JsonKey(name: 'acceptTC', defaultValue: false)
-  final bool acceptTC;
-  @override
-  @JsonKey(
-      name: 'acceptTCTimestamp',
-      defaultValue: '1970-01-01 00:00:00',
-      readValue: dateTimeStringFormatCheck)
-  final String acceptTCTimestamp;
-  @override
-  @JsonKey(name: 'acceptAUP', defaultValue: false)
-  final bool acceptAUP;
-  @override
   @JsonKey(name: 'enableOrderType', defaultValue: false)
   final bool enableOrderType;
   @override
+  @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+  final bool acceptPrivacyPolicy;
+  @override
   @JsonKey(
-      name: 'acceptAUPTC',
+      name: 'acceptPrivacyPolicyTime',
       defaultValue: '1970-01-01 00:00:00',
       readValue: dateTimeStringFormatCheck)
-  final String acceptAUPTimestamp;
+  final String acceptPrivacyPolicyTime;
+  @override
+  @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
+  final String privacyPolicyAcceptedPlatform;
 
   @override
   String toString() {
-    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, acceptTC: $acceptTC, acceptTCTimestamp: $acceptTCTimestamp, acceptAUP: $acceptAUP, enableOrderType: $enableOrderType, acceptAUPTimestamp: $acceptAUPTimestamp)';
+    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, acceptPrivacyPolicyTime: $acceptPrivacyPolicyTime, privacyPolicyAcceptedPlatform: $privacyPolicyAcceptedPlatform)';
   }
 
   @override
@@ -467,55 +446,61 @@ class _$_UserDto extends _UserDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserDto &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.username, username) &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.firstName, firstName) &&
-            const DeepCollectionEquality().equals(other.lastName, lastName) &&
-            const DeepCollectionEquality().equals(other.role, role) &&
-            const DeepCollectionEquality()
-                .equals(other.customerCode, customerCode) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.customerCode, customerCode) ||
+                other.customerCode == customerCode) &&
             const DeepCollectionEquality().equals(
                 other._userSalesOrganisations, _userSalesOrganisations) &&
-            const DeepCollectionEquality()
-                .equals(other.emailNotifications, emailNotifications) &&
-            const DeepCollectionEquality()
-                .equals(other.mobileNotifications, mobileNotifications) &&
-            const DeepCollectionEquality()
-                .equals(other.languagePreference, languagePreference) &&
-            const DeepCollectionEquality().equals(other.acceptTC, acceptTC) &&
-            const DeepCollectionEquality()
-                .equals(other.acceptTCTimestamp, acceptTCTimestamp) &&
-            const DeepCollectionEquality().equals(other.acceptAUP, acceptAUP) &&
-            const DeepCollectionEquality()
-                .equals(other.enableOrderType, enableOrderType) &&
-            const DeepCollectionEquality()
-                .equals(other.acceptAUPTimestamp, acceptAUPTimestamp));
+            (identical(other.emailNotifications, emailNotifications) ||
+                other.emailNotifications == emailNotifications) &&
+            (identical(other.mobileNotifications, mobileNotifications) ||
+                other.mobileNotifications == mobileNotifications) &&
+            (identical(other.languagePreference, languagePreference) ||
+                other.languagePreference == languagePreference) &&
+            (identical(other.enableOrderType, enableOrderType) ||
+                other.enableOrderType == enableOrderType) &&
+            (identical(other.acceptPrivacyPolicy, acceptPrivacyPolicy) ||
+                other.acceptPrivacyPolicy == acceptPrivacyPolicy) &&
+            (identical(
+                    other.acceptPrivacyPolicyTime, acceptPrivacyPolicyTime) ||
+                other.acceptPrivacyPolicyTime == acceptPrivacyPolicyTime) &&
+            (identical(other.privacyPolicyAcceptedPlatform,
+                    privacyPolicyAcceptedPlatform) ||
+                other.privacyPolicyAcceptedPlatform ==
+                    privacyPolicyAcceptedPlatform));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(username),
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(firstName),
-      const DeepCollectionEquality().hash(lastName),
-      const DeepCollectionEquality().hash(role),
-      const DeepCollectionEquality().hash(customerCode),
+      id,
+      username,
+      email,
+      firstName,
+      lastName,
+      role,
+      customerCode,
       const DeepCollectionEquality().hash(_userSalesOrganisations),
-      const DeepCollectionEquality().hash(emailNotifications),
-      const DeepCollectionEquality().hash(mobileNotifications),
-      const DeepCollectionEquality().hash(languagePreference),
-      const DeepCollectionEquality().hash(acceptTC),
-      const DeepCollectionEquality().hash(acceptTCTimestamp),
-      const DeepCollectionEquality().hash(acceptAUP),
-      const DeepCollectionEquality().hash(enableOrderType),
-      const DeepCollectionEquality().hash(acceptAUPTimestamp));
+      emailNotifications,
+      mobileNotifications,
+      languagePreference,
+      enableOrderType,
+      acceptPrivacyPolicy,
+      acceptPrivacyPolicyTime,
+      privacyPolicyAcceptedPlatform);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UserDtoCopyWith<_$_UserDto> get copyWith =>
       __$$_UserDtoCopyWithImpl<_$_UserDto>(this, _$identity);
 
@@ -552,16 +537,14 @@ abstract class _UserDto extends UserDto {
           required final bool mobileNotifications,
       @JsonKey(name: 'languagePreference', readValue: handleEmptyLanguagePreference)
           required final String languagePreference,
-      @JsonKey(name: 'acceptTC', defaultValue: false)
-          required final bool acceptTC,
-      @JsonKey(name: 'acceptTCTimestamp', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
-          required final String acceptTCTimestamp,
-      @JsonKey(name: 'acceptAUP', defaultValue: false)
-          required final bool acceptAUP,
       @JsonKey(name: 'enableOrderType', defaultValue: false)
           required final bool enableOrderType,
-      @JsonKey(name: 'acceptAUPTC', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
-          required final String acceptAUPTimestamp}) = _$_UserDto;
+      @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+          required final bool acceptPrivacyPolicy,
+      @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
+          required final String acceptPrivacyPolicyTime,
+      @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
+          required final String privacyPolicyAcceptedPlatform}) = _$_UserDto;
   const _UserDto._() : super._();
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$_UserDto.fromJson;
@@ -601,26 +584,20 @@ abstract class _UserDto extends UserDto {
   @JsonKey(name: 'languagePreference', readValue: handleEmptyLanguagePreference)
   String get languagePreference;
   @override
-  @JsonKey(name: 'acceptTC', defaultValue: false)
-  bool get acceptTC;
-  @override
-  @JsonKey(
-      name: 'acceptTCTimestamp',
-      defaultValue: '1970-01-01 00:00:00',
-      readValue: dateTimeStringFormatCheck)
-  String get acceptTCTimestamp;
-  @override
-  @JsonKey(name: 'acceptAUP', defaultValue: false)
-  bool get acceptAUP;
-  @override
   @JsonKey(name: 'enableOrderType', defaultValue: false)
   bool get enableOrderType;
   @override
+  @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+  bool get acceptPrivacyPolicy;
+  @override
   @JsonKey(
-      name: 'acceptAUPTC',
+      name: 'acceptPrivacyPolicyTime',
       defaultValue: '1970-01-01 00:00:00',
       readValue: dateTimeStringFormatCheck)
-  String get acceptAUPTimestamp;
+  String get acceptPrivacyPolicyTime;
+  @override
+  @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
+  String get privacyPolicyAcceptedPlatform;
   @override
   @JsonKey(ignore: true)
   _$$_UserDtoCopyWith<_$_UserDto> get copyWith =>

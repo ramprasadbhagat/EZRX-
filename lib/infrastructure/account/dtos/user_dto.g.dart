@@ -22,15 +22,14 @@ _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
       mobileNotifications: json['mobileNotifications'] as bool? ?? false,
       languagePreference:
           handleEmptyLanguagePreference(json, 'languagePreference') as String,
-      acceptTC: json['acceptTC'] as bool? ?? false,
-      acceptTCTimestamp:
-          dateTimeStringFormatCheck(json, 'acceptTCTimestamp') as String? ??
-              '1970-01-01 00:00:00',
-      acceptAUP: json['acceptAUP'] as bool? ?? false,
       enableOrderType: json['enableOrderType'] as bool? ?? false,
-      acceptAUPTimestamp:
-          dateTimeStringFormatCheck(json, 'acceptAUPTC') as String? ??
+      acceptPrivacyPolicy: json['acceptPrivacyPolicy'] as bool? ?? false,
+      acceptPrivacyPolicyTime:
+          dateTimeStringFormatCheck(json, 'acceptPrivacyPolicyTime')
+                  as String? ??
               '1970-01-01 00:00:00',
+      privacyPolicyAcceptedPlatform:
+          json['privacyPolicyAcceptedPlatform'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
@@ -47,9 +46,8 @@ Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
       'emailNotifications': instance.emailNotifications,
       'mobileNotifications': instance.mobileNotifications,
       'languagePreference': instance.languagePreference,
-      'acceptTC': instance.acceptTC,
-      'acceptTCTimestamp': instance.acceptTCTimestamp,
-      'acceptAUP': instance.acceptAUP,
       'enableOrderType': instance.enableOrderType,
-      'acceptAUPTC': instance.acceptAUPTimestamp,
+      'acceptPrivacyPolicy': instance.acceptPrivacyPolicy,
+      'acceptPrivacyPolicyTime': instance.acceptPrivacyPolicyTime,
+      'privacyPolicyAcceptedPlatform': instance.privacyPolicyAcceptedPlatform,
     };

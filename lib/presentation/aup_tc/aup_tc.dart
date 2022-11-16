@@ -1,11 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 
 class AupTCDialog extends StatefulWidget {
   final bool fromSetting;
@@ -61,7 +63,11 @@ class AupTCDialogState extends State<AupTCDialog> {
           child: Scaffold(
             appBar: AppBar(
               key: const ValueKey('auptcappBar'),
-              title: Text(state.title.tr()),
+              title: Image.asset(
+                'assets/images/ezrxlogo.png',
+                width: 80,
+                height: 80,
+              ),
               automaticallyImplyLeading: widget.fromSetting,
             ),
             body: Stack(
@@ -96,15 +102,15 @@ class AupTCDialogState extends State<AupTCDialog> {
                     }
                   },
                 ),
-                isLoading
-                    ? const SizedBox.shrink()
-                    : AcceptButton(
-                        key: const ValueKey('auptcAcceptButton'),
-                        fromSetting: widget.fromSetting,
-                        termsAndConditionReadtoEnd: termsAndConditionReadtoEnd,
-                      ),
               ],
             ),
+            bottomNavigationBar: isLoading || widget.fromSetting
+                ? const SizedBox.shrink()
+                : AcceptButton(
+                    key: const ValueKey('auptcAcceptButton'),
+                    fromSetting: widget.fromSetting,
+                    termsAndConditionReadtoEnd: termsAndConditionReadtoEnd,
+                  ),
           ),
         );
       },
@@ -123,25 +129,69 @@ class AcceptButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      right: 10,
-      bottom: 10,
-      child: ElevatedButton(
-        onPressed: () {
-          if (!termsAndConditionReadtoEnd) {
-            showSnackBar(
-              context: context,
-              message: 'You Need To read full Terms and Condition before Accept'
-                  .tr(),
-            );
-          } else {
-            context.read<UserBloc>().add(const UserEvent.accptTnc());
-            if (fromSetting) {
-              context.router.pop();
-            }
-          }
-        },
-        child: const Text('Accept').tr(),
+    return BottomAppBar(
+      elevation: 10,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 24),
+        height: 97,
+        child: Column(
+          children: [
+            Container(
+              alignment: Alignment.center,
+              margin: const EdgeInsets.only(top: 10),
+              child: const Text(
+                'I acknowledge that I have read, and do hereby accept the \nterms of use & Regional Privacy Policy',
+                style: TextStyle(
+                  fontSize: 10,
+                  // color: zpDarkerGreenColor,
+                  fontWeight: FontWeight.w500,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            InkWell(
+                onTap: () {
+                  if (!termsAndConditionReadtoEnd) {
+                    showSnackBar(
+                      context: context,
+                      message:
+                          'You Need To read full Terms and Condition before Accept'
+                              .tr(),
+                    );
+                  } else {
+                    context.read<UserBloc>().add(const UserEvent.accptTnc());
+                    if (fromSetting) {
+                     context.router.pop();
+                    }
+                  }
+                },
+                child: Container(
+                  height: 40,
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: termsAndConditionReadtoEnd
+                        ? ZPColors.secondary
+                        : ZPColors.lightGray,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Center(
+                      child: Text(
+                    'Accept',
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: termsAndConditionReadtoEnd
+                            ? ZPColors.primary
+                            : ZPColors.darkGray,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    textAlign: TextAlign.center,
+                  ),
+                 ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

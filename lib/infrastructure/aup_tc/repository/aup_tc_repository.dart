@@ -44,6 +44,9 @@ class AupTcRepository implements IAupTcRepository {
 
   @override
   bool getTncConfig() {
+    if (config.appFlavor == Flavor.mock) {
+      return true;
+    }
     try {
       final isTncEnabled = remoteConfigService.getTncConfig();
 

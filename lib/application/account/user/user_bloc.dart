@@ -42,25 +42,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         );
       },
       accptTnc: (e) async {
-        if (state.user.role.type.isAupAudience) {
-          final failureOrSuccess =
-              await userRepository.updateUserAup(state.user);
-
-          failureOrSuccess.fold(
-            (failure) => emit(
-              state.copyWith(
-                userFailureOrSuccessOption: optionOf(failureOrSuccess),
-              ),
-            ),
-            (settingAup) => emit(
-              state.copyWith(
-                user: state.user.copyWith(settingAup: settingAup),
-                userFailureOrSuccessOption: none(),
-              ),
-            ),
-          );
-        } else {
-          final failureOrSuccess =
+        final failureOrSuccess =
               await userRepository.updateUserTc(state.user);
 
           failureOrSuccess.fold(
@@ -76,7 +58,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
               ),
             ),
           );
-        }
       },
       updateNotificationSettings: (e) async {
         final user = state.user.copyWith(

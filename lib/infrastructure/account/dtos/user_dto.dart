@@ -3,7 +3,6 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/setting_aup.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -38,14 +37,14 @@ class UserDto with _$UserDto {
         required bool mobileNotifications,
     @JsonKey(name: 'languagePreference', readValue: handleEmptyLanguagePreference)
         required String languagePreference,
-    @JsonKey(name: 'acceptTC', defaultValue: false) required bool acceptTC,
-    @JsonKey(name: 'acceptTCTimestamp', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
-        required String acceptTCTimestamp,
-    @JsonKey(name: 'acceptAUP', defaultValue: false) required bool acceptAUP,
     @JsonKey(name: 'enableOrderType', defaultValue: false)
         required bool enableOrderType,
-    @JsonKey(name: 'acceptAUPTC', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
-        required String acceptAUPTimestamp,
+   @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+        required bool acceptPrivacyPolicy,
+    @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
+        required String acceptPrivacyPolicyTime,
+    @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
+        required String privacyPolicyAcceptedPlatform,
   }) = _UserDto;
 
   factory UserDto.fromDomain(User user) {
@@ -61,43 +60,41 @@ class UserDto with _$UserDto {
       emailNotifications: user.settings.emailNotifications,
       mobileNotifications: user.settings.mobileNotifications,
       languagePreference: user.settings.languagePreference,
-      acceptTC: user.settingTc.acceptTC,
-      acceptTCTimestamp: user.settingTc.acceptTCTimestamp.toIso8601String(),
-      acceptAUP: user.settingAup.acceptAUP,
       enableOrderType: user.enableOrderType,
-      acceptAUPTimestamp: user.settingAup.acceptAUPTimestamp.toIso8601String(),
+      acceptPrivacyPolicy: user.settingTc.acceptPrivacyPolicy,
+      acceptPrivacyPolicyTime:
+          user.settingTc.acceptPrivacyPolicyTime.toIso8601String(),
+      privacyPolicyAcceptedPlatform:
+          user.settingTc.privacyPolicyAcceptedPlatform,
     );
   }
 
   User toDomain() {
     return User(
-      id: id,
-      username: Username(username),
-      email: EmailAddress(email),
-      fullName: FullName(firstName: firstName, lastName: lastName),
-      role: Role(
-        id: role.id,
-        name: role.name,
-        type: RoleType(role.type),
-        description: role.description,
-      ),
-      customerCode: CustomerCode(customerCode),
-      userSalesOrganisations: _mergeSalesOrg(userSalesOrganisations),
-      settings: Settings(
-        emailNotifications: emailNotifications,
-        mobileNotifications: mobileNotifications,
-        languagePreference: languagePreference,
-      ),
-      settingTc: SettingTc(
-        acceptTC: acceptTC,
-        acceptTCTimestamp: DateTime.parse(acceptTCTimestamp),
-      ),
-      settingAup: SettingAup(
-        acceptAUP: acceptAUP,
-        acceptAUPTimestamp: DateTime.parse(acceptAUPTimestamp),
-      ),
-      enableOrderType: enableOrderType,
-    );
+        id: id,
+        username: Username(username),
+        email: EmailAddress(email),
+        fullName: FullName(firstName: firstName, lastName: lastName),
+        role: Role(
+          id: role.id,
+          name: role.name,
+          type: RoleType(role.type),
+          description: role.description,
+        ),
+        customerCode: CustomerCode(customerCode),
+        userSalesOrganisations: _mergeSalesOrg(userSalesOrganisations),
+        settings: Settings(
+          emailNotifications: emailNotifications,
+          mobileNotifications: mobileNotifications,
+          languagePreference: languagePreference,
+        ),
+        settingTc: SettingTc(
+          acceptPrivacyPolicy: false,
+          acceptPrivacyPolicyTime: DateTime.parse('1970-01-01 00:00:00'),
+          privacyPolicyAcceptedPlatform: '',
+        ),
+        enableOrderType: enableOrderType,
+      );
   }
 
   factory UserDto.fromJson(Map<String, dynamic> json) =>

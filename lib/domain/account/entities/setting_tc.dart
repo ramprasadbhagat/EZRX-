@@ -7,12 +7,14 @@ class SettingTc with _$SettingTc {
   const SettingTc._();
 
   const factory SettingTc({
-    required bool acceptTC,
-    required DateTime acceptTCTimestamp,
+   required bool acceptPrivacyPolicy,
+    required DateTime acceptPrivacyPolicyTime,
+    required String privacyPolicyAcceptedPlatform,
   }) = _SettingTc;
 
   factory SettingTc.empty() => SettingTc(
-        acceptTC: false,
-        acceptTCTimestamp: DateTime.parse('1970-01-01 00:00:00'),
+        acceptPrivacyPolicy: false,
+        acceptPrivacyPolicyTime: DateTime.parse('1970-01-01 00:00:00'),
+        privacyPolicyAcceptedPlatform: '',
       );
 }
