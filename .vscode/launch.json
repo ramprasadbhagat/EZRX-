@@ -54,6 +54,17 @@
                 "--flavor",
                 "uat"
             ],
-        }
+        },
+        {
+            "name": "uat-release",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_uat.dart",
+            "args": [
+                "--flavor",
+                "uat",
+                "--release"
+            ],
+        },
     ]
 }
