@@ -26,7 +26,7 @@ class SalesOrgSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     final salesOrgBloc = context.read<SalesOrgBloc>();
     final cartBloc = context.read<CartBloc>();
-    
+
     return CustomSelector(
       key: const Key('salesOrgSelect'),
       title: 'Sales Org',
@@ -93,7 +93,9 @@ class SalesOrgSelector extends StatelessWidget {
               previous.userSalesOrganisations != current.userSalesOrganisations,
           builder: (context, state) {
             return PlatformAlertDialog(
-              title: const Text('Please select a Sales Org').tr(),
+              title: FittedBox(
+                child: const Text('Please select a Sales Org').tr(),
+              ),
               actions: state.userSalesOrganisations
                   .map(
                     (e) => PlatformDialogAction(
@@ -114,7 +116,8 @@ class SalesOrgSelector extends StatelessWidget {
                             onConfirmed: () {
                               cartBloc.add(const CartEvent.clearCart());
                               context.router.popUntilRouteWithName(
-                                  HomeNavigationTabbarRoute.name,);
+                                HomeNavigationTabbarRoute.name,
+                              );
                               salesOrgBloc.add(
                                 SalesOrgEvent.selected(
                                   salesOrganisation: e,
@@ -124,7 +127,8 @@ class SalesOrgSelector extends StatelessWidget {
                           );
                         } else {
                           context.router.popUntilRouteWithName(
-                              HomeNavigationTabbarRoute.name,);
+                            HomeNavigationTabbarRoute.name,
+                          );
                           salesOrgBloc.add(
                             SalesOrgEvent.selected(
                               salesOrganisation: e,

@@ -74,6 +74,11 @@ Future<void> _firebaseMessagingBackgroundHandler(
 
 Future<void> initialSetup() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  await Wakelock.enable();
+  await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  setupLocator();
   if (kDebugMode) {
     await Upgrader.clearSavedSettings();
     if (Platform.isAndroid) {
@@ -84,17 +89,12 @@ Future<void> initialSetup() async {
     FlutterError.onError = _crashlytics.recordFlutterError;
   }
 
-  await EasyLocalization.ensureInitialized();
-  await Wakelock.enable();
-  await Firebase.initializeApp();
-  setupLocator();
   await locator<RemoteConfigService>().init();
   await locator<TokenStorage>().init();
   await locator<CredStorage>().init();
   await locator<OktaLoginServices>().init();
   await locator<AccountSelectorStorage>().init();
   await locator<CartStorage>().init();
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 }
 
 void runAppWithCrashlyticsAndLocalization() {

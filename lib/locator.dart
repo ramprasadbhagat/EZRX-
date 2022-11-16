@@ -268,6 +268,7 @@ void setupLocator() {
       localDataSource: locator<AuthLocalDataSource>(),
       tokenStorage: locator<TokenStorage>(),
       credStorage: locator<CredStorage>(),
+      cartStorage: locator<CartStorage>(),
       oktaLoginServices: locator<OktaLoginServices>(),
       pushNotificationService: locator<PushNotificationService>(),
       localAuthentication: locator<LocalAuthentication>(),

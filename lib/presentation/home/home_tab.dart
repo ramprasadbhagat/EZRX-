@@ -171,10 +171,12 @@ class _TileCard extends StatelessWidget {
                   color: textStyle!.color,
                 ),
               ),
-              Text(
-                homePageTile.title,
-                style: textStyle,
-              ).tr(),
+              FittedBox(
+                child: Text(
+                  homePageTile.title,
+                  style: textStyle,
+                ).tr(),
+              ),
             ],
           ),
         ),

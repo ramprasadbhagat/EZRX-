@@ -217,14 +217,16 @@ class ShipCodeSelector extends StatelessWidget {
                   : () => context.router.pushNamed('ship_to_search_page'),
               child: customerCodeState.isFetching
                   ? LoadingShimmer.tile()
-                  : Text(
-                      customerCodeState.apiSuccess
-                          ? state.shipToInfo.shipToCustomerCode
-                          : 'No Shipping',
-                      style: Theme.of(context).textTheme.subtitle2?.apply(
-                            color: ZPColors.primary,
-                          ),
-                    ).tr(),
+                  : FittedBox(
+                      child: Text(
+                        customerCodeState.apiSuccess
+                            ? state.shipToInfo.shipToCustomerCode
+                            : 'No Shipping',
+                        style: Theme.of(context).textTheme.subtitle2?.apply(
+                              color: ZPColors.primary,
+                            ),
+                      ).tr(),
+                    ),
             );
           },
         );

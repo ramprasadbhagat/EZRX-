@@ -81,14 +81,16 @@ class CustomerCodeSelector extends StatelessWidget {
               : () => context.router.pushNamed('customer_search_page'),
           child: state.isFetching
               ? LoadingShimmer.tile()
-              : Text(
-                  state.apiSuccess
-                      ? state.customerCodeInfo.customerCodeSoldTo
-                      : 'No Customer',
-                  style: Theme.of(context).textTheme.subtitle2?.apply(
-                        color: ZPColors.primary,
-                      ),
-                ).tr(),
+              : FittedBox(
+                  child: Text(
+                    state.apiSuccess
+                        ? state.customerCodeInfo.customerCodeSoldTo
+                        : 'No Customer',
+                    style: Theme.of(context).textTheme.subtitle2?.apply(
+                          color: ZPColors.primary,
+                        ),
+                  ).tr(),
+                ),
         );
       },
     );

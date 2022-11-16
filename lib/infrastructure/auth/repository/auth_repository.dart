@@ -14,6 +14,7 @@ import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/cred_dto.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
@@ -30,6 +31,7 @@ class AuthRepository implements IAuthRepository {
   final AuthLocalDataSource localDataSource;
   final TokenStorage tokenStorage;
   final CredStorage credStorage;
+  final CartStorage cartStorage;
   final AccountSelectorStorage accountSelectorStorage;
   final OktaLoginServices oktaLoginServices;
   final PushNotificationService pushNotificationService;
@@ -41,6 +43,7 @@ class AuthRepository implements IAuthRepository {
     required this.localDataSource,
     required this.tokenStorage,
     required this.credStorage,
+    required this.cartStorage,
     required this.oktaLoginServices,
     required this.pushNotificationService,
     required this.localAuthentication,
@@ -208,6 +211,7 @@ class AuthRepository implements IAuthRepository {
       await tokenStorage.clear();
       await oktaLoginServices.logout();
       await accountSelectorStorage.delete();
+      await cartStorage.clear();
 
       return const Right(unit);
     } catch (e) {
