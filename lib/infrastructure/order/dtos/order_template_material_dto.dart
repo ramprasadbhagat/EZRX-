@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'order_template_material_dto.freezed.dart';
+
 part 'order_template_material_dto.g.dart';
 
 @freezed
@@ -21,6 +22,10 @@ class OrderTemplateMaterialDto with _$OrderTemplateMaterialDto {
     @JsonKey(name: 'hidePrice', defaultValue: false) required bool hidePrice,
     @JsonKey(name: 'taxClassification', defaultValue: '')
         required String taxClassification,
+    @JsonKey(name: 'materialGroup4', defaultValue: '')
+        required String materialGroup4,
+    @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+        required bool hasValidTenderContract,
   }) = _OrderTemplateMaterialDto;
 
   factory OrderTemplateMaterialDto.fromJson(Map<String, dynamic> json) =>
@@ -37,6 +42,8 @@ class OrderTemplateMaterialDto with _$OrderTemplateMaterialDto {
       materialDescription: orderTemplate.materialDescription,
       hidePrice: orderTemplate.hidePrice,
       taxClassification: orderTemplate.taxClassification.getOrDefaultValue(''),
+      materialGroup4: orderTemplate.materialGroup4.getOrDefaultValue(''),
+      hasValidTenderContract: orderTemplate.hasValidTenderContract,
     );
   }
 
@@ -49,6 +56,8 @@ class OrderTemplateMaterialDto with _$OrderTemplateMaterialDto {
       materialDescription: materialDescription,
       hidePrice: hidePrice,
       taxClassification: MaterialTaxClassification(taxClassification),
+      materialGroup4: MaterialGroup.four(materialGroup4),
+      hasValidTenderContract: hasValidTenderContract,
     );
   }
 }

@@ -21,6 +21,12 @@ mixin _$OrderTemplateListEvent {
     required TResult Function() initialized,
     required TResult Function(User user) fetch,
     required TResult Function(OrderTemplate tempItem) delete,
+    required TResult Function(
+            String templateName,
+            String userID,
+            List<OrderTemplateMaterial> cartList,
+            List<OrderTemplate> templateList)
+        save,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +34,12 @@ mixin _$OrderTemplateListEvent {
     TResult? Function()? initialized,
     TResult? Function(User user)? fetch,
     TResult? Function(OrderTemplate tempItem)? delete,
+    TResult? Function(
+            String templateName,
+            String userID,
+            List<OrderTemplateMaterial> cartList,
+            List<OrderTemplate> templateList)?
+        save,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +47,12 @@ mixin _$OrderTemplateListEvent {
     TResult Function()? initialized,
     TResult Function(User user)? fetch,
     TResult Function(OrderTemplate tempItem)? delete,
+    TResult Function(
+            String templateName,
+            String userID,
+            List<OrderTemplateMaterial> cartList,
+            List<OrderTemplate> templateList)?
+        save,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +61,7 @@ mixin _$OrderTemplateListEvent {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_DeleteOrderTemplate value) delete,
+    required TResult Function(_SaveOrderTemplate value) save,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +69,7 @@ mixin _$OrderTemplateListEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_DeleteOrderTemplate value)? delete,
+    TResult? Function(_SaveOrderTemplate value)? save,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +77,7 @@ mixin _$OrderTemplateListEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_DeleteOrderTemplate value)? delete,
+    TResult Function(_SaveOrderTemplate value)? save,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -122,6 +143,12 @@ class _$_Initialized implements _Initialized {
     required TResult Function() initialized,
     required TResult Function(User user) fetch,
     required TResult Function(OrderTemplate tempItem) delete,
+    required TResult Function(
+            String templateName,
+            String userID,
+            List<OrderTemplateMaterial> cartList,
+            List<OrderTemplate> templateList)
+        save,
   }) {
     return initialized();
   }
@@ -132,6 +159,12 @@ class _$_Initialized implements _Initialized {
     TResult? Function()? initialized,
     TResult? Function(User user)? fetch,
     TResult? Function(OrderTemplate tempItem)? delete,
+    TResult? Function(
+            String templateName,
+            String userID,
+            List<OrderTemplateMaterial> cartList,
+            List<OrderTemplate> templateList)?
+        save,
   }) {
     return initialized?.call();
   }
@@ -142,6 +175,12 @@ class _$_Initialized implements _Initialized {
     TResult Function()? initialized,
     TResult Function(User user)? fetch,
     TResult Function(OrderTemplate tempItem)? delete,
+    TResult Function(
+            String templateName,
+            String userID,
+            List<OrderTemplateMaterial> cartList,
+            List<OrderTemplate> templateList)?
+        save,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -156,6 +195,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_DeleteOrderTemplate value) delete,
+    required TResult Function(_SaveOrderTemplate value) save,
   }) {
     return initialized(this);
   }
@@ -166,6 +206,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_DeleteOrderTemplate value)? delete,
+    TResult? Function(_SaveOrderTemplate value)? save,
   }) {
     return initialized?.call(this);
   }
@@ -176,6 +217,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_DeleteOrderTemplate value)? delete,
+    TResult Function(_SaveOrderTemplate value)? save,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -264,6 +306,12 @@ class _$_Fetch implements _Fetch {
     required TResult Function() initialized,
     required TResult Function(User user) fetch,
     required TResult Function(OrderTemplate tempItem) delete,
+    required TResult Function(
+            String templateName,
+            String userID,
+            List<OrderTemplateMaterial> cartList,
+            List<OrderTemplate> templateList)
+        save,
   }) {
     return fetch(user);
   }
@@ -274,6 +322,12 @@ class _$_Fetch implements _Fetch {
     TResult? Function()? initialized,
     TResult? Function(User user)? fetch,
     TResult? Function(OrderTemplate tempItem)? delete,
+    TResult? Function(
+            String templateName,
+            String userID,
+            List<OrderTemplateMaterial> cartList,
+            List<OrderTemplate> templateList)?
+        save,
   }) {
     return fetch?.call(user);
   }
@@ -284,6 +338,12 @@ class _$_Fetch implements _Fetch {
     TResult Function()? initialized,
     TResult Function(User user)? fetch,
     TResult Function(OrderTemplate tempItem)? delete,
+    TResult Function(
+            String templateName,
+            String userID,
+            List<OrderTemplateMaterial> cartList,
+            List<OrderTemplate> templateList)?
+        save,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -298,6 +358,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_DeleteOrderTemplate value) delete,
+    required TResult Function(_SaveOrderTemplate value) save,
   }) {
     return fetch(this);
   }
@@ -308,6 +369,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_DeleteOrderTemplate value)? delete,
+    TResult? Function(_SaveOrderTemplate value)? save,
   }) {
     return fetch?.call(this);
   }
@@ -318,6 +380,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_DeleteOrderTemplate value)? delete,
+    TResult Function(_SaveOrderTemplate value)? save,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -415,6 +478,12 @@ class _$_DeleteOrderTemplate implements _DeleteOrderTemplate {
     required TResult Function() initialized,
     required TResult Function(User user) fetch,
     required TResult Function(OrderTemplate tempItem) delete,
+    required TResult Function(
+            String templateName,
+            String userID,
+            List<OrderTemplateMaterial> cartList,
+            List<OrderTemplate> templateList)
+        save,
   }) {
     return delete(tempItem);
   }
@@ -425,6 +494,12 @@ class _$_DeleteOrderTemplate implements _DeleteOrderTemplate {
     TResult? Function()? initialized,
     TResult? Function(User user)? fetch,
     TResult? Function(OrderTemplate tempItem)? delete,
+    TResult? Function(
+            String templateName,
+            String userID,
+            List<OrderTemplateMaterial> cartList,
+            List<OrderTemplate> templateList)?
+        save,
   }) {
     return delete?.call(tempItem);
   }
@@ -435,6 +510,12 @@ class _$_DeleteOrderTemplate implements _DeleteOrderTemplate {
     TResult Function()? initialized,
     TResult Function(User user)? fetch,
     TResult Function(OrderTemplate tempItem)? delete,
+    TResult Function(
+            String templateName,
+            String userID,
+            List<OrderTemplateMaterial> cartList,
+            List<OrderTemplate> templateList)?
+        save,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -449,6 +530,7 @@ class _$_DeleteOrderTemplate implements _DeleteOrderTemplate {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_DeleteOrderTemplate value) delete,
+    required TResult Function(_SaveOrderTemplate value) save,
   }) {
     return delete(this);
   }
@@ -459,6 +541,7 @@ class _$_DeleteOrderTemplate implements _DeleteOrderTemplate {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_DeleteOrderTemplate value)? delete,
+    TResult? Function(_SaveOrderTemplate value)? save,
   }) {
     return delete?.call(this);
   }
@@ -469,6 +552,7 @@ class _$_DeleteOrderTemplate implements _DeleteOrderTemplate {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_DeleteOrderTemplate value)? delete,
+    TResult Function(_SaveOrderTemplate value)? save,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -485,6 +569,224 @@ abstract class _DeleteOrderTemplate implements OrderTemplateListEvent {
   OrderTemplate get tempItem;
   @JsonKey(ignore: true)
   _$$_DeleteOrderTemplateCopyWith<_$_DeleteOrderTemplate> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SaveOrderTemplateCopyWith<$Res> {
+  factory _$$_SaveOrderTemplateCopyWith(_$_SaveOrderTemplate value,
+          $Res Function(_$_SaveOrderTemplate) then) =
+      __$$_SaveOrderTemplateCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {String templateName,
+      String userID,
+      List<OrderTemplateMaterial> cartList,
+      List<OrderTemplate> templateList});
+}
+
+/// @nodoc
+class __$$_SaveOrderTemplateCopyWithImpl<$Res>
+    extends _$OrderTemplateListEventCopyWithImpl<$Res, _$_SaveOrderTemplate>
+    implements _$$_SaveOrderTemplateCopyWith<$Res> {
+  __$$_SaveOrderTemplateCopyWithImpl(
+      _$_SaveOrderTemplate _value, $Res Function(_$_SaveOrderTemplate) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? templateName = null,
+    Object? userID = null,
+    Object? cartList = null,
+    Object? templateList = null,
+  }) {
+    return _then(_$_SaveOrderTemplate(
+      templateName: null == templateName
+          ? _value.templateName
+          : templateName // ignore: cast_nullable_to_non_nullable
+              as String,
+      userID: null == userID
+          ? _value.userID
+          : userID // ignore: cast_nullable_to_non_nullable
+              as String,
+      cartList: null == cartList
+          ? _value._cartList
+          : cartList // ignore: cast_nullable_to_non_nullable
+              as List<OrderTemplateMaterial>,
+      templateList: null == templateList
+          ? _value._templateList
+          : templateList // ignore: cast_nullable_to_non_nullable
+              as List<OrderTemplate>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SaveOrderTemplate implements _SaveOrderTemplate {
+  const _$_SaveOrderTemplate(
+      {required this.templateName,
+      required this.userID,
+      required final List<OrderTemplateMaterial> cartList,
+      required final List<OrderTemplate> templateList})
+      : _cartList = cartList,
+        _templateList = templateList;
+
+  @override
+  final String templateName;
+  @override
+  final String userID;
+  final List<OrderTemplateMaterial> _cartList;
+  @override
+  List<OrderTemplateMaterial> get cartList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_cartList);
+  }
+
+  final List<OrderTemplate> _templateList;
+  @override
+  List<OrderTemplate> get templateList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_templateList);
+  }
+
+  @override
+  String toString() {
+    return 'OrderTemplateListEvent.save(templateName: $templateName, userID: $userID, cartList: $cartList, templateList: $templateList)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SaveOrderTemplate &&
+            (identical(other.templateName, templateName) ||
+                other.templateName == templateName) &&
+            (identical(other.userID, userID) || other.userID == userID) &&
+            const DeepCollectionEquality().equals(other._cartList, _cartList) &&
+            const DeepCollectionEquality()
+                .equals(other._templateList, _templateList));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      templateName,
+      userID,
+      const DeepCollectionEquality().hash(_cartList),
+      const DeepCollectionEquality().hash(_templateList));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SaveOrderTemplateCopyWith<_$_SaveOrderTemplate> get copyWith =>
+      __$$_SaveOrderTemplateCopyWithImpl<_$_SaveOrderTemplate>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(User user) fetch,
+    required TResult Function(OrderTemplate tempItem) delete,
+    required TResult Function(
+            String templateName,
+            String userID,
+            List<OrderTemplateMaterial> cartList,
+            List<OrderTemplate> templateList)
+        save,
+  }) {
+    return save(templateName, userID, cartList, templateList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(User user)? fetch,
+    TResult? Function(OrderTemplate tempItem)? delete,
+    TResult? Function(
+            String templateName,
+            String userID,
+            List<OrderTemplateMaterial> cartList,
+            List<OrderTemplate> templateList)?
+        save,
+  }) {
+    return save?.call(templateName, userID, cartList, templateList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(User user)? fetch,
+    TResult Function(OrderTemplate tempItem)? delete,
+    TResult Function(
+            String templateName,
+            String userID,
+            List<OrderTemplateMaterial> cartList,
+            List<OrderTemplate> templateList)?
+        save,
+    required TResult orElse(),
+  }) {
+    if (save != null) {
+      return save(templateName, userID, cartList, templateList);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_DeleteOrderTemplate value) delete,
+    required TResult Function(_SaveOrderTemplate value) save,
+  }) {
+    return save(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_DeleteOrderTemplate value)? delete,
+    TResult? Function(_SaveOrderTemplate value)? save,
+  }) {
+    return save?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_DeleteOrderTemplate value)? delete,
+    TResult Function(_SaveOrderTemplate value)? save,
+    required TResult orElse(),
+  }) {
+    if (save != null) {
+      return save(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SaveOrderTemplate implements OrderTemplateListEvent {
+  const factory _SaveOrderTemplate(
+      {required final String templateName,
+      required final String userID,
+      required final List<OrderTemplateMaterial> cartList,
+      required final List<OrderTemplate> templateList}) = _$_SaveOrderTemplate;
+
+  String get templateName;
+  String get userID;
+  List<OrderTemplateMaterial> get cartList;
+  List<OrderTemplate> get templateList;
+  @JsonKey(ignore: true)
+  _$$_SaveOrderTemplateCopyWith<_$_SaveOrderTemplate> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

@@ -6,16 +6,21 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
+import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_list_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -29,10 +34,115 @@ class OrderSummaryPage extends StatelessWidget {
         preferredSize: const Size(double.infinity, 60),
         child: AppBar(
           title: const Text('Order Summary').tr(),
+          actions: const [
+            _SaveTemplateButton(),
+          ],
         ),
       ),
       body: const _BodyContent(),
     );
+  }
+}
+
+class _SaveTemplateButton extends StatelessWidget {
+  const _SaveTemplateButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<OrderTemplateListBloc, OrderTemplateListState>(
+      listenWhen: (previous, current) =>
+          previous.apiFailureOrSuccessOption !=
+          current.apiFailureOrSuccessOption,
+      listener: (context, state) {
+        state.apiFailureOrSuccessOption.fold(
+          () {},
+          (either) => either.fold(
+            (failure) {
+              final failureMessage = failure.failureMessage;
+              showSnackBar(
+                context: context,
+                message: failureMessage.tr(),
+              );
+            },
+            (_) {
+              showSnackBar(
+                context: context,
+                message: 'Saved order template'.tr(),
+              );
+            },
+          ),
+        );
+      },
+      builder: (context, state) {
+        return IconButton(
+          onPressed: () => showSaveTemplateDialog(context),
+          icon: const Icon(
+            Icons.featured_play_list_outlined,
+          ),
+        );
+      },
+    );
+  }
+
+  void showSaveTemplateDialog(BuildContext context) {
+    final templateNameTextController = TextEditingController();
+    showPlatformDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (dialogContext) => PlatformAlertDialog(
+        title: const Text('Save as Template').tr(),
+        content: Padding(
+          padding: const EdgeInsets.only(top: 12),
+          child: PlatformTextField(
+            controller: templateNameTextController,
+            maxLength: 35,
+            hintText: 'Enter template name',
+            material: (context, platform) => MaterialTextFieldData(
+              decoration: const InputDecoration(
+                counterText: '',
+              ),
+            ),
+            cupertino: (context, platform) => CupertinoTextFieldData(
+              maxLength: 35,
+              maxLengthEnforcement: MaxLengthEnforcement.enforced,
+            ),
+          ),
+        ),
+        actions: [
+          PlatformDialogAction(
+            key: const Key('saveButton'),
+            child: const Text('Save'),
+            onPressed: () =>
+                saveButtonPressed(context, templateNameTextController.text),
+          ),
+          PlatformDialogAction(
+            key: const Key('closeButton'),
+            child: const Text('Close'),
+            onPressed: () => context.router.pop(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void saveButtonPressed(BuildContext context, templateName) {
+    context.router.pop();
+    final templateList =
+        context.read<OrderTemplateListBloc>().state.orderTemplateList;
+    final priceAggregateList = context.read<CartBloc>().state.cartItemList;
+    final userID = context.read<UserBloc>().state.user.id;
+    final cartList = <OrderTemplateMaterial>[];
+    priceAggregateList
+        .map((cartItem) => cartList.add(cartItem.toOrderTemplateMaterial()))
+        .toList();
+    context.read<OrderTemplateListBloc>().add(
+          OrderTemplateListEvent.save(
+            templateName: templateName,
+            userID: userID,
+            cartList: cartList,
+            templateList: templateList,
+          ),
+        );
   }
 }
 
@@ -146,6 +256,7 @@ class _OrderSummaryDetails {
     required this.key,
     required this.value,
   });
+
   final String key;
   final String value;
 }
@@ -190,6 +301,7 @@ class _CustomerDetailsStep extends StatelessWidget {
   const _CustomerDetailsStep({
     Key? key,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
@@ -221,6 +333,7 @@ class _AdditionalInformationStep extends StatelessWidget {
   const _AdditionalInformationStep({
     Key? key,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     // TODO: Biswaranjan - can we use SalesOrgBloc builder here instead of ShipToCodeBloc
@@ -292,6 +405,7 @@ class _Disclaimer extends StatelessWidget {
   const _Disclaimer({
     Key? key,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -320,6 +434,7 @@ class _CartDetails extends StatelessWidget {
   const _CartDetails({
     Key? key,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CartBloc, CartState>(
@@ -386,12 +501,14 @@ class _TextFormField extends StatelessWidget {
   final String labelText;
   final int maxLength;
   final TextInputType keyboardType;
+
   const _TextFormField({
     required this.labelText,
     required this.maxLength,
     this.keyboardType = TextInputType.text,
     Key? key,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -438,6 +555,7 @@ class _PaymentTerm extends StatefulWidget {
 
 class _PaymentTermState extends State<_PaymentTerm> {
   late TextEditingController _controller;
+
   @override
   void initState() {
     _controller = TextEditingController();
@@ -502,6 +620,7 @@ class _PaymentTermState extends State<_PaymentTerm> {
 
 class _DatePickerField extends StatefulWidget {
   final String futureDeliveryDay;
+
   const _DatePickerField({
     required this.futureDeliveryDay,
     Key? key,

@@ -16,6 +16,8 @@ _$_OrderTemplateMaterialDto _$$_OrderTemplateMaterialDtoFromJson(
       materialDescription: json['materialDescription'] as String? ?? '',
       hidePrice: json['hidePrice'] as bool? ?? false,
       taxClassification: json['taxClassification'] as String? ?? '',
+      materialGroup4: json['materialGroup4'] as String? ?? '',
+      hasValidTenderContract: json['hasValidTenderContract'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_OrderTemplateMaterialDtoToJson(
@@ -28,4 +30,6 @@ Map<String, dynamic> _$$_OrderTemplateMaterialDtoToJson(
       'materialDescription': instance.materialDescription,
       'hidePrice': instance.hidePrice,
       'taxClassification': instance.taxClassification,
+      'materialGroup4': instance.materialGroup4,
+      'hasValidTenderContract': instance.hasValidTenderContract,
     };

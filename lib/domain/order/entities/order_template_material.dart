@@ -10,21 +10,25 @@ class OrderTemplateMaterial with _$OrderTemplateMaterial {
 
   const factory OrderTemplateMaterial({
     required MaterialNumber materialNumber,
+    required MaterialGroup materialGroup4,
     required int qty,
     required String type,
     required String principalName,
     required String materialDescription,
     required bool hidePrice,
+    required bool hasValidTenderContract,
     required MaterialTaxClassification taxClassification,
   }) = _OrderTemplateMaterial;
 
   factory OrderTemplateMaterial.empty() => OrderTemplateMaterial(
         materialNumber: MaterialNumber(''),
+        materialGroup4: MaterialGroup.four(''),
         qty: 0,
         type: '',
         principalName: '',
         materialDescription: '',
         hidePrice: false,
+        hasValidTenderContract: false,
         taxClassification: MaterialTaxClassification(''),
       );
 

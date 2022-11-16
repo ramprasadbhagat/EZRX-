@@ -28,4 +28,19 @@ String getOrderTemplates() {
     }
     ''';
   }
+
+  String saveOrderTemplate() {
+    return '''
+      mutation saveOrderTemplateMutation(\$input: CreateOrderTemplateInput!) {
+          createOrderTemplate(input: \$input) {
+              orderTemplate {
+                  id
+                  name
+                  cartList
+                  user{id}                 
+              }
+          }
+      }
+    ''';
+  }
 }

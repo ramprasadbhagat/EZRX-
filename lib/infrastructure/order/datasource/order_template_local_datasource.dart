@@ -12,10 +12,19 @@ class OrderTemplateLocalDataSource {
       await rootBundle.loadString('assets/json/getOrderTemplatesResponse.json'),
     );
     final finalData = data['data']['orderTemplates'];
-    
+
     return List.from(finalData)
         .map((e) => OrderTemplateDto.fromJson(e).toDomain())
         .toList();
-   
+  }
+
+  Future<OrderTemplate> saveOrderTemplate() async {
+    final data = json.decode(
+      await rootBundle.loadString('assets/json/saveOrderTemplatesResponse.json'),
+    );
+
+    return OrderTemplateDto.fromJson(
+      data['data']['createOrderTemplate']['orderTemplate'],
+    ).toDomain();
   }
 }

@@ -4,9 +4,11 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
+import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_template_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_remote_datasource.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/order_template_material_dto.dart';
 
 class OrderTemplateRepository implements IOrderTemplateRepository {
   final Config config;
@@ -74,6 +76,46 @@ class OrderTemplateRepository implements IOrderTemplateRepository {
         );
 
       return right(newTempItems);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<OrderTemplate>>> saveOrderTemplate({
+    required String templateName,
+    required String userID,
+    required List<OrderTemplateMaterial> cartList,
+    required List<OrderTemplate> templateList,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final savedTemplate =
+            await orderTemplateLocalDataSource.saveOrderTemplate();
+        final newOrderTemplateList = List<OrderTemplate>.from(templateList)
+          ..insert(0, savedTemplate);
+
+        return right(newOrderTemplateList);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final cartListOfMap = List.from(cartList)
+          .map((e) => OrderTemplateMaterialDto.fromDomain(e).toJson())
+          .toList();
+
+      final savedTemplate =
+          await orderTemplateRemoteDataSource.saveOrderTemplate(
+        templateName: templateName,
+        userID: userID,
+        cartList: cartListOfMap,
+      );
+
+      final newOrderTemplateList = List<OrderTemplate>.from(templateList)
+        ..insert(0, savedTemplate);
+
+      return right(newOrderTemplateList);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

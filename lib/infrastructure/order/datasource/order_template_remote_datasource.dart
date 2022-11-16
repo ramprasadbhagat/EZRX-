@@ -80,4 +80,49 @@ class OrderTemplateRemoteDataSource {
       );
     }
   }
+
+  Future<OrderTemplate> saveOrderTemplate({
+    required String templateName,
+    required String userID,
+    required List<Map<String, dynamic>> cartList,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = orderTemplateQueries.saveOrderTemplate();
+
+      final inputVariables = {
+        'name': templateName,
+        'user': userID,
+        'cartlist': jsonEncode(cartList),
+      };
+
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}strapiEngine',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': {
+            'input': {
+              'data': inputVariables,
+            },
+          },
+        }),
+      );
+      _saveOrderTemplateExceptionChecker(res: res);
+
+      return OrderTemplateDto.fromJson(
+        res.data['data']['createOrderTemplate']['orderTemplate'],
+      ).toDomain();
+    });
+  }
+
+  void _saveOrderTemplateExceptionChecker({required Response<dynamic> res}) {
+    if (res.data['errors'] != null) {
+      throw ServerException(message: res.data['errors'][0]['message']);
+    } else if (res.statusCode != 200) {
+      throw ServerException(
+        code: res.statusCode ?? 0,
+        message: res.statusMessage ?? '',
+      );
+    }
+  }
 }

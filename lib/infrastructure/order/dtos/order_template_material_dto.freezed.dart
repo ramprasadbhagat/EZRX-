@@ -35,6 +35,10 @@ mixin _$OrderTemplateMaterialDto {
   bool get hidePrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'taxClassification', defaultValue: '')
   String get taxClassification => throw _privateConstructorUsedError;
+  @JsonKey(name: 'materialGroup4', defaultValue: '')
+  String get materialGroup4 => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+  bool get hasValidTenderContract => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -62,7 +66,11 @@ abstract class $OrderTemplateMaterialDtoCopyWith<$Res> {
       @JsonKey(name: 'hidePrice', defaultValue: false)
           bool hidePrice,
       @JsonKey(name: 'taxClassification', defaultValue: '')
-          String taxClassification});
+          String taxClassification,
+      @JsonKey(name: 'materialGroup4', defaultValue: '')
+          String materialGroup4,
+      @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+          bool hasValidTenderContract});
 }
 
 /// @nodoc
@@ -86,6 +94,8 @@ class _$OrderTemplateMaterialDtoCopyWithImpl<$Res,
     Object? materialDescription = null,
     Object? hidePrice = null,
     Object? taxClassification = null,
+    Object? materialGroup4 = null,
+    Object? hasValidTenderContract = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -116,6 +126,14 @@ class _$OrderTemplateMaterialDtoCopyWithImpl<$Res,
           ? _value.taxClassification
           : taxClassification // ignore: cast_nullable_to_non_nullable
               as String,
+      materialGroup4: null == materialGroup4
+          ? _value.materialGroup4
+          : materialGroup4 // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasValidTenderContract: null == hasValidTenderContract
+          ? _value.hasValidTenderContract
+          : hasValidTenderContract // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -143,7 +161,11 @@ abstract class _$$_OrderTemplateMaterialDtoCopyWith<$Res>
       @JsonKey(name: 'hidePrice', defaultValue: false)
           bool hidePrice,
       @JsonKey(name: 'taxClassification', defaultValue: '')
-          String taxClassification});
+          String taxClassification,
+      @JsonKey(name: 'materialGroup4', defaultValue: '')
+          String materialGroup4,
+      @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+          bool hasValidTenderContract});
 }
 
 /// @nodoc
@@ -165,6 +187,8 @@ class __$$_OrderTemplateMaterialDtoCopyWithImpl<$Res>
     Object? materialDescription = null,
     Object? hidePrice = null,
     Object? taxClassification = null,
+    Object? materialGroup4 = null,
+    Object? hasValidTenderContract = null,
   }) {
     return _then(_$_OrderTemplateMaterialDto(
       materialNumber: null == materialNumber
@@ -195,6 +219,14 @@ class __$$_OrderTemplateMaterialDtoCopyWithImpl<$Res>
           ? _value.taxClassification
           : taxClassification // ignore: cast_nullable_to_non_nullable
               as String,
+      materialGroup4: null == materialGroup4
+          ? _value.materialGroup4
+          : materialGroup4 // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasValidTenderContract: null == hasValidTenderContract
+          ? _value.hasValidTenderContract
+          : hasValidTenderContract // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -216,7 +248,11 @@ class _$_OrderTemplateMaterialDto extends _OrderTemplateMaterialDto {
       @JsonKey(name: 'hidePrice', defaultValue: false)
           required this.hidePrice,
       @JsonKey(name: 'taxClassification', defaultValue: '')
-          required this.taxClassification})
+          required this.taxClassification,
+      @JsonKey(name: 'materialGroup4', defaultValue: '')
+          required this.materialGroup4,
+      @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+          required this.hasValidTenderContract})
       : super._();
 
   factory _$_OrderTemplateMaterialDto.fromJson(Map<String, dynamic> json) =>
@@ -243,10 +279,16 @@ class _$_OrderTemplateMaterialDto extends _OrderTemplateMaterialDto {
   @override
   @JsonKey(name: 'taxClassification', defaultValue: '')
   final String taxClassification;
+  @override
+  @JsonKey(name: 'materialGroup4', defaultValue: '')
+  final String materialGroup4;
+  @override
+  @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+  final bool hasValidTenderContract;
 
   @override
   String toString() {
-    return 'OrderTemplateMaterialDto(materialNumber: $materialNumber, qty: $qty, type: $type, principalName: $principalName, materialDescription: $materialDescription, hidePrice: $hidePrice, taxClassification: $taxClassification)';
+    return 'OrderTemplateMaterialDto(materialNumber: $materialNumber, qty: $qty, type: $type, principalName: $principalName, materialDescription: $materialDescription, hidePrice: $hidePrice, taxClassification: $taxClassification, materialGroup4: $materialGroup4, hasValidTenderContract: $hasValidTenderContract)';
   }
 
   @override
@@ -265,13 +307,26 @@ class _$_OrderTemplateMaterialDto extends _OrderTemplateMaterialDto {
             (identical(other.hidePrice, hidePrice) ||
                 other.hidePrice == hidePrice) &&
             (identical(other.taxClassification, taxClassification) ||
-                other.taxClassification == taxClassification));
+                other.taxClassification == taxClassification) &&
+            (identical(other.materialGroup4, materialGroup4) ||
+                other.materialGroup4 == materialGroup4) &&
+            (identical(other.hasValidTenderContract, hasValidTenderContract) ||
+                other.hasValidTenderContract == hasValidTenderContract));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, materialNumber, qty, type,
-      principalName, materialDescription, hidePrice, taxClassification);
+  int get hashCode => Object.hash(
+      runtimeType,
+      materialNumber,
+      qty,
+      type,
+      principalName,
+      materialDescription,
+      hidePrice,
+      taxClassification,
+      materialGroup4,
+      hasValidTenderContract);
 
   @JsonKey(ignore: true)
   @override
@@ -303,7 +358,11 @@ abstract class _OrderTemplateMaterialDto extends OrderTemplateMaterialDto {
           @JsonKey(name: 'hidePrice', defaultValue: false)
               required final bool hidePrice,
           @JsonKey(name: 'taxClassification', defaultValue: '')
-              required final String taxClassification}) =
+              required final String taxClassification,
+          @JsonKey(name: 'materialGroup4', defaultValue: '')
+              required final String materialGroup4,
+          @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+              required final bool hasValidTenderContract}) =
       _$_OrderTemplateMaterialDto;
   const _OrderTemplateMaterialDto._() : super._();
 
@@ -331,6 +390,12 @@ abstract class _OrderTemplateMaterialDto extends OrderTemplateMaterialDto {
   @override
   @JsonKey(name: 'taxClassification', defaultValue: '')
   String get taxClassification;
+  @override
+  @JsonKey(name: 'materialGroup4', defaultValue: '')
+  String get materialGroup4;
+  @override
+  @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+  bool get hasValidTenderContract;
   @override
   @JsonKey(ignore: true)
   _$$_OrderTemplateMaterialDtoCopyWith<_$_OrderTemplateMaterialDto>

@@ -4,12 +4,15 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
+import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_template_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'order_template_list_bloc.freezed.dart';
+
 part 'order_template_list_event.dart';
+
 part 'order_template_list_state.dart';
 
 class OrderTemplateListBloc
@@ -47,9 +50,9 @@ class OrderTemplateListBloc
               ),
             );
           },
-          (currentTempleteList) {
+          (currentTemplateList) {
             emit(state.copyWith(
-              orderTemplateList: currentTempleteList,
+              orderTemplateList: currentTemplateList,
               apiFailureOrSuccessOption: none(),
               isFetching: false,
             ));
@@ -88,7 +91,42 @@ class OrderTemplateListBloc
           },
         );
       },
+      save: (e) async {
+        emit(
+          state.copyWith(
+            isFetching: true,
+            orderTemplateList: e.templateList,
+          ),
+        );
+
+        final failureOrSuccess =
+            await orderTemplateRepository.saveOrderTemplate(
+          templateName: e.templateName,
+          userID: e.userID,
+          cartList: e.cartList,
+          templateList: e.templateList,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (templateList) {
+            emit(
+              state.copyWith(
+                orderTemplateList: templateList,
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }
-

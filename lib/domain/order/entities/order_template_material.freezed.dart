@@ -17,11 +17,13 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$OrderTemplateMaterial {
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
+  MaterialGroup get materialGroup4 => throw _privateConstructorUsedError;
   int get qty => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String get principalName => throw _privateConstructorUsedError;
   String get materialDescription => throw _privateConstructorUsedError;
   bool get hidePrice => throw _privateConstructorUsedError;
+  bool get hasValidTenderContract => throw _privateConstructorUsedError;
   MaterialTaxClassification get taxClassification =>
       throw _privateConstructorUsedError;
 
@@ -38,11 +40,13 @@ abstract class $OrderTemplateMaterialCopyWith<$Res> {
   @useResult
   $Res call(
       {MaterialNumber materialNumber,
+      MaterialGroup materialGroup4,
       int qty,
       String type,
       String principalName,
       String materialDescription,
       bool hidePrice,
+      bool hasValidTenderContract,
       MaterialTaxClassification taxClassification});
 }
 
@@ -61,11 +65,13 @@ class _$OrderTemplateMaterialCopyWithImpl<$Res,
   @override
   $Res call({
     Object? materialNumber = null,
+    Object? materialGroup4 = null,
     Object? qty = null,
     Object? type = null,
     Object? principalName = null,
     Object? materialDescription = null,
     Object? hidePrice = null,
+    Object? hasValidTenderContract = null,
     Object? taxClassification = null,
   }) {
     return _then(_value.copyWith(
@@ -73,6 +79,10 @@ class _$OrderTemplateMaterialCopyWithImpl<$Res,
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
+      materialGroup4: null == materialGroup4
+          ? _value.materialGroup4
+          : materialGroup4 // ignore: cast_nullable_to_non_nullable
+              as MaterialGroup,
       qty: null == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
@@ -92,6 +102,10 @@ class _$OrderTemplateMaterialCopyWithImpl<$Res,
       hidePrice: null == hidePrice
           ? _value.hidePrice
           : hidePrice // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasValidTenderContract: null == hasValidTenderContract
+          ? _value.hasValidTenderContract
+          : hasValidTenderContract // ignore: cast_nullable_to_non_nullable
               as bool,
       taxClassification: null == taxClassification
           ? _value.taxClassification
@@ -111,11 +125,13 @@ abstract class _$$_OrderTemplateMaterialCopyWith<$Res>
   @useResult
   $Res call(
       {MaterialNumber materialNumber,
+      MaterialGroup materialGroup4,
       int qty,
       String type,
       String principalName,
       String materialDescription,
       bool hidePrice,
+      bool hasValidTenderContract,
       MaterialTaxClassification taxClassification});
 }
 
@@ -131,11 +147,13 @@ class __$$_OrderTemplateMaterialCopyWithImpl<$Res>
   @override
   $Res call({
     Object? materialNumber = null,
+    Object? materialGroup4 = null,
     Object? qty = null,
     Object? type = null,
     Object? principalName = null,
     Object? materialDescription = null,
     Object? hidePrice = null,
+    Object? hasValidTenderContract = null,
     Object? taxClassification = null,
   }) {
     return _then(_$_OrderTemplateMaterial(
@@ -143,6 +161,10 @@ class __$$_OrderTemplateMaterialCopyWithImpl<$Res>
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
+      materialGroup4: null == materialGroup4
+          ? _value.materialGroup4
+          : materialGroup4 // ignore: cast_nullable_to_non_nullable
+              as MaterialGroup,
       qty: null == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
@@ -163,6 +185,10 @@ class __$$_OrderTemplateMaterialCopyWithImpl<$Res>
           ? _value.hidePrice
           : hidePrice // ignore: cast_nullable_to_non_nullable
               as bool,
+      hasValidTenderContract: null == hasValidTenderContract
+          ? _value.hasValidTenderContract
+          : hasValidTenderContract // ignore: cast_nullable_to_non_nullable
+              as bool,
       taxClassification: null == taxClassification
           ? _value.taxClassification
           : taxClassification // ignore: cast_nullable_to_non_nullable
@@ -176,16 +202,20 @@ class __$$_OrderTemplateMaterialCopyWithImpl<$Res>
 class _$_OrderTemplateMaterial extends _OrderTemplateMaterial {
   const _$_OrderTemplateMaterial(
       {required this.materialNumber,
+      required this.materialGroup4,
       required this.qty,
       required this.type,
       required this.principalName,
       required this.materialDescription,
       required this.hidePrice,
+      required this.hasValidTenderContract,
       required this.taxClassification})
       : super._();
 
   @override
   final MaterialNumber materialNumber;
+  @override
+  final MaterialGroup materialGroup4;
   @override
   final int qty;
   @override
@@ -197,11 +227,13 @@ class _$_OrderTemplateMaterial extends _OrderTemplateMaterial {
   @override
   final bool hidePrice;
   @override
+  final bool hasValidTenderContract;
+  @override
   final MaterialTaxClassification taxClassification;
 
   @override
   String toString() {
-    return 'OrderTemplateMaterial(materialNumber: $materialNumber, qty: $qty, type: $type, principalName: $principalName, materialDescription: $materialDescription, hidePrice: $hidePrice, taxClassification: $taxClassification)';
+    return 'OrderTemplateMaterial(materialNumber: $materialNumber, materialGroup4: $materialGroup4, qty: $qty, type: $type, principalName: $principalName, materialDescription: $materialDescription, hidePrice: $hidePrice, hasValidTenderContract: $hasValidTenderContract, taxClassification: $taxClassification)';
   }
 
   @override
@@ -211,6 +243,8 @@ class _$_OrderTemplateMaterial extends _OrderTemplateMaterial {
             other is _$_OrderTemplateMaterial &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
+            (identical(other.materialGroup4, materialGroup4) ||
+                other.materialGroup4 == materialGroup4) &&
             (identical(other.qty, qty) || other.qty == qty) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.principalName, principalName) ||
@@ -219,13 +253,24 @@ class _$_OrderTemplateMaterial extends _OrderTemplateMaterial {
                 other.materialDescription == materialDescription) &&
             (identical(other.hidePrice, hidePrice) ||
                 other.hidePrice == hidePrice) &&
+            (identical(other.hasValidTenderContract, hasValidTenderContract) ||
+                other.hasValidTenderContract == hasValidTenderContract) &&
             (identical(other.taxClassification, taxClassification) ||
                 other.taxClassification == taxClassification));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, materialNumber, qty, type,
-      principalName, materialDescription, hidePrice, taxClassification);
+  int get hashCode => Object.hash(
+      runtimeType,
+      materialNumber,
+      materialGroup4,
+      qty,
+      type,
+      principalName,
+      materialDescription,
+      hidePrice,
+      hasValidTenderContract,
+      taxClassification);
 
   @JsonKey(ignore: true)
   @override
@@ -238,17 +283,21 @@ class _$_OrderTemplateMaterial extends _OrderTemplateMaterial {
 abstract class _OrderTemplateMaterial extends OrderTemplateMaterial {
   const factory _OrderTemplateMaterial(
           {required final MaterialNumber materialNumber,
+          required final MaterialGroup materialGroup4,
           required final int qty,
           required final String type,
           required final String principalName,
           required final String materialDescription,
           required final bool hidePrice,
+          required final bool hasValidTenderContract,
           required final MaterialTaxClassification taxClassification}) =
       _$_OrderTemplateMaterial;
   const _OrderTemplateMaterial._() : super._();
 
   @override
   MaterialNumber get materialNumber;
+  @override
+  MaterialGroup get materialGroup4;
   @override
   int get qty;
   @override
@@ -259,6 +308,8 @@ abstract class _OrderTemplateMaterial extends OrderTemplateMaterial {
   String get materialDescription;
   @override
   bool get hidePrice;
+  @override
+  bool get hasValidTenderContract;
   @override
   MaterialTaxClassification get taxClassification;
   @override

@@ -16,19 +16,19 @@ class SavedOrderDto with _$SavedOrderDto {
     @JsonKey(name: 'id', defaultValue: '') required String id,
     @_OrderProductItemListConverter()
     @JsonKey(name: 'itemlist', defaultValue: <MaterialItemDto>[])
-        required List<MaterialItemDto> items,
+    required List<MaterialItemDto> items,
     @JsonKey(name: 'draftorder', defaultValue: false)
-        required bool isDraftOrder,
+    required bool isDraftOrder,
     @JsonKey(name: 'BillingDocument', defaultValue: '')
-        required String billingDocument,
+    required String billingDocument,
     @JsonKey(name: 'eZRxNumber', defaultValue: '') required String eZRxNumber,
     @JsonKey(name: 'SoldToParty', defaultValue: '') required String soldToParty,
     @JsonKey(name: 'ShipToParty', defaultValue: '') required String shipToParty,
     @JsonKey(name: 'CompanyName', defaultValue: '') required String companyName,
     @JsonKey(name: 'TotalOrderValue', defaultValue: 0)
-        required double totalOrderValue,
+    required double totalOrderValue,
     @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
-        required String requestedDeliveryDate,
+    required String requestedDeliveryDate,
   }) = _SavedOrderDto;
 
   SavedOrder toDomain() {
