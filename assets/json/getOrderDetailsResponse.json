@@ -17,7 +17,19 @@
           "POReference": "Test1",
           "InvoiceNumber": "",
           "InvoiceDate": "",
-          "Invoices": [],
+          "Invoices": [
+            {
+              "InvoiceNumber":"123",
+              "InvoiceDate":"2022-10-30",
+              "InvoicePrice":"0.0"
+            },
+            {
+              "InvoiceNumber":"124",
+              "InvoiceDate":"2022-10-30",
+              "InvoicePrice":"1.0"
+            }
+          ],
+
           "PostalCode":"117406",
           "Country":"",
           "Phone":"",
@@ -50,8 +62,8 @@
           }
         ],
         "PaymentTerm": {
-          "PaymentTermCode": "",
-          "PaymentTermDescription": ""
+          "PaymentTermCode": "100",
+          "PaymentTermDescription": "testing"
         },
         "SpecialInstructions": "",
         "PODocuments": [],

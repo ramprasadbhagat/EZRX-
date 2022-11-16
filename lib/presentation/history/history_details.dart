@@ -205,8 +205,10 @@ class _OrderDetails extends StatelessWidget {
           items: [
             BalanceTextRow(
               keyText: 'Total sub value'.tr(),
-              valueText: orderDetails.orderHistoryDetailsOrderHeader.orderValue
-                  .toString(),
+              valueText: _displayPrice(
+                context.read<SalesOrgBloc>().state.configs,
+                orderDetails.orderHistoryDetailsOrderHeader.orderValue,
+              ),
               valueTextLoading: state.isLoading,
               keyFlex: 1,
               valueFlex: 1,
@@ -223,10 +225,10 @@ class _OrderDetails extends StatelessWidget {
             ),
             BalanceTextRow(
               keyText: 'Total Tax'.tr(),
-              valueText: double.parse(orderDetails
-                      .orderHistoryDetailsOrderHeader.totalTax
-                      .toString())
-                  .toStringAsFixed(2),
+              valueText: _displayPrice(
+                context.read<SalesOrgBloc>().state.configs,
+                orderDetails.orderHistoryDetailsOrderHeader.totalTax,
+              ),
               valueTextLoading: state.isLoading,
               keyFlex: 1,
               valueFlex: 1,
@@ -339,14 +341,14 @@ class _OrderDetails extends StatelessWidget {
       },
     );
   }
+}
 
-  String _displayPrice(SalesOrganisationConfigs salesOrgConfig, double price) {
-    if (salesOrgConfig.currency.isVN) {
-      return '${price.toStringAsFixed(2)} ${salesOrgConfig.currency.code}';
-    }
-
-    return '${salesOrgConfig.currency.code} ${price.toStringAsFixed(2)}';
+String _displayPrice(SalesOrganisationConfigs salesOrgConfig, double price) {
+  if (salesOrgConfig.currency.isVN) {
+    return '${price.toStringAsFixed(2)} ${salesOrgConfig.currency.code}';
   }
+
+  return '${salesOrgConfig.currency.code} ${price.toStringAsFixed(2)}';
 }
 
 class _SoldToAddress extends StatelessWidget {
@@ -580,138 +582,68 @@ class _Invoices extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomExpansionTile(
-      titleText: 'Invoices'.tr(),
-      items: <Widget>[
-        Container(
-          padding: const EdgeInsets.only(
-            top: 0.0,
-          ),
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: orderDetails
-                      .orderHistoryDetailsShippingInformation.invoices
-                      .map((invoice) {
-                    return Card(
-                      elevation: 0,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 5,
-                              left: 5,
-                              right: 5,
-                            ),
-                            child: Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: Text(
-                                    'Invoice Number'.tr(),
-                                    style: const TextStyle(
-                                      color: ZPColors.darkerGreen,
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    invoice.invoiceNumber,
-                                    style: const TextStyle(
-                                      color: ZPColors.darkerGreen,
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              bottom: 2,
-                              left: 5,
-                              right: 5,
-                            ),
-                            child: Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: Text(
-                                    'Invoice Date'.tr(),
-                                    style: const TextStyle(
-                                      color: ZPColors.darkerGreen,
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    invoice.invoiceDate,
-                                    style: const TextStyle(
-                                      color: ZPColors.darkerGreen,
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              bottom: 2,
-                              left: 5,
-                              right: 5,
-                            ),
-                            child: Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: Text(
-                                    'Invoice Price'.tr(),
-                                    style: const TextStyle(
-                                      color: ZPColors.darkerGreen,
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: RichText(
-                                    text: TextSpan(
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                          text: invoice.invoicePrice,
-                                          style: const TextStyle(
-                                            color: ZPColors.darkerGreen,
-                                            fontSize: 14.0,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 5.0,
-                          ),
-                        ],
-                      ),
-                    );
-                  }).toList(),
-                ),
+    return BlocBuilder<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
+      buildWhen: (previous, current) => previous.isLoading != current.isLoading,
+      builder: (context, state) {
+        return CustomExpansionTile(
+          titleText: 'Invoices'.tr(),
+          items: <Widget>[
+            Container(
+              padding: const EdgeInsets.only(
+                top: 0.0,
               ),
-            ],
-          ),
-        ),
-      ],
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: orderDetails
+                          .orderHistoryDetailsShippingInformation.invoices
+                          .map((invoice) {
+                        return Card(
+                          elevation: 0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                BalanceTextRow(
+                                  keyText: 'Invoice Number'.tr(),
+                                  valueText: invoice.invoiceNumber,
+                                  valueTextLoading: state.isLoading,
+                                  keyFlex: 1,
+                                  valueFlex: 1,
+                                ),
+                                BalanceTextRow(
+                                  keyText: 'Invoice Date'.tr(),
+                                  valueText: invoice.invoiceDate,
+                                  valueTextLoading: state.isLoading,
+                                  keyFlex: 1,
+                                  valueFlex: 1,
+                                ),
+                                BalanceTextRow(
+                                  keyText: 'Invoice Price'.tr(),
+                                  valueText: invoice.invoicePrice,
+                                  valueTextLoading: state.isLoading,
+                                  keyFlex: 1,
+                                  valueFlex: 1,
+                                ),
+                                const SizedBox(
+                                  height: 5.0,
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
