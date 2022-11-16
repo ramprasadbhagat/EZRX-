@@ -5,18 +5,17 @@ import 'package:ezrxmobile/application/order/cart/price_override/price_override_
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 
 class PriceSheet extends StatefulWidget {
   const PriceSheet({Key? key, required this.item, required this.onTap})
       : super(key: key);
 
   @override
-  _PriceSheetState createState() => _PriceSheetState();
+  State<PriceSheet> createState() => _PriceSheetState();
 
   final PriceAggregate item;
   final Function onTap;

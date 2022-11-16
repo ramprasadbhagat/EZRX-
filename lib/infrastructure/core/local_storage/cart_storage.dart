@@ -71,6 +71,26 @@ class CartStorage {
       throw CacheException(message: e.toString());
     }
   }
+
+  Future updateItem(PriceAggregateDto cartDto) async {
+    try {
+      if (_cartBox.isEmpty) {
+        await _cartBox.add(cartDto);
+      } else {
+        for (final entry in _cartBox.toMap().entries) {
+          final existingItem = entry.value as PriceAggregateDto;
+          if (existingItem.materialDto.materialNumber ==
+              cartDto.materialDto.materialNumber) {
+            await _cartBox.put(entry.key, cartDto);
+            break;
+          }
+        }
+      }
+    } catch (e) {
+      throw CacheException(message: e.toString());
+    }
+  }
+
 //Replacing the item for price override
 
   Future update({

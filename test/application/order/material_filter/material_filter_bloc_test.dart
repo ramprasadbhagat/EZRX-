@@ -1,16 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/material_filter_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_filter_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -26,65 +16,65 @@ class MaterialFilterMockBloc
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialFilterRepository materialFilterRepositoryMock;
-  late MaterialFilter materialFilterMockData;
-
-  final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(
-    customerCodeSoldTo: 'fake-1234',
-  );
-
-  final fakeSaleOrganisation = SalesOrganisation.empty().copyWith(
-    salesOrg: SalesOrg('fake-1234'),
-  );
-
-  final fakeShipToInfo = ShipToInfo.empty().copyWith(
-    shipToCustomerCode: 'fake-1234',
-  );
-
-  final fakeUser = User.empty().copyWith(
-      username: Username('fakeUser'),
-      role:
-          Role(type: RoleType('fakeRole'), description: '', id: '', name: ''));
-
-  final fakeSaleOrgConfig = SalesOrganisationConfigs(
-    enableDefaultMD: false,
-    disableProcessingStatus: false,
-    currency: Currency(''),
-    hideCustomer: false,
-    disableOrderType: false,
-    disablePrincipals: false,
-    enableGimmickMaterial: false,
-    languageFilter: false,
-    languageValue: '',
-    disableBundles: false,
-    principalList: [],
-    enableBatchNumber: false,
-    enableTaxClassification: false,
-    enableVat: false,
-    enableZDP5: false,
-    vatValue: 0,
-    materialWithoutPrice: false,
-    enableCollectiveNumber: false,
-    enableFutureDeliveryDay: false,
-    enableMobileNumber: false,
-    enablePaymentTerms: false,
-    enableReferenceNote: false,
-    enableSpecialInstructions: false,
-    futureDeliveryDay: '',
-    enableGMC: false,
-    enableListPrice: false,
-    priceOverride: false,
-    disablePaymentTermsDisplay: false,
-    disableDeliveryDate: false,
-    enableBillTo:false,
-  );
+  // late MaterialFilter materialFilterMockData;
+  //
+  // final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(
+  //   customerCodeSoldTo: 'fake-1234',
+  // );
+  //
+  // final fakeSaleOrganisation = SalesOrganisation.empty().copyWith(
+  //   salesOrg: SalesOrg('fake-1234'),
+  // );
+  //
+  // final fakeShipToInfo = ShipToInfo.empty().copyWith(
+  //   shipToCustomerCode: 'fake-1234',
+  // );
+  //
+  // final fakeUser = User.empty().copyWith(
+  //     username: Username('fakeUser'),
+  //     role:
+  //         Role(type: RoleType('fakeRole'), description: '', id: '', name: ''));
+  //
+  // final fakeSaleOrgConfig = SalesOrganisationConfigs(
+  //   enableDefaultMD: false,
+  //   disableProcessingStatus: false,
+  //   currency: Currency(''),
+  //   hideCustomer: false,
+  //   disableOrderType: false,
+  //   disablePrincipals: false,
+  //   enableGimmickMaterial: false,
+  //   languageFilter: false,
+  //   languageValue: '',
+  //   disableBundles: false,
+  //   principalList: [],
+  //   enableBatchNumber: false,
+  //   enableTaxClassification: false,
+  //   enableVat: false,
+  //   enableZDP5: false,
+  //   vatValue: 0,
+  //   materialWithoutPrice: false,
+  //   enableCollectiveNumber: false,
+  //   enableFutureDeliveryDay: false,
+  //   enableMobileNumber: false,
+  //   enablePaymentTerms: false,
+  //   enableReferenceNote: false,
+  //   enableSpecialInstructions: false,
+  //   futureDeliveryDay: '',
+  //   enableGMC: false,
+  //   enableListPrice: false,
+  //   priceOverride: false,
+  //   disablePaymentTermsDisplay: false,
+  //   disableDeliveryDate: false,
+  //   enableBillTo:false,
+  // );
 
   const fakeSelectedFilterCategory = MaterialFilterType.principal;
 
   group('Material Filter Bloc', () {
     setUp(() async {
       materialFilterRepositoryMock = MaterialFilterRepositoryMock();
-      materialFilterMockData =
-          await MaterialFilterLocalDataSource().getFilters();
+      // materialFilterMockData =
+      //     await MaterialFilterLocalDataSource().getFilters();
       WidgetsFlutterBinding.ensureInitialized();
     });
     // blocTest<MaterialFilterBloc, MaterialFilterState>(

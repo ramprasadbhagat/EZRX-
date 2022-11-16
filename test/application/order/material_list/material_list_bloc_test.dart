@@ -1,45 +1,36 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
-import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MaterialListMockRepo extends Mock implements MaterialListRepository {}
 
-const _defaultPageSize = 10;
+// const _defaultPageSize = 10;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   final MaterialListRepository materialListMockRepository =
       MaterialListMockRepo();
 
-  final mockUser = User.empty();
-  final mockSalesOrg = SalesOrganisation.empty();
-  final mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty();
-  final mockCustomerCodeInfo = CustomerCodeInfo.empty();
-  final mockShipToInfo = ShipToInfo.empty();
-  final mockSelectedMaterialFilter =
-      MaterialFilterState.initial().selectedMaterialFilter;
-  final mockSelectedOrderDocumentType =
-      OrderDocumentTypeState.initial().selectedOrderType;    
+  // final mockUser = User.empty();
+  // final mockSalesOrg = SalesOrganisation.empty();
+  // final mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty();
+  // final mockCustomerCodeInfo = CustomerCodeInfo.empty();
+  // final mockShipToInfo = ShipToInfo.empty();
+  // final mockSelectedMaterialFilter =
+  //     MaterialFilterState.initial().selectedMaterialFilter;
+  // final mockSelectedOrderDocumentType =
+  //     OrderDocumentTypeState.initial().selectedOrderType;
 
-  late final List<MaterialInfo> materialListMock;
+  // late final List<MaterialInfo> materialListMock;
   final materialState = MaterialListState.initial();
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    materialListMock = await MaterialListLocalDataSource().getMaterialList();
+    // materialListMock = await MaterialListLocalDataSource().getMaterialList();
   });
 
   group('Material List Bloc', () {
@@ -68,7 +59,7 @@ void main() {
     );
 
     // Need to modify this
-    // 
+    //
     // blocTest(
     //   'Material List search fetch',
     //   build: () =>
@@ -157,7 +148,7 @@ void main() {
     );
 
     // Need to modify this
-    // 
+    //
     // blocTest(
     //   'Material List Fetch fail',
     //   build: () =>
@@ -511,7 +502,6 @@ void main() {
     //     ),
     //   ],
     // );
-
 
     // uncomment till this
   });

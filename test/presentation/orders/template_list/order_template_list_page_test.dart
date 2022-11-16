@@ -16,7 +16,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/material_frame_wrapper.dart';
-import '../../../utils/multi_bloc_provider_frame_wrapper.dart';
 
 class OrderTemplateListBlocMock
     extends MockBloc<OrderTemplateListEvent, OrderTemplateListState>

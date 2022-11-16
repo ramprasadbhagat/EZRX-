@@ -2,15 +2,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/presentation/core/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bonus_discount_label.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/price_override_bottomsheet.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 
 class CartItemListTile extends StatelessWidget {
   final PriceAggregate cartItem;
@@ -40,6 +40,12 @@ class CartItemListTile extends StatelessWidget {
           key: Key(
             'cartItem${cartItem.materialInfo.materialNumber}',
           ),
+          onTap: () {
+            CartBottomSheet.showUpdateCartBottomSheet(
+              context: context,
+              cartItem: cartItem,
+            );
+          },
           trailing: SizedBox(
             width: 50,
             child: Wrap(

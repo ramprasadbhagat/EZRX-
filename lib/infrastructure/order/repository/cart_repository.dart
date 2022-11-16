@@ -1,8 +1,8 @@
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
@@ -35,6 +35,19 @@ class CartRepository implements ICartRepository {
   }) async {
     try {
       await cartStorage.add(PriceAggregateDto.fromDomain(cartItem));
+
+      return fetchCartItems();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<PriceAggregate>>> updateCartItem({
+    required PriceAggregate cartItem,
+  }) async {
+    try {
+      await cartStorage.updateItem(PriceAggregateDto.fromDomain(cartItem));
 
       return fetchCartItems();
     } catch (e) {

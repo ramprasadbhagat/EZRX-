@@ -113,6 +113,52 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
         );
       },
+      updateCartItem: (e) async {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
+          ),
+        );
+        final failureOrSuccess = await cartRepository.updateCartItem(
+          cartItem: e.item,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (cartItemList) {
+            emit(
+              state.copyWith(
+                cartItemList: cartItemList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+            if (e.item.price.zmgDiscount) {
+              emit(
+                state.copyWith(
+                  cartItemList: cartItemList
+                      .map(
+                        (PriceAggregate element) => element.copyWith(
+                          zmgMaterialCountOnCart: state.zmgMaterialCount,
+                        ),
+                      )
+                      .toList(),
+                  apiFailureOrSuccessOption: none(),
+                  isFetching: false,
+                ),
+              );
+            }
+          },
+        );
+      },
       removeFromCart: (e) async {
         final failureOrSuccess = await cartRepository.deleteFromCart(
           cartItem: e.item,
