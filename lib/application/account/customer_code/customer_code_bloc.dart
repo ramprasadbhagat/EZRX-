@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 
 part 'customer_code_bloc.freezed.dart';
 part 'customer_code_event.dart';
@@ -23,72 +24,64 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
   CustomerCodeBloc({
     required this.customerCodeRepository,
   }) : super(CustomerCodeState.initial()) {
-    on<CustomerCodeEvent>(_onEvent);
-  }
-
-  Future<void> _onEvent(
-    CustomerCodeEvent event,
-    Emitter<CustomerCodeState> emit,
-  ) async {
-    await event.map(
-      initialized: (e) async {
-        emit(CustomerCodeState.initial());
-      },
-      updateSearchKey: (e) {
-        emit(state.copyWith(searchKey: SearchKey.search(e.searchKey)));
-      },
-      selected: (e) async {
-        await customerCodeRepository.storeCustomerCode(
-          customerCode: e.customerCodeInfo.customerCodeSoldTo,
-        );
-        emit(state.copyWith(customerCodeInfo: e.customerCodeInfo));
-      },
-      search: (e) async {
-        if (state.isFetching) return;
-        final previousSearchKey = state.searchKey;
-        final previousCustomerCodeState = state.customerCodeInfo;
-        emit(CustomerCodeState.initial().copyWith(
-          searchKey: previousSearchKey,
-          customerCodeInfo: previousCustomerCodeState,
-          isSearchActive: true,
-          isFetching: true,
-        ));
-        final failureOrSuccess = await customerCodeRepository.getCustomerCode(
-          e.selectedSalesOrg,
-          state.searchKey.getValue(),
-          e.hidecustomer,
-          state.customerCodeList.length,
-          e.userInfo,
-        );
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                canLoadMore: false,
-                isFetching: false,
-              ),
-            );
-          },
-          (customerCodeList) {
-            emit(
-              state.copyWith(
-                customerCodeList: customerCodeList,
-                apiFailureOrSuccessOption: none(),
-                isFetching: false,
-                canLoadMore: customerCodeList.length >= _pageSize,
-              ),
-            );
-          },
-        );
-      },
-      fetch: (e) async {
+    on<_Initialized>((e, emit) async {
+      emit(CustomerCodeState.initial());
+    });
+    on<_UpdateSearchKey>((e, emit) async {
+      emit(state.copyWith(searchKey: SearchKey.search(e.searchKey)));
+    });
+    on<_Selected>((e, emit) async {
+      await customerCodeRepository.storeCustomerCode(
+        customerCode: e.customerCodeInfo.customerCodeSoldTo,
+      );
+      emit(state.copyWith(customerCodeInfo: e.customerCodeInfo));
+    });
+    on<_Search>((e, emit) async {
+      if (state.isFetching) return;
+      final previousSearchKey = state.searchKey;
+      final previousCustomerCodeState = state.customerCodeInfo;
+      emit(CustomerCodeState.initial().copyWith(
+        searchKey: previousSearchKey,
+        customerCodeInfo: previousCustomerCodeState,
+        isSearchActive: true,
+        isFetching: true,
+      ));
+      final failureOrSuccess = await customerCodeRepository.getCustomerCode(
+        e.selectedSalesOrg,
+        state.searchKey.getValue(),
+        e.hidecustomer,
+        state.customerCodeList.length,
+        e.userInfo,
+      );
+      failureOrSuccess.fold(
+        (failure) {
+          emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+              canLoadMore: false,
+              isFetching: false,
+            ),
+          );
+        },
+        (customerCodeList) {
+          emit(
+            state.copyWith(
+              customerCodeList: customerCodeList,
+              apiFailureOrSuccessOption: none(),
+              isFetching: false,
+              canLoadMore: customerCodeList.length >= _pageSize,
+            ),
+          );
+        },
+      );
+    });
+    on<_Fetch>(
+      (e, emit) async {
         // We have very bad API design so right now we using ugly implementation
         // will revisit and reduce the complexity when API completed the enhancement
         // https://dev.azure.com/zuelligpharmadevops/eZRx%20Overall/_wiki/wikis/eZRx-Overall.wiki/3442/Enhance-customerInformationSearch-API
         // and
         // https://dev.azure.com/zuelligpharmadevops/eZRx%20Overall/_wiki/wikis/eZRx-Overall.wiki/3513/Enhance-customerInformationSearch-customerListForSalesRep
-        if (state.isFetching) return;
         var canLoadMore = true;
         var finalCustomerCodeInfoList = <CustomerCodeInfo>[];
         var apiFailure = false;
@@ -153,64 +146,61 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
               );
             },
           );
-          emit(
-            state.copyWith(
-              customerCodeList: finalCustomerCodeInfoList,
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-              canLoadMore: canLoadMore,
-              customerCodeInfo: customerCode,
-            ),
-          );
-        }
-      },
-      loadMore: (e) async {
-        if (!state.canLoadMore || state.isFetching) return;
-        emit(state.copyWith(isFetching: true));
-        final customerCodeInfo = state.searchKey.isValid()
-            ? state.searchKey.getValue()
-            : e.selectedSalesOrg.customerInfos.isNotEmpty
-                ? e.selectedSalesOrg.customerInfos.first.customerCodeSoldTo
-                    .getOrCrash()
-                : '';
-        if (customerCodeInfo.isEmpty) return;
-        final failureOrSuccess = await customerCodeRepository.getCustomerCode(
-          e.selectedSalesOrg,
-          customerCodeInfo,
-          e.hidecustomer,
-          state.customerCodeList.length,
-          e.userInfo,
-        );
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
-              ),
-            );
-          },
-          (customerCodeList) {
-            final finalCustomerCodeInfoList =
-                List<CustomerCodeInfo>.from(state.customerCodeList)
-                  ..addAll(customerCodeList);
+          if (!emit.isDone) {
             emit(
               state.copyWith(
                 customerCodeList: finalCustomerCodeInfoList,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
-                canLoadMore: customerCodeList.length >= _pageSize,
+                canLoadMore: canLoadMore,
+                customerCodeInfo: customerCode,
               ),
             );
-          },
-        );
+          }
+        }
       },
+      transformer: restartable(),
     );
-  }
-
-  @override
-  void onChange(Change<CustomerCodeState> change) {
-    super.onChange(change);
-    // print(change);
+    on<_LoadMore>((e, emit) async {
+      if (!state.canLoadMore || state.isFetching) return;
+      emit(state.copyWith(isFetching: true));
+      final customerCodeInfo = state.searchKey.isValid()
+          ? state.searchKey.getValue()
+          : e.selectedSalesOrg.customerInfos.isNotEmpty
+              ? e.selectedSalesOrg.customerInfos.first.customerCodeSoldTo
+                  .getOrCrash()
+              : '';
+      if (customerCodeInfo.isEmpty) return;
+      final failureOrSuccess = await customerCodeRepository.getCustomerCode(
+        e.selectedSalesOrg,
+        customerCodeInfo,
+        e.hidecustomer,
+        state.customerCodeList.length,
+        e.userInfo,
+      );
+      failureOrSuccess.fold(
+        (failure) {
+          emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+              isFetching: false,
+            ),
+          );
+        },
+        (customerCodeList) {
+          final finalCustomerCodeInfoList =
+              List<CustomerCodeInfo>.from(state.customerCodeList)
+                ..addAll(customerCodeList);
+          emit(
+            state.copyWith(
+              customerCodeList: finalCustomerCodeInfoList,
+              apiFailureOrSuccessOption: none(),
+              isFetching: false,
+              canLoadMore: customerCodeList.length >= _pageSize,
+            ),
+          );
+        },
+      );
+    });
   }
 }
