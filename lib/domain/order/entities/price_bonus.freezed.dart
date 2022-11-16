@@ -27,32 +27,28 @@ mixin _$PriceBonus {
 abstract class $PriceBonusCopyWith<$Res> {
   factory $PriceBonusCopyWith(
           PriceBonus value, $Res Function(PriceBonus) then) =
-      _$PriceBonusCopyWithImpl<$Res, PriceBonus>;
-  @useResult
+      _$PriceBonusCopyWithImpl<$Res>;
   $Res call({List<PriceBonusItem> items});
 }
 
 /// @nodoc
-class _$PriceBonusCopyWithImpl<$Res, $Val extends PriceBonus>
-    implements $PriceBonusCopyWith<$Res> {
+class _$PriceBonusCopyWithImpl<$Res> implements $PriceBonusCopyWith<$Res> {
   _$PriceBonusCopyWithImpl(this._value, this._then);
 
+  final PriceBonus _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(PriceBonus) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? items = null,
+    Object? items = freezed,
   }) {
     return _then(_value.copyWith(
-      items: null == items
+      items: items == freezed
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
               as List<PriceBonusItem>,
-    ) as $Val);
+    ));
   }
 }
 
@@ -63,25 +59,25 @@ abstract class _$$_PriceBonusCopyWith<$Res>
           _$_PriceBonus value, $Res Function(_$_PriceBonus) then) =
       __$$_PriceBonusCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call({List<PriceBonusItem> items});
 }
 
 /// @nodoc
-class __$$_PriceBonusCopyWithImpl<$Res>
-    extends _$PriceBonusCopyWithImpl<$Res, _$_PriceBonus>
+class __$$_PriceBonusCopyWithImpl<$Res> extends _$PriceBonusCopyWithImpl<$Res>
     implements _$$_PriceBonusCopyWith<$Res> {
   __$$_PriceBonusCopyWithImpl(
       _$_PriceBonus _value, $Res Function(_$_PriceBonus) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_PriceBonus));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_PriceBonus get _value => super._value as _$_PriceBonus;
+
   @override
   $Res call({
-    Object? items = null,
+    Object? items = freezed,
   }) {
     return _then(_$_PriceBonus(
-      items: null == items
+      items: items == freezed
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
               as List<PriceBonusItem>,
@@ -122,7 +118,6 @@ class _$_PriceBonus extends _PriceBonus {
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_PriceBonusCopyWith<_$_PriceBonus> get copyWith =>
       __$$_PriceBonusCopyWithImpl<_$_PriceBonus>(this, _$identity);
 }
@@ -155,8 +150,7 @@ mixin _$PriceBonusItem {
 abstract class $PriceBonusItemCopyWith<$Res> {
   factory $PriceBonusItemCopyWith(
           PriceBonusItem value, $Res Function(PriceBonusItem) then) =
-      _$PriceBonusItemCopyWithImpl<$Res, PriceBonusItem>;
-  @useResult
+      _$PriceBonusItemCopyWithImpl<$Res>;
   $Res call(
       {String calculation,
       int qualifyingQuantity,
@@ -164,36 +158,34 @@ abstract class $PriceBonusItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PriceBonusItemCopyWithImpl<$Res, $Val extends PriceBonusItem>
+class _$PriceBonusItemCopyWithImpl<$Res>
     implements $PriceBonusItemCopyWith<$Res> {
   _$PriceBonusItemCopyWithImpl(this._value, this._then);
 
+  final PriceBonusItem _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(PriceBonusItem) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? calculation = null,
-    Object? qualifyingQuantity = null,
-    Object? bonusMaterials = null,
+    Object? calculation = freezed,
+    Object? qualifyingQuantity = freezed,
+    Object? bonusMaterials = freezed,
   }) {
     return _then(_value.copyWith(
-      calculation: null == calculation
+      calculation: calculation == freezed
           ? _value.calculation
           : calculation // ignore: cast_nullable_to_non_nullable
               as String,
-      qualifyingQuantity: null == qualifyingQuantity
+      qualifyingQuantity: qualifyingQuantity == freezed
           ? _value.qualifyingQuantity
           : qualifyingQuantity // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusMaterials: null == bonusMaterials
+      bonusMaterials: bonusMaterials == freezed
           ? _value.bonusMaterials
           : bonusMaterials // ignore: cast_nullable_to_non_nullable
               as List<BonusMaterial>,
-    ) as $Val);
+    ));
   }
 }
 
@@ -204,7 +196,6 @@ abstract class _$$_PriceBonusItemCopyWith<$Res>
           _$_PriceBonusItem value, $Res Function(_$_PriceBonusItem) then) =
       __$$_PriceBonusItemCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {String calculation,
       int qualifyingQuantity,
@@ -213,29 +204,31 @@ abstract class _$$_PriceBonusItemCopyWith<$Res>
 
 /// @nodoc
 class __$$_PriceBonusItemCopyWithImpl<$Res>
-    extends _$PriceBonusItemCopyWithImpl<$Res, _$_PriceBonusItem>
+    extends _$PriceBonusItemCopyWithImpl<$Res>
     implements _$$_PriceBonusItemCopyWith<$Res> {
   __$$_PriceBonusItemCopyWithImpl(
       _$_PriceBonusItem _value, $Res Function(_$_PriceBonusItem) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_PriceBonusItem));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_PriceBonusItem get _value => super._value as _$_PriceBonusItem;
+
   @override
   $Res call({
-    Object? calculation = null,
-    Object? qualifyingQuantity = null,
-    Object? bonusMaterials = null,
+    Object? calculation = freezed,
+    Object? qualifyingQuantity = freezed,
+    Object? bonusMaterials = freezed,
   }) {
     return _then(_$_PriceBonusItem(
-      calculation: null == calculation
+      calculation: calculation == freezed
           ? _value.calculation
           : calculation // ignore: cast_nullable_to_non_nullable
               as String,
-      qualifyingQuantity: null == qualifyingQuantity
+      qualifyingQuantity: qualifyingQuantity == freezed
           ? _value.qualifyingQuantity
           : qualifyingQuantity // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusMaterials: null == bonusMaterials
+      bonusMaterials: bonusMaterials == freezed
           ? _value._bonusMaterials
           : bonusMaterials // ignore: cast_nullable_to_non_nullable
               as List<BonusMaterial>,
@@ -274,21 +267,23 @@ class _$_PriceBonusItem extends _PriceBonusItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PriceBonusItem &&
-            (identical(other.calculation, calculation) ||
-                other.calculation == calculation) &&
-            (identical(other.qualifyingQuantity, qualifyingQuantity) ||
-                other.qualifyingQuantity == qualifyingQuantity) &&
+            const DeepCollectionEquality()
+                .equals(other.calculation, calculation) &&
+            const DeepCollectionEquality()
+                .equals(other.qualifyingQuantity, qualifyingQuantity) &&
             const DeepCollectionEquality()
                 .equals(other._bonusMaterials, _bonusMaterials));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, calculation, qualifyingQuantity,
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(calculation),
+      const DeepCollectionEquality().hash(qualifyingQuantity),
       const DeepCollectionEquality().hash(_bonusMaterials));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_PriceBonusItemCopyWith<_$_PriceBonusItem> get copyWith =>
       __$$_PriceBonusItemCopyWithImpl<_$_PriceBonusItem>(this, _$identity);
 }
@@ -330,8 +325,7 @@ mixin _$BonusMaterial {
 abstract class $BonusMaterialCopyWith<$Res> {
   factory $BonusMaterialCopyWith(
           BonusMaterial value, $Res Function(BonusMaterial) then) =
-      _$BonusMaterialCopyWithImpl<$Res, BonusMaterial>;
-  @useResult
+      _$BonusMaterialCopyWithImpl<$Res>;
   $Res call(
       {String materialNumber,
       String materialDescription,
@@ -342,51 +336,49 @@ abstract class $BonusMaterialCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BonusMaterialCopyWithImpl<$Res, $Val extends BonusMaterial>
+class _$BonusMaterialCopyWithImpl<$Res>
     implements $BonusMaterialCopyWith<$Res> {
   _$BonusMaterialCopyWithImpl(this._value, this._then);
 
+  final BonusMaterial _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(BonusMaterial) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialNumber = null,
-    Object? materialDescription = null,
-    Object? calculation = null,
-    Object? bonusRatio = null,
-    Object? qualifyingQuantity = null,
-    Object? bonusQuantity = null,
+    Object? materialNumber = freezed,
+    Object? materialDescription = freezed,
+    Object? calculation = freezed,
+    Object? bonusRatio = freezed,
+    Object? qualifyingQuantity = freezed,
+    Object? bonusQuantity = freezed,
   }) {
     return _then(_value.copyWith(
-      materialNumber: null == materialNumber
+      materialNumber: materialNumber == freezed
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      materialDescription: null == materialDescription
+      materialDescription: materialDescription == freezed
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      calculation: null == calculation
+      calculation: calculation == freezed
           ? _value.calculation
           : calculation // ignore: cast_nullable_to_non_nullable
               as String,
-      bonusRatio: null == bonusRatio
+      bonusRatio: bonusRatio == freezed
           ? _value.bonusRatio
           : bonusRatio // ignore: cast_nullable_to_non_nullable
               as int,
-      qualifyingQuantity: null == qualifyingQuantity
+      qualifyingQuantity: qualifyingQuantity == freezed
           ? _value.qualifyingQuantity
           : qualifyingQuantity // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusQuantity: null == bonusQuantity
+      bonusQuantity: bonusQuantity == freezed
           ? _value.bonusQuantity
           : bonusQuantity // ignore: cast_nullable_to_non_nullable
               as int,
-    ) as $Val);
+    ));
   }
 }
 
@@ -397,7 +389,6 @@ abstract class _$$_BonusMaterialCopyWith<$Res>
           _$_BonusMaterial value, $Res Function(_$_BonusMaterial) then) =
       __$$_BonusMaterialCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {String materialNumber,
       String materialDescription,
@@ -409,44 +400,46 @@ abstract class _$$_BonusMaterialCopyWith<$Res>
 
 /// @nodoc
 class __$$_BonusMaterialCopyWithImpl<$Res>
-    extends _$BonusMaterialCopyWithImpl<$Res, _$_BonusMaterial>
+    extends _$BonusMaterialCopyWithImpl<$Res>
     implements _$$_BonusMaterialCopyWith<$Res> {
   __$$_BonusMaterialCopyWithImpl(
       _$_BonusMaterial _value, $Res Function(_$_BonusMaterial) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_BonusMaterial));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_BonusMaterial get _value => super._value as _$_BonusMaterial;
+
   @override
   $Res call({
-    Object? materialNumber = null,
-    Object? materialDescription = null,
-    Object? calculation = null,
-    Object? bonusRatio = null,
-    Object? qualifyingQuantity = null,
-    Object? bonusQuantity = null,
+    Object? materialNumber = freezed,
+    Object? materialDescription = freezed,
+    Object? calculation = freezed,
+    Object? bonusRatio = freezed,
+    Object? qualifyingQuantity = freezed,
+    Object? bonusQuantity = freezed,
   }) {
     return _then(_$_BonusMaterial(
-      materialNumber: null == materialNumber
+      materialNumber: materialNumber == freezed
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      materialDescription: null == materialDescription
+      materialDescription: materialDescription == freezed
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      calculation: null == calculation
+      calculation: calculation == freezed
           ? _value.calculation
           : calculation // ignore: cast_nullable_to_non_nullable
               as String,
-      bonusRatio: null == bonusRatio
+      bonusRatio: bonusRatio == freezed
           ? _value.bonusRatio
           : bonusRatio // ignore: cast_nullable_to_non_nullable
               as int,
-      qualifyingQuantity: null == qualifyingQuantity
+      qualifyingQuantity: qualifyingQuantity == freezed
           ? _value.qualifyingQuantity
           : qualifyingQuantity // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusQuantity: null == bonusQuantity
+      bonusQuantity: bonusQuantity == freezed
           ? _value.bonusQuantity
           : bonusQuantity // ignore: cast_nullable_to_non_nullable
               as int,
@@ -489,33 +482,32 @@ class _$_BonusMaterial extends _BonusMaterial {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BonusMaterial &&
-            (identical(other.materialNumber, materialNumber) ||
-                other.materialNumber == materialNumber) &&
-            (identical(other.materialDescription, materialDescription) ||
-                other.materialDescription == materialDescription) &&
-            (identical(other.calculation, calculation) ||
-                other.calculation == calculation) &&
-            (identical(other.bonusRatio, bonusRatio) ||
-                other.bonusRatio == bonusRatio) &&
-            (identical(other.qualifyingQuantity, qualifyingQuantity) ||
-                other.qualifyingQuantity == qualifyingQuantity) &&
-            (identical(other.bonusQuantity, bonusQuantity) ||
-                other.bonusQuantity == bonusQuantity));
+            const DeepCollectionEquality()
+                .equals(other.materialNumber, materialNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.materialDescription, materialDescription) &&
+            const DeepCollectionEquality()
+                .equals(other.calculation, calculation) &&
+            const DeepCollectionEquality()
+                .equals(other.bonusRatio, bonusRatio) &&
+            const DeepCollectionEquality()
+                .equals(other.qualifyingQuantity, qualifyingQuantity) &&
+            const DeepCollectionEquality()
+                .equals(other.bonusQuantity, bonusQuantity));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      materialNumber,
-      materialDescription,
-      calculation,
-      bonusRatio,
-      qualifyingQuantity,
-      bonusQuantity);
+      const DeepCollectionEquality().hash(materialNumber),
+      const DeepCollectionEquality().hash(materialDescription),
+      const DeepCollectionEquality().hash(calculation),
+      const DeepCollectionEquality().hash(bonusRatio),
+      const DeepCollectionEquality().hash(qualifyingQuantity),
+      const DeepCollectionEquality().hash(bonusQuantity));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_BonusMaterialCopyWith<_$_BonusMaterial> get copyWith =>
       __$$_BonusMaterialCopyWithImpl<_$_BonusMaterial>(this, _$identity);
 }

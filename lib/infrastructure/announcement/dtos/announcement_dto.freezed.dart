@@ -48,8 +48,7 @@ mixin _$AnnouncementDto {
 abstract class $AnnouncementDtoCopyWith<$Res> {
   factory $AnnouncementDtoCopyWith(
           AnnouncementDto value, $Res Function(AnnouncementDto) then) =
-      _$AnnouncementDtoCopyWithImpl<$Res, AnnouncementDto>;
-  @useResult
+      _$AnnouncementDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'startTime', defaultValue: '', readValue: announcementDateTimeFormatCheck)
           String startTime,
@@ -66,51 +65,49 @@ abstract class $AnnouncementDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AnnouncementDtoCopyWithImpl<$Res, $Val extends AnnouncementDto>
+class _$AnnouncementDtoCopyWithImpl<$Res>
     implements $AnnouncementDtoCopyWith<$Res> {
   _$AnnouncementDtoCopyWithImpl(this._value, this._then);
 
+  final AnnouncementDto _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(AnnouncementDto) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? startTime = null,
-    Object? endTime = null,
-    Object? description = null,
-    Object? id = null,
-    Object? type = null,
-    Object? active = null,
+    Object? startTime = freezed,
+    Object? endTime = freezed,
+    Object? description = freezed,
+    Object? id = freezed,
+    Object? type = freezed,
+    Object? active = freezed,
   }) {
     return _then(_value.copyWith(
-      startTime: null == startTime
+      startTime: startTime == freezed
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as String,
-      endTime: null == endTime
+      endTime: endTime == freezed
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      id: null == id
+      id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
+      type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      active: null == active
+      active: active == freezed
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
               as bool,
-    ) as $Val);
+    ));
   }
 }
 
@@ -121,7 +118,6 @@ abstract class _$$_AnnouncementDtoCopyWith<$Res>
           _$_AnnouncementDto value, $Res Function(_$_AnnouncementDto) then) =
       __$$_AnnouncementDtoCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {@JsonKey(name: 'startTime', defaultValue: '', readValue: announcementDateTimeFormatCheck)
           String startTime,
@@ -139,44 +135,46 @@ abstract class _$$_AnnouncementDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_AnnouncementDtoCopyWithImpl<$Res>
-    extends _$AnnouncementDtoCopyWithImpl<$Res, _$_AnnouncementDto>
+    extends _$AnnouncementDtoCopyWithImpl<$Res>
     implements _$$_AnnouncementDtoCopyWith<$Res> {
   __$$_AnnouncementDtoCopyWithImpl(
       _$_AnnouncementDto _value, $Res Function(_$_AnnouncementDto) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_AnnouncementDto));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_AnnouncementDto get _value => super._value as _$_AnnouncementDto;
+
   @override
   $Res call({
-    Object? startTime = null,
-    Object? endTime = null,
-    Object? description = null,
-    Object? id = null,
-    Object? type = null,
-    Object? active = null,
+    Object? startTime = freezed,
+    Object? endTime = freezed,
+    Object? description = freezed,
+    Object? id = freezed,
+    Object? type = freezed,
+    Object? active = freezed,
   }) {
     return _then(_$_AnnouncementDto(
-      startTime: null == startTime
+      startTime: startTime == freezed
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as String,
-      endTime: null == endTime
+      endTime: endTime == freezed
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      id: null == id
+      id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
+      type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      active: null == active
+      active: active == freezed
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -240,24 +238,28 @@ class _$_AnnouncementDto extends _AnnouncementDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AnnouncementDto &&
-            (identical(other.startTime, startTime) ||
-                other.startTime == startTime) &&
-            (identical(other.endTime, endTime) || other.endTime == endTime) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.active, active) || other.active == active));
+            const DeepCollectionEquality().equals(other.startTime, startTime) &&
+            const DeepCollectionEquality().equals(other.endTime, endTime) &&
+            const DeepCollectionEquality()
+                .equals(other.description, description) &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.type, type) &&
+            const DeepCollectionEquality().equals(other.active, active));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, startTime, endTime, description, id, type, active);
+      runtimeType,
+      const DeepCollectionEquality().hash(startTime),
+      const DeepCollectionEquality().hash(endTime),
+      const DeepCollectionEquality().hash(description),
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(type),
+      const DeepCollectionEquality().hash(active));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_AnnouncementDtoCopyWith<_$_AnnouncementDto> get copyWith =>
       __$$_AnnouncementDtoCopyWithImpl<_$_AnnouncementDto>(this, _$identity);
 }

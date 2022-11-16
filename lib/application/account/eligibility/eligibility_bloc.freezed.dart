@@ -29,8 +29,8 @@ mixin _$EligibilityEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
+    TResult Function()? initialized,
+    TResult Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrgConfigs,
@@ -58,8 +58,8 @@ mixin _$EligibilityEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Update value)? update,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Update value)? update,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,18 +75,17 @@ mixin _$EligibilityEvent {
 abstract class $EligibilityEventCopyWith<$Res> {
   factory $EligibilityEventCopyWith(
           EligibilityEvent value, $Res Function(EligibilityEvent) then) =
-      _$EligibilityEventCopyWithImpl<$Res, EligibilityEvent>;
+      _$EligibilityEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$EligibilityEventCopyWithImpl<$Res, $Val extends EligibilityEvent>
+class _$EligibilityEventCopyWithImpl<$Res>
     implements $EligibilityEventCopyWith<$Res> {
   _$EligibilityEventCopyWithImpl(this._value, this._then);
 
+  final EligibilityEvent _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(EligibilityEvent) _then;
 }
 
 /// @nodoc
@@ -98,11 +97,14 @@ abstract class _$$_InitializedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitializedCopyWithImpl<$Res>
-    extends _$EligibilityEventCopyWithImpl<$Res, _$_Initialized>
+    extends _$EligibilityEventCopyWithImpl<$Res>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Initialized));
+
+  @override
+  _$_Initialized get _value => super._value as _$_Initialized;
 }
 
 /// @nodoc
@@ -141,8 +143,8 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
+    TResult Function()? initialized,
+    TResult Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrgConfigs,
@@ -182,8 +184,8 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Update value)? update,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Update value)? update,
   }) {
     return initialized?.call(this);
   }
@@ -210,7 +212,6 @@ abstract class _Initialized implements EligibilityEvent {
 abstract class _$$_UpdateCopyWith<$Res> {
   factory _$$_UpdateCopyWith(_$_Update value, $Res Function(_$_Update) then) =
       __$$_UpdateCopyWithImpl<$Res>;
-  @useResult
   $Res call(
       {User user,
       SalesOrganisation salesOrganisation,
@@ -224,34 +225,35 @@ abstract class _$$_UpdateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UpdateCopyWithImpl<$Res>
-    extends _$EligibilityEventCopyWithImpl<$Res, _$_Update>
+class __$$_UpdateCopyWithImpl<$Res> extends _$EligibilityEventCopyWithImpl<$Res>
     implements _$$_UpdateCopyWith<$Res> {
   __$$_UpdateCopyWithImpl(_$_Update _value, $Res Function(_$_Update) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Update));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_Update get _value => super._value as _$_Update;
+
   @override
   $Res call({
-    Object? user = null,
-    Object? salesOrganisation = null,
-    Object? salesOrgConfigs = null,
-    Object? customerCodeInfo = null,
+    Object? user = freezed,
+    Object? salesOrganisation = freezed,
+    Object? salesOrgConfigs = freezed,
+    Object? customerCodeInfo = freezed,
   }) {
     return _then(_$_Update(
-      user: null == user
+      user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      salesOrganisation: null == salesOrganisation
+      salesOrganisation: salesOrganisation == freezed
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      salesOrgConfigs: null == salesOrgConfigs
+      salesOrgConfigs: salesOrgConfigs == freezed
           ? _value.salesOrgConfigs
           : salesOrgConfigs // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
-      customerCodeInfo: null == customerCodeInfo
+      customerCodeInfo: customerCodeInfo == freezed
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
@@ -259,7 +261,6 @@ class __$$_UpdateCopyWithImpl<$Res>
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value));
@@ -267,7 +268,6 @@ class __$$_UpdateCopyWithImpl<$Res>
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $SalesOrganisationCopyWith<$Res> get salesOrganisation {
     return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
       return _then(_value.copyWith(salesOrganisation: value));
@@ -275,7 +275,6 @@ class __$$_UpdateCopyWithImpl<$Res>
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs {
     return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfigs,
         (value) {
@@ -284,7 +283,6 @@ class __$$_UpdateCopyWithImpl<$Res>
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
     return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
       return _then(_value.copyWith(customerCodeInfo: value));
@@ -320,22 +318,25 @@ class _$_Update implements _Update {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Update &&
-            (identical(other.user, user) || other.user == user) &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
-            (identical(other.salesOrgConfigs, salesOrgConfigs) ||
-                other.salesOrgConfigs == salesOrgConfigs) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo));
+            const DeepCollectionEquality().equals(other.user, user) &&
+            const DeepCollectionEquality()
+                .equals(other.salesOrganisation, salesOrganisation) &&
+            const DeepCollectionEquality()
+                .equals(other.salesOrgConfigs, salesOrgConfigs) &&
+            const DeepCollectionEquality()
+                .equals(other.customerCodeInfo, customerCodeInfo));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, user, salesOrganisation, salesOrgConfigs, customerCodeInfo);
+      runtimeType,
+      const DeepCollectionEquality().hash(user),
+      const DeepCollectionEquality().hash(salesOrganisation),
+      const DeepCollectionEquality().hash(salesOrgConfigs),
+      const DeepCollectionEquality().hash(customerCodeInfo));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_UpdateCopyWith<_$_Update> get copyWith =>
       __$$_UpdateCopyWithImpl<_$_Update>(this, _$identity);
 
@@ -356,8 +357,8 @@ class _$_Update implements _Update {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
+    TResult Function()? initialized,
+    TResult Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrgConfigs,
@@ -398,8 +399,8 @@ class _$_Update implements _Update {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Update value)? update,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Update value)? update,
   }) {
     return update?.call(this);
   }
@@ -451,8 +452,7 @@ mixin _$EligibilityState {
 abstract class $EligibilityStateCopyWith<$Res> {
   factory $EligibilityStateCopyWith(
           EligibilityState value, $Res Function(EligibilityState) then) =
-      _$EligibilityStateCopyWithImpl<$Res, EligibilityState>;
-  @useResult
+      _$EligibilityStateCopyWithImpl<$Res>;
   $Res call(
       {User user,
       SalesOrganisation salesOrganisation,
@@ -466,73 +466,67 @@ abstract class $EligibilityStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$EligibilityStateCopyWithImpl<$Res, $Val extends EligibilityState>
+class _$EligibilityStateCopyWithImpl<$Res>
     implements $EligibilityStateCopyWith<$Res> {
   _$EligibilityStateCopyWithImpl(this._value, this._then);
 
+  final EligibilityState _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(EligibilityState) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = null,
-    Object? salesOrganisation = null,
-    Object? salesOrgConfigs = null,
-    Object? customerCodeInfo = null,
+    Object? user = freezed,
+    Object? salesOrganisation = freezed,
+    Object? salesOrgConfigs = freezed,
+    Object? customerCodeInfo = freezed,
   }) {
     return _then(_value.copyWith(
-      user: null == user
+      user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      salesOrganisation: null == salesOrganisation
+      salesOrganisation: salesOrganisation == freezed
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      salesOrgConfigs: null == salesOrgConfigs
+      salesOrgConfigs: salesOrgConfigs == freezed
           ? _value.salesOrgConfigs
           : salesOrgConfigs // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
-      customerCodeInfo: null == customerCodeInfo
+      customerCodeInfo: customerCodeInfo == freezed
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
-    ) as $Val);
+    ));
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value) as $Val);
+      return _then(_value.copyWith(user: value));
     });
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $SalesOrganisationCopyWith<$Res> get salesOrganisation {
     return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value) as $Val);
+      return _then(_value.copyWith(salesOrganisation: value));
     });
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs {
     return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfigs,
         (value) {
-      return _then(_value.copyWith(salesOrgConfigs: value) as $Val);
+      return _then(_value.copyWith(salesOrgConfigs: value));
     });
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
     return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value) as $Val);
+      return _then(_value.copyWith(customerCodeInfo: value));
     });
   }
 }
@@ -544,7 +538,6 @@ abstract class _$$_EligibilityStateCopyWith<$Res>
           _$_EligibilityState value, $Res Function(_$_EligibilityState) then) =
       __$$_EligibilityStateCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {User user,
       SalesOrganisation salesOrganisation,
@@ -563,34 +556,36 @@ abstract class _$$_EligibilityStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_EligibilityStateCopyWithImpl<$Res>
-    extends _$EligibilityStateCopyWithImpl<$Res, _$_EligibilityState>
+    extends _$EligibilityStateCopyWithImpl<$Res>
     implements _$$_EligibilityStateCopyWith<$Res> {
   __$$_EligibilityStateCopyWithImpl(
       _$_EligibilityState _value, $Res Function(_$_EligibilityState) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_EligibilityState));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_EligibilityState get _value => super._value as _$_EligibilityState;
+
   @override
   $Res call({
-    Object? user = null,
-    Object? salesOrganisation = null,
-    Object? salesOrgConfigs = null,
-    Object? customerCodeInfo = null,
+    Object? user = freezed,
+    Object? salesOrganisation = freezed,
+    Object? salesOrgConfigs = freezed,
+    Object? customerCodeInfo = freezed,
   }) {
     return _then(_$_EligibilityState(
-      user: null == user
+      user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      salesOrganisation: null == salesOrganisation
+      salesOrganisation: salesOrganisation == freezed
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      salesOrgConfigs: null == salesOrgConfigs
+      salesOrgConfigs: salesOrgConfigs == freezed
           ? _value.salesOrgConfigs
           : salesOrgConfigs // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
-      customerCodeInfo: null == customerCodeInfo
+      customerCodeInfo: customerCodeInfo == freezed
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
@@ -627,22 +622,25 @@ class _$_EligibilityState extends _EligibilityState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_EligibilityState &&
-            (identical(other.user, user) || other.user == user) &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
-            (identical(other.salesOrgConfigs, salesOrgConfigs) ||
-                other.salesOrgConfigs == salesOrgConfigs) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo));
+            const DeepCollectionEquality().equals(other.user, user) &&
+            const DeepCollectionEquality()
+                .equals(other.salesOrganisation, salesOrganisation) &&
+            const DeepCollectionEquality()
+                .equals(other.salesOrgConfigs, salesOrgConfigs) &&
+            const DeepCollectionEquality()
+                .equals(other.customerCodeInfo, customerCodeInfo));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, user, salesOrganisation, salesOrgConfigs, customerCodeInfo);
+      runtimeType,
+      const DeepCollectionEquality().hash(user),
+      const DeepCollectionEquality().hash(salesOrganisation),
+      const DeepCollectionEquality().hash(salesOrgConfigs),
+      const DeepCollectionEquality().hash(customerCodeInfo));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_EligibilityStateCopyWith<_$_EligibilityState> get copyWith =>
       __$$_EligibilityStateCopyWithImpl<_$_EligibilityState>(this, _$identity);
 }

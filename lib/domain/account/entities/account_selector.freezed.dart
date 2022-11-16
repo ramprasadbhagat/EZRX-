@@ -29,42 +29,39 @@ mixin _$AccountSelector {
 abstract class $AccountSelectorCopyWith<$Res> {
   factory $AccountSelectorCopyWith(
           AccountSelector value, $Res Function(AccountSelector) then) =
-      _$AccountSelectorCopyWithImpl<$Res, AccountSelector>;
-  @useResult
+      _$AccountSelectorCopyWithImpl<$Res>;
   $Res call({String salesOrg, String customerCode, String shippingAddress});
 }
 
 /// @nodoc
-class _$AccountSelectorCopyWithImpl<$Res, $Val extends AccountSelector>
+class _$AccountSelectorCopyWithImpl<$Res>
     implements $AccountSelectorCopyWith<$Res> {
   _$AccountSelectorCopyWithImpl(this._value, this._then);
 
+  final AccountSelector _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(AccountSelector) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? salesOrg = null,
-    Object? customerCode = null,
-    Object? shippingAddress = null,
+    Object? salesOrg = freezed,
+    Object? customerCode = freezed,
+    Object? shippingAddress = freezed,
   }) {
     return _then(_value.copyWith(
-      salesOrg: null == salesOrg
+      salesOrg: salesOrg == freezed
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as String,
-      customerCode: null == customerCode
+      customerCode: customerCode == freezed
           ? _value.customerCode
           : customerCode // ignore: cast_nullable_to_non_nullable
               as String,
-      shippingAddress: null == shippingAddress
+      shippingAddress: shippingAddress == freezed
           ? _value.shippingAddress
           : shippingAddress // ignore: cast_nullable_to_non_nullable
               as String,
-    ) as $Val);
+    ));
   }
 }
 
@@ -75,35 +72,36 @@ abstract class _$$_AccountSelectorCopyWith<$Res>
           _$_AccountSelector value, $Res Function(_$_AccountSelector) then) =
       __$$_AccountSelectorCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call({String salesOrg, String customerCode, String shippingAddress});
 }
 
 /// @nodoc
 class __$$_AccountSelectorCopyWithImpl<$Res>
-    extends _$AccountSelectorCopyWithImpl<$Res, _$_AccountSelector>
+    extends _$AccountSelectorCopyWithImpl<$Res>
     implements _$$_AccountSelectorCopyWith<$Res> {
   __$$_AccountSelectorCopyWithImpl(
       _$_AccountSelector _value, $Res Function(_$_AccountSelector) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_AccountSelector));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_AccountSelector get _value => super._value as _$_AccountSelector;
+
   @override
   $Res call({
-    Object? salesOrg = null,
-    Object? customerCode = null,
-    Object? shippingAddress = null,
+    Object? salesOrg = freezed,
+    Object? customerCode = freezed,
+    Object? shippingAddress = freezed,
   }) {
     return _then(_$_AccountSelector(
-      salesOrg: null == salesOrg
+      salesOrg: salesOrg == freezed
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as String,
-      customerCode: null == customerCode
+      customerCode: customerCode == freezed
           ? _value.customerCode
           : customerCode // ignore: cast_nullable_to_non_nullable
               as String,
-      shippingAddress: null == shippingAddress
+      shippingAddress: shippingAddress == freezed
           ? _value.shippingAddress
           : shippingAddress // ignore: cast_nullable_to_non_nullable
               as String,
@@ -137,21 +135,22 @@ class _$_AccountSelector extends _AccountSelector {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AccountSelector &&
-            (identical(other.salesOrg, salesOrg) ||
-                other.salesOrg == salesOrg) &&
-            (identical(other.customerCode, customerCode) ||
-                other.customerCode == customerCode) &&
-            (identical(other.shippingAddress, shippingAddress) ||
-                other.shippingAddress == shippingAddress));
+            const DeepCollectionEquality().equals(other.salesOrg, salesOrg) &&
+            const DeepCollectionEquality()
+                .equals(other.customerCode, customerCode) &&
+            const DeepCollectionEquality()
+                .equals(other.shippingAddress, shippingAddress));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, salesOrg, customerCode, shippingAddress);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(salesOrg),
+      const DeepCollectionEquality().hash(customerCode),
+      const DeepCollectionEquality().hash(shippingAddress));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_AccountSelectorCopyWith<_$_AccountSelector> get copyWith =>
       __$$_AccountSelectorCopyWithImpl<_$_AccountSelector>(this, _$identity);
 }

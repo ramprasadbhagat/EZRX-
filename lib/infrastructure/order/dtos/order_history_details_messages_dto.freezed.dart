@@ -37,41 +37,36 @@ abstract class $OrderHistoryDetailsMessagesDtoCopyWith<$Res> {
   factory $OrderHistoryDetailsMessagesDtoCopyWith(
           OrderHistoryDetailsMessagesDto value,
           $Res Function(OrderHistoryDetailsMessagesDto) then) =
-      _$OrderHistoryDetailsMessagesDtoCopyWithImpl<$Res,
-          OrderHistoryDetailsMessagesDto>;
-  @useResult
+      _$OrderHistoryDetailsMessagesDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'Type', defaultValue: '') String type,
       @JsonKey(name: 'Message', defaultValue: '') String message});
 }
 
 /// @nodoc
-class _$OrderHistoryDetailsMessagesDtoCopyWithImpl<$Res,
-        $Val extends OrderHistoryDetailsMessagesDto>
+class _$OrderHistoryDetailsMessagesDtoCopyWithImpl<$Res>
     implements $OrderHistoryDetailsMessagesDtoCopyWith<$Res> {
   _$OrderHistoryDetailsMessagesDtoCopyWithImpl(this._value, this._then);
 
+  final OrderHistoryDetailsMessagesDto _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(OrderHistoryDetailsMessagesDto) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = null,
-    Object? message = null,
+    Object? type = freezed,
+    Object? message = freezed,
   }) {
     return _then(_value.copyWith(
-      type: null == type
+      type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      message: null == message
+      message: message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-    ) as $Val);
+    ));
   }
 }
 
@@ -83,7 +78,6 @@ abstract class _$$_OrderHistoryDetailsMessagesDtoCopyWith<$Res>
           $Res Function(_$_OrderHistoryDetailsMessagesDto) then) =
       __$$_OrderHistoryDetailsMessagesDtoCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {@JsonKey(name: 'Type', defaultValue: '') String type,
       @JsonKey(name: 'Message', defaultValue: '') String message});
@@ -91,26 +85,28 @@ abstract class _$$_OrderHistoryDetailsMessagesDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_OrderHistoryDetailsMessagesDtoCopyWithImpl<$Res>
-    extends _$OrderHistoryDetailsMessagesDtoCopyWithImpl<$Res,
-        _$_OrderHistoryDetailsMessagesDto>
+    extends _$OrderHistoryDetailsMessagesDtoCopyWithImpl<$Res>
     implements _$$_OrderHistoryDetailsMessagesDtoCopyWith<$Res> {
   __$$_OrderHistoryDetailsMessagesDtoCopyWithImpl(
       _$_OrderHistoryDetailsMessagesDto _value,
       $Res Function(_$_OrderHistoryDetailsMessagesDto) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_OrderHistoryDetailsMessagesDto));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_OrderHistoryDetailsMessagesDto get _value =>
+      super._value as _$_OrderHistoryDetailsMessagesDto;
+
   @override
   $Res call({
-    Object? type = null,
-    Object? message = null,
+    Object? type = freezed,
+    Object? message = freezed,
   }) {
     return _then(_$_OrderHistoryDetailsMessagesDto(
-      type: null == type
+      type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      message: null == message
+      message: message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
@@ -148,17 +144,19 @@ class _$_OrderHistoryDetailsMessagesDto
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryDetailsMessagesDto &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.message, message) || other.message == message));
+            const DeepCollectionEquality().equals(other.type, type) &&
+            const DeepCollectionEquality().equals(other.message, message));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, type, message);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(type),
+      const DeepCollectionEquality().hash(message));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_OrderHistoryDetailsMessagesDtoCopyWith<_$_OrderHistoryDetailsMessagesDto>
       get copyWith => __$$_OrderHistoryDetailsMessagesDtoCopyWithImpl<
           _$_OrderHistoryDetailsMessagesDto>(this, _$identity);

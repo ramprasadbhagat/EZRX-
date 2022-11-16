@@ -30,48 +30,45 @@ mixin _$BillToAltName {
 abstract class $BillToAltNameCopyWith<$Res> {
   factory $BillToAltNameCopyWith(
           BillToAltName value, $Res Function(BillToAltName) then) =
-      _$BillToAltNameCopyWithImpl<$Res, BillToAltName>;
-  @useResult
+      _$BillToAltNameCopyWithImpl<$Res>;
   $Res call(
       {String altName1, String altName2, String altName3, String altName4});
 }
 
 /// @nodoc
-class _$BillToAltNameCopyWithImpl<$Res, $Val extends BillToAltName>
+class _$BillToAltNameCopyWithImpl<$Res>
     implements $BillToAltNameCopyWith<$Res> {
   _$BillToAltNameCopyWithImpl(this._value, this._then);
 
+  final BillToAltName _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(BillToAltName) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? altName1 = null,
-    Object? altName2 = null,
-    Object? altName3 = null,
-    Object? altName4 = null,
+    Object? altName1 = freezed,
+    Object? altName2 = freezed,
+    Object? altName3 = freezed,
+    Object? altName4 = freezed,
   }) {
     return _then(_value.copyWith(
-      altName1: null == altName1
+      altName1: altName1 == freezed
           ? _value.altName1
           : altName1 // ignore: cast_nullable_to_non_nullable
               as String,
-      altName2: null == altName2
+      altName2: altName2 == freezed
           ? _value.altName2
           : altName2 // ignore: cast_nullable_to_non_nullable
               as String,
-      altName3: null == altName3
+      altName3: altName3 == freezed
           ? _value.altName3
           : altName3 // ignore: cast_nullable_to_non_nullable
               as String,
-      altName4: null == altName4
+      altName4: altName4 == freezed
           ? _value.altName4
           : altName4 // ignore: cast_nullable_to_non_nullable
               as String,
-    ) as $Val);
+    ));
   }
 }
 
@@ -82,41 +79,42 @@ abstract class _$$_BillToAltNameCopyWith<$Res>
           _$_BillToAltName value, $Res Function(_$_BillToAltName) then) =
       __$$_BillToAltNameCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {String altName1, String altName2, String altName3, String altName4});
 }
 
 /// @nodoc
 class __$$_BillToAltNameCopyWithImpl<$Res>
-    extends _$BillToAltNameCopyWithImpl<$Res, _$_BillToAltName>
+    extends _$BillToAltNameCopyWithImpl<$Res>
     implements _$$_BillToAltNameCopyWith<$Res> {
   __$$_BillToAltNameCopyWithImpl(
       _$_BillToAltName _value, $Res Function(_$_BillToAltName) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_BillToAltName));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_BillToAltName get _value => super._value as _$_BillToAltName;
+
   @override
   $Res call({
-    Object? altName1 = null,
-    Object? altName2 = null,
-    Object? altName3 = null,
-    Object? altName4 = null,
+    Object? altName1 = freezed,
+    Object? altName2 = freezed,
+    Object? altName3 = freezed,
+    Object? altName4 = freezed,
   }) {
     return _then(_$_BillToAltName(
-      altName1: null == altName1
+      altName1: altName1 == freezed
           ? _value.altName1
           : altName1 // ignore: cast_nullable_to_non_nullable
               as String,
-      altName2: null == altName2
+      altName2: altName2 == freezed
           ? _value.altName2
           : altName2 // ignore: cast_nullable_to_non_nullable
               as String,
-      altName3: null == altName3
+      altName3: altName3 == freezed
           ? _value.altName3
           : altName3 // ignore: cast_nullable_to_non_nullable
               as String,
-      altName4: null == altName4
+      altName4: altName4 == freezed
           ? _value.altName4
           : altName4 // ignore: cast_nullable_to_non_nullable
               as String,
@@ -148,23 +146,22 @@ class _$_BillToAltName extends _BillToAltName {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BillToAltName &&
-            (identical(other.altName1, altName1) ||
-                other.altName1 == altName1) &&
-            (identical(other.altName2, altName2) ||
-                other.altName2 == altName2) &&
-            (identical(other.altName3, altName3) ||
-                other.altName3 == altName3) &&
-            (identical(other.altName4, altName4) ||
-                other.altName4 == altName4));
+            const DeepCollectionEquality().equals(other.altName1, altName1) &&
+            const DeepCollectionEquality().equals(other.altName2, altName2) &&
+            const DeepCollectionEquality().equals(other.altName3, altName3) &&
+            const DeepCollectionEquality().equals(other.altName4, altName4));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, altName1, altName2, altName3, altName4);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(altName1),
+      const DeepCollectionEquality().hash(altName2),
+      const DeepCollectionEquality().hash(altName3),
+      const DeepCollectionEquality().hash(altName4));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_BillToAltNameCopyWith<_$_BillToAltName> get copyWith =>
       __$$_BillToAltNameCopyWithImpl<_$_BillToAltName>(this, _$identity);
 }

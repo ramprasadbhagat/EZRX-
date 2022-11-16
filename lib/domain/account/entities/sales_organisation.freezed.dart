@@ -29,37 +29,34 @@ mixin _$SalesOrganisation {
 abstract class $SalesOrganisationCopyWith<$Res> {
   factory $SalesOrganisationCopyWith(
           SalesOrganisation value, $Res Function(SalesOrganisation) then) =
-      _$SalesOrganisationCopyWithImpl<$Res, SalesOrganisation>;
-  @useResult
+      _$SalesOrganisationCopyWithImpl<$Res>;
   $Res call({SalesOrg salesOrg, List<SalesOrgCustomerInfo> customerInfos});
 }
 
 /// @nodoc
-class _$SalesOrganisationCopyWithImpl<$Res, $Val extends SalesOrganisation>
+class _$SalesOrganisationCopyWithImpl<$Res>
     implements $SalesOrganisationCopyWith<$Res> {
   _$SalesOrganisationCopyWithImpl(this._value, this._then);
 
+  final SalesOrganisation _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(SalesOrganisation) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? salesOrg = null,
-    Object? customerInfos = null,
+    Object? salesOrg = freezed,
+    Object? customerInfos = freezed,
   }) {
     return _then(_value.copyWith(
-      salesOrg: null == salesOrg
+      salesOrg: salesOrg == freezed
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as SalesOrg,
-      customerInfos: null == customerInfos
+      customerInfos: customerInfos == freezed
           ? _value.customerInfos
           : customerInfos // ignore: cast_nullable_to_non_nullable
               as List<SalesOrgCustomerInfo>,
-    ) as $Val);
+    ));
   }
 }
 
@@ -70,30 +67,31 @@ abstract class _$$_SalesOrganisationCopyWith<$Res>
           $Res Function(_$_SalesOrganisation) then) =
       __$$_SalesOrganisationCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call({SalesOrg salesOrg, List<SalesOrgCustomerInfo> customerInfos});
 }
 
 /// @nodoc
 class __$$_SalesOrganisationCopyWithImpl<$Res>
-    extends _$SalesOrganisationCopyWithImpl<$Res, _$_SalesOrganisation>
+    extends _$SalesOrganisationCopyWithImpl<$Res>
     implements _$$_SalesOrganisationCopyWith<$Res> {
   __$$_SalesOrganisationCopyWithImpl(
       _$_SalesOrganisation _value, $Res Function(_$_SalesOrganisation) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_SalesOrganisation));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_SalesOrganisation get _value => super._value as _$_SalesOrganisation;
+
   @override
   $Res call({
-    Object? salesOrg = null,
-    Object? customerInfos = null,
+    Object? salesOrg = freezed,
+    Object? customerInfos = freezed,
   }) {
     return _then(_$_SalesOrganisation(
-      salesOrg: null == salesOrg
+      salesOrg: salesOrg == freezed
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as SalesOrg,
-      customerInfos: null == customerInfos
+      customerInfos: customerInfos == freezed
           ? _value._customerInfos
           : customerInfos // ignore: cast_nullable_to_non_nullable
               as List<SalesOrgCustomerInfo>,
@@ -129,19 +127,19 @@ class _$_SalesOrganisation extends _SalesOrganisation {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SalesOrganisation &&
-            (identical(other.salesOrg, salesOrg) ||
-                other.salesOrg == salesOrg) &&
+            const DeepCollectionEquality().equals(other.salesOrg, salesOrg) &&
             const DeepCollectionEquality()
                 .equals(other._customerInfos, _customerInfos));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrg,
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(salesOrg),
       const DeepCollectionEquality().hash(_customerInfos));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_SalesOrganisationCopyWith<_$_SalesOrganisation> get copyWith =>
       __$$_SalesOrganisationCopyWithImpl<_$_SalesOrganisation>(
           this, _$identity);

@@ -29,39 +29,35 @@ mixin _$SalesOrgCustomerInfo {
 abstract class $SalesOrgCustomerInfoCopyWith<$Res> {
   factory $SalesOrgCustomerInfoCopyWith(SalesOrgCustomerInfo value,
           $Res Function(SalesOrgCustomerInfo) then) =
-      _$SalesOrgCustomerInfoCopyWithImpl<$Res, SalesOrgCustomerInfo>;
-  @useResult
+      _$SalesOrgCustomerInfoCopyWithImpl<$Res>;
   $Res call(
       {CustomerCode customerCodeSoldTo, List<SalesOrgShipToInfo> shipToInfos});
 }
 
 /// @nodoc
-class _$SalesOrgCustomerInfoCopyWithImpl<$Res,
-        $Val extends SalesOrgCustomerInfo>
+class _$SalesOrgCustomerInfoCopyWithImpl<$Res>
     implements $SalesOrgCustomerInfoCopyWith<$Res> {
   _$SalesOrgCustomerInfoCopyWithImpl(this._value, this._then);
 
+  final SalesOrgCustomerInfo _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(SalesOrgCustomerInfo) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? customerCodeSoldTo = null,
-    Object? shipToInfos = null,
+    Object? customerCodeSoldTo = freezed,
+    Object? shipToInfos = freezed,
   }) {
     return _then(_value.copyWith(
-      customerCodeSoldTo: null == customerCodeSoldTo
+      customerCodeSoldTo: customerCodeSoldTo == freezed
           ? _value.customerCodeSoldTo
           : customerCodeSoldTo // ignore: cast_nullable_to_non_nullable
               as CustomerCode,
-      shipToInfos: null == shipToInfos
+      shipToInfos: shipToInfos == freezed
           ? _value.shipToInfos
           : shipToInfos // ignore: cast_nullable_to_non_nullable
               as List<SalesOrgShipToInfo>,
-    ) as $Val);
+    ));
   }
 }
 
@@ -72,31 +68,32 @@ abstract class _$$_SalesOrgCustomerInfoCopyWith<$Res>
           $Res Function(_$_SalesOrgCustomerInfo) then) =
       __$$_SalesOrgCustomerInfoCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {CustomerCode customerCodeSoldTo, List<SalesOrgShipToInfo> shipToInfos});
 }
 
 /// @nodoc
 class __$$_SalesOrgCustomerInfoCopyWithImpl<$Res>
-    extends _$SalesOrgCustomerInfoCopyWithImpl<$Res, _$_SalesOrgCustomerInfo>
+    extends _$SalesOrgCustomerInfoCopyWithImpl<$Res>
     implements _$$_SalesOrgCustomerInfoCopyWith<$Res> {
   __$$_SalesOrgCustomerInfoCopyWithImpl(_$_SalesOrgCustomerInfo _value,
       $Res Function(_$_SalesOrgCustomerInfo) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_SalesOrgCustomerInfo));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_SalesOrgCustomerInfo get _value => super._value as _$_SalesOrgCustomerInfo;
+
   @override
   $Res call({
-    Object? customerCodeSoldTo = null,
-    Object? shipToInfos = null,
+    Object? customerCodeSoldTo = freezed,
+    Object? shipToInfos = freezed,
   }) {
     return _then(_$_SalesOrgCustomerInfo(
-      customerCodeSoldTo: null == customerCodeSoldTo
+      customerCodeSoldTo: customerCodeSoldTo == freezed
           ? _value.customerCodeSoldTo
           : customerCodeSoldTo // ignore: cast_nullable_to_non_nullable
               as CustomerCode,
-      shipToInfos: null == shipToInfos
+      shipToInfos: shipToInfos == freezed
           ? _value._shipToInfos
           : shipToInfos // ignore: cast_nullable_to_non_nullable
               as List<SalesOrgShipToInfo>,
@@ -132,19 +129,20 @@ class _$_SalesOrgCustomerInfo extends _SalesOrgCustomerInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SalesOrgCustomerInfo &&
-            (identical(other.customerCodeSoldTo, customerCodeSoldTo) ||
-                other.customerCodeSoldTo == customerCodeSoldTo) &&
+            const DeepCollectionEquality()
+                .equals(other.customerCodeSoldTo, customerCodeSoldTo) &&
             const DeepCollectionEquality()
                 .equals(other._shipToInfos, _shipToInfos));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, customerCodeSoldTo,
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(customerCodeSoldTo),
       const DeepCollectionEquality().hash(_shipToInfos));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_SalesOrgCustomerInfoCopyWith<_$_SalesOrgCustomerInfo> get copyWith =>
       __$$_SalesOrgCustomerInfoCopyWithImpl<_$_SalesOrgCustomerInfo>(
           this, _$identity);

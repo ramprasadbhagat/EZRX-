@@ -29,8 +29,7 @@ mixin _$MaterialPriceDetail {
 abstract class $MaterialPriceDetailCopyWith<$Res> {
   factory $MaterialPriceDetailCopyWith(
           MaterialPriceDetail value, $Res Function(MaterialPriceDetail) then) =
-      _$MaterialPriceDetailCopyWithImpl<$Res, MaterialPriceDetail>;
-  @useResult
+      _$MaterialPriceDetailCopyWithImpl<$Res>;
   $Res call({Price price, MaterialInfo info, bool isValidMaterial});
 
   $PriceCopyWith<$Res> get price;
@@ -38,51 +37,47 @@ abstract class $MaterialPriceDetailCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MaterialPriceDetailCopyWithImpl<$Res, $Val extends MaterialPriceDetail>
+class _$MaterialPriceDetailCopyWithImpl<$Res>
     implements $MaterialPriceDetailCopyWith<$Res> {
   _$MaterialPriceDetailCopyWithImpl(this._value, this._then);
 
+  final MaterialPriceDetail _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(MaterialPriceDetail) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? price = null,
-    Object? info = null,
-    Object? isValidMaterial = null,
+    Object? price = freezed,
+    Object? info = freezed,
+    Object? isValidMaterial = freezed,
   }) {
     return _then(_value.copyWith(
-      price: null == price
+      price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as Price,
-      info: null == info
+      info: info == freezed
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
               as MaterialInfo,
-      isValidMaterial: null == isValidMaterial
+      isValidMaterial: isValidMaterial == freezed
           ? _value.isValidMaterial
           : isValidMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-    ) as $Val);
+    ));
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $PriceCopyWith<$Res> get price {
     return $PriceCopyWith<$Res>(_value.price, (value) {
-      return _then(_value.copyWith(price: value) as $Val);
+      return _then(_value.copyWith(price: value));
     });
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $MaterialInfoCopyWith<$Res> get info {
     return $MaterialInfoCopyWith<$Res>(_value.info, (value) {
-      return _then(_value.copyWith(info: value) as $Val);
+      return _then(_value.copyWith(info: value));
     });
   }
 }
@@ -94,7 +89,6 @@ abstract class _$$_MaterialPriceDetailCopyWith<$Res>
           $Res Function(_$_MaterialPriceDetail) then) =
       __$$_MaterialPriceDetailCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call({Price price, MaterialInfo info, bool isValidMaterial});
 
   @override
@@ -105,29 +99,31 @@ abstract class _$$_MaterialPriceDetailCopyWith<$Res>
 
 /// @nodoc
 class __$$_MaterialPriceDetailCopyWithImpl<$Res>
-    extends _$MaterialPriceDetailCopyWithImpl<$Res, _$_MaterialPriceDetail>
+    extends _$MaterialPriceDetailCopyWithImpl<$Res>
     implements _$$_MaterialPriceDetailCopyWith<$Res> {
   __$$_MaterialPriceDetailCopyWithImpl(_$_MaterialPriceDetail _value,
       $Res Function(_$_MaterialPriceDetail) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_MaterialPriceDetail));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_MaterialPriceDetail get _value => super._value as _$_MaterialPriceDetail;
+
   @override
   $Res call({
-    Object? price = null,
-    Object? info = null,
-    Object? isValidMaterial = null,
+    Object? price = freezed,
+    Object? info = freezed,
+    Object? isValidMaterial = freezed,
   }) {
     return _then(_$_MaterialPriceDetail(
-      price: null == price
+      price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as Price,
-      info: null == info
+      info: info == freezed
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
               as MaterialInfo,
-      isValidMaterial: null == isValidMaterial
+      isValidMaterial: isValidMaterial == freezed
           ? _value.isValidMaterial
           : isValidMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -159,18 +155,21 @@ class _$_MaterialPriceDetail extends _MaterialPriceDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MaterialPriceDetail &&
-            (identical(other.price, price) || other.price == price) &&
-            (identical(other.info, info) || other.info == info) &&
-            (identical(other.isValidMaterial, isValidMaterial) ||
-                other.isValidMaterial == isValidMaterial));
+            const DeepCollectionEquality().equals(other.price, price) &&
+            const DeepCollectionEquality().equals(other.info, info) &&
+            const DeepCollectionEquality()
+                .equals(other.isValidMaterial, isValidMaterial));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, price, info, isValidMaterial);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(price),
+      const DeepCollectionEquality().hash(info),
+      const DeepCollectionEquality().hash(isValidMaterial));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_MaterialPriceDetailCopyWith<_$_MaterialPriceDetail> get copyWith =>
       __$$_MaterialPriceDetailCopyWithImpl<_$_MaterialPriceDetail>(
           this, _$identity);

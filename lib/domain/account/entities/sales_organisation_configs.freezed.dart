@@ -56,8 +56,7 @@ mixin _$SalesOrganisationConfigs {
 abstract class $SalesOrganisationConfigsCopyWith<$Res> {
   factory $SalesOrganisationConfigsCopyWith(SalesOrganisationConfigs value,
           $Res Function(SalesOrganisationConfigs) then) =
-      _$SalesOrganisationConfigsCopyWithImpl<$Res, SalesOrganisationConfigs>;
-  @useResult
+      _$SalesOrganisationConfigsCopyWithImpl<$Res>;
   $Res call(
       {bool enableDefaultMD,
       bool disableProcessingStatus,
@@ -92,172 +91,169 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SalesOrganisationConfigsCopyWithImpl<$Res,
-        $Val extends SalesOrganisationConfigs>
+class _$SalesOrganisationConfigsCopyWithImpl<$Res>
     implements $SalesOrganisationConfigsCopyWith<$Res> {
   _$SalesOrganisationConfigsCopyWithImpl(this._value, this._then);
 
+  final SalesOrganisationConfigs _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(SalesOrganisationConfigs) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? enableDefaultMD = null,
-    Object? disableProcessingStatus = null,
-    Object? currency = null,
-    Object? hideCustomer = null,
-    Object? enableGimmickMaterial = null,
-    Object? languageFilter = null,
-    Object? languageValue = null,
-    Object? disablePrincipals = null,
-    Object? principalList = null,
-    Object? disableOrderType = null,
-    Object? enableBatchNumber = null,
-    Object? disableBundles = null,
-    Object? enableZDP5 = null,
-    Object? enableVat = null,
-    Object? enableTaxClassification = null,
-    Object? vatValue = null,
-    Object? materialWithoutPrice = null,
-    Object? enableSpecialInstructions = null,
-    Object? enableReferenceNote = null,
-    Object? enableCollectiveNumber = null,
-    Object? enableMobileNumber = null,
-    Object? enableFutureDeliveryDay = null,
-    Object? enablePaymentTerms = null,
-    Object? futureDeliveryDay = null,
-    Object? enableGMC = null,
-    Object? enableListPrice = null,
-    Object? priceOverride = null,
-    Object? disablePaymentTermsDisplay = null,
-    Object? disableDeliveryDate = null,
-    Object? enableBillTo = null,
+    Object? enableDefaultMD = freezed,
+    Object? disableProcessingStatus = freezed,
+    Object? currency = freezed,
+    Object? hideCustomer = freezed,
+    Object? enableGimmickMaterial = freezed,
+    Object? languageFilter = freezed,
+    Object? languageValue = freezed,
+    Object? disablePrincipals = freezed,
+    Object? principalList = freezed,
+    Object? disableOrderType = freezed,
+    Object? enableBatchNumber = freezed,
+    Object? disableBundles = freezed,
+    Object? enableZDP5 = freezed,
+    Object? enableVat = freezed,
+    Object? enableTaxClassification = freezed,
+    Object? vatValue = freezed,
+    Object? materialWithoutPrice = freezed,
+    Object? enableSpecialInstructions = freezed,
+    Object? enableReferenceNote = freezed,
+    Object? enableCollectiveNumber = freezed,
+    Object? enableMobileNumber = freezed,
+    Object? enableFutureDeliveryDay = freezed,
+    Object? enablePaymentTerms = freezed,
+    Object? futureDeliveryDay = freezed,
+    Object? enableGMC = freezed,
+    Object? enableListPrice = freezed,
+    Object? priceOverride = freezed,
+    Object? disablePaymentTermsDisplay = freezed,
+    Object? disableDeliveryDate = freezed,
+    Object? enableBillTo = freezed,
   }) {
     return _then(_value.copyWith(
-      enableDefaultMD: null == enableDefaultMD
+      enableDefaultMD: enableDefaultMD == freezed
           ? _value.enableDefaultMD
           : enableDefaultMD // ignore: cast_nullable_to_non_nullable
               as bool,
-      disableProcessingStatus: null == disableProcessingStatus
+      disableProcessingStatus: disableProcessingStatus == freezed
           ? _value.disableProcessingStatus
           : disableProcessingStatus // ignore: cast_nullable_to_non_nullable
               as bool,
-      currency: null == currency
+      currency: currency == freezed
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as Currency,
-      hideCustomer: null == hideCustomer
+      hideCustomer: hideCustomer == freezed
           ? _value.hideCustomer
           : hideCustomer // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableGimmickMaterial: null == enableGimmickMaterial
+      enableGimmickMaterial: enableGimmickMaterial == freezed
           ? _value.enableGimmickMaterial
           : enableGimmickMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-      languageFilter: null == languageFilter
+      languageFilter: languageFilter == freezed
           ? _value.languageFilter
           : languageFilter // ignore: cast_nullable_to_non_nullable
               as bool,
-      languageValue: null == languageValue
+      languageValue: languageValue == freezed
           ? _value.languageValue
           : languageValue // ignore: cast_nullable_to_non_nullable
               as String,
-      disablePrincipals: null == disablePrincipals
+      disablePrincipals: disablePrincipals == freezed
           ? _value.disablePrincipals
           : disablePrincipals // ignore: cast_nullable_to_non_nullable
               as bool,
-      principalList: null == principalList
+      principalList: principalList == freezed
           ? _value.principalList
           : principalList // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
-      disableOrderType: null == disableOrderType
+      disableOrderType: disableOrderType == freezed
           ? _value.disableOrderType
           : disableOrderType // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableBatchNumber: null == enableBatchNumber
+      enableBatchNumber: enableBatchNumber == freezed
           ? _value.enableBatchNumber
           : enableBatchNumber // ignore: cast_nullable_to_non_nullable
               as bool,
-      disableBundles: null == disableBundles
+      disableBundles: disableBundles == freezed
           ? _value.disableBundles
           : disableBundles // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableZDP5: null == enableZDP5
+      enableZDP5: enableZDP5 == freezed
           ? _value.enableZDP5
           : enableZDP5 // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableVat: null == enableVat
+      enableVat: enableVat == freezed
           ? _value.enableVat
           : enableVat // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableTaxClassification: null == enableTaxClassification
+      enableTaxClassification: enableTaxClassification == freezed
           ? _value.enableTaxClassification
           : enableTaxClassification // ignore: cast_nullable_to_non_nullable
               as bool,
-      vatValue: null == vatValue
+      vatValue: vatValue == freezed
           ? _value.vatValue
           : vatValue // ignore: cast_nullable_to_non_nullable
               as int,
-      materialWithoutPrice: null == materialWithoutPrice
+      materialWithoutPrice: materialWithoutPrice == freezed
           ? _value.materialWithoutPrice
           : materialWithoutPrice // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableSpecialInstructions: null == enableSpecialInstructions
+      enableSpecialInstructions: enableSpecialInstructions == freezed
           ? _value.enableSpecialInstructions
           : enableSpecialInstructions // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableReferenceNote: null == enableReferenceNote
+      enableReferenceNote: enableReferenceNote == freezed
           ? _value.enableReferenceNote
           : enableReferenceNote // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableCollectiveNumber: null == enableCollectiveNumber
+      enableCollectiveNumber: enableCollectiveNumber == freezed
           ? _value.enableCollectiveNumber
           : enableCollectiveNumber // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableMobileNumber: null == enableMobileNumber
+      enableMobileNumber: enableMobileNumber == freezed
           ? _value.enableMobileNumber
           : enableMobileNumber // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableFutureDeliveryDay: null == enableFutureDeliveryDay
+      enableFutureDeliveryDay: enableFutureDeliveryDay == freezed
           ? _value.enableFutureDeliveryDay
           : enableFutureDeliveryDay // ignore: cast_nullable_to_non_nullable
               as bool,
-      enablePaymentTerms: null == enablePaymentTerms
+      enablePaymentTerms: enablePaymentTerms == freezed
           ? _value.enablePaymentTerms
           : enablePaymentTerms // ignore: cast_nullable_to_non_nullable
               as bool,
-      futureDeliveryDay: null == futureDeliveryDay
+      futureDeliveryDay: futureDeliveryDay == freezed
           ? _value.futureDeliveryDay
           : futureDeliveryDay // ignore: cast_nullable_to_non_nullable
               as String,
-      enableGMC: null == enableGMC
+      enableGMC: enableGMC == freezed
           ? _value.enableGMC
           : enableGMC // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableListPrice: null == enableListPrice
+      enableListPrice: enableListPrice == freezed
           ? _value.enableListPrice
           : enableListPrice // ignore: cast_nullable_to_non_nullable
               as bool,
-      priceOverride: null == priceOverride
+      priceOverride: priceOverride == freezed
           ? _value.priceOverride
           : priceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
-      disablePaymentTermsDisplay: null == disablePaymentTermsDisplay
+      disablePaymentTermsDisplay: disablePaymentTermsDisplay == freezed
           ? _value.disablePaymentTermsDisplay
           : disablePaymentTermsDisplay // ignore: cast_nullable_to_non_nullable
               as bool,
-      disableDeliveryDate: null == disableDeliveryDate
+      disableDeliveryDate: disableDeliveryDate == freezed
           ? _value.disableDeliveryDate
           : disableDeliveryDate // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableBillTo: null == enableBillTo
+      enableBillTo: enableBillTo == freezed
           ? _value.enableBillTo
           : enableBillTo // ignore: cast_nullable_to_non_nullable
               as bool,
-    ) as $Val);
+    ));
   }
 }
 
@@ -269,7 +265,6 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
           $Res Function(_$_SalesOrganisationConfigs) then) =
       __$$_SalesOrganisationConfigsCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {bool enableDefaultMD,
       bool disableProcessingStatus,
@@ -305,165 +300,167 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
 
 /// @nodoc
 class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
-    extends _$SalesOrganisationConfigsCopyWithImpl<$Res,
-        _$_SalesOrganisationConfigs>
+    extends _$SalesOrganisationConfigsCopyWithImpl<$Res>
     implements _$$_SalesOrganisationConfigsCopyWith<$Res> {
   __$$_SalesOrganisationConfigsCopyWithImpl(_$_SalesOrganisationConfigs _value,
       $Res Function(_$_SalesOrganisationConfigs) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_SalesOrganisationConfigs));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_SalesOrganisationConfigs get _value =>
+      super._value as _$_SalesOrganisationConfigs;
+
   @override
   $Res call({
-    Object? enableDefaultMD = null,
-    Object? disableProcessingStatus = null,
-    Object? currency = null,
-    Object? hideCustomer = null,
-    Object? enableGimmickMaterial = null,
-    Object? languageFilter = null,
-    Object? languageValue = null,
-    Object? disablePrincipals = null,
-    Object? principalList = null,
-    Object? disableOrderType = null,
-    Object? enableBatchNumber = null,
-    Object? disableBundles = null,
-    Object? enableZDP5 = null,
-    Object? enableVat = null,
-    Object? enableTaxClassification = null,
-    Object? vatValue = null,
-    Object? materialWithoutPrice = null,
-    Object? enableSpecialInstructions = null,
-    Object? enableReferenceNote = null,
-    Object? enableCollectiveNumber = null,
-    Object? enableMobileNumber = null,
-    Object? enableFutureDeliveryDay = null,
-    Object? enablePaymentTerms = null,
-    Object? futureDeliveryDay = null,
-    Object? enableGMC = null,
-    Object? enableListPrice = null,
-    Object? priceOverride = null,
-    Object? disablePaymentTermsDisplay = null,
-    Object? disableDeliveryDate = null,
-    Object? enableBillTo = null,
+    Object? enableDefaultMD = freezed,
+    Object? disableProcessingStatus = freezed,
+    Object? currency = freezed,
+    Object? hideCustomer = freezed,
+    Object? enableGimmickMaterial = freezed,
+    Object? languageFilter = freezed,
+    Object? languageValue = freezed,
+    Object? disablePrincipals = freezed,
+    Object? principalList = freezed,
+    Object? disableOrderType = freezed,
+    Object? enableBatchNumber = freezed,
+    Object? disableBundles = freezed,
+    Object? enableZDP5 = freezed,
+    Object? enableVat = freezed,
+    Object? enableTaxClassification = freezed,
+    Object? vatValue = freezed,
+    Object? materialWithoutPrice = freezed,
+    Object? enableSpecialInstructions = freezed,
+    Object? enableReferenceNote = freezed,
+    Object? enableCollectiveNumber = freezed,
+    Object? enableMobileNumber = freezed,
+    Object? enableFutureDeliveryDay = freezed,
+    Object? enablePaymentTerms = freezed,
+    Object? futureDeliveryDay = freezed,
+    Object? enableGMC = freezed,
+    Object? enableListPrice = freezed,
+    Object? priceOverride = freezed,
+    Object? disablePaymentTermsDisplay = freezed,
+    Object? disableDeliveryDate = freezed,
+    Object? enableBillTo = freezed,
   }) {
     return _then(_$_SalesOrganisationConfigs(
-      enableDefaultMD: null == enableDefaultMD
+      enableDefaultMD: enableDefaultMD == freezed
           ? _value.enableDefaultMD
           : enableDefaultMD // ignore: cast_nullable_to_non_nullable
               as bool,
-      disableProcessingStatus: null == disableProcessingStatus
+      disableProcessingStatus: disableProcessingStatus == freezed
           ? _value.disableProcessingStatus
           : disableProcessingStatus // ignore: cast_nullable_to_non_nullable
               as bool,
-      currency: null == currency
+      currency: currency == freezed
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as Currency,
-      hideCustomer: null == hideCustomer
+      hideCustomer: hideCustomer == freezed
           ? _value.hideCustomer
           : hideCustomer // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableGimmickMaterial: null == enableGimmickMaterial
+      enableGimmickMaterial: enableGimmickMaterial == freezed
           ? _value.enableGimmickMaterial
           : enableGimmickMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-      languageFilter: null == languageFilter
+      languageFilter: languageFilter == freezed
           ? _value.languageFilter
           : languageFilter // ignore: cast_nullable_to_non_nullable
               as bool,
-      languageValue: null == languageValue
+      languageValue: languageValue == freezed
           ? _value.languageValue
           : languageValue // ignore: cast_nullable_to_non_nullable
               as String,
-      disablePrincipals: null == disablePrincipals
+      disablePrincipals: disablePrincipals == freezed
           ? _value.disablePrincipals
           : disablePrincipals // ignore: cast_nullable_to_non_nullable
               as bool,
-      principalList: null == principalList
+      principalList: principalList == freezed
           ? _value._principalList
           : principalList // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
-      disableOrderType: null == disableOrderType
+      disableOrderType: disableOrderType == freezed
           ? _value.disableOrderType
           : disableOrderType // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableBatchNumber: null == enableBatchNumber
+      enableBatchNumber: enableBatchNumber == freezed
           ? _value.enableBatchNumber
           : enableBatchNumber // ignore: cast_nullable_to_non_nullable
               as bool,
-      disableBundles: null == disableBundles
+      disableBundles: disableBundles == freezed
           ? _value.disableBundles
           : disableBundles // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableZDP5: null == enableZDP5
+      enableZDP5: enableZDP5 == freezed
           ? _value.enableZDP5
           : enableZDP5 // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableVat: null == enableVat
+      enableVat: enableVat == freezed
           ? _value.enableVat
           : enableVat // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableTaxClassification: null == enableTaxClassification
+      enableTaxClassification: enableTaxClassification == freezed
           ? _value.enableTaxClassification
           : enableTaxClassification // ignore: cast_nullable_to_non_nullable
               as bool,
-      vatValue: null == vatValue
+      vatValue: vatValue == freezed
           ? _value.vatValue
           : vatValue // ignore: cast_nullable_to_non_nullable
               as int,
-      materialWithoutPrice: null == materialWithoutPrice
+      materialWithoutPrice: materialWithoutPrice == freezed
           ? _value.materialWithoutPrice
           : materialWithoutPrice // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableSpecialInstructions: null == enableSpecialInstructions
+      enableSpecialInstructions: enableSpecialInstructions == freezed
           ? _value.enableSpecialInstructions
           : enableSpecialInstructions // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableReferenceNote: null == enableReferenceNote
+      enableReferenceNote: enableReferenceNote == freezed
           ? _value.enableReferenceNote
           : enableReferenceNote // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableCollectiveNumber: null == enableCollectiveNumber
+      enableCollectiveNumber: enableCollectiveNumber == freezed
           ? _value.enableCollectiveNumber
           : enableCollectiveNumber // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableMobileNumber: null == enableMobileNumber
+      enableMobileNumber: enableMobileNumber == freezed
           ? _value.enableMobileNumber
           : enableMobileNumber // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableFutureDeliveryDay: null == enableFutureDeliveryDay
+      enableFutureDeliveryDay: enableFutureDeliveryDay == freezed
           ? _value.enableFutureDeliveryDay
           : enableFutureDeliveryDay // ignore: cast_nullable_to_non_nullable
               as bool,
-      enablePaymentTerms: null == enablePaymentTerms
+      enablePaymentTerms: enablePaymentTerms == freezed
           ? _value.enablePaymentTerms
           : enablePaymentTerms // ignore: cast_nullable_to_non_nullable
               as bool,
-      futureDeliveryDay: null == futureDeliveryDay
+      futureDeliveryDay: futureDeliveryDay == freezed
           ? _value.futureDeliveryDay
           : futureDeliveryDay // ignore: cast_nullable_to_non_nullable
               as String,
-      enableGMC: null == enableGMC
+      enableGMC: enableGMC == freezed
           ? _value.enableGMC
           : enableGMC // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableListPrice: null == enableListPrice
+      enableListPrice: enableListPrice == freezed
           ? _value.enableListPrice
           : enableListPrice // ignore: cast_nullable_to_non_nullable
               as bool,
-      priceOverride: null == priceOverride
+      priceOverride: priceOverride == freezed
           ? _value.priceOverride
           : priceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
-      disablePaymentTermsDisplay: null == disablePaymentTermsDisplay
+      disablePaymentTermsDisplay: disablePaymentTermsDisplay == freezed
           ? _value.disablePaymentTermsDisplay
           : disablePaymentTermsDisplay // ignore: cast_nullable_to_non_nullable
               as bool,
-      disableDeliveryDate: null == disableDeliveryDate
+      disableDeliveryDate: disableDeliveryDate == freezed
           ? _value.disableDeliveryDate
           : disableDeliveryDate // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableBillTo: null == enableBillTo
+      enableBillTo: enableBillTo == freezed
           ? _value.enableBillTo
           : enableBillTo // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -584,105 +581,101 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SalesOrganisationConfigs &&
-            (identical(other.enableDefaultMD, enableDefaultMD) ||
-                other.enableDefaultMD == enableDefaultMD) &&
-            (identical(other.disableProcessingStatus, disableProcessingStatus) ||
-                other.disableProcessingStatus == disableProcessingStatus) &&
-            (identical(other.currency, currency) ||
-                other.currency == currency) &&
-            (identical(other.hideCustomer, hideCustomer) ||
-                other.hideCustomer == hideCustomer) &&
-            (identical(other.enableGimmickMaterial, enableGimmickMaterial) ||
-                other.enableGimmickMaterial == enableGimmickMaterial) &&
-            (identical(other.languageFilter, languageFilter) ||
-                other.languageFilter == languageFilter) &&
-            (identical(other.languageValue, languageValue) ||
-                other.languageValue == languageValue) &&
-            (identical(other.disablePrincipals, disablePrincipals) ||
-                other.disablePrincipals == disablePrincipals) &&
+            const DeepCollectionEquality()
+                .equals(other.enableDefaultMD, enableDefaultMD) &&
+            const DeepCollectionEquality().equals(
+                other.disableProcessingStatus, disableProcessingStatus) &&
+            const DeepCollectionEquality().equals(other.currency, currency) &&
+            const DeepCollectionEquality()
+                .equals(other.hideCustomer, hideCustomer) &&
+            const DeepCollectionEquality()
+                .equals(other.enableGimmickMaterial, enableGimmickMaterial) &&
+            const DeepCollectionEquality()
+                .equals(other.languageFilter, languageFilter) &&
+            const DeepCollectionEquality()
+                .equals(other.languageValue, languageValue) &&
+            const DeepCollectionEquality()
+                .equals(other.disablePrincipals, disablePrincipals) &&
             const DeepCollectionEquality()
                 .equals(other._principalList, _principalList) &&
-            (identical(other.disableOrderType, disableOrderType) ||
-                other.disableOrderType == disableOrderType) &&
-            (identical(other.enableBatchNumber, enableBatchNumber) ||
-                other.enableBatchNumber == enableBatchNumber) &&
-            (identical(other.disableBundles, disableBundles) ||
-                other.disableBundles == disableBundles) &&
-            (identical(other.enableZDP5, enableZDP5) ||
-                other.enableZDP5 == enableZDP5) &&
-            (identical(other.enableVat, enableVat) ||
-                other.enableVat == enableVat) &&
-            (identical(other.enableTaxClassification, enableTaxClassification) ||
-                other.enableTaxClassification == enableTaxClassification) &&
-            (identical(other.vatValue, vatValue) ||
-                other.vatValue == vatValue) &&
-            (identical(other.materialWithoutPrice, materialWithoutPrice) ||
-                other.materialWithoutPrice == materialWithoutPrice) &&
-            (identical(other.enableSpecialInstructions, enableSpecialInstructions) ||
-                other.enableSpecialInstructions == enableSpecialInstructions) &&
-            (identical(other.enableReferenceNote, enableReferenceNote) ||
-                other.enableReferenceNote == enableReferenceNote) &&
-            (identical(other.enableCollectiveNumber, enableCollectiveNumber) ||
-                other.enableCollectiveNumber == enableCollectiveNumber) &&
-            (identical(other.enableMobileNumber, enableMobileNumber) ||
-                other.enableMobileNumber == enableMobileNumber) &&
-            (identical(other.enableFutureDeliveryDay, enableFutureDeliveryDay) ||
-                other.enableFutureDeliveryDay == enableFutureDeliveryDay) &&
-            (identical(other.enablePaymentTerms, enablePaymentTerms) ||
-                other.enablePaymentTerms == enablePaymentTerms) &&
-            (identical(other.futureDeliveryDay, futureDeliveryDay) ||
-                other.futureDeliveryDay == futureDeliveryDay) &&
-            (identical(other.enableGMC, enableGMC) ||
-                other.enableGMC == enableGMC) &&
-            (identical(other.enableListPrice, enableListPrice) ||
-                other.enableListPrice == enableListPrice) &&
-            (identical(other.priceOverride, priceOverride) ||
-                other.priceOverride == priceOverride) &&
-            (identical(
-                    other.disablePaymentTermsDisplay, disablePaymentTermsDisplay) ||
-                other.disablePaymentTermsDisplay == disablePaymentTermsDisplay) &&
-            (identical(other.disableDeliveryDate, disableDeliveryDate) || other.disableDeliveryDate == disableDeliveryDate) &&
-            (identical(other.enableBillTo, enableBillTo) || other.enableBillTo == enableBillTo));
+            const DeepCollectionEquality()
+                .equals(other.disableOrderType, disableOrderType) &&
+            const DeepCollectionEquality()
+                .equals(other.enableBatchNumber, enableBatchNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.disableBundles, disableBundles) &&
+            const DeepCollectionEquality()
+                .equals(other.enableZDP5, enableZDP5) &&
+            const DeepCollectionEquality().equals(other.enableVat, enableVat) &&
+            const DeepCollectionEquality().equals(
+                other.enableTaxClassification, enableTaxClassification) &&
+            const DeepCollectionEquality().equals(other.vatValue, vatValue) &&
+            const DeepCollectionEquality()
+                .equals(other.materialWithoutPrice, materialWithoutPrice) &&
+            const DeepCollectionEquality().equals(
+                other.enableSpecialInstructions, enableSpecialInstructions) &&
+            const DeepCollectionEquality()
+                .equals(other.enableReferenceNote, enableReferenceNote) &&
+            const DeepCollectionEquality()
+                .equals(other.enableCollectiveNumber, enableCollectiveNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.enableMobileNumber, enableMobileNumber) &&
+            const DeepCollectionEquality().equals(
+                other.enableFutureDeliveryDay, enableFutureDeliveryDay) &&
+            const DeepCollectionEquality()
+                .equals(other.enablePaymentTerms, enablePaymentTerms) &&
+            const DeepCollectionEquality()
+                .equals(other.futureDeliveryDay, futureDeliveryDay) &&
+            const DeepCollectionEquality().equals(other.enableGMC, enableGMC) &&
+            const DeepCollectionEquality()
+                .equals(other.enableListPrice, enableListPrice) &&
+            const DeepCollectionEquality()
+                .equals(other.priceOverride, priceOverride) &&
+            const DeepCollectionEquality().equals(
+                other.disablePaymentTermsDisplay, disablePaymentTermsDisplay) &&
+            const DeepCollectionEquality()
+                .equals(other.disableDeliveryDate, disableDeliveryDate) &&
+            const DeepCollectionEquality()
+                .equals(other.enableBillTo, enableBillTo));
   }
 
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        enableDefaultMD,
-        disableProcessingStatus,
-        currency,
-        hideCustomer,
-        enableGimmickMaterial,
-        languageFilter,
-        languageValue,
-        disablePrincipals,
+        const DeepCollectionEquality().hash(enableDefaultMD),
+        const DeepCollectionEquality().hash(disableProcessingStatus),
+        const DeepCollectionEquality().hash(currency),
+        const DeepCollectionEquality().hash(hideCustomer),
+        const DeepCollectionEquality().hash(enableGimmickMaterial),
+        const DeepCollectionEquality().hash(languageFilter),
+        const DeepCollectionEquality().hash(languageValue),
+        const DeepCollectionEquality().hash(disablePrincipals),
         const DeepCollectionEquality().hash(_principalList),
-        disableOrderType,
-        enableBatchNumber,
-        disableBundles,
-        enableZDP5,
-        enableVat,
-        enableTaxClassification,
-        vatValue,
-        materialWithoutPrice,
-        enableSpecialInstructions,
-        enableReferenceNote,
-        enableCollectiveNumber,
-        enableMobileNumber,
-        enableFutureDeliveryDay,
-        enablePaymentTerms,
-        futureDeliveryDay,
-        enableGMC,
-        enableListPrice,
-        priceOverride,
-        disablePaymentTermsDisplay,
-        disableDeliveryDate,
-        enableBillTo
+        const DeepCollectionEquality().hash(disableOrderType),
+        const DeepCollectionEquality().hash(enableBatchNumber),
+        const DeepCollectionEquality().hash(disableBundles),
+        const DeepCollectionEquality().hash(enableZDP5),
+        const DeepCollectionEquality().hash(enableVat),
+        const DeepCollectionEquality().hash(enableTaxClassification),
+        const DeepCollectionEquality().hash(vatValue),
+        const DeepCollectionEquality().hash(materialWithoutPrice),
+        const DeepCollectionEquality().hash(enableSpecialInstructions),
+        const DeepCollectionEquality().hash(enableReferenceNote),
+        const DeepCollectionEquality().hash(enableCollectiveNumber),
+        const DeepCollectionEquality().hash(enableMobileNumber),
+        const DeepCollectionEquality().hash(enableFutureDeliveryDay),
+        const DeepCollectionEquality().hash(enablePaymentTerms),
+        const DeepCollectionEquality().hash(futureDeliveryDay),
+        const DeepCollectionEquality().hash(enableGMC),
+        const DeepCollectionEquality().hash(enableListPrice),
+        const DeepCollectionEquality().hash(priceOverride),
+        const DeepCollectionEquality().hash(disablePaymentTermsDisplay),
+        const DeepCollectionEquality().hash(disableDeliveryDate),
+        const DeepCollectionEquality().hash(enableBillTo)
       ]);
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_SalesOrganisationConfigsCopyWith<_$_SalesOrganisationConfigs>
       get copyWith => __$$_SalesOrganisationConfigsCopyWithImpl<
           _$_SalesOrganisationConfigs>(this, _$identity);

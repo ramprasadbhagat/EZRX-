@@ -41,8 +41,7 @@ mixin _$FavouriteDto {
 abstract class $FavouriteDtoCopyWith<$Res> {
   factory $FavouriteDtoCopyWith(
           FavouriteDto value, $Res Function(FavouriteDto) then) =
-      _$FavouriteDtoCopyWithImpl<$Res, FavouriteDto>;
-  @useResult
+      _$FavouriteDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'id', defaultValue: '')
           String id,
@@ -57,46 +56,43 @@ abstract class $FavouriteDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$FavouriteDtoCopyWithImpl<$Res, $Val extends FavouriteDto>
-    implements $FavouriteDtoCopyWith<$Res> {
+class _$FavouriteDtoCopyWithImpl<$Res> implements $FavouriteDtoCopyWith<$Res> {
   _$FavouriteDtoCopyWithImpl(this._value, this._then);
 
+  final FavouriteDto _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(FavouriteDto) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? isTenderContract = null,
-    Object? materialDescription = null,
-    Object? materialNumber = null,
-    Object? isFOC = null,
+    Object? id = freezed,
+    Object? isTenderContract = freezed,
+    Object? materialDescription = freezed,
+    Object? materialNumber = freezed,
+    Object? isFOC = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      isTenderContract: null == isTenderContract
+      isTenderContract: isTenderContract == freezed
           ? _value.isTenderContract
           : isTenderContract // ignore: cast_nullable_to_non_nullable
               as bool,
-      materialDescription: null == materialDescription
+      materialDescription: materialDescription == freezed
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      materialNumber: null == materialNumber
+      materialNumber: materialNumber == freezed
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      isFOC: null == isFOC
+      isFOC: isFOC == freezed
           ? _value.isFOC
           : isFOC // ignore: cast_nullable_to_non_nullable
               as bool,
-    ) as $Val);
+    ));
   }
 }
 
@@ -107,7 +103,6 @@ abstract class _$$_FavouriteDtoCopyWith<$Res>
           _$_FavouriteDto value, $Res Function(_$_FavouriteDto) then) =
       __$$_FavouriteDtoCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {@JsonKey(name: 'id', defaultValue: '')
           String id,
@@ -123,39 +118,41 @@ abstract class _$$_FavouriteDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_FavouriteDtoCopyWithImpl<$Res>
-    extends _$FavouriteDtoCopyWithImpl<$Res, _$_FavouriteDto>
+    extends _$FavouriteDtoCopyWithImpl<$Res>
     implements _$$_FavouriteDtoCopyWith<$Res> {
   __$$_FavouriteDtoCopyWithImpl(
       _$_FavouriteDto _value, $Res Function(_$_FavouriteDto) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_FavouriteDto));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_FavouriteDto get _value => super._value as _$_FavouriteDto;
+
   @override
   $Res call({
-    Object? id = null,
-    Object? isTenderContract = null,
-    Object? materialDescription = null,
-    Object? materialNumber = null,
-    Object? isFOC = null,
+    Object? id = freezed,
+    Object? isTenderContract = freezed,
+    Object? materialDescription = freezed,
+    Object? materialNumber = freezed,
+    Object? isFOC = freezed,
   }) {
     return _then(_$_FavouriteDto(
-      id: null == id
+      id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      isTenderContract: null == isTenderContract
+      isTenderContract: isTenderContract == freezed
           ? _value.isTenderContract
           : isTenderContract // ignore: cast_nullable_to_non_nullable
               as bool,
-      materialDescription: null == materialDescription
+      materialDescription: materialDescription == freezed
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      materialNumber: null == materialNumber
+      materialNumber: materialNumber == freezed
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      isFOC: null == isFOC
+      isFOC: isFOC == freezed
           ? _value.isFOC
           : isFOC // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -208,24 +205,28 @@ class _$_FavouriteDto extends _FavouriteDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_FavouriteDto &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.isTenderContract, isTenderContract) ||
-                other.isTenderContract == isTenderContract) &&
-            (identical(other.materialDescription, materialDescription) ||
-                other.materialDescription == materialDescription) &&
-            (identical(other.materialNumber, materialNumber) ||
-                other.materialNumber == materialNumber) &&
-            (identical(other.isFOC, isFOC) || other.isFOC == isFOC));
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality()
+                .equals(other.isTenderContract, isTenderContract) &&
+            const DeepCollectionEquality()
+                .equals(other.materialDescription, materialDescription) &&
+            const DeepCollectionEquality()
+                .equals(other.materialNumber, materialNumber) &&
+            const DeepCollectionEquality().equals(other.isFOC, isFOC));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, isTenderContract,
-      materialDescription, materialNumber, isFOC);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(isTenderContract),
+      const DeepCollectionEquality().hash(materialDescription),
+      const DeepCollectionEquality().hash(materialNumber),
+      const DeepCollectionEquality().hash(isFOC));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_FavouriteDtoCopyWith<_$_FavouriteDto> get copyWith =>
       __$$_FavouriteDtoCopyWithImpl<_$_FavouriteDto>(this, _$identity);
 

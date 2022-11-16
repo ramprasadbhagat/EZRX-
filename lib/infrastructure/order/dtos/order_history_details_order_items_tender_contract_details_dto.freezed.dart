@@ -43,9 +43,7 @@ abstract class $OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<
           OrderHistoryDetailsOrderItemTenderContractDetailsDto value,
           $Res Function(OrderHistoryDetailsOrderItemTenderContractDetailsDto)
               then) =
-      _$OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWithImpl<$Res,
-          OrderHistoryDetailsOrderItemTenderContractDetailsDto>;
-  @useResult
+      _$OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'TenderContractNumber', defaultValue: '')
           String tenderContractNumber,
@@ -56,39 +54,37 @@ abstract class $OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<
 }
 
 /// @nodoc
-class _$OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWithImpl<$Res,
-        $Val extends OrderHistoryDetailsOrderItemTenderContractDetailsDto>
+class _$OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWithImpl<$Res>
     implements
         $OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<$Res> {
   _$OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWithImpl(
       this._value, this._then);
 
+  final OrderHistoryDetailsOrderItemTenderContractDetailsDto _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(OrderHistoryDetailsOrderItemTenderContractDetailsDto)
+      _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tenderContractNumber = null,
-    Object? tenderContractReference = null,
-    Object? tenderPackageDescription = null,
+    Object? tenderContractNumber = freezed,
+    Object? tenderContractReference = freezed,
+    Object? tenderPackageDescription = freezed,
   }) {
     return _then(_value.copyWith(
-      tenderContractNumber: null == tenderContractNumber
+      tenderContractNumber: tenderContractNumber == freezed
           ? _value.tenderContractNumber
           : tenderContractNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      tenderContractReference: null == tenderContractReference
+      tenderContractReference: tenderContractReference == freezed
           ? _value.tenderContractReference
           : tenderContractReference // ignore: cast_nullable_to_non_nullable
               as String,
-      tenderPackageDescription: null == tenderPackageDescription
+      tenderPackageDescription: tenderPackageDescription == freezed
           ? _value.tenderPackageDescription
           : tenderPackageDescription // ignore: cast_nullable_to_non_nullable
               as String,
-    ) as $Val);
+    ));
   }
 }
 
@@ -104,7 +100,6 @@ abstract class _$$_OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<
       __$$_OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWithImpl<
           $Res>;
   @override
-  @useResult
   $Res call(
       {@JsonKey(name: 'TenderContractNumber', defaultValue: '')
           String tenderContractNumber,
@@ -118,32 +113,38 @@ abstract class _$$_OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<
 class __$$_OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWithImpl<
         $Res>
     extends _$OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWithImpl<
-        $Res, _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto>
+        $Res>
     implements
         _$$_OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<$Res> {
   __$$_OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWithImpl(
       _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto _value,
       $Res Function(_$_OrderHistoryDetailsOrderItemTenderContractDetailsDto)
           _then)
-      : super(_value, _then);
+      : super(
+            _value,
+            (v) => _then(
+                v as _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto get _value =>
+      super._value as _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto;
+
   @override
   $Res call({
-    Object? tenderContractNumber = null,
-    Object? tenderContractReference = null,
-    Object? tenderPackageDescription = null,
+    Object? tenderContractNumber = freezed,
+    Object? tenderContractReference = freezed,
+    Object? tenderPackageDescription = freezed,
   }) {
     return _then(_$_OrderHistoryDetailsOrderItemTenderContractDetailsDto(
-      tenderContractNumber: null == tenderContractNumber
+      tenderContractNumber: tenderContractNumber == freezed
           ? _value.tenderContractNumber
           : tenderContractNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      tenderContractReference: null == tenderContractReference
+      tenderContractReference: tenderContractReference == freezed
           ? _value.tenderContractReference
           : tenderContractReference // ignore: cast_nullable_to_non_nullable
               as String,
-      tenderPackageDescription: null == tenderPackageDescription
+      tenderPackageDescription: tenderPackageDescription == freezed
           ? _value.tenderPackageDescription
           : tenderPackageDescription // ignore: cast_nullable_to_non_nullable
               as String,
@@ -188,24 +189,24 @@ class _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto &&
-            (identical(other.tenderContractNumber, tenderContractNumber) ||
-                other.tenderContractNumber == tenderContractNumber) &&
-            (identical(
-                    other.tenderContractReference, tenderContractReference) ||
-                other.tenderContractReference == tenderContractReference) &&
-            (identical(
-                    other.tenderPackageDescription, tenderPackageDescription) ||
-                other.tenderPackageDescription == tenderPackageDescription));
+            const DeepCollectionEquality()
+                .equals(other.tenderContractNumber, tenderContractNumber) &&
+            const DeepCollectionEquality().equals(
+                other.tenderContractReference, tenderContractReference) &&
+            const DeepCollectionEquality().equals(
+                other.tenderPackageDescription, tenderPackageDescription));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, tenderContractNumber,
-      tenderContractReference, tenderPackageDescription);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(tenderContractNumber),
+      const DeepCollectionEquality().hash(tenderContractReference),
+      const DeepCollectionEquality().hash(tenderPackageDescription));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<
           _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto>
       get copyWith =>

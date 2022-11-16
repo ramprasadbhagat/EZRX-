@@ -36,20 +36,20 @@ mixin _$ApiFailure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? other,
-    TResult? Function(String message)? serverError,
-    TResult? Function()? poorConnection,
-    TResult? Function()? serverTimeout,
-    TResult? Function()? userNotFound,
-    TResult? Function()? invalidEmailAndPasswordCombination,
-    TResult? Function()? accountLocked,
-    TResult? Function()? accountExpired,
-    TResult? Function()? tokenExpired,
-    TResult? Function()? deviceNotSupportBiometirc,
-    TResult? Function()? cannotCheckBiometrics,
-    TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
-    TResult? Function()? priceOverrideNotFound,
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -96,22 +96,22 @@ mixin _$ApiFailure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Other value)? other,
-    TResult? Function(_ServerError value)? serverError,
-    TResult? Function(_PoorConnection value)? poorConnection,
-    TResult? Function(_ServerTimeout value)? serverTimeout,
-    TResult? Function(_UserNotFound value)? userNotFound,
-    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
-    TResult? Function(_AccountLocked value)? accountLocked,
-    TResult? Function(_AccountExpired value)? accountExpired,
-    TResult? Function(_TokenExpired value)? tokenExpired,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
-    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
-    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
-    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -141,42 +141,40 @@ mixin _$ApiFailure {
 abstract class $ApiFailureCopyWith<$Res> {
   factory $ApiFailureCopyWith(
           ApiFailure value, $Res Function(ApiFailure) then) =
-      _$ApiFailureCopyWithImpl<$Res, ApiFailure>;
+      _$ApiFailureCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$ApiFailureCopyWithImpl<$Res, $Val extends ApiFailure>
-    implements $ApiFailureCopyWith<$Res> {
+class _$ApiFailureCopyWithImpl<$Res> implements $ApiFailureCopyWith<$Res> {
   _$ApiFailureCopyWithImpl(this._value, this._then);
 
+  final ApiFailure _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(ApiFailure) _then;
 }
 
 /// @nodoc
 abstract class _$$_OtherCopyWith<$Res> {
   factory _$$_OtherCopyWith(_$_Other value, $Res Function(_$_Other) then) =
       __$$_OtherCopyWithImpl<$Res>;
-  @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$_OtherCopyWithImpl<$Res>
-    extends _$ApiFailureCopyWithImpl<$Res, _$_Other>
+class __$$_OtherCopyWithImpl<$Res> extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_OtherCopyWith<$Res> {
   __$$_OtherCopyWithImpl(_$_Other _value, $Res Function(_$_Other) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Other));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_Other get _value => super._value as _$_Other;
+
   @override
   $Res call({
-    Object? message = null,
+    Object? message = freezed,
   }) {
     return _then(_$_Other(
-      null == message
+      message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
@@ -202,15 +200,15 @@ class _$_Other implements _Other {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Other &&
-            (identical(other.message, message) || other.message == message));
+            const DeepCollectionEquality().equals(other.message, message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_OtherCopyWith<_$_Other> get copyWith =>
       __$$_OtherCopyWithImpl<_$_Other>(this, _$identity);
 
@@ -238,20 +236,20 @@ class _$_Other implements _Other {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? other,
-    TResult? Function(String message)? serverError,
-    TResult? Function()? poorConnection,
-    TResult? Function()? serverTimeout,
-    TResult? Function()? userNotFound,
-    TResult? Function()? invalidEmailAndPasswordCombination,
-    TResult? Function()? accountLocked,
-    TResult? Function()? accountExpired,
-    TResult? Function()? tokenExpired,
-    TResult? Function()? deviceNotSupportBiometirc,
-    TResult? Function()? cannotCheckBiometrics,
-    TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
-    TResult? Function()? priceOverrideNotFound,
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
   }) {
     return other?.call(message);
   }
@@ -310,22 +308,22 @@ class _$_Other implements _Other {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Other value)? other,
-    TResult? Function(_ServerError value)? serverError,
-    TResult? Function(_PoorConnection value)? poorConnection,
-    TResult? Function(_ServerTimeout value)? serverTimeout,
-    TResult? Function(_UserNotFound value)? userNotFound,
-    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
-    TResult? Function(_AccountLocked value)? accountLocked,
-    TResult? Function(_AccountExpired value)? accountExpired,
-    TResult? Function(_TokenExpired value)? tokenExpired,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
-    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
-    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
-    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return other?.call(this);
   }
@@ -372,25 +370,25 @@ abstract class _$$_ServerErrorCopyWith<$Res> {
   factory _$$_ServerErrorCopyWith(
           _$_ServerError value, $Res Function(_$_ServerError) then) =
       __$$_ServerErrorCopyWithImpl<$Res>;
-  @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$_ServerErrorCopyWithImpl<$Res>
-    extends _$ApiFailureCopyWithImpl<$Res, _$_ServerError>
+class __$$_ServerErrorCopyWithImpl<$Res> extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_ServerErrorCopyWith<$Res> {
   __$$_ServerErrorCopyWithImpl(
       _$_ServerError _value, $Res Function(_$_ServerError) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_ServerError));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_ServerError get _value => super._value as _$_ServerError;
+
   @override
   $Res call({
-    Object? message = null,
+    Object? message = freezed,
   }) {
     return _then(_$_ServerError(
-      null == message
+      message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
@@ -416,15 +414,15 @@ class _$_ServerError implements _ServerError {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ServerError &&
-            (identical(other.message, message) || other.message == message));
+            const DeepCollectionEquality().equals(other.message, message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_ServerErrorCopyWith<_$_ServerError> get copyWith =>
       __$$_ServerErrorCopyWithImpl<_$_ServerError>(this, _$identity);
 
@@ -452,20 +450,20 @@ class _$_ServerError implements _ServerError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? other,
-    TResult? Function(String message)? serverError,
-    TResult? Function()? poorConnection,
-    TResult? Function()? serverTimeout,
-    TResult? Function()? userNotFound,
-    TResult? Function()? invalidEmailAndPasswordCombination,
-    TResult? Function()? accountLocked,
-    TResult? Function()? accountExpired,
-    TResult? Function()? tokenExpired,
-    TResult? Function()? deviceNotSupportBiometirc,
-    TResult? Function()? cannotCheckBiometrics,
-    TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
-    TResult? Function()? priceOverrideNotFound,
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
   }) {
     return serverError?.call(message);
   }
@@ -524,22 +522,22 @@ class _$_ServerError implements _ServerError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Other value)? other,
-    TResult? Function(_ServerError value)? serverError,
-    TResult? Function(_PoorConnection value)? poorConnection,
-    TResult? Function(_ServerTimeout value)? serverTimeout,
-    TResult? Function(_UserNotFound value)? userNotFound,
-    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
-    TResult? Function(_AccountLocked value)? accountLocked,
-    TResult? Function(_AccountExpired value)? accountExpired,
-    TResult? Function(_TokenExpired value)? tokenExpired,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
-    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
-    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
-    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return serverError?.call(this);
   }
@@ -590,11 +588,14 @@ abstract class _$$_PoorConnectionCopyWith<$Res> {
 
 /// @nodoc
 class __$$_PoorConnectionCopyWithImpl<$Res>
-    extends _$ApiFailureCopyWithImpl<$Res, _$_PoorConnection>
+    extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_PoorConnectionCopyWith<$Res> {
   __$$_PoorConnectionCopyWithImpl(
       _$_PoorConnection _value, $Res Function(_$_PoorConnection) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_PoorConnection));
+
+  @override
+  _$_PoorConnection get _value => super._value as _$_PoorConnection;
 }
 
 /// @nodoc
@@ -640,20 +641,20 @@ class _$_PoorConnection implements _PoorConnection {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? other,
-    TResult? Function(String message)? serverError,
-    TResult? Function()? poorConnection,
-    TResult? Function()? serverTimeout,
-    TResult? Function()? userNotFound,
-    TResult? Function()? invalidEmailAndPasswordCombination,
-    TResult? Function()? accountLocked,
-    TResult? Function()? accountExpired,
-    TResult? Function()? tokenExpired,
-    TResult? Function()? deviceNotSupportBiometirc,
-    TResult? Function()? cannotCheckBiometrics,
-    TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
-    TResult? Function()? priceOverrideNotFound,
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
   }) {
     return poorConnection?.call();
   }
@@ -712,22 +713,22 @@ class _$_PoorConnection implements _PoorConnection {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Other value)? other,
-    TResult? Function(_ServerError value)? serverError,
-    TResult? Function(_PoorConnection value)? poorConnection,
-    TResult? Function(_ServerTimeout value)? serverTimeout,
-    TResult? Function(_UserNotFound value)? userNotFound,
-    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
-    TResult? Function(_AccountLocked value)? accountLocked,
-    TResult? Function(_AccountExpired value)? accountExpired,
-    TResult? Function(_TokenExpired value)? tokenExpired,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
-    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
-    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
-    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return poorConnection?.call(this);
   }
@@ -773,11 +774,14 @@ abstract class _$$_ServerTimeoutCopyWith<$Res> {
 
 /// @nodoc
 class __$$_ServerTimeoutCopyWithImpl<$Res>
-    extends _$ApiFailureCopyWithImpl<$Res, _$_ServerTimeout>
+    extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_ServerTimeoutCopyWith<$Res> {
   __$$_ServerTimeoutCopyWithImpl(
       _$_ServerTimeout _value, $Res Function(_$_ServerTimeout) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_ServerTimeout));
+
+  @override
+  _$_ServerTimeout get _value => super._value as _$_ServerTimeout;
 }
 
 /// @nodoc
@@ -823,20 +827,20 @@ class _$_ServerTimeout implements _ServerTimeout {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? other,
-    TResult? Function(String message)? serverError,
-    TResult? Function()? poorConnection,
-    TResult? Function()? serverTimeout,
-    TResult? Function()? userNotFound,
-    TResult? Function()? invalidEmailAndPasswordCombination,
-    TResult? Function()? accountLocked,
-    TResult? Function()? accountExpired,
-    TResult? Function()? tokenExpired,
-    TResult? Function()? deviceNotSupportBiometirc,
-    TResult? Function()? cannotCheckBiometrics,
-    TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
-    TResult? Function()? priceOverrideNotFound,
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
   }) {
     return serverTimeout?.call();
   }
@@ -895,22 +899,22 @@ class _$_ServerTimeout implements _ServerTimeout {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Other value)? other,
-    TResult? Function(_ServerError value)? serverError,
-    TResult? Function(_PoorConnection value)? poorConnection,
-    TResult? Function(_ServerTimeout value)? serverTimeout,
-    TResult? Function(_UserNotFound value)? userNotFound,
-    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
-    TResult? Function(_AccountLocked value)? accountLocked,
-    TResult? Function(_AccountExpired value)? accountExpired,
-    TResult? Function(_TokenExpired value)? tokenExpired,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
-    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
-    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
-    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return serverTimeout?.call(this);
   }
@@ -955,12 +959,14 @@ abstract class _$$_UserNotFoundCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UserNotFoundCopyWithImpl<$Res>
-    extends _$ApiFailureCopyWithImpl<$Res, _$_UserNotFound>
+class __$$_UserNotFoundCopyWithImpl<$Res> extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_UserNotFoundCopyWith<$Res> {
   __$$_UserNotFoundCopyWithImpl(
       _$_UserNotFound _value, $Res Function(_$_UserNotFound) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_UserNotFound));
+
+  @override
+  _$_UserNotFound get _value => super._value as _$_UserNotFound;
 }
 
 /// @nodoc
@@ -1006,20 +1012,20 @@ class _$_UserNotFound implements _UserNotFound {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? other,
-    TResult? Function(String message)? serverError,
-    TResult? Function()? poorConnection,
-    TResult? Function()? serverTimeout,
-    TResult? Function()? userNotFound,
-    TResult? Function()? invalidEmailAndPasswordCombination,
-    TResult? Function()? accountLocked,
-    TResult? Function()? accountExpired,
-    TResult? Function()? tokenExpired,
-    TResult? Function()? deviceNotSupportBiometirc,
-    TResult? Function()? cannotCheckBiometrics,
-    TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
-    TResult? Function()? priceOverrideNotFound,
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
   }) {
     return userNotFound?.call();
   }
@@ -1078,22 +1084,22 @@ class _$_UserNotFound implements _UserNotFound {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Other value)? other,
-    TResult? Function(_ServerError value)? serverError,
-    TResult? Function(_PoorConnection value)? poorConnection,
-    TResult? Function(_ServerTimeout value)? serverTimeout,
-    TResult? Function(_UserNotFound value)? userNotFound,
-    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
-    TResult? Function(_AccountLocked value)? accountLocked,
-    TResult? Function(_AccountExpired value)? accountExpired,
-    TResult? Function(_TokenExpired value)? tokenExpired,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
-    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
-    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
-    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return userNotFound?.call(this);
   }
@@ -1140,13 +1146,16 @@ abstract class _$$_InvalidEmailAndPasswordCombinationCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InvalidEmailAndPasswordCombinationCopyWithImpl<$Res>
-    extends _$ApiFailureCopyWithImpl<$Res,
-        _$_InvalidEmailAndPasswordCombination>
+    extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_InvalidEmailAndPasswordCombinationCopyWith<$Res> {
   __$$_InvalidEmailAndPasswordCombinationCopyWithImpl(
       _$_InvalidEmailAndPasswordCombination _value,
       $Res Function(_$_InvalidEmailAndPasswordCombination) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_InvalidEmailAndPasswordCombination));
+
+  @override
+  _$_InvalidEmailAndPasswordCombination get _value =>
+      super._value as _$_InvalidEmailAndPasswordCombination;
 }
 
 /// @nodoc
@@ -1194,20 +1203,20 @@ class _$_InvalidEmailAndPasswordCombination
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? other,
-    TResult? Function(String message)? serverError,
-    TResult? Function()? poorConnection,
-    TResult? Function()? serverTimeout,
-    TResult? Function()? userNotFound,
-    TResult? Function()? invalidEmailAndPasswordCombination,
-    TResult? Function()? accountLocked,
-    TResult? Function()? accountExpired,
-    TResult? Function()? tokenExpired,
-    TResult? Function()? deviceNotSupportBiometirc,
-    TResult? Function()? cannotCheckBiometrics,
-    TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
-    TResult? Function()? priceOverrideNotFound,
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
   }) {
     return invalidEmailAndPasswordCombination?.call();
   }
@@ -1266,22 +1275,22 @@ class _$_InvalidEmailAndPasswordCombination
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Other value)? other,
-    TResult? Function(_ServerError value)? serverError,
-    TResult? Function(_PoorConnection value)? poorConnection,
-    TResult? Function(_ServerTimeout value)? serverTimeout,
-    TResult? Function(_UserNotFound value)? userNotFound,
-    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
-    TResult? Function(_AccountLocked value)? accountLocked,
-    TResult? Function(_AccountExpired value)? accountExpired,
-    TResult? Function(_TokenExpired value)? tokenExpired,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
-    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
-    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
-    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return invalidEmailAndPasswordCombination?.call(this);
   }
@@ -1328,11 +1337,14 @@ abstract class _$$_AccountLockedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_AccountLockedCopyWithImpl<$Res>
-    extends _$ApiFailureCopyWithImpl<$Res, _$_AccountLocked>
+    extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_AccountLockedCopyWith<$Res> {
   __$$_AccountLockedCopyWithImpl(
       _$_AccountLocked _value, $Res Function(_$_AccountLocked) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_AccountLocked));
+
+  @override
+  _$_AccountLocked get _value => super._value as _$_AccountLocked;
 }
 
 /// @nodoc
@@ -1378,20 +1390,20 @@ class _$_AccountLocked implements _AccountLocked {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? other,
-    TResult? Function(String message)? serverError,
-    TResult? Function()? poorConnection,
-    TResult? Function()? serverTimeout,
-    TResult? Function()? userNotFound,
-    TResult? Function()? invalidEmailAndPasswordCombination,
-    TResult? Function()? accountLocked,
-    TResult? Function()? accountExpired,
-    TResult? Function()? tokenExpired,
-    TResult? Function()? deviceNotSupportBiometirc,
-    TResult? Function()? cannotCheckBiometrics,
-    TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
-    TResult? Function()? priceOverrideNotFound,
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
   }) {
     return accountLocked?.call();
   }
@@ -1450,22 +1462,22 @@ class _$_AccountLocked implements _AccountLocked {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Other value)? other,
-    TResult? Function(_ServerError value)? serverError,
-    TResult? Function(_PoorConnection value)? poorConnection,
-    TResult? Function(_ServerTimeout value)? serverTimeout,
-    TResult? Function(_UserNotFound value)? userNotFound,
-    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
-    TResult? Function(_AccountLocked value)? accountLocked,
-    TResult? Function(_AccountExpired value)? accountExpired,
-    TResult? Function(_TokenExpired value)? tokenExpired,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
-    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
-    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
-    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return accountLocked?.call(this);
   }
@@ -1511,11 +1523,14 @@ abstract class _$$_AccountExpiredCopyWith<$Res> {
 
 /// @nodoc
 class __$$_AccountExpiredCopyWithImpl<$Res>
-    extends _$ApiFailureCopyWithImpl<$Res, _$_AccountExpired>
+    extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_AccountExpiredCopyWith<$Res> {
   __$$_AccountExpiredCopyWithImpl(
       _$_AccountExpired _value, $Res Function(_$_AccountExpired) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_AccountExpired));
+
+  @override
+  _$_AccountExpired get _value => super._value as _$_AccountExpired;
 }
 
 /// @nodoc
@@ -1561,20 +1576,20 @@ class _$_AccountExpired implements _AccountExpired {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? other,
-    TResult? Function(String message)? serverError,
-    TResult? Function()? poorConnection,
-    TResult? Function()? serverTimeout,
-    TResult? Function()? userNotFound,
-    TResult? Function()? invalidEmailAndPasswordCombination,
-    TResult? Function()? accountLocked,
-    TResult? Function()? accountExpired,
-    TResult? Function()? tokenExpired,
-    TResult? Function()? deviceNotSupportBiometirc,
-    TResult? Function()? cannotCheckBiometrics,
-    TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
-    TResult? Function()? priceOverrideNotFound,
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
   }) {
     return accountExpired?.call();
   }
@@ -1633,22 +1648,22 @@ class _$_AccountExpired implements _AccountExpired {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Other value)? other,
-    TResult? Function(_ServerError value)? serverError,
-    TResult? Function(_PoorConnection value)? poorConnection,
-    TResult? Function(_ServerTimeout value)? serverTimeout,
-    TResult? Function(_UserNotFound value)? userNotFound,
-    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
-    TResult? Function(_AccountLocked value)? accountLocked,
-    TResult? Function(_AccountExpired value)? accountExpired,
-    TResult? Function(_TokenExpired value)? tokenExpired,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
-    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
-    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
-    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return accountExpired?.call(this);
   }
@@ -1693,12 +1708,14 @@ abstract class _$$_TokenExpiredCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TokenExpiredCopyWithImpl<$Res>
-    extends _$ApiFailureCopyWithImpl<$Res, _$_TokenExpired>
+class __$$_TokenExpiredCopyWithImpl<$Res> extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_TokenExpiredCopyWith<$Res> {
   __$$_TokenExpiredCopyWithImpl(
       _$_TokenExpired _value, $Res Function(_$_TokenExpired) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_TokenExpired));
+
+  @override
+  _$_TokenExpired get _value => super._value as _$_TokenExpired;
 }
 
 /// @nodoc
@@ -1744,20 +1761,20 @@ class _$_TokenExpired implements _TokenExpired {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? other,
-    TResult? Function(String message)? serverError,
-    TResult? Function()? poorConnection,
-    TResult? Function()? serverTimeout,
-    TResult? Function()? userNotFound,
-    TResult? Function()? invalidEmailAndPasswordCombination,
-    TResult? Function()? accountLocked,
-    TResult? Function()? accountExpired,
-    TResult? Function()? tokenExpired,
-    TResult? Function()? deviceNotSupportBiometirc,
-    TResult? Function()? cannotCheckBiometrics,
-    TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
-    TResult? Function()? priceOverrideNotFound,
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
   }) {
     return tokenExpired?.call();
   }
@@ -1816,22 +1833,22 @@ class _$_TokenExpired implements _TokenExpired {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Other value)? other,
-    TResult? Function(_ServerError value)? serverError,
-    TResult? Function(_PoorConnection value)? poorConnection,
-    TResult? Function(_ServerTimeout value)? serverTimeout,
-    TResult? Function(_UserNotFound value)? userNotFound,
-    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
-    TResult? Function(_AccountLocked value)? accountLocked,
-    TResult? Function(_AccountExpired value)? accountExpired,
-    TResult? Function(_TokenExpired value)? tokenExpired,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
-    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
-    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
-    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return tokenExpired?.call(this);
   }
@@ -1878,12 +1895,16 @@ abstract class _$$_DeviceNotSupportBiometircCopyWith<$Res> {
 
 /// @nodoc
 class __$$_DeviceNotSupportBiometircCopyWithImpl<$Res>
-    extends _$ApiFailureCopyWithImpl<$Res, _$_DeviceNotSupportBiometirc>
+    extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_DeviceNotSupportBiometircCopyWith<$Res> {
   __$$_DeviceNotSupportBiometircCopyWithImpl(
       _$_DeviceNotSupportBiometirc _value,
       $Res Function(_$_DeviceNotSupportBiometirc) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_DeviceNotSupportBiometirc));
+
+  @override
+  _$_DeviceNotSupportBiometirc get _value =>
+      super._value as _$_DeviceNotSupportBiometirc;
 }
 
 /// @nodoc
@@ -1930,20 +1951,20 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? other,
-    TResult? Function(String message)? serverError,
-    TResult? Function()? poorConnection,
-    TResult? Function()? serverTimeout,
-    TResult? Function()? userNotFound,
-    TResult? Function()? invalidEmailAndPasswordCombination,
-    TResult? Function()? accountLocked,
-    TResult? Function()? accountExpired,
-    TResult? Function()? tokenExpired,
-    TResult? Function()? deviceNotSupportBiometirc,
-    TResult? Function()? cannotCheckBiometrics,
-    TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
-    TResult? Function()? priceOverrideNotFound,
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
   }) {
     return deviceNotSupportBiometirc?.call();
   }
@@ -2002,22 +2023,22 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Other value)? other,
-    TResult? Function(_ServerError value)? serverError,
-    TResult? Function(_PoorConnection value)? poorConnection,
-    TResult? Function(_ServerTimeout value)? serverTimeout,
-    TResult? Function(_UserNotFound value)? userNotFound,
-    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
-    TResult? Function(_AccountLocked value)? accountLocked,
-    TResult? Function(_AccountExpired value)? accountExpired,
-    TResult? Function(_TokenExpired value)? tokenExpired,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
-    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
-    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
-    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return deviceNotSupportBiometirc?.call(this);
   }
@@ -2063,11 +2084,15 @@ abstract class _$$_CannotCheckBiometricsCopyWith<$Res> {
 
 /// @nodoc
 class __$$_CannotCheckBiometricsCopyWithImpl<$Res>
-    extends _$ApiFailureCopyWithImpl<$Res, _$_CannotCheckBiometrics>
+    extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_CannotCheckBiometricsCopyWith<$Res> {
   __$$_CannotCheckBiometricsCopyWithImpl(_$_CannotCheckBiometrics _value,
       $Res Function(_$_CannotCheckBiometrics) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_CannotCheckBiometrics));
+
+  @override
+  _$_CannotCheckBiometrics get _value =>
+      super._value as _$_CannotCheckBiometrics;
 }
 
 /// @nodoc
@@ -2113,20 +2138,20 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? other,
-    TResult? Function(String message)? serverError,
-    TResult? Function()? poorConnection,
-    TResult? Function()? serverTimeout,
-    TResult? Function()? userNotFound,
-    TResult? Function()? invalidEmailAndPasswordCombination,
-    TResult? Function()? accountLocked,
-    TResult? Function()? accountExpired,
-    TResult? Function()? tokenExpired,
-    TResult? Function()? deviceNotSupportBiometirc,
-    TResult? Function()? cannotCheckBiometrics,
-    TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
-    TResult? Function()? priceOverrideNotFound,
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
   }) {
     return cannotCheckBiometrics?.call();
   }
@@ -2185,22 +2210,22 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Other value)? other,
-    TResult? Function(_ServerError value)? serverError,
-    TResult? Function(_PoorConnection value)? poorConnection,
-    TResult? Function(_ServerTimeout value)? serverTimeout,
-    TResult? Function(_UserNotFound value)? userNotFound,
-    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
-    TResult? Function(_AccountLocked value)? accountLocked,
-    TResult? Function(_AccountExpired value)? accountExpired,
-    TResult? Function(_TokenExpired value)? tokenExpired,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
-    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
-    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
-    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return cannotCheckBiometrics?.call(this);
   }
@@ -2246,11 +2271,15 @@ abstract class _$$_NoSupportedBiometricsCopyWith<$Res> {
 
 /// @nodoc
 class __$$_NoSupportedBiometricsCopyWithImpl<$Res>
-    extends _$ApiFailureCopyWithImpl<$Res, _$_NoSupportedBiometrics>
+    extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_NoSupportedBiometricsCopyWith<$Res> {
   __$$_NoSupportedBiometricsCopyWithImpl(_$_NoSupportedBiometrics _value,
       $Res Function(_$_NoSupportedBiometrics) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_NoSupportedBiometrics));
+
+  @override
+  _$_NoSupportedBiometrics get _value =>
+      super._value as _$_NoSupportedBiometrics;
 }
 
 /// @nodoc
@@ -2296,20 +2325,20 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? other,
-    TResult? Function(String message)? serverError,
-    TResult? Function()? poorConnection,
-    TResult? Function()? serverTimeout,
-    TResult? Function()? userNotFound,
-    TResult? Function()? invalidEmailAndPasswordCombination,
-    TResult? Function()? accountLocked,
-    TResult? Function()? accountExpired,
-    TResult? Function()? tokenExpired,
-    TResult? Function()? deviceNotSupportBiometirc,
-    TResult? Function()? cannotCheckBiometrics,
-    TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
-    TResult? Function()? priceOverrideNotFound,
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
   }) {
     return noSupportedBiometrics?.call();
   }
@@ -2368,22 +2397,22 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Other value)? other,
-    TResult? Function(_ServerError value)? serverError,
-    TResult? Function(_PoorConnection value)? poorConnection,
-    TResult? Function(_ServerTimeout value)? serverTimeout,
-    TResult? Function(_UserNotFound value)? userNotFound,
-    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
-    TResult? Function(_AccountLocked value)? accountLocked,
-    TResult? Function(_AccountExpired value)? accountExpired,
-    TResult? Function(_TokenExpired value)? tokenExpired,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
-    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
-    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
-    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return noSupportedBiometrics?.call(this);
   }
@@ -2429,11 +2458,14 @@ abstract class _$$_InvalidBiometircCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InvalidBiometircCopyWithImpl<$Res>
-    extends _$ApiFailureCopyWithImpl<$Res, _$_InvalidBiometirc>
+    extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_InvalidBiometircCopyWith<$Res> {
   __$$_InvalidBiometircCopyWithImpl(
       _$_InvalidBiometirc _value, $Res Function(_$_InvalidBiometirc) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_InvalidBiometirc));
+
+  @override
+  _$_InvalidBiometirc get _value => super._value as _$_InvalidBiometirc;
 }
 
 /// @nodoc
@@ -2479,20 +2511,20 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? other,
-    TResult? Function(String message)? serverError,
-    TResult? Function()? poorConnection,
-    TResult? Function()? serverTimeout,
-    TResult? Function()? userNotFound,
-    TResult? Function()? invalidEmailAndPasswordCombination,
-    TResult? Function()? accountLocked,
-    TResult? Function()? accountExpired,
-    TResult? Function()? tokenExpired,
-    TResult? Function()? deviceNotSupportBiometirc,
-    TResult? Function()? cannotCheckBiometrics,
-    TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
-    TResult? Function()? priceOverrideNotFound,
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
   }) {
     return invalidBiometirc?.call();
   }
@@ -2551,22 +2583,22 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Other value)? other,
-    TResult? Function(_ServerError value)? serverError,
-    TResult? Function(_PoorConnection value)? poorConnection,
-    TResult? Function(_ServerTimeout value)? serverTimeout,
-    TResult? Function(_UserNotFound value)? userNotFound,
-    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
-    TResult? Function(_AccountLocked value)? accountLocked,
-    TResult? Function(_AccountExpired value)? accountExpired,
-    TResult? Function(_TokenExpired value)? tokenExpired,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
-    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
-    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
-    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return invalidBiometirc?.call(this);
   }
@@ -2612,11 +2644,15 @@ abstract class _$$_PriceOverrideNotFoundCopyWith<$Res> {
 
 /// @nodoc
 class __$$_PriceOverrideNotFoundCopyWithImpl<$Res>
-    extends _$ApiFailureCopyWithImpl<$Res, _$_PriceOverrideNotFound>
+    extends _$ApiFailureCopyWithImpl<$Res>
     implements _$$_PriceOverrideNotFoundCopyWith<$Res> {
   __$$_PriceOverrideNotFoundCopyWithImpl(_$_PriceOverrideNotFound _value,
       $Res Function(_$_PriceOverrideNotFound) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_PriceOverrideNotFound));
+
+  @override
+  _$_PriceOverrideNotFound get _value =>
+      super._value as _$_PriceOverrideNotFound;
 }
 
 /// @nodoc
@@ -2662,20 +2698,20 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? other,
-    TResult? Function(String message)? serverError,
-    TResult? Function()? poorConnection,
-    TResult? Function()? serverTimeout,
-    TResult? Function()? userNotFound,
-    TResult? Function()? invalidEmailAndPasswordCombination,
-    TResult? Function()? accountLocked,
-    TResult? Function()? accountExpired,
-    TResult? Function()? tokenExpired,
-    TResult? Function()? deviceNotSupportBiometirc,
-    TResult? Function()? cannotCheckBiometrics,
-    TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
-    TResult? Function()? priceOverrideNotFound,
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
   }) {
     return priceOverrideNotFound?.call();
   }
@@ -2734,22 +2770,22 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Other value)? other,
-    TResult? Function(_ServerError value)? serverError,
-    TResult? Function(_PoorConnection value)? poorConnection,
-    TResult? Function(_ServerTimeout value)? serverTimeout,
-    TResult? Function(_UserNotFound value)? userNotFound,
-    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
-    TResult? Function(_AccountLocked value)? accountLocked,
-    TResult? Function(_AccountExpired value)? accountExpired,
-    TResult? Function(_TokenExpired value)? tokenExpired,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
-    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
-    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
-    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
   }) {
     return priceOverrideNotFound?.call(this);
   }

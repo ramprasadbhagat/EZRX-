@@ -37,8 +37,7 @@ mixin _$RoleDto {
 /// @nodoc
 abstract class $RoleDtoCopyWith<$Res> {
   factory $RoleDtoCopyWith(RoleDto value, $Res Function(RoleDto) then) =
-      _$RoleDtoCopyWithImpl<$Res, RoleDto>;
-  @useResult
+      _$RoleDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'id') String id,
       @JsonKey(name: 'name', defaultValue: '') String name,
@@ -47,41 +46,38 @@ abstract class $RoleDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$RoleDtoCopyWithImpl<$Res, $Val extends RoleDto>
-    implements $RoleDtoCopyWith<$Res> {
+class _$RoleDtoCopyWithImpl<$Res> implements $RoleDtoCopyWith<$Res> {
   _$RoleDtoCopyWithImpl(this._value, this._then);
 
+  final RoleDto _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(RoleDto) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? type = null,
-    Object? description = null,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? type = freezed,
+    Object? description = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
+      name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
+      type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-    ) as $Val);
+    ));
   }
 }
 
@@ -91,7 +87,6 @@ abstract class _$$_RoleDtoCopyWith<$Res> implements $RoleDtoCopyWith<$Res> {
           _$_RoleDto value, $Res Function(_$_RoleDto) then) =
       __$$_RoleDtoCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {@JsonKey(name: 'id') String id,
       @JsonKey(name: 'name', defaultValue: '') String name,
@@ -100,34 +95,35 @@ abstract class _$$_RoleDtoCopyWith<$Res> implements $RoleDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_RoleDtoCopyWithImpl<$Res>
-    extends _$RoleDtoCopyWithImpl<$Res, _$_RoleDto>
+class __$$_RoleDtoCopyWithImpl<$Res> extends _$RoleDtoCopyWithImpl<$Res>
     implements _$$_RoleDtoCopyWith<$Res> {
   __$$_RoleDtoCopyWithImpl(_$_RoleDto _value, $Res Function(_$_RoleDto) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_RoleDto));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_RoleDto get _value => super._value as _$_RoleDto;
+
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? type = null,
-    Object? description = null,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? type = freezed,
+    Object? description = freezed,
   }) {
     return _then(_$_RoleDto(
-      id: null == id
+      id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
+      name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
+      type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
@@ -175,20 +171,24 @@ class _$_RoleDto extends _RoleDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_RoleDto &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.description, description) ||
-                other.description == description));
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.type, type) &&
+            const DeepCollectionEquality()
+                .equals(other.description, description));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, type, description);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(type),
+      const DeepCollectionEquality().hash(description));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_RoleDtoCopyWith<_$_RoleDto> get copyWith =>
       __$$_RoleDtoCopyWithImpl<_$_RoleDto>(this, _$identity);
 

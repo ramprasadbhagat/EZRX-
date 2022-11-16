@@ -67,6 +67,7 @@ class CartPage extends StatelessWidget {
                     itemBuilder: (context, index, item) => CartItemListTile(
                       cartItem: item,
                       taxCode: taxCode,
+                      showCheckBox: true,
                     ),
                     items: state.cartItemList,
                   ),
@@ -116,6 +117,37 @@ class CartPage extends StatelessWidget {
                               salesOrgConfig,
                               state.grandTotal,
                             ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              BlocBuilder<CartBloc, CartState>(
+                                builder: (context, state) {
+                                  return Radio(
+                                    value: state.selectedItemList.length,
+                                    groupValue: state.cartItemList.length,
+                                    activeColor: ZPColors.primary,
+                                    toggleable: true,
+                                    onChanged: (value) {
+                                      context.read<CartBloc>().add(
+                                            const CartEvent
+                                                .updateSelectAllItems(),
+                                          );
+                                    },
+                                  );
+                                },
+                              ),
+                              Text(
+                                'Select All',
+                                style: TextStyle(
+                                  color: state.selectedItemsMaterialNumber
+                                              .length ==
+                                          state.cartItemList.length
+                                      ? ZPColors.primary
+                                      : ZPColors.black,
+                                ),
+                              ),
+                            ],
                           ),
                           state.cartItemList.isNotEmpty
                               ? ElevatedButton(

@@ -27,37 +27,33 @@ mixin _$PriceTier {
 /// @nodoc
 abstract class $PriceTierCopyWith<$Res> {
   factory $PriceTierCopyWith(PriceTier value, $Res Function(PriceTier) then) =
-      _$PriceTierCopyWithImpl<$Res, PriceTier>;
-  @useResult
+      _$PriceTierCopyWithImpl<$Res>;
   $Res call({String tier, List<PriceTierItem> items});
 }
 
 /// @nodoc
-class _$PriceTierCopyWithImpl<$Res, $Val extends PriceTier>
-    implements $PriceTierCopyWith<$Res> {
+class _$PriceTierCopyWithImpl<$Res> implements $PriceTierCopyWith<$Res> {
   _$PriceTierCopyWithImpl(this._value, this._then);
 
+  final PriceTier _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(PriceTier) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tier = null,
-    Object? items = null,
+    Object? tier = freezed,
+    Object? items = freezed,
   }) {
     return _then(_value.copyWith(
-      tier: null == tier
+      tier: tier == freezed
           ? _value.tier
           : tier // ignore: cast_nullable_to_non_nullable
               as String,
-      items: null == items
+      items: items == freezed
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
               as List<PriceTierItem>,
-    ) as $Val);
+    ));
   }
 }
 
@@ -67,30 +63,30 @@ abstract class _$$_PriceTierCopyWith<$Res> implements $PriceTierCopyWith<$Res> {
           _$_PriceTier value, $Res Function(_$_PriceTier) then) =
       __$$_PriceTierCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call({String tier, List<PriceTierItem> items});
 }
 
 /// @nodoc
-class __$$_PriceTierCopyWithImpl<$Res>
-    extends _$PriceTierCopyWithImpl<$Res, _$_PriceTier>
+class __$$_PriceTierCopyWithImpl<$Res> extends _$PriceTierCopyWithImpl<$Res>
     implements _$$_PriceTierCopyWith<$Res> {
   __$$_PriceTierCopyWithImpl(
       _$_PriceTier _value, $Res Function(_$_PriceTier) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_PriceTier));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_PriceTier get _value => super._value as _$_PriceTier;
+
   @override
   $Res call({
-    Object? tier = null,
-    Object? items = null,
+    Object? tier = freezed,
+    Object? items = freezed,
   }) {
     return _then(_$_PriceTier(
-      tier: null == tier
+      tier: tier == freezed
           ? _value.tier
           : tier // ignore: cast_nullable_to_non_nullable
               as String,
-      items: null == items
+      items: items == freezed
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
               as List<PriceTierItem>,
@@ -125,17 +121,18 @@ class _$_PriceTier extends _PriceTier {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PriceTier &&
-            (identical(other.tier, tier) || other.tier == tier) &&
+            const DeepCollectionEquality().equals(other.tier, tier) &&
             const DeepCollectionEquality().equals(other._items, _items));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, tier, const DeepCollectionEquality().hash(_items));
+      runtimeType,
+      const DeepCollectionEquality().hash(tier),
+      const DeepCollectionEquality().hash(_items));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_PriceTierCopyWith<_$_PriceTier> get copyWith =>
       __$$_PriceTierCopyWithImpl<_$_PriceTier>(this, _$identity);
 }
@@ -173,53 +170,50 @@ mixin _$PriceTierItem {
 abstract class $PriceTierItemCopyWith<$Res> {
   factory $PriceTierItemCopyWith(
           PriceTierItem value, $Res Function(PriceTierItem) then) =
-      _$PriceTierItemCopyWithImpl<$Res, PriceTierItem>;
-  @useResult
+      _$PriceTierItemCopyWithImpl<$Res>;
   $Res call(
       {String type, bool applyBonus, int sequence, int quantity, double rate});
 }
 
 /// @nodoc
-class _$PriceTierItemCopyWithImpl<$Res, $Val extends PriceTierItem>
+class _$PriceTierItemCopyWithImpl<$Res>
     implements $PriceTierItemCopyWith<$Res> {
   _$PriceTierItemCopyWithImpl(this._value, this._then);
 
+  final PriceTierItem _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(PriceTierItem) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = null,
-    Object? applyBonus = null,
-    Object? sequence = null,
-    Object? quantity = null,
-    Object? rate = null,
+    Object? type = freezed,
+    Object? applyBonus = freezed,
+    Object? sequence = freezed,
+    Object? quantity = freezed,
+    Object? rate = freezed,
   }) {
     return _then(_value.copyWith(
-      type: null == type
+      type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      applyBonus: null == applyBonus
+      applyBonus: applyBonus == freezed
           ? _value.applyBonus
           : applyBonus // ignore: cast_nullable_to_non_nullable
               as bool,
-      sequence: null == sequence
+      sequence: sequence == freezed
           ? _value.sequence
           : sequence // ignore: cast_nullable_to_non_nullable
               as int,
-      quantity: null == quantity
+      quantity: quantity == freezed
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      rate: null == rate
+      rate: rate == freezed
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
-    ) as $Val);
+    ));
   }
 }
 
@@ -230,46 +224,47 @@ abstract class _$$_PriceTierItemCopyWith<$Res>
           _$_PriceTierItem value, $Res Function(_$_PriceTierItem) then) =
       __$$_PriceTierItemCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {String type, bool applyBonus, int sequence, int quantity, double rate});
 }
 
 /// @nodoc
 class __$$_PriceTierItemCopyWithImpl<$Res>
-    extends _$PriceTierItemCopyWithImpl<$Res, _$_PriceTierItem>
+    extends _$PriceTierItemCopyWithImpl<$Res>
     implements _$$_PriceTierItemCopyWith<$Res> {
   __$$_PriceTierItemCopyWithImpl(
       _$_PriceTierItem _value, $Res Function(_$_PriceTierItem) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_PriceTierItem));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_PriceTierItem get _value => super._value as _$_PriceTierItem;
+
   @override
   $Res call({
-    Object? type = null,
-    Object? applyBonus = null,
-    Object? sequence = null,
-    Object? quantity = null,
-    Object? rate = null,
+    Object? type = freezed,
+    Object? applyBonus = freezed,
+    Object? sequence = freezed,
+    Object? quantity = freezed,
+    Object? rate = freezed,
   }) {
     return _then(_$_PriceTierItem(
-      type: null == type
+      type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      applyBonus: null == applyBonus
+      applyBonus: applyBonus == freezed
           ? _value.applyBonus
           : applyBonus // ignore: cast_nullable_to_non_nullable
               as bool,
-      sequence: null == sequence
+      sequence: sequence == freezed
           ? _value.sequence
           : sequence // ignore: cast_nullable_to_non_nullable
               as int,
-      quantity: null == quantity
+      quantity: quantity == freezed
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      rate: null == rate
+      rate: rate == freezed
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
@@ -309,23 +304,25 @@ class _$_PriceTierItem extends _PriceTierItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PriceTierItem &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.applyBonus, applyBonus) ||
-                other.applyBonus == applyBonus) &&
-            (identical(other.sequence, sequence) ||
-                other.sequence == sequence) &&
-            (identical(other.quantity, quantity) ||
-                other.quantity == quantity) &&
-            (identical(other.rate, rate) || other.rate == rate));
+            const DeepCollectionEquality().equals(other.type, type) &&
+            const DeepCollectionEquality()
+                .equals(other.applyBonus, applyBonus) &&
+            const DeepCollectionEquality().equals(other.sequence, sequence) &&
+            const DeepCollectionEquality().equals(other.quantity, quantity) &&
+            const DeepCollectionEquality().equals(other.rate, rate));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, type, applyBonus, sequence, quantity, rate);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(type),
+      const DeepCollectionEquality().hash(applyBonus),
+      const DeepCollectionEquality().hash(sequence),
+      const DeepCollectionEquality().hash(quantity),
+      const DeepCollectionEquality().hash(rate));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_PriceTierItemCopyWith<_$_PriceTierItem> get copyWith =>
       __$$_PriceTierItemCopyWithImpl<_$_PriceTierItem>(this, _$identity);
 }

@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -264,6 +265,29 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
+        );
+      },
+      updateSelectedItem: (e) {
+        emit(
+          state.copyWith(
+            selectedItemsMaterialNumber: cartRepository.updateSelectedItem(
+              cartItem: e.item,
+              selectedMaterialList: state.selectedItemsMaterialNumber,
+            ),
+          ),
+        );
+      },
+      updateSelectAllItems: (e) {
+        emit(
+          state.copyWith(
+            selectedItemsMaterialNumber:
+                state.selectedItemsMaterialNumber.length ==
+                        state.cartItemList.length
+                    ? []
+                    : cartRepository.updateSelectAll(
+                        cartItemList: state.cartItemList,
+                      ),
+          ),
         );
       },
     );

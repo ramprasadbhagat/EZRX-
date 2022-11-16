@@ -37,41 +37,36 @@ abstract class $PaymentCustomerInformationDtoCopyWith<$Res> {
   factory $PaymentCustomerInformationDtoCopyWith(
           PaymentCustomerInformationDto value,
           $Res Function(PaymentCustomerInformationDto) then) =
-      _$PaymentCustomerInformationDtoCopyWithImpl<$Res,
-          PaymentCustomerInformationDto>;
-  @useResult
+      _$PaymentCustomerInformationDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'paymentTerm') String paymentTerm,
       @JsonKey(name: 'shipTo') List<ShipToDto> shipToDtoList});
 }
 
 /// @nodoc
-class _$PaymentCustomerInformationDtoCopyWithImpl<$Res,
-        $Val extends PaymentCustomerInformationDto>
+class _$PaymentCustomerInformationDtoCopyWithImpl<$Res>
     implements $PaymentCustomerInformationDtoCopyWith<$Res> {
   _$PaymentCustomerInformationDtoCopyWithImpl(this._value, this._then);
 
+  final PaymentCustomerInformationDto _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(PaymentCustomerInformationDto) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? paymentTerm = null,
-    Object? shipToDtoList = null,
+    Object? paymentTerm = freezed,
+    Object? shipToDtoList = freezed,
   }) {
     return _then(_value.copyWith(
-      paymentTerm: null == paymentTerm
+      paymentTerm: paymentTerm == freezed
           ? _value.paymentTerm
           : paymentTerm // ignore: cast_nullable_to_non_nullable
               as String,
-      shipToDtoList: null == shipToDtoList
+      shipToDtoList: shipToDtoList == freezed
           ? _value.shipToDtoList
           : shipToDtoList // ignore: cast_nullable_to_non_nullable
               as List<ShipToDto>,
-    ) as $Val);
+    ));
   }
 }
 
@@ -83,7 +78,6 @@ abstract class _$$_PaymentCustomerInformationDtoCopyWith<$Res>
           $Res Function(_$_PaymentCustomerInformationDto) then) =
       __$$_PaymentCustomerInformationDtoCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {@JsonKey(name: 'paymentTerm') String paymentTerm,
       @JsonKey(name: 'shipTo') List<ShipToDto> shipToDtoList});
@@ -91,26 +85,28 @@ abstract class _$$_PaymentCustomerInformationDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_PaymentCustomerInformationDtoCopyWithImpl<$Res>
-    extends _$PaymentCustomerInformationDtoCopyWithImpl<$Res,
-        _$_PaymentCustomerInformationDto>
+    extends _$PaymentCustomerInformationDtoCopyWithImpl<$Res>
     implements _$$_PaymentCustomerInformationDtoCopyWith<$Res> {
   __$$_PaymentCustomerInformationDtoCopyWithImpl(
       _$_PaymentCustomerInformationDto _value,
       $Res Function(_$_PaymentCustomerInformationDto) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_PaymentCustomerInformationDto));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_PaymentCustomerInformationDto get _value =>
+      super._value as _$_PaymentCustomerInformationDto;
+
   @override
   $Res call({
-    Object? paymentTerm = null,
-    Object? shipToDtoList = null,
+    Object? paymentTerm = freezed,
+    Object? shipToDtoList = freezed,
   }) {
     return _then(_$_PaymentCustomerInformationDto(
-      paymentTerm: null == paymentTerm
+      paymentTerm: paymentTerm == freezed
           ? _value.paymentTerm
           : paymentTerm // ignore: cast_nullable_to_non_nullable
               as String,
-      shipToDtoList: null == shipToDtoList
+      shipToDtoList: shipToDtoList == freezed
           ? _value._shipToDtoList
           : shipToDtoList // ignore: cast_nullable_to_non_nullable
               as List<ShipToDto>,
@@ -152,20 +148,21 @@ class _$_PaymentCustomerInformationDto extends _PaymentCustomerInformationDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PaymentCustomerInformationDto &&
-            (identical(other.paymentTerm, paymentTerm) ||
-                other.paymentTerm == paymentTerm) &&
+            const DeepCollectionEquality()
+                .equals(other.paymentTerm, paymentTerm) &&
             const DeepCollectionEquality()
                 .equals(other._shipToDtoList, _shipToDtoList));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, paymentTerm,
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(paymentTerm),
       const DeepCollectionEquality().hash(_shipToDtoList));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_PaymentCustomerInformationDtoCopyWith<_$_PaymentCustomerInformationDto>
       get copyWith => __$$_PaymentCustomerInformationDtoCopyWithImpl<
           _$_PaymentCustomerInformationDto>(this, _$identity);

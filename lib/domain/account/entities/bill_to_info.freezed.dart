@@ -54,8 +54,7 @@ mixin _$BillToInfo {
 abstract class $BillToInfoCopyWith<$Res> {
   factory $BillToInfoCopyWith(
           BillToInfo value, $Res Function(BillToInfo) then) =
-      _$BillToInfoCopyWithImpl<$Res, BillToInfo>;
-  @useResult
+      _$BillToInfoCopyWithImpl<$Res>;
   $Res call(
       {bool defaulBillToAddress,
       String billToCustomerCode,
@@ -92,184 +91,178 @@ abstract class $BillToInfoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BillToInfoCopyWithImpl<$Res, $Val extends BillToInfo>
-    implements $BillToInfoCopyWith<$Res> {
+class _$BillToInfoCopyWithImpl<$Res> implements $BillToInfoCopyWith<$Res> {
   _$BillToInfoCopyWithImpl(this._value, this._then);
 
+  final BillToInfo _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(BillToInfo) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? defaulBillToAddress = null,
-    Object? billToCustomerCode = null,
-    Object? billToName = null,
-    Object? billToAddress = null,
-    Object? billToAltName = null,
-    Object? emailAddresses = null,
-    Object? taxNumber = null,
-    Object? status = null,
-    Object? country = null,
-    Object? district = null,
-    Object? building = null,
-    Object? city1 = null,
-    Object? city2 = null,
-    Object? postalCode = null,
-    Object? postalCode2 = null,
-    Object? houseNumber1 = null,
-    Object? houseNumber2 = null,
-    Object? telephoneNumber = null,
-    Object? telephoneExtension = null,
-    Object? faxNumber = null,
-    Object? faxExtension = null,
-    Object? region = null,
-    Object? floor = null,
-    Object? plant = null,
-    Object? roomnumber = null,
-    Object? taxIncludedBySalesOrganization = null,
-    Object? customerClassification = null,
-    Object? customerLocalGroup = null,
+    Object? defaulBillToAddress = freezed,
+    Object? billToCustomerCode = freezed,
+    Object? billToName = freezed,
+    Object? billToAddress = freezed,
+    Object? billToAltName = freezed,
+    Object? emailAddresses = freezed,
+    Object? taxNumber = freezed,
+    Object? status = freezed,
+    Object? country = freezed,
+    Object? district = freezed,
+    Object? building = freezed,
+    Object? city1 = freezed,
+    Object? city2 = freezed,
+    Object? postalCode = freezed,
+    Object? postalCode2 = freezed,
+    Object? houseNumber1 = freezed,
+    Object? houseNumber2 = freezed,
+    Object? telephoneNumber = freezed,
+    Object? telephoneExtension = freezed,
+    Object? faxNumber = freezed,
+    Object? faxExtension = freezed,
+    Object? region = freezed,
+    Object? floor = freezed,
+    Object? plant = freezed,
+    Object? roomnumber = freezed,
+    Object? taxIncludedBySalesOrganization = freezed,
+    Object? customerClassification = freezed,
+    Object? customerLocalGroup = freezed,
   }) {
     return _then(_value.copyWith(
-      defaulBillToAddress: null == defaulBillToAddress
+      defaulBillToAddress: defaulBillToAddress == freezed
           ? _value.defaulBillToAddress
           : defaulBillToAddress // ignore: cast_nullable_to_non_nullable
               as bool,
-      billToCustomerCode: null == billToCustomerCode
+      billToCustomerCode: billToCustomerCode == freezed
           ? _value.billToCustomerCode
           : billToCustomerCode // ignore: cast_nullable_to_non_nullable
               as String,
-      billToName: null == billToName
+      billToName: billToName == freezed
           ? _value.billToName
           : billToName // ignore: cast_nullable_to_non_nullable
               as BillToName,
-      billToAddress: null == billToAddress
+      billToAddress: billToAddress == freezed
           ? _value.billToAddress
           : billToAddress // ignore: cast_nullable_to_non_nullable
               as BillToAddress,
-      billToAltName: null == billToAltName
+      billToAltName: billToAltName == freezed
           ? _value.billToAltName
           : billToAltName // ignore: cast_nullable_to_non_nullable
               as BillToAltName,
-      emailAddresses: null == emailAddresses
+      emailAddresses: emailAddresses == freezed
           ? _value.emailAddresses
           : emailAddresses // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
-      taxNumber: null == taxNumber
+      taxNumber: taxNumber == freezed
           ? _value.taxNumber
           : taxNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      status: null == status
+      status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      country: null == country
+      country: country == freezed
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as String,
-      district: null == district
+      district: district == freezed
           ? _value.district
           : district // ignore: cast_nullable_to_non_nullable
               as String,
-      building: null == building
+      building: building == freezed
           ? _value.building
           : building // ignore: cast_nullable_to_non_nullable
               as String,
-      city1: null == city1
+      city1: city1 == freezed
           ? _value.city1
           : city1 // ignore: cast_nullable_to_non_nullable
               as String,
-      city2: null == city2
+      city2: city2 == freezed
           ? _value.city2
           : city2 // ignore: cast_nullable_to_non_nullable
               as String,
-      postalCode: null == postalCode
+      postalCode: postalCode == freezed
           ? _value.postalCode
           : postalCode // ignore: cast_nullable_to_non_nullable
               as String,
-      postalCode2: null == postalCode2
+      postalCode2: postalCode2 == freezed
           ? _value.postalCode2
           : postalCode2 // ignore: cast_nullable_to_non_nullable
               as String,
-      houseNumber1: null == houseNumber1
+      houseNumber1: houseNumber1 == freezed
           ? _value.houseNumber1
           : houseNumber1 // ignore: cast_nullable_to_non_nullable
               as String,
-      houseNumber2: null == houseNumber2
+      houseNumber2: houseNumber2 == freezed
           ? _value.houseNumber2
           : houseNumber2 // ignore: cast_nullable_to_non_nullable
               as String,
-      telephoneNumber: null == telephoneNumber
+      telephoneNumber: telephoneNumber == freezed
           ? _value.telephoneNumber
           : telephoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      telephoneExtension: null == telephoneExtension
+      telephoneExtension: telephoneExtension == freezed
           ? _value.telephoneExtension
           : telephoneExtension // ignore: cast_nullable_to_non_nullable
               as String,
-      faxNumber: null == faxNumber
+      faxNumber: faxNumber == freezed
           ? _value.faxNumber
           : faxNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      faxExtension: null == faxExtension
+      faxExtension: faxExtension == freezed
           ? _value.faxExtension
           : faxExtension // ignore: cast_nullable_to_non_nullable
               as String,
-      region: null == region
+      region: region == freezed
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
               as String,
-      floor: null == floor
+      floor: floor == freezed
           ? _value.floor
           : floor // ignore: cast_nullable_to_non_nullable
               as String,
-      plant: null == plant
+      plant: plant == freezed
           ? _value.plant
           : plant // ignore: cast_nullable_to_non_nullable
               as String,
-      roomnumber: null == roomnumber
+      roomnumber: roomnumber == freezed
           ? _value.roomnumber
           : roomnumber // ignore: cast_nullable_to_non_nullable
               as String,
-      taxIncludedBySalesOrganization: null == taxIncludedBySalesOrganization
+      taxIncludedBySalesOrganization: taxIncludedBySalesOrganization == freezed
           ? _value.taxIncludedBySalesOrganization
           : taxIncludedBySalesOrganization // ignore: cast_nullable_to_non_nullable
               as bool,
-      customerClassification: null == customerClassification
+      customerClassification: customerClassification == freezed
           ? _value.customerClassification
           : customerClassification // ignore: cast_nullable_to_non_nullable
               as String,
-      customerLocalGroup: null == customerLocalGroup
+      customerLocalGroup: customerLocalGroup == freezed
           ? _value.customerLocalGroup
           : customerLocalGroup // ignore: cast_nullable_to_non_nullable
               as String,
-    ) as $Val);
+    ));
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $BillToNameCopyWith<$Res> get billToName {
     return $BillToNameCopyWith<$Res>(_value.billToName, (value) {
-      return _then(_value.copyWith(billToName: value) as $Val);
+      return _then(_value.copyWith(billToName: value));
     });
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $BillToAddressCopyWith<$Res> get billToAddress {
     return $BillToAddressCopyWith<$Res>(_value.billToAddress, (value) {
-      return _then(_value.copyWith(billToAddress: value) as $Val);
+      return _then(_value.copyWith(billToAddress: value));
     });
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $BillToAltNameCopyWith<$Res> get billToAltName {
     return $BillToAltNameCopyWith<$Res>(_value.billToAltName, (value) {
-      return _then(_value.copyWith(billToAltName: value) as $Val);
+      return _then(_value.copyWith(billToAltName: value));
     });
   }
 }
@@ -281,7 +274,6 @@ abstract class _$$_BillToInfoCopyWith<$Res>
           _$_BillToInfo value, $Res Function(_$_BillToInfo) then) =
       __$$_BillToInfoCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {bool defaulBillToAddress,
       String billToCustomerCode,
@@ -321,155 +313,156 @@ abstract class _$$_BillToInfoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BillToInfoCopyWithImpl<$Res>
-    extends _$BillToInfoCopyWithImpl<$Res, _$_BillToInfo>
+class __$$_BillToInfoCopyWithImpl<$Res> extends _$BillToInfoCopyWithImpl<$Res>
     implements _$$_BillToInfoCopyWith<$Res> {
   __$$_BillToInfoCopyWithImpl(
       _$_BillToInfo _value, $Res Function(_$_BillToInfo) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_BillToInfo));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_BillToInfo get _value => super._value as _$_BillToInfo;
+
   @override
   $Res call({
-    Object? defaulBillToAddress = null,
-    Object? billToCustomerCode = null,
-    Object? billToName = null,
-    Object? billToAddress = null,
-    Object? billToAltName = null,
-    Object? emailAddresses = null,
-    Object? taxNumber = null,
-    Object? status = null,
-    Object? country = null,
-    Object? district = null,
-    Object? building = null,
-    Object? city1 = null,
-    Object? city2 = null,
-    Object? postalCode = null,
-    Object? postalCode2 = null,
-    Object? houseNumber1 = null,
-    Object? houseNumber2 = null,
-    Object? telephoneNumber = null,
-    Object? telephoneExtension = null,
-    Object? faxNumber = null,
-    Object? faxExtension = null,
-    Object? region = null,
-    Object? floor = null,
-    Object? plant = null,
-    Object? roomnumber = null,
-    Object? taxIncludedBySalesOrganization = null,
-    Object? customerClassification = null,
-    Object? customerLocalGroup = null,
+    Object? defaulBillToAddress = freezed,
+    Object? billToCustomerCode = freezed,
+    Object? billToName = freezed,
+    Object? billToAddress = freezed,
+    Object? billToAltName = freezed,
+    Object? emailAddresses = freezed,
+    Object? taxNumber = freezed,
+    Object? status = freezed,
+    Object? country = freezed,
+    Object? district = freezed,
+    Object? building = freezed,
+    Object? city1 = freezed,
+    Object? city2 = freezed,
+    Object? postalCode = freezed,
+    Object? postalCode2 = freezed,
+    Object? houseNumber1 = freezed,
+    Object? houseNumber2 = freezed,
+    Object? telephoneNumber = freezed,
+    Object? telephoneExtension = freezed,
+    Object? faxNumber = freezed,
+    Object? faxExtension = freezed,
+    Object? region = freezed,
+    Object? floor = freezed,
+    Object? plant = freezed,
+    Object? roomnumber = freezed,
+    Object? taxIncludedBySalesOrganization = freezed,
+    Object? customerClassification = freezed,
+    Object? customerLocalGroup = freezed,
   }) {
     return _then(_$_BillToInfo(
-      defaulBillToAddress: null == defaulBillToAddress
+      defaulBillToAddress: defaulBillToAddress == freezed
           ? _value.defaulBillToAddress
           : defaulBillToAddress // ignore: cast_nullable_to_non_nullable
               as bool,
-      billToCustomerCode: null == billToCustomerCode
+      billToCustomerCode: billToCustomerCode == freezed
           ? _value.billToCustomerCode
           : billToCustomerCode // ignore: cast_nullable_to_non_nullable
               as String,
-      billToName: null == billToName
+      billToName: billToName == freezed
           ? _value.billToName
           : billToName // ignore: cast_nullable_to_non_nullable
               as BillToName,
-      billToAddress: null == billToAddress
+      billToAddress: billToAddress == freezed
           ? _value.billToAddress
           : billToAddress // ignore: cast_nullable_to_non_nullable
               as BillToAddress,
-      billToAltName: null == billToAltName
+      billToAltName: billToAltName == freezed
           ? _value.billToAltName
           : billToAltName // ignore: cast_nullable_to_non_nullable
               as BillToAltName,
-      emailAddresses: null == emailAddresses
+      emailAddresses: emailAddresses == freezed
           ? _value._emailAddresses
           : emailAddresses // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
-      taxNumber: null == taxNumber
+      taxNumber: taxNumber == freezed
           ? _value.taxNumber
           : taxNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      status: null == status
+      status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      country: null == country
+      country: country == freezed
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as String,
-      district: null == district
+      district: district == freezed
           ? _value.district
           : district // ignore: cast_nullable_to_non_nullable
               as String,
-      building: null == building
+      building: building == freezed
           ? _value.building
           : building // ignore: cast_nullable_to_non_nullable
               as String,
-      city1: null == city1
+      city1: city1 == freezed
           ? _value.city1
           : city1 // ignore: cast_nullable_to_non_nullable
               as String,
-      city2: null == city2
+      city2: city2 == freezed
           ? _value.city2
           : city2 // ignore: cast_nullable_to_non_nullable
               as String,
-      postalCode: null == postalCode
+      postalCode: postalCode == freezed
           ? _value.postalCode
           : postalCode // ignore: cast_nullable_to_non_nullable
               as String,
-      postalCode2: null == postalCode2
+      postalCode2: postalCode2 == freezed
           ? _value.postalCode2
           : postalCode2 // ignore: cast_nullable_to_non_nullable
               as String,
-      houseNumber1: null == houseNumber1
+      houseNumber1: houseNumber1 == freezed
           ? _value.houseNumber1
           : houseNumber1 // ignore: cast_nullable_to_non_nullable
               as String,
-      houseNumber2: null == houseNumber2
+      houseNumber2: houseNumber2 == freezed
           ? _value.houseNumber2
           : houseNumber2 // ignore: cast_nullable_to_non_nullable
               as String,
-      telephoneNumber: null == telephoneNumber
+      telephoneNumber: telephoneNumber == freezed
           ? _value.telephoneNumber
           : telephoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      telephoneExtension: null == telephoneExtension
+      telephoneExtension: telephoneExtension == freezed
           ? _value.telephoneExtension
           : telephoneExtension // ignore: cast_nullable_to_non_nullable
               as String,
-      faxNumber: null == faxNumber
+      faxNumber: faxNumber == freezed
           ? _value.faxNumber
           : faxNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      faxExtension: null == faxExtension
+      faxExtension: faxExtension == freezed
           ? _value.faxExtension
           : faxExtension // ignore: cast_nullable_to_non_nullable
               as String,
-      region: null == region
+      region: region == freezed
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
               as String,
-      floor: null == floor
+      floor: floor == freezed
           ? _value.floor
           : floor // ignore: cast_nullable_to_non_nullable
               as String,
-      plant: null == plant
+      plant: plant == freezed
           ? _value.plant
           : plant // ignore: cast_nullable_to_non_nullable
               as String,
-      roomnumber: null == roomnumber
+      roomnumber: roomnumber == freezed
           ? _value.roomnumber
           : roomnumber // ignore: cast_nullable_to_non_nullable
               as String,
-      taxIncludedBySalesOrganization: null == taxIncludedBySalesOrganization
+      taxIncludedBySalesOrganization: taxIncludedBySalesOrganization == freezed
           ? _value.taxIncludedBySalesOrganization
           : taxIncludedBySalesOrganization // ignore: cast_nullable_to_non_nullable
               as bool,
-      customerClassification: null == customerClassification
+      customerClassification: customerClassification == freezed
           ? _value.customerClassification
           : customerClassification // ignore: cast_nullable_to_non_nullable
               as String,
-      customerLocalGroup: null == customerLocalGroup
+      customerLocalGroup: customerLocalGroup == freezed
           ? _value.customerLocalGroup
           : customerLocalGroup // ignore: cast_nullable_to_non_nullable
               as String,
@@ -584,95 +577,89 @@ class _$_BillToInfo extends _BillToInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BillToInfo &&
-            (identical(other.defaulBillToAddress, defaulBillToAddress) ||
-                other.defaulBillToAddress == defaulBillToAddress) &&
-            (identical(other.billToCustomerCode, billToCustomerCode) ||
-                other.billToCustomerCode == billToCustomerCode) &&
-            (identical(other.billToName, billToName) ||
-                other.billToName == billToName) &&
-            (identical(other.billToAddress, billToAddress) ||
-                other.billToAddress == billToAddress) &&
-            (identical(other.billToAltName, billToAltName) ||
-                other.billToAltName == billToAltName) &&
+            const DeepCollectionEquality()
+                .equals(other.defaulBillToAddress, defaulBillToAddress) &&
+            const DeepCollectionEquality()
+                .equals(other.billToCustomerCode, billToCustomerCode) &&
+            const DeepCollectionEquality()
+                .equals(other.billToName, billToName) &&
+            const DeepCollectionEquality()
+                .equals(other.billToAddress, billToAddress) &&
+            const DeepCollectionEquality()
+                .equals(other.billToAltName, billToAltName) &&
             const DeepCollectionEquality()
                 .equals(other._emailAddresses, _emailAddresses) &&
-            (identical(other.taxNumber, taxNumber) ||
-                other.taxNumber == taxNumber) &&
-            (identical(other.status, status) || other.status == status) &&
-            (identical(other.country, country) || other.country == country) &&
-            (identical(other.district, district) ||
-                other.district == district) &&
-            (identical(other.building, building) ||
-                other.building == building) &&
-            (identical(other.city1, city1) || other.city1 == city1) &&
-            (identical(other.city2, city2) || other.city2 == city2) &&
-            (identical(other.postalCode, postalCode) ||
-                other.postalCode == postalCode) &&
-            (identical(other.postalCode2, postalCode2) ||
-                other.postalCode2 == postalCode2) &&
-            (identical(other.houseNumber1, houseNumber1) ||
-                other.houseNumber1 == houseNumber1) &&
-            (identical(other.houseNumber2, houseNumber2) ||
-                other.houseNumber2 == houseNumber2) &&
-            (identical(other.telephoneNumber, telephoneNumber) ||
-                other.telephoneNumber == telephoneNumber) &&
-            (identical(other.telephoneExtension, telephoneExtension) ||
-                other.telephoneExtension == telephoneExtension) &&
-            (identical(other.faxNumber, faxNumber) ||
-                other.faxNumber == faxNumber) &&
-            (identical(other.faxExtension, faxExtension) ||
-                other.faxExtension == faxExtension) &&
-            (identical(other.region, region) || other.region == region) &&
-            (identical(other.floor, floor) || other.floor == floor) &&
-            (identical(other.plant, plant) || other.plant == plant) &&
-            (identical(other.roomnumber, roomnumber) ||
-                other.roomnumber == roomnumber) &&
-            (identical(other.taxIncludedBySalesOrganization,
-                    taxIncludedBySalesOrganization) ||
-                other.taxIncludedBySalesOrganization ==
-                    taxIncludedBySalesOrganization) &&
-            (identical(other.customerClassification, customerClassification) ||
-                other.customerClassification == customerClassification) &&
-            (identical(other.customerLocalGroup, customerLocalGroup) ||
-                other.customerLocalGroup == customerLocalGroup));
+            const DeepCollectionEquality().equals(other.taxNumber, taxNumber) &&
+            const DeepCollectionEquality().equals(other.status, status) &&
+            const DeepCollectionEquality().equals(other.country, country) &&
+            const DeepCollectionEquality().equals(other.district, district) &&
+            const DeepCollectionEquality().equals(other.building, building) &&
+            const DeepCollectionEquality().equals(other.city1, city1) &&
+            const DeepCollectionEquality().equals(other.city2, city2) &&
+            const DeepCollectionEquality()
+                .equals(other.postalCode, postalCode) &&
+            const DeepCollectionEquality()
+                .equals(other.postalCode2, postalCode2) &&
+            const DeepCollectionEquality()
+                .equals(other.houseNumber1, houseNumber1) &&
+            const DeepCollectionEquality()
+                .equals(other.houseNumber2, houseNumber2) &&
+            const DeepCollectionEquality()
+                .equals(other.telephoneNumber, telephoneNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.telephoneExtension, telephoneExtension) &&
+            const DeepCollectionEquality().equals(other.faxNumber, faxNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.faxExtension, faxExtension) &&
+            const DeepCollectionEquality().equals(other.region, region) &&
+            const DeepCollectionEquality().equals(other.floor, floor) &&
+            const DeepCollectionEquality().equals(other.plant, plant) &&
+            const DeepCollectionEquality()
+                .equals(other.roomnumber, roomnumber) &&
+            const DeepCollectionEquality().equals(
+                other.taxIncludedBySalesOrganization,
+                taxIncludedBySalesOrganization) &&
+            const DeepCollectionEquality()
+                .equals(other.customerClassification, customerClassification) &&
+            const DeepCollectionEquality()
+                .equals(other.customerLocalGroup, customerLocalGroup));
   }
 
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        defaulBillToAddress,
-        billToCustomerCode,
-        billToName,
-        billToAddress,
-        billToAltName,
+        const DeepCollectionEquality().hash(defaulBillToAddress),
+        const DeepCollectionEquality().hash(billToCustomerCode),
+        const DeepCollectionEquality().hash(billToName),
+        const DeepCollectionEquality().hash(billToAddress),
+        const DeepCollectionEquality().hash(billToAltName),
         const DeepCollectionEquality().hash(_emailAddresses),
-        taxNumber,
-        status,
-        country,
-        district,
-        building,
-        city1,
-        city2,
-        postalCode,
-        postalCode2,
-        houseNumber1,
-        houseNumber2,
-        telephoneNumber,
-        telephoneExtension,
-        faxNumber,
-        faxExtension,
-        region,
-        floor,
-        plant,
-        roomnumber,
-        taxIncludedBySalesOrganization,
-        customerClassification,
-        customerLocalGroup
+        const DeepCollectionEquality().hash(taxNumber),
+        const DeepCollectionEquality().hash(status),
+        const DeepCollectionEquality().hash(country),
+        const DeepCollectionEquality().hash(district),
+        const DeepCollectionEquality().hash(building),
+        const DeepCollectionEquality().hash(city1),
+        const DeepCollectionEquality().hash(city2),
+        const DeepCollectionEquality().hash(postalCode),
+        const DeepCollectionEquality().hash(postalCode2),
+        const DeepCollectionEquality().hash(houseNumber1),
+        const DeepCollectionEquality().hash(houseNumber2),
+        const DeepCollectionEquality().hash(telephoneNumber),
+        const DeepCollectionEquality().hash(telephoneExtension),
+        const DeepCollectionEquality().hash(faxNumber),
+        const DeepCollectionEquality().hash(faxExtension),
+        const DeepCollectionEquality().hash(region),
+        const DeepCollectionEquality().hash(floor),
+        const DeepCollectionEquality().hash(plant),
+        const DeepCollectionEquality().hash(roomnumber),
+        const DeepCollectionEquality().hash(taxIncludedBySalesOrganization),
+        const DeepCollectionEquality().hash(customerClassification),
+        const DeepCollectionEquality().hash(customerLocalGroup)
       ]);
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_BillToInfoCopyWith<_$_BillToInfo> get copyWith =>
       __$$_BillToInfoCopyWithImpl<_$_BillToInfo>(this, _$identity);
 }

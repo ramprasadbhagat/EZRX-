@@ -31,32 +31,28 @@ mixin _$TncDateDto {
 abstract class $TncDateDtoCopyWith<$Res> {
   factory $TncDateDtoCopyWith(
           TncDateDto value, $Res Function(TncDateDto) then) =
-      _$TncDateDtoCopyWithImpl<$Res, TncDateDto>;
-  @useResult
+      _$TncDateDtoCopyWithImpl<$Res>;
   $Res call({String date});
 }
 
 /// @nodoc
-class _$TncDateDtoCopyWithImpl<$Res, $Val extends TncDateDto>
-    implements $TncDateDtoCopyWith<$Res> {
+class _$TncDateDtoCopyWithImpl<$Res> implements $TncDateDtoCopyWith<$Res> {
   _$TncDateDtoCopyWithImpl(this._value, this._then);
 
+  final TncDateDto _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(TncDateDto) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? date = null,
+    Object? date = freezed,
   }) {
     return _then(_value.copyWith(
-      date: null == date
+      date: date == freezed
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as String,
-    ) as $Val);
+    ));
   }
 }
 
@@ -67,25 +63,25 @@ abstract class _$$_TncDateDtoCopyWith<$Res>
           _$_TncDateDto value, $Res Function(_$_TncDateDto) then) =
       __$$_TncDateDtoCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call({String date});
 }
 
 /// @nodoc
-class __$$_TncDateDtoCopyWithImpl<$Res>
-    extends _$TncDateDtoCopyWithImpl<$Res, _$_TncDateDto>
+class __$$_TncDateDtoCopyWithImpl<$Res> extends _$TncDateDtoCopyWithImpl<$Res>
     implements _$$_TncDateDtoCopyWith<$Res> {
   __$$_TncDateDtoCopyWithImpl(
       _$_TncDateDto _value, $Res Function(_$_TncDateDto) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_TncDateDto));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_TncDateDto get _value => super._value as _$_TncDateDto;
+
   @override
   $Res call({
-    Object? date = null,
+    Object? date = freezed,
   }) {
     return _then(_$_TncDateDto(
-      date: null == date
+      date: date == freezed
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as String,
@@ -114,16 +110,16 @@ class _$_TncDateDto extends _TncDateDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TncDateDto &&
-            (identical(other.date, date) || other.date == date));
+            const DeepCollectionEquality().equals(other.date, date));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, date);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(date));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_TncDateDtoCopyWith<_$_TncDateDto> get copyWith =>
       __$$_TncDateDtoCopyWithImpl<_$_TncDateDto>(this, _$identity);
 }

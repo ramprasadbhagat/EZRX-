@@ -72,8 +72,8 @@ class MaterialDto with _$MaterialDto {
     @HiveField(18, defaultValue: '')
         required String defaultMaterialDescription,
     @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-    @HiveField(19)
-        required bool isFOCMaterial,    
+    @HiveField(19, defaultValue: false)
+        required bool isFOCMaterial,
   }) = _MaterialDto;
 
   factory MaterialDto.fromDomain(MaterialInfo materialInfo) {

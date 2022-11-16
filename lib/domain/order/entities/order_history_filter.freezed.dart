@@ -32,8 +32,7 @@ mixin _$OrderHistoryFilter {
 abstract class $OrderHistoryFilterCopyWith<$Res> {
   factory $OrderHistoryFilterCopyWith(
           OrderHistoryFilter value, $Res Function(OrderHistoryFilter) then) =
-      _$OrderHistoryFilterCopyWithImpl<$Res, OrderHistoryFilter>;
-  @useResult
+      _$OrderHistoryFilterCopyWithImpl<$Res>;
   $Res call(
       {SearchKey orderId,
       SearchKey poNumber,
@@ -44,51 +43,49 @@ abstract class $OrderHistoryFilterCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OrderHistoryFilterCopyWithImpl<$Res, $Val extends OrderHistoryFilter>
+class _$OrderHistoryFilterCopyWithImpl<$Res>
     implements $OrderHistoryFilterCopyWith<$Res> {
   _$OrderHistoryFilterCopyWithImpl(this._value, this._then);
 
+  final OrderHistoryFilter _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(OrderHistoryFilter) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderId = null,
-    Object? poNumber = null,
-    Object? materialSearch = null,
-    Object? principalSearch = null,
-    Object? toDate = null,
-    Object? fromDate = null,
+    Object? orderId = freezed,
+    Object? poNumber = freezed,
+    Object? materialSearch = freezed,
+    Object? principalSearch = freezed,
+    Object? toDate = freezed,
+    Object? fromDate = freezed,
   }) {
     return _then(_value.copyWith(
-      orderId: null == orderId
+      orderId: orderId == freezed
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
               as SearchKey,
-      poNumber: null == poNumber
+      poNumber: poNumber == freezed
           ? _value.poNumber
           : poNumber // ignore: cast_nullable_to_non_nullable
               as SearchKey,
-      materialSearch: null == materialSearch
+      materialSearch: materialSearch == freezed
           ? _value.materialSearch
           : materialSearch // ignore: cast_nullable_to_non_nullable
               as SearchKey,
-      principalSearch: null == principalSearch
+      principalSearch: principalSearch == freezed
           ? _value.principalSearch
           : principalSearch // ignore: cast_nullable_to_non_nullable
               as SearchKey,
-      toDate: null == toDate
+      toDate: toDate == freezed
           ? _value.toDate
           : toDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      fromDate: null == fromDate
+      fromDate: fromDate == freezed
           ? _value.fromDate
           : fromDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-    ) as $Val);
+    ));
   }
 }
 
@@ -99,7 +96,6 @@ abstract class _$$_OrderHistoryFilterCopyWith<$Res>
           $Res Function(_$_OrderHistoryFilter) then) =
       __$$_OrderHistoryFilterCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {SearchKey orderId,
       SearchKey poNumber,
@@ -111,44 +107,46 @@ abstract class _$$_OrderHistoryFilterCopyWith<$Res>
 
 /// @nodoc
 class __$$_OrderHistoryFilterCopyWithImpl<$Res>
-    extends _$OrderHistoryFilterCopyWithImpl<$Res, _$_OrderHistoryFilter>
+    extends _$OrderHistoryFilterCopyWithImpl<$Res>
     implements _$$_OrderHistoryFilterCopyWith<$Res> {
   __$$_OrderHistoryFilterCopyWithImpl(
       _$_OrderHistoryFilter _value, $Res Function(_$_OrderHistoryFilter) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_OrderHistoryFilter));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_OrderHistoryFilter get _value => super._value as _$_OrderHistoryFilter;
+
   @override
   $Res call({
-    Object? orderId = null,
-    Object? poNumber = null,
-    Object? materialSearch = null,
-    Object? principalSearch = null,
-    Object? toDate = null,
-    Object? fromDate = null,
+    Object? orderId = freezed,
+    Object? poNumber = freezed,
+    Object? materialSearch = freezed,
+    Object? principalSearch = freezed,
+    Object? toDate = freezed,
+    Object? fromDate = freezed,
   }) {
     return _then(_$_OrderHistoryFilter(
-      orderId: null == orderId
+      orderId: orderId == freezed
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
               as SearchKey,
-      poNumber: null == poNumber
+      poNumber: poNumber == freezed
           ? _value.poNumber
           : poNumber // ignore: cast_nullable_to_non_nullable
               as SearchKey,
-      materialSearch: null == materialSearch
+      materialSearch: materialSearch == freezed
           ? _value.materialSearch
           : materialSearch // ignore: cast_nullable_to_non_nullable
               as SearchKey,
-      principalSearch: null == principalSearch
+      principalSearch: principalSearch == freezed
           ? _value.principalSearch
           : principalSearch // ignore: cast_nullable_to_non_nullable
               as SearchKey,
-      toDate: null == toDate
+      toDate: toDate == freezed
           ? _value.toDate
           : toDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      fromDate: null == fromDate
+      fromDate: fromDate == freezed
           ? _value.fromDate
           : fromDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -191,25 +189,28 @@ class _$_OrderHistoryFilter extends _OrderHistoryFilter {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryFilter &&
-            (identical(other.orderId, orderId) || other.orderId == orderId) &&
-            (identical(other.poNumber, poNumber) ||
-                other.poNumber == poNumber) &&
-            (identical(other.materialSearch, materialSearch) ||
-                other.materialSearch == materialSearch) &&
-            (identical(other.principalSearch, principalSearch) ||
-                other.principalSearch == principalSearch) &&
-            (identical(other.toDate, toDate) || other.toDate == toDate) &&
-            (identical(other.fromDate, fromDate) ||
-                other.fromDate == fromDate));
+            const DeepCollectionEquality().equals(other.orderId, orderId) &&
+            const DeepCollectionEquality().equals(other.poNumber, poNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.materialSearch, materialSearch) &&
+            const DeepCollectionEquality()
+                .equals(other.principalSearch, principalSearch) &&
+            const DeepCollectionEquality().equals(other.toDate, toDate) &&
+            const DeepCollectionEquality().equals(other.fromDate, fromDate));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, orderId, poNumber,
-      materialSearch, principalSearch, toDate, fromDate);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(orderId),
+      const DeepCollectionEquality().hash(poNumber),
+      const DeepCollectionEquality().hash(materialSearch),
+      const DeepCollectionEquality().hash(principalSearch),
+      const DeepCollectionEquality().hash(toDate),
+      const DeepCollectionEquality().hash(fromDate));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_OrderHistoryFilterCopyWith<_$_OrderHistoryFilter> get copyWith =>
       __$$_OrderHistoryFilterCopyWithImpl<_$_OrderHistoryFilter>(
           this, _$identity);

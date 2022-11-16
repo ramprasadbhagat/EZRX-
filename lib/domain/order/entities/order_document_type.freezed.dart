@@ -31,8 +31,7 @@ mixin _$OrderDocumentType {
 abstract class $OrderDocumentTypeCopyWith<$Res> {
   factory $OrderDocumentTypeCopyWith(
           OrderDocumentType value, $Res Function(OrderDocumentType) then) =
-      _$OrderDocumentTypeCopyWithImpl<$Res, OrderDocumentType>;
-  @useResult
+      _$OrderDocumentTypeCopyWithImpl<$Res>;
   $Res call(
       {SalesOrg salesOrg,
       String documentType,
@@ -42,46 +41,44 @@ abstract class $OrderDocumentTypeCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OrderDocumentTypeCopyWithImpl<$Res, $Val extends OrderDocumentType>
+class _$OrderDocumentTypeCopyWithImpl<$Res>
     implements $OrderDocumentTypeCopyWith<$Res> {
   _$OrderDocumentTypeCopyWithImpl(this._value, this._then);
 
+  final OrderDocumentType _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(OrderDocumentType) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? salesOrg = null,
-    Object? documentType = null,
-    Object? description = null,
-    Object? shippingCondition = null,
-    Object? orderReason = null,
+    Object? salesOrg = freezed,
+    Object? documentType = freezed,
+    Object? description = freezed,
+    Object? shippingCondition = freezed,
+    Object? orderReason = freezed,
   }) {
     return _then(_value.copyWith(
-      salesOrg: null == salesOrg
+      salesOrg: salesOrg == freezed
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as SalesOrg,
-      documentType: null == documentType
+      documentType: documentType == freezed
           ? _value.documentType
           : documentType // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      shippingCondition: null == shippingCondition
+      shippingCondition: shippingCondition == freezed
           ? _value.shippingCondition
           : shippingCondition // ignore: cast_nullable_to_non_nullable
               as String,
-      orderReason: null == orderReason
+      orderReason: orderReason == freezed
           ? _value.orderReason
           : orderReason // ignore: cast_nullable_to_non_nullable
               as String,
-    ) as $Val);
+    ));
   }
 }
 
@@ -92,7 +89,6 @@ abstract class _$$_OrderDocumentTypeCopyWith<$Res>
           $Res Function(_$_OrderDocumentType) then) =
       __$$_OrderDocumentTypeCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {SalesOrg salesOrg,
       String documentType,
@@ -103,39 +99,41 @@ abstract class _$$_OrderDocumentTypeCopyWith<$Res>
 
 /// @nodoc
 class __$$_OrderDocumentTypeCopyWithImpl<$Res>
-    extends _$OrderDocumentTypeCopyWithImpl<$Res, _$_OrderDocumentType>
+    extends _$OrderDocumentTypeCopyWithImpl<$Res>
     implements _$$_OrderDocumentTypeCopyWith<$Res> {
   __$$_OrderDocumentTypeCopyWithImpl(
       _$_OrderDocumentType _value, $Res Function(_$_OrderDocumentType) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_OrderDocumentType));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_OrderDocumentType get _value => super._value as _$_OrderDocumentType;
+
   @override
   $Res call({
-    Object? salesOrg = null,
-    Object? documentType = null,
-    Object? description = null,
-    Object? shippingCondition = null,
-    Object? orderReason = null,
+    Object? salesOrg = freezed,
+    Object? documentType = freezed,
+    Object? description = freezed,
+    Object? shippingCondition = freezed,
+    Object? orderReason = freezed,
   }) {
     return _then(_$_OrderDocumentType(
-      salesOrg: null == salesOrg
+      salesOrg: salesOrg == freezed
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as SalesOrg,
-      documentType: null == documentType
+      documentType: documentType == freezed
           ? _value.documentType
           : documentType // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      shippingCondition: null == shippingCondition
+      shippingCondition: shippingCondition == freezed
           ? _value.shippingCondition
           : shippingCondition // ignore: cast_nullable_to_non_nullable
               as String,
-      orderReason: null == orderReason
+      orderReason: orderReason == freezed
           ? _value.orderReason
           : orderReason // ignore: cast_nullable_to_non_nullable
               as String,
@@ -175,25 +173,28 @@ class _$_OrderDocumentType extends _OrderDocumentType {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderDocumentType &&
-            (identical(other.salesOrg, salesOrg) ||
-                other.salesOrg == salesOrg) &&
-            (identical(other.documentType, documentType) ||
-                other.documentType == documentType) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.shippingCondition, shippingCondition) ||
-                other.shippingCondition == shippingCondition) &&
-            (identical(other.orderReason, orderReason) ||
-                other.orderReason == orderReason));
+            const DeepCollectionEquality().equals(other.salesOrg, salesOrg) &&
+            const DeepCollectionEquality()
+                .equals(other.documentType, documentType) &&
+            const DeepCollectionEquality()
+                .equals(other.description, description) &&
+            const DeepCollectionEquality()
+                .equals(other.shippingCondition, shippingCondition) &&
+            const DeepCollectionEquality()
+                .equals(other.orderReason, orderReason));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrg, documentType,
-      description, shippingCondition, orderReason);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(salesOrg),
+      const DeepCollectionEquality().hash(documentType),
+      const DeepCollectionEquality().hash(description),
+      const DeepCollectionEquality().hash(shippingCondition),
+      const DeepCollectionEquality().hash(orderReason));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_OrderDocumentTypeCopyWith<_$_OrderDocumentType> get copyWith =>
       __$$_OrderDocumentTypeCopyWithImpl<_$_OrderDocumentType>(
           this, _$identity);

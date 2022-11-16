@@ -31,8 +31,7 @@ mixin _$SalesRepresentativeInfo {
 abstract class $SalesRepresentativeInfoCopyWith<$Res> {
   factory $SalesRepresentativeInfoCopyWith(SalesRepresentativeInfo value,
           $Res Function(SalesRepresentativeInfo) then) =
-      _$SalesRepresentativeInfoCopyWithImpl<$Res, SalesRepresentativeInfo>;
-  @useResult
+      _$SalesRepresentativeInfoCopyWithImpl<$Res>;
   $Res call(
       {int count,
       List<String> uniquePrincipalGroup,
@@ -41,42 +40,39 @@ abstract class $SalesRepresentativeInfoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SalesRepresentativeInfoCopyWithImpl<$Res,
-        $Val extends SalesRepresentativeInfo>
+class _$SalesRepresentativeInfoCopyWithImpl<$Res>
     implements $SalesRepresentativeInfoCopyWith<$Res> {
   _$SalesRepresentativeInfoCopyWithImpl(this._value, this._then);
 
+  final SalesRepresentativeInfo _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(SalesRepresentativeInfo) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? count = null,
-    Object? uniquePrincipalGroup = null,
-    Object? uniquePrincipalNumber = null,
-    Object? uniqueSalesOrganisation = null,
+    Object? count = freezed,
+    Object? uniquePrincipalGroup = freezed,
+    Object? uniquePrincipalNumber = freezed,
+    Object? uniqueSalesOrganisation = freezed,
   }) {
     return _then(_value.copyWith(
-      count: null == count
+      count: count == freezed
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as int,
-      uniquePrincipalGroup: null == uniquePrincipalGroup
+      uniquePrincipalGroup: uniquePrincipalGroup == freezed
           ? _value.uniquePrincipalGroup
           : uniquePrincipalGroup // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      uniquePrincipalNumber: null == uniquePrincipalNumber
+      uniquePrincipalNumber: uniquePrincipalNumber == freezed
           ? _value.uniquePrincipalNumber
           : uniquePrincipalNumber // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      uniqueSalesOrganisation: null == uniqueSalesOrganisation
+      uniqueSalesOrganisation: uniqueSalesOrganisation == freezed
           ? _value.uniqueSalesOrganisation
           : uniqueSalesOrganisation // ignore: cast_nullable_to_non_nullable
               as List<String>,
-    ) as $Val);
+    ));
   }
 }
 
@@ -87,7 +83,6 @@ abstract class _$$_SalesRepresentativeInfoCopyWith<$Res>
           $Res Function(_$_SalesRepresentativeInfo) then) =
       __$$_SalesRepresentativeInfoCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {int count,
       List<String> uniquePrincipalGroup,
@@ -97,35 +92,37 @@ abstract class _$$_SalesRepresentativeInfoCopyWith<$Res>
 
 /// @nodoc
 class __$$_SalesRepresentativeInfoCopyWithImpl<$Res>
-    extends _$SalesRepresentativeInfoCopyWithImpl<$Res,
-        _$_SalesRepresentativeInfo>
+    extends _$SalesRepresentativeInfoCopyWithImpl<$Res>
     implements _$$_SalesRepresentativeInfoCopyWith<$Res> {
   __$$_SalesRepresentativeInfoCopyWithImpl(_$_SalesRepresentativeInfo _value,
       $Res Function(_$_SalesRepresentativeInfo) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_SalesRepresentativeInfo));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_SalesRepresentativeInfo get _value =>
+      super._value as _$_SalesRepresentativeInfo;
+
   @override
   $Res call({
-    Object? count = null,
-    Object? uniquePrincipalGroup = null,
-    Object? uniquePrincipalNumber = null,
-    Object? uniqueSalesOrganisation = null,
+    Object? count = freezed,
+    Object? uniquePrincipalGroup = freezed,
+    Object? uniquePrincipalNumber = freezed,
+    Object? uniqueSalesOrganisation = freezed,
   }) {
     return _then(_$_SalesRepresentativeInfo(
-      count: null == count
+      count: count == freezed
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as int,
-      uniquePrincipalGroup: null == uniquePrincipalGroup
+      uniquePrincipalGroup: uniquePrincipalGroup == freezed
           ? _value._uniquePrincipalGroup
           : uniquePrincipalGroup // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      uniquePrincipalNumber: null == uniquePrincipalNumber
+      uniquePrincipalNumber: uniquePrincipalNumber == freezed
           ? _value._uniquePrincipalNumber
           : uniquePrincipalNumber // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      uniqueSalesOrganisation: null == uniqueSalesOrganisation
+      uniqueSalesOrganisation: uniqueSalesOrganisation == freezed
           ? _value._uniqueSalesOrganisation
           : uniqueSalesOrganisation // ignore: cast_nullable_to_non_nullable
               as List<String>,
@@ -179,7 +176,7 @@ class _$_SalesRepresentativeInfo extends _SalesRepresentativeInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SalesRepresentativeInfo &&
-            (identical(other.count, count) || other.count == count) &&
+            const DeepCollectionEquality().equals(other.count, count) &&
             const DeepCollectionEquality()
                 .equals(other._uniquePrincipalGroup, _uniquePrincipalGroup) &&
             const DeepCollectionEquality()
@@ -191,14 +188,13 @@ class _$_SalesRepresentativeInfo extends _SalesRepresentativeInfo {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      count,
+      const DeepCollectionEquality().hash(count),
       const DeepCollectionEquality().hash(_uniquePrincipalGroup),
       const DeepCollectionEquality().hash(_uniquePrincipalNumber),
       const DeepCollectionEquality().hash(_uniqueSalesOrganisation));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_SalesRepresentativeInfoCopyWith<_$_SalesRepresentativeInfo>
       get copyWith =>
           __$$_SalesRepresentativeInfoCopyWithImpl<_$_SalesRepresentativeInfo>(

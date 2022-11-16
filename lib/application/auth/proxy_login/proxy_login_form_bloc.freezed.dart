@@ -24,8 +24,8 @@ mixin _$ProxyLoginFormEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function()? loginWithADButtonPressed,
+    TResult Function(String usernameStr)? usernameChanged,
+    TResult Function()? loginWithADButtonPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,9 +44,8 @@ mixin _$ProxyLoginFormEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_UsernameChanged value)? usernameChanged,
-    TResult? Function(_LoginWithADButtonPressed value)?
-        loginWithADButtonPressed,
+    TResult Function(_UsernameChanged value)? usernameChanged,
+    TResult Function(_LoginWithADButtonPressed value)? loginWithADButtonPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,18 +61,17 @@ mixin _$ProxyLoginFormEvent {
 abstract class $ProxyLoginFormEventCopyWith<$Res> {
   factory $ProxyLoginFormEventCopyWith(
           ProxyLoginFormEvent value, $Res Function(ProxyLoginFormEvent) then) =
-      _$ProxyLoginFormEventCopyWithImpl<$Res, ProxyLoginFormEvent>;
+      _$ProxyLoginFormEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$ProxyLoginFormEventCopyWithImpl<$Res, $Val extends ProxyLoginFormEvent>
+class _$ProxyLoginFormEventCopyWithImpl<$Res>
     implements $ProxyLoginFormEventCopyWith<$Res> {
   _$ProxyLoginFormEventCopyWithImpl(this._value, this._then);
 
+  final ProxyLoginFormEvent _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(ProxyLoginFormEvent) _then;
 }
 
 /// @nodoc
@@ -81,25 +79,26 @@ abstract class _$$_UsernameChangedCopyWith<$Res> {
   factory _$$_UsernameChangedCopyWith(
           _$_UsernameChanged value, $Res Function(_$_UsernameChanged) then) =
       __$$_UsernameChangedCopyWithImpl<$Res>;
-  @useResult
   $Res call({String usernameStr});
 }
 
 /// @nodoc
 class __$$_UsernameChangedCopyWithImpl<$Res>
-    extends _$ProxyLoginFormEventCopyWithImpl<$Res, _$_UsernameChanged>
+    extends _$ProxyLoginFormEventCopyWithImpl<$Res>
     implements _$$_UsernameChangedCopyWith<$Res> {
   __$$_UsernameChangedCopyWithImpl(
       _$_UsernameChanged _value, $Res Function(_$_UsernameChanged) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_UsernameChanged));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_UsernameChanged get _value => super._value as _$_UsernameChanged;
+
   @override
   $Res call({
-    Object? usernameStr = null,
+    Object? usernameStr = freezed,
   }) {
     return _then(_$_UsernameChanged(
-      null == usernameStr
+      usernameStr == freezed
           ? _value.usernameStr
           : usernameStr // ignore: cast_nullable_to_non_nullable
               as String,
@@ -125,16 +124,16 @@ class _$_UsernameChanged implements _UsernameChanged {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UsernameChanged &&
-            (identical(other.usernameStr, usernameStr) ||
-                other.usernameStr == usernameStr));
+            const DeepCollectionEquality()
+                .equals(other.usernameStr, usernameStr));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, usernameStr);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(usernameStr));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_UsernameChangedCopyWith<_$_UsernameChanged> get copyWith =>
       __$$_UsernameChangedCopyWithImpl<_$_UsernameChanged>(this, _$identity);
 
@@ -150,8 +149,8 @@ class _$_UsernameChanged implements _UsernameChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function()? loginWithADButtonPressed,
+    TResult Function(String usernameStr)? usernameChanged,
+    TResult Function()? loginWithADButtonPressed,
   }) {
     return usernameChanged?.call(usernameStr);
   }
@@ -182,9 +181,8 @@ class _$_UsernameChanged implements _UsernameChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_UsernameChanged value)? usernameChanged,
-    TResult? Function(_LoginWithADButtonPressed value)?
-        loginWithADButtonPressed,
+    TResult Function(_UsernameChanged value)? usernameChanged,
+    TResult Function(_LoginWithADButtonPressed value)? loginWithADButtonPressed,
   }) {
     return usernameChanged?.call(this);
   }
@@ -222,11 +220,15 @@ abstract class _$$_LoginWithADButtonPressedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_LoginWithADButtonPressedCopyWithImpl<$Res>
-    extends _$ProxyLoginFormEventCopyWithImpl<$Res, _$_LoginWithADButtonPressed>
+    extends _$ProxyLoginFormEventCopyWithImpl<$Res>
     implements _$$_LoginWithADButtonPressedCopyWith<$Res> {
   __$$_LoginWithADButtonPressedCopyWithImpl(_$_LoginWithADButtonPressed _value,
       $Res Function(_$_LoginWithADButtonPressed) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_LoginWithADButtonPressed));
+
+  @override
+  _$_LoginWithADButtonPressed get _value =>
+      super._value as _$_LoginWithADButtonPressed;
 }
 
 /// @nodoc
@@ -261,8 +263,8 @@ class _$_LoginWithADButtonPressed implements _LoginWithADButtonPressed {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function()? loginWithADButtonPressed,
+    TResult Function(String usernameStr)? usernameChanged,
+    TResult Function()? loginWithADButtonPressed,
   }) {
     return loginWithADButtonPressed?.call();
   }
@@ -293,9 +295,8 @@ class _$_LoginWithADButtonPressed implements _LoginWithADButtonPressed {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_UsernameChanged value)? usernameChanged,
-    TResult? Function(_LoginWithADButtonPressed value)?
-        loginWithADButtonPressed,
+    TResult Function(_UsernameChanged value)? usernameChanged,
+    TResult Function(_LoginWithADButtonPressed value)? loginWithADButtonPressed,
   }) {
     return loginWithADButtonPressed?.call(this);
   }
@@ -335,8 +336,7 @@ mixin _$ProxyLoginFormState {
 abstract class $ProxyLoginFormStateCopyWith<$Res> {
   factory $ProxyLoginFormStateCopyWith(
           ProxyLoginFormState value, $Res Function(ProxyLoginFormState) then) =
-      _$ProxyLoginFormStateCopyWithImpl<$Res, ProxyLoginFormState>;
-  @useResult
+      _$ProxyLoginFormStateCopyWithImpl<$Res>;
   $Res call(
       {Username username,
       bool showErrorMessages,
@@ -345,41 +345,39 @@ abstract class $ProxyLoginFormStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ProxyLoginFormStateCopyWithImpl<$Res, $Val extends ProxyLoginFormState>
+class _$ProxyLoginFormStateCopyWithImpl<$Res>
     implements $ProxyLoginFormStateCopyWith<$Res> {
   _$ProxyLoginFormStateCopyWithImpl(this._value, this._then);
 
+  final ProxyLoginFormState _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(ProxyLoginFormState) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = null,
-    Object? showErrorMessages = null,
-    Object? isSubmitting = null,
-    Object? authFailureOrSuccessOption = null,
+    Object? username = freezed,
+    Object? showErrorMessages = freezed,
+    Object? isSubmitting = freezed,
+    Object? authFailureOrSuccessOption = freezed,
   }) {
     return _then(_value.copyWith(
-      username: null == username
+      username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as Username,
-      showErrorMessages: null == showErrorMessages
+      showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
-      isSubmitting: null == isSubmitting
+      isSubmitting: isSubmitting == freezed
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
-      authFailureOrSuccessOption: null == authFailureOrSuccessOption
+      authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-    ) as $Val);
+    ));
   }
 }
 
@@ -390,7 +388,6 @@ abstract class _$$_ProxyLoginFormStateCopyWith<$Res>
           $Res Function(_$_ProxyLoginFormState) then) =
       __$$_ProxyLoginFormStateCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {Username username,
       bool showErrorMessages,
@@ -400,34 +397,36 @@ abstract class _$$_ProxyLoginFormStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_ProxyLoginFormStateCopyWithImpl<$Res>
-    extends _$ProxyLoginFormStateCopyWithImpl<$Res, _$_ProxyLoginFormState>
+    extends _$ProxyLoginFormStateCopyWithImpl<$Res>
     implements _$$_ProxyLoginFormStateCopyWith<$Res> {
   __$$_ProxyLoginFormStateCopyWithImpl(_$_ProxyLoginFormState _value,
       $Res Function(_$_ProxyLoginFormState) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_ProxyLoginFormState));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_ProxyLoginFormState get _value => super._value as _$_ProxyLoginFormState;
+
   @override
   $Res call({
-    Object? username = null,
-    Object? showErrorMessages = null,
-    Object? isSubmitting = null,
-    Object? authFailureOrSuccessOption = null,
+    Object? username = freezed,
+    Object? showErrorMessages = freezed,
+    Object? isSubmitting = freezed,
+    Object? authFailureOrSuccessOption = freezed,
   }) {
     return _then(_$_ProxyLoginFormState(
-      username: null == username
+      username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as Username,
-      showErrorMessages: null == showErrorMessages
+      showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
-      isSubmitting: null == isSubmitting
+      isSubmitting: isSubmitting == freezed
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
-      authFailureOrSuccessOption: null == authFailureOrSuccessOption
+      authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
@@ -463,25 +462,25 @@ class _$_ProxyLoginFormState implements _ProxyLoginFormState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ProxyLoginFormState &&
-            (identical(other.username, username) ||
-                other.username == username) &&
-            (identical(other.showErrorMessages, showErrorMessages) ||
-                other.showErrorMessages == showErrorMessages) &&
-            (identical(other.isSubmitting, isSubmitting) ||
-                other.isSubmitting == isSubmitting) &&
-            (identical(other.authFailureOrSuccessOption,
-                    authFailureOrSuccessOption) ||
-                other.authFailureOrSuccessOption ==
-                    authFailureOrSuccessOption));
+            const DeepCollectionEquality().equals(other.username, username) &&
+            const DeepCollectionEquality()
+                .equals(other.showErrorMessages, showErrorMessages) &&
+            const DeepCollectionEquality()
+                .equals(other.isSubmitting, isSubmitting) &&
+            const DeepCollectionEquality().equals(
+                other.authFailureOrSuccessOption, authFailureOrSuccessOption));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, username, showErrorMessages,
-      isSubmitting, authFailureOrSuccessOption);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(username),
+      const DeepCollectionEquality().hash(showErrorMessages),
+      const DeepCollectionEquality().hash(isSubmitting),
+      const DeepCollectionEquality().hash(authFailureOrSuccessOption));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_ProxyLoginFormStateCopyWith<_$_ProxyLoginFormState> get copyWith =>
       __$$_ProxyLoginFormStateCopyWithImpl<_$_ProxyLoginFormState>(
           this, _$identity);

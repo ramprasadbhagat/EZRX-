@@ -41,8 +41,7 @@ mixin _$StockInfoDto {
 abstract class $StockInfoDtoCopyWith<$Res> {
   factory $StockInfoDtoCopyWith(
           StockInfoDto value, $Res Function(StockInfoDto) then) =
-      _$StockInfoDtoCopyWithImpl<$Res, StockInfoDto>;
-  @useResult
+      _$StockInfoDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'MaterialNumber') String materialNumber,
       @JsonKey(name: 'ExpiryDate') String expiryDate,
@@ -52,46 +51,43 @@ abstract class $StockInfoDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$StockInfoDtoCopyWithImpl<$Res, $Val extends StockInfoDto>
-    implements $StockInfoDtoCopyWith<$Res> {
+class _$StockInfoDtoCopyWithImpl<$Res> implements $StockInfoDtoCopyWith<$Res> {
   _$StockInfoDtoCopyWithImpl(this._value, this._then);
 
+  final StockInfoDto _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(StockInfoDto) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialNumber = null,
-    Object? expiryDate = null,
-    Object? batch = null,
-    Object? inStock = null,
+    Object? materialNumber = freezed,
+    Object? expiryDate = freezed,
+    Object? batch = freezed,
+    Object? inStock = freezed,
     Object? salesDistrict = freezed,
   }) {
     return _then(_value.copyWith(
-      materialNumber: null == materialNumber
+      materialNumber: materialNumber == freezed
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      expiryDate: null == expiryDate
+      expiryDate: expiryDate == freezed
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
               as String,
-      batch: null == batch
+      batch: batch == freezed
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
               as String,
-      inStock: null == inStock
+      inStock: inStock == freezed
           ? _value.inStock
           : inStock // ignore: cast_nullable_to_non_nullable
               as String,
-      salesDistrict: freezed == salesDistrict
+      salesDistrict: salesDistrict == freezed
           ? _value.salesDistrict
           : salesDistrict // ignore: cast_nullable_to_non_nullable
               as String?,
-    ) as $Val);
+    ));
   }
 }
 
@@ -102,7 +98,6 @@ abstract class _$$_StockInfoDtoCopyWith<$Res>
           _$_StockInfoDto value, $Res Function(_$_StockInfoDto) then) =
       __$$_StockInfoDtoCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {@JsonKey(name: 'MaterialNumber') String materialNumber,
       @JsonKey(name: 'ExpiryDate') String expiryDate,
@@ -113,39 +108,41 @@ abstract class _$$_StockInfoDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_StockInfoDtoCopyWithImpl<$Res>
-    extends _$StockInfoDtoCopyWithImpl<$Res, _$_StockInfoDto>
+    extends _$StockInfoDtoCopyWithImpl<$Res>
     implements _$$_StockInfoDtoCopyWith<$Res> {
   __$$_StockInfoDtoCopyWithImpl(
       _$_StockInfoDto _value, $Res Function(_$_StockInfoDto) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_StockInfoDto));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_StockInfoDto get _value => super._value as _$_StockInfoDto;
+
   @override
   $Res call({
-    Object? materialNumber = null,
-    Object? expiryDate = null,
-    Object? batch = null,
-    Object? inStock = null,
+    Object? materialNumber = freezed,
+    Object? expiryDate = freezed,
+    Object? batch = freezed,
+    Object? inStock = freezed,
     Object? salesDistrict = freezed,
   }) {
     return _then(_$_StockInfoDto(
-      materialNumber: null == materialNumber
+      materialNumber: materialNumber == freezed
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      expiryDate: null == expiryDate
+      expiryDate: expiryDate == freezed
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
               as String,
-      batch: null == batch
+      batch: batch == freezed
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
               as String,
-      inStock: null == inStock
+      inStock: inStock == freezed
           ? _value.inStock
           : inStock // ignore: cast_nullable_to_non_nullable
               as String,
-      salesDistrict: freezed == salesDistrict
+      salesDistrict: salesDistrict == freezed
           ? _value.salesDistrict
           : salesDistrict // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -193,24 +190,28 @@ class _$_StockInfoDto extends _StockInfoDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_StockInfoDto &&
-            (identical(other.materialNumber, materialNumber) ||
-                other.materialNumber == materialNumber) &&
-            (identical(other.expiryDate, expiryDate) ||
-                other.expiryDate == expiryDate) &&
-            (identical(other.batch, batch) || other.batch == batch) &&
-            (identical(other.inStock, inStock) || other.inStock == inStock) &&
-            (identical(other.salesDistrict, salesDistrict) ||
-                other.salesDistrict == salesDistrict));
+            const DeepCollectionEquality()
+                .equals(other.materialNumber, materialNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.expiryDate, expiryDate) &&
+            const DeepCollectionEquality().equals(other.batch, batch) &&
+            const DeepCollectionEquality().equals(other.inStock, inStock) &&
+            const DeepCollectionEquality()
+                .equals(other.salesDistrict, salesDistrict));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, materialNumber, expiryDate, batch, inStock, salesDistrict);
+      runtimeType,
+      const DeepCollectionEquality().hash(materialNumber),
+      const DeepCollectionEquality().hash(expiryDate),
+      const DeepCollectionEquality().hash(batch),
+      const DeepCollectionEquality().hash(inStock),
+      const DeepCollectionEquality().hash(salesDistrict));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_StockInfoDtoCopyWith<_$_StockInfoDto> get copyWith =>
       __$$_StockInfoDtoCopyWithImpl<_$_StockInfoDto>(this, _$identity);
 

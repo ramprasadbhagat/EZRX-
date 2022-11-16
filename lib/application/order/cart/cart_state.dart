@@ -6,21 +6,27 @@ class CartState with _$CartState {
 
   const factory CartState({
     required List<PriceAggregate> cartItemList,
+    required List<MaterialNumber> selectedItemsMaterialNumber,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required bool isFetching,
   }) = _CartState;
 
   factory CartState.initial() => CartState(
         cartItemList: <PriceAggregate>[],
+        selectedItemsMaterialNumber: <MaterialNumber>[],
         apiFailureOrSuccessOption: none(),
         isFetching: false,
       );
 
-  double get subtotal =>
-      cartItemList.fold<double>(0, (sum, item) => sum + item.listPriceTotal);
+  double get subtotal => selectedItemList.fold<double>(
+        0,
+        (sum, item) => sum + item.listPriceTotal,
+      );
 
-  double get grandTotal =>
-      cartItemList.fold<double>(0, (sum, item) => sum + item.unitPriceTotal);
+  double get grandTotal => selectedItemList.fold<double>(
+        0,
+        (sum, item) => sum + item.unitPriceTotal,
+      );
 
   double get vatTotal => grandTotal - subtotal;
 
@@ -53,13 +59,21 @@ class CartState with _$CartState {
       : containNonFocMaterialOT
           ? 'non-FOC'
           : containNonRegularMaterial
-            ? 'only sample and/or FOC'
-            : '';
+              ? 'only sample and/or FOC'
+              : '';
 
-  bool showDialog(OrderDocumentType orderType){
-    return orderType.isZPFB ? containNonSampleMaterial
-      : orderType.isZPFC ? containNonFocMaterialOT
-      : orderType.isZPOR ?containNonRegularMaterial
-          : false;
+  bool showDialog(OrderDocumentType orderType) {
+    return orderType.isZPFB
+        ? containNonSampleMaterial
+        : orderType.isZPFC
+            ? containNonFocMaterialOT
+            : orderType.isZPOR
+                ? containNonRegularMaterial
+                : false;
   }
+
+  List<PriceAggregate> get selectedItemList => cartItemList
+      .where((element) => selectedItemsMaterialNumber
+          .contains(element.materialInfo.materialNumber))
+      .toList();
 }

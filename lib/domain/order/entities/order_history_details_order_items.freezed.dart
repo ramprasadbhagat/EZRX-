@@ -38,9 +38,7 @@ abstract class $OrderHistoryDetailsOrderItemCopyWith<$Res> {
   factory $OrderHistoryDetailsOrderItemCopyWith(
           OrderHistoryDetailsOrderItem value,
           $Res Function(OrderHistoryDetailsOrderItem) then) =
-      _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
-          OrderHistoryDetailsOrderItem>;
-  @useResult
+      _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res>;
   $Res call(
       {String sAPStatus,
       String plannedDeliveryDate,
@@ -57,76 +55,72 @@ abstract class $OrderHistoryDetailsOrderItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
-        $Val extends OrderHistoryDetailsOrderItem>
+class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
     implements $OrderHistoryDetailsOrderItemCopyWith<$Res> {
   _$OrderHistoryDetailsOrderItemCopyWithImpl(this._value, this._then);
 
+  final OrderHistoryDetailsOrderItem _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(OrderHistoryDetailsOrderItem) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sAPStatus = null,
-    Object? plannedDeliveryDate = null,
-    Object? pickedQuantity = null,
-    Object? batch = null,
-    Object? expiryDate = null,
-    Object? lineReferenceNotes = null,
-    Object? isTenderContractMaterial = null,
-    Object? details = null,
-    Object? tenderContractDetails = null,
+    Object? sAPStatus = freezed,
+    Object? plannedDeliveryDate = freezed,
+    Object? pickedQuantity = freezed,
+    Object? batch = freezed,
+    Object? expiryDate = freezed,
+    Object? lineReferenceNotes = freezed,
+    Object? isTenderContractMaterial = freezed,
+    Object? details = freezed,
+    Object? tenderContractDetails = freezed,
   }) {
     return _then(_value.copyWith(
-      sAPStatus: null == sAPStatus
+      sAPStatus: sAPStatus == freezed
           ? _value.sAPStatus
           : sAPStatus // ignore: cast_nullable_to_non_nullable
               as String,
-      plannedDeliveryDate: null == plannedDeliveryDate
+      plannedDeliveryDate: plannedDeliveryDate == freezed
           ? _value.plannedDeliveryDate
           : plannedDeliveryDate // ignore: cast_nullable_to_non_nullable
               as String,
-      pickedQuantity: null == pickedQuantity
+      pickedQuantity: pickedQuantity == freezed
           ? _value.pickedQuantity
           : pickedQuantity // ignore: cast_nullable_to_non_nullable
               as int,
-      batch: null == batch
+      batch: batch == freezed
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
               as String,
-      expiryDate: null == expiryDate
+      expiryDate: expiryDate == freezed
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
               as String,
-      lineReferenceNotes: null == lineReferenceNotes
+      lineReferenceNotes: lineReferenceNotes == freezed
           ? _value.lineReferenceNotes
           : lineReferenceNotes // ignore: cast_nullable_to_non_nullable
               as String,
-      isTenderContractMaterial: null == isTenderContractMaterial
+      isTenderContractMaterial: isTenderContractMaterial == freezed
           ? _value.isTenderContractMaterial
           : isTenderContractMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-      details: null == details
+      details: details == freezed
           ? _value.details
           : details // ignore: cast_nullable_to_non_nullable
               as List<OrderHistoryDetailsOrderItemDetails>,
-      tenderContractDetails: null == tenderContractDetails
+      tenderContractDetails: tenderContractDetails == freezed
           ? _value.tenderContractDetails
           : tenderContractDetails // ignore: cast_nullable_to_non_nullable
               as OrderHistoryDetailsOrderItemTenderContractDetails,
-    ) as $Val);
+    ));
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $OrderHistoryDetailsOrderItemTenderContractDetailsCopyWith<$Res>
       get tenderContractDetails {
     return $OrderHistoryDetailsOrderItemTenderContractDetailsCopyWith<$Res>(
         _value.tenderContractDetails, (value) {
-      return _then(_value.copyWith(tenderContractDetails: value) as $Val);
+      return _then(_value.copyWith(tenderContractDetails: value));
     });
   }
 }
@@ -139,7 +133,6 @@ abstract class _$$_OrderHistoryDetailsOrderItemCopyWith<$Res>
           $Res Function(_$_OrderHistoryDetailsOrderItem) then) =
       __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {String sAPStatus,
       String plannedDeliveryDate,
@@ -158,61 +151,63 @@ abstract class _$$_OrderHistoryDetailsOrderItemCopyWith<$Res>
 
 /// @nodoc
 class __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
-    extends _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
-        _$_OrderHistoryDetailsOrderItem>
+    extends _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
     implements _$$_OrderHistoryDetailsOrderItemCopyWith<$Res> {
   __$$_OrderHistoryDetailsOrderItemCopyWithImpl(
       _$_OrderHistoryDetailsOrderItem _value,
       $Res Function(_$_OrderHistoryDetailsOrderItem) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_OrderHistoryDetailsOrderItem));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_OrderHistoryDetailsOrderItem get _value =>
+      super._value as _$_OrderHistoryDetailsOrderItem;
+
   @override
   $Res call({
-    Object? sAPStatus = null,
-    Object? plannedDeliveryDate = null,
-    Object? pickedQuantity = null,
-    Object? batch = null,
-    Object? expiryDate = null,
-    Object? lineReferenceNotes = null,
-    Object? isTenderContractMaterial = null,
-    Object? details = null,
-    Object? tenderContractDetails = null,
+    Object? sAPStatus = freezed,
+    Object? plannedDeliveryDate = freezed,
+    Object? pickedQuantity = freezed,
+    Object? batch = freezed,
+    Object? expiryDate = freezed,
+    Object? lineReferenceNotes = freezed,
+    Object? isTenderContractMaterial = freezed,
+    Object? details = freezed,
+    Object? tenderContractDetails = freezed,
   }) {
     return _then(_$_OrderHistoryDetailsOrderItem(
-      sAPStatus: null == sAPStatus
+      sAPStatus: sAPStatus == freezed
           ? _value.sAPStatus
           : sAPStatus // ignore: cast_nullable_to_non_nullable
               as String,
-      plannedDeliveryDate: null == plannedDeliveryDate
+      plannedDeliveryDate: plannedDeliveryDate == freezed
           ? _value.plannedDeliveryDate
           : plannedDeliveryDate // ignore: cast_nullable_to_non_nullable
               as String,
-      pickedQuantity: null == pickedQuantity
+      pickedQuantity: pickedQuantity == freezed
           ? _value.pickedQuantity
           : pickedQuantity // ignore: cast_nullable_to_non_nullable
               as int,
-      batch: null == batch
+      batch: batch == freezed
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
               as String,
-      expiryDate: null == expiryDate
+      expiryDate: expiryDate == freezed
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
               as String,
-      lineReferenceNotes: null == lineReferenceNotes
+      lineReferenceNotes: lineReferenceNotes == freezed
           ? _value.lineReferenceNotes
           : lineReferenceNotes // ignore: cast_nullable_to_non_nullable
               as String,
-      isTenderContractMaterial: null == isTenderContractMaterial
+      isTenderContractMaterial: isTenderContractMaterial == freezed
           ? _value.isTenderContractMaterial
           : isTenderContractMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
-      details: null == details
+      details: details == freezed
           ? _value._details
           : details // ignore: cast_nullable_to_non_nullable
               as List<OrderHistoryDetailsOrderItemDetails>,
-      tenderContractDetails: null == tenderContractDetails
+      tenderContractDetails: tenderContractDetails == freezed
           ? _value.tenderContractDetails
           : tenderContractDetails // ignore: cast_nullable_to_non_nullable
               as OrderHistoryDetailsOrderItemTenderContractDetails,
@@ -270,41 +265,38 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryDetailsOrderItem &&
-            (identical(other.sAPStatus, sAPStatus) ||
-                other.sAPStatus == sAPStatus) &&
-            (identical(other.plannedDeliveryDate, plannedDeliveryDate) ||
-                other.plannedDeliveryDate == plannedDeliveryDate) &&
-            (identical(other.pickedQuantity, pickedQuantity) ||
-                other.pickedQuantity == pickedQuantity) &&
-            (identical(other.batch, batch) || other.batch == batch) &&
-            (identical(other.expiryDate, expiryDate) ||
-                other.expiryDate == expiryDate) &&
-            (identical(other.lineReferenceNotes, lineReferenceNotes) ||
-                other.lineReferenceNotes == lineReferenceNotes) &&
-            (identical(
-                    other.isTenderContractMaterial, isTenderContractMaterial) ||
-                other.isTenderContractMaterial == isTenderContractMaterial) &&
+            const DeepCollectionEquality().equals(other.sAPStatus, sAPStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.plannedDeliveryDate, plannedDeliveryDate) &&
+            const DeepCollectionEquality()
+                .equals(other.pickedQuantity, pickedQuantity) &&
+            const DeepCollectionEquality().equals(other.batch, batch) &&
+            const DeepCollectionEquality()
+                .equals(other.expiryDate, expiryDate) &&
+            const DeepCollectionEquality()
+                .equals(other.lineReferenceNotes, lineReferenceNotes) &&
+            const DeepCollectionEquality().equals(
+                other.isTenderContractMaterial, isTenderContractMaterial) &&
             const DeepCollectionEquality().equals(other._details, _details) &&
-            (identical(other.tenderContractDetails, tenderContractDetails) ||
-                other.tenderContractDetails == tenderContractDetails));
+            const DeepCollectionEquality()
+                .equals(other.tenderContractDetails, tenderContractDetails));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      sAPStatus,
-      plannedDeliveryDate,
-      pickedQuantity,
-      batch,
-      expiryDate,
-      lineReferenceNotes,
-      isTenderContractMaterial,
+      const DeepCollectionEquality().hash(sAPStatus),
+      const DeepCollectionEquality().hash(plannedDeliveryDate),
+      const DeepCollectionEquality().hash(pickedQuantity),
+      const DeepCollectionEquality().hash(batch),
+      const DeepCollectionEquality().hash(expiryDate),
+      const DeepCollectionEquality().hash(lineReferenceNotes),
+      const DeepCollectionEquality().hash(isTenderContractMaterial),
       const DeepCollectionEquality().hash(_details),
-      tenderContractDetails);
+      const DeepCollectionEquality().hash(tenderContractDetails));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_OrderHistoryDetailsOrderItemCopyWith<_$_OrderHistoryDetailsOrderItem>
       get copyWith => __$$_OrderHistoryDetailsOrderItemCopyWithImpl<
           _$_OrderHistoryDetailsOrderItem>(this, _$identity);

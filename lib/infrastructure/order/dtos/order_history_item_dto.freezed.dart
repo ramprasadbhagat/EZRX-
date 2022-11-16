@@ -65,8 +65,7 @@ mixin _$OrderHistoryItemDto {
 abstract class $OrderHistoryItemDtoCopyWith<$Res> {
   factory $OrderHistoryItemDtoCopyWith(
           OrderHistoryItemDto value, $Res Function(OrderHistoryItemDto) then) =
-      _$OrderHistoryItemDtoCopyWithImpl<$Res, OrderHistoryItemDto>;
-  @useResult
+      _$OrderHistoryItemDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'MaterialCode') String materialNumber,
       @JsonKey(name: 'MaterialDescription') String materialDescription,
@@ -88,106 +87,104 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
+class _$OrderHistoryItemDtoCopyWithImpl<$Res>
     implements $OrderHistoryItemDtoCopyWith<$Res> {
   _$OrderHistoryItemDtoCopyWithImpl(this._value, this._then);
 
+  final OrderHistoryItemDto _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(OrderHistoryItemDto) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialNumber = null,
-    Object? materialDescription = null,
-    Object? qty = null,
-    Object? unitPrice = null,
-    Object? totalPrice = null,
-    Object? status = null,
-    Object? deliveryDate = null,
-    Object? deliveryTime = null,
-    Object? lineNumber = null,
-    Object? tax = null,
-    Object? orderType = null,
-    Object? orderNumber = null,
-    Object? ezrxNumber = null,
-    Object? createdDate = null,
-    Object? createdTime = null,
-    Object? orderBy = null,
-    Object? purchaseOrderType = null,
+    Object? materialNumber = freezed,
+    Object? materialDescription = freezed,
+    Object? qty = freezed,
+    Object? unitPrice = freezed,
+    Object? totalPrice = freezed,
+    Object? status = freezed,
+    Object? deliveryDate = freezed,
+    Object? deliveryTime = freezed,
+    Object? lineNumber = freezed,
+    Object? tax = freezed,
+    Object? orderType = freezed,
+    Object? orderNumber = freezed,
+    Object? ezrxNumber = freezed,
+    Object? createdDate = freezed,
+    Object? createdTime = freezed,
+    Object? orderBy = freezed,
+    Object? purchaseOrderType = freezed,
   }) {
     return _then(_value.copyWith(
-      materialNumber: null == materialNumber
+      materialNumber: materialNumber == freezed
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      materialDescription: null == materialDescription
+      materialDescription: materialDescription == freezed
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      qty: null == qty
+      qty: qty == freezed
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
               as int,
-      unitPrice: null == unitPrice
+      unitPrice: unitPrice == freezed
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      totalPrice: null == totalPrice
+      totalPrice: totalPrice == freezed
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      status: null == status
+      status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      deliveryDate: null == deliveryDate
+      deliveryDate: deliveryDate == freezed
           ? _value.deliveryDate
           : deliveryDate // ignore: cast_nullable_to_non_nullable
               as String,
-      deliveryTime: null == deliveryTime
+      deliveryTime: deliveryTime == freezed
           ? _value.deliveryTime
           : deliveryTime // ignore: cast_nullable_to_non_nullable
               as String,
-      lineNumber: null == lineNumber
+      lineNumber: lineNumber == freezed
           ? _value.lineNumber
           : lineNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      tax: null == tax
+      tax: tax == freezed
           ? _value.tax
           : tax // ignore: cast_nullable_to_non_nullable
               as double,
-      orderType: null == orderType
+      orderType: orderType == freezed
           ? _value.orderType
           : orderType // ignore: cast_nullable_to_non_nullable
               as String,
-      orderNumber: null == orderNumber
+      orderNumber: orderNumber == freezed
           ? _value.orderNumber
           : orderNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      ezrxNumber: null == ezrxNumber
+      ezrxNumber: ezrxNumber == freezed
           ? _value.ezrxNumber
           : ezrxNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      createdDate: null == createdDate
+      createdDate: createdDate == freezed
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
               as String,
-      createdTime: null == createdTime
+      createdTime: createdTime == freezed
           ? _value.createdTime
           : createdTime // ignore: cast_nullable_to_non_nullable
               as String,
-      orderBy: null == orderBy
+      orderBy: orderBy == freezed
           ? _value.orderBy
           : orderBy // ignore: cast_nullable_to_non_nullable
               as String,
-      purchaseOrderType: null == purchaseOrderType
+      purchaseOrderType: purchaseOrderType == freezed
           ? _value.purchaseOrderType
           : purchaseOrderType // ignore: cast_nullable_to_non_nullable
               as String,
-    ) as $Val);
+    ));
   }
 }
 
@@ -198,7 +195,6 @@ abstract class _$$_OrderHistoryItemDtoCopyWith<$Res>
           $Res Function(_$_OrderHistoryItemDto) then) =
       __$$_OrderHistoryItemDtoCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {@JsonKey(name: 'MaterialCode') String materialNumber,
       @JsonKey(name: 'MaterialDescription') String materialDescription,
@@ -221,99 +217,101 @@ abstract class _$$_OrderHistoryItemDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
-    extends _$OrderHistoryItemDtoCopyWithImpl<$Res, _$_OrderHistoryItemDto>
+    extends _$OrderHistoryItemDtoCopyWithImpl<$Res>
     implements _$$_OrderHistoryItemDtoCopyWith<$Res> {
   __$$_OrderHistoryItemDtoCopyWithImpl(_$_OrderHistoryItemDto _value,
       $Res Function(_$_OrderHistoryItemDto) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_OrderHistoryItemDto));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_OrderHistoryItemDto get _value => super._value as _$_OrderHistoryItemDto;
+
   @override
   $Res call({
-    Object? materialNumber = null,
-    Object? materialDescription = null,
-    Object? qty = null,
-    Object? unitPrice = null,
-    Object? totalPrice = null,
-    Object? status = null,
-    Object? deliveryDate = null,
-    Object? deliveryTime = null,
-    Object? lineNumber = null,
-    Object? tax = null,
-    Object? orderType = null,
-    Object? orderNumber = null,
-    Object? ezrxNumber = null,
-    Object? createdDate = null,
-    Object? createdTime = null,
-    Object? orderBy = null,
-    Object? purchaseOrderType = null,
+    Object? materialNumber = freezed,
+    Object? materialDescription = freezed,
+    Object? qty = freezed,
+    Object? unitPrice = freezed,
+    Object? totalPrice = freezed,
+    Object? status = freezed,
+    Object? deliveryDate = freezed,
+    Object? deliveryTime = freezed,
+    Object? lineNumber = freezed,
+    Object? tax = freezed,
+    Object? orderType = freezed,
+    Object? orderNumber = freezed,
+    Object? ezrxNumber = freezed,
+    Object? createdDate = freezed,
+    Object? createdTime = freezed,
+    Object? orderBy = freezed,
+    Object? purchaseOrderType = freezed,
   }) {
     return _then(_$_OrderHistoryItemDto(
-      materialNumber: null == materialNumber
+      materialNumber: materialNumber == freezed
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      materialDescription: null == materialDescription
+      materialDescription: materialDescription == freezed
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      qty: null == qty
+      qty: qty == freezed
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
               as int,
-      unitPrice: null == unitPrice
+      unitPrice: unitPrice == freezed
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      totalPrice: null == totalPrice
+      totalPrice: totalPrice == freezed
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      status: null == status
+      status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      deliveryDate: null == deliveryDate
+      deliveryDate: deliveryDate == freezed
           ? _value.deliveryDate
           : deliveryDate // ignore: cast_nullable_to_non_nullable
               as String,
-      deliveryTime: null == deliveryTime
+      deliveryTime: deliveryTime == freezed
           ? _value.deliveryTime
           : deliveryTime // ignore: cast_nullable_to_non_nullable
               as String,
-      lineNumber: null == lineNumber
+      lineNumber: lineNumber == freezed
           ? _value.lineNumber
           : lineNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      tax: null == tax
+      tax: tax == freezed
           ? _value.tax
           : tax // ignore: cast_nullable_to_non_nullable
               as double,
-      orderType: null == orderType
+      orderType: orderType == freezed
           ? _value.orderType
           : orderType // ignore: cast_nullable_to_non_nullable
               as String,
-      orderNumber: null == orderNumber
+      orderNumber: orderNumber == freezed
           ? _value.orderNumber
           : orderNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      ezrxNumber: null == ezrxNumber
+      ezrxNumber: ezrxNumber == freezed
           ? _value.ezrxNumber
           : ezrxNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      createdDate: null == createdDate
+      createdDate: createdDate == freezed
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
               as String,
-      createdTime: null == createdTime
+      createdTime: createdTime == freezed
           ? _value.createdTime
           : createdTime // ignore: cast_nullable_to_non_nullable
               as String,
-      orderBy: null == orderBy
+      orderBy: orderBy == freezed
           ? _value.orderBy
           : orderBy // ignore: cast_nullable_to_non_nullable
               as String,
-      purchaseOrderType: null == purchaseOrderType
+      purchaseOrderType: purchaseOrderType == freezed
           ? _value.purchaseOrderType
           : purchaseOrderType // ignore: cast_nullable_to_non_nullable
               as String,
@@ -426,63 +424,60 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryItemDto &&
-            (identical(other.materialNumber, materialNumber) ||
-                other.materialNumber == materialNumber) &&
-            (identical(other.materialDescription, materialDescription) ||
-                other.materialDescription == materialDescription) &&
-            (identical(other.qty, qty) || other.qty == qty) &&
-            (identical(other.unitPrice, unitPrice) ||
-                other.unitPrice == unitPrice) &&
-            (identical(other.totalPrice, totalPrice) ||
-                other.totalPrice == totalPrice) &&
-            (identical(other.status, status) || other.status == status) &&
-            (identical(other.deliveryDate, deliveryDate) ||
-                other.deliveryDate == deliveryDate) &&
-            (identical(other.deliveryTime, deliveryTime) ||
-                other.deliveryTime == deliveryTime) &&
-            (identical(other.lineNumber, lineNumber) ||
-                other.lineNumber == lineNumber) &&
-            (identical(other.tax, tax) || other.tax == tax) &&
-            (identical(other.orderType, orderType) ||
-                other.orderType == orderType) &&
-            (identical(other.orderNumber, orderNumber) ||
-                other.orderNumber == orderNumber) &&
-            (identical(other.ezrxNumber, ezrxNumber) ||
-                other.ezrxNumber == ezrxNumber) &&
-            (identical(other.createdDate, createdDate) ||
-                other.createdDate == createdDate) &&
-            (identical(other.createdTime, createdTime) ||
-                other.createdTime == createdTime) &&
-            (identical(other.orderBy, orderBy) || other.orderBy == orderBy) &&
-            (identical(other.purchaseOrderType, purchaseOrderType) ||
-                other.purchaseOrderType == purchaseOrderType));
+            const DeepCollectionEquality()
+                .equals(other.materialNumber, materialNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.materialDescription, materialDescription) &&
+            const DeepCollectionEquality().equals(other.qty, qty) &&
+            const DeepCollectionEquality().equals(other.unitPrice, unitPrice) &&
+            const DeepCollectionEquality()
+                .equals(other.totalPrice, totalPrice) &&
+            const DeepCollectionEquality().equals(other.status, status) &&
+            const DeepCollectionEquality()
+                .equals(other.deliveryDate, deliveryDate) &&
+            const DeepCollectionEquality()
+                .equals(other.deliveryTime, deliveryTime) &&
+            const DeepCollectionEquality()
+                .equals(other.lineNumber, lineNumber) &&
+            const DeepCollectionEquality().equals(other.tax, tax) &&
+            const DeepCollectionEquality().equals(other.orderType, orderType) &&
+            const DeepCollectionEquality()
+                .equals(other.orderNumber, orderNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.ezrxNumber, ezrxNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.createdDate, createdDate) &&
+            const DeepCollectionEquality()
+                .equals(other.createdTime, createdTime) &&
+            const DeepCollectionEquality().equals(other.orderBy, orderBy) &&
+            const DeepCollectionEquality()
+                .equals(other.purchaseOrderType, purchaseOrderType));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      materialNumber,
-      materialDescription,
-      qty,
-      unitPrice,
-      totalPrice,
-      status,
-      deliveryDate,
-      deliveryTime,
-      lineNumber,
-      tax,
-      orderType,
-      orderNumber,
-      ezrxNumber,
-      createdDate,
-      createdTime,
-      orderBy,
-      purchaseOrderType);
+      const DeepCollectionEquality().hash(materialNumber),
+      const DeepCollectionEquality().hash(materialDescription),
+      const DeepCollectionEquality().hash(qty),
+      const DeepCollectionEquality().hash(unitPrice),
+      const DeepCollectionEquality().hash(totalPrice),
+      const DeepCollectionEquality().hash(status),
+      const DeepCollectionEquality().hash(deliveryDate),
+      const DeepCollectionEquality().hash(deliveryTime),
+      const DeepCollectionEquality().hash(lineNumber),
+      const DeepCollectionEquality().hash(tax),
+      const DeepCollectionEquality().hash(orderType),
+      const DeepCollectionEquality().hash(orderNumber),
+      const DeepCollectionEquality().hash(ezrxNumber),
+      const DeepCollectionEquality().hash(createdDate),
+      const DeepCollectionEquality().hash(createdTime),
+      const DeepCollectionEquality().hash(orderBy),
+      const DeepCollectionEquality().hash(purchaseOrderType));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_OrderHistoryItemDtoCopyWith<_$_OrderHistoryItemDto> get copyWith =>
       __$$_OrderHistoryItemDtoCopyWithImpl<_$_OrderHistoryItemDto>(
           this, _$identity);

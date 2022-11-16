@@ -29,13 +29,13 @@ mixin _$LoginFormEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadLastSavedCred,
-    TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function(String passwordStr)? passwordChanged,
-    TResult? Function()? passwordVisibilityChanged,
-    TResult? Function()? rememberCheckChanged,
-    TResult? Function()? loginWithEmailAndPasswordPressed,
-    TResult? Function()? loginWithOktaButtonPressed,
+    TResult Function()? loadLastSavedCred,
+    TResult Function(String usernameStr)? usernameChanged,
+    TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? passwordVisibilityChanged,
+    TResult Function()? rememberCheckChanged,
+    TResult Function()? loginWithEmailAndPasswordPressed,
+    TResult Function()? loginWithOktaButtonPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,14 +66,14 @@ mixin _$LoginFormEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadLastSavedCred value)? loadLastSavedCred,
-    TResult? Function(_UsernameChanged value)? usernameChanged,
-    TResult? Function(_PasswordChanged value)? passwordChanged,
-    TResult? Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
-    TResult? Function(_RememberCheckChanged value)? rememberCheckChanged,
-    TResult? Function(_LoginWithEmailAndPasswordPressed value)?
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
+    TResult Function(_UsernameChanged value)? usernameChanged,
+    TResult Function(_PasswordChanged value)? passwordChanged,
+    TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
+    TResult Function(_RememberCheckChanged value)? rememberCheckChanged,
+    TResult Function(_LoginWithEmailAndPasswordPressed value)?
         loginWithEmailAndPasswordPressed,
-    TResult? Function(_LoginWithOktaButtonPressed value)?
+    TResult Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
   }) =>
       throw _privateConstructorUsedError;
@@ -97,18 +97,17 @@ mixin _$LoginFormEvent {
 abstract class $LoginFormEventCopyWith<$Res> {
   factory $LoginFormEventCopyWith(
           LoginFormEvent value, $Res Function(LoginFormEvent) then) =
-      _$LoginFormEventCopyWithImpl<$Res, LoginFormEvent>;
+      _$LoginFormEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$LoginFormEventCopyWithImpl<$Res, $Val extends LoginFormEvent>
+class _$LoginFormEventCopyWithImpl<$Res>
     implements $LoginFormEventCopyWith<$Res> {
   _$LoginFormEventCopyWithImpl(this._value, this._then);
 
+  final LoginFormEvent _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(LoginFormEvent) _then;
 }
 
 /// @nodoc
@@ -120,11 +119,14 @@ abstract class _$$_LoadLastSavedCredCopyWith<$Res> {
 
 /// @nodoc
 class __$$_LoadLastSavedCredCopyWithImpl<$Res>
-    extends _$LoginFormEventCopyWithImpl<$Res, _$_LoadLastSavedCred>
+    extends _$LoginFormEventCopyWithImpl<$Res>
     implements _$$_LoadLastSavedCredCopyWith<$Res> {
   __$$_LoadLastSavedCredCopyWithImpl(
       _$_LoadLastSavedCred _value, $Res Function(_$_LoadLastSavedCred) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_LoadLastSavedCred));
+
+  @override
+  _$_LoadLastSavedCred get _value => super._value as _$_LoadLastSavedCred;
 }
 
 /// @nodoc
@@ -163,13 +165,13 @@ class _$_LoadLastSavedCred implements _LoadLastSavedCred {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadLastSavedCred,
-    TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function(String passwordStr)? passwordChanged,
-    TResult? Function()? passwordVisibilityChanged,
-    TResult? Function()? rememberCheckChanged,
-    TResult? Function()? loginWithEmailAndPasswordPressed,
-    TResult? Function()? loginWithOktaButtonPressed,
+    TResult Function()? loadLastSavedCred,
+    TResult Function(String usernameStr)? usernameChanged,
+    TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? passwordVisibilityChanged,
+    TResult Function()? rememberCheckChanged,
+    TResult Function()? loginWithEmailAndPasswordPressed,
+    TResult Function()? loginWithOktaButtonPressed,
   }) {
     return loadLastSavedCred?.call();
   }
@@ -212,14 +214,14 @@ class _$_LoadLastSavedCred implements _LoadLastSavedCred {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadLastSavedCred value)? loadLastSavedCred,
-    TResult? Function(_UsernameChanged value)? usernameChanged,
-    TResult? Function(_PasswordChanged value)? passwordChanged,
-    TResult? Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
-    TResult? Function(_RememberCheckChanged value)? rememberCheckChanged,
-    TResult? Function(_LoginWithEmailAndPasswordPressed value)?
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
+    TResult Function(_UsernameChanged value)? usernameChanged,
+    TResult Function(_PasswordChanged value)? passwordChanged,
+    TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
+    TResult Function(_RememberCheckChanged value)? rememberCheckChanged,
+    TResult Function(_LoginWithEmailAndPasswordPressed value)?
         loginWithEmailAndPasswordPressed,
-    TResult? Function(_LoginWithOktaButtonPressed value)?
+    TResult Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
   }) {
     return loadLastSavedCred?.call(this);
@@ -255,25 +257,26 @@ abstract class _$$_UsernameChangedCopyWith<$Res> {
   factory _$$_UsernameChangedCopyWith(
           _$_UsernameChanged value, $Res Function(_$_UsernameChanged) then) =
       __$$_UsernameChangedCopyWithImpl<$Res>;
-  @useResult
   $Res call({String usernameStr});
 }
 
 /// @nodoc
 class __$$_UsernameChangedCopyWithImpl<$Res>
-    extends _$LoginFormEventCopyWithImpl<$Res, _$_UsernameChanged>
+    extends _$LoginFormEventCopyWithImpl<$Res>
     implements _$$_UsernameChangedCopyWith<$Res> {
   __$$_UsernameChangedCopyWithImpl(
       _$_UsernameChanged _value, $Res Function(_$_UsernameChanged) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_UsernameChanged));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_UsernameChanged get _value => super._value as _$_UsernameChanged;
+
   @override
   $Res call({
-    Object? usernameStr = null,
+    Object? usernameStr = freezed,
   }) {
     return _then(_$_UsernameChanged(
-      null == usernameStr
+      usernameStr == freezed
           ? _value.usernameStr
           : usernameStr // ignore: cast_nullable_to_non_nullable
               as String,
@@ -299,16 +302,16 @@ class _$_UsernameChanged implements _UsernameChanged {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UsernameChanged &&
-            (identical(other.usernameStr, usernameStr) ||
-                other.usernameStr == usernameStr));
+            const DeepCollectionEquality()
+                .equals(other.usernameStr, usernameStr));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, usernameStr);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(usernameStr));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_UsernameChangedCopyWith<_$_UsernameChanged> get copyWith =>
       __$$_UsernameChangedCopyWithImpl<_$_UsernameChanged>(this, _$identity);
 
@@ -329,13 +332,13 @@ class _$_UsernameChanged implements _UsernameChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadLastSavedCred,
-    TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function(String passwordStr)? passwordChanged,
-    TResult? Function()? passwordVisibilityChanged,
-    TResult? Function()? rememberCheckChanged,
-    TResult? Function()? loginWithEmailAndPasswordPressed,
-    TResult? Function()? loginWithOktaButtonPressed,
+    TResult Function()? loadLastSavedCred,
+    TResult Function(String usernameStr)? usernameChanged,
+    TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? passwordVisibilityChanged,
+    TResult Function()? rememberCheckChanged,
+    TResult Function()? loginWithEmailAndPasswordPressed,
+    TResult Function()? loginWithOktaButtonPressed,
   }) {
     return usernameChanged?.call(usernameStr);
   }
@@ -378,14 +381,14 @@ class _$_UsernameChanged implements _UsernameChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadLastSavedCred value)? loadLastSavedCred,
-    TResult? Function(_UsernameChanged value)? usernameChanged,
-    TResult? Function(_PasswordChanged value)? passwordChanged,
-    TResult? Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
-    TResult? Function(_RememberCheckChanged value)? rememberCheckChanged,
-    TResult? Function(_LoginWithEmailAndPasswordPressed value)?
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
+    TResult Function(_UsernameChanged value)? usernameChanged,
+    TResult Function(_PasswordChanged value)? passwordChanged,
+    TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
+    TResult Function(_RememberCheckChanged value)? rememberCheckChanged,
+    TResult Function(_LoginWithEmailAndPasswordPressed value)?
         loginWithEmailAndPasswordPressed,
-    TResult? Function(_LoginWithOktaButtonPressed value)?
+    TResult Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
   }) {
     return usernameChanged?.call(this);
@@ -426,25 +429,26 @@ abstract class _$$_PasswordChangedCopyWith<$Res> {
   factory _$$_PasswordChangedCopyWith(
           _$_PasswordChanged value, $Res Function(_$_PasswordChanged) then) =
       __$$_PasswordChangedCopyWithImpl<$Res>;
-  @useResult
   $Res call({String passwordStr});
 }
 
 /// @nodoc
 class __$$_PasswordChangedCopyWithImpl<$Res>
-    extends _$LoginFormEventCopyWithImpl<$Res, _$_PasswordChanged>
+    extends _$LoginFormEventCopyWithImpl<$Res>
     implements _$$_PasswordChangedCopyWith<$Res> {
   __$$_PasswordChangedCopyWithImpl(
       _$_PasswordChanged _value, $Res Function(_$_PasswordChanged) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_PasswordChanged));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_PasswordChanged get _value => super._value as _$_PasswordChanged;
+
   @override
   $Res call({
-    Object? passwordStr = null,
+    Object? passwordStr = freezed,
   }) {
     return _then(_$_PasswordChanged(
-      null == passwordStr
+      passwordStr == freezed
           ? _value.passwordStr
           : passwordStr // ignore: cast_nullable_to_non_nullable
               as String,
@@ -470,16 +474,16 @@ class _$_PasswordChanged implements _PasswordChanged {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PasswordChanged &&
-            (identical(other.passwordStr, passwordStr) ||
-                other.passwordStr == passwordStr));
+            const DeepCollectionEquality()
+                .equals(other.passwordStr, passwordStr));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, passwordStr);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(passwordStr));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_PasswordChangedCopyWith<_$_PasswordChanged> get copyWith =>
       __$$_PasswordChangedCopyWithImpl<_$_PasswordChanged>(this, _$identity);
 
@@ -500,13 +504,13 @@ class _$_PasswordChanged implements _PasswordChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadLastSavedCred,
-    TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function(String passwordStr)? passwordChanged,
-    TResult? Function()? passwordVisibilityChanged,
-    TResult? Function()? rememberCheckChanged,
-    TResult? Function()? loginWithEmailAndPasswordPressed,
-    TResult? Function()? loginWithOktaButtonPressed,
+    TResult Function()? loadLastSavedCred,
+    TResult Function(String usernameStr)? usernameChanged,
+    TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? passwordVisibilityChanged,
+    TResult Function()? rememberCheckChanged,
+    TResult Function()? loginWithEmailAndPasswordPressed,
+    TResult Function()? loginWithOktaButtonPressed,
   }) {
     return passwordChanged?.call(passwordStr);
   }
@@ -549,14 +553,14 @@ class _$_PasswordChanged implements _PasswordChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadLastSavedCred value)? loadLastSavedCred,
-    TResult? Function(_UsernameChanged value)? usernameChanged,
-    TResult? Function(_PasswordChanged value)? passwordChanged,
-    TResult? Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
-    TResult? Function(_RememberCheckChanged value)? rememberCheckChanged,
-    TResult? Function(_LoginWithEmailAndPasswordPressed value)?
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
+    TResult Function(_UsernameChanged value)? usernameChanged,
+    TResult Function(_PasswordChanged value)? passwordChanged,
+    TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
+    TResult Function(_RememberCheckChanged value)? rememberCheckChanged,
+    TResult Function(_LoginWithEmailAndPasswordPressed value)?
         loginWithEmailAndPasswordPressed,
-    TResult? Function(_LoginWithOktaButtonPressed value)?
+    TResult Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
   }) {
     return passwordChanged?.call(this);
@@ -601,11 +605,15 @@ abstract class _$$_PasswordVisibleChangedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_PasswordVisibleChangedCopyWithImpl<$Res>
-    extends _$LoginFormEventCopyWithImpl<$Res, _$_PasswordVisibleChanged>
+    extends _$LoginFormEventCopyWithImpl<$Res>
     implements _$$_PasswordVisibleChangedCopyWith<$Res> {
   __$$_PasswordVisibleChangedCopyWithImpl(_$_PasswordVisibleChanged _value,
       $Res Function(_$_PasswordVisibleChanged) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_PasswordVisibleChanged));
+
+  @override
+  _$_PasswordVisibleChanged get _value =>
+      super._value as _$_PasswordVisibleChanged;
 }
 
 /// @nodoc
@@ -645,13 +653,13 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadLastSavedCred,
-    TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function(String passwordStr)? passwordChanged,
-    TResult? Function()? passwordVisibilityChanged,
-    TResult? Function()? rememberCheckChanged,
-    TResult? Function()? loginWithEmailAndPasswordPressed,
-    TResult? Function()? loginWithOktaButtonPressed,
+    TResult Function()? loadLastSavedCred,
+    TResult Function(String usernameStr)? usernameChanged,
+    TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? passwordVisibilityChanged,
+    TResult Function()? rememberCheckChanged,
+    TResult Function()? loginWithEmailAndPasswordPressed,
+    TResult Function()? loginWithOktaButtonPressed,
   }) {
     return passwordVisibilityChanged?.call();
   }
@@ -694,14 +702,14 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadLastSavedCred value)? loadLastSavedCred,
-    TResult? Function(_UsernameChanged value)? usernameChanged,
-    TResult? Function(_PasswordChanged value)? passwordChanged,
-    TResult? Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
-    TResult? Function(_RememberCheckChanged value)? rememberCheckChanged,
-    TResult? Function(_LoginWithEmailAndPasswordPressed value)?
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
+    TResult Function(_UsernameChanged value)? usernameChanged,
+    TResult Function(_PasswordChanged value)? passwordChanged,
+    TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
+    TResult Function(_RememberCheckChanged value)? rememberCheckChanged,
+    TResult Function(_LoginWithEmailAndPasswordPressed value)?
         loginWithEmailAndPasswordPressed,
-    TResult? Function(_LoginWithOktaButtonPressed value)?
+    TResult Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
   }) {
     return passwordVisibilityChanged?.call(this);
@@ -741,11 +749,14 @@ abstract class _$$_RememberCheckChangedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_RememberCheckChangedCopyWithImpl<$Res>
-    extends _$LoginFormEventCopyWithImpl<$Res, _$_RememberCheckChanged>
+    extends _$LoginFormEventCopyWithImpl<$Res>
     implements _$$_RememberCheckChangedCopyWith<$Res> {
   __$$_RememberCheckChangedCopyWithImpl(_$_RememberCheckChanged _value,
       $Res Function(_$_RememberCheckChanged) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_RememberCheckChanged));
+
+  @override
+  _$_RememberCheckChanged get _value => super._value as _$_RememberCheckChanged;
 }
 
 /// @nodoc
@@ -784,13 +795,13 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadLastSavedCred,
-    TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function(String passwordStr)? passwordChanged,
-    TResult? Function()? passwordVisibilityChanged,
-    TResult? Function()? rememberCheckChanged,
-    TResult? Function()? loginWithEmailAndPasswordPressed,
-    TResult? Function()? loginWithOktaButtonPressed,
+    TResult Function()? loadLastSavedCred,
+    TResult Function(String usernameStr)? usernameChanged,
+    TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? passwordVisibilityChanged,
+    TResult Function()? rememberCheckChanged,
+    TResult Function()? loginWithEmailAndPasswordPressed,
+    TResult Function()? loginWithOktaButtonPressed,
   }) {
     return rememberCheckChanged?.call();
   }
@@ -833,14 +844,14 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadLastSavedCred value)? loadLastSavedCred,
-    TResult? Function(_UsernameChanged value)? usernameChanged,
-    TResult? Function(_PasswordChanged value)? passwordChanged,
-    TResult? Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
-    TResult? Function(_RememberCheckChanged value)? rememberCheckChanged,
-    TResult? Function(_LoginWithEmailAndPasswordPressed value)?
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
+    TResult Function(_UsernameChanged value)? usernameChanged,
+    TResult Function(_PasswordChanged value)? passwordChanged,
+    TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
+    TResult Function(_RememberCheckChanged value)? rememberCheckChanged,
+    TResult Function(_LoginWithEmailAndPasswordPressed value)?
         loginWithEmailAndPasswordPressed,
-    TResult? Function(_LoginWithOktaButtonPressed value)?
+    TResult Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
   }) {
     return rememberCheckChanged?.call(this);
@@ -881,13 +892,16 @@ abstract class _$$_LoginWithEmailAndPasswordPressedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_LoginWithEmailAndPasswordPressedCopyWithImpl<$Res>
-    extends _$LoginFormEventCopyWithImpl<$Res,
-        _$_LoginWithEmailAndPasswordPressed>
+    extends _$LoginFormEventCopyWithImpl<$Res>
     implements _$$_LoginWithEmailAndPasswordPressedCopyWith<$Res> {
   __$$_LoginWithEmailAndPasswordPressedCopyWithImpl(
       _$_LoginWithEmailAndPasswordPressed _value,
       $Res Function(_$_LoginWithEmailAndPasswordPressed) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_LoginWithEmailAndPasswordPressed));
+
+  @override
+  _$_LoginWithEmailAndPasswordPressed get _value =>
+      super._value as _$_LoginWithEmailAndPasswordPressed;
 }
 
 /// @nodoc
@@ -928,13 +942,13 @@ class _$_LoginWithEmailAndPasswordPressed
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadLastSavedCred,
-    TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function(String passwordStr)? passwordChanged,
-    TResult? Function()? passwordVisibilityChanged,
-    TResult? Function()? rememberCheckChanged,
-    TResult? Function()? loginWithEmailAndPasswordPressed,
-    TResult? Function()? loginWithOktaButtonPressed,
+    TResult Function()? loadLastSavedCred,
+    TResult Function(String usernameStr)? usernameChanged,
+    TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? passwordVisibilityChanged,
+    TResult Function()? rememberCheckChanged,
+    TResult Function()? loginWithEmailAndPasswordPressed,
+    TResult Function()? loginWithOktaButtonPressed,
   }) {
     return loginWithEmailAndPasswordPressed?.call();
   }
@@ -977,14 +991,14 @@ class _$_LoginWithEmailAndPasswordPressed
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadLastSavedCred value)? loadLastSavedCred,
-    TResult? Function(_UsernameChanged value)? usernameChanged,
-    TResult? Function(_PasswordChanged value)? passwordChanged,
-    TResult? Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
-    TResult? Function(_RememberCheckChanged value)? rememberCheckChanged,
-    TResult? Function(_LoginWithEmailAndPasswordPressed value)?
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
+    TResult Function(_UsernameChanged value)? usernameChanged,
+    TResult Function(_PasswordChanged value)? passwordChanged,
+    TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
+    TResult Function(_RememberCheckChanged value)? rememberCheckChanged,
+    TResult Function(_LoginWithEmailAndPasswordPressed value)?
         loginWithEmailAndPasswordPressed,
-    TResult? Function(_LoginWithOktaButtonPressed value)?
+    TResult Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
   }) {
     return loginWithEmailAndPasswordPressed?.call(this);
@@ -1026,12 +1040,16 @@ abstract class _$$_LoginWithOktaButtonPressedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_LoginWithOktaButtonPressedCopyWithImpl<$Res>
-    extends _$LoginFormEventCopyWithImpl<$Res, _$_LoginWithOktaButtonPressed>
+    extends _$LoginFormEventCopyWithImpl<$Res>
     implements _$$_LoginWithOktaButtonPressedCopyWith<$Res> {
   __$$_LoginWithOktaButtonPressedCopyWithImpl(
       _$_LoginWithOktaButtonPressed _value,
       $Res Function(_$_LoginWithOktaButtonPressed) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_LoginWithOktaButtonPressed));
+
+  @override
+  _$_LoginWithOktaButtonPressed get _value =>
+      super._value as _$_LoginWithOktaButtonPressed;
 }
 
 /// @nodoc
@@ -1071,13 +1089,13 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadLastSavedCred,
-    TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function(String passwordStr)? passwordChanged,
-    TResult? Function()? passwordVisibilityChanged,
-    TResult? Function()? rememberCheckChanged,
-    TResult? Function()? loginWithEmailAndPasswordPressed,
-    TResult? Function()? loginWithOktaButtonPressed,
+    TResult Function()? loadLastSavedCred,
+    TResult Function(String usernameStr)? usernameChanged,
+    TResult Function(String passwordStr)? passwordChanged,
+    TResult Function()? passwordVisibilityChanged,
+    TResult Function()? rememberCheckChanged,
+    TResult Function()? loginWithEmailAndPasswordPressed,
+    TResult Function()? loginWithOktaButtonPressed,
   }) {
     return loginWithOktaButtonPressed?.call();
   }
@@ -1120,14 +1138,14 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadLastSavedCred value)? loadLastSavedCred,
-    TResult? Function(_UsernameChanged value)? usernameChanged,
-    TResult? Function(_PasswordChanged value)? passwordChanged,
-    TResult? Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
-    TResult? Function(_RememberCheckChanged value)? rememberCheckChanged,
-    TResult? Function(_LoginWithEmailAndPasswordPressed value)?
+    TResult Function(_LoadLastSavedCred value)? loadLastSavedCred,
+    TResult Function(_UsernameChanged value)? usernameChanged,
+    TResult Function(_PasswordChanged value)? passwordChanged,
+    TResult Function(_PasswordVisibleChanged value)? passwordVisibilityChanged,
+    TResult Function(_RememberCheckChanged value)? rememberCheckChanged,
+    TResult Function(_LoginWithEmailAndPasswordPressed value)?
         loginWithEmailAndPasswordPressed,
-    TResult? Function(_LoginWithOktaButtonPressed value)?
+    TResult Function(_LoginWithOktaButtonPressed value)?
         loginWithOktaButtonPressed,
   }) {
     return loginWithOktaButtonPressed?.call(this);
@@ -1178,8 +1196,7 @@ mixin _$LoginFormState {
 abstract class $LoginFormStateCopyWith<$Res> {
   factory $LoginFormStateCopyWith(
           LoginFormState value, $Res Function(LoginFormState) then) =
-      _$LoginFormStateCopyWithImpl<$Res, LoginFormState>;
-  @useResult
+      _$LoginFormStateCopyWithImpl<$Res>;
   $Res call(
       {Username username,
       Password password,
@@ -1191,56 +1208,54 @@ abstract class $LoginFormStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LoginFormStateCopyWithImpl<$Res, $Val extends LoginFormState>
+class _$LoginFormStateCopyWithImpl<$Res>
     implements $LoginFormStateCopyWith<$Res> {
   _$LoginFormStateCopyWithImpl(this._value, this._then);
 
+  final LoginFormState _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(LoginFormState) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = null,
-    Object? password = null,
-    Object? passwordVisible = null,
-    Object? rememberPassword = null,
-    Object? showErrorMessages = null,
-    Object? isSubmitting = null,
-    Object? authFailureOrSuccessOption = null,
+    Object? username = freezed,
+    Object? password = freezed,
+    Object? passwordVisible = freezed,
+    Object? rememberPassword = freezed,
+    Object? showErrorMessages = freezed,
+    Object? isSubmitting = freezed,
+    Object? authFailureOrSuccessOption = freezed,
   }) {
     return _then(_value.copyWith(
-      username: null == username
+      username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as Username,
-      password: null == password
+      password: password == freezed
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as Password,
-      passwordVisible: null == passwordVisible
+      passwordVisible: passwordVisible == freezed
           ? _value.passwordVisible
           : passwordVisible // ignore: cast_nullable_to_non_nullable
               as bool,
-      rememberPassword: null == rememberPassword
+      rememberPassword: rememberPassword == freezed
           ? _value.rememberPassword
           : rememberPassword // ignore: cast_nullable_to_non_nullable
               as bool,
-      showErrorMessages: null == showErrorMessages
+      showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
-      isSubmitting: null == isSubmitting
+      isSubmitting: isSubmitting == freezed
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
-      authFailureOrSuccessOption: null == authFailureOrSuccessOption
+      authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-    ) as $Val);
+    ));
   }
 }
 
@@ -1251,7 +1266,6 @@ abstract class _$$_LoginFormStateCopyWith<$Res>
           _$_LoginFormState value, $Res Function(_$_LoginFormState) then) =
       __$$_LoginFormStateCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {Username username,
       Password password,
@@ -1264,49 +1278,51 @@ abstract class _$$_LoginFormStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_LoginFormStateCopyWithImpl<$Res>
-    extends _$LoginFormStateCopyWithImpl<$Res, _$_LoginFormState>
+    extends _$LoginFormStateCopyWithImpl<$Res>
     implements _$$_LoginFormStateCopyWith<$Res> {
   __$$_LoginFormStateCopyWithImpl(
       _$_LoginFormState _value, $Res Function(_$_LoginFormState) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_LoginFormState));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_LoginFormState get _value => super._value as _$_LoginFormState;
+
   @override
   $Res call({
-    Object? username = null,
-    Object? password = null,
-    Object? passwordVisible = null,
-    Object? rememberPassword = null,
-    Object? showErrorMessages = null,
-    Object? isSubmitting = null,
-    Object? authFailureOrSuccessOption = null,
+    Object? username = freezed,
+    Object? password = freezed,
+    Object? passwordVisible = freezed,
+    Object? rememberPassword = freezed,
+    Object? showErrorMessages = freezed,
+    Object? isSubmitting = freezed,
+    Object? authFailureOrSuccessOption = freezed,
   }) {
     return _then(_$_LoginFormState(
-      username: null == username
+      username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as Username,
-      password: null == password
+      password: password == freezed
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as Password,
-      passwordVisible: null == passwordVisible
+      passwordVisible: passwordVisible == freezed
           ? _value.passwordVisible
           : passwordVisible // ignore: cast_nullable_to_non_nullable
               as bool,
-      rememberPassword: null == rememberPassword
+      rememberPassword: rememberPassword == freezed
           ? _value.rememberPassword
           : rememberPassword // ignore: cast_nullable_to_non_nullable
               as bool,
-      showErrorMessages: null == showErrorMessages
+      showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
-      isSubmitting: null == isSubmitting
+      isSubmitting: isSubmitting == freezed
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
-      authFailureOrSuccessOption: null == authFailureOrSuccessOption
+      authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
@@ -1351,38 +1367,33 @@ class _$_LoginFormState implements _LoginFormState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoginFormState &&
-            (identical(other.username, username) ||
-                other.username == username) &&
-            (identical(other.password, password) ||
-                other.password == password) &&
-            (identical(other.passwordVisible, passwordVisible) ||
-                other.passwordVisible == passwordVisible) &&
-            (identical(other.rememberPassword, rememberPassword) ||
-                other.rememberPassword == rememberPassword) &&
-            (identical(other.showErrorMessages, showErrorMessages) ||
-                other.showErrorMessages == showErrorMessages) &&
-            (identical(other.isSubmitting, isSubmitting) ||
-                other.isSubmitting == isSubmitting) &&
-            (identical(other.authFailureOrSuccessOption,
-                    authFailureOrSuccessOption) ||
-                other.authFailureOrSuccessOption ==
-                    authFailureOrSuccessOption));
+            const DeepCollectionEquality().equals(other.username, username) &&
+            const DeepCollectionEquality().equals(other.password, password) &&
+            const DeepCollectionEquality()
+                .equals(other.passwordVisible, passwordVisible) &&
+            const DeepCollectionEquality()
+                .equals(other.rememberPassword, rememberPassword) &&
+            const DeepCollectionEquality()
+                .equals(other.showErrorMessages, showErrorMessages) &&
+            const DeepCollectionEquality()
+                .equals(other.isSubmitting, isSubmitting) &&
+            const DeepCollectionEquality().equals(
+                other.authFailureOrSuccessOption, authFailureOrSuccessOption));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      username,
-      password,
-      passwordVisible,
-      rememberPassword,
-      showErrorMessages,
-      isSubmitting,
-      authFailureOrSuccessOption);
+      const DeepCollectionEquality().hash(username),
+      const DeepCollectionEquality().hash(password),
+      const DeepCollectionEquality().hash(passwordVisible),
+      const DeepCollectionEquality().hash(rememberPassword),
+      const DeepCollectionEquality().hash(showErrorMessages),
+      const DeepCollectionEquality().hash(isSubmitting),
+      const DeepCollectionEquality().hash(authFailureOrSuccessOption));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_LoginFormStateCopyWith<_$_LoginFormState> get copyWith =>
       __$$_LoginFormStateCopyWithImpl<_$_LoginFormState>(this, _$identity);
 }

@@ -39,8 +39,7 @@ mixin _$MaterialItemOverrideDto {
 abstract class $MaterialItemOverrideDtoCopyWith<$Res> {
   factory $MaterialItemOverrideDtoCopyWith(MaterialItemOverrideDto value,
           $Res Function(MaterialItemOverrideDto) then) =
-      _$MaterialItemOverrideDtoCopyWithImpl<$Res, MaterialItemOverrideDto>;
-  @useResult
+      _$MaterialItemOverrideDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'reference', defaultValue: '')
           String reference,
@@ -51,37 +50,34 @@ abstract class $MaterialItemOverrideDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MaterialItemOverrideDtoCopyWithImpl<$Res,
-        $Val extends MaterialItemOverrideDto>
+class _$MaterialItemOverrideDtoCopyWithImpl<$Res>
     implements $MaterialItemOverrideDtoCopyWith<$Res> {
   _$MaterialItemOverrideDtoCopyWithImpl(this._value, this._then);
 
+  final MaterialItemOverrideDto _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(MaterialItemOverrideDto) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? reference = null,
-    Object? valueOverride = null,
-    Object? percentageOverride = null,
+    Object? reference = freezed,
+    Object? valueOverride = freezed,
+    Object? percentageOverride = freezed,
   }) {
     return _then(_value.copyWith(
-      reference: null == reference
+      reference: reference == freezed
           ? _value.reference
           : reference // ignore: cast_nullable_to_non_nullable
               as String,
-      valueOverride: null == valueOverride
+      valueOverride: valueOverride == freezed
           ? _value.valueOverride
           : valueOverride // ignore: cast_nullable_to_non_nullable
               as List<ValueOverrideDto>,
-      percentageOverride: null == percentageOverride
+      percentageOverride: percentageOverride == freezed
           ? _value.percentageOverride
           : percentageOverride // ignore: cast_nullable_to_non_nullable
               as dynamic,
-    ) as $Val);
+    ));
   }
 }
 
@@ -92,7 +88,6 @@ abstract class _$$_MaterialItemOverrideDtoCopyWith<$Res>
           $Res Function(_$_MaterialItemOverrideDto) then) =
       __$$_MaterialItemOverrideDtoCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {@JsonKey(name: 'reference', defaultValue: '')
           String reference,
@@ -104,30 +99,32 @@ abstract class _$$_MaterialItemOverrideDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_MaterialItemOverrideDtoCopyWithImpl<$Res>
-    extends _$MaterialItemOverrideDtoCopyWithImpl<$Res,
-        _$_MaterialItemOverrideDto>
+    extends _$MaterialItemOverrideDtoCopyWithImpl<$Res>
     implements _$$_MaterialItemOverrideDtoCopyWith<$Res> {
   __$$_MaterialItemOverrideDtoCopyWithImpl(_$_MaterialItemOverrideDto _value,
       $Res Function(_$_MaterialItemOverrideDto) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_MaterialItemOverrideDto));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_MaterialItemOverrideDto get _value =>
+      super._value as _$_MaterialItemOverrideDto;
+
   @override
   $Res call({
-    Object? reference = null,
-    Object? valueOverride = null,
-    Object? percentageOverride = null,
+    Object? reference = freezed,
+    Object? valueOverride = freezed,
+    Object? percentageOverride = freezed,
   }) {
     return _then(_$_MaterialItemOverrideDto(
-      reference: null == reference
+      reference: reference == freezed
           ? _value.reference
           : reference // ignore: cast_nullable_to_non_nullable
               as String,
-      valueOverride: null == valueOverride
+      valueOverride: valueOverride == freezed
           ? _value._valueOverride
           : valueOverride // ignore: cast_nullable_to_non_nullable
               as List<ValueOverrideDto>,
-      percentageOverride: null == percentageOverride
+      percentageOverride: percentageOverride == freezed
           ? _value.percentageOverride
           : percentageOverride // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -177,8 +174,7 @@ class _$_MaterialItemOverrideDto extends _MaterialItemOverrideDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MaterialItemOverrideDto &&
-            (identical(other.reference, reference) ||
-                other.reference == reference) &&
+            const DeepCollectionEquality().equals(other.reference, reference) &&
             const DeepCollectionEquality()
                 .equals(other._valueOverride, _valueOverride) &&
             const DeepCollectionEquality()
@@ -189,13 +185,12 @@ class _$_MaterialItemOverrideDto extends _MaterialItemOverrideDto {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      reference,
+      const DeepCollectionEquality().hash(reference),
       const DeepCollectionEquality().hash(_valueOverride),
       const DeepCollectionEquality().hash(percentageOverride));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_MaterialItemOverrideDtoCopyWith<_$_MaterialItemOverrideDto>
       get copyWith =>
           __$$_MaterialItemOverrideDtoCopyWithImpl<_$_MaterialItemOverrideDto>(
@@ -260,8 +255,7 @@ mixin _$ValueOverrideDto {
 abstract class $ValueOverrideDtoCopyWith<$Res> {
   factory $ValueOverrideDtoCopyWith(
           ValueOverrideDto value, $Res Function(ValueOverrideDto) then) =
-      _$ValueOverrideDtoCopyWithImpl<$Res, ValueOverrideDto>;
-  @useResult
+      _$ValueOverrideDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'code', defaultValue: '') String code,
       @JsonKey(name: 'price') dynamic price,
@@ -269,36 +263,34 @@ abstract class $ValueOverrideDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ValueOverrideDtoCopyWithImpl<$Res, $Val extends ValueOverrideDto>
+class _$ValueOverrideDtoCopyWithImpl<$Res>
     implements $ValueOverrideDtoCopyWith<$Res> {
   _$ValueOverrideDtoCopyWithImpl(this._value, this._then);
 
+  final ValueOverrideDto _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(ValueOverrideDto) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? code = null,
-    Object? price = null,
-    Object? currency = null,
+    Object? code = freezed,
+    Object? price = freezed,
+    Object? currency = freezed,
   }) {
     return _then(_value.copyWith(
-      code: null == code
+      code: code == freezed
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
-      price: null == price
+      price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      currency: null == currency
+      currency: currency == freezed
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as String,
-    ) as $Val);
+    ));
   }
 }
 
@@ -309,7 +301,6 @@ abstract class _$$_ValueOverrideDtoCopyWith<$Res>
           _$_ValueOverrideDto value, $Res Function(_$_ValueOverrideDto) then) =
       __$$_ValueOverrideDtoCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {@JsonKey(name: 'code', defaultValue: '') String code,
       @JsonKey(name: 'price') dynamic price,
@@ -318,29 +309,31 @@ abstract class _$$_ValueOverrideDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_ValueOverrideDtoCopyWithImpl<$Res>
-    extends _$ValueOverrideDtoCopyWithImpl<$Res, _$_ValueOverrideDto>
+    extends _$ValueOverrideDtoCopyWithImpl<$Res>
     implements _$$_ValueOverrideDtoCopyWith<$Res> {
   __$$_ValueOverrideDtoCopyWithImpl(
       _$_ValueOverrideDto _value, $Res Function(_$_ValueOverrideDto) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_ValueOverrideDto));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_ValueOverrideDto get _value => super._value as _$_ValueOverrideDto;
+
   @override
   $Res call({
-    Object? code = null,
-    Object? price = null,
-    Object? currency = null,
+    Object? code = freezed,
+    Object? price = freezed,
+    Object? currency = freezed,
   }) {
     return _then(_$_ValueOverrideDto(
-      code: null == code
+      code: code == freezed
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
-      price: null == price
+      price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      currency: null == currency
+      currency: currency == freezed
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as String,
@@ -380,20 +373,21 @@ class _$_ValueOverrideDto extends _ValueOverrideDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ValueOverrideDto &&
-            (identical(other.code, code) || other.code == code) &&
+            const DeepCollectionEquality().equals(other.code, code) &&
             const DeepCollectionEquality().equals(other.price, price) &&
-            (identical(other.currency, currency) ||
-                other.currency == currency));
+            const DeepCollectionEquality().equals(other.currency, currency));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, code, const DeepCollectionEquality().hash(price), currency);
+      runtimeType,
+      const DeepCollectionEquality().hash(code),
+      const DeepCollectionEquality().hash(price),
+      const DeepCollectionEquality().hash(currency));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_ValueOverrideDtoCopyWith<_$_ValueOverrideDto> get copyWith =>
       __$$_ValueOverrideDtoCopyWithImpl<_$_ValueOverrideDto>(this, _$identity);
 

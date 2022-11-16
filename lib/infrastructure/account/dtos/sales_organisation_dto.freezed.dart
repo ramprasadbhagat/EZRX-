@@ -37,8 +37,7 @@ mixin _$SalesOrganisationDto {
 abstract class $SalesOrganisationDtoCopyWith<$Res> {
   factory $SalesOrganisationDtoCopyWith(SalesOrganisationDto value,
           $Res Function(SalesOrganisationDto) then) =
-      _$SalesOrganisationDtoCopyWithImpl<$Res, SalesOrganisationDto>;
-  @useResult
+      _$SalesOrganisationDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'salesOrg') String salesOrg,
       @JsonKey(name: 'customerCode') String customerCode,
@@ -46,37 +45,34 @@ abstract class $SalesOrganisationDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SalesOrganisationDtoCopyWithImpl<$Res,
-        $Val extends SalesOrganisationDto>
+class _$SalesOrganisationDtoCopyWithImpl<$Res>
     implements $SalesOrganisationDtoCopyWith<$Res> {
   _$SalesOrganisationDtoCopyWithImpl(this._value, this._then);
 
+  final SalesOrganisationDto _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(SalesOrganisationDto) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? salesOrg = null,
-    Object? customerCode = null,
-    Object? shipToCodes = null,
+    Object? salesOrg = freezed,
+    Object? customerCode = freezed,
+    Object? shipToCodes = freezed,
   }) {
     return _then(_value.copyWith(
-      salesOrg: null == salesOrg
+      salesOrg: salesOrg == freezed
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as String,
-      customerCode: null == customerCode
+      customerCode: customerCode == freezed
           ? _value.customerCode
           : customerCode // ignore: cast_nullable_to_non_nullable
               as String,
-      shipToCodes: null == shipToCodes
+      shipToCodes: shipToCodes == freezed
           ? _value.shipToCodes
           : shipToCodes // ignore: cast_nullable_to_non_nullable
               as List<String>,
-    ) as $Val);
+    ));
   }
 }
 
@@ -87,7 +83,6 @@ abstract class _$$_SalesOrganisationDtoCopyWith<$Res>
           $Res Function(_$_SalesOrganisationDto) then) =
       __$$_SalesOrganisationDtoCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {@JsonKey(name: 'salesOrg') String salesOrg,
       @JsonKey(name: 'customerCode') String customerCode,
@@ -96,29 +91,31 @@ abstract class _$$_SalesOrganisationDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_SalesOrganisationDtoCopyWithImpl<$Res>
-    extends _$SalesOrganisationDtoCopyWithImpl<$Res, _$_SalesOrganisationDto>
+    extends _$SalesOrganisationDtoCopyWithImpl<$Res>
     implements _$$_SalesOrganisationDtoCopyWith<$Res> {
   __$$_SalesOrganisationDtoCopyWithImpl(_$_SalesOrganisationDto _value,
       $Res Function(_$_SalesOrganisationDto) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_SalesOrganisationDto));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_SalesOrganisationDto get _value => super._value as _$_SalesOrganisationDto;
+
   @override
   $Res call({
-    Object? salesOrg = null,
-    Object? customerCode = null,
-    Object? shipToCodes = null,
+    Object? salesOrg = freezed,
+    Object? customerCode = freezed,
+    Object? shipToCodes = freezed,
   }) {
     return _then(_$_SalesOrganisationDto(
-      salesOrg: null == salesOrg
+      salesOrg: salesOrg == freezed
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as String,
-      customerCode: null == customerCode
+      customerCode: customerCode == freezed
           ? _value.customerCode
           : customerCode // ignore: cast_nullable_to_non_nullable
               as String,
-      shipToCodes: null == shipToCodes
+      shipToCodes: shipToCodes == freezed
           ? _value._shipToCodes
           : shipToCodes // ignore: cast_nullable_to_non_nullable
               as List<String>,
@@ -163,22 +160,23 @@ class _$_SalesOrganisationDto extends _SalesOrganisationDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SalesOrganisationDto &&
-            (identical(other.salesOrg, salesOrg) ||
-                other.salesOrg == salesOrg) &&
-            (identical(other.customerCode, customerCode) ||
-                other.customerCode == customerCode) &&
+            const DeepCollectionEquality().equals(other.salesOrg, salesOrg) &&
+            const DeepCollectionEquality()
+                .equals(other.customerCode, customerCode) &&
             const DeepCollectionEquality()
                 .equals(other._shipToCodes, _shipToCodes));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrg, customerCode,
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(salesOrg),
+      const DeepCollectionEquality().hash(customerCode),
       const DeepCollectionEquality().hash(_shipToCodes));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_SalesOrganisationDtoCopyWith<_$_SalesOrganisationDto> get copyWith =>
       __$$_SalesOrganisationDtoCopyWithImpl<_$_SalesOrganisationDto>(
           this, _$identity);

@@ -35,8 +35,7 @@ mixin _$MaterialBundleDto {
 abstract class $MaterialBundleDtoCopyWith<$Res> {
   factory $MaterialBundleDtoCopyWith(
           MaterialBundleDto value, $Res Function(MaterialBundleDto) then) =
-      _$MaterialBundleDtoCopyWithImpl<$Res, MaterialBundleDto>;
-  @useResult
+      _$MaterialBundleDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'MaterialNumber')
           String materialNumber,
@@ -45,31 +44,29 @@ abstract class $MaterialBundleDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MaterialBundleDtoCopyWithImpl<$Res, $Val extends MaterialBundleDto>
+class _$MaterialBundleDtoCopyWithImpl<$Res>
     implements $MaterialBundleDtoCopyWith<$Res> {
   _$MaterialBundleDtoCopyWithImpl(this._value, this._then);
 
+  final MaterialBundleDto _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(MaterialBundleDto) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialNumber = null,
-    Object? bundles = null,
+    Object? materialNumber = freezed,
+    Object? bundles = freezed,
   }) {
     return _then(_value.copyWith(
-      materialNumber: null == materialNumber
+      materialNumber: materialNumber == freezed
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      bundles: null == bundles
+      bundles: bundles == freezed
           ? _value.bundles
           : bundles // ignore: cast_nullable_to_non_nullable
               as List<BundleDto>,
-    ) as $Val);
+    ));
   }
 }
 
@@ -80,7 +77,6 @@ abstract class _$$_MaterialBundleDtoCopyWith<$Res>
           $Res Function(_$_MaterialBundleDto) then) =
       __$$_MaterialBundleDtoCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {@JsonKey(name: 'MaterialNumber')
           String materialNumber,
@@ -90,24 +86,26 @@ abstract class _$$_MaterialBundleDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_MaterialBundleDtoCopyWithImpl<$Res>
-    extends _$MaterialBundleDtoCopyWithImpl<$Res, _$_MaterialBundleDto>
+    extends _$MaterialBundleDtoCopyWithImpl<$Res>
     implements _$$_MaterialBundleDtoCopyWith<$Res> {
   __$$_MaterialBundleDtoCopyWithImpl(
       _$_MaterialBundleDto _value, $Res Function(_$_MaterialBundleDto) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_MaterialBundleDto));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_MaterialBundleDto get _value => super._value as _$_MaterialBundleDto;
+
   @override
   $Res call({
-    Object? materialNumber = null,
-    Object? bundles = null,
+    Object? materialNumber = freezed,
+    Object? bundles = freezed,
   }) {
     return _then(_$_MaterialBundleDto(
-      materialNumber: null == materialNumber
+      materialNumber: materialNumber == freezed
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      bundles: null == bundles
+      bundles: bundles == freezed
           ? _value._bundles
           : bundles // ignore: cast_nullable_to_non_nullable
               as List<BundleDto>,
@@ -150,19 +148,20 @@ class _$_MaterialBundleDto extends _MaterialBundleDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MaterialBundleDto &&
-            (identical(other.materialNumber, materialNumber) ||
-                other.materialNumber == materialNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.materialNumber, materialNumber) &&
             const DeepCollectionEquality().equals(other._bundles, _bundles));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, materialNumber,
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(materialNumber),
       const DeepCollectionEquality().hash(_bundles));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_MaterialBundleDtoCopyWith<_$_MaterialBundleDto> get copyWith =>
       __$$_MaterialBundleDtoCopyWithImpl<_$_MaterialBundleDto>(
           this, _$identity);

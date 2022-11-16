@@ -37,41 +37,36 @@ abstract class $OrderHistoryDetailsPODocumentsDtoCopyWith<$Res> {
   factory $OrderHistoryDetailsPODocumentsDtoCopyWith(
           OrderHistoryDetailsPODocumentsDto value,
           $Res Function(OrderHistoryDetailsPODocumentsDto) then) =
-      _$OrderHistoryDetailsPODocumentsDtoCopyWithImpl<$Res,
-          OrderHistoryDetailsPODocumentsDto>;
-  @useResult
+      _$OrderHistoryDetailsPODocumentsDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'Url', defaultValue: '') String url,
       @JsonKey(name: 'Name', defaultValue: '') String name});
 }
 
 /// @nodoc
-class _$OrderHistoryDetailsPODocumentsDtoCopyWithImpl<$Res,
-        $Val extends OrderHistoryDetailsPODocumentsDto>
+class _$OrderHistoryDetailsPODocumentsDtoCopyWithImpl<$Res>
     implements $OrderHistoryDetailsPODocumentsDtoCopyWith<$Res> {
   _$OrderHistoryDetailsPODocumentsDtoCopyWithImpl(this._value, this._then);
 
+  final OrderHistoryDetailsPODocumentsDto _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(OrderHistoryDetailsPODocumentsDto) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? url = null,
-    Object? name = null,
+    Object? url = freezed,
+    Object? name = freezed,
   }) {
     return _then(_value.copyWith(
-      url: null == url
+      url: url == freezed
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
+      name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-    ) as $Val);
+    ));
   }
 }
 
@@ -83,7 +78,6 @@ abstract class _$$_OrderHistoryDetailsPODocumentsDtoCopyWith<$Res>
           $Res Function(_$_OrderHistoryDetailsPODocumentsDto) then) =
       __$$_OrderHistoryDetailsPODocumentsDtoCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {@JsonKey(name: 'Url', defaultValue: '') String url,
       @JsonKey(name: 'Name', defaultValue: '') String name});
@@ -91,26 +85,28 @@ abstract class _$$_OrderHistoryDetailsPODocumentsDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_OrderHistoryDetailsPODocumentsDtoCopyWithImpl<$Res>
-    extends _$OrderHistoryDetailsPODocumentsDtoCopyWithImpl<$Res,
-        _$_OrderHistoryDetailsPODocumentsDto>
+    extends _$OrderHistoryDetailsPODocumentsDtoCopyWithImpl<$Res>
     implements _$$_OrderHistoryDetailsPODocumentsDtoCopyWith<$Res> {
   __$$_OrderHistoryDetailsPODocumentsDtoCopyWithImpl(
       _$_OrderHistoryDetailsPODocumentsDto _value,
       $Res Function(_$_OrderHistoryDetailsPODocumentsDto) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_OrderHistoryDetailsPODocumentsDto));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_OrderHistoryDetailsPODocumentsDto get _value =>
+      super._value as _$_OrderHistoryDetailsPODocumentsDto;
+
   @override
   $Res call({
-    Object? url = null,
-    Object? name = null,
+    Object? url = freezed,
+    Object? name = freezed,
   }) {
     return _then(_$_OrderHistoryDetailsPODocumentsDto(
-      url: null == url
+      url: url == freezed
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
+      name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
@@ -148,17 +144,19 @@ class _$_OrderHistoryDetailsPODocumentsDto
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryDetailsPODocumentsDto &&
-            (identical(other.url, url) || other.url == url) &&
-            (identical(other.name, name) || other.name == name));
+            const DeepCollectionEquality().equals(other.url, url) &&
+            const DeepCollectionEquality().equals(other.name, name));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, url, name);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(url),
+      const DeepCollectionEquality().hash(name));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_OrderHistoryDetailsPODocumentsDtoCopyWith<
           _$_OrderHistoryDetailsPODocumentsDto>
       get copyWith => __$$_OrderHistoryDetailsPODocumentsDtoCopyWithImpl<

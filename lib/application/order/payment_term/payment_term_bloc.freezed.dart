@@ -30,8 +30,8 @@ mixin _$PaymentTermEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
+    TResult Function()? initialized,
+    TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customeCodeInfo,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -61,8 +61,8 @@ mixin _$PaymentTermEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -78,18 +78,17 @@ mixin _$PaymentTermEvent {
 abstract class $PaymentTermEventCopyWith<$Res> {
   factory $PaymentTermEventCopyWith(
           PaymentTermEvent value, $Res Function(PaymentTermEvent) then) =
-      _$PaymentTermEventCopyWithImpl<$Res, PaymentTermEvent>;
+      _$PaymentTermEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$PaymentTermEventCopyWithImpl<$Res, $Val extends PaymentTermEvent>
+class _$PaymentTermEventCopyWithImpl<$Res>
     implements $PaymentTermEventCopyWith<$Res> {
   _$PaymentTermEventCopyWithImpl(this._value, this._then);
 
+  final PaymentTermEvent _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(PaymentTermEvent) _then;
 }
 
 /// @nodoc
@@ -101,11 +100,14 @@ abstract class _$$_InitializedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitializedCopyWithImpl<$Res>
-    extends _$PaymentTermEventCopyWithImpl<$Res, _$_Initialized>
+    extends _$PaymentTermEventCopyWithImpl<$Res>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Initialized));
+
+  @override
+  _$_Initialized get _value => super._value as _$_Initialized;
 }
 
 /// @nodoc
@@ -145,8 +147,8 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
+    TResult Function()? initialized,
+    TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customeCodeInfo,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -188,8 +190,8 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
   }) {
     return initialized?.call(this);
   }
@@ -216,7 +218,6 @@ abstract class _Initialized implements PaymentTermEvent {
 abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
-  @useResult
   $Res call(
       {SalesOrganisation salesOrganisation,
       CustomerCodeInfo customeCodeInfo,
@@ -232,39 +233,40 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$PaymentTermEventCopyWithImpl<$Res, _$_Fetch>
+class __$$_FetchCopyWithImpl<$Res> extends _$PaymentTermEventCopyWithImpl<$Res>
     implements _$$_FetchCopyWith<$Res> {
   __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Fetch));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_Fetch get _value => super._value as _$_Fetch;
+
   @override
   $Res call({
-    Object? salesOrganisation = null,
-    Object? customeCodeInfo = null,
-    Object? salesOrganisationConfigs = null,
-    Object? salesRepresentativeInfo = null,
-    Object? paymentCustomerInformation = null,
+    Object? salesOrganisation = freezed,
+    Object? customeCodeInfo = freezed,
+    Object? salesOrganisationConfigs = freezed,
+    Object? salesRepresentativeInfo = freezed,
+    Object? paymentCustomerInformation = freezed,
   }) {
     return _then(_$_Fetch(
-      salesOrganisation: null == salesOrganisation
+      salesOrganisation: salesOrganisation == freezed
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      customeCodeInfo: null == customeCodeInfo
+      customeCodeInfo: customeCodeInfo == freezed
           ? _value.customeCodeInfo
           : customeCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
-      salesOrganisationConfigs: null == salesOrganisationConfigs
+      salesOrganisationConfigs: salesOrganisationConfigs == freezed
           ? _value.salesOrganisationConfigs
           : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
-      salesRepresentativeInfo: null == salesRepresentativeInfo
+      salesRepresentativeInfo: salesRepresentativeInfo == freezed
           ? _value.salesRepresentativeInfo
           : salesRepresentativeInfo // ignore: cast_nullable_to_non_nullable
               as SalesRepresentativeInfo,
-      paymentCustomerInformation: null == paymentCustomerInformation
+      paymentCustomerInformation: paymentCustomerInformation == freezed
           ? _value.paymentCustomerInformation
           : paymentCustomerInformation // ignore: cast_nullable_to_non_nullable
               as PaymentCustomerInformation,
@@ -272,7 +274,6 @@ class __$$_FetchCopyWithImpl<$Res>
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $SalesOrganisationCopyWith<$Res> get salesOrganisation {
     return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
       return _then(_value.copyWith(salesOrganisation: value));
@@ -280,7 +281,6 @@ class __$$_FetchCopyWithImpl<$Res>
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $CustomerCodeInfoCopyWith<$Res> get customeCodeInfo {
     return $CustomerCodeInfoCopyWith<$Res>(_value.customeCodeInfo, (value) {
       return _then(_value.copyWith(customeCodeInfo: value));
@@ -288,7 +288,6 @@ class __$$_FetchCopyWithImpl<$Res>
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs {
     return $SalesOrganisationConfigsCopyWith<$Res>(
         _value.salesOrganisationConfigs, (value) {
@@ -297,7 +296,6 @@ class __$$_FetchCopyWithImpl<$Res>
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $SalesRepresentativeInfoCopyWith<$Res> get salesRepresentativeInfo {
     return $SalesRepresentativeInfoCopyWith<$Res>(
         _value.salesRepresentativeInfo, (value) {
@@ -306,7 +304,6 @@ class __$$_FetchCopyWithImpl<$Res>
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $PaymentCustomerInformationCopyWith<$Res> get paymentCustomerInformation {
     return $PaymentCustomerInformationCopyWith<$Res>(
         _value.paymentCustomerInformation, (value) {
@@ -346,34 +343,29 @@ class _$_Fetch implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
-            (identical(other.customeCodeInfo, customeCodeInfo) ||
-                other.customeCodeInfo == customeCodeInfo) &&
-            (identical(
-                    other.salesOrganisationConfigs, salesOrganisationConfigs) ||
-                other.salesOrganisationConfigs == salesOrganisationConfigs) &&
-            (identical(
-                    other.salesRepresentativeInfo, salesRepresentativeInfo) ||
-                other.salesRepresentativeInfo == salesRepresentativeInfo) &&
-            (identical(other.paymentCustomerInformation,
-                    paymentCustomerInformation) ||
-                other.paymentCustomerInformation ==
-                    paymentCustomerInformation));
+            const DeepCollectionEquality()
+                .equals(other.salesOrganisation, salesOrganisation) &&
+            const DeepCollectionEquality()
+                .equals(other.customeCodeInfo, customeCodeInfo) &&
+            const DeepCollectionEquality().equals(
+                other.salesOrganisationConfigs, salesOrganisationConfigs) &&
+            const DeepCollectionEquality().equals(
+                other.salesRepresentativeInfo, salesRepresentativeInfo) &&
+            const DeepCollectionEquality().equals(
+                other.paymentCustomerInformation, paymentCustomerInformation));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      salesOrganisation,
-      customeCodeInfo,
-      salesOrganisationConfigs,
-      salesRepresentativeInfo,
-      paymentCustomerInformation);
+      const DeepCollectionEquality().hash(salesOrganisation),
+      const DeepCollectionEquality().hash(customeCodeInfo),
+      const DeepCollectionEquality().hash(salesOrganisationConfigs),
+      const DeepCollectionEquality().hash(salesRepresentativeInfo),
+      const DeepCollectionEquality().hash(paymentCustomerInformation));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
 
@@ -396,8 +388,8 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
+    TResult Function()? initialized,
+    TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customeCodeInfo,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -445,8 +437,8 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
   }) {
     return fetch?.call(this);
   }
@@ -502,8 +494,7 @@ mixin _$PaymentTermState {
 abstract class $PaymentTermStateCopyWith<$Res> {
   factory $PaymentTermStateCopyWith(
           PaymentTermState value, $Res Function(PaymentTermState) then) =
-      _$PaymentTermStateCopyWithImpl<$Res, PaymentTermState>;
-  @useResult
+      _$PaymentTermStateCopyWithImpl<$Res>;
   $Res call(
       {List<PaymentTerm> paymentTerms,
       List<String> paymentTermsDisplayLevels,
@@ -512,42 +503,40 @@ abstract class $PaymentTermStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PaymentTermStateCopyWithImpl<$Res, $Val extends PaymentTermState>
+class _$PaymentTermStateCopyWithImpl<$Res>
     implements $PaymentTermStateCopyWith<$Res> {
   _$PaymentTermStateCopyWithImpl(this._value, this._then);
 
+  final PaymentTermState _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(PaymentTermState) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? paymentTerms = null,
-    Object? paymentTermsDisplayLevels = null,
-    Object? isFetching = null,
-    Object? paymentTermsFailureOrSuccessOption = null,
+    Object? paymentTerms = freezed,
+    Object? paymentTermsDisplayLevels = freezed,
+    Object? isFetching = freezed,
+    Object? paymentTermsFailureOrSuccessOption = freezed,
   }) {
     return _then(_value.copyWith(
-      paymentTerms: null == paymentTerms
+      paymentTerms: paymentTerms == freezed
           ? _value.paymentTerms
           : paymentTerms // ignore: cast_nullable_to_non_nullable
               as List<PaymentTerm>,
-      paymentTermsDisplayLevels: null == paymentTermsDisplayLevels
+      paymentTermsDisplayLevels: paymentTermsDisplayLevels == freezed
           ? _value.paymentTermsDisplayLevels
           : paymentTermsDisplayLevels // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      isFetching: null == isFetching
+      isFetching: isFetching == freezed
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
-      paymentTermsFailureOrSuccessOption: null ==
-              paymentTermsFailureOrSuccessOption
+      paymentTermsFailureOrSuccessOption: paymentTermsFailureOrSuccessOption ==
+              freezed
           ? _value.paymentTermsFailureOrSuccessOption
           : paymentTermsFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-    ) as $Val);
+    ));
   }
 }
 
@@ -558,7 +547,6 @@ abstract class _$$_PaymentTermStateCopyWith<$Res>
           _$_PaymentTermState value, $Res Function(_$_PaymentTermState) then) =
       __$$_PaymentTermStateCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {List<PaymentTerm> paymentTerms,
       List<String> paymentTermsDisplayLevels,
@@ -568,35 +556,37 @@ abstract class _$$_PaymentTermStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_PaymentTermStateCopyWithImpl<$Res>
-    extends _$PaymentTermStateCopyWithImpl<$Res, _$_PaymentTermState>
+    extends _$PaymentTermStateCopyWithImpl<$Res>
     implements _$$_PaymentTermStateCopyWith<$Res> {
   __$$_PaymentTermStateCopyWithImpl(
       _$_PaymentTermState _value, $Res Function(_$_PaymentTermState) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_PaymentTermState));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_PaymentTermState get _value => super._value as _$_PaymentTermState;
+
   @override
   $Res call({
-    Object? paymentTerms = null,
-    Object? paymentTermsDisplayLevels = null,
-    Object? isFetching = null,
-    Object? paymentTermsFailureOrSuccessOption = null,
+    Object? paymentTerms = freezed,
+    Object? paymentTermsDisplayLevels = freezed,
+    Object? isFetching = freezed,
+    Object? paymentTermsFailureOrSuccessOption = freezed,
   }) {
     return _then(_$_PaymentTermState(
-      paymentTerms: null == paymentTerms
+      paymentTerms: paymentTerms == freezed
           ? _value._paymentTerms
           : paymentTerms // ignore: cast_nullable_to_non_nullable
               as List<PaymentTerm>,
-      paymentTermsDisplayLevels: null == paymentTermsDisplayLevels
+      paymentTermsDisplayLevels: paymentTermsDisplayLevels == freezed
           ? _value._paymentTermsDisplayLevels
           : paymentTermsDisplayLevels // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      isFetching: null == isFetching
+      isFetching: isFetching == freezed
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
-      paymentTermsFailureOrSuccessOption: null ==
-              paymentTermsFailureOrSuccessOption
+      paymentTermsFailureOrSuccessOption: paymentTermsFailureOrSuccessOption ==
+              freezed
           ? _value.paymentTermsFailureOrSuccessOption
           : paymentTermsFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
@@ -648,12 +638,11 @@ class _$_PaymentTermState implements _PaymentTermState {
                 .equals(other._paymentTerms, _paymentTerms) &&
             const DeepCollectionEquality().equals(
                 other._paymentTermsDisplayLevels, _paymentTermsDisplayLevels) &&
-            (identical(other.isFetching, isFetching) ||
-                other.isFetching == isFetching) &&
-            (identical(other.paymentTermsFailureOrSuccessOption,
-                    paymentTermsFailureOrSuccessOption) ||
-                other.paymentTermsFailureOrSuccessOption ==
-                    paymentTermsFailureOrSuccessOption));
+            const DeepCollectionEquality()
+                .equals(other.isFetching, isFetching) &&
+            const DeepCollectionEquality().equals(
+                other.paymentTermsFailureOrSuccessOption,
+                paymentTermsFailureOrSuccessOption));
   }
 
   @override
@@ -661,12 +650,11 @@ class _$_PaymentTermState implements _PaymentTermState {
       runtimeType,
       const DeepCollectionEquality().hash(_paymentTerms),
       const DeepCollectionEquality().hash(_paymentTermsDisplayLevels),
-      isFetching,
-      paymentTermsFailureOrSuccessOption);
+      const DeepCollectionEquality().hash(isFetching),
+      const DeepCollectionEquality().hash(paymentTermsFailureOrSuccessOption));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_PaymentTermStateCopyWith<_$_PaymentTermState> get copyWith =>
       __$$_PaymentTermStateCopyWithImpl<_$_PaymentTermState>(this, _$identity);
 }

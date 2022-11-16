@@ -28,37 +28,34 @@ mixin _$ResetPassword {
 abstract class $ResetPasswordCopyWith<$Res> {
   factory $ResetPasswordCopyWith(
           ResetPassword value, $Res Function(ResetPassword) then) =
-      _$ResetPasswordCopyWithImpl<$Res, ResetPassword>;
-  @useResult
+      _$ResetPasswordCopyWithImpl<$Res>;
   $Res call({bool success, String status});
 }
 
 /// @nodoc
-class _$ResetPasswordCopyWithImpl<$Res, $Val extends ResetPassword>
+class _$ResetPasswordCopyWithImpl<$Res>
     implements $ResetPasswordCopyWith<$Res> {
   _$ResetPasswordCopyWithImpl(this._value, this._then);
 
+  final ResetPassword _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(ResetPassword) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? success = null,
-    Object? status = null,
+    Object? success = freezed,
+    Object? status = freezed,
   }) {
     return _then(_value.copyWith(
-      success: null == success
+      success: success == freezed
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as bool,
-      status: null == status
+      status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-    ) as $Val);
+    ));
   }
 }
 
@@ -69,30 +66,31 @@ abstract class _$$_ResetPasswordCopyWith<$Res>
           _$_ResetPassword value, $Res Function(_$_ResetPassword) then) =
       __$$_ResetPasswordCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call({bool success, String status});
 }
 
 /// @nodoc
 class __$$_ResetPasswordCopyWithImpl<$Res>
-    extends _$ResetPasswordCopyWithImpl<$Res, _$_ResetPassword>
+    extends _$ResetPasswordCopyWithImpl<$Res>
     implements _$$_ResetPasswordCopyWith<$Res> {
   __$$_ResetPasswordCopyWithImpl(
       _$_ResetPassword _value, $Res Function(_$_ResetPassword) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_ResetPassword));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_ResetPassword get _value => super._value as _$_ResetPassword;
+
   @override
   $Res call({
-    Object? success = null,
-    Object? status = null,
+    Object? success = freezed,
+    Object? status = freezed,
   }) {
     return _then(_$_ResetPassword(
-      success: null == success
+      success: success == freezed
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as bool,
-      status: null == status
+      status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
@@ -121,16 +119,18 @@ class _$_ResetPassword extends _ResetPassword {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ResetPassword &&
-            (identical(other.success, success) || other.success == success) &&
-            (identical(other.status, status) || other.status == status));
+            const DeepCollectionEquality().equals(other.success, success) &&
+            const DeepCollectionEquality().equals(other.status, status));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, success, status);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(success),
+      const DeepCollectionEquality().hash(status));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_ResetPasswordCopyWith<_$_ResetPassword> get copyWith =>
       __$$_ResetPasswordCopyWithImpl<_$_ResetPassword>(this, _$identity);
 }

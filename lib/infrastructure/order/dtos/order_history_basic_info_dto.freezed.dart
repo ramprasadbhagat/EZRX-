@@ -38,8 +38,7 @@ mixin _$OrderHistoryBasicInfoDto {
 abstract class $OrderHistoryBasicInfoDtoCopyWith<$Res> {
   factory $OrderHistoryBasicInfoDtoCopyWith(OrderHistoryBasicInfoDto value,
           $Res Function(OrderHistoryBasicInfoDto) then) =
-      _$OrderHistoryBasicInfoDtoCopyWithImpl<$Res, OrderHistoryBasicInfoDto>;
-  @useResult
+      _$OrderHistoryBasicInfoDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'SoldTo') String soldTo,
       @JsonKey(name: 'ShipTo') String shipTo,
@@ -47,37 +46,34 @@ abstract class $OrderHistoryBasicInfoDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OrderHistoryBasicInfoDtoCopyWithImpl<$Res,
-        $Val extends OrderHistoryBasicInfoDto>
+class _$OrderHistoryBasicInfoDtoCopyWithImpl<$Res>
     implements $OrderHistoryBasicInfoDtoCopyWith<$Res> {
   _$OrderHistoryBasicInfoDtoCopyWithImpl(this._value, this._then);
 
+  final OrderHistoryBasicInfoDto _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(OrderHistoryBasicInfoDto) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? soldTo = null,
-    Object? shipTo = null,
-    Object? companyName = null,
+    Object? soldTo = freezed,
+    Object? shipTo = freezed,
+    Object? companyName = freezed,
   }) {
     return _then(_value.copyWith(
-      soldTo: null == soldTo
+      soldTo: soldTo == freezed
           ? _value.soldTo
           : soldTo // ignore: cast_nullable_to_non_nullable
               as String,
-      shipTo: null == shipTo
+      shipTo: shipTo == freezed
           ? _value.shipTo
           : shipTo // ignore: cast_nullable_to_non_nullable
               as String,
-      companyName: null == companyName
+      companyName: companyName == freezed
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
               as String,
-    ) as $Val);
+    ));
   }
 }
 
@@ -89,7 +85,6 @@ abstract class _$$_OrderHistoryBasicInfoDtoCopyWith<$Res>
           $Res Function(_$_OrderHistoryBasicInfoDto) then) =
       __$$_OrderHistoryBasicInfoDtoCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {@JsonKey(name: 'SoldTo') String soldTo,
       @JsonKey(name: 'ShipTo') String shipTo,
@@ -98,30 +93,32 @@ abstract class _$$_OrderHistoryBasicInfoDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_OrderHistoryBasicInfoDtoCopyWithImpl<$Res>
-    extends _$OrderHistoryBasicInfoDtoCopyWithImpl<$Res,
-        _$_OrderHistoryBasicInfoDto>
+    extends _$OrderHistoryBasicInfoDtoCopyWithImpl<$Res>
     implements _$$_OrderHistoryBasicInfoDtoCopyWith<$Res> {
   __$$_OrderHistoryBasicInfoDtoCopyWithImpl(_$_OrderHistoryBasicInfoDto _value,
       $Res Function(_$_OrderHistoryBasicInfoDto) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_OrderHistoryBasicInfoDto));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_OrderHistoryBasicInfoDto get _value =>
+      super._value as _$_OrderHistoryBasicInfoDto;
+
   @override
   $Res call({
-    Object? soldTo = null,
-    Object? shipTo = null,
-    Object? companyName = null,
+    Object? soldTo = freezed,
+    Object? shipTo = freezed,
+    Object? companyName = freezed,
   }) {
     return _then(_$_OrderHistoryBasicInfoDto(
-      soldTo: null == soldTo
+      soldTo: soldTo == freezed
           ? _value.soldTo
           : soldTo // ignore: cast_nullable_to_non_nullable
               as String,
-      shipTo: null == shipTo
+      shipTo: shipTo == freezed
           ? _value.shipTo
           : shipTo // ignore: cast_nullable_to_non_nullable
               as String,
-      companyName: null == companyName
+      companyName: companyName == freezed
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
               as String,
@@ -161,19 +158,22 @@ class _$_OrderHistoryBasicInfoDto extends _OrderHistoryBasicInfoDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryBasicInfoDto &&
-            (identical(other.soldTo, soldTo) || other.soldTo == soldTo) &&
-            (identical(other.shipTo, shipTo) || other.shipTo == shipTo) &&
-            (identical(other.companyName, companyName) ||
-                other.companyName == companyName));
+            const DeepCollectionEquality().equals(other.soldTo, soldTo) &&
+            const DeepCollectionEquality().equals(other.shipTo, shipTo) &&
+            const DeepCollectionEquality()
+                .equals(other.companyName, companyName));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, soldTo, shipTo, companyName);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(soldTo),
+      const DeepCollectionEquality().hash(shipTo),
+      const DeepCollectionEquality().hash(companyName));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_OrderHistoryBasicInfoDtoCopyWith<_$_OrderHistoryBasicInfoDto>
       get copyWith => __$$_OrderHistoryBasicInfoDtoCopyWithImpl<
           _$_OrderHistoryBasicInfoDto>(this, _$identity);

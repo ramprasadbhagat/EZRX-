@@ -30,47 +30,43 @@ mixin _$BillToName {
 abstract class $BillToNameCopyWith<$Res> {
   factory $BillToNameCopyWith(
           BillToName value, $Res Function(BillToName) then) =
-      _$BillToNameCopyWithImpl<$Res, BillToName>;
-  @useResult
+      _$BillToNameCopyWithImpl<$Res>;
   $Res call({String name1, String name2, String name3, String name4});
 }
 
 /// @nodoc
-class _$BillToNameCopyWithImpl<$Res, $Val extends BillToName>
-    implements $BillToNameCopyWith<$Res> {
+class _$BillToNameCopyWithImpl<$Res> implements $BillToNameCopyWith<$Res> {
   _$BillToNameCopyWithImpl(this._value, this._then);
 
+  final BillToName _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(BillToName) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name1 = null,
-    Object? name2 = null,
-    Object? name3 = null,
-    Object? name4 = null,
+    Object? name1 = freezed,
+    Object? name2 = freezed,
+    Object? name3 = freezed,
+    Object? name4 = freezed,
   }) {
     return _then(_value.copyWith(
-      name1: null == name1
+      name1: name1 == freezed
           ? _value.name1
           : name1 // ignore: cast_nullable_to_non_nullable
               as String,
-      name2: null == name2
+      name2: name2 == freezed
           ? _value.name2
           : name2 // ignore: cast_nullable_to_non_nullable
               as String,
-      name3: null == name3
+      name3: name3 == freezed
           ? _value.name3
           : name3 // ignore: cast_nullable_to_non_nullable
               as String,
-      name4: null == name4
+      name4: name4 == freezed
           ? _value.name4
           : name4 // ignore: cast_nullable_to_non_nullable
               as String,
-    ) as $Val);
+    ));
   }
 }
 
@@ -81,40 +77,40 @@ abstract class _$$_BillToNameCopyWith<$Res>
           _$_BillToName value, $Res Function(_$_BillToName) then) =
       __$$_BillToNameCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call({String name1, String name2, String name3, String name4});
 }
 
 /// @nodoc
-class __$$_BillToNameCopyWithImpl<$Res>
-    extends _$BillToNameCopyWithImpl<$Res, _$_BillToName>
+class __$$_BillToNameCopyWithImpl<$Res> extends _$BillToNameCopyWithImpl<$Res>
     implements _$$_BillToNameCopyWith<$Res> {
   __$$_BillToNameCopyWithImpl(
       _$_BillToName _value, $Res Function(_$_BillToName) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_BillToName));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_BillToName get _value => super._value as _$_BillToName;
+
   @override
   $Res call({
-    Object? name1 = null,
-    Object? name2 = null,
-    Object? name3 = null,
-    Object? name4 = null,
+    Object? name1 = freezed,
+    Object? name2 = freezed,
+    Object? name3 = freezed,
+    Object? name4 = freezed,
   }) {
     return _then(_$_BillToName(
-      name1: null == name1
+      name1: name1 == freezed
           ? _value.name1
           : name1 // ignore: cast_nullable_to_non_nullable
               as String,
-      name2: null == name2
+      name2: name2 == freezed
           ? _value.name2
           : name2 // ignore: cast_nullable_to_non_nullable
               as String,
-      name3: null == name3
+      name3: name3 == freezed
           ? _value.name3
           : name3 // ignore: cast_nullable_to_non_nullable
               as String,
-      name4: null == name4
+      name4: name4 == freezed
           ? _value.name4
           : name4 // ignore: cast_nullable_to_non_nullable
               as String,
@@ -146,18 +142,22 @@ class _$_BillToName extends _BillToName {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BillToName &&
-            (identical(other.name1, name1) || other.name1 == name1) &&
-            (identical(other.name2, name2) || other.name2 == name2) &&
-            (identical(other.name3, name3) || other.name3 == name3) &&
-            (identical(other.name4, name4) || other.name4 == name4));
+            const DeepCollectionEquality().equals(other.name1, name1) &&
+            const DeepCollectionEquality().equals(other.name2, name2) &&
+            const DeepCollectionEquality().equals(other.name3, name3) &&
+            const DeepCollectionEquality().equals(other.name4, name4));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name1, name2, name3, name4);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name1),
+      const DeepCollectionEquality().hash(name2),
+      const DeepCollectionEquality().hash(name3),
+      const DeepCollectionEquality().hash(name4));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_BillToNameCopyWith<_$_BillToName> get copyWith =>
       __$$_BillToNameCopyWithImpl<_$_BillToName>(this, _$identity);
 }

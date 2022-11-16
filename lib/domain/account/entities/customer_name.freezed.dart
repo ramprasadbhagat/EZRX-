@@ -30,47 +30,43 @@ mixin _$CustomerName {
 abstract class $CustomerNameCopyWith<$Res> {
   factory $CustomerNameCopyWith(
           CustomerName value, $Res Function(CustomerName) then) =
-      _$CustomerNameCopyWithImpl<$Res, CustomerName>;
-  @useResult
+      _$CustomerNameCopyWithImpl<$Res>;
   $Res call({String name1, String name2, String name3, String name4});
 }
 
 /// @nodoc
-class _$CustomerNameCopyWithImpl<$Res, $Val extends CustomerName>
-    implements $CustomerNameCopyWith<$Res> {
+class _$CustomerNameCopyWithImpl<$Res> implements $CustomerNameCopyWith<$Res> {
   _$CustomerNameCopyWithImpl(this._value, this._then);
 
+  final CustomerName _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(CustomerName) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name1 = null,
-    Object? name2 = null,
-    Object? name3 = null,
-    Object? name4 = null,
+    Object? name1 = freezed,
+    Object? name2 = freezed,
+    Object? name3 = freezed,
+    Object? name4 = freezed,
   }) {
     return _then(_value.copyWith(
-      name1: null == name1
+      name1: name1 == freezed
           ? _value.name1
           : name1 // ignore: cast_nullable_to_non_nullable
               as String,
-      name2: null == name2
+      name2: name2 == freezed
           ? _value.name2
           : name2 // ignore: cast_nullable_to_non_nullable
               as String,
-      name3: null == name3
+      name3: name3 == freezed
           ? _value.name3
           : name3 // ignore: cast_nullable_to_non_nullable
               as String,
-      name4: null == name4
+      name4: name4 == freezed
           ? _value.name4
           : name4 // ignore: cast_nullable_to_non_nullable
               as String,
-    ) as $Val);
+    ));
   }
 }
 
@@ -81,40 +77,41 @@ abstract class _$$_CustomerNameCopyWith<$Res>
           _$_CustomerName value, $Res Function(_$_CustomerName) then) =
       __$$_CustomerNameCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call({String name1, String name2, String name3, String name4});
 }
 
 /// @nodoc
 class __$$_CustomerNameCopyWithImpl<$Res>
-    extends _$CustomerNameCopyWithImpl<$Res, _$_CustomerName>
+    extends _$CustomerNameCopyWithImpl<$Res>
     implements _$$_CustomerNameCopyWith<$Res> {
   __$$_CustomerNameCopyWithImpl(
       _$_CustomerName _value, $Res Function(_$_CustomerName) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_CustomerName));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_CustomerName get _value => super._value as _$_CustomerName;
+
   @override
   $Res call({
-    Object? name1 = null,
-    Object? name2 = null,
-    Object? name3 = null,
-    Object? name4 = null,
+    Object? name1 = freezed,
+    Object? name2 = freezed,
+    Object? name3 = freezed,
+    Object? name4 = freezed,
   }) {
     return _then(_$_CustomerName(
-      name1: null == name1
+      name1: name1 == freezed
           ? _value.name1
           : name1 // ignore: cast_nullable_to_non_nullable
               as String,
-      name2: null == name2
+      name2: name2 == freezed
           ? _value.name2
           : name2 // ignore: cast_nullable_to_non_nullable
               as String,
-      name3: null == name3
+      name3: name3 == freezed
           ? _value.name3
           : name3 // ignore: cast_nullable_to_non_nullable
               as String,
-      name4: null == name4
+      name4: name4 == freezed
           ? _value.name4
           : name4 // ignore: cast_nullable_to_non_nullable
               as String,
@@ -146,18 +143,22 @@ class _$_CustomerName extends _CustomerName {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CustomerName &&
-            (identical(other.name1, name1) || other.name1 == name1) &&
-            (identical(other.name2, name2) || other.name2 == name2) &&
-            (identical(other.name3, name3) || other.name3 == name3) &&
-            (identical(other.name4, name4) || other.name4 == name4));
+            const DeepCollectionEquality().equals(other.name1, name1) &&
+            const DeepCollectionEquality().equals(other.name2, name2) &&
+            const DeepCollectionEquality().equals(other.name3, name3) &&
+            const DeepCollectionEquality().equals(other.name4, name4));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name1, name2, name3, name4);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name1),
+      const DeepCollectionEquality().hash(name2),
+      const DeepCollectionEquality().hash(name3),
+      const DeepCollectionEquality().hash(name4));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_CustomerNameCopyWith<_$_CustomerName> get copyWith =>
       __$$_CustomerNameCopyWithImpl<_$_CustomerName>(this, _$identity);
 }

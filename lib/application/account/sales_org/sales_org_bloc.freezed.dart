@@ -26,9 +26,9 @@ mixin _$SalesOrgEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrganisation salesOrganisation)? selected,
-    TResult? Function(List<SalesOrganisation> salesOrganisations)?
+    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation)? selected,
+    TResult Function(List<SalesOrganisation> salesOrganisations)?
         loadSavedOrganisation,
   }) =>
       throw _privateConstructorUsedError;
@@ -51,9 +51,9 @@ mixin _$SalesOrgEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Selected value)? selected,
-    TResult? Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,18 +70,17 @@ mixin _$SalesOrgEvent {
 abstract class $SalesOrgEventCopyWith<$Res> {
   factory $SalesOrgEventCopyWith(
           SalesOrgEvent value, $Res Function(SalesOrgEvent) then) =
-      _$SalesOrgEventCopyWithImpl<$Res, SalesOrgEvent>;
+      _$SalesOrgEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$SalesOrgEventCopyWithImpl<$Res, $Val extends SalesOrgEvent>
+class _$SalesOrgEventCopyWithImpl<$Res>
     implements $SalesOrgEventCopyWith<$Res> {
   _$SalesOrgEventCopyWithImpl(this._value, this._then);
 
+  final SalesOrgEvent _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(SalesOrgEvent) _then;
 }
 
 /// @nodoc
@@ -93,11 +92,14 @@ abstract class _$$_InitializedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitializedCopyWithImpl<$Res>
-    extends _$SalesOrgEventCopyWithImpl<$Res, _$_Initialized>
+    extends _$SalesOrgEventCopyWithImpl<$Res>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Initialized));
+
+  @override
+  _$_Initialized get _value => super._value as _$_Initialized;
 }
 
 /// @nodoc
@@ -133,9 +135,9 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrganisation salesOrganisation)? selected,
-    TResult? Function(List<SalesOrganisation> salesOrganisations)?
+    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation)? selected,
+    TResult Function(List<SalesOrganisation> salesOrganisations)?
         loadSavedOrganisation,
   }) {
     return initialized?.call();
@@ -170,9 +172,9 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Selected value)? selected,
-    TResult? Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
   }) {
     return initialized?.call(this);
   }
@@ -201,27 +203,27 @@ abstract class _$$_SelectedCopyWith<$Res> {
   factory _$$_SelectedCopyWith(
           _$_Selected value, $Res Function(_$_Selected) then) =
       __$$_SelectedCopyWithImpl<$Res>;
-  @useResult
   $Res call({SalesOrganisation salesOrganisation});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
 
 /// @nodoc
-class __$$_SelectedCopyWithImpl<$Res>
-    extends _$SalesOrgEventCopyWithImpl<$Res, _$_Selected>
+class __$$_SelectedCopyWithImpl<$Res> extends _$SalesOrgEventCopyWithImpl<$Res>
     implements _$$_SelectedCopyWith<$Res> {
   __$$_SelectedCopyWithImpl(
       _$_Selected _value, $Res Function(_$_Selected) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Selected));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_Selected get _value => super._value as _$_Selected;
+
   @override
   $Res call({
-    Object? salesOrganisation = null,
+    Object? salesOrganisation = freezed,
   }) {
     return _then(_$_Selected(
-      salesOrganisation: null == salesOrganisation
+      salesOrganisation: salesOrganisation == freezed
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
@@ -229,7 +231,6 @@ class __$$_SelectedCopyWithImpl<$Res>
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $SalesOrganisationCopyWith<$Res> get salesOrganisation {
     return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
       return _then(_value.copyWith(salesOrganisation: value));
@@ -255,16 +256,16 @@ class _$_Selected implements _Selected {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Selected &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation));
+            const DeepCollectionEquality()
+                .equals(other.salesOrganisation, salesOrganisation));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrganisation);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(salesOrganisation));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_SelectedCopyWith<_$_Selected> get copyWith =>
       __$$_SelectedCopyWithImpl<_$_Selected>(this, _$identity);
 
@@ -282,9 +283,9 @@ class _$_Selected implements _Selected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrganisation salesOrganisation)? selected,
-    TResult? Function(List<SalesOrganisation> salesOrganisations)?
+    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation)? selected,
+    TResult Function(List<SalesOrganisation> salesOrganisations)?
         loadSavedOrganisation,
   }) {
     return selected?.call(salesOrganisation);
@@ -319,9 +320,9 @@ class _$_Selected implements _Selected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Selected value)? selected,
-    TResult? Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
   }) {
     return selected?.call(this);
   }
@@ -356,25 +357,27 @@ abstract class _$$_LoadSavedOrganisationCopyWith<$Res> {
   factory _$$_LoadSavedOrganisationCopyWith(_$_LoadSavedOrganisation value,
           $Res Function(_$_LoadSavedOrganisation) then) =
       __$$_LoadSavedOrganisationCopyWithImpl<$Res>;
-  @useResult
   $Res call({List<SalesOrganisation> salesOrganisations});
 }
 
 /// @nodoc
 class __$$_LoadSavedOrganisationCopyWithImpl<$Res>
-    extends _$SalesOrgEventCopyWithImpl<$Res, _$_LoadSavedOrganisation>
+    extends _$SalesOrgEventCopyWithImpl<$Res>
     implements _$$_LoadSavedOrganisationCopyWith<$Res> {
   __$$_LoadSavedOrganisationCopyWithImpl(_$_LoadSavedOrganisation _value,
       $Res Function(_$_LoadSavedOrganisation) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_LoadSavedOrganisation));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_LoadSavedOrganisation get _value =>
+      super._value as _$_LoadSavedOrganisation;
+
   @override
   $Res call({
-    Object? salesOrganisations = null,
+    Object? salesOrganisations = freezed,
   }) {
     return _then(_$_LoadSavedOrganisation(
-      salesOrganisations: null == salesOrganisations
+      salesOrganisations: salesOrganisations == freezed
           ? _value._salesOrganisations
           : salesOrganisations // ignore: cast_nullable_to_non_nullable
               as List<SalesOrganisation>,
@@ -416,7 +419,6 @@ class _$_LoadSavedOrganisation implements _LoadSavedOrganisation {
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_LoadSavedOrganisationCopyWith<_$_LoadSavedOrganisation> get copyWith =>
       __$$_LoadSavedOrganisationCopyWithImpl<_$_LoadSavedOrganisation>(
           this, _$identity);
@@ -435,9 +437,9 @@ class _$_LoadSavedOrganisation implements _LoadSavedOrganisation {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrganisation salesOrganisation)? selected,
-    TResult? Function(List<SalesOrganisation> salesOrganisations)?
+    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation)? selected,
+    TResult Function(List<SalesOrganisation> salesOrganisations)?
         loadSavedOrganisation,
   }) {
     return loadSavedOrganisation?.call(salesOrganisations);
@@ -472,9 +474,9 @@ class _$_LoadSavedOrganisation implements _LoadSavedOrganisation {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Selected value)? selected,
-    TResult? Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_LoadSavedOrganisation value)? loadSavedOrganisation,
   }) {
     return loadSavedOrganisation?.call(this);
   }
@@ -521,8 +523,7 @@ mixin _$SalesOrgState {
 abstract class $SalesOrgStateCopyWith<$Res> {
   factory $SalesOrgStateCopyWith(
           SalesOrgState value, $Res Function(SalesOrgState) then) =
-      _$SalesOrgStateCopyWithImpl<$Res, SalesOrgState>;
-  @useResult
+      _$SalesOrgStateCopyWithImpl<$Res>;
   $Res call(
       {SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs configs,
@@ -533,51 +534,47 @@ abstract class $SalesOrgStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SalesOrgStateCopyWithImpl<$Res, $Val extends SalesOrgState>
+class _$SalesOrgStateCopyWithImpl<$Res>
     implements $SalesOrgStateCopyWith<$Res> {
   _$SalesOrgStateCopyWithImpl(this._value, this._then);
 
+  final SalesOrgState _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(SalesOrgState) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? salesOrganisation = null,
-    Object? configs = null,
-    Object? salesOrgFailureOrSuccessOption = null,
+    Object? salesOrganisation = freezed,
+    Object? configs = freezed,
+    Object? salesOrgFailureOrSuccessOption = freezed,
   }) {
     return _then(_value.copyWith(
-      salesOrganisation: null == salesOrganisation
+      salesOrganisation: salesOrganisation == freezed
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      configs: null == configs
+      configs: configs == freezed
           ? _value.configs
           : configs // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
-      salesOrgFailureOrSuccessOption: null == salesOrgFailureOrSuccessOption
+      salesOrgFailureOrSuccessOption: salesOrgFailureOrSuccessOption == freezed
           ? _value.salesOrgFailureOrSuccessOption
           : salesOrgFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-    ) as $Val);
+    ));
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $SalesOrganisationCopyWith<$Res> get salesOrganisation {
     return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value) as $Val);
+      return _then(_value.copyWith(salesOrganisation: value));
     });
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $SalesOrganisationConfigsCopyWith<$Res> get configs {
     return $SalesOrganisationConfigsCopyWith<$Res>(_value.configs, (value) {
-      return _then(_value.copyWith(configs: value) as $Val);
+      return _then(_value.copyWith(configs: value));
     });
   }
 }
@@ -589,7 +586,6 @@ abstract class _$$_SalesOrgStateCopyWith<$Res>
           _$_SalesOrgState value, $Res Function(_$_SalesOrgState) then) =
       __$$_SalesOrgStateCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs configs,
@@ -603,29 +599,31 @@ abstract class _$$_SalesOrgStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_SalesOrgStateCopyWithImpl<$Res>
-    extends _$SalesOrgStateCopyWithImpl<$Res, _$_SalesOrgState>
+    extends _$SalesOrgStateCopyWithImpl<$Res>
     implements _$$_SalesOrgStateCopyWith<$Res> {
   __$$_SalesOrgStateCopyWithImpl(
       _$_SalesOrgState _value, $Res Function(_$_SalesOrgState) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_SalesOrgState));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_SalesOrgState get _value => super._value as _$_SalesOrgState;
+
   @override
   $Res call({
-    Object? salesOrganisation = null,
-    Object? configs = null,
-    Object? salesOrgFailureOrSuccessOption = null,
+    Object? salesOrganisation = freezed,
+    Object? configs = freezed,
+    Object? salesOrgFailureOrSuccessOption = freezed,
   }) {
     return _then(_$_SalesOrgState(
-      salesOrganisation: null == salesOrganisation
+      salesOrganisation: salesOrganisation == freezed
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      configs: null == configs
+      configs: configs == freezed
           ? _value.configs
           : configs // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
-      salesOrgFailureOrSuccessOption: null == salesOrgFailureOrSuccessOption
+      salesOrgFailureOrSuccessOption: salesOrgFailureOrSuccessOption == freezed
           ? _value.salesOrgFailureOrSuccessOption
           : salesOrgFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
@@ -659,22 +657,23 @@ class _$_SalesOrgState extends _SalesOrgState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SalesOrgState &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
-            (identical(other.configs, configs) || other.configs == configs) &&
-            (identical(other.salesOrgFailureOrSuccessOption,
-                    salesOrgFailureOrSuccessOption) ||
-                other.salesOrgFailureOrSuccessOption ==
-                    salesOrgFailureOrSuccessOption));
+            const DeepCollectionEquality()
+                .equals(other.salesOrganisation, salesOrganisation) &&
+            const DeepCollectionEquality().equals(other.configs, configs) &&
+            const DeepCollectionEquality().equals(
+                other.salesOrgFailureOrSuccessOption,
+                salesOrgFailureOrSuccessOption));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, salesOrganisation, configs, salesOrgFailureOrSuccessOption);
+      runtimeType,
+      const DeepCollectionEquality().hash(salesOrganisation),
+      const DeepCollectionEquality().hash(configs),
+      const DeepCollectionEquality().hash(salesOrgFailureOrSuccessOption));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_SalesOrgStateCopyWith<_$_SalesOrgState> get copyWith =>
       __$$_SalesOrgStateCopyWithImpl<_$_SalesOrgState>(this, _$identity);
 }

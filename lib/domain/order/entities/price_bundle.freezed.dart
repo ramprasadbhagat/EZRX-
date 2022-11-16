@@ -29,42 +29,38 @@ mixin _$PriceBundle {
 abstract class $PriceBundleCopyWith<$Res> {
   factory $PriceBundleCopyWith(
           PriceBundle value, $Res Function(PriceBundle) then) =
-      _$PriceBundleCopyWithImpl<$Res, PriceBundle>;
-  @useResult
+      _$PriceBundleCopyWithImpl<$Res>;
   $Res call({String name, String code, List<PriceBundleItem> information});
 }
 
 /// @nodoc
-class _$PriceBundleCopyWithImpl<$Res, $Val extends PriceBundle>
-    implements $PriceBundleCopyWith<$Res> {
+class _$PriceBundleCopyWithImpl<$Res> implements $PriceBundleCopyWith<$Res> {
   _$PriceBundleCopyWithImpl(this._value, this._then);
 
+  final PriceBundle _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(PriceBundle) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
-    Object? code = null,
-    Object? information = null,
+    Object? name = freezed,
+    Object? code = freezed,
+    Object? information = freezed,
   }) {
     return _then(_value.copyWith(
-      name: null == name
+      name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      code: null == code
+      code: code == freezed
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
-      information: null == information
+      information: information == freezed
           ? _value.information
           : information // ignore: cast_nullable_to_non_nullable
               as List<PriceBundleItem>,
-    ) as $Val);
+    ));
   }
 }
 
@@ -75,35 +71,35 @@ abstract class _$$_PriceBundleCopyWith<$Res>
           _$_PriceBundle value, $Res Function(_$_PriceBundle) then) =
       __$$_PriceBundleCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call({String name, String code, List<PriceBundleItem> information});
 }
 
 /// @nodoc
-class __$$_PriceBundleCopyWithImpl<$Res>
-    extends _$PriceBundleCopyWithImpl<$Res, _$_PriceBundle>
+class __$$_PriceBundleCopyWithImpl<$Res> extends _$PriceBundleCopyWithImpl<$Res>
     implements _$$_PriceBundleCopyWith<$Res> {
   __$$_PriceBundleCopyWithImpl(
       _$_PriceBundle _value, $Res Function(_$_PriceBundle) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_PriceBundle));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_PriceBundle get _value => super._value as _$_PriceBundle;
+
   @override
   $Res call({
-    Object? name = null,
-    Object? code = null,
-    Object? information = null,
+    Object? name = freezed,
+    Object? code = freezed,
+    Object? information = freezed,
   }) {
     return _then(_$_PriceBundle(
-      name: null == name
+      name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      code: null == code
+      code: code == freezed
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
-      information: null == information
+      information: information == freezed
           ? _value._information
           : information // ignore: cast_nullable_to_non_nullable
               as List<PriceBundleItem>,
@@ -142,19 +138,21 @@ class _$_PriceBundle extends _PriceBundle {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PriceBundle &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.code, code) || other.code == code) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.code, code) &&
             const DeepCollectionEquality()
                 .equals(other._information, _information));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, code,
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(code),
       const DeepCollectionEquality().hash(_information));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_PriceBundleCopyWith<_$_PriceBundle> get copyWith =>
       __$$_PriceBundleCopyWithImpl<_$_PriceBundle>(this, _$identity);
 }
@@ -194,47 +192,44 @@ mixin _$PriceBundleItem {
 abstract class $PriceBundleItemCopyWith<$Res> {
   factory $PriceBundleItemCopyWith(
           PriceBundleItem value, $Res Function(PriceBundleItem) then) =
-      _$PriceBundleItemCopyWithImpl<$Res, PriceBundleItem>;
-  @useResult
+      _$PriceBundleItemCopyWithImpl<$Res>;
   $Res call({String type, int sequence, int quantity, double rate});
 }
 
 /// @nodoc
-class _$PriceBundleItemCopyWithImpl<$Res, $Val extends PriceBundleItem>
+class _$PriceBundleItemCopyWithImpl<$Res>
     implements $PriceBundleItemCopyWith<$Res> {
   _$PriceBundleItemCopyWithImpl(this._value, this._then);
 
+  final PriceBundleItem _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(PriceBundleItem) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = null,
-    Object? sequence = null,
-    Object? quantity = null,
-    Object? rate = null,
+    Object? type = freezed,
+    Object? sequence = freezed,
+    Object? quantity = freezed,
+    Object? rate = freezed,
   }) {
     return _then(_value.copyWith(
-      type: null == type
+      type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      sequence: null == sequence
+      sequence: sequence == freezed
           ? _value.sequence
           : sequence // ignore: cast_nullable_to_non_nullable
               as int,
-      quantity: null == quantity
+      quantity: quantity == freezed
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      rate: null == rate
+      rate: rate == freezed
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
-    ) as $Val);
+    ));
   }
 }
 
@@ -245,40 +240,41 @@ abstract class _$$_PriceBundleItemCopyWith<$Res>
           _$_PriceBundleItem value, $Res Function(_$_PriceBundleItem) then) =
       __$$_PriceBundleItemCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call({String type, int sequence, int quantity, double rate});
 }
 
 /// @nodoc
 class __$$_PriceBundleItemCopyWithImpl<$Res>
-    extends _$PriceBundleItemCopyWithImpl<$Res, _$_PriceBundleItem>
+    extends _$PriceBundleItemCopyWithImpl<$Res>
     implements _$$_PriceBundleItemCopyWith<$Res> {
   __$$_PriceBundleItemCopyWithImpl(
       _$_PriceBundleItem _value, $Res Function(_$_PriceBundleItem) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_PriceBundleItem));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_PriceBundleItem get _value => super._value as _$_PriceBundleItem;
+
   @override
   $Res call({
-    Object? type = null,
-    Object? sequence = null,
-    Object? quantity = null,
-    Object? rate = null,
+    Object? type = freezed,
+    Object? sequence = freezed,
+    Object? quantity = freezed,
+    Object? rate = freezed,
   }) {
     return _then(_$_PriceBundleItem(
-      type: null == type
+      type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      sequence: null == sequence
+      sequence: sequence == freezed
           ? _value.sequence
           : sequence // ignore: cast_nullable_to_non_nullable
               as int,
-      quantity: null == quantity
+      quantity: quantity == freezed
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      rate: null == rate
+      rate: rate == freezed
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
@@ -315,20 +311,22 @@ class _$_PriceBundleItem extends _PriceBundleItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PriceBundleItem &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.sequence, sequence) ||
-                other.sequence == sequence) &&
-            (identical(other.quantity, quantity) ||
-                other.quantity == quantity) &&
-            (identical(other.rate, rate) || other.rate == rate));
+            const DeepCollectionEquality().equals(other.type, type) &&
+            const DeepCollectionEquality().equals(other.sequence, sequence) &&
+            const DeepCollectionEquality().equals(other.quantity, quantity) &&
+            const DeepCollectionEquality().equals(other.rate, rate));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, type, sequence, quantity, rate);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(type),
+      const DeepCollectionEquality().hash(sequence),
+      const DeepCollectionEquality().hash(quantity),
+      const DeepCollectionEquality().hash(rate));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_PriceBundleItemCopyWith<_$_PriceBundleItem> get copyWith =>
       __$$_PriceBundleItemCopyWithImpl<_$_PriceBundleItem>(this, _$identity);
 }

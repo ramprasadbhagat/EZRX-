@@ -30,12 +30,12 @@ mixin _$ShipToCodeEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(ShipToInfo shipToInfo)? selected,
-    TResult? Function(List<ShipToInfo> shipToInfos)? load,
-    TResult? Function(List<ShipToInfo> shipToInfos)? search,
-    TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function(
+    TResult Function()? initialized,
+    TResult Function(ShipToInfo shipToInfo)? selected,
+    TResult Function(List<ShipToInfo> shipToInfos)? load,
+    TResult Function(List<ShipToInfo> shipToInfos)? search,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
             List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)?
         loadSavedShipToCode,
   }) =>
@@ -65,12 +65,12 @@ mixin _$ShipToCodeEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Selected value)? selected,
-    TResult? Function(_Load value)? load,
-    TResult? Function(_Search value)? search,
-    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
-    TResult? Function(LoadShipToCode value)? loadSavedShipToCode,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_Load value)? load,
+    TResult Function(_Search value)? search,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(LoadShipToCode value)? loadSavedShipToCode,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -90,18 +90,17 @@ mixin _$ShipToCodeEvent {
 abstract class $ShipToCodeEventCopyWith<$Res> {
   factory $ShipToCodeEventCopyWith(
           ShipToCodeEvent value, $Res Function(ShipToCodeEvent) then) =
-      _$ShipToCodeEventCopyWithImpl<$Res, ShipToCodeEvent>;
+      _$ShipToCodeEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$ShipToCodeEventCopyWithImpl<$Res, $Val extends ShipToCodeEvent>
+class _$ShipToCodeEventCopyWithImpl<$Res>
     implements $ShipToCodeEventCopyWith<$Res> {
   _$ShipToCodeEventCopyWithImpl(this._value, this._then);
 
+  final ShipToCodeEvent _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(ShipToCodeEvent) _then;
 }
 
 /// @nodoc
@@ -113,11 +112,14 @@ abstract class _$$_InitializedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitializedCopyWithImpl<$Res>
-    extends _$ShipToCodeEventCopyWithImpl<$Res, _$_Initialized>
+    extends _$ShipToCodeEventCopyWithImpl<$Res>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Initialized));
+
+  @override
+  _$_Initialized get _value => super._value as _$_Initialized;
 }
 
 /// @nodoc
@@ -157,12 +159,12 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(ShipToInfo shipToInfo)? selected,
-    TResult? Function(List<ShipToInfo> shipToInfos)? load,
-    TResult? Function(List<ShipToInfo> shipToInfos)? search,
-    TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function(
+    TResult Function()? initialized,
+    TResult Function(ShipToInfo shipToInfo)? selected,
+    TResult Function(List<ShipToInfo> shipToInfos)? load,
+    TResult Function(List<ShipToInfo> shipToInfos)? search,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
             List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)?
         loadSavedShipToCode,
   }) {
@@ -204,12 +206,12 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Selected value)? selected,
-    TResult? Function(_Load value)? load,
-    TResult? Function(_Search value)? search,
-    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
-    TResult? Function(LoadShipToCode value)? loadSavedShipToCode,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_Load value)? load,
+    TResult Function(_Search value)? search,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(LoadShipToCode value)? loadSavedShipToCode,
   }) {
     return initialized?.call(this);
   }
@@ -241,7 +243,6 @@ abstract class _$$_SelectedCopyWith<$Res> {
   factory _$$_SelectedCopyWith(
           _$_Selected value, $Res Function(_$_Selected) then) =
       __$$_SelectedCopyWithImpl<$Res>;
-  @useResult
   $Res call({ShipToInfo shipToInfo});
 
   $ShipToInfoCopyWith<$Res> get shipToInfo;
@@ -249,19 +250,21 @@ abstract class _$$_SelectedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_SelectedCopyWithImpl<$Res>
-    extends _$ShipToCodeEventCopyWithImpl<$Res, _$_Selected>
+    extends _$ShipToCodeEventCopyWithImpl<$Res>
     implements _$$_SelectedCopyWith<$Res> {
   __$$_SelectedCopyWithImpl(
       _$_Selected _value, $Res Function(_$_Selected) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Selected));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_Selected get _value => super._value as _$_Selected;
+
   @override
   $Res call({
-    Object? shipToInfo = null,
+    Object? shipToInfo = freezed,
   }) {
     return _then(_$_Selected(
-      shipToInfo: null == shipToInfo
+      shipToInfo: shipToInfo == freezed
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
@@ -269,7 +272,6 @@ class __$$_SelectedCopyWithImpl<$Res>
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $ShipToInfoCopyWith<$Res> get shipToInfo {
     return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
       return _then(_value.copyWith(shipToInfo: value));
@@ -295,16 +297,16 @@ class _$_Selected implements _Selected {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Selected &&
-            (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo));
+            const DeepCollectionEquality()
+                .equals(other.shipToInfo, shipToInfo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, shipToInfo);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(shipToInfo));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_SelectedCopyWith<_$_Selected> get copyWith =>
       __$$_SelectedCopyWithImpl<_$_Selected>(this, _$identity);
 
@@ -326,12 +328,12 @@ class _$_Selected implements _Selected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(ShipToInfo shipToInfo)? selected,
-    TResult? Function(List<ShipToInfo> shipToInfos)? load,
-    TResult? Function(List<ShipToInfo> shipToInfos)? search,
-    TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function(
+    TResult Function()? initialized,
+    TResult Function(ShipToInfo shipToInfo)? selected,
+    TResult Function(List<ShipToInfo> shipToInfos)? load,
+    TResult Function(List<ShipToInfo> shipToInfos)? search,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
             List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)?
         loadSavedShipToCode,
   }) {
@@ -373,12 +375,12 @@ class _$_Selected implements _Selected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Selected value)? selected,
-    TResult? Function(_Load value)? load,
-    TResult? Function(_Search value)? search,
-    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
-    TResult? Function(LoadShipToCode value)? loadSavedShipToCode,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_Load value)? load,
+    TResult Function(_Search value)? search,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(LoadShipToCode value)? loadSavedShipToCode,
   }) {
     return selected?.call(this);
   }
@@ -414,24 +416,24 @@ abstract class _Selected implements ShipToCodeEvent {
 abstract class _$$_LoadCopyWith<$Res> {
   factory _$$_LoadCopyWith(_$_Load value, $Res Function(_$_Load) then) =
       __$$_LoadCopyWithImpl<$Res>;
-  @useResult
   $Res call({List<ShipToInfo> shipToInfos});
 }
 
 /// @nodoc
-class __$$_LoadCopyWithImpl<$Res>
-    extends _$ShipToCodeEventCopyWithImpl<$Res, _$_Load>
+class __$$_LoadCopyWithImpl<$Res> extends _$ShipToCodeEventCopyWithImpl<$Res>
     implements _$$_LoadCopyWith<$Res> {
   __$$_LoadCopyWithImpl(_$_Load _value, $Res Function(_$_Load) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Load));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_Load get _value => super._value as _$_Load;
+
   @override
   $Res call({
-    Object? shipToInfos = null,
+    Object? shipToInfos = freezed,
   }) {
     return _then(_$_Load(
-      shipToInfos: null == shipToInfos
+      shipToInfos: shipToInfos == freezed
           ? _value._shipToInfos
           : shipToInfos // ignore: cast_nullable_to_non_nullable
               as List<ShipToInfo>,
@@ -472,7 +474,6 @@ class _$_Load implements _Load {
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_LoadCopyWith<_$_Load> get copyWith =>
       __$$_LoadCopyWithImpl<_$_Load>(this, _$identity);
 
@@ -494,12 +495,12 @@ class _$_Load implements _Load {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(ShipToInfo shipToInfo)? selected,
-    TResult? Function(List<ShipToInfo> shipToInfos)? load,
-    TResult? Function(List<ShipToInfo> shipToInfos)? search,
-    TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function(
+    TResult Function()? initialized,
+    TResult Function(ShipToInfo shipToInfo)? selected,
+    TResult Function(List<ShipToInfo> shipToInfos)? load,
+    TResult Function(List<ShipToInfo> shipToInfos)? search,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
             List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)?
         loadSavedShipToCode,
   }) {
@@ -541,12 +542,12 @@ class _$_Load implements _Load {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Selected value)? selected,
-    TResult? Function(_Load value)? load,
-    TResult? Function(_Search value)? search,
-    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
-    TResult? Function(LoadShipToCode value)? loadSavedShipToCode,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_Load value)? load,
+    TResult Function(_Search value)? search,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(LoadShipToCode value)? loadSavedShipToCode,
   }) {
     return load?.call(this);
   }
@@ -581,24 +582,24 @@ abstract class _Load implements ShipToCodeEvent {
 abstract class _$$_SearchCopyWith<$Res> {
   factory _$$_SearchCopyWith(_$_Search value, $Res Function(_$_Search) then) =
       __$$_SearchCopyWithImpl<$Res>;
-  @useResult
   $Res call({List<ShipToInfo> shipToInfos});
 }
 
 /// @nodoc
-class __$$_SearchCopyWithImpl<$Res>
-    extends _$ShipToCodeEventCopyWithImpl<$Res, _$_Search>
+class __$$_SearchCopyWithImpl<$Res> extends _$ShipToCodeEventCopyWithImpl<$Res>
     implements _$$_SearchCopyWith<$Res> {
   __$$_SearchCopyWithImpl(_$_Search _value, $Res Function(_$_Search) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Search));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_Search get _value => super._value as _$_Search;
+
   @override
   $Res call({
-    Object? shipToInfos = null,
+    Object? shipToInfos = freezed,
   }) {
     return _then(_$_Search(
-      shipToInfos: null == shipToInfos
+      shipToInfos: shipToInfos == freezed
           ? _value._shipToInfos
           : shipToInfos // ignore: cast_nullable_to_non_nullable
               as List<ShipToInfo>,
@@ -639,7 +640,6 @@ class _$_Search implements _Search {
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_SearchCopyWith<_$_Search> get copyWith =>
       __$$_SearchCopyWithImpl<_$_Search>(this, _$identity);
 
@@ -661,12 +661,12 @@ class _$_Search implements _Search {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(ShipToInfo shipToInfo)? selected,
-    TResult? Function(List<ShipToInfo> shipToInfos)? load,
-    TResult? Function(List<ShipToInfo> shipToInfos)? search,
-    TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function(
+    TResult Function()? initialized,
+    TResult Function(ShipToInfo shipToInfo)? selected,
+    TResult Function(List<ShipToInfo> shipToInfos)? load,
+    TResult Function(List<ShipToInfo> shipToInfos)? search,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
             List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)?
         loadSavedShipToCode,
   }) {
@@ -708,12 +708,12 @@ class _$_Search implements _Search {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Selected value)? selected,
-    TResult? Function(_Load value)? load,
-    TResult? Function(_Search value)? search,
-    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
-    TResult? Function(LoadShipToCode value)? loadSavedShipToCode,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_Load value)? load,
+    TResult Function(_Search value)? search,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(LoadShipToCode value)? loadSavedShipToCode,
   }) {
     return search?.call(this);
   }
@@ -751,25 +751,26 @@ abstract class _$$_UpdateSearchKeyCopyWith<$Res> {
   factory _$$_UpdateSearchKeyCopyWith(
           _$_UpdateSearchKey value, $Res Function(_$_UpdateSearchKey) then) =
       __$$_UpdateSearchKeyCopyWithImpl<$Res>;
-  @useResult
   $Res call({String searchKey});
 }
 
 /// @nodoc
 class __$$_UpdateSearchKeyCopyWithImpl<$Res>
-    extends _$ShipToCodeEventCopyWithImpl<$Res, _$_UpdateSearchKey>
+    extends _$ShipToCodeEventCopyWithImpl<$Res>
     implements _$$_UpdateSearchKeyCopyWith<$Res> {
   __$$_UpdateSearchKeyCopyWithImpl(
       _$_UpdateSearchKey _value, $Res Function(_$_UpdateSearchKey) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_UpdateSearchKey));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_UpdateSearchKey get _value => super._value as _$_UpdateSearchKey;
+
   @override
   $Res call({
-    Object? searchKey = null,
+    Object? searchKey = freezed,
   }) {
     return _then(_$_UpdateSearchKey(
-      null == searchKey
+      searchKey == freezed
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as String,
@@ -795,16 +796,15 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UpdateSearchKey &&
-            (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
+            const DeepCollectionEquality().equals(other.searchKey, searchKey));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, searchKey);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(searchKey));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_UpdateSearchKeyCopyWith<_$_UpdateSearchKey> get copyWith =>
       __$$_UpdateSearchKeyCopyWithImpl<_$_UpdateSearchKey>(this, _$identity);
 
@@ -826,12 +826,12 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(ShipToInfo shipToInfo)? selected,
-    TResult? Function(List<ShipToInfo> shipToInfos)? load,
-    TResult? Function(List<ShipToInfo> shipToInfos)? search,
-    TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function(
+    TResult Function()? initialized,
+    TResult Function(ShipToInfo shipToInfo)? selected,
+    TResult Function(List<ShipToInfo> shipToInfos)? load,
+    TResult Function(List<ShipToInfo> shipToInfos)? search,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
             List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)?
         loadSavedShipToCode,
   }) {
@@ -873,12 +873,12 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Selected value)? selected,
-    TResult? Function(_Load value)? load,
-    TResult? Function(_Search value)? search,
-    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
-    TResult? Function(LoadShipToCode value)? loadSavedShipToCode,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_Load value)? load,
+    TResult Function(_Search value)? search,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(LoadShipToCode value)? loadSavedShipToCode,
   }) {
     return updateSearchKey?.call(this);
   }
@@ -915,7 +915,6 @@ abstract class _$$LoadShipToCodeCopyWith<$Res> {
   factory _$$LoadShipToCodeCopyWith(
           _$LoadShipToCode value, $Res Function(_$LoadShipToCode) then) =
       __$$LoadShipToCodeCopyWithImpl<$Res>;
-  @useResult
   $Res call({List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo});
 
   $ShipToInfoCopyWith<$Res> get defaultShipToInfo;
@@ -923,24 +922,26 @@ abstract class _$$LoadShipToCodeCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadShipToCodeCopyWithImpl<$Res>
-    extends _$ShipToCodeEventCopyWithImpl<$Res, _$LoadShipToCode>
+    extends _$ShipToCodeEventCopyWithImpl<$Res>
     implements _$$LoadShipToCodeCopyWith<$Res> {
   __$$LoadShipToCodeCopyWithImpl(
       _$LoadShipToCode _value, $Res Function(_$LoadShipToCode) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$LoadShipToCode));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$LoadShipToCode get _value => super._value as _$LoadShipToCode;
+
   @override
   $Res call({
-    Object? shipToInfos = null,
-    Object? defaultShipToInfo = null,
+    Object? shipToInfos = freezed,
+    Object? defaultShipToInfo = freezed,
   }) {
     return _then(_$LoadShipToCode(
-      shipToInfos: null == shipToInfos
+      shipToInfos: shipToInfos == freezed
           ? _value._shipToInfos
           : shipToInfos // ignore: cast_nullable_to_non_nullable
               as List<ShipToInfo>,
-      defaultShipToInfo: null == defaultShipToInfo
+      defaultShipToInfo: defaultShipToInfo == freezed
           ? _value.defaultShipToInfo
           : defaultShipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
@@ -948,7 +949,6 @@ class __$$LoadShipToCodeCopyWithImpl<$Res>
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $ShipToInfoCopyWith<$Res> get defaultShipToInfo {
     return $ShipToInfoCopyWith<$Res>(_value.defaultShipToInfo, (value) {
       return _then(_value.copyWith(defaultShipToInfo: value));
@@ -986,17 +986,18 @@ class _$LoadShipToCode implements LoadShipToCode {
             other is _$LoadShipToCode &&
             const DeepCollectionEquality()
                 .equals(other._shipToInfos, _shipToInfos) &&
-            (identical(other.defaultShipToInfo, defaultShipToInfo) ||
-                other.defaultShipToInfo == defaultShipToInfo));
+            const DeepCollectionEquality()
+                .equals(other.defaultShipToInfo, defaultShipToInfo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_shipToInfos), defaultShipToInfo);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_shipToInfos),
+      const DeepCollectionEquality().hash(defaultShipToInfo));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$LoadShipToCodeCopyWith<_$LoadShipToCode> get copyWith =>
       __$$LoadShipToCodeCopyWithImpl<_$LoadShipToCode>(this, _$identity);
 
@@ -1018,12 +1019,12 @@ class _$LoadShipToCode implements LoadShipToCode {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(ShipToInfo shipToInfo)? selected,
-    TResult? Function(List<ShipToInfo> shipToInfos)? load,
-    TResult? Function(List<ShipToInfo> shipToInfos)? search,
-    TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function(
+    TResult Function()? initialized,
+    TResult Function(ShipToInfo shipToInfo)? selected,
+    TResult Function(List<ShipToInfo> shipToInfos)? load,
+    TResult Function(List<ShipToInfo> shipToInfos)? search,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function(
             List<ShipToInfo> shipToInfos, ShipToInfo defaultShipToInfo)?
         loadSavedShipToCode,
   }) {
@@ -1065,12 +1066,12 @@ class _$LoadShipToCode implements LoadShipToCode {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Selected value)? selected,
-    TResult? Function(_Load value)? load,
-    TResult? Function(_Search value)? search,
-    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
-    TResult? Function(LoadShipToCode value)? loadSavedShipToCode,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_Load value)? load,
+    TResult Function(_Search value)? search,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(LoadShipToCode value)? loadSavedShipToCode,
   }) {
     return loadSavedShipToCode?.call(this);
   }
@@ -1121,8 +1122,7 @@ mixin _$ShipToCodeState {
 abstract class $ShipToCodeStateCopyWith<$Res> {
   factory $ShipToCodeStateCopyWith(
           ShipToCodeState value, $Res Function(ShipToCodeState) then) =
-      _$ShipToCodeStateCopyWithImpl<$Res, ShipToCodeState>;
-  @useResult
+      _$ShipToCodeStateCopyWithImpl<$Res>;
   $Res call(
       {List<ShipToInfo> shipToInfoList,
       ShipToInfo shipToInfo,
@@ -1133,48 +1133,45 @@ abstract class $ShipToCodeStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ShipToCodeStateCopyWithImpl<$Res, $Val extends ShipToCodeState>
+class _$ShipToCodeStateCopyWithImpl<$Res>
     implements $ShipToCodeStateCopyWith<$Res> {
   _$ShipToCodeStateCopyWithImpl(this._value, this._then);
 
+  final ShipToCodeState _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(ShipToCodeState) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? shipToInfoList = null,
-    Object? shipToInfo = null,
-    Object? isSearching = null,
-    Object? searchKey = null,
+    Object? shipToInfoList = freezed,
+    Object? shipToInfo = freezed,
+    Object? isSearching = freezed,
+    Object? searchKey = freezed,
   }) {
     return _then(_value.copyWith(
-      shipToInfoList: null == shipToInfoList
+      shipToInfoList: shipToInfoList == freezed
           ? _value.shipToInfoList
           : shipToInfoList // ignore: cast_nullable_to_non_nullable
               as List<ShipToInfo>,
-      shipToInfo: null == shipToInfo
+      shipToInfo: shipToInfo == freezed
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
-      isSearching: null == isSearching
+      isSearching: isSearching == freezed
           ? _value.isSearching
           : isSearching // ignore: cast_nullable_to_non_nullable
               as bool,
-      searchKey: null == searchKey
+      searchKey: searchKey == freezed
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
-    ) as $Val);
+    ));
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $ShipToInfoCopyWith<$Res> get shipToInfo {
     return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
-      return _then(_value.copyWith(shipToInfo: value) as $Val);
+      return _then(_value.copyWith(shipToInfo: value));
     });
   }
 }
@@ -1186,7 +1183,6 @@ abstract class _$$_ShipToCodeStateCopyWith<$Res>
           _$_ShipToCodeState value, $Res Function(_$_ShipToCodeState) then) =
       __$$_ShipToCodeStateCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {List<ShipToInfo> shipToInfoList,
       ShipToInfo shipToInfo,
@@ -1199,34 +1195,36 @@ abstract class _$$_ShipToCodeStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_ShipToCodeStateCopyWithImpl<$Res>
-    extends _$ShipToCodeStateCopyWithImpl<$Res, _$_ShipToCodeState>
+    extends _$ShipToCodeStateCopyWithImpl<$Res>
     implements _$$_ShipToCodeStateCopyWith<$Res> {
   __$$_ShipToCodeStateCopyWithImpl(
       _$_ShipToCodeState _value, $Res Function(_$_ShipToCodeState) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_ShipToCodeState));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_ShipToCodeState get _value => super._value as _$_ShipToCodeState;
+
   @override
   $Res call({
-    Object? shipToInfoList = null,
-    Object? shipToInfo = null,
-    Object? isSearching = null,
-    Object? searchKey = null,
+    Object? shipToInfoList = freezed,
+    Object? shipToInfo = freezed,
+    Object? isSearching = freezed,
+    Object? searchKey = freezed,
   }) {
     return _then(_$_ShipToCodeState(
-      shipToInfoList: null == shipToInfoList
+      shipToInfoList: shipToInfoList == freezed
           ? _value._shipToInfoList
           : shipToInfoList // ignore: cast_nullable_to_non_nullable
               as List<ShipToInfo>,
-      shipToInfo: null == shipToInfo
+      shipToInfo: shipToInfo == freezed
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
-      isSearching: null == isSearching
+      isSearching: isSearching == freezed
           ? _value.isSearching
           : isSearching // ignore: cast_nullable_to_non_nullable
               as bool,
-      searchKey: null == searchKey
+      searchKey: searchKey == freezed
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
@@ -1271,25 +1269,23 @@ class _$_ShipToCodeState extends _ShipToCodeState {
             other is _$_ShipToCodeState &&
             const DeepCollectionEquality()
                 .equals(other._shipToInfoList, _shipToInfoList) &&
-            (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo) &&
-            (identical(other.isSearching, isSearching) ||
-                other.isSearching == isSearching) &&
-            (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
+            const DeepCollectionEquality()
+                .equals(other.shipToInfo, shipToInfo) &&
+            const DeepCollectionEquality()
+                .equals(other.isSearching, isSearching) &&
+            const DeepCollectionEquality().equals(other.searchKey, searchKey));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_shipToInfoList),
-      shipToInfo,
-      isSearching,
-      searchKey);
+      const DeepCollectionEquality().hash(shipToInfo),
+      const DeepCollectionEquality().hash(isSearching),
+      const DeepCollectionEquality().hash(searchKey));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_ShipToCodeStateCopyWith<_$_ShipToCodeState> get copyWith =>
       __$$_ShipToCodeStateCopyWithImpl<_$_ShipToCodeState>(this, _$identity);
 }

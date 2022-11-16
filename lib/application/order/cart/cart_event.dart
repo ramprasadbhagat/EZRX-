@@ -21,4 +21,8 @@ class CartEvent with _$CartEvent {
     required PriceAggregate item,
   }) = _RemoveFromCart;
   const factory CartEvent.clearCart() = _ClearCart;
+  const factory CartEvent.updateSelectedItem({
+    required PriceAggregate item,
+  }) = _updateSelectedItem;
+  const factory CartEvent.updateSelectAllItems() = _updateSelectAllItems;
 }

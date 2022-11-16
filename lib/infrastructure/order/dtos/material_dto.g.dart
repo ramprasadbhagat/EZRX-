@@ -38,7 +38,7 @@ class MaterialDtoAdapter extends TypeAdapter<_$_MaterialDto> {
       bundles: fields[17] == null ? [] : (fields[17] as List).cast<BundleDto>(),
       defaultMaterialDescription:
           fields[18] == null ? '' : fields[18] as String,
-      isFOCMaterial: fields[19] as bool,
+      isFOCMaterial: fields[19] == null ? false : fields[19] as bool,
     );
   }
 

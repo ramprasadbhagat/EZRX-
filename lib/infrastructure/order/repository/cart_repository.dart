@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_aggregate_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
@@ -133,5 +134,44 @@ class CartRepository implements ICartRepository {
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
+  }
+
+  @override
+  List<MaterialNumber> updateSelectedItem({
+    required PriceAggregate cartItem,
+    required List<MaterialNumber> selectedMaterialList,
+  }) {
+    if (selectedMaterialList.contains(cartItem.materialInfo.materialNumber)) {
+      return List.from(selectedMaterialList)
+        ..remove(cartItem.materialInfo.materialNumber);
+    }
+
+    return List.from(selectedMaterialList)
+      ..add(cartItem.materialInfo.materialNumber);
+  }
+
+  @override
+  List<MaterialNumber> removeFromSelectedMaterialList({
+    required PriceAggregate cartItem,
+    required List<MaterialNumber> selectedMaterialList,
+  }) {
+    if (selectedMaterialList.contains(cartItem.materialInfo.materialNumber)) {
+      return List.from(selectedMaterialList)
+        ..remove(cartItem.materialInfo.materialNumber);
+    }
+
+    return selectedMaterialList;
+  }
+
+  @override
+  List<MaterialNumber> updateSelectAll({
+    required List<PriceAggregate> cartItemList,
+  }) {
+    final newMaterialNumberList = <MaterialNumber>[];
+    for (final element in cartItemList) {
+      newMaterialNumberList.add(element.materialInfo.materialNumber);
+    }
+
+    return newMaterialNumberList;
   }
 }

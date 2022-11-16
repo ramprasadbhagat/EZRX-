@@ -26,37 +26,33 @@ mixin _$Cred {
 /// @nodoc
 abstract class $CredCopyWith<$Res> {
   factory $CredCopyWith(Cred value, $Res Function(Cred) then) =
-      _$CredCopyWithImpl<$Res, Cred>;
-  @useResult
+      _$CredCopyWithImpl<$Res>;
   $Res call({Username username, Password password});
 }
 
 /// @nodoc
-class _$CredCopyWithImpl<$Res, $Val extends Cred>
-    implements $CredCopyWith<$Res> {
+class _$CredCopyWithImpl<$Res> implements $CredCopyWith<$Res> {
   _$CredCopyWithImpl(this._value, this._then);
 
+  final Cred _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(Cred) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = null,
-    Object? password = null,
+    Object? username = freezed,
+    Object? password = freezed,
   }) {
     return _then(_value.copyWith(
-      username: null == username
+      username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as Username,
-      password: null == password
+      password: password == freezed
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as Password,
-    ) as $Val);
+    ));
   }
 }
 
@@ -65,28 +61,29 @@ abstract class _$$_CredCopyWith<$Res> implements $CredCopyWith<$Res> {
   factory _$$_CredCopyWith(_$_Cred value, $Res Function(_$_Cred) then) =
       __$$_CredCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call({Username username, Password password});
 }
 
 /// @nodoc
-class __$$_CredCopyWithImpl<$Res> extends _$CredCopyWithImpl<$Res, _$_Cred>
+class __$$_CredCopyWithImpl<$Res> extends _$CredCopyWithImpl<$Res>
     implements _$$_CredCopyWith<$Res> {
   __$$_CredCopyWithImpl(_$_Cred _value, $Res Function(_$_Cred) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Cred));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_Cred get _value => super._value as _$_Cred;
+
   @override
   $Res call({
-    Object? username = null,
-    Object? password = null,
+    Object? username = freezed,
+    Object? password = freezed,
   }) {
     return _then(_$_Cred(
-      username: null == username
+      username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as Username,
-      password: null == password
+      password: password == freezed
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as Password,
@@ -114,18 +111,18 @@ class _$_Cred extends _Cred {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Cred &&
-            (identical(other.username, username) ||
-                other.username == username) &&
-            (identical(other.password, password) ||
-                other.password == password));
+            const DeepCollectionEquality().equals(other.username, username) &&
+            const DeepCollectionEquality().equals(other.password, password));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, username, password);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(username),
+      const DeepCollectionEquality().hash(password));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_CredCopyWith<_$_Cred> get copyWith =>
       __$$_CredCopyWithImpl<_$_Cred>(this, _$identity);
 }

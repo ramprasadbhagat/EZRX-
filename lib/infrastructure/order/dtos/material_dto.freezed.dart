@@ -78,7 +78,7 @@ mixin _$MaterialDto {
   @HiveField(18, defaultValue: '')
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
   @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-  @HiveField(19)
+  @HiveField(19, defaultValue: false)
   bool get isFOCMaterial => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -153,7 +153,7 @@ abstract class $MaterialDtoCopyWith<$Res> {
       @HiveField(18, defaultValue: '')
           String defaultMaterialDescription,
       @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-      @HiveField(19)
+      @HiveField(19, defaultValue: false)
           bool isFOCMaterial});
 }
 
@@ -344,7 +344,7 @@ abstract class _$$_MaterialDtoCopyWith<$Res>
       @HiveField(18, defaultValue: '')
           String defaultMaterialDescription,
       @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-      @HiveField(19)
+      @HiveField(19, defaultValue: false)
           bool isFOCMaterial});
 }
 
@@ -529,7 +529,7 @@ class _$_MaterialDto extends _MaterialDto {
       @HiveField(18, defaultValue: '')
           required this.defaultMaterialDescription,
       @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-      @HiveField(19)
+      @HiveField(19, defaultValue: false)
           required this.isFOCMaterial})
       : _taxes = taxes,
         _bundles = bundles,
@@ -626,7 +626,7 @@ class _$_MaterialDto extends _MaterialDto {
   final String defaultMaterialDescription;
   @override
   @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-  @HiveField(19)
+  @HiveField(19, defaultValue: false)
   final bool isFOCMaterial;
 
   @override
@@ -784,7 +784,7 @@ abstract class _MaterialDto extends MaterialDto {
       @HiveField(18, defaultValue: '')
           required final String defaultMaterialDescription,
       @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-      @HiveField(19)
+      @HiveField(19, defaultValue: false)
           required final bool isFOCMaterial}) = _$_MaterialDto;
   const _MaterialDto._() : super._();
 
@@ -869,7 +869,7 @@ abstract class _MaterialDto extends MaterialDto {
   String get defaultMaterialDescription;
   @override
   @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-  @HiveField(19)
+  @HiveField(19, defaultValue: false)
   bool get isFOCMaterial;
   @override
   @JsonKey(ignore: true)

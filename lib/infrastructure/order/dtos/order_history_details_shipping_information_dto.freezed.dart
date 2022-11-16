@@ -54,9 +54,7 @@ abstract class $OrderHistoryDetailsShippingInformationDtoCopyWith<$Res> {
   factory $OrderHistoryDetailsShippingInformationDtoCopyWith(
           OrderHistoryDetailsShippingInformationDto value,
           $Res Function(OrderHistoryDetailsShippingInformationDto) then) =
-      _$OrderHistoryDetailsShippingInformationDtoCopyWithImpl<$Res,
-          OrderHistoryDetailsShippingInformationDto>;
-  @useResult
+      _$OrderHistoryDetailsShippingInformationDtoCopyWithImpl<$Res>;
   $Res
       call(
           {@JsonKey(name: 'Address', defaultValue: '')
@@ -82,68 +80,65 @@ abstract class $OrderHistoryDetailsShippingInformationDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OrderHistoryDetailsShippingInformationDtoCopyWithImpl<$Res,
-        $Val extends OrderHistoryDetailsShippingInformationDto>
+class _$OrderHistoryDetailsShippingInformationDtoCopyWithImpl<$Res>
     implements $OrderHistoryDetailsShippingInformationDtoCopyWith<$Res> {
   _$OrderHistoryDetailsShippingInformationDtoCopyWithImpl(
       this._value, this._then);
 
+  final OrderHistoryDetailsShippingInformationDto _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(OrderHistoryDetailsShippingInformationDto) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? address = null,
-    Object? pOReference = null,
-    Object? invoiceNumber = null,
-    Object? invoiceDate = null,
-    Object? postalCode = null,
-    Object? country = null,
-    Object? phone = null,
-    Object? fax = null,
-    Object? invoices = null,
+    Object? address = freezed,
+    Object? pOReference = freezed,
+    Object? invoiceNumber = freezed,
+    Object? invoiceDate = freezed,
+    Object? postalCode = freezed,
+    Object? country = freezed,
+    Object? phone = freezed,
+    Object? fax = freezed,
+    Object? invoices = freezed,
   }) {
     return _then(_value.copyWith(
-      address: null == address
+      address: address == freezed
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      pOReference: null == pOReference
+      pOReference: pOReference == freezed
           ? _value.pOReference
           : pOReference // ignore: cast_nullable_to_non_nullable
               as String,
-      invoiceNumber: null == invoiceNumber
+      invoiceNumber: invoiceNumber == freezed
           ? _value.invoiceNumber
           : invoiceNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      invoiceDate: null == invoiceDate
+      invoiceDate: invoiceDate == freezed
           ? _value.invoiceDate
           : invoiceDate // ignore: cast_nullable_to_non_nullable
               as String,
-      postalCode: null == postalCode
+      postalCode: postalCode == freezed
           ? _value.postalCode
           : postalCode // ignore: cast_nullable_to_non_nullable
               as String,
-      country: null == country
+      country: country == freezed
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as String,
-      phone: null == phone
+      phone: phone == freezed
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String,
-      fax: null == fax
+      fax: fax == freezed
           ? _value.fax
           : fax // ignore: cast_nullable_to_non_nullable
               as String,
-      invoices: null == invoices
+      invoices: invoices == freezed
           ? _value.invoices
           : invoices // ignore: cast_nullable_to_non_nullable
               as List<OrderHistoryDetailsInvoicesDto>,
-    ) as $Val);
+    ));
   }
 }
 
@@ -155,7 +150,6 @@ abstract class _$$_OrderHistoryDetailsShippingInformationDtoCopyWith<$Res>
           $Res Function(_$_OrderHistoryDetailsShippingInformationDto) then) =
       __$$_OrderHistoryDetailsShippingInformationDtoCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res
       call(
           {@JsonKey(name: 'Address', defaultValue: '')
@@ -182,61 +176,64 @@ abstract class _$$_OrderHistoryDetailsShippingInformationDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_OrderHistoryDetailsShippingInformationDtoCopyWithImpl<$Res>
-    extends _$OrderHistoryDetailsShippingInformationDtoCopyWithImpl<$Res,
-        _$_OrderHistoryDetailsShippingInformationDto>
+    extends _$OrderHistoryDetailsShippingInformationDtoCopyWithImpl<$Res>
     implements _$$_OrderHistoryDetailsShippingInformationDtoCopyWith<$Res> {
   __$$_OrderHistoryDetailsShippingInformationDtoCopyWithImpl(
       _$_OrderHistoryDetailsShippingInformationDto _value,
       $Res Function(_$_OrderHistoryDetailsShippingInformationDto) _then)
-      : super(_value, _then);
+      : super(_value,
+            (v) => _then(v as _$_OrderHistoryDetailsShippingInformationDto));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_OrderHistoryDetailsShippingInformationDto get _value =>
+      super._value as _$_OrderHistoryDetailsShippingInformationDto;
+
   @override
   $Res call({
-    Object? address = null,
-    Object? pOReference = null,
-    Object? invoiceNumber = null,
-    Object? invoiceDate = null,
-    Object? postalCode = null,
-    Object? country = null,
-    Object? phone = null,
-    Object? fax = null,
-    Object? invoices = null,
+    Object? address = freezed,
+    Object? pOReference = freezed,
+    Object? invoiceNumber = freezed,
+    Object? invoiceDate = freezed,
+    Object? postalCode = freezed,
+    Object? country = freezed,
+    Object? phone = freezed,
+    Object? fax = freezed,
+    Object? invoices = freezed,
   }) {
     return _then(_$_OrderHistoryDetailsShippingInformationDto(
-      address: null == address
+      address: address == freezed
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      pOReference: null == pOReference
+      pOReference: pOReference == freezed
           ? _value.pOReference
           : pOReference // ignore: cast_nullable_to_non_nullable
               as String,
-      invoiceNumber: null == invoiceNumber
+      invoiceNumber: invoiceNumber == freezed
           ? _value.invoiceNumber
           : invoiceNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      invoiceDate: null == invoiceDate
+      invoiceDate: invoiceDate == freezed
           ? _value.invoiceDate
           : invoiceDate // ignore: cast_nullable_to_non_nullable
               as String,
-      postalCode: null == postalCode
+      postalCode: postalCode == freezed
           ? _value.postalCode
           : postalCode // ignore: cast_nullable_to_non_nullable
               as String,
-      country: null == country
+      country: country == freezed
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as String,
-      phone: null == phone
+      phone: phone == freezed
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String,
-      fax: null == fax
+      fax: fax == freezed
           ? _value.fax
           : fax // ignore: cast_nullable_to_non_nullable
               as String,
-      invoices: null == invoices
+      invoices: invoices == freezed
           ? _value._invoices
           : invoices // ignore: cast_nullable_to_non_nullable
               as List<OrderHistoryDetailsInvoicesDto>,
@@ -316,18 +313,18 @@ class _$_OrderHistoryDetailsShippingInformationDto
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryDetailsShippingInformationDto &&
-            (identical(other.address, address) || other.address == address) &&
-            (identical(other.pOReference, pOReference) ||
-                other.pOReference == pOReference) &&
-            (identical(other.invoiceNumber, invoiceNumber) ||
-                other.invoiceNumber == invoiceNumber) &&
-            (identical(other.invoiceDate, invoiceDate) ||
-                other.invoiceDate == invoiceDate) &&
-            (identical(other.postalCode, postalCode) ||
-                other.postalCode == postalCode) &&
-            (identical(other.country, country) || other.country == country) &&
-            (identical(other.phone, phone) || other.phone == phone) &&
-            (identical(other.fax, fax) || other.fax == fax) &&
+            const DeepCollectionEquality().equals(other.address, address) &&
+            const DeepCollectionEquality()
+                .equals(other.pOReference, pOReference) &&
+            const DeepCollectionEquality()
+                .equals(other.invoiceNumber, invoiceNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.invoiceDate, invoiceDate) &&
+            const DeepCollectionEquality()
+                .equals(other.postalCode, postalCode) &&
+            const DeepCollectionEquality().equals(other.country, country) &&
+            const DeepCollectionEquality().equals(other.phone, phone) &&
+            const DeepCollectionEquality().equals(other.fax, fax) &&
             const DeepCollectionEquality().equals(other._invoices, _invoices));
   }
 
@@ -335,19 +332,18 @@ class _$_OrderHistoryDetailsShippingInformationDto
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      address,
-      pOReference,
-      invoiceNumber,
-      invoiceDate,
-      postalCode,
-      country,
-      phone,
-      fax,
+      const DeepCollectionEquality().hash(address),
+      const DeepCollectionEquality().hash(pOReference),
+      const DeepCollectionEquality().hash(invoiceNumber),
+      const DeepCollectionEquality().hash(invoiceDate),
+      const DeepCollectionEquality().hash(postalCode),
+      const DeepCollectionEquality().hash(country),
+      const DeepCollectionEquality().hash(phone),
+      const DeepCollectionEquality().hash(fax),
       const DeepCollectionEquality().hash(_invoices));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_OrderHistoryDetailsShippingInformationDtoCopyWith<
           _$_OrderHistoryDetailsShippingInformationDto>
       get copyWith =>

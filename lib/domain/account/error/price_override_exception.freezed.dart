@@ -23,7 +23,7 @@ mixin _$PriceException {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? priceNotFound,
+    TResult Function()? priceNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,7 +39,7 @@ mixin _$PriceException {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_PriceNotFound value)? priceNotFound,
+    TResult Function(_PriceNotFound value)? priceNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,18 +54,17 @@ mixin _$PriceException {
 abstract class $PriceExceptionCopyWith<$Res> {
   factory $PriceExceptionCopyWith(
           PriceException value, $Res Function(PriceException) then) =
-      _$PriceExceptionCopyWithImpl<$Res, PriceException>;
+      _$PriceExceptionCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$PriceExceptionCopyWithImpl<$Res, $Val extends PriceException>
+class _$PriceExceptionCopyWithImpl<$Res>
     implements $PriceExceptionCopyWith<$Res> {
   _$PriceExceptionCopyWithImpl(this._value, this._then);
 
+  final PriceException _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(PriceException) _then;
 }
 
 /// @nodoc
@@ -77,11 +76,14 @@ abstract class _$$_PriceNotFoundCopyWith<$Res> {
 
 /// @nodoc
 class __$$_PriceNotFoundCopyWithImpl<$Res>
-    extends _$PriceExceptionCopyWithImpl<$Res, _$_PriceNotFound>
+    extends _$PriceExceptionCopyWithImpl<$Res>
     implements _$$_PriceNotFoundCopyWith<$Res> {
   __$$_PriceNotFoundCopyWithImpl(
       _$_PriceNotFound _value, $Res Function(_$_PriceNotFound) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_PriceNotFound));
+
+  @override
+  _$_PriceNotFound get _value => super._value as _$_PriceNotFound;
 }
 
 /// @nodoc
@@ -114,7 +116,7 @@ class _$_PriceNotFound implements _PriceNotFound {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? priceNotFound,
+    TResult Function()? priceNotFound,
   }) {
     return priceNotFound?.call();
   }
@@ -142,7 +144,7 @@ class _$_PriceNotFound implements _PriceNotFound {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_PriceNotFound value)? priceNotFound,
+    TResult Function(_PriceNotFound value)? priceNotFound,
   }) {
     return priceNotFound?.call(this);
   }

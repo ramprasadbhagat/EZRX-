@@ -15,11 +15,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CartItemListTile extends StatelessWidget {
   final PriceAggregate cartItem;
   final String taxCode;
+  final bool showCheckBox;
 
   const CartItemListTile({
     Key? key,
     required this.cartItem,
     this.taxCode = 'VAT',
+    this.showCheckBox = false,
   }) : super(key: key);
 
   @override
@@ -46,6 +48,29 @@ class CartItemListTile extends StatelessWidget {
               cartItem: cartItem,
             );
           },
+          leading: showCheckBox
+              ? BlocBuilder<CartBloc, CartState>(
+                  buildWhen: ((previous, current) =>
+                      previous.selectedItemsMaterialNumber.length !=
+                      current.selectedItemsMaterialNumber.length),
+                  builder: (context, state) {
+                    return Checkbox(
+                      onChanged: ((v) => {
+                            context
+                                .read<CartBloc>()
+                                .add(CartEvent.updateSelectedItem(
+                                  item: cartItem,
+                                )),
+                          }),
+                      value: context
+                          .read<CartBloc>()
+                          .state
+                          .selectedItemsMaterialNumber
+                          .contains(cartItem.materialInfo.materialNumber),
+                    );
+                  },
+                )
+              : const SizedBox.shrink(),
           trailing: SizedBox(
             width: 50,
             child: Wrap(

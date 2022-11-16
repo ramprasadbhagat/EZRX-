@@ -23,7 +23,7 @@ mixin _$UserException {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? userNotFound,
+    TResult Function()? userNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,7 +39,7 @@ mixin _$UserException {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult Function(_UserNotFound value)? userNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,18 +54,17 @@ mixin _$UserException {
 abstract class $UserExceptionCopyWith<$Res> {
   factory $UserExceptionCopyWith(
           UserException value, $Res Function(UserException) then) =
-      _$UserExceptionCopyWithImpl<$Res, UserException>;
+      _$UserExceptionCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$UserExceptionCopyWithImpl<$Res, $Val extends UserException>
+class _$UserExceptionCopyWithImpl<$Res>
     implements $UserExceptionCopyWith<$Res> {
   _$UserExceptionCopyWithImpl(this._value, this._then);
 
+  final UserException _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(UserException) _then;
 }
 
 /// @nodoc
@@ -77,11 +76,14 @@ abstract class _$$_UserNotFoundCopyWith<$Res> {
 
 /// @nodoc
 class __$$_UserNotFoundCopyWithImpl<$Res>
-    extends _$UserExceptionCopyWithImpl<$Res, _$_UserNotFound>
+    extends _$UserExceptionCopyWithImpl<$Res>
     implements _$$_UserNotFoundCopyWith<$Res> {
   __$$_UserNotFoundCopyWithImpl(
       _$_UserNotFound _value, $Res Function(_$_UserNotFound) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_UserNotFound));
+
+  @override
+  _$_UserNotFound get _value => super._value as _$_UserNotFound;
 }
 
 /// @nodoc
@@ -114,7 +116,7 @@ class _$_UserNotFound implements _UserNotFound {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? userNotFound,
+    TResult Function()? userNotFound,
   }) {
     return userNotFound?.call();
   }
@@ -142,7 +144,7 @@ class _$_UserNotFound implements _UserNotFound {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult Function(_UserNotFound value)? userNotFound,
   }) {
     return userNotFound?.call(this);
   }

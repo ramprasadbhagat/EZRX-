@@ -127,6 +127,6 @@ const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
   vatValue: 0,
   priceOverride: false,
   disablePaymentTermsDisplay: false,
-  disableDeliveryDate:false,
-  enableBillTo:false,
+  disableDeliveryDate: false,
+  enableBillTo: false,
 );

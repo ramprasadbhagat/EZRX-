@@ -27,37 +27,33 @@ mixin _$SettingTc {
 /// @nodoc
 abstract class $SettingTcCopyWith<$Res> {
   factory $SettingTcCopyWith(SettingTc value, $Res Function(SettingTc) then) =
-      _$SettingTcCopyWithImpl<$Res, SettingTc>;
-  @useResult
+      _$SettingTcCopyWithImpl<$Res>;
   $Res call({bool acceptTC, DateTime acceptTCTimestamp});
 }
 
 /// @nodoc
-class _$SettingTcCopyWithImpl<$Res, $Val extends SettingTc>
-    implements $SettingTcCopyWith<$Res> {
+class _$SettingTcCopyWithImpl<$Res> implements $SettingTcCopyWith<$Res> {
   _$SettingTcCopyWithImpl(this._value, this._then);
 
+  final SettingTc _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(SettingTc) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? acceptTC = null,
-    Object? acceptTCTimestamp = null,
+    Object? acceptTC = freezed,
+    Object? acceptTCTimestamp = freezed,
   }) {
     return _then(_value.copyWith(
-      acceptTC: null == acceptTC
+      acceptTC: acceptTC == freezed
           ? _value.acceptTC
           : acceptTC // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptTCTimestamp: null == acceptTCTimestamp
+      acceptTCTimestamp: acceptTCTimestamp == freezed
           ? _value.acceptTCTimestamp
           : acceptTCTimestamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
-    ) as $Val);
+    ));
   }
 }
 
@@ -67,30 +63,30 @@ abstract class _$$_SettingTcCopyWith<$Res> implements $SettingTcCopyWith<$Res> {
           _$_SettingTc value, $Res Function(_$_SettingTc) then) =
       __$$_SettingTcCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call({bool acceptTC, DateTime acceptTCTimestamp});
 }
 
 /// @nodoc
-class __$$_SettingTcCopyWithImpl<$Res>
-    extends _$SettingTcCopyWithImpl<$Res, _$_SettingTc>
+class __$$_SettingTcCopyWithImpl<$Res> extends _$SettingTcCopyWithImpl<$Res>
     implements _$$_SettingTcCopyWith<$Res> {
   __$$_SettingTcCopyWithImpl(
       _$_SettingTc _value, $Res Function(_$_SettingTc) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_SettingTc));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_SettingTc get _value => super._value as _$_SettingTc;
+
   @override
   $Res call({
-    Object? acceptTC = null,
-    Object? acceptTCTimestamp = null,
+    Object? acceptTC = freezed,
+    Object? acceptTCTimestamp = freezed,
   }) {
     return _then(_$_SettingTc(
-      acceptTC: null == acceptTC
+      acceptTC: acceptTC == freezed
           ? _value.acceptTC
           : acceptTC // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptTCTimestamp: null == acceptTCTimestamp
+      acceptTCTimestamp: acceptTCTimestamp == freezed
           ? _value.acceptTCTimestamp
           : acceptTCTimestamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -119,18 +115,19 @@ class _$_SettingTc extends _SettingTc {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SettingTc &&
-            (identical(other.acceptTC, acceptTC) ||
-                other.acceptTC == acceptTC) &&
-            (identical(other.acceptTCTimestamp, acceptTCTimestamp) ||
-                other.acceptTCTimestamp == acceptTCTimestamp));
+            const DeepCollectionEquality().equals(other.acceptTC, acceptTC) &&
+            const DeepCollectionEquality()
+                .equals(other.acceptTCTimestamp, acceptTCTimestamp));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, acceptTC, acceptTCTimestamp);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(acceptTC),
+      const DeepCollectionEquality().hash(acceptTCTimestamp));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_SettingTcCopyWith<_$_SettingTc> get copyWith =>
       __$$_SettingTcCopyWithImpl<_$_SettingTc>(this, _$identity);
 }

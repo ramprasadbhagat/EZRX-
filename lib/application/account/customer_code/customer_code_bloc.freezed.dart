@@ -38,18 +38,18 @@ mixin _$CustomerCodeEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult? Function(bool isRefresh, String searchText, bool hidecustomer,
+    TResult Function()? initialized,
+    TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         search,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult? Function(String searchKey)? updateSearchKey,
+    TResult Function(String searchKey)? updateSearchKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,12 +81,12 @@ mixin _$CustomerCodeEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Selected value)? selected,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Search value)? search,
-    TResult? Function(_LoadMore value)? loadMore,
-    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_Search value)? search,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -106,18 +106,17 @@ mixin _$CustomerCodeEvent {
 abstract class $CustomerCodeEventCopyWith<$Res> {
   factory $CustomerCodeEventCopyWith(
           CustomerCodeEvent value, $Res Function(CustomerCodeEvent) then) =
-      _$CustomerCodeEventCopyWithImpl<$Res, CustomerCodeEvent>;
+      _$CustomerCodeEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$CustomerCodeEventCopyWithImpl<$Res, $Val extends CustomerCodeEvent>
+class _$CustomerCodeEventCopyWithImpl<$Res>
     implements $CustomerCodeEventCopyWith<$Res> {
   _$CustomerCodeEventCopyWithImpl(this._value, this._then);
 
+  final CustomerCodeEvent _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(CustomerCodeEvent) _then;
 }
 
 /// @nodoc
@@ -129,11 +128,14 @@ abstract class _$$_InitializedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitializedCopyWithImpl<$Res>
-    extends _$CustomerCodeEventCopyWithImpl<$Res, _$_Initialized>
+    extends _$CustomerCodeEventCopyWithImpl<$Res>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Initialized));
+
+  @override
+  _$_Initialized get _value => super._value as _$_Initialized;
 }
 
 /// @nodoc
@@ -181,18 +183,18 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult? Function(bool isRefresh, String searchText, bool hidecustomer,
+    TResult Function()? initialized,
+    TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         search,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult? Function(String searchKey)? updateSearchKey,
+    TResult Function(String searchKey)? updateSearchKey,
   }) {
     return initialized?.call();
   }
@@ -236,12 +238,12 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Selected value)? selected,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Search value)? search,
-    TResult? Function(_LoadMore value)? loadMore,
-    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_Search value)? search,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
   }) {
     return initialized?.call(this);
   }
@@ -273,7 +275,6 @@ abstract class _$$_SelectedCopyWith<$Res> {
   factory _$$_SelectedCopyWith(
           _$_Selected value, $Res Function(_$_Selected) then) =
       __$$_SelectedCopyWithImpl<$Res>;
-  @useResult
   $Res call({CustomerCodeInfo customerCodeInfo});
 
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
@@ -281,19 +282,21 @@ abstract class _$$_SelectedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_SelectedCopyWithImpl<$Res>
-    extends _$CustomerCodeEventCopyWithImpl<$Res, _$_Selected>
+    extends _$CustomerCodeEventCopyWithImpl<$Res>
     implements _$$_SelectedCopyWith<$Res> {
   __$$_SelectedCopyWithImpl(
       _$_Selected _value, $Res Function(_$_Selected) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Selected));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_Selected get _value => super._value as _$_Selected;
+
   @override
   $Res call({
-    Object? customerCodeInfo = null,
+    Object? customerCodeInfo = freezed,
   }) {
     return _then(_$_Selected(
-      customerCodeInfo: null == customerCodeInfo
+      customerCodeInfo: customerCodeInfo == freezed
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
@@ -301,7 +304,6 @@ class __$$_SelectedCopyWithImpl<$Res>
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
     return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
       return _then(_value.copyWith(customerCodeInfo: value));
@@ -327,16 +329,16 @@ class _$_Selected implements _Selected {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Selected &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo));
+            const DeepCollectionEquality()
+                .equals(other.customerCodeInfo, customerCodeInfo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, customerCodeInfo);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(customerCodeInfo));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_SelectedCopyWith<_$_Selected> get copyWith =>
       __$$_SelectedCopyWithImpl<_$_Selected>(this, _$identity);
 
@@ -366,18 +368,18 @@ class _$_Selected implements _Selected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult? Function(bool isRefresh, String searchText, bool hidecustomer,
+    TResult Function()? initialized,
+    TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         search,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult? Function(String searchKey)? updateSearchKey,
+    TResult Function(String searchKey)? updateSearchKey,
   }) {
     return selected?.call(customerCodeInfo);
   }
@@ -421,12 +423,12 @@ class _$_Selected implements _Selected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Selected value)? selected,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Search value)? search,
-    TResult? Function(_LoadMore value)? loadMore,
-    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_Search value)? search,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
   }) {
     return selected?.call(this);
   }
@@ -463,7 +465,6 @@ abstract class _Selected implements CustomerCodeEvent {
 abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
-  @useResult
   $Res call(
       {bool isRefresh,
       String searchText,
@@ -476,39 +477,40 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$CustomerCodeEventCopyWithImpl<$Res, _$_Fetch>
+class __$$_FetchCopyWithImpl<$Res> extends _$CustomerCodeEventCopyWithImpl<$Res>
     implements _$$_FetchCopyWith<$Res> {
   __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Fetch));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_Fetch get _value => super._value as _$_Fetch;
+
   @override
   $Res call({
-    Object? isRefresh = null,
-    Object? searchText = null,
-    Object? hidecustomer = null,
-    Object? userInfo = null,
-    Object? selectedSalesOrg = null,
+    Object? isRefresh = freezed,
+    Object? searchText = freezed,
+    Object? hidecustomer = freezed,
+    Object? userInfo = freezed,
+    Object? selectedSalesOrg = freezed,
   }) {
     return _then(_$_Fetch(
-      isRefresh: null == isRefresh
+      isRefresh: isRefresh == freezed
           ? _value.isRefresh
           : isRefresh // ignore: cast_nullable_to_non_nullable
               as bool,
-      searchText: null == searchText
+      searchText: searchText == freezed
           ? _value.searchText
           : searchText // ignore: cast_nullable_to_non_nullable
               as String,
-      hidecustomer: null == hidecustomer
+      hidecustomer: hidecustomer == freezed
           ? _value.hidecustomer
           : hidecustomer // ignore: cast_nullable_to_non_nullable
               as bool,
-      userInfo: null == userInfo
+      userInfo: userInfo == freezed
           ? _value.userInfo
           : userInfo // ignore: cast_nullable_to_non_nullable
               as User,
-      selectedSalesOrg: null == selectedSalesOrg
+      selectedSalesOrg: selectedSalesOrg == freezed
           ? _value.selectedSalesOrg
           : selectedSalesOrg // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
@@ -516,7 +518,6 @@ class __$$_FetchCopyWithImpl<$Res>
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get userInfo {
     return $UserCopyWith<$Res>(_value.userInfo, (value) {
       return _then(_value.copyWith(userInfo: value));
@@ -524,7 +525,6 @@ class __$$_FetchCopyWithImpl<$Res>
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $SalesOrganisationCopyWith<$Res> get selectedSalesOrg {
     return $SalesOrganisationCopyWith<$Res>(_value.selectedSalesOrg, (value) {
       return _then(_value.copyWith(selectedSalesOrg: value));
@@ -565,25 +565,27 @@ class _$_Fetch implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
-            (identical(other.isRefresh, isRefresh) ||
-                other.isRefresh == isRefresh) &&
-            (identical(other.searchText, searchText) ||
-                other.searchText == searchText) &&
-            (identical(other.hidecustomer, hidecustomer) ||
-                other.hidecustomer == hidecustomer) &&
-            (identical(other.userInfo, userInfo) ||
-                other.userInfo == userInfo) &&
-            (identical(other.selectedSalesOrg, selectedSalesOrg) ||
-                other.selectedSalesOrg == selectedSalesOrg));
+            const DeepCollectionEquality().equals(other.isRefresh, isRefresh) &&
+            const DeepCollectionEquality()
+                .equals(other.searchText, searchText) &&
+            const DeepCollectionEquality()
+                .equals(other.hidecustomer, hidecustomer) &&
+            const DeepCollectionEquality().equals(other.userInfo, userInfo) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedSalesOrg, selectedSalesOrg));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isRefresh, searchText,
-      hidecustomer, userInfo, selectedSalesOrg);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(isRefresh),
+      const DeepCollectionEquality().hash(searchText),
+      const DeepCollectionEquality().hash(hidecustomer),
+      const DeepCollectionEquality().hash(userInfo),
+      const DeepCollectionEquality().hash(selectedSalesOrg));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
 
@@ -614,18 +616,18 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult? Function(bool isRefresh, String searchText, bool hidecustomer,
+    TResult Function()? initialized,
+    TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         search,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult? Function(String searchKey)? updateSearchKey,
+    TResult Function(String searchKey)? updateSearchKey,
   }) {
     return fetch?.call(
         isRefresh, searchText, hidecustomer, userInfo, selectedSalesOrg);
@@ -671,12 +673,12 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Selected value)? selected,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Search value)? search,
-    TResult? Function(_LoadMore value)? loadMore,
-    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_Search value)? search,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
   }) {
     return fetch?.call(this);
   }
@@ -721,7 +723,6 @@ abstract class _Fetch implements CustomerCodeEvent {
 abstract class _$$_SearchCopyWith<$Res> {
   factory _$$_SearchCopyWith(_$_Search value, $Res Function(_$_Search) then) =
       __$$_SearchCopyWithImpl<$Res>;
-  @useResult
   $Res call(
       {bool hidecustomer, User userInfo, SalesOrganisation selectedSalesOrg});
 
@@ -731,28 +732,30 @@ abstract class _$$_SearchCopyWith<$Res> {
 
 /// @nodoc
 class __$$_SearchCopyWithImpl<$Res>
-    extends _$CustomerCodeEventCopyWithImpl<$Res, _$_Search>
+    extends _$CustomerCodeEventCopyWithImpl<$Res>
     implements _$$_SearchCopyWith<$Res> {
   __$$_SearchCopyWithImpl(_$_Search _value, $Res Function(_$_Search) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Search));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_Search get _value => super._value as _$_Search;
+
   @override
   $Res call({
-    Object? hidecustomer = null,
-    Object? userInfo = null,
-    Object? selectedSalesOrg = null,
+    Object? hidecustomer = freezed,
+    Object? userInfo = freezed,
+    Object? selectedSalesOrg = freezed,
   }) {
     return _then(_$_Search(
-      hidecustomer: null == hidecustomer
+      hidecustomer: hidecustomer == freezed
           ? _value.hidecustomer
           : hidecustomer // ignore: cast_nullable_to_non_nullable
               as bool,
-      userInfo: null == userInfo
+      userInfo: userInfo == freezed
           ? _value.userInfo
           : userInfo // ignore: cast_nullable_to_non_nullable
               as User,
-      selectedSalesOrg: null == selectedSalesOrg
+      selectedSalesOrg: selectedSalesOrg == freezed
           ? _value.selectedSalesOrg
           : selectedSalesOrg // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
@@ -760,7 +763,6 @@ class __$$_SearchCopyWithImpl<$Res>
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get userInfo {
     return $UserCopyWith<$Res>(_value.userInfo, (value) {
       return _then(_value.copyWith(userInfo: value));
@@ -768,7 +770,6 @@ class __$$_SearchCopyWithImpl<$Res>
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $SalesOrganisationCopyWith<$Res> get selectedSalesOrg {
     return $SalesOrganisationCopyWith<$Res>(_value.selectedSalesOrg, (value) {
       return _then(_value.copyWith(selectedSalesOrg: value));
@@ -801,21 +802,22 @@ class _$_Search implements _Search {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Search &&
-            (identical(other.hidecustomer, hidecustomer) ||
-                other.hidecustomer == hidecustomer) &&
-            (identical(other.userInfo, userInfo) ||
-                other.userInfo == userInfo) &&
-            (identical(other.selectedSalesOrg, selectedSalesOrg) ||
-                other.selectedSalesOrg == selectedSalesOrg));
+            const DeepCollectionEquality()
+                .equals(other.hidecustomer, hidecustomer) &&
+            const DeepCollectionEquality().equals(other.userInfo, userInfo) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedSalesOrg, selectedSalesOrg));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, hidecustomer, userInfo, selectedSalesOrg);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(hidecustomer),
+      const DeepCollectionEquality().hash(userInfo),
+      const DeepCollectionEquality().hash(selectedSalesOrg));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_SearchCopyWith<_$_Search> get copyWith =>
       __$$_SearchCopyWithImpl<_$_Search>(this, _$identity);
 
@@ -845,18 +847,18 @@ class _$_Search implements _Search {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult? Function(bool isRefresh, String searchText, bool hidecustomer,
+    TResult Function()? initialized,
+    TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         search,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult? Function(String searchKey)? updateSearchKey,
+    TResult Function(String searchKey)? updateSearchKey,
   }) {
     return search?.call(hidecustomer, userInfo, selectedSalesOrg);
   }
@@ -900,12 +902,12 @@ class _$_Search implements _Search {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Selected value)? selected,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Search value)? search,
-    TResult? Function(_LoadMore value)? loadMore,
-    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_Search value)? search,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
   }) {
     return search?.call(this);
   }
@@ -947,7 +949,6 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
   factory _$$_LoadMoreCopyWith(
           _$_LoadMore value, $Res Function(_$_LoadMore) then) =
       __$$_LoadMoreCopyWithImpl<$Res>;
-  @useResult
   $Res call(
       {bool hidecustomer, User userInfo, SalesOrganisation selectedSalesOrg});
 
@@ -957,29 +958,31 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
 
 /// @nodoc
 class __$$_LoadMoreCopyWithImpl<$Res>
-    extends _$CustomerCodeEventCopyWithImpl<$Res, _$_LoadMore>
+    extends _$CustomerCodeEventCopyWithImpl<$Res>
     implements _$$_LoadMoreCopyWith<$Res> {
   __$$_LoadMoreCopyWithImpl(
       _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_LoadMore));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_LoadMore get _value => super._value as _$_LoadMore;
+
   @override
   $Res call({
-    Object? hidecustomer = null,
-    Object? userInfo = null,
-    Object? selectedSalesOrg = null,
+    Object? hidecustomer = freezed,
+    Object? userInfo = freezed,
+    Object? selectedSalesOrg = freezed,
   }) {
     return _then(_$_LoadMore(
-      hidecustomer: null == hidecustomer
+      hidecustomer: hidecustomer == freezed
           ? _value.hidecustomer
           : hidecustomer // ignore: cast_nullable_to_non_nullable
               as bool,
-      userInfo: null == userInfo
+      userInfo: userInfo == freezed
           ? _value.userInfo
           : userInfo // ignore: cast_nullable_to_non_nullable
               as User,
-      selectedSalesOrg: null == selectedSalesOrg
+      selectedSalesOrg: selectedSalesOrg == freezed
           ? _value.selectedSalesOrg
           : selectedSalesOrg // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
@@ -987,7 +990,6 @@ class __$$_LoadMoreCopyWithImpl<$Res>
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get userInfo {
     return $UserCopyWith<$Res>(_value.userInfo, (value) {
       return _then(_value.copyWith(userInfo: value));
@@ -995,7 +997,6 @@ class __$$_LoadMoreCopyWithImpl<$Res>
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $SalesOrganisationCopyWith<$Res> get selectedSalesOrg {
     return $SalesOrganisationCopyWith<$Res>(_value.selectedSalesOrg, (value) {
       return _then(_value.copyWith(selectedSalesOrg: value));
@@ -1028,21 +1029,22 @@ class _$_LoadMore implements _LoadMore {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoadMore &&
-            (identical(other.hidecustomer, hidecustomer) ||
-                other.hidecustomer == hidecustomer) &&
-            (identical(other.userInfo, userInfo) ||
-                other.userInfo == userInfo) &&
-            (identical(other.selectedSalesOrg, selectedSalesOrg) ||
-                other.selectedSalesOrg == selectedSalesOrg));
+            const DeepCollectionEquality()
+                .equals(other.hidecustomer, hidecustomer) &&
+            const DeepCollectionEquality().equals(other.userInfo, userInfo) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedSalesOrg, selectedSalesOrg));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, hidecustomer, userInfo, selectedSalesOrg);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(hidecustomer),
+      const DeepCollectionEquality().hash(userInfo),
+      const DeepCollectionEquality().hash(selectedSalesOrg));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
       __$$_LoadMoreCopyWithImpl<_$_LoadMore>(this, _$identity);
 
@@ -1072,18 +1074,18 @@ class _$_LoadMore implements _LoadMore {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult? Function(bool isRefresh, String searchText, bool hidecustomer,
+    TResult Function()? initialized,
+    TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         search,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult? Function(String searchKey)? updateSearchKey,
+    TResult Function(String searchKey)? updateSearchKey,
   }) {
     return loadMore?.call(hidecustomer, userInfo, selectedSalesOrg);
   }
@@ -1127,12 +1129,12 @@ class _$_LoadMore implements _LoadMore {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Selected value)? selected,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Search value)? search,
-    TResult? Function(_LoadMore value)? loadMore,
-    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_Search value)? search,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
   }) {
     return loadMore?.call(this);
   }
@@ -1174,25 +1176,26 @@ abstract class _$$_UpdateSearchKeyCopyWith<$Res> {
   factory _$$_UpdateSearchKeyCopyWith(
           _$_UpdateSearchKey value, $Res Function(_$_UpdateSearchKey) then) =
       __$$_UpdateSearchKeyCopyWithImpl<$Res>;
-  @useResult
   $Res call({String searchKey});
 }
 
 /// @nodoc
 class __$$_UpdateSearchKeyCopyWithImpl<$Res>
-    extends _$CustomerCodeEventCopyWithImpl<$Res, _$_UpdateSearchKey>
+    extends _$CustomerCodeEventCopyWithImpl<$Res>
     implements _$$_UpdateSearchKeyCopyWith<$Res> {
   __$$_UpdateSearchKeyCopyWithImpl(
       _$_UpdateSearchKey _value, $Res Function(_$_UpdateSearchKey) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_UpdateSearchKey));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_UpdateSearchKey get _value => super._value as _$_UpdateSearchKey;
+
   @override
   $Res call({
-    Object? searchKey = null,
+    Object? searchKey = freezed,
   }) {
     return _then(_$_UpdateSearchKey(
-      null == searchKey
+      searchKey == freezed
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as String,
@@ -1218,16 +1221,15 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UpdateSearchKey &&
-            (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
+            const DeepCollectionEquality().equals(other.searchKey, searchKey));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, searchKey);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(searchKey));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_UpdateSearchKeyCopyWith<_$_UpdateSearchKey> get copyWith =>
       __$$_UpdateSearchKeyCopyWithImpl<_$_UpdateSearchKey>(this, _$identity);
 
@@ -1257,18 +1259,18 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult? Function(bool isRefresh, String searchText, bool hidecustomer,
+    TResult Function()? initialized,
+    TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)?
         fetch,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         search,
-    TResult? Function(bool hidecustomer, User userInfo,
+    TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
-    TResult? Function(String searchKey)? updateSearchKey,
+    TResult Function(String searchKey)? updateSearchKey,
   }) {
     return updateSearchKey?.call(searchKey);
   }
@@ -1312,12 +1314,12 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Selected value)? selected,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Search value)? search,
-    TResult? Function(_LoadMore value)? loadMore,
-    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_Search value)? search,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
   }) {
     return updateSearchKey?.call(this);
   }
@@ -1370,8 +1372,7 @@ mixin _$CustomerCodeState {
 abstract class $CustomerCodeStateCopyWith<$Res> {
   factory $CustomerCodeStateCopyWith(
           CustomerCodeState value, $Res Function(CustomerCodeState) then) =
-      _$CustomerCodeStateCopyWithImpl<$Res, CustomerCodeState>;
-  @useResult
+      _$CustomerCodeStateCopyWithImpl<$Res>;
   $Res call(
       {CustomerCodeInfo customerCodeInfo,
       List<CustomerCodeInfo> customerCodeList,
@@ -1385,63 +1386,60 @@ abstract class $CustomerCodeStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CustomerCodeStateCopyWithImpl<$Res, $Val extends CustomerCodeState>
+class _$CustomerCodeStateCopyWithImpl<$Res>
     implements $CustomerCodeStateCopyWith<$Res> {
   _$CustomerCodeStateCopyWithImpl(this._value, this._then);
 
+  final CustomerCodeState _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(CustomerCodeState) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? customerCodeInfo = null,
-    Object? customerCodeList = null,
-    Object? apiFailureOrSuccessOption = null,
-    Object? canLoadMore = null,
-    Object? isFetching = null,
-    Object? isSearchActive = null,
-    Object? searchKey = null,
+    Object? customerCodeInfo = freezed,
+    Object? customerCodeList = freezed,
+    Object? apiFailureOrSuccessOption = freezed,
+    Object? canLoadMore = freezed,
+    Object? isFetching = freezed,
+    Object? isSearchActive = freezed,
+    Object? searchKey = freezed,
   }) {
     return _then(_value.copyWith(
-      customerCodeInfo: null == customerCodeInfo
+      customerCodeInfo: customerCodeInfo == freezed
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
-      customerCodeList: null == customerCodeList
+      customerCodeList: customerCodeList == freezed
           ? _value.customerCodeList
           : customerCodeList // ignore: cast_nullable_to_non_nullable
               as List<CustomerCodeInfo>,
-      apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
+      apiFailureOrSuccessOption: apiFailureOrSuccessOption == freezed
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      canLoadMore: null == canLoadMore
+      canLoadMore: canLoadMore == freezed
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
-      isFetching: null == isFetching
+      isFetching: isFetching == freezed
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
-      isSearchActive: null == isSearchActive
+      isSearchActive: isSearchActive == freezed
           ? _value.isSearchActive
           : isSearchActive // ignore: cast_nullable_to_non_nullable
               as bool,
-      searchKey: null == searchKey
+      searchKey: searchKey == freezed
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
-    ) as $Val);
+    ));
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
     return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value) as $Val);
+      return _then(_value.copyWith(customerCodeInfo: value));
     });
   }
 }
@@ -1453,7 +1451,6 @@ abstract class _$$_CustomerCodeStateCopyWith<$Res>
           $Res Function(_$_CustomerCodeState) then) =
       __$$_CustomerCodeStateCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {CustomerCodeInfo customerCodeInfo,
       List<CustomerCodeInfo> customerCodeList,
@@ -1469,49 +1466,51 @@ abstract class _$$_CustomerCodeStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_CustomerCodeStateCopyWithImpl<$Res>
-    extends _$CustomerCodeStateCopyWithImpl<$Res, _$_CustomerCodeState>
+    extends _$CustomerCodeStateCopyWithImpl<$Res>
     implements _$$_CustomerCodeStateCopyWith<$Res> {
   __$$_CustomerCodeStateCopyWithImpl(
       _$_CustomerCodeState _value, $Res Function(_$_CustomerCodeState) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_CustomerCodeState));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_CustomerCodeState get _value => super._value as _$_CustomerCodeState;
+
   @override
   $Res call({
-    Object? customerCodeInfo = null,
-    Object? customerCodeList = null,
-    Object? apiFailureOrSuccessOption = null,
-    Object? canLoadMore = null,
-    Object? isFetching = null,
-    Object? isSearchActive = null,
-    Object? searchKey = null,
+    Object? customerCodeInfo = freezed,
+    Object? customerCodeList = freezed,
+    Object? apiFailureOrSuccessOption = freezed,
+    Object? canLoadMore = freezed,
+    Object? isFetching = freezed,
+    Object? isSearchActive = freezed,
+    Object? searchKey = freezed,
   }) {
     return _then(_$_CustomerCodeState(
-      customerCodeInfo: null == customerCodeInfo
+      customerCodeInfo: customerCodeInfo == freezed
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
-      customerCodeList: null == customerCodeList
+      customerCodeList: customerCodeList == freezed
           ? _value._customerCodeList
           : customerCodeList // ignore: cast_nullable_to_non_nullable
               as List<CustomerCodeInfo>,
-      apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
+      apiFailureOrSuccessOption: apiFailureOrSuccessOption == freezed
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      canLoadMore: null == canLoadMore
+      canLoadMore: canLoadMore == freezed
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
-      isFetching: null == isFetching
+      isFetching: isFetching == freezed
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
-      isSearchActive: null == isSearchActive
+      isSearchActive: isSearchActive == freezed
           ? _value.isSearchActive
           : isSearchActive // ignore: cast_nullable_to_non_nullable
               as bool,
-      searchKey: null == searchKey
+      searchKey: searchKey == freezed
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
@@ -1563,37 +1562,34 @@ class _$_CustomerCodeState extends _CustomerCodeState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CustomerCodeState &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
+            const DeepCollectionEquality()
+                .equals(other.customerCodeInfo, customerCodeInfo) &&
             const DeepCollectionEquality()
                 .equals(other._customerCodeList, _customerCodeList) &&
-            (identical(other.apiFailureOrSuccessOption,
-                    apiFailureOrSuccessOption) ||
-                other.apiFailureOrSuccessOption == apiFailureOrSuccessOption) &&
-            (identical(other.canLoadMore, canLoadMore) ||
-                other.canLoadMore == canLoadMore) &&
-            (identical(other.isFetching, isFetching) ||
-                other.isFetching == isFetching) &&
-            (identical(other.isSearchActive, isSearchActive) ||
-                other.isSearchActive == isSearchActive) &&
-            (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
+            const DeepCollectionEquality().equals(
+                other.apiFailureOrSuccessOption, apiFailureOrSuccessOption) &&
+            const DeepCollectionEquality()
+                .equals(other.canLoadMore, canLoadMore) &&
+            const DeepCollectionEquality()
+                .equals(other.isFetching, isFetching) &&
+            const DeepCollectionEquality()
+                .equals(other.isSearchActive, isSearchActive) &&
+            const DeepCollectionEquality().equals(other.searchKey, searchKey));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      customerCodeInfo,
+      const DeepCollectionEquality().hash(customerCodeInfo),
       const DeepCollectionEquality().hash(_customerCodeList),
-      apiFailureOrSuccessOption,
-      canLoadMore,
-      isFetching,
-      isSearchActive,
-      searchKey);
+      const DeepCollectionEquality().hash(apiFailureOrSuccessOption),
+      const DeepCollectionEquality().hash(canLoadMore),
+      const DeepCollectionEquality().hash(isFetching),
+      const DeepCollectionEquality().hash(isSearchActive),
+      const DeepCollectionEquality().hash(searchKey));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_CustomerCodeStateCopyWith<_$_CustomerCodeState> get copyWith =>
       __$$_CustomerCodeStateCopyWithImpl<_$_CustomerCodeState>(
           this, _$identity);

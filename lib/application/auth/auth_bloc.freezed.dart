@@ -28,12 +28,12 @@ mixin _$AuthEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function()? bioCheck,
-    TResult? Function()? authCheck,
-    TResult? Function()? refreshOktaToken,
-    TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
-    TResult? Function()? logout,
+    TResult Function()? init,
+    TResult Function()? bioCheck,
+    TResult Function()? authCheck,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult Function()? logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,12 +59,12 @@ mixin _$AuthEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_AuthInit value)? init,
-    TResult? Function(_BioCheck value)? bioCheck,
-    TResult? Function(_AuthCheck value)? authCheck,
-    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
-    TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
-    TResult? Function(_Logout value)? logout,
+    TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
+    TResult Function(_AuthCheck value)? authCheck,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
+    TResult Function(_Logout value)? logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -83,18 +83,16 @@ mixin _$AuthEvent {
 /// @nodoc
 abstract class $AuthEventCopyWith<$Res> {
   factory $AuthEventCopyWith(AuthEvent value, $Res Function(AuthEvent) then) =
-      _$AuthEventCopyWithImpl<$Res, AuthEvent>;
+      _$AuthEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$AuthEventCopyWithImpl<$Res, $Val extends AuthEvent>
-    implements $AuthEventCopyWith<$Res> {
+class _$AuthEventCopyWithImpl<$Res> implements $AuthEventCopyWith<$Res> {
   _$AuthEventCopyWithImpl(this._value, this._then);
 
+  final AuthEvent _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(AuthEvent) _then;
 }
 
 /// @nodoc
@@ -105,12 +103,14 @@ abstract class _$$_AuthInitCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_AuthInitCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$_AuthInit>
+class __$$_AuthInitCopyWithImpl<$Res> extends _$AuthEventCopyWithImpl<$Res>
     implements _$$_AuthInitCopyWith<$Res> {
   __$$_AuthInitCopyWithImpl(
       _$_AuthInit _value, $Res Function(_$_AuthInit) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_AuthInit));
+
+  @override
+  _$_AuthInit get _value => super._value as _$_AuthInit;
 }
 
 /// @nodoc
@@ -148,12 +148,12 @@ class _$_AuthInit implements _AuthInit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function()? bioCheck,
-    TResult? Function()? authCheck,
-    TResult? Function()? refreshOktaToken,
-    TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
-    TResult? Function()? logout,
+    TResult Function()? init,
+    TResult Function()? bioCheck,
+    TResult Function()? authCheck,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult Function()? logout,
   }) {
     return init?.call();
   }
@@ -191,12 +191,12 @@ class _$_AuthInit implements _AuthInit {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_AuthInit value)? init,
-    TResult? Function(_BioCheck value)? bioCheck,
-    TResult? Function(_AuthCheck value)? authCheck,
-    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
-    TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
-    TResult? Function(_Logout value)? logout,
+    TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
+    TResult Function(_AuthCheck value)? authCheck,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
+    TResult Function(_Logout value)? logout,
   }) {
     return init?.call(this);
   }
@@ -231,12 +231,14 @@ abstract class _$$_BioCheckCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_BioCheckCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$_BioCheck>
+class __$$_BioCheckCopyWithImpl<$Res> extends _$AuthEventCopyWithImpl<$Res>
     implements _$$_BioCheckCopyWith<$Res> {
   __$$_BioCheckCopyWithImpl(
       _$_BioCheck _value, $Res Function(_$_BioCheck) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_BioCheck));
+
+  @override
+  _$_BioCheck get _value => super._value as _$_BioCheck;
 }
 
 /// @nodoc
@@ -274,12 +276,12 @@ class _$_BioCheck implements _BioCheck {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function()? bioCheck,
-    TResult? Function()? authCheck,
-    TResult? Function()? refreshOktaToken,
-    TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
-    TResult? Function()? logout,
+    TResult Function()? init,
+    TResult Function()? bioCheck,
+    TResult Function()? authCheck,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult Function()? logout,
   }) {
     return bioCheck?.call();
   }
@@ -317,12 +319,12 @@ class _$_BioCheck implements _BioCheck {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_AuthInit value)? init,
-    TResult? Function(_BioCheck value)? bioCheck,
-    TResult? Function(_AuthCheck value)? authCheck,
-    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
-    TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
-    TResult? Function(_Logout value)? logout,
+    TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
+    TResult Function(_AuthCheck value)? authCheck,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
+    TResult Function(_Logout value)? logout,
   }) {
     return bioCheck?.call(this);
   }
@@ -357,12 +359,14 @@ abstract class _$$_AuthCheckCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_AuthCheckCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$_AuthCheck>
+class __$$_AuthCheckCopyWithImpl<$Res> extends _$AuthEventCopyWithImpl<$Res>
     implements _$$_AuthCheckCopyWith<$Res> {
   __$$_AuthCheckCopyWithImpl(
       _$_AuthCheck _value, $Res Function(_$_AuthCheck) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_AuthCheck));
+
+  @override
+  _$_AuthCheck get _value => super._value as _$_AuthCheck;
 }
 
 /// @nodoc
@@ -400,12 +404,12 @@ class _$_AuthCheck implements _AuthCheck {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function()? bioCheck,
-    TResult? Function()? authCheck,
-    TResult? Function()? refreshOktaToken,
-    TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
-    TResult? Function()? logout,
+    TResult Function()? init,
+    TResult Function()? bioCheck,
+    TResult Function()? authCheck,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult Function()? logout,
   }) {
     return authCheck?.call();
   }
@@ -443,12 +447,12 @@ class _$_AuthCheck implements _AuthCheck {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_AuthInit value)? init,
-    TResult? Function(_BioCheck value)? bioCheck,
-    TResult? Function(_AuthCheck value)? authCheck,
-    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
-    TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
-    TResult? Function(_Logout value)? logout,
+    TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
+    TResult Function(_AuthCheck value)? authCheck,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
+    TResult Function(_Logout value)? logout,
   }) {
     return authCheck?.call(this);
   }
@@ -484,11 +488,14 @@ abstract class _$$_RefreshOktaTokenCopyWith<$Res> {
 
 /// @nodoc
 class __$$_RefreshOktaTokenCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$_RefreshOktaToken>
+    extends _$AuthEventCopyWithImpl<$Res>
     implements _$$_RefreshOktaTokenCopyWith<$Res> {
   __$$_RefreshOktaTokenCopyWithImpl(
       _$_RefreshOktaToken _value, $Res Function(_$_RefreshOktaToken) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_RefreshOktaToken));
+
+  @override
+  _$_RefreshOktaToken get _value => super._value as _$_RefreshOktaToken;
 }
 
 /// @nodoc
@@ -526,12 +533,12 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function()? bioCheck,
-    TResult? Function()? authCheck,
-    TResult? Function()? refreshOktaToken,
-    TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
-    TResult? Function()? logout,
+    TResult Function()? init,
+    TResult Function()? bioCheck,
+    TResult Function()? authCheck,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult Function()? logout,
   }) {
     return refreshOktaToken?.call();
   }
@@ -569,12 +576,12 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_AuthInit value)? init,
-    TResult? Function(_BioCheck value)? bioCheck,
-    TResult? Function(_AuthCheck value)? authCheck,
-    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
-    TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
-    TResult? Function(_Logout value)? logout,
+    TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
+    TResult Function(_AuthCheck value)? authCheck,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
+    TResult Function(_Logout value)? logout,
   }) {
     return refreshOktaToken?.call(this);
   }
@@ -606,25 +613,26 @@ abstract class _$$_RefreshEZRXTokenCopyWith<$Res> {
   factory _$$_RefreshEZRXTokenCopyWith(
           _$_RefreshEZRXToken value, $Res Function(_$_RefreshEZRXToken) then) =
       __$$_RefreshEZRXTokenCopyWithImpl<$Res>;
-  @useResult
   $Res call({JWT oktaAccessToken});
 }
 
 /// @nodoc
 class __$$_RefreshEZRXTokenCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$_RefreshEZRXToken>
+    extends _$AuthEventCopyWithImpl<$Res>
     implements _$$_RefreshEZRXTokenCopyWith<$Res> {
   __$$_RefreshEZRXTokenCopyWithImpl(
       _$_RefreshEZRXToken _value, $Res Function(_$_RefreshEZRXToken) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_RefreshEZRXToken));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_RefreshEZRXToken get _value => super._value as _$_RefreshEZRXToken;
+
   @override
   $Res call({
-    Object? oktaAccessToken = null,
+    Object? oktaAccessToken = freezed,
   }) {
     return _then(_$_RefreshEZRXToken(
-      null == oktaAccessToken
+      oktaAccessToken == freezed
           ? _value.oktaAccessToken
           : oktaAccessToken // ignore: cast_nullable_to_non_nullable
               as JWT,
@@ -650,16 +658,16 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_RefreshEZRXToken &&
-            (identical(other.oktaAccessToken, oktaAccessToken) ||
-                other.oktaAccessToken == oktaAccessToken));
+            const DeepCollectionEquality()
+                .equals(other.oktaAccessToken, oktaAccessToken));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, oktaAccessToken);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(oktaAccessToken));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_RefreshEZRXTokenCopyWith<_$_RefreshEZRXToken> get copyWith =>
       __$$_RefreshEZRXTokenCopyWithImpl<_$_RefreshEZRXToken>(this, _$identity);
 
@@ -679,12 +687,12 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function()? bioCheck,
-    TResult? Function()? authCheck,
-    TResult? Function()? refreshOktaToken,
-    TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
-    TResult? Function()? logout,
+    TResult Function()? init,
+    TResult Function()? bioCheck,
+    TResult Function()? authCheck,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult Function()? logout,
   }) {
     return refreshEZRXToken?.call(oktaAccessToken);
   }
@@ -722,12 +730,12 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_AuthInit value)? init,
-    TResult? Function(_BioCheck value)? bioCheck,
-    TResult? Function(_AuthCheck value)? authCheck,
-    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
-    TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
-    TResult? Function(_Logout value)? logout,
+    TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
+    TResult Function(_AuthCheck value)? authCheck,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
+    TResult Function(_Logout value)? logout,
   }) {
     return refreshEZRXToken?.call(this);
   }
@@ -767,11 +775,13 @@ abstract class _$$_LogoutCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_LogoutCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$_Logout>
+class __$$_LogoutCopyWithImpl<$Res> extends _$AuthEventCopyWithImpl<$Res>
     implements _$$_LogoutCopyWith<$Res> {
   __$$_LogoutCopyWithImpl(_$_Logout _value, $Res Function(_$_Logout) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Logout));
+
+  @override
+  _$_Logout get _value => super._value as _$_Logout;
 }
 
 /// @nodoc
@@ -809,12 +819,12 @@ class _$_Logout implements _Logout {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function()? bioCheck,
-    TResult? Function()? authCheck,
-    TResult? Function()? refreshOktaToken,
-    TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
-    TResult? Function()? logout,
+    TResult Function()? init,
+    TResult Function()? bioCheck,
+    TResult Function()? authCheck,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult Function()? logout,
   }) {
     return logout?.call();
   }
@@ -852,12 +862,12 @@ class _$_Logout implements _Logout {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_AuthInit value)? init,
-    TResult? Function(_BioCheck value)? bioCheck,
-    TResult? Function(_AuthCheck value)? authCheck,
-    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
-    TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
-    TResult? Function(_Logout value)? logout,
+    TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
+    TResult Function(_AuthCheck value)? authCheck,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
+    TResult Function(_Logout value)? logout,
   }) {
     return logout?.call(this);
   }
@@ -896,10 +906,10 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? authenticated,
-    TResult? Function()? unauthenticated,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? authenticated,
+    TResult Function()? unauthenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -921,10 +931,10 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Authenticated value)? authenticated,
-    TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Unauthenticated value)? unauthenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -941,18 +951,16 @@ mixin _$AuthState {
 /// @nodoc
 abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
-      _$AuthStateCopyWithImpl<$Res, AuthState>;
+      _$AuthStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
-    implements $AuthStateCopyWith<$Res> {
+class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
   _$AuthStateCopyWithImpl(this._value, this._then);
 
+  final AuthState _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(AuthState) _then;
 }
 
 /// @nodoc
@@ -963,11 +971,13 @@ abstract class _$$_InitialCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_Initial>
+class __$$_InitialCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
     implements _$$_InitialCopyWith<$Res> {
   __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Initial));
+
+  @override
+  _$_Initial get _value => super._value as _$_Initial;
 }
 
 /// @nodoc
@@ -1003,10 +1013,10 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? authenticated,
-    TResult? Function()? unauthenticated,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? authenticated,
+    TResult Function()? unauthenticated,
   }) {
     return initial?.call();
   }
@@ -1040,10 +1050,10 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Authenticated value)? authenticated,
-    TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Unauthenticated value)? unauthenticated,
   }) {
     return initial?.call(this);
   }
@@ -1076,11 +1086,13 @@ abstract class _$$_LoadingCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_LoadingCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_Loading>
+class __$$_LoadingCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
     implements _$$_LoadingCopyWith<$Res> {
   __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Loading));
+
+  @override
+  _$_Loading get _value => super._value as _$_Loading;
 }
 
 /// @nodoc
@@ -1116,10 +1128,10 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? authenticated,
-    TResult? Function()? unauthenticated,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? authenticated,
+    TResult Function()? unauthenticated,
   }) {
     return loading?.call();
   }
@@ -1153,10 +1165,10 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Authenticated value)? authenticated,
-    TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Unauthenticated value)? unauthenticated,
   }) {
     return loading?.call(this);
   }
@@ -1189,12 +1201,14 @@ abstract class _$$_AuthenticatedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_AuthenticatedCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_Authenticated>
+class __$$_AuthenticatedCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
     implements _$$_AuthenticatedCopyWith<$Res> {
   __$$_AuthenticatedCopyWithImpl(
       _$_Authenticated _value, $Res Function(_$_Authenticated) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Authenticated));
+
+  @override
+  _$_Authenticated get _value => super._value as _$_Authenticated;
 }
 
 /// @nodoc
@@ -1230,10 +1244,10 @@ class _$_Authenticated implements _Authenticated {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? authenticated,
-    TResult? Function()? unauthenticated,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? authenticated,
+    TResult Function()? unauthenticated,
   }) {
     return authenticated?.call();
   }
@@ -1267,10 +1281,10 @@ class _$_Authenticated implements _Authenticated {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Authenticated value)? authenticated,
-    TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Unauthenticated value)? unauthenticated,
   }) {
     return authenticated?.call(this);
   }
@@ -1304,11 +1318,14 @@ abstract class _$$_UnauthenticatedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_UnauthenticatedCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_Unauthenticated>
+    extends _$AuthStateCopyWithImpl<$Res>
     implements _$$_UnauthenticatedCopyWith<$Res> {
   __$$_UnauthenticatedCopyWithImpl(
       _$_Unauthenticated _value, $Res Function(_$_Unauthenticated) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Unauthenticated));
+
+  @override
+  _$_Unauthenticated get _value => super._value as _$_Unauthenticated;
 }
 
 /// @nodoc
@@ -1344,10 +1361,10 @@ class _$_Unauthenticated implements _Unauthenticated {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? authenticated,
-    TResult? Function()? unauthenticated,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? authenticated,
+    TResult Function()? unauthenticated,
   }) {
     return unauthenticated?.call();
   }
@@ -1381,10 +1398,10 @@ class _$_Unauthenticated implements _Unauthenticated {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Authenticated value)? authenticated,
-    TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Unauthenticated value)? unauthenticated,
   }) {
     return unauthenticated?.call(this);
   }

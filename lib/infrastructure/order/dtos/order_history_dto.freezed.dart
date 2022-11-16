@@ -37,8 +37,7 @@ mixin _$OrderHistoryDto {
 abstract class $OrderHistoryDtoCopyWith<$Res> {
   factory $OrderHistoryDtoCopyWith(
           OrderHistoryDto value, $Res Function(OrderHistoryDto) then) =
-      _$OrderHistoryDtoCopyWithImpl<$Res, OrderHistoryDto>;
-  @useResult
+      _$OrderHistoryDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'OrderBasicInformation')
           OrderHistoryBasicInfoDto orderBasicInformation,
@@ -49,39 +48,36 @@ abstract class $OrderHistoryDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OrderHistoryDtoCopyWithImpl<$Res, $Val extends OrderHistoryDto>
+class _$OrderHistoryDtoCopyWithImpl<$Res>
     implements $OrderHistoryDtoCopyWith<$Res> {
   _$OrderHistoryDtoCopyWithImpl(this._value, this._then);
 
+  final OrderHistoryDto _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(OrderHistoryDto) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderBasicInformation = null,
-    Object? orderItems = null,
+    Object? orderBasicInformation = freezed,
+    Object? orderItems = freezed,
   }) {
     return _then(_value.copyWith(
-      orderBasicInformation: null == orderBasicInformation
+      orderBasicInformation: orderBasicInformation == freezed
           ? _value.orderBasicInformation
           : orderBasicInformation // ignore: cast_nullable_to_non_nullable
               as OrderHistoryBasicInfoDto,
-      orderItems: null == orderItems
+      orderItems: orderItems == freezed
           ? _value.orderItems
           : orderItems // ignore: cast_nullable_to_non_nullable
               as List<OrderHistoryItemDto>,
-    ) as $Val);
+    ));
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $OrderHistoryBasicInfoDtoCopyWith<$Res> get orderBasicInformation {
     return $OrderHistoryBasicInfoDtoCopyWith<$Res>(_value.orderBasicInformation,
         (value) {
-      return _then(_value.copyWith(orderBasicInformation: value) as $Val);
+      return _then(_value.copyWith(orderBasicInformation: value));
     });
   }
 }
@@ -93,7 +89,6 @@ abstract class _$$_OrderHistoryItemDtoCopyWith<$Res>
           $Res Function(_$_OrderHistoryItemDto) then) =
       __$$_OrderHistoryItemDtoCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {@JsonKey(name: 'OrderBasicInformation')
           OrderHistoryBasicInfoDto orderBasicInformation,
@@ -106,24 +101,26 @@ abstract class _$$_OrderHistoryItemDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
-    extends _$OrderHistoryDtoCopyWithImpl<$Res, _$_OrderHistoryItemDto>
+    extends _$OrderHistoryDtoCopyWithImpl<$Res>
     implements _$$_OrderHistoryItemDtoCopyWith<$Res> {
   __$$_OrderHistoryItemDtoCopyWithImpl(_$_OrderHistoryItemDto _value,
       $Res Function(_$_OrderHistoryItemDto) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_OrderHistoryItemDto));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_OrderHistoryItemDto get _value => super._value as _$_OrderHistoryItemDto;
+
   @override
   $Res call({
-    Object? orderBasicInformation = null,
-    Object? orderItems = null,
+    Object? orderBasicInformation = freezed,
+    Object? orderItems = freezed,
   }) {
     return _then(_$_OrderHistoryItemDto(
-      orderBasicInformation: null == orderBasicInformation
+      orderBasicInformation: orderBasicInformation == freezed
           ? _value.orderBasicInformation
           : orderBasicInformation // ignore: cast_nullable_to_non_nullable
               as OrderHistoryBasicInfoDto,
-      orderItems: null == orderItems
+      orderItems: orderItems == freezed
           ? _value._orderItems
           : orderItems // ignore: cast_nullable_to_non_nullable
               as List<OrderHistoryItemDto>,
@@ -166,20 +163,21 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryItemDto &&
-            (identical(other.orderBasicInformation, orderBasicInformation) ||
-                other.orderBasicInformation == orderBasicInformation) &&
+            const DeepCollectionEquality()
+                .equals(other.orderBasicInformation, orderBasicInformation) &&
             const DeepCollectionEquality()
                 .equals(other._orderItems, _orderItems));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, orderBasicInformation,
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(orderBasicInformation),
       const DeepCollectionEquality().hash(_orderItems));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_OrderHistoryItemDtoCopyWith<_$_OrderHistoryItemDto> get copyWith =>
       __$$_OrderHistoryItemDtoCopyWithImpl<_$_OrderHistoryItemDto>(
           this, _$identity);

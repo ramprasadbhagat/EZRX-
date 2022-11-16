@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 abstract class ICartRepository {
   Future<Either<ApiFailure, Unit>> initCartStorage();
@@ -24,5 +25,17 @@ abstract class ICartRepository {
 
   Future<Either<ApiFailure, List<PriceAggregate>>> addToCartList({
     required List<PriceAggregate> items,
+  });
+
+  List<MaterialNumber> updateSelectedItem({
+    required PriceAggregate cartItem,
+    required List<MaterialNumber> selectedMaterialList,
+  });
+  List<MaterialNumber> removeFromSelectedMaterialList({
+    required PriceAggregate cartItem,
+    required List<MaterialNumber> selectedMaterialList,
+  });
+  List<MaterialNumber> updateSelectAll({
+    required List<PriceAggregate> cartItemList,
   });
 }

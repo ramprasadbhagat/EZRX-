@@ -40,23 +40,23 @@ mixin _$ValueFailure<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T failedValue, int max)? exceedingLength,
-    TResult? Function(T failedValue, int min)? subceedLength,
-    TResult? Function(T failedValue)? empty,
-    TResult? Function(T failedValue)? multiline,
-    TResult? Function(T failedValue)? invalidEmail,
-    TResult? Function(T failedValue)? passwordNotMatchRequirements,
-    TResult? Function(T failedValue)? invalidJWT,
-    TResult? Function(T failedValue)? invalidJWTPayload,
-    TResult? Function(T failedValue)? mustOneUpperCaseCharacter,
-    TResult? Function(T failedValue)? mustOneLowerCaseCharacter,
-    TResult? Function(T failedValue)? mustOneNumericCharacter,
-    TResult? Function(T failedValue)? mustOneSpecialCharacter,
-    TResult? Function(T failedValue)? mustNotContainUserName,
-    TResult? Function(T failedValue)? mustNotMatchOldPassword,
-    TResult? Function(T failedValue)? mustMatchNewPassword,
-    TResult? Function(T failedValue)? invalidDate,
-    TResult? Function(T failedValue)? isEmpty,
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, int min)? subceedLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue)? multiline,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? passwordNotMatchRequirements,
+    TResult Function(T failedValue)? invalidJWT,
+    TResult Function(T failedValue)? invalidJWTPayload,
+    TResult Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult Function(T failedValue)? mustOneNumericCharacter,
+    TResult Function(T failedValue)? mustOneSpecialCharacter,
+    TResult Function(T failedValue)? mustNotContainUserName,
+    TResult Function(T failedValue)? mustNotMatchOldPassword,
+    TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
+    TResult Function(T failedValue)? isEmpty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -107,23 +107,23 @@ mixin _$ValueFailure<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ExceedingLength<T> value)? exceedingLength,
-    TResult? Function(SubceedLength<T> value)? subceedLength,
-    TResult? Function(Empty<T> value)? empty,
-    TResult? Function(Multiline<T> value)? multiline,
-    TResult? Function(InvalidEmail<T> value)? invalidEmail,
-    TResult? Function(ShortPassword<T> value)? passwordNotMatchRequirements,
-    TResult? Function(InvalidJWT<T> value)? invalidJWT,
-    TResult? Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
-    TResult? Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
-    TResult? Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
-    TResult? Function(OneNumeric<T> value)? mustOneNumericCharacter,
-    TResult? Function(OneSpecial<T> value)? mustOneSpecialCharacter,
-    TResult? Function(NotContainUserName<T> value)? mustNotContainUserName,
-    TResult? Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
-    TResult? Function(MatchNewPassword<T> value)? mustMatchNewPassword,
-    TResult? Function(InvalidDate<T> value)? invalidDate,
-    TResult? Function(isEmpty<T> value)? isEmpty,
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(SubceedLength<T> value)? subceedLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Multiline<T> value)? multiline,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult Function(InvalidJWT<T> value)? invalidJWT,
+    TResult Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
+    TResult Function(isEmpty<T> value)? isEmpty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -158,32 +158,29 @@ mixin _$ValueFailure<T> {
 abstract class $ValueFailureCopyWith<T, $Res> {
   factory $ValueFailureCopyWith(
           ValueFailure<T> value, $Res Function(ValueFailure<T>) then) =
-      _$ValueFailureCopyWithImpl<T, $Res, ValueFailure<T>>;
-  @useResult
+      _$ValueFailureCopyWithImpl<T, $Res>;
   $Res call({T failedValue});
 }
 
 /// @nodoc
-class _$ValueFailureCopyWithImpl<T, $Res, $Val extends ValueFailure<T>>
+class _$ValueFailureCopyWithImpl<T, $Res>
     implements $ValueFailureCopyWith<T, $Res> {
   _$ValueFailureCopyWithImpl(this._value, this._then);
 
+  final ValueFailure<T> _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(ValueFailure<T>) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? failedValue = null,
+    Object? failedValue = freezed,
   }) {
     return _then(_value.copyWith(
-      failedValue: null == failedValue
+      failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
               as T,
-    ) as $Val);
+    ));
   }
 }
 
@@ -194,30 +191,31 @@ abstract class _$$ExceedingLengthCopyWith<T, $Res>
           $Res Function(_$ExceedingLength<T>) then) =
       __$$ExceedingLengthCopyWithImpl<T, $Res>;
   @override
-  @useResult
   $Res call({T failedValue, int max});
 }
 
 /// @nodoc
 class __$$ExceedingLengthCopyWithImpl<T, $Res>
-    extends _$ValueFailureCopyWithImpl<T, $Res, _$ExceedingLength<T>>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
     implements _$$ExceedingLengthCopyWith<T, $Res> {
   __$$ExceedingLengthCopyWithImpl(
       _$ExceedingLength<T> _value, $Res Function(_$ExceedingLength<T>) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$ExceedingLength<T>));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$ExceedingLength<T> get _value => super._value as _$ExceedingLength<T>;
+
   @override
   $Res call({
-    Object? failedValue = null,
-    Object? max = null,
+    Object? failedValue = freezed,
+    Object? max = freezed,
   }) {
     return _then(_$ExceedingLength<T>(
-      failedValue: null == failedValue
+      failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
               as T,
-      max: null == max
+      max: max == freezed
           ? _value.max
           : max // ignore: cast_nullable_to_non_nullable
               as int,
@@ -247,16 +245,17 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
             other is _$ExceedingLength<T> &&
             const DeepCollectionEquality()
                 .equals(other.failedValue, failedValue) &&
-            (identical(other.max, max) || other.max == max));
+            const DeepCollectionEquality().equals(other.max, max));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(failedValue), max);
+      runtimeType,
+      const DeepCollectionEquality().hash(failedValue),
+      const DeepCollectionEquality().hash(max));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$ExceedingLengthCopyWith<T, _$ExceedingLength<T>> get copyWith =>
       __$$ExceedingLengthCopyWithImpl<T, _$ExceedingLength<T>>(
           this, _$identity);
@@ -288,23 +287,23 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T failedValue, int max)? exceedingLength,
-    TResult? Function(T failedValue, int min)? subceedLength,
-    TResult? Function(T failedValue)? empty,
-    TResult? Function(T failedValue)? multiline,
-    TResult? Function(T failedValue)? invalidEmail,
-    TResult? Function(T failedValue)? passwordNotMatchRequirements,
-    TResult? Function(T failedValue)? invalidJWT,
-    TResult? Function(T failedValue)? invalidJWTPayload,
-    TResult? Function(T failedValue)? mustOneUpperCaseCharacter,
-    TResult? Function(T failedValue)? mustOneLowerCaseCharacter,
-    TResult? Function(T failedValue)? mustOneNumericCharacter,
-    TResult? Function(T failedValue)? mustOneSpecialCharacter,
-    TResult? Function(T failedValue)? mustNotContainUserName,
-    TResult? Function(T failedValue)? mustNotMatchOldPassword,
-    TResult? Function(T failedValue)? mustMatchNewPassword,
-    TResult? Function(T failedValue)? invalidDate,
-    TResult? Function(T failedValue)? isEmpty,
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, int min)? subceedLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue)? multiline,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? passwordNotMatchRequirements,
+    TResult Function(T failedValue)? invalidJWT,
+    TResult Function(T failedValue)? invalidJWTPayload,
+    TResult Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult Function(T failedValue)? mustOneNumericCharacter,
+    TResult Function(T failedValue)? mustOneSpecialCharacter,
+    TResult Function(T failedValue)? mustNotContainUserName,
+    TResult Function(T failedValue)? mustNotMatchOldPassword,
+    TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
+    TResult Function(T failedValue)? isEmpty,
   }) {
     return exceedingLength?.call(failedValue, max);
   }
@@ -367,23 +366,23 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ExceedingLength<T> value)? exceedingLength,
-    TResult? Function(SubceedLength<T> value)? subceedLength,
-    TResult? Function(Empty<T> value)? empty,
-    TResult? Function(Multiline<T> value)? multiline,
-    TResult? Function(InvalidEmail<T> value)? invalidEmail,
-    TResult? Function(ShortPassword<T> value)? passwordNotMatchRequirements,
-    TResult? Function(InvalidJWT<T> value)? invalidJWT,
-    TResult? Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
-    TResult? Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
-    TResult? Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
-    TResult? Function(OneNumeric<T> value)? mustOneNumericCharacter,
-    TResult? Function(OneSpecial<T> value)? mustOneSpecialCharacter,
-    TResult? Function(NotContainUserName<T> value)? mustNotContainUserName,
-    TResult? Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
-    TResult? Function(MatchNewPassword<T> value)? mustMatchNewPassword,
-    TResult? Function(InvalidDate<T> value)? invalidDate,
-    TResult? Function(isEmpty<T> value)? isEmpty,
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(SubceedLength<T> value)? subceedLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Multiline<T> value)? multiline,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult Function(InvalidJWT<T> value)? invalidJWT,
+    TResult Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
+    TResult Function(isEmpty<T> value)? isEmpty,
   }) {
     return exceedingLength?.call(this);
   }
@@ -438,30 +437,31 @@ abstract class _$$SubceedLengthCopyWith<T, $Res>
           _$SubceedLength<T> value, $Res Function(_$SubceedLength<T>) then) =
       __$$SubceedLengthCopyWithImpl<T, $Res>;
   @override
-  @useResult
   $Res call({T failedValue, int min});
 }
 
 /// @nodoc
 class __$$SubceedLengthCopyWithImpl<T, $Res>
-    extends _$ValueFailureCopyWithImpl<T, $Res, _$SubceedLength<T>>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
     implements _$$SubceedLengthCopyWith<T, $Res> {
   __$$SubceedLengthCopyWithImpl(
       _$SubceedLength<T> _value, $Res Function(_$SubceedLength<T>) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$SubceedLength<T>));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$SubceedLength<T> get _value => super._value as _$SubceedLength<T>;
+
   @override
   $Res call({
-    Object? failedValue = null,
-    Object? min = null,
+    Object? failedValue = freezed,
+    Object? min = freezed,
   }) {
     return _then(_$SubceedLength<T>(
-      failedValue: null == failedValue
+      failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
               as T,
-      min: null == min
+      min: min == freezed
           ? _value.min
           : min // ignore: cast_nullable_to_non_nullable
               as int,
@@ -491,16 +491,17 @@ class _$SubceedLength<T> implements SubceedLength<T> {
             other is _$SubceedLength<T> &&
             const DeepCollectionEquality()
                 .equals(other.failedValue, failedValue) &&
-            (identical(other.min, min) || other.min == min));
+            const DeepCollectionEquality().equals(other.min, min));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(failedValue), min);
+      runtimeType,
+      const DeepCollectionEquality().hash(failedValue),
+      const DeepCollectionEquality().hash(min));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$SubceedLengthCopyWith<T, _$SubceedLength<T>> get copyWith =>
       __$$SubceedLengthCopyWithImpl<T, _$SubceedLength<T>>(this, _$identity);
 
@@ -531,23 +532,23 @@ class _$SubceedLength<T> implements SubceedLength<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T failedValue, int max)? exceedingLength,
-    TResult? Function(T failedValue, int min)? subceedLength,
-    TResult? Function(T failedValue)? empty,
-    TResult? Function(T failedValue)? multiline,
-    TResult? Function(T failedValue)? invalidEmail,
-    TResult? Function(T failedValue)? passwordNotMatchRequirements,
-    TResult? Function(T failedValue)? invalidJWT,
-    TResult? Function(T failedValue)? invalidJWTPayload,
-    TResult? Function(T failedValue)? mustOneUpperCaseCharacter,
-    TResult? Function(T failedValue)? mustOneLowerCaseCharacter,
-    TResult? Function(T failedValue)? mustOneNumericCharacter,
-    TResult? Function(T failedValue)? mustOneSpecialCharacter,
-    TResult? Function(T failedValue)? mustNotContainUserName,
-    TResult? Function(T failedValue)? mustNotMatchOldPassword,
-    TResult? Function(T failedValue)? mustMatchNewPassword,
-    TResult? Function(T failedValue)? invalidDate,
-    TResult? Function(T failedValue)? isEmpty,
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, int min)? subceedLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue)? multiline,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? passwordNotMatchRequirements,
+    TResult Function(T failedValue)? invalidJWT,
+    TResult Function(T failedValue)? invalidJWTPayload,
+    TResult Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult Function(T failedValue)? mustOneNumericCharacter,
+    TResult Function(T failedValue)? mustOneSpecialCharacter,
+    TResult Function(T failedValue)? mustNotContainUserName,
+    TResult Function(T failedValue)? mustNotMatchOldPassword,
+    TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
+    TResult Function(T failedValue)? isEmpty,
   }) {
     return subceedLength?.call(failedValue, min);
   }
@@ -610,23 +611,23 @@ class _$SubceedLength<T> implements SubceedLength<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ExceedingLength<T> value)? exceedingLength,
-    TResult? Function(SubceedLength<T> value)? subceedLength,
-    TResult? Function(Empty<T> value)? empty,
-    TResult? Function(Multiline<T> value)? multiline,
-    TResult? Function(InvalidEmail<T> value)? invalidEmail,
-    TResult? Function(ShortPassword<T> value)? passwordNotMatchRequirements,
-    TResult? Function(InvalidJWT<T> value)? invalidJWT,
-    TResult? Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
-    TResult? Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
-    TResult? Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
-    TResult? Function(OneNumeric<T> value)? mustOneNumericCharacter,
-    TResult? Function(OneSpecial<T> value)? mustOneSpecialCharacter,
-    TResult? Function(NotContainUserName<T> value)? mustNotContainUserName,
-    TResult? Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
-    TResult? Function(MatchNewPassword<T> value)? mustMatchNewPassword,
-    TResult? Function(InvalidDate<T> value)? invalidDate,
-    TResult? Function(isEmpty<T> value)? isEmpty,
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(SubceedLength<T> value)? subceedLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Multiline<T> value)? multiline,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult Function(InvalidJWT<T> value)? invalidJWT,
+    TResult Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
+    TResult Function(isEmpty<T> value)? isEmpty,
   }) {
     return subceedLength?.call(this);
   }
@@ -680,24 +681,24 @@ abstract class _$$EmptyCopyWith<T, $Res>
   factory _$$EmptyCopyWith(_$Empty<T> value, $Res Function(_$Empty<T>) then) =
       __$$EmptyCopyWithImpl<T, $Res>;
   @override
-  @useResult
   $Res call({T failedValue});
 }
 
 /// @nodoc
-class __$$EmptyCopyWithImpl<T, $Res>
-    extends _$ValueFailureCopyWithImpl<T, $Res, _$Empty<T>>
+class __$$EmptyCopyWithImpl<T, $Res> extends _$ValueFailureCopyWithImpl<T, $Res>
     implements _$$EmptyCopyWith<T, $Res> {
   __$$EmptyCopyWithImpl(_$Empty<T> _value, $Res Function(_$Empty<T>) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$Empty<T>));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$Empty<T> get _value => super._value as _$Empty<T>;
+
   @override
   $Res call({
-    Object? failedValue = null,
+    Object? failedValue = freezed,
   }) {
     return _then(_$Empty<T>(
-      failedValue: null == failedValue
+      failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
               as T,
@@ -733,7 +734,6 @@ class _$Empty<T> implements Empty<T> {
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$EmptyCopyWith<T, _$Empty<T>> get copyWith =>
       __$$EmptyCopyWithImpl<T, _$Empty<T>>(this, _$identity);
 
@@ -764,23 +764,23 @@ class _$Empty<T> implements Empty<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T failedValue, int max)? exceedingLength,
-    TResult? Function(T failedValue, int min)? subceedLength,
-    TResult? Function(T failedValue)? empty,
-    TResult? Function(T failedValue)? multiline,
-    TResult? Function(T failedValue)? invalidEmail,
-    TResult? Function(T failedValue)? passwordNotMatchRequirements,
-    TResult? Function(T failedValue)? invalidJWT,
-    TResult? Function(T failedValue)? invalidJWTPayload,
-    TResult? Function(T failedValue)? mustOneUpperCaseCharacter,
-    TResult? Function(T failedValue)? mustOneLowerCaseCharacter,
-    TResult? Function(T failedValue)? mustOneNumericCharacter,
-    TResult? Function(T failedValue)? mustOneSpecialCharacter,
-    TResult? Function(T failedValue)? mustNotContainUserName,
-    TResult? Function(T failedValue)? mustNotMatchOldPassword,
-    TResult? Function(T failedValue)? mustMatchNewPassword,
-    TResult? Function(T failedValue)? invalidDate,
-    TResult? Function(T failedValue)? isEmpty,
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, int min)? subceedLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue)? multiline,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? passwordNotMatchRequirements,
+    TResult Function(T failedValue)? invalidJWT,
+    TResult Function(T failedValue)? invalidJWTPayload,
+    TResult Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult Function(T failedValue)? mustOneNumericCharacter,
+    TResult Function(T failedValue)? mustOneSpecialCharacter,
+    TResult Function(T failedValue)? mustNotContainUserName,
+    TResult Function(T failedValue)? mustNotMatchOldPassword,
+    TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
+    TResult Function(T failedValue)? isEmpty,
   }) {
     return empty?.call(failedValue);
   }
@@ -843,23 +843,23 @@ class _$Empty<T> implements Empty<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ExceedingLength<T> value)? exceedingLength,
-    TResult? Function(SubceedLength<T> value)? subceedLength,
-    TResult? Function(Empty<T> value)? empty,
-    TResult? Function(Multiline<T> value)? multiline,
-    TResult? Function(InvalidEmail<T> value)? invalidEmail,
-    TResult? Function(ShortPassword<T> value)? passwordNotMatchRequirements,
-    TResult? Function(InvalidJWT<T> value)? invalidJWT,
-    TResult? Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
-    TResult? Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
-    TResult? Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
-    TResult? Function(OneNumeric<T> value)? mustOneNumericCharacter,
-    TResult? Function(OneSpecial<T> value)? mustOneSpecialCharacter,
-    TResult? Function(NotContainUserName<T> value)? mustNotContainUserName,
-    TResult? Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
-    TResult? Function(MatchNewPassword<T> value)? mustMatchNewPassword,
-    TResult? Function(InvalidDate<T> value)? invalidDate,
-    TResult? Function(isEmpty<T> value)? isEmpty,
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(SubceedLength<T> value)? subceedLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Multiline<T> value)? multiline,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult Function(InvalidJWT<T> value)? invalidJWT,
+    TResult Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
+    TResult Function(isEmpty<T> value)? isEmpty,
   }) {
     return empty?.call(this);
   }
@@ -911,25 +911,26 @@ abstract class _$$MultilineCopyWith<T, $Res>
           _$Multiline<T> value, $Res Function(_$Multiline<T>) then) =
       __$$MultilineCopyWithImpl<T, $Res>;
   @override
-  @useResult
   $Res call({T failedValue});
 }
 
 /// @nodoc
 class __$$MultilineCopyWithImpl<T, $Res>
-    extends _$ValueFailureCopyWithImpl<T, $Res, _$Multiline<T>>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
     implements _$$MultilineCopyWith<T, $Res> {
   __$$MultilineCopyWithImpl(
       _$Multiline<T> _value, $Res Function(_$Multiline<T>) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$Multiline<T>));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$Multiline<T> get _value => super._value as _$Multiline<T>;
+
   @override
   $Res call({
-    Object? failedValue = null,
+    Object? failedValue = freezed,
   }) {
     return _then(_$Multiline<T>(
-      failedValue: null == failedValue
+      failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
               as T,
@@ -965,7 +966,6 @@ class _$Multiline<T> implements Multiline<T> {
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$MultilineCopyWith<T, _$Multiline<T>> get copyWith =>
       __$$MultilineCopyWithImpl<T, _$Multiline<T>>(this, _$identity);
 
@@ -996,23 +996,23 @@ class _$Multiline<T> implements Multiline<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T failedValue, int max)? exceedingLength,
-    TResult? Function(T failedValue, int min)? subceedLength,
-    TResult? Function(T failedValue)? empty,
-    TResult? Function(T failedValue)? multiline,
-    TResult? Function(T failedValue)? invalidEmail,
-    TResult? Function(T failedValue)? passwordNotMatchRequirements,
-    TResult? Function(T failedValue)? invalidJWT,
-    TResult? Function(T failedValue)? invalidJWTPayload,
-    TResult? Function(T failedValue)? mustOneUpperCaseCharacter,
-    TResult? Function(T failedValue)? mustOneLowerCaseCharacter,
-    TResult? Function(T failedValue)? mustOneNumericCharacter,
-    TResult? Function(T failedValue)? mustOneSpecialCharacter,
-    TResult? Function(T failedValue)? mustNotContainUserName,
-    TResult? Function(T failedValue)? mustNotMatchOldPassword,
-    TResult? Function(T failedValue)? mustMatchNewPassword,
-    TResult? Function(T failedValue)? invalidDate,
-    TResult? Function(T failedValue)? isEmpty,
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, int min)? subceedLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue)? multiline,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? passwordNotMatchRequirements,
+    TResult Function(T failedValue)? invalidJWT,
+    TResult Function(T failedValue)? invalidJWTPayload,
+    TResult Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult Function(T failedValue)? mustOneNumericCharacter,
+    TResult Function(T failedValue)? mustOneSpecialCharacter,
+    TResult Function(T failedValue)? mustNotContainUserName,
+    TResult Function(T failedValue)? mustNotMatchOldPassword,
+    TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
+    TResult Function(T failedValue)? isEmpty,
   }) {
     return multiline?.call(failedValue);
   }
@@ -1075,23 +1075,23 @@ class _$Multiline<T> implements Multiline<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ExceedingLength<T> value)? exceedingLength,
-    TResult? Function(SubceedLength<T> value)? subceedLength,
-    TResult? Function(Empty<T> value)? empty,
-    TResult? Function(Multiline<T> value)? multiline,
-    TResult? Function(InvalidEmail<T> value)? invalidEmail,
-    TResult? Function(ShortPassword<T> value)? passwordNotMatchRequirements,
-    TResult? Function(InvalidJWT<T> value)? invalidJWT,
-    TResult? Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
-    TResult? Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
-    TResult? Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
-    TResult? Function(OneNumeric<T> value)? mustOneNumericCharacter,
-    TResult? Function(OneSpecial<T> value)? mustOneSpecialCharacter,
-    TResult? Function(NotContainUserName<T> value)? mustNotContainUserName,
-    TResult? Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
-    TResult? Function(MatchNewPassword<T> value)? mustMatchNewPassword,
-    TResult? Function(InvalidDate<T> value)? invalidDate,
-    TResult? Function(isEmpty<T> value)? isEmpty,
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(SubceedLength<T> value)? subceedLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Multiline<T> value)? multiline,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult Function(InvalidJWT<T> value)? invalidJWT,
+    TResult Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
+    TResult Function(isEmpty<T> value)? isEmpty,
   }) {
     return multiline?.call(this);
   }
@@ -1143,25 +1143,26 @@ abstract class _$$InvalidEmailCopyWith<T, $Res>
           _$InvalidEmail<T> value, $Res Function(_$InvalidEmail<T>) then) =
       __$$InvalidEmailCopyWithImpl<T, $Res>;
   @override
-  @useResult
   $Res call({T failedValue});
 }
 
 /// @nodoc
 class __$$InvalidEmailCopyWithImpl<T, $Res>
-    extends _$ValueFailureCopyWithImpl<T, $Res, _$InvalidEmail<T>>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
     implements _$$InvalidEmailCopyWith<T, $Res> {
   __$$InvalidEmailCopyWithImpl(
       _$InvalidEmail<T> _value, $Res Function(_$InvalidEmail<T>) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$InvalidEmail<T>));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$InvalidEmail<T> get _value => super._value as _$InvalidEmail<T>;
+
   @override
   $Res call({
-    Object? failedValue = null,
+    Object? failedValue = freezed,
   }) {
     return _then(_$InvalidEmail<T>(
-      failedValue: null == failedValue
+      failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
               as T,
@@ -1197,7 +1198,6 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$InvalidEmailCopyWith<T, _$InvalidEmail<T>> get copyWith =>
       __$$InvalidEmailCopyWithImpl<T, _$InvalidEmail<T>>(this, _$identity);
 
@@ -1228,23 +1228,23 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T failedValue, int max)? exceedingLength,
-    TResult? Function(T failedValue, int min)? subceedLength,
-    TResult? Function(T failedValue)? empty,
-    TResult? Function(T failedValue)? multiline,
-    TResult? Function(T failedValue)? invalidEmail,
-    TResult? Function(T failedValue)? passwordNotMatchRequirements,
-    TResult? Function(T failedValue)? invalidJWT,
-    TResult? Function(T failedValue)? invalidJWTPayload,
-    TResult? Function(T failedValue)? mustOneUpperCaseCharacter,
-    TResult? Function(T failedValue)? mustOneLowerCaseCharacter,
-    TResult? Function(T failedValue)? mustOneNumericCharacter,
-    TResult? Function(T failedValue)? mustOneSpecialCharacter,
-    TResult? Function(T failedValue)? mustNotContainUserName,
-    TResult? Function(T failedValue)? mustNotMatchOldPassword,
-    TResult? Function(T failedValue)? mustMatchNewPassword,
-    TResult? Function(T failedValue)? invalidDate,
-    TResult? Function(T failedValue)? isEmpty,
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, int min)? subceedLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue)? multiline,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? passwordNotMatchRequirements,
+    TResult Function(T failedValue)? invalidJWT,
+    TResult Function(T failedValue)? invalidJWTPayload,
+    TResult Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult Function(T failedValue)? mustOneNumericCharacter,
+    TResult Function(T failedValue)? mustOneSpecialCharacter,
+    TResult Function(T failedValue)? mustNotContainUserName,
+    TResult Function(T failedValue)? mustNotMatchOldPassword,
+    TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
+    TResult Function(T failedValue)? isEmpty,
   }) {
     return invalidEmail?.call(failedValue);
   }
@@ -1307,23 +1307,23 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ExceedingLength<T> value)? exceedingLength,
-    TResult? Function(SubceedLength<T> value)? subceedLength,
-    TResult? Function(Empty<T> value)? empty,
-    TResult? Function(Multiline<T> value)? multiline,
-    TResult? Function(InvalidEmail<T> value)? invalidEmail,
-    TResult? Function(ShortPassword<T> value)? passwordNotMatchRequirements,
-    TResult? Function(InvalidJWT<T> value)? invalidJWT,
-    TResult? Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
-    TResult? Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
-    TResult? Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
-    TResult? Function(OneNumeric<T> value)? mustOneNumericCharacter,
-    TResult? Function(OneSpecial<T> value)? mustOneSpecialCharacter,
-    TResult? Function(NotContainUserName<T> value)? mustNotContainUserName,
-    TResult? Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
-    TResult? Function(MatchNewPassword<T> value)? mustMatchNewPassword,
-    TResult? Function(InvalidDate<T> value)? invalidDate,
-    TResult? Function(isEmpty<T> value)? isEmpty,
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(SubceedLength<T> value)? subceedLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Multiline<T> value)? multiline,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult Function(InvalidJWT<T> value)? invalidJWT,
+    TResult Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
+    TResult Function(isEmpty<T> value)? isEmpty,
   }) {
     return invalidEmail?.call(this);
   }
@@ -1376,25 +1376,26 @@ abstract class _$$ShortPasswordCopyWith<T, $Res>
           _$ShortPassword<T> value, $Res Function(_$ShortPassword<T>) then) =
       __$$ShortPasswordCopyWithImpl<T, $Res>;
   @override
-  @useResult
   $Res call({T failedValue});
 }
 
 /// @nodoc
 class __$$ShortPasswordCopyWithImpl<T, $Res>
-    extends _$ValueFailureCopyWithImpl<T, $Res, _$ShortPassword<T>>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
     implements _$$ShortPasswordCopyWith<T, $Res> {
   __$$ShortPasswordCopyWithImpl(
       _$ShortPassword<T> _value, $Res Function(_$ShortPassword<T>) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$ShortPassword<T>));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$ShortPassword<T> get _value => super._value as _$ShortPassword<T>;
+
   @override
   $Res call({
-    Object? failedValue = null,
+    Object? failedValue = freezed,
   }) {
     return _then(_$ShortPassword<T>(
-      failedValue: null == failedValue
+      failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
               as T,
@@ -1430,7 +1431,6 @@ class _$ShortPassword<T> implements ShortPassword<T> {
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$ShortPasswordCopyWith<T, _$ShortPassword<T>> get copyWith =>
       __$$ShortPasswordCopyWithImpl<T, _$ShortPassword<T>>(this, _$identity);
 
@@ -1461,23 +1461,23 @@ class _$ShortPassword<T> implements ShortPassword<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T failedValue, int max)? exceedingLength,
-    TResult? Function(T failedValue, int min)? subceedLength,
-    TResult? Function(T failedValue)? empty,
-    TResult? Function(T failedValue)? multiline,
-    TResult? Function(T failedValue)? invalidEmail,
-    TResult? Function(T failedValue)? passwordNotMatchRequirements,
-    TResult? Function(T failedValue)? invalidJWT,
-    TResult? Function(T failedValue)? invalidJWTPayload,
-    TResult? Function(T failedValue)? mustOneUpperCaseCharacter,
-    TResult? Function(T failedValue)? mustOneLowerCaseCharacter,
-    TResult? Function(T failedValue)? mustOneNumericCharacter,
-    TResult? Function(T failedValue)? mustOneSpecialCharacter,
-    TResult? Function(T failedValue)? mustNotContainUserName,
-    TResult? Function(T failedValue)? mustNotMatchOldPassword,
-    TResult? Function(T failedValue)? mustMatchNewPassword,
-    TResult? Function(T failedValue)? invalidDate,
-    TResult? Function(T failedValue)? isEmpty,
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, int min)? subceedLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue)? multiline,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? passwordNotMatchRequirements,
+    TResult Function(T failedValue)? invalidJWT,
+    TResult Function(T failedValue)? invalidJWTPayload,
+    TResult Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult Function(T failedValue)? mustOneNumericCharacter,
+    TResult Function(T failedValue)? mustOneSpecialCharacter,
+    TResult Function(T failedValue)? mustNotContainUserName,
+    TResult Function(T failedValue)? mustNotMatchOldPassword,
+    TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
+    TResult Function(T failedValue)? isEmpty,
   }) {
     return passwordNotMatchRequirements?.call(failedValue);
   }
@@ -1540,23 +1540,23 @@ class _$ShortPassword<T> implements ShortPassword<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ExceedingLength<T> value)? exceedingLength,
-    TResult? Function(SubceedLength<T> value)? subceedLength,
-    TResult? Function(Empty<T> value)? empty,
-    TResult? Function(Multiline<T> value)? multiline,
-    TResult? Function(InvalidEmail<T> value)? invalidEmail,
-    TResult? Function(ShortPassword<T> value)? passwordNotMatchRequirements,
-    TResult? Function(InvalidJWT<T> value)? invalidJWT,
-    TResult? Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
-    TResult? Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
-    TResult? Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
-    TResult? Function(OneNumeric<T> value)? mustOneNumericCharacter,
-    TResult? Function(OneSpecial<T> value)? mustOneSpecialCharacter,
-    TResult? Function(NotContainUserName<T> value)? mustNotContainUserName,
-    TResult? Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
-    TResult? Function(MatchNewPassword<T> value)? mustMatchNewPassword,
-    TResult? Function(InvalidDate<T> value)? invalidDate,
-    TResult? Function(isEmpty<T> value)? isEmpty,
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(SubceedLength<T> value)? subceedLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Multiline<T> value)? multiline,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult Function(InvalidJWT<T> value)? invalidJWT,
+    TResult Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
+    TResult Function(isEmpty<T> value)? isEmpty,
   }) {
     return passwordNotMatchRequirements?.call(this);
   }
@@ -1609,25 +1609,26 @@ abstract class _$$InvalidJWTCopyWith<T, $Res>
           _$InvalidJWT<T> value, $Res Function(_$InvalidJWT<T>) then) =
       __$$InvalidJWTCopyWithImpl<T, $Res>;
   @override
-  @useResult
   $Res call({T failedValue});
 }
 
 /// @nodoc
 class __$$InvalidJWTCopyWithImpl<T, $Res>
-    extends _$ValueFailureCopyWithImpl<T, $Res, _$InvalidJWT<T>>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
     implements _$$InvalidJWTCopyWith<T, $Res> {
   __$$InvalidJWTCopyWithImpl(
       _$InvalidJWT<T> _value, $Res Function(_$InvalidJWT<T>) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$InvalidJWT<T>));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$InvalidJWT<T> get _value => super._value as _$InvalidJWT<T>;
+
   @override
   $Res call({
-    Object? failedValue = null,
+    Object? failedValue = freezed,
   }) {
     return _then(_$InvalidJWT<T>(
-      failedValue: null == failedValue
+      failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
               as T,
@@ -1663,7 +1664,6 @@ class _$InvalidJWT<T> implements InvalidJWT<T> {
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$InvalidJWTCopyWith<T, _$InvalidJWT<T>> get copyWith =>
       __$$InvalidJWTCopyWithImpl<T, _$InvalidJWT<T>>(this, _$identity);
 
@@ -1694,23 +1694,23 @@ class _$InvalidJWT<T> implements InvalidJWT<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T failedValue, int max)? exceedingLength,
-    TResult? Function(T failedValue, int min)? subceedLength,
-    TResult? Function(T failedValue)? empty,
-    TResult? Function(T failedValue)? multiline,
-    TResult? Function(T failedValue)? invalidEmail,
-    TResult? Function(T failedValue)? passwordNotMatchRequirements,
-    TResult? Function(T failedValue)? invalidJWT,
-    TResult? Function(T failedValue)? invalidJWTPayload,
-    TResult? Function(T failedValue)? mustOneUpperCaseCharacter,
-    TResult? Function(T failedValue)? mustOneLowerCaseCharacter,
-    TResult? Function(T failedValue)? mustOneNumericCharacter,
-    TResult? Function(T failedValue)? mustOneSpecialCharacter,
-    TResult? Function(T failedValue)? mustNotContainUserName,
-    TResult? Function(T failedValue)? mustNotMatchOldPassword,
-    TResult? Function(T failedValue)? mustMatchNewPassword,
-    TResult? Function(T failedValue)? invalidDate,
-    TResult? Function(T failedValue)? isEmpty,
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, int min)? subceedLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue)? multiline,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? passwordNotMatchRequirements,
+    TResult Function(T failedValue)? invalidJWT,
+    TResult Function(T failedValue)? invalidJWTPayload,
+    TResult Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult Function(T failedValue)? mustOneNumericCharacter,
+    TResult Function(T failedValue)? mustOneSpecialCharacter,
+    TResult Function(T failedValue)? mustNotContainUserName,
+    TResult Function(T failedValue)? mustNotMatchOldPassword,
+    TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
+    TResult Function(T failedValue)? isEmpty,
   }) {
     return invalidJWT?.call(failedValue);
   }
@@ -1773,23 +1773,23 @@ class _$InvalidJWT<T> implements InvalidJWT<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ExceedingLength<T> value)? exceedingLength,
-    TResult? Function(SubceedLength<T> value)? subceedLength,
-    TResult? Function(Empty<T> value)? empty,
-    TResult? Function(Multiline<T> value)? multiline,
-    TResult? Function(InvalidEmail<T> value)? invalidEmail,
-    TResult? Function(ShortPassword<T> value)? passwordNotMatchRequirements,
-    TResult? Function(InvalidJWT<T> value)? invalidJWT,
-    TResult? Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
-    TResult? Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
-    TResult? Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
-    TResult? Function(OneNumeric<T> value)? mustOneNumericCharacter,
-    TResult? Function(OneSpecial<T> value)? mustOneSpecialCharacter,
-    TResult? Function(NotContainUserName<T> value)? mustNotContainUserName,
-    TResult? Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
-    TResult? Function(MatchNewPassword<T> value)? mustMatchNewPassword,
-    TResult? Function(InvalidDate<T> value)? invalidDate,
-    TResult? Function(isEmpty<T> value)? isEmpty,
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(SubceedLength<T> value)? subceedLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Multiline<T> value)? multiline,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult Function(InvalidJWT<T> value)? invalidJWT,
+    TResult Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
+    TResult Function(isEmpty<T> value)? isEmpty,
   }) {
     return invalidJWT?.call(this);
   }
@@ -1841,25 +1841,26 @@ abstract class _$$InvalidJWTPayloadCopyWith<T, $Res>
           $Res Function(_$InvalidJWTPayload<T>) then) =
       __$$InvalidJWTPayloadCopyWithImpl<T, $Res>;
   @override
-  @useResult
   $Res call({T failedValue});
 }
 
 /// @nodoc
 class __$$InvalidJWTPayloadCopyWithImpl<T, $Res>
-    extends _$ValueFailureCopyWithImpl<T, $Res, _$InvalidJWTPayload<T>>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
     implements _$$InvalidJWTPayloadCopyWith<T, $Res> {
   __$$InvalidJWTPayloadCopyWithImpl(_$InvalidJWTPayload<T> _value,
       $Res Function(_$InvalidJWTPayload<T>) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$InvalidJWTPayload<T>));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$InvalidJWTPayload<T> get _value => super._value as _$InvalidJWTPayload<T>;
+
   @override
   $Res call({
-    Object? failedValue = null,
+    Object? failedValue = freezed,
   }) {
     return _then(_$InvalidJWTPayload<T>(
-      failedValue: null == failedValue
+      failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
               as T,
@@ -1895,7 +1896,6 @@ class _$InvalidJWTPayload<T> implements InvalidJWTPayload<T> {
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$InvalidJWTPayloadCopyWith<T, _$InvalidJWTPayload<T>> get copyWith =>
       __$$InvalidJWTPayloadCopyWithImpl<T, _$InvalidJWTPayload<T>>(
           this, _$identity);
@@ -1927,23 +1927,23 @@ class _$InvalidJWTPayload<T> implements InvalidJWTPayload<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T failedValue, int max)? exceedingLength,
-    TResult? Function(T failedValue, int min)? subceedLength,
-    TResult? Function(T failedValue)? empty,
-    TResult? Function(T failedValue)? multiline,
-    TResult? Function(T failedValue)? invalidEmail,
-    TResult? Function(T failedValue)? passwordNotMatchRequirements,
-    TResult? Function(T failedValue)? invalidJWT,
-    TResult? Function(T failedValue)? invalidJWTPayload,
-    TResult? Function(T failedValue)? mustOneUpperCaseCharacter,
-    TResult? Function(T failedValue)? mustOneLowerCaseCharacter,
-    TResult? Function(T failedValue)? mustOneNumericCharacter,
-    TResult? Function(T failedValue)? mustOneSpecialCharacter,
-    TResult? Function(T failedValue)? mustNotContainUserName,
-    TResult? Function(T failedValue)? mustNotMatchOldPassword,
-    TResult? Function(T failedValue)? mustMatchNewPassword,
-    TResult? Function(T failedValue)? invalidDate,
-    TResult? Function(T failedValue)? isEmpty,
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, int min)? subceedLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue)? multiline,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? passwordNotMatchRequirements,
+    TResult Function(T failedValue)? invalidJWT,
+    TResult Function(T failedValue)? invalidJWTPayload,
+    TResult Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult Function(T failedValue)? mustOneNumericCharacter,
+    TResult Function(T failedValue)? mustOneSpecialCharacter,
+    TResult Function(T failedValue)? mustNotContainUserName,
+    TResult Function(T failedValue)? mustNotMatchOldPassword,
+    TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
+    TResult Function(T failedValue)? isEmpty,
   }) {
     return invalidJWTPayload?.call(failedValue);
   }
@@ -2006,23 +2006,23 @@ class _$InvalidJWTPayload<T> implements InvalidJWTPayload<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ExceedingLength<T> value)? exceedingLength,
-    TResult? Function(SubceedLength<T> value)? subceedLength,
-    TResult? Function(Empty<T> value)? empty,
-    TResult? Function(Multiline<T> value)? multiline,
-    TResult? Function(InvalidEmail<T> value)? invalidEmail,
-    TResult? Function(ShortPassword<T> value)? passwordNotMatchRequirements,
-    TResult? Function(InvalidJWT<T> value)? invalidJWT,
-    TResult? Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
-    TResult? Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
-    TResult? Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
-    TResult? Function(OneNumeric<T> value)? mustOneNumericCharacter,
-    TResult? Function(OneSpecial<T> value)? mustOneSpecialCharacter,
-    TResult? Function(NotContainUserName<T> value)? mustNotContainUserName,
-    TResult? Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
-    TResult? Function(MatchNewPassword<T> value)? mustMatchNewPassword,
-    TResult? Function(InvalidDate<T> value)? invalidDate,
-    TResult? Function(isEmpty<T> value)? isEmpty,
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(SubceedLength<T> value)? subceedLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Multiline<T> value)? multiline,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult Function(InvalidJWT<T> value)? invalidJWT,
+    TResult Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
+    TResult Function(isEmpty<T> value)? isEmpty,
   }) {
     return invalidJWTPayload?.call(this);
   }
@@ -2075,25 +2075,26 @@ abstract class _$$OneUpperCaseCopyWith<T, $Res>
           _$OneUpperCase<T> value, $Res Function(_$OneUpperCase<T>) then) =
       __$$OneUpperCaseCopyWithImpl<T, $Res>;
   @override
-  @useResult
   $Res call({T failedValue});
 }
 
 /// @nodoc
 class __$$OneUpperCaseCopyWithImpl<T, $Res>
-    extends _$ValueFailureCopyWithImpl<T, $Res, _$OneUpperCase<T>>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
     implements _$$OneUpperCaseCopyWith<T, $Res> {
   __$$OneUpperCaseCopyWithImpl(
       _$OneUpperCase<T> _value, $Res Function(_$OneUpperCase<T>) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$OneUpperCase<T>));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$OneUpperCase<T> get _value => super._value as _$OneUpperCase<T>;
+
   @override
   $Res call({
-    Object? failedValue = null,
+    Object? failedValue = freezed,
   }) {
     return _then(_$OneUpperCase<T>(
-      failedValue: null == failedValue
+      failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
               as T,
@@ -2129,7 +2130,6 @@ class _$OneUpperCase<T> implements OneUpperCase<T> {
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$OneUpperCaseCopyWith<T, _$OneUpperCase<T>> get copyWith =>
       __$$OneUpperCaseCopyWithImpl<T, _$OneUpperCase<T>>(this, _$identity);
 
@@ -2160,23 +2160,23 @@ class _$OneUpperCase<T> implements OneUpperCase<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T failedValue, int max)? exceedingLength,
-    TResult? Function(T failedValue, int min)? subceedLength,
-    TResult? Function(T failedValue)? empty,
-    TResult? Function(T failedValue)? multiline,
-    TResult? Function(T failedValue)? invalidEmail,
-    TResult? Function(T failedValue)? passwordNotMatchRequirements,
-    TResult? Function(T failedValue)? invalidJWT,
-    TResult? Function(T failedValue)? invalidJWTPayload,
-    TResult? Function(T failedValue)? mustOneUpperCaseCharacter,
-    TResult? Function(T failedValue)? mustOneLowerCaseCharacter,
-    TResult? Function(T failedValue)? mustOneNumericCharacter,
-    TResult? Function(T failedValue)? mustOneSpecialCharacter,
-    TResult? Function(T failedValue)? mustNotContainUserName,
-    TResult? Function(T failedValue)? mustNotMatchOldPassword,
-    TResult? Function(T failedValue)? mustMatchNewPassword,
-    TResult? Function(T failedValue)? invalidDate,
-    TResult? Function(T failedValue)? isEmpty,
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, int min)? subceedLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue)? multiline,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? passwordNotMatchRequirements,
+    TResult Function(T failedValue)? invalidJWT,
+    TResult Function(T failedValue)? invalidJWTPayload,
+    TResult Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult Function(T failedValue)? mustOneNumericCharacter,
+    TResult Function(T failedValue)? mustOneSpecialCharacter,
+    TResult Function(T failedValue)? mustNotContainUserName,
+    TResult Function(T failedValue)? mustNotMatchOldPassword,
+    TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
+    TResult Function(T failedValue)? isEmpty,
   }) {
     return mustOneUpperCaseCharacter?.call(failedValue);
   }
@@ -2239,23 +2239,23 @@ class _$OneUpperCase<T> implements OneUpperCase<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ExceedingLength<T> value)? exceedingLength,
-    TResult? Function(SubceedLength<T> value)? subceedLength,
-    TResult? Function(Empty<T> value)? empty,
-    TResult? Function(Multiline<T> value)? multiline,
-    TResult? Function(InvalidEmail<T> value)? invalidEmail,
-    TResult? Function(ShortPassword<T> value)? passwordNotMatchRequirements,
-    TResult? Function(InvalidJWT<T> value)? invalidJWT,
-    TResult? Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
-    TResult? Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
-    TResult? Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
-    TResult? Function(OneNumeric<T> value)? mustOneNumericCharacter,
-    TResult? Function(OneSpecial<T> value)? mustOneSpecialCharacter,
-    TResult? Function(NotContainUserName<T> value)? mustNotContainUserName,
-    TResult? Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
-    TResult? Function(MatchNewPassword<T> value)? mustMatchNewPassword,
-    TResult? Function(InvalidDate<T> value)? invalidDate,
-    TResult? Function(isEmpty<T> value)? isEmpty,
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(SubceedLength<T> value)? subceedLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Multiline<T> value)? multiline,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult Function(InvalidJWT<T> value)? invalidJWT,
+    TResult Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
+    TResult Function(isEmpty<T> value)? isEmpty,
   }) {
     return mustOneUpperCaseCharacter?.call(this);
   }
@@ -2308,25 +2308,26 @@ abstract class _$$OneLowerCaseCopyWith<T, $Res>
           _$OneLowerCase<T> value, $Res Function(_$OneLowerCase<T>) then) =
       __$$OneLowerCaseCopyWithImpl<T, $Res>;
   @override
-  @useResult
   $Res call({T failedValue});
 }
 
 /// @nodoc
 class __$$OneLowerCaseCopyWithImpl<T, $Res>
-    extends _$ValueFailureCopyWithImpl<T, $Res, _$OneLowerCase<T>>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
     implements _$$OneLowerCaseCopyWith<T, $Res> {
   __$$OneLowerCaseCopyWithImpl(
       _$OneLowerCase<T> _value, $Res Function(_$OneLowerCase<T>) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$OneLowerCase<T>));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$OneLowerCase<T> get _value => super._value as _$OneLowerCase<T>;
+
   @override
   $Res call({
-    Object? failedValue = null,
+    Object? failedValue = freezed,
   }) {
     return _then(_$OneLowerCase<T>(
-      failedValue: null == failedValue
+      failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
               as T,
@@ -2362,7 +2363,6 @@ class _$OneLowerCase<T> implements OneLowerCase<T> {
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$OneLowerCaseCopyWith<T, _$OneLowerCase<T>> get copyWith =>
       __$$OneLowerCaseCopyWithImpl<T, _$OneLowerCase<T>>(this, _$identity);
 
@@ -2393,23 +2393,23 @@ class _$OneLowerCase<T> implements OneLowerCase<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T failedValue, int max)? exceedingLength,
-    TResult? Function(T failedValue, int min)? subceedLength,
-    TResult? Function(T failedValue)? empty,
-    TResult? Function(T failedValue)? multiline,
-    TResult? Function(T failedValue)? invalidEmail,
-    TResult? Function(T failedValue)? passwordNotMatchRequirements,
-    TResult? Function(T failedValue)? invalidJWT,
-    TResult? Function(T failedValue)? invalidJWTPayload,
-    TResult? Function(T failedValue)? mustOneUpperCaseCharacter,
-    TResult? Function(T failedValue)? mustOneLowerCaseCharacter,
-    TResult? Function(T failedValue)? mustOneNumericCharacter,
-    TResult? Function(T failedValue)? mustOneSpecialCharacter,
-    TResult? Function(T failedValue)? mustNotContainUserName,
-    TResult? Function(T failedValue)? mustNotMatchOldPassword,
-    TResult? Function(T failedValue)? mustMatchNewPassword,
-    TResult? Function(T failedValue)? invalidDate,
-    TResult? Function(T failedValue)? isEmpty,
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, int min)? subceedLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue)? multiline,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? passwordNotMatchRequirements,
+    TResult Function(T failedValue)? invalidJWT,
+    TResult Function(T failedValue)? invalidJWTPayload,
+    TResult Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult Function(T failedValue)? mustOneNumericCharacter,
+    TResult Function(T failedValue)? mustOneSpecialCharacter,
+    TResult Function(T failedValue)? mustNotContainUserName,
+    TResult Function(T failedValue)? mustNotMatchOldPassword,
+    TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
+    TResult Function(T failedValue)? isEmpty,
   }) {
     return mustOneLowerCaseCharacter?.call(failedValue);
   }
@@ -2472,23 +2472,23 @@ class _$OneLowerCase<T> implements OneLowerCase<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ExceedingLength<T> value)? exceedingLength,
-    TResult? Function(SubceedLength<T> value)? subceedLength,
-    TResult? Function(Empty<T> value)? empty,
-    TResult? Function(Multiline<T> value)? multiline,
-    TResult? Function(InvalidEmail<T> value)? invalidEmail,
-    TResult? Function(ShortPassword<T> value)? passwordNotMatchRequirements,
-    TResult? Function(InvalidJWT<T> value)? invalidJWT,
-    TResult? Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
-    TResult? Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
-    TResult? Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
-    TResult? Function(OneNumeric<T> value)? mustOneNumericCharacter,
-    TResult? Function(OneSpecial<T> value)? mustOneSpecialCharacter,
-    TResult? Function(NotContainUserName<T> value)? mustNotContainUserName,
-    TResult? Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
-    TResult? Function(MatchNewPassword<T> value)? mustMatchNewPassword,
-    TResult? Function(InvalidDate<T> value)? invalidDate,
-    TResult? Function(isEmpty<T> value)? isEmpty,
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(SubceedLength<T> value)? subceedLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Multiline<T> value)? multiline,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult Function(InvalidJWT<T> value)? invalidJWT,
+    TResult Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
+    TResult Function(isEmpty<T> value)? isEmpty,
   }) {
     return mustOneLowerCaseCharacter?.call(this);
   }
@@ -2541,25 +2541,26 @@ abstract class _$$OneNumericCopyWith<T, $Res>
           _$OneNumeric<T> value, $Res Function(_$OneNumeric<T>) then) =
       __$$OneNumericCopyWithImpl<T, $Res>;
   @override
-  @useResult
   $Res call({T failedValue});
 }
 
 /// @nodoc
 class __$$OneNumericCopyWithImpl<T, $Res>
-    extends _$ValueFailureCopyWithImpl<T, $Res, _$OneNumeric<T>>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
     implements _$$OneNumericCopyWith<T, $Res> {
   __$$OneNumericCopyWithImpl(
       _$OneNumeric<T> _value, $Res Function(_$OneNumeric<T>) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$OneNumeric<T>));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$OneNumeric<T> get _value => super._value as _$OneNumeric<T>;
+
   @override
   $Res call({
-    Object? failedValue = null,
+    Object? failedValue = freezed,
   }) {
     return _then(_$OneNumeric<T>(
-      failedValue: null == failedValue
+      failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
               as T,
@@ -2595,7 +2596,6 @@ class _$OneNumeric<T> implements OneNumeric<T> {
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$OneNumericCopyWith<T, _$OneNumeric<T>> get copyWith =>
       __$$OneNumericCopyWithImpl<T, _$OneNumeric<T>>(this, _$identity);
 
@@ -2626,23 +2626,23 @@ class _$OneNumeric<T> implements OneNumeric<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T failedValue, int max)? exceedingLength,
-    TResult? Function(T failedValue, int min)? subceedLength,
-    TResult? Function(T failedValue)? empty,
-    TResult? Function(T failedValue)? multiline,
-    TResult? Function(T failedValue)? invalidEmail,
-    TResult? Function(T failedValue)? passwordNotMatchRequirements,
-    TResult? Function(T failedValue)? invalidJWT,
-    TResult? Function(T failedValue)? invalidJWTPayload,
-    TResult? Function(T failedValue)? mustOneUpperCaseCharacter,
-    TResult? Function(T failedValue)? mustOneLowerCaseCharacter,
-    TResult? Function(T failedValue)? mustOneNumericCharacter,
-    TResult? Function(T failedValue)? mustOneSpecialCharacter,
-    TResult? Function(T failedValue)? mustNotContainUserName,
-    TResult? Function(T failedValue)? mustNotMatchOldPassword,
-    TResult? Function(T failedValue)? mustMatchNewPassword,
-    TResult? Function(T failedValue)? invalidDate,
-    TResult? Function(T failedValue)? isEmpty,
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, int min)? subceedLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue)? multiline,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? passwordNotMatchRequirements,
+    TResult Function(T failedValue)? invalidJWT,
+    TResult Function(T failedValue)? invalidJWTPayload,
+    TResult Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult Function(T failedValue)? mustOneNumericCharacter,
+    TResult Function(T failedValue)? mustOneSpecialCharacter,
+    TResult Function(T failedValue)? mustNotContainUserName,
+    TResult Function(T failedValue)? mustNotMatchOldPassword,
+    TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
+    TResult Function(T failedValue)? isEmpty,
   }) {
     return mustOneNumericCharacter?.call(failedValue);
   }
@@ -2705,23 +2705,23 @@ class _$OneNumeric<T> implements OneNumeric<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ExceedingLength<T> value)? exceedingLength,
-    TResult? Function(SubceedLength<T> value)? subceedLength,
-    TResult? Function(Empty<T> value)? empty,
-    TResult? Function(Multiline<T> value)? multiline,
-    TResult? Function(InvalidEmail<T> value)? invalidEmail,
-    TResult? Function(ShortPassword<T> value)? passwordNotMatchRequirements,
-    TResult? Function(InvalidJWT<T> value)? invalidJWT,
-    TResult? Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
-    TResult? Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
-    TResult? Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
-    TResult? Function(OneNumeric<T> value)? mustOneNumericCharacter,
-    TResult? Function(OneSpecial<T> value)? mustOneSpecialCharacter,
-    TResult? Function(NotContainUserName<T> value)? mustNotContainUserName,
-    TResult? Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
-    TResult? Function(MatchNewPassword<T> value)? mustMatchNewPassword,
-    TResult? Function(InvalidDate<T> value)? invalidDate,
-    TResult? Function(isEmpty<T> value)? isEmpty,
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(SubceedLength<T> value)? subceedLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Multiline<T> value)? multiline,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult Function(InvalidJWT<T> value)? invalidJWT,
+    TResult Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
+    TResult Function(isEmpty<T> value)? isEmpty,
   }) {
     return mustOneNumericCharacter?.call(this);
   }
@@ -2773,25 +2773,26 @@ abstract class _$$OneSpecialCopyWith<T, $Res>
           _$OneSpecial<T> value, $Res Function(_$OneSpecial<T>) then) =
       __$$OneSpecialCopyWithImpl<T, $Res>;
   @override
-  @useResult
   $Res call({T failedValue});
 }
 
 /// @nodoc
 class __$$OneSpecialCopyWithImpl<T, $Res>
-    extends _$ValueFailureCopyWithImpl<T, $Res, _$OneSpecial<T>>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
     implements _$$OneSpecialCopyWith<T, $Res> {
   __$$OneSpecialCopyWithImpl(
       _$OneSpecial<T> _value, $Res Function(_$OneSpecial<T>) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$OneSpecial<T>));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$OneSpecial<T> get _value => super._value as _$OneSpecial<T>;
+
   @override
   $Res call({
-    Object? failedValue = null,
+    Object? failedValue = freezed,
   }) {
     return _then(_$OneSpecial<T>(
-      failedValue: null == failedValue
+      failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
               as T,
@@ -2827,7 +2828,6 @@ class _$OneSpecial<T> implements OneSpecial<T> {
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$OneSpecialCopyWith<T, _$OneSpecial<T>> get copyWith =>
       __$$OneSpecialCopyWithImpl<T, _$OneSpecial<T>>(this, _$identity);
 
@@ -2858,23 +2858,23 @@ class _$OneSpecial<T> implements OneSpecial<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T failedValue, int max)? exceedingLength,
-    TResult? Function(T failedValue, int min)? subceedLength,
-    TResult? Function(T failedValue)? empty,
-    TResult? Function(T failedValue)? multiline,
-    TResult? Function(T failedValue)? invalidEmail,
-    TResult? Function(T failedValue)? passwordNotMatchRequirements,
-    TResult? Function(T failedValue)? invalidJWT,
-    TResult? Function(T failedValue)? invalidJWTPayload,
-    TResult? Function(T failedValue)? mustOneUpperCaseCharacter,
-    TResult? Function(T failedValue)? mustOneLowerCaseCharacter,
-    TResult? Function(T failedValue)? mustOneNumericCharacter,
-    TResult? Function(T failedValue)? mustOneSpecialCharacter,
-    TResult? Function(T failedValue)? mustNotContainUserName,
-    TResult? Function(T failedValue)? mustNotMatchOldPassword,
-    TResult? Function(T failedValue)? mustMatchNewPassword,
-    TResult? Function(T failedValue)? invalidDate,
-    TResult? Function(T failedValue)? isEmpty,
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, int min)? subceedLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue)? multiline,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? passwordNotMatchRequirements,
+    TResult Function(T failedValue)? invalidJWT,
+    TResult Function(T failedValue)? invalidJWTPayload,
+    TResult Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult Function(T failedValue)? mustOneNumericCharacter,
+    TResult Function(T failedValue)? mustOneSpecialCharacter,
+    TResult Function(T failedValue)? mustNotContainUserName,
+    TResult Function(T failedValue)? mustNotMatchOldPassword,
+    TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
+    TResult Function(T failedValue)? isEmpty,
   }) {
     return mustOneSpecialCharacter?.call(failedValue);
   }
@@ -2937,23 +2937,23 @@ class _$OneSpecial<T> implements OneSpecial<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ExceedingLength<T> value)? exceedingLength,
-    TResult? Function(SubceedLength<T> value)? subceedLength,
-    TResult? Function(Empty<T> value)? empty,
-    TResult? Function(Multiline<T> value)? multiline,
-    TResult? Function(InvalidEmail<T> value)? invalidEmail,
-    TResult? Function(ShortPassword<T> value)? passwordNotMatchRequirements,
-    TResult? Function(InvalidJWT<T> value)? invalidJWT,
-    TResult? Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
-    TResult? Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
-    TResult? Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
-    TResult? Function(OneNumeric<T> value)? mustOneNumericCharacter,
-    TResult? Function(OneSpecial<T> value)? mustOneSpecialCharacter,
-    TResult? Function(NotContainUserName<T> value)? mustNotContainUserName,
-    TResult? Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
-    TResult? Function(MatchNewPassword<T> value)? mustMatchNewPassword,
-    TResult? Function(InvalidDate<T> value)? invalidDate,
-    TResult? Function(isEmpty<T> value)? isEmpty,
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(SubceedLength<T> value)? subceedLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Multiline<T> value)? multiline,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult Function(InvalidJWT<T> value)? invalidJWT,
+    TResult Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
+    TResult Function(isEmpty<T> value)? isEmpty,
   }) {
     return mustOneSpecialCharacter?.call(this);
   }
@@ -3005,25 +3005,26 @@ abstract class _$$NotContainUserNameCopyWith<T, $Res>
           $Res Function(_$NotContainUserName<T>) then) =
       __$$NotContainUserNameCopyWithImpl<T, $Res>;
   @override
-  @useResult
   $Res call({T failedValue});
 }
 
 /// @nodoc
 class __$$NotContainUserNameCopyWithImpl<T, $Res>
-    extends _$ValueFailureCopyWithImpl<T, $Res, _$NotContainUserName<T>>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
     implements _$$NotContainUserNameCopyWith<T, $Res> {
   __$$NotContainUserNameCopyWithImpl(_$NotContainUserName<T> _value,
       $Res Function(_$NotContainUserName<T>) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$NotContainUserName<T>));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$NotContainUserName<T> get _value => super._value as _$NotContainUserName<T>;
+
   @override
   $Res call({
-    Object? failedValue = null,
+    Object? failedValue = freezed,
   }) {
     return _then(_$NotContainUserName<T>(
-      failedValue: null == failedValue
+      failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
               as T,
@@ -3059,7 +3060,6 @@ class _$NotContainUserName<T> implements NotContainUserName<T> {
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$NotContainUserNameCopyWith<T, _$NotContainUserName<T>> get copyWith =>
       __$$NotContainUserNameCopyWithImpl<T, _$NotContainUserName<T>>(
           this, _$identity);
@@ -3091,23 +3091,23 @@ class _$NotContainUserName<T> implements NotContainUserName<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T failedValue, int max)? exceedingLength,
-    TResult? Function(T failedValue, int min)? subceedLength,
-    TResult? Function(T failedValue)? empty,
-    TResult? Function(T failedValue)? multiline,
-    TResult? Function(T failedValue)? invalidEmail,
-    TResult? Function(T failedValue)? passwordNotMatchRequirements,
-    TResult? Function(T failedValue)? invalidJWT,
-    TResult? Function(T failedValue)? invalidJWTPayload,
-    TResult? Function(T failedValue)? mustOneUpperCaseCharacter,
-    TResult? Function(T failedValue)? mustOneLowerCaseCharacter,
-    TResult? Function(T failedValue)? mustOneNumericCharacter,
-    TResult? Function(T failedValue)? mustOneSpecialCharacter,
-    TResult? Function(T failedValue)? mustNotContainUserName,
-    TResult? Function(T failedValue)? mustNotMatchOldPassword,
-    TResult? Function(T failedValue)? mustMatchNewPassword,
-    TResult? Function(T failedValue)? invalidDate,
-    TResult? Function(T failedValue)? isEmpty,
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, int min)? subceedLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue)? multiline,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? passwordNotMatchRequirements,
+    TResult Function(T failedValue)? invalidJWT,
+    TResult Function(T failedValue)? invalidJWTPayload,
+    TResult Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult Function(T failedValue)? mustOneNumericCharacter,
+    TResult Function(T failedValue)? mustOneSpecialCharacter,
+    TResult Function(T failedValue)? mustNotContainUserName,
+    TResult Function(T failedValue)? mustNotMatchOldPassword,
+    TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
+    TResult Function(T failedValue)? isEmpty,
   }) {
     return mustNotContainUserName?.call(failedValue);
   }
@@ -3170,23 +3170,23 @@ class _$NotContainUserName<T> implements NotContainUserName<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ExceedingLength<T> value)? exceedingLength,
-    TResult? Function(SubceedLength<T> value)? subceedLength,
-    TResult? Function(Empty<T> value)? empty,
-    TResult? Function(Multiline<T> value)? multiline,
-    TResult? Function(InvalidEmail<T> value)? invalidEmail,
-    TResult? Function(ShortPassword<T> value)? passwordNotMatchRequirements,
-    TResult? Function(InvalidJWT<T> value)? invalidJWT,
-    TResult? Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
-    TResult? Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
-    TResult? Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
-    TResult? Function(OneNumeric<T> value)? mustOneNumericCharacter,
-    TResult? Function(OneSpecial<T> value)? mustOneSpecialCharacter,
-    TResult? Function(NotContainUserName<T> value)? mustNotContainUserName,
-    TResult? Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
-    TResult? Function(MatchNewPassword<T> value)? mustMatchNewPassword,
-    TResult? Function(InvalidDate<T> value)? invalidDate,
-    TResult? Function(isEmpty<T> value)? isEmpty,
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(SubceedLength<T> value)? subceedLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Multiline<T> value)? multiline,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult Function(InvalidJWT<T> value)? invalidJWT,
+    TResult Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
+    TResult Function(isEmpty<T> value)? isEmpty,
   }) {
     return mustNotContainUserName?.call(this);
   }
@@ -3239,25 +3239,27 @@ abstract class _$$NotMatchOldPasswordCopyWith<T, $Res>
           $Res Function(_$NotMatchOldPassword<T>) then) =
       __$$NotMatchOldPasswordCopyWithImpl<T, $Res>;
   @override
-  @useResult
   $Res call({T failedValue});
 }
 
 /// @nodoc
 class __$$NotMatchOldPasswordCopyWithImpl<T, $Res>
-    extends _$ValueFailureCopyWithImpl<T, $Res, _$NotMatchOldPassword<T>>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
     implements _$$NotMatchOldPasswordCopyWith<T, $Res> {
   __$$NotMatchOldPasswordCopyWithImpl(_$NotMatchOldPassword<T> _value,
       $Res Function(_$NotMatchOldPassword<T>) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$NotMatchOldPassword<T>));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$NotMatchOldPassword<T> get _value =>
+      super._value as _$NotMatchOldPassword<T>;
+
   @override
   $Res call({
-    Object? failedValue = null,
+    Object? failedValue = freezed,
   }) {
     return _then(_$NotMatchOldPassword<T>(
-      failedValue: null == failedValue
+      failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
               as T,
@@ -3293,7 +3295,6 @@ class _$NotMatchOldPassword<T> implements NotMatchOldPassword<T> {
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$NotMatchOldPasswordCopyWith<T, _$NotMatchOldPassword<T>> get copyWith =>
       __$$NotMatchOldPasswordCopyWithImpl<T, _$NotMatchOldPassword<T>>(
           this, _$identity);
@@ -3325,23 +3326,23 @@ class _$NotMatchOldPassword<T> implements NotMatchOldPassword<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T failedValue, int max)? exceedingLength,
-    TResult? Function(T failedValue, int min)? subceedLength,
-    TResult? Function(T failedValue)? empty,
-    TResult? Function(T failedValue)? multiline,
-    TResult? Function(T failedValue)? invalidEmail,
-    TResult? Function(T failedValue)? passwordNotMatchRequirements,
-    TResult? Function(T failedValue)? invalidJWT,
-    TResult? Function(T failedValue)? invalidJWTPayload,
-    TResult? Function(T failedValue)? mustOneUpperCaseCharacter,
-    TResult? Function(T failedValue)? mustOneLowerCaseCharacter,
-    TResult? Function(T failedValue)? mustOneNumericCharacter,
-    TResult? Function(T failedValue)? mustOneSpecialCharacter,
-    TResult? Function(T failedValue)? mustNotContainUserName,
-    TResult? Function(T failedValue)? mustNotMatchOldPassword,
-    TResult? Function(T failedValue)? mustMatchNewPassword,
-    TResult? Function(T failedValue)? invalidDate,
-    TResult? Function(T failedValue)? isEmpty,
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, int min)? subceedLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue)? multiline,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? passwordNotMatchRequirements,
+    TResult Function(T failedValue)? invalidJWT,
+    TResult Function(T failedValue)? invalidJWTPayload,
+    TResult Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult Function(T failedValue)? mustOneNumericCharacter,
+    TResult Function(T failedValue)? mustOneSpecialCharacter,
+    TResult Function(T failedValue)? mustNotContainUserName,
+    TResult Function(T failedValue)? mustNotMatchOldPassword,
+    TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
+    TResult Function(T failedValue)? isEmpty,
   }) {
     return mustNotMatchOldPassword?.call(failedValue);
   }
@@ -3404,23 +3405,23 @@ class _$NotMatchOldPassword<T> implements NotMatchOldPassword<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ExceedingLength<T> value)? exceedingLength,
-    TResult? Function(SubceedLength<T> value)? subceedLength,
-    TResult? Function(Empty<T> value)? empty,
-    TResult? Function(Multiline<T> value)? multiline,
-    TResult? Function(InvalidEmail<T> value)? invalidEmail,
-    TResult? Function(ShortPassword<T> value)? passwordNotMatchRequirements,
-    TResult? Function(InvalidJWT<T> value)? invalidJWT,
-    TResult? Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
-    TResult? Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
-    TResult? Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
-    TResult? Function(OneNumeric<T> value)? mustOneNumericCharacter,
-    TResult? Function(OneSpecial<T> value)? mustOneSpecialCharacter,
-    TResult? Function(NotContainUserName<T> value)? mustNotContainUserName,
-    TResult? Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
-    TResult? Function(MatchNewPassword<T> value)? mustMatchNewPassword,
-    TResult? Function(InvalidDate<T> value)? invalidDate,
-    TResult? Function(isEmpty<T> value)? isEmpty,
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(SubceedLength<T> value)? subceedLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Multiline<T> value)? multiline,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult Function(InvalidJWT<T> value)? invalidJWT,
+    TResult Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
+    TResult Function(isEmpty<T> value)? isEmpty,
   }) {
     return mustNotMatchOldPassword?.call(this);
   }
@@ -3473,25 +3474,26 @@ abstract class _$$MatchNewPasswordCopyWith<T, $Res>
           $Res Function(_$MatchNewPassword<T>) then) =
       __$$MatchNewPasswordCopyWithImpl<T, $Res>;
   @override
-  @useResult
   $Res call({T failedValue});
 }
 
 /// @nodoc
 class __$$MatchNewPasswordCopyWithImpl<T, $Res>
-    extends _$ValueFailureCopyWithImpl<T, $Res, _$MatchNewPassword<T>>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
     implements _$$MatchNewPasswordCopyWith<T, $Res> {
   __$$MatchNewPasswordCopyWithImpl(
       _$MatchNewPassword<T> _value, $Res Function(_$MatchNewPassword<T>) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$MatchNewPassword<T>));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$MatchNewPassword<T> get _value => super._value as _$MatchNewPassword<T>;
+
   @override
   $Res call({
-    Object? failedValue = null,
+    Object? failedValue = freezed,
   }) {
     return _then(_$MatchNewPassword<T>(
-      failedValue: null == failedValue
+      failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
               as T,
@@ -3527,7 +3529,6 @@ class _$MatchNewPassword<T> implements MatchNewPassword<T> {
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$MatchNewPasswordCopyWith<T, _$MatchNewPassword<T>> get copyWith =>
       __$$MatchNewPasswordCopyWithImpl<T, _$MatchNewPassword<T>>(
           this, _$identity);
@@ -3559,23 +3560,23 @@ class _$MatchNewPassword<T> implements MatchNewPassword<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T failedValue, int max)? exceedingLength,
-    TResult? Function(T failedValue, int min)? subceedLength,
-    TResult? Function(T failedValue)? empty,
-    TResult? Function(T failedValue)? multiline,
-    TResult? Function(T failedValue)? invalidEmail,
-    TResult? Function(T failedValue)? passwordNotMatchRequirements,
-    TResult? Function(T failedValue)? invalidJWT,
-    TResult? Function(T failedValue)? invalidJWTPayload,
-    TResult? Function(T failedValue)? mustOneUpperCaseCharacter,
-    TResult? Function(T failedValue)? mustOneLowerCaseCharacter,
-    TResult? Function(T failedValue)? mustOneNumericCharacter,
-    TResult? Function(T failedValue)? mustOneSpecialCharacter,
-    TResult? Function(T failedValue)? mustNotContainUserName,
-    TResult? Function(T failedValue)? mustNotMatchOldPassword,
-    TResult? Function(T failedValue)? mustMatchNewPassword,
-    TResult? Function(T failedValue)? invalidDate,
-    TResult? Function(T failedValue)? isEmpty,
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, int min)? subceedLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue)? multiline,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? passwordNotMatchRequirements,
+    TResult Function(T failedValue)? invalidJWT,
+    TResult Function(T failedValue)? invalidJWTPayload,
+    TResult Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult Function(T failedValue)? mustOneNumericCharacter,
+    TResult Function(T failedValue)? mustOneSpecialCharacter,
+    TResult Function(T failedValue)? mustNotContainUserName,
+    TResult Function(T failedValue)? mustNotMatchOldPassword,
+    TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
+    TResult Function(T failedValue)? isEmpty,
   }) {
     return mustMatchNewPassword?.call(failedValue);
   }
@@ -3638,23 +3639,23 @@ class _$MatchNewPassword<T> implements MatchNewPassword<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ExceedingLength<T> value)? exceedingLength,
-    TResult? Function(SubceedLength<T> value)? subceedLength,
-    TResult? Function(Empty<T> value)? empty,
-    TResult? Function(Multiline<T> value)? multiline,
-    TResult? Function(InvalidEmail<T> value)? invalidEmail,
-    TResult? Function(ShortPassword<T> value)? passwordNotMatchRequirements,
-    TResult? Function(InvalidJWT<T> value)? invalidJWT,
-    TResult? Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
-    TResult? Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
-    TResult? Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
-    TResult? Function(OneNumeric<T> value)? mustOneNumericCharacter,
-    TResult? Function(OneSpecial<T> value)? mustOneSpecialCharacter,
-    TResult? Function(NotContainUserName<T> value)? mustNotContainUserName,
-    TResult? Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
-    TResult? Function(MatchNewPassword<T> value)? mustMatchNewPassword,
-    TResult? Function(InvalidDate<T> value)? invalidDate,
-    TResult? Function(isEmpty<T> value)? isEmpty,
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(SubceedLength<T> value)? subceedLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Multiline<T> value)? multiline,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult Function(InvalidJWT<T> value)? invalidJWT,
+    TResult Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
+    TResult Function(isEmpty<T> value)? isEmpty,
   }) {
     return mustMatchNewPassword?.call(this);
   }
@@ -3707,25 +3708,26 @@ abstract class _$$InvalidDateCopyWith<T, $Res>
           _$InvalidDate<T> value, $Res Function(_$InvalidDate<T>) then) =
       __$$InvalidDateCopyWithImpl<T, $Res>;
   @override
-  @useResult
   $Res call({T failedValue});
 }
 
 /// @nodoc
 class __$$InvalidDateCopyWithImpl<T, $Res>
-    extends _$ValueFailureCopyWithImpl<T, $Res, _$InvalidDate<T>>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
     implements _$$InvalidDateCopyWith<T, $Res> {
   __$$InvalidDateCopyWithImpl(
       _$InvalidDate<T> _value, $Res Function(_$InvalidDate<T>) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$InvalidDate<T>));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$InvalidDate<T> get _value => super._value as _$InvalidDate<T>;
+
   @override
   $Res call({
-    Object? failedValue = null,
+    Object? failedValue = freezed,
   }) {
     return _then(_$InvalidDate<T>(
-      failedValue: null == failedValue
+      failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
               as T,
@@ -3761,7 +3763,6 @@ class _$InvalidDate<T> implements InvalidDate<T> {
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$InvalidDateCopyWith<T, _$InvalidDate<T>> get copyWith =>
       __$$InvalidDateCopyWithImpl<T, _$InvalidDate<T>>(this, _$identity);
 
@@ -3792,23 +3793,23 @@ class _$InvalidDate<T> implements InvalidDate<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T failedValue, int max)? exceedingLength,
-    TResult? Function(T failedValue, int min)? subceedLength,
-    TResult? Function(T failedValue)? empty,
-    TResult? Function(T failedValue)? multiline,
-    TResult? Function(T failedValue)? invalidEmail,
-    TResult? Function(T failedValue)? passwordNotMatchRequirements,
-    TResult? Function(T failedValue)? invalidJWT,
-    TResult? Function(T failedValue)? invalidJWTPayload,
-    TResult? Function(T failedValue)? mustOneUpperCaseCharacter,
-    TResult? Function(T failedValue)? mustOneLowerCaseCharacter,
-    TResult? Function(T failedValue)? mustOneNumericCharacter,
-    TResult? Function(T failedValue)? mustOneSpecialCharacter,
-    TResult? Function(T failedValue)? mustNotContainUserName,
-    TResult? Function(T failedValue)? mustNotMatchOldPassword,
-    TResult? Function(T failedValue)? mustMatchNewPassword,
-    TResult? Function(T failedValue)? invalidDate,
-    TResult? Function(T failedValue)? isEmpty,
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, int min)? subceedLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue)? multiline,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? passwordNotMatchRequirements,
+    TResult Function(T failedValue)? invalidJWT,
+    TResult Function(T failedValue)? invalidJWTPayload,
+    TResult Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult Function(T failedValue)? mustOneNumericCharacter,
+    TResult Function(T failedValue)? mustOneSpecialCharacter,
+    TResult Function(T failedValue)? mustNotContainUserName,
+    TResult Function(T failedValue)? mustNotMatchOldPassword,
+    TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
+    TResult Function(T failedValue)? isEmpty,
   }) {
     return invalidDate?.call(failedValue);
   }
@@ -3871,23 +3872,23 @@ class _$InvalidDate<T> implements InvalidDate<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ExceedingLength<T> value)? exceedingLength,
-    TResult? Function(SubceedLength<T> value)? subceedLength,
-    TResult? Function(Empty<T> value)? empty,
-    TResult? Function(Multiline<T> value)? multiline,
-    TResult? Function(InvalidEmail<T> value)? invalidEmail,
-    TResult? Function(ShortPassword<T> value)? passwordNotMatchRequirements,
-    TResult? Function(InvalidJWT<T> value)? invalidJWT,
-    TResult? Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
-    TResult? Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
-    TResult? Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
-    TResult? Function(OneNumeric<T> value)? mustOneNumericCharacter,
-    TResult? Function(OneSpecial<T> value)? mustOneSpecialCharacter,
-    TResult? Function(NotContainUserName<T> value)? mustNotContainUserName,
-    TResult? Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
-    TResult? Function(MatchNewPassword<T> value)? mustMatchNewPassword,
-    TResult? Function(InvalidDate<T> value)? invalidDate,
-    TResult? Function(isEmpty<T> value)? isEmpty,
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(SubceedLength<T> value)? subceedLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Multiline<T> value)? multiline,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult Function(InvalidJWT<T> value)? invalidJWT,
+    TResult Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
+    TResult Function(isEmpty<T> value)? isEmpty,
   }) {
     return invalidDate?.call(this);
   }
@@ -3939,25 +3940,26 @@ abstract class _$$isEmptyCopyWith<T, $Res>
           _$isEmpty<T> value, $Res Function(_$isEmpty<T>) then) =
       __$$isEmptyCopyWithImpl<T, $Res>;
   @override
-  @useResult
   $Res call({T failedValue});
 }
 
 /// @nodoc
 class __$$isEmptyCopyWithImpl<T, $Res>
-    extends _$ValueFailureCopyWithImpl<T, $Res, _$isEmpty<T>>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
     implements _$$isEmptyCopyWith<T, $Res> {
   __$$isEmptyCopyWithImpl(
       _$isEmpty<T> _value, $Res Function(_$isEmpty<T>) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$isEmpty<T>));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$isEmpty<T> get _value => super._value as _$isEmpty<T>;
+
   @override
   $Res call({
-    Object? failedValue = null,
+    Object? failedValue = freezed,
   }) {
     return _then(_$isEmpty<T>(
-      failedValue: null == failedValue
+      failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
               as T,
@@ -3993,7 +3995,6 @@ class _$isEmpty<T> implements isEmpty<T> {
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$isEmptyCopyWith<T, _$isEmpty<T>> get copyWith =>
       __$$isEmptyCopyWithImpl<T, _$isEmpty<T>>(this, _$identity);
 
@@ -4024,23 +4025,23 @@ class _$isEmpty<T> implements isEmpty<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T failedValue, int max)? exceedingLength,
-    TResult? Function(T failedValue, int min)? subceedLength,
-    TResult? Function(T failedValue)? empty,
-    TResult? Function(T failedValue)? multiline,
-    TResult? Function(T failedValue)? invalidEmail,
-    TResult? Function(T failedValue)? passwordNotMatchRequirements,
-    TResult? Function(T failedValue)? invalidJWT,
-    TResult? Function(T failedValue)? invalidJWTPayload,
-    TResult? Function(T failedValue)? mustOneUpperCaseCharacter,
-    TResult? Function(T failedValue)? mustOneLowerCaseCharacter,
-    TResult? Function(T failedValue)? mustOneNumericCharacter,
-    TResult? Function(T failedValue)? mustOneSpecialCharacter,
-    TResult? Function(T failedValue)? mustNotContainUserName,
-    TResult? Function(T failedValue)? mustNotMatchOldPassword,
-    TResult? Function(T failedValue)? mustMatchNewPassword,
-    TResult? Function(T failedValue)? invalidDate,
-    TResult? Function(T failedValue)? isEmpty,
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, int min)? subceedLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue)? multiline,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? passwordNotMatchRequirements,
+    TResult Function(T failedValue)? invalidJWT,
+    TResult Function(T failedValue)? invalidJWTPayload,
+    TResult Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult Function(T failedValue)? mustOneNumericCharacter,
+    TResult Function(T failedValue)? mustOneSpecialCharacter,
+    TResult Function(T failedValue)? mustNotContainUserName,
+    TResult Function(T failedValue)? mustNotMatchOldPassword,
+    TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? invalidDate,
+    TResult Function(T failedValue)? isEmpty,
   }) {
     return isEmpty?.call(failedValue);
   }
@@ -4103,23 +4104,23 @@ class _$isEmpty<T> implements isEmpty<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ExceedingLength<T> value)? exceedingLength,
-    TResult? Function(SubceedLength<T> value)? subceedLength,
-    TResult? Function(Empty<T> value)? empty,
-    TResult? Function(Multiline<T> value)? multiline,
-    TResult? Function(InvalidEmail<T> value)? invalidEmail,
-    TResult? Function(ShortPassword<T> value)? passwordNotMatchRequirements,
-    TResult? Function(InvalidJWT<T> value)? invalidJWT,
-    TResult? Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
-    TResult? Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
-    TResult? Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
-    TResult? Function(OneNumeric<T> value)? mustOneNumericCharacter,
-    TResult? Function(OneSpecial<T> value)? mustOneSpecialCharacter,
-    TResult? Function(NotContainUserName<T> value)? mustNotContainUserName,
-    TResult? Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
-    TResult? Function(MatchNewPassword<T> value)? mustMatchNewPassword,
-    TResult? Function(InvalidDate<T> value)? invalidDate,
-    TResult? Function(isEmpty<T> value)? isEmpty,
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(SubceedLength<T> value)? subceedLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Multiline<T> value)? multiline,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult Function(InvalidJWT<T> value)? invalidJWT,
+    TResult Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(InvalidDate<T> value)? invalidDate,
+    TResult Function(isEmpty<T> value)? isEmpty,
   }) {
     return isEmpty?.call(this);
   }

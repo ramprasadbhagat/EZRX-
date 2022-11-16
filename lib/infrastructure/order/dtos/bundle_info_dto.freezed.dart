@@ -43,8 +43,7 @@ mixin _$BundleInfoDto {
 abstract class $BundleInfoDtoCopyWith<$Res> {
   factory $BundleInfoDtoCopyWith(
           BundleInfoDto value, $Res Function(BundleInfoDto) then) =
-      _$BundleInfoDtoCopyWithImpl<$Res, BundleInfoDto>;
-  @useResult
+      _$BundleInfoDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'sequence') @HiveField(21, defaultValue: 1) int sequence,
       @JsonKey(name: 'quantity') @HiveField(22, defaultValue: 1) int quantity,
@@ -53,41 +52,39 @@ abstract class $BundleInfoDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BundleInfoDtoCopyWithImpl<$Res, $Val extends BundleInfoDto>
+class _$BundleInfoDtoCopyWithImpl<$Res>
     implements $BundleInfoDtoCopyWith<$Res> {
   _$BundleInfoDtoCopyWithImpl(this._value, this._then);
 
+  final BundleInfoDto _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(BundleInfoDto) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sequence = null,
-    Object? quantity = null,
-    Object? type = null,
-    Object? rate = null,
+    Object? sequence = freezed,
+    Object? quantity = freezed,
+    Object? type = freezed,
+    Object? rate = freezed,
   }) {
     return _then(_value.copyWith(
-      sequence: null == sequence
+      sequence: sequence == freezed
           ? _value.sequence
           : sequence // ignore: cast_nullable_to_non_nullable
               as int,
-      quantity: null == quantity
+      quantity: quantity == freezed
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      type: null == type
+      type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      rate: null == rate
+      rate: rate == freezed
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
-    ) as $Val);
+    ));
   }
 }
 
@@ -98,7 +95,6 @@ abstract class _$$_BundleInfoDtoCopyWith<$Res>
           _$_BundleInfoDto value, $Res Function(_$_BundleInfoDto) then) =
       __$$_BundleInfoDtoCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {@JsonKey(name: 'sequence') @HiveField(21, defaultValue: 1) int sequence,
       @JsonKey(name: 'quantity') @HiveField(22, defaultValue: 1) int quantity,
@@ -108,34 +104,36 @@ abstract class _$$_BundleInfoDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_BundleInfoDtoCopyWithImpl<$Res>
-    extends _$BundleInfoDtoCopyWithImpl<$Res, _$_BundleInfoDto>
+    extends _$BundleInfoDtoCopyWithImpl<$Res>
     implements _$$_BundleInfoDtoCopyWith<$Res> {
   __$$_BundleInfoDtoCopyWithImpl(
       _$_BundleInfoDto _value, $Res Function(_$_BundleInfoDto) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_BundleInfoDto));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_BundleInfoDto get _value => super._value as _$_BundleInfoDto;
+
   @override
   $Res call({
-    Object? sequence = null,
-    Object? quantity = null,
-    Object? type = null,
-    Object? rate = null,
+    Object? sequence = freezed,
+    Object? quantity = freezed,
+    Object? type = freezed,
+    Object? rate = freezed,
   }) {
     return _then(_$_BundleInfoDto(
-      sequence: null == sequence
+      sequence: sequence == freezed
           ? _value.sequence
           : sequence // ignore: cast_nullable_to_non_nullable
               as int,
-      quantity: null == quantity
+      quantity: quantity == freezed
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      type: null == type
+      type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      rate: null == rate
+      rate: rate == freezed
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
@@ -192,21 +190,23 @@ class _$_BundleInfoDto extends _BundleInfoDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BundleInfoDto &&
-            (identical(other.sequence, sequence) ||
-                other.sequence == sequence) &&
-            (identical(other.quantity, quantity) ||
-                other.quantity == quantity) &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.rate, rate) || other.rate == rate));
+            const DeepCollectionEquality().equals(other.sequence, sequence) &&
+            const DeepCollectionEquality().equals(other.quantity, quantity) &&
+            const DeepCollectionEquality().equals(other.type, type) &&
+            const DeepCollectionEquality().equals(other.rate, rate));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, sequence, quantity, type, rate);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(sequence),
+      const DeepCollectionEquality().hash(quantity),
+      const DeepCollectionEquality().hash(type),
+      const DeepCollectionEquality().hash(rate));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_BundleInfoDtoCopyWith<_$_BundleInfoDto> get copyWith =>
       __$$_BundleInfoDtoCopyWithImpl<_$_BundleInfoDto>(this, _$identity);
 

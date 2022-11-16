@@ -24,8 +24,8 @@ mixin _$AnnouncementEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getAnnouncement,
-    TResult? Function()? close,
+    TResult Function()? getAnnouncement,
+    TResult Function()? close,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,8 +43,8 @@ mixin _$AnnouncementEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetAnnouncement value)? getAnnouncement,
-    TResult? Function(_Close value)? close,
+    TResult Function(_GetAnnouncement value)? getAnnouncement,
+    TResult Function(_Close value)? close,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,18 +60,17 @@ mixin _$AnnouncementEvent {
 abstract class $AnnouncementEventCopyWith<$Res> {
   factory $AnnouncementEventCopyWith(
           AnnouncementEvent value, $Res Function(AnnouncementEvent) then) =
-      _$AnnouncementEventCopyWithImpl<$Res, AnnouncementEvent>;
+      _$AnnouncementEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$AnnouncementEventCopyWithImpl<$Res, $Val extends AnnouncementEvent>
+class _$AnnouncementEventCopyWithImpl<$Res>
     implements $AnnouncementEventCopyWith<$Res> {
   _$AnnouncementEventCopyWithImpl(this._value, this._then);
 
+  final AnnouncementEvent _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(AnnouncementEvent) _then;
 }
 
 /// @nodoc
@@ -83,11 +82,14 @@ abstract class _$$_GetAnnouncementCopyWith<$Res> {
 
 /// @nodoc
 class __$$_GetAnnouncementCopyWithImpl<$Res>
-    extends _$AnnouncementEventCopyWithImpl<$Res, _$_GetAnnouncement>
+    extends _$AnnouncementEventCopyWithImpl<$Res>
     implements _$$_GetAnnouncementCopyWith<$Res> {
   __$$_GetAnnouncementCopyWithImpl(
       _$_GetAnnouncement _value, $Res Function(_$_GetAnnouncement) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_GetAnnouncement));
+
+  @override
+  _$_GetAnnouncement get _value => super._value as _$_GetAnnouncement;
 }
 
 /// @nodoc
@@ -121,8 +123,8 @@ class _$_GetAnnouncement implements _GetAnnouncement {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getAnnouncement,
-    TResult? Function()? close,
+    TResult Function()? getAnnouncement,
+    TResult Function()? close,
   }) {
     return getAnnouncement?.call();
   }
@@ -152,8 +154,8 @@ class _$_GetAnnouncement implements _GetAnnouncement {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetAnnouncement value)? getAnnouncement,
-    TResult? Function(_Close value)? close,
+    TResult Function(_GetAnnouncement value)? getAnnouncement,
+    TResult Function(_Close value)? close,
   }) {
     return getAnnouncement?.call(this);
   }
@@ -183,11 +185,13 @@ abstract class _$$_CloseCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_CloseCopyWithImpl<$Res>
-    extends _$AnnouncementEventCopyWithImpl<$Res, _$_Close>
+class __$$_CloseCopyWithImpl<$Res> extends _$AnnouncementEventCopyWithImpl<$Res>
     implements _$$_CloseCopyWith<$Res> {
   __$$_CloseCopyWithImpl(_$_Close _value, $Res Function(_$_Close) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Close));
+
+  @override
+  _$_Close get _value => super._value as _$_Close;
 }
 
 /// @nodoc
@@ -221,8 +225,8 @@ class _$_Close implements _Close {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getAnnouncement,
-    TResult? Function()? close,
+    TResult Function()? getAnnouncement,
+    TResult Function()? close,
   }) {
     return close?.call();
   }
@@ -252,8 +256,8 @@ class _$_Close implements _Close {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetAnnouncement value)? getAnnouncement,
-    TResult? Function(_Close value)? close,
+    TResult Function(_GetAnnouncement value)? getAnnouncement,
+    TResult Function(_Close value)? close,
   }) {
     return close?.call(this);
   }
@@ -291,51 +295,47 @@ mixin _$AnnouncementState {
 abstract class $AnnouncementStateCopyWith<$Res> {
   factory $AnnouncementStateCopyWith(
           AnnouncementState value, $Res Function(AnnouncementState) then) =
-      _$AnnouncementStateCopyWithImpl<$Res, AnnouncementState>;
-  @useResult
+      _$AnnouncementStateCopyWithImpl<$Res>;
   $Res call({Announcement announcement, bool isLoading, bool isClosed});
 
   $AnnouncementCopyWith<$Res> get announcement;
 }
 
 /// @nodoc
-class _$AnnouncementStateCopyWithImpl<$Res, $Val extends AnnouncementState>
+class _$AnnouncementStateCopyWithImpl<$Res>
     implements $AnnouncementStateCopyWith<$Res> {
   _$AnnouncementStateCopyWithImpl(this._value, this._then);
 
+  final AnnouncementState _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(AnnouncementState) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? announcement = null,
-    Object? isLoading = null,
-    Object? isClosed = null,
+    Object? announcement = freezed,
+    Object? isLoading = freezed,
+    Object? isClosed = freezed,
   }) {
     return _then(_value.copyWith(
-      announcement: null == announcement
+      announcement: announcement == freezed
           ? _value.announcement
           : announcement // ignore: cast_nullable_to_non_nullable
               as Announcement,
-      isLoading: null == isLoading
+      isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      isClosed: null == isClosed
+      isClosed: isClosed == freezed
           ? _value.isClosed
           : isClosed // ignore: cast_nullable_to_non_nullable
               as bool,
-    ) as $Val);
+    ));
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $AnnouncementCopyWith<$Res> get announcement {
     return $AnnouncementCopyWith<$Res>(_value.announcement, (value) {
-      return _then(_value.copyWith(announcement: value) as $Val);
+      return _then(_value.copyWith(announcement: value));
     });
   }
 }
@@ -347,7 +347,6 @@ abstract class _$$_AnnouncementStateCopyWith<$Res>
           $Res Function(_$_AnnouncementState) then) =
       __$$_AnnouncementStateCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call({Announcement announcement, bool isLoading, bool isClosed});
 
   @override
@@ -356,29 +355,31 @@ abstract class _$$_AnnouncementStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_AnnouncementStateCopyWithImpl<$Res>
-    extends _$AnnouncementStateCopyWithImpl<$Res, _$_AnnouncementState>
+    extends _$AnnouncementStateCopyWithImpl<$Res>
     implements _$$_AnnouncementStateCopyWith<$Res> {
   __$$_AnnouncementStateCopyWithImpl(
       _$_AnnouncementState _value, $Res Function(_$_AnnouncementState) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_AnnouncementState));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_AnnouncementState get _value => super._value as _$_AnnouncementState;
+
   @override
   $Res call({
-    Object? announcement = null,
-    Object? isLoading = null,
-    Object? isClosed = null,
+    Object? announcement = freezed,
+    Object? isLoading = freezed,
+    Object? isClosed = freezed,
   }) {
     return _then(_$_AnnouncementState(
-      announcement: null == announcement
+      announcement: announcement == freezed
           ? _value.announcement
           : announcement // ignore: cast_nullable_to_non_nullable
               as Announcement,
-      isLoading: null == isLoading
+      isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      isClosed: null == isClosed
+      isClosed: isClosed == freezed
           ? _value.isClosed
           : isClosed // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -412,21 +413,21 @@ class _$_AnnouncementState extends _AnnouncementState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AnnouncementState &&
-            (identical(other.announcement, announcement) ||
-                other.announcement == announcement) &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
-            (identical(other.isClosed, isClosed) ||
-                other.isClosed == isClosed));
+            const DeepCollectionEquality()
+                .equals(other.announcement, announcement) &&
+            const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            const DeepCollectionEquality().equals(other.isClosed, isClosed));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, announcement, isLoading, isClosed);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(announcement),
+      const DeepCollectionEquality().hash(isLoading),
+      const DeepCollectionEquality().hash(isClosed));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_AnnouncementStateCopyWith<_$_AnnouncementState> get copyWith =>
       __$$_AnnouncementStateCopyWithImpl<_$_AnnouncementState>(
           this, _$identity);

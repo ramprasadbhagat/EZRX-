@@ -31,8 +31,7 @@ mixin _$CustomerAddress {
 abstract class $CustomerAddressCopyWith<$Res> {
   factory $CustomerAddressCopyWith(
           CustomerAddress value, $Res Function(CustomerAddress) then) =
-      _$CustomerAddressCopyWithImpl<$Res, CustomerAddress>;
-  @useResult
+      _$CustomerAddressCopyWithImpl<$Res>;
   $Res call(
       {String street1,
       String street2,
@@ -42,46 +41,44 @@ abstract class $CustomerAddressCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CustomerAddressCopyWithImpl<$Res, $Val extends CustomerAddress>
+class _$CustomerAddressCopyWithImpl<$Res>
     implements $CustomerAddressCopyWith<$Res> {
   _$CustomerAddressCopyWithImpl(this._value, this._then);
 
+  final CustomerAddress _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(CustomerAddress) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? street1 = null,
-    Object? street2 = null,
-    Object? street3 = null,
-    Object? street4 = null,
-    Object? street5 = null,
+    Object? street1 = freezed,
+    Object? street2 = freezed,
+    Object? street3 = freezed,
+    Object? street4 = freezed,
+    Object? street5 = freezed,
   }) {
     return _then(_value.copyWith(
-      street1: null == street1
+      street1: street1 == freezed
           ? _value.street1
           : street1 // ignore: cast_nullable_to_non_nullable
               as String,
-      street2: null == street2
+      street2: street2 == freezed
           ? _value.street2
           : street2 // ignore: cast_nullable_to_non_nullable
               as String,
-      street3: null == street3
+      street3: street3 == freezed
           ? _value.street3
           : street3 // ignore: cast_nullable_to_non_nullable
               as String,
-      street4: null == street4
+      street4: street4 == freezed
           ? _value.street4
           : street4 // ignore: cast_nullable_to_non_nullable
               as String,
-      street5: null == street5
+      street5: street5 == freezed
           ? _value.street5
           : street5 // ignore: cast_nullable_to_non_nullable
               as String,
-    ) as $Val);
+    ));
   }
 }
 
@@ -92,7 +89,6 @@ abstract class _$$_CustomerAddressCopyWith<$Res>
           _$_CustomerAddress value, $Res Function(_$_CustomerAddress) then) =
       __$$_CustomerAddressCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {String street1,
       String street2,
@@ -103,39 +99,41 @@ abstract class _$$_CustomerAddressCopyWith<$Res>
 
 /// @nodoc
 class __$$_CustomerAddressCopyWithImpl<$Res>
-    extends _$CustomerAddressCopyWithImpl<$Res, _$_CustomerAddress>
+    extends _$CustomerAddressCopyWithImpl<$Res>
     implements _$$_CustomerAddressCopyWith<$Res> {
   __$$_CustomerAddressCopyWithImpl(
       _$_CustomerAddress _value, $Res Function(_$_CustomerAddress) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_CustomerAddress));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_CustomerAddress get _value => super._value as _$_CustomerAddress;
+
   @override
   $Res call({
-    Object? street1 = null,
-    Object? street2 = null,
-    Object? street3 = null,
-    Object? street4 = null,
-    Object? street5 = null,
+    Object? street1 = freezed,
+    Object? street2 = freezed,
+    Object? street3 = freezed,
+    Object? street4 = freezed,
+    Object? street5 = freezed,
   }) {
     return _then(_$_CustomerAddress(
-      street1: null == street1
+      street1: street1 == freezed
           ? _value.street1
           : street1 // ignore: cast_nullable_to_non_nullable
               as String,
-      street2: null == street2
+      street2: street2 == freezed
           ? _value.street2
           : street2 // ignore: cast_nullable_to_non_nullable
               as String,
-      street3: null == street3
+      street3: street3 == freezed
           ? _value.street3
           : street3 // ignore: cast_nullable_to_non_nullable
               as String,
-      street4: null == street4
+      street4: street4 == freezed
           ? _value.street4
           : street4 // ignore: cast_nullable_to_non_nullable
               as String,
-      street5: null == street5
+      street5: street5 == freezed
           ? _value.street5
           : street5 // ignore: cast_nullable_to_non_nullable
               as String,
@@ -170,20 +168,24 @@ class _$_CustomerAddress extends _CustomerAddress {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CustomerAddress &&
-            (identical(other.street1, street1) || other.street1 == street1) &&
-            (identical(other.street2, street2) || other.street2 == street2) &&
-            (identical(other.street3, street3) || other.street3 == street3) &&
-            (identical(other.street4, street4) || other.street4 == street4) &&
-            (identical(other.street5, street5) || other.street5 == street5));
+            const DeepCollectionEquality().equals(other.street1, street1) &&
+            const DeepCollectionEquality().equals(other.street2, street2) &&
+            const DeepCollectionEquality().equals(other.street3, street3) &&
+            const DeepCollectionEquality().equals(other.street4, street4) &&
+            const DeepCollectionEquality().equals(other.street5, street5));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, street1, street2, street3, street4, street5);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(street1),
+      const DeepCollectionEquality().hash(street2),
+      const DeepCollectionEquality().hash(street3),
+      const DeepCollectionEquality().hash(street4),
+      const DeepCollectionEquality().hash(street5));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_CustomerAddressCopyWith<_$_CustomerAddress> get copyWith =>
       __$$_CustomerAddressCopyWithImpl<_$_CustomerAddress>(this, _$identity);
 }

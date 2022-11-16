@@ -26,8 +26,8 @@ mixin _$BannerEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(bool isPreSalesOrg, SalesOrganisation salesOrganisation)?
+    TResult Function()? initialized,
+    TResult Function(bool isPreSalesOrg, SalesOrganisation salesOrganisation)?
         fetch,
   }) =>
       throw _privateConstructorUsedError;
@@ -47,8 +47,8 @@ mixin _$BannerEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,18 +64,16 @@ mixin _$BannerEvent {
 abstract class $BannerEventCopyWith<$Res> {
   factory $BannerEventCopyWith(
           BannerEvent value, $Res Function(BannerEvent) then) =
-      _$BannerEventCopyWithImpl<$Res, BannerEvent>;
+      _$BannerEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$BannerEventCopyWithImpl<$Res, $Val extends BannerEvent>
-    implements $BannerEventCopyWith<$Res> {
+class _$BannerEventCopyWithImpl<$Res> implements $BannerEventCopyWith<$Res> {
   _$BannerEventCopyWithImpl(this._value, this._then);
 
+  final BannerEvent _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(BannerEvent) _then;
 }
 
 /// @nodoc
@@ -86,12 +84,14 @@ abstract class _$$_InitializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$BannerEventCopyWithImpl<$Res, _$_Initialized>
+class __$$_InitializedCopyWithImpl<$Res> extends _$BannerEventCopyWithImpl<$Res>
     implements _$$_InitializedCopyWith<$Res> {
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Initialized));
+
+  @override
+  _$_Initialized get _value => super._value as _$_Initialized;
 }
 
 /// @nodoc
@@ -127,8 +127,8 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(bool isPreSalesOrg, SalesOrganisation salesOrganisation)?
+    TResult Function()? initialized,
+    TResult Function(bool isPreSalesOrg, SalesOrganisation salesOrganisation)?
         fetch,
   }) {
     return initialized?.call();
@@ -160,8 +160,8 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
   }) {
     return initialized?.call(this);
   }
@@ -188,31 +188,31 @@ abstract class _Initialized implements BannerEvent {
 abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
-  @useResult
   $Res call({bool isPreSalesOrg, SalesOrganisation salesOrganisation});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$BannerEventCopyWithImpl<$Res, _$_Fetch>
+class __$$_FetchCopyWithImpl<$Res> extends _$BannerEventCopyWithImpl<$Res>
     implements _$$_FetchCopyWith<$Res> {
   __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_Fetch));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_Fetch get _value => super._value as _$_Fetch;
+
   @override
   $Res call({
-    Object? isPreSalesOrg = null,
-    Object? salesOrganisation = null,
+    Object? isPreSalesOrg = freezed,
+    Object? salesOrganisation = freezed,
   }) {
     return _then(_$_Fetch(
-      isPreSalesOrg: null == isPreSalesOrg
+      isPreSalesOrg: isPreSalesOrg == freezed
           ? _value.isPreSalesOrg
           : isPreSalesOrg // ignore: cast_nullable_to_non_nullable
               as bool,
-      salesOrganisation: null == salesOrganisation
+      salesOrganisation: salesOrganisation == freezed
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
@@ -220,7 +220,6 @@ class __$$_FetchCopyWithImpl<$Res>
   }
 
   @override
-  @pragma('vm:prefer-inline')
   $SalesOrganisationCopyWith<$Res> get salesOrganisation {
     return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
       return _then(_value.copyWith(salesOrganisation: value));
@@ -249,19 +248,20 @@ class _$_Fetch implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
-            (identical(other.isPreSalesOrg, isPreSalesOrg) ||
-                other.isPreSalesOrg == isPreSalesOrg) &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation));
+            const DeepCollectionEquality()
+                .equals(other.isPreSalesOrg, isPreSalesOrg) &&
+            const DeepCollectionEquality()
+                .equals(other.salesOrganisation, salesOrganisation));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isPreSalesOrg, salesOrganisation);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(isPreSalesOrg),
+      const DeepCollectionEquality().hash(salesOrganisation));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
 
@@ -279,8 +279,8 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(bool isPreSalesOrg, SalesOrganisation salesOrganisation)?
+    TResult Function()? initialized,
+    TResult Function(bool isPreSalesOrg, SalesOrganisation salesOrganisation)?
         fetch,
   }) {
     return fetch?.call(isPreSalesOrg, salesOrganisation);
@@ -312,8 +312,8 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
   }) {
     return fetch?.call(this);
   }
@@ -359,39 +359,35 @@ mixin _$BannerState {
 abstract class $BannerStateCopyWith<$Res> {
   factory $BannerStateCopyWith(
           BannerState value, $Res Function(BannerState) then) =
-      _$BannerStateCopyWithImpl<$Res, BannerState>;
-  @useResult
+      _$BannerStateCopyWithImpl<$Res>;
   $Res call(
       {List<BannerItem> banner,
       Option<Either<ApiFailure, dynamic>> bannerFailureOrSuccessOption});
 }
 
 /// @nodoc
-class _$BannerStateCopyWithImpl<$Res, $Val extends BannerState>
-    implements $BannerStateCopyWith<$Res> {
+class _$BannerStateCopyWithImpl<$Res> implements $BannerStateCopyWith<$Res> {
   _$BannerStateCopyWithImpl(this._value, this._then);
 
+  final BannerState _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(BannerState) _then;
 
-  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? banner = null,
-    Object? bannerFailureOrSuccessOption = null,
+    Object? banner = freezed,
+    Object? bannerFailureOrSuccessOption = freezed,
   }) {
     return _then(_value.copyWith(
-      banner: null == banner
+      banner: banner == freezed
           ? _value.banner
           : banner // ignore: cast_nullable_to_non_nullable
               as List<BannerItem>,
-      bannerFailureOrSuccessOption: null == bannerFailureOrSuccessOption
+      bannerFailureOrSuccessOption: bannerFailureOrSuccessOption == freezed
           ? _value.bannerFailureOrSuccessOption
           : bannerFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-    ) as $Val);
+    ));
   }
 }
 
@@ -402,32 +398,32 @@ abstract class _$$_BannerStateCopyWith<$Res>
           _$_BannerState value, $Res Function(_$_BannerState) then) =
       __$$_BannerStateCopyWithImpl<$Res>;
   @override
-  @useResult
   $Res call(
       {List<BannerItem> banner,
       Option<Either<ApiFailure, dynamic>> bannerFailureOrSuccessOption});
 }
 
 /// @nodoc
-class __$$_BannerStateCopyWithImpl<$Res>
-    extends _$BannerStateCopyWithImpl<$Res, _$_BannerState>
+class __$$_BannerStateCopyWithImpl<$Res> extends _$BannerStateCopyWithImpl<$Res>
     implements _$$_BannerStateCopyWith<$Res> {
   __$$_BannerStateCopyWithImpl(
       _$_BannerState _value, $Res Function(_$_BannerState) _then)
-      : super(_value, _then);
+      : super(_value, (v) => _then(v as _$_BannerState));
 
-  @pragma('vm:prefer-inline')
+  @override
+  _$_BannerState get _value => super._value as _$_BannerState;
+
   @override
   $Res call({
-    Object? banner = null,
-    Object? bannerFailureOrSuccessOption = null,
+    Object? banner = freezed,
+    Object? bannerFailureOrSuccessOption = freezed,
   }) {
     return _then(_$_BannerState(
-      banner: null == banner
+      banner: banner == freezed
           ? _value._banner
           : banner // ignore: cast_nullable_to_non_nullable
               as List<BannerItem>,
-      bannerFailureOrSuccessOption: null == bannerFailureOrSuccessOption
+      bannerFailureOrSuccessOption: bannerFailureOrSuccessOption == freezed
           ? _value.bannerFailureOrSuccessOption
           : bannerFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
@@ -464,21 +460,19 @@ class _$_BannerState implements _BannerState {
         (other.runtimeType == runtimeType &&
             other is _$_BannerState &&
             const DeepCollectionEquality().equals(other._banner, _banner) &&
-            (identical(other.bannerFailureOrSuccessOption,
-                    bannerFailureOrSuccessOption) ||
-                other.bannerFailureOrSuccessOption ==
-                    bannerFailureOrSuccessOption));
+            const DeepCollectionEquality().equals(
+                other.bannerFailureOrSuccessOption,
+                bannerFailureOrSuccessOption));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_banner),
-      bannerFailureOrSuccessOption);
+      const DeepCollectionEquality().hash(bannerFailureOrSuccessOption));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
   _$$_BannerStateCopyWith<_$_BannerState> get copyWith =>
       __$$_BannerStateCopyWithImpl<_$_BannerState>(this, _$identity);
 }
