@@ -41,7 +41,9 @@ abstract class $OrderHistoryDetailsOrderItemDetailsDtoCopyWith<$Res> {
   factory $OrderHistoryDetailsOrderItemDetailsDtoCopyWith(
           OrderHistoryDetailsOrderItemDetailsDto value,
           $Res Function(OrderHistoryDetailsOrderItemDetailsDto) then) =
-      _$OrderHistoryDetailsOrderItemDetailsDtoCopyWithImpl<$Res>;
+      _$OrderHistoryDetailsOrderItemDetailsDtoCopyWithImpl<$Res,
+          OrderHistoryDetailsOrderItemDetailsDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'DiscountCode', defaultValue: '')
           String discountCode,
@@ -52,34 +54,37 @@ abstract class $OrderHistoryDetailsOrderItemDetailsDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OrderHistoryDetailsOrderItemDetailsDtoCopyWithImpl<$Res>
+class _$OrderHistoryDetailsOrderItemDetailsDtoCopyWithImpl<$Res,
+        $Val extends OrderHistoryDetailsOrderItemDetailsDto>
     implements $OrderHistoryDetailsOrderItemDetailsDtoCopyWith<$Res> {
   _$OrderHistoryDetailsOrderItemDetailsDtoCopyWithImpl(this._value, this._then);
 
-  final OrderHistoryDetailsOrderItemDetailsDto _value;
   // ignore: unused_field
-  final $Res Function(OrderHistoryDetailsOrderItemDetailsDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? discountCode = freezed,
-    Object? discountDescription = freezed,
-    Object? rate = freezed,
+    Object? discountCode = null,
+    Object? discountDescription = null,
+    Object? rate = null,
   }) {
     return _then(_value.copyWith(
-      discountCode: discountCode == freezed
+      discountCode: null == discountCode
           ? _value.discountCode
           : discountCode // ignore: cast_nullable_to_non_nullable
               as String,
-      discountDescription: discountDescription == freezed
+      discountDescription: null == discountDescription
           ? _value.discountDescription
           : discountDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      rate: rate == freezed
+      rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -91,6 +96,7 @@ abstract class _$$_OrderHistoryDetailsOrderItemDetailsDtoCopyWith<$Res>
           $Res Function(_$_OrderHistoryDetailsOrderItemDetailsDto) then) =
       __$$_OrderHistoryDetailsOrderItemDetailsDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'DiscountCode', defaultValue: '')
           String discountCode,
@@ -102,34 +108,31 @@ abstract class _$$_OrderHistoryDetailsOrderItemDetailsDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_OrderHistoryDetailsOrderItemDetailsDtoCopyWithImpl<$Res>
-    extends _$OrderHistoryDetailsOrderItemDetailsDtoCopyWithImpl<$Res>
+    extends _$OrderHistoryDetailsOrderItemDetailsDtoCopyWithImpl<$Res,
+        _$_OrderHistoryDetailsOrderItemDetailsDto>
     implements _$$_OrderHistoryDetailsOrderItemDetailsDtoCopyWith<$Res> {
   __$$_OrderHistoryDetailsOrderItemDetailsDtoCopyWithImpl(
       _$_OrderHistoryDetailsOrderItemDetailsDto _value,
       $Res Function(_$_OrderHistoryDetailsOrderItemDetailsDto) _then)
-      : super(_value,
-            (v) => _then(v as _$_OrderHistoryDetailsOrderItemDetailsDto));
+      : super(_value, _then);
 
-  @override
-  _$_OrderHistoryDetailsOrderItemDetailsDto get _value =>
-      super._value as _$_OrderHistoryDetailsOrderItemDetailsDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? discountCode = freezed,
-    Object? discountDescription = freezed,
-    Object? rate = freezed,
+    Object? discountCode = null,
+    Object? discountDescription = null,
+    Object? rate = null,
   }) {
     return _then(_$_OrderHistoryDetailsOrderItemDetailsDto(
-      discountCode: discountCode == freezed
+      discountCode: null == discountCode
           ? _value.discountCode
           : discountCode // ignore: cast_nullable_to_non_nullable
               as String,
-      discountDescription: discountDescription == freezed
+      discountDescription: null == discountDescription
           ? _value.discountDescription
           : discountDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      rate: rate == freezed
+      rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as String,
@@ -174,23 +177,21 @@ class _$_OrderHistoryDetailsOrderItemDetailsDto
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryDetailsOrderItemDetailsDto &&
-            const DeepCollectionEquality()
-                .equals(other.discountCode, discountCode) &&
-            const DeepCollectionEquality()
-                .equals(other.discountDescription, discountDescription) &&
-            const DeepCollectionEquality().equals(other.rate, rate));
+            (identical(other.discountCode, discountCode) ||
+                other.discountCode == discountCode) &&
+            (identical(other.discountDescription, discountDescription) ||
+                other.discountDescription == discountDescription) &&
+            (identical(other.rate, rate) || other.rate == rate));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(discountCode),
-      const DeepCollectionEquality().hash(discountDescription),
-      const DeepCollectionEquality().hash(rate));
+  int get hashCode =>
+      Object.hash(runtimeType, discountCode, discountDescription, rate);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OrderHistoryDetailsOrderItemDetailsDtoCopyWith<
           _$_OrderHistoryDetailsOrderItemDetailsDto>
       get copyWith => __$$_OrderHistoryDetailsOrderItemDetailsDtoCopyWithImpl<

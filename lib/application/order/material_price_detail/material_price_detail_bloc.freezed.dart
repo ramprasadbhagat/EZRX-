@@ -26,7 +26,8 @@ mixin _$MaterialPriceDetailEvent {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)
+            String pickAndPack,
+            bool skipFOCCheck)
         refresh,
     required TResult Function(
             User user,
@@ -35,7 +36,8 @@ mixin _$MaterialPriceDetailEvent {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)
+            String pickAndPack,
+            bool skipFOCCheck)
         fetch,
   }) =>
       throw _privateConstructorUsedError;
@@ -49,7 +51,8 @@ mixin _$MaterialPriceDetailEvent {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)?
+            String pickAndPack,
+            bool skipFOCCheck)?
         refresh,
     TResult? Function(
             User user,
@@ -58,7 +61,8 @@ mixin _$MaterialPriceDetailEvent {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)?
+            String pickAndPack,
+            bool skipFOCCheck)?
         fetch,
   }) =>
       throw _privateConstructorUsedError;
@@ -72,7 +76,8 @@ mixin _$MaterialPriceDetailEvent {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)?
+            String pickAndPack,
+            bool skipFOCCheck)?
         refresh,
     TResult Function(
             User user,
@@ -81,7 +86,8 @@ mixin _$MaterialPriceDetailEvent {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)?
+            String pickAndPack,
+            bool skipFOCCheck)?
         fetch,
     required TResult orElse(),
   }) =>
@@ -175,7 +181,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)
+            String pickAndPack,
+            bool skipFOCCheck)
         refresh,
     required TResult Function(
             User user,
@@ -184,7 +191,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)
+            String pickAndPack,
+            bool skipFOCCheck)
         fetch,
   }) {
     return initialized();
@@ -201,7 +209,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)?
+            String pickAndPack,
+            bool skipFOCCheck)?
         refresh,
     TResult? Function(
             User user,
@@ -210,7 +219,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)?
+            String pickAndPack,
+            bool skipFOCCheck)?
         fetch,
   }) {
     return initialized?.call();
@@ -227,7 +237,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)?
+            String pickAndPack,
+            bool skipFOCCheck)?
         refresh,
     TResult Function(
             User user,
@@ -236,7 +247,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)?
+            String pickAndPack,
+            bool skipFOCCheck)?
         fetch,
     required TResult orElse(),
   }) {
@@ -298,7 +310,8 @@ abstract class _$$_RefreshCopyWith<$Res> {
       SalesOrganisationConfigs salesOrganisationConfigs,
       ShipToInfo shipToCode,
       List<MaterialQueryInfo> materialInfoList,
-      String pickAndPack});
+      String pickAndPack,
+      bool skipFOCCheck});
 
   $UserCopyWith<$Res> get user;
   $CustomerCodeInfoCopyWith<$Res> get customerCode;
@@ -324,6 +337,7 @@ class __$$_RefreshCopyWithImpl<$Res>
     Object? shipToCode = null,
     Object? materialInfoList = null,
     Object? pickAndPack = null,
+    Object? skipFOCCheck = null,
   }) {
     return _then(_$_Refresh(
       user: null == user
@@ -354,6 +368,10 @@ class __$$_RefreshCopyWithImpl<$Res>
           ? _value.pickAndPack
           : pickAndPack // ignore: cast_nullable_to_non_nullable
               as String,
+      skipFOCCheck: null == skipFOCCheck
+          ? _value.skipFOCCheck
+          : skipFOCCheck // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -409,7 +427,8 @@ class _$_Refresh implements _Refresh {
       required this.salesOrganisationConfigs,
       required this.shipToCode,
       required final List<MaterialQueryInfo> materialInfoList,
-      required this.pickAndPack})
+      required this.pickAndPack,
+      this.skipFOCCheck = false})
       : _materialInfoList = materialInfoList;
 
   @override
@@ -431,10 +450,13 @@ class _$_Refresh implements _Refresh {
 
   @override
   final String pickAndPack;
+  @override
+  @JsonKey()
+  final bool skipFOCCheck;
 
   @override
   String toString() {
-    return 'MaterialPriceDetailEvent.refresh(user: $user, customerCode: $customerCode, salesOrganisation: $salesOrganisation, salesOrganisationConfigs: $salesOrganisationConfigs, shipToCode: $shipToCode, materialInfoList: $materialInfoList, pickAndPack: $pickAndPack)';
+    return 'MaterialPriceDetailEvent.refresh(user: $user, customerCode: $customerCode, salesOrganisation: $salesOrganisation, salesOrganisationConfigs: $salesOrganisationConfigs, shipToCode: $shipToCode, materialInfoList: $materialInfoList, pickAndPack: $pickAndPack, skipFOCCheck: $skipFOCCheck)';
   }
 
   @override
@@ -455,7 +477,9 @@ class _$_Refresh implements _Refresh {
             const DeepCollectionEquality()
                 .equals(other._materialInfoList, _materialInfoList) &&
             (identical(other.pickAndPack, pickAndPack) ||
-                other.pickAndPack == pickAndPack));
+                other.pickAndPack == pickAndPack) &&
+            (identical(other.skipFOCCheck, skipFOCCheck) ||
+                other.skipFOCCheck == skipFOCCheck));
   }
 
   @override
@@ -467,7 +491,8 @@ class _$_Refresh implements _Refresh {
       salesOrganisationConfigs,
       shipToCode,
       const DeepCollectionEquality().hash(_materialInfoList),
-      pickAndPack);
+      pickAndPack,
+      skipFOCCheck);
 
   @JsonKey(ignore: true)
   @override
@@ -486,7 +511,8 @@ class _$_Refresh implements _Refresh {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)
+            String pickAndPack,
+            bool skipFOCCheck)
         refresh,
     required TResult Function(
             User user,
@@ -495,11 +521,19 @@ class _$_Refresh implements _Refresh {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)
+            String pickAndPack,
+            bool skipFOCCheck)
         fetch,
   }) {
-    return refresh(user, customerCode, salesOrganisation,
-        salesOrganisationConfigs, shipToCode, materialInfoList, pickAndPack);
+    return refresh(
+        user,
+        customerCode,
+        salesOrganisation,
+        salesOrganisationConfigs,
+        shipToCode,
+        materialInfoList,
+        pickAndPack,
+        skipFOCCheck);
   }
 
   @override
@@ -513,7 +547,8 @@ class _$_Refresh implements _Refresh {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)?
+            String pickAndPack,
+            bool skipFOCCheck)?
         refresh,
     TResult? Function(
             User user,
@@ -522,11 +557,19 @@ class _$_Refresh implements _Refresh {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)?
+            String pickAndPack,
+            bool skipFOCCheck)?
         fetch,
   }) {
-    return refresh?.call(user, customerCode, salesOrganisation,
-        salesOrganisationConfigs, shipToCode, materialInfoList, pickAndPack);
+    return refresh?.call(
+        user,
+        customerCode,
+        salesOrganisation,
+        salesOrganisationConfigs,
+        shipToCode,
+        materialInfoList,
+        pickAndPack,
+        skipFOCCheck);
   }
 
   @override
@@ -540,7 +583,8 @@ class _$_Refresh implements _Refresh {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)?
+            String pickAndPack,
+            bool skipFOCCheck)?
         refresh,
     TResult Function(
             User user,
@@ -549,13 +593,21 @@ class _$_Refresh implements _Refresh {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)?
+            String pickAndPack,
+            bool skipFOCCheck)?
         fetch,
     required TResult orElse(),
   }) {
     if (refresh != null) {
-      return refresh(user, customerCode, salesOrganisation,
-          salesOrganisationConfigs, shipToCode, materialInfoList, pickAndPack);
+      return refresh(
+          user,
+          customerCode,
+          salesOrganisation,
+          salesOrganisationConfigs,
+          shipToCode,
+          materialInfoList,
+          pickAndPack,
+          skipFOCCheck);
     }
     return orElse();
   }
@@ -603,7 +655,8 @@ abstract class _Refresh implements MaterialPriceDetailEvent {
       required final SalesOrganisationConfigs salesOrganisationConfigs,
       required final ShipToInfo shipToCode,
       required final List<MaterialQueryInfo> materialInfoList,
-      required final String pickAndPack}) = _$_Refresh;
+      required final String pickAndPack,
+      final bool skipFOCCheck}) = _$_Refresh;
 
   User get user;
   CustomerCodeInfo get customerCode;
@@ -612,6 +665,7 @@ abstract class _Refresh implements MaterialPriceDetailEvent {
   ShipToInfo get shipToCode;
   List<MaterialQueryInfo> get materialInfoList;
   String get pickAndPack;
+  bool get skipFOCCheck;
   @JsonKey(ignore: true)
   _$$_RefreshCopyWith<_$_Refresh> get copyWith =>
       throw _privateConstructorUsedError;
@@ -629,7 +683,8 @@ abstract class _$$_FetchCopyWith<$Res> {
       SalesOrganisationConfigs salesOrganisationConfigs,
       ShipToInfo shipToCode,
       List<MaterialQueryInfo> materialInfoList,
-      String pickAndPack});
+      String pickAndPack,
+      bool skipFOCCheck});
 
   $UserCopyWith<$Res> get user;
   $CustomerCodeInfoCopyWith<$Res> get customerCode;
@@ -655,6 +710,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? shipToCode = null,
     Object? materialInfoList = null,
     Object? pickAndPack = null,
+    Object? skipFOCCheck = null,
   }) {
     return _then(_$_Fetch(
       user: null == user
@@ -685,6 +741,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.pickAndPack
           : pickAndPack // ignore: cast_nullable_to_non_nullable
               as String,
+      skipFOCCheck: null == skipFOCCheck
+          ? _value.skipFOCCheck
+          : skipFOCCheck // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -740,7 +800,8 @@ class _$_Fetch implements _Fetch {
       required this.salesOrganisationConfigs,
       required this.shipToCode,
       required final List<MaterialQueryInfo> materialInfoList,
-      required this.pickAndPack})
+      required this.pickAndPack,
+      this.skipFOCCheck = false})
       : _materialInfoList = materialInfoList;
 
   @override
@@ -762,10 +823,13 @@ class _$_Fetch implements _Fetch {
 
   @override
   final String pickAndPack;
+  @override
+  @JsonKey()
+  final bool skipFOCCheck;
 
   @override
   String toString() {
-    return 'MaterialPriceDetailEvent.fetch(user: $user, customerCode: $customerCode, salesOrganisation: $salesOrganisation, salesOrganisationConfigs: $salesOrganisationConfigs, shipToCode: $shipToCode, materialInfoList: $materialInfoList, pickAndPack: $pickAndPack)';
+    return 'MaterialPriceDetailEvent.fetch(user: $user, customerCode: $customerCode, salesOrganisation: $salesOrganisation, salesOrganisationConfigs: $salesOrganisationConfigs, shipToCode: $shipToCode, materialInfoList: $materialInfoList, pickAndPack: $pickAndPack, skipFOCCheck: $skipFOCCheck)';
   }
 
   @override
@@ -786,7 +850,9 @@ class _$_Fetch implements _Fetch {
             const DeepCollectionEquality()
                 .equals(other._materialInfoList, _materialInfoList) &&
             (identical(other.pickAndPack, pickAndPack) ||
-                other.pickAndPack == pickAndPack));
+                other.pickAndPack == pickAndPack) &&
+            (identical(other.skipFOCCheck, skipFOCCheck) ||
+                other.skipFOCCheck == skipFOCCheck));
   }
 
   @override
@@ -798,7 +864,8 @@ class _$_Fetch implements _Fetch {
       salesOrganisationConfigs,
       shipToCode,
       const DeepCollectionEquality().hash(_materialInfoList),
-      pickAndPack);
+      pickAndPack,
+      skipFOCCheck);
 
   @JsonKey(ignore: true)
   @override
@@ -817,7 +884,8 @@ class _$_Fetch implements _Fetch {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)
+            String pickAndPack,
+            bool skipFOCCheck)
         refresh,
     required TResult Function(
             User user,
@@ -826,11 +894,19 @@ class _$_Fetch implements _Fetch {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)
+            String pickAndPack,
+            bool skipFOCCheck)
         fetch,
   }) {
-    return fetch(user, customerCode, salesOrganisation,
-        salesOrganisationConfigs, shipToCode, materialInfoList, pickAndPack);
+    return fetch(
+        user,
+        customerCode,
+        salesOrganisation,
+        salesOrganisationConfigs,
+        shipToCode,
+        materialInfoList,
+        pickAndPack,
+        skipFOCCheck);
   }
 
   @override
@@ -844,7 +920,8 @@ class _$_Fetch implements _Fetch {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)?
+            String pickAndPack,
+            bool skipFOCCheck)?
         refresh,
     TResult? Function(
             User user,
@@ -853,11 +930,19 @@ class _$_Fetch implements _Fetch {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)?
+            String pickAndPack,
+            bool skipFOCCheck)?
         fetch,
   }) {
-    return fetch?.call(user, customerCode, salesOrganisation,
-        salesOrganisationConfigs, shipToCode, materialInfoList, pickAndPack);
+    return fetch?.call(
+        user,
+        customerCode,
+        salesOrganisation,
+        salesOrganisationConfigs,
+        shipToCode,
+        materialInfoList,
+        pickAndPack,
+        skipFOCCheck);
   }
 
   @override
@@ -871,7 +956,8 @@ class _$_Fetch implements _Fetch {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)?
+            String pickAndPack,
+            bool skipFOCCheck)?
         refresh,
     TResult Function(
             User user,
@@ -880,13 +966,21 @@ class _$_Fetch implements _Fetch {
             SalesOrganisationConfigs salesOrganisationConfigs,
             ShipToInfo shipToCode,
             List<MaterialQueryInfo> materialInfoList,
-            String pickAndPack)?
+            String pickAndPack,
+            bool skipFOCCheck)?
         fetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(user, customerCode, salesOrganisation,
-          salesOrganisationConfigs, shipToCode, materialInfoList, pickAndPack);
+      return fetch(
+          user,
+          customerCode,
+          salesOrganisation,
+          salesOrganisationConfigs,
+          shipToCode,
+          materialInfoList,
+          pickAndPack,
+          skipFOCCheck);
     }
     return orElse();
   }
@@ -934,7 +1028,8 @@ abstract class _Fetch implements MaterialPriceDetailEvent {
       required final SalesOrganisationConfigs salesOrganisationConfigs,
       required final ShipToInfo shipToCode,
       required final List<MaterialQueryInfo> materialInfoList,
-      required final String pickAndPack}) = _$_Fetch;
+      required final String pickAndPack,
+      final bool skipFOCCheck}) = _$_Fetch;
 
   User get user;
   CustomerCodeInfo get customerCode;
@@ -943,6 +1038,7 @@ abstract class _Fetch implements MaterialPriceDetailEvent {
   ShipToInfo get shipToCode;
   List<MaterialQueryInfo> get materialInfoList;
   String get pickAndPack;
+  bool get skipFOCCheck;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;

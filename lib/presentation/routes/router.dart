@@ -15,6 +15,7 @@ import 'package:ezrxmobile/presentation/history/history_tab.dart';
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:ezrxmobile/presentation/home_tab.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/bundle_item_detail_page.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_filter.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_root.dart';
@@ -67,6 +68,7 @@ import 'package:ezrxmobile/presentation/history/history_details.dart';
     AutoRoute(path: 'saved_order_list', page: SavedOrderListPage),
     AutoRoute(path: 'saved_order_detail', page: SavedOrderDetailPage),
     AutoRoute(path: 'history_details', page: HistoryDetails),
+    CustomRoute(path: 'bundle_item_detail', page: BundleItemDetailPage, transitionsBuilder: TransitionsBuilders.slideBottom,fullscreenDialog: true,),
   ],
 )
 class $AppRouter {}

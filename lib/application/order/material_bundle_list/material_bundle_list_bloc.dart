@@ -5,8 +5,10 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/core/aggregate/bundle_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_bundle_list_repository.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_price_detail_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -76,7 +78,7 @@ class MaterialBundleListBloc
 
             emit(
               state.copyWith(
-                bundleList: bundleList,
+                bundleList: getBundleAggregate(bundleList,materialBundleItemList),
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
                 canLoadMore: materialBundleItemList.length >= _pageSize,
@@ -128,7 +130,7 @@ class MaterialBundleListBloc
               ..addAll(bundleList);
             emit(
               state.copyWith(
-                bundleList: newBundleList,
+                bundleList: getBundleAggregate(newBundleList,morebundleList),
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
                 canLoadMore: newBundleList.length >= _pageSize,
@@ -139,5 +141,22 @@ class MaterialBundleListBloc
         );
       },
     );
+  }
+
+  List<BundleAggregate> getBundleAggregate(
+      List<Bundle> bundleList, List<MaterialInfo> materialBundleItemList,) {
+    final bundleAggregate = <BundleAggregate>[];
+    for (final item in bundleList) {
+      final bundleItem = BundleAggregate(
+          bundle: item,
+          materialInfos: materialBundleItemList
+              .where((element) =>
+                  element.bundles.isNotEmpty &&
+                  element.bundles[0].bundleCode == item.bundleCode)
+              .toList(),);
+      bundleAggregate.add(bundleItem);
+    }
+    
+    return bundleAggregate;
   }
 }

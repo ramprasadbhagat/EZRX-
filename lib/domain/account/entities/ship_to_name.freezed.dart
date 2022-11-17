@@ -30,43 +30,47 @@ mixin _$ShipToName {
 abstract class $ShipToNameCopyWith<$Res> {
   factory $ShipToNameCopyWith(
           ShipToName value, $Res Function(ShipToName) then) =
-      _$ShipToNameCopyWithImpl<$Res>;
+      _$ShipToNameCopyWithImpl<$Res, ShipToName>;
+  @useResult
   $Res call({String name1, String name2, String name3, String name4});
 }
 
 /// @nodoc
-class _$ShipToNameCopyWithImpl<$Res> implements $ShipToNameCopyWith<$Res> {
+class _$ShipToNameCopyWithImpl<$Res, $Val extends ShipToName>
+    implements $ShipToNameCopyWith<$Res> {
   _$ShipToNameCopyWithImpl(this._value, this._then);
 
-  final ShipToName _value;
   // ignore: unused_field
-  final $Res Function(ShipToName) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name1 = freezed,
-    Object? name2 = freezed,
-    Object? name3 = freezed,
-    Object? name4 = freezed,
+    Object? name1 = null,
+    Object? name2 = null,
+    Object? name3 = null,
+    Object? name4 = null,
   }) {
     return _then(_value.copyWith(
-      name1: name1 == freezed
+      name1: null == name1
           ? _value.name1
           : name1 // ignore: cast_nullable_to_non_nullable
               as String,
-      name2: name2 == freezed
+      name2: null == name2
           ? _value.name2
           : name2 // ignore: cast_nullable_to_non_nullable
               as String,
-      name3: name3 == freezed
+      name3: null == name3
           ? _value.name3
           : name3 // ignore: cast_nullable_to_non_nullable
               as String,
-      name4: name4 == freezed
+      name4: null == name4
           ? _value.name4
           : name4 // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -77,40 +81,40 @@ abstract class _$$_ShipToNameCopyWith<$Res>
           _$_ShipToName value, $Res Function(_$_ShipToName) then) =
       __$$_ShipToNameCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String name1, String name2, String name3, String name4});
 }
 
 /// @nodoc
-class __$$_ShipToNameCopyWithImpl<$Res> extends _$ShipToNameCopyWithImpl<$Res>
+class __$$_ShipToNameCopyWithImpl<$Res>
+    extends _$ShipToNameCopyWithImpl<$Res, _$_ShipToName>
     implements _$$_ShipToNameCopyWith<$Res> {
   __$$_ShipToNameCopyWithImpl(
       _$_ShipToName _value, $Res Function(_$_ShipToName) _then)
-      : super(_value, (v) => _then(v as _$_ShipToName));
+      : super(_value, _then);
 
-  @override
-  _$_ShipToName get _value => super._value as _$_ShipToName;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name1 = freezed,
-    Object? name2 = freezed,
-    Object? name3 = freezed,
-    Object? name4 = freezed,
+    Object? name1 = null,
+    Object? name2 = null,
+    Object? name3 = null,
+    Object? name4 = null,
   }) {
     return _then(_$_ShipToName(
-      name1: name1 == freezed
+      name1: null == name1
           ? _value.name1
           : name1 // ignore: cast_nullable_to_non_nullable
               as String,
-      name2: name2 == freezed
+      name2: null == name2
           ? _value.name2
           : name2 // ignore: cast_nullable_to_non_nullable
               as String,
-      name3: name3 == freezed
+      name3: null == name3
           ? _value.name3
           : name3 // ignore: cast_nullable_to_non_nullable
               as String,
-      name4: name4 == freezed
+      name4: null == name4
           ? _value.name4
           : name4 // ignore: cast_nullable_to_non_nullable
               as String,
@@ -142,22 +146,18 @@ class _$_ShipToName extends _ShipToName {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ShipToName &&
-            const DeepCollectionEquality().equals(other.name1, name1) &&
-            const DeepCollectionEquality().equals(other.name2, name2) &&
-            const DeepCollectionEquality().equals(other.name3, name3) &&
-            const DeepCollectionEquality().equals(other.name4, name4));
+            (identical(other.name1, name1) || other.name1 == name1) &&
+            (identical(other.name2, name2) || other.name2 == name2) &&
+            (identical(other.name3, name3) || other.name3 == name3) &&
+            (identical(other.name4, name4) || other.name4 == name4));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name1),
-      const DeepCollectionEquality().hash(name2),
-      const DeepCollectionEquality().hash(name3),
-      const DeepCollectionEquality().hash(name4));
+  int get hashCode => Object.hash(runtimeType, name1, name2, name3, name4);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ShipToNameCopyWith<_$_ShipToName> get copyWith =>
       __$$_ShipToNameCopyWithImpl<_$_ShipToName>(this, _$identity);
 }

@@ -17,10 +17,9 @@ class QuantityInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 30,
-      child: ListTile(
-        leading: _QuantityIcon(
+    return Row(
+      children: [
+        _QuantityIcon(
           pressed: () {
             if (int.parse(controller.text) > 1) {
               FocusScope.of(context).unfocus();
@@ -35,32 +34,34 @@ class QuantityInput extends StatelessWidget {
           },
           icon: Icons.remove,
         ),
-        title: TextField(
-          controller: controller,
-          keyboardType: TextInputType.number,
-          textAlign: TextAlign.center,
-          inputFormatters: <TextInputFormatter>[
-            // Only digits
-            FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-            // Prevent leading zero
-            FilteringTextInputFormatter.deny(RegExp(r'^0+')),
-          ],
-          onChanged: (String text) {
-            final newValue = text;
-            // if (text.isEmpty || int.parse(text) <= 0) {
-            //   newValue = '1';
-            // } else if (int.parse(text) >= 999999) {
-            //   newValue = '999999';
-            // }
-            // controller.value = TextEditingValue(
-            //   text: newValue,
-            //   selection: TextSelection.collapsed(offset: newValue.length),
-            // );
-            onFieldChange(int.parse(newValue));
-          },
-          decoration: const InputDecoration(isDense: true),
+        Expanded(
+          child: TextField(
+            controller: controller,
+            keyboardType: TextInputType.number,
+            textAlign: TextAlign.center,
+            inputFormatters: <TextInputFormatter>[
+              // Only digits
+              FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+              // Prevent leading zero
+              FilteringTextInputFormatter.deny(RegExp(r'^0+')),
+            ],
+            onChanged: (String text) {
+              final newValue = text;
+              // if (text.isEmpty || int.parse(text) <= 0) {
+              //   newValue = '1';
+              // } else if (int.parse(text) >= 999999) {
+              //   newValue = '999999';
+              // }
+              // controller.value = TextEditingValue(
+              //   text: newValue,
+              //   selection: TextSelection.collapsed(offset: newValue.length),
+              // );
+              onFieldChange(int.parse(newValue));
+            },
+            decoration: const InputDecoration(isDense: true),
+          ),
         ),
-        trailing: _QuantityIcon(
+        _QuantityIcon(
           pressed: () {
             FocusScope.of(context).unfocus();
             final value = int.parse(controller.text) + 1;
@@ -73,7 +74,7 @@ class QuantityInput extends StatelessWidget {
           },
           icon: Icons.add,
         ),
-      ),
+      ],
     );
   }
 }

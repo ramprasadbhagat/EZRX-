@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'bundle.freezed.dart';
@@ -9,15 +10,15 @@ class Bundle with _$Bundle {
   const Bundle._();
 
   const factory Bundle({
-    required String bundleName,
+    required BundleName bundleName,
     required String bundleCode,
     required List<BundleInfo> bundleInformation,
   }) = _Bundle;
 
   factory Bundle.empty() => Bundle(
-        bundleName: '',
+        bundleName: BundleName(''),
         bundleCode: '',
-        bundleInformation: [BundleInfo.empty()],
+        bundleInformation: <BundleInfo>[],
       );
 
   List<String> bundleInfoMessage() {

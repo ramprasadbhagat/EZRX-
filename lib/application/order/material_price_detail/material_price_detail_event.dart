@@ -11,6 +11,7 @@ class MaterialPriceDetailEvent with _$MaterialPriceDetailEvent {
     required ShipToInfo shipToCode,
     required List<MaterialQueryInfo> materialInfoList,
     required String pickAndPack,
+    @Default(false) bool skipFOCCheck,
   }) = _Refresh;
   const factory MaterialPriceDetailEvent.fetch({
     required User user,
@@ -20,5 +21,6 @@ class MaterialPriceDetailEvent with _$MaterialPriceDetailEvent {
     required ShipToInfo shipToCode,
     required List<MaterialQueryInfo> materialInfoList,
     required String pickAndPack,
+    @Default(false) bool skipFOCCheck,
   }) = _Fetch;
 }

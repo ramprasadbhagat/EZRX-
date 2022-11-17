@@ -5,7 +5,7 @@ class MaterialBundleListState with _$MaterialBundleListState {
   const MaterialBundleListState._();
 
   const factory MaterialBundleListState({
-    required List<Bundle> bundleList,
+    required List<BundleAggregate> bundleList,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required bool canLoadMore,
     required bool isFetching,
@@ -14,7 +14,7 @@ class MaterialBundleListState with _$MaterialBundleListState {
   }) = _MaterialBundleListState;
 
   factory MaterialBundleListState.initial() => MaterialBundleListState(
-        bundleList: <Bundle>[],
+        bundleList: <BundleAggregate>[],
         apiFailureOrSuccessOption: none(),
         canLoadMore: true,
         isFetching: false,

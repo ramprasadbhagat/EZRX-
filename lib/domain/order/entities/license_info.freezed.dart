@@ -31,7 +31,8 @@ mixin _$LicenseInfo {
 abstract class $LicenseInfoCopyWith<$Res> {
   factory $LicenseInfoCopyWith(
           LicenseInfo value, $Res Function(LicenseInfo) then) =
-      _$LicenseInfoCopyWithImpl<$Res>;
+      _$LicenseInfoCopyWithImpl<$Res, LicenseInfo>;
+  @useResult
   $Res call(
       {String licenceType,
       String licenseDescription,
@@ -41,43 +42,46 @@ abstract class $LicenseInfoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LicenseInfoCopyWithImpl<$Res> implements $LicenseInfoCopyWith<$Res> {
+class _$LicenseInfoCopyWithImpl<$Res, $Val extends LicenseInfo>
+    implements $LicenseInfoCopyWith<$Res> {
   _$LicenseInfoCopyWithImpl(this._value, this._then);
 
-  final LicenseInfo _value;
   // ignore: unused_field
-  final $Res Function(LicenseInfo) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? licenceType = freezed,
-    Object? licenseDescription = freezed,
-    Object? licenseNumber = freezed,
-    Object? validFrom = freezed,
-    Object? validTo = freezed,
+    Object? licenceType = null,
+    Object? licenseDescription = null,
+    Object? licenseNumber = null,
+    Object? validFrom = null,
+    Object? validTo = null,
   }) {
     return _then(_value.copyWith(
-      licenceType: licenceType == freezed
+      licenceType: null == licenceType
           ? _value.licenceType
           : licenceType // ignore: cast_nullable_to_non_nullable
               as String,
-      licenseDescription: licenseDescription == freezed
+      licenseDescription: null == licenseDescription
           ? _value.licenseDescription
           : licenseDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      licenseNumber: licenseNumber == freezed
+      licenseNumber: null == licenseNumber
           ? _value.licenseNumber
           : licenseNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      validFrom: validFrom == freezed
+      validFrom: null == validFrom
           ? _value.validFrom
           : validFrom // ignore: cast_nullable_to_non_nullable
               as String,
-      validTo: validTo == freezed
+      validTo: null == validTo
           ? _value.validTo
           : validTo // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -88,6 +92,7 @@ abstract class _$$_LicenseInfoCopyWith<$Res>
           _$_LicenseInfo value, $Res Function(_$_LicenseInfo) then) =
       __$$_LicenseInfoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String licenceType,
       String licenseDescription,
@@ -97,41 +102,40 @@ abstract class _$$_LicenseInfoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LicenseInfoCopyWithImpl<$Res> extends _$LicenseInfoCopyWithImpl<$Res>
+class __$$_LicenseInfoCopyWithImpl<$Res>
+    extends _$LicenseInfoCopyWithImpl<$Res, _$_LicenseInfo>
     implements _$$_LicenseInfoCopyWith<$Res> {
   __$$_LicenseInfoCopyWithImpl(
       _$_LicenseInfo _value, $Res Function(_$_LicenseInfo) _then)
-      : super(_value, (v) => _then(v as _$_LicenseInfo));
+      : super(_value, _then);
 
-  @override
-  _$_LicenseInfo get _value => super._value as _$_LicenseInfo;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? licenceType = freezed,
-    Object? licenseDescription = freezed,
-    Object? licenseNumber = freezed,
-    Object? validFrom = freezed,
-    Object? validTo = freezed,
+    Object? licenceType = null,
+    Object? licenseDescription = null,
+    Object? licenseNumber = null,
+    Object? validFrom = null,
+    Object? validTo = null,
   }) {
     return _then(_$_LicenseInfo(
-      licenceType: licenceType == freezed
+      licenceType: null == licenceType
           ? _value.licenceType
           : licenceType // ignore: cast_nullable_to_non_nullable
               as String,
-      licenseDescription: licenseDescription == freezed
+      licenseDescription: null == licenseDescription
           ? _value.licenseDescription
           : licenseDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      licenseNumber: licenseNumber == freezed
+      licenseNumber: null == licenseNumber
           ? _value.licenseNumber
           : licenseNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      validFrom: validFrom == freezed
+      validFrom: null == validFrom
           ? _value.validFrom
           : validFrom // ignore: cast_nullable_to_non_nullable
               as String,
-      validTo: validTo == freezed
+      validTo: null == validTo
           ? _value.validTo
           : validTo // ignore: cast_nullable_to_non_nullable
               as String,
@@ -171,27 +175,24 @@ class _$_LicenseInfo extends _LicenseInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LicenseInfo &&
-            const DeepCollectionEquality()
-                .equals(other.licenceType, licenceType) &&
-            const DeepCollectionEquality()
-                .equals(other.licenseDescription, licenseDescription) &&
-            const DeepCollectionEquality()
-                .equals(other.licenseNumber, licenseNumber) &&
-            const DeepCollectionEquality().equals(other.validFrom, validFrom) &&
-            const DeepCollectionEquality().equals(other.validTo, validTo));
+            (identical(other.licenceType, licenceType) ||
+                other.licenceType == licenceType) &&
+            (identical(other.licenseDescription, licenseDescription) ||
+                other.licenseDescription == licenseDescription) &&
+            (identical(other.licenseNumber, licenseNumber) ||
+                other.licenseNumber == licenseNumber) &&
+            (identical(other.validFrom, validFrom) ||
+                other.validFrom == validFrom) &&
+            (identical(other.validTo, validTo) || other.validTo == validTo));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(licenceType),
-      const DeepCollectionEquality().hash(licenseDescription),
-      const DeepCollectionEquality().hash(licenseNumber),
-      const DeepCollectionEquality().hash(validFrom),
-      const DeepCollectionEquality().hash(validTo));
+  int get hashCode => Object.hash(runtimeType, licenceType, licenseDescription,
+      licenseNumber, validFrom, validTo);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LicenseInfoCopyWith<_$_LicenseInfo> get copyWith =>
       __$$_LicenseInfoCopyWithImpl<_$_LicenseInfo>(this, _$identity);
 }

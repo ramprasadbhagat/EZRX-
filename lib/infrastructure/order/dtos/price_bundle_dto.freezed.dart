@@ -41,7 +41,8 @@ mixin _$PriceBundleDto {
 abstract class $PriceBundleDtoCopyWith<$Res> {
   factory $PriceBundleDtoCopyWith(
           PriceBundleDto value, $Res Function(PriceBundleDto) then) =
-      _$PriceBundleDtoCopyWithImpl<$Res>;
+      _$PriceBundleDtoCopyWithImpl<$Res, PriceBundleDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'BundleName', defaultValue: '')
       @HiveField(35, defaultValue: '')
@@ -55,34 +56,36 @@ abstract class $PriceBundleDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PriceBundleDtoCopyWithImpl<$Res>
+class _$PriceBundleDtoCopyWithImpl<$Res, $Val extends PriceBundleDto>
     implements $PriceBundleDtoCopyWith<$Res> {
   _$PriceBundleDtoCopyWithImpl(this._value, this._then);
 
-  final PriceBundleDto _value;
   // ignore: unused_field
-  final $Res Function(PriceBundleDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? code = freezed,
-    Object? information = freezed,
+    Object? name = null,
+    Object? code = null,
+    Object? information = null,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      code: code == freezed
+      code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
-      information: information == freezed
+      information: null == information
           ? _value.information
           : information // ignore: cast_nullable_to_non_nullable
               as List<PriceBundleItemDto>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -93,6 +96,7 @@ abstract class _$$_PriceBundleDtoCopyWith<$Res>
           _$_PriceBundleDto value, $Res Function(_$_PriceBundleDto) then) =
       __$$_PriceBundleDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'BundleName', defaultValue: '')
       @HiveField(35, defaultValue: '')
@@ -107,31 +111,29 @@ abstract class _$$_PriceBundleDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_PriceBundleDtoCopyWithImpl<$Res>
-    extends _$PriceBundleDtoCopyWithImpl<$Res>
+    extends _$PriceBundleDtoCopyWithImpl<$Res, _$_PriceBundleDto>
     implements _$$_PriceBundleDtoCopyWith<$Res> {
   __$$_PriceBundleDtoCopyWithImpl(
       _$_PriceBundleDto _value, $Res Function(_$_PriceBundleDto) _then)
-      : super(_value, (v) => _then(v as _$_PriceBundleDto));
+      : super(_value, _then);
 
-  @override
-  _$_PriceBundleDto get _value => super._value as _$_PriceBundleDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? code = freezed,
-    Object? information = freezed,
+    Object? name = null,
+    Object? code = null,
+    Object? information = null,
   }) {
     return _then(_$_PriceBundleDto(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      code: code == freezed
+      code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
-      information: information == freezed
+      information: null == information
           ? _value._information
           : information // ignore: cast_nullable_to_non_nullable
               as List<PriceBundleItemDto>,
@@ -186,22 +188,20 @@ class _$_PriceBundleDto extends _PriceBundleDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PriceBundleDto &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.code, code) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.code, code) || other.code == code) &&
             const DeepCollectionEquality()
                 .equals(other._information, _information));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(code),
+  int get hashCode => Object.hash(runtimeType, name, code,
       const DeepCollectionEquality().hash(_information));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PriceBundleDtoCopyWith<_$_PriceBundleDto> get copyWith =>
       __$$_PriceBundleDtoCopyWithImpl<_$_PriceBundleDto>(this, _$identity);
 
@@ -277,7 +277,8 @@ mixin _$PriceBundleItemDto {
 abstract class $PriceBundleItemDtoCopyWith<$Res> {
   factory $PriceBundleItemDtoCopyWith(
           PriceBundleItemDto value, $Res Function(PriceBundleItemDto) then) =
-      _$PriceBundleItemDtoCopyWithImpl<$Res>;
+      _$PriceBundleItemDtoCopyWithImpl<$Res, PriceBundleItemDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'Type', defaultValue: '')
       @HiveField(38, defaultValue: '')
@@ -294,39 +295,41 @@ abstract class $PriceBundleItemDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PriceBundleItemDtoCopyWithImpl<$Res>
+class _$PriceBundleItemDtoCopyWithImpl<$Res, $Val extends PriceBundleItemDto>
     implements $PriceBundleItemDtoCopyWith<$Res> {
   _$PriceBundleItemDtoCopyWithImpl(this._value, this._then);
 
-  final PriceBundleItemDto _value;
   // ignore: unused_field
-  final $Res Function(PriceBundleItemDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? sequence = freezed,
-    Object? quantity = freezed,
-    Object? rate = freezed,
+    Object? type = null,
+    Object? sequence = null,
+    Object? quantity = null,
+    Object? rate = null,
   }) {
     return _then(_value.copyWith(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      sequence: sequence == freezed
+      sequence: null == sequence
           ? _value.sequence
           : sequence // ignore: cast_nullable_to_non_nullable
               as int,
-      quantity: quantity == freezed
+      quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      rate: rate == freezed
+      rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
-    ));
+    ) as $Val);
   }
 }
 
@@ -337,6 +340,7 @@ abstract class _$$_PriceBundleItemDtoCopyWith<$Res>
           $Res Function(_$_PriceBundleItemDto) then) =
       __$$_PriceBundleItemDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'Type', defaultValue: '')
       @HiveField(38, defaultValue: '')
@@ -354,36 +358,34 @@ abstract class _$$_PriceBundleItemDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_PriceBundleItemDtoCopyWithImpl<$Res>
-    extends _$PriceBundleItemDtoCopyWithImpl<$Res>
+    extends _$PriceBundleItemDtoCopyWithImpl<$Res, _$_PriceBundleItemDto>
     implements _$$_PriceBundleItemDtoCopyWith<$Res> {
   __$$_PriceBundleItemDtoCopyWithImpl(
       _$_PriceBundleItemDto _value, $Res Function(_$_PriceBundleItemDto) _then)
-      : super(_value, (v) => _then(v as _$_PriceBundleItemDto));
+      : super(_value, _then);
 
-  @override
-  _$_PriceBundleItemDto get _value => super._value as _$_PriceBundleItemDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? sequence = freezed,
-    Object? quantity = freezed,
-    Object? rate = freezed,
+    Object? type = null,
+    Object? sequence = null,
+    Object? quantity = null,
+    Object? rate = null,
   }) {
     return _then(_$_PriceBundleItemDto(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      sequence: sequence == freezed
+      sequence: null == sequence
           ? _value.sequence
           : sequence // ignore: cast_nullable_to_non_nullable
               as int,
-      quantity: quantity == freezed
+      quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      rate: rate == freezed
+      rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
@@ -440,23 +442,21 @@ class _$_PriceBundleItemDto extends _PriceBundleItemDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PriceBundleItemDto &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.sequence, sequence) &&
-            const DeepCollectionEquality().equals(other.quantity, quantity) &&
-            const DeepCollectionEquality().equals(other.rate, rate));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.sequence, sequence) ||
+                other.sequence == sequence) &&
+            (identical(other.quantity, quantity) ||
+                other.quantity == quantity) &&
+            (identical(other.rate, rate) || other.rate == rate));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(sequence),
-      const DeepCollectionEquality().hash(quantity),
-      const DeepCollectionEquality().hash(rate));
+  int get hashCode => Object.hash(runtimeType, type, sequence, quantity, rate);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PriceBundleItemDtoCopyWith<_$_PriceBundleItemDto> get copyWith =>
       __$$_PriceBundleItemDtoCopyWithImpl<_$_PriceBundleItemDto>(
           this, _$identity);

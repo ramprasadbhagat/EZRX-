@@ -39,7 +39,8 @@ mixin _$PaymentTermDto {
 abstract class $PaymentTermDtoCopyWith<$Res> {
   factory $PaymentTermDtoCopyWith(
           PaymentTermDto value, $Res Function(PaymentTermDto) then) =
-      _$PaymentTermDtoCopyWithImpl<$Res>;
+      _$PaymentTermDtoCopyWithImpl<$Res, PaymentTermDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'paymentTermCode') String paymentTermCode,
       @JsonKey(name: 'paymentTermRanking') int paymentTermRanking,
@@ -48,39 +49,41 @@ abstract class $PaymentTermDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PaymentTermDtoCopyWithImpl<$Res>
+class _$PaymentTermDtoCopyWithImpl<$Res, $Val extends PaymentTermDto>
     implements $PaymentTermDtoCopyWith<$Res> {
   _$PaymentTermDtoCopyWithImpl(this._value, this._then);
 
-  final PaymentTermDto _value;
   // ignore: unused_field
-  final $Res Function(PaymentTermDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? paymentTermCode = freezed,
-    Object? paymentTermRanking = freezed,
-    Object? paymentTermDescription = freezed,
-    Object? paymentTermSubranking = freezed,
+    Object? paymentTermCode = null,
+    Object? paymentTermRanking = null,
+    Object? paymentTermDescription = null,
+    Object? paymentTermSubranking = null,
   }) {
     return _then(_value.copyWith(
-      paymentTermCode: paymentTermCode == freezed
+      paymentTermCode: null == paymentTermCode
           ? _value.paymentTermCode
           : paymentTermCode // ignore: cast_nullable_to_non_nullable
               as String,
-      paymentTermRanking: paymentTermRanking == freezed
+      paymentTermRanking: null == paymentTermRanking
           ? _value.paymentTermRanking
           : paymentTermRanking // ignore: cast_nullable_to_non_nullable
               as int,
-      paymentTermDescription: paymentTermDescription == freezed
+      paymentTermDescription: null == paymentTermDescription
           ? _value.paymentTermDescription
           : paymentTermDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      paymentTermSubranking: paymentTermSubranking == freezed
+      paymentTermSubranking: null == paymentTermSubranking
           ? _value.paymentTermSubranking
           : paymentTermSubranking // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -91,6 +94,7 @@ abstract class _$$_PaymentTermDtoCopyWith<$Res>
           _$_PaymentTermDto value, $Res Function(_$_PaymentTermDto) then) =
       __$$_PaymentTermDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'paymentTermCode') String paymentTermCode,
       @JsonKey(name: 'paymentTermRanking') int paymentTermRanking,
@@ -100,36 +104,34 @@ abstract class _$$_PaymentTermDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_PaymentTermDtoCopyWithImpl<$Res>
-    extends _$PaymentTermDtoCopyWithImpl<$Res>
+    extends _$PaymentTermDtoCopyWithImpl<$Res, _$_PaymentTermDto>
     implements _$$_PaymentTermDtoCopyWith<$Res> {
   __$$_PaymentTermDtoCopyWithImpl(
       _$_PaymentTermDto _value, $Res Function(_$_PaymentTermDto) _then)
-      : super(_value, (v) => _then(v as _$_PaymentTermDto));
+      : super(_value, _then);
 
-  @override
-  _$_PaymentTermDto get _value => super._value as _$_PaymentTermDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? paymentTermCode = freezed,
-    Object? paymentTermRanking = freezed,
-    Object? paymentTermDescription = freezed,
-    Object? paymentTermSubranking = freezed,
+    Object? paymentTermCode = null,
+    Object? paymentTermRanking = null,
+    Object? paymentTermDescription = null,
+    Object? paymentTermSubranking = null,
   }) {
     return _then(_$_PaymentTermDto(
-      paymentTermCode: paymentTermCode == freezed
+      paymentTermCode: null == paymentTermCode
           ? _value.paymentTermCode
           : paymentTermCode // ignore: cast_nullable_to_non_nullable
               as String,
-      paymentTermRanking: paymentTermRanking == freezed
+      paymentTermRanking: null == paymentTermRanking
           ? _value.paymentTermRanking
           : paymentTermRanking // ignore: cast_nullable_to_non_nullable
               as int,
-      paymentTermDescription: paymentTermDescription == freezed
+      paymentTermDescription: null == paymentTermDescription
           ? _value.paymentTermDescription
           : paymentTermDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      paymentTermSubranking: paymentTermSubranking == freezed
+      paymentTermSubranking: null == paymentTermSubranking
           ? _value.paymentTermSubranking
           : paymentTermSubranking // ignore: cast_nullable_to_non_nullable
               as int,
@@ -177,27 +179,24 @@ class _$_PaymentTermDto extends _PaymentTermDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PaymentTermDto &&
-            const DeepCollectionEquality()
-                .equals(other.paymentTermCode, paymentTermCode) &&
-            const DeepCollectionEquality()
-                .equals(other.paymentTermRanking, paymentTermRanking) &&
-            const DeepCollectionEquality()
-                .equals(other.paymentTermDescription, paymentTermDescription) &&
-            const DeepCollectionEquality()
-                .equals(other.paymentTermSubranking, paymentTermSubranking));
+            (identical(other.paymentTermCode, paymentTermCode) ||
+                other.paymentTermCode == paymentTermCode) &&
+            (identical(other.paymentTermRanking, paymentTermRanking) ||
+                other.paymentTermRanking == paymentTermRanking) &&
+            (identical(other.paymentTermDescription, paymentTermDescription) ||
+                other.paymentTermDescription == paymentTermDescription) &&
+            (identical(other.paymentTermSubranking, paymentTermSubranking) ||
+                other.paymentTermSubranking == paymentTermSubranking));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(paymentTermCode),
-      const DeepCollectionEquality().hash(paymentTermRanking),
-      const DeepCollectionEquality().hash(paymentTermDescription),
-      const DeepCollectionEquality().hash(paymentTermSubranking));
+  int get hashCode => Object.hash(runtimeType, paymentTermCode,
+      paymentTermRanking, paymentTermDescription, paymentTermSubranking);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PaymentTermDtoCopyWith<_$_PaymentTermDto> get copyWith =>
       __$$_PaymentTermDtoCopyWithImpl<_$_PaymentTermDto>(this, _$identity);
 

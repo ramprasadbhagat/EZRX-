@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_info_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -24,7 +25,7 @@ class BundleDto with _$BundleDto {
 
   Bundle toDomain() {
     return Bundle(
-      bundleName: bundleName,
+      bundleName: BundleName(bundleName),
       bundleCode: bundleCode,
       bundleInformation: bundleInformation.map((e) => e.toDomain()).toList(),
     );
@@ -32,7 +33,7 @@ class BundleDto with _$BundleDto {
 
   factory BundleDto.fromDomain(Bundle bundle) {
     return BundleDto(
-      bundleName: bundle.bundleName,
+      bundleName: bundle.bundleName.getOrCrash(),
       bundleCode: bundle.bundleCode,
       bundleInformation: bundle.bundleInformation
           .map((e) => BundleInfoDto.fromDomain(e))

@@ -21,6 +21,21 @@ class CompanyName extends ValueObject<String> {
   const CompanyName._(this.value);
 }
 
+class BundleName extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory BundleName(String input) {
+    return BundleName._(validateStringNotEmpty(input));
+  }
+
+  String get name {
+    return naIfEmpty(value.getOrElse(() => '--'));
+  }
+
+  const BundleName._(this.value);
+}
+
 class SoldToParty extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;

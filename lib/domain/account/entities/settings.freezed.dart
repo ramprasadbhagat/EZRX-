@@ -28,7 +28,8 @@ mixin _$Settings {
 /// @nodoc
 abstract class $SettingsCopyWith<$Res> {
   factory $SettingsCopyWith(Settings value, $Res Function(Settings) then) =
-      _$SettingsCopyWithImpl<$Res>;
+      _$SettingsCopyWithImpl<$Res, Settings>;
+  @useResult
   $Res call(
       {bool emailNotifications,
       bool mobileNotifications,
@@ -36,33 +37,36 @@ abstract class $SettingsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SettingsCopyWithImpl<$Res> implements $SettingsCopyWith<$Res> {
+class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
+    implements $SettingsCopyWith<$Res> {
   _$SettingsCopyWithImpl(this._value, this._then);
 
-  final Settings _value;
   // ignore: unused_field
-  final $Res Function(Settings) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? emailNotifications = freezed,
-    Object? mobileNotifications = freezed,
-    Object? languagePreference = freezed,
+    Object? emailNotifications = null,
+    Object? mobileNotifications = null,
+    Object? languagePreference = null,
   }) {
     return _then(_value.copyWith(
-      emailNotifications: emailNotifications == freezed
+      emailNotifications: null == emailNotifications
           ? _value.emailNotifications
           : emailNotifications // ignore: cast_nullable_to_non_nullable
               as bool,
-      mobileNotifications: mobileNotifications == freezed
+      mobileNotifications: null == mobileNotifications
           ? _value.mobileNotifications
           : mobileNotifications // ignore: cast_nullable_to_non_nullable
               as bool,
-      languagePreference: languagePreference == freezed
+      languagePreference: null == languagePreference
           ? _value.languagePreference
           : languagePreference // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -72,6 +76,7 @@ abstract class _$$_SettingsCopyWith<$Res> implements $SettingsCopyWith<$Res> {
           _$_Settings value, $Res Function(_$_Settings) then) =
       __$$_SettingsCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {bool emailNotifications,
       bool mobileNotifications,
@@ -79,31 +84,30 @@ abstract class _$$_SettingsCopyWith<$Res> implements $SettingsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SettingsCopyWithImpl<$Res> extends _$SettingsCopyWithImpl<$Res>
+class __$$_SettingsCopyWithImpl<$Res>
+    extends _$SettingsCopyWithImpl<$Res, _$_Settings>
     implements _$$_SettingsCopyWith<$Res> {
   __$$_SettingsCopyWithImpl(
       _$_Settings _value, $Res Function(_$_Settings) _then)
-      : super(_value, (v) => _then(v as _$_Settings));
+      : super(_value, _then);
 
-  @override
-  _$_Settings get _value => super._value as _$_Settings;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? emailNotifications = freezed,
-    Object? mobileNotifications = freezed,
-    Object? languagePreference = freezed,
+    Object? emailNotifications = null,
+    Object? mobileNotifications = null,
+    Object? languagePreference = null,
   }) {
     return _then(_$_Settings(
-      emailNotifications: emailNotifications == freezed
+      emailNotifications: null == emailNotifications
           ? _value.emailNotifications
           : emailNotifications // ignore: cast_nullable_to_non_nullable
               as bool,
-      mobileNotifications: mobileNotifications == freezed
+      mobileNotifications: null == mobileNotifications
           ? _value.mobileNotifications
           : mobileNotifications // ignore: cast_nullable_to_non_nullable
               as bool,
-      languagePreference: languagePreference == freezed
+      languagePreference: null == languagePreference
           ? _value.languagePreference
           : languagePreference // ignore: cast_nullable_to_non_nullable
               as String,
@@ -137,23 +141,21 @@ class _$_Settings extends _Settings {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Settings &&
-            const DeepCollectionEquality()
-                .equals(other.emailNotifications, emailNotifications) &&
-            const DeepCollectionEquality()
-                .equals(other.mobileNotifications, mobileNotifications) &&
-            const DeepCollectionEquality()
-                .equals(other.languagePreference, languagePreference));
+            (identical(other.emailNotifications, emailNotifications) ||
+                other.emailNotifications == emailNotifications) &&
+            (identical(other.mobileNotifications, mobileNotifications) ||
+                other.mobileNotifications == mobileNotifications) &&
+            (identical(other.languagePreference, languagePreference) ||
+                other.languagePreference == languagePreference));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(emailNotifications),
-      const DeepCollectionEquality().hash(mobileNotifications),
-      const DeepCollectionEquality().hash(languagePreference));
+      runtimeType, emailNotifications, mobileNotifications, languagePreference);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SettingsCopyWith<_$_Settings> get copyWith =>
       __$$_SettingsCopyWithImpl<_$_Settings>(this, _$identity);
 }

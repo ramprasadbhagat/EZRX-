@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -45,6 +46,16 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
         materialGroup2: MaterialGroup.two(''),
         materialGroup4:
             material.isFOC ? MaterialGroup.four('6A1') : MaterialGroup.four(''),
+      );
+
+  factory MaterialQueryInfo.fromBundles({
+    required MaterialInfo materialInfo,
+  }) =>
+      MaterialQueryInfo(
+        qty: MaterialQty(1),
+        value: materialInfo.materialNumber,
+        materialGroup2: MaterialGroup.two(''),
+        materialGroup4: MaterialGroup.four(''),
       );
 
   factory MaterialQueryInfo.empty() => MaterialQueryInfo(

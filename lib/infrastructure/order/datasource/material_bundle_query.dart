@@ -68,17 +68,17 @@ class MaterialBundleQuery {
 
   String getSalesRepMaterialBundleList() {
     return '''
-      query GetBundles(
+      query GetBundlesForSalesRep(
         \$userName: String!
-        \$custCode: String!
-        \$materialNumberList: String!
-        \$salesOrg: String!
+        \$customer: String!
+        \$shipToCode: String!
+        \$salesOrganisation: String!
       ) {
       GetBundlesForSalesRep(
         userName: \$userName
-        customer: \$custCode
-        shipToCode: \$materialNumberList
-        salesOrganisation: \$salesOrg
+        customer: \$customer
+        shipToCode: \$shipToCode
+        salesOrganisation: \$salesOrganisation
       ) {
         MaterialNumber
         ListPrice

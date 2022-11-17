@@ -29,34 +29,39 @@ abstract class $OrderHistoryDetailsPODocumentsCopyWith<$Res> {
   factory $OrderHistoryDetailsPODocumentsCopyWith(
           OrderHistoryDetailsPODocuments value,
           $Res Function(OrderHistoryDetailsPODocuments) then) =
-      _$OrderHistoryDetailsPODocumentsCopyWithImpl<$Res>;
+      _$OrderHistoryDetailsPODocumentsCopyWithImpl<$Res,
+          OrderHistoryDetailsPODocuments>;
+  @useResult
   $Res call({String url, String name});
 }
 
 /// @nodoc
-class _$OrderHistoryDetailsPODocumentsCopyWithImpl<$Res>
+class _$OrderHistoryDetailsPODocumentsCopyWithImpl<$Res,
+        $Val extends OrderHistoryDetailsPODocuments>
     implements $OrderHistoryDetailsPODocumentsCopyWith<$Res> {
   _$OrderHistoryDetailsPODocumentsCopyWithImpl(this._value, this._then);
 
-  final OrderHistoryDetailsPODocuments _value;
   // ignore: unused_field
-  final $Res Function(OrderHistoryDetailsPODocuments) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? url = freezed,
-    Object? name = freezed,
+    Object? url = null,
+    Object? name = null,
   }) {
     return _then(_value.copyWith(
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -68,33 +73,32 @@ abstract class _$$_OrderHistoryDetailsPODocumentsCopyWith<$Res>
           $Res Function(_$_OrderHistoryDetailsPODocuments) then) =
       __$$_OrderHistoryDetailsPODocumentsCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String url, String name});
 }
 
 /// @nodoc
 class __$$_OrderHistoryDetailsPODocumentsCopyWithImpl<$Res>
-    extends _$OrderHistoryDetailsPODocumentsCopyWithImpl<$Res>
+    extends _$OrderHistoryDetailsPODocumentsCopyWithImpl<$Res,
+        _$_OrderHistoryDetailsPODocuments>
     implements _$$_OrderHistoryDetailsPODocumentsCopyWith<$Res> {
   __$$_OrderHistoryDetailsPODocumentsCopyWithImpl(
       _$_OrderHistoryDetailsPODocuments _value,
       $Res Function(_$_OrderHistoryDetailsPODocuments) _then)
-      : super(_value, (v) => _then(v as _$_OrderHistoryDetailsPODocuments));
+      : super(_value, _then);
 
-  @override
-  _$_OrderHistoryDetailsPODocuments get _value =>
-      super._value as _$_OrderHistoryDetailsPODocuments;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? url = freezed,
-    Object? name = freezed,
+    Object? url = null,
+    Object? name = null,
   }) {
     return _then(_$_OrderHistoryDetailsPODocuments(
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
@@ -124,18 +128,16 @@ class _$_OrderHistoryDetailsPODocuments
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryDetailsPODocuments &&
-            const DeepCollectionEquality().equals(other.url, url) &&
-            const DeepCollectionEquality().equals(other.name, name));
+            (identical(other.url, url) || other.url == url) &&
+            (identical(other.name, name) || other.name == name));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(url),
-      const DeepCollectionEquality().hash(name));
+  int get hashCode => Object.hash(runtimeType, url, name);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OrderHistoryDetailsPODocumentsCopyWith<_$_OrderHistoryDetailsPODocuments>
       get copyWith => __$$_OrderHistoryDetailsPODocumentsCopyWithImpl<
           _$_OrderHistoryDetailsPODocuments>(this, _$identity);

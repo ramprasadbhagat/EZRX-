@@ -675,7 +675,7 @@ abstract class _LoadMore implements MaterialBundleListEvent {
 
 /// @nodoc
 mixin _$MaterialBundleListState {
-  List<Bundle> get bundleList => throw _privateConstructorUsedError;
+  List<BundleAggregate> get bundleList => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
@@ -695,7 +695,7 @@ abstract class $MaterialBundleListStateCopyWith<$Res> {
       _$MaterialBundleListStateCopyWithImpl<$Res, MaterialBundleListState>;
   @useResult
   $Res call(
-      {List<Bundle> bundleList,
+      {List<BundleAggregate> bundleList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool canLoadMore,
       bool isFetching,
@@ -728,7 +728,7 @@ class _$MaterialBundleListStateCopyWithImpl<$Res,
       bundleList: null == bundleList
           ? _value.bundleList
           : bundleList // ignore: cast_nullable_to_non_nullable
-              as List<Bundle>,
+              as List<BundleAggregate>,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -762,7 +762,7 @@ abstract class _$$_MaterialBundleListStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<Bundle> bundleList,
+      {List<BundleAggregate> bundleList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool canLoadMore,
       bool isFetching,
@@ -793,7 +793,7 @@ class __$$_MaterialBundleListStateCopyWithImpl<$Res>
       bundleList: null == bundleList
           ? _value._bundleList
           : bundleList // ignore: cast_nullable_to_non_nullable
-              as List<Bundle>,
+              as List<BundleAggregate>,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -822,7 +822,7 @@ class __$$_MaterialBundleListStateCopyWithImpl<$Res>
 
 class _$_MaterialBundleListState extends _MaterialBundleListState {
   const _$_MaterialBundleListState(
-      {required final List<Bundle> bundleList,
+      {required final List<BundleAggregate> bundleList,
       required this.apiFailureOrSuccessOption,
       required this.canLoadMore,
       required this.isFetching,
@@ -831,9 +831,9 @@ class _$_MaterialBundleListState extends _MaterialBundleListState {
       : _bundleList = bundleList,
         super._();
 
-  final List<Bundle> _bundleList;
+  final List<BundleAggregate> _bundleList;
   @override
-  List<Bundle> get bundleList {
+  List<BundleAggregate> get bundleList {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bundleList);
   }
@@ -895,7 +895,7 @@ class _$_MaterialBundleListState extends _MaterialBundleListState {
 
 abstract class _MaterialBundleListState extends MaterialBundleListState {
   const factory _MaterialBundleListState(
-      {required final List<Bundle> bundleList,
+      {required final List<BundleAggregate> bundleList,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
       required final bool canLoadMore,
@@ -905,7 +905,7 @@ abstract class _MaterialBundleListState extends MaterialBundleListState {
   const _MaterialBundleListState._() : super._();
 
   @override
-  List<Bundle> get bundleList;
+  List<BundleAggregate> get bundleList;
   @override
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override

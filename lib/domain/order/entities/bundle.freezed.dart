@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Bundle {
-  String get bundleName => throw _privateConstructorUsedError;
+  BundleName get bundleName => throw _privateConstructorUsedError;
   String get bundleCode => throw _privateConstructorUsedError;
   List<BundleInfo> get bundleInformation => throw _privateConstructorUsedError;
 
@@ -30,7 +30,7 @@ abstract class $BundleCopyWith<$Res> {
       _$BundleCopyWithImpl<$Res, Bundle>;
   @useResult
   $Res call(
-      {String bundleName,
+      {BundleName bundleName,
       String bundleCode,
       List<BundleInfo> bundleInformation});
 }
@@ -56,7 +56,7 @@ class _$BundleCopyWithImpl<$Res, $Val extends Bundle>
       bundleName: null == bundleName
           ? _value.bundleName
           : bundleName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as BundleName,
       bundleCode: null == bundleCode
           ? _value.bundleCode
           : bundleCode // ignore: cast_nullable_to_non_nullable
@@ -76,7 +76,7 @@ abstract class _$$_BundleCopyWith<$Res> implements $BundleCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String bundleName,
+      {BundleName bundleName,
       String bundleCode,
       List<BundleInfo> bundleInformation});
 }
@@ -99,7 +99,7 @@ class __$$_BundleCopyWithImpl<$Res>
       bundleName: null == bundleName
           ? _value.bundleName
           : bundleName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as BundleName,
       bundleCode: null == bundleCode
           ? _value.bundleCode
           : bundleCode // ignore: cast_nullable_to_non_nullable
@@ -123,7 +123,7 @@ class _$_Bundle extends _Bundle {
         super._();
 
   @override
-  final String bundleName;
+  final BundleName bundleName;
   @override
   final String bundleCode;
   final List<BundleInfo> _bundleInformation;
@@ -164,13 +164,13 @@ class _$_Bundle extends _Bundle {
 
 abstract class _Bundle extends Bundle {
   const factory _Bundle(
-      {required final String bundleName,
+      {required final BundleName bundleName,
       required final String bundleCode,
       required final List<BundleInfo> bundleInformation}) = _$_Bundle;
   const _Bundle._() : super._();
 
   @override
-  String get bundleName;
+  BundleName get bundleName;
   @override
   String get bundleCode;
   @override

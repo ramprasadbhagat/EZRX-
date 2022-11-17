@@ -56,7 +56,8 @@ mixin _$OrderHistoryDetailsDto {
 abstract class $OrderHistoryDetailsDtoCopyWith<$Res> {
   factory $OrderHistoryDetailsDtoCopyWith(OrderHistoryDetailsDto value,
           $Res Function(OrderHistoryDetailsDto) then) =
-      _$OrderHistoryDetailsDtoCopyWithImpl<$Res>;
+      _$OrderHistoryDetailsDtoCopyWithImpl<$Res, OrderHistoryDetailsDto>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'OrderHeader', readValue: orderHeaderOverride)
           OrderHistoryDetailsOrderHeadersDto orderHistoryDetailsOrderHeader,
@@ -82,83 +83,91 @@ abstract class $OrderHistoryDetailsDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OrderHistoryDetailsDtoCopyWithImpl<$Res>
+class _$OrderHistoryDetailsDtoCopyWithImpl<$Res,
+        $Val extends OrderHistoryDetailsDto>
     implements $OrderHistoryDetailsDtoCopyWith<$Res> {
   _$OrderHistoryDetailsDtoCopyWithImpl(this._value, this._then);
 
-  final OrderHistoryDetailsDto _value;
   // ignore: unused_field
-  final $Res Function(OrderHistoryDetailsDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderHistoryDetailsOrderHeader = freezed,
-    Object? orderHistoryDetailsShippingInformation = freezed,
-    Object? orderHistoryDetailsOrderItem = freezed,
-    Object? orderHistoryDetailsPaymentTerm = freezed,
-    Object? orderHistoryDetailsSpecialInstructions = freezed,
-    Object? orderHistoryDetailsPoDocuments = freezed,
-    Object? orderHistoryDetailsMessages = freezed,
+    Object? orderHistoryDetailsOrderHeader = null,
+    Object? orderHistoryDetailsShippingInformation = null,
+    Object? orderHistoryDetailsOrderItem = null,
+    Object? orderHistoryDetailsPaymentTerm = null,
+    Object? orderHistoryDetailsSpecialInstructions = null,
+    Object? orderHistoryDetailsPoDocuments = null,
+    Object? orderHistoryDetailsMessages = null,
   }) {
     return _then(_value.copyWith(
-      orderHistoryDetailsOrderHeader: orderHistoryDetailsOrderHeader == freezed
+      orderHistoryDetailsOrderHeader: null == orderHistoryDetailsOrderHeader
           ? _value.orderHistoryDetailsOrderHeader
           : orderHistoryDetailsOrderHeader // ignore: cast_nullable_to_non_nullable
               as OrderHistoryDetailsOrderHeadersDto,
-      orderHistoryDetailsShippingInformation:
-          orderHistoryDetailsShippingInformation == freezed
-              ? _value.orderHistoryDetailsShippingInformation
-              : orderHistoryDetailsShippingInformation // ignore: cast_nullable_to_non_nullable
-                  as OrderHistoryDetailsShippingInformationDto,
-      orderHistoryDetailsOrderItem: orderHistoryDetailsOrderItem == freezed
+      orderHistoryDetailsShippingInformation: null ==
+              orderHistoryDetailsShippingInformation
+          ? _value.orderHistoryDetailsShippingInformation
+          : orderHistoryDetailsShippingInformation // ignore: cast_nullable_to_non_nullable
+              as OrderHistoryDetailsShippingInformationDto,
+      orderHistoryDetailsOrderItem: null == orderHistoryDetailsOrderItem
           ? _value.orderHistoryDetailsOrderItem
           : orderHistoryDetailsOrderItem // ignore: cast_nullable_to_non_nullable
               as List<OrderHistoryDetailsOrderItemDto>,
-      orderHistoryDetailsPaymentTerm: orderHistoryDetailsPaymentTerm == freezed
+      orderHistoryDetailsPaymentTerm: null == orderHistoryDetailsPaymentTerm
           ? _value.orderHistoryDetailsPaymentTerm
           : orderHistoryDetailsPaymentTerm // ignore: cast_nullable_to_non_nullable
               as OrderHistoryDetailsPaymentTermDto,
-      orderHistoryDetailsSpecialInstructions:
-          orderHistoryDetailsSpecialInstructions == freezed
-              ? _value.orderHistoryDetailsSpecialInstructions
-              : orderHistoryDetailsSpecialInstructions // ignore: cast_nullable_to_non_nullable
-                  as String,
-      orderHistoryDetailsPoDocuments: orderHistoryDetailsPoDocuments == freezed
+      orderHistoryDetailsSpecialInstructions: null ==
+              orderHistoryDetailsSpecialInstructions
+          ? _value.orderHistoryDetailsSpecialInstructions
+          : orderHistoryDetailsSpecialInstructions // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderHistoryDetailsPoDocuments: null == orderHistoryDetailsPoDocuments
           ? _value.orderHistoryDetailsPoDocuments
           : orderHistoryDetailsPoDocuments // ignore: cast_nullable_to_non_nullable
               as List<OrderHistoryDetailsPODocumentsDto>,
-      orderHistoryDetailsMessages: orderHistoryDetailsMessages == freezed
+      orderHistoryDetailsMessages: null == orderHistoryDetailsMessages
           ? _value.orderHistoryDetailsMessages
           : orderHistoryDetailsMessages // ignore: cast_nullable_to_non_nullable
               as List<OrderHistoryDetailsMessagesDto>,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $OrderHistoryDetailsOrderHeadersDtoCopyWith<$Res>
       get orderHistoryDetailsOrderHeader {
     return $OrderHistoryDetailsOrderHeadersDtoCopyWith<$Res>(
         _value.orderHistoryDetailsOrderHeader, (value) {
-      return _then(_value.copyWith(orderHistoryDetailsOrderHeader: value));
+      return _then(
+          _value.copyWith(orderHistoryDetailsOrderHeader: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $OrderHistoryDetailsShippingInformationDtoCopyWith<$Res>
       get orderHistoryDetailsShippingInformation {
     return $OrderHistoryDetailsShippingInformationDtoCopyWith<$Res>(
         _value.orderHistoryDetailsShippingInformation, (value) {
-      return _then(
-          _value.copyWith(orderHistoryDetailsShippingInformation: value));
+      return _then(_value.copyWith(
+          orderHistoryDetailsShippingInformation: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $OrderHistoryDetailsPaymentTermDtoCopyWith<$Res>
       get orderHistoryDetailsPaymentTerm {
     return $OrderHistoryDetailsPaymentTermDtoCopyWith<$Res>(
         _value.orderHistoryDetailsPaymentTerm, (value) {
-      return _then(_value.copyWith(orderHistoryDetailsPaymentTerm: value));
+      return _then(
+          _value.copyWith(orderHistoryDetailsPaymentTerm: value) as $Val);
     });
   }
 }
@@ -170,6 +179,7 @@ abstract class _$$_OrderHistoryDetailsDtoCopyWith<$Res>
           $Res Function(_$_OrderHistoryDetailsDto) then) =
       __$$_OrderHistoryDetailsDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'OrderHeader', readValue: orderHeaderOverride)
           OrderHistoryDetailsOrderHeadersDto orderHistoryDetailsOrderHeader,
@@ -199,54 +209,52 @@ abstract class _$$_OrderHistoryDetailsDtoCopyWith<$Res>
 
 /// @nodoc
 class __$$_OrderHistoryDetailsDtoCopyWithImpl<$Res>
-    extends _$OrderHistoryDetailsDtoCopyWithImpl<$Res>
+    extends _$OrderHistoryDetailsDtoCopyWithImpl<$Res,
+        _$_OrderHistoryDetailsDto>
     implements _$$_OrderHistoryDetailsDtoCopyWith<$Res> {
   __$$_OrderHistoryDetailsDtoCopyWithImpl(_$_OrderHistoryDetailsDto _value,
       $Res Function(_$_OrderHistoryDetailsDto) _then)
-      : super(_value, (v) => _then(v as _$_OrderHistoryDetailsDto));
+      : super(_value, _then);
 
-  @override
-  _$_OrderHistoryDetailsDto get _value =>
-      super._value as _$_OrderHistoryDetailsDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderHistoryDetailsOrderHeader = freezed,
-    Object? orderHistoryDetailsShippingInformation = freezed,
-    Object? orderHistoryDetailsOrderItem = freezed,
-    Object? orderHistoryDetailsPaymentTerm = freezed,
-    Object? orderHistoryDetailsSpecialInstructions = freezed,
-    Object? orderHistoryDetailsPoDocuments = freezed,
-    Object? orderHistoryDetailsMessages = freezed,
+    Object? orderHistoryDetailsOrderHeader = null,
+    Object? orderHistoryDetailsShippingInformation = null,
+    Object? orderHistoryDetailsOrderItem = null,
+    Object? orderHistoryDetailsPaymentTerm = null,
+    Object? orderHistoryDetailsSpecialInstructions = null,
+    Object? orderHistoryDetailsPoDocuments = null,
+    Object? orderHistoryDetailsMessages = null,
   }) {
     return _then(_$_OrderHistoryDetailsDto(
-      orderHistoryDetailsOrderHeader: orderHistoryDetailsOrderHeader == freezed
+      orderHistoryDetailsOrderHeader: null == orderHistoryDetailsOrderHeader
           ? _value.orderHistoryDetailsOrderHeader
           : orderHistoryDetailsOrderHeader // ignore: cast_nullable_to_non_nullable
               as OrderHistoryDetailsOrderHeadersDto,
-      orderHistoryDetailsShippingInformation:
-          orderHistoryDetailsShippingInformation == freezed
-              ? _value.orderHistoryDetailsShippingInformation
-              : orderHistoryDetailsShippingInformation // ignore: cast_nullable_to_non_nullable
-                  as OrderHistoryDetailsShippingInformationDto,
-      orderHistoryDetailsOrderItem: orderHistoryDetailsOrderItem == freezed
+      orderHistoryDetailsShippingInformation: null ==
+              orderHistoryDetailsShippingInformation
+          ? _value.orderHistoryDetailsShippingInformation
+          : orderHistoryDetailsShippingInformation // ignore: cast_nullable_to_non_nullable
+              as OrderHistoryDetailsShippingInformationDto,
+      orderHistoryDetailsOrderItem: null == orderHistoryDetailsOrderItem
           ? _value._orderHistoryDetailsOrderItem
           : orderHistoryDetailsOrderItem // ignore: cast_nullable_to_non_nullable
               as List<OrderHistoryDetailsOrderItemDto>,
-      orderHistoryDetailsPaymentTerm: orderHistoryDetailsPaymentTerm == freezed
+      orderHistoryDetailsPaymentTerm: null == orderHistoryDetailsPaymentTerm
           ? _value.orderHistoryDetailsPaymentTerm
           : orderHistoryDetailsPaymentTerm // ignore: cast_nullable_to_non_nullable
               as OrderHistoryDetailsPaymentTermDto,
-      orderHistoryDetailsSpecialInstructions:
-          orderHistoryDetailsSpecialInstructions == freezed
-              ? _value.orderHistoryDetailsSpecialInstructions
-              : orderHistoryDetailsSpecialInstructions // ignore: cast_nullable_to_non_nullable
-                  as String,
-      orderHistoryDetailsPoDocuments: orderHistoryDetailsPoDocuments == freezed
+      orderHistoryDetailsSpecialInstructions: null ==
+              orderHistoryDetailsSpecialInstructions
+          ? _value.orderHistoryDetailsSpecialInstructions
+          : orderHistoryDetailsSpecialInstructions // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderHistoryDetailsPoDocuments: null == orderHistoryDetailsPoDocuments
           ? _value._orderHistoryDetailsPoDocuments
           : orderHistoryDetailsPoDocuments // ignore: cast_nullable_to_non_nullable
               as List<OrderHistoryDetailsPODocumentsDto>,
-      orderHistoryDetailsMessages: orderHistoryDetailsMessages == freezed
+      orderHistoryDetailsMessages: null == orderHistoryDetailsMessages
           ? _value._orderHistoryDetailsMessages
           : orderHistoryDetailsMessages // ignore: cast_nullable_to_non_nullable
               as List<OrderHistoryDetailsMessagesDto>,
@@ -329,21 +337,25 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryDetailsDto &&
-            const DeepCollectionEquality().equals(
-                other.orderHistoryDetailsOrderHeader,
-                orderHistoryDetailsOrderHeader) &&
-            const DeepCollectionEquality().equals(
-                other.orderHistoryDetailsShippingInformation,
-                orderHistoryDetailsShippingInformation) &&
+            (identical(other.orderHistoryDetailsOrderHeader,
+                    orderHistoryDetailsOrderHeader) ||
+                other.orderHistoryDetailsOrderHeader ==
+                    orderHistoryDetailsOrderHeader) &&
+            (identical(other.orderHistoryDetailsShippingInformation,
+                    orderHistoryDetailsShippingInformation) ||
+                other.orderHistoryDetailsShippingInformation ==
+                    orderHistoryDetailsShippingInformation) &&
             const DeepCollectionEquality().equals(
                 other._orderHistoryDetailsOrderItem,
                 _orderHistoryDetailsOrderItem) &&
-            const DeepCollectionEquality().equals(
-                other.orderHistoryDetailsPaymentTerm,
-                orderHistoryDetailsPaymentTerm) &&
-            const DeepCollectionEquality().equals(
-                other.orderHistoryDetailsSpecialInstructions,
-                orderHistoryDetailsSpecialInstructions) &&
+            (identical(other.orderHistoryDetailsPaymentTerm,
+                    orderHistoryDetailsPaymentTerm) ||
+                other.orderHistoryDetailsPaymentTerm ==
+                    orderHistoryDetailsPaymentTerm) &&
+            (identical(other.orderHistoryDetailsSpecialInstructions,
+                    orderHistoryDetailsSpecialInstructions) ||
+                other.orderHistoryDetailsSpecialInstructions ==
+                    orderHistoryDetailsSpecialInstructions) &&
             const DeepCollectionEquality().equals(
                 other._orderHistoryDetailsPoDocuments,
                 _orderHistoryDetailsPoDocuments) &&
@@ -356,18 +368,17 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(orderHistoryDetailsOrderHeader),
-      const DeepCollectionEquality()
-          .hash(orderHistoryDetailsShippingInformation),
+      orderHistoryDetailsOrderHeader,
+      orderHistoryDetailsShippingInformation,
       const DeepCollectionEquality().hash(_orderHistoryDetailsOrderItem),
-      const DeepCollectionEquality().hash(orderHistoryDetailsPaymentTerm),
-      const DeepCollectionEquality()
-          .hash(orderHistoryDetailsSpecialInstructions),
+      orderHistoryDetailsPaymentTerm,
+      orderHistoryDetailsSpecialInstructions,
       const DeepCollectionEquality().hash(_orderHistoryDetailsPoDocuments),
       const DeepCollectionEquality().hash(_orderHistoryDetailsMessages));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OrderHistoryDetailsDtoCopyWith<_$_OrderHistoryDetailsDto> get copyWith =>
       __$$_OrderHistoryDetailsDtoCopyWithImpl<_$_OrderHistoryDetailsDto>(
           this, _$identity);

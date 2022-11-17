@@ -27,29 +27,32 @@ mixin _$SalesOrgShipToInfo {
 abstract class $SalesOrgShipToInfoCopyWith<$Res> {
   factory $SalesOrgShipToInfoCopyWith(
           SalesOrgShipToInfo value, $Res Function(SalesOrgShipToInfo) then) =
-      _$SalesOrgShipToInfoCopyWithImpl<$Res>;
+      _$SalesOrgShipToInfoCopyWithImpl<$Res, SalesOrgShipToInfo>;
+  @useResult
   $Res call({String shipToCustomerCode});
 }
 
 /// @nodoc
-class _$SalesOrgShipToInfoCopyWithImpl<$Res>
+class _$SalesOrgShipToInfoCopyWithImpl<$Res, $Val extends SalesOrgShipToInfo>
     implements $SalesOrgShipToInfoCopyWith<$Res> {
   _$SalesOrgShipToInfoCopyWithImpl(this._value, this._then);
 
-  final SalesOrgShipToInfo _value;
   // ignore: unused_field
-  final $Res Function(SalesOrgShipToInfo) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? shipToCustomerCode = freezed,
+    Object? shipToCustomerCode = null,
   }) {
     return _then(_value.copyWith(
-      shipToCustomerCode: shipToCustomerCode == freezed
+      shipToCustomerCode: null == shipToCustomerCode
           ? _value.shipToCustomerCode
           : shipToCustomerCode // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -60,26 +63,25 @@ abstract class _$$_SalesOrgShipToInfoCopyWith<$Res>
           $Res Function(_$_SalesOrgShipToInfo) then) =
       __$$_SalesOrgShipToInfoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String shipToCustomerCode});
 }
 
 /// @nodoc
 class __$$_SalesOrgShipToInfoCopyWithImpl<$Res>
-    extends _$SalesOrgShipToInfoCopyWithImpl<$Res>
+    extends _$SalesOrgShipToInfoCopyWithImpl<$Res, _$_SalesOrgShipToInfo>
     implements _$$_SalesOrgShipToInfoCopyWith<$Res> {
   __$$_SalesOrgShipToInfoCopyWithImpl(
       _$_SalesOrgShipToInfo _value, $Res Function(_$_SalesOrgShipToInfo) _then)
-      : super(_value, (v) => _then(v as _$_SalesOrgShipToInfo));
+      : super(_value, _then);
 
-  @override
-  _$_SalesOrgShipToInfo get _value => super._value as _$_SalesOrgShipToInfo;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? shipToCustomerCode = freezed,
+    Object? shipToCustomerCode = null,
   }) {
     return _then(_$_SalesOrgShipToInfo(
-      shipToCustomerCode: shipToCustomerCode == freezed
+      shipToCustomerCode: null == shipToCustomerCode
           ? _value.shipToCustomerCode
           : shipToCustomerCode // ignore: cast_nullable_to_non_nullable
               as String,
@@ -105,16 +107,16 @@ class _$_SalesOrgShipToInfo extends _SalesOrgShipToInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SalesOrgShipToInfo &&
-            const DeepCollectionEquality()
-                .equals(other.shipToCustomerCode, shipToCustomerCode));
+            (identical(other.shipToCustomerCode, shipToCustomerCode) ||
+                other.shipToCustomerCode == shipToCustomerCode));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(shipToCustomerCode));
+  int get hashCode => Object.hash(runtimeType, shipToCustomerCode);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SalesOrgShipToInfoCopyWith<_$_SalesOrgShipToInfo> get copyWith =>
       __$$_SalesOrgShipToInfoCopyWithImpl<_$_SalesOrgShipToInfo>(
           this, _$identity);

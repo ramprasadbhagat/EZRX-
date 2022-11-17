@@ -56,6 +56,8 @@ class MaterialPriceDetailBloc
             materials: e.materialInfoList,
           );
 
+          var nonFocValidMaterials = queryMaterials;
+
           if (queryMaterials.isEmpty) return;
 
           emit(
@@ -97,9 +99,11 @@ class MaterialPriceDetailBloc
             ),
           );
 
-          final nonFocValidMaterials = _getNonFOCMaterials(
-            materials: validMaterials,
-          );
+          if(!e.skipFOCCheck){
+              nonFocValidMaterials = _getNonFOCMaterials(
+              materials: validMaterials,
+            );
+          }
 
           final focValidMaterials = _getFOCMaterials(
             materials: validMaterials,

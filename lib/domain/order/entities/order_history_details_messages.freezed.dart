@@ -29,34 +29,39 @@ abstract class $OrderHistoryDetailsMessagesCopyWith<$Res> {
   factory $OrderHistoryDetailsMessagesCopyWith(
           OrderHistoryDetailsMessages value,
           $Res Function(OrderHistoryDetailsMessages) then) =
-      _$OrderHistoryDetailsMessagesCopyWithImpl<$Res>;
+      _$OrderHistoryDetailsMessagesCopyWithImpl<$Res,
+          OrderHistoryDetailsMessages>;
+  @useResult
   $Res call({String type, String message});
 }
 
 /// @nodoc
-class _$OrderHistoryDetailsMessagesCopyWithImpl<$Res>
+class _$OrderHistoryDetailsMessagesCopyWithImpl<$Res,
+        $Val extends OrderHistoryDetailsMessages>
     implements $OrderHistoryDetailsMessagesCopyWith<$Res> {
   _$OrderHistoryDetailsMessagesCopyWithImpl(this._value, this._then);
 
-  final OrderHistoryDetailsMessages _value;
   // ignore: unused_field
-  final $Res Function(OrderHistoryDetailsMessages) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? message = freezed,
+    Object? type = null,
+    Object? message = null,
   }) {
     return _then(_value.copyWith(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      message: message == freezed
+      message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -68,33 +73,32 @@ abstract class _$$_OrderHistoryDetailsMessagesCopyWith<$Res>
           $Res Function(_$_OrderHistoryDetailsMessages) then) =
       __$$_OrderHistoryDetailsMessagesCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String type, String message});
 }
 
 /// @nodoc
 class __$$_OrderHistoryDetailsMessagesCopyWithImpl<$Res>
-    extends _$OrderHistoryDetailsMessagesCopyWithImpl<$Res>
+    extends _$OrderHistoryDetailsMessagesCopyWithImpl<$Res,
+        _$_OrderHistoryDetailsMessages>
     implements _$$_OrderHistoryDetailsMessagesCopyWith<$Res> {
   __$$_OrderHistoryDetailsMessagesCopyWithImpl(
       _$_OrderHistoryDetailsMessages _value,
       $Res Function(_$_OrderHistoryDetailsMessages) _then)
-      : super(_value, (v) => _then(v as _$_OrderHistoryDetailsMessages));
+      : super(_value, _then);
 
-  @override
-  _$_OrderHistoryDetailsMessages get _value =>
-      super._value as _$_OrderHistoryDetailsMessages;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? message = freezed,
+    Object? type = null,
+    Object? message = null,
   }) {
     return _then(_$_OrderHistoryDetailsMessages(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      message: message == freezed
+      message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
@@ -123,18 +127,16 @@ class _$_OrderHistoryDetailsMessages extends _OrderHistoryDetailsMessages {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryDetailsMessages &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.message, message));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(message));
+  int get hashCode => Object.hash(runtimeType, type, message);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_OrderHistoryDetailsMessagesCopyWith<_$_OrderHistoryDetailsMessages>
       get copyWith => __$$_OrderHistoryDetailsMessagesCopyWithImpl<
           _$_OrderHistoryDetailsMessages>(this, _$identity);

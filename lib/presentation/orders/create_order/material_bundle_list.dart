@@ -1,15 +1,20 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/domain/core/aggregate/bundle_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +28,8 @@ class MaterialBundleListPage extends StatelessWidget {
       key: const Key('materialBundleListPage'),
       listenWhen: (previous, current) =>
           previous.apiFailureOrSuccessOption !=
-          current.apiFailureOrSuccessOption,
+              current.apiFailureOrSuccessOption ||
+          (previous.isFetching != current.isFetching),
       listener: (context, state) {
         state.apiFailureOrSuccessOption.fold(
           () {},
@@ -41,6 +47,35 @@ class MaterialBundleListPage extends StatelessWidget {
             (_) {},
           ),
         );
+        if (state.bundleList.isNotEmpty && !state.isFetching) {
+          for (final item in state.bundleList) {
+            final templist = item.materialInfos
+                .map(
+                  (item) => MaterialQueryInfo.fromBundles(
+                    materialInfo: item,
+                  ),
+                )
+                .toList();
+            context.read<MaterialPriceDetailBloc>().add(
+                  MaterialPriceDetailEvent.fetch(
+                    user: context.read<UserBloc>().state.user,
+                    customerCode:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    salesOrganisationConfigs:
+                        context.read<SalesOrgBloc>().state.configs,
+                    shipToCode: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    materialInfoList: templist,
+                    pickAndPack: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .getPNPValueMaterial,
+                    skipFOCCheck: true,
+                  ),
+                );
+          }
+        }
       },
       buildWhen: (previous, current) =>
           previous.isFetching != current.isFetching,
@@ -77,9 +112,12 @@ class _BodyContent extends StatelessWidget {
                 height: 80,
               ),
             )
-          : ScrollList<Bundle>(
+          : ScrollList<BundleAggregate>(
               emptyMessage: 'No bundle found',
               onRefresh: () {
+                context
+                    .read<MaterialPriceDetailBloc>()
+                    .add(const MaterialPriceDetailEvent.initialized());
                 context.read<MaterialBundleListBloc>().add(
                       MaterialBundleListEvent.fetch(
                         user: context.read<UserBloc>().state.user,
@@ -110,7 +148,8 @@ class _BodyContent extends StatelessWidget {
                     ),
                   ),
               isLoading: materialBundleListState.isFetching,
-              itemBuilder: (context, index, item) => _ListContent(bundle: item),
+              itemBuilder: (context, index, item) =>
+                  _ListContent(bundleAggregate: item),
               items: materialBundleListState.bundleList,
             ),
     );
@@ -118,16 +157,21 @@ class _BodyContent extends StatelessWidget {
 }
 
 class _ListContent extends StatelessWidget {
-  final Bundle bundle;
-  const _ListContent({Key? key, required this.bundle}) : super(key: key);
+  final BundleAggregate bundleAggregate;
+  const _ListContent({Key? key, required this.bundleAggregate})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
         key: Key(
-          'materialBundleOption${bundle.bundleCode}',
+          'materialBundleOption${bundleAggregate.bundle.bundleCode}',
         ),
+        onTap: () {
+          context.router.push(
+              BundleItemDetailPageRoute(bundleAggregate: bundleAggregate,),);
+        },
         // leading: ClipRRect(
         //   borderRadius: const BorderRadius.all(
         //     Radius.circular(10.0),
@@ -141,10 +185,16 @@ class _ListContent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              bundle.bundleName.toUpperCase(),
-              style: Theme.of(context).textTheme.bodyText1,
+              bundleAggregate.bundle.bundleCode.toUpperCase(),
+              style: Theme.of(context).textTheme.subtitle2?.apply(
+                    color: ZPColors.kPrimaryColor,
+                  ),
             ),
-            ...bundle
+            Text(
+              bundleAggregate.bundle.bundleName.name.toUpperCase(),
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
+            ...bundleAggregate.bundle
                 .bundleInfoMessage()
                 .map(
                   (e) => Text(
@@ -211,5 +261,4 @@ class _ListContent extends StatelessWidget {
 
   //   return imagePath;
   // }
-
 }
