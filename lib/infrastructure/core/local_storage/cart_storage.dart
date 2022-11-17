@@ -58,8 +58,10 @@ class CartStorage {
           if (existingItem.materialDto.materialNumber ==
               cartDto.materialDto.materialNumber) {
             isUpdate = true;
-            cartDto.quantity += existingItem.quantity;
-            await _cartBox.put(entry.key, cartDto);
+            // cartDto.quantity += existingItem.quantity;
+            existingItem.quantity += cartDto.quantity;
+
+            await _cartBox.put(entry.key, existingItem);
             break;
           }
         }
