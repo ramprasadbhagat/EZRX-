@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -17,6 +18,7 @@ import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_list_tile.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/order_type_selector.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -394,6 +396,11 @@ class _AdditionalInformationStep extends StatelessWidget {
                 ? const _PaymentTerm()
                 : const SizedBox.shrink(),
             //OrderType
+            context.read<EligibilityBloc>().state.isOrderTypeEnable
+                ? Container(
+                  margin: const EdgeInsets.only(top: 18),
+                  child: const OrderTypeSelector(),)
+                : const SizedBox.shrink(),
           ],
         );
       },
@@ -442,7 +449,7 @@ class _CartDetails extends StatelessWidget {
           previous.cartItemList != current.cartItemList,
       listener: (context, state) {
         if (state.cartItemList.isEmpty) {
-          context.router.pop();
+          // context.router.pop();
         }
       },
       buildWhen: (previous, current) =>
