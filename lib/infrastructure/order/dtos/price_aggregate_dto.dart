@@ -129,4 +129,5 @@ const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
   disablePaymentTermsDisplay: false,
   disableDeliveryDate: false,
   enableBillTo: false,
+  showPOAttachment: false,
 );

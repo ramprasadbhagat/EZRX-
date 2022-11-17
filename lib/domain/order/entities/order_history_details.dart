@@ -12,20 +12,29 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
   const OrderHistoryDetails._();
   factory OrderHistoryDetails({
     required OrderHistoryDetailsOrderHeader orderHistoryDetailsOrderHeader,
-    required OrderHistoryDetailsShippingInformation orderHistoryDetailsShippingInformation,
+    required OrderHistoryDetailsShippingInformation
+        orderHistoryDetailsShippingInformation,
     required List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItem,
     required OrderHistoryDetailsPaymentTerm orderHistoryDetailsPaymentTerm,
     required String orderHistoryDetailsSpecialInstructions,
-    required List<OrderHistoryDetailsPODocuments> orderHistoryDetailsPoDocuments,
+    required List<OrderHistoryDetailsPODocuments>
+        orderHistoryDetailsPoDocuments,
     required List<OrderHistoryDetailsMessages> orderHistoryDetailsMessages,
   }) = _OrderHistoryDetails;
   factory OrderHistoryDetails.empty() => OrderHistoryDetails(
         orderHistoryDetailsOrderHeader: OrderHistoryDetailsOrderHeader.empty(),
-        orderHistoryDetailsShippingInformation: OrderHistoryDetailsShippingInformation.empty(),
+        orderHistoryDetailsShippingInformation:
+            OrderHistoryDetailsShippingInformation.empty(),
         orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[],
         orderHistoryDetailsPaymentTerm: OrderHistoryDetailsPaymentTerm.empty(),
         orderHistoryDetailsSpecialInstructions: '',
         orderHistoryDetailsPoDocuments: <OrderHistoryDetailsPODocuments>[],
         orderHistoryDetailsMessages: <OrderHistoryDetailsMessages>[],
       );
+
+  Map<String, String> get getAllPoAsMap => <String, String>{}..addEntries(
+      orderHistoryDetailsPoDocuments
+          .map((e) => MapEntry(e.name, e.url))
+          .toList(),
+    );
 }

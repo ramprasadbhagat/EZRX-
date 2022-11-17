@@ -46,6 +46,7 @@ mixin _$SalesOrganisationConfigs {
   bool get disablePaymentTermsDisplay => throw _privateConstructorUsedError;
   bool get disableDeliveryDate => throw _privateConstructorUsedError;
   bool get enableBillTo => throw _privateConstructorUsedError;
+  bool get showPOAttachment => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrganisationConfigsCopyWith<SalesOrganisationConfigs> get copyWith =>
@@ -88,7 +89,8 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       bool priceOverride,
       bool disablePaymentTermsDisplay,
       bool disableDeliveryDate,
-      bool enableBillTo});
+      bool enableBillTo,
+      bool showPOAttachment});
 }
 
 /// @nodoc
@@ -135,6 +137,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
     Object? disablePaymentTermsDisplay = null,
     Object? disableDeliveryDate = null,
     Object? enableBillTo = null,
+    Object? showPOAttachment = null,
   }) {
     return _then(_value.copyWith(
       enableDefaultMD: null == enableDefaultMD
@@ -257,6 +260,10 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
           ? _value.enableBillTo
           : enableBillTo // ignore: cast_nullable_to_non_nullable
               as bool,
+      showPOAttachment: null == showPOAttachment
+          ? _value.showPOAttachment
+          : showPOAttachment // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -300,7 +307,8 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       bool priceOverride,
       bool disablePaymentTermsDisplay,
       bool disableDeliveryDate,
-      bool enableBillTo});
+      bool enableBillTo,
+      bool showPOAttachment});
 }
 
 /// @nodoc
@@ -345,6 +353,7 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? disablePaymentTermsDisplay = null,
     Object? disableDeliveryDate = null,
     Object? enableBillTo = null,
+    Object? showPOAttachment = null,
   }) {
     return _then(_$_SalesOrganisationConfigs(
       enableDefaultMD: null == enableDefaultMD
@@ -467,6 +476,10 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.enableBillTo
           : enableBillTo // ignore: cast_nullable_to_non_nullable
               as bool,
+      showPOAttachment: null == showPOAttachment
+          ? _value.showPOAttachment
+          : showPOAttachment // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -504,7 +517,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       required this.priceOverride,
       required this.disablePaymentTermsDisplay,
       required this.disableDeliveryDate,
-      required this.enableBillTo})
+      required this.enableBillTo,
+      required this.showPOAttachment})
       : _principalList = principalList,
         super._();
 
@@ -573,10 +587,12 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   final bool disableDeliveryDate;
   @override
   final bool enableBillTo;
+  @override
+  final bool showPOAttachment;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo)';
+    return 'SalesOrganisationConfigs(enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment)';
   }
 
   @override
@@ -642,7 +658,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
                     other.disablePaymentTermsDisplay, disablePaymentTermsDisplay) ||
                 other.disablePaymentTermsDisplay == disablePaymentTermsDisplay) &&
             (identical(other.disableDeliveryDate, disableDeliveryDate) || other.disableDeliveryDate == disableDeliveryDate) &&
-            (identical(other.enableBillTo, enableBillTo) || other.enableBillTo == enableBillTo));
+            (identical(other.enableBillTo, enableBillTo) || other.enableBillTo == enableBillTo) &&
+            (identical(other.showPOAttachment, showPOAttachment) || other.showPOAttachment == showPOAttachment));
   }
 
   @override
@@ -677,7 +694,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
         priceOverride,
         disablePaymentTermsDisplay,
         disableDeliveryDate,
-        enableBillTo
+        enableBillTo,
+        showPOAttachment
       ]);
 
   @JsonKey(ignore: true)
@@ -719,7 +737,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final bool priceOverride,
       required final bool disablePaymentTermsDisplay,
       required final bool disableDeliveryDate,
-      required final bool enableBillTo}) = _$_SalesOrganisationConfigs;
+      required final bool enableBillTo,
+      required final bool showPOAttachment}) = _$_SalesOrganisationConfigs;
   const _SalesOrganisationConfigs._() : super._();
 
   @override
@@ -782,6 +801,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   bool get disableDeliveryDate;
   @override
   bool get enableBillTo;
+  @override
+  bool get showPOAttachment;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsCopyWith<_$_SalesOrganisationConfigs>

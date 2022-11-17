@@ -38,6 +38,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool disablePaymentTermsDisplay,
     required bool disableDeliveryDate,
     required bool enableBillTo,
+    required bool showPOAttachment,
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
@@ -68,9 +69,10 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         enableGMC: false,
         enableListPrice: false,
         priceOverride: false,
-        disablePaymentTermsDisplay:false,
-        disableDeliveryDate:false,
-        enableBillTo:false,
+        disablePaymentTermsDisplay: false,
+        disableDeliveryDate: false,
+        enableBillTo: false,
+        showPOAttachment: false,
       );
 
   String get getConfigLangauge {

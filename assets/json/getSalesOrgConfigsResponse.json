@@ -57,7 +57,7 @@
             "disablePayment": false,
             "enablePartialPayment": false,
             "disableDeals": false,
-            "showPOAttachment": false,
+            "showPOAttachment": true,
             "principleDisabledDeals": {
                "value": []
             },

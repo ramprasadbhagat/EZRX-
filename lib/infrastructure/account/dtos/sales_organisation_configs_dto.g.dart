@@ -54,13 +54,14 @@ class SalesOrganisationConfigsDtoAdapter
           fields[127] == null ? false : fields[127] as bool,
       disableDeliveryDate: fields[128] == null ? false : fields[128] as bool,
       enableBillTo: fields[129] == null ? false : fields[129] as bool,
+      showPOAttachment: fields[130] == null ? false : fields[130] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_SalesOrganisationConfigsDto obj) {
     writer
-      ..writeByte(30)
+      ..writeByte(31)
       ..writeByte(100)
       ..write(obj.disableProcessingStatus)
       ..writeByte(101)
@@ -119,6 +120,8 @@ class SalesOrganisationConfigsDtoAdapter
       ..write(obj.disableDeliveryDate)
       ..writeByte(129)
       ..write(obj.enableBillTo)
+      ..writeByte(130)
+      ..write(obj.showPOAttachment)
       ..writeByte(7)
       ..write(obj.principalList);
   }
@@ -176,6 +179,7 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
           json['disablePaymentTermsDisplay'] as bool? ?? false,
       disableDeliveryDate: json['disableDeliveryDate'] as bool? ?? false,
       enableBillTo: json['enableBillTo'] as bool? ?? false,
+      showPOAttachment: json['showPOAttachment'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -212,4 +216,5 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'disablePaymentTermsDisplay': instance.disablePaymentTermsDisplay,
       'disableDeliveryDate': instance.disableDeliveryDate,
       'enableBillTo': instance.enableBillTo,
+      'showPOAttachment': instance.showPOAttachment,
     };

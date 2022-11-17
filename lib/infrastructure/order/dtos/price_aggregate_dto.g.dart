@@ -89,7 +89,8 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
               priceOverride: false,
               disablePaymentTermsDisplay: false,
               disableDeliveryDate: false,
-              enableBillTo: false)
+              enableBillTo: false,
+              showPOAttachment: false)
           : fields[3] as SalesOrganisationConfigsDto,
       zmgMaterialCountOnCart: fields[4] == null ? 0 : fields[4] as int,
       isOverride: fields[5] == null ? false : fields[5] as bool,

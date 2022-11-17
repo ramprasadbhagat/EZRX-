@@ -67,7 +67,8 @@ void main() {
     priceOverride: false,
     disablePaymentTermsDisplay: false,
     disableDeliveryDate: false,
-    enableBillTo:false,
+    enableBillTo: false,
+    showPOAttachment: false,
   );
 
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(

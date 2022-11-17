@@ -66,7 +66,12 @@
           "PaymentTermDescription": "testing"
         },
         "SpecialInstructions": "",
-        "PODocuments": [],
+        "PODocuments": [
+          {
+            "Url":" https://ezrxpostorage.blob.core.windows.net/ezrx-sg/po-bucket/2022/ezrxtest05_0000100728_0070048890_1668437253_Screenshot from 2022-11-10 22-07-20.png", 
+            "Name": "2022-11-10 22-07-20.png"
+          }
+        ],
         "Messages": [
           {
             "Type": "E",

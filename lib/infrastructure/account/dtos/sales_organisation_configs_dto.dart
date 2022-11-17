@@ -100,9 +100,12 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'disableDeliveryDate', defaultValue: false)
     @HiveField(128, defaultValue: false)
         required bool disableDeliveryDate,
-        @JsonKey(name: 'enableBillTo', defaultValue: false)
+    @JsonKey(name: 'enableBillTo', defaultValue: false)
     @HiveField(129, defaultValue: false)
         required bool enableBillTo,
+    @JsonKey(name: 'showPOAttachment', defaultValue: false)
+    @HiveField(130, defaultValue: false)
+        required bool showPOAttachment,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -137,8 +140,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableGMC: configs.enableGMC,
       enableListPrice: configs.enableListPrice,
       disablePaymentTermsDisplay: configs.disablePaymentTermsDisplay,
-      disableDeliveryDate:configs.disableDeliveryDate,
-      enableBillTo:configs.enableBillTo,
+      disableDeliveryDate: configs.disableDeliveryDate,
+      enableBillTo: configs.enableBillTo,
+      showPOAttachment: configs.showPOAttachment,
     );
   }
 
@@ -173,7 +177,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       priceOverride: priceOverride,
       disablePaymentTermsDisplay: disablePaymentTermsDisplay,
       disableDeliveryDate: disableDeliveryDate,
-      enableBillTo:enableBillTo,
+      enableBillTo: enableBillTo,
+      showPOAttachment: showPOAttachment,
     );
   }
 
