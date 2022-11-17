@@ -17,6 +17,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -48,6 +49,8 @@ void main() {
   late CustomerCodeBloc customerCodeBloc;
   late List<PriceAggregate> mockCartItemWithDataList;
   late List<PriceAggregate> mockCartItemWithDataList2;
+
+  late List<PriceAggregate> mockCartItemWithDataListOverride;
   late Map<MaterialNumber, Price> mockPriceList;
 
   final AuthBloc authBlocMock = AuthBlocMock();
@@ -78,6 +81,19 @@ void main() {
       ];
       mockCartItemWithDataList2 = [
         PriceAggregate.empty().copyWith(
+          quantity: 2,
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('000000000023168451'),
+            materialDescription: ' Triglyceride Mosys D',
+            principalData: PrincipalData.empty().copyWith(
+              principalName: '台灣拜耳股份有限公司',
+            ),
+          ),
+        ),
+      ];
+      mockCartItemWithDataListOverride = [
+        PriceAggregate.empty().copyWith(
+          isOverride: true,
           quantity: 2,
           materialInfo: MaterialInfo.empty().copyWith(
             materialNumber: MaterialNumber('000000000023168451'),
@@ -437,6 +453,114 @@ void main() {
       //   final zmgDiscountLable = find.byKey(const Key('zmgDiscountLable'));
       //   expect(zmgDiscountLable, findsOneWidget);
       // });
+
+      testWidgets('open bottom sheet to override price', (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItemList: mockCartItemWithDataList,
+            isFetching: true,
+          ),
+        );
+
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
+
+        await tester.pump();
+        final item = find.byKey(Key(
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+        expect(item, findsOneWidget);
+        final listWidget = find.byWidgetPredicate((w) => w is ListTile);
+        expect(listWidget, findsOneWidget);
+        final removeWidget = tester.widget(find.byIcon(Icons.remove));
+        await tester.tap(find.byWidget(removeWidget));
+
+        await tester.pump();
+        final priceWidget = find.byKey(
+          const Key('priceOverride'),
+        );
+        // tester.widget(find.byKey(const Key('priceOverride')));
+        expect(priceWidget, findsOneWidget);
+        await tester.tap(
+          priceWidget,
+        );
+        // final bottomSheet = find.byKey(
+        //   const Key('priceSheetKey'),
+        // );
+        // expect(bottomSheet, findsOneWidget);
+      });
+      testWidgets('Check if price is overrided ', (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItemList: mockCartItemWithDataListOverride,
+            isFetching: true,
+          ),
+        );
+
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
+
+        await tester.pump();
+        final item = find.byKey(Key(
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+        expect(item, findsOneWidget);
+        final listWidget = find.byWidgetPredicate((w) => w is ListTile);
+        expect(listWidget, findsOneWidget);
+        final removeWidget = tester.widget(find.byIcon(Icons.remove));
+        await tester.tap(find.byWidget(removeWidget));
+
+        await tester.pump();
+        final priceWidget = find.byKey(
+          const Key('priceOverride'),
+        );
+        expect(priceWidget, findsOneWidget);
+        final listPrice = find.byKey(const Key('listPrice'));
+
+        expect(
+            (tester.firstWidget(find.byKey(
+              const Key('listPrice'),
+            )) as Text)
+                .style!
+                .color,
+            ZPColors.red);
+      });
+      testWidgets('Check if price is not overrided ', (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItemList: mockCartItemWithDataList,
+            isFetching: true,
+          ),
+        );
+
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
+
+        await tester.pump();
+        final item = find.byKey(Key(
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+        expect(item, findsOneWidget);
+        final listWidget = find.byWidgetPredicate((w) => w is ListTile);
+        expect(listWidget, findsOneWidget);
+        final removeWidget = tester.widget(find.byIcon(Icons.remove));
+        await tester.tap(find.byWidget(removeWidget));
+
+        await tester.pump();
+        final priceWidget = find.byKey(
+          const Key('priceOverride'),
+        );
+        expect(priceWidget, findsOneWidget);
+        final listPrice = find.byKey(const Key('listPrice'));
+
+        expect(
+            (tester.firstWidget(find.byKey(
+              const Key('listPrice'),
+            )) as Text)
+                .style!
+                .color,
+            ZPColors.lightGray);
+      });
     },
   );
 }

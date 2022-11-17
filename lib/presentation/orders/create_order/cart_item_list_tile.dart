@@ -182,8 +182,9 @@ class CartItemListTile extends StatelessWidget {
                     ),
               ),
               GestureDetector(
-                onTap: () {
-                  showModalBottomSheet<void>(
+                key: const Key('priceOverride'),
+                onTap: () async {
+                  await showModalBottomSheet<void>(
                     isScrollControlled: true,
                     backgroundColor: Colors.transparent,
                     context: context,
@@ -232,6 +233,7 @@ class CartItemListTile extends StatelessWidget {
                         : const SizedBox.shrink(),
                     Text(
                       '${'List Price: '.tr()}${cartItem.display(PriceType.listPrice)}',
+                      key: const Key('listPrice'),
                       style: Theme.of(context).textTheme.bodyText1?.apply(
                             color: cartItem.isOverride
                                 ? ZPColors.red

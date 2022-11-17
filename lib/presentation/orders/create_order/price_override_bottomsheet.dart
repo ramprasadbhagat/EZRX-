@@ -33,6 +33,7 @@ class _PriceSheetState extends State<PriceSheet> {
   @override
   Widget build(BuildContext context) {
     return Padding(
+      key: const Key('priceSheetKey'),
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
