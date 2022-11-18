@@ -76,7 +76,6 @@ class OrderTemplateDetailPage extends StatelessWidget {
                     materialQueryInfo: MaterialQueryInfo.fromOrderTemplate(
                       orderMaterial: material,
                     ),
-                    description: material.materialDescription,
                     materialNumber: material.materialNumber.displayMatNo,
                     qty: material.qty.toString(),
                   );
@@ -116,12 +115,3 @@ class OrderTemplateDetailPage extends StatelessWidget {
     );
   }
 }
-
-  // TODO: missing widget after rebase
-  // final salesOrgConfigs = context.read<SalesOrgBloc>().state.configs;
-  //         final defaultMaterialDescription = orderTemplateInfo
-  //             .cartItems[index].materialInfo.defaultMaterialDescription;
-  //         if (salesOrgConfigs.enableDefaultMD &&
-  //             defaultMaterialDescription.isNotEmpty) {
-  //           return Text(defaultMaterialDescription);
-  //         }

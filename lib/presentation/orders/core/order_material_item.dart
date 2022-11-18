@@ -11,13 +11,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderMaterialItem extends StatelessWidget {
   final MaterialQueryInfo materialQueryInfo;
-  final String description;
+
   final String materialNumber;
   final String qty;
   const OrderMaterialItem({
     Key? key,
     required this.materialQueryInfo,
-    required this.description,
     required this.materialNumber,
     required this.qty,
   }) : super(key: key);
@@ -49,7 +48,7 @@ class OrderMaterialItem extends StatelessWidget {
                   final itemInfo = state.materialDetails[materialQueryInfo];
                   final materialDescription =
                       itemInfo?.info.materialDescription ?? '';
-                  
+
                   return Row(
                     children: [
                       const Text(

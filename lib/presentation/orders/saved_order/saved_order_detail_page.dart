@@ -84,7 +84,6 @@ class SavedOrderDetailPage extends StatelessWidget {
 
                   return OrderMaterialItem(
                     materialQueryInfo: material.queryInfo,
-                    description: material.materialDescription,
                     materialNumber: material.materialNumber.displayMatNo,
                     qty: material.qty.toString(),
                   );
