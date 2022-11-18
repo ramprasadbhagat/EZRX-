@@ -13,9 +13,16 @@ import 'package:ezrxmobile/application/order/material_filter/material_filter_blo
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
@@ -24,6 +31,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_root.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/order_type_selector.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -93,6 +101,37 @@ void main() {
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
   final fakeMaterialPrice = MaterialPrice(10.0);
 
+  final fakeOrderDocumentTypeList = [
+    OrderDocumentType.empty().copyWith(documentType: 'ZPOR'),
+    OrderDocumentType.empty().copyWith(documentType: 'ZPFB'),
+    OrderDocumentType.empty().copyWith(documentType: 'ZPFC'),
+  ];
+
+  final fakematerialInfo = MaterialInfo(
+    materialNumber: fakeMaterialNumber,
+    materialDescription: "Reag Cup 15ml 1'S",
+    governmentMaterialCode: '',
+    therapeuticClass: 'All other non-therapeutic products',
+    itemBrand: 'Item not listed in I',
+    principalData: const PrincipalData(
+      principalName: '台灣羅氏醫療診斷設備(股)公司',
+      principalCode: '0000102004',
+    ),
+    taxClassification:
+        MaterialTaxClassification('Product : Full Tax'),
+    itemRegistrationNumber: 'NA',
+    unitOfMeasurement: 'EA',
+    materialGroup2: MaterialGroup.two(''),
+    materialGroup4: MaterialGroup.four('OTH'),
+    isSampleMaterial: false,
+    hidePrice: false,
+    hasValidTenderContract: false,
+    hasMandatoryTenderContract: false,
+    taxes: ['5'],
+    bundles: [],
+    defaultMaterialDescription: '',
+    isFOCMaterial: false
+  );
   late MaterialFilterBloc mockMaterialFilterBloc;
 
   setUpAll(() async {
@@ -225,31 +264,7 @@ void main() {
           isFetching: false,
           nextPageIndex: 2,
           materialList: <MaterialInfo>[
-            MaterialInfo(
-              materialNumber: fakeMaterialNumber,
-              materialDescription: "Reag Cup 15ml 1'S",
-              governmentMaterialCode: '',
-              therapeuticClass: 'All other non-therapeutic products',
-              itemBrand: 'Item not listed in I',
-              principalData: const PrincipalData(
-                principalName: '台灣羅氏醫療診斷設備(股)公司',
-                principalCode: '0000102004',
-              ),
-              taxClassification:
-                  MaterialTaxClassification('Product : Full Tax'),
-              itemRegistrationNumber: 'NA',
-              unitOfMeasurement: 'EA',
-              materialGroup2: MaterialGroup.two(''),
-              materialGroup4: MaterialGroup.four('OTH'),
-              isSampleMaterial: false,
-              hidePrice: false,
-              hasValidTenderContract: false,
-              hasMandatoryTenderContract: false,
-              taxes: ['5'],
-              bundles: [],
-              defaultMaterialDescription: '',
-              isFOCMaterial: false
-            )
+            fakematerialInfo,
           ],
         )
       ];
@@ -330,6 +345,227 @@ void main() {
           find.text('123'), findsNothing); // 3 characters shouldn't be allowed
 
       expect(find.text('1234'), findsOneWidget);
+    });
+
+    testWidgets('Order Type Document type disable',
+        (WidgetTester tester) async {
+      final isOrderTypeEnable = eligibilityBlocMock.state.isOrderTypeEnable;
+      final orderDocumentTypedialog =
+          find.byKey(const Key('orderDocumentTypedialog'));
+      expect(isOrderTypeEnable, false);
+      expect(orderDocumentTypedialog, findsNothing);
+    });
+
+    testWidgets('Order Type Document type enable', (tester) async {
+      final eligibilityState = eligibilityBlocMock.state.copyWith(
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+          user: User.empty().copyWith(
+              role:
+                  Role.empty().copyWith(type: RoleType('internal_sales_rep'))),
+          salesOrgConfigs: SalesOrganisationConfigs.empty()
+              .copyWith(disableOrderType: false));
+      final isOrderTypeEnable = eligibilityState.isOrderTypeEnable;
+      expect(isOrderTypeEnable, true);
+
+      when(() => orderDocumentTypeBlocMock.state).thenReturn(
+        OrderDocumentTypeState.initial().copyWith(
+          isSubmitting: false,
+          orderDocumentTypeList: fakeOrderDocumentTypeList,
+        ),
+      );
+
+      await tester.pumpWidget(
+          getScopedWidget(const Material(child: OrderTypeSelector(hideReasonField: true,))));
+      await tester.pump();
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      final orderTypeSelector = find.byKey(const Key('orderTypeSelector'));
+      expect(orderTypeSelector, findsOneWidget);
+    });
+
+    testWidgets('Order Type Document type enable with selected order type', (tester) async {
+      final eligibilityState = eligibilityBlocMock.state.copyWith(
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+          user: User.empty().copyWith(
+              role:
+                  Role.empty().copyWith(type: RoleType('internal_sales_rep'))),
+          salesOrgConfigs: SalesOrganisationConfigs.empty()
+              .copyWith(disableOrderType: false));
+      final isOrderTypeEnable = eligibilityState.isOrderTypeEnable;
+      expect(isOrderTypeEnable, true);
+
+      when(() => orderDocumentTypeBlocMock.state).thenReturn(
+        OrderDocumentTypeState.initial().copyWith(
+          isSubmitting: false,
+          orderDocumentTypeList: fakeOrderDocumentTypeList,
+        ),
+      );
+
+      await tester.pumpWidget(
+          getScopedWidget(const Material(child: OrderTypeSelector(hideReasonField: true,))));
+      await tester.pump();
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      final orderTypeSelector = find.byKey(const Key('orderTypeSelector'));
+      expect(orderTypeSelector, findsOneWidget);
+
+      final orderDocumentTypedialog =
+          find.byKey(const Key('orderDocumentTypedialog'));
+      expect(orderDocumentTypedialog, findsOneWidget);
+      await tester.tap(orderDocumentTypedialog);
+
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      final documentType =
+          find.byKey(Key(fakeOrderDocumentTypeList.last.documentType));
+      expect(documentType, findsOneWidget);
+      await tester.tap(documentType);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      
+    });
+
+    testWidgets(
+      'Change order type when already cart item added, success', (tester) async {
+      final eligibilityState = eligibilityBlocMock.state.copyWith(
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+          user: User.empty().copyWith(
+              role:
+                  Role.empty().copyWith(type: RoleType('internal_sales_rep'))),
+          salesOrgConfigs: SalesOrganisationConfigs.empty()
+              .copyWith(disableOrderType: false));
+      final isOrderTypeEnable = eligibilityState.isOrderTypeEnable;
+      expect(isOrderTypeEnable, true);
+
+      when(() => orderDocumentTypeBlocMock.state).thenReturn(
+        OrderDocumentTypeState.initial().copyWith(
+          isSubmitting: false,
+          orderDocumentTypeList: fakeOrderDocumentTypeList,
+        ),
+      );
+
+      await tester.pumpWidget(
+          getScopedWidget(const Material(child: OrderTypeSelector(hideReasonField: true,))));
+      await tester.pump();
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      final orderTypeSelector = find.byKey(const Key('orderTypeSelector'));
+      expect(orderTypeSelector, findsOneWidget);
+
+      final orderDocumentTypedialog =
+          find.byKey(const Key('orderDocumentTypedialog'));
+      expect(orderDocumentTypedialog, findsOneWidget);
+      await tester.tap(orderDocumentTypedialog);
+
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      final documentType =
+          find.byKey(Key(fakeOrderDocumentTypeList.last.documentType));
+      expect(documentType, findsOneWidget);
+      await tester.tap(documentType);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      //add to cart
+      when(() => cartBlocMock.state).thenReturn(
+        cartBlocMock.state.copyWith(
+          cartItemList: [
+            PriceAggregate.empty().copyWith(
+              materialInfo: fakematerialInfo,
+            ),
+          ]
+        ),
+      );
+
+      final orderDocumentTypedialog2 =
+          find.byKey(const Key('orderDocumentTypedialog'));
+      expect(orderDocumentTypedialog2, findsOneWidget);
+      await tester.tap(orderDocumentTypedialog2);
+
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      final documentType2 =
+          find.byKey(Key(fakeOrderDocumentTypeList.last.documentType));
+      expect(documentType2, findsOneWidget);
+      await tester.tap(documentType2);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      final changeAction =
+          find.byKey(const Key('Change'));
+      expect(changeAction, findsOneWidget);
+      await tester.tap(changeAction);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      
+    });
+
+    testWidgets(
+      'Change order type when already cart item added, fails', (tester) async {
+      final eligibilityState = eligibilityBlocMock.state.copyWith(
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+          user: User.empty().copyWith(
+              role:
+                  Role.empty().copyWith(type: RoleType('internal_sales_rep'))),
+          salesOrgConfigs: SalesOrganisationConfigs.empty()
+              .copyWith(disableOrderType: false));
+      final isOrderTypeEnable = eligibilityState.isOrderTypeEnable;
+      expect(isOrderTypeEnable, true);
+
+      when(() => orderDocumentTypeBlocMock.state).thenReturn(
+        OrderDocumentTypeState.initial().copyWith(
+          isSubmitting: false,
+          orderDocumentTypeList: fakeOrderDocumentTypeList,
+        ),
+      );
+
+      await tester.pumpWidget(
+          getScopedWidget(const Material(child: OrderTypeSelector(hideReasonField: true,))));
+      await tester.pump();
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+      final orderTypeSelector = find.byKey(const Key('orderTypeSelector'));
+      expect(orderTypeSelector, findsOneWidget);
+
+      final orderDocumentTypedialog =
+          find.byKey(const Key('orderDocumentTypedialog'));
+      expect(orderDocumentTypedialog, findsOneWidget);
+      await tester.tap(orderDocumentTypedialog);
+
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      final documentType =
+          find.byKey(Key(fakeOrderDocumentTypeList.last.documentType));
+      expect(documentType, findsOneWidget);
+      await tester.tap(documentType);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      //add to cart
+      when(() => cartBlocMock.state).thenReturn(
+        cartBlocMock.state.copyWith(
+          cartItemList: [
+            PriceAggregate.empty().copyWith(
+              materialInfo: fakematerialInfo,
+            ),
+          ]
+        ),
+      );
+
+      final orderDocumentTypedialog2 =
+          find.byKey(const Key('orderDocumentTypedialog'));
+      expect(orderDocumentTypedialog2, findsOneWidget);
+      await tester.tap(orderDocumentTypedialog2);
+
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      final documentType2 =
+          find.byKey(Key(fakeOrderDocumentTypeList.last.documentType));
+      expect(documentType2, findsOneWidget);
+      await tester.tap(documentType2);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      final cancelAction =
+          find.byKey(const Key('Cancel'));
+      expect(cancelAction, findsOneWidget);
+      await tester.tap(cancelAction);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      
     });
 
     // TODO: need Wasim help

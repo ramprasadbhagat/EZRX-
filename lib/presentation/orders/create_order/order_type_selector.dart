@@ -21,6 +21,7 @@ class OrderTypeSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: const Key('orderTypeSelector'),
       decoration: const BoxDecoration(
         color: ZPColors.secondaryBGColor,
       ),
@@ -129,6 +130,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
                   ),
                 ),
                 child: InkWell(
+                  key: const Key('orderDocumentTypedialog'),
                   onTap: () async => orderDocumentTypeState.isSubmitting
                       ? null
                       : await showOrderDocumentTypedialog(context: context),
@@ -183,6 +185,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
             final displayText = isReason ? i.displayReasonText : i.documentType;
 
             return CupertinoActionSheetAction(
+              key: Key(displayText),
               child: Text(
                 displayText,
                 style: const TextStyle(
