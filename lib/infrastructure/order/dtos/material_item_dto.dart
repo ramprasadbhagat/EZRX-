@@ -62,6 +62,30 @@ class MaterialItemDto with _$MaterialItemDto {
     );
   }
 
+  factory MaterialItemDto.fromDomain(MaterialItem materialItem) {
+    return MaterialItemDto(
+      batchNumber: materialItem.batchNumber,
+      bonuses: materialItem.bonuses
+          .map((e) => MaterialItemBonusDto.fromDomain(e))
+          .toList(),
+      comment: materialItem.comment,
+      defaultMaterialDescription: materialItem.defaultMaterialDescription,
+      hidePrice: materialItem.hidePrice,
+      itemRegistrationNumber: materialItem.itemRegistrationNumber,
+      materialDescription: materialItem.materialDescription,
+      materialGroup2: materialItem.materialGroup2.getOrCrash(),
+      materialGroup4: materialItem.materialGroup4.getOrCrash(),
+      materialNumber: materialItem.materialNumber.getOrCrash(),
+      overrideInfo:
+          MaterialItemOverrideDto.fromDomain(materialItem.overrideInfo),
+      overridenPrice: materialItem.overridenPrice,
+      qty: materialItem.qty,
+      type: materialItem.type,
+      unitOfMeasurement: materialItem.unitOfMeasurement,
+      zdp8Override: materialItem.zdp8Override,
+    );
+  }
+
   factory MaterialItemDto.fromJson(Map<String, dynamic> json) =>
       _$MaterialItemDtoFromJson(json);
 }

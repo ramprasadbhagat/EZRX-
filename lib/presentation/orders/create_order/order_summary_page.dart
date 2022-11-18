@@ -26,6 +26,30 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
+GlobalKey<FormState> _additionalDetailsFormKey = GlobalKey<FormState>();
+
+enum AdditionalInfoLabelList {
+  customerPoReference,
+  specialInstruction,
+  referenceNote,
+  collectiveNumber,
+  contactPerson,
+  contactNumber,
+  paymentTerm,
+  deliveryDate
+}
+
+final Map<AdditionalInfoLabelList, String> data = {
+  AdditionalInfoLabelList.customerPoReference: '',
+  AdditionalInfoLabelList.specialInstruction: '',
+  AdditionalInfoLabelList.referenceNote: '',
+  AdditionalInfoLabelList.collectiveNumber: '',
+  AdditionalInfoLabelList.contactPerson: '',
+  AdditionalInfoLabelList.contactNumber: '',
+  AdditionalInfoLabelList.paymentTerm: '',
+  AdditionalInfoLabelList.deliveryDate: '',
+};
+
 class OrderSummaryPage extends StatelessWidget {
   const OrderSummaryPage({Key? key}) : super(key: key);
 
@@ -151,9 +175,37 @@ class _SaveTemplateButton extends StatelessWidget {
 class _BodyContent extends StatelessWidget {
   const _BodyContent({Key? key}) : super(key: key);
 
+  void _saveAdditionalInformation(
+    String value,
+    AdditionalInfoLabelList lavel,
+  ) {
+    data[lavel] = value;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<OrderSummaryBloc, OrderSummaryState>(
+    return BlocConsumer<OrderSummaryBloc, OrderSummaryState>(
+      listenWhen: (previous, current) =>
+          previous.isDraftOrderCreated != current.isDraftOrderCreated,
+      listener: (context, state) {
+        if (state.isDraftOrderCreated) {
+          context.router.pushNamed('saved_order_list');
+        } else {
+          state.apiFailureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) {
+                final failureMessage = failure.toString();
+                showSnackBar(
+                  context: context,
+                  message: failureMessage.tr(),
+                );
+              },
+              (_) {},
+            ),
+          );
+        }
+      },
       buildWhen: (previous, current) => previous.step != current.step,
       builder: (context, state) {
         return Stepper(
@@ -169,6 +221,9 @@ class _BodyContent extends StatelessWidget {
                       if (details.currentStep == state.maxSteps) {
                         //code to submit
                       } else {
+                        if (details.currentStep == 3) {
+                          _additionalDetailsFormKey.currentState?.save();
+                        }
                         context
                             .read<OrderSummaryBloc>()
                             .add(const OrderSummaryEvent.stepContinue());
@@ -185,9 +240,20 @@ class _BodyContent extends StatelessWidget {
                                 ZPColors.darkGray,
                               ),
                             ),
-                    onPressed: () {
-                      if (details.currentStep == state.maxSteps) {
-                        //code to save
+                    onPressed: () async {
+                      if (details.currentStep == 5) {
+                        context.read<OrderSummaryBloc>().add(
+                              OrderSummaryEvent.createDraft(
+                                shipToCodeState:
+                                    context.read<ShipToCodeBloc>().state,
+                                customerCodeState:
+                                    context.read<CustomerCodeBloc>().state,
+                                salesOrgStateState:
+                                    context.read<SalesOrgBloc>().state,
+                                userState: context.read<UserBloc>().state,
+                                cartState: context.read<CartBloc>().state,
+                              ),
+                            );
                       } else {
                         context
                             .read<OrderSummaryBloc>()
@@ -236,7 +302,9 @@ class _BodyContent extends StatelessWidget {
             ),
             Step(
               title: Text('Additional Information'.tr()),
-              content: const _AdditionalInformationStep(),
+              content: _AdditionalInformationStep(
+                saveData: _saveAdditionalInformation,
+              ),
             ),
             Step(
               title: Text('Disclaimer'.tr()),
@@ -332,7 +400,9 @@ class _CustomerDetailsStep extends StatelessWidget {
 }
 
 class _AdditionalInformationStep extends StatelessWidget {
+  final Function saveData;
   const _AdditionalInformationStep({
+    required this.saveData,
     Key? key,
   }) : super(key: key);
 
@@ -345,42 +415,54 @@ class _AdditionalInformationStep extends StatelessWidget {
       builder: (context, state) {
         return Column(
           children: [
-            const _TextFormField(
+            _TextFormField(
               labelText: 'Customer PO Reference',
               maxLength: 35,
+              saveData: saveData,
+              label: AdditionalInfoLabelList.customerPoReference,
             ),
             context.read<SalesOrgBloc>().state.configs.enableSpecialInstructions
-                ? const _TextFormField(
+                ? _TextFormField(
                     labelText: 'Special Instructions',
-                    maxLength: 132,
                     keyboardType: TextInputType.multiline,
+                    maxLength: 132,
+                    saveData: saveData,
+                    label: AdditionalInfoLabelList.specialInstruction,
                   )
                 : const SizedBox.shrink(),
             context.read<SalesOrgBloc>().state.configs.enableReferenceNote
-                ? const _TextFormField(
+                ? _TextFormField(
                     labelText: 'Reference Note',
                     maxLength: 50,
                     keyboardType: TextInputType.multiline,
+                    saveData: saveData,
+                    label: AdditionalInfoLabelList.referenceNote,
                   )
                 : const SizedBox.shrink(),
             context.read<SalesOrgBloc>().state.configs.enableCollectiveNumber &&
                     context.read<UserBloc>().state.user.role.type.isSalesRep
-                ? const _TextFormField(
+                ? _TextFormField(
                     labelText: 'Collective Number',
                     maxLength: 10,
+                    saveData: saveData,
+                    label: AdditionalInfoLabelList.collectiveNumber,
                   )
                 : const SizedBox.shrink(),
             context.read<SalesOrgBloc>().state.configs.enableMobileNumber
-                ? const _TextFormField(
+                ? _TextFormField(
                     labelText: 'Contact Person',
                     maxLength: 50,
+                    saveData: saveData,
+                    label: AdditionalInfoLabelList.contactPerson,
                   )
                 : const SizedBox.shrink(),
             context.read<SalesOrgBloc>().state.configs.enableMobileNumber
-                ? const _TextFormField(
+                ? _TextFormField(
                     labelText: 'Contact Number',
                     maxLength: 10,
                     keyboardType: TextInputType.phone,
+                    saveData: saveData,
+                    label: AdditionalInfoLabelList.contactNumber,
                   )
                 : const SizedBox.shrink(),
             context.read<SalesOrgBloc>().state.configs.enableFutureDeliveryDay
@@ -398,8 +480,9 @@ class _AdditionalInformationStep extends StatelessWidget {
             //OrderType
             context.read<EligibilityBloc>().state.isOrderTypeEnable
                 ? Container(
-                  margin: const EdgeInsets.only(top: 18),
-                  child: const OrderTypeSelector(),)
+                    margin: const EdgeInsets.only(top: 18),
+                    child: const OrderTypeSelector(),
+                  )
                 : const SizedBox.shrink(),
           ],
         );
@@ -506,13 +589,16 @@ String _displayPrice(SalesOrganisationConfigs salesOrgConfig, double price) {
 
 class _TextFormField extends StatelessWidget {
   final String labelText;
+  final AdditionalInfoLabelList label;
   final int maxLength;
   final TextInputType keyboardType;
-
+  final Function saveData;
   const _TextFormField({
     required this.labelText,
+    required this.label,
     required this.maxLength,
     this.keyboardType = TextInputType.text,
+    required this.saveData,
     Key? key,
   }) : super(key: key);
 
@@ -525,6 +611,9 @@ class _TextFormField extends StatelessWidget {
           initialValue: '',
           maxLength: maxLength,
           maxLines: keyboardType == TextInputType.multiline ? null : 1,
+          onSaved: (value) {
+            saveData(value, label);
+          },
           decoration: InputDecoration(
             // border: InputBorder.none,
             labelText: labelText.tr(),
@@ -578,6 +667,8 @@ class _PaymentTermState extends State<_PaymentTerm> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PaymentTermBloc, PaymentTermState>(
+      buildWhen: (previous, current) =>
+          previous.isFetching != current.isFetching,
       builder: (context, state) {
         return TextFormField(
           controller: _controller,

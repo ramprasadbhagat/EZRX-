@@ -23,6 +23,16 @@ class MaterialItemOverrideDto with _$MaterialItemOverrideDto {
         percentageOverride: percentageOverride,
       );
 
+  factory MaterialItemOverrideDto.fromDomain(MaterialItemOverride bonus) {
+    return MaterialItemOverrideDto(
+      reference: bonus.reference,
+      valueOverride: bonus.valueOverride
+          .map((e) => ValueOverrideDto.fromDomain(e))
+          .toList(),
+      percentageOverride: bonus.percentageOverride,
+    );
+  }
+
   factory MaterialItemOverrideDto.fromJson(Map<String, dynamic> json) =>
       _$MaterialItemOverrideDtoFromJson(json);
 }
@@ -41,6 +51,14 @@ class ValueOverrideDto with _$ValueOverrideDto {
         price: price,
         currency: Currency(currency),
       );
+
+  factory ValueOverrideDto.fromDomain(ValueOverride override) {
+    return ValueOverrideDto(
+      code: override.code,
+      currency: override.currency.getOrCrash(),
+      price: override.price,
+    );
+  }
 
   factory ValueOverrideDto.fromJson(Map<String, dynamic> json) =>
       _$ValueOverrideDtoFromJson(json);

@@ -22,6 +22,13 @@ mixin _$OrderSummaryEvent {
     required TResult Function() stepContinue,
     required TResult Function() stepCancel,
     required TResult Function(int step) stepTapped,
+    required TResult Function(
+            ShipToCodeState shipToCodeState,
+            UserState userState,
+            CartState cartState,
+            CustomerCodeState customerCodeState,
+            SalesOrgState salesOrgStateState)
+        createDraft,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +37,13 @@ mixin _$OrderSummaryEvent {
     TResult? Function()? stepContinue,
     TResult? Function()? stepCancel,
     TResult? Function(int step)? stepTapped,
+    TResult? Function(
+            ShipToCodeState shipToCodeState,
+            UserState userState,
+            CartState cartState,
+            CustomerCodeState customerCodeState,
+            SalesOrgState salesOrgStateState)?
+        createDraft,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +52,13 @@ mixin _$OrderSummaryEvent {
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
     TResult Function(int step)? stepTapped,
+    TResult Function(
+            ShipToCodeState shipToCodeState,
+            UserState userState,
+            CartState cartState,
+            CustomerCodeState customerCodeState,
+            SalesOrgState salesOrgStateState)?
+        createDraft,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +68,7 @@ mixin _$OrderSummaryEvent {
     required TResult Function(_StepContinue value) stepContinue,
     required TResult Function(_StepCancel value) stepCancel,
     required TResult Function(_StepTapped value) stepTapped,
+    required TResult Function(_CreateDraft value) createDraft,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +77,7 @@ mixin _$OrderSummaryEvent {
     TResult? Function(_StepContinue value)? stepContinue,
     TResult? Function(_StepCancel value)? stepCancel,
     TResult? Function(_StepTapped value)? stepTapped,
+    TResult? Function(_CreateDraft value)? createDraft,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +86,7 @@ mixin _$OrderSummaryEvent {
     TResult Function(_StepContinue value)? stepContinue,
     TResult Function(_StepCancel value)? stepCancel,
     TResult Function(_StepTapped value)? stepTapped,
+    TResult Function(_CreateDraft value)? createDraft,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -128,6 +152,13 @@ class _$_Initialized implements _Initialized {
     required TResult Function() stepContinue,
     required TResult Function() stepCancel,
     required TResult Function(int step) stepTapped,
+    required TResult Function(
+            ShipToCodeState shipToCodeState,
+            UserState userState,
+            CartState cartState,
+            CustomerCodeState customerCodeState,
+            SalesOrgState salesOrgStateState)
+        createDraft,
   }) {
     return initialized();
   }
@@ -139,6 +170,13 @@ class _$_Initialized implements _Initialized {
     TResult? Function()? stepContinue,
     TResult? Function()? stepCancel,
     TResult? Function(int step)? stepTapped,
+    TResult? Function(
+            ShipToCodeState shipToCodeState,
+            UserState userState,
+            CartState cartState,
+            CustomerCodeState customerCodeState,
+            SalesOrgState salesOrgStateState)?
+        createDraft,
   }) {
     return initialized?.call();
   }
@@ -150,6 +188,13 @@ class _$_Initialized implements _Initialized {
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
     TResult Function(int step)? stepTapped,
+    TResult Function(
+            ShipToCodeState shipToCodeState,
+            UserState userState,
+            CartState cartState,
+            CustomerCodeState customerCodeState,
+            SalesOrgState salesOrgStateState)?
+        createDraft,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -165,6 +210,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_StepContinue value) stepContinue,
     required TResult Function(_StepCancel value) stepCancel,
     required TResult Function(_StepTapped value) stepTapped,
+    required TResult Function(_CreateDraft value) createDraft,
   }) {
     return initialized(this);
   }
@@ -176,6 +222,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_StepContinue value)? stepContinue,
     TResult? Function(_StepCancel value)? stepCancel,
     TResult? Function(_StepTapped value)? stepTapped,
+    TResult? Function(_CreateDraft value)? createDraft,
   }) {
     return initialized?.call(this);
   }
@@ -187,6 +234,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_StepContinue value)? stepContinue,
     TResult Function(_StepCancel value)? stepCancel,
     TResult Function(_StepTapped value)? stepTapped,
+    TResult Function(_CreateDraft value)? createDraft,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -242,6 +290,13 @@ class _$_StepContinue implements _StepContinue {
     required TResult Function() stepContinue,
     required TResult Function() stepCancel,
     required TResult Function(int step) stepTapped,
+    required TResult Function(
+            ShipToCodeState shipToCodeState,
+            UserState userState,
+            CartState cartState,
+            CustomerCodeState customerCodeState,
+            SalesOrgState salesOrgStateState)
+        createDraft,
   }) {
     return stepContinue();
   }
@@ -253,6 +308,13 @@ class _$_StepContinue implements _StepContinue {
     TResult? Function()? stepContinue,
     TResult? Function()? stepCancel,
     TResult? Function(int step)? stepTapped,
+    TResult? Function(
+            ShipToCodeState shipToCodeState,
+            UserState userState,
+            CartState cartState,
+            CustomerCodeState customerCodeState,
+            SalesOrgState salesOrgStateState)?
+        createDraft,
   }) {
     return stepContinue?.call();
   }
@@ -264,6 +326,13 @@ class _$_StepContinue implements _StepContinue {
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
     TResult Function(int step)? stepTapped,
+    TResult Function(
+            ShipToCodeState shipToCodeState,
+            UserState userState,
+            CartState cartState,
+            CustomerCodeState customerCodeState,
+            SalesOrgState salesOrgStateState)?
+        createDraft,
     required TResult orElse(),
   }) {
     if (stepContinue != null) {
@@ -279,6 +348,7 @@ class _$_StepContinue implements _StepContinue {
     required TResult Function(_StepContinue value) stepContinue,
     required TResult Function(_StepCancel value) stepCancel,
     required TResult Function(_StepTapped value) stepTapped,
+    required TResult Function(_CreateDraft value) createDraft,
   }) {
     return stepContinue(this);
   }
@@ -290,6 +360,7 @@ class _$_StepContinue implements _StepContinue {
     TResult? Function(_StepContinue value)? stepContinue,
     TResult? Function(_StepCancel value)? stepCancel,
     TResult? Function(_StepTapped value)? stepTapped,
+    TResult? Function(_CreateDraft value)? createDraft,
   }) {
     return stepContinue?.call(this);
   }
@@ -301,6 +372,7 @@ class _$_StepContinue implements _StepContinue {
     TResult Function(_StepContinue value)? stepContinue,
     TResult Function(_StepCancel value)? stepCancel,
     TResult Function(_StepTapped value)? stepTapped,
+    TResult Function(_CreateDraft value)? createDraft,
     required TResult orElse(),
   }) {
     if (stepContinue != null) {
@@ -356,6 +428,13 @@ class _$_StepCancel implements _StepCancel {
     required TResult Function() stepContinue,
     required TResult Function() stepCancel,
     required TResult Function(int step) stepTapped,
+    required TResult Function(
+            ShipToCodeState shipToCodeState,
+            UserState userState,
+            CartState cartState,
+            CustomerCodeState customerCodeState,
+            SalesOrgState salesOrgStateState)
+        createDraft,
   }) {
     return stepCancel();
   }
@@ -367,6 +446,13 @@ class _$_StepCancel implements _StepCancel {
     TResult? Function()? stepContinue,
     TResult? Function()? stepCancel,
     TResult? Function(int step)? stepTapped,
+    TResult? Function(
+            ShipToCodeState shipToCodeState,
+            UserState userState,
+            CartState cartState,
+            CustomerCodeState customerCodeState,
+            SalesOrgState salesOrgStateState)?
+        createDraft,
   }) {
     return stepCancel?.call();
   }
@@ -378,6 +464,13 @@ class _$_StepCancel implements _StepCancel {
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
     TResult Function(int step)? stepTapped,
+    TResult Function(
+            ShipToCodeState shipToCodeState,
+            UserState userState,
+            CartState cartState,
+            CustomerCodeState customerCodeState,
+            SalesOrgState salesOrgStateState)?
+        createDraft,
     required TResult orElse(),
   }) {
     if (stepCancel != null) {
@@ -393,6 +486,7 @@ class _$_StepCancel implements _StepCancel {
     required TResult Function(_StepContinue value) stepContinue,
     required TResult Function(_StepCancel value) stepCancel,
     required TResult Function(_StepTapped value) stepTapped,
+    required TResult Function(_CreateDraft value) createDraft,
   }) {
     return stepCancel(this);
   }
@@ -404,6 +498,7 @@ class _$_StepCancel implements _StepCancel {
     TResult? Function(_StepContinue value)? stepContinue,
     TResult? Function(_StepCancel value)? stepCancel,
     TResult? Function(_StepTapped value)? stepTapped,
+    TResult? Function(_CreateDraft value)? createDraft,
   }) {
     return stepCancel?.call(this);
   }
@@ -415,6 +510,7 @@ class _$_StepCancel implements _StepCancel {
     TResult Function(_StepContinue value)? stepContinue,
     TResult Function(_StepCancel value)? stepCancel,
     TResult Function(_StepTapped value)? stepTapped,
+    TResult Function(_CreateDraft value)? createDraft,
     required TResult orElse(),
   }) {
     if (stepCancel != null) {
@@ -496,6 +592,13 @@ class _$_StepTapped implements _StepTapped {
     required TResult Function() stepContinue,
     required TResult Function() stepCancel,
     required TResult Function(int step) stepTapped,
+    required TResult Function(
+            ShipToCodeState shipToCodeState,
+            UserState userState,
+            CartState cartState,
+            CustomerCodeState customerCodeState,
+            SalesOrgState salesOrgStateState)
+        createDraft,
   }) {
     return stepTapped(step);
   }
@@ -507,6 +610,13 @@ class _$_StepTapped implements _StepTapped {
     TResult? Function()? stepContinue,
     TResult? Function()? stepCancel,
     TResult? Function(int step)? stepTapped,
+    TResult? Function(
+            ShipToCodeState shipToCodeState,
+            UserState userState,
+            CartState cartState,
+            CustomerCodeState customerCodeState,
+            SalesOrgState salesOrgStateState)?
+        createDraft,
   }) {
     return stepTapped?.call(step);
   }
@@ -518,6 +628,13 @@ class _$_StepTapped implements _StepTapped {
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
     TResult Function(int step)? stepTapped,
+    TResult Function(
+            ShipToCodeState shipToCodeState,
+            UserState userState,
+            CartState cartState,
+            CustomerCodeState customerCodeState,
+            SalesOrgState salesOrgStateState)?
+        createDraft,
     required TResult orElse(),
   }) {
     if (stepTapped != null) {
@@ -533,6 +650,7 @@ class _$_StepTapped implements _StepTapped {
     required TResult Function(_StepContinue value) stepContinue,
     required TResult Function(_StepCancel value) stepCancel,
     required TResult Function(_StepTapped value) stepTapped,
+    required TResult Function(_CreateDraft value) createDraft,
   }) {
     return stepTapped(this);
   }
@@ -544,6 +662,7 @@ class _$_StepTapped implements _StepTapped {
     TResult? Function(_StepContinue value)? stepContinue,
     TResult? Function(_StepCancel value)? stepCancel,
     TResult? Function(_StepTapped value)? stepTapped,
+    TResult? Function(_CreateDraft value)? createDraft,
   }) {
     return stepTapped?.call(this);
   }
@@ -555,6 +674,7 @@ class _$_StepTapped implements _StepTapped {
     TResult Function(_StepContinue value)? stepContinue,
     TResult Function(_StepCancel value)? stepCancel,
     TResult Function(_StepTapped value)? stepTapped,
+    TResult Function(_CreateDraft value)? createDraft,
     required TResult orElse(),
   }) {
     if (stepTapped != null) {
@@ -574,11 +694,287 @@ abstract class _StepTapped implements OrderSummaryEvent {
 }
 
 /// @nodoc
+abstract class _$$_CreateDraftCopyWith<$Res> {
+  factory _$$_CreateDraftCopyWith(
+          _$_CreateDraft value, $Res Function(_$_CreateDraft) then) =
+      __$$_CreateDraftCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {ShipToCodeState shipToCodeState,
+      UserState userState,
+      CartState cartState,
+      CustomerCodeState customerCodeState,
+      SalesOrgState salesOrgStateState});
+
+  $ShipToCodeStateCopyWith<$Res> get shipToCodeState;
+  $UserStateCopyWith<$Res> get userState;
+  $CartStateCopyWith<$Res> get cartState;
+  $CustomerCodeStateCopyWith<$Res> get customerCodeState;
+  $SalesOrgStateCopyWith<$Res> get salesOrgStateState;
+}
+
+/// @nodoc
+class __$$_CreateDraftCopyWithImpl<$Res>
+    extends _$OrderSummaryEventCopyWithImpl<$Res, _$_CreateDraft>
+    implements _$$_CreateDraftCopyWith<$Res> {
+  __$$_CreateDraftCopyWithImpl(
+      _$_CreateDraft _value, $Res Function(_$_CreateDraft) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? shipToCodeState = null,
+    Object? userState = null,
+    Object? cartState = null,
+    Object? customerCodeState = null,
+    Object? salesOrgStateState = null,
+  }) {
+    return _then(_$_CreateDraft(
+      shipToCodeState: null == shipToCodeState
+          ? _value.shipToCodeState
+          : shipToCodeState // ignore: cast_nullable_to_non_nullable
+              as ShipToCodeState,
+      userState: null == userState
+          ? _value.userState
+          : userState // ignore: cast_nullable_to_non_nullable
+              as UserState,
+      cartState: null == cartState
+          ? _value.cartState
+          : cartState // ignore: cast_nullable_to_non_nullable
+              as CartState,
+      customerCodeState: null == customerCodeState
+          ? _value.customerCodeState
+          : customerCodeState // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeState,
+      salesOrgStateState: null == salesOrgStateState
+          ? _value.salesOrgStateState
+          : salesOrgStateState // ignore: cast_nullable_to_non_nullable
+              as SalesOrgState,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToCodeStateCopyWith<$Res> get shipToCodeState {
+    return $ShipToCodeStateCopyWith<$Res>(_value.shipToCodeState, (value) {
+      return _then(_value.copyWith(shipToCodeState: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserStateCopyWith<$Res> get userState {
+    return $UserStateCopyWith<$Res>(_value.userState, (value) {
+      return _then(_value.copyWith(userState: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CartStateCopyWith<$Res> get cartState {
+    return $CartStateCopyWith<$Res>(_value.cartState, (value) {
+      return _then(_value.copyWith(cartState: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeStateCopyWith<$Res> get customerCodeState {
+    return $CustomerCodeStateCopyWith<$Res>(_value.customerCodeState, (value) {
+      return _then(_value.copyWith(customerCodeState: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrgStateCopyWith<$Res> get salesOrgStateState {
+    return $SalesOrgStateCopyWith<$Res>(_value.salesOrgStateState, (value) {
+      return _then(_value.copyWith(salesOrgStateState: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_CreateDraft implements _CreateDraft {
+  const _$_CreateDraft(
+      {required this.shipToCodeState,
+      required this.userState,
+      required this.cartState,
+      required this.customerCodeState,
+      required this.salesOrgStateState});
+
+  @override
+  final ShipToCodeState shipToCodeState;
+  @override
+  final UserState userState;
+  @override
+  final CartState cartState;
+  @override
+  final CustomerCodeState customerCodeState;
+  @override
+  final SalesOrgState salesOrgStateState;
+
+  @override
+  String toString() {
+    return 'OrderSummaryEvent.createDraft(shipToCodeState: $shipToCodeState, userState: $userState, cartState: $cartState, customerCodeState: $customerCodeState, salesOrgStateState: $salesOrgStateState)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_CreateDraft &&
+            (identical(other.shipToCodeState, shipToCodeState) ||
+                other.shipToCodeState == shipToCodeState) &&
+            (identical(other.userState, userState) ||
+                other.userState == userState) &&
+            (identical(other.cartState, cartState) ||
+                other.cartState == cartState) &&
+            (identical(other.customerCodeState, customerCodeState) ||
+                other.customerCodeState == customerCodeState) &&
+            (identical(other.salesOrgStateState, salesOrgStateState) ||
+                other.salesOrgStateState == salesOrgStateState));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, shipToCodeState, userState,
+      cartState, customerCodeState, salesOrgStateState);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_CreateDraftCopyWith<_$_CreateDraft> get copyWith =>
+      __$$_CreateDraftCopyWithImpl<_$_CreateDraft>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function() stepContinue,
+    required TResult Function() stepCancel,
+    required TResult Function(int step) stepTapped,
+    required TResult Function(
+            ShipToCodeState shipToCodeState,
+            UserState userState,
+            CartState cartState,
+            CustomerCodeState customerCodeState,
+            SalesOrgState salesOrgStateState)
+        createDraft,
+  }) {
+    return createDraft(shipToCodeState, userState, cartState, customerCodeState,
+        salesOrgStateState);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function()? stepContinue,
+    TResult? Function()? stepCancel,
+    TResult? Function(int step)? stepTapped,
+    TResult? Function(
+            ShipToCodeState shipToCodeState,
+            UserState userState,
+            CartState cartState,
+            CustomerCodeState customerCodeState,
+            SalesOrgState salesOrgStateState)?
+        createDraft,
+  }) {
+    return createDraft?.call(shipToCodeState, userState, cartState,
+        customerCodeState, salesOrgStateState);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function()? stepContinue,
+    TResult Function()? stepCancel,
+    TResult Function(int step)? stepTapped,
+    TResult Function(
+            ShipToCodeState shipToCodeState,
+            UserState userState,
+            CartState cartState,
+            CustomerCodeState customerCodeState,
+            SalesOrgState salesOrgStateState)?
+        createDraft,
+    required TResult orElse(),
+  }) {
+    if (createDraft != null) {
+      return createDraft(shipToCodeState, userState, cartState,
+          customerCodeState, salesOrgStateState);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_StepContinue value) stepContinue,
+    required TResult Function(_StepCancel value) stepCancel,
+    required TResult Function(_StepTapped value) stepTapped,
+    required TResult Function(_CreateDraft value) createDraft,
+  }) {
+    return createDraft(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_StepContinue value)? stepContinue,
+    TResult? Function(_StepCancel value)? stepCancel,
+    TResult? Function(_StepTapped value)? stepTapped,
+    TResult? Function(_CreateDraft value)? createDraft,
+  }) {
+    return createDraft?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_StepContinue value)? stepContinue,
+    TResult Function(_StepCancel value)? stepCancel,
+    TResult Function(_StepTapped value)? stepTapped,
+    TResult Function(_CreateDraft value)? createDraft,
+    required TResult orElse(),
+  }) {
+    if (createDraft != null) {
+      return createDraft(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CreateDraft implements OrderSummaryEvent {
+  const factory _CreateDraft(
+      {required final ShipToCodeState shipToCodeState,
+      required final UserState userState,
+      required final CartState cartState,
+      required final CustomerCodeState customerCodeState,
+      required final SalesOrgState salesOrgStateState}) = _$_CreateDraft;
+
+  ShipToCodeState get shipToCodeState;
+  UserState get userState;
+  CartState get cartState;
+  CustomerCodeState get customerCodeState;
+  SalesOrgState get salesOrgStateState;
+  @JsonKey(ignore: true)
+  _$$_CreateDraftCopyWith<_$_CreateDraft> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$OrderSummaryState {
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
   int get step => throw _privateConstructorUsedError;
   int get maxSteps => throw _privateConstructorUsedError;
+  bool get isDraftOrderCreated => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderSummaryStateCopyWith<OrderSummaryState> get copyWith =>
@@ -594,7 +990,8 @@ abstract class $OrderSummaryStateCopyWith<$Res> {
   $Res call(
       {Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       int step,
-      int maxSteps});
+      int maxSteps,
+      bool isDraftOrderCreated});
 }
 
 /// @nodoc
@@ -613,6 +1010,7 @@ class _$OrderSummaryStateCopyWithImpl<$Res, $Val extends OrderSummaryState>
     Object? apiFailureOrSuccessOption = null,
     Object? step = null,
     Object? maxSteps = null,
+    Object? isDraftOrderCreated = null,
   }) {
     return _then(_value.copyWith(
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
@@ -627,6 +1025,10 @@ class _$OrderSummaryStateCopyWithImpl<$Res, $Val extends OrderSummaryState>
           ? _value.maxSteps
           : maxSteps // ignore: cast_nullable_to_non_nullable
               as int,
+      isDraftOrderCreated: null == isDraftOrderCreated
+          ? _value.isDraftOrderCreated
+          : isDraftOrderCreated // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -642,7 +1044,8 @@ abstract class _$$_OrderSummaryStateCopyWith<$Res>
   $Res call(
       {Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       int step,
-      int maxSteps});
+      int maxSteps,
+      bool isDraftOrderCreated});
 }
 
 /// @nodoc
@@ -659,6 +1062,7 @@ class __$$_OrderSummaryStateCopyWithImpl<$Res>
     Object? apiFailureOrSuccessOption = null,
     Object? step = null,
     Object? maxSteps = null,
+    Object? isDraftOrderCreated = null,
   }) {
     return _then(_$_OrderSummaryState(
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
@@ -673,6 +1077,10 @@ class __$$_OrderSummaryStateCopyWithImpl<$Res>
           ? _value.maxSteps
           : maxSteps // ignore: cast_nullable_to_non_nullable
               as int,
+      isDraftOrderCreated: null == isDraftOrderCreated
+          ? _value.isDraftOrderCreated
+          : isDraftOrderCreated // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -683,7 +1091,8 @@ class _$_OrderSummaryState extends _OrderSummaryState {
   const _$_OrderSummaryState(
       {required this.apiFailureOrSuccessOption,
       required this.step,
-      required this.maxSteps})
+      required this.maxSteps,
+      required this.isDraftOrderCreated})
       : super._();
 
   @override
@@ -692,10 +1101,12 @@ class _$_OrderSummaryState extends _OrderSummaryState {
   final int step;
   @override
   final int maxSteps;
+  @override
+  final bool isDraftOrderCreated;
 
   @override
   String toString() {
-    return 'OrderSummaryState(apiFailureOrSuccessOption: $apiFailureOrSuccessOption, step: $step, maxSteps: $maxSteps)';
+    return 'OrderSummaryState(apiFailureOrSuccessOption: $apiFailureOrSuccessOption, step: $step, maxSteps: $maxSteps, isDraftOrderCreated: $isDraftOrderCreated)';
   }
 
   @override
@@ -708,12 +1119,14 @@ class _$_OrderSummaryState extends _OrderSummaryState {
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption) &&
             (identical(other.step, step) || other.step == step) &&
             (identical(other.maxSteps, maxSteps) ||
-                other.maxSteps == maxSteps));
+                other.maxSteps == maxSteps) &&
+            (identical(other.isDraftOrderCreated, isDraftOrderCreated) ||
+                other.isDraftOrderCreated == isDraftOrderCreated));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, apiFailureOrSuccessOption, step, maxSteps);
+  int get hashCode => Object.hash(runtimeType, apiFailureOrSuccessOption, step,
+      maxSteps, isDraftOrderCreated);
 
   @JsonKey(ignore: true)
   @override
@@ -728,7 +1141,8 @@ abstract class _OrderSummaryState extends OrderSummaryState {
       {required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
       required final int step,
-      required final int maxSteps}) = _$_OrderSummaryState;
+      required final int maxSteps,
+      required final bool isDraftOrderCreated}) = _$_OrderSummaryState;
   const _OrderSummaryState._() : super._();
 
   @override
@@ -737,6 +1151,8 @@ abstract class _OrderSummaryState extends OrderSummaryState {
   int get step;
   @override
   int get maxSteps;
+  @override
+  bool get isDraftOrderCreated;
   @override
   @JsonKey(ignore: true)
   _$$_OrderSummaryStateCopyWith<_$_OrderSummaryState> get copyWith =>

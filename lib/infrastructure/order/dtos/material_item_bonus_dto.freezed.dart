@@ -28,6 +28,12 @@ mixin _$MaterialItemBonusDto {
   String get comment => throw _privateConstructorUsedError;
   @JsonKey(name: 'MaterialDescription', defaultValue: '')
   String get materialDescription => throw _privateConstructorUsedError;
+  @JsonKey(name: 'expiryDate', defaultValue: '')
+  String get expiryDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'inStock', defaultValue: '')
+  String get inStock => throw _privateConstructorUsedError;
+  @JsonKey(name: 'remainingQty', defaultValue: 0)
+  int get remainingQty => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +55,13 @@ abstract class $MaterialItemBonusDtoCopyWith<$Res> {
       @JsonKey(name: 'comment', defaultValue: '')
           String comment,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-          String materialDescription});
+          String materialDescription,
+      @JsonKey(name: 'expiryDate', defaultValue: '')
+          String expiryDate,
+      @JsonKey(name: 'inStock', defaultValue: '')
+          String inStock,
+      @JsonKey(name: 'remainingQty', defaultValue: 0)
+          int remainingQty});
 }
 
 /// @nodoc
@@ -70,6 +82,9 @@ class _$MaterialItemBonusDtoCopyWithImpl<$Res,
     Object? qty = null,
     Object? comment = null,
     Object? materialDescription = null,
+    Object? expiryDate = null,
+    Object? inStock = null,
+    Object? remainingQty = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -88,6 +103,18 @@ class _$MaterialItemBonusDtoCopyWithImpl<$Res,
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
+      expiryDate: null == expiryDate
+          ? _value.expiryDate
+          : expiryDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      inStock: null == inStock
+          ? _value.inStock
+          : inStock // ignore: cast_nullable_to_non_nullable
+              as String,
+      remainingQty: null == remainingQty
+          ? _value.remainingQty
+          : remainingQty // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -108,7 +135,13 @@ abstract class _$$_MaterialItemBonusDtoCopyWith<$Res>
       @JsonKey(name: 'comment', defaultValue: '')
           String comment,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-          String materialDescription});
+          String materialDescription,
+      @JsonKey(name: 'expiryDate', defaultValue: '')
+          String expiryDate,
+      @JsonKey(name: 'inStock', defaultValue: '')
+          String inStock,
+      @JsonKey(name: 'remainingQty', defaultValue: 0)
+          int remainingQty});
 }
 
 /// @nodoc
@@ -126,6 +159,9 @@ class __$$_MaterialItemBonusDtoCopyWithImpl<$Res>
     Object? qty = null,
     Object? comment = null,
     Object? materialDescription = null,
+    Object? expiryDate = null,
+    Object? inStock = null,
+    Object? remainingQty = null,
   }) {
     return _then(_$_MaterialItemBonusDto(
       materialNumber: null == materialNumber
@@ -144,6 +180,18 @@ class __$$_MaterialItemBonusDtoCopyWithImpl<$Res>
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
+      expiryDate: null == expiryDate
+          ? _value.expiryDate
+          : expiryDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      inStock: null == inStock
+          ? _value.inStock
+          : inStock // ignore: cast_nullable_to_non_nullable
+              as String,
+      remainingQty: null == remainingQty
+          ? _value.remainingQty
+          : remainingQty // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -159,7 +207,13 @@ class _$_MaterialItemBonusDto extends _MaterialItemBonusDto {
       @JsonKey(name: 'comment', defaultValue: '')
           required this.comment,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-          required this.materialDescription})
+          required this.materialDescription,
+      @JsonKey(name: 'expiryDate', defaultValue: '')
+          required this.expiryDate,
+      @JsonKey(name: 'inStock', defaultValue: '')
+          required this.inStock,
+      @JsonKey(name: 'remainingQty', defaultValue: 0)
+          required this.remainingQty})
       : super._();
 
   factory _$_MaterialItemBonusDto.fromJson(Map<String, dynamic> json) =>
@@ -177,10 +231,19 @@ class _$_MaterialItemBonusDto extends _MaterialItemBonusDto {
   @override
   @JsonKey(name: 'MaterialDescription', defaultValue: '')
   final String materialDescription;
+  @override
+  @JsonKey(name: 'expiryDate', defaultValue: '')
+  final String expiryDate;
+  @override
+  @JsonKey(name: 'inStock', defaultValue: '')
+  final String inStock;
+  @override
+  @JsonKey(name: 'remainingQty', defaultValue: 0)
+  final int remainingQty;
 
   @override
   String toString() {
-    return 'MaterialItemBonusDto(materialNumber: $materialNumber, qty: $qty, comment: $comment, materialDescription: $materialDescription)';
+    return 'MaterialItemBonusDto(materialNumber: $materialNumber, qty: $qty, comment: $comment, materialDescription: $materialDescription, expiryDate: $expiryDate, inStock: $inStock, remainingQty: $remainingQty)';
   }
 
   @override
@@ -193,13 +256,18 @@ class _$_MaterialItemBonusDto extends _MaterialItemBonusDto {
             (identical(other.qty, qty) || other.qty == qty) &&
             (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.materialDescription, materialDescription) ||
-                other.materialDescription == materialDescription));
+                other.materialDescription == materialDescription) &&
+            (identical(other.expiryDate, expiryDate) ||
+                other.expiryDate == expiryDate) &&
+            (identical(other.inStock, inStock) || other.inStock == inStock) &&
+            (identical(other.remainingQty, remainingQty) ||
+                other.remainingQty == remainingQty));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, materialNumber, qty, comment, materialDescription);
+  int get hashCode => Object.hash(runtimeType, materialNumber, qty, comment,
+      materialDescription, expiryDate, inStock, remainingQty);
 
   @JsonKey(ignore: true)
   @override
@@ -225,7 +293,13 @@ abstract class _MaterialItemBonusDto extends MaterialItemBonusDto {
       @JsonKey(name: 'comment', defaultValue: '')
           required final String comment,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-          required final String materialDescription}) = _$_MaterialItemBonusDto;
+          required final String materialDescription,
+      @JsonKey(name: 'expiryDate', defaultValue: '')
+          required final String expiryDate,
+      @JsonKey(name: 'inStock', defaultValue: '')
+          required final String inStock,
+      @JsonKey(name: 'remainingQty', defaultValue: 0)
+          required final int remainingQty}) = _$_MaterialItemBonusDto;
   const _MaterialItemBonusDto._() : super._();
 
   factory _MaterialItemBonusDto.fromJson(Map<String, dynamic> json) =
@@ -243,6 +317,15 @@ abstract class _MaterialItemBonusDto extends MaterialItemBonusDto {
   @override
   @JsonKey(name: 'MaterialDescription', defaultValue: '')
   String get materialDescription;
+  @override
+  @JsonKey(name: 'expiryDate', defaultValue: '')
+  String get expiryDate;
+  @override
+  @JsonKey(name: 'inStock', defaultValue: '')
+  String get inStock;
+  @override
+  @JsonKey(name: 'remainingQty', defaultValue: 0)
+  int get remainingQty;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialItemBonusDtoCopyWith<_$_MaterialItemBonusDto> get copyWith =>

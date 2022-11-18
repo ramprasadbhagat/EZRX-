@@ -13,6 +13,9 @@ _$_MaterialItemBonusDto _$$_MaterialItemBonusDtoFromJson(
       qty: json['freeQuantity'] as int? ?? 0,
       comment: json['comment'] as String? ?? '',
       materialDescription: json['MaterialDescription'] as String? ?? '',
+      expiryDate: json['expiryDate'] as String? ?? '',
+      inStock: json['inStock'] as String? ?? '',
+      remainingQty: json['remainingQty'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_MaterialItemBonusDtoToJson(
@@ -22,4 +25,7 @@ Map<String, dynamic> _$$_MaterialItemBonusDtoToJson(
       'freeQuantity': instance.qty,
       'comment': instance.comment,
       'MaterialDescription': instance.materialDescription,
+      'expiryDate': instance.expiryDate,
+      'inStock': instance.inStock,
+      'remainingQty': instance.remainingQty,
     };

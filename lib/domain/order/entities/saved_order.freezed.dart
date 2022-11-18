@@ -28,6 +28,31 @@ mixin _$SavedOrder {
   CompanyName get companyName => throw _privateConstructorUsedError;
   double get totalOrderValue => throw _privateConstructorUsedError;
   String get requestedDeliveryDate => throw _privateConstructorUsedError;
+  String get deliveryDocument => throw _privateConstructorUsedError;
+  String get salesOrganization => throw _privateConstructorUsedError;
+  String get principal => throw _privateConstructorUsedError;
+  String get processingStatus => throw _privateConstructorUsedError;
+  String get country => throw _privateConstructorUsedError;
+  String get postCode1 => throw _privateConstructorUsedError;
+  String get specialInstructions => throw _privateConstructorUsedError;
+  String get poReference => throw _privateConstructorUsedError;
+  String get payTerm => throw _privateConstructorUsedError;
+  String get collectiveNo => throw _privateConstructorUsedError;
+  int get quantity => throw _privateConstructorUsedError;
+  double get unitPrice => throw _privateConstructorUsedError;
+  double get totalPrice => throw _privateConstructorUsedError;
+  bool get draftorder => throw _privateConstructorUsedError;
+  String get address1 => throw _privateConstructorUsedError;
+  String get address2 => throw _privateConstructorUsedError;
+  String get city => throw _privateConstructorUsedError;
+  String get fax => throw _privateConstructorUsedError;
+  String get phonenumber => throw _privateConstructorUsedError;
+  String get orderType => throw _privateConstructorUsedError;
+  String get orderReason => throw _privateConstructorUsedError;
+  String get shippingCondition => throw _privateConstructorUsedError;
+  String get user => throw _privateConstructorUsedError;
+  String get contactPerson => throw _privateConstructorUsedError;
+  String get referenceNotes => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SavedOrderCopyWith<SavedOrder> get copyWith =>
@@ -52,7 +77,32 @@ abstract class $SavedOrderCopyWith<$Res> {
       ShipToParty shipToParty,
       CompanyName companyName,
       double totalOrderValue,
-      String requestedDeliveryDate});
+      String requestedDeliveryDate,
+      String deliveryDocument,
+      String salesOrganization,
+      String principal,
+      String processingStatus,
+      String country,
+      String postCode1,
+      String specialInstructions,
+      String poReference,
+      String payTerm,
+      String collectiveNo,
+      int quantity,
+      double unitPrice,
+      double totalPrice,
+      bool draftorder,
+      String address1,
+      String address2,
+      String city,
+      String fax,
+      String phonenumber,
+      String orderType,
+      String orderReason,
+      String shippingCondition,
+      String user,
+      String contactPerson,
+      String referenceNotes});
 }
 
 /// @nodoc
@@ -80,6 +130,31 @@ class _$SavedOrderCopyWithImpl<$Res, $Val extends SavedOrder>
     Object? companyName = null,
     Object? totalOrderValue = null,
     Object? requestedDeliveryDate = null,
+    Object? deliveryDocument = null,
+    Object? salesOrganization = null,
+    Object? principal = null,
+    Object? processingStatus = null,
+    Object? country = null,
+    Object? postCode1 = null,
+    Object? specialInstructions = null,
+    Object? poReference = null,
+    Object? payTerm = null,
+    Object? collectiveNo = null,
+    Object? quantity = null,
+    Object? unitPrice = null,
+    Object? totalPrice = null,
+    Object? draftorder = null,
+    Object? address1 = null,
+    Object? address2 = null,
+    Object? city = null,
+    Object? fax = null,
+    Object? phonenumber = null,
+    Object? orderType = null,
+    Object? orderReason = null,
+    Object? shippingCondition = null,
+    Object? user = null,
+    Object? contactPerson = null,
+    Object? referenceNotes = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -130,6 +205,106 @@ class _$SavedOrderCopyWithImpl<$Res, $Val extends SavedOrder>
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
               as String,
+      deliveryDocument: null == deliveryDocument
+          ? _value.deliveryDocument
+          : deliveryDocument // ignore: cast_nullable_to_non_nullable
+              as String,
+      salesOrganization: null == salesOrganization
+          ? _value.salesOrganization
+          : salesOrganization // ignore: cast_nullable_to_non_nullable
+              as String,
+      principal: null == principal
+          ? _value.principal
+          : principal // ignore: cast_nullable_to_non_nullable
+              as String,
+      processingStatus: null == processingStatus
+          ? _value.processingStatus
+          : processingStatus // ignore: cast_nullable_to_non_nullable
+              as String,
+      country: null == country
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String,
+      postCode1: null == postCode1
+          ? _value.postCode1
+          : postCode1 // ignore: cast_nullable_to_non_nullable
+              as String,
+      specialInstructions: null == specialInstructions
+          ? _value.specialInstructions
+          : specialInstructions // ignore: cast_nullable_to_non_nullable
+              as String,
+      poReference: null == poReference
+          ? _value.poReference
+          : poReference // ignore: cast_nullable_to_non_nullable
+              as String,
+      payTerm: null == payTerm
+          ? _value.payTerm
+          : payTerm // ignore: cast_nullable_to_non_nullable
+              as String,
+      collectiveNo: null == collectiveNo
+          ? _value.collectiveNo
+          : collectiveNo // ignore: cast_nullable_to_non_nullable
+              as String,
+      quantity: null == quantity
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as int,
+      unitPrice: null == unitPrice
+          ? _value.unitPrice
+          : unitPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalPrice: null == totalPrice
+          ? _value.totalPrice
+          : totalPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      draftorder: null == draftorder
+          ? _value.draftorder
+          : draftorder // ignore: cast_nullable_to_non_nullable
+              as bool,
+      address1: null == address1
+          ? _value.address1
+          : address1 // ignore: cast_nullable_to_non_nullable
+              as String,
+      address2: null == address2
+          ? _value.address2
+          : address2 // ignore: cast_nullable_to_non_nullable
+              as String,
+      city: null == city
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String,
+      fax: null == fax
+          ? _value.fax
+          : fax // ignore: cast_nullable_to_non_nullable
+              as String,
+      phonenumber: null == phonenumber
+          ? _value.phonenumber
+          : phonenumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderType: null == orderType
+          ? _value.orderType
+          : orderType // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderReason: null == orderReason
+          ? _value.orderReason
+          : orderReason // ignore: cast_nullable_to_non_nullable
+              as String,
+      shippingCondition: null == shippingCondition
+          ? _value.shippingCondition
+          : shippingCondition // ignore: cast_nullable_to_non_nullable
+              as String,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as String,
+      contactPerson: null == contactPerson
+          ? _value.contactPerson
+          : contactPerson // ignore: cast_nullable_to_non_nullable
+              as String,
+      referenceNotes: null == referenceNotes
+          ? _value.referenceNotes
+          : referenceNotes // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -154,7 +329,32 @@ abstract class _$$_SavedOrderCopyWith<$Res>
       ShipToParty shipToParty,
       CompanyName companyName,
       double totalOrderValue,
-      String requestedDeliveryDate});
+      String requestedDeliveryDate,
+      String deliveryDocument,
+      String salesOrganization,
+      String principal,
+      String processingStatus,
+      String country,
+      String postCode1,
+      String specialInstructions,
+      String poReference,
+      String payTerm,
+      String collectiveNo,
+      int quantity,
+      double unitPrice,
+      double totalPrice,
+      bool draftorder,
+      String address1,
+      String address2,
+      String city,
+      String fax,
+      String phonenumber,
+      String orderType,
+      String orderReason,
+      String shippingCondition,
+      String user,
+      String contactPerson,
+      String referenceNotes});
 }
 
 /// @nodoc
@@ -180,6 +380,31 @@ class __$$_SavedOrderCopyWithImpl<$Res>
     Object? companyName = null,
     Object? totalOrderValue = null,
     Object? requestedDeliveryDate = null,
+    Object? deliveryDocument = null,
+    Object? salesOrganization = null,
+    Object? principal = null,
+    Object? processingStatus = null,
+    Object? country = null,
+    Object? postCode1 = null,
+    Object? specialInstructions = null,
+    Object? poReference = null,
+    Object? payTerm = null,
+    Object? collectiveNo = null,
+    Object? quantity = null,
+    Object? unitPrice = null,
+    Object? totalPrice = null,
+    Object? draftorder = null,
+    Object? address1 = null,
+    Object? address2 = null,
+    Object? city = null,
+    Object? fax = null,
+    Object? phonenumber = null,
+    Object? orderType = null,
+    Object? orderReason = null,
+    Object? shippingCondition = null,
+    Object? user = null,
+    Object? contactPerson = null,
+    Object? referenceNotes = null,
   }) {
     return _then(_$_SavedOrder(
       id: null == id
@@ -230,6 +455,106 @@ class __$$_SavedOrderCopyWithImpl<$Res>
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
               as String,
+      deliveryDocument: null == deliveryDocument
+          ? _value.deliveryDocument
+          : deliveryDocument // ignore: cast_nullable_to_non_nullable
+              as String,
+      salesOrganization: null == salesOrganization
+          ? _value.salesOrganization
+          : salesOrganization // ignore: cast_nullable_to_non_nullable
+              as String,
+      principal: null == principal
+          ? _value.principal
+          : principal // ignore: cast_nullable_to_non_nullable
+              as String,
+      processingStatus: null == processingStatus
+          ? _value.processingStatus
+          : processingStatus // ignore: cast_nullable_to_non_nullable
+              as String,
+      country: null == country
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String,
+      postCode1: null == postCode1
+          ? _value.postCode1
+          : postCode1 // ignore: cast_nullable_to_non_nullable
+              as String,
+      specialInstructions: null == specialInstructions
+          ? _value.specialInstructions
+          : specialInstructions // ignore: cast_nullable_to_non_nullable
+              as String,
+      poReference: null == poReference
+          ? _value.poReference
+          : poReference // ignore: cast_nullable_to_non_nullable
+              as String,
+      payTerm: null == payTerm
+          ? _value.payTerm
+          : payTerm // ignore: cast_nullable_to_non_nullable
+              as String,
+      collectiveNo: null == collectiveNo
+          ? _value.collectiveNo
+          : collectiveNo // ignore: cast_nullable_to_non_nullable
+              as String,
+      quantity: null == quantity
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as int,
+      unitPrice: null == unitPrice
+          ? _value.unitPrice
+          : unitPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalPrice: null == totalPrice
+          ? _value.totalPrice
+          : totalPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      draftorder: null == draftorder
+          ? _value.draftorder
+          : draftorder // ignore: cast_nullable_to_non_nullable
+              as bool,
+      address1: null == address1
+          ? _value.address1
+          : address1 // ignore: cast_nullable_to_non_nullable
+              as String,
+      address2: null == address2
+          ? _value.address2
+          : address2 // ignore: cast_nullable_to_non_nullable
+              as String,
+      city: null == city
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String,
+      fax: null == fax
+          ? _value.fax
+          : fax // ignore: cast_nullable_to_non_nullable
+              as String,
+      phonenumber: null == phonenumber
+          ? _value.phonenumber
+          : phonenumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderType: null == orderType
+          ? _value.orderType
+          : orderType // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderReason: null == orderReason
+          ? _value.orderReason
+          : orderReason // ignore: cast_nullable_to_non_nullable
+              as String,
+      shippingCondition: null == shippingCondition
+          ? _value.shippingCondition
+          : shippingCondition // ignore: cast_nullable_to_non_nullable
+              as String,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as String,
+      contactPerson: null == contactPerson
+          ? _value.contactPerson
+          : contactPerson // ignore: cast_nullable_to_non_nullable
+              as String,
+      referenceNotes: null == referenceNotes
+          ? _value.referenceNotes
+          : referenceNotes // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -249,7 +574,32 @@ class _$_SavedOrder extends _SavedOrder {
       required this.shipToParty,
       required this.companyName,
       required this.totalOrderValue,
-      required this.requestedDeliveryDate})
+      required this.requestedDeliveryDate,
+      required this.deliveryDocument,
+      required this.salesOrganization,
+      required this.principal,
+      required this.processingStatus,
+      required this.country,
+      required this.postCode1,
+      required this.specialInstructions,
+      required this.poReference,
+      required this.payTerm,
+      required this.collectiveNo,
+      required this.quantity,
+      required this.unitPrice,
+      required this.totalPrice,
+      required this.draftorder,
+      required this.address1,
+      required this.address2,
+      required this.city,
+      required this.fax,
+      required this.phonenumber,
+      required this.orderType,
+      required this.orderReason,
+      required this.shippingCondition,
+      required this.user,
+      required this.contactPerson,
+      required this.referenceNotes})
       : _items = items,
         super._();
 
@@ -282,10 +632,60 @@ class _$_SavedOrder extends _SavedOrder {
   final double totalOrderValue;
   @override
   final String requestedDeliveryDate;
+  @override
+  final String deliveryDocument;
+  @override
+  final String salesOrganization;
+  @override
+  final String principal;
+  @override
+  final String processingStatus;
+  @override
+  final String country;
+  @override
+  final String postCode1;
+  @override
+  final String specialInstructions;
+  @override
+  final String poReference;
+  @override
+  final String payTerm;
+  @override
+  final String collectiveNo;
+  @override
+  final int quantity;
+  @override
+  final double unitPrice;
+  @override
+  final double totalPrice;
+  @override
+  final bool draftorder;
+  @override
+  final String address1;
+  @override
+  final String address2;
+  @override
+  final String city;
+  @override
+  final String fax;
+  @override
+  final String phonenumber;
+  @override
+  final String orderType;
+  @override
+  final String orderReason;
+  @override
+  final String shippingCondition;
+  @override
+  final String user;
+  @override
+  final String contactPerson;
+  @override
+  final String referenceNotes;
 
   @override
   String toString() {
-    return 'SavedOrder(id: $id, items: $items, isDraftOrder: $isDraftOrder, isSelected: $isSelected, isDeleted: $isDeleted, billingDocument: $billingDocument, eZRxNumber: $eZRxNumber, soldToParty: $soldToParty, shipToParty: $shipToParty, companyName: $companyName, totalOrderValue: $totalOrderValue, requestedDeliveryDate: $requestedDeliveryDate)';
+    return 'SavedOrder(id: $id, items: $items, isDraftOrder: $isDraftOrder, isSelected: $isSelected, isDeleted: $isDeleted, billingDocument: $billingDocument, eZRxNumber: $eZRxNumber, soldToParty: $soldToParty, shipToParty: $shipToParty, companyName: $companyName, totalOrderValue: $totalOrderValue, requestedDeliveryDate: $requestedDeliveryDate, deliveryDocument: $deliveryDocument, salesOrganization: $salesOrganization, principal: $principal, processingStatus: $processingStatus, country: $country, postCode1: $postCode1, specialInstructions: $specialInstructions, poReference: $poReference, payTerm: $payTerm, collectiveNo: $collectiveNo, quantity: $quantity, unitPrice: $unitPrice, totalPrice: $totalPrice, draftorder: $draftorder, address1: $address1, address2: $address2, city: $city, fax: $fax, phonenumber: $phonenumber, orderType: $orderType, orderReason: $orderReason, shippingCondition: $shippingCondition, user: $user, contactPerson: $contactPerson, referenceNotes: $referenceNotes)';
   }
 
   @override
@@ -314,24 +714,95 @@ class _$_SavedOrder extends _SavedOrder {
             (identical(other.totalOrderValue, totalOrderValue) ||
                 other.totalOrderValue == totalOrderValue) &&
             (identical(other.requestedDeliveryDate, requestedDeliveryDate) ||
-                other.requestedDeliveryDate == requestedDeliveryDate));
+                other.requestedDeliveryDate == requestedDeliveryDate) &&
+            (identical(other.deliveryDocument, deliveryDocument) ||
+                other.deliveryDocument == deliveryDocument) &&
+            (identical(other.salesOrganization, salesOrganization) ||
+                other.salesOrganization == salesOrganization) &&
+            (identical(other.principal, principal) ||
+                other.principal == principal) &&
+            (identical(other.processingStatus, processingStatus) ||
+                other.processingStatus == processingStatus) &&
+            (identical(other.country, country) || other.country == country) &&
+            (identical(other.postCode1, postCode1) ||
+                other.postCode1 == postCode1) &&
+            (identical(other.specialInstructions, specialInstructions) ||
+                other.specialInstructions == specialInstructions) &&
+            (identical(other.poReference, poReference) ||
+                other.poReference == poReference) &&
+            (identical(other.payTerm, payTerm) || other.payTerm == payTerm) &&
+            (identical(other.collectiveNo, collectiveNo) ||
+                other.collectiveNo == collectiveNo) &&
+            (identical(other.quantity, quantity) ||
+                other.quantity == quantity) &&
+            (identical(other.unitPrice, unitPrice) ||
+                other.unitPrice == unitPrice) &&
+            (identical(other.totalPrice, totalPrice) ||
+                other.totalPrice == totalPrice) &&
+            (identical(other.draftorder, draftorder) ||
+                other.draftorder == draftorder) &&
+            (identical(other.address1, address1) ||
+                other.address1 == address1) &&
+            (identical(other.address2, address2) ||
+                other.address2 == address2) &&
+            (identical(other.city, city) || other.city == city) &&
+            (identical(other.fax, fax) || other.fax == fax) &&
+            (identical(other.phonenumber, phonenumber) ||
+                other.phonenumber == phonenumber) &&
+            (identical(other.orderType, orderType) ||
+                other.orderType == orderType) &&
+            (identical(other.orderReason, orderReason) ||
+                other.orderReason == orderReason) &&
+            (identical(other.shippingCondition, shippingCondition) ||
+                other.shippingCondition == shippingCondition) &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.contactPerson, contactPerson) ||
+                other.contactPerson == contactPerson) &&
+            (identical(other.referenceNotes, referenceNotes) ||
+                other.referenceNotes == referenceNotes));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      const DeepCollectionEquality().hash(_items),
-      isDraftOrder,
-      isSelected,
-      isDeleted,
-      billingDocument,
-      eZRxNumber,
-      soldToParty,
-      shipToParty,
-      companyName,
-      totalOrderValue,
-      requestedDeliveryDate);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        const DeepCollectionEquality().hash(_items),
+        isDraftOrder,
+        isSelected,
+        isDeleted,
+        billingDocument,
+        eZRxNumber,
+        soldToParty,
+        shipToParty,
+        companyName,
+        totalOrderValue,
+        requestedDeliveryDate,
+        deliveryDocument,
+        salesOrganization,
+        principal,
+        processingStatus,
+        country,
+        postCode1,
+        specialInstructions,
+        poReference,
+        payTerm,
+        collectiveNo,
+        quantity,
+        unitPrice,
+        totalPrice,
+        draftorder,
+        address1,
+        address2,
+        city,
+        fax,
+        phonenumber,
+        orderType,
+        orderReason,
+        shippingCondition,
+        user,
+        contactPerson,
+        referenceNotes
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -353,7 +824,32 @@ abstract class _SavedOrder extends SavedOrder {
       required final ShipToParty shipToParty,
       required final CompanyName companyName,
       required final double totalOrderValue,
-      required final String requestedDeliveryDate}) = _$_SavedOrder;
+      required final String requestedDeliveryDate,
+      required final String deliveryDocument,
+      required final String salesOrganization,
+      required final String principal,
+      required final String processingStatus,
+      required final String country,
+      required final String postCode1,
+      required final String specialInstructions,
+      required final String poReference,
+      required final String payTerm,
+      required final String collectiveNo,
+      required final int quantity,
+      required final double unitPrice,
+      required final double totalPrice,
+      required final bool draftorder,
+      required final String address1,
+      required final String address2,
+      required final String city,
+      required final String fax,
+      required final String phonenumber,
+      required final String orderType,
+      required final String orderReason,
+      required final String shippingCondition,
+      required final String user,
+      required final String contactPerson,
+      required final String referenceNotes}) = _$_SavedOrder;
   const _SavedOrder._() : super._();
 
   @override
@@ -380,6 +876,56 @@ abstract class _SavedOrder extends SavedOrder {
   double get totalOrderValue;
   @override
   String get requestedDeliveryDate;
+  @override
+  String get deliveryDocument;
+  @override
+  String get salesOrganization;
+  @override
+  String get principal;
+  @override
+  String get processingStatus;
+  @override
+  String get country;
+  @override
+  String get postCode1;
+  @override
+  String get specialInstructions;
+  @override
+  String get poReference;
+  @override
+  String get payTerm;
+  @override
+  String get collectiveNo;
+  @override
+  int get quantity;
+  @override
+  double get unitPrice;
+  @override
+  double get totalPrice;
+  @override
+  bool get draftorder;
+  @override
+  String get address1;
+  @override
+  String get address2;
+  @override
+  String get city;
+  @override
+  String get fax;
+  @override
+  String get phonenumber;
+  @override
+  String get orderType;
+  @override
+  String get orderReason;
+  @override
+  String get shippingCondition;
+  @override
+  String get user;
+  @override
+  String get contactPerson;
+  @override
+  String get referenceNotes;
   @override
   @JsonKey(ignore: true)
   _$$_SavedOrderCopyWith<_$_SavedOrder> get copyWith =>

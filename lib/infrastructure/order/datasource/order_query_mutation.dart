@@ -31,4 +31,14 @@ class OrderQueryMutation {
     }
     ''';
   }
+
+  String createSavedOrder() {
+    return '''
+    mutation createDraftorder(\$input: CreateDraftOrderInput!) {
+      createDraftOrder(input: \$input) { 
+          draftorder
+      }
+    }
+    ''';
+  }
 }

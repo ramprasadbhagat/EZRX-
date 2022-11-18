@@ -12,6 +12,9 @@ class MaterialItemBonus with _$MaterialItemBonus {
     required int qty,
     required String comment,
     required String materialDescription,
+    required String expiryDate,
+    required String inStock,
+    required int remainingQty,
   }) = _MaterialItemBonus;
 
   factory MaterialItemBonus.empty() => MaterialItemBonus(
@@ -19,5 +22,8 @@ class MaterialItemBonus with _$MaterialItemBonus {
         qty: 0,
         comment: '',
         materialDescription: '',
+        expiryDate: '',
+        inStock: '',
+        remainingQty: 0,
       );
 }

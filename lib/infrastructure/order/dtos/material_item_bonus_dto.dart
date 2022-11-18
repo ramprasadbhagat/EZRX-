@@ -16,6 +16,9 @@ class MaterialItemBonusDto with _$MaterialItemBonusDto {
     @JsonKey(name: 'comment', defaultValue: '') required String comment,
     @JsonKey(name: 'MaterialDescription', defaultValue: '')
         required String materialDescription,
+    @JsonKey(name: 'expiryDate', defaultValue: '') required String expiryDate,
+    @JsonKey(name: 'inStock', defaultValue: '') required String inStock,
+    @JsonKey(name: 'remainingQty', defaultValue: 0) required int remainingQty,
   }) = _MaterialItemBonusDto;
 
   MaterialItemBonus toDomain() {
@@ -24,6 +27,9 @@ class MaterialItemBonusDto with _$MaterialItemBonusDto {
       qty: qty,
       comment: comment,
       materialDescription: materialDescription,
+      expiryDate: expiryDate,
+      inStock: inStock,
+      remainingQty: remainingQty,
     );
   }
 
@@ -33,6 +39,9 @@ class MaterialItemBonusDto with _$MaterialItemBonusDto {
       materialNumber: bonus.materialNumber.getOrCrash(),
       qty: bonus.qty,
       comment: bonus.comment,
+      expiryDate: bonus.expiryDate,
+      inStock: bonus.inStock,
+      remainingQty: bonus.remainingQty,
     );
   }
 

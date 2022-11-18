@@ -20,6 +20,9 @@ mixin _$MaterialItemBonus {
   int get qty => throw _privateConstructorUsedError;
   String get comment => throw _privateConstructorUsedError;
   String get materialDescription => throw _privateConstructorUsedError;
+  String get expiryDate => throw _privateConstructorUsedError;
+  String get inStock => throw _privateConstructorUsedError;
+  int get remainingQty => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialItemBonusCopyWith<MaterialItemBonus> get copyWith =>
@@ -36,7 +39,10 @@ abstract class $MaterialItemBonusCopyWith<$Res> {
       {MaterialNumber materialNumber,
       int qty,
       String comment,
-      String materialDescription});
+      String materialDescription,
+      String expiryDate,
+      String inStock,
+      int remainingQty});
 }
 
 /// @nodoc
@@ -56,6 +62,9 @@ class _$MaterialItemBonusCopyWithImpl<$Res, $Val extends MaterialItemBonus>
     Object? qty = null,
     Object? comment = null,
     Object? materialDescription = null,
+    Object? expiryDate = null,
+    Object? inStock = null,
+    Object? remainingQty = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -74,6 +83,18 @@ class _$MaterialItemBonusCopyWithImpl<$Res, $Val extends MaterialItemBonus>
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
+      expiryDate: null == expiryDate
+          ? _value.expiryDate
+          : expiryDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      inStock: null == inStock
+          ? _value.inStock
+          : inStock // ignore: cast_nullable_to_non_nullable
+              as String,
+      remainingQty: null == remainingQty
+          ? _value.remainingQty
+          : remainingQty // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -90,7 +111,10 @@ abstract class _$$_MaterialItemBonusCopyWith<$Res>
       {MaterialNumber materialNumber,
       int qty,
       String comment,
-      String materialDescription});
+      String materialDescription,
+      String expiryDate,
+      String inStock,
+      int remainingQty});
 }
 
 /// @nodoc
@@ -108,6 +132,9 @@ class __$$_MaterialItemBonusCopyWithImpl<$Res>
     Object? qty = null,
     Object? comment = null,
     Object? materialDescription = null,
+    Object? expiryDate = null,
+    Object? inStock = null,
+    Object? remainingQty = null,
   }) {
     return _then(_$_MaterialItemBonus(
       materialNumber: null == materialNumber
@@ -126,6 +153,18 @@ class __$$_MaterialItemBonusCopyWithImpl<$Res>
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
+      expiryDate: null == expiryDate
+          ? _value.expiryDate
+          : expiryDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      inStock: null == inStock
+          ? _value.inStock
+          : inStock // ignore: cast_nullable_to_non_nullable
+              as String,
+      remainingQty: null == remainingQty
+          ? _value.remainingQty
+          : remainingQty // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -137,7 +176,10 @@ class _$_MaterialItemBonus extends _MaterialItemBonus {
       {required this.materialNumber,
       required this.qty,
       required this.comment,
-      required this.materialDescription})
+      required this.materialDescription,
+      required this.expiryDate,
+      required this.inStock,
+      required this.remainingQty})
       : super._();
 
   @override
@@ -148,10 +190,16 @@ class _$_MaterialItemBonus extends _MaterialItemBonus {
   final String comment;
   @override
   final String materialDescription;
+  @override
+  final String expiryDate;
+  @override
+  final String inStock;
+  @override
+  final int remainingQty;
 
   @override
   String toString() {
-    return 'MaterialItemBonus(materialNumber: $materialNumber, qty: $qty, comment: $comment, materialDescription: $materialDescription)';
+    return 'MaterialItemBonus(materialNumber: $materialNumber, qty: $qty, comment: $comment, materialDescription: $materialDescription, expiryDate: $expiryDate, inStock: $inStock, remainingQty: $remainingQty)';
   }
 
   @override
@@ -164,12 +212,17 @@ class _$_MaterialItemBonus extends _MaterialItemBonus {
             (identical(other.qty, qty) || other.qty == qty) &&
             (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.materialDescription, materialDescription) ||
-                other.materialDescription == materialDescription));
+                other.materialDescription == materialDescription) &&
+            (identical(other.expiryDate, expiryDate) ||
+                other.expiryDate == expiryDate) &&
+            (identical(other.inStock, inStock) || other.inStock == inStock) &&
+            (identical(other.remainingQty, remainingQty) ||
+                other.remainingQty == remainingQty));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, materialNumber, qty, comment, materialDescription);
+  int get hashCode => Object.hash(runtimeType, materialNumber, qty, comment,
+      materialDescription, expiryDate, inStock, remainingQty);
 
   @JsonKey(ignore: true)
   @override
@@ -184,7 +237,10 @@ abstract class _MaterialItemBonus extends MaterialItemBonus {
       {required final MaterialNumber materialNumber,
       required final int qty,
       required final String comment,
-      required final String materialDescription}) = _$_MaterialItemBonus;
+      required final String materialDescription,
+      required final String expiryDate,
+      required final String inStock,
+      required final int remainingQty}) = _$_MaterialItemBonus;
   const _MaterialItemBonus._() : super._();
 
   @override
@@ -195,6 +251,12 @@ abstract class _MaterialItemBonus extends MaterialItemBonus {
   String get comment;
   @override
   String get materialDescription;
+  @override
+  String get expiryDate;
+  @override
+  String get inStock;
+  @override
+  int get remainingQty;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialItemBonusCopyWith<_$_MaterialItemBonus> get copyWith =>

@@ -310,7 +310,7 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
-    () => OrderSummaryBloc(),
+    () => OrderSummaryBloc(repository: locator<OrderRepository>()),
   );
 
   //============================================================

@@ -16,19 +16,51 @@ class SavedOrderDto with _$SavedOrderDto {
     @JsonKey(name: 'id', defaultValue: '') required String id,
     @_OrderProductItemListConverter()
     @JsonKey(name: 'itemlist', defaultValue: <MaterialItemDto>[])
-    required List<MaterialItemDto> items,
+        required List<MaterialItemDto> items,
     @JsonKey(name: 'draftorder', defaultValue: false)
-    required bool isDraftOrder,
+        required bool isDraftOrder,
     @JsonKey(name: 'BillingDocument', defaultValue: '')
-    required String billingDocument,
+        required String billingDocument,
     @JsonKey(name: 'eZRxNumber', defaultValue: '') required String eZRxNumber,
     @JsonKey(name: 'SoldToParty', defaultValue: '') required String soldToParty,
     @JsonKey(name: 'ShipToParty', defaultValue: '') required String shipToParty,
     @JsonKey(name: 'CompanyName', defaultValue: '') required String companyName,
     @JsonKey(name: 'TotalOrderValue', defaultValue: 0)
-    required double totalOrderValue,
+        required double totalOrderValue,
     @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
-    required String requestedDeliveryDate,
+        required String requestedDeliveryDate,
+    @JsonKey(name: 'DeliveryDocument', defaultValue: '')
+        required String deliveryDocument,
+    @JsonKey(name: 'SalesOrganization', defaultValue: '')
+        required String salesOrganization,
+    @JsonKey(name: 'Principal', defaultValue: '') required String principal,
+    @JsonKey(name: 'ProcessingStatus', defaultValue: '')
+        required String processingStatus,
+    @JsonKey(name: 'country', defaultValue: '') required String country,
+    @JsonKey(name: 'post_code1', defaultValue: '') required String postCode1,
+    @JsonKey(name: 'orderRequest', defaultValue: '')
+        required String specialInstructions,
+    @JsonKey(name: 'POReference', defaultValue: '') required String poReference,
+    @JsonKey(name: 'paymentTerm', defaultValue: '') required String payTerm,
+    @JsonKey(name: 'collectiveNumber', defaultValue: '')
+        required String collectiveNo,
+    @JsonKey(name: 'Quantity', defaultValue: 0) required int quantity,
+    @JsonKey(name: 'UnitPrice', defaultValue: 0.0) required double unitPrice,
+    @JsonKey(name: 'TotalPrice', defaultValue: 0.0) required double totalPrice,
+    @JsonKey(name: 'address1', defaultValue: '') required String address1,
+    @JsonKey(name: 'address2', defaultValue: '') required String address2,
+    @JsonKey(name: 'city', defaultValue: '') required String city,
+    @JsonKey(name: 'fax', defaultValue: '') required String fax,
+    @JsonKey(name: 'phonenumber', defaultValue: '') required String phonenumber,
+    @JsonKey(name: 'orderType', defaultValue: '') required String orderType,
+    @JsonKey(name: 'orderReason', defaultValue: '') required String orderReason,
+    @JsonKey(name: 'shippingCondition', defaultValue: '')
+        required String shippingCondition,
+    @JsonKey(name: 'user', defaultValue: '') required String user,
+    @JsonKey(name: 'contactPerson', defaultValue: '')
+        required String contactPerson,
+    @JsonKey(name: 'referenceNote', defaultValue: '')
+        required String referenceNotes,
   }) = _SavedOrderDto;
 
   SavedOrder toDomain() {
@@ -45,6 +77,70 @@ class SavedOrderDto with _$SavedOrderDto {
       companyName: CompanyName(companyName),
       totalOrderValue: totalOrderValue,
       requestedDeliveryDate: requestedDeliveryDate,
+      address1: address1,
+      address2: address2,
+      city: city,
+      collectiveNo: collectiveNo,
+      contactPerson: contactPerson,
+      country: country,
+      referenceNotes: referenceNotes,
+      deliveryDocument: deliveryDocument,
+      draftorder: false,
+      fax: fax,
+      orderReason: orderReason,
+      orderType: orderType,
+      payTerm: payTerm,
+      phonenumber: phonenumber,
+      poReference: poReference,
+      postCode1: postCode1,
+      principal: principal,
+      processingStatus: processingStatus,
+      quantity: quantity,
+      salesOrganization: salesOrganization,
+      shippingCondition: shippingCondition,
+      specialInstructions: specialInstructions,
+      totalPrice: totalPrice,
+      unitPrice: unitPrice,
+      user: user,
+    );
+  }
+
+  factory SavedOrderDto.fromDomain(SavedOrder saveOrder) {
+    return SavedOrderDto(
+      address1: saveOrder.address1,
+      address2: saveOrder.address2,
+      billingDocument: saveOrder.billingDocument,
+      city: saveOrder.city,
+      collectiveNo: saveOrder.collectiveNo,
+      companyName: saveOrder.companyName.getOrCrash(),
+      contactPerson: saveOrder.contactPerson,
+      country: saveOrder.country,
+      deliveryDocument: saveOrder.deliveryDocument,
+      eZRxNumber: saveOrder.eZRxNumber,
+      fax: saveOrder.fax,
+      id: saveOrder.id,
+      isDraftOrder: saveOrder.isDraftOrder,
+      orderReason: saveOrder.orderReason,
+      orderType: saveOrder.orderType,
+      payTerm: saveOrder.payTerm,
+      phonenumber: saveOrder.phonenumber,
+      poReference: saveOrder.poReference,
+      postCode1: saveOrder.postCode1,
+      principal: saveOrder.principal,
+      processingStatus: saveOrder.processingStatus,
+      quantity: saveOrder.quantity,
+      referenceNotes: saveOrder.referenceNotes,
+      requestedDeliveryDate: saveOrder.requestedDeliveryDate,
+      salesOrganization: saveOrder.salesOrganization,
+      shipToParty: saveOrder.shipToParty.getOrCrash(),
+      shippingCondition: saveOrder.shippingCondition,
+      soldToParty: saveOrder.soldToParty.getOrCrash(),
+      specialInstructions: saveOrder.specialInstructions,
+      totalOrderValue: saveOrder.totalOrderValue,
+      totalPrice: saveOrder.totalPrice,
+      unitPrice: saveOrder.unitPrice,
+      user: saveOrder.user,
+      items: saveOrder.items.map((e) => MaterialItemDto.fromDomain(e)).toList(),
     );
   }
 
