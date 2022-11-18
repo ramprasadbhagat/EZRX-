@@ -49,13 +49,13 @@ class OrderHistoryRepository implements IOrderHistoryRepository {
     }
 
     try {
-    
       final orderHistoryItemList = user.role.type.isSalesRep
           ? await orderHistoryRemoteDataSource.getOrderHistorySalesRep(
               loginUserType: user.role.type.loginUserType,
               shipTo: shipTo.shipToCustomerCode,
               soldTo: soldTo.customerCodeSoldTo,
-              fromDate:  DateFormat('yyyyMMdd').format(orderHistoryFilter.fromDate),
+              fromDate:
+                  DateFormat('yyyyMMdd').format(orderHistoryFilter.fromDate),
               toDate: DateFormat('yyyyMMdd').format(orderHistoryFilter.toDate),
               pageSize: pageSize,
               offset: offset,
@@ -63,26 +63,31 @@ class OrderHistoryRepository implements IOrderHistoryRepository {
               userName: user.username.getOrCrash(),
               orderBy: orderBy,
               sort: sort,
-              materialSearch: orderHistoryFilter.materialSearch.getOrDefaultValue(''),
+              materialSearch:
+                  orderHistoryFilter.materialSearch.getOrDefaultValue(''),
               orderId: orderHistoryFilter.orderId.getOrDefaultValue(''),
               poNumber: orderHistoryFilter.poNumber.getOrDefaultValue(''),
-              principalSearch: orderHistoryFilter.principalSearch.getOrDefaultValue(''),
+              principalSearch:
+                  orderHistoryFilter.principalSearch.getOrDefaultValue(''),
             )
           : await orderHistoryRemoteDataSource.getOrderHistory(
               loginUserType: user.role.type.loginUserType,
               shipTo: shipTo.shipToCustomerCode,
               soldTo: soldTo.customerCodeSoldTo,
-              fromDate: DateFormat('yyyyMMdd').format(orderHistoryFilter.fromDate),
+              fromDate:
+                  DateFormat('yyyyMMdd').format(orderHistoryFilter.fromDate),
               toDate: DateFormat('yyyyMMdd').format(orderHistoryFilter.toDate),
               pageSize: pageSize,
               offset: offset,
               companyName: '',
               orderBy: orderBy,
               sort: sort,
-              materialSearch: orderHistoryFilter.materialSearch.getOrDefaultValue(''),
+              materialSearch:
+                  orderHistoryFilter.materialSearch.getOrDefaultValue(''),
               orderId: orderHistoryFilter.orderId.getOrDefaultValue(''),
               poNumber: orderHistoryFilter.poNumber.getOrDefaultValue(''),
-              principalSearch: orderHistoryFilter.principalSearch.getOrDefaultValue(''),
+              principalSearch:
+                  orderHistoryFilter.principalSearch.getOrDefaultValue(''),
             );
 
       return Right(orderHistoryItemList);

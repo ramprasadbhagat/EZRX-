@@ -29,9 +29,9 @@ class OrderHistoryListBloc
   }
 
   Future<void> _onEvent(
-      OrderHistoryListEvent event,
-      Emitter<OrderHistoryListState> emit,
-      ) async {
+    OrderHistoryListEvent event,
+    Emitter<OrderHistoryListState> emit,
+  ) async {
     await event.map(
       initialized: (e) async => emit(OrderHistoryListState.initial()),
       fetch: (e) async {
@@ -49,8 +49,6 @@ class OrderHistoryListBloc
           soldTo: e.customerCodeInfo,
           shipTo: e.shipToInfo,
           user: e.user,
-          // fromDate: e.orderHistoryFilter.fromDate,
-          // toDate: e.orderHistoryFilter.toDate,
           orderBy: 'orderDate',
           sort: 'desc',
           pageSize: _pageSize,
@@ -58,9 +56,8 @@ class OrderHistoryListBloc
           orderHistoryFilter: e.orderHistoryFilter,
         );
 
-
         failureOrSuccess.fold(
-              (failure) {
+          (failure) {
             emit(
               state.copyWith(
                 failureOrSuccessOption: optionOf(failureOrSuccess),
@@ -68,14 +65,14 @@ class OrderHistoryListBloc
               ),
             );
           },
-              (orderHistoryList) {
+          (orderHistoryList) {
             emit(
               state.copyWith(
                 orderHistoryList: orderHistoryList,
                 failureOrSuccessOption: none(),
                 isFetching: false,
                 canLoadMore:
-                orderHistoryList.orderHistoryItems.length >= _pageSize,
+                    orderHistoryList.orderHistoryItems.length >= _pageSize,
                 nextPageIndex: 1,
               ),
             );
@@ -91,11 +88,6 @@ class OrderHistoryListBloc
           soldTo: e.customerCodeInfo,
           shipTo: e.shipToInfo,
           user: e.user,
-          // fromDate: e.orderHistoryFilter.fromDate,
-          // // DateTime.parse(DateFormat('yyyyMMdd')
-          // //     .format(DateTime.now().subtract(const Duration(days: 7)))),
-          // toDate:e.orderHistoryFilter.toDate,
-          // //  DateTime.parse(DateFormat('yyyyMMdd').format(DateTime.now())),
           orderBy: 'orderDate',
           sort: 'desc',
           pageSize: _pageSize,
@@ -104,7 +96,7 @@ class OrderHistoryListBloc
         );
 
         await failureOrSuccess.fold(
-              (failure) async {
+          (failure) async {
             emit(
               state.copyWith(
                 failureOrSuccessOption: optionOf(failureOrSuccess),
@@ -112,7 +104,7 @@ class OrderHistoryListBloc
               ),
             );
           },
-              (orderHistoryList) async {
+          (orderHistoryList) async {
             final newOrderHistoryList = List<OrderHistoryItem>.from(
               state.orderHistoryList.orderHistoryItems,
             )..addAll(orderHistoryList.orderHistoryItems);
@@ -125,7 +117,7 @@ class OrderHistoryListBloc
                 failureOrSuccessOption: none(),
                 isFetching: false,
                 canLoadMore:
-                orderHistoryList.orderHistoryItems.length >= _pageSize,
+                    orderHistoryList.orderHistoryItems.length >= _pageSize,
                 nextPageIndex: state.nextPageIndex + 1,
               ),
             );

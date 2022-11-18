@@ -2,6 +2,7 @@ part of 'order_history_list_bloc.dart';
 
 @freezed
 class OrderHistoryListState with _$OrderHistoryListState {
+  const OrderHistoryListState._();
   const factory OrderHistoryListState({
     required OrderHistory orderHistoryList,
     required bool canLoadMore,
@@ -16,4 +17,10 @@ class OrderHistoryListState with _$OrderHistoryListState {
         nextPageIndex: 0,
         failureOrSuccessOption: none(),
       );
+
+  List<OrderHistoryItem> getFilterItem(List<String> filter) =>
+      List.from(orderHistoryList.orderHistoryItems)
+        ..retainWhere(
+          (element) => filter.contains(element.status) || filter.isEmpty,
+        );
 }

@@ -969,13 +969,14 @@ class __$$_OrderHistoryListStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderHistoryListState implements _OrderHistoryListState {
+class _$_OrderHistoryListState extends _OrderHistoryListState {
   const _$_OrderHistoryListState(
       {required this.orderHistoryList,
       required this.canLoadMore,
       required this.isFetching,
       required this.nextPageIndex,
-      required this.failureOrSuccessOption});
+      required this.failureOrSuccessOption})
+      : super._();
 
   @override
   final OrderHistory orderHistoryList;
@@ -1022,7 +1023,7 @@ class _$_OrderHistoryListState implements _OrderHistoryListState {
           this, _$identity);
 }
 
-abstract class _OrderHistoryListState implements OrderHistoryListState {
+abstract class _OrderHistoryListState extends OrderHistoryListState {
   const factory _OrderHistoryListState(
       {required final OrderHistory orderHistoryList,
       required final bool canLoadMore,
@@ -1030,6 +1031,7 @@ abstract class _OrderHistoryListState implements OrderHistoryListState {
       required final int nextPageIndex,
       required final Option<Either<ApiFailure, dynamic>>
           failureOrSuccessOption}) = _$_OrderHistoryListState;
+  const _OrderHistoryListState._() : super._();
 
   @override
   OrderHistory get orderHistoryList;

@@ -13,6 +13,7 @@ import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
@@ -205,6 +206,9 @@ class ShipCodeSelector extends StatelessWidget {
               context
                   .read<OrderHistoryFilterBloc>()
                   .add(const OrderHistoryFilterEvent.initialized());
+                  context
+                  .read<OrderHistoryFilterByStatusBloc>()
+                  .add(const OrderHistoryFilterByStatusEvent.initialized());
             }
           },
           buildWhen: (previous, current) =>

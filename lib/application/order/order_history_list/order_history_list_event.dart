@@ -16,6 +16,5 @@ class OrderHistoryListEvent with _$OrderHistoryListEvent {
     required ShipToInfo shipToInfo,
     required User user,
     required OrderHistoryFilter orderHistoryFilter,
-    
   }) = _LoadMore;
 }

@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -15,6 +16,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/history/history_filter.dart';
+import 'package:ezrxmobile/presentation/history/history_filter_by_status.dart';
 import 'package:ezrxmobile/presentation/history/history_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +24,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HistoryTab extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  HistoryTab({Key? key}) : super(key: key);
+  HistoryTab({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,65 +53,121 @@ class HistoryTab extends StatelessWidget {
                 previous.haveShipTo != current.haveShipTo,
             builder: (context, state) {
               return state.haveShipTo
-                  ? GestureDetector(
-                      key: const Key('filterButton'),
-                      onTap: () {
-                        scaffoldKey.currentState!.openEndDrawer();
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          const Text(
-                            'Filter',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: ZPColors.kPrimaryColor,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ).tr(),
-                          Padding(
-                            padding: const EdgeInsets.all(
-                              8.0,
-                            ),
-                            child: Stack(
-                              children: <Widget>[
-                                const FittedBox(
-                                  key: ValueKey('order_history_filter'),
-                                  child: Icon(
-                                    Icons.filter_alt,
-                                  ),
-                                ),
-                                BlocBuilder<OrderHistoryFilterBloc,
-                                    OrderHistoryFilterState>(
-                                  buildWhen: (previous, current) =>
-                                      previous.isAppliedFilter !=
-                                      current.isAppliedFilter,
-                                  builder: (context, state) {
-                                    if (state.isAppliedFilter) {
-                                      return Positioned(
-                                        key: const ValueKey(
-                                          'Filter_list_not_empty',
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            showModalBottomSheet(
+                              isScrollControlled: true,
+                              context: context,
+                              builder: (_) {
+                                return const HistoryFilterByStatus();
+                              },
+                            );
+                          },
+                          child: Stack(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.only(left:8.0),
+                                      child: Text(
+                                        'status'.tr(),
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          color: ZPColors.kPrimaryColor,
+                                          fontWeight: FontWeight.w500,
                                         ),
-                                        right: 0,
-                                        child: Container(
-                                          decoration: const BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: ZPColors.kPrimaryColor,
-                                          ),
-                                          width: radius / 2,
-                                          height: radius / 2,
-                                        ),
-                                      );
-                                    }
+                                      ),
+                                    ),
+                                    BlocBuilder<OrderHistoryFilterByStatusBloc,
+                                        OrderHistoryFilterByStatusState>(
+                                     
+                                      builder: (context, state) {
+                                        if (state.filterByStatusName.isNotEmpty) {
+                                          return Positioned(
+                                            key: const ValueKey(
+                                              'Filter_by_status_list_not_empty',
+                                            ),
+                                            right: 0,
+                                            child: Container(
+                                              decoration: const BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: ZPColors.kPrimaryColor,
+                                              ),
+                                              width: radius / 3,
+                                              height: radius / 2,
+                                            ),
+                                          );
+                                        }
 
-                                    return const SizedBox.shrink();
-                                  },
+                                        return const SizedBox.shrink();
+                                      },
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                          
+                        ),
+                        GestureDetector(
+                          key: const Key('filterButton'),
+                          onTap: () {
+                            scaffoldKey.currentState!.openEndDrawer();
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              const Text(
+                                'Filter',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: ZPColors.kPrimaryColor,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ).tr(),
+                              Padding(
+                                padding: const EdgeInsets.all(
+                                  8.0,
+                                ),
+                                child: Stack(
+                                  children: <Widget>[
+                                    const FittedBox(
+                                      key: ValueKey('order_history_filter'),
+                                      child: Icon(
+                                        Icons.filter_alt,
+                                      ),
+                                    ),
+                                    BlocBuilder<OrderHistoryFilterBloc,
+                                        OrderHistoryFilterState>(
+                                      buildWhen: (previous, current) =>
+                                          previous.isAppliedFilter !=
+                                          current.isAppliedFilter,
+                                      builder: (context, state) {
+                                        if (state.isAppliedFilter) {
+                                          return Positioned(
+                                            key: const ValueKey(
+                                              'Filter_list_not_empty',
+                                            ),
+                                            right: 0,
+                                            child: Container(
+                                              decoration: const BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: ZPColors.kPrimaryColor,
+                                              ),
+                                              width: radius / 2,
+                                              height: radius / 2,
+                                            ),
+                                          );
+                                        }
+
+                                        return const SizedBox.shrink();
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     )
                   : const SizedBox.shrink();
             },
@@ -147,69 +207,85 @@ class HistoryTab extends StatelessWidget {
                 );
           }
         },
-        child: BlocConsumer<OrderHistoryListBloc, OrderHistoryListState>(
-          listenWhen: (previous, current) =>
-              previous.failureOrSuccessOption != current.failureOrSuccessOption,
-          listener: (context, state) {
-            state.failureOrSuccessOption.fold(
-              () {},
-              (either) => either.fold(
-                (failure) {
-                  final failureMessage = failure.failureMessage;
-                  showSnackBar(
-                    context: context,
-                    message: failureMessage.tr(),
-                  );
-                  if (failureMessage == 'authentication failed') {
-                    context.read<AuthBloc>().add(const AuthEvent.logout());
-                  }
-                },
-                (_) {},
-              ),
-            );
-          },
-          buildWhen: (previous, current) =>
-              previous.isFetching != current.isFetching,
-          builder: (context, state) {
-            return state.isFetching &&
-                    state.orderHistoryList.orderHistoryItems.isEmpty
-                ? LoadingShimmer.withChild(
-                    child: Image.asset(
-                      'assets/images/ezrxlogo.png',
-                      key: const Key('LoaderImage'),
-                      width: 80,
-                      height: 80,
-                    ),
-                  )
-                : ScrollList<OrderHistoryItem>(
-                    key: const Key('OrderHistoryList'),
-                    emptyMessage: 'No history found',
-                    onRefresh: () {
-                      if (context.read<ShipToCodeBloc>().state.haveShipTo) {
-                        context.read<OrderHistoryFilterBloc>().add(
-                              const OrderHistoryFilterEvent.initialized(),
-                            );
-                        context.read<OrderHistoryListBloc>().add(
-                              OrderHistoryListEvent.fetch(
-                                customerCodeInfo: context
-                                    .read<CustomerCodeBloc>()
-                                    .state
-                                    .customerCodeInfo,
-                                salesOrgConfigs:
-                                    context.read<SalesOrgBloc>().state.configs,
-                                shipToInfo: context
-                                    .read<ShipToCodeBloc>()
-                                    .state
-                                    .shipToInfo,
-                                user: context.read<UserBloc>().state.user,
-                                orderHistoryFilter: OrderHistoryFilter.empty(),
-                              ),
-                            );
+        child: BlocBuilder<OrderHistoryFilterByStatusBloc,
+            OrderHistoryFilterByStatusState>(
+          buildWhen: ((previous, current) =>
+              previous.filterByStatusName != current.filterByStatusName),
+          builder: (context, orderHistoryFilterByStatusState) {
+            return BlocConsumer<OrderHistoryListBloc, OrderHistoryListState>(
+              listenWhen: (previous, current) =>
+                  previous.failureOrSuccessOption !=
+                  current.failureOrSuccessOption,
+              listener: (context, state) {
+                state.failureOrSuccessOption.fold(
+                  () {},
+                  (either) => either.fold(
+                    (failure) {
+                      final failureMessage = failure.failureMessage;
+                      showSnackBar(
+                        context: context,
+                        message: failureMessage.tr(),
+                      );
+                      if (failureMessage == 'authentication failed') {
+                        context.read<AuthBloc>().add(const AuthEvent.logout());
                       }
                     },
-                    isLoading: state.isFetching,
-                    onLoadingMore: () =>
-                        context.read<OrderHistoryListBloc>().add(
+                    (_) {},
+                  ),
+                );
+              },
+              buildWhen: (previous, current) =>
+                  previous.isFetching != current.isFetching,
+              builder: (context, state) {
+                return state.isFetching &&
+                        state
+                            .getFilterItem(orderHistoryFilterByStatusState
+                                .filterByStatusName)
+                            .isEmpty
+                    ? LoadingShimmer.withChild(
+                        child: Image.asset(
+                          'assets/images/ezrxlogo.png',
+                          key: const Key('LoaderImage'),
+                          width: 80,
+                          height: 80,
+                        ),
+                      )
+                    : ScrollList<OrderHistoryItem>(
+                        key: const Key('OrderHistoryList'),
+                        emptyMessage: 'No history found',
+                        onRefresh: () {
+                          if (context.read<ShipToCodeBloc>().state.haveShipTo) {
+                             context.read<OrderHistoryFilterBloc>().add(
+                                  const OrderHistoryFilterEvent.initialized(),
+                                );
+                            context.read<OrderHistoryFilterByStatusBloc>().add(
+                                  const OrderHistoryFilterByStatusEvent.initialized(),
+                                );
+                            context.read<OrderHistoryListBloc>().add(
+                                  OrderHistoryListEvent.fetch(
+                                    customerCodeInfo: context
+                                        .read<CustomerCodeBloc>()
+                                        .state
+                                        .customerCodeInfo,
+                                    salesOrgConfigs: context
+                                        .read<SalesOrgBloc>()
+                                        .state
+                                        .configs,
+                                    shipToInfo: context
+                                        .read<ShipToCodeBloc>()
+                                        .state
+                                        .shipToInfo,
+                                    user: context.read<UserBloc>().state.user,
+                                    orderHistoryFilter:
+                                        OrderHistoryFilter.empty(),
+                                  ),
+                                );
+                          }
+                        },
+                        isLoading: state.isFetching,
+                        onLoadingMore: () => context
+                            .read<OrderHistoryListBloc>()
+                            .add(
                               OrderHistoryListEvent.loadMore(
                                 customerCodeInfo: context
                                     .read<CustomerCodeBloc>()
@@ -225,26 +301,33 @@ class HistoryTab extends StatelessWidget {
                                 orderHistoryFilter: OrderHistoryFilter.empty(),
                               ),
                             ),
-                    itemBuilder: (context, index, item) => OrderHistoryListTile(
-                      orderHistoryItem: item,
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      shipToInfo:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
-                      orderHistoryBasicInfo:
-                          state.orderHistoryList.orderBasicInformation,
-                      currency:
-                          context.read<SalesOrgBloc>().state.configs.currency,
-                      salesOrgConfigs:
-                          context.read<SalesOrgBloc>().state.configs,
-                      billToInfo: buildToInformation.isNotEmpty
-                          ? buildToInformation.first
-                          : BillToInfo.empty(),
-                    ),
-                    items: state.orderHistoryList.orderHistoryItems,
-                  );
+                        itemBuilder: (context, index, item) =>
+                            OrderHistoryListTile(
+                          orderHistoryItem: item,
+                          customerCodeInfo: context
+                              .read<CustomerCodeBloc>()
+                              .state
+                              .customerCodeInfo,
+                          shipToInfo:
+                              context.read<ShipToCodeBloc>().state.shipToInfo,
+                          orderHistoryBasicInfo:
+                              state.orderHistoryList.orderBasicInformation,
+                          currency: context
+                              .read<SalesOrgBloc>()
+                              .state
+                              .configs
+                              .currency,
+                          salesOrgConfigs:
+                              context.read<SalesOrgBloc>().state.configs,
+                          billToInfo: buildToInformation.isNotEmpty
+                              ? buildToInformation.first
+                              : BillToInfo.empty(),
+                        ),
+                        items: state.getFilterItem(
+                            orderHistoryFilterByStatusState.filterByStatusName,),
+                      );
+              },
+            );
           },
         ),
       ),
