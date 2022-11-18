@@ -124,6 +124,9 @@ void main() {
         when(() => authRepoMock.deleteCredential()).thenAnswer(
           (invocation) async => const Right(unit),
         );
+        when(() => authRepoMock.logout()).thenAnswer(
+          (invocation) async => const Right(unit),
+        );
       },
       act: (ProxyLoginFormBloc bloc) => bloc
         ..add(const ProxyLoginFormEvent.usernameChanged('fake-proxy_user'))

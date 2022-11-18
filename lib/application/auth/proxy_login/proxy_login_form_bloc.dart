@@ -42,7 +42,10 @@ class ProxyLoginFormBloc
           );
           await failureOrSuccess.fold(
             (_) {},
-            (login) => authRepository.storeJWT(jwt: login.jwt),
+            (login) async {
+              await authRepository.logout();
+              await authRepository.storeJWT(jwt: login.jwt);
+            },
           );
           emit(state.copyWith(
             isSubmitting: false,
