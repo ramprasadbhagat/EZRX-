@@ -17,6 +17,7 @@ import 'package:ezrxmobile/application/order/order_history_list/order_history_li
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
@@ -219,9 +220,9 @@ class ShipCodeSelector extends StatelessWidget {
                   ? LoadingShimmer.tile()
                   : FittedBox(
                       child: Text(
-                        customerCodeState.apiSuccess
-                            ? state.shipToInfo.shipToCustomerCode
-                            : 'No Shipping',
+                        state.shipToInfo == ShipToInfo.empty()
+                            ? 'NA'.tr()
+                            : state.shipToInfo.shipToCustomerCode,
                         style: Theme.of(context).textTheme.subtitle2?.apply(
                               color: ZPColors.primary,
                             ),

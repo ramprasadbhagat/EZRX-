@@ -13,13 +13,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CartBottomSheet {
   static void showAddToCartBottomSheet({
     required BuildContext context,
-    required MaterialInfo materialInfo,
+    required PriceAggregate priceAggregate,
   }) {
-    final itemPrice = context
-        .read<MaterialPriceBloc>()
-        .state
-        .materialPrice[materialInfo.materialNumber];
-
     showModalBottomSheet(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -31,15 +26,7 @@ class CartBottomSheet {
       builder: (_) {
         context.read<AddToCartBloc>().add(
               AddToCartEvent.setCartItem(
-                PriceAggregate(
-                  price: itemPrice ?? Price.empty(),
-                  materialInfo: materialInfo,
-                  salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                  quantity: 1,
-                  zmgMaterialCountOnCart:
-                      context.read<CartBloc>().state.zmgMaterialCount,
-                  isOverride: false,
-                ),
+                priceAggregate,
               ),
             );
 

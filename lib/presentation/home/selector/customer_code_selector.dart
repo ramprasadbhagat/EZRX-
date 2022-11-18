@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
@@ -83,9 +84,9 @@ class CustomerCodeSelector extends StatelessWidget {
               ? LoadingShimmer.tile()
               : FittedBox(
                   child: Text(
-                    state.apiSuccess
-                        ? state.customerCodeInfo.customerCodeSoldTo
-                        : 'No Customer',
+                    state.customerCodeInfo == CustomerCodeInfo.empty()
+                        ? 'NA'.tr()
+                        : state.customerCodeInfo.customerCodeSoldTo,
                     style: Theme.of(context).textTheme.subtitle2?.apply(
                           color: ZPColors.primary,
                         ),

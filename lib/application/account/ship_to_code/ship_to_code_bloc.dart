@@ -37,7 +37,8 @@ class ShipToCodeBloc extends Bloc<ShipToCodeEvent, ShipToCodeState> {
           (shipToCode) {
             return e.shipToInfos.firstWhere(
               (e) => shipToCode == e.shipToCustomerCode,
-              orElse: () => e.defaultShipToInfo,
+              orElse: () =>
+                  shipToCode.isEmpty ? ShipToInfo.empty() : e.defaultShipToInfo,
             );
           },
         );

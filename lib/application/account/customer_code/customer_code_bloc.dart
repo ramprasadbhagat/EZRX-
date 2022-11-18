@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -142,7 +140,9 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
 
               return finalCustomerCodeInfoList.firstWhere(
                 (e) => e.customerCodeSoldTo == customerCodeSoldTo,
-                orElse: () => finalCustomerCodeInfoList.first,
+                orElse: () => finalCustomerCodeInfoList.isEmpty
+                    ? CustomerCodeInfo.empty()
+                    : finalCustomerCodeInfoList.first,
               );
             },
           );

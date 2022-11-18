@@ -3,21 +3,24 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
-import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/presentation/core/action_button.dart';
+import 'package:ezrxmobile/presentation/core/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FavouriteListTile extends StatelessWidget {
   final Favourite favourite;
-
-  const FavouriteListTile({Key? key, required this.favourite})
-      : super(key: key);
+  const FavouriteListTile({
+    Key? key,
+    required this.favourite,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -174,7 +177,17 @@ class FavouriteListTile extends StatelessWidget {
                                 return ActionButton(
                                   width: 120,
                                   onTap: () {
-                                    //TODO: Implement Add to cart
+                                    if (itemPrice.isUnavailable()) {
+                                      showSnackBar(
+                                        context: context,
+                                        message: 'Product Not Available'.tr(),
+                                      );
+                                    } else {
+                                      CartBottomSheet.showAddToCartBottomSheet(
+                                        context: context,
+                                        priceAggregate: priceAggregate,
+                                      );
+                                    }
                                   },
                                   text: 'Add to Cart'.tr(),
                                 );

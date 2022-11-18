@@ -179,10 +179,29 @@ class _ListContent extends StatelessWidget {
           'covidMaterialOption${materialInfo.materialNumber.getOrCrash()}',
         ),
         onTap: () {
-          addToCart(
-            context: context,
-            materialInfo: materialInfo,
-          );
+          final materialPrice = context
+              .read<MaterialPriceBloc>()
+              .state
+              .materialPrice[materialInfo.materialNumber];
+          if (materialPrice == null) {
+            showSnackBar(
+              context: context,
+              message: 'Product Not Available'.tr(),
+            );
+          } else {
+            addToCart(
+              context: context,
+              priceAggregate: PriceAggregate(
+                price: materialPrice,
+                materialInfo: materialInfo,
+                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                quantity: 1,
+                zmgMaterialCountOnCart:
+                    context.read<CartBloc>().state.zmgMaterialCount,
+                isOverride: false,
+              ),
+            );
+          }
         },
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
