@@ -41,13 +41,54 @@ class OrderMaterialItem extends StatelessWidget {
                   ),
                 ),
               ),
-              child: Text(
-                'Material Description: $description',
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: ZPColors.darkerGreen,
-                ),
+              child: BlocBuilder<MaterialPriceDetailBloc,
+                  MaterialPriceDetailState>(
+                buildWhen: (previous, current) =>
+                    previous.isFetching != current.isFetching,
+                builder: (context, state) {
+                  final itemInfo = state.materialDetails[materialQueryInfo];
+                  final materialDescription =
+                      itemInfo?.info.materialDescription ?? '';
+                  
+                  return Row(
+                    children: [
+                      const Text(
+                        'Material Description : ',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: ZPColors.darkerGreen,
+                        ),
+                      ),
+                      state.isFetching || state.isValidating
+                          ? SizedBox(
+                              key: const Key('material-description-key'),
+                              width: 100,
+                              child: LoadingShimmer.tile(),
+                            )
+                          : itemInfo == null
+                              ? const Text(
+                                  'NA',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: ZPColors.darkerGreen,
+                                  ),
+                                )
+                              : Flexible(
+                                  child: Text(
+                                    materialDescription,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: ZPColors.darkerGreen,
+                                    ),
+                                  ),
+                                ),
+                    ],
+                  );
+                },
               ),
             ),
             _MaterialItemInfo(
