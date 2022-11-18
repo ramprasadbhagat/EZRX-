@@ -126,11 +126,37 @@ class CartRepository implements ICartRepository {
     required List<PriceAggregate> items,
   }) async {
     try {
-      final cartItemsDto =
-          items.map((e) => PriceAggregateDto.fromDomain(e)).toList();
-      await cartStorage.addAll(cartItemsDto);
+      final apiSuccessOrFailure = await fetchCartItems();
 
-      return fetchCartItems();
+      return apiSuccessOrFailure.fold(
+        (apiFailure) => Left(
+          FailureHandler.handleFailure(apiFailure),
+        ),
+        (storedList) async {
+          final storedItemsMap = {
+            for (final storedItem in storedList)
+              storedItem.materialInfo.materialNumber.displayMatNo: storedItem,
+          };
+
+          for (final item in items) {
+            final materialNumber =
+                item.materialInfo.materialNumber.displayMatNo;
+            if (storedItemsMap[materialNumber] != null) {
+              final storedItemToUpdate = storedItemsMap[materialNumber];
+              final itemToUpdate = storedItemToUpdate!.copyWith(
+                quantity: storedItemToUpdate.quantity + 1,
+              );
+              await cartStorage.updateItem(PriceAggregateDto.fromDomain(
+                itemToUpdate,
+              ));
+            } else {
+              await cartStorage.add(PriceAggregateDto.fromDomain(item));
+            }
+          }
+
+          return fetchCartItems();
+        },
+      );
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
