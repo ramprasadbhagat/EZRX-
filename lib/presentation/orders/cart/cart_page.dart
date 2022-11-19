@@ -39,7 +39,6 @@ class CartPage extends StatelessWidget {
       },
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
-        final salesOrgConfig = context.read<SalesOrgBloc>().state.configs;
         final taxCode = context.read<SalesOrgBloc>().state.salesOrg.taxCode;
 
         return Scaffold(
@@ -52,32 +51,26 @@ class CartPage extends StatelessWidget {
           body: Column(
             children: [
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 5,
+                child: ScrollList<PriceAggregate>(
+                  emptyMessage: 'Cart is Empty',
+                  onRefresh: () {
+                    context.read<CartBloc>().add(const CartEvent.fetch());
+                  },
+                  onLoadingMore: () {},
+                  isLoading: state.isFetching,
+                  itemBuilder: (context, index, item) => CartItemListTile(
+                    cartItem: item,
+                    taxCode: taxCode,
+                    showCheckBox: true,
                   ),
-                  child: ScrollList<PriceAggregate>(
-                    emptyMessage: 'Cart is Empty',
-                    onRefresh: () {
-                      context.read<CartBloc>().add(const CartEvent.fetch());
-                    },
-                    onLoadingMore: () {},
-                    isLoading: state.isFetching,
-                    itemBuilder: (context, index, item) => CartItemListTile(
-                      cartItem: item,
-                      taxCode: taxCode,
-                      showCheckBox: true,
-                    ),
-                    items: state.cartItemList,
-                  ),
+                  items: state.cartItemList,
                 ),
               ),
               state.cartItemList.isEmpty
                   ? const SizedBox.shrink()
                   : Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
                       decoration: const BoxDecoration(
                         boxShadow: <BoxShadow>[
                           BoxShadow(
@@ -89,77 +82,114 @@ class CartPage extends StatelessWidget {
                         color: ZPColors.white,
                       ),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          BalanceTextRow(
-                            keyText: 'Subtotal'.tr(),
-                            valueText:
-                                _displayPrice(salesOrgConfig, state.subtotal),
-                          ),
-                          salesOrgConfig.enableVat
-                              ? BalanceTextRow(
-                                  keyText: '$taxCode in %'.tr(),
-                                  valueText: '${salesOrgConfig.vatValue}%',
-                                )
-                              : const SizedBox.shrink(),
-                          salesOrgConfig.enableVat
-                              ? BalanceTextRow(
-                                  keyText: taxCode.tr(),
-                                  valueText: _displayPrice(
-                                    salesOrgConfig,
-                                    state.vatTotal,
-                                  ),
-                                )
-                              : const SizedBox.shrink(),
-                          BalanceTextRow(
-                            keyText: 'Grand Total'.tr(),
-                            valueText: _displayPrice(
-                              salesOrgConfig,
-                              state.grandTotal,
-                            ),
-                          ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              BlocBuilder<CartBloc, CartState>(
-                                builder: (context, state) {
-                                  return Radio(
-                                    value: state.selectedItemList.length,
-                                    groupValue: state.cartItemList.length,
-                                    activeColor: ZPColors.primary,
-                                    toggleable: true,
-                                    onChanged: (value) {
-                                      context.read<CartBloc>().add(
-                                            const CartEvent
-                                                .updateSelectAllItems(),
-                                          );
-                                    },
-                                  );
-                                },
-                              ),
-                              Text(
-                                'Select All',
-                                style: TextStyle(
-                                  color: state.selectedItemsMaterialNumber
-                                              .length ==
-                                          state.cartItemList.length
-                                      ? ZPColors.primary
-                                      : ZPColors.black,
-                                ),
-                              ),
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
+                              _SelectAllButton(),
+                              _TotalSection(),
                             ],
                           ),
-                          state.cartItemList.isNotEmpty
-                              ? ElevatedButton(
-                                  onPressed: () {
-                                    context.router.pushNamed('order_summary');
-                                  },
-                                  child: const Text('Order Summary').tr(),
-                                )
-                              : const SizedBox.shrink(),
+                          ElevatedButton(
+                            onPressed: () {
+                              context.router.pushNamed('order_summary');
+                            },
+                            child: const Text('Order Summary').tr(),
+                          ),
                         ],
                       ),
                     ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _SelectAllButton extends StatelessWidget {
+  const _SelectAllButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CartBloc, CartState>(
+      buildWhen: (previous, current) => previous != current,
+      builder: (context, state) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Radio(
+              value: state.selectedItemList.length,
+              groupValue: state.cartItemList.length,
+              toggleable: true,
+              onChanged: (value) {
+                context.read<CartBloc>().add(
+                      const CartEvent.updateSelectAllItems(),
+                    );
+              },
+            ),
+            Text(
+              'Select All',
+              style: TextStyle(
+                color: state.selectedItemsMaterialNumber.length ==
+                        state.cartItemList.length
+                    ? ZPColors.primary
+                    : ZPColors.black,
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _TotalSection extends StatelessWidget {
+  const _TotalSection({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CartBloc, CartState>(
+      buildWhen: (previous, current) => previous != current,
+      builder: (context, state) {
+        final salesOrgConfig = context.read<SalesOrgBloc>().state.configs;
+        final taxCode = context.read<SalesOrgBloc>().state.salesOrg.taxCode;
+
+        return SizedBox(
+          width: 150,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              BalanceTextRow(
+                keyText: 'Subtotal'.tr(),
+                valueText: _displayPrice(salesOrgConfig, state.subtotal),
+                valueFlex: 1,
+              ),
+              salesOrgConfig.enableVat
+                  ? BalanceTextRow(
+                      keyText: '$taxCode in %'.tr(),
+                      valueText: '${salesOrgConfig.vatValue}%',
+                      valueFlex: 1,
+                    )
+                  : const SizedBox.shrink(),
+              salesOrgConfig.enableVat
+                  ? BalanceTextRow(
+                      keyText: taxCode.tr(),
+                      valueText: _displayPrice(
+                        salesOrgConfig,
+                        state.vatTotal,
+                      ),
+                      valueFlex: 1,
+                    )
+                  : const SizedBox.shrink(),
+              BalanceTextRow(
+                keyText: 'Grand Total'.tr(),
+                valueText: _displayPrice(
+                  salesOrgConfig,
+                  state.grandTotal,
+                ),
+                valueFlex: 1,
+              ),
             ],
           ),
         );

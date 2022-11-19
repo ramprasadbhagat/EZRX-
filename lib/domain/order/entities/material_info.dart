@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -52,5 +53,9 @@ class MaterialInfo with _$MaterialInfo {
         defaultMaterialDescription: '',
         bundles: [],
         isFOCMaterial : false,
+      );
+
+  MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromBundles(
+        materialInfo: this,
       );
 }

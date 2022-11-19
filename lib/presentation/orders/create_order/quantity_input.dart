@@ -4,77 +4,84 @@ import 'package:flutter/services.dart';
 
 class QuantityInput extends StatelessWidget {
   final TextEditingController controller;
+  final Key quantityTextKey;
   final Function(int) onFieldChange;
   final Function(int) minusPressed;
   final Function(int) addPressed;
+  final bool isFromBundles;
   const QuantityInput({
     Key? key,
     required this.controller,
+    required this.quantityTextKey,
     required this.onFieldChange,
     required this.minusPressed,
     required this.addPressed,
+    required this.isFromBundles,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        _QuantityIcon(
-          pressed: () {
-            if (int.parse(controller.text) > 1) {
+    final leastValidQuantity = isFromBundles ? 0 : 1;
+
+    return SizedBox(
+      child: Row(
+        children: [
+          _QuantityIcon(
+            pressed: () {
+              if (int.parse(controller.text) > leastValidQuantity) {
+                FocusScope.of(context).unfocus();
+                final value = int.parse(controller.text) - 1;
+                final text = value.toString();
+                controller.value = TextEditingValue(
+                  text: text,
+                  selection: TextSelection.collapsed(offset: text.length),
+                );
+                minusPressed(value);
+              }
+            },
+            icon: Icons.remove,
+          ),
+          SizedBox(
+            width: 50,
+            child: TextField(
+              key: quantityTextKey,
+              controller: controller,
+              keyboardType: TextInputType.number,
+              textAlign: TextAlign.center,
+              inputFormatters: <TextInputFormatter>[
+                // Only digits
+                FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                // Prevent leading zero
+                FilteringTextInputFormatter.deny(RegExp(r'^0+')),
+                // limit charcter length to 6
+                LengthLimitingTextInputFormatter(6),
+              ],
+              onChanged: (String text) {
+                if (text.isEmpty) return;
+                onFieldChange(int.parse(text));
+              },
+              decoration: const InputDecoration(
+                isDense: true,
+                contentPadding: EdgeInsets.zero,
+              ),
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+          ),
+          _QuantityIcon(
+            pressed: () {
               FocusScope.of(context).unfocus();
-              final value = int.parse(controller.text) - 1;
+              final value = int.parse(controller.text) + 1;
               final text = value.toString();
               controller.value = TextEditingValue(
                 text: text,
                 selection: TextSelection.collapsed(offset: text.length),
               );
-              minusPressed(value);
-            }
-          },
-          icon: Icons.remove,
-        ),
-        Expanded(
-          child: TextField(
-            controller: controller,
-            keyboardType: TextInputType.number,
-            textAlign: TextAlign.center,
-            inputFormatters: <TextInputFormatter>[
-              // Only digits
-              FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-              // Prevent leading zero
-              FilteringTextInputFormatter.deny(RegExp(r'^0+')),
-            ],
-            onChanged: (String text) {
-              final newValue = text;
-              // if (text.isEmpty || int.parse(text) <= 0) {
-              //   newValue = '1';
-              // } else if (int.parse(text) >= 999999) {
-              //   newValue = '999999';
-              // }
-              // controller.value = TextEditingValue(
-              //   text: newValue,
-              //   selection: TextSelection.collapsed(offset: newValue.length),
-              // );
-              onFieldChange(int.parse(newValue));
+              addPressed(value);
             },
-            decoration: const InputDecoration(isDense: true),
+            icon: Icons.add,
           ),
-        ),
-        _QuantityIcon(
-          pressed: () {
-            FocusScope.of(context).unfocus();
-            final value = int.parse(controller.text) + 1;
-            final text = value.toString();
-            controller.value = TextEditingValue(
-              text: text,
-              selection: TextSelection.collapsed(offset: text.length),
-            );
-            addPressed(value);
-          },
-          icon: Icons.add,
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -92,12 +99,16 @@ class _QuantityIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        minimumSize: const Size(30, 30),
-        fixedSize: const Size(30, 30),
+        minimumSize: const Size(20, 20),
+        fixedSize: const Size(20, 20),
         padding: EdgeInsets.zero,
         backgroundColor: ZPColors.primary,
       ),
-      child: Icon(icon, color: ZPColors.white),
+      child: Icon(
+        icon,
+        color: ZPColors.white,
+        size: 15,
+      ),
       onPressed: () => pressed(),
     );
   }

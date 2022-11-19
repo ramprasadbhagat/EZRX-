@@ -86,6 +86,7 @@ final appThemeData = {
       // contentPadding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
     ),
     checkboxTheme: CheckboxThemeData(
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       checkColor: MaterialStateProperty.all(
         ZPColors.white,
       ),
@@ -98,17 +99,24 @@ final appThemeData = {
         ),
       ),
     ),
+    radioTheme: RadioThemeData(
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      fillColor: MaterialStateProperty.all(
+        ZPColors.primary,
+      ),
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: ZPColors.primary,
         // onPrimary: AppColors.black80,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(
-              8.0,
-            ),
-          ),
-        ), //const StadiumBorder(),
+        // shape: const RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.all(
+        //     Radius.circular(
+        //       8.0,
+        //     ),
+        //   ),
+        // ),
+        shape: const StadiumBorder(),
         // textStyle: ThemeData.light().textTheme.bodyText2,
         textStyle: const TextStyle(
           // fontSize: 21.sp,
@@ -159,7 +167,7 @@ final appThemeData = {
     ),
     cardTheme: const CardTheme(
       elevation: 0,
-      margin: EdgeInsets.only(top: 8.0),
+      // margin: EdgeInsets.only(top: 8.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(
@@ -168,6 +176,9 @@ final appThemeData = {
         ),
       ),
     ),
+    // listTileTheme: const ListTileThemeData(
+    //   contentPadding: EdgeInsets.zero,
+    // ),
     dividerTheme: const DividerThemeData(
       // color: ZPColors.lightGray,
       space: 0,

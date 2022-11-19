@@ -8,33 +8,8 @@ import 'package:ezrxmobile/presentation/orders/create_order/cart_item_detail_wid
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AddToCart extends StatefulWidget {
+class AddToCart extends StatelessWidget {
   const AddToCart({Key? key}) : super(key: key);
-
-  @override
-  State<AddToCart> createState() => _AddToCartState();
-}
-
-class _AddToCartState extends State<AddToCart> {
-  late TextEditingController _controller;
-
-  @override
-  void initState() {
-    _controller = TextEditingController();
-    _controller.text = '1';
-    context.read<AddToCartBloc>().add(AddToCartEvent.updateQuantity(
-          1,
-          context.read<CartBloc>().state.zmgMaterialCount,
-        ));
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -49,7 +24,6 @@ class _AddToCartState extends State<AddToCart> {
               return ListView(
                 children: [
                   CartItemDetailWidget(
-                    controller: _controller,
                     cartItem: state.cartItem,
                     onQuantityChanged: (int value) {
                       context.read<AddToCartBloc>().add(

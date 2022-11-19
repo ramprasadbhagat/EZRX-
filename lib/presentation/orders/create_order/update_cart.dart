@@ -29,7 +29,6 @@ class UpdateCart extends StatelessWidget {
           child: ListView(
             children: [
               CartItemDetailWidget(
-                controller: controller,
                 cartItem: cartItem,
                 onQuantityChanged: (int value) {},
               ),
