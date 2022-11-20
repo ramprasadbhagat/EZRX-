@@ -27,37 +27,31 @@ class HistoryFilterByStatus extends StatelessWidget {
                 child: Text(
                   'Select Status'.tr(),
                   style: const TextStyle(
-                    color: Colors.black,
+                    color: ZPColors.black,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-               
               ),
               Column(
                 children: state.getAllStatusName.map((status) {
-                  return Container(
-                    padding: const EdgeInsets.only(
-                      left: 25.0,
-                      right: 25.0,
-                    ),
-                    child: Column(
-                      children: <Widget>[
-                        CheckboxListTile(
-                          checkColor: Colors.white,
-                          activeColor: ZPColors.kPrimaryColor,
-                          title: Text(status),
-                          onChanged: (bool? value) {
-                            BlocProvider.of<OrderHistoryFilterByStatusBloc>(
-                                    context,)
-                                .add(OrderHistoryFilterByStatusEvent
-                                    .checkedStatusFilter(
-                                        isChecked: value!, statusName: status,),);
-                          },
-                          value: state.isChecked(status),
-                        ),
-                      ],
-                    ),
+                  return Column(
+                    children: <Widget>[
+                      CheckboxListTile(
+                        title: Text(status),
+                        onChanged: (bool? value) {
+                          BlocProvider.of<OrderHistoryFilterByStatusBloc>(
+                            context,
+                          ).add(
+                            OrderHistoryFilterByStatusEvent.checkedStatusFilter(
+                              isChecked: value!,
+                              statusName: status,
+                            ),
+                          );
+                        },
+                        value: state.isChecked(status),
+                      ),
+                    ],
                   );
                 }).toList(),
               ),
@@ -67,12 +61,7 @@ class HistoryFilterByStatus extends StatelessWidget {
                   right: 10,
                   top: 10,
                 ),
-                child: 
-                 
-                    _ClearButtonForFilterByStatus(),
-                   
-                  
-                
+                child: _ClearButtonForFilterByStatus(),
               ),
               const SizedBox(
                 height: 40,
@@ -90,38 +79,16 @@ class _ClearButtonForFilterByStatus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 3,
-      child: GestureDetector(
-        onTap: () async {
-           context.read<OrderHistoryFilterByStatusBloc>().add(
+    return ElevatedButton(
+      onPressed: () async {
+        context.read<OrderHistoryFilterByStatusBloc>().add(
               const OrderHistoryFilterByStatusEvent.initialized(),
             );
-          Navigator.of(context).pop();
-        },
-        child: Container(
-          width: MediaQuery.of(context).size.width * 60 / 100,
-          height: 35,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(18.0),
-            gradient: const LinearGradient(
-              colors: <Color>[ZPColors.kPrimaryColor, ZPColors.gradient],
-            ),
-          ),
-          child: const Center(
-            child: Text(
-              'Clear All',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ),
+        Navigator.of(context).pop();
+      },
+      child: const Text(
+        'Clear All',
       ),
     );
   }
 }
-

@@ -709,6 +709,10 @@ class _PaymentTermState extends State<_PaymentTerm> {
                 Radius.circular(10.0),
               ),
             ),
+            suffixIcon: const Icon(
+              Icons.keyboard_arrow_down,
+              color: ZPColors.darkGray,
+            ),
           ),
         );
       },

@@ -1,12 +1,15 @@
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class MaterialFilterSearch extends StatefulWidget {
   final Function onSearchMethod;
   final String searchText;
 
-  const MaterialFilterSearch(
-      {Key? key, required this.onSearchMethod, required this.searchText,})
-      : super(key: key);
+  const MaterialFilterSearch({
+    Key? key,
+    required this.onSearchMethod,
+    required this.searchText,
+  }) : super(key: key);
 
   @override
   State<MaterialFilterSearch> createState() => _MaterialFilterSearch();
@@ -40,7 +43,7 @@ class _MaterialFilterSearch extends State<MaterialFilterSearch> {
       width: double.infinity,
       height: 40,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ZPColors.white,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Center(

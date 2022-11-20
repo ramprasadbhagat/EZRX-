@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,7 +34,7 @@ class PriceTierLabel extends StatelessWidget {
               text: 'Buy ${priceTierItem.quantity.toString()} or more ',
               style: const TextStyle(
                 fontSize: 11,
-                color: Colors.white,
+                color: ZPColors.white,
                 fontFamily: 'Poppins',
               ),
             ),
@@ -41,7 +42,7 @@ class PriceTierLabel extends StatelessWidget {
               text: context.read<SalesOrgBloc>().state.currency.code,
               style: const TextStyle(
                 fontSize: 11,
-                color: Colors.white,
+                color: ZPColors.white,
                 fontFamily: 'Roboto',
               ),
             ),
@@ -49,7 +50,7 @@ class PriceTierLabel extends StatelessWidget {
               text: ' ',
               style: TextStyle(
                 fontSize: 11,
-                color: Colors.white,
+                color: ZPColors.white,
                 fontFamily: 'Poppins',
               ),
             ),
@@ -57,7 +58,7 @@ class PriceTierLabel extends StatelessWidget {
               text: priceTierItem.rate.toStringAsFixed(2),
               style: const TextStyle(
                 fontSize: 11,
-                color: Colors.white,
+                color: ZPColors.white,
                 fontFamily: 'Poppins',
               ),
             ),

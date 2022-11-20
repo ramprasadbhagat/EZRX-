@@ -124,7 +124,7 @@ class _PriceSheetState extends State<PriceSheet> {
                               },
                               style: const TextStyle(
                                 fontSize: 18.0,
-                                color: Colors.black,
+                                color: ZPColors.black,
                               ),
                             ),
                           ),
@@ -135,7 +135,7 @@ class _PriceSheetState extends State<PriceSheet> {
                 ),
               ),
               const Divider(
-                color: Colors.black,
+                color: ZPColors.black,
               ),
               BlocConsumer<PriceOverrideBloc, PriceOverrideState>(
                 listenWhen: (
@@ -220,7 +220,7 @@ class _PriceSheetState extends State<PriceSheet> {
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
                                     fontSize: 16,
-                                    color: Colors.white,
+                                    color: ZPColors.white,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),

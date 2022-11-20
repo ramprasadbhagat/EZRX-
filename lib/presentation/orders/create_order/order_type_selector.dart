@@ -93,18 +93,12 @@ class _OrderTypeSelectorField extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Expanded(
-            flex: 1,
+          FittedBox(
             child: Padding(
-              padding: const EdgeInsets.only(left: 20),
+              padding: const EdgeInsets.only(left: 10),
               child: Text(
                 leadingText,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: 'Noto Sans',
-                  fontSize: 12,
-                ),
+                style: Theme.of(context).textTheme.caption,
               ),
             ),
           ),
@@ -140,7 +134,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
                       Text(
                         displayItemText,
                         style: const TextStyle(
-                          color: Colors.black,
+                          color: ZPColors.black,
                           fontWeight: FontWeight.w400,
                           fontFamily: 'Noto Sans',
                           fontSize: 12,
@@ -177,10 +171,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
       context: context,
       builder: (BuildContext ctx) {
         return PlatformAlertDialog(
-          title: Text(
-            dropDownTitle,
-            style: const TextStyle(fontFamily: 'Poppins'),
-          ),
+          title: Text(dropDownTitle),
           actions: itemList.map<CupertinoActionSheetAction>((i) {
             final displayText = isReason ? i.displayReasonText : i.documentType;
 
@@ -198,37 +189,39 @@ class _OrderTypeSelectorField extends StatelessWidget {
               onPressed: () async {
                 Navigator.pop(ctx);
                 final validationText = getValidationText(
-                    orderDocumentTypeState.selectedOrderType,
-                    i,
-                    context.read<CartBloc>().state,);
-                if((context.read<CartBloc>().state.cartItemList.isEmpty ||
-                  validationText.isEmpty)){
-                    context.read<OrderDocumentTypeBloc>().add(
-                      OrderDocumentTypeEvent.selectedOrderType(
-                        selectedOrderType: i,
-                        isReasonSelected: isReason,
-                      ),
-                    );
-                  }else{
-                      ConfirmClearDialog.show(
-                      context: context,
-                      title: validationText.first ,
-                      description: validationText.last,
-                      onCancel: () {context.router.pop();},
-                      onConfirmed: () {
-                        context.read<CartBloc>().add(const CartEvent.clearCart());
-                        context.router.popUntilRouteWithName(MaterialRootRoute.name);
-                        context.read<OrderDocumentTypeBloc>().add(
-                          OrderDocumentTypeEvent.selectedOrderType(
-                            selectedOrderType: i,
-                            isReasonSelected: isReason,
-                          ),
-                        );
-                      },
-                    );
-
-                  }
-               
+                  orderDocumentTypeState.selectedOrderType,
+                  i,
+                  context.read<CartBloc>().state,
+                );
+                if ((context.read<CartBloc>().state.cartItemList.isEmpty ||
+                    validationText.isEmpty)) {
+                  context.read<OrderDocumentTypeBloc>().add(
+                        OrderDocumentTypeEvent.selectedOrderType(
+                          selectedOrderType: i,
+                          isReasonSelected: isReason,
+                        ),
+                      );
+                } else {
+                  ConfirmClearDialog.show(
+                    context: context,
+                    title: validationText.first,
+                    description: validationText.last,
+                    onCancel: () {
+                      context.router.pop();
+                    },
+                    onConfirmed: () {
+                      context.read<CartBloc>().add(const CartEvent.clearCart());
+                      context.router
+                          .popUntilRouteWithName(MaterialRootRoute.name);
+                      context.read<OrderDocumentTypeBloc>().add(
+                            OrderDocumentTypeEvent.selectedOrderType(
+                              selectedOrderType: i,
+                              isReasonSelected: isReason,
+                            ),
+                          );
+                    },
+                  );
+                }
               },
             );
           }).toList(),
@@ -238,14 +231,20 @@ class _OrderTypeSelectorField extends StatelessWidget {
   }
 }
 
-List<String> getValidationText(OrderDocumentType initial,
-    OrderDocumentType selected, CartState cartState,) {
+List<String> getValidationText(
+  OrderDocumentType initial,
+  OrderDocumentType selected,
+  CartState cartState,
+) {
   final list = <String>[];
-  if(initial != selected && cartState.showDialog(selected) && cartState.dialogContent.isNotEmpty){
+  if (initial != selected &&
+      cartState.showDialog(selected) &&
+      cartState.dialogContent.isNotEmpty) {
     list.add('Changing order type to ${selected.documentType}!');
     list.add(
-      'Your cart includes ${cartState.dialogContent} materials, changing the order type will clear all items in your cart. Please confirm if you want to proceed',);
+      'Your cart includes ${cartState.dialogContent} materials, changing the order type will clear all items in your cart. Please confirm if you want to proceed',
+    );
   }
-  
+
   return list;
 }

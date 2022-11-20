@@ -14,6 +14,7 @@ import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -123,7 +124,7 @@ class SplashPage extends StatelessWidget {
           minAppVersion: '1.0.0',
         ),
         child: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: ZPColors.white,
           body: Image.asset(
             'assets/images/splash.png',
             height: MediaQuery.of(context).size.height,

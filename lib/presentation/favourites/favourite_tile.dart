@@ -6,11 +6,9 @@ import 'package:ezrxmobile/application/order/material_price_detail/material_pric
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
-import 'package:ezrxmobile/presentation/core/action_button.dart';
 import 'package:ezrxmobile/presentation/core/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,6 +24,7 @@ class FavouriteListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: CustomSlidable(
+        borderRadius: 8,
         endActionPaneActions: [
           CustomSlidableAction(
             label: 'Delete',
@@ -38,170 +37,107 @@ class FavouriteListTile extends StatelessWidget {
                 ),
           ),
         ],
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: RichText(
-                        overflow: TextOverflow.visible,
-                        text: TextSpan(
-                          style: DefaultTextStyle.of(context).style,
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: favourite.materialDescription.toUpperCase(),
-                              style: const TextStyle(
-                                color:
-                                    ZPColors.darkerGreen, // zpDarkerGreenColor,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    favourite.isWaitingStatusUpdate
-                        ? LoadingShimmer.withChild(
-                            child: IconButton(
-                              icon: const Icon(
-                                Icons.favorite,
-                                color: ZPColors.secondary,
-                              ),
-                              onPressed: () {},
-                            ),
-                          )
-                        : IconButton(
-                            key: const Key('deleteFavouriteFavPage'),
-                            icon: const Icon(
-                              Icons.favorite,
-                              color: ZPColors.secondary,
-                            ),
-                            onPressed: () async => context
-                                .read<FavouriteBloc>()
-                                .add(
-                                  FavouriteEvent.delete(
-                                    item: favourite,
-                                    user: context.read<UserBloc>().state.user,
-                                  ),
-                                ),
+        child: BlocBuilder<MaterialPriceDetailBloc, MaterialPriceDetailState>(
+          buildWhen: (previous, current) =>
+              previous.isFetching != current.isFetching,
+          builder: (context, state) {
+            final queryInfo =
+                MaterialQueryInfo.fromFavorite(material: favourite);
+            final priceDetail = state.materialDetails[queryInfo]!;
 
-                            // context.read<BonusMaterialBloc>().add(
-                            //       BonusMaterialEvent.fetch(
-                            //         pickandpack: true,
-                            //         searchKey: '',
-                            //         user: User.empty(),
-                            //         configs:
-                            //             SalesOrganisationConfigs.empty(),
-                            //         customerInfo:
-                            //             SalesOrgCustomerInfo.empty(),
-                            //         shipInfo: SalesOrgShipToInfo.empty(),
-                            //         salesOrganisation:
-                            //             SalesOrganisation.empty(),
-                            //       ),
-                            //     ),
-                          ),
-                  ],
-                ),
-                Text(
-                  "${'Mat No: '.tr()}${favourite.materialNumber.displayMatNo}",
-                  style: const TextStyle(
-                    color: ZPColors.darkGray,
-                    fontSize: 12,
-                  ),
-                ),
-                BlocBuilder<MaterialPriceDetailBloc, MaterialPriceDetailState>(
-                  buildWhen: (previous, current) =>
-                      previous.isFetching != current.isFetching,
-                  builder: (context, state) {
-                    if (state.isFetching) {
-                      return SizedBox(
-                        key: const Key('price-loading'),
-                        width: 40,
-                        child: LoadingShimmer.tile(),
+            final priceAggregate = PriceAggregate(
+              price: priceDetail.price,
+              materialInfo: priceDetail.info,
+              salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+              quantity: 1,
+              zmgMaterialCountOnCart: 0,
+              isOverride: false,
+            );
+
+            return ListTile(
+              onTap: state.isFetching
+                  ? null
+                  : () {
+                      CartBottomSheet.showAddToCartBottomSheet(
+                        context: context,
+                        priceAggregate: priceAggregate,
                       );
-                    }
-                    final queryInfo =
-                        MaterialQueryInfo.fromFavorite(material: favourite);
-                    final priceDetail = state.materialDetails[queryInfo]!;
-
-                    final priceAggregate = PriceAggregate(
-                      price: priceDetail.price,
-                      materialInfo: priceDetail.info,
-                      salesOrgConfig:
-                          context.read<SalesOrgBloc>().state.configs,
-                      quantity: 1,
-                      zmgMaterialCountOnCart: 0,
-                      isOverride: false,
-                    );
-
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // priceAggregate.isDefaultMDEnabled
-                        //     ? Text(
-                        //         "${'Mat Default Description: '.tr()}${priceAggregate.materialInfo.defaultMaterialDescription}",
-                        //         style: Theme.of(context)
-                        //             .textTheme
-                        //             .subtitle2
-                        //             ?.apply(color: ZPColors.lightGray),
-                        //       )
-                        //     : const SizedBox.shrink(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
+                    },
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        favourite.materialNumber.displayMatNo,
+                        style: Theme.of(context).textTheme.subtitle2?.apply(
+                              color: ZPColors.kPrimaryColor,
+                            ),
+                      ),
+                      // BonusDiscountLabel(materialInfo: materialInfo),
+                    ],
+                  ),
+                  Text(
+                    favourite.materialDescription,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                  priceAggregate.isDefaultMDEnabled
+                      ? Text(
+                          "${'Mat Default Description: '.tr()}${priceAggregate.materialInfo.defaultMaterialDescription}",
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle2
+                              ?.apply(color: ZPColors.lightGray),
+                        )
+                      : const SizedBox.shrink(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      state.isFetching
+                          ? SizedBox(
+                              key: const Key('price-loading'),
+                              width: 40,
+                              child: LoadingShimmer.tile(),
+                            )
+                          : Text(
                               '${'Unit Price: '.tr()}${priceAggregate.display(PriceType.unitPrice)}',
                               style:
                                   Theme.of(context).textTheme.bodyText1?.apply(
                                         color: ZPColors.black,
                                       ),
                             ),
-                            BlocBuilder<SalesOrgBloc, SalesOrgState>(
-                              buildWhen: (previous, current) =>
-                                  previous.configs != current.configs,
-                              builder: (context, state) {
-                                final hidePrice = priceDetail.info.hidePrice;
-                                final itemPrice = priceDetail.price.finalPrice;
-                                if ((hidePrice || itemPrice.isEmpty()) &&
-                                    !state.configs.materialWithoutPrice) {
-                                  return const SizedBox();
-                                }
-
-                                return ActionButton(
-                                  width: 120,
-                                  onTap: () {
-                                    if (itemPrice.isUnavailable()) {
-                                      showSnackBar(
-                                        context: context,
-                                        message: 'Product Not Available'.tr(),
-                                      );
-                                    } else {
-                                      CartBottomSheet.showAddToCartBottomSheet(
-                                        context: context,
-                                        priceAggregate: priceAggregate,
-                                      );
-                                    }
-                                  },
-                                  text: 'Add to Cart'.tr(),
-                                );
-                              },
+                      favourite.isWaitingStatusUpdate
+                          ? LoadingShimmer.withChild(
+                              child: IconButton(
+                                icon: const Icon(
+                                  Icons.favorite,
+                                  color: ZPColors.secondary,
+                                ),
+                                onPressed: () {},
+                              ),
+                            )
+                          : IconButton(
+                              key: const Key('deleteFavouriteFavPage'),
+                              icon: const Icon(
+                                Icons.favorite,
+                                color: ZPColors.secondary,
+                              ),
+                              onPressed: () async => context
+                                  .read<FavouriteBloc>()
+                                  .add(
+                                    FavouriteEvent.delete(
+                                      item: favourite,
+                                      user: context.read<UserBloc>().state.user,
+                                    ),
+                                  ),
                             ),
-                          ],
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );

@@ -670,21 +670,10 @@ class _ClearButton extends StatelessWidget {
       key: const Key('filterclearButton'),
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.resolveWith(
-          (states) => Colors.white,
+          (states) => ZPColors.white,
         ),
-        padding: MaterialStateProperty.resolveWith(
-          (states) => const EdgeInsets.symmetric(
-            vertical: 10.0,
-            horizontal: 10.0,
-          ),
-        ),
-        shape: MaterialStateProperty.resolveWith(
-          (states) => RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              3.0,
-            ),
-            side: const BorderSide(color: ZPColors.primary),
-          ),
+        side: MaterialStateProperty.resolveWith(
+          (states) => const BorderSide(color: ZPColors.primary),
         ),
       ),
       onPressed: () async {
@@ -713,24 +702,6 @@ class _ApplyButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       key: const Key('filterapplyButton'),
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.resolveWith(
-          (states) => ZPColors.primary,
-        ),
-        padding: MaterialStateProperty.resolveWith(
-          (states) => const EdgeInsets.symmetric(
-            vertical: 10.0,
-            horizontal: 10.0,
-          ),
-        ),
-        shape: MaterialStateProperty.resolveWith(
-          (states) => RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              3.0,
-            ),
-          ),
-        ),
-      ),
       onPressed: () async {
         context.read<OrderHistoryFilterBloc>().add(
               const OrderHistoryFilterEvent.filterOrderHistory(),
