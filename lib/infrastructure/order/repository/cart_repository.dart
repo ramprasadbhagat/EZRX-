@@ -144,7 +144,7 @@ class CartRepository implements ICartRepository {
             if (storedItemsMap[materialNumber] != null) {
               final storedItemToUpdate = storedItemsMap[materialNumber];
               final itemToUpdate = storedItemToUpdate!.copyWith(
-                quantity: storedItemToUpdate.quantity + 1,
+                quantity: storedItemToUpdate.quantity + item.quantity,
               );
               await cartStorage.updateItem(PriceAggregateDto.fromDomain(
                 itemToUpdate,

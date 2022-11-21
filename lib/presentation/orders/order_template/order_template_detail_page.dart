@@ -4,8 +4,10 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_action_button.dart';
@@ -87,10 +89,11 @@ class OrderTemplateDetailPage extends StatelessWidget {
               child: BlocBuilder<MaterialPriceDetailBloc,
                   MaterialPriceDetailState>(
                 buildWhen: (previous, current) =>
-                    previous.isValidating != current.isValidating,
+                    previous.isValidating != current.isValidating ||
+                    previous.isFetching != current.isFetching,
                 builder: (context, state) {
                   return OrderActionButton(
-                    onAddToCartPressed: () {},
+                    onAddToCartPressed: () => _addToCartPressed(context, state),
                     onDeletePressed: () {
                       context.read<OrderTemplateListBloc>().add(
                             OrderTemplateListEvent.delete(
@@ -113,5 +116,34 @@ class OrderTemplateDetailPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _addToCartPressed(BuildContext context, MaterialPriceDetailState state) {
+    final cartBloc = context.read<CartBloc>();
+    final items = order.allMaterialQueryInfo.map((queryInfo) {
+      final itemInfo = state.materialDetails[queryInfo];
+      if (itemInfo != null) {
+        final priceAggregate = PriceAggregate(
+          price: itemInfo.price,
+          materialInfo: itemInfo.info,
+          salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+          quantity: queryInfo.qty.getOrCrash(),
+          zmgMaterialCountOnCart: cartBloc.state.zmgMaterialCount,
+          isOverride: false,
+        );
+
+        return priceAggregate;
+      }
+
+      return PriceAggregate.empty();
+    }).toList();
+    context.read<CartBloc>().add(
+          CartEvent.addToCartFromList(
+            items: items,
+          ),
+        );
+
+    //TODO: revisit this later
+    context.router.pushNamed('cart_page');
   }
 }
