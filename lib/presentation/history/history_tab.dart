@@ -57,6 +57,7 @@ class HistoryTab extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         InkWell(
+                          key: const Key('statusFilterButton'),
                           onTap: () {
                             showModalBottomSheet(
                               isScrollControlled: true,
@@ -67,45 +68,44 @@ class HistoryTab extends StatelessWidget {
                             );
                           },
                           child: Stack(
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.only(left:8.0),
-                                      child: Text(
-                                        'status'.tr(),
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                          color: ZPColors.kPrimaryColor,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ),
-                                    BlocBuilder<OrderHistoryFilterByStatusBloc,
-                                        OrderHistoryFilterByStatusState>(
-                                     
-                                      builder: (context, state) {
-                                        if (state.filterByStatusName.isNotEmpty) {
-                                          return Positioned(
-                                            key: const ValueKey(
-                                              'Filter_by_status_list_not_empty',
-                                            ),
-                                            right: 0,
-                                            child: Container(
-                                              decoration: const BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: ZPColors.kPrimaryColor,
-                                              ),
-                                              width: radius / 3,
-                                              height: radius / 2,
-                                            ),
-                                          );
-                                        }
-
-                                        return const SizedBox.shrink();
-                                      },
-                                    ),
-                                  ],
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Text(
+                                  'status'.tr(),
+                                  key: const ValueKey('status'),
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    color: ZPColors.kPrimaryColor,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
-                          
+                              ),
+                              BlocBuilder<OrderHistoryFilterByStatusBloc,
+                                  OrderHistoryFilterByStatusState>(
+                                builder: (context, state) {
+                                  if (state.filterByStatusName.isNotEmpty) {
+                                    return Positioned(
+                                      key: const ValueKey(
+                                        'Filter_by_status_list_not_empty',
+                                      ),
+                                      right: 0,
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: ZPColors.kPrimaryColor,
+                                        ),
+                                        width: radius / 3,
+                                        height: radius / 2,
+                                      ),
+                                    );
+                                  }
+
+                                  return const SizedBox.shrink();
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                         GestureDetector(
                           key: const Key('filterButton'),
@@ -255,11 +255,12 @@ class HistoryTab extends StatelessWidget {
                         emptyMessage: 'No history found',
                         onRefresh: () {
                           if (context.read<ShipToCodeBloc>().state.haveShipTo) {
-                             context.read<OrderHistoryFilterBloc>().add(
+                            context.read<OrderHistoryFilterBloc>().add(
                                   const OrderHistoryFilterEvent.initialized(),
                                 );
                             context.read<OrderHistoryFilterByStatusBloc>().add(
-                                  const OrderHistoryFilterByStatusEvent.initialized(),
+                                  const OrderHistoryFilterByStatusEvent
+                                      .initialized(),
                                 );
                             context.read<OrderHistoryListBloc>().add(
                                   OrderHistoryListEvent.fetch(
@@ -303,6 +304,7 @@ class HistoryTab extends StatelessWidget {
                             ),
                         itemBuilder: (context, index, item) =>
                             OrderHistoryListTile(
+                          key: const ValueKey('historyTitle'),
                           orderHistoryItem: item,
                           customerCodeInfo: context
                               .read<CustomerCodeBloc>()
@@ -324,7 +326,8 @@ class HistoryTab extends StatelessWidget {
                               : BillToInfo.empty(),
                         ),
                         items: state.getFilterItem(
-                            orderHistoryFilterByStatusState.filterByStatusName,),
+                          orderHistoryFilterByStatusState.filterByStatusName,
+                        ),
                       );
               },
             );
