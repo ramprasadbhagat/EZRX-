@@ -28,6 +28,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MaterialListPage extends StatelessWidget {
   final Function addToCart;
+
   const MaterialListPage({Key? key, required this.addToCart}) : super(key: key);
 
   @override
@@ -382,6 +383,14 @@ class _PriceLabel extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              context.read<SalesOrgBloc>().state.configs.enableVat
+                  ? Text(
+                      '${'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr()}${priceAggregate.display(PriceType.unitPriceBeforeGst)}',
+                      style: Theme.of(context).textTheme.bodyText1?.apply(
+                            color: ZPColors.lightGray,
+                          ),
+                    )
+                  : const SizedBox.shrink(),
               context.read<SalesOrgBloc>().state.configs.enableListPrice
                   ? Text(
                       '${'List Price: '.tr()}${priceAggregate.display(PriceType.listPrice)}',
