@@ -8,7 +8,6 @@ class QuantityInput extends StatelessWidget {
   final Function(int) onFieldChange;
   final Function(int) minusPressed;
   final Function(int) addPressed;
-  final bool isFromBundles;
   const QuantityInput({
     Key? key,
     required this.controller,
@@ -16,28 +15,24 @@ class QuantityInput extends StatelessWidget {
     required this.onFieldChange,
     required this.minusPressed,
     required this.addPressed,
-    required this.isFromBundles,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final leastValidQuantity = isFromBundles ? 0 : 1;
 
     return SizedBox(
       child: Row(
         children: [
           _QuantityIcon(
             pressed: () {
-              if (int.parse(controller.text) > leastValidQuantity) {
-                FocusScope.of(context).unfocus();
-                final value = int.parse(controller.text) - 1;
-                final text = value.toString();
-                controller.value = TextEditingValue(
-                  text: text,
-                  selection: TextSelection.collapsed(offset: text.length),
-                );
-                minusPressed(value);
-              }
+              FocusScope.of(context).unfocus();
+              final value = int.parse(controller.text) - 1;
+              final text = value.toString();
+              controller.value = TextEditingValue(
+                text: text,
+                selection: TextSelection.collapsed(offset: text.length),
+              );
+              minusPressed(value);
             },
             icon: Icons.remove,
           ),

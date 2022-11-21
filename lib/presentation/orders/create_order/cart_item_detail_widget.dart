@@ -91,7 +91,6 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
               onFieldChange: widget.onQuantityChanged,
               minusPressed: widget.onQuantityChanged,
               addPressed: widget.onQuantityChanged,
-              isFromBundles: false,
             ),
           ],
         ),

@@ -225,7 +225,6 @@ class _ListContent extends StatelessWidget {
                   );
             },
             controller: controller,
-            isFromBundles: true,
           ),
         ],
       ),
