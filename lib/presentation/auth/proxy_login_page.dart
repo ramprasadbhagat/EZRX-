@@ -88,26 +88,43 @@ class _UsernameFieldState extends State<UsernameField> {
   final TextEditingController _usernameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-      child: TextFormField(
-        key: const Key('proxyLoginUsernameField'),
-        controller: _usernameController,
-        keyboardType: TextInputType.emailAddress,
-        autocorrect: false,
-        decoration: InputDecoration(labelText: 'Username'.tr()),
-        onChanged: (value) => context.read<ProxyLoginFormBloc>().add(
-              ProxyLoginFormEvent.usernameChanged(value),
-            ),
-        validator: (_) =>
-            context.read<ProxyLoginFormBloc>().state.username.value.fold(
-                  (f) => f.maybeMap(
-                    empty: (_) => 'Username cannot be empty.'.tr(),
-                    orElse: () => null,
-                  ),
-                  (_) => null,
+    return BlocBuilder<ProxyLoginFormBloc, ProxyLoginFormState>(
+      buildWhen: (previous, current) =>
+          previous.isSubmitting != current.isSubmitting,
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 8,
+          ),
+          child: TextFormField(
+            key: const Key('proxyLoginUsernameField'),
+            controller: _usernameController,
+            keyboardType: TextInputType.emailAddress,
+            autocorrect: false,
+            decoration: InputDecoration(labelText: 'Username'.tr()),
+            onChanged: (value) => context.read<ProxyLoginFormBloc>().add(
+                  ProxyLoginFormEvent.usernameChanged(value),
                 ),
-      ),
+            validator: (_) =>
+                context.read<ProxyLoginFormBloc>().state.username.value.fold(
+                      (f) => f.maybeMap(
+                        empty: (_) => 'Username cannot be empty.'.tr(),
+                        orElse: () => null,
+                      ),
+                      (_) => null,
+                    ),
+            onFieldSubmitted: (value) {
+              if (!state.isSubmitting) {
+                FocusScope.of(context).unfocus();
+                context.read<ProxyLoginFormBloc>().add(
+                      const ProxyLoginFormEvent.loginWithADButtonPressed(),
+                    );
+              }
+            },
+          ),
+        );
+      },
     );
   }
 

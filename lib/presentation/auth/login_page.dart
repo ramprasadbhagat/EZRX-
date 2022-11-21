@@ -263,6 +263,14 @@ class __PasswordFieldState extends State<_PasswordField> {
                         ),
                         (_) => null,
                       ),
+              onFieldSubmitted: (value) {
+                if (!state.isSubmitting) {
+                  FocusScope.of(context).unfocus();
+                  context.read<LoginFormBloc>().add(
+                        const LoginFormEvent.loginWithEmailAndPasswordPressed(),
+                      );
+                }
+              },
             );
           },
         ),
