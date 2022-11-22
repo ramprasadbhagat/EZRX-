@@ -78,7 +78,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         final failureOrSuccess = await cartRepository.addToCart(
           cartItem: e.item,
         );
-
+      
         failureOrSuccess.fold(
           (failure) {
             emit(
@@ -89,8 +89,15 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
           },
           (cartItemList) {
+            final updatedMaterialList = cartRepository.getUpdatedMaterialList(
+              cartItemList: state.cartItemList,
+              selectedItemsMaterialNumber: state.selectedItemsMaterialNumber,
+              item: e.item,
+            );
+            
             emit(
               state.copyWith(
+                selectedItemsMaterialNumber: updatedMaterialList,
                 cartItemList: cartItemList,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,

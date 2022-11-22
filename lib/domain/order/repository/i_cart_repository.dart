@@ -38,4 +38,10 @@ abstract class ICartRepository {
   List<MaterialNumber> updateSelectAll({
     required List<PriceAggregate> cartItemList,
   });
+  
+  List<MaterialNumber> getUpdatedMaterialList({
+    required List<PriceAggregate> cartItemList,
+    required List<MaterialNumber> selectedItemsMaterialNumber,
+    required PriceAggregate item,
+  });
 }

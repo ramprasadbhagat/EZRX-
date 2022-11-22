@@ -27,6 +27,10 @@ void main() {
     ),
   ];
 
+  final mockMaterialItemList = [
+    MaterialNumber('111111111'),
+  ];
+
   group(
     'Testing CartBloc',
     () {
@@ -108,11 +112,19 @@ void main() {
         'Add to Cart Success CartBloc',
         build: () => CartBloc(cartRepository: cartRepositoryMock),
         setUp: () {
+        
           when(() => cartRepositoryMock.addToCart(
                   cartItem: PriceAggregate.empty()))
               .thenAnswer((invocation) async => Right(mockCartItemList));
+
           when(() => cartRepositoryMock.fetchCartItems())
               .thenAnswer((invocation) async => Right(mockCartItemList));
+
+          when((() => cartRepositoryMock.getUpdatedMaterialList(
+                  cartItemList: [],
+                  selectedItemsMaterialNumber: [],
+                  item: PriceAggregate.empty())))
+              .thenAnswer((invocation) => mockMaterialItemList);
         },
         act: (bloc) =>
             bloc.add(CartEvent.addToCart(item: PriceAggregate.empty())),
@@ -120,11 +132,13 @@ void main() {
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: none(),
             isFetching: true,
+            selectedItemsMaterialNumber: [],
           ),
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: none(),
             cartItemList: mockCartItemList,
             isFetching: false,
+            selectedItemsMaterialNumber: mockMaterialItemList,
           ),
         ],
       );

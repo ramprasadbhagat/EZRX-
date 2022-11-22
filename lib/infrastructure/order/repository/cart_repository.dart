@@ -200,4 +200,24 @@ class CartRepository implements ICartRepository {
 
     return newMaterialNumberList;
   }
+
+  @override
+  List<MaterialNumber> getUpdatedMaterialList({
+    required List<PriceAggregate> cartItemList,
+    required List<MaterialNumber> selectedItemsMaterialNumber,
+    required PriceAggregate item,
+  }) {
+    final materialNumberIsEmpty =
+        item.materialInfo.materialNumber.getOrDefaultValue('').isEmpty;
+
+    final itemExist = cartItemList.any((e) =>
+        e.materialInfo.materialNumber == item.materialInfo.materialNumber);
+
+    if (itemExist || materialNumberIsEmpty) {
+      return selectedItemsMaterialNumber;
+    }
+    
+    return List.from(selectedItemsMaterialNumber)
+      ..add(item.materialInfo.materialNumber);
+  }
 }
