@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -56,6 +57,18 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
         value: materialInfo.materialNumber,
         materialGroup2: MaterialGroup.two(''),
         materialGroup4: MaterialGroup.four(''),
+      );
+
+  factory MaterialQueryInfo.fromOrderHistory({
+    required OrderHistoryItem orderHistoryItem,
+  }) =>
+      MaterialQueryInfo(
+        value: orderHistoryItem.materialNumber,
+        materialGroup2: MaterialGroup.two(''),
+        materialGroup4: MaterialGroup.four(''),
+        qty: MaterialQty(
+          orderHistoryItem.qty,
+        ),
       );
 
   factory MaterialQueryInfo.empty() => MaterialQueryInfo(

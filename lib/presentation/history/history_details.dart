@@ -1,12 +1,17 @@
 import 'dart:io';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/core/text_button_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:open_file_safe/open_file_safe.dart';
@@ -50,14 +55,30 @@ class HistoryDetails extends StatelessWidget {
         ),
         title: Text('#${orderHistoryItem.orderNumber}'.tr()),
         actions: <Widget>[
-          TextButton(
-            child: Text(
-              'Reorder'.tr(),
-              style: const TextStyle(
-                color: ZPColors.kPrimaryColor,
-              ),
-            ),
-            onPressed: () {},
+          BlocBuilder<MaterialPriceDetailBloc, MaterialPriceDetailState>(
+            buildWhen: (previous, current) =>
+                previous.isValidating != current.isValidating ||
+                previous.isFetching != current.isFetching,
+            builder: (context, state) {
+              if (state.isValidating || state.isFetching) {
+                return TextButtonShimmer(
+                  title: 'Reorder'.tr(),
+                );
+              }
+
+              return TextButton(
+                onPressed: () => _addToCartPressed(
+                  context,
+                  state,
+                ),
+                child: Text(
+                  'Reorder'.tr(),
+                  style: const TextStyle(
+                    color: ZPColors.kPrimaryColor,
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -140,6 +161,28 @@ class HistoryDetails extends StatelessWidget {
         },
       ),
     );
+  }
+
+  void _addToCartPressed(BuildContext context, MaterialPriceDetailState state) {
+    final cartBloc = context.read<CartBloc>();
+    final queryInfo = MaterialQueryInfo.fromOrderHistory(
+      orderHistoryItem: orderHistoryItem,
+    );
+    final itemInfo = state.materialDetails[queryInfo];
+    if (itemInfo != null) {
+      final priceAggregate = PriceAggregate(
+        price: itemInfo.price,
+        materialInfo: itemInfo.info,
+        salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+        quantity: queryInfo.qty.getOrCrash(),
+        zmgMaterialCountOnCart: cartBloc.state.zmgMaterialCount,
+        isOverride: false,
+      );
+      cartBloc.add(CartEvent.addToCart(item: priceAggregate));
+
+      //TODO: Revisit later
+      context.router.pushNamed('cart_page');
+    }
   }
 }
 

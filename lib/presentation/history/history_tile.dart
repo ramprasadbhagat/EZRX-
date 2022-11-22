@@ -1,9 +1,13 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -37,10 +41,29 @@ class OrderHistoryListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.read<OrderHistoryDetailsBloc>().add(OrderHistoryDetailsEvent.fetch(
-              user: context.read<UserBloc>().state.user,
-              orderHistoryItem: orderHistoryItem,
-            ));
+        context.read<MaterialPriceDetailBloc>().add(
+              MaterialPriceDetailEvent.fetch(
+                user: context.read<UserBloc>().state.user,
+                customerCode: customerCodeInfo,
+                salesOrganisation:
+                    context.read<SalesOrgBloc>().state.salesOrganisation,
+                salesOrganisationConfigs: salesOrgConfigs,
+                shipToCode: shipToInfo,
+                materialInfoList: [
+                  MaterialQueryInfo.fromOrderHistory(
+                    orderHistoryItem: orderHistoryItem,
+                  ),
+                ],
+                pickAndPack:
+                    context.read<EligibilityBloc>().state.getPNPValueMaterial,
+              ),
+            );
+        context.read<OrderHistoryDetailsBloc>().add(
+              OrderHistoryDetailsEvent.fetch(
+                user: context.read<UserBloc>().state.user,
+                orderHistoryItem: orderHistoryItem,
+              ),
+            );
 
         context.router.push(HistoryDetailsRoute(
           orderHistoryItem: orderHistoryItem,
