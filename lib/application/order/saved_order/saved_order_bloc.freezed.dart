@@ -32,6 +32,16 @@ mixin _$SavedOrderListEvent {
             ShipToInfo selectedShipTo)
         loadMore,
     required TResult Function(SavedOrder order, User user) delete,
+    required TResult Function(
+            ShipToInfo shipToInfo,
+            User user,
+            List<PriceAggregate> cartItems,
+            double grandTotal,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            Map<AdditionalInfoLabelList, String> data,
+            List<SavedOrder> existingSavedOrderList)
+        createDraft,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +60,16 @@ mixin _$SavedOrderListEvent {
             ShipToInfo selectedShipTo)?
         loadMore,
     TResult? Function(SavedOrder order, User user)? delete,
+    TResult? Function(
+            ShipToInfo shipToInfo,
+            User user,
+            List<PriceAggregate> cartItems,
+            double grandTotal,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            Map<AdditionalInfoLabelList, String> data,
+            List<SavedOrder> existingSavedOrderList)?
+        createDraft,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,6 +82,16 @@ mixin _$SavedOrderListEvent {
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         loadMore,
     TResult Function(SavedOrder order, User user)? delete,
+    TResult Function(
+            ShipToInfo shipToInfo,
+            User user,
+            List<PriceAggregate> cartItems,
+            double grandTotal,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            Map<AdditionalInfoLabelList, String> data,
+            List<SavedOrder> existingSavedOrderList)?
+        createDraft,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -71,6 +101,7 @@ mixin _$SavedOrderListEvent {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_Delete value) delete,
+    required TResult Function(_CreateDraft value) createDraft,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -79,6 +110,7 @@ mixin _$SavedOrderListEvent {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_Delete value)? delete,
+    TResult? Function(_CreateDraft value)? createDraft,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -87,6 +119,7 @@ mixin _$SavedOrderListEvent {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_Delete value)? delete,
+    TResult Function(_CreateDraft value)? createDraft,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -162,6 +195,16 @@ class _$_Initialized implements _Initialized {
             ShipToInfo selectedShipTo)
         loadMore,
     required TResult Function(SavedOrder order, User user) delete,
+    required TResult Function(
+            ShipToInfo shipToInfo,
+            User user,
+            List<PriceAggregate> cartItems,
+            double grandTotal,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            Map<AdditionalInfoLabelList, String> data,
+            List<SavedOrder> existingSavedOrderList)
+        createDraft,
   }) {
     return initialized();
   }
@@ -183,6 +226,16 @@ class _$_Initialized implements _Initialized {
             ShipToInfo selectedShipTo)?
         loadMore,
     TResult? Function(SavedOrder order, User user)? delete,
+    TResult? Function(
+            ShipToInfo shipToInfo,
+            User user,
+            List<PriceAggregate> cartItems,
+            double grandTotal,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            Map<AdditionalInfoLabelList, String> data,
+            List<SavedOrder> existingSavedOrderList)?
+        createDraft,
   }) {
     return initialized?.call();
   }
@@ -198,6 +251,16 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         loadMore,
     TResult Function(SavedOrder order, User user)? delete,
+    TResult Function(
+            ShipToInfo shipToInfo,
+            User user,
+            List<PriceAggregate> cartItems,
+            double grandTotal,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            Map<AdditionalInfoLabelList, String> data,
+            List<SavedOrder> existingSavedOrderList)?
+        createDraft,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -213,6 +276,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_Delete value) delete,
+    required TResult Function(_CreateDraft value) createDraft,
   }) {
     return initialized(this);
   }
@@ -224,6 +288,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_Delete value)? delete,
+    TResult? Function(_CreateDraft value)? createDraft,
   }) {
     return initialized?.call(this);
   }
@@ -235,6 +300,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_Delete value)? delete,
+    TResult Function(_CreateDraft value)? createDraft,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -401,6 +467,16 @@ class _$_Fetch implements _Fetch {
             ShipToInfo selectedShipTo)
         loadMore,
     required TResult Function(SavedOrder order, User user) delete,
+    required TResult Function(
+            ShipToInfo shipToInfo,
+            User user,
+            List<PriceAggregate> cartItems,
+            double grandTotal,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            Map<AdditionalInfoLabelList, String> data,
+            List<SavedOrder> existingSavedOrderList)
+        createDraft,
   }) {
     return fetch(userInfo, selectedSalesOrganisation, selectedCustomerCode,
         selectedShipTo);
@@ -423,6 +499,16 @@ class _$_Fetch implements _Fetch {
             ShipToInfo selectedShipTo)?
         loadMore,
     TResult? Function(SavedOrder order, User user)? delete,
+    TResult? Function(
+            ShipToInfo shipToInfo,
+            User user,
+            List<PriceAggregate> cartItems,
+            double grandTotal,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            Map<AdditionalInfoLabelList, String> data,
+            List<SavedOrder> existingSavedOrderList)?
+        createDraft,
   }) {
     return fetch?.call(userInfo, selectedSalesOrganisation,
         selectedCustomerCode, selectedShipTo);
@@ -439,6 +525,16 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         loadMore,
     TResult Function(SavedOrder order, User user)? delete,
+    TResult Function(
+            ShipToInfo shipToInfo,
+            User user,
+            List<PriceAggregate> cartItems,
+            double grandTotal,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            Map<AdditionalInfoLabelList, String> data,
+            List<SavedOrder> existingSavedOrderList)?
+        createDraft,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -455,6 +551,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_Delete value) delete,
+    required TResult Function(_CreateDraft value) createDraft,
   }) {
     return fetch(this);
   }
@@ -466,6 +563,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_Delete value)? delete,
+    TResult? Function(_CreateDraft value)? createDraft,
   }) {
     return fetch?.call(this);
   }
@@ -477,6 +575,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_Delete value)? delete,
+    TResult Function(_CreateDraft value)? createDraft,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -657,6 +756,16 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo selectedShipTo)
         loadMore,
     required TResult Function(SavedOrder order, User user) delete,
+    required TResult Function(
+            ShipToInfo shipToInfo,
+            User user,
+            List<PriceAggregate> cartItems,
+            double grandTotal,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            Map<AdditionalInfoLabelList, String> data,
+            List<SavedOrder> existingSavedOrderList)
+        createDraft,
   }) {
     return loadMore(userInfo, selectedSalesOrganisation, selectedCustomerCode,
         selectedShipTo);
@@ -679,6 +788,16 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo selectedShipTo)?
         loadMore,
     TResult? Function(SavedOrder order, User user)? delete,
+    TResult? Function(
+            ShipToInfo shipToInfo,
+            User user,
+            List<PriceAggregate> cartItems,
+            double grandTotal,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            Map<AdditionalInfoLabelList, String> data,
+            List<SavedOrder> existingSavedOrderList)?
+        createDraft,
   }) {
     return loadMore?.call(userInfo, selectedSalesOrganisation,
         selectedCustomerCode, selectedShipTo);
@@ -695,6 +814,16 @@ class _$_LoadMore implements _LoadMore {
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         loadMore,
     TResult Function(SavedOrder order, User user)? delete,
+    TResult Function(
+            ShipToInfo shipToInfo,
+            User user,
+            List<PriceAggregate> cartItems,
+            double grandTotal,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            Map<AdditionalInfoLabelList, String> data,
+            List<SavedOrder> existingSavedOrderList)?
+        createDraft,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -711,6 +840,7 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_Delete value) delete,
+    required TResult Function(_CreateDraft value) createDraft,
   }) {
     return loadMore(this);
   }
@@ -722,6 +852,7 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_Delete value)? delete,
+    TResult? Function(_CreateDraft value)? createDraft,
   }) {
     return loadMore?.call(this);
   }
@@ -733,6 +864,7 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_Delete value)? delete,
+    TResult Function(_CreateDraft value)? createDraft,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -861,6 +993,16 @@ class _$_Delete implements _Delete {
             ShipToInfo selectedShipTo)
         loadMore,
     required TResult Function(SavedOrder order, User user) delete,
+    required TResult Function(
+            ShipToInfo shipToInfo,
+            User user,
+            List<PriceAggregate> cartItems,
+            double grandTotal,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            Map<AdditionalInfoLabelList, String> data,
+            List<SavedOrder> existingSavedOrderList)
+        createDraft,
   }) {
     return delete(order, user);
   }
@@ -882,6 +1024,16 @@ class _$_Delete implements _Delete {
             ShipToInfo selectedShipTo)?
         loadMore,
     TResult? Function(SavedOrder order, User user)? delete,
+    TResult? Function(
+            ShipToInfo shipToInfo,
+            User user,
+            List<PriceAggregate> cartItems,
+            double grandTotal,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            Map<AdditionalInfoLabelList, String> data,
+            List<SavedOrder> existingSavedOrderList)?
+        createDraft,
   }) {
     return delete?.call(order, user);
   }
@@ -897,6 +1049,16 @@ class _$_Delete implements _Delete {
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         loadMore,
     TResult Function(SavedOrder order, User user)? delete,
+    TResult Function(
+            ShipToInfo shipToInfo,
+            User user,
+            List<PriceAggregate> cartItems,
+            double grandTotal,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            Map<AdditionalInfoLabelList, String> data,
+            List<SavedOrder> existingSavedOrderList)?
+        createDraft,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -912,6 +1074,7 @@ class _$_Delete implements _Delete {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_Delete value) delete,
+    required TResult Function(_CreateDraft value) createDraft,
   }) {
     return delete(this);
   }
@@ -923,6 +1086,7 @@ class _$_Delete implements _Delete {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_Delete value)? delete,
+    TResult? Function(_CreateDraft value)? createDraft,
   }) {
     return delete?.call(this);
   }
@@ -934,6 +1098,7 @@ class _$_Delete implements _Delete {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_Delete value)? delete,
+    TResult Function(_CreateDraft value)? createDraft,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -955,11 +1120,375 @@ abstract class _Delete implements SavedOrderListEvent {
 }
 
 /// @nodoc
+abstract class _$$_CreateDraftCopyWith<$Res> {
+  factory _$$_CreateDraftCopyWith(
+          _$_CreateDraft value, $Res Function(_$_CreateDraft) then) =
+      __$$_CreateDraftCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {ShipToInfo shipToInfo,
+      User user,
+      List<PriceAggregate> cartItems,
+      double grandTotal,
+      CustomerCodeInfo customerCodeInfo,
+      SalesOrganisation salesOrganisation,
+      Map<AdditionalInfoLabelList, String> data,
+      List<SavedOrder> existingSavedOrderList});
+
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $UserCopyWith<$Res> get user;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+}
+
+/// @nodoc
+class __$$_CreateDraftCopyWithImpl<$Res>
+    extends _$SavedOrderListEventCopyWithImpl<$Res, _$_CreateDraft>
+    implements _$$_CreateDraftCopyWith<$Res> {
+  __$$_CreateDraftCopyWithImpl(
+      _$_CreateDraft _value, $Res Function(_$_CreateDraft) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? shipToInfo = null,
+    Object? user = null,
+    Object? cartItems = null,
+    Object? grandTotal = null,
+    Object? customerCodeInfo = null,
+    Object? salesOrganisation = null,
+    Object? data = null,
+    Object? existingSavedOrderList = null,
+  }) {
+    return _then(_$_CreateDraft(
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      cartItems: null == cartItems
+          ? _value._cartItems
+          : cartItems // ignore: cast_nullable_to_non_nullable
+              as List<PriceAggregate>,
+      grandTotal: null == grandTotal
+          ? _value.grandTotal
+          : grandTotal // ignore: cast_nullable_to_non_nullable
+              as double,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as Map<AdditionalInfoLabelList, String>,
+      existingSavedOrderList: null == existingSavedOrderList
+          ? _value._existingSavedOrderList
+          : existingSavedOrderList // ignore: cast_nullable_to_non_nullable
+              as List<SavedOrder>,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_CreateDraft implements _CreateDraft {
+  const _$_CreateDraft(
+      {required this.shipToInfo,
+      required this.user,
+      required final List<PriceAggregate> cartItems,
+      required this.grandTotal,
+      required this.customerCodeInfo,
+      required this.salesOrganisation,
+      required final Map<AdditionalInfoLabelList, String> data,
+      required final List<SavedOrder> existingSavedOrderList})
+      : _cartItems = cartItems,
+        _data = data,
+        _existingSavedOrderList = existingSavedOrderList;
+
+  @override
+  final ShipToInfo shipToInfo;
+  @override
+  final User user;
+  final List<PriceAggregate> _cartItems;
+  @override
+  List<PriceAggregate> get cartItems {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_cartItems);
+  }
+
+  @override
+  final double grandTotal;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final SalesOrganisation salesOrganisation;
+  final Map<AdditionalInfoLabelList, String> _data;
+  @override
+  Map<AdditionalInfoLabelList, String> get data {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_data);
+  }
+
+  final List<SavedOrder> _existingSavedOrderList;
+  @override
+  List<SavedOrder> get existingSavedOrderList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_existingSavedOrderList);
+  }
+
+  @override
+  String toString() {
+    return 'SavedOrderListEvent.createDraft(shipToInfo: $shipToInfo, user: $user, cartItems: $cartItems, grandTotal: $grandTotal, customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation, data: $data, existingSavedOrderList: $existingSavedOrderList)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_CreateDraft &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.user, user) || other.user == user) &&
+            const DeepCollectionEquality()
+                .equals(other._cartItems, _cartItems) &&
+            (identical(other.grandTotal, grandTotal) ||
+                other.grandTotal == grandTotal) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            const DeepCollectionEquality().equals(other._data, _data) &&
+            const DeepCollectionEquality().equals(
+                other._existingSavedOrderList, _existingSavedOrderList));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      shipToInfo,
+      user,
+      const DeepCollectionEquality().hash(_cartItems),
+      grandTotal,
+      customerCodeInfo,
+      salesOrganisation,
+      const DeepCollectionEquality().hash(_data),
+      const DeepCollectionEquality().hash(_existingSavedOrderList));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_CreateDraftCopyWith<_$_CreateDraft> get copyWith =>
+      __$$_CreateDraftCopyWithImpl<_$_CreateDraft>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)
+        fetch,
+    required TResult Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)
+        loadMore,
+    required TResult Function(SavedOrder order, User user) delete,
+    required TResult Function(
+            ShipToInfo shipToInfo,
+            User user,
+            List<PriceAggregate> cartItems,
+            double grandTotal,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            Map<AdditionalInfoLabelList, String> data,
+            List<SavedOrder> existingSavedOrderList)
+        createDraft,
+  }) {
+    return createDraft(shipToInfo, user, cartItems, grandTotal,
+        customerCodeInfo, salesOrganisation, data, existingSavedOrderList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)?
+        fetch,
+    TResult? Function(
+            User userInfo,
+            SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode,
+            ShipToInfo selectedShipTo)?
+        loadMore,
+    TResult? Function(SavedOrder order, User user)? delete,
+    TResult? Function(
+            ShipToInfo shipToInfo,
+            User user,
+            List<PriceAggregate> cartItems,
+            double grandTotal,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            Map<AdditionalInfoLabelList, String> data,
+            List<SavedOrder> existingSavedOrderList)?
+        createDraft,
+  }) {
+    return createDraft?.call(shipToInfo, user, cartItems, grandTotal,
+        customerCodeInfo, salesOrganisation, data, existingSavedOrderList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        fetch,
+    TResult Function(User userInfo, SalesOrganisation selectedSalesOrganisation,
+            CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
+        loadMore,
+    TResult Function(SavedOrder order, User user)? delete,
+    TResult Function(
+            ShipToInfo shipToInfo,
+            User user,
+            List<PriceAggregate> cartItems,
+            double grandTotal,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            Map<AdditionalInfoLabelList, String> data,
+            List<SavedOrder> existingSavedOrderList)?
+        createDraft,
+    required TResult orElse(),
+  }) {
+    if (createDraft != null) {
+      return createDraft(shipToInfo, user, cartItems, grandTotal,
+          customerCodeInfo, salesOrganisation, data, existingSavedOrderList);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_Delete value) delete,
+    required TResult Function(_CreateDraft value) createDraft,
+  }) {
+    return createDraft(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_Delete value)? delete,
+    TResult? Function(_CreateDraft value)? createDraft,
+  }) {
+    return createDraft?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_Delete value)? delete,
+    TResult Function(_CreateDraft value)? createDraft,
+    required TResult orElse(),
+  }) {
+    if (createDraft != null) {
+      return createDraft(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CreateDraft implements SavedOrderListEvent {
+  const factory _CreateDraft(
+      {required final ShipToInfo shipToInfo,
+      required final User user,
+      required final List<PriceAggregate> cartItems,
+      required final double grandTotal,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final SalesOrganisation salesOrganisation,
+      required final Map<AdditionalInfoLabelList, String> data,
+      required final List<SavedOrder> existingSavedOrderList}) = _$_CreateDraft;
+
+  ShipToInfo get shipToInfo;
+  User get user;
+  List<PriceAggregate> get cartItems;
+  double get grandTotal;
+  CustomerCodeInfo get customerCodeInfo;
+  SalesOrganisation get salesOrganisation;
+  Map<AdditionalInfoLabelList, String> get data;
+  List<SavedOrder> get existingSavedOrderList;
+  @JsonKey(ignore: true)
+  _$$_CreateDraftCopyWith<_$_CreateDraft> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$SavedOrderListState {
   List<SavedOrder> get savedOrders => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
   int get nextPageIndex => throw _privateConstructorUsedError;
+  bool get isDraftOrderCreated => throw _privateConstructorUsedError;
+  bool get isCreating => throw _privateConstructorUsedError;
+  SavedOrder get newlyCreatedDraftOrder => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
@@ -979,7 +1508,12 @@ abstract class $SavedOrderListStateCopyWith<$Res> {
       bool canLoadMore,
       bool isFetching,
       int nextPageIndex,
+      bool isDraftOrderCreated,
+      bool isCreating,
+      SavedOrder newlyCreatedDraftOrder,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
+
+  $SavedOrderCopyWith<$Res> get newlyCreatedDraftOrder;
 }
 
 /// @nodoc
@@ -999,6 +1533,9 @@ class _$SavedOrderListStateCopyWithImpl<$Res, $Val extends SavedOrderListState>
     Object? canLoadMore = null,
     Object? isFetching = null,
     Object? nextPageIndex = null,
+    Object? isDraftOrderCreated = null,
+    Object? isCreating = null,
+    Object? newlyCreatedDraftOrder = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
@@ -1018,11 +1555,31 @@ class _$SavedOrderListStateCopyWithImpl<$Res, $Val extends SavedOrderListState>
           ? _value.nextPageIndex
           : nextPageIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      isDraftOrderCreated: null == isDraftOrderCreated
+          ? _value.isDraftOrderCreated
+          : isDraftOrderCreated // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isCreating: null == isCreating
+          ? _value.isCreating
+          : isCreating // ignore: cast_nullable_to_non_nullable
+              as bool,
+      newlyCreatedDraftOrder: null == newlyCreatedDraftOrder
+          ? _value.newlyCreatedDraftOrder
+          : newlyCreatedDraftOrder // ignore: cast_nullable_to_non_nullable
+              as SavedOrder,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SavedOrderCopyWith<$Res> get newlyCreatedDraftOrder {
+    return $SavedOrderCopyWith<$Res>(_value.newlyCreatedDraftOrder, (value) {
+      return _then(_value.copyWith(newlyCreatedDraftOrder: value) as $Val);
+    });
   }
 }
 
@@ -1039,7 +1596,13 @@ abstract class _$$_SavedOrderListStateCopyWith<$Res>
       bool canLoadMore,
       bool isFetching,
       int nextPageIndex,
+      bool isDraftOrderCreated,
+      bool isCreating,
+      SavedOrder newlyCreatedDraftOrder,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
+
+  @override
+  $SavedOrderCopyWith<$Res> get newlyCreatedDraftOrder;
 }
 
 /// @nodoc
@@ -1057,6 +1620,9 @@ class __$$_SavedOrderListStateCopyWithImpl<$Res>
     Object? canLoadMore = null,
     Object? isFetching = null,
     Object? nextPageIndex = null,
+    Object? isDraftOrderCreated = null,
+    Object? isCreating = null,
+    Object? newlyCreatedDraftOrder = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_$_SavedOrderListState(
@@ -1076,6 +1642,18 @@ class __$$_SavedOrderListStateCopyWithImpl<$Res>
           ? _value.nextPageIndex
           : nextPageIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      isDraftOrderCreated: null == isDraftOrderCreated
+          ? _value.isDraftOrderCreated
+          : isDraftOrderCreated // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isCreating: null == isCreating
+          ? _value.isCreating
+          : isCreating // ignore: cast_nullable_to_non_nullable
+              as bool,
+      newlyCreatedDraftOrder: null == newlyCreatedDraftOrder
+          ? _value.newlyCreatedDraftOrder
+          : newlyCreatedDraftOrder // ignore: cast_nullable_to_non_nullable
+              as SavedOrder,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -1092,6 +1670,9 @@ class _$_SavedOrderListState extends _SavedOrderListState {
       required this.canLoadMore,
       required this.isFetching,
       required this.nextPageIndex,
+      required this.isDraftOrderCreated,
+      required this.isCreating,
+      required this.newlyCreatedDraftOrder,
       required this.apiFailureOrSuccessOption})
       : _savedOrders = savedOrders,
         super._();
@@ -1110,11 +1691,17 @@ class _$_SavedOrderListState extends _SavedOrderListState {
   @override
   final int nextPageIndex;
   @override
+  final bool isDraftOrderCreated;
+  @override
+  final bool isCreating;
+  @override
+  final SavedOrder newlyCreatedDraftOrder;
+  @override
   final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'SavedOrderListState(savedOrders: $savedOrders, canLoadMore: $canLoadMore, isFetching: $isFetching, nextPageIndex: $nextPageIndex, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
+    return 'SavedOrderListState(savedOrders: $savedOrders, canLoadMore: $canLoadMore, isFetching: $isFetching, nextPageIndex: $nextPageIndex, isDraftOrderCreated: $isDraftOrderCreated, isCreating: $isCreating, newlyCreatedDraftOrder: $newlyCreatedDraftOrder, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
   }
 
   @override
@@ -1130,6 +1717,12 @@ class _$_SavedOrderListState extends _SavedOrderListState {
                 other.isFetching == isFetching) &&
             (identical(other.nextPageIndex, nextPageIndex) ||
                 other.nextPageIndex == nextPageIndex) &&
+            (identical(other.isDraftOrderCreated, isDraftOrderCreated) ||
+                other.isDraftOrderCreated == isDraftOrderCreated) &&
+            (identical(other.isCreating, isCreating) ||
+                other.isCreating == isCreating) &&
+            (identical(other.newlyCreatedDraftOrder, newlyCreatedDraftOrder) ||
+                other.newlyCreatedDraftOrder == newlyCreatedDraftOrder) &&
             (identical(other.apiFailureOrSuccessOption,
                     apiFailureOrSuccessOption) ||
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption));
@@ -1142,6 +1735,9 @@ class _$_SavedOrderListState extends _SavedOrderListState {
       canLoadMore,
       isFetching,
       nextPageIndex,
+      isDraftOrderCreated,
+      isCreating,
+      newlyCreatedDraftOrder,
       apiFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
@@ -1158,6 +1754,9 @@ abstract class _SavedOrderListState extends SavedOrderListState {
       required final bool canLoadMore,
       required final bool isFetching,
       required final int nextPageIndex,
+      required final bool isDraftOrderCreated,
+      required final bool isCreating,
+      required final SavedOrder newlyCreatedDraftOrder,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption}) = _$_SavedOrderListState;
   const _SavedOrderListState._() : super._();
@@ -1170,6 +1769,12 @@ abstract class _SavedOrderListState extends SavedOrderListState {
   bool get isFetching;
   @override
   int get nextPageIndex;
+  @override
+  bool get isDraftOrderCreated;
+  @override
+  bool get isCreating;
+  @override
+  SavedOrder get newlyCreatedDraftOrder;
   @override
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override

@@ -37,6 +37,7 @@ class OrderQueryMutation {
     mutation createDraftorder(\$input: CreateDraftOrderInput!) {
       createDraftOrder(input: \$input) { 
           draftorder
+          id
       }
     }
     ''';

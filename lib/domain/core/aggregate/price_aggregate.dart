@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
@@ -40,6 +41,21 @@ class PriceAggregate with _$PriceAggregate {
       hasValidTenderContract: materialInfo.hasValidTenderContract,
       taxClassification: materialInfo.taxClassification,
       type: '',
+    );
+  }
+
+  MaterialItem toSavedOrderMaterial() {
+    return MaterialItem.empty().copyWith(
+      materialNumber: materialInfo.materialNumber,
+      qty: quantity,
+      defaultMaterialDescription: materialInfo.materialDescription,
+      type: 'Comm',
+      itemRegistrationNumber: materialInfo.itemRegistrationNumber,
+      unitOfMeasurement: materialInfo.unitOfMeasurement,
+      zdp8Override: isOverride,
+      hidePrice: materialInfo.hidePrice,
+      materialGroup2: materialInfo.materialGroup2,
+      materialGroup4: materialInfo.materialGroup4,
     );
   }
 

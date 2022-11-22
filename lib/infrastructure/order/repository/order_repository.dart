@@ -1,14 +1,10 @@
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
@@ -17,6 +13,7 @@ import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/saved_order_dto.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_summary_page.dart';
 
 class OrderRepository implements IOrderRepository {
@@ -101,90 +98,113 @@ class OrderRepository implements IOrderRepository {
   }
 
   @override
-  Future<Either<ApiFailure, bool>> createDraftOrder({
-    required ShipToCodeState shipToCodeState,
-    required UserState userState,
-    required CartState cartState,
-    required CustomerCodeState customerCodeState,
-    required SalesOrgState salesOrgStateState,
+  Future<Either<ApiFailure, SavedOrder>> createDraftOrder({
+    required ShipToInfo shipToInfo,
+    required User user,
+    required List<PriceAggregate> cartItems,
+    required double grandTotal,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
+    required Map<AdditionalInfoLabelList, String> data,
   }) async {
     final draftOrder = _getCreateDraftOrderRequest(
-      shipToCodeState: shipToCodeState,
-      userState: userState,
-      cartState: cartState,
-      customerCodeState: customerCodeState,
-      salesOrgStateState: salesOrgStateState,
+      shipToInfo: shipToInfo,
+      user: user,
+      cartItems: cartItems,
+      grandTotal: grandTotal,
+      customerCodeInfo: customerCodeInfo,
+      salesOrganisation: salesOrganisation,
+      data: data,
     );
     if (config.appFlavor == Flavor.mock) {
       try {
-        return const Right(true);
+        final savedOrder = await localDataSource.createDraftOrder(
+          draftOrder: SavedOrderDto.fromDomain(draftOrder),
+        );
+        if (savedOrder.isDraftOrder) {
+          final newlyAddedDraftOrder = draftOrder.copyWith(id: savedOrder.id);
+
+          return Right(newlyAddedDraftOrder);
+        } else {
+          return Left(
+            FailureHandler.handleFailure('Order not saved'),
+          );
+        }
       } catch (e) {
         return Left(
           FailureHandler.handleFailure(e),
         );
       }
     }
-    throw UnimplementedError();
+    try {
+      final savedOrder = await remoteDataSource.createDraftOrder(
+        draftOrder: SavedOrderDto.fromDomain(draftOrder),
+      );
+
+      if (savedOrder.isDraftOrder) {
+        final newlyAddedDraftOrder = draftOrder.copyWith(id: savedOrder.id);
+
+        return Right(newlyAddedDraftOrder);
+      } else {
+        return Left(
+          FailureHandler.handleFailure('Order not saved'),
+        );
+      }
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
+    }
   }
 
-  List<MaterialItem> _getItemList(CartState cartState) {
-    final cartItemList = cartState.cartItemList;
-
+  List<MaterialItem> _getItemList(List<PriceAggregate> cartItemList) {
     return cartItemList
-        .map((item) => MaterialItem.empty().copyWith(
-              materialNumber: item.materialInfo.materialNumber,
-              qty: item.quantity,
-              defaultMaterialDescription: item.materialInfo.materialDescription,
-              type: 'Comm',
-              itemRegistrationNumber: item.materialInfo.itemRegistrationNumber,
-              unitOfMeasurement: item.materialInfo.unitOfMeasurement,
-              zdp8Override: item.isOverride,
-              hidePrice: item.materialInfo.hidePrice,
-              materialGroup2: item.materialInfo.materialGroup2,
-              materialGroup4: item.materialInfo.materialGroup4,
-            ))
+        .map((cartItem) => cartItem.toSavedOrderMaterial())
         .toList();
   }
 
 //TODO : Will revisit
   SavedOrder _getCreateDraftOrderRequest({
-    required ShipToCodeState shipToCodeState,
-    required UserState userState,
-    required CartState cartState,
-    required CustomerCodeState customerCodeState,
-    required SalesOrgState salesOrgStateState,
+    required ShipToInfo shipToInfo,
+    required User user,
+    required List<PriceAggregate> cartItems,
+    required double grandTotal,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
+    required Map<AdditionalInfoLabelList, String> data,
   }) {
     //bonus calculation
 
     return SavedOrder.empty().copyWith(
-      deliveryDocument: shipToCodeState.shipToInfo.shipToName.name1,
-      billingDocument: customerCodeState.customerCodeInfo.customerName.name1,
-      salesOrganization:
-          salesOrgStateState.salesOrganisation.salesOrg.getOrCrash(),
+      deliveryDocument: shipToInfo.shipToName.name1,
+      billingDocument: customerCodeInfo.customerName.name1,
+      salesOrganization: salesOrganisation.salesOrg.getOrCrash(),
       principal: '',
-      soldToParty:
-          SoldToParty(customerCodeState.customerCodeInfo.customerCodeSoldTo),
-      shipToParty: ShipToParty(shipToCodeState.shipToInfo.shipToCustomerCode),
+      soldToParty: SoldToParty(customerCodeInfo.customerCodeSoldTo),
+      shipToParty: ShipToParty(shipToInfo.shipToCustomerCode),
       processingStatus: 'Draft',
-      companyName:
-          CompanyName(shipToCodeState.shipToInfo.shipToName.toString()),
-      country: shipToCodeState.shipToInfo.region,
-      postCode1: shipToCodeState.shipToInfo.postalCode,
+      isDraftOrder: true,
+      companyName: CompanyName(shipToInfo.shipToName.toString()),
+      country: shipToInfo.region,
+      postCode1: shipToInfo.postalCode,
       specialInstructions:
           data[AdditionalInfoLabelList.specialInstruction] ?? '',
       poReference: data[AdditionalInfoLabelList.customerPoReference] ?? '',
       payTerm: data[AdditionalInfoLabelList.paymentTerm] ?? '',
       collectiveNo: data[AdditionalInfoLabelList.collectiveNumber] ?? '',
-      totalOrderValue: cartState.grandTotal,
+      totalOrderValue: grandTotal,
       draftorder: true,
-      address1: shipToCodeState.shipToInfo.shipToAddress.street,
-      address2: shipToCodeState.shipToInfo.shipToAddress.street2,
-      city: shipToCodeState.shipToInfo.city1,
+      address1: shipToInfo.shipToAddress.street,
+      address2: shipToInfo.shipToAddress.street2,
+      city: shipToInfo.city1,
       phonenumber: data[AdditionalInfoLabelList.contactNumber] ?? '',
-      user: userState.user.id,
-      contactPerson: data[AdditionalInfoLabelList.contactPerson] ?? '',
+      user: user.id,
+      contactPerson: data[AdditionalInfoLabelList.contactPerson] != null &&
+              data[AdditionalInfoLabelList.contactPerson]!.isNotEmpty
+          ? data[AdditionalInfoLabelList.contactPerson]!
+          : user.fullName.toString(),
       referenceNotes: data[AdditionalInfoLabelList.referenceNote] ?? '',
-      items: _getItemList(cartState),
+      items: _getItemList(cartItems),
     );
   }
 }

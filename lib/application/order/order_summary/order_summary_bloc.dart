@@ -1,9 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,36 +44,6 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
           apiFailureOrSuccessOption: none(),
           step: value.step,
         ));
-      },
-      createDraft: (e) async {
-        emit(state.copyWith(
-          apiFailureOrSuccessOption: none(),
-          isDraftOrderCreated: false,
-        ));
-        final failureOrSuccess = await repository.createDraftOrder(
-          shipToCodeState: e.shipToCodeState,
-          userState: e.userState,
-          cartState: e.cartState,
-          customerCodeState: e.customerCodeState,
-          salesOrgStateState: e.salesOrgStateState,
-        );
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              ),
-            );
-          },
-          (createDraftOrder) {
-            emit(
-              state.copyWith(
-                isDraftOrderCreated: createDraftOrder,
-                apiFailureOrSuccessOption: none(),
-              ),
-            );
-          },
-        );
       },
     );
   }

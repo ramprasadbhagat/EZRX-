@@ -161,8 +161,8 @@ class _OrderProductItemListConverter
 
   @override
   String toJson(List<MaterialItemDto> object) {
-    return {
+    return jsonEncode({
       'value': object.map((e) => e.toJson()).toList(),
-    }.toString();
+    }).toString();
   }
 }

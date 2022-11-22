@@ -19,4 +19,14 @@ class SavedOrderListEvent with _$SavedOrderListEvent {
     required SavedOrder order,
     required User user,
   }) = _Delete;
+  const factory SavedOrderListEvent.createDraft({
+    required ShipToInfo shipToInfo,
+    required User user,
+    required List<PriceAggregate> cartItems,
+    required double grandTotal,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
+    required Map<AdditionalInfoLabelList, String> data,
+    required List<SavedOrder> existingSavedOrderList,
+  }) = _CreateDraft;
 }

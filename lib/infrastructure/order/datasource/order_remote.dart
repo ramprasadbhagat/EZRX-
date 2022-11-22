@@ -60,6 +60,41 @@ class OrderRemoteDataSource {
     });
   }
 
+  Future<SavedOrder> createDraftOrder({
+    required SavedOrderDto draftOrder,
+  }) async {
+    return await exceptionHandler.handle(() async {
+      final variables = {
+        'input': {
+          'data': _removeUnnecessaryElement(draftOrder.toJson()),
+        },
+      };
+
+      final res = await httpService.request(
+        method: 'POST',
+        url: '/api/strapiEngineMutation',
+        data: jsonEncode({
+          'query': queryMutation.createSavedOrder(),
+          'variables': variables,
+        }),
+      );
+      _savedOrderExceptionChecker(res: res);
+      if (res.data['data']['createDraftOrder'] == null ||
+          res.data['data']['createDraftOrder']['draftorder'] == null) {
+        throw OtherException(message: '');
+      }
+
+      return SavedOrderDto.fromJson(res.data['data']['createDraftOrder'])
+          .toDomain();
+    });
+  }
+
+  Map<String, dynamic> _removeUnnecessaryElement(Map<String, dynamic> input) {
+    input.remove('id');
+
+    return input;
+  }
+
   void _savedOrderExceptionChecker({required Response<dynamic> res}) {
     if (res.data['errors'] != null) {
       throw ServerException(message: res.data['errors'][0]['message']);

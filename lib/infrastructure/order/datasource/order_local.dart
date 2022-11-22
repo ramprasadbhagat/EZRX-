@@ -24,7 +24,18 @@ class OrderLocalDataSource {
           .loadString('assets/json/deleteSavedOrderTemplateResponse.json'),
     );
 
-    return SavedOrderDto.fromJson(data['data']['deleteDraftOrder']['draftOrder'])
-        .toDomain();
+    return SavedOrderDto.fromJson(
+      data['data']['deleteDraftOrder']['draftOrder'],
+    ).toDomain();
+  }
+
+  Future<SavedOrder> createDraftOrder({
+    required SavedOrderDto draftOrder,
+  }) async {
+    final data = json.decode(
+      await rootBundle.loadString('assets/json/createDraftOrderResponse.json'),
+    );
+
+    return SavedOrderDto.fromJson(data['data']['createDraftOrder']).toDomain();
   }
 }

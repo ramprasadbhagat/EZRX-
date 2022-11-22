@@ -9,11 +9,13 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
+import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
@@ -175,23 +177,15 @@ class _SaveTemplateButton extends StatelessWidget {
 class _BodyContent extends StatelessWidget {
   const _BodyContent({Key? key}) : super(key: key);
 
-  void _saveAdditionalInformation(
-    String value,
-    AdditionalInfoLabelList lavel,
-  ) {
-    data[lavel] = value;
-  }
-
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<OrderSummaryBloc, OrderSummaryState>(
-      listenWhen: (previous, current) =>
-          previous.isDraftOrderCreated != current.isDraftOrderCreated,
-      listener: (context, state) {
-        if (state.isDraftOrderCreated) {
+    return BlocConsumer<SavedOrderListBloc, SavedOrderListState>(
+      listenWhen: (previous, current) => previous != current,
+      listener: (context, savedOrderState) {
+        if (savedOrderState.isDraftOrderCreated) {
           context.router.pushNamed('saved_order_list');
         } else {
-          state.apiFailureOrSuccessOption.fold(
+          savedOrderState.apiFailureOrSuccessOption.fold(
             () {},
             (either) => either.fold(
               (failure) {
@@ -206,7 +200,34 @@ class _BodyContent extends StatelessWidget {
           );
         }
       },
-      buildWhen: (previous, current) => previous.step != current.step,
+      buildWhen: (previous, current) => previous != current,
+      builder: (context, savedOrderState) {
+        return _Stepper(
+          savedOrderState: savedOrderState,
+        );
+      },
+    );
+  }
+}
+
+class _Stepper extends StatelessWidget {
+  final SavedOrderListState savedOrderState;
+  const _Stepper({
+    required this.savedOrderState,
+    Key? key,
+  }) : super(key: key);
+
+  void _saveAdditionalInformation(
+    String value,
+    AdditionalInfoLabelList lavel,
+  ) {
+    data[lavel] = value;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<OrderSummaryBloc, OrderSummaryState>(
+      buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         return Stepper(
           margin: const EdgeInsets.fromLTRB(50, 10, 10, 10),
@@ -242,16 +263,28 @@ class _BodyContent extends StatelessWidget {
                             ),
                     onPressed: () async {
                       if (details.currentStep == 5) {
-                        context.read<OrderSummaryBloc>().add(
-                              OrderSummaryEvent.createDraft(
-                                shipToCodeState:
-                                    context.read<ShipToCodeBloc>().state,
-                                customerCodeState:
-                                    context.read<CustomerCodeBloc>().state,
-                                salesOrgStateState:
-                                    context.read<SalesOrgBloc>().state,
-                                userState: context.read<UserBloc>().state,
-                                cartState: context.read<CartBloc>().state,
+                        context.read<SavedOrderListBloc>().add(
+                              SavedOrderListEvent.createDraft(
+                                shipToInfo: context
+                                    .read<ShipToCodeBloc>()
+                                    .state
+                                    .shipToInfo,
+                                customerCodeInfo: context
+                                    .read<CustomerCodeBloc>()
+                                    .state
+                                    .customerCodeInfo,
+                                salesOrganisation: context
+                                    .read<SalesOrgBloc>()
+                                    .state
+                                    .salesOrganisation,
+                                user: context.read<UserBloc>().state.user,
+                                cartItems:
+                                    context.read<CartBloc>().state.cartItemList,
+                                grandTotal:
+                                    context.read<CartBloc>().state.grandTotal,
+                                data: data,
+                                existingSavedOrderList:
+                                    savedOrderState.savedOrders,
                               ),
                             );
                       } else {
@@ -261,8 +294,11 @@ class _BodyContent extends StatelessWidget {
                       }
                     },
                     child: details.currentStep == state.maxSteps
-                        ? const Text('Save').tr()
-                        : const Text('Cancel').tr(),
+                        ? LoadingShimmer.withChild(
+                            enabled: savedOrderState.isCreating,
+                            child: const Text('Save').tr(),
+                          )
+                        : const Text('Back').tr(),
                   ),
                 ],
               ),
@@ -413,78 +449,89 @@ class _AdditionalInformationStep extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.shipToInfo != current.shipToInfo,
       builder: (context, state) {
-        return Column(
-          children: [
-            _TextFormField(
-              labelText: 'Customer PO Reference',
-              maxLength: 35,
-              saveData: saveData,
-              label: AdditionalInfoLabelList.customerPoReference,
-            ),
-            context.read<SalesOrgBloc>().state.configs.enableSpecialInstructions
-                ? _TextFormField(
-                    labelText: 'Special Instructions',
-                    keyboardType: TextInputType.multiline,
-                    maxLength: 132,
-                    saveData: saveData,
-                    label: AdditionalInfoLabelList.specialInstruction,
-                  )
-                : const SizedBox.shrink(),
-            context.read<SalesOrgBloc>().state.configs.enableReferenceNote
-                ? _TextFormField(
-                    labelText: 'Reference Note',
-                    maxLength: 50,
-                    keyboardType: TextInputType.multiline,
-                    saveData: saveData,
-                    label: AdditionalInfoLabelList.referenceNote,
-                  )
-                : const SizedBox.shrink(),
-            context.read<SalesOrgBloc>().state.configs.enableCollectiveNumber &&
-                    context.read<UserBloc>().state.user.role.type.isSalesRep
-                ? _TextFormField(
-                    labelText: 'Collective Number',
-                    maxLength: 10,
-                    saveData: saveData,
-                    label: AdditionalInfoLabelList.collectiveNumber,
-                  )
-                : const SizedBox.shrink(),
-            context.read<SalesOrgBloc>().state.configs.enableMobileNumber
-                ? _TextFormField(
-                    labelText: 'Contact Person',
-                    maxLength: 50,
-                    saveData: saveData,
-                    label: AdditionalInfoLabelList.contactPerson,
-                  )
-                : const SizedBox.shrink(),
-            context.read<SalesOrgBloc>().state.configs.enableMobileNumber
-                ? _TextFormField(
-                    labelText: 'Contact Number',
-                    maxLength: 10,
-                    keyboardType: TextInputType.phone,
-                    saveData: saveData,
-                    label: AdditionalInfoLabelList.contactNumber,
-                  )
-                : const SizedBox.shrink(),
-            context.read<SalesOrgBloc>().state.configs.enableFutureDeliveryDay
-                ? _DatePickerField(
-                    futureDeliveryDay: context
-                        .read<SalesOrgBloc>()
-                        .state
-                        .configs
-                        .futureDeliveryDay,
-                  )
-                : const SizedBox.shrink(),
-            context.read<SalesOrgBloc>().state.configs.enablePaymentTerms
-                ? const _PaymentTerm()
-                : const SizedBox.shrink(),
-            //OrderType
-            context.read<EligibilityBloc>().state.isOrderTypeEnable
-                ? Container(
-                    margin: const EdgeInsets.only(top: 18),
-                    child: const OrderTypeSelector(),
-                  )
-                : const SizedBox.shrink(),
-          ],
+        return Form(
+          key: _additionalDetailsFormKey,
+          child: Column(
+            children: [
+              _TextFormField(
+                labelText: 'Customer PO Reference',
+                maxLength: 35,
+                saveData: saveData,
+                label: AdditionalInfoLabelList.customerPoReference,
+              ),
+              context
+                      .read<SalesOrgBloc>()
+                      .state
+                      .configs
+                      .enableSpecialInstructions
+                  ? _TextFormField(
+                      labelText: 'Special Instructions',
+                      keyboardType: TextInputType.multiline,
+                      maxLength: 132,
+                      saveData: saveData,
+                      label: AdditionalInfoLabelList.specialInstruction,
+                    )
+                  : const SizedBox.shrink(),
+              context.read<SalesOrgBloc>().state.configs.enableReferenceNote
+                  ? _TextFormField(
+                      labelText: 'Reference Note',
+                      maxLength: 50,
+                      keyboardType: TextInputType.multiline,
+                      saveData: saveData,
+                      label: AdditionalInfoLabelList.referenceNote,
+                    )
+                  : const SizedBox.shrink(),
+              context
+                          .read<SalesOrgBloc>()
+                          .state
+                          .configs
+                          .enableCollectiveNumber &&
+                      context.read<UserBloc>().state.user.role.type.isSalesRep
+                  ? _TextFormField(
+                      labelText: 'Collective Number',
+                      maxLength: 10,
+                      saveData: saveData,
+                      label: AdditionalInfoLabelList.collectiveNumber,
+                    )
+                  : const SizedBox.shrink(),
+              context.read<SalesOrgBloc>().state.configs.enableMobileNumber
+                  ? _TextFormField(
+                      labelText: 'Contact Person',
+                      maxLength: 50,
+                      saveData: saveData,
+                      label: AdditionalInfoLabelList.contactPerson,
+                    )
+                  : const SizedBox.shrink(),
+              context.read<SalesOrgBloc>().state.configs.enableMobileNumber
+                  ? _TextFormField(
+                      labelText: 'Contact Number',
+                      maxLength: 10,
+                      keyboardType: TextInputType.phone,
+                      saveData: saveData,
+                      label: AdditionalInfoLabelList.contactNumber,
+                    )
+                  : const SizedBox.shrink(),
+              context.read<SalesOrgBloc>().state.configs.enableFutureDeliveryDay
+                  ? _DatePickerField(
+                      futureDeliveryDay: context
+                          .read<SalesOrgBloc>()
+                          .state
+                          .configs
+                          .futureDeliveryDay,
+                    )
+                  : const SizedBox.shrink(),
+              context.read<SalesOrgBloc>().state.configs.enablePaymentTerms
+                  ? const _PaymentTerm()
+                  : const SizedBox.shrink(),
+              //OrderType
+              context.read<EligibilityBloc>().state.isOrderTypeEnable
+                  ? Container(
+                      margin: const EdgeInsets.only(top: 18),
+                      child: const OrderTypeSelector(),
+                    )
+                  : const SizedBox.shrink(),
+            ],
+          ),
         );
       },
     );

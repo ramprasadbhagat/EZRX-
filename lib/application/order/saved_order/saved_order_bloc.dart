@@ -5,9 +5,11 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/order_summary_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -39,6 +41,8 @@ class SavedOrderListBloc
             isFetching: true,
             savedOrders: [],
             nextPageIndex: 0,
+            isDraftOrderCreated: false,
+            isCreating: false,
             apiFailureOrSuccessOption: none(),
           ),
         );
@@ -68,6 +72,8 @@ class SavedOrderListBloc
                 isFetching: false,
                 canLoadMore: savedOrders.length >= _defaultPageSize,
                 nextPageIndex: 1,
+                isDraftOrderCreated: false,
+                isCreating: false,
               ),
             );
           },
@@ -78,6 +84,8 @@ class SavedOrderListBloc
         emit(
           state.copyWith(
             isFetching: true,
+            isDraftOrderCreated: false,
+            isCreating: false,
             apiFailureOrSuccessOption: none(),
           ),
         );
@@ -94,6 +102,8 @@ class SavedOrderListBloc
           (failure) async {
             emit(
               state.copyWith(
+                isDraftOrderCreated: false,
+                isCreating: false,
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
                 isFetching: false,
               ),
@@ -109,6 +119,8 @@ class SavedOrderListBloc
                 isFetching: false,
                 canLoadMore: savedOrders.length >= _defaultPageSize,
                 nextPageIndex: state.nextPageIndex + 1,
+                isDraftOrderCreated: false,
+                isCreating: false,
               ),
             );
           },
@@ -118,6 +130,8 @@ class SavedOrderListBloc
         emit(state.copyWith(
           apiFailureOrSuccessOption: none(),
           isFetching: true,
+          isDraftOrderCreated: false,
+          isCreating: false,
         ));
 
         final failureOrSuccess = await repository.deleteSavedOrder(
@@ -130,6 +144,8 @@ class SavedOrderListBloc
               state.copyWith(
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
                 isFetching: false,
+                isDraftOrderCreated: false,
+                isCreating: false,
               ),
             );
           },
@@ -139,6 +155,47 @@ class SavedOrderListBloc
                 savedOrders: savedOrders,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
+                isDraftOrderCreated: false,
+                isCreating: false,
+              ),
+            );
+          },
+        );
+      },
+      createDraft: (e) async {
+        emit(state.copyWith(
+          apiFailureOrSuccessOption: none(),
+          isDraftOrderCreated: false,
+          isCreating: true,
+        ));
+        final failureOrSuccess = await repository.createDraftOrder(
+          shipToInfo: e.shipToInfo,
+          user: e.user,
+          cartItems: e.cartItems,
+          grandTotal: e.grandTotal,
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisation: e.salesOrganisation,
+          data: e.data,
+        );
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isCreating: false,
+              ),
+            );
+          },
+          (createDraftOrder) {
+            final newList = List<SavedOrder>.from(e.existingSavedOrderList)
+              ..insert(0, createDraftOrder);
+            emit(
+              state.copyWith(
+                isDraftOrderCreated: createDraftOrder.draftorder,
+                savedOrders: newList,
+                newlyCreatedDraftOrder: createDraftOrder,
+                apiFailureOrSuccessOption: none(),
+                isCreating: false,
               ),
             );
           },
