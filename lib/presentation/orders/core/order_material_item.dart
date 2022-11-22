@@ -151,52 +151,17 @@ class OrderMaterialItem extends StatelessWidget {
               ),
             ),
             _MaterialItemInfo(
+              title: 'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr(),
+              info: _MaterialPriceInfo(
+                materialQueryInfo: materialQueryInfo, 
+                priceType: PriceType.unitPriceBeforeGst,
+              ),
+            ),
+            _MaterialItemInfo(
               title: 'Unit Price: '.tr(),
-              info: BlocBuilder<MaterialPriceDetailBloc,
-                  MaterialPriceDetailState>(
-                buildWhen: (previous, current) =>
-                    previous.isFetching != current.isFetching ||
-                    previous.isValidating != current.isValidating,
-                builder: (context, state) {
-                  final itemInfo = state.materialDetails[materialQueryInfo];
-                  if (state.isFetching || state.isValidating) {
-                    return SizedBox(
-                      key: const Key('price-loading'),
-                      width: 40,
-                      child: LoadingShimmer.tile(),
-                    );
-                  }
-                  if (itemInfo != null) {
-                    final priceAggregate = PriceAggregate(
-                      price: itemInfo.price,
-                      materialInfo: itemInfo.info,
-                      salesOrgConfig:
-                          context.read<SalesOrgBloc>().state.configs,
-                      quantity: 1,
-                      zmgMaterialCountOnCart:
-                          context.read<CartBloc>().state.zmgMaterialCount,
-                      isOverride: false,
-                    );
-
-                    return Text(
-                      priceAggregate.display(PriceType.unitPrice),
-                      style: const TextStyle(
-                        color: ZPColors.darkerGreen,
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    );
-                  }
-
-                  return const Text(
-                    'NA',
-                    style: TextStyle(
-                      color: ZPColors.darkerGreen,
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  );
-                },
+              info: _MaterialPriceInfo(
+                materialQueryInfo: materialQueryInfo, 
+                priceType: PriceType.unitPrice,
               ),
             ),
             const SizedBox(height: 5),
@@ -248,6 +213,66 @@ class _MaterialItemInfo extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+}
+
+class _MaterialPriceInfo extends StatelessWidget {
+  final MaterialQueryInfo materialQueryInfo;
+  final PriceType priceType;
+  const _MaterialPriceInfo({
+    Key? key,
+    required this.materialQueryInfo,
+    required this.priceType,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<MaterialPriceDetailBloc,
+      MaterialPriceDetailState>(
+      buildWhen: (previous, current) =>
+          previous.isFetching != current.isFetching ||
+          previous.isValidating != current.isValidating,
+      builder: (context, state) {
+        final itemInfo = state.materialDetails[materialQueryInfo];
+        if (state.isFetching || state.isValidating) {
+          return SizedBox(
+            key: const Key('price-loading'),
+            width: 40,
+            child: LoadingShimmer.tile(),
+          );
+        }
+        if (itemInfo != null) {
+          final priceAggregate = PriceAggregate(
+            price: itemInfo.price,
+            materialInfo: itemInfo.info,
+            salesOrgConfig:
+                context.read<SalesOrgBloc>().state.configs,
+            quantity: 1,
+            zmgMaterialCountOnCart:
+                context.read<CartBloc>().state.zmgMaterialCount,
+            isOverride: false,
+          );
+
+          return Text(
+            priceAggregate.display(priceType),
+            style: const TextStyle(
+              color: ZPColors.darkerGreen,
+              fontSize: 14.0,
+              fontWeight: FontWeight.w400,
+            ),
+          );
+        }
+
+        return const Text(
+          'NA',
+          style: TextStyle(
+            color: ZPColors.darkerGreen,
+            fontSize: 14.0,
+            fontWeight: FontWeight.w400,
+          ),
+        );
+      },
     );
   }
 }
