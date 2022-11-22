@@ -91,9 +91,11 @@ class CartPage extends StatelessWidget {
                             ],
                           ),
                           ElevatedButton(
-                            onPressed: () {
-                              context.router.pushNamed('order_summary');
-                            },
+                            onPressed: state.selectedItemList.isEmpty
+                                ? null
+                                : () {
+                                    context.router.pushNamed('order_summary');
+                                  },
                             child: const Text('Order Summary').tr(),
                           ),
                         ],
@@ -156,7 +158,7 @@ class _TotalSection extends StatelessWidget {
         final taxCode = context.read<SalesOrgBloc>().state.salesOrg.taxCode;
 
         return SizedBox(
-          width: 150,
+          width: 200,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

@@ -19,7 +19,6 @@ class QuantityInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SizedBox(
       child: Row(
         children: [
@@ -27,12 +26,14 @@ class QuantityInput extends StatelessWidget {
             pressed: () {
               FocusScope.of(context).unfocus();
               final value = int.parse(controller.text) - 1;
-              final text = value.toString();
-              controller.value = TextEditingValue(
-                text: text,
-                selection: TextSelection.collapsed(offset: text.length),
-              );
-              minusPressed(value);
+              if (value > 0) {
+                final text = value.toString();
+                controller.value = TextEditingValue(
+                  text: text,
+                  selection: TextSelection.collapsed(offset: text.length),
+                );
+                minusPressed(value);
+              }
             },
             icon: Icons.remove,
           ),
@@ -59,19 +60,21 @@ class QuantityInput extends StatelessWidget {
                 isDense: true,
                 contentPadding: EdgeInsets.zero,
               ),
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.titleSmall,
             ),
           ),
           _QuantityIcon(
             pressed: () {
               FocusScope.of(context).unfocus();
               final value = int.parse(controller.text) + 1;
-              final text = value.toString();
-              controller.value = TextEditingValue(
-                text: text,
-                selection: TextSelection.collapsed(offset: text.length),
-              );
-              addPressed(value);
+              if (value < 100000) {
+                final text = value.toString();
+                controller.value = TextEditingValue(
+                  text: text,
+                  selection: TextSelection.collapsed(offset: text.length),
+                );
+                addPressed(value);
+              }
             },
             icon: Icons.add,
           ),
@@ -94,10 +97,9 @@ class _QuantityIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         minimumSize: const Size(20, 20),
-        fixedSize: const Size(20, 20),
         padding: EdgeInsets.zero,
-        backgroundColor: ZPColors.primary,
       ),
       child: Icon(
         icon,

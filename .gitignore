@@ -59,3 +59,4 @@ tests.output
 /windows/flutter/generated_plugin_registrant.h
 /windows/flutter/generated_plugins.cmake
 
+android/local.properties
