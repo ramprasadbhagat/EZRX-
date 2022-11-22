@@ -7,7 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'ship_to_code_bloc.freezed.dart';
+
 part 'ship_to_code_event.dart';
+
 part 'ship_to_code_state.dart';
 
 class ShipToCodeBloc extends Bloc<ShipToCodeEvent, ShipToCodeState> {
@@ -36,17 +38,15 @@ class ShipToCodeBloc extends Bloc<ShipToCodeEvent, ShipToCodeState> {
           },
           (shipToCode) {
             return e.shipToInfos.firstWhere(
-              (e) => shipToCode == e.shipToCustomerCode,
-              orElse: () =>
-                  shipToCode.isEmpty ? ShipToInfo.empty() : e.defaultShipToInfo,
+              (e) =>
+                  shipToCode.isNotEmpty && shipToCode == e.shipToCustomerCode,
+              orElse: () => e.defaultShipToInfo,
             );
           },
         );
         add(ShipToCodeEvent.selected(shipToInfo: shipToInfo));
       },
-      initialized: (e) async {
-        emit(ShipToCodeState.initial());
-      },
+      initialized: (e) async => emit(ShipToCodeState.initial()),
       updateSearchKey: (e) {
         emit(state.copyWith(searchKey: SearchKey.search(e.searchKey)));
       },

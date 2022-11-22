@@ -184,7 +184,7 @@ void main() {
     test('Check if state does not have DefaultShipToInfo', () {
       final customerCodeState = CustomerCodeState.initial();
       expect(customerCodeState.haveShipToInfo, false);
-      expect(customerCodeState.defaultShipToInfo, null);
+      expect(customerCodeState.defaultShipToInfo, ShipToInfo.empty());
     });
 
     test('Check if state has DefaultShipToInfo in first index', () {

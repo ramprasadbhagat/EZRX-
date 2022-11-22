@@ -54,23 +54,17 @@ class CustomerCodeSelector extends StatelessWidget {
             );
 
         final defaultShipToInfo = state.defaultShipToInfo;
-        if (defaultShipToInfo != null) {
-          context.read<ShipToCodeBloc>().add(
-                ShipToCodeEvent.load(
-                  shipToInfos: state.shipToInfos,
-                ),
-              );
-          context.read<ShipToCodeBloc>().add(
-                ShipToCodeEvent.loadSavedShipToCode(
-                  shipToInfos: state.shipToInfos,
-                  defaultShipToInfo: defaultShipToInfo,
-                ),
-              );
-        } else {
-          context
-              .read<ShipToCodeBloc>()
-              .add(const ShipToCodeEvent.initialized());
-        }
+        context.read<ShipToCodeBloc>().add(
+              ShipToCodeEvent.load(
+                shipToInfos: state.shipToInfos,
+              ),
+            );
+        context.read<ShipToCodeBloc>().add(
+              ShipToCodeEvent.loadSavedShipToCode(
+                shipToInfos: state.shipToInfos,
+                defaultShipToInfo: defaultShipToInfo,
+              ),
+            );
       },
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {

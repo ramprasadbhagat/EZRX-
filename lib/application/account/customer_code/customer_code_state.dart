@@ -24,7 +24,7 @@ class CustomerCodeState with _$CustomerCodeState {
         searchKey: SearchKey(''),
       );
 
-  ShipToInfo? get defaultShipToInfo {
+  ShipToInfo get defaultShipToInfo {
     if (haveShipToInfo) {
       final index = customerCodeInfo.shipToInfos
           .indexWhere((element) => element.defaultShipToAddress);
@@ -33,7 +33,7 @@ class CustomerCodeState with _$CustomerCodeState {
           ? customerCodeInfo.shipToInfos.first
           : customerCodeInfo.shipToInfos[index];
     } else {
-      return null;
+      return ShipToInfo.empty();
     }
   }
 
