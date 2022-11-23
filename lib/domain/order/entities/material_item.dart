@@ -74,6 +74,7 @@ class MaterialItem with _$MaterialItem {
       defaultMaterialDescription: defaultMaterialDescription,
       bundles: [],
       isFOCMaterial: false,
+      quantity: 0,
     );
   }
 

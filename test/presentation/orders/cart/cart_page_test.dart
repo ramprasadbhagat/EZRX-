@@ -247,8 +247,8 @@ void main() {
             'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-        expect(listWidget, findsOneWidget);
-        final addWidget = tester.widget(find.byIcon(Icons.add));
+        expect(listWidget, findsAtLeastNWidgets(1));
+        final addWidget = tester.widget(find.byKey(const Key('cartAdd')));
         await tester.tap(find.byWidget(addWidget));
         await tester.pump();
 
@@ -256,7 +256,7 @@ void main() {
             find.byKey(const Key('slidable')), const Offset(-300, 0.0));
         await tester.pump();
 
-        final removeWidget = tester.widget(find.byIcon(Icons.delete_outline));
+        final removeWidget = tester.widget(find.byKey(const Key('cartDelete')));
         await tester.tap(find.byWidget(removeWidget));
         await tester.pump();
       });
@@ -279,12 +279,12 @@ void main() {
             'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-        expect(listWidget, findsOneWidget);
-        final addWidget = tester.widget(find.byIcon(Icons.add));
+        expect(listWidget, findsAtLeastNWidgets(1));
+        final addWidget = tester.widget(find.byKey(const Key('cartAdd')));
         await tester.tap(find.byWidget(addWidget));
         await tester.pump();
 
-        final removeWidget = tester.widget(find.byIcon(Icons.remove));
+        final removeWidget = tester.widget(find.byKey(const Key('cartDelete')));
         await tester.tap(find.byWidget(removeWidget));
         await tester.pump();
       });
@@ -307,9 +307,9 @@ void main() {
             'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-        expect(listWidget, findsOneWidget);
+        expect(listWidget, findsAtLeastNWidgets(1));
 
-        final removeWidget = tester.widget(find.byIcon(Icons.remove));
+        final removeWidget = tester.widget(find.byKey(const Key('cartDelete')));
         await tester.tap(find.byWidget(removeWidget));
         await tester.pump();
       });
@@ -394,7 +394,7 @@ void main() {
             'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-        expect(listWidget, findsOneWidget);
+        expect(listWidget, findsAtLeastNWidgets(1));
         final finder = find.byKey(const Key('price-loading'));
         expect(finder, findsNothing);
       });
@@ -429,7 +429,7 @@ void main() {
             'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-        expect(listWidget, findsOneWidget);
+        expect(listWidget, findsAtLeastNWidgets(1));
         final finder = find.byKey(const Key('price-loading'));
         expect(finder, findsNothing);
       });
@@ -471,8 +471,8 @@ void main() {
             'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-        expect(listWidget, findsOneWidget);
-        final removeWidget = tester.widget(find.byIcon(Icons.remove));
+        expect(listWidget, findsAtLeastNWidgets(1));
+        final removeWidget = tester.widget(find.byKey(const Key('cartDelete')));
         await tester.tap(find.byWidget(removeWidget));
 
         await tester.pump();
@@ -506,8 +506,8 @@ void main() {
             'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-        expect(listWidget, findsOneWidget);
-        final removeWidget = tester.widget(find.byIcon(Icons.remove));
+        expect(listWidget, findsAtLeastNWidgets(1));
+        final removeWidget = tester.widget(find.byKey(const Key('cartDelete')));
         await tester.tap(find.byWidget(removeWidget));
 
         await tester.pump();
@@ -541,8 +541,8 @@ void main() {
             'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-        expect(listWidget, findsOneWidget);
-        final removeWidget = tester.widget(find.byIcon(Icons.remove));
+        expect(listWidget, findsAtLeastNWidgets(1));
+        final removeWidget = tester.widget(find.byKey(const Key('cartDelete')));
         await tester.tap(find.byWidget(removeWidget));
 
         await tester.pump();

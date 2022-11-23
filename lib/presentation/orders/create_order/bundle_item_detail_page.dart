@@ -161,6 +161,7 @@ class BundleItemDetailPage extends StatelessWidget {
           discountedMaterialCount: cartBloc.state.zmgMaterialCount,
           isOverride: false,
           bundle: bundle,
+          addedBonusList: [],
         );
 
         return priceAggregate;
@@ -228,6 +229,8 @@ class _ListContent extends StatelessWidget {
             ),
           ),
           QuantityInput(
+            quantityAddKey: const Key('bundleAdd'),
+            quantityDeleteKey: const Key('bundleDelete'),
             quantityTextKey:
                 Key('$bundleCode${materialInfo.materialNumber.getValue()}'),
             onFieldChange: (int value) {

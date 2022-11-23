@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_configs_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_info_dto.dart';
@@ -107,6 +108,90 @@ class CartStorage {
         if (existingItem.materialDto.materialNumber == materialNumber) {
           existingItem.priceDto = cartDto;
           existingItem.isOverride = true;
+
+          await _cartBox.put(entry.key, existingItem);
+          break;
+        }
+      }
+    } catch (e) {
+      throw CacheException(message: e.toString());
+    }
+  }
+
+//Adding and updating the bonus list
+  Future updateBonus({
+    required PriceAggregateDto cartDto,
+    required MaterialInfo bonusItem,
+    required int quantity,
+    required bool isUpdateFromCart,
+  }) async {
+    try {
+      for (final entry in _cartBox.toMap().entries) {
+        final existingItem = entry.value as PriceAggregateDto;
+
+        if (existingItem.materialDto.materialNumber ==
+            cartDto.materialDto.materialNumber) {
+          var isUpdate = false;
+
+          for (var i = 0; i < existingItem.bonusItem.length; i++) {
+            if (existingItem.bonusItem[i].materialNumber ==
+                bonusItem.materialNumber.getOrCrash()) {
+              isUpdate = true;
+              // cartDto;
+              final bonus =
+                  existingItem.bonusItem.map((e) => e.toJson()).toList();
+              existingItem.bonusItem =
+                  bonus.map((e) => MaterialDto.fromJson(e)).toList();
+
+              isUpdateFromCart
+                  ? bonus[i]['quantity'] = quantity
+                  : bonus[i]['quantity'] += quantity;
+              existingItem.bonusItem =
+                  bonus.map((e) => MaterialDto.fromJson(e)).toList();
+            }
+          }
+          if (!isUpdate) {
+            final tempBonus = MaterialDto.fromDomain(bonusItem).toJson();
+            tempBonus['quantity'] = quantity;
+            existingItem.bonusItem.add(MaterialDto.fromJson(tempBonus));
+          }
+          await _cartBox.put(entry.key, existingItem);
+          break;
+        }
+      }
+    } catch (e) {
+      throw CacheException(message: e.toString());
+    }
+  }
+
+//Adelete from bonus list
+  Future deleteBonus({
+    required PriceAggregateDto cartDto,
+    required MaterialInfo bonusItem,
+    required bool isUpdateFromCart,
+  }) async {
+    try {
+      for (final entry in _cartBox.toMap().entries) {
+        final existingItem = entry.value as PriceAggregateDto;
+
+        if (existingItem.materialDto.materialNumber ==
+            cartDto.materialDto.materialNumber) {
+          var isUpdate = false;
+
+          for (var i = 0; i < existingItem.bonusItem.length; i++) {
+            if (existingItem.bonusItem[i].materialNumber ==
+                bonusItem.materialNumber.getOrCrash()) {
+              isUpdate = true;
+              // cartDto;
+              final bonus =
+                  existingItem.bonusItem.map((e) => e.toJson()).toList();
+              existingItem.bonusItem =
+                  bonus.map((e) => MaterialDto.fromJson(e)).toList();
+              bonus.removeAt(i);
+              existingItem.bonusItem =
+                  bonus.map((e) => MaterialDto.fromJson(e)).toList();
+            }
+          }
 
           await _cartBox.put(entry.key, existingItem);
           break;

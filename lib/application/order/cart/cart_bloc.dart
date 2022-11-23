@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
@@ -298,6 +299,73 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                         cartItemList: state.cartItemList,
                       ),
           ),
+        );
+      },
+      updateBonusItem: (_updateBonusItem e) async {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetching: false,
+          ),
+        );
+
+        final failureOrSuccess = await cartRepository.updateBonusItem(
+          bonusItem: e.bonusItem,
+          quantity: e.bonusItemCount,
+          cartItem: e.cartItem,
+          isUpdatedFromCart: e.isUpdateFromCart,
+        );
+        failureOrSuccess.fold(
+          (apiFailure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (cartItemList) {
+            emit(
+              state.copyWith(
+                cartItemList: cartItemList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      },
+      deleteBonusItem: (e) async {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetching: false,
+          ),
+        );
+
+        final failureOrSuccess = await cartRepository.deleteBonusItem(
+          bonusItem: e.bonusItem,
+          cartItem: e.cartItem,
+          isUpdateFromCart: e.isUpdateFromCart,
+        );
+        failureOrSuccess.fold(
+          (apiFailure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (cartItemList) {
+            emit(
+              state.copyWith(
+                cartItemList: cartItemList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+          },
         );
       },
     );

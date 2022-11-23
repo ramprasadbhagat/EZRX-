@@ -54,6 +54,7 @@ class FavouriteListTile extends StatelessWidget {
               discountedMaterialCount: 0,
               isOverride: false,
               bundle: Bundle.empty(),
+              addedBonusList: [],
             );
 
             return ListTile(

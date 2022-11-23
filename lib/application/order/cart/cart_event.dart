@@ -25,4 +25,15 @@ class CartEvent with _$CartEvent {
     required PriceAggregate item,
   }) = _updateSelectedItem;
   const factory CartEvent.updateSelectAllItems() = _updateSelectAllItems;
+  const factory CartEvent.updateBonusItem({
+    required int bonusItemCount,
+    required PriceAggregate cartItem,
+    required MaterialInfo bonusItem,
+    required bool isUpdateFromCart,
+  }) = _updateBonusItem;
+  const factory CartEvent.deleteBonusItem({
+    required PriceAggregate cartItem,
+    required MaterialInfo bonusItem,
+    required bool isUpdateFromCart,
+  }) = _deleteBonusItem;
 }

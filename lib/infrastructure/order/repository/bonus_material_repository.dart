@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_org_ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
@@ -30,8 +30,8 @@ class BonusMaterialRepository implements IBonusMaterialRepository {
     required User user,
     required SalesOrganisationConfigs configs,
     required String searchKey,
-    required SalesOrgCustomerInfo customerInfo,
-    required SalesOrgShipToInfo shipInfo,
+    required CustomerCodeInfo customerInfo,
+    required ShipToInfo shipInfo,
     required SalesOrganisation salesOrganisation,
     required String pickAndPack,
   }) async {
@@ -54,17 +54,16 @@ class BonusMaterialRepository implements IBonusMaterialRepository {
       final List<MaterialInfo> bonusMaterial;
       bonusMaterial = user.role.type.isSalesRep
           ? await remoteDataSource.customerMaterialsForSalesRep(
-              gimmickMaterial:
-                  configs.enableGimmickMaterial, // gimmickMaterial,
+              gimmickMaterial: configs.enableGimmickMaterial,
               pickandpack: pickAndPack,
               salesOrganisation: salesOrganisation.salesOrg.getOrCrash(),
               searchKey: searchKey,
               username: user.username.getValue(),
               shipTo: shipInfo.shipToCustomerCode,
-              soldTo: customerInfo.customerCodeSoldTo.getOrCrash(),
+              soldTo: customerInfo.customerCodeSoldTo,
             )
           : await remoteDataSource.getadditionalBonus(
-              customerCodeSoldTo: customerInfo.customerCodeSoldTo.getOrCrash(),
+              customerCodeSoldTo: customerInfo.customerCodeSoldTo,
               salesOrganisation: salesOrganisation.salesOrg.getOrCrash(),
               searchKey: searchKey,
               shipToCode: shipInfo.shipToCustomerCode,

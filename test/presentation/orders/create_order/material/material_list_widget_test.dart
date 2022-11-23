@@ -108,6 +108,7 @@ void main() {
   ];
 
   final fakematerialInfo = MaterialInfo(
+      quantity: 0,
       materialNumber: fakeMaterialNumber,
       materialDescription: "Reag Cup 15ml 1'S",
       governmentMaterialCode: '',
@@ -263,6 +264,7 @@ void main() {
           nextPageIndex: 2,
           materialList: <MaterialInfo>[
             MaterialInfo(
+                quantity: 0,
                 materialNumber: fakeMaterialNumber,
                 materialDescription: "Reag Cup 15ml 1'S",
                 governmentMaterialCode: '',

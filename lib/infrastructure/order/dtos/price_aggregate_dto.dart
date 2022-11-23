@@ -17,6 +17,7 @@ class PriceAggregateDto {
     required this.zmgMaterialCountOnCart,
     required this.isOverride,
     required this.bundleDto,
+    required this.bonusItem,
   });
 
   @HiveField(0, defaultValue: _emptyConstMaterialDto)
@@ -33,6 +34,8 @@ class PriceAggregateDto {
   bool isOverride;
   @HiveField(6, defaultValue: _emptyBundleDto)
   BundleDto bundleDto;
+  @HiveField(7, defaultValue: [])
+  List<MaterialDto> bonusItem;
 
   factory PriceAggregateDto.fromDomain(PriceAggregate cart) {
     return PriceAggregateDto(
@@ -45,6 +48,11 @@ class PriceAggregateDto {
       zmgMaterialCountOnCart: cart.discountedMaterialCount,
       isOverride: cart.isOverride,
       bundleDto: BundleDto.fromDomain(cart.bundle),
+      bonusItem: cart.addedBonusList
+          .map(
+            (e) => MaterialDto.fromDomain(e),
+          )
+          .toList(),
     );
   }
 
@@ -59,6 +67,7 @@ class PriceAggregateDto {
       discountedMaterialCount: zmgMaterialCountOnCart,
       isOverride: isOverride,
       bundle: bundleDto.toDomain(),
+      addedBonusList: bonusItem.map((e) => e.toDomain()).toList(),
     );
   }
 }
@@ -84,6 +93,7 @@ const MaterialDto _emptyConstMaterialDto = MaterialDto(
   therapeuticClass: '',
   unitOfMeasurement: '',
   isFOCMaterial: false,
+  quantity: 0,
 );
 
 const PriceDto _emptyPriceDto = PriceDto(

@@ -179,6 +179,7 @@ class HistoryDetails extends StatelessWidget {
         discountedMaterialCount: cartBloc.state.zmgMaterialCount,
         isOverride: false,
         bundle: Bundle.empty(),
+        addedBonusList: [],
       );
       cartBloc.add(CartEvent.addToCart(item: priceAggregate));
 

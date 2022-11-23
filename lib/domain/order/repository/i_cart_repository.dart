@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
@@ -43,5 +44,18 @@ abstract class ICartRepository {
     required List<PriceAggregate> cartItemList,
     required List<MaterialNumber> selectedItemsMaterialNumber,
     required PriceAggregate item,
+  });
+
+  Future<Either<ApiFailure, List<PriceAggregate>>> updateBonusItem({
+    required PriceAggregate cartItem,
+    required int quantity,
+    required MaterialInfo bonusItem,
+    required bool isUpdatedFromCart,
+  });
+
+  Future<Either<ApiFailure, List<PriceAggregate>>> deleteBonusItem({
+    required PriceAggregate cartItem,
+    required MaterialInfo bonusItem,
+    required bool isUpdateFromCart,
   });
 }

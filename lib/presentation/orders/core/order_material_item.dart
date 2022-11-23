@@ -254,6 +254,7 @@ class _MaterialPriceInfo extends StatelessWidget {
                 context.read<CartBloc>().state.zmgMaterialCount,
             isOverride: false,
             bundle: Bundle.empty(),
+            addedBonusList: [],
           );
 
           return Text(

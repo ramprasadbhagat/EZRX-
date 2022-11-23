@@ -83,6 +83,8 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             QuantityInput(
+              quantityAddKey: const Key('cartItemAdd'),
+              quantityDeleteKey: const Key('cartItemDelete'),
               quantityTextKey: const Key('item'),
               controller: _controller,
               onFieldChange: widget.onQuantityChanged,

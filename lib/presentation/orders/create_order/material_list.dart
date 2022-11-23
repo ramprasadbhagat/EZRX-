@@ -277,6 +277,7 @@ class _ListContent extends StatelessWidget {
                     context.read<CartBloc>().state.zmgMaterialCount,
                 isOverride: false,
                 bundle: Bundle.empty(),
+                addedBonusList: [],
               ),
             );
           }
@@ -381,6 +382,7 @@ class _PriceLabel extends StatelessWidget {
                 : context.read<CartBloc>().state.zmgMaterialCount,
             isOverride: false,
             bundle: Bundle.empty(),
+            addedBonusList: [],
           );
 
           return Column(

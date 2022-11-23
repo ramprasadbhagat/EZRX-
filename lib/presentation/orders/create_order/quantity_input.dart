@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/quantity_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -8,6 +8,8 @@ class QuantityInput extends StatelessWidget {
   final Function(int) onFieldChange;
   final Function(int) minusPressed;
   final Function(int) addPressed;
+  final Key quantityAddKey;
+  final Key quantityDeleteKey;
   const QuantityInput({
     Key? key,
     required this.controller,
@@ -15,6 +17,8 @@ class QuantityInput extends StatelessWidget {
     required this.onFieldChange,
     required this.minusPressed,
     required this.addPressed,
+    required this.quantityAddKey,
+    required this.quantityDeleteKey,
   }) : super(key: key);
 
   @override
@@ -22,7 +26,8 @@ class QuantityInput extends StatelessWidget {
     return SizedBox(
       child: Row(
         children: [
-          _QuantityIcon(
+          QuantityIcon(
+            key: quantityDeleteKey,
             pressed: () {
               FocusScope.of(context).unfocus();
               final value = int.parse(controller.text) - 1;
@@ -63,7 +68,8 @@ class QuantityInput extends StatelessWidget {
               style: Theme.of(context).textTheme.titleSmall,
             ),
           ),
-          _QuantityIcon(
+          QuantityIcon(
+            key: quantityAddKey,
             pressed: () {
               FocusScope.of(context).unfocus();
               final value = int.parse(controller.text) + 1;
@@ -80,33 +86,6 @@ class QuantityInput extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _QuantityIcon extends StatelessWidget {
-  final Function pressed;
-  final IconData icon;
-  const _QuantityIcon({
-    Key? key,
-    required this.pressed,
-    required this.icon,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        minimumSize: const Size(20, 20),
-        padding: EdgeInsets.zero,
-      ),
-      child: Icon(
-        icon,
-        color: ZPColors.white,
-        size: 15,
-      ),
-      onPressed: () => pressed(),
     );
   }
 }

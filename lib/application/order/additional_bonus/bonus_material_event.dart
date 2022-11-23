@@ -7,9 +7,14 @@ class BonusMaterialEvent with _$BonusMaterialEvent {
     required User user,
     required SalesOrganisationConfigs configs,
     required String searchKey,
-    required SalesOrgCustomerInfo customerInfo,
-    required SalesOrgShipToInfo shipInfo,
+    required CustomerCodeInfo customerInfo,
+    required ShipToInfo shipInfo,
     required SalesOrganisation salesOrganisation,
     required String pickAndPack,
   }) = _Fetch;
+
+  const factory BonusMaterialEvent.updateSearchKey({
+    required String searchKey,
+  }) = _UpdateSearchKey;
+  const factory BonusMaterialEvent.reset() = _Reset;
 }

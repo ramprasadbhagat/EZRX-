@@ -139,6 +139,7 @@ class SavedOrderDetailPage extends StatelessWidget {
           discountedMaterialCount: cartBloc.state.zmgMaterialCount,
           isOverride: false,
           bundle: Bundle.empty(),
+          addedBonusList: [],
         );
 
         return priceAggregate;

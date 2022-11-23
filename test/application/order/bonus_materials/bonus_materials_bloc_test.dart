@@ -4,10 +4,10 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_org_ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -79,29 +79,41 @@ void main() {
           return BonusMaterialBloc(
               bonusMaterialRepository: mockBonusMaterialRepository);
         },
-        act: (BonusMaterialBloc bloc) => bloc.add(BonusMaterialEvent.fetch(
-          user: mockUser,
-          configs: SalesOrganisationConfigs.empty(),
-          customerInfo: SalesOrgCustomerInfo.empty(),
-          pickAndPack: 'include',
-          salesOrganisation: SalesOrganisation.empty(),
-          searchKey: '',
-          shipInfo: SalesOrgShipToInfo.empty(),
-        )),
+        act: (BonusMaterialBloc bloc) => bloc.add(
+          BonusMaterialEvent.fetch(
+            user: mockUser,
+            configs: SalesOrganisationConfigs.empty(),
+            customerInfo: CustomerCodeInfo.empty(),
+            pickAndPack: 'include',
+            salesOrganisation: SalesOrganisation.empty(),
+            searchKey: '',
+            shipInfo: ShipToInfo.empty(),
+          ),
+        ),
         setUp: () => when(() => mockBonusMaterialRepository.getMaterialBonus(
               user: mockUser,
               configs: SalesOrganisationConfigs.empty(),
-              customerInfo: SalesOrgCustomerInfo.empty(),
+              customerInfo: CustomerCodeInfo.empty(),
               pickAndPack: 'include',
               salesOrganisation: SalesOrganisation.empty(),
               searchKey: '',
-              shipInfo: SalesOrgShipToInfo.empty(),
+              shipInfo: ShipToInfo.empty(),
             )).thenAnswer(
           (invocation) async => const Right([]),
         ),
         expect: () => [
-          BonusMaterialState.initial()
-              .copyWith(failureOrSuccessOption: none(), bonus: [])
+          BonusMaterialState.initial().copyWith(
+            failureOrSuccessOption: none(),
+            bonus: [],
+            isFetching: true,
+            isStarting: false,
+          ),
+          BonusMaterialState.initial().copyWith(
+            failureOrSuccessOption: none(),
+            bonus: [],
+            isFetching: false,
+            isStarting: false,
+          )
         ],
       );
       blocTest<BonusMaterialBloc, BonusMaterialState>(
@@ -110,31 +122,41 @@ void main() {
           return BonusMaterialBloc(
               bonusMaterialRepository: mockBonusMaterialRepository);
         },
-        act: (BonusMaterialBloc bloc) => bloc.add(BonusMaterialEvent.fetch(
-          user: mockUser,
-          configs: SalesOrganisationConfigs.empty(),
-          customerInfo: SalesOrgCustomerInfo.empty(),
-          pickAndPack: 'include',
-          salesOrganisation: SalesOrganisation.empty(),
-          searchKey: '',
-          shipInfo: SalesOrgShipToInfo.empty(),
-        )),
+        act: (BonusMaterialBloc bloc) => bloc.add(
+          BonusMaterialEvent.fetch(
+            user: mockUser,
+            configs: SalesOrganisationConfigs.empty(),
+            customerInfo: CustomerCodeInfo.empty(),
+            pickAndPack: 'include',
+            salesOrganisation: SalesOrganisation.empty(),
+            searchKey: '',
+            shipInfo: ShipToInfo.empty(),
+          ),
+        ),
         setUp: () => when(() => mockBonusMaterialRepository.getMaterialBonus(
               user: mockUser,
               configs: SalesOrganisationConfigs.empty(),
-              customerInfo: SalesOrgCustomerInfo.empty(),
+              customerInfo: CustomerCodeInfo.empty(),
               pickAndPack: 'include',
               salesOrganisation: SalesOrganisation.empty(),
               searchKey: '',
-              shipInfo: SalesOrgShipToInfo.empty(),
+              shipInfo: ShipToInfo.empty(),
             )).thenAnswer(
           (invocation) async => Right([MaterialInfo.empty()]),
         ),
         expect: () => [
-          BonusMaterialState.initial()
-              .copyWith(failureOrSuccessOption: none(), bonus: []),
           BonusMaterialState.initial().copyWith(
-              failureOrSuccessOption: none(), bonus: [MaterialInfo.empty()])
+            failureOrSuccessOption: none(),
+            bonus: [],
+            isStarting: false,
+            isFetching: true,
+          ),
+          BonusMaterialState.initial().copyWith(
+            failureOrSuccessOption: none(),
+            bonus: [MaterialInfo.empty()],
+            isStarting: false,
+            isFetching: false,
+          )
         ],
       );
 
@@ -149,11 +171,11 @@ void main() {
             () => mockBonusMaterialRepository.getMaterialBonus(
               user: mockUser,
               configs: SalesOrganisationConfigs.empty(),
-              customerInfo: SalesOrgCustomerInfo.empty(),
+              customerInfo: CustomerCodeInfo.empty(),
               pickAndPack: 'include',
               salesOrganisation: SalesOrganisation.empty(),
               searchKey: '',
-              shipInfo: SalesOrgShipToInfo.empty(),
+              shipInfo: ShipToInfo.empty(),
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -165,23 +187,30 @@ void main() {
           BonusMaterialEvent.fetch(
             user: mockUser,
             configs: SalesOrganisationConfigs.empty(),
-            customerInfo: SalesOrgCustomerInfo.empty(),
+            customerInfo: CustomerCodeInfo.empty(),
             pickAndPack: 'include',
             salesOrganisation: SalesOrganisation.empty(),
             searchKey: '',
-            shipInfo: SalesOrgShipToInfo.empty(),
+            shipInfo: ShipToInfo.empty(),
           ),
         ),
         expect: () => [
-          BonusMaterialState.initial()
-              .copyWith(failureOrSuccessOption: none(), bonus: []),
           BonusMaterialState.initial().copyWith(
-              failureOrSuccessOption: optionOf(
-                const Left(
-                  ApiFailure.other('fake-error'),
-                ),
+            failureOrSuccessOption: none(),
+            bonus: [],
+            isStarting: false,
+            isFetching: true,
+          ),
+          BonusMaterialState.initial().copyWith(
+            failureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('fake-error'),
               ),
-              bonus: []),
+            ),
+            bonus: [],
+            isStarting: false,
+            isFetching: false,
+          ),
         ],
       );
     },

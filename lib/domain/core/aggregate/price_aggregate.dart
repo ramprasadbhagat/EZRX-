@@ -21,6 +21,7 @@ class PriceAggregate with _$PriceAggregate {
     required int quantity,
     required int discountedMaterialCount,
     required bool isOverride,
+    required List<MaterialInfo> addedBonusList,
   }) = _PriceAggregate;
 
   factory PriceAggregate.empty() => PriceAggregate(
@@ -31,6 +32,7 @@ class PriceAggregate with _$PriceAggregate {
         quantity: 1,
         discountedMaterialCount: 0,
         isOverride: false,
+        addedBonusList: [],
       );
 
   OrderTemplateMaterial toOrderTemplateMaterial() {

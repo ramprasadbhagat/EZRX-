@@ -23,11 +23,13 @@ mixin _$BonusMaterialEvent {
             User user,
             SalesOrganisationConfigs configs,
             String searchKey,
-            SalesOrgCustomerInfo customerInfo,
-            SalesOrgShipToInfo shipInfo,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
             String pickAndPack)
         fetch,
+    required TResult Function(String searchKey) updateSearchKey,
+    required TResult Function() reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,11 +39,13 @@ mixin _$BonusMaterialEvent {
             User user,
             SalesOrganisationConfigs configs,
             String searchKey,
-            SalesOrgCustomerInfo customerInfo,
-            SalesOrgShipToInfo shipInfo,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
+    TResult? Function(String searchKey)? updateSearchKey,
+    TResult? Function()? reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,11 +55,13 @@ mixin _$BonusMaterialEvent {
             User user,
             SalesOrganisationConfigs configs,
             String searchKey,
-            SalesOrgCustomerInfo customerInfo,
-            SalesOrgShipToInfo shipInfo,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function()? reset,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -63,18 +69,24 @@ mixin _$BonusMaterialEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
+    required TResult Function(_Reset value) reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult? Function(_Reset value)? reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -141,11 +153,13 @@ class _$_Initialized implements _Initialized {
             User user,
             SalesOrganisationConfigs configs,
             String searchKey,
-            SalesOrgCustomerInfo customerInfo,
-            SalesOrgShipToInfo shipInfo,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
             String pickAndPack)
         fetch,
+    required TResult Function(String searchKey) updateSearchKey,
+    required TResult Function() reset,
   }) {
     return initialized();
   }
@@ -158,11 +172,13 @@ class _$_Initialized implements _Initialized {
             User user,
             SalesOrganisationConfigs configs,
             String searchKey,
-            SalesOrgCustomerInfo customerInfo,
-            SalesOrgShipToInfo shipInfo,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
+    TResult? Function(String searchKey)? updateSearchKey,
+    TResult? Function()? reset,
   }) {
     return initialized?.call();
   }
@@ -175,11 +191,13 @@ class _$_Initialized implements _Initialized {
             User user,
             SalesOrganisationConfigs configs,
             String searchKey,
-            SalesOrgCustomerInfo customerInfo,
-            SalesOrgShipToInfo shipInfo,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -193,6 +211,8 @@ class _$_Initialized implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
+    required TResult Function(_Reset value) reset,
   }) {
     return initialized(this);
   }
@@ -202,6 +222,8 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult? Function(_Reset value)? reset,
   }) {
     return initialized?.call(this);
   }
@@ -211,6 +233,8 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -233,15 +257,15 @@ abstract class _$$_FetchCopyWith<$Res> {
       {User user,
       SalesOrganisationConfigs configs,
       String searchKey,
-      SalesOrgCustomerInfo customerInfo,
-      SalesOrgShipToInfo shipInfo,
+      CustomerCodeInfo customerInfo,
+      ShipToInfo shipInfo,
       SalesOrganisation salesOrganisation,
       String pickAndPack});
 
   $UserCopyWith<$Res> get user;
   $SalesOrganisationConfigsCopyWith<$Res> get configs;
-  $SalesOrgCustomerInfoCopyWith<$Res> get customerInfo;
-  $SalesOrgShipToInfoCopyWith<$Res> get shipInfo;
+  $CustomerCodeInfoCopyWith<$Res> get customerInfo;
+  $ShipToInfoCopyWith<$Res> get shipInfo;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
 
@@ -279,11 +303,11 @@ class __$$_FetchCopyWithImpl<$Res>
       customerInfo: null == customerInfo
           ? _value.customerInfo
           : customerInfo // ignore: cast_nullable_to_non_nullable
-              as SalesOrgCustomerInfo,
+              as CustomerCodeInfo,
       shipInfo: null == shipInfo
           ? _value.shipInfo
           : shipInfo // ignore: cast_nullable_to_non_nullable
-              as SalesOrgShipToInfo,
+              as ShipToInfo,
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -313,16 +337,16 @@ class __$$_FetchCopyWithImpl<$Res>
 
   @override
   @pragma('vm:prefer-inline')
-  $SalesOrgCustomerInfoCopyWith<$Res> get customerInfo {
-    return $SalesOrgCustomerInfoCopyWith<$Res>(_value.customerInfo, (value) {
+  $CustomerCodeInfoCopyWith<$Res> get customerInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerInfo, (value) {
       return _then(_value.copyWith(customerInfo: value));
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $SalesOrgShipToInfoCopyWith<$Res> get shipInfo {
-    return $SalesOrgShipToInfoCopyWith<$Res>(_value.shipInfo, (value) {
+  $ShipToInfoCopyWith<$Res> get shipInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipInfo, (value) {
       return _then(_value.copyWith(shipInfo: value));
     });
   }
@@ -355,9 +379,9 @@ class _$_Fetch implements _Fetch {
   @override
   final String searchKey;
   @override
-  final SalesOrgCustomerInfo customerInfo;
+  final CustomerCodeInfo customerInfo;
   @override
-  final SalesOrgShipToInfo shipInfo;
+  final ShipToInfo shipInfo;
   @override
   final SalesOrganisation salesOrganisation;
   @override
@@ -405,11 +429,13 @@ class _$_Fetch implements _Fetch {
             User user,
             SalesOrganisationConfigs configs,
             String searchKey,
-            SalesOrgCustomerInfo customerInfo,
-            SalesOrgShipToInfo shipInfo,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
             String pickAndPack)
         fetch,
+    required TResult Function(String searchKey) updateSearchKey,
+    required TResult Function() reset,
   }) {
     return fetch(user, configs, searchKey, customerInfo, shipInfo,
         salesOrganisation, pickAndPack);
@@ -423,11 +449,13 @@ class _$_Fetch implements _Fetch {
             User user,
             SalesOrganisationConfigs configs,
             String searchKey,
-            SalesOrgCustomerInfo customerInfo,
-            SalesOrgShipToInfo shipInfo,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
+    TResult? Function(String searchKey)? updateSearchKey,
+    TResult? Function()? reset,
   }) {
     return fetch?.call(user, configs, searchKey, customerInfo, shipInfo,
         salesOrganisation, pickAndPack);
@@ -441,11 +469,13 @@ class _$_Fetch implements _Fetch {
             User user,
             SalesOrganisationConfigs configs,
             String searchKey,
-            SalesOrgCustomerInfo customerInfo,
-            SalesOrgShipToInfo shipInfo,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -460,6 +490,8 @@ class _$_Fetch implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
+    required TResult Function(_Reset value) reset,
   }) {
     return fetch(this);
   }
@@ -469,6 +501,8 @@ class _$_Fetch implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult? Function(_Reset value)? reset,
   }) {
     return fetch?.call(this);
   }
@@ -478,6 +512,8 @@ class _$_Fetch implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -492,16 +528,16 @@ abstract class _Fetch implements BonusMaterialEvent {
       {required final User user,
       required final SalesOrganisationConfigs configs,
       required final String searchKey,
-      required final SalesOrgCustomerInfo customerInfo,
-      required final SalesOrgShipToInfo shipInfo,
+      required final CustomerCodeInfo customerInfo,
+      required final ShipToInfo shipInfo,
       required final SalesOrganisation salesOrganisation,
       required final String pickAndPack}) = _$_Fetch;
 
   User get user;
   SalesOrganisationConfigs get configs;
   String get searchKey;
-  SalesOrgCustomerInfo get customerInfo;
-  SalesOrgShipToInfo get shipInfo;
+  CustomerCodeInfo get customerInfo;
+  ShipToInfo get shipInfo;
   SalesOrganisation get salesOrganisation;
   String get pickAndPack;
   @JsonKey(ignore: true)
@@ -510,10 +546,320 @@ abstract class _Fetch implements BonusMaterialEvent {
 }
 
 /// @nodoc
+abstract class _$$_UpdateSearchKeyCopyWith<$Res> {
+  factory _$$_UpdateSearchKeyCopyWith(
+          _$_UpdateSearchKey value, $Res Function(_$_UpdateSearchKey) then) =
+      __$$_UpdateSearchKeyCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String searchKey});
+}
+
+/// @nodoc
+class __$$_UpdateSearchKeyCopyWithImpl<$Res>
+    extends _$BonusMaterialEventCopyWithImpl<$Res, _$_UpdateSearchKey>
+    implements _$$_UpdateSearchKeyCopyWith<$Res> {
+  __$$_UpdateSearchKeyCopyWithImpl(
+      _$_UpdateSearchKey _value, $Res Function(_$_UpdateSearchKey) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? searchKey = null,
+  }) {
+    return _then(_$_UpdateSearchKey(
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateSearchKey implements _UpdateSearchKey {
+  const _$_UpdateSearchKey({required this.searchKey});
+
+  @override
+  final String searchKey;
+
+  @override
+  String toString() {
+    return 'BonusMaterialEvent.updateSearchKey(searchKey: $searchKey)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateSearchKey &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, searchKey);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateSearchKeyCopyWith<_$_UpdateSearchKey> get copyWith =>
+      __$$_UpdateSearchKeyCopyWithImpl<_$_UpdateSearchKey>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            String searchKey,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
+            SalesOrganisation salesOrganisation,
+            String pickAndPack)
+        fetch,
+    required TResult Function(String searchKey) updateSearchKey,
+    required TResult Function() reset,
+  }) {
+    return updateSearchKey(searchKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            String searchKey,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
+            SalesOrganisation salesOrganisation,
+            String pickAndPack)?
+        fetch,
+    TResult? Function(String searchKey)? updateSearchKey,
+    TResult? Function()? reset,
+  }) {
+    return updateSearchKey?.call(searchKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            String searchKey,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
+            SalesOrganisation salesOrganisation,
+            String pickAndPack)?
+        fetch,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function()? reset,
+    required TResult orElse(),
+  }) {
+    if (updateSearchKey != null) {
+      return updateSearchKey(searchKey);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
+    required TResult Function(_Reset value) reset,
+  }) {
+    return updateSearchKey(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult? Function(_Reset value)? reset,
+  }) {
+    return updateSearchKey?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(_Reset value)? reset,
+    required TResult orElse(),
+  }) {
+    if (updateSearchKey != null) {
+      return updateSearchKey(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateSearchKey implements BonusMaterialEvent {
+  const factory _UpdateSearchKey({required final String searchKey}) =
+      _$_UpdateSearchKey;
+
+  String get searchKey;
+  @JsonKey(ignore: true)
+  _$$_UpdateSearchKeyCopyWith<_$_UpdateSearchKey> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ResetCopyWith<$Res> {
+  factory _$$_ResetCopyWith(_$_Reset value, $Res Function(_$_Reset) then) =
+      __$$_ResetCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ResetCopyWithImpl<$Res>
+    extends _$BonusMaterialEventCopyWithImpl<$Res, _$_Reset>
+    implements _$$_ResetCopyWith<$Res> {
+  __$$_ResetCopyWithImpl(_$_Reset _value, $Res Function(_$_Reset) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Reset implements _Reset {
+  const _$_Reset();
+
+  @override
+  String toString() {
+    return 'BonusMaterialEvent.reset()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Reset);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            String searchKey,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
+            SalesOrganisation salesOrganisation,
+            String pickAndPack)
+        fetch,
+    required TResult Function(String searchKey) updateSearchKey,
+    required TResult Function() reset,
+  }) {
+    return reset();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            String searchKey,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
+            SalesOrganisation salesOrganisation,
+            String pickAndPack)?
+        fetch,
+    TResult? Function(String searchKey)? updateSearchKey,
+    TResult? Function()? reset,
+  }) {
+    return reset?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            String searchKey,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
+            SalesOrganisation salesOrganisation,
+            String pickAndPack)?
+        fetch,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function()? reset,
+    required TResult orElse(),
+  }) {
+    if (reset != null) {
+      return reset();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
+    required TResult Function(_Reset value) reset,
+  }) {
+    return reset(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult? Function(_Reset value)? reset,
+  }) {
+    return reset?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(_Reset value)? reset,
+    required TResult orElse(),
+  }) {
+    if (reset != null) {
+      return reset(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Reset implements BonusMaterialEvent {
+  const factory _Reset() = _$_Reset;
+}
+
+/// @nodoc
 mixin _$BonusMaterialState {
+  bool get isFetching => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
   List<MaterialInfo> get bonus => throw _privateConstructorUsedError;
+  bool get isStarting => throw _privateConstructorUsedError;
+  SearchKey get searchKey => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BonusMaterialStateCopyWith<BonusMaterialState> get copyWith =>
@@ -527,8 +873,11 @@ abstract class $BonusMaterialStateCopyWith<$Res> {
       _$BonusMaterialStateCopyWithImpl<$Res, BonusMaterialState>;
   @useResult
   $Res call(
-      {Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      List<MaterialInfo> bonus});
+      {bool isFetching,
+      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
+      List<MaterialInfo> bonus,
+      bool isStarting,
+      SearchKey searchKey});
 }
 
 /// @nodoc
@@ -544,10 +893,17 @@ class _$BonusMaterialStateCopyWithImpl<$Res, $Val extends BonusMaterialState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isFetching = null,
     Object? failureOrSuccessOption = null,
     Object? bonus = null,
+    Object? isStarting = null,
+    Object? searchKey = null,
   }) {
     return _then(_value.copyWith(
+      isFetching: null == isFetching
+          ? _value.isFetching
+          : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -556,6 +912,14 @@ class _$BonusMaterialStateCopyWithImpl<$Res, $Val extends BonusMaterialState>
           ? _value.bonus
           : bonus // ignore: cast_nullable_to_non_nullable
               as List<MaterialInfo>,
+      isStarting: null == isStarting
+          ? _value.isStarting
+          : isStarting // ignore: cast_nullable_to_non_nullable
+              as bool,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
     ) as $Val);
   }
 }
@@ -569,8 +933,11 @@ abstract class _$$_BonusMaterialStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      List<MaterialInfo> bonus});
+      {bool isFetching,
+      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
+      List<MaterialInfo> bonus,
+      bool isStarting,
+      SearchKey searchKey});
 }
 
 /// @nodoc
@@ -584,10 +951,17 @@ class __$$_BonusMaterialStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isFetching = null,
     Object? failureOrSuccessOption = null,
     Object? bonus = null,
+    Object? isStarting = null,
+    Object? searchKey = null,
   }) {
     return _then(_$_BonusMaterialState(
+      isFetching: null == isFetching
+          ? _value.isFetching
+          : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -596,6 +970,14 @@ class __$$_BonusMaterialStateCopyWithImpl<$Res>
           ? _value._bonus
           : bonus // ignore: cast_nullable_to_non_nullable
               as List<MaterialInfo>,
+      isStarting: null == isStarting
+          ? _value.isStarting
+          : isStarting // ignore: cast_nullable_to_non_nullable
+              as bool,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
     ));
   }
 }
@@ -604,10 +986,15 @@ class __$$_BonusMaterialStateCopyWithImpl<$Res>
 
 class _$_BonusMaterialState implements _BonusMaterialState {
   const _$_BonusMaterialState(
-      {required this.failureOrSuccessOption,
-      required final List<MaterialInfo> bonus})
+      {required this.isFetching,
+      required this.failureOrSuccessOption,
+      required final List<MaterialInfo> bonus,
+      required this.isStarting,
+      required this.searchKey})
       : _bonus = bonus;
 
+  @override
+  final bool isFetching;
   @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
   final List<MaterialInfo> _bonus;
@@ -618,8 +1005,13 @@ class _$_BonusMaterialState implements _BonusMaterialState {
   }
 
   @override
+  final bool isStarting;
+  @override
+  final SearchKey searchKey;
+
+  @override
   String toString() {
-    return 'BonusMaterialState(failureOrSuccessOption: $failureOrSuccessOption, bonus: $bonus)';
+    return 'BonusMaterialState(isFetching: $isFetching, failureOrSuccessOption: $failureOrSuccessOption, bonus: $bonus, isStarting: $isStarting, searchKey: $searchKey)';
   }
 
   @override
@@ -627,14 +1019,25 @@ class _$_BonusMaterialState implements _BonusMaterialState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BonusMaterialState &&
+            (identical(other.isFetching, isFetching) ||
+                other.isFetching == isFetching) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
-            const DeepCollectionEquality().equals(other._bonus, _bonus));
+            const DeepCollectionEquality().equals(other._bonus, _bonus) &&
+            (identical(other.isStarting, isStarting) ||
+                other.isStarting == isStarting) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, failureOrSuccessOption,
-      const DeepCollectionEquality().hash(_bonus));
+  int get hashCode => Object.hash(
+      runtimeType,
+      isFetching,
+      failureOrSuccessOption,
+      const DeepCollectionEquality().hash(_bonus),
+      isStarting,
+      searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -646,14 +1049,22 @@ class _$_BonusMaterialState implements _BonusMaterialState {
 
 abstract class _BonusMaterialState implements BonusMaterialState {
   const factory _BonusMaterialState(
-      {required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption,
-      required final List<MaterialInfo> bonus}) = _$_BonusMaterialState;
+      {required final bool isFetching,
+      required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
+      required final List<MaterialInfo> bonus,
+      required final bool isStarting,
+      required final SearchKey searchKey}) = _$_BonusMaterialState;
 
+  @override
+  bool get isFetching;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   List<MaterialInfo> get bonus;
+  @override
+  bool get isStarting;
+  @override
+  SearchKey get searchKey;
   @override
   @JsonKey(ignore: true)
   _$$_BonusMaterialStateCopyWith<_$_BonusMaterialState> get copyWith =>

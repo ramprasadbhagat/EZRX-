@@ -30,6 +30,7 @@ class MaterialInfo with _$MaterialInfo {
     required List<String> taxes,
     required List<Bundle> bundles,
     required bool isFOCMaterial,
+    required int quantity,
   }) = _MaterialInfo;
 
   factory MaterialInfo.empty() => MaterialInfo(
@@ -52,7 +53,8 @@ class MaterialInfo with _$MaterialInfo {
         taxes: [],
         defaultMaterialDescription: '',
         bundles: [],
-        isFOCMaterial : false,
+        isFOCMaterial: false,
+        quantity: 0,
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromBundles(

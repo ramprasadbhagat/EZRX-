@@ -38,7 +38,8 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
               taxes: [],
               therapeuticClass: '',
               unitOfMeasurement: '',
-              isFOCMaterial: false)
+              isFOCMaterial: false,
+              quantity: 0)
           : fields[0] as MaterialDto,
       quantity: fields[1] == null ? 1 : fields[1] as int,
       priceDto: fields[2] == null
@@ -98,13 +99,15 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
           ? const BundleDto(
               bundleName: '', bundleCode: '', bundleInformation: [])
           : fields[6] as BundleDto,
+      bonusItem:
+          fields[7] == null ? [] : (fields[7] as List).cast<MaterialDto>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, PriceAggregateDto obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.materialDto)
       ..writeByte(1)
@@ -118,7 +121,9 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
       ..writeByte(5)
       ..write(obj.isOverride)
       ..writeByte(6)
-      ..write(obj.bundleDto);
+      ..write(obj.bundleDto)
+      ..writeByte(7)
+      ..write(obj.bonusItem);
   }
 
   @override

@@ -3,6 +3,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -219,5 +220,45 @@ class CartRepository implements ICartRepository {
     
     return List.from(selectedItemsMaterialNumber)
       ..add(item.materialInfo.materialNumber);
+  }
+
+   @override
+  Future<Either<ApiFailure, List<PriceAggregate>>> updateBonusItem({
+    required PriceAggregate cartItem,
+    required int quantity,
+    required MaterialInfo bonusItem,
+    required bool isUpdatedFromCart,
+  }) async {
+    try {
+      await cartStorage.updateBonus(
+        cartDto: PriceAggregateDto.fromDomain(cartItem),
+        bonusItem: bonusItem,
+        isUpdateFromCart: isUpdatedFromCart,
+        quantity: quantity,
+      );
+
+      return fetchCartItems();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<PriceAggregate>>> deleteBonusItem({
+    required PriceAggregate cartItem,
+    required MaterialInfo bonusItem,
+    required bool isUpdateFromCart,
+  }) async {
+    try {
+      await cartStorage.deleteBonus(
+        cartDto: PriceAggregateDto.fromDomain(cartItem),
+        bonusItem: bonusItem,
+        isUpdateFromCart: isUpdateFromCart,
+      );
+
+      return fetchCartItems();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
   }
 }

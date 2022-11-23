@@ -45,10 +45,6 @@ class BonusMaterialRemoteDataSource {
         );
 
         _bonusExceptionChecker(res: res);
-        // print(res.data['data']['additionalBonusMaterial']);
-        // return MaterialDto.fromJson(
-        //         res.data['data']['additionalBonusMaterial']['materials'])
-        //     .toDomain();
 
         return List.from(
           res.data['data']['additionalBonusMaterial']['materials'],
