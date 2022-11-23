@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/presentation/core/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
@@ -52,6 +53,7 @@ class FavouriteListTile extends StatelessWidget {
               quantity: 1,
               zmgMaterialCountOnCart: 0,
               isOverride: false,
+              bundle: Bundle.empty(),
             );
 
             return ListTile(

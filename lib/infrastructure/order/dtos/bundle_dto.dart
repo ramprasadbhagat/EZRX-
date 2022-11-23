@@ -33,7 +33,7 @@ class BundleDto with _$BundleDto {
 
   factory BundleDto.fromDomain(Bundle bundle) {
     return BundleDto(
-      bundleName: bundle.bundleName.getOrCrash(),
+      bundleName: bundle.bundleName.getOrDefaultValue(''),
       bundleCode: bundle.bundleCode,
       bundleInformation: bundle.bundleInformation
           .map((e) => BundleInfoDto.fromDomain(e))

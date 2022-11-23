@@ -13,6 +13,7 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
@@ -275,6 +276,7 @@ class _ListContent extends StatelessWidget {
                 zmgMaterialCountOnCart:
                     context.read<CartBloc>().state.zmgMaterialCount,
                 isOverride: false,
+                bundle: Bundle.empty(),
               ),
             );
           }
@@ -378,6 +380,7 @@ class _PriceLabel extends StatelessWidget {
                 ? context.watch<CartBloc>().state.zmgMaterialCount
                 : context.read<CartBloc>().state.zmgMaterialCount,
             isOverride: false,
+            bundle: Bundle.empty(),
           );
 
           return Column(

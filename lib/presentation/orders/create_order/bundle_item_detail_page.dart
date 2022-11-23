@@ -6,9 +6,11 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/bundle_aggregate.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/presentation/core/custom_label.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -63,6 +65,16 @@ class BundleItemDetailPage extends StatelessWidget {
                   return ListView.builder(
                     itemCount: bundleAggregate.materialInfos.length,
                     itemBuilder: (context, index) {
+                      if (state.isValidating || state.isFetching) {
+                        return LoadingShimmer.withChild(
+                          child: const Card(
+                            child: SizedBox(
+                              height: 60,
+                              width: double.infinity,
+                            ),
+                          ),
+                        );
+                      }
                       final queryInfo = MaterialQueryInfo.fromBundles(
                         materialInfo: bundleAggregate.materialInfos[index],
                       );
@@ -96,15 +108,32 @@ class BundleItemDetailPage extends StatelessWidget {
               ),
             ),
             Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  _addToCartPressed(
-                    context,
-                    bundleAggregate.bundle.bundleCode,
-                    quantityControllerList,
+              child: BlocBuilder<MaterialPriceDetailBloc,
+                  MaterialPriceDetailState>(
+                buildWhen: (previous, current) =>
+                    previous.isValidating != current.isValidating ||
+                    previous.isFetching != current.isFetching,
+                builder: (context, state) {
+                  if (state.isFetching || state.isValidating) {
+                    return LoadingShimmer.withChild(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: const SizedBox(),
+                      ),
+                    );
+                  }
+
+                  return ElevatedButton(
+                    onPressed: () {
+                      _addToCartPressed(
+                        context,
+                        bundleAggregate.bundle,
+                        quantityControllerList,
+                      );
+                    },
+                    child: const Text('Add to Cart').tr(),
                   );
                 },
-                child: const Text('Add to Cart').tr(),
               ),
             ),
           ],
@@ -115,7 +144,7 @@ class BundleItemDetailPage extends StatelessWidget {
 
   void _addToCartPressed(
     BuildContext context,
-    String bundleCode,
+    Bundle bundle,
     Map<String, TextEditingController> list,
   ) {
     final cartBloc = context.read<CartBloc>();
@@ -131,6 +160,7 @@ class BundleItemDetailPage extends StatelessWidget {
           quantity: int.parse(list[material.materialNumber.getOrCrash()]!.text),
           zmgMaterialCountOnCart: cartBloc.state.zmgMaterialCount,
           isOverride: false,
+          bundle: bundle,
         );
 
         return priceAggregate;

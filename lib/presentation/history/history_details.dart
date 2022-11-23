@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -177,6 +178,7 @@ class HistoryDetails extends StatelessWidget {
         quantity: queryInfo.qty.getOrCrash(),
         zmgMaterialCountOnCart: cartBloc.state.zmgMaterialCount,
         isOverride: false,
+        bundle: Bundle.empty(),
       );
       cartBloc.add(CartEvent.addToCart(item: priceAggregate));
 

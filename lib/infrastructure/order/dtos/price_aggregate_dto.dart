@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_configs_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/bundle_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:hive/hive.dart';
@@ -15,6 +16,7 @@ class PriceAggregateDto {
     required this.salesOrganisationConfigsDto,
     required this.zmgMaterialCountOnCart,
     required this.isOverride,
+    required this.bundleDto,
   });
 
   @HiveField(0, defaultValue: _emptyConstMaterialDto)
@@ -29,6 +31,8 @@ class PriceAggregateDto {
   int zmgMaterialCountOnCart;
   @HiveField(5, defaultValue: false)
   bool isOverride;
+  @HiveField(6, defaultValue: _emptyBundleDto)
+  BundleDto bundleDto;
 
   factory PriceAggregateDto.fromDomain(PriceAggregate cart) {
     return PriceAggregateDto(
@@ -40,6 +44,7 @@ class PriceAggregateDto {
       ),
       zmgMaterialCountOnCart: cart.zmgMaterialCountOnCart,
       isOverride: cart.isOverride,
+      bundleDto: BundleDto.fromDomain(cart.bundle),
     );
   }
 
@@ -53,6 +58,7 @@ class PriceAggregateDto {
       // salesOrgConfig: SalesOrganisationConfigs.empty(),
       zmgMaterialCountOnCart: zmgMaterialCountOnCart,
       isOverride: isOverride,
+      bundle: bundleDto.toDomain(),
     );
   }
 }
@@ -130,4 +136,10 @@ const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
   disableDeliveryDate: false,
   enableBillTo: false,
   showPOAttachment: false,
+);
+
+const BundleDto _emptyBundleDto = BundleDto(
+  bundleName: '',
+  bundleCode: '',
+  bundleInformation: [],
 );

@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -151,16 +152,18 @@ class OrderMaterialItem extends StatelessWidget {
               ),
             ),
             _MaterialItemInfo(
-              title: 'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr(),
+              title:
+                  'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '
+                      .tr(),
               info: _MaterialPriceInfo(
-                materialQueryInfo: materialQueryInfo, 
+                materialQueryInfo: materialQueryInfo,
                 priceType: PriceType.unitPriceBeforeGst,
               ),
             ),
             _MaterialItemInfo(
               title: 'Unit Price: '.tr(),
               info: _MaterialPriceInfo(
-                materialQueryInfo: materialQueryInfo, 
+                materialQueryInfo: materialQueryInfo,
                 priceType: PriceType.unitPrice,
               ),
             ),
@@ -228,8 +231,7 @@ class _MaterialPriceInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MaterialPriceDetailBloc,
-      MaterialPriceDetailState>(
+    return BlocBuilder<MaterialPriceDetailBloc, MaterialPriceDetailState>(
       buildWhen: (previous, current) =>
           previous.isFetching != current.isFetching ||
           previous.isValidating != current.isValidating,
@@ -246,12 +248,12 @@ class _MaterialPriceInfo extends StatelessWidget {
           final priceAggregate = PriceAggregate(
             price: itemInfo.price,
             materialInfo: itemInfo.info,
-            salesOrgConfig:
-                context.read<SalesOrgBloc>().state.configs,
+            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
             quantity: 1,
             zmgMaterialCountOnCart:
                 context.read<CartBloc>().state.zmgMaterialCount,
             isOverride: false,
+            bundle: Bundle.empty(),
           );
 
           return Text(

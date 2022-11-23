@@ -94,13 +94,17 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
           : fields[3] as SalesOrganisationConfigsDto,
       zmgMaterialCountOnCart: fields[4] == null ? 0 : fields[4] as int,
       isOverride: fields[5] == null ? false : fields[5] as bool,
+      bundleDto: fields[6] == null
+          ? const BundleDto(
+              bundleName: '', bundleCode: '', bundleInformation: [])
+          : fields[6] as BundleDto,
     );
   }
 
   @override
   void write(BinaryWriter writer, PriceAggregateDto obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.materialDto)
       ..writeByte(1)
@@ -112,7 +116,9 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
       ..writeByte(4)
       ..write(obj.zmgMaterialCountOnCart)
       ..writeByte(5)
-      ..write(obj.isOverride);
+      ..write(obj.isOverride)
+      ..writeByte(6)
+      ..write(obj.bundleDto);
   }
 
   @override

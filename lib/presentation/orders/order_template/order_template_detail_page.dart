@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_action_button.dart';
@@ -130,6 +131,7 @@ class OrderTemplateDetailPage extends StatelessWidget {
           quantity: queryInfo.qty.getOrCrash(),
           zmgMaterialCountOnCart: cartBloc.state.zmgMaterialCount,
           isOverride: false,
+          bundle: Bundle.empty(),
         );
 
         return priceAggregate;

@@ -76,4 +76,38 @@ class CartState with _$CartState {
       .where((element) => selectedItemsMaterialNumber
           .contains(element.materialInfo.materialNumber))
       .toList();
+
+  List<CartItem> get displayCartItems {
+    final displayCartItems = <String, CartItem>{};
+    for (final material in cartItemList) {
+      if (material.isFromBundle) {
+        final bundleCode = material.bundle.bundleCode;
+        if (displayCartItems[bundleCode] == null) {
+          displayCartItems.addAll(
+            {
+              bundleCode: CartItem(
+                materials: [material],
+                itemType: CartItemType.bundle,
+              ),
+            },
+          );
+        } else {
+          displayCartItems[bundleCode] =
+              displayCartItems[bundleCode]!.copyWithNewItem(material);
+        }
+      } else {
+        final materialCode = material.materialNumberString;
+        displayCartItems.addAll(
+          {
+            materialCode: CartItem(
+              materials: [material],
+              itemType: CartItemType.material,
+            ),
+          },
+        );
+      }
+    }
+
+    return displayCartItems.values.toList();
+  }
 }

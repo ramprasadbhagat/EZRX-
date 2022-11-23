@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
@@ -15,6 +16,7 @@ class PriceAggregate with _$PriceAggregate {
   const factory PriceAggregate({
     required Price price,
     required MaterialInfo materialInfo,
+    required Bundle bundle,
     required SalesOrganisationConfigs salesOrgConfig,
     required int quantity,
     required int zmgMaterialCountOnCart,
@@ -24,6 +26,7 @@ class PriceAggregate with _$PriceAggregate {
   factory PriceAggregate.empty() => PriceAggregate(
         price: Price.empty(),
         materialInfo: MaterialInfo.empty(),
+        bundle: Bundle.empty(),
         salesOrgConfig: SalesOrganisationConfigs.empty(),
         quantity: 1,
         zmgMaterialCountOnCart: 0,
@@ -171,10 +174,21 @@ class PriceAggregate with _$PriceAggregate {
     return '${salesOrgConfig.currency.code} ${result.toStringAsFixed(2)}';
   }
 
-  MaterialInfo get getMaterialInfo => materialInfo;
   bool get isDefaultMDEnabled {
     return salesOrgConfig.enableDefaultMD &&
         materialInfo.defaultMaterialDescription.isNotEmpty;
+  }
+
+  bool get isFromBundle => bundle != Bundle.empty();
+
+  String get materialNumberString {
+    final materialNumberFromPrice = price.materialNumber.getOrDefaultValue('');
+    final materialNumberFromInfo =
+        materialInfo.materialNumber.getOrDefaultValue('');
+
+    return materialNumberFromPrice.isEmpty
+        ? materialNumberFromInfo
+        : materialNumberFromPrice;
   }
 }
 

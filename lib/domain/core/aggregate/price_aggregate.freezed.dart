@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PriceAggregate {
   Price get price => throw _privateConstructorUsedError;
   MaterialInfo get materialInfo => throw _privateConstructorUsedError;
+  Bundle get bundle => throw _privateConstructorUsedError;
   SalesOrganisationConfigs get salesOrgConfig =>
       throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
@@ -38,6 +39,7 @@ abstract class $PriceAggregateCopyWith<$Res> {
   $Res call(
       {Price price,
       MaterialInfo materialInfo,
+      Bundle bundle,
       SalesOrganisationConfigs salesOrgConfig,
       int quantity,
       int zmgMaterialCountOnCart,
@@ -45,6 +47,7 @@ abstract class $PriceAggregateCopyWith<$Res> {
 
   $PriceCopyWith<$Res> get price;
   $MaterialInfoCopyWith<$Res> get materialInfo;
+  $BundleCopyWith<$Res> get bundle;
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
 }
 
@@ -63,6 +66,7 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
   $Res call({
     Object? price = null,
     Object? materialInfo = null,
+    Object? bundle = null,
     Object? salesOrgConfig = null,
     Object? quantity = null,
     Object? zmgMaterialCountOnCart = null,
@@ -77,6 +81,10 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
           ? _value.materialInfo
           : materialInfo // ignore: cast_nullable_to_non_nullable
               as MaterialInfo,
+      bundle: null == bundle
+          ? _value.bundle
+          : bundle // ignore: cast_nullable_to_non_nullable
+              as Bundle,
       salesOrgConfig: null == salesOrgConfig
           ? _value.salesOrgConfig
           : salesOrgConfig // ignore: cast_nullable_to_non_nullable
@@ -114,6 +122,14 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
 
   @override
   @pragma('vm:prefer-inline')
+  $BundleCopyWith<$Res> get bundle {
+    return $BundleCopyWith<$Res>(_value.bundle, (value) {
+      return _then(_value.copyWith(bundle: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig {
     return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfig,
         (value) {
@@ -133,6 +149,7 @@ abstract class _$$_PriceAggregateCopyWith<$Res>
   $Res call(
       {Price price,
       MaterialInfo materialInfo,
+      Bundle bundle,
       SalesOrganisationConfigs salesOrgConfig,
       int quantity,
       int zmgMaterialCountOnCart,
@@ -142,6 +159,8 @@ abstract class _$$_PriceAggregateCopyWith<$Res>
   $PriceCopyWith<$Res> get price;
   @override
   $MaterialInfoCopyWith<$Res> get materialInfo;
+  @override
+  $BundleCopyWith<$Res> get bundle;
   @override
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
 }
@@ -159,6 +178,7 @@ class __$$_PriceAggregateCopyWithImpl<$Res>
   $Res call({
     Object? price = null,
     Object? materialInfo = null,
+    Object? bundle = null,
     Object? salesOrgConfig = null,
     Object? quantity = null,
     Object? zmgMaterialCountOnCart = null,
@@ -173,6 +193,10 @@ class __$$_PriceAggregateCopyWithImpl<$Res>
           ? _value.materialInfo
           : materialInfo // ignore: cast_nullable_to_non_nullable
               as MaterialInfo,
+      bundle: null == bundle
+          ? _value.bundle
+          : bundle // ignore: cast_nullable_to_non_nullable
+              as Bundle,
       salesOrgConfig: null == salesOrgConfig
           ? _value.salesOrgConfig
           : salesOrgConfig // ignore: cast_nullable_to_non_nullable
@@ -199,6 +223,7 @@ class _$_PriceAggregate extends _PriceAggregate {
   const _$_PriceAggregate(
       {required this.price,
       required this.materialInfo,
+      required this.bundle,
       required this.salesOrgConfig,
       required this.quantity,
       required this.zmgMaterialCountOnCart,
@@ -210,6 +235,8 @@ class _$_PriceAggregate extends _PriceAggregate {
   @override
   final MaterialInfo materialInfo;
   @override
+  final Bundle bundle;
+  @override
   final SalesOrganisationConfigs salesOrgConfig;
   @override
   final int quantity;
@@ -220,7 +247,7 @@ class _$_PriceAggregate extends _PriceAggregate {
 
   @override
   String toString() {
-    return 'PriceAggregate(price: $price, materialInfo: $materialInfo, salesOrgConfig: $salesOrgConfig, quantity: $quantity, zmgMaterialCountOnCart: $zmgMaterialCountOnCart, isOverride: $isOverride)';
+    return 'PriceAggregate(price: $price, materialInfo: $materialInfo, bundle: $bundle, salesOrgConfig: $salesOrgConfig, quantity: $quantity, zmgMaterialCountOnCart: $zmgMaterialCountOnCart, isOverride: $isOverride)';
   }
 
   @override
@@ -231,6 +258,7 @@ class _$_PriceAggregate extends _PriceAggregate {
             (identical(other.price, price) || other.price == price) &&
             (identical(other.materialInfo, materialInfo) ||
                 other.materialInfo == materialInfo) &&
+            (identical(other.bundle, bundle) || other.bundle == bundle) &&
             (identical(other.salesOrgConfig, salesOrgConfig) ||
                 other.salesOrgConfig == salesOrgConfig) &&
             (identical(other.quantity, quantity) ||
@@ -242,7 +270,7 @@ class _$_PriceAggregate extends _PriceAggregate {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, price, materialInfo,
+  int get hashCode => Object.hash(runtimeType, price, materialInfo, bundle,
       salesOrgConfig, quantity, zmgMaterialCountOnCart, isOverride);
 
   @JsonKey(ignore: true)
@@ -256,6 +284,7 @@ abstract class _PriceAggregate extends PriceAggregate {
   const factory _PriceAggregate(
       {required final Price price,
       required final MaterialInfo materialInfo,
+      required final Bundle bundle,
       required final SalesOrganisationConfigs salesOrgConfig,
       required final int quantity,
       required final int zmgMaterialCountOnCart,
@@ -266,6 +295,8 @@ abstract class _PriceAggregate extends PriceAggregate {
   Price get price;
   @override
   MaterialInfo get materialInfo;
+  @override
+  Bundle get bundle;
   @override
   SalesOrganisationConfigs get salesOrgConfig;
   @override

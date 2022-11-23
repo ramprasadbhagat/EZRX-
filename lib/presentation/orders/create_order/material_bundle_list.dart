@@ -28,8 +28,7 @@ class MaterialBundleListPage extends StatelessWidget {
       key: const Key('materialBundleListPage'),
       listenWhen: (previous, current) =>
           previous.apiFailureOrSuccessOption !=
-              current.apiFailureOrSuccessOption ||
-          (previous.isFetching != current.isFetching),
+          current.apiFailureOrSuccessOption,
       listener: (context, state) {
         state.apiFailureOrSuccessOption.fold(
           () {},
@@ -47,35 +46,6 @@ class MaterialBundleListPage extends StatelessWidget {
             (_) {},
           ),
         );
-        if (state.bundleList.isNotEmpty && !state.isFetching) {
-          for (final item in state.bundleList) {
-            final templist = item.materialInfos
-                .map(
-                  (item) => MaterialQueryInfo.fromBundles(
-                    materialInfo: item,
-                  ),
-                )
-                .toList();
-            context.read<MaterialPriceDetailBloc>().add(
-                  MaterialPriceDetailEvent.fetch(
-                    user: context.read<UserBloc>().state.user,
-                    customerCode:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    salesOrganisationConfigs:
-                        context.read<SalesOrgBloc>().state.configs,
-                    shipToCode: context.read<ShipToCodeBloc>().state.shipToInfo,
-                    materialInfoList: templist,
-                    pickAndPack: context
-                        .read<EligibilityBloc>()
-                        .state
-                        .getPNPValueMaterial,
-                    skipFOCCheck: true,
-                  ),
-                );
-          }
-        }
       },
       buildWhen: (previous, current) =>
           previous.isFetching != current.isFetching,
@@ -83,7 +53,7 @@ class MaterialBundleListPage extends StatelessWidget {
         return Column(
           children: [
             _BodyContent(
-              materialBundleListState: state,
+              state: state,
             ),
           ],
         );
@@ -93,17 +63,16 @@ class MaterialBundleListPage extends StatelessWidget {
 }
 
 class _BodyContent extends StatelessWidget {
-  final MaterialBundleListState materialBundleListState;
+  final MaterialBundleListState state;
   const _BodyContent({
     Key? key,
-    required this.materialBundleListState,
+    required this.state,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: materialBundleListState.isFetching &&
-              materialBundleListState.bundleList.isEmpty
+      child: state.isFetching && state.bundleList.isEmpty
           ? LoadingShimmer.withChild(
               child: Image.asset(
                 'assets/images/ezrxlogo.png',
@@ -147,10 +116,10 @@ class _BodyContent extends StatelessWidget {
                           context.read<ShipToCodeBloc>().state.shipToInfo,
                     ),
                   ),
-              isLoading: materialBundleListState.isFetching,
+              isLoading: state.isFetching,
               itemBuilder: (context, index, item) =>
                   _ListContent(bundleAggregate: item),
-              items: materialBundleListState.bundleList,
+              items: state.bundleList,
             ),
     );
   }
@@ -169,8 +138,34 @@ class _ListContent extends StatelessWidget {
           'materialBundleOption${bundleAggregate.bundle.bundleCode}',
         ),
         onTap: () {
+          final materialQueryInfo = bundleAggregate.materialInfos
+              .map(
+                (item) => MaterialQueryInfo.fromBundles(
+                  materialInfo: item,
+                ),
+              )
+              .toList();
+          context.read<MaterialPriceDetailBloc>().add(
+                MaterialPriceDetailEvent.fetch(
+                  user: context.read<UserBloc>().state.user,
+                  customerCode:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  salesOrganisationConfigs:
+                      context.read<SalesOrgBloc>().state.configs,
+                  shipToCode: context.read<ShipToCodeBloc>().state.shipToInfo,
+                  materialInfoList: materialQueryInfo,
+                  pickAndPack:
+                      context.read<EligibilityBloc>().state.getPNPValueMaterial,
+                  skipFOCCheck: true,
+                ),
+              );
           context.router.push(
-              BundleItemDetailPageRoute(bundleAggregate: bundleAggregate,),);
+            BundleItemDetailPageRoute(
+              bundleAggregate: bundleAggregate,
+            ),
+          );
         },
         // leading: ClipRRect(
         //   borderRadius: const BorderRadius.all(

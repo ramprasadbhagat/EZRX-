@@ -2,13 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/cart_item_list_tile.dart';
+import 'package:ezrxmobile/presentation/orders/cart/cart_bundle_item_tile.dart';
+import 'package:ezrxmobile/presentation/orders/cart/cart_material_item_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,19 +53,30 @@ class CartPage extends StatelessWidget {
           body: Column(
             children: [
               Expanded(
-                child: ScrollList<PriceAggregate>(
+                child: ScrollList<CartItem>(
                   emptyMessage: 'Cart is Empty',
                   onRefresh: () {
                     context.read<CartBloc>().add(const CartEvent.fetch());
                   },
                   onLoadingMore: () {},
                   isLoading: state.isFetching,
-                  itemBuilder: (context, index, item) => CartItemListTile(
-                    cartItem: item,
-                    taxCode: taxCode,
-                    showCheckBox: true,
-                  ),
-                  items: state.cartItemList,
+                  itemBuilder: (context, index, item) {
+                    switch (item.itemType) {
+                      case CartItemType.material:
+                        return CartMaterialItemTile(
+                          cartItem: item.materials.first,
+                          taxCode: taxCode,
+                          showCheckBox: true,
+                        );
+                      case CartItemType.bundle:
+                        return CartBundleItemTile(
+                          materialItems: item.materials,
+                          taxCode: taxCode,
+                          showCheckBox: true,
+                        );
+                    }
+                  },
+                  items: state.displayCartItems,
                 ),
               ),
               state.cartItemList.isEmpty

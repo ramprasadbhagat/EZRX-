@@ -19,7 +19,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/cart_item_list_tile.dart';
+import 'package:ezrxmobile/presentation/orders/cart/cart_material_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_type_selector.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/cupertino.dart';
@@ -613,7 +613,7 @@ class _CartDetails extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            ...state.cartItemList.map((e) => CartItemListTile(
+            ...state.cartItemList.map((e) => CartMaterialItemTile(
                   cartItem: e,
                 )),
             const SizedBox(
