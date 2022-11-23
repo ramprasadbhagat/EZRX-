@@ -52,9 +52,9 @@ class OrderMaterialItem extends StatelessWidget {
 
                   return Row(
                     children: [
-                      const Text(
-                        'Material Description : ',
-                        style: TextStyle(
+                       Text(
+                        'Material Description:'.tr(),
+                        style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                           color: ZPColors.darkerGreen,
@@ -92,7 +92,7 @@ class OrderMaterialItem extends StatelessWidget {
               ),
             ),
             _MaterialItemInfo(
-              title: 'Material Number: '.tr(),
+              title: 'Material Number:'.tr(),
               info: Row(
                 children: [
                   Text(
@@ -141,7 +141,7 @@ class OrderMaterialItem extends StatelessWidget {
               ),
             ),
             _MaterialItemInfo(
-              title: 'Material Qty: '.tr(),
+              title: 'Material Qty:'.tr(),
               info: Text(
                 qty,
                 style: const TextStyle(

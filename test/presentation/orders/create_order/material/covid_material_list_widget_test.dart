@@ -425,9 +425,9 @@ void main() {
           findsOneWidget);
 
       if (salesOrgBlocMock.state.configs.enableListPrice) {
-        expect(find.textContaining('List Price: '), findsOneWidget);
+        expect(find.textContaining('List Price:'), findsOneWidget);
       }
-      expect(find.textContaining('Unit Price: '), findsOneWidget);
+      expect(find.textContaining('Unit Price:'), findsOneWidget);
     });
   });
 }

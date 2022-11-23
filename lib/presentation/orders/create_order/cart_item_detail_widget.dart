@@ -128,7 +128,7 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: BalanceTextRow(
-            keyText: 'Total price'.tr(),
+            keyText: 'Total Price'.tr(),
             valueText: widget.cartItem.display(PriceType.unitPriceTotal),
             keyFlex: 1,
             valueFlex: 1,

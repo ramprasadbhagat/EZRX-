@@ -28,7 +28,7 @@ class FavouriteListTile extends StatelessWidget {
         borderRadius: 8,
         endActionPaneActions: [
           CustomSlidableAction(
-            label: 'Delete',
+            label: 'Delete'.tr(),
             icon: Icons.delete_outline,
             onPressed: (context) => context.read<FavouriteBloc>().add(
                   FavouriteEvent.delete(

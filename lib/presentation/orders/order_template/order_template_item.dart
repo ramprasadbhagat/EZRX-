@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -27,7 +28,7 @@ class OrderTemplateItem extends StatelessWidget {
         child: CustomSlidable(
           endActionPaneActions: [
             CustomSlidableAction(
-              label: 'Delete',
+              label: 'Delete'.tr(),
               icon: Icons.delete_outline,
               onPressed: (context) => context.read<OrderTemplateListBloc>().add(
                     OrderTemplateListEvent.delete(

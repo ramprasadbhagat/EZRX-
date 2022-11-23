@@ -5,7 +5,6 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -54,7 +53,7 @@ class CartPage extends StatelessWidget {
             children: [
               Expanded(
                 child: ScrollList<CartItem>(
-                  emptyMessage: 'Cart is Empty',
+                  emptyMessage: 'Cart is Empty'.tr(),
                   onRefresh: () {
                     context.read<CartBloc>().add(const CartEvent.fetch());
                   },
@@ -145,7 +144,7 @@ class _SelectAllButton extends StatelessWidget {
                 },
               ),
               Text(
-                'Select All',
+                'Select All'.tr(),
                 style: TextStyle(
                   color: state.selectedItemsMaterialNumber.length ==
                           state.cartItemList.length

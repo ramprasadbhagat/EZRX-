@@ -17,6 +17,8 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 
 class OrderHistoryListTile extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
@@ -110,7 +112,7 @@ class OrderHistoryListTile extends StatelessWidget {
                               ),
                             ),
                             child: Text(
-                              orderHistoryItem.status,
+                              orderHistoryItem.status.tr(),
                               style: const TextStyle(
                                 color: ZPColors.black,
                                 fontSize: 10,
@@ -123,39 +125,39 @@ class OrderHistoryListTile extends StatelessWidget {
                 ],
               ),
               BalanceTextRow(
-                key: const Key('orderTypeKey'),
-                keyText: 'Order Type',
+                key:  const Key('orderTypeKey'),
+                keyText: 'Order Type'.tr(),
                 valueText: orderHistoryItem.orderType,
               ),
               BalanceTextRow(
-                keyText: 'Material ID',
+                keyText: 'Material ID'.tr(),
                 valueText: orderHistoryItem.materialNumber.displayMatNo,
               ),
               BalanceTextRow(
-                keyText: 'Material Name',
+                keyText: 'Material Name'.tr(),
                 valueText: orderHistoryItem.materialDescription,
               ),
               BalanceTextRow(
-                keyText: 'Order Date',
+                keyText: 'Order Date'.tr(),
                 valueText: orderHistoryItem.createdDate,
               ),
               BalanceTextRow(
-                keyText: 'Delivery Date/Time',
+                keyText: 'Delivery Date/Time'.tr(),
                 valueText: orderHistoryItem.deliveryDate,
               ),
               BalanceTextRow(
-                keyText: 'Quantity',
+                keyText: 'Quantity'.tr(),
                 valueText: orderHistoryItem.qty.toString(),
               ),
               BalanceTextRow(
-                keyText: 'ZP Price',
+                keyText: 'ZP Price'.tr(),
                 valueText: _displayPrice(
                   salesOrgConfigs,
                   orderHistoryItem.unitPrice.zpPrice,
                 ),
               ),
               BalanceTextRow(
-                keyText: 'Total Price',
+                keyText: 'Total Price'.tr(),
                 valueText: _displayPrice(
                   salesOrgConfigs,
                   orderHistoryItem.totalPrice.totalPrice,

@@ -132,7 +132,7 @@ class FavouritesTab extends StatelessWidget with AutoRouteWrapper {
                     .toList();
 
                 return ScrollList<Favourite>(
-                  emptyMessage: 'No favorite found',
+                  emptyMessage: 'No favorite found'.tr(),
                   onRefresh: () {
                     context
                         .read<MaterialPriceDetailBloc>()

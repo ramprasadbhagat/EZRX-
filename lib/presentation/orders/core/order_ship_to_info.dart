@@ -113,27 +113,27 @@ class ShipToDetails {
 List<ShipToDetails> _getTextRowLevelsForShipToInfo(ShipToInfo shipToInfo) {
   return [
     ShipToDetails(
-      key: 'Ship to ID',
+      key: 'Ship to ID'.tr(),
       value: shipToInfo.shipToCustomerCode,
     ),
     ShipToDetails(
-      key: 'Address',
+      key: 'Address'.tr(),
       value:shipToInfo.shipToAddress.toString(),
             ),
     ShipToDetails(
-      key: 'Postal Code',
+      key: 'Postal Code'.tr(),
       value: shipToInfo.postalCode,
     ),
     ShipToDetails(
-      key: 'Country',
+      key: 'Country'.tr(),
       value: shipToInfo.region,
     ),
     ShipToDetails(
-      key: 'Phone',
+      key: 'Phone'.tr(),
       value: shipToInfo.telephoneNumber,
     ),
     ShipToDetails(
-      key: 'License',
+      key: 'License'.tr(),
       value: 'View license info'.tr(),
     ),
   ];

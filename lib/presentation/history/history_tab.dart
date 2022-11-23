@@ -37,9 +37,9 @@ class HistoryTab extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: const Text(
-          'Order History',
-        ).tr(),
+        title:  Text(
+          'Order History'.tr(),
+        ),
         automaticallyImplyLeading: false,
         actions: const [
           CartButton(),
@@ -72,7 +72,7 @@ class HistoryTab extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
                                 child: Text(
-                                  'status'.tr(),
+                                  'Status'.tr(),
                                   key: const ValueKey('status'),
                                   style: const TextStyle(
                                     fontSize: 14,
@@ -115,9 +115,9 @@ class HistoryTab extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              const Text(
-                                'Filter',
-                                style: TextStyle(
+                               Text(
+                                'Filter'.tr(),
+                                style: const TextStyle(
                                   fontSize: 14,
                                   color: ZPColors.kPrimaryColor,
                                   fontWeight: FontWeight.w500,
@@ -252,7 +252,7 @@ class HistoryTab extends StatelessWidget {
                       )
                     : ScrollList<OrderHistoryItem>(
                         key: const Key('OrderHistoryList'),
-                        emptyMessage: 'No history found',
+                        emptyMessage: 'No history found'.tr(),
                         onRefresh: () {
                           if (context.read<ShipToCodeBloc>().state.haveShipTo) {
                             context.read<OrderHistoryFilterBloc>().add(

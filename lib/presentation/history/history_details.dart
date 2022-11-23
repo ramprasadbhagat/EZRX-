@@ -373,7 +373,7 @@ class _OrderDetails extends StatelessWidget {
             ),
             context.read<EligibilityBloc>().state.isPaymentTermEnable
                 ? BalanceTextRow(
-                    keyText: 'Payment Term '.tr(),
+                    keyText: 'Payment Term'.tr(),
                     valueText: orderDetails
                         .orderHistoryDetailsPaymentTerm.paymentTermCode,
                     valueTextLoading: state.isLoading,

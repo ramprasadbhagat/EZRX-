@@ -46,7 +46,7 @@ class HistoryFilterByStatus extends StatelessWidget {
                         CheckboxListTile(
                           checkColor: Colors.white,
                           activeColor: ZPColors.kPrimaryColor,
-                          title: Text(status),
+                          title: Text(status.tr()),
                           onChanged: (bool? value) {
                             BlocProvider.of<OrderHistoryFilterByStatusBloc>(
                               context,
@@ -106,11 +106,11 @@ class _ClearButtonForFilterByStatus extends StatelessWidget {
             colors: <Color>[ZPColors.kPrimaryColor, ZPColors.gradient],
           ),
         ),
-        child: const Center(
+        child:  Center(
           child: Text(
-            'Clear All',
+            'Clear All'.tr(),
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               color: Colors.white,
               fontWeight: FontWeight.bold,

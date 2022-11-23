@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
@@ -48,27 +49,27 @@ List<SoldToDetails> _getTextRowLevelsForSoldToInfo(
 ) {
   return [
     SoldToDetails(
-      key: 'Sold to ID',
+      key: 'Sold to ID'.tr(),
       value: customer.customerCodeSoldTo,
     ),
     SoldToDetails(
-      key: 'Sold to Customer Name',
+      key: 'Sold to Customer Name'.tr(),
       value: customer.customerName.toString(),
     ),
     SoldToDetails(
-      key: 'Address',
+      key: 'Address'.tr(),
       value:customer.customerAddress.toString(),
             ),
     SoldToDetails(
-      key: 'Postal Code',
+      key: 'Postal Code'.tr(),
       value: customer.postalCode,
     ),
     SoldToDetails(
-      key: 'Country',
+      key: 'Country'.tr(),
       value: customer.region,
     ),
-    const SoldToDetails(
-      key: 'Phone',
+     SoldToDetails(
+      key: 'Phone'.tr(),
       value: 'NA',
     ),
   ];
