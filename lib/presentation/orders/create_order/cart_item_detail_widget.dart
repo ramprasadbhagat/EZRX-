@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/price_tier_label.dart';
@@ -29,11 +28,9 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
   @override
   void initState() {
     _controller = TextEditingController();
-    _controller.text = '1';
-    context.read<AddToCartBloc>().add(AddToCartEvent.updateQuantity(
-          1,
-          context.read<CartBloc>().state.zmgMaterialCount,
-        ));
+    final addToCartBloc = context.read<AddToCartBloc>();
+
+    _controller.text = addToCartBloc.state.cartItem.quantity.toString();
     super.initState();
   }
 
@@ -74,7 +71,7 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
                 ),
           ),
         ),
-        if (widget.cartItem.price.zmgDiscount)
+        if (widget.cartItem.price.isDiscountEligible)
           Column(
             children: [
               ...widget.cartItem.price.tiers.first.items

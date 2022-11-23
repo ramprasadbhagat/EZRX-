@@ -51,7 +51,7 @@ class FavouriteListTile extends StatelessWidget {
               materialInfo: priceDetail.info,
               salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
               quantity: 1,
-              zmgMaterialCountOnCart: 0,
+              discountedMaterialCount: 0,
               isOverride: false,
               bundle: Bundle.empty(),
             );
@@ -103,25 +103,34 @@ class FavouriteListTile extends StatelessWidget {
                               child: LoadingShimmer.tile(),
                             )
                           : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              context.read<SalesOrgBloc>().state.configs.enableVat
-                                  ? Text(
-                                '${'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr()}${priceAggregate.display(PriceType.unitPriceBeforeGst)}',
-                                style: Theme.of(context).textTheme.bodyText1?.apply(
-                                  color: ZPColors.lightGray,
-                                ),
-                              )
-                                  : const SizedBox.shrink(),
-                              Text(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                context
+                                        .read<SalesOrgBloc>()
+                                        .state
+                                        .configs
+                                        .enableVat
+                                    ? Text(
+                                        '${'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr()}${priceAggregate.display(PriceType.unitPriceBeforeGst)}',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1
+                                            ?.apply(
+                                              color: ZPColors.lightGray,
+                                            ),
+                                      )
+                                    : const SizedBox.shrink(),
+                                Text(
                                   '${'Unit Price: '.tr()}${priceAggregate.display(PriceType.unitPrice)}',
-                                  style:
-                                      Theme.of(context).textTheme.bodyText1?.apply(
-                                            color: ZPColors.black,
-                                          ),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1
+                                      ?.apply(
+                                        color: ZPColors.black,
+                                      ),
                                 ),
-                            ],
-                          ),
+                              ],
+                            ),
                       favourite.isWaitingStatusUpdate
                           ? LoadingShimmer.withChild(
                               child: IconButton(

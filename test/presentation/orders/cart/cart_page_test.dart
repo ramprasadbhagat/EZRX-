@@ -515,7 +515,6 @@ void main() {
           const Key('priceOverride'),
         );
         expect(priceWidget, findsOneWidget);
-        final listPrice = find.byKey(const Key('listPrice'));
 
         expect(
             (tester.firstWidget(find.byKey(
@@ -551,7 +550,6 @@ void main() {
           const Key('priceOverride'),
         );
         expect(priceWidget, findsOneWidget);
-        final listPrice = find.byKey(const Key('listPrice'));
 
         expect(
             (tester.firstWidget(find.byKey(

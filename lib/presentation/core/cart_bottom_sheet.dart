@@ -1,10 +1,5 @@
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/add_to_cart.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/update_cart.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +10,12 @@ class CartBottomSheet {
     required BuildContext context,
     required PriceAggregate priceAggregate,
   }) {
+    context.read<AddToCartBloc>().add(
+          AddToCartEvent.setCartItem(
+            priceAggregate,
+          ),
+        );
+
     showModalBottomSheet(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -24,12 +25,6 @@ class CartBottomSheet {
       ),
       context: context,
       builder: (_) {
-        context.read<AddToCartBloc>().add(
-              AddToCartEvent.setCartItem(
-                priceAggregate,
-              ),
-            );
-
         return const AddToCart();
       },
     );
@@ -39,6 +34,11 @@ class CartBottomSheet {
     required BuildContext context,
     required PriceAggregate cartItem,
   }) {
+    context.read<AddToCartBloc>().add(
+          AddToCartEvent.setCartItem(
+            cartItem,
+          ),
+        );
     showModalBottomSheet(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -48,7 +48,7 @@ class CartBottomSheet {
       ),
       context: context,
       builder: (_) {
-        return UpdateCart(cartItem: cartItem);
+        return const UpdateCart();
       },
     );
   }

@@ -137,7 +137,7 @@ void main() {
       );
     }
 
-    testWidgets('Add to Cart zmg Discount Materail', (tester) async {
+    testWidgets('Add to Cart zmg Discount Material', (tester) async {
       when(() => addToCartBlocMock.state).thenReturn(
         AddToCartState.initial().copyWith(
           cartItem: priceAggregate.copyWith(

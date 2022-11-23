@@ -130,29 +130,31 @@ class _SelectAllButton extends StatelessWidget {
     return BlocBuilder<CartBloc, CartState>(
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Radio(
-              value: state.selectedItemList.length,
-              groupValue: state.cartItemList.length,
-              toggleable: true,
-              onChanged: (value) {
-                context.read<CartBloc>().add(
-                      const CartEvent.updateSelectAllItems(),
-                    );
-              },
-            ),
-            Text(
-              'Select All',
-              style: TextStyle(
-                color: state.selectedItemsMaterialNumber.length ==
-                        state.cartItemList.length
-                    ? ZPColors.primary
-                    : ZPColors.black,
+        return Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Radio(
+                value: state.selectedItemList.length,
+                groupValue: state.cartItemList.length,
+                toggleable: true,
+                onChanged: (value) {
+                  context.read<CartBloc>().add(
+                        const CartEvent.updateSelectAllItems(),
+                      );
+                },
               ),
-            ),
-          ],
+              Text(
+                'Select All',
+                style: TextStyle(
+                  color: state.selectedItemsMaterialNumber.length ==
+                          state.cartItemList.length
+                      ? ZPColors.primary
+                      : ZPColors.black,
+                ),
+              ),
+            ],
+          ),
         );
       },
     );
@@ -170,21 +172,20 @@ class _TotalSection extends StatelessWidget {
         final salesOrgConfig = context.read<SalesOrgBloc>().state.configs;
         final taxCode = context.read<SalesOrgBloc>().state.salesOrg.taxCode;
 
-        return SizedBox(
-          width: 200,
+        return Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               BalanceTextRow(
                 keyText: 'Subtotal'.tr(),
                 valueText: _displayPrice(salesOrgConfig, state.subtotal),
-                valueFlex: 1,
+                valueFlex: 2,
               ),
               salesOrgConfig.enableVat
                   ? BalanceTextRow(
                       keyText: '$taxCode in %'.tr(),
                       valueText: '${salesOrgConfig.vatValue}%',
-                      valueFlex: 1,
+                      valueFlex: 2,
                     )
                   : const SizedBox.shrink(),
               salesOrgConfig.enableVat
@@ -194,7 +195,7 @@ class _TotalSection extends StatelessWidget {
                         salesOrgConfig,
                         state.vatTotal,
                       ),
-                      valueFlex: 1,
+                      valueFlex: 2,
                     )
                   : const SizedBox.shrink(),
               BalanceTextRow(
@@ -203,7 +204,7 @@ class _TotalSection extends StatelessWidget {
                   salesOrgConfig,
                   state.grandTotal,
                 ),
-                valueFlex: 1,
+                valueFlex: 2,
               ),
             ],
           ),

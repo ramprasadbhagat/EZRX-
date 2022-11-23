@@ -29,7 +29,7 @@ class CartMaterialItemTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller =
         TextEditingController(text: cartItem.quantity.toString());
-    
+
     return Card(
       child: CustomSlidable(
         endActionPaneActions: [
@@ -54,6 +54,7 @@ class CartMaterialItemTile extends StatelessWidget {
             );
           },
           title: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               showCheckBox
                   ? BlocBuilder<CartBloc, CartState>(
@@ -83,17 +84,14 @@ class CartMaterialItemTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          cartItem.materialInfo.materialNumber.displayMatNo,
-                          style: Theme.of(context).textTheme.subtitle2?.apply(
-                                color: ZPColors.kPrimaryColor,
-                              ),
-                        ),
-                        BonusDiscountLabel(materialInfo: cartItem.materialInfo),
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        cartItem.materialInfo.materialNumber.displayMatNo,
+                        style: Theme.of(context).textTheme.subtitle2?.apply(
+                              color: ZPColors.kPrimaryColor,
+                            ),
+                      ),
                     ),
                     Text(
                       cartItem.materialInfo.materialDescription,
@@ -198,36 +196,49 @@ class CartMaterialItemTile extends StatelessWidget {
                   ],
                 ),
               ),
-              QuantityInput(
-                quantityTextKey: const Key('cartItem'),
-                controller: controller,
-                onFieldChange: (value) {
-                   context.read<CartBloc>().add(
-                      CartEvent.updateCartItem(
-                        item: cartItem.copyWith(quantity: value),
-                      ),
-                    );
-                },
-                minusPressed: (k) {
-                  if (cartItem.quantity > 1) {
-                    context.read<CartBloc>().add(
-                          CartEvent.addToCart(
-                            item: cartItem.copyWith(quantity: -1),
-                          ),
-                        );
-                  } else {
-                    context.read<CartBloc>().add(
-                          CartEvent.removeFromCart(item: cartItem),
-                        );
-                  }
-                },
-                addPressed: (k) {
-                  context.read<CartBloc>().add(
-                        CartEvent.addToCart(
-                          item: cartItem.copyWith(quantity: 1),
-                        ),
-                      );
-                },
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child:
+                        BonusDiscountLabel(materialInfo: cartItem.materialInfo),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  QuantityInput(
+                    quantityTextKey: const Key('cartItem'),
+                    controller: controller,
+                    onFieldChange: (value) {
+                      context.read<CartBloc>().add(
+                            CartEvent.updateCartItem(
+                              item: cartItem.copyWith(quantity: value),
+                            ),
+                          );
+                    },
+                    minusPressed: (k) {
+                      if (cartItem.quantity > 1) {
+                        context.read<CartBloc>().add(
+                              CartEvent.addToCart(
+                                item: cartItem.copyWith(quantity: -1),
+                              ),
+                            );
+                      } else {
+                        context.read<CartBloc>().add(
+                              CartEvent.removeFromCart(item: cartItem),
+                            );
+                      }
+                    },
+                    addPressed: (k) {
+                      context.read<CartBloc>().add(
+                            CartEvent.addToCart(
+                              item: cartItem.copyWith(quantity: 1),
+                            ),
+                          );
+                    },
+                  ),
+                ],
               ),
 
               // isThreeLine: true,

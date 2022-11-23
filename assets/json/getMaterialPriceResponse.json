@@ -367,7 +367,34 @@
           }
         ],
         "Bonuses": [],
-        "TieredPricing": [],
+        "TieredPricing": [
+          {
+            "Tier": "C",
+            "PriceTier": [
+              {
+                "ApplyBonus": false,
+                "Sequence": 0,
+                "Quantity": 1,
+                "Type": "",
+                "Rate": 800
+              },
+              {
+                "ApplyBonus": false,
+                "Sequence": 0,
+                "Quantity": 3,
+                "Type": "",
+                "Rate": 850
+              },
+              {
+                "ApplyBonus": false,
+                "Sequence": 0,
+                "Quantity": 5,
+                "Type": "",
+                "Rate": 900
+              }
+            ]
+          }
+        ],
         "Bundles": [],
         "Valid": true
       },
@@ -400,7 +427,21 @@
                 "Sequence": 0,
                 "Quantity": 1,
                 "Type": "",
-                "Rate": 901
+                "Rate": 900
+              },
+              {
+                "ApplyBonus": false,
+                "Sequence": 0,
+                "Quantity": 3,
+                "Type": "",
+                "Rate": 950
+              },
+              {
+                "ApplyBonus": false,
+                "Sequence": 0,
+                "Quantity": 5,
+                "Type": "",
+                "Rate": 1000
               }
             ]
           }

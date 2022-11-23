@@ -1,24 +1,42 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_detail_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class UpdateCart extends StatelessWidget {
+class UpdateCart extends StatefulWidget {
   const UpdateCart({
     Key? key,
-    required this.cartItem,
   }) : super(key: key);
 
-  final PriceAggregate cartItem;
+  @override
+  State<UpdateCart> createState() => _UpdateCartState();
+}
+
+class _UpdateCartState extends State<UpdateCart> {
+  @override
+  void initState() {
+    final addToCartBloc = context.read<AddToCartBloc>();
+    final cartBloc = context.read<CartBloc>();
+
+    final cartItem = addToCartBloc.state.cartItem;
+    final discountedMaterialCount =
+        cartBloc.state.onUpdateDiscountMaterialCount(cartItem);
+    addToCartBloc.add(
+      AddToCartEvent.updateQuantity(
+        cartItem.quantity,
+        discountedMaterialCount,
+      ),
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final controller = TextEditingController(
-      text: '${cartItem.quantity}',
-    );
+    final cartBloc = context.read<CartBloc>();
+    final addToCartBloc = context.read<AddToCartBloc>();
 
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.7,
@@ -26,25 +44,38 @@ class UpdateCart extends StatelessWidget {
         backgroundColor: Colors.transparent,
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: ListView(
-            children: [
-              CartItemDetailWidget(
-                cartItem: cartItem,
-                onQuantityChanged: (int value) {},
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  final updatedCartItem = cartItem.copyWith(
-                    quantity: int.tryParse(controller.text) ?? 1,
-                  );
-                  context.read<CartBloc>().add(
-                        CartEvent.updateCartItem(item: updatedCartItem),
+          child: BlocBuilder<AddToCartBloc, AddToCartState>(
+            buildWhen: (previous, current) => previous != current,
+            builder: (context, state) {
+              return ListView(
+                children: [
+                  CartItemDetailWidget(
+                    cartItem: state.cartItem,
+                    onQuantityChanged: (int value) {
+                      final discountedMaterialCount =
+                          cartBloc.state.onUpdateDiscountMaterialCount(
+                        addToCartBloc.state.cartItem,
                       );
-                  context.router.pop();
-                },
-                child: const Text('Update Cart').tr(),
-              ),
-            ],
+                      context.read<AddToCartBloc>().add(
+                            AddToCartEvent.updateQuantity(
+                              value,
+                              discountedMaterialCount,
+                            ),
+                          );
+                    },
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      context.read<CartBloc>().add(
+                            CartEvent.updateCartItem(item: state.cartItem),
+                          );
+                      context.router.pop();
+                    },
+                    child: const Text('Update Cart').tr(),
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),

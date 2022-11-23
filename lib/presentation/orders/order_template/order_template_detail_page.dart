@@ -129,7 +129,7 @@ class OrderTemplateDetailPage extends StatelessWidget {
           materialInfo: itemInfo.info,
           salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
           quantity: queryInfo.qty.getOrCrash(),
-          zmgMaterialCountOnCart: cartBloc.state.zmgMaterialCount,
+          discountedMaterialCount: cartBloc.state.zmgMaterialCount,
           isOverride: false,
           bundle: Bundle.empty(),
         );

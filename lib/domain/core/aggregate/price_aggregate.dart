@@ -4,7 +4,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
-import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'price_aggregate.freezed.dart';
@@ -19,7 +19,7 @@ class PriceAggregate with _$PriceAggregate {
     required Bundle bundle,
     required SalesOrganisationConfigs salesOrgConfig,
     required int quantity,
-    required int zmgMaterialCountOnCart,
+    required int discountedMaterialCount,
     required bool isOverride,
   }) = _PriceAggregate;
 
@@ -29,7 +29,7 @@ class PriceAggregate with _$PriceAggregate {
         bundle: Bundle.empty(),
         salesOrgConfig: SalesOrganisationConfigs.empty(),
         quantity: 1,
-        zmgMaterialCountOnCart: 0,
+        discountedMaterialCount: 0,
         isOverride: false,
       );
 
@@ -63,7 +63,7 @@ class PriceAggregate with _$PriceAggregate {
   }
 
   double get listPrice {
-    if (price.zmgDiscount) return tirePriceforZMG;
+    if (price.isDiscountEligible) return discountedListPrice;
 
     return price.finalPrice.getOrDefaultValue(0);
   }
@@ -118,15 +118,12 @@ class PriceAggregate with _$PriceAggregate {
     return unitPrice * quantity;
   }
 
-  double get tirePriceforZMG => price.priceTireItem
+  double get discountedListPrice => price.priceTireItem
       .firstWhere(
-        (element) => zmgMaterialTotalCount >= element.quantity,
-        orElse: () => PriceTierItem.empty(),
+        (element) => discountedMaterialCount >= element.quantity,
+        orElse: () => price.priceTireItem.last,
       )
       .rate;
-
-  int get zmgMaterialTotalCount =>
-      zmgMaterialCountOnCart != 0 ? zmgMaterialCountOnCart : quantity;
 
   double getNewPrice() {
     final newPrice = materialInfo.taxClassification.isExempt()
@@ -190,6 +187,8 @@ class PriceAggregate with _$PriceAggregate {
         ? materialNumberFromInfo
         : materialNumberFromPrice;
   }
+
+  MaterialNumber get getMaterialNumber => materialInfo.materialNumber;
 }
 
 enum PriceType {

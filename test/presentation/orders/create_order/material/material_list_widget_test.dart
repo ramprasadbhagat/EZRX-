@@ -108,30 +108,28 @@ void main() {
   ];
 
   final fakematerialInfo = MaterialInfo(
-    materialNumber: fakeMaterialNumber,
-    materialDescription: "Reag Cup 15ml 1'S",
-    governmentMaterialCode: '',
-    therapeuticClass: 'All other non-therapeutic products',
-    itemBrand: 'Item not listed in I',
-    principalData: const PrincipalData(
-      principalName: '台灣羅氏醫療診斷設備(股)公司',
-      principalCode: '0000102004',
-    ),
-    taxClassification:
-        MaterialTaxClassification('Product : Full Tax'),
-    itemRegistrationNumber: 'NA',
-    unitOfMeasurement: 'EA',
-    materialGroup2: MaterialGroup.two(''),
-    materialGroup4: MaterialGroup.four('OTH'),
-    isSampleMaterial: false,
-    hidePrice: false,
-    hasValidTenderContract: false,
-    hasMandatoryTenderContract: false,
-    taxes: ['5'],
-    bundles: [],
-    defaultMaterialDescription: '',
-    isFOCMaterial: false
-  );
+      materialNumber: fakeMaterialNumber,
+      materialDescription: "Reag Cup 15ml 1'S",
+      governmentMaterialCode: '',
+      therapeuticClass: 'All other non-therapeutic products',
+      itemBrand: 'Item not listed in I',
+      principalData: const PrincipalData(
+        principalName: '台灣羅氏醫療診斷設備(股)公司',
+        principalCode: '0000102004',
+      ),
+      taxClassification: MaterialTaxClassification('Product : Full Tax'),
+      itemRegistrationNumber: 'NA',
+      unitOfMeasurement: 'EA',
+      materialGroup2: MaterialGroup.two(''),
+      materialGroup4: MaterialGroup.four('OTH'),
+      isSampleMaterial: false,
+      hidePrice: false,
+      hasValidTenderContract: false,
+      hasMandatoryTenderContract: false,
+      taxes: ['5'],
+      bundles: [],
+      defaultMaterialDescription: '',
+      isFOCMaterial: false);
   late MaterialFilterBloc mockMaterialFilterBloc;
 
   setUpAll(() async {
@@ -264,7 +262,30 @@ void main() {
           isFetching: false,
           nextPageIndex: 2,
           materialList: <MaterialInfo>[
-            fakematerialInfo,
+            MaterialInfo(
+                materialNumber: fakeMaterialNumber,
+                materialDescription: "Reag Cup 15ml 1'S",
+                governmentMaterialCode: '',
+                therapeuticClass: 'All other non-therapeutic products',
+                itemBrand: 'Item not listed in I',
+                principalData: const PrincipalData(
+                  principalName: '台灣羅氏醫療診斷設備(股)公司',
+                  principalCode: '0000102004',
+                ),
+                taxClassification:
+                    MaterialTaxClassification('Product : Full Tax'),
+                itemRegistrationNumber: 'NA',
+                unitOfMeasurement: 'EA',
+                materialGroup2: MaterialGroup.two(''),
+                materialGroup4: MaterialGroup.four('OTH'),
+                isSampleMaterial: false,
+                hidePrice: false,
+                hasValidTenderContract: false,
+                hasMandatoryTenderContract: false,
+                taxes: ['5'],
+                bundles: [],
+                defaultMaterialDescription: '',
+                isFOCMaterial: false)
           ],
         )
       ];
@@ -375,15 +396,18 @@ void main() {
         ),
       );
 
-      await tester.pumpWidget(
-          getScopedWidget(const Material(child: OrderTypeSelector(hideReasonField: true,))));
+      await tester.pumpWidget(getScopedWidget(const Material(
+          child: OrderTypeSelector(
+        hideReasonField: true,
+      ))));
       await tester.pump();
       await tester.pumpAndSettle(const Duration(seconds: 1));
       final orderTypeSelector = find.byKey(const Key('orderTypeSelector'));
       expect(orderTypeSelector, findsOneWidget);
     });
 
-    testWidgets('Order Type Document type enable with selected order type', (tester) async {
+    testWidgets('Order Type Document type enable with selected order type',
+        (tester) async {
       final eligibilityState = eligibilityBlocMock.state.copyWith(
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
@@ -402,8 +426,10 @@ void main() {
         ),
       );
 
-      await tester.pumpWidget(
-          getScopedWidget(const Material(child: OrderTypeSelector(hideReasonField: true,))));
+      await tester.pumpWidget(getScopedWidget(const Material(
+          child: OrderTypeSelector(
+        hideReasonField: true,
+      ))));
       await tester.pump();
       await tester.pumpAndSettle(const Duration(seconds: 1));
       final orderTypeSelector = find.byKey(const Key('orderTypeSelector'));
@@ -421,11 +447,10 @@ void main() {
       expect(documentType, findsOneWidget);
       await tester.tap(documentType);
       await tester.pumpAndSettle(const Duration(seconds: 1));
-      
     });
 
-    testWidgets(
-      'Change order type when already cart item added, success', (tester) async {
+    testWidgets('Change order type when already cart item added, success',
+        (tester) async {
       final eligibilityState = eligibilityBlocMock.state.copyWith(
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
@@ -444,8 +469,10 @@ void main() {
         ),
       );
 
-      await tester.pumpWidget(
-          getScopedWidget(const Material(child: OrderTypeSelector(hideReasonField: true,))));
+      await tester.pumpWidget(getScopedWidget(const Material(
+          child: OrderTypeSelector(
+        hideReasonField: true,
+      ))));
       await tester.pump();
       await tester.pumpAndSettle(const Duration(seconds: 1));
       final orderTypeSelector = find.byKey(const Key('orderTypeSelector'));
@@ -466,13 +493,11 @@ void main() {
 
       //add to cart
       when(() => cartBlocMock.state).thenReturn(
-        cartBlocMock.state.copyWith(
-          cartItemList: [
-            PriceAggregate.empty().copyWith(
-              materialInfo: fakematerialInfo,
-            ),
-          ]
-        ),
+        cartBlocMock.state.copyWith(cartItemList: [
+          PriceAggregate.empty().copyWith(
+            materialInfo: fakematerialInfo,
+          ),
+        ]),
       );
 
       final orderDocumentTypedialog2 =
@@ -488,16 +513,14 @@ void main() {
       await tester.tap(documentType2);
       await tester.pumpAndSettle(const Duration(seconds: 1));
 
-      final changeAction =
-          find.byKey(const Key('Change'));
+      final changeAction = find.byKey(const Key('Change'));
       expect(changeAction, findsOneWidget);
       await tester.tap(changeAction);
       await tester.pumpAndSettle(const Duration(seconds: 1));
-      
     });
 
-    testWidgets(
-      'Change order type when already cart item added, fails', (tester) async {
+    testWidgets('Change order type when already cart item added, fails',
+        (tester) async {
       final eligibilityState = eligibilityBlocMock.state.copyWith(
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
@@ -516,8 +539,10 @@ void main() {
         ),
       );
 
-      await tester.pumpWidget(
-          getScopedWidget(const Material(child: OrderTypeSelector(hideReasonField: true,))));
+      await tester.pumpWidget(getScopedWidget(const Material(
+          child: OrderTypeSelector(
+        hideReasonField: true,
+      ))));
       await tester.pump();
       await tester.pumpAndSettle(const Duration(seconds: 3));
       final orderTypeSelector = find.byKey(const Key('orderTypeSelector'));
@@ -538,13 +563,11 @@ void main() {
 
       //add to cart
       when(() => cartBlocMock.state).thenReturn(
-        cartBlocMock.state.copyWith(
-          cartItemList: [
-            PriceAggregate.empty().copyWith(
-              materialInfo: fakematerialInfo,
-            ),
-          ]
-        ),
+        cartBlocMock.state.copyWith(cartItemList: [
+          PriceAggregate.empty().copyWith(
+            materialInfo: fakematerialInfo,
+          ),
+        ]),
       );
 
       final orderDocumentTypedialog2 =
@@ -560,12 +583,10 @@ void main() {
       await tester.tap(documentType2);
       await tester.pumpAndSettle(const Duration(seconds: 1));
 
-      final cancelAction =
-          find.byKey(const Key('Cancel'));
+      final cancelAction = find.byKey(const Key('Cancel'));
       expect(cancelAction, findsOneWidget);
       await tester.tap(cancelAction);
       await tester.pumpAndSettle(const Duration(seconds: 1));
-      
     });
 
     // TODO: need Wasim help
@@ -787,6 +808,9 @@ void main() {
           materialPrice: {
             fakeMaterialNumber: Price.empty().copyWith(
               zmgDiscount: true,
+              tiers: [
+                PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
+              ],
             )
           },
         ),
@@ -820,6 +844,9 @@ void main() {
           materialPrice: {
             fakeMaterialNumber: Price.empty().copyWith(
               zmgDiscount: true,
+              tiers: [
+                PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
+              ],
               bonuses: [
                 PriceBonus.empty().copyWith(
                   items: [

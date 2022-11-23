@@ -49,4 +49,8 @@ class Price with _$Price {
 
   List<PriceTierItem> get priceTireItem =>
       tiers.isNotEmpty ? tiers.first.getItems : <PriceTierItem>[];
+
+  bool get isTireDiscountEligible => tiers.isNotEmpty;
+
+  bool get isDiscountEligible => isTireDiscountEligible || zmgDiscount;
 }

@@ -26,8 +26,8 @@ class AddToCartBloc extends Bloc<AddToCartEvent, AddToCartState> {
           state.copyWith(
             cartItem: state.cartItem.copyWith(
               quantity: e.quantity,
-              zmgMaterialCountOnCart: e.zmgMaterialCountOnCart +
-                  (state.cartItem.price.zmgDiscount ? e.quantity : 0),
+              discountedMaterialCount:
+                  e.discountMaterialCountOnCart + e.quantity,
             ),
             quantity: e.quantity,
           ),

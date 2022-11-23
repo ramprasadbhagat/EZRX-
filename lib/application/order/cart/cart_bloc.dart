@@ -57,8 +57,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               state.copyWith(
                 cartItemList: cartItemList
                     .map(
-                      (e) => e.copyWith(
-                        zmgMaterialCountOnCart: state.zmgMaterialCount,
+                      (element) => element.copyWith(
+                        discountedMaterialCount:
+                            state.onAddCartDiscountMaterialCount(element),
                       ),
                     )
                     .toList(),
@@ -104,21 +105,20 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 isFetching: false,
               ),
             );
-            if (e.item.price.zmgDiscount) {
-              emit(
-                state.copyWith(
-                  cartItemList: cartItemList
-                      .map(
-                        (PriceAggregate element) => element.copyWith(
-                          zmgMaterialCountOnCart: state.zmgMaterialCount,
-                        ),
-                      )
-                      .toList(),
-                  apiFailureOrSuccessOption: none(),
-                  isFetching: false,
-                ),
-              );
-            }
+            emit(
+              state.copyWith(
+                cartItemList: cartItemList
+                    .map(
+                      (PriceAggregate element) => element.copyWith(
+                        discountedMaterialCount:
+                            state.onAddCartDiscountMaterialCount(element),
+                      ),
+                    )
+                    .toList(),
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
           },
         );
       },
@@ -150,13 +150,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 isFetching: false,
               ),
             );
-            if (e.item.price.zmgDiscount) {
+            if (e.item.price.isDiscountEligible) {
               emit(
                 state.copyWith(
                   cartItemList: cartItemList
                       .map(
                         (PriceAggregate element) => element.copyWith(
-                          zmgMaterialCountOnCart: state.zmgMaterialCount,
+                          discountedMaterialCount:
+                              state.onAddCartDiscountMaterialCount(element),
                         ),
                       )
                       .toList(),
@@ -190,13 +191,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 isFetching: false,
               ),
             );
-            if (e.item.price.zmgDiscount) {
+            if (e.item.price.isDiscountEligible) {
               emit(
                 state.copyWith(
                   cartItemList: cartItemList
                       .map(
                         (PriceAggregate element) => element.copyWith(
-                          zmgMaterialCountOnCart: state.zmgMaterialCount,
+                          discountedMaterialCount:
+                              state.onAddCartDiscountMaterialCount(element),
                         ),
                       )
                       .toList(),

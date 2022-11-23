@@ -22,7 +22,7 @@ mixin _$PriceAggregate {
   SalesOrganisationConfigs get salesOrgConfig =>
       throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
-  int get zmgMaterialCountOnCart => throw _privateConstructorUsedError;
+  int get discountedMaterialCount => throw _privateConstructorUsedError;
   bool get isOverride => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -42,7 +42,7 @@ abstract class $PriceAggregateCopyWith<$Res> {
       Bundle bundle,
       SalesOrganisationConfigs salesOrgConfig,
       int quantity,
-      int zmgMaterialCountOnCart,
+      int discountedMaterialCount,
       bool isOverride});
 
   $PriceCopyWith<$Res> get price;
@@ -69,7 +69,7 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
     Object? bundle = null,
     Object? salesOrgConfig = null,
     Object? quantity = null,
-    Object? zmgMaterialCountOnCart = null,
+    Object? discountedMaterialCount = null,
     Object? isOverride = null,
   }) {
     return _then(_value.copyWith(
@@ -93,9 +93,9 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      zmgMaterialCountOnCart: null == zmgMaterialCountOnCart
-          ? _value.zmgMaterialCountOnCart
-          : zmgMaterialCountOnCart // ignore: cast_nullable_to_non_nullable
+      discountedMaterialCount: null == discountedMaterialCount
+          ? _value.discountedMaterialCount
+          : discountedMaterialCount // ignore: cast_nullable_to_non_nullable
               as int,
       isOverride: null == isOverride
           ? _value.isOverride
@@ -152,7 +152,7 @@ abstract class _$$_PriceAggregateCopyWith<$Res>
       Bundle bundle,
       SalesOrganisationConfigs salesOrgConfig,
       int quantity,
-      int zmgMaterialCountOnCart,
+      int discountedMaterialCount,
       bool isOverride});
 
   @override
@@ -181,7 +181,7 @@ class __$$_PriceAggregateCopyWithImpl<$Res>
     Object? bundle = null,
     Object? salesOrgConfig = null,
     Object? quantity = null,
-    Object? zmgMaterialCountOnCart = null,
+    Object? discountedMaterialCount = null,
     Object? isOverride = null,
   }) {
     return _then(_$_PriceAggregate(
@@ -205,9 +205,9 @@ class __$$_PriceAggregateCopyWithImpl<$Res>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      zmgMaterialCountOnCart: null == zmgMaterialCountOnCart
-          ? _value.zmgMaterialCountOnCart
-          : zmgMaterialCountOnCart // ignore: cast_nullable_to_non_nullable
+      discountedMaterialCount: null == discountedMaterialCount
+          ? _value.discountedMaterialCount
+          : discountedMaterialCount // ignore: cast_nullable_to_non_nullable
               as int,
       isOverride: null == isOverride
           ? _value.isOverride
@@ -226,7 +226,7 @@ class _$_PriceAggregate extends _PriceAggregate {
       required this.bundle,
       required this.salesOrgConfig,
       required this.quantity,
-      required this.zmgMaterialCountOnCart,
+      required this.discountedMaterialCount,
       required this.isOverride})
       : super._();
 
@@ -241,13 +241,13 @@ class _$_PriceAggregate extends _PriceAggregate {
   @override
   final int quantity;
   @override
-  final int zmgMaterialCountOnCart;
+  final int discountedMaterialCount;
   @override
   final bool isOverride;
 
   @override
   String toString() {
-    return 'PriceAggregate(price: $price, materialInfo: $materialInfo, bundle: $bundle, salesOrgConfig: $salesOrgConfig, quantity: $quantity, zmgMaterialCountOnCart: $zmgMaterialCountOnCart, isOverride: $isOverride)';
+    return 'PriceAggregate(price: $price, materialInfo: $materialInfo, bundle: $bundle, salesOrgConfig: $salesOrgConfig, quantity: $quantity, discountedMaterialCount: $discountedMaterialCount, isOverride: $isOverride)';
   }
 
   @override
@@ -263,15 +263,16 @@ class _$_PriceAggregate extends _PriceAggregate {
                 other.salesOrgConfig == salesOrgConfig) &&
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity) &&
-            (identical(other.zmgMaterialCountOnCart, zmgMaterialCountOnCart) ||
-                other.zmgMaterialCountOnCart == zmgMaterialCountOnCart) &&
+            (identical(
+                    other.discountedMaterialCount, discountedMaterialCount) ||
+                other.discountedMaterialCount == discountedMaterialCount) &&
             (identical(other.isOverride, isOverride) ||
                 other.isOverride == isOverride));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, price, materialInfo, bundle,
-      salesOrgConfig, quantity, zmgMaterialCountOnCart, isOverride);
+      salesOrgConfig, quantity, discountedMaterialCount, isOverride);
 
   @JsonKey(ignore: true)
   @override
@@ -287,7 +288,7 @@ abstract class _PriceAggregate extends PriceAggregate {
       required final Bundle bundle,
       required final SalesOrganisationConfigs salesOrgConfig,
       required final int quantity,
-      required final int zmgMaterialCountOnCart,
+      required final int discountedMaterialCount,
       required final bool isOverride}) = _$_PriceAggregate;
   const _PriceAggregate._() : super._();
 
@@ -302,7 +303,7 @@ abstract class _PriceAggregate extends PriceAggregate {
   @override
   int get quantity;
   @override
-  int get zmgMaterialCountOnCart;
+  int get discountedMaterialCount;
   @override
   bool get isOverride;
   @override

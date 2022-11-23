@@ -110,4 +110,30 @@ class CartState with _$CartState {
 
     return displayCartItems.values.toList();
   }
+
+  int onAddCartDiscountMaterialCount(PriceAggregate addedCartItem) =>
+      cartItemList.fold<int>(
+        0,
+        (sum, item) =>
+            sum +
+            ((item.price.zmgDiscount && addedCartItem.price.zmgDiscount) ||
+                    (addedCartItem.price.isTireDiscountEligible &&
+                        item.price.isTireDiscountEligible &&
+                        item.getMaterialNumber ==
+                            addedCartItem.getMaterialNumber)
+                ? item.quantity
+                : 0),
+      );
+
+  int onUpdateDiscountMaterialCount(PriceAggregate ubdatedCartItem) =>
+      cartItemList.fold<int>(
+        0,
+        (sum, item) =>
+            sum +
+            ((item.price.zmgDiscount &&
+                    ubdatedCartItem.price.zmgDiscount &&
+                    item.getMaterialNumber != ubdatedCartItem.getMaterialNumber)
+                ? item.quantity
+                : 0),
+      );
 }

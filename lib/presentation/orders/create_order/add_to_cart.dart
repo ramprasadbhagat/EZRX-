@@ -8,10 +8,40 @@ import 'package:ezrxmobile/presentation/orders/create_order/cart_item_detail_wid
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AddToCart extends StatelessWidget {
+class AddToCart extends StatefulWidget {
   const AddToCart({Key? key}) : super(key: key);
+
+  @override
+  State<AddToCart> createState() => _AddToCartState();
+}
+
+class _AddToCartState extends State<AddToCart> {
+  @override
+  void initState() {
+    final addToCartBloc = context.read<AddToCartBloc>();
+    final cartBloc = context.read<CartBloc>();
+    final cartItem = addToCartBloc.state.cartItem;
+    addToCartBloc.add(
+      AddToCartEvent.updateQuantity(
+        1,
+        cartItem.price.zmgDiscount
+            ? cartBloc.state.zmgMaterialCount
+            : cartBloc.state.onAddCartDiscountMaterialCount(cartItem),
+      ),
+    );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final cartBloc = context.read<CartBloc>();
+    final addToCartBloc = context.read<AddToCartBloc>();
+
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.7,
       child: Scaffold(
@@ -26,12 +56,17 @@ class AddToCart extends StatelessWidget {
                   CartItemDetailWidget(
                     cartItem: state.cartItem,
                     onQuantityChanged: (int value) {
-                      context.read<AddToCartBloc>().add(
-                            AddToCartEvent.updateQuantity(
-                              value,
-                              context.read<CartBloc>().state.zmgMaterialCount,
-                            ),
-                          );
+                      final cartItem = addToCartBloc.state.cartItem;
+                      final discountedMaterialCount = cartItem.price.zmgDiscount
+                          ? cartBloc.state.zmgMaterialCount
+                          : cartBloc.state
+                              .onAddCartDiscountMaterialCount(cartItem);
+                      addToCartBloc.add(
+                        AddToCartEvent.updateQuantity(
+                          value,
+                          discountedMaterialCount,
+                        ),
+                      );
                     },
                   ),
                   ElevatedButton(

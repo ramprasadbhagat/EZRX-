@@ -42,7 +42,7 @@ class PriceAggregateDto {
       salesOrganisationConfigsDto: SalesOrganisationConfigsDto.fromDomain(
         cart.salesOrgConfig,
       ),
-      zmgMaterialCountOnCart: cart.zmgMaterialCountOnCart,
+      zmgMaterialCountOnCart: cart.discountedMaterialCount,
       isOverride: cart.isOverride,
       bundleDto: BundleDto.fromDomain(cart.bundle),
     );
@@ -56,7 +56,7 @@ class PriceAggregateDto {
       // price: Price.empty(),
       salesOrgConfig: salesOrganisationConfigsDto.toDomain(),
       // salesOrgConfig: SalesOrganisationConfigs.empty(),
-      zmgMaterialCountOnCart: zmgMaterialCountOnCart,
+      discountedMaterialCount: zmgMaterialCountOnCart,
       isOverride: isOverride,
       bundle: bundleDto.toDomain(),
     );

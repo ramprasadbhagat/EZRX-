@@ -8,6 +8,6 @@ class AddToCartEvent with _$AddToCartEvent {
       _SetCartItem;
   const factory AddToCartEvent.updateQuantity(
     int quantity,
-    int zmgMaterialCountOnCart,
+    int discountMaterialCountOnCart,
   ) = _UpdateQuantity;
 }

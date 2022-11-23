@@ -112,7 +112,6 @@ void main() {
         'Add to Cart Success CartBloc',
         build: () => CartBloc(cartRepository: cartRepositoryMock),
         setUp: () {
-        
           when(() => cartRepositoryMock.addToCart(
                   cartItem: PriceAggregate.empty()))
               .thenAnswer((invocation) async => Right(mockCartItemList));
