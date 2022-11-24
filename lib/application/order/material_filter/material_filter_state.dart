@@ -89,12 +89,6 @@ class MaterialFilterState with _$MaterialFilterState {
     return getSelectedFilterList(filterType).contains(name);
   }
 
-  bool isNoFilterSelected() {
-    return selectedMaterialFilter.uniquePrincipalName.isEmpty &&
-        selectedMaterialFilter.uniqueTherapeuticClass.isEmpty &&
-        selectedMaterialFilter.uniqueItemBrand.isEmpty;
-  }
-
   MaterialFilter getEmptyMaterialFilter() {
     return const MaterialFilter(
       uniqueItemBrand: <String>[],

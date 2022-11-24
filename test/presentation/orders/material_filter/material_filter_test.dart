@@ -15,7 +15,6 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
 
-
 class AutoRouterMock extends Mock implements AppRouter {}
 
 class MockMaterialFilterBloc
@@ -52,7 +51,7 @@ void main() {
           autoRouterMock: autoRouterMock,
           providers: [
             BlocProvider<MaterialFilterBloc>(
-                create: ((context) => materialfilterBlocMock)), 
+                create: ((context) => materialfilterBlocMock)),
           ],
           child: child,
         ),
@@ -102,26 +101,29 @@ void main() {
       final expectedState = [
         MaterialFilterState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
-          selectedMaterialFilter:
-              const MaterialFilter(uniqueItemBrand: [], uniquePrincipalName: [
-            'GSK Consumer Healthcare',
-          ], uniqueTherapeuticClass: []),
+          selectedMaterialFilter: const MaterialFilter(
+              uniqueItemBrand: [],
+              uniquePrincipalName: [
+                'GSK Consumer Healthcare',
+                'Pfizer PFE Private Limited test'
+              ],
+              uniqueTherapeuticClass: []),
         )
       ];
       when(() => materialfilterBlocMock.state).thenReturn(
-        MaterialFilterState.initial().copyWith(
-            materialFilter: const MaterialFilter(
-                uniqueItemBrand: [],
-                uniquePrincipalName: [
-                  'GSK Consumer Healthcare',
-                  'Pfizer PFE Private Limited test'
-                ],
-            uniqueTherapeuticClass: [])));
+          MaterialFilterState.initial().copyWith(
+              materialFilter: const MaterialFilter(
+                  uniqueItemBrand: [],
+                  uniquePrincipalName: [
+            'GSK Consumer Healthcare',
+            'Pfizer PFE Private Limited test'
+          ],
+                  uniqueTherapeuticClass: [])));
       whenListen(materialfilterBlocMock, Stream.fromIterable(expectedState));
       await tester.pumpWidget(getScopedWidget(const MaterialFilterPage(
         filterType: MaterialFilterType.principal,
       )));
-      
+
       final optionTile =
           find.byKey(const Key('filterOption-GSK Consumer Healthcare'));
       expect(optionTile, findsOneWidget);
@@ -136,7 +138,6 @@ void main() {
         )
       ];
       when(() => materialfilterBlocMock.state).thenReturn(
-
           MaterialFilterState.initial().copyWith(
               materialFilter: const MaterialFilter(
                   uniqueItemBrand: [],
@@ -160,8 +161,7 @@ void main() {
       await tester.tap(clearMaterialFiltereSearch);
     });
 
-
-     testWidgets('Enter Search Key in Search Field', (tester) async {
+    testWidgets('Enter Search Key in Search Field', (tester) async {
       final expected = [
         MaterialFilterState.initial().copyWith(
           searchKey: 'GSK',
@@ -185,13 +185,97 @@ void main() {
       });
 
       await tester.pump();
-      await tester.enterText(find.byKey(const Key('materialFilterSearchField')), 'GSK');
+      await tester.enterText(
+          find.byKey(const Key('materialFilterSearchField')), 'GSK');
       await tester.pump();
       expect(find.text('123'), findsNothing);
       expect(find.text('GSK'), findsOneWidget);
-      
     });
 
-    
+    testWidgets('Enter Search Key in Search Field', (tester) async {
+      final expected = [
+        MaterialFilterState.initial().copyWith(
+          searchKey: 'Growth hormones',
+        )
+      ];
+      when(() => materialfilterBlocMock.state)
+          .thenReturn(MaterialFilterState.initial().copyWith(
+              materialFilter: const MaterialFilter(
+        uniqueItemBrand: [],
+        uniquePrincipalName: [],
+        uniqueTherapeuticClass: ['Growth hormones'],
+      )));
+      whenListen(materialfilterBlocMock, Stream.fromIterable(expected));
+
+      await tester.runAsync(() async {
+        await tester.pumpWidget(getScopedWidget(const MaterialFilterPage(
+          filterType: MaterialFilterType.therapeutic,
+        )));
+      });
+
+      await tester.pump();
+      await tester.enterText(find.byKey(const Key('materialFilterSearchField')),
+          'Growth hormones');
+      await tester.pump();
+      expect(find.text('123'), findsNothing);
+      expect(find.text('Growth hormones'), findsOneWidget);
+    });
+
+    testWidgets('Enter Search Key in Search Field', (tester) async {
+      final expected = [
+        MaterialFilterState.initial().copyWith(
+          searchKey: 'Dequadin',
+        )
+      ];
+      when(() => materialfilterBlocMock.state)
+          .thenReturn(MaterialFilterState.initial().copyWith(
+              materialFilter: const MaterialFilter(
+        uniqueItemBrand: ['Dequadin Extra Lemon'],
+        uniquePrincipalName: [],
+        uniqueTherapeuticClass: [],
+      )));
+      whenListen(materialfilterBlocMock, Stream.fromIterable(expected));
+
+      await tester.runAsync(() async {
+        await tester.pumpWidget(getScopedWidget(const MaterialFilterPage(
+          filterType: MaterialFilterType.brand,
+        )));
+      });
+
+      await tester.pump();
+      await tester.enterText(find.byKey(const Key('materialFilterSearchField')),
+          'Dequadin Extra Lemon');
+      await tester.pump();
+      expect(find.text('123'), findsNothing);
+      expect(find.text('Dequadin Extra Lemon'), findsOneWidget);
+    });
+
+    testWidgets('Enter random Search Key in Search Field', (tester) async {
+      final expected = [
+        MaterialFilterState.initial().copyWith(
+          searchKey: 'RandomKey',
+        )
+      ];
+      when(() => materialfilterBlocMock.state)
+          .thenReturn(MaterialFilterState.initial().copyWith(
+              materialFilter: const MaterialFilter(
+        uniqueItemBrand: [],
+        uniquePrincipalName: [],
+        uniqueTherapeuticClass: [],
+      )));
+      whenListen(materialfilterBlocMock, Stream.fromIterable(expected));
+
+      await tester.runAsync(() async {
+        await tester.pumpWidget(getScopedWidget(const MaterialFilterPage(
+          filterType: MaterialFilterType.brand,
+        )));
+      });
+
+      await tester.pump();
+      await tester.enterText(
+          find.byKey(const Key('materialFilterSearchField')), 'RandomKey');
+      await tester.pump();
+      expect(find.text('RandomKey'), findsOneWidget);
+    });
   });
 }

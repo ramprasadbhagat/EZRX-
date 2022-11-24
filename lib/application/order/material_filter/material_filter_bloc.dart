@@ -105,11 +105,7 @@ class MaterialFilterBloc
           emit(state.copyWith(searchKey: e.searchkey)),
       clearSelected: (_) async => emit(
         state.copyWith(
-          selectedMaterialFilter: const MaterialFilter(
-            uniqueItemBrand: <String>[],
-            uniquePrincipalName: <String>[],
-            uniqueTherapeuticClass: <String>[],
-          ),
+          selectedMaterialFilter: state.getEmptyMaterialFilter(),
         ),
       ),
     );

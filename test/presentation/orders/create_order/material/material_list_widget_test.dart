@@ -160,8 +160,15 @@ void main() {
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
-      when(() => mockMaterialFilterBloc.state)
-          .thenReturn(MaterialFilterState.initial());
+      when(() => mockMaterialFilterBloc.state).thenReturn(
+          MaterialFilterState.initial().copyWith(
+              selectedMaterialFilter:
+                  MaterialFilterState.initial().selectedMaterialFilter.copyWith(
+        uniqueTherapeuticClass: [
+          'GSK Consumer Healthcare',
+          'All other non-therapeutic products',
+        ],
+      )));
       when(() => materialListBlocMock.state)
           .thenReturn(MaterialListState.initial());
       when(() => orderDocumentTypeBlocMock.state)
@@ -265,31 +272,32 @@ void main() {
           nextPageIndex: 2,
           materialList: <MaterialInfo>[
             MaterialInfo(
-                quantity: 0,
-                materialNumber: fakeMaterialNumber,
-                materialDescription: "Reag Cup 15ml 1'S",
-                governmentMaterialCode: '',
-                therapeuticClass: 'All other non-therapeutic products',
-                itemBrand: 'Item not listed in I',
-                principalData: const PrincipalData(
-                  principalName: '台灣羅氏醫療診斷設備(股)公司',
-                  principalCode: '0000102004',
-                ),
-                taxClassification:
-                    MaterialTaxClassification('Product : Full Tax'),
-                itemRegistrationNumber: 'NA',
-                unitOfMeasurement: 'EA',
-                materialGroup2: MaterialGroup.two(''),
-                materialGroup4: MaterialGroup.four('OTH'),
-                isSampleMaterial: false,
-                hidePrice: false,
-                hasValidTenderContract: false,
-                hasMandatoryTenderContract: false,
-                taxes: ['5'],
-                bundles: [],
-                defaultMaterialDescription: '',
-                isFOCMaterial: false,
-                remarks: '',)
+              quantity: 0,
+              materialNumber: fakeMaterialNumber,
+              materialDescription: "Reag Cup 15ml 1'S",
+              governmentMaterialCode: '',
+              therapeuticClass: 'All other non-therapeutic products',
+              itemBrand: 'Item not listed in I',
+              principalData: const PrincipalData(
+                principalName: '台灣羅氏醫療診斷設備(股)公司',
+                principalCode: '0000102004',
+              ),
+              taxClassification:
+                  MaterialTaxClassification('Product : Full Tax'),
+              itemRegistrationNumber: 'NA',
+              unitOfMeasurement: 'EA',
+              materialGroup2: MaterialGroup.two(''),
+              materialGroup4: MaterialGroup.four('OTH'),
+              isSampleMaterial: false,
+              hidePrice: false,
+              hasValidTenderContract: false,
+              hasMandatoryTenderContract: false,
+              taxes: ['5'],
+              bundles: [],
+              defaultMaterialDescription: '',
+              isFOCMaterial: false,
+              remarks: '',
+            )
           ],
         )
       ];
