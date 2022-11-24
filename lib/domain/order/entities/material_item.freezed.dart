@@ -32,6 +32,7 @@ mixin _$MaterialItem {
   String get itemRegistrationNumber => throw _privateConstructorUsedError;
   String get materialDescription => throw _privateConstructorUsedError;
   MaterialItemOverride get overrideInfo => throw _privateConstructorUsedError;
+  String get remarks => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialItemCopyWith<MaterialItem> get copyWith =>
@@ -60,7 +61,8 @@ abstract class $MaterialItemCopyWith<$Res> {
       String unitOfMeasurement,
       String itemRegistrationNumber,
       String materialDescription,
-      MaterialItemOverride overrideInfo});
+      MaterialItemOverride overrideInfo,
+      String remarks});
 
   $MaterialItemOverrideCopyWith<$Res> get overrideInfo;
 }
@@ -94,6 +96,7 @@ class _$MaterialItemCopyWithImpl<$Res, $Val extends MaterialItem>
     Object? itemRegistrationNumber = null,
     Object? materialDescription = null,
     Object? overrideInfo = null,
+    Object? remarks = null,
   }) {
     return _then(_value.copyWith(
       qty: null == qty
@@ -160,6 +163,10 @@ class _$MaterialItemCopyWithImpl<$Res, $Val extends MaterialItem>
           ? _value.overrideInfo
           : overrideInfo // ignore: cast_nullable_to_non_nullable
               as MaterialItemOverride,
+      remarks: null == remarks
+          ? _value.remarks
+          : remarks // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -196,7 +203,8 @@ abstract class _$$_MaterialItemCopyWith<$Res>
       String unitOfMeasurement,
       String itemRegistrationNumber,
       String materialDescription,
-      MaterialItemOverride overrideInfo});
+      MaterialItemOverride overrideInfo,
+      String remarks});
 
   @override
   $MaterialItemOverrideCopyWith<$Res> get overrideInfo;
@@ -229,6 +237,7 @@ class __$$_MaterialItemCopyWithImpl<$Res>
     Object? itemRegistrationNumber = null,
     Object? materialDescription = null,
     Object? overrideInfo = null,
+    Object? remarks = null,
   }) {
     return _then(_$_MaterialItem(
       qty: null == qty
@@ -295,6 +304,10 @@ class __$$_MaterialItemCopyWithImpl<$Res>
           ? _value.overrideInfo
           : overrideInfo // ignore: cast_nullable_to_non_nullable
               as MaterialItemOverride,
+      remarks: null == remarks
+          ? _value.remarks
+          : remarks // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -318,7 +331,8 @@ class _$_MaterialItem extends _MaterialItem {
       required this.unitOfMeasurement,
       required this.itemRegistrationNumber,
       required this.materialDescription,
-      required this.overrideInfo})
+      required this.overrideInfo,
+      required this.remarks})
       : _bonuses = bonuses,
         super._();
 
@@ -359,10 +373,12 @@ class _$_MaterialItem extends _MaterialItem {
   final String materialDescription;
   @override
   final MaterialItemOverride overrideInfo;
+  @override
+  final String remarks;
 
   @override
   String toString() {
-    return 'MaterialItem(qty: $qty, type: $type, comment: $comment, hidePrice: $hidePrice, batchNumber: $batchNumber, zdp8Override: $zdp8Override, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, defaultMaterialDescription: $defaultMaterialDescription, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, materialDescription: $materialDescription, overrideInfo: $overrideInfo)';
+    return 'MaterialItem(qty: $qty, type: $type, comment: $comment, hidePrice: $hidePrice, batchNumber: $batchNumber, zdp8Override: $zdp8Override, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, defaultMaterialDescription: $defaultMaterialDescription, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, materialDescription: $materialDescription, overrideInfo: $overrideInfo, remarks: $remarks)';
   }
 
   @override
@@ -399,7 +415,8 @@ class _$_MaterialItem extends _MaterialItem {
             (identical(other.materialDescription, materialDescription) ||
                 other.materialDescription == materialDescription) &&
             (identical(other.overrideInfo, overrideInfo) ||
-                other.overrideInfo == overrideInfo));
+                other.overrideInfo == overrideInfo) &&
+            (identical(other.remarks, remarks) || other.remarks == remarks));
   }
 
   @override
@@ -420,7 +437,8 @@ class _$_MaterialItem extends _MaterialItem {
       unitOfMeasurement,
       itemRegistrationNumber,
       materialDescription,
-      overrideInfo);
+      overrideInfo,
+      remarks);
 
   @JsonKey(ignore: true)
   @override
@@ -446,7 +464,8 @@ abstract class _MaterialItem extends MaterialItem {
       required final String unitOfMeasurement,
       required final String itemRegistrationNumber,
       required final String materialDescription,
-      required final MaterialItemOverride overrideInfo}) = _$_MaterialItem;
+      required final MaterialItemOverride overrideInfo,
+      required final String remarks}) = _$_MaterialItem;
   const _MaterialItem._() : super._();
 
   @override
@@ -481,6 +500,8 @@ abstract class _MaterialItem extends MaterialItem {
   String get materialDescription;
   @override
   MaterialItemOverride get overrideInfo;
+  @override
+  String get remarks;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialItemCopyWith<_$_MaterialItem> get copyWith =>

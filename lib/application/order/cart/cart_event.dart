@@ -36,4 +36,10 @@ class CartEvent with _$CartEvent {
     required MaterialInfo bonusItem,
     required bool isUpdateFromCart,
   }) = _deleteBonusItem;
+
+  const factory CartEvent.remarksChanged(String remarks) = _RemarksChanged;
+  const factory CartEvent.addRemarksToCartItem({
+    required PriceAggregate item,
+    required bool isDelete,
+  }) = _AddRemarksToCartItem;
 }

@@ -8,8 +8,8 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -76,6 +76,7 @@ void main() {
             principalData: PrincipalData.empty().copyWith(
               principalName: '台灣拜耳股份有限公司',
             ),
+            remarks: '',
           ),
         ),
       ];
@@ -247,7 +248,7 @@ void main() {
             'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-        expect(listWidget, findsAtLeastNWidgets(1));
+        expect(listWidget, findsNWidgets(2));
         final addWidget = tester.widget(find.byKey(const Key('cartAdd')));
         await tester.tap(find.byWidget(addWidget));
         await tester.pump();
@@ -279,7 +280,7 @@ void main() {
             'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-        expect(listWidget, findsAtLeastNWidgets(1));
+        expect(listWidget, findsNWidgets(2));
         final addWidget = tester.widget(find.byKey(const Key('cartAdd')));
         await tester.tap(find.byWidget(addWidget));
         await tester.pump();
@@ -515,6 +516,7 @@ void main() {
           const Key('priceOverride'),
         );
         expect(priceWidget, findsOneWidget);
+        // final listPrice = find.byKey(const Key('listPrice'));
 
         expect(
             (tester.firstWidget(find.byKey(
@@ -550,6 +552,7 @@ void main() {
           const Key('priceOverride'),
         );
         expect(priceWidget, findsOneWidget);
+        // final listPrice = find.byKey(const Key('listPrice'));
 
         expect(
             (tester.firstWidget(find.byKey(
@@ -558,6 +561,54 @@ void main() {
                 .style!
                 .color,
             ZPColors.lightGray);
+      });
+      testWidgets('Test Add Remarks', (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItemList: mockCartItemWithDataList,
+            isFetching: true,
+          ),
+        );
+
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
+
+        await tester.pump();
+        final item = find.byKey(Key(
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+        expect(item, findsOneWidget);
+
+        final listWidget = find.byWidgetPredicate((w) => w is ListTile);
+        expect(listWidget, findsNWidgets(2));
+
+        final addRemarkButton =
+            tester.widget(find.byKey(const Key('addRemarks')));
+        await tester.tap(find.byWidget(addRemarkButton));
+        await tester.pump();
+
+        final addRemarkDialog = find.byKey(const Key('addRemarksDialog'));
+        expect(addRemarkDialog, findsOneWidget);
+
+        const remarkText = '1234';
+        final textField = find.byKey(const Key('remarkTextField'));
+        await tester.enterText(textField, remarkText);
+
+        verify(() => cartBloc.add(const CartEvent.remarksChanged(remarkText)))
+            .called(1);
+
+        final addButton = find.byKey(const Key('Add'));
+        await tester.tap(addButton);
+        await tester.pump();
+
+        verify(
+          () => cartBloc.add(
+            CartEvent.addRemarksToCartItem(
+              item: mockCartItemWithDataList[0],
+              isDelete: false,
+            ),
+          ),
+        ).called(1);
       });
     },
   );

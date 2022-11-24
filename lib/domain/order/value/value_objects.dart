@@ -215,3 +215,14 @@ class MaterialTaxClassification extends ValueObject<String> {
     return materialTaxClassificationIsFullTax(value.getOrElse(() => ''));
   }
 }
+
+class Remarks extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory Remarks(String input) {
+    return Remarks._(validateStringNotEmpty(input));
+  }
+
+  const Remarks._(this.value);
+}

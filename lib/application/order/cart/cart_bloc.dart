@@ -10,9 +10,9 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'cart_bloc.freezed.dart';
 part 'cart_event.dart';
 part 'cart_state.dart';
-part 'cart_bloc.freezed.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
   final ICartRepository cartRepository;
@@ -81,7 +81,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         final failureOrSuccess = await cartRepository.addToCart(
           cartItem: e.item,
         );
-      
+
         failureOrSuccess.fold(
           (failure) {
             emit(
@@ -97,7 +97,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               selectedItemsMaterialNumber: state.selectedItemsMaterialNumber,
               item: e.item,
             );
-            
+
             emit(
               state.copyWith(
                 selectedItemsMaterialNumber: updatedMaterialList,
@@ -367,6 +367,65 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
           },
         );
+      },
+      remarksChanged: (e) {
+        emit(
+          state.copyWith(
+            remarks: Remarks(e.remarks),
+          ),
+        );
+      },
+      addRemarksToCartItem: (e) async {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isRemarksAdding: true,
+            showErrorMessages: false,
+            isFetching: true,
+          ),
+        );
+        final isRemarksValid = state.remarks.isValid();
+        if (isRemarksValid || e.isDelete) {
+          final updatedCartItem = e.item.copyWith(
+            materialInfo: e.item.materialInfo.copyWith(
+              remarks: state.remarks.getValue(),
+            ),
+          );
+
+          final failureOrSuccess = await cartRepository.updateCartItem(
+            cartItem: updatedCartItem,
+          );
+
+          failureOrSuccess.fold(
+            (failure) {
+              emit(
+                state.copyWith(
+                  apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                  isFetching: false,
+                  isRemarksAdding: false,
+                ),
+              );
+            },
+            (cartItemList) {
+              emit(
+                state.copyWith(
+                  cartItemList: cartItemList,
+                  isFetching: false,
+                  remarks: Remarks(''),
+                  isRemarksAdding: false,
+                ),
+              );
+            },
+          );
+        } else {
+          emit(
+            state.copyWith(
+              isFetching: false,
+              isRemarksAdding: false,
+              showErrorMessages: true,
+            ),
+          );
+        }
       },
     );
   }

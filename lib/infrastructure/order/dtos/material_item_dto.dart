@@ -39,6 +39,7 @@ class MaterialItemDto with _$MaterialItemDto {
         required bool zdp8Override,
     @JsonKey(name: 'override', readValue: materialItemOverride)
         required MaterialItemOverrideDto overrideInfo,
+    @JsonKey(name: 'remarks', defaultValue: '') required String remarks,
   }) = _MaterialItemDto;
 
   MaterialItem toDomain() {
@@ -59,6 +60,7 @@ class MaterialItemDto with _$MaterialItemDto {
       itemRegistrationNumber: itemRegistrationNumber,
       materialDescription: materialDescription,
       overrideInfo: overrideInfo.toDomain(),
+      remarks: remarks,
     );
   }
 
@@ -83,6 +85,7 @@ class MaterialItemDto with _$MaterialItemDto {
       type: materialItem.type,
       unitOfMeasurement: materialItem.unitOfMeasurement,
       zdp8Override: materialItem.zdp8Override,
+      remarks: materialItem.remarks,
     );
   }
 

@@ -1,8 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -23,6 +23,7 @@ void main() {
         principalData: PrincipalData.empty().copyWith(
           principalName: '台灣拜耳股份有限公司',
         ),
+        remarks: '',
       ),
     ),
   ];
@@ -30,6 +31,21 @@ void main() {
   final mockMaterialItemList = [
     MaterialNumber('111111111'),
   ];
+
+  const remarkText = '1234';
+
+  final mockItemWithRemarks = PriceAggregate.empty().copyWith(
+    quantity: 1,
+    materialInfo: MaterialInfo.empty().copyWith(
+      materialNumber: MaterialNumber('000000000023168451'),
+      materialDescription: ' Triglyceride Mosys D',
+      principalData: PrincipalData.empty().copyWith(
+        principalName: '台灣拜耳股份有限公司',
+      ),
+      remarks: remarkText,
+    ),
+  );
+
 
   group(
     'Testing CartBloc',
@@ -211,6 +227,72 @@ void main() {
               ),
             ),
             isFetching: false,
+          ),
+        ],
+      );
+
+      blocTest<CartBloc, CartState>(
+        'Add Remarks Failure CartBloc',
+        build: () => CartBloc(cartRepository: cartRepositoryMock),
+        act: (bloc) {
+          bloc.add(const CartEvent.remarksChanged(''));
+          bloc.add(CartEvent.addRemarksToCartItem(
+            item: PriceAggregate.empty(),
+            isDelete: false,
+          ));
+        },
+        expect: () => [
+          CartState.initial().copyWith(
+            isRemarksAdding: false,
+            showErrorMessages: false,
+          ),
+          CartState.initial().copyWith(
+            isRemarksAdding: true,
+            isFetching: true,
+            showErrorMessages: false,
+          ),
+          CartState.initial().copyWith(
+            isRemarksAdding: false,
+            isFetching: false,
+            showErrorMessages: true,
+          ),
+        ],
+      );
+
+      blocTest<CartBloc, CartState>(
+        'Add Remarks Success CartBloc',
+        setUp: () {
+          when(() => cartRepositoryMock.updateCartItem(
+                  cartItem: mockItemWithRemarks))
+              .thenAnswer((invocation) async => Right([mockItemWithRemarks]));
+        },
+        build: () => CartBloc(cartRepository: cartRepositoryMock),
+        seed: () => CartState.initial().copyWith(
+          cartItemList: mockCartItemList,
+        ),
+        act: (bloc) {
+          bloc.add(const CartEvent.remarksChanged(remarkText));
+          bloc.add(CartEvent.addRemarksToCartItem(
+            item: mockItemWithRemarks,
+            isDelete: false,
+          ));
+        },
+        expect: () => [
+          CartState.initial().copyWith(
+            cartItemList: mockCartItemList,
+            remarks: Remarks(remarkText),
+          ),
+          CartState.initial().copyWith(
+            cartItemList: mockCartItemList,
+            remarks: Remarks(remarkText),
+            isRemarksAdding: true,
+            isFetching: true,
+          ),
+          CartState.initial().copyWith(
+            cartItemList: [mockItemWithRemarks],
+            isFetching: false,
+            remarks: Remarks(''),
+            isRemarksAdding: false,
           ),
         ],
       );

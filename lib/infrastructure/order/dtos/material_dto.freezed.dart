@@ -83,6 +83,9 @@ mixin _$MaterialDto {
   @JsonKey(name: 'quantity', defaultValue: 0)
   @HiveField(20, defaultValue: 0)
   int get quantity => throw _privateConstructorUsedError;
+  @JsonKey(name: 'remarks', defaultValue: '')
+  @HiveField(21, defaultValue: '')
+  String get remarks => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -160,7 +163,10 @@ abstract class $MaterialDtoCopyWith<$Res> {
           bool isFOCMaterial,
       @JsonKey(name: 'quantity', defaultValue: 0)
       @HiveField(20, defaultValue: 0)
-          int quantity});
+          int quantity,
+      @JsonKey(name: 'remarks', defaultValue: '')
+      @HiveField(21, defaultValue: '')
+          String remarks});
 }
 
 /// @nodoc
@@ -197,6 +203,7 @@ class _$MaterialDtoCopyWithImpl<$Res, $Val extends MaterialDto>
     Object? defaultMaterialDescription = null,
     Object? isFOCMaterial = null,
     Object? quantity = null,
+    Object? remarks = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -283,6 +290,10 @@ class _$MaterialDtoCopyWithImpl<$Res, $Val extends MaterialDto>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
+      remarks: null == remarks
+          ? _value.remarks
+          : remarks // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -359,7 +370,10 @@ abstract class _$$_MaterialDtoCopyWith<$Res>
           bool isFOCMaterial,
       @JsonKey(name: 'quantity', defaultValue: 0)
       @HiveField(20, defaultValue: 0)
-          int quantity});
+          int quantity,
+      @JsonKey(name: 'remarks', defaultValue: '')
+      @HiveField(21, defaultValue: '')
+          String remarks});
 }
 
 /// @nodoc
@@ -394,6 +408,7 @@ class __$$_MaterialDtoCopyWithImpl<$Res>
     Object? defaultMaterialDescription = null,
     Object? isFOCMaterial = null,
     Object? quantity = null,
+    Object? remarks = null,
   }) {
     return _then(_$_MaterialDto(
       materialNumber: null == materialNumber
@@ -480,6 +495,10 @@ class __$$_MaterialDtoCopyWithImpl<$Res>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
+      remarks: null == remarks
+          ? _value.remarks
+          : remarks // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -552,7 +571,10 @@ class _$_MaterialDto extends _MaterialDto {
           required this.isFOCMaterial,
       @JsonKey(name: 'quantity', defaultValue: 0)
       @HiveField(20, defaultValue: 0)
-          required this.quantity})
+          required this.quantity,
+      @JsonKey(name: 'remarks', defaultValue: '')
+      @HiveField(21, defaultValue: '')
+          required this.remarks})
       : _taxes = taxes,
         _bundles = bundles,
         super._();
@@ -654,10 +676,14 @@ class _$_MaterialDto extends _MaterialDto {
   @JsonKey(name: 'quantity', defaultValue: 0)
   @HiveField(20, defaultValue: 0)
   final int quantity;
+  @override
+  @JsonKey(name: 'remarks', defaultValue: '')
+  @HiveField(21, defaultValue: '')
+  final String remarks;
 
   @override
   String toString() {
-    return 'MaterialDto(materialNumber: $materialNumber, materialDescription: $materialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, principalName: $principalName, principalCode: $principalCode, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hidePrice: $hidePrice, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, bundles: $bundles, defaultMaterialDescription: $defaultMaterialDescription, isFOCMaterial: $isFOCMaterial, quantity: $quantity)';
+    return 'MaterialDto(materialNumber: $materialNumber, materialDescription: $materialDescription, governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, principalName: $principalName, principalCode: $principalCode, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hidePrice: $hidePrice, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, bundles: $bundles, defaultMaterialDescription: $defaultMaterialDescription, isFOCMaterial: $isFOCMaterial, quantity: $quantity, remarks: $remarks)';
   }
 
   @override
@@ -708,7 +734,8 @@ class _$_MaterialDto extends _MaterialDto {
             (identical(other.isFOCMaterial, isFOCMaterial) ||
                 other.isFOCMaterial == isFOCMaterial) &&
             (identical(other.quantity, quantity) ||
-                other.quantity == quantity));
+                other.quantity == quantity) &&
+            (identical(other.remarks, remarks) || other.remarks == remarks));
   }
 
   @JsonKey(ignore: true)
@@ -735,7 +762,8 @@ class _$_MaterialDto extends _MaterialDto {
         const DeepCollectionEquality().hash(_bundles),
         defaultMaterialDescription,
         isFOCMaterial,
-        quantity
+        quantity,
+        remarks
       ]);
 
   @JsonKey(ignore: true)
@@ -817,7 +845,10 @@ abstract class _MaterialDto extends MaterialDto {
           required final bool isFOCMaterial,
       @JsonKey(name: 'quantity', defaultValue: 0)
       @HiveField(20, defaultValue: 0)
-          required final int quantity}) = _$_MaterialDto;
+          required final int quantity,
+      @JsonKey(name: 'remarks', defaultValue: '')
+      @HiveField(21, defaultValue: '')
+          required final String remarks}) = _$_MaterialDto;
   const _MaterialDto._() : super._();
 
   factory _MaterialDto.fromJson(Map<String, dynamic> json) =
@@ -907,6 +938,10 @@ abstract class _MaterialDto extends MaterialDto {
   @JsonKey(name: 'quantity', defaultValue: 0)
   @HiveField(20, defaultValue: 0)
   int get quantity;
+  @override
+  @JsonKey(name: 'remarks', defaultValue: '')
+  @HiveField(21, defaultValue: '')
+  String get remarks;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialDtoCopyWith<_$_MaterialDto> get copyWith =>

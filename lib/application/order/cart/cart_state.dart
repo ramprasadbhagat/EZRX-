@@ -9,6 +9,9 @@ class CartState with _$CartState {
     required List<MaterialNumber> selectedItemsMaterialNumber,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required bool isFetching,
+    required Remarks remarks,
+    required bool showErrorMessages,
+    required bool isRemarksAdding,
   }) = _CartState;
 
   factory CartState.initial() => CartState(
@@ -16,6 +19,9 @@ class CartState with _$CartState {
         selectedItemsMaterialNumber: <MaterialNumber>[],
         apiFailureOrSuccessOption: none(),
         isFetching: false,
+        remarks: Remarks(''),
+        showErrorMessages: false,
+        isRemarksAdding: false,
       );
 
   double get subtotal => selectedItemList.fold<double>(

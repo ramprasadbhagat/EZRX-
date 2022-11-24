@@ -33,6 +33,7 @@ _$_CustomerMaterialDto _$$_CustomerMaterialDtoFromJson(
       materialGroup2: json['MaterialGroup2'] as String? ?? '',
       materialGroup4: json['MaterialGroup4'] as String? ?? '',
       isFOCMaterial: json['IsFOCMaterial'] as bool? ?? false,
+      remarks: json['remarks'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_CustomerMaterialDtoToJson(
@@ -58,4 +59,5 @@ Map<String, dynamic> _$$_CustomerMaterialDtoToJson(
       'MaterialGroup2': instance.materialGroup2,
       'MaterialGroup4': instance.materialGroup4,
       'IsFOCMaterial': instance.isFOCMaterial,
+      'remarks': instance.remarks,
     };

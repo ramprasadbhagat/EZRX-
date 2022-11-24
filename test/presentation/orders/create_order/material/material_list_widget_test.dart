@@ -130,7 +130,8 @@ void main() {
       taxes: ['5'],
       bundles: [],
       defaultMaterialDescription: '',
-      isFOCMaterial: false);
+      isFOCMaterial: false,
+      remarks: '');
   late MaterialFilterBloc mockMaterialFilterBloc;
 
   setUpAll(() async {
@@ -287,7 +288,8 @@ void main() {
                 taxes: ['5'],
                 bundles: [],
                 defaultMaterialDescription: '',
-                isFOCMaterial: false)
+                isFOCMaterial: false,
+                remarks: '',)
           ],
         )
       ];

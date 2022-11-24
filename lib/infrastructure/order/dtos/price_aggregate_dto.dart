@@ -94,6 +94,7 @@ const MaterialDto _emptyConstMaterialDto = MaterialDto(
   unitOfMeasurement: '',
   isFOCMaterial: false,
   quantity: 0,
+  remarks: '',
 );
 
 const PriceDto _emptyPriceDto = PriceDto(

@@ -28,6 +28,7 @@ class MaterialItem with _$MaterialItem {
     required String itemRegistrationNumber,
     required String materialDescription,
     required MaterialItemOverride overrideInfo,
+    required String remarks,
   }) = _MaterialItem;
 
   factory MaterialItem.empty() => MaterialItem(
@@ -51,6 +52,7 @@ class MaterialItem with _$MaterialItem {
           reference: '',
           valueOverride: <ValueOverride>[],
         ),
+        remarks: '',
       );
 
   MaterialInfo toMaterialInfo() {
@@ -75,6 +77,7 @@ class MaterialItem with _$MaterialItem {
       bundles: [],
       isFOCMaterial: false,
       quantity: 0,
+      remarks: remarks,
     );
   }
 

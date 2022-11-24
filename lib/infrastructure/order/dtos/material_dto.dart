@@ -3,8 +3,8 @@ import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 import 'package:hive/hive.dart';
+
 part 'material_dto.freezed.dart';
 part 'material_dto.g.dart';
 
@@ -77,6 +77,9 @@ class MaterialDto with _$MaterialDto {
     @JsonKey(name: 'quantity', defaultValue: 0)
     @HiveField(20, defaultValue: 0)
         required int quantity,
+    @JsonKey(name: 'remarks', defaultValue: '')
+    @HiveField(21, defaultValue: '')
+        required String remarks,
   }) = _MaterialDto;
 
   factory MaterialDto.fromDomain(MaterialInfo materialInfo) {
@@ -103,6 +106,7 @@ class MaterialDto with _$MaterialDto {
       bundles:
           materialInfo.bundles.map((e) => BundleDto.fromDomain(e)).toList(),
       isFOCMaterial: materialInfo.isFOCMaterial,
+      remarks: materialInfo.remarks,
     );
   }
 
@@ -131,6 +135,7 @@ class MaterialDto with _$MaterialDto {
       defaultMaterialDescription: defaultMaterialDescription,
       isFOCMaterial: isFOCMaterial,
       quantity: quantity,
+      remarks: remarks,
     );
   }
 
