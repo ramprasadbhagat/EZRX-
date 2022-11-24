@@ -46,7 +46,6 @@ void main() {
       await tester.enterText(loginPasswordField, 'St@ysafe01');
       await tester.pumpAndSettle(const Duration(microseconds: 200));
 
-      await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pumpAndSettle(const Duration(seconds: 1));
 
       tester.printToConsole('Tap login button');
@@ -77,14 +76,17 @@ void main() {
       //  Announcement Test
       //
       //============================================================
-      tester.printToConsole('Home Screen announcement Close');
       await tester.pumpAndSettle(const Duration(seconds: 1));
       final announcementCloseIcon =
           find.byKey(const Key('announcementCloseIcon'));
-      expect(announcementCloseIcon, findsOneWidget);
-      await tester.pumpAndSettle(const Duration(milliseconds: 100));
-      await tester.tap(announcementCloseIcon);
-      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      if(announcementCloseIcon.evaluate().isNotEmpty){
+        expect(announcementCloseIcon, findsOneWidget);
+        await tester.pumpAndSettle(const Duration(milliseconds: 100));
+        await tester.tap(announcementCloseIcon);
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+        tester.printToConsole('Home Screen announcement Close');
+      }      
 
       //============================================================
       //  SalesOrg, Customer, Shipping Address Test
@@ -114,22 +116,22 @@ void main() {
       expect(vnSalesOrg, findsOneWidget);
       expect(phSalesOrg, findsOneWidget);
       await tester.tap(twSalesOrg);
-      await tester.pumpAndSettle(const Duration(seconds: 1));
+      await tester.pumpAndSettle(const Duration(seconds: 3));
 
       await tester.tap(salesOrgSelector);
-      await tester.pumpAndSettle(const Duration(seconds: 1));
+      await tester.pumpAndSettle(const Duration(seconds: 3));
       await tester.tap(phSalesOrg);
-      await tester.pumpAndSettle(const Duration(seconds: 1));
+      await tester.pumpAndSettle(const Duration(seconds: 3));
 
       await tester.tap(salesOrgSelector);
-      await tester.pumpAndSettle(const Duration(seconds: 1));
+      await tester.pumpAndSettle(const Duration(seconds: 3));
       await tester.tap(vnSalesOrg);
-      await tester.pumpAndSettle(const Duration(seconds: 1));
+      await tester.pumpAndSettle(const Duration(seconds: 3));
 
       await tester.tap(salesOrgSelector);
-      await tester.pumpAndSettle(const Duration(seconds: 1));
+      await tester.pumpAndSettle(const Duration(seconds: 3));
       await tester.tap(sgSalesOrg);
-      await tester.pumpAndSettle(const Duration(seconds: 1));
+      await tester.pumpAndSettle(const Duration(seconds: 3));
 
       final customerCodeSelector =
           find.byKey(const Key('customerCodeSelect')).first;
@@ -146,7 +148,7 @@ void main() {
           itemFinder,
           listFinder, // widget you want to scroll
           const Offset(0, -500), // delta to move
-          duration: const Duration(seconds: 1));
+          duration: const Duration(seconds: 5));
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       await tester.ensureVisible(itemFinder);
@@ -197,12 +199,6 @@ void main() {
       await tester.tap(shipToCodeSelector);
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
-      final shipToCode1 = find.text('0070046062');
-      final shipToCode2 = find.text('0070041907');
-      expect(shipToCode1, findsOneWidget);
-      expect(shipToCode2, findsOneWidget);
-      await tester.pumpAndSettle(const Duration(seconds: 2));
-
       final backButton = find.byTooltip('Back');
       await tester.tap(backButton);
       await tester.pumpAndSettle(const Duration(seconds: 2));
@@ -229,8 +225,9 @@ void main() {
       //
       //============================================================
 
+      await tester.pumpAndSettle(const Duration(seconds: 1));
       tester.printToConsole('Click notification tile');
-      final notificationTile = find.byKey(const Key('NotificationTile'));
+      final notificationTile = find.byKey(const Key('notificationTile'));
       await tester.tap(notificationTile);
       await tester.pumpAndSettle(const Duration(seconds: 1));
 
@@ -448,13 +445,10 @@ void main() {
         await tester.dragFrom(const Offset(100, 100), const Offset(100, -1000));
         await tester.pumpAndSettle(const Duration(seconds: 3));
         await tester.dragFrom(const Offset(100, 100), const Offset(100, -1000));
-
-        await tester.pumpAndSettle(const Duration(seconds: 2));
-        final auptcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
-        await tester.tap(auptcAcceptButton);
-      }else if(Platform.isIOS){
-        await tester.tap(find.byType(BackButton));
       }
+
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+      await tester.tap(find.byType(BackButton));
 
       await tester.pumpAndSettle(const Duration(milliseconds: 300));
       expect(find.text('Settings'), findsOneWidget);
@@ -478,6 +472,7 @@ void main() {
       //
       //============================================================
 
+      await tester.pumpAndSettle(const Duration(seconds: 1));
       tester.printToConsole('Redirect to setting page and click logout tile');
       final logoutTile = find.byKey(const Key('logoutTile'));
       await tester.tap(logoutTile);

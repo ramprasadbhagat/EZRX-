@@ -65,18 +65,19 @@ class _HomeBannerState extends State<HomeBanner> {
                 },
               ),
             ),
-            SmoothPageIndicator(
-              controller: _controller,
-              onDotClicked: (index) => _controller.jumpToPage(index),
-              count: state.banner.length,
-              effect: ExpandingDotsEffect(
-                dotHeight: MediaQuery.of(context).size.width * 0.02,
-                dotWidth: MediaQuery.of(context).size.width * 0.02,
-                dotColor: ZPColors.secondary,
-                activeDotColor: ZPColors.primary,
-                // strokeWidth: 0.5,
-              ),
-            ),
+            state.banner.isNotEmpty ?
+              SmoothPageIndicator(
+                controller: _controller,
+                onDotClicked: (index) => _controller.jumpToPage(index),
+                count: state.banner.length,
+                effect: ExpandingDotsEffect(
+                  dotHeight: MediaQuery.of(context).size.width * 0.02,
+                  dotWidth: MediaQuery.of(context).size.width * 0.02,
+                  dotColor: ZPColors.secondary,
+                  activeDotColor: ZPColors.primary,
+                  // strokeWidth: 0.5,
+                ),
+              ) : const SizedBox.shrink(),
           ],
         );
       },
