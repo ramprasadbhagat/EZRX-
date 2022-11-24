@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -12,6 +13,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
@@ -42,6 +44,9 @@ class CustomerCodeBlocMock
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
+class AddToCartBlocMock extends MockBloc<AddToCartEvent, AddToCartState>
+    implements AddToCartBloc {}
+
 void main() {
   late CartBloc cartBloc;
   late MaterialPriceBloc materialPriceBloc;
@@ -54,6 +59,8 @@ void main() {
   late Map<MaterialNumber, Price> mockPriceList;
 
   final AuthBloc authBlocMock = AuthBlocMock();
+  final AddToCartBloc addToCartBlocMock = AddToCartBlocMock();
+
   setUp(
     () {
       WidgetsFlutterBinding.ensureInitialized();
@@ -140,6 +147,8 @@ void main() {
             BlocProvider<CustomerCodeBloc>(
                 create: (context) => customerCodeBloc),
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+            BlocProvider<AddToCartBloc>(
+                create: ((context) => addToCartBlocMock)),
           ],
           child: const CartPage(),
         );
@@ -435,25 +444,68 @@ void main() {
         expect(finder, findsNothing);
       });
 
-      // TODO: need fix
-      // testWidgets('Test have zmg Discount cart item', (tester) async {
-      //   when(() => cartBloc.state).thenReturn(
-      //     CartState.initial().copyWith(
-      //       cartItemList: [
-      //         mockCartItemWithDataList2.first.copyWith(
-      //           price: Price.empty().copyWith(
-      //             zmgDiscount: true,
-      //           ),
-      //         )
-      //       ],
-      //       isFetching: false,
-      //     ),
-      //   );
-      //   await tester.pumpWidget(getWidget());
-      //   await tester.pump();
-      //   final zmgDiscountLable = find.byKey(const Key('zmgDiscountLable'));
-      //   expect(zmgDiscountLable, findsOneWidget);
-      // });
+      testWidgets('Test have zmg Discount cart item', (tester) async {
+        when(() => materialPriceBloc.state)
+            .thenReturn(MaterialPriceState.initial().copyWith(
+          isFetching: false,
+          materialPrice: {
+            MaterialNumber('000000000023168451'): Price.empty().copyWith(
+              zmgDiscount: true,
+              tiers: [
+                PriceTier(
+                  tier: 'c',
+                  items: [PriceTierItem.empty()],
+                )
+              ],
+            )
+          },
+        ));
+        when(() => addToCartBlocMock.state).thenReturn(
+          AddToCartState.initial().copyWith(
+            cartItem: PriceAggregate.empty().copyWith(
+              price: Price.empty().copyWith(
+                zmgDiscount: true,
+                tiers: [
+                  PriceTier(
+                    tier: 'c',
+                    items: [PriceTierItem.empty()],
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItemList: [
+              mockCartItemWithDataList2.first.copyWith(
+                price: Price.empty().copyWith(
+                  zmgDiscount: true,
+                  tiers: [
+                    PriceTier(
+                      tier: 'c',
+                      items: [PriceTierItem.empty()],
+                    )
+                  ],
+                ),
+              )
+            ],
+            isFetching: false,
+          ),
+        );
+
+        await tester.pumpWidget(Material(child: getWidget()));
+        await tester.pump();
+        final zmgDiscountLable = find.byKey(const Key('zmgDiscountLable'));
+        expect(zmgDiscountLable, findsOneWidget);
+        await tester.pump();
+        await tester.tap(
+          zmgDiscountLable,
+        );
+        await tester.pump();
+        expect(find.byKey(const Key('updateCartBottomSheet')), findsOneWidget);
+        expect(find.byKey(const Key('priceTierLable')), findsWidgets);
+      });
 
       testWidgets('open bottom sheet to override price', (tester) async {
         when(() => cartBloc.state).thenReturn(
@@ -609,6 +661,54 @@ void main() {
             ),
           ),
         ).called(1);
+      });
+
+      testWidgets('Test have Tire Discount cart item', (tester) async {
+        when(() => materialPriceBloc.state)
+            .thenReturn(MaterialPriceState.initial().copyWith(
+          isFetching: false,
+          materialPrice: {
+            MaterialNumber('000000000023168451'): Price.empty().copyWith(
+              zmgDiscount: true,
+              tiers: [
+                PriceTier(
+                  tier: 'c',
+                  items: [PriceTierItem.empty()],
+                )
+              ],
+            )
+          },
+        ));
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItemList: [mockCartItemWithDataList2.first],
+            isFetching: false,
+          ),
+        );
+        when(() => addToCartBlocMock.state).thenReturn(
+          AddToCartState.initial().copyWith(
+            cartItem: PriceAggregate.empty().copyWith(
+              price: Price.empty().copyWith(
+                tiers: [
+                  PriceTier(
+                    tier: 'c',
+                    items: [PriceTierItem.empty()],
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
+        await tester.pumpWidget(Material(child: getWidget()));
+        await tester.pump();
+        final tierDiscountLable = find.byKey(const Key('tieredPricingLogo'));
+        expect(tierDiscountLable, findsOneWidget);
+        await tester.tap(
+          tierDiscountLable,
+        );
+        await tester.pump();
+        expect(find.byKey(const Key('updateCartBottomSheet')), findsOneWidget);
+        expect(find.byKey(const Key('priceTierLable')), findsWidgets);
       });
     },
   );

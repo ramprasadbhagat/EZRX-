@@ -898,7 +898,6 @@ void main() {
           isFetching: false,
           materialPrice: {
             fakeMaterialNumber: Price.empty().copyWith(
-              zmgDiscount: true,
               tiers: [
                 PriceTier.empty().copyWith(
                   items: [

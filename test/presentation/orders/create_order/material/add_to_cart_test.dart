@@ -47,28 +47,6 @@ void main() {
   late CartBloc cartBlocMock;
   final AddToCartBloc addToCartBlocMock = AddToCartBlocMock();
 
-  final priceTierItem1 = PriceTierItem.empty().copyWith(
-    type: '',
-    applyBonus: false,
-    sequence: 1,
-    quantity: 1,
-    rate: 5230,
-  );
-  final priceTierItem2 = PriceTierItem.empty().copyWith(
-    type: '',
-    applyBonus: false,
-    sequence: 1,
-    quantity: 3,
-    rate: 5530,
-  );
-  final priceTierItem3 = PriceTierItem.empty().copyWith(
-    type: '',
-    applyBonus: false,
-    sequence: 1,
-    quantity: 5,
-    rate: 5730,
-  );
-
   final priceAggregate = PriceAggregate.empty().copyWith(
     quantity: 1,
     materialInfo: MaterialInfo.empty().copyWith(
@@ -83,11 +61,7 @@ void main() {
       tiers: [
         PriceTier.empty().copyWith(
           tier: '',
-          items: [
-            priceTierItem1,
-            priceTierItem2,
-            priceTierItem3,
-          ],
+          items: [PriceTierItem.empty()],
         )
       ],
       zmgDiscount: false,
@@ -154,8 +128,30 @@ void main() {
                   .copyWith(salesOrg: SalesOrg('SG'))));
       await tester.pumpWidget(getScopedWidget(const AddToCart()));
       await tester.pump();
-      // final listcontent = find.textContaining('Tiered Pricing:'.tr());
-      // expect(listcontent, findsOneWidget);
+      final tirePriceLable = find.byKey(const Key('priceTierLable'));
+
+      expect(
+        tirePriceLable,
+        findsNWidgets(
+          priceAggregate.price.tiers.first.items.length,
+        ),
+      );
+    });
+
+    testWidgets('Add to Cart Tire Discount Material', (tester) async {
+      when(() => addToCartBlocMock.state).thenReturn(
+        AddToCartState.initial().copyWith(
+          cartItem: priceAggregate.copyWith(
+              price: priceAggregate.price.copyWith(zmgDiscount: false)),
+        ),
+      );
+
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
+          .copyWith(
+              salesOrganisation: SalesOrganisation.empty()
+                  .copyWith(salesOrg: SalesOrg('SG'))));
+      await tester.pumpWidget(getScopedWidget(const AddToCart()));
+      await tester.pump();
       final tirePriceLable = find.byKey(const Key('priceTierLable'));
 
       expect(

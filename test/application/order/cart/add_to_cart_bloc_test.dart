@@ -63,7 +63,7 @@ void main() {
   ];
 
   var addToCartQuantity = 0;
-  var onCartZmgProductQuantity = 0;
+  var onCartDiscountProductQuantity = 0;
 
   group(
     'Testing CartBloc',
@@ -104,20 +104,20 @@ void main() {
         'UpdateQuantity AddToCartBloc for Material',
         setUp: () {
           addToCartQuantity = 2;
-          onCartZmgProductQuantity = 0;
+          onCartDiscountProductQuantity = 0;
         },
         build: () => AddToCartBloc(),
         seed: () =>
             AddToCartState.initial().copyWith(cartItem: mockCartItemList.first),
         act: (bloc) => bloc.add(AddToCartEvent.updateQuantity(
           addToCartQuantity,
-          onCartZmgProductQuantity,
+          onCartDiscountProductQuantity,
         )),
         expect: () => [
           AddToCartState.initial().copyWith(
             cartItem: mockCartItemList.first.copyWith(
               discountedMaterialCount:
-                  onCartZmgProductQuantity + addToCartQuantity,
+                  onCartDiscountProductQuantity + addToCartQuantity,
               quantity: addToCartQuantity,
             ),
             quantity: addToCartQuantity,
@@ -145,7 +145,7 @@ void main() {
         'UpdateQuantity AddToCartBloc for Material with zmg discount enable with empty cart',
         setUp: () {
           addToCartQuantity = 5;
-          onCartZmgProductQuantity = 0;
+          onCartDiscountProductQuantity = 0;
         },
         build: () => AddToCartBloc(),
         seed: () => AddToCartState.initial().copyWith(
@@ -157,7 +157,7 @@ void main() {
         ),
         act: (bloc) => bloc.add(AddToCartEvent.updateQuantity(
           addToCartQuantity,
-          onCartZmgProductQuantity,
+          onCartDiscountProductQuantity,
         )),
         expect: () => [
           AddToCartState.initial().copyWith(
@@ -196,7 +196,7 @@ void main() {
         'UpdateQuantity AddToCartBloc for Material with zmg discount enable with zmg discount Material on cart',
         setUp: () {
           addToCartQuantity = 2;
-          onCartZmgProductQuantity = 3;
+          onCartDiscountProductQuantity = 3;
         },
         build: () => AddToCartBloc(),
         seed: () => AddToCartState.initial().copyWith(
@@ -207,12 +207,12 @@ void main() {
           ),
         ),
         act: (bloc) => bloc.add(AddToCartEvent.updateQuantity(
-            addToCartQuantity, onCartZmgProductQuantity)),
+            addToCartQuantity, onCartDiscountProductQuantity)),
         expect: () => [
           AddToCartState.initial().copyWith(
             cartItem: mockCartItemList.first.copyWith(
               discountedMaterialCount:
-                  (addToCartQuantity + onCartZmgProductQuantity),
+                  (addToCartQuantity + onCartDiscountProductQuantity),
               quantity: addToCartQuantity,
               price: mockCartItemList.first.price.copyWith(
                 zmgDiscount: true,
@@ -235,10 +235,101 @@ void main() {
             mockCartItemList.first
                     .copyWith(
                       discountedMaterialCount:
-                          (addToCartQuantity + onCartZmgProductQuantity),
+                          (addToCartQuantity + onCartDiscountProductQuantity),
                       quantity: addToCartQuantity,
                     )
                     .price
+                    .copyWith(zmgDiscount: true)
+                    .priceTireItem
+                    .first
+                    .rate *
+                addToCartQuantity,
+          );
+        },
+      );
+
+      blocTest<AddToCartBloc, AddToCartState>(
+        'Tire Materail UpdateQuantity AddToCartBloc for Material with Trie discount enable in cart',
+        setUp: () {
+          addToCartQuantity = 5;
+          onCartDiscountProductQuantity = 0;
+        },
+        build: () => AddToCartBloc(),
+        seed: () => AddToCartState.initial().copyWith(
+          cartItem: mockCartItemList.first,
+        ),
+        act: (bloc) => bloc.add(AddToCartEvent.updateQuantity(
+          addToCartQuantity,
+          onCartDiscountProductQuantity,
+        )),
+        expect: () => [
+          AddToCartState.initial().copyWith(
+            cartItem: mockCartItemList.first.copyWith(
+              discountedMaterialCount: addToCartQuantity,
+              quantity: addToCartQuantity,
+              price: mockCartItemList.first.price.copyWith(),
+            ),
+            quantity: addToCartQuantity,
+          ),
+        ],
+        verify: (AddToCartBloc bloc) {
+          expect(
+            bloc.state.cartItem.listPrice,
+            mockCartItemList.first.price
+                .copyWith(zmgDiscount: true)
+                .priceTireItem
+                .first
+                .rate,
+          );
+          expect(
+            bloc.state.cartItem.listPriceTotal,
+            mockCartItemList.first.price
+                    .copyWith(zmgDiscount: true)
+                    .priceTireItem
+                    .first
+                    .rate *
+                addToCartQuantity,
+          );
+        },
+      );
+
+      blocTest<AddToCartBloc, AddToCartState>(
+        'Tire Materail UpdateQuantity AddToCartBloc for Material with Trie discount enable in cart',
+        setUp: () {
+          addToCartQuantity = 3;
+          onCartDiscountProductQuantity = 2;
+        },
+        build: () => AddToCartBloc(),
+        seed: () => AddToCartState.initial().copyWith(
+          cartItem: mockCartItemList.first,
+        ),
+        act: (bloc) => bloc.add(AddToCartEvent.updateQuantity(
+          addToCartQuantity,
+          onCartDiscountProductQuantity,
+        )),
+        expect: () => [
+          AddToCartState.initial().copyWith(
+            cartItem: mockCartItemList.first.copyWith(
+              discountedMaterialCount:
+                  addToCartQuantity + onCartDiscountProductQuantity,
+              quantity: addToCartQuantity,
+              price: mockCartItemList.first.price.copyWith(),
+            ),
+            quantity: addToCartQuantity,
+          ),
+        ],
+        verify: (AddToCartBloc bloc) {
+          expect(
+            bloc.state.cartItem.listPrice,
+            mockCartItemList.first.price
+                .copyWith(zmgDiscount: true)
+                .priceTireItem
+                .first
+                .rate,
+          );
+          expect(
+            bloc.state.cartItem.listPriceTotal,
+            mockCartItemList.first.price
                     .copyWith(zmgDiscount: true)
                     .priceTireItem
                     .first

@@ -41,6 +41,7 @@ class _UpdateCartState extends State<UpdateCart> {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.7,
       child: Scaffold(
+        key: const ValueKey('updateCartBottomSheet'),
         backgroundColor: Colors.transparent,
         body: Padding(
           padding: const EdgeInsets.all(8.0),
