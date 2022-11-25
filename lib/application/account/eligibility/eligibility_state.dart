@@ -91,7 +91,7 @@ class EligibilityState with _$EligibilityState {
     return salesOrgConfigs.disableDeliveryDate;
   }
 
-  bool get isBillToenable {
+  bool get isBillToEnable {
     return salesOrgConfigs.enableBillTo;
   }
 }

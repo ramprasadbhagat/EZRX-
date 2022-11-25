@@ -125,7 +125,7 @@ class HistoryDetails extends StatelessWidget {
                     ),
                     const _SoldToAddress(),
                     const _ShipToAddress(),
-                    context.read<EligibilityBloc>().state.isBillToenable &&
+                    context.read<EligibilityBloc>().state.isBillToEnable &&
                             orderHistoryBasicInfo.soldTo !=
                                 billToInfo.billToCustomerCode
                         ? _BillToAddress(
