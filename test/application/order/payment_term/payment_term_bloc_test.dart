@@ -69,6 +69,10 @@ void main() {
     disableDeliveryDate: false,
     enableBillTo: false,
     showPOAttachment: false,
+    expiryDateDisplay: false,
+    hideStockDisplay: false,
+    addOosMaterials: false,
+    oosValue: OosValue(0),
   );
 
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(

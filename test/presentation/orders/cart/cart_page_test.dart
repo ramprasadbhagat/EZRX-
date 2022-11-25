@@ -1,7 +1,10 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -15,6 +18,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -38,6 +42,14 @@ class MaterialPriceBlocMock
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
+class ShipToBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
+    implements ShipToCodeBloc {}
+
+class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
+
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
@@ -50,6 +62,9 @@ class AddToCartBlocMock extends MockBloc<AddToCartEvent, AddToCartState>
 void main() {
   late CartBloc cartBloc;
   late MaterialPriceBloc materialPriceBloc;
+  late EligibilityBloc eligibilityBloc;
+  late ShipToCodeBloc shipToCodeBloc;
+  late UserBloc userBloc;
   late SalesOrgBloc salesOrgBloc;
   late CustomerCodeBloc customerCodeBloc;
   late List<PriceAggregate> mockCartItemWithDataList;
@@ -68,6 +83,9 @@ void main() {
       materialPriceBloc = MaterialPriceBlocMock();
       salesOrgBloc = SalesOrgBlocMock();
       customerCodeBloc = CustomerCodeBlocMock();
+      eligibilityBloc = EligibilityBlocMock();
+      userBloc = UserBlocMock();
+      shipToCodeBloc = ShipToBlocMock();
       mockPriceList = {};
       mockPriceList.putIfAbsent(
           MaterialNumber('000000000023168451'),
@@ -85,6 +103,9 @@ void main() {
             ),
             remarks: '',
           ),
+          stockInfo: StockInfo.empty().copyWith(
+            inStock: MaterialInStock('Yes'),
+          ),
         ),
       ];
       mockCartItemWithDataList2 = [
@@ -96,6 +117,9 @@ void main() {
             principalData: PrincipalData.empty().copyWith(
               principalName: '台灣拜耳股份有限公司',
             ),
+          ),
+          stockInfo: StockInfo.empty().copyWith(
+            inStock: MaterialInStock('Yes'),
           ),
         ),
       ];
@@ -110,6 +134,9 @@ void main() {
               principalName: '台灣拜耳股份有限公司',
             ),
           ),
+          stockInfo: StockInfo.empty().copyWith(
+            inStock: MaterialInStock('Yes'),
+          ),
         ),
       ];
       when(() => cartBloc.state).thenReturn(CartState.initial().copyWith(
@@ -122,6 +149,9 @@ void main() {
         isFetching: false,
         materialPrice: mockPriceList,
       ));
+      when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
+      when(() => shipToCodeBloc.state).thenReturn(ShipToCodeState.initial());
+      when(() => userBloc.state).thenReturn(UserState.initial());
       when(() => salesOrgBloc.state)
           .thenReturn(SalesOrgState.initial().copyWith(
         salesOrganisation:
@@ -149,6 +179,8 @@ void main() {
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<AddToCartBloc>(
                 create: ((context) => addToCartBlocMock)),
+            BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
+            BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBloc),
           ],
           child: const CartPage(),
         );

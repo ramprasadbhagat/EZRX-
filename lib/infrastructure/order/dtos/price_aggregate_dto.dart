@@ -3,6 +3,7 @@ import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_config
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/stock_info_dto.dart';
 import 'package:hive/hive.dart';
 
 part 'price_aggregate_dto.g.dart';
@@ -18,6 +19,7 @@ class PriceAggregateDto {
     required this.isOverride,
     required this.bundleDto,
     required this.bonusItem,
+    required this.stockInfoDto,
   });
 
   @HiveField(0, defaultValue: _emptyConstMaterialDto)
@@ -36,6 +38,8 @@ class PriceAggregateDto {
   BundleDto bundleDto;
   @HiveField(7, defaultValue: [])
   List<MaterialDto> bonusItem;
+  @HiveField(8, defaultValue: _emptyStockInfoDto)
+  StockInfoDto stockInfoDto;
 
   factory PriceAggregateDto.fromDomain(PriceAggregate cart) {
     return PriceAggregateDto(
@@ -47,6 +51,7 @@ class PriceAggregateDto {
       ),
       zmgMaterialCountOnCart: cart.discountedMaterialCount,
       isOverride: cart.isOverride,
+      stockInfoDto: StockInfoDto.fromDomain(cart.stockInfo),
       bundleDto: BundleDto.fromDomain(cart.bundle),
       bonusItem: cart.addedBonusList
           .map(
@@ -68,6 +73,7 @@ class PriceAggregateDto {
       isOverride: isOverride,
       bundle: bundleDto.toDomain(),
       addedBonusList: bonusItem.map((e) => e.toDomain()).toList(),
+      stockInfo: stockInfoDto.toDomain(),
     );
   }
 }
@@ -147,10 +153,22 @@ const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
   disableDeliveryDate: false,
   enableBillTo: false,
   showPOAttachment: false,
+  hideStockDisplay: false,
+  expiryDateDisplay: false,
+  addOosMaterials: false,
+  oosValue: 0,
 );
 
 const BundleDto _emptyBundleDto = BundleDto(
   bundleName: '',
   bundleCode: '',
   bundleInformation: [],
+);
+
+const StockInfoDto _emptyStockInfoDto = StockInfoDto(
+  batch: '',
+  expiryDate: '',
+  inStock: '',
+  materialNumber: '',
+  salesDistrict: '',
 );

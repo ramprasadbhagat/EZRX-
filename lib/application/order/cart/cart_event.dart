@@ -6,6 +6,11 @@ class CartEvent with _$CartEvent {
   const factory CartEvent.fetch() = _Fetch;
   const factory CartEvent.addToCart({
     required PriceAggregate item,
+    required bool doNotallowOutOfStockMaterial,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
   }) = _AddToCart;
   const factory CartEvent.addToCartFromList({
     required List<PriceAggregate> items,
@@ -17,6 +22,13 @@ class CartEvent with _$CartEvent {
     required List<Price> item,
     required String materialNumber,
   }) = _UpdateCart;
+  const factory CartEvent.updateStockInfo({
+    required User user,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+  }) = _UpdateStockInfo;
   const factory CartEvent.removeFromCart({
     required PriceAggregate item,
   }) = _RemoveFromCart;

@@ -1,5 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -80,6 +85,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
         final failureOrSuccess = await cartRepository.addToCart(
           cartItem: e.item,
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisation: e.salesOrganisation,
+          salesOrganisationConfigs: e.salesOrganisationConfigs,
+          shipToInfo: e.shipToInfo,
+          doNotallowOutOfStockMaterial: e.doNotallowOutOfStockMaterial,
         );
 
         failureOrSuccess.fold(
@@ -426,6 +436,41 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             ),
           );
         }
+      },
+      updateStockInfo: (e) async {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
+          ),
+        );
+        final failureOrSuccess = await cartRepository.updateStockInfo(
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisation: e.salesOrganisation,
+          salesOrganisationConfigs: e.salesOrganisationConfigs,
+          shipToInfo: e.shipToInfo,
+          user: e.user,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (cartItemList) {
+            emit(
+              state.copyWith(
+                cartItemList: cartItemList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+          },
+        );
       },
     );
   }

@@ -15,6 +15,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -278,6 +279,9 @@ class _ListContent extends StatelessWidget {
                 isOverride: false,
                 bundle: Bundle.empty(),
                 addedBonusList: [],
+                stockInfo: StockInfo.empty().copyWith(
+                  materialNumber: materialInfo.materialNumber,
+                ),
               ),
             );
           }
@@ -383,6 +387,9 @@ class _PriceLabel extends StatelessWidget {
             isOverride: false,
             bundle: Bundle.empty(),
             addedBonusList: [],
+            stockInfo: StockInfo.empty().copyWith(
+              materialNumber: materialInfo.materialNumber,
+            ),
           );
 
           return Column(

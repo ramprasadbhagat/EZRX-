@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'price_aggregate.freezed.dart';
@@ -22,6 +23,7 @@ class PriceAggregate with _$PriceAggregate {
     required int discountedMaterialCount,
     required bool isOverride,
     required List<MaterialInfo> addedBonusList,
+    required StockInfo stockInfo,
   }) = _PriceAggregate;
 
   factory PriceAggregate.empty() => PriceAggregate(
@@ -33,6 +35,7 @@ class PriceAggregate with _$PriceAggregate {
         discountedMaterialCount: 0,
         isOverride: false,
         addedBonusList: [],
+        stockInfo: StockInfo.empty(),
       );
 
   OrderTemplateMaterial toOrderTemplateMaterial() {

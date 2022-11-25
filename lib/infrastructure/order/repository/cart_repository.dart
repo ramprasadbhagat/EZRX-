@@ -1,23 +1,37 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_aggregate_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/stock_info_dto.dart';
 
 class CartRepository implements ICartRepository {
   final CartStorage cartStorage;
   final Config config;
+  final StockInfoLocalDataSource stockInfoLocalDataSource;
+  final StockInfoRemoteDataSource stockInfoRemoteDataSource;
 
   CartRepository({
     required this.cartStorage,
     required this.config,
+    required this.stockInfoLocalDataSource,
+    required this.stockInfoRemoteDataSource,
   });
 
   @override
@@ -34,9 +48,33 @@ class CartRepository implements ICartRepository {
   @override
   Future<Either<ApiFailure, List<PriceAggregate>>> addToCart({
     required PriceAggregate cartItem,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+    required bool doNotallowOutOfStockMaterial,
   }) async {
     try {
-      await cartStorage.add(PriceAggregateDto.fromDomain(cartItem));
+      final stockInfo = await getStockInfo(
+        material: cartItem.materialInfo,
+        customerCodeInfo: customerCodeInfo,
+        salesOrganisation: salesOrganisation,
+        salesOrganisationConfigs: salesOrganisationConfigs,
+        shipToInfo: shipToInfo,
+      );
+      final stockInformation = stockInfo.fold(
+        (faliure) {
+          throw OtherException(message: faliure.failureMessage);
+        },
+        (stockInfo) => stockInfo,
+      );
+      if (!stockInformation.inStock.isMaterialInStock &&
+          doNotallowOutOfStockMaterial) {
+        throw OtherException(message: 'Product Not Available');
+      }
+      await cartStorage.add(PriceAggregateDto.fromDomain(cartItem.copyWith(
+        stockInfo: stockInformation,
+      )));
 
       return fetchCartItems();
     } catch (e) {
@@ -50,6 +88,40 @@ class CartRepository implements ICartRepository {
   }) async {
     try {
       await cartStorage.updateItem(PriceAggregateDto.fromDomain(cartItem));
+
+      return fetchCartItems();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<PriceAggregate>>> updateStockInfo({
+    required User user,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+  }) async {
+    try {
+      final cartItemDtoList = await cartStorage.get();
+      final cartItemList = cartItemDtoList.map((e) => e.toDomain()).toList();
+      for (final element in cartItemList) {
+        final updatedStockInfo = await getStockInfo(
+          material: element.materialInfo,
+          customerCodeInfo: customerCodeInfo,
+          salesOrganisationConfigs: salesOrganisationConfigs,
+          salesOrganisation: salesOrganisation,
+          shipToInfo: shipToInfo,
+        );
+        final stockInfo = updatedStockInfo.fold(
+          (faliure) {
+           throw OtherException(message: faliure.failureMessage);
+          },
+          (stockInfo) => stockInfo,
+        );
+        await cartStorage.updateStockInfo(StockInfoDto.fromDomain(stockInfo));
+      }
 
       return fetchCartItems();
     } catch (e) {
@@ -217,12 +289,12 @@ class CartRepository implements ICartRepository {
     if (itemExist || materialNumberIsEmpty) {
       return selectedItemsMaterialNumber;
     }
-    
+
     return List.from(selectedItemsMaterialNumber)
       ..add(item.materialInfo.materialNumber);
   }
 
-   @override
+  @override
   Future<Either<ApiFailure, List<PriceAggregate>>> updateBonusItem({
     required PriceAggregate cartItem,
     required int quantity,
@@ -259,6 +331,62 @@ class CartRepository implements ICartRepository {
       return fetchCartItems();
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  Future<Either<ApiFailure, StockInfo>> getStockInfo({
+    required MaterialInfo material,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final stockInfoList = salesOrganisationConfigs.enableBatchNumber
+            ? await stockInfoLocalDataSource.getStockInfoList()
+            : [await stockInfoLocalDataSource.getStockInfo()];
+        final stockInformation = stockInfoList
+            .where(
+              (element) => element.materialNumber == material.materialNumber,
+            )
+            .toList()
+            .first;
+
+        return Right(stockInformation);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    } else {
+      try {
+        final stockInfoList = salesOrganisationConfigs.enableBatchNumber
+            ? await stockInfoRemoteDataSource.getStockInfoList(
+                materialNumber: material.materialNumber.getOrCrash(),
+                plant: shipToInfo.plant,
+                principalCode: material.principalData.principalCode,
+                salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+                selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
+              )
+            : [
+                await stockInfoRemoteDataSource.getStockInfo(
+                  materialNumber: material.materialNumber.getOrCrash(),
+                  plant: shipToInfo.plant,
+                  principalCode: material.principalData.principalCode,
+                  salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+                  selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
+                ),
+              ];
+        final stockInformation = stockInfoList
+            .where(
+              (element) => element.materialNumber == material.materialNumber,
+            )
+            .toList()
+            .first;
+
+        return Right(stockInformation);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
     }
   }
 }

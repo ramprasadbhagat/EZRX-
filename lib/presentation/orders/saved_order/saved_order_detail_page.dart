@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_action_button.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_invalid_warning.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_material_item.dart';
@@ -140,6 +141,9 @@ class SavedOrderDetailPage extends StatelessWidget {
           isOverride: false,
           bundle: Bundle.empty(),
           addedBonusList: [],
+          stockInfo: StockInfo.empty().copyWith(
+            materialNumber: itemInfo.info.materialNumber,
+          ),
         );
 
         return priceAggregate;

@@ -242,6 +242,8 @@ String roleOrderType(String roleType) {
   }
 }
 
+bool isZero(int value) => value == 0;
+
 // Is Acceptable Use Policy Audience
 bool roleIsAupAudience(String roleType) {
   switch (roleType) {

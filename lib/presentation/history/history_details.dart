@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -11,6 +13,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/core/text_button_shimmer.dart';
 import 'package:flutter/material.dart';
@@ -180,8 +183,20 @@ class HistoryDetails extends StatelessWidget {
         isOverride: false,
         bundle: Bundle.empty(),
         addedBonusList: [],
+        stockInfo: StockInfo.empty().copyWith(
+          materialNumber: itemInfo.info.materialNumber,
+        ),
       );
-      cartBloc.add(CartEvent.addToCart(item: priceAggregate));
+      cartBloc.add(CartEvent.addToCart(
+        item: priceAggregate,
+        customerCodeInfo:
+            context.read<CustomerCodeBloc>().state.customerCodeInfo,
+        salesOrganisationConfigs: context.read<SalesOrgBloc>().state.configs,
+        shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+        doNotallowOutOfStockMaterial:
+            context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials,
+        salesOrganisation: context.read<SalesOrgBloc>().state.salesOrganisation,
+      ));
 
       //TODO: Revisit later
       context.router.pushNamed('cart_page');

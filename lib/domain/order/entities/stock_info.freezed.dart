@@ -19,7 +19,7 @@ mixin _$StockInfo {
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   String get expiryDate => throw _privateConstructorUsedError;
   String get batch => throw _privateConstructorUsedError;
-  String get inStock => throw _privateConstructorUsedError;
+  MaterialInStock get inStock => throw _privateConstructorUsedError;
   String get salesDistrict => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -36,7 +36,7 @@ abstract class $StockInfoCopyWith<$Res> {
       {MaterialNumber materialNumber,
       String expiryDate,
       String batch,
-      String inStock,
+      MaterialInStock inStock,
       String salesDistrict});
 }
 
@@ -75,7 +75,7 @@ class _$StockInfoCopyWithImpl<$Res, $Val extends StockInfo>
       inStock: null == inStock
           ? _value.inStock
           : inStock // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialInStock,
       salesDistrict: null == salesDistrict
           ? _value.salesDistrict
           : salesDistrict // ignore: cast_nullable_to_non_nullable
@@ -95,7 +95,7 @@ abstract class _$$_StockInfoCopyWith<$Res> implements $StockInfoCopyWith<$Res> {
       {MaterialNumber materialNumber,
       String expiryDate,
       String batch,
-      String inStock,
+      MaterialInStock inStock,
       String salesDistrict});
 }
 
@@ -132,7 +132,7 @@ class __$$_StockInfoCopyWithImpl<$Res>
       inStock: null == inStock
           ? _value.inStock
           : inStock // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialInStock,
       salesDistrict: null == salesDistrict
           ? _value.salesDistrict
           : salesDistrict // ignore: cast_nullable_to_non_nullable
@@ -159,7 +159,7 @@ class _$_StockInfo extends _StockInfo {
   @override
   final String batch;
   @override
-  final String inStock;
+  final MaterialInStock inStock;
   @override
   final String salesDistrict;
 
@@ -199,7 +199,7 @@ abstract class _StockInfo extends StockInfo {
       {required final MaterialNumber materialNumber,
       required final String expiryDate,
       required final String batch,
-      required final String inStock,
+      required final MaterialInStock inStock,
       required final String salesDistrict}) = _$_StockInfo;
   const _StockInfo._() : super._();
 
@@ -210,7 +210,7 @@ abstract class _StockInfo extends StockInfo {
   @override
   String get batch;
   @override
-  String get inStock;
+  MaterialInStock get inStock;
   @override
   String get salesDistrict;
   @override

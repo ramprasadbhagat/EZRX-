@@ -27,6 +27,10 @@ String naIfEmpty(String text) {
   return text.isEmpty ? 'NA' : text;
 }
 
+bool getInStock(String text) {
+  return text == 'Yes' ;
+}
+
 // String getParsedString(String textString) {
 //   if (textString.isEmpty) {
 //     return '';

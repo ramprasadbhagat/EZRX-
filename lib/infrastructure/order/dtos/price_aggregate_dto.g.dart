@@ -92,7 +92,11 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
               disablePaymentTermsDisplay: false,
               disableDeliveryDate: false,
               enableBillTo: false,
-              showPOAttachment: false)
+              showPOAttachment: false,
+              hideStockDisplay: false,
+              expiryDateDisplay: false,
+              addOosMaterials: false,
+              oosValue: 0)
           : fields[3] as SalesOrganisationConfigsDto,
       zmgMaterialCountOnCart: fields[4] == null ? 0 : fields[4] as int,
       isOverride: fields[5] == null ? false : fields[5] as bool,
@@ -102,13 +106,21 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
           : fields[6] as BundleDto,
       bonusItem:
           fields[7] == null ? [] : (fields[7] as List).cast<MaterialDto>(),
+      stockInfoDto: fields[8] == null
+          ? const StockInfoDto(
+              batch: '',
+              expiryDate: '',
+              inStock: '',
+              materialNumber: '',
+              salesDistrict: '')
+          : fields[8] as StockInfoDto,
     );
   }
 
   @override
   void write(BinaryWriter writer, PriceAggregateDto obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.materialDto)
       ..writeByte(1)
@@ -124,7 +136,9 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
       ..writeByte(6)
       ..write(obj.bundleDto)
       ..writeByte(7)
-      ..write(obj.bonusItem);
+      ..write(obj.bonusItem)
+      ..writeByte(8)
+      ..write(obj.stockInfoDto);
   }
 
   @override

@@ -78,6 +78,10 @@ void main() {
     disableDeliveryDate: false,
     enableBillTo: false,
     showPOAttachment: false,
+    addOosMaterials: true,
+    expiryDateDisplay: true,
+    hideStockDisplay: true,
+    oosValue: OosValue(1),
   );
 
   const fakeSelectedPrincipalFilterCategory = MaterialFilterType.principal;

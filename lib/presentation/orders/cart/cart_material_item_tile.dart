@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -171,6 +173,28 @@ class CartMaterialItemTile extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  !cartItem.salesOrgConfig.hideStockDisplay
+                                      ? Text(
+                                          '${'In Stock: '.tr()}${cartItem.stockInfo.inStock.getOrCrash()}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1
+                                              ?.apply(
+                                                color: ZPColors.lightGray,
+                                              ),
+                                        )
+                                      : const SizedBox.shrink(),
+                                  cartItem.salesOrgConfig.expiryDateDisplay
+                                      ? Text(
+                                          '${'Expiry date: '.tr()}${cartItem.stockInfo.expiryDate}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1
+                                              ?.apply(
+                                                color: ZPColors.lightGray,
+                                              ),
+                                        )
+                                      : const SizedBox.shrink(),
                                   cartItem.isEnableVat
                                       ? Text(
                                           '${'Price before $taxCode: '.tr()}${cartItem.display(PriceType.unitPriceBeforeGst)}',
@@ -246,6 +270,26 @@ class CartMaterialItemTile extends StatelessWidget {
                                 context.read<CartBloc>().add(
                                       CartEvent.addToCart(
                                         item: cartItem.copyWith(quantity: -1),
+                                        customerCodeInfo: context
+                                            .read<CustomerCodeBloc>()
+                                            .state
+                                            .customerCodeInfo,
+                                        doNotallowOutOfStockMaterial: context
+                                            .read<EligibilityBloc>()
+                                            .state
+                                            .doNotAllowOutOfStockMaterials,
+                                        salesOrganisation: context
+                                            .read<SalesOrgBloc>()
+                                            .state
+                                            .salesOrganisation,
+                                        salesOrganisationConfigs: context
+                                            .read<SalesOrgBloc>()
+                                            .state
+                                            .configs,
+                                        shipToInfo: context
+                                            .read<ShipToCodeBloc>()
+                                            .state
+                                            .shipToInfo,
                                       ),
                                     );
                               } else {
@@ -258,6 +302,26 @@ class CartMaterialItemTile extends StatelessWidget {
                               context.read<CartBloc>().add(
                                     CartEvent.addToCart(
                                       item: cartItem.copyWith(quantity: 1),
+                                      customerCodeInfo: context
+                                          .read<CustomerCodeBloc>()
+                                          .state
+                                          .customerCodeInfo,
+                                      doNotallowOutOfStockMaterial: context
+                                          .read<EligibilityBloc>()
+                                          .state
+                                          .doNotAllowOutOfStockMaterials,
+                                      salesOrganisation: context
+                                          .read<SalesOrgBloc>()
+                                          .state
+                                          .salesOrganisation,
+                                      salesOrganisationConfigs: context
+                                          .read<SalesOrgBloc>()
+                                          .state
+                                          .configs,
+                                      shipToInfo: context
+                                          .read<ShipToCodeBloc>()
+                                          .state
+                                          .shipToInfo,
                                     ),
                                   );
                             },

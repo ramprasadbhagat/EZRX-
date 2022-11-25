@@ -284,6 +284,8 @@ void setupLocator() {
     () => CartRepository(
       cartStorage: locator<CartStorage>(),
       config: locator<Config>(),
+      stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
+      stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
     ),
   );
 

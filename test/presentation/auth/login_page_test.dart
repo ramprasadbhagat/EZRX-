@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
@@ -38,6 +39,8 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
+class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
+
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
@@ -58,8 +61,9 @@ void main() {
   final SalesOrgBloc salesOrgBlocMock = SalesOrgBlocMock();
   final CustomerCodeBloc customerCodeBlocMock = CustomerCodeBlocMock();
   final ShipToCodeBloc shipToCodeBLocMock = ShipToCodeBlocMock();
-  final PaymentCustomerInformationBloc paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
-
+  final CartBloc cartBlocMock = CartBlocMock();
+  final PaymentCustomerInformationBloc paymentCustomerInformationBlocMock =
+      PaymentCustomerInformationBlocMock();
 
   setUpAll(() async {
     GetIt.instance.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
@@ -82,7 +86,9 @@ void main() {
       when(() => shipToCodeBLocMock.state)
           .thenReturn(ShipToCodeState.initial());
       when(() => paymentCustomerInformationBlocMock.state)
-          .thenReturn(PaymentCustomerInformationState.initial());    
+          .thenReturn(PaymentCustomerInformationState.initial());
+      when(() => cartBlocMock.state)
+          .thenReturn(CartState.initial());
     });
     testWidgets("Test don't have credential", (tester) async {
       await tester.pumpWidget(
@@ -97,6 +103,9 @@ void main() {
               ),
               BlocProvider<PaymentCustomerInformationBloc>(
                 create: (context) => paymentCustomerInformationBlocMock,
+              ),
+              BlocProvider<CartBloc>(
+                create: (context) => CartBlocMock(),
               ),
             ],
             child: const LoginPage(),
@@ -143,6 +152,9 @@ void main() {
               BlocProvider<PaymentCustomerInformationBloc>(
                 create: (context) => paymentCustomerInformationBlocMock,
               ),
+              BlocProvider<CartBloc>(
+                create: (context) => cartBlocMock,
+              ),
             ],
             child: const LoginPage(),
           ),
@@ -187,6 +199,9 @@ void main() {
               BlocProvider<PaymentCustomerInformationBloc>(
                 create: (context) => paymentCustomerInformationBlocMock,
               ),
+              BlocProvider<CartBloc>(
+                create: (context) => cartBlocMock,
+              ),
             ],
             child: const LoginPage(),
           ),
@@ -215,6 +230,9 @@ void main() {
             ),
             BlocProvider<PaymentCustomerInformationBloc>(
                 create: (context) => paymentCustomerInformationBlocMock,
+              ),
+            BlocProvider<CartBloc>(
+                create: (context) => cartBlocMock,
               ),
           ],
           child: const SplashPage(),

@@ -55,13 +55,17 @@ class SalesOrganisationConfigsDtoAdapter
       disableDeliveryDate: fields[128] == null ? false : fields[128] as bool,
       enableBillTo: fields[129] == null ? false : fields[129] as bool,
       showPOAttachment: fields[130] == null ? false : fields[130] as bool,
+      expiryDateDisplay: fields[131] == null ? false : fields[131] as bool,
+      hideStockDisplay: fields[132] == null ? false : fields[132] as bool,
+      addOosMaterials: fields[133] == null ? false : fields[133] as bool,
+      oosValue: fields[134] == null ? 0 : fields[134] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_SalesOrganisationConfigsDto obj) {
     writer
-      ..writeByte(31)
+      ..writeByte(35)
       ..writeByte(100)
       ..write(obj.disableProcessingStatus)
       ..writeByte(101)
@@ -122,6 +126,14 @@ class SalesOrganisationConfigsDtoAdapter
       ..write(obj.enableBillTo)
       ..writeByte(130)
       ..write(obj.showPOAttachment)
+      ..writeByte(131)
+      ..write(obj.expiryDateDisplay)
+      ..writeByte(132)
+      ..write(obj.hideStockDisplay)
+      ..writeByte(133)
+      ..write(obj.addOosMaterials)
+      ..writeByte(134)
+      ..write(obj.oosValue)
       ..writeByte(7)
       ..write(obj.principalList);
   }
@@ -180,6 +192,10 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       disableDeliveryDate: json['disableDeliveryDate'] as bool? ?? false,
       enableBillTo: json['enableBillTo'] as bool? ?? false,
       showPOAttachment: json['showPOAttachment'] as bool? ?? false,
+      expiryDateDisplay: json['expiryDateDisplay'] as bool? ?? false,
+      hideStockDisplay: json['hideStockDisplay'] as bool? ?? false,
+      addOosMaterials: json['addOosMaterials'] as bool? ?? false,
+      oosValue: json['oosValue'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -217,4 +233,8 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'disableDeliveryDate': instance.disableDeliveryDate,
       'enableBillTo': instance.enableBillTo,
       'showPOAttachment': instance.showPOAttachment,
+      'expiryDateDisplay': instance.expiryDateDisplay,
+      'hideStockDisplay': instance.hideStockDisplay,
+      'addOosMaterials': instance.addOosMaterials,
+      'oosValue': instance.oosValue,
     };

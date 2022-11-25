@@ -1,5 +1,8 @@
+
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -99,7 +102,14 @@ class _AddToCartState extends State<AddToCart> {
             'Commercial material cannot be combined with covid material.'.tr(),
       );
     } else {
-      context.read<CartBloc>().add(CartEvent.addToCart(item: selectedCartItem));
+      final eligibilityState = context.read<EligibilityBloc>().state;
+      context.read<CartBloc>().add(CartEvent.addToCart(
+          item: context.read<AddToCartBloc>().state.cartItem,
+          customerCodeInfo: eligibilityState.customerCodeInfo,
+          salesOrganisation: eligibilityState.salesOrganisation,
+          salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
+          shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+          doNotallowOutOfStockMaterial: eligibilityState.doNotAllowOutOfStockMaterials,));
       context.router.pop();
     }
   }

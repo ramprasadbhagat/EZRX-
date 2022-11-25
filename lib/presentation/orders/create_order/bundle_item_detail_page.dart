@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/custom_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
@@ -162,6 +163,9 @@ class BundleItemDetailPage extends StatelessWidget {
           isOverride: false,
           bundle: bundle,
           addedBonusList: [],
+          stockInfo: StockInfo.empty().copyWith(
+            materialNumber: itemInfo.info.materialNumber,
+          ),
         );
 
         return priceAggregate;

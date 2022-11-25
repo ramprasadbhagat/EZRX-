@@ -11,7 +11,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MaterialRoot extends StatelessWidget {
   const MaterialRoot({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<EligibilityBloc, EligibilityState>(
@@ -19,7 +18,8 @@ class MaterialRoot extends StatelessWidget {
       builder: (context, state) {
         final disableBundles = state.salesOrgConfigs.disableBundles;
         final enableCovidMaterial = state.isCovidMaterialEnable;
-        final length = (disableBundles ? 1 : 2) + (enableCovidMaterial ? 1 : 0);
+        final length =
+            (disableBundles ? 1 : 2) + (enableCovidMaterial ? 1 : 0);
 
         return Scaffold(
           appBar: PreferredSize(

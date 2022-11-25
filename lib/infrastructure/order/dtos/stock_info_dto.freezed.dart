@@ -21,14 +21,19 @@ StockInfoDto _$StockInfoDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$StockInfoDto {
   @JsonKey(name: 'MaterialNumber')
+  @HiveField(0, defaultValue: '')
   String get materialNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'ExpiryDate')
+  @HiveField(1, defaultValue: '')
   String get expiryDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'Batch')
+  @HiveField(2, defaultValue: '')
   String get batch => throw _privateConstructorUsedError;
   @JsonKey(name: 'InStock')
+  @HiveField(3, defaultValue: '')
   String get inStock => throw _privateConstructorUsedError;
   @JsonKey(name: 'SalesDistrict')
+  @HiveField(4, defaultValue: '')
   String? get salesDistrict => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,11 +49,21 @@ abstract class $StockInfoDtoCopyWith<$Res> {
       _$StockInfoDtoCopyWithImpl<$Res, StockInfoDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'MaterialNumber') String materialNumber,
-      @JsonKey(name: 'ExpiryDate') String expiryDate,
-      @JsonKey(name: 'Batch') String batch,
-      @JsonKey(name: 'InStock') String inStock,
-      @JsonKey(name: 'SalesDistrict') String? salesDistrict});
+      {@JsonKey(name: 'MaterialNumber')
+      @HiveField(0, defaultValue: '')
+          String materialNumber,
+      @JsonKey(name: 'ExpiryDate')
+      @HiveField(1, defaultValue: '')
+          String expiryDate,
+      @JsonKey(name: 'Batch')
+      @HiveField(2, defaultValue: '')
+          String batch,
+      @JsonKey(name: 'InStock')
+      @HiveField(3, defaultValue: '')
+          String inStock,
+      @JsonKey(name: 'SalesDistrict')
+      @HiveField(4, defaultValue: '')
+          String? salesDistrict});
 }
 
 /// @nodoc
@@ -104,11 +119,21 @@ abstract class _$$_StockInfoDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'MaterialNumber') String materialNumber,
-      @JsonKey(name: 'ExpiryDate') String expiryDate,
-      @JsonKey(name: 'Batch') String batch,
-      @JsonKey(name: 'InStock') String inStock,
-      @JsonKey(name: 'SalesDistrict') String? salesDistrict});
+      {@JsonKey(name: 'MaterialNumber')
+      @HiveField(0, defaultValue: '')
+          String materialNumber,
+      @JsonKey(name: 'ExpiryDate')
+      @HiveField(1, defaultValue: '')
+          String expiryDate,
+      @JsonKey(name: 'Batch')
+      @HiveField(2, defaultValue: '')
+          String batch,
+      @JsonKey(name: 'InStock')
+      @HiveField(3, defaultValue: '')
+          String inStock,
+      @JsonKey(name: 'SalesDistrict')
+      @HiveField(4, defaultValue: '')
+          String? salesDistrict});
 }
 
 /// @nodoc
@@ -155,13 +180,24 @@ class __$$_StockInfoDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
+@HiveType(typeId: 18, adapterName: 'StockInfoDtoAdapter')
 class _$_StockInfoDto extends _StockInfoDto {
   const _$_StockInfoDto(
-      {@JsonKey(name: 'MaterialNumber') required this.materialNumber,
-      @JsonKey(name: 'ExpiryDate') required this.expiryDate,
-      @JsonKey(name: 'Batch') required this.batch,
-      @JsonKey(name: 'InStock') required this.inStock,
-      @JsonKey(name: 'SalesDistrict') required this.salesDistrict})
+      {@JsonKey(name: 'MaterialNumber')
+      @HiveField(0, defaultValue: '')
+          required this.materialNumber,
+      @JsonKey(name: 'ExpiryDate')
+      @HiveField(1, defaultValue: '')
+          required this.expiryDate,
+      @JsonKey(name: 'Batch')
+      @HiveField(2, defaultValue: '')
+          required this.batch,
+      @JsonKey(name: 'InStock')
+      @HiveField(3, defaultValue: '')
+          required this.inStock,
+      @JsonKey(name: 'SalesDistrict')
+      @HiveField(4, defaultValue: '')
+          required this.salesDistrict})
       : super._();
 
   factory _$_StockInfoDto.fromJson(Map<String, dynamic> json) =>
@@ -169,18 +205,23 @@ class _$_StockInfoDto extends _StockInfoDto {
 
   @override
   @JsonKey(name: 'MaterialNumber')
+  @HiveField(0, defaultValue: '')
   final String materialNumber;
   @override
   @JsonKey(name: 'ExpiryDate')
+  @HiveField(1, defaultValue: '')
   final String expiryDate;
   @override
   @JsonKey(name: 'Batch')
+  @HiveField(2, defaultValue: '')
   final String batch;
   @override
   @JsonKey(name: 'InStock')
+  @HiveField(3, defaultValue: '')
   final String inStock;
   @override
   @JsonKey(name: 'SalesDistrict')
+  @HiveField(4, defaultValue: '')
   final String? salesDistrict;
 
   @override
@@ -225,14 +266,19 @@ class _$_StockInfoDto extends _StockInfoDto {
 abstract class _StockInfoDto extends StockInfoDto {
   const factory _StockInfoDto(
       {@JsonKey(name: 'MaterialNumber')
+      @HiveField(0, defaultValue: '')
           required final String materialNumber,
       @JsonKey(name: 'ExpiryDate')
+      @HiveField(1, defaultValue: '')
           required final String expiryDate,
       @JsonKey(name: 'Batch')
+      @HiveField(2, defaultValue: '')
           required final String batch,
       @JsonKey(name: 'InStock')
+      @HiveField(3, defaultValue: '')
           required final String inStock,
       @JsonKey(name: 'SalesDistrict')
+      @HiveField(4, defaultValue: '')
           required final String? salesDistrict}) = _$_StockInfoDto;
   const _StockInfoDto._() : super._();
 
@@ -241,18 +287,23 @@ abstract class _StockInfoDto extends StockInfoDto {
 
   @override
   @JsonKey(name: 'MaterialNumber')
+  @HiveField(0, defaultValue: '')
   String get materialNumber;
   @override
   @JsonKey(name: 'ExpiryDate')
+  @HiveField(1, defaultValue: '')
   String get expiryDate;
   @override
   @JsonKey(name: 'Batch')
+  @HiveField(2, defaultValue: '')
   String get batch;
   @override
   @JsonKey(name: 'InStock')
+  @HiveField(3, defaultValue: '')
   String get inStock;
   @override
   @JsonKey(name: 'SalesDistrict')
+  @HiveField(4, defaultValue: '')
   String? get salesDistrict;
   @override
   @JsonKey(ignore: true)

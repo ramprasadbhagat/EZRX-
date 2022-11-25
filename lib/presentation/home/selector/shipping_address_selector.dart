@@ -43,199 +43,205 @@ class ShipCodeSelector extends StatelessWidget {
             final enableCovidMaterial =
                 context.read<EligibilityBloc>().state.isCovidMaterialEnable;
 
-            if (state.haveShipTo) {
-              context.read<SavedOrderListBloc>().add(
-                    SavedOrderListEvent.fetch(
-                      userInfo: context.read<UserBloc>().state.user,
-                      selectedSalesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      selectedCustomerCode: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      selectedShipTo: state.shipToInfo,
-                    ),
-                  );
+          if (state.haveShipTo) {
+            context.read<SavedOrderListBloc>().add(
+                  SavedOrderListEvent.fetch(
+                    userInfo: context.read<UserBloc>().state.user,
+                    selectedSalesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    selectedCustomerCode: context
+                        .read<CustomerCodeBloc>()
+                        .state
+                        .customerCodeInfo,
+                    selectedShipTo: state.shipToInfo,
+                  ),
+                );
 
-              context.read<MaterialListBloc>().add(
-                    MaterialListEvent.fetch(
+            context.read<MaterialListBloc>().add(
+                  MaterialListEvent.fetch(
+                    user: context.read<UserBloc>().state.user,
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    configs: context.read<SalesOrgBloc>().state.configs,
+                    customerCodeInfo: context
+                        .read<CustomerCodeBloc>()
+                        .state
+                        .customerCodeInfo,
+                    shipToInfo: state.shipToInfo,
+                    selectedMaterialFilter: context
+                        .read<MaterialFilterBloc>()
+                        .state
+                        .selectedMaterialFilter,
+                    orderDocumentType: context
+                        .read<OrderDocumentTypeBloc>()
+                        .state
+                        .selectedOrderType,
+                    pickAndPack: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .getPNPValueMaterial,
+                  ),
+                );
+            if (enableCovidMaterial) {
+              context.read<CovidMaterialListBloc>().add(
+                    CovidMaterialListEvent.fetch(
                       user: context.read<UserBloc>().state.user,
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      salesOrganisation: context
+                          .read<SalesOrgBloc>()
+                          .state
+                          .salesOrganisation,
                       configs: context.read<SalesOrgBloc>().state.configs,
                       customerCodeInfo: context
                           .read<CustomerCodeBloc>()
                           .state
                           .customerCodeInfo,
                       shipToInfo: state.shipToInfo,
-                      selectedMaterialFilter: context
-                          .read<MaterialFilterBloc>()
-                          .state
-                          .selectedMaterialFilter,
-                      orderDocumentType: context
-                          .read<OrderDocumentTypeBloc>()
-                          .state
-                          .selectedOrderType,
                       pickAndPack: context
                           .read<EligibilityBloc>()
                           .state
                           .getPNPValueMaterial,
                     ),
                   );
-              if (enableCovidMaterial) {
-                context.read<CovidMaterialListBloc>().add(
-                      CovidMaterialListEvent.fetch(
-                        user: context.read<UserBloc>().state.user,
-                        salesOrganisation: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
-                        configs: context.read<SalesOrgBloc>().state.configs,
-                        customerCodeInfo: context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo,
-                        shipToInfo: state.shipToInfo,
-                        pickAndPack: context
-                            .read<EligibilityBloc>()
-                            .state
-                            .getPNPValueMaterial,
-                      ),
-                    );
-              }
-              context.read<OrderHistoryListBloc>().add(
-                    OrderHistoryListEvent.fetch(
-                      salesOrgConfigs:
-                          context.read<SalesOrgBloc>().state.configs,
-                      shipToInfo: state.shipToInfo,
+            }
+            context.read<OrderHistoryListBloc>().add(
+                  OrderHistoryListEvent.fetch(
+                    salesOrgConfigs:
+                        context.read<SalesOrgBloc>().state.configs,
+                    shipToInfo: state.shipToInfo,
+                    user: context.read<UserBloc>().state.user,
+                    customerCodeInfo: context
+                        .read<CustomerCodeBloc>()
+                        .state
+                        .customerCodeInfo,
+                    orderHistoryFilter: OrderHistoryFilter.empty(),
+                  ),
+                );
+
+            context.read<OrderTemplateListBloc>().add(
+                  OrderTemplateListEvent.fetch(
+                    context.read<UserBloc>().state.user,
+                  ),
+                );
+
+            context.read<FavouriteBloc>().add(
+                  FavouriteEvent.fetch(
+                    user: context.read<UserBloc>().state.user,
+                  ),
+                );
+
+            if (enableBundles) {
+              context.read<MaterialBundleListBloc>().add(
+                    MaterialBundleListEvent.fetch(
                       user: context.read<UserBloc>().state.user,
-                      customerCodeInfo: context
+                      customerCode: context
                           .read<CustomerCodeBloc>()
                           .state
                           .customerCodeInfo,
-                      orderHistoryFilter: OrderHistoryFilter.empty(),
+                      shipToCode:
+                          context.read<ShipToCodeBloc>().state.shipToInfo,
+                      salesOrganisation: context
+                          .read<SalesOrgBloc>()
+                          .state
+                          .salesOrganisation,
                     ),
                   );
-
-              context.read<OrderTemplateListBloc>().add(
-                    OrderTemplateListEvent.fetch(
-                      context.read<UserBloc>().state.user,
-                    ),
-                  );
-
-              context.read<FavouriteBloc>().add(
-                    FavouriteEvent.fetch(
-                      user: context.read<UserBloc>().state.user,
-                    ),
-                  );
-
-              if (enableBundles) {
-                context.read<MaterialBundleListBloc>().add(
-                      MaterialBundleListEvent.fetch(
-                        user: context.read<UserBloc>().state.user,
-                        customerCode: context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo,
-                        shipToCode:
-                            context.read<ShipToCodeBloc>().state.shipToInfo,
-                        salesOrganisation: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
-                      ),
-                    );
-              }
-              context.read<CartBloc>().add(const CartEvent.fetch());
-              context.read<MaterialFilterBloc>().add(MaterialFilterEvent.fetch(
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    user: context.read<UserBloc>().state.user,
-                    salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                    pickAndPack: context
-                        .read<EligibilityBloc>()
-                        .state
-                        .getPNPValueMaterial,
-                  ));
-
-              context
-                  .read<PaymentCustomerInformationBloc>()
-                  .add(PaymentCustomerInformationEvent.fetch(
-                    customeCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    selectedShipToCode: context
-                        .read<ShipToCodeBloc>()
-                        .state
-                        .shipToInfo
-                        .shipToCustomerCode,
-                  ));
-            } else {
-              context
-                  .read<SavedOrderListBloc>()
-                  .add(const SavedOrderListEvent.initialized());
-
-              context
-                  .read<OrderHistoryListBloc>()
-                  .add(const OrderHistoryListEvent.initialized());
-
-              context
-                  .read<OrderTemplateListBloc>()
-                  .add(const OrderTemplateListEvent.initialized());
-
-              context
-                  .read<FavouriteBloc>()
-                  .add(const FavouriteEvent.initialized());
-
-              if (enableBundles) {
-                context
-                    .read<MaterialBundleListBloc>()
-                    .add(const MaterialBundleListEvent.initialized());
-              }
-
-              if (enableCovidMaterial) {
-                context
-                    .read<CovidMaterialListBloc>()
-                    .add(const CovidMaterialListEvent.initialized());
-              }
-
-              context
-                  .read<OrderHistoryFilterBloc>()
-                  .add(const OrderHistoryFilterEvent.initialized());
-                  context
-                  .read<OrderHistoryFilterByStatusBloc>()
-                  .add(const OrderHistoryFilterByStatusEvent.initialized());
             }
-          },
-          buildWhen: (previous, current) =>
-              previous.shipToInfo != current.shipToInfo,
-          builder: (context, state) {
-            return CustomSelector(
-              key: const Key('shipToCodeSelect'),
-              title: 'Shipping Address',
-              onTap: customerCodeState.isFetching
-                  ? null
-                  : () => context.router.pushNamed('ship_to_search_page'),
-              child: customerCodeState.isFetching
-                  ? LoadingShimmer.tile()
-                  : FittedBox(
-                      child: Text(
-                        state.shipToInfo == ShipToInfo.empty()
-                            ? 'NA'.tr()
-                            : state.shipToInfo.shipToCustomerCode,
-                        style: Theme.of(context).textTheme.subtitle2?.apply(
-                              color: ZPColors.primary,
-                            ),
-                      ).tr(),
-                    ),
-            );
-          },
-        );
-      },
+            context.read<CartBloc>().add(const CartEvent.fetch());
+            context.read<MaterialFilterBloc>().add(MaterialFilterEvent.fetch(
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  user: context.read<UserBloc>().state.user,
+                  salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                  pickAndPack: context
+                      .read<EligibilityBloc>()
+                      .state
+                      .getPNPValueMaterial,
+                ));
+
+            context
+                .read<PaymentCustomerInformationBloc>()
+                .add(PaymentCustomerInformationEvent.fetch(
+                  customeCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  selectedShipToCode: context
+                      .read<ShipToCodeBloc>()
+                      .state
+                      .shipToInfo
+                      .shipToCustomerCode,
+                ));
+             context.read<CartBloc>().add(CartEvent.updateStockInfo(
+                  user: context.read<UserBloc>().state.user,
+                  customerCodeInfo: context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  salesOrganisationConfigs: context.read<SalesOrgBloc>().state.configs,
+                  salesOrganisation: context.read<SalesOrgBloc>().state.salesOrganisation,
+                  shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,));
+          } else {
+            context
+                .read<SavedOrderListBloc>()
+                .add(const SavedOrderListEvent.initialized());
+
+            context
+                .read<OrderHistoryListBloc>()
+                .add(const OrderHistoryListEvent.initialized());
+
+            context
+                .read<OrderTemplateListBloc>()
+                .add(const OrderTemplateListEvent.initialized());
+
+            context
+                .read<FavouriteBloc>()
+                .add(const FavouriteEvent.initialized());
+
+            if (enableBundles) {
+              context
+                  .read<MaterialBundleListBloc>()
+                  .add(const MaterialBundleListEvent.initialized());
+            }
+
+            if (enableCovidMaterial) {
+              context
+                  .read<CovidMaterialListBloc>()
+                  .add(const CovidMaterialListEvent.initialized());
+            }
+
+            context
+                .read<OrderHistoryFilterBloc>()
+                .add(const OrderHistoryFilterEvent.initialized());
+                context
+                .read<OrderHistoryFilterByStatusBloc>()
+                .add(const OrderHistoryFilterByStatusEvent.initialized());
+          }
+        },
+        buildWhen: (previous, current) =>
+            previous.shipToInfo != current.shipToInfo,
+        builder: (context, state) {
+          return CustomSelector(
+            key: const Key('shipToCodeSelect'),
+            title: 'Shipping Address',
+            onTap: customerCodeState.isFetching
+                ? null
+                : () => context.router.pushNamed('ship_to_search_page'),
+            child: customerCodeState.isFetching
+                ? LoadingShimmer.tile()
+                : FittedBox(
+                    child: Text(
+                      state.shipToInfo == ShipToInfo.empty()
+                          ? 'NA'.tr()
+                          : state.shipToInfo.shipToCustomerCode,
+                      style: Theme.of(context).textTheme.subtitle2?.apply(
+                            color: ZPColors.primary,
+                          ),
+                    ).tr(),
+                  ),
+          );
+        },
+      );
+    },
     );
   }
 }

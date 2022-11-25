@@ -19,6 +19,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/application/order/stock_information/stock_information_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -71,6 +72,10 @@ class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 class MockMaterialFilterBloc
     extends MockBloc<MaterialFilterEvent, MaterialFilterState>
     implements MaterialFilterBloc {}
+
+class MockStockInformationBloc
+    extends MockBloc<StockInformationEvent, StockInformationState>
+    implements StockInformationBloc {}
 
 class MaterialListBlocMock
     extends MockBloc<MaterialListEvent, MaterialListState>
@@ -133,6 +138,7 @@ void main() {
       isFOCMaterial: false,
       remarks: '');
   late MaterialFilterBloc mockMaterialFilterBloc;
+  late StockInformationBloc mockStockInformationBloc;
 
   setUpAll(() async {
     setupLocator();
@@ -149,6 +155,7 @@ void main() {
       materialPriceBlocMock = MaterialPriceBlocMock();
       cartBlocMock = CartBlocMock();
       mockMaterialFilterBloc = MockMaterialFilterBloc();
+      mockStockInformationBloc = MockStockInformationBloc();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       autoRouterMock = locator<AppRouter>();
       eligibilityBlocMock = EligibilityBlocMock();
@@ -206,6 +213,8 @@ void main() {
             BlocProvider<CartBloc>(create: ((context) => cartBlocMock)),
             BlocProvider<MaterialFilterBloc>(
                 create: ((context) => mockMaterialFilterBloc)),
+            BlocProvider<StockInformationBloc>(
+                create: ((context) => mockStockInformationBloc)),
             BlocProvider<MaterialListBloc>(
                 create: ((context) => materialListBlocMock)),
             BlocProvider<OrderDocumentTypeBloc>(

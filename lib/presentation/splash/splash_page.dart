@@ -12,7 +12,9 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/cupertino.dart';
@@ -82,6 +84,26 @@ class SplashPage extends StatelessWidget {
                     const CartEvent.initialized(),
                   );
             }
+          },
+        ),
+        BlocListener<CartBloc, CartState>(
+          listenWhen: (previous, current) =>
+              previous.apiFailureOrSuccessOption !=
+              current.apiFailureOrSuccessOption,
+          listener: (context, state) {
+            state.apiFailureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  final failureMessage = failure.failureMessage;
+                  showSnackBar(
+                    context: context,
+                    message: failureMessage,
+                  );
+                },
+                (_) {},
+              ),
+            );
           },
         ),
         BlocListener<PaymentCustomerInformationBloc,

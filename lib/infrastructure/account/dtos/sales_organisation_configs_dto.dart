@@ -106,6 +106,18 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'showPOAttachment', defaultValue: false)
     @HiveField(130, defaultValue: false)
         required bool showPOAttachment,
+    @JsonKey(name: 'expiryDateDisplay', defaultValue: false)
+    @HiveField(131, defaultValue: false)
+        required bool expiryDateDisplay,
+    @JsonKey(name: 'hideStockDisplay', defaultValue: false)
+    @HiveField(132, defaultValue: false)
+        required bool hideStockDisplay,
+    @JsonKey(name: 'addOosMaterials', defaultValue: false)
+    @HiveField(133, defaultValue: false)
+        required bool addOosMaterials,
+    @JsonKey(name: 'oosValue', defaultValue: 0)
+    @HiveField(134, defaultValue: 0)
+        required int oosValue,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -143,6 +155,10 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       disableDeliveryDate: configs.disableDeliveryDate,
       enableBillTo: configs.enableBillTo,
       showPOAttachment: configs.showPOAttachment,
+      hideStockDisplay: configs.hideStockDisplay,
+      expiryDateDisplay: configs.expiryDateDisplay,
+      addOosMaterials: configs.addOosMaterials,
+      oosValue: configs.oosValue.getOrCrash(),
     );
   }
 
@@ -179,6 +195,10 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       disableDeliveryDate: disableDeliveryDate,
       enableBillTo: enableBillTo,
       showPOAttachment: showPOAttachment,
+      hideStockDisplay: hideStockDisplay,
+      expiryDateDisplay: expiryDateDisplay,
+      addOosMaterials: addOosMaterials,
+      oosValue: OosValue(oosValue),
     );
   }
 

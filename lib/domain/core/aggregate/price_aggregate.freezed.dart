@@ -25,6 +25,7 @@ mixin _$PriceAggregate {
   int get discountedMaterialCount => throw _privateConstructorUsedError;
   bool get isOverride => throw _privateConstructorUsedError;
   List<MaterialInfo> get addedBonusList => throw _privateConstructorUsedError;
+  StockInfo get stockInfo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PriceAggregateCopyWith<PriceAggregate> get copyWith =>
@@ -45,12 +46,14 @@ abstract class $PriceAggregateCopyWith<$Res> {
       int quantity,
       int discountedMaterialCount,
       bool isOverride,
-      List<MaterialInfo> addedBonusList});
+      List<MaterialInfo> addedBonusList,
+      StockInfo stockInfo});
 
   $PriceCopyWith<$Res> get price;
   $MaterialInfoCopyWith<$Res> get materialInfo;
   $BundleCopyWith<$Res> get bundle;
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
+  $StockInfoCopyWith<$Res> get stockInfo;
 }
 
 /// @nodoc
@@ -74,6 +77,7 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
     Object? discountedMaterialCount = null,
     Object? isOverride = null,
     Object? addedBonusList = null,
+    Object? stockInfo = null,
   }) {
     return _then(_value.copyWith(
       price: null == price
@@ -108,6 +112,10 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
           ? _value.addedBonusList
           : addedBonusList // ignore: cast_nullable_to_non_nullable
               as List<MaterialInfo>,
+      stockInfo: null == stockInfo
+          ? _value.stockInfo
+          : stockInfo // ignore: cast_nullable_to_non_nullable
+              as StockInfo,
     ) as $Val);
   }
 
@@ -143,6 +151,14 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
       return _then(_value.copyWith(salesOrgConfig: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $StockInfoCopyWith<$Res> get stockInfo {
+    return $StockInfoCopyWith<$Res>(_value.stockInfo, (value) {
+      return _then(_value.copyWith(stockInfo: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -161,7 +177,8 @@ abstract class _$$_PriceAggregateCopyWith<$Res>
       int quantity,
       int discountedMaterialCount,
       bool isOverride,
-      List<MaterialInfo> addedBonusList});
+      List<MaterialInfo> addedBonusList,
+      StockInfo stockInfo});
 
   @override
   $PriceCopyWith<$Res> get price;
@@ -171,6 +188,8 @@ abstract class _$$_PriceAggregateCopyWith<$Res>
   $BundleCopyWith<$Res> get bundle;
   @override
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
+  @override
+  $StockInfoCopyWith<$Res> get stockInfo;
 }
 
 /// @nodoc
@@ -192,6 +211,7 @@ class __$$_PriceAggregateCopyWithImpl<$Res>
     Object? discountedMaterialCount = null,
     Object? isOverride = null,
     Object? addedBonusList = null,
+    Object? stockInfo = null,
   }) {
     return _then(_$_PriceAggregate(
       price: null == price
@@ -226,6 +246,10 @@ class __$$_PriceAggregateCopyWithImpl<$Res>
           ? _value._addedBonusList
           : addedBonusList // ignore: cast_nullable_to_non_nullable
               as List<MaterialInfo>,
+      stockInfo: null == stockInfo
+          ? _value.stockInfo
+          : stockInfo // ignore: cast_nullable_to_non_nullable
+              as StockInfo,
     ));
   }
 }
@@ -241,7 +265,8 @@ class _$_PriceAggregate extends _PriceAggregate {
       required this.quantity,
       required this.discountedMaterialCount,
       required this.isOverride,
-      required final List<MaterialInfo> addedBonusList})
+      required final List<MaterialInfo> addedBonusList,
+      required this.stockInfo})
       : _addedBonusList = addedBonusList,
         super._();
 
@@ -267,8 +292,11 @@ class _$_PriceAggregate extends _PriceAggregate {
   }
 
   @override
+  final StockInfo stockInfo;
+
+  @override
   String toString() {
-    return 'PriceAggregate(price: $price, materialInfo: $materialInfo, bundle: $bundle, salesOrgConfig: $salesOrgConfig, quantity: $quantity, discountedMaterialCount: $discountedMaterialCount, isOverride: $isOverride, addedBonusList: $addedBonusList)';
+    return 'PriceAggregate(price: $price, materialInfo: $materialInfo, bundle: $bundle, salesOrgConfig: $salesOrgConfig, quantity: $quantity, discountedMaterialCount: $discountedMaterialCount, isOverride: $isOverride, addedBonusList: $addedBonusList, stockInfo: $stockInfo)';
   }
 
   @override
@@ -290,7 +318,9 @@ class _$_PriceAggregate extends _PriceAggregate {
             (identical(other.isOverride, isOverride) ||
                 other.isOverride == isOverride) &&
             const DeepCollectionEquality()
-                .equals(other._addedBonusList, _addedBonusList));
+                .equals(other._addedBonusList, _addedBonusList) &&
+            (identical(other.stockInfo, stockInfo) ||
+                other.stockInfo == stockInfo));
   }
 
   @override
@@ -303,7 +333,8 @@ class _$_PriceAggregate extends _PriceAggregate {
       quantity,
       discountedMaterialCount,
       isOverride,
-      const DeepCollectionEquality().hash(_addedBonusList));
+      const DeepCollectionEquality().hash(_addedBonusList),
+      stockInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -321,7 +352,8 @@ abstract class _PriceAggregate extends PriceAggregate {
       required final int quantity,
       required final int discountedMaterialCount,
       required final bool isOverride,
-      required final List<MaterialInfo> addedBonusList}) = _$_PriceAggregate;
+      required final List<MaterialInfo> addedBonusList,
+      required final StockInfo stockInfo}) = _$_PriceAggregate;
   const _PriceAggregate._() : super._();
 
   @override
@@ -340,6 +372,8 @@ abstract class _PriceAggregate extends PriceAggregate {
   bool get isOverride;
   @override
   List<MaterialInfo> get addedBonusList;
+  @override
+  StockInfo get stockInfo;
   @override
   @JsonKey(ignore: true)
   _$$_PriceAggregateCopyWith<_$_PriceAggregate> get copyWith =>

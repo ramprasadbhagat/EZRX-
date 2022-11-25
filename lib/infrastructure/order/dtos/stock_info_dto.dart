@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive/hive.dart';
 
 part 'stock_info_dto.freezed.dart';
 part 'stock_info_dto.g.dart';
@@ -8,12 +9,24 @@ part 'stock_info_dto.g.dart';
 @freezed
 class StockInfoDto with _$StockInfoDto {
   const StockInfoDto._();
+
+  @HiveType(typeId: 18, adapterName: 'StockInfoDtoAdapter')
   const factory StockInfoDto({
-    @JsonKey(name: 'MaterialNumber') required String materialNumber,
-    @JsonKey(name: 'ExpiryDate') required String expiryDate,
-    @JsonKey(name: 'Batch') required String batch,
-    @JsonKey(name: 'InStock') required String inStock,
-    @JsonKey(name: 'SalesDistrict') required String? salesDistrict,
+    @JsonKey(name: 'MaterialNumber')
+    @HiveField(0, defaultValue: '')
+        required String materialNumber,
+    @JsonKey(name: 'ExpiryDate')
+    @HiveField(1, defaultValue: '')
+        required String expiryDate,
+    @JsonKey(name: 'Batch')
+    @HiveField(2, defaultValue: '')
+        required String batch,
+    @JsonKey(name: 'InStock')
+    @HiveField(3, defaultValue: '')
+        required String inStock,
+    @JsonKey(name: 'SalesDistrict')
+    @HiveField(4, defaultValue: '')
+        required String? salesDistrict,
   }) = _StockInfoDto;
 
   factory StockInfoDto.fromDomain(StockInfo stockInfo) {
@@ -21,7 +34,7 @@ class StockInfoDto with _$StockInfoDto {
       materialNumber: stockInfo.materialNumber.getOrCrash(),
       expiryDate: stockInfo.expiryDate,
       batch: stockInfo.batch,
-      inStock: stockInfo.inStock,
+      inStock: stockInfo.inStock.getOrCrash(),
       salesDistrict: stockInfo.salesDistrict,
     );
   }
@@ -31,7 +44,7 @@ class StockInfoDto with _$StockInfoDto {
       materialNumber: MaterialNumber(materialNumber),
       batch: batch,
       expiryDate: expiryDate,
-      inStock: inStock,
+      inStock: MaterialInStock(inStock),
       salesDistrict: salesDistrict ?? '',
     );
   }

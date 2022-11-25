@@ -10,6 +10,7 @@ import 'package:ezrxmobile/infrastructure/order/dtos/price_bundle_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_rule_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_tier_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/stock_info_dto.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class CartStorage {
@@ -34,7 +35,8 @@ class CartStorage {
       ..registerAdapter(PriceBundleDtoAdapter())
       ..registerAdapter(PriceDtoAdapter())
       ..registerAdapter(SalesOrganisationConfigsDtoAdapter())
-      ..registerAdapter(PriceAggregateDtoAdapter());
+      ..registerAdapter(PriceAggregateDtoAdapter())
+      ..registerAdapter(StockInfoDtoAdapter());
     _cartBox = await Hive.openBox(
       _boxName,
     );
@@ -87,6 +89,22 @@ class CartStorage {
             await _cartBox.put(entry.key, cartDto);
             break;
           }
+        }
+      }
+    } catch (e) {
+      throw CacheException(message: e.toString());
+    }
+  }
+
+  Future updateStockInfo(StockInfoDto stockInfo) async {
+    try {
+      for (final entry in _cartBox.toMap().entries) {
+        final existingItem = entry.value as PriceAggregateDto;
+        if (existingItem.materialDto.materialNumber ==
+            stockInfo.materialNumber) {
+          existingItem.stockInfoDto = stockInfo;
+          await _cartBox.put(entry.key, existingItem);
+          break;
         }
       }
     } catch (e) {

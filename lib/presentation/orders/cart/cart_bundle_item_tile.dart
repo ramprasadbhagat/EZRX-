@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -258,6 +260,26 @@ class CartBundleItemTile extends StatelessWidget {
                                               item: cartItem.copyWith(
                                                 quantity: -1,
                                               ),
+                                              customerCodeInfo: context
+                                                  .read<CustomerCodeBloc>()
+                                                  .state
+                                                  .customerCodeInfo,
+                                              salesOrganisationConfigs: context
+                                                  .read<SalesOrgBloc>()
+                                                  .state
+                                                  .configs,
+                                              shipToInfo: context
+                                                  .read<ShipToCodeBloc>()
+                                                  .state
+                                                  .shipToInfo,
+                                              doNotallowOutOfStockMaterial: context
+                                                  .read<EligibilityBloc>()
+                                                  .state
+                                                  .doNotAllowOutOfStockMaterials,
+                                              salesOrganisation: context
+                                                  .read<SalesOrgBloc>()
+                                                  .state
+                                                  .salesOrganisation,
                                             ),
                                           );
                                     } else {
@@ -290,6 +312,26 @@ class CartBundleItemTile extends StatelessWidget {
                                             item: cartItem.copyWith(
                                               quantity: 1,
                                             ),
+                                            customerCodeInfo: context
+                                                .read<CustomerCodeBloc>()
+                                                .state
+                                                .customerCodeInfo,
+                                            salesOrganisationConfigs: context
+                                                .read<SalesOrgBloc>()
+                                                .state
+                                                .configs,
+                                            shipToInfo: context
+                                                .read<ShipToCodeBloc>()
+                                                .state
+                                                .shipToInfo,
+                                            doNotallowOutOfStockMaterial: context
+                                                .read<EligibilityBloc>()
+                                                .state
+                                                .doNotAllowOutOfStockMaterials,
+                                            salesOrganisation: context
+                                                .read<SalesOrgBloc>()
+                                                .state
+                                                .salesOrganisation,
                                           ),
                                         );
                                   },

@@ -82,6 +82,21 @@ class SalesOrg extends ValueObject<String> {
   const SalesOrg._(this.value);
 }
 
+class OosValue extends ValueObject<int> {
+  @override
+  final Either<ValueFailure<int>, int> value;
+
+  factory OosValue(int input) {
+    return OosValue._(Right(input));
+  }
+
+  bool get isOosValueZero {
+    return isZero(value.getOrElse(() => 0));
+  }
+
+  const OosValue._(this.value);
+}
+
 class RoleType extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;

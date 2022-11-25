@@ -1,6 +1,10 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -225,8 +229,13 @@ void main() {
         build: () => CartBloc(cartRepository: cartRepositoryMock),
         setUp: () {
           when(() => cartRepositoryMock.addToCart(
-                  cartItem: PriceAggregate.empty()))
-              .thenAnswer((invocation) async => Right(mockCartItemList));
+                cartItem: PriceAggregate.empty(),
+                customerCodeInfo: CustomerCodeInfo.empty(),
+                salesOrganisation: SalesOrganisation.empty(),
+                salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+                shipToInfo: ShipToInfo.empty(),
+                doNotallowOutOfStockMaterial: true,
+              )).thenAnswer((invocation) async => Right(mockCartItemList));
 
           when(() => cartRepositoryMock.fetchCartItems())
               .thenAnswer((invocation) async => Right(mockCartItemList));
@@ -237,8 +246,14 @@ void main() {
                   item: PriceAggregate.empty())))
               .thenAnswer((invocation) => mockMaterialItemList);
         },
-        act: (bloc) =>
-            bloc.add(CartEvent.addToCart(item: PriceAggregate.empty())),
+        act: (bloc) => bloc.add(CartEvent.addToCart(
+          item: PriceAggregate.empty(),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          salesOrganisation: SalesOrganisation.empty(),
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          shipToInfo: ShipToInfo.empty(),
+          doNotallowOutOfStockMaterial: true,
+        )),
         expect: () => [
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: none(),
@@ -257,15 +272,27 @@ void main() {
         'Add to Cart Failure CartBloc',
         build: () => CartBloc(cartRepository: cartRepositoryMock),
         setUp: () {
-          when(() =>
-              cartRepositoryMock.addToCart(
-                  cartItem: PriceAggregate.empty())).thenAnswer(
-              (invocation) async => const Left(ApiFailure.other('Fake-Error')));
+          when(() => cartRepositoryMock.addToCart(
+                    cartItem: PriceAggregate.empty(),
+                    customerCodeInfo: CustomerCodeInfo.empty(),
+                    salesOrganisation: SalesOrganisation.empty(),
+                    salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+                    shipToInfo: ShipToInfo.empty(),
+                    doNotallowOutOfStockMaterial: true,
+                  ))
+              .thenAnswer((invocation) async =>
+                  const Left(ApiFailure.other('Fake-Error')));
           when(() => cartRepositoryMock.fetchCartItems()).thenAnswer(
               (invocation) async => const Left(ApiFailure.other('Fake-Error')));
         },
-        act: (bloc) =>
-            bloc.add(CartEvent.addToCart(item: PriceAggregate.empty())),
+        act: (bloc) => bloc.add(CartEvent.addToCart(
+          item: PriceAggregate.empty(),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          salesOrganisation: SalesOrganisation.empty(),
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          shipToInfo: ShipToInfo.empty(),
+          doNotallowOutOfStockMaterial: true,
+        )),
         expect: () => [
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: none(),
@@ -398,7 +425,13 @@ void main() {
         build: () => CartBloc(cartRepository: cartRepositoryMock),
         setUp: () {
           when(() => cartRepositoryMock.addToCart(
-              cartItem: mockZmgCartItemList.first)).thenAnswer(
+                cartItem: mockZmgCartItemList.first,
+                customerCodeInfo: CustomerCodeInfo.empty(),
+                salesOrganisation: SalesOrganisation.empty(),
+                salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+                shipToInfo: ShipToInfo.empty(),
+                doNotallowOutOfStockMaterial: true,
+              )).thenAnswer(
             (invocation) async => Right([mockZmgCartItemList.first]),
           );
 
@@ -410,8 +443,14 @@ void main() {
               .thenAnswer((invocation) =>
                   [mockZmgCartItemList.first.getMaterialNumber]);
         },
-        act: (bloc) =>
-            bloc.add(CartEvent.addToCart(item: mockZmgCartItemList.first)),
+        act: (bloc) => bloc.add(CartEvent.addToCart(
+          item: mockZmgCartItemList.first,
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          salesOrganisation: SalesOrganisation.empty(),
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          shipToInfo: ShipToInfo.empty(),
+          doNotallowOutOfStockMaterial: true,
+        )),
         expect: () => [
           CartState.initial().copyWith(isFetching: true),
           CartState.initial().copyWith(
@@ -461,6 +500,11 @@ void main() {
           when(
             () => cartRepositoryMock.addToCart(
               cartItem: mockZmgCartItemList.last.copyWith(quantity: 3),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              salesOrganisation: SalesOrganisation.empty(),
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+              shipToInfo: ShipToInfo.empty(),
+              doNotallowOutOfStockMaterial: true,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -482,7 +526,13 @@ void main() {
           );
         },
         act: (bloc) => bloc.add(CartEvent.addToCart(
-            item: mockZmgCartItemList.last.copyWith(quantity: 3))),
+          item: mockZmgCartItemList.last.copyWith(quantity: 3),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          salesOrganisation: SalesOrganisation.empty(),
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          shipToInfo: ShipToInfo.empty(),
+          doNotallowOutOfStockMaterial: true,
+        )),
         expect: () => [
           CartState.initial().copyWith(
             cartItemList: [mockZmgCartItemList.first.copyWith(quantity: 2)],
@@ -788,6 +838,11 @@ void main() {
                 price: mockZmgCartItemList.first.price
                     .copyWith(zmgDiscount: false),
               ),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              salesOrganisation: SalesOrganisation.empty(),
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+              shipToInfo: ShipToInfo.empty(),
+              doNotallowOutOfStockMaterial: true,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -831,6 +886,11 @@ void main() {
               price:
                   mockZmgCartItemList.first.price.copyWith(zmgDiscount: false),
             ),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            doNotallowOutOfStockMaterial: true,
           ),
         ),
         expect: () => [

@@ -130,6 +130,21 @@ class MaterialNumber extends ValueObject<String> {
   const MaterialNumber._(this.value);
 }
 
+class MaterialInStock extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory MaterialInStock(String input) {
+    return MaterialInStock._(validateStringNotEmpty(input));
+  }
+
+  bool get isMaterialInStock {
+    return getInStock(value.getOrElse(() => ''));
+  }
+
+  const MaterialInStock._(this.value);
+}
+
 class MaterialGroup extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;

@@ -11,7 +11,7 @@ class StockInfo with _$StockInfo {
     required MaterialNumber materialNumber,
     required String expiryDate,
     required String batch,
-    required String inStock,
+    required MaterialInStock inStock,
     required String salesDistrict,
   }) = _StockInfo;
 
@@ -19,7 +19,7 @@ class StockInfo with _$StockInfo {
         materialNumber: MaterialNumber(''),
         expiryDate: '',
         batch: '',
-        inStock: '',
+        inStock: MaterialInStock(''),
         salesDistrict: '',
       );
 }

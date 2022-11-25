@@ -94,4 +94,13 @@ class EligibilityState with _$EligibilityState {
   bool get isBillToEnable {
     return salesOrgConfigs.enableBillTo;
   }
+
+  bool get validateOutOfStockValue {
+    return user.role.type.isSalesRep && salesOrgConfigs.oosValue.isOosValueZero;
+  }
+
+  bool get doNotAllowOutOfStockMaterials {
+    return !salesOrgConfigs.addOosMaterials ||
+        (salesOrgConfigs.addOosMaterials && validateOutOfStockValue);
+  }
 }
