@@ -88,6 +88,7 @@ class OrderTemplateDetailPage extends StatelessWidget {
               ),
             ),
             SliverToBoxAdapter(
+              key: const Key('orderAction'),
               child: BlocBuilder<MaterialPriceDetailBloc,
                   MaterialPriceDetailState>(
                 buildWhen: (previous, current) =>

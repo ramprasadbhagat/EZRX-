@@ -1,5 +1,9 @@
+import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
+import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -19,7 +23,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../utils/material_frame_wrapper.dart';
+import '../../../utils/widget_utils.dart';
+
+class AutoRouterMock extends Mock implements AppRouter {}
 
 class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
@@ -39,6 +45,13 @@ class MockMaterialPriceDetailBloc
 
 class MockCartBloc extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
+class OrderTemplateListBlocMock
+    extends MockBloc<OrderTemplateListEvent, OrderTemplateListState>
+    implements OrderTemplateListBloc {}
+
 void main() {
   late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
@@ -48,21 +61,31 @@ void main() {
   late CartBloc cartBlocMock;
   late OrderTemplate orderMock;
   late List<OrderTemplateMaterial> orderMockItems;
+  late EligibilityBlocMock eligibilityBlocMock;
+  late AppRouter autoRouterMock;
+  late OrderTemplateListBloc orderTemplateListBlocMock;
+
   setUpAll(() async {
+    setupLocator();
+
     final orders = await OrderTemplateLocalDataSource().getOrderTemplates();
     orderMock = orders.first;
     orderMockItems = orderMock.items;
   });
 
   setUp(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
     WidgetsFlutterBinding.ensureInitialized();
+    eligibilityBlocMock = EligibilityBlocMock();
+
     userBlocMock = MockUserBloc();
     salesOrgBlocMock = MockSalesOrgBloc();
     customerCodeBlocMock = MockCustomerCodeBloc();
     shipToCodeBLocMock = MockShipToCodeBloc();
     materialPriceDetailBlocMock = MockMaterialPriceDetailBloc();
     cartBlocMock = MockCartBloc();
-
+    orderTemplateListBlocMock = OrderTemplateListBlocMock();
     when(() => userBlocMock.state).thenReturn(UserState.initial());
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => customerCodeBlocMock.state)
@@ -71,33 +94,46 @@ void main() {
     when(() => materialPriceDetailBlocMock.state)
         .thenReturn(MaterialPriceDetailState.initial());
     when(() => cartBlocMock.state).thenReturn(CartState.initial());
+    when(() => eligibilityBlocMock.state)
+        .thenReturn(EligibilityState.initial());
+    when(() => orderTemplateListBlocMock.state)
+        .thenReturn(OrderTemplateListState.initial());
   });
 
-  Widget orderTemplateDetailPage() => MaterialFrameWrapper(
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider<UserBloc>(
-              create: (context) => userBlocMock,
-            ),
-            BlocProvider<SalesOrgBloc>(
-              create: (context) => salesOrgBlocMock,
-            ),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock,
-            ),
-            BlocProvider<ShipToCodeBloc>(
-              create: (context) => shipToCodeBLocMock,
-            ),
-            BlocProvider<MaterialPriceDetailBloc>(
-              create: (context) => materialPriceDetailBlocMock,
-            ),
-            BlocProvider<CartBloc>(create: (context) => cartBlocMock),
-          ],
-          child: OrderTemplateDetailPage(order: orderMock),
-        ),
-      );
-
   group('Order Template Detail Screen', () {
+    setUp(() {
+      autoRouterMock = locator<AppRouter>();
+    });
+
+    Widget orderTemplateDetailPage() {
+      return WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        providers: [
+          BlocProvider<CartBloc>(create: (context) => cartBlocMock),
+          BlocProvider<UserBloc>(
+            create: (context) => userBlocMock,
+          ),
+          BlocProvider<SalesOrgBloc>(
+            create: (context) => salesOrgBlocMock,
+          ),
+          BlocProvider<CustomerCodeBloc>(
+            create: (context) => customerCodeBlocMock,
+          ),
+          BlocProvider<ShipToCodeBloc>(
+            create: (context) => shipToCodeBLocMock,
+          ),
+          BlocProvider<MaterialPriceDetailBloc>(
+            create: (context) => materialPriceDetailBlocMock,
+          ),
+          BlocProvider<EligibilityBloc>(
+              create: (context) => eligibilityBlocMock),
+          BlocProvider<OrderTemplateListBloc>(
+              create: (context) => orderTemplateListBlocMock),
+        ],
+        child: OrderTemplateDetailPage(order: orderMock),
+      );
+    }
+
     testWidgets(
       'Order Template Detail with material items',
       (tester) async {
@@ -194,5 +230,52 @@ void main() {
         expect(find.text('$currency 10.00'), findsAtLeastNWidgets(1));
       },
     );
+    testWidgets('Reload order template and price when refresh page',
+        (tester) async {
+      when(() => materialPriceDetailBlocMock.state).thenReturn(
+        MaterialPriceDetailState.initial().copyWith(
+          materialDetails: {
+            for (final material in orderMockItems)
+              MaterialQueryInfo.fromOrderTemplate(orderMaterial: material):
+                  MaterialPriceDetail.empty()
+                      .copyWith
+                      .price(finalPrice: MaterialPrice(10)),
+          },
+        ),
+      );
+      await tester.pumpWidget(orderTemplateDetailPage());
+      await tester.fling(
+          find.byType(RefreshIndicator), const Offset(0, 300), 600);
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+    });
+    testWidgets('Reload order template OrderInvalidWarning', (tester) async {
+      when(() => materialPriceDetailBlocMock.state).thenReturn(
+        MaterialPriceDetailState.initial().copyWith(
+          materialDetails: {
+            for (final material in orderMockItems)
+              MaterialQueryInfo.fromOrderTemplate(orderMaterial: material):
+                  MaterialPriceDetail.empty()
+                      .copyWith
+                      .price(finalPrice: MaterialPrice(10)),
+          },
+        ),
+      );
+      await tester.pumpWidget(orderTemplateDetailPage());
+      final orderAction = find.byKey(const Key('orderAction'));
+      final addToCart = find.text('Add to Cart');
+      expect(orderAction, findsOneWidget);
+      expect(addToCart, findsOneWidget);
+      final delete = find.text('Delete');
+      expect(delete, findsOneWidget);
+
+      final addToCartPressed =
+          tester.widget(find.byKey(const Key('onAddToCartPressed')));
+      await tester.tap(find.byWidget(addToCartPressed));
+      await tester.pump();
+      final onDeletePressed =
+          tester.widget(find.byKey(const Key('onDeletePressed')));
+      await tester.tap(find.byWidget(onDeletePressed));
+      await tester.pump();
+    });
   });
 }

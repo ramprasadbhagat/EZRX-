@@ -9,9 +9,10 @@ import 'package:ezrxmobile/application/order/material_price_detail/material_pric
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 class OrderTemplateItem extends StatelessWidget {
   final OrderTemplate orderTemplate;
@@ -30,15 +31,18 @@ class OrderTemplateItem extends StatelessWidget {
             CustomSlidableAction(
               label: 'Delete'.tr(),
               icon: Icons.delete_outline,
-              onPressed: (context) => context.read<OrderTemplateListBloc>().add(
-                    OrderTemplateListEvent.delete(
-                      orderTemplate,
-                    ),
-                  ),
+              onPressed: (context) {
+                context.read<OrderTemplateListBloc>().add(
+                      OrderTemplateListEvent.delete(
+                        orderTemplate,
+                      ),
+                    );
+              },
             ),
           ],
           borderRadius: 8,
           child: ListTile(
+            key: Key('orderListTile${orderTemplate.templateId}'),
             onTap: () {
               context.read<MaterialPriceDetailBloc>().add(
                     MaterialPriceDetailEvent.fetch(

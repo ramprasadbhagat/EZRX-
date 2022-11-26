@@ -26,6 +26,7 @@ class OrderActionButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ElevatedButton(
+          key: const Key('onAddToCartPressed'),
           onPressed: enableAddToCart ? onAddToCartPressed : () {},
           style: enableAddToCart
               ? null
@@ -36,6 +37,7 @@ class OrderActionButton extends StatelessWidget {
         ),
         const SizedBox(width: 10),
         ElevatedButton(
+          key: const Key('onDeletePressed'),
           onPressed: onDeletePressed,
           child: const Text('Delete').tr(),
         ),
