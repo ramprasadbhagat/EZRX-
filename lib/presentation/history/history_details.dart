@@ -135,9 +135,14 @@ class HistoryDetails extends StatelessWidget {
                             billToInfo: billToInfo,
                           )
                         : const SizedBox.shrink(),
-                    _AdditionalComments(
-                      orderDetails: orderDetails,
-                    ),
+                    if (context
+                            .read<EligibilityBloc>()
+                            .state
+                            .isShowPOAttachmentEnable &&
+                        orderDetails.poDocumentsAvailable)
+                      _AdditionalComments(
+                        orderDetails: orderDetails,
+                      ),
                     _Invoices(
                       orderDetails: orderDetails,
                     ),
@@ -525,197 +530,184 @@ class _AdditionalCommentsState extends State<_AdditionalComments> {
     return CustomExpansionTile(
       titleText: 'Additional Comments'.tr(),
       items: <Widget>[
-        widget.orderDetails.orderHistoryDetailsPoDocuments.isNotEmpty
-            ? BlocListener<DownloadAttachmentBloc, DownloadAttachmentState>(
-                listenWhen: (previous, current) => previous != current,
-                listener: (context, state) async {
-                  state.failureOrSuccessOption.fold(
-                    () => {},
-                    (either) => either.fold(
-                      (failure) {
-                        overlay.hide();
+        BlocListener<DownloadAttachmentBloc, DownloadAttachmentState>(
+          listenWhen: (previous, current) => previous != current,
+          listener: (context, state) async {
+            state.failureOrSuccessOption.fold(
+              () => {},
+              (either) => either.fold(
+                (failure) {
+                  overlay.hide();
 
-                        final failureMessage = failure.failureMessage;
-                        showSnackBar(
-                          context: context,
-                          message: failureMessage.tr(),
-                        );
-                      },
-                      (r) async {
-                        overlay.hide();
-                        if (state.fileFetchMode == FileFetchMode.view) {
-                          await openFile(
-                            state.fileData.first,
-                          );
-                        } else {
-                          await downloadAllFile(state.fileData);
-                          showSnackBar(
-                            context: context,
-                            message:
-                                'All attachments downloaded successfully.'.tr(),
-                          );
-                        }
-                      },
-                    ),
+                  final failureMessage = failure.failureMessage;
+                  showSnackBar(
+                    context: context,
+                    message: failureMessage.tr(),
                   );
                 },
-                child: Container(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                (r) async {
+                  overlay.hide();
+                  if (state.fileFetchMode == FileFetchMode.view) {
+                    await openFile(
+                      state.fileData.first,
+                    );
+                  } else {
+                    await downloadAllFile(state.fileData);
+                    showSnackBar(
+                      context: context,
+                      message: 'All attachments downloaded successfully.'.tr(),
+                    );
+                  }
+                },
+              ),
+            );
+          },
+          child: Container(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    'Uploaded Attachments'.tr(),
+                    style: const TextStyle(
+                      color: ZPColors.darkerGreen,
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Column(
                     children: [
-                      Expanded(
-                        flex: 1,
-                        child: Text(
-                          'Uploaded Attachments'.tr(),
-                          style: const TextStyle(
-                            color: ZPColors.darkerGreen,
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Column(
-                          children: [
-                            Column(
-                              children: widget
-                                  .orderDetails.orderHistoryDetailsPoDocuments
-                                  .sublist(0, listLength)
-                                  .map((pODocuments) {
-                                return pODocuments.url.isEmpty
-                                    ? SizedBox(
-                                        width: 40,
-                                        child: LoadingShimmer.tile(),
-                                      )
-                                    : Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          InkWell(
-                                            onTap: () async {
-                                              context
-                                                  .read<
-                                                      DownloadAttachmentBloc>()
-                                                  .add(DownloadAttachmentEvent
-                                                      .downloadFile(
-                                                    files: pODocuments
-                                                        .getNameUrlAsMap,
-                                                    fetchMode:
-                                                        FileFetchMode.view,
-                                                  ));
-                                              overlay.show();
-                                            },
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                bottom: 10.0,
-                                                top: 2.0,
-                                              ),
-                                              child: Column(
+                      Column(
+                        children: widget
+                            .orderDetails.orderHistoryDetailsPoDocuments
+                            .sublist(0, listLength)
+                            .map((pODocuments) {
+                          return pODocuments.url.isEmpty
+                              ? SizedBox(
+                                  width: 40,
+                                  child: LoadingShimmer.tile(),
+                                )
+                              : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    InkWell(
+                                      onTap: () async {
+                                        context
+                                            .read<DownloadAttachmentBloc>()
+                                            .add(DownloadAttachmentEvent
+                                                .downloadFile(
+                                              files:
+                                                  pODocuments.getNameUrlAsMap,
+                                              fetchMode: FileFetchMode.view,
+                                            ));
+                                        overlay.show();
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                          bottom: 10.0,
+                                          top: 2.0,
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            RichText(
+                                              text: TextSpan(
                                                 children: [
-                                                  RichText(
-                                                    text: TextSpan(
-                                                      children: [
-                                                        WidgetSpan(
-                                                          child:
-                                                              Transform.rotate(
-                                                            angle: -45,
-                                                            child: const Icon(
-                                                              Icons
-                                                                  .attachment_outlined,
-                                                              size: 14,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        TextSpan(
-                                                          text:
-                                                              pODocuments.name,
-                                                          style:
-                                                              const TextStyle(
-                                                            color: ZPColors
-                                                                .darkerGreen,
-                                                            fontSize: 14.0,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                          ),
-                                                        ),
-                                                      ],
+                                                  WidgetSpan(
+                                                    child: Transform.rotate(
+                                                      angle: -45,
+                                                      child: const Icon(
+                                                        Icons
+                                                            .attachment_outlined,
+                                                        size: 14,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  TextSpan(
+                                                    text: pODocuments.name,
+                                                    style: const TextStyle(
+                                                      color:
+                                                          ZPColors.darkerGreen,
+                                                      fontSize: 14.0,
+                                                      fontWeight:
+                                                          FontWeight.w400,
                                                     ),
                                                   ),
                                                 ],
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      );
-                              }).toList(),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                widget
-                                                .orderDetails
-                                                .orderHistoryDetailsPoDocuments
-                                                .length >
-                                            2 &&
-                                        !show
-                                    ? InkWell(
-                                        child: Text(
-                                          'View All'.tr(),
-                                          style: const TextStyle(
-                                            color: ZPColors.darkerGreen,
-                                            decoration:
-                                                TextDecoration.underline,
-                                          ),
+                                          ],
                                         ),
-                                        onTap: () {
-                                          setState(() {
-                                            show = !show;
-                                          });
-                                        },
-                                      )
-                                    : const SizedBox(),
-                                InkWell(
+                                      ),
+                                    ),
+                                  ],
+                                );
+                        }).toList(),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          widget.orderDetails.orderHistoryDetailsPoDocuments
+                                          .length >
+                                      2 &&
+                                  !show
+                              ? InkWell(
+                                  child: Text(
+                                    'View All'.tr(),
+                                    style: const TextStyle(
+                                      color: ZPColors.darkerGreen,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                                  ),
                                   onTap: () {
-                                    context.read<DownloadAttachmentBloc>().add(
-                                          DownloadAttachmentEvent.downloadFile(
-                                            files: widget
-                                                .orderDetails.getAllPoAsMap,
-                                            fetchMode: FileFetchMode.download,
-                                          ),
-                                        );
-                                    overlay.show();
+                                    setState(() {
+                                      show = !show;
+                                    });
                                   },
-                                  child: Row(
-                                    children: [
-                                      const Icon(
-                                        Icons.download,
-                                      ),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        'Download All'.tr(),
-                                        style: const TextStyle(
-                                          color: ZPColors.darkerGreen,
-                                          decoration: TextDecoration.underline,
-                                        ),
-                                      ),
-                                    ],
+                                )
+                              : const SizedBox(),
+                          InkWell(
+                            onTap: () {
+                              context.read<DownloadAttachmentBloc>().add(
+                                    DownloadAttachmentEvent.downloadFile(
+                                      files: widget.orderDetails.getAllPoAsMap,
+                                      fetchMode: FileFetchMode.download,
+                                    ),
+                                  );
+                              overlay.show();
+                            },
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.download,
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  'Download All'.tr(),
+                                  style: const TextStyle(
+                                    color: ZPColors.darkerGreen,
+                                    decoration: TextDecoration.underline,
                                   ),
                                 ),
                               ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ),
-              )
-            : const SizedBox.shrink(),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }

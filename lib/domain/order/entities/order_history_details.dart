@@ -37,4 +37,6 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
           .map((e) => MapEntry(e.name, e.url))
           .toList(),
     );
+
+  bool get poDocumentsAvailable => orderHistoryDetailsPoDocuments.isNotEmpty;
 }
