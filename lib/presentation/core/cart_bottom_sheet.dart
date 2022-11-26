@@ -55,7 +55,7 @@ class CartBottomSheet {
     );
   }
 
- static void showUpdateCartBonusBottomSheet({
+  static void showUpdateCartBonusBottomSheet({
     required BuildContext context,
     required MaterialInfo item,
     required PriceAggregate cartItem,

@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
@@ -210,6 +211,41 @@ void main() {
             bonus: [],
             isStarting: false,
             isFetching: false,
+          ),
+        ],
+      );
+      blocTest<BonusMaterialBloc, BonusMaterialState>(
+        'update the search key',
+        build: () {
+          return BonusMaterialBloc(
+              bonusMaterialRepository: mockBonusMaterialRepository);
+        },
+        setUp: () {},
+        act: (BonusMaterialBloc bloc) => bloc.add(
+          const BonusMaterialEvent.updateSearchKey(
+            searchKey: '1234',
+          ),
+        ),
+        expect: () => [
+          BonusMaterialState.initial().copyWith(searchKey: SearchKey('1234')),
+        ],
+      );
+      blocTest<BonusMaterialBloc, BonusMaterialState>(
+        'reset bloc',
+        build: () {
+          return BonusMaterialBloc(
+              bonusMaterialRepository: mockBonusMaterialRepository);
+        },
+        setUp: () {},
+        act: (BonusMaterialBloc bloc) => bloc.add(
+          const BonusMaterialEvent.reset(),
+        ),
+        expect: () => [
+          BonusMaterialState.initial().copyWith(
+            searchKey: SearchKey(''),
+            bonus: [],
+            isFetching: false,
+            isStarting: true,
           ),
         ],
       );

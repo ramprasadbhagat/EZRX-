@@ -28,6 +28,7 @@ class UpdateBonus extends StatelessWidget {
     );
 
     return SizedBox(
+      key: const Key('updateBonus'),
       height: MediaQuery.of(context).size.height * 0.7,
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -82,6 +83,7 @@ class UpdateBonus extends StatelessWidget {
                 ],
               ),
               ElevatedButton(
+                key: const Key('addButton'),
                 onPressed: () {
                   // final updatedCartItem = cartItem.copyWith(
                   //   quantity: int.tryParse(controller.text) ?? 1,

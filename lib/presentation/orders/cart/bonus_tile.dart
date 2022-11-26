@@ -16,6 +16,7 @@ class BounsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: const Key('bonusTile'),
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -152,6 +153,7 @@ class BounsTile extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               QuantityIcon(
+                                key: const Key('removeBonusFromCart'),
                                 pressed: () {
                                   if (e.quantity - 1 > 0) {
                                     context.read<CartBloc>().add(
@@ -186,6 +188,7 @@ class BounsTile extends StatelessWidget {
                                 ),
                               ),
                               QuantityIcon(
+                                key: const Key('addBonusFromCart'),
                                 pressed: () {
                                   context.read<CartBloc>().add(
                                         CartEvent.updateBonusItem(
@@ -207,6 +210,7 @@ class BounsTile extends StatelessWidget {
                       right: 0,
                       top: -15,
                       child: IconButton(
+                        key: const Key('deleteBonusFromCart'),
                         onPressed: () {
                           context.read<CartBloc>().add(
                                 CartEvent.deleteBonusItem(

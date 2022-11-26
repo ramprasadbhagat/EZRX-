@@ -1086,6 +1086,124 @@ void main() {
           );
         },
       );
+      blocTest<CartBloc, CartState>(
+        'add a bonus item',
+        build: () => CartBloc(cartRepository: cartRepositoryMock),
+        setUp: () {
+          when(() => cartRepositoryMock.updateBonusItem(
+                cartItem: PriceAggregate.empty(),
+                bonusItem: MaterialInfo.empty(),
+                isUpdatedFromCart: false,
+                quantity: 10,
+              )).thenAnswer(
+            (invocation) async => Right(
+              [PriceAggregate.empty()],
+            ),
+          );
+          when(() => cartRepositoryMock.fetchCartItems()).thenAnswer(
+            (invocation) async => Right(
+              [PriceAggregate.empty()],
+            ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          CartEvent.updateBonusItem(
+            cartItem: PriceAggregate.empty(),
+            bonusItem: MaterialInfo.empty(),
+            isUpdateFromCart: false,
+            bonusItemCount: 10,
+          ),
+        ),
+        expect: () => [
+          CartState.initial().copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
+          ),
+          CartState.initial().copyWith(
+            apiFailureOrSuccessOption: none(),
+            cartItemList: [PriceAggregate.empty()],
+            isFetching: false,
+          ),
+        ],
+      );
+      blocTest<CartBloc, CartState>(
+        'update  bonus item from cart screen',
+        build: () => CartBloc(cartRepository: cartRepositoryMock),
+        setUp: () {
+          when(() => cartRepositoryMock.updateBonusItem(
+                cartItem: PriceAggregate.empty(),
+                bonusItem: MaterialInfo.empty(),
+                isUpdatedFromCart: true,
+                quantity: 10,
+              )).thenAnswer(
+            (invocation) async => Right(
+              [PriceAggregate.empty()],
+            ),
+          );
+          when(() => cartRepositoryMock.fetchCartItems()).thenAnswer(
+            (invocation) async => Right(
+              [PriceAggregate.empty()],
+            ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          CartEvent.updateBonusItem(
+            cartItem: PriceAggregate.empty(),
+            bonusItem: MaterialInfo.empty(),
+            isUpdateFromCart: true,
+            bonusItemCount: 10,
+          ),
+        ),
+        expect: () => [
+          CartState.initial().copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
+          ),
+          CartState.initial().copyWith(
+            apiFailureOrSuccessOption: none(),
+            cartItemList: [PriceAggregate.empty()],
+            isFetching: false,
+          ),
+        ],
+      );
+      blocTest<CartBloc, CartState>(
+        'remove  bonus item from cart screen',
+        build: () => CartBloc(cartRepository: cartRepositoryMock),
+        setUp: () {
+          when(() => cartRepositoryMock.deleteBonusItem(
+                cartItem: PriceAggregate.empty(),
+                bonusItem: MaterialInfo.empty(),
+                isUpdateFromCart: true,
+              )).thenAnswer(
+            (invocation) async => Right(
+              [PriceAggregate.empty()],
+            ),
+          );
+          when(() => cartRepositoryMock.fetchCartItems()).thenAnswer(
+            (invocation) async => Right(
+              [PriceAggregate.empty()],
+            ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          CartEvent.deleteBonusItem(
+            cartItem: PriceAggregate.empty(),
+            bonusItem: MaterialInfo.empty(),
+            isUpdateFromCart: true,
+          ),
+        ),
+        expect: () => [
+          CartState.initial().copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
+          ),
+          CartState.initial().copyWith(
+            apiFailureOrSuccessOption: none(),
+            cartItemList: [PriceAggregate.empty()],
+            isFetching: false,
+          ),
+        ],
+      );
     },
   );
 }

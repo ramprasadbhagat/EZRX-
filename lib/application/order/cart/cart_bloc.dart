@@ -315,7 +315,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         emit(
           state.copyWith(
             apiFailureOrSuccessOption: none(),
-            isFetching: false,
+            isFetching: true,
           ),
         );
 
@@ -349,7 +349,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         emit(
           state.copyWith(
             apiFailureOrSuccessOption: none(),
-            isFetching: false,
+            isFetching: true,
           ),
         );
 

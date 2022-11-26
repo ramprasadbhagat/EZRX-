@@ -15,7 +15,6 @@ import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 
@@ -50,6 +49,7 @@ class _BonusAddPageState extends State<BonusAddPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: const Key('addBonus'),
       appBar: PreferredSize(
         preferredSize: const Size(double.infinity, 60),
         child: CustomAppBar(
@@ -95,6 +95,7 @@ class _BonusAddPageState extends State<BonusAddPage> {
             builder: (context, state) {
               return Form(
                 child: TextFormField(
+                  key: const Key('addBonusTextField'),
                   controller: _searchController,
                   autocorrect: false,
                   enabled: !state.isFetching,
@@ -173,7 +174,9 @@ class _BonusAddPageState extends State<BonusAddPage> {
         listener: (context, state) {},
         builder: (context, state) {
           return state.isStarting
-              ? Container()
+              ? Container(
+                  key: const Key('empty'),
+                )
               : state.isFetching
                   ? LoadingShimmer.withChild(
                       child: Image.asset(
@@ -199,6 +202,7 @@ class _BonusAddPageState extends State<BonusAddPage> {
                           vertical: 6.0,
                         ),
                         child: Padding(
+                          key: const Key('bonusItemList'),
                           padding: const EdgeInsets.all(10),
                           child: Row(
                             children: [
@@ -265,6 +269,7 @@ class _BonusAddPageState extends State<BonusAddPage> {
                               Expanded(
                                 flex: 1,
                                 child: GestureDetector(
+                                  key: const Key('addItem'),
                                   onTap: () {
                                     CartBottomSheet
                                         .showUpdateCartBonusBottomSheet(

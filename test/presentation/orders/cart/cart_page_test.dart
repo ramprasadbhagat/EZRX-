@@ -94,6 +94,15 @@ void main() {
               ));
       mockCartItemWithDataList = [
         PriceAggregate.empty().copyWith(
+          addedBonusList: [
+            MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('0000000000111111'),
+              materialDescription: ' Mosys D',
+              principalData: PrincipalData.empty().copyWith(
+                principalName: '台灣拜耳股份有限公司',
+              ),
+            ),
+          ],
           quantity: 1,
           materialInfo: MaterialInfo.empty().copyWith(
             materialNumber: MaterialNumber('000000000023168451'),
@@ -646,7 +655,9 @@ void main() {
                 .color,
             ZPColors.lightGray);
       });
-      testWidgets('Test Add Remarks', (tester) async {
+
+      testWidgets('Test have cart item list add update a bonus item',
+          (tester) async {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartItemList: mockCartItemWithDataList,
@@ -741,6 +752,52 @@ void main() {
         await tester.pump();
         expect(find.byKey(const Key('updateCartBottomSheet')), findsOneWidget);
         expect(find.byKey(const Key('priceTierLable')), findsWidgets);
+      });
+
+      testWidgets('Test have cart item list add delete a bonus item',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItemList: mockCartItemWithDataList,
+            isFetching: true,
+          ),
+        );
+
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
+
+        await tester.pump();
+
+        final listWidget = find.byWidgetPredicate((w) => w is ListTile);
+        expect(listWidget, findsAtLeastNWidgets(1));
+        final item = find.byKey(const Key('bonusTile'));
+        expect(item, findsOneWidget);
+        final addWidget = tester.widget(
+          find.byKey(
+            const Key('addBonusFromCart'),
+          ),
+        );
+        await tester.tap(
+          find.byWidget(addWidget),
+        );
+
+        final removeWidget = tester.widget(
+          find.byKey(
+            const Key('removeBonusFromCart'),
+          ),
+        );
+        await tester.tap(
+          find.byWidget(removeWidget),
+        );
+        final deleteWidget = tester.widget(
+          find.byKey(
+            const Key('deleteBonusFromCart'),
+          ),
+        );
+        await tester.tap(
+          find.byWidget(deleteWidget),
+        );
       });
     },
   );
