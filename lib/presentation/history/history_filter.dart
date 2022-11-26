@@ -106,7 +106,7 @@ class _FilterHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-           Text(
+          Text(
             'Filter Order History'.tr(),
             style: const TextStyle(
               fontSize: 16,
@@ -171,7 +171,7 @@ class _OrderIdByFilter extends StatelessWidget {
             fontSize: 14,
             fontWeight: FontWeight.w400,
           ),
-          decoration:  InputDecoration(
+          decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(
               vertical: 5.0,
               horizontal: 10.0,
@@ -184,13 +184,6 @@ class _OrderIdByFilter extends StatelessWidget {
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 color: ZPColors.kPrimaryColor,
-                width: 1.0,
-              ),
-            ),
-
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                color: ZPColors.lightGray,
                 width: 1.0,
               ),
             ),
@@ -252,7 +245,7 @@ class _PoNumberFilter extends StatelessWidget {
             fontSize: 14,
             fontWeight: FontWeight.w400,
           ),
-          decoration:  InputDecoration(
+          decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(
               vertical: 5.0,
               horizontal: 10.0,
@@ -262,18 +255,6 @@ class _PoNumberFilter extends StatelessWidget {
                 width: 1,
               ),
             ),
-            errorBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 1,
-                color: ZPColors.kPrimaryColor,
-              ),
-            ),
-            focusedErrorBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 1,
-                color: ZPColors.kPrimaryColor,
-              ),
-            ),
             labelText: 'PO Number'.tr(),
             labelStyle: const TextStyle(
               fontSize: 12.0,
@@ -281,12 +262,6 @@ class _PoNumberFilter extends StatelessWidget {
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 color: ZPColors.kPrimaryColor,
-                width: 1.0,
-              ),
-            ),
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                color: ZPColors.lightGray,
                 width: 1.0,
               ),
             ),
@@ -332,7 +307,7 @@ class _MaterialSearchByFilter extends StatelessWidget {
             fontSize: 14,
             fontWeight: FontWeight.w400,
           ),
-          decoration:  InputDecoration(
+          decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(
               vertical: 5.0,
               horizontal: 10.0,
@@ -361,12 +336,6 @@ class _MaterialSearchByFilter extends StatelessWidget {
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 color: ZPColors.kPrimaryColor,
-                width: 1.0,
-              ),
-            ),
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                color: ZPColors.lightGray,
                 width: 1.0,
               ),
             ),
@@ -410,7 +379,7 @@ class _PrincipleSearchByFilter extends StatelessWidget {
             fontSize: 14,
             fontWeight: FontWeight.w400,
           ),
-          decoration:  InputDecoration(
+          decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(
               vertical: 5.0,
               horizontal: 10.0,
@@ -420,18 +389,6 @@ class _PrincipleSearchByFilter extends StatelessWidget {
                 width: 1,
               ),
             ),
-            errorBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 1,
-                color: ZPColors.kPrimaryColor,
-              ),
-            ),
-            focusedErrorBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 1,
-                color: ZPColors.kPrimaryColor,
-              ),
-            ),
             labelText: 'Principal Code/Name'.tr(),
             labelStyle: const TextStyle(
               fontSize: 12.0,
@@ -439,12 +396,6 @@ class _PrincipleSearchByFilter extends StatelessWidget {
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 color: ZPColors.kPrimaryColor,
-                width: 1.0,
-              ),
-            ),
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                color: ZPColors.lightGray,
                 width: 1.0,
               ),
             ),
@@ -538,12 +489,11 @@ class __OrderFromDateByFilterState extends State<_OrderFromDateByFilter> {
               fontSize: 13,
               fontWeight: FontWeight.w400,
             ),
-            decoration:  InputDecoration(
+            decoration: InputDecoration(
               contentPadding: const EdgeInsets.symmetric(
                 vertical: 5.0,
                 horizontal: 4.0,
               ),
-              border: InputBorder.none,
               labelText: 'From Date'.tr(),
               labelStyle: const TextStyle(
                 fontSize: 12.0,
@@ -554,12 +504,7 @@ class __OrderFromDateByFilterState extends State<_OrderFromDateByFilter> {
                   width: 1.0,
                 ),
               ),
-              enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: ZPColors.lightGray,
-                  width: 1.0,
-                ),
-              ),
+              border: const OutlineInputBorder(),
               suffixIcon: const Icon(
                 Icons.calendar_month,
               ),
@@ -628,12 +573,11 @@ class __OrderToDateByFilterState extends State<_OrderToDateByFilter> {
               fontSize: 13,
               fontWeight: FontWeight.w400,
             ),
-            decoration:  InputDecoration(
+            decoration: InputDecoration(
               contentPadding: const EdgeInsets.symmetric(
                 vertical: 5.0,
                 horizontal: 4.0,
               ),
-              border: InputBorder.none,
               labelText: 'To Date'.tr(),
               labelStyle: const TextStyle(
                 fontSize: 12.0,
@@ -644,7 +588,7 @@ class __OrderToDateByFilterState extends State<_OrderToDateByFilter> {
                   width: 1.0,
                 ),
               ),
-              enabledBorder: const OutlineInputBorder(
+              border: const OutlineInputBorder(
                 borderSide: BorderSide(
                   color: ZPColors.lightGray,
                   width: 1.0,
@@ -683,7 +627,7 @@ class _ClearButton extends StatelessWidget {
 
         Navigator.of(context).pop();
       },
-      child:  Text(
+      child: Text(
         'Clear'.tr(),
         style: const TextStyle(
           color: ZPColors.primary,
@@ -707,7 +651,7 @@ class _ApplyButton extends StatelessWidget {
               const OrderHistoryFilterEvent.filterOrderHistory(),
             );
       },
-      child:  Text(
+      child: Text(
         'Apply'.tr(),
         style: const TextStyle(
           color: ZPColors.white,

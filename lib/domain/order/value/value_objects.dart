@@ -241,3 +241,14 @@ class Remarks extends ValueObject<String> {
 
   const Remarks._(this.value);
 }
+
+class TemplateName extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory TemplateName(String input) {
+    return TemplateName._(validateStringNotEmpty(input));
+  }
+
+  const TemplateName._(this.value);
+}

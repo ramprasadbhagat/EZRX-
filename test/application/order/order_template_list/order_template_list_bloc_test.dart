@@ -28,7 +28,7 @@ void main() {
 
   group(
     'Order Template List BLOC',
-        () {
+    () {
       blocTest(
         'Initialize',
         build: () =>
@@ -44,9 +44,9 @@ void main() {
             OrderTemplateListBloc(orderTemplateRepository: templateRepository),
         setUp: () {
           when(
-                () => templateRepository.getOrderTemplateList(user: mockUser),
+            () => templateRepository.getOrderTemplateList(user: mockUser),
           ).thenAnswer(
-                (invocation) async => const Left(
+            (invocation) async => const Left(
               ApiFailure.other('fake-error'),
             ),
           );
@@ -62,7 +62,7 @@ void main() {
             isFetching: false,
             orderTemplateList: [],
             apiFailureOrSuccessOption:
-            optionOf(const Left(ApiFailure.other('fake-error'))),
+                optionOf(const Left(ApiFailure.other('fake-error'))),
           ),
         ],
       );
@@ -73,9 +73,9 @@ void main() {
             OrderTemplateListBloc(orderTemplateRepository: templateRepository),
         setUp: () {
           when(() => templateRepository.getOrderTemplateList(
-            user: mockUser,
-          )).thenAnswer(
-                (invocation) async => Right(templateListMock),
+                user: mockUser,
+              )).thenAnswer(
+            (invocation) async => Right(templateListMock),
           );
         },
         act: (OrderTemplateListBloc bloc) =>
@@ -105,9 +105,9 @@ void main() {
             OrderTemplateListBloc(orderTemplateRepository: templateRepository),
         setUp: () {
           when(() => templateRepository.deleteOrderTemplate(
-            templateList: templateListMock,
-            templateItem: tempObj,
-          )).thenAnswer((invocation) async {
+                templateList: templateListMock,
+                templateItem: tempObj,
+              )).thenAnswer((invocation) async {
             final isItemPresent = templateListMock.contains(tempObj);
             assert(isItemPresent == false);
             return Right(templateListMock);
@@ -138,9 +138,9 @@ void main() {
             OrderTemplateListBloc(orderTemplateRepository: templateRepository),
         setUp: () {
           when(() => templateRepository.deleteOrderTemplate(
-            templateList: templateListMock,
-            templateItem: tempObj,
-          )).thenAnswer((invocation) async {
+                templateList: templateListMock,
+                templateItem: tempObj,
+              )).thenAnswer((invocation) async {
             final isItemPresent = templateListMock.contains(tempObj);
             assert(isItemPresent == false);
             return const Left(
@@ -185,18 +185,19 @@ void main() {
         ),
       ];
 
+      final saveTemplateListMock = [tempObj];
       blocTest(
         'Save Order Template success',
         build: () =>
             OrderTemplateListBloc(orderTemplateRepository: templateRepository),
         setUp: () {
           when(() => templateRepository.saveOrderTemplate(
-            userID: mockUser.id,
-            templateName: 'fake-saved-template',
-            cartList: cartList,
-            templateList: templateListMock,
-          )).thenAnswer((invocation) async {
-            templateListMock.insert(
+                userID: mockUser.id,
+                templateName: 'fake-saved-template',
+                cartList: cartList,
+                templateList: saveTemplateListMock,
+              )).thenAnswer((invocation) async {
+            saveTemplateListMock.insert(
               0,
               OrderTemplate(
                 templateId: 'id',
@@ -207,30 +208,42 @@ void main() {
                 },
               ),
             );
-            return Right(templateListMock);
+            return Right(saveTemplateListMock);
           });
           when(() => templateRepository.getOrderTemplateList(user: mockUser))
-              .thenAnswer((invocation) async => Right(templateListMock));
+              .thenAnswer((invocation) async => Right(saveTemplateListMock));
         },
         act: (OrderTemplateListBloc bloc) {
+          bloc.add(const OrderTemplateListEvent.templateNameChanged('fake-saved-template'));
           bloc.add(
             OrderTemplateListEvent.save(
               templateName: 'fake-saved-template',
               userID: mockUser.id,
-              templateList: templateListMock,
+              templateList: saveTemplateListMock,
               cartList: cartList,
             ),
           );
         },
         expect: () => [
           OrderTemplateListState.initial().copyWith(
+            isFetching: false,
+            isSubmitting: false,
+            showErrorMessages: false,
+            templateName: TemplateName('fake-saved-template'),
+          ),
+          OrderTemplateListState.initial().copyWith(
             isFetching: true,
-            orderTemplateList: templateListMock,
+            isSubmitting: true,
+            showErrorMessages: false,
+            orderTemplateList: saveTemplateListMock,
+            templateName: TemplateName('fake-saved-template'),
           ),
           OrderTemplateListState.initial().copyWith(
             isFetching: false,
-            apiFailureOrSuccessOption: optionOf(Right(templateListMock)),
-            orderTemplateList: templateListMock,
+            templateName: TemplateName('fake-saved-template'),
+            apiFailureOrSuccessOption: optionOf(Right(saveTemplateListMock)),
+            orderTemplateList: saveTemplateListMock,
+
           ),
         ],
       );
@@ -241,36 +254,47 @@ void main() {
             OrderTemplateListBloc(orderTemplateRepository: templateRepository),
         setUp: () {
           when(
-                () => templateRepository.saveOrderTemplate(
+            () => templateRepository.saveOrderTemplate(
               userID: mockUser.id,
               templateName: 'fake-saved-template',
               cartList: cartList,
-              templateList: templateListMock,
+              templateList: saveTemplateListMock,
             ),
           ).thenAnswer(
-                (invocation) async => const Left(
+            (invocation) async => const Left(
               ApiFailure.other('fake-error'),
             ),
           );
         },
         seed: () => OrderTemplateListState.initial().copyWith(
-          orderTemplateList: templateListMock,
+          orderTemplateList: saveTemplateListMock,
           isFetching: false,
         ),
         act: (OrderTemplateListBloc bloc) {
+          bloc.add(const OrderTemplateListEvent.templateNameChanged('fake-saved-template'));
           bloc.add(
             OrderTemplateListEvent.save(
               templateName: 'fake-saved-template',
               userID: mockUser.id,
-              templateList: templateListMock,
+              templateList: saveTemplateListMock,
               cartList: cartList,
             ),
           );
         },
         expect: () => [
           OrderTemplateListState.initial().copyWith(
+            isFetching: false,
+            isSubmitting: false,
+            showErrorMessages: false,
+            templateName: TemplateName('fake-saved-template'),
+            orderTemplateList: saveTemplateListMock,
+          ),
+          OrderTemplateListState.initial().copyWith(
             isFetching: true,
-            orderTemplateList: templateListMock,
+            isSubmitting: true,
+            showErrorMessages: false,
+            orderTemplateList: saveTemplateListMock,
+            templateName: TemplateName('fake-saved-template'),
           ),
           OrderTemplateListState.initial().copyWith(
             apiFailureOrSuccessOption: optionOf(
@@ -279,11 +303,11 @@ void main() {
               ),
             ),
             isFetching: false,
-            orderTemplateList: templateListMock,
+            orderTemplateList: saveTemplateListMock,
+            templateName: TemplateName('fake-saved-template'),
           )
         ],
       );
     },
   );
 }
-

@@ -27,6 +27,7 @@ mixin _$OrderTemplateListEvent {
             List<OrderTemplateMaterial> cartList,
             List<OrderTemplate> templateList)
         save,
+    required TResult Function(String templateNameStr) templateNameChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,6 +41,7 @@ mixin _$OrderTemplateListEvent {
             List<OrderTemplateMaterial> cartList,
             List<OrderTemplate> templateList)?
         save,
+    TResult? Function(String templateNameStr)? templateNameChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -53,6 +55,7 @@ mixin _$OrderTemplateListEvent {
             List<OrderTemplateMaterial> cartList,
             List<OrderTemplate> templateList)?
         save,
+    TResult Function(String templateNameStr)? templateNameChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -62,6 +65,7 @@ mixin _$OrderTemplateListEvent {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_DeleteOrderTemplate value) delete,
     required TResult Function(_SaveOrderTemplate value) save,
+    required TResult Function(_TemplateNameChanged value) templateNameChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,6 +74,7 @@ mixin _$OrderTemplateListEvent {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_DeleteOrderTemplate value)? delete,
     TResult? Function(_SaveOrderTemplate value)? save,
+    TResult? Function(_TemplateNameChanged value)? templateNameChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -78,6 +83,7 @@ mixin _$OrderTemplateListEvent {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_DeleteOrderTemplate value)? delete,
     TResult Function(_SaveOrderTemplate value)? save,
+    TResult Function(_TemplateNameChanged value)? templateNameChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -149,6 +155,7 @@ class _$_Initialized implements _Initialized {
             List<OrderTemplateMaterial> cartList,
             List<OrderTemplate> templateList)
         save,
+    required TResult Function(String templateNameStr) templateNameChanged,
   }) {
     return initialized();
   }
@@ -165,6 +172,7 @@ class _$_Initialized implements _Initialized {
             List<OrderTemplateMaterial> cartList,
             List<OrderTemplate> templateList)?
         save,
+    TResult? Function(String templateNameStr)? templateNameChanged,
   }) {
     return initialized?.call();
   }
@@ -181,6 +189,7 @@ class _$_Initialized implements _Initialized {
             List<OrderTemplateMaterial> cartList,
             List<OrderTemplate> templateList)?
         save,
+    TResult Function(String templateNameStr)? templateNameChanged,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -196,6 +205,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_DeleteOrderTemplate value) delete,
     required TResult Function(_SaveOrderTemplate value) save,
+    required TResult Function(_TemplateNameChanged value) templateNameChanged,
   }) {
     return initialized(this);
   }
@@ -207,6 +217,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_DeleteOrderTemplate value)? delete,
     TResult? Function(_SaveOrderTemplate value)? save,
+    TResult? Function(_TemplateNameChanged value)? templateNameChanged,
   }) {
     return initialized?.call(this);
   }
@@ -218,6 +229,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_DeleteOrderTemplate value)? delete,
     TResult Function(_SaveOrderTemplate value)? save,
+    TResult Function(_TemplateNameChanged value)? templateNameChanged,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -312,6 +324,7 @@ class _$_Fetch implements _Fetch {
             List<OrderTemplateMaterial> cartList,
             List<OrderTemplate> templateList)
         save,
+    required TResult Function(String templateNameStr) templateNameChanged,
   }) {
     return fetch(user);
   }
@@ -328,6 +341,7 @@ class _$_Fetch implements _Fetch {
             List<OrderTemplateMaterial> cartList,
             List<OrderTemplate> templateList)?
         save,
+    TResult? Function(String templateNameStr)? templateNameChanged,
   }) {
     return fetch?.call(user);
   }
@@ -344,6 +358,7 @@ class _$_Fetch implements _Fetch {
             List<OrderTemplateMaterial> cartList,
             List<OrderTemplate> templateList)?
         save,
+    TResult Function(String templateNameStr)? templateNameChanged,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -359,6 +374,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_DeleteOrderTemplate value) delete,
     required TResult Function(_SaveOrderTemplate value) save,
+    required TResult Function(_TemplateNameChanged value) templateNameChanged,
   }) {
     return fetch(this);
   }
@@ -370,6 +386,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_DeleteOrderTemplate value)? delete,
     TResult? Function(_SaveOrderTemplate value)? save,
+    TResult? Function(_TemplateNameChanged value)? templateNameChanged,
   }) {
     return fetch?.call(this);
   }
@@ -381,6 +398,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_DeleteOrderTemplate value)? delete,
     TResult Function(_SaveOrderTemplate value)? save,
+    TResult Function(_TemplateNameChanged value)? templateNameChanged,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -484,6 +502,7 @@ class _$_DeleteOrderTemplate implements _DeleteOrderTemplate {
             List<OrderTemplateMaterial> cartList,
             List<OrderTemplate> templateList)
         save,
+    required TResult Function(String templateNameStr) templateNameChanged,
   }) {
     return delete(tempItem);
   }
@@ -500,6 +519,7 @@ class _$_DeleteOrderTemplate implements _DeleteOrderTemplate {
             List<OrderTemplateMaterial> cartList,
             List<OrderTemplate> templateList)?
         save,
+    TResult? Function(String templateNameStr)? templateNameChanged,
   }) {
     return delete?.call(tempItem);
   }
@@ -516,6 +536,7 @@ class _$_DeleteOrderTemplate implements _DeleteOrderTemplate {
             List<OrderTemplateMaterial> cartList,
             List<OrderTemplate> templateList)?
         save,
+    TResult Function(String templateNameStr)? templateNameChanged,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -531,6 +552,7 @@ class _$_DeleteOrderTemplate implements _DeleteOrderTemplate {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_DeleteOrderTemplate value) delete,
     required TResult Function(_SaveOrderTemplate value) save,
+    required TResult Function(_TemplateNameChanged value) templateNameChanged,
   }) {
     return delete(this);
   }
@@ -542,6 +564,7 @@ class _$_DeleteOrderTemplate implements _DeleteOrderTemplate {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_DeleteOrderTemplate value)? delete,
     TResult? Function(_SaveOrderTemplate value)? save,
+    TResult? Function(_TemplateNameChanged value)? templateNameChanged,
   }) {
     return delete?.call(this);
   }
@@ -553,6 +576,7 @@ class _$_DeleteOrderTemplate implements _DeleteOrderTemplate {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_DeleteOrderTemplate value)? delete,
     TResult Function(_SaveOrderTemplate value)? save,
+    TResult Function(_TemplateNameChanged value)? templateNameChanged,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -696,6 +720,7 @@ class _$_SaveOrderTemplate implements _SaveOrderTemplate {
             List<OrderTemplateMaterial> cartList,
             List<OrderTemplate> templateList)
         save,
+    required TResult Function(String templateNameStr) templateNameChanged,
   }) {
     return save(templateName, userID, cartList, templateList);
   }
@@ -712,6 +737,7 @@ class _$_SaveOrderTemplate implements _SaveOrderTemplate {
             List<OrderTemplateMaterial> cartList,
             List<OrderTemplate> templateList)?
         save,
+    TResult? Function(String templateNameStr)? templateNameChanged,
   }) {
     return save?.call(templateName, userID, cartList, templateList);
   }
@@ -728,6 +754,7 @@ class _$_SaveOrderTemplate implements _SaveOrderTemplate {
             List<OrderTemplateMaterial> cartList,
             List<OrderTemplate> templateList)?
         save,
+    TResult Function(String templateNameStr)? templateNameChanged,
     required TResult orElse(),
   }) {
     if (save != null) {
@@ -743,6 +770,7 @@ class _$_SaveOrderTemplate implements _SaveOrderTemplate {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_DeleteOrderTemplate value) delete,
     required TResult Function(_SaveOrderTemplate value) save,
+    required TResult Function(_TemplateNameChanged value) templateNameChanged,
   }) {
     return save(this);
   }
@@ -754,6 +782,7 @@ class _$_SaveOrderTemplate implements _SaveOrderTemplate {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_DeleteOrderTemplate value)? delete,
     TResult? Function(_SaveOrderTemplate value)? save,
+    TResult? Function(_TemplateNameChanged value)? templateNameChanged,
   }) {
     return save?.call(this);
   }
@@ -765,6 +794,7 @@ class _$_SaveOrderTemplate implements _SaveOrderTemplate {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_DeleteOrderTemplate value)? delete,
     TResult Function(_SaveOrderTemplate value)? save,
+    TResult Function(_TemplateNameChanged value)? templateNameChanged,
     required TResult orElse(),
   }) {
     if (save != null) {
@@ -791,12 +821,184 @@ abstract class _SaveOrderTemplate implements OrderTemplateListEvent {
 }
 
 /// @nodoc
+abstract class _$$_TemplateNameChangedCopyWith<$Res> {
+  factory _$$_TemplateNameChangedCopyWith(_$_TemplateNameChanged value,
+          $Res Function(_$_TemplateNameChanged) then) =
+      __$$_TemplateNameChangedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String templateNameStr});
+}
+
+/// @nodoc
+class __$$_TemplateNameChangedCopyWithImpl<$Res>
+    extends _$OrderTemplateListEventCopyWithImpl<$Res, _$_TemplateNameChanged>
+    implements _$$_TemplateNameChangedCopyWith<$Res> {
+  __$$_TemplateNameChangedCopyWithImpl(_$_TemplateNameChanged _value,
+      $Res Function(_$_TemplateNameChanged) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? templateNameStr = null,
+  }) {
+    return _then(_$_TemplateNameChanged(
+      null == templateNameStr
+          ? _value.templateNameStr
+          : templateNameStr // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_TemplateNameChanged implements _TemplateNameChanged {
+  const _$_TemplateNameChanged(this.templateNameStr);
+
+  @override
+  final String templateNameStr;
+
+  @override
+  String toString() {
+    return 'OrderTemplateListEvent.templateNameChanged(templateNameStr: $templateNameStr)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_TemplateNameChanged &&
+            (identical(other.templateNameStr, templateNameStr) ||
+                other.templateNameStr == templateNameStr));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, templateNameStr);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_TemplateNameChangedCopyWith<_$_TemplateNameChanged> get copyWith =>
+      __$$_TemplateNameChangedCopyWithImpl<_$_TemplateNameChanged>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(User user) fetch,
+    required TResult Function(OrderTemplate tempItem) delete,
+    required TResult Function(
+            String templateName,
+            String userID,
+            List<OrderTemplateMaterial> cartList,
+            List<OrderTemplate> templateList)
+        save,
+    required TResult Function(String templateNameStr) templateNameChanged,
+  }) {
+    return templateNameChanged(templateNameStr);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(User user)? fetch,
+    TResult? Function(OrderTemplate tempItem)? delete,
+    TResult? Function(
+            String templateName,
+            String userID,
+            List<OrderTemplateMaterial> cartList,
+            List<OrderTemplate> templateList)?
+        save,
+    TResult? Function(String templateNameStr)? templateNameChanged,
+  }) {
+    return templateNameChanged?.call(templateNameStr);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(User user)? fetch,
+    TResult Function(OrderTemplate tempItem)? delete,
+    TResult Function(
+            String templateName,
+            String userID,
+            List<OrderTemplateMaterial> cartList,
+            List<OrderTemplate> templateList)?
+        save,
+    TResult Function(String templateNameStr)? templateNameChanged,
+    required TResult orElse(),
+  }) {
+    if (templateNameChanged != null) {
+      return templateNameChanged(templateNameStr);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_DeleteOrderTemplate value) delete,
+    required TResult Function(_SaveOrderTemplate value) save,
+    required TResult Function(_TemplateNameChanged value) templateNameChanged,
+  }) {
+    return templateNameChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_DeleteOrderTemplate value)? delete,
+    TResult? Function(_SaveOrderTemplate value)? save,
+    TResult? Function(_TemplateNameChanged value)? templateNameChanged,
+  }) {
+    return templateNameChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_DeleteOrderTemplate value)? delete,
+    TResult Function(_SaveOrderTemplate value)? save,
+    TResult Function(_TemplateNameChanged value)? templateNameChanged,
+    required TResult orElse(),
+  }) {
+    if (templateNameChanged != null) {
+      return templateNameChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _TemplateNameChanged implements OrderTemplateListEvent {
+  const factory _TemplateNameChanged(final String templateNameStr) =
+      _$_TemplateNameChanged;
+
+  String get templateNameStr;
+  @JsonKey(ignore: true)
+  _$$_TemplateNameChangedCopyWith<_$_TemplateNameChanged> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$OrderTemplateListState {
   List<OrderTemplate> get orderTemplateList =>
       throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
+  TemplateName get templateName => throw _privateConstructorUsedError;
+  bool get isSubmitting => throw _privateConstructorUsedError;
+  bool get showErrorMessages => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderTemplateListStateCopyWith<OrderTemplateListState> get copyWith =>
@@ -812,7 +1014,10 @@ abstract class $OrderTemplateListStateCopyWith<$Res> {
   $Res call(
       {List<OrderTemplate> orderTemplateList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
-      bool isFetching});
+      bool isFetching,
+      TemplateName templateName,
+      bool isSubmitting,
+      bool showErrorMessages});
 }
 
 /// @nodoc
@@ -832,6 +1037,9 @@ class _$OrderTemplateListStateCopyWithImpl<$Res,
     Object? orderTemplateList = null,
     Object? apiFailureOrSuccessOption = null,
     Object? isFetching = null,
+    Object? templateName = null,
+    Object? isSubmitting = null,
+    Object? showErrorMessages = null,
   }) {
     return _then(_value.copyWith(
       orderTemplateList: null == orderTemplateList
@@ -845,6 +1053,18 @@ class _$OrderTemplateListStateCopyWithImpl<$Res,
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      templateName: null == templateName
+          ? _value.templateName
+          : templateName // ignore: cast_nullable_to_non_nullable
+              as TemplateName,
+      isSubmitting: null == isSubmitting
+          ? _value.isSubmitting
+          : isSubmitting // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showErrorMessages: null == showErrorMessages
+          ? _value.showErrorMessages
+          : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -861,7 +1081,10 @@ abstract class _$$_OrderTemplateListStateCopyWith<$Res>
   $Res call(
       {List<OrderTemplate> orderTemplateList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
-      bool isFetching});
+      bool isFetching,
+      TemplateName templateName,
+      bool isSubmitting,
+      bool showErrorMessages});
 }
 
 /// @nodoc
@@ -879,6 +1102,9 @@ class __$$_OrderTemplateListStateCopyWithImpl<$Res>
     Object? orderTemplateList = null,
     Object? apiFailureOrSuccessOption = null,
     Object? isFetching = null,
+    Object? templateName = null,
+    Object? isSubmitting = null,
+    Object? showErrorMessages = null,
   }) {
     return _then(_$_OrderTemplateListState(
       orderTemplateList: null == orderTemplateList
@@ -893,6 +1119,18 @@ class __$$_OrderTemplateListStateCopyWithImpl<$Res>
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
+      templateName: null == templateName
+          ? _value.templateName
+          : templateName // ignore: cast_nullable_to_non_nullable
+              as TemplateName,
+      isSubmitting: null == isSubmitting
+          ? _value.isSubmitting
+          : isSubmitting // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showErrorMessages: null == showErrorMessages
+          ? _value.showErrorMessages
+          : showErrorMessages // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -903,7 +1141,10 @@ class _$_OrderTemplateListState implements _OrderTemplateListState {
   const _$_OrderTemplateListState(
       {required final List<OrderTemplate> orderTemplateList,
       required this.apiFailureOrSuccessOption,
-      required this.isFetching})
+      required this.isFetching,
+      required this.templateName,
+      required this.isSubmitting,
+      required this.showErrorMessages})
       : _orderTemplateList = orderTemplateList;
 
   final List<OrderTemplate> _orderTemplateList;
@@ -917,10 +1158,16 @@ class _$_OrderTemplateListState implements _OrderTemplateListState {
   final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
   @override
   final bool isFetching;
+  @override
+  final TemplateName templateName;
+  @override
+  final bool isSubmitting;
+  @override
+  final bool showErrorMessages;
 
   @override
   String toString() {
-    return 'OrderTemplateListState(orderTemplateList: $orderTemplateList, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching)';
+    return 'OrderTemplateListState(orderTemplateList: $orderTemplateList, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, templateName: $templateName, isSubmitting: $isSubmitting, showErrorMessages: $showErrorMessages)';
   }
 
   @override
@@ -934,7 +1181,13 @@ class _$_OrderTemplateListState implements _OrderTemplateListState {
                     apiFailureOrSuccessOption) ||
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption) &&
             (identical(other.isFetching, isFetching) ||
-                other.isFetching == isFetching));
+                other.isFetching == isFetching) &&
+            (identical(other.templateName, templateName) ||
+                other.templateName == templateName) &&
+            (identical(other.isSubmitting, isSubmitting) ||
+                other.isSubmitting == isSubmitting) &&
+            (identical(other.showErrorMessages, showErrorMessages) ||
+                other.showErrorMessages == showErrorMessages));
   }
 
   @override
@@ -942,7 +1195,10 @@ class _$_OrderTemplateListState implements _OrderTemplateListState {
       runtimeType,
       const DeepCollectionEquality().hash(_orderTemplateList),
       apiFailureOrSuccessOption,
-      isFetching);
+      isFetching,
+      templateName,
+      isSubmitting,
+      showErrorMessages);
 
   @JsonKey(ignore: true)
   @override
@@ -957,7 +1213,10 @@ abstract class _OrderTemplateListState implements OrderTemplateListState {
       {required final List<OrderTemplate> orderTemplateList,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
-      required final bool isFetching}) = _$_OrderTemplateListState;
+      required final bool isFetching,
+      required final TemplateName templateName,
+      required final bool isSubmitting,
+      required final bool showErrorMessages}) = _$_OrderTemplateListState;
 
   @override
   List<OrderTemplate> get orderTemplateList;
@@ -965,6 +1224,12 @@ abstract class _OrderTemplateListState implements OrderTemplateListState {
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override
   bool get isFetching;
+  @override
+  TemplateName get templateName;
+  @override
+  bool get isSubmitting;
+  @override
+  bool get showErrorMessages;
   @override
   @JsonKey(ignore: true)
   _$$_OrderTemplateListStateCopyWith<_$_OrderTemplateListState> get copyWith =>

@@ -13,7 +13,6 @@ import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -21,10 +20,10 @@ import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_material_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_type_selector.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/save_template_dialog.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -104,74 +103,13 @@ class _SaveTemplateButton extends StatelessWidget {
       },
       builder: (context, state) {
         return IconButton(
-          onPressed: () => showSaveTemplateDialog(context),
+          onPressed: () => SaveTemplateDialog.show(context: context),
           icon: const Icon(
             Icons.featured_play_list_outlined,
           ),
         );
       },
     );
-  }
-
-  void showSaveTemplateDialog(BuildContext context) {
-    final templateNameTextController = TextEditingController();
-    showPlatformDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (dialogContext) => PlatformAlertDialog(
-        title: const Text('Save as Template').tr(),
-        content: Padding(
-          padding: const EdgeInsets.only(top: 12),
-          child: PlatformTextField(
-            controller: templateNameTextController,
-            maxLength: 35,
-            hintText: 'Enter template name',
-            material: (context, platform) => MaterialTextFieldData(
-              decoration: const InputDecoration(
-                counterText: '',
-              ),
-            ),
-            cupertino: (context, platform) => CupertinoTextFieldData(
-              maxLength: 35,
-              maxLengthEnforcement: MaxLengthEnforcement.enforced,
-            ),
-          ),
-        ),
-        actions: [
-          PlatformDialogAction(
-            key: const Key('saveButton'),
-            child: const Text('Save'),
-            onPressed: () =>
-                saveButtonPressed(context, templateNameTextController.text),
-          ),
-          PlatformDialogAction(
-            key: const Key('closeButton'),
-            child: const Text('Close'),
-            onPressed: () => context.router.pop(),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void saveButtonPressed(BuildContext context, templateName) {
-    context.router.pop();
-    final templateList =
-        context.read<OrderTemplateListBloc>().state.orderTemplateList;
-    final priceAggregateList = context.read<CartBloc>().state.cartItemList;
-    final userID = context.read<UserBloc>().state.user.id;
-    final cartList = <OrderTemplateMaterial>[];
-    priceAggregateList
-        .map((cartItem) => cartList.add(cartItem.toOrderTemplateMaterial()))
-        .toList();
-    context.read<OrderTemplateListBloc>().add(
-          OrderTemplateListEvent.save(
-            templateName: templateName,
-            userID: userID,
-            cartList: cartList,
-            templateList: templateList,
-          ),
-        );
   }
 }
 
@@ -213,6 +151,7 @@ class _BodyContent extends StatelessWidget {
 
 class _Stepper extends StatelessWidget {
   final SavedOrderListState savedOrderState;
+
   const _Stepper({
     required this.savedOrderState,
     Key? key,
@@ -430,6 +369,7 @@ class _CustomerDetailsStep extends StatelessWidget {
 
 class _AdditionalInformationStep extends StatelessWidget {
   final Function saveData;
+
   const _AdditionalInformationStep({
     required this.saveData,
     Key? key,
@@ -632,6 +572,7 @@ class _TextFormField extends StatelessWidget {
   final int maxLength;
   final TextInputType keyboardType;
   final Function saveData;
+
   const _TextFormField({
     required this.labelText,
     required this.label,
@@ -654,7 +595,6 @@ class _TextFormField extends StatelessWidget {
             saveData(value, label);
           },
           decoration: InputDecoration(
-            // border: InputBorder.none,
             labelText: labelText.tr(),
             // labelStyle: const TextStyle(fontSize: 12.0),
             focusedBorder: const OutlineInputBorder(
@@ -663,7 +603,7 @@ class _TextFormField extends StatelessWidget {
                 Radius.circular(10.0),
               ),
             ),
-            enabledBorder: const OutlineInputBorder(
+            border: const OutlineInputBorder(
               borderSide: BorderSide(color: ZPColors.darkGray, width: 2.0),
               borderRadius: BorderRadius.all(
                 Radius.circular(10.0),
@@ -733,7 +673,6 @@ class _PaymentTermState extends State<_PaymentTerm> {
           ),
           readOnly: true,
           decoration: InputDecoration(
-            border: InputBorder.none,
             labelText: 'Select Payment Term'.tr(),
             // labelStyle: const TextStyle(fontSize: 12.0),
             focusedBorder: const OutlineInputBorder(
@@ -742,7 +681,7 @@ class _PaymentTermState extends State<_PaymentTerm> {
                 Radius.circular(10.0),
               ),
             ),
-            enabledBorder: const OutlineInputBorder(
+            border: const OutlineInputBorder(
               borderSide: BorderSide(color: ZPColors.darkGray, width: 2.0),
               borderRadius: BorderRadius.all(
                 Radius.circular(10.0),
@@ -812,7 +751,6 @@ class _DatePickerFieldState extends State<_DatePickerField> {
               keyboardType: TextInputType.datetime,
               controller: controller,
               decoration: InputDecoration(
-                border: InputBorder.none,
                 labelText: 'Requested Delivery Date'.tr(),
                 // labelStyle: const TextStyle(fontSize: 12.0),
                 suffixIcon: const Icon(
@@ -824,7 +762,7 @@ class _DatePickerFieldState extends State<_DatePickerField> {
                     Radius.circular(10.0),
                   ),
                 ),
-                enabledBorder: const OutlineInputBorder(
+                border: const OutlineInputBorder(
                   borderSide: BorderSide(color: ZPColors.darkGray, width: 2.0),
                   borderRadius: BorderRadius.all(
                     Radius.circular(10.0),

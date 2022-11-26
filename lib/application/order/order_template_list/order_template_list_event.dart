@@ -13,4 +13,6 @@ class OrderTemplateListEvent with _$OrderTemplateListEvent {
       required List<OrderTemplateMaterial> cartList,
         required List<OrderTemplate> templateList,
       }) = _SaveOrderTemplate;
+  const factory OrderTemplateListEvent.templateNameChanged(String templateNameStr) =
+  _TemplateNameChanged;
 }
