@@ -59,13 +59,14 @@ class SalesOrganisationConfigsDtoAdapter
       hideStockDisplay: fields[132] == null ? false : fields[132] as bool,
       addOosMaterials: fields[133] == null ? false : fields[133] as bool,
       oosValue: fields[134] == null ? 0 : fields[134] as int,
+      enableRemarks: fields[135] == null ? false : fields[135] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_SalesOrganisationConfigsDto obj) {
     writer
-      ..writeByte(35)
+      ..writeByte(36)
       ..writeByte(100)
       ..write(obj.disableProcessingStatus)
       ..writeByte(101)
@@ -134,6 +135,8 @@ class SalesOrganisationConfigsDtoAdapter
       ..write(obj.addOosMaterials)
       ..writeByte(134)
       ..write(obj.oosValue)
+      ..writeByte(135)
+      ..write(obj.enableRemarks)
       ..writeByte(7)
       ..write(obj.principalList);
   }
@@ -196,6 +199,7 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       hideStockDisplay: json['hideStockDisplay'] as bool? ?? false,
       addOosMaterials: json['addOosMaterials'] as bool? ?? false,
       oosValue: json['oosValue'] as int? ?? 0,
+      enableRemarks: json['enableRemarks'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -237,4 +241,5 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'hideStockDisplay': instance.hideStockDisplay,
       'addOosMaterials': instance.addOosMaterials,
       'oosValue': instance.oosValue,
+      'enableRemarks': instance.enableRemarks,
     };

@@ -677,33 +677,35 @@ void main() {
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
         expect(listWidget, findsNWidgets(2));
 
-        final addRemarkButton =
-            tester.widget(find.byKey(const Key('addRemarks')));
-        await tester.tap(find.byWidget(addRemarkButton));
-        await tester.pump();
+        if (salesOrgBloc.state.configs.enableRemarks) {
+          final addRemarkButton =
+              tester.widget(find.byKey(const Key('addRemarks')));
+          await tester.tap(find.byWidget(addRemarkButton));
+          await tester.pump();
 
-        final addRemarkDialog = find.byKey(const Key('addRemarksDialog'));
-        expect(addRemarkDialog, findsOneWidget);
+          final addRemarkDialog = find.byKey(const Key('addRemarksDialog'));
+          expect(addRemarkDialog, findsOneWidget);
 
-        const remarkText = '1234';
-        final textField = find.byKey(const Key('remarkTextField'));
-        await tester.enterText(textField, remarkText);
+          const remarkText = '1234';
+          final textField = find.byKey(const Key('remarkTextField'));
+          await tester.enterText(textField, remarkText);
 
-        verify(() => cartBloc.add(const CartEvent.remarksChanged(remarkText)))
-            .called(1);
+          verify(() => cartBloc.add(const CartEvent.remarksChanged(remarkText)))
+              .called(1);
 
-        final addButton = find.byKey(const Key('Add'));
-        await tester.tap(addButton);
-        await tester.pump();
+          final addButton = find.byKey(const Key('Add'));
+          await tester.tap(addButton);
+          await tester.pump();
 
-        verify(
-          () => cartBloc.add(
-            CartEvent.addRemarksToCartItem(
-              item: mockCartItemWithDataList[0],
-              isDelete: false,
+          verify(
+            () => cartBloc.add(
+              CartEvent.addRemarksToCartItem(
+                item: mockCartItemWithDataList[0],
+                isDelete: false,
+              ),
             ),
-          ),
-        ).called(1);
+          ).called(1);
+        }
       });
 
       testWidgets('Test have Tire Discount cart item', (tester) async {

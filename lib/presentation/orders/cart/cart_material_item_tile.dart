@@ -326,7 +326,12 @@ class CartMaterialItemTile extends StatelessWidget {
                                   );
                             },
                           ),
-                          cartItem.materialInfo.remarks.isEmpty
+                          cartItem.materialInfo.remarks.isEmpty &&
+                                  context
+                                      .read<SalesOrgBloc>()
+                                      .state
+                                      .configs
+                                      .enableRemarks
                               ? Padding(
                                   padding: const EdgeInsets.only(top: 10.0),
                                   child: InkWell(
@@ -378,7 +383,8 @@ class CartMaterialItemTile extends StatelessWidget {
                       // ),
                     ],
                   ),
-                  if (cartItem.materialInfo.remarks.isNotEmpty)
+                  if (cartItem.materialInfo.remarks.isNotEmpty &&
+                      context.read<SalesOrgBloc>().state.configs.enableRemarks)
                     RemarksMessage(
                       message:
                           '${'Remarks: '.tr()}${cartItem.materialInfo.remarks}',

@@ -73,6 +73,7 @@ void main() {
     hideStockDisplay: false,
     addOosMaterials: false,
     oosValue: OosValue(0),
+    enableRemarks: false,
   );
 
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(

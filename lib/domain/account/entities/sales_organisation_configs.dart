@@ -43,6 +43,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool expiryDateDisplay,
     required bool addOosMaterials,
     required OosValue oosValue,
+    required bool enableRemarks,
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
@@ -81,6 +82,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         expiryDateDisplay: false,
         addOosMaterials: false,
         oosValue: OosValue(0),
+        enableRemarks: false,
       );
 
   String get getConfigLangauge {

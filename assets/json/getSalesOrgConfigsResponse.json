@@ -12,7 +12,7 @@
             "currency": "myr",
             "enableUploadAd": false,
             "enableMobileNumber": true,
-            "enableRemarks": false,
+            "enableRemarks": true,
             "enableListPrice": true,
             "enableTaxDisplay": true,
             "enableDefaultMD": true,

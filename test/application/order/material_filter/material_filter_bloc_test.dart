@@ -82,6 +82,7 @@ void main() {
     expiryDateDisplay: true,
     hideStockDisplay: true,
     oosValue: OosValue(1),
+    enableRemarks: false,
   );
 
   const fakeSelectedPrincipalFilterCategory = MaterialFilterType.principal;

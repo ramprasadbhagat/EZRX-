@@ -157,6 +157,7 @@ const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
   expiryDateDisplay: false,
   addOosMaterials: false,
   oosValue: 0,
+  enableRemarks: false,
 );
 
 const BundleDto _emptyBundleDto = BundleDto(

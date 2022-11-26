@@ -127,6 +127,9 @@ mixin _$SalesOrganisationConfigsDto {
   @JsonKey(name: 'oosValue', defaultValue: 0)
   @HiveField(134, defaultValue: 0)
   int get oosValue => throw _privateConstructorUsedError;
+  @JsonKey(name: 'enableRemarks', defaultValue: false)
+  @HiveField(135, defaultValue: false)
+  bool get enableRemarks => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -248,7 +251,10 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
           bool addOosMaterials,
       @JsonKey(name: 'oosValue', defaultValue: 0)
       @HiveField(134, defaultValue: 0)
-          int oosValue});
+          int oosValue,
+      @JsonKey(name: 'enableRemarks', defaultValue: false)
+      @HiveField(135, defaultValue: false)
+          bool enableRemarks});
 }
 
 /// @nodoc
@@ -300,6 +306,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
     Object? hideStockDisplay = null,
     Object? addOosMaterials = null,
     Object? oosValue = null,
+    Object? enableRemarks = null,
   }) {
     return _then(_value.copyWith(
       disableProcessingStatus: null == disableProcessingStatus
@@ -442,6 +449,10 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
           ? _value.oosValue
           : oosValue // ignore: cast_nullable_to_non_nullable
               as int,
+      enableRemarks: null == enableRemarks
+          ? _value.enableRemarks
+          : enableRemarks // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -561,7 +572,10 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
           bool addOosMaterials,
       @JsonKey(name: 'oosValue', defaultValue: 0)
       @HiveField(134, defaultValue: 0)
-          int oosValue});
+          int oosValue,
+      @JsonKey(name: 'enableRemarks', defaultValue: false)
+      @HiveField(135, defaultValue: false)
+          bool enableRemarks});
 }
 
 /// @nodoc
@@ -612,6 +626,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? hideStockDisplay = null,
     Object? addOosMaterials = null,
     Object? oosValue = null,
+    Object? enableRemarks = null,
   }) {
     return _then(_$_SalesOrganisationConfigsDto(
       disableProcessingStatus: null == disableProcessingStatus
@@ -754,6 +769,10 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.oosValue
           : oosValue // ignore: cast_nullable_to_non_nullable
               as int,
+      enableRemarks: null == enableRemarks
+          ? _value.enableRemarks
+          : enableRemarks // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -868,7 +887,10 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
           required this.addOosMaterials,
       @JsonKey(name: 'oosValue', defaultValue: 0)
       @HiveField(134, defaultValue: 0)
-          required this.oosValue})
+          required this.oosValue,
+      @JsonKey(name: 'enableRemarks', defaultValue: false)
+      @HiveField(135, defaultValue: false)
+          required this.enableRemarks})
       : _principalList = principalList,
         super._();
 
@@ -1021,10 +1043,14 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @JsonKey(name: 'oosValue', defaultValue: 0)
   @HiveField(134, defaultValue: 0)
   final int oosValue;
+  @override
+  @JsonKey(name: 'enableRemarks', defaultValue: false)
+  @HiveField(135, defaultValue: false)
+  final bool enableRemarks;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks)';
   }
 
   @override
@@ -1095,7 +1121,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
             (identical(other.expiryDateDisplay, expiryDateDisplay) || other.expiryDateDisplay == expiryDateDisplay) &&
             (identical(other.hideStockDisplay, hideStockDisplay) || other.hideStockDisplay == hideStockDisplay) &&
             (identical(other.addOosMaterials, addOosMaterials) || other.addOosMaterials == addOosMaterials) &&
-            (identical(other.oosValue, oosValue) || other.oosValue == oosValue));
+            (identical(other.oosValue, oosValue) || other.oosValue == oosValue) &&
+            (identical(other.enableRemarks, enableRemarks) || other.enableRemarks == enableRemarks));
   }
 
   @JsonKey(ignore: true)
@@ -1136,7 +1163,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
         expiryDateDisplay,
         hideStockDisplay,
         addOosMaterials,
-        oosValue
+        oosValue,
+        enableRemarks
       ]);
 
   @JsonKey(ignore: true)
@@ -1262,7 +1290,10 @@ abstract class _SalesOrganisationConfigsDto
           required final bool addOosMaterials,
       @JsonKey(name: 'oosValue', defaultValue: 0)
       @HiveField(134, defaultValue: 0)
-          required final int oosValue}) = _$_SalesOrganisationConfigsDto;
+          required final int oosValue,
+      @JsonKey(name: 'enableRemarks', defaultValue: false)
+      @HiveField(135, defaultValue: false)
+          required final bool enableRemarks}) = _$_SalesOrganisationConfigsDto;
   const _SalesOrganisationConfigsDto._() : super._();
 
   factory _SalesOrganisationConfigsDto.fromJson(Map<String, dynamic> json) =
@@ -1409,6 +1440,10 @@ abstract class _SalesOrganisationConfigsDto
   @JsonKey(name: 'oosValue', defaultValue: 0)
   @HiveField(134, defaultValue: 0)
   int get oosValue;
+  @override
+  @JsonKey(name: 'enableRemarks', defaultValue: false)
+  @HiveField(135, defaultValue: false)
+  bool get enableRemarks;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsDtoCopyWith<_$_SalesOrganisationConfigsDto>

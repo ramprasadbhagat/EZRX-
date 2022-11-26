@@ -69,6 +69,7 @@ void main() {
     expiryDateDisplay: false,
     hideStockDisplay: false,
     oosValue: OosValue(0),
+    enableRemarks: false,
   );
 
   group('Eligibility Bloc', () {

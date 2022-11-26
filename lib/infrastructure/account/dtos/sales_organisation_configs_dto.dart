@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
+
 part 'sales_organisation_configs_dto.freezed.dart';
 part 'sales_organisation_configs_dto.g.dart';
 
@@ -118,6 +119,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'oosValue', defaultValue: 0)
     @HiveField(134, defaultValue: 0)
         required int oosValue,
+    @JsonKey(name: 'enableRemarks', defaultValue: false)
+    @HiveField(135, defaultValue: false)
+        required bool enableRemarks,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -159,6 +163,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       expiryDateDisplay: configs.expiryDateDisplay,
       addOosMaterials: configs.addOosMaterials,
       oosValue: configs.oosValue.getOrCrash(),
+      enableRemarks: configs.enableRemarks,
     );
   }
 
@@ -199,6 +204,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       expiryDateDisplay: expiryDateDisplay,
       addOosMaterials: addOosMaterials,
       oosValue: OosValue(oosValue),
+      enableRemarks: enableRemarks,
     );
   }
 

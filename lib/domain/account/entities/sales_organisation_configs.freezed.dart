@@ -51,6 +51,7 @@ mixin _$SalesOrganisationConfigs {
   bool get expiryDateDisplay => throw _privateConstructorUsedError;
   bool get addOosMaterials => throw _privateConstructorUsedError;
   OosValue get oosValue => throw _privateConstructorUsedError;
+  bool get enableRemarks => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrganisationConfigsCopyWith<SalesOrganisationConfigs> get copyWith =>
@@ -98,7 +99,8 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       bool hideStockDisplay,
       bool expiryDateDisplay,
       bool addOosMaterials,
-      OosValue oosValue});
+      OosValue oosValue,
+      bool enableRemarks});
 }
 
 /// @nodoc
@@ -150,6 +152,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
     Object? expiryDateDisplay = null,
     Object? addOosMaterials = null,
     Object? oosValue = null,
+    Object? enableRemarks = null,
   }) {
     return _then(_value.copyWith(
       enableDefaultMD: null == enableDefaultMD
@@ -292,6 +295,10 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
           ? _value.oosValue
           : oosValue // ignore: cast_nullable_to_non_nullable
               as OosValue,
+      enableRemarks: null == enableRemarks
+          ? _value.enableRemarks
+          : enableRemarks // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -340,7 +347,8 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       bool hideStockDisplay,
       bool expiryDateDisplay,
       bool addOosMaterials,
-      OosValue oosValue});
+      OosValue oosValue,
+      bool enableRemarks});
 }
 
 /// @nodoc
@@ -390,6 +398,7 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? expiryDateDisplay = null,
     Object? addOosMaterials = null,
     Object? oosValue = null,
+    Object? enableRemarks = null,
   }) {
     return _then(_$_SalesOrganisationConfigs(
       enableDefaultMD: null == enableDefaultMD
@@ -532,6 +541,10 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.oosValue
           : oosValue // ignore: cast_nullable_to_non_nullable
               as OosValue,
+      enableRemarks: null == enableRemarks
+          ? _value.enableRemarks
+          : enableRemarks // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -574,7 +587,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       required this.hideStockDisplay,
       required this.expiryDateDisplay,
       required this.addOosMaterials,
-      required this.oosValue})
+      required this.oosValue,
+      required this.enableRemarks})
       : _principalList = principalList,
         super._();
 
@@ -653,10 +667,12 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   final bool addOosMaterials;
   @override
   final OosValue oosValue;
+  @override
+  final bool enableRemarks;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue)';
+    return 'SalesOrganisationConfigs(enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks)';
   }
 
   @override
@@ -727,7 +743,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
             (identical(other.hideStockDisplay, hideStockDisplay) || other.hideStockDisplay == hideStockDisplay) &&
             (identical(other.expiryDateDisplay, expiryDateDisplay) || other.expiryDateDisplay == expiryDateDisplay) &&
             (identical(other.addOosMaterials, addOosMaterials) || other.addOosMaterials == addOosMaterials) &&
-            (identical(other.oosValue, oosValue) || other.oosValue == oosValue));
+            (identical(other.oosValue, oosValue) || other.oosValue == oosValue) &&
+            (identical(other.enableRemarks, enableRemarks) || other.enableRemarks == enableRemarks));
   }
 
   @override
@@ -767,7 +784,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
         hideStockDisplay,
         expiryDateDisplay,
         addOosMaterials,
-        oosValue
+        oosValue,
+        enableRemarks
       ]);
 
   @JsonKey(ignore: true)
@@ -814,7 +832,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final bool hideStockDisplay,
       required final bool expiryDateDisplay,
       required final bool addOosMaterials,
-      required final OosValue oosValue}) = _$_SalesOrganisationConfigs;
+      required final OosValue oosValue,
+      required final bool enableRemarks}) = _$_SalesOrganisationConfigs;
   const _SalesOrganisationConfigs._() : super._();
 
   @override
@@ -887,6 +906,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   bool get addOosMaterials;
   @override
   OosValue get oosValue;
+  @override
+  bool get enableRemarks;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsCopyWith<_$_SalesOrganisationConfigs>
