@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
@@ -233,6 +234,100 @@ void main() {
               optionOf(const Left(ApiFailure.other('fake-error'))),
           canLoadMore: true,
           nextPageIndex: 1,
+        ),
+      ],
+    );
+
+    blocTest<SavedOrderListBloc, SavedOrderListState>(
+      '==> Create Draft Order with Success',
+      build: () => SavedOrderListBloc(repository: repository),
+      setUp: () {
+        when(() => repository.createDraftOrder(
+              shipToInfo: ShipToInfo.empty(),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              grandTotal: 0.0,
+              salesOrganisation: SalesOrganisation.empty(),
+              user: User.empty(),
+              cartItems: <PriceAggregate>[PriceAggregate.empty()],
+              data: {},
+            )).thenAnswer(
+          (invocation) async => Right(
+            SavedOrder.empty().copyWith(
+              draftorder: true,
+            ),
+          ),
+        );
+      },
+      act: (bloc) => bloc.add(
+        SavedOrderListEvent.createDraft(
+          shipToInfo: ShipToInfo.empty(),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          grandTotal: 0.0,
+          salesOrganisation: SalesOrganisation.empty(),
+          user: User.empty(),
+          cartItems: <PriceAggregate>[PriceAggregate.empty()],
+          data: {},
+          existingSavedOrderList: <SavedOrder>[],
+        ),
+      ),
+      expect: () => [
+        SavedOrderListState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          isDraftOrderCreated: false,
+          isCreating: true,
+        ),
+        SavedOrderListState.initial().copyWith(
+          isDraftOrderCreated: true,
+          savedOrders: <SavedOrder>[
+            SavedOrder.empty().copyWith(
+              draftorder: true,
+            )
+          ],
+          apiFailureOrSuccessOption: none(),
+          isCreating: false,
+        ),
+      ],
+    );
+    blocTest<SavedOrderListBloc, SavedOrderListState>(
+      '==> Create Draft Order with Failure',
+      build: () => SavedOrderListBloc(repository: repository),
+      setUp: () {
+        when(() => repository.createDraftOrder(
+              shipToInfo: ShipToInfo.empty(),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              grandTotal: 0.0,
+              salesOrganisation: SalesOrganisation.empty(),
+              user: User.empty(),
+              cartItems: <PriceAggregate>[PriceAggregate.empty()],
+              data: {},
+            )).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('Fake-Error'),
+          ),
+        );
+      },
+      act: (bloc) => bloc.add(
+        SavedOrderListEvent.createDraft(
+          shipToInfo: ShipToInfo.empty(),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          grandTotal: 0.0,
+          salesOrganisation: SalesOrganisation.empty(),
+          user: User.empty(),
+          cartItems: <PriceAggregate>[PriceAggregate.empty()],
+          data: {},
+          existingSavedOrderList: <SavedOrder>[],
+        ),
+      ),
+      expect: () => [
+        SavedOrderListState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          isDraftOrderCreated: false,
+          isCreating: true,
+        ),
+        SavedOrderListState.initial().copyWith(
+          apiFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('Fake-Error'))),
+          isCreating: false,
         ),
       ],
     );

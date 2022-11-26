@@ -1488,7 +1488,6 @@ mixin _$SavedOrderListState {
   int get nextPageIndex => throw _privateConstructorUsedError;
   bool get isDraftOrderCreated => throw _privateConstructorUsedError;
   bool get isCreating => throw _privateConstructorUsedError;
-  SavedOrder get newlyCreatedDraftOrder => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
@@ -1510,10 +1509,7 @@ abstract class $SavedOrderListStateCopyWith<$Res> {
       int nextPageIndex,
       bool isDraftOrderCreated,
       bool isCreating,
-      SavedOrder newlyCreatedDraftOrder,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
-
-  $SavedOrderCopyWith<$Res> get newlyCreatedDraftOrder;
 }
 
 /// @nodoc
@@ -1535,7 +1531,6 @@ class _$SavedOrderListStateCopyWithImpl<$Res, $Val extends SavedOrderListState>
     Object? nextPageIndex = null,
     Object? isDraftOrderCreated = null,
     Object? isCreating = null,
-    Object? newlyCreatedDraftOrder = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
@@ -1563,23 +1558,11 @@ class _$SavedOrderListStateCopyWithImpl<$Res, $Val extends SavedOrderListState>
           ? _value.isCreating
           : isCreating // ignore: cast_nullable_to_non_nullable
               as bool,
-      newlyCreatedDraftOrder: null == newlyCreatedDraftOrder
-          ? _value.newlyCreatedDraftOrder
-          : newlyCreatedDraftOrder // ignore: cast_nullable_to_non_nullable
-              as SavedOrder,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SavedOrderCopyWith<$Res> get newlyCreatedDraftOrder {
-    return $SavedOrderCopyWith<$Res>(_value.newlyCreatedDraftOrder, (value) {
-      return _then(_value.copyWith(newlyCreatedDraftOrder: value) as $Val);
-    });
   }
 }
 
@@ -1598,11 +1581,7 @@ abstract class _$$_SavedOrderListStateCopyWith<$Res>
       int nextPageIndex,
       bool isDraftOrderCreated,
       bool isCreating,
-      SavedOrder newlyCreatedDraftOrder,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
-
-  @override
-  $SavedOrderCopyWith<$Res> get newlyCreatedDraftOrder;
 }
 
 /// @nodoc
@@ -1622,7 +1601,6 @@ class __$$_SavedOrderListStateCopyWithImpl<$Res>
     Object? nextPageIndex = null,
     Object? isDraftOrderCreated = null,
     Object? isCreating = null,
-    Object? newlyCreatedDraftOrder = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_$_SavedOrderListState(
@@ -1650,10 +1628,6 @@ class __$$_SavedOrderListStateCopyWithImpl<$Res>
           ? _value.isCreating
           : isCreating // ignore: cast_nullable_to_non_nullable
               as bool,
-      newlyCreatedDraftOrder: null == newlyCreatedDraftOrder
-          ? _value.newlyCreatedDraftOrder
-          : newlyCreatedDraftOrder // ignore: cast_nullable_to_non_nullable
-              as SavedOrder,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -1672,7 +1646,6 @@ class _$_SavedOrderListState extends _SavedOrderListState {
       required this.nextPageIndex,
       required this.isDraftOrderCreated,
       required this.isCreating,
-      required this.newlyCreatedDraftOrder,
       required this.apiFailureOrSuccessOption})
       : _savedOrders = savedOrders,
         super._();
@@ -1695,13 +1668,11 @@ class _$_SavedOrderListState extends _SavedOrderListState {
   @override
   final bool isCreating;
   @override
-  final SavedOrder newlyCreatedDraftOrder;
-  @override
   final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'SavedOrderListState(savedOrders: $savedOrders, canLoadMore: $canLoadMore, isFetching: $isFetching, nextPageIndex: $nextPageIndex, isDraftOrderCreated: $isDraftOrderCreated, isCreating: $isCreating, newlyCreatedDraftOrder: $newlyCreatedDraftOrder, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
+    return 'SavedOrderListState(savedOrders: $savedOrders, canLoadMore: $canLoadMore, isFetching: $isFetching, nextPageIndex: $nextPageIndex, isDraftOrderCreated: $isDraftOrderCreated, isCreating: $isCreating, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
   }
 
   @override
@@ -1721,8 +1692,6 @@ class _$_SavedOrderListState extends _SavedOrderListState {
                 other.isDraftOrderCreated == isDraftOrderCreated) &&
             (identical(other.isCreating, isCreating) ||
                 other.isCreating == isCreating) &&
-            (identical(other.newlyCreatedDraftOrder, newlyCreatedDraftOrder) ||
-                other.newlyCreatedDraftOrder == newlyCreatedDraftOrder) &&
             (identical(other.apiFailureOrSuccessOption,
                     apiFailureOrSuccessOption) ||
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption));
@@ -1737,7 +1706,6 @@ class _$_SavedOrderListState extends _SavedOrderListState {
       nextPageIndex,
       isDraftOrderCreated,
       isCreating,
-      newlyCreatedDraftOrder,
       apiFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
@@ -1756,7 +1724,6 @@ abstract class _SavedOrderListState extends SavedOrderListState {
       required final int nextPageIndex,
       required final bool isDraftOrderCreated,
       required final bool isCreating,
-      required final SavedOrder newlyCreatedDraftOrder,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption}) = _$_SavedOrderListState;
   const _SavedOrderListState._() : super._();
@@ -1773,8 +1740,6 @@ abstract class _SavedOrderListState extends SavedOrderListState {
   bool get isDraftOrderCreated;
   @override
   bool get isCreating;
-  @override
-  SavedOrder get newlyCreatedDraftOrder;
   @override
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override

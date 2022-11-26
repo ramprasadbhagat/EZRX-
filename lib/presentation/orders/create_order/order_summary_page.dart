@@ -58,6 +58,7 @@ class OrderSummaryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: const Key('orderSummaryKey'),
       appBar: PreferredSize(
         preferredSize: const Size(double.infinity, 60),
         child: AppBar(
@@ -238,6 +239,9 @@ class _Stepper extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
+                    key: Key(details.currentStep == state.maxSteps
+                        ? 'submitButtonKey'
+                        : 'continueButtonKey'),
                     onPressed: () {
                       if (details.currentStep == state.maxSteps) {
                         //code to submit
@@ -305,22 +309,12 @@ class _Stepper extends StatelessWidget {
             );
           },
           physics: const BouncingScrollPhysics(),
-          key: const Key('orderSummaryKey'),
+          key: const Key('orderSummaryStepperKey'),
           type: StepperType.vertical,
           onStepTapped: (step) {
             context
                 .read<OrderSummaryBloc>()
                 .add(OrderSummaryEvent.stepTapped(step: step));
-          },
-          onStepCancel: () {
-            context
-                .read<OrderSummaryBloc>()
-                .add(const OrderSummaryEvent.stepCancel());
-          },
-          onStepContinue: () {
-            context
-                .read<OrderSummaryBloc>()
-                .add(const OrderSummaryEvent.stepContinue());
           },
           currentStep: context.read<OrderSummaryBloc>().state.step,
           steps: [
@@ -404,13 +398,12 @@ List<_OrderSummaryDetails> _getTextRowLevelsForCustomerInfo(
 }
 
 class _CustomerDetailsStep extends StatelessWidget {
-  const _CustomerDetailsStep({
-    Key? key,
-  }) : super(key: key);
+  const _CustomerDetailsStep();
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
+      key: const Key('_CustomerDetailsStepperKey'),
       buildWhen: (previous, current) =>
           previous.customerCodeInfo != current.customerCodeInfo,
       builder: (context, state) {
@@ -446,6 +439,7 @@ class _AdditionalInformationStep extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: Biswaranjan - can we use SalesOrgBloc builder here instead of ShipToCodeBloc
     return BlocBuilder<ShipToCodeBloc, ShipToCodeState>(
+      key: const Key('_additionalDetailsFormKey'),
       buildWhen: (previous, current) =>
           previous.shipToInfo != current.shipToInfo,
       builder: (context, state) {
@@ -539,13 +533,12 @@ class _AdditionalInformationStep extends StatelessWidget {
 }
 
 class _Disclaimer extends StatelessWidget {
-  const _Disclaimer({
-    Key? key,
-  }) : super(key: key);
+  const _Disclaimer();
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: const Key('disclaimerKey'),
       children: [
         context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg.isSg &&
                 !context.read<UserBloc>().state.user.role.type.isSalesRep
@@ -568,13 +561,12 @@ class _Disclaimer extends StatelessWidget {
 }
 
 class _CartDetails extends StatelessWidget {
-  const _CartDetails({
-    Key? key,
-  }) : super(key: key);
+  const _CartDetails();
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CartBloc, CartState>(
+      key: const Key('_cartDetailsKey'),
       listenWhen: (previous, current) =>
           previous.cartItemList != current.cartItemList,
       listener: (context, state) {
@@ -655,7 +647,7 @@ class _TextFormField extends StatelessWidget {
       children: [
         TextFormField(
           keyboardType: keyboardType,
-          initialValue: '',
+          initialValue: data[label],
           maxLength: maxLength,
           maxLines: keyboardType == TextInputType.multiline ? null : 1,
           onSaved: (value) {
@@ -688,9 +680,7 @@ class _TextFormField extends StatelessWidget {
 }
 
 class _PaymentTerm extends StatefulWidget {
-  const _PaymentTerm({
-    Key? key,
-  }) : super(key: key);
+  const _PaymentTerm();
 
   @override
   State<_PaymentTerm> createState() => _PaymentTermState();
@@ -714,10 +704,12 @@ class _PaymentTermState extends State<_PaymentTerm> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PaymentTermBloc, PaymentTermState>(
+      key: const Key('_PaymentTermKey'),
       buildWhen: (previous, current) =>
           previous.isFetching != current.isFetching,
       builder: (context, state) {
         return TextFormField(
+          key: const Key('_PaymentTermTextKey'),
           controller: _controller,
           onTap: () => showCupertinoModalPopup<void>(
             context: context,
@@ -803,6 +795,7 @@ class _DatePickerFieldState extends State<_DatePickerField> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: const Key('_DatePickerFieldKey'),
       children: [
         InkWell(
           onTap: () async {

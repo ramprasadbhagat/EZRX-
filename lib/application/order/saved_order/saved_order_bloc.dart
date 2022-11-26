@@ -193,7 +193,6 @@ class SavedOrderListBloc
               state.copyWith(
                 isDraftOrderCreated: createDraftOrder.draftorder,
                 savedOrders: newList,
-                newlyCreatedDraftOrder: createDraftOrder,
                 apiFailureOrSuccessOption: none(),
                 isCreating: false,
               ),

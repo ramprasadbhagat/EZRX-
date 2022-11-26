@@ -23,7 +23,7 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
     await event.map(
       initialized: (value) {
         emit(state.copyWith(
-          maxSteps: 4,
+          maxSteps: 5,
           step: 0,
         ));
       },

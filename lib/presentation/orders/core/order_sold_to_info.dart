@@ -12,6 +12,7 @@ class SoldToAddressInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
+      key: const Key('soldToAddressStepperKey'),
       builder: (context, state) {
         return Column(
           children: [
@@ -58,8 +59,8 @@ List<SoldToDetails> _getTextRowLevelsForSoldToInfo(
     ),
     SoldToDetails(
       key: 'Address'.tr(),
-      value:customer.customerAddress.toString(),
-            ),
+      value: customer.customerAddress.toString(),
+    ),
     SoldToDetails(
       key: 'Postal Code'.tr(),
       value: customer.postalCode,
@@ -68,7 +69,7 @@ List<SoldToDetails> _getTextRowLevelsForSoldToInfo(
       key: 'Country'.tr(),
       value: customer.region,
     ),
-     SoldToDetails(
+    SoldToDetails(
       key: 'Phone'.tr(),
       value: 'NA',
     ),

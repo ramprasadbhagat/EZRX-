@@ -10,7 +10,6 @@ class SavedOrderListState with _$SavedOrderListState {
     required int nextPageIndex,
     required bool isDraftOrderCreated,
     required bool isCreating,
-    required SavedOrder newlyCreatedDraftOrder,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
   }) = _SavedOrderListState;
 
@@ -21,7 +20,6 @@ class SavedOrderListState with _$SavedOrderListState {
         nextPageIndex: 0,
         isDraftOrderCreated: false,
         isCreating: false,
-        newlyCreatedDraftOrder: SavedOrder.empty(),
         apiFailureOrSuccessOption: none(),
       );
 }

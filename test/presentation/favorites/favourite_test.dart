@@ -112,9 +112,7 @@ void main() {
                 create: (context) => mockMaterialPriceDetailBloc,
               ),
             ],
-            child: const Scaffold(
-              body: FavouritesTab(),
-            ),
+            child: const FavouritesTab(),
           ),
         );
       }
@@ -198,7 +196,7 @@ void main() {
       });
 
       // Need to modify this
-      // 
+      //
       // testWidgets(
       //     'Fetch Favourite success, ValidCustomerMaterial failure, display an empty list',
       //     (tester) async {
