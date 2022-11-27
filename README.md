@@ -90,3 +90,14 @@ Let's assume that we test loading_more fuction for load a page 2
 2. Setup a mock `repository` with parameters and a `pageSize` equals to page 1 lenght
 3. Use `act` to add load_more `event` to `bloc`
 4. `expect` section will be the same as when we test the `fetch` function, except that the `state` will have both page 1 and page 2 response
+
+### How to trigger Azure Pipeline Automation Build
+1. Create a release branch release/2.0.0
+2. Merge all related PR to release branch
+3. Make sure checkout to release/2.0.0 branch
+4. Use Uat build and upload command, this will build uat and upload to Google Play Internal Test and IOS testFlight
+- ```git tag -a uat.2.0.0-108 -m "uat 2.0.0(108)"```
+- ```git push origin uat.2.0.0-108```
+5. Use Prod build and upload command, this will build uat and upload to Google Play Internal Test and IOS testFlight
+- ```git tag -a prod.2.0.0-108 -m "prod 2.0.0(108)"```
+- ```git push origin prod.2.0.0-108```
