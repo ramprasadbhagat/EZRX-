@@ -6,7 +6,7 @@ import 'package:ezrxmobile/presentation/orders/create_order/quantity_icon.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ezrxmobile/presentation/orders/cart/customExpansionTile.dart'
+import 'package:ezrxmobile/presentation/orders/cart/custom_expansion_tile.dart'
     as custom;
 
 class BounsTile extends StatelessWidget {
@@ -24,11 +24,7 @@ class BounsTile extends StatelessWidget {
             initiallyExpanded: true,
             title: Text(
               'Bonuses'.tr(),
-              style: const TextStyle(
-                fontSize: 14.0,
-                color: ZPColors.kPrimaryColor, // zpPrimaryColor,
-                fontWeight: FontWeight.w700,
-              ),
+              style: Theme.of(context).textTheme.titleSmall,
             ),
             children: <Widget>[
               Row(
@@ -38,31 +34,6 @@ class BounsTile extends StatelessWidget {
                   SizedBox(
                     child: TextButton(
                       onPressed: () {
-                        //fetch bonus material here
-                        // context.read<BonusMaterialBloc>().add(
-                        //       BonusMaterialEvent.fetch(
-                        //         user: context.read<UserBloc>().state.user,
-                        //         salesOrganisation: context
-                        //             .read<SalesOrgBloc>()
-                        //             .state
-                        //             .salesOrganisation,
-                        //         configs:
-                        //             context.read<SalesOrgBloc>().state.configs,
-                        //         pickAndPack: context
-                        //             .read<EligibilityBloc>()
-                        //             .state
-                        //             .getPNPValueMaterial,
-                        //         customerInfo: context
-                        //             .read<CustomerCodeBloc>()
-                        //             .state
-                        //             .customerCodeInfo,
-                        //         shipInfo: context
-                        //             .read<ShipToCodeBloc>()
-                        //             .state
-                        //             .shipToInfo,
-                        //         searchKey: '',
-                        //       ),
-                        //     );
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -85,12 +56,12 @@ class BounsTile extends StatelessWidget {
                                   children: [
                                     TextSpan(
                                       text: 'Add Bonus'.tr(),
-                                      style: const TextStyle(
-                                        color: ZPColors.kPrimaryColor,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 16,
-                                        fontFamily: 'Poppins',
-                                      ),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1
+                                          ?.apply(
+                                            color: ZPColors.kPrimaryColor,
+                                          ),
                                     ),
                                   ],
                                 ),

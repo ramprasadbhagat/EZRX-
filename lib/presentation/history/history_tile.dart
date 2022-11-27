@@ -19,7 +19,6 @@ import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-
 class OrderHistoryListTile extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
   final Currency currency;
@@ -41,6 +40,8 @@ class OrderHistoryListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final enableOHPrice = context.read<EligibilityBloc>().state.enableOHPrice;
+
     return GestureDetector(
       onTap: () {
         context.read<MaterialPriceDetailBloc>().add(
@@ -125,7 +126,7 @@ class OrderHistoryListTile extends StatelessWidget {
                 ],
               ),
               BalanceTextRow(
-                key:  const Key('orderTypeKey'),
+                key: const Key('orderTypeKey'),
                 keyText: 'Order Type'.tr(),
                 valueText: orderHistoryItem.orderType,
               ),
@@ -149,20 +150,22 @@ class OrderHistoryListTile extends StatelessWidget {
                 keyText: 'Quantity'.tr(),
                 valueText: orderHistoryItem.qty.toString(),
               ),
-              BalanceTextRow(
-                keyText: 'ZP Price'.tr(),
-                valueText: _displayPrice(
-                  salesOrgConfigs,
-                  orderHistoryItem.unitPrice.zpPrice,
+              if (enableOHPrice)
+                BalanceTextRow(
+                  keyText: 'ZP Price'.tr(),
+                  valueText: _displayPrice(
+                    salesOrgConfigs,
+                    orderHistoryItem.unitPrice.zpPrice,
+                  ),
                 ),
-              ),
-              BalanceTextRow(
-                keyText: 'Total Price'.tr(),
-                valueText: _displayPrice(
-                  salesOrgConfigs,
-                  orderHistoryItem.totalPrice.totalPrice,
+              if (enableOHPrice)
+                BalanceTextRow(
+                  keyText: 'Total Price'.tr(),
+                  valueText: _displayPrice(
+                    salesOrgConfigs,
+                    orderHistoryItem.totalPrice.totalPrice,
+                  ),
                 ),
-              ),
             ],
           ),
         ),

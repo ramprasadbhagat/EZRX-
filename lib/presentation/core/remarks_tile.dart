@@ -25,14 +25,14 @@ class RemarksMessage extends StatelessWidget {
               alignment: Alignment.center,
               transform: Matrix4.rotationY(math.pi),
               child: CustomPaint(
-                painter: Triangle(ZPColors.green),
+                painter: Triangle(ZPColors.darkGray),
               ),
             ),
             Flexible(
               child: Container(
                 padding: const EdgeInsets.only(left: 8),
                 decoration: const BoxDecoration(
-                  color: ZPColors.green,
+                  color: ZPColors.darkGray,
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(18),
                     bottomLeft: Radius.circular(18),
@@ -50,7 +50,7 @@ class RemarksMessage extends StatelessWidget {
                         title: Text(
                           message,
                           style: const TextStyle(
-                            color: Colors.white,
+                            color: ZPColors.white,
                             fontFamily: 'Monstserrat',
                             fontSize: 14,
                           ),

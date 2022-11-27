@@ -190,17 +190,12 @@ class _BonusAddPageState extends State<BonusAddPage> {
                       onLoadingMore: () {},
                       emptyMessage: 'No materials found.'.tr(),
                       onRefresh: () {
-                        context.read<BonusMaterialBloc>().add(
-                              const BonusMaterialEvent.reset(),
-                            );
+                        // context.read<BonusMaterialBloc>().add(
+                        //       const BonusMaterialEvent.reset(),
+                        //     );
                       },
                       isLoading: state.isFetching,
                       itemBuilder: (context, i, item) => Card(
-                        elevation: 1.0,
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: 20.0,
-                          vertical: 6.0,
-                        ),
                         child: Padding(
                           key: const Key('bonusItemList'),
                           padding: const EdgeInsets.all(10),
@@ -214,53 +209,31 @@ class _BonusAddPageState extends State<BonusAddPage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
-                                      Row(
-                                        children: <Widget>[
-                                          Expanded(
-                                            flex: 5,
-                                            child: RichText(
-                                              overflow: TextOverflow.visible,
-                                              text: TextSpan(
-                                                children: <TextSpan>[
-                                                  TextSpan(
-                                                    text: state.bonus[i]
-                                                        .materialDescription
-                                                        .toUpperCase(),
-                                                    style: const TextStyle(
-                                                      color:
-                                                          ZPColors.darkerGreen,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 14,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
+                                      Text(
+                                        state.bonus[i].materialNumber
+                                            .displayMatNo,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .subtitle2
+                                            ?.apply(
+                                              color: ZPColors.kPrimaryColor,
                                             ),
-                                          ),
-                                        ],
                                       ),
                                       Text(
-                                        'Mat No: '
-                                                '${state.bonus[i].materialNumber.displayMatNo}'
-                                            .tr(),
-                                        style: const TextStyle(
-                                          color: ZPColors.darkGray,
-                                          fontSize: 12,
-                                        ),
+                                        state.bonus[i].materialDescription,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1,
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                          bottom: 5.0,
-                                        ),
-                                        child: Text(
-                                          state.bonus[i].principalData
-                                              .principalName,
-                                          style: const TextStyle(
-                                            color: ZPColors.darkGray,
-                                            fontSize: 12,
-                                          ),
-                                        ),
+                                      Text(
+                                        state.bonus[i].principalData
+                                            .principalName,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .subtitle2
+                                            ?.apply(
+                                              color: ZPColors.lightGray,
+                                            ),
                                       ),
                                     ],
                                   ),

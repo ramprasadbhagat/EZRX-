@@ -178,13 +178,13 @@ class _TotalSection extends StatelessWidget {
               BalanceTextRow(
                 keyText: 'Subtotal'.tr(),
                 valueText: _displayPrice(salesOrgConfig, state.subtotal),
-                valueFlex: 2,
+                valueFlex: 1,
               ),
               salesOrgConfig.enableVat
                   ? BalanceTextRow(
                       keyText: '$taxCode in %'.tr(),
                       valueText: '${salesOrgConfig.vatValue}%',
-                      valueFlex: 2,
+                      valueFlex: 1,
                     )
                   : const SizedBox.shrink(),
               salesOrgConfig.enableVat
@@ -194,7 +194,7 @@ class _TotalSection extends StatelessWidget {
                         salesOrgConfig,
                         state.vatTotal,
                       ),
-                      valueFlex: 2,
+                      valueFlex: 1,
                     )
                   : const SizedBox.shrink(),
               BalanceTextRow(
@@ -203,7 +203,7 @@ class _TotalSection extends StatelessWidget {
                   salesOrgConfig,
                   state.grandTotal,
                 ),
-                valueFlex: 2,
+                valueFlex: 1,
               ),
             ],
           ),

@@ -37,20 +37,20 @@ class CartMaterialItemTile extends StatelessWidget {
         TextEditingController(text: cartItem.quantity.toString());
 
     return Card(
-      child: Column(
-        children: [
-          CustomSlidable(
-            endActionPaneActions: [
-              CustomSlidableAction(
-                label: 'Delete',
-                icon: Icons.delete_outline,
-                onPressed: (context) => context
-                    .read<CartBloc>()
-                    .add(CartEvent.removeFromCart(item: cartItem)),
-              ),
-            ],
-            borderRadius: 8,
-            child: ListTile(
+      child: CustomSlidable(
+        endActionPaneActions: [
+          CustomSlidableAction(
+            label: 'Delete',
+            icon: Icons.delete_outline,
+            onPressed: (context) => context
+                .read<CartBloc>()
+                .add(CartEvent.removeFromCart(item: cartItem)),
+          ),
+        ],
+        borderRadius: 8,
+        child: Column(
+          children: [
+            ListTile(
               contentPadding: showCheckBox ? EdgeInsets.zero : null,
               key: Key(
                 'cartItem${cartItem.materialInfo.materialNumber}',
@@ -355,12 +355,15 @@ class CartMaterialItemTile extends StatelessWidget {
                                             color: ZPColors.kPrimaryColor,
                                           ),
                                           Flexible(
-                                            child: const Text(
+                                            child: Text(
                                               'Add Remarks',
-                                              style: TextStyle(
-                                                color: ZPColors.kPrimaryColor,
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText1
+                                                  ?.apply(
+                                                    color:
+                                                        ZPColors.kPrimaryColor,
+                                                  ),
                                             ).tr(),
                                           ),
                                         ],
@@ -395,15 +398,9 @@ class CartMaterialItemTile extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-          Column(
-            children: [
-              BounsTile(
-                cartItem: cartItem,
-              ),
-            ],
-          ),
-        ],
+            BounsTile(cartItem: cartItem),
+          ],
+        ),
       ),
     );
   }

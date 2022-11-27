@@ -272,32 +272,36 @@ class _OrderDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final enableOHPrice = context.read<EligibilityBloc>().state.enableOHPrice;
+
     return BlocBuilder<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
       builder: (context, state) {
         return CustomExpansionTile(
           titleText: 'Order Details'.tr(),
           items: [
-            BalanceTextRow(
-              keyText: 'Total sub value'.tr(),
-              valueText: _displayPrice(
-                context.read<SalesOrgBloc>().state.configs,
-                orderDetails.orderHistoryDetailsOrderHeader.orderValue,
+            if (enableOHPrice)
+              BalanceTextRow(
+                keyText: 'Total sub value'.tr(),
+                valueText: _displayPrice(
+                  context.read<SalesOrgBloc>().state.configs,
+                  orderDetails.orderHistoryDetailsOrderHeader.orderValue,
+                ),
+                valueTextLoading: state.isLoading,
+                keyFlex: 1,
+                valueFlex: 1,
               ),
-              valueTextLoading: state.isLoading,
-              keyFlex: 1,
-              valueFlex: 1,
-            ),
-            BalanceTextRow(
-              keyText: 'Grand Total'.tr(),
-              valueText: _displayPrice(
-                context.read<SalesOrgBloc>().state.configs,
-                context.read<CartBloc>().state.grandTotal,
+            if (enableOHPrice)
+              BalanceTextRow(
+                keyText: 'Grand Total'.tr(),
+                valueText: _displayPrice(
+                  context.read<SalesOrgBloc>().state.configs,
+                  context.read<CartBloc>().state.grandTotal,
+                ),
+                keyFlex: 1,
+                valueFlex: 1,
+                valueTextLoading: state.isLoading,
               ),
-              keyFlex: 1,
-              valueFlex: 1,
-              valueTextLoading: state.isLoading,
-            ),
             BalanceTextRow(
               keyText: 'Total Tax'.tr(),
               valueText: _displayPrice(

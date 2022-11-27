@@ -158,6 +158,7 @@ const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
   addOosMaterials: false,
   oosValue: 0,
   enableRemarks: false,
+  enableOHPrice: true,
 );
 
 const BundleDto _emptyBundleDto = BundleDto(

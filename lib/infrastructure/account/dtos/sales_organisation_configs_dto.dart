@@ -122,6 +122,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'enableRemarks', defaultValue: false)
     @HiveField(135, defaultValue: false)
         required bool enableRemarks,
+    @JsonKey(name: 'enableOHPrice', defaultValue: true)
+    @HiveField(136, defaultValue: true)
+        required bool enableOHPrice,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -164,6 +167,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       addOosMaterials: configs.addOosMaterials,
       oosValue: configs.oosValue.getOrCrash(),
       enableRemarks: configs.enableRemarks,
+      enableOHPrice: configs.enableOHPrice,
     );
   }
 
@@ -205,6 +209,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       addOosMaterials: addOosMaterials,
       oosValue: OosValue(oosValue),
       enableRemarks: enableRemarks,
+      enableOHPrice: enableOHPrice,
     );
   }
 

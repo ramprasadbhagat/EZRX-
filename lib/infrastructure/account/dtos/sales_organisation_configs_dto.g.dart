@@ -60,13 +60,14 @@ class SalesOrganisationConfigsDtoAdapter
       addOosMaterials: fields[133] == null ? false : fields[133] as bool,
       oosValue: fields[134] == null ? 0 : fields[134] as int,
       enableRemarks: fields[135] == null ? false : fields[135] as bool,
+      enableOHPrice: fields[136] == null ? true : fields[136] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_SalesOrganisationConfigsDto obj) {
     writer
-      ..writeByte(36)
+      ..writeByte(37)
       ..writeByte(100)
       ..write(obj.disableProcessingStatus)
       ..writeByte(101)
@@ -137,6 +138,8 @@ class SalesOrganisationConfigsDtoAdapter
       ..write(obj.oosValue)
       ..writeByte(135)
       ..write(obj.enableRemarks)
+      ..writeByte(136)
+      ..write(obj.enableOHPrice)
       ..writeByte(7)
       ..write(obj.principalList);
   }
@@ -200,6 +203,7 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       addOosMaterials: json['addOosMaterials'] as bool? ?? false,
       oosValue: json['oosValue'] as int? ?? 0,
       enableRemarks: json['enableRemarks'] as bool? ?? false,
+      enableOHPrice: json['enableOHPrice'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -242,4 +246,5 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'addOosMaterials': instance.addOosMaterials,
       'oosValue': instance.oosValue,
       'enableRemarks': instance.enableRemarks,
+      'enableOHPrice': instance.enableOHPrice,
     };

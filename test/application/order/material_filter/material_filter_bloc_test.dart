@@ -83,6 +83,7 @@ void main() {
     hideStockDisplay: true,
     oosValue: OosValue(1),
     enableRemarks: false,
+    enableOHPrice: true,
   );
 
   const fakeSelectedPrincipalFilterCategory = MaterialFilterType.principal;

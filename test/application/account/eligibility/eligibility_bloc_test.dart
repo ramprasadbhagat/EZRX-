@@ -70,6 +70,7 @@ void main() {
     hideStockDisplay: false,
     oosValue: OosValue(0),
     enableRemarks: false,
+    enableOHPrice: true,
   );
 
   group('Eligibility Bloc', () {

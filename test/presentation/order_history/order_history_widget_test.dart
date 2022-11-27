@@ -3,6 +3,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -61,6 +62,9 @@ class OrderHistoryStatusByFilterBloc extends MockBloc<
         OrderHistoryFilterByStatusEvent, OrderHistoryFilterByStatusState>
     implements OrderHistoryFilterByStatusBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late GetIt locator;
@@ -76,6 +80,7 @@ void main() {
   late AppRouter autoRouterMock;
 
   late OrderHistory orderHistoryItem;
+  late EligibilityBlocMock eligibilityBlocMock;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -93,6 +98,7 @@ void main() {
     autoRouterMock = locator<AppRouter>();
     mockHTTPService = MockHTTPService();
     customerCodeBlocMock = CustomerCodeBlocMock();
+    eligibilityBlocMock = EligibilityBlocMock();
 
     locator.registerLazySingleton<HttpService>(
       () => mockHTTPService,
@@ -114,6 +120,8 @@ void main() {
         when(() => mockOrderHistoryFilterByStatusBloc.state)
             .thenReturn(OrderHistoryFilterByStatusState.initial());
         when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
+        when(() => eligibilityBlocMock.state)
+            .thenReturn(EligibilityState.initial());
       });
       StackRouterScope getWUT() {
         return WidgetUtils.getScopedWidget(
@@ -131,6 +139,8 @@ void main() {
             BlocProvider<OrderHistoryFilterByStatusBloc>(
                 create: (context) => mockOrderHistoryFilterByStatusBloc),
             BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
+            BlocProvider<EligibilityBloc>(
+                create: (context) => eligibilityBlocMock),
           ],
           child: Material(child: HistoryTab()),
         );

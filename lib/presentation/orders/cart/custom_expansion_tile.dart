@@ -167,7 +167,7 @@ class _ExpansionTileState extends State<ExpansionTile>
                 margin: const EdgeInsets.all(0),
                 decoration: const BoxDecoration(
                   border: Border(
-                    bottom: BorderSide(width: 2, color: ZPColors.kPrimaryColor),
+                    bottom: BorderSide(width: 2, color: ZPColors.black),
                   ),
                 ),
                 child: ListTile(
