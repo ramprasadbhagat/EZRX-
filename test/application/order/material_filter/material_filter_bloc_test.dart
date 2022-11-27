@@ -84,6 +84,7 @@ void main() {
     oosValue: OosValue(1),
     enableRemarks: false,
     enableOHPrice: true,
+    ponRequired: false,
   );
 
   const fakeSelectedPrincipalFilterCategory = MaterialFilterType.principal;

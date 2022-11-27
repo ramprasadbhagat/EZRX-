@@ -188,8 +188,9 @@ class _OrderIdByFilter extends StatelessWidget {
               ),
             ),
             border: const OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 1,
+              borderSide: BorderSide(width: 1.0),
+              borderRadius: BorderRadius.all(
+                Radius.circular(8.0),
               ),
             ),
             errorBorder: const OutlineInputBorder(
@@ -251,8 +252,9 @@ class _PoNumberFilter extends StatelessWidget {
               horizontal: 10.0,
             ),
             border: const OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 1,
+              borderSide: BorderSide(width: 1.0),
+              borderRadius: BorderRadius.all(
+                Radius.circular(8.0),
               ),
             ),
             labelText: 'PO Number'.tr(),
@@ -313,8 +315,9 @@ class _MaterialSearchByFilter extends StatelessWidget {
               horizontal: 10.0,
             ),
             border: const OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 1,
+              borderSide: BorderSide(width: 1.0),
+              borderRadius: BorderRadius.all(
+                Radius.circular(8.0),
               ),
             ),
             errorBorder: const OutlineInputBorder(
@@ -385,8 +388,9 @@ class _PrincipleSearchByFilter extends StatelessWidget {
               horizontal: 10.0,
             ),
             border: const OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 1,
+              borderSide: BorderSide(width: 1.0),
+              borderRadius: BorderRadius.all(
+                Radius.circular(8.0),
               ),
             ),
             labelText: 'Principal Code/Name'.tr(),
@@ -504,7 +508,12 @@ class __OrderFromDateByFilterState extends State<_OrderFromDateByFilter> {
                   width: 1.0,
                 ),
               ),
-              border: const OutlineInputBorder(),
+              border: const OutlineInputBorder(
+                borderSide: BorderSide(width: 1.0),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(8.0),
+                ),
+              ),
               suffixIcon: const Icon(
                 Icons.calendar_month,
               ),
@@ -589,9 +598,9 @@ class __OrderToDateByFilterState extends State<_OrderToDateByFilter> {
                 ),
               ),
               border: const OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: ZPColors.lightGray,
-                  width: 1.0,
+                borderSide: BorderSide(width: 1.0),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(8.0),
                 ),
               ),
               suffixIcon: const Icon(

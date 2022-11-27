@@ -75,6 +75,7 @@ void main() {
     oosValue: OosValue(0),
     enableRemarks: false,
     enableOHPrice: true,
+    ponRequired: false,
   );
 
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(

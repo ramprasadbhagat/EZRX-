@@ -8,4 +8,5 @@ class OrderSummaryEvent with _$OrderSummaryEvent {
   const factory OrderSummaryEvent.stepTapped({
     required int step,
   }) = _StepTapped;
+  const factory OrderSummaryEvent.submitOrder() = _SubmitOrder;
 }

@@ -33,15 +33,15 @@ class RemarksForm extends StatelessWidget {
               decoration: const InputDecoration(
                 label: Text('Remarks'),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: ZPColors.primary, width: 2.0),
+                  borderSide: BorderSide(color: ZPColors.primary, width: 1.0),
                   borderRadius: BorderRadius.all(
-                    Radius.circular(10.0),
+                    Radius.circular(8),
                   ),
                 ),
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: ZPColors.darkGray, width: 2.0),
+                  borderSide: BorderSide(width: 1.0),
                   borderRadius: BorderRadius.all(
-                    Radius.circular(10.0),
+                    Radius.circular(8.0),
                   ),
                 ),
               ),

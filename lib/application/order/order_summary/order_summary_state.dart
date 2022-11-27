@@ -8,11 +8,13 @@ class OrderSummaryState with _$OrderSummaryState {
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required int step,
     required int maxSteps,
+    required bool isSubmitting,
   }) = _OrderSummaryState;
 
   factory OrderSummaryState.initial() => OrderSummaryState(
         apiFailureOrSuccessOption: none(),
         step: 0,
         maxSteps: 5,
+        isSubmitting: false,
       );
 }

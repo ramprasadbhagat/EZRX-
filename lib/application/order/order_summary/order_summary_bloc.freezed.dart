@@ -22,6 +22,7 @@ mixin _$OrderSummaryEvent {
     required TResult Function() stepContinue,
     required TResult Function() stepCancel,
     required TResult Function(int step) stepTapped,
+    required TResult Function() submitOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$OrderSummaryEvent {
     TResult? Function()? stepContinue,
     TResult? Function()? stepCancel,
     TResult? Function(int step)? stepTapped,
+    TResult? Function()? submitOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$OrderSummaryEvent {
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
     TResult Function(int step)? stepTapped,
+    TResult Function()? submitOrder,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +50,7 @@ mixin _$OrderSummaryEvent {
     required TResult Function(_StepContinue value) stepContinue,
     required TResult Function(_StepCancel value) stepCancel,
     required TResult Function(_StepTapped value) stepTapped,
+    required TResult Function(_SubmitOrder value) submitOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +59,7 @@ mixin _$OrderSummaryEvent {
     TResult? Function(_StepContinue value)? stepContinue,
     TResult? Function(_StepCancel value)? stepCancel,
     TResult? Function(_StepTapped value)? stepTapped,
+    TResult? Function(_SubmitOrder value)? submitOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +68,7 @@ mixin _$OrderSummaryEvent {
     TResult Function(_StepContinue value)? stepContinue,
     TResult Function(_StepCancel value)? stepCancel,
     TResult Function(_StepTapped value)? stepTapped,
+    TResult Function(_SubmitOrder value)? submitOrder,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -128,6 +134,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function() stepContinue,
     required TResult Function() stepCancel,
     required TResult Function(int step) stepTapped,
+    required TResult Function() submitOrder,
   }) {
     return initialized();
   }
@@ -139,6 +146,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function()? stepContinue,
     TResult? Function()? stepCancel,
     TResult? Function(int step)? stepTapped,
+    TResult? Function()? submitOrder,
   }) {
     return initialized?.call();
   }
@@ -150,6 +158,7 @@ class _$_Initialized implements _Initialized {
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
     TResult Function(int step)? stepTapped,
+    TResult Function()? submitOrder,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -165,6 +174,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_StepContinue value) stepContinue,
     required TResult Function(_StepCancel value) stepCancel,
     required TResult Function(_StepTapped value) stepTapped,
+    required TResult Function(_SubmitOrder value) submitOrder,
   }) {
     return initialized(this);
   }
@@ -176,6 +186,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_StepContinue value)? stepContinue,
     TResult? Function(_StepCancel value)? stepCancel,
     TResult? Function(_StepTapped value)? stepTapped,
+    TResult? Function(_SubmitOrder value)? submitOrder,
   }) {
     return initialized?.call(this);
   }
@@ -187,6 +198,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_StepContinue value)? stepContinue,
     TResult Function(_StepCancel value)? stepCancel,
     TResult Function(_StepTapped value)? stepTapped,
+    TResult Function(_SubmitOrder value)? submitOrder,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -242,6 +254,7 @@ class _$_StepContinue implements _StepContinue {
     required TResult Function() stepContinue,
     required TResult Function() stepCancel,
     required TResult Function(int step) stepTapped,
+    required TResult Function() submitOrder,
   }) {
     return stepContinue();
   }
@@ -253,6 +266,7 @@ class _$_StepContinue implements _StepContinue {
     TResult? Function()? stepContinue,
     TResult? Function()? stepCancel,
     TResult? Function(int step)? stepTapped,
+    TResult? Function()? submitOrder,
   }) {
     return stepContinue?.call();
   }
@@ -264,6 +278,7 @@ class _$_StepContinue implements _StepContinue {
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
     TResult Function(int step)? stepTapped,
+    TResult Function()? submitOrder,
     required TResult orElse(),
   }) {
     if (stepContinue != null) {
@@ -279,6 +294,7 @@ class _$_StepContinue implements _StepContinue {
     required TResult Function(_StepContinue value) stepContinue,
     required TResult Function(_StepCancel value) stepCancel,
     required TResult Function(_StepTapped value) stepTapped,
+    required TResult Function(_SubmitOrder value) submitOrder,
   }) {
     return stepContinue(this);
   }
@@ -290,6 +306,7 @@ class _$_StepContinue implements _StepContinue {
     TResult? Function(_StepContinue value)? stepContinue,
     TResult? Function(_StepCancel value)? stepCancel,
     TResult? Function(_StepTapped value)? stepTapped,
+    TResult? Function(_SubmitOrder value)? submitOrder,
   }) {
     return stepContinue?.call(this);
   }
@@ -301,6 +318,7 @@ class _$_StepContinue implements _StepContinue {
     TResult Function(_StepContinue value)? stepContinue,
     TResult Function(_StepCancel value)? stepCancel,
     TResult Function(_StepTapped value)? stepTapped,
+    TResult Function(_SubmitOrder value)? submitOrder,
     required TResult orElse(),
   }) {
     if (stepContinue != null) {
@@ -356,6 +374,7 @@ class _$_StepCancel implements _StepCancel {
     required TResult Function() stepContinue,
     required TResult Function() stepCancel,
     required TResult Function(int step) stepTapped,
+    required TResult Function() submitOrder,
   }) {
     return stepCancel();
   }
@@ -367,6 +386,7 @@ class _$_StepCancel implements _StepCancel {
     TResult? Function()? stepContinue,
     TResult? Function()? stepCancel,
     TResult? Function(int step)? stepTapped,
+    TResult? Function()? submitOrder,
   }) {
     return stepCancel?.call();
   }
@@ -378,6 +398,7 @@ class _$_StepCancel implements _StepCancel {
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
     TResult Function(int step)? stepTapped,
+    TResult Function()? submitOrder,
     required TResult orElse(),
   }) {
     if (stepCancel != null) {
@@ -393,6 +414,7 @@ class _$_StepCancel implements _StepCancel {
     required TResult Function(_StepContinue value) stepContinue,
     required TResult Function(_StepCancel value) stepCancel,
     required TResult Function(_StepTapped value) stepTapped,
+    required TResult Function(_SubmitOrder value) submitOrder,
   }) {
     return stepCancel(this);
   }
@@ -404,6 +426,7 @@ class _$_StepCancel implements _StepCancel {
     TResult? Function(_StepContinue value)? stepContinue,
     TResult? Function(_StepCancel value)? stepCancel,
     TResult? Function(_StepTapped value)? stepTapped,
+    TResult? Function(_SubmitOrder value)? submitOrder,
   }) {
     return stepCancel?.call(this);
   }
@@ -415,6 +438,7 @@ class _$_StepCancel implements _StepCancel {
     TResult Function(_StepContinue value)? stepContinue,
     TResult Function(_StepCancel value)? stepCancel,
     TResult Function(_StepTapped value)? stepTapped,
+    TResult Function(_SubmitOrder value)? submitOrder,
     required TResult orElse(),
   }) {
     if (stepCancel != null) {
@@ -496,6 +520,7 @@ class _$_StepTapped implements _StepTapped {
     required TResult Function() stepContinue,
     required TResult Function() stepCancel,
     required TResult Function(int step) stepTapped,
+    required TResult Function() submitOrder,
   }) {
     return stepTapped(step);
   }
@@ -507,6 +532,7 @@ class _$_StepTapped implements _StepTapped {
     TResult? Function()? stepContinue,
     TResult? Function()? stepCancel,
     TResult? Function(int step)? stepTapped,
+    TResult? Function()? submitOrder,
   }) {
     return stepTapped?.call(step);
   }
@@ -518,6 +544,7 @@ class _$_StepTapped implements _StepTapped {
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
     TResult Function(int step)? stepTapped,
+    TResult Function()? submitOrder,
     required TResult orElse(),
   }) {
     if (stepTapped != null) {
@@ -533,6 +560,7 @@ class _$_StepTapped implements _StepTapped {
     required TResult Function(_StepContinue value) stepContinue,
     required TResult Function(_StepCancel value) stepCancel,
     required TResult Function(_StepTapped value) stepTapped,
+    required TResult Function(_SubmitOrder value) submitOrder,
   }) {
     return stepTapped(this);
   }
@@ -544,6 +572,7 @@ class _$_StepTapped implements _StepTapped {
     TResult? Function(_StepContinue value)? stepContinue,
     TResult? Function(_StepCancel value)? stepCancel,
     TResult? Function(_StepTapped value)? stepTapped,
+    TResult? Function(_SubmitOrder value)? submitOrder,
   }) {
     return stepTapped?.call(this);
   }
@@ -555,6 +584,7 @@ class _$_StepTapped implements _StepTapped {
     TResult Function(_StepContinue value)? stepContinue,
     TResult Function(_StepCancel value)? stepCancel,
     TResult Function(_StepTapped value)? stepTapped,
+    TResult Function(_SubmitOrder value)? submitOrder,
     required TResult orElse(),
   }) {
     if (stepTapped != null) {
@@ -574,11 +604,132 @@ abstract class _StepTapped implements OrderSummaryEvent {
 }
 
 /// @nodoc
+abstract class _$$_SubmitOrderCopyWith<$Res> {
+  factory _$$_SubmitOrderCopyWith(
+          _$_SubmitOrder value, $Res Function(_$_SubmitOrder) then) =
+      __$$_SubmitOrderCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_SubmitOrderCopyWithImpl<$Res>
+    extends _$OrderSummaryEventCopyWithImpl<$Res, _$_SubmitOrder>
+    implements _$$_SubmitOrderCopyWith<$Res> {
+  __$$_SubmitOrderCopyWithImpl(
+      _$_SubmitOrder _value, $Res Function(_$_SubmitOrder) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_SubmitOrder implements _SubmitOrder {
+  const _$_SubmitOrder();
+
+  @override
+  String toString() {
+    return 'OrderSummaryEvent.submitOrder()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_SubmitOrder);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function() stepContinue,
+    required TResult Function() stepCancel,
+    required TResult Function(int step) stepTapped,
+    required TResult Function() submitOrder,
+  }) {
+    return submitOrder();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function()? stepContinue,
+    TResult? Function()? stepCancel,
+    TResult? Function(int step)? stepTapped,
+    TResult? Function()? submitOrder,
+  }) {
+    return submitOrder?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function()? stepContinue,
+    TResult Function()? stepCancel,
+    TResult Function(int step)? stepTapped,
+    TResult Function()? submitOrder,
+    required TResult orElse(),
+  }) {
+    if (submitOrder != null) {
+      return submitOrder();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_StepContinue value) stepContinue,
+    required TResult Function(_StepCancel value) stepCancel,
+    required TResult Function(_StepTapped value) stepTapped,
+    required TResult Function(_SubmitOrder value) submitOrder,
+  }) {
+    return submitOrder(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_StepContinue value)? stepContinue,
+    TResult? Function(_StepCancel value)? stepCancel,
+    TResult? Function(_StepTapped value)? stepTapped,
+    TResult? Function(_SubmitOrder value)? submitOrder,
+  }) {
+    return submitOrder?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_StepContinue value)? stepContinue,
+    TResult Function(_StepCancel value)? stepCancel,
+    TResult Function(_StepTapped value)? stepTapped,
+    TResult Function(_SubmitOrder value)? submitOrder,
+    required TResult orElse(),
+  }) {
+    if (submitOrder != null) {
+      return submitOrder(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SubmitOrder implements OrderSummaryEvent {
+  const factory _SubmitOrder() = _$_SubmitOrder;
+}
+
+/// @nodoc
 mixin _$OrderSummaryState {
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
   int get step => throw _privateConstructorUsedError;
   int get maxSteps => throw _privateConstructorUsedError;
+  bool get isSubmitting => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderSummaryStateCopyWith<OrderSummaryState> get copyWith =>
@@ -594,7 +745,8 @@ abstract class $OrderSummaryStateCopyWith<$Res> {
   $Res call(
       {Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       int step,
-      int maxSteps});
+      int maxSteps,
+      bool isSubmitting});
 }
 
 /// @nodoc
@@ -613,6 +765,7 @@ class _$OrderSummaryStateCopyWithImpl<$Res, $Val extends OrderSummaryState>
     Object? apiFailureOrSuccessOption = null,
     Object? step = null,
     Object? maxSteps = null,
+    Object? isSubmitting = null,
   }) {
     return _then(_value.copyWith(
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
@@ -627,6 +780,10 @@ class _$OrderSummaryStateCopyWithImpl<$Res, $Val extends OrderSummaryState>
           ? _value.maxSteps
           : maxSteps // ignore: cast_nullable_to_non_nullable
               as int,
+      isSubmitting: null == isSubmitting
+          ? _value.isSubmitting
+          : isSubmitting // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -642,7 +799,8 @@ abstract class _$$_OrderSummaryStateCopyWith<$Res>
   $Res call(
       {Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       int step,
-      int maxSteps});
+      int maxSteps,
+      bool isSubmitting});
 }
 
 /// @nodoc
@@ -659,6 +817,7 @@ class __$$_OrderSummaryStateCopyWithImpl<$Res>
     Object? apiFailureOrSuccessOption = null,
     Object? step = null,
     Object? maxSteps = null,
+    Object? isSubmitting = null,
   }) {
     return _then(_$_OrderSummaryState(
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
@@ -673,6 +832,10 @@ class __$$_OrderSummaryStateCopyWithImpl<$Res>
           ? _value.maxSteps
           : maxSteps // ignore: cast_nullable_to_non_nullable
               as int,
+      isSubmitting: null == isSubmitting
+          ? _value.isSubmitting
+          : isSubmitting // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -683,7 +846,8 @@ class _$_OrderSummaryState extends _OrderSummaryState {
   const _$_OrderSummaryState(
       {required this.apiFailureOrSuccessOption,
       required this.step,
-      required this.maxSteps})
+      required this.maxSteps,
+      required this.isSubmitting})
       : super._();
 
   @override
@@ -692,10 +856,12 @@ class _$_OrderSummaryState extends _OrderSummaryState {
   final int step;
   @override
   final int maxSteps;
+  @override
+  final bool isSubmitting;
 
   @override
   String toString() {
-    return 'OrderSummaryState(apiFailureOrSuccessOption: $apiFailureOrSuccessOption, step: $step, maxSteps: $maxSteps)';
+    return 'OrderSummaryState(apiFailureOrSuccessOption: $apiFailureOrSuccessOption, step: $step, maxSteps: $maxSteps, isSubmitting: $isSubmitting)';
   }
 
   @override
@@ -708,12 +874,14 @@ class _$_OrderSummaryState extends _OrderSummaryState {
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption) &&
             (identical(other.step, step) || other.step == step) &&
             (identical(other.maxSteps, maxSteps) ||
-                other.maxSteps == maxSteps));
+                other.maxSteps == maxSteps) &&
+            (identical(other.isSubmitting, isSubmitting) ||
+                other.isSubmitting == isSubmitting));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, apiFailureOrSuccessOption, step, maxSteps);
+  int get hashCode => Object.hash(
+      runtimeType, apiFailureOrSuccessOption, step, maxSteps, isSubmitting);
 
   @JsonKey(ignore: true)
   @override
@@ -728,7 +896,8 @@ abstract class _OrderSummaryState extends OrderSummaryState {
       {required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
       required final int step,
-      required final int maxSteps}) = _$_OrderSummaryState;
+      required final int maxSteps,
+      required final bool isSubmitting}) = _$_OrderSummaryState;
   const _OrderSummaryState._() : super._();
 
   @override
@@ -737,6 +906,8 @@ abstract class _OrderSummaryState extends OrderSummaryState {
   int get step;
   @override
   int get maxSteps;
+  @override
+  bool get isSubmitting;
   @override
   @JsonKey(ignore: true)
   _$$_OrderSummaryStateCopyWith<_$_OrderSummaryState> get copyWith =>

@@ -133,6 +133,9 @@ mixin _$SalesOrganisationConfigsDto {
   @JsonKey(name: 'enableOHPrice', defaultValue: true)
   @HiveField(136, defaultValue: true)
   bool get enableOHPrice => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ponRequired', defaultValue: false)
+  @HiveField(137, defaultValue: false)
+  bool get ponRequired => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -260,7 +263,10 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
           bool enableRemarks,
       @JsonKey(name: 'enableOHPrice', defaultValue: true)
       @HiveField(136, defaultValue: true)
-          bool enableOHPrice});
+          bool enableOHPrice,
+      @JsonKey(name: 'ponRequired', defaultValue: false)
+      @HiveField(137, defaultValue: false)
+          bool ponRequired});
 }
 
 /// @nodoc
@@ -314,6 +320,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
     Object? oosValue = null,
     Object? enableRemarks = null,
     Object? enableOHPrice = null,
+    Object? ponRequired = null,
   }) {
     return _then(_value.copyWith(
       disableProcessingStatus: null == disableProcessingStatus
@@ -464,6 +471,10 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
           ? _value.enableOHPrice
           : enableOHPrice // ignore: cast_nullable_to_non_nullable
               as bool,
+      ponRequired: null == ponRequired
+          ? _value.ponRequired
+          : ponRequired // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -589,7 +600,10 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
           bool enableRemarks,
       @JsonKey(name: 'enableOHPrice', defaultValue: true)
       @HiveField(136, defaultValue: true)
-          bool enableOHPrice});
+          bool enableOHPrice,
+      @JsonKey(name: 'ponRequired', defaultValue: false)
+      @HiveField(137, defaultValue: false)
+          bool ponRequired});
 }
 
 /// @nodoc
@@ -642,6 +656,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? oosValue = null,
     Object? enableRemarks = null,
     Object? enableOHPrice = null,
+    Object? ponRequired = null,
   }) {
     return _then(_$_SalesOrganisationConfigsDto(
       disableProcessingStatus: null == disableProcessingStatus
@@ -792,6 +807,10 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.enableOHPrice
           : enableOHPrice // ignore: cast_nullable_to_non_nullable
               as bool,
+      ponRequired: null == ponRequired
+          ? _value.ponRequired
+          : ponRequired // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -912,7 +931,10 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
           required this.enableRemarks,
       @JsonKey(name: 'enableOHPrice', defaultValue: true)
       @HiveField(136, defaultValue: true)
-          required this.enableOHPrice})
+          required this.enableOHPrice,
+      @JsonKey(name: 'ponRequired', defaultValue: false)
+      @HiveField(137, defaultValue: false)
+          required this.ponRequired})
       : _principalList = principalList,
         super._();
 
@@ -1073,10 +1095,14 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @JsonKey(name: 'enableOHPrice', defaultValue: true)
   @HiveField(136, defaultValue: true)
   final bool enableOHPrice;
+  @override
+  @JsonKey(name: 'ponRequired', defaultValue: false)
+  @HiveField(137, defaultValue: false)
+  final bool ponRequired;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, ponRequired: $ponRequired)';
   }
 
   @override
@@ -1149,7 +1175,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
             (identical(other.addOosMaterials, addOosMaterials) || other.addOosMaterials == addOosMaterials) &&
             (identical(other.oosValue, oosValue) || other.oosValue == oosValue) &&
             (identical(other.enableRemarks, enableRemarks) || other.enableRemarks == enableRemarks) &&
-            (identical(other.enableOHPrice, enableOHPrice) || other.enableOHPrice == enableOHPrice));
+            (identical(other.enableOHPrice, enableOHPrice) || other.enableOHPrice == enableOHPrice) &&
+            (identical(other.ponRequired, ponRequired) || other.ponRequired == ponRequired));
   }
 
   @JsonKey(ignore: true)
@@ -1192,7 +1219,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
         addOosMaterials,
         oosValue,
         enableRemarks,
-        enableOHPrice
+        enableOHPrice,
+        ponRequired
       ]);
 
   @JsonKey(ignore: true)
@@ -1324,7 +1352,10 @@ abstract class _SalesOrganisationConfigsDto
           required final bool enableRemarks,
       @JsonKey(name: 'enableOHPrice', defaultValue: true)
       @HiveField(136, defaultValue: true)
-          required final bool enableOHPrice}) = _$_SalesOrganisationConfigsDto;
+          required final bool enableOHPrice,
+      @JsonKey(name: 'ponRequired', defaultValue: false)
+      @HiveField(137, defaultValue: false)
+          required final bool ponRequired}) = _$_SalesOrganisationConfigsDto;
   const _SalesOrganisationConfigsDto._() : super._();
 
   factory _SalesOrganisationConfigsDto.fromJson(Map<String, dynamic> json) =
@@ -1479,6 +1510,10 @@ abstract class _SalesOrganisationConfigsDto
   @JsonKey(name: 'enableOHPrice', defaultValue: true)
   @HiveField(136, defaultValue: true)
   bool get enableOHPrice;
+  @override
+  @JsonKey(name: 'ponRequired', defaultValue: false)
+  @HiveField(137, defaultValue: false)
+  bool get ponRequired;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsDtoCopyWith<_$_SalesOrganisationConfigsDto>

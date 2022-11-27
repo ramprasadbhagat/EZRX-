@@ -125,6 +125,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'enableOHPrice', defaultValue: true)
     @HiveField(136, defaultValue: true)
         required bool enableOHPrice,
+    @JsonKey(name: 'ponRequired', defaultValue: false)
+    @HiveField(137, defaultValue: false)
+        required bool ponRequired,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -168,6 +171,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       oosValue: configs.oosValue.getOrCrash(),
       enableRemarks: configs.enableRemarks,
       enableOHPrice: configs.enableOHPrice,
+      ponRequired: configs.ponRequired,
     );
   }
 
@@ -210,6 +214,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       oosValue: OosValue(oosValue),
       enableRemarks: enableRemarks,
       enableOHPrice: enableOHPrice,
+      ponRequired: ponRequired,
     );
   }
 

@@ -33,12 +33,13 @@ class SaveTemplateTextField extends StatelessWidget {
                 decoration: InputDecoration(
                   labelText: 'Template name'.tr(),
                   border: const OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: ZPColors.darkGray, width: 2.0),
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                    borderSide: BorderSide(width: 1.0),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(8.0),
+                    ),
                   ),
                   focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: ZPColors.primary, width: 2.0),
+                    borderSide: BorderSide(color: ZPColors.primary, width: 1.0),
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                   ),
                 ),

@@ -164,9 +164,50 @@ class _Stepper extends StatelessWidget {
     data[lavel] = value;
   }
 
+  String? _validateAdditionalInformation(
+    String value,
+    AdditionalInfoLabelList lavel,
+    BuildContext context,
+  ) {
+    final salesOrganisationConfig = context.read<SalesOrgBloc>().state.configs;
+    if (AdditionalInfoLabelList.customerPoReference == lavel &&
+        salesOrganisationConfig.ponRequired &&
+        value.isEmpty) {
+      return 'Customer PO Reference Required'.tr();
+    }
+
+    return null;
+  }
+
+  bool _performFormAction() {
+    var isValid = false;
+    if (_additionalDetailsFormKey.currentState!.validate()) {
+      _additionalDetailsFormKey.currentState!.save();
+      isValid = true;
+    }
+
+    return isValid;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<OrderSummaryBloc, OrderSummaryState>(
+    return BlocConsumer<OrderSummaryBloc, OrderSummaryState>(
+      listenWhen: (previous, current) => previous != current,
+      listener: (context, orderSummaryState) {
+        orderSummaryState.apiFailureOrSuccessOption.fold(
+          () {},
+          (either) => either.fold(
+            (failure) {
+              final failureMessage = failure.toString();
+              showSnackBar(
+                context: context,
+                message: failureMessage.tr(),
+              );
+            },
+            (_) {},
+          ),
+        );
+      },
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         return Stepper(
@@ -183,14 +224,22 @@ class _Stepper extends StatelessWidget {
                         : 'continueButtonKey'),
                     onPressed: () {
                       if (details.currentStep == state.maxSteps) {
-                        //code to submit
+                        _performFormAction()
+                            ? context.read<OrderSummaryBloc>().add(
+                                  const OrderSummaryEvent.submitOrder(),
+                                )
+                            : context.read<OrderSummaryBloc>().add(
+                                  const OrderSummaryEvent.stepTapped(step: 3),
+                                );
                       } else {
-                        if (details.currentStep == 3) {
-                          _additionalDetailsFormKey.currentState?.save();
-                        }
-                        context
-                            .read<OrderSummaryBloc>()
-                            .add(const OrderSummaryEvent.stepContinue());
+                        final shouldStepContinue = details.currentStep == 3
+                            ? _performFormAction()
+                            : true;
+                        shouldStepContinue
+                            ? context
+                                .read<OrderSummaryBloc>()
+                                .add(const OrderSummaryEvent.stepContinue())
+                            : null;
                       }
                     },
                     child: details.currentStep == state.maxSteps
@@ -273,6 +322,7 @@ class _Stepper extends StatelessWidget {
               title: Text('Additional Information'.tr()),
               content: _AdditionalInformationStep(
                 saveData: _saveAdditionalInformation,
+                validateData: _validateAdditionalInformation,
               ),
             ),
             Step(
@@ -369,11 +419,20 @@ class _CustomerDetailsStep extends StatelessWidget {
 
 class _AdditionalInformationStep extends StatelessWidget {
   final Function saveData;
-
+  final Function validateData;
   const _AdditionalInformationStep({
     required this.saveData,
+    required this.validateData,
     Key? key,
   }) : super(key: key);
+
+  String? emptyValidator(
+    String value,
+    AdditionalInfoLabelList lavel,
+    BuildContext context,
+  ) {
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -392,6 +451,10 @@ class _AdditionalInformationStep extends StatelessWidget {
                 maxLength: 35,
                 saveData: saveData,
                 label: AdditionalInfoLabelList.customerPoReference,
+                validateData:
+                    context.read<SalesOrgBloc>().state.configs.ponRequired
+                        ? validateData
+                        : emptyValidator,
               ),
               context
                       .read<SalesOrgBloc>()
@@ -404,6 +467,7 @@ class _AdditionalInformationStep extends StatelessWidget {
                       maxLength: 132,
                       saveData: saveData,
                       label: AdditionalInfoLabelList.specialInstruction,
+                      validateData: emptyValidator,
                     )
                   : const SizedBox.shrink(),
               context.read<SalesOrgBloc>().state.configs.enableReferenceNote
@@ -413,6 +477,7 @@ class _AdditionalInformationStep extends StatelessWidget {
                       keyboardType: TextInputType.multiline,
                       saveData: saveData,
                       label: AdditionalInfoLabelList.referenceNote,
+                      validateData: emptyValidator,
                     )
                   : const SizedBox.shrink(),
               context
@@ -426,6 +491,7 @@ class _AdditionalInformationStep extends StatelessWidget {
                       maxLength: 10,
                       saveData: saveData,
                       label: AdditionalInfoLabelList.collectiveNumber,
+                      validateData: emptyValidator,
                     )
                   : const SizedBox.shrink(),
               context.read<SalesOrgBloc>().state.configs.enableMobileNumber
@@ -434,6 +500,7 @@ class _AdditionalInformationStep extends StatelessWidget {
                       maxLength: 50,
                       saveData: saveData,
                       label: AdditionalInfoLabelList.contactPerson,
+                      validateData: emptyValidator,
                     )
                   : const SizedBox.shrink(),
               context.read<SalesOrgBloc>().state.configs.enableMobileNumber
@@ -443,6 +510,7 @@ class _AdditionalInformationStep extends StatelessWidget {
                       keyboardType: TextInputType.phone,
                       saveData: saveData,
                       label: AdditionalInfoLabelList.contactNumber,
+                      validateData: emptyValidator,
                     )
                   : const SizedBox.shrink(),
               context.read<SalesOrgBloc>().state.configs.enableFutureDeliveryDay
@@ -572,13 +640,14 @@ class _TextFormField extends StatelessWidget {
   final int maxLength;
   final TextInputType keyboardType;
   final Function saveData;
-
+  final Function validateData;
   const _TextFormField({
     required this.labelText,
     required this.label,
     required this.maxLength,
     this.keyboardType = TextInputType.text,
     required this.saveData,
+    required this.validateData,
     Key? key,
   }) : super(key: key);
 
@@ -591,6 +660,9 @@ class _TextFormField extends StatelessWidget {
           initialValue: data[label],
           maxLength: maxLength,
           maxLines: keyboardType == TextInputType.multiline ? null : 1,
+          validator: (value) {
+            return validateData(value, label, context);
+          },
           onSaved: (value) {
             saveData(value, label);
           },
@@ -598,15 +670,15 @@ class _TextFormField extends StatelessWidget {
             labelText: labelText.tr(),
             // labelStyle: const TextStyle(fontSize: 12.0),
             focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: ZPColors.primary, width: 2.0),
+              borderSide: BorderSide(color: ZPColors.primary, width: 1.0),
               borderRadius: BorderRadius.all(
-                Radius.circular(10.0),
+                Radius.circular(8),
               ),
             ),
             border: const OutlineInputBorder(
-              borderSide: BorderSide(color: ZPColors.darkGray, width: 2.0),
+              borderSide: BorderSide(width: 1.0),
               borderRadius: BorderRadius.all(
-                Radius.circular(10.0),
+                Radius.circular(8.0),
               ),
             ),
           ),
@@ -676,15 +748,15 @@ class _PaymentTermState extends State<_PaymentTerm> {
             labelText: 'Select Payment Term'.tr(),
             // labelStyle: const TextStyle(fontSize: 12.0),
             focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: ZPColors.primary, width: 2.0),
+              borderSide: BorderSide(color: ZPColors.primary, width: 1.0),
               borderRadius: BorderRadius.all(
-                Radius.circular(10.0),
+                Radius.circular(8),
               ),
             ),
             border: const OutlineInputBorder(
-              borderSide: BorderSide(color: ZPColors.darkGray, width: 2.0),
+              borderSide: BorderSide(width: 1.0),
               borderRadius: BorderRadius.all(
-                Radius.circular(10.0),
+                Radius.circular(8.0),
               ),
             ),
             suffixIcon: const Icon(
@@ -757,15 +829,15 @@ class _DatePickerFieldState extends State<_DatePickerField> {
                   Icons.calendar_month,
                 ),
                 focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: ZPColors.primary, width: 2.0),
+                  borderSide: BorderSide(color: ZPColors.primary, width: 1.0),
                   borderRadius: BorderRadius.all(
-                    Radius.circular(10.0),
+                    Radius.circular(8),
                   ),
                 ),
                 border: const OutlineInputBorder(
-                  borderSide: BorderSide(color: ZPColors.darkGray, width: 2.0),
+                  borderSide: BorderSide(width: 1.0),
                   borderRadius: BorderRadius.all(
-                    Radius.circular(10.0),
+                    Radius.circular(8.0),
                   ),
                 ),
               ),

@@ -71,6 +71,7 @@ void main() {
     oosValue: OosValue(0),
     enableRemarks: false,
     enableOHPrice: true,
+    ponRequired: false,
   );
 
   group('Eligibility Bloc', () {

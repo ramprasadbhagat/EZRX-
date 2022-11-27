@@ -14,7 +14,7 @@ class InvalidMaterialNumberDialog {
           return AlertDialog(
             title: const Text('Info').tr(),
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
             content: SingleChildScrollView(
               child: ListBody(

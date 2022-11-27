@@ -45,6 +45,15 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
           step: value.step,
         ));
       },
+      submitOrder: (value) async {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isSubmitting: false,
+          ),
+        );
+        //TODO: Need to complete
+      },
     );
   }
 }

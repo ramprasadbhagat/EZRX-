@@ -169,7 +169,7 @@ class _ListContent extends StatelessWidget {
         },
         // leading: ClipRRect(
         //   borderRadius: const BorderRadius.all(
-        //     Radius.circular(10.0),
+        //     Radius.circular(8),
         //   ),
         //   child: SvgPicture.asset(
         //     _getImage(),
