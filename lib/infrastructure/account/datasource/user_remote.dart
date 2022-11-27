@@ -62,8 +62,9 @@ class UserRemoteDataSource {
             'input': {
               'where': {'id': int.parse(userId)},
               'data': {
-                'acceptTC': true,
-                'acceptTCTimestamp': DateTime.now().toUtc().toIso8601String(),
+                'acceptPrivacyPolicy': true,
+                'acceptPrivacyPolicyTime': DateTime.now().toUtc().toIso8601String(),
+                'privacyPolicyAcceptedPlatform':'Mobile',
               },
             },
           },

@@ -121,14 +121,6 @@ class RoleType extends ValueObject<String> {
     return roleOrderType(value.getOrElse(() => ''));
   }
 
-  bool get isAupAudience {
-    return roleIsAupAudience(value.getOrElse(() => ''));
-  }
-
-  bool get isTcAudience {
-    return roleIsTcAudience(value.getOrElse(() => ''));
-  }
-
   bool get isClient {
     return loginUserType == 'client';
   }

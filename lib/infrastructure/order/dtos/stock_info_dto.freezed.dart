@@ -32,9 +32,9 @@ mixin _$StockInfoDto {
   @JsonKey(name: 'InStock')
   @HiveField(3, defaultValue: '')
   String get inStock => throw _privateConstructorUsedError;
-  @JsonKey(name: 'SalesDistrict')
+  @JsonKey(name: 'SalesDistrict', defaultValue: '')
   @HiveField(4, defaultValue: '')
-  String? get salesDistrict => throw _privateConstructorUsedError;
+  String get salesDistrict => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -61,9 +61,9 @@ abstract class $StockInfoDtoCopyWith<$Res> {
       @JsonKey(name: 'InStock')
       @HiveField(3, defaultValue: '')
           String inStock,
-      @JsonKey(name: 'SalesDistrict')
+      @JsonKey(name: 'SalesDistrict', defaultValue: '')
       @HiveField(4, defaultValue: '')
-          String? salesDistrict});
+          String salesDistrict});
 }
 
 /// @nodoc
@@ -83,7 +83,7 @@ class _$StockInfoDtoCopyWithImpl<$Res, $Val extends StockInfoDto>
     Object? expiryDate = null,
     Object? batch = null,
     Object? inStock = null,
-    Object? salesDistrict = freezed,
+    Object? salesDistrict = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -102,10 +102,10 @@ class _$StockInfoDtoCopyWithImpl<$Res, $Val extends StockInfoDto>
           ? _value.inStock
           : inStock // ignore: cast_nullable_to_non_nullable
               as String,
-      salesDistrict: freezed == salesDistrict
+      salesDistrict: null == salesDistrict
           ? _value.salesDistrict
           : salesDistrict // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ) as $Val);
   }
 }
@@ -131,9 +131,9 @@ abstract class _$$_StockInfoDtoCopyWith<$Res>
       @JsonKey(name: 'InStock')
       @HiveField(3, defaultValue: '')
           String inStock,
-      @JsonKey(name: 'SalesDistrict')
+      @JsonKey(name: 'SalesDistrict', defaultValue: '')
       @HiveField(4, defaultValue: '')
-          String? salesDistrict});
+          String salesDistrict});
 }
 
 /// @nodoc
@@ -151,7 +151,7 @@ class __$$_StockInfoDtoCopyWithImpl<$Res>
     Object? expiryDate = null,
     Object? batch = null,
     Object? inStock = null,
-    Object? salesDistrict = freezed,
+    Object? salesDistrict = null,
   }) {
     return _then(_$_StockInfoDto(
       materialNumber: null == materialNumber
@@ -170,10 +170,10 @@ class __$$_StockInfoDtoCopyWithImpl<$Res>
           ? _value.inStock
           : inStock // ignore: cast_nullable_to_non_nullable
               as String,
-      salesDistrict: freezed == salesDistrict
+      salesDistrict: null == salesDistrict
           ? _value.salesDistrict
           : salesDistrict // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -195,7 +195,7 @@ class _$_StockInfoDto extends _StockInfoDto {
       @JsonKey(name: 'InStock')
       @HiveField(3, defaultValue: '')
           required this.inStock,
-      @JsonKey(name: 'SalesDistrict')
+      @JsonKey(name: 'SalesDistrict', defaultValue: '')
       @HiveField(4, defaultValue: '')
           required this.salesDistrict})
       : super._();
@@ -220,9 +220,9 @@ class _$_StockInfoDto extends _StockInfoDto {
   @HiveField(3, defaultValue: '')
   final String inStock;
   @override
-  @JsonKey(name: 'SalesDistrict')
+  @JsonKey(name: 'SalesDistrict', defaultValue: '')
   @HiveField(4, defaultValue: '')
-  final String? salesDistrict;
+  final String salesDistrict;
 
   @override
   String toString() {
@@ -277,9 +277,9 @@ abstract class _StockInfoDto extends StockInfoDto {
       @JsonKey(name: 'InStock')
       @HiveField(3, defaultValue: '')
           required final String inStock,
-      @JsonKey(name: 'SalesDistrict')
+      @JsonKey(name: 'SalesDistrict', defaultValue: '')
       @HiveField(4, defaultValue: '')
-          required final String? salesDistrict}) = _$_StockInfoDto;
+          required final String salesDistrict}) = _$_StockInfoDto;
   const _StockInfoDto._() : super._();
 
   factory _StockInfoDto.fromJson(Map<String, dynamic> json) =
@@ -302,9 +302,9 @@ abstract class _StockInfoDto extends StockInfoDto {
   @HiveField(3, defaultValue: '')
   String get inStock;
   @override
-  @JsonKey(name: 'SalesDistrict')
+  @JsonKey(name: 'SalesDistrict', defaultValue: '')
   @HiveField(4, defaultValue: '')
-  String? get salesDistrict;
+  String get salesDistrict;
   @override
   @JsonKey(ignore: true)
   _$$_StockInfoDtoCopyWith<_$_StockInfoDto> get copyWith =>

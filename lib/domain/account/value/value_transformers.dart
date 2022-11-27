@@ -244,31 +244,6 @@ String roleOrderType(String roleType) {
 
 bool isZero(int value) => value == 0;
 
-// Is Acceptable Use Policy Audience
-bool roleIsAupAudience(String roleType) {
-  switch (roleType) {
-    case 'internal_sales_rep':
-    case 'external_sales_rep':
-    case 'root_admin':
-    case 'zp_admin':
-      return true;
-    default:
-      return false;
-  }
-}
-
-// Is TERMS OF USE Audience
-bool roleIsTcAudience(String roleType) {
-  switch (roleType) {
-    case 'client_admin':
-    case 'client_user':
-    case 'user':
-      return true;
-    default:
-      return false;
-  }
-}
-
 String currencySymbol(String currency) {
   switch (currency) {
     case 'twd':

@@ -89,14 +89,14 @@ class UserDto with _$UserDto {
           languagePreference: languagePreference,
         ),
         settingTc: SettingTc(
-          acceptPrivacyPolicy: false,
-          acceptPrivacyPolicyTime: DateTime.parse('1970-01-01 00:00:00'),
-          privacyPolicyAcceptedPlatform: '',
+          acceptPrivacyPolicy: acceptPrivacyPolicy,
+          acceptPrivacyPolicyTime: DateTime.parse(acceptPrivacyPolicyTime),
+          privacyPolicyAcceptedPlatform: privacyPolicyAcceptedPlatform,
         ),
         enableOrderType: enableOrderType,
       );
   }
-
+  
   factory UserDto.fromJson(Map<String, dynamic> json) =>
       _$UserDtoFromJson(json);
 }

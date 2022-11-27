@@ -32,6 +32,8 @@ class _PriceSheetState extends State<PriceSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final isVN = widget.item.salesOrgConfig.currency.isVN;
+
     return Padding(
       key: const Key('priceSheetKey'),
       padding: EdgeInsets.only(
@@ -48,189 +50,124 @@ class _PriceSheetState extends State<PriceSheet> {
               topRight: Radius.circular(40),
             ),
           ),
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(
-                  bottom: 0.0,
-                  top: 20.0,
-                  left: 5,
-                  right: 5,
-                ),
-                child: Column(
+          child: Padding(
+            padding: const EdgeInsets.only(
+              bottom: 10.0,
+              top: 20.0,
+              left: 5,
+              right: 5,
+            ),
+            child: ListView(
+              children: <Widget>[
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: Wrap(
-                        children: [
-                          Text(
-                            widget.item.materialInfo.materialDescription,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              color: ZPColors.darkGreen,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
+                    Center(
+                      child: Text(
+                        widget.item.materialInfo.materialDescription,
+                        style: Theme.of(context).textTheme.headline6?.apply(
+                              color: ZPColors.black,
                             ),
-                          ),
-                        ],
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          margin: const EdgeInsets.only(right: 2),
-                          child: Text(
-                            widget.item.salesOrgConfig.currency.code,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: ZPColors.darkGreen,
-                              fontFamily: 'Roboto',
+                    const SizedBox(height: 15),
+                    SizedBox(
+                      width: 150.0,
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          prefixText: isVN
+                              ? null
+                              : widget.item.salesOrgConfig.currency.code,
+                          suffixText: isVN
+                              ? widget.item.salesOrgConfig.currency.code
+                              : null,
+                          isDense: true,
+                          contentPadding: EdgeInsets.zero,
+                        ),
+                        style: Theme.of(context).textTheme.titleSmall,
+                        enableInteractiveSelection: false,
+                        keyboardType: const TextInputType.numberWithOptions(
+                          signed: false,
+                          decimal: true,
+                        ),
+                        textAlign: TextAlign.center,
+                        controller: TextEditingController.fromValue(
+                          TextEditingValue(
+                            text: (newPrice).toStringAsFixed(2),
+                            selection: TextSelection.collapsed(
+                              offset: (newPrice).toStringAsFixed(2).length,
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 2.0,
-                            vertical: 10.0,
-                          ),
-                          child: SizedBox(
-                            width: 120.0,
-                            height: 30.0,
-                            child: TextFormField(
-                              enableInteractiveSelection: false,
-                              keyboardType:
-                                  const TextInputType.numberWithOptions(
-                                signed: false,
-                                decimal: true,
-                              ),
-                              textAlign: TextAlign.center,
-                              controller: TextEditingController.fromValue(
-                                TextEditingValue(
-                                  text: (newPrice).toStringAsFixed(2),
-                                  selection: TextSelection.collapsed(
-                                    offset:
-                                        (newPrice).toStringAsFixed(2).length,
-                                  ),
-                                ),
-                              ),
-                              onChanged: (text) => {
-                                if (text.isNotEmpty)
-                                  {
-                                    newPrice = double.parse(text),
-                                  },
-                              },
-                              style: const TextStyle(
-                                fontSize: 18.0,
-                                color: ZPColors.black,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                        onChanged: (text) => {
+                          if (text.isNotEmpty)
+                            {
+                              newPrice = double.parse(text),
+                            },
+                        },
+                      ),
                     ),
+                    const SizedBox(height: 15),
                   ],
                 ),
-              ),
-              const Divider(
-                color: ZPColors.black,
-              ),
-              BlocConsumer<PriceOverrideBloc, PriceOverrideState>(
-                listenWhen: (
-                  previous,
-                  current,
-                ) =>
-                    previous.isFetching != current.isFetching,
-                listener: (
-                  context,
-                  state,
-                ) {
-                  state.apiFailureOrSuccessOption.fold(
-                    () {
-                      if (!state.isFetching) {
-                        context.read<CartBloc>().add(
-                              CartEvent.updateCart(
-                                item: state.cartItemList,
-                                materialNumber: widget
-                                    .item.materialInfo.materialNumber
-                                    .getOrCrash(),
-                              ),
-                            );
-
-                        Navigator.pop(context);
-                      }
-                    },
-                    (either) => either.fold(
-                      (failure) {
-                        final failureMessage = failure.failureMessage;
-
-                        showSnackBar(
-                          context: context,
-                          message: failureMessage.tr(),
-                        );
-                        Navigator.of(context).pop();
-                        if (failureMessage == 'authentication failed') {
-                          context.read<AuthBloc>().add(
-                                const AuthEvent.logout(),
+                BlocConsumer<PriceOverrideBloc, PriceOverrideState>(
+                  listenWhen: (previous, current) =>
+                      previous.isFetching != current.isFetching,
+                  listener: (context, state) {
+                    state.apiFailureOrSuccessOption.fold(
+                      () {
+                        if (!state.isFetching) {
+                          context.read<CartBloc>().add(
+                                CartEvent.updateCart(
+                                  item: state.cartItemList,
+                                  materialNumber: widget
+                                      .item.materialInfo.materialNumber
+                                      .getOrCrash(),
+                                ),
                               );
+
+                          Navigator.pop(context);
                         }
                       },
-                      (_) {},
-                    ),
-                  );
-                },
-                buildWhen: (previous, current) =>
-                    previous.isFetching != current.isFetching,
-                builder: (context, state) {
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 6.0),
-                    child: state.isFetching
-                        ? SizedBox(
-                            width: MediaQuery.of(context).size.width * 60 / 100,
-                            height: 35,
-                            child: LoadingShimmer.withChild(
-                              enabled: true,
-                              child: const Text('Override Price').tr(),
-                            ),
-                          )
-                        : GestureDetector(
-                            onTap: () async {
+                      (either) => either.fold(
+                        (failure) {
+                          final failureMessage = failure.failureMessage;
+
+                          showSnackBar(
+                            context: context,
+                            message: failureMessage.tr(),
+                          );
+
+                          if (failureMessage == 'authentication failed') {
+                            context.read<AuthBloc>().add(
+                                  const AuthEvent.logout(),
+                                );
+                          }
+                        },
+                        (_) {},
+                      ),
+                    );
+                  },
+                  buildWhen: (previous, current) =>
+                      previous.isFetching != current.isFetching,
+                  builder: (context, state) {
+                    return ElevatedButton(
+                      key: const Key('ssoLoginButton'),
+                      onPressed: state.isFetching
+                          ? null
+                          : () {
+                              FocusScope.of(context).unfocus();
                               widget.onTap(newPrice);
                             },
-                            child: Container(
-                              width:
-                                  MediaQuery.of(context).size.width * 60 / 100,
-                              height: 35,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                  18.0,
-                                ),
-                                gradient: const LinearGradient(
-                                  colors: <Color>[
-                                    ZPColors.primary,
-                                    ZPColors.gradient,
-                                  ],
-                                ),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Override Price'.tr(),
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    color: ZPColors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                  );
-                },
-              ),
-            ],
+                      child: LoadingShimmer.withChild(
+                        enabled: state.isFetching,
+                        child: const Text('Override Price').tr(),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
@@ -7,8 +8,10 @@ import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
+import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
 import 'package:ezrxmobile/presentation/home_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -87,22 +90,18 @@ void main() {
         ),
       );
       await tester.pump();
-      // need fix//
-      // final auptcscreen = find.byKey(const Key('auptcscreen'));
-      // final homeTabbar = find.byKey(const Key('homeTabbar'));
-      // final auptcappBar = find.byKey(const Key('auptcappBar'));
-      // final auptcwebview = find.byKey(const Key('auptcwebview'));
-      // final auptcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
-      // expect(auptcscreen, findsOneWidget);
-      // expect(auptcappBar, findsOneWidget);
-      // expect(homeTabbar, findsNothing);
-      // expect(auptcwebview, findsOneWidget);
-      // await tester.pumpAndSettle(const Duration(seconds: 3));
-      // expect(auptcAcceptButton, findsOneWidget);
-      // await tester.tap(auptcAcceptButton);
-      // final snackBarMessage = find.byKey(const Key('snackBarMessage'));
-      // await tester.pump();
-      // expect(snackBarMessage, findsOneWidget);
+      final auptcscreen = find.byKey(const Key('auptcscreen'));
+      final homeTabbar = find.byKey(const Key('homeTabbar'));
+      final auptcappBar = find.byKey(const Key('auptcappBar'));
+      final auptcwebview = find.byKey(const Key('auptcwebview'));
+      final auptcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
+      expect(auptcscreen, findsOneWidget);
+      expect(auptcappBar, findsOneWidget);
+      expect(homeTabbar, findsNothing);
+      expect(auptcwebview, findsOneWidget);
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+      expect(auptcAcceptButton, findsOneWidget);
+      await tester.tap(auptcAcceptButton);
     });
 
     // TODO: need Joseph fix this
@@ -159,16 +158,16 @@ void main() {
     );
     // need fix//
 
-    // final auptcscreen = find.byKey(const Key('auptcscreen'));
-    // expect(auptcscreen, findsOneWidget);
+    final auptcscreen = find.byKey(const Key('auptcscreen'));
+    expect(auptcscreen, findsOneWidget);
 
-    // final auptcscreenElement = tester.state(auptcscreen) as AupTCDialogState;
-    // auptcscreenElement.isLoading = true;
-    // // ignore: invalid_use_of_protected_member
-    // auptcscreenElement.setState(() {});
-    // await tester.pump();
-    // final auptcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
-    // expect(auptcAcceptButton, findsNothing);
+    final auptcscreenElement = tester.state(auptcscreen) as AupTCDialogState;
+    auptcscreenElement.isLoading = true;
+    // ignore: invalid_use_of_protected_member
+    auptcscreenElement.setState(() {});
+    await tester.pump();
+    final auptcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
+    expect(auptcAcceptButton, findsNothing);
   });
 
   testWidgets('Test - AupTc Widget localization test', (tester) async {
@@ -190,18 +189,14 @@ void main() {
       ),
     );
     await tester.pump();
-    // need fix//
-    // final screenTitleFinder = find.text(mockAupTcBloc.state.title.tr());
-    // expect(screenTitleFinder, findsOneWidget);
-    // final acceptButtonTextFinder = find.text('Accept');
-    // expect(acceptButtonTextFinder, findsOneWidget);
-    // final auptcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
-    // // await tester.pumpAndSettle(const Duration(seconds: 3));
-    // await tester.tap(auptcAcceptButton);
-    // await tester.pump();
-    // final snackBarMsgFinder = find
-    //     .text('You Need To read full Terms and Condition before Accept'.tr());
-    // expect(snackBarMsgFinder, findsOneWidget);
+    final acceptButtonTextFinder = find.text('Accept');
+    expect(acceptButtonTextFinder, findsOneWidget);
+    final auptcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
+    await tester.pumpAndSettle(const Duration(seconds: 3));
+    await tester.tap(auptcAcceptButton);
+    await tester.pump();
+    final snackBarMsgFinder = find.text('You Need To read full Terms and Condition before Accept'.tr());
+    expect(snackBarMsgFinder, findsOneWidget);
   });
 
   // TODO: need Joseph fix this

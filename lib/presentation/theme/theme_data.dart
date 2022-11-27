@@ -127,10 +127,7 @@ final appThemeData = {
         //   borderRadius: BorderRadius.circular(8),
         // ),
         elevation: 0,
-        minimumSize: const Size(
-          120,
-          40,
-        ),
+        minimumSize: const Size(120, 40),
       ),
     ),
     textButtonTheme: TextButtonThemeData(

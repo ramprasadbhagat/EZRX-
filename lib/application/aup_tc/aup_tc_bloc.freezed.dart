@@ -248,7 +248,6 @@ abstract class _Show implements AupTcEvent {
 /// @nodoc
 mixin _$AupTcState {
   bool get showTermsAndConditon => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
   String? get initialFile => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
 
@@ -263,11 +262,7 @@ abstract class $AupTcStateCopyWith<$Res> {
           AupTcState value, $Res Function(AupTcState) then) =
       _$AupTcStateCopyWithImpl<$Res, AupTcState>;
   @useResult
-  $Res call(
-      {bool showTermsAndConditon,
-      String title,
-      String? initialFile,
-      String url});
+  $Res call({bool showTermsAndConditon, String? initialFile, String url});
 }
 
 /// @nodoc
@@ -284,7 +279,6 @@ class _$AupTcStateCopyWithImpl<$Res, $Val extends AupTcState>
   @override
   $Res call({
     Object? showTermsAndConditon = null,
-    Object? title = null,
     Object? initialFile = freezed,
     Object? url = null,
   }) {
@@ -293,10 +287,6 @@ class _$AupTcStateCopyWithImpl<$Res, $Val extends AupTcState>
           ? _value.showTermsAndConditon
           : showTermsAndConditon // ignore: cast_nullable_to_non_nullable
               as bool,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
       initialFile: freezed == initialFile
           ? _value.initialFile
           : initialFile // ignore: cast_nullable_to_non_nullable
@@ -317,11 +307,7 @@ abstract class _$$_AupTcStateCopyWith<$Res>
       __$$_AupTcStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {bool showTermsAndConditon,
-      String title,
-      String? initialFile,
-      String url});
+  $Res call({bool showTermsAndConditon, String? initialFile, String url});
 }
 
 /// @nodoc
@@ -336,7 +322,6 @@ class __$$_AupTcStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? showTermsAndConditon = null,
-    Object? title = null,
     Object? initialFile = freezed,
     Object? url = null,
   }) {
@@ -345,10 +330,6 @@ class __$$_AupTcStateCopyWithImpl<$Res>
           ? _value.showTermsAndConditon
           : showTermsAndConditon // ignore: cast_nullable_to_non_nullable
               as bool,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
       initialFile: freezed == initialFile
           ? _value.initialFile
           : initialFile // ignore: cast_nullable_to_non_nullable
@@ -366,14 +347,11 @@ class __$$_AupTcStateCopyWithImpl<$Res>
 class _$_AupTcState implements _AupTcState {
   const _$_AupTcState(
       {required this.showTermsAndConditon,
-      required this.title,
       this.initialFile,
       required this.url});
 
   @override
   final bool showTermsAndConditon;
-  @override
-  final String title;
   @override
   final String? initialFile;
   @override
@@ -381,7 +359,7 @@ class _$_AupTcState implements _AupTcState {
 
   @override
   String toString() {
-    return 'AupTcState(showTermsAndConditon: $showTermsAndConditon, title: $title, initialFile: $initialFile, url: $url)';
+    return 'AupTcState(showTermsAndConditon: $showTermsAndConditon, initialFile: $initialFile, url: $url)';
   }
 
   @override
@@ -391,7 +369,6 @@ class _$_AupTcState implements _AupTcState {
             other is _$_AupTcState &&
             (identical(other.showTermsAndConditon, showTermsAndConditon) ||
                 other.showTermsAndConditon == showTermsAndConditon) &&
-            (identical(other.title, title) || other.title == title) &&
             (identical(other.initialFile, initialFile) ||
                 other.initialFile == initialFile) &&
             (identical(other.url, url) || other.url == url));
@@ -399,7 +376,7 @@ class _$_AupTcState implements _AupTcState {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, showTermsAndConditon, title, initialFile, url);
+      Object.hash(runtimeType, showTermsAndConditon, initialFile, url);
 
   @JsonKey(ignore: true)
   @override
@@ -411,14 +388,11 @@ class _$_AupTcState implements _AupTcState {
 abstract class _AupTcState implements AupTcState {
   const factory _AupTcState(
       {required final bool showTermsAndConditon,
-      required final String title,
       final String? initialFile,
       required final String url}) = _$_AupTcState;
 
   @override
   bool get showTermsAndConditon;
-  @override
-  String get title;
   @override
   String? get initialFile;
   @override

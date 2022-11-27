@@ -24,9 +24,9 @@ class StockInfoDto with _$StockInfoDto {
     @JsonKey(name: 'InStock')
     @HiveField(3, defaultValue: '')
         required String inStock,
-    @JsonKey(name: 'SalesDistrict')
+    @JsonKey(name: 'SalesDistrict', defaultValue: '')
     @HiveField(4, defaultValue: '')
-        required String? salesDistrict,
+        required String salesDistrict,
   }) = _StockInfoDto;
 
   factory StockInfoDto.fromDomain(StockInfo stockInfo) {
@@ -45,7 +45,7 @@ class StockInfoDto with _$StockInfoDto {
       batch: batch,
       expiryDate: expiryDate,
       inStock: MaterialInStock(inStock),
-      salesDistrict: salesDistrict ?? '',
+      salesDistrict: salesDistrict,
     );
   }
 

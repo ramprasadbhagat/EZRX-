@@ -26,9 +26,6 @@ class AupTcBloc extends Bloc<AupTcEvent, AupTcState> {
       show: (e) async {
         emit(
           state.copyWith(
-            title: e.user.role.type.isAupAudience
-                ? 'Acceptable Use Policy'
-                : 'TERMS OF USE',
             initialFile: _getInitialFile(e.salesOrg),
             showTermsAndConditon: await _showTermsAndConditon(e.user),
             url: _getLink(e.salesOrg),

@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -548,6 +549,9 @@ class _AdditionalCommentsState extends State<_AdditionalComments> {
                     context: context,
                     message: failureMessage.tr(),
                   );
+                  if (failureMessage == 'authentication failed') {
+                    context.read<AuthBloc>().add(const AuthEvent.logout());
+                  }
                 },
                 (r) async {
                   overlay.hide();

@@ -1,4 +1,3 @@
-
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -104,12 +103,14 @@ class _AddToCartState extends State<AddToCart> {
     } else {
       final eligibilityState = context.read<EligibilityBloc>().state;
       context.read<CartBloc>().add(CartEvent.addToCart(
-          item: context.read<AddToCartBloc>().state.cartItem,
-          customerCodeInfo: eligibilityState.customerCodeInfo,
-          salesOrganisation: eligibilityState.salesOrganisation,
-          salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
-          shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-          doNotallowOutOfStockMaterial: eligibilityState.doNotAllowOutOfStockMaterials,));
+            item: context.read<AddToCartBloc>().state.cartItem,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+            salesOrganisation: eligibilityState.salesOrganisation,
+            salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
+            shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+            doNotallowOutOfStockMaterial:
+                eligibilityState.doNotAllowOutOfStockMaterials,
+          ));
       context.router.pop();
     }
   }

@@ -21,7 +21,7 @@ class StockInfoDtoAdapter extends TypeAdapter<_$_StockInfoDto> {
       expiryDate: fields[1] == null ? '' : fields[1] as String,
       batch: fields[2] == null ? '' : fields[2] as String,
       inStock: fields[3] == null ? '' : fields[3] as String,
-      salesDistrict: fields[4] == null ? '' : fields[4] as String?,
+      salesDistrict: fields[4] == null ? '' : fields[4] as String,
     );
   }
 
@@ -62,7 +62,7 @@ _$_StockInfoDto _$$_StockInfoDtoFromJson(Map<String, dynamic> json) =>
       expiryDate: json['ExpiryDate'] as String,
       batch: json['Batch'] as String,
       inStock: json['InStock'] as String,
-      salesDistrict: json['SalesDistrict'] as String?,
+      salesDistrict: json['SalesDistrict'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_StockInfoDtoToJson(_$_StockInfoDto instance) =>

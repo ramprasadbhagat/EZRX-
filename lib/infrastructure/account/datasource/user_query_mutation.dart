@@ -64,11 +64,8 @@ class UserQueryMutation {
           acceptMobileTC,
           mobileNumber,
           countryCode,
-          acceptTCTimestamp,
           optIn,
           optInTimestamp,
-          acceptLocalTC,
-          acceptLTCTimestamp,
           totp2fa,
           totpSecret,
           hasPriceOverride,
@@ -76,10 +73,11 @@ class UserQueryMutation {
           principalOverrideList,
           mobileAccess,
           disable2fa,
-          acceptAUP,
-          acceptAUPTC,
           emailNotifications,
           mobileNotifications,
+          acceptPrivacyPolicy
+          acceptPrivacyPolicyTime
+          privacyPolicyAcceptedPlatform
           mobileToken
           {
             token,

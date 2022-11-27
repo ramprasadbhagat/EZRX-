@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
@@ -91,6 +92,9 @@ class _SaveTemplateButton extends StatelessWidget {
                 context: context,
                 message: failureMessage.tr(),
               );
+              if (failureMessage == 'authentication failed') {
+                context.read<AuthBloc>().add(const AuthEvent.logout());
+              }
             },
             (_) {
               showSnackBar(
@@ -133,6 +137,9 @@ class _BodyContent extends StatelessWidget {
                   context: context,
                   message: failureMessage.tr(),
                 );
+                if (failureMessage == 'authentication failed') {
+                  context.read<AuthBloc>().add(const AuthEvent.logout());
+                }
               },
               (_) {},
             ),
@@ -555,8 +562,8 @@ class _Disclaimer extends StatelessWidget {
                   children: <TextSpan>[
                     TextSpan(
                       text:
-                          'To avoid delays to your PPE Orders, please\n \u2022 Order the quantity as stated in the MOH Order template\n \u2022 Do not place NON PPE items in the same Order\nNote: Minimum Order value is waived for MOH PPE Orders only',
-                      style: Theme.of(context).textTheme.subtitle1,
+                          'To avoid delays to your PPE Orders, please\n\n\u2022 Order the quantity as stated in the MOH Order template\n\n\u2022 Do not place NON PPE items in the same Order\nNote: Minimum Order value is waived for MOH PPE Orders only',
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ],
                 ),
