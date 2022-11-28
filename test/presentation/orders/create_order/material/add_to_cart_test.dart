@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -39,6 +40,9 @@ class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 class AddToCartBlocMock extends MockBloc<AddToCartEvent, AddToCartState>
     implements AddToCartBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late SalesOrgBloc salesOrgBlocMock;
@@ -46,6 +50,7 @@ void main() {
   late MaterialPriceBloc materialPriceBlocMock;
   late CartBloc cartBlocMock;
   final AddToCartBloc addToCartBlocMock = AddToCartBlocMock();
+  late EligibilityBloc eligibilityBlocMock;
 
   final priceAggregate = PriceAggregate.empty().copyWith(
     quantity: 1,
@@ -79,10 +84,13 @@ void main() {
       materialPriceBlocMock = MaterialPriceBlocMock();
       cartBlocMock = CartBlocMock();
       autoRouterMock = locator<AppRouter>();
+      eligibilityBlocMock = EligibilityBlocMock();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
     });
 
     Widget getScopedWidget(Widget child) {
@@ -105,6 +113,8 @@ void main() {
             BlocProvider<CartBloc>(create: ((context) => cartBlocMock)),
             BlocProvider<AddToCartBloc>(
                 create: ((context) => addToCartBlocMock)),
+            BlocProvider<EligibilityBloc>(
+                create: ((context) => eligibilityBlocMock)),
           ],
           child: child,
         ),
@@ -126,7 +136,9 @@ void main() {
           .copyWith(
               salesOrganisation: SalesOrganisation.empty()
                   .copyWith(salesOrg: SalesOrg('SG'))));
-      await tester.pumpWidget(getScopedWidget(const AddToCart()));
+      await tester.pumpWidget(getScopedWidget(AddToCart(
+        isCovid19Tab: false,
+      )));
       await tester.pump();
       final tirePriceLable = find.byKey(const Key('priceTierLable'));
 
@@ -150,7 +162,9 @@ void main() {
           .copyWith(
               salesOrganisation: SalesOrganisation.empty()
                   .copyWith(salesOrg: SalesOrg('SG'))));
-      await tester.pumpWidget(getScopedWidget(const AddToCart()));
+      await tester.pumpWidget(getScopedWidget(AddToCart(
+        isCovid19Tab: false,
+      )));
       await tester.pump();
       final tirePriceLable = find.byKey(const Key('priceTierLable'));
 

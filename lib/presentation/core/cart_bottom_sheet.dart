@@ -11,13 +11,13 @@ class CartBottomSheet {
   static void showAddToCartBottomSheet({
     required BuildContext context,
     required PriceAggregate priceAggregate,
+    bool isCovid19Tab = false,
   }) {
     context.read<AddToCartBloc>().add(
           AddToCartEvent.setCartItem(
             priceAggregate,
           ),
         );
-
     showModalBottomSheet(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -27,7 +27,9 @@ class CartBottomSheet {
       ),
       context: context,
       builder: (_) {
-        return const AddToCart();
+        return AddToCart(
+          isCovid19Tab: isCovid19Tab,
+        );
       },
     );
   }

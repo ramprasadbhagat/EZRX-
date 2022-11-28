@@ -207,6 +207,7 @@ class _ListContent extends StatelessWidget {
                   materialNumber: materialInfo.materialNumber,
                 ),
               ),
+              isCovid19Tab: true,
             );
           }
         },

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -10,16 +11,25 @@ import 'package:ezrxmobile/presentation/orders/create_order/cart_item_detail_wid
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+
 class AddToCart extends StatefulWidget {
-  const AddToCart({Key? key}) : super(key: key);
+  bool isCovid19Tab;
+  AddToCart({
+    Key? key,
+    required this.isCovid19Tab,
+  }) : super(key: key);
 
   @override
   State<AddToCart> createState() => _AddToCartState();
 }
 
 class _AddToCartState extends State<AddToCart> {
+  late SalesOrgBloc salesOrgBloc;
   @override
   void initState() {
+    salesOrgBloc = context.read<SalesOrgBloc>();
+
     final addToCartBloc = context.read<AddToCartBloc>();
     final cartBloc = context.read<CartBloc>();
     final cartItem = addToCartBloc.state.cartItem;
@@ -72,7 +82,17 @@ class _AddToCartState extends State<AddToCart> {
                     },
                   ),
                   ElevatedButton(
-                    onPressed: () => _addToCart(context, state.cartItem),
+                    style: salesOrgBloc.state.configs.materialWithoutPrice ||
+                            widget.isCovid19Tab
+                        ? null
+                        : ElevatedButton.styleFrom(
+                            backgroundColor: ZPColors.lightGray,
+                          ),
+                    onPressed: () =>
+                        salesOrgBloc.state.configs.materialWithoutPrice ||
+                                widget.isCovid19Tab
+                            ? _addToCart(context, state.cartItem)
+                            : null,
                     child: const Text('Add to Cart').tr(),
                   ),
                 ],

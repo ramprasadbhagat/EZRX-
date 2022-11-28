@@ -105,5 +105,6 @@ class EligibilityState with _$EligibilityState {
   }
 
   bool get isShowPOAttachmentEnable => salesOrgConfigs.showPOAttachment;
+
   bool get enableOHPrice => salesOrgConfigs.enableOHPrice;
 }
