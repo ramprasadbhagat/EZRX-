@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.da
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -19,6 +20,7 @@ import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_bundle_item_tile.dart';
+import 'package:ezrxmobile/presentation/core/widget_helper.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_material_item_tile.dart';
@@ -198,8 +200,31 @@ class _Stepper extends StatelessWidget {
     return isValid;
   }
 
+  void _saveOrder(BuildContext context) {
+    context.read<SavedOrderListBloc>().add(
+          SavedOrderListEvent.createDraft(
+            shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            salesOrganisation:
+                context.read<SalesOrgBloc>().state.salesOrganisation,
+            user: context.read<UserBloc>().state.user,
+            cartItems: context.read<CartBloc>().state.cartItemList,
+            grandTotal: context.read<CartBloc>().state.grandTotal,
+            data: data,
+            existingSavedOrderList: savedOrderState.savedOrders,
+          ),
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final customerCodeInfo =
+        context.read<CustomerCodeBloc>().state.customerCodeInfo;
+    final billToInfo = customerCodeInfo.billToInfos.isNotEmpty
+        ? customerCodeInfo.billToInfos.first
+        : BillToInfo.empty();
+
     return BlocConsumer<OrderSummaryBloc, OrderSummaryState>(
       listenWhen: (previous, current) => previous != current,
       listener: (context, orderSummaryState) {
@@ -219,6 +244,8 @@ class _Stepper extends StatelessWidget {
       },
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
+        final config = context.read<SalesOrgBloc>().state.configs;
+
         return Stepper(
           margin: const EdgeInsets.fromLTRB(50, 10, 10, 10),
           controlsBuilder: (context, details) {
@@ -238,12 +265,15 @@ class _Stepper extends StatelessWidget {
                                   const OrderSummaryEvent.submitOrder(),
                                 )
                             : context.read<OrderSummaryBloc>().add(
-                                  const OrderSummaryEvent.stepTapped(step: 3),
+                                  OrderSummaryEvent.stepTapped(
+                                    step: state.additionalDetailsStep,
+                                  ),
                                 );
                       } else {
-                        final shouldStepContinue = details.currentStep == 3
-                            ? _performFormAction()
-                            : true;
+                        final shouldStepContinue =
+                            details.currentStep == state.additionalDetailsStep
+                                ? _performFormAction()
+                                : true;
                         shouldStepContinue
                             ? context
                                 .read<OrderSummaryBloc>()
@@ -263,31 +293,8 @@ class _Stepper extends StatelessWidget {
                               ),
                             ),
                     onPressed: () async {
-                      if (details.currentStep == 5) {
-                        context.read<SavedOrderListBloc>().add(
-                              SavedOrderListEvent.createDraft(
-                                shipToInfo: context
-                                    .read<ShipToCodeBloc>()
-                                    .state
-                                    .shipToInfo,
-                                customerCodeInfo: context
-                                    .read<CustomerCodeBloc>()
-                                    .state
-                                    .customerCodeInfo,
-                                salesOrganisation: context
-                                    .read<SalesOrgBloc>()
-                                    .state
-                                    .salesOrganisation,
-                                user: context.read<UserBloc>().state.user,
-                                cartItems:
-                                    context.read<CartBloc>().state.cartItemList,
-                                grandTotal:
-                                    context.read<CartBloc>().state.grandTotal,
-                                data: data,
-                                existingSavedOrderList:
-                                    savedOrderState.savedOrders,
-                              ),
-                            );
+                      if (details.currentStep == state.maxSteps) {
+                        _saveOrder(context);
                       } else {
                         context
                             .read<OrderSummaryBloc>()
@@ -327,6 +334,16 @@ class _Stepper extends StatelessWidget {
               title: Text('Ship to Address'.tr()),
               content: const ShipToAddressInfo(),
             ),
+            if (config.enableBillTo &&
+                billToInfo.billToCustomerCode.isNotEmpty &&
+                billToInfo.billToCustomerCode !=
+                    customerCodeInfo.customerCodeSoldTo)
+              Step(
+                title: Text('Bill to Address'.tr()),
+                content: _BillToCustomerStep(
+                  billToInfo: billToInfo,
+                ),
+              ),
             Step(
               title: Text('Additional Information'.tr()),
               content: _AdditionalInformationStep(
@@ -393,6 +410,21 @@ List<_OrderSummaryDetails> _getTextRowLevelsForCustomerInfo(
       value: 'NA',
     ),
   ];
+}
+
+class _BillToCustomerStep extends StatelessWidget {
+  final BillToInfo billToInfo;
+  const _BillToCustomerStep({
+    Key? key,
+    required this.billToInfo,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: WidgetHelper.getBillToCustomerDetails(billToInfo),
+    );
+  }
 }
 
 class _CustomerDetailsStep extends StatelessWidget {

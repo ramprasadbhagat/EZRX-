@@ -8,6 +8,7 @@ class OrderSummaryState with _$OrderSummaryState {
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required int step,
     required int maxSteps,
+    required int additionalDetailsStep,
     required bool isSubmitting,
   }) = _OrderSummaryState;
 
@@ -15,6 +16,7 @@ class OrderSummaryState with _$OrderSummaryState {
         apiFailureOrSuccessOption: none(),
         step: 0,
         maxSteps: 5,
+        additionalDetailsStep: 3,
         isSubmitting: false,
       );
 }

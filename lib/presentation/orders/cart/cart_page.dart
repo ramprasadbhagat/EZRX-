@@ -1,9 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
+import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
@@ -110,7 +113,7 @@ class CartPage extends StatelessWidget {
                             onPressed: state.selectedItemList.isEmpty
                                 ? null
                                 : () {
-                                    context.router.pushNamed('order_summary');
+                                    _goToOrderSummary(context);
                                   },
                             child: const Text('Order Summary').tr(),
                           ),
@@ -122,6 +125,29 @@ class CartPage extends StatelessWidget {
         );
       },
     );
+  }
+
+  void _goToOrderSummary(BuildContext context) {
+    final config = context.read<SalesOrgBloc>().state.configs;
+    final customerCodeInfo =
+        context.read<CustomerCodeBloc>().state.customerCodeInfo;
+    final billToInfo = customerCodeInfo.billToInfos.isNotEmpty
+        ? customerCodeInfo.billToInfos.first
+        : BillToInfo.empty();
+    var maxStep = 5;
+    var additionDetailsStep = 3;
+    if (config.enableBillTo &&
+        billToInfo.billToCustomerCode.isNotEmpty &&
+        customerCodeInfo.customerCodeSoldTo != billToInfo.billToCustomerCode) {
+      maxStep = 6;
+      additionDetailsStep = 4;
+    }
+    context.read<OrderSummaryBloc>().add(OrderSummaryEvent.initialized(
+          additionalDetailsStep: additionDetailsStep,
+          maxSteps: maxStep,
+          step: 0,
+        ));
+    context.router.pushNamed('order_summary');
   }
 }
 

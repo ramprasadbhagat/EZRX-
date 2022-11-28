@@ -21,7 +21,11 @@ void main() {
       '==> Initialize and Navigate Stepper',
       build: () => OrderSummaryBloc(repository: orderRepositoryMock),
       act: (bloc) => bloc
-        ..add(const OrderSummaryEvent.initialized())
+        ..add(const OrderSummaryEvent.initialized(
+          additionalDetailsStep: 3,
+          maxSteps: 5,
+          step: 0,
+        ))
         ..add(const OrderSummaryEvent.stepContinue())
         ..add(const OrderSummaryEvent.stepCancel())
         ..add(const OrderSummaryEvent.stepTapped(step: 2)),
@@ -49,7 +53,11 @@ void main() {
       'Order Summary Bloc Initial',
       build: () => OrderSummaryBloc(repository: orderRepositoryMock),
       act: (OrderSummaryBloc bloc) {
-        bloc.add(const OrderSummaryEvent.initialized());
+        bloc.add(const OrderSummaryEvent.initialized(
+          additionalDetailsStep: 3,
+          maxSteps: 5,
+          step: 0,
+        ));
       },
       expect: () => [OrderSummaryState.initial().copyWith(maxSteps: 5)],
     );

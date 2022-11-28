@@ -17,6 +17,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_po_docume
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/core/text_button_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/widget_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:open_file_safe/open_file_safe.dart';
@@ -481,50 +482,7 @@ class _BillToAddress extends StatelessWidget {
     return CustomExpansionTile(
       key: const ValueKey('billToAddress'),
       titleText: 'Bill to Address'.tr(),
-      items: [
-        BalanceTextRow(
-          keyText: 'Bill To Customer Code'.tr(),
-          valueText: billToInfo.billToCustomerCode,
-          keyFlex: 1,
-          valueFlex: 1,
-        ),
-        BalanceTextRow(
-          keyText: 'Email'.tr(),
-          valueText: billToInfo.emailAddresses.join(','),
-          keyFlex: 1,
-          valueFlex: 1,
-        ),
-        BalanceTextRow(
-          keyText: 'Tax Number'.tr(),
-          valueText: billToInfo.taxNumber,
-          keyFlex: 1,
-          valueFlex: 1,
-        ),
-        BalanceTextRow(
-          keyText: 'Address'.tr(),
-          valueText: billToInfo.billToAddress.toString(),
-          keyFlex: 1,
-          valueFlex: 1,
-        ),
-        BalanceTextRow(
-          keyText: 'Postal Code'.tr(),
-          valueText: billToInfo.postalCode,
-          keyFlex: 1,
-          valueFlex: 1,
-        ),
-        BalanceTextRow(
-          keyText: 'Country'.tr(),
-          valueText: billToInfo.country,
-          keyFlex: 1,
-          valueFlex: 1,
-        ),
-        BalanceTextRow(
-          keyText: 'Phone'.tr(),
-          valueText: billToInfo.telephoneNumber,
-          keyFlex: 1,
-          valueFlex: 1,
-        ),
-      ],
+      items: WidgetHelper.getBillToCustomerDetails(billToInfo),
     );
   }
 }

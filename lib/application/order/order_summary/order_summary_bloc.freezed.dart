@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OrderSummaryEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(int step, int maxSteps, int additionalDetailsStep)
+        initialized,
     required TResult Function() stepContinue,
     required TResult Function() stepCancel,
     required TResult Function(int step) stepTapped,
@@ -27,7 +28,8 @@ mixin _$OrderSummaryEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(int step, int maxSteps, int additionalDetailsStep)?
+        initialized,
     TResult? Function()? stepContinue,
     TResult? Function()? stepCancel,
     TResult? Function(int step)? stepTapped,
@@ -36,7 +38,8 @@ mixin _$OrderSummaryEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(int step, int maxSteps, int additionalDetailsStep)?
+        initialized,
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
     TResult Function(int step)? stepTapped,
@@ -97,6 +100,8 @@ abstract class _$$_InitializedCopyWith<$Res> {
   factory _$$_InitializedCopyWith(
           _$_Initialized value, $Res Function(_$_Initialized) then) =
       __$$_InitializedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int step, int maxSteps, int additionalDetailsStep});
 }
 
 /// @nodoc
@@ -106,55 +111,104 @@ class __$$_InitializedCopyWithImpl<$Res>
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? step = null,
+    Object? maxSteps = null,
+    Object? additionalDetailsStep = null,
+  }) {
+    return _then(_$_Initialized(
+      step: null == step
+          ? _value.step
+          : step // ignore: cast_nullable_to_non_nullable
+              as int,
+      maxSteps: null == maxSteps
+          ? _value.maxSteps
+          : maxSteps // ignore: cast_nullable_to_non_nullable
+              as int,
+      additionalDetailsStep: null == additionalDetailsStep
+          ? _value.additionalDetailsStep
+          : additionalDetailsStep // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+  const _$_Initialized(
+      {required this.step,
+      required this.maxSteps,
+      required this.additionalDetailsStep});
+
+  @override
+  final int step;
+  @override
+  final int maxSteps;
+  @override
+  final int additionalDetailsStep;
 
   @override
   String toString() {
-    return 'OrderSummaryEvent.initialized()';
+    return 'OrderSummaryEvent.initialized(step: $step, maxSteps: $maxSteps, additionalDetailsStep: $additionalDetailsStep)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType &&
+            other is _$_Initialized &&
+            (identical(other.step, step) || other.step == step) &&
+            (identical(other.maxSteps, maxSteps) ||
+                other.maxSteps == maxSteps) &&
+            (identical(other.additionalDetailsStep, additionalDetailsStep) ||
+                other.additionalDetailsStep == additionalDetailsStep));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, step, maxSteps, additionalDetailsStep);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(int step, int maxSteps, int additionalDetailsStep)
+        initialized,
     required TResult Function() stepContinue,
     required TResult Function() stepCancel,
     required TResult Function(int step) stepTapped,
     required TResult Function() submitOrder,
   }) {
-    return initialized();
+    return initialized(step, maxSteps, additionalDetailsStep);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(int step, int maxSteps, int additionalDetailsStep)?
+        initialized,
     TResult? Function()? stepContinue,
     TResult? Function()? stepCancel,
     TResult? Function(int step)? stepTapped,
     TResult? Function()? submitOrder,
   }) {
-    return initialized?.call();
+    return initialized?.call(step, maxSteps, additionalDetailsStep);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(int step, int maxSteps, int additionalDetailsStep)?
+        initialized,
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
     TResult Function(int step)? stepTapped,
@@ -162,7 +216,7 @@ class _$_Initialized implements _Initialized {
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized();
+      return initialized(step, maxSteps, additionalDetailsStep);
     }
     return orElse();
   }
@@ -209,7 +263,17 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements OrderSummaryEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized(
+      {required final int step,
+      required final int maxSteps,
+      required final int additionalDetailsStep}) = _$_Initialized;
+
+  int get step;
+  int get maxSteps;
+  int get additionalDetailsStep;
+  @JsonKey(ignore: true)
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -250,7 +314,8 @@ class _$_StepContinue implements _StepContinue {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(int step, int maxSteps, int additionalDetailsStep)
+        initialized,
     required TResult Function() stepContinue,
     required TResult Function() stepCancel,
     required TResult Function(int step) stepTapped,
@@ -262,7 +327,8 @@ class _$_StepContinue implements _StepContinue {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(int step, int maxSteps, int additionalDetailsStep)?
+        initialized,
     TResult? Function()? stepContinue,
     TResult? Function()? stepCancel,
     TResult? Function(int step)? stepTapped,
@@ -274,7 +340,8 @@ class _$_StepContinue implements _StepContinue {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(int step, int maxSteps, int additionalDetailsStep)?
+        initialized,
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
     TResult Function(int step)? stepTapped,
@@ -370,7 +437,8 @@ class _$_StepCancel implements _StepCancel {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(int step, int maxSteps, int additionalDetailsStep)
+        initialized,
     required TResult Function() stepContinue,
     required TResult Function() stepCancel,
     required TResult Function(int step) stepTapped,
@@ -382,7 +450,8 @@ class _$_StepCancel implements _StepCancel {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(int step, int maxSteps, int additionalDetailsStep)?
+        initialized,
     TResult? Function()? stepContinue,
     TResult? Function()? stepCancel,
     TResult? Function(int step)? stepTapped,
@@ -394,7 +463,8 @@ class _$_StepCancel implements _StepCancel {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(int step, int maxSteps, int additionalDetailsStep)?
+        initialized,
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
     TResult Function(int step)? stepTapped,
@@ -516,7 +586,8 @@ class _$_StepTapped implements _StepTapped {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(int step, int maxSteps, int additionalDetailsStep)
+        initialized,
     required TResult Function() stepContinue,
     required TResult Function() stepCancel,
     required TResult Function(int step) stepTapped,
@@ -528,7 +599,8 @@ class _$_StepTapped implements _StepTapped {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(int step, int maxSteps, int additionalDetailsStep)?
+        initialized,
     TResult? Function()? stepContinue,
     TResult? Function()? stepCancel,
     TResult? Function(int step)? stepTapped,
@@ -540,7 +612,8 @@ class _$_StepTapped implements _StepTapped {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(int step, int maxSteps, int additionalDetailsStep)?
+        initialized,
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
     TResult Function(int step)? stepTapped,
@@ -641,7 +714,8 @@ class _$_SubmitOrder implements _SubmitOrder {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(int step, int maxSteps, int additionalDetailsStep)
+        initialized,
     required TResult Function() stepContinue,
     required TResult Function() stepCancel,
     required TResult Function(int step) stepTapped,
@@ -653,7 +727,8 @@ class _$_SubmitOrder implements _SubmitOrder {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(int step, int maxSteps, int additionalDetailsStep)?
+        initialized,
     TResult? Function()? stepContinue,
     TResult? Function()? stepCancel,
     TResult? Function(int step)? stepTapped,
@@ -665,7 +740,8 @@ class _$_SubmitOrder implements _SubmitOrder {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(int step, int maxSteps, int additionalDetailsStep)?
+        initialized,
     TResult Function()? stepContinue,
     TResult Function()? stepCancel,
     TResult Function(int step)? stepTapped,
@@ -729,6 +805,7 @@ mixin _$OrderSummaryState {
       throw _privateConstructorUsedError;
   int get step => throw _privateConstructorUsedError;
   int get maxSteps => throw _privateConstructorUsedError;
+  int get additionalDetailsStep => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -746,6 +823,7 @@ abstract class $OrderSummaryStateCopyWith<$Res> {
       {Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       int step,
       int maxSteps,
+      int additionalDetailsStep,
       bool isSubmitting});
 }
 
@@ -765,6 +843,7 @@ class _$OrderSummaryStateCopyWithImpl<$Res, $Val extends OrderSummaryState>
     Object? apiFailureOrSuccessOption = null,
     Object? step = null,
     Object? maxSteps = null,
+    Object? additionalDetailsStep = null,
     Object? isSubmitting = null,
   }) {
     return _then(_value.copyWith(
@@ -779,6 +858,10 @@ class _$OrderSummaryStateCopyWithImpl<$Res, $Val extends OrderSummaryState>
       maxSteps: null == maxSteps
           ? _value.maxSteps
           : maxSteps // ignore: cast_nullable_to_non_nullable
+              as int,
+      additionalDetailsStep: null == additionalDetailsStep
+          ? _value.additionalDetailsStep
+          : additionalDetailsStep // ignore: cast_nullable_to_non_nullable
               as int,
       isSubmitting: null == isSubmitting
           ? _value.isSubmitting
@@ -800,6 +883,7 @@ abstract class _$$_OrderSummaryStateCopyWith<$Res>
       {Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       int step,
       int maxSteps,
+      int additionalDetailsStep,
       bool isSubmitting});
 }
 
@@ -817,6 +901,7 @@ class __$$_OrderSummaryStateCopyWithImpl<$Res>
     Object? apiFailureOrSuccessOption = null,
     Object? step = null,
     Object? maxSteps = null,
+    Object? additionalDetailsStep = null,
     Object? isSubmitting = null,
   }) {
     return _then(_$_OrderSummaryState(
@@ -831,6 +916,10 @@ class __$$_OrderSummaryStateCopyWithImpl<$Res>
       maxSteps: null == maxSteps
           ? _value.maxSteps
           : maxSteps // ignore: cast_nullable_to_non_nullable
+              as int,
+      additionalDetailsStep: null == additionalDetailsStep
+          ? _value.additionalDetailsStep
+          : additionalDetailsStep // ignore: cast_nullable_to_non_nullable
               as int,
       isSubmitting: null == isSubmitting
           ? _value.isSubmitting
@@ -847,6 +936,7 @@ class _$_OrderSummaryState extends _OrderSummaryState {
       {required this.apiFailureOrSuccessOption,
       required this.step,
       required this.maxSteps,
+      required this.additionalDetailsStep,
       required this.isSubmitting})
       : super._();
 
@@ -857,11 +947,13 @@ class _$_OrderSummaryState extends _OrderSummaryState {
   @override
   final int maxSteps;
   @override
+  final int additionalDetailsStep;
+  @override
   final bool isSubmitting;
 
   @override
   String toString() {
-    return 'OrderSummaryState(apiFailureOrSuccessOption: $apiFailureOrSuccessOption, step: $step, maxSteps: $maxSteps, isSubmitting: $isSubmitting)';
+    return 'OrderSummaryState(apiFailureOrSuccessOption: $apiFailureOrSuccessOption, step: $step, maxSteps: $maxSteps, additionalDetailsStep: $additionalDetailsStep, isSubmitting: $isSubmitting)';
   }
 
   @override
@@ -875,13 +967,15 @@ class _$_OrderSummaryState extends _OrderSummaryState {
             (identical(other.step, step) || other.step == step) &&
             (identical(other.maxSteps, maxSteps) ||
                 other.maxSteps == maxSteps) &&
+            (identical(other.additionalDetailsStep, additionalDetailsStep) ||
+                other.additionalDetailsStep == additionalDetailsStep) &&
             (identical(other.isSubmitting, isSubmitting) ||
                 other.isSubmitting == isSubmitting));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, apiFailureOrSuccessOption, step, maxSteps, isSubmitting);
+  int get hashCode => Object.hash(runtimeType, apiFailureOrSuccessOption, step,
+      maxSteps, additionalDetailsStep, isSubmitting);
 
   @JsonKey(ignore: true)
   @override
@@ -897,6 +991,7 @@ abstract class _OrderSummaryState extends OrderSummaryState {
           apiFailureOrSuccessOption,
       required final int step,
       required final int maxSteps,
+      required final int additionalDetailsStep,
       required final bool isSubmitting}) = _$_OrderSummaryState;
   const _OrderSummaryState._() : super._();
 
@@ -906,6 +1001,8 @@ abstract class _OrderSummaryState extends OrderSummaryState {
   int get step;
   @override
   int get maxSteps;
+  @override
+  int get additionalDetailsStep;
   @override
   bool get isSubmitting;
   @override
