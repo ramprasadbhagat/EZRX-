@@ -46,6 +46,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool enableRemarks,
     required bool enableOHPrice,
     required bool ponRequired,
+    required bool enableTaxDisplay,
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
@@ -87,6 +88,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         enableRemarks: false,
         enableOHPrice: true,
         ponRequired: false,
+        enableTaxDisplay: false,
       );
 
   String get getConfigLangauge {

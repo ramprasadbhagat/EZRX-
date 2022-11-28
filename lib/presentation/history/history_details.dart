@@ -282,6 +282,8 @@ class _OrderDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final enableOHPrice = context.read<EligibilityBloc>().state.enableOHPrice;
+    final enableTaxDisplay =
+        context.read<SalesOrgBloc>().state.configs.enableTaxDisplay;
 
     return BlocBuilder<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
@@ -293,9 +295,24 @@ class _OrderDetails extends StatelessWidget {
             if (enableOHPrice)
               BalanceTextRow(
                 keyText: 'Total sub value'.tr(),
+                valueText: enableTaxDisplay
+                    ? _displayPrice(
+                        context.read<SalesOrgBloc>().state.configs,
+                        orderDetails.orderHistoryDetailsOrderHeader.orderValue,
+                      )
+                    : '',
+                valueTextLoading: state.isLoading,
+                keyFlex: 1,
+                valueFlex: 1,
+              ),
+            if (enableTaxDisplay)
+              BalanceTextRow(
+                keyText: context.read<SalesOrgBloc>().state.salesOrg.isSg
+                    ? 'GST'
+                    : 'Total Tax',
                 valueText: _displayPrice(
                   context.read<SalesOrgBloc>().state.configs,
-                  orderDetails.orderHistoryDetailsOrderHeader.orderValue,
+                  orderDetails.orderHistoryDetailsOrderHeader.totalTax,
                 ),
                 valueTextLoading: state.isLoading,
                 keyFlex: 1,
@@ -306,22 +323,14 @@ class _OrderDetails extends StatelessWidget {
                 keyText: 'Grand Total'.tr(),
                 valueText: _displayPrice(
                   context.read<SalesOrgBloc>().state.configs,
-                  context.read<CartBloc>().state.grandTotal,
+                  enableTaxDisplay
+                      ? context.read<CartBloc>().state.grandTotal
+                      : orderDetails.orderHistoryDetailsOrderHeader.orderValue,
                 ),
                 keyFlex: 1,
                 valueFlex: 1,
                 valueTextLoading: state.isLoading,
               ),
-            BalanceTextRow(
-              keyText: 'Total Tax'.tr(),
-              valueText: _displayPrice(
-                context.read<SalesOrgBloc>().state.configs,
-                orderDetails.orderHistoryDetailsOrderHeader.totalTax,
-              ),
-              valueTextLoading: state.isLoading,
-              keyFlex: 1,
-              valueFlex: 1,
-            ),
             BalanceTextRow(
               keyText: 'Type'.tr(),
               valueText: orderDetails.orderHistoryDetailsOrderHeader.type,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -62,4 +63,23 @@ class MaterialInfo with _$MaterialInfo {
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromBundles(
         materialInfo: this,
       );
+
+  String get displayTaxes {
+    return taxes.isNotEmpty ? '${taxes.join('% , ')}%' : '0%';
+  }
+
+  String? getTaxClassification(
+    bool enableTaxDisplay,
+    bool enableTaxClassification,
+  ) {
+    return enableTaxDisplay && enableTaxClassification
+        ? taxClassification.getOrCrash()
+        : null;
+  }
+
+  String? getTotalTax(bool enableTaxDisplay) {
+    return enableTaxDisplay && displayTaxes != '0%'
+        ? '${'Total Tax: '.tr()}$taxes'
+        : null;
+  }
 }

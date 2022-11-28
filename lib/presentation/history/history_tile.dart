@@ -41,6 +41,8 @@ class OrderHistoryListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final enableOHPrice = context.read<EligibilityBloc>().state.enableOHPrice;
+    final enableTaxDisplay =
+        context.read<EligibilityBloc>().state.salesOrgConfigs.enableTaxDisplay;
 
     return GestureDetector(
       onTap: () {
@@ -165,6 +167,11 @@ class OrderHistoryListTile extends StatelessWidget {
                     salesOrgConfigs,
                     orderHistoryItem.totalPrice.totalPrice,
                   ),
+                ),
+              if (enableTaxDisplay)
+                BalanceTextRow(
+                  keyText: 'Included Tax'.tr(),
+                  valueText: orderHistoryItem.tax.toStringAsFixed(2),
                 ),
             ],
           ),

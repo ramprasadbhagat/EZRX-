@@ -160,6 +160,7 @@ const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
   enableRemarks: false,
   enableOHPrice: true,
   ponRequired: false,
+  enableTaxDisplay: false,
 );
 
 const BundleDto _emptyBundleDto = BundleDto(

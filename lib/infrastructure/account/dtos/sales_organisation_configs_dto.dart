@@ -128,6 +128,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'ponRequired', defaultValue: false)
     @HiveField(137, defaultValue: false)
         required bool ponRequired,
+    @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
+    @HiveField(138, defaultValue: false)
+        required bool enableTaxDisplay,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -172,6 +175,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableRemarks: configs.enableRemarks,
       enableOHPrice: configs.enableOHPrice,
       ponRequired: configs.ponRequired,
+      enableTaxDisplay: configs.enableTaxDisplay,
     );
   }
 
@@ -215,6 +219,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableRemarks: enableRemarks,
       enableOHPrice: enableOHPrice,
       ponRequired: ponRequired,
+      enableTaxDisplay: enableTaxDisplay,
     );
   }
 

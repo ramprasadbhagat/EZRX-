@@ -191,6 +191,15 @@ class PriceAggregate with _$PriceAggregate {
   }
 
   MaterialNumber get getMaterialNumber => materialInfo.materialNumber;
+
+  String? get taxDetails {
+    return salesOrgConfig.currency.isVN
+        ? materialInfo.getTotalTax(salesOrgConfig.enableTaxDisplay)
+        : materialInfo.getTaxClassification(
+            salesOrgConfig.enableTaxDisplay,
+            salesOrgConfig.enableTaxClassification,
+          );
+  }
 }
 
 enum PriceType {

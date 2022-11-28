@@ -72,6 +72,7 @@ void main() {
     enableRemarks: false,
     enableOHPrice: true,
     ponRequired: false,
+    enableTaxDisplay: false,
   );
 
   group('Eligibility Bloc', () {

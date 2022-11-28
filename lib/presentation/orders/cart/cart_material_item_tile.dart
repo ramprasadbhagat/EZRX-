@@ -38,11 +38,13 @@ class CartMaterialItemTile extends StatefulWidget {
 
 class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
   late final TextEditingController controller;
+  late final String? taxDetails;
 
   @override
   void initState() {
     controller =
         TextEditingController(text: widget.cartItem.quantity.toString());
+    taxDetails = widget.cartItem.taxDetails;
     super.initState();
   }
 
@@ -123,6 +125,13 @@ class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
                                 ),
                               ],
                             ),
+                            taxDetails != null
+                                ? Text(
+                                    taxDetails!,
+                                    style:
+                                        Theme.of(context).textTheme.bodyText1,
+                                  )
+                                : const SizedBox.shrink(),
                             Text(
                               widget.cartItem.materialInfo.materialDescription,
                               style: Theme.of(context).textTheme.bodyText1,

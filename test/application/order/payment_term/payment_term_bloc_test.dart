@@ -76,6 +76,7 @@ void main() {
     enableRemarks: false,
     enableOHPrice: true,
     ponRequired: false,
+    enableTaxDisplay: false,
   );
 
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(
