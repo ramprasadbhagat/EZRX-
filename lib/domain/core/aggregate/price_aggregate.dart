@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
@@ -169,11 +170,7 @@ class PriceAggregate with _$PriceAggregate {
         break;
     }
 
-    if (salesOrgConfig.currency.isVN) {
-      return '${result.toStringAsFixed(2)} ${salesOrgConfig.currency.code}';
-    }
-
-    return '${salesOrgConfig.currency.code} ${result.toStringAsFixed(2)}';
+    return StringUtils.displayPrice(salesOrgConfig, result);
   }
 
   bool get isDefaultMDEnabled {

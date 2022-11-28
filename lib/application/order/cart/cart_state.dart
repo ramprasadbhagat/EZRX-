@@ -24,14 +24,14 @@ class CartState with _$CartState {
         isRemarksAdding: false,
       );
 
-  double get subtotal => selectedItemList.fold<double>(
+  double get subtotal => selectedDisplayCartItems.fold<double>(
         0,
-        (sum, item) => sum + item.listPriceTotal,
+        (sum, item) => sum + item.subTotalPrice,
       );
 
-  double get grandTotal => selectedItemList.fold<double>(
+  double get grandTotal => selectedDisplayCartItems.fold<double>(
         0,
-        (sum, item) => sum + item.unitPriceTotal,
+        (sum, item) => sum + item.grandTotalPrice,
       );
 
   double get vatTotal => grandTotal - subtotal;
@@ -82,6 +82,21 @@ class CartState with _$CartState {
       .where((element) => selectedItemsMaterialNumber
           .contains(element.materialInfo.materialNumber))
       .toList();
+
+  List<CartItem> get selectedDisplayCartItems {
+    final selectedItemList = displayCartItems
+        .map(
+          (cartItem) => cartItem.copyWith(
+            materials: cartItem.materials
+                .where((material) => selectedItemsMaterialNumber
+                    .contains(material.materialInfo.materialNumber))
+                .toList(),
+          ),
+        )
+        .toList();
+
+    return selectedItemList;
+  }
 
   List<CartItem> get displayCartItems {
     final displayCartItems = <String, CartItem>{};

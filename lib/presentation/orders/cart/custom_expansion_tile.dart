@@ -140,7 +140,10 @@ class _ExpansionTileState extends State<ExpansionTile>
       }
       PageStorage.of(context)?.writeState(context, _isExpanded);
     });
-    widget.onExpansionChanged!(_isExpanded);
+    //TODO: Need to revisit later
+    if (widget.onExpansionChanged != null) {
+      widget.onExpansionChanged!(_isExpanded);
+    }
   }
 
   Widget _buildChildren(BuildContext context, Widget? child) {

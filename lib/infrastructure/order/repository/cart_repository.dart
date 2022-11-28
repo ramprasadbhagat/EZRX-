@@ -116,7 +116,7 @@ class CartRepository implements ICartRepository {
         );
         final stockInfo = updatedStockInfo.fold(
           (faliure) {
-           throw OtherException(message: faliure.failureMessage);
+            throw OtherException(message: faliure.failureMessage);
           },
           (stockInfo) => stockInfo,
         );
@@ -278,20 +278,25 @@ class CartRepository implements ICartRepository {
   List<MaterialNumber> getUpdatedMaterialList({
     required List<PriceAggregate> cartItemList,
     required List<MaterialNumber> selectedItemsMaterialNumber,
-    required PriceAggregate item,
+    required List<PriceAggregate> items,
   }) {
-    final materialNumberIsEmpty =
-        item.materialInfo.materialNumber.getOrDefaultValue('').isEmpty;
+    final selectedItems =
+        List<MaterialNumber>.from(selectedItemsMaterialNumber);
+    for (final item in items) {
+      final materialNumberIsEmpty =
+          item.materialInfo.materialNumber.getOrDefaultValue('').isEmpty;
 
-    final itemExist = cartItemList.any((e) =>
-        e.materialInfo.materialNumber == item.materialInfo.materialNumber);
+      final itemExist = cartItemList.any((e) =>
+          e.materialInfo.materialNumber == item.materialInfo.materialNumber);
 
-    if (itemExist || materialNumberIsEmpty) {
-      return selectedItemsMaterialNumber;
+      if (itemExist || materialNumberIsEmpty) {
+        continue;
+      } else {
+        selectedItems.add(item.materialInfo.materialNumber);
+      }
     }
 
-    return List.from(selectedItemsMaterialNumber)
-      ..add(item.materialInfo.materialNumber);
+    return selectedItems;
   }
 
   @override

@@ -31,10 +31,10 @@ class StockInfoDto with _$StockInfoDto {
 
   factory StockInfoDto.fromDomain(StockInfo stockInfo) {
     return StockInfoDto(
-      materialNumber: stockInfo.materialNumber.getOrCrash(),
+      materialNumber: stockInfo.materialNumber.getOrDefaultValue(''),
       expiryDate: stockInfo.expiryDate,
       batch: stockInfo.batch,
-      inStock: stockInfo.inStock.getOrCrash(),
+      inStock: stockInfo.inStock.getOrDefaultValue(''),
       salesDistrict: stockInfo.salesDistrict,
     );
   }

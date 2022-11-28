@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
@@ -17,6 +18,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/orders/cart/cart_bundle_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_material_item_tile.dart';
@@ -620,9 +622,20 @@ class _CartDetails extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            ...state.cartItemList.map((e) => CartMaterialItemTile(
-                  cartItem: e,
-                )),
+            ...state.displayCartItems.map((item) {
+              switch (item.itemType) {
+                case CartItemType.material:
+                  return CartMaterialItemTile(
+                    cartItem: item.materials.first,
+                    taxCode: taxCode,
+                  );
+                case CartItemType.bundle:
+                  return CartBundleItemTile(
+                    cartItem: item,
+                    taxCode: taxCode,
+                  );
+              }
+            }),
             const SizedBox(
               height: 20,
             ),

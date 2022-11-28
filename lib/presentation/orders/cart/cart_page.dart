@@ -4,8 +4,8 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -73,7 +73,7 @@ class CartPage extends StatelessWidget {
                         );
                       case CartItemType.bundle:
                         return CartBundleItemTile(
-                          materialItems: item.materials,
+                          cartItem: item,
                           taxCode: taxCode,
                           showCheckBox: true,
                         );
@@ -181,7 +181,8 @@ class _TotalSection extends StatelessWidget {
             children: [
               BalanceTextRow(
                 keyText: 'Subtotal'.tr(),
-                valueText: _displayPrice(salesOrgConfig, state.subtotal),
+                valueText:
+                    StringUtils.displayPrice(salesOrgConfig, state.subtotal),
                 valueFlex: 1,
               ),
               salesOrgConfig.enableVat
@@ -194,7 +195,7 @@ class _TotalSection extends StatelessWidget {
               salesOrgConfig.enableVat
                   ? BalanceTextRow(
                       keyText: taxCode.tr(),
-                      valueText: _displayPrice(
+                      valueText: StringUtils.displayPrice(
                         salesOrgConfig,
                         state.vatTotal,
                       ),
@@ -203,7 +204,7 @@ class _TotalSection extends StatelessWidget {
                   : const SizedBox.shrink(),
               BalanceTextRow(
                 keyText: 'Grand Total'.tr(),
-                valueText: _displayPrice(
+                valueText: StringUtils.displayPrice(
                   salesOrgConfig,
                   state.grandTotal,
                 ),
@@ -215,12 +216,4 @@ class _TotalSection extends StatelessWidget {
       },
     );
   }
-}
-
-String _displayPrice(SalesOrganisationConfigs salesOrgConfig, double price) {
-  if (salesOrgConfig.currency.isVN) {
-    return '${price.toStringAsFixed(2)} ${salesOrgConfig.currency.code}';
-  }
-
-  return '${salesOrgConfig.currency.code} ${price.toStringAsFixed(2)}';
 }

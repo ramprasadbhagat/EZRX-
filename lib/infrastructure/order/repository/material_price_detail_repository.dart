@@ -42,37 +42,37 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
           FailureHandler.handleFailure(e),
         );
       }
-    }
-    try {
-      final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
-      final customerCode = customerCodeInfo.customerCodeSoldTo;
-      final shipToCode = shipToCodeInfo.shipToCustomerCode;
-      final language = salesOrganisationConfigs.getConfigLangauge;
-      final queryMaterialNumbers = materialQueryList
-          .map(
-            (e) => e.value.getOrCrash(),
-          )
-          .toList();
-      materialDetailData = await remoteDataSource.getMaterialDetail(
-        salesOrgCode: salesOrgCode,
-        customerCode: customerCode,
-        shipToCode: shipToCode,
-        language: language,
-        materialNumbers: queryMaterialNumbers,
+    } else {
+      try {
+        final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
+        final customerCode = customerCodeInfo.customerCodeSoldTo;
+        final shipToCode = shipToCodeInfo.shipToCustomerCode;
+        final language = salesOrganisationConfigs.getConfigLangauge;
+        final queryMaterialNumbers = materialQueryList
+            .map(
+              (e) => e.value.getOrCrash(),
+            )
+            .toList();
+        materialDetailData = await remoteDataSource.getMaterialDetail(
+          salesOrgCode: salesOrgCode,
+          customerCode: customerCode,
+          shipToCode: shipToCode,
+          language: language,
+          materialNumbers: queryMaterialNumbers,
+        );
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+
+      materialDetails.addAll(
+        {
+          for (final materialDetail in materialDetailData)
+            materialQueryList.firstWhere(
+              (element) => element.value == materialDetail.price.materialNumber,
+            ): materialDetail,
+        },
       );
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
     }
-
-    materialDetails.addAll(
-      {
-        for (final materialDetail in materialDetailData)
-          materialQueryList.firstWhere(
-            (element) => element.value == materialDetail.price.materialNumber,
-          ): materialDetail,
-      },
-    );
-
     await _getMaterialDetailsWithZDP5(
       materialDetailData,
       salesOrganisationConfigs,

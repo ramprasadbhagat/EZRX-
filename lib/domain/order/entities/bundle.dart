@@ -21,10 +21,14 @@ class Bundle with _$Bundle {
         bundleInformation: <BundleInfo>[],
       );
 
-  List<String> bundleInfoMessage() {
-    return bundleInformation
-        .map((e) =>
-            '${'Buy'.tr()} ${e.quantity} ${'or more'.tr()} ${e.type.isPercent() ? '${e.rate.abs()} ${e.type.getOrCrash()}' : '${e.type.getOrCrash()} ${e.rate}'}')
-        .toList();
-  }
+  List<BundleInfo> get sortedBundleInformation =>
+      List<BundleInfo>.from(bundleInformation)
+        ..sort(
+          (a, b) => a.sequence.compareTo(b.sequence),
+        );
+
+  List<String> get bundleInfoMessage => sortedBundleInformation
+      .map((e) =>
+          '${'Buy'.tr()} ${e.quantity} ${'or more'.tr()} ${e.type.isPercent() ? '${e.rate.abs()} ${e.type.getOrCrash()}' : '${e.type.getOrCrash()} ${e.rate}'}')
+      .toList();
 }

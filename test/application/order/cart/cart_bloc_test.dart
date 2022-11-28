@@ -243,7 +243,7 @@ void main() {
           when((() => cartRepositoryMock.getUpdatedMaterialList(
                   cartItemList: [],
                   selectedItemsMaterialNumber: [],
-                  item: PriceAggregate.empty())))
+                  items: [PriceAggregate.empty()])))
               .thenAnswer((invocation) => mockMaterialItemList);
         },
         act: (bloc) => bloc.add(CartEvent.addToCart(
@@ -438,7 +438,7 @@ void main() {
           when((() => cartRepositoryMock.getUpdatedMaterialList(
                     cartItemList: [],
                     selectedItemsMaterialNumber: [],
-                    item: mockZmgCartItemList.first,
+                    items: [mockZmgCartItemList.first],
                   )))
               .thenAnswer((invocation) =>
                   [mockZmgCartItemList.first.getMaterialNumber]);
@@ -520,7 +520,7 @@ void main() {
                   mockZmgCartItemList.first.copyWith(quantity: 2),
                 ],
                 selectedItemsMaterialNumber: [],
-                item: mockZmgCartItemList.last.copyWith(quantity: 3),
+                items: [mockZmgCartItemList.last.copyWith(quantity: 3)],
               ))).thenAnswer(
             (invocation) => [mockZmgCartItemList.last.getMaterialNumber],
           );
@@ -869,11 +869,13 @@ void main() {
                     ),
                   ],
                   selectedItemsMaterialNumber: [],
-                  item: mockZmgCartItemList.first.copyWith(
-                    quantity: 4,
-                    price: mockZmgCartItemList.first.price
-                        .copyWith(zmgDiscount: false),
-                  ),
+                  items: [
+                    mockZmgCartItemList.first.copyWith(
+                      quantity: 4,
+                      price: mockZmgCartItemList.first.price
+                          .copyWith(zmgDiscount: false),
+                    )
+                  ],
                 )),
           ).thenAnswer(
             (invocation) => [mockZmgCartItemList.first.getMaterialNumber],
@@ -1008,11 +1010,13 @@ void main() {
                     ),
                   ],
                   selectedItemsMaterialNumber: [],
-                  item: mockZmgCartItemList.first.copyWith(
-                    quantity: 4,
-                    price: mockZmgCartItemList.first.price
-                        .copyWith(zmgDiscount: false),
-                  ),
+                  items: [
+                    mockZmgCartItemList.first.copyWith(
+                      quantity: 4,
+                      price: mockZmgCartItemList.first.price
+                          .copyWith(zmgDiscount: false),
+                    )
+                  ],
                 )),
           ).thenAnswer(
             (invocation) => [mockZmgCartItemList.first.getMaterialNumber],

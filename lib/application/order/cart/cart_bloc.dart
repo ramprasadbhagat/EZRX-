@@ -105,7 +105,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             final updatedMaterialList = cartRepository.getUpdatedMaterialList(
               cartItemList: state.cartItemList,
               selectedItemsMaterialNumber: state.selectedItemsMaterialNumber,
-              item: e.item,
+              items: [e.item],
             );
 
             emit(
@@ -278,8 +278,15 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
           },
           (cartItemList) {
+            final updatedMaterialList = cartRepository.getUpdatedMaterialList(
+              cartItemList: state.cartItemList,
+              selectedItemsMaterialNumber: state.selectedItemsMaterialNumber,
+              items: e.items,
+            );
+
             emit(
               state.copyWith(
+                selectedItemsMaterialNumber: updatedMaterialList,
                 cartItemList: cartItemList,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,

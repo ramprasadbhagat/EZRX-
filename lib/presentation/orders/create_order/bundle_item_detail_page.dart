@@ -45,8 +45,7 @@ class BundleItemDetailPage extends StatelessWidget {
             const CustomLabel(
               textValue: 'Deals%',
             ),
-            ...bundleAggregate.bundle
-                .bundleInfoMessage()
+            ...bundleAggregate.bundle.bundleInfoMessage
                 .map(
                   (e) => Text(
                     e,

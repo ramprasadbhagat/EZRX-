@@ -189,8 +189,7 @@ class _ListContent extends StatelessWidget {
               bundleAggregate.bundle.bundleName.name.toUpperCase(),
               style: Theme.of(context).textTheme.bodyText2,
             ),
-            ...bundleAggregate.bundle
-                .bundleInfoMessage()
+            ...bundleAggregate.bundle.bundleInfoMessage
                 .map(
                   (e) => Text(
                     e,

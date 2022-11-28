@@ -12,18 +12,22 @@ class QuantityIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        minimumSize: const Size(20, 20),
-        padding: EdgeInsets.zero,
+    return Container(
+      height: 23,
+      width: 23,
+      margin: const EdgeInsets.all(6),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.zero,
+          backgroundColor: ZPColors.primary,
+        ),
+        child: Icon(
+          icon,
+          color: ZPColors.white,
+          size: 15,
+        ),
+        onPressed: () => pressed(),
       ),
-      child: Icon(
-        icon,
-        color: ZPColors.white,
-        size: 15,
-      ),
-      onPressed: () => pressed(),
     );
   }
 }
