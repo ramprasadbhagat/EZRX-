@@ -5,7 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   final fakestatusName = <String>[];
-  const fakeIsChecked = false;
   const fakestatus = '';
 
   group(' Order History Filter Bloc', () {

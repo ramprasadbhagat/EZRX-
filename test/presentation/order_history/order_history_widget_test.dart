@@ -245,11 +245,11 @@ void main() {
         });
         await tester.pumpWidget(getWUT());
         await tester.pumpAndSettle(const Duration(seconds: 3));
-        expect(find.byKey(const Key('OrderHistoryList')), findsWidgets);
+        expect(find.byKey(const Key('orderHistoryList')), findsWidgets);
         expect(find.byType(OrderHistoryListTile), findsWidgets);
 
         await tester.drag(
-            find.byKey(const Key('OrderHistoryList')), const Offset(0.0, -300));
+            find.byKey(const Key('orderHistoryList')), const Offset(0.0, -300));
         await tester.pump();
       });
 

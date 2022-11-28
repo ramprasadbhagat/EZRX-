@@ -245,13 +245,13 @@ class HistoryTab extends StatelessWidget {
                     ? LoadingShimmer.withChild(
                         child: Image.asset(
                           'assets/images/ezrxlogo.png',
-                          key: const Key('LoaderImage'),
+                          key: const Key('loaderImage'),
                           width: 80,
                           height: 80,
                         ),
                       )
                     : ScrollList<OrderHistoryItem>(
-                        key: const Key('OrderHistoryList'),
+                        key: const Key('orderHistoryList'),
                         emptyMessage: 'No history found'.tr(),
                         onRefresh: () {
                           if (context.read<ShipToCodeBloc>().state.haveShipTo) {

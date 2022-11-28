@@ -53,8 +53,10 @@ class HistoryDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: const ValueKey('orderHistoryDetailsPage'),
       appBar: AppBar(
         leading: IconButton(
+          key: const ValueKey('backToOrderHistoryDetailsPage'),
           icon: const Icon(Icons.arrow_back_ios_new_sharp),
           onPressed: () => Navigator.of(context).pop(),
         ),
@@ -67,11 +69,13 @@ class HistoryDetails extends StatelessWidget {
             builder: (context, state) {
               if (state.isValidating || state.isFetching) {
                 return TextButtonShimmer(
+                  key: const ValueKey('reorder'),
                   title: 'Reorder'.tr(),
                 );
               }
 
               return TextButton(
+                key: const ValueKey('addToCartPressed'),
                 onPressed: () => _addToCartPressed(
                   context,
                   state,
@@ -97,6 +101,7 @@ class HistoryDetails extends StatelessWidget {
             Center(
               child: Text(
                 'Unable to Get Order History'.tr(),
+                key: const Key('unable'),
                 style: const TextStyle(
                   color: ZPColors.darkerGreen,
                   fontSize: 16,
@@ -218,6 +223,7 @@ class _SystemMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: const ValueKey('systemMessage'),
       color: ZPColors.systrmMessageColor,
       margin: const EdgeInsets.only(
         left: 5.0,
@@ -242,6 +248,7 @@ class _SystemMessage extends StatelessWidget {
               children: orderDetails.orderHistoryDetailsMessages.map((e) {
                 return e.message.isEmpty
                     ? SizedBox(
+                        key: const ValueKey('messageEmpty'),
                         width: 40,
                         child: LoadingShimmer.tile(),
                       )
@@ -279,6 +286,7 @@ class _OrderDetails extends StatelessWidget {
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
       builder: (context, state) {
         return CustomExpansionTile(
+          key: const ValueKey('orderDetails'),
           titleText: 'Order Details'.tr(),
           items: [
             if (enableOHPrice)
@@ -398,6 +406,7 @@ class _OrderDetails extends StatelessWidget {
             ),
             context.read<EligibilityBloc>().state.isPaymentTermEnable
                 ? BalanceTextRow(
+                    key: const ValueKey('paymentTerm'),
                     keyText: 'Payment Term'.tr(),
                     valueText: orderDetails
                         .orderHistoryDetailsPaymentTerm.paymentTermCode,
@@ -438,6 +447,7 @@ class _SoldToAddress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomExpansionTile(
+      key: const ValueKey('soldToAddress'),
       titleText: 'Sold to Address'.tr(),
       items: const [
         SoldToAddressInfo(),
@@ -454,6 +464,7 @@ class _ShipToAddress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomExpansionTile(
+      key: const ValueKey('shipToAddress'),
       titleText: 'Ship to Address'.tr(),
       items: const [
         ShipToAddressInfo(),
@@ -468,6 +479,7 @@ class _BillToAddress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomExpansionTile(
+      key: const ValueKey('billToAddress'),
       titleText: 'Bill to Address'.tr(),
       items: [
         BalanceTextRow(
@@ -533,6 +545,7 @@ class _AdditionalCommentsState extends State<_AdditionalComments> {
     final overlay = LoadingOverlay.of(context);
 
     return CustomExpansionTile(
+      key: const ValueKey('additionalComment'),
       titleText: 'Additional Comments'.tr(),
       items: <Widget>[
         BlocListener<DownloadAttachmentBloc, DownloadAttachmentState>(
@@ -598,6 +611,7 @@ class _AdditionalCommentsState extends State<_AdditionalComments> {
                             .map((pODocuments) {
                           return pODocuments.url.isEmpty
                               ? SizedBox(
+                                  key: const ValueKey('pODocumentsUrl'),
                                   width: 40,
                                   child: LoadingShimmer.tile(),
                                 )
@@ -778,6 +792,7 @@ class _Invoices extends StatelessWidget {
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
       builder: (context, state) {
         return CustomExpansionTile(
+          key: const ValueKey('invoices'),
           titleText: 'Invoices'.tr(),
           items: <Widget>[
             Container(

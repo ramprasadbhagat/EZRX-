@@ -10,7 +10,7 @@ class OrderHistoryFilterDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      key: const Key('Order History Filter'),
+      key: const Key('orderHistoryFilter'),
       width: MediaQuery.of(context).size.width * 0.85,
       height: MediaQuery.of(context).size.height,
       child: Drawer(
@@ -119,7 +119,7 @@ class _FilterHeader extends StatelessWidget {
               right: 20.0,
             ),
             child: IconButton(
-              key: const Key('filtercrossbutton'),
+              key: const Key('filterCrossButton'),
               icon: const Icon(
                 Icons.close,
               ),
@@ -150,7 +150,7 @@ class _OrderIdByFilter extends StatelessWidget {
         state,
       ) {
         return TextFormField(
-          key: const Key('filterorderidField'),
+          key: const Key('filterOrderIdField'),
           initialValue:
               state.orderHistoryFilterList.orderId.getOrDefaultValue(''),
           onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
@@ -225,7 +225,7 @@ class _PoNumberFilter extends StatelessWidget {
         state,
       ) {
         return TextFormField(
-          key: const Key('filterponumberField'),
+          key: const Key('filterPoNumberField'),
           initialValue:
               state.orderHistoryFilterList.poNumber.getOrDefaultValue(''),
           onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
@@ -287,7 +287,7 @@ class _MaterialSearchByFilter extends StatelessWidget {
         state,
       ) {
         return TextFormField(
-          key: const Key('filtermaterialsearchField'),
+          key: const Key('filterMaterialSearchField'),
           initialValue:
               state.orderHistoryFilterList.materialSearch.getOrDefaultValue(''),
           onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
@@ -362,7 +362,7 @@ class _PrincipleSearchByFilter extends StatelessWidget {
         state,
       ) {
         return TextFormField(
-          key: const Key('filterprinciplesearchField'),
+          key: const Key('filterPrincipleSearchField'),
           initialValue: state.orderHistoryFilterList.principalSearch
               .getOrDefaultValue(''),
           onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
@@ -469,7 +469,7 @@ class __OrderFromDateByFilterState extends State<_OrderFromDateByFilter> {
       ) {
         return Expanded(
           child: TextFormField(
-            key: const Key('filtefromdateField'),
+            key: const Key('filteFromdateField'),
             onTap: () async {
               final orderDate = await viewDatePicker(
                 state.orderHistoryFilterList.fromDate,
@@ -558,7 +558,7 @@ class __OrderToDateByFilterState extends State<_OrderToDateByFilter> {
       ) {
         return Expanded(
           child: TextFormField(
-            key: const Key('filtertodateField'),
+            key: const Key('filterTodateField'),
             onTap: () async {
               final orderDate = await viewDatePicker(
                 state.orderHistoryFilterList.toDate,
@@ -620,7 +620,7 @@ class _ClearButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      key: const Key('filterclearButton'),
+      key: const Key('filterClearButton'),
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.resolveWith(
           (states) => ZPColors.white,
@@ -654,7 +654,7 @@ class _ApplyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      key: const Key('filterapplyButton'),
+      key: const Key('filterApplyButton'),
       onPressed: () async {
         context.read<OrderHistoryFilterBloc>().add(
               const OrderHistoryFilterEvent.filterOrderHistory(),
