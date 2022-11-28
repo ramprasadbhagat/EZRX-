@@ -1,6 +1,19 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -8,27 +21,27 @@ import 'package:mocktail/mocktail.dart';
 
 class MaterialListMockRepo extends Mock implements MaterialListRepository {}
 
-// const _defaultPageSize = 10;
+const _defaultPageSize = 10;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  final MaterialListRepository materialListMockRepository =
-      MaterialListMockRepo();
+  late MaterialListRepository materialListMockRepository;
+  final mockUser = User.empty();
+  final salesOrg2601 = SalesOrg('2601');
+  final mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty();
+  final mockCustomerCodeInfo = CustomerCodeInfo.empty();
+  final mockShipToInfo = ShipToInfo.empty();
+  final mockSelectedMaterialFilter = MaterialFilter.empty();
+  final mockSalesOrganisation = SalesOrganisation(
+      salesOrg: salesOrg2601, customerInfos: <SalesOrgCustomerInfo>[]);
 
-  // final mockUser = User.empty();
-  // final mockSalesOrg = SalesOrganisation.empty();
-  // final mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty();
-  // final mockCustomerCodeInfo = CustomerCodeInfo.empty();
-  // final mockShipToInfo = ShipToInfo.empty();
-  //
-  // late final List<MaterialInfo> materialListMock;
+  late final List<MaterialInfo> materialListMock;
   final covidMaterialState = CovidMaterialListState.initial();
-  // final mockSelectedMaterialFilter =
-  //     MaterialFilterState.initial().selectedMaterialFilter;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    // materialListMock = await MaterialListLocalDataSource().getMaterialList();
+    materialListMockRepository = MaterialListMockRepo();
+    materialListMock = await MaterialListLocalDataSource().getMaterialList();
   });
 
   group('Covid Material List Bloc', () {
@@ -59,66 +72,116 @@ void main() {
       ],
     );
 
-    // Need to modify this
-    //
-    // blocTest(
-    //   'Material List search fetch',
-    //   build: () => CovidMaterialListBloc(
-    //       materialListRepository: materialListMockRepository),
-    //   setUp: () {
-    //     when(() => materialListMockRepository.searchMaterialList(
-    //           user: mockUser,
-    //           salesOrganisation: mockSalesOrg,
-    //           salesOrgConfig: mockSalesOrganisationConfigs,
-    //           customerCodeInfo: mockCustomerCodeInfo,
-    //           shipToInfo: mockShipToInfo,
-    //           pageSize: _defaultPageSize,
-    //           offset: 0,
-    //           orderBy: 'materialDescription_asc',
-    //           searchKey: '1763',
-    //           selectedMaterialFilter: MaterialFilter.empty(),
-    //           ispickandpackenabled:
-    //               mockUser.role.type.isSalesRep ? true : false,
-    //           isForFoc: mockUser.role.type.isSalesRep ? false : true,
-    //         )).thenAnswer(
-    //       (invocation) async => Right(materialListMock),
-    //     );
-    //   },
-    //   act: (CovidMaterialListBloc bloc) {
-    //     bloc.add(
-    //       const CovidMaterialListEvent.updateSearchKey(
-    //         searchKey: '1763',
-    //       ),
-    //     );
-    //     bloc.add(
-    //       CovidMaterialListEvent.searchMaterialList(
-    //         user: mockUser,
-    //         salesOrganisation: mockSalesOrg,
-    //         configs: mockSalesOrganisationConfigs,
-    //         customerCodeInfo: mockCustomerCodeInfo,
-    //         shipToInfo: mockShipToInfo,
-    //         selectedMaterialFilter: MaterialFilter.empty(),
-    //       ),
-    //     );
-    //   },
-    //   expect: () => [
-    //     covidMaterialState.copyWith(
-    //       isFetching: true,
-    //       materialList: [],
-    //       searchKey: SearchKey('1763'),
-    //     ),
-    //     covidMaterialState.copyWith(
-    //       isFetching: false,
-    //       materialList: materialListMock,
-    //       apiFailureOrSuccessOption: none(),
-    //       canLoadMore: materialListMock.length >= _defaultPageSize,
-    //       nextPageIndex: 1,
-    //       searchKey: SearchKey('1763'),
-    //     ),
-    //   ],
-    // );
+    blocTest(
+      'Material List search fetch',
+      build: () => CovidMaterialListBloc(
+          materialListRepository: materialListMockRepository),
+      setUp: () {
+        when(() => materialListMockRepository.searchMaterialList(
+              user: mockUser,
+              salesOrganisation: mockSalesOrganisation,
+              salesOrgConfig: mockSalesOrganisationConfigs,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              pageSize: _defaultPageSize,
+              offset: 0,
+              orderBy: 'materialDescription_asc',
+              searchKey: '1763',
+              selectedMaterialFilter: MaterialFilter.empty(),
+              pickAndPack: 'incldue',
+              isForFoc: mockUser.role.type.isSalesRep ? false : true,
+            )).thenAnswer(
+          (invocation) async => Right(materialListMock),
+        );
+      },
+      act: (CovidMaterialListBloc bloc) {
+        bloc.add(
+          const CovidMaterialListEvent.updateSearchKey(
+            searchKey: '1763',
+          ),
+        );
+        bloc.add(
+          CovidMaterialListEvent.searchMaterialList(
+            user: mockUser,
+            salesOrganisation: mockSalesOrganisation,
+            configs: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            selectedMaterialFilter: MaterialFilter.empty(),
+            pickAndPack: 'incldue',
+          ),
+        );
+      },
+      expect: () => [
+        covidMaterialState.copyWith(
+          isFetching: true,
+          materialList: [],
+          searchKey: SearchKey('1763'),
+        ),
+        covidMaterialState.copyWith(
+          isFetching: false,
+          materialList: materialListMock,
+          apiFailureOrSuccessOption: none(),
+          canLoadMore: materialListMock.length >= _defaultPageSize,
+          nextPageIndex: 1,
+          searchKey: SearchKey('1763'),
+        ),
+      ],
+    );
 
-    // uncomment till this
+    blocTest(
+      'covid material list search fails',
+      build: () => CovidMaterialListBloc(
+          materialListRepository: materialListMockRepository),
+      setUp: () {
+        when(() => materialListMockRepository.searchMaterialList(
+              user: mockUser,
+              salesOrganisation: mockSalesOrganisation,
+              salesOrgConfig: mockSalesOrganisationConfigs,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              pageSize: _defaultPageSize,
+              offset: 0,
+              orderBy: 'materialDescription_asc',
+              searchKey: '1234',
+              selectedMaterialFilter: MaterialFilter.empty(),
+              pickAndPack: 'only',
+              isForFoc: mockUser.role.type.isSalesRep ? false : true,
+            )).thenAnswer(
+          (invocation) async => const Left(ApiFailure.other('fake-error')),
+        );
+      },
+      seed: () => covidMaterialState.copyWith(
+        materialList: materialListMock,
+      ),
+      act: (CovidMaterialListBloc bloc) {
+        bloc.add(
+            const CovidMaterialListEvent.updateSearchKey(searchKey: '1234'));
+
+        bloc.add(CovidMaterialListEvent.searchMaterialList(
+            configs: mockSalesOrganisationConfigs,
+            user: mockUser,
+            customerCodeInfo: mockCustomerCodeInfo,
+            pickAndPack: 'only',
+            salesOrganisation: mockSalesOrganisation,
+            selectedMaterialFilter: mockSelectedMaterialFilter,
+            shipToInfo: mockShipToInfo));
+      },
+      expect: () => [
+        covidMaterialState.copyWith(
+          isFetching: true,
+          materialList: materialListMock,
+          searchKey: SearchKey('1234'),
+        ),
+        covidMaterialState.copyWith(
+          materialList: materialListMock,
+          apiFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('fake-error'))),
+          isFetching: false,
+          searchKey: SearchKey('1234'),
+        ),
+      ],
+    );
 
     blocTest(
       'Clear Covid Material List search key',
@@ -135,106 +198,328 @@ void main() {
         )
       ],
     );
+
     blocTest(
-      'Covid Material List search fails',
+      'Covid Material Initail List Fetch fail',
       build: () => CovidMaterialListBloc(
           materialListRepository: materialListMockRepository),
+      setUp: () {
+        when(() => materialListMockRepository.getMaterialList(
+              user: mockUser,
+              salesOrganisation: mockSalesOrganisation,
+              salesOrgConfig: mockSalesOrganisationConfigs,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              pageSize: _defaultPageSize,
+              offset: 0,
+              orderBy: 'materialDescription_asc',
+              searchKey: '',
+              pickAndPack: 'exclude',
+              isForFoc: mockUser.role.type.isSalesRep ? false : true,
+              selectedMaterialFilter: MaterialFilter.empty(),
+              orderDocumentType: OrderDocumentType.empty(),
+            )).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+      },
       act: (CovidMaterialListBloc bloc) {
-        bloc.add(
-            const CovidMaterialListEvent.updateSearchKey(searchKey: '999'));
+        bloc.add(CovidMaterialListEvent.fetch(
+            user: mockUser,
+            salesOrganisation: mockSalesOrganisation,
+            configs: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            pickAndPack: 'exclude'));
       },
       expect: () => [
         covidMaterialState.copyWith(
           isFetching: true,
+          materialList: <MaterialInfo>[],
+          nextPageIndex: 0,
+          apiFailureOrSuccessOption: none(),
+        ),
+        covidMaterialState.copyWith(
+          isFetching: false,
           materialList: [],
-          searchKey: SearchKey.search('999'),
-        )
+          apiFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('fake-error'))),
+        ),
+      ],
+    );
+    blocTest(
+      'covid Fetch material list success',
+      build: () => CovidMaterialListBloc(
+          materialListRepository: materialListMockRepository),
+      setUp: () {
+        when(() => materialListMockRepository.getMaterialList(
+              user: mockUser,
+              salesOrganisation: mockSalesOrganisation,
+              salesOrgConfig: mockSalesOrganisationConfigs,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              pageSize: _defaultPageSize,
+              offset: 0,
+              orderBy: 'materialDescription_asc',
+              searchKey: '',
+              selectedMaterialFilter: MaterialFilter.empty(),
+              orderDocumentType: OrderDocumentType.empty(),
+              pickAndPack:
+                  mockUser.role.type.isSalesRep ? 'incldue' : 'exclude',
+              isForFoc: mockUser.role.type.isSalesRep ? false : true,
+            )).thenAnswer(
+          (invocation) async => Right(materialListMock),
+        );
+      },
+      act: (CovidMaterialListBloc bloc) {
+        bloc.add(CovidMaterialListEvent.fetch(
+            user: mockUser,
+            salesOrganisation: mockSalesOrganisation,
+            configs: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            pickAndPack: 'exclude'));
+      },
+      expect: () => [
+        covidMaterialState.copyWith(
+          isFetching: true,
+          apiFailureOrSuccessOption: none(),
+        ),
+        covidMaterialState.copyWith(
+          isFetching: false,
+          materialList: materialListMock,
+          apiFailureOrSuccessOption: none(),
+          canLoadMore: materialListMock.length >= _defaultPageSize,
+          nextPageIndex: 1,
+        ),
       ],
     );
 
-    // Need to modify this
-    //
+    blocTest(
+      'Fetch covid material list success and load more success',
+      build: () => CovidMaterialListBloc(
+          materialListRepository: materialListMockRepository),
+      act: (CovidMaterialListBloc bloc) {
+        bloc.add(CovidMaterialListEvent.fetch(
+            user: mockUser,
+            salesOrganisation: mockSalesOrganisation,
+            configs: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            pickAndPack: 'only'));
+        bloc.add(CovidMaterialListEvent.loadMore(
+            user: mockUser,
+            salesOrganisation: mockSalesOrganisation,
+            configs: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            pickAndPack: 'only'));
+      },
+      setUp: () {
+        when(() => materialListMockRepository.getMaterialList(
+              user: mockUser,
+              salesOrganisation: mockSalesOrganisation,
+              salesOrgConfig: mockSalesOrganisationConfigs,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              pageSize: _defaultPageSize,
+              offset: 0,
+              orderBy: 'materialDescription_asc',
+              searchKey: '',
+              pickAndPack: 'only',
+              isForFoc: mockUser.role.type.isSalesRep ? false : true,
+              orderDocumentType: OrderDocumentType.empty(),
+              selectedMaterialFilter: MaterialFilter.empty(),
+            )).thenAnswer(
+          (invocation) async => Right(materialListMock),
+        );
+        when(() => materialListMockRepository.getMaterialList(
+              user: mockUser,
+              salesOrganisation: mockSalesOrganisation,
+              salesOrgConfig: mockSalesOrganisationConfigs,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              pageSize: _defaultPageSize,
+              offset: materialListMock.length,
+              pickAndPack: 'only',
+              isForFoc: mockUser.role.type.isSalesRep ? false : true,
+              orderBy: 'materialDescription_asc',
+              searchKey: '',
+              selectedMaterialFilter: MaterialFilter.empty(),
+              orderDocumentType: OrderDocumentType.empty(),
+            )).thenAnswer(
+          (invocation) async => Right(materialListMock),
+        );
+      },
+      expect: () => [
+        covidMaterialState.copyWith(
+          isFetching: true,
+          apiFailureOrSuccessOption: none(),
+        ),
+        covidMaterialState.copyWith(
+          isFetching: false,
+          materialList: materialListMock,
+          apiFailureOrSuccessOption: none(),
+          canLoadMore: true,
+          nextPageIndex: 1,
+        ),
+        covidMaterialState.copyWith(
+          isFetching: true,
+          materialList: materialListMock,
+          apiFailureOrSuccessOption: none(),
+          canLoadMore: true,
+          nextPageIndex: 1,
+        ),
+        covidMaterialState.copyWith(
+          isFetching: false,
+          materialList: [...materialListMock, ...materialListMock],
+          apiFailureOrSuccessOption: none(),
+          canLoadMore: true,
+          nextPageIndex: 2,
+        ),
+      ],
+    );
+    blocTest(
+      'Fetch covid material list success and load more fail',
+      build: () => CovidMaterialListBloc(
+          materialListRepository: materialListMockRepository),
+      act: (CovidMaterialListBloc bloc) {
+        bloc.add(CovidMaterialListEvent.fetch(
+          user: mockUser,
+          salesOrganisation: mockSalesOrganisation,
+          configs: mockSalesOrganisationConfigs,
+          customerCodeInfo: mockCustomerCodeInfo,
+          shipToInfo: mockShipToInfo,
+          pickAndPack: 'only',
+        ));
+        bloc.add(CovidMaterialListEvent.loadMore(
+          user: mockUser,
+          salesOrganisation: mockSalesOrganisation,
+          configs: mockSalesOrganisationConfigs,
+          customerCodeInfo: mockCustomerCodeInfo,
+          shipToInfo: mockShipToInfo,
+          pickAndPack: 'only',
+        ));
+      },
+      setUp: () {
+        when(() => materialListMockRepository.getMaterialList(
+              user: mockUser,
+              salesOrganisation: mockSalesOrganisation,
+              salesOrgConfig: mockSalesOrganisationConfigs,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              pageSize: _defaultPageSize,
+              offset: 0,
+              orderBy: 'materialDescription_asc',
+              searchKey: '',
+              pickAndPack: 'only',
+              isForFoc: mockUser.role.type.isSalesRep ? false : true,
+              selectedMaterialFilter: MaterialFilter.empty(),
+              orderDocumentType: OrderDocumentType.empty(),
+            )).thenAnswer(
+          (invocation) async => Right(materialListMock),
+        );
+        when(() => materialListMockRepository.getMaterialList(
+              user: mockUser,
+              salesOrganisation: mockSalesOrganisation,
+              salesOrgConfig: mockSalesOrganisationConfigs,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              pageSize: _defaultPageSize,
+              offset: materialListMock.length,
+              orderBy: 'materialDescription_asc',
+              searchKey: '',
+              pickAndPack: 'only',
+              isForFoc: mockUser.role.type.isSalesRep ? false : true,
+              selectedMaterialFilter: MaterialFilter.empty(),
+              orderDocumentType: OrderDocumentType.empty(),
+            )).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+      },
+      expect: () => [
+        covidMaterialState.copyWith(
+          isFetching: true,
+          apiFailureOrSuccessOption: none(),
+        ),
+        covidMaterialState.copyWith(
+          isFetching: false,
+          materialList: materialListMock,
+          apiFailureOrSuccessOption: none(),
+          canLoadMore: true,
+          nextPageIndex: 1,
+        ),
+        covidMaterialState.copyWith(
+          isFetching: true,
+          materialList: materialListMock,
+          apiFailureOrSuccessOption: none(),
+          canLoadMore: true,
+          nextPageIndex: 1,
+        ),
+        covidMaterialState.copyWith(
+          isFetching: false,
+          materialList: materialListMock,
+          apiFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('fake-error'))),
+          canLoadMore: true,
+          nextPageIndex: 1,
+        ),
+      ],
+    );
+
     // blocTest(
-    //   'Covid Material Initail List Fetch fail',
+    //   'covid Fetch material again after ShipToCode changed',
     //   build: () => CovidMaterialListBloc(
     //       materialListRepository: materialListMockRepository),
+    //   act: (CovidMaterialListBloc bloc) {
+    //     bloc.add(CovidMaterialListEvent.fetch(
+    //       user: mockUser,
+    //       salesOrganisation: mockSalesOrganisation,
+    //       configs: mockSalesOrganisationConfigs,
+    //       customerCodeInfo: mockCustomerCodeInfo,
+    //       shipToInfo:  ShipToInfo.empty(),
+    //       pickAndPack: 'only',
+    //     ));
+
+    //   },
     //   setUp: () {
     //     when(() => materialListMockRepository.getMaterialList(
     //           user: mockUser,
-    //           salesOrganisation: mockSalesOrg,
+    //           salesOrganisation: mockSalesOrganisation,
     //           salesOrgConfig: mockSalesOrganisationConfigs,
     //           customerCodeInfo: mockCustomerCodeInfo,
     //           shipToInfo: mockShipToInfo,
     //           pageSize: _defaultPageSize,
     //           offset: 0,
+    //           pickAndPack: 'only',
+    //           isForFoc: mockUser.role.type.isSalesRep ? false : true,
     //           orderBy: 'materialDescription_asc',
     //           searchKey: '',
-    //           ispickandpackenabled:
-    //               mockUser.role.type.isSalesRep ? true : false,
+    //           selectedMaterialFilter: MaterialFilter.empty(),
+    //           orderDocumentType: OrderDocumentType.empty(),
+    //         )).thenAnswer(
+    //       (invocation) async => Right(materialListMock),
+    //     );
+    //     when(() => materialListMockRepository.getMaterialList(
+    //           user: mockUser,
+    //           salesOrganisation: mockSalesOrganisation,
+    //           salesOrgConfig: mockSalesOrganisationConfigs,
+    //           customerCodeInfo: mockCustomerCodeInfo,
+    //           shipToInfo: mockShipToInfo,
+    //           pageSize: _defaultPageSize,
+    //           offset: materialListMock.length,
+    //           orderBy: 'materialDescription_asc',
+    //           searchKey: '',
+    //           pickAndPack: 'only',
     //           isForFoc: mockUser.role.type.isSalesRep ? false : true,
     //           selectedMaterialFilter: MaterialFilter.empty(),
     //           orderDocumentType: OrderDocumentType.empty(),
     //         )).thenAnswer(
-    //       (invocation) async => const Left(
-    //         ApiFailure.other('fake-error'),
-    //       ),
-    //     );
-    //   },
-    //   act: (CovidMaterialListBloc bloc) {
-    //     bloc.add(CovidMaterialListEvent.fetch(
-    //       user: mockUser,
-    //       salesOrganisation: mockSalesOrg,
-    //       configs: mockSalesOrganisationConfigs,
-    //       customerCodeInfo: mockCustomerCodeInfo,
-    //       shipToInfo: mockShipToInfo,
-    //     ));
-    //   },
-    //   expect: () => [
-    //     covidMaterialState.copyWith(
-    //       isFetching: true,
-    //       materialList: <MaterialInfo>[],
-    //       nextPageIndex: 0,
-    //       apiFailureOrSuccessOption: none(),
-    //     ),
-    //     covidMaterialState.copyWith(
-    //       isFetching: false,
-    //       materialList: [],
-    //       apiFailureOrSuccessOption:
-    //           optionOf(const Left(ApiFailure.other('fake-error'))),
-    //     ),
-    //   ],
-    // );
-    // blocTest(
-    //   'covid Fetch material list success',
-    //   build: () => CovidMaterialListBloc(
-    //       materialListRepository: materialListMockRepository),
-    //   setUp: () {
-    //     when(() => materialListMockRepository.getMaterialList(
-    //         user: mockUser,
-    //         salesOrganisation: mockSalesOrg,
-    //         salesOrgConfig: mockSalesOrganisationConfigs,
-    //         customerCodeInfo: mockCustomerCodeInfo,
-    //         shipToInfo: mockShipToInfo,
-    //         pageSize: _defaultPageSize,
-    //         offset: 0,
-    //         orderBy: 'materialDescription_asc',
-    //         searchKey: '',
-    //         selectedMaterialFilter: MaterialFilter.empty(),
-    //         orderDocumentType: OrderDocumentType.empty(),
-    //         ispickandpackenabled:
-    //         mockUser.role.type.isSalesRep ? true : false,
-    //         isForFoc: mockUser.role.type.isSalesRep ? false : true,)).thenAnswer(
     //       (invocation) async => Right(materialListMock),
     //     );
-    //   },
-    //   act: (CovidMaterialListBloc bloc) {
-    //     bloc.add(CovidMaterialListEvent.fetch(
-    //       user: mockUser,
-    //       salesOrganisation: mockSalesOrg,
-    //       configs: mockSalesOrganisationConfigs,
-    //       customerCodeInfo: mockCustomerCodeInfo,
-    //       shipToInfo: mockShipToInfo,
-    //     ));
     //   },
     //   expect: () => [
     //     covidMaterialState.copyWith(
@@ -250,270 +535,5 @@ void main() {
     //     ),
     //   ],
     // );
-
-    // blocTest(
-    //   'Fetch material list success and load more success',
-    //   build: () => CovidMaterialListBloc(
-    //       materialListRepository: materialListMockRepository),
-    //   act: (CovidMaterialListBloc bloc) {
-    //     bloc.add(CovidMaterialListEvent.fetch(
-    //       user: mockUser,
-    //       salesOrganisation: mockSalesOrg,
-    //       configs: mockSalesOrganisationConfigs,
-    //       customerCodeInfo: mockCustomerCodeInfo,
-    //       shipToInfo: mockShipToInfo,
-    //     ));
-    //     bloc.add(CovidMaterialListEvent.loadMore(
-    //       user: mockUser,
-    //       salesOrganisation: mockSalesOrg,
-    //       configs: mockSalesOrganisationConfigs,
-    //       customerCodeInfo: mockCustomerCodeInfo,
-    //       shipToInfo: mockShipToInfo,
-    //     ));
-    //   },
-    //   setUp: () {
-    //     when(() => materialListMockRepository.getMaterialList(
-    //           user: mockUser,
-    //           salesOrganisation: mockSalesOrg,
-    //           salesOrgConfig: mockSalesOrganisationConfigs,
-    //           customerCodeInfo: mockCustomerCodeInfo,
-    //           shipToInfo: mockShipToInfo,
-    //           pageSize: _defaultPageSize,
-    //           offset: 0,
-    //           orderBy: 'materialDescription_asc',
-    //           searchKey: '',
-    //           ispickandpackenabled:
-    //               mockUser.role.type.isSalesRep ? true : false,
-    //           isForFoc: mockUser.role.type.isSalesRep ? false : true,
-    //           orderDocumentType: OrderDocumentType.empty(),
-    //           selectedMaterialFilter: MaterialFilter.empty(),
-    //         )).thenAnswer(
-    //       (invocation) async => Right(materialListMock),
-    //     );
-    //     when(() => materialListMockRepository.getMaterialList(
-    //           user: mockUser,
-    //           salesOrganisation: mockSalesOrg,
-    //           salesOrgConfig: mockSalesOrganisationConfigs,
-    //           customerCodeInfo: mockCustomerCodeInfo,
-    //           shipToInfo: mockShipToInfo,
-    //           pageSize: _defaultPageSize,
-    //           offset: materialListMock.length,
-    //           ispickandpackenabled:
-    //               mockUser.role.type.isSalesRep ? true : false,
-    //           isForFoc: mockUser.role.type.isSalesRep ? false : true,
-    //           orderBy: 'materialDescription_asc',
-    //           searchKey: '',
-    //           selectedMaterialFilter: MaterialFilter.empty(),
-    //           orderDocumentType: OrderDocumentType.empty(),
-    //         )).thenAnswer(
-    //       (invocation) async => Right(materialListMock),
-    //     );
-    //   },
-    //   expect: () => [
-    //     covidMaterialState.copyWith(
-    //       isFetching: true,
-    //       apiFailureOrSuccessOption: none(),
-    //     ),
-    //     covidMaterialState.copyWith(
-    //       isFetching: false,
-    //       materialList: materialListMock,
-    //       apiFailureOrSuccessOption: none(),
-    //       canLoadMore: true,
-    //       nextPageIndex: 1,
-    //     ),
-    //     covidMaterialState.copyWith(
-    //       isFetching: true,
-    //       materialList: materialListMock,
-    //       apiFailureOrSuccessOption: none(),
-    //       canLoadMore: true,
-    //       nextPageIndex: 1,
-    //     ),
-    //     covidMaterialState.copyWith(
-    //       isFetching: false,
-    //       materialList: [...materialListMock, ...materialListMock],
-    //       apiFailureOrSuccessOption: none(),
-    //       canLoadMore: true,
-    //       nextPageIndex: 2,
-    //     ),
-    //   ],
-    // );
-    // blocTest(
-    //   'Fetch material list success and load more fail',
-    //   build: () => CovidMaterialListBloc(
-    //       materialListRepository: materialListMockRepository),
-    //   act: (CovidMaterialListBloc bloc) {
-    //     bloc.add(CovidMaterialListEvent.fetch(
-    //       user: mockUser,
-    //       salesOrganisation: mockSalesOrg,
-    //       configs: mockSalesOrganisationConfigs,
-    //       customerCodeInfo: mockCustomerCodeInfo,
-    //       shipToInfo: mockShipToInfo,
-    //     ));
-    //     bloc.add(CovidMaterialListEvent.loadMore(
-    //       user: mockUser,
-    //       salesOrganisation: mockSalesOrg,
-    //       configs: mockSalesOrganisationConfigs,
-    //       customerCodeInfo: mockCustomerCodeInfo,
-    //       shipToInfo: mockShipToInfo,
-    //     ));
-    //   },
-    //   setUp: () {
-    //     when(() => materialListMockRepository.getMaterialList(
-    //           user: mockUser,
-    //           salesOrganisation: mockSalesOrg,
-    //           salesOrgConfig: mockSalesOrganisationConfigs,
-    //           customerCodeInfo: mockCustomerCodeInfo,
-    //           shipToInfo: mockShipToInfo,
-    //           pageSize: _defaultPageSize,
-    //           offset: 0,
-    //           orderBy: 'materialDescription_asc',
-    //           searchKey: '',
-    //           ispickandpackenabled:
-    //               mockUser.role.type.isSalesRep ? true : false,
-    //           isForFoc: mockUser.role.type.isSalesRep ? false : true,
-    //           selectedMaterialFilter: MaterialFilter.empty(),
-    //           orderDocumentType: OrderDocumentType.empty(),
-    //         )).thenAnswer(
-    //       (invocation) async => Right(materialListMock),
-    //     );
-    //     when(() => materialListMockRepository.getMaterialList(
-    //           user: mockUser,
-    //           salesOrganisation: mockSalesOrg,
-    //           salesOrgConfig: mockSalesOrganisationConfigs,
-    //           customerCodeInfo: mockCustomerCodeInfo,
-    //           shipToInfo: mockShipToInfo,
-    //           pageSize: _defaultPageSize,
-    //           offset: materialListMock.length,
-    //           orderBy: 'materialDescription_asc',
-    //           searchKey: '',
-    //           ispickandpackenabled:
-    //               mockUser.role.type.isSalesRep ? true : false,
-    //           isForFoc: mockUser.role.type.isSalesRep ? false : true,
-    //           selectedMaterialFilter: MaterialFilter.empty(),
-    //           orderDocumentType: OrderDocumentType.empty(),
-    //         )).thenAnswer(
-    //       (invocation) async => const Left(
-    //         ApiFailure.other('fake-error'),
-    //       ),
-    //     );
-    //   },
-    //   expect: () => [
-    //     covidMaterialState.copyWith(
-    //       isFetching: true,
-    //       apiFailureOrSuccessOption: none(),
-    //     ),
-    //     covidMaterialState.copyWith(
-    //       isFetching: false,
-    //       materialList: materialListMock,
-    //       apiFailureOrSuccessOption: none(),
-    //       canLoadMore: true,
-    //       nextPageIndex: 1,
-    //     ),
-    //     covidMaterialState.copyWith(
-    //       isFetching: true,
-    //       materialList: materialListMock,
-    //       apiFailureOrSuccessOption: none(),
-    //       canLoadMore: true,
-    //       nextPageIndex: 1,
-    //     ),
-    //     covidMaterialState.copyWith(
-    //       isFetching: false,
-    //       materialList: materialListMock,
-    //       apiFailureOrSuccessOption:
-    //           optionOf(const Left(ApiFailure.other('fake-error'))),
-    //       canLoadMore: true,
-    //       nextPageIndex: 1,
-    //     ),
-    //   ],
-    // );
-    // blocTest(
-    //   'covid Fetch material again after ShipToCode changed',
-    //   build: () => CovidMaterialListBloc(
-    //       materialListRepository: materialListMockRepository),
-    //   act: (CovidMaterialListBloc bloc) {
-    //     bloc.add(CovidMaterialListEvent.fetch(
-    //       user: mockUser,
-    //       salesOrganisation: mockSalesOrg,
-    //       configs: mockSalesOrganisationConfigs,
-    //       customerCodeInfo: mockCustomerCodeInfo,
-    //       shipToInfo: mockShipToInfo,
-    //     ));
-
-    //     bloc.add(CovidMaterialListEvent.loadMore(
-    //       user: mockUser,
-    //       salesOrganisation: mockSalesOrg,
-    //       configs: mockSalesOrganisationConfigs,
-    //       customerCodeInfo: mockCustomerCodeInfo,
-    //       shipToInfo: mockShipToInfo,
-    //     ));
-    //   },
-    //   setUp: () {
-    //     when(() => materialListMockRepository.getMaterialList(
-    //           user: mockUser,
-    //           salesOrganisation: mockSalesOrg,
-    //           salesOrgConfig: mockSalesOrganisationConfigs,
-    //           customerCodeInfo: mockCustomerCodeInfo,
-    //           shipToInfo: mockShipToInfo,
-    //           pageSize: _defaultPageSize,
-    //           offset: 0,
-    //           ispickandpackenabled:
-    //               mockUser.role.type.isSalesRep ? true : false,
-    //           isForFoc: mockUser.role.type.isSalesRep ? false : true,
-    //           orderBy: 'materialDescription_asc',
-    //           searchKey: '',
-    //           selectedMaterialFilter: MaterialFilter.empty(),
-    //           orderDocumentType: OrderDocumentType.empty(),
-    //         )).thenAnswer(
-    //       (invocation) async => Right(materialListMock),
-    //     );
-    //     when(() => materialListMockRepository.getMaterialList(
-    //           user: mockUser,
-    //           salesOrganisation: mockSalesOrg,
-    //           salesOrgConfig: mockSalesOrganisationConfigs,
-    //           customerCodeInfo: mockCustomerCodeInfo,
-    //           shipToInfo: mockShipToInfo,
-    //           pageSize: _defaultPageSize,
-    //           offset: materialListMock.length,
-    //           orderBy: 'materialDescription_asc',
-    //           searchKey: '',
-    //           ispickandpackenabled:
-    //               mockUser.role.type.isSalesRep ? true : false,
-    //           isForFoc: mockUser.role.type.isSalesRep ? false : true,
-    //           selectedMaterialFilter: MaterialFilter.empty(),
-    //           orderDocumentType: OrderDocumentType.empty(),
-    //         )).thenAnswer(
-    //       (invocation) async => Right(materialListMock),
-    //     );
-    //   },
-    //   expect: () => [
-    //     covidMaterialState.copyWith(
-    //       isFetching: true,
-    //       apiFailureOrSuccessOption: none(),
-    //     ),
-    //     covidMaterialState.copyWith(
-    //       isFetching: false,
-    //       materialList: materialListMock,
-    //       apiFailureOrSuccessOption: none(),
-    //       canLoadMore: true,
-    //       nextPageIndex: 1,
-    //     ),
-    //     covidMaterialState.copyWith(
-    //       isFetching: true,
-    //       materialList: materialListMock,
-    //       apiFailureOrSuccessOption: none(),
-    //       canLoadMore: true,
-    //       nextPageIndex: 1,
-    //     ),
-    //     covidMaterialState.copyWith(
-    //       isFetching: false,
-    //       materialList: [...materialListMock, ...materialListMock],
-    //       apiFailureOrSuccessOption: none(),
-    //       canLoadMore: true,
-    //       nextPageIndex: 2,
-    //     ),
-    //   ],
-    // );
-
-    // uncomment till this
   });
 }
