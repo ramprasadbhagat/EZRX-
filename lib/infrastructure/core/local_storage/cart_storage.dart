@@ -164,6 +164,8 @@ class CartStorage {
               isUpdateFromCart
                   ? bonus[i]['quantity'] = quantity
                   : bonus[i]['quantity'] += quantity;
+              bonus[i]['remarks'] = bonusItem.remarks;
+
               existingItem.bonusItem =
                   bonus.map((e) => MaterialDto.fromJson(e)).toList();
             }

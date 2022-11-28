@@ -5,8 +5,8 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -411,6 +411,59 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
           final failureOrSuccess = await cartRepository.updateCartItem(
             cartItem: updatedCartItem,
+          );
+
+          failureOrSuccess.fold(
+            (failure) {
+              emit(
+                state.copyWith(
+                  apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                  isFetching: false,
+                  isRemarksAdding: false,
+                ),
+              );
+            },
+            (cartItemList) {
+              emit(
+                state.copyWith(
+                  cartItemList: cartItemList,
+                  isFetching: false,
+                  remarks: Remarks(''),
+                  isRemarksAdding: false,
+                ),
+              );
+            },
+          );
+        } else {
+          emit(
+            state.copyWith(
+              isFetching: false,
+              isRemarksAdding: false,
+              showErrorMessages: true,
+            ),
+          );
+        }
+      },
+      addRemarksToBonusItem: (e) async {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isRemarksAdding: true,
+            showErrorMessages: false,
+            isFetching: true,
+          ),
+        );
+        final isRemarksValid = state.remarks.isValid();
+        if (isRemarksValid || e.isDelete) {
+          final updatedBonusItem = e.bonusItem.copyWith(
+            remarks: state.remarks.getValue(),
+          );
+
+          final failureOrSuccess = await cartRepository.updateBonusItem(
+            cartItem: e.item,
+            bonusItem: updatedBonusItem,
+            quantity: e.bonusItem.quantity,
+            isUpdatedFromCart: true,
           );
 
           failureOrSuccess.fold(

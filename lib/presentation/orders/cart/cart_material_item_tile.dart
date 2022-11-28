@@ -10,6 +10,7 @@ import 'package:ezrxmobile/presentation/core/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/remarks_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_remark_dialog.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_remarks_button.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/edit_delete_dialog.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bonus_discount_label.dart';
@@ -327,43 +328,27 @@ class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
                           '${'Remarks: '.tr()}${widget.cartItem.materialInfo.remarks}',
                       showEditDeleteDialog: EditDeleteDialog(
                         cartItem: widget.cartItem,
+                        bonusItem: widget.cartItem.materialInfo,
+                        isBonus: false,
                       ),
                     ),
                 ],
               ),
             ),
           ),
-          widget.cartItem.materialInfo.remarks.isEmpty
-              ? Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: InkWell(
-                    key: const Key('addRemarks'),
-                    onTap: () {
-                      AddRemarkDialog.show(
-                        context: context,
-                        cartItem: widget.cartItem,
-                        isEdit: false,
-                      );
-                    },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(
-                          Icons.add,
-                          color: ZPColors.kPrimaryColor,
-                        ),
-                        Flexible(
-                          child: const Text(
-                            'Add Remarks',
-                            style: TextStyle(
-                              color: ZPColors.kPrimaryColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ).tr(),
-                        ),
-                      ],
-                    ),
-                  ),
+          widget.cartItem.materialInfo.remarks.isEmpty &&
+                  context.read<SalesOrgBloc>().state.configs.enableRemarks
+              ? AddRemarksButton(
+                  key: const Key('addRemarks'),
+                  onPressed: () {
+                    AddRemarkDialog.show(
+                      context: context,
+                      cartItem: widget.cartItem,
+                      isEdit: false,
+                      bonusItem: widget.cartItem.materialInfo,
+                      isBonus: false,
+                    );
+                  },
                 )
               : const SizedBox.shrink(),
           BounsTile(

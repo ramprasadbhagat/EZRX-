@@ -52,6 +52,9 @@ mixin _$CartEvent {
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
         addRemarksToCartItem,
+    required TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)
+        addRemarksToBonusItem,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -88,6 +91,9 @@ mixin _$CartEvent {
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
     TResult? Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult? Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -124,6 +130,9 @@ mixin _$CartEvent {
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
     TResult Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -144,6 +153,8 @@ mixin _$CartEvent {
     required TResult Function(_deleteBonusItem value) deleteBonusItem,
     required TResult Function(_RemarksChanged value) remarksChanged,
     required TResult Function(_AddRemarksToCartItem value) addRemarksToCartItem,
+    required TResult Function(_AddRemarksToBonusItem value)
+        addRemarksToBonusItem,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -163,6 +174,7 @@ mixin _$CartEvent {
     TResult? Function(_deleteBonusItem value)? deleteBonusItem,
     TResult? Function(_RemarksChanged value)? remarksChanged,
     TResult? Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult? Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -182,6 +194,7 @@ mixin _$CartEvent {
     TResult Function(_deleteBonusItem value)? deleteBonusItem,
     TResult Function(_RemarksChanged value)? remarksChanged,
     TResult Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -276,6 +289,9 @@ class _$_Initialized implements _Initialized {
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
         addRemarksToCartItem,
+    required TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)
+        addRemarksToBonusItem,
   }) {
     return initialized();
   }
@@ -315,6 +331,9 @@ class _$_Initialized implements _Initialized {
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
     TResult? Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult? Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
   }) {
     return initialized?.call();
   }
@@ -354,6 +373,9 @@ class _$_Initialized implements _Initialized {
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
     TResult Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -380,6 +402,8 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_deleteBonusItem value) deleteBonusItem,
     required TResult Function(_RemarksChanged value) remarksChanged,
     required TResult Function(_AddRemarksToCartItem value) addRemarksToCartItem,
+    required TResult Function(_AddRemarksToBonusItem value)
+        addRemarksToBonusItem,
   }) {
     return initialized(this);
   }
@@ -402,6 +426,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_deleteBonusItem value)? deleteBonusItem,
     TResult? Function(_RemarksChanged value)? remarksChanged,
     TResult? Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult? Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
   }) {
     return initialized?.call(this);
   }
@@ -424,6 +449,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_deleteBonusItem value)? deleteBonusItem,
     TResult Function(_RemarksChanged value)? remarksChanged,
     TResult Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -507,6 +533,9 @@ class _$_Fetch implements _Fetch {
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
         addRemarksToCartItem,
+    required TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)
+        addRemarksToBonusItem,
   }) {
     return fetch();
   }
@@ -546,6 +575,9 @@ class _$_Fetch implements _Fetch {
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
     TResult? Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult? Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
   }) {
     return fetch?.call();
   }
@@ -585,6 +617,9 @@ class _$_Fetch implements _Fetch {
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
     TResult Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -611,6 +646,8 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_deleteBonusItem value) deleteBonusItem,
     required TResult Function(_RemarksChanged value) remarksChanged,
     required TResult Function(_AddRemarksToCartItem value) addRemarksToCartItem,
+    required TResult Function(_AddRemarksToBonusItem value)
+        addRemarksToBonusItem,
   }) {
     return fetch(this);
   }
@@ -633,6 +670,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_deleteBonusItem value)? deleteBonusItem,
     TResult? Function(_RemarksChanged value)? remarksChanged,
     TResult? Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult? Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
   }) {
     return fetch?.call(this);
   }
@@ -655,6 +693,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_deleteBonusItem value)? deleteBonusItem,
     TResult Function(_RemarksChanged value)? remarksChanged,
     TResult Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -880,6 +919,9 @@ class _$_AddToCart implements _AddToCart {
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
         addRemarksToCartItem,
+    required TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)
+        addRemarksToBonusItem,
   }) {
     return addToCart(item, doNotallowOutOfStockMaterial, customerCodeInfo,
         salesOrganisationConfigs, salesOrganisation, shipToInfo);
@@ -920,6 +962,9 @@ class _$_AddToCart implements _AddToCart {
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
     TResult? Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult? Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
   }) {
     return addToCart?.call(item, doNotallowOutOfStockMaterial, customerCodeInfo,
         salesOrganisationConfigs, salesOrganisation, shipToInfo);
@@ -960,6 +1005,9 @@ class _$_AddToCart implements _AddToCart {
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
     TResult Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (addToCart != null) {
@@ -987,6 +1035,8 @@ class _$_AddToCart implements _AddToCart {
     required TResult Function(_deleteBonusItem value) deleteBonusItem,
     required TResult Function(_RemarksChanged value) remarksChanged,
     required TResult Function(_AddRemarksToCartItem value) addRemarksToCartItem,
+    required TResult Function(_AddRemarksToBonusItem value)
+        addRemarksToBonusItem,
   }) {
     return addToCart(this);
   }
@@ -1009,6 +1059,7 @@ class _$_AddToCart implements _AddToCart {
     TResult? Function(_deleteBonusItem value)? deleteBonusItem,
     TResult? Function(_RemarksChanged value)? remarksChanged,
     TResult? Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult? Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
   }) {
     return addToCart?.call(this);
   }
@@ -1031,6 +1082,7 @@ class _$_AddToCart implements _AddToCart {
     TResult Function(_deleteBonusItem value)? deleteBonusItem,
     TResult Function(_RemarksChanged value)? remarksChanged,
     TResult Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (addToCart != null) {
@@ -1165,6 +1217,9 @@ class _$_AddToCartFromList implements _AddToCartFromList {
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
         addRemarksToCartItem,
+    required TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)
+        addRemarksToBonusItem,
   }) {
     return addToCartFromList(items);
   }
@@ -1204,6 +1259,9 @@ class _$_AddToCartFromList implements _AddToCartFromList {
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
     TResult? Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult? Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
   }) {
     return addToCartFromList?.call(items);
   }
@@ -1243,6 +1301,9 @@ class _$_AddToCartFromList implements _AddToCartFromList {
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
     TResult Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (addToCartFromList != null) {
@@ -1269,6 +1330,8 @@ class _$_AddToCartFromList implements _AddToCartFromList {
     required TResult Function(_deleteBonusItem value) deleteBonusItem,
     required TResult Function(_RemarksChanged value) remarksChanged,
     required TResult Function(_AddRemarksToCartItem value) addRemarksToCartItem,
+    required TResult Function(_AddRemarksToBonusItem value)
+        addRemarksToBonusItem,
   }) {
     return addToCartFromList(this);
   }
@@ -1291,6 +1354,7 @@ class _$_AddToCartFromList implements _AddToCartFromList {
     TResult? Function(_deleteBonusItem value)? deleteBonusItem,
     TResult? Function(_RemarksChanged value)? remarksChanged,
     TResult? Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult? Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
   }) {
     return addToCartFromList?.call(this);
   }
@@ -1313,6 +1377,7 @@ class _$_AddToCartFromList implements _AddToCartFromList {
     TResult Function(_deleteBonusItem value)? deleteBonusItem,
     TResult Function(_RemarksChanged value)? remarksChanged,
     TResult Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (addToCartFromList != null) {
@@ -1440,6 +1505,9 @@ class _$_UpdateCartItem implements _UpdateCartItem {
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
         addRemarksToCartItem,
+    required TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)
+        addRemarksToBonusItem,
   }) {
     return updateCartItem(item);
   }
@@ -1479,6 +1547,9 @@ class _$_UpdateCartItem implements _UpdateCartItem {
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
     TResult? Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult? Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
   }) {
     return updateCartItem?.call(item);
   }
@@ -1518,6 +1589,9 @@ class _$_UpdateCartItem implements _UpdateCartItem {
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
     TResult Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (updateCartItem != null) {
@@ -1544,6 +1618,8 @@ class _$_UpdateCartItem implements _UpdateCartItem {
     required TResult Function(_deleteBonusItem value) deleteBonusItem,
     required TResult Function(_RemarksChanged value) remarksChanged,
     required TResult Function(_AddRemarksToCartItem value) addRemarksToCartItem,
+    required TResult Function(_AddRemarksToBonusItem value)
+        addRemarksToBonusItem,
   }) {
     return updateCartItem(this);
   }
@@ -1566,6 +1642,7 @@ class _$_UpdateCartItem implements _UpdateCartItem {
     TResult? Function(_deleteBonusItem value)? deleteBonusItem,
     TResult? Function(_RemarksChanged value)? remarksChanged,
     TResult? Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult? Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
   }) {
     return updateCartItem?.call(this);
   }
@@ -1588,6 +1665,7 @@ class _$_UpdateCartItem implements _UpdateCartItem {
     TResult Function(_deleteBonusItem value)? deleteBonusItem,
     TResult Function(_RemarksChanged value)? remarksChanged,
     TResult Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (updateCartItem != null) {
@@ -1722,6 +1800,9 @@ class _$_UpdateCart implements _UpdateCart {
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
         addRemarksToCartItem,
+    required TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)
+        addRemarksToBonusItem,
   }) {
     return updateCart(item, materialNumber);
   }
@@ -1761,6 +1842,9 @@ class _$_UpdateCart implements _UpdateCart {
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
     TResult? Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult? Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
   }) {
     return updateCart?.call(item, materialNumber);
   }
@@ -1800,6 +1884,9 @@ class _$_UpdateCart implements _UpdateCart {
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
     TResult Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (updateCart != null) {
@@ -1826,6 +1913,8 @@ class _$_UpdateCart implements _UpdateCart {
     required TResult Function(_deleteBonusItem value) deleteBonusItem,
     required TResult Function(_RemarksChanged value) remarksChanged,
     required TResult Function(_AddRemarksToCartItem value) addRemarksToCartItem,
+    required TResult Function(_AddRemarksToBonusItem value)
+        addRemarksToBonusItem,
   }) {
     return updateCart(this);
   }
@@ -1848,6 +1937,7 @@ class _$_UpdateCart implements _UpdateCart {
     TResult? Function(_deleteBonusItem value)? deleteBonusItem,
     TResult? Function(_RemarksChanged value)? remarksChanged,
     TResult? Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult? Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
   }) {
     return updateCart?.call(this);
   }
@@ -1870,6 +1960,7 @@ class _$_UpdateCart implements _UpdateCart {
     TResult Function(_deleteBonusItem value)? deleteBonusItem,
     TResult Function(_RemarksChanged value)? remarksChanged,
     TResult Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (updateCart != null) {
@@ -2084,6 +2175,9 @@ class _$_UpdateStockInfo implements _UpdateStockInfo {
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
         addRemarksToCartItem,
+    required TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)
+        addRemarksToBonusItem,
   }) {
     return updateStockInfo(user, customerCodeInfo, salesOrganisationConfigs,
         salesOrganisation, shipToInfo);
@@ -2124,6 +2218,9 @@ class _$_UpdateStockInfo implements _UpdateStockInfo {
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
     TResult? Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult? Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
   }) {
     return updateStockInfo?.call(user, customerCodeInfo,
         salesOrganisationConfigs, salesOrganisation, shipToInfo);
@@ -2164,6 +2261,9 @@ class _$_UpdateStockInfo implements _UpdateStockInfo {
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
     TResult Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (updateStockInfo != null) {
@@ -2191,6 +2291,8 @@ class _$_UpdateStockInfo implements _UpdateStockInfo {
     required TResult Function(_deleteBonusItem value) deleteBonusItem,
     required TResult Function(_RemarksChanged value) remarksChanged,
     required TResult Function(_AddRemarksToCartItem value) addRemarksToCartItem,
+    required TResult Function(_AddRemarksToBonusItem value)
+        addRemarksToBonusItem,
   }) {
     return updateStockInfo(this);
   }
@@ -2213,6 +2315,7 @@ class _$_UpdateStockInfo implements _UpdateStockInfo {
     TResult? Function(_deleteBonusItem value)? deleteBonusItem,
     TResult? Function(_RemarksChanged value)? remarksChanged,
     TResult? Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult? Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
   }) {
     return updateStockInfo?.call(this);
   }
@@ -2235,6 +2338,7 @@ class _$_UpdateStockInfo implements _UpdateStockInfo {
     TResult Function(_deleteBonusItem value)? deleteBonusItem,
     TResult Function(_RemarksChanged value)? remarksChanged,
     TResult Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (updateStockInfo != null) {
@@ -2370,6 +2474,9 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
         addRemarksToCartItem,
+    required TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)
+        addRemarksToBonusItem,
   }) {
     return removeFromCart(item);
   }
@@ -2409,6 +2516,9 @@ class _$_RemoveFromCart implements _RemoveFromCart {
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
     TResult? Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult? Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
   }) {
     return removeFromCart?.call(item);
   }
@@ -2448,6 +2558,9 @@ class _$_RemoveFromCart implements _RemoveFromCart {
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
     TResult Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (removeFromCart != null) {
@@ -2474,6 +2587,8 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     required TResult Function(_deleteBonusItem value) deleteBonusItem,
     required TResult Function(_RemarksChanged value) remarksChanged,
     required TResult Function(_AddRemarksToCartItem value) addRemarksToCartItem,
+    required TResult Function(_AddRemarksToBonusItem value)
+        addRemarksToBonusItem,
   }) {
     return removeFromCart(this);
   }
@@ -2496,6 +2611,7 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     TResult? Function(_deleteBonusItem value)? deleteBonusItem,
     TResult? Function(_RemarksChanged value)? remarksChanged,
     TResult? Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult? Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
   }) {
     return removeFromCart?.call(this);
   }
@@ -2518,6 +2634,7 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     TResult Function(_deleteBonusItem value)? deleteBonusItem,
     TResult Function(_RemarksChanged value)? remarksChanged,
     TResult Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (removeFromCart != null) {
@@ -2609,6 +2726,9 @@ class _$_ClearCart implements _ClearCart {
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
         addRemarksToCartItem,
+    required TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)
+        addRemarksToBonusItem,
   }) {
     return clearCart();
   }
@@ -2648,6 +2768,9 @@ class _$_ClearCart implements _ClearCart {
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
     TResult? Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult? Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
   }) {
     return clearCart?.call();
   }
@@ -2687,6 +2810,9 @@ class _$_ClearCart implements _ClearCart {
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
     TResult Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (clearCart != null) {
@@ -2713,6 +2839,8 @@ class _$_ClearCart implements _ClearCart {
     required TResult Function(_deleteBonusItem value) deleteBonusItem,
     required TResult Function(_RemarksChanged value) remarksChanged,
     required TResult Function(_AddRemarksToCartItem value) addRemarksToCartItem,
+    required TResult Function(_AddRemarksToBonusItem value)
+        addRemarksToBonusItem,
   }) {
     return clearCart(this);
   }
@@ -2735,6 +2863,7 @@ class _$_ClearCart implements _ClearCart {
     TResult? Function(_deleteBonusItem value)? deleteBonusItem,
     TResult? Function(_RemarksChanged value)? remarksChanged,
     TResult? Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult? Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
   }) {
     return clearCart?.call(this);
   }
@@ -2757,6 +2886,7 @@ class _$_ClearCart implements _ClearCart {
     TResult Function(_deleteBonusItem value)? deleteBonusItem,
     TResult Function(_RemarksChanged value)? remarksChanged,
     TResult Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (clearCart != null) {
@@ -2879,6 +3009,9 @@ class _$_updateSelectedItem implements _updateSelectedItem {
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
         addRemarksToCartItem,
+    required TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)
+        addRemarksToBonusItem,
   }) {
     return updateSelectedItem(item);
   }
@@ -2918,6 +3051,9 @@ class _$_updateSelectedItem implements _updateSelectedItem {
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
     TResult? Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult? Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
   }) {
     return updateSelectedItem?.call(item);
   }
@@ -2957,6 +3093,9 @@ class _$_updateSelectedItem implements _updateSelectedItem {
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
     TResult Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (updateSelectedItem != null) {
@@ -2983,6 +3122,8 @@ class _$_updateSelectedItem implements _updateSelectedItem {
     required TResult Function(_deleteBonusItem value) deleteBonusItem,
     required TResult Function(_RemarksChanged value) remarksChanged,
     required TResult Function(_AddRemarksToCartItem value) addRemarksToCartItem,
+    required TResult Function(_AddRemarksToBonusItem value)
+        addRemarksToBonusItem,
   }) {
     return updateSelectedItem(this);
   }
@@ -3005,6 +3146,7 @@ class _$_updateSelectedItem implements _updateSelectedItem {
     TResult? Function(_deleteBonusItem value)? deleteBonusItem,
     TResult? Function(_RemarksChanged value)? remarksChanged,
     TResult? Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult? Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
   }) {
     return updateSelectedItem?.call(this);
   }
@@ -3027,6 +3169,7 @@ class _$_updateSelectedItem implements _updateSelectedItem {
     TResult Function(_deleteBonusItem value)? deleteBonusItem,
     TResult Function(_RemarksChanged value)? remarksChanged,
     TResult Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (updateSelectedItem != null) {
@@ -3118,6 +3261,9 @@ class _$_updateSelectAllItems implements _updateSelectAllItems {
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
         addRemarksToCartItem,
+    required TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)
+        addRemarksToBonusItem,
   }) {
     return updateSelectAllItems();
   }
@@ -3157,6 +3303,9 @@ class _$_updateSelectAllItems implements _updateSelectAllItems {
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
     TResult? Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult? Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
   }) {
     return updateSelectAllItems?.call();
   }
@@ -3196,6 +3345,9 @@ class _$_updateSelectAllItems implements _updateSelectAllItems {
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
     TResult Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (updateSelectAllItems != null) {
@@ -3222,6 +3374,8 @@ class _$_updateSelectAllItems implements _updateSelectAllItems {
     required TResult Function(_deleteBonusItem value) deleteBonusItem,
     required TResult Function(_RemarksChanged value) remarksChanged,
     required TResult Function(_AddRemarksToCartItem value) addRemarksToCartItem,
+    required TResult Function(_AddRemarksToBonusItem value)
+        addRemarksToBonusItem,
   }) {
     return updateSelectAllItems(this);
   }
@@ -3244,6 +3398,7 @@ class _$_updateSelectAllItems implements _updateSelectAllItems {
     TResult? Function(_deleteBonusItem value)? deleteBonusItem,
     TResult? Function(_RemarksChanged value)? remarksChanged,
     TResult? Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult? Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
   }) {
     return updateSelectAllItems?.call(this);
   }
@@ -3266,6 +3421,7 @@ class _$_updateSelectAllItems implements _updateSelectAllItems {
     TResult Function(_deleteBonusItem value)? deleteBonusItem,
     TResult Function(_RemarksChanged value)? remarksChanged,
     TResult Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (updateSelectAllItems != null) {
@@ -3433,6 +3589,9 @@ class _$_updateBonusItem implements _updateBonusItem {
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
         addRemarksToCartItem,
+    required TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)
+        addRemarksToBonusItem,
   }) {
     return updateBonusItem(
         bonusItemCount, cartItem, bonusItem, isUpdateFromCart);
@@ -3473,6 +3632,9 @@ class _$_updateBonusItem implements _updateBonusItem {
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
     TResult? Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult? Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
   }) {
     return updateBonusItem?.call(
         bonusItemCount, cartItem, bonusItem, isUpdateFromCart);
@@ -3513,6 +3675,9 @@ class _$_updateBonusItem implements _updateBonusItem {
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
     TResult Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (updateBonusItem != null) {
@@ -3540,6 +3705,8 @@ class _$_updateBonusItem implements _updateBonusItem {
     required TResult Function(_deleteBonusItem value) deleteBonusItem,
     required TResult Function(_RemarksChanged value) remarksChanged,
     required TResult Function(_AddRemarksToCartItem value) addRemarksToCartItem,
+    required TResult Function(_AddRemarksToBonusItem value)
+        addRemarksToBonusItem,
   }) {
     return updateBonusItem(this);
   }
@@ -3562,6 +3729,7 @@ class _$_updateBonusItem implements _updateBonusItem {
     TResult? Function(_deleteBonusItem value)? deleteBonusItem,
     TResult? Function(_RemarksChanged value)? remarksChanged,
     TResult? Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult? Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
   }) {
     return updateBonusItem?.call(this);
   }
@@ -3584,6 +3752,7 @@ class _$_updateBonusItem implements _updateBonusItem {
     TResult Function(_deleteBonusItem value)? deleteBonusItem,
     TResult Function(_RemarksChanged value)? remarksChanged,
     TResult Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (updateBonusItem != null) {
@@ -3750,6 +3919,9 @@ class _$_deleteBonusItem implements _deleteBonusItem {
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
         addRemarksToCartItem,
+    required TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)
+        addRemarksToBonusItem,
   }) {
     return deleteBonusItem(cartItem, bonusItem, isUpdateFromCart);
   }
@@ -3789,6 +3961,9 @@ class _$_deleteBonusItem implements _deleteBonusItem {
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
     TResult? Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult? Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
   }) {
     return deleteBonusItem?.call(cartItem, bonusItem, isUpdateFromCart);
   }
@@ -3828,6 +4003,9 @@ class _$_deleteBonusItem implements _deleteBonusItem {
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
     TResult Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (deleteBonusItem != null) {
@@ -3854,6 +4032,8 @@ class _$_deleteBonusItem implements _deleteBonusItem {
     required TResult Function(_deleteBonusItem value) deleteBonusItem,
     required TResult Function(_RemarksChanged value) remarksChanged,
     required TResult Function(_AddRemarksToCartItem value) addRemarksToCartItem,
+    required TResult Function(_AddRemarksToBonusItem value)
+        addRemarksToBonusItem,
   }) {
     return deleteBonusItem(this);
   }
@@ -3876,6 +4056,7 @@ class _$_deleteBonusItem implements _deleteBonusItem {
     TResult? Function(_deleteBonusItem value)? deleteBonusItem,
     TResult? Function(_RemarksChanged value)? remarksChanged,
     TResult? Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult? Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
   }) {
     return deleteBonusItem?.call(this);
   }
@@ -3898,6 +4079,7 @@ class _$_deleteBonusItem implements _deleteBonusItem {
     TResult Function(_deleteBonusItem value)? deleteBonusItem,
     TResult Function(_RemarksChanged value)? remarksChanged,
     TResult Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (deleteBonusItem != null) {
@@ -4019,6 +4201,9 @@ class _$_RemarksChanged implements _RemarksChanged {
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
         addRemarksToCartItem,
+    required TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)
+        addRemarksToBonusItem,
   }) {
     return remarksChanged(remarks);
   }
@@ -4058,6 +4243,9 @@ class _$_RemarksChanged implements _RemarksChanged {
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
     TResult? Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult? Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
   }) {
     return remarksChanged?.call(remarks);
   }
@@ -4097,6 +4285,9 @@ class _$_RemarksChanged implements _RemarksChanged {
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
     TResult Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (remarksChanged != null) {
@@ -4123,6 +4314,8 @@ class _$_RemarksChanged implements _RemarksChanged {
     required TResult Function(_deleteBonusItem value) deleteBonusItem,
     required TResult Function(_RemarksChanged value) remarksChanged,
     required TResult Function(_AddRemarksToCartItem value) addRemarksToCartItem,
+    required TResult Function(_AddRemarksToBonusItem value)
+        addRemarksToBonusItem,
   }) {
     return remarksChanged(this);
   }
@@ -4145,6 +4338,7 @@ class _$_RemarksChanged implements _RemarksChanged {
     TResult? Function(_deleteBonusItem value)? deleteBonusItem,
     TResult? Function(_RemarksChanged value)? remarksChanged,
     TResult? Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult? Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
   }) {
     return remarksChanged?.call(this);
   }
@@ -4167,6 +4361,7 @@ class _$_RemarksChanged implements _RemarksChanged {
     TResult Function(_deleteBonusItem value)? deleteBonusItem,
     TResult Function(_RemarksChanged value)? remarksChanged,
     TResult Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (remarksChanged != null) {
@@ -4303,6 +4498,9 @@ class _$_AddRemarksToCartItem implements _AddRemarksToCartItem {
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
         addRemarksToCartItem,
+    required TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)
+        addRemarksToBonusItem,
   }) {
     return addRemarksToCartItem(item, isDelete);
   }
@@ -4342,6 +4540,9 @@ class _$_AddRemarksToCartItem implements _AddRemarksToCartItem {
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
     TResult? Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult? Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
   }) {
     return addRemarksToCartItem?.call(item, isDelete);
   }
@@ -4381,6 +4582,9 @@ class _$_AddRemarksToCartItem implements _AddRemarksToCartItem {
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
     TResult Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (addRemarksToCartItem != null) {
@@ -4407,6 +4611,8 @@ class _$_AddRemarksToCartItem implements _AddRemarksToCartItem {
     required TResult Function(_deleteBonusItem value) deleteBonusItem,
     required TResult Function(_RemarksChanged value) remarksChanged,
     required TResult Function(_AddRemarksToCartItem value) addRemarksToCartItem,
+    required TResult Function(_AddRemarksToBonusItem value)
+        addRemarksToBonusItem,
   }) {
     return addRemarksToCartItem(this);
   }
@@ -4429,6 +4635,7 @@ class _$_AddRemarksToCartItem implements _AddRemarksToCartItem {
     TResult? Function(_deleteBonusItem value)? deleteBonusItem,
     TResult? Function(_RemarksChanged value)? remarksChanged,
     TResult? Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult? Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
   }) {
     return addRemarksToCartItem?.call(this);
   }
@@ -4451,6 +4658,7 @@ class _$_AddRemarksToCartItem implements _AddRemarksToCartItem {
     TResult Function(_deleteBonusItem value)? deleteBonusItem,
     TResult Function(_RemarksChanged value)? remarksChanged,
     TResult Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
     required TResult orElse(),
   }) {
     if (addRemarksToCartItem != null) {
@@ -4469,6 +4677,327 @@ abstract class _AddRemarksToCartItem implements CartEvent {
   bool get isDelete;
   @JsonKey(ignore: true)
   _$$_AddRemarksToCartItemCopyWith<_$_AddRemarksToCartItem> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_AddRemarksToBonusItemCopyWith<$Res> {
+  factory _$$_AddRemarksToBonusItemCopyWith(_$_AddRemarksToBonusItem value,
+          $Res Function(_$_AddRemarksToBonusItem) then) =
+      __$$_AddRemarksToBonusItemCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PriceAggregate item, MaterialInfo bonusItem, bool isDelete});
+
+  $PriceAggregateCopyWith<$Res> get item;
+  $MaterialInfoCopyWith<$Res> get bonusItem;
+}
+
+/// @nodoc
+class __$$_AddRemarksToBonusItemCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$_AddRemarksToBonusItem>
+    implements _$$_AddRemarksToBonusItemCopyWith<$Res> {
+  __$$_AddRemarksToBonusItemCopyWithImpl(_$_AddRemarksToBonusItem _value,
+      $Res Function(_$_AddRemarksToBonusItem) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? item = null,
+    Object? bonusItem = null,
+    Object? isDelete = null,
+  }) {
+    return _then(_$_AddRemarksToBonusItem(
+      item: null == item
+          ? _value.item
+          : item // ignore: cast_nullable_to_non_nullable
+              as PriceAggregate,
+      bonusItem: null == bonusItem
+          ? _value.bonusItem
+          : bonusItem // ignore: cast_nullable_to_non_nullable
+              as MaterialInfo,
+      isDelete: null == isDelete
+          ? _value.isDelete
+          : isDelete // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PriceAggregateCopyWith<$Res> get item {
+    return $PriceAggregateCopyWith<$Res>(_value.item, (value) {
+      return _then(_value.copyWith(item: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MaterialInfoCopyWith<$Res> get bonusItem {
+    return $MaterialInfoCopyWith<$Res>(_value.bonusItem, (value) {
+      return _then(_value.copyWith(bonusItem: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_AddRemarksToBonusItem implements _AddRemarksToBonusItem {
+  const _$_AddRemarksToBonusItem(
+      {required this.item, required this.bonusItem, required this.isDelete});
+
+  @override
+  final PriceAggregate item;
+  @override
+  final MaterialInfo bonusItem;
+  @override
+  final bool isDelete;
+
+  @override
+  String toString() {
+    return 'CartEvent.addRemarksToBonusItem(item: $item, bonusItem: $bonusItem, isDelete: $isDelete)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AddRemarksToBonusItem &&
+            (identical(other.item, item) || other.item == item) &&
+            (identical(other.bonusItem, bonusItem) ||
+                other.bonusItem == bonusItem) &&
+            (identical(other.isDelete, isDelete) ||
+                other.isDelete == isDelete));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, item, bonusItem, isDelete);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AddRemarksToBonusItemCopyWith<_$_AddRemarksToBonusItem> get copyWith =>
+      __$$_AddRemarksToBonusItemCopyWithImpl<_$_AddRemarksToBonusItem>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function() fetch,
+    required TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
+        addToCart,
+    required TResult Function(List<PriceAggregate> items) addToCartFromList,
+    required TResult Function(PriceAggregate item) updateCartItem,
+    required TResult Function(List<Price> item, String materialNumber)
+        updateCart,
+    required TResult Function(
+            User user,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
+        updateStockInfo,
+    required TResult Function(PriceAggregate item) removeFromCart,
+    required TResult Function() clearCart,
+    required TResult Function(PriceAggregate item) updateSelectedItem,
+    required TResult Function() updateSelectAllItems,
+    required TResult Function(int bonusItemCount, PriceAggregate cartItem,
+            MaterialInfo bonusItem, bool isUpdateFromCart)
+        updateBonusItem,
+    required TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+            bool isUpdateFromCart)
+        deleteBonusItem,
+    required TResult Function(String remarks) remarksChanged,
+    required TResult Function(PriceAggregate item, bool isDelete)
+        addRemarksToCartItem,
+    required TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)
+        addRemarksToBonusItem,
+  }) {
+    return addRemarksToBonusItem(item, bonusItem, isDelete);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function()? fetch,
+    TResult? Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        addToCart,
+    TResult? Function(List<PriceAggregate> items)? addToCartFromList,
+    TResult? Function(PriceAggregate item)? updateCartItem,
+    TResult? Function(List<Price> item, String materialNumber)? updateCart,
+    TResult? Function(
+            User user,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateStockInfo,
+    TResult? Function(PriceAggregate item)? removeFromCart,
+    TResult? Function()? clearCart,
+    TResult? Function(PriceAggregate item)? updateSelectedItem,
+    TResult? Function()? updateSelectAllItems,
+    TResult? Function(int bonusItemCount, PriceAggregate cartItem,
+            MaterialInfo bonusItem, bool isUpdateFromCart)?
+        updateBonusItem,
+    TResult? Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+            bool isUpdateFromCart)?
+        deleteBonusItem,
+    TResult? Function(String remarks)? remarksChanged,
+    TResult? Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult? Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
+  }) {
+    return addRemarksToBonusItem?.call(item, bonusItem, isDelete);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function()? fetch,
+    TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        addToCart,
+    TResult Function(List<PriceAggregate> items)? addToCartFromList,
+    TResult Function(PriceAggregate item)? updateCartItem,
+    TResult Function(List<Price> item, String materialNumber)? updateCart,
+    TResult Function(
+            User user,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateStockInfo,
+    TResult Function(PriceAggregate item)? removeFromCart,
+    TResult Function()? clearCart,
+    TResult Function(PriceAggregate item)? updateSelectedItem,
+    TResult Function()? updateSelectAllItems,
+    TResult Function(int bonusItemCount, PriceAggregate cartItem,
+            MaterialInfo bonusItem, bool isUpdateFromCart)?
+        updateBonusItem,
+    TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+            bool isUpdateFromCart)?
+        deleteBonusItem,
+    TResult Function(String remarks)? remarksChanged,
+    TResult Function(PriceAggregate item, bool isDelete)? addRemarksToCartItem,
+    TResult Function(
+            PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
+        addRemarksToBonusItem,
+    required TResult orElse(),
+  }) {
+    if (addRemarksToBonusItem != null) {
+      return addRemarksToBonusItem(item, bonusItem, isDelete);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_AddToCart value) addToCart,
+    required TResult Function(_AddToCartFromList value) addToCartFromList,
+    required TResult Function(_UpdateCartItem value) updateCartItem,
+    required TResult Function(_UpdateCart value) updateCart,
+    required TResult Function(_UpdateStockInfo value) updateStockInfo,
+    required TResult Function(_RemoveFromCart value) removeFromCart,
+    required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_updateSelectedItem value) updateSelectedItem,
+    required TResult Function(_updateSelectAllItems value) updateSelectAllItems,
+    required TResult Function(_updateBonusItem value) updateBonusItem,
+    required TResult Function(_deleteBonusItem value) deleteBonusItem,
+    required TResult Function(_RemarksChanged value) remarksChanged,
+    required TResult Function(_AddRemarksToCartItem value) addRemarksToCartItem,
+    required TResult Function(_AddRemarksToBonusItem value)
+        addRemarksToBonusItem,
+  }) {
+    return addRemarksToBonusItem(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AddToCart value)? addToCart,
+    TResult? Function(_AddToCartFromList value)? addToCartFromList,
+    TResult? Function(_UpdateCartItem value)? updateCartItem,
+    TResult? Function(_UpdateCart value)? updateCart,
+    TResult? Function(_UpdateStockInfo value)? updateStockInfo,
+    TResult? Function(_RemoveFromCart value)? removeFromCart,
+    TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_updateSelectedItem value)? updateSelectedItem,
+    TResult? Function(_updateSelectAllItems value)? updateSelectAllItems,
+    TResult? Function(_updateBonusItem value)? updateBonusItem,
+    TResult? Function(_deleteBonusItem value)? deleteBonusItem,
+    TResult? Function(_RemarksChanged value)? remarksChanged,
+    TResult? Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult? Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
+  }) {
+    return addRemarksToBonusItem?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_AddToCart value)? addToCart,
+    TResult Function(_AddToCartFromList value)? addToCartFromList,
+    TResult Function(_UpdateCartItem value)? updateCartItem,
+    TResult Function(_UpdateCart value)? updateCart,
+    TResult Function(_UpdateStockInfo value)? updateStockInfo,
+    TResult Function(_RemoveFromCart value)? removeFromCart,
+    TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_updateSelectedItem value)? updateSelectedItem,
+    TResult Function(_updateSelectAllItems value)? updateSelectAllItems,
+    TResult Function(_updateBonusItem value)? updateBonusItem,
+    TResult Function(_deleteBonusItem value)? deleteBonusItem,
+    TResult Function(_RemarksChanged value)? remarksChanged,
+    TResult Function(_AddRemarksToCartItem value)? addRemarksToCartItem,
+    TResult Function(_AddRemarksToBonusItem value)? addRemarksToBonusItem,
+    required TResult orElse(),
+  }) {
+    if (addRemarksToBonusItem != null) {
+      return addRemarksToBonusItem(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AddRemarksToBonusItem implements CartEvent {
+  const factory _AddRemarksToBonusItem(
+      {required final PriceAggregate item,
+      required final MaterialInfo bonusItem,
+      required final bool isDelete}) = _$_AddRemarksToBonusItem;
+
+  PriceAggregate get item;
+  MaterialInfo get bonusItem;
+  bool get isDelete;
+  @JsonKey(ignore: true)
+  _$$_AddRemarksToBonusItemCopyWith<_$_AddRemarksToBonusItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

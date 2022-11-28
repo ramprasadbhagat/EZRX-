@@ -1,13 +1,18 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/presentation/core/remarks_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_bonus.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_remark_dialog.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_remarks_button.dart';
+import 'package:ezrxmobile/presentation/orders/cart/custom_expansion_tile.dart'
+    as custom;
+import 'package:ezrxmobile/presentation/orders/cart/edit_delete_dialog.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_icon.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ezrxmobile/presentation/orders/cart/custom_expansion_tile.dart'
-    as custom;
 
 class BounsTile extends StatelessWidget {
   final PriceAggregate cartItem;
@@ -117,6 +122,34 @@ class BounsTile extends StatelessWidget {
                                     fontSize: 12,
                                   ),
                                 ),
+                                if (context
+                                    .read<SalesOrgBloc>()
+                                    .state
+                                    .configs
+                                    .enableRemarks)
+                                  e.remarks.isNotEmpty
+                                      ? RemarksMessage(
+                                          message:
+                                              '${'Remarks: '.tr()}${e.remarks}',
+                                          showEditDeleteDialog:
+                                              EditDeleteDialog(
+                                            cartItem: cartItem,
+                                            bonusItem: e,
+                                            isBonus: true,
+                                          ),
+                                        )
+                                      : AddRemarksButton(
+                                          key: const Key('addRemarksBonus'),
+                                          onPressed: () {
+                                            AddRemarkDialog.show(
+                                              context: context,
+                                              cartItem: cartItem,
+                                              isEdit: false,
+                                              isBonus: true,
+                                              bonusItem: e,
+                                            );
+                                          },
+                                        ),
                               ],
                             ),
                           ),

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/orders/cart/remarks_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,9 +13,12 @@ class AddRemarkDialog {
     required BuildContext context,
     required PriceAggregate cartItem,
     required bool isEdit,
+    required MaterialInfo bonusItem,
+    required bool isBonus,
     String confirmText = 'Add',
     String cancelText = 'Cancel',
   }) {
+    final remarks = isBonus ? bonusItem.remarks : cartItem.materialInfo.remarks;
     showPlatformDialog(
       context: context,
       barrierDismissible: true,
@@ -22,7 +26,7 @@ class AddRemarkDialog {
       builder: (BuildContext context) {
         context.read<CartBloc>().add(
               CartEvent.remarksChanged(
-                cartItem.materialInfo.remarks,
+                remarks,
               ),
             );
 
@@ -39,9 +43,9 @@ class AddRemarkDialog {
           builder: (context, state) {
             return PlatformAlertDialog(
               key: const Key('addRemarksDialog'),
-              title: Text(isEdit?'Update Remarks':'Add Remarks').tr(),
+              title: Text(isEdit ? 'Update Remarks' : 'Add Remarks').tr(),
               content: RemarksForm(
-                currentRemarkData: cartItem.materialInfo.remarks,
+                currentRemarkData: remarks,
               ),
               actions: [
                 PlatformDialogAction(
@@ -56,12 +60,22 @@ class AddRemarkDialog {
                   onPressed: state.isRemarksAdding
                       ? null
                       : () {
-                          context.read<CartBloc>().add(
-                                CartEvent.addRemarksToCartItem(
-                                  item: cartItem,
-                                  isDelete: false,
-                                ),
-                              );
+                          if (isBonus) {
+                            context.read<CartBloc>().add(
+                                  CartEvent.addRemarksToBonusItem(
+                                    item: cartItem,
+                                    bonusItem: bonusItem,
+                                    isDelete: false,
+                                  ),
+                                );
+                          } else {
+                            context.read<CartBloc>().add(
+                                  CartEvent.addRemarksToCartItem(
+                                    item: cartItem,
+                                    isDelete: false,
+                                  ),
+                                );
+                          }
                         },
                   child: Text(confirmText).tr(),
                 ),
