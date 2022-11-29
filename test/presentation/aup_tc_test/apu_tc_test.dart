@@ -6,11 +6,15 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
+import 'package:ezrxmobile/presentation/account/settings_page.dart';
 import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
 import 'package:ezrxmobile/presentation/home_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,6 +22,8 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../utils/material_frame_wrapper.dart';
+import '../../utils/tester_utils.dart';
+import '../../utils/widget_utils.dart';
 
 class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
@@ -40,13 +46,21 @@ class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
 
 class AutoRouterMock extends Mock implements AppRouter {}
 
+class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
+
+class PaymentCustomerInfoMockBloc extends MockBloc<
+        PaymentCustomerInformationEvent, PaymentCustomerInformationState>
+    implements PaymentCustomerInformationBloc {}
+
 void main() {
   late GetIt locator;
   late AuthBloc mockAuthBloc;
-  // late AppRouter autoRouterMock;
+  late AppRouter autoRouterMock;
   late MockAupTcBloc mockAupTcBloc;
   late UserBloc userBlocMock;
   late AuthBloc authBlocMock;
+  late CartBloc cartBlocMock;
+  late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -57,7 +71,7 @@ void main() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => mockAuthBloc);
     locator.registerLazySingleton(() => PackageInfoService());
-    // autoRouterMock = locator<AppRouter>();
+    autoRouterMock = locator<AppRouter>();
   });
 
   group('AupTc Widget Show hide base on state.showTermsAndConditon true', () {
@@ -65,9 +79,13 @@ void main() {
       // autoRouterMock = locator<AppRouter>();
       userBlocMock = UserBlocMock();
       authBlocMock = AuthBlocMock();
+      cartBlocMock = CartBlocMock();
+      paymentCustomerInformationBlocMock = PaymentCustomerInfoMockBloc();
       // autoRouterMock = locator<AppRouter>();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => cartBlocMock.state).thenReturn(CartState.initial());
+      when(() => paymentCustomerInformationBlocMock.state).thenReturn(PaymentCustomerInformationState.initial());
     });
     testWidgets(
         'Test - AupTc Widget Show AupTcBloc state.showTermsAndConditon=true',
@@ -105,37 +123,47 @@ void main() {
     });
 
     // TODO: need Joseph fix this
-    // testWidgets(
-    //     'Test - AupTc Widget Show AupTcBloc state.showTermsAndConditon=false',
-    //     (tester) async {
-    //   final expectedStates = [
-    //     const AuthState.authenticated(),
-    //   ];
-    //   when(() => mockAupTcBloc.state).thenReturn(
-    //     AupTcState.initial().copyWith(
-    //       showTermsAndConditon: false,
-    //     ),
-    //   );
-    //   whenListen(authBlocMock, Stream.fromIterable(expectedStates),
-    //       initialState: const AuthState.initial());
+    testWidgets(
+        'Test - AupTc Widget Show AupTcBloc state.showTermsAndConditon=false',
+        (tester) async {
+      final expectedStates = [
+        const AuthState.authenticated(),
+      ];
+      when(() => mockAupTcBloc.state).thenReturn(
+        AupTcState.initial().copyWith(
+          showTermsAndConditon: false,
+        ),
+      );
+      whenListen(authBlocMock, Stream.fromIterable(expectedStates),
+          initialState: const AuthState.initial());
 
-    //   await tester.pumpWidget(WidgetUtils.getScopedWidget(
-    //     autoRouterMock: autoRouterMock,
-    //     providers: [
-    //       BlocProvider<AuthBloc>(
-    //         create: (context) => authBlocMock,
-    //       ),
-    //       BlocProvider<AupTcBloc>(
-    //         create: (context) => mockAupTcBloc,
-    //       ),
-    //     ],
-    //     child: const SplashPage(),
-    //   ));
-    //   await tester.pumpAndSettle();
-    //   final auptcscreen = find.byKey(const Key('auptcscreen'));
-    //   expect(autoRouterMock.current.name, HomeNavigationTabbarRoute.name);
-    //   expect(auptcscreen, findsNothing);
-    // });
+      await tester.pumpWidget(WidgetUtils.getScopedWidget(
+          autoRouterMock: autoRouterMock,
+          providers: [
+            BlocProvider<AuthBloc>(
+              create: (context) => authBlocMock,
+            ),
+            BlocProvider<AupTcBloc>(
+              create: (context) => mockAupTcBloc,
+            ),
+            BlocProvider<UserBloc>(
+              create: (context) => userBlocMock,
+            ),
+            BlocProvider<CartBloc>(
+              create: (context) => cartBlocMock,
+            ),
+            BlocProvider<PaymentCustomerInformationBloc>(
+              create: (context) => paymentCustomerInformationBlocMock,
+            ),
+          ],
+          child: const SplashPage(),
+        ),
+      );
+      await tester.pump();
+      final auptcscreen = find.byKey(const Key('auptcscreen'));
+      expect(autoRouterMock.current.name, HomeNavigationTabbarRoute.name);
+      expect(auptcscreen, findsNothing);
+    });
   });
 
   testWidgets('Test - AupTc Widget Show AupTcBloc on loading', (tester) async {
@@ -156,7 +184,6 @@ void main() {
         ),
       ),
     );
-    // need fix//
 
     final auptcscreen = find.byKey(const Key('auptcscreen'));
     expect(auptcscreen, findsOneWidget);
@@ -195,42 +222,32 @@ void main() {
     await tester.pumpAndSettle(const Duration(seconds: 3));
     await tester.tap(auptcAcceptButton);
     await tester.pump();
-    final snackBarMsgFinder = find.text('You Need To read full Terms and Condition before Accept'.tr());
+    final snackBarMsgFinder = find
+        .text('You Need To read full Terms and Condition before Accept'.tr());
     expect(snackBarMsgFinder, findsOneWidget);
   });
 
-  // TODO: need Joseph fix this
-  // testWidgets('Setting screen toc tile', (tester) async {
-  //   await tester.pumpWidget(EasyLocalization(
-  //     supportedLocales: const [
-  //       Locale('en', 'SG'),
-  //     ],
-  //     path: 'assets/langs/langs.csv',
-  //     startLocale: const Locale('en', 'SG'),
-  //     fallbackLocale: const Locale('en', 'SG'),
-  //     saveLocale: true,
-  //     useOnlyLangCode: false,
-  //     assetLoader: CsvAssetLoader(),
-  //     child: WidgetUtils.getScopedWidget(
-  //       autoRouterMock: autoRouterMock,
-  //       providers: [
-  //         BlocProvider<AuthBloc>(
-  //           create: (context) => authBlocMock,
-  //         ),
-  //         BlocProvider<AupTcBloc>(
-  //           create: (context) => mockAupTcBloc,
-  //         ),
-  //       ],
-  //       child: const SettingsPage(),
-  //     ),
-  //   ));
-  //   await tester.pump();
-  //   final tosTile = find.byKey(const Key('tostile'));
-  //   expect(tosTile, findsOneWidget);
-  //   final tosTileTextFinder = find.text('Tos'.tr());
-  //   expect(tosTileTextFinder, findsOneWidget);
-  //   await tester.tap(tosTile);
-  //   await tester.pump();
-  //   expect(autoRouterMock.current.name, AupTCDialogRoute.name);
-  // });
+  testWidgets('Setting screen toc tile', (tester) async {
+    await TesterUtils.setUpLocalizationWrapper(
+      tester: tester,
+       home: const SettingsPage(), 
+       locale:  const Locale('en', 'SG'),
+       isAutoRouteEnabled: true,
+       autoRouterMock: autoRouterMock,
+       providers: [
+         BlocProvider<AuthBloc>(
+            create: (context) => authBlocMock,
+          ),
+          BlocProvider<AupTcBloc>(
+            create: (context) => mockAupTcBloc,
+          ),
+       ]
+     );
+    await tester.pump();
+    final tosTile = find.byKey(const Key('tostile'));
+    expect(tosTile, findsOneWidget);
+    await tester.tap(tosTile);
+    await tester.pump();
+    expect(autoRouterMock.current.name, AupTCDialogRoute.name);
+  });
 }
