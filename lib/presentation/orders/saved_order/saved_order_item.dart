@@ -7,9 +7,9 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -94,7 +94,7 @@ class SavedOrderItem extends StatelessWidget {
                     ),
               ),
               Text(
-                'Order Value: ${_displayPrice(context.read<SalesOrgBloc>().state.configs, order.totalOrderValue)}',
+                'Order Value: ${StringUtils.displayPrice(context.read<SalesOrgBloc>().state.configs, order.totalOrderValue)}',
                 style: Theme.of(context).textTheme.bodyText1?.apply(
                       color: ZPColors.black,
                     ),
@@ -105,12 +105,4 @@ class SavedOrderItem extends StatelessWidget {
       ),
     );
   }
-}
-
-String _displayPrice(SalesOrganisationConfigs salesOrgConfig, double price) {
-  if (salesOrgConfig.currency.isVN) {
-    return '${price.toStringAsFixed(2)} ${salesOrgConfig.currency.code}';
-  }
-
-  return '${salesOrgConfig.currency.code} ${price.toStringAsFixed(2)}';
 }

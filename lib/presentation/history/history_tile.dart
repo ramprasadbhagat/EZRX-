@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -155,7 +156,7 @@ class OrderHistoryListTile extends StatelessWidget {
               if (enableOHPrice)
                 BalanceTextRow(
                   keyText: 'ZP Price'.tr(),
-                  valueText: _displayPrice(
+                  valueText: StringUtils.displayPrice(
                     salesOrgConfigs,
                     orderHistoryItem.unitPrice.zpPrice,
                   ),
@@ -163,7 +164,7 @@ class OrderHistoryListTile extends StatelessWidget {
               if (enableOHPrice)
                 BalanceTextRow(
                   keyText: 'Total Price'.tr(),
-                  valueText: _displayPrice(
+                  valueText: StringUtils.displayPrice(
                     salesOrgConfigs,
                     orderHistoryItem.totalPrice.totalPrice,
                   ),
@@ -179,12 +180,4 @@ class OrderHistoryListTile extends StatelessWidget {
       ),
     );
   }
-}
-
-String _displayPrice(SalesOrganisationConfigs salesOrgConfig, double price) {
-  if (salesOrgConfig.currency.isVN) {
-    return '${price.toStringAsFixed(2)} ${salesOrgConfig.currency.code}';
-  }
-
-  return '${salesOrgConfig.currency.code} ${price.toStringAsFixed(2)}';
 }

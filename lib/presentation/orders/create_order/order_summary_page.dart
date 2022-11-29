@@ -14,8 +14,8 @@ import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -633,7 +633,10 @@ class _CartDetails extends StatelessWidget {
           children: [
             BalanceTextRow(
               keyText: 'Subtotal'.tr(),
-              valueText: _displayPrice(salesOrgConfig, state.subtotal),
+              valueText: StringUtils.displayPrice(
+                salesOrgConfig,
+                state.subtotal,
+              ),
             ),
             salesOrgConfig.enableVat
                 ? BalanceTextRow(
@@ -644,12 +647,18 @@ class _CartDetails extends StatelessWidget {
             salesOrgConfig.enableVat
                 ? BalanceTextRow(
                     keyText: taxCode.tr(),
-                    valueText: _displayPrice(salesOrgConfig, state.vatTotal),
+                    valueText: StringUtils.displayPrice(
+                      salesOrgConfig,
+                      state.vatTotal,
+                    ),
                   )
                 : const SizedBox.shrink(),
             BalanceTextRow(
               keyText: 'Grand Total'.tr(),
-              valueText: _displayPrice(salesOrgConfig, state.grandTotal),
+              valueText: StringUtils.displayPrice(
+                salesOrgConfig,
+                state.grandTotal,
+              ),
             ),
             const SizedBox(
               height: 20,
@@ -676,14 +685,6 @@ class _CartDetails extends StatelessWidget {
       },
     );
   }
-}
-
-String _displayPrice(SalesOrganisationConfigs salesOrgConfig, double price) {
-  if (salesOrgConfig.currency.isVN) {
-    return '${price.toStringAsFixed(2)} ${salesOrgConfig.currency.code}';
-  }
-
-  return '${salesOrgConfig.currency.code} ${price.toStringAsFixed(2)}';
 }
 
 class _TextFormField extends StatelessWidget {

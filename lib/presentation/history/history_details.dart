@@ -15,6 +15,7 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/core/text_button_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_helper.dart';
@@ -27,7 +28,6 @@ import 'package:ezrxmobile/application/order/order_history_details/download_atta
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
@@ -296,7 +296,7 @@ class _OrderDetails extends StatelessWidget {
               BalanceTextRow(
                 keyText: 'Total sub value'.tr(),
                 valueText: enableTaxDisplay
-                    ? _displayPrice(
+                    ? StringUtils.displayPrice(
                         context.read<SalesOrgBloc>().state.configs,
                         orderDetails.orderHistoryDetailsOrderHeader.orderValue,
                       )
@@ -310,7 +310,7 @@ class _OrderDetails extends StatelessWidget {
                 keyText: context.read<SalesOrgBloc>().state.salesOrg.isSg
                     ? 'GST'
                     : 'Total Tax',
-                valueText: _displayPrice(
+                valueText: StringUtils.displayPrice(
                   context.read<SalesOrgBloc>().state.configs,
                   orderDetails.orderHistoryDetailsOrderHeader.totalTax,
                 ),
@@ -321,7 +321,7 @@ class _OrderDetails extends StatelessWidget {
             if (enableOHPrice)
               BalanceTextRow(
                 keyText: 'Grand Total'.tr(),
-                valueText: _displayPrice(
+                valueText: StringUtils.displayPrice(
                   context.read<SalesOrgBloc>().state.configs,
                   enableTaxDisplay
                       ? context.read<CartBloc>().state.grandTotal
@@ -440,14 +440,6 @@ class _OrderDetails extends StatelessWidget {
       },
     );
   }
-}
-
-String _displayPrice(SalesOrganisationConfigs salesOrgConfig, double price) {
-  if (salesOrgConfig.currency.isVN) {
-    return '${price.toStringAsFixed(2)} ${salesOrgConfig.currency.code}';
-  }
-
-  return '${salesOrgConfig.currency.code} ${price.toStringAsFixed(2)}';
 }
 
 class _SoldToAddress extends StatelessWidget {
