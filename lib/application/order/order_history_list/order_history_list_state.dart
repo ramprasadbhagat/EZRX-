@@ -13,7 +13,7 @@ class OrderHistoryListState with _$OrderHistoryListState {
   factory OrderHistoryListState.initial() => OrderHistoryListState(
         orderHistoryList: OrderHistory.empty(),
         canLoadMore: true,
-        isFetching: true,
+        isFetching: false,
         nextPageIndex: 0,
         failureOrSuccessOption: none(),
       );

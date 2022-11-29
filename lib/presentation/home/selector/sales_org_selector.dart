@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
@@ -34,7 +35,8 @@ class SalesOrgSelector extends StatelessWidget {
         listenWhen: (previous, current) =>
             previous.salesOrganisation != current.salesOrganisation ||
             previous.salesOrgFailureOrSuccessOption !=
-                current.salesOrgFailureOrSuccessOption,
+                current.salesOrgFailureOrSuccessOption ||
+            previous.configs != current.configs,
         listener: (context, state) {
           state.salesOrgFailureOrSuccessOption.fold(
             () {},
@@ -48,30 +50,17 @@ class SalesOrgSelector extends StatelessWidget {
                 if (failureMessage == 'authentication failed') {
                   context.read<AuthBloc>().add(const AuthEvent.logout());
                 }
+
+                if (state.haveSelectedSalesOrganisation) {
+                  _callBannerAndDocType(context, state, false);
+                }
               },
               (_) {},
             ),
           );
-          if (state.haveSelectedSalesOrganisation) {
-            context.read<CustomerCodeBloc>().add(
-                  CustomerCodeEvent.fetch(
-                    hidecustomer: state.hideCustomer,
-                    selectedSalesOrg: state.salesOrganisation,
-                    isRefresh: true,
-                    userInfo: context.read<UserBloc>().state.user,
-                  ),
-                );
-            context.read<BannerBloc>().add(
-                  BannerEvent.fetch(
-                    isPreSalesOrg: false,
-                    salesOrganisation: state.salesOrganisation,
-                  ),
-                );
-            context.read<OrderDocumentTypeBloc>().add(
-                  OrderDocumentTypeEvent.fetch(
-                    salesOrganisation: state.salesOrganisation,
-                  ),
-                );
+          if (state.haveSelectedSalesOrganisation &&
+              state.configs != SalesOrganisationConfigs.empty()) {
+            _callBannerAndDocType(context, state, true);
           }
         },
         buildWhen: (previous, current) =>
@@ -146,5 +135,31 @@ class SalesOrgSelector extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _callBannerAndDocType(
+      BuildContext context, SalesOrgState state, bool fetchCustomer,) {
+    context.read<BannerBloc>().add(
+          BannerEvent.fetch(
+            isPreSalesOrg: false,
+            salesOrganisation: state.salesOrganisation,
+          ),
+        );
+    context.read<OrderDocumentTypeBloc>().add(
+          OrderDocumentTypeEvent.fetch(
+            salesOrganisation: state.salesOrganisation,
+          ),
+        );
+
+    if (fetchCustomer) {
+      context.read<CustomerCodeBloc>().add(
+            CustomerCodeEvent.fetch(
+              hidecustomer: state.hideCustomer,
+              selectedSalesOrg: state.salesOrganisation,
+              isRefresh: true,
+              userInfo: context.read<UserBloc>().state.user,
+            ),
+          );
+    }
   }
 }

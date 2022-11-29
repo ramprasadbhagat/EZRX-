@@ -265,7 +265,7 @@ void main() {
       ];
       // optionOf(const Right(<MaterialInfo>[])),
       when(() => materialListBlocMock.state)
-          .thenReturn(MaterialListState.initial());
+          .thenReturn(MaterialListState.initial().copyWith(isFetching: true));
       await tester.pumpWidget(getScopedWidget(const MaterialRoot()));
       whenListen(materialListBlocMock, Stream.fromIterable(expectedState));
       final loaderImage = find.byKey(const Key('loaderImage'));

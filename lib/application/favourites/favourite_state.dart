@@ -10,7 +10,7 @@ class FavouriteState with _$FavouriteState {
 
   factory FavouriteState.initial() => FavouriteState(
         failureOrSuccessOption: none(),
-        isLoading: true,
+        isLoading: false,
         favouriteItems: <Favourite>[],
       );
 }

@@ -237,7 +237,7 @@ void main() {
       await tester.tap(covidTabTitle);
       await tester.pump(const Duration(seconds: 4));
       final txtForm = find.byType(TextFormField);
-      await tester.enterText(txtForm, '999');
+      await tester.enterText(txtForm, '99');
       expect(find.text('999'), findsNothing);
     });
 

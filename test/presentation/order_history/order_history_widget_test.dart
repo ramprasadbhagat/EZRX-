@@ -243,6 +243,14 @@ void main() {
             ),
           ]);
         });
+        when(() => mockOrderHistoryListBloc.state).thenReturn(
+          OrderHistoryListState.initial().copyWith(isFetching: true),
+        );
+        when(() => mockOrderHistoryFilterByStatusBloc.state).thenReturn(
+          OrderHistoryFilterByStatusState.initial().copyWith(
+            filterByStatusName: [],
+          ),
+        );
         await tester.pumpWidget(getWUT());
         await tester.pumpAndSettle(const Duration(seconds: 3));
         expect(find.byKey(const Key('orderHistoryList')), findsWidgets);

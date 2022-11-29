@@ -163,7 +163,7 @@ void main() {
       },
       expect: () => [
         materialState.copyWith(
-          isFetching: true,
+          isFetching: false,
           materialList: [],
           searchKey: SearchKey('1234'),
         ),
@@ -211,6 +211,9 @@ void main() {
       },
       expect: () => [
         materialState.copyWith(
+          searchKey: SearchKey('1763'),
+        ),
+        materialState.copyWith(
           isFetching: true,
           materialList: [],
           searchKey: SearchKey('1763'),
@@ -235,7 +238,7 @@ void main() {
       },
       expect: () => [
         materialState.copyWith(
-          isFetching: true,
+          isFetching: false,
           materialList: [],
           searchKey: SearchKey.search(''),
         )
@@ -279,6 +282,9 @@ void main() {
         );
       },
       expect: () => [
+        materialState.copyWith(
+          searchKey: SearchKey('1978'),
+        ),
         materialState.copyWith(
           isFetching: true,
           materialList: [],

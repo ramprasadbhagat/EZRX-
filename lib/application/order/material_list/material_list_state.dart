@@ -16,7 +16,7 @@ class MaterialListState with _$MaterialListState {
         materialList: <MaterialInfo>[],
         apiFailureOrSuccessOption: none(),
         canLoadMore: true,
-        isFetching: true,
+        isFetching: false,
         nextPageIndex: 0,
         searchKey: SearchKey(''),
         selectedFilters: MaterialFilter.empty(),

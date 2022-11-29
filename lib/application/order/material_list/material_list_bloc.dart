@@ -137,6 +137,14 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
         );
       },
       searchMaterialList: (e) async {
+        emit(
+          state.copyWith(
+            isFetching: true,
+            materialList: <MaterialInfo>[],
+            nextPageIndex: 0,
+            apiFailureOrSuccessOption: none(),
+          ),
+        );
         final failureOrSuccess =
             await materialListRepository.searchMaterialList(
           user: e.user,
