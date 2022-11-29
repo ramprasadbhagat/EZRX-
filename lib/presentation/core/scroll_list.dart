@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class ScrollList<T> extends StatefulWidget {
   final VoidCallback onRefresh;
-  final VoidCallback onLoadingMore;
+  final VoidCallback? onLoadingMore;
   final bool isLoading;
   final List<T> items;
   final String emptyMessage;
@@ -15,11 +15,11 @@ class ScrollList<T> extends StatefulWidget {
   const ScrollList({
     Key? key,
     required this.onRefresh,
-    required this.onLoadingMore,
     required this.isLoading,
     required this.itemBuilder,
     required this.items,
     required this.emptyMessage,
+    this.onLoadingMore,
   }) : super(key: key);
 
   @override
@@ -35,7 +35,7 @@ class _ScrollListState<T> extends State<ScrollList<T>> {
       () {
         if (_controller.position.pixels >=
             _controller.position.maxScrollExtent) {
-          widget.onLoadingMore.call();
+          widget.onLoadingMore?.call();
         }
       },
     );

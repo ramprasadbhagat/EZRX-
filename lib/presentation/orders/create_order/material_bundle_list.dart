@@ -103,19 +103,6 @@ class _BodyContent extends StatelessWidget {
                       ),
                     );
               },
-              onLoadingMore: () => context.read<MaterialBundleListBloc>().add(
-                    MaterialBundleListEvent.fetch(
-                      user: context.read<UserBloc>().state.user,
-                      customerCode: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      shipToCode:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
-                    ),
-                  ),
               isLoading: state.isFetching,
               itemBuilder: (context, index, item) =>
                   _ListContent(bundleAggregate: item),
