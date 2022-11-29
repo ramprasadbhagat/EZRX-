@@ -21,26 +21,34 @@ class CartStorage {
   CartStorage();
 
   Future<void> init() async {
-    Hive
-      ..registerAdapter(BundleInfoDtoAdapter())
-      ..registerAdapter(BundleDtoAdapter())
-      ..registerAdapter(MaterialDtoAdapter())
-      ..registerAdapter(PriceRuleDtoAdapter())
-      ..registerAdapter(PriceTierItemDtoAdapter())
-      ..registerAdapter(PriceTierDtoAdapter())
-      ..registerAdapter(BonusMaterialDtoAdapter())
-      ..registerAdapter(PriceBonusItemDtoAdapter())
-      ..registerAdapter(PriceBonusDtoAdapter())
-      ..registerAdapter(PriceBundleItemDtoAdapter())
-      ..registerAdapter(PriceBundleDtoAdapter())
-      ..registerAdapter(PriceDtoAdapter())
-      ..registerAdapter(SalesOrganisationConfigsDtoAdapter())
-      ..registerAdapter(PriceAggregateDtoAdapter())
-      ..registerAdapter(StockInfoDtoAdapter());
-    _cartBox = await Hive.openBox(
-      _boxName,
-    );
+    try {
+      await Hive.initFlutter();
+      Hive
+        ..registerAdapter(BundleInfoDtoAdapter())
+        ..registerAdapter(BundleDtoAdapter())
+        ..registerAdapter(MaterialDtoAdapter())
+        ..registerAdapter(PriceRuleDtoAdapter())
+        ..registerAdapter(PriceTierItemDtoAdapter())
+        ..registerAdapter(PriceTierDtoAdapter())
+        ..registerAdapter(BonusMaterialDtoAdapter())
+        ..registerAdapter(PriceBonusItemDtoAdapter())
+        ..registerAdapter(PriceBonusDtoAdapter())
+        ..registerAdapter(PriceBundleItemDtoAdapter())
+        ..registerAdapter(PriceBundleDtoAdapter())
+        ..registerAdapter(PriceDtoAdapter())
+        ..registerAdapter(SalesOrganisationConfigsDtoAdapter())
+        ..registerAdapter(PriceAggregateDtoAdapter())
+        ..registerAdapter(StockInfoDtoAdapter());
+      _cartBox = await Hive.openBox(
+        _boxName,
+      );
+    } catch (e) {
+      await Hive.deleteBoxFromDisk(_boxName);
+      Hive.resetAdapters();
+      await init();
+    }
   }
+
 
   Future<List<PriceAggregateDto>> get() async {
     try {
