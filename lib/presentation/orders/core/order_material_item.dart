@@ -53,7 +53,7 @@ class OrderMaterialItem extends StatelessWidget {
 
                   return Row(
                     children: [
-                       Text(
+                      Text(
                         'Material Description:'.tr(),
                         style: const TextStyle(
                           fontSize: 14,
@@ -253,7 +253,6 @@ class _MaterialPriceInfo extends StatelessWidget {
             quantity: 1,
             discountedMaterialCount:
                 context.read<CartBloc>().state.zmgMaterialCount,
-            isOverride: false,
             bundle: Bundle.empty(),
             addedBonusList: [],
             stockInfo: StockInfo.empty(),

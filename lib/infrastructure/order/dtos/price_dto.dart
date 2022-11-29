@@ -58,6 +58,9 @@ class PriceDto with _$PriceDto {
     @JsonKey(name: 'Valid', defaultValue: false)
     @HiveField(13, defaultValue: false)
         required bool isValid,
+    @JsonKey(name: 'isPriceOverride', defaultValue: false)
+    @HiveField(14, defaultValue: false)
+        required bool isPriceOverride,
   }) = _PriceDto;
 
   Price toDomain() => Price(
@@ -75,6 +78,7 @@ class PriceDto with _$PriceDto {
         finalTotalPrice: MaterialPrice(finalTotalPrice),
         additionalBonusEligible: additionalBonusEligible,
         isValid: isValid,
+        isPriceOverride: isPriceOverride,
       );
 
   factory PriceDto.fromDomain(Price price) {
@@ -93,6 +97,7 @@ class PriceDto with _$PriceDto {
       finalTotalPrice: price.finalTotalPrice.getOrCrash(),
       additionalBonusEligible: price.additionalBonusEligible,
       isValid: price.isValid,
+      isPriceOverride: price.isPriceOverride,
     );
   }
 

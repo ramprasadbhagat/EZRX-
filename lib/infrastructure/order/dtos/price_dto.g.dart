@@ -33,13 +33,14 @@ class PriceDtoAdapter extends TypeAdapter<_$_PriceDto> {
       finalTotalPrice: fields[11] == null ? 0 : fields[11] as double,
       additionalBonusEligible: fields[12] == null ? false : fields[12] as bool,
       isValid: fields[13] == null ? false : fields[13] as bool,
+      isPriceOverride: fields[14] == null ? false : fields[14] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_PriceDto obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(15)
       ..writeByte(0)
       ..write(obj.materialNumber)
       ..writeByte(5)
@@ -60,6 +61,8 @@ class PriceDtoAdapter extends TypeAdapter<_$_PriceDto> {
       ..write(obj.additionalBonusEligible)
       ..writeByte(13)
       ..write(obj.isValid)
+      ..writeByte(14)
+      ..write(obj.isPriceOverride)
       ..writeByte(1)
       ..write(obj.rules)
       ..writeByte(2)
@@ -114,6 +117,7 @@ _$_PriceDto _$$_PriceDtoFromJson(Map<String, dynamic> json) => _$_PriceDto(
       additionalBonusEligible:
           json['AdditionalBonusEligible'] as bool? ?? false,
       isValid: json['Valid'] as bool? ?? false,
+      isPriceOverride: json['isPriceOverride'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_PriceDtoToJson(_$_PriceDto instance) =>
@@ -132,4 +136,5 @@ Map<String, dynamic> _$$_PriceDtoToJson(_$_PriceDto instance) =>
       'FinalTotalPrice': instance.finalTotalPrice,
       'AdditionalBonusEligible': instance.additionalBonusEligible,
       'Valid': instance.isValid,
+      'isPriceOverride': instance.isPriceOverride,
     };

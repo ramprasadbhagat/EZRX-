@@ -159,7 +159,6 @@ class BundleItemDetailPage extends StatelessWidget {
           salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
           quantity: int.parse(list[material.materialNumber.getOrCrash()]!.text),
           discountedMaterialCount: cartBloc.state.zmgMaterialCount,
-          isOverride: false,
           bundle: bundle,
           addedBonusList: [],
           stockInfo: StockInfo.empty().copyWith(

@@ -58,7 +58,8 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
               tiers: [],
               zdp5MaxQuota: '',
               zdp5RemainingQuota: '',
-              zmgDiscount: false)
+              zmgDiscount: false,
+              isPriceOverride: false)
           : fields[2] as PriceDto,
       salesOrganisationConfigsDto: fields[3] == null
           ? const SalesOrganisationConfigsDto(
@@ -104,28 +105,27 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
               enableTaxDisplay: false)
           : fields[3] as SalesOrganisationConfigsDto,
       zmgMaterialCountOnCart: fields[4] == null ? 0 : fields[4] as int,
-      isOverride: fields[5] == null ? false : fields[5] as bool,
-      bundleDto: fields[6] == null
+      bundleDto: fields[5] == null
           ? const BundleDto(
               bundleName: '', bundleCode: '', bundleInformation: [])
-          : fields[6] as BundleDto,
+          : fields[5] as BundleDto,
       bonusItem:
-          fields[7] == null ? [] : (fields[7] as List).cast<MaterialDto>(),
-      stockInfoDto: fields[8] == null
+          fields[6] == null ? [] : (fields[6] as List).cast<MaterialDto>(),
+      stockInfoDto: fields[7] == null
           ? const StockInfoDto(
               batch: '',
               expiryDate: '',
               inStock: '',
               materialNumber: '',
               salesDistrict: '')
-          : fields[8] as StockInfoDto,
+          : fields[7] as StockInfoDto,
     );
   }
 
   @override
   void write(BinaryWriter writer, PriceAggregateDto obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.materialDto)
       ..writeByte(1)
@@ -137,12 +137,10 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
       ..writeByte(4)
       ..write(obj.zmgMaterialCountOnCart)
       ..writeByte(5)
-      ..write(obj.isOverride)
-      ..writeByte(6)
       ..write(obj.bundleDto)
-      ..writeByte(7)
+      ..writeByte(6)
       ..write(obj.bonusItem)
-      ..writeByte(8)
+      ..writeByte(7)
       ..write(obj.stockInfoDto);
   }
 

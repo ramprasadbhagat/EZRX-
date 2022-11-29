@@ -192,7 +192,6 @@ class HistoryDetails extends StatelessWidget {
         salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
         quantity: queryInfo.qty.getOrCrash(),
         discountedMaterialCount: cartBloc.state.zmgMaterialCount,
-        isOverride: false,
         bundle: Bundle.empty(),
         addedBonusList: [],
         stockInfo: StockInfo.empty().copyWith(

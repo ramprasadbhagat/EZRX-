@@ -138,7 +138,6 @@ class SavedOrderDetailPage extends StatelessWidget {
           salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
           quantity: material.qty,
           discountedMaterialCount: cartBloc.state.zmgMaterialCount,
-          isOverride: false,
           bundle: Bundle.empty(),
           addedBonusList: [],
           stockInfo: StockInfo.empty().copyWith(

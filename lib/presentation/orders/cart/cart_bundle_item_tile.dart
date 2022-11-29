@@ -129,10 +129,10 @@ class CartBundleItemTile extends StatelessWidget {
                                             .textTheme
                                             .bodyText1
                                             ?.apply(
-                                              color:
-                                                  materialCommonInfo.isOverride
-                                                      ? ZPColors.red
-                                                      : ZPColors.lightGray,
+                                              color: materialCommonInfo
+                                                      .price.isPriceOverride
+                                                  ? ZPColors.red
+                                                  : ZPColors.lightGray,
                                               decoration: materialCommonInfo
                                                       .salesOrgConfig
                                                       .priceOverride

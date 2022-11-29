@@ -201,7 +201,6 @@ class _ListContent extends StatelessWidget {
                 quantity: 1,
                 discountedMaterialCount:
                     context.read<CartBloc>().state.zmgMaterialCount,
-                isOverride: false,
                 bundle: Bundle.empty(),
                 addedBonusList: [],
                 stockInfo: StockInfo.empty().copyWith(
@@ -303,7 +302,6 @@ class _PriceLabel extends StatelessWidget {
             quantity: 1,
             discountedMaterialCount:
                 context.read<CartBloc>().state.zmgMaterialCount,
-            isOverride: false,
             bundle: Bundle.empty(),
             addedBonusList: [],
             stockInfo: StockInfo.empty().copyWith(

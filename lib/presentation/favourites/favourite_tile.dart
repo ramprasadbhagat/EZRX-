@@ -53,7 +53,6 @@ class FavouriteListTile extends StatelessWidget {
               salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
               quantity: 1,
               discountedMaterialCount: 0,
-              isOverride: false,
               bundle: Bundle.empty(),
               addedBonusList: [],
               stockInfo: StockInfo.empty().copyWith(

@@ -22,7 +22,6 @@ class PriceAggregate with _$PriceAggregate {
     required SalesOrganisationConfigs salesOrgConfig,
     required int quantity,
     required int discountedMaterialCount,
-    required bool isOverride,
     required List<MaterialInfo> addedBonusList,
     required StockInfo stockInfo,
   }) = _PriceAggregate;
@@ -34,7 +33,6 @@ class PriceAggregate with _$PriceAggregate {
         salesOrgConfig: SalesOrganisationConfigs.empty(),
         quantity: 1,
         discountedMaterialCount: 0,
-        isOverride: false,
         addedBonusList: [],
         stockInfo: StockInfo.empty(),
       );
@@ -61,7 +59,7 @@ class PriceAggregate with _$PriceAggregate {
       type: 'Comm',
       itemRegistrationNumber: materialInfo.itemRegistrationNumber,
       unitOfMeasurement: materialInfo.unitOfMeasurement,
-      zdp8Override: isOverride,
+      // zdp8Override: isOverride,
       hidePrice: materialInfo.hidePrice,
       materialGroup2: materialInfo.materialGroup2,
       materialGroup4: materialInfo.materialGroup4,

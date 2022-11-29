@@ -134,7 +134,9 @@ void main() {
       ];
       mockCartItemWithDataListOverride = [
         PriceAggregate.empty().copyWith(
-          isOverride: true,
+          price: Price.empty().copyWith(
+            isPriceOverride: true,
+          ),
           quantity: 2,
           materialInfo: MaterialInfo.empty().copyWith(
             materialNumber: MaterialNumber('000000000023168451'),

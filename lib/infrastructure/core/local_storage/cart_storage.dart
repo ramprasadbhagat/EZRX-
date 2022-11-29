@@ -125,7 +125,8 @@ class CartStorage {
 
         if (existingItem.materialDto.materialNumber == materialNumber) {
           existingItem.priceDto = cartDto;
-          existingItem.isOverride = true;
+          existingItem.priceDto =
+              existingItem.priceDto.copyWith(isPriceOverride: true);
 
           await _cartBox.put(entry.key, existingItem);
           break;

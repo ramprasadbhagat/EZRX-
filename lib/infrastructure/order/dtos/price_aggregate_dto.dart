@@ -16,7 +16,6 @@ class PriceAggregateDto {
     required this.priceDto,
     required this.salesOrganisationConfigsDto,
     required this.zmgMaterialCountOnCart,
-    required this.isOverride,
     required this.bundleDto,
     required this.bonusItem,
     required this.stockInfoDto,
@@ -32,13 +31,11 @@ class PriceAggregateDto {
   SalesOrganisationConfigsDto salesOrganisationConfigsDto;
   @HiveField(4, defaultValue: 0)
   int zmgMaterialCountOnCart;
-  @HiveField(5, defaultValue: false)
-  bool isOverride;
-  @HiveField(6, defaultValue: _emptyBundleDto)
+  @HiveField(5, defaultValue: _emptyBundleDto)
   BundleDto bundleDto;
-  @HiveField(7, defaultValue: [])
+  @HiveField(6, defaultValue: [])
   List<MaterialDto> bonusItem;
-  @HiveField(8, defaultValue: _emptyStockInfoDto)
+  @HiveField(7, defaultValue: _emptyStockInfoDto)
   StockInfoDto stockInfoDto;
 
   factory PriceAggregateDto.fromDomain(PriceAggregate cart) {
@@ -50,7 +47,6 @@ class PriceAggregateDto {
         cart.salesOrgConfig,
       ),
       zmgMaterialCountOnCart: cart.discountedMaterialCount,
-      isOverride: cart.isOverride,
       stockInfoDto: StockInfoDto.fromDomain(cart.stockInfo),
       bundleDto: BundleDto.fromDomain(cart.bundle),
       bonusItem: cart.addedBonusList
@@ -70,7 +66,6 @@ class PriceAggregateDto {
       salesOrgConfig: salesOrganisationConfigsDto.toDomain(),
       // salesOrgConfig: SalesOrganisationConfigs.empty(),
       discountedMaterialCount: zmgMaterialCountOnCart,
-      isOverride: isOverride,
       bundle: bundleDto.toDomain(),
       addedBonusList: bonusItem.map((e) => e.toDomain()).toList(),
       stockInfo: stockInfoDto.toDomain(),
@@ -118,6 +113,7 @@ const PriceDto _emptyPriceDto = PriceDto(
   zdp5MaxQuota: '',
   zdp5RemainingQuota: '',
   zmgDiscount: false,
+  isPriceOverride: false,
 );
 
 const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
