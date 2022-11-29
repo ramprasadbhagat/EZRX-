@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/order/material_filter/material_filter_blo
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
@@ -224,11 +225,11 @@ class _BodyContent extends StatelessWidget {
                   ),
               isLoading: materialListState.isFetching,
               itemBuilder: (context, index, item) {
-                final enableDefaultMD =
-                    context.read<SalesOrgBloc>().state.configs.enableDefaultMD;
+                final salesOrgConfigs =
+                    context.read<SalesOrgBloc>().state.configs;
 
                 return _ListContent(
-                  enableDefaultMD: enableDefaultMD,
+                  salesOrgConfigs: salesOrgConfigs,
                   materialInfo: item,
                   addToCart: addToCart,
                 );
@@ -242,13 +243,13 @@ class _BodyContent extends StatelessWidget {
 class _ListContent extends StatelessWidget {
   final MaterialInfo materialInfo;
   final Function addToCart;
-  final bool enableDefaultMD;
+  final SalesOrganisationConfigs salesOrgConfigs;
 
   const _ListContent({
     Key? key,
     required this.materialInfo,
     required this.addToCart,
-    required this.enableDefaultMD,
+    required this.salesOrgConfigs,
   }) : super(key: key);
 
   @override
@@ -305,10 +306,19 @@ class _ListContent extends StatelessWidget {
               materialInfo.materialDescription,
               style: Theme.of(context).textTheme.bodyText1,
             ),
-            (enableDefaultMD &&
+            (salesOrgConfigs.enableDefaultMD &&
                     materialInfo.defaultMaterialDescription.isNotEmpty)
                 ? Text(
                     materialInfo.defaultMaterialDescription,
+                    style: Theme.of(context).textTheme.subtitle2?.apply(
+                          color: ZPColors.lightGray,
+                        ),
+                  )
+                : const SizedBox.shrink(),
+            (salesOrgConfigs.enableItemRegistrationNumber &&
+                    materialInfo.itemRegistrationNumber.isNotEmpty)
+                ? Text(
+                    materialInfo.itemRegistrationNumber,
                     style: Theme.of(context).textTheme.subtitle2?.apply(
                           color: ZPColors.lightGray,
                         ),

@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SalesOrganisationConfigs {
+  bool get enableItemRegistrationNumber => throw _privateConstructorUsedError;
   bool get enableDefaultMD => throw _privateConstructorUsedError;
   bool get disableProcessingStatus => throw _privateConstructorUsedError;
   Currency get currency => throw _privateConstructorUsedError;
@@ -68,7 +69,8 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       _$SalesOrganisationConfigsCopyWithImpl<$Res, SalesOrganisationConfigs>;
   @useResult
   $Res call(
-      {bool enableDefaultMD,
+      {bool enableItemRegistrationNumber,
+      bool enableDefaultMD,
       bool disableProcessingStatus,
       Currency currency,
       bool hideCustomer,
@@ -123,6 +125,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? enableItemRegistrationNumber = null,
     Object? enableDefaultMD = null,
     Object? disableProcessingStatus = null,
     Object? currency = null,
@@ -164,6 +167,10 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
     Object? enableTaxDisplay = null,
   }) {
     return _then(_value.copyWith(
+      enableItemRegistrationNumber: null == enableItemRegistrationNumber
+          ? _value.enableItemRegistrationNumber
+          : enableItemRegistrationNumber // ignore: cast_nullable_to_non_nullable
+              as bool,
       enableDefaultMD: null == enableDefaultMD
           ? _value.enableDefaultMD
           : enableDefaultMD // ignore: cast_nullable_to_non_nullable
@@ -334,7 +341,8 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool enableDefaultMD,
+      {bool enableItemRegistrationNumber,
+      bool enableDefaultMD,
       bool disableProcessingStatus,
       Currency currency,
       bool hideCustomer,
@@ -387,6 +395,7 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? enableItemRegistrationNumber = null,
     Object? enableDefaultMD = null,
     Object? disableProcessingStatus = null,
     Object? currency = null,
@@ -428,6 +437,10 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? enableTaxDisplay = null,
   }) {
     return _then(_$_SalesOrganisationConfigs(
+      enableItemRegistrationNumber: null == enableItemRegistrationNumber
+          ? _value.enableItemRegistrationNumber
+          : enableItemRegistrationNumber // ignore: cast_nullable_to_non_nullable
+              as bool,
       enableDefaultMD: null == enableDefaultMD
           ? _value.enableDefaultMD
           : enableDefaultMD // ignore: cast_nullable_to_non_nullable
@@ -592,7 +605,8 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
 
 class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   const _$_SalesOrganisationConfigs(
-      {required this.enableDefaultMD,
+      {required this.enableItemRegistrationNumber,
+      required this.enableDefaultMD,
       required this.disableProcessingStatus,
       required this.currency,
       required this.hideCustomer,
@@ -634,6 +648,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       : _principalList = principalList,
         super._();
 
+  @override
+  final bool enableItemRegistrationNumber;
   @override
   final bool enableDefaultMD;
   @override
@@ -720,7 +736,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, ponRequired: $ponRequired, enableTaxDisplay: $enableTaxDisplay)';
+    return 'SalesOrganisationConfigs(enableItemRegistrationNumber: $enableItemRegistrationNumber, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, ponRequired: $ponRequired, enableTaxDisplay: $enableTaxDisplay)';
   }
 
   @override
@@ -728,6 +744,9 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SalesOrganisationConfigs &&
+            (identical(other.enableItemRegistrationNumber, enableItemRegistrationNumber) ||
+                other.enableItemRegistrationNumber ==
+                    enableItemRegistrationNumber) &&
             (identical(other.enableDefaultMD, enableDefaultMD) ||
                 other.enableDefaultMD == enableDefaultMD) &&
             (identical(other.disableProcessingStatus, disableProcessingStatus) ||
@@ -776,15 +795,10 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
                 other.enablePaymentTerms == enablePaymentTerms) &&
             (identical(other.futureDeliveryDay, futureDeliveryDay) ||
                 other.futureDeliveryDay == futureDeliveryDay) &&
-            (identical(other.enableGMC, enableGMC) ||
-                other.enableGMC == enableGMC) &&
-            (identical(other.enableListPrice, enableListPrice) ||
-                other.enableListPrice == enableListPrice) &&
-            (identical(other.priceOverride, priceOverride) ||
-                other.priceOverride == priceOverride) &&
-            (identical(
-                    other.disablePaymentTermsDisplay, disablePaymentTermsDisplay) ||
-                other.disablePaymentTermsDisplay == disablePaymentTermsDisplay) &&
+            (identical(other.enableGMC, enableGMC) || other.enableGMC == enableGMC) &&
+            (identical(other.enableListPrice, enableListPrice) || other.enableListPrice == enableListPrice) &&
+            (identical(other.priceOverride, priceOverride) || other.priceOverride == priceOverride) &&
+            (identical(other.disablePaymentTermsDisplay, disablePaymentTermsDisplay) || other.disablePaymentTermsDisplay == disablePaymentTermsDisplay) &&
             (identical(other.disableDeliveryDate, disableDeliveryDate) || other.disableDeliveryDate == disableDeliveryDate) &&
             (identical(other.enableBillTo, enableBillTo) || other.enableBillTo == enableBillTo) &&
             (identical(other.showPOAttachment, showPOAttachment) || other.showPOAttachment == showPOAttachment) &&
@@ -801,6 +815,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
+        enableItemRegistrationNumber,
         enableDefaultMD,
         disableProcessingStatus,
         currency,
@@ -852,7 +867,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
 
 abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   const factory _SalesOrganisationConfigs(
-      {required final bool enableDefaultMD,
+      {required final bool enableItemRegistrationNumber,
+      required final bool enableDefaultMD,
       required final bool disableProcessingStatus,
       required final Currency currency,
       required final bool hideCustomer,
@@ -893,6 +909,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final bool enableTaxDisplay}) = _$_SalesOrganisationConfigs;
   const _SalesOrganisationConfigs._() : super._();
 
+  @override
+  bool get enableItemRegistrationNumber;
   @override
   bool get enableDefaultMD;
   @override

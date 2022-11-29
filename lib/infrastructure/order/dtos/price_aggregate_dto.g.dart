@@ -62,6 +62,7 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
           : fields[2] as PriceDto,
       salesOrganisationConfigsDto: fields[3] == null
           ? const SalesOrganisationConfigsDto(
+              enableItemRegistrationNumber: false,
               currency: '',
               disableBundles: false,
               disableOrderType: false,

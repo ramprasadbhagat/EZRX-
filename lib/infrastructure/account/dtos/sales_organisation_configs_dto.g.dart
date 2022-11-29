@@ -62,6 +62,8 @@ class SalesOrganisationConfigsDtoAdapter
       enableRemarks: fields[135] == null ? false : fields[135] as bool,
       enableOHPrice: fields[136] == null ? true : fields[136] as bool,
       ponRequired: fields[137] == null ? false : fields[137] as bool,
+      enableItemRegistrationNumber:
+          fields[139] == null ? false : fields[139] as bool,
       enableTaxDisplay: fields[138] == null ? false : fields[138] as bool,
     );
   }
@@ -69,7 +71,7 @@ class SalesOrganisationConfigsDtoAdapter
   @override
   void write(BinaryWriter writer, _$_SalesOrganisationConfigsDto obj) {
     writer
-      ..writeByte(39)
+      ..writeByte(40)
       ..writeByte(100)
       ..write(obj.disableProcessingStatus)
       ..writeByte(101)
@@ -144,6 +146,8 @@ class SalesOrganisationConfigsDtoAdapter
       ..write(obj.enableOHPrice)
       ..writeByte(137)
       ..write(obj.ponRequired)
+      ..writeByte(139)
+      ..write(obj.enableItemRegistrationNumber)
       ..writeByte(138)
       ..write(obj.enableTaxDisplay)
       ..writeByte(7)
@@ -211,6 +215,8 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       enableRemarks: json['enableRemarks'] as bool? ?? false,
       enableOHPrice: json['enableOHPrice'] as bool? ?? true,
       ponRequired: json['ponRequired'] as bool? ?? false,
+      enableItemRegistrationNumber:
+          json['enableItemRegistrationNumber'] as bool? ?? false,
       enableTaxDisplay: json['enableTaxDisplay'] as bool? ?? false,
     );
 
@@ -256,5 +262,6 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'enableRemarks': instance.enableRemarks,
       'enableOHPrice': instance.enableOHPrice,
       'ponRequired': instance.ponRequired,
+      'enableItemRegistrationNumber': instance.enableItemRegistrationNumber,
       'enableTaxDisplay': instance.enableTaxDisplay,
     };

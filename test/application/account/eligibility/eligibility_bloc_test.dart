@@ -34,6 +34,7 @@ void main() {
     customerInfos: fakeSalesOrgCustomerInfos,
   );
   final fakeSaleOrgConfig = SalesOrganisationConfigs(
+    enableItemRegistrationNumber: false,
     enableDefaultMD: false,
     disableProcessingStatus: false,
     currency: Currency(''),
