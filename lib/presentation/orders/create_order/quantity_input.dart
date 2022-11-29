@@ -1,5 +1,4 @@
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_icon.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -61,7 +60,7 @@ class QuantityInput extends StatelessWidget {
               key: quantityDeleteKey,
               pressed: () {
                 FocusScope.of(context).unfocus();
-                final value = int.parse(controller.text) - 1;
+                final value = (int.tryParse(controller.text) ?? 0) - 1;
                 if (value > minimumQty) {
                   final text = value.toString();
                   controller.value = TextEditingValue(
@@ -77,7 +76,7 @@ class QuantityInput extends StatelessWidget {
               key: quantityAddKey,
               pressed: () {
                 FocusScope.of(context).unfocus();
-                final value = int.parse(controller.text) + 1;
+                final value = (int.tryParse(controller.text) ?? 0) + 1;
 
                 if (value < maximumQty) {
                   final text = value.toString();

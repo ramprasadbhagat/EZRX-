@@ -1,18 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/presentation/core/remarks_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_bonus.dart';
-import 'package:ezrxmobile/presentation/orders/cart/add_remark_dialog.dart';
-import 'package:ezrxmobile/presentation/orders/cart/add_remarks_button.dart';
+import 'package:ezrxmobile/presentation/orders/cart/bonus_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/custom_expansion_tile.dart'
     as custom;
-import 'package:ezrxmobile/presentation/orders/cart/edit_delete_dialog.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/quantity_icon.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BounsTile extends StatelessWidget {
   final PriceAggregate cartItem;
@@ -80,155 +73,12 @@ class BounsTile extends StatelessWidget {
                 ],
               ),
               ...cartItem.addedBonusList.map(
-                (e) => Stack(
-                  children: [
-                    Card(
-                      // color: ZPColors.extraLightGray,
-                      margin: const EdgeInsets.all(6),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(6),
-                            width: MediaQuery.of(context).size.width / 2,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Flexible(
-                                      child: Text(
-                                        e.materialDescription,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText1,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Text(
-                                  'Expiry Data :-'.tr(),
-                                  style: const TextStyle(
-                                    color: ZPColors.lightGray,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                                Text(
-                                  'In Stock :'.tr(),
-                                  style: const TextStyle(
-                                    color: ZPColors.lightGray,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                                if (context
-                                    .read<SalesOrgBloc>()
-                                    .state
-                                    .configs
-                                    .enableRemarks)
-                                  e.remarks.isNotEmpty
-                                      ? RemarksMessage(
-                                          message:
-                                              '${'Remarks: '.tr()}${e.remarks}',
-                                          showEditDeleteDialog:
-                                              EditDeleteDialog(
-                                            cartItem: cartItem,
-                                            bonusItem: e,
-                                            isBonus: true,
-                                          ),
-                                        )
-                                      : AddRemarksButton(
-                                          key: const Key('addRemarksBonus'),
-                                          onPressed: () {
-                                            AddRemarkDialog.show(
-                                              context: context,
-                                              cartItem: cartItem,
-                                              isEdit: false,
-                                              isBonus: true,
-                                              bonusItem: e,
-                                            );
-                                          },
-                                        ),
-                              ],
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              QuantityIcon(
-                                key: const Key('removeBonusFromCart'),
-                                pressed: () {
-                                  if (e.quantity - 1 > 0) {
-                                    context.read<CartBloc>().add(
-                                          CartEvent.updateBonusItem(
-                                            bonusItemCount: e.quantity - 1,
-                                            cartItem: cartItem,
-                                            bonusItem: e,
-                                            isUpdateFromCart: true,
-                                          ),
-                                        );
-                                  } else {
-                                    context.read<CartBloc>().add(
-                                          CartEvent.deleteBonusItem(
-                                            cartItem: cartItem,
-                                            bonusItem: e,
-                                            isUpdateFromCart: true,
-                                          ),
-                                        );
-                                  }
-                                },
-                                icon: Icons.remove,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 5),
-                                child: Text(
-                                  e.quantity.toString().padLeft(2, '0'),
-                                  key: Key(
-                                    'itemCount${e.quantity}',
-                                  ),
-                                  style: Theme.of(context).textTheme.bodyText1,
-                                ),
-                              ),
-                              QuantityIcon(
-                                key: const Key('addBonusFromCart'),
-                                pressed: () {
-                                  context.read<CartBloc>().add(
-                                        CartEvent.updateBonusItem(
-                                          bonusItemCount: e.quantity + 1,
-                                          cartItem: cartItem,
-                                          bonusItem: e,
-                                          isUpdateFromCart: true,
-                                        ),
-                                      );
-                                },
-                                icon: Icons.add,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Positioned(
-                      right: 0,
-                      top: -15,
-                      child: IconButton(
-                        key: const Key('deleteBonusFromCart'),
-                        onPressed: () {
-                          context.read<CartBloc>().add(
-                                CartEvent.deleteBonusItem(
-                                  cartItem: cartItem,
-                                  bonusItem: e,
-                                  isUpdateFromCart: true,
-                                ),
-                              );
-                        },
-                        icon: const Icon(Icons.delete),
-                      ),
-                    ),
-                  ],
-                ),
+                (e) {
+                  return BonusItemTile(
+                    bonusItem: e,
+                    cartItem: cartItem,
+                  );
+                },
               ),
             ],
           ),
