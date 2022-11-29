@@ -410,30 +410,6 @@ class _PrincipleSearchByFilter extends StatelessWidget {
   }
 }
 
-Future<DateTime?> viewDatePicker(
-  initialDate,
-  selectedDateType,
-  BuildContext context,
-) =>
-    showPlatformDatePicker(
-      context: context,
-      initialDate: initialDate,
-      firstDate: selectedDateType == 'startDate'
-          ? DateTime(2018)
-          : initialDate.subtract(
-              const Duration(
-                days: 6,
-              ),
-            ),
-      lastDate: selectedDateType == 'startDate'
-          ? initialDate.add(
-              const Duration(
-                days: 7,
-              ),
-            )
-          : initialDate,
-    );
-
 class _OrderFromDateByFilter extends StatefulWidget {
   const _OrderFromDateByFilter({Key? key}) : super(key: key);
   @override
@@ -442,10 +418,14 @@ class _OrderFromDateByFilter extends StatefulWidget {
 
 class __OrderFromDateByFilterState extends State<_OrderFromDateByFilter> {
   late TextEditingController txtfromDateController;
+  late OrderHistoryFilterBloc orderHistoryFilterBloc;
 
   @override
   void initState() {
     txtfromDateController = TextEditingController();
+    orderHistoryFilterBloc = context.read<OrderHistoryFilterBloc>();
+    txtfromDateController.text = DateFormat('dd/MM/yyyy')
+        .format(orderHistoryFilterBloc.state.orderHistoryFilterList.fromDate);
 
     super.initState();
   }
@@ -459,68 +439,70 @@ class __OrderFromDateByFilterState extends State<_OrderFromDateByFilter> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<OrderHistoryFilterBloc, OrderHistoryFilterState>(
-      buildWhen: (previous, current) =>
+    return BlocListener<OrderHistoryFilterBloc, OrderHistoryFilterState>(
+      listenWhen: (previous, current) =>
           previous.orderHistoryFilterList.fromDate !=
-          current.orderHistoryFilterList.fromDate,
-      builder: (
-        context,
-        state,
-      ) {
-        return Expanded(
-          child: TextFormField(
-            key: const Key('filteFromdateField'),
-            onTap: () async {
-              final orderDate = await viewDatePicker(
-                state.orderHistoryFilterList.fromDate,
-                'startDate',
-                context,
-              );
-              if (mounted) {
-                context.read<OrderHistoryFilterBloc>().add(
-                      OrderHistoryFilterEvent.setfromDate(
-                        fromDate: orderDate!,
-                      ),
-                    );
-              }
-            },
-            readOnly: true,
-            controller: txtfromDateController
-              ..text = DateFormat('dd/MM/yyyy')
-                  .format(state.orderHistoryFilterList.fromDate),
-            keyboardType: TextInputType.text,
-            style: const TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w400,
+              current.orderHistoryFilterList.fromDate ||
+          previous.orderHistoryFilterList.toDate !=
+              current.orderHistoryFilterList.toDate,
+      listener: (context, state) {
+        txtfromDateController.text = DateFormat('dd/MM/yyyy')
+            .format(state.orderHistoryFilterList.fromDate);
+      },
+      child: Expanded(
+        child: TextFormField(
+          key: const Key('filteFromdateField'),
+          onTap: () async {
+            final orderDate = await showPlatformDatePicker(
+              context: context,
+              initialDate:
+                  orderHistoryFilterBloc.state.orderHistoryFilterList.fromDate,
+              firstDate: orderHistoryFilterBloc
+                  .state.orderHistoryFilterList.toDate
+                  .subtract(const Duration(days: 365)),
+              lastDate:
+                  orderHistoryFilterBloc.state.orderHistoryFilterList.toDate,
+            );
+            orderHistoryFilterBloc.add(
+              OrderHistoryFilterEvent.setfromDate(
+                fromDate: orderDate!,
+              ),
+            );
+          },
+          readOnly: true,
+          controller: txtfromDateController,
+          keyboardType: TextInputType.text,
+          style: const TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w400,
+          ),
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.symmetric(
+              vertical: 5.0,
+              horizontal: 4.0,
             ),
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(
-                vertical: 5.0,
-                horizontal: 4.0,
+            labelText: 'From Date'.tr(),
+            labelStyle: const TextStyle(
+              fontSize: 12.0,
+            ),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                color: ZPColors.kPrimaryColor,
+                width: 1.0,
               ),
-              labelText: 'From Date'.tr(),
-              labelStyle: const TextStyle(
-                fontSize: 12.0,
+            ),
+            border: const OutlineInputBorder(
+              borderSide: BorderSide(width: 1.0),
+              borderRadius: BorderRadius.all(
+                Radius.circular(8.0),
               ),
-              focusedBorder: const OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: ZPColors.kPrimaryColor,
-                  width: 1.0,
-                ),
-              ),
-              border: const OutlineInputBorder(
-                borderSide: BorderSide(width: 1.0),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(8.0),
-                ),
-              ),
-              suffixIcon: const Icon(
-                Icons.calendar_month,
-              ),
+            ),
+            suffixIcon: const Icon(
+              Icons.calendar_month,
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
@@ -533,9 +515,13 @@ class _OrderToDateByFilter extends StatefulWidget {
 
 class __OrderToDateByFilterState extends State<_OrderToDateByFilter> {
   late TextEditingController txttoDateController;
+  late OrderHistoryFilterBloc orderHistoryFilterBloc;
   @override
   void initState() {
     txttoDateController = TextEditingController();
+    orderHistoryFilterBloc = context.read<OrderHistoryFilterBloc>();
+    txttoDateController.text = DateFormat('dd/MM/yyyy')
+        .format(orderHistoryFilterBloc.state.orderHistoryFilterList.toDate);
 
     super.initState();
   }
@@ -548,68 +534,74 @@ class __OrderToDateByFilterState extends State<_OrderToDateByFilter> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<OrderHistoryFilterBloc, OrderHistoryFilterState>(
-      buildWhen: (previous, current) =>
+    return BlocListener<OrderHistoryFilterBloc, OrderHistoryFilterState>(
+      listenWhen: (previous, current) =>
           previous.orderHistoryFilterList.toDate !=
-          current.orderHistoryFilterList.toDate,
-      builder: (
+              current.orderHistoryFilterList.toDate ||
+          previous.orderHistoryFilterList.fromDate !=
+              current.orderHistoryFilterList.fromDate,
+      listener: (
         context,
         state,
       ) {
-        return Expanded(
-          child: TextFormField(
-            key: const Key('filterTodateField'),
-            onTap: () async {
-              final orderDate = await viewDatePicker(
-                state.orderHistoryFilterList.toDate,
-                'endDate',
-                context,
-              );
-              if (mounted) {
-                context.read<OrderHistoryFilterBloc>().add(
-                      OrderHistoryFilterEvent.setToDate(
-                        toDate: orderDate!,
-                      ),
-                    );
-              }
-            },
-            readOnly: true,
-            controller: txttoDateController
-              ..text = DateFormat('dd/MM/yyyy')
-                  .format(state.orderHistoryFilterList.toDate),
-            keyboardType: TextInputType.text,
-            style: const TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w400,
+        txttoDateController.text = DateFormat('dd/MM/yyyy')
+            .format(state.orderHistoryFilterList.toDate);
+      },
+      child: Expanded(
+        child: TextFormField(
+          key: const Key('filterTodateField'),
+          onTap: () async {
+            final orderDate = await showPlatformDatePicker(
+              context: context,
+              initialDate:
+                  orderHistoryFilterBloc.state.orderHistoryFilterList.toDate,
+              firstDate:
+                  orderHistoryFilterBloc.state.orderHistoryFilterList.fromDate,
+              lastDate: orderHistoryFilterBloc
+                  .state.orderHistoryFilterList.fromDate
+                  .add(const Duration(days: 365)),
+            );
+
+            orderHistoryFilterBloc.add(
+              OrderHistoryFilterEvent.setToDate(
+                toDate: orderDate!,
+              ),
+            );
+          },
+          readOnly: true,
+          controller: txttoDateController,
+          keyboardType: TextInputType.text,
+          style: const TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w400,
+          ),
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.symmetric(
+              vertical: 5.0,
+              horizontal: 4.0,
             ),
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(
-                vertical: 5.0,
-                horizontal: 4.0,
+            labelText: 'To Date'.tr(),
+            labelStyle: const TextStyle(
+              fontSize: 12.0,
+            ),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                color: ZPColors.kPrimaryColor,
+                width: 1.0,
               ),
-              labelText: 'To Date'.tr(),
-              labelStyle: const TextStyle(
-                fontSize: 12.0,
+            ),
+            border: const OutlineInputBorder(
+              borderSide: BorderSide(width: 1.0),
+              borderRadius: BorderRadius.all(
+                Radius.circular(8.0),
               ),
-              focusedBorder: const OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: ZPColors.kPrimaryColor,
-                  width: 1.0,
-                ),
-              ),
-              border: const OutlineInputBorder(
-                borderSide: BorderSide(width: 1.0),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(8.0),
-                ),
-              ),
-              suffixIcon: const Icon(
-                Icons.calendar_month,
-              ),
+            ),
+            suffixIcon: const Icon(
+              Icons.calendar_month,
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
