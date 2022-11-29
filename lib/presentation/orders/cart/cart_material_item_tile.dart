@@ -37,14 +37,19 @@ class CartMaterialItemTile extends StatefulWidget {
 }
 
 class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
-  late final TextEditingController controller;
+  final controller = TextEditingController();
   late final String? taxDetails;
 
   @override
   void initState() {
-    controller =
-        TextEditingController(text: widget.cartItem.quantity.toString());
+    controller.value = TextEditingValue(
+      text: widget.cartItem.quantity.toString(),
+      selection: TextSelection.collapsed(
+        offset: widget.cartItem.quantity.toString().length,
+      ),
+    );
     taxDetails = widget.cartItem.taxDetails;
+
     super.initState();
   }
 
@@ -127,10 +132,10 @@ class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
                             ),
                             taxDetails != null
                                 ? Text(
-                                    taxDetails!,
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1,
-                                  )
+                              taxDetails!,
+                              style:
+                              Theme.of(context).textTheme.bodyText1,
+                            )
                                 : const SizedBox.shrink(),
                             Text(
                               widget.cartItem.materialInfo.materialDescription,
@@ -346,19 +351,19 @@ class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
             ),
           ),
           widget.cartItem.materialInfo.remarks.isEmpty &&
-                  context.read<SalesOrgBloc>().state.configs.enableRemarks
+              context.read<SalesOrgBloc>().state.configs.enableRemarks
               ? AddRemarksButton(
-                  key: const Key('addRemarks'),
-                  onPressed: () {
-                    AddRemarkDialog.show(
-                      context: context,
-                      cartItem: widget.cartItem,
-                      isEdit: false,
-                      bonusItem: widget.cartItem.materialInfo,
-                      isBonus: false,
-                    );
-                  },
-                )
+            key: const Key('addRemarks'),
+            onPressed: () {
+              AddRemarkDialog.show(
+                context: context,
+                cartItem: widget.cartItem,
+                isEdit: false,
+                bonusItem: widget.cartItem.materialInfo,
+                isBonus: false,
+              );
+            },
+          )
               : const SizedBox.shrink(),
           BounsTile(
             cartItem: widget.cartItem,
