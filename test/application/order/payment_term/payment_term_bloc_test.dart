@@ -38,7 +38,7 @@ void main() {
   );
 
   final fakeSaleOrgConfig = SalesOrganisationConfigs(
-    enableItemRegistrationNumber: false,
+    enableIRN: false,
     enableDefaultMD: false,
     disableProcessingStatus: false,
     currency: Currency(''),

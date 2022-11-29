@@ -78,7 +78,7 @@ class SalesOrgQueryMutation {
           updated_at
           enableLoyaltyScheme
           disableProcessingStatus
-          enableItemRegistrationNumber
+          enableIRN
        }
       }
     ''';

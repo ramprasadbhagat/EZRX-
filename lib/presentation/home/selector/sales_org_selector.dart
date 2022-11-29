@@ -32,7 +32,9 @@ class SalesOrgSelector extends StatelessWidget {
       title: 'Sales Org',
       child: BlocConsumer<SalesOrgBloc, SalesOrgState>(
         listenWhen: (previous, current) =>
-            previous.salesOrganisation != current.salesOrganisation,
+            previous.salesOrganisation != current.salesOrganisation ||
+            previous.salesOrgFailureOrSuccessOption !=
+                current.salesOrgFailureOrSuccessOption,
         listener: (context, state) {
           state.salesOrgFailureOrSuccessOption.fold(
             () {},

@@ -234,7 +234,7 @@ class _ListContent extends StatelessWidget {
                         ),
                   )
                 : const SizedBox.shrink(),
-            (salesOrgConfigs.enableItemRegistrationNumber &&
+            (salesOrgConfigs.enableIRN &&
                     materialInfo.itemRegistrationNumber.isNotEmpty)
                 ? Text(
                     materialInfo.itemRegistrationNumber,

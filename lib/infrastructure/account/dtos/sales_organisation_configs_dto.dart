@@ -128,9 +128,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'ponRequired', defaultValue: false)
     @HiveField(137, defaultValue: false)
         required bool ponRequired,
-    @JsonKey(name: 'enableItemRegistrationNumber', defaultValue: false)
+    @JsonKey(name: 'enableIRN', defaultValue: false)
     @HiveField(139, defaultValue: false)
-        required bool enableItemRegistrationNumber,
+        required bool enableIRN,
     @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
     @HiveField(138, defaultValue: false)
         required bool enableTaxDisplay,
@@ -140,7 +140,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     SalesOrganisationConfigs configs,
   ) {
     return SalesOrganisationConfigsDto(
-      enableItemRegistrationNumber: configs.enableItemRegistrationNumber,
+      enableIRN: configs.enableIRN,
       enableDefaultMD: configs.enableDefaultMD,
       priceOverride: configs.priceOverride,
       disableProcessingStatus: configs.disableProcessingStatus,
@@ -185,7 +185,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
 
   SalesOrganisationConfigs toDomain() {
     return SalesOrganisationConfigs(
-      enableItemRegistrationNumber: enableItemRegistrationNumber,
+      enableIRN: enableIRN,
       enableDefaultMD: enableDefaultMD,
       disableProcessingStatus: disableProcessingStatus,
       currency: Currency(currency),

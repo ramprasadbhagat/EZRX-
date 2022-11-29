@@ -65,7 +65,7 @@
             "updated_at": "2022-04-22T04:30:42.398Z",
             "enableLoyaltyScheme": false,
             "disableProcessingStatus": false,
-            "enableItemRegistrationNumber": true
+            "enableIRN": true
          }
       ]
    }

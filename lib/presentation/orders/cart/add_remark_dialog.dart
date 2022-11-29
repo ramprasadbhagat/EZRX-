@@ -24,11 +24,7 @@ class AddRemarkDialog {
       barrierDismissible: true,
       useRootNavigator: true,
       builder: (BuildContext context) {
-        context.read<CartBloc>().add(
-              CartEvent.remarksChanged(
-                remarks,
-              ),
-            );
+        context.read<CartBloc>().add(CartEvent.remarksChanged(remarks));
 
         return BlocConsumer<CartBloc, CartState>(
           listenWhen: (previous, current) =>
@@ -44,16 +40,12 @@ class AddRemarkDialog {
             return PlatformAlertDialog(
               key: const Key('addRemarksDialog'),
               title: Text(isEdit ? 'Update Remarks' : 'Add Remarks').tr(),
-              content: RemarksForm(
-                currentRemarkData: remarks,
-              ),
+              content: RemarksForm(currentRemarkData: remarks),
               actions: [
                 PlatformDialogAction(
                   key: Key(cancelText),
                   child: Text(cancelText).tr(),
-                  onPressed: () {
-                    context.router.pop();
-                  },
+                  onPressed: () => context.router.pop(),
                 ),
                 PlatformDialogAction(
                   key: Key(confirmText),

@@ -136,9 +136,9 @@ mixin _$SalesOrganisationConfigsDto {
   @JsonKey(name: 'ponRequired', defaultValue: false)
   @HiveField(137, defaultValue: false)
   bool get ponRequired => throw _privateConstructorUsedError;
-  @JsonKey(name: 'enableItemRegistrationNumber', defaultValue: false)
+  @JsonKey(name: 'enableIRN', defaultValue: false)
   @HiveField(139, defaultValue: false)
-  bool get enableItemRegistrationNumber => throw _privateConstructorUsedError;
+  bool get enableIRN => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
   @HiveField(138, defaultValue: false)
   bool get enableTaxDisplay => throw _privateConstructorUsedError;
@@ -273,9 +273,9 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
       @JsonKey(name: 'ponRequired', defaultValue: false)
       @HiveField(137, defaultValue: false)
           bool ponRequired,
-      @JsonKey(name: 'enableItemRegistrationNumber', defaultValue: false)
+      @JsonKey(name: 'enableIRN', defaultValue: false)
       @HiveField(139, defaultValue: false)
-          bool enableItemRegistrationNumber,
+          bool enableIRN,
       @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
       @HiveField(138, defaultValue: false)
           bool enableTaxDisplay});
@@ -333,7 +333,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
     Object? enableRemarks = null,
     Object? enableOHPrice = null,
     Object? ponRequired = null,
-    Object? enableItemRegistrationNumber = null,
+    Object? enableIRN = null,
     Object? enableTaxDisplay = null,
   }) {
     return _then(_value.copyWith(
@@ -489,9 +489,9 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
           ? _value.ponRequired
           : ponRequired // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableItemRegistrationNumber: null == enableItemRegistrationNumber
-          ? _value.enableItemRegistrationNumber
-          : enableItemRegistrationNumber // ignore: cast_nullable_to_non_nullable
+      enableIRN: null == enableIRN
+          ? _value.enableIRN
+          : enableIRN // ignore: cast_nullable_to_non_nullable
               as bool,
       enableTaxDisplay: null == enableTaxDisplay
           ? _value.enableTaxDisplay
@@ -626,9 +626,9 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
       @JsonKey(name: 'ponRequired', defaultValue: false)
       @HiveField(137, defaultValue: false)
           bool ponRequired,
-      @JsonKey(name: 'enableItemRegistrationNumber', defaultValue: false)
+      @JsonKey(name: 'enableIRN', defaultValue: false)
       @HiveField(139, defaultValue: false)
-          bool enableItemRegistrationNumber,
+          bool enableIRN,
       @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
       @HiveField(138, defaultValue: false)
           bool enableTaxDisplay});
@@ -685,7 +685,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? enableRemarks = null,
     Object? enableOHPrice = null,
     Object? ponRequired = null,
-    Object? enableItemRegistrationNumber = null,
+    Object? enableIRN = null,
     Object? enableTaxDisplay = null,
   }) {
     return _then(_$_SalesOrganisationConfigsDto(
@@ -841,9 +841,9 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.ponRequired
           : ponRequired // ignore: cast_nullable_to_non_nullable
               as bool,
-      enableItemRegistrationNumber: null == enableItemRegistrationNumber
-          ? _value.enableItemRegistrationNumber
-          : enableItemRegistrationNumber // ignore: cast_nullable_to_non_nullable
+      enableIRN: null == enableIRN
+          ? _value.enableIRN
+          : enableIRN // ignore: cast_nullable_to_non_nullable
               as bool,
       enableTaxDisplay: null == enableTaxDisplay
           ? _value.enableTaxDisplay
@@ -973,9 +973,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
       @JsonKey(name: 'ponRequired', defaultValue: false)
       @HiveField(137, defaultValue: false)
           required this.ponRequired,
-      @JsonKey(name: 'enableItemRegistrationNumber', defaultValue: false)
+      @JsonKey(name: 'enableIRN', defaultValue: false)
       @HiveField(139, defaultValue: false)
-          required this.enableItemRegistrationNumber,
+          required this.enableIRN,
       @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
       @HiveField(138, defaultValue: false)
           required this.enableTaxDisplay})
@@ -1144,9 +1144,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @HiveField(137, defaultValue: false)
   final bool ponRequired;
   @override
-  @JsonKey(name: 'enableItemRegistrationNumber', defaultValue: false)
+  @JsonKey(name: 'enableIRN', defaultValue: false)
   @HiveField(139, defaultValue: false)
-  final bool enableItemRegistrationNumber;
+  final bool enableIRN;
   @override
   @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
   @HiveField(138, defaultValue: false)
@@ -1154,7 +1154,7 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, ponRequired: $ponRequired, enableItemRegistrationNumber: $enableItemRegistrationNumber, enableTaxDisplay: $enableTaxDisplay)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, ponRequired: $ponRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay)';
   }
 
   @override
@@ -1229,7 +1229,7 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
             (identical(other.enableRemarks, enableRemarks) || other.enableRemarks == enableRemarks) &&
             (identical(other.enableOHPrice, enableOHPrice) || other.enableOHPrice == enableOHPrice) &&
             (identical(other.ponRequired, ponRequired) || other.ponRequired == ponRequired) &&
-            (identical(other.enableItemRegistrationNumber, enableItemRegistrationNumber) || other.enableItemRegistrationNumber == enableItemRegistrationNumber) &&
+            (identical(other.enableIRN, enableIRN) || other.enableIRN == enableIRN) &&
             (identical(other.enableTaxDisplay, enableTaxDisplay) || other.enableTaxDisplay == enableTaxDisplay));
   }
 
@@ -1275,7 +1275,7 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
         enableRemarks,
         enableOHPrice,
         ponRequired,
-        enableItemRegistrationNumber,
+        enableIRN,
         enableTaxDisplay
       ]);
 
@@ -1412,9 +1412,9 @@ abstract class _SalesOrganisationConfigsDto
           @JsonKey(name: 'ponRequired', defaultValue: false)
           @HiveField(137, defaultValue: false)
               required final bool ponRequired,
-          @JsonKey(name: 'enableItemRegistrationNumber', defaultValue: false)
+          @JsonKey(name: 'enableIRN', defaultValue: false)
           @HiveField(139, defaultValue: false)
-              required final bool enableItemRegistrationNumber,
+              required final bool enableIRN,
           @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
           @HiveField(138, defaultValue: false)
               required final bool enableTaxDisplay}) =
@@ -1578,9 +1578,9 @@ abstract class _SalesOrganisationConfigsDto
   @HiveField(137, defaultValue: false)
   bool get ponRequired;
   @override
-  @JsonKey(name: 'enableItemRegistrationNumber', defaultValue: false)
+  @JsonKey(name: 'enableIRN', defaultValue: false)
   @HiveField(139, defaultValue: false)
-  bool get enableItemRegistrationNumber;
+  bool get enableIRN;
   @override
   @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
   @HiveField(138, defaultValue: false)
