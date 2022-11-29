@@ -177,14 +177,20 @@ class _Stepper extends StatelessWidget {
 
   String? _validateAdditionalInformation(
     String value,
-    AdditionalInfoLabelList lavel,
-    BuildContext context,
+    AdditionalInfoLabelList label,
   ) {
-    final salesOrganisationConfig = context.read<SalesOrgBloc>().state.configs;
-    if (AdditionalInfoLabelList.customerPoReference == lavel &&
-        salesOrganisationConfig.ponRequired &&
-        value.isEmpty) {
-      return 'Customer PO Reference Required'.tr();
+    if (value.isEmpty) {
+      switch (label) {
+        case AdditionalInfoLabelList.customerPoReference:
+          return 'Customer PO Reference Required'.tr();
+        case AdditionalInfoLabelList.contactPerson:
+          return 'Please enter contact person'.tr();
+        case AdditionalInfoLabelList.contactNumber:
+          return 'Please enter valid contact number'.tr();
+        case AdditionalInfoLabelList.paymentTerm:
+          return 'Please Select Payment Term'.tr();
+        default:
+      }
     }
 
     return null;
@@ -470,18 +476,15 @@ class _AdditionalInformationStep extends StatelessWidget {
   String? emptyValidator(
     String value,
     AdditionalInfoLabelList lavel,
-    BuildContext context,
   ) {
     return null;
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Biswaranjan - can we use SalesOrgBloc builder here instead of ShipToCodeBloc
-    return BlocBuilder<ShipToCodeBloc, ShipToCodeState>(
+    return BlocBuilder<SalesOrgBloc, SalesOrgState>(
       key: const Key('_additionalDetailsFormKey'),
-      buildWhen: (previous, current) =>
-          previous.shipToInfo != current.shipToInfo,
+      buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         return Form(
           key: _additionalDetailsFormKey,
@@ -493,15 +496,9 @@ class _AdditionalInformationStep extends StatelessWidget {
                 saveData: saveData,
                 label: AdditionalInfoLabelList.customerPoReference,
                 validateData:
-                    context.read<SalesOrgBloc>().state.configs.ponRequired
-                        ? validateData
-                        : emptyValidator,
+                    state.configs.ponRequired ? validateData : emptyValidator,
               ),
-              context
-                      .read<SalesOrgBloc>()
-                      .state
-                      .configs
-                      .enableSpecialInstructions
+              state.configs.enableSpecialInstructions
                   ? _TextFormField(
                       labelText: 'Special Instructions',
                       keyboardType: TextInputType.multiline,
@@ -511,7 +508,7 @@ class _AdditionalInformationStep extends StatelessWidget {
                       validateData: emptyValidator,
                     )
                   : const SizedBox.shrink(),
-              context.read<SalesOrgBloc>().state.configs.enableReferenceNote
+              state.configs.enableReferenceNote
                   ? _TextFormField(
                       labelText: 'Reference Note',
                       maxLength: 50,
@@ -521,11 +518,7 @@ class _AdditionalInformationStep extends StatelessWidget {
                       validateData: emptyValidator,
                     )
                   : const SizedBox.shrink(),
-              context
-                          .read<SalesOrgBloc>()
-                          .state
-                          .configs
-                          .enableCollectiveNumber &&
+              state.configs.enableCollectiveNumber &&
                       context.read<UserBloc>().state.user.role.type.isSalesRep
                   ? _TextFormField(
                       labelText: 'Collective Number',
@@ -535,26 +528,26 @@ class _AdditionalInformationStep extends StatelessWidget {
                       validateData: emptyValidator,
                     )
                   : const SizedBox.shrink(),
-              context.read<SalesOrgBloc>().state.configs.enableMobileNumber
+              state.configs.enableMobileNumber
                   ? _TextFormField(
                       labelText: 'Contact Person',
                       maxLength: 50,
                       saveData: saveData,
                       label: AdditionalInfoLabelList.contactPerson,
-                      validateData: emptyValidator,
+                      validateData: validateData,
                     )
                   : const SizedBox.shrink(),
-              context.read<SalesOrgBloc>().state.configs.enableMobileNumber
+              state.configs.enableMobileNumber
                   ? _TextFormField(
                       labelText: 'Contact Number',
                       maxLength: 10,
                       keyboardType: TextInputType.phone,
                       saveData: saveData,
                       label: AdditionalInfoLabelList.contactNumber,
-                      validateData: emptyValidator,
+                      validateData: validateData,
                     )
                   : const SizedBox.shrink(),
-              context.read<SalesOrgBloc>().state.configs.enableFutureDeliveryDay
+              state.configs.enableFutureDeliveryDay
                   ? _DatePickerField(
                       futureDeliveryDay: context
                           .read<SalesOrgBloc>()
@@ -563,8 +556,10 @@ class _AdditionalInformationStep extends StatelessWidget {
                           .futureDeliveryDay,
                     )
                   : const SizedBox.shrink(),
-              context.read<SalesOrgBloc>().state.configs.enablePaymentTerms
-                  ? const _PaymentTerm()
+              state.configs.enablePaymentTerms
+                  ? _PaymentTerm(
+                      validateData: validateData,
+                    )
                   : const SizedBox.shrink(),
               //OrderType
               context.read<EligibilityBloc>().state.isOrderTypeEnable
@@ -714,7 +709,7 @@ class _TextFormField extends StatelessWidget {
           maxLength: maxLength,
           maxLines: keyboardType == TextInputType.multiline ? null : 1,
           validator: (value) {
-            return validateData(value, label, context);
+            return validateData(value, label);
           },
           onSaved: (value) {
             saveData(value, label);
@@ -745,7 +740,8 @@ class _TextFormField extends StatelessWidget {
 }
 
 class _PaymentTerm extends StatefulWidget {
-  const _PaymentTerm();
+  final Function validateData;
+  const _PaymentTerm({required this.validateData});
 
   @override
   State<_PaymentTerm> createState() => _PaymentTermState();
@@ -769,13 +765,19 @@ class _PaymentTermState extends State<_PaymentTerm> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PaymentTermBloc, PaymentTermState>(
-      key: const Key('_PaymentTermKey'),
+      key: const Key('_paymentTermKey'),
       buildWhen: (previous, current) =>
           previous.isFetching != current.isFetching,
       builder: (context, state) {
         return TextFormField(
-          key: const Key('_PaymentTermTextKey'),
+          key: const Key('_paymentTermTextKey'),
           controller: _controller,
+          validator: (value) {
+            return widget.validateData(
+              value,
+              AdditionalInfoLabelList.paymentTerm,
+            );
+          },
           onTap: () => showCupertinoModalPopup<void>(
             context: context,
             builder: (BuildContext context) {

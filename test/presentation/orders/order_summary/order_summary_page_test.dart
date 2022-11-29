@@ -498,10 +498,10 @@ void main() {
           tester.binding.window.devicePixelRatioTestValue = 1.0;
           await tester.pumpWidget(getWidget());
           await tester.pumpAndSettle();
-          final paymentTermKey = find.byKey(const Key('_PaymentTermKey'));
+          final paymentTermKey = find.byKey(const Key('_paymentTermKey'));
           expect(paymentTermKey, findsOneWidget);
           final paymentTermTextKey =
-              find.byKey(const Key('_PaymentTermTextKey'));
+              find.byKey(const Key('_paymentTermTextKey'));
           await tester.tap(paymentTermTextKey);
           await tester.pumpAndSettle();
           expect(paymentTermTextKey, findsOneWidget);

@@ -26,54 +26,74 @@ class AddRemarkDialog {
       builder: (BuildContext context) {
         context.read<CartBloc>().add(CartEvent.remarksChanged(remarks));
 
-        return BlocConsumer<CartBloc, CartState>(
-          listenWhen: (previous, current) =>
-              previous.isRemarksAdding && !current.isRemarksAdding,
-          listener: (context, state) {
-            if (!state.showErrorMessages && !state.remarks.isValid()) {
-              context.router.pop();
-            }
-          },
-          buildWhen: (previous, current) =>
-              previous.showErrorMessages != current.showErrorMessages,
-          builder: (context, state) {
-            return PlatformAlertDialog(
-              key: const Key('addRemarksDialog'),
-              title: Text(isEdit ? 'Update Remarks' : 'Add Remarks').tr(),
-              content: RemarksForm(currentRemarkData: remarks),
-              actions: [
-                PlatformDialogAction(
-                  key: Key(cancelText),
-                  child: Text(cancelText).tr(),
-                  onPressed: () => context.router.pop(),
-                ),
-                PlatformDialogAction(
-                  key: Key(confirmText),
-                  onPressed: state.isRemarksAdding
-                      ? null
-                      : () {
-                          if (isBonus) {
-                            context.read<CartBloc>().add(
-                                  CartEvent.addRemarksToBonusItem(
-                                    item: cartItem,
-                                    bonusItem: bonusItem,
-                                    isDelete: false,
-                                  ),
-                                );
-                          } else {
-                            context.read<CartBloc>().add(
-                                  CartEvent.addRemarksToCartItem(
-                                    item: cartItem,
-                                    isDelete: false,
-                                  ),
-                                );
-                          }
-                        },
-                  child: Text(confirmText).tr(),
-                ),
-              ],
-            );
-          },
+        return _getDialog(
+          isEdit: isEdit,
+          remarks: remarks,
+          confirmText: confirmText,
+          cancelText: cancelText,
+          isBonus: isBonus,
+          cartItem: cartItem,
+          bonusItem: bonusItem,
+        );
+      },
+    );
+  }
+
+  static BlocConsumer _getDialog({
+    required bool isEdit,
+    required String remarks,
+    required String confirmText,
+    required String cancelText,
+    required bool isBonus,
+    required PriceAggregate cartItem,
+    required MaterialInfo bonusItem,
+  }) {
+    return BlocConsumer<CartBloc, CartState>(
+      listenWhen: (previous, current) =>
+          previous.isRemarksAdding && !current.isRemarksAdding,
+      listener: (context, state) {
+        if (!state.showErrorMessages && !state.remarks.isValid()) {
+          context.router.pop();
+        }
+      },
+      buildWhen: (previous, current) =>
+          previous.showErrorMessages != current.showErrorMessages,
+      builder: (context, state) {
+        return PlatformAlertDialog(
+          key: const Key('addRemarksDialog'),
+          title: Text(isEdit ? 'Update Remarks' : 'Add Remarks').tr(),
+          content: RemarksForm(currentRemarkData: remarks),
+          actions: [
+            PlatformDialogAction(
+              key: Key(cancelText),
+              child: Text(cancelText).tr(),
+              onPressed: () => context.router.pop(),
+            ),
+            PlatformDialogAction(
+              key: Key(confirmText),
+              onPressed: state.isRemarksAdding
+                  ? null
+                  : () {
+                      if (isBonus) {
+                        context.read<CartBloc>().add(
+                              CartEvent.addRemarksToBonusItem(
+                                item: cartItem,
+                                bonusItem: bonusItem,
+                                isDelete: false,
+                              ),
+                            );
+                      } else {
+                        context.read<CartBloc>().add(
+                              CartEvent.addRemarksToCartItem(
+                                item: cartItem,
+                                isDelete: false,
+                              ),
+                            );
+                      }
+                    },
+              child: Text(confirmText).tr(),
+            ),
+          ],
         );
       },
     );
