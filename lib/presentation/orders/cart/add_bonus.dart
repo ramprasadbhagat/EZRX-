@@ -137,7 +137,7 @@ class _BonusAddPageState extends State<BonusAddPage> {
                       showSnackBar(
                         context: context,
                         message:
-                            'Search input must be greater than 4 characters.'
+                            'Search input must be greater than 2 characters.'
                                 .tr(),
                       );
                     }

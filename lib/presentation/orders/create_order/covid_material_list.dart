@@ -441,14 +441,14 @@ class _SearchBarState extends State<_SearchBar> {
                   showSnackBar(
                     context: context,
                     message:
-                        'Search input must be greater than 4 characters.'.tr(),
+                        'Search input must be greater than 2 characters.'.tr(),
                   );
                 }
               },
               validator: (_) => state.searchKey.value.fold(
                 (f) => f.maybeMap(
                   subceedLength: (f) =>
-                      'Search input must be greater than 4 characters.'.tr(),
+                      'Search input must be greater than 2 characters.'.tr(),
                   orElse: () => null,
                 ),
                 (_) => null,

@@ -81,13 +81,13 @@ class SearchKey extends ValueObject<String> {
 
   factory SearchKey.search(String searchText) {
     return SearchKey._(validateStringNotEmpty(searchText)
-        .flatMap((input) => validateMinStringLength(input, 4)));
+        .flatMap((input) => validateMinStringLength(input, 3)));
   }
 
   factory SearchKey.orderHistoryFilter(String searchText) {
     return SearchKey._(
       validateStringIsEmpty(searchText).fold(
-        (l) => validateMinStringLength(l.failedValue, 4),
+        (l) => validateMinStringLength(l.failedValue, 3),
         (r) => Right(r),
       ),
     );

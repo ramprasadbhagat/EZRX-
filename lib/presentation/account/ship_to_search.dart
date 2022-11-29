@@ -133,7 +133,7 @@ class AppBar extends StatelessWidget {
                   showSnackBar(
                     context: context,
                     message:
-                        'Search input must be greater than 4 characters.'.tr(),
+                        'Search input must be greater than 2 characters.'.tr(),
                   );
                 }
               },
@@ -221,7 +221,7 @@ class _ListContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final shipToBloc = context.read<ShipToCodeBloc>();
     final cartBloc = context.read<CartBloc>();
-    
+
     return Column(
       children: [
         ListTile(
@@ -276,10 +276,10 @@ class _ListContent extends StatelessWidget {
                   context.router
                       .popUntilRouteWithName(HomeNavigationTabbarRoute.name);
                   shipToBloc.add(
-                        ShipToCodeEvent.selected(
-                          shipToInfo: shipToInfo,
-                        ),
-                      );
+                    ShipToCodeEvent.selected(
+                      shipToInfo: shipToInfo,
+                    ),
+                  );
                 },
               );
             } else {

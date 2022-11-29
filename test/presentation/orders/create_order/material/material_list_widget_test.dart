@@ -363,7 +363,7 @@ void main() {
         expect(find.byKey(const Key('materialSearchField')), findsOneWidget);
       },
     );
-    testWidgets('Search input must be greater than 3 characters.',
+    testWidgets('Search input must be greater than 2 characters.',
         (WidgetTester tester) async {
       final expectedCustomerCodeListStates = [
         MaterialListState.initial().copyWith(isFetching: true),

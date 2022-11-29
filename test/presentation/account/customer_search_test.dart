@@ -80,8 +80,7 @@ void main() {
           BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
           BlocProvider<CustomerCodeBloc>(
               create: (context) => customerCodeBlocMock),
-          BlocProvider<CartBloc>(
-              create: (context) => cartBlocMock),    
+          BlocProvider<CartBloc>(create: (context) => cartBlocMock),
         ],
         child: const CustomerSearchPage(),
       );
@@ -127,7 +126,7 @@ void main() {
       variant: customerCodeVariants,
     );
 
-    testWidgets('Search input must be greater than 4 characters.',
+    testWidgets('Search input must be greater than 2 characters.',
         (tester) async {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle(const Duration(seconds: 3));
