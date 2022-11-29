@@ -14,7 +14,7 @@ void main() {
     testWidgets('Login & logout test example', (WidgetTester tester) async {
       tester.printToConsole('Initial setup and run as DEV flavor');
       await initialSetup();
-      locator<Config>().appFlavor = Flavor.dev;
+      locator<Config>().appFlavor = Flavor.uat;
 
       runAppWithCrashlyticsAndLocalization();
 
@@ -80,13 +80,13 @@ void main() {
       final announcementCloseIcon =
           find.byKey(const Key('announcementCloseIcon'));
 
-      if(announcementCloseIcon.evaluate().isNotEmpty){
+      if (announcementCloseIcon.evaluate().isNotEmpty) {
         expect(announcementCloseIcon, findsOneWidget);
         await tester.pumpAndSettle(const Duration(milliseconds: 100));
         await tester.tap(announcementCloseIcon);
         await tester.pumpAndSettle(const Duration(seconds: 1));
         tester.printToConsole('Home Screen announcement Close');
-      }      
+      }
 
       //============================================================
       //  SalesOrg, Customer, Shipping Address Test
@@ -231,7 +231,8 @@ void main() {
       await tester.tap(notificationTile);
       await tester.pumpAndSettle(const Duration(seconds: 1));
 
-      final languagePicker = find.byKey(const Key('gestureDetectorForLanguagePicker'));
+      final languagePicker =
+          find.byKey(const Key('gestureDetectorForLanguagePicker'));
       await tester.tap(languagePicker);
       await tester.pumpAndSettle(const Duration(seconds: 1));
 
@@ -441,7 +442,7 @@ void main() {
       expect(auptcappBar, findsOneWidget);
 
       await tester.pumpAndSettle(const Duration(seconds: 8));
-      if(Platform.isAndroid){
+      if (Platform.isAndroid) {
         await tester.dragFrom(const Offset(100, 100), const Offset(100, -1000));
         await tester.pumpAndSettle(const Duration(seconds: 3));
         await tester.dragFrom(const Offset(100, 100), const Offset(100, -1000));

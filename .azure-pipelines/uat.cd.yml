@@ -89,6 +89,12 @@ stages:
     steps: 
 
     - task: DownloadSecureFile@1
+      name: localprop
+      displayName: Download local properties file
+      inputs:
+        secureFile: 'local.properties'
+
+    - task: DownloadSecureFile@1
       name: keyprop
       displayName: Download key properties file
       inputs:
@@ -111,10 +117,12 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
+          cp $(localprop.secureFilePath) $(Build.SourcesDirectory)/android/local.properties
           cp $(keyprop.secureFilePath) $(Build.SourcesDirectory)/android/key.properties
           cp $(key.secureFilePath) $(Build.SourcesDirectory)/android/app/ezrxkey.jks
           cp $(serviceAccountKey.secureFilePath) $(Build.SourcesDirectory)/android/serviceAccountKey.json
           
+          echo "local.properties copied to $(Build.SourcesDirectory)/android/local.properties"
           echo "key.properties copied to $(Build.SourcesDirectory)/android/key.properties"
           echo "key.jks copied to $(Build.SourcesDirectory)/android/app/ezrxkey.jks"
 

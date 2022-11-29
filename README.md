@@ -42,15 +42,18 @@ https://resocoder.com/2020/03/09/flutter-firebase-ddd-course-1-domain-driven-des
 9. open ```http://localhost:9000/dashboard?id=ezrx_mobile```
 
 ### Integration test
-```fvm flutter drive --driver=test_driver/integration_driver.dart --target=integration_test/app_test.dart --flavor dev```
+#### Local test/ CI test
+```fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/app_test.dart ```
+#### Browserstack test
+```fvm flutter test --flavor uat --machine integration_test/app_test.dart > report.json```
 
 ### Flavor
 | Flavor| Package name | App Name | Endpoint |
 |--|--|--|--|
 | PROD |  `com.zuelligpharma.ezrxmobile`| eZRx | https://ezrx.com |
-| UAT  |  `com.zuelligpharma.ezrxmobile.uat`| eZRx Uat | https://zpprodapiportalapimgmt.apimanagement.ap1.hana.ondemand.com |
-| DEV  |  `com.zuelligpharma.ezrxmobile.dev`| eZRx Dev | https://dev.ezrx.com/ |
-| MOCK  |  `com.zuelligpharma.ezrxmobile.mock`| eZRx Mock | local json |
+| UAT  |  `com.zuelligpharma.ezrxmobile.uat`| eZRx Uat | https://uat.ezrx.com |
+| DEV  |  `com.zuelligpharma.ezrxmobile.dev`| eZRx Dev | https://dev.ezrx.com |
+| MOCK  |  `com.zuelligpharma.ezrxmobile.mock`| eZRx Mock | local assets json |
 
 ### Build app
 #### IOS
