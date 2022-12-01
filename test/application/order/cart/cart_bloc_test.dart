@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -34,8 +35,37 @@ void main() {
     ),
   ];
 
+  final mockCartItemList2 = [
+    PriceAggregate.empty().copyWith(
+      quantity: 1,
+      materialInfo: MaterialInfo.empty().copyWith(
+        materialNumber: MaterialNumber('000000000023168451'),
+        materialDescription: ' Triglyceride Mosys D',
+        principalData: PrincipalData.empty().copyWith(
+          principalName: '台灣拜耳股份有限公司',
+        ),
+        remarks: '',
+      ),
+    ),
+    PriceAggregate.empty().copyWith(
+      quantity: 1,
+      materialInfo: MaterialInfo.empty().copyWith(
+        materialNumber: MaterialNumber('000000000023168456'),
+        materialDescription: ' Triglyceride Mosys D',
+        principalData: PrincipalData.empty().copyWith(
+          principalName: '台灣拜耳股份有限公司',
+        ),
+        remarks: '',
+      ),
+    ),
+  ];
+
   final mockMaterialItemList = [
     MaterialNumber('111111111'),
+  ];
+  final mockMaterialItemList2 = [
+    MaterialNumber('111111111'),
+    MaterialNumber('000000000023168451'),
   ];
 
   const remarkText = '1234';
@@ -1206,6 +1236,259 @@ void main() {
             cartItemList: [PriceAggregate.empty()],
             isFetching: false,
           ),
+        ],
+      );
+      blocTest<CartBloc, CartState>(
+        'update stock info from cart screen',
+        build: () => CartBloc(cartRepository: cartRepositoryMock),
+        setUp: () {
+          when(() => cartRepositoryMock.updateStockInfo(
+                customerCodeInfo: CustomerCodeInfo.empty(),
+                salesOrganisation: SalesOrganisation.empty(),
+                salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+                shipToInfo: ShipToInfo.empty(),
+                user: User.empty(),
+              )).thenAnswer(
+            (invocation) async => Right(
+              [PriceAggregate.empty()],
+            ),
+          );
+          when(() => cartRepositoryMock.fetchCartItems()).thenAnswer(
+            (invocation) async => Right(
+              [PriceAggregate.empty()],
+            ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          CartEvent.updateStockInfo(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            user: User.empty(),
+          ),
+        ),
+        expect: () => [
+          CartState.initial().copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
+          ),
+          CartState.initial().copyWith(
+            apiFailureOrSuccessOption: none(),
+            cartItemList: [PriceAggregate.empty()],
+            isFetching: false,
+          ),
+        ],
+      );
+      blocTest<CartBloc, CartState>(
+        'failed to load update stock info',
+        build: () => CartBloc(cartRepository: cartRepositoryMock),
+        setUp: () {
+          when(() => cartRepositoryMock.updateStockInfo(
+                    customerCodeInfo: CustomerCodeInfo.empty(),
+                    salesOrganisation: SalesOrganisation.empty(),
+                    salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+                    shipToInfo: ShipToInfo.empty(),
+                    user: User.empty(),
+                  ))
+              .thenAnswer((invocation) async =>
+                  const Left(ApiFailure.other('Fake-Error')));
+          when(() => cartRepositoryMock.fetchCartItems()).thenAnswer(
+            (invocation) async => Right(
+              [PriceAggregate.empty()],
+            ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          CartEvent.updateStockInfo(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            user: User.empty(),
+          ),
+        ),
+        expect: () => [
+          CartState.initial().copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
+          ),
+          CartState.initial().copyWith(
+            apiFailureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('Fake-Error'),
+              ),
+            ),
+            cartItemList: [],
+            isFetching: false,
+          ),
+        ],
+      );
+      blocTest<CartBloc, CartState>(
+        'Add remark to the bonus item',
+        build: () => CartBloc(cartRepository: cartRepositoryMock),
+        setUp: () {
+          when(() => cartRepositoryMock.updateBonusItem(
+                bonusItem: MaterialInfo.empty().copyWith(quantity: 2),
+                cartItem: mockCartItemList[0],
+                isUpdatedFromCart: true,
+                quantity: 2,
+              )).thenAnswer(
+            (invocation) async => Right(mockCartItemList),
+          );
+          when(() => cartRepositoryMock.fetchCartItems()).thenAnswer(
+            (invocation) async => Right(
+              mockCartItemList,
+            ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          CartEvent.addRemarksToBonusItem(
+            bonusItem: MaterialInfo.empty().copyWith(quantity: 2),
+            isDelete: true,
+            item: mockCartItemList[0],
+          ),
+        ),
+        expect: () => [
+          CartState.initial().copyWith(
+            isRemarksAdding: true,
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
+          ),
+          CartState.initial().copyWith(
+            apiFailureOrSuccessOption: none(),
+            cartItemList: mockCartItemList,
+            isFetching: false,
+            remarks: Remarks(''),
+            isRemarksAdding: false,
+          ),
+        ],
+      );
+      blocTest<CartBloc, CartState>(
+        'Failed to load remark to the bonus item',
+        build: () => CartBloc(cartRepository: cartRepositoryMock),
+        setUp: () {
+          when(() => cartRepositoryMock.updateBonusItem(
+                bonusItem: MaterialInfo.empty().copyWith(quantity: 2),
+                cartItem: mockCartItemList[0],
+                isUpdatedFromCart: true,
+                quantity: 2,
+              )).thenAnswer(
+            (invocation) async => const Left(
+              ApiFailure.other('Fake-Error'),
+            ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          CartEvent.addRemarksToBonusItem(
+            bonusItem: MaterialInfo.empty().copyWith(quantity: 2),
+            isDelete: true,
+            item: mockCartItemList[0],
+          ),
+        ),
+        expect: () => [
+          CartState.initial().copyWith(
+            isRemarksAdding: true,
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
+          ),
+          CartState.initial().copyWith(
+            apiFailureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('Fake-Error'),
+              ),
+            ),
+            cartItemList: [],
+            isFetching: false,
+            remarks: Remarks(''),
+            isRemarksAdding: false,
+          ),
+        ],
+      );
+
+      blocTest<CartBloc, CartState>(
+        'update cart',
+        build: () => CartBloc(cartRepository: cartRepositoryMock),
+        setUp: () {
+          when(() => cartRepositoryMock.updateCart(
+                cartItem: [mockCartItemList[0].price],
+                materialNumber: mockMaterialItemList[0].displayMatNo,
+              )).thenAnswer(
+            (invocation) async => Right(mockCartItemList),
+          );
+          when(() => cartRepositoryMock.fetchCartItems()).thenAnswer(
+            (invocation) async => Right(
+              mockCartItemList,
+            ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          CartEvent.updateCart(
+            item: [mockCartItemList[0].price],
+            materialNumber: mockMaterialItemList[0].displayMatNo,
+          ),
+        ),
+        expect: () => [
+          CartState.initial().copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
+          ),
+          CartState.initial().copyWith(
+            apiFailureOrSuccessOption: none(),
+            cartItemList: mockCartItemList,
+            isFetching: false,
+          ),
+        ],
+      );
+      blocTest<CartBloc, CartState>(
+        'Failed to update cart',
+        build: () => CartBloc(cartRepository: cartRepositoryMock),
+        setUp: () {
+          when(() => cartRepositoryMock.updateCart(
+                cartItem: [mockCartItemList[0].price],
+                materialNumber: mockMaterialItemList[0].displayMatNo,
+              )).thenAnswer(
+            (invocation) async => const Left(
+              ApiFailure.other('Fake-Error'),
+            ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          CartEvent.updateCart(
+            item: [mockCartItemList[0].price],
+            materialNumber: mockMaterialItemList[0].displayMatNo,
+          ),
+        ),
+        expect: () => [
+          CartState.initial().copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
+          ),
+          CartState.initial().copyWith(
+            apiFailureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('Fake-Error'),
+              ),
+            ),
+            cartItemList: [],
+            isFetching: false,
+          ),
+        ],
+      );
+
+      blocTest<CartBloc, CartState>(
+        'Clear cart',
+        build: () => CartBloc(cartRepository: cartRepositoryMock),
+        setUp: () {
+          when(() => cartRepositoryMock.clear()).thenAnswer(
+            (invocation) async => const Right(unit),
+          );
+        },
+        act: (bloc) => bloc.add(
+          const CartEvent.clearCart(),
+        ),
+        expect: () => [
+          CartState.initial(),
         ],
       );
     },

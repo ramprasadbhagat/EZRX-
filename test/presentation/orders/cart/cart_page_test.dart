@@ -8,12 +8,15 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
@@ -22,6 +25,8 @@ import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
+import 'package:ezrxmobile/presentation/orders/cart/cart_bundle_item_tile.dart';
+import 'package:ezrxmobile/presentation/orders/cart/cart_material_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -59,6 +64,10 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 class AddToCartBlocMock extends MockBloc<AddToCartEvent, AddToCartState>
     implements AddToCartBloc {}
 
+class MaterialListBlocMock
+    extends MockBloc<MaterialListEvent, MaterialListState>
+    implements MaterialListBloc {}
+
 void main() {
   late CartBloc cartBloc;
   late MaterialPriceBloc materialPriceBloc;
@@ -69,16 +78,23 @@ void main() {
   late CustomerCodeBloc customerCodeBloc;
   late List<PriceAggregate> mockCartItemWithDataList;
   late List<PriceAggregate> mockCartItemWithDataList2;
+  late List<PriceAggregate> mockCartItemBundles;
+  late MaterialListBloc materialListBlocMock;
 
   late List<PriceAggregate> mockCartItemWithDataListOverride;
   late Map<MaterialNumber, Price> mockPriceList;
-
   final AuthBloc authBlocMock = AuthBlocMock();
   final AddToCartBloc addToCartBlocMock = AddToCartBlocMock();
 
+  final mockMaterialItemList = [
+    MaterialNumber('000000000023168451'),
+    MaterialNumber('000000000023168441')
+  ];
   setUp(
     () {
       WidgetsFlutterBinding.ensureInitialized();
+      materialListBlocMock = MaterialListBlocMock();
+
       cartBloc = CartBlocMock();
       materialPriceBloc = MaterialPriceBlocMock();
       salesOrgBloc = SalesOrgBlocMock();
@@ -92,6 +108,62 @@ void main() {
           () => Price.empty().copyWith(
                 finalPrice: MaterialPrice(4.5),
               ));
+
+      mockCartItemBundles = [
+        PriceAggregate.empty().copyWith(
+          addedBonusList: [
+            MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('0000000000111111'),
+              materialDescription: ' Mosys D',
+              principalData: PrincipalData.empty().copyWith(
+                principalName: '台灣拜耳股份有限公司',
+              ),
+            ),
+          ],
+          quantity: 10,
+          bundle: Bundle(
+            bundleInformation: [],
+            bundleCode: '',
+            bundleName: BundleName('test'),
+          ),
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('000000000023168451'),
+            materialDescription: ' Triglyceride Mosys D',
+            principalData: PrincipalData.empty().copyWith(
+              principalName: '台灣拜耳股份有限公司',
+            ),
+            remarks: '',
+          ),
+          stockInfo: StockInfo.empty().copyWith(
+            inStock: MaterialInStock('Yes'),
+          ),
+        ),
+        PriceAggregate.empty().copyWith(
+          addedBonusList: [
+            MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('0000000000111111'),
+              materialDescription: ' Mosys D',
+              principalData: PrincipalData.empty().copyWith(
+                principalName: '台灣拜耳股份有限公司',
+              ),
+            ),
+          ],
+          quantity: 1,
+          bundle: Bundle.empty(),
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('000000000023168441'),
+            materialDescription: ' Triglyceride Mosys D',
+            principalData: PrincipalData.empty().copyWith(
+              principalName: '台灣拜耳股份有限公司',
+            ),
+            remarks: '',
+          ),
+          stockInfo: StockInfo.empty().copyWith(
+            inStock: MaterialInStock('Yes'),
+          ),
+        ),
+      ];
+
       mockCartItemWithDataList = [
         PriceAggregate.empty().copyWith(
           addedBonusList: [
@@ -117,6 +189,7 @@ void main() {
           ),
         ),
       ];
+
       mockCartItemWithDataList2 = [
         PriceAggregate.empty().copyWith(
           quantity: 2,
@@ -163,10 +236,27 @@ void main() {
       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
       when(() => shipToCodeBloc.state).thenReturn(ShipToCodeState.initial());
       when(() => userBloc.state).thenReturn(UserState.initial());
+      // when(() => salesOrgBloc.state)
+      //     .thenReturn(SalesOrgState.initial().copyWith(
+      //   salesOrganisation: SalesOrganisation.empty().copyWith(
+      //     salesOrg: SalesOrg('2601'),
+      //   ),
+      // ));
       when(() => salesOrgBloc.state)
           .thenReturn(SalesOrgState.initial().copyWith(
-        salesOrganisation:
-            SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+        configs: SalesOrganisationConfigs.empty().copyWith(
+          enableReferenceNote: true,
+          enableVat: true,
+          enableFutureDeliveryDay: true,
+          enableMobileNumber: true,
+          enableSpecialInstructions: true,
+          disableOrderType: false,
+          enableCollectiveNumber: true,
+          enablePaymentTerms: true,
+        ),
+        salesOrganisation: SalesOrganisation.empty().copyWith(
+          salesOrg: SalesOrg('2601'),
+        ),
       ));
       when(() => customerCodeBloc.state)
           .thenReturn(CustomerCodeState.initial().copyWith(
@@ -190,6 +280,8 @@ void main() {
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<AddToCartBloc>(
                 create: ((context) => addToCartBlocMock)),
+            BlocProvider<MaterialListBloc>(
+                create: ((context) => materialListBlocMock)),
             BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
             BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBloc),
           ],
@@ -261,11 +353,11 @@ void main() {
       testWidgets('Test have cart item list and Refresh', (tester) async {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
-            cartItemList: mockCartItemWithDataList,
-            isFetching: true,
+            selectedItemsMaterialNumber: mockMaterialItemList,
+            cartItemList: mockCartItemBundles,
+            isFetching: false,
           ),
         );
-
         await tester.runAsync(() async {
           await tester.pumpWidget(getWidget());
         });
@@ -275,6 +367,23 @@ void main() {
         expect(noBundleList, findsNothing);
         final scrollWidget = find.byWidgetPredicate((w) => w is ScrollList);
         expect(scrollWidget, findsOneWidget);
+
+        final cartBundleItemTile =
+            find.byWidgetPredicate((w) => w is CartBundleItemTile);
+
+        expect(cartBundleItemTile, findsOneWidget);
+        final cartTile =
+            find.byWidgetPredicate((w) => w is CartMaterialItemTile);
+
+        expect(cartTile, findsOneWidget);
+        final selectAllButton = find.byKey(const Key('selectAllButton'));
+
+        expect(selectAllButton, findsOneWidget);
+
+        final totalSection = find.byKey(const Key('totalSection'));
+
+        expect(totalSection, findsOneWidget);
+
         await tester.fling(scrollWidget, const Offset(0.0, 300.0), 1000.0);
         await tester.pump();
         await tester.pump(const Duration(seconds: 1));

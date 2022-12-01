@@ -160,6 +160,7 @@ class _SelectAllButton extends StatelessWidget {
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         return Expanded(
+          key: const Key('selectAllButton'),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -202,6 +203,7 @@ class _TotalSection extends StatelessWidget {
         final taxCode = context.read<SalesOrgBloc>().state.salesOrg.taxCode;
 
         return Expanded(
+          key: const Key('totalSection'),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
