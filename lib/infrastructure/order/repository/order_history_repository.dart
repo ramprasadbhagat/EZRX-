@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_history_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_remote.dart';
 import 'package:intl/intl.dart';
@@ -17,11 +18,13 @@ class OrderHistoryRepository implements IOrderHistoryRepository {
   final Config config;
   final OrderHistoryLocalDataSource localDataSource;
   final OrderHistoryRemoteDataSource orderHistoryRemoteDataSource;
+  final CountlyService countlyService;
 
   OrderHistoryRepository({
     required this.config,
     required this.localDataSource,
     required this.orderHistoryRemoteDataSource,
+    required this.countlyService,
   });
 
   @override
@@ -89,6 +92,12 @@ class OrderHistoryRepository implements IOrderHistoryRepository {
               principalSearch:
                   orderHistoryFilter.principalSearch.getOrDefaultValue(''),
             );
+      await countlyService.addCountlyEvent(
+        'order_history_filter',
+        segmentation: {
+          'isDateChanged': orderHistoryFilter.toDate.isBefore(DateTime.now()),
+        },
+      );
 
       return Right(orderHistoryItemList);
     } catch (e) {

@@ -73,7 +73,7 @@ void main() {
     locator = GetIt.instance;
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton(() => CountlyService());
+    locator.registerLazySingleton(() => CountlyService(config: locator<Config>()));
     locator.registerLazySingleton(() => mockAuthBloc);
     locator.registerLazySingleton(() => mockSalesOrgBloc);
     locator.registerLazySingleton(() => mockBannerBloc);

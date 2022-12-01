@@ -26,7 +26,6 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MaterialListBlocMock
@@ -79,11 +78,11 @@ void main() {
   late MaterialPriceBlocMock materialPriceBlocMock;
   late CovidMaterialListBlocMock covidMaterialListBlocMock;
   late CartBlocMock cartBlocMock;
-  late BannerBlocMock bannerBlocMock;
+  late BannerBlocMock mockBannerBloc;
   late ShipToCodeBlocMock shipToCodeBlocMock;
   late AuthBlocMock authBlocMock;
   late UserBlocMock userBlocMock;
-  late HttpService httpServiceMock;
+  late HttpService mockHTTPService;
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
   final fakematerialInfo1 = MaterialInfo(
       quantity: 0,
@@ -118,128 +117,129 @@ void main() {
 
   group('Home banner test', () {
     setUpAll(() {
-      locator = GetIt.instance;
-      locator.registerLazySingleton(() => CountlyService());
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
       locator.registerLazySingleton(() => AppRouter());
+      locator.registerLazySingleton(() => mockBannerBloc);
+      locator.registerLazySingleton(() => CountlyService(config: locator<Config>()));
+      mockHTTPService = MockHTTPService();
       locator.registerLazySingleton<HttpService>(
-        () => httpServiceMock,
+        () => mockHTTPService,
       );
     });
+    group('Home Tab Screen', () {
+      setUp(() {
+        mockCustomerCodeBloc = CustomerCodeBlocMock();
+        salesOrgBlocMock = SalesOrgBlocMock();
+        materialListBlocMock = MaterialListBlocMock();
+        materialPriceBlocMock = MaterialPriceBlocMock();
+        covidMaterialListBlocMock = CovidMaterialListBlocMock();
+        mockBannerBloc = BannerBlocMock();
+        shipToCodeBlocMock = ShipToCodeBlocMock();
+        authBlocMock = AuthBlocMock();
+        userBlocMock = UserBlocMock();
+        cartBlocMock = CartBlocMock();
+        mockHTTPService = MockHTTPService();
 
-    setUp(() {
-      mockCustomerCodeBloc = CustomerCodeBlocMock();
-      salesOrgBlocMock = SalesOrgBlocMock();
-      materialListBlocMock = MaterialListBlocMock();
-      materialPriceBlocMock = MaterialPriceBlocMock();
-      covidMaterialListBlocMock = CovidMaterialListBlocMock();
-      bannerBlocMock = BannerBlocMock();
-      shipToCodeBlocMock = ShipToCodeBlocMock();
-      authBlocMock = AuthBlocMock();
-      userBlocMock = UserBlocMock();
-      cartBlocMock = CartBlocMock();
-      httpServiceMock = MockHTTPService();
+        when(() => mockCustomerCodeBloc.state).thenReturn(
+            CustomerCodeState.initial()
+                .copyWith(customerCodeInfo: fakeCustomerCodeInfo));
+        when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
+            .copyWith(salesOrganisation: fakeSalesOrganisation));
+        when(() => materialListBlocMock.state).thenReturn(
+            MaterialListState.initial()
+                .copyWith(materialList: [fakematerialInfo1]));
+        when(() => materialPriceBlocMock.state)
+            .thenReturn(MaterialPriceState.initial());
+        when(() => covidMaterialListBlocMock.state)
+            .thenReturn(CovidMaterialListState.initial());
+        when(() => cartBlocMock.state).thenReturn(CartState.initial());
+        when(() => mockBannerBloc.state).thenReturn(BannerState.initial());
+        when(() => shipToCodeBlocMock.state)
+            .thenReturn(ShipToCodeState.initial());
+        when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+        when(() => userBlocMock.state).thenReturn(UserState.initial());
+      });
 
-      when(() => mockCustomerCodeBloc.state).thenReturn(
-          CustomerCodeState.initial()
-              .copyWith(customerCodeInfo: fakeCustomerCodeInfo));
-      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
-          .copyWith(salesOrganisation: fakeSalesOrganisation));
-      when(() => materialListBlocMock.state).thenReturn(
-          MaterialListState.initial()
-              .copyWith(materialList: [fakematerialInfo1]));
-      when(() => materialPriceBlocMock.state)
-          .thenReturn(MaterialPriceState.initial());
-      when(() => covidMaterialListBlocMock.state)
-          .thenReturn(CovidMaterialListState.initial());
-      when(() => cartBlocMock.state).thenReturn(CartState.initial());
-      when(() => bannerBlocMock.state).thenReturn(BannerState.initial());
-      when(() => shipToCodeBlocMock.state)
-          .thenReturn(ShipToCodeState.initial());
-      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
-      when(() => userBlocMock.state).thenReturn(UserState.initial());
-    });
-
-    Future getWidget(tester) async {
-      return await tester.pumpWidget(
-        MultiBlocProvider(
-          providers: [
-            BlocProvider<CustomerCodeBloc>(
-                create: (context) => mockCustomerCodeBloc),
-            BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
-            BlocProvider<MaterialListBloc>(
-                create: (context) => materialListBlocMock),
-            BlocProvider<MaterialPriceBloc>(
-                create: (context) => materialPriceBlocMock),
-            BlocProvider<CovidMaterialListBloc>(
-                create: (context) => covidMaterialListBlocMock),
-            BlocProvider<CartBloc>(create: (context) => cartBlocMock),
-            BlocProvider<BannerBloc>(create: (context) => bannerBlocMock),
-            BlocProvider<ShipToCodeBloc>(
-                create: (context) => shipToCodeBlocMock),
-            BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-            BlocProvider<UserBloc>(create: (context) => userBlocMock),
-          ],
-          child: const MaterialApp(
-            home: Scaffold(
-              body: HomeTab(),
+      Future getWidget(tester) async {
+        return await tester.pumpWidget(
+          MultiBlocProvider(
+            providers: [
+              BlocProvider<CustomerCodeBloc>(
+                  create: (context) => mockCustomerCodeBloc),
+              BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
+              BlocProvider<MaterialListBloc>(
+                  create: (context) => materialListBlocMock),
+              BlocProvider<MaterialPriceBloc>(
+                  create: (context) => materialPriceBlocMock),
+              BlocProvider<CovidMaterialListBloc>(
+                  create: (context) => covidMaterialListBlocMock),
+              BlocProvider<CartBloc>(create: (context) => cartBlocMock),
+              BlocProvider<BannerBloc>(create: (context) => mockBannerBloc),
+              BlocProvider<ShipToCodeBloc>(
+                  create: (context) => shipToCodeBlocMock),
+              BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+              BlocProvider<UserBloc>(create: (context) => userBlocMock),
+            ],
+            child: const MaterialApp(
+              home: Scaffold(
+                body: HomeTab(),
+              ),
             ),
           ),
-        ),
-      );
-    }
+        );
+      }
 
-    testWidgets('Home Tab  test', (WidgetTester tester) async {
-      final expectedMaterialState = [
-        MaterialListState.initial().copyWith(
-            isFetching: true,
-            nextPageIndex: 1,
-            materialList: [fakematerialInfo1]),
-        MaterialListState.initial().copyWith(
-            isFetching: false,
-            nextPageIndex: 1,
-            materialList: [
-              fakematerialInfo1.copyWith(materialNumber: fakeMaterialNumber)
-            ]),
-      ];
-      final expectedCovidMaterialState = [
-        CovidMaterialListState.initial().copyWith(
-            isFetching: true,
-            nextPageIndex: 1,
-            materialList: [fakematerialInfo1]),
-        CovidMaterialListState.initial().copyWith(
-            isFetching: false,
-            nextPageIndex: 1,
-            materialList: [
-              fakematerialInfo1.copyWith(materialNumber: fakeMaterialNumber)
-            ]),
-      ];
+      testWidgets('Home Tab  test', (WidgetTester tester) async {
+        final expectedMaterialState = [
+          MaterialListState.initial().copyWith(
+              isFetching: true,
+              nextPageIndex: 1,
+              materialList: [fakematerialInfo1]),
+          MaterialListState.initial().copyWith(
+              isFetching: false,
+              nextPageIndex: 1,
+              materialList: [
+                fakematerialInfo1.copyWith(materialNumber: fakeMaterialNumber)
+              ]),
+        ];
+        final expectedCovidMaterialState = [
+          CovidMaterialListState.initial().copyWith(
+              isFetching: true,
+              nextPageIndex: 1,
+              materialList: [fakematerialInfo1]),
+          CovidMaterialListState.initial().copyWith(
+              isFetching: false,
+              nextPageIndex: 1,
+              materialList: [
+                fakematerialInfo1.copyWith(materialNumber: fakeMaterialNumber)
+              ]),
+        ];
 
-      whenListen(
-          materialListBlocMock, Stream.fromIterable(expectedMaterialState));
-      whenListen(covidMaterialListBlocMock,
-          Stream.fromIterable(expectedCovidMaterialState));
+        whenListen(
+            materialListBlocMock, Stream.fromIterable(expectedMaterialState));
+        whenListen(covidMaterialListBlocMock,
+            Stream.fromIterable(expectedCovidMaterialState));
 
-      await getWidget(tester);
-      await tester.pump(const Duration(seconds: 3));
+        await getWidget(tester);
+        await tester.pump(const Duration(seconds: 3));
 
-      expect(find.byType(HomeTab), findsOneWidget);
-      expect(
-          find.byKey(const ValueKey('HomeSalesOrgSelector')), findsOneWidget);
-      expect(find.byKey(const ValueKey('HomeCustomerCodeSelector')),
-          findsOneWidget);
-      expect(
-          find.byKey(const ValueKey('HomeShipCodeSelector')), findsOneWidget);
-      expect(find.byKey(const ValueKey('HomeBanner')), findsOneWidget);
-      expect(find.text('Create Order'), findsOneWidget);
-      expect(find.text('Saved Orders'), findsOneWidget);
-      expect(find.text('Order Template'), findsOneWidget);
+        expect(find.byType(HomeTab), findsOneWidget);
+        expect(
+            find.byKey(const ValueKey('HomeSalesOrgSelector')), findsOneWidget);
+        expect(find.byKey(const ValueKey('HomeCustomerCodeSelector')),
+            findsOneWidget);
+        expect(
+            find.byKey(const ValueKey('HomeShipCodeSelector')), findsOneWidget);
+        expect(find.byKey(const ValueKey('HomeBanner')), findsOneWidget);
+        expect(find.text('Create Order'), findsOneWidget);
+        expect(find.text('Saved Orders'), findsOneWidget);
+        expect(find.text('Order Template'), findsOneWidget);
 
-      verify(() => materialPriceBlocMock.add(MaterialPriceEvent.fetch(
-          customerCode: fakeCustomerCodeInfo,
-          materials: [fakematerialInfo1],
-          salesOrganisation: fakeSalesOrganisation))).called(2);
-          
+        verify(() => materialPriceBlocMock.add(MaterialPriceEvent.fetch(
+            customerCode: fakeCustomerCodeInfo,
+            materials: [fakematerialInfo1],
+            salesOrganisation: fakeSalesOrganisation))).called(2);
+      });
     });
   });
 }

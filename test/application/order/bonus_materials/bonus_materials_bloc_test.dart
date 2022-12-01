@@ -47,7 +47,7 @@ void main() {
 
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(
-      () => CountlyService(),
+      () => locator<CountlyService>(),
     );
     locator.registerLazySingleton<HttpService>(
       () => HttpService(

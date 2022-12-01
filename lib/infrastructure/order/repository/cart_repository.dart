@@ -14,6 +14,7 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
@@ -26,12 +27,14 @@ class CartRepository implements ICartRepository {
   final Config config;
   final StockInfoLocalDataSource stockInfoLocalDataSource;
   final StockInfoRemoteDataSource stockInfoRemoteDataSource;
+  final CountlyService countlyService;
 
   CartRepository({
     required this.cartStorage,
     required this.config,
     required this.stockInfoLocalDataSource,
     required this.stockInfoRemoteDataSource,
+    required this.countlyService,
   });
 
   @override
@@ -75,6 +78,15 @@ class CartRepository implements ICartRepository {
       await cartStorage.add(PriceAggregateDto.fromDomain(cartItem.copyWith(
         stockInfo: stockInformation,
       )));
+      await countlyService
+          .addCountlyEvent('Add materials to cart', segmentation: {
+        'materialNum': cartItem.getMaterialNumber.getOrCrash(),
+        'listPrice': cartItem.listPrice,
+        'price': cartItem.price.finalPrice.getOrCrash(),
+        'numItemInCart': cartStorage.cartBoxSize,
+        'materialType':
+          cartItem.materialInfo.materialGroup4.getMaterialGroup4Type,
+      });
 
       return fetchCartItems();
     } catch (e) {
@@ -164,6 +176,7 @@ class CartRepository implements ICartRepository {
       await cartStorage.delete(
         cartItem.materialInfo.materialNumber.getOrCrash(),
       );
+      await countlyService.addCountlyEvent('Delete from Order Summary');
 
       return fetchCartItems();
     } catch (e) {
@@ -332,6 +345,7 @@ class CartRepository implements ICartRepository {
         bonusItem: bonusItem,
         isUpdateFromCart: isUpdateFromCart,
       );
+      await countlyService.addCountlyEvent('Remove bonus');
 
       return fetchCartItems();
     } catch (e) {

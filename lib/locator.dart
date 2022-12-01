@@ -277,6 +277,7 @@ void setupLocator() {
       oktaLoginServices: locator<OktaLoginServices>(),
       pushNotificationService: locator<PushNotificationService>(),
       localAuthentication: locator<LocalAuthentication>(),
+      countlyService: locator<CountlyService>(),
     ),
   );
 
@@ -286,6 +287,7 @@ void setupLocator() {
       config: locator<Config>(),
       stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
       stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
+      countlyService: locator<CountlyService>(),
     ),
   );
 
@@ -471,6 +473,7 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<FavouriteLocalDataSource>(),
       remoteDataSource: locator<FavouriteRemoteDataSource>(),
+      countlyService: locator<CountlyService>(),
     ),
   );
   locator.registerLazySingleton(
@@ -503,6 +506,7 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<SalesOrgLocalDataSource>(),
       remoteDataSource: locator<SalesOrgRemoteDataSource>(),
+      countlyService: locator<CountlyService>(),
     ),
   );
 
@@ -535,6 +539,7 @@ void setupLocator() {
       remoteDataSource: locator<CustomerCodeRemoteDataSource>(),
       localCustomerCodeDataSource: locator<CustomerCodeLocalDataSource>(),
       accountSelectorStorage: locator<AccountSelectorStorage>(),
+      countlyService: locator<CountlyService>(),
     ),
   );
 
@@ -552,6 +557,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ShipToCodeRepository(
       accountSelectorStorage: locator<AccountSelectorStorage>(),
+      countlyService: locator<CountlyService>(),
     ),
   );
 
@@ -576,8 +582,11 @@ void setupLocator() {
   //============================================================
 
   locator.registerLazySingleton(
-    () => CountlyService(),
+    () => CountlyService(
+      config: locator<Config>(),
+    ),
   );
+
 
   //============================================================
   //  Announcement
@@ -632,6 +641,7 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<OrderLocalDataSource>(),
       remoteDataSource: locator<OrderRemoteDataSource>(),
+      countlyService: locator<CountlyService>(),
     ),
   );
 
@@ -699,6 +709,7 @@ void setupLocator() {
       config: locator<Config>(),
       materialListLocalDataSource: locator<MaterialListLocalDataSource>(),
       materialListRemoteDataSource: locator<MaterialListRemoteDataSource>(),
+      countlyService: locator<CountlyService>(),
     ),
   );
 
@@ -735,6 +746,7 @@ void setupLocator() {
       config: locator<Config>(),
       orderTemplateLocalDataSource: locator<OrderTemplateLocalDataSource>(),
       orderTemplateRemoteDataSource: locator<OrderTemplateRemoteDataSource>(),
+      countlyService: locator<CountlyService>(),
     ),
   );
 
@@ -825,6 +837,7 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<OrderHistoryLocalDataSource>(),
       orderHistoryRemoteDataSource: locator<OrderHistoryRemoteDataSource>(),
+      countlyService: locator<CountlyService>(),
     ),
   );
   locator.registerLazySingleton(

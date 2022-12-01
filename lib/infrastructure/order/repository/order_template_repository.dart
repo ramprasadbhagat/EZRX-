@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_template_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_remote_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_template_material_dto.dart';
@@ -14,11 +15,13 @@ class OrderTemplateRepository implements IOrderTemplateRepository {
   final Config config;
   final OrderTemplateLocalDataSource orderTemplateLocalDataSource;
   final OrderTemplateRemoteDataSource orderTemplateRemoteDataSource;
+  final CountlyService countlyService;
 
   OrderTemplateRepository({
     required this.config,
     required this.orderTemplateLocalDataSource,
     required this.orderTemplateRemoteDataSource,
+    required this.countlyService,
   });
 
   @override
@@ -74,6 +77,7 @@ class OrderTemplateRepository implements IOrderTemplateRepository {
         ..removeWhere(
           (element) => element.templateId == deletedTemplate.templateId,
         );
+      await countlyService.addCountlyEvent('Delete template');
 
       return right(newTempItems);
     } catch (e) {
@@ -114,6 +118,7 @@ class OrderTemplateRepository implements IOrderTemplateRepository {
 
       final newOrderTemplateList = List<OrderTemplate>.from(templateList)
         ..insert(0, savedTemplate);
+      await countlyService.addCountlyEvent('save_as_template');
 
       return right(newOrderTemplateList);
     } catch (e) {

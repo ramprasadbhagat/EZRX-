@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_list_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
 
@@ -18,11 +19,13 @@ class MaterialListRepository implements IMaterialListRepository {
   final Config config;
   final MaterialListLocalDataSource materialListLocalDataSource;
   final MaterialListRemoteDataSource materialListRemoteDataSource;
+  final CountlyService countlyService;
 
   MaterialListRepository({
     required this.config,
     required this.materialListLocalDataSource,
     required this.materialListRemoteDataSource,
+    required this.countlyService,
   });
 
   @override
@@ -91,6 +94,9 @@ class MaterialListRepository implements IMaterialListRepository {
                   selectedMaterialFilter.uniqueTherapeuticClass,
               isForFOC: isForFoc,
             );
+      if (selectedMaterialFilter != MaterialFilter.empty()) {
+        await callCountly(selectedMaterialFilter);
+      }
 
       return Right(materialListData);
     } catch (e) {
@@ -164,6 +170,50 @@ class MaterialListRepository implements IMaterialListRepository {
       return Right(materialListData);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  Future<void> callCountly(MaterialFilter selectedMaterialFilter) async {
+    if (selectedMaterialFilter.uniquePrincipalName.isNotEmpty) {
+      await countlyService.addCountlyEvent(
+        'select_principal',
+        segmentation: {
+          'principalName': selectedMaterialFilter.uniquePrincipalName.join(','),
+          'numSelected': selectedMaterialFilter.uniquePrincipalName.length,
+        },
+      );
+      await countlyService.addCountlyEvent(
+        'Use filter',
+        segmentation: {
+          'principal_name':
+              selectedMaterialFilter.uniquePrincipalName.join(','),
+        },
+      );
+    }
+    if (selectedMaterialFilter.uniqueTherapeuticClass.isNotEmpty) {
+      await countlyService.addCountlyEvent(
+        'select_thera_class',
+        segmentation: {
+          'theraClassName':
+              selectedMaterialFilter.uniqueTherapeuticClass.join(','),
+          'numSelected': selectedMaterialFilter.uniqueTherapeuticClass.length,
+        },
+      );
+      await countlyService.addCountlyEvent(
+        'Use filter',
+        segmentation: {
+          'therapeutic_class':
+              selectedMaterialFilter.uniqueTherapeuticClass.join(','),
+        },
+      );
+    }
+    if (selectedMaterialFilter.uniqueItemBrand.isNotEmpty) {
+      await countlyService.addCountlyEvent(
+        'Use filter',
+        segmentation: {
+          'item_brand': selectedMaterialFilter.uniqueItemBrand.join(','),
+        },
+      );
     }
   }
 }

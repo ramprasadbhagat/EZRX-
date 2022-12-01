@@ -12,18 +12,21 @@ import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/account_selector_storage_dto.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 
 class CustomerCodeRepository implements ICustomerCodeRepository {
   final Config config;
   final CustomerCodeRemoteDataSource remoteDataSource;
   final CustomerCodeLocalDataSource localCustomerCodeDataSource;
   final AccountSelectorStorage accountSelectorStorage;
+  final CountlyService countlyService;
 
   CustomerCodeRepository({
     required this.config,
     required this.remoteDataSource,
     required this.localCustomerCodeDataSource,
     required this.accountSelectorStorage,
+    required this.countlyService,
   });
 
   @override
@@ -79,6 +82,10 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
         accountSelectorStorageDto: AccountSelectorStorageDto.fromDomain(
           accountSelector: accountSelector.copyWith(customerCode: customerCode),
         ),
+      );
+      await countlyService.addCountlyEvent(
+        'customerCode_save',
+        segmentation: {'customerCode': customerCode},
       );
 
       return const Right(unit);

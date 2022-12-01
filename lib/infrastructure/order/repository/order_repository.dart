@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order_material.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/saved_order_dto.dart';
@@ -20,11 +21,13 @@ class OrderRepository implements IOrderRepository {
   final Config config;
   final OrderLocalDataSource localDataSource;
   final OrderRemoteDataSource remoteDataSource;
+  final CountlyService countlyService;
 
   OrderRepository({
     required this.config,
     required this.localDataSource,
     required this.remoteDataSource,
+    required this.countlyService,
   });
 
   @override
@@ -143,6 +146,7 @@ class OrderRepository implements IOrderRepository {
 
       if (savedOrder.isDraftOrder) {
         final newlyAddedDraftOrder = draftOrder.copyWith(id: savedOrder.id);
+        await countlyService.addCountlyEvent('Save order');
 
         return Right(newlyAddedDraftOrder);
       } else {

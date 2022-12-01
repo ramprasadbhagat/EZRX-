@@ -36,6 +36,7 @@ import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
@@ -74,7 +75,7 @@ Future<void> _firebaseMessagingBackgroundHandler(
   );
 }
 
-Future<void> initialSetup() async {
+Future<void> initialSetup({required Flavor flavor}) async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await Wakelock.enable();
@@ -91,12 +92,14 @@ Future<void> initialSetup() async {
     FlutterError.onError = _crashlytics.recordFlutterError;
   }
 
+  locator<Config>().appFlavor = flavor;
   await locator<RemoteConfigService>().init();
   await locator<TokenStorage>().init();
   await locator<CredStorage>().init();
   await locator<OktaLoginServices>().init();
   await locator<AccountSelectorStorage>().init();
   await locator<CartStorage>().init();
+  await locator<CountlyService>().init();
 }
 
 void runAppWithCrashlyticsAndLocalization() {
@@ -245,7 +248,7 @@ class App extends StatelessWidget {
         BlocProvider<DownloadAttachmentBloc>(
           create: (context) => locator<DownloadAttachmentBloc>(),
         ),
-         BlocProvider<OrderHistoryFilterByStatusBloc>(
+        BlocProvider<OrderHistoryFilterByStatusBloc>(
           create: (context) => locator<OrderHistoryFilterByStatusBloc>(),
         ),
       ],

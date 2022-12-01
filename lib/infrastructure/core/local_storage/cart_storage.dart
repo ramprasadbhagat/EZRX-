@@ -20,6 +20,8 @@ class CartStorage {
 
   CartStorage();
 
+  int get cartBoxSize => _cartBox.length;
+
   Future<void> init() async {
     try {
       await Hive.initFlutter();
