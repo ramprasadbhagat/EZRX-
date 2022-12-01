@@ -90,7 +90,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         for (final customerItem in finalCustomerCodeinfo) {
           final failureOrSuccess = await customerCodeRepository.getCustomerCode(
             e.selectedSalesOrg,
-            customerItem.customerCodeSoldTo.getOrCrash(),
+            customerItem.customerCodeSoldTo.checkAllOrCustomerCode,
             e.hidecustomer,
             state.customerCodeList.length,
             e.userInfo,

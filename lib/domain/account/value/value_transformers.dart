@@ -312,3 +312,13 @@ class Contact {
   Contact({required this.instruction, required this.phoneNumbers});
   factory Contact.empty() => Contact(instruction: '', phoneNumbers: <String>[]);
 }
+
+String checkAllOrDash(String value) {
+  switch (value) {
+    case '-':
+    case 'all':
+      return '';
+    default:
+      return value;
+  }
+}

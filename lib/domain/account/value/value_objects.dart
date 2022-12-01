@@ -12,6 +12,10 @@ class CustomerCode extends ValueObject<String> {
     return CustomerCode._(validateStringNotEmpty(input));
   }
 
+  String get checkAllOrCustomerCode {
+    return checkAllOrDash(value.getOrElse(() => ''));
+  }
+
   const CustomerCode._(this.value);
 }
 

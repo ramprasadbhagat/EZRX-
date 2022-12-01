@@ -108,18 +108,16 @@ class CustomerCodeQueryMutation {
   // Query for fetching the customer information for Sales Rep User
   String getCustomerListForSalesRep() {
     return '''
-        query customerListForSalesRep(\$username: String!,
-                                      \$searchKey: String!,
+        query CustomerListForSalesRep(\$username: String!,
+                                      \$searchKey: String,
                                       \$salesOrganisation: String!,
-                                      \$filterBlockCustomer: Boolean!,
                                       \$first: Int,
                                       \$after: Int){
           customerListForSalesRep(username: \$username,
                                   searchKey: \$searchKey,
                                   salesOrganisation:\$salesOrganisation,
                                   first:\$first,
-                                  after: \$after,
-                                  filterBlockCustomer: \$filterBlockCustomer) {
+                                  after: \$after) {
               taxIncludedBySalesOrganization
               customerClassification
               customerCodeSoldTo

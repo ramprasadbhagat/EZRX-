@@ -68,13 +68,15 @@ class CustomerCodeRemoteDataSource {
       final queryData = customerCodeQueryMutation.getCustomerListForSalesRep();
 
       final variables = {
-        'searchKey': customerCode,
         'salesOrganisation': salesOrg,
         'first': 20,
         'after': paginate,
-        'filterBlockCustomer': hidecustomer,
         'username': userName,
       };
+
+      if (customerCode.isNotEmpty) {
+        variables.putIfAbsent('searchKey', () => customerCode);
+      }
 
       final res = await httpService.request(
         method: 'POST',
