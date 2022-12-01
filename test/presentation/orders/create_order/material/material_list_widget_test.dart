@@ -13,13 +13,13 @@ import 'package:ezrxmobile/application/order/material_filter/material_filter_blo
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/application/order/stock_information/stock_information_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/application/order/stock_information/stock_information_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -425,6 +425,15 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 1));
       final orderTypeSelector = find.byKey(const Key('orderTypeSelector'));
       expect(orderTypeSelector, findsOneWidget);
+
+      final isZPOR = orderDocumentTypeBlocMock.state.selectedOrderType.isZPOR;
+      final isReasonFieldEnable =
+          orderDocumentTypeBlocMock.state.isOrderTypeSelected &&
+              !isZPOR &&
+              orderDocumentTypeBlocMock.state.reasonList.isNotEmpty;
+      expect(isReasonFieldEnable, false);
+      final reasonField = find.byKey(const Key('reasonField'));
+      expect(reasonField, findsNothing);
     });
 
     testWidgets('Order Type Document type enable with selected order type',
@@ -462,6 +471,16 @@ void main() {
       await tester.tap(orderDocumentTypedialog);
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      final displayReasonText =
+          orderDocumentTypeBlocMock.state.selectedReason.displayReasonText;
+
+      final displayItemText = orderDocumentTypeBlocMock.state.isReasonSelected
+          ? displayReasonText
+          : '';
+
+      final displayItemTextWidget = find.text(displayItemText);
+      expect(displayItemTextWidget, findsNothing);
 
       final documentType =
           find.byKey(Key(fakeOrderDocumentTypeList.last.documentType));

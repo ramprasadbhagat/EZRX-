@@ -13,12 +13,4 @@ class LicenseInfo with _$LicenseInfo {
     required String validFrom,
     required String validTo,
   }) = _LicenseInfo;
-
-  factory LicenseInfo.empty() => const LicenseInfo(
-        licenceType: '',
-        licenseDescription: '',
-        licenseNumber: '',
-        validFrom: '',
-        validTo: '',
-      );
 }

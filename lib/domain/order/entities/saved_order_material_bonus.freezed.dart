@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'material_item_bonus.dart';
+part of 'saved_order_material_bonus.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$MaterialItemBonus {
+mixin _$SavedOrderMaterialBonus {
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   int get qty => throw _privateConstructorUsedError;
   String get comment => throw _privateConstructorUsedError;
@@ -25,15 +25,15 @@ mixin _$MaterialItemBonus {
   int get remainingQty => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $MaterialItemBonusCopyWith<MaterialItemBonus> get copyWith =>
+  $SavedOrderMaterialBonusCopyWith<SavedOrderMaterialBonus> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MaterialItemBonusCopyWith<$Res> {
-  factory $MaterialItemBonusCopyWith(
-          MaterialItemBonus value, $Res Function(MaterialItemBonus) then) =
-      _$MaterialItemBonusCopyWithImpl<$Res, MaterialItemBonus>;
+abstract class $SavedOrderMaterialBonusCopyWith<$Res> {
+  factory $SavedOrderMaterialBonusCopyWith(SavedOrderMaterialBonus value,
+          $Res Function(SavedOrderMaterialBonus) then) =
+      _$SavedOrderMaterialBonusCopyWithImpl<$Res, SavedOrderMaterialBonus>;
   @useResult
   $Res call(
       {MaterialNumber materialNumber,
@@ -46,9 +46,10 @@ abstract class $MaterialItemBonusCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MaterialItemBonusCopyWithImpl<$Res, $Val extends MaterialItemBonus>
-    implements $MaterialItemBonusCopyWith<$Res> {
-  _$MaterialItemBonusCopyWithImpl(this._value, this._then);
+class _$SavedOrderMaterialBonusCopyWithImpl<$Res,
+        $Val extends SavedOrderMaterialBonus>
+    implements $SavedOrderMaterialBonusCopyWith<$Res> {
+  _$SavedOrderMaterialBonusCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -100,11 +101,11 @@ class _$MaterialItemBonusCopyWithImpl<$Res, $Val extends MaterialItemBonus>
 }
 
 /// @nodoc
-abstract class _$$_MaterialItemBonusCopyWith<$Res>
-    implements $MaterialItemBonusCopyWith<$Res> {
-  factory _$$_MaterialItemBonusCopyWith(_$_MaterialItemBonus value,
-          $Res Function(_$_MaterialItemBonus) then) =
-      __$$_MaterialItemBonusCopyWithImpl<$Res>;
+abstract class _$$_SavedOrderMaterialBonusCopyWith<$Res>
+    implements $SavedOrderMaterialBonusCopyWith<$Res> {
+  factory _$$_SavedOrderMaterialBonusCopyWith(_$_SavedOrderMaterialBonus value,
+          $Res Function(_$_SavedOrderMaterialBonus) then) =
+      __$$_SavedOrderMaterialBonusCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -118,11 +119,12 @@ abstract class _$$_MaterialItemBonusCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaterialItemBonusCopyWithImpl<$Res>
-    extends _$MaterialItemBonusCopyWithImpl<$Res, _$_MaterialItemBonus>
-    implements _$$_MaterialItemBonusCopyWith<$Res> {
-  __$$_MaterialItemBonusCopyWithImpl(
-      _$_MaterialItemBonus _value, $Res Function(_$_MaterialItemBonus) _then)
+class __$$_SavedOrderMaterialBonusCopyWithImpl<$Res>
+    extends _$SavedOrderMaterialBonusCopyWithImpl<$Res,
+        _$_SavedOrderMaterialBonus>
+    implements _$$_SavedOrderMaterialBonusCopyWith<$Res> {
+  __$$_SavedOrderMaterialBonusCopyWithImpl(_$_SavedOrderMaterialBonus _value,
+      $Res Function(_$_SavedOrderMaterialBonus) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -136,7 +138,7 @@ class __$$_MaterialItemBonusCopyWithImpl<$Res>
     Object? inStock = null,
     Object? remainingQty = null,
   }) {
-    return _then(_$_MaterialItemBonus(
+    return _then(_$_SavedOrderMaterialBonus(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -171,8 +173,8 @@ class __$$_MaterialItemBonusCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MaterialItemBonus extends _MaterialItemBonus {
-  const _$_MaterialItemBonus(
+class _$_SavedOrderMaterialBonus extends _SavedOrderMaterialBonus {
+  const _$_SavedOrderMaterialBonus(
       {required this.materialNumber,
       required this.qty,
       required this.comment,
@@ -199,14 +201,14 @@ class _$_MaterialItemBonus extends _MaterialItemBonus {
 
   @override
   String toString() {
-    return 'MaterialItemBonus(materialNumber: $materialNumber, qty: $qty, comment: $comment, materialDescription: $materialDescription, expiryDate: $expiryDate, inStock: $inStock, remainingQty: $remainingQty)';
+    return 'SavedOrderMaterialBonus(materialNumber: $materialNumber, qty: $qty, comment: $comment, materialDescription: $materialDescription, expiryDate: $expiryDate, inStock: $inStock, remainingQty: $remainingQty)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialItemBonus &&
+            other is _$_SavedOrderMaterialBonus &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.qty, qty) || other.qty == qty) &&
@@ -227,21 +229,22 @@ class _$_MaterialItemBonus extends _MaterialItemBonus {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialItemBonusCopyWith<_$_MaterialItemBonus> get copyWith =>
-      __$$_MaterialItemBonusCopyWithImpl<_$_MaterialItemBonus>(
-          this, _$identity);
+  _$$_SavedOrderMaterialBonusCopyWith<_$_SavedOrderMaterialBonus>
+      get copyWith =>
+          __$$_SavedOrderMaterialBonusCopyWithImpl<_$_SavedOrderMaterialBonus>(
+              this, _$identity);
 }
 
-abstract class _MaterialItemBonus extends MaterialItemBonus {
-  const factory _MaterialItemBonus(
+abstract class _SavedOrderMaterialBonus extends SavedOrderMaterialBonus {
+  const factory _SavedOrderMaterialBonus(
       {required final MaterialNumber materialNumber,
       required final int qty,
       required final String comment,
       required final String materialDescription,
       required final String expiryDate,
       required final String inStock,
-      required final int remainingQty}) = _$_MaterialItemBonus;
-  const _MaterialItemBonus._() : super._();
+      required final int remainingQty}) = _$_SavedOrderMaterialBonus;
+  const _SavedOrderMaterialBonus._() : super._();
 
   @override
   MaterialNumber get materialNumber;
@@ -259,6 +262,6 @@ abstract class _MaterialItemBonus extends MaterialItemBonus {
   int get remainingQty;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialItemBonusCopyWith<_$_MaterialItemBonus> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_SavedOrderMaterialBonusCopyWith<_$_SavedOrderMaterialBonus>
+      get copyWith => throw _privateConstructorUsedError;
 }

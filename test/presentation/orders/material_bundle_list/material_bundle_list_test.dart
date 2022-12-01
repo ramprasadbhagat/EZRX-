@@ -15,7 +15,6 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/material_bundle_list_local.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_bundle_list.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +49,7 @@ void main() {
   final CustomerCodeBloc customerCodeBlocMock = CustomerCodeBlocMock();
   final ShipToCodeBloc shipToCodeBLocMock = ShipToCodeBlocMock();
   final AuthBloc authBlocMock = AuthBlocMock();
-  var materialBundleItemsMock = <MaterialInfo>[];
+  // var materialBundleItemsMock = <MaterialInfo>[];
   final bundleItemsMock = <BundleAggregate>[];
 
   setUpAll(() async {
@@ -58,8 +57,8 @@ void main() {
 
     materialBundleListBloc = MaterialBundleListBlocMock();
 
-    materialBundleItemsMock =
-        await MaterialBundleListLocalDatasource().getMaterialBundleList();
+    // materialBundleItemsMock =
+    //     await MaterialBundleListLocalDatasource().getMaterialBundleList();
     // for (final item in materialBundleItemsMock) {
     //   if (item.bundles.isNotEmpty &&
     //       bundleItemsMock
@@ -172,12 +171,7 @@ void main() {
         'Test have material bundle list and emit load more state include',
         (tester) async {
       final bundleInfoList = [
-        BundleInfo(
-          sequence: 1,
-          quantity: 1,
-          type: MaterialBundleType('%'),
-          rate: -10,
-        ),
+        BundleInfo.empty(),
         BundleInfo(
           sequence: 4,
           quantity: 10,
@@ -204,31 +198,43 @@ void main() {
         ),
       ];
       final bundleList = [
-        BundleAggregate(bundle: Bundle(
-          bundleName: BundleName(''),
-          bundleCode: '0010276811',
-          bundleInformation: bundleInfoList,
-        ), materialInfos: <MaterialInfo>[],),
-        BundleAggregate(bundle: Bundle(
-          bundleName: BundleName(''),
-          bundleCode: '0010276812',
-          bundleInformation: bundleInfoList,
-        ), materialInfos: <MaterialInfo>[]),
-        BundleAggregate(bundle: Bundle(
-          bundleName: BundleName(''),
-          bundleCode: '0010276813',
-          bundleInformation: bundleInfoList,
-        ), materialInfos: <MaterialInfo>[],),
-        BundleAggregate(bundle: Bundle(
-          bundleName: BundleName(''),
-          bundleCode: '0010276814',
-          bundleInformation: bundleInfoList,
-        ), materialInfos: <MaterialInfo>[]),
-        BundleAggregate(bundle: Bundle(
-          bundleName: BundleName(''),
-          bundleCode: '0010276815',
-          bundleInformation: bundleInfoList,
-        ), materialInfos: <MaterialInfo>[]),
+        BundleAggregate(
+          bundle: Bundle(
+            bundleName: BundleName(''),
+            bundleCode: '0010276811',
+            bundleInformation: bundleInfoList,
+          ),
+          materialInfos: <MaterialInfo>[],
+        ),
+        BundleAggregate(
+            bundle: Bundle(
+              bundleName: BundleName(''),
+              bundleCode: '0010276812',
+              bundleInformation: bundleInfoList,
+            ),
+            materialInfos: <MaterialInfo>[]),
+        BundleAggregate(
+          bundle: Bundle(
+            bundleName: BundleName(''),
+            bundleCode: '0010276813',
+            bundleInformation: bundleInfoList,
+          ),
+          materialInfos: <MaterialInfo>[],
+        ),
+        BundleAggregate(
+            bundle: Bundle(
+              bundleName: BundleName(''),
+              bundleCode: '0010276814',
+              bundleInformation: bundleInfoList,
+            ),
+            materialInfos: <MaterialInfo>[]),
+        BundleAggregate(
+            bundle: Bundle(
+              bundleName: BundleName(''),
+              bundleCode: '0010276815',
+              bundleInformation: bundleInfoList,
+            ),
+            materialInfos: <MaterialInfo>[]),
       ];
       bundleItemsMock.addAll(bundleList);
       when(() => materialBundleListBloc.state).thenReturn(

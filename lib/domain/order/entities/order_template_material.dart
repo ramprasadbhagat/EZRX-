@@ -20,17 +20,6 @@ class OrderTemplateMaterial with _$OrderTemplateMaterial {
     required MaterialTaxClassification taxClassification,
   }) = _OrderTemplateMaterial;
 
-  factory OrderTemplateMaterial.empty() => OrderTemplateMaterial(
-        materialNumber: MaterialNumber(''),
-        materialGroup4: MaterialGroup.four(''),
-        qty: 0,
-        type: '',
-        principalName: '',
-        materialDescription: '',
-        hidePrice: false,
-        hasValidTenderContract: false,
-        taxClassification: MaterialTaxClassification(''),
-      );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromOrderTemplate(
         orderMaterial: this,

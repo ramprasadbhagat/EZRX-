@@ -1,5 +1,5 @@
-import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
+import 'package:ezrxmobile/domain/order/entities/saved_order_material.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -10,7 +10,7 @@ class SavedOrder with _$SavedOrder {
   const SavedOrder._();
   const factory SavedOrder({
     required String id,
-    required List<MaterialItem> items,
+    required List<SavedOrderMaterial> items,
     required bool isDraftOrder,
     required bool isSelected,
     required bool isDeleted,
@@ -50,7 +50,7 @@ class SavedOrder with _$SavedOrder {
 
   factory SavedOrder.empty() => SavedOrder(
         id: '',
-        items: <MaterialItem>[],
+        items: <SavedOrderMaterial>[],
         isDraftOrder: false,
         isSelected: false,
         isDeleted: false,

@@ -1,13 +1,13 @@
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'material_item_bonus.freezed.dart';
+part 'saved_order_material_bonus.freezed.dart';
 
 @freezed
-class MaterialItemBonus with _$MaterialItemBonus {
-  const MaterialItemBonus._();
+class SavedOrderMaterialBonus with _$SavedOrderMaterialBonus {
+  const SavedOrderMaterialBonus._();
 
-  const factory MaterialItemBonus({
+  const factory SavedOrderMaterialBonus({
     required MaterialNumber materialNumber,
     required int qty,
     required String comment,
@@ -15,9 +15,9 @@ class MaterialItemBonus with _$MaterialItemBonus {
     required String expiryDate,
     required String inStock,
     required int remainingQty,
-  }) = _MaterialItemBonus;
+  }) = _SavedOrderMaterialBonus;
 
-  factory MaterialItemBonus.empty() => MaterialItemBonus(
+  factory SavedOrderMaterialBonus.empty() => SavedOrderMaterialBonus(
         materialNumber: MaterialNumber(''),
         qty: 0,
         comment: '',

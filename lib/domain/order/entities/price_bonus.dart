@@ -41,13 +41,4 @@ class BonusMaterial with _$BonusMaterial {
     required int qualifyingQuantity,
     required int bonusQuantity,
   }) = _BonusMaterial;
-
-  factory BonusMaterial.empty() => const BonusMaterial(
-        materialNumber: '',
-        materialDescription: '',
-        calculation: '',
-        bonusRatio: 0,
-        qualifyingQuantity: 0,
-        bonusQuantity: 0,
-      );
 }

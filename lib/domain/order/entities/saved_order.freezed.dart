@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SavedOrder {
   String get id => throw _privateConstructorUsedError;
-  List<MaterialItem> get items => throw _privateConstructorUsedError;
+  List<SavedOrderMaterial> get items => throw _privateConstructorUsedError;
   bool get isDraftOrder => throw _privateConstructorUsedError;
   bool get isSelected => throw _privateConstructorUsedError;
   bool get isDeleted => throw _privateConstructorUsedError;
@@ -67,7 +67,7 @@ abstract class $SavedOrderCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      List<MaterialItem> items,
+      List<SavedOrderMaterial> items,
       bool isDraftOrder,
       bool isSelected,
       bool isDeleted,
@@ -164,7 +164,7 @@ class _$SavedOrderCopyWithImpl<$Res, $Val extends SavedOrder>
       items: null == items
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
-              as List<MaterialItem>,
+              as List<SavedOrderMaterial>,
       isDraftOrder: null == isDraftOrder
           ? _value.isDraftOrder
           : isDraftOrder // ignore: cast_nullable_to_non_nullable
@@ -319,7 +319,7 @@ abstract class _$$_SavedOrderCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      List<MaterialItem> items,
+      List<SavedOrderMaterial> items,
       bool isDraftOrder,
       bool isSelected,
       bool isDeleted,
@@ -414,7 +414,7 @@ class __$$_SavedOrderCopyWithImpl<$Res>
       items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
-              as List<MaterialItem>,
+              as List<SavedOrderMaterial>,
       isDraftOrder: null == isDraftOrder
           ? _value.isDraftOrder
           : isDraftOrder // ignore: cast_nullable_to_non_nullable
@@ -564,7 +564,7 @@ class __$$_SavedOrderCopyWithImpl<$Res>
 class _$_SavedOrder extends _SavedOrder {
   const _$_SavedOrder(
       {required this.id,
-      required final List<MaterialItem> items,
+      required final List<SavedOrderMaterial> items,
       required this.isDraftOrder,
       required this.isSelected,
       required this.isDeleted,
@@ -605,9 +605,9 @@ class _$_SavedOrder extends _SavedOrder {
 
   @override
   final String id;
-  final List<MaterialItem> _items;
+  final List<SavedOrderMaterial> _items;
   @override
-  List<MaterialItem> get items {
+  List<SavedOrderMaterial> get items {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_items);
   }
@@ -814,7 +814,7 @@ class _$_SavedOrder extends _SavedOrder {
 abstract class _SavedOrder extends SavedOrder {
   const factory _SavedOrder(
       {required final String id,
-      required final List<MaterialItem> items,
+      required final List<SavedOrderMaterial> items,
       required final bool isDraftOrder,
       required final bool isSelected,
       required final bool isDeleted,
@@ -855,7 +855,7 @@ abstract class _SavedOrder extends SavedOrder {
   @override
   String get id;
   @override
-  List<MaterialItem> get items;
+  List<SavedOrderMaterial> get items;
   @override
   bool get isDraftOrder;
   @override

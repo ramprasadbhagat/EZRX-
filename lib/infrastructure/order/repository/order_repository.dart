@@ -7,8 +7,8 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
+import 'package:ezrxmobile/domain/order/entities/saved_order_material.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
@@ -157,7 +157,7 @@ class OrderRepository implements IOrderRepository {
     }
   }
 
-  List<MaterialItem> _getItemList(List<PriceAggregate> cartItemList) {
+  List<SavedOrderMaterial> _getItemList(List<PriceAggregate> cartItemList) {
     return cartItemList
         .map((cartItem) => cartItem.toSavedOrderMaterial())
         .toList();

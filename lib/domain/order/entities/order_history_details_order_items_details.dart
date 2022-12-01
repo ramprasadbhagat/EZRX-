@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'order_history_details_order_items_details.freezed.dart';
 
 @freezed

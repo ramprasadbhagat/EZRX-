@@ -10,12 +10,6 @@ class PriceBundle with _$PriceBundle {
     required String code,
     required List<PriceBundleItem> information,
   }) = _PriceBundle;
-
-  factory PriceBundle.empty() => const PriceBundle(
-        name: '',
-        code: '',
-        information: [],
-      );
 }
 
 @freezed
@@ -27,11 +21,4 @@ class PriceBundleItem with _$PriceBundleItem {
     required int quantity,
     required double rate,
   }) = _PriceBundleItem;
-
-  factory PriceBundleItem.empty() => const PriceBundleItem(
-        type: '',
-        sequence: 0,
-        quantity: 0,
-        rate: 0,
-      );
 }

@@ -1,12 +1,12 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/saved_order_material.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'price_aggregate.freezed.dart';
@@ -51,8 +51,8 @@ class PriceAggregate with _$PriceAggregate {
     );
   }
 
-  MaterialItem toSavedOrderMaterial() {
-    return MaterialItem.empty().copyWith(
+  SavedOrderMaterial toSavedOrderMaterial() {
+    return SavedOrderMaterial.empty().copyWith(
       materialNumber: materialInfo.materialNumber,
       qty: quantity,
       defaultMaterialDescription: materialInfo.materialDescription,

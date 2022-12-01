@@ -4,6 +4,9 @@ import 'package:ezrxmobile/application/order/order_history_details/order_history
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_details.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_history_details_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,7 +21,17 @@ void main() {
     late OrderHistoryDetailsRepository orderHistoryDetailsRepository;
     final emptyUser = User.empty();
     final emptyOrderHistoryItem = OrderHistoryItem.empty();
-    final emptyOrderHistoryDetails = OrderHistoryDetails.empty();
+    final emptyOrderHistoryDetails = OrderHistoryDetails.empty().copyWith(
+      orderHistoryDetailsOrderItem: [
+        OrderHistoryDetailsOrderItem.empty().copyWith(
+          details: [
+            OrderHistoryDetailsOrderItemDetails.empty(),
+          ],
+          tenderContractDetails:
+              OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
+        )
+      ],
+    );
     const apiServerTimeOut = ApiFailure.serverTimeout();
 
     OrderHistoryDetailsBloc getOrderHistoryDetailsBloc() {

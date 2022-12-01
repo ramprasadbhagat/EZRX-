@@ -16,13 +16,6 @@ class OrderTemplate with _$OrderTemplate {
     required Map<String, dynamic> user,
   }) = _OrderTemplate;
 
-  factory OrderTemplate.empty() => const OrderTemplate(
-        templateId: '',
-        templateName: '',
-        items: <OrderTemplateMaterial>[],
-        user: <String, dynamic>{},
-      );
-
   List<MaterialQueryInfo> get allMaterialQueryInfo => items
       .map(
         (item) => item.queryInfo,

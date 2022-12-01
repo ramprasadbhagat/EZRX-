@@ -12,12 +12,6 @@ class MaterialItemOverride with _$MaterialItemOverride {
     required List<ValueOverride> valueOverride,
     required dynamic percentageOverride,
   }) = _MaterialItemOverride;
-
-  factory MaterialItemOverride.empty() => const MaterialItemOverride(
-        reference: '',
-        valueOverride: <ValueOverride>[],
-        percentageOverride: '',
-      );
 }
 
 @freezed
@@ -27,10 +21,4 @@ class ValueOverride with _$ValueOverride {
     required dynamic price,
     required Currency currency,
   }) = _ValueOverride;
-
-  factory ValueOverride.empty() => ValueOverride(
-        code: '',
-        price: '',
-        currency: Currency(''),
-      );
 }

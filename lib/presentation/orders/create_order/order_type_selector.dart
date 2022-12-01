@@ -48,6 +48,7 @@ class OrderTypeSelector extends StatelessWidget {
               ),
               if (!hideReasonField && state.isReasonFieldEnable)
                 Container(
+                  key: const Key('reasonField'),
                   margin: const EdgeInsets.only(top: 12),
                   child: _OrderTypeSelectorField(
                     itemList: state.reasonList,
@@ -133,6 +134,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
                     children: [
                       Text(
                         displayItemText,
+                        key: const Key('displayItemText'),
                         style: const TextStyle(
                           color: ZPColors.black,
                           fontWeight: FontWeight.w400,

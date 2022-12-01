@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/saved_order_material_bonus.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -21,8 +21,8 @@ class MaterialItemBonusDto with _$MaterialItemBonusDto {
     @JsonKey(name: 'remainingQty', defaultValue: 0) required int remainingQty,
   }) = _MaterialItemBonusDto;
 
-  MaterialItemBonus toDomain() {
-    return MaterialItemBonus(
+  SavedOrderMaterialBonus toDomain() {
+    return SavedOrderMaterialBonus(
       materialNumber: MaterialNumber(materialNumber),
       qty: qty,
       comment: comment,
@@ -33,7 +33,7 @@ class MaterialItemBonusDto with _$MaterialItemBonusDto {
     );
   }
 
-  factory MaterialItemBonusDto.fromDomain(MaterialItemBonus bonus) {
+  factory MaterialItemBonusDto.fromDomain(SavedOrderMaterialBonus bonus) {
     return MaterialItemBonusDto(
       materialDescription: bonus.materialDescription,
       materialNumber: bonus.materialNumber.getOrCrash(),
