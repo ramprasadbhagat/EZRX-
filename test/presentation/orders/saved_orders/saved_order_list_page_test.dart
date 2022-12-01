@@ -1,28 +1,34 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_item.dart';
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_list_page.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 
 import 'package:mocktail/mocktail.dart';
 
-import '../../../utils/material_frame_wrapper.dart';
+import '../../../utils/widget_utils.dart';
 
 class MockSavedOrderListBloc
     extends MockBloc<SavedOrderListEvent, SavedOrderListState>
@@ -46,6 +52,9 @@ class MockMaterialPriceDetailBloc
 
 class MockCartBloc extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 void main() {
   late SavedOrderListBloc savedOrderListBlocMock;
   late UserBloc userBlocMock;
@@ -54,10 +63,17 @@ void main() {
   late ShipToCodeBloc shipToCodeBLocMock;
   late MaterialPriceDetailBloc materialPriceDetailBlocMock;
   late CartBloc cartBlocMock;
+  late AppRouter autoRouterMock;
+  late EligibilityBloc eligibilityBlocMock;
+
   var savedOrdersMock = <SavedOrder>[];
+  final locator = GetIt.instance;
 
   setUpAll(() async {
+    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+    locator.registerLazySingleton(() => AppRouter());
     savedOrdersMock = await OrderLocalDataSource().getSavedOrders();
+    autoRouterMock = locator<AppRouter>();
   });
 
   setUp(() async {
@@ -69,6 +85,7 @@ void main() {
     shipToCodeBLocMock = MockShipToCodeBloc();
     materialPriceDetailBlocMock = MockMaterialPriceDetailBloc();
     cartBlocMock = MockCartBloc();
+    eligibilityBlocMock = EligibilityBlocMock();
 
     when(() => savedOrderListBlocMock.state)
         .thenReturn(SavedOrderListState.initial());
@@ -80,38 +97,46 @@ void main() {
     when(() => materialPriceDetailBlocMock.state)
         .thenReturn(MaterialPriceDetailState.initial());
     when(() => cartBlocMock.state).thenReturn(CartState.initial());
+    when(() => eligibilityBlocMock.state)
+        .thenReturn(EligibilityState.initial());
   });
 
-  Widget savedOrderPage() => MaterialFrameWrapper(
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider<UserBloc>(
-              create: (context) => userBlocMock,
-            ),
-            BlocProvider<SalesOrgBloc>(
-              create: (context) => salesOrgBlocMock,
-            ),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock,
-            ),
-            BlocProvider<ShipToCodeBloc>(
-              create: (context) => shipToCodeBLocMock,
-            ),
-            BlocProvider<SavedOrderListBloc>(
-              create: (context) => savedOrderListBlocMock,
-            ),
-            BlocProvider<MaterialPriceDetailBloc>(
-              create: (context) => materialPriceDetailBlocMock,
-            ),
-            BlocProvider<CartBloc>(create: (context) => cartBlocMock),
-          ],
-          child: const SavedOrderListPage(),
-        ),
-      );
+  Future getWidget(tester) async {
+    return tester.pumpWidget(
+      WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        providers: [
+          BlocProvider<UserBloc>(
+            create: (context) => userBlocMock,
+          ),
+          BlocProvider<SalesOrgBloc>(
+            create: (context) => salesOrgBlocMock,
+          ),
+          BlocProvider<CustomerCodeBloc>(
+            create: (context) => customerCodeBlocMock,
+          ),
+          BlocProvider<ShipToCodeBloc>(
+            create: (context) => shipToCodeBLocMock,
+          ),
+          BlocProvider<SavedOrderListBloc>(
+            create: (context) => savedOrderListBlocMock,
+          ),
+          BlocProvider<MaterialPriceDetailBloc>(
+            create: (context) => materialPriceDetailBlocMock,
+          ),
+          BlocProvider<CartBloc>(create: (context) => cartBlocMock),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
+          ),
+        ],
+        child: const SavedOrderListPage(),
+      ),
+    );
+  }
 
   group('Saved Order List Screen', () {
     testWidgets('Test when refresh page', (tester) async {
-      await tester.pumpWidget(savedOrderPage());
+      await getWidget(tester);
       expect(find.text('Saved Orders'), findsOneWidget);
       expect(find.text('No saved order found'), findsOneWidget);
       expect(find.byType(SavedOrderItem), findsNothing);
@@ -141,7 +166,7 @@ void main() {
           isFetching: true,
         ),
       );
-      await tester.pumpWidget(savedOrderPage());
+      await getWidget(tester);
       await tester.pump(const Duration(milliseconds: 100));
       final loadIndicator = find.byKey(const Key('loadIndicator'));
       final orderTemplateItem = find.byType(SavedOrderItem);
@@ -159,7 +184,7 @@ void main() {
         isFetching: false,
       ));
 
-      await tester.pumpWidget(savedOrderPage());
+      await getWidget(tester);
       await tester.pump(const Duration(milliseconds: 100));
       final orderTemplateItem = find.byType(SavedOrderItem);
       expect(orderTemplateItem, findsAtLeastNWidgets(1));
@@ -177,7 +202,7 @@ void main() {
       );
 
       await tester.runAsync(() async {
-        await tester.pumpWidget(savedOrderPage());
+        await getWidget(tester);
       });
       final loadIndicator = find.byKey(const Key('loadIndicator'));
       final orderTemplateItem = find.byType(SavedOrderItem);
@@ -208,7 +233,7 @@ void main() {
             ),
           ]));
       await tester.runAsync(() async {
-        await tester.pumpWidget(savedOrderPage());
+        await getWidget(tester);
       });
       final noSavedOrder = find.text('No saved order found');
       final orderTemplateItem = find.byType(SavedOrderItem);
@@ -232,7 +257,7 @@ void main() {
         ),
       );
 
-      await tester.pumpWidget(savedOrderPage());
+      await getWidget(tester);
       await tester.pump(const Duration(milliseconds: 100));
       final orderTemplateItem = find.byType(SavedOrderItem);
       expect(orderTemplateItem, findsOneWidget);
@@ -248,42 +273,39 @@ void main() {
           .called(1);
     });
 
-    // Need to modify this
-    // 
-    //testWidgets('Press order item to go to Detail screen', (tester) async {
-    //   final order = savedOrdersMock.first;
-    //   final mockRouter = AppRouter();
-    //   when(() => savedOrderListBlocMock.state).thenReturn(
-    //     SavedOrderListState.initial().copyWith(
-    //       savedOrders: [order],
-    //       nextPageIndex: 1,
-    //       canLoadMore: true,
-    //       isFetching: true,
-    //     ),
-    //   );
+    testWidgets('Press order item to go to Detail screen', (tester) async {
+      final order = savedOrdersMock.first;
+      when(() => savedOrderListBlocMock.state).thenReturn(
+        SavedOrderListState.initial().copyWith(
+          savedOrders: [order],
+          nextPageIndex: 1,
+          canLoadMore: true,
+          isFetching: true,
+        ),
+      );
 
-    //   await tester.pumpWidget(StackRouterScope(
-    //       controller: mockRouter, stateHash: 0, child: savedOrderPage()));
-    //   await tester.pump(const Duration(milliseconds: 100));
-    //   final orderTemplateItem = find.byType(SavedOrderItem);
-    //   expect(orderTemplateItem, findsOneWidget);
-    //   await tester.tap(orderTemplateItem);
-    //   await tester.pump();
+      await getWidget(tester);
+      await tester.pump(const Duration(milliseconds: 100));
+      final orderTemplateItem = find.byType(SavedOrderItem);
+      expect(orderTemplateItem, findsOneWidget);
+      await tester.tap(orderTemplateItem);
+      await tester.pump();
 
-    //   verify(() =>
-    //       materialPriceDetailBlocMock.add(MaterialPriceDetailEvent.fetch(
-    //         user: User.empty(),
-    //         customerCode: CustomerCodeInfo.empty(),
-    //         salesOrganisation: SalesOrganisation.empty(),
-    //         salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-    //         shipToCode: ShipToInfo.empty(),
-    //         materialInfoList: order.items
-    //             .map((e) => MaterialQueryInfo.fromSavedOrder(orderMaterial: e))
-    //             .toList(),
-    //       ))).called(1);
-    //   await tester.pump();
-    //   expect(mockRouter.current.name,
-    //       SavedOrderDetailPageRoute(order: order).routeName);
-    // });
+      verify(() =>
+          materialPriceDetailBlocMock.add(MaterialPriceDetailEvent.fetch(
+            user: User.empty(),
+            customerCode: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            shipToCode: ShipToInfo.empty(),
+            materialInfoList: order.items
+                .map((e) => MaterialQueryInfo.fromSavedOrder(orderMaterial: e))
+                .toList(),
+            pickAndPack: '',
+          ))).called(1);
+      await tester.pump();
+      expect(autoRouterMock.current.name,
+          SavedOrderDetailPageRoute(order: order).routeName);
+    });
   });
 }

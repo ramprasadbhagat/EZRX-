@@ -31,9 +31,9 @@ class HomeTab extends StatelessWidget {
             // ),
             Row(
               children: const [
-                SalesOrgSelector(),
-                CustomerCodeSelector(),
-                ShipCodeSelector(),
+                SalesOrgSelector(key: ValueKey('HomeSalesOrgSelector'),),
+                CustomerCodeSelector(key: ValueKey('HomeCustomerCodeSelector'),),
+                ShipCodeSelector(key: ValueKey('HomeShipCodeSelector'),),
               ],
             ),
           ],
@@ -43,7 +43,7 @@ class HomeTab extends StatelessWidget {
       body: SafeArea(
         child: ListView(
           children: [
-            const HomeBanner(),
+            const HomeBanner(key: ValueKey('HomeBanner'),),
             MultiBlocListener(
               listeners: [
                 BlocListener<MaterialListBloc, MaterialListState>(

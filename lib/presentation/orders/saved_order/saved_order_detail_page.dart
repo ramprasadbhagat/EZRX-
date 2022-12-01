@@ -38,6 +38,7 @@ class SavedOrderDetailPage extends StatelessWidget {
         ),
       ),
       body: RefreshIndicator(
+        key: const ValueKey('SavedDetailRefreshIndicator'),
         color: ZPColors.primary,
         onRefresh: () async => context.read<MaterialPriceDetailBloc>().add(
               MaterialPriceDetailEvent.refresh(
@@ -150,7 +151,6 @@ class SavedOrderDetailPage extends StatelessWidget {
 
       return PriceAggregate.empty();
     }).toList();
-
     cartBloc.add(CartEvent.addToCartFromList(items: priceAggregateList));
 
     //TODO: Will revisit
