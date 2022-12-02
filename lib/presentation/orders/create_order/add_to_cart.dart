@@ -14,8 +14,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
 class AddToCart extends StatefulWidget {
-  bool isCovid19Tab;
-  AddToCart({
+  final bool isCovid19Tab;
+  const AddToCart({
     Key? key,
     required this.isCovid19Tab,
   }) : super(key: key);
@@ -26,11 +26,12 @@ class AddToCart extends StatefulWidget {
 
 class _AddToCartState extends State<AddToCart> {
   late SalesOrgBloc salesOrgBloc;
+  late AddToCartBloc addToCartBloc;
   @override
   void initState() {
     salesOrgBloc = context.read<SalesOrgBloc>();
 
-    final addToCartBloc = context.read<AddToCartBloc>();
+    addToCartBloc = context.read<AddToCartBloc>();
     final cartBloc = context.read<CartBloc>();
     final cartItem = addToCartBloc.state.cartItem;
     addToCartBloc.add(
@@ -49,10 +50,15 @@ class _AddToCartState extends State<AddToCart> {
     super.dispose();
   }
 
+  bool get _isAddToCartAllowed {
+    return !salesOrgBloc.state.configs.materialWithoutPrice &&
+        addToCartBloc.state.cartItem.price.finalPrice.isEmpty() &&
+        !widget.isCovid19Tab;
+  }
+
   @override
   Widget build(BuildContext context) {
     final cartBloc = context.read<CartBloc>();
-    final addToCartBloc = context.read<AddToCartBloc>();
 
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.7,
@@ -82,17 +88,14 @@ class _AddToCartState extends State<AddToCart> {
                     },
                   ),
                   ElevatedButton(
-                    style: salesOrgBloc.state.configs.materialWithoutPrice ||
-                            widget.isCovid19Tab
-                        ? null
-                        : ElevatedButton.styleFrom(
+                    style: _isAddToCartAllowed
+                        ? ElevatedButton.styleFrom(
                             backgroundColor: ZPColors.lightGray,
-                          ),
-                    onPressed: () =>
-                        salesOrgBloc.state.configs.materialWithoutPrice ||
-                                widget.isCovid19Tab
-                            ? _addToCart(context, state.cartItem)
-                            : null,
+                          )
+                        : null,
+                    onPressed: () => _isAddToCartAllowed
+                        ? null
+                        : _addToCart(context, state.cartItem),
                     child: const Text('Add to Cart').tr(),
                   ),
                 ],
