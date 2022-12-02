@@ -64,7 +64,6 @@ class CartPage extends StatelessWidget {
                   onRefresh: () {
                     context.read<CartBloc>().add(const CartEvent.fetch());
                   },
-                  onLoadingMore: () {},
                   isLoading: state.isFetching,
                   itemBuilder: (context, index, item) {
                     switch (item.itemType) {

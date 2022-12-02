@@ -143,7 +143,6 @@ class FavouritesTab extends StatelessWidget with AutoRouteWrapper {
                         );
                   },
                   isLoading: false,
-                  onLoadingMore: () {},
                   itemBuilder: (context, index, itemInfo) {
                     return FavouriteListTile(
                       favourite: itemInfo,

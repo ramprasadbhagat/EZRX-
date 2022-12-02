@@ -188,13 +188,12 @@ class _BonusAddPageState extends State<BonusAddPage> {
                       ),
                     )
                   : ScrollList<MaterialInfo>(
-                      onLoadingMore: () {},
                       emptyMessage: 'No materials found.'.tr(),
-                      onRefresh: () {
-                        // context.read<BonusMaterialBloc>().add(
-                        //       const BonusMaterialEvent.reset(),
-                        //     );
-                      },
+                      // onRefresh: () {
+                      // context.read<BonusMaterialBloc>().add(
+                      //       const BonusMaterialEvent.reset(),
+                      //     );
+                      // },
                       isLoading: state.isFetching,
                       itemBuilder: (context, i, item) => Card(
                         child: Padding(

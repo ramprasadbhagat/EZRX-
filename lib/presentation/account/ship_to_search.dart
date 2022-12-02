@@ -202,8 +202,6 @@ class _BodyContent extends StatelessWidget {
     return Expanded(
       child: ScrollList<ShipToInfo>(
         key: const Key('shipToCodeSelect'),
-        onRefresh: () {},
-        onLoadingMore: () {},
         isLoading: state.isSearching,
         itemBuilder: (_, __, item) => _ListContent(shipToInfo: item),
         items: state.shipToInfoList,

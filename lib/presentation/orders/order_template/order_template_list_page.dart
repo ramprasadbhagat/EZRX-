@@ -72,7 +72,6 @@ class OrderTemplateListPage extends StatelessWidget {
                         );
                   },
                   isLoading: false,
-                  onLoadingMore: () {},
                   itemBuilder: (context, index, item) => OrderTemplateItem(
                     orderTemplate: state.orderTemplateList[index],
                   ),

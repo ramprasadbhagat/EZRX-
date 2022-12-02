@@ -6,7 +6,7 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class ScrollList<T> extends StatefulWidget {
-  final VoidCallback onRefresh;
+  final VoidCallback? onRefresh;
   final VoidCallback? onLoadingMore;
   final bool isLoading;
   final List<T> items;
@@ -14,11 +14,11 @@ class ScrollList<T> extends StatefulWidget {
   final Widget Function(BuildContext context, int index, T item) itemBuilder;
   const ScrollList({
     Key? key,
-    required this.onRefresh,
     required this.isLoading,
     required this.itemBuilder,
     required this.items,
     required this.emptyMessage,
+    this.onRefresh,
     this.onLoadingMore,
   }) : super(key: key);
 
@@ -52,7 +52,7 @@ class _ScrollListState<T> extends State<ScrollList<T>> {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       color: ZPColors.primary,
-      onRefresh: () async => widget.onRefresh.call(),
+      onRefresh: () async => widget.onRefresh?.call(),
       child: CustomScrollView(
         key: const Key('scrollList'),
         controller: _controller,
