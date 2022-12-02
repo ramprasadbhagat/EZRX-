@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,8 +43,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ),
         );
         final failureOrSuccess = await cartRepository.fetchCartItems();
-        failureOrSuccess.fold(
-          (failure) {
+        await failureOrSuccess.fold(
+          (failure) async{
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
@@ -51,7 +52,32 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
-          (cartItemList) {
+          (cartItemList) async{
+            final stockInformationList =
+            await cartRepository.getStockInfoMaterialList(
+          materialList: cartItemList
+              .where((element) => element.price.isValidMaterial)
+              .toList(),
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisationConfigs: e.salesOrganisationConfigs,
+          salesOrganisation: e.salesOrganisation,
+          shipToInfo: e.shipToInfo,
+        );
+
+        final validatedStockInfoMaterialList = stockInformationList.fold(
+          (faliure) => <PriceAggregate>[],
+          (stockInfo) {
+            return stockInfo
+                .where((element) =>
+                    element.stockInfo.inStock.isMaterialInStock ||
+                    !e.doNotAllowOutOfStockMaterials)
+                .toList();
+          },
+        );
+
+        if (validatedStockInfoMaterialList.isEmpty) {
+          emit(state.copyWith(isFetching: false));
+        }
             emit(
               state.copyWith(
                 cartItemList: cartItemList,
@@ -83,13 +109,35 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             isFetching: true,
           ),
         );
-        final failureOrSuccess = await cartRepository.addToCart(
-          cartItem: e.item,
+
+        final getStockInfo = await cartRepository.getStockInfo(
+          material: e.item.materialInfo,
           customerCodeInfo: e.customerCodeInfo,
-          salesOrganisation: e.salesOrganisation,
           salesOrganisationConfigs: e.salesOrganisationConfigs,
+          salesOrganisation: e.salesOrganisation,
           shipToInfo: e.shipToInfo,
-          doNotallowOutOfStockMaterial: e.doNotallowOutOfStockMaterial,
+        );
+
+        final stockInformation = getStockInfo.fold(
+          (failure) => StockInfo.empty(),
+          (stockInfo) => stockInfo,
+        );
+
+        if (!stockInformation.inStock.isMaterialInStock &&
+            e.doNotallowOutOfStockMaterial) {
+          emit(state.copyWith(
+            apiFailureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('Product Not Available'))),
+            isFetching: false,
+          ));
+
+          return;
+        }
+
+        final failureOrSuccess = await cartRepository.addToCart(
+          cartItem: e.item.copyWith(
+            stockInfo: stockInformation,
+          ),
         );
 
         failureOrSuccess.fold(
@@ -140,8 +188,35 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             isFetching: true,
           ),
         );
+
+        final getStockInfo = await cartRepository.getStockInfo(
+          material: e.item.materialInfo,
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisationConfigs: e.salesOrganisationConfigs,
+          salesOrganisation: e.salesOrganisation,
+          shipToInfo: e.shipToInfo,
+        );
+
+        final stockInformation = getStockInfo.fold(
+          (failure) => StockInfo.empty(),
+          (stockInfo) => stockInfo,
+        );
+
+        if (!stockInformation.inStock.isMaterialInStock &&
+            e.doNotallowOutOfStockMaterial) {
+          emit(state.copyWith(
+            apiFailureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('Product Not Available'))),
+            isFetching: false,
+          ));
+
+          return;
+        }
+
         final failureOrSuccess = await cartRepository.updateCartItem(
-          cartItem: e.item,
+          cartItem: e.item.copyWith(
+            stockInfo: stockInformation,
+          ),
         );
 
         failureOrSuccess.fold(
@@ -262,12 +337,39 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         emit(
           state.copyWith(
             apiFailureOrSuccessOption: none(),
-            isFetching: false,
+            isFetching: true,
           ),
         );
 
-        final failureOrSuccess =
-            await cartRepository.addToCartList(items: e.items);
+        final stockInformationList =
+            await cartRepository.getStockInfoMaterialList(
+          materialList: e.items
+              .where((element) => element.price.isValidMaterial)
+              .toList(),
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisationConfigs: e.salesOrganisationConfigs,
+          salesOrganisation: e.salesOrganisation,
+          shipToInfo: e.shipToInfo,
+        );
+
+        final validatedStockInfoMaterialList = stockInformationList.fold(
+          (faliure) => <PriceAggregate>[],
+          (stockInfo) {
+            return stockInfo
+                .where((element) =>
+                    element.stockInfo.inStock.isMaterialInStock ||
+                    !e.doNotAllowOutOfStockMaterials)
+                .toList();
+          },
+        );
+
+        if (validatedStockInfoMaterialList.isEmpty) {
+          emit(state.copyWith(isFetching: false));
+        }
+
+        final failureOrSuccess = await cartRepository.addToCartList(
+          items: validatedStockInfoMaterialList,
+        );
         failureOrSuccess.fold(
           (apiFailure) {
             emit(

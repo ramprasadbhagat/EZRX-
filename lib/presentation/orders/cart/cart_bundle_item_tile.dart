@@ -279,6 +279,17 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
             context.read<CartBloc>().add(
                   CartEvent.updateCartItem(
                     item: widget.cartItem.copyWith(quantity: value),
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    doNotallowOutOfStockMaterial: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .doNotAllowOutOfStockMaterials,
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    salesOrganisationConfigs:
+                        context.read<SalesOrgBloc>().state.configs,
+                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
                   ),
                 );
           },

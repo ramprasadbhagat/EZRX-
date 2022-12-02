@@ -130,6 +130,7 @@ class SavedOrderDetailPage extends StatelessWidget {
 
   void _addToCartPressed(BuildContext context, MaterialPriceDetailState state) {
     final cartBloc = context.read<CartBloc>();
+    cartBloc.add(const CartEvent.clearCart());
     final priceAggregateList = order.items.map((material) {
       final itemInfo = state.materialDetails[material.queryInfo];
       if (itemInfo != null) {
@@ -151,9 +152,19 @@ class SavedOrderDetailPage extends StatelessWidget {
 
       return PriceAggregate.empty();
     }).toList();
-    cartBloc.add(CartEvent.addToCartFromList(items: priceAggregateList));
 
-    //TODO: Will revisit
+    cartBloc.add(CartEvent.addToCartFromList(
+      items: priceAggregateList,
+      customerCodeInfo: context.read<EligibilityBloc>().state.customerCodeInfo,
+      salesOrganisation:
+          context.read<EligibilityBloc>().state.salesOrganisation,
+      salesOrganisationConfigs:
+          context.read<EligibilityBloc>().state.salesOrgConfigs,
+      shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+      doNotAllowOutOfStockMaterials:
+          context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials,
+    ));
+
     context.router.pushNamed('cart_page');
   }
 }

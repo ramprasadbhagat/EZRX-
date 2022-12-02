@@ -1,5 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_detail_widget.dart';
@@ -68,7 +72,27 @@ class _UpdateCartState extends State<UpdateCart> {
                   ElevatedButton(
                     onPressed: () {
                       context.read<CartBloc>().add(
-                            CartEvent.updateCartItem(item: state.cartItem),
+                            CartEvent.updateCartItem(
+                              item: state.cartItem,
+                              customerCodeInfo: context
+                                  .read<CustomerCodeBloc>()
+                                  .state
+                                  .customerCodeInfo,
+                              doNotallowOutOfStockMaterial: context
+                                  .read<EligibilityBloc>()
+                                  .state
+                                  .doNotAllowOutOfStockMaterials,
+                              salesOrganisation: context
+                                  .read<SalesOrgBloc>()
+                                  .state
+                                  .salesOrganisation,
+                              salesOrganisationConfigs:
+                                  context.read<SalesOrgBloc>().state.configs,
+                              shipToInfo: context
+                                  .read<ShipToCodeBloc>()
+                                  .state
+                                  .shipToInfo,
+                            ),
                           );
                       context.router.pop();
                     },

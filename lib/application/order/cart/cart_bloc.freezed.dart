@@ -19,7 +19,13 @@ mixin _$CartEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        fetch,
     required TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -28,8 +34,22 @@ mixin _$CartEvent {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)
         addToCart,
-    required TResult Function(List<PriceAggregate> items) addToCartFromList,
-    required TResult Function(PriceAggregate item) updateCartItem,
+    required TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        addToCartFromList,
+    required TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
+        updateCartItem,
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(
@@ -60,7 +80,13 @@ mixin _$CartEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult? Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -69,8 +95,22 @@ mixin _$CartEvent {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult? Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult? Function(PriceAggregate item)? updateCartItem,
+    TResult? Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult? Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(
             User user,
@@ -99,7 +139,13 @@ mixin _$CartEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -108,8 +154,22 @@ mixin _$CartEvent {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult Function(PriceAggregate item)? updateCartItem,
+    TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(
             User user,
@@ -256,7 +316,13 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        fetch,
     required TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -265,8 +331,22 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)
         addToCart,
-    required TResult Function(List<PriceAggregate> items) addToCartFromList,
-    required TResult Function(PriceAggregate item) updateCartItem,
+    required TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        addToCartFromList,
+    required TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
+        updateCartItem,
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(
@@ -300,7 +380,13 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult? Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -309,8 +395,22 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult? Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult? Function(PriceAggregate item)? updateCartItem,
+    TResult? Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult? Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(
             User user,
@@ -342,7 +442,13 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -351,8 +457,22 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult Function(PriceAggregate item)? updateCartItem,
+    TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(
             User user,
@@ -467,6 +587,18 @@ abstract class _Initialized implements CartEvent {
 abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {CustomerCodeInfo customerCodeInfo,
+      SalesOrganisationConfigs salesOrganisationConfigs,
+      SalesOrganisation salesOrganisation,
+      ShipToInfo shipToInfo,
+      bool doNotAllowOutOfStockMaterials});
+
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
 
 /// @nodoc
@@ -475,32 +607,146 @@ class __$$_FetchCopyWithImpl<$Res>
     implements _$$_FetchCopyWith<$Res> {
   __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? customerCodeInfo = null,
+    Object? salesOrganisationConfigs = null,
+    Object? salesOrganisation = null,
+    Object? shipToInfo = null,
+    Object? doNotAllowOutOfStockMaterials = null,
+  }) {
+    return _then(_$_Fetch(
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      salesOrganisationConfigs: null == salesOrganisationConfigs
+          ? _value.salesOrganisationConfigs
+          : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      doNotAllowOutOfStockMaterials: null == doNotAllowOutOfStockMaterials
+          ? _value.doNotAllowOutOfStockMaterials
+          : doNotAllowOutOfStockMaterials // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(
+        _value.salesOrganisationConfigs, (value) {
+      return _then(_value.copyWith(salesOrganisationConfigs: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  const _$_Fetch();
+  const _$_Fetch(
+      {required this.customerCodeInfo,
+      required this.salesOrganisationConfigs,
+      required this.salesOrganisation,
+      required this.shipToInfo,
+      required this.doNotAllowOutOfStockMaterials});
+
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final SalesOrganisationConfigs salesOrganisationConfigs;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final ShipToInfo shipToInfo;
+  @override
+  final bool doNotAllowOutOfStockMaterials;
 
   @override
   String toString() {
-    return 'CartEvent.fetch()';
+    return 'CartEvent.fetch(customerCodeInfo: $customerCodeInfo, salesOrganisationConfigs: $salesOrganisationConfigs, salesOrganisation: $salesOrganisation, shipToInfo: $shipToInfo, doNotAllowOutOfStockMaterials: $doNotAllowOutOfStockMaterials)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Fetch);
+        (other.runtimeType == runtimeType &&
+            other is _$_Fetch &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(
+                    other.salesOrganisationConfigs, salesOrganisationConfigs) ||
+                other.salesOrganisationConfigs == salesOrganisationConfigs) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.doNotAllowOutOfStockMaterials,
+                    doNotAllowOutOfStockMaterials) ||
+                other.doNotAllowOutOfStockMaterials ==
+                    doNotAllowOutOfStockMaterials));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      customerCodeInfo,
+      salesOrganisationConfigs,
+      salesOrganisation,
+      shipToInfo,
+      doNotAllowOutOfStockMaterials);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        fetch,
     required TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -509,8 +755,22 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)
         addToCart,
-    required TResult Function(List<PriceAggregate> items) addToCartFromList,
-    required TResult Function(PriceAggregate item) updateCartItem,
+    required TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        addToCartFromList,
+    required TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
+        updateCartItem,
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(
@@ -537,14 +797,21 @@ class _$_Fetch implements _Fetch {
             PriceAggregate item, MaterialInfo bonusItem, bool isDelete)
         addRemarksToBonusItem,
   }) {
-    return fetch();
+    return fetch(customerCodeInfo, salesOrganisationConfigs, salesOrganisation,
+        shipToInfo, doNotAllowOutOfStockMaterials);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult? Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -553,8 +820,22 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult? Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult? Function(PriceAggregate item)? updateCartItem,
+    TResult? Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult? Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(
             User user,
@@ -579,14 +860,21 @@ class _$_Fetch implements _Fetch {
             PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
         addRemarksToBonusItem,
   }) {
-    return fetch?.call();
+    return fetch?.call(customerCodeInfo, salesOrganisationConfigs,
+        salesOrganisation, shipToInfo, doNotAllowOutOfStockMaterials);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -595,8 +883,22 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult Function(PriceAggregate item)? updateCartItem,
+    TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(
             User user,
@@ -623,7 +925,8 @@ class _$_Fetch implements _Fetch {
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch();
+      return fetch(customerCodeInfo, salesOrganisationConfigs,
+          salesOrganisation, shipToInfo, doNotAllowOutOfStockMaterials);
     }
     return orElse();
   }
@@ -704,7 +1007,21 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements CartEvent {
-  const factory _Fetch() = _$_Fetch;
+  const factory _Fetch(
+      {required final CustomerCodeInfo customerCodeInfo,
+      required final SalesOrganisationConfigs salesOrganisationConfigs,
+      required final SalesOrganisation salesOrganisation,
+      required final ShipToInfo shipToInfo,
+      required final bool doNotAllowOutOfStockMaterials}) = _$_Fetch;
+
+  CustomerCodeInfo get customerCodeInfo;
+  SalesOrganisationConfigs get salesOrganisationConfigs;
+  SalesOrganisation get salesOrganisation;
+  ShipToInfo get shipToInfo;
+  bool get doNotAllowOutOfStockMaterials;
+  @JsonKey(ignore: true)
+  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -886,7 +1203,13 @@ class _$_AddToCart implements _AddToCart {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        fetch,
     required TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -895,8 +1218,22 @@ class _$_AddToCart implements _AddToCart {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)
         addToCart,
-    required TResult Function(List<PriceAggregate> items) addToCartFromList,
-    required TResult Function(PriceAggregate item) updateCartItem,
+    required TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        addToCartFromList,
+    required TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
+        updateCartItem,
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(
@@ -931,7 +1268,13 @@ class _$_AddToCart implements _AddToCart {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult? Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -940,8 +1283,22 @@ class _$_AddToCart implements _AddToCart {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult? Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult? Function(PriceAggregate item)? updateCartItem,
+    TResult? Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult? Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(
             User user,
@@ -974,7 +1331,13 @@ class _$_AddToCart implements _AddToCart {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -983,8 +1346,22 @@ class _$_AddToCart implements _AddToCart {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult Function(PriceAggregate item)? updateCartItem,
+    TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(
             User user,
@@ -1118,7 +1495,18 @@ abstract class _$$_AddToCartFromListCopyWith<$Res> {
           $Res Function(_$_AddToCartFromList) then) =
       __$$_AddToCartFromListCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<PriceAggregate> items});
+  $Res call(
+      {List<PriceAggregate> items,
+      CustomerCodeInfo customerCodeInfo,
+      SalesOrganisationConfigs salesOrganisationConfigs,
+      SalesOrganisation salesOrganisation,
+      ShipToInfo shipToInfo,
+      bool doNotAllowOutOfStockMaterials});
+
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
 
 /// @nodoc
@@ -1133,20 +1521,84 @@ class __$$_AddToCartFromListCopyWithImpl<$Res>
   @override
   $Res call({
     Object? items = null,
+    Object? customerCodeInfo = null,
+    Object? salesOrganisationConfigs = null,
+    Object? salesOrganisation = null,
+    Object? shipToInfo = null,
+    Object? doNotAllowOutOfStockMaterials = null,
   }) {
     return _then(_$_AddToCartFromList(
       items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
               as List<PriceAggregate>,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      salesOrganisationConfigs: null == salesOrganisationConfigs
+          ? _value.salesOrganisationConfigs
+          : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      doNotAllowOutOfStockMaterials: null == doNotAllowOutOfStockMaterials
+          ? _value.doNotAllowOutOfStockMaterials
+          : doNotAllowOutOfStockMaterials // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(
+        _value.salesOrganisationConfigs, (value) {
+      return _then(_value.copyWith(salesOrganisationConfigs: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$_AddToCartFromList implements _AddToCartFromList {
-  const _$_AddToCartFromList({required final List<PriceAggregate> items})
+  const _$_AddToCartFromList(
+      {required final List<PriceAggregate> items,
+      required this.customerCodeInfo,
+      required this.salesOrganisationConfigs,
+      required this.salesOrganisation,
+      required this.shipToInfo,
+      required this.doNotAllowOutOfStockMaterials})
       : _items = items;
 
   final List<PriceAggregate> _items;
@@ -1157,8 +1609,19 @@ class _$_AddToCartFromList implements _AddToCartFromList {
   }
 
   @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final SalesOrganisationConfigs salesOrganisationConfigs;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final ShipToInfo shipToInfo;
+  @override
+  final bool doNotAllowOutOfStockMaterials;
+
+  @override
   String toString() {
-    return 'CartEvent.addToCartFromList(items: $items)';
+    return 'CartEvent.addToCartFromList(items: $items, customerCodeInfo: $customerCodeInfo, salesOrganisationConfigs: $salesOrganisationConfigs, salesOrganisation: $salesOrganisation, shipToInfo: $shipToInfo, doNotAllowOutOfStockMaterials: $doNotAllowOutOfStockMaterials)';
   }
 
   @override
@@ -1166,12 +1629,31 @@ class _$_AddToCartFromList implements _AddToCartFromList {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AddToCartFromList &&
-            const DeepCollectionEquality().equals(other._items, _items));
+            const DeepCollectionEquality().equals(other._items, _items) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(
+                    other.salesOrganisationConfigs, salesOrganisationConfigs) ||
+                other.salesOrganisationConfigs == salesOrganisationConfigs) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.doNotAllowOutOfStockMaterials,
+                    doNotAllowOutOfStockMaterials) ||
+                other.doNotAllowOutOfStockMaterials ==
+                    doNotAllowOutOfStockMaterials));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_items));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_items),
+      customerCodeInfo,
+      salesOrganisationConfigs,
+      salesOrganisation,
+      shipToInfo,
+      doNotAllowOutOfStockMaterials);
 
   @JsonKey(ignore: true)
   @override
@@ -1184,7 +1666,13 @@ class _$_AddToCartFromList implements _AddToCartFromList {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        fetch,
     required TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -1193,8 +1681,22 @@ class _$_AddToCartFromList implements _AddToCartFromList {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)
         addToCart,
-    required TResult Function(List<PriceAggregate> items) addToCartFromList,
-    required TResult Function(PriceAggregate item) updateCartItem,
+    required TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        addToCartFromList,
+    required TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
+        updateCartItem,
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(
@@ -1221,14 +1723,21 @@ class _$_AddToCartFromList implements _AddToCartFromList {
             PriceAggregate item, MaterialInfo bonusItem, bool isDelete)
         addRemarksToBonusItem,
   }) {
-    return addToCartFromList(items);
+    return addToCartFromList(items, customerCodeInfo, salesOrganisationConfigs,
+        salesOrganisation, shipToInfo, doNotAllowOutOfStockMaterials);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult? Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -1237,8 +1746,22 @@ class _$_AddToCartFromList implements _AddToCartFromList {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult? Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult? Function(PriceAggregate item)? updateCartItem,
+    TResult? Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult? Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(
             User user,
@@ -1263,14 +1786,26 @@ class _$_AddToCartFromList implements _AddToCartFromList {
             PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
         addRemarksToBonusItem,
   }) {
-    return addToCartFromList?.call(items);
+    return addToCartFromList?.call(
+        items,
+        customerCodeInfo,
+        salesOrganisationConfigs,
+        salesOrganisation,
+        shipToInfo,
+        doNotAllowOutOfStockMaterials);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -1279,8 +1814,22 @@ class _$_AddToCartFromList implements _AddToCartFromList {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult Function(PriceAggregate item)? updateCartItem,
+    TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(
             User user,
@@ -1307,7 +1856,13 @@ class _$_AddToCartFromList implements _AddToCartFromList {
     required TResult orElse(),
   }) {
     if (addToCartFromList != null) {
-      return addToCartFromList(items);
+      return addToCartFromList(
+          items,
+          customerCodeInfo,
+          salesOrganisationConfigs,
+          salesOrganisation,
+          shipToInfo,
+          doNotAllowOutOfStockMaterials);
     }
     return orElse();
   }
@@ -1389,9 +1944,20 @@ class _$_AddToCartFromList implements _AddToCartFromList {
 
 abstract class _AddToCartFromList implements CartEvent {
   const factory _AddToCartFromList(
-      {required final List<PriceAggregate> items}) = _$_AddToCartFromList;
+          {required final List<PriceAggregate> items,
+          required final CustomerCodeInfo customerCodeInfo,
+          required final SalesOrganisationConfigs salesOrganisationConfigs,
+          required final SalesOrganisation salesOrganisation,
+          required final ShipToInfo shipToInfo,
+          required final bool doNotAllowOutOfStockMaterials}) =
+      _$_AddToCartFromList;
 
   List<PriceAggregate> get items;
+  CustomerCodeInfo get customerCodeInfo;
+  SalesOrganisationConfigs get salesOrganisationConfigs;
+  SalesOrganisation get salesOrganisation;
+  ShipToInfo get shipToInfo;
+  bool get doNotAllowOutOfStockMaterials;
   @JsonKey(ignore: true)
   _$$_AddToCartFromListCopyWith<_$_AddToCartFromList> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1403,9 +1969,19 @@ abstract class _$$_UpdateCartItemCopyWith<$Res> {
           _$_UpdateCartItem value, $Res Function(_$_UpdateCartItem) then) =
       __$$_UpdateCartItemCopyWithImpl<$Res>;
   @useResult
-  $Res call({PriceAggregate item});
+  $Res call(
+      {PriceAggregate item,
+      bool doNotallowOutOfStockMaterial,
+      CustomerCodeInfo customerCodeInfo,
+      SalesOrganisationConfigs salesOrganisationConfigs,
+      SalesOrganisation salesOrganisation,
+      ShipToInfo shipToInfo});
 
   $PriceAggregateCopyWith<$Res> get item;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
 
 /// @nodoc
@@ -1420,12 +1996,37 @@ class __$$_UpdateCartItemCopyWithImpl<$Res>
   @override
   $Res call({
     Object? item = null,
+    Object? doNotallowOutOfStockMaterial = null,
+    Object? customerCodeInfo = null,
+    Object? salesOrganisationConfigs = null,
+    Object? salesOrganisation = null,
+    Object? shipToInfo = null,
   }) {
     return _then(_$_UpdateCartItem(
       item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
               as PriceAggregate,
+      doNotallowOutOfStockMaterial: null == doNotallowOutOfStockMaterial
+          ? _value.doNotallowOutOfStockMaterial
+          : doNotallowOutOfStockMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      salesOrganisationConfigs: null == salesOrganisationConfigs
+          ? _value.salesOrganisationConfigs
+          : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
     ));
   }
 
@@ -1436,19 +2037,68 @@ class __$$_UpdateCartItemCopyWithImpl<$Res>
       return _then(_value.copyWith(item: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(
+        _value.salesOrganisationConfigs, (value) {
+      return _then(_value.copyWith(salesOrganisationConfigs: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_UpdateCartItem implements _UpdateCartItem {
-  const _$_UpdateCartItem({required this.item});
+  const _$_UpdateCartItem(
+      {required this.item,
+      required this.doNotallowOutOfStockMaterial,
+      required this.customerCodeInfo,
+      required this.salesOrganisationConfigs,
+      required this.salesOrganisation,
+      required this.shipToInfo});
 
   @override
   final PriceAggregate item;
+  @override
+  final bool doNotallowOutOfStockMaterial;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final SalesOrganisationConfigs salesOrganisationConfigs;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final ShipToInfo shipToInfo;
 
   @override
   String toString() {
-    return 'CartEvent.updateCartItem(item: $item)';
+    return 'CartEvent.updateCartItem(item: $item, doNotallowOutOfStockMaterial: $doNotallowOutOfStockMaterial, customerCodeInfo: $customerCodeInfo, salesOrganisationConfigs: $salesOrganisationConfigs, salesOrganisation: $salesOrganisation, shipToInfo: $shipToInfo)';
   }
 
   @override
@@ -1456,11 +2106,31 @@ class _$_UpdateCartItem implements _UpdateCartItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UpdateCartItem &&
-            (identical(other.item, item) || other.item == item));
+            (identical(other.item, item) || other.item == item) &&
+            (identical(other.doNotallowOutOfStockMaterial,
+                    doNotallowOutOfStockMaterial) ||
+                other.doNotallowOutOfStockMaterial ==
+                    doNotallowOutOfStockMaterial) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(
+                    other.salesOrganisationConfigs, salesOrganisationConfigs) ||
+                other.salesOrganisationConfigs == salesOrganisationConfigs) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, item);
+  int get hashCode => Object.hash(
+      runtimeType,
+      item,
+      doNotallowOutOfStockMaterial,
+      customerCodeInfo,
+      salesOrganisationConfigs,
+      salesOrganisation,
+      shipToInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -1472,7 +2142,13 @@ class _$_UpdateCartItem implements _UpdateCartItem {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        fetch,
     required TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -1481,8 +2157,22 @@ class _$_UpdateCartItem implements _UpdateCartItem {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)
         addToCart,
-    required TResult Function(List<PriceAggregate> items) addToCartFromList,
-    required TResult Function(PriceAggregate item) updateCartItem,
+    required TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        addToCartFromList,
+    required TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
+        updateCartItem,
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(
@@ -1509,14 +2199,21 @@ class _$_UpdateCartItem implements _UpdateCartItem {
             PriceAggregate item, MaterialInfo bonusItem, bool isDelete)
         addRemarksToBonusItem,
   }) {
-    return updateCartItem(item);
+    return updateCartItem(item, doNotallowOutOfStockMaterial, customerCodeInfo,
+        salesOrganisationConfigs, salesOrganisation, shipToInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult? Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -1525,8 +2222,22 @@ class _$_UpdateCartItem implements _UpdateCartItem {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult? Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult? Function(PriceAggregate item)? updateCartItem,
+    TResult? Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult? Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(
             User user,
@@ -1551,14 +2262,26 @@ class _$_UpdateCartItem implements _UpdateCartItem {
             PriceAggregate item, MaterialInfo bonusItem, bool isDelete)?
         addRemarksToBonusItem,
   }) {
-    return updateCartItem?.call(item);
+    return updateCartItem?.call(
+        item,
+        doNotallowOutOfStockMaterial,
+        customerCodeInfo,
+        salesOrganisationConfigs,
+        salesOrganisation,
+        shipToInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -1567,8 +2290,22 @@ class _$_UpdateCartItem implements _UpdateCartItem {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult Function(PriceAggregate item)? updateCartItem,
+    TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(
             User user,
@@ -1595,7 +2332,13 @@ class _$_UpdateCartItem implements _UpdateCartItem {
     required TResult orElse(),
   }) {
     if (updateCartItem != null) {
-      return updateCartItem(item);
+      return updateCartItem(
+          item,
+          doNotallowOutOfStockMaterial,
+          customerCodeInfo,
+          salesOrganisationConfigs,
+          salesOrganisation,
+          shipToInfo);
     }
     return orElse();
   }
@@ -1676,10 +2419,20 @@ class _$_UpdateCartItem implements _UpdateCartItem {
 }
 
 abstract class _UpdateCartItem implements CartEvent {
-  const factory _UpdateCartItem({required final PriceAggregate item}) =
-      _$_UpdateCartItem;
+  const factory _UpdateCartItem(
+      {required final PriceAggregate item,
+      required final bool doNotallowOutOfStockMaterial,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final SalesOrganisationConfigs salesOrganisationConfigs,
+      required final SalesOrganisation salesOrganisation,
+      required final ShipToInfo shipToInfo}) = _$_UpdateCartItem;
 
   PriceAggregate get item;
+  bool get doNotallowOutOfStockMaterial;
+  CustomerCodeInfo get customerCodeInfo;
+  SalesOrganisationConfigs get salesOrganisationConfigs;
+  SalesOrganisation get salesOrganisation;
+  ShipToInfo get shipToInfo;
   @JsonKey(ignore: true)
   _$$_UpdateCartItemCopyWith<_$_UpdateCartItem> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1767,7 +2520,13 @@ class _$_UpdateCart implements _UpdateCart {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        fetch,
     required TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -1776,8 +2535,22 @@ class _$_UpdateCart implements _UpdateCart {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)
         addToCart,
-    required TResult Function(List<PriceAggregate> items) addToCartFromList,
-    required TResult Function(PriceAggregate item) updateCartItem,
+    required TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        addToCartFromList,
+    required TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
+        updateCartItem,
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(
@@ -1811,7 +2584,13 @@ class _$_UpdateCart implements _UpdateCart {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult? Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -1820,8 +2599,22 @@ class _$_UpdateCart implements _UpdateCart {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult? Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult? Function(PriceAggregate item)? updateCartItem,
+    TResult? Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult? Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(
             User user,
@@ -1853,7 +2646,13 @@ class _$_UpdateCart implements _UpdateCart {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -1862,8 +2661,22 @@ class _$_UpdateCart implements _UpdateCart {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult Function(PriceAggregate item)? updateCartItem,
+    TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(
             User user,
@@ -2142,7 +2955,13 @@ class _$_UpdateStockInfo implements _UpdateStockInfo {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        fetch,
     required TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -2151,8 +2970,22 @@ class _$_UpdateStockInfo implements _UpdateStockInfo {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)
         addToCart,
-    required TResult Function(List<PriceAggregate> items) addToCartFromList,
-    required TResult Function(PriceAggregate item) updateCartItem,
+    required TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        addToCartFromList,
+    required TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
+        updateCartItem,
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(
@@ -2187,7 +3020,13 @@ class _$_UpdateStockInfo implements _UpdateStockInfo {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult? Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -2196,8 +3035,22 @@ class _$_UpdateStockInfo implements _UpdateStockInfo {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult? Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult? Function(PriceAggregate item)? updateCartItem,
+    TResult? Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult? Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(
             User user,
@@ -2230,7 +3083,13 @@ class _$_UpdateStockInfo implements _UpdateStockInfo {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -2239,8 +3098,22 @@ class _$_UpdateStockInfo implements _UpdateStockInfo {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult Function(PriceAggregate item)? updateCartItem,
+    TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(
             User user,
@@ -2441,7 +3314,13 @@ class _$_RemoveFromCart implements _RemoveFromCart {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        fetch,
     required TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -2450,8 +3329,22 @@ class _$_RemoveFromCart implements _RemoveFromCart {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)
         addToCart,
-    required TResult Function(List<PriceAggregate> items) addToCartFromList,
-    required TResult Function(PriceAggregate item) updateCartItem,
+    required TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        addToCartFromList,
+    required TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
+        updateCartItem,
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(
@@ -2485,7 +3378,13 @@ class _$_RemoveFromCart implements _RemoveFromCart {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult? Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -2494,8 +3393,22 @@ class _$_RemoveFromCart implements _RemoveFromCart {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult? Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult? Function(PriceAggregate item)? updateCartItem,
+    TResult? Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult? Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(
             User user,
@@ -2527,7 +3440,13 @@ class _$_RemoveFromCart implements _RemoveFromCart {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -2536,8 +3455,22 @@ class _$_RemoveFromCart implements _RemoveFromCart {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult Function(PriceAggregate item)? updateCartItem,
+    TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(
             User user,
@@ -2693,7 +3626,13 @@ class _$_ClearCart implements _ClearCart {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        fetch,
     required TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -2702,8 +3641,22 @@ class _$_ClearCart implements _ClearCart {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)
         addToCart,
-    required TResult Function(List<PriceAggregate> items) addToCartFromList,
-    required TResult Function(PriceAggregate item) updateCartItem,
+    required TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        addToCartFromList,
+    required TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
+        updateCartItem,
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(
@@ -2737,7 +3690,13 @@ class _$_ClearCart implements _ClearCart {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult? Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -2746,8 +3705,22 @@ class _$_ClearCart implements _ClearCart {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult? Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult? Function(PriceAggregate item)? updateCartItem,
+    TResult? Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult? Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(
             User user,
@@ -2779,7 +3752,13 @@ class _$_ClearCart implements _ClearCart {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -2788,8 +3767,22 @@ class _$_ClearCart implements _ClearCart {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult Function(PriceAggregate item)? updateCartItem,
+    TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(
             User user,
@@ -2976,7 +3969,13 @@ class _$_updateSelectedItem implements _updateSelectedItem {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        fetch,
     required TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -2985,8 +3984,22 @@ class _$_updateSelectedItem implements _updateSelectedItem {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)
         addToCart,
-    required TResult Function(List<PriceAggregate> items) addToCartFromList,
-    required TResult Function(PriceAggregate item) updateCartItem,
+    required TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        addToCartFromList,
+    required TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
+        updateCartItem,
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(
@@ -3020,7 +4033,13 @@ class _$_updateSelectedItem implements _updateSelectedItem {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult? Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -3029,8 +4048,22 @@ class _$_updateSelectedItem implements _updateSelectedItem {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult? Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult? Function(PriceAggregate item)? updateCartItem,
+    TResult? Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult? Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(
             User user,
@@ -3062,7 +4095,13 @@ class _$_updateSelectedItem implements _updateSelectedItem {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -3071,8 +4110,22 @@ class _$_updateSelectedItem implements _updateSelectedItem {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult Function(PriceAggregate item)? updateCartItem,
+    TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(
             User user,
@@ -3228,7 +4281,13 @@ class _$_updateSelectAllItems implements _updateSelectAllItems {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        fetch,
     required TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -3237,8 +4296,22 @@ class _$_updateSelectAllItems implements _updateSelectAllItems {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)
         addToCart,
-    required TResult Function(List<PriceAggregate> items) addToCartFromList,
-    required TResult Function(PriceAggregate item) updateCartItem,
+    required TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        addToCartFromList,
+    required TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
+        updateCartItem,
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(
@@ -3272,7 +4345,13 @@ class _$_updateSelectAllItems implements _updateSelectAllItems {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult? Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -3281,8 +4360,22 @@ class _$_updateSelectAllItems implements _updateSelectAllItems {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult? Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult? Function(PriceAggregate item)? updateCartItem,
+    TResult? Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult? Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(
             User user,
@@ -3314,7 +4407,13 @@ class _$_updateSelectAllItems implements _updateSelectAllItems {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -3323,8 +4422,22 @@ class _$_updateSelectAllItems implements _updateSelectAllItems {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult Function(PriceAggregate item)? updateCartItem,
+    TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(
             User user,
@@ -3556,7 +4669,13 @@ class _$_updateBonusItem implements _updateBonusItem {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        fetch,
     required TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -3565,8 +4684,22 @@ class _$_updateBonusItem implements _updateBonusItem {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)
         addToCart,
-    required TResult Function(List<PriceAggregate> items) addToCartFromList,
-    required TResult Function(PriceAggregate item) updateCartItem,
+    required TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        addToCartFromList,
+    required TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
+        updateCartItem,
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(
@@ -3601,7 +4734,13 @@ class _$_updateBonusItem implements _updateBonusItem {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult? Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -3610,8 +4749,22 @@ class _$_updateBonusItem implements _updateBonusItem {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult? Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult? Function(PriceAggregate item)? updateCartItem,
+    TResult? Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult? Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(
             User user,
@@ -3644,7 +4797,13 @@ class _$_updateBonusItem implements _updateBonusItem {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -3653,8 +4812,22 @@ class _$_updateBonusItem implements _updateBonusItem {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult Function(PriceAggregate item)? updateCartItem,
+    TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(
             User user,
@@ -3886,7 +5059,13 @@ class _$_deleteBonusItem implements _deleteBonusItem {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        fetch,
     required TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -3895,8 +5074,22 @@ class _$_deleteBonusItem implements _deleteBonusItem {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)
         addToCart,
-    required TResult Function(List<PriceAggregate> items) addToCartFromList,
-    required TResult Function(PriceAggregate item) updateCartItem,
+    required TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        addToCartFromList,
+    required TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
+        updateCartItem,
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(
@@ -3930,7 +5123,13 @@ class _$_deleteBonusItem implements _deleteBonusItem {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult? Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -3939,8 +5138,22 @@ class _$_deleteBonusItem implements _deleteBonusItem {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult? Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult? Function(PriceAggregate item)? updateCartItem,
+    TResult? Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult? Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(
             User user,
@@ -3972,7 +5185,13 @@ class _$_deleteBonusItem implements _deleteBonusItem {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -3981,8 +5200,22 @@ class _$_deleteBonusItem implements _deleteBonusItem {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult Function(PriceAggregate item)? updateCartItem,
+    TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(
             User user,
@@ -4168,7 +5401,13 @@ class _$_RemarksChanged implements _RemarksChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        fetch,
     required TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -4177,8 +5416,22 @@ class _$_RemarksChanged implements _RemarksChanged {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)
         addToCart,
-    required TResult Function(List<PriceAggregate> items) addToCartFromList,
-    required TResult Function(PriceAggregate item) updateCartItem,
+    required TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        addToCartFromList,
+    required TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
+        updateCartItem,
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(
@@ -4212,7 +5465,13 @@ class _$_RemarksChanged implements _RemarksChanged {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult? Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -4221,8 +5480,22 @@ class _$_RemarksChanged implements _RemarksChanged {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult? Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult? Function(PriceAggregate item)? updateCartItem,
+    TResult? Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult? Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(
             User user,
@@ -4254,7 +5527,13 @@ class _$_RemarksChanged implements _RemarksChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -4263,8 +5542,22 @@ class _$_RemarksChanged implements _RemarksChanged {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult Function(PriceAggregate item)? updateCartItem,
+    TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(
             User user,
@@ -4465,7 +5758,13 @@ class _$_AddRemarksToCartItem implements _AddRemarksToCartItem {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        fetch,
     required TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -4474,8 +5773,22 @@ class _$_AddRemarksToCartItem implements _AddRemarksToCartItem {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)
         addToCart,
-    required TResult Function(List<PriceAggregate> items) addToCartFromList,
-    required TResult Function(PriceAggregate item) updateCartItem,
+    required TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        addToCartFromList,
+    required TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
+        updateCartItem,
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(
@@ -4509,7 +5822,13 @@ class _$_AddRemarksToCartItem implements _AddRemarksToCartItem {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult? Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -4518,8 +5837,22 @@ class _$_AddRemarksToCartItem implements _AddRemarksToCartItem {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult? Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult? Function(PriceAggregate item)? updateCartItem,
+    TResult? Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult? Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(
             User user,
@@ -4551,7 +5884,13 @@ class _$_AddRemarksToCartItem implements _AddRemarksToCartItem {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -4560,8 +5899,22 @@ class _$_AddRemarksToCartItem implements _AddRemarksToCartItem {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult Function(PriceAggregate item)? updateCartItem,
+    TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(
             User user,
@@ -4784,7 +6137,13 @@ class _$_AddRemarksToBonusItem implements _AddRemarksToBonusItem {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        fetch,
     required TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -4793,8 +6152,22 @@ class _$_AddRemarksToBonusItem implements _AddRemarksToBonusItem {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)
         addToCart,
-    required TResult Function(List<PriceAggregate> items) addToCartFromList,
-    required TResult Function(PriceAggregate item) updateCartItem,
+    required TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        addToCartFromList,
+    required TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
+        updateCartItem,
     required TResult Function(List<Price> item, String materialNumber)
         updateCart,
     required TResult Function(
@@ -4828,7 +6201,13 @@ class _$_AddRemarksToBonusItem implements _AddRemarksToBonusItem {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult? Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -4837,8 +6216,22 @@ class _$_AddRemarksToBonusItem implements _AddRemarksToBonusItem {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult? Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult? Function(PriceAggregate item)? updateCartItem,
+    TResult? Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult? Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult? Function(List<Price> item, String materialNumber)? updateCart,
     TResult? Function(
             User user,
@@ -4870,7 +6263,13 @@ class _$_AddRemarksToBonusItem implements _AddRemarksToBonusItem {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
     TResult Function(
             PriceAggregate item,
             bool doNotallowOutOfStockMaterial,
@@ -4879,8 +6278,22 @@ class _$_AddRemarksToBonusItem implements _AddRemarksToBonusItem {
             SalesOrganisation salesOrganisation,
             ShipToInfo shipToInfo)?
         addToCart,
-    TResult Function(List<PriceAggregate> items)? addToCartFromList,
-    TResult Function(PriceAggregate item)? updateCartItem,
+    TResult Function(
+            List<PriceAggregate> items,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        addToCartFromList,
+    TResult Function(
+            PriceAggregate item,
+            bool doNotallowOutOfStockMaterial,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        updateCartItem,
     TResult Function(List<Price> item, String materialNumber)? updateCart,
     TResult Function(
             User user,

@@ -123,6 +123,8 @@ class OrderTemplateDetailPage extends StatelessWidget {
 
   void _addToCartPressed(BuildContext context, MaterialPriceDetailState state) {
     final cartBloc = context.read<CartBloc>();
+    cartBloc.add(const CartEvent.clearCart());
+    final eligibilityState = context.read<EligibilityBloc>().state;
     final items = order.allMaterialQueryInfo.map((queryInfo) {
       final itemInfo = state.materialDetails[queryInfo];
       if (itemInfo != null) {
@@ -134,9 +136,7 @@ class OrderTemplateDetailPage extends StatelessWidget {
           discountedMaterialCount: cartBloc.state.zmgMaterialCount,
           bundle: Bundle.empty(),
           addedBonusList: [],
-          stockInfo: StockInfo.empty().copyWith(
-            materialNumber: itemInfo.info.materialNumber,
-          ),
+          stockInfo: StockInfo.empty(),
         );
 
         return priceAggregate;
@@ -144,13 +144,16 @@ class OrderTemplateDetailPage extends StatelessWidget {
 
       return PriceAggregate.empty();
     }).toList();
-    context.read<CartBloc>().add(
-          CartEvent.addToCartFromList(
-            items: items,
-          ),
-        );
 
-    //TODO: revisit this later
+    context.read<CartBloc>().add(CartEvent.addToCartFromList(
+          items: items,
+          customerCodeInfo: eligibilityState.customerCodeInfo,
+          salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
+          salesOrganisation: eligibilityState.salesOrganisation,
+          shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+          doNotAllowOutOfStockMaterials:
+              eligibilityState.doNotAllowOutOfStockMaterials,
+        ));
     context.router.pushNamed('cart_page');
   }
 }

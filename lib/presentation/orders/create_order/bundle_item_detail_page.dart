@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
@@ -171,7 +173,17 @@ class BundleItemDetailPage extends StatelessWidget {
 
       return PriceAggregate.empty();
     }).toList();
-    cartBloc.add(CartEvent.addToCartFromList(items: priceAggregateList));
+    cartBloc.add(CartEvent.addToCartFromList(
+      items: priceAggregateList,
+      customerCodeInfo: context.read<EligibilityBloc>().state.customerCodeInfo,
+      salesOrganisation:
+          context.read<EligibilityBloc>().state.salesOrganisation,
+      salesOrganisationConfigs:
+          context.read<EligibilityBloc>().state.salesOrgConfigs,
+      shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+      doNotAllowOutOfStockMaterials:
+          context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials,
+    ));
 
     //TODO: Will revisit
     context.router.pushNamed('cart_page');

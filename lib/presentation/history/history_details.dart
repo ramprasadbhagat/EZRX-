@@ -181,6 +181,7 @@ class HistoryDetails extends StatelessWidget {
 
   void _addToCartPressed(BuildContext context, MaterialPriceDetailState state) {
     final cartBloc = context.read<CartBloc>();
+    cartBloc.add(const CartEvent.clearCart());
     final queryInfo = MaterialQueryInfo.fromOrderHistory(
       orderHistoryItem: orderHistoryItem,
     );
@@ -198,18 +199,16 @@ class HistoryDetails extends StatelessWidget {
           materialNumber: itemInfo.info.materialNumber,
         ),
       );
-      cartBloc.add(CartEvent.addToCart(
-        item: priceAggregate,
+      cartBloc.add(CartEvent.addToCartFromList(
+        items: [priceAggregate],
         customerCodeInfo:
             context.read<CustomerCodeBloc>().state.customerCodeInfo,
         salesOrganisationConfigs: context.read<SalesOrgBloc>().state.configs,
         shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-        doNotallowOutOfStockMaterial:
-            context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials,
+        doNotAllowOutOfStockMaterials: context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials,
         salesOrganisation: context.read<SalesOrgBloc>().state.salesOrganisation,
       ));
 
-      //TODO: Revisit later
       context.router.pushNamed('cart_page');
     }
   }

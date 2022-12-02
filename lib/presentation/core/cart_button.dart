@@ -12,9 +12,6 @@ class CartButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.read<CartBloc>().add(
-              const CartEvent.fetch(),
-            );
         context.router.pushNamed('cart_page');
       },
       child: BlocBuilder<CartBloc, CartState>(

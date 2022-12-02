@@ -60,6 +60,7 @@ class OrderHistoryListTile extends StatelessWidget {
                     orderHistoryItem: orderHistoryItem,
                   ),
                 ],
+                skipFOCCheck: true,
                 pickAndPack:
                     context.read<EligibilityBloc>().state.getPNPValueMaterial,
               ),

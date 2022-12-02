@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 abstract class ICartRepository {
@@ -15,11 +16,6 @@ abstract class ICartRepository {
   Future<Either<ApiFailure, List<PriceAggregate>>> fetchCartItems();
   Future<Either<ApiFailure, List<PriceAggregate>>> addToCart({
     required PriceAggregate cartItem,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
-    required bool doNotallowOutOfStockMaterial,
   });
   Future<Either<ApiFailure, List<PriceAggregate>>> updateCartItem({
     required PriceAggregate cartItem,
@@ -58,6 +54,23 @@ abstract class ICartRepository {
     required List<PriceAggregate> cartItemList,
   });
 
+  Future<Either<ApiFailure, StockInfo>> getStockInfo({
+    required MaterialInfo material,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+  });
+
+  Future<Either<ApiFailure, List<PriceAggregate>>>
+      getStockInfoMaterialList({
+    required List<PriceAggregate> materialList,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+  });
+  
   List<MaterialNumber> getUpdatedMaterialList({
     required List<PriceAggregate> cartItemList,
     required List<MaterialNumber> selectedItemsMaterialNumber,

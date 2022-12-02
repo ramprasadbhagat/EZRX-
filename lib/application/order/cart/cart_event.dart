@@ -3,7 +3,13 @@ part of 'cart_bloc.dart';
 @freezed
 class CartEvent with _$CartEvent {
   const factory CartEvent.initialized() = _Initialized;
-  const factory CartEvent.fetch() = _Fetch;
+  const factory CartEvent.fetch({
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+    required bool doNotAllowOutOfStockMaterials,
+  }) = _Fetch;
   const factory CartEvent.addToCart({
     required PriceAggregate item,
     required bool doNotallowOutOfStockMaterial,
@@ -14,9 +20,19 @@ class CartEvent with _$CartEvent {
   }) = _AddToCart;
   const factory CartEvent.addToCartFromList({
     required List<PriceAggregate> items,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+    required bool doNotAllowOutOfStockMaterials,
   }) = _AddToCartFromList;
   const factory CartEvent.updateCartItem({
     required PriceAggregate item,
+    required bool doNotallowOutOfStockMaterial,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
   }) = _UpdateCartItem;
   const factory CartEvent.updateCart({
     required List<Price> item,

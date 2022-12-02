@@ -51,33 +51,9 @@ class CartRepository implements ICartRepository {
   @override
   Future<Either<ApiFailure, List<PriceAggregate>>> addToCart({
     required PriceAggregate cartItem,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
-    required bool doNotallowOutOfStockMaterial,
   }) async {
     try {
-      final stockInfo = await getStockInfo(
-        material: cartItem.materialInfo,
-        customerCodeInfo: customerCodeInfo,
-        salesOrganisation: salesOrganisation,
-        salesOrganisationConfigs: salesOrganisationConfigs,
-        shipToInfo: shipToInfo,
-      );
-      final stockInformation = stockInfo.fold(
-        (faliure) {
-          throw OtherException(message: faliure.failureMessage);
-        },
-        (stockInfo) => stockInfo,
-      );
-      if (!stockInformation.inStock.isMaterialInStock &&
-          doNotallowOutOfStockMaterial) {
-        throw OtherException(message: 'Product Not Available');
-      }
-      await cartStorage.add(PriceAggregateDto.fromDomain(cartItem.copyWith(
-        stockInfo: stockInformation,
-      )));
+      await cartStorage.add(PriceAggregateDto.fromDomain(cartItem));
       await countlyService
           .addCountlyEvent('Add materials to cart', segmentation: {
         'materialNum': cartItem.getMaterialNumber.getOrCrash(),
@@ -353,6 +329,7 @@ class CartRepository implements ICartRepository {
     }
   }
 
+  @override
   Future<Either<ApiFailure, StockInfo>> getStockInfo({
     required MaterialInfo material,
     required CustomerCodeInfo customerCodeInfo,
@@ -406,6 +383,40 @@ class CartRepository implements ICartRepository {
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<PriceAggregate>>>
+      getStockInfoMaterialList({
+    required List<PriceAggregate> materialList,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+  }) async {
+    try {
+      final stockInfoList = <PriceAggregate>[];
+      for (final element in materialList) {
+        final stockInfo = await getStockInfo(
+          customerCodeInfo: customerCodeInfo,
+          material: element.materialInfo,
+          salesOrganisation: salesOrganisation,
+          salesOrganisationConfigs: salesOrganisationConfigs,
+          shipToInfo: shipToInfo,
+        );
+        final stockInformation = stockInfo.fold(
+          (failure) {
+            throw (OtherException(message: failure.failureMessage));
+          },
+          (stockInfo) => stockInfo,
+        );
+        stockInfoList.add(element.copyWith(stockInfo: stockInformation));
+      }
+
+      return Right(stockInfoList);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 }

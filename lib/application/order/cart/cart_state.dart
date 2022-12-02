@@ -18,7 +18,7 @@ class CartState with _$CartState {
         cartItemList: <PriceAggregate>[],
         selectedItemsMaterialNumber: <MaterialNumber>[],
         apiFailureOrSuccessOption: none(),
-        isFetching: false,
+        isFetching: true,
         remarks: Remarks(''),
         showErrorMessages: false,
         isRemarksAdding: false,

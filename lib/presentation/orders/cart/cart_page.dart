@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
@@ -62,7 +64,24 @@ class CartPage extends StatelessWidget {
                 child: ScrollList<CartItem>(
                   emptyMessage: 'Cart is Empty'.tr(),
                   onRefresh: () {
-                    context.read<CartBloc>().add(const CartEvent.fetch());
+                    context.read<CartBloc>().add(CartEvent.fetch(
+                          customerCodeInfo: context
+                              .read<CustomerCodeBloc>()
+                              .state
+                              .customerCodeInfo,
+                          salesOrganisationConfigs:
+                              context.read<SalesOrgBloc>().state.configs,
+                          shipToInfo:
+                              context.read<ShipToCodeBloc>().state.shipToInfo,
+                          doNotAllowOutOfStockMaterials: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .doNotAllowOutOfStockMaterials,
+                          salesOrganisation: context
+                              .read<SalesOrgBloc>()
+                              .state
+                              .salesOrganisation,
+                        ));
                   },
                   isLoading: state.isFetching,
                   itemBuilder: (context, index, item) {

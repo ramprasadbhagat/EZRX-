@@ -227,7 +227,7 @@ class App extends StatelessWidget {
         ),
         BlocProvider<CartBloc>(
           create: (context) =>
-              locator<CartBloc>()..add(const CartEvent.fetch()),
+              locator<CartBloc>(),
         ),
         BlocProvider<PriceOverrideBloc>(
           create: (context) => locator<PriceOverrideBloc>(),
