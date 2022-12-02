@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:ezrxmobile/app.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -13,8 +12,7 @@ void main() {
   group('end-to-end test', () {
     testWidgets('Login & logout test example', (WidgetTester tester) async {
       tester.printToConsole('Initial setup and run as DEV flavor');
-      await initialSetup();
-      locator<Config>().appFlavor = Flavor.uat;
+      await initialSetup(flavor: Flavor.uat);
 
       runAppWithCrashlyticsAndLocalization();
 
