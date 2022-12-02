@@ -6,6 +6,7 @@ import 'package:ezrxmobile/presentation/account/settings_page.dart';
 import 'package:ezrxmobile/presentation/core/webview_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../utils/material_frame_wrapper.dart';
 
@@ -14,6 +15,13 @@ void main() {
 
   setUpAll(() async {
     setupLocator();
+    PackageInfo.setMockInitialValues(
+        appName: '',
+        packageName: '"packageName"',
+        version: '',
+        buildNumber: '',
+        buildSignature: '',
+        installerStore: '');
   });
 
   testWidgets('Tap Privacy Policy', (tester) async {

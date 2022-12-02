@@ -102,7 +102,9 @@ class _LoadingMoreIndicator extends StatelessWidget {
         Timer(
           const Duration(milliseconds: 50),
           () {
-            controller.jumpTo(controller.position.maxScrollExtent);
+            if (controller.hasClients) {
+              controller.jumpTo(controller.position.maxScrollExtent);
+            }
           },
         );
 

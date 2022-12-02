@@ -20,6 +20,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../utils/material_frame_wrapper.dart';
 import '../../utils/tester_utils.dart';
@@ -72,6 +73,13 @@ void main() {
     locator.registerLazySingleton(() => mockAuthBloc);
     locator.registerLazySingleton(() => PackageInfoService());
     autoRouterMock = locator<AppRouter>();
+    PackageInfo.setMockInitialValues(
+        appName: '',
+        packageName: '"packageName"',
+        version: '',
+        buildNumber: '',
+        buildSignature: '',
+        installerStore: '');
   });
 
   group('AupTc Widget Show hide base on state.showTermsAndConditon true', () {
@@ -85,7 +93,8 @@ void main() {
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
-      when(() => paymentCustomerInformationBlocMock.state).thenReturn(PaymentCustomerInformationState.initial());
+      when(() => paymentCustomerInformationBlocMock.state)
+          .thenReturn(PaymentCustomerInformationState.initial());
     });
     testWidgets(
         'Test - AupTc Widget Show AupTcBloc state.showTermsAndConditon=true',
@@ -137,7 +146,8 @@ void main() {
       whenListen(authBlocMock, Stream.fromIterable(expectedStates),
           initialState: const AuthState.initial());
 
-      await tester.pumpWidget(WidgetUtils.getScopedWidget(
+      await tester.pumpWidget(
+        WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
           providers: [
             BlocProvider<AuthBloc>(
@@ -229,20 +239,19 @@ void main() {
 
   testWidgets('Setting screen toc tile', (tester) async {
     await TesterUtils.setUpLocalizationWrapper(
-      tester: tester,
-       home: const SettingsPage(), 
-       locale:  const Locale('en', 'SG'),
-       isAutoRouteEnabled: true,
-       autoRouterMock: autoRouterMock,
-       providers: [
-         BlocProvider<AuthBloc>(
+        tester: tester,
+        home: const SettingsPage(),
+        locale: const Locale('en', 'SG'),
+        isAutoRouteEnabled: true,
+        autoRouterMock: autoRouterMock,
+        providers: [
+          BlocProvider<AuthBloc>(
             create: (context) => authBlocMock,
           ),
           BlocProvider<AupTcBloc>(
             create: (context) => mockAupTcBloc,
           ),
-       ]
-     );
+        ]);
     await tester.pump();
     final tosTile = find.byKey(const Key('tostile'));
     expect(tosTile, findsOneWidget);

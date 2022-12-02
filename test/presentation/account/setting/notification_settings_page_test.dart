@@ -19,6 +19,7 @@ class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
+  EasyLocalization.logger.enableLevels = [];
 
   late UserBloc userBlocMock;
   setUpAll(() async {

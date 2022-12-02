@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
@@ -72,6 +73,7 @@ class MockHTTPService extends Mock implements HttpService {}
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
+  EasyLocalization.logger.enableLevels = [];
   late CustomerCodeBlocMock mockCustomerCodeBloc;
   late SalesOrgBlocMock salesOrgBlocMock;
   late MaterialListBlocMock materialListBlocMock;

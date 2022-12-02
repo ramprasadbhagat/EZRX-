@@ -179,7 +179,7 @@ void main() {
       final addButton = find.byKey(const Key('addButton'));
       expect(addButton, findsOneWidget);
       final button = tester.widget(find.byKey(const Key('addButton')));
-      await tester.tap(find.byWidget(button));
+      await tester.tap(find.byWidget(button), warnIfMissed: false);
     });
   });
 }

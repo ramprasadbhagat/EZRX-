@@ -22,6 +22,7 @@ class TesterUtils {
       SharedPreferences.setMockInitialValues({});
       await EasyLocalization.ensureInitialized();
       EasyLocalization.logger.enableBuildModes = [];
+      EasyLocalization.logger.enableLevels = [];
       await tester.pumpWidget(
         EasyLocalization(
           supportedLocales: [

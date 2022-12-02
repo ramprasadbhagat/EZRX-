@@ -11,8 +11,9 @@ class WidgetUtils {
       {required AppRouter autoRouterMock,
       required List<BlocProvider> providers,
       required Widget child}) {
+    EasyLocalization.logger.enableLevels = [];
     EasyLocalization.logger.enableBuildModes = [];
-
+    
     return StackRouterScope(
       controller: autoRouterMock,
       stateHash: 0,
