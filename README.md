@@ -61,11 +61,13 @@ https://resocoder.com/2020/03/09/flutter-firebase-ddd-course-1-domain-driven-des
 - ```fvm flutter build ios --flavor dev -t lib/main_dev.dart```
 - ```fvm flutter build ios --flavor uat -t lib/main_uat.dart```
 - ```fvm flutter build ios --flavor prod -t lib/main_prod.dart```
+
 #### Android
 - ```fvm flutter build appbundle --flavor mock -t lib/main_mock.dart```
 - ```fvm flutter build appbundle --flavor dev -t lib/main_dev.dart```
 - ```fvm flutter build appbundle --flavor uat -t lib/main_uat.dart```
 - ```fvm flutter build appbundle --flavor prod -t lib/main_prod.dart```
+- ```fvm flutter build apk --flavor uat -t lib/main_browserstack.dart --debug```
 
 ### Error when run IOS ?
 1. go to /ios
@@ -104,3 +106,11 @@ Let's assume that we test loading_more fuction for load a page 2
 5. Use Prod build and upload command, this will build uat and upload to Google Play Internal Test and IOS testFlight
 - ```git tag -a prod.2.0.0-108 -m "prod 2.0.0(108)"```
 - ```git push origin prod.2.0.0-108```
+
+### How to generate splash screen
+- [flutter_native_splash](https://pub.dev/packages/flutter_native_splash)
+- Run command ```fvm flutter pub run flutter_native_splash:create```
+
+### How to generate app icon
+- [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
+- Run command ```fvm flutter pub run flutter_launcher_icons```
