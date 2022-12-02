@@ -180,9 +180,9 @@ class MaterialPrice extends ValueObject<double> {
 
   const MaterialPrice._(this.value);
 
-  bool isEmpty() => value.getOrElse(() => 0) == 0;
+  bool get isEmpty => value.getOrElse(() => 0) == 0;
 
-  bool isUnavailable() => value.getOrElse(() => 0) == unavailablePriceValue;
+  bool get isUnavailable => value.getOrElse(() => 0) == unavailablePriceValue;
 }
 
 class MaterialQty extends ValueObject<int> {
@@ -222,11 +222,11 @@ class MaterialTaxClassification extends ValueObject<String> {
 
   const MaterialTaxClassification._(this.value);
 
-  bool isNoTax() {
+  bool get isNoTax {
     return materialTaxClassificationIsNoTax(value.getOrElse(() => ''));
   }
 
-  bool isExempt() {
+  bool get isExempt {
     return materialTaxClassificationIsExempt(value.getOrElse(() => ''));
   }
 

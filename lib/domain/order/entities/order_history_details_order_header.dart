@@ -1,9 +1,8 @@
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'order_history_details_order_header.freezed.dart';
 
 @freezed
-class OrderHistoryDetailsOrderHeader with _$OrderHistoryDetailsOrderHeader{
+class OrderHistoryDetailsOrderHeader with _$OrderHistoryDetailsOrderHeader {
   const OrderHistoryDetailsOrderHeader._();
   factory OrderHistoryDetailsOrderHeader({
     required double totalTax,
@@ -16,7 +15,8 @@ class OrderHistoryDetailsOrderHeader with _$OrderHistoryDetailsOrderHeader{
     required String eZRXNumber,
     required String orderBy,
   }) = _OrderHistoryDetailsOrderHeader;
-  factory OrderHistoryDetailsOrderHeader.empty() => OrderHistoryDetailsOrderHeader(
+  factory OrderHistoryDetailsOrderHeader.empty() =>
+      OrderHistoryDetailsOrderHeader(
         totalTax: 0.0,
         requestedDeliveryDate: '',
         pOReference: '',
@@ -26,6 +26,7 @@ class OrderHistoryDetailsOrderHeader with _$OrderHistoryDetailsOrderHeader{
         createdDate: '',
         eZRXNumber: '',
         orderBy: '',
-
       );
+
+  double get grandTotal => orderValue + totalTax;
 }

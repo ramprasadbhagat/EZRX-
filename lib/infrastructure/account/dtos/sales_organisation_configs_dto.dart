@@ -134,6 +134,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
     @HiveField(138, defaultValue: false)
         required bool enableTaxDisplay,
+    @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
+    @HiveField(140, defaultValue: false)
+        required bool enableTaxAtTotalLevelOnly,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -157,6 +160,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableZDP5: configs.enableZDP5,
       enableTaxClassification: configs.enableTaxClassification,
       enableVat: configs.enableVat,
+      enableTaxAtTotalLevelOnly: configs.enableTaxAtTotalLevelOnly,
       vatValue: configs.vatValue,
       materialWithoutPrice: configs.materialWithoutPrice,
       enableSpecialInstructions: configs.enableSpecialInstructions,
@@ -201,6 +205,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableZDP5: enableZDP5,
       enableTaxClassification: enableTaxClassification,
       enableVat: enableVat,
+      enableTaxAtTotalLevelOnly: enableTaxAtTotalLevelOnly,
       vatValue: vatValue,
       materialWithoutPrice: materialWithoutPrice,
       enableSpecialInstructions: enableSpecialInstructions,

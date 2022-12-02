@@ -75,39 +75,53 @@ class PriceAggregate with _$PriceAggregate {
   double get unitPrice {
     final value = listPrice;
 
-    if (salesOrgConfig.enableVat) {
-      return value + (value * (salesOrgConfig.vatValue / 100));
-    } else if (materialInfo.taxClassification.isNoTax()) {
-      return value;
-    } else if (salesOrgConfig.enableTaxClassification) {
+    // VN Tax
+    if (salesOrgConfig.enableVat &&
+        salesOrgConfig.enableTaxClassification &&
+        salesOrgConfig.currency.isVN) {
       return value + (value * (double.parse(materialInfo.taxes.first) / 100));
     }
 
-    return value;
-
-    // Backup Logic from value Object
-    // finalPrice = isVNUser
-    // ? enableVat && enableTaxClassification
-    //     ? value +
-    //         (value * ((taxes).isNotEmpty ? double.parse(taxes[0]) * 0.01 : 0))
-    //     : value
-    // : enableTaxClassification && !taxClassification.isExempt()
-    //     ? !taxClassification.isNoTax()
-    //         ? value + (value * vatValue * 0.01)
-    //         : value
-    //     : value;
-  }
-
-  double get priceBeforeGst {
-    if (salesOrgConfig.currency.isVN &&
-        salesOrgConfig.enableTaxClassification) {
-      return listPrice / (1 + double.parse(materialInfo.taxes[0]) * 0.01);
-    } else if (!salesOrgConfig.currency.isVN &&
+    // Non VN VAT
+    if (salesOrgConfig.enableVat &&
+        salesOrgConfig.enableTaxClassification &&
         materialInfo.taxClassification.isFullTax) {
-      return listPrice / (1 + salesOrgConfig.vatValue * 0.01);
+      return value + (value * (salesOrgConfig.vatValue / 100));
     }
 
-    return listPrice;
+    return value;
+  }
+
+  double get unitPriceForTotal {
+    final value = listPrice;
+
+    // VN Tax
+    if (salesOrgConfig.enableVat &&
+        salesOrgConfig.enableTaxClassification &&
+        salesOrgConfig.currency.isVN) {
+      return value + (value * (double.parse(materialInfo.taxes.first) / 100));
+    }
+
+    // VN Tax total
+    if (salesOrgConfig.enableTaxAtTotalLevelOnly &&
+        salesOrgConfig.currency.isVN) {
+      return value + (value * (double.parse(materialInfo.taxes.first) / 100));
+    }
+
+    // Non VN VAT
+    if (salesOrgConfig.enableVat &&
+        salesOrgConfig.enableTaxClassification &&
+        materialInfo.taxClassification.isFullTax) {
+      return value + (value * (salesOrgConfig.vatValue / 100));
+    }
+
+    // Non VN Total
+    if (salesOrgConfig.enableTaxAtTotalLevelOnly &&
+        !salesOrgConfig.currency.isVN) {
+      return value + (value * (salesOrgConfig.vatValue / 100));
+    }
+
+    return value;
   }
 
   bool get isEnableVat {
@@ -119,7 +133,9 @@ class PriceAggregate with _$PriceAggregate {
   }
 
   double get unitPriceTotal {
-    return unitPrice * quantity;
+    return salesOrgConfig.enableTaxAtTotalLevelOnly
+        ? unitPriceForTotal * quantity
+        : unitPrice * quantity;
   }
 
   double get discountedListPrice => price.priceTireItem
@@ -130,11 +146,11 @@ class PriceAggregate with _$PriceAggregate {
       .rate;
 
   double getNewPrice() {
-    final newPrice = materialInfo.taxClassification.isExempt()
+    final newPrice = materialInfo.taxClassification.isExempt
         ? price.finalPrice.getOrCrash()
         : ((price.finalPrice.getOrCrash()) /
             (1 +
-                (materialInfo.taxClassification.isNoTax()
+                (materialInfo.taxClassification.isNoTax
                     ? salesOrgConfig.vatValue
                     : 0)));
 
@@ -143,7 +159,7 @@ class PriceAggregate with _$PriceAggregate {
 
   String display(PriceType priceType) {
     if (price.isFOC) return 'FOC';
-    if (price.finalPrice.isUnavailable() ||
+    if (price.finalPrice.isUnavailable ||
         materialInfo.hidePrice ||
         !price.isValid ||
         !price.isValidMaterial) return 'NA';
@@ -151,16 +167,17 @@ class PriceAggregate with _$PriceAggregate {
     double result;
     switch (priceType) {
       case PriceType.unitPrice:
-        result = unitPrice;
+        result =
+            salesOrgConfig.enableTaxAtTotalLevelOnly ? listPrice : unitPrice;
         break;
+      case PriceType.unitPriceBeforeGst:
       case PriceType.listPriceTotal:
         result = listPriceTotal;
         break;
       case PriceType.unitPriceTotal:
-        result = unitPriceTotal;
-        break;
-      case PriceType.unitPriceBeforeGst:
-        result = priceBeforeGst;
+        result = salesOrgConfig.enableTaxAtTotalLevelOnly
+            ? listPriceTotal
+            : unitPriceTotal;
         break;
       case PriceType.listPrice:
       default:

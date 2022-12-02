@@ -62,6 +62,7 @@ void main() {
     enableBatchNumber: false,
     enableTaxClassification: false,
     enableVat: false,
+    enableTaxAtTotalLevelOnly: false,
     enableZDP5: false,
     vatValue: 0,
     materialWithoutPrice: false,

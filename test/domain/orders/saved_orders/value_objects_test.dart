@@ -70,12 +70,10 @@ void main() {
 
   group('Principal Name Value Object', () {
     test('should return PrincipalName when not empty', () {
-
       const input = 'fake-principal-name';
       final principalName = PrincipalName(input);
       final result = principalName.name;
       expect(result, 'fake-principal-name');
-
     });
 
     test(
@@ -93,28 +91,28 @@ void main() {
     test('should return true when there is no Tax', () {
       const input = 'noTax';
       final valObj = MaterialTaxClassification(input);
-      final result = valObj.isNoTax();
+      final result = valObj.isNoTax;
       expect(result, true);
     });
 
     test('should return false when there is fake Tax', () {
       const input = 'fake-Tax';
       final valObj = MaterialTaxClassification(input);
-      final result = valObj.isNoTax();
+      final result = valObj.isNoTax;
       expect(result, false);
     });
 
     test('should return true when there is Exempt', () {
       const input = 'Exempt';
       final valObj = MaterialTaxClassification(input);
-      final result = valObj.isExempt();
+      final result = valObj.isExempt;
       expect(result, true);
     });
 
     test('should return false when there is not Exempt', () {
       const input = 'fake-data';
       final valObj = MaterialTaxClassification(input);
-      final result = valObj.isExempt();
+      final result = valObj.isExempt;
       expect(result, false);
     });
 
@@ -131,7 +129,6 @@ void main() {
       final result = valObj.isFullTax;
       expect(result, false);
     });
-
   });
 
   group('Material Number Value Object', () {
@@ -167,14 +164,14 @@ void main() {
     test('should true when is empty', () {
       const input = 0.0;
       final valObj = MaterialPrice(input);
-      final result = valObj.isEmpty();
+      final result = valObj.isEmpty;
       expect(result, true);
     });
 
     test('should false when is not empty', () {
       const input = 5.0;
       final valObj = MaterialPrice(input);
-      final result = valObj.isEmpty();
+      final result = valObj.isEmpty;
       expect(result, false);
     });
   });

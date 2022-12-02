@@ -137,6 +137,7 @@ const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
   enableSpecialInstructions: false,
   enableTaxClassification: false,
   enableVat: false,
+  enableTaxAtTotalLevelOnly: false,
   enableZDP5: false,
   futureDeliveryDay: '',
   hideCustomer: false,

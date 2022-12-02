@@ -59,6 +59,7 @@ class SalesOrgQueryMutation {
           addOosMaterials
           vatValue
           enableVat
+          enableTaxAtTotalLevelOnly
           oosValue
           enableUnreferencedReturn
           enableGimmickMaterial

@@ -19,11 +19,11 @@ import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
-import 'package:ezrxmobile/presentation/orders/cart/cart_bundle_item_tile.dart';
 import 'package:ezrxmobile/presentation/core/widget_helper.dart';
-import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
-import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
+import 'package:ezrxmobile/presentation/orders/cart/cart_bundle_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_material_item_tile.dart';
+import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
+import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_type_selector.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/save_template_dialog.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -633,13 +633,13 @@ class _CartDetails extends StatelessWidget {
                 state.subtotal,
               ),
             ),
-            salesOrgConfig.enableVat
+            salesOrgConfig.enableVat || salesOrgConfig.enableTaxAtTotalLevelOnly
                 ? BalanceTextRow(
                     keyText: '$taxCode in %'.tr(),
                     valueText: '${salesOrgConfig.vatValue}%',
                   )
                 : const SizedBox.shrink(),
-            salesOrgConfig.enableVat
+            salesOrgConfig.enableVat || salesOrgConfig.enableTaxAtTotalLevelOnly
                 ? BalanceTextRow(
                     keyText: taxCode.tr(),
                     valueText: StringUtils.displayPrice(

@@ -64,13 +64,15 @@ class SalesOrganisationConfigsDtoAdapter
       ponRequired: fields[137] == null ? false : fields[137] as bool,
       enableIRN: fields[139] == null ? false : fields[139] as bool,
       enableTaxDisplay: fields[138] == null ? false : fields[138] as bool,
+      enableTaxAtTotalLevelOnly:
+          fields[140] == null ? false : fields[140] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_SalesOrganisationConfigsDto obj) {
     writer
-      ..writeByte(40)
+      ..writeByte(41)
       ..writeByte(100)
       ..write(obj.disableProcessingStatus)
       ..writeByte(101)
@@ -149,6 +151,8 @@ class SalesOrganisationConfigsDtoAdapter
       ..write(obj.enableIRN)
       ..writeByte(138)
       ..write(obj.enableTaxDisplay)
+      ..writeByte(140)
+      ..write(obj.enableTaxAtTotalLevelOnly)
       ..writeByte(7)
       ..write(obj.principalList);
   }
@@ -216,6 +220,8 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       ponRequired: json['ponRequired'] as bool? ?? false,
       enableIRN: json['enableIRN'] as bool? ?? false,
       enableTaxDisplay: json['enableTaxDisplay'] as bool? ?? false,
+      enableTaxAtTotalLevelOnly:
+          json['enableTaxAtTotalLevelOnly'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -262,4 +268,5 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'ponRequired': instance.ponRequired,
       'enableIRN': instance.enableIRN,
       'enableTaxDisplay': instance.enableTaxDisplay,
+      'enableTaxAtTotalLevelOnly': instance.enableTaxAtTotalLevelOnly,
     };

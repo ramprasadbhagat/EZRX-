@@ -52,7 +52,7 @@ class _AddToCartState extends State<AddToCart> {
 
   bool get _isAddToCartAllowed {
     return !salesOrgBloc.state.configs.materialWithoutPrice &&
-        addToCartBloc.state.cartItem.price.finalPrice.isEmpty() &&
+        addToCartBloc.state.cartItem.price.finalPrice.isEmpty &&
         !widget.isCovid19Tab;
   }
 

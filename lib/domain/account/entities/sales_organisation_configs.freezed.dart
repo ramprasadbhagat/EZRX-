@@ -31,6 +31,7 @@ mixin _$SalesOrganisationConfigs {
   bool get disableBundles => throw _privateConstructorUsedError;
   bool get enableZDP5 => throw _privateConstructorUsedError;
   bool get enableVat => throw _privateConstructorUsedError;
+  bool get enableTaxAtTotalLevelOnly => throw _privateConstructorUsedError;
   bool get enableTaxClassification => throw _privateConstructorUsedError;
   int get vatValue => throw _privateConstructorUsedError;
   bool get materialWithoutPrice => throw _privateConstructorUsedError;
@@ -84,6 +85,7 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       bool disableBundles,
       bool enableZDP5,
       bool enableVat,
+      bool enableTaxAtTotalLevelOnly,
       bool enableTaxClassification,
       int vatValue,
       bool materialWithoutPrice,
@@ -140,6 +142,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
     Object? disableBundles = null,
     Object? enableZDP5 = null,
     Object? enableVat = null,
+    Object? enableTaxAtTotalLevelOnly = null,
     Object? enableTaxClassification = null,
     Object? vatValue = null,
     Object? materialWithoutPrice = null,
@@ -226,6 +229,10 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
       enableVat: null == enableVat
           ? _value.enableVat
           : enableVat // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableTaxAtTotalLevelOnly: null == enableTaxAtTotalLevelOnly
+          ? _value.enableTaxAtTotalLevelOnly
+          : enableTaxAtTotalLevelOnly // ignore: cast_nullable_to_non_nullable
               as bool,
       enableTaxClassification: null == enableTaxClassification
           ? _value.enableTaxClassification
@@ -356,6 +363,7 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       bool disableBundles,
       bool enableZDP5,
       bool enableVat,
+      bool enableTaxAtTotalLevelOnly,
       bool enableTaxClassification,
       int vatValue,
       bool materialWithoutPrice,
@@ -410,6 +418,7 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? disableBundles = null,
     Object? enableZDP5 = null,
     Object? enableVat = null,
+    Object? enableTaxAtTotalLevelOnly = null,
     Object? enableTaxClassification = null,
     Object? vatValue = null,
     Object? materialWithoutPrice = null,
@@ -496,6 +505,10 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
       enableVat: null == enableVat
           ? _value.enableVat
           : enableVat // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableTaxAtTotalLevelOnly: null == enableTaxAtTotalLevelOnly
+          ? _value.enableTaxAtTotalLevelOnly
+          : enableTaxAtTotalLevelOnly // ignore: cast_nullable_to_non_nullable
               as bool,
       enableTaxClassification: null == enableTaxClassification
           ? _value.enableTaxClassification
@@ -620,6 +633,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       required this.disableBundles,
       required this.enableZDP5,
       required this.enableVat,
+      required this.enableTaxAtTotalLevelOnly,
       required this.enableTaxClassification,
       required this.vatValue,
       required this.materialWithoutPrice,
@@ -684,6 +698,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   @override
   final bool enableVat;
   @override
+  final bool enableTaxAtTotalLevelOnly;
+  @override
   final bool enableTaxClassification;
   @override
   final int vatValue;
@@ -736,7 +752,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, ponRequired: $ponRequired, enableTaxDisplay: $enableTaxDisplay)';
+    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, ponRequired: $ponRequired, enableTaxDisplay: $enableTaxDisplay)';
   }
 
   @override
@@ -774,6 +790,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
                 other.enableZDP5 == enableZDP5) &&
             (identical(other.enableVat, enableVat) ||
                 other.enableVat == enableVat) &&
+            (identical(other.enableTaxAtTotalLevelOnly, enableTaxAtTotalLevelOnly) ||
+                other.enableTaxAtTotalLevelOnly == enableTaxAtTotalLevelOnly) &&
             (identical(other.enableTaxClassification, enableTaxClassification) ||
                 other.enableTaxClassification == enableTaxClassification) &&
             (identical(other.vatValue, vatValue) ||
@@ -800,9 +818,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
                 other.enableListPrice == enableListPrice) &&
             (identical(other.priceOverride, priceOverride) ||
                 other.priceOverride == priceOverride) &&
-            (identical(other.disablePaymentTermsDisplay, disablePaymentTermsDisplay) ||
-                other.disablePaymentTermsDisplay ==
-                    disablePaymentTermsDisplay) &&
+            (identical(other.disablePaymentTermsDisplay, disablePaymentTermsDisplay) || other.disablePaymentTermsDisplay == disablePaymentTermsDisplay) &&
             (identical(other.disableDeliveryDate, disableDeliveryDate) || other.disableDeliveryDate == disableDeliveryDate) &&
             (identical(other.enableBillTo, enableBillTo) || other.enableBillTo == enableBillTo) &&
             (identical(other.showPOAttachment, showPOAttachment) || other.showPOAttachment == showPOAttachment) &&
@@ -834,6 +850,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
         disableBundles,
         enableZDP5,
         enableVat,
+        enableTaxAtTotalLevelOnly,
         enableTaxClassification,
         vatValue,
         materialWithoutPrice,
@@ -886,6 +903,7 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final bool disableBundles,
       required final bool enableZDP5,
       required final bool enableVat,
+      required final bool enableTaxAtTotalLevelOnly,
       required final bool enableTaxClassification,
       required final int vatValue,
       required final bool materialWithoutPrice,
@@ -943,6 +961,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   bool get enableZDP5;
   @override
   bool get enableVat;
+  @override
+  bool get enableTaxAtTotalLevelOnly;
   @override
   bool get enableTaxClassification;
   @override

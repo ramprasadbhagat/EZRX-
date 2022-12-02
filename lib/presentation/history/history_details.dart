@@ -9,34 +9,33 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/bundle.dart';
-import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
-import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
-import 'package:ezrxmobile/presentation/core/text_button_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/widget_helper.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:open_file_safe/open_file_safe.dart';
-import 'package:path_provider/path_provider.dart';
-
 import 'package:ezrxmobile/application/order/order_history_details/download_attachment/bloc/download_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/core/text_button_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/widget_helper.dart';
 import 'package:ezrxmobile/presentation/history/widgets/history_details_expanion_tile.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:open_file_safe/open_file_safe.dart';
+import 'package:path_provider/path_provider.dart';
 
 class HistoryDetails extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
@@ -205,7 +204,8 @@ class HistoryDetails extends StatelessWidget {
             context.read<CustomerCodeBloc>().state.customerCodeInfo,
         salesOrganisationConfigs: context.read<SalesOrgBloc>().state.configs,
         shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-        doNotAllowOutOfStockMaterials: context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials,
+        doNotAllowOutOfStockMaterials:
+            context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials,
         salesOrganisation: context.read<SalesOrgBloc>().state.salesOrganisation,
       ));
 
@@ -282,6 +282,8 @@ class _OrderDetails extends StatelessWidget {
     final enableOHPrice = context.read<EligibilityBloc>().state.enableOHPrice;
     final enableTaxDisplay =
         context.read<SalesOrgBloc>().state.configs.enableTaxDisplay;
+    final enableTaxAtTotalLevelOnly =
+        context.read<SalesOrgBloc>().state.configs.enableTaxAtTotalLevelOnly;
 
     return BlocBuilder<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
@@ -293,17 +295,15 @@ class _OrderDetails extends StatelessWidget {
             if (enableOHPrice)
               BalanceTextRow(
                 keyText: 'Total sub value'.tr(),
-                valueText: enableTaxDisplay
-                    ? StringUtils.displayPrice(
-                        context.read<SalesOrgBloc>().state.configs,
-                        orderDetails.orderHistoryDetailsOrderHeader.orderValue,
-                      )
-                    : '',
+                valueText: StringUtils.displayPrice(
+                  context.read<SalesOrgBloc>().state.configs,
+                  orderDetails.orderHistoryDetailsOrderHeader.orderValue,
+                ),
                 valueTextLoading: state.isLoading,
                 keyFlex: 1,
                 valueFlex: 1,
               ),
-            if (enableTaxDisplay)
+            if (enableTaxDisplay || enableTaxAtTotalLevelOnly)
               BalanceTextRow(
                 keyText: context.read<SalesOrgBloc>().state.salesOrg.isSg
                     ? 'GST'
@@ -321,9 +321,7 @@ class _OrderDetails extends StatelessWidget {
                 keyText: 'Grand Total'.tr(),
                 valueText: StringUtils.displayPrice(
                   context.read<SalesOrgBloc>().state.configs,
-                  enableTaxDisplay
-                      ? context.read<CartBloc>().state.grandTotal
-                      : orderDetails.orderHistoryDetailsOrderHeader.orderValue,
+                  orderDetails.orderHistoryDetailsOrderHeader.grandTotal,
                 ),
                 keyFlex: 1,
                 valueFlex: 1,

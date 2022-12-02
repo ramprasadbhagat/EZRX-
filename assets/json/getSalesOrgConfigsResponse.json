@@ -48,6 +48,7 @@
             "addOosMaterials": true,
             "vatValue": 8,
             "enableVat": true,
+            "enableTaxAtTotalLevelOnly": true,
             "oosValue": 1,
             "enableUnreferencedReturn": false,
             "enableGimmickMaterial": false,

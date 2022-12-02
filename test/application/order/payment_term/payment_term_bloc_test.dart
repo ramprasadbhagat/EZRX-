@@ -54,6 +54,7 @@ void main() {
     enableZDP5: false,
     enableTaxClassification: false,
     enableVat: false,
+    enableTaxAtTotalLevelOnly: false,
     vatValue: 0,
     materialWithoutPrice: false,
     enableCollectiveNumber: false,
