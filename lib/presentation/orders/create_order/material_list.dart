@@ -18,7 +18,7 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bonus_discount_label.dart';
@@ -146,14 +146,7 @@ class _BodyContent extends StatelessWidget {
     return Expanded(
       child: materialListState.isFetching &&
               materialListState.materialList.isEmpty
-          ? LoadingShimmer.withChild(
-              child: Image.asset(
-                'assets/images/ezrxlogo.png',
-                key: const Key('loaderImage'),
-                width: 80,
-                height: 80,
-              ),
-            )
+          ? LoadingShimmer.logo(key: const Key('loaderImage'))
           : ScrollList<MaterialInfo>(
               emptyMessage: 'No material found',
               onRefresh: () {

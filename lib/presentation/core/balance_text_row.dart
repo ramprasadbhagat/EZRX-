@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 

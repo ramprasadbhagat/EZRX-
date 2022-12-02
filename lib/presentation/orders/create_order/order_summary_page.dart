@@ -17,7 +17,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_bundle_item_tile.dart';
 import 'package:ezrxmobile/presentation/core/widget_helper.dart';

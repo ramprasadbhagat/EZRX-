@@ -3,7 +3,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

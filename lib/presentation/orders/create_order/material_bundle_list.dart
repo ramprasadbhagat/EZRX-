@@ -11,7 +11,7 @@ import 'package:ezrxmobile/application/order/material_price_detail/material_pric
 import 'package:ezrxmobile/domain/core/aggregate/bundle_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -73,14 +73,7 @@ class _BodyContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: state.isFetching && state.bundleList.isEmpty
-          ? LoadingShimmer.withChild(
-              child: Image.asset(
-                'assets/images/ezrxlogo.png',
-                key: const Key('loaderImage'),
-                width: 80,
-                height: 80,
-              ),
-            )
+          ? LoadingShimmer.logo(key: const Key('loaderImage'))
           : ScrollList<BundleAggregate>(
               emptyMessage: 'No bundle found',
               onRefresh: () {

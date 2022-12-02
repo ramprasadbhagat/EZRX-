@@ -5,7 +5,7 @@ import 'package:ezrxmobile/config.dart' as c;
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -61,13 +61,7 @@ class BannerTile extends StatelessWidget {
                       gaplessPlayback: true,
                     ),
                   )
-                : LoadingShimmer.withChild(
-                    child: Image.asset(
-                      'assets/images/ezrxlogo.png',
-                      width: 80,
-                      height: 80,
-                    ),
-                  );
+                : LoadingShimmer.logo();
           },
         ),
       ),

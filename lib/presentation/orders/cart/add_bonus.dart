@@ -9,7 +9,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -179,14 +179,7 @@ class _BonusAddPageState extends State<BonusAddPage> {
                   key: const Key('empty'),
                 )
               : state.isFetching
-                  ? LoadingShimmer.withChild(
-                      child: Image.asset(
-                        'assets/images/ezrxlogo.png',
-                        key: const Key('loaderImage'),
-                        width: 80,
-                        height: 80,
-                      ),
-                    )
+                  ? LoadingShimmer.logo(key: const Key('loaderImage'))
                   : ScrollList<MaterialInfo>(
                       emptyMessage: 'No materials found.'.tr(),
                       // onRefresh: () {

@@ -12,7 +12,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/presentation/core/cart_button.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/history/history_filter.dart';
@@ -37,7 +37,7 @@ class HistoryTab extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title:  Text(
+        title: Text(
           'Order History'.tr(),
         ),
         automaticallyImplyLeading: false,
@@ -115,7 +115,7 @@ class HistoryTab extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                               Text(
+                              Text(
                                 'Filter'.tr(),
                                 style: const TextStyle(
                                   fontSize: 14,
@@ -242,14 +242,7 @@ class HistoryTab extends StatelessWidget {
                             .getFilterItem(orderHistoryFilterByStatusState
                                 .filterByStatusName)
                             .isEmpty
-                    ? LoadingShimmer.withChild(
-                        child: Image.asset(
-                          'assets/images/ezrxlogo.png',
-                          key: const Key('loaderImage'),
-                          width: 80,
-                          height: 80,
-                        ),
-                      )
+                    ? LoadingShimmer.logo(key: const Key('loaderImage'))
                     : ScrollList<OrderHistoryItem>(
                         key: const Key('orderHistoryList'),
                         emptyMessage: 'No history found'.tr(),

@@ -6,7 +6,7 @@ import 'package:ezrxmobile/application/order/order_template_list/order_template_
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/presentation/core/cart_button.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/order_template/order_template_item.dart';
@@ -51,14 +51,7 @@ class OrderTemplateListPage extends StatelessWidget {
             previous.isFetching != current.isFetching,
         builder: (context, state) {
           return state.isFetching && state.orderTemplateList.isEmpty
-              ? LoadingShimmer.withChild(
-                  child: Image.asset(
-                    'assets/images/ezrxlogo.png',
-                    key: const Key('loading-shimmer'),
-                    width: 80,
-                    height: 80,
-                  ),
-                )
+              ? LoadingShimmer.logo(key: const Key('loading-shimmer'))
               : ScrollList<OrderTemplate>(
                   emptyMessage: 'No order template found',
                   onRefresh: () {

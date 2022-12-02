@@ -12,7 +12,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -138,7 +138,10 @@ class SalesOrgSelector extends StatelessWidget {
   }
 
   void _callBannerAndDocType(
-      BuildContext context, SalesOrgState state, bool fetchCustomer,) {
+    BuildContext context,
+    SalesOrgState state,
+    bool fetchCustomer,
+  ) {
     context.read<BannerBloc>().add(
           BannerEvent.fetch(
             isPreSalesOrg: false,

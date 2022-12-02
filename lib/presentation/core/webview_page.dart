@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
@@ -85,13 +85,7 @@ class _WebViewPageState extends State<WebViewPage> {
                 Visibility(
                   key: const ValueKey('loader'),
                   visible: isLoading,
-                  child: LoadingShimmer.withChild(
-                    child: Image.asset(
-                      'assets/images/ezrxlogo.png',
-                      width: 80,
-                      height: 80,
-                    ),
-                  ),
+                  child: LoadingShimmer.logo(),
                 ),
               ],
             ),

@@ -3,7 +3,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,7 +52,8 @@ class ResetPasswordButton extends StatelessWidget {
                 FocusScope.of(context).unfocus();
                 context.read<ResetPasswordBloc>().add(
                       ResetPasswordEvent.resetPasswordPressed(
-                          user: user,),
+                        user: user,
+                      ),
                     );
               },
               child: LoadingShimmer.withChild(

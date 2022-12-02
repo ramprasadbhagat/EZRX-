@@ -1,28 +1,16 @@
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
+part of 'loading_shimmer.dart';
 
-class LoadingShimmer {
-  static Widget withChild({
-    required Widget child,
-    bool enabled = true,
-  }) {
-    if (!enabled) return Center(child: child);
+class _Tile extends StatelessWidget {
+  const _Tile({
+    Key? key,
+    required this.enabled,
+    required this.line,
+  }) : super(key: key);
+  final int line;
+  final bool enabled;
 
-    return Center(
-      child: Shimmer.fromColors(
-        baseColor: ZPColors.lightGray,
-        highlightColor: ZPColors.white,
-        enabled: true,
-        child: child,
-      ),
-    );
-  }
-
-  static Widget tile({
-    bool enabled = true,
-    int line = 1,
-  }) {
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: Shimmer.fromColors(
         baseColor: ZPColors.lightGray,

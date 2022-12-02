@@ -223,7 +223,6 @@ void main() {
       final searchField = find.byKey(const Key('materialSearchField'));
       final cartButton = find.byKey(const Key('CartButton'));
       expect(laoder, findsOneWidget);
-      expect(laoder.evaluate().first.size, const Size(80, 80));
       expect(covidMaterialsListPage, findsOneWidget);
       expect(cartButton, findsOneWidget);
       expect(searchField, findsOneWidget);

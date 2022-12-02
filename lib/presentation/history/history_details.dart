@@ -32,7 +32,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/history/widgets/history_details_expanion_tile.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
@@ -823,14 +823,7 @@ class LoadingOverlay {
     showDialog(
       context: _context,
       barrierDismissible: false,
-      builder: (ctx) => LoadingShimmer.withChild(
-        child: Image.asset(
-          'assets/images/ezrxlogo.png',
-          key: const Key('loaderImage'),
-          width: 80,
-          height: 80,
-        ),
-      ),
+      builder: (ctx) => LoadingShimmer.logo(key: const Key('loaderImage')),
     );
   }
 

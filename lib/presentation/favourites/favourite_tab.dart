@@ -13,7 +13,7 @@ import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/cart_button.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/favourites/favourite_tile.dart';
@@ -97,14 +97,7 @@ class FavouritesTab extends StatelessWidget with AutoRouteWrapper {
               previous.favouriteItems != current.favouriteItems,
           builder: (context, favoriteState) {
             if (favoriteState.isLoading) {
-              return LoadingShimmer.withChild(
-                child: Image.asset(
-                  'assets/images/ezrxlogo.png',
-                  key: const Key('LoaderImage'),
-                  width: 80,
-                  height: 80,
-                ),
-              );
+              return LoadingShimmer.logo(key: const Key('LoaderImage'));
             }
 
             return BlocBuilder<MaterialPriceDetailBloc,
@@ -113,14 +106,7 @@ class FavouritesTab extends StatelessWidget with AutoRouteWrapper {
                   previous.isValidating != current.isValidating,
               builder: (context, priceState) {
                 if (priceState.isValidating) {
-                  return LoadingShimmer.withChild(
-                    child: Image.asset(
-                      'assets/images/ezrxlogo.png',
-                      key: const Key('LoaderImage'),
-                      width: 80,
-                      height: 80,
-                    ),
-                  );
+                  return LoadingShimmer.logo(key: const Key('LoaderImage'));
                 }
                 final validFavoriteItems = favoriteState.favouriteItems
                     .where(
