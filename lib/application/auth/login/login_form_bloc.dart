@@ -71,26 +71,34 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
             password: state.password,
           );
 
-          failureOrSuccess.fold(
-            (_) {},
-            (login) {
-              authRepository.storeJWT(jwt: login.jwt);
+          await failureOrSuccess.fold(
+            (_) async {
+              emit(state.copyWith(
+                isSubmitting: false,
+                showErrorMessages: true,
+                authFailureOrSuccessOption: optionOf(failureOrSuccess),
+              ));
+            },
+            (login) async {
+              await authRepository.storeJWT(jwt: login.jwt);
               if (state.rememberPassword) {
-                authRepository.storeCredential(
+                await authRepository.storeCredential(
                   username: state.username,
                   password: state.password,
                 );
               } else {
-                authRepository.deleteCredential();
+                await authRepository.deleteCredential();
               }
+
+              emit(state.copyWith(
+                isSubmitting: false,
+                showErrorMessages: true,
+                username: Username(''),
+                password: Password.login(''),
+                authFailureOrSuccessOption: optionOf(failureOrSuccess),
+              ));
             },
           );
-
-          emit(state.copyWith(
-            isSubmitting: false,
-            showErrorMessages: true,
-            authFailureOrSuccessOption: optionOf(failureOrSuccess),
-          ));
         } else {
           emit(state.copyWith(showErrorMessages: true));
         }

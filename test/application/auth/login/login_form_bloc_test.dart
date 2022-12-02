@@ -290,6 +290,8 @@ void main() {
         loginFormState.copyWith(
           isSubmitting: false,
           showErrorMessages: true,
+          username: Username(''),
+          password: Password.login(''),
           authFailureOrSuccessOption: optionOf(
             Right(Login(jwt: fakeJWT)),
           ),
@@ -349,6 +351,8 @@ void main() {
           isSubmitting: false,
           showErrorMessages: true,
           rememberPassword: true,
+          username: Username(''),
+          password: Password.login(''),
           authFailureOrSuccessOption: optionOf(
             Right(Login(jwt: fakeJWT)),
           ),

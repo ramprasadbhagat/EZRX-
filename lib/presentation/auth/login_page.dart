@@ -6,10 +6,34 @@ import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    context.read<LoginFormBloc>().add(
+          const LoginFormEvent.loadLastSavedCred(),
+        );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,19 +73,23 @@ class LoginPage extends StatelessWidget {
                         : AutovalidateMode.disabled,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Spacer(),
-                        _Logo(),
-                        _SSOLoginButton(),
-                        Spacer(),
-                        _OrDivider(),
-                        Spacer(),
-                        _UsernameField(),
-                        _PasswordField(),
-                        _RememberPassword(),
-                        Spacer(),
-                        _LoginButton(),
-                        Spacer(flex: 3),
+                      children: [
+                        const Spacer(),
+                        const _Logo(),
+                        const _SSOLoginButton(),
+                        const Spacer(),
+                        const _OrDivider(),
+                        const Spacer(),
+                        _UsernameField(
+                          controller: _usernameController,
+                        ),
+                        _PasswordField(
+                          controller: _passwordController,
+                        ),
+                        const _RememberPassword(),
+                        const Spacer(),
+                        const _LoginButton(),
+                        const Spacer(flex: 3),
                         // _VersionString(),
                       ],
                     ),
@@ -139,15 +167,13 @@ class _OrDivider extends StatelessWidget {
   }
 }
 
-class _UsernameField extends StatefulWidget {
-  const _UsernameField({Key? key}) : super(key: key);
+class _UsernameField extends StatelessWidget {
+  final TextEditingController controller;
+  const _UsernameField({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
 
-  @override
-  State<_UsernameField> createState() => __UsernameFieldState();
-}
-
-class __UsernameFieldState extends State<_UsernameField> {
-  final _usernameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Visibility(
@@ -160,7 +186,7 @@ class __UsernameFieldState extends State<_UsernameField> {
               current.username.isValid(),
           listener: (context, state) {
             final username = state.username.getOrCrash();
-            _usernameController.value = TextEditingValue(
+            controller.value = TextEditingValue(
               text: username,
               selection: TextSelection.collapsed(offset: username.length),
             );
@@ -172,7 +198,7 @@ class __UsernameFieldState extends State<_UsernameField> {
             return TextFormField(
               key: const Key('loginUsernameField'),
               enabled: !state.isSubmitting,
-              controller: _usernameController,
+              controller: controller,
               keyboardType: TextInputType.emailAddress,
               autocorrect: false,
               decoration: InputDecoration(labelText: 'Username'.tr()),
@@ -193,23 +219,14 @@ class __UsernameFieldState extends State<_UsernameField> {
       ),
     );
   }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _usernameController.dispose();
-  }
 }
 
-class _PasswordField extends StatefulWidget {
-  const _PasswordField({Key? key}) : super(key: key);
-
-  @override
-  State<_PasswordField> createState() => __PasswordFieldState();
-}
-
-class __PasswordFieldState extends State<_PasswordField> {
-  final _passwordController = TextEditingController();
+class _PasswordField extends StatelessWidget {
+  final TextEditingController controller;
+  const _PasswordField({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -223,7 +240,7 @@ class __PasswordFieldState extends State<_PasswordField> {
               current.password.isValid(),
           listener: (context, state) {
             final password = state.password.getOrCrash();
-            _passwordController.value = TextEditingValue(
+            controller.value = TextEditingValue(
               text: password,
               selection: TextSelection.collapsed(offset: password.length),
             );
@@ -235,7 +252,7 @@ class __PasswordFieldState extends State<_PasswordField> {
             return TextFormField(
               key: const Key('loginPasswordField'),
               enabled: !state.isSubmitting,
-              controller: _passwordController,
+              controller: controller,
               keyboardType: TextInputType.visiblePassword,
               autocorrect: false,
               decoration: InputDecoration(
@@ -276,12 +293,6 @@ class __PasswordFieldState extends State<_PasswordField> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _passwordController.dispose();
   }
 }
 
