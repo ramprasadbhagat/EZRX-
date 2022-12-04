@@ -148,9 +148,10 @@ stages:
         targetType: 'inline'
         script: |
           fvm flutter build appbundle --flavor uat -t lib/main_uat.dart --release
+          fvm flutter build apk --flavor uat -t lib/main_browserstack.dart --debug
 
     - task: AppCenterDistribute@3
-      displayName: Upload to Microsoft Appcenter
+      displayName: Upload to Microsoft Appcenter eZRx Uat
       inputs:
         serverEndpoint: 'eZRx Uat Appcenter'
         appSlug: '$(APPCENTER_APP_SLUG_UAT)'
@@ -158,6 +159,17 @@ stages:
         destinationType: 'groups'
         destinationGroupIds: '$(APPCENTER_DESTINATION_GROUP_IDS_UAT)'
         releaseNotesInput: 'uat release'
+        isSilent: true
+
+    - task: AppCenterDistribute@3
+      displayName: Upload to Microsoft Appcenter eZRx Uat BrowserStack
+      inputs:
+        serverEndpoint: 'eZRx Uat BrowserStack Appcenter'
+        appSlug: '$(APPCENTER_APP_SLUG_UAT_BROWSERSTACK)'
+        appFile: 'build/app/outputs/apk/uat/debug/*.apk'
+        destinationType: 'groups'
+        destinationGroupIds: '$(APPCENTER_DESTINATION_GROUP_IDS_UAT_BROWSERSTACK)'
+        releaseNotesInput: 'uat debug browserstack'
         isSilent: true
 
     - task: GooglePlayRelease@4
