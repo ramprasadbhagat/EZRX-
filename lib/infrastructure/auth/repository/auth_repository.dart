@@ -337,6 +337,7 @@ class AuthRepository implements IAuthRepository {
       if (!isBioAvailable) {
         return const Left(ApiFailure.noSupportedBiometrics());
       }
+      await countlyService.addCountlyEvent('Biometric login');
 
       return const Right(true);
     } on PlatformException catch (e) {
