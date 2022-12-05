@@ -168,20 +168,24 @@ void main() {
           .thenReturn(MaterialPriceState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
       when(() => mockMaterialFilterBloc.state).thenReturn(
-          MaterialFilterState.initial().copyWith(
-              selectedMaterialFilter:
-                  MaterialFilterState.initial().selectedMaterialFilter.copyWith(
-        uniqueTherapeuticClass: [
-          'GSK Consumer Healthcare',
-          'All other non-therapeutic products',
-        ],
-      )));
+        MaterialFilterState.initial().copyWith(
+          selectedMaterialFilter:
+              MaterialFilterState.initial().selectedMaterialFilter.copyWith(
+            uniqueTherapeuticClass: [
+              'GSK Consumer Healthcare',
+              'All other non-therapeutic products',
+            ],
+          ),
+        ),
+      );
       when(() => materialListBlocMock.state)
           .thenReturn(MaterialListState.initial());
       when(() => orderDocumentTypeBlocMock.state)
           .thenReturn(OrderDocumentTypeState.initial());
       when(() => eligibilityBlocMock.state)
           .thenReturn(EligibilityState.initial());
+      when(() => shipToCodeBlocMock.state)
+          .thenReturn(ShipToCodeState.initial());
     });
 
     Widget getScopedWidget(Widget child) {
@@ -347,20 +351,16 @@ void main() {
     testWidgets(
       'Test material list search',
       (tester) async {
-        final expectedCustomerCodeListStates = [
-          MaterialListState.initial().copyWith(isFetching: true),
-          MaterialListState.initial()
-              .copyWith(isFetching: false, searchKey: SearchKey('')),
-        ];
-
-        whenListen(materialListBlocMock,
-            Stream.fromIterable(expectedCustomerCodeListStates));
         await tester.pumpWidget(getScopedWidget(
           MaterialListPage(addToCart: () {}),
         ));
+
         await tester.pumpAndSettle(const Duration(seconds: 3));
 
         expect(find.byKey(const Key('materialSearchField')), findsOneWidget);
+        final clearSearch = find.byKey(const Key('clearSearch'));
+        expect(clearSearch, findsOneWidget);
+        await tester.tap(clearSearch);
       },
     );
     testWidgets('Search input must be greater than 2 characters.',

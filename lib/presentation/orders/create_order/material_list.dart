@@ -154,9 +154,9 @@ class _BodyContent extends StatelessWidget {
                       const MaterialPriceEvent.initialized(),
                     );
 
-                context
-                    .read<MaterialFilterBloc>()
-                    .add(const MaterialFilterEvent.clearSelected());
+                context.read<MaterialFilterBloc>().add(
+                      const MaterialFilterEvent.clearSelected(),
+                    );
 
                 context.read<MaterialListBloc>().add(
                       const MaterialListEvent.updateSearchKey(searchKey: ''),
@@ -576,8 +576,14 @@ class _SearchBarState extends State<_SearchBar> {
                 isDense: true,
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: IconButton(
+                  key: const Key('clearSearch'),
                   icon: const Icon(Icons.clear),
                   onPressed: () {
+                    //To reset the filters
+                    context.read<MaterialFilterBloc>().add(
+                          const MaterialFilterEvent.clearSelected(),
+                        );
+
                     context.read<MaterialListBloc>().add(
                           const MaterialListEvent.updateSearchKey(
                             searchKey: '',
