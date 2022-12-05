@@ -20,7 +20,7 @@ mixin _$ShipToInfo {
   String get shipToCustomerCode => throw _privateConstructorUsedError;
   ShipToName get shipToName => throw _privateConstructorUsedError;
   ShipToAddress get shipToAddress => throw _privateConstructorUsedError;
-  String get status => throw _privateConstructorUsedError;
+  Status get status => throw _privateConstructorUsedError;
   String get building => throw _privateConstructorUsedError;
   String get city1 => throw _privateConstructorUsedError;
   String get city2 => throw _privateConstructorUsedError;
@@ -48,7 +48,7 @@ abstract class $ShipToInfoCopyWith<$Res> {
       String shipToCustomerCode,
       ShipToName shipToName,
       ShipToAddress shipToAddress,
-      String status,
+      Status status,
       String building,
       String city1,
       String city2,
@@ -113,7 +113,7 @@ class _$ShipToInfoCopyWithImpl<$Res, $Val extends ShipToInfo>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Status,
       building: null == building
           ? _value.building
           : building // ignore: cast_nullable_to_non_nullable
@@ -187,7 +187,7 @@ abstract class _$$_ShipToInfoCopyWith<$Res>
       String shipToCustomerCode,
       ShipToName shipToName,
       ShipToAddress shipToAddress,
-      String status,
+      Status status,
       String building,
       String city1,
       String city2,
@@ -252,7 +252,7 @@ class __$$_ShipToInfoCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Status,
       building: null == building
           ? _value.building
           : building // ignore: cast_nullable_to_non_nullable
@@ -328,7 +328,7 @@ class _$_ShipToInfo extends _ShipToInfo {
   @override
   final ShipToAddress shipToAddress;
   @override
-  final String status;
+  final Status status;
   @override
   final String building;
   @override
@@ -421,7 +421,7 @@ abstract class _ShipToInfo extends ShipToInfo {
       required final String shipToCustomerCode,
       required final ShipToName shipToName,
       required final ShipToAddress shipToAddress,
-      required final String status,
+      required final Status status,
       required final String building,
       required final String city1,
       required final String city2,
@@ -443,7 +443,7 @@ abstract class _ShipToInfo extends ShipToInfo {
   @override
   ShipToAddress get shipToAddress;
   @override
-  String get status;
+  Status get status;
   @override
   String get building;
   @override

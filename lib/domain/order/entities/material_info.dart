@@ -41,8 +41,10 @@ class MaterialInfo with _$MaterialInfo {
         governmentMaterialCode: '',
         therapeuticClass: '',
         itemBrand: '',
-        principalData:
-            const PrincipalData(principalName: '', principalCode: ''),
+        principalData: PrincipalData(
+          principalName: '',
+          principalCode: PrincipleCode(''),
+        ),
         taxClassification: MaterialTaxClassification(''),
         itemRegistrationNumber: '',
         unitOfMeasurement: '',

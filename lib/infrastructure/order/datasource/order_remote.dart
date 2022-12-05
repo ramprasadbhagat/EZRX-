@@ -4,9 +4,13 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
+import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
+import 'package:ezrxmobile/domain/order/error/order_exception.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/saved_order_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_response_dto.dart';
 
 class OrderRemoteDataSource {
   final HttpService httpService;
@@ -49,9 +53,9 @@ class OrderRemoteDataSource {
           'variables': variables,
         }),
       );
-      _savedOrderExceptionChecker(res: res);
+      _orderExceptionChecker(res: res);
       if (res.data['data']['draftOrders'] == null) {
-        throw OtherException(message: '');
+        throw const OrderException.draftOrdersDataIsEmpty();
       }
 
       return List.from(res.data['data']['draftOrders'])
@@ -78,14 +82,42 @@ class OrderRemoteDataSource {
           'variables': variables,
         }),
       );
-      _savedOrderExceptionChecker(res: res);
+      _orderExceptionChecker(res: res);
       if (res.data['data']['createDraftOrder'] == null ||
           res.data['data']['createDraftOrder']['draftorder'] == null) {
-        throw OtherException(message: '');
+        throw const OrderException.draftOrdersInCreateDraftOrderDataIsEmpty();
       }
 
       return SavedOrderDto.fromJson(res.data['data']['createDraftOrder'])
           .toDomain();
+    });
+  }
+
+  Future<SubmitOrderResponse> submitOrder({
+    required SubmitOrderDto submitOrder,
+  }) async {
+    return await exceptionHandler.handle(() async {
+      final variables = {
+        'order': submitOrder.toJson(),
+      };
+
+      final res = await httpService.request(
+        method: 'POST',
+        url: '/api/orderMutation',
+        data: jsonEncode({
+          'query': queryMutation.submitOrder(),
+          'variables': variables,
+        }),
+      );
+      _orderExceptionChecker(res: res);
+      if (res.data['data']['submitOrderTwo'] == null) {
+        throw const OrderException.submitOrderDataIsEmpty();
+      }
+      final submitOrderResponse =
+          SubmitOrderResponseDto.fromJson(res.data['data']['submitOrderTwo']);
+      _submitOrderExceptionChecker(submitOrderResponse: submitOrderResponse);
+
+      return submitOrderResponse.toDomain();
     });
   }
 
@@ -95,7 +127,7 @@ class OrderRemoteDataSource {
     return input;
   }
 
-  void _savedOrderExceptionChecker({required Response<dynamic> res}) {
+  void _orderExceptionChecker({required Response<dynamic> res}) {
     if (res.data['errors'] != null) {
       throw ServerException(message: res.data['errors'][0]['message']);
     } else if (res.statusCode != 200) {
@@ -103,6 +135,18 @@ class OrderRemoteDataSource {
         code: res.statusCode ?? 0,
         message: res.statusMessage ?? '',
       );
+    }
+  }
+
+  void _submitOrderExceptionChecker({
+    required SubmitOrderResponseDto submitOrderResponse,
+  }) {
+    if (submitOrderResponse.salesDocument.isEmpty) {
+      final msg = submitOrderResponse.messages
+          .map((e) => e.message)
+          .toList()
+          .join(', ');
+      throw OtherException(message: msg);
     }
   }
 
@@ -125,22 +169,11 @@ class OrderRemoteDataSource {
         ),
       );
 
-      _deleteOrderExceptionChecker(res: res);
+      _orderExceptionChecker(res: res);
 
       return SavedOrderDto.fromJson(
         res.data['data']['deleteDraftOrder']['draftOrder'],
       ).toDomain();
     });
-  }
-
-  void _deleteOrderExceptionChecker({required Response<dynamic> res}) {
-    if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    } else if (res.data['errors'] != null) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    }
   }
 }

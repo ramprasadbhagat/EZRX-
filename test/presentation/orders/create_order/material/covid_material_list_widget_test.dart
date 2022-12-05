@@ -289,9 +289,9 @@ void main() {
             governmentMaterialCode: '',
             therapeuticClass: 'All other non-therapeutic products',
             itemBrand: 'Item not listed in I',
-            principalData: const PrincipalData(
+            principalData: PrincipalData(
               principalName: '台灣羅氏醫療診斷設備(股)公司',
-              principalCode: '0000102004',
+              principalCode: PrincipleCode('0000102004'),
             ),
             taxClassification: MaterialTaxClassification('Product : Full Tax'),
             itemRegistrationNumber: 'NA',
@@ -370,9 +370,9 @@ void main() {
             governmentMaterialCode: '',
             therapeuticClass: 'All other non-therapeutic products',
             itemBrand: 'Item not listed in I',
-            principalData: const PrincipalData(
+            principalData: PrincipalData(
               principalName: '台灣羅氏醫療診斷設備(股)公司',
-              principalCode: '0000102004',
+              principalCode: PrincipleCode('0000102004'),
             ),
             taxClassification: MaterialTaxClassification('Product : Full Tax'),
             itemRegistrationNumber: 'NA',

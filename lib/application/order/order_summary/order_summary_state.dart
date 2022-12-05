@@ -10,6 +10,8 @@ class OrderSummaryState with _$OrderSummaryState {
     required int maxSteps,
     required int additionalDetailsStep,
     required bool isSubmitting,
+    required bool isSubmitSuccess,
+    required SubmitOrderResponse submitOrderResponse,
   }) = _OrderSummaryState;
 
   factory OrderSummaryState.initial() => OrderSummaryState(
@@ -18,5 +20,7 @@ class OrderSummaryState with _$OrderSummaryState {
         maxSteps: 5,
         additionalDetailsStep: 3,
         isSubmitting: false,
+        isSubmitSuccess: false,
+        submitOrderResponse: SubmitOrderResponse.empty(),
       );
 }

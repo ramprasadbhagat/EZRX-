@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/account/entities/ship_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/license_info.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -14,7 +15,7 @@ class ShipToInfo with _$ShipToInfo {
     required String shipToCustomerCode,
     required ShipToName shipToName,
     required ShipToAddress shipToAddress,
-    required String status,
+    required Status status,
     required String building,
     required String city1,
     required String city2,
@@ -27,23 +28,23 @@ class ShipToInfo with _$ShipToInfo {
     required List<LicenseInfo> licenses,
   }) = _ShipToInfo;
 
-  factory ShipToInfo.empty() => const ShipToInfo(
+  factory ShipToInfo.empty() => ShipToInfo(
         defaultShipToAddress: false,
         shipToCustomerCode: '',
-        shipToName: ShipToName(
+        shipToName: const ShipToName(
           name1: '',
           name2: '',
           name3: '',
           name4: '',
         ),
-        shipToAddress: ShipToAddress(
+        shipToAddress: const ShipToAddress(
           street: '',
           street2: '',
           street3: '',
           street4: '',
           street5: '',
         ),
-        status: '',
+        status: Status(''),
         postalCode: '',
         houseNumber1: '',
         region: '',

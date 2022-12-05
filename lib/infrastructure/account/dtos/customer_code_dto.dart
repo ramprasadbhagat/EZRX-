@@ -26,6 +26,7 @@ class CustomerCodeDto with _$CustomerCodeDto {
     @JsonKey(name: 'street4') required String street4,
     @JsonKey(name: 'street5') required String street5,
     @JsonKey(name: 'postalCode') required String postalCode,
+    @JsonKey(name: 'division', defaultValue: '') required String division,
     @JsonKey(name: 'customerClassification')
         required String customerClassification,
     @JsonKey(name: 'customerLocalGroup') required String customerLocalGroup,
@@ -47,12 +48,13 @@ class CustomerCodeDto with _$CustomerCodeDto {
       name2: customerCodeInfo.customerName.name2,
       name3: customerCodeInfo.customerName.name3,
       name4: customerCodeInfo.customerName.name4,
-      status: customerCodeInfo.status,
+      status: customerCodeInfo.status.getOrCrash(),
       street1: customerCodeInfo.customerAddress.street1,
       street2: customerCodeInfo.customerAddress.street2,
       street3: customerCodeInfo.customerAddress.street3,
       street4: customerCodeInfo.customerAddress.street4,
       street5: customerCodeInfo.customerAddress.street5,
+      division: customerCodeInfo.division,
       postalCode: customerCodeInfo.postalCode,
       customerClassification: customerCodeInfo.customerClassification,
       customerLocalGroup: customerCodeInfo.customerLocalGroup,
@@ -88,7 +90,8 @@ class CustomerCodeDto with _$CustomerCodeDto {
         street4: street4,
         street5: street5,
       ),
-      status: status,
+      status: Status(status),
+      division: division,
       postalCode: postalCode,
       customerClassification: customerClassification,
       customerLocalGroup: customerLocalGroup,
@@ -99,7 +102,6 @@ class CustomerCodeDto with _$CustomerCodeDto {
       customerGrp4: CustomerGrp4(customerGrp4),
       region: region,
       emailAddresses: emailAddresses.map((e) => EmailAddress(e)).toList(),
-    
     );
   }
 

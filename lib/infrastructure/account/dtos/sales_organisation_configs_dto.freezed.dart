@@ -154,6 +154,9 @@ mixin _$SalesOrganisationConfigsDto {
   @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
   @HiveField(143, defaultValue: false)
   bool get displayOrderDiscount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'minOrderAmount', defaultValue: '0')
+  @HiveField(144, defaultValue: '0')
+  String get minOrderAmount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -302,7 +305,10 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
           bool batchNumDisplay,
       @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
       @HiveField(143, defaultValue: false)
-          bool displayOrderDiscount});
+          bool displayOrderDiscount,
+      @JsonKey(name: 'minOrderAmount', defaultValue: '0')
+      @HiveField(144, defaultValue: '0')
+          String minOrderAmount});
 }
 
 /// @nodoc
@@ -363,6 +369,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
     Object? netPriceOverride = null,
     Object? batchNumDisplay = null,
     Object? displayOrderDiscount = null,
+    Object? minOrderAmount = null,
   }) {
     return _then(_value.copyWith(
       disableProcessingStatus: null == disableProcessingStatus
@@ -541,6 +548,10 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
           ? _value.displayOrderDiscount
           : displayOrderDiscount // ignore: cast_nullable_to_non_nullable
               as bool,
+      minOrderAmount: null == minOrderAmount
+          ? _value.minOrderAmount
+          : minOrderAmount // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -687,7 +698,10 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
           bool batchNumDisplay,
       @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
       @HiveField(143, defaultValue: false)
-          bool displayOrderDiscount});
+          bool displayOrderDiscount,
+      @JsonKey(name: 'minOrderAmount', defaultValue: '0')
+      @HiveField(144, defaultValue: '0')
+          String minOrderAmount});
 }
 
 /// @nodoc
@@ -747,6 +761,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? netPriceOverride = null,
     Object? batchNumDisplay = null,
     Object? displayOrderDiscount = null,
+    Object? minOrderAmount = null,
   }) {
     return _then(_$_SalesOrganisationConfigsDto(
       disableProcessingStatus: null == disableProcessingStatus
@@ -925,6 +940,10 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.displayOrderDiscount
           : displayOrderDiscount // ignore: cast_nullable_to_non_nullable
               as bool,
+      minOrderAmount: null == minOrderAmount
+          ? _value.minOrderAmount
+          : minOrderAmount // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -1066,7 +1085,10 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
           required this.batchNumDisplay,
       @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
       @HiveField(143, defaultValue: false)
-          required this.displayOrderDiscount})
+          required this.displayOrderDiscount,
+      @JsonKey(name: 'minOrderAmount', defaultValue: '0')
+      @HiveField(144, defaultValue: '0')
+          required this.minOrderAmount})
       : _principalList = principalList,
         super._();
 
@@ -1255,10 +1277,14 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
   @HiveField(143, defaultValue: false)
   final bool displayOrderDiscount;
+  @override
+  @JsonKey(name: 'minOrderAmount', defaultValue: '0')
+  @HiveField(144, defaultValue: '0')
+  final String minOrderAmount;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, ponRequired: $ponRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, ponRequired: $ponRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount)';
   }
 
   @override
@@ -1338,7 +1364,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
             (identical(other.enableTaxAtTotalLevelOnly, enableTaxAtTotalLevelOnly) || other.enableTaxAtTotalLevelOnly == enableTaxAtTotalLevelOnly) &&
             (identical(other.netPriceOverride, netPriceOverride) || other.netPriceOverride == netPriceOverride) &&
             (identical(other.batchNumDisplay, batchNumDisplay) || other.batchNumDisplay == batchNumDisplay) &&
-            (identical(other.displayOrderDiscount, displayOrderDiscount) || other.displayOrderDiscount == displayOrderDiscount));
+            (identical(other.displayOrderDiscount, displayOrderDiscount) || other.displayOrderDiscount == displayOrderDiscount) &&
+            (identical(other.minOrderAmount, minOrderAmount) || other.minOrderAmount == minOrderAmount));
   }
 
   @JsonKey(ignore: true)
@@ -1388,7 +1415,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
         enableTaxAtTotalLevelOnly,
         netPriceOverride,
         batchNumDisplay,
-        displayOrderDiscount
+        displayOrderDiscount,
+        minOrderAmount
       ]);
 
   @JsonKey(ignore: true)
@@ -1541,7 +1569,10 @@ abstract class _SalesOrganisationConfigsDto
               required final bool batchNumDisplay,
           @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
           @HiveField(143, defaultValue: false)
-              required final bool displayOrderDiscount}) =
+              required final bool displayOrderDiscount,
+          @JsonKey(name: 'minOrderAmount', defaultValue: '0')
+          @HiveField(144, defaultValue: '0')
+              required final String minOrderAmount}) =
       _$_SalesOrganisationConfigsDto;
   const _SalesOrganisationConfigsDto._() : super._();
 
@@ -1725,6 +1756,10 @@ abstract class _SalesOrganisationConfigsDto
   @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
   @HiveField(143, defaultValue: false)
   bool get displayOrderDiscount;
+  @override
+  @JsonKey(name: 'minOrderAmount', defaultValue: '0')
+  @HiveField(144, defaultValue: '0')
+  String get minOrderAmount;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsDtoCopyWith<_$_SalesOrganisationConfigsDto>

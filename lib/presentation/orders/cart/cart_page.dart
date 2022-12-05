@@ -4,9 +4,11 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
+import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -167,6 +169,26 @@ class CartPage extends StatelessWidget {
           additionalDetailsStep: additionDetailsStep,
           maxSteps: maxStep,
           step: 0,
+        ));
+    final selectedMaterialList =
+        context.read<CartBloc>().state.selectedItemsMaterialNumber;
+    context
+        .read<OrderEligibilityBloc>()
+        .add(OrderEligibilityEvent.checkMinimumOrderValue(
+          cartItems: context
+              .read<CartBloc>()
+              .state
+              .cartItemList
+              .where((element) =>
+                  selectedMaterialList.contains(element.getMaterialNumber))
+              .toList(),
+          configs: config,
+          customerCodeInfo: customerCodeInfo,
+          grandTotal: context.read<CartBloc>().state.grandTotal,
+          orderType: '',
+          salesOrg: context.read<SalesOrgBloc>().state.salesOrganisation,
+          shipInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+          user: context.read<UserBloc>().state.user,
         ));
     context.router.pushNamed('order_summary');
   }

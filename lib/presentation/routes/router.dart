@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/application/order/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/account/account_tab.dart';
 import 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
 import 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart';
@@ -51,6 +52,7 @@ import 'package:ezrxmobile/presentation/history/history_details.dart';
     AutoRoute(path: 'order_template_list_page', page: OrderTemplateListPage),
     AutoRoute(path: 'cart_page', page: CartPage),
     AutoRoute(path: 'order_summary', page: OrderSummaryPage),
+    AutoRoute(path: 'order_confirmation', page: OrderSuccessPage),
     AutoRoute(
       path: 'order_template_detail_page',
       page: OrderTemplateDetailPage,
@@ -68,7 +70,12 @@ import 'package:ezrxmobile/presentation/history/history_details.dart';
     AutoRoute(path: 'saved_order_list', page: SavedOrderListPage),
     AutoRoute(path: 'saved_order_detail', page: SavedOrderDetailPage),
     AutoRoute(path: 'history_details', page: HistoryDetails),
-    CustomRoute(path: 'bundle_item_detail', page: BundleItemDetailPage, transitionsBuilder: TransitionsBuilders.slideBottom,fullscreenDialog: true,),
+    CustomRoute(
+      path: 'bundle_item_detail',
+      page: BundleItemDetailPage,
+      transitionsBuilder: TransitionsBuilders.slideBottom,
+      fullscreenDialog: true,
+    ),
   ],
 )
 class $AppRouter {}

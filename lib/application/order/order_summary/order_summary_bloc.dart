@@ -1,6 +1,14 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/order_summary_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -46,14 +54,46 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
           step: value.step,
         ));
       },
-      submitOrder: (value) async {
+      submitOrder: (e) async {
         emit(
           state.copyWith(
             apiFailureOrSuccessOption: none(),
-            isSubmitting: false,
+            isSubmitting: true,
+            isSubmitSuccess: false,
           ),
         );
-        //TODO: Need to complete
+        final failureOrSuccess = await repository.submitOrder(
+          shipToInfo: e.shipToInfo,
+          user: e.user,
+          cartItems: e.cartItems,
+          grandTotal: e.grandTotal,
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisation: e.salesOrganisation,
+          data: e.data,
+          orderType: e.orderType,
+          configs: e.config,
+        );
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isSubmitting: false,
+                isSubmitSuccess: false,
+              ),
+            );
+          },
+          (submitOrderResponse) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: none(),
+                isSubmitting: false,
+                isSubmitSuccess: true,
+                submitOrderResponse: submitOrderResponse,
+              ),
+            );
+          },
+        );
       },
     );
   }

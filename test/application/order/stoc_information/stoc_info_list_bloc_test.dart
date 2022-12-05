@@ -39,8 +39,8 @@ void main() {
       SalesOrganisationConfigs.empty().copyWith(enableBatchNumber: false);
   final fakeMaterial = MaterialInfo.empty().copyWith(
       materialNumber: MaterialNumber('000000000023245612'),
-      principalData:
-          PrincipalData.empty().copyWith(principalCode: '0000100813'));
+      principalData: PrincipalData.empty()
+          .copyWith(principalCode: PrincipleCode('0000100813')));
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();

@@ -62,7 +62,7 @@ class CartRepository implements ICartRepository {
         'price': cartItem.price.finalPrice.getOrCrash(),
         'numItemInCart': cartStorage.cartBoxSize,
         'materialType':
-          cartItem.materialInfo.materialGroup4.getMaterialGroup4Type,
+            cartItem.materialInfo.materialGroup4.getMaterialGroup4Type,
       });
 
       return fetchCartItems();
@@ -360,7 +360,8 @@ class CartRepository implements ICartRepository {
             ? await stockInfoRemoteDataSource.getStockInfoList(
                 materialNumber: material.materialNumber.getOrCrash(),
                 plant: shipToInfo.plant,
-                principalCode: material.principalData.principalCode,
+                principalCode:
+                    material.principalData.principalCode.getOrCrash(),
                 salesOrg: salesOrganisation.salesOrg.getOrCrash(),
                 selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
               )
@@ -368,7 +369,8 @@ class CartRepository implements ICartRepository {
                 await stockInfoRemoteDataSource.getStockInfo(
                   materialNumber: material.materialNumber.getOrCrash(),
                   plant: shipToInfo.plant,
-                  principalCode: material.principalData.principalCode,
+                  principalCode:
+                      material.principalData.principalCode.getOrCrash(),
                   salesOrg: salesOrganisation.salesOrg.getOrCrash(),
                   selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
                 ),

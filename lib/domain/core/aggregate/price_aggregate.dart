@@ -1,12 +1,13 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -50,6 +51,17 @@ class PriceAggregate with _$PriceAggregate {
       hasValidTenderContract: materialInfo.hasValidTenderContract,
       taxClassification: materialInfo.taxClassification,
       type: '',
+    );
+  }
+
+  SubmitMaterialInfo toSubmitMaterialInfo() {
+    return SubmitMaterialInfo(
+      batch: stockInfo.batch,
+      bonuses: <MaterialItemBonus>[],
+      comment: '',
+      materialNumber: materialInfo.materialNumber,
+      quantity: quantity,
+      salesDistrict: stockInfo.salesDistrict,
     );
   }
 
@@ -293,6 +305,14 @@ class PriceAggregate with _$PriceAggregate {
       !materialInfo.materialGroup4.isFOC &&
       !materialInfo.hidePrice &&
       (salesOrgConfig.netPriceOverride || price.additionalBonusEligible);
+  bool get hasSalesRepPrinciple {
+    return materialInfo.principalData.principalCode
+        .isSubmitAllowedForSalesRep();
+  }
+
+  bool get hasClientPrinciple {
+    return materialInfo.principalData.principalCode.isSubmitAllowedForClient();
+  }
 }
 
 enum PriceType {

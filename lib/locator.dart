@@ -20,6 +20,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/download_attachment/bloc/download_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
@@ -317,6 +318,10 @@ void setupLocator() {
     () => OrderSummaryBloc(repository: locator<OrderRepository>()),
   );
 
+  locator.registerLazySingleton(
+    () => OrderEligibilityBloc(repository: locator<OrderRepository>()),
+  );
+
   //============================================================
   //  User
   //
@@ -587,7 +592,6 @@ void setupLocator() {
     ),
   );
 
-
   //============================================================
   //  Announcement
   //
@@ -853,7 +857,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => OrderHistoryFilterBloc(),
   );
-   //============================================================
+  //============================================================
   //  Order History Filter By Status
   //
   //============================================================

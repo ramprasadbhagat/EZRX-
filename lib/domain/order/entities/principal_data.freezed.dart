@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$PrincipalData {
   String get principalName => throw _privateConstructorUsedError;
-  String get principalCode => throw _privateConstructorUsedError;
+  PrincipleCode get principalCode => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PrincipalDataCopyWith<PrincipalData> get copyWith =>
@@ -30,7 +30,7 @@ abstract class $PrincipalDataCopyWith<$Res> {
           PrincipalData value, $Res Function(PrincipalData) then) =
       _$PrincipalDataCopyWithImpl<$Res, PrincipalData>;
   @useResult
-  $Res call({String principalName, String principalCode});
+  $Res call({String principalName, PrincipleCode principalCode});
 }
 
 /// @nodoc
@@ -57,7 +57,7 @@ class _$PrincipalDataCopyWithImpl<$Res, $Val extends PrincipalData>
       principalCode: null == principalCode
           ? _value.principalCode
           : principalCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PrincipleCode,
     ) as $Val);
   }
 }
@@ -70,7 +70,7 @@ abstract class _$$_PrincipalDataCopyWith<$Res>
       __$$_PrincipalDataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String principalName, String principalCode});
+  $Res call({String principalName, PrincipleCode principalCode});
 }
 
 /// @nodoc
@@ -95,7 +95,7 @@ class __$$_PrincipalDataCopyWithImpl<$Res>
       principalCode: null == principalCode
           ? _value.principalCode
           : principalCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PrincipleCode,
     ));
   }
 }
@@ -110,7 +110,7 @@ class _$_PrincipalData extends _PrincipalData {
   @override
   final String principalName;
   @override
-  final String principalCode;
+  final PrincipleCode principalCode;
 
   @override
   String toString() {
@@ -141,13 +141,13 @@ class _$_PrincipalData extends _PrincipalData {
 abstract class _PrincipalData extends PrincipalData {
   const factory _PrincipalData(
       {required final String principalName,
-      required final String principalCode}) = _$_PrincipalData;
+      required final PrincipleCode principalCode}) = _$_PrincipalData;
   const _PrincipalData._() : super._();
 
   @override
   String get principalName;
   @override
-  String get principalCode;
+  PrincipleCode get principalCode;
   @override
   @JsonKey(ignore: true)
   _$$_PrincipalDataCopyWith<_$_PrincipalData> get copyWith =>

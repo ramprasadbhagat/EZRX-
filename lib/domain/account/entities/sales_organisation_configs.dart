@@ -43,7 +43,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool showPOAttachment,
     required bool hideStockDisplay,
     required bool expiryDateDisplay,
-     required bool batchNumDisplay,
+    required bool batchNumDisplay,
     required bool addOosMaterials,
     required OosValue oosValue,
     required bool enableRemarks,
@@ -52,6 +52,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool enableTaxDisplay,
     required bool netPriceOverride,
     required bool displayOrderDiscount,
+    required String minOrderAmount,
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
@@ -97,8 +98,9 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         ponRequired: false,
         enableTaxDisplay: false,
         netPriceOverride: false,
-        batchNumDisplay:false,
-        displayOrderDiscount:false,
+        batchNumDisplay: false,
+        displayOrderDiscount: false,
+        minOrderAmount: '0',
       );
 
   String get getConfigLangauge {

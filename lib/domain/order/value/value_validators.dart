@@ -13,3 +13,11 @@ bool materialTaxClassificationIsExempt(String taxClassification) {
 bool materialTaxClassificationIsFullTax(String taxClassification) {
   return taxClassification == 'Product : Full Tax';
 }
+
+bool havingSubmitPrincipleForClient(String principleCode) {
+  return principleCode == '100822';
+}
+
+bool havingSubmitPrincipleForSalesRep(String principleCode) {
+  return principleCode == '100225';
+}

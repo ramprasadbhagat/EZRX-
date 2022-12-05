@@ -133,7 +133,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
     @HiveField(139, defaultValue: false)
         required bool enableTaxDisplay,
-          @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
+    @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
     @HiveField(140, defaultValue: false)
         required bool enableTaxAtTotalLevelOnly,
     @JsonKey(name: 'netPriceOverride', defaultValue: false)
@@ -145,6 +145,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
     @HiveField(143, defaultValue: false)
         required bool displayOrderDiscount,
+    @JsonKey(name: 'minOrderAmount', defaultValue: '0')
+    @HiveField(144, defaultValue: '0')
+        required String minOrderAmount,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -194,7 +197,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableTaxDisplay: configs.enableTaxDisplay,
       netPriceOverride: configs.netPriceOverride,
       batchNumDisplay: configs.batchNumDisplay,
-      displayOrderDiscount:configs.displayOrderDiscount,
+      displayOrderDiscount: configs.displayOrderDiscount,
+      minOrderAmount: configs.minOrderAmount,
     );
   }
 
@@ -243,7 +247,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableTaxDisplay: enableTaxDisplay,
       netPriceOverride: netPriceOverride,
       batchNumDisplay: batchNumDisplay,
-      displayOrderDiscount:displayOrderDiscount,
+      displayOrderDiscount: displayOrderDiscount,
+      minOrderAmount: minOrderAmount,
     );
   }
 

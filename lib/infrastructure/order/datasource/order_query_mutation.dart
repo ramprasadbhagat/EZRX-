@@ -42,4 +42,18 @@ class OrderQueryMutation {
     }
     ''';
   }
+
+  String submitOrder() {
+    return '''
+    mutation submitOrderMutation(\$order: NewOrderTwoInput!){
+      submitOrderTwo(order: \$order) {
+        SalesDocument
+        Messages {
+          Type
+          Message
+        }
+      }
+    }
+    ''';
+  }
 }

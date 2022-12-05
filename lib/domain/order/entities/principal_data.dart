@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'principal_data.freezed.dart';
@@ -8,11 +9,11 @@ class PrincipalData with _$PrincipalData {
 
   const factory PrincipalData({
     required String principalName,
-    required String principalCode,
+    required PrincipleCode principalCode,
   }) = _PrincipalData;
 
-  factory PrincipalData.empty() => const PrincipalData(
-    principalName: '',
-    principalCode: '',
-  );
+  factory PrincipalData.empty() => PrincipalData(
+        principalName: '',
+        principalCode: PrincipleCode(''),
+      );
 }

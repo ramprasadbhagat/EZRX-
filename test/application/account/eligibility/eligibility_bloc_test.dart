@@ -76,8 +76,9 @@ void main() {
     ponRequired: false,
     enableTaxDisplay: false,
     netPriceOverride: false,
-    batchNumDisplay:false,
-    displayOrderDiscount:false,
+    batchNumDisplay: false,
+    displayOrderDiscount: false,
+    minOrderAmount: '0',
   );
 
   group('Eligibility Bloc', () {

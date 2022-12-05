@@ -16,7 +16,8 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
     required String customerCodeSoldTo,
     required CustomerName customerName,
     required CustomerAddress customerAddress,
-    required String status,
+    required Status status,
+    required String division,
     required String postalCode,
     required String customerClassification,
     required String customerLocalGroup,
@@ -44,7 +45,8 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
           street4: '',
           street5: '',
         ),
-        status: '',
+        status: Status(''),
+        division: '',
         postalCode: '',
         customerClassification: '',
         customerLocalGroup: '',
@@ -57,8 +59,8 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
         emailAddresses: <EmailAddress>[],
       );
 
-      String get customerEmailAddress {
-       return emailAddresses.isNotEmpty
+  String get customerEmailAddress {
+    return emailAddresses.isNotEmpty
         ? emailAddresses.first.value.getOrElse(() => 'NA')
         : 'NA';
   }

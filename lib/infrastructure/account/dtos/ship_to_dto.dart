@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/account/entities/ship_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/license_info.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/license_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -45,7 +46,7 @@ class ShipToDto with _$ShipToDto {
       name2: shipToInfo.shipToName.name2,
       name3: shipToInfo.shipToName.name3,
       name4: shipToInfo.shipToName.name4,
-      status: shipToInfo.status,
+      status: shipToInfo.status.getOrCrash(),
       street: shipToInfo.shipToAddress.street,
       street2: shipToInfo.shipToAddress.street2,
       street3: shipToInfo.shipToAddress.street3,
@@ -75,7 +76,7 @@ class ShipToDto with _$ShipToDto {
         name3: name3,
         name4: name4,
       ),
-      status: status,
+      status: Status(status),
       shipToAddress: ShipToAddress(
         street: street,
         street2: street2,

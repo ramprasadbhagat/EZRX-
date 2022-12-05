@@ -1,7 +1,10 @@
 import 'dart:convert';
 
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
+import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/saved_order_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_response_dto.dart';
 import 'package:flutter/services.dart';
 
 class OrderLocalDataSource {
@@ -37,5 +40,17 @@ class OrderLocalDataSource {
     );
 
     return SavedOrderDto.fromJson(data['data']['createDraftOrder']).toDomain();
+  }
+
+  Future<SubmitOrderResponse> submitOrder({
+    required SubmitOrderDto submitOrder,
+  }) async {
+    await Future.delayed(const Duration(seconds: 5));
+    final data = json.decode(
+      await rootBundle.loadString('assets/json/submitOrderResponse.json'),
+    );
+
+    return SubmitOrderResponseDto.fromJson(data['data']['submitOrderTwo'])
+        .toDomain();
   }
 }

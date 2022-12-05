@@ -20,6 +20,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/download_attachment/bloc/download_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
@@ -226,8 +227,7 @@ class App extends StatelessWidget {
           create: (context) => locator<CovidMaterialListBloc>(),
         ),
         BlocProvider<CartBloc>(
-          create: (context) =>
-              locator<CartBloc>(),
+          create: (context) => locator<CartBloc>(),
         ),
         BlocProvider<PriceOverrideBloc>(
           create: (context) => locator<PriceOverrideBloc>(),
@@ -249,6 +249,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<OrderHistoryFilterByStatusBloc>(
           create: (context) => locator<OrderHistoryFilterByStatusBloc>(),
+        ),
+        BlocProvider<OrderEligibilityBloc>(
+          create: (context) => locator<OrderEligibilityBloc>(),
         ),
       ],
       child: MaterialApp.router(

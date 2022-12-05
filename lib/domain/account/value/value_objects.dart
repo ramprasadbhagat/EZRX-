@@ -190,3 +190,24 @@ class CustomerGrp4 extends ValueObject<String> {
 
   const CustomerGrp4._(this.value);
 }
+
+class Status extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory Status(String input) {
+    return Status._(validateStringNotEmpty(input));
+  }
+
+  bool get isContain01 {
+    return value.getOrElse(() => '').contains('01');
+  }
+
+  bool get isContainZ1 {
+    return value.getOrElse(() => '').contains('Z1');
+  }
+
+  bool get isSuspended => isContain01 || isContainZ1;
+
+  const Status._(this.value);
+}

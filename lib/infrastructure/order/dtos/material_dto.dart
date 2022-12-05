@@ -92,7 +92,7 @@ class MaterialDto with _$MaterialDto {
       therapeuticClass: materialInfo.therapeuticClass,
       itemBrand: materialInfo.itemBrand,
       principalName: materialInfo.principalData.principalName,
-      principalCode: materialInfo.principalData.principalCode,
+      principalCode: materialInfo.principalData.principalCode.getOrCrash(),
       taxClassification: materialInfo.taxClassification.getOrCrash(),
       itemRegistrationNumber: materialInfo.itemRegistrationNumber,
       unitOfMeasurement: materialInfo.unitOfMeasurement,
@@ -119,7 +119,7 @@ class MaterialDto with _$MaterialDto {
       itemBrand: itemBrand,
       principalData: PrincipalData(
         principalName: principalName,
-        principalCode: principalCode,
+        principalCode: PrincipleCode(principalCode),
       ),
       taxClassification: MaterialTaxClassification(taxClassification),
       itemRegistrationNumber: itemRegistrationNumber,

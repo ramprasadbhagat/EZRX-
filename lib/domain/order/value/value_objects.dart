@@ -271,6 +271,7 @@ class BonusMaterialCalculation extends ValueObject<String> {
 
   const BonusMaterialCalculation._(this.value);
 }
+
 class OrderItemType extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -279,11 +280,36 @@ class OrderItemType extends ValueObject<String> {
     return OrderItemType._(validateStringNotEmpty(input));
   }
 
-    bool get isMaterialTypeComm {
-
+  bool get isMaterialTypeComm {
     return checkMatrialType(value.getOrElse(() => ''));
-
   }
 
   const OrderItemType._(this.value);
+}
+
+class PrincipleCode extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory PrincipleCode(String input) {
+    return PrincipleCode._(validateStringNotEmpty(input));
+  }
+
+  const PrincipleCode._(this.value);
+
+  bool isSubmitAllowedForClient() {
+    return havingSubmitPrincipleForClient(
+      removeLeadingZero(
+        value.getOrElse(() => ''),
+      ),
+    );
+  }
+
+  bool isSubmitAllowedForSalesRep() {
+    return havingSubmitPrincipleForSalesRep(
+      removeLeadingZero(
+        value.getOrElse(() => ''),
+      ),
+    );
+  }
 }

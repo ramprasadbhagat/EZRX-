@@ -69,13 +69,14 @@ class SalesOrganisationConfigsDtoAdapter
       netPriceOverride: fields[141] == null ? false : fields[141] as bool,
       batchNumDisplay: fields[142] == null ? false : fields[142] as bool,
       displayOrderDiscount: fields[143] == null ? false : fields[143] as bool,
+      minOrderAmount: fields[144] == null ? '0' : fields[144] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_SalesOrganisationConfigsDto obj) {
     writer
-      ..writeByte(44)
+      ..writeByte(45)
       ..writeByte(100)
       ..write(obj.disableProcessingStatus)
       ..writeByte(101)
@@ -162,6 +163,8 @@ class SalesOrganisationConfigsDtoAdapter
       ..write(obj.batchNumDisplay)
       ..writeByte(143)
       ..write(obj.displayOrderDiscount)
+      ..writeByte(144)
+      ..write(obj.minOrderAmount)
       ..writeByte(7)
       ..write(obj.principalList);
   }
@@ -234,6 +237,7 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       netPriceOverride: json['netPriceOverride'] as bool? ?? false,
       batchNumDisplay: json['batchNumDisplay'] as bool? ?? false,
       displayOrderDiscount: json['displayOrderDiscount'] as bool? ?? false,
+      minOrderAmount: json['minOrderAmount'] as String? ?? '0',
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -284,4 +288,5 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'netPriceOverride': instance.netPriceOverride,
       'batchNumDisplay': instance.batchNumDisplay,
       'displayOrderDiscount': instance.displayOrderDiscount,
+      'minOrderAmount': instance.minOrderAmount,
     };

@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
@@ -72,6 +73,10 @@ class OrderDocumentTypeBlocMock
     extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
     implements OrderDocumentTypeBloc {}
 
+class OrderEligibilityBlocMock
+    extends MockBloc<OrderEligibilityEvent, OrderEligibilityState>
+    implements OrderEligibilityBloc {}
+
 class AutoRouterMock extends Mock implements AppRouter {}
 
 void main() {
@@ -88,6 +93,7 @@ void main() {
   late PaymentTermBloc paymentTermBlocMock;
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late AppRouter autoRouterMock;
+  late OrderEligibilityBlocMock orderEligibilityBlocMock;
   setUpAll(
     () {
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
@@ -109,6 +115,7 @@ void main() {
       materialPriceBlocMock = MaterialPriceBlocMock();
       paymentTermBlocMock = PaymentTermBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
+      orderEligibilityBlocMock = OrderEligibilityBlocMock();
       autoRouterMock = locator<AppRouter>();
 
       when(() => orderSummaryBlocMock.state)
@@ -131,6 +138,13 @@ void main() {
           ShipToInfo.empty().copyWith(),
         ]),
       ));
+      when(
+        () => orderEligibilityBlocMock.state,
+      ).thenReturn(
+        OrderEligibilityState.initial().copyWith(
+          eligibleForOrderSubmit: true,
+        ),
+      );
       when(() => salesOrgBlocMock.state)
           .thenReturn(SalesOrgState.initial().copyWith(
         configs: SalesOrganisationConfigs.empty().copyWith(
@@ -188,6 +202,8 @@ void main() {
                 create: (context) => paymentTermBlocMock),
             BlocProvider<OrderDocumentTypeBloc>(
                 create: (context) => orderDocumentTypeBlocMock),
+            BlocProvider<OrderEligibilityBloc>(
+                create: (context) => orderEligibilityBlocMock),
           ],
           child: const OrderSummaryPage(),
         );
@@ -321,6 +337,13 @@ void main() {
             OrderSummaryState.initial().copyWith(
               step: 5,
               maxSteps: 5,
+            ),
+          );
+          when(
+            () => orderEligibilityBlocMock.state,
+          ).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+              eligibleForOrderSubmit: true,
             ),
           );
           tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);

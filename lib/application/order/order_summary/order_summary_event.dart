@@ -12,5 +12,15 @@ class OrderSummaryEvent with _$OrderSummaryEvent {
   const factory OrderSummaryEvent.stepTapped({
     required int step,
   }) = _StepTapped;
-  const factory OrderSummaryEvent.submitOrder() = _SubmitOrder;
+  const factory OrderSummaryEvent.submitOrder({
+    required ShipToInfo shipToInfo,
+    required User user,
+    required List<PriceAggregate> cartItems,
+    required double grandTotal,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
+    required Map<AdditionalInfoLabelList, String> data,
+    required String orderType,
+    required SalesOrganisationConfigs config,
+  }) = _SubmitOrder;
 }

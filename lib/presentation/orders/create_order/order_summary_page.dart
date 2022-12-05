@@ -8,12 +8,18 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
+import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
@@ -223,6 +229,38 @@ class _Stepper extends StatelessWidget {
         );
   }
 
+  void _submitOrder({
+    required List<PriceAggregate> cartItems,
+    required User user,
+    required double grandTotal,
+    required BuildContext context,
+    required OrderSummaryState state,
+  }) {
+    if (_performFormAction()) {
+      context.read<OrderSummaryBloc>().add(
+            OrderSummaryEvent.submitOrder(
+              shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+              customerCodeInfo:
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
+              salesOrganisation:
+                  context.read<SalesOrgBloc>().state.salesOrganisation,
+              user: context.read<UserBloc>().state.user,
+              cartItems: context.read<CartBloc>().state.cartItemList,
+              grandTotal: context.read<CartBloc>().state.grandTotal,
+              data: data,
+              orderType: '',
+              config: context.read<SalesOrgBloc>().state.configs,
+            ),
+          );
+    } else {
+      context.read<OrderSummaryBloc>().add(
+            OrderSummaryEvent.stepTapped(
+              step: state.additionalDetailsStep,
+            ),
+          );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final customerCodeInfo =
@@ -232,25 +270,43 @@ class _Stepper extends StatelessWidget {
         : BillToInfo.empty();
 
     return BlocConsumer<OrderSummaryBloc, OrderSummaryState>(
-      listenWhen: (previous, current) => previous != current,
+      listenWhen: (previous, current) =>
+          previous.isSubmitting != current.isSubmitting,
       listener: (context, orderSummaryState) {
-        orderSummaryState.apiFailureOrSuccessOption.fold(
-          () {},
-          (either) => either.fold(
-            (failure) {
-              final failureMessage = failure.toString();
-              showSnackBar(
-                context: context,
-                message: failureMessage.tr(),
-              );
-            },
-            (_) {},
-          ),
-        );
+        if (orderSummaryState.isSubmitSuccess) {
+          context.read<OrderHistoryListBloc>().add(OrderHistoryListEvent.fetch(
+                salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+                customerCodeInfo: customerCodeInfo,
+                shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                user: context.read<UserBloc>().state.user,
+                orderHistoryFilter: context
+                    .read<OrderHistoryFilterBloc>()
+                    .state
+                    .orderHistoryFilterList,
+              ));
+          context.read<CartBloc>().add(const CartEvent.clearCart());
+          context.router.pushNamed('order_confirmation');
+        } else {
+          orderSummaryState.apiFailureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) {
+                final failureMessage = failure.toString();
+                showSnackBar(
+                  context: context,
+                  message: failureMessage.tr(),
+                );
+              },
+              (_) {},
+            ),
+          );
+        }
       },
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         final config = context.read<SalesOrgBloc>().state.configs;
+        final eligibleForOrderSubmit =
+            context.read<OrderEligibilityBloc>().state.eligibleForOrderSubmit;
 
         return Stepper(
           margin: const EdgeInsets.fromLTRB(50, 10, 10, 10),
@@ -264,17 +320,26 @@ class _Stepper extends StatelessWidget {
                     key: Key(details.currentStep == state.maxSteps
                         ? 'submitButtonKey'
                         : 'continueButtonKey'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: details.currentStep == state.maxSteps
+                          ? eligibleForOrderSubmit
+                              ? ZPColors.primary
+                              : ZPColors.lightGray
+                          : ZPColors.primary,
+                    ),
                     onPressed: () {
                       if (details.currentStep == state.maxSteps) {
-                        _performFormAction()
-                            ? context.read<OrderSummaryBloc>().add(
-                                  const OrderSummaryEvent.submitOrder(),
-                                )
-                            : context.read<OrderSummaryBloc>().add(
-                                  OrderSummaryEvent.stepTapped(
-                                    step: state.additionalDetailsStep,
-                                  ),
-                                );
+                        if (eligibleForOrderSubmit) {
+                          _submitOrder(
+                            cartItems:
+                                context.read<CartBloc>().state.cartItemList,
+                            user: context.read<UserBloc>().state.user,
+                            grandTotal:
+                                context.read<CartBloc>().state.grandTotal,
+                            context: context,
+                            state: state,
+                          );
+                        }
                       } else {
                         final shouldStepContinue =
                             details.currentStep == state.additionalDetailsStep
@@ -288,7 +353,10 @@ class _Stepper extends StatelessWidget {
                       }
                     },
                     child: details.currentStep == state.maxSteps
-                        ? const Text('Submit').tr()
+                        ? LoadingShimmer.withChild(
+                            enabled: state.isSubmitting,
+                            child: const Text('Submit').tr(),
+                          )
                         : const Text('Continue').tr(),
                   ),
                   ElevatedButton(
@@ -327,49 +395,66 @@ class _Stepper extends StatelessWidget {
                 .add(OrderSummaryEvent.stepTapped(step: step));
           },
           currentStep: context.read<OrderSummaryBloc>().state.step,
-          steps: [
-            Step(
-              title: Text('Customer Details'.tr()),
-              content: const _CustomerDetailsStep(),
-            ),
-            Step(
-              title: Text('Sold to Address'.tr()),
-              content: const SoldToAddressInfo(),
-            ),
-            Step(
-              title: Text('Ship to Address'.tr()),
-              content: const ShipToAddressInfo(),
-            ),
-            if (config.enableBillTo &&
-                billToInfo.billToCustomerCode.isNotEmpty &&
-                billToInfo.billToCustomerCode !=
-                    customerCodeInfo.customerCodeSoldTo)
-              Step(
-                title: Text('Bill to Address'.tr()),
-                content: _BillToCustomerStep(
-                  billToInfo: billToInfo,
-                ),
-              ),
-            Step(
-              title: Text('Additional Information'.tr()),
-              content: _AdditionalInformationStep(
-                saveData: _saveAdditionalInformation,
-                validateData: _validateAdditionalInformation,
-              ),
-            ),
-            Step(
-              title: Text('Disclaimer'.tr()),
-              content: const _Disclaimer(),
-            ),
-            Step(
-              title: Text('Cart Details'.tr()),
-              content: const _CartDetails(),
-            ),
-          ],
+          steps: _getSteps(
+            context: context,
+            config: config,
+            billToInfo: billToInfo,
+            customerCodeInfo: customerCodeInfo,
+            savedFunction: _saveAdditionalInformation,
+            validateFunction: _validateAdditionalInformation,
+          ),
         );
       },
     );
   }
+}
+
+List<Step> _getSteps({
+  required BuildContext context,
+  required SalesOrganisationConfigs config,
+  required BillToInfo billToInfo,
+  required CustomerCodeInfo customerCodeInfo,
+  required Function savedFunction,
+  required Function validateFunction,
+}) {
+  return [
+    Step(
+      title: Text('Customer Details'.tr()),
+      content: const _CustomerDetailsStep(),
+    ),
+    Step(
+      title: Text('Sold to Address'.tr()),
+      content: const SoldToAddressInfo(),
+    ),
+    Step(
+      title: Text('Ship to Address'.tr()),
+      content: const ShipToAddressInfo(),
+    ),
+    if (config.enableBillTo &&
+        billToInfo.billToCustomerCode.isNotEmpty &&
+        billToInfo.billToCustomerCode != customerCodeInfo.customerCodeSoldTo)
+      Step(
+        title: Text('Bill to Address'.tr()),
+        content: _BillToCustomerStep(
+          billToInfo: billToInfo,
+        ),
+      ),
+    Step(
+      title: Text('Additional Information'.tr()),
+      content: _AdditionalInformationStep(
+        saveData: savedFunction,
+        validateData: validateFunction,
+      ),
+    ),
+    Step(
+      title: Text('Disclaimer'.tr()),
+      content: const _Disclaimer(),
+    ),
+    Step(
+      title: Text('Cart Details'.tr()),
+      content: const _CartDetails(),
+    ),
+  ];
 }
 
 class _OrderSummaryDetails {
@@ -554,11 +639,13 @@ class _AdditionalInformationStep extends StatelessWidget {
                           .state
                           .configs
                           .futureDeliveryDay,
+                      saveData: saveData,
                     )
                   : const SizedBox.shrink(),
               state.configs.enablePaymentTerms
                   ? _PaymentTerm(
                       validateData: validateData,
+                      saveData: saveData,
                     )
                   : const SizedBox.shrink(),
               //OrderType
@@ -623,6 +710,8 @@ class _CartDetails extends StatelessWidget {
       builder: (context, state) {
         final salesOrgConfig = context.read<SalesOrgBloc>().state.configs;
         final taxCode = context.read<SalesOrgBloc>().state.salesOrg.taxCode;
+        final selectedMaterialList =
+            context.read<CartBloc>().state.selectedItemsMaterialNumber;
 
         return Column(
           children: [
@@ -649,6 +738,13 @@ class _CartDetails extends StatelessWidget {
                   )
                 : const SizedBox.shrink(),
             BalanceTextRow(
+              keyText: 'Min. Order Value'.tr(),
+              valueText: StringUtils.displayPrice(
+                salesOrgConfig,
+                double.parse(salesOrgConfig.minOrderAmount),
+              ),
+            ),
+            BalanceTextRow(
               keyText: 'Grand Total'.tr(),
               valueText: StringUtils.displayPrice(
                 salesOrgConfig,
@@ -661,10 +757,13 @@ class _CartDetails extends StatelessWidget {
             ...state.displayCartItems.map((item) {
               switch (item.itemType) {
                 case CartItemType.material:
-                  return CartMaterialItemTile(
-                    cartItem: item.materials.first,
-                    taxCode: taxCode,
-                  );
+                  return selectedMaterialList
+                          .contains(item.materials.first.getMaterialNumber)
+                      ? CartMaterialItemTile(
+                          cartItem: item.materials.first,
+                          taxCode: taxCode,
+                        )
+                      : const SizedBox.shrink();
                 case CartItemType.bundle:
                   return CartBundleItemTile(
                     cartItem: item,
@@ -741,7 +840,11 @@ class _TextFormField extends StatelessWidget {
 
 class _PaymentTerm extends StatefulWidget {
   final Function validateData;
-  const _PaymentTerm({required this.validateData});
+  final Function saveData;
+  const _PaymentTerm({
+    required this.validateData,
+    required this.saveData,
+  });
 
   @override
   State<_PaymentTerm> createState() => _PaymentTermState();
@@ -752,7 +855,8 @@ class _PaymentTermState extends State<_PaymentTerm> {
 
   @override
   void initState() {
-    _controller = TextEditingController();
+    _controller =
+        TextEditingController(text: data[AdditionalInfoLabelList.paymentTerm]);
     super.initState();
   }
 
@@ -772,6 +876,9 @@ class _PaymentTermState extends State<_PaymentTerm> {
         return TextFormField(
           key: const Key('_paymentTermTextKey'),
           controller: _controller,
+          onSaved: (value) {
+            widget.saveData(value, AdditionalInfoLabelList.paymentTerm);
+          },
           validator: (value) {
             return widget.validateData(
               value,
@@ -827,9 +934,10 @@ class _PaymentTermState extends State<_PaymentTerm> {
 
 class _DatePickerField extends StatefulWidget {
   final String futureDeliveryDay;
-
+  final Function saveData;
   const _DatePickerField({
     required this.futureDeliveryDay,
+    required this.saveData,
     Key? key,
   }) : super(key: key);
 
@@ -877,6 +985,9 @@ class _DatePickerFieldState extends State<_DatePickerField> {
               enabled: true,
               keyboardType: TextInputType.datetime,
               controller: controller,
+              onSaved: (value) {
+                widget.saveData(value, AdditionalInfoLabelList.deliveryDate);
+              },
               decoration: InputDecoration(
                 labelText: 'Requested Delivery Date'.tr(),
                 // labelStyle: const TextStyle(fontSize: 12.0),

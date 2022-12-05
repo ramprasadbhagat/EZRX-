@@ -19,7 +19,8 @@ mixin _$CustomerCodeInfo {
   String get customerCodeSoldTo => throw _privateConstructorUsedError;
   CustomerName get customerName => throw _privateConstructorUsedError;
   CustomerAddress get customerAddress => throw _privateConstructorUsedError;
-  String get status => throw _privateConstructorUsedError;
+  Status get status => throw _privateConstructorUsedError;
+  String get division => throw _privateConstructorUsedError;
   String get postalCode => throw _privateConstructorUsedError;
   String get customerClassification => throw _privateConstructorUsedError;
   String get customerLocalGroup => throw _privateConstructorUsedError;
@@ -46,7 +47,8 @@ abstract class $CustomerCodeInfoCopyWith<$Res> {
       {String customerCodeSoldTo,
       CustomerName customerName,
       CustomerAddress customerAddress,
-      String status,
+      Status status,
+      String division,
       String postalCode,
       String customerClassification,
       String customerLocalGroup,
@@ -79,6 +81,7 @@ class _$CustomerCodeInfoCopyWithImpl<$Res, $Val extends CustomerCodeInfo>
     Object? customerName = null,
     Object? customerAddress = null,
     Object? status = null,
+    Object? division = null,
     Object? postalCode = null,
     Object? customerClassification = null,
     Object? customerLocalGroup = null,
@@ -106,6 +109,10 @@ class _$CustomerCodeInfoCopyWithImpl<$Res, $Val extends CustomerCodeInfo>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
+              as Status,
+      division: null == division
+          ? _value.division
+          : division // ignore: cast_nullable_to_non_nullable
               as String,
       postalCode: null == postalCode
           ? _value.postalCode
@@ -179,7 +186,8 @@ abstract class _$$_CustomerCodeInfoCopyWith<$Res>
       {String customerCodeSoldTo,
       CustomerName customerName,
       CustomerAddress customerAddress,
-      String status,
+      Status status,
+      String division,
       String postalCode,
       String customerClassification,
       String customerLocalGroup,
@@ -212,6 +220,7 @@ class __$$_CustomerCodeInfoCopyWithImpl<$Res>
     Object? customerName = null,
     Object? customerAddress = null,
     Object? status = null,
+    Object? division = null,
     Object? postalCode = null,
     Object? customerClassification = null,
     Object? customerLocalGroup = null,
@@ -239,6 +248,10 @@ class __$$_CustomerCodeInfoCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
+              as Status,
+      division: null == division
+          ? _value.division
+          : division // ignore: cast_nullable_to_non_nullable
               as String,
       postalCode: null == postalCode
           ? _value.postalCode
@@ -292,6 +305,7 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
       required this.customerName,
       required this.customerAddress,
       required this.status,
+      required this.division,
       required this.postalCode,
       required this.customerClassification,
       required this.customerLocalGroup,
@@ -314,7 +328,9 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
   @override
   final CustomerAddress customerAddress;
   @override
-  final String status;
+  final Status status;
+  @override
+  final String division;
   @override
   final String postalCode;
   @override
@@ -353,7 +369,7 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
 
   @override
   String toString() {
-    return 'CustomerCodeInfo(customerCodeSoldTo: $customerCodeSoldTo, customerName: $customerName, customerAddress: $customerAddress, status: $status, postalCode: $postalCode, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, emailAddresses: $emailAddresses, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region)';
+    return 'CustomerCodeInfo(customerCodeSoldTo: $customerCodeSoldTo, customerName: $customerName, customerAddress: $customerAddress, status: $status, division: $division, postalCode: $postalCode, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, emailAddresses: $emailAddresses, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region)';
   }
 
   @override
@@ -368,6 +384,8 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
             (identical(other.customerAddress, customerAddress) ||
                 other.customerAddress == customerAddress) &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.division, division) ||
+                other.division == division) &&
             (identical(other.postalCode, postalCode) ||
                 other.postalCode == postalCode) &&
             (identical(other.customerClassification, customerClassification) ||
@@ -396,6 +414,7 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
       customerName,
       customerAddress,
       status,
+      division,
       postalCode,
       customerClassification,
       customerLocalGroup,
@@ -419,7 +438,8 @@ abstract class _CustomerCodeInfo extends CustomerCodeInfo {
       {required final String customerCodeSoldTo,
       required final CustomerName customerName,
       required final CustomerAddress customerAddress,
-      required final String status,
+      required final Status status,
+      required final String division,
       required final String postalCode,
       required final String customerClassification,
       required final String customerLocalGroup,
@@ -439,7 +459,9 @@ abstract class _CustomerCodeInfo extends CustomerCodeInfo {
   @override
   CustomerAddress get customerAddress;
   @override
-  String get status;
+  Status get status;
+  @override
+  String get division;
   @override
   String get postalCode;
   @override
