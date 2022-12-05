@@ -64,10 +64,10 @@ mixin _$CartEvent {
     required TResult Function(PriceAggregate item) updateSelectedItem,
     required TResult Function() updateSelectAllItems,
     required TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         updateBonusItem,
-    required TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
-            bool isUpdateFromCart)
+    required TResult Function(PriceAggregate cartItem,
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         deleteBonusItem,
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
@@ -124,9 +124,9 @@ mixin _$CartEvent {
     TResult? Function(PriceAggregate item)? updateSelectedItem,
     TResult? Function()? updateSelectAllItems,
     TResult? Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult? Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult? Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
@@ -183,9 +183,9 @@ mixin _$CartEvent {
     TResult Function(PriceAggregate item)? updateSelectedItem,
     TResult Function()? updateSelectAllItems,
     TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
@@ -361,10 +361,10 @@ class _$_Initialized implements _Initialized {
     required TResult Function(PriceAggregate item) updateSelectedItem,
     required TResult Function() updateSelectAllItems,
     required TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         updateBonusItem,
-    required TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
-            bool isUpdateFromCart)
+    required TResult Function(PriceAggregate cartItem,
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         deleteBonusItem,
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
@@ -424,9 +424,9 @@ class _$_Initialized implements _Initialized {
     TResult? Function(PriceAggregate item)? updateSelectedItem,
     TResult? Function()? updateSelectAllItems,
     TResult? Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult? Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult? Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
@@ -486,9 +486,9 @@ class _$_Initialized implements _Initialized {
     TResult Function(PriceAggregate item)? updateSelectedItem,
     TResult Function()? updateSelectAllItems,
     TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
@@ -785,10 +785,10 @@ class _$_Fetch implements _Fetch {
     required TResult Function(PriceAggregate item) updateSelectedItem,
     required TResult Function() updateSelectAllItems,
     required TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         updateBonusItem,
-    required TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
-            bool isUpdateFromCart)
+    required TResult Function(PriceAggregate cartItem,
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         deleteBonusItem,
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
@@ -849,9 +849,9 @@ class _$_Fetch implements _Fetch {
     TResult? Function(PriceAggregate item)? updateSelectedItem,
     TResult? Function()? updateSelectAllItems,
     TResult? Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult? Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult? Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
@@ -912,9 +912,9 @@ class _$_Fetch implements _Fetch {
     TResult Function(PriceAggregate item)? updateSelectedItem,
     TResult Function()? updateSelectAllItems,
     TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
@@ -1248,10 +1248,10 @@ class _$_AddToCart implements _AddToCart {
     required TResult Function(PriceAggregate item) updateSelectedItem,
     required TResult Function() updateSelectAllItems,
     required TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         updateBonusItem,
-    required TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
-            bool isUpdateFromCart)
+    required TResult Function(PriceAggregate cartItem,
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         deleteBonusItem,
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
@@ -1312,9 +1312,9 @@ class _$_AddToCart implements _AddToCart {
     TResult? Function(PriceAggregate item)? updateSelectedItem,
     TResult? Function()? updateSelectAllItems,
     TResult? Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult? Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult? Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
@@ -1375,9 +1375,9 @@ class _$_AddToCart implements _AddToCart {
     TResult Function(PriceAggregate item)? updateSelectedItem,
     TResult Function()? updateSelectAllItems,
     TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
@@ -1711,10 +1711,10 @@ class _$_AddToCartFromList implements _AddToCartFromList {
     required TResult Function(PriceAggregate item) updateSelectedItem,
     required TResult Function() updateSelectAllItems,
     required TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         updateBonusItem,
-    required TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
-            bool isUpdateFromCart)
+    required TResult Function(PriceAggregate cartItem,
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         deleteBonusItem,
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
@@ -1775,9 +1775,9 @@ class _$_AddToCartFromList implements _AddToCartFromList {
     TResult? Function(PriceAggregate item)? updateSelectedItem,
     TResult? Function()? updateSelectAllItems,
     TResult? Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult? Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult? Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
@@ -1843,9 +1843,9 @@ class _$_AddToCartFromList implements _AddToCartFromList {
     TResult Function(PriceAggregate item)? updateSelectedItem,
     TResult Function()? updateSelectAllItems,
     TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
@@ -2187,10 +2187,10 @@ class _$_UpdateCartItem implements _UpdateCartItem {
     required TResult Function(PriceAggregate item) updateSelectedItem,
     required TResult Function() updateSelectAllItems,
     required TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         updateBonusItem,
-    required TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
-            bool isUpdateFromCart)
+    required TResult Function(PriceAggregate cartItem,
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         deleteBonusItem,
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
@@ -2251,9 +2251,9 @@ class _$_UpdateCartItem implements _UpdateCartItem {
     TResult? Function(PriceAggregate item)? updateSelectedItem,
     TResult? Function()? updateSelectAllItems,
     TResult? Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult? Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult? Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
@@ -2319,9 +2319,9 @@ class _$_UpdateCartItem implements _UpdateCartItem {
     TResult Function(PriceAggregate item)? updateSelectedItem,
     TResult Function()? updateSelectAllItems,
     TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
@@ -2565,10 +2565,10 @@ class _$_UpdateCart implements _UpdateCart {
     required TResult Function(PriceAggregate item) updateSelectedItem,
     required TResult Function() updateSelectAllItems,
     required TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         updateBonusItem,
-    required TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
-            bool isUpdateFromCart)
+    required TResult Function(PriceAggregate cartItem,
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         deleteBonusItem,
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
@@ -2628,9 +2628,9 @@ class _$_UpdateCart implements _UpdateCart {
     TResult? Function(PriceAggregate item)? updateSelectedItem,
     TResult? Function()? updateSelectAllItems,
     TResult? Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult? Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult? Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
@@ -2690,9 +2690,9 @@ class _$_UpdateCart implements _UpdateCart {
     TResult Function(PriceAggregate item)? updateSelectedItem,
     TResult Function()? updateSelectAllItems,
     TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
@@ -3000,10 +3000,10 @@ class _$_UpdateStockInfo implements _UpdateStockInfo {
     required TResult Function(PriceAggregate item) updateSelectedItem,
     required TResult Function() updateSelectAllItems,
     required TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         updateBonusItem,
-    required TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
-            bool isUpdateFromCart)
+    required TResult Function(PriceAggregate cartItem,
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         deleteBonusItem,
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
@@ -3064,9 +3064,9 @@ class _$_UpdateStockInfo implements _UpdateStockInfo {
     TResult? Function(PriceAggregate item)? updateSelectedItem,
     TResult? Function()? updateSelectAllItems,
     TResult? Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult? Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult? Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
@@ -3127,9 +3127,9 @@ class _$_UpdateStockInfo implements _UpdateStockInfo {
     TResult Function(PriceAggregate item)? updateSelectedItem,
     TResult Function()? updateSelectAllItems,
     TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
@@ -3359,10 +3359,10 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     required TResult Function(PriceAggregate item) updateSelectedItem,
     required TResult Function() updateSelectAllItems,
     required TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         updateBonusItem,
-    required TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
-            bool isUpdateFromCart)
+    required TResult Function(PriceAggregate cartItem,
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         deleteBonusItem,
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
@@ -3422,9 +3422,9 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     TResult? Function(PriceAggregate item)? updateSelectedItem,
     TResult? Function()? updateSelectAllItems,
     TResult? Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult? Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult? Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
@@ -3484,9 +3484,9 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     TResult Function(PriceAggregate item)? updateSelectedItem,
     TResult Function()? updateSelectAllItems,
     TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
@@ -3671,10 +3671,10 @@ class _$_ClearCart implements _ClearCart {
     required TResult Function(PriceAggregate item) updateSelectedItem,
     required TResult Function() updateSelectAllItems,
     required TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         updateBonusItem,
-    required TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
-            bool isUpdateFromCart)
+    required TResult Function(PriceAggregate cartItem,
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         deleteBonusItem,
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
@@ -3734,9 +3734,9 @@ class _$_ClearCart implements _ClearCart {
     TResult? Function(PriceAggregate item)? updateSelectedItem,
     TResult? Function()? updateSelectAllItems,
     TResult? Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult? Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult? Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
@@ -3796,9 +3796,9 @@ class _$_ClearCart implements _ClearCart {
     TResult Function(PriceAggregate item)? updateSelectedItem,
     TResult Function()? updateSelectAllItems,
     TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
@@ -4014,10 +4014,10 @@ class _$_updateSelectedItem implements _updateSelectedItem {
     required TResult Function(PriceAggregate item) updateSelectedItem,
     required TResult Function() updateSelectAllItems,
     required TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         updateBonusItem,
-    required TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
-            bool isUpdateFromCart)
+    required TResult Function(PriceAggregate cartItem,
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         deleteBonusItem,
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
@@ -4077,9 +4077,9 @@ class _$_updateSelectedItem implements _updateSelectedItem {
     TResult? Function(PriceAggregate item)? updateSelectedItem,
     TResult? Function()? updateSelectAllItems,
     TResult? Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult? Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult? Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
@@ -4139,9 +4139,9 @@ class _$_updateSelectedItem implements _updateSelectedItem {
     TResult Function(PriceAggregate item)? updateSelectedItem,
     TResult Function()? updateSelectAllItems,
     TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
@@ -4326,10 +4326,10 @@ class _$_updateSelectAllItems implements _updateSelectAllItems {
     required TResult Function(PriceAggregate item) updateSelectedItem,
     required TResult Function() updateSelectAllItems,
     required TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         updateBonusItem,
-    required TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
-            bool isUpdateFromCart)
+    required TResult Function(PriceAggregate cartItem,
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         deleteBonusItem,
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
@@ -4389,9 +4389,9 @@ class _$_updateSelectAllItems implements _updateSelectAllItems {
     TResult? Function(PriceAggregate item)? updateSelectedItem,
     TResult? Function()? updateSelectAllItems,
     TResult? Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult? Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult? Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
@@ -4451,9 +4451,9 @@ class _$_updateSelectAllItems implements _updateSelectAllItems {
     TResult Function(PriceAggregate item)? updateSelectedItem,
     TResult Function()? updateSelectAllItems,
     TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
@@ -4557,11 +4557,11 @@ abstract class _$$_updateBonusItemCopyWith<$Res> {
   $Res call(
       {int bonusItemCount,
       PriceAggregate cartItem,
-      MaterialInfo bonusItem,
+      MaterialItemBonus bonusItem,
       bool isUpdateFromCart});
 
   $PriceAggregateCopyWith<$Res> get cartItem;
-  $MaterialInfoCopyWith<$Res> get bonusItem;
+  $MaterialItemBonusCopyWith<$Res> get bonusItem;
 }
 
 /// @nodoc
@@ -4592,7 +4592,7 @@ class __$$_updateBonusItemCopyWithImpl<$Res>
       bonusItem: null == bonusItem
           ? _value.bonusItem
           : bonusItem // ignore: cast_nullable_to_non_nullable
-              as MaterialInfo,
+              as MaterialItemBonus,
       isUpdateFromCart: null == isUpdateFromCart
           ? _value.isUpdateFromCart
           : isUpdateFromCart // ignore: cast_nullable_to_non_nullable
@@ -4610,8 +4610,8 @@ class __$$_updateBonusItemCopyWithImpl<$Res>
 
   @override
   @pragma('vm:prefer-inline')
-  $MaterialInfoCopyWith<$Res> get bonusItem {
-    return $MaterialInfoCopyWith<$Res>(_value.bonusItem, (value) {
+  $MaterialItemBonusCopyWith<$Res> get bonusItem {
+    return $MaterialItemBonusCopyWith<$Res>(_value.bonusItem, (value) {
       return _then(_value.copyWith(bonusItem: value));
     });
   }
@@ -4631,7 +4631,7 @@ class _$_updateBonusItem implements _updateBonusItem {
   @override
   final PriceAggregate cartItem;
   @override
-  final MaterialInfo bonusItem;
+  final MaterialItemBonus bonusItem;
   @override
   final bool isUpdateFromCart;
 
@@ -4714,10 +4714,10 @@ class _$_updateBonusItem implements _updateBonusItem {
     required TResult Function(PriceAggregate item) updateSelectedItem,
     required TResult Function() updateSelectAllItems,
     required TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         updateBonusItem,
-    required TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
-            bool isUpdateFromCart)
+    required TResult Function(PriceAggregate cartItem,
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         deleteBonusItem,
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
@@ -4778,9 +4778,9 @@ class _$_updateBonusItem implements _updateBonusItem {
     TResult? Function(PriceAggregate item)? updateSelectedItem,
     TResult? Function()? updateSelectAllItems,
     TResult? Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult? Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult? Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
@@ -4841,9 +4841,9 @@ class _$_updateBonusItem implements _updateBonusItem {
     TResult Function(PriceAggregate item)? updateSelectedItem,
     TResult Function()? updateSelectAllItems,
     TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
@@ -4939,12 +4939,12 @@ abstract class _updateBonusItem implements CartEvent {
   const factory _updateBonusItem(
       {required final int bonusItemCount,
       required final PriceAggregate cartItem,
-      required final MaterialInfo bonusItem,
+      required final MaterialItemBonus bonusItem,
       required final bool isUpdateFromCart}) = _$_updateBonusItem;
 
   int get bonusItemCount;
   PriceAggregate get cartItem;
-  MaterialInfo get bonusItem;
+  MaterialItemBonus get bonusItem;
   bool get isUpdateFromCart;
   @JsonKey(ignore: true)
   _$$_updateBonusItemCopyWith<_$_updateBonusItem> get copyWith =>
@@ -4958,10 +4958,12 @@ abstract class _$$_deleteBonusItemCopyWith<$Res> {
       __$$_deleteBonusItemCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {PriceAggregate cartItem, MaterialInfo bonusItem, bool isUpdateFromCart});
+      {PriceAggregate cartItem,
+      MaterialItemBonus bonusItem,
+      bool isUpdateFromCart});
 
   $PriceAggregateCopyWith<$Res> get cartItem;
-  $MaterialInfoCopyWith<$Res> get bonusItem;
+  $MaterialItemBonusCopyWith<$Res> get bonusItem;
 }
 
 /// @nodoc
@@ -4987,7 +4989,7 @@ class __$$_deleteBonusItemCopyWithImpl<$Res>
       bonusItem: null == bonusItem
           ? _value.bonusItem
           : bonusItem // ignore: cast_nullable_to_non_nullable
-              as MaterialInfo,
+              as MaterialItemBonus,
       isUpdateFromCart: null == isUpdateFromCart
           ? _value.isUpdateFromCart
           : isUpdateFromCart // ignore: cast_nullable_to_non_nullable
@@ -5005,8 +5007,8 @@ class __$$_deleteBonusItemCopyWithImpl<$Res>
 
   @override
   @pragma('vm:prefer-inline')
-  $MaterialInfoCopyWith<$Res> get bonusItem {
-    return $MaterialInfoCopyWith<$Res>(_value.bonusItem, (value) {
+  $MaterialItemBonusCopyWith<$Res> get bonusItem {
+    return $MaterialItemBonusCopyWith<$Res>(_value.bonusItem, (value) {
       return _then(_value.copyWith(bonusItem: value));
     });
   }
@@ -5023,7 +5025,7 @@ class _$_deleteBonusItem implements _deleteBonusItem {
   @override
   final PriceAggregate cartItem;
   @override
-  final MaterialInfo bonusItem;
+  final MaterialItemBonus bonusItem;
   @override
   final bool isUpdateFromCart;
 
@@ -5104,10 +5106,10 @@ class _$_deleteBonusItem implements _deleteBonusItem {
     required TResult Function(PriceAggregate item) updateSelectedItem,
     required TResult Function() updateSelectAllItems,
     required TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         updateBonusItem,
-    required TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
-            bool isUpdateFromCart)
+    required TResult Function(PriceAggregate cartItem,
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         deleteBonusItem,
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
@@ -5167,9 +5169,9 @@ class _$_deleteBonusItem implements _deleteBonusItem {
     TResult? Function(PriceAggregate item)? updateSelectedItem,
     TResult? Function()? updateSelectAllItems,
     TResult? Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult? Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult? Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
@@ -5229,9 +5231,9 @@ class _$_deleteBonusItem implements _deleteBonusItem {
     TResult Function(PriceAggregate item)? updateSelectedItem,
     TResult Function()? updateSelectAllItems,
     TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
@@ -5325,11 +5327,11 @@ class _$_deleteBonusItem implements _deleteBonusItem {
 abstract class _deleteBonusItem implements CartEvent {
   const factory _deleteBonusItem(
       {required final PriceAggregate cartItem,
-      required final MaterialInfo bonusItem,
+      required final MaterialItemBonus bonusItem,
       required final bool isUpdateFromCart}) = _$_deleteBonusItem;
 
   PriceAggregate get cartItem;
-  MaterialInfo get bonusItem;
+  MaterialItemBonus get bonusItem;
   bool get isUpdateFromCart;
   @JsonKey(ignore: true)
   _$$_deleteBonusItemCopyWith<_$_deleteBonusItem> get copyWith =>
@@ -5446,10 +5448,10 @@ class _$_RemarksChanged implements _RemarksChanged {
     required TResult Function(PriceAggregate item) updateSelectedItem,
     required TResult Function() updateSelectAllItems,
     required TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         updateBonusItem,
-    required TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
-            bool isUpdateFromCart)
+    required TResult Function(PriceAggregate cartItem,
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         deleteBonusItem,
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
@@ -5509,9 +5511,9 @@ class _$_RemarksChanged implements _RemarksChanged {
     TResult? Function(PriceAggregate item)? updateSelectedItem,
     TResult? Function()? updateSelectAllItems,
     TResult? Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult? Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult? Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
@@ -5571,9 +5573,9 @@ class _$_RemarksChanged implements _RemarksChanged {
     TResult Function(PriceAggregate item)? updateSelectedItem,
     TResult Function()? updateSelectAllItems,
     TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
@@ -5803,10 +5805,10 @@ class _$_AddRemarksToCartItem implements _AddRemarksToCartItem {
     required TResult Function(PriceAggregate item) updateSelectedItem,
     required TResult Function() updateSelectAllItems,
     required TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         updateBonusItem,
-    required TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
-            bool isUpdateFromCart)
+    required TResult Function(PriceAggregate cartItem,
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         deleteBonusItem,
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
@@ -5866,9 +5868,9 @@ class _$_AddRemarksToCartItem implements _AddRemarksToCartItem {
     TResult? Function(PriceAggregate item)? updateSelectedItem,
     TResult? Function()? updateSelectAllItems,
     TResult? Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult? Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult? Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
@@ -5928,9 +5930,9 @@ class _$_AddRemarksToCartItem implements _AddRemarksToCartItem {
     TResult Function(PriceAggregate item)? updateSelectedItem,
     TResult Function()? updateSelectAllItems,
     TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,
@@ -6182,10 +6184,10 @@ class _$_AddRemarksToBonusItem implements _AddRemarksToBonusItem {
     required TResult Function(PriceAggregate item) updateSelectedItem,
     required TResult Function() updateSelectAllItems,
     required TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         updateBonusItem,
-    required TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
-            bool isUpdateFromCart)
+    required TResult Function(PriceAggregate cartItem,
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)
         deleteBonusItem,
     required TResult Function(String remarks) remarksChanged,
     required TResult Function(PriceAggregate item, bool isDelete)
@@ -6245,9 +6247,9 @@ class _$_AddRemarksToBonusItem implements _AddRemarksToBonusItem {
     TResult? Function(PriceAggregate item)? updateSelectedItem,
     TResult? Function()? updateSelectAllItems,
     TResult? Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult? Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult? Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult? Function(String remarks)? remarksChanged,
@@ -6307,9 +6309,9 @@ class _$_AddRemarksToBonusItem implements _AddRemarksToBonusItem {
     TResult Function(PriceAggregate item)? updateSelectedItem,
     TResult Function()? updateSelectAllItems,
     TResult Function(int bonusItemCount, PriceAggregate cartItem,
-            MaterialInfo bonusItem, bool isUpdateFromCart)?
+            MaterialItemBonus bonusItem, bool isUpdateFromCart)?
         updateBonusItem,
-    TResult Function(PriceAggregate cartItem, MaterialInfo bonusItem,
+    TResult Function(PriceAggregate cartItem, MaterialItemBonus bonusItem,
             bool isUpdateFromCart)?
         deleteBonusItem,
     TResult Function(String remarks)? remarksChanged,

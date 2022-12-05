@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/presentation/core/remarks_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_remark_dialog.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_remarks_button.dart';
@@ -19,7 +19,7 @@ class BonusItemTile extends StatefulWidget {
     required this.cartItem,
   }) : super(key: key);
 
-  final MaterialInfo bonusItem;
+  final MaterialItemBonus bonusItem;
   final PriceAggregate cartItem;
 
   @override
@@ -33,7 +33,7 @@ class _BonusItemTileState extends State<BonusItemTile> {
   void initState() {
     super.initState();
     quantityController = TextEditingController(
-      text: widget.bonusItem.quantity.toString(),
+      text: widget.bonusItem.qty.toString(),
     );
   }
 
@@ -89,13 +89,13 @@ class _BonusItemTileState extends State<BonusItemTile> {
                           .state
                           .configs
                           .enableRemarks)
-                        widget.bonusItem.remarks.isNotEmpty
+                        widget.bonusItem.materialInfo.remarks.isNotEmpty
                             ? RemarksMessage(
                                 message:
-                                    '${'Remarks: '.tr()}${widget.bonusItem.remarks}',
+                                    '${'Remarks: '.tr()}${widget.bonusItem.materialInfo.remarks}',
                                 showEditDeleteDialog: EditDeleteDialog(
                                   cartItem: widget.cartItem,
-                                  bonusItem: widget.bonusItem,
+                                  bonusItem: widget.bonusItem.materialInfo,
                                   isBonus: true,
                                 ),
                               )
@@ -107,7 +107,7 @@ class _BonusItemTileState extends State<BonusItemTile> {
                                     cartItem: widget.cartItem,
                                     isEdit: false,
                                     isBonus: true,
-                                    bonusItem: widget.bonusItem,
+                                    bonusItem: widget.bonusItem.materialInfo,
                                   );
                                 },
                               ),
@@ -121,7 +121,7 @@ class _BonusItemTileState extends State<BonusItemTile> {
                   quantityAddKey: const Key('addBonusFromCart'),
                   quantityDeleteKey: const Key('removeBonusFromCart'),
                   quantityTextKey: Key(
-                    'itemCount${widget.bonusItem.quantity}',
+                    'itemCount${widget.bonusItem.qty}',
                   ),
                   controller: quantityController,
                   onFieldChange: (value) {

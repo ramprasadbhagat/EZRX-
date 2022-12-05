@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -93,9 +94,9 @@ class BonusMaterialDto with _$BonusMaterialDto {
 
   factory BonusMaterialDto.fromDomain(BonusMaterial bonusMaterial) {
     return BonusMaterialDto(
-      materialNumber: bonusMaterial.materialNumber,
+      materialNumber: bonusMaterial.materialNumber.getOrDefaultValue(''),
       materialDescription: bonusMaterial.materialDescription,
-      calculation: bonusMaterial.calculation,
+      calculation: bonusMaterial.calculation.getOrDefaultValue(''),
       bonusRatio: bonusMaterial.bonusRatio,
       qualifyingQuantity: bonusMaterial.qualifyingQuantity,
       bonusQuantity: bonusMaterial.bonusQuantity,
@@ -103,9 +104,9 @@ class BonusMaterialDto with _$BonusMaterialDto {
   }
 
   BonusMaterial toDomain() => BonusMaterial(
-        materialNumber: materialNumber,
+        materialNumber: MaterialNumber(materialNumber),
         materialDescription: materialDescription,
-        calculation: calculation,
+        calculation: BonusMaterialCalculation(calculation),
         bonusRatio: bonusRatio,
         qualifyingQuantity: qualifyingQuantity,
         bonusQuantity: bonusQuantity,

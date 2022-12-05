@@ -35,6 +35,13 @@
         "Batch": "141221",
         "InStock": "Yes",
         "SalesDistrict": null
+      },
+      {
+        "MaterialNumber": "000000000023063774",
+        "ExpiryDate": "20230731",
+        "Batch": "199021",
+        "InStock": "Yes",
+        "SalesDistrict": null
       }
     ]
   }

@@ -56,6 +56,8 @@ mixin _$UserDto {
   @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
   String get privacyPolicyAcceptedPlatform =>
       throw _privateConstructorUsedError;
+  @JsonKey(name: 'hasBonusOverride', defaultValue: false)
+  bool get hasBonusOverride => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -98,7 +100,9 @@ abstract class $UserDtoCopyWith<$Res> {
       @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
           String acceptPrivacyPolicyTime,
       @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
-          String privacyPolicyAcceptedPlatform});
+          String privacyPolicyAcceptedPlatform,
+      @JsonKey(name: 'hasBonusOverride', defaultValue: false)
+          bool hasBonusOverride});
 
   $RoleDtoCopyWith<$Res> get role;
 }
@@ -131,6 +135,7 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
     Object? acceptPrivacyPolicy = null,
     Object? acceptPrivacyPolicyTime = null,
     Object? privacyPolicyAcceptedPlatform = null,
+    Object? hasBonusOverride = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -193,6 +198,10 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
           ? _value.privacyPolicyAcceptedPlatform
           : privacyPolicyAcceptedPlatform // ignore: cast_nullable_to_non_nullable
               as String,
+      hasBonusOverride: null == hasBonusOverride
+          ? _value.hasBonusOverride
+          : hasBonusOverride // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -243,7 +252,9 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
           String acceptPrivacyPolicyTime,
       @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
-          String privacyPolicyAcceptedPlatform});
+          String privacyPolicyAcceptedPlatform,
+      @JsonKey(name: 'hasBonusOverride', defaultValue: false)
+          bool hasBonusOverride});
 
   @override
   $RoleDtoCopyWith<$Res> get role;
@@ -274,6 +285,7 @@ class __$$_UserDtoCopyWithImpl<$Res>
     Object? acceptPrivacyPolicy = null,
     Object? acceptPrivacyPolicyTime = null,
     Object? privacyPolicyAcceptedPlatform = null,
+    Object? hasBonusOverride = null,
   }) {
     return _then(_$_UserDto(
       id: null == id
@@ -336,6 +348,10 @@ class __$$_UserDtoCopyWithImpl<$Res>
           ? _value.privacyPolicyAcceptedPlatform
           : privacyPolicyAcceptedPlatform // ignore: cast_nullable_to_non_nullable
               as String,
+      hasBonusOverride: null == hasBonusOverride
+          ? _value.hasBonusOverride
+          : hasBonusOverride // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -374,7 +390,9 @@ class _$_UserDto extends _UserDto {
       @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
           required this.acceptPrivacyPolicyTime,
       @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
-          required this.privacyPolicyAcceptedPlatform})
+          required this.privacyPolicyAcceptedPlatform,
+      @JsonKey(name: 'hasBonusOverride', defaultValue: false)
+          required this.hasBonusOverride})
       : _userSalesOrganisations = userSalesOrganisations,
         super._();
 
@@ -435,10 +453,13 @@ class _$_UserDto extends _UserDto {
   @override
   @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
   final String privacyPolicyAcceptedPlatform;
+  @override
+  @JsonKey(name: 'hasBonusOverride', defaultValue: false)
+  final bool hasBonusOverride;
 
   @override
   String toString() {
-    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, acceptPrivacyPolicyTime: $acceptPrivacyPolicyTime, privacyPolicyAcceptedPlatform: $privacyPolicyAcceptedPlatform)';
+    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, acceptPrivacyPolicyTime: $acceptPrivacyPolicyTime, privacyPolicyAcceptedPlatform: $privacyPolicyAcceptedPlatform, hasBonusOverride: $hasBonusOverride)';
   }
 
   @override
@@ -475,7 +496,9 @@ class _$_UserDto extends _UserDto {
             (identical(other.privacyPolicyAcceptedPlatform,
                     privacyPolicyAcceptedPlatform) ||
                 other.privacyPolicyAcceptedPlatform ==
-                    privacyPolicyAcceptedPlatform));
+                    privacyPolicyAcceptedPlatform) &&
+            (identical(other.hasBonusOverride, hasBonusOverride) ||
+                other.hasBonusOverride == hasBonusOverride));
   }
 
   @JsonKey(ignore: true)
@@ -496,7 +519,8 @@ class _$_UserDto extends _UserDto {
       enableOrderType,
       acceptPrivacyPolicy,
       acceptPrivacyPolicyTime,
-      privacyPolicyAcceptedPlatform);
+      privacyPolicyAcceptedPlatform,
+      hasBonusOverride);
 
   @JsonKey(ignore: true)
   @override
@@ -544,7 +568,9 @@ abstract class _UserDto extends UserDto {
       @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
           required final String acceptPrivacyPolicyTime,
       @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
-          required final String privacyPolicyAcceptedPlatform}) = _$_UserDto;
+          required final String privacyPolicyAcceptedPlatform,
+      @JsonKey(name: 'hasBonusOverride', defaultValue: false)
+          required final bool hasBonusOverride}) = _$_UserDto;
   const _UserDto._() : super._();
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$_UserDto.fromJson;
@@ -598,6 +624,9 @@ abstract class _UserDto extends UserDto {
   @override
   @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
   String get privacyPolicyAcceptedPlatform;
+  @override
+  @JsonKey(name: 'hasBonusOverride', defaultValue: false)
+  bool get hasBonusOverride;
   @override
   @JsonKey(ignore: true)
   _$$_UserDtoCopyWith<_$_UserDto> get copyWith =>

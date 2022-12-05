@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/bonus_lable.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/price_tier_label.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -71,6 +72,19 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
                 ),
           ),
         ),
+        if (widget.cartItem.price.isBonusDealEligible)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Bonuses :',
+                style: Theme.of(context).textTheme.subtitle2,
+              ).tr(),
+              ...widget.cartItem.price.priceBonusItem
+                  .map((e) => BonusLabel(bonus: e))
+                  .toList(),
+            ],
+          ),
         if (widget.cartItem.price.isDiscountEligible)
           Column(
             children: [

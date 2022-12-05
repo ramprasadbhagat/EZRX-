@@ -463,6 +463,7 @@ void main() {
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
           enableOrderType: false,
+          hasBonusOverride: false,
         );
         final result = validateContainUserNameOrName(input, user);
         expect(result, const Right(input));
@@ -488,6 +489,7 @@ void main() {
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
           enableOrderType: false,
+          hasBonusOverride: false,
         );
         final result = validateContainUserNameOrName(input, user);
         expect(
@@ -516,6 +518,7 @@ void main() {
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
           enableOrderType: false,
+          hasBonusOverride: false,
         );
         final result = validateContainUserNameOrName(input, user);
         expect(
@@ -544,6 +547,7 @@ void main() {
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
           enableOrderType: false,
+          hasBonusOverride: false,
         );
         final result = validateContainUserNameOrName(input, user);
         expect(

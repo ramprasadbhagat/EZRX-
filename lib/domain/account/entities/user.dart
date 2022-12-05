@@ -24,6 +24,7 @@ class User with _$User {
     required Settings settings,
     required SettingTc settingTc,
     required bool enableOrderType,
+    required bool hasBonusOverride,
   }) = _User;
 
   factory User.empty() => User(
@@ -45,5 +46,6 @@ class User with _$User {
           privacyPolicyAcceptedPlatform: '',
         ),
         enableOrderType: false,
+        hasBonusOverride: false,
       );
 }

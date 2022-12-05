@@ -314,9 +314,10 @@ abstract class _PriceBonusItem extends PriceBonusItem {
 
 /// @nodoc
 mixin _$BonusMaterial {
-  String get materialNumber => throw _privateConstructorUsedError;
+  MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   String get materialDescription => throw _privateConstructorUsedError;
-  String get calculation => throw _privateConstructorUsedError;
+  BonusMaterialCalculation get calculation =>
+      throw _privateConstructorUsedError;
   int get bonusRatio => throw _privateConstructorUsedError;
   int get qualifyingQuantity => throw _privateConstructorUsedError;
   int get bonusQuantity => throw _privateConstructorUsedError;
@@ -333,9 +334,9 @@ abstract class $BonusMaterialCopyWith<$Res> {
       _$BonusMaterialCopyWithImpl<$Res, BonusMaterial>;
   @useResult
   $Res call(
-      {String materialNumber,
+      {MaterialNumber materialNumber,
       String materialDescription,
-      String calculation,
+      BonusMaterialCalculation calculation,
       int bonusRatio,
       int qualifyingQuantity,
       int bonusQuantity});
@@ -365,7 +366,7 @@ class _$BonusMaterialCopyWithImpl<$Res, $Val extends BonusMaterial>
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialNumber,
       materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
@@ -373,7 +374,7 @@ class _$BonusMaterialCopyWithImpl<$Res, $Val extends BonusMaterial>
       calculation: null == calculation
           ? _value.calculation
           : calculation // ignore: cast_nullable_to_non_nullable
-              as String,
+              as BonusMaterialCalculation,
       bonusRatio: null == bonusRatio
           ? _value.bonusRatio
           : bonusRatio // ignore: cast_nullable_to_non_nullable
@@ -399,9 +400,9 @@ abstract class _$$_BonusMaterialCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String materialNumber,
+      {MaterialNumber materialNumber,
       String materialDescription,
-      String calculation,
+      BonusMaterialCalculation calculation,
       int bonusRatio,
       int qualifyingQuantity,
       int bonusQuantity});
@@ -429,7 +430,7 @@ class __$$_BonusMaterialCopyWithImpl<$Res>
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialNumber,
       materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
@@ -437,7 +438,7 @@ class __$$_BonusMaterialCopyWithImpl<$Res>
       calculation: null == calculation
           ? _value.calculation
           : calculation // ignore: cast_nullable_to_non_nullable
-              as String,
+              as BonusMaterialCalculation,
       bonusRatio: null == bonusRatio
           ? _value.bonusRatio
           : bonusRatio // ignore: cast_nullable_to_non_nullable
@@ -467,11 +468,11 @@ class _$_BonusMaterial extends _BonusMaterial {
       : super._();
 
   @override
-  final String materialNumber;
+  final MaterialNumber materialNumber;
   @override
   final String materialDescription;
   @override
-  final String calculation;
+  final BonusMaterialCalculation calculation;
   @override
   final int bonusRatio;
   @override
@@ -522,20 +523,20 @@ class _$_BonusMaterial extends _BonusMaterial {
 
 abstract class _BonusMaterial extends BonusMaterial {
   const factory _BonusMaterial(
-      {required final String materialNumber,
+      {required final MaterialNumber materialNumber,
       required final String materialDescription,
-      required final String calculation,
+      required final BonusMaterialCalculation calculation,
       required final int bonusRatio,
       required final int qualifyingQuantity,
       required final int bonusQuantity}) = _$_BonusMaterial;
   const _BonusMaterial._() : super._();
 
   @override
-  String get materialNumber;
+  MaterialNumber get materialNumber;
   @override
   String get materialDescription;
   @override
-  String get calculation;
+  BonusMaterialCalculation get calculation;
   @override
   int get bonusRatio;
   @override

@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -62,15 +63,14 @@ abstract class ICartRepository {
     required ShipToInfo shipToInfo,
   });
 
-  Future<Either<ApiFailure, List<PriceAggregate>>>
-      getStockInfoMaterialList({
+  Future<Either<ApiFailure, List<PriceAggregate>>> getStockInfoMaterialList({
     required List<PriceAggregate> materialList,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required SalesOrganisation salesOrganisation,
     required ShipToInfo shipToInfo,
   });
-  
+
   List<MaterialNumber> getUpdatedMaterialList({
     required List<PriceAggregate> cartItemList,
     required List<MaterialNumber> selectedItemsMaterialNumber,
@@ -80,13 +80,13 @@ abstract class ICartRepository {
   Future<Either<ApiFailure, List<PriceAggregate>>> updateBonusItem({
     required PriceAggregate cartItem,
     required int quantity,
-    required MaterialInfo bonusItem,
+    required MaterialItemBonus bonusItem,
     required bool isUpdatedFromCart,
   });
 
   Future<Either<ApiFailure, List<PriceAggregate>>> deleteBonusItem({
     required PriceAggregate cartItem,
-    required MaterialInfo bonusItem,
+    required MaterialItemBonus bonusItem,
     required bool isUpdateFromCart,
   });
 }

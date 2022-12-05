@@ -12,6 +12,7 @@ import 'package:ezrxmobile/infrastructure/account/dtos/role_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/common/dto_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:rxdart/transformers.dart';
 
 part 'user_dto.freezed.dart';
 part 'user_dto.g.dart';
@@ -39,12 +40,14 @@ class UserDto with _$UserDto {
         required String languagePreference,
     @JsonKey(name: 'enableOrderType', defaultValue: false)
         required bool enableOrderType,
-   @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+    @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
         required bool acceptPrivacyPolicy,
     @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
         required String acceptPrivacyPolicyTime,
     @JsonKey(name: 'privacyPolicyAcceptedPlatform', defaultValue: '')
         required String privacyPolicyAcceptedPlatform,
+    @JsonKey(name: 'hasBonusOverride', defaultValue: false)
+        required bool hasBonusOverride,
   }) = _UserDto;
 
   factory UserDto.fromDomain(User user) {
@@ -66,37 +69,39 @@ class UserDto with _$UserDto {
           user.settingTc.acceptPrivacyPolicyTime.toIso8601String(),
       privacyPolicyAcceptedPlatform:
           user.settingTc.privacyPolicyAcceptedPlatform,
+      hasBonusOverride: user.hasBonusOverride,
     );
   }
 
   User toDomain() {
     return User(
-        id: id,
-        username: Username(username),
-        email: EmailAddress(email),
-        fullName: FullName(firstName: firstName, lastName: lastName),
-        role: Role(
-          id: role.id,
-          name: role.name,
-          type: RoleType(role.type),
-          description: role.description,
-        ),
-        customerCode: CustomerCode(customerCode),
-        userSalesOrganisations: _mergeSalesOrg(userSalesOrganisations),
-        settings: Settings(
-          emailNotifications: emailNotifications,
-          mobileNotifications: mobileNotifications,
-          languagePreference: languagePreference,
-        ),
-        settingTc: SettingTc(
-          acceptPrivacyPolicy: acceptPrivacyPolicy,
-          acceptPrivacyPolicyTime: DateTime.parse(acceptPrivacyPolicyTime),
-          privacyPolicyAcceptedPlatform: privacyPolicyAcceptedPlatform,
-        ),
-        enableOrderType: enableOrderType,
-      );
+      id: id,
+      username: Username(username),
+      email: EmailAddress(email),
+      fullName: FullName(firstName: firstName, lastName: lastName),
+      role: Role(
+        id: role.id,
+        name: role.name,
+        type: RoleType(role.type),
+        description: role.description,
+      ),
+      customerCode: CustomerCode(customerCode),
+      userSalesOrganisations: _mergeSalesOrg(userSalesOrganisations),
+      settings: Settings(
+        emailNotifications: emailNotifications,
+        mobileNotifications: mobileNotifications,
+        languagePreference: languagePreference,
+      ),
+      settingTc: SettingTc(
+        acceptPrivacyPolicy: acceptPrivacyPolicy,
+        acceptPrivacyPolicyTime: DateTime.parse(acceptPrivacyPolicyTime),
+        privacyPolicyAcceptedPlatform: privacyPolicyAcceptedPlatform,
+      ),
+      enableOrderType: enableOrderType,
+      hasBonusOverride: hasBonusOverride,
+    );
   }
-  
+
   factory UserDto.fromJson(Map<String, dynamic> json) =>
       _$UserDtoFromJson(json);
 }

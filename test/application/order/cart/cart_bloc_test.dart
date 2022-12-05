@@ -1,5 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -9,6 +11,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -20,8 +23,18 @@ import 'package:mocktail/mocktail.dart';
 
 class CartRepositoryMock extends Mock implements CartRepository {}
 
+class MockSalesOrgBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
+    implements SalesOrgBloc {}
+
+class MockCustomerCodeBloc
+    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
+    implements CustomerCodeBloc {}
+
 void main() {
   late CartRepository cartRepositoryMock;
+  final mockSalesOrgBloc = MockSalesOrgBloc();
+  final mockCustomerBloc = MockCustomerCodeBloc();
+
   final mockCartItemList = [
     PriceAggregate.empty().copyWith(
         quantity: 1,
@@ -199,18 +212,27 @@ void main() {
         cartRepositoryMock = CartRepositoryMock();
         when(() => cartRepositoryMock.initCartStorage())
             .thenAnswer((invocation) async => const Right(unit));
+        when(() => mockCustomerBloc.state)
+            .thenReturn(CustomerCodeState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          isFetching: false,
+        ));
+        when(() => mockSalesOrgBloc.state)
+            .thenReturn(SalesOrgState.initial().copyWith());
       });
       blocTest<CartBloc, CartState>(
         'Initialize CartBloc adn fetch',
         build: () => CartBloc(cartRepository: cartRepositoryMock),
         setUp: () {
           when(() => cartRepositoryMock.getStockInfoMaterialList(
-                materialList: <PriceAggregate>[],
-                customerCodeInfo: CustomerCodeInfo.empty(),
-                salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-                salesOrganisation: SalesOrganisation.empty(),
-                shipToInfo: ShipToInfo.empty(),
-              )).thenAnswer((invocation) async => const Right(<PriceAggregate>[]));
+                    materialList: <PriceAggregate>[],
+                    customerCodeInfo: CustomerCodeInfo.empty(),
+                    salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+                    salesOrganisation: SalesOrganisation.empty(),
+                    shipToInfo: ShipToInfo.empty(),
+                  ))
+              .thenAnswer(
+                  (invocation) async => const Right(<PriceAggregate>[]));
           when(() => cartRepositoryMock.fetchCartItems()).thenAnswer(
               (invocation) async => const Right(<PriceAggregate>[]));
         },
@@ -284,7 +306,6 @@ void main() {
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: none(),
             cartItemList: <PriceAggregate>[],
-            isFetching: true,
           ),
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: optionOf(
@@ -292,7 +313,6 @@ void main() {
                 ApiFailure.other('Fake-Error'),
               ),
             ),
-            isFetching: false,
           ),
         ],
       );
@@ -326,20 +346,18 @@ void main() {
           item: PriceAggregate.empty(),
           customerCodeInfo: CustomerCodeInfo.empty(),
           salesOrganisation: SalesOrganisation.empty(),
-          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
           shipToInfo: ShipToInfo.empty(),
           doNotallowOutOfStockMaterial: true,
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
         )),
         expect: () => [
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: none(),
-            isFetching: true,
             selectedItemsMaterialNumber: [],
           ),
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: none(),
             cartItemList: mockCartItemList,
-            isFetching: false,
             selectedItemsMaterialNumber: mockMaterialItemList,
           ),
         ],
@@ -365,18 +383,19 @@ void main() {
           when(() => cartRepositoryMock.fetchCartItems()).thenAnswer(
               (invocation) async => const Left(ApiFailure.other('Fake-Error')));
         },
-        act: (bloc) => bloc.add(CartEvent.addToCart(
-          item: PriceAggregate.empty(),
-          customerCodeInfo: CustomerCodeInfo.empty(),
-          salesOrganisation: SalesOrganisation.empty(),
-          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-          shipToInfo: ShipToInfo.empty(),
-          doNotallowOutOfStockMaterial: true,
-        )),
+        act: (bloc) => bloc.add(
+          CartEvent.addToCart(
+            item: PriceAggregate.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            doNotallowOutOfStockMaterial: true,
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          ),
+        ),
         expect: () => [
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: none(),
-            isFetching: true,
           ),
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: optionOf(
@@ -384,7 +403,6 @@ void main() {
                 ApiFailure.other('Fake-Error'),
               ),
             ),
-            isFetching: false,
           ),
         ],
       );
@@ -528,21 +546,19 @@ void main() {
                   [mockZmgCartItemList.first.getMaterialNumber]);
         },
         act: (bloc) => bloc.add(CartEvent.addToCart(
-          item: mockZmgCartItemList.first,
-          customerCodeInfo: CustomerCodeInfo.empty(),
-          salesOrganisation: SalesOrganisation.empty(),
-          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-          shipToInfo: ShipToInfo.empty(),
-          doNotallowOutOfStockMaterial: true,
-        )),
+            item: mockZmgCartItemList.first,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            doNotallowOutOfStockMaterial: true,
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty())),
         expect: () => [
-          CartState.initial().copyWith(isFetching: true),
+          CartState.initial(),
           CartState.initial().copyWith(
             cartItemList: [mockZmgCartItemList.first],
             selectedItemsMaterialNumber: [
               mockZmgCartItemList.first.getMaterialNumber
             ],
-            isFetching: false,
           ),
           CartState.initial().copyWith(
             cartItemList: [
@@ -551,7 +567,6 @@ void main() {
             selectedItemsMaterialNumber: [
               mockZmgCartItemList.first.getMaterialNumber
             ],
-            isFetching: false,
           ),
         ],
         verify: (CartBloc bloc) {
@@ -577,7 +592,6 @@ void main() {
         seed: () => CartState.initial().copyWith(
           cartItemList: [mockZmgCartItemList.first.copyWith(quantity: 2)],
           selectedItemsMaterialNumber: [],
-          isFetching: false,
         ),
         build: () => CartBloc(cartRepository: cartRepositoryMock),
         setUp: () {
@@ -623,11 +637,6 @@ void main() {
         )),
         expect: () => [
           CartState.initial().copyWith(
-            cartItemList: [mockZmgCartItemList.first.copyWith(quantity: 2)],
-            selectedItemsMaterialNumber: [],
-            isFetching: true,
-          ),
-          CartState.initial().copyWith(
             cartItemList: [
               mockZmgCartItemList.first.copyWith(quantity: 2),
               mockZmgCartItemList.last.copyWith(quantity: 3)
@@ -635,7 +644,6 @@ void main() {
             selectedItemsMaterialNumber: [
               mockZmgCartItemList.last.getMaterialNumber,
             ],
-            isFetching: false,
           ),
           CartState.initial().copyWith(
             cartItemList: [
@@ -647,7 +655,6 @@ void main() {
             selectedItemsMaterialNumber: [
               mockZmgCartItemList.last.getMaterialNumber
             ],
-            isFetching: false,
           ),
         ],
         verify: (CartBloc bloc) {
@@ -961,7 +968,6 @@ void main() {
             ),
           ],
           selectedItemsMaterialNumber: [],
-          isFetching: false,
         ),
         build: () => CartBloc(cartRepository: cartRepositoryMock),
         setUp: () {
@@ -1035,16 +1041,6 @@ void main() {
         expect: () => [
           CartState.initial().copyWith(
             cartItemList: [
-              mockZmgCartItemList.last.copyWith(
-                price:
-                    mockZmgCartItemList.last.price.copyWith(zmgDiscount: false),
-              ),
-            ],
-            selectedItemsMaterialNumber: [],
-            isFetching: true,
-          ),
-          CartState.initial().copyWith(
-            cartItemList: [
               mockZmgCartItemList.first.copyWith(
                 quantity: 5,
                 price: mockZmgCartItemList.first.price
@@ -1058,7 +1054,6 @@ void main() {
             selectedItemsMaterialNumber: [
               mockZmgCartItemList.first.getMaterialNumber
             ],
-            isFetching: false,
           ),
           CartState.initial().copyWith(
             cartItemList: [
@@ -1077,7 +1072,6 @@ void main() {
             selectedItemsMaterialNumber: [
               mockZmgCartItemList.first.getMaterialNumber
             ],
-            isFetching: false,
           ),
         ],
         verify: (CartBloc bloc) {
@@ -1246,7 +1240,7 @@ void main() {
         setUp: () {
           when(() => cartRepositoryMock.updateBonusItem(
                 cartItem: PriceAggregate.empty(),
-                bonusItem: MaterialInfo.empty(),
+                bonusItem: MaterialItemBonus.empty(),
                 isUpdatedFromCart: false,
                 quantity: 10,
               )).thenAnswer(
@@ -1263,7 +1257,7 @@ void main() {
         act: (bloc) => bloc.add(
           CartEvent.updateBonusItem(
             cartItem: PriceAggregate.empty(),
-            bonusItem: MaterialInfo.empty(),
+            bonusItem: MaterialItemBonus.empty(),
             isUpdateFromCart: false,
             bonusItemCount: 10,
           ),
@@ -1286,7 +1280,7 @@ void main() {
         setUp: () {
           when(() => cartRepositoryMock.updateBonusItem(
                 cartItem: PriceAggregate.empty(),
-                bonusItem: MaterialInfo.empty(),
+                bonusItem: MaterialItemBonus.empty(),
                 isUpdatedFromCart: true,
                 quantity: 10,
               )).thenAnswer(
@@ -1303,7 +1297,7 @@ void main() {
         act: (bloc) => bloc.add(
           CartEvent.updateBonusItem(
             cartItem: PriceAggregate.empty(),
-            bonusItem: MaterialInfo.empty(),
+            bonusItem: MaterialItemBonus.empty(),
             isUpdateFromCart: true,
             bonusItemCount: 10,
           ),
@@ -1326,7 +1320,7 @@ void main() {
         setUp: () {
           when(() => cartRepositoryMock.deleteBonusItem(
                 cartItem: PriceAggregate.empty(),
-                bonusItem: MaterialInfo.empty(),
+                bonusItem: MaterialItemBonus.empty(),
                 isUpdateFromCart: true,
               )).thenAnswer(
             (invocation) async => Right(
@@ -1342,7 +1336,7 @@ void main() {
         act: (bloc) => bloc.add(
           CartEvent.deleteBonusItem(
             cartItem: PriceAggregate.empty(),
-            bonusItem: MaterialInfo.empty(),
+            bonusItem: MaterialItemBonus.empty(),
             isUpdateFromCart: true,
           ),
         ),
@@ -1447,12 +1441,27 @@ void main() {
       blocTest<CartBloc, CartState>(
         'Add remark to the bonus item',
         build: () => CartBloc(cartRepository: cartRepositoryMock),
+        seed: () => CartState.initial().copyWith(cartItemList: [
+          mockCartItemList.first.copyWith(addedBonusList: [
+            MaterialItemBonus.empty().copyWith(
+              materialInfo: mockCartItemList.first.materialInfo,
+            )
+          ])
+        ], remarks: Remarks('test')),
         setUp: () {
           when(() => cartRepositoryMock.updateBonusItem(
-                bonusItem: MaterialInfo.empty().copyWith(quantity: 2),
-                cartItem: mockCartItemList[0],
+                bonusItem: MaterialItemBonus.empty().copyWith(
+                  comment: 'test',
+                  materialInfo: mockCartItemList.first.materialInfo
+                      .copyWith(remarks: 'test'),
+                ),
+                cartItem: mockCartItemList.first.copyWith(addedBonusList: [
+                  MaterialItemBonus.empty().copyWith(
+                    materialInfo: mockCartItemList.first.materialInfo,
+                  )
+                ]),
                 isUpdatedFromCart: true,
-                quantity: 2,
+                quantity: 0,
               )).thenAnswer(
             (invocation) async => Right(mockCartItemList),
           );
@@ -1464,17 +1473,28 @@ void main() {
         },
         act: (bloc) => bloc.add(
           CartEvent.addRemarksToBonusItem(
-            bonusItem: MaterialInfo.empty().copyWith(quantity: 2),
+            bonusItem: mockCartItemList.first.materialInfo,
             isDelete: true,
-            item: mockCartItemList[0],
+            item: mockCartItemList.first.copyWith(addedBonusList: [
+              MaterialItemBonus.empty().copyWith(
+                materialInfo: mockCartItemList.first.materialInfo,
+              )
+            ]),
           ),
         ),
         expect: () => [
           CartState.initial().copyWith(
-            isRemarksAdding: true,
-            apiFailureOrSuccessOption: none(),
-            isFetching: true,
-          ),
+              cartItemList: [
+                mockCartItemList.first.copyWith(addedBonusList: [
+                  MaterialItemBonus.empty().copyWith(
+                    materialInfo: mockCartItemList.first.materialInfo,
+                  )
+                ])
+              ],
+              isRemarksAdding: true,
+              apiFailureOrSuccessOption: none(),
+              isFetching: true,
+              remarks: Remarks('test')),
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: none(),
             cartItemList: mockCartItemList,
@@ -1487,40 +1507,72 @@ void main() {
       blocTest<CartBloc, CartState>(
         'Failed to load remark to the bonus item',
         build: () => CartBloc(cartRepository: cartRepositoryMock),
+        seed: () => CartState.initial().copyWith(cartItemList: [
+          mockCartItemList.first.copyWith(addedBonusList: [
+            MaterialItemBonus.empty().copyWith(
+              materialInfo: mockCartItemList.first.materialInfo,
+            )
+          ])
+        ], remarks: Remarks('test')),
         setUp: () {
           when(() => cartRepositoryMock.updateBonusItem(
-                bonusItem: MaterialInfo.empty().copyWith(quantity: 2),
-                cartItem: mockCartItemList[0],
+                bonusItem: MaterialItemBonus.empty().copyWith(
+                  comment: 'test',
+                  materialInfo: mockCartItemList.first.materialInfo
+                      .copyWith(remarks: 'test'),
+                ),
+                cartItem: mockCartItemList.first.copyWith(addedBonusList: [
+                  MaterialItemBonus.empty().copyWith(
+                    materialInfo: mockCartItemList.first.materialInfo,
+                  )
+                ]),
                 isUpdatedFromCart: true,
-                quantity: 2,
+                quantity: 0,
               )).thenAnswer(
-            (invocation) async => const Left(
-              ApiFailure.other('Fake-Error'),
+            (invocation) async => const Left(ApiFailure.other('Fake Error')),
+          );
+          when(() => cartRepositoryMock.fetchCartItems()).thenAnswer(
+            (invocation) async => Right(
+              mockCartItemList,
             ),
           );
         },
         act: (bloc) => bloc.add(
           CartEvent.addRemarksToBonusItem(
-            bonusItem: MaterialInfo.empty().copyWith(quantity: 2),
+            bonusItem: mockCartItemList.first.materialInfo,
             isDelete: true,
-            item: mockCartItemList[0],
+            item: mockCartItemList.first.copyWith(addedBonusList: [
+              MaterialItemBonus.empty().copyWith(
+                materialInfo: mockCartItemList.first.materialInfo,
+              )
+            ]),
           ),
         ),
         expect: () => [
           CartState.initial().copyWith(
-            isRemarksAdding: true,
-            apiFailureOrSuccessOption: none(),
-            isFetching: true,
-          ),
+              cartItemList: [
+                mockCartItemList.first.copyWith(addedBonusList: [
+                  MaterialItemBonus.empty().copyWith(
+                    materialInfo: mockCartItemList.first.materialInfo,
+                  )
+                ])
+              ],
+              isRemarksAdding: true,
+              apiFailureOrSuccessOption: none(),
+              isFetching: true,
+              remarks: Remarks('test')),
           CartState.initial().copyWith(
-            apiFailureOrSuccessOption: optionOf(
-              const Left(
-                ApiFailure.other('Fake-Error'),
-              ),
-            ),
-            cartItemList: [],
+            apiFailureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('Fake Error'))),
+            cartItemList: [
+              mockCartItemList.first.copyWith(addedBonusList: [
+                MaterialItemBonus.empty().copyWith(
+                  materialInfo: mockCartItemList.first.materialInfo,
+                )
+              ])
+            ],
             isFetching: false,
-            remarks: Remarks(''),
+            remarks: Remarks('test'),
             isRemarksAdding: false,
           ),
         ],

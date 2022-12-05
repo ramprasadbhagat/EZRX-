@@ -107,4 +107,8 @@ class EligibilityState with _$EligibilityState {
   bool get isShowPOAttachmentEnable => salesOrgConfigs.showPOAttachment;
 
   bool get enableOHPrice => salesOrgConfigs.enableOHPrice;
+
+  bool get getBonusOverRide => user.role.type.isSalesRep
+      ? user.hasBonusOverride
+      : salesOrgConfigs.priceOverride;
 }

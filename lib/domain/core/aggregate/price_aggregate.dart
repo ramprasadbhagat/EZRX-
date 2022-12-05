@@ -1,12 +1,14 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
-import 'package:ezrxmobile/domain/order/entities/saved_order_material.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'price_aggregate.freezed.dart';
@@ -22,7 +24,7 @@ class PriceAggregate with _$PriceAggregate {
     required SalesOrganisationConfigs salesOrgConfig,
     required int quantity,
     required int discountedMaterialCount,
-    required List<MaterialInfo> addedBonusList,
+    required List<MaterialItemBonus> addedBonusList,
     required StockInfo stockInfo,
   }) = _PriceAggregate;
 
@@ -51,14 +53,17 @@ class PriceAggregate with _$PriceAggregate {
     );
   }
 
-  SavedOrderMaterial toSavedOrderMaterial() {
-    return SavedOrderMaterial.empty().copyWith(
+  MaterialItem toSavedOrderMaterial() {
+    return MaterialItem.empty().copyWith(
       materialNumber: materialInfo.materialNumber,
       qty: quantity,
       defaultMaterialDescription: materialInfo.materialDescription,
       type: 'Comm',
       itemRegistrationNumber: materialInfo.itemRegistrationNumber,
       unitOfMeasurement: materialInfo.unitOfMeasurement,
+      bonuses: addedBonusList
+          .where((element) => element.additionalBonusFlag)
+          .toList(),
       // zdp8Override: isOverride,
       hidePrice: materialInfo.hidePrice,
       materialGroup2: materialInfo.materialGroup2,
@@ -215,6 +220,79 @@ class PriceAggregate with _$PriceAggregate {
             salesOrgConfig.enableTaxClassification,
           );
   }
+
+  bool get isEligibleForBonus =>
+      bonusavailable && quantity >= price.priceBonusItem.last.bonusQuantity;
+
+  bool get refreshAddedBonus =>
+      _addedDealBonusMaterial.qty != _calculateMaterialItemBonus;
+
+  bool get isDealBounsAdded => addedBonusList.any((element) =>
+      element.materialInfo.materialNumber == materialInfo.materialNumber);
+
+  bool get bonusavailable =>
+      price.priceBonusItem.isNotEmpty && _bonusItem != BonusMaterial.empty();
+
+  BonusMaterial get _bonusItem => price.priceBonusItem.firstWhere(
+        (BonusMaterial element) => quantity >= element.qualifyingQuantity,
+        orElse: () => BonusMaterial.empty(),
+      );
+
+  MaterialItemBonus get _addedDealBonusMaterial => addedBonusList.firstWhere(
+        (MaterialItemBonus element) =>
+            element.materialInfo.materialNumber == materialInfo.materialNumber,
+        orElse: () => MaterialItemBonus.empty(),
+      );
+
+  int get _calculateMaterialItemBonus {
+    switch (_bonusItem.calculation.getCalculationEnum) {
+      case BonusMaterialCalculationEnum.calculation915:
+        return (quantity / _bonusItem.qualifyingQuantity).truncate() *
+            _bonusItem.bonusQuantity;
+
+      case BonusMaterialCalculationEnum.calculation914:
+        return ((quantity / _bonusItem.qualifyingQuantity) *
+                _bonusItem.bonusQuantity)
+            .truncate();
+
+      case BonusMaterialCalculationEnum.calculation913:
+        var bonusQty = 0;
+        price.priceBonusItem.fold<int>(quantity, (remainQty, item) {
+          final ratio = (remainQty / item.qualifyingQuantity).truncate();
+          if (remainQty >= item.qualifyingQuantity) {
+            bonusQty += (ratio * item.bonusQuantity).truncate();
+          }
+
+          return remainQty - (ratio * item.qualifyingQuantity);
+        });
+        return bonusQty;
+
+      case BonusMaterialCalculationEnum.calculation911:
+        return (quantity / _bonusItem.bonusRatio).truncate() *
+            _bonusItem.bonusQuantity;
+
+      case BonusMaterialCalculationEnum.calculation912:
+      default:
+        return _bonusItem.bonusQuantity;
+    }
+  }
+
+  MaterialItemBonus get getMaterialItemBonus {
+    final ratio = (quantity / _bonusItem.qualifyingQuantity).floor();
+    final remainingQty = quantity - (_bonusItem.qualifyingQuantity * ratio);
+
+    return MaterialItemBonus.fromBonusMaterial(_bonusItem).copyWith(
+      qty: _calculateMaterialItemBonus,
+      remainingQty: remainingQty,
+      additionalBonusFlag: false,
+      bonusOverrideFlag: true,
+    );
+  }
+
+  bool get isEligibleAddAdditionBonus =>
+      !materialInfo.materialGroup4.isFOC &&
+      !materialInfo.hidePrice &&
+      (salesOrgConfig.netPriceOverride || price.additionalBonusEligible);
 }
 
 enum PriceType {

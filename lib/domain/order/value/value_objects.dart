@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
+import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/value/value_validators.dart';
 
@@ -255,4 +256,18 @@ class TemplateName extends ValueObject<String> {
   }
 
   const TemplateName._(this.value);
+}
+
+class BonusMaterialCalculation extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory BonusMaterialCalculation(String input) {
+    return BonusMaterialCalculation._(validateStringNotEmpty(input));
+  }
+
+  BonusMaterialCalculationEnum get getCalculationEnum =>
+      getBonusCalculationEnum(value.getOrElse(() => ''));
+
+  const BonusMaterialCalculation._(this.value);
 }

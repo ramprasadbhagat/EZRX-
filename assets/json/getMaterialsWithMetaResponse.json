@@ -227,6 +227,32 @@
           "hidePrice": false,
           "hasValidTenderContract": null,
           "hasMandatoryTenderContract": null
+        },
+        {
+          "materialNumber": "000000000023063774",
+          "materialDescription": "(M) TEOSYAL PS RD I 1ML PRFS 2'S",
+          "principalCode": "0000101363",
+          "principalName": "PARVUS SDN BHD",
+          "therapeuticClass": "Other dermatological preparations",
+          "governmentMaterialCode": "",
+          "genericMaterialName": "",
+          "defaultMaterialDescription": "(M) TEOSYAL PS RD I 1ML PRFS 2'S",
+          "oldMaterialCode": "PVFILTEOPRI2MLAC",
+          "materialGroup4": "2GD",
+          "materialGroup2": "",
+          "taxClassification": "Product : No Tax",
+          "itemRegistrationNumber": "NOT REQUIRED",
+          "taxM1": "0",
+          "taxes": [
+            "6"
+          ],
+          "unitOfMeasurement": "EA",
+          "hidePrice": false,
+          "hasValidTenderContract": null,
+          "hasMandatoryTenderContract": null,
+          "isSampleMaterial": false,
+          "isFOCMaterial": false,
+          "__typename": "Material"
         }
       ]
     }

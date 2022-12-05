@@ -201,7 +201,7 @@ class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
                                   !widget.cartItem.salesOrgConfig
                                           .hideStockDisplay
                                       ? Text(
-                                          '${'In Stock : '.tr()}${widget.cartItem.stockInfo.inStock.getOrCrash()}',
+                                          '${'In Stock : '.tr()}${widget.cartItem.stockInfo.inStock.getOrDefaultValue('')}',
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyText1

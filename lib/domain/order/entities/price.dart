@@ -54,4 +54,9 @@ class Price with _$Price {
   bool get isTireDiscountEligible => tiers.isNotEmpty;
 
   bool get isDiscountEligible => isTireDiscountEligible || zmgDiscount;
+
+  bool get isBonusDealEligible => priceBonusItem.isNotEmpty;
+
+  List<BonusMaterial> get priceBonusItem =>
+      bonuses.isNotEmpty ? bonuses.first.getItems : <BonusMaterial>[];
 }

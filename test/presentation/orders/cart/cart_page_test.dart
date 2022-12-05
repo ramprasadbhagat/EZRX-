@@ -13,11 +13,13 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -112,13 +114,14 @@ void main() {
       mockCartItemBundles = [
         PriceAggregate.empty().copyWith(
           addedBonusList: [
-            MaterialInfo.empty().copyWith(
+            MaterialItemBonus.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
               materialNumber: MaterialNumber('0000000000111111'),
               materialDescription: ' Mosys D',
               principalData: PrincipalData.empty().copyWith(
                 principalName: '台灣拜耳股份有限公司',
               ),
-            ),
+            )),
           ],
           quantity: 10,
           bundle: Bundle(
@@ -140,13 +143,15 @@ void main() {
         ),
         PriceAggregate.empty().copyWith(
           addedBonusList: [
-            MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('0000000000111111'),
-              materialDescription: ' Mosys D',
-              principalData: PrincipalData.empty().copyWith(
-                principalName: '台灣拜耳股份有限公司',
+            MaterialItemBonus.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('0000000000111111'),
+                materialDescription: ' Mosys D',
+                principalData: PrincipalData.empty().copyWith(
+                  principalName: '台灣拜耳股份有限公司',
+                ),
               ),
-            ),
+            )
           ],
           quantity: 1,
           bundle: Bundle.empty(),
@@ -167,12 +172,11 @@ void main() {
       mockCartItemWithDataList = [
         PriceAggregate.empty().copyWith(
           addedBonusList: [
-            MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('0000000000111111'),
-              materialDescription: ' Mosys D',
-              principalData: PrincipalData.empty().copyWith(
-                principalName: '台灣拜耳股份有限公司',
+            MaterialItemBonus.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('0000000000111111'),
               ),
+              materialDescription: ' Mosys D',
             ),
           ],
           quantity: 1,
@@ -263,6 +267,8 @@ void main() {
               customerCodeInfo: CustomerCodeInfo.empty().copyWith(
         customerCodeSoldTo: '1234',
       )));
+      when(() => userBloc.state).thenReturn(UserState.initial()
+          .copyWith(user: User.empty().copyWith(hasBonusOverride: false)));
     },
   );
   group(
@@ -271,6 +277,7 @@ void main() {
       Widget getWidget() {
         return MultiBlocProviderFrameWrapper(
           providers: [
+            BlocProvider<UserBloc>(create: (context) => userBloc),
             BlocProvider<CartBloc>(create: (context) => cartBloc),
             BlocProvider<MaterialPriceBloc>(
                 create: (context) => materialPriceBloc),

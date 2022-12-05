@@ -401,6 +401,7 @@ void main() {
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
           enableOrderType: false,
+          hasBonusOverride: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.isValid();
@@ -429,6 +430,7 @@ void main() {
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
           enableOrderType: false,
+          hasBonusOverride: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -463,6 +465,7 @@ void main() {
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
           enableOrderType: false,
+          hasBonusOverride: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -497,6 +500,7 @@ void main() {
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
           enableOrderType: false,
+          hasBonusOverride: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -531,6 +535,7 @@ void main() {
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
           enableOrderType: false,
+          hasBonusOverride: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -565,6 +570,7 @@ void main() {
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
           enableOrderType: false,
+          hasBonusOverride: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -600,6 +606,7 @@ void main() {
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
           enableOrderType: false,
+          hasBonusOverride: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -635,6 +642,7 @@ void main() {
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
           enableOrderType: false,
+          hasBonusOverride: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -669,6 +677,7 @@ void main() {
           settings: Settings.empty(),
           settingTc: SettingTc.empty(),
           enableOrderType: false,
+          hasBonusOverride: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(

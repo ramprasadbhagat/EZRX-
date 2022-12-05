@@ -49,6 +49,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool enableOHPrice,
     required bool ponRequired,
     required bool enableTaxDisplay,
+    required bool netPriceOverride,
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
@@ -93,6 +94,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         enableOHPrice: true,
         ponRequired: false,
         enableTaxDisplay: false,
+        netPriceOverride: false,
       );
 
   String get getConfigLangauge {

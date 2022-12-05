@@ -88,6 +88,7 @@ void main() {
     enableOHPrice: true,
     ponRequired: false,
     enableTaxDisplay: false,
+    netPriceOverride: false,
   );
 
   const fakeSelectedPrincipalFilterCategory = MaterialFilterType.principal;

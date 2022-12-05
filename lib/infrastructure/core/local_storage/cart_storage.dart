@@ -1,9 +1,10 @@
 import 'package:ezrxmobile/domain/core/error/exception.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_configs_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/material_item_bonus_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_aggregate_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_bonus_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_bundle_dto.dart';
@@ -40,7 +41,8 @@ class CartStorage {
         ..registerAdapter(PriceDtoAdapter())
         ..registerAdapter(SalesOrganisationConfigsDtoAdapter())
         ..registerAdapter(PriceAggregateDtoAdapter())
-        ..registerAdapter(StockInfoDtoAdapter());
+        ..registerAdapter(StockInfoDtoAdapter())
+        ..registerAdapter(MaterialItemBonusDtoAdapter());
       _cartBox = await Hive.openBox(
         _boxName,
       );
@@ -50,7 +52,6 @@ class CartStorage {
       await init();
     }
   }
-
 
   Future<List<PriceAggregateDto>> get() async {
     try {
@@ -150,7 +151,7 @@ class CartStorage {
 //Adding and updating the bonus list
   Future updateBonus({
     required PriceAggregateDto cartDto,
-    required MaterialInfo bonusItem,
+    required MaterialItemBonus bonusItem,
     required int quantity,
     required bool isUpdateFromCart,
   }) async {
@@ -164,27 +165,27 @@ class CartStorage {
 
           for (var i = 0; i < existingItem.bonusItem.length; i++) {
             if (existingItem.bonusItem[i].materialNumber ==
-                bonusItem.materialNumber.getOrCrash()) {
+                bonusItem.materialInfo.materialNumber.getOrCrash()) {
               isUpdate = true;
-              // cartDto;
               final bonus =
                   existingItem.bonusItem.map((e) => e.toJson()).toList();
-              existingItem.bonusItem =
-                  bonus.map((e) => MaterialDto.fromJson(e)).toList();
-
               isUpdateFromCart
-                  ? bonus[i]['quantity'] = quantity
-                  : bonus[i]['quantity'] += quantity;
-              bonus[i]['remarks'] = bonusItem.remarks;
-
-              existingItem.bonusItem =
-                  bonus.map((e) => MaterialDto.fromJson(e)).toList();
+                  ? bonus[i]['freeQuantity'] = quantity
+                  : bonus[i]['freeQuantity'] += quantity;
+              bonus[i]['comment'] = bonusItem.materialInfo.remarks;
+              existingItem.bonusItem = bonus
+                  .map<MaterialItemBonusDto>(
+                    (e) => MaterialItemBonusDto.fromJson(e),
+                  )
+                  .toList();
             }
           }
           if (!isUpdate) {
-            final tempBonus = MaterialDto.fromDomain(bonusItem).toJson();
-            tempBonus['quantity'] = quantity;
-            existingItem.bonusItem.add(MaterialDto.fromJson(tempBonus));
+            final tempBonus =
+                MaterialItemBonusDto.fromDomain(bonusItem).toJson();
+            tempBonus['freeQuantity'] = quantity;
+            existingItem.bonusItem
+                .add(MaterialItemBonusDto.fromJson(tempBonus));
           }
           await _cartBox.put(entry.key, existingItem);
           break;
@@ -198,7 +199,7 @@ class CartStorage {
 //Adelete from bonus list
   Future deleteBonus({
     required PriceAggregateDto cartDto,
-    required MaterialInfo bonusItem,
+    required MaterialItemBonus bonusItem,
     required bool isUpdateFromCart,
   }) async {
     try {
@@ -207,20 +208,16 @@ class CartStorage {
 
         if (existingItem.materialDto.materialNumber ==
             cartDto.materialDto.materialNumber) {
-          var isUpdate = false;
-
           for (var i = 0; i < existingItem.bonusItem.length; i++) {
             if (existingItem.bonusItem[i].materialNumber ==
-                bonusItem.materialNumber.getOrCrash()) {
-              isUpdate = true;
-              // cartDto;
+                bonusItem.materialInfo.materialNumber.getOrCrash()) {
               final bonus =
                   existingItem.bonusItem.map((e) => e.toJson()).toList();
               existingItem.bonusItem =
-                  bonus.map((e) => MaterialDto.fromJson(e)).toList();
+                  bonus.map((e) => MaterialItemBonusDto.fromJson(e)).toList();
               bonus.removeAt(i);
               existingItem.bonusItem =
-                  bonus.map((e) => MaterialDto.fromJson(e)).toList();
+                  bonus.map((e) => MaterialItemBonusDto.fromJson(e)).toList();
             }
           }
 

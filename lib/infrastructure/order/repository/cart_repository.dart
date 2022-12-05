@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
@@ -292,7 +293,7 @@ class CartRepository implements ICartRepository {
   Future<Either<ApiFailure, List<PriceAggregate>>> updateBonusItem({
     required PriceAggregate cartItem,
     required int quantity,
-    required MaterialInfo bonusItem,
+    required MaterialItemBonus bonusItem,
     required bool isUpdatedFromCart,
   }) async {
     try {
@@ -312,7 +313,7 @@ class CartRepository implements ICartRepository {
   @override
   Future<Either<ApiFailure, List<PriceAggregate>>> deleteBonusItem({
     required PriceAggregate cartItem,
-    required MaterialInfo bonusItem,
+    required MaterialItemBonus bonusItem,
     required bool isUpdateFromCart,
   }) async {
     try {

@@ -103,15 +103,17 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
               enableRemarks: false,
               enableOHPrice: true,
               ponRequired: false,
-              enableTaxDisplay: false)
+              enableTaxDisplay: false,
+              netPriceOverride: false)
           : fields[3] as SalesOrganisationConfigsDto,
       zmgMaterialCountOnCart: fields[4] == null ? 0 : fields[4] as int,
       bundleDto: fields[5] == null
           ? const BundleDto(
               bundleName: '', bundleCode: '', bundleInformation: [])
           : fields[5] as BundleDto,
-      bonusItem:
-          fields[6] == null ? [] : (fields[6] as List).cast<MaterialDto>(),
+      bonusItem: fields[6] == null
+          ? []
+          : (fields[6] as List).cast<MaterialItemBonusDto>(),
       stockInfoDto: fields[7] == null
           ? const StockInfoDto(
               batch: '',

@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_configs_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/material_item_bonus_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/stock_info_dto.dart';
 import 'package:hive/hive.dart';
@@ -34,7 +35,7 @@ class PriceAggregateDto {
   @HiveField(5, defaultValue: _emptyBundleDto)
   BundleDto bundleDto;
   @HiveField(6, defaultValue: [])
-  List<MaterialDto> bonusItem;
+  List<MaterialItemBonusDto> bonusItem;
   @HiveField(7, defaultValue: _emptyStockInfoDto)
   StockInfoDto stockInfoDto;
 
@@ -51,7 +52,7 @@ class PriceAggregateDto {
       bundleDto: BundleDto.fromDomain(cart.bundle),
       bonusItem: cart.addedBonusList
           .map(
-            (e) => MaterialDto.fromDomain(e),
+            (e) => MaterialItemBonusDto.fromDomain(e),
           )
           .toList(),
     );
@@ -159,6 +160,7 @@ const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
   enableOHPrice: true,
   ponRequired: false,
   enableTaxDisplay: false,
+  netPriceOverride: false,
 );
 
 const BundleDto _emptyBundleDto = BundleDto(

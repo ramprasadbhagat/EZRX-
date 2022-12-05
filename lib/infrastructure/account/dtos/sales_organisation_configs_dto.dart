@@ -137,6 +137,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
     @HiveField(140, defaultValue: false)
         required bool enableTaxAtTotalLevelOnly,
+    @JsonKey(name: 'netPriceOverride', defaultValue: false)
+    @HiveField(141, defaultValue: false)
+        required bool netPriceOverride,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -184,6 +187,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableOHPrice: configs.enableOHPrice,
       ponRequired: configs.ponRequired,
       enableTaxDisplay: configs.enableTaxDisplay,
+      netPriceOverride: configs.netPriceOverride,
     );
   }
 
@@ -230,6 +234,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableOHPrice: enableOHPrice,
       ponRequired: ponRequired,
       enableTaxDisplay: enableTaxDisplay,
+      netPriceOverride: netPriceOverride,
     );
   }
 

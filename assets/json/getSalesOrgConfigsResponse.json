@@ -29,7 +29,7 @@
             "languageValue": "",
             "materialWithoutPrice": false,
             "enablePaymentTerms": true,
-            "enableBatchNumber": false,
+            "enableBatchNumber": true,
             "enableOHPrice": true,
             "enableSpecialInstructions": true,
             "enableReferenceNote": false,

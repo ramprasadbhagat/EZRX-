@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/order/entities/saved_order_material.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_bonus_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.dart';
@@ -42,8 +42,8 @@ class MaterialItemDto with _$MaterialItemDto {
     @JsonKey(name: 'remarks', defaultValue: '') required String remarks,
   }) = _MaterialItemDto;
 
-  SavedOrderMaterial toDomain() {
-    return SavedOrderMaterial(
+  MaterialItem toDomain() {
+    return MaterialItem(
       defaultMaterialDescription: defaultMaterialDescription,
       qty: qty,
       type: type,
@@ -64,7 +64,7 @@ class MaterialItemDto with _$MaterialItemDto {
     );
   }
 
-  factory MaterialItemDto.fromDomain(SavedOrderMaterial materialItem) {
+  factory MaterialItemDto.fromDomain(MaterialItem materialItem) {
     return MaterialItemDto(
       batchNumber: materialItem.batchNumber,
       bonuses: materialItem.bonuses

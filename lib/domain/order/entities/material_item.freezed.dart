@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'saved_order_material.dart';
+part of 'material_item.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,15 +15,14 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$SavedOrderMaterial {
+mixin _$MaterialItem {
   int get qty => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String get comment => throw _privateConstructorUsedError;
   bool get hidePrice => throw _privateConstructorUsedError;
   String get batchNumber => throw _privateConstructorUsedError;
   bool get zdp8Override => throw _privateConstructorUsedError;
-  List<SavedOrderMaterialBonus> get bonuses =>
-      throw _privateConstructorUsedError;
+  List<MaterialItemBonus> get bonuses => throw _privateConstructorUsedError;
   MaterialGroup get materialGroup2 => throw _privateConstructorUsedError;
   MaterialGroup get materialGroup4 => throw _privateConstructorUsedError;
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
@@ -36,15 +35,15 @@ mixin _$SavedOrderMaterial {
   String get remarks => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SavedOrderMaterialCopyWith<SavedOrderMaterial> get copyWith =>
+  $MaterialItemCopyWith<MaterialItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SavedOrderMaterialCopyWith<$Res> {
-  factory $SavedOrderMaterialCopyWith(
-          SavedOrderMaterial value, $Res Function(SavedOrderMaterial) then) =
-      _$SavedOrderMaterialCopyWithImpl<$Res, SavedOrderMaterial>;
+abstract class $MaterialItemCopyWith<$Res> {
+  factory $MaterialItemCopyWith(
+          MaterialItem value, $Res Function(MaterialItem) then) =
+      _$MaterialItemCopyWithImpl<$Res, MaterialItem>;
   @useResult
   $Res call(
       {int qty,
@@ -53,7 +52,7 @@ abstract class $SavedOrderMaterialCopyWith<$Res> {
       bool hidePrice,
       String batchNumber,
       bool zdp8Override,
-      List<SavedOrderMaterialBonus> bonuses,
+      List<MaterialItemBonus> bonuses,
       MaterialGroup materialGroup2,
       MaterialGroup materialGroup4,
       MaterialNumber materialNumber,
@@ -69,9 +68,9 @@ abstract class $SavedOrderMaterialCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SavedOrderMaterialCopyWithImpl<$Res, $Val extends SavedOrderMaterial>
-    implements $SavedOrderMaterialCopyWith<$Res> {
-  _$SavedOrderMaterialCopyWithImpl(this._value, this._then);
+class _$MaterialItemCopyWithImpl<$Res, $Val extends MaterialItem>
+    implements $MaterialItemCopyWith<$Res> {
+  _$MaterialItemCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -127,7 +126,7 @@ class _$SavedOrderMaterialCopyWithImpl<$Res, $Val extends SavedOrderMaterial>
       bonuses: null == bonuses
           ? _value.bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
-              as List<SavedOrderMaterialBonus>,
+              as List<MaterialItemBonus>,
       materialGroup2: null == materialGroup2
           ? _value.materialGroup2
           : materialGroup2 // ignore: cast_nullable_to_non_nullable
@@ -181,11 +180,11 @@ class _$SavedOrderMaterialCopyWithImpl<$Res, $Val extends SavedOrderMaterial>
 }
 
 /// @nodoc
-abstract class _$$_SavedOrderMaterialCopyWith<$Res>
-    implements $SavedOrderMaterialCopyWith<$Res> {
-  factory _$$_SavedOrderMaterialCopyWith(_$_SavedOrderMaterial value,
-          $Res Function(_$_SavedOrderMaterial) then) =
-      __$$_SavedOrderMaterialCopyWithImpl<$Res>;
+abstract class _$$_MaterialItemCopyWith<$Res>
+    implements $MaterialItemCopyWith<$Res> {
+  factory _$$_MaterialItemCopyWith(
+          _$_MaterialItem value, $Res Function(_$_MaterialItem) then) =
+      __$$_MaterialItemCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -195,7 +194,7 @@ abstract class _$$_SavedOrderMaterialCopyWith<$Res>
       bool hidePrice,
       String batchNumber,
       bool zdp8Override,
-      List<SavedOrderMaterialBonus> bonuses,
+      List<MaterialItemBonus> bonuses,
       MaterialGroup materialGroup2,
       MaterialGroup materialGroup4,
       MaterialNumber materialNumber,
@@ -212,11 +211,11 @@ abstract class _$$_SavedOrderMaterialCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SavedOrderMaterialCopyWithImpl<$Res>
-    extends _$SavedOrderMaterialCopyWithImpl<$Res, _$_SavedOrderMaterial>
-    implements _$$_SavedOrderMaterialCopyWith<$Res> {
-  __$$_SavedOrderMaterialCopyWithImpl(
-      _$_SavedOrderMaterial _value, $Res Function(_$_SavedOrderMaterial) _then)
+class __$$_MaterialItemCopyWithImpl<$Res>
+    extends _$MaterialItemCopyWithImpl<$Res, _$_MaterialItem>
+    implements _$$_MaterialItemCopyWith<$Res> {
+  __$$_MaterialItemCopyWithImpl(
+      _$_MaterialItem _value, $Res Function(_$_MaterialItem) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -240,7 +239,7 @@ class __$$_SavedOrderMaterialCopyWithImpl<$Res>
     Object? overrideInfo = null,
     Object? remarks = null,
   }) {
-    return _then(_$_SavedOrderMaterial(
+    return _then(_$_MaterialItem(
       qty: null == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
@@ -268,7 +267,7 @@ class __$$_SavedOrderMaterialCopyWithImpl<$Res>
       bonuses: null == bonuses
           ? _value._bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
-              as List<SavedOrderMaterialBonus>,
+              as List<MaterialItemBonus>,
       materialGroup2: null == materialGroup2
           ? _value.materialGroup2
           : materialGroup2 // ignore: cast_nullable_to_non_nullable
@@ -315,15 +314,15 @@ class __$$_SavedOrderMaterialCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SavedOrderMaterial extends _SavedOrderMaterial {
-  const _$_SavedOrderMaterial(
+class _$_MaterialItem extends _MaterialItem {
+  const _$_MaterialItem(
       {required this.qty,
       required this.type,
       required this.comment,
       required this.hidePrice,
       required this.batchNumber,
       required this.zdp8Override,
-      required final List<SavedOrderMaterialBonus> bonuses,
+      required final List<MaterialItemBonus> bonuses,
       required this.materialGroup2,
       required this.materialGroup4,
       required this.materialNumber,
@@ -349,9 +348,9 @@ class _$_SavedOrderMaterial extends _SavedOrderMaterial {
   final String batchNumber;
   @override
   final bool zdp8Override;
-  final List<SavedOrderMaterialBonus> _bonuses;
+  final List<MaterialItemBonus> _bonuses;
   @override
-  List<SavedOrderMaterialBonus> get bonuses {
+  List<MaterialItemBonus> get bonuses {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bonuses);
   }
@@ -379,14 +378,14 @@ class _$_SavedOrderMaterial extends _SavedOrderMaterial {
 
   @override
   String toString() {
-    return 'SavedOrderMaterial(qty: $qty, type: $type, comment: $comment, hidePrice: $hidePrice, batchNumber: $batchNumber, zdp8Override: $zdp8Override, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, defaultMaterialDescription: $defaultMaterialDescription, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, materialDescription: $materialDescription, overrideInfo: $overrideInfo, remarks: $remarks)';
+    return 'MaterialItem(qty: $qty, type: $type, comment: $comment, hidePrice: $hidePrice, batchNumber: $batchNumber, zdp8Override: $zdp8Override, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, defaultMaterialDescription: $defaultMaterialDescription, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, materialDescription: $materialDescription, overrideInfo: $overrideInfo, remarks: $remarks)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SavedOrderMaterial &&
+            other is _$_MaterialItem &&
             (identical(other.qty, qty) || other.qty == qty) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.comment, comment) || other.comment == comment) &&
@@ -444,20 +443,19 @@ class _$_SavedOrderMaterial extends _SavedOrderMaterial {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SavedOrderMaterialCopyWith<_$_SavedOrderMaterial> get copyWith =>
-      __$$_SavedOrderMaterialCopyWithImpl<_$_SavedOrderMaterial>(
-          this, _$identity);
+  _$$_MaterialItemCopyWith<_$_MaterialItem> get copyWith =>
+      __$$_MaterialItemCopyWithImpl<_$_MaterialItem>(this, _$identity);
 }
 
-abstract class _SavedOrderMaterial extends SavedOrderMaterial {
-  const factory _SavedOrderMaterial(
+abstract class _MaterialItem extends MaterialItem {
+  const factory _MaterialItem(
       {required final int qty,
       required final String type,
       required final String comment,
       required final bool hidePrice,
       required final String batchNumber,
       required final bool zdp8Override,
-      required final List<SavedOrderMaterialBonus> bonuses,
+      required final List<MaterialItemBonus> bonuses,
       required final MaterialGroup materialGroup2,
       required final MaterialGroup materialGroup4,
       required final MaterialNumber materialNumber,
@@ -467,8 +465,8 @@ abstract class _SavedOrderMaterial extends SavedOrderMaterial {
       required final String itemRegistrationNumber,
       required final String materialDescription,
       required final MaterialItemOverride overrideInfo,
-      required final String remarks}) = _$_SavedOrderMaterial;
-  const _SavedOrderMaterial._() : super._();
+      required final String remarks}) = _$_MaterialItem;
+  const _MaterialItem._() : super._();
 
   @override
   int get qty;
@@ -483,7 +481,7 @@ abstract class _SavedOrderMaterial extends SavedOrderMaterial {
   @override
   bool get zdp8Override;
   @override
-  List<SavedOrderMaterialBonus> get bonuses;
+  List<MaterialItemBonus> get bonuses;
   @override
   MaterialGroup get materialGroup2;
   @override
@@ -506,6 +504,6 @@ abstract class _SavedOrderMaterial extends SavedOrderMaterial {
   String get remarks;
   @override
   @JsonKey(ignore: true)
-  _$$_SavedOrderMaterialCopyWith<_$_SavedOrderMaterial> get copyWith =>
+  _$$_MaterialItemCopyWith<_$_MaterialItem> get copyWith =>
       throw _privateConstructorUsedError;
 }

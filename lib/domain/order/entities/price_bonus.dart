@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'price_bonus.freezed.dart';
@@ -12,6 +13,18 @@ class PriceBonus with _$PriceBonus {
   factory PriceBonus.empty() => const PriceBonus(
         items: [],
       );
+
+  List<PriceBonusItem> get sortedPriceBonusItem =>
+      List<PriceBonusItem>.from(items)
+        ..sort((
+          PriceBonusItem a,
+          PriceBonusItem b,
+        ) =>
+            b.qualifyingQuantity.compareTo(a.qualifyingQuantity));
+
+  List<BonusMaterial> get getItems => sortedPriceBonusItem
+      .map<BonusMaterial>((PriceBonusItem e) => e.bonusMaterials.first)
+      .toList();
 }
 
 @freezed
@@ -34,11 +47,28 @@ class PriceBonusItem with _$PriceBonusItem {
 class BonusMaterial with _$BonusMaterial {
   const BonusMaterial._();
   const factory BonusMaterial({
-    required String materialNumber,
+    required MaterialNumber materialNumber,
     required String materialDescription,
-    required String calculation,
+    required BonusMaterialCalculation calculation,
     required int bonusRatio,
     required int qualifyingQuantity,
     required int bonusQuantity,
   }) = _BonusMaterial;
+
+  factory BonusMaterial.empty() => BonusMaterial(
+        materialNumber: MaterialNumber(''),
+        materialDescription: '',
+        calculation: BonusMaterialCalculation(''),
+        bonusRatio: 0,
+        qualifyingQuantity: 0,
+        bonusQuantity: 0,
+      );
+}
+
+enum BonusMaterialCalculationEnum {
+  calculation915,
+  calculation914,
+  calculation913,
+  calculation912,
+  calculation911
 }

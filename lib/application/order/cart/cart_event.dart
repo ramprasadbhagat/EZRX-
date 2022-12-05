@@ -56,12 +56,12 @@ class CartEvent with _$CartEvent {
   const factory CartEvent.updateBonusItem({
     required int bonusItemCount,
     required PriceAggregate cartItem,
-    required MaterialInfo bonusItem,
+    required MaterialItemBonus bonusItem,
     required bool isUpdateFromCart,
   }) = _updateBonusItem;
   const factory CartEvent.deleteBonusItem({
     required PriceAggregate cartItem,
-    required MaterialInfo bonusItem,
+    required MaterialItemBonus bonusItem,
     required bool isUpdateFromCart,
   }) = _deleteBonusItem;
 

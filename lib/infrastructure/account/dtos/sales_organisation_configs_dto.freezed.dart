@@ -145,6 +145,9 @@ mixin _$SalesOrganisationConfigsDto {
   @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
   @HiveField(140, defaultValue: false)
   bool get enableTaxAtTotalLevelOnly => throw _privateConstructorUsedError;
+  @JsonKey(name: 'netPriceOverride', defaultValue: false)
+  @HiveField(141, defaultValue: false)
+  bool get netPriceOverride => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -284,7 +287,10 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
           bool enableTaxDisplay,
       @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
       @HiveField(140, defaultValue: false)
-          bool enableTaxAtTotalLevelOnly});
+          bool enableTaxAtTotalLevelOnly,
+      @JsonKey(name: 'netPriceOverride', defaultValue: false)
+      @HiveField(141, defaultValue: false)
+          bool netPriceOverride});
 }
 
 /// @nodoc
@@ -342,6 +348,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
     Object? enableIRN = null,
     Object? enableTaxDisplay = null,
     Object? enableTaxAtTotalLevelOnly = null,
+    Object? netPriceOverride = null,
   }) {
     return _then(_value.copyWith(
       disableProcessingStatus: null == disableProcessingStatus
@@ -508,6 +515,10 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
           ? _value.enableTaxAtTotalLevelOnly
           : enableTaxAtTotalLevelOnly // ignore: cast_nullable_to_non_nullable
               as bool,
+      netPriceOverride: null == netPriceOverride
+          ? _value.netPriceOverride
+          : netPriceOverride // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -645,7 +656,10 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
           bool enableTaxDisplay,
       @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
       @HiveField(140, defaultValue: false)
-          bool enableTaxAtTotalLevelOnly});
+          bool enableTaxAtTotalLevelOnly,
+      @JsonKey(name: 'netPriceOverride', defaultValue: false)
+      @HiveField(141, defaultValue: false)
+          bool netPriceOverride});
 }
 
 /// @nodoc
@@ -702,6 +716,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? enableIRN = null,
     Object? enableTaxDisplay = null,
     Object? enableTaxAtTotalLevelOnly = null,
+    Object? netPriceOverride = null,
   }) {
     return _then(_$_SalesOrganisationConfigsDto(
       disableProcessingStatus: null == disableProcessingStatus
@@ -868,6 +883,10 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.enableTaxAtTotalLevelOnly
           : enableTaxAtTotalLevelOnly // ignore: cast_nullable_to_non_nullable
               as bool,
+      netPriceOverride: null == netPriceOverride
+          ? _value.netPriceOverride
+          : netPriceOverride // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1000,7 +1019,10 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
           required this.enableTaxDisplay,
       @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
       @HiveField(140, defaultValue: false)
-          required this.enableTaxAtTotalLevelOnly})
+          required this.enableTaxAtTotalLevelOnly,
+      @JsonKey(name: 'netPriceOverride', defaultValue: false)
+      @HiveField(141, defaultValue: false)
+          required this.netPriceOverride})
       : _principalList = principalList,
         super._();
 
@@ -1177,10 +1199,14 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
   @HiveField(140, defaultValue: false)
   final bool enableTaxAtTotalLevelOnly;
+  @override
+  @JsonKey(name: 'netPriceOverride', defaultValue: false)
+  @HiveField(141, defaultValue: false)
+  final bool netPriceOverride;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, ponRequired: $ponRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, ponRequired: $ponRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride)';
   }
 
   @override
@@ -1257,7 +1283,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
             (identical(other.ponRequired, ponRequired) || other.ponRequired == ponRequired) &&
             (identical(other.enableIRN, enableIRN) || other.enableIRN == enableIRN) &&
             (identical(other.enableTaxDisplay, enableTaxDisplay) || other.enableTaxDisplay == enableTaxDisplay) &&
-            (identical(other.enableTaxAtTotalLevelOnly, enableTaxAtTotalLevelOnly) || other.enableTaxAtTotalLevelOnly == enableTaxAtTotalLevelOnly));
+            (identical(other.enableTaxAtTotalLevelOnly, enableTaxAtTotalLevelOnly) || other.enableTaxAtTotalLevelOnly == enableTaxAtTotalLevelOnly) &&
+            (identical(other.netPriceOverride, netPriceOverride) || other.netPriceOverride == netPriceOverride));
   }
 
   @JsonKey(ignore: true)
@@ -1304,7 +1331,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
         ponRequired,
         enableIRN,
         enableTaxDisplay,
-        enableTaxAtTotalLevelOnly
+        enableTaxAtTotalLevelOnly,
+        netPriceOverride
       ]);
 
   @JsonKey(ignore: true)
@@ -1448,7 +1476,10 @@ abstract class _SalesOrganisationConfigsDto
               required final bool enableTaxDisplay,
           @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
           @HiveField(140, defaultValue: false)
-              required final bool enableTaxAtTotalLevelOnly}) =
+              required final bool enableTaxAtTotalLevelOnly,
+          @JsonKey(name: 'netPriceOverride', defaultValue: false)
+          @HiveField(141, defaultValue: false)
+              required final bool netPriceOverride}) =
       _$_SalesOrganisationConfigsDto;
   const _SalesOrganisationConfigsDto._() : super._();
 
@@ -1620,6 +1651,10 @@ abstract class _SalesOrganisationConfigsDto
   @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
   @HiveField(140, defaultValue: false)
   bool get enableTaxAtTotalLevelOnly;
+  @override
+  @JsonKey(name: 'netPriceOverride', defaultValue: false)
+  @HiveField(141, defaultValue: false)
+  bool get netPriceOverride;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsDtoCopyWith<_$_SalesOrganisationConfigsDto>

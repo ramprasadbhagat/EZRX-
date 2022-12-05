@@ -17,7 +17,7 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
-import 'package:ezrxmobile/domain/order/entities/saved_order_material.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
@@ -65,7 +65,7 @@ void main() {
   late MaterialPriceDetailBloc materialPriceDetailBlocMock;
   late CartBloc cartBlocMock;
   late SavedOrder orderMock;
-  late List<SavedOrderMaterial> orderMockItems;
+  late List<MaterialItem> orderMockItems;
   late MockEligibilityBloc eligibilityBlocMock;
   late AppRouter autoRouterMock;
   late SavedOrderListBlocMock savedOrderListBlocMock;

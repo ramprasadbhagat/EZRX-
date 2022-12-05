@@ -27,6 +27,7 @@ mixin _$User {
   Settings get settings => throw _privateConstructorUsedError;
   SettingTc get settingTc => throw _privateConstructorUsedError;
   bool get enableOrderType => throw _privateConstructorUsedError;
+  bool get hasBonusOverride => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
@@ -47,7 +48,8 @@ abstract class $UserCopyWith<$Res> {
       List<SalesOrganisation> userSalesOrganisations,
       Settings settings,
       SettingTc settingTc,
-      bool enableOrderType});
+      bool enableOrderType,
+      bool hasBonusOverride});
 
   $FullNameCopyWith<$Res> get fullName;
   $RoleCopyWith<$Res> get role;
@@ -78,6 +80,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? settings = null,
     Object? settingTc = null,
     Object? enableOrderType = null,
+    Object? hasBonusOverride = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -119,6 +122,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       enableOrderType: null == enableOrderType
           ? _value.enableOrderType
           : enableOrderType // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasBonusOverride: null == hasBonusOverride
+          ? _value.hasBonusOverride
+          : hasBonusOverride // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -172,7 +179,8 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       List<SalesOrganisation> userSalesOrganisations,
       Settings settings,
       SettingTc settingTc,
-      bool enableOrderType});
+      bool enableOrderType,
+      bool hasBonusOverride});
 
   @override
   $FullNameCopyWith<$Res> get fullName;
@@ -203,6 +211,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? settings = null,
     Object? settingTc = null,
     Object? enableOrderType = null,
+    Object? hasBonusOverride = null,
   }) {
     return _then(_$_User(
       id: null == id
@@ -245,6 +254,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.enableOrderType
           : enableOrderType // ignore: cast_nullable_to_non_nullable
               as bool,
+      hasBonusOverride: null == hasBonusOverride
+          ? _value.hasBonusOverride
+          : hasBonusOverride // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -262,7 +275,8 @@ class _$_User extends _User {
       required final List<SalesOrganisation> userSalesOrganisations,
       required this.settings,
       required this.settingTc,
-      required this.enableOrderType})
+      required this.enableOrderType,
+      required this.hasBonusOverride})
       : _userSalesOrganisations = userSalesOrganisations,
         super._();
 
@@ -291,10 +305,12 @@ class _$_User extends _User {
   final SettingTc settingTc;
   @override
   final bool enableOrderType;
+  @override
+  final bool hasBonusOverride;
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, settings: $settings, settingTc: $settingTc, enableOrderType: $enableOrderType)';
+    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, settings: $settings, settingTc: $settingTc, enableOrderType: $enableOrderType, hasBonusOverride: $hasBonusOverride)';
   }
 
   @override
@@ -318,7 +334,9 @@ class _$_User extends _User {
             (identical(other.settingTc, settingTc) ||
                 other.settingTc == settingTc) &&
             (identical(other.enableOrderType, enableOrderType) ||
-                other.enableOrderType == enableOrderType));
+                other.enableOrderType == enableOrderType) &&
+            (identical(other.hasBonusOverride, hasBonusOverride) ||
+                other.hasBonusOverride == hasBonusOverride));
   }
 
   @override
@@ -333,7 +351,8 @@ class _$_User extends _User {
       const DeepCollectionEquality().hash(_userSalesOrganisations),
       settings,
       settingTc,
-      enableOrderType);
+      enableOrderType,
+      hasBonusOverride);
 
   @JsonKey(ignore: true)
   @override
@@ -353,7 +372,8 @@ abstract class _User extends User {
       required final List<SalesOrganisation> userSalesOrganisations,
       required final Settings settings,
       required final SettingTc settingTc,
-      required final bool enableOrderType}) = _$_User;
+      required final bool enableOrderType,
+      required final bool hasBonusOverride}) = _$_User;
   const _User._() : super._();
 
   @override
@@ -376,6 +396,8 @@ abstract class _User extends User {
   SettingTc get settingTc;
   @override
   bool get enableOrderType;
+  @override
+  bool get hasBonusOverride;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

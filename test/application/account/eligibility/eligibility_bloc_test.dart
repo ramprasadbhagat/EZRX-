@@ -75,6 +75,7 @@ void main() {
     enableOHPrice: true,
     ponRequired: false,
     enableTaxDisplay: false,
+    netPriceOverride: false,
   );
 
   group('Eligibility Bloc', () {

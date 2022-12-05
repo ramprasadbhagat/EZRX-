@@ -66,13 +66,14 @@ class SalesOrganisationConfigsDtoAdapter
       enableTaxDisplay: fields[138] == null ? false : fields[138] as bool,
       enableTaxAtTotalLevelOnly:
           fields[140] == null ? false : fields[140] as bool,
+      netPriceOverride: fields[141] == null ? false : fields[141] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_SalesOrganisationConfigsDto obj) {
     writer
-      ..writeByte(41)
+      ..writeByte(42)
       ..writeByte(100)
       ..write(obj.disableProcessingStatus)
       ..writeByte(101)
@@ -153,6 +154,8 @@ class SalesOrganisationConfigsDtoAdapter
       ..write(obj.enableTaxDisplay)
       ..writeByte(140)
       ..write(obj.enableTaxAtTotalLevelOnly)
+      ..writeByte(141)
+      ..write(obj.netPriceOverride)
       ..writeByte(7)
       ..write(obj.principalList);
   }
@@ -222,6 +225,7 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       enableTaxDisplay: json['enableTaxDisplay'] as bool? ?? false,
       enableTaxAtTotalLevelOnly:
           json['enableTaxAtTotalLevelOnly'] as bool? ?? false,
+      netPriceOverride: json['netPriceOverride'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -269,4 +273,5 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'enableIRN': instance.enableIRN,
       'enableTaxDisplay': instance.enableTaxDisplay,
       'enableTaxAtTotalLevelOnly': instance.enableTaxAtTotalLevelOnly,
+      'netPriceOverride': instance.netPriceOverride,
     };

@@ -88,6 +88,9 @@ class CartPage extends StatelessWidget {
                     switch (item.itemType) {
                       case CartItemType.material:
                         return CartMaterialItemTile(
+                          key: ValueKey(
+                            '${item.materials.first.materialInfo.materialNumber.getValue()}${item.materials.first.quantity}',
+                          ),
                           cartItem: item.materials.first,
                           taxCode: taxCode,
                           showCheckBox: true,

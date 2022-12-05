@@ -15,6 +15,7 @@ import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_action_button.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_invalid_warning.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_material_item.dart';
+import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_bouns_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -85,10 +86,18 @@ class SavedOrderDetailPage extends StatelessWidget {
                 (context, index) {
                   final material = order.items[index];
 
-                  return OrderMaterialItem(
-                    materialQueryInfo: material.queryInfo,
-                    materialNumber: material.materialNumber.displayMatNo,
-                    qty: material.qty.toString(),
+                  return Column(
+                    children: [
+                      OrderMaterialItem(
+                        materialQueryInfo: material.queryInfo,
+                        materialNumber: material.materialNumber.displayMatNo,
+                        qty: material.qty.toString(),
+                      ),
+                      if (material.bonuses.isNotEmpty)
+                        SaveOrderBounsTile(
+                          item: material,
+                        ),
+                    ],
                   );
                 },
                 childCount: order.items.length,
@@ -141,7 +150,7 @@ class SavedOrderDetailPage extends StatelessWidget {
           quantity: material.qty,
           discountedMaterialCount: cartBloc.state.zmgMaterialCount,
           bundle: Bundle.empty(),
-          addedBonusList: [],
+          addedBonusList: material.bonuses,
           stockInfo: StockInfo.empty().copyWith(
             materialNumber: itemInfo.info.materialNumber,
           ),

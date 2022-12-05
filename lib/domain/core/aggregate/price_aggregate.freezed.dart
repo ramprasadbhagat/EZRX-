@@ -23,7 +23,8 @@ mixin _$PriceAggregate {
       throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
   int get discountedMaterialCount => throw _privateConstructorUsedError;
-  List<MaterialInfo> get addedBonusList => throw _privateConstructorUsedError;
+  List<MaterialItemBonus> get addedBonusList =>
+      throw _privateConstructorUsedError;
   StockInfo get stockInfo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -44,7 +45,7 @@ abstract class $PriceAggregateCopyWith<$Res> {
       SalesOrganisationConfigs salesOrgConfig,
       int quantity,
       int discountedMaterialCount,
-      List<MaterialInfo> addedBonusList,
+      List<MaterialItemBonus> addedBonusList,
       StockInfo stockInfo});
 
   $PriceCopyWith<$Res> get price;
@@ -104,7 +105,7 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
       addedBonusList: null == addedBonusList
           ? _value.addedBonusList
           : addedBonusList // ignore: cast_nullable_to_non_nullable
-              as List<MaterialInfo>,
+              as List<MaterialItemBonus>,
       stockInfo: null == stockInfo
           ? _value.stockInfo
           : stockInfo // ignore: cast_nullable_to_non_nullable
@@ -169,7 +170,7 @@ abstract class _$$_PriceAggregateCopyWith<$Res>
       SalesOrganisationConfigs salesOrgConfig,
       int quantity,
       int discountedMaterialCount,
-      List<MaterialInfo> addedBonusList,
+      List<MaterialItemBonus> addedBonusList,
       StockInfo stockInfo});
 
   @override
@@ -232,7 +233,7 @@ class __$$_PriceAggregateCopyWithImpl<$Res>
       addedBonusList: null == addedBonusList
           ? _value._addedBonusList
           : addedBonusList // ignore: cast_nullable_to_non_nullable
-              as List<MaterialInfo>,
+              as List<MaterialItemBonus>,
       stockInfo: null == stockInfo
           ? _value.stockInfo
           : stockInfo // ignore: cast_nullable_to_non_nullable
@@ -251,7 +252,7 @@ class _$_PriceAggregate extends _PriceAggregate {
       required this.salesOrgConfig,
       required this.quantity,
       required this.discountedMaterialCount,
-      required final List<MaterialInfo> addedBonusList,
+      required final List<MaterialItemBonus> addedBonusList,
       required this.stockInfo})
       : _addedBonusList = addedBonusList,
         super._();
@@ -268,9 +269,9 @@ class _$_PriceAggregate extends _PriceAggregate {
   final int quantity;
   @override
   final int discountedMaterialCount;
-  final List<MaterialInfo> _addedBonusList;
+  final List<MaterialItemBonus> _addedBonusList;
   @override
-  List<MaterialInfo> get addedBonusList {
+  List<MaterialItemBonus> get addedBonusList {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_addedBonusList);
   }
@@ -332,7 +333,7 @@ abstract class _PriceAggregate extends PriceAggregate {
       required final SalesOrganisationConfigs salesOrgConfig,
       required final int quantity,
       required final int discountedMaterialCount,
-      required final List<MaterialInfo> addedBonusList,
+      required final List<MaterialItemBonus> addedBonusList,
       required final StockInfo stockInfo}) = _$_PriceAggregate;
   const _PriceAggregate._() : super._();
 
@@ -349,7 +350,7 @@ abstract class _PriceAggregate extends PriceAggregate {
   @override
   int get discountedMaterialCount;
   @override
-  List<MaterialInfo> get addedBonusList;
+  List<MaterialItemBonus> get addedBonusList;
   @override
   StockInfo get stockInfo;
   @override

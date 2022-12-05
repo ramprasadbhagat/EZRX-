@@ -1,22 +1,22 @@
 import 'package:ezrxmobile/domain/order/entities/material_item_override.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
-import 'package:ezrxmobile/domain/order/entities/saved_order_material_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'saved_order_material.freezed.dart';
+part 'material_item.freezed.dart';
 
 @freezed
-class SavedOrderMaterial with _$SavedOrderMaterial {
-  const SavedOrderMaterial._();
-  const factory SavedOrderMaterial({
+class MaterialItem with _$MaterialItem {
+  const MaterialItem._();
+  const factory MaterialItem({
     required int qty,
     required String type,
     required String comment,
     required bool hidePrice,
     required String batchNumber,
     required bool zdp8Override,
-    required List<SavedOrderMaterialBonus> bonuses,
+    required List<MaterialItemBonus> bonuses,
     required MaterialGroup materialGroup2,
     required MaterialGroup materialGroup4,
     required MaterialNumber materialNumber,
@@ -27,9 +27,9 @@ class SavedOrderMaterial with _$SavedOrderMaterial {
     required String materialDescription,
     required MaterialItemOverride overrideInfo,
     required String remarks,
-  }) = _SavedOrderMaterial;
+  }) = _MaterialItem;
 
-  factory SavedOrderMaterial.empty() => SavedOrderMaterial(
+  factory MaterialItem.empty() => MaterialItem(
         qty: 0,
         type: '',
         comment: '',
@@ -37,7 +37,7 @@ class SavedOrderMaterial with _$SavedOrderMaterial {
         hidePrice: false,
         batchNumber: '',
         zdp8Override: false,
-        bonuses: <SavedOrderMaterialBonus>[],
+        bonuses: <MaterialItemBonus>[],
         materialGroup2: MaterialGroup.two(''),
         materialGroup4: MaterialGroup.four(''),
         materialNumber: MaterialNumber(''),
