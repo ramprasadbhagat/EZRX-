@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'order_history_details_order_items.freezed.dart';
@@ -8,6 +9,13 @@ part 'order_history_details_order_items.freezed.dart';
 class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
   const OrderHistoryDetailsOrderItem._();
   factory OrderHistoryDetailsOrderItem({
+    required OrderItemType type,
+    required MaterialNumber materialNumber,
+    required String materialDescription,
+    required int qty,
+    required ZpPrice unitPrice,
+    required TotalPrice totalPrice,
+    required double tax,
     required String sAPStatus,
     required String plannedDeliveryDate,
     required int pickedQuantity,
@@ -21,6 +29,13 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
   }) = _OrderHistoryDetailsOrderItem;
 
   factory OrderHistoryDetailsOrderItem.empty() => OrderHistoryDetailsOrderItem(
+        type: OrderItemType(''),
+        materialNumber: MaterialNumber(''),
+        materialDescription: '',
+        qty: 0,
+        unitPrice: ZpPrice('0.0'),
+        totalPrice: TotalPrice('0.0'),
+        tax: 0.0,
         sAPStatus: '',
         plannedDeliveryDate: '',
         pickedQuantity: 0,
@@ -32,4 +47,6 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         tenderContractDetails:
             OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
       );
+
+
 }

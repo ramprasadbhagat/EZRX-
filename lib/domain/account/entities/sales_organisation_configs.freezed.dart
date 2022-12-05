@@ -51,6 +51,7 @@ mixin _$SalesOrganisationConfigs {
   bool get showPOAttachment => throw _privateConstructorUsedError;
   bool get hideStockDisplay => throw _privateConstructorUsedError;
   bool get expiryDateDisplay => throw _privateConstructorUsedError;
+  bool get batchNumDisplay => throw _privateConstructorUsedError;
   bool get addOosMaterials => throw _privateConstructorUsedError;
   OosValue get oosValue => throw _privateConstructorUsedError;
   bool get enableRemarks => throw _privateConstructorUsedError;
@@ -58,6 +59,7 @@ mixin _$SalesOrganisationConfigs {
   bool get ponRequired => throw _privateConstructorUsedError;
   bool get enableTaxDisplay => throw _privateConstructorUsedError;
   bool get netPriceOverride => throw _privateConstructorUsedError;
+  bool get displayOrderDiscount => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrganisationConfigsCopyWith<SalesOrganisationConfigs> get copyWith =>
@@ -106,13 +108,15 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       bool showPOAttachment,
       bool hideStockDisplay,
       bool expiryDateDisplay,
+      bool batchNumDisplay,
       bool addOosMaterials,
       OosValue oosValue,
       bool enableRemarks,
       bool enableOHPrice,
       bool ponRequired,
       bool enableTaxDisplay,
-      bool netPriceOverride});
+      bool netPriceOverride,
+      bool displayOrderDiscount});
 }
 
 /// @nodoc
@@ -164,6 +168,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
     Object? showPOAttachment = null,
     Object? hideStockDisplay = null,
     Object? expiryDateDisplay = null,
+    Object? batchNumDisplay = null,
     Object? addOosMaterials = null,
     Object? oosValue = null,
     Object? enableRemarks = null,
@@ -171,6 +176,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
     Object? ponRequired = null,
     Object? enableTaxDisplay = null,
     Object? netPriceOverride = null,
+    Object? displayOrderDiscount = null,
   }) {
     return _then(_value.copyWith(
       enableIRN: null == enableIRN
@@ -313,6 +319,10 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
           ? _value.expiryDateDisplay
           : expiryDateDisplay // ignore: cast_nullable_to_non_nullable
               as bool,
+      batchNumDisplay: null == batchNumDisplay
+          ? _value.batchNumDisplay
+          : batchNumDisplay // ignore: cast_nullable_to_non_nullable
+              as bool,
       addOosMaterials: null == addOosMaterials
           ? _value.addOosMaterials
           : addOosMaterials // ignore: cast_nullable_to_non_nullable
@@ -340,6 +350,10 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
       netPriceOverride: null == netPriceOverride
           ? _value.netPriceOverride
           : netPriceOverride // ignore: cast_nullable_to_non_nullable
+              as bool,
+      displayOrderDiscount: null == displayOrderDiscount
+          ? _value.displayOrderDiscount
+          : displayOrderDiscount // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -390,13 +404,15 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       bool showPOAttachment,
       bool hideStockDisplay,
       bool expiryDateDisplay,
+      bool batchNumDisplay,
       bool addOosMaterials,
       OosValue oosValue,
       bool enableRemarks,
       bool enableOHPrice,
       bool ponRequired,
       bool enableTaxDisplay,
-      bool netPriceOverride});
+      bool netPriceOverride,
+      bool displayOrderDiscount});
 }
 
 /// @nodoc
@@ -446,6 +462,7 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? showPOAttachment = null,
     Object? hideStockDisplay = null,
     Object? expiryDateDisplay = null,
+    Object? batchNumDisplay = null,
     Object? addOosMaterials = null,
     Object? oosValue = null,
     Object? enableRemarks = null,
@@ -453,6 +470,7 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? ponRequired = null,
     Object? enableTaxDisplay = null,
     Object? netPriceOverride = null,
+    Object? displayOrderDiscount = null,
   }) {
     return _then(_$_SalesOrganisationConfigs(
       enableIRN: null == enableIRN
@@ -595,6 +613,10 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.expiryDateDisplay
           : expiryDateDisplay // ignore: cast_nullable_to_non_nullable
               as bool,
+      batchNumDisplay: null == batchNumDisplay
+          ? _value.batchNumDisplay
+          : batchNumDisplay // ignore: cast_nullable_to_non_nullable
+              as bool,
       addOosMaterials: null == addOosMaterials
           ? _value.addOosMaterials
           : addOosMaterials // ignore: cast_nullable_to_non_nullable
@@ -622,6 +644,10 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
       netPriceOverride: null == netPriceOverride
           ? _value.netPriceOverride
           : netPriceOverride // ignore: cast_nullable_to_non_nullable
+              as bool,
+      displayOrderDiscount: null == displayOrderDiscount
+          ? _value.displayOrderDiscount
+          : displayOrderDiscount // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -666,13 +692,15 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       required this.showPOAttachment,
       required this.hideStockDisplay,
       required this.expiryDateDisplay,
+      required this.batchNumDisplay,
       required this.addOosMaterials,
       required this.oosValue,
       required this.enableRemarks,
       required this.enableOHPrice,
       required this.ponRequired,
       required this.enableTaxDisplay,
-      required this.netPriceOverride})
+      required this.netPriceOverride,
+      required this.displayOrderDiscount})
       : _principalList = principalList,
         super._();
 
@@ -752,6 +780,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   @override
   final bool expiryDateDisplay;
   @override
+  final bool batchNumDisplay;
+  @override
   final bool addOosMaterials;
   @override
   final OosValue oosValue;
@@ -765,10 +795,12 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   final bool enableTaxDisplay;
   @override
   final bool netPriceOverride;
+  @override
+  final bool displayOrderDiscount;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, ponRequired: $ponRequired, enableTaxDisplay: $enableTaxDisplay, netPriceOverride: $netPriceOverride)';
+    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, ponRequired: $ponRequired, enableTaxDisplay: $enableTaxDisplay, netPriceOverride: $netPriceOverride, displayOrderDiscount: $displayOrderDiscount)';
   }
 
   @override
@@ -840,13 +872,15 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
             (identical(other.showPOAttachment, showPOAttachment) || other.showPOAttachment == showPOAttachment) &&
             (identical(other.hideStockDisplay, hideStockDisplay) || other.hideStockDisplay == hideStockDisplay) &&
             (identical(other.expiryDateDisplay, expiryDateDisplay) || other.expiryDateDisplay == expiryDateDisplay) &&
+            (identical(other.batchNumDisplay, batchNumDisplay) || other.batchNumDisplay == batchNumDisplay) &&
             (identical(other.addOosMaterials, addOosMaterials) || other.addOosMaterials == addOosMaterials) &&
             (identical(other.oosValue, oosValue) || other.oosValue == oosValue) &&
             (identical(other.enableRemarks, enableRemarks) || other.enableRemarks == enableRemarks) &&
             (identical(other.enableOHPrice, enableOHPrice) || other.enableOHPrice == enableOHPrice) &&
             (identical(other.ponRequired, ponRequired) || other.ponRequired == ponRequired) &&
             (identical(other.enableTaxDisplay, enableTaxDisplay) || other.enableTaxDisplay == enableTaxDisplay) &&
-            (identical(other.netPriceOverride, netPriceOverride) || other.netPriceOverride == netPriceOverride));
+            (identical(other.netPriceOverride, netPriceOverride) || other.netPriceOverride == netPriceOverride) &&
+            (identical(other.displayOrderDiscount, displayOrderDiscount) || other.displayOrderDiscount == displayOrderDiscount));
   }
 
   @override
@@ -887,13 +921,15 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
         showPOAttachment,
         hideStockDisplay,
         expiryDateDisplay,
+        batchNumDisplay,
         addOosMaterials,
         oosValue,
         enableRemarks,
         enableOHPrice,
         ponRequired,
         enableTaxDisplay,
-        netPriceOverride
+        netPriceOverride,
+        displayOrderDiscount
       ]);
 
   @JsonKey(ignore: true)
@@ -941,13 +977,15 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final bool showPOAttachment,
       required final bool hideStockDisplay,
       required final bool expiryDateDisplay,
+      required final bool batchNumDisplay,
       required final bool addOosMaterials,
       required final OosValue oosValue,
       required final bool enableRemarks,
       required final bool enableOHPrice,
       required final bool ponRequired,
       required final bool enableTaxDisplay,
-      required final bool netPriceOverride}) = _$_SalesOrganisationConfigs;
+      required final bool netPriceOverride,
+      required final bool displayOrderDiscount}) = _$_SalesOrganisationConfigs;
   const _SalesOrganisationConfigs._() : super._();
 
   @override
@@ -1021,6 +1059,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   @override
   bool get expiryDateDisplay;
   @override
+  bool get batchNumDisplay;
+  @override
   bool get addOosMaterials;
   @override
   OosValue get oosValue;
@@ -1034,6 +1074,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   bool get enableTaxDisplay;
   @override
   bool get netPriceOverride;
+  @override
+  bool get displayOrderDiscount;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsCopyWith<_$_SalesOrganisationConfigs>

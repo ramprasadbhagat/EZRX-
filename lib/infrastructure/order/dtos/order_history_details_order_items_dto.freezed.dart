@@ -21,6 +21,20 @@ OrderHistoryDetailsOrderItemDto _$OrderHistoryDetailsOrderItemDtoFromJson(
 
 /// @nodoc
 mixin _$OrderHistoryDetailsOrderItemDto {
+  @JsonKey(name: 'Type', defaultValue: '')
+  String get type => throw _privateConstructorUsedError;
+  @JsonKey(name: 'MaterialCode')
+  String get materialNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'MaterialDescription', defaultValue: '')
+  String get materialDescription => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Qty', defaultValue: 0)
+  int get qty => throw _privateConstructorUsedError;
+  @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
+  double get unitPrice => throw _privateConstructorUsedError;
+  @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
+  double get totalPrice => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Tax', defaultValue: 0.0)
+  double get tax => throw _privateConstructorUsedError;
   @JsonKey(name: 'SAPStatus', defaultValue: '')
   String get sAPStatus => throw _privateConstructorUsedError;
   @JsonKey(name: 'PlannedDeliveryDate', defaultValue: '')
@@ -63,7 +77,21 @@ abstract class $OrderHistoryDetailsOrderItemDtoCopyWith<$Res> {
           OrderHistoryDetailsOrderItemDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'SAPStatus', defaultValue: '')
+      {@JsonKey(name: 'Type', defaultValue: '')
+          String type,
+      @JsonKey(name: 'MaterialCode')
+          String materialNumber,
+      @JsonKey(name: 'MaterialDescription', defaultValue: '')
+          String materialDescription,
+      @JsonKey(name: 'Qty', defaultValue: 0)
+          int qty,
+      @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
+          double unitPrice,
+      @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
+          double totalPrice,
+      @JsonKey(name: 'Tax', defaultValue: 0.0)
+          double tax,
+      @JsonKey(name: 'SAPStatus', defaultValue: '')
           String sAPStatus,
       @JsonKey(name: 'PlannedDeliveryDate', defaultValue: '')
           String plannedDeliveryDate,
@@ -100,6 +128,13 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? type = null,
+    Object? materialNumber = null,
+    Object? materialDescription = null,
+    Object? qty = null,
+    Object? unitPrice = null,
+    Object? totalPrice = null,
+    Object? tax = null,
     Object? sAPStatus = null,
     Object? plannedDeliveryDate = null,
     Object? pickedQuantity = null,
@@ -111,6 +146,34 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
     Object? tenderContractDetails = null,
   }) {
     return _then(_value.copyWith(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      materialDescription: null == materialDescription
+          ? _value.materialDescription
+          : materialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      qty: null == qty
+          ? _value.qty
+          : qty // ignore: cast_nullable_to_non_nullable
+              as int,
+      unitPrice: null == unitPrice
+          ? _value.unitPrice
+          : unitPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalPrice: null == totalPrice
+          ? _value.totalPrice
+          : totalPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      tax: null == tax
+          ? _value.tax
+          : tax // ignore: cast_nullable_to_non_nullable
+              as double,
       sAPStatus: null == sAPStatus
           ? _value.sAPStatus
           : sAPStatus // ignore: cast_nullable_to_non_nullable
@@ -171,7 +234,21 @@ abstract class _$$_OrderHistoryDetailsOrderItemDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'SAPStatus', defaultValue: '')
+      {@JsonKey(name: 'Type', defaultValue: '')
+          String type,
+      @JsonKey(name: 'MaterialCode')
+          String materialNumber,
+      @JsonKey(name: 'MaterialDescription', defaultValue: '')
+          String materialDescription,
+      @JsonKey(name: 'Qty', defaultValue: 0)
+          int qty,
+      @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
+          double unitPrice,
+      @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
+          double totalPrice,
+      @JsonKey(name: 'Tax', defaultValue: 0.0)
+          double tax,
+      @JsonKey(name: 'SAPStatus', defaultValue: '')
           String sAPStatus,
       @JsonKey(name: 'PlannedDeliveryDate', defaultValue: '')
           String plannedDeliveryDate,
@@ -208,6 +285,13 @@ class __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? type = null,
+    Object? materialNumber = null,
+    Object? materialDescription = null,
+    Object? qty = null,
+    Object? unitPrice = null,
+    Object? totalPrice = null,
+    Object? tax = null,
     Object? sAPStatus = null,
     Object? plannedDeliveryDate = null,
     Object? pickedQuantity = null,
@@ -219,6 +303,34 @@ class __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
     Object? tenderContractDetails = null,
   }) {
     return _then(_$_OrderHistoryDetailsOrderItemDto(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      materialDescription: null == materialDescription
+          ? _value.materialDescription
+          : materialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      qty: null == qty
+          ? _value.qty
+          : qty // ignore: cast_nullable_to_non_nullable
+              as int,
+      unitPrice: null == unitPrice
+          ? _value.unitPrice
+          : unitPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalPrice: null == totalPrice
+          ? _value.totalPrice
+          : totalPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      tax: null == tax
+          ? _value.tax
+          : tax // ignore: cast_nullable_to_non_nullable
+              as double,
       sAPStatus: null == sAPStatus
           ? _value.sAPStatus
           : sAPStatus // ignore: cast_nullable_to_non_nullable
@@ -264,7 +376,21 @@ class __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
 class _$_OrderHistoryDetailsOrderItemDto
     extends _OrderHistoryDetailsOrderItemDto {
   const _$_OrderHistoryDetailsOrderItemDto(
-      {@JsonKey(name: 'SAPStatus', defaultValue: '')
+      {@JsonKey(name: 'Type', defaultValue: '')
+          required this.type,
+      @JsonKey(name: 'MaterialCode')
+          required this.materialNumber,
+      @JsonKey(name: 'MaterialDescription', defaultValue: '')
+          required this.materialDescription,
+      @JsonKey(name: 'Qty', defaultValue: 0)
+          required this.qty,
+      @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
+          required this.unitPrice,
+      @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
+          required this.totalPrice,
+      @JsonKey(name: 'Tax', defaultValue: 0.0)
+          required this.tax,
+      @JsonKey(name: 'SAPStatus', defaultValue: '')
           required this.sAPStatus,
       @JsonKey(name: 'PlannedDeliveryDate', defaultValue: '')
           required this.plannedDeliveryDate,
@@ -289,6 +415,27 @@ class _$_OrderHistoryDetailsOrderItemDto
           Map<String, dynamic> json) =>
       _$$_OrderHistoryDetailsOrderItemDtoFromJson(json);
 
+  @override
+  @JsonKey(name: 'Type', defaultValue: '')
+  final String type;
+  @override
+  @JsonKey(name: 'MaterialCode')
+  final String materialNumber;
+  @override
+  @JsonKey(name: 'MaterialDescription', defaultValue: '')
+  final String materialDescription;
+  @override
+  @JsonKey(name: 'Qty', defaultValue: 0)
+  final int qty;
+  @override
+  @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
+  final double unitPrice;
+  @override
+  @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
+  final double totalPrice;
+  @override
+  @JsonKey(name: 'Tax', defaultValue: 0.0)
+  final double tax;
   @override
   @JsonKey(name: 'SAPStatus', defaultValue: '')
   final String sAPStatus;
@@ -331,7 +478,7 @@ class _$_OrderHistoryDetailsOrderItemDto
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItemDto(sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails)';
+    return 'OrderHistoryDetailsOrderItemDto(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails)';
   }
 
   @override
@@ -339,6 +486,17 @@ class _$_OrderHistoryDetailsOrderItemDto
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryDetailsOrderItemDto &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber) &&
+            (identical(other.materialDescription, materialDescription) ||
+                other.materialDescription == materialDescription) &&
+            (identical(other.qty, qty) || other.qty == qty) &&
+            (identical(other.unitPrice, unitPrice) ||
+                other.unitPrice == unitPrice) &&
+            (identical(other.totalPrice, totalPrice) ||
+                other.totalPrice == totalPrice) &&
+            (identical(other.tax, tax) || other.tax == tax) &&
             (identical(other.sAPStatus, sAPStatus) ||
                 other.sAPStatus == sAPStatus) &&
             (identical(other.plannedDeliveryDate, plannedDeliveryDate) ||
@@ -362,6 +520,13 @@ class _$_OrderHistoryDetailsOrderItemDto
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      type,
+      materialNumber,
+      materialDescription,
+      qty,
+      unitPrice,
+      totalPrice,
+      tax,
       sAPStatus,
       plannedDeliveryDate,
       pickedQuantity,
@@ -391,7 +556,21 @@ class _$_OrderHistoryDetailsOrderItemDto
 abstract class _OrderHistoryDetailsOrderItemDto
     extends OrderHistoryDetailsOrderItemDto {
   const factory _OrderHistoryDetailsOrderItemDto(
-      {@JsonKey(name: 'SAPStatus', defaultValue: '')
+      {@JsonKey(name: 'Type', defaultValue: '')
+          required final String type,
+      @JsonKey(name: 'MaterialCode')
+          required final String materialNumber,
+      @JsonKey(name: 'MaterialDescription', defaultValue: '')
+          required final String materialDescription,
+      @JsonKey(name: 'Qty', defaultValue: 0)
+          required final int qty,
+      @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
+          required final double unitPrice,
+      @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
+          required final double totalPrice,
+      @JsonKey(name: 'Tax', defaultValue: 0.0)
+          required final double tax,
+      @JsonKey(name: 'SAPStatus', defaultValue: '')
           required final String sAPStatus,
       @JsonKey(name: 'PlannedDeliveryDate', defaultValue: '')
           required final String plannedDeliveryDate,
@@ -414,6 +593,27 @@ abstract class _OrderHistoryDetailsOrderItemDto
   factory _OrderHistoryDetailsOrderItemDto.fromJson(Map<String, dynamic> json) =
       _$_OrderHistoryDetailsOrderItemDto.fromJson;
 
+  @override
+  @JsonKey(name: 'Type', defaultValue: '')
+  String get type;
+  @override
+  @JsonKey(name: 'MaterialCode')
+  String get materialNumber;
+  @override
+  @JsonKey(name: 'MaterialDescription', defaultValue: '')
+  String get materialDescription;
+  @override
+  @JsonKey(name: 'Qty', defaultValue: 0)
+  int get qty;
+  @override
+  @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
+  double get unitPrice;
+  @override
+  @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
+  double get totalPrice;
+  @override
+  @JsonKey(name: 'Tax', defaultValue: 0.0)
+  double get tax;
   @override
   @JsonKey(name: 'SAPStatus', defaultValue: '')
   String get sAPStatus;

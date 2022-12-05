@@ -16,6 +16,13 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$OrderHistoryDetailsOrderItem {
+  OrderItemType get type => throw _privateConstructorUsedError;
+  MaterialNumber get materialNumber => throw _privateConstructorUsedError;
+  String get materialDescription => throw _privateConstructorUsedError;
+  int get qty => throw _privateConstructorUsedError;
+  ZpPrice get unitPrice => throw _privateConstructorUsedError;
+  TotalPrice get totalPrice => throw _privateConstructorUsedError;
+  double get tax => throw _privateConstructorUsedError;
   String get sAPStatus => throw _privateConstructorUsedError;
   String get plannedDeliveryDate => throw _privateConstructorUsedError;
   int get pickedQuantity => throw _privateConstructorUsedError;
@@ -42,7 +49,14 @@ abstract class $OrderHistoryDetailsOrderItemCopyWith<$Res> {
           OrderHistoryDetailsOrderItem>;
   @useResult
   $Res call(
-      {String sAPStatus,
+      {OrderItemType type,
+      MaterialNumber materialNumber,
+      String materialDescription,
+      int qty,
+      ZpPrice unitPrice,
+      TotalPrice totalPrice,
+      double tax,
+      String sAPStatus,
       String plannedDeliveryDate,
       int pickedQuantity,
       String batch,
@@ -70,6 +84,13 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? type = null,
+    Object? materialNumber = null,
+    Object? materialDescription = null,
+    Object? qty = null,
+    Object? unitPrice = null,
+    Object? totalPrice = null,
+    Object? tax = null,
     Object? sAPStatus = null,
     Object? plannedDeliveryDate = null,
     Object? pickedQuantity = null,
@@ -81,6 +102,34 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
     Object? tenderContractDetails = null,
   }) {
     return _then(_value.copyWith(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as OrderItemType,
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
+              as MaterialNumber,
+      materialDescription: null == materialDescription
+          ? _value.materialDescription
+          : materialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      qty: null == qty
+          ? _value.qty
+          : qty // ignore: cast_nullable_to_non_nullable
+              as int,
+      unitPrice: null == unitPrice
+          ? _value.unitPrice
+          : unitPrice // ignore: cast_nullable_to_non_nullable
+              as ZpPrice,
+      totalPrice: null == totalPrice
+          ? _value.totalPrice
+          : totalPrice // ignore: cast_nullable_to_non_nullable
+              as TotalPrice,
+      tax: null == tax
+          ? _value.tax
+          : tax // ignore: cast_nullable_to_non_nullable
+              as double,
       sAPStatus: null == sAPStatus
           ? _value.sAPStatus
           : sAPStatus // ignore: cast_nullable_to_non_nullable
@@ -141,7 +190,14 @@ abstract class _$$_OrderHistoryDetailsOrderItemCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String sAPStatus,
+      {OrderItemType type,
+      MaterialNumber materialNumber,
+      String materialDescription,
+      int qty,
+      ZpPrice unitPrice,
+      TotalPrice totalPrice,
+      double tax,
+      String sAPStatus,
       String plannedDeliveryDate,
       int pickedQuantity,
       String batch,
@@ -169,6 +225,13 @@ class __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? type = null,
+    Object? materialNumber = null,
+    Object? materialDescription = null,
+    Object? qty = null,
+    Object? unitPrice = null,
+    Object? totalPrice = null,
+    Object? tax = null,
     Object? sAPStatus = null,
     Object? plannedDeliveryDate = null,
     Object? pickedQuantity = null,
@@ -180,6 +243,34 @@ class __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
     Object? tenderContractDetails = null,
   }) {
     return _then(_$_OrderHistoryDetailsOrderItem(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as OrderItemType,
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
+              as MaterialNumber,
+      materialDescription: null == materialDescription
+          ? _value.materialDescription
+          : materialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      qty: null == qty
+          ? _value.qty
+          : qty // ignore: cast_nullable_to_non_nullable
+              as int,
+      unitPrice: null == unitPrice
+          ? _value.unitPrice
+          : unitPrice // ignore: cast_nullable_to_non_nullable
+              as ZpPrice,
+      totalPrice: null == totalPrice
+          ? _value.totalPrice
+          : totalPrice // ignore: cast_nullable_to_non_nullable
+              as TotalPrice,
+      tax: null == tax
+          ? _value.tax
+          : tax // ignore: cast_nullable_to_non_nullable
+              as double,
       sAPStatus: null == sAPStatus
           ? _value.sAPStatus
           : sAPStatus // ignore: cast_nullable_to_non_nullable
@@ -224,7 +315,14 @@ class __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
 
 class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
   _$_OrderHistoryDetailsOrderItem(
-      {required this.sAPStatus,
+      {required this.type,
+      required this.materialNumber,
+      required this.materialDescription,
+      required this.qty,
+      required this.unitPrice,
+      required this.totalPrice,
+      required this.tax,
+      required this.sAPStatus,
       required this.plannedDeliveryDate,
       required this.pickedQuantity,
       required this.batch,
@@ -236,6 +334,20 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
       : _details = details,
         super._();
 
+  @override
+  final OrderItemType type;
+  @override
+  final MaterialNumber materialNumber;
+  @override
+  final String materialDescription;
+  @override
+  final int qty;
+  @override
+  final ZpPrice unitPrice;
+  @override
+  final TotalPrice totalPrice;
+  @override
+  final double tax;
   @override
   final String sAPStatus;
   @override
@@ -262,7 +374,7 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItem(sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails)';
+    return 'OrderHistoryDetailsOrderItem(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails)';
   }
 
   @override
@@ -270,6 +382,17 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryDetailsOrderItem &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber) &&
+            (identical(other.materialDescription, materialDescription) ||
+                other.materialDescription == materialDescription) &&
+            (identical(other.qty, qty) || other.qty == qty) &&
+            (identical(other.unitPrice, unitPrice) ||
+                other.unitPrice == unitPrice) &&
+            (identical(other.totalPrice, totalPrice) ||
+                other.totalPrice == totalPrice) &&
+            (identical(other.tax, tax) || other.tax == tax) &&
             (identical(other.sAPStatus, sAPStatus) ||
                 other.sAPStatus == sAPStatus) &&
             (identical(other.plannedDeliveryDate, plannedDeliveryDate) ||
@@ -292,6 +415,13 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      type,
+      materialNumber,
+      materialDescription,
+      qty,
+      unitPrice,
+      totalPrice,
+      tax,
       sAPStatus,
       plannedDeliveryDate,
       pickedQuantity,
@@ -313,7 +443,14 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
 abstract class _OrderHistoryDetailsOrderItem
     extends OrderHistoryDetailsOrderItem {
   factory _OrderHistoryDetailsOrderItem(
-      {required final String sAPStatus,
+      {required final OrderItemType type,
+      required final MaterialNumber materialNumber,
+      required final String materialDescription,
+      required final int qty,
+      required final ZpPrice unitPrice,
+      required final TotalPrice totalPrice,
+      required final double tax,
+      required final String sAPStatus,
       required final String plannedDeliveryDate,
       required final int pickedQuantity,
       required final String batch,
@@ -325,6 +462,20 @@ abstract class _OrderHistoryDetailsOrderItem
           tenderContractDetails}) = _$_OrderHistoryDetailsOrderItem;
   _OrderHistoryDetailsOrderItem._() : super._();
 
+  @override
+  OrderItemType get type;
+  @override
+  MaterialNumber get materialNumber;
+  @override
+  String get materialDescription;
+  @override
+  int get qty;
+  @override
+  ZpPrice get unitPrice;
+  @override
+  TotalPrice get totalPrice;
+  @override
+  double get tax;
   @override
   String get sAPStatus;
   @override

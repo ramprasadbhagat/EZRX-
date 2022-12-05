@@ -105,10 +105,12 @@ class EligibilityState with _$EligibilityState {
   }
 
   bool get isShowPOAttachmentEnable => salesOrgConfigs.showPOAttachment;
-
   bool get enableOHPrice => salesOrgConfigs.enableOHPrice;
-
+  bool get isDeliveryDateOrTimeEnable => salesOrgConfigs.disableDeliveryDate;
+  bool get isdisplayOrderDiscountEnable => salesOrgConfigs.displayOrderDiscount;
   bool get getBonusOverRide => user.role.type.isSalesRep
       ? user.hasBonusOverride
       : salesOrgConfigs.priceOverride;
+  bool get isBatchNumberEnable => salesOrgConfigs.batchNumDisplay;
+  bool get isRemarksEnable => salesOrgConfigs.enableRemarks;
 }

@@ -271,3 +271,19 @@ class BonusMaterialCalculation extends ValueObject<String> {
 
   const BonusMaterialCalculation._(this.value);
 }
+class OrderItemType extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory OrderItemType(String input) {
+    return OrderItemType._(validateStringNotEmpty(input));
+  }
+
+    bool get isMaterialTypeComm {
+
+    return checkMatrialType(value.getOrElse(() => ''));
+
+  }
+
+  const OrderItemType._(this.value);
+}

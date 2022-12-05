@@ -137,10 +137,10 @@ mixin _$SalesOrganisationConfigsDto {
   @HiveField(137, defaultValue: false)
   bool get ponRequired => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableIRN', defaultValue: false)
-  @HiveField(139, defaultValue: false)
+  @HiveField(138, defaultValue: false)
   bool get enableIRN => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
-  @HiveField(138, defaultValue: false)
+  @HiveField(139, defaultValue: false)
   bool get enableTaxDisplay => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
   @HiveField(140, defaultValue: false)
@@ -148,6 +148,12 @@ mixin _$SalesOrganisationConfigsDto {
   @JsonKey(name: 'netPriceOverride', defaultValue: false)
   @HiveField(141, defaultValue: false)
   bool get netPriceOverride => throw _privateConstructorUsedError;
+  @JsonKey(name: 'batchNumDisplay', defaultValue: false)
+  @HiveField(142, defaultValue: false)
+  bool get batchNumDisplay => throw _privateConstructorUsedError;
+  @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
+  @HiveField(143, defaultValue: false)
+  bool get displayOrderDiscount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -280,17 +286,23 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
       @HiveField(137, defaultValue: false)
           bool ponRequired,
       @JsonKey(name: 'enableIRN', defaultValue: false)
-      @HiveField(139, defaultValue: false)
+      @HiveField(138, defaultValue: false)
           bool enableIRN,
       @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
-      @HiveField(138, defaultValue: false)
+      @HiveField(139, defaultValue: false)
           bool enableTaxDisplay,
       @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
       @HiveField(140, defaultValue: false)
           bool enableTaxAtTotalLevelOnly,
       @JsonKey(name: 'netPriceOverride', defaultValue: false)
       @HiveField(141, defaultValue: false)
-          bool netPriceOverride});
+          bool netPriceOverride,
+      @JsonKey(name: 'batchNumDisplay', defaultValue: false)
+      @HiveField(142, defaultValue: false)
+          bool batchNumDisplay,
+      @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
+      @HiveField(143, defaultValue: false)
+          bool displayOrderDiscount});
 }
 
 /// @nodoc
@@ -349,6 +361,8 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
     Object? enableTaxDisplay = null,
     Object? enableTaxAtTotalLevelOnly = null,
     Object? netPriceOverride = null,
+    Object? batchNumDisplay = null,
+    Object? displayOrderDiscount = null,
   }) {
     return _then(_value.copyWith(
       disableProcessingStatus: null == disableProcessingStatus
@@ -519,6 +533,14 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
           ? _value.netPriceOverride
           : netPriceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
+      batchNumDisplay: null == batchNumDisplay
+          ? _value.batchNumDisplay
+          : batchNumDisplay // ignore: cast_nullable_to_non_nullable
+              as bool,
+      displayOrderDiscount: null == displayOrderDiscount
+          ? _value.displayOrderDiscount
+          : displayOrderDiscount // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -649,17 +671,23 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
       @HiveField(137, defaultValue: false)
           bool ponRequired,
       @JsonKey(name: 'enableIRN', defaultValue: false)
-      @HiveField(139, defaultValue: false)
+      @HiveField(138, defaultValue: false)
           bool enableIRN,
       @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
-      @HiveField(138, defaultValue: false)
+      @HiveField(139, defaultValue: false)
           bool enableTaxDisplay,
       @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
       @HiveField(140, defaultValue: false)
           bool enableTaxAtTotalLevelOnly,
       @JsonKey(name: 'netPriceOverride', defaultValue: false)
       @HiveField(141, defaultValue: false)
-          bool netPriceOverride});
+          bool netPriceOverride,
+      @JsonKey(name: 'batchNumDisplay', defaultValue: false)
+      @HiveField(142, defaultValue: false)
+          bool batchNumDisplay,
+      @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
+      @HiveField(143, defaultValue: false)
+          bool displayOrderDiscount});
 }
 
 /// @nodoc
@@ -717,6 +745,8 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? enableTaxDisplay = null,
     Object? enableTaxAtTotalLevelOnly = null,
     Object? netPriceOverride = null,
+    Object? batchNumDisplay = null,
+    Object? displayOrderDiscount = null,
   }) {
     return _then(_$_SalesOrganisationConfigsDto(
       disableProcessingStatus: null == disableProcessingStatus
@@ -887,6 +917,14 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.netPriceOverride
           : netPriceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
+      batchNumDisplay: null == batchNumDisplay
+          ? _value.batchNumDisplay
+          : batchNumDisplay // ignore: cast_nullable_to_non_nullable
+              as bool,
+      displayOrderDiscount: null == displayOrderDiscount
+          ? _value.displayOrderDiscount
+          : displayOrderDiscount // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1012,17 +1050,23 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
       @HiveField(137, defaultValue: false)
           required this.ponRequired,
       @JsonKey(name: 'enableIRN', defaultValue: false)
-      @HiveField(139, defaultValue: false)
+      @HiveField(138, defaultValue: false)
           required this.enableIRN,
       @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
-      @HiveField(138, defaultValue: false)
+      @HiveField(139, defaultValue: false)
           required this.enableTaxDisplay,
       @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
       @HiveField(140, defaultValue: false)
           required this.enableTaxAtTotalLevelOnly,
       @JsonKey(name: 'netPriceOverride', defaultValue: false)
       @HiveField(141, defaultValue: false)
-          required this.netPriceOverride})
+          required this.netPriceOverride,
+      @JsonKey(name: 'batchNumDisplay', defaultValue: false)
+      @HiveField(142, defaultValue: false)
+          required this.batchNumDisplay,
+      @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
+      @HiveField(143, defaultValue: false)
+          required this.displayOrderDiscount})
       : _principalList = principalList,
         super._();
 
@@ -1189,11 +1233,11 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   final bool ponRequired;
   @override
   @JsonKey(name: 'enableIRN', defaultValue: false)
-  @HiveField(139, defaultValue: false)
+  @HiveField(138, defaultValue: false)
   final bool enableIRN;
   @override
   @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
-  @HiveField(138, defaultValue: false)
+  @HiveField(139, defaultValue: false)
   final bool enableTaxDisplay;
   @override
   @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
@@ -1203,10 +1247,18 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @JsonKey(name: 'netPriceOverride', defaultValue: false)
   @HiveField(141, defaultValue: false)
   final bool netPriceOverride;
+  @override
+  @JsonKey(name: 'batchNumDisplay', defaultValue: false)
+  @HiveField(142, defaultValue: false)
+  final bool batchNumDisplay;
+  @override
+  @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
+  @HiveField(143, defaultValue: false)
+  final bool displayOrderDiscount;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, ponRequired: $ponRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, ponRequired: $ponRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount)';
   }
 
   @override
@@ -1284,7 +1336,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
             (identical(other.enableIRN, enableIRN) || other.enableIRN == enableIRN) &&
             (identical(other.enableTaxDisplay, enableTaxDisplay) || other.enableTaxDisplay == enableTaxDisplay) &&
             (identical(other.enableTaxAtTotalLevelOnly, enableTaxAtTotalLevelOnly) || other.enableTaxAtTotalLevelOnly == enableTaxAtTotalLevelOnly) &&
-            (identical(other.netPriceOverride, netPriceOverride) || other.netPriceOverride == netPriceOverride));
+            (identical(other.netPriceOverride, netPriceOverride) || other.netPriceOverride == netPriceOverride) &&
+            (identical(other.batchNumDisplay, batchNumDisplay) || other.batchNumDisplay == batchNumDisplay) &&
+            (identical(other.displayOrderDiscount, displayOrderDiscount) || other.displayOrderDiscount == displayOrderDiscount));
   }
 
   @JsonKey(ignore: true)
@@ -1332,7 +1386,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
         enableIRN,
         enableTaxDisplay,
         enableTaxAtTotalLevelOnly,
-        netPriceOverride
+        netPriceOverride,
+        batchNumDisplay,
+        displayOrderDiscount
       ]);
 
   @JsonKey(ignore: true)
@@ -1469,17 +1525,23 @@ abstract class _SalesOrganisationConfigsDto
           @HiveField(137, defaultValue: false)
               required final bool ponRequired,
           @JsonKey(name: 'enableIRN', defaultValue: false)
-          @HiveField(139, defaultValue: false)
+          @HiveField(138, defaultValue: false)
               required final bool enableIRN,
           @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
-          @HiveField(138, defaultValue: false)
+          @HiveField(139, defaultValue: false)
               required final bool enableTaxDisplay,
           @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
           @HiveField(140, defaultValue: false)
               required final bool enableTaxAtTotalLevelOnly,
           @JsonKey(name: 'netPriceOverride', defaultValue: false)
           @HiveField(141, defaultValue: false)
-              required final bool netPriceOverride}) =
+              required final bool netPriceOverride,
+          @JsonKey(name: 'batchNumDisplay', defaultValue: false)
+          @HiveField(142, defaultValue: false)
+              required final bool batchNumDisplay,
+          @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
+          @HiveField(143, defaultValue: false)
+              required final bool displayOrderDiscount}) =
       _$_SalesOrganisationConfigsDto;
   const _SalesOrganisationConfigsDto._() : super._();
 
@@ -1641,11 +1703,11 @@ abstract class _SalesOrganisationConfigsDto
   bool get ponRequired;
   @override
   @JsonKey(name: 'enableIRN', defaultValue: false)
-  @HiveField(139, defaultValue: false)
+  @HiveField(138, defaultValue: false)
   bool get enableIRN;
   @override
   @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
-  @HiveField(138, defaultValue: false)
+  @HiveField(139, defaultValue: false)
   bool get enableTaxDisplay;
   @override
   @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
@@ -1655,6 +1717,14 @@ abstract class _SalesOrganisationConfigsDto
   @JsonKey(name: 'netPriceOverride', defaultValue: false)
   @HiveField(141, defaultValue: false)
   bool get netPriceOverride;
+  @override
+  @JsonKey(name: 'batchNumDisplay', defaultValue: false)
+  @HiveField(142, defaultValue: false)
+  bool get batchNumDisplay;
+  @override
+  @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
+  @HiveField(143, defaultValue: false)
+  bool get displayOrderDiscount;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsDtoCopyWith<_$_SalesOrganisationConfigsDto>

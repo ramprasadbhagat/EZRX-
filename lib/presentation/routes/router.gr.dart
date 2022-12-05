@@ -18,7 +18,8 @@ import '../../application/order/material_filter/material_filter_bloc.dart'
     as _i30;
 import '../../domain/account/entities/bill_to_info.dart' as _i34;
 import '../../domain/account/entities/customer_code_info.dart' as _i35;
-import '../../domain/core/aggregate/bundle_aggregate.dart' as _i37;
+import '../../domain/account/entities/sales_organisation_configs.dart' as _i37;
+import '../../domain/core/aggregate/bundle_aggregate.dart' as _i38;
 import '../../domain/order/entities/order_history_basic_info.dart' as _i36;
 import '../../domain/order/entities/order_history_item.dart' as _i33;
 import '../../domain/order/entities/order_template.dart' as _i31;
@@ -223,6 +224,7 @@ class AppRouter extends _i28.RootStackRouter {
           billToInfo: args.billToInfo,
           customerCodeInfo: args.customerCodeInfo,
           orderHistoryBasicInfo: args.orderHistoryBasicInfo,
+          salesOrgConfigs: args.salesOrgConfigs,
         ),
       );
     },
@@ -811,6 +813,7 @@ class HistoryDetailsRoute extends _i28.PageRouteInfo<HistoryDetailsRouteArgs> {
     required _i34.BillToInfo billToInfo,
     required _i35.CustomerCodeInfo customerCodeInfo,
     required _i36.OrderHistoryBasicInfo orderHistoryBasicInfo,
+    required _i37.SalesOrganisationConfigs salesOrgConfigs,
   }) : super(
           HistoryDetailsRoute.name,
           path: 'history_details',
@@ -820,6 +823,7 @@ class HistoryDetailsRoute extends _i28.PageRouteInfo<HistoryDetailsRouteArgs> {
             billToInfo: billToInfo,
             customerCodeInfo: customerCodeInfo,
             orderHistoryBasicInfo: orderHistoryBasicInfo,
+            salesOrgConfigs: salesOrgConfigs,
           ),
         );
 
@@ -833,6 +837,7 @@ class HistoryDetailsRouteArgs {
     required this.billToInfo,
     required this.customerCodeInfo,
     required this.orderHistoryBasicInfo,
+    required this.salesOrgConfigs,
   });
 
   final _i29.Key? key;
@@ -845,9 +850,11 @@ class HistoryDetailsRouteArgs {
 
   final _i36.OrderHistoryBasicInfo orderHistoryBasicInfo;
 
+  final _i37.SalesOrganisationConfigs salesOrgConfigs;
+
   @override
   String toString() {
-    return 'HistoryDetailsRouteArgs{key: $key, orderHistoryItem: $orderHistoryItem, billToInfo: $billToInfo, customerCodeInfo: $customerCodeInfo, orderHistoryBasicInfo: $orderHistoryBasicInfo}';
+    return 'HistoryDetailsRouteArgs{key: $key, orderHistoryItem: $orderHistoryItem, billToInfo: $billToInfo, customerCodeInfo: $customerCodeInfo, orderHistoryBasicInfo: $orderHistoryBasicInfo, salesOrgConfigs: $salesOrgConfigs}';
   }
 }
 
@@ -857,7 +864,7 @@ class BundleItemDetailPageRoute
     extends _i28.PageRouteInfo<BundleItemDetailPageRouteArgs> {
   BundleItemDetailPageRoute({
     _i29.Key? key,
-    required _i37.BundleAggregate bundleAggregate,
+    required _i38.BundleAggregate bundleAggregate,
   }) : super(
           BundleItemDetailPageRoute.name,
           path: 'bundle_item_detail',
@@ -878,7 +885,7 @@ class BundleItemDetailPageRouteArgs {
 
   final _i29.Key? key;
 
-  final _i37.BundleAggregate bundleAggregate;
+  final _i38.BundleAggregate bundleAggregate;
 
   @override
   String toString() {

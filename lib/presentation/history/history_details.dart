@@ -9,45 +9,52 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_details/download_attachment/bloc/download_attachment_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
-import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/core/text_button_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_helper.dart';
-import 'package:ezrxmobile/presentation/history/widgets/history_details_expanion_tile.dart';
-import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
-import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:open_file_safe/open_file_safe.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:ezrxmobile/application/order/order_history_details/download_attachment/bloc/download_attachment_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/history/widgets/history_details_expanion_tile.dart';
+import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
+import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/history/widgets/history_details_order_summary_order_bonus_card.dart';
+import 'package:ezrxmobile/presentation/history/widgets/history_details_order_summary_order_item_card.dart';
+import 'package:ezrxmobile/presentation/history/widgets/history_details_order_summary_order_tender_contract_card.dart';
 
 class HistoryDetails extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
   final BillToInfo billToInfo;
   final CustomerCodeInfo customerCodeInfo;
   final OrderHistoryBasicInfo orderHistoryBasicInfo;
+  final SalesOrganisationConfigs salesOrgConfigs;
+
   const HistoryDetails({
     Key? key,
     required this.orderHistoryItem,
     required this.billToInfo,
     required this.customerCodeInfo,
     required this.orderHistoryBasicInfo,
+    required this.salesOrgConfigs,
   }) : super(key: key);
 
   @override
@@ -79,6 +86,7 @@ class HistoryDetails extends StatelessWidget {
                 onPressed: () => _addToCartPressed(
                   context,
                   state,
+                  orderHistoryItem,
                 ),
                 child: Text(
                   'Reorder'.tr(),
@@ -152,21 +160,10 @@ class HistoryDetails extends StatelessWidget {
                     _Invoices(
                       orderDetails: orderDetails,
                     ),
-                    Text(
-                      'Order Summary'.tr(),
-                      style: const TextStyle(
-                        fontSize: 16.0,
-                        color: ZPColors.darkerGreen,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: state
-                          .orderHistoryDetails.orderHistoryDetailsOrderItem
-                          .map((orderItem) {
-                        return const Card();
-                      }).toList(),
+                    _OrderSummary(
+                      orderDetails: orderDetails,
+                      salesOrgConfigs: salesOrgConfigs,
+                      orderHistoryItem: orderHistoryItem,
                     ),
                   ],
                 ),
@@ -177,40 +174,43 @@ class HistoryDetails extends StatelessWidget {
       ),
     );
   }
+}
 
-  void _addToCartPressed(BuildContext context, MaterialPriceDetailState state) {
-    final cartBloc = context.read<CartBloc>();
-    cartBloc.add(const CartEvent.clearCart());
-    final queryInfo = MaterialQueryInfo.fromOrderHistory(
-      orderHistoryItem: orderHistoryItem,
+void _addToCartPressed(
+  BuildContext context,
+  MaterialPriceDetailState state,
+  OrderHistoryItem orderHistoryItem,
+) {
+  final cartBloc = context.read<CartBloc>();
+  final queryInfo = MaterialQueryInfo.fromOrderHistory(
+    orderHistoryItem: orderHistoryItem,
+  );
+  final itemInfo = state.materialDetails[queryInfo];
+  if (itemInfo != null) {
+    final priceAggregate = PriceAggregate(
+      price: itemInfo.price,
+      materialInfo: itemInfo.info,
+      salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+      quantity: queryInfo.qty.getOrCrash(),
+      discountedMaterialCount: cartBloc.state.zmgMaterialCount,
+      bundle: Bundle.empty(),
+      addedBonusList: [],
+      stockInfo: StockInfo.empty().copyWith(
+        materialNumber: itemInfo.info.materialNumber,
+      ),
     );
-    final itemInfo = state.materialDetails[queryInfo];
-    if (itemInfo != null) {
-      final priceAggregate = PriceAggregate(
-        price: itemInfo.price,
-        materialInfo: itemInfo.info,
-        salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-        quantity: queryInfo.qty.getOrCrash(),
-        discountedMaterialCount: cartBloc.state.zmgMaterialCount,
-        bundle: Bundle.empty(),
-        addedBonusList: [],
-        stockInfo: StockInfo.empty().copyWith(
-          materialNumber: itemInfo.info.materialNumber,
-        ),
-      );
-      cartBloc.add(CartEvent.addToCartFromList(
-        items: [priceAggregate],
-        customerCodeInfo:
-            context.read<CustomerCodeBloc>().state.customerCodeInfo,
-        salesOrganisationConfigs: context.read<SalesOrgBloc>().state.configs,
-        shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-        doNotAllowOutOfStockMaterials:
-            context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials,
-        salesOrganisation: context.read<SalesOrgBloc>().state.salesOrganisation,
-      ));
+    cartBloc.add(CartEvent.addToCart(
+      item: priceAggregate,
+      customerCodeInfo: context.read<CustomerCodeBloc>().state.customerCodeInfo,
+      salesOrganisationConfigs: context.read<SalesOrgBloc>().state.configs,
+      shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+      doNotallowOutOfStockMaterial:
+          context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials,
+      salesOrganisation: context.read<SalesOrgBloc>().state.salesOrganisation,
+    ));
 
-      context.router.pushNamed('cart_page');
-    }
+    //TODO: Revisit later
+    context.router.pushNamed('cart_page');
   }
 }
 
@@ -835,5 +835,91 @@ class LoadingOverlay {
 
   factory LoadingOverlay.of(BuildContext context) {
     return LoadingOverlay._create(context);
+  }
+}
+
+class _OrderSummary extends StatelessWidget {
+  final OrderHistoryDetails orderDetails;
+  final SalesOrganisationConfigs salesOrgConfigs;
+  final OrderHistoryItem orderHistoryItem;
+
+  const _OrderSummary({
+    Key? key,
+    required this.orderDetails,
+    required this.salesOrgConfigs,
+    required this.orderHistoryItem,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
+      buildWhen: (previous, current) => previous.isLoading != current.isLoading,
+      builder: (context, state) {
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                'Order Summary'.tr(),
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  color: ZPColors.darkerGreen,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: state.bonusItem.map((orderItem) {
+                  return orderItem.bonusList.isNotEmpty
+                      ? OrderItemBonusCard(
+                          orderHistoryDetailsBonusAggregate: orderItem,
+                        )
+                      : orderItem.orderItem.isTenderContractMaterial
+                          ? OrderTenderContractCard(
+                              orderHistoryDetailsBonusAggregate: orderItem,
+                            )
+                          : OrderItemCard(
+                              orderHistoryDetailsBonusAggregate: orderItem,
+                            );
+                }).toList(),
+              ),
+              Center(
+                child: Container(
+                  width: 160,
+                  padding: const EdgeInsets.all(16.0),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.resolveWith(
+                        (states) => ZPColors.white,
+                      ),
+                      side: MaterialStateProperty.resolveWith(
+                        (states) => const BorderSide(color: ZPColors.primary),
+                      ),
+                    ),
+                    onPressed: () => _addToCartPressed(
+                      context,
+                      context.read<MaterialPriceDetailBloc>().state,
+                      orderHistoryItem,
+                    ),
+                    child: Text(
+                      'Re-order'.tr(),
+                      style: const TextStyle(
+                        color: ZPColors.darkerGreen,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

@@ -15,6 +15,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
     required OrderHistoryDetailsShippingInformation
         orderHistoryDetailsShippingInformation,
     required List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItem,
+   
     required OrderHistoryDetailsPaymentTerm orderHistoryDetailsPaymentTerm,
     required String orderHistoryDetailsSpecialInstructions,
     required List<OrderHistoryDetailsPODocuments>
@@ -39,4 +40,6 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
     );
 
   bool get poDocumentsAvailable => orderHistoryDetailsPoDocuments.isNotEmpty;
+
+
 }

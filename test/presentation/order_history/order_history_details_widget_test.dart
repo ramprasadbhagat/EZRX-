@@ -200,6 +200,7 @@ void main() {
           orderHistoryBasicInfo:
               OrderHistoryBasicInfo.empty().copyWith(soldTo: 'slkfjdl'),
           orderHistoryItem: OrderHistoryItem.empty(),
+          salesOrgConfigs: SalesOrganisationConfigs.empty(),
         )),
       );
     }

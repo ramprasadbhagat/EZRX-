@@ -62,18 +62,20 @@ class SalesOrganisationConfigsDtoAdapter
       enableRemarks: fields[135] == null ? false : fields[135] as bool,
       enableOHPrice: fields[136] == null ? true : fields[136] as bool,
       ponRequired: fields[137] == null ? false : fields[137] as bool,
-      enableIRN: fields[139] == null ? false : fields[139] as bool,
-      enableTaxDisplay: fields[138] == null ? false : fields[138] as bool,
+      enableIRN: fields[138] == null ? false : fields[138] as bool,
+      enableTaxDisplay: fields[139] == null ? false : fields[139] as bool,
       enableTaxAtTotalLevelOnly:
           fields[140] == null ? false : fields[140] as bool,
       netPriceOverride: fields[141] == null ? false : fields[141] as bool,
+      batchNumDisplay: fields[142] == null ? false : fields[142] as bool,
+      displayOrderDiscount: fields[143] == null ? false : fields[143] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_SalesOrganisationConfigsDto obj) {
     writer
-      ..writeByte(42)
+      ..writeByte(44)
       ..writeByte(100)
       ..write(obj.disableProcessingStatus)
       ..writeByte(101)
@@ -148,14 +150,18 @@ class SalesOrganisationConfigsDtoAdapter
       ..write(obj.enableOHPrice)
       ..writeByte(137)
       ..write(obj.ponRequired)
-      ..writeByte(139)
-      ..write(obj.enableIRN)
       ..writeByte(138)
+      ..write(obj.enableIRN)
+      ..writeByte(139)
       ..write(obj.enableTaxDisplay)
       ..writeByte(140)
       ..write(obj.enableTaxAtTotalLevelOnly)
       ..writeByte(141)
       ..write(obj.netPriceOverride)
+      ..writeByte(142)
+      ..write(obj.batchNumDisplay)
+      ..writeByte(143)
+      ..write(obj.displayOrderDiscount)
       ..writeByte(7)
       ..write(obj.principalList);
   }
@@ -226,6 +232,8 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       enableTaxAtTotalLevelOnly:
           json['enableTaxAtTotalLevelOnly'] as bool? ?? false,
       netPriceOverride: json['netPriceOverride'] as bool? ?? false,
+      batchNumDisplay: json['batchNumDisplay'] as bool? ?? false,
+      displayOrderDiscount: json['displayOrderDiscount'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -274,4 +282,6 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'enableTaxDisplay': instance.enableTaxDisplay,
       'enableTaxAtTotalLevelOnly': instance.enableTaxAtTotalLevelOnly,
       'netPriceOverride': instance.netPriceOverride,
+      'batchNumDisplay': instance.batchNumDisplay,
+      'displayOrderDiscount': instance.displayOrderDiscount,
     };

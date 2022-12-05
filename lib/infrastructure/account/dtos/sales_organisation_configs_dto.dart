@@ -2,7 +2,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
-
 part 'sales_organisation_configs_dto.freezed.dart';
 part 'sales_organisation_configs_dto.g.dart';
 
@@ -129,17 +128,23 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @HiveField(137, defaultValue: false)
         required bool ponRequired,
     @JsonKey(name: 'enableIRN', defaultValue: false)
-    @HiveField(139, defaultValue: false)
+    @HiveField(138, defaultValue: false)
         required bool enableIRN,
     @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
-    @HiveField(138, defaultValue: false)
+    @HiveField(139, defaultValue: false)
         required bool enableTaxDisplay,
-    @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
+          @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
     @HiveField(140, defaultValue: false)
         required bool enableTaxAtTotalLevelOnly,
     @JsonKey(name: 'netPriceOverride', defaultValue: false)
     @HiveField(141, defaultValue: false)
         required bool netPriceOverride,
+    @JsonKey(name: 'batchNumDisplay', defaultValue: false)
+    @HiveField(142, defaultValue: false)
+        required bool batchNumDisplay,
+    @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
+    @HiveField(143, defaultValue: false)
+        required bool displayOrderDiscount,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -188,6 +193,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       ponRequired: configs.ponRequired,
       enableTaxDisplay: configs.enableTaxDisplay,
       netPriceOverride: configs.netPriceOverride,
+      batchNumDisplay: configs.batchNumDisplay,
+      displayOrderDiscount:configs.displayOrderDiscount,
     );
   }
 
@@ -235,6 +242,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       ponRequired: ponRequired,
       enableTaxDisplay: enableTaxDisplay,
       netPriceOverride: netPriceOverride,
+      batchNumDisplay: batchNumDisplay,
+      displayOrderDiscount:displayOrderDiscount,
     );
   }
 

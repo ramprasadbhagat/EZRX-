@@ -37,3 +37,6 @@ bool materialQtyConformZDP5Rule(int qtyValue, String zdp5Value) {
 String materialGroup4Type(bool isFoc) {
   return isFoc ? 'ZPFC' : 'ZPOR';
 }
+bool checkMatrialType(String type) {
+  return type == 'Comm';
+}

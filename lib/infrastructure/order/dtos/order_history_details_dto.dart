@@ -20,19 +20,18 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
         required OrderHistoryDetailsOrderHeadersDto
             orderHistoryDetailsOrderHeader,
     @JsonKey(name: 'ShippingInformation', readValue: shippingInformationOverride)
-        required OrderHistoryDetailsShippingInformationDto
-            orderHistoryDetailsShippingInformation,
+        required OrderHistoryDetailsShippingInformationDto orderHistoryDetailsShippingInformation,
     @JsonKey(name: 'OrderItems', defaultValue: <OrderHistoryDetailsOrderItemDto>[])
-        required List<OrderHistoryDetailsOrderItemDto>
-            orderHistoryDetailsOrderItem,
-    @JsonKey(name: 'PaymentTerm',readValue:paymentTermOverride)
+        required List<OrderHistoryDetailsOrderItemDto> orderHistoryDetailsOrderItem,
+    @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
         required OrderHistoryDetailsPaymentTermDto
             orderHistoryDetailsPaymentTerm,
     @JsonKey(name: 'SpecialInstructions', defaultValue: '')
         required String orderHistoryDetailsSpecialInstructions,
     @JsonKey(
-        name: 'PODocuments', defaultValue: <
-            OrderHistoryDetailsPODocumentsDto>[],)
+      name: 'PODocuments',
+      defaultValue: <OrderHistoryDetailsPODocumentsDto>[],
+    )
         required List<OrderHistoryDetailsPODocumentsDto>
             orderHistoryDetailsPoDocuments,
     @JsonKey(name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
@@ -57,7 +56,8 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
               .toList(),
       orderHistoryDetailsPaymentTerm:
           OrderHistoryDetailsPaymentTermDto.fromDomain(
-              orderHistoryDetails.orderHistoryDetailsPaymentTerm,),
+        orderHistoryDetails.orderHistoryDetailsPaymentTerm,
+      ),
       orderHistoryDetailsSpecialInstructions:
           orderHistoryDetails.orderHistoryDetailsSpecialInstructions,
       orderHistoryDetailsPoDocuments:
@@ -100,6 +100,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
       ),
       orderHistoryDetailsOrderItem:
           orderHistoryDetailsOrderItem.map((e) => e.toDomain()).toList(),
+    
       orderHistoryDetailsPaymentTerm: OrderHistoryDetailsPaymentTerm(
         paymentTermCode: orderHistoryDetailsPaymentTerm.paymentTermCode,
         paymentTermDescription:
@@ -121,6 +122,5 @@ Map<String, dynamic> orderHeaderOverride(Map json, String key) =>
     json[key] ?? {};
 Map<String, dynamic> shippingInformationOverride(Map json, String key) =>
     json[key] ?? {};
-    Map<String, dynamic> paymentTermOverride(Map json, String key) =>
+Map<String, dynamic> paymentTermOverride(Map json, String key) =>
     json[key] ?? {};
-

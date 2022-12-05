@@ -45,7 +45,7 @@ class OrderHistoryListTile extends StatelessWidget {
     final enableTaxDisplay =
         context.read<EligibilityBloc>().state.salesOrgConfigs.enableTaxDisplay;
 
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         context.read<MaterialPriceDetailBloc>().add(
               MaterialPriceDetailEvent.fetch(
@@ -77,6 +77,7 @@ class OrderHistoryListTile extends StatelessWidget {
           billToInfo: billToInfo,
           customerCodeInfo: customerCodeInfo,
           orderHistoryBasicInfo: orderHistoryBasicInfo,
+          salesOrgConfigs: salesOrgConfigs,
         ));
       },
       child: Card(

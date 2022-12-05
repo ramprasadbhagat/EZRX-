@@ -161,6 +161,8 @@ const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
   ponRequired: false,
   enableTaxDisplay: false,
   netPriceOverride: false,
+  batchNumDisplay:false,
+  displayOrderDiscount:false,
 );
 
 const BundleDto _emptyBundleDto = BundleDto(

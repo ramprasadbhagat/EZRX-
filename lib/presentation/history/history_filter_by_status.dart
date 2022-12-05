@@ -89,24 +89,28 @@ class _ClearButtonForFilterByStatus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      key: const ValueKey('filterclearAllButton'),
-      onTap: () async {
-        context.read<OrderHistoryFilterByStatusBloc>().add(
-              const OrderHistoryFilterByStatusEvent.initialized(),
-            );
-        Navigator.of(context).pop();
-      },
-      child: Container(
-        width: MediaQuery.of(context).size.width * 60 / 100,
-        height: 35,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(18.0),
-          gradient: const LinearGradient(
-            colors: <Color>[ZPColors.kPrimaryColor, ZPColors.gradient],
-          ),
+    return Container(
+      width: MediaQuery.of(context).size.width * 60 / 100,
+      height: 35,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(18.0),
+        gradient: const LinearGradient(
+          colors: <Color>[ZPColors.kPrimaryColor, ZPColors.gradient],
         ),
-        child:  Center(
+      ),
+      child: ElevatedButton(
+        key: const ValueKey('filterclearAllButton'),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+           ),
+        onPressed: () async {
+          context.read<OrderHistoryFilterByStatusBloc>().add(
+                const OrderHistoryFilterByStatusEvent.initialized(),
+              );
+          Navigator.of(context).pop();
+        },
+        child: Center(
           child: Text(
             'Clear All'.tr(),
             textAlign: TextAlign.center,

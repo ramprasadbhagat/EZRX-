@@ -350,6 +350,8 @@ mixin _$OrderHistoryDetailsState {
   bool get showErrorMessage => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
+  List<OrderHistoryDetailsBonusAggregate> get bonusItem =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryDetailsStateCopyWith<OrderHistoryDetailsState> get copyWith =>
@@ -366,7 +368,8 @@ abstract class $OrderHistoryDetailsStateCopyWith<$Res> {
       {OrderHistoryDetails orderHistoryDetails,
       bool isLoading,
       bool showErrorMessage,
-      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
+      List<OrderHistoryDetailsBonusAggregate> bonusItem});
 
   $OrderHistoryDetailsCopyWith<$Res> get orderHistoryDetails;
 }
@@ -389,6 +392,7 @@ class _$OrderHistoryDetailsStateCopyWithImpl<$Res,
     Object? isLoading = null,
     Object? showErrorMessage = null,
     Object? failureOrSuccessOption = null,
+    Object? bonusItem = null,
   }) {
     return _then(_value.copyWith(
       orderHistoryDetails: null == orderHistoryDetails
@@ -407,6 +411,10 @@ class _$OrderHistoryDetailsStateCopyWithImpl<$Res,
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
+      bonusItem: null == bonusItem
+          ? _value.bonusItem
+          : bonusItem // ignore: cast_nullable_to_non_nullable
+              as List<OrderHistoryDetailsBonusAggregate>,
     ) as $Val);
   }
 
@@ -433,7 +441,8 @@ abstract class _$$_OrderHistoryDetailsStateCopyWith<$Res>
       {OrderHistoryDetails orderHistoryDetails,
       bool isLoading,
       bool showErrorMessage,
-      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
+      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
+      List<OrderHistoryDetailsBonusAggregate> bonusItem});
 
   @override
   $OrderHistoryDetailsCopyWith<$Res> get orderHistoryDetails;
@@ -455,6 +464,7 @@ class __$$_OrderHistoryDetailsStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? showErrorMessage = null,
     Object? failureOrSuccessOption = null,
+    Object? bonusItem = null,
   }) {
     return _then(_$_OrderHistoryDetailsState(
       orderHistoryDetails: null == orderHistoryDetails
@@ -473,18 +483,25 @@ class __$$_OrderHistoryDetailsStateCopyWithImpl<$Res>
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
+      bonusItem: null == bonusItem
+          ? _value._bonusItem
+          : bonusItem // ignore: cast_nullable_to_non_nullable
+              as List<OrderHistoryDetailsBonusAggregate>,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_OrderHistoryDetailsState implements _OrderHistoryDetailsState {
+class _$_OrderHistoryDetailsState extends _OrderHistoryDetailsState {
   const _$_OrderHistoryDetailsState(
       {required this.orderHistoryDetails,
       required this.isLoading,
       required this.showErrorMessage,
-      required this.failureOrSuccessOption});
+      required this.failureOrSuccessOption,
+      required final List<OrderHistoryDetailsBonusAggregate> bonusItem})
+      : _bonusItem = bonusItem,
+        super._();
 
   @override
   final OrderHistoryDetails orderHistoryDetails;
@@ -494,10 +511,16 @@ class _$_OrderHistoryDetailsState implements _OrderHistoryDetailsState {
   final bool showErrorMessage;
   @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
+  final List<OrderHistoryDetailsBonusAggregate> _bonusItem;
+  @override
+  List<OrderHistoryDetailsBonusAggregate> get bonusItem {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bonusItem);
+  }
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsState(orderHistoryDetails: $orderHistoryDetails, isLoading: $isLoading, showErrorMessage: $showErrorMessage, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'OrderHistoryDetailsState(orderHistoryDetails: $orderHistoryDetails, isLoading: $isLoading, showErrorMessage: $showErrorMessage, failureOrSuccessOption: $failureOrSuccessOption, bonusItem: $bonusItem)';
   }
 
   @override
@@ -512,12 +535,19 @@ class _$_OrderHistoryDetailsState implements _OrderHistoryDetailsState {
             (identical(other.showErrorMessage, showErrorMessage) ||
                 other.showErrorMessage == showErrorMessage) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
-                other.failureOrSuccessOption == failureOrSuccessOption));
+                other.failureOrSuccessOption == failureOrSuccessOption) &&
+            const DeepCollectionEquality()
+                .equals(other._bonusItem, _bonusItem));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, orderHistoryDetails, isLoading,
-      showErrorMessage, failureOrSuccessOption);
+  int get hashCode => Object.hash(
+      runtimeType,
+      orderHistoryDetails,
+      isLoading,
+      showErrorMessage,
+      failureOrSuccessOption,
+      const DeepCollectionEquality().hash(_bonusItem));
 
   @JsonKey(ignore: true)
   @override
@@ -527,13 +557,15 @@ class _$_OrderHistoryDetailsState implements _OrderHistoryDetailsState {
           _$_OrderHistoryDetailsState>(this, _$identity);
 }
 
-abstract class _OrderHistoryDetailsState implements OrderHistoryDetailsState {
+abstract class _OrderHistoryDetailsState extends OrderHistoryDetailsState {
   const factory _OrderHistoryDetailsState(
       {required final OrderHistoryDetails orderHistoryDetails,
       required final bool isLoading,
       required final bool showErrorMessage,
-      required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption}) = _$_OrderHistoryDetailsState;
+      required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
+      required final List<OrderHistoryDetailsBonusAggregate>
+          bonusItem}) = _$_OrderHistoryDetailsState;
+  const _OrderHistoryDetailsState._() : super._();
 
   @override
   OrderHistoryDetails get orderHistoryDetails;
@@ -543,6 +575,8 @@ abstract class _OrderHistoryDetailsState implements OrderHistoryDetailsState {
   bool get showErrorMessage;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
+  @override
+  List<OrderHistoryDetailsBonusAggregate> get bonusItem;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryDetailsStateCopyWith<_$_OrderHistoryDetailsState>

@@ -104,7 +104,9 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
               enableOHPrice: true,
               ponRequired: false,
               enableTaxDisplay: false,
-              netPriceOverride: false)
+              netPriceOverride: false,
+              batchNumDisplay: false,
+              displayOrderDiscount: false)
           : fields[3] as SalesOrganisationConfigsDto,
       zmgMaterialCountOnCart: fields[4] == null ? 0 : fields[4] as int,
       bundleDto: fields[5] == null
