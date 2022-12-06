@@ -30,7 +30,7 @@ class SalesOrgSelector extends StatelessWidget {
 
     return CustomSelector(
       key: const Key('salesOrgSelect'),
-      title: 'Sales Org',
+      title: 'Sales Org'.tr(),
       child: BlocConsumer<SalesOrgBloc, SalesOrgState>(
         listenWhen: (previous, current) =>
             previous.salesOrganisation != current.salesOrganisation ||

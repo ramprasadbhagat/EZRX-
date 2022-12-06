@@ -18,8 +18,7 @@ class MaterialRoot extends StatelessWidget {
       builder: (context, state) {
         final disableBundles = state.salesOrgConfigs.disableBundles;
         final enableCovidMaterial = state.isCovidMaterialEnable;
-        final length =
-            (disableBundles ? 1 : 2) + (enableCovidMaterial ? 1 : 0);
+        final length = (disableBundles ? 1 : 2) + (enableCovidMaterial ? 1 : 0);
 
         return Scaffold(
           appBar: PreferredSize(
@@ -36,9 +35,9 @@ class MaterialRoot extends StatelessWidget {
               : TabViewPage(
                   length: length,
                   tabHeaderText: [
-                    'Material',
-                    if (!disableBundles) 'Bundles',
-                    if (enableCovidMaterial) 'COVID-19',
+                    'Material'.tr(),
+                    if (!disableBundles) 'Bundles'.tr(),
+                    if (enableCovidMaterial) 'COVID-19'.tr(),
                   ],
                   tabWidgets: [
                     const MaterialListPage(

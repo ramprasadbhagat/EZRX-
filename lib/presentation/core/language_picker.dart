@@ -81,7 +81,7 @@ extension LocaleExtension on Locale {
       case 'th':
         return 'ภาษาไทย';
       case 'zh':
-        return '中文';
+        return '繁體中文';
       case 'my':
         return 'ဗမာဘာသာစကား';
       case 'vi':

@@ -70,7 +70,7 @@ class CustomerCodeSelector extends StatelessWidget {
       builder: (context, state) {
         return CustomSelector(
           key: const Key('customerCodeSelect'),
-          title: 'Customer Code',
+          title: 'Customer Code'.tr(),
           onTap: state.isFetching
               ? null
               : () => context.router.pushNamed('customer_search_page'),

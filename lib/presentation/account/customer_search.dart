@@ -157,7 +157,7 @@ class _CustomerSearchPage extends State<CustomerSearchPage> {
                         }
                       },
                     ),
-                    hintText: 'Search...',
+                    hintText: 'Search...'.tr(),
                     border: InputBorder.none,
                   ),
                 ),

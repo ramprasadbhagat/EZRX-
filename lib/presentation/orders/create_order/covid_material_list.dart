@@ -489,7 +489,7 @@ class _SearchBarState extends State<_SearchBar> {
                         );
                   },
                 ),
-                hintText: 'Search...',
+                hintText: 'Search...'.tr(),
               ),
             ),
           );

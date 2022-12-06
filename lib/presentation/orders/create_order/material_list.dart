@@ -12,7 +12,6 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -270,12 +269,10 @@ class _ListContent extends StatelessWidget {
                           .read<CustomerCodeBloc>()
                           .state
                           .customerCodeInfo,
-                      salesOrganisation: context
-                          .read<SalesOrgBloc>()
-                          .state
-                          .salesOrganisation,
+                      salesOrganisation:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
                       shipToInfo:
-                      context.read<ShipToCodeBloc>().state.shipToInfo,
+                          context.read<ShipToCodeBloc>().state.shipToInfo,
                       materialInfo: materialInfo,
                     ),
                   );
@@ -641,7 +638,7 @@ class _SearchBarState extends State<_SearchBar> {
                         ));
                   },
                 ),
-                hintText: 'Search...',
+                hintText: 'Search...'.tr(),
                 // border: InputBorder.none,
               ),
             ),
@@ -665,9 +662,9 @@ class _MaterialFilters extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CustomSelector(
-                title: 'Principal',
+                title: 'Principal'.tr(),
                 child: Text(
-                  state.getFilterLabel(MaterialFilterType.principal),
+                  state.getFilterLabel(MaterialFilterType.principal).tr(),
                   maxLines: 1,
                   style: Theme.of(context).textTheme.subtitle2?.apply(
                         color: ZPColors.primary,
@@ -682,9 +679,9 @@ class _MaterialFilters extends StatelessWidget {
                 },
               ),
               CustomSelector(
-                title: 'Theraputic',
+                title: 'Therapeutic'.tr(),
                 child: Text(
-                  state.getFilterLabel(MaterialFilterType.therapeutic),
+                  state.getFilterLabel(MaterialFilterType.therapeutic).tr(),
                   maxLines: 1,
                   style: Theme.of(context).textTheme.subtitle2?.apply(
                         color: ZPColors.primary,
@@ -699,9 +696,9 @@ class _MaterialFilters extends StatelessWidget {
                 },
               ),
               CustomSelector(
-                title: 'Brand',
+                title: 'Brand'.tr(),
                 child: Text(
-                  state.getFilterLabel(MaterialFilterType.brand),
+                  state.getFilterLabel(MaterialFilterType.brand).tr(),
                   maxLines: 1,
                   style: Theme.of(context).textTheme.subtitle2?.apply(
                         color: ZPColors.primary,

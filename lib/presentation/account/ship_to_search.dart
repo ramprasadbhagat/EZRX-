@@ -164,7 +164,7 @@ class AppBar extends StatelessWidget {
                         ));
                   },
                 ),
-                hintText: 'Search...',
+                hintText: 'Search...'.tr(),
                 border: InputBorder.none,
               ),
             ),
@@ -227,7 +227,7 @@ class _ListContent extends StatelessWidget {
             'shipToOption${shipToInfo.shipToCustomerCode}',
           ),
           trailing: shipToInfo.defaultShipToAddress
-              ? const CustomLabel(textValue: 'Default')
+              ? CustomLabel(textValue: 'Default'.tr())
               : const SizedBox.shrink(),
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

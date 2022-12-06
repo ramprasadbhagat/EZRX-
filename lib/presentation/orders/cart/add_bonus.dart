@@ -156,7 +156,7 @@ class _BonusAddPageState extends State<BonusAddPage> {
                             );
                       },
                     ),
-                    hintText: 'Search...',
+                    hintText: 'Search...'.tr(),
                     border: InputBorder.none,
                   ),
                 ),

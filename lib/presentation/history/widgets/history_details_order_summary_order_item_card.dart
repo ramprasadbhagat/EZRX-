@@ -57,8 +57,7 @@ class OrderItemCard extends StatelessWidget {
             }
           },
           child: Card(
-            color: Colors.white,
-            elevation: 3,
+            color: ZPColors.white,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -116,7 +115,7 @@ class OrderItemCard extends StatelessWidget {
                             )
                           : const SizedBox.shrink(),
                       BalanceTextRow(
-                        keyText: 'Status:'.tr(),
+                        keyText: 'Status'.tr(),
                         valueText: orderHistoryDetailsBonusAggregate
                                 .orderItem.sAPStatus.isNotEmpty
                             ? orderHistoryDetailsBonusAggregate

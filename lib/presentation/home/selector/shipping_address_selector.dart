@@ -247,7 +247,7 @@ class ShipCodeSelector extends StatelessWidget {
           builder: (context, state) {
             return CustomSelector(
               key: const Key('shipToCodeSelect'),
-              title: 'Shipping Address',
+              title: 'Shipping Address'.tr(),
               onTap: customerCodeState.isFetching
                   ? null
                   : () => context.router.pushNamed('ship_to_search_page'),
