@@ -295,17 +295,6 @@ bool countrySupportOrderType(country) {
   }
 }
 
-// bool isAllCustomerCodeEnabled(String customerCode) {
-//   switch (customerCode) {
-//     case 'all':
-//     case '-':
-//     case '':
-//       return true;
-//     default:
-//       return false;
-//   }
-// }
-
 class Contact {
   String instruction;
   List<String> phoneNumbers;

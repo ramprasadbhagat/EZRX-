@@ -5,7 +5,6 @@ import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/value/value_transformers.dart';
-import 'package:ezrxmobile/domain/order/value/value_validators.dart';
 
 class CompanyName extends ValueObject<String> {
   @override
