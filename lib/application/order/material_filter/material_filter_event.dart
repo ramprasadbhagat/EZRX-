@@ -18,6 +18,7 @@ class MaterialFilterEvent with _$MaterialFilterEvent {
   const factory MaterialFilterEvent.updateSearchKey(String searchkey) =
       _updateSearchKey;
   const factory MaterialFilterEvent.clearSelected() = _clearSelected;
+  const factory MaterialFilterEvent.resetFilter() = _resetFilter;
 }
 
 enum MaterialFilterType {

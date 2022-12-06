@@ -108,6 +108,15 @@ class MaterialFilterBloc
           selectedMaterialFilter: state.getEmptyMaterialFilter(),
         ),
       ),
+      resetFilter: (_) {
+        emit(
+          state.copyWith(
+            searchKey: '',
+            selectedMaterialFilter: state.getEmptyMaterialFilter(),
+            materialFilter: state.getEmptyMaterialFilter(),
+          ),
+        );
+      },
     );
   }
 }

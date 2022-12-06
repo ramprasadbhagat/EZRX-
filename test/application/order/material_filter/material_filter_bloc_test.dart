@@ -299,5 +299,40 @@ void main() {
                 ),
               )
             ]);
+
+    blocTest<MaterialFilterBloc, MaterialFilterState>(
+      'Reset Filter',
+      build: () => MaterialFilterBloc(
+        materialFilterRepository: materialFilterRepositoryMock,
+      ),
+      setUp: () {
+        when(() => materialFilterRepositoryMock.updateSelectedList(
+            selectedList: MaterialFilterState.initial()
+                .selectedMaterialFilter
+                .uniqueTherapeuticClass,
+            name: 'Other multivitamins with minerals')).thenAnswer(
+          (invocation) => ['GSK Consumer Healthcare'],
+        );
+      },
+      act: (bloc) {
+        bloc.add(
+          const MaterialFilterEvent.updateMaterialSelected(
+            fakeSelectedTheraputicFilterCategory,
+            'Other multivitamins with minerals',
+          ),
+        );
+        bloc.add(const MaterialFilterEvent.resetFilter());
+      },
+      expect: () => [
+        MaterialFilterState.initial().copyWith(
+          selectedMaterialFilter:
+              MaterialFilterState.initial().selectedMaterialFilter.copyWith(
+            uniqueTherapeuticClass: ['GSK Consumer Healthcare'],
+          ),
+          apiFailureOrSuccessOption: none(),
+        ),
+        MaterialFilterState.initial(),
+      ],
+    );
   });
 }

@@ -43,6 +43,16 @@ class ShipCodeSelector extends StatelessWidget {
             final enableCovidMaterial =
                 context.read<EligibilityBloc>().state.isCovidMaterialEnable;
 
+            context.read<MaterialFilterBloc>().add(
+                  const MaterialFilterEvent.resetFilter(),
+                );
+
+            context.read<MaterialListBloc>().add(
+                  const MaterialListEvent.updateSearchKey(
+                    searchKey: '',
+                  ),
+                );
+
             if (state.haveShipTo) {
               context.read<SavedOrderListBloc>().add(
                     SavedOrderListEvent.fetch(
@@ -71,7 +81,7 @@ class ShipCodeSelector extends StatelessWidget {
                       selectedMaterialFilter: context
                           .read<MaterialFilterBloc>()
                           .state
-                          .selectedMaterialFilter,
+                          .getEmptyMaterialFilter(),
                       orderDocumentType: context
                           .read<OrderDocumentTypeBloc>()
                           .state
@@ -147,18 +157,18 @@ class ShipCodeSelector extends StatelessWidget {
                     );
               }
               context.read<CartBloc>().add(CartEvent.fetch(
-                customerCodeInfo:
-                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                salesOrganisationConfigs:
-                    context.read<SalesOrgBloc>().state.configs,
-                shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-                doNotAllowOutOfStockMaterials: context
-                    .read<EligibilityBloc>()
-                    .state
-                    .doNotAllowOutOfStockMaterials,
-                salesOrganisation:
-                    context.read<SalesOrgBloc>().state.salesOrganisation,
-              ));
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    salesOrganisationConfigs:
+                        context.read<SalesOrgBloc>().state.configs,
+                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    doNotAllowOutOfStockMaterials: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .doNotAllowOutOfStockMaterials,
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                  ));
               context.read<MaterialFilterBloc>().add(MaterialFilterEvent.fetch(
                     salesOrganisation:
                         context.read<SalesOrgBloc>().state.salesOrganisation,
