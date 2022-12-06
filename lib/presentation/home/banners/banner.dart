@@ -45,6 +45,10 @@ class _HomeBannerState extends State<HomeBanner> {
       },
       buildWhen: (previous, current) => previous.banner != current.banner,
       builder: (context, state) {
+        if (state.banner.isEmpty) {
+          return const SizedBox.shrink();
+        }
+
         return Column(
           children: [
             SizedBox(
@@ -65,19 +69,20 @@ class _HomeBannerState extends State<HomeBanner> {
                 },
               ),
             ),
-            state.banner.isNotEmpty ?
-              SmoothPageIndicator(
-                controller: _controller,
-                onDotClicked: (index) => _controller.jumpToPage(index),
-                count: state.banner.length,
-                effect: ExpandingDotsEffect(
-                  dotHeight: MediaQuery.of(context).size.width * 0.02,
-                  dotWidth: MediaQuery.of(context).size.width * 0.02,
-                  dotColor: ZPColors.secondary,
-                  activeDotColor: ZPColors.primary,
-                  // strokeWidth: 0.5,
-                ),
-              ) : const SizedBox.shrink(),
+            state.banner.isNotEmpty
+                ? SmoothPageIndicator(
+                    controller: _controller,
+                    onDotClicked: (index) => _controller.jumpToPage(index),
+                    count: state.banner.length,
+                    effect: ExpandingDotsEffect(
+                      dotHeight: MediaQuery.of(context).size.width * 0.02,
+                      dotWidth: MediaQuery.of(context).size.width * 0.02,
+                      dotColor: ZPColors.secondary,
+                      activeDotColor: ZPColors.primary,
+                      // strokeWidth: 0.5,
+                    ),
+                  )
+                : const SizedBox.shrink(),
           ],
         );
       },
