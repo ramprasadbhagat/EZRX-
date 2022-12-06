@@ -59,6 +59,11 @@ class SplashPage extends StatelessWidget {
         BlocListener<UserBloc, UserState>(
           listenWhen: (previous, current) => previous.user != current.user,
           listener: (context, state) {
+            if (state.user.username.isValid()) {
+              final welcomeMessage =
+                  '${'Welcome back'.tr()}, ${state.user.username.getOrCrash()}';
+              showSnackBar(context: context, message: welcomeMessage);
+            }
             if (state.haveSalesOrganisation) {
               context.read<SalesOrgBloc>().add(
                     SalesOrgEvent.loadSavedOrganisation(

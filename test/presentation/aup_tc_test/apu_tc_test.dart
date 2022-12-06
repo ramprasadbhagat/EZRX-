@@ -131,7 +131,6 @@ void main() {
       await tester.tap(auptcAcceptButton);
     });
 
-    // TODO: need Joseph fix this
     testWidgets(
         'Test - AupTc Widget Show AupTcBloc state.showTermsAndConditon=false',
         (tester) async {

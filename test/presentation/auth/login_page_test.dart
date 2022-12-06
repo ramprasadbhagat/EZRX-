@@ -48,9 +48,9 @@ class AnnnouncementBlocMock
     extends MockBloc<AnnouncementEvent, AnnouncementState>
     implements AnnouncementBloc {}
 
-class PaymentCustomerInformationBlocMock
-    extends MockBloc<PaymentCustomerInformationEvent, PaymentCustomerInformationState>
-    implements PaymentCustomerInformationBloc {}    
+class PaymentCustomerInformationBlocMock extends MockBloc<
+        PaymentCustomerInformationEvent, PaymentCustomerInformationState>
+    implements PaymentCustomerInformationBloc {}
 
 void main() {
   late LoginFormBloc loginBlocMock;
@@ -87,8 +87,7 @@ void main() {
           .thenReturn(ShipToCodeState.initial());
       when(() => paymentCustomerInformationBlocMock.state)
           .thenReturn(PaymentCustomerInformationState.initial());
-      when(() => cartBlocMock.state)
-          .thenReturn(CartState.initial());
+      when(() => cartBlocMock.state).thenReturn(CartState.initial());
     });
     testWidgets("Test don't have credential", (tester) async {
       await tester.pumpWidget(
@@ -106,6 +105,9 @@ void main() {
               ),
               BlocProvider<CartBloc>(
                 create: (context) => CartBlocMock(),
+              ),
+              BlocProvider<UserBloc>(
+                create: (context) => userBlocMock,
               ),
             ],
             child: const LoginPage(),
@@ -155,6 +157,9 @@ void main() {
               BlocProvider<CartBloc>(
                 create: (context) => cartBlocMock,
               ),
+              BlocProvider<UserBloc>(
+                create: (context) => userBlocMock,
+              ),
             ],
             child: const LoginPage(),
           ),
@@ -202,6 +207,9 @@ void main() {
               BlocProvider<CartBloc>(
                 create: (context) => cartBlocMock,
               ),
+              BlocProvider<UserBloc>(
+                create: (context) => userBlocMock,
+              ),
             ],
             child: const LoginPage(),
           ),
@@ -229,11 +237,11 @@ void main() {
               create: (context) => shipToCodeBLocMock,
             ),
             BlocProvider<PaymentCustomerInformationBloc>(
-                create: (context) => paymentCustomerInformationBlocMock,
-              ),
+              create: (context) => paymentCustomerInformationBlocMock,
+            ),
             BlocProvider<CartBloc>(
-                create: (context) => cartBlocMock,
-              ),
+              create: (context) => cartBlocMock,
+            ),
           ],
           child: const SplashPage(),
         ),
@@ -272,6 +280,9 @@ void main() {
               ),
               BlocProvider<AnnouncementBloc>(
                 create: (context) => announcementBlocMock,
+              ),
+              BlocProvider<UserBloc>(
+                create: (context) => userBlocMock,
               ),
             ],
             child: const LoginPage(),

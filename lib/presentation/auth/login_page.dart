@@ -6,7 +6,6 @@ import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatefulWidget {
@@ -56,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                       message: failureMessage.tr(),
                     );
                   },
-                  (_) {
+                  (success) {
                     context.read<AuthBloc>().add(const AuthEvent.authCheck());
                   },
                 ),
