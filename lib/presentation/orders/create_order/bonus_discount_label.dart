@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/custom_label.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,6 +22,16 @@ class BonusDiscountLabel extends StatelessWidget {
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: [
+            if (materialInfo.hasValidTenderContract)
+               Padding(
+                padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
+                child: Text(
+                  'Tender contract',
+                  style: Theme.of(context).textTheme.bodyText1?.apply(
+                        color: ZPColors.tender,
+                      ),
+                ),
+              ),
             if (!materialInfo.hidePrice && itemPrice.bonuses.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),

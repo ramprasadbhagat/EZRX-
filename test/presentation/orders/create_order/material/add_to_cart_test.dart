@@ -138,6 +138,8 @@ void main() {
                   .copyWith(salesOrg: SalesOrg('SG'))));
       await tester.pumpWidget(getScopedWidget(AddToCart(
         isCovid19Tab: false,
+        hasValidTenderContract: false,
+        hasMandatoryTenderContract: false,
       )));
       await tester.pump();
       final tirePriceLable = find.byKey(const Key('priceTierLable'));
@@ -164,6 +166,8 @@ void main() {
                   .copyWith(salesOrg: SalesOrg('SG'))));
       await tester.pumpWidget(getScopedWidget(AddToCart(
         isCovid19Tab: false,
+        hasValidTenderContract: false,
+        hasMandatoryTenderContract: false,
       )));
       await tester.pump();
       final tirePriceLable = find.byKey(const Key('priceTierLable'));

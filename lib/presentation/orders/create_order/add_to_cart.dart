@@ -12,12 +12,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/select_contract.dart';
 
 class AddToCart extends StatefulWidget {
   final bool isCovid19Tab;
-  const AddToCart({
+  bool hasValidTenderContract = false;
+  bool hasMandatoryTenderContract = false;
+
+  AddToCart({
     Key? key,
     required this.isCovid19Tab,
+    required this.hasValidTenderContract,
+    required this.hasMandatoryTenderContract,
   }) : super(key: key);
 
   @override
@@ -27,6 +33,7 @@ class AddToCart extends StatefulWidget {
 class _AddToCartState extends State<AddToCart> {
   late SalesOrgBloc salesOrgBloc;
   late AddToCartBloc addToCartBloc;
+
   @override
   void initState() {
     salesOrgBloc = context.read<SalesOrgBloc>();
@@ -59,39 +66,57 @@ class _AddToCartState extends State<AddToCart> {
   @override
   Widget build(BuildContext context) {
     final cartBloc = context.read<CartBloc>();
+    final addToCartBloc = context.read<AddToCartBloc>();
 
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.7,
+      height: MediaQuery.of(context).size.height -
+          AppBar().preferredSize.height -
+          MediaQuery.of(context).padding.top,
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: ZPColors.white,
+        appBar: AppBar(
+          title: const Text('Material Detail').tr(),
+        ),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(15),
           child: BlocBuilder<AddToCartBloc, AddToCartState>(
             buildWhen: (previous, current) => previous != current,
             builder: (context, state) {
-              return ListView(
+              return Column(
                 children: [
-                  CartItemDetailWidget(
-                    cartItem: state.cartItem,
-                    onQuantityChanged: (int value) {
-                      final cartItem = addToCartBloc.state.cartItem;
-                      final discountedMaterialCount = cartItem.price.zmgDiscount
-                          ? cartBloc.state.zmgMaterialCount
-                          : cartBloc.state
-                              .onAddCartDiscountMaterialCount(cartItem);
-                      addToCartBloc.add(
-                        AddToCartEvent.updateQuantity(
-                          value,
-                          discountedMaterialCount,
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        CartItemDetailWidget(
+                          cartItem: state.cartItem,
+                          onQuantityChanged: (int value) {
+                            final cartItem = addToCartBloc.state.cartItem;
+                            final discountedMaterialCount = cartItem
+                                .price.zmgDiscount
+                                ? cartBloc.state.zmgMaterialCount
+                                : cartBloc.state
+                                .onAddCartDiscountMaterialCount(cartItem);
+                            addToCartBloc.add(
+                              AddToCartEvent.updateQuantity(
+                                value,
+                                discountedMaterialCount,
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
+                        widget.hasValidTenderContract
+                            ? SelectContract(
+                          materialInfo: state.cartItem.materialInfo,
+                        )
+                            : const SizedBox.shrink(),
+                      ],
+                    ),
                   ),
                   ElevatedButton(
                     style: _isAddToCartAllowed
                         ? ElevatedButton.styleFrom(
-                            backgroundColor: ZPColors.lightGray,
-                          )
+                      backgroundColor: ZPColors.lightGray,
+                    )
                         : null,
                     onPressed: () => _isAddToCartAllowed
                         ? null
@@ -114,26 +139,26 @@ class _AddToCartState extends State<AddToCart> {
       showSnackBar(
         context: context,
         message:
-            'Covid material cannot be combined with commercial material.'.tr(),
+        'Covid material cannot be combined with commercial material.'.tr(),
       );
     } else if (!selectedCartItem.materialInfo.materialGroup4.isFOC &&
         cartState.containFocMaterial) {
       showSnackBar(
         context: context,
         message:
-            'Commercial material cannot be combined with covid material.'.tr(),
+        'Commercial material cannot be combined with covid material.'.tr(),
       );
     } else {
       final eligibilityState = context.read<EligibilityBloc>().state;
       context.read<CartBloc>().add(CartEvent.addToCart(
-            item: context.read<AddToCartBloc>().state.cartItem,
-            customerCodeInfo: eligibilityState.customerCodeInfo,
-            salesOrganisation: eligibilityState.salesOrganisation,
-            salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
-            shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-            doNotallowOutOfStockMaterial:
-                eligibilityState.doNotAllowOutOfStockMaterials,
-          ));
+        item: context.read<AddToCartBloc>().state.cartItem,
+        customerCodeInfo: eligibilityState.customerCodeInfo,
+        salesOrganisation: eligibilityState.salesOrganisation,
+        salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
+        shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+        doNotallowOutOfStockMaterial:
+        eligibilityState.doNotAllowOutOfStockMaterials,
+      ));
       context.router.pop();
     }
   }

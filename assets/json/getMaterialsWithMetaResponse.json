@@ -27,8 +27,8 @@
             "5"
           ],
           "hidePrice": false,
-          "hasValidTenderContract": null,
-          "hasMandatoryTenderContract": null
+          "hasValidTenderContract": true,
+          "hasMandatoryTenderContract": false
         },
         {
           "materialNumber": "000000000023167583",

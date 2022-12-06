@@ -313,3 +313,62 @@ class PrincipleCode extends ValueObject<String> {
     );
   }
 }
+
+class TenderPrice extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory TenderPrice(String input) {
+    return TenderPrice._(validateStringNotEmpty(input));
+  }
+
+  double get tenderPrice {
+    return totalPriceStringAsFixed(value.getOrElse(() => '0'));
+  }
+
+  const TenderPrice._(this.value);
+}
+
+class TenderContractNumber extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory TenderContractNumber.tenderVisaNumber(String input) {
+    return TenderContractNumber._(Right(input));
+  }
+
+  factory TenderContractNumber.announcementLetterNumber(String input) {
+    return TenderContractNumber._(Right(input));
+  }
+
+  String get displayTenderVisaNumber {
+    return naIfEmpty(removeLeadingZero(value.getOrElse(() => '-')));
+  }
+
+  String get displayAnnouncementLetterNumber {
+    return naIfEmpty(removeLeadingZero(value.getOrElse(() => '-')));
+  }
+
+  const TenderContractNumber._(this.value);
+}
+
+class TenderContractReason extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory TenderContractReason(String input) {
+    return TenderContractReason._(validateStringNotEmpty(input));
+  }
+
+  bool get is730 {
+    return contractIs730(value.getOrElse(() => ''));
+  }
+
+  bool get isEmpty => value.getOrElse(() => '') == '';
+
+  String get displayTenderContractReason {
+    return naIfEmpty(removeLeadingZero(value.getOrElse(() => '-')));
+  }
+
+  const TenderContractReason._(this.value);
+}

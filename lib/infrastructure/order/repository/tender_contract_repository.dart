@@ -1,0 +1,57 @@
+import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/domain/order/repository/i_tender_contract_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/tender_contract_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/tender_contract_remote.dart';
+
+class TenderContractRepository implements ITenderContractRepository {
+  final Config config;
+  final TenderContractLocalDataSource tenderContractLocalDataSource;
+  final TenderContractRemoteDataSource tenderContractRemoteDataSource;
+
+  TenderContractRepository({
+    required this.config,
+    required this.tenderContractLocalDataSource,
+    required this.tenderContractRemoteDataSource,
+  });
+
+  @override
+  Future<Either<ApiFailure, List<TenderContract>>> getTenderContractDetails({
+    required MaterialInfo material,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final tenderContractDetails =
+            await tenderContractLocalDataSource.getTenderContractDetails();
+
+        return Right(tenderContractDetails);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    } else {
+      try {
+        final tenderContractDetails =
+            await tenderContractRemoteDataSource.getTenderContractDetails(
+          materialNumber: material.materialNumber.getValue(),
+          salesOrg: salesOrganisation.salesOrg.getValue(),
+          selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
+          shipTo: customerCodeInfo.customerCodeSoldTo,
+        );
+
+        return Right(tenderContractDetails);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+  }
+}

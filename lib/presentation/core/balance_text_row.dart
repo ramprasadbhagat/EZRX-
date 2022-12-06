@@ -22,13 +22,13 @@ class BalanceTextRow extends StatelessWidget {
   Widget build(BuildContext context) {
     const keyTextStyle = TextStyle(
       color: ZPColors.darkGray,
-      fontSize: 12.0,
+      fontSize: 15.0,
       fontFamily: 'Poppins',
       fontWeight: FontWeight.w400,
     );
     const valueTextStyle = TextStyle(
       color: ZPColors.black,
-      fontSize: 12.0,
+      fontSize: 15.0,
       fontFamily: 'Poppins',
       fontWeight: FontWeight.w600,
     );

@@ -12,6 +12,8 @@ class CartBottomSheet {
     required BuildContext context,
     required PriceAggregate priceAggregate,
     bool isCovid19Tab = false,
+    bool hasValidTenderContract = false,
+    bool hasMandatoryTenderContract = false,
   }) {
     context.read<AddToCartBloc>().add(
           AddToCartEvent.setCartItem(
@@ -19,16 +21,15 @@ class CartBottomSheet {
           ),
         );
     showModalBottomSheet(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(15),
-          topRight: Radius.circular(15),
-        ),
-      ),
+      barrierColor: Colors.transparent,
       context: context,
+      enableDrag: false,
+      isScrollControlled: true,
       builder: (_) {
         return AddToCart(
           isCovid19Tab: isCovid19Tab,
+          hasValidTenderContract: hasValidTenderContract,
+          hasMandatoryTenderContract: hasMandatoryTenderContract,
         );
       },
     );

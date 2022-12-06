@@ -36,6 +36,7 @@ import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
@@ -227,7 +228,8 @@ class App extends StatelessWidget {
           create: (context) => locator<CovidMaterialListBloc>(),
         ),
         BlocProvider<CartBloc>(
-          create: (context) => locator<CartBloc>(),
+          create: (context) =>
+              locator<CartBloc>(),
         ),
         BlocProvider<PriceOverrideBloc>(
           create: (context) => locator<PriceOverrideBloc>(),
@@ -252,6 +254,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<OrderEligibilityBloc>(
           create: (context) => locator<OrderEligibilityBloc>(),
+        ),
+        BlocProvider<TenderContractBloc>(
+          create: (context) => locator<TenderContractBloc>(),
         ),
       ],
       child: MaterialApp.router(

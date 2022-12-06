@@ -11,6 +11,8 @@ import 'package:ezrxmobile/application/order/material_filter/material_filter_blo
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -261,6 +263,23 @@ class _ListContent extends StatelessWidget {
               message: 'Product Not Available'.tr(),
             );
           } else {
+            if (materialInfo.hasValidTenderContract) {
+              context.read<TenderContractBloc>().add(
+                    TenderContractEvent.fetch(
+                      customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                      salesOrganisation: context
+                          .read<SalesOrgBloc>()
+                          .state
+                          .salesOrganisation,
+                      shipToInfo:
+                      context.read<ShipToCodeBloc>().state.shipToInfo,
+                      materialInfo: materialInfo,
+                    ),
+                  );
+            }
             addToCart(
               context: context,
               priceAggregate: PriceAggregate(
@@ -276,6 +295,8 @@ class _ListContent extends StatelessWidget {
                   materialNumber: materialInfo.materialNumber,
                 ),
               ),
+              hasValidTenderContract: materialInfo.hasValidTenderContract,
+              hasMandatoryTenderContract: materialInfo.hasValidTenderContract,
             );
           }
         },

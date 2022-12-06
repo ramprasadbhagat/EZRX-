@@ -35,6 +35,7 @@ import 'package:ezrxmobile/application/order/order_history_list/order_history_li
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
@@ -141,6 +142,9 @@ import 'package:ezrxmobile/infrastructure/order/datasource/price_override/price_
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/tender_contract_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/tender_contract_query.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/tender_contract_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/valid_customer_material_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/valid_customer_material_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/valid_customer_materials_query.dart';
@@ -161,6 +165,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart
 import 'package:ezrxmobile/infrastructure/order/repository/order_template_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/payment_customer_information_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/payment_term_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/tender_contract_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/valid_customer_material_repository.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/routes/router_observer.dart';
@@ -1218,4 +1223,37 @@ void setupLocator() {
           locator<OrderHistoryDetailsPoDocumentRepository>(),
     ),
   );
+
+  //============================================================
+  //  Tender Contract
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => TenderContractQuery());
+
+  locator.registerLazySingleton(() => TenderContractLocalDataSource());
+
+  locator.registerLazySingleton(
+        () => TenderContractRemoteDataSource(
+      httpService: locator<HttpService>(),
+      tenderContractQuery: locator<TenderContractQuery>(),
+      config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+        () => TenderContractRepository(
+      config: locator<Config>(),
+      tenderContractLocalDataSource: locator<TenderContractLocalDataSource>(),
+      tenderContractRemoteDataSource: locator<TenderContractRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+        () => TenderContractBloc(
+      tenderContractRepository: locator<TenderContractRepository>(),
+    ),
+  );
+
 }
