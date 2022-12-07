@@ -237,7 +237,7 @@ class PriceAggregate with _$PriceAggregate {
       bonusavailable && quantity >= price.priceBonusItem.last.bonusQuantity;
 
   bool get refreshAddedBonus =>
-      _addedDealBonusMaterial.qty != _calculateMaterialItemBonus;
+      _addedDealBonusMaterial.qty != calculateMaterialItemBonus;
 
   bool get isDealBounsAdded => addedBonusList.any((element) =>
       element.materialInfo.materialNumber == materialInfo.materialNumber);
@@ -256,7 +256,8 @@ class PriceAggregate with _$PriceAggregate {
         orElse: () => MaterialItemBonus.empty(),
       );
 
-  int get _calculateMaterialItemBonus {
+  @protected
+  int get calculateMaterialItemBonus {
     switch (_bonusItem.calculation.getCalculationEnum) {
       case BonusMaterialCalculationEnum.calculation915:
         return (quantity / _bonusItem.qualifyingQuantity).truncate() *
@@ -294,7 +295,7 @@ class PriceAggregate with _$PriceAggregate {
     final remainingQty = quantity - (_bonusItem.qualifyingQuantity * ratio);
 
     return MaterialItemBonus.fromBonusMaterial(_bonusItem).copyWith(
-      qty: _calculateMaterialItemBonus,
+      qty: calculateMaterialItemBonus,
       remainingQty: remainingQty,
       additionalBonusFlag: false,
       bonusOverrideFlag: true,

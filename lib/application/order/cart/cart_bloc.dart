@@ -129,12 +129,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           emit(state.copyWith(
             apiFailureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('Product Not Available'))),
-            // isFetching: false,
           ));
 
           return;
         }
-
         final failureOrSuccess = await cartRepository.addToCart(
           cartItem: e.item.copyWith(
             stockInfo: stockInformation,
@@ -146,7 +144,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                // isFetching: false,
               ),
             );
           },

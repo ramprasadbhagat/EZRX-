@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -878,11 +879,29 @@ void main() {
           (tester) async {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
-            cartItemList: mockCartItemWithDataList,
+            cartItemList: mockCartItemWithDataList
+                .map(
+                  (e) => e.copyWith(
+                    materialInfo: e.materialInfo.copyWith(
+                      materialGroup4: MaterialGroup.four('none'),
+                      hidePrice: false,
+                    ),
+                    price: e.price.copyWith(additionalBonusEligible: true),
+                  ),
+                )
+                .toList(),
             isFetching: true,
           ),
         );
-
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+              user: User.empty().copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('external_sales_rep'),
+            ),
+            hasBonusOverride: true,
+          )),
+        );
         await tester.runAsync(() async {
           await tester.pumpWidget(getWidget());
         });
@@ -918,6 +937,12 @@ void main() {
         await tester.tap(
           find.byWidget(deleteWidget),
         );
+
+        expect(
+            find.byKey(
+              const Key('addBonusButton'),
+            ),
+            findsOneWidget);
       });
     },
   );

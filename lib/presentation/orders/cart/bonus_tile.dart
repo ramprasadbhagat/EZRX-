@@ -30,6 +30,7 @@ class BounsTile extends StatelessWidget {
               if (cartItem.isEligibleAddAdditionBonus &&
                   context.read<EligibilityBloc>().state.getBonusOverRide)
                 Row(
+                  key: const ValueKey('addBonusButton'),
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[

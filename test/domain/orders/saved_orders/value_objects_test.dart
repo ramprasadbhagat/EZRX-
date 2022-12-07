@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -174,5 +175,55 @@ void main() {
       final result = valObj.isEmpty;
       expect(result, false);
     });
+  });
+
+  group('BonusMaterialCalculation Value Object', () {
+    test(
+      'should return BonusMaterialCalculationEnum.calculation911',
+      () {
+        const input = '911';
+        final valObj = BonusMaterialCalculation(input);
+        expect(valObj.getCalculationEnum,
+            BonusMaterialCalculationEnum.calculation911);
+      },
+    );
+
+    test(
+      'should return BonusMaterialCalculationEnum.calculation912',
+      () {
+        const input = '912';
+        final valObj = BonusMaterialCalculation(input);
+        expect(valObj.getCalculationEnum,
+            BonusMaterialCalculationEnum.calculation912);
+      },
+    );
+    test(
+      'should return BonusMaterialCalculationEnum.calculation913',
+      () {
+        const input = '913';
+        final valObj = BonusMaterialCalculation(input);
+        expect(valObj.getCalculationEnum,
+            BonusMaterialCalculationEnum.calculation913);
+      },
+    );
+    test(
+      'should return BonusMaterialCalculationEnum.calculation914',
+      () {
+        const input = '914';
+        final valObj = BonusMaterialCalculation(input);
+        expect(valObj.getCalculationEnum,
+            BonusMaterialCalculationEnum.calculation914);
+      },
+    );
+
+    test(
+      'should true BonusMaterialCalculationEnum.calculation915',
+      () {
+        const input = '915';
+        final valObj = BonusMaterialCalculation(input);
+        expect(valObj.getCalculationEnum,
+            BonusMaterialCalculationEnum.calculation915);
+      },
+    );
   });
 }
