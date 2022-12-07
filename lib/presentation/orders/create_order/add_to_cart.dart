@@ -92,10 +92,10 @@ class _AddToCartState extends State<AddToCart> {
                           onQuantityChanged: (int value) {
                             final cartItem = addToCartBloc.state.cartItem;
                             final discountedMaterialCount = cartItem
-                                .price.zmgDiscount
+                                    .price.zmgDiscount
                                 ? cartBloc.state.zmgMaterialCount
                                 : cartBloc.state
-                                .onAddCartDiscountMaterialCount(cartItem);
+                                    .onAddCartDiscountMaterialCount(cartItem);
                             addToCartBloc.add(
                               AddToCartEvent.updateQuantity(
                                 value,
@@ -106,8 +106,8 @@ class _AddToCartState extends State<AddToCart> {
                         ),
                         widget.hasValidTenderContract
                             ? SelectContract(
-                          materialInfo: state.cartItem.materialInfo,
-                        )
+                                materialInfo: state.cartItem.materialInfo,
+                              )
                             : const SizedBox.shrink(),
                       ],
                     ),
@@ -115,8 +115,8 @@ class _AddToCartState extends State<AddToCart> {
                   ElevatedButton(
                     style: _isAddToCartAllowed
                         ? ElevatedButton.styleFrom(
-                      backgroundColor: ZPColors.lightGray,
-                    )
+                            backgroundColor: ZPColors.lightGray,
+                          )
                         : null,
                     onPressed: () => _isAddToCartAllowed
                         ? null
@@ -139,26 +139,26 @@ class _AddToCartState extends State<AddToCart> {
       showSnackBar(
         context: context,
         message:
-        'Covid material cannot be combined with commercial material.'.tr(),
+            'Covid material cannot be combined with commercial material.'.tr(),
       );
     } else if (!selectedCartItem.materialInfo.materialGroup4.isFOC &&
         cartState.containFocMaterial) {
       showSnackBar(
         context: context,
         message:
-        'Commercial material cannot be combined with covid material.'.tr(),
+            'Commercial material cannot be combined with covid material.'.tr(),
       );
     } else {
       final eligibilityState = context.read<EligibilityBloc>().state;
       context.read<CartBloc>().add(CartEvent.addToCart(
-        item: context.read<AddToCartBloc>().state.cartItem,
-        customerCodeInfo: eligibilityState.customerCodeInfo,
-        salesOrganisation: eligibilityState.salesOrganisation,
-        salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
-        shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-        doNotallowOutOfStockMaterial:
-        eligibilityState.doNotAllowOutOfStockMaterials,
-      ));
+            item: context.read<AddToCartBloc>().state.cartItem,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+            salesOrganisation: eligibilityState.salesOrganisation,
+            salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
+            shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+            doNotallowOutOfStockMaterial:
+                eligibilityState.doNotAllowOutOfStockMaterials,
+          ));
       context.router.pop();
     }
   }

@@ -8,38 +8,45 @@ class TenderContract with _$TenderContract {
   const TenderContract._();
 
   const factory TenderContract({
-    required String contractNumber,
-    required String contractItemNumber,
-    required String contractReference,
+    required TenderContractNumber contractNumber,
+    required TenderContractNumber contractItemNumber,
+    required TenderContractInfo contractReference,
     required TenderContractReason tenderOrderReason,
     required TenderContractNumber tenderVisaNumber,
-    required String salesDistrict,
-    required String tenderPackageDescription,
+    required TenderContractInfo salesDistrict,
+    required TenderContractInfo tenderPackageDescription,
     required TenderPrice tenderPrice,
     required int pricingUnit,
     required int remainingTenderQuantity,
     required int contractQuantity,
-    required String contractExpiryDate,
+    required TenderContractInfo contractExpiryDate,
     required TenderContractNumber announcementLetterNumber,
     required bool isNearToExpire,
-    required String contractPaymentTerm,
+    required TenderContractInfo contractPaymentTerm,
   }) = _TenderContract;
 
   factory TenderContract.empty() => TenderContract(
-        contractNumber: '',
-        contractItemNumber: '',
-        contractReference: '',
+        contractNumber: TenderContractNumber.tenderContractNumber(''),
+        contractItemNumber: TenderContractNumber.tenderContractItemNumber(''),
+        contractReference: TenderContractInfo.tenderContractReference(''),
         tenderOrderReason: TenderContractReason(''),
         tenderVisaNumber: TenderContractNumber.tenderVisaNumber(''),
-        salesDistrict: '',
-        tenderPackageDescription: '',
+        salesDistrict: TenderContractInfo.salesDistrict(''),
+        tenderPackageDescription: TenderContractInfo.packageDescription(''),
         tenderPrice: TenderPrice(''),
         pricingUnit: 0,
         remainingTenderQuantity: 0,
         contractQuantity: 0,
-        contractExpiryDate: '',
-        announcementLetterNumber: TenderContractNumber.announcementLetterNumber(''),
+        contractExpiryDate: TenderContractInfo.contractExpiryDate(''),
+        announcementLetterNumber:
+            TenderContractNumber.announcementLetterNumber(''),
         isNearToExpire: false,
-        contractPaymentTerm: '',
+        contractPaymentTerm: TenderContractInfo.contractPaymentTerm(''),
+      );
+
+  factory TenderContract.noContract() => TenderContract.empty().copyWith(
+        contractNumber: TenderContractNumber.tenderContractNumber(
+          'No contract (Price remains same)',
+        ),
       );
 }

@@ -10,9 +10,9 @@ class TenderContractState with _$TenderContractState {
   }) = _TenderContractState;
 
   factory TenderContractState.initial() => TenderContractState(
-    tenderContractList: <TenderContract>[],
-    apiFailureOrSuccessOption: none(),
-    isFetching: false,
-    selectedTenderContract: TenderContract.empty(),
-  );
+        tenderContractList: <TenderContract>[],
+        apiFailureOrSuccessOption: none(),
+        isFetching: false,
+        selectedTenderContract: TenderContract.empty(),
+      );
 }

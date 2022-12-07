@@ -31,7 +31,11 @@ class TenderContractBloc
     await event.map(
       initialized: (_) async => emit(TenderContractState.initial()),
       fetch: (e) async {
-        emit(state.copyWith(isFetching: true));
+        emit(state.copyWith(
+          isFetching: true,
+          tenderContractList: [],
+          apiFailureOrSuccessOption: none(),
+        ));
 
         final failureOrSuccess =
             await tenderContractRepository.getTenderContractDetails(
@@ -46,11 +50,32 @@ class TenderContractBloc
             apiFailureOrSuccessOption: optionOf(failureOrSuccess),
             isFetching: false,
           )),
-          (tenderContractList) => emit(state.copyWith(
-            apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-            isFetching: false,
-            tenderContractList: tenderContractList,
-          )),
+          (tenderContractList) {
+            //If no 730 contract is present in the list, the first item must be a no contract item
+            final notContainReason730 = !tenderContractList
+                .any((element) => element.tenderOrderReason.is730);
+
+            final newTenderContractList = notContainReason730
+                ? (List<TenderContract>.from(tenderContractList)
+                  ..insert(0, TenderContract.noContract()))
+                : tenderContractList;
+
+            //Select 730 contract if present, else select first item
+            add(
+              TenderContractEvent.selected(
+                tenderContract: newTenderContractList.firstWhere(
+                  (e) => e.tenderOrderReason.is730,
+                  orElse: () => newTenderContractList.first,
+                ),
+              ),
+            );
+
+            emit(state.copyWith(
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+              isFetching: false,
+              tenderContractList: newTenderContractList,
+            ));
+          },
         );
       },
       selected: (e) {
@@ -58,6 +83,13 @@ class TenderContractBloc
           state.copyWith(
             isFetching: false,
             selectedTenderContract: e.tenderContract,
+          ),
+        );
+      },
+      unselected: (e) {
+        emit(
+          state.copyWith(
+            selectedTenderContract: TenderContract.empty(),
           ),
         );
       },

@@ -36,10 +36,12 @@ class TenderContractRemoteDataSource {
           {
             'query': tenderContractQuery.getTenderContractDetails(),
             'variables': {
-              'materialNumber': materialNumber,
-              'customerCode': selectedCustomerCode,
-              'salesOrganisation': salesOrg,
-              'principalCode': shipTo,
+              'request': {
+                'materialNumber': materialNumber,
+                'customerNumber': selectedCustomerCode,
+                'salesOrg': salesOrg,
+                'shipToCustomer': shipTo,
+              },
             },
           },
         ),
@@ -48,7 +50,7 @@ class TenderContractRemoteDataSource {
       _exceptionChecker(res: res);
 
       final finalData =
-          res.data['data']['tenderContractDetails']['tenderContractDetails'];
+      res.data['data']['tenderContractDetails']['tenderContractDetails'];
 
       return List.from(finalData)
           .map((e) => TenderContractDto.fromJson(e).toDomain())

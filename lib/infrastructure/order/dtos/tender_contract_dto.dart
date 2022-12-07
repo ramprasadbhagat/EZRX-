@@ -17,54 +17,66 @@ class TenderContractDto with _$TenderContractDto {
     @JsonKey(name: 'tenderOrderReason') required String tenderOrderReason,
     @JsonKey(name: 'tenderVisaNumber') required String tenderVisaNumber,
     @JsonKey(name: 'salesDistrict') required String salesDistrict,
-    @JsonKey(name: 'tenderPackageDescription') required String tenderPackageDescription,
+    @JsonKey(name: 'tenderPackageDescription')
+        required String tenderPackageDescription,
     @JsonKey(name: 'tenderPrice') required String tenderPrice,
     @JsonKey(name: 'pricingUnit') required int pricingUnit,
-    @JsonKey(name: 'remainingTenderQuantity') required int remainingTenderQuantity,
+    @JsonKey(name: 'remainingTenderQuantity')
+        required int remainingTenderQuantity,
     @JsonKey(name: 'contractQuantity') required int contractQuantity,
     @JsonKey(name: 'contractExpiryDate') required String contractExpiryDate,
-    @JsonKey(name: 'announcementLetterNumber') required String announcementLetterNumber,
+    @JsonKey(name: 'announcementLetterNumber')
+        required String announcementLetterNumber,
     @JsonKey(name: 'isNearToExpire') required bool isNearToExpire,
     @JsonKey(name: 'contractPaymentTerm') required String contractPaymentTerm,
   }) = _TenderContractDto;
 
   factory TenderContractDto.fromDomain(TenderContract tenderContract) {
     return TenderContractDto(
-        contractNumber: tenderContract.contractNumber,
-        contractItemNumber: tenderContract.contractItemNumber,
-        contractReference: tenderContract.contractReference,
-        tenderOrderReason: tenderContract.tenderOrderReason.getOrCrash(),
-        tenderVisaNumber: tenderContract.tenderVisaNumber.getOrCrash(),
-        salesDistrict: tenderContract.salesDistrict,
-        tenderPackageDescription: tenderContract.tenderPackageDescription,
-        tenderPrice: tenderContract.tenderPrice.getOrCrash(),
-        pricingUnit: tenderContract.pricingUnit,
-        remainingTenderQuantity: tenderContract.remainingTenderQuantity,
-        contractQuantity: tenderContract.contractQuantity,
-        contractExpiryDate: tenderContract.contractExpiryDate,
-        announcementLetterNumber: tenderContract.announcementLetterNumber.getOrCrash(),
-        isNearToExpire: tenderContract.isNearToExpire,
-        contractPaymentTerm: tenderContract.contractPaymentTerm,
+      contractNumber: tenderContract.contractNumber.getOrCrash(),
+      contractItemNumber: tenderContract.contractItemNumber.getOrCrash(),
+      contractReference: tenderContract.contractReference.getOrCrash(),
+      tenderOrderReason: tenderContract.tenderOrderReason.getOrCrash(),
+      tenderVisaNumber: tenderContract.tenderVisaNumber.getOrCrash(),
+      salesDistrict: tenderContract.salesDistrict.getOrCrash(),
+      tenderPackageDescription:
+          tenderContract.tenderPackageDescription.getOrCrash(),
+      tenderPrice: tenderContract.tenderPrice.getOrCrash(),
+      pricingUnit: tenderContract.pricingUnit,
+      remainingTenderQuantity: tenderContract.remainingTenderQuantity,
+      contractQuantity: tenderContract.contractQuantity,
+      contractExpiryDate: tenderContract.contractExpiryDate.getOrCrash(),
+      announcementLetterNumber:
+          tenderContract.announcementLetterNumber.getOrCrash(),
+      isNearToExpire: tenderContract.isNearToExpire,
+      contractPaymentTerm: tenderContract.contractPaymentTerm.getOrCrash(),
     );
   }
 
   TenderContract toDomain() {
     return TenderContract(
-        contractNumber:contractNumber,
-        contractItemNumber:contractItemNumber,
-        contractReference:contractReference,
-        tenderOrderReason:TenderContractReason(tenderOrderReason),
-        tenderVisaNumber:TenderContractNumber.tenderVisaNumber(tenderVisaNumber),
-        salesDistrict:salesDistrict,
-        tenderPackageDescription:tenderPackageDescription,
-        tenderPrice:TenderPrice(tenderPrice),
-        pricingUnit:pricingUnit,
-        remainingTenderQuantity:remainingTenderQuantity,
-        contractQuantity:contractQuantity,
-        contractExpiryDate:contractExpiryDate,
-        announcementLetterNumber:TenderContractNumber.announcementLetterNumber(announcementLetterNumber),
-        isNearToExpire:isNearToExpire,
-        contractPaymentTerm:contractPaymentTerm,
+      contractNumber: TenderContractNumber.tenderContractNumber(contractNumber),
+      contractItemNumber:
+          TenderContractNumber.tenderContractItemNumber(contractItemNumber),
+      contractReference:
+          TenderContractInfo.tenderContractReference(contractReference),
+      tenderOrderReason: TenderContractReason(tenderOrderReason),
+      tenderVisaNumber: TenderContractNumber.tenderVisaNumber(tenderVisaNumber),
+      salesDistrict: TenderContractInfo.salesDistrict(salesDistrict),
+      tenderPackageDescription:
+          TenderContractInfo.packageDescription(tenderPackageDescription),
+      tenderPrice: TenderPrice(tenderPrice),
+      pricingUnit: pricingUnit,
+      remainingTenderQuantity: remainingTenderQuantity,
+      contractQuantity: contractQuantity,
+      contractExpiryDate:
+          TenderContractInfo.contractExpiryDate(contractExpiryDate),
+      announcementLetterNumber: TenderContractNumber.announcementLetterNumber(
+        announcementLetterNumber,
+      ),
+      isNearToExpire: isNearToExpire,
+      contractPaymentTerm:
+          TenderContractInfo.contractPaymentTerm(contractPaymentTerm),
     );
   }
 

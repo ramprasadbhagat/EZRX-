@@ -10,8 +10,6 @@ class TenderContractItem extends StatelessWidget {
   const TenderContractItem({Key? key, required this.tenderContract})
       : super(key: key);
 
-  final bool isSelected = false;
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -22,38 +20,28 @@ class TenderContractItem extends StatelessWidget {
         childrenPadding:
             const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         title: TenderContractHeader(tenderContract: tenderContract),
-        leading: GestureDetector(
-          onTap: () {
-            context.read<TenderContractBloc>().add(
-                  TenderContractEvent.selected(
-                    tenderContract: tenderContract,
-                  ),
-                );
-          },
-          child: BlocBuilder<TenderContractBloc, TenderContractState>(
-            buildWhen: (previous, current) => previous != current,
-            builder: (context, state) {
-              return Container(
+        leading: BlocBuilder<TenderContractBloc, TenderContractState>(
+          builder: (context, state) {
+            return GestureDetector(
+              onTap: () => selectTenderContract(context, state),
+              child: Container(
                 height: 35,
                 width: 35,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   border: Border.all(color: ZPColors.lightGray),
                   borderRadius: BorderRadius.circular(10),
-                  color: state.selectedTenderContract == tenderContract
-                      ? ZPColors.primary
-                      : ZPColors.white,
+                  color: _isSelected(state) ? ZPColors.primary : ZPColors.white,
                 ),
                 child: Icon(
                   Icons.check_rounded,
                   size: 17,
-                  color: state.selectedTenderContract == tenderContract
-                      ? ZPColors.white
-                      : ZPColors.lightGray,
+                  color:
+                      _isSelected(state) ? ZPColors.white : ZPColors.lightGray,
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
         children: [
           TenderContractBody(tenderContract: tenderContract),
@@ -61,6 +49,21 @@ class TenderContractItem extends StatelessWidget {
       ),
     );
   }
+
+  bool _isSelected(TenderContractState state) =>
+      state.selectedTenderContract.contractNumber ==
+      tenderContract.contractNumber;
+
+  void selectTenderContract(BuildContext context, TenderContractState state) =>
+      _isSelected(state)
+          ? context.read<TenderContractBloc>().add(
+                const TenderContractEvent.unselected(),
+              )
+          : context.read<TenderContractBloc>().add(
+                TenderContractEvent.selected(
+                  tenderContract: tenderContract,
+                ),
+              );
 }
 
 class TenderContractHeader extends StatelessWidget {
@@ -75,7 +78,7 @@ class TenderContractHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Contract - ${tenderContract.contractNumber}',
+          'Contract - ${tenderContract.contractNumber.displayTenderContractNumber}',
           style: Theme.of(context).textTheme.titleSmall?.apply(
                 color: ZPColors.black,
               ),
@@ -116,7 +119,7 @@ class TenderContractBody extends StatelessWidget {
             children: [
               TenderInfoText(
                 title: 'Contract Reference',
-                info: tenderContract.contractReference,
+                info: tenderContract.contractReference.displayContractReference,
               ),
               TenderInfoText(
                 title: 'Material Visa Number',
@@ -124,7 +127,7 @@ class TenderContractBody extends StatelessWidget {
               ),
               TenderInfoText(
                 title: 'Sales District',
-                info: tenderContract.salesDistrict,
+                info: tenderContract.salesDistrict.displaySalesDistrict,
               ),
               TenderInfoText(
                 title: 'Announcement Letter Number',
@@ -148,7 +151,7 @@ class TenderContractBody extends StatelessWidget {
               ),
               TenderInfoText(
                 title: 'Contract Expiry Date',
-                info: tenderContract.contractExpiryDate,
+                info: tenderContract.contractExpiryDate.displayContractExpiryDate,
               ),
             ],
           ),

@@ -26,6 +26,7 @@ mixin _$TenderContractEvent {
             MaterialInfo materialInfo)
         fetch,
     required TResult Function(TenderContract tenderContract) selected,
+    required TResult Function() unselected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +39,7 @@ mixin _$TenderContractEvent {
             MaterialInfo materialInfo)?
         fetch,
     TResult? Function(TenderContract tenderContract)? selected,
+    TResult? Function()? unselected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +52,7 @@ mixin _$TenderContractEvent {
             MaterialInfo materialInfo)?
         fetch,
     TResult Function(TenderContract tenderContract)? selected,
+    TResult Function()? unselected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -58,6 +61,7 @@ mixin _$TenderContractEvent {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Selected value) selected,
+    required TResult Function(_Unselected value) unselected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +69,7 @@ mixin _$TenderContractEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Selected value)? selected,
+    TResult? Function(_Unselected value)? unselected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,6 +77,7 @@ mixin _$TenderContractEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Selected value)? selected,
+    TResult Function(_Unselected value)? unselected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -141,6 +147,7 @@ class _$_Initialized implements _Initialized {
             MaterialInfo materialInfo)
         fetch,
     required TResult Function(TenderContract tenderContract) selected,
+    required TResult Function() unselected,
   }) {
     return initialized();
   }
@@ -156,6 +163,7 @@ class _$_Initialized implements _Initialized {
             MaterialInfo materialInfo)?
         fetch,
     TResult? Function(TenderContract tenderContract)? selected,
+    TResult? Function()? unselected,
   }) {
     return initialized?.call();
   }
@@ -171,6 +179,7 @@ class _$_Initialized implements _Initialized {
             MaterialInfo materialInfo)?
         fetch,
     TResult Function(TenderContract tenderContract)? selected,
+    TResult Function()? unselected,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -185,6 +194,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Selected value) selected,
+    required TResult Function(_Unselected value) unselected,
   }) {
     return initialized(this);
   }
@@ -195,6 +205,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Selected value)? selected,
+    TResult? Function(_Unselected value)? unselected,
   }) {
     return initialized?.call(this);
   }
@@ -205,6 +216,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Selected value)? selected,
+    TResult Function(_Unselected value)? unselected,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -362,6 +374,7 @@ class _$_Fetch implements _Fetch {
             MaterialInfo materialInfo)
         fetch,
     required TResult Function(TenderContract tenderContract) selected,
+    required TResult Function() unselected,
   }) {
     return fetch(salesOrganisation, customerCodeInfo, shipToInfo, materialInfo);
   }
@@ -377,6 +390,7 @@ class _$_Fetch implements _Fetch {
             MaterialInfo materialInfo)?
         fetch,
     TResult? Function(TenderContract tenderContract)? selected,
+    TResult? Function()? unselected,
   }) {
     return fetch?.call(
         salesOrganisation, customerCodeInfo, shipToInfo, materialInfo);
@@ -393,6 +407,7 @@ class _$_Fetch implements _Fetch {
             MaterialInfo materialInfo)?
         fetch,
     TResult Function(TenderContract tenderContract)? selected,
+    TResult Function()? unselected,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -408,6 +423,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Selected value) selected,
+    required TResult Function(_Unselected value) unselected,
   }) {
     return fetch(this);
   }
@@ -418,6 +434,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Selected value)? selected,
+    TResult? Function(_Unselected value)? unselected,
   }) {
     return fetch?.call(this);
   }
@@ -428,6 +445,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Selected value)? selected,
+    TResult Function(_Unselected value)? unselected,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -536,6 +554,7 @@ class _$_Selected implements _Selected {
             MaterialInfo materialInfo)
         fetch,
     required TResult Function(TenderContract tenderContract) selected,
+    required TResult Function() unselected,
   }) {
     return selected(tenderContract);
   }
@@ -551,6 +570,7 @@ class _$_Selected implements _Selected {
             MaterialInfo materialInfo)?
         fetch,
     TResult? Function(TenderContract tenderContract)? selected,
+    TResult? Function()? unselected,
   }) {
     return selected?.call(tenderContract);
   }
@@ -566,6 +586,7 @@ class _$_Selected implements _Selected {
             MaterialInfo materialInfo)?
         fetch,
     TResult Function(TenderContract tenderContract)? selected,
+    TResult Function()? unselected,
     required TResult orElse(),
   }) {
     if (selected != null) {
@@ -580,6 +601,7 @@ class _$_Selected implements _Selected {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Selected value) selected,
+    required TResult Function(_Unselected value) unselected,
   }) {
     return selected(this);
   }
@@ -590,6 +612,7 @@ class _$_Selected implements _Selected {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Selected value)? selected,
+    TResult? Function(_Unselected value)? unselected,
   }) {
     return selected?.call(this);
   }
@@ -600,6 +623,7 @@ class _$_Selected implements _Selected {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Selected value)? selected,
+    TResult Function(_Unselected value)? unselected,
     required TResult orElse(),
   }) {
     if (selected != null) {
@@ -617,6 +641,135 @@ abstract class _Selected implements TenderContractEvent {
   @JsonKey(ignore: true)
   _$$_SelectedCopyWith<_$_Selected> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_UnselectedCopyWith<$Res> {
+  factory _$$_UnselectedCopyWith(
+          _$_Unselected value, $Res Function(_$_Unselected) then) =
+      __$$_UnselectedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_UnselectedCopyWithImpl<$Res>
+    extends _$TenderContractEventCopyWithImpl<$Res, _$_Unselected>
+    implements _$$_UnselectedCopyWith<$Res> {
+  __$$_UnselectedCopyWithImpl(
+      _$_Unselected _value, $Res Function(_$_Unselected) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Unselected implements _Unselected {
+  const _$_Unselected();
+
+  @override
+  String toString() {
+    return 'TenderContractEvent.unselected()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Unselected);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialInfo materialInfo)
+        fetch,
+    required TResult Function(TenderContract tenderContract) selected,
+    required TResult Function() unselected,
+  }) {
+    return unselected();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialInfo materialInfo)?
+        fetch,
+    TResult? Function(TenderContract tenderContract)? selected,
+    TResult? Function()? unselected,
+  }) {
+    return unselected?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialInfo materialInfo)?
+        fetch,
+    TResult Function(TenderContract tenderContract)? selected,
+    TResult Function()? unselected,
+    required TResult orElse(),
+  }) {
+    if (unselected != null) {
+      return unselected();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Selected value) selected,
+    required TResult Function(_Unselected value) unselected,
+  }) {
+    return unselected(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Selected value)? selected,
+    TResult? Function(_Unselected value)? unselected,
+  }) {
+    return unselected?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_Unselected value)? unselected,
+    required TResult orElse(),
+  }) {
+    if (unselected != null) {
+      return unselected(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Unselected implements TenderContractEvent {
+  const factory _Unselected() = _$_Unselected;
 }
 
 /// @nodoc

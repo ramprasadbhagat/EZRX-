@@ -1,7 +1,7 @@
 part of 'tender_contract_bloc.dart';
 
 @freezed
- class TenderContractEvent with _$TenderContractEvent {
+class TenderContractEvent with _$TenderContractEvent {
   const factory TenderContractEvent.initialized() = _Initialized;
   factory TenderContractEvent.fetch({
     required SalesOrganisation salesOrganisation,
@@ -12,4 +12,5 @@ part of 'tender_contract_bloc.dart';
   const factory TenderContractEvent.selected({
     required TenderContract tenderContract,
   }) = _Selected;
+  const factory TenderContractEvent.unselected() = _Unselected;
 }

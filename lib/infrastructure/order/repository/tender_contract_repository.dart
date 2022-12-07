@@ -45,7 +45,7 @@ class TenderContractRepository implements ITenderContractRepository {
           materialNumber: material.materialNumber.getValue(),
           salesOrg: salesOrganisation.salesOrg.getValue(),
           selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
-          shipTo: customerCodeInfo.customerCodeSoldTo,
+          shipTo: shipToInfo.shipToCustomerCode,
         );
 
         return Right(tenderContractDetails);

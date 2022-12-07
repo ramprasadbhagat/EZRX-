@@ -228,8 +228,7 @@ class App extends StatelessWidget {
           create: (context) => locator<CovidMaterialListBloc>(),
         ),
         BlocProvider<CartBloc>(
-          create: (context) =>
-              locator<CartBloc>(),
+          create: (context) => locator<CartBloc>(),
         ),
         BlocProvider<PriceOverrideBloc>(
           create: (context) => locator<PriceOverrideBloc>(),

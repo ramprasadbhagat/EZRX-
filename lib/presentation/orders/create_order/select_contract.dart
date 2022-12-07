@@ -3,7 +3,6 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/tender_contract_item.dart';
@@ -72,39 +71,13 @@ class TenderContractList extends StatelessWidget {
           previous.isFetching != current.isFetching,
       builder: (context, state) {
         return state.isFetching && state.tenderContractList.isEmpty
-            ? LoadingShimmer.withChild(
-                child: Image.asset(
-                  'assets/images/ezrxlogo.png',
-                  key: const Key('loading-shimmer'),
-                  width: 80,
-                  height: 80,
-                ),
-              )
+            ? LoadingShimmer.logo()
             : ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  TenderContract defaultSelectedTenderContract;
-                  if (state.selectedTenderContract == TenderContract.empty()) {
-                    defaultSelectedTenderContract =
-                        state.tenderContractList.firstWhere(
-                      (e) => e.tenderOrderReason.is730,
-                      orElse: () => state.tenderContractList.first,
-                    );
-                    context.read<TenderContractBloc>().add(
-                          TenderContractEvent.selected(
-                            tenderContract: defaultSelectedTenderContract,
-                          ),
-                        );
-                  } else {
-                    defaultSelectedTenderContract =
-                        state.selectedTenderContract;
-                  }
-
-                  return TenderContractItem(
-                    tenderContract: state.tenderContractList[index],
-                  );
-                },
+                itemBuilder: (context, index) => TenderContractItem(
+                  tenderContract: state.tenderContractList[index],
+                ),
                 itemCount: state.tenderContractList.length,
               );
       },
