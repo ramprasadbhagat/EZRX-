@@ -27,6 +27,7 @@ class SalesOrgRemoteDataSource {
           'query': salesOrgQueryMutation.getSalesOrgConfigsQuery(),
           'variables': {'salesOrg': salesOrg},
         }),
+        apiEndpoint: 'salesOrgConfigs',
       );
       _salesOrgExceptionChecker(res: res);
 

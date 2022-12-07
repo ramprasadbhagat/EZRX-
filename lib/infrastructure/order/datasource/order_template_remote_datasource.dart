@@ -37,6 +37,7 @@ class OrderTemplateRemoteDataSource {
             'userId': userId,
           },
         }),
+        apiEndpoint: 'orderTemplates',
       );
       _orderTemplateExceptionChecker(res: res);
 
@@ -61,6 +62,7 @@ class OrderTemplateRemoteDataSource {
             'input': templateId,
           },
         }),
+        apiEndpoint: 'deleteOrderTemplate',
       );
       _orderTemplateExceptionChecker(res: res);
 
@@ -106,6 +108,7 @@ class OrderTemplateRemoteDataSource {
             },
           },
         }),
+        apiEndpoint: 'saveOrderTemplateMutation',
       );
       _saveOrderTemplateExceptionChecker(res: res);
 

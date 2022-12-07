@@ -42,6 +42,7 @@ class BonusMaterialRemoteDataSource {
               },
             },
           ),
+          apiEndpoint: 'additionalBonusMaterial',
         );
 
         _bonusExceptionChecker(res: res);
@@ -85,6 +86,7 @@ class BonusMaterialRemoteDataSource {
               },
             },
           ),
+          apiEndpoint: 'customerMaterialsForSalesRep',
         );
 
         _bonusExceptionChecker(res: res);

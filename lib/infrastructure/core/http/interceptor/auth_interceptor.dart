@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/login_dto.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
@@ -21,6 +22,7 @@ class AuthInterceptor extends Interceptor {
   final Config config;
   final AuthQueryMutation authQueryMutation;
   final PushNotificationService pushNotificationService;
+  final CountlyService countlyService;
   AuthInterceptor({
     required this.tokenStorage,
     required this.packageInfoService,
@@ -28,6 +30,7 @@ class AuthInterceptor extends Interceptor {
     required this.config,
     required this.authQueryMutation,
     required this.pushNotificationService,
+    required this.countlyService,
   });
   @override
   Future<void> onRequest(
@@ -67,6 +70,10 @@ class AuthInterceptor extends Interceptor {
         final newJwt = await _refreshToken();
         if (newJwt != null) {
           final newResponse = await _retry(response.requestOptions);
+          await _callCountly(
+            newResponse, 
+            response.requestOptions.headers['apiEndpoint'],
+          );
 
           return handler.next(newResponse);
         }
@@ -84,6 +91,21 @@ class AuthInterceptor extends Interceptor {
     ErrorInterceptorHandler handler,
   ) async {
     // debugPrint('onError ${error.response?.statusCode} ${error.response?.data}');
+    final apiEndpoint = err.requestOptions.headers['apiEndpoint'].toString();
+    if (apiEndpoint.isNotEmpty) {
+      if (err.type == DioErrorType.connectTimeout ||
+          err.type == DioErrorType.receiveTimeout ||
+          err.type == DioErrorType.sendTimeout) {
+        await countlyService
+            .addCountlyEvent('API Timeout', segmentation: {'API': apiEndpoint});
+      } else {
+        await countlyService.addCountlyEvent('API Failure', segmentation: {
+          'API': apiEndpoint,
+          'message': err.message,
+        });
+      }
+    }
+    
     return super.onError(err, handler);
   }
 
@@ -122,6 +144,7 @@ class AuthInterceptor extends Interceptor {
           },
         ),
       );
+      await _callCountly(response, 'loginV3');
       final login =
           LoginDto.fromJson(response.data['data']['loginV3']).toDomain();
       final newJwt = JWTDto.fromDomain(login.jwt);
@@ -159,5 +182,14 @@ class AuthInterceptor extends Interceptor {
         headers: requestOptions.headers,
       ),
     );
+  }
+
+  Future<void> _callCountly(Response response, String endPoint) async {
+    if (endPoint.isNotEmpty && response.data['errors'] != null) {
+      await countlyService.addCountlyEvent('API Failure', segmentation: {
+        'API': endPoint,
+        'message': response.data['errors'][0]['message'],
+      });
+    }
   }
 }

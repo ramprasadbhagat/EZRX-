@@ -48,6 +48,7 @@ class MaterialPriceDetailRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
+        apiEndpoint: 'customerMaterialPriceDetailsQuery',
       );
       _materialPriceExceptionChecker(res: res);
       final materialDetailData =
@@ -92,6 +93,7 @@ class MaterialPriceDetailRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
+        apiEndpoint: 'customerMaterialPriceDetailsQuery',
       );
       _materialPriceExceptionChecker(res: res);
       final materialDetailData =

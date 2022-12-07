@@ -41,6 +41,7 @@ class ChangePasswordRemoteDataSource {
             },
           },
         ),
+        apiEndpoint: 'changePassword',
       );
 
       _exceptionChecker(

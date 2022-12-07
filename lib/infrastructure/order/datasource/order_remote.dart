@@ -52,6 +52,7 @@ class OrderRemoteDataSource {
           'query': queryMutation.getSaveOrderHistory(),
           'variables': variables,
         }),
+        apiEndpoint: 'draftOrders',
       );
       _orderExceptionChecker(res: res);
       if (res.data['data']['draftOrders'] == null) {
@@ -81,6 +82,7 @@ class OrderRemoteDataSource {
           'query': queryMutation.createSavedOrder(),
           'variables': variables,
         }),
+        apiEndpoint: 'createDraftorder',
       );
       _orderExceptionChecker(res: res);
       if (res.data['data']['createDraftOrder'] == null ||
@@ -167,6 +169,7 @@ class OrderRemoteDataSource {
             },
           },
         ),
+        apiEndpoint: 'deleteDraftOrder',
       );
 
       _orderExceptionChecker(res: res);

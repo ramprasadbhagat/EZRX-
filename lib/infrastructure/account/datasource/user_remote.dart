@@ -31,6 +31,7 @@ class UserRemoteDataSource {
           'query': userQueryMutation.getUserQuery(),
           'variables': {'id': userId},
         }),
+        apiEndpoint: 'userQuery',
       );
       _userExceptionChecker(res: res);
 
@@ -69,6 +70,7 @@ class UserRemoteDataSource {
             },
           },
         }),
+        apiEndpoint: 'updateUserMutation',
       );
       _userExceptionChecker(res: res);
 
@@ -98,6 +100,7 @@ class UserRemoteDataSource {
             },
           },
         }),
+        apiEndpoint: 'updateUserMutation',
       );
       _userExceptionChecker(res: res);
 

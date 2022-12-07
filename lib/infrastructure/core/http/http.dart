@@ -14,9 +14,9 @@ class HttpService {
     _dio = Dio(
       BaseOptions(
         baseUrl: config.baseUrl,
-        // sendTimeout: config.httpSendTimeout,
-        // connectTimeout: config.httpConnectTimeout,
-        // receiveTimeout: config.httpReceiveTimeout,
+        sendTimeout: config.httpSendTimeout,
+        connectTimeout: config.httpConnectTimeout,
+        receiveTimeout: config.httpReceiveTimeout,
       ),
     );
     _dio.interceptors.addAll([
@@ -32,10 +32,12 @@ class HttpService {
     required String url,
     dynamic data = const {}, // can be Map<String, dynamic> or FormData
     ResponseType responseType = ResponseType.json,
+    String apiEndpoint = '',
   }) async {
     try {
       _dio.options.method = method;
       _dio.options.responseType = responseType;
+      _dio.options.headers['apiEndpoint'] = apiEndpoint;
 
       final response = await _dio.request(
         url,

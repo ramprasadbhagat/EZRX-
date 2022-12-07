@@ -84,6 +84,7 @@ import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/http/interceptor/auth_interceptor.dart';
+import 'package:ezrxmobile/infrastructure/core/http/interceptor/countly_interceptor.dart';
 import 'package:ezrxmobile/infrastructure/core/http/interceptor/performance_interceptor.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
@@ -235,6 +236,7 @@ void setupLocator() {
       config: locator<Config>(),
       authQueryMutation: locator<AuthQueryMutation>(),
       pushNotificationService: locator<PushNotificationService>(),
+      countlyService: locator<CountlyService>(),
     ),
   );
   locator.registerLazySingleton(
@@ -243,11 +245,15 @@ void setupLocator() {
     ),
   );
   locator.registerLazySingleton(
+    () => CountlyInterceptor(countlyService: locator<CountlyService>()),
+  );
+  locator.registerLazySingleton(
     () => HttpService(
       config: locator<Config>(),
       interceptors: [
         locator<AuthInterceptor>(),
         locator<PerformanceInterceptor>(),
+        locator<CountlyInterceptor>(),
       ],
     ),
   );

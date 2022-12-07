@@ -48,6 +48,7 @@ class ValidCustomerMaterialRemoteDataSource {
             },
           },
         }),
+        apiEndpoint: 'validCustomerMaterials',
       );
       _validCustomerMaterialExceptionChecker(res: res);
       final finalData = res.data['data']['validCustomerMaterials']['materials'];

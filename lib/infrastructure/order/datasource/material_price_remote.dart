@@ -42,6 +42,7 @@ class MaterialPriceRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
+        apiEndpoint: 'price',
       );
       _materialPriceExceptionChecker(res: res);
       final priceData = res.data['data']['price'];

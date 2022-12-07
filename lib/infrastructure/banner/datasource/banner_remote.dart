@@ -38,6 +38,7 @@ class BannerRemoteDataSource {
             },
           },
         }),
+        apiEndpoint: 'getBanners',
       );
 
       _bannerExceptionChecker(res: res);

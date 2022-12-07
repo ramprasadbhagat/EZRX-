@@ -65,6 +65,7 @@ class OrderHistoryRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
+        apiEndpoint: 'orderHistoryV2',
       );
 
       _orderHistoryExceptionChecker(res: res);
@@ -122,6 +123,7 @@ class OrderHistoryRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
+        apiEndpoint: 'orderHistoryForSalesRepV2',
       );
 
       _orderHistoryExceptionChecker(res: res);

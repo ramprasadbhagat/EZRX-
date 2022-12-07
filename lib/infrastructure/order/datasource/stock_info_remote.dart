@@ -45,6 +45,7 @@ class StockInfoRemoteDataSource {
             },
           },
         ),
+        apiEndpoint: 'stockInformation',
       );
 
       _exceptionChecker(res: res);
@@ -77,6 +78,7 @@ class StockInfoRemoteDataSource {
             },
           },
         ),
+        apiEndpoint: 'stockInformationList',
       );
 
       _exceptionChecker(res: res);

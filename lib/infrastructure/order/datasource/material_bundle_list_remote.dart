@@ -42,6 +42,7 @@ class MaterialBundleListRemoteDataSource {
             'salesOrganisation': salesOrganisation,
           },
         }),
+        apiEndpoint: 'GetBundles',
       );
       _materialBundleListExceptionChecker(res: res);
 
@@ -70,6 +71,7 @@ class MaterialBundleListRemoteDataSource {
             'salesOrganisation': salesOrganisation,
           },
         }),
+        apiEndpoint: 'GetBundlesForSalesRep',
       );
       _materialBundleListExceptionChecker(res: res);
 

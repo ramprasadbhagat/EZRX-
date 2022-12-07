@@ -27,6 +27,7 @@ class AnnouncementRemoteDataSource {
         data: jsonEncode({
           'query': queryMutation.getAnnouncementsQuery(),
         }),
+        apiEndpoint: 'getAnnouncements',
       );
       _announcementExceptionChecker(res: res);
       if (res.data['data']['getAnnouncements'] == null ||

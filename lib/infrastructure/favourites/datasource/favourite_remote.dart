@@ -36,6 +36,7 @@ class FavouriteRemoteDataSource {
               },
             },
           ),
+          apiEndpoint: 'favouriteMaterials',
         );
 
         _favouriteExceptionChecker(res: res);
@@ -77,6 +78,7 @@ class FavouriteRemoteDataSource {
               },
             },
           ),
+          apiEndpoint: 'createFavouriteMaterial',
         );
 
         _favouriteExceptionChecker(res: res);
@@ -101,6 +103,7 @@ class FavouriteRemoteDataSource {
             },
           },
         ),
+        apiEndpoint: 'deleteFavouriteMaterial',
       );
 
       _favouriteExceptionChecker(res: res);

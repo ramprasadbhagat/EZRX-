@@ -45,6 +45,7 @@ class MaterialFilterRemoteDataSource {
           'query': queryMaterialFilters,
           'variables': materialFilterInputVariables,
         }),
+        apiEndpoint: 'materialsWithMeta',
       );
 
       _materialFilterExceptionChecker(res: resMaterialFilters);
@@ -84,6 +85,7 @@ class MaterialFilterRemoteDataSource {
           'query': queryMaterialFilters,
           'variables': materialFilterInputVariables,
         }),
+        apiEndpoint: 'customerMaterialsForSalesRep',
       );
 
       _materialFilterExceptionChecker(res: resMaterialFilters);

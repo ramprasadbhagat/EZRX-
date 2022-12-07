@@ -45,6 +45,7 @@ class CustomerCodeRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
+        apiEndpoint: 'customerInformationSearch',
       );
       _customerCodeExceptionChecker(res: res);
 
@@ -85,6 +86,7 @@ class CustomerCodeRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
+        apiEndpoint: 'customerListForSalesRep',
       );
       _customerCodeExceptionChecker(res: res);
 

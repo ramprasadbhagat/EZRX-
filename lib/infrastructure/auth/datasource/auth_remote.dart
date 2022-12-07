@@ -47,6 +47,7 @@ class AuthRemoteDataSource {
             },
           },
         ),
+        apiEndpoint: 'loginV3',
       );
       _authExceptionChecker(res: res, jsonKey: 'loginV3');
 
@@ -78,6 +79,7 @@ class AuthRemoteDataSource {
             },
           },
         ),
+        apiEndpoint: 'loginV3',
       );
 
       _authExceptionChecker(res: res, jsonKey: 'loginV3');
@@ -99,6 +101,7 @@ class AuthRemoteDataSource {
             },
           },
         ),
+        apiEndpoint: 'proxyLoginV3',
       );
 
       _authExceptionChecker(res: res, jsonKey: 'proxyLoginV3');

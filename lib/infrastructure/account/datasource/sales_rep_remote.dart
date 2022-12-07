@@ -29,6 +29,7 @@ class SalesRepRemoteDataSource {
           'query': salesRepQueryMutation.getSalesRepInfo(),
           'variables': {'userName': userName},
         }),
+        apiEndpoint: 'salesRepresentativeInfo',
       );
       _salesRepExceptionChecker(res: res);
 

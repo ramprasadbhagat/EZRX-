@@ -80,6 +80,7 @@ class MaterialListRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
+        apiEndpoint: 'materialsWithMetaQuery',
       );
       _materialListExceptionChecker(res: res);
       final finalData = res.data['data']['materialsWithMeta']['materials'];
@@ -135,6 +136,7 @@ class MaterialListRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
+        apiEndpoint: 'customerMaterialsForSalesRep',
       );
       _materialListExceptionChecker(res: res);
       final finalData = res.data['data']['materialsWithMeta']['materials'];
@@ -187,6 +189,7 @@ class MaterialListRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
+        apiEndpoint: 'materialsWithMetaQuery',
       );
       _materialListExceptionChecker(res: res);
       final finalData = res.data['data']['materialsWithMeta']['materials'];
@@ -246,6 +249,7 @@ class MaterialListRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
+        apiEndpoint: 'customerMaterialsForSalesRep',
       );
       _materialListExceptionChecker(res: res);
       final finalData =
