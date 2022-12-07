@@ -115,7 +115,8 @@ class OrderItemCard extends StatelessWidget {
                             )
                           : const SizedBox.shrink(),
                       BalanceTextRow(
-                        keyText: 'Status'.tr(),
+                        key:const Key('sapStatusNotEmpty'),
+                        keyText: 'Status:'.tr(),
                         valueText: orderHistoryDetailsBonusAggregate
                                 .orderItem.sAPStatus.isNotEmpty
                             ? orderHistoryDetailsBonusAggregate
@@ -177,6 +178,7 @@ class OrderItemCard extends StatelessWidget {
                         ),
                       if (enableDisplayOrderDiscount)
                         BalanceTextRow(
+                          key: const Key('discountRateForItemCard'),
                           keyText: 'Discount'.tr(),
                           valueText:
                               orderHistoryDetailsBonusAggregate.details.isEmpty

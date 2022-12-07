@@ -876,13 +876,16 @@ class _OrderSummary extends StatelessWidget {
                 children: state.bonusItem.map((orderItem) {
                   return orderItem.bonusList.isNotEmpty
                       ? OrderItemBonusCard(
+                          key: const Key('orderItemBonusCard'),
                           orderHistoryDetailsBonusAggregate: orderItem,
                         )
                       : orderItem.orderItem.isTenderContractMaterial
                           ? OrderTenderContractCard(
+                              key: const Key('orderTenderContractCard'),
                               orderHistoryDetailsBonusAggregate: orderItem,
                             )
                           : OrderItemCard(
+                              key: const Key('orderItemCard'),
                               orderHistoryDetailsBonusAggregate: orderItem,
                             );
                 }).toList(),
@@ -892,6 +895,7 @@ class _OrderSummary extends StatelessWidget {
                   width: 160,
                   padding: const EdgeInsets.all(16.0),
                   child: ElevatedButton(
+                    key: const ValueKey('reOrderButton'),
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.resolveWith(
                         (states) => ZPColors.white,

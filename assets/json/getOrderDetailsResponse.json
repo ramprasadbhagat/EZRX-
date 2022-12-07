@@ -42,7 +42,7 @@
             "MaterialDescription": "?Genotropin GQ 5.3MG SFDPO 1xPTCC DEMO",
             "TotalPrice": 0.0,
             "Tax": 0,
-            "SAPStatus": "",
+            "SAPStatus": "testOrderStatus",
             "PlannedDeliveryDate": "",
             "Qty": 1,
             "PickedQuantity": 0,
@@ -52,7 +52,12 @@
             "Batch": "",
             "ExpiryDate": "",
             "LineReferenceNotes": "",
-            "Details": [],
+            "Details": [
+             { "DiscountCode":"100",
+             "DiscountDescription":"test",
+             "Rate":"100"
+            }
+            ],
             "IsTenderContractMaterial": false,
             "TenderContractDetails": {
               "TenderContractNumber":"",

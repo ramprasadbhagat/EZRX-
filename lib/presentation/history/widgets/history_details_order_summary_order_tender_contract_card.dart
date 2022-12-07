@@ -76,6 +76,7 @@ class OrderTenderContractCard extends StatelessWidget {
                         valueFlex: 1,
                       ),
                       BalanceTextRow(
+                         key:const Key('sapStatusNotEmpty'),
                         keyText: 'Status'.tr(),
                         valueText: orderHistoryDetailsBonusAggregate
                                 .orderItem.sAPStatus.isNotEmpty
