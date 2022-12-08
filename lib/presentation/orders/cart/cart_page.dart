@@ -64,7 +64,7 @@ class CartPage extends StatelessWidget {
             children: [
               Expanded(
                 child: ScrollList<CartItem>(
-                  emptyMessage: 'Cart is Empty'.tr(),
+                  emptyMessage: 'Cart is Empty',
                   onRefresh: () {
                     context.read<CartBloc>().add(CartEvent.fetch(
                           customerCodeInfo: context

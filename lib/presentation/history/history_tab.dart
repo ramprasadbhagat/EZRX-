@@ -245,7 +245,7 @@ class HistoryTab extends StatelessWidget {
                     ? LoadingShimmer.logo(key: const Key('loaderImage'))
                     : ScrollList<OrderHistoryItem>(
                         key: const Key('orderHistoryList'),
-                        emptyMessage: 'No history found'.tr(),
+                        emptyMessage: 'No history found',
                         onRefresh: () {
                           if (context.read<ShipToCodeBloc>().state.haveShipTo) {
                             context.read<OrderHistoryFilterBloc>().add(

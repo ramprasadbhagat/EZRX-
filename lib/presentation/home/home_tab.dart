@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/presentation/core/cart_button.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/home/selector/sales_org_selector.dart';
@@ -19,31 +20,30 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // toolbarHeight: 120,
-        title: Column(
-          children: [
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: const [
-            //     _WelcomeUser(),
-            //     CartButton(),
-            //   ],
-            // ),
-            Row(
+        title: Image.asset('assets/images/ezrxlogo.png', height: 30),
+        // SvgPicture.asset('assets/svg/ezrxlogo.svg', height: 30),
+        automaticallyImplyLeading: false,
+        actions: const [CartButton()],
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(40.0),
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Row(
               children: const [
-                SalesOrgSelector(key: ValueKey('HomeSalesOrgSelector'),),
-                CustomerCodeSelector(key: ValueKey('HomeCustomerCodeSelector'),),
-                ShipCodeSelector(key: ValueKey('HomeShipCodeSelector'),),
+                SalesOrgSelector(key: ValueKey('HomeSalesOrgSelector')),
+                CustomerCodeSelector(key: ValueKey('HomeCustomerCodeSelector')),
+                ShipCodeSelector(key: ValueKey('HomeShipCodeSelector')),
               ],
             ),
-          ],
+          ),
         ),
-        automaticallyImplyLeading: false,
       ),
       body: SafeArea(
         child: ListView(
           children: [
-            const HomeBanner(key: ValueKey('HomeBanner'),),
+            const HomeBanner(
+              key: ValueKey('HomeBanner'),
+            ),
             MultiBlocListener(
               listeners: [
                 BlocListener<MaterialListBloc, MaterialListState>(
