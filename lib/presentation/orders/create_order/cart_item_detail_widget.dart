@@ -75,9 +75,10 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
         if (widget.cartItem.price.isBonusDealEligible)
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Bonuses :',
+                '${'Bonuses'.tr()} :',
                 style: Theme.of(context).textTheme.subtitle2,
               ).tr(),
               ...widget.cartItem.price.priceBonusItem
@@ -87,7 +88,12 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
           ),
         if (widget.cartItem.price.isDiscountEligible)
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text(
+                '${'Tiered Pricing'.tr()} :',
+                style: Theme.of(context).textTheme.subtitle2,
+              ).tr(),
               ...widget.cartItem.price.tiers.first.items
                   .map((e) => PriceTierLabel(priceTierItem: e))
                   .toList(),

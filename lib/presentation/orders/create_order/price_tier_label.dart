@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +18,7 @@ class PriceTierLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       key: const ValueKey('priceTierLable'),
-      width: 180,
+      // width: 180,
       alignment: Alignment.center,
       margin: const EdgeInsets.only(bottom: 5),
       decoration: const BoxDecoration(
@@ -31,35 +33,23 @@ class PriceTierLabel extends StatelessWidget {
         text: TextSpan(
           children: <TextSpan>[
             TextSpan(
-              text: 'Buy ${priceTierItem.quantity.toString()} or more ',
+              text:
+                  '${'Buy'.tr()} ${priceTierItem.quantity.toString()} ${'or more'.tr()} ',
               style: const TextStyle(
-                fontSize: 11,
-                color: ZPColors.white,
+                color: ZPColors.black,
                 fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold,
               ),
             ),
             TextSpan(
-              text: context.read<SalesOrgBloc>().state.currency.code,
-              style: const TextStyle(
-                fontSize: 11,
-                color: ZPColors.white,
-                fontFamily: 'Roboto',
+              text: StringUtils.displayPrice(
+                context.read<SalesOrgBloc>().state.configs,
+                priceTierItem.rate,
               ),
-            ),
-            const TextSpan(
-              text: ' ',
-              style: TextStyle(
-                fontSize: 11,
-                color: ZPColors.white,
-                fontFamily: 'Poppins',
-              ),
-            ),
-            TextSpan(
-              text: priceTierItem.rate.toStringAsFixed(2),
               style: const TextStyle(
-                fontSize: 11,
-                color: ZPColors.white,
+                color: ZPColors.black,
                 fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold,
               ),
             ),
           ],

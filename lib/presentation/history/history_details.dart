@@ -307,7 +307,7 @@ class _OrderDetails extends StatelessWidget {
               BalanceTextRow(
                 keyText: context.read<SalesOrgBloc>().state.salesOrg.isSg
                     ? 'GST'
-                    : 'Total Tax',
+                    : 'Total Tax'.tr(),
                 valueText: StringUtils.displayPrice(
                   context.read<SalesOrgBloc>().state.configs,
                   orderDetails.orderHistoryDetailsOrderHeader.totalTax,
