@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -40,8 +41,11 @@ class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 class AddToCartBlocMock extends MockBloc<AddToCartEvent, AddToCartState>
     implements AddToCartBloc {}
 
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+class EligibilityMockBloc extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
+
+class ShipToCodeMockBloc extends MockBloc<ShipToCodeEvent, ShipToCodeState>
+    implements ShipToCodeBloc {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -49,18 +53,21 @@ void main() {
   late AppRouter autoRouterMock;
   late MaterialPriceBloc materialPriceBlocMock;
   late CartBloc cartBlocMock;
+  late ShipToCodeBloc shipToCodeMockBloc;
+  late EligibilityBloc eligibilityMockBloc;
   final AddToCartBloc addToCartBlocMock = AddToCartBlocMock();
-  late EligibilityBloc eligibilityBlocMock;
+
+  final materialInfo = MaterialInfo.empty().copyWith(
+    materialNumber: MaterialNumber('000000000023168451'),
+    materialDescription: ' Triglyceride Mosys D',
+    principalData: PrincipalData.empty().copyWith(
+      principalName: '台灣拜耳股份有限公司',
+    ),
+  );
 
   final priceAggregate = PriceAggregate.empty().copyWith(
     quantity: 1,
-    materialInfo: MaterialInfo.empty().copyWith(
-      materialNumber: MaterialNumber('000000000023168451'),
-      materialDescription: ' Triglyceride Mosys D',
-      principalData: PrincipalData.empty().copyWith(
-        principalName: '台灣拜耳股份有限公司',
-      ),
-    ),
+    materialInfo: materialInfo,
     price: Price.empty().copyWith(
       materialNumber: MaterialNumber('000000000023168451'),
       tiers: [
@@ -83,14 +90,17 @@ void main() {
       salesOrgBlocMock = SalesOrgMockBloc();
       materialPriceBlocMock = MaterialPriceBlocMock();
       cartBlocMock = CartBlocMock();
+      eligibilityMockBloc = EligibilityMockBloc();
+      shipToCodeMockBloc = ShipToCodeMockBloc();
       autoRouterMock = locator<AppRouter>();
-      eligibilityBlocMock = EligibilityBlocMock();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
-      when(() => eligibilityBlocMock.state)
+      when(() => eligibilityMockBloc.state)
           .thenReturn(EligibilityState.initial());
+      when(() => shipToCodeMockBloc.state)
+          .thenReturn(ShipToCodeState.initial());
     });
 
     Widget getScopedWidget(Widget child) {
@@ -113,8 +123,10 @@ void main() {
             BlocProvider<CartBloc>(create: ((context) => cartBlocMock)),
             BlocProvider<AddToCartBloc>(
                 create: ((context) => addToCartBlocMock)),
+            BlocProvider<ShipToCodeBloc>(
+                create: ((context) => shipToCodeMockBloc)),
             BlocProvider<EligibilityBloc>(
-                create: ((context) => eligibilityBlocMock)),
+                create: (context) => eligibilityMockBloc)
           ],
           child: child,
         ),
@@ -178,6 +190,123 @@ void main() {
           priceAggregate.price.tiers.first.items.length,
         ),
       );
+    });
+
+    testWidgets('Test add to cart covid material + commercial material',
+        (tester) async {
+      when(() => cartBlocMock.state).thenReturn(CartState.initial().copyWith(
+        cartItemList: [
+          priceAggregate.copyWith(
+            materialInfo: materialInfo,
+          ),
+        ],
+      ));
+
+      when(() => addToCartBlocMock.state).thenReturn(
+        AddToCartState.initial().copyWith(
+          cartItem: priceAggregate.copyWith(
+            price: priceAggregate.price.copyWith(
+              zmgDiscount: true,
+            ),
+            materialInfo: materialInfo.copyWith(
+              isFOCMaterial: true,
+              materialGroup4: MaterialGroup.four('6A1'),
+            ),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget(AddToCart(
+        isCovid19Tab: true,
+        hasValidTenderContract: false,
+        hasMandatoryTenderContract: false,
+      )));
+
+      final button = find.text('Add to Cart');
+      await tester.tap(button);
+      await tester.pump(const Duration(seconds: 1));
+
+      const snackbarText =
+          'Covid material cannot be combined with commercial material.';
+      final snackbarWidget = find.text(snackbarText);
+
+      expect(snackbarWidget, findsOneWidget);
+    });
+
+    testWidgets('Test add to cart commercial material + covid material test',
+        (tester) async {
+      when(() => cartBlocMock.state).thenReturn(CartState.initial().copyWith(
+        cartItemList: [
+          priceAggregate.copyWith(
+            materialInfo: materialInfo.copyWith(
+              isFOCMaterial: true,
+              materialGroup4: MaterialGroup.four('6A1'),
+            ),
+          ),
+        ],
+      ));
+
+      when(() => addToCartBlocMock.state).thenReturn(
+        AddToCartState.initial().copyWith(
+          cartItem: priceAggregate.copyWith(
+            price: priceAggregate.price.copyWith(
+              zmgDiscount: true,
+            ),
+            materialInfo: materialInfo,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget(
+        AddToCart(
+          isCovid19Tab: true,
+          hasValidTenderContract: false,
+          hasMandatoryTenderContract: false,
+        ),
+      ));
+
+      final button = find.text('Add to Cart');
+      await tester.tap(button);
+      await tester.pump(const Duration(seconds: 1));
+
+      const snackbarText =
+          'Commercial material cannot be combined with covid material.';
+      final snackbarWidget = find.text(snackbarText);
+
+      expect(snackbarWidget, findsOneWidget);
+    });
+
+    testWidgets('Test add to cart eligible items', (tester) async {
+      when(() => cartBlocMock.state).thenReturn(CartState.initial().copyWith(
+        cartItemList: [
+          priceAggregate.copyWith(
+            materialInfo: materialInfo,
+          ),
+        ],
+      ));
+
+      when(() => addToCartBlocMock.state).thenReturn(
+        AddToCartState.initial().copyWith(
+          cartItem: priceAggregate.copyWith(
+            price: priceAggregate.price.copyWith(
+              zmgDiscount: true,
+            ),
+            materialInfo: materialInfo,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget(
+        AddToCart(
+          isCovid19Tab: false,
+          hasValidTenderContract: false,
+          hasMandatoryTenderContract: false,
+        ),
+      ));
+
+      final button = find.text('Add to Cart');
+      await tester.tap(button);
+      await tester.pump(const Duration(seconds: 1));
     });
   });
 }

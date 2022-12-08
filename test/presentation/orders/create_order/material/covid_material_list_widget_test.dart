@@ -19,12 +19,14 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/covid_material_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_root.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -81,6 +83,14 @@ class OrderDocumentTypeBlocMock
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class AddToCartStub {
+  void addToCart() {
+    // Do nothing
+  }
+}
+
+class MockAddToCartStub extends Mock implements AddToCartStub {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialListBloc materialListBlocMock;
@@ -94,9 +104,38 @@ void main() {
   late CartBloc cartBlocMock;
   late CovidMaterialListBloc covidMaterialListBlocMock;
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
+  final fakeMaterialPrice = MaterialPrice(10.0);
   late MaterialFilterBloc mockMaterialFilterBloc;
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
+  late AddToCartStub mockAddToCartStub;
+
+  final fakeMaterialInfo = MaterialInfo(
+    materialNumber: fakeMaterialNumber,
+    materialDescription: "Reag Cup 15ml 1'S",
+    governmentMaterialCode: '',
+    therapeuticClass: 'All other non-therapeutic products',
+    itemBrand: 'Item not listed in I',
+    principalData: PrincipalData(
+      principalName: '台灣羅氏醫療診斷設備(股)公司',
+      principalCode: PrincipleCode('0000102004'),
+    ),
+    taxClassification: MaterialTaxClassification('Product : Full Tax'),
+    itemRegistrationNumber: 'NA',
+    unitOfMeasurement: 'EA',
+    materialGroup2: MaterialGroup.two(''),
+    materialGroup4: MaterialGroup.four('OTH'),
+    isSampleMaterial: false,
+    hidePrice: false,
+    hasValidTenderContract: false,
+    hasMandatoryTenderContract: false,
+    taxes: ['5'],
+    bundles: [],
+    defaultMaterialDescription: '',
+    isFOCMaterial: false,
+    quantity: 0,
+    remarks: '',
+  );
 
   setUpAll(() async {
     setupLocator();
@@ -117,6 +156,7 @@ void main() {
       covidMaterialListBlocMock = CovidMaterialListBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
+      mockAddToCartStub = MockAddToCartStub();
       when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
           user: User.empty().copyWith(
         role: Role(
@@ -149,6 +189,8 @@ void main() {
           .thenReturn(CovidMaterialListState.initial());
       when(() => orderDocumentTypeBlocMock.state)
           .thenReturn(OrderDocumentTypeState.initial());
+      when(() => shipToCodeBlocMock.state)
+          .thenReturn(ShipToCodeState.initial());
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
             user: User.empty().copyWith(
@@ -283,32 +325,7 @@ void main() {
         isFetching: false,
         nextPageIndex: 2,
         materialList: <MaterialInfo>[
-          MaterialInfo(
-            materialNumber: fakeMaterialNumber,
-            materialDescription: "Reag Cup 15ml 1'S",
-            governmentMaterialCode: '',
-            therapeuticClass: 'All other non-therapeutic products',
-            itemBrand: 'Item not listed in I',
-            principalData: PrincipalData(
-              principalName: '台灣羅氏醫療診斷設備(股)公司',
-              principalCode: PrincipleCode('0000102004'),
-            ),
-            taxClassification: MaterialTaxClassification('Product : Full Tax'),
-            itemRegistrationNumber: 'NA',
-            unitOfMeasurement: 'EA',
-            materialGroup2: MaterialGroup.two(''),
-            materialGroup4: MaterialGroup.four('OTH'),
-            isSampleMaterial: false,
-            hidePrice: false,
-            hasValidTenderContract: false,
-            hasMandatoryTenderContract: false,
-            taxes: ['5'],
-            bundles: [],
-            defaultMaterialDescription: '',
-            isFOCMaterial: false,
-            quantity: 0,
-            remarks: '',
-          )
+          fakeMaterialInfo,
         ],
       ));
       await tester.pumpWidget(getScopedWidget(const MaterialRoot()));
@@ -428,6 +445,229 @@ void main() {
         expect(find.textContaining('List Price:'), findsOneWidget);
       }
       expect(find.textContaining('Unit Price:'), findsOneWidget);
+    });
+
+    testWidgets('Test loadingMore', (tester) async {
+      when(() => covidMaterialListBlocMock.state).thenReturn(
+        CovidMaterialListState.initial().copyWith(
+          nextPageIndex: 2,
+          materialList: [
+            fakeMaterialInfo,
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168452'),
+            ),
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168453'),
+            ),
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168454'),
+            ),
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168454'),
+            ),
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168455'),
+            ),
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168456'),
+            ),
+          ],
+        ),
+      );
+
+      await tester
+          .pumpWidget(getScopedWidget(CovidMaterialListPage(addToCart: () {})));
+
+      final firstListItem = find.text('23168451');
+
+      await tester.drag(
+        firstListItem,
+        const Offset(0.0, -1000.0),
+      );
+      await tester.pump(const Duration(seconds: 1));
+
+      final loadIndicatorWidget = find.byKey(const Key('loadIndicator'));
+
+      expect(loadIndicatorWidget, findsOneWidget);
+
+      await tester
+          .pump(const Duration(seconds: 1)); // finish the scroll animation
+      await tester.pump(
+          const Duration(seconds: 1)); // finish the indicator settle animation
+      await tester.pump(const Duration(seconds: 1));
+    });
+
+    testWidgets('Test onRefresh', (tester) async {
+      when(() => covidMaterialListBlocMock.state).thenReturn(
+        CovidMaterialListState.initial().copyWith(
+          nextPageIndex: 2,
+          materialList: [
+            fakeMaterialInfo,
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168452'),
+            ),
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168453'),
+            ),
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168454'),
+            ),
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168454'),
+            ),
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168455'),
+            ),
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168456'),
+            ),
+          ],
+        ),
+      );
+
+      final handle = tester.ensureSemantics();
+
+      await tester
+          .pumpWidget(getScopedWidget(CovidMaterialListPage(addToCart: () {})));
+
+      // debugDumpApp();
+
+      await tester.drag(
+        find.text('23168451'),
+        const Offset(0.0, 1000.0),
+      );
+      await tester.pump(const Duration(seconds: 1));
+
+      expect(
+        tester.getSemantics(find.byType(RefreshProgressIndicator)),
+        matchesSemantics(
+          label: 'Refresh',
+        ),
+      );
+
+      await tester
+          .pump(const Duration(seconds: 1)); // finish the scroll animation
+      await tester.pump(
+          const Duration(seconds: 1)); // finish the indicator settle animation
+      await tester.pump(
+          const Duration(seconds: 1)); // finish the indicator hide animation
+
+      handle.dispose();
+    });
+
+    testWidgets('Covid Material List Item tap when material price is null',
+        (tester) async {
+      when(() => covidMaterialListBlocMock.state).thenReturn(
+        CovidMaterialListState.initial().copyWith(
+          nextPageIndex: 2,
+          materialList: [
+            fakeMaterialInfo,
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168452'),
+            ),
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168453'),
+            ),
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168454'),
+            ),
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168454'),
+            ),
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168455'),
+            ),
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168456'),
+            ),
+          ],
+        ),
+      );
+
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          isFetching: false,
+          materialPrice: {},
+        ),
+      );
+
+      await tester
+          .pumpWidget(getScopedWidget(CovidMaterialListPage(addToCart: () {})));
+
+      final firstListItem = find.text('23168451');
+
+      await tester.tap(firstListItem);
+      await tester.pump(const Duration(seconds: 1));
+
+      const snackBarText = 'Product Not Available';
+      final snackBar = find.text(snackBarText);
+
+      await tester.pump(const Duration(seconds: 1));
+      expect(snackBar, findsOneWidget);
+    });
+
+    testWidgets('Covid Material List Item tap when material price is not null',
+        (tester) async {
+      when(() => covidMaterialListBlocMock.state).thenReturn(
+        CovidMaterialListState.initial().copyWith(
+          nextPageIndex: 2,
+          materialList: [
+            fakeMaterialInfo,
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168452'),
+            ),
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168453'),
+            ),
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168454'),
+            ),
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168454'),
+            ),
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168455'),
+            ),
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168456'),
+            ),
+          ],
+        ),
+      );
+
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          isFetching: false,
+          materialPrice: {
+            fakeMaterialInfo.materialNumber: Price.empty().copyWith(
+              materialNumber: fakeMaterialInfo.materialNumber,
+              lastPrice: fakeMaterialPrice,
+              finalPrice: fakeMaterialPrice,
+            ),
+          },
+        ),
+      );
+
+      await tester.pumpWidget(
+        getScopedWidget(
+          CovidMaterialListPage(addToCart: ({
+            required BuildContext context,
+            required PriceAggregate priceAggregate,
+            required bool isCovid19Tab,
+          }) {
+            mockAddToCartStub.addToCart();
+          }),
+        ),
+      );
+
+      final firstListItem = find.text('23168451');
+
+      await tester.tap(firstListItem);
+      await tester.pump(const Duration(seconds: 1));
+
+      verify(
+        () => mockAddToCartStub.addToCart(),
+      ).called(1);
     });
   });
 }

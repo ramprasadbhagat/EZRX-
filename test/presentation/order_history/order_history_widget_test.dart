@@ -31,7 +31,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../utils/widget_utils.dart';
-import '../orders/material_bundle_list/material_bundle_list_test.dart';
+import '../orders/create_order/material_bundle/material_bundle_list_test.dart';
 
 class MockHTTPService extends Mock implements HttpService {}
 

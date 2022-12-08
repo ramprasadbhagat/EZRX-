@@ -30,6 +30,7 @@ import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/favorite_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_root.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_type_selector.dart';
@@ -88,6 +89,14 @@ class OrderDocumentTypeBlocMock
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class AddToCartStub {
+  void addToCart() {
+    // Do nothing
+  }
+}
+
+class MockAddToCartStub extends Mock implements AddToCartStub {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialListBloc materialListBlocMock;
@@ -102,6 +111,7 @@ void main() {
   // late MaterialListBloc materialListBloc;
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
+  late AddToCartStub mockAddToCartStub;
 
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
   final fakeMaterialPrice = MaterialPrice(10.0);
@@ -157,6 +167,7 @@ void main() {
       mockMaterialFilterBloc = MockMaterialFilterBloc();
       mockStockInformationBloc = MockStockInformationBloc();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
+      mockAddToCartStub = MockAddToCartStub();
       autoRouterMock = locator<AppRouter>();
       eligibilityBlocMock = EligibilityBlocMock();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
@@ -945,6 +956,327 @@ void main() {
       expect(listContent, findsOneWidget);
       final zmgDiscountLable = find.byKey(const Key('tieredPricingLogo'));
       expect(zmgDiscountLable, findsOneWidget);
+    });
+
+    testWidgets('Test loadingMore', (tester) async {
+      when(() => materialListBlocMock.state).thenReturn(
+        MaterialListState.initial().copyWith(
+          nextPageIndex: 2,
+          isFetching: true,
+          materialList: [
+            fakematerialInfo,
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168452'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168453'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168454'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168454'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168455'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168456'),
+            ),
+          ],
+        ),
+      );
+
+      await tester
+          .pumpWidget(getScopedWidget(MaterialListPage(addToCart: () {})));
+
+      final firstListItem = find.text('23168451');
+
+      await tester.drag(
+        firstListItem,
+        const Offset(0.0, -1000.0),
+      );
+      await tester.pump(const Duration(seconds: 2));
+
+      final loadIndicatorWidget = find.byKey(const Key('loadIndicator'));
+
+      expect(loadIndicatorWidget, findsOneWidget);
+
+      await tester
+          .pump(const Duration(seconds: 1)); // finish the scroll animation
+      await tester.pump(
+          const Duration(seconds: 1)); // finish the indicator settle animation
+      await tester.pump(const Duration(seconds: 1));
+    });
+
+    testWidgets('Test onRefresh', (tester) async {
+      when(() => materialListBlocMock.state).thenReturn(
+        MaterialListState.initial().copyWith(
+          nextPageIndex: 2,
+          materialList: [
+            fakematerialInfo,
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168452'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168453'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168454'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168454'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168455'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168456'),
+            ),
+          ],
+        ),
+      );
+
+      final handle = tester.ensureSemantics();
+
+      await tester
+          .pumpWidget(getScopedWidget(MaterialListPage(addToCart: () {})));
+
+      // debugDumpApp();
+
+      await tester.drag(
+        find.text('23168451'),
+        const Offset(0.0, 1000.0),
+      );
+      await tester.pump(const Duration(seconds: 1));
+
+      expect(
+        tester.getSemantics(find.byType(RefreshProgressIndicator)),
+        matchesSemantics(
+          label: 'Refresh',
+        ),
+      );
+
+      await tester
+          .pump(const Duration(seconds: 1)); // finish the scroll animation
+      await tester.pump(
+          const Duration(seconds: 1)); // finish the indicator settle animation
+      await tester.pump(
+          const Duration(seconds: 1)); // finish the indicator hide animation
+
+      handle.dispose();
+    });
+
+    testWidgets('Order Document type fetch success', (tester) async {
+      when(() => materialListBlocMock.state)
+          .thenReturn(MaterialListState.initial().copyWith(
+        isFetching: true,
+      ));
+
+      final expectedState = [
+        OrderDocumentTypeState.initial().copyWith(
+          isSubmitting: true,
+        ),
+        OrderDocumentTypeState.initial().copyWith(
+          isSubmitting: false,
+        )
+      ];
+
+      when(() => orderDocumentTypeBlocMock.state)
+          .thenReturn(OrderDocumentTypeState.initial());
+
+      whenListen(orderDocumentTypeBlocMock, Stream.fromIterable(expectedState));
+
+      await tester.pumpWidget(getScopedWidget(const MaterialRoot()));
+
+      final loaderImage = find.byKey(const Key('loaderImage'));
+
+      expect(loaderImage, findsOneWidget);
+    });
+
+    testWidgets('Order Document type fetch failed', (tester) async {
+      final expectedState = [
+        OrderDocumentTypeState.initial().copyWith(
+          isSubmitting: true,
+        ),
+        OrderDocumentTypeState.initial().copyWith(
+          isSubmitting: false,
+          orderDocumentTypeListFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('mock_error'))),
+        ),
+      ];
+
+      when(() => orderDocumentTypeBlocMock.state)
+          .thenReturn(OrderDocumentTypeState.initial());
+
+      whenListen(orderDocumentTypeBlocMock, Stream.fromIterable(expectedState));
+
+      await tester.pumpWidget(getScopedWidget(const MaterialRoot()));
+
+      const snackBarText = 'Unable to fetch Order Type';
+      final snackBar = find.text(snackBarText);
+
+      await tester.pump();
+      expect(snackBar, findsOneWidget);
+    });
+
+    testWidgets('Material List Item tap when material price is null',
+        (tester) async {
+      when(() => materialListBlocMock.state).thenReturn(
+        MaterialListState.initial().copyWith(
+          nextPageIndex: 2,
+          materialList: [
+            fakematerialInfo,
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168452'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168453'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168454'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168454'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168455'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168456'),
+            ),
+          ],
+        ),
+      );
+
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          isFetching: false,
+          materialPrice: {},
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget(const MaterialRoot()));
+
+      final firstListItem = find.text('23168451');
+
+      await tester.tap(firstListItem);
+      await tester.pump(const Duration(seconds: 1));
+
+      const snackBarText = 'Product Not Available';
+      final snackBar = find.text(snackBarText);
+
+      await tester.pump(const Duration(seconds: 1));
+      expect(snackBar, findsOneWidget);
+    });
+
+    testWidgets('Material List Item tap when material price is not null',
+        (tester) async {
+      when(() => materialListBlocMock.state).thenReturn(
+        MaterialListState.initial().copyWith(
+          nextPageIndex: 2,
+          materialList: [
+            fakematerialInfo,
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168452'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168453'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168454'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168454'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168455'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168456'),
+            ),
+          ],
+        ),
+      );
+
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          isFetching: false,
+          materialPrice: {
+            fakematerialInfo.materialNumber: Price.empty().copyWith(
+              materialNumber: fakematerialInfo.materialNumber,
+              lastPrice: fakeMaterialPrice,
+              finalPrice: fakeMaterialPrice,
+            ),
+          },
+        ),
+      );
+
+      await tester.pumpWidget(
+        getScopedWidget(
+          MaterialListPage(addToCart: ({
+            required BuildContext context,
+            required bool hasValidTenderContract,
+            required PriceAggregate priceAggregate,
+            required bool hasMandatoryTenderContract,
+          }) {
+            mockAddToCartStub.addToCart();
+          }),
+        ),
+      );
+
+      final firstListItem = find.text('23168451');
+
+      await tester.tap(firstListItem);
+      await tester.pump(const Duration(seconds: 1));
+
+      verify(
+        () => mockAddToCartStub.addToCart(),
+      ).called(1);
+    });
+
+    testWidgets('Material List Item favorite button tap', (tester) async {
+      when(() => materialListBlocMock.state).thenReturn(
+        MaterialListState.initial().copyWith(
+          nextPageIndex: 2,
+          materialList: [
+            fakematerialInfo,
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168452'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168453'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168454'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168454'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168455'),
+            ),
+            fakematerialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168456'),
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(
+        getScopedWidget(
+          MaterialListPage(addToCart: (
+              {required BuildContext context,
+              required PriceAggregate priceAggregate}) {
+            mockAddToCartStub.addToCart();
+          }),
+        ),
+      );
+
+      final favoriteButton = find.byType(FavoriteButton).first;
+
+      await tester.tap(favoriteButton);
+      await tester.pump(const Duration(seconds: 1));
     });
   });
 }
