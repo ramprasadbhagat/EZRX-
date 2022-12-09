@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
@@ -23,6 +25,7 @@ class HomeBanner extends StatefulWidget {
 
 class _HomeBannerState extends State<HomeBanner> {
   final _controller = PageController(viewportFraction: 0.95, keepPage: true);
+  Timer? bannerTimer;
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +48,12 @@ class _HomeBannerState extends State<HomeBanner> {
       },
       buildWhen: (previous, current) => previous.banner != current.banner,
       builder: (context, state) {
+        bannerTimer?.cancel();
         if (state.banner.isEmpty) {
           return const SizedBox.shrink();
+        }
+        if (state.banner.length > 1) {
+          startBannerScrollTimer();
         }
 
         return Column(
@@ -56,11 +63,10 @@ class _HomeBannerState extends State<HomeBanner> {
               child: PageView.builder(
                 key: const Key('homeBanner'),
                 controller: _controller,
-                itemCount: state.banner.length,
                 allowImplicitScrolling: true,
                 itemBuilder: (_, index) {
                   return BannerTile(
-                    banner: state.banner[index],
+                    banner: state.banner[index % state.banner.length],
                     httpService: locator<HttpService>(),
                     countlyService: locator<CountlyService>(),
                     config: locator<Config>(),
@@ -93,5 +99,19 @@ class _HomeBannerState extends State<HomeBanner> {
   void dispose() {
     super.dispose();
     _controller.dispose();
+    bannerTimer?.cancel();
+  }
+
+  void startBannerScrollTimer() {
+    _controller.jumpToPage(0);
+    bannerTimer = Timer.periodic(
+      const Duration(seconds: 8),
+      (timer) {
+        _controller.nextPage(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.ease,
+        );
+      },
+    );
   }
 }
