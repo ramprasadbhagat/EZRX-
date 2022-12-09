@@ -28,6 +28,7 @@ import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_helper.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_bundle_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_material_item_tile.dart';
+import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_type_selector.dart';
@@ -158,8 +159,20 @@ class _BodyContent extends StatelessWidget {
       },
       buildWhen: (previous, current) => previous != current,
       builder: (context, savedOrderState) {
-        return _Stepper(
-          savedOrderState: savedOrderState,
+        final isAccountSuspended =
+            context.read<EligibilityBloc>().state.isAccountSuspended;
+
+        return Column(
+          children: [
+            isAccountSuspended
+                ? const AccountSuspendedBanner()
+                : const SizedBox.shrink(),
+            Expanded(
+              child: _Stepper(
+                savedOrderState: savedOrderState,
+              ),
+            ),
+          ],
         );
       },
     );
@@ -311,6 +324,8 @@ class _Stepper extends StatelessWidget {
         final config = context.read<SalesOrgBloc>().state.configs;
         final eligibleForOrderSubmit =
             context.read<OrderEligibilityBloc>().state.eligibleForOrderSubmit;
+        final isAccountSuspended =
+            context.read<EligibilityBloc>().state.isAccountSuspended;
 
         return Stepper(
           margin: const EdgeInsets.fromLTRB(50, 10, 10, 10),
@@ -326,14 +341,14 @@ class _Stepper extends StatelessWidget {
                         : 'continueButtonKey'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: details.currentStep == state.maxSteps
-                          ? eligibleForOrderSubmit
+                          ? eligibleForOrderSubmit && !isAccountSuspended
                               ? ZPColors.primary
                               : ZPColors.lightGray
                           : ZPColors.primary,
                     ),
                     onPressed: () {
                       if (details.currentStep == state.maxSteps) {
-                        if (eligibleForOrderSubmit) {
+                        if (eligibleForOrderSubmit && !isAccountSuspended) {
                           _submitOrder(
                             cartItems:
                                 context.read<CartBloc>().state.cartItemList,

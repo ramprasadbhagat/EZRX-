@@ -9,6 +9,7 @@ class EligibilityState with _$EligibilityState {
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs salesOrgConfigs,
     required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
   }) = _EligibilityState;
 
   factory EligibilityState.initial() => EligibilityState(
@@ -16,6 +17,7 @@ class EligibilityState with _$EligibilityState {
         salesOrganisation: SalesOrganisation.empty(),
         salesOrgConfigs: SalesOrganisationConfigs.empty(),
         customerCodeInfo: CustomerCodeInfo.empty(),
+        shipToInfo: ShipToInfo.empty(),
       );
 
   bool get isCovidMaterialEnable {
@@ -63,6 +65,10 @@ class EligibilityState with _$EligibilityState {
     return user.role.type.isSalesRep && !salesOrganisation.salesOrg.isSg
         ? 'only'
         : '';
+  }
+
+  bool get isAccountSuspended {
+    return customerCodeInfo.status.isSuspended && shipToInfo.status.isSuspended;
   }
 
   String get getPNPValueBonusMaterialSearch {

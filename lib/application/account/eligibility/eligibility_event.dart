@@ -8,5 +8,6 @@ class EligibilityEvent with _$EligibilityEvent {
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs salesOrgConfigs,
     required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
   }) = _Update;
 }

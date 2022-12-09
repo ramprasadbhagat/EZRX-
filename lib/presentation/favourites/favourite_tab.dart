@@ -17,6 +17,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/favourites/favourite_tile.dart';
+import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -105,6 +106,8 @@ class FavouritesTab extends StatelessWidget with AutoRouteWrapper {
               buildWhen: (previous, current) =>
                   previous.isValidating != current.isValidating,
               builder: (context, priceState) {
+                final isAccountSuspended =
+                    context.read<EligibilityBloc>().state.isAccountSuspended;
                 if (priceState.isValidating) {
                   return LoadingShimmer.logo(key: const Key('LoaderImage'));
                 }
@@ -116,25 +119,34 @@ class FavouritesTab extends StatelessWidget with AutoRouteWrapper {
                     )
                     .toList();
 
-                return ScrollList<Favourite>(
-                  emptyMessage: 'No favorite found',
-                  onRefresh: () {
-                    context
-                        .read<MaterialPriceDetailBloc>()
-                        .add(const MaterialPriceDetailEvent.initialized());
-                    context.read<FavouriteBloc>().add(
-                          FavouriteEvent.fetch(
-                            user: context.read<UserBloc>().state.user,
-                          ),
-                        );
-                  },
-                  isLoading: false,
-                  itemBuilder: (context, index, itemInfo) {
-                    return FavouriteListTile(
-                      favourite: itemInfo,
-                    );
-                  },
-                  items: validFavoriteItems,
+                return Column(
+                  children: [
+                    isAccountSuspended
+                        ? const AccountSuspendedBanner()
+                        : const SizedBox.shrink(),
+                    Expanded(
+                      child: ScrollList<Favourite>(
+                        emptyMessage: 'No favorite found',
+                        onRefresh: () {
+                          context
+                              .read<MaterialPriceDetailBloc>()
+                              .add(const MaterialPriceDetailEvent.initialized());
+                          context.read<FavouriteBloc>().add(
+                                FavouriteEvent.fetch(
+                                  user: context.read<UserBloc>().state.user,
+                                ),
+                              );
+                        },
+                        isLoading: false,
+                        itemBuilder: (context, index, itemInfo) {
+                          return FavouriteListTile(
+                            favourite: itemInfo,
+                          );
+                        },
+                        items: validFavoriteItems,
+                      ),
+                    ),
+                  ],
                 );
               },
             );

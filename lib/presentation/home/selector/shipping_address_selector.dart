@@ -42,6 +42,7 @@ class ShipCodeSelector extends StatelessWidget {
                 !(context.read<SalesOrgBloc>().state.configs.disableBundles);
             final enableCovidMaterial =
                 context.read<EligibilityBloc>().state.isCovidMaterialEnable;
+            final salesOrgState = context.read<SalesOrgBloc>().state;
 
             context.read<MaterialFilterBloc>().add(
                   const MaterialFilterEvent.resetFilter(),
@@ -54,6 +55,16 @@ class ShipCodeSelector extends StatelessWidget {
                 );
 
             if (state.haveShipTo) {
+              context.read<EligibilityBloc>().add(
+                EligibilityEvent.update(
+                  user: context.read<UserBloc>().state.user,
+                  salesOrganisation: salesOrgState.salesOrganisation,
+                  salesOrgConfigs: salesOrgState.configs,
+                  customerCodeInfo: context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  shipToInfo: state.shipToInfo,
+                ),
+            );
+              
               context.read<SavedOrderListBloc>().add(
                     SavedOrderListEvent.fetch(
                       userInfo: context.read<UserBloc>().state.user,

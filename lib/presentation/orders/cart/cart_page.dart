@@ -18,6 +18,7 @@ import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_bundle_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_material_item_tile.dart';
+import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,6 +53,8 @@ class CartPage extends StatelessWidget {
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         final taxCode = context.read<SalesOrgBloc>().state.salesOrg.taxCode;
+        final isAccountSuspended =
+            context.read<EligibilityBloc>().state.isAccountSuspended;
 
         return Scaffold(
           key: const Key('cartpage'),
@@ -62,6 +65,9 @@ class CartPage extends StatelessWidget {
           ),
           body: Column(
             children: [
+              isAccountSuspended
+                  ? const AccountSuspendedBanner()
+                  : const SizedBox.shrink(),
               Expanded(
                 child: ScrollList<CartItem>(
                   emptyMessage: 'Cart is Empty',

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -10,6 +11,7 @@ import 'package:ezrxmobile/presentation/home/banners/banner.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/home/selector/sales_org_selector.dart';
 import 'package:ezrxmobile/presentation/home/selector/shipping_address_selector.dart';
+import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -39,81 +41,92 @@ class HomeTab extends StatelessWidget {
         ),
       ),
       body: SafeArea(
-        child: ListView(
-          children: [
-            const HomeBanner(
-              key: ValueKey('HomeBanner'),
-            ),
-            MultiBlocListener(
-              listeners: [
-                BlocListener<MaterialListBloc, MaterialListState>(
-                  listenWhen: (previous, current) =>
-                      previous.nextPageIndex != current.nextPageIndex,
-                  listener: (context, state) {
-                    if (state.materialList.isNotEmpty) {
-                      context.read<MaterialPriceBloc>().add(
-                            MaterialPriceEvent.fetch(
-                              salesOrganisation: context
-                                  .read<SalesOrgBloc>()
-                                  .state
-                                  .salesOrganisation,
-                              customerCode: context
-                                  .read<CustomerCodeBloc>()
-                                  .state
-                                  .customerCodeInfo,
-                              materials: state.materialList,
+        child: BlocBuilder<EligibilityBloc, EligibilityState>(
+          buildWhen: (previous, current) => previous != current,
+          builder: (context, state) {
+            final isAccountSuspended =
+                context.read<EligibilityBloc>().state.isAccountSuspended;
+
+            return ListView(
+              children: [
+                isAccountSuspended
+                    ? const AccountSuspendedBanner()
+                    : const SizedBox.shrink(),
+                const HomeBanner(
+                  key: ValueKey('HomeBanner'),
+                ),
+                MultiBlocListener(
+                  listeners: [
+                    BlocListener<MaterialListBloc, MaterialListState>(
+                      listenWhen: (previous, current) =>
+                          previous.nextPageIndex != current.nextPageIndex,
+                      listener: (context, state) {
+                        if (state.materialList.isNotEmpty) {
+                          context.read<MaterialPriceBloc>().add(
+                                MaterialPriceEvent.fetch(
+                                  salesOrganisation: context
+                                      .read<SalesOrgBloc>()
+                                      .state
+                                      .salesOrganisation,
+                                  customerCode: context
+                                      .read<CustomerCodeBloc>()
+                                      .state
+                                      .customerCodeInfo,
+                                  materials: state.materialList,
+                                ),
+                              );
+                        }
+                      },
+                    ),
+                    BlocListener<CovidMaterialListBloc, CovidMaterialListState>(
+                      listenWhen: (previous, current) =>
+                          previous.nextPageIndex != current.nextPageIndex,
+                      listener: (context, state) {
+                        if (state.materialList.isNotEmpty) {
+                          context.read<MaterialPriceBloc>().add(
+                                MaterialPriceEvent.fetch(
+                                  salesOrganisation: context
+                                      .read<SalesOrgBloc>()
+                                      .state
+                                      .salesOrganisation,
+                                  customerCode: context
+                                      .read<CustomerCodeBloc>()
+                                      .state
+                                      .customerCodeInfo,
+                                  materials: state.materialList,
+                                ),
+                              );
+                        }
+                      },
+                    ),
+                  ],
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GridView.count(
+                      physics:
+                          const NeverScrollableScrollPhysics(), // to disable GridView's scrolling
+                      shrinkWrap: true,
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 8.0,
+                      mainAxisSpacing: 8.0,
+                      childAspectRatio: (1 / .6),
+                      children: List.generate(
+                        homePageTiles.length,
+                        (index) {
+                          return Center(
+                            child: _TileCard(
+                              key: const Key('HomeTileCard'),
+                              homePageTile: homePageTiles[index],
                             ),
                           );
-                    }
-                  },
-                ),
-                BlocListener<CovidMaterialListBloc, CovidMaterialListState>(
-                  listenWhen: (previous, current) =>
-                      previous.nextPageIndex != current.nextPageIndex,
-                  listener: (context, state) {
-                    if (state.materialList.isNotEmpty) {
-                      context.read<MaterialPriceBloc>().add(
-                            MaterialPriceEvent.fetch(
-                              salesOrganisation: context
-                                  .read<SalesOrgBloc>()
-                                  .state
-                                  .salesOrganisation,
-                              customerCode: context
-                                  .read<CustomerCodeBloc>()
-                                  .state
-                                  .customerCodeInfo,
-                              materials: state.materialList,
-                            ),
-                          );
-                    }
-                  },
-                ),
-              ],
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GridView.count(
-                  physics:
-                      const NeverScrollableScrollPhysics(), // to disable GridView's scrolling
-                  shrinkWrap: true,
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 8.0,
-                  mainAxisSpacing: 8.0,
-                  childAspectRatio: (1 / .6),
-                  children: List.generate(
-                    homePageTiles.length,
-                    (index) {
-                      return Center(
-                        child: _TileCard(
-                          key: const Key('HomeTileCard'),
-                          homePageTile: homePageTiles[index],
-                        ),
-                      );
-                    },
+                        },
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-          ],
+              ],
+            );
+          },
         ),
       ),
     );

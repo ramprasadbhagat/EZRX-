@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -64,6 +65,9 @@ class BannerBlocMock extends MockBloc<BannerEvent, BannerState>
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -77,6 +81,7 @@ void main() {
   late CustomerCodeBlocMock mockCustomerCodeBloc;
   late SalesOrgBlocMock salesOrgBlocMock;
   late MaterialListBlocMock materialListBlocMock;
+  late EligibilityBlocMock eligibilityBlocMock;
   late MaterialPriceBlocMock materialPriceBlocMock;
   late CovidMaterialListBlocMock covidMaterialListBlocMock;
   late CartBlocMock cartBlocMock;
@@ -122,6 +127,7 @@ void main() {
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
       locator.registerLazySingleton(() => AppRouter());
       locator.registerLazySingleton(() => mockBannerBloc);
+      locator.registerLazySingleton(() => eligibilityBlocMock);
       locator.registerLazySingleton(
           () => CountlyService(config: locator<Config>()));
       mockHTTPService = MockHTTPService();
@@ -137,6 +143,7 @@ void main() {
         materialPriceBlocMock = MaterialPriceBlocMock();
         covidMaterialListBlocMock = CovidMaterialListBlocMock();
         mockBannerBloc = BannerBlocMock();
+        eligibilityBlocMock = EligibilityBlocMock();
         shipToCodeBlocMock = ShipToCodeBlocMock();
         authBlocMock = AuthBlocMock();
         userBlocMock = UserBlocMock();
@@ -153,6 +160,8 @@ void main() {
                 .copyWith(materialList: [fakematerialInfo1]));
         when(() => materialPriceBlocMock.state)
             .thenReturn(MaterialPriceState.initial());
+        when(() => eligibilityBlocMock.state)
+            .thenReturn(EligibilityState.initial());
         when(() => covidMaterialListBlocMock.state)
             .thenReturn(CovidMaterialListState.initial());
         when(() => cartBlocMock.state).thenReturn(CartState.initial());
@@ -177,6 +186,7 @@ void main() {
               BlocProvider<CovidMaterialListBloc>(
                   create: (context) => covidMaterialListBlocMock),
               BlocProvider<CartBloc>(create: (context) => cartBlocMock),
+              BlocProvider<EligibilityBloc>(create: (context) => eligibilityBlocMock),
               BlocProvider<BannerBloc>(create: (context) => mockBannerBloc),
               BlocProvider<ShipToCodeBloc>(
                   create: (context) => shipToCodeBlocMock),

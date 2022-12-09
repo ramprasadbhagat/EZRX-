@@ -30,6 +30,9 @@ class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 class ShipToCodeMockBloc extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
+class EligibilityMockBloc extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 class CustomerCodeMockBloc
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
@@ -53,6 +56,7 @@ void main() {
   var mockFavouriteBloc = MockFavouriteBloc();
   var userBlocMock = UserMockBloc();
   var shipToCodeMockBloc = ShipToCodeMockBloc();
+  var eligibilityMockBloc = EligibilityMockBloc();
   var customerCodeMockBloc = CustomerCodeMockBloc();
   var salesOrgMockBloc = SalesOrgMockBloc();
   var cartMockBloc = CartMockBloc();
@@ -83,6 +87,7 @@ void main() {
     mockFavouriteBloc = MockFavouriteBloc();
     userBlocMock = UserMockBloc();
     shipToCodeMockBloc = ShipToCodeMockBloc();
+    eligibilityMockBloc = EligibilityMockBloc();
     customerCodeMockBloc = CustomerCodeMockBloc();
     salesOrgMockBloc = SalesOrgMockBloc();
     cartMockBloc = CartMockBloc();
@@ -91,6 +96,8 @@ void main() {
     when(() => mockEligiblityBloc.state).thenReturn(EligibilityState.initial());
     when(() => customerCodeMockBloc.state)
         .thenReturn(CustomerCodeState.initial());
+    when(() => eligibilityMockBloc.state)
+        .thenReturn(EligibilityState.initial());
     when(() => salesOrgMockBloc.state).thenReturn(SalesOrgState.initial());
     when(() => shipToCodeMockBloc.state).thenReturn(ShipToCodeState.initial());
     when(() => userBlocMock.state).thenReturn(UserState.initial());
@@ -114,6 +121,8 @@ void main() {
                   create: ((context) => customerCodeMockBloc)),
               BlocProvider<ShipToCodeBloc>(
                   create: ((context) => shipToCodeMockBloc)),
+              BlocProvider<EligibilityBloc>(
+                  create: ((context) => eligibilityMockBloc)),
               BlocProvider<FavouriteBloc>(
                   create: (context) => mockFavouriteBloc),
               BlocProvider<CartBloc>(create: (context) => cartMockBloc),

@@ -99,6 +99,7 @@ void main() {
             salesOrganisation: fakeSaleOrg,
             salesOrgConfigs: fakeSaleOrgConfig,
             customerCodeInfo: fakeCustomerInfo,
+            shipToInfo: fakeShipToInfo,
           ),
         );
       },
@@ -108,6 +109,7 @@ void main() {
           salesOrganisation: fakeSaleOrg,
           salesOrgConfigs: fakeSaleOrgConfig,
           customerCodeInfo: fakeCustomerInfo,
+          shipToInfo: fakeShipToInfo,
         ),
       ],
     );

@@ -22,6 +22,7 @@ import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bonus_discount_label.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/favorite_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_type_selector.dart';
@@ -65,6 +66,8 @@ class MaterialListPage extends StatelessWidget {
             previous.isFetching != current.isFetching ||
             previous.materialList != current.materialList,
         builder: (context, state) {
+          final isAccountSuspended = context.read<EligibilityBloc>().state.isAccountSuspended;
+
           return BlocListener<OrderDocumentTypeBloc, OrderDocumentTypeState>(
             listenWhen: (previous, current) =>
                 previous.selectedOrderType != current.selectedOrderType ||
@@ -116,6 +119,9 @@ class MaterialListPage extends StatelessWidget {
             child: Column(
               children: [
                 const _SearchBar(),
+                isAccountSuspended
+                    ? const AccountSuspendedBanner()
+                    : const SizedBox.shrink(),
                 if (context.read<EligibilityBloc>().state.isOrderTypeEnable)
                   const OrderTypeSelector(hideReasonField: true),
                 const _MaterialFilters(),

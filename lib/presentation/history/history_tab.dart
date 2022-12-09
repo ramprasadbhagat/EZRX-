@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -18,6 +19,7 @@ import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/history/history_filter.dart';
 import 'package:ezrxmobile/presentation/history/history_filter_by_status.dart';
 import 'package:ezrxmobile/presentation/history/history_tile.dart';
+import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -275,99 +277,111 @@ class HistoryTab extends StatelessWidget {
               buildWhen: (previous, current) =>
                   previous.isFetching != current.isFetching,
               builder: (context, state) {
+                final isAccountSuspended =
+                    context.read<EligibilityBloc>().state.isAccountSuspended;
+                    
                 return state.isFetching &&
                         state
                             .getFilterItem(orderHistoryFilterByStatusState
                                 .filterByStatusName)
                             .isEmpty
                     ? LoadingShimmer.logo(key: const Key('loaderImage'))
-                    : ScrollList<OrderHistoryItem>(
-                        key: const Key('orderHistoryList'),
-                        emptyMessage: 'No history found',
-                        onRefresh: () {
-                          if (context.read<ShipToCodeBloc>().state.haveShipTo) {
-                            context.read<OrderHistoryFilterBloc>().add(
-                                  const OrderHistoryFilterEvent.initialized(),
-                                );
-                            context.read<OrderHistoryFilterByStatusBloc>().add(
-                                  const OrderHistoryFilterByStatusEvent
-                                      .initialized(),
-                                );
-                            context.read<OrderHistoryListBloc>().add(
-                                  OrderHistoryListEvent.fetch(
-                                    customerCodeInfo: context
-                                        .read<CustomerCodeBloc>()
-                                        .state
-                                        .customerCodeInfo,
-                                    salesOrgConfigs: context
-                                        .read<SalesOrgBloc>()
-                                        .state
-                                        .configs,
-                                    shipToInfo: context
-                                        .read<ShipToCodeBloc>()
-                                        .state
-                                        .shipToInfo,
-                                    user: context.read<UserBloc>().state.user,
-                                    orderHistoryFilter:
-                                        OrderHistoryFilter.empty(),
-                                    sortDirection: context
-                                        .read<OrderHistoryFilterBloc>()
-                                        .state
-                                        .sortDirection,
+                    : Column(
+                      children: [
+                        isAccountSuspended
+                              ? const AccountSuspendedBanner()
+                              : const SizedBox.shrink(),
+                        Expanded(
+                          child: ScrollList<OrderHistoryItem>(
+                              key: const Key('orderHistoryList'),
+                              emptyMessage: 'No history found',
+                              onRefresh: () {
+                                if (context.read<ShipToCodeBloc>().state.haveShipTo) {
+                                  context.read<OrderHistoryFilterBloc>().add(
+                                        const OrderHistoryFilterEvent.initialized(),
+                                      );
+                                  context.read<OrderHistoryFilterByStatusBloc>().add(
+                                        const OrderHistoryFilterByStatusEvent
+                                            .initialized(),
+                                      );
+                                  context.read<OrderHistoryListBloc>().add(
+                                        OrderHistoryListEvent.fetch(
+                                          customerCodeInfo: context
+                                              .read<CustomerCodeBloc>()
+                                              .state
+                                              .customerCodeInfo,
+                                          salesOrgConfigs: context
+                                              .read<SalesOrgBloc>()
+                                              .state
+                                              .configs,
+                                          shipToInfo: context
+                                              .read<ShipToCodeBloc>()
+                                              .state
+                                              .shipToInfo,
+                                          user: context.read<UserBloc>().state.user,
+                                          orderHistoryFilter:
+                                              OrderHistoryFilter.empty(),
+                                          sortDirection: context
+                                              .read<OrderHistoryFilterBloc>()
+                                              .state
+                                              .sortDirection,
+                                        ),
+                                      );
+                                }
+                              },
+                              isLoading: state.isFetching,
+                              onLoadingMore: () => context
+                                  .read<OrderHistoryListBloc>()
+                                  .add(
+                                    OrderHistoryListEvent.loadMore(
+                                      customerCodeInfo: context
+                                          .read<CustomerCodeBloc>()
+                                          .state
+                                          .customerCodeInfo,
+                                      salesOrgConfigs:
+                                          context.read<SalesOrgBloc>().state.configs,
+                                      shipToInfo: context
+                                          .read<ShipToCodeBloc>()
+                                          .state
+                                          .shipToInfo,
+                                      user: context.read<UserBloc>().state.user,
+                                      sortDirection: context
+                                          .read<OrderHistoryFilterBloc>()
+                                          .state
+                                          .sortDirection,
+                                      orderHistoryFilter: OrderHistoryFilter.empty(),
+                                    ),
                                   ),
-                                );
-                          }
-                        },
-                        isLoading: state.isFetching,
-                        onLoadingMore: () => context
-                            .read<OrderHistoryListBloc>()
-                            .add(
-                              OrderHistoryListEvent.loadMore(
+                              itemBuilder: (context, index, item) =>
+                                  OrderHistoryListTile(
+                                key: const ValueKey('historyTitle'),
+                                orderHistoryItem: item,
                                 customerCodeInfo: context
                                     .read<CustomerCodeBloc>()
                                     .state
                                     .customerCodeInfo,
+                                shipToInfo:
+                                    context.read<ShipToCodeBloc>().state.shipToInfo,
+                                orderHistoryBasicInfo:
+                                    state.orderHistoryList.orderBasicInformation,
+                                currency: context
+                                    .read<SalesOrgBloc>()
+                                    .state
+                                    .configs
+                                    .currency,
                                 salesOrgConfigs:
                                     context.read<SalesOrgBloc>().state.configs,
-                                shipToInfo: context
-                                    .read<ShipToCodeBloc>()
-                                    .state
-                                    .shipToInfo,
-                                user: context.read<UserBloc>().state.user,
-                                sortDirection: context
-                                    .read<OrderHistoryFilterBloc>()
-                                    .state
-                                    .sortDirection,
-                                orderHistoryFilter: OrderHistoryFilter.empty(),
+                                billToInfo: buildToInformation.isNotEmpty
+                                    ? buildToInformation.first
+                                    : BillToInfo.empty(),
+                              ),
+                              items: state.getFilterItem(
+                                orderHistoryFilterByStatusState.filterByStatusName,
                               ),
                             ),
-                        itemBuilder: (context, index, item) =>
-                            OrderHistoryListTile(
-                          key: const ValueKey('historyTitle'),
-                          orderHistoryItem: item,
-                          customerCodeInfo: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                          shipToInfo:
-                              context.read<ShipToCodeBloc>().state.shipToInfo,
-                          orderHistoryBasicInfo:
-                              state.orderHistoryList.orderBasicInformation,
-                          currency: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .configs
-                              .currency,
-                          salesOrgConfigs:
-                              context.read<SalesOrgBloc>().state.configs,
-                          billToInfo: buildToInformation.isNotEmpty
-                              ? buildToInformation.first
-                              : BillToInfo.empty(),
                         ),
-                        items: state.getFilterItem(
-                          orderHistoryFilterByStatusState.filterByStatusName,
-                        ),
-                      );
+                      ],
+                    );
               },
             );
           },

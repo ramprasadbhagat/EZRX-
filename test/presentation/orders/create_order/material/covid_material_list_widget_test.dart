@@ -172,6 +172,8 @@ void main() {
                   .copyWith(salesOrg: SalesOrg('SG'))));
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
+      when(() => shipToCodeBlocMock.state)
+          .thenReturn(ShipToCodeState.initial());
       when(() => mockFavouriteBloc.state).thenReturn(FavouriteState.initial());
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
