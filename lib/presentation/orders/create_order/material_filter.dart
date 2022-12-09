@@ -10,6 +10,8 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_filter_search.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -154,92 +156,99 @@ class _BodyContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final filterList = state.getSearchedFilterList(filterType);
 
-    return Stack(
-      children: [
-        ListView.builder(
-          key: const Key('filterOptionList'),
-          itemCount: filterList.length,
-          itemBuilder: ((BuildContext context, int index) {
-            return ListTile(
-              key: Key('filterOption-${filterList[index]}'),
-              onTap: () {
-                BlocProvider.of<MaterialFilterBloc>(context).add(
-                  MaterialFilterEvent.updateMaterialSelected(
-                    filterType,
-                    filterList[index],
-                  ),
-                );
-              },
-              leading: Text(filterList[index]),
-              trailing: state.isSelected(filterType, filterList[index])
-                  ? const Icon(Icons.check, color: ZPColors.secondary)
-                  : const SizedBox.shrink(),
-            );
-          }),
-        ),
-        // Positioned(
-        //   bottom: 10,
-        //   right: 8,
-        //   child: Row(
-        //     children: <Widget>[
-        //       Container(
-        //         margin: const EdgeInsets.symmetric(horizontal: 10.0),
-        //         child: ElevatedButton(
-        //           style: ButtonStyle(
-        //             shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
-        //               (states) => RoundedRectangleBorder(
-        //                 borderRadius: BorderRadius.circular(30.0),
-        //               ),
-        //             ),
-        //             backgroundColor: MaterialStateProperty.resolveWith<Color>(
-        //               (states) => ZPColors.primary,
-        //             ),
-        //             padding:
-        //                 MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
-        //               (states) => const EdgeInsets.symmetric(
-        //                 vertical: 10.0,
-        //                 horizontal: 10.0,
-        //               ),
-        //             ),
-        //           ),
-        //           onPressed: () {
-        //             context.read<MaterialListBloc>().add(
-        //                   MaterialListEvent.fetch(
-        //                     user: context.read<UserBloc>().state.user,
-        //                     salesOrganisation: context
-        //                         .read<SalesOrgBloc>()
-        //                         .state
-        //                         .salesOrganisation,
-        //                     configs: context.read<SalesOrgBloc>().state.configs,
-        //                     customerCodeInfo: context
-        //                         .read<CustomerCodeBloc>()
-        //                         .state
-        //                         .customerCodeInfo,
-        //                     shipToInfo:
-        //                         context.read<ShipToCodeBloc>().state.shipToInfo,
-        //                     selectedMaterialFilter: context
-        //                         .read<MaterialFilterBloc>()
-        //                         .state
-        //                         .selectedMaterialFilter,
-        //                   ),
-        //                 );
-        //             Navigator.pop(context);
-        //           },
-        //           child: const Text(
-        //             'Apply',
-        //             key: Key('materialFilterApply'),
-        //             style: TextStyle(
-        //               color: Colors.white,
-        //               fontWeight: FontWeight.bold,
-        //               fontSize: 19,
-        //             ),
-        //           ),
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // ),
-      ],
-    );
+    return state.isFetching
+        ? Center(
+            child: LoadingShimmer.logo(
+              key: const Key('loaderImage'),
+            ),
+          )
+        : Stack(
+            children: [
+              ScrollList(
+                emptyMessage: 'No filter option found',
+                isLoading: state.isFetching,
+                itemBuilder: (context, index, item) => ListTile(
+                  key: Key('filterOption-${filterList[index]}'),
+                  onTap: () {
+                    BlocProvider.of<MaterialFilterBloc>(context).add(
+                      MaterialFilterEvent.updateMaterialSelected(
+                        filterType,
+                        filterList[index],
+                      ),
+                    );
+                  },
+                  leading: Text(filterList[index]),
+                  trailing: state.isSelected(filterType, filterList[index])
+                      ? const Icon(Icons.check, color: ZPColors.secondary)
+                      : const SizedBox.shrink(),
+                ),
+                key: const Key('filterOptionList'),
+                items: filterList,
+              ),
+
+              // Positioned(
+              //   bottom: 10,
+              //   right: 8,
+              //   child: Row(
+              //     children: <Widget>[
+              //       Container(
+              //         margin: const EdgeInsets.symmetric(horizontal: 10.0),
+              //         child: ElevatedButton(
+              //           style: ButtonStyle(
+              //             shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
+              //               (states) => RoundedRectangleBorder(
+              //                 borderRadius: BorderRadius.circular(30.0),
+              //               ),
+              //             ),
+              //             backgroundColor: MaterialStateProperty.resolveWith<Color>(
+              //               (states) => ZPColors.primary,
+              //             ),
+              //             padding:
+              //                 MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
+              //               (states) => const EdgeInsets.symmetric(
+              //                 vertical: 10.0,
+              //                 horizontal: 10.0,
+              //               ),
+              //             ),
+              //           ),
+              //           onPressed: () {
+              //             context.read<MaterialListBloc>().add(
+              //                   MaterialListEvent.fetch(
+              //                     user: context.read<UserBloc>().state.user,
+              //                     salesOrganisation: context
+              //                         .read<SalesOrgBloc>()
+              //                         .state
+              //                         .salesOrganisation,
+              //                     configs: context.read<SalesOrgBloc>().state.configs,
+              //                     customerCodeInfo: context
+              //                         .read<CustomerCodeBloc>()
+              //                         .state
+              //                         .customerCodeInfo,
+              //                     shipToInfo:
+              //                         context.read<ShipToCodeBloc>().state.shipToInfo,
+              //                     selectedMaterialFilter: context
+              //                         .read<MaterialFilterBloc>()
+              //                         .state
+              //                         .selectedMaterialFilter,
+              //                   ),
+              //                 );
+              //             Navigator.pop(context);
+              //           },
+              //           child: const Text(
+              //             'Apply',
+              //             key: Key('materialFilterApply'),
+              //             style: TextStyle(
+              //               color: Colors.white,
+              //               fontWeight: FontWeight.bold,
+              //               fontSize: 19,
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+            ],
+          );
   }
 }

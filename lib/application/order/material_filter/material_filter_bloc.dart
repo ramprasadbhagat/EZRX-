@@ -29,6 +29,12 @@ class MaterialFilterBloc
     await event.map(
       initialized: (_) async => emit(MaterialFilterState.initial()),
       fetch: (e) async {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
+          ),
+        );
         final failureOrSuccess =
             await materialFilterRepository.getMaterialFilterList(
           salesOrgConfig: e.salesOrgConfig,
@@ -43,14 +49,18 @@ class MaterialFilterBloc
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
               ),
             );
           },
           (materialFilter) {
-            emit(state.copyWith(
-              apiFailureOrSuccessOption: none(),
-              materialFilter: materialFilter,
-            ));
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: none(),
+                materialFilter: materialFilter,
+                isFetching: false,
+              ),
+            );
           },
         );
       },

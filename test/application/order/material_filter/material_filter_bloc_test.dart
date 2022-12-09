@@ -146,8 +146,13 @@ void main() {
           pickAndPack: '')),
       expect: () => [
         MaterialFilterState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          isFetching: true,
+        ),
+        MaterialFilterState.initial().copyWith(
           materialFilter: materialFilterMockData,
           apiFailureOrSuccessOption: none(),
+          isFetching: false,
         )
       ],
     );
@@ -180,6 +185,10 @@ void main() {
           pickAndPack: '')),
       expect: () => [
         MaterialFilterState.initial().copyWith(
+          isFetching: true,
+        ),
+        MaterialFilterState.initial().copyWith(
+          isFetching: false,
           apiFailureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),

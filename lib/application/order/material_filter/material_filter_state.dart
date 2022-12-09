@@ -8,6 +8,7 @@ class MaterialFilterState with _$MaterialFilterState {
     required MaterialFilter selectedMaterialFilter,
     required String searchKey,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
+    required bool isFetching,
   }) = _MaterialFilterState;
 
   factory MaterialFilterState.initial() => MaterialFilterState(
@@ -16,6 +17,7 @@ class MaterialFilterState with _$MaterialFilterState {
           uniquePrincipalName: <String>[],
           uniqueTherapeuticClass: <String>[],
         ),
+        isFetching: false,
         selectedMaterialFilter: const MaterialFilter(
           uniqueItemBrand: <String>[],
           uniquePrincipalName: <String>[],
