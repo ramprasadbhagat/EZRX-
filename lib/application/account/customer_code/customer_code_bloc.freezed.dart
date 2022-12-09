@@ -33,6 +33,9 @@ mixin _$CustomerCodeEvent {
     required TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadMore,
+    required TResult Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)
+        loadStoredCustomerCode,
     required TResult Function(String searchKey) updateSearchKey,
   }) =>
       throw _privateConstructorUsedError;
@@ -49,6 +52,9 @@ mixin _$CustomerCodeEvent {
     TResult? Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
+    TResult? Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        loadStoredCustomerCode,
     TResult? Function(String searchKey)? updateSearchKey,
   }) =>
       throw _privateConstructorUsedError;
@@ -65,6 +71,9 @@ mixin _$CustomerCodeEvent {
     TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
+    TResult Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        loadStoredCustomerCode,
     TResult Function(String searchKey)? updateSearchKey,
     required TResult orElse(),
   }) =>
@@ -76,6 +85,8 @@ mixin _$CustomerCodeEvent {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Search value) search,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_LoadStoredCustomerCode value)
+        loadStoredCustomerCode,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
   }) =>
       throw _privateConstructorUsedError;
@@ -86,6 +97,7 @@ mixin _$CustomerCodeEvent {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Search value)? search,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
   }) =>
       throw _privateConstructorUsedError;
@@ -96,6 +108,7 @@ mixin _$CustomerCodeEvent {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Search value)? search,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     required TResult orElse(),
   }) =>
@@ -173,6 +186,9 @@ class _$_Initialized implements _Initialized {
     required TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadMore,
+    required TResult Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)
+        loadStoredCustomerCode,
     required TResult Function(String searchKey) updateSearchKey,
   }) {
     return initialized();
@@ -192,6 +208,9 @@ class _$_Initialized implements _Initialized {
     TResult? Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
+    TResult? Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        loadStoredCustomerCode,
     TResult? Function(String searchKey)? updateSearchKey,
   }) {
     return initialized?.call();
@@ -211,6 +230,9 @@ class _$_Initialized implements _Initialized {
     TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
+    TResult Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        loadStoredCustomerCode,
     TResult Function(String searchKey)? updateSearchKey,
     required TResult orElse(),
   }) {
@@ -228,6 +250,8 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Search value) search,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_LoadStoredCustomerCode value)
+        loadStoredCustomerCode,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
   }) {
     return initialized(this);
@@ -241,6 +265,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Search value)? search,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
   }) {
     return initialized?.call(this);
@@ -254,6 +279,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Search value)? search,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     required TResult orElse(),
   }) {
@@ -358,6 +384,9 @@ class _$_Selected implements _Selected {
     required TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadMore,
+    required TResult Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)
+        loadStoredCustomerCode,
     required TResult Function(String searchKey) updateSearchKey,
   }) {
     return selected(customerCodeInfo);
@@ -377,6 +406,9 @@ class _$_Selected implements _Selected {
     TResult? Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
+    TResult? Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        loadStoredCustomerCode,
     TResult? Function(String searchKey)? updateSearchKey,
   }) {
     return selected?.call(customerCodeInfo);
@@ -396,6 +428,9 @@ class _$_Selected implements _Selected {
     TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
+    TResult Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        loadStoredCustomerCode,
     TResult Function(String searchKey)? updateSearchKey,
     required TResult orElse(),
   }) {
@@ -413,6 +448,8 @@ class _$_Selected implements _Selected {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Search value) search,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_LoadStoredCustomerCode value)
+        loadStoredCustomerCode,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
   }) {
     return selected(this);
@@ -426,6 +463,7 @@ class _$_Selected implements _Selected {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Search value)? search,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
   }) {
     return selected?.call(this);
@@ -439,6 +477,7 @@ class _$_Selected implements _Selected {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Search value)? search,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     required TResult orElse(),
   }) {
@@ -605,6 +644,9 @@ class _$_Fetch implements _Fetch {
     required TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadMore,
+    required TResult Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)
+        loadStoredCustomerCode,
     required TResult Function(String searchKey) updateSearchKey,
   }) {
     return fetch(
@@ -625,6 +667,9 @@ class _$_Fetch implements _Fetch {
     TResult? Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
+    TResult? Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        loadStoredCustomerCode,
     TResult? Function(String searchKey)? updateSearchKey,
   }) {
     return fetch?.call(
@@ -645,6 +690,9 @@ class _$_Fetch implements _Fetch {
     TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
+    TResult Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        loadStoredCustomerCode,
     TResult Function(String searchKey)? updateSearchKey,
     required TResult orElse(),
   }) {
@@ -663,6 +711,8 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Search value) search,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_LoadStoredCustomerCode value)
+        loadStoredCustomerCode,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
   }) {
     return fetch(this);
@@ -676,6 +726,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Search value)? search,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
   }) {
     return fetch?.call(this);
@@ -689,6 +740,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Search value)? search,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     required TResult orElse(),
   }) {
@@ -837,6 +889,9 @@ class _$_Search implements _Search {
     required TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadMore,
+    required TResult Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)
+        loadStoredCustomerCode,
     required TResult Function(String searchKey) updateSearchKey,
   }) {
     return search(hidecustomer, userInfo, selectedSalesOrg);
@@ -856,6 +911,9 @@ class _$_Search implements _Search {
     TResult? Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
+    TResult? Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        loadStoredCustomerCode,
     TResult? Function(String searchKey)? updateSearchKey,
   }) {
     return search?.call(hidecustomer, userInfo, selectedSalesOrg);
@@ -875,6 +933,9 @@ class _$_Search implements _Search {
     TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
+    TResult Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        loadStoredCustomerCode,
     TResult Function(String searchKey)? updateSearchKey,
     required TResult orElse(),
   }) {
@@ -892,6 +953,8 @@ class _$_Search implements _Search {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Search value) search,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_LoadStoredCustomerCode value)
+        loadStoredCustomerCode,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
   }) {
     return search(this);
@@ -905,6 +968,7 @@ class _$_Search implements _Search {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Search value)? search,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
   }) {
     return search?.call(this);
@@ -918,6 +982,7 @@ class _$_Search implements _Search {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Search value)? search,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     required TResult orElse(),
   }) {
@@ -1064,6 +1129,9 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadMore,
+    required TResult Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)
+        loadStoredCustomerCode,
     required TResult Function(String searchKey) updateSearchKey,
   }) {
     return loadMore(hidecustomer, userInfo, selectedSalesOrg);
@@ -1083,6 +1151,9 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
+    TResult? Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        loadStoredCustomerCode,
     TResult? Function(String searchKey)? updateSearchKey,
   }) {
     return loadMore?.call(hidecustomer, userInfo, selectedSalesOrg);
@@ -1102,6 +1173,9 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
+    TResult Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        loadStoredCustomerCode,
     TResult Function(String searchKey)? updateSearchKey,
     required TResult orElse(),
   }) {
@@ -1119,6 +1193,8 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Search value) search,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_LoadStoredCustomerCode value)
+        loadStoredCustomerCode,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
   }) {
     return loadMore(this);
@@ -1132,6 +1208,7 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Search value)? search,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
   }) {
     return loadMore?.call(this);
@@ -1145,6 +1222,7 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Search value)? search,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     required TResult orElse(),
   }) {
@@ -1166,6 +1244,249 @@ abstract class _LoadMore implements CustomerCodeEvent {
   SalesOrganisation get selectedSalesOrg;
   @JsonKey(ignore: true)
   _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_LoadStoredCustomerCodeCopyWith<$Res> {
+  factory _$$_LoadStoredCustomerCodeCopyWith(_$_LoadStoredCustomerCode value,
+          $Res Function(_$_LoadStoredCustomerCode) then) =
+      __$$_LoadStoredCustomerCodeCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {bool hidecustomer, User userInfo, SalesOrganisation selectedSalesOrg});
+
+  $UserCopyWith<$Res> get userInfo;
+  $SalesOrganisationCopyWith<$Res> get selectedSalesOrg;
+}
+
+/// @nodoc
+class __$$_LoadStoredCustomerCodeCopyWithImpl<$Res>
+    extends _$CustomerCodeEventCopyWithImpl<$Res, _$_LoadStoredCustomerCode>
+    implements _$$_LoadStoredCustomerCodeCopyWith<$Res> {
+  __$$_LoadStoredCustomerCodeCopyWithImpl(_$_LoadStoredCustomerCode _value,
+      $Res Function(_$_LoadStoredCustomerCode) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? hidecustomer = null,
+    Object? userInfo = null,
+    Object? selectedSalesOrg = null,
+  }) {
+    return _then(_$_LoadStoredCustomerCode(
+      hidecustomer: null == hidecustomer
+          ? _value.hidecustomer
+          : hidecustomer // ignore: cast_nullable_to_non_nullable
+              as bool,
+      userInfo: null == userInfo
+          ? _value.userInfo
+          : userInfo // ignore: cast_nullable_to_non_nullable
+              as User,
+      selectedSalesOrg: null == selectedSalesOrg
+          ? _value.selectedSalesOrg
+          : selectedSalesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get userInfo {
+    return $UserCopyWith<$Res>(_value.userInfo, (value) {
+      return _then(_value.copyWith(userInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get selectedSalesOrg {
+    return $SalesOrganisationCopyWith<$Res>(_value.selectedSalesOrg, (value) {
+      return _then(_value.copyWith(selectedSalesOrg: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
+  const _$_LoadStoredCustomerCode(
+      {required this.hidecustomer,
+      required this.userInfo,
+      required this.selectedSalesOrg});
+
+  @override
+  final bool hidecustomer;
+  @override
+  final User userInfo;
+  @override
+  final SalesOrganisation selectedSalesOrg;
+
+  @override
+  String toString() {
+    return 'CustomerCodeEvent.loadStoredCustomerCode(hidecustomer: $hidecustomer, userInfo: $userInfo, selectedSalesOrg: $selectedSalesOrg)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_LoadStoredCustomerCode &&
+            (identical(other.hidecustomer, hidecustomer) ||
+                other.hidecustomer == hidecustomer) &&
+            (identical(other.userInfo, userInfo) ||
+                other.userInfo == userInfo) &&
+            (identical(other.selectedSalesOrg, selectedSalesOrg) ||
+                other.selectedSalesOrg == selectedSalesOrg));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, hidecustomer, userInfo, selectedSalesOrg);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_LoadStoredCustomerCodeCopyWith<_$_LoadStoredCustomerCode> get copyWith =>
+      __$$_LoadStoredCustomerCodeCopyWithImpl<_$_LoadStoredCustomerCode>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
+    required TResult Function(
+            bool isRefresh,
+            String searchText,
+            bool hidecustomer,
+            User userInfo,
+            SalesOrganisation selectedSalesOrg)
+        fetch,
+    required TResult Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)
+        search,
+    required TResult Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)
+        loadMore,
+    required TResult Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)
+        loadStoredCustomerCode,
+    required TResult Function(String searchKey) updateSearchKey,
+  }) {
+    return loadStoredCustomerCode(hidecustomer, userInfo, selectedSalesOrg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult? Function(bool isRefresh, String searchText, bool hidecustomer,
+            User userInfo, SalesOrganisation selectedSalesOrg)?
+        fetch,
+    TResult? Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        search,
+    TResult? Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        loadMore,
+    TResult? Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        loadStoredCustomerCode,
+    TResult? Function(String searchKey)? updateSearchKey,
+  }) {
+    return loadStoredCustomerCode?.call(
+        hidecustomer, userInfo, selectedSalesOrg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
+    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
+            User userInfo, SalesOrganisation selectedSalesOrg)?
+        fetch,
+    TResult Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        search,
+    TResult Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        loadMore,
+    TResult Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        loadStoredCustomerCode,
+    TResult Function(String searchKey)? updateSearchKey,
+    required TResult orElse(),
+  }) {
+    if (loadStoredCustomerCode != null) {
+      return loadStoredCustomerCode(hidecustomer, userInfo, selectedSalesOrg);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Selected value) selected,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Search value) search,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_LoadStoredCustomerCode value)
+        loadStoredCustomerCode,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
+  }) {
+    return loadStoredCustomerCode(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Selected value)? selected,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Search value)? search,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
+    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
+  }) {
+    return loadStoredCustomerCode?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Selected value)? selected,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_Search value)? search,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    required TResult orElse(),
+  }) {
+    if (loadStoredCustomerCode != null) {
+      return loadStoredCustomerCode(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadStoredCustomerCode implements CustomerCodeEvent {
+  const factory _LoadStoredCustomerCode(
+          {required final bool hidecustomer,
+          required final User userInfo,
+          required final SalesOrganisation selectedSalesOrg}) =
+      _$_LoadStoredCustomerCode;
+
+  bool get hidecustomer;
+  User get userInfo;
+  SalesOrganisation get selectedSalesOrg;
+  @JsonKey(ignore: true)
+  _$$_LoadStoredCustomerCodeCopyWith<_$_LoadStoredCustomerCode> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1249,6 +1570,9 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     required TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         loadMore,
+    required TResult Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)
+        loadStoredCustomerCode,
     required TResult Function(String searchKey) updateSearchKey,
   }) {
     return updateSearchKey(searchKey);
@@ -1268,6 +1592,9 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     TResult? Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
+    TResult? Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        loadStoredCustomerCode,
     TResult? Function(String searchKey)? updateSearchKey,
   }) {
     return updateSearchKey?.call(searchKey);
@@ -1287,6 +1614,9 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         loadMore,
+    TResult Function(bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        loadStoredCustomerCode,
     TResult Function(String searchKey)? updateSearchKey,
     required TResult orElse(),
   }) {
@@ -1304,6 +1634,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Search value) search,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_LoadStoredCustomerCode value)
+        loadStoredCustomerCode,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
   }) {
     return updateSearchKey(this);
@@ -1317,6 +1649,7 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Search value)? search,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
   }) {
     return updateSearchKey?.call(this);
@@ -1330,6 +1663,7 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Search value)? search,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     required TResult orElse(),
   }) {

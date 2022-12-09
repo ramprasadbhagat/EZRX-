@@ -104,6 +104,18 @@ void main() {
             ApiFailure.other('fake-error'),
           ),
         );
+
+        when(() => customerCodeMockRepo.getCustomerCode(
+              fakeSaleOrg,
+              AccountSelector.empty().customerCode,
+              false,
+              0,
+              fakeUser,
+            )).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
       },
       act: (CustomerCodeBloc bloc) {
         bloc.add(CustomerCodeEvent.fetch(
@@ -138,14 +150,6 @@ void main() {
             customerCode: customerMockData.first.customerCodeSoldTo,
           ),
         ).thenAnswer((invocation) async => const Right(unit));
-
-        when(
-          () => customerCodeMockRepo.getCustomerCodeStorage(),
-        ).thenAnswer(
-          (invocation) async => Right(
-            AccountSelector.empty(),
-          ),
-        );
 
         when(() => customerCodeMockRepo.getCustomerCode(
             fakeSaleOrg,
@@ -366,6 +370,202 @@ void main() {
             ...customerMockData,
           ],
         )
+      ],
+    );
+
+    blocTest(
+      'loadStoredCustomerCode - Customer Code Storage returns failure',
+      build: () =>
+          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      setUp: () {
+        when(
+          () => customerCodeMockRepo.storeCustomerCode(
+            customerCode: customerMockData.first.customerCodeSoldTo,
+          ),
+        ).thenAnswer((invocation) async => const Right(unit));
+
+        when(() => customerCodeMockRepo.getCustomerCodeStorage())
+            .thenAnswer((_) async => const Left(ApiFailure.serverTimeout()));
+
+        when(() => customerCodeMockRepo.getCustomerCode(
+            fakeSaleOrg,
+            fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
+            false,
+            0,
+            fakeUser)).thenAnswer(
+          (invocation) async => Right(
+            customerMockData,
+          ),
+        );
+      },
+      act: (CustomerCodeBloc bloc) {
+        bloc.add(CustomerCodeEvent.loadStoredCustomerCode(
+            hidecustomer: false,
+            userInfo: fakeUser,
+            selectedSalesOrg: fakeSaleOrg));
+      },
+      expect: () => [
+        CustomerCodeState.initial().copyWith(isFetching: true),
+        CustomerCodeState.initial(),
+        CustomerCodeState.initial().copyWith(isFetching: true),
+        CustomerCodeState.initial().copyWith(
+            customerCodeInfo: customerMockData.first,
+            isFetching: false,
+            customerCodeList: customerMockData),
+      ],
+    );
+
+    blocTest(
+      'loadStoredCustomerCode - Customer Code Storage returns success but Get Customer Code returns failure',
+      build: () =>
+          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      setUp: () {
+        when(
+          () => customerCodeMockRepo.storeCustomerCode(
+            customerCode: customerMockData.first.customerCodeSoldTo,
+          ),
+        ).thenAnswer((invocation) async => const Right(unit));
+
+        when(() => customerCodeMockRepo.getCustomerCodeStorage()).thenAnswer(
+            (_) async => const Right(AccountSelector(
+                customerCode: 'mockCustomerCode',
+                salesOrg: 'mockSalesOrg',
+                shippingAddress: 'mockShippingAddress')));
+
+        when(() => customerCodeMockRepo.getCustomerCode(
+            fakeSaleOrg, 'mockCustomerCode', false, 0, fakeUser)).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.serverTimeout(),
+          ),
+        );
+
+        when(() => customerCodeMockRepo.getCustomerCode(
+            fakeSaleOrg,
+            fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
+            false,
+            0,
+            fakeUser)).thenAnswer(
+          (invocation) async => Right(
+            customerMockData,
+          ),
+        );
+      },
+      act: (CustomerCodeBloc bloc) {
+        bloc.add(CustomerCodeEvent.loadStoredCustomerCode(
+            hidecustomer: false,
+            userInfo: fakeUser,
+            selectedSalesOrg: fakeSaleOrg));
+      },
+      expect: () => [
+        CustomerCodeState.initial().copyWith(isFetching: true),
+        CustomerCodeState.initial(),
+        CustomerCodeState.initial().copyWith(isFetching: true),
+        CustomerCodeState.initial().copyWith(
+            customerCodeInfo: customerMockData.first,
+            isFetching: false,
+            customerCodeList: customerMockData),
+      ],
+    );
+
+    blocTest(
+      'loadStoredCustomerCode - Customer Code Storage returns success and Get Customer Code returns success with empty list',
+      build: () =>
+          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      setUp: () {
+        when(
+          () => customerCodeMockRepo.storeCustomerCode(
+            customerCode: customerMockData.first.customerCodeSoldTo,
+          ),
+        ).thenAnswer((invocation) async => const Right(unit));
+
+        when(() => customerCodeMockRepo.getCustomerCodeStorage()).thenAnswer(
+            (_) async => const Right(AccountSelector(
+                salesOrg: 'mockSalesOrg',
+                customerCode: 'mockCustomerCode',
+                shippingAddress: 'mockShippingAddress')));
+
+        when(() => customerCodeMockRepo.getCustomerCode(
+            fakeSaleOrg, 'mockCustomerCode', false, 0, fakeUser)).thenAnswer(
+          (invocation) async => const Right([]),
+        );
+
+        when(() => customerCodeMockRepo.getCustomerCode(
+            fakeSaleOrg,
+            fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
+            false,
+            0,
+            fakeUser)).thenAnswer(
+          (invocation) async => Right(
+            customerMockData,
+          ),
+        );
+      },
+      act: (CustomerCodeBloc bloc) {
+        bloc.add(CustomerCodeEvent.loadStoredCustomerCode(
+            hidecustomer: false,
+            userInfo: fakeUser,
+            selectedSalesOrg: fakeSaleOrg));
+      },
+      expect: () => [
+        CustomerCodeState.initial().copyWith(isFetching: true),
+        CustomerCodeState.initial(),
+        CustomerCodeState.initial().copyWith(isFetching: true),
+        CustomerCodeState.initial().copyWith(
+            customerCodeInfo: customerMockData.first,
+            isFetching: false,
+            customerCodeList: customerMockData),
+      ],
+    );
+
+    blocTest(
+      'loadStoredCustomerCode - Customer Code Storage returns success and Get Customer Code returns success with populated list',
+      build: () =>
+          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      setUp: () {
+        when(
+          () => customerCodeMockRepo.storeCustomerCode(
+            customerCode: customerMockData.first.customerCodeSoldTo,
+          ),
+        ).thenAnswer((invocation) async => const Right(unit));
+
+        when(() => customerCodeMockRepo.getCustomerCodeStorage()).thenAnswer(
+            (_) async => const Right(AccountSelector(
+                salesOrg: 'mockSalesOrg',
+                customerCode: 'mockCustomerCode',
+                shippingAddress: 'mockShippingAddress')));
+
+        when(() => customerCodeMockRepo.getCustomerCode(
+            fakeSaleOrg, 'mockCustomerCode', false, 0, fakeUser)).thenAnswer(
+          (invocation) async => Right([customerMockData.first]),
+        );
+
+        when(() => customerCodeMockRepo.getCustomerCode(
+            fakeSaleOrg,
+            fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
+            false,
+            0,
+            fakeUser)).thenAnswer(
+          (invocation) async => Right(
+            customerMockData,
+          ),
+        );
+      },
+      act: (CustomerCodeBloc bloc) {
+        bloc.add(CustomerCodeEvent.loadStoredCustomerCode(
+            hidecustomer: false,
+            userInfo: fakeUser,
+            selectedSalesOrg: fakeSaleOrg));
+      },
+      expect: () => [
+        CustomerCodeState.initial().copyWith(isFetching: true),
+        CustomerCodeState.initial().copyWith(
+            isSearchActive: true,
+            customerCodeInfo: customerMockData.first,
+            isFetching: false,
+            customerCodeList: [customerMockData.first],
+            searchKey: SearchKey(
+              customerMockData.first.customerCodeSoldTo,
+            )),
       ],
     );
   });

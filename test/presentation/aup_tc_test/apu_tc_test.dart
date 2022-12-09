@@ -22,6 +22,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+import '../../application/order/cart/cart_bloc_test.dart';
 import '../../utils/material_frame_wrapper.dart';
 import '../../utils/tester_utils.dart';
 import '../../utils/widget_utils.dart';
@@ -55,6 +56,7 @@ class PaymentCustomerInfoMockBloc extends MockBloc<
 
 void main() {
   late GetIt locator;
+  late SalesOrgBloc mockSalesOrgBloc;
   late AuthBloc mockAuthBloc;
   late AppRouter autoRouterMock;
   late MockAupTcBloc mockAupTcBloc;
@@ -65,6 +67,7 @@ void main() {
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
+    mockSalesOrgBloc = MockSalesOrgBloc();
     mockAuthBloc = MockAuthBloc();
     mockAupTcBloc = MockAupTcBloc();
     locator = GetIt.instance;
@@ -149,6 +152,9 @@ void main() {
         WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
           providers: [
+            BlocProvider<SalesOrgBloc>(
+              create: (context) => mockSalesOrgBloc,
+            ),
             BlocProvider<AuthBloc>(
               create: (context) => authBlocMock,
             ),

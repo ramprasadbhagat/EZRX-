@@ -73,6 +73,66 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         },
       );
     });
+    on<_LoadStoredCustomerCode>((e, emit) async {
+      emit(state.copyWith(
+        isFetching: true,
+      ));
+
+      final customerStorageSuccessOrFailure =
+          await customerCodeRepository.getCustomerCodeStorage();
+
+      final lastSavedCustomerCode = customerStorageSuccessOrFailure.fold(
+        (_) => '',
+        (accountSelector) => accountSelector.customerCode,
+      );
+
+      if (lastSavedCustomerCode.isEmpty) {
+        add(
+          CustomerCodeEvent.fetch(
+            hidecustomer: e.hidecustomer,
+            userInfo: e.userInfo,
+            selectedSalesOrg: e.selectedSalesOrg,
+          ),
+        );
+
+        return;
+      }
+
+      final failureOrSuccess = await customerCodeRepository.getCustomerCode(
+        e.selectedSalesOrg,
+        lastSavedCustomerCode,
+        e.hidecustomer,
+        state.customerCodeList.length,
+        e.userInfo,
+      );
+
+      final customerCodeInfoList =
+          failureOrSuccess.fold<List<CustomerCodeInfo>>(
+        (_) => [],
+        (customerCodeList) => customerCodeList,
+      );
+
+      if (customerCodeInfoList.isEmpty) {
+        add(
+          CustomerCodeEvent.fetch(
+            hidecustomer: e.hidecustomer,
+            userInfo: e.userInfo,
+            selectedSalesOrg: e.selectedSalesOrg,
+          ),
+        );
+
+        return;
+      }
+
+      emit(state.copyWith(
+        customerCodeList: customerCodeInfoList,
+        isFetching: false,
+        isSearchActive: true,
+        searchKey:
+            SearchKey.search(customerCodeInfoList.first.customerCodeSoldTo),
+        customerCodeInfo: customerCodeInfoList.first,
+      ));
+    });
     on<_Fetch>(
       (e, emit) async {
         // We have very bad API design so right now we using ugly implementation
@@ -122,30 +182,6 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
           if (apiFailure) {
             break;
           }
-        }
-        if (!apiFailure) {
-          final getCustomerCodeFailureOrSuccess =
-              await customerCodeRepository.getCustomerCodeStorage();
-
-          // found last selected from local storage => apply
-          // not found last selected from local storage => use first one of the current list
-          final customerCode = getCustomerCodeFailureOrSuccess.fold(
-            (_) {
-              return finalCustomerCodeInfoList.isNotEmpty
-                  ? finalCustomerCodeInfoList.first
-                  : state.customerCodeInfo;
-            },
-            (accountSelector) {
-              final customerCodeSoldTo = accountSelector.customerCode;
-
-              return finalCustomerCodeInfoList.firstWhere(
-                (e) => e.customerCodeSoldTo == customerCodeSoldTo,
-                orElse: () => finalCustomerCodeInfoList.isEmpty
-                    ? CustomerCodeInfo.empty()
-                    : finalCustomerCodeInfoList.first,
-              );
-            },
-          );
           if (!emit.isDone) {
             emit(
               state.copyWith(
@@ -153,7 +189,9 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
                 canLoadMore: canLoadMore,
-                customerCodeInfo: customerCode,
+                customerCodeInfo: finalCustomerCodeInfoList.isNotEmpty
+                    ? finalCustomerCodeInfoList.first
+                    : CustomerCodeInfo.empty(),
               ),
             );
           }

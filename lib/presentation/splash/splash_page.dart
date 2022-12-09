@@ -70,6 +70,10 @@ class SplashPage extends StatelessWidget {
                       salesOrganisations: state.userSalesOrganisations,
                     ),
                   );
+            } else {
+              context
+                  .read<SalesOrgBloc>()
+                  .add(const SalesOrgEvent.initialized());
             }
             if (state.isSalesRep) {
               context.read<SalesRepBloc>().add(

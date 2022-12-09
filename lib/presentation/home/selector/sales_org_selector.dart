@@ -53,11 +53,16 @@ class SalesOrgSelector extends StatelessWidget {
 
                 if (state.haveSelectedSalesOrganisation) {
                   _callBannerAndDocType(context, state, false);
+                } else {
+                  _initBlocs(context);
                 }
               },
               (_) {},
             ),
           );
+          if (!state.haveSelectedSalesOrganisation) {
+            _initBlocs(context);
+          }
           if (state.haveSelectedSalesOrganisation &&
               state.configs != SalesOrganisationConfigs.empty()) {
             _callBannerAndDocType(context, state, true);
@@ -137,6 +142,14 @@ class SalesOrgSelector extends StatelessWidget {
     );
   }
 
+  void _initBlocs(BuildContext context) {
+    context.read<BannerBloc>().add(const BannerEvent.initialized());
+    context
+        .read<OrderDocumentTypeBloc>()
+        .add(const OrderDocumentTypeEvent.initialized());
+    context.read<CustomerCodeBloc>().add(const CustomerCodeEvent.initialized());
+  }
+
   void _callBannerAndDocType(
     BuildContext context,
     SalesOrgState state,
@@ -156,10 +169,9 @@ class SalesOrgSelector extends StatelessWidget {
 
     if (fetchCustomer) {
       context.read<CustomerCodeBloc>().add(
-            CustomerCodeEvent.fetch(
+            CustomerCodeEvent.loadStoredCustomerCode(
               hidecustomer: state.hideCustomer,
               selectedSalesOrg: state.salesOrganisation,
-              isRefresh: true,
               userInfo: context.read<UserBloc>().state.user,
             ),
           );
