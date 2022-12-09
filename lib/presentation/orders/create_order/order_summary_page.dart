@@ -270,6 +270,7 @@ class _Stepper extends StatelessWidget {
         : BillToInfo.empty();
 
     return BlocConsumer<OrderSummaryBloc, OrderSummaryState>(
+      key: const Key('orderSUmmaryBlocConsumer'),
       listenWhen: (previous, current) =>
           previous.isSubmitting != current.isSubmitting,
       listener: (context, orderSummaryState) {
@@ -513,6 +514,7 @@ class _BillToCustomerStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: const Key('billToCustomer'),
       children: WidgetHelper.getBillToCustomerDetails(billToInfo),
     );
   }
@@ -576,6 +578,7 @@ class _AdditionalInformationStep extends StatelessWidget {
           child: Column(
             children: [
               _TextFormField(
+                keyText: 'customerPOReferenceKey',
                 labelText: 'Customer PO Reference',
                 maxLength: 35,
                 saveData: saveData,
@@ -585,6 +588,7 @@ class _AdditionalInformationStep extends StatelessWidget {
               ),
               state.configs.enableSpecialInstructions
                   ? _TextFormField(
+                      keyText: 'specialInstruction',
                       labelText: 'Special Instructions',
                       keyboardType: TextInputType.multiline,
                       maxLength: 132,
@@ -595,6 +599,7 @@ class _AdditionalInformationStep extends StatelessWidget {
                   : const SizedBox.shrink(),
               state.configs.enableReferenceNote
                   ? _TextFormField(
+                      keyText: 'referenceNote',
                       labelText: 'Reference Note',
                       maxLength: 50,
                       keyboardType: TextInputType.multiline,
@@ -606,6 +611,7 @@ class _AdditionalInformationStep extends StatelessWidget {
               state.configs.enableCollectiveNumber &&
                       context.read<UserBloc>().state.user.role.type.isSalesRep
                   ? _TextFormField(
+                      keyText: 'collectiveNumber',
                       labelText: 'Collective Number',
                       maxLength: 10,
                       saveData: saveData,
@@ -615,6 +621,7 @@ class _AdditionalInformationStep extends StatelessWidget {
                   : const SizedBox.shrink(),
               state.configs.enableMobileNumber
                   ? _TextFormField(
+                      keyText: 'contactPersonKey',
                       labelText: 'Contact Person',
                       maxLength: 50,
                       saveData: saveData,
@@ -624,6 +631,7 @@ class _AdditionalInformationStep extends StatelessWidget {
                   : const SizedBox.shrink(),
               state.configs.enableMobileNumber
                   ? _TextFormField(
+                      keyText: 'contactNumberKey',
                       labelText: 'Contact Number',
                       maxLength: 10,
                       keyboardType: TextInputType.phone,
@@ -782,6 +790,7 @@ class _CartDetails extends StatelessWidget {
 }
 
 class _TextFormField extends StatelessWidget {
+  final String keyText;
   final String labelText;
   final AdditionalInfoLabelList label;
   final int maxLength;
@@ -789,6 +798,7 @@ class _TextFormField extends StatelessWidget {
   final Function saveData;
   final Function validateData;
   const _TextFormField({
+    required this.keyText,
     required this.labelText,
     required this.label,
     required this.maxLength,
@@ -803,6 +813,7 @@ class _TextFormField extends StatelessWidget {
     return Column(
       children: [
         TextFormField(
+          key: Key(keyText),
           keyboardType: keyboardType,
           initialValue: data[label],
           maxLength: maxLength,

@@ -9,11 +9,14 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -21,8 +24,11 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_summary_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -77,7 +83,42 @@ class OrderEligibilityBlocMock
     extends MockBloc<OrderEligibilityEvent, OrderEligibilityState>
     implements OrderEligibilityBloc {}
 
+class OrderHistoryListBlocMock
+    extends MockBloc<OrderHistoryListEvent, OrderHistoryListState>
+    implements OrderHistoryListBloc {}
+
+class OrderHistoryFilterBlocMock
+    extends MockBloc<OrderHistoryFilterEvent, OrderHistoryFilterState>
+    implements OrderHistoryFilterBloc {}
+
 class AutoRouterMock extends Mock implements AppRouter {}
+
+enum StepVariant {
+  three,
+  five,
+}
+
+OrderSummaryState _getState(StepVariant? value) {
+  switch (value!.name) {
+    case 'three':
+      return OrderSummaryState.initial().copyWith(
+        step: 3,
+        maxSteps: 5,
+      );
+    case 'five':
+      return OrderSummaryState.initial().copyWith(
+        step: 5,
+        maxSteps: 5,
+      );
+    default:
+      return OrderSummaryState.initial().copyWith(
+        step: 3,
+        maxSteps: 5,
+      );
+  }
+}
+
+final variants = ValueVariant({...StepVariant.values});
 
 void main() {
   late OrderSummaryBloc orderSummaryBlocMock;
@@ -93,7 +134,9 @@ void main() {
   late PaymentTermBloc paymentTermBlocMock;
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late AppRouter autoRouterMock;
-  late OrderEligibilityBlocMock orderEligibilityBlocMock;
+  late OrderEligibilityBloc orderEligibilityBlocMock;
+  late OrderHistoryListBloc orderHistoryListBlocMock;
+  late OrderHistoryFilterBloc orderHistoryFilterBlocMock;
   setUpAll(
     () {
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
@@ -116,6 +159,8 @@ void main() {
       paymentTermBlocMock = PaymentTermBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       orderEligibilityBlocMock = OrderEligibilityBlocMock();
+      orderHistoryListBlocMock = OrderHistoryListBlocMock();
+      orderHistoryFilterBlocMock = OrderHistoryFilterBlocMock();
       autoRouterMock = locator<AppRouter>();
 
       when(() => orderSummaryBlocMock.state)
@@ -156,6 +201,7 @@ void main() {
           disableOrderType: false,
           enableCollectiveNumber: true,
           enablePaymentTerms: true,
+          ponRequired: true,
         ),
         salesOrganisation: SalesOrganisation.empty().copyWith(
           salesOrg: SalesOrg('2601'),
@@ -204,6 +250,10 @@ void main() {
                 create: (context) => orderDocumentTypeBlocMock),
             BlocProvider<OrderEligibilityBloc>(
                 create: (context) => orderEligibilityBlocMock),
+            BlocProvider<OrderHistoryListBloc>(
+                create: (context) => orderHistoryListBlocMock),
+            BlocProvider<OrderHistoryFilterBloc>(
+                create: (context) => orderHistoryFilterBlocMock),
           ],
           child: const OrderSummaryPage(),
         );
@@ -357,6 +407,110 @@ void main() {
           await tester.tap(saveButtonKey.at(5));
           await tester.pumpAndSettle();
         },
+      );
+
+      testWidgets(
+        '=> test submitOrder not validated',
+        (tester) async {
+          when(
+            () => orderSummaryBlocMock.state,
+          ).thenReturn(
+            OrderSummaryState.initial().copyWith(
+              step: 5,
+              maxSteps: 5,
+            ),
+          );
+          when(
+            () => orderEligibilityBlocMock.state,
+          ).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+              eligibleForOrderSubmit: true,
+            ),
+          );
+          tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+          tester.binding.window.devicePixelRatioTestValue = 1.0;
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+          final cartDetailsKey = find.byKey(const Key('_cartDetailsKey'));
+          expect(cartDetailsKey, findsOneWidget);
+          final submitButtonKey = find.text('Submit');
+          expect(submitButtonKey, findsNWidgets(6));
+          await tester.tap(submitButtonKey.at(5));
+          await tester.pumpAndSettle();
+        },
+      );
+
+      testWidgets(
+        '=> test submitOrder success',
+        (tester) async {
+          final expectedStates = [_getState(variants.currentValue!)];
+          whenListen(orderSummaryBlocMock, Stream.fromIterable(expectedStates));
+          when(() => salesOrgBlocMock.state)
+              .thenReturn(SalesOrgState.initial().copyWith(
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              enableReferenceNote: true,
+              enableVat: true,
+              enableFutureDeliveryDay: true,
+              enableMobileNumber: true,
+              enableSpecialInstructions: true,
+              disableOrderType: false,
+              enableCollectiveNumber: true,
+              enablePaymentTerms: true,
+              ponRequired: true,
+            ),
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2601'),
+            ),
+          ));
+          when(() => paymentTermBlocMock.state)
+              .thenReturn(PaymentTermState.initial().copyWith(
+            paymentTermsDisplayLevels: ['0001-Test'],
+          ));
+          when(
+            () => orderEligibilityBlocMock.state,
+          ).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+              eligibleForOrderSubmit: true,
+            ),
+          );
+
+          tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+          tester.binding.window.devicePixelRatioTestValue = 1.0;
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+          final contactNumberKey = find.byKey(const Key('contactNumberKey'));
+          expect(contactNumberKey, findsOneWidget);
+          await tester.enterText(contactNumberKey, '1234567890');
+          await tester.pump(const Duration(seconds: 2));
+          final contactPersonKey = find.byKey(const Key('contactPersonKey'));
+          expect(contactPersonKey, findsOneWidget);
+          await tester.enterText(contactPersonKey, 'Lionel Messi');
+          await tester.pump(const Duration(seconds: 2));
+          final customerPOReferenceKey =
+              find.byKey(const Key('customerPOReferenceKey'));
+          expect(customerPOReferenceKey, findsOneWidget);
+          await tester.enterText(customerPOReferenceKey, 'PO Reference');
+          await tester.pump(const Duration(seconds: 2));
+
+          final paymentTermKey = find.byKey(const Key('_paymentTermTextKey'));
+          expect(paymentTermKey, findsOneWidget);
+          final textField =
+              paymentTermKey.evaluate().single.widget as TextFormField;
+          textField.controller!.text = '0001-Test';
+          await tester.pump(const Duration(seconds: 2));
+          if (orderSummaryBlocMock.state.step == 3) {
+            final continueButtonKey = find.text('Continue');
+            expect(continueButtonKey, findsNWidgets(6));
+            await tester.tap(continueButtonKey.at(3));
+            await tester.pump();
+          } else {
+            final submitButtonKey = find.text('Submit');
+            expect(submitButtonKey, findsNWidgets(6));
+            await tester.tap(submitButtonKey.at(5));
+            await tester.pump();
+          }
+        },
+        variant: variants,
       );
 
       testWidgets(
@@ -567,6 +721,144 @@ void main() {
             skipOffstage: false,
           );
           expect(customerDetailsKey, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        '=> test BillToCustomerInfo',
+        (tester) async {
+          when(() => orderSummaryBlocMock.state)
+              .thenReturn(OrderSummaryState.initial().copyWith(
+            step: 3,
+            maxSteps: 5,
+          ));
+          when(() => customerCodeBlocMock.state).thenReturn(
+            CustomerCodeState.initial().copyWith(
+              customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+                billToInfos: <BillToInfo>[
+                  BillToInfo.empty().copyWith(billToCustomerCode: '123456789'),
+                ],
+                shipToInfos: <ShipToInfo>[
+                  ShipToInfo.empty().copyWith(city1: 'KOL'),
+                ],
+                customerCodeSoldTo: '987654321',
+              ),
+            ),
+          );
+          when(() => salesOrgBlocMock.state)
+              .thenReturn(SalesOrgState.initial().copyWith(
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              enableReferenceNote: true,
+              enableVat: true,
+              enableFutureDeliveryDay: true,
+              enableMobileNumber: true,
+              enableSpecialInstructions: true,
+              disableOrderType: false,
+              enableCollectiveNumber: true,
+              enablePaymentTerms: true,
+              enableBillTo: true,
+            ),
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2601'),
+            ),
+          ));
+          when(() => userBlocMock.state).thenReturn(UserState.initial()
+              .copyWith(
+                  user: User.empty().copyWith(
+                      role: Role.empty().copyWith(type: RoleType('client')))));
+
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+          final billToKey = find.byKey(
+            const Key('billToCustomer'),
+            skipOffstage: false,
+          );
+          expect(billToKey, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        '=> test move to order success',
+        (tester) async {
+          final expectedStates = [
+            OrderSummaryState.initial().copyWith(
+              isSubmitting: true,
+              isSubmitSuccess: false,
+            ),
+            OrderSummaryState.initial().copyWith(
+              isSubmitting: false,
+              isSubmitSuccess: true,
+            ),
+            OrderSummaryState.initial().copyWith(
+              isSubmitting: true,
+              isSubmitSuccess: false,
+              apiFailureOrSuccessOption: optionOf(
+                const Left(
+                  ApiFailure.other('Fake-Error'),
+                ),
+              ),
+            ),
+          ];
+          whenListen(orderSummaryBlocMock, Stream.fromIterable(expectedStates));
+
+          when(() => orderHistoryFilterBlocMock.state).thenReturn(
+            OrderHistoryFilterState.initial().copyWith(
+              isSubmitting: false,
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+          final orderSummary = find.byKey(
+            const Key('orderSUmmaryBlocConsumer'),
+            skipOffstage: false,
+          );
+          expect(orderSummary, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        '=> test cart items',
+        (tester) async {
+          when(() => orderSummaryBlocMock.state)
+              .thenReturn(OrderSummaryState.initial().copyWith(
+            step: 5,
+            maxSteps: 5,
+          ));
+          final expectedStates = [
+            CartState.initial().copyWith(
+              selectedItemsMaterialNumber: <MaterialNumber>[
+                MaterialNumber('123456789'),
+              ],
+              cartItemList: <PriceAggregate>[
+                PriceAggregate.empty().copyWith(
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123456789'),
+                  ),
+                ),
+                PriceAggregate.empty().copyWith(
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('987654321'),
+                  ),
+                ),
+              ],
+            ),
+          ];
+          whenListen(cartBlocMock, Stream.fromIterable(expectedStates));
+
+          when(() => orderHistoryFilterBlocMock.state).thenReturn(
+            OrderHistoryFilterState.initial().copyWith(
+              isSubmitting: false,
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+          final cartDetails = find.byKey(
+            const Key('_cartDetailsKey'),
+            skipOffstage: false,
+          );
+          expect(cartDetails, findsOneWidget);
         },
       );
 

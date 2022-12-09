@@ -16,7 +16,6 @@ import 'package:flutter/material.dart' as _i30;
 
 import '../../application/order/material_filter/material_filter_bloc.dart'
     as _i31;
-import '../../application/order/order_success/order_success_page.dart' as _i18;
 import '../../domain/account/entities/bill_to_info.dart' as _i35;
 import '../../domain/account/entities/customer_code_info.dart' as _i36;
 import '../../domain/account/entities/sales_organisation_configs.dart' as _i38;
@@ -48,6 +47,7 @@ import '../orders/create_order/material_filter.dart' as _i13;
 import '../orders/create_order/material_list.dart' as _i12;
 import '../orders/create_order/material_root.dart' as _i11;
 import '../orders/create_order/order_summary_page.dart' as _i17;
+import '../orders/order_success/order_success_page.dart' as _i18;
 import '../orders/order_template/order_template_detail_page.dart' as _i19;
 import '../orders/order_template/order_template_list_page.dart' as _i15;
 import '../orders/saved_order/saved_order_detail_page.dart' as _i22;
