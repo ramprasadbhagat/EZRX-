@@ -24,6 +24,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HistoryTab extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
   HistoryTab({
     Key? key,
   }) : super(key: key);
@@ -56,6 +57,41 @@ class HistoryTab extends StatelessWidget {
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        BlocBuilder<OrderHistoryFilterBloc,
+                            OrderHistoryFilterState>(
+                          builder: (context, state) {
+                            return InkWell(
+                              onTap: () {
+                                context.read<OrderHistoryFilterBloc>().add(
+                                      OrderHistoryFilterEvent.sortByDate(
+                                        state.sortDirection == 'desc'
+                                            ? 'asc'
+                                            : 'desc',
+                                      ),
+                                    );
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  const SizedBox(width: 12),
+                                  Text(
+                                    'Order Date: '.tr(),
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: ZPColors.kPrimaryColor,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  const Icon(
+                                    Icons.swap_vert_outlined,
+                                    color: ZPColors.darkGray,
+                                    size: 12,
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
                         InkWell(
                           key: const Key('statusFilterButton'),
                           onTap: () {
@@ -180,7 +216,8 @@ class HistoryTab extends StatelessWidget {
         listenWhen: (previous, current) =>
             previous.isSubmitting != current.isSubmitting &&
                 current.isSubmitting ||
-            !scaffoldKey.currentState!.isEndDrawerOpen,
+            !scaffoldKey.currentState!.isEndDrawerOpen ||
+            previous.sortDirection != current.sortDirection,
         listener: (context, state) {
           final hasCustomerCodeInfo = context
               .read<CustomerCodeBloc>()
@@ -203,6 +240,7 @@ class HistoryTab extends StatelessWidget {
                     shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
                     user: context.read<UserBloc>().state.user,
                     orderHistoryFilter: state.orderHistoryFilterList,
+                    sortDirection: state.sortDirection,
                   ),
                 );
           }
@@ -272,6 +310,10 @@ class HistoryTab extends StatelessWidget {
                                     user: context.read<UserBloc>().state.user,
                                     orderHistoryFilter:
                                         OrderHistoryFilter.empty(),
+                                    sortDirection: context
+                                        .read<OrderHistoryFilterBloc>()
+                                        .state
+                                        .sortDirection,
                                   ),
                                 );
                           }
@@ -292,6 +334,10 @@ class HistoryTab extends StatelessWidget {
                                     .state
                                     .shipToInfo,
                                 user: context.read<UserBloc>().state.user,
+                                sortDirection: context
+                                    .read<OrderHistoryFilterBloc>()
+                                    .state
+                                    .sortDirection,
                                 orderHistoryFilter: OrderHistoryFilter.empty(),
                               ),
                             ),

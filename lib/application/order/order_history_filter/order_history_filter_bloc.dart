@@ -2,8 +2,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+
 part 'order_history_filter_event.dart';
+
 part 'order_history_filter_state.dart';
+
 part 'order_history_filter_bloc.freezed.dart';
 
 class OrderHistoryFilterBloc
@@ -11,6 +14,7 @@ class OrderHistoryFilterBloc
   OrderHistoryFilterBloc() : super(OrderHistoryFilterState.initial()) {
     on<OrderHistoryFilterEvent>(_onEvent);
   }
+
   Future<void> _onEvent(
     OrderHistoryFilterEvent event,
     Emitter<OrderHistoryFilterState> emit,
@@ -33,7 +37,7 @@ class OrderHistoryFilterBloc
           emit(state.copyWith(
             showErrorMessages: true,
             isSubmitting: false,
-            isAppliedFilter:false,
+            isAppliedFilter: false,
           ));
         }
       },
@@ -44,7 +48,7 @@ class OrderHistoryFilterBloc
           ),
           isSubmitting: false,
           showErrorMessages: false,
-          isAppliedFilter:false,
+          isAppliedFilter: false,
         ),
       ),
       setToDate: (e) => emit(
@@ -54,7 +58,7 @@ class OrderHistoryFilterBloc
           ),
           isSubmitting: false,
           showErrorMessages: false,
-          isAppliedFilter:false,
+          isAppliedFilter: false,
         ),
       ),
       orderIdChanged: (e) => emit(
@@ -64,7 +68,7 @@ class OrderHistoryFilterBloc
           ),
           isSubmitting: false,
           showErrorMessages: false,
-          isAppliedFilter:false,
+          isAppliedFilter: false,
         ),
       ),
       poNumberChanged: (e) => emit(
@@ -74,7 +78,7 @@ class OrderHistoryFilterBloc
           ),
           isSubmitting: false,
           showErrorMessages: false,
-          isAppliedFilter:false,
+          isAppliedFilter: false,
         ),
       ),
       principalSearchChanged: (e) => emit(
@@ -84,7 +88,7 @@ class OrderHistoryFilterBloc
           ),
           isSubmitting: false,
           showErrorMessages: false,
-          isAppliedFilter:false,
+          isAppliedFilter: false,
         ),
       ),
       materialSearchChanged: (e) => emit(
@@ -94,7 +98,15 @@ class OrderHistoryFilterBloc
           ),
           isSubmitting: false,
           showErrorMessages: false,
-          isAppliedFilter:false,
+          isAppliedFilter: false,
+        ),
+      ),
+      sortByDate: (event) => emit(
+        state.copyWith(
+          isSubmitting: false,
+          showErrorMessages: false,
+          isAppliedFilter: false,
+          sortDirection: event.sortDirection,
         ),
       ),
     );

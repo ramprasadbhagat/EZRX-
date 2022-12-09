@@ -8,6 +8,7 @@ class OrderHistoryListEvent with _$OrderHistoryListEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required User user,
+    required String sortDirection,
     required OrderHistoryFilter orderHistoryFilter,
   }) = _Fetch;
   const factory OrderHistoryListEvent.loadMore({
@@ -15,6 +16,7 @@ class OrderHistoryListEvent with _$OrderHistoryListEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required User user,
+    required String sortDirection,
     required OrderHistoryFilter orderHistoryFilter,
   }) = _LoadMore;
 }

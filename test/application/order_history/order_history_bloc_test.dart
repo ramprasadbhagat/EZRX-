@@ -23,8 +23,11 @@ void main() {
   final orderHistoryRepository = OrderHistoryRepoMock();
   final mockUser = User.empty();
   final mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty();
-  final mockCustomerCodeInfo = CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: 'fake-customer-code');
-  final mockShipToInfo =  ShipToInfo.empty().copyWith(building: 'fakeBuilding', shipToCustomerCode: 'fake-ship-to-customer-code');
+  final mockCustomerCodeInfo = CustomerCodeInfo.empty()
+      .copyWith(customerCodeSoldTo: 'fake-customer-code');
+  final mockShipToInfo = ShipToInfo.empty().copyWith(
+      building: 'fakeBuilding',
+      shipToCustomerCode: 'fake-ship-to-customer-code');
   final mockOrderHistoryFilter = OrderHistoryFilter.empty();
   late final OrderHistory orderHistoryListMock;
   const fakeSort = 'desc';
@@ -62,13 +65,16 @@ void main() {
         ),
       );
     },
-    act: (OrderHistoryListBloc bloc) => bloc.add(OrderHistoryListEvent.fetch(
-      user: mockUser,
-      customerCodeInfo: mockCustomerCodeInfo,
-      salesOrgConfigs: mockSalesOrganisationConfigs,
-      shipToInfo: mockShipToInfo,
-      orderHistoryFilter: mockOrderHistoryFilter,
-    )),
+    act: (OrderHistoryListBloc bloc) => bloc.add(
+      OrderHistoryListEvent.fetch(
+        user: mockUser,
+        customerCodeInfo: mockCustomerCodeInfo,
+        salesOrgConfigs: mockSalesOrganisationConfigs,
+        shipToInfo: mockShipToInfo,
+        orderHistoryFilter: mockOrderHistoryFilter,
+        sortDirection: 'desc',
+      ),
+    ),
     expect: () => [
       OrderHistoryListState.initial().copyWith(
         isFetching: true,
@@ -107,6 +113,7 @@ void main() {
       salesOrgConfigs: mockSalesOrganisationConfigs,
       shipToInfo: mockShipToInfo,
       orderHistoryFilter: mockOrderHistoryFilter,
+      sortDirection: 'desc',
     )),
     expect: () => [
       OrderHistoryListState.initial().copyWith(
@@ -162,6 +169,7 @@ void main() {
         salesOrgConfigs: mockSalesOrganisationConfigs,
         shipToInfo: mockShipToInfo,
         orderHistoryFilter: mockOrderHistoryFilter,
+        sortDirection: 'desc',
       ))
       ..add(OrderHistoryListEvent.loadMore(
         user: mockUser,
@@ -169,6 +177,7 @@ void main() {
         salesOrgConfigs: mockSalesOrganisationConfigs,
         shipToInfo: mockShipToInfo,
         orderHistoryFilter: mockOrderHistoryFilter,
+        sortDirection: 'desc',
       )),
     expect: () => [
       OrderHistoryListState.initial().copyWith(
@@ -243,6 +252,7 @@ void main() {
         salesOrgConfigs: mockSalesOrganisationConfigs,
         shipToInfo: mockShipToInfo,
         orderHistoryFilter: mockOrderHistoryFilter,
+        sortDirection: 'desc',
       ))
       ..add(OrderHistoryListEvent.loadMore(
         user: mockUser,
@@ -250,6 +260,7 @@ void main() {
         salesOrgConfigs: mockSalesOrganisationConfigs,
         shipToInfo: mockShipToInfo,
         orderHistoryFilter: mockOrderHistoryFilter,
+        sortDirection: 'desc',
       )),
     expect: () => [
       OrderHistoryListState.initial().copyWith(

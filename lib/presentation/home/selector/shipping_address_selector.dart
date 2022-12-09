@@ -124,6 +124,7 @@ class ShipCodeSelector extends StatelessWidget {
                           .state
                           .customerCodeInfo,
                       orderHistoryFilter: OrderHistoryFilter.empty(),
+                      sortDirection: 'desc',
                     ),
                   );
 

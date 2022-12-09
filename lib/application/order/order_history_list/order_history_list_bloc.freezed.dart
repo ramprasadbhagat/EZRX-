@@ -24,6 +24,7 @@ mixin _$OrderHistoryListEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)
         fetch,
     required TResult Function(
@@ -31,6 +32,7 @@ mixin _$OrderHistoryListEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)
         loadMore,
   }) =>
@@ -43,6 +45,7 @@ mixin _$OrderHistoryListEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         fetch,
     TResult? Function(
@@ -50,6 +53,7 @@ mixin _$OrderHistoryListEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         loadMore,
   }) =>
@@ -62,6 +66,7 @@ mixin _$OrderHistoryListEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         fetch,
     TResult Function(
@@ -69,6 +74,7 @@ mixin _$OrderHistoryListEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         loadMore,
     required TResult orElse(),
@@ -161,6 +167,7 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)
         fetch,
     required TResult Function(
@@ -168,6 +175,7 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)
         loadMore,
   }) {
@@ -183,6 +191,7 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         fetch,
     TResult? Function(
@@ -190,6 +199,7 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         loadMore,
   }) {
@@ -205,6 +215,7 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         fetch,
     TResult Function(
@@ -212,6 +223,7 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         loadMore,
     required TResult orElse(),
@@ -271,6 +283,7 @@ abstract class _$$_FetchCopyWith<$Res> {
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
       User user,
+      String sortDirection,
       OrderHistoryFilter orderHistoryFilter});
 
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
@@ -294,6 +307,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? user = null,
+    Object? sortDirection = null,
     Object? orderHistoryFilter = null,
   }) {
     return _then(_$_Fetch(
@@ -313,6 +327,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      sortDirection: null == sortDirection
+          ? _value.sortDirection
+          : sortDirection // ignore: cast_nullable_to_non_nullable
+              as String,
       orderHistoryFilter: null == orderHistoryFilter
           ? _value.orderHistoryFilter
           : orderHistoryFilter // ignore: cast_nullable_to_non_nullable
@@ -371,6 +389,7 @@ class _$_Fetch implements _Fetch {
       required this.customerCodeInfo,
       required this.shipToInfo,
       required this.user,
+      required this.sortDirection,
       required this.orderHistoryFilter});
 
   @override
@@ -382,11 +401,13 @@ class _$_Fetch implements _Fetch {
   @override
   final User user;
   @override
+  final String sortDirection;
+  @override
   final OrderHistoryFilter orderHistoryFilter;
 
   @override
   String toString() {
-    return 'OrderHistoryListEvent.fetch(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, orderHistoryFilter: $orderHistoryFilter)';
+    return 'OrderHistoryListEvent.fetch(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, sortDirection: $sortDirection, orderHistoryFilter: $orderHistoryFilter)';
   }
 
   @override
@@ -401,13 +422,15 @@ class _$_Fetch implements _Fetch {
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
             (identical(other.user, user) || other.user == user) &&
+            (identical(other.sortDirection, sortDirection) ||
+                other.sortDirection == sortDirection) &&
             (identical(other.orderHistoryFilter, orderHistoryFilter) ||
                 other.orderHistoryFilter == orderHistoryFilter));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, salesOrgConfigs,
-      customerCodeInfo, shipToInfo, user, orderHistoryFilter);
+      customerCodeInfo, shipToInfo, user, sortDirection, orderHistoryFilter);
 
   @JsonKey(ignore: true)
   @override
@@ -424,6 +447,7 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)
         fetch,
     required TResult Function(
@@ -431,11 +455,12 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)
         loadMore,
   }) {
     return fetch(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
-        orderHistoryFilter);
+        sortDirection, orderHistoryFilter);
   }
 
   @override
@@ -447,6 +472,7 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         fetch,
     TResult? Function(
@@ -454,11 +480,12 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         loadMore,
   }) {
     return fetch?.call(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
-        orderHistoryFilter);
+        sortDirection, orderHistoryFilter);
   }
 
   @override
@@ -470,6 +497,7 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         fetch,
     TResult Function(
@@ -477,13 +505,14 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         loadMore,
     required TResult orElse(),
   }) {
     if (fetch != null) {
       return fetch(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
-          orderHistoryFilter);
+          sortDirection, orderHistoryFilter);
     }
     return orElse();
   }
@@ -529,12 +558,14 @@ abstract class _Fetch implements OrderHistoryListEvent {
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
       required final User user,
+      required final String sortDirection,
       required final OrderHistoryFilter orderHistoryFilter}) = _$_Fetch;
 
   SalesOrganisationConfigs get salesOrgConfigs;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
   User get user;
+  String get sortDirection;
   OrderHistoryFilter get orderHistoryFilter;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
@@ -552,6 +583,7 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
       User user,
+      String sortDirection,
       OrderHistoryFilter orderHistoryFilter});
 
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
@@ -576,6 +608,7 @@ class __$$_LoadMoreCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? user = null,
+    Object? sortDirection = null,
     Object? orderHistoryFilter = null,
   }) {
     return _then(_$_LoadMore(
@@ -595,6 +628,10 @@ class __$$_LoadMoreCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      sortDirection: null == sortDirection
+          ? _value.sortDirection
+          : sortDirection // ignore: cast_nullable_to_non_nullable
+              as String,
       orderHistoryFilter: null == orderHistoryFilter
           ? _value.orderHistoryFilter
           : orderHistoryFilter // ignore: cast_nullable_to_non_nullable
@@ -653,6 +690,7 @@ class _$_LoadMore implements _LoadMore {
       required this.customerCodeInfo,
       required this.shipToInfo,
       required this.user,
+      required this.sortDirection,
       required this.orderHistoryFilter});
 
   @override
@@ -664,11 +702,13 @@ class _$_LoadMore implements _LoadMore {
   @override
   final User user;
   @override
+  final String sortDirection;
+  @override
   final OrderHistoryFilter orderHistoryFilter;
 
   @override
   String toString() {
-    return 'OrderHistoryListEvent.loadMore(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, orderHistoryFilter: $orderHistoryFilter)';
+    return 'OrderHistoryListEvent.loadMore(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, sortDirection: $sortDirection, orderHistoryFilter: $orderHistoryFilter)';
   }
 
   @override
@@ -683,13 +723,15 @@ class _$_LoadMore implements _LoadMore {
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
             (identical(other.user, user) || other.user == user) &&
+            (identical(other.sortDirection, sortDirection) ||
+                other.sortDirection == sortDirection) &&
             (identical(other.orderHistoryFilter, orderHistoryFilter) ||
                 other.orderHistoryFilter == orderHistoryFilter));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, salesOrgConfigs,
-      customerCodeInfo, shipToInfo, user, orderHistoryFilter);
+      customerCodeInfo, shipToInfo, user, sortDirection, orderHistoryFilter);
 
   @JsonKey(ignore: true)
   @override
@@ -706,6 +748,7 @@ class _$_LoadMore implements _LoadMore {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)
         fetch,
     required TResult Function(
@@ -713,11 +756,12 @@ class _$_LoadMore implements _LoadMore {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)
         loadMore,
   }) {
     return loadMore(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
-        orderHistoryFilter);
+        sortDirection, orderHistoryFilter);
   }
 
   @override
@@ -729,6 +773,7 @@ class _$_LoadMore implements _LoadMore {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         fetch,
     TResult? Function(
@@ -736,11 +781,12 @@ class _$_LoadMore implements _LoadMore {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         loadMore,
   }) {
     return loadMore?.call(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
-        orderHistoryFilter);
+        sortDirection, orderHistoryFilter);
   }
 
   @override
@@ -752,6 +798,7 @@ class _$_LoadMore implements _LoadMore {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         fetch,
     TResult Function(
@@ -759,13 +806,14 @@ class _$_LoadMore implements _LoadMore {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            String sortDirection,
             OrderHistoryFilter orderHistoryFilter)?
         loadMore,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
       return loadMore(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
-          orderHistoryFilter);
+          sortDirection, orderHistoryFilter);
     }
     return orElse();
   }
@@ -811,12 +859,14 @@ abstract class _LoadMore implements OrderHistoryListEvent {
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
       required final User user,
+      required final String sortDirection,
       required final OrderHistoryFilter orderHistoryFilter}) = _$_LoadMore;
 
   SalesOrganisationConfigs get salesOrgConfigs;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
   User get user;
+  String get sortDirection;
   OrderHistoryFilter get orderHistoryFilter;
   @JsonKey(ignore: true)
   _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>

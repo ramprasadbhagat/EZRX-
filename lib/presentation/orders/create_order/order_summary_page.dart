@@ -275,16 +275,19 @@ class _Stepper extends StatelessWidget {
           previous.isSubmitting != current.isSubmitting,
       listener: (context, orderSummaryState) {
         if (orderSummaryState.isSubmitSuccess) {
-          context.read<OrderHistoryListBloc>().add(OrderHistoryListEvent.fetch(
-                salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-                customerCodeInfo: customerCodeInfo,
-                shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-                user: context.read<UserBloc>().state.user,
-                orderHistoryFilter: context
-                    .read<OrderHistoryFilterBloc>()
-                    .state
-                    .orderHistoryFilterList,
-              ));
+          context.read<OrderHistoryListBloc>().add(
+                OrderHistoryListEvent.fetch(
+                  salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+                  customerCodeInfo: customerCodeInfo,
+                  shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                  user: context.read<UserBloc>().state.user,
+                  orderHistoryFilter: context
+                      .read<OrderHistoryFilterBloc>()
+                      .state
+                      .orderHistoryFilterList,
+                  sortDirection: 'desc',
+                ),
+              );
           context.read<CartBloc>().add(const CartEvent.clearCart());
           context.router.pushNamed('order_confirmation');
         } else {
@@ -506,6 +509,7 @@ List<_OrderSummaryDetails> _getTextRowLevelsForCustomerInfo(
 
 class _BillToCustomerStep extends StatelessWidget {
   final BillToInfo billToInfo;
+
   const _BillToCustomerStep({
     Key? key,
     required this.billToInfo,
@@ -554,6 +558,7 @@ class _CustomerDetailsStep extends StatelessWidget {
 class _AdditionalInformationStep extends StatelessWidget {
   final Function saveData;
   final Function validateData;
+
   const _AdditionalInformationStep({
     required this.saveData,
     required this.validateData,
@@ -797,6 +802,7 @@ class _TextFormField extends StatelessWidget {
   final TextInputType keyboardType;
   final Function saveData;
   final Function validateData;
+
   const _TextFormField({
     required this.keyText,
     required this.labelText,
@@ -852,6 +858,7 @@ class _TextFormField extends StatelessWidget {
 class _PaymentTerm extends StatefulWidget {
   final Function validateData;
   final Function saveData;
+
   const _PaymentTerm({
     required this.validateData,
     required this.saveData,
@@ -946,6 +953,7 @@ class _PaymentTermState extends State<_PaymentTerm> {
 class _DatePickerField extends StatefulWidget {
   final String futureDeliveryDay;
   final Function saveData;
+
   const _DatePickerField({
     required this.futureDeliveryDay,
     required this.saveData,

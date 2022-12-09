@@ -26,6 +26,7 @@ mixin _$OrderHistoryFilterEvent {
     required TResult Function(String poNumber) poNumberChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
     required TResult Function(String materialSearch) materialSearchChanged,
+    required TResult Function(String sortDirection) sortByDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +39,7 @@ mixin _$OrderHistoryFilterEvent {
     TResult? Function(String poNumber)? poNumberChanged,
     TResult? Function(String principalSearch)? principalSearchChanged,
     TResult? Function(String materialSearch)? materialSearchChanged,
+    TResult? Function(String sortDirection)? sortByDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +52,7 @@ mixin _$OrderHistoryFilterEvent {
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
     TResult Function(String materialSearch)? materialSearchChanged,
+    TResult Function(String sortDirection)? sortByDate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -65,6 +68,7 @@ mixin _$OrderHistoryFilterEvent {
         principalSearchChanged,
     required TResult Function(_MaterialSearchChanged value)
         materialSearchChanged,
+    required TResult Function(_SortByDate value) sortByDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -77,6 +81,7 @@ mixin _$OrderHistoryFilterEvent {
     TResult? Function(_PoNumberChanged value)? poNumberChanged,
     TResult? Function(_PrincipalSearchChanged value)? principalSearchChanged,
     TResult? Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult? Function(_SortByDate value)? sortByDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -89,6 +94,7 @@ mixin _$OrderHistoryFilterEvent {
     TResult Function(_PoNumberChanged value)? poNumberChanged,
     TResult Function(_PrincipalSearchChanged value)? principalSearchChanged,
     TResult Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult Function(_SortByDate value)? sortByDate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -159,6 +165,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(String poNumber) poNumberChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
     required TResult Function(String materialSearch) materialSearchChanged,
+    required TResult Function(String sortDirection) sortByDate,
   }) {
     return initialized();
   }
@@ -174,6 +181,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(String poNumber)? poNumberChanged,
     TResult? Function(String principalSearch)? principalSearchChanged,
     TResult? Function(String materialSearch)? materialSearchChanged,
+    TResult? Function(String sortDirection)? sortByDate,
   }) {
     return initialized?.call();
   }
@@ -189,6 +197,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
     TResult Function(String materialSearch)? materialSearchChanged,
+    TResult Function(String sortDirection)? sortByDate,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -210,6 +219,7 @@ class _$_Initialized implements _Initialized {
         principalSearchChanged,
     required TResult Function(_MaterialSearchChanged value)
         materialSearchChanged,
+    required TResult Function(_SortByDate value) sortByDate,
   }) {
     return initialized(this);
   }
@@ -225,6 +235,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_PoNumberChanged value)? poNumberChanged,
     TResult? Function(_PrincipalSearchChanged value)? principalSearchChanged,
     TResult? Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult? Function(_SortByDate value)? sortByDate,
   }) {
     return initialized?.call(this);
   }
@@ -240,6 +251,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_PoNumberChanged value)? poNumberChanged,
     TResult Function(_PrincipalSearchChanged value)? principalSearchChanged,
     TResult Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult Function(_SortByDate value)? sortByDate,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -299,6 +311,7 @@ class _$_FilterOrderHistory implements _FilterOrderHistory {
     required TResult Function(String poNumber) poNumberChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
     required TResult Function(String materialSearch) materialSearchChanged,
+    required TResult Function(String sortDirection) sortByDate,
   }) {
     return filterOrderHistory();
   }
@@ -314,6 +327,7 @@ class _$_FilterOrderHistory implements _FilterOrderHistory {
     TResult? Function(String poNumber)? poNumberChanged,
     TResult? Function(String principalSearch)? principalSearchChanged,
     TResult? Function(String materialSearch)? materialSearchChanged,
+    TResult? Function(String sortDirection)? sortByDate,
   }) {
     return filterOrderHistory?.call();
   }
@@ -329,6 +343,7 @@ class _$_FilterOrderHistory implements _FilterOrderHistory {
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
     TResult Function(String materialSearch)? materialSearchChanged,
+    TResult Function(String sortDirection)? sortByDate,
     required TResult orElse(),
   }) {
     if (filterOrderHistory != null) {
@@ -350,6 +365,7 @@ class _$_FilterOrderHistory implements _FilterOrderHistory {
         principalSearchChanged,
     required TResult Function(_MaterialSearchChanged value)
         materialSearchChanged,
+    required TResult Function(_SortByDate value) sortByDate,
   }) {
     return filterOrderHistory(this);
   }
@@ -365,6 +381,7 @@ class _$_FilterOrderHistory implements _FilterOrderHistory {
     TResult? Function(_PoNumberChanged value)? poNumberChanged,
     TResult? Function(_PrincipalSearchChanged value)? principalSearchChanged,
     TResult? Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult? Function(_SortByDate value)? sortByDate,
   }) {
     return filterOrderHistory?.call(this);
   }
@@ -380,6 +397,7 @@ class _$_FilterOrderHistory implements _FilterOrderHistory {
     TResult Function(_PoNumberChanged value)? poNumberChanged,
     TResult Function(_PrincipalSearchChanged value)? principalSearchChanged,
     TResult Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult Function(_SortByDate value)? sortByDate,
     required TResult orElse(),
   }) {
     if (filterOrderHistory != null) {
@@ -466,6 +484,7 @@ class _$_SetfromDate implements _SetfromDate {
     required TResult Function(String poNumber) poNumberChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
     required TResult Function(String materialSearch) materialSearchChanged,
+    required TResult Function(String sortDirection) sortByDate,
   }) {
     return setfromDate(fromDate);
   }
@@ -481,6 +500,7 @@ class _$_SetfromDate implements _SetfromDate {
     TResult? Function(String poNumber)? poNumberChanged,
     TResult? Function(String principalSearch)? principalSearchChanged,
     TResult? Function(String materialSearch)? materialSearchChanged,
+    TResult? Function(String sortDirection)? sortByDate,
   }) {
     return setfromDate?.call(fromDate);
   }
@@ -496,6 +516,7 @@ class _$_SetfromDate implements _SetfromDate {
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
     TResult Function(String materialSearch)? materialSearchChanged,
+    TResult Function(String sortDirection)? sortByDate,
     required TResult orElse(),
   }) {
     if (setfromDate != null) {
@@ -517,6 +538,7 @@ class _$_SetfromDate implements _SetfromDate {
         principalSearchChanged,
     required TResult Function(_MaterialSearchChanged value)
         materialSearchChanged,
+    required TResult Function(_SortByDate value) sortByDate,
   }) {
     return setfromDate(this);
   }
@@ -532,6 +554,7 @@ class _$_SetfromDate implements _SetfromDate {
     TResult? Function(_PoNumberChanged value)? poNumberChanged,
     TResult? Function(_PrincipalSearchChanged value)? principalSearchChanged,
     TResult? Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult? Function(_SortByDate value)? sortByDate,
   }) {
     return setfromDate?.call(this);
   }
@@ -547,6 +570,7 @@ class _$_SetfromDate implements _SetfromDate {
     TResult Function(_PoNumberChanged value)? poNumberChanged,
     TResult Function(_PrincipalSearchChanged value)? principalSearchChanged,
     TResult Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult Function(_SortByDate value)? sortByDate,
     required TResult orElse(),
   }) {
     if (setfromDate != null) {
@@ -638,6 +662,7 @@ class _$_SetToDate implements _SetToDate {
     required TResult Function(String poNumber) poNumberChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
     required TResult Function(String materialSearch) materialSearchChanged,
+    required TResult Function(String sortDirection) sortByDate,
   }) {
     return setToDate(toDate);
   }
@@ -653,6 +678,7 @@ class _$_SetToDate implements _SetToDate {
     TResult? Function(String poNumber)? poNumberChanged,
     TResult? Function(String principalSearch)? principalSearchChanged,
     TResult? Function(String materialSearch)? materialSearchChanged,
+    TResult? Function(String sortDirection)? sortByDate,
   }) {
     return setToDate?.call(toDate);
   }
@@ -668,6 +694,7 @@ class _$_SetToDate implements _SetToDate {
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
     TResult Function(String materialSearch)? materialSearchChanged,
+    TResult Function(String sortDirection)? sortByDate,
     required TResult orElse(),
   }) {
     if (setToDate != null) {
@@ -689,6 +716,7 @@ class _$_SetToDate implements _SetToDate {
         principalSearchChanged,
     required TResult Function(_MaterialSearchChanged value)
         materialSearchChanged,
+    required TResult Function(_SortByDate value) sortByDate,
   }) {
     return setToDate(this);
   }
@@ -704,6 +732,7 @@ class _$_SetToDate implements _SetToDate {
     TResult? Function(_PoNumberChanged value)? poNumberChanged,
     TResult? Function(_PrincipalSearchChanged value)? principalSearchChanged,
     TResult? Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult? Function(_SortByDate value)? sortByDate,
   }) {
     return setToDate?.call(this);
   }
@@ -719,6 +748,7 @@ class _$_SetToDate implements _SetToDate {
     TResult Function(_PoNumberChanged value)? poNumberChanged,
     TResult Function(_PrincipalSearchChanged value)? principalSearchChanged,
     TResult Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult Function(_SortByDate value)? sortByDate,
     required TResult orElse(),
   }) {
     if (setToDate != null) {
@@ -809,6 +839,7 @@ class _$_OrderIdChanged implements _OrderIdChanged {
     required TResult Function(String poNumber) poNumberChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
     required TResult Function(String materialSearch) materialSearchChanged,
+    required TResult Function(String sortDirection) sortByDate,
   }) {
     return orderIdChanged(orderId);
   }
@@ -824,6 +855,7 @@ class _$_OrderIdChanged implements _OrderIdChanged {
     TResult? Function(String poNumber)? poNumberChanged,
     TResult? Function(String principalSearch)? principalSearchChanged,
     TResult? Function(String materialSearch)? materialSearchChanged,
+    TResult? Function(String sortDirection)? sortByDate,
   }) {
     return orderIdChanged?.call(orderId);
   }
@@ -839,6 +871,7 @@ class _$_OrderIdChanged implements _OrderIdChanged {
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
     TResult Function(String materialSearch)? materialSearchChanged,
+    TResult Function(String sortDirection)? sortByDate,
     required TResult orElse(),
   }) {
     if (orderIdChanged != null) {
@@ -860,6 +893,7 @@ class _$_OrderIdChanged implements _OrderIdChanged {
         principalSearchChanged,
     required TResult Function(_MaterialSearchChanged value)
         materialSearchChanged,
+    required TResult Function(_SortByDate value) sortByDate,
   }) {
     return orderIdChanged(this);
   }
@@ -875,6 +909,7 @@ class _$_OrderIdChanged implements _OrderIdChanged {
     TResult? Function(_PoNumberChanged value)? poNumberChanged,
     TResult? Function(_PrincipalSearchChanged value)? principalSearchChanged,
     TResult? Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult? Function(_SortByDate value)? sortByDate,
   }) {
     return orderIdChanged?.call(this);
   }
@@ -890,6 +925,7 @@ class _$_OrderIdChanged implements _OrderIdChanged {
     TResult Function(_PoNumberChanged value)? poNumberChanged,
     TResult Function(_PrincipalSearchChanged value)? principalSearchChanged,
     TResult Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult Function(_SortByDate value)? sortByDate,
     required TResult orElse(),
   }) {
     if (orderIdChanged != null) {
@@ -981,6 +1017,7 @@ class _$_PoNumberChanged implements _PoNumberChanged {
     required TResult Function(String poNumber) poNumberChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
     required TResult Function(String materialSearch) materialSearchChanged,
+    required TResult Function(String sortDirection) sortByDate,
   }) {
     return poNumberChanged(poNumber);
   }
@@ -996,6 +1033,7 @@ class _$_PoNumberChanged implements _PoNumberChanged {
     TResult? Function(String poNumber)? poNumberChanged,
     TResult? Function(String principalSearch)? principalSearchChanged,
     TResult? Function(String materialSearch)? materialSearchChanged,
+    TResult? Function(String sortDirection)? sortByDate,
   }) {
     return poNumberChanged?.call(poNumber);
   }
@@ -1011,6 +1049,7 @@ class _$_PoNumberChanged implements _PoNumberChanged {
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
     TResult Function(String materialSearch)? materialSearchChanged,
+    TResult Function(String sortDirection)? sortByDate,
     required TResult orElse(),
   }) {
     if (poNumberChanged != null) {
@@ -1032,6 +1071,7 @@ class _$_PoNumberChanged implements _PoNumberChanged {
         principalSearchChanged,
     required TResult Function(_MaterialSearchChanged value)
         materialSearchChanged,
+    required TResult Function(_SortByDate value) sortByDate,
   }) {
     return poNumberChanged(this);
   }
@@ -1047,6 +1087,7 @@ class _$_PoNumberChanged implements _PoNumberChanged {
     TResult? Function(_PoNumberChanged value)? poNumberChanged,
     TResult? Function(_PrincipalSearchChanged value)? principalSearchChanged,
     TResult? Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult? Function(_SortByDate value)? sortByDate,
   }) {
     return poNumberChanged?.call(this);
   }
@@ -1062,6 +1103,7 @@ class _$_PoNumberChanged implements _PoNumberChanged {
     TResult Function(_PoNumberChanged value)? poNumberChanged,
     TResult Function(_PrincipalSearchChanged value)? principalSearchChanged,
     TResult Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult Function(_SortByDate value)? sortByDate,
     required TResult orElse(),
   }) {
     if (poNumberChanged != null) {
@@ -1155,6 +1197,7 @@ class _$_PrincipalSearchChanged implements _PrincipalSearchChanged {
     required TResult Function(String poNumber) poNumberChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
     required TResult Function(String materialSearch) materialSearchChanged,
+    required TResult Function(String sortDirection) sortByDate,
   }) {
     return principalSearchChanged(principalSearch);
   }
@@ -1170,6 +1213,7 @@ class _$_PrincipalSearchChanged implements _PrincipalSearchChanged {
     TResult? Function(String poNumber)? poNumberChanged,
     TResult? Function(String principalSearch)? principalSearchChanged,
     TResult? Function(String materialSearch)? materialSearchChanged,
+    TResult? Function(String sortDirection)? sortByDate,
   }) {
     return principalSearchChanged?.call(principalSearch);
   }
@@ -1185,6 +1229,7 @@ class _$_PrincipalSearchChanged implements _PrincipalSearchChanged {
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
     TResult Function(String materialSearch)? materialSearchChanged,
+    TResult Function(String sortDirection)? sortByDate,
     required TResult orElse(),
   }) {
     if (principalSearchChanged != null) {
@@ -1206,6 +1251,7 @@ class _$_PrincipalSearchChanged implements _PrincipalSearchChanged {
         principalSearchChanged,
     required TResult Function(_MaterialSearchChanged value)
         materialSearchChanged,
+    required TResult Function(_SortByDate value) sortByDate,
   }) {
     return principalSearchChanged(this);
   }
@@ -1221,6 +1267,7 @@ class _$_PrincipalSearchChanged implements _PrincipalSearchChanged {
     TResult? Function(_PoNumberChanged value)? poNumberChanged,
     TResult? Function(_PrincipalSearchChanged value)? principalSearchChanged,
     TResult? Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult? Function(_SortByDate value)? sortByDate,
   }) {
     return principalSearchChanged?.call(this);
   }
@@ -1236,6 +1283,7 @@ class _$_PrincipalSearchChanged implements _PrincipalSearchChanged {
     TResult Function(_PoNumberChanged value)? poNumberChanged,
     TResult Function(_PrincipalSearchChanged value)? principalSearchChanged,
     TResult Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult Function(_SortByDate value)? sortByDate,
     required TResult orElse(),
   }) {
     if (principalSearchChanged != null) {
@@ -1330,6 +1378,7 @@ class _$_MaterialSearchChanged implements _MaterialSearchChanged {
     required TResult Function(String poNumber) poNumberChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
     required TResult Function(String materialSearch) materialSearchChanged,
+    required TResult Function(String sortDirection) sortByDate,
   }) {
     return materialSearchChanged(materialSearch);
   }
@@ -1345,6 +1394,7 @@ class _$_MaterialSearchChanged implements _MaterialSearchChanged {
     TResult? Function(String poNumber)? poNumberChanged,
     TResult? Function(String principalSearch)? principalSearchChanged,
     TResult? Function(String materialSearch)? materialSearchChanged,
+    TResult? Function(String sortDirection)? sortByDate,
   }) {
     return materialSearchChanged?.call(materialSearch);
   }
@@ -1360,6 +1410,7 @@ class _$_MaterialSearchChanged implements _MaterialSearchChanged {
     TResult Function(String poNumber)? poNumberChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
     TResult Function(String materialSearch)? materialSearchChanged,
+    TResult Function(String sortDirection)? sortByDate,
     required TResult orElse(),
   }) {
     if (materialSearchChanged != null) {
@@ -1381,6 +1432,7 @@ class _$_MaterialSearchChanged implements _MaterialSearchChanged {
         principalSearchChanged,
     required TResult Function(_MaterialSearchChanged value)
         materialSearchChanged,
+    required TResult Function(_SortByDate value) sortByDate,
   }) {
     return materialSearchChanged(this);
   }
@@ -1396,6 +1448,7 @@ class _$_MaterialSearchChanged implements _MaterialSearchChanged {
     TResult? Function(_PoNumberChanged value)? poNumberChanged,
     TResult? Function(_PrincipalSearchChanged value)? principalSearchChanged,
     TResult? Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult? Function(_SortByDate value)? sortByDate,
   }) {
     return materialSearchChanged?.call(this);
   }
@@ -1411,6 +1464,7 @@ class _$_MaterialSearchChanged implements _MaterialSearchChanged {
     TResult Function(_PoNumberChanged value)? poNumberChanged,
     TResult Function(_PrincipalSearchChanged value)? principalSearchChanged,
     TResult Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult Function(_SortByDate value)? sortByDate,
     required TResult orElse(),
   }) {
     if (materialSearchChanged != null) {
@@ -1431,12 +1485,191 @@ abstract class _MaterialSearchChanged implements OrderHistoryFilterEvent {
 }
 
 /// @nodoc
+abstract class _$$_SortByDateCopyWith<$Res> {
+  factory _$$_SortByDateCopyWith(
+          _$_SortByDate value, $Res Function(_$_SortByDate) then) =
+      __$$_SortByDateCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String sortDirection});
+}
+
+/// @nodoc
+class __$$_SortByDateCopyWithImpl<$Res>
+    extends _$OrderHistoryFilterEventCopyWithImpl<$Res, _$_SortByDate>
+    implements _$$_SortByDateCopyWith<$Res> {
+  __$$_SortByDateCopyWithImpl(
+      _$_SortByDate _value, $Res Function(_$_SortByDate) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? sortDirection = null,
+  }) {
+    return _then(_$_SortByDate(
+      null == sortDirection
+          ? _value.sortDirection
+          : sortDirection // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SortByDate implements _SortByDate {
+  const _$_SortByDate(this.sortDirection);
+
+  @override
+  final String sortDirection;
+
+  @override
+  String toString() {
+    return 'OrderHistoryFilterEvent.sortByDate(sortDirection: $sortDirection)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SortByDate &&
+            (identical(other.sortDirection, sortDirection) ||
+                other.sortDirection == sortDirection));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, sortDirection);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SortByDateCopyWith<_$_SortByDate> get copyWith =>
+      __$$_SortByDateCopyWithImpl<_$_SortByDate>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function() filterOrderHistory,
+    required TResult Function(DateTime fromDate) setfromDate,
+    required TResult Function(DateTime toDate) setToDate,
+    required TResult Function(String orderId) orderIdChanged,
+    required TResult Function(String poNumber) poNumberChanged,
+    required TResult Function(String principalSearch) principalSearchChanged,
+    required TResult Function(String materialSearch) materialSearchChanged,
+    required TResult Function(String sortDirection) sortByDate,
+  }) {
+    return sortByDate(sortDirection);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function()? filterOrderHistory,
+    TResult? Function(DateTime fromDate)? setfromDate,
+    TResult? Function(DateTime toDate)? setToDate,
+    TResult? Function(String orderId)? orderIdChanged,
+    TResult? Function(String poNumber)? poNumberChanged,
+    TResult? Function(String principalSearch)? principalSearchChanged,
+    TResult? Function(String materialSearch)? materialSearchChanged,
+    TResult? Function(String sortDirection)? sortByDate,
+  }) {
+    return sortByDate?.call(sortDirection);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function()? filterOrderHistory,
+    TResult Function(DateTime fromDate)? setfromDate,
+    TResult Function(DateTime toDate)? setToDate,
+    TResult Function(String orderId)? orderIdChanged,
+    TResult Function(String poNumber)? poNumberChanged,
+    TResult Function(String principalSearch)? principalSearchChanged,
+    TResult Function(String materialSearch)? materialSearchChanged,
+    TResult Function(String sortDirection)? sortByDate,
+    required TResult orElse(),
+  }) {
+    if (sortByDate != null) {
+      return sortByDate(sortDirection);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_FilterOrderHistory value) filterOrderHistory,
+    required TResult Function(_SetfromDate value) setfromDate,
+    required TResult Function(_SetToDate value) setToDate,
+    required TResult Function(_OrderIdChanged value) orderIdChanged,
+    required TResult Function(_PoNumberChanged value) poNumberChanged,
+    required TResult Function(_PrincipalSearchChanged value)
+        principalSearchChanged,
+    required TResult Function(_MaterialSearchChanged value)
+        materialSearchChanged,
+    required TResult Function(_SortByDate value) sortByDate,
+  }) {
+    return sortByDate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult? Function(_SetfromDate value)? setfromDate,
+    TResult? Function(_SetToDate value)? setToDate,
+    TResult? Function(_OrderIdChanged value)? orderIdChanged,
+    TResult? Function(_PoNumberChanged value)? poNumberChanged,
+    TResult? Function(_PrincipalSearchChanged value)? principalSearchChanged,
+    TResult? Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult? Function(_SortByDate value)? sortByDate,
+  }) {
+    return sortByDate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult Function(_SetfromDate value)? setfromDate,
+    TResult Function(_SetToDate value)? setToDate,
+    TResult Function(_OrderIdChanged value)? orderIdChanged,
+    TResult Function(_PoNumberChanged value)? poNumberChanged,
+    TResult Function(_PrincipalSearchChanged value)? principalSearchChanged,
+    TResult Function(_MaterialSearchChanged value)? materialSearchChanged,
+    TResult Function(_SortByDate value)? sortByDate,
+    required TResult orElse(),
+  }) {
+    if (sortByDate != null) {
+      return sortByDate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SortByDate implements OrderHistoryFilterEvent {
+  const factory _SortByDate(final String sortDirection) = _$_SortByDate;
+
+  String get sortDirection;
+  @JsonKey(ignore: true)
+  _$$_SortByDateCopyWith<_$_SortByDate> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$OrderHistoryFilterState {
   OrderHistoryFilter get orderHistoryFilterList =>
       throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isAppliedFilter => throw _privateConstructorUsedError;
+  String get sortDirection => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryFilterStateCopyWith<OrderHistoryFilterState> get copyWith =>
@@ -1453,7 +1686,8 @@ abstract class $OrderHistoryFilterStateCopyWith<$Res> {
       {OrderHistoryFilter orderHistoryFilterList,
       bool isSubmitting,
       bool showErrorMessages,
-      bool isAppliedFilter});
+      bool isAppliedFilter,
+      String sortDirection});
 
   $OrderHistoryFilterCopyWith<$Res> get orderHistoryFilterList;
 }
@@ -1476,6 +1710,7 @@ class _$OrderHistoryFilterStateCopyWithImpl<$Res,
     Object? isSubmitting = null,
     Object? showErrorMessages = null,
     Object? isAppliedFilter = null,
+    Object? sortDirection = null,
   }) {
     return _then(_value.copyWith(
       orderHistoryFilterList: null == orderHistoryFilterList
@@ -1494,6 +1729,10 @@ class _$OrderHistoryFilterStateCopyWithImpl<$Res,
           ? _value.isAppliedFilter
           : isAppliedFilter // ignore: cast_nullable_to_non_nullable
               as bool,
+      sortDirection: null == sortDirection
+          ? _value.sortDirection
+          : sortDirection // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -1519,7 +1758,8 @@ abstract class _$$_OrderHistoryFilterStateCopyWith<$Res>
       {OrderHistoryFilter orderHistoryFilterList,
       bool isSubmitting,
       bool showErrorMessages,
-      bool isAppliedFilter});
+      bool isAppliedFilter,
+      String sortDirection});
 
   @override
   $OrderHistoryFilterCopyWith<$Res> get orderHistoryFilterList;
@@ -1541,6 +1781,7 @@ class __$$_OrderHistoryFilterStateCopyWithImpl<$Res>
     Object? isSubmitting = null,
     Object? showErrorMessages = null,
     Object? isAppliedFilter = null,
+    Object? sortDirection = null,
   }) {
     return _then(_$_OrderHistoryFilterState(
       orderHistoryFilterList: null == orderHistoryFilterList
@@ -1559,6 +1800,10 @@ class __$$_OrderHistoryFilterStateCopyWithImpl<$Res>
           ? _value.isAppliedFilter
           : isAppliedFilter // ignore: cast_nullable_to_non_nullable
               as bool,
+      sortDirection: null == sortDirection
+          ? _value.sortDirection
+          : sortDirection // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -1570,7 +1815,8 @@ class _$_OrderHistoryFilterState extends _OrderHistoryFilterState {
       {required this.orderHistoryFilterList,
       required this.isSubmitting,
       required this.showErrorMessages,
-      required this.isAppliedFilter})
+      required this.isAppliedFilter,
+      required this.sortDirection})
       : super._();
 
   @override
@@ -1581,10 +1827,12 @@ class _$_OrderHistoryFilterState extends _OrderHistoryFilterState {
   final bool showErrorMessages;
   @override
   final bool isAppliedFilter;
+  @override
+  final String sortDirection;
 
   @override
   String toString() {
-    return 'OrderHistoryFilterState(orderHistoryFilterList: $orderHistoryFilterList, isSubmitting: $isSubmitting, showErrorMessages: $showErrorMessages, isAppliedFilter: $isAppliedFilter)';
+    return 'OrderHistoryFilterState(orderHistoryFilterList: $orderHistoryFilterList, isSubmitting: $isSubmitting, showErrorMessages: $showErrorMessages, isAppliedFilter: $isAppliedFilter, sortDirection: $sortDirection)';
   }
 
   @override
@@ -1599,12 +1847,14 @@ class _$_OrderHistoryFilterState extends _OrderHistoryFilterState {
             (identical(other.showErrorMessages, showErrorMessages) ||
                 other.showErrorMessages == showErrorMessages) &&
             (identical(other.isAppliedFilter, isAppliedFilter) ||
-                other.isAppliedFilter == isAppliedFilter));
+                other.isAppliedFilter == isAppliedFilter) &&
+            (identical(other.sortDirection, sortDirection) ||
+                other.sortDirection == sortDirection));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, orderHistoryFilterList,
-      isSubmitting, showErrorMessages, isAppliedFilter);
+      isSubmitting, showErrorMessages, isAppliedFilter, sortDirection);
 
   @JsonKey(ignore: true)
   @override
@@ -1620,7 +1870,8 @@ abstract class _OrderHistoryFilterState extends OrderHistoryFilterState {
       {required final OrderHistoryFilter orderHistoryFilterList,
       required final bool isSubmitting,
       required final bool showErrorMessages,
-      required final bool isAppliedFilter}) = _$_OrderHistoryFilterState;
+      required final bool isAppliedFilter,
+      required final String sortDirection}) = _$_OrderHistoryFilterState;
   const _OrderHistoryFilterState._() : super._();
 
   @override
@@ -1631,6 +1882,8 @@ abstract class _OrderHistoryFilterState extends OrderHistoryFilterState {
   bool get showErrorMessages;
   @override
   bool get isAppliedFilter;
+  @override
+  String get sortDirection;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryFilterStateCopyWith<_$_OrderHistoryFilterState>

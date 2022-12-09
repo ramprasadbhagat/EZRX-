@@ -14,14 +14,21 @@ class OrderHistoryFilterEvent with _$OrderHistoryFilterEvent {
   const factory OrderHistoryFilterEvent.setToDate({
     required DateTime toDate,
   }) = _SetToDate;
+
   const factory OrderHistoryFilterEvent.orderIdChanged(String orderId) =
       _OrderIdChanged;
+
   const factory OrderHistoryFilterEvent.poNumberChanged(String poNumber) =
       _PoNumberChanged;
+
   const factory OrderHistoryFilterEvent.principalSearchChanged(
     String principalSearch,
   ) = _PrincipalSearchChanged;
+
   const factory OrderHistoryFilterEvent.materialSearchChanged(
     String materialSearch,
   ) = _MaterialSearchChanged;
+
+  const factory OrderHistoryFilterEvent.sortByDate(String sortDirection) =
+      _SortByDate;
 }
