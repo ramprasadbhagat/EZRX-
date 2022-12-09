@@ -519,8 +519,12 @@ void main() {
       );
       await tester.pumpWidget(getWUT());
       await tester.pump();
+
+      final materialNumber = orderHistoryDetails
+          .orderHistoryDetailsOrderItem.first.materialNumber.displayMatNo;
+
       final orderItemBonusCardField =
-          find.byKey(const Key('orderItemBonusCard'));
+          find.byKey(Key('orderItemBonusCard-$materialNumber'));
 
       expect(orderItemBonusCardField, findsOneWidget);
       await tester.pump();
@@ -567,7 +571,11 @@ void main() {
       await tester.pumpWidget(getWUT());
       await tester.pump();
 
-      final orderItemCardField = find.byKey(const Key('orderItemCard'));
+      final materialNumber = orderHistoryDetails
+          .orderHistoryDetailsOrderItem.first.materialNumber.displayMatNo;
+
+      final orderItemCardField =
+          find.byKey(Key('orderItemCard-$materialNumber'));
 
       expect(orderItemCardField, findsOneWidget);
       await tester.pump();
@@ -612,8 +620,11 @@ void main() {
       await tester.pumpWidget(getWUT());
       await tester.pump();
 
+      final materialNumber = orderHistoryDetails
+          .orderHistoryDetailsOrderItem.first.materialNumber.displayMatNo;
+
       final orderTenderContractCardField =
-          find.byKey(const Key('orderTenderContractCard'));
+          find.byKey(Key('orderTenderContractCard-$materialNumber'));
 
       expect(orderTenderContractCardField, findsOneWidget);
       await tester.pump();

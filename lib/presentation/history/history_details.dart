@@ -216,6 +216,7 @@ void _addToCartPressed(
 
 class _SystemMessage extends StatelessWidget {
   final OrderHistoryDetails orderDetails;
+
   const _SystemMessage({Key? key, required this.orderDetails})
       : super(key: key);
 
@@ -271,6 +272,7 @@ class _SystemMessage extends StatelessWidget {
 class _OrderDetails extends StatelessWidget {
   final OrderHistoryDetails orderDetails;
   final CustomerCodeInfo customerCodeInfo;
+
   const _OrderDetails({
     Key? key,
     required this.orderDetails,
@@ -442,6 +444,7 @@ class _SoldToAddress extends StatelessWidget {
   const _SoldToAddress({
     Key? key,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return CustomExpansionTile(
@@ -473,7 +476,9 @@ class _ShipToAddress extends StatelessWidget {
 
 class _BillToAddress extends StatelessWidget {
   final BillToInfo billToInfo;
+
   const _BillToAddress({Key? key, required this.billToInfo}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return CustomExpansionTile(
@@ -486,6 +491,7 @@ class _BillToAddress extends StatelessWidget {
 
 class _AdditionalComments extends StatefulWidget {
   final OrderHistoryDetails orderDetails;
+
   const _AdditionalComments({Key? key, required this.orderDetails})
       : super(key: key);
 
@@ -495,6 +501,7 @@ class _AdditionalComments extends StatefulWidget {
 
 class _AdditionalCommentsState extends State<_AdditionalComments> {
   bool show = false;
+
   @override
   Widget build(BuildContext context) {
     final overlay = LoadingOverlay.of(context);
@@ -739,6 +746,7 @@ class _AdditionalCommentsState extends State<_AdditionalComments> {
 
 class _Invoices extends StatelessWidget {
   final OrderHistoryDetails orderDetails;
+
   const _Invoices({Key? key, required this.orderDetails}) : super(key: key);
 
   @override
@@ -876,16 +884,22 @@ class _OrderSummary extends StatelessWidget {
                 children: state.bonusItem.map((orderItem) {
                   return orderItem.bonusList.isNotEmpty
                       ? OrderItemBonusCard(
-                          key: const Key('orderItemBonusCard'),
+                          key: Key(
+                            'orderItemBonusCard-${orderItem.orderItem.materialNumber.displayMatNo}',
+                          ),
                           orderHistoryDetailsBonusAggregate: orderItem,
                         )
                       : orderItem.orderItem.isTenderContractMaterial
                           ? OrderTenderContractCard(
-                              key: const Key('orderTenderContractCard'),
+                              key: Key(
+                                'orderTenderContractCard-${orderItem.orderItem.materialNumber.displayMatNo}',
+                              ),
                               orderHistoryDetailsBonusAggregate: orderItem,
                             )
                           : OrderItemCard(
-                              key: const Key('orderItemCard'),
+                              key: Key(
+                                'orderItemCard-${orderItem.orderItem.materialNumber.displayMatNo}',
+                              ),
                               orderHistoryDetailsBonusAggregate: orderItem,
                             );
                 }).toList(),
