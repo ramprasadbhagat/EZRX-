@@ -630,11 +630,7 @@ class _ClearButton extends StatelessWidget {
       },
       child: Text(
         'Clear'.tr(),
-        style: const TextStyle(
-          color: ZPColors.primary,
-          fontWeight: FontWeight.w700,
-          fontSize: 16,
-        ),
+        style: const TextStyle(color: ZPColors.primary),
       ),
     );
   }
@@ -654,11 +650,7 @@ class _ApplyButton extends StatelessWidget {
       },
       child: Text(
         'Apply'.tr(),
-        style: const TextStyle(
-          color: ZPColors.white,
-          fontWeight: FontWeight.w700,
-          fontSize: 16,
-        ),
+        style: const TextStyle(color: ZPColors.white),
       ),
     );
   }

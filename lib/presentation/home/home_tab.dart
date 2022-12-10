@@ -44,14 +44,9 @@ class HomeTab extends StatelessWidget {
         child: BlocBuilder<EligibilityBloc, EligibilityState>(
           buildWhen: (previous, current) => previous != current,
           builder: (context, state) {
-            final isAccountSuspended =
-                context.read<EligibilityBloc>().state.isAccountSuspended;
-
             return ListView(
               children: [
-                isAccountSuspended
-                    ? const AccountSuspendedBanner()
-                    : const SizedBox.shrink(),
+                const AccountSuspendedBanner(),
                 const HomeBanner(
                   key: ValueKey('HomeBanner'),
                 ),

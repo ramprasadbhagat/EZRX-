@@ -29,7 +29,7 @@ class QuantityInput extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          width: 50,
+          width: 70,
           child: TextField(
             key: quantityTextKey,
             controller: controller,

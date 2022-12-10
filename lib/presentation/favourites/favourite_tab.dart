@@ -106,8 +106,6 @@ class FavouritesTab extends StatelessWidget with AutoRouteWrapper {
               buildWhen: (previous, current) =>
                   previous.isValidating != current.isValidating,
               builder: (context, priceState) {
-                final isAccountSuspended =
-                    context.read<EligibilityBloc>().state.isAccountSuspended;
                 if (priceState.isValidating) {
                   return LoadingShimmer.logo(key: const Key('LoaderImage'));
                 }
@@ -121,16 +119,14 @@ class FavouritesTab extends StatelessWidget with AutoRouteWrapper {
 
                 return Column(
                   children: [
-                    isAccountSuspended
-                        ? const AccountSuspendedBanner()
-                        : const SizedBox.shrink(),
+                    const AccountSuspendedBanner(),
                     Expanded(
                       child: ScrollList<Favourite>(
                         emptyMessage: 'No favorite found',
                         onRefresh: () {
-                          context
-                              .read<MaterialPriceDetailBloc>()
-                              .add(const MaterialPriceDetailEvent.initialized());
+                          context.read<MaterialPriceDetailBloc>().add(
+                                const MaterialPriceDetailEvent.initialized(),
+                              );
                           context.read<FavouriteBloc>().add(
                                 FavouriteEvent.fetch(
                                   user: context.read<UserBloc>().state.user,

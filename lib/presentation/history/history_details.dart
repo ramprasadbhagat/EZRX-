@@ -910,14 +910,14 @@ class _OrderSummary extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: ElevatedButton(
                     key: const ValueKey('reOrderButton'),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.resolveWith(
-                        (states) => ZPColors.white,
-                      ),
-                      side: MaterialStateProperty.resolveWith(
-                        (states) => const BorderSide(color: ZPColors.primary),
-                      ),
-                    ),
+                    // style: ButtonStyle(
+                    //   backgroundColor: MaterialStateProperty.resolveWith(
+                    //     (states) => ZPColors.white,
+                    //   ),
+                    //   side: MaterialStateProperty.resolveWith(
+                    //     (states) => const BorderSide(color: ZPColors.primary),
+                    //   ),
+                    // ),
                     onPressed: () => _addToCartPressed(
                       context,
                       context.read<MaterialPriceDetailBloc>().state,
@@ -925,11 +925,7 @@ class _OrderSummary extends StatelessWidget {
                     ),
                     child: Text(
                       'Re-order'.tr(),
-                      style: const TextStyle(
-                        color: ZPColors.darkerGreen,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14,
-                      ),
+                      // style: const TextStyle(color: ZPColors.darkerGreen),
                     ),
                   ),
                 ),

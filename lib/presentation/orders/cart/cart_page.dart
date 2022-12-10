@@ -53,8 +53,6 @@ class CartPage extends StatelessWidget {
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         final taxCode = context.read<SalesOrgBloc>().state.salesOrg.taxCode;
-        final isAccountSuspended =
-            context.read<EligibilityBloc>().state.isAccountSuspended;
 
         return Scaffold(
           key: const Key('cartpage'),
@@ -65,9 +63,7 @@ class CartPage extends StatelessWidget {
           ),
           body: Column(
             children: [
-              isAccountSuspended
-                  ? const AccountSuspendedBanner()
-                  : const SizedBox.shrink(),
+              const AccountSuspendedBanner(),
               Expanded(
                 child: ScrollList<CartItem>(
                   emptyMessage: 'Cart is Empty',
@@ -209,6 +205,7 @@ class _SelectAllButton extends StatelessWidget {
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         return Expanded(
+          flex: 1,
           key: const Key('selectAllButton'),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -252,6 +249,7 @@ class _TotalSection extends StatelessWidget {
         final taxCode = context.read<SalesOrgBloc>().state.salesOrg.taxCode;
 
         return Expanded(
+          flex: 2,
           key: const Key('totalSection'),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,

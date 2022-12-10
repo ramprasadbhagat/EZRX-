@@ -159,14 +159,9 @@ class _BodyContent extends StatelessWidget {
       },
       buildWhen: (previous, current) => previous != current,
       builder: (context, savedOrderState) {
-        final isAccountSuspended =
-            context.read<EligibilityBloc>().state.isAccountSuspended;
-
         return Column(
           children: [
-            isAccountSuspended
-                ? const AccountSuspendedBanner()
-                : const SizedBox.shrink(),
+            const AccountSuspendedBanner(),
             Expanded(
               child: _Stepper(
                 savedOrderState: savedOrderState,

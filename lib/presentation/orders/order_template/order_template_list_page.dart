@@ -9,6 +9,7 @@ import 'package:ezrxmobile/presentation/core/cart_button.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/orders/order_template/order_template_item.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -50,26 +51,34 @@ class OrderTemplateListPage extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.isFetching != current.isFetching,
         builder: (context, state) {
-          return state.isFetching && state.orderTemplateList.isEmpty
-              ? LoadingShimmer.logo(key: const Key('loading-shimmer'))
-              : ScrollList<OrderTemplate>(
-                  emptyMessage: 'No order template found',
-                  onRefresh: () {
-                    context
-                        .read<MaterialPriceDetailBloc>()
-                        .add(const MaterialPriceDetailEvent.initialized());
-                    context.read<OrderTemplateListBloc>().add(
-                          OrderTemplateListEvent.fetch(
-                            context.read<UserBloc>().state.user,
-                          ),
-                        );
-                  },
-                  isLoading: false,
-                  itemBuilder: (context, index, item) => OrderTemplateItem(
-                    orderTemplate: state.orderTemplateList[index],
-                  ),
-                  items: state.orderTemplateList,
-                );
+          return Column(
+            children: [
+              const AccountSuspendedBanner(),
+              Expanded(
+                child: state.isFetching && state.orderTemplateList.isEmpty
+                    ? LoadingShimmer.logo(key: const Key('loading-shimmer'))
+                    : ScrollList<OrderTemplate>(
+                        emptyMessage: 'No order template found',
+                        onRefresh: () {
+                          context.read<MaterialPriceDetailBloc>().add(
+                                const MaterialPriceDetailEvent.initialized(),
+                              );
+                          context.read<OrderTemplateListBloc>().add(
+                                OrderTemplateListEvent.fetch(
+                                  context.read<UserBloc>().state.user,
+                                ),
+                              );
+                        },
+                        isLoading: false,
+                        itemBuilder: (context, index, item) =>
+                            OrderTemplateItem(
+                          orderTemplate: state.orderTemplateList[index],
+                        ),
+                        items: state.orderTemplateList,
+                      ),
+              ),
+            ],
+          );
         },
       ),
     );

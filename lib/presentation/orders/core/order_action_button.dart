@@ -23,7 +23,7 @@ class OrderActionButton extends StatelessWidget {
     }
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         ElevatedButton(
           key: const Key('onAddToCartPressed'),
@@ -35,11 +35,21 @@ class OrderActionButton extends StatelessWidget {
                 ),
           child: const Text('Add to Cart').tr(),
         ),
-        const SizedBox(width: 10),
         ElevatedButton(
           key: const Key('onDeletePressed'),
           onPressed: onDeletePressed,
-          child: const Text('Delete').tr(),
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith(
+              (states) => ZPColors.white,
+            ),
+            side: MaterialStateProperty.resolveWith(
+              (states) => const BorderSide(color: ZPColors.primary),
+            ),
+          ),
+          child: const Text(
+            'Delete',
+            style: TextStyle(color: ZPColors.primary),
+          ).tr(),
         ),
       ],
     );
@@ -55,16 +65,13 @@ class _ActionButtonShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       key: const Key('OrderActionButtonShimmer'),
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         LoadingShimmer.withChild(
           child: ElevatedButton(
             onPressed: () {},
             child: const SizedBox(),
           ),
-        ),
-        const SizedBox(
-          width: 10,
         ),
         LoadingShimmer.withChild(
           child: ElevatedButton(

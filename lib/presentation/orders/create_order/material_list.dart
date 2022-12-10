@@ -66,8 +66,6 @@ class MaterialListPage extends StatelessWidget {
             previous.isFetching != current.isFetching ||
             previous.materialList != current.materialList,
         builder: (context, state) {
-          final isAccountSuspended = context.read<EligibilityBloc>().state.isAccountSuspended;
-
           return BlocListener<OrderDocumentTypeBloc, OrderDocumentTypeState>(
             listenWhen: (previous, current) =>
                 previous.selectedOrderType != current.selectedOrderType ||
@@ -119,9 +117,7 @@ class MaterialListPage extends StatelessWidget {
             child: Column(
               children: [
                 const _SearchBar(),
-                isAccountSuspended
-                    ? const AccountSuspendedBanner()
-                    : const SizedBox.shrink(),
+                const AccountSuspendedBanner(),
                 if (context.read<EligibilityBloc>().state.isOrderTypeEnable)
                   const OrderTypeSelector(hideReasonField: true),
                 const _MaterialFilters(),

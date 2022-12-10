@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -277,9 +276,6 @@ class HistoryTab extends StatelessWidget {
               buildWhen: (previous, current) =>
                   previous.isFetching != current.isFetching,
               builder: (context, state) {
-                final isAccountSuspended =
-                    context.read<EligibilityBloc>().state.isAccountSuspended;
-                    
                 return state.isFetching &&
                         state
                             .getFilterItem(orderHistoryFilterByStatusState
@@ -287,20 +283,24 @@ class HistoryTab extends StatelessWidget {
                             .isEmpty
                     ? LoadingShimmer.logo(key: const Key('loaderImage'))
                     : Column(
-                      children: [
-                        isAccountSuspended
-                              ? const AccountSuspendedBanner()
-                              : const SizedBox.shrink(),
-                        Expanded(
-                          child: ScrollList<OrderHistoryItem>(
+                        children: [
+                          const AccountSuspendedBanner(),
+                          Expanded(
+                            child: ScrollList<OrderHistoryItem>(
                               key: const Key('orderHistoryList'),
                               emptyMessage: 'No history found',
                               onRefresh: () {
-                                if (context.read<ShipToCodeBloc>().state.haveShipTo) {
+                                if (context
+                                    .read<ShipToCodeBloc>()
+                                    .state
+                                    .haveShipTo) {
                                   context.read<OrderHistoryFilterBloc>().add(
-                                        const OrderHistoryFilterEvent.initialized(),
+                                        const OrderHistoryFilterEvent
+                                            .initialized(),
                                       );
-                                  context.read<OrderHistoryFilterByStatusBloc>().add(
+                                  context
+                                      .read<OrderHistoryFilterByStatusBloc>()
+                                      .add(
                                         const OrderHistoryFilterByStatusEvent
                                             .initialized(),
                                       );
@@ -318,7 +318,10 @@ class HistoryTab extends StatelessWidget {
                                               .read<ShipToCodeBloc>()
                                               .state
                                               .shipToInfo,
-                                          user: context.read<UserBloc>().state.user,
+                                          user: context
+                                              .read<UserBloc>()
+                                              .state
+                                              .user,
                                           orderHistoryFilter:
                                               OrderHistoryFilter.empty(),
                                           sortDirection: context
@@ -338,8 +341,10 @@ class HistoryTab extends StatelessWidget {
                                           .read<CustomerCodeBloc>()
                                           .state
                                           .customerCodeInfo,
-                                      salesOrgConfigs:
-                                          context.read<SalesOrgBloc>().state.configs,
+                                      salesOrgConfigs: context
+                                          .read<SalesOrgBloc>()
+                                          .state
+                                          .configs,
                                       shipToInfo: context
                                           .read<ShipToCodeBloc>()
                                           .state
@@ -349,7 +354,8 @@ class HistoryTab extends StatelessWidget {
                                           .read<OrderHistoryFilterBloc>()
                                           .state
                                           .sortDirection,
-                                      orderHistoryFilter: OrderHistoryFilter.empty(),
+                                      orderHistoryFilter:
+                                          OrderHistoryFilter.empty(),
                                     ),
                                   ),
                               itemBuilder: (context, index, item) =>
@@ -360,10 +366,12 @@ class HistoryTab extends StatelessWidget {
                                     .read<CustomerCodeBloc>()
                                     .state
                                     .customerCodeInfo,
-                                shipToInfo:
-                                    context.read<ShipToCodeBloc>().state.shipToInfo,
-                                orderHistoryBasicInfo:
-                                    state.orderHistoryList.orderBasicInformation,
+                                shipToInfo: context
+                                    .read<ShipToCodeBloc>()
+                                    .state
+                                    .shipToInfo,
+                                orderHistoryBasicInfo: state
+                                    .orderHistoryList.orderBasicInformation,
                                 currency: context
                                     .read<SalesOrgBloc>()
                                     .state
@@ -376,12 +384,13 @@ class HistoryTab extends StatelessWidget {
                                     : BillToInfo.empty(),
                               ),
                               items: state.getFilterItem(
-                                orderHistoryFilterByStatusState.filterByStatusName,
+                                orderHistoryFilterByStatusState
+                                    .filterByStatusName,
                               ),
                             ),
-                        ),
-                      ],
-                    );
+                          ),
+                        ],
+                      );
               },
             );
           },
