@@ -3920,9 +3920,6 @@ void main() {
           );
         },
       );
-
-      //////////////// corrected //////////////////////////
-      ///
       blocTest<CartBloc, CartState>(
         'Bonus item decrement - Tire 2 discount to Tire 1 discount',
         build: () => CartBloc(cartRepository: cartRepositoryMock),
@@ -6794,6 +6791,803 @@ void main() {
           );
         },
       );
+
+      group('Test Material Bonus + Additional Bonus CartBloc', () {
+        blocTest<CartBloc, CartState>(
+          'Add Additional Bonus with existing materail bonus',
+          build: () => CartBloc(cartRepository: cartRepositoryMock),
+          seed: () => CartState.initial().copyWith(
+            selectedItemsMaterialNumber: [bonusMaterialNumber],
+            cartItemList: [
+              bonus913MockCartItem.copyWith(
+                quantity: 5,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+                addedBonusList: [
+                  MaterialItemBonus.empty().copyWith(
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      materialNumber: bonusMaterialNumber,
+                    ),
+                    additionalBonusFlag: false,
+                    qty: 1,
+                  ),
+                ],
+              )
+            ],
+            apiFailureOrSuccessOption: none(),
+            isFetching: false,
+          ),
+          setUp: () {
+            when(
+              () => cartRepositoryMock.updateBonusItem(
+                cartItem: bonus913MockCartItem.copyWith(
+                  quantity: 5,
+                  stockInfo: mockStockInfo.copyWith(
+                    materialNumber: bonusMaterialNumber,
+                  ),
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusMaterialNumber,
+                      ),
+                      additionalBonusFlag: false,
+                      qty: 1,
+                    ),
+                  ],
+                ),
+                bonusItem: MaterialItemBonus.empty().copyWith(
+                  materialInfo: bonus913MockCartItem.materialInfo,
+                  additionalBonusFlag: true,
+                  bonusOverrideFlag: true,
+                ),
+                isUpdatedFromCart: false,
+                quantity: 1,
+              ),
+            ).thenAnswer(
+              (invocation) async => Right(
+                [
+                  bonus913MockCartItem.copyWith(
+                    quantity: 5,
+                    stockInfo: mockStockInfo.copyWith(
+                      materialNumber: bonusMaterialNumber,
+                    ),
+                    addedBonusList: [
+                      MaterialItemBonus.empty().copyWith(
+                        materialInfo: MaterialInfo.empty().copyWith(
+                          materialNumber: bonusMaterialNumber,
+                        ),
+                        additionalBonusFlag: false,
+                        qty: 1,
+                      ),
+                      MaterialItemBonus.empty().copyWith(
+                        materialInfo: MaterialInfo.empty().copyWith(
+                          materialNumber: bonusMaterialNumber,
+                        ),
+                        additionalBonusFlag: true,
+                        qty: 1,
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            );
+          },
+          act: (bloc) => bloc.add(
+            CartEvent.updateBonusItem(
+              cartItem: bonus913MockCartItem.copyWith(
+                quantity: 5,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+                addedBonusList: [
+                  MaterialItemBonus.empty().copyWith(
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      materialNumber: bonusMaterialNumber,
+                    ),
+                    additionalBonusFlag: false,
+                    qty: 1,
+                  ),
+                ],
+              ),
+              bonusItem: MaterialItemBonus.empty().copyWith(
+                materialInfo: bonus913MockCartItem.materialInfo,
+                additionalBonusFlag: true,
+                bonusOverrideFlag: true,
+              ),
+              isUpdateFromCart: false,
+              bonusItemCount: 1,
+            ),
+          ),
+          expect: () => [
+            CartState.initial().copyWith(
+              selectedItemsMaterialNumber: [bonusMaterialNumber],
+              cartItemList: [
+                bonus913MockCartItem.copyWith(
+                  quantity: 5,
+                  stockInfo: mockStockInfo.copyWith(
+                    materialNumber: bonusMaterialNumber,
+                  ),
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusMaterialNumber,
+                      ),
+                      additionalBonusFlag: false,
+                      qty: 1,
+                    ),
+                  ],
+                )
+              ],
+              apiFailureOrSuccessOption: none(),
+              isFetching: true,
+            ),
+            CartState.initial().copyWith(
+              selectedItemsMaterialNumber: [bonusMaterialNumber],
+              cartItemList: [
+                bonus913MockCartItem.copyWith(
+                  quantity: 5,
+                  stockInfo: mockStockInfo.copyWith(
+                    materialNumber: bonusMaterialNumber,
+                  ),
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusMaterialNumber,
+                      ),
+                      additionalBonusFlag: false,
+                      qty: 1,
+                    ),
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusMaterialNumber,
+                      ),
+                      additionalBonusFlag: true,
+                      qty: 1,
+                    ),
+                  ],
+                )
+              ],
+              apiFailureOrSuccessOption: none(),
+              isFetching: false,
+            ),
+          ],
+          verify: (CartBloc bloc) {
+            expect(
+              bloc.state.cartItemList.first.addedBonusList.length,
+              2,
+            );
+            expect(
+              bloc.state.cartItemList.first.addedBonusList.first
+                  .additionalBonusFlag,
+              false,
+            );
+            expect(
+              bloc.state.cartItemList.first.addedBonusList.last
+                  .additionalBonusFlag,
+              true,
+            );
+          },
+        );
+
+        blocTest<CartBloc, CartState>(
+          'Add bonus Item when same item aditional bonus is available on cart',
+          build: () => CartBloc(cartRepository: cartRepositoryMock),
+          seed: () => CartState.initial().copyWith(
+            selectedItemsMaterialNumber: [bonusMaterialNumber],
+            cartItemList: [
+              bonus913MockCartItem.copyWith(
+                quantity: 4,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+                addedBonusList: [
+                  MaterialItemBonus.empty().copyWith(
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      materialNumber: bonusMaterialNumber,
+                    ),
+                    additionalBonusFlag: true,
+                    qty: 1,
+                  ),
+                ],
+              )
+            ],
+            apiFailureOrSuccessOption: none(),
+            isFetching: false,
+          ),
+          setUp: () {
+            when(
+              () => cartRepositoryMock.getStockInfo(
+                material: bonus913MockCartItem.materialInfo,
+                customerCodeInfo: CustomerCodeInfo.empty(),
+                salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+                salesOrganisation: SalesOrganisation.empty(),
+                shipToInfo: ShipToInfo.empty(),
+              ),
+            ).thenAnswer(
+              (invocation) async => Right(
+                mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              ),
+            );
+            when(
+              () => cartRepositoryMock.addToCart(
+                cartItem: bonus913MockCartItem.copyWith(
+                  quantity: 1,
+                  stockInfo: mockStockInfo.copyWith(
+                    materialNumber: bonusMaterialNumber,
+                  ),
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusMaterialNumber,
+                      ),
+                      additionalBonusFlag: true,
+                      qty: 1,
+                    ),
+                  ],
+                ),
+              ),
+            ).thenAnswer(
+              (invocation) async => Right(
+                [
+                  bonus913MockCartItem.copyWith(
+                    quantity: 5,
+                    stockInfo: mockStockInfo.copyWith(
+                      materialNumber: bonusMaterialNumber,
+                    ),
+                    addedBonusList: [
+                      MaterialItemBonus.empty().copyWith(
+                        materialInfo: MaterialInfo.empty().copyWith(
+                          materialNumber: bonusMaterialNumber,
+                        ),
+                        additionalBonusFlag: true,
+                        qty: 1,
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            );
+
+            when(
+              () => cartRepositoryMock.getUpdatedMaterialList(
+                cartItemList: [
+                  bonus913MockCartItem.copyWith(
+                    quantity: 4,
+                    stockInfo: mockStockInfo.copyWith(
+                      materialNumber: bonusMaterialNumber,
+                    ),
+                    addedBonusList: [
+                      MaterialItemBonus.empty().copyWith(
+                        materialInfo: MaterialInfo.empty().copyWith(
+                          materialNumber: bonusMaterialNumber,
+                        ),
+                        additionalBonusFlag: true,
+                        qty: 1,
+                      ),
+                    ],
+                  )
+                ],
+                selectedItemsMaterialNumber: [bonusMaterialNumber],
+                items: [
+                  bonus913MockCartItem.copyWith(
+                    quantity: 1,
+                    addedBonusList: [
+                      MaterialItemBonus.empty().copyWith(
+                        materialInfo: MaterialInfo.empty().copyWith(
+                          materialNumber: bonusMaterialNumber,
+                        ),
+                        additionalBonusFlag: true,
+                        qty: 1,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ).thenAnswer((invocation) => [bonusMaterialNumber]);
+            when(
+              () => cartRepositoryMock.updateBonusItem(
+                cartItem: bonus913MockCartItem.copyWith(
+                  quantity: 5,
+                  stockInfo: mockStockInfo.copyWith(
+                    materialNumber: bonusMaterialNumber,
+                  ),
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusMaterialNumber,
+                      ),
+                      additionalBonusFlag: true,
+                      qty: 1,
+                    ),
+                  ],
+                ),
+                bonusItem: bonus913MockCartItem.copyWith(
+                  quantity: 5,
+                  stockInfo: mockStockInfo.copyWith(
+                    materialNumber: bonusMaterialNumber,
+                  ),
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusMaterialNumber,
+                      ),
+                      additionalBonusFlag: true,
+                      qty: 1,
+                    ),
+                  ],
+                ).getMaterialItemBonus,
+                isUpdatedFromCart: true,
+                quantity: bonus913MockCartItem.copyWith(
+                  quantity: 5,
+                  stockInfo: mockStockInfo.copyWith(
+                    materialNumber: bonusMaterialNumber,
+                  ),
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusMaterialNumber,
+                      ),
+                      additionalBonusFlag: true,
+                      qty: 1,
+                    ),
+                  ],
+                )
+                    // ignore: invalid_use_of_protected_member
+                    .calculateMaterialItemBonus,
+              ),
+            ).thenAnswer(
+              (invocation) async => Right(
+                [
+                  bonus913MockCartItem.copyWith(
+                    quantity: 5,
+                    stockInfo: mockStockInfo.copyWith(
+                      materialNumber: bonusMaterialNumber,
+                    ),
+                    addedBonusList: [
+                      MaterialItemBonus.empty().copyWith(
+                        materialInfo: MaterialInfo.empty().copyWith(
+                          materialNumber: bonusMaterialNumber,
+                        ),
+                        qty: 1,
+                        additionalBonusFlag: true,
+                      ),
+                      MaterialItemBonus.empty().copyWith(
+                        materialInfo: MaterialInfo.empty().copyWith(
+                          materialNumber: bonusMaterialNumber,
+                        ),
+                        qty: bonus913MockCartItem
+                            .copyWith(
+                              quantity: 5,
+                              stockInfo: mockStockInfo.copyWith(
+                                materialNumber: bonusMaterialNumber,
+                              ),
+                            )
+                            // ignore: invalid_use_of_protected_member
+                            .calculateMaterialItemBonus,
+                        additionalBonusFlag: false,
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            );
+          },
+          act: (bloc) => bloc.add(
+            CartEvent.addToCart(
+              item: bonus913MockCartItem.copyWith(
+                quantity: 1,
+                addedBonusList: [
+                  MaterialItemBonus.empty().copyWith(
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      materialNumber: bonusMaterialNumber,
+                    ),
+                    additionalBonusFlag: true,
+                    qty: 1,
+                  ),
+                ],
+              ),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              doNotallowOutOfStockMaterial: true,
+              salesOrganisation: SalesOrganisation.empty(),
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+              shipToInfo: ShipToInfo.empty(),
+            ),
+          ),
+          expect: () => [
+            CartState.initial().copyWith(
+              selectedItemsMaterialNumber: [bonusMaterialNumber],
+              cartItemList: [
+                bonus913MockCartItem.copyWith(
+                  quantity: 5,
+                  stockInfo: mockStockInfo.copyWith(
+                    materialNumber: bonusMaterialNumber,
+                  ),
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusMaterialNumber,
+                      ),
+                      additionalBonusFlag: true,
+                      qty: 1,
+                    ),
+                  ],
+                )
+              ],
+              isFetching: false,
+            ),
+            CartState.initial().copyWith(
+              selectedItemsMaterialNumber: [bonusMaterialNumber],
+              cartItemList: [
+                bonus913MockCartItem.copyWith(
+                  quantity: 5,
+                  stockInfo: mockStockInfo.copyWith(
+                    materialNumber: bonusMaterialNumber,
+                  ),
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusMaterialNumber,
+                      ),
+                      additionalBonusFlag: true,
+                      qty: 1,
+                    ),
+                  ],
+                )
+              ],
+              isFetching: true,
+            ),
+            CartState.initial().copyWith(
+              selectedItemsMaterialNumber: [bonusMaterialNumber],
+              cartItemList: [
+                bonus913MockCartItem.copyWith(
+                  quantity: 5,
+                  stockInfo: mockStockInfo.copyWith(
+                    materialNumber: bonusMaterialNumber,
+                  ),
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusMaterialNumber,
+                      ),
+                      additionalBonusFlag: true,
+                      qty: 1,
+                    ),
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusMaterialNumber,
+                      ),
+                      additionalBonusFlag: false,
+                      qty: 2,
+                    ),
+                  ],
+                )
+              ],
+              isFetching: false,
+            ),
+          ],
+        );
+
+        blocTest<CartBloc, CartState>(
+          'remove bonus Item when same item aditional bonus and bonus item is available on cart',
+          build: () => CartBloc(cartRepository: cartRepositoryMock),
+          seed: () => CartState.initial().copyWith(
+            selectedItemsMaterialNumber: [bonusMaterialNumber],
+            cartItemList: [
+              bonus913MockCartItem.copyWith(
+                quantity: 3,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+                addedBonusList: [
+                  MaterialItemBonus.empty().copyWith(
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      materialNumber: bonusMaterialNumber,
+                    ),
+                    additionalBonusFlag: true,
+                    qty: 1,
+                  ),
+                  MaterialItemBonus.empty().copyWith(
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      materialNumber: bonusMaterialNumber,
+                    ),
+                    additionalBonusFlag: false,
+                    qty: 1,
+                  ),
+                ],
+              )
+            ],
+            apiFailureOrSuccessOption: none(),
+            isFetching: false,
+          ),
+          setUp: () {
+            when(
+              () => cartRepositoryMock.getStockInfo(
+                material: bonus913MockCartItem.materialInfo,
+                customerCodeInfo: CustomerCodeInfo.empty(),
+                salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+                salesOrganisation: SalesOrganisation.empty(),
+                shipToInfo: ShipToInfo.empty(),
+              ),
+            ).thenAnswer(
+              (invocation) async => Right(
+                mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              ),
+            );
+            when(
+              () => cartRepositoryMock.addToCart(
+                cartItem: bonus913MockCartItem.copyWith(
+                  quantity: -1,
+                  stockInfo: mockStockInfo.copyWith(
+                    materialNumber: bonusMaterialNumber,
+                  ),
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusMaterialNumber,
+                      ),
+                      additionalBonusFlag: true,
+                      qty: 1,
+                    ),
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusMaterialNumber,
+                      ),
+                      additionalBonusFlag: false,
+                      qty: 1,
+                    ),
+                  ],
+                ),
+              ),
+            ).thenAnswer(
+              (invocation) async => Right(
+                [
+                  bonus913MockCartItem.copyWith(
+                    quantity: 2,
+                    stockInfo: mockStockInfo.copyWith(
+                      materialNumber: bonusMaterialNumber,
+                    ),
+                    addedBonusList: [
+                      MaterialItemBonus.empty().copyWith(
+                        materialInfo: MaterialInfo.empty().copyWith(
+                          materialNumber: bonusMaterialNumber,
+                        ),
+                        additionalBonusFlag: true,
+                        qty: 1,
+                      ),
+                      MaterialItemBonus.empty().copyWith(
+                        materialInfo: MaterialInfo.empty().copyWith(
+                          materialNumber: bonusMaterialNumber,
+                        ),
+                        additionalBonusFlag: false,
+                        qty: 1,
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            );
+
+            when(
+              () => cartRepositoryMock.getUpdatedMaterialList(
+                cartItemList: [
+                  bonus913MockCartItem.copyWith(
+                    quantity: 3,
+                    stockInfo: mockStockInfo.copyWith(
+                      materialNumber: bonusMaterialNumber,
+                    ),
+                    addedBonusList: [
+                      MaterialItemBonus.empty().copyWith(
+                        materialInfo: MaterialInfo.empty().copyWith(
+                          materialNumber: bonusMaterialNumber,
+                        ),
+                        additionalBonusFlag: true,
+                        qty: 1,
+                      ),
+                      MaterialItemBonus.empty().copyWith(
+                        materialInfo: MaterialInfo.empty().copyWith(
+                          materialNumber: bonusMaterialNumber,
+                        ),
+                        additionalBonusFlag: false,
+                        qty: 1,
+                      ),
+                    ],
+                  )
+                ],
+                selectedItemsMaterialNumber: [bonusMaterialNumber],
+                items: [
+                  bonus913MockCartItem.copyWith(
+                    quantity: -1,
+                    stockInfo: mockStockInfo.copyWith(
+                      materialNumber: bonusMaterialNumber,
+                    ),
+                    addedBonusList: [
+                      MaterialItemBonus.empty().copyWith(
+                        materialInfo: MaterialInfo.empty().copyWith(
+                          materialNumber: bonusMaterialNumber,
+                        ),
+                        additionalBonusFlag: true,
+                        qty: 1,
+                      ),
+                      MaterialItemBonus.empty().copyWith(
+                        materialInfo: MaterialInfo.empty().copyWith(
+                          materialNumber: bonusMaterialNumber,
+                        ),
+                        additionalBonusFlag: false,
+                        qty: 1,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ).thenAnswer((invocation) => [bonusMaterialNumber]);
+            when(
+              () => cartRepositoryMock.deleteBonusItem(
+                cartItem: bonus913MockCartItem.copyWith(
+                  quantity: -1,
+                  stockInfo: mockStockInfo.copyWith(
+                    materialNumber: bonusMaterialNumber,
+                  ),
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusMaterialNumber,
+                      ),
+                      additionalBonusFlag: true,
+                      qty: 1,
+                    ),
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusMaterialNumber,
+                      ),
+                      additionalBonusFlag: false,
+                      qty: 1,
+                    ),
+                  ],
+                ),
+                bonusItem: MaterialItemBonus.empty().copyWith(
+                  materialInfo: bonus913MockCartItem.materialInfo,
+                ),
+                isUpdateFromCart: true,
+              ),
+            ).thenAnswer(
+              (invocation) async => Right(
+                [
+                  bonus913MockCartItem.copyWith(
+                    quantity: 1,
+                    stockInfo: mockStockInfo.copyWith(
+                      materialNumber: bonusMaterialNumber,
+                    ),
+                    addedBonusList: [
+                      MaterialItemBonus.empty().copyWith(
+                        materialInfo: MaterialInfo.empty().copyWith(
+                          materialNumber: bonusMaterialNumber,
+                        ),
+                        qty: 1,
+                        additionalBonusFlag: true,
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            );
+          },
+          act: (bloc) => bloc.add(
+            CartEvent.addToCart(
+              item: bonus913MockCartItem.copyWith(
+                quantity: -1,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+                addedBonusList: [
+                  MaterialItemBonus.empty().copyWith(
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      materialNumber: bonusMaterialNumber,
+                    ),
+                    additionalBonusFlag: true,
+                    qty: 1,
+                  ),
+                  MaterialItemBonus.empty().copyWith(
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      materialNumber: bonusMaterialNumber,
+                    ),
+                    additionalBonusFlag: false,
+                    qty: 1,
+                  ),
+                ],
+              ),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              doNotallowOutOfStockMaterial: true,
+              salesOrganisation: SalesOrganisation.empty(),
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+              shipToInfo: ShipToInfo.empty(),
+            ),
+          ),
+          expect: () => [
+            CartState.initial().copyWith(
+              selectedItemsMaterialNumber: [bonusMaterialNumber],
+              cartItemList: [
+                bonus913MockCartItem.copyWith(
+                  quantity: 2,
+                  stockInfo: mockStockInfo.copyWith(
+                    materialNumber: bonusMaterialNumber,
+                  ),
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusMaterialNumber,
+                      ),
+                      additionalBonusFlag: true,
+                      qty: 1,
+                    ),
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusMaterialNumber,
+                      ),
+                      additionalBonusFlag: false,
+                      qty: 1,
+                    ),
+                  ],
+                )
+              ],
+              isFetching: false,
+            ),
+            CartState.initial().copyWith(
+              selectedItemsMaterialNumber: [bonusMaterialNumber],
+              cartItemList: [
+                bonus913MockCartItem.copyWith(
+                  quantity: 2,
+                  stockInfo: mockStockInfo.copyWith(
+                    materialNumber: bonusMaterialNumber,
+                  ),
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusMaterialNumber,
+                      ),
+                      additionalBonusFlag: true,
+                      qty: 1,
+                    ),
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusMaterialNumber,
+                      ),
+                      additionalBonusFlag: false,
+                      qty: 1,
+                    ),
+                  ],
+                )
+              ],
+              isFetching: true,
+            ),
+            CartState.initial().copyWith(
+              selectedItemsMaterialNumber: [bonusMaterialNumber],
+              cartItemList: [
+                bonus913MockCartItem.copyWith(
+                  quantity: 1,
+                  stockInfo: mockStockInfo.copyWith(
+                    materialNumber: bonusMaterialNumber,
+                  ),
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusMaterialNumber,
+                      ),
+                      additionalBonusFlag: true,
+                      qty: 1,
+                    ),
+                  ],
+                )
+              ],
+              isFetching: false,
+            ),
+          ],
+        );
+      });
     },
   );
 }

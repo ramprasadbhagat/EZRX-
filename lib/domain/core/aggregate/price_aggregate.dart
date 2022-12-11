@@ -240,7 +240,8 @@ class PriceAggregate with _$PriceAggregate {
       _addedDealBonusMaterial.qty != calculateMaterialItemBonus;
 
   bool get isDealBounsAdded => addedBonusList.any((element) =>
-      element.materialInfo.materialNumber == materialInfo.materialNumber);
+      element.materialInfo.materialNumber == materialInfo.materialNumber &&
+      !element.additionalBonusFlag);
 
   bool get bonusavailable =>
       price.priceBonusItem.isNotEmpty && _bonusItem != BonusMaterial.empty();
@@ -252,7 +253,9 @@ class PriceAggregate with _$PriceAggregate {
 
   MaterialItemBonus get _addedDealBonusMaterial => addedBonusList.firstWhere(
         (MaterialItemBonus element) =>
-            element.materialInfo.materialNumber == materialInfo.materialNumber,
+            element.materialInfo.materialNumber ==
+                materialInfo.materialNumber &&
+            !element.additionalBonusFlag,
         orElse: () => MaterialItemBonus.empty(),
       );
 
@@ -314,6 +317,18 @@ class PriceAggregate with _$PriceAggregate {
   bool get hasClientPrinciple {
     return materialInfo.principalData.principalCode.isSubmitAllowedForClient();
   }
+
+  List<MaterialItemBonus> get getAddedBonusList =>
+      List<MaterialItemBonus>.from(addedBonusList)
+        ..sort(
+          (
+            MaterialItemBonus a,
+            MaterialItemBonus b,
+          ) =>
+              a.additionalBonusFlag
+                  ? 1
+                  : 0.compareTo(b.additionalBonusFlag ? 0 : 1),
+        );
 }
 
 enum PriceType {

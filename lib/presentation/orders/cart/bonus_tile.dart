@@ -77,10 +77,12 @@ class BounsTile extends StatelessWidget {
                     ),
                   ],
                 ),
-              ...cartItem.addedBonusList.map(
+              ...cartItem.getAddedBonusList.map(
                 (e) {
                   return BonusItemTile(
-                    key: ValueKey('${e.materialInfo.materialNumber}${e.qty}'),
+                    key: ValueKey(
+                      '${e.materialInfo.materialNumber}${e.additionalBonusFlag}${e.qty}',
+                    ),
                     bonusItem: e,
                     cartItem: cartItem,
                   );

@@ -165,7 +165,9 @@ class CartStorage {
 
           for (var i = 0; i < existingItem.bonusItem.length; i++) {
             if (existingItem.bonusItem[i].materialNumber ==
-                bonusItem.materialInfo.materialNumber.getOrCrash()) {
+                    bonusItem.materialInfo.materialNumber.getOrCrash() &&
+                existingItem.bonusItem.elementAt(i).additionalBonusFlag ==
+                    bonusItem.additionalBonusFlag) {
               isUpdate = true;
               final bonus =
                   existingItem.bonusItem.map((e) => e.toJson()).toList();
@@ -210,7 +212,9 @@ class CartStorage {
             cartDto.materialDto.materialNumber) {
           for (var i = 0; i < existingItem.bonusItem.length; i++) {
             if (existingItem.bonusItem[i].materialNumber ==
-                bonusItem.materialInfo.materialNumber.getOrCrash()) {
+                    bonusItem.materialInfo.materialNumber.getOrCrash() &&
+                existingItem.bonusItem.elementAt(i).additionalBonusFlag ==
+                    bonusItem.additionalBonusFlag) {
               final bonus =
                   existingItem.bonusItem.map((e) => e.toJson()).toList();
               existingItem.bonusItem =
