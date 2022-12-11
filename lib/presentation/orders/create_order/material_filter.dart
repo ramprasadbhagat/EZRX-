@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/order/material_filter/material_filter_blo
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -37,14 +38,7 @@ class MaterialFilterPage extends StatelessWidget {
           () {},
           (either) => either.fold(
             (failure) {
-              final failureMessage = failure.failureMessage;
-              showSnackBar(
-                context: context,
-                message: failureMessage.tr(),
-              );
-              if (failureMessage == 'authentication failed') {
-                context.read<AuthBloc>().add(const AuthEvent.logout());
-              }
+              ErrorUtils.handleApiFailure(context, failure);
             },
             (_) {},
           ),

@@ -27,6 +27,7 @@ mixin _$ApiFailure {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
     required TResult Function() deviceNotSupportBiometirc,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -45,6 +46,7 @@ mixin _$ApiFailure {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
     TResult? Function()? deviceNotSupportBiometirc,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -63,6 +65,7 @@ mixin _$ApiFailure {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
     TResult Function()? deviceNotSupportBiometirc,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -83,6 +86,7 @@ mixin _$ApiFailure {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_DeviceNotSupportBiometirc value)
         deviceNotSupportBiometirc,
     required TResult Function(_CannotCheckBiometrics value)
@@ -106,6 +110,7 @@ mixin _$ApiFailure {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -126,6 +131,7 @@ mixin _$ApiFailure {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -226,6 +232,7 @@ class _$_Other implements _Other {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
     required TResult Function() deviceNotSupportBiometirc,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -247,6 +254,7 @@ class _$_Other implements _Other {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
     TResult? Function()? deviceNotSupportBiometirc,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -268,6 +276,7 @@ class _$_Other implements _Other {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
     TResult Function()? deviceNotSupportBiometirc,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -294,6 +303,7 @@ class _$_Other implements _Other {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_DeviceNotSupportBiometirc value)
         deviceNotSupportBiometirc,
     required TResult Function(_CannotCheckBiometrics value)
@@ -320,6 +330,7 @@ class _$_Other implements _Other {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -343,6 +354,7 @@ class _$_Other implements _Other {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -440,6 +452,7 @@ class _$_ServerError implements _ServerError {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
     required TResult Function() deviceNotSupportBiometirc,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -461,6 +474,7 @@ class _$_ServerError implements _ServerError {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
     TResult? Function()? deviceNotSupportBiometirc,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -482,6 +496,7 @@ class _$_ServerError implements _ServerError {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
     TResult Function()? deviceNotSupportBiometirc,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -508,6 +523,7 @@ class _$_ServerError implements _ServerError {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_DeviceNotSupportBiometirc value)
         deviceNotSupportBiometirc,
     required TResult Function(_CannotCheckBiometrics value)
@@ -534,6 +550,7 @@ class _$_ServerError implements _ServerError {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -557,6 +574,7 @@ class _$_ServerError implements _ServerError {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -628,6 +646,7 @@ class _$_PoorConnection implements _PoorConnection {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
     required TResult Function() deviceNotSupportBiometirc,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -649,6 +668,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
     TResult? Function()? deviceNotSupportBiometirc,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -670,6 +690,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
     TResult Function()? deviceNotSupportBiometirc,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -696,6 +717,7 @@ class _$_PoorConnection implements _PoorConnection {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_DeviceNotSupportBiometirc value)
         deviceNotSupportBiometirc,
     required TResult Function(_CannotCheckBiometrics value)
@@ -722,6 +744,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -745,6 +768,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -811,6 +835,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
     required TResult Function() deviceNotSupportBiometirc,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -832,6 +857,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
     TResult? Function()? deviceNotSupportBiometirc,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -853,6 +879,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
     TResult Function()? deviceNotSupportBiometirc,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -879,6 +906,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_DeviceNotSupportBiometirc value)
         deviceNotSupportBiometirc,
     required TResult Function(_CannotCheckBiometrics value)
@@ -905,6 +933,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -928,6 +957,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -994,6 +1024,7 @@ class _$_UserNotFound implements _UserNotFound {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
     required TResult Function() deviceNotSupportBiometirc,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -1015,6 +1046,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
     TResult? Function()? deviceNotSupportBiometirc,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -1036,6 +1068,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
     TResult Function()? deviceNotSupportBiometirc,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -1062,6 +1095,7 @@ class _$_UserNotFound implements _UserNotFound {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_DeviceNotSupportBiometirc value)
         deviceNotSupportBiometirc,
     required TResult Function(_CannotCheckBiometrics value)
@@ -1088,6 +1122,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -1111,6 +1146,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -1182,6 +1218,7 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
     required TResult Function() deviceNotSupportBiometirc,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -1203,6 +1240,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
     TResult? Function()? deviceNotSupportBiometirc,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -1224,6 +1262,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
     TResult Function()? deviceNotSupportBiometirc,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -1250,6 +1289,7 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_DeviceNotSupportBiometirc value)
         deviceNotSupportBiometirc,
     required TResult Function(_CannotCheckBiometrics value)
@@ -1276,6 +1316,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -1299,6 +1340,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -1366,6 +1408,7 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
     required TResult Function() deviceNotSupportBiometirc,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -1387,6 +1430,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
     TResult? Function()? deviceNotSupportBiometirc,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -1408,6 +1452,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
     TResult Function()? deviceNotSupportBiometirc,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -1434,6 +1479,7 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_DeviceNotSupportBiometirc value)
         deviceNotSupportBiometirc,
     required TResult Function(_CannotCheckBiometrics value)
@@ -1460,6 +1506,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -1483,6 +1530,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -1549,6 +1597,7 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
     required TResult Function() deviceNotSupportBiometirc,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -1570,6 +1619,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
     TResult? Function()? deviceNotSupportBiometirc,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -1591,6 +1641,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
     TResult Function()? deviceNotSupportBiometirc,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -1617,6 +1668,7 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_DeviceNotSupportBiometirc value)
         deviceNotSupportBiometirc,
     required TResult Function(_CannotCheckBiometrics value)
@@ -1643,6 +1695,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -1666,6 +1719,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -1732,6 +1786,7 @@ class _$_TokenExpired implements _TokenExpired {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
     required TResult Function() deviceNotSupportBiometirc,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -1753,6 +1808,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
     TResult? Function()? deviceNotSupportBiometirc,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -1774,6 +1830,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
     TResult Function()? deviceNotSupportBiometirc,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -1800,6 +1857,7 @@ class _$_TokenExpired implements _TokenExpired {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_DeviceNotSupportBiometirc value)
         deviceNotSupportBiometirc,
     required TResult Function(_CannotCheckBiometrics value)
@@ -1826,6 +1884,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -1849,6 +1908,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -1866,6 +1926,195 @@ class _$_TokenExpired implements _TokenExpired {
 
 abstract class _TokenExpired implements ApiFailure {
   const factory _TokenExpired() = _$_TokenExpired;
+}
+
+/// @nodoc
+abstract class _$$_AuthenticationFailedCopyWith<$Res> {
+  factory _$$_AuthenticationFailedCopyWith(_$_AuthenticationFailed value,
+          $Res Function(_$_AuthenticationFailed) then) =
+      __$$_AuthenticationFailedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_AuthenticationFailedCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res, _$_AuthenticationFailed>
+    implements _$$_AuthenticationFailedCopyWith<$Res> {
+  __$$_AuthenticationFailedCopyWithImpl(_$_AuthenticationFailed _value,
+      $Res Function(_$_AuthenticationFailed) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_AuthenticationFailed implements _AuthenticationFailed {
+  const _$_AuthenticationFailed();
+
+  @override
+  String toString() {
+    return 'ApiFailure.authenticationFailed()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_AuthenticationFailed);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
+    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometirc,
+    required TResult Function() priceOverrideNotFound,
+  }) {
+    return authenticationFailed();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? other,
+    TResult? Function(String message)? serverError,
+    TResult? Function()? poorConnection,
+    TResult? Function()? serverTimeout,
+    TResult? Function()? userNotFound,
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
+    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? cannotCheckBiometrics,
+    TResult? Function()? noSupportedBiometrics,
+    TResult? Function()? invalidBiometirc,
+    TResult? Function()? priceOverrideNotFound,
+  }) {
+    return authenticationFailed?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
+    required TResult orElse(),
+  }) {
+    if (authenticationFailed != null) {
+      return authenticationFailed();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
+    required TResult Function(_DeviceNotSupportBiometirc value)
+        deviceNotSupportBiometirc,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
+  }) {
+    return authenticationFailed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Other value)? other,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_PoorConnection value)? poorConnection,
+    TResult? Function(_ServerTimeout value)? serverTimeout,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult? Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+  }) {
+    return authenticationFailed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    required TResult orElse(),
+  }) {
+    if (authenticationFailed != null) {
+      return authenticationFailed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AuthenticationFailed implements ApiFailure {
+  const factory _AuthenticationFailed() = _$_AuthenticationFailed;
 }
 
 /// @nodoc
@@ -1918,6 +2167,7 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
     required TResult Function() deviceNotSupportBiometirc,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -1939,6 +2189,7 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
     TResult? Function()? deviceNotSupportBiometirc,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -1960,6 +2211,7 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
     TResult Function()? deviceNotSupportBiometirc,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -1986,6 +2238,7 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_DeviceNotSupportBiometirc value)
         deviceNotSupportBiometirc,
     required TResult Function(_CannotCheckBiometrics value)
@@ -2012,6 +2265,7 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -2035,6 +2289,7 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -2101,6 +2356,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
     required TResult Function() deviceNotSupportBiometirc,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -2122,6 +2378,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
     TResult? Function()? deviceNotSupportBiometirc,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -2143,6 +2400,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
     TResult Function()? deviceNotSupportBiometirc,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -2169,6 +2427,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_DeviceNotSupportBiometirc value)
         deviceNotSupportBiometirc,
     required TResult Function(_CannotCheckBiometrics value)
@@ -2195,6 +2454,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -2218,6 +2478,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -2284,6 +2545,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
     required TResult Function() deviceNotSupportBiometirc,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -2305,6 +2567,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
     TResult? Function()? deviceNotSupportBiometirc,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -2326,6 +2589,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
     TResult Function()? deviceNotSupportBiometirc,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -2352,6 +2616,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_DeviceNotSupportBiometirc value)
         deviceNotSupportBiometirc,
     required TResult Function(_CannotCheckBiometrics value)
@@ -2378,6 +2643,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -2401,6 +2667,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -2467,6 +2734,7 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
     required TResult Function() deviceNotSupportBiometirc,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -2488,6 +2756,7 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
     TResult? Function()? deviceNotSupportBiometirc,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -2509,6 +2778,7 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
     TResult Function()? deviceNotSupportBiometirc,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -2535,6 +2805,7 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_DeviceNotSupportBiometirc value)
         deviceNotSupportBiometirc,
     required TResult Function(_CannotCheckBiometrics value)
@@ -2561,6 +2832,7 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -2584,6 +2856,7 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -2650,6 +2923,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
     required TResult Function() deviceNotSupportBiometirc,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
@@ -2671,6 +2945,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
     TResult? Function()? deviceNotSupportBiometirc,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
@@ -2692,6 +2967,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
     TResult Function()? deviceNotSupportBiometirc,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
@@ -2718,6 +2994,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
     required TResult Function(_DeviceNotSupportBiometirc value)
         deviceNotSupportBiometirc,
     required TResult Function(_CannotCheckBiometrics value)
@@ -2744,6 +3021,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
     TResult? Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
@@ -2767,6 +3045,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
     TResult Function(_DeviceNotSupportBiometirc value)?
         deviceNotSupportBiometirc,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,

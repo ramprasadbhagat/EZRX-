@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -37,14 +38,7 @@ class CartPage extends StatelessWidget {
           () {},
           (either) => either.fold(
             (failure) {
-              final failureMessage = failure.failureMessage;
-              showSnackBar(
-                context: context,
-                message: failureMessage.tr(),
-              );
-              if (failureMessage == 'authentication failed') {
-                context.read<AuthBloc>().add(const AuthEvent.logout());
-              }
+              ErrorUtils.handleApiFailure(context, failure);
             },
             (_) {},
           ),

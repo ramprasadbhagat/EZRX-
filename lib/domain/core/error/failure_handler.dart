@@ -32,7 +32,11 @@ class FailureHandler {
         case CacheException:
           return ApiFailure.other((error as CacheException).message);
         case ServerException:
-          return ApiFailure.serverError((error as ServerException).message);
+          final message = (error as ServerException).message;
+          if (message == 'authentication failed') {
+            return const ApiFailure.authenticationFailed();
+          }
+          return ApiFailure.serverError(message);
         case SocketException:
           return const ApiFailure.poorConnection();
         case TimeoutException:

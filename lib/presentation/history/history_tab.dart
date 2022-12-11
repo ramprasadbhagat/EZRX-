@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/cart_button.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -251,14 +252,7 @@ class HistoryTab extends StatelessWidget {
                   () {},
                   (either) => either.fold(
                     (failure) {
-                      final failureMessage = failure.failureMessage;
-                      showSnackBar(
-                        context: context,
-                        message: failureMessage.tr(),
-                      );
-                      if (failureMessage == 'authentication failed') {
-                        context.read<AuthBloc>().add(const AuthEvent.logout());
-                      }
+                      ErrorUtils.handleApiFailure(context, failure);
                     },
                     (_) {},
                   ),

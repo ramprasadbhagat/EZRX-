@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
@@ -13,17 +14,16 @@ class ProfileTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserBloc, UserState>(
-      listenWhen: (previous, current) => previous.user != current.user,
+      listenWhen: (previous, current) =>
+          previous.user != current.user ||
+          previous.userFailureOrSuccessOption !=
+              current.userFailureOrSuccessOption,
       listener: (context, state) {
         state.userFailureOrSuccessOption.fold(
           () {},
           (either) => either.fold(
             (failure) {
-              final failureMessage = failure.failureMessage;
-              showSnackBar(context: context, message: failureMessage.tr());
-              if (failureMessage == 'authentication failed') {
-                context.read<AuthBloc>().add(const AuthEvent.logout());
-              }
+              ErrorUtils.handleApiFailure(context, failure);
             },
             (_) {},
           ),

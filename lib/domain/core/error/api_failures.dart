@@ -18,6 +18,7 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.accountLocked() = _AccountLocked;
   const factory ApiFailure.accountExpired() = _AccountExpired;
   const factory ApiFailure.tokenExpired() = _TokenExpired;
+  const factory ApiFailure.authenticationFailed() = _AuthenticationFailed;
 
   // Bio failure
   const factory ApiFailure.deviceNotSupportBiometirc() =
@@ -41,6 +42,7 @@ extension ApiFailureExt on ApiFailure {
       accountLocked: (_) => 'Account is Locked',
       accountExpired: (_) => 'Account is Expired',
       tokenExpired: (_) => 'Session token is Expired',
+      authenticationFailed: (_) => 'Your session has expired',
       deviceNotSupportBiometirc: (_) => 'Device not support biometric',
       cannotCheckBiometrics: (_) => 'Unable to check your biometric',
       noSupportedBiometrics: (_) => 'No supported biometric',

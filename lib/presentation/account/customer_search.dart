@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -63,14 +64,7 @@ class _CustomerSearchPage extends State<CustomerSearchPage> {
                 () {},
                 (either) => either.fold(
                   (failure) {
-                    final failureMessage = failure.failureMessage;
-                    showSnackBar(
-                      context: context,
-                      message: failureMessage.tr(),
-                    );
-                    if (failureMessage == 'authentication failed') {
-                      context.read<AuthBloc>().add(const AuthEvent.logout());
-                    }
+                    ErrorUtils.handleApiFailure(context, failure);
                   },
                   (_) {},
                 ),

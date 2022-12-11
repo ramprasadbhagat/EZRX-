@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/order/material_price_detail/material_pric
 import 'package:ezrxmobile/domain/core/aggregate/bundle_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -34,14 +35,7 @@ class MaterialBundleListPage extends StatelessWidget {
           () {},
           (either) => either.fold(
             (failure) {
-              final failureMessage = failure.failureMessage;
-              showSnackBar(
-                context: context,
-                message: failureMessage.tr(),
-              );
-              if (failureMessage == 'authentication failed') {
-                context.read<AuthBloc>().add(const AuthEvent.logout());
-              }
+              ErrorUtils.handleApiFailure(context, failure);
             },
             (_) {},
           ),

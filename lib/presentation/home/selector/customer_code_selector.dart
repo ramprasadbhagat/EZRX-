@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -27,14 +28,7 @@ class CustomerCodeSelector extends StatelessWidget {
           () {},
           (either) => either.fold(
             (failure) {
-              final failureMessage = failure.failureMessage;
-              showSnackBar(
-                context: context,
-                message: failureMessage.tr(),
-              );
-              if (failureMessage == 'authentication failed') {
-                context.read<AuthBloc>().add(const AuthEvent.logout());
-              }
+              ErrorUtils.handleApiFailure(context, failure);
             },
             (_) {},
           ),

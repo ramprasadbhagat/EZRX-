@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -131,18 +132,7 @@ class _PriceSheetState extends State<PriceSheet> {
                       },
                       (either) => either.fold(
                         (failure) {
-                          final failureMessage = failure.failureMessage;
-
-                          showSnackBar(
-                            context: context,
-                            message: failureMessage.tr(),
-                          );
-
-                          if (failureMessage == 'authentication failed') {
-                            context.read<AuthBloc>().add(
-                                  const AuthEvent.logout(),
-                                );
-                          }
+                          ErrorUtils.handleApiFailure(context, failure);
                         },
                         (_) {},
                       ),

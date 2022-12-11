@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/order/order_document_type/order_document_
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -42,14 +43,7 @@ class SalesOrgSelector extends StatelessWidget {
             () {},
             (either) => either.fold(
               (failure) {
-                final failureMessage = failure.failureMessage;
-                showSnackBar(
-                  context: context,
-                  message: failureMessage.tr(),
-                );
-                if (failureMessage == 'authentication failed') {
-                  context.read<AuthBloc>().add(const AuthEvent.logout());
-                }
+                ErrorUtils.handleApiFailure(context, failure);
 
                 if (state.haveSelectedSalesOrganisation) {
                   _callBannerAndDocType(context, state, false);

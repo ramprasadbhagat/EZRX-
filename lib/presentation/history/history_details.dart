@@ -16,6 +16,7 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/core/text_button_shimmer.dart';
@@ -519,14 +520,7 @@ class _AdditionalCommentsState extends State<_AdditionalComments> {
                 (failure) {
                   overlay.hide();
 
-                  final failureMessage = failure.failureMessage;
-                  showSnackBar(
-                    context: context,
-                    message: failureMessage.tr(),
-                  );
-                  if (failureMessage == 'authentication failed') {
-                    context.read<AuthBloc>().add(const AuthEvent.logout());
-                  }
+                  ErrorUtils.handleApiFailure(context, failure);
                 },
                 (r) async {
                   overlay.hide();
