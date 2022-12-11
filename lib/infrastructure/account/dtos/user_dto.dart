@@ -12,7 +12,6 @@ import 'package:ezrxmobile/infrastructure/account/dtos/role_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/common/dto_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rxdart/transformers.dart';
 
 part 'user_dto.freezed.dart';
 part 'user_dto.g.dart';

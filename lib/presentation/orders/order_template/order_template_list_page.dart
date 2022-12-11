@@ -1,15 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/cart_button.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/orders/order_template/order_template_item.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';

@@ -5,7 +5,6 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -14,7 +13,6 @@ import 'package:ezrxmobile/application/order/order_document_type/order_document_
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';

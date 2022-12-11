@@ -97,7 +97,7 @@ class _ExpansionTileState extends State<ExpansionTile>
   late AnimationController _controller;
   late Animation<double> _iconTurns;
   late Animation<double> _heightFactor;
-  late Animation<Color?> _borderColor;
+  // late Animation<Color?> _borderColor;
   late Animation<Color?> _headerColor;
   late Animation<Color?> _iconColor;
   late Animation<Color?> _backgroundColor;

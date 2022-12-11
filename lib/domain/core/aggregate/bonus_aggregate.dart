@@ -1,7 +1,6 @@
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'bonus_aggregate.freezed.dart';
 

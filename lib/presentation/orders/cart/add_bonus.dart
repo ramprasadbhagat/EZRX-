@@ -2,10 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/cart_bottom_sheet.dart';
@@ -72,14 +70,7 @@ class _BonusAddPageState extends State<BonusAddPage> {
                   (failure) {
                     ErrorUtils.handleApiFailure(context, failure);
                   },
-                  (value) {
-                    // TODO: Mahendra , why we need these ?
-                    final failureMessage = value.failureMessage;
-                    showSnackBar(
-                      context: context,
-                      message: failureMessage.tr(),
-                    );
-                  },
+                  (_) {},
                 ),
               );
             },

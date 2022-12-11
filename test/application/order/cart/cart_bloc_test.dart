@@ -56,30 +56,30 @@ void main() {
         )),
   ];
 
-  final mockCartItemList2 = [
-    PriceAggregate.empty().copyWith(
-      quantity: 1,
-      materialInfo: MaterialInfo.empty().copyWith(
-        materialNumber: MaterialNumber('000000000023168451'),
-        materialDescription: ' Triglyceride Mosys D',
-        principalData: PrincipalData.empty().copyWith(
-          principalName: '台灣拜耳股份有限公司',
-        ),
-        remarks: '',
-      ),
-    ),
-    PriceAggregate.empty().copyWith(
-      quantity: 1,
-      materialInfo: MaterialInfo.empty().copyWith(
-        materialNumber: MaterialNumber('000000000023168456'),
-        materialDescription: ' Triglyceride Mosys D',
-        principalData: PrincipalData.empty().copyWith(
-          principalName: '台灣拜耳股份有限公司',
-        ),
-        remarks: '',
-      ),
-    ),
-  ];
+  // final mockCartItemList2 = [
+  //   PriceAggregate.empty().copyWith(
+  //     quantity: 1,
+  //     materialInfo: MaterialInfo.empty().copyWith(
+  //       materialNumber: MaterialNumber('000000000023168451'),
+  //       materialDescription: ' Triglyceride Mosys D',
+  //       principalData: PrincipalData.empty().copyWith(
+  //         principalName: '台灣拜耳股份有限公司',
+  //       ),
+  //       remarks: '',
+  //     ),
+  //   ),
+  //   PriceAggregate.empty().copyWith(
+  //     quantity: 1,
+  //     materialInfo: MaterialInfo.empty().copyWith(
+  //       materialNumber: MaterialNumber('000000000023168456'),
+  //       materialDescription: ' Triglyceride Mosys D',
+  //       principalData: PrincipalData.empty().copyWith(
+  //         principalName: '台灣拜耳股份有限公司',
+  //       ),
+  //       remarks: '',
+  //     ),
+  //   ),
+  // ];
 
   final mockStockInfo = StockInfo.empty().copyWith(
     materialNumber: MaterialNumber('8949542'),
@@ -92,10 +92,10 @@ void main() {
   final mockMaterialItemList = [
     MaterialNumber('111111111'),
   ];
-  final mockMaterialItemList2 = [
-    MaterialNumber('111111111'),
-    MaterialNumber('000000000023168451'),
-  ];
+  // final mockMaterialItemList2 = [
+  //   MaterialNumber('111111111'),
+  //   MaterialNumber('000000000023168451'),
+  // ];
 
   const remarkText = '1234';
 
