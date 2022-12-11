@@ -119,7 +119,7 @@ class AuthRemoteDataSource {
         code: res.statusCode ?? 0,
         message: res.statusMessage ?? '',
       );
-    } else if (res.data['errors'] != null) {
+    } else if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
       throw ServerException(message: res.data['errors'][0]['message']);
     } else if (res.data['data'][jsonKey]['authenticated'] == false) {
       throw const AuthException.invalidEmailAndPasswordCombination();

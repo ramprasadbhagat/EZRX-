@@ -29,7 +29,12 @@ class SalesOrgRemoteDataSource {
         }),
         apiEndpoint: 'salesOrgConfigs',
       );
+
       _salesOrgExceptionChecker(res: res);
+      if (res.data['data']['salesOrgConfigs'] == null ||
+          res.data['data']['salesOrgConfigs'].isEmpty) {
+        return SalesOrganisationConfigs.empty();
+      }
 
       return SalesOrganisationConfigsDto.fromJson(
         res.data['data']['salesOrgConfigs'][0],
@@ -38,7 +43,7 @@ class SalesOrgRemoteDataSource {
   }
 
   void _salesOrgExceptionChecker({required Response<dynamic> res}) {
-    if (res.data['errors'] != null) {
+    if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
       throw ServerException(message: res.data['errors'][0]['message']);
     } else if (res.statusCode != 200) {
       throw ServerException(

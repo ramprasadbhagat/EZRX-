@@ -66,6 +66,7 @@ class AuthInterceptor extends Interceptor {
 
     try {
       if (response.data['errors'] != null &&
+          response.data['errors'].isNotEmpty &&
           response.data['errors'][0]['message'] == 'authentication failed') {
         final newJwt = await _refreshToken();
         if (newJwt != null) {

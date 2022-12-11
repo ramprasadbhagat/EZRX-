@@ -37,7 +37,7 @@ class OrderDocumentTypeRemoteDataSource {
         }),
         apiEndpoint: 'orderDocumentType',
       );
-      
+
       _orderDocumentTypeChecker(res: res);
       final orderDocumentTypeData =
           res.data['data']['orderDocumentType']['documentTypes'];
@@ -49,7 +49,7 @@ class OrderDocumentTypeRemoteDataSource {
   }
 
   void _orderDocumentTypeChecker({required Response<dynamic> res}) {
-    if (res.data['errors'] != null) {
+    if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
       throw ServerException(message: res.data['errors'][0]['message']);
     } else if (res.statusCode != 200) {
       throw ServerException(

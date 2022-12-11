@@ -10,6 +10,7 @@ class OrderHistoryDetailsState with _$OrderHistoryDetailsState {
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required List<OrderHistoryDetailsBonusAggregate> bonusItem,
   }) = _OrderHistoryDetailsState;
+
   factory OrderHistoryDetailsState.initial() => OrderHistoryDetailsState(
         orderHistoryDetails: OrderHistoryDetails.empty(),
         failureOrSuccessOption: none(),
@@ -17,10 +18,10 @@ class OrderHistoryDetailsState with _$OrderHistoryDetailsState {
         showErrorMessage: false,
         bonusItem: <OrderHistoryDetailsBonusAggregate>[],
       );
-  String discountRate(
-    List<OrderHistoryDetailsOrderItemDetails> details,
-  ) {
-    return details.map((e) => e.rate).toList().first;
-  }
 
+  String discountRate(List<OrderHistoryDetailsOrderItemDetails> details) {
+    final discountRateList = details.map((e) => e.rate).toList();
+
+    return discountRateList.isEmpty ? '' : discountRateList.first;
+  }
 }
