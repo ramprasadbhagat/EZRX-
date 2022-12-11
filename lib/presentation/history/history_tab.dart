@@ -43,72 +43,68 @@ class HistoryTab extends StatelessWidget {
           'Order History'.tr(),
         ),
         automaticallyImplyLeading: false,
-        actions: const [
-          CartButton(),
-        ],
+        actions: const [CartButton()],
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(
-            30.0,
-          ),
-          child: BlocBuilder<ShipToCodeBloc, ShipToCodeState>(
-            buildWhen: (previous, current) =>
-                previous.haveShipTo != current.haveShipTo,
-            builder: (context, state) {
-              return state.haveShipTo
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        BlocBuilder<OrderHistoryFilterBloc,
-                            OrderHistoryFilterState>(
-                          builder: (context, state) {
-                            return InkWell(
-                              onTap: () {
-                                context.read<OrderHistoryFilterBloc>().add(
-                                      OrderHistoryFilterEvent.sortByDate(
-                                        state.sortDirection == 'desc'
-                                            ? 'asc'
-                                            : 'desc',
+          preferredSize: const Size.fromHeight(30.0),
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: BlocBuilder<ShipToCodeBloc, ShipToCodeState>(
+              buildWhen: (previous, current) =>
+                  previous.haveShipTo != current.haveShipTo,
+              builder: (context, state) {
+                return state.haveShipTo
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          BlocBuilder<OrderHistoryFilterBloc,
+                              OrderHistoryFilterState>(
+                            builder: (context, state) {
+                              return InkWell(
+                                onTap: () {
+                                  context.read<OrderHistoryFilterBloc>().add(
+                                        OrderHistoryFilterEvent.sortByDate(
+                                          state.sortDirection == 'desc'
+                                              ? 'asc'
+                                              : 'desc',
+                                        ),
+                                      );
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text(
+                                      'Order Date'.tr(),
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: ZPColors.kPrimaryColor,
+                                        fontWeight: FontWeight.w500,
                                       ),
-                                    );
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  const SizedBox(width: 12),
-                                  Text(
-                                    'Order Date: '.tr(),
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      color: ZPColors.kPrimaryColor,
-                                      fontWeight: FontWeight.w500,
                                     ),
-                                  ),
-                                  const Icon(
-                                    Icons.swap_vert_outlined,
-                                    color: ZPColors.darkGray,
-                                    size: 12,
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                        InkWell(
-                          key: const Key('statusFilterButton'),
-                          onTap: () {
-                            showModalBottomSheet(
-                              isScrollControlled: true,
-                              context: context,
-                              builder: (_) {
-                                return const HistoryFilterByStatus();
-                              },
-                            );
-                          },
-                          child: Stack(
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                child: Text(
+                                    Icon(
+                                      state.sortDirection == 'desc'
+                                          ? Icons.arrow_drop_down_outlined
+                                          : Icons.arrow_drop_up_outlined,
+                                      color: ZPColors.darkGray,
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                          InkWell(
+                            key: const Key('statusFilterButton'),
+                            onTap: () {
+                              showModalBottomSheet(
+                                isScrollControlled: true,
+                                context: context,
+                                builder: (_) {
+                                  return const HistoryFilterByStatus();
+                                },
+                              );
+                            },
+                            child: Stack(
+                              children: <Widget>[
+                                Text(
                                   'Status'.tr(),
                                   key: const ValueKey('status'),
                                   style: const TextStyle(
@@ -117,54 +113,49 @@ class HistoryTab extends StatelessWidget {
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                              ),
-                              BlocBuilder<OrderHistoryFilterByStatusBloc,
-                                  OrderHistoryFilterByStatusState>(
-                                builder: (context, state) {
-                                  if (state.filterByStatusName.isNotEmpty) {
-                                    return Positioned(
-                                      key: const ValueKey(
-                                        'Filter_by_status_list_not_empty',
-                                      ),
-                                      right: 0,
-                                      child: Container(
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: ZPColors.kPrimaryColor,
+                                BlocBuilder<OrderHistoryFilterByStatusBloc,
+                                    OrderHistoryFilterByStatusState>(
+                                  builder: (context, state) {
+                                    if (state.filterByStatusName.isNotEmpty) {
+                                      return Positioned(
+                                        key: const ValueKey(
+                                          'Filter_by_status_list_not_empty',
                                         ),
-                                        width: radius / 3,
-                                        height: radius / 2,
-                                      ),
-                                    );
-                                  }
+                                        right: 0,
+                                        child: Container(
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: ZPColors.kPrimaryColor,
+                                          ),
+                                          width: radius / 3,
+                                          height: radius / 2,
+                                        ),
+                                      );
+                                    }
 
-                                  return const SizedBox.shrink();
-                                },
-                              ),
-                            ],
+                                    return const SizedBox.shrink();
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        GestureDetector(
-                          key: const Key('filterButton'),
-                          onTap: () {
-                            scaffoldKey.currentState!.openEndDrawer();
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Text(
-                                'Filter'.tr(),
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: ZPColors.kPrimaryColor,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ).tr(),
-                              Padding(
-                                padding: const EdgeInsets.all(
-                                  8.0,
-                                ),
-                                child: Stack(
+                          InkWell(
+                            key: const Key('filterButton'),
+                            onTap: () {
+                              scaffoldKey.currentState!.openEndDrawer();
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                  'Filter'.tr(),
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    color: ZPColors.kPrimaryColor,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ).tr(),
+                                Stack(
                                   children: <Widget>[
                                     const FittedBox(
                                       key: ValueKey('order_history_filter'),
@@ -200,14 +191,14 @@ class HistoryTab extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    )
-                  : const SizedBox.shrink();
-            },
+                        ],
+                      )
+                    : const SizedBox.shrink();
+              },
+            ),
           ),
           // : const SizedBox.shrink(),
         ),
