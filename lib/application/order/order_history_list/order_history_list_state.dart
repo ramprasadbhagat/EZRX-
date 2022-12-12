@@ -18,9 +18,12 @@ class OrderHistoryListState with _$OrderHistoryListState {
         failureOrSuccessOption: none(),
       );
 
-  List<OrderHistoryItem> getFilterItem(List<String> filter) =>
-      List.from(orderHistoryList.orderHistoryItems)
-        ..retainWhere(
-          (element) => filter.contains(element.status) || filter.isEmpty,
-        );
+  List<OrderHistoryItem> getFilterItem(List<String> filter) {
+    return List.from(orderHistoryList.orderHistoryItems)
+      ..retainWhere(
+        (orderHistoryItem) =>
+            filter.any((e) => orderHistoryItem.status.contains(e)) ||
+            filter.isEmpty,
+      );
+  }
 }

@@ -359,6 +359,32 @@ void main() {
         expect(find.byKey(const Key('Filter_by_status_list_not_empty')),
             findsOneWidget);
       });
+
+      testWidgets(
+          'When selected filter status order history list should be filtered',
+          (tester) async {
+        when(() => mockOrderHistoryListBloc.state).thenReturn(
+          OrderHistoryListState.initial().copyWith(
+            isFetching: false,
+            orderHistoryList: orderHistoryItem,
+          ),
+        );
+        when(() => mockShipToCodeBloc.state).thenReturn(
+            ShipToCodeState.initial().copyWith(
+                shipToInfo:
+                    ShipToInfo.empty().copyWith(defaultShipToAddress: true)));
+        when(() => mockOrderHistoryFilterByStatusBloc.state).thenReturn(
+          OrderHistoryFilterByStatusState.initial().copyWith(
+            filterByStatusName: [
+              'Pending',
+            ],
+          ),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+
+        expect(find.byType(OrderHistoryListTile), findsNWidgets(2));
+      });
     },
   );
 }
