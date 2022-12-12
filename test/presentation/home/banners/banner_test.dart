@@ -56,11 +56,13 @@ void main() {
   const mockUrl = 'mock-image-urls';
   const mockUrlLink = 'www.google.com';
   final mockBanner1 = BannerItem.empty().copyWith(
+    id: 1,
     title: 'Banner Title 1',
     url: mockUrl,
     urlLink: mockUrlLink,
   );
   final mockBanner2 = BannerItem.empty().copyWith(
+    id: 2,
     title: 'Banner Title 2',
     url: mockUrl,
     urlLink: mockUrlLink,
@@ -73,7 +75,8 @@ void main() {
     locator = GetIt.instance;
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton(() => CountlyService(config: locator<Config>()));
+    locator
+        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
     locator.registerLazySingleton(() => mockAuthBloc);
     locator.registerLazySingleton(() => mockSalesOrgBloc);
     locator.registerLazySingleton(() => mockBannerBloc);
@@ -236,6 +239,72 @@ void main() {
         find.byKey(const Key('homeBanner')),
         findsOneWidget,
       );
+    });
+
+    testWidgets('Banner test - Auto Scroll - Success', (tester) async {
+      final bannerBloc = locator<MockBannerBloc>();
+
+      when(() => bannerBloc.stream).thenAnswer((invocation) {
+        return Stream.fromIterable([
+          BannerState.initial(),
+          BannerState.initial().copyWith(
+            banner: [
+              mockBanner1,
+              mockBanner2,
+            ],
+            bannerFailureOrSuccessOption: optionOf(const Right('No API error')),
+          ),
+        ]);
+      });
+
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+
+      var bannerPageViewController = PageController();
+      final bannerPageViewFinder = find.byType(PageView);
+      expect(bannerPageViewFinder, findsOneWidget);
+
+      final bannerPageView = tester.widget<PageView>(bannerPageViewFinder);
+
+      final firstBanner = find.byKey(Key(mockBanner1.id.toString()));
+      expect(firstBanner.hitTestable(), findsOneWidget);
+
+      bannerPageViewController = bannerPageView.controller;
+      expect(bannerPageViewController.hasClients, true);
+      bannerPageViewController.jumpToPage(1);
+      await tester.pump();
+
+      final secondBanner = find.byKey(Key(mockBanner2.id.toString()));
+      expect(secondBanner.hitTestable(), findsOneWidget);
+    });
+
+    testWidgets('Empty Banner test - Auto Scroll', (tester) async {
+      final bannerBloc = locator<MockBannerBloc>();
+
+      when(() => bannerBloc.stream).thenAnswer((invocation) {
+        return Stream.fromIterable([
+          BannerState.initial(),
+          BannerState.initial().copyWith(
+            banner: [],
+            bannerFailureOrSuccessOption: optionOf(const Right('No API error')),
+          ),
+        ]);
+      });
+
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+
+      var bannerPageViewController = PageController();
+      final bannerPageViewFinder = find.byType(PageView);
+
+      try {
+        final bannerPageView = tester.widget<PageView>(bannerPageViewFinder);
+        expect(bannerPageViewFinder, findsOneWidget);
+        bannerPageViewController = bannerPageView.controller;
+      } catch (e) {
+        expect(bannerPageViewFinder, findsNothing);
+        expect(bannerPageViewController.hasClients, false);
+      }
     });
   });
 }

@@ -59,6 +59,8 @@ class _HomeBannerState extends State<HomeBanner> {
                 allowImplicitScrolling: true,
                 itemBuilder: (_, index) {
                   return BannerTile(
+                    key: Key(state.banner[index % state.banner.length].id
+                        .toString()),
                     banner: state.banner[index % state.banner.length],
                     httpService: locator<HttpService>(),
                     countlyService: locator<CountlyService>(),
@@ -96,14 +98,18 @@ class _HomeBannerState extends State<HomeBanner> {
   }
 
   void startBannerScrollTimer() {
-    _controller.jumpToPage(0);
+    if (_controller.hasClients) {
+      _controller.jumpToPage(0);
+    }
     bannerTimer = Timer.periodic(
       const Duration(seconds: 8),
       (timer) {
-        _controller.nextPage(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.ease,
-        );
+        if (_controller.hasClients) {
+          _controller.nextPage(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.ease,
+          );
+        }
       },
     );
   }
