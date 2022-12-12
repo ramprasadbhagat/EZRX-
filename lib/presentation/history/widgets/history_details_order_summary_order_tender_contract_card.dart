@@ -20,13 +20,15 @@ class OrderTenderContractCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final eligibiltiyBlocState = context.read<EligibilityBloc>().state;
     final salesOrgConfigs = eligibiltiyBlocState.salesOrgConfigs;
+    // final disableCreateOrder =
+    //     context.read<UserBloc>().state.user.disableCreateOrder;
 
     return BlocBuilder<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
       builder: (context, state) {
         return InkWell(
           ////revisit later
-          // onTap: (){},
+          // onTap: disableCreateOrder ? null : (){},
           child: Card(
             color: Colors.white,
             elevation: 3,
@@ -76,7 +78,7 @@ class OrderTenderContractCard extends StatelessWidget {
                         valueFlex: 1,
                       ),
                       BalanceTextRow(
-                         key:const Key('sapStatusNotEmpty'),
+                        key: const Key('sapStatusNotEmpty'),
                         keyText: 'Status'.tr(),
                         valueText: orderHistoryDetailsBonusAggregate
                                 .orderItem.sAPStatus.isNotEmpty

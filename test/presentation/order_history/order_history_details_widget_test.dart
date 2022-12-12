@@ -89,6 +89,8 @@ class MockDownloadAttachmentBloc
 class MockOrderHistoryDetailsRepository extends Mock
     implements OrderHistoryDetailsRepository {}
 
+class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late GetIt locator;
@@ -98,6 +100,7 @@ void main() {
   final mockShipToCodeBloc = ShipToCodeMocBloc();
   final mockCartBloc = CartMocBloc();
   final mockSalesOrgBloc = SalesOrgMockBloc();
+  final userBlocMock = UserBlocMock();
   late CustomerCodeBloc customerCodeBlocMock;
   late MockHTTPService mockHTTPService;
   late AppRouter autoRouterMock;
@@ -138,6 +141,7 @@ void main() {
       eligibilityBlocMock = EligibilityBlocMock();
       materialPriceDetailBlocMock = MockMaterialPriceDetailBloc();
       downloadAttachmentBlocMock = MockDownloadAttachmentBloc();
+      when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => mockOrderHistoryListBloc.state)
           .thenReturn(OrderHistoryListState.initial());
       when(() => mockOrderHistoryFilterBloc.state)
@@ -175,6 +179,7 @@ void main() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         providers: [
+          BlocProvider<UserBloc>(create: (context) => userBlocMock),
           BlocProvider<OrderHistoryListBloc>(
               create: (context) => mockOrderHistoryListBloc),
           BlocProvider<OrderHistoryFilterBloc>(

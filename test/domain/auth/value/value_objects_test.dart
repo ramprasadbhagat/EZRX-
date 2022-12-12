@@ -402,6 +402,7 @@ void main() {
           settingTc: SettingTc.empty(),
           enableOrderType: false,
           hasBonusOverride: false,
+          disableCreateOrder: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.isValid();
@@ -431,6 +432,7 @@ void main() {
           settingTc: SettingTc.empty(),
           enableOrderType: false,
           hasBonusOverride: false,
+          disableCreateOrder: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -466,6 +468,7 @@ void main() {
           settingTc: SettingTc.empty(),
           enableOrderType: false,
           hasBonusOverride: false,
+          disableCreateOrder: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -501,6 +504,7 @@ void main() {
           settingTc: SettingTc.empty(),
           enableOrderType: false,
           hasBonusOverride: false,
+          disableCreateOrder: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -536,6 +540,7 @@ void main() {
           settingTc: SettingTc.empty(),
           enableOrderType: false,
           hasBonusOverride: false,
+          disableCreateOrder: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -571,6 +576,7 @@ void main() {
           settingTc: SettingTc.empty(),
           enableOrderType: false,
           hasBonusOverride: false,
+          disableCreateOrder: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -607,6 +613,7 @@ void main() {
           settingTc: SettingTc.empty(),
           enableOrderType: false,
           hasBonusOverride: false,
+          disableCreateOrder: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -643,6 +650,7 @@ void main() {
           settingTc: SettingTc.empty(),
           enableOrderType: false,
           hasBonusOverride: false,
+          disableCreateOrder: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -678,6 +686,7 @@ void main() {
           settingTc: SettingTc.empty(),
           enableOrderType: false,
           hasBonusOverride: false,
+          disableCreateOrder: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(

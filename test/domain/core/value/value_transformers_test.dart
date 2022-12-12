@@ -324,6 +324,7 @@ void main() {
           settingTc: SettingTc.empty(),
           enableOrderType: false,
           hasBonusOverride: false,
+          disableCreateOrder: false,
         );
         final result = isMustNotContainUserNameOrName(input: input, user: user);
         expect(result, true);
@@ -350,6 +351,7 @@ void main() {
           settingTc: SettingTc.empty(),
           enableOrderType: false,
           hasBonusOverride: false,
+          disableCreateOrder: false,
         );
         final result = isMustNotContainUserNameOrName(input: input, user: user);
         expect(result, false);
@@ -376,6 +378,7 @@ void main() {
           settingTc: SettingTc.empty(),
           enableOrderType: false,
           hasBonusOverride: false,
+          disableCreateOrder: false,
         );
         final result = isMustNotContainUserNameOrName(input: input, user: user);
         expect(result, false);
@@ -402,6 +405,7 @@ void main() {
           settingTc: SettingTc.empty(),
           enableOrderType: false,
           hasBonusOverride: false,
+          disableCreateOrder: false,
         );
         final result = isMustNotContainUserNameOrName(input: input, user: user);
         expect(result, false);

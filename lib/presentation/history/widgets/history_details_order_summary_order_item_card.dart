@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
@@ -34,28 +35,33 @@ class OrderItemCard extends StatelessWidget {
     final enableTaxDisplay = salesOrgConfigs.enableTaxDisplay;
     final enableDisplayOrderDiscount = salesOrgConfigs.displayOrderDiscount;
     final enableRemark = salesOrgConfigs.enableRemarks;
+    final disableCreateOrder =
+        context.read<UserBloc>().state.user.disableCreateOrder;
 
     return BlocBuilder<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
       builder: (context, state) {
         return InkWell(
-          onTap: () {
-            final materialPrice =
-                context.read<MaterialPriceBloc>().state.materialPrice[
-                    orderHistoryDetailsBonusAggregate.orderItem.materialNumber];
-            if (materialPrice == null) {
-              showSnackBar(
-                context: context,
-                message: 'Product Not Available'.tr(),
-              );
-            } else {
-              _addToCartPressed(
-                context,
-                context.read<MaterialPriceDetailBloc>().state,
-                orderHistoryDetailsBonusAggregate.orderItem,
-              );
-            }
-          },
+          onTap: disableCreateOrder
+              ? null
+              : () {
+                  final materialPrice =
+                      context.read<MaterialPriceBloc>().state.materialPrice[
+                          orderHistoryDetailsBonusAggregate
+                              .orderItem.materialNumber];
+                  if (materialPrice == null) {
+                    showSnackBar(
+                      context: context,
+                      message: 'Product Not Available'.tr(),
+                    );
+                  } else {
+                    _addToCartPressed(
+                      context,
+                      context.read<MaterialPriceDetailBloc>().state,
+                      orderHistoryDetailsBonusAggregate.orderItem,
+                    );
+                  }
+                },
           child: Card(
             color: ZPColors.white,
             child: Padding(
@@ -115,7 +121,7 @@ class OrderItemCard extends StatelessWidget {
                             )
                           : const SizedBox.shrink(),
                       BalanceTextRow(
-                        key:const Key('sapStatusNotEmpty'),
+                        key: const Key('sapStatusNotEmpty'),
                         keyText: 'Status:'.tr(),
                         valueText: orderHistoryDetailsBonusAggregate
                                 .orderItem.sAPStatus.isNotEmpty

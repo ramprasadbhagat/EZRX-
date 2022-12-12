@@ -25,6 +25,7 @@ class User with _$User {
     required SettingTc settingTc,
     required bool enableOrderType,
     required bool hasBonusOverride,
+    required bool disableCreateOrder,
   }) = _User;
 
   factory User.empty() => User(
@@ -47,5 +48,6 @@ class User with _$User {
         ),
         enableOrderType: false,
         hasBonusOverride: false,
+        disableCreateOrder: false,
       );
 }

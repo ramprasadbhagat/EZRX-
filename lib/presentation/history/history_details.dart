@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -58,6 +59,9 @@ class HistoryDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final disableCreateOrder =
+        context.read<UserBloc>().state.user.disableCreateOrder;
+
     return Scaffold(
       key: const ValueKey('orderHistoryDetailsPage'),
       appBar: AppBar(
@@ -67,36 +71,38 @@ class HistoryDetails extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text('#${orderHistoryItem.orderNumber}'.tr()),
-        actions: <Widget>[
-          BlocBuilder<MaterialPriceDetailBloc, MaterialPriceDetailState>(
-            buildWhen: (previous, current) =>
-                previous.isValidating != current.isValidating ||
-                previous.isFetching != current.isFetching,
-            builder: (context, state) {
-              if (state.isValidating || state.isFetching) {
-                return TextButtonShimmer(
-                  key: const ValueKey('reorder'),
-                  title: 'Reorder'.tr(),
-                );
-              }
+        actions: disableCreateOrder
+            ? <Widget>[]
+            : <Widget>[
+                BlocBuilder<MaterialPriceDetailBloc, MaterialPriceDetailState>(
+                  buildWhen: (previous, current) =>
+                      previous.isValidating != current.isValidating ||
+                      previous.isFetching != current.isFetching,
+                  builder: (context, state) {
+                    if (state.isValidating || state.isFetching) {
+                      return TextButtonShimmer(
+                        key: const ValueKey('reorder'),
+                        title: 'Reorder'.tr(),
+                      );
+                    }
 
-              return TextButton(
-                key: const ValueKey('addToCartPressed'),
-                onPressed: () => _addToCartPressed(
-                  context,
-                  state,
-                  orderHistoryItem,
+                    return TextButton(
+                      key: const ValueKey('addToCartPressed'),
+                      onPressed: () => _addToCartPressed(
+                        context,
+                        state,
+                        orderHistoryItem,
+                      ),
+                      child: Text(
+                        'Reorder'.tr(),
+                        style: const TextStyle(
+                          color: ZPColors.kPrimaryColor,
+                        ),
+                      ),
+                    );
+                  },
                 ),
-                child: Text(
-                  'Reorder'.tr(),
-                  style: const TextStyle(
-                    color: ZPColors.kPrimaryColor,
-                  ),
-                ),
-              );
-            },
-          ),
-        ],
+              ],
       ),
       body: BlocBuilder<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
         buildWhen: (previous, current) =>
@@ -896,31 +902,40 @@ class _OrderSummary extends StatelessWidget {
                             );
                 }).toList(),
               ),
-              Center(
-                child: Container(
-                  width: 160,
-                  padding: const EdgeInsets.all(16.0),
-                  child: ElevatedButton(
-                    key: const ValueKey('reOrderButton'),
-                    // style: ButtonStyle(
-                    //   backgroundColor: MaterialStateProperty.resolveWith(
-                    //     (states) => ZPColors.white,
-                    //   ),
-                    //   side: MaterialStateProperty.resolveWith(
-                    //     (states) => const BorderSide(color: ZPColors.primary),
-                    //   ),
-                    // ),
-                    onPressed: () => _addToCartPressed(
-                      context,
-                      context.read<MaterialPriceDetailBloc>().state,
-                      orderHistoryItem,
-                    ),
-                    child: Text(
-                      'Re-order'.tr(),
-                      // style: const TextStyle(color: ZPColors.darkerGreen),
-                    ),
-                  ),
-                ),
+              BlocBuilder<UserBloc, UserState>(
+                buildWhen: (previous, current) =>
+                    previous.user.disableCreateOrder !=
+                    current.user.disableCreateOrder,
+                builder: (context, state) {
+                  return state.user.disableCreateOrder
+                      ? const SizedBox.shrink()
+                      : Center(
+                          child: Container(
+                            width: 160,
+                            padding: const EdgeInsets.all(16.0),
+                            child: ElevatedButton(
+                              key: const ValueKey('reOrderButton'),
+                              // style: ButtonStyle(
+                              //   backgroundColor: MaterialStateProperty.resolveWith(
+                              //     (states) => ZPColors.white,
+                              //   ),
+                              //   side: MaterialStateProperty.resolveWith(
+                              //     (states) => const BorderSide(color: ZPColors.primary),
+                              //   ),
+                              // ),
+                              onPressed: () => _addToCartPressed(
+                                context,
+                                context.read<MaterialPriceDetailBloc>().state,
+                                orderHistoryItem,
+                              ),
+                              child: Text(
+                                'Re-order'.tr(),
+                                // style: const TextStyle(color: ZPColors.darkerGreen),
+                              ),
+                            ),
+                          ),
+                        );
+                },
               ),
             ],
           ),

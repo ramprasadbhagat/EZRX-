@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -44,6 +45,9 @@ class HomeTab extends StatelessWidget {
         child: BlocBuilder<EligibilityBloc, EligibilityState>(
           buildWhen: (previous, current) => previous != current,
           builder: (context, state) {
+            final disableCreateOrder =
+                context.read<UserBloc>().state.user.disableCreateOrder;
+
             return ListView(
               children: [
                 const AccountSuspendedBanner(),
@@ -105,17 +109,20 @@ class HomeTab extends StatelessWidget {
                       crossAxisSpacing: 8.0,
                       mainAxisSpacing: 8.0,
                       childAspectRatio: (1 / .6),
-                      children: List.generate(
-                        homePageTiles.length,
-                        (index) {
-                          return Center(
-                            child: _TileCard(
-                              key: const Key('HomeTileCard'),
-                              homePageTile: homePageTiles[index],
-                            ),
-                          );
-                        },
-                      ),
+                      children:
+                          disableCreateOrder
+                              ? []
+                              : List.generate(
+                                  homePageTiles.length,
+                                  (index) {
+                                    return Center(
+                                      child: _TileCard(
+                                        key: const Key('HomeTileCard'),
+                                        homePageTile: homePageTiles[index],
+                                      ),
+                                    );
+                                  },
+                                ),
                     ),
                   ),
                 ),

@@ -47,6 +47,8 @@ class UserDto with _$UserDto {
         required String privacyPolicyAcceptedPlatform,
     @JsonKey(name: 'hasBonusOverride', defaultValue: false)
         required bool hasBonusOverride,
+    @JsonKey(name: 'disableCreateOrder', defaultValue: false)
+        required bool disableCreateOrder,
   }) = _UserDto;
 
   factory UserDto.fromDomain(User user) {
@@ -69,6 +71,7 @@ class UserDto with _$UserDto {
       privacyPolicyAcceptedPlatform:
           user.settingTc.privacyPolicyAcceptedPlatform,
       hasBonusOverride: user.hasBonusOverride,
+      disableCreateOrder: user.disableCreateOrder,
     );
   }
 
@@ -98,6 +101,7 @@ class UserDto with _$UserDto {
       ),
       enableOrderType: enableOrderType,
       hasBonusOverride: hasBonusOverride,
+      disableCreateOrder: disableCreateOrder,
     );
   }
 

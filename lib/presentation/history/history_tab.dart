@@ -37,9 +37,7 @@ class HistoryTab extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: Text(
-          'Order History'.tr(),
-        ),
+        title: Text('Order History'.tr()),
         automaticallyImplyLeading: false,
         actions: const [CartButton()],
         bottom: PreferredSize(

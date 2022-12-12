@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
@@ -27,61 +28,75 @@ class HomeNavigationTabbar extends StatelessWidget {
                 child: Stack(
                   children: [
                     SizerUtil.deviceType == DeviceType.mobile
-                        ? AutoTabsScaffold(
-                            lazyLoad: false,
-                            routes:
-                                _routesItems.map((item) => item.route).toList(),
-                            bottomNavigationBuilder: (_, tabsRouter) {
-                              return BottomNavigationBar(
-                                key: const Key('homeTabbar'),
-                                currentIndex: tabsRouter.activeIndex,
-                                onTap: tabsRouter.setActiveIndex,
-                                items: _routesItems
-                                    .map(
-                                      (item) => BottomNavigationBarItem(
-                                        icon: item.icon,
-                                        label: item.label.tr(),
-                                      ),
-                                    )
+                        ? BlocBuilder<UserBloc, UserState>(
+                            buildWhen: (previous, current) => previous != current,
+                            builder: (context, state) {
+                              return AutoTabsScaffold(
+                                lazyLoad: false,
+                                routes: _getTabs(context)
+                                    .map((item) => item.route)
                                     .toList(),
-                              );
-                            },
-                          )
-                        : AutoTabsRouter(
-                            lazyLoad: false,
-                            routes:
-                                _routesItems.map((item) => item.route).toList(),
-                            builder: (context, child, animation) {
-                              var activeIndex = _routesItems.indexWhere(
-                                (d) => context.tabsRouter
-                                    .isRouteActive(d.route.routeName),
-                              );
-                              if (activeIndex == -1) {
-                                activeIndex = 0;
-                              }
-
-                              return Row(
-                                children: [
-                                  NavigationRail(
+                                bottomNavigationBuilder: (_, tabsRouter) {
+                                  return BottomNavigationBar(
                                     key: const Key('homeTabbar'),
-                                    destinations: _routesItems
+                                    currentIndex: tabsRouter.activeIndex,
+                                    onTap: tabsRouter.setActiveIndex,
+                                    items: _getTabs(context)
                                         .map(
-                                          (item) => NavigationRailDestination(
+                                          (item) => BottomNavigationBarItem(
                                             icon: item.icon,
-                                            label: Text(item.label).tr(),
+                                            label: item.label.tr(),
                                           ),
                                         )
                                         .toList(),
-                                    selectedIndex: activeIndex,
-                                    onDestinationSelected: (index) {
-                                      context.navigateTo(
-                                        _routesItems[index].route,
-                                      );
-                                    },
-                                    labelType: NavigationRailLabelType.selected,
-                                  ),
-                                  Expanded(child: child),
-                                ],
+                                  );
+                                },
+                              );
+                            },
+                          )
+                        : BlocBuilder<UserBloc, UserState>(
+                            buildWhen: (previous, current) => previous != current,
+                            builder: (context, state) {
+                              return AutoTabsRouter(
+                                lazyLoad: false,
+                                routes: _getTabs(context)
+                                    .map((item) => item.route)
+                                    .toList(),
+                                builder: (context, child, animation) {
+                                  var activeIndex = _getTabs(context).indexWhere(
+                                    (d) => context.tabsRouter
+                                        .isRouteActive(d.route.routeName),
+                                  );
+                                  if (activeIndex == -1) {
+                                    activeIndex = 0;
+                                  }
+
+                                  return Row(
+                                    children: [
+                                      NavigationRail(
+                                        key: const Key('homeTabbar'),
+                                        destinations: _getTabs(context)
+                                            .map(
+                                              (item) =>
+                                                  NavigationRailDestination(
+                                                icon: item.icon,
+                                                label: Text(item.label).tr(),
+                                              ),
+                                            )
+                                            .toList(),
+                                        selectedIndex: activeIndex,
+                                        onDestinationSelected: (index) {
+                                          context.navigateTo(
+                                            _getTabs(context)[index].route,
+                                          );
+                                        },
+                                        labelType:
+                                            NavigationRailLabelType.selected,
+                                      ),
+                                      Expanded(child: child),
+                                    ],
+                                  );
+                                },
                               );
                             },
                           ),
@@ -92,6 +107,18 @@ class HomeNavigationTabbar extends StatelessWidget {
       },
     );
   }
+}
+
+List<RouteItem> _getTabs(BuildContext context) {
+  final isDisableCreateOrder =
+      context.read<UserBloc>().state.user.disableCreateOrder;
+  if (isDisableCreateOrder) {
+    return _routesItems
+        .where((element) => element.label != 'Favourites')
+        .toList();
+  }
+  
+  return _routesItems;
 }
 
 final _routesItems = [
