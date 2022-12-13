@@ -110,6 +110,7 @@ class _SaveTemplateButton extends StatelessWidget {
       },
       builder: (context, state) {
         return IconButton(
+          key: const Key('orderSummarySaveTemplate'),
           onPressed: () => SaveTemplateDialog.show(context: context),
           icon: const Icon(
             Icons.featured_play_list_outlined,
