@@ -103,17 +103,17 @@ OrderSummaryState _getState(StepVariant? value) {
     case 'three':
       return OrderSummaryState.initial().copyWith(
         step: 3,
-        maxSteps: 5,
+        maxSteps: 4,
       );
     case 'five':
       return OrderSummaryState.initial().copyWith(
-        step: 5,
-        maxSteps: 5,
+        step: 4,
+        maxSteps: 4,
       );
     default:
       return OrderSummaryState.initial().copyWith(
         step: 3,
-        maxSteps: 5,
+        maxSteps: 4,
       );
   }
 }
@@ -339,7 +339,7 @@ void main() {
           when(() => orderSummaryBlocMock.state)
               .thenReturn(OrderSummaryState.initial().copyWith(
             step: 3,
-            maxSteps: 5,
+            maxSteps: 4,
           ));
           final expectedStates = [
             ShipToCodeState.initial().copyWith(
@@ -372,7 +372,7 @@ void main() {
               find.byKey(const Key('_additionalDetailsFormKey'));
           expect(customerDetailsKey, findsOneWidget);
           final continueButtonKey = find.byKey(const Key('continueButtonKey'));
-          expect(continueButtonKey, findsNWidgets(6));
+          expect(continueButtonKey, findsNWidgets(5));
           await tester.tap(continueButtonKey.at(3));
           await tester.pumpAndSettle();
         },
@@ -385,8 +385,8 @@ void main() {
             () => orderSummaryBlocMock.state,
           ).thenReturn(
             OrderSummaryState.initial().copyWith(
-              step: 5,
-              maxSteps: 5,
+              step: 4,
+              maxSteps: 4,
             ),
           );
           when(
@@ -403,8 +403,8 @@ void main() {
           final cartDetailsKey = find.byKey(const Key('_cartDetailsKey'));
           expect(cartDetailsKey, findsOneWidget);
           final saveButtonKey = find.text('Save');
-          expect(saveButtonKey, findsNWidgets(6));
-          await tester.tap(saveButtonKey.at(5));
+          expect(saveButtonKey, findsNWidgets(5));
+          await tester.tap(saveButtonKey.at(4));
           await tester.pumpAndSettle();
         },
       );
@@ -416,8 +416,8 @@ void main() {
             () => orderSummaryBlocMock.state,
           ).thenReturn(
             OrderSummaryState.initial().copyWith(
-              step: 5,
-              maxSteps: 5,
+              step: 4,
+              maxSteps: 4,
             ),
           );
           when(
@@ -434,8 +434,8 @@ void main() {
           final cartDetailsKey = find.byKey(const Key('_cartDetailsKey'));
           expect(cartDetailsKey, findsOneWidget);
           final submitButtonKey = find.text('Submit');
-          expect(submitButtonKey, findsNWidgets(6));
-          await tester.tap(submitButtonKey.at(5));
+          expect(submitButtonKey, findsNWidgets(5));
+          await tester.tap(submitButtonKey.at(4));
           await tester.pumpAndSettle();
         },
       );
@@ -500,13 +500,13 @@ void main() {
           await tester.pump(const Duration(seconds: 2));
           if (orderSummaryBlocMock.state.step == 3) {
             final continueButtonKey = find.text('Continue');
-            expect(continueButtonKey, findsNWidgets(6));
+            expect(continueButtonKey, findsNWidgets(5));
             await tester.tap(continueButtonKey.at(3));
             await tester.pump();
           } else {
             final submitButtonKey = find.text('Submit');
-            expect(submitButtonKey, findsNWidgets(6));
-            await tester.tap(submitButtonKey.at(5));
+            expect(submitButtonKey, findsNWidgets(5));
+            await tester.tap(submitButtonKey.at(4));
             await tester.pump();
           }
         },
@@ -531,8 +531,11 @@ void main() {
           final cartDetailsKey = find.byKey(const Key('_cartDetailsKey'));
           expect(cartDetailsKey, findsOneWidget);
           final saveButtonKey = find.text('Back');
-          expect(saveButtonKey, findsNWidgets(6));
-          await tester.tap(saveButtonKey.at(4));
+          expect(saveButtonKey, findsNWidgets(5));
+          await tester.tap(
+            saveButtonKey.at(3),
+            warnIfMissed: false,
+          );
           await tester.pumpAndSettle();
         },
       );
@@ -822,8 +825,8 @@ void main() {
         (tester) async {
           when(() => orderSummaryBlocMock.state)
               .thenReturn(OrderSummaryState.initial().copyWith(
-            step: 5,
-            maxSteps: 5,
+            step: 4,
+            maxSteps: 4,
           ));
           final expectedStates = [
             CartState.initial().copyWith(

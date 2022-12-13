@@ -17,7 +17,7 @@ class OrderSummaryState with _$OrderSummaryState {
   factory OrderSummaryState.initial() => OrderSummaryState(
         apiFailureOrSuccessOption: none(),
         step: 0,
-        maxSteps: 5,
+        maxSteps: 4,
         additionalDetailsStep: 3,
         isSubmitting: false,
         isSubmitSuccess: false,

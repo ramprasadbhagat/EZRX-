@@ -408,6 +408,11 @@ class _Stepper extends StatelessWidget {
   }
 }
 
+bool _isDisclamerPresent(BuildContext context) {
+  return context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg.isSg &&
+      !context.read<UserBloc>().state.user.role.type.isSalesRep;
+}
+
 List<Step> _getSteps({
   required BuildContext context,
   required SalesOrganisationConfigs config,
@@ -446,11 +451,9 @@ List<Step> _getSteps({
       ),
     ),
     Step(
-      title: Text('Disclaimer'.tr()),
-      content: const _Disclaimer(),
-    ),
-    Step(
-      title: Text('Cart Details'.tr()),
+      title: Text(_isDisclamerPresent(context)
+          ? 'Disclaimer & Cart Details'.tr()
+          : 'Cart Details'.tr()),
       content: const _CartDetails(),
     ),
   ];
@@ -693,6 +696,9 @@ class _Disclaimer extends StatelessWidget {
                 ),
               )
             : const SizedBox.shrink(),
+        const SizedBox(
+          height: 15,
+        ),
         //displayNote()
       ],
     );
@@ -723,6 +729,7 @@ class _CartDetails extends StatelessWidget {
 
         return Column(
           children: [
+            const _Disclaimer(),
             BalanceTextRow(
               keyText: 'Subtotal'.tr(),
               valueText: StringUtils.displayPrice(

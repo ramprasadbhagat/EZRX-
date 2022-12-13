@@ -28,11 +28,16 @@ void main() {
       type: 'D',
     ),
   ]);
+  late OrderSummaryState orderSummaryState;
 
   group('Test Order Summary Bloc', () {
     setUp(
       () {
         orderRepositoryMock = OrderRepositoryMock();
+        orderSummaryState = OrderSummaryState.initial().copyWith(
+          additionalDetailsStep: 3,
+          maxSteps: 4,
+        );
       },
     );
     blocTest<OrderSummaryBloc, OrderSummaryState>(
@@ -41,26 +46,26 @@ void main() {
       act: (bloc) => bloc
         ..add(const OrderSummaryEvent.initialized(
           additionalDetailsStep: 3,
-          maxSteps: 5,
+          maxSteps: 4,
           step: 0,
         ))
         ..add(const OrderSummaryEvent.stepContinue())
         ..add(const OrderSummaryEvent.stepCancel())
         ..add(const OrderSummaryEvent.stepTapped(step: 2)),
       expect: () => [
-        OrderSummaryState.initial().copyWith(
-          maxSteps: 5,
+        orderSummaryState.copyWith(
+          maxSteps: 4,
           step: 0,
         ),
-        OrderSummaryState.initial().copyWith(
+        orderSummaryState.copyWith(
           apiFailureOrSuccessOption: none(),
           step: 1,
         ),
-        OrderSummaryState.initial().copyWith(
+        orderSummaryState.copyWith(
           apiFailureOrSuccessOption: none(),
           step: 0,
         ),
-        OrderSummaryState.initial().copyWith(
+        orderSummaryState.copyWith(
           apiFailureOrSuccessOption: none(),
           step: 2,
         ),
@@ -73,11 +78,11 @@ void main() {
       act: (OrderSummaryBloc bloc) {
         bloc.add(const OrderSummaryEvent.initialized(
           additionalDetailsStep: 3,
-          maxSteps: 5,
+          maxSteps: 4,
           step: 0,
         ));
       },
-      expect: () => [OrderSummaryState.initial().copyWith(maxSteps: 5)],
+      expect: () => [OrderSummaryState.initial().copyWith(maxSteps: 4)],
     );
 
     blocTest(

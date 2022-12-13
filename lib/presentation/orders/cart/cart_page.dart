@@ -150,12 +150,12 @@ class CartPage extends StatelessWidget {
     final billToInfo = customerCodeInfo.billToInfos.isNotEmpty
         ? customerCodeInfo.billToInfos.first
         : BillToInfo.empty();
-    var maxStep = 5;
+    var maxStep = 4;
     var additionDetailsStep = 3;
     if (config.enableBillTo &&
         billToInfo.billToCustomerCode.isNotEmpty &&
         customerCodeInfo.customerCodeSoldTo != billToInfo.billToCustomerCode) {
-      maxStep = 6;
+      maxStep = 5;
       additionDetailsStep = 4;
     }
     context.read<OrderSummaryBloc>().add(OrderSummaryEvent.initialized(
