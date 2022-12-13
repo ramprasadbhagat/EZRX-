@@ -12,6 +12,8 @@ import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.da
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_bundle_item_tile.dart';
@@ -26,6 +28,8 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    locator<CountlyService>().recordCountlyView('Cart Window Screen');
+    
     return BlocConsumer<CartBloc, CartState>(
       listenWhen: (previous, current) =>
           previous.apiFailureOrSuccessOption !=
@@ -129,6 +133,15 @@ class CartPage extends StatelessWidget {
                             onPressed: state.selectedItemList.isEmpty
                                 ? null
                                 : () {
+                                    locator<CountlyService>().addCountlyEvent(
+                                      'Checkout',
+                                      segmentation: {
+                                        'numItemInCart':
+                                            state.cartItemList.length,
+                                        'subTotal': state.subtotal,
+                                        'grandTotal': state.grandTotal,
+                                      },
+                                    );
                                     _goToOrderSummary(context);
                                   },
                             child: const Text('Order Summary').tr(),

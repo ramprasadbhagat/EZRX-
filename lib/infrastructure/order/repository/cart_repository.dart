@@ -153,7 +153,7 @@ class CartRepository implements ICartRepository {
       await cartStorage.delete(
         cartItem.materialInfo.materialNumber.getOrCrash(),
       );
-      await countlyService.addCountlyEvent('Delete from Order Summary');
+      await countlyService.addCountlyEvent('Delete from Cart');
 
       return fetchCartItems();
     } catch (e) {
@@ -221,6 +221,8 @@ class CartRepository implements ICartRepository {
         },
       );
     } catch (e) {
+      await countlyService.addCountlyEvent('add_to_cart_failed');
+      
       return Left(FailureHandler.handleFailure(e));
     }
   }

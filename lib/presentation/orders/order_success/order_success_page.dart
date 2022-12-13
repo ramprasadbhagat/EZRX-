@@ -1,14 +1,22 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderSuccessPage extends StatelessWidget {
   const OrderSuccessPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    locator<CountlyService>().recordCountlyView('Thank you screen');
+    
     return Scaffold(
       key: const Key('orderSuccessKey'),
       appBar: PreferredSize(
@@ -56,6 +64,8 @@ class _BodyContent extends StatelessWidget {
             children: [
               ElevatedButton(
                 onPressed: () {
+                  locator<CountlyService>()
+                      .addCountlyEvent('thankyou_to_create');
                   context.router.popUntilRouteWithName('MaterialRootRoute');
                 },
                 child: Text(
@@ -67,6 +77,26 @@ class _BodyContent extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
+                  locator<CountlyService>()
+                      .addCountlyEvent('order_history', segmentation: {
+                    'pageSource': 'Successful Order Page',
+                    'selectedSalesOrg': context
+                        .read<SalesOrgBloc>()
+                        .state
+                        .salesOrganisation
+                        .salesOrg
+                        .getOrDefaultValue(''),
+                    'selectedCustomerCode': context
+                        .read<CustomerCodeBloc>()
+                        .state
+                        .customerCodeInfo
+                        .customerCodeSoldTo,
+                    'selectedShipToAddress': context
+                        .read<ShipToCodeBloc>()
+                        .state
+                        .shipToInfo
+                        .shipToCustomerCode,
+                  });
                   context.router.pushAndPopUntil(
                     HomeNavigationTabbarRoute(
                       children: [
@@ -76,6 +106,8 @@ class _BodyContent extends StatelessWidget {
                     predicate: (route) =>
                         route.settings.name == 'HomeNavigationTabbarRoute',
                   );
+                  locator<CountlyService>()
+                      .addCountlyEvent('thankyou_to_history');
                 },
                 child: Text(
                   'Go To Order History',

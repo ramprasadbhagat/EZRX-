@@ -18,6 +18,8 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -560,6 +562,15 @@ class _SearchBarState extends State<_SearchBar> {
                               .getPNPValueMaterial,
                         ),
                       );
+                      locator<CountlyService>().addCountlyEvent(
+                        'Product Search',
+                        segmentation: {
+                          'searchKeyWord': state.searchKey.getOrCrash(),
+                          'numResults': state.materialList.length,
+                          'selectedSalesOrg': context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg.getOrCrash(),
+                          'selectedCustomerCode' : context.read<CustomerCodeBloc>().state.customerCodeInfo.customerCodeSoldTo,
+                          'selectedShipToAddress': context.read<ShipToCodeBloc>().state.shipToInfo.shipToCustomerCode,
+                        },);
                 } else {
                   showSnackBar(
                     context: context,

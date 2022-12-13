@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.d
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -26,6 +27,7 @@ import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_bundle_item_tile.dart';
@@ -35,6 +37,7 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/multi_bloc_provider_frame_wrapper.dart';
@@ -71,6 +74,8 @@ class MaterialListBlocMock
     extends MockBloc<MaterialListEvent, MaterialListState>
     implements MaterialListBloc {}
 
+final locator = GetIt.instance;
+
 void main() {
   late CartBloc cartBloc;
   late MaterialPriceBloc materialPriceBloc;
@@ -93,6 +98,11 @@ void main() {
     MaterialNumber('000000000023168451'),
     MaterialNumber('000000000023168441')
   ];
+  setUpAll(() {
+    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+    locator.registerLazySingleton(
+          () => CountlyService(config: locator<Config>()));
+  });
   setUp(
     () {
       WidgetsFlutterBinding.ensureInitialized();

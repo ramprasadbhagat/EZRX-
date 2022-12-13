@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -38,6 +40,13 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
+class CustomerCodeBlocMock
+    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
+    implements CustomerCodeBloc {}
+
+class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
+    implements ShipToCodeBloc {}
+
 class AutoRouterMock extends Mock implements AppRouter {}
 
 void main() {
@@ -54,6 +63,8 @@ void main() {
     urlLink: mockUrlLink,
   );
   late DefaultCacheManager cacheManagerMock;
+  late CustomerCodeBloc customerCodeBlocMock;
+  late ShipToCodeBloc shipToCodeBlocMock;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -61,7 +72,8 @@ void main() {
     locator = GetIt.instance;
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton(() => CountlyService(config: locator<Config>()));
+    locator
+        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
 
     mockHTTPService = MockHTTPService();
     cacheManagerMock = MockCacheManager();
@@ -97,9 +109,15 @@ void main() {
       salesOrgBlocMock = SalesOrgBlocMock();
       authBlocMock = AuthBlocMock();
       autoRouterMock = locator<AppRouter>();
+      customerCodeBlocMock = CustomerCodeBlocMock();
+      shipToCodeBlocMock = ShipToCodeBlocMock();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => customerCodeBlocMock.state)
+          .thenReturn(CustomerCodeState.initial());
+      when(() => shipToCodeBlocMock.state)
+          .thenReturn(ShipToCodeState.initial());    
     });
 
     Widget getWUT(Config config) {
@@ -119,6 +137,10 @@ void main() {
           BlocProvider<UserBloc>(create: (context) => userBlocMock),
           BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
           BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<CustomerCodeBloc>(
+              create: (context) => customerCodeBlocMock),
+          BlocProvider<ShipToCodeBloc>(
+              create: (context) => shipToCodeBlocMock),    
         ],
         child: getWUT(config),
       );

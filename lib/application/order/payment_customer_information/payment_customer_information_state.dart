@@ -23,4 +23,7 @@ class PaymentCustomerInformationState with _$PaymentCustomerInformationState {
 
   bool get isPaymentCustomerInformationEmpty =>
       paymentCustomerInformation == PaymentCustomerInformation.empty();
+      
+  String get getLicensesType => 
+    licenses.isNotEmpty ? licenses.first.licenceType : 'NA'; 
 }

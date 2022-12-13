@@ -25,4 +25,6 @@ class FullName with _$FullName {
 
     return '${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}';
   }
+
+  String get displayFullName => '$firstName $lastName';
 }

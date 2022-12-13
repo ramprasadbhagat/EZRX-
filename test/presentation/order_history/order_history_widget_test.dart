@@ -91,7 +91,8 @@ void main() {
     orderHistoryItem = await OrderHistoryLocalDataSource().getOrderHistory();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton(() => locator<CountlyService>());
+    locator
+        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
     locator.registerLazySingleton(() => mockOrderHistoryListBloc);
 
     locator.registerLazySingleton(() => mockShipToCodeBloc);

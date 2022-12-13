@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/presentation/account/settings_page.dart';
 import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
@@ -76,6 +77,8 @@ void main() {
     locator.registerLazySingleton(() => mockAuthBloc);
     locator.registerLazySingleton(() => PackageInfoService());
     autoRouterMock = locator<AppRouter>();
+    locator
+        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
     PackageInfo.setMockInitialValues(
         appName: '',
         packageName: '"packageName"',

@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
@@ -10,6 +12,8 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -47,6 +51,27 @@ class OrderHistoryListTile extends StatelessWidget {
 
     return InkWell(
       onTap: () {
+        locator<CountlyService>()
+            .addCountlyEvent('view Order Details', segmentation: {
+          'order_id': orderHistoryItem.orderNumber,
+          'createdDate': orderHistoryItem.createdDate,
+          'selectedSalesOrg': context
+              .read<SalesOrgBloc>()
+              .state
+              .salesOrganisation
+              .salesOrg
+              .getOrCrash(),
+          'selectedCustomerCode': context
+              .read<CustomerCodeBloc>()
+              .state
+              .customerCodeInfo
+              .customerCodeSoldTo,
+          'selectedShipToAddress': context
+              .read<ShipToCodeBloc>()
+              .state
+              .shipToInfo
+              .shipToCustomerCode,
+        });
         context.read<MaterialPriceDetailBloc>().add(
               MaterialPriceDetailEvent.fetch(
                 user: context.read<UserBloc>().state.user,

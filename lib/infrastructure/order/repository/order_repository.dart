@@ -215,6 +215,8 @@ class OrderRepository implements IOrderRepository {
 
       return Right(submitOrderResponse);
     } catch (e) {
+      await countlyService.addCountlyEvent('order_fail');
+
       return Left(
         FailureHandler.handleFailure(e),
       );

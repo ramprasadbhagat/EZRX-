@@ -11,17 +11,21 @@ import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.d
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/aggregate/bundle_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bundle_item_detail_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../utils/widget_utils.dart';
@@ -94,6 +98,13 @@ void main() {
   final mockMaterialPriceDetail = MaterialPriceDetail.empty().copyWith(
     info: mockMaterialInfo,
   );
+
+  setUpAll(() {
+    locator = GetIt.instance;
+    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+    locator
+        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
+  });
 
   group('Bundle item details test', () {
     setUp(() {

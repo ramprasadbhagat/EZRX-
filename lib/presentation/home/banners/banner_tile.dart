@@ -1,10 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dio/dio.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/config.dart' as c;
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +44,31 @@ class BannerTile extends StatelessWidget {
             return image.data != null
                 ? GestureDetector(
                     onTap: () async {
+                      await locator<CountlyService>().addCountlyEvent(
+                        'carousel_banner_clicked',
+                        segmentation: {
+                          'banner_id': banner.id,
+                          'landingPage': banner.urlLink,
+                          'selectedSalesOrg': banner.salesOrg,
+                          'selectedCustomerCode': context
+                              .read<CustomerCodeBloc>()
+                              .state
+                              .customerCodeInfo
+                              .customerCodeSoldTo,
+                          'selectedShipToAddress': context
+                              .read<ShipToCodeBloc>()
+                              .state
+                              .shipToInfo
+                              .shipToCustomerCode,
+                          'userRole': context
+                              .read<UserBloc>()
+                              .state
+                              .user
+                              .role
+                              .type
+                              .getOrDefaultValue(''),
+                        },
+                      );
                       if (banner.isKeyword && banner.keyword != '') {
                         context.read<MaterialListBloc>().add(
                               MaterialListEvent.updateSearchKey(

@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -58,6 +61,28 @@ class _HomeBannerState extends State<HomeBanner> {
                 controller: _controller,
                 allowImplicitScrolling: true,
                 itemBuilder: (_, index) {
+                  final userState = context.read<UserBloc>().state;
+                  locator<CountlyService>().addCountlyEvent(
+                    'banner_impression',
+                    segmentation: {
+                      'banner_id': state.banner[index % state.banner.length].id,
+                      'landingPage': state.banner[index % state.banner.length].urlLink,
+                      'selectedSalesOrg': state.banner[index % state.banner.length].salesOrg,
+                      'selectedCustomerCode': context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo
+                          .customerCodeSoldTo,
+                      'selectedShipToAddress': context
+                          .read<ShipToCodeBloc>()
+                          .state
+                          .shipToInfo
+                          .shipToCustomerCode,
+                      'userRole': userState.user.role.type.getOrDefaultValue(''),
+                      'username': userState.userFullName.displayFullName,
+                    },
+                  );
+                  
                   return BannerTile(
                     key: Key(state.banner[index % state.banner.length].id
                         .toString()),

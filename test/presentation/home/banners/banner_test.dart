@@ -2,7 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -36,6 +39,15 @@ class MockHTTPService extends Mock implements HttpService {}
 class MockBannerBloc extends MockBloc<BannerEvent, BannerState>
     implements BannerBloc {}
 
+class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
+
+class MockCustomerCodeBloc
+    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
+    implements CustomerCodeBloc {}
+
+class MockShipToCodeBloc extends MockBloc<ShipToCodeEvent, ShipToCodeState>
+    implements ShipToCodeBloc {}
+
 class MockBannerRepository extends Mock implements BannerRepository {}
 
 class MockSalesOrgBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
@@ -52,6 +64,9 @@ void main() {
   late MockHTTPService mockHTTPService;
   late SalesOrgBloc mockSalesOrgBloc;
   late AppRouter autoRouterMock;
+  late UserBloc mockUserBloc;
+  late CustomerCodeBloc mockCustomerCodeBloc;
+  late ShipToCodeBloc mockShipToCodeBloc;
 
   const mockUrl = 'mock-image-urls';
   const mockUrlLink = 'www.google.com';
@@ -82,6 +97,9 @@ void main() {
     locator.registerLazySingleton(() => mockBannerBloc);
     autoRouterMock = locator<AppRouter>();
     mockHTTPService = MockHTTPService();
+    mockUserBloc = MockUserBloc();
+    mockCustomerCodeBloc = MockCustomerCodeBloc();
+    mockShipToCodeBloc = MockShipToCodeBloc();
     locator.registerLazySingleton<HttpService>(
       () => mockHTTPService,
     );
@@ -97,6 +115,11 @@ void main() {
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
       when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
       when(() => mockBannerBloc.state).thenReturn(BannerState.initial());
+      when(() => mockUserBloc.state).thenReturn(UserState.initial());
+      when(() => mockCustomerCodeBloc.state)
+          .thenReturn(CustomerCodeState.initial());
+      when(() => mockShipToCodeBloc.state)
+          .thenReturn(ShipToCodeState.initial());    
     });
 
     StackRouterScope getWUT() {
@@ -106,6 +129,11 @@ void main() {
           BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
           BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
           BlocProvider<BannerBloc>(create: (context) => mockBannerBloc),
+          BlocProvider<UserBloc>(create: (context) => mockUserBloc),
+          BlocProvider<CustomerCodeBloc>(
+              create: (context) => mockCustomerCodeBloc),
+          BlocProvider<ShipToCodeBloc>(
+              create: (context) => mockShipToCodeBloc),    
         ],
         child: const Scaffold(body: HomeBanner()),
       );

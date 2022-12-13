@@ -29,6 +29,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_summary_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -141,6 +142,8 @@ void main() {
     () {
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
       locator.registerLazySingleton(() => AppRouter());
+      locator
+        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
     },
   );
   setUp(

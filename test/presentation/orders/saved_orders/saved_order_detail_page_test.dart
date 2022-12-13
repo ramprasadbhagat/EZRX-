@@ -20,6 +20,7 @@ import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_material_item.dart';
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_detail_page.dart';
@@ -73,6 +74,8 @@ void main() {
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
+    locator.registerLazySingleton(
+          () => CountlyService(config: locator<Config>()));
     final orders = await OrderLocalDataSource().getSavedOrders();
     orderMock = orders.first;
     orderMockItems = orderMock.items;

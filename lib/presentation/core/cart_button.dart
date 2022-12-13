@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,10 +35,18 @@ class CartButton extends StatelessWidget {
                 position: BadgePosition.topEnd(top: 0, end: 3),
                 animationType: BadgeAnimationType.fade,
                 child: IconButton(
-                  key: const Key('CartButton'),
-                  icon: const Icon(Icons.shopping_cart_outlined),
-                  onPressed: () => context.router.pushNamed('cart_page'),
-                ),
+                    key: const Key('CartButton'),
+                    icon: const Icon(Icons.shopping_cart_outlined),
+                    onPressed: () {
+                      final cartState = context.read<CartBloc>().state;
+                      locator<CountlyService>()
+                          .addCountlyEvent('Cart Window', segmentation: {
+                        'numItemInCart': cartState.cartItemList.length,
+                        'subTotal': cartState.subtotal,
+                        'grandTotal': cartState.grandTotal,
+                      });
+                      context.router.pushNamed('cart_page');
+                    },),
               );
             },
           );

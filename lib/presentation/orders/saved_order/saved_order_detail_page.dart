@@ -12,6 +12,8 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_action_button.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_invalid_warning.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_material_item.dart';
@@ -29,6 +31,8 @@ class SavedOrderDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    locator<CountlyService>().recordCountlyView('Saved Order Details Screen');
+    
     return Scaffold(
       key: const Key('SavedOrderDetailPage'),
       backgroundColor: ZPColors.white,
@@ -175,5 +179,6 @@ class SavedOrderDetailPage extends StatelessWidget {
     ));
 
     context.router.pushNamed('cart_page');
+    locator<CountlyService>().recordCountlyView('Use saved order');
   }
 }

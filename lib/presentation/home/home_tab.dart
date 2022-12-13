@@ -8,6 +8,8 @@ import 'package:ezrxmobile/application/order/covid_material_list/covid_material_
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/presentation/core/cart_button.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/home/selector/sales_org_selector.dart';
@@ -173,7 +175,24 @@ class _TileCard extends StatelessWidget {
     final textStyle = Theme.of(context).textTheme.subtitle2;
 
     return GestureDetector(
-      onTap: () => context.router.pushNamed(homePageTile.routeName),
+      onTap: () {
+        String countlyTile;
+        switch(homePageTile.routeName) {
+          case 'material_list_page' :
+            countlyTile = 'Create Order';
+            break;
+          case 'saved_order_list' :
+            countlyTile = 'Saved Orders';
+            break;
+          case 'order_template_list_page' :
+            countlyTile = 'Order Template';
+            break;
+          default : 
+            countlyTile = '';
+        }
+        locator<CountlyService>().addCountlyEvent(countlyTile);
+        context.router.pushNamed(homePageTile.routeName);
+      },
       child: Card(
         child: Center(
           child: Column(

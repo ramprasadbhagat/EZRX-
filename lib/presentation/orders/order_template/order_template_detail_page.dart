@@ -12,6 +12,8 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_action_button.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_invalid_warning.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_material_item.dart';
@@ -26,6 +28,8 @@ class OrderTemplateDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    locator<CountlyService>().recordCountlyView('Template Detail Screen');
+    
     return Scaffold(
       key: const Key('OrderTemplateDetailPage'),
       backgroundColor: ZPColors.white,
@@ -155,5 +159,6 @@ class OrderTemplateDetailPage extends StatelessWidget {
               eligibilityState.doNotAllowOutOfStockMaterials,
         ));
     context.router.pushNamed('cart_page');
+    locator<CountlyService>().addCountlyEvent('Use template');
   }
 }

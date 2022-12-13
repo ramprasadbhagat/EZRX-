@@ -22,6 +22,8 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -68,6 +70,8 @@ class OrderSummaryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    locator<CountlyService>().recordCountlyView('Order Summary Screen');
+    
     return Scaffold(
       key: const Key('orderSummaryKey'),
       appBar: PreferredSize(
@@ -232,6 +236,12 @@ class _Stepper extends StatelessWidget {
     required OrderSummaryState state,
   }) {
     if (_performFormAction()) {
+      final cartState = context.read<CartBloc>().state;
+      locator<CountlyService>().addCountlyEvent('Order Placed', segmentation: {
+        'numItemInCart': cartState.cartItemList.length,
+        'subTotal': cartState.subtotal,
+        'grandTotal': cartState.grandTotal,
+      });
       context.read<OrderSummaryBloc>().add(
             OrderSummaryEvent.submitOrder(
               shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
@@ -240,8 +250,8 @@ class _Stepper extends StatelessWidget {
               salesOrganisation:
                   context.read<SalesOrgBloc>().state.salesOrganisation,
               user: context.read<UserBloc>().state.user,
-              cartItems: context.read<CartBloc>().state.cartItemList,
-              grandTotal: context.read<CartBloc>().state.grandTotal,
+              cartItems: cartState.cartItemList,
+              grandTotal: cartState.grandTotal,
               data: data,
               orderType: '',
               config: context.read<SalesOrgBloc>().state.configs,
@@ -952,6 +962,12 @@ class _PaymentTermState extends State<_PaymentTerm> {
                           ),
                           onPressed: () async {
                             _controller.text = e;
+                            await locator<CountlyService>().addCountlyEvent(
+                              'select_payment_term',
+                              segmentation: {
+                                'payment_term': e,
+                              },
+                            );
                             await context.router.pop();
                           },
                         )

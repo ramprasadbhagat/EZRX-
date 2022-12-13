@@ -4,6 +4,8 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -89,6 +91,7 @@ class UpdateBonus extends StatelessWidget {
                   // final updatedCartItem = cartItem.copyWith(
                   //   quantity: int.tryParse(controller.text) ?? 1,
                   // );
+                  locator<CountlyService>().addCountlyEvent('Add to bonus');
                   context.read<CartBloc>().add(
                         CartEvent.updateBonusItem(
                           bonusItem: MaterialItemBonus.empty().copyWith(
