@@ -57,7 +57,7 @@ class CartPage extends StatelessWidget {
               const AccountSuspendedBanner(),
               Expanded(
                 child: ScrollList<CartItem>(
-                  emptyMessage: 'Cart is Empty',
+                  emptyMessage: 'Cart is Empty'.tr(),
                   onRefresh: () {
                     context.read<CartBloc>().add(CartEvent.fetch(
                           customerCodeInfo: context

@@ -1,7 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
@@ -122,19 +122,31 @@ void main() {
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     });
 
-    StackRouterScope getScopedWidget() {
-      return WidgetUtils.getScopedWidget(
-        autoRouterMock: autoRouterMock,
-        providers: [
-          BlocProvider<UserBloc>(create: (context) => userBlocMock),
-          BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
-          BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock),
-          BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBlocMock),
-          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-          BlocProvider<CartBloc>(create: (context) => cartBlocMock),
+    Widget getScopedWidget() {
+      return EasyLocalization(
+        supportedLocales: const [
+          Locale('en', 'SG'),
         ],
-        child: const AccountTab(),
+        path: 'assets/langs/langs.csv',
+        startLocale: const Locale('en', 'SG'),
+        fallbackLocale: const Locale('en', 'SG'),
+        saveLocale: true,
+        useOnlyLangCode: false,
+        assetLoader: CsvAssetLoader(),
+        child: WidgetUtils.getScopedWidget(
+          autoRouterMock: autoRouterMock,
+          providers: [
+            BlocProvider<UserBloc>(create: (context) => userBlocMock),
+            BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
+            BlocProvider<CustomerCodeBloc>(
+                create: (context) => customerCodeBlocMock),
+            BlocProvider<ShipToCodeBloc>(
+                create: (context) => shipToCodeBlocMock),
+            BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+            BlocProvider<CartBloc>(create: (context) => cartBlocMock),
+          ],
+          child: const AccountTab(),
+        ),
       );
     }
 

@@ -37,7 +37,10 @@ class HistoryTab extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: Text('Order History'.tr()),
+        title: Text(
+          'Order History'.tr(),
+          locale: context.locale,
+        ),
         automaticallyImplyLeading: false,
         actions: const [CartButton()],
         bottom: PreferredSize(
@@ -268,7 +271,7 @@ class HistoryTab extends StatelessWidget {
                           Expanded(
                             child: ScrollList<OrderHistoryItem>(
                               key: const Key('orderHistoryList'),
-                              emptyMessage: 'No history found',
+                              emptyMessage: 'No history found'.tr(),
                               onRefresh: () {
                                 if (context
                                     .read<ShipToCodeBloc>()

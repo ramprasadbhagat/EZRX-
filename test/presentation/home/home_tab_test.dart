@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -22,9 +23,9 @@ import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -174,28 +175,41 @@ void main() {
 
       Future getWidget(tester) async {
         return await tester.pumpWidget(
-          MultiBlocProvider(
-            providers: [
-              BlocProvider<CustomerCodeBloc>(
-                  create: (context) => mockCustomerCodeBloc),
-              BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
-              BlocProvider<MaterialListBloc>(
-                  create: (context) => materialListBlocMock),
-              BlocProvider<MaterialPriceBloc>(
-                  create: (context) => materialPriceBlocMock),
-              BlocProvider<CovidMaterialListBloc>(
-                  create: (context) => covidMaterialListBlocMock),
-              BlocProvider<CartBloc>(create: (context) => cartBlocMock),
-              BlocProvider<EligibilityBloc>(create: (context) => eligibilityBlocMock),
-              BlocProvider<BannerBloc>(create: (context) => mockBannerBloc),
-              BlocProvider<ShipToCodeBloc>(
-                  create: (context) => shipToCodeBlocMock),
-              BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-              BlocProvider<UserBloc>(create: (context) => userBlocMock),
+          EasyLocalization(
+            supportedLocales: const [
+              Locale('en', 'SG'),
             ],
-            child: const MaterialApp(
-              home: Scaffold(
-                body: HomeTab(),
+            path: 'assets/langs/langs.csv',
+            startLocale: const Locale('en', 'SG'),
+            fallbackLocale: const Locale('en', 'SG'),
+            saveLocale: true,
+            useOnlyLangCode: false,
+            assetLoader: CsvAssetLoader(),
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider<CustomerCodeBloc>(
+                    create: (context) => mockCustomerCodeBloc),
+                BlocProvider<SalesOrgBloc>(
+                    create: (context) => salesOrgBlocMock),
+                BlocProvider<MaterialListBloc>(
+                    create: (context) => materialListBlocMock),
+                BlocProvider<MaterialPriceBloc>(
+                    create: (context) => materialPriceBlocMock),
+                BlocProvider<CovidMaterialListBloc>(
+                    create: (context) => covidMaterialListBlocMock),
+                BlocProvider<CartBloc>(create: (context) => cartBlocMock),
+                BlocProvider<EligibilityBloc>(
+                    create: (context) => eligibilityBlocMock),
+                BlocProvider<BannerBloc>(create: (context) => mockBannerBloc),
+                BlocProvider<ShipToCodeBloc>(
+                    create: (context) => shipToCodeBlocMock),
+                BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+                BlocProvider<UserBloc>(create: (context) => userBlocMock),
+              ],
+              child: const MaterialApp(
+                home: Scaffold(
+                  body: HomeTab(),
+                ),
               ),
             ),
           ),

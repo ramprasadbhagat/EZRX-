@@ -1,7 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -127,27 +127,38 @@ void main() {
         when(() => eligibilityBlocMock.state)
             .thenReturn(EligibilityState.initial());
       });
-      StackRouterScope getWUT() {
-        return WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          providers: [
-            BlocProvider<UserBloc>(create: (context) => userBlocMock),
-            BlocProvider<OrderHistoryListBloc>(
-                create: (context) => mockOrderHistoryListBloc),
-            BlocProvider<OrderHistoryFilterBloc>(
-                create: (context) => mockOrderHistoryFilterBloc),
-            BlocProvider<ShipToCodeBloc>(
-                create: (context) => mockShipToCodeBloc),
-            BlocProvider<CartBloc>(create: (context) => mockCartBloc),
-            BlocProvider<CustomerCodeBloc>(
-                create: (context) => customerCodeBlocMock),
-            BlocProvider<OrderHistoryFilterByStatusBloc>(
-                create: (context) => mockOrderHistoryFilterByStatusBloc),
-            BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
-            BlocProvider<EligibilityBloc>(
-                create: (context) => eligibilityBlocMock),
+      Widget getWUT() {
+        return EasyLocalization(
+          supportedLocales: const [
+            Locale('en', 'SG'),
           ],
-          child: Material(child: HistoryTab()),
+          path: 'assets/langs/langs.csv',
+          startLocale: const Locale('en', 'SG'),
+          fallbackLocale: const Locale('en', 'SG'),
+          saveLocale: true,
+          useOnlyLangCode: false,
+          assetLoader: CsvAssetLoader(),
+          child: WidgetUtils.getScopedWidget(
+            autoRouterMock: autoRouterMock,
+            providers: [
+              BlocProvider<UserBloc>(create: (context) => userBlocMock),
+              BlocProvider<OrderHistoryListBloc>(
+                  create: (context) => mockOrderHistoryListBloc),
+              BlocProvider<OrderHistoryFilterBloc>(
+                  create: (context) => mockOrderHistoryFilterBloc),
+              BlocProvider<ShipToCodeBloc>(
+                  create: (context) => mockShipToCodeBloc),
+              BlocProvider<CartBloc>(create: (context) => mockCartBloc),
+              BlocProvider<CustomerCodeBloc>(
+                  create: (context) => customerCodeBlocMock),
+              BlocProvider<OrderHistoryFilterByStatusBloc>(
+                  create: (context) => mockOrderHistoryFilterByStatusBloc),
+              BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
+              BlocProvider<EligibilityBloc>(
+                  create: (context) => eligibilityBlocMock),
+            ],
+            child: Material(child: HistoryTab()),
+          ),
         );
       }
 

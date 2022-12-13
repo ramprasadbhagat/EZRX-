@@ -34,7 +34,10 @@ class FavouritesTab extends StatelessWidget with AutoRouteWrapper {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favourites').tr(),
+        title: Text(
+          'Favourites',
+          locale: context.locale,
+        ).tr(),
         automaticallyImplyLeading: false,
         actions: const [CartButton()],
       ),

@@ -10,7 +10,10 @@ class NotificationTile extends StatelessWidget {
     return ListTile(
       key: const Key('notificationTile'),
       leading: const Icon(Icons.notifications_active_outlined),
-      title: Text('Notifications'.tr()),
+      title: Text(
+        'Notifications'.tr(),
+        locale: context.locale,
+      ),
       onTap: () {
         context.router.pushNamed('notification_settings_page');
       },

@@ -1,5 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -140,8 +142,8 @@ void main() {
     when(() => mockCustomerCodeBloc.state)
         .thenReturn(CustomerCodeState.initial());
 
-    when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
-        .copyWith(salesOrganisation: fakeSalesOrg));
+    when(() => salesOrgBlocMock.state).thenReturn(
+        SalesOrgState.initial().copyWith(salesOrganisation: fakeSalesOrg));
     when(() => cartBlocMock.state).thenReturn(CartState.initial());
     when(() => userBlocMock.state).thenReturn(UserState.initial());
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
@@ -153,25 +155,36 @@ void main() {
   group('Sales Org Selector Test ', () {
     Future getScopedWidget(tester) async {
       return await tester.pumpWidget(
-        WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          providers: [
-            BlocProvider<CustomerCodeBloc>(
-                create: (context) => mockCustomerCodeBloc),
-            BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-            BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
-            BlocProvider<CartBloc>(create: (context) => cartBlocMock),
-            BlocProvider<BannerBloc>(create: (context) => bannerBlocMock),
-            BlocProvider<OrderDocumentTypeBloc>(
-                create: (context) => orderDocumentTypeBlocMock),
-            BlocProvider<UserBloc>(create: (context) => userBlocMock),
+        EasyLocalization(
+          supportedLocales: const [
+            Locale('en', 'SG'),
           ],
-          child: Material(
-            child: Scaffold(
-              body: Row(
-                children: const [
-                  SalesOrgSelector(),
-                ],
+          path: 'assets/langs/langs.csv',
+          startLocale: const Locale('en', 'SG'),
+          fallbackLocale: const Locale('en', 'SG'),
+          saveLocale: true,
+          useOnlyLangCode: false,
+          assetLoader: CsvAssetLoader(),
+          child: WidgetUtils.getScopedWidget(
+            autoRouterMock: autoRouterMock,
+            providers: [
+              BlocProvider<CustomerCodeBloc>(
+                  create: (context) => mockCustomerCodeBloc),
+              BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+              BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
+              BlocProvider<CartBloc>(create: (context) => cartBlocMock),
+              BlocProvider<BannerBloc>(create: (context) => bannerBlocMock),
+              BlocProvider<OrderDocumentTypeBloc>(
+                  create: (context) => orderDocumentTypeBlocMock),
+              BlocProvider<UserBloc>(create: (context) => userBlocMock),
+            ],
+            child: Material(
+              child: Scaffold(
+                body: Row(
+                  children: const [
+                    SalesOrgSelector(),
+                  ],
+                ),
               ),
             ),
           ),
@@ -180,8 +193,8 @@ void main() {
     }
 
     testWidgets('When salesOrg has data', (tester) async {
-      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
-          .copyWith(salesOrganisation: fakeSalesOrg));
+      when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(salesOrganisation: fakeSalesOrg));
       await getScopedWidget(tester);
       final salesOrgText = find.text('Sales Org');
       final salesOrgValue = find.text(salesCodeText);
@@ -204,8 +217,8 @@ void main() {
       locator<Config>().appFlavor = Flavor.dev;
       WidgetsFlutterBinding.ensureInitialized();
 
-      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
-          .copyWith(salesOrganisation: fakeSalesOrg));
+      when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(salesOrganisation: fakeSalesOrg));
 
       await getScopedWidget(tester);
       when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
@@ -226,8 +239,8 @@ void main() {
       locator<Config>().appFlavor = Flavor.dev;
       WidgetsFlutterBinding.ensureInitialized();
 
-      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
-          .copyWith(salesOrganisation: fakeSalesOrg));
+      when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(salesOrganisation: fakeSalesOrg));
       when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
           user: User.empty().copyWith(
         userSalesOrganisations: [fakeSalesOrg2],
@@ -255,8 +268,8 @@ void main() {
       locator<Config>().appFlavor = Flavor.dev;
       WidgetsFlutterBinding.ensureInitialized();
 
-      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
-          .copyWith(salesOrganisation: fakeSalesOrg));
+      when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(salesOrganisation: fakeSalesOrg));
       when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
           user: User.empty().copyWith(
         userSalesOrganisations: [fakeSalesOrg2],
@@ -287,10 +300,10 @@ void main() {
       expect(find.text(salesCodeText2), findsOneWidget);
     });
 
-    testWidgets('When there is an error fetching salesOrg data', (tester) async {
+    testWidgets('When there is an error fetching salesOrg data',
+        (tester) async {
       final expectedSalesOrgListStates = [
-        SalesOrgState.initial()
-            .copyWith(salesOrganisation: fakeSalesOrg),
+        SalesOrgState.initial().copyWith(salesOrganisation: fakeSalesOrg),
         SalesOrgState.initial().copyWith(
           salesOrganisation: fakeSalesOrg2,
           salesOrgFailureOrSuccessOption: optionOf(

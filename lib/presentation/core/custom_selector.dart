@@ -5,11 +5,14 @@ class CustomSelector extends StatelessWidget {
   final String title;
   final Widget child;
   final Function()? onTap;
+  final Locale? locale;
+
   const CustomSelector({
     Key? key,
     required this.title,
     required this.child,
     required this.onTap,
+    this.locale,
   }) : super(key: key);
 
   @override
@@ -31,6 +34,7 @@ class CustomSelector extends StatelessWidget {
                       .textTheme
                       .caption
                       ?.apply(color: ZPColors.lightGray),
+                  locale: locale,
                 ),
               ),
               child,

@@ -46,7 +46,10 @@ class _LoginOnBehalfTile extends StatelessWidget {
           child: ListTile(
             key: const Key('loginOnBehalfTile'),
             leading: const Icon(Icons.person_outline),
-            title: const Text('Login on behalf').tr(),
+            title: Text(
+              'Login on behalf',
+              locale: context.locale,
+            ).tr(),
             onTap: () => context.router.pushNamed('login_on_behalf'),
           ),
         );
@@ -63,7 +66,10 @@ class _SettingsTile extends StatelessWidget {
     return ListTile(
       key: const Key('settingsTile'),
       leading: const Icon(Icons.settings_outlined),
-      title: const Text('Settings').tr(),
+      title: Text(
+        'Settings',
+        locale: context.locale,
+      ).tr(),
       onTap: () => context.router.pushNamed('settings'),
     );
   }
