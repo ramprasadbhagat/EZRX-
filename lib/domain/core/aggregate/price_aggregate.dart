@@ -309,6 +309,7 @@ class PriceAggregate with _$PriceAggregate {
       !materialInfo.materialGroup4.isFOC &&
       !materialInfo.hidePrice &&
       (salesOrgConfig.netPriceOverride || price.additionalBonusEligible);
+
   bool get hasSalesRepPrinciple {
     return materialInfo.principalData.principalCode
         .isSubmitAllowedForSalesRep();

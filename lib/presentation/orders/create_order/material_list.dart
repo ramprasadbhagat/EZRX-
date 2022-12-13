@@ -15,6 +15,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
@@ -250,7 +251,7 @@ class _ListContent extends StatelessWidget {
               .read<MaterialPriceBloc>()
               .state
               .materialPrice[materialInfo.materialNumber];
-          if (materialPrice == null) {
+          if (materialPrice == null && !salesOrgConfigs.materialWithoutPrice) {
             showSnackBar(
               context: context,
               message: 'Product Not Available'.tr(),
@@ -274,7 +275,7 @@ class _ListContent extends StatelessWidget {
             addToCart(
               context: context,
               priceAggregate: PriceAggregate(
-                price: materialPrice,
+                price: materialPrice ?? Price.empty(),
                 materialInfo: materialInfo,
                 salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
                 quantity: 1,

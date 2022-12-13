@@ -390,8 +390,7 @@ class CartRepository implements ICartRepository {
   }
 
   @override
-  Future<Either<ApiFailure, List<PriceAggregate>>>
-      getStockInfoMaterialList({
+  Future<Either<ApiFailure, List<PriceAggregate>>> getStockInfoMaterialList({
     required List<PriceAggregate> materialList,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisationConfigs salesOrganisationConfigs,

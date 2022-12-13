@@ -61,6 +61,8 @@ class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
 
   @override
   Widget build(BuildContext context) {
+    final isPriceOverride = widget.cartItem.price.isPriceOverride;
+
     return Card(
       child: Column(
         children: [
@@ -230,8 +232,7 @@ class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
                                               .textTheme
                                               .bodyText1
                                               ?.apply(
-                                                color: widget.cartItem.price
-                                                        .isPriceOverride
+                                                color: isPriceOverride
                                                     ? ZPColors.red
                                                     : ZPColors.lightGray,
                                                 decoration: widget
@@ -250,8 +251,7 @@ class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
                                         .textTheme
                                         .bodyText1
                                         ?.apply(
-                                          color: widget.cartItem.price
-                                                  .isPriceOverride
+                                          color: isPriceOverride
                                               ? ZPColors.red
                                               : ZPColors.lightGray,
                                           decoration: widget.cartItem
@@ -267,8 +267,7 @@ class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
                                         .textTheme
                                         .bodyText1
                                         ?.apply(
-                                          color: widget.cartItem.price
-                                                  .isPriceOverride
+                                          color: isPriceOverride
                                               ? ZPColors.red
                                               : ZPColors.black,
                                           decoration: widget.cartItem
