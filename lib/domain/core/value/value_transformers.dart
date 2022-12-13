@@ -28,7 +28,11 @@ String naIfEmpty(String text) {
 }
 
 bool getInStock(String text) {
-  return text == 'Yes' ;
+  return text == 'Yes';
+}
+
+String getTelephoneNotGreaterThan16(String text) {
+  return text.length > 16 ? text.substring(0, 16) : text;
 }
 
 // String getParsedString(String textString) {

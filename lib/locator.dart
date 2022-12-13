@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
@@ -327,6 +328,10 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => OrderSummaryBloc(repository: locator<OrderRepository>()),
+  );
+
+  locator.registerLazySingleton(
+    () => AdditionalDetailsBloc(),
   );
 
   locator.registerLazySingleton(
@@ -1240,7 +1245,7 @@ void setupLocator() {
   locator.registerLazySingleton(() => TenderContractLocalDataSource());
 
   locator.registerLazySingleton(
-        () => TenderContractRemoteDataSource(
+    () => TenderContractRemoteDataSource(
       httpService: locator<HttpService>(),
       tenderContractQuery: locator<TenderContractQuery>(),
       config: locator<Config>(),
@@ -1249,7 +1254,7 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
-        () => TenderContractRepository(
+    () => TenderContractRepository(
       config: locator<Config>(),
       tenderContractLocalDataSource: locator<TenderContractLocalDataSource>(),
       tenderContractRemoteDataSource: locator<TenderContractRemoteDataSource>(),
@@ -1257,9 +1262,8 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
-        () => TenderContractBloc(
+    () => TenderContractBloc(
       tenderContractRepository: locator<TenderContractRepository>(),
     ),
   );
-
 }

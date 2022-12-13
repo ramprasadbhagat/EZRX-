@@ -6,6 +6,7 @@ class OrderSummaryEvent with _$OrderSummaryEvent {
     required int step,
     required int maxSteps,
     required int additionalDetailsStep,
+    required SalesOrganisationConfigs config,
   }) = _Initialized;
   const factory OrderSummaryEvent.stepContinue() = _StepContinue;
   const factory OrderSummaryEvent.stepCancel() = _StepCancel;
@@ -19,7 +20,7 @@ class OrderSummaryEvent with _$OrderSummaryEvent {
     required double grandTotal,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
-    required Map<AdditionalInfoLabelList, String> data,
+    required AdditionalDetailsData data,
     required String orderType,
     required SalesOrganisationConfigs config,
   }) = _SubmitOrder;

@@ -434,3 +434,95 @@ class TenderContractInfo extends ValueObject<String> {
 
   const TenderContractInfo._(this.value);
 }
+
+class CustomerPoReference extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory CustomerPoReference(String input) {
+    return CustomerPoReference._(validateStringNotEmpty(input));
+  }
+
+  const CustomerPoReference._(this.value);
+}
+
+class SpecialInstruction extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory SpecialInstruction(String input) {
+    return SpecialInstruction._(validateStringNotEmpty(input));
+  }
+
+  const SpecialInstruction._(this.value);
+}
+
+class ReferenceNote extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory ReferenceNote(String input) {
+    return ReferenceNote._(validateStringNotEmpty(input));
+  }
+
+  const ReferenceNote._(this.value);
+}
+
+class CollectiveNumber extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory CollectiveNumber(String input) {
+    return CollectiveNumber._(validateStringNotEmpty(input));
+  }
+
+  const CollectiveNumber._(this.value);
+}
+
+class ContactNumber extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory ContactNumber(String input) {
+    return ContactNumber._(validateStringNotEmpty(input));
+  }
+
+  String get getTelephone {
+    return getTelephoneNotGreaterThan16(value.getOrElse(() => ''));
+  }
+
+  const ContactNumber._(this.value);
+}
+
+class ContactPerson extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory ContactPerson(String input) {
+    return ContactPerson._(validateStringNotEmpty(input));
+  }
+
+  const ContactPerson._(this.value);
+}
+
+class PaymentTerm extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory PaymentTerm(String input) {
+    return PaymentTerm._(validateStringNotEmpty(input));
+  }
+
+  const PaymentTerm._(this.value);
+}
+
+class DeliveryDate extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory DeliveryDate(String input) {
+    return DeliveryDate._(validateStringNotEmpty(input));
+  }
+
+  const DeliveryDate._(this.value);
+}

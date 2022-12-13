@@ -23,8 +23,9 @@ class OrderSuccessPage extends StatelessWidget {
         preferredSize: const Size(double.infinity, 60),
         child: AppBar(
           leading: IconButton(
-            onPressed: () =>
-                context.router.popUntilRouteWithName('MaterialRootRoute'),
+            onPressed: () {
+              context.router.popUntilRouteWithName('MaterialRootRoute');
+            },
             icon: const Icon(Icons.arrow_back),
           ),
           title: const Text('Order Confirmation').tr(),

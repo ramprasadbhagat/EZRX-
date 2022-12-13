@@ -26,7 +26,7 @@ class SavedOrderListEvent with _$SavedOrderListEvent {
     required double grandTotal,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
-    required Map<AdditionalInfoLabelList, String> data,
+    required AdditionalDetailsData data,
     required List<SavedOrder> existingSavedOrderList,
   }) = _CreateDraft;
 }

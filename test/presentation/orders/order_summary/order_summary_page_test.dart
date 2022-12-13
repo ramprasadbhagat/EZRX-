@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
@@ -26,8 +27,10 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/payment_term.dart';
+import 'package:ezrxmobile/domain/order/entities/payment_term.dart' as pt;
+import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -92,6 +95,10 @@ class OrderHistoryFilterBlocMock
     extends MockBloc<OrderHistoryFilterEvent, OrderHistoryFilterState>
     implements OrderHistoryFilterBloc {}
 
+class AdditionalDetailsBlocMock
+    extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
+    implements AdditionalDetailsBloc {}
+
 class AutoRouterMock extends Mock implements AppRouter {}
 
 enum StepVariant {
@@ -138,6 +145,7 @@ void main() {
   late OrderEligibilityBloc orderEligibilityBlocMock;
   late OrderHistoryListBloc orderHistoryListBlocMock;
   late OrderHistoryFilterBloc orderHistoryFilterBlocMock;
+  late AdditionalDetailsBloc additionalDetailsBlocMock;
   setUpAll(
     () {
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
@@ -164,6 +172,7 @@ void main() {
       orderEligibilityBlocMock = OrderEligibilityBlocMock();
       orderHistoryListBlocMock = OrderHistoryListBlocMock();
       orderHistoryFilterBlocMock = OrderHistoryFilterBlocMock();
+      additionalDetailsBlocMock = AdditionalDetailsBlocMock();
       autoRouterMock = locator<AppRouter>();
 
       when(() => orderSummaryBlocMock.state)
@@ -173,6 +182,8 @@ void main() {
       ));
       when(() => orderTemplateListBlocMock.state)
           .thenReturn(OrderTemplateListState.initial());
+      when(() => additionalDetailsBlocMock.state)
+          .thenReturn(AdditionalDetailsState.initial());
       when(() => paymentTermBlocMock.state)
           .thenReturn(PaymentTermState.initial());
       when(() => orderDocumentTypeBlocMock.state)
@@ -257,6 +268,8 @@ void main() {
                 create: (context) => orderHistoryListBlocMock),
             BlocProvider<OrderHistoryFilterBloc>(
                 create: (context) => orderHistoryFilterBlocMock),
+            BlocProvider<AdditionalDetailsBloc>(
+                create: (context) => additionalDetailsBlocMock),
           ],
           child: const OrderSummaryPage(),
         );
@@ -271,36 +284,28 @@ void main() {
           expect(orderSummaryPage, findsOneWidget);
         },
       );
-      /*testWidgets(
+      testWidgets(
         'Load Order Summary and StepContinue',
         (tester) async {
-          await tester.pumpWidget(getWidget());
-          await tester.pump();
-          final orderSummaryPage = find.byKey(const Key('orderSummaryKey'));
-          expect(orderSummaryPage, findsOneWidget);
           when(() => orderSummaryBlocMock.state)
               .thenReturn(OrderSummaryState.initial().copyWith(
-            step: 2,
-            maxSteps: 5,
+            step: 1,
+            maxSteps: 4,
           ));
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+          tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+          tester.binding.window.devicePixelRatioTestValue = 1.0;
+          final orderSummaryPage = find.byKey(const Key('orderSummaryKey'));
+          expect(orderSummaryPage, findsOneWidget);
+
           final continueKey =
               find.byKey(const Key('continueButtonKey'), skipOffstage: false);
-
-          expect(continueKey, findsNWidgets(6));
-          for (var i = 0; i <= 5; i++) {
-            if (i == 5) {
-              final submitButtonKey =
-                  find.byKey(const Key('submitButtonKey'), skipOffstage: false);
-              expect(submitButtonKey, findsOneWidget);
-            } else {
-              await tester.ensureVisible(continueKey.at(2));
-              await tester.pumpAndSettle();
-              await tester.tap(continueKey.at(2));
-              await tester.pumpAndSettle();
-            }
-          }
+          expect(continueKey, findsNWidgets(5));
+          await tester.tap(continueKey.at(1));
+          await tester.pumpAndSettle();
         },
-      );*/
+      );
 
       testWidgets(
         'test CustomerDetailsStep',
@@ -335,6 +340,51 @@ void main() {
           expect(customerDetailsKey, findsOneWidget);
         },
       );
+
+      /*testWidgets(
+        '=> test SubmitOrder',
+        (tester) async {
+          when(() => orderSummaryBlocMock.state)
+              .thenReturn(OrderSummaryState.initial().copyWith(
+            step: 3,
+            maxSteps: 4,
+          ));
+          final expectedStates = [
+            ShipToCodeState.initial().copyWith(
+              shipToInfo: ShipToInfo.empty().copyWith(
+                city1: 'Kolkata',
+              ),
+            ),
+            ShipToCodeState.initial().copyWith(
+              shipToInfo: ShipToInfo.empty().copyWith(
+                city1: 'Bangkok',
+              ),
+            ),
+          ];
+          when(() => userBlocMock.state).thenReturn(
+            UserState.initial().copyWith(
+              user: User.empty().copyWith(
+                role: Role.empty().copyWith(
+                  type: RoleType('internal_sales_rep'),
+                ),
+                enableOrderType: true,
+              ),
+            ),
+          );
+          whenListen(shipToCodeBlocMock, Stream.fromIterable(expectedStates));
+          tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+          tester.binding.window.devicePixelRatioTestValue = 1.0;
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+          final customerDetailsKey =
+              find.byKey(const Key('additionalDetailsFormKey'));
+          expect(customerDetailsKey, findsOneWidget);
+          final continueButtonKey = find.byKey(const Key('continueButtonKey'));
+          expect(continueButtonKey, findsNWidgets(5));
+          await tester.tap(continueButtonKey.at(3));
+          await tester.pumpAndSettle();
+        },
+      );*/
 
       testWidgets(
         '=> test AdditionalInformationStep',
@@ -372,7 +422,7 @@ void main() {
           await tester.pumpWidget(getWidget());
           await tester.pumpAndSettle();
           final customerDetailsKey =
-              find.byKey(const Key('_additionalDetailsFormKey'));
+              find.byKey(const Key('additionalDetailsFormKey'));
           expect(customerDetailsKey, findsOneWidget);
           final continueButtonKey = find.byKey(const Key('continueButtonKey'));
           expect(continueButtonKey, findsNWidgets(5));
@@ -412,9 +462,35 @@ void main() {
         },
       );
 
-      testWidgets(
+      /*testWidgets(
         '=> test submitOrder not validated',
         (tester) async {
+          when(
+            () => shipToCodeBlocMock.state,
+          ).thenReturn(
+            ShipToCodeState.initial().copyWith(
+              shipToInfo: ShipToInfo.empty().copyWith(
+                shipToAddress: ShipToAddress.empty().copyWith(street2: '1'),
+                shipToCustomerCode: '1234567890',
+                region: '11111',
+                postalCode: '2222',
+                telephoneNumber: '11111',
+              ),
+            ),
+          );
+          final expectedStates = [
+            AdditionalDetailsState.initial().copyWith(
+              additionalDetailsData: AdditionalDetailsData.empty(),
+              isValidated: false,
+              showErrorMessages: true,
+            ),
+            AdditionalDetailsState.initial().copyWith(
+              additionalDetailsData: AdditionalDetailsData.empty(),
+              isValidated: false,
+              showErrorMessages: true,
+            ),
+          ];
+          whenListen(shipToCodeBlocMock, Stream.fromIterable(expectedStates));
           when(
             () => orderSummaryBlocMock.state,
           ).thenReturn(
@@ -437,15 +513,81 @@ void main() {
           final cartDetailsKey = find.byKey(const Key('_cartDetailsKey'));
           expect(cartDetailsKey, findsOneWidget);
           final submitButtonKey = find.text('Submit');
-          expect(submitButtonKey, findsNWidgets(5));
-          await tester.tap(submitButtonKey.at(4));
+          expect(submitButtonKey, findsNWidgets(1));
+          await tester.tap(submitButtonKey.at(0));
           await tester.pumpAndSettle();
         },
+      );*/
+
+      testWidgets('=>Goto Handle Listener', (tester) async {
+        when(
+          () => orderHistoryFilterBlocMock.state,
+        ).thenReturn(OrderHistoryFilterState.initial());
+        final orderSUmmaryExpectedStates = [
+          OrderSummaryState.initial().copyWith(
+            isSubmitSuccess: false,
+            isSubmitting: true,
+          ),
+          OrderSummaryState.initial().copyWith(
+              isSubmitSuccess: true,
+              isSubmitting: false,
+              submitOrderResponse: SubmitOrderResponse.empty()
+                  .copyWith(salesDocument: 'XXXX-YYYY-ZZZZ')),
+        ];
+        whenListen(orderSummaryBlocMock,
+            Stream.fromIterable(orderSUmmaryExpectedStates));
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        final orderSuccess = find.byKey(const Key('additionalDetailsFormKey'));
+        expect(orderSuccess, findsOneWidget);
+      });
+
+      testWidgets(
+        '=>Goto Order Success',
+        (tester) async {
+          final orderSUmmaryExpectedStates = [
+            _getState(variants.currentValue!)
+          ];
+          whenListen(orderSummaryBlocMock,
+              Stream.fromIterable(orderSUmmaryExpectedStates));
+          final additionalDetailsExpectedStates = [
+            AdditionalDetailsState.initial().copyWith(
+              isValidated: false,
+              showErrorMessages: true,
+              additionalDetailsData: AdditionalDetailsData.empty().copyWith(
+                customerPoReference: CustomerPoReference('REF'),
+                contactNumber: ContactNumber('123456'),
+                contactPerson: ContactPerson('CP'),
+                paymentTerm: PaymentTerm('0001-TEST'),
+              ),
+            ),
+            AdditionalDetailsState.initial().copyWith(
+              isValidated: true,
+              showErrorMessages: false,
+              additionalDetailsData: AdditionalDetailsData.empty().copyWith(
+                customerPoReference: CustomerPoReference('REF'),
+                contactNumber: ContactNumber('123456'),
+                contactPerson: ContactPerson('CP'),
+                paymentTerm: PaymentTerm('0001-TEST'),
+              ),
+            ),
+          ];
+          whenListen(additionalDetailsBlocMock,
+              Stream.fromIterable(additionalDetailsExpectedStates));
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+          final orderSuccess =
+              find.byKey(const Key('additionalDetailsFormKey'));
+          expect(orderSuccess, findsOneWidget);
+        },
+        variant: variants,
       );
 
       testWidgets(
         '=> test submitOrder success',
         (tester) async {
+          tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+          tester.binding.window.devicePixelRatioTestValue = 1.0;
           final expectedStates = [_getState(variants.currentValue!)];
           whenListen(orderSummaryBlocMock, Stream.fromIterable(expectedStates));
           when(() => salesOrgBlocMock.state)
@@ -477,31 +619,32 @@ void main() {
             ),
           );
 
-          tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
-          tester.binding.window.devicePixelRatioTestValue = 1.0;
           await tester.pumpWidget(getWidget());
           await tester.pump();
-          final contactNumberKey = find.byKey(const Key('contactNumberKey'));
-          expect(contactNumberKey, findsOneWidget);
-          await tester.enterText(contactNumberKey, '1234567890');
-          await tester.pump(const Duration(seconds: 2));
-          final contactPersonKey = find.byKey(const Key('contactPersonKey'));
-          expect(contactPersonKey, findsOneWidget);
-          await tester.enterText(contactPersonKey, 'Lionel Messi');
-          await tester.pump(const Duration(seconds: 2));
-          final customerPOReferenceKey =
-              find.byKey(const Key('customerPOReferenceKey'));
-          expect(customerPOReferenceKey, findsOneWidget);
-          await tester.enterText(customerPOReferenceKey, 'PO Reference');
-          await tester.pump(const Duration(seconds: 2));
-
-          final paymentTermKey = find.byKey(const Key('_paymentTermTextKey'));
-          expect(paymentTermKey, findsOneWidget);
-          final textField =
-              paymentTermKey.evaluate().single.widget as TextFormField;
-          textField.controller!.text = '0001-Test';
-          await tester.pump(const Duration(seconds: 2));
           if (orderSummaryBlocMock.state.step == 3) {
+            final contactNumberKey = find.byKey(const Key('contactNumberKey'));
+            expect(contactNumberKey, findsOneWidget);
+            await tester.enterText(contactNumberKey, '1234567890');
+            await tester.pump(const Duration(seconds: 2));
+            final contactPersonKey = find.byKey(const Key('contactPersonKey'));
+            expect(contactPersonKey, findsOneWidget);
+            await tester.enterText(contactPersonKey, 'Lionel Messi');
+            await tester.pump(const Duration(seconds: 2));
+            final customerPOReferenceKey =
+                find.byKey(const Key('customerPOReferenceKey'));
+            expect(customerPOReferenceKey, findsOneWidget);
+            await tester.enterText(customerPOReferenceKey, 'PO Reference');
+            await tester.pump(const Duration(seconds: 2));
+
+            final paymentTermKey = find.byKey(const Key('_paymentTermTextKey'));
+            expect(paymentTermKey, findsOneWidget);
+            final dropDownFieldKey =
+                find.byKey(const Key('_paymentTermTextKey'));
+            expect(dropDownFieldKey, findsOneWidget);
+            await tester.tap(dropDownFieldKey, warnIfMissed: false);
+            await tester.pump(const Duration(seconds: 1));
+            await tester.tap(find.text('0001-Test').last, warnIfMissed: false);
+            await tester.pump(const Duration(seconds: 1));
             final continueButtonKey = find.text('Continue');
             expect(continueButtonKey, findsNWidgets(5));
             await tester.tap(continueButtonKey.at(3));
@@ -509,7 +652,7 @@ void main() {
           } else {
             final submitButtonKey = find.text('Submit');
             expect(submitButtonKey, findsNWidgets(5));
-            await tester.tap(submitButtonKey.at(4));
+            await tester.tap(submitButtonKey.last, warnIfMissed: false);
             await tester.pump();
           }
         },
@@ -523,8 +666,8 @@ void main() {
             () => orderSummaryBlocMock.state,
           ).thenReturn(
             OrderSummaryState.initial().copyWith(
-              step: 4,
-              maxSteps: 5,
+              step: 3,
+              maxSteps: 4,
             ),
           );
           tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
@@ -636,7 +779,7 @@ void main() {
           await tester.pumpWidget(getWidget());
           await tester.pumpAndSettle();
           final customerDetailsKey =
-              find.byKey(const Key('_additionalDetailsFormKey'));
+              find.byKey(const Key('additionalDetailsFormKey'));
           final datePickerKey = find.byKey(const Key('_DatePickerFieldKey'));
           expect(customerDetailsKey, findsOneWidget);
           expect(datePickerKey, findsOneWidget);
@@ -660,16 +803,16 @@ void main() {
           ));
           final expectedStates = [
             PaymentTermState.initial().copyWith(
-              paymentTerms: <PaymentTerm>[
-                PaymentTerm.empty().copyWith(
+              paymentTerms: <pt.PaymentTerm>[
+                pt.PaymentTerm.empty().copyWith(
                   paymentTermCode: '0001',
                   paymentTermDescription: 'Test',
                 ),
               ],
             ),
             PaymentTermState.initial().copyWith(
-              paymentTerms: <PaymentTerm>[
-                PaymentTerm.empty().copyWith(
+              paymentTerms: <pt.PaymentTerm>[
+                pt.PaymentTerm.empty().copyWith(
                   paymentTermCode: 'CCP',
                   paymentTermDescription: 'COD',
                 ),
@@ -786,18 +929,30 @@ void main() {
       testWidgets(
         '=> test move to order success',
         (tester) async {
+          final state = OrderSummaryState.initial().copyWith(
+            step: 3,
+          );
           final expectedStates = [
-            OrderSummaryState.initial().copyWith(
+            state.copyWith(
               isSubmitting: true,
-              isSubmitSuccess: false,
             ),
-            OrderSummaryState.initial().copyWith(
+            state.copyWith(
               isSubmitting: false,
-              isSubmitSuccess: true,
+              step: 5,
             ),
-            OrderSummaryState.initial().copyWith(
+            state.copyWith(
+              isSubmitting: false,
+              step: 5,
+            ),
+            state.copyWith(
+              isSubmitting: false,
+              step: 3,
+            ),
+            state.copyWith(
+              isSubmitting: false,
+            ),
+            state.copyWith(
               isSubmitting: true,
-              isSubmitSuccess: false,
               apiFailureOrSuccessOption: optionOf(
                 const Left(
                   ApiFailure.other('Fake-Error'),

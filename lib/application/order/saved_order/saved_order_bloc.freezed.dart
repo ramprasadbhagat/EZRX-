@@ -39,7 +39,7 @@ mixin _$SavedOrderListEvent {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            Map<AdditionalInfoLabelList, String> data,
+            AdditionalDetailsData data,
             List<SavedOrder> existingSavedOrderList)
         createDraft,
   }) =>
@@ -67,7 +67,7 @@ mixin _$SavedOrderListEvent {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            Map<AdditionalInfoLabelList, String> data,
+            AdditionalDetailsData data,
             List<SavedOrder> existingSavedOrderList)?
         createDraft,
   }) =>
@@ -89,7 +89,7 @@ mixin _$SavedOrderListEvent {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            Map<AdditionalInfoLabelList, String> data,
+            AdditionalDetailsData data,
             List<SavedOrder> existingSavedOrderList)?
         createDraft,
     required TResult orElse(),
@@ -202,7 +202,7 @@ class _$_Initialized implements _Initialized {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            Map<AdditionalInfoLabelList, String> data,
+            AdditionalDetailsData data,
             List<SavedOrder> existingSavedOrderList)
         createDraft,
   }) {
@@ -233,7 +233,7 @@ class _$_Initialized implements _Initialized {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            Map<AdditionalInfoLabelList, String> data,
+            AdditionalDetailsData data,
             List<SavedOrder> existingSavedOrderList)?
         createDraft,
   }) {
@@ -258,7 +258,7 @@ class _$_Initialized implements _Initialized {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            Map<AdditionalInfoLabelList, String> data,
+            AdditionalDetailsData data,
             List<SavedOrder> existingSavedOrderList)?
         createDraft,
     required TResult orElse(),
@@ -474,7 +474,7 @@ class _$_Fetch implements _Fetch {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            Map<AdditionalInfoLabelList, String> data,
+            AdditionalDetailsData data,
             List<SavedOrder> existingSavedOrderList)
         createDraft,
   }) {
@@ -506,7 +506,7 @@ class _$_Fetch implements _Fetch {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            Map<AdditionalInfoLabelList, String> data,
+            AdditionalDetailsData data,
             List<SavedOrder> existingSavedOrderList)?
         createDraft,
   }) {
@@ -532,7 +532,7 @@ class _$_Fetch implements _Fetch {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            Map<AdditionalInfoLabelList, String> data,
+            AdditionalDetailsData data,
             List<SavedOrder> existingSavedOrderList)?
         createDraft,
     required TResult orElse(),
@@ -763,7 +763,7 @@ class _$_LoadMore implements _LoadMore {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            Map<AdditionalInfoLabelList, String> data,
+            AdditionalDetailsData data,
             List<SavedOrder> existingSavedOrderList)
         createDraft,
   }) {
@@ -795,7 +795,7 @@ class _$_LoadMore implements _LoadMore {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            Map<AdditionalInfoLabelList, String> data,
+            AdditionalDetailsData data,
             List<SavedOrder> existingSavedOrderList)?
         createDraft,
   }) {
@@ -821,7 +821,7 @@ class _$_LoadMore implements _LoadMore {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            Map<AdditionalInfoLabelList, String> data,
+            AdditionalDetailsData data,
             List<SavedOrder> existingSavedOrderList)?
         createDraft,
     required TResult orElse(),
@@ -1000,7 +1000,7 @@ class _$_Delete implements _Delete {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            Map<AdditionalInfoLabelList, String> data,
+            AdditionalDetailsData data,
             List<SavedOrder> existingSavedOrderList)
         createDraft,
   }) {
@@ -1031,7 +1031,7 @@ class _$_Delete implements _Delete {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            Map<AdditionalInfoLabelList, String> data,
+            AdditionalDetailsData data,
             List<SavedOrder> existingSavedOrderList)?
         createDraft,
   }) {
@@ -1056,7 +1056,7 @@ class _$_Delete implements _Delete {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            Map<AdditionalInfoLabelList, String> data,
+            AdditionalDetailsData data,
             List<SavedOrder> existingSavedOrderList)?
         createDraft,
     required TResult orElse(),
@@ -1132,13 +1132,14 @@ abstract class _$$_CreateDraftCopyWith<$Res> {
       double grandTotal,
       CustomerCodeInfo customerCodeInfo,
       SalesOrganisation salesOrganisation,
-      Map<AdditionalInfoLabelList, String> data,
+      AdditionalDetailsData data,
       List<SavedOrder> existingSavedOrderList});
 
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $UserCopyWith<$Res> get user;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $AdditionalDetailsDataCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -1187,9 +1188,9 @@ class __$$_CreateDraftCopyWithImpl<$Res>
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
       data: null == data
-          ? _value._data
+          ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as Map<AdditionalInfoLabelList, String>,
+              as AdditionalDetailsData,
       existingSavedOrderList: null == existingSavedOrderList
           ? _value._existingSavedOrderList
           : existingSavedOrderList // ignore: cast_nullable_to_non_nullable
@@ -1228,6 +1229,14 @@ class __$$_CreateDraftCopyWithImpl<$Res>
       return _then(_value.copyWith(salesOrganisation: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AdditionalDetailsDataCopyWith<$Res> get data {
+    return $AdditionalDetailsDataCopyWith<$Res>(_value.data, (value) {
+      return _then(_value.copyWith(data: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -1240,10 +1249,9 @@ class _$_CreateDraft implements _CreateDraft {
       required this.grandTotal,
       required this.customerCodeInfo,
       required this.salesOrganisation,
-      required final Map<AdditionalInfoLabelList, String> data,
+      required this.data,
       required final List<SavedOrder> existingSavedOrderList})
       : _cartItems = cartItems,
-        _data = data,
         _existingSavedOrderList = existingSavedOrderList;
 
   @override
@@ -1263,13 +1271,8 @@ class _$_CreateDraft implements _CreateDraft {
   final CustomerCodeInfo customerCodeInfo;
   @override
   final SalesOrganisation salesOrganisation;
-  final Map<AdditionalInfoLabelList, String> _data;
   @override
-  Map<AdditionalInfoLabelList, String> get data {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_data);
-  }
-
+  final AdditionalDetailsData data;
   final List<SavedOrder> _existingSavedOrderList;
   @override
   List<SavedOrder> get existingSavedOrderList {
@@ -1298,7 +1301,7 @@ class _$_CreateDraft implements _CreateDraft {
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
-            const DeepCollectionEquality().equals(other._data, _data) &&
+            (identical(other.data, data) || other.data == data) &&
             const DeepCollectionEquality().equals(
                 other._existingSavedOrderList, _existingSavedOrderList));
   }
@@ -1312,7 +1315,7 @@ class _$_CreateDraft implements _CreateDraft {
       grandTotal,
       customerCodeInfo,
       salesOrganisation,
-      const DeepCollectionEquality().hash(_data),
+      data,
       const DeepCollectionEquality().hash(_existingSavedOrderList));
 
   @JsonKey(ignore: true)
@@ -1345,7 +1348,7 @@ class _$_CreateDraft implements _CreateDraft {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            Map<AdditionalInfoLabelList, String> data,
+            AdditionalDetailsData data,
             List<SavedOrder> existingSavedOrderList)
         createDraft,
   }) {
@@ -1377,7 +1380,7 @@ class _$_CreateDraft implements _CreateDraft {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            Map<AdditionalInfoLabelList, String> data,
+            AdditionalDetailsData data,
             List<SavedOrder> existingSavedOrderList)?
         createDraft,
   }) {
@@ -1403,7 +1406,7 @@ class _$_CreateDraft implements _CreateDraft {
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
-            Map<AdditionalInfoLabelList, String> data,
+            AdditionalDetailsData data,
             List<SavedOrder> existingSavedOrderList)?
         createDraft,
     required TResult orElse(),
@@ -1464,7 +1467,7 @@ abstract class _CreateDraft implements SavedOrderListEvent {
       required final double grandTotal,
       required final CustomerCodeInfo customerCodeInfo,
       required final SalesOrganisation salesOrganisation,
-      required final Map<AdditionalInfoLabelList, String> data,
+      required final AdditionalDetailsData data,
       required final List<SavedOrder> existingSavedOrderList}) = _$_CreateDraft;
 
   ShipToInfo get shipToInfo;
@@ -1473,7 +1476,7 @@ abstract class _CreateDraft implements SavedOrderListEvent {
   double get grandTotal;
   CustomerCodeInfo get customerCodeInfo;
   SalesOrganisation get salesOrganisation;
-  Map<AdditionalInfoLabelList, String> get data;
+  AdditionalDetailsData get data;
   List<SavedOrder> get existingSavedOrderList;
   @JsonKey(ignore: true)
   _$$_CreateDraftCopyWith<_$_CreateDraft> get copyWith =>

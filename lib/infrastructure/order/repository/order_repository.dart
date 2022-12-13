@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
@@ -21,7 +22,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/saved_order_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/order_summary_page.dart';
 
 class OrderRepository implements IOrderRepository {
   final Config config;
@@ -114,7 +114,7 @@ class OrderRepository implements IOrderRepository {
     required double grandTotal,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
-    required Map<AdditionalInfoLabelList, String> data,
+    required AdditionalDetailsData data,
   }) async {
     final draftOrder = _getCreateDraftOrderRequest(
       shipToInfo: shipToInfo,
@@ -181,7 +181,7 @@ class OrderRepository implements IOrderRepository {
     required double grandTotal,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
-    required Map<AdditionalInfoLabelList, String> data,
+    required AdditionalDetailsData data,
     required String orderType,
     required SalesOrganisationConfigs configs,
   }) async {
@@ -231,7 +231,7 @@ class OrderRepository implements IOrderRepository {
     required double grandTotal,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
-    required Map<AdditionalInfoLabelList, String> data,
+    required AdditionalDetailsData data,
   }) {
     //bonus calculation
 
@@ -247,23 +247,21 @@ class OrderRepository implements IOrderRepository {
       companyName: CompanyName(shipToInfo.shipToName.toString()),
       country: shipToInfo.region,
       postCode1: shipToInfo.postalCode,
-      specialInstructions:
-          data[AdditionalInfoLabelList.specialInstruction] ?? '',
-      poReference: data[AdditionalInfoLabelList.customerPoReference] ?? '',
-      payTerm: data[AdditionalInfoLabelList.paymentTerm] ?? '',
-      collectiveNo: data[AdditionalInfoLabelList.collectiveNumber] ?? '',
+      specialInstructions: data.specialInstruction.getValue(),
+      poReference: data.customerPoReference.getValue(),
+      payTerm: data.paymentTerm.getValue(),
+      collectiveNo: data.collectiveNumber.getValue(),
       totalOrderValue: grandTotal,
       draftorder: true,
       address1: shipToInfo.shipToAddress.street,
       address2: shipToInfo.shipToAddress.street2,
       city: shipToInfo.city1,
-      phonenumber: data[AdditionalInfoLabelList.contactNumber] ?? '',
+      phonenumber: data.contactNumber.getValue(),
       user: user.id,
-      contactPerson: data[AdditionalInfoLabelList.contactPerson] != null &&
-              data[AdditionalInfoLabelList.contactPerson]!.isNotEmpty
-          ? data[AdditionalInfoLabelList.contactPerson]!
+      contactPerson: data.contactPerson.getValue().isNotEmpty
+          ? data.contactPerson.getValue()
           : user.fullName.toString(),
-      referenceNotes: data[AdditionalInfoLabelList.referenceNote] ?? '',
+      referenceNotes: data.referenceNote.getValue(),
       items: _getItemList(cartItems),
     );
   }
@@ -271,7 +269,7 @@ class OrderRepository implements IOrderRepository {
   SubmitOrder _getSubmitOrderRequest({
     required ShipToInfo shipToInfo,
     required User user,
-    required Map<AdditionalInfoLabelList, String> data,
+    required AdditionalDetailsData data,
     required List<PriceAggregate> cartItems,
     required String orderType,
     required CustomerCodeInfo customerCodeInfo,
@@ -279,20 +277,16 @@ class OrderRepository implements IOrderRepository {
     required SalesOrganisationConfigs configs,
   }) {
     return SubmitOrder.empty().copyWith(
-      userName: data[AdditionalInfoLabelList.contactPerson] != null &&
-              data[AdditionalInfoLabelList.contactPerson]!.isNotEmpty
-          ? data[AdditionalInfoLabelList.contactPerson]!
+      userName: data.contactPerson.getValue().isNotEmpty
+          ? data.contactPerson.getValue()
           : user.fullName.toString(),
-      poReference: data[AdditionalInfoLabelList.customerPoReference] ?? '',
-      referenceNotes: data[AdditionalInfoLabelList.referenceNote] ?? '',
-      specialInstructions:
-          data[AdditionalInfoLabelList.specialInstruction] ?? '',
+      poReference: data.customerPoReference.getValue(),
+      referenceNotes: data.referenceNote.getValue(),
+      specialInstructions: data.specialInstruction.getValue(),
       companyName: CompanyName(shipToInfo.shipToName.toString()),
-      requestedDeliveryDate: data[AdditionalInfoLabelList.deliveryDate] ?? '',
-      poDate: data[AdditionalInfoLabelList.deliveryDate] ?? '',
-      telephone: data[AdditionalInfoLabelList.contactNumber]!.length > 16
-          ? data[AdditionalInfoLabelList.contactNumber]!.substring(0, 16)
-          : data[AdditionalInfoLabelList.contactNumber]!,
+      requestedDeliveryDate: data.deliveryDate.getValue(),
+      poDate: data.deliveryDate.getValue(),
+      telephone: data.contactNumber.getTelephone,
       trackingLevel: 'items',
       collectiveNumber: '',
       subscribeStatusChange: true,
@@ -305,7 +299,7 @@ class OrderRepository implements IOrderRepository {
       shippingCondition: '',
       paymentTerms: gettenderAvailability(cartItem: cartItems.last)
           ? 'contractPaymentTerm'
-          : data[AdditionalInfoLabelList.paymentTerm]!,
+          : data.paymentTerm.getValue(),
       customer: _getSubmitOrderCustomer(
         customerCodeInfo: customerCodeInfo,
         salesOrganisation: salesOrganisation,

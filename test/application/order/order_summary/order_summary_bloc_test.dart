@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response_message.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
@@ -19,8 +20,8 @@ import 'package:mocktail/mocktail.dart';
 class OrderRepositoryMock extends Mock implements OrderRepository {}
 
 void main() {
-  //TestWidgetsFlutterBinding.ensureInitialized();
   late OrderRepository orderRepositoryMock;
+  late AdditionalDetailsData additionalDetailsData;
   final submitOrderResponse = SubmitOrderResponse.empty()
       .copyWith(salesDocument: 'fake-sales-document', messages: [
     SubmitOrderResponseMessage.empty().copyWith(
@@ -30,6 +31,12 @@ void main() {
   ]);
   late OrderSummaryState orderSummaryState;
 
+  final config = SalesOrganisationConfigs.empty().copyWith(
+    ponRequired: true,
+    enableMobileNumber: true,
+    enablePaymentTerms: true,
+  );
+
   group('Test Order Summary Bloc', () {
     setUp(
       () {
@@ -38,16 +45,18 @@ void main() {
           additionalDetailsStep: 3,
           maxSteps: 4,
         );
+        additionalDetailsData = AdditionalDetailsData.empty();
       },
     );
     blocTest<OrderSummaryBloc, OrderSummaryState>(
       '==> Initialize and Navigate Stepper',
       build: () => OrderSummaryBloc(repository: orderRepositoryMock),
       act: (bloc) => bloc
-        ..add(const OrderSummaryEvent.initialized(
+        ..add(OrderSummaryEvent.initialized(
           additionalDetailsStep: 3,
           maxSteps: 4,
           step: 0,
+          config: SalesOrganisationConfigs.empty(),
         ))
         ..add(const OrderSummaryEvent.stepContinue())
         ..add(const OrderSummaryEvent.stepCancel())
@@ -76,10 +85,11 @@ void main() {
       'Order Summary Bloc Initial',
       build: () => OrderSummaryBloc(repository: orderRepositoryMock),
       act: (OrderSummaryBloc bloc) {
-        bloc.add(const OrderSummaryEvent.initialized(
+        bloc.add(OrderSummaryEvent.initialized(
           additionalDetailsStep: 3,
           maxSteps: 4,
           step: 0,
+          config: SalesOrganisationConfigs.empty(),
         ));
       },
       expect: () => [OrderSummaryState.initial().copyWith(maxSteps: 4)],
@@ -198,7 +208,7 @@ void main() {
                   CustomerCodeInfo.empty().copyWith(division: 'div'),
               salesOrganisation: SalesOrganisation.empty()
                   .copyWith(salesOrg: SalesOrg('2601')),
-              data: {},
+              data: AdditionalDetailsData.empty(),
               orderType: '',
               configs: SalesOrganisationConfigs.empty()
                   .copyWith(currency: Currency('PHP')),
@@ -220,7 +230,7 @@ void main() {
                 CustomerCodeInfo.empty().copyWith(division: 'div'),
             salesOrganisation:
                 SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
-            data: {},
+            data: AdditionalDetailsData.empty(),
             orderType: '',
             config: SalesOrganisationConfigs.empty()
                 .copyWith(currency: Currency('PHP')),
@@ -231,13 +241,12 @@ void main() {
         OrderSummaryState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
           isSubmitting: true,
-          isSubmitSuccess: false,
         ),
         OrderSummaryState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
           isSubmitting: false,
-          isSubmitSuccess: true,
           submitOrderResponse: submitOrderResponse,
+          isSubmitSuccess: true,
         ),
       ],
     );
@@ -259,7 +268,7 @@ void main() {
                       CustomerCodeInfo.empty().copyWith(division: 'div'),
                   salesOrganisation: SalesOrganisation.empty()
                       .copyWith(salesOrg: SalesOrg('2601')),
-                  data: {},
+                  data: AdditionalDetailsData.empty(),
                   orderType: '',
                   configs: SalesOrganisationConfigs.empty()
                       .copyWith(currency: Currency('PHP')),
@@ -283,7 +292,7 @@ void main() {
                 CustomerCodeInfo.empty().copyWith(division: 'div'),
             salesOrganisation:
                 SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
-            data: {},
+            data: AdditionalDetailsData.empty(),
             orderType: '',
             config: SalesOrganisationConfigs.empty()
                 .copyWith(currency: Currency('PHP')),
@@ -294,13 +303,11 @@ void main() {
         OrderSummaryState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
           isSubmitting: true,
-          isSubmitSuccess: false,
         ),
         OrderSummaryState.initial().copyWith(
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Some Error'))),
           isSubmitting: false,
-          isSubmitSuccess: false,
         ),
       ],
     );

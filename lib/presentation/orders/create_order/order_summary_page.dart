@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
@@ -13,13 +14,10 @@ import 'package:ezrxmobile/application/order/order_history_filter/order_history_
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
-import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
@@ -33,37 +31,11 @@ import 'package:ezrxmobile/presentation/orders/cart/cart_material_item_tile.dart
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/order_type_selector.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/additional_details.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/save_template_dialog.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-
-GlobalKey<FormState> _additionalDetailsFormKey = GlobalKey<FormState>();
-
-enum AdditionalInfoLabelList {
-  customerPoReference,
-  specialInstruction,
-  referenceNote,
-  collectiveNumber,
-  contactPerson,
-  contactNumber,
-  paymentTerm,
-  deliveryDate
-}
-
-final Map<AdditionalInfoLabelList, String> data = {
-  AdditionalInfoLabelList.customerPoReference: '',
-  AdditionalInfoLabelList.specialInstruction: '',
-  AdditionalInfoLabelList.referenceNote: '',
-  AdditionalInfoLabelList.collectiveNumber: '',
-  AdditionalInfoLabelList.contactPerson: '',
-  AdditionalInfoLabelList.contactNumber: '',
-  AdditionalInfoLabelList.paymentTerm: '',
-  AdditionalInfoLabelList.deliveryDate: '',
-};
 
 class OrderSummaryPage extends StatelessWidget {
   const OrderSummaryPage({Key? key}) : super(key: key);
@@ -71,7 +43,7 @@ class OrderSummaryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     locator<CountlyService>().recordCountlyView('Order Summary Screen');
-    
+
     return Scaffold(
       key: const Key('orderSummaryKey'),
       appBar: PreferredSize(
@@ -173,42 +145,14 @@ class _Stepper extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  void _saveAdditionalInformation(
-    String value,
-    AdditionalInfoLabelList lavel,
-  ) {
-    data[lavel] = value;
-  }
-
-  String? _validateAdditionalInformation(
-    String value,
-    AdditionalInfoLabelList label,
-  ) {
-    if (value.isEmpty) {
-      switch (label) {
-        case AdditionalInfoLabelList.customerPoReference:
-          return 'Customer PO Reference Required'.tr();
-        case AdditionalInfoLabelList.contactPerson:
-          return 'Please enter contact person'.tr();
-        case AdditionalInfoLabelList.contactNumber:
-          return 'Please enter valid contact number'.tr();
-        case AdditionalInfoLabelList.paymentTerm:
-          return 'Please Select Payment Term'.tr();
-        default:
-      }
-    }
-
-    return null;
-  }
-
-  bool _performFormAction() {
-    var isValid = false;
-    if (_additionalDetailsFormKey.currentState!.validate()) {
-      _additionalDetailsFormKey.currentState!.save();
-      isValid = true;
-    }
-
-    return isValid;
+  void _validateForm({
+    required BuildContext context,
+  }) {
+    context.read<AdditionalDetailsBloc>().add(
+          AdditionalDetailsEvent.validateForm(
+            config: context.read<SalesOrgBloc>().state.configs,
+          ),
+        );
   }
 
   void _saveOrder(BuildContext context) {
@@ -222,48 +166,72 @@ class _Stepper extends StatelessWidget {
             user: context.read<UserBloc>().state.user,
             cartItems: context.read<CartBloc>().state.cartItemList,
             grandTotal: context.read<CartBloc>().state.grandTotal,
-            data: data,
+            data: context
+                .read<AdditionalDetailsBloc>()
+                .state
+                .additionalDetailsData,
             existingSavedOrderList: savedOrderState.savedOrders,
           ),
         );
   }
 
-  void _submitOrder({
-    required List<PriceAggregate> cartItems,
-    required User user,
-    required double grandTotal,
-    required BuildContext context,
-    required OrderSummaryState state,
-  }) {
-    if (_performFormAction()) {
-      final cartState = context.read<CartBloc>().state;
-      locator<CountlyService>().addCountlyEvent('Order Placed', segmentation: {
-        'numItemInCart': cartState.cartItemList.length,
-        'subTotal': cartState.subtotal,
-        'grandTotal': cartState.grandTotal,
-      });
-      context.read<OrderSummaryBloc>().add(
-            OrderSummaryEvent.submitOrder(
-              shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-              customerCodeInfo:
-                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
-              salesOrganisation:
-                  context.read<SalesOrgBloc>().state.salesOrganisation,
-              user: context.read<UserBloc>().state.user,
-              cartItems: cartState.cartItemList,
-              grandTotal: cartState.grandTotal,
-              data: data,
-              orderType: '',
-              config: context.read<SalesOrgBloc>().state.configs,
-            ),
+  void _moveToOrderHistory(BuildContext context) {
+    context.read<OrderHistoryListBloc>().add(
+          OrderHistoryListEvent.fetch(
+            salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+            user: context.read<UserBloc>().state.user,
+            orderHistoryFilter: context
+                .read<OrderHistoryFilterBloc>()
+                .state
+                .orderHistoryFilterList,
+            sortDirection: 'desc',
+          ),
+        );
+    context.read<CartBloc>().add(const CartEvent.clearCart());
+    context.router.pushNamed('order_confirmation');
+  }
+
+  void _stepTapped(BuildContext context, int step) {
+    context.read<OrderSummaryBloc>().add(
+          OrderSummaryEvent.stepTapped(
+            step: step,
+          ),
+        );
+  }
+
+  void _stepContinue(BuildContext context) {
+    context
+        .read<OrderSummaryBloc>()
+        .add(const OrderSummaryEvent.stepContinue());
+  }
+
+  void _handleError(BuildContext context, OrderSummaryState state) {
+    state.apiFailureOrSuccessOption.fold(
+      () {},
+      (either) => either.fold(
+        (failure) {
+          final failureMessage = failure.toString();
+          showSnackBar(
+            context: context,
+            message: failureMessage.tr(),
           );
-    } else {
-      context.read<OrderSummaryBloc>().add(
-            OrderSummaryEvent.stepTapped(
-              step: state.additionalDetailsStep,
-            ),
-          );
+        },
+        (_) {},
+      ),
+    );
+  }
+
+  void _handleListner(BuildContext context, OrderSummaryState state) {
+    if (state.isSubmitSuccess) {
+      context
+          .read<AdditionalDetailsBloc>()
+          .add(const AdditionalDetailsEvent.flushForm());
+      _moveToOrderHistory(context);
     }
+    _handleError(context, state);
   }
 
   @override
@@ -276,40 +244,9 @@ class _Stepper extends StatelessWidget {
 
     return BlocConsumer<OrderSummaryBloc, OrderSummaryState>(
       key: const Key('orderSUmmaryBlocConsumer'),
-      listenWhen: (previous, current) =>
-          previous.isSubmitting != current.isSubmitting,
+      listenWhen: (previous, current) => previous != current,
       listener: (context, orderSummaryState) {
-        if (orderSummaryState.isSubmitSuccess) {
-          context.read<OrderHistoryListBloc>().add(
-                OrderHistoryListEvent.fetch(
-                  salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-                  customerCodeInfo: customerCodeInfo,
-                  shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-                  user: context.read<UserBloc>().state.user,
-                  orderHistoryFilter: context
-                      .read<OrderHistoryFilterBloc>()
-                      .state
-                      .orderHistoryFilterList,
-                  sortDirection: 'desc',
-                ),
-              );
-          context.read<CartBloc>().add(const CartEvent.clearCart());
-          context.router.pushNamed('order_confirmation');
-        } else {
-          orderSummaryState.apiFailureOrSuccessOption.fold(
-            () {},
-            (either) => either.fold(
-              (failure) {
-                final failureMessage = failure.toString();
-                showSnackBar(
-                  context: context,
-                  message: failureMessage.tr(),
-                );
-              },
-              (_) {},
-            ),
-          );
-        }
+        _handleListner(context, orderSummaryState);
       },
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
@@ -340,27 +277,20 @@ class _Stepper extends StatelessWidget {
                     ),
                     onPressed: () {
                       if (details.currentStep == state.maxSteps) {
-                        if (eligibleForOrderSubmit && !isAccountSuspended) {
-                          _submitOrder(
-                            cartItems:
-                                context.read<CartBloc>().state.cartItemList,
-                            user: context.read<UserBloc>().state.user,
-                            grandTotal:
-                                context.read<CartBloc>().state.grandTotal,
+                        if (eligibleForOrderSubmit) {
+                          _validateForm(
                             context: context,
-                            state: state,
                           );
                         }
                       } else {
-                        final shouldStepContinue =
-                            details.currentStep == state.additionalDetailsStep
-                                ? _performFormAction()
-                                : true;
-                        shouldStepContinue
-                            ? context
-                                .read<OrderSummaryBloc>()
-                                .add(const OrderSummaryEvent.stepContinue())
-                            : null;
+                        if (details.currentStep ==
+                            state.additionalDetailsStep) {
+                          _validateForm(
+                            context: context,
+                          );
+                        } else {
+                          _stepContinue(context);
+                        }
                       }
                     },
                     child: details.currentStep == state.maxSteps
@@ -401,9 +331,7 @@ class _Stepper extends StatelessWidget {
           key: const Key('orderSummaryStepperKey'),
           type: StepperType.vertical,
           onStepTapped: (step) {
-            context
-                .read<OrderSummaryBloc>()
-                .add(OrderSummaryEvent.stepTapped(step: step));
+            _stepTapped(context, step);
           },
           currentStep: context.read<OrderSummaryBloc>().state.step,
           steps: _getSteps(
@@ -411,8 +339,6 @@ class _Stepper extends StatelessWidget {
             config: config,
             billToInfo: billToInfo,
             customerCodeInfo: customerCodeInfo,
-            savedFunction: _saveAdditionalInformation,
-            validateFunction: _validateAdditionalInformation,
           ),
         );
       },
@@ -430,8 +356,6 @@ List<Step> _getSteps({
   required SalesOrganisationConfigs config,
   required BillToInfo billToInfo,
   required CustomerCodeInfo customerCodeInfo,
-  required Function savedFunction,
-  required Function validateFunction,
 }) {
   return [
     Step(
@@ -457,10 +381,7 @@ List<Step> _getSteps({
       ),
     Step(
       title: Text('Additional Information'.tr()),
-      content: _AdditionalInformationStep(
-        saveData: savedFunction,
-        validateData: validateFunction,
-      ),
+      content: const _AdditionalDetailsStep(),
     ),
     Step(
       title: Text(_isDisclamerPresent(context)
@@ -469,6 +390,57 @@ List<Step> _getSteps({
       content: const _CartDetails(),
     ),
   ];
+}
+
+class _AdditionalDetailsStep extends StatelessWidget {
+  const _AdditionalDetailsStep();
+
+  void _submitOrder(BuildContext context) {
+    context.read<OrderSummaryBloc>().add(OrderSummaryEvent.submitOrder(
+          config: context.read<SalesOrgBloc>().state.configs,
+          shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+          customerCodeInfo:
+              context.read<CustomerCodeBloc>().state.customerCodeInfo,
+          salesOrganisation:
+              context.read<SalesOrgBloc>().state.salesOrganisation,
+          user: context.read<UserBloc>().state.user,
+          cartItems: context.read<CartBloc>().state.cartItemList,
+          grandTotal: context.read<CartBloc>().state.grandTotal,
+          orderType: '',
+          data:
+              context.read<AdditionalDetailsBloc>().state.additionalDetailsData,
+        ));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<AdditionalDetailsBloc, AdditionalDetailsState>(
+      key: const Key('additionalDetailsFormKey'),
+      listenWhen: (previous, current) => previous != current,
+      listener: (context, state) {
+        final orderSummaryBloc = context.read<OrderSummaryBloc>();
+        final orderSummaryState = orderSummaryBloc.state;
+        if (state.isValidated) {
+          orderSummaryState.step == orderSummaryState.additionalDetailsStep
+              ? orderSummaryBloc.add(const OrderSummaryEvent.stepContinue())
+              : _submitOrder(context);
+        } else if (!state.isValidated && state.showErrorMessages) {
+          orderSummaryBloc.add(
+            OrderSummaryEvent.stepTapped(
+              step: orderSummaryState.additionalDetailsStep,
+            ),
+          );
+        }
+      },
+      buildWhen: (previous, current) => previous != current,
+      builder: (context, state) {
+        return AdditionalDetails(
+          config: context.read<SalesOrgBloc>().state.configs,
+          state: state,
+        );
+      },
+    );
+  }
 }
 
 class _OrderSummaryDetails {
@@ -559,127 +531,6 @@ class _CustomerDetailsStep extends StatelessWidget {
               );
             }),
           ],
-        );
-      },
-    );
-  }
-}
-
-class _AdditionalInformationStep extends StatelessWidget {
-  final Function saveData;
-  final Function validateData;
-
-  const _AdditionalInformationStep({
-    required this.saveData,
-    required this.validateData,
-    Key? key,
-  }) : super(key: key);
-
-  String? emptyValidator(
-    String value,
-    AdditionalInfoLabelList lavel,
-  ) {
-    return null;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<SalesOrgBloc, SalesOrgState>(
-      key: const Key('_additionalDetailsFormKey'),
-      buildWhen: (previous, current) => previous != current,
-      builder: (context, state) {
-        return Form(
-          key: _additionalDetailsFormKey,
-          child: Column(
-            children: [
-              _TextFormField(
-                keyText: 'customerPOReferenceKey',
-                labelText: 'Customer PO Reference',
-                maxLength: 35,
-                saveData: saveData,
-                label: AdditionalInfoLabelList.customerPoReference,
-                validateData:
-                    state.configs.ponRequired ? validateData : emptyValidator,
-              ),
-              state.configs.enableSpecialInstructions
-                  ? _TextFormField(
-                      keyText: 'specialInstruction',
-                      labelText: 'Special Instructions',
-                      keyboardType: TextInputType.multiline,
-                      maxLength: 132,
-                      saveData: saveData,
-                      label: AdditionalInfoLabelList.specialInstruction,
-                      validateData: emptyValidator,
-                    )
-                  : const SizedBox.shrink(),
-              state.configs.enableReferenceNote
-                  ? _TextFormField(
-                      keyText: 'referenceNote',
-                      labelText: 'Reference Note',
-                      maxLength: 50,
-                      keyboardType: TextInputType.multiline,
-                      saveData: saveData,
-                      label: AdditionalInfoLabelList.referenceNote,
-                      validateData: emptyValidator,
-                    )
-                  : const SizedBox.shrink(),
-              state.configs.enableCollectiveNumber &&
-                      context.read<UserBloc>().state.user.role.type.isSalesRep
-                  ? _TextFormField(
-                      keyText: 'collectiveNumber',
-                      labelText: 'Collective Number',
-                      maxLength: 10,
-                      saveData: saveData,
-                      label: AdditionalInfoLabelList.collectiveNumber,
-                      validateData: emptyValidator,
-                    )
-                  : const SizedBox.shrink(),
-              state.configs.enableMobileNumber
-                  ? _TextFormField(
-                      keyText: 'contactPersonKey',
-                      labelText: 'Contact Person',
-                      maxLength: 50,
-                      saveData: saveData,
-                      label: AdditionalInfoLabelList.contactPerson,
-                      validateData: validateData,
-                    )
-                  : const SizedBox.shrink(),
-              state.configs.enableMobileNumber
-                  ? _TextFormField(
-                      keyText: 'contactNumberKey',
-                      labelText: 'Contact Number',
-                      maxLength: 10,
-                      keyboardType: TextInputType.phone,
-                      saveData: saveData,
-                      label: AdditionalInfoLabelList.contactNumber,
-                      validateData: validateData,
-                    )
-                  : const SizedBox.shrink(),
-              state.configs.enableFutureDeliveryDay
-                  ? _DatePickerField(
-                      futureDeliveryDay: context
-                          .read<SalesOrgBloc>()
-                          .state
-                          .configs
-                          .futureDeliveryDay,
-                      saveData: saveData,
-                    )
-                  : const SizedBox.shrink(),
-              state.configs.enablePaymentTerms
-                  ? _PaymentTerm(
-                      validateData: validateData,
-                      saveData: saveData,
-                    )
-                  : const SizedBox.shrink(),
-              //OrderType
-              context.read<EligibilityBloc>().state.isOrderTypeEnable
-                  ? Container(
-                      margin: const EdgeInsets.only(top: 18),
-                      child: const OrderTypeSelector(),
-                    )
-                  : const SizedBox.shrink(),
-            ],
-          ),
         );
       },
     );
@@ -831,276 +682,5 @@ class _CartDetails extends StatelessWidget {
         );
       },
     );
-  }
-}
-
-class _TextFormField extends StatelessWidget {
-  final String keyText;
-  final String labelText;
-  final AdditionalInfoLabelList label;
-  final int maxLength;
-  final TextInputType keyboardType;
-  final Function saveData;
-  final Function validateData;
-
-  const _TextFormField({
-    required this.keyText,
-    required this.labelText,
-    required this.label,
-    required this.maxLength,
-    this.keyboardType = TextInputType.text,
-    required this.saveData,
-    required this.validateData,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TextFormField(
-          key: Key(keyText),
-          keyboardType: keyboardType,
-          initialValue: data[label],
-          maxLength: maxLength,
-          maxLines: keyboardType == TextInputType.multiline ? null : 1,
-          validator: (value) {
-            return validateData(value, label);
-          },
-          onSaved: (value) {
-            saveData(value, label);
-          },
-          decoration: InputDecoration(
-            labelText: labelText.tr(),
-            // labelStyle: const TextStyle(fontSize: 12.0),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: ZPColors.primary, width: 1.0),
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
-              ),
-            ),
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(width: 1.0),
-              borderRadius: BorderRadius.all(
-                Radius.circular(8.0),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 15,
-        ),
-      ],
-    );
-  }
-}
-
-class _PaymentTerm extends StatefulWidget {
-  final Function validateData;
-  final Function saveData;
-
-  const _PaymentTerm({
-    required this.validateData,
-    required this.saveData,
-  });
-
-  @override
-  State<_PaymentTerm> createState() => _PaymentTermState();
-}
-
-class _PaymentTermState extends State<_PaymentTerm> {
-  late TextEditingController _controller;
-
-  @override
-  void initState() {
-    _controller =
-        TextEditingController(text: data[AdditionalInfoLabelList.paymentTerm]);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<PaymentTermBloc, PaymentTermState>(
-      key: const Key('_paymentTermKey'),
-      buildWhen: (previous, current) =>
-          previous.isFetching != current.isFetching,
-      builder: (context, state) {
-        return TextFormField(
-          key: const Key('_paymentTermTextKey'),
-          controller: _controller,
-          onSaved: (value) {
-            widget.saveData(value, AdditionalInfoLabelList.paymentTerm);
-          },
-          validator: (value) {
-            return widget.validateData(
-              value,
-              AdditionalInfoLabelList.paymentTerm,
-            );
-          },
-          onTap: () => showCupertinoModalPopup<void>(
-            context: context,
-            builder: (BuildContext context) {
-              return PlatformAlertDialog(
-                title: const Text('Please Select Payment Term').tr(),
-                actions: state.paymentTermsDisplayLevels.map((e) {
-                  return e.isNotEmpty
-                      ? PlatformDialogAction(
-                          key: Key('paymentterm-$e'),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            width: double.infinity,
-                            child: Text(
-                              e,
-                              textAlign: TextAlign.left,
-                            ),
-                          ),
-                          onPressed: () async {
-                            _controller.text = e;
-                            await locator<CountlyService>().addCountlyEvent(
-                              'select_payment_term',
-                              segmentation: {
-                                'payment_term': e,
-                              },
-                            );
-                            await context.router.pop();
-                          },
-                        )
-                      : const SizedBox.shrink();
-                }).toList(),
-              );
-            },
-          ),
-          readOnly: true,
-          decoration: InputDecoration(
-            labelText: 'Select Payment Term'.tr(),
-            // labelStyle: const TextStyle(fontSize: 12.0),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: ZPColors.primary, width: 1.0),
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
-              ),
-            ),
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(width: 1.0),
-              borderRadius: BorderRadius.all(
-                Radius.circular(8.0),
-              ),
-            ),
-            suffixIcon: const Icon(
-              Icons.keyboard_arrow_down,
-              color: ZPColors.darkGray,
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _DatePickerField extends StatefulWidget {
-  final String futureDeliveryDay;
-  final Function saveData;
-
-  const _DatePickerField({
-    required this.futureDeliveryDay,
-    required this.saveData,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<_DatePickerField> createState() => _DatePickerFieldState();
-}
-
-class _DatePickerFieldState extends State<_DatePickerField> {
-  late TextEditingController controller;
-
-  @override
-  void initState() {
-    controller = TextEditingController.fromValue(TextEditingValue(
-      text: widget.futureDeliveryDay.isEmpty
-          ? DateFormat('yyyy-MM-dd')
-              .format(DateTime.now().add(const Duration(days: 1)))
-          : DateFormat('yyyy-MM-dd').format(DateTime.now()
-              .add(Duration(days: int.parse(widget.futureDeliveryDay)))),
-    ));
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      key: const Key('_DatePickerFieldKey'),
-      children: [
-        InkWell(
-          onTap: () async {
-            final dateTime = await getDateFromDatePicker(
-              true,
-              widget.futureDeliveryDay,
-              context,
-            );
-            controller.text = DateFormat('yyyy-MM-dd').format(dateTime);
-          },
-          child: IgnorePointer(
-            child: TextFormField(
-              enabled: true,
-              keyboardType: TextInputType.datetime,
-              controller: controller,
-              onSaved: (value) {
-                widget.saveData(value, AdditionalInfoLabelList.deliveryDate);
-              },
-              decoration: InputDecoration(
-                labelText: 'Requested Delivery Date'.tr(),
-                // labelStyle: const TextStyle(fontSize: 12.0),
-                suffixIcon: const Icon(
-                  Icons.calendar_month,
-                ),
-                focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: ZPColors.primary, width: 1.0),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(8),
-                  ),
-                ),
-                border: const OutlineInputBorder(
-                  borderSide: BorderSide(width: 1.0),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(8.0),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-      ],
-    );
-  }
-
-  Future<DateTime> getDateFromDatePicker(
-    enableFutureDevlieryDay,
-    futureDeliveryDay,
-    BuildContext context,
-  ) async {
-    final orderDate = await showPlatformDatePicker(
-      context: context,
-      firstDate: DateTime.now().subtract(const Duration(days: 100)),
-      lastDate: DateTime.now().add(const Duration(days: 100)),
-      initialDate: DateTime.now(),
-    );
-
-    return orderDate ?? DateTime.now();
   }
 }

@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
@@ -249,7 +250,7 @@ void main() {
               salesOrganisation: SalesOrganisation.empty(),
               user: User.empty(),
               cartItems: <PriceAggregate>[PriceAggregate.empty()],
-              data: {},
+              data: AdditionalDetailsData.empty(),
             )).thenAnswer(
           (invocation) async => Right(
             SavedOrder.empty().copyWith(
@@ -266,7 +267,7 @@ void main() {
           salesOrganisation: SalesOrganisation.empty(),
           user: User.empty(),
           cartItems: <PriceAggregate>[PriceAggregate.empty()],
-          data: {},
+          data: AdditionalDetailsData.empty(),
           existingSavedOrderList: <SavedOrder>[],
         ),
       ),
@@ -299,7 +300,7 @@ void main() {
               salesOrganisation: SalesOrganisation.empty(),
               user: User.empty(),
               cartItems: <PriceAggregate>[PriceAggregate.empty()],
-              data: {},
+              data: AdditionalDetailsData.empty(),
             )).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('Fake-Error'),
@@ -314,7 +315,7 @@ void main() {
           salesOrganisation: SalesOrganisation.empty(),
           user: User.empty(),
           cartItems: <PriceAggregate>[PriceAggregate.empty()],
-          data: {},
+          data: AdditionalDetailsData.empty(),
           existingSavedOrderList: <SavedOrder>[],
         ),
       ),
