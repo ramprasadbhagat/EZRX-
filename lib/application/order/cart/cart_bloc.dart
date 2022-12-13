@@ -403,6 +403,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
         if (validatedStockInfoMaterialList.isEmpty) {
           emit(state.copyWith(isFetching: false));
+
+          return;
         }
 
         final failureOrSuccess = await cartRepository.addToCartList(

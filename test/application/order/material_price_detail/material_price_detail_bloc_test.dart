@@ -10,9 +10,11 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_local.dart';
@@ -186,33 +188,39 @@ void main() {
               MaterialPriceDetailState.initial()
                   .copyWith(isValidating: true, materialDetails: {
                 for (final material in fakeQuery)
-                  material: MaterialPriceDetail.empty().copyWith(
-                      price: Price.empty().copyWith(
-                    isValidMaterial: false,
-                    isFOC: false,
-                  ))
+                  material: MaterialPriceDetail.defaultWithPrice(
+                    query: material,
+                    price: Price.empty().copyWith(
+                      isValidMaterial: false,
+                      isFOC: false,
+                    ),
+                  ),
               }),
               MaterialPriceDetailState.initial().copyWith(
                   isValidating: false,
                   isFetching: true,
                   materialDetails: {
                     for (final material in fakeQuery)
-                      material: MaterialPriceDetail.empty().copyWith(
-                          price: Price.empty().copyWith(
-                        isValidMaterial: false,
-                        isFOC: false,
-                      ))
+                      material: MaterialPriceDetail.defaultWithPrice(
+                        query: material,
+                        price: Price.empty().copyWith(
+                          isValidMaterial: false,
+                          isFOC: false,
+                        ),
+                      ),
                   }),
               MaterialPriceDetailState.initial().copyWith(
                   isValidating: false,
                   isFetching: false,
                   materialDetails: {
                     for (final material in fakeQuery)
-                      material: MaterialPriceDetail.empty().copyWith(
-                          price: Price.empty().copyWith(
-                        isValidMaterial: false,
-                        isFOC: false,
-                      ))
+                      material: MaterialPriceDetail.defaultWithPrice(
+                        query: material,
+                        price: Price.empty().copyWith(
+                          isValidMaterial: false,
+                          isFOC: false,
+                        ),
+                      ),
                   }),
             ],
         verify: (MaterialPriceDetailBloc bloc) {
@@ -256,12 +264,13 @@ void main() {
                 isValidating: true,
                 materialDetails: {
                   for (final material in fakeQueryFOC)
-                    material: MaterialPriceDetail.empty().copyWith(
+                    material: MaterialPriceDetail.defaultWithPrice(
+                      query: material,
                       price: Price.empty().copyWith(
                         isValidMaterial: true,
                         isFOC: false,
                       ),
-                    )
+                    ),
                 },
               ),
               MaterialPriceDetailState.initial().copyWith(
@@ -269,12 +278,13 @@ void main() {
                 isFetching: true,
                 materialDetails: {
                   for (final material in fakeQueryFOC)
-                    material: MaterialPriceDetail.empty().copyWith(
+                    material: MaterialPriceDetail.defaultWithPrice(
+                      query: material,
                       price: Price.empty().copyWith(
                         isValidMaterial: true,
                         isFOC: false,
                       ),
-                    )
+                    ),
                 },
               ),
               MaterialPriceDetailState.initial().copyWith(
@@ -282,11 +292,13 @@ void main() {
                 isFetching: true,
                 materialDetails: {
                   for (final material in fakeQueryFOC)
-                    material: MaterialPriceDetail.empty().copyWith(
-                        price: Price.empty().copyWith(
-                      isValidMaterial: true,
-                      isFOC: true,
-                    ))
+                    material: MaterialPriceDetail.defaultWithPrice(
+                      query: material,
+                      price: Price.empty().copyWith(
+                        isValidMaterial: true,
+                        isFOC: true,
+                      ),
+                    ),
                 },
               ),
               MaterialPriceDetailState.initial().copyWith(
@@ -294,11 +306,13 @@ void main() {
                 isFetching: false,
                 materialDetails: {
                   for (final material in fakeQueryFOC)
-                    material: MaterialPriceDetail.empty().copyWith(
-                        price: Price.empty().copyWith(
-                      isValidMaterial: true,
-                      isFOC: true,
-                    ))
+                    material: MaterialPriceDetail.defaultWithPrice(
+                      query: material,
+                      price: Price.empty().copyWith(
+                        isValidMaterial: true,
+                        isFOC: true,
+                      ),
+                    ),
                 },
               ),
             ],
@@ -355,12 +369,13 @@ void main() {
           isValidating: true,
           materialDetails: {
             for (final material in fakeQuery)
-              material: MaterialPriceDetail.empty().copyWith(
+              material: MaterialPriceDetail.defaultWithPrice(
+                query: material,
                 price: Price.empty().copyWith(
                   isValidMaterial: true,
                   isFOC: false,
                 ),
-              )
+              ),
           },
         ),
         MaterialPriceDetailState.initial().copyWith(
@@ -368,12 +383,13 @@ void main() {
           isFetching: true,
           materialDetails: {
             for (final material in fakeQuery)
-              material: MaterialPriceDetail.empty().copyWith(
+              material: MaterialPriceDetail.defaultWithPrice(
+                query: material,
                 price: Price.empty().copyWith(
                   isValidMaterial: true,
                   isFOC: false,
                 ),
-              )
+              ),
           },
         ),
         MaterialPriceDetailState.initial().copyWith(
@@ -381,12 +397,14 @@ void main() {
           isFetching: true,
           materialDetails: {
             for (final material in fakeQuery)
-              material: MaterialPriceDetail.empty().copyWith(
-                  price: Price.empty().copyWith(
-                isValidMaterial: true,
-                isFOC: false,
-                finalPrice: MaterialPrice.unavailable(),
-              ))
+              material: MaterialPriceDetail.defaultWithPrice(
+                query: material,
+                price: Price.empty().copyWith(
+                  isValidMaterial: true,
+                  isFOC: false,
+                  finalPrice: MaterialPrice.unavailable(),
+                ),
+              ),
           },
         ),
         MaterialPriceDetailState.initial().copyWith(
@@ -394,12 +412,14 @@ void main() {
           isFetching: false,
           materialDetails: {
             for (final material in fakeQuery)
-              material: MaterialPriceDetail.empty().copyWith(
-                  price: Price.empty().copyWith(
-                isValidMaterial: true,
-                isFOC: false,
-                finalPrice: MaterialPrice.unavailable(),
-              ))
+              material: MaterialPriceDetail.defaultWithPrice(
+                query: material,
+                price: Price.empty().copyWith(
+                  isValidMaterial: true,
+                  isFOC: false,
+                  finalPrice: MaterialPrice.unavailable(),
+                ),
+              ),
           },
         ),
       ],
@@ -453,12 +473,13 @@ void main() {
                 isValidating: true,
                 materialDetails: {
                   for (final material in fakeQuery)
-                    material: MaterialPriceDetail.empty().copyWith(
+                    material: MaterialPriceDetail.defaultWithPrice(
+                      query: material,
                       price: Price.empty().copyWith(
                         isValidMaterial: true,
                         isFOC: false,
                       ),
-                    )
+                    ),
                 },
               ),
               MaterialPriceDetailState.initial().copyWith(
@@ -466,12 +487,13 @@ void main() {
                 isFetching: true,
                 materialDetails: {
                   for (final material in fakeQuery)
-                    material: MaterialPriceDetail.empty().copyWith(
+                    material: MaterialPriceDetail.defaultWithPrice(
+                      query: material,
                       price: Price.empty().copyWith(
                         isValidMaterial: true,
                         isFOC: false,
                       ),
-                    )
+                    ),
                 },
               ),
               MaterialPriceDetailState.initial().copyWith(
@@ -479,12 +501,14 @@ void main() {
                 isFetching: true,
                 materialDetails: {
                   for (final material in fakeQuery)
-                    material: MaterialPriceDetail.empty().copyWith(
-                        price: Price.empty().copyWith(
-                      isValidMaterial: true,
-                      isFOC: false,
-                      finalPrice: MaterialPrice.unavailable(),
-                    ))
+                    material: MaterialPriceDetail.defaultWithPrice(
+                      query: material,
+                      price: Price.empty().copyWith(
+                        isValidMaterial: true,
+                        isFOC: false,
+                        finalPrice: MaterialPrice.unavailable(),
+                      ),
+                    ),
                 },
               ),
               MaterialPriceDetailState.initial().copyWith(
@@ -492,12 +516,14 @@ void main() {
                 isFetching: false,
                 materialDetails: {
                   for (final material in fakeQuery)
-                    material: MaterialPriceDetail.empty().copyWith(
-                        price: Price.empty().copyWith(
-                      isValidMaterial: true,
-                      isFOC: false,
-                      finalPrice: MaterialPrice.unavailable(),
-                    ))
+                    material: MaterialPriceDetail.defaultWithPrice(
+                      query: material,
+                      price: Price.empty().copyWith(
+                        isValidMaterial: true,
+                        isFOC: false,
+                        finalPrice: MaterialPrice.unavailable(),
+                      ),
+                    ),
                 }..addAll(mockDetails),
               ),
             ],
@@ -550,11 +576,13 @@ void main() {
           materialDetails: Map.from(mockDetailsAfterRefresh)
             ..addAll({
               for (final material in fakeQuery)
-                material: MaterialPriceDetail.empty().copyWith(
-                    price: Price.empty().copyWith(
-                  isValidMaterial: false,
-                  isFOC: false,
-                ))
+                material: MaterialPriceDetail.defaultWithPrice(
+                  query: material,
+                  price: Price.empty().copyWith(
+                    isValidMaterial: false,
+                    isFOC: false,
+                  ),
+                ),
             }),
         ),
         MaterialPriceDetailState.initial().copyWith(
@@ -563,11 +591,13 @@ void main() {
           materialDetails: Map.from(mockDetailsAfterRefresh)
             ..addAll({
               for (final material in fakeQuery)
-                material: MaterialPriceDetail.empty().copyWith(
-                    price: Price.empty().copyWith(
-                  isValidMaterial: false,
-                  isFOC: false,
-                ))
+                material: MaterialPriceDetail.defaultWithPrice(
+                  query: material,
+                  price: Price.empty().copyWith(
+                    isValidMaterial: false,
+                    isFOC: false,
+                  ),
+                ),
             }),
         ),
         MaterialPriceDetailState.initial().copyWith(
@@ -576,11 +606,13 @@ void main() {
           materialDetails: Map.from(mockDetailsAfterRefresh)
             ..addAll({
               for (final material in fakeQuery)
-                material: MaterialPriceDetail.empty().copyWith(
-                    price: Price.empty().copyWith(
-                  isValidMaterial: false,
-                  isFOC: false,
-                ))
+                material: MaterialPriceDetail.defaultWithPrice(
+                  query: material,
+                  price: Price.empty().copyWith(
+                    isValidMaterial: false,
+                    isFOC: false,
+                  ),
+                ),
             }),
         ),
       ],

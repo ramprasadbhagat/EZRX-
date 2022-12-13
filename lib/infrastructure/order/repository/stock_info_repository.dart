@@ -47,8 +47,6 @@ class StockInfoRepository implements IStockInfoRepository {
             ? await stockInfoRemoteDataSource.getStockInfoList(
                 materialNumber: material.materialNumber.getOrCrash(),
                 plant: shipToInfo.plant,
-                principalCode:
-                    material.principalData.principalCode.getOrCrash(),
                 salesOrg: salesOrganisation.salesOrg.getOrCrash(),
                 selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
               )
@@ -56,8 +54,6 @@ class StockInfoRepository implements IStockInfoRepository {
                 await stockInfoRemoteDataSource.getStockInfo(
                   materialNumber: material.materialNumber.getOrCrash(),
                   plant: shipToInfo.plant,
-                  principalCode:
-                      material.principalData.principalCode.getOrCrash(),
                   salesOrg: salesOrganisation.salesOrg.getOrCrash(),
                   selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
                 ),

@@ -99,8 +99,8 @@ class MaterialPriceDetailBloc
             ),
           );
 
-          if(!e.skipFOCCheck){
-              nonFocValidMaterials = _getNonFOCMaterials(
+          if (!e.skipFOCCheck) {
+            nonFocValidMaterials = _getNonFOCMaterials(
               materials: validMaterials,
             );
           }
@@ -168,15 +168,7 @@ class MaterialPriceDetailBloc
     final materialDetails = Map<MaterialQueryInfo, MaterialPriceDetail>.from(
       state.materialDetails,
     )..removeWhere(
-        (key, value) =>
-            value ==
-            MaterialPriceDetail.empty().copyWith(
-              price: Price.empty().copyWith(
-                isValidMaterial: true,
-                isFOC: false,
-                finalPrice: MaterialPrice.unavailable(),
-              ),
-            ),
+        (key, value) => value.price.isFailurePrice,
       );
 
     return Set<MaterialQueryInfo>.from(materials).toList()
@@ -257,7 +249,8 @@ class MaterialPriceDetailBloc
   }) {
     final unavailableMaterialDetails = {
       for (final material in materials)
-        material: MaterialPriceDetail.empty().copyWith(
+        material: MaterialPriceDetail.defaultWithPrice(
+          query: material,
           price: value,
         ),
     };

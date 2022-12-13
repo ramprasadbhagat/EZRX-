@@ -84,4 +84,8 @@ class MaterialInfo with _$MaterialInfo {
         ? '${'Total Tax: '.tr()}$taxes'
         : null;
   }
+
+  String get displayDescription => materialDescription.isEmpty
+      ? defaultMaterialDescription
+      : materialDescription;
 }

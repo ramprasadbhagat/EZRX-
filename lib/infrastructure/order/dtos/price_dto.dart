@@ -83,7 +83,7 @@ class PriceDto with _$PriceDto {
 
   factory PriceDto.fromDomain(Price price) {
     return PriceDto(
-      materialNumber: price.materialNumber.getOrCrash(),
+      materialNumber: price.materialNumber.getOrDefaultValue(''),
       rules: price.rules.map((e) => PriceRuleDto.fromDomain(e)).toList(),
       tiers: price.tiers.map((e) => PriceTierDto.fromDomain(e)).toList(),
       bonuses: price.bonuses.map((e) => PriceBonusDto.fromDomain(e)).toList(),
@@ -92,9 +92,9 @@ class PriceDto with _$PriceDto {
       zdp5MaxQuota: price.zdp5MaxQuota,
       zdp5RemainingQuota: price.zdp5RemainingQuota,
       zmgDiscount: price.zmgDiscount,
-      listPrice: price.lastPrice.getOrCrash(),
-      finalIndividualPrice: price.finalPrice.getOrCrash(),
-      finalTotalPrice: price.finalTotalPrice.getOrCrash(),
+      listPrice: price.lastPrice.getOrDefaultValue(0),
+      finalIndividualPrice: price.finalPrice.getOrDefaultValue(0),
+      finalTotalPrice: price.finalTotalPrice.getOrDefaultValue(0),
       additionalBonusEligible: price.additionalBonusEligible,
       isValid: price.isValid,
       isPriceOverride: price.isPriceOverride,

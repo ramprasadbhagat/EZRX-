@@ -27,7 +27,6 @@ class StockInfoRemoteDataSource {
     required String salesOrg,
     required String selectedCustomerCode,
     required String plant,
-    required String principalCode,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
@@ -41,7 +40,6 @@ class StockInfoRemoteDataSource {
               'plant': plant,
               'customerCode': selectedCustomerCode,
               'salesOrganisation': salesOrg,
-              'principalCode': principalCode,
             },
           },
         ),
@@ -60,7 +58,6 @@ class StockInfoRemoteDataSource {
     required String salesOrg,
     required String selectedCustomerCode,
     required String plant,
-    required String principalCode,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
@@ -74,7 +71,6 @@ class StockInfoRemoteDataSource {
               'plant': plant,
               'customerCode': selectedCustomerCode,
               'salesOrganisation': salesOrg,
-              'principalCode': principalCode,
             },
           },
         ),

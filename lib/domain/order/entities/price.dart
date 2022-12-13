@@ -59,4 +59,7 @@ class Price with _$Price {
 
   List<BonusMaterial> get priceBonusItem =>
       bonuses.isNotEmpty ? bonuses.first.getItems : <BonusMaterial>[];
+
+  bool get isFailurePrice =>
+      isValidMaterial && !isFOC && finalPrice == MaterialPrice.unavailable();
 }

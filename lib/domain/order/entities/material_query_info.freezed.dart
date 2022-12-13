@@ -19,6 +19,8 @@ mixin _$MaterialQueryInfo {
   MaterialNumber get value => throw _privateConstructorUsedError;
   MaterialGroup get materialGroup2 => throw _privateConstructorUsedError;
   MaterialGroup get materialGroup4 => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+  String get principalName => throw _privateConstructorUsedError;
   MaterialQty get qty => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -36,6 +38,8 @@ abstract class $MaterialQueryInfoCopyWith<$Res> {
       {MaterialNumber value,
       MaterialGroup materialGroup2,
       MaterialGroup materialGroup4,
+      String description,
+      String principalName,
       MaterialQty qty});
 }
 
@@ -55,6 +59,8 @@ class _$MaterialQueryInfoCopyWithImpl<$Res, $Val extends MaterialQueryInfo>
     Object? value = null,
     Object? materialGroup2 = null,
     Object? materialGroup4 = null,
+    Object? description = null,
+    Object? principalName = null,
     Object? qty = null,
   }) {
     return _then(_value.copyWith(
@@ -70,6 +76,14 @@ class _$MaterialQueryInfoCopyWithImpl<$Res, $Val extends MaterialQueryInfo>
           ? _value.materialGroup4
           : materialGroup4 // ignore: cast_nullable_to_non_nullable
               as MaterialGroup,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      principalName: null == principalName
+          ? _value.principalName
+          : principalName // ignore: cast_nullable_to_non_nullable
+              as String,
       qty: null == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
@@ -90,6 +104,8 @@ abstract class _$$_MaterialQueryInfoCopyWith<$Res>
       {MaterialNumber value,
       MaterialGroup materialGroup2,
       MaterialGroup materialGroup4,
+      String description,
+      String principalName,
       MaterialQty qty});
 }
 
@@ -107,6 +123,8 @@ class __$$_MaterialQueryInfoCopyWithImpl<$Res>
     Object? value = null,
     Object? materialGroup2 = null,
     Object? materialGroup4 = null,
+    Object? description = null,
+    Object? principalName = null,
     Object? qty = null,
   }) {
     return _then(_$_MaterialQueryInfo(
@@ -122,6 +140,14 @@ class __$$_MaterialQueryInfoCopyWithImpl<$Res>
           ? _value.materialGroup4
           : materialGroup4 // ignore: cast_nullable_to_non_nullable
               as MaterialGroup,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      principalName: null == principalName
+          ? _value.principalName
+          : principalName // ignore: cast_nullable_to_non_nullable
+              as String,
       qty: null == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
@@ -137,6 +163,8 @@ class _$_MaterialQueryInfo extends _MaterialQueryInfo {
       {required this.value,
       required this.materialGroup2,
       required this.materialGroup4,
+      required this.description,
+      required this.principalName,
       required this.qty})
       : super._();
 
@@ -147,11 +175,15 @@ class _$_MaterialQueryInfo extends _MaterialQueryInfo {
   @override
   final MaterialGroup materialGroup4;
   @override
+  final String description;
+  @override
+  final String principalName;
+  @override
   final MaterialQty qty;
 
   @override
   String toString() {
-    return 'MaterialQueryInfo(value: $value, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, qty: $qty)';
+    return 'MaterialQueryInfo(value: $value, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, description: $description, principalName: $principalName, qty: $qty)';
   }
 
   @override
@@ -164,12 +196,16 @@ class _$_MaterialQueryInfo extends _MaterialQueryInfo {
                 other.materialGroup2 == materialGroup2) &&
             (identical(other.materialGroup4, materialGroup4) ||
                 other.materialGroup4 == materialGroup4) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.principalName, principalName) ||
+                other.principalName == principalName) &&
             (identical(other.qty, qty) || other.qty == qty));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, value, materialGroup2, materialGroup4, qty);
+  int get hashCode => Object.hash(runtimeType, value, materialGroup2,
+      materialGroup4, description, principalName, qty);
 
   @JsonKey(ignore: true)
   @override
@@ -184,6 +220,8 @@ abstract class _MaterialQueryInfo extends MaterialQueryInfo {
       {required final MaterialNumber value,
       required final MaterialGroup materialGroup2,
       required final MaterialGroup materialGroup4,
+      required final String description,
+      required final String principalName,
       required final MaterialQty qty}) = _$_MaterialQueryInfo;
   const _MaterialQueryInfo._() : super._();
 
@@ -193,6 +231,10 @@ abstract class _MaterialQueryInfo extends MaterialQueryInfo {
   MaterialGroup get materialGroup2;
   @override
   MaterialGroup get materialGroup4;
+  @override
+  String get description;
+  @override
+  String get principalName;
   @override
   MaterialQty get qty;
   @override

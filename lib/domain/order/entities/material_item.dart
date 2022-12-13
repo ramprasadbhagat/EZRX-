@@ -56,4 +56,8 @@ class MaterialItem with _$MaterialItem {
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromSavedOrder(
         orderMaterial: this,
       );
+
+  String get displayDescription => materialDescription.isEmpty
+      ? defaultMaterialDescription
+      : materialDescription;
 }

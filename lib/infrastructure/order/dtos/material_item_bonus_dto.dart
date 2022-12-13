@@ -61,7 +61,7 @@ class MaterialItemBonusDto with _$MaterialItemBonusDto {
   factory MaterialItemBonusDto.fromDomain(MaterialItemBonus bonus) {
     return MaterialItemBonusDto(
       materialDescription: bonus.materialDescription,
-      materialNumber: bonus.materialInfo.materialNumber.getOrCrash(),
+      materialNumber: bonus.materialInfo.materialNumber.getOrDefaultValue(''),
       qty: bonus.qty,
       comment: bonus.comment,
       expiryDate: bonus.expiryDate,

@@ -16,6 +16,8 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
     required MaterialNumber value,
     required MaterialGroup materialGroup2,
     required MaterialGroup materialGroup4,
+    required String description,
+    required String principalName,
     required MaterialQty qty,
   }) = _MaterialQueryInfo;
 
@@ -27,6 +29,8 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
         value: orderMaterial.materialNumber,
         materialGroup2: orderMaterial.materialGroup2,
         materialGroup4: orderMaterial.materialGroup4,
+        description: orderMaterial.displayDescription,
+        principalName: 'NA',
       );
 
   factory MaterialQueryInfo.fromOrderTemplate({
@@ -36,7 +40,9 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
         qty: MaterialQty(orderMaterial.qty),
         value: orderMaterial.materialNumber,
         materialGroup2: MaterialGroup.two(''),
-        materialGroup4: MaterialGroup.four(''),
+        materialGroup4: orderMaterial.materialGroup4,
+        description: orderMaterial.materialDescription,
+        principalName: orderMaterial.principalName,
       );
 
   factory MaterialQueryInfo.fromFavorite({
@@ -48,6 +54,8 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
         materialGroup2: MaterialGroup.two(''),
         materialGroup4:
             material.isFOC ? MaterialGroup.four('6A1') : MaterialGroup.four(''),
+        description: material.materialDescription,
+        principalName: 'NA',
       );
 
   factory MaterialQueryInfo.fromBundles({
@@ -56,8 +64,10 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
       MaterialQueryInfo(
         qty: MaterialQty(1),
         value: materialInfo.materialNumber,
-        materialGroup2: MaterialGroup.two(''),
-        materialGroup4: MaterialGroup.four(''),
+        materialGroup2: materialInfo.materialGroup2,
+        materialGroup4: materialInfo.materialGroup4,
+        description: materialInfo.displayDescription,
+        principalName: materialInfo.principalData.principalName,
       );
 
   factory MaterialQueryInfo.fromOrderHistory({
@@ -70,6 +80,8 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
         qty: MaterialQty(
           orderHistoryItem.qty,
         ),
+        description: orderHistoryItem.materialDescription,
+        principalName: 'NA',
       );
 
   factory MaterialQueryInfo.empty() => MaterialQueryInfo(
@@ -77,6 +89,8 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
         qty: MaterialQty(0),
         materialGroup2: MaterialGroup.two(''),
         materialGroup4: MaterialGroup.four(''),
+        description: 'NA',
+        principalName: 'NA',
       );
 
   factory MaterialQueryInfo.fromOrderHistoryDetails({
@@ -89,5 +103,7 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
         qty: MaterialQty(
           orderHistoryDetailsOrderItem.qty,
         ),
+        description: orderHistoryDetailsOrderItem.materialDescription,
+        principalName: 'NA',
       );
 }
