@@ -268,6 +268,42 @@ class HistoryTab extends StatelessWidget {
                     : Column(
                         children: [
                           const AccountSuspendedBanner(),
+                          context
+                                  .read<OrderHistoryFilterBloc>()
+                                  .state
+                                  .isAppliedFilter
+                              ? const SizedBox.shrink()
+                              : Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Icon(
+                                        Icons.info_outline_rounded,
+                                        color: ZPColors.darkerGreen,
+                                        size: 18,
+                                      ),
+                                      const SizedBox(
+                                        width: 4,
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          'Order dates pre-set for past 7 days. Change the date range from “Filter” for more data'
+                                              .tr(),
+                                          style: const TextStyle(
+                                            color: ZPColors.darkGray,
+                                            fontSize: 12.0,
+                                            fontFamily: 'Poppins',
+                                            fontStyle: FontStyle.italic,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                           Expanded(
                             child: ScrollList<OrderHistoryItem>(
                               key: const Key('orderHistoryList'),
