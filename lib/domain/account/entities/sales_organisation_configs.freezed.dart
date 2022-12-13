@@ -61,6 +61,7 @@ mixin _$SalesOrganisationConfigs {
   bool get netPriceOverride => throw _privateConstructorUsedError;
   bool get displayOrderDiscount => throw _privateConstructorUsedError;
   String get minOrderAmount => throw _privateConstructorUsedError;
+  SalesOrg get salesOrg => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrganisationConfigsCopyWith<SalesOrganisationConfigs> get copyWith =>
@@ -118,7 +119,8 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       bool enableTaxDisplay,
       bool netPriceOverride,
       bool displayOrderDiscount,
-      String minOrderAmount});
+      String minOrderAmount,
+      SalesOrg salesOrg});
 }
 
 /// @nodoc
@@ -180,6 +182,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
     Object? netPriceOverride = null,
     Object? displayOrderDiscount = null,
     Object? minOrderAmount = null,
+    Object? salesOrg = null,
   }) {
     return _then(_value.copyWith(
       enableIRN: null == enableIRN
@@ -362,6 +365,10 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
           ? _value.minOrderAmount
           : minOrderAmount // ignore: cast_nullable_to_non_nullable
               as String,
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
     ) as $Val);
   }
 }
@@ -420,7 +427,8 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       bool enableTaxDisplay,
       bool netPriceOverride,
       bool displayOrderDiscount,
-      String minOrderAmount});
+      String minOrderAmount,
+      SalesOrg salesOrg});
 }
 
 /// @nodoc
@@ -480,6 +488,7 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? netPriceOverride = null,
     Object? displayOrderDiscount = null,
     Object? minOrderAmount = null,
+    Object? salesOrg = null,
   }) {
     return _then(_$_SalesOrganisationConfigs(
       enableIRN: null == enableIRN
@@ -662,6 +671,10 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.minOrderAmount
           : minOrderAmount // ignore: cast_nullable_to_non_nullable
               as String,
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
     ));
   }
 }
@@ -714,7 +727,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       required this.enableTaxDisplay,
       required this.netPriceOverride,
       required this.displayOrderDiscount,
-      required this.minOrderAmount})
+      required this.minOrderAmount,
+      required this.salesOrg})
       : _principalList = principalList,
         super._();
 
@@ -813,10 +827,12 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   final bool displayOrderDiscount;
   @override
   final String minOrderAmount;
+  @override
+  final SalesOrg salesOrg;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, ponRequired: $ponRequired, enableTaxDisplay: $enableTaxDisplay, netPriceOverride: $netPriceOverride, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount)';
+    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, ponRequired: $ponRequired, enableTaxDisplay: $enableTaxDisplay, netPriceOverride: $netPriceOverride, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg)';
   }
 
   @override
@@ -897,7 +913,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
             (identical(other.enableTaxDisplay, enableTaxDisplay) || other.enableTaxDisplay == enableTaxDisplay) &&
             (identical(other.netPriceOverride, netPriceOverride) || other.netPriceOverride == netPriceOverride) &&
             (identical(other.displayOrderDiscount, displayOrderDiscount) || other.displayOrderDiscount == displayOrderDiscount) &&
-            (identical(other.minOrderAmount, minOrderAmount) || other.minOrderAmount == minOrderAmount));
+            (identical(other.minOrderAmount, minOrderAmount) || other.minOrderAmount == minOrderAmount) &&
+            (identical(other.salesOrg, salesOrg) || other.salesOrg == salesOrg));
   }
 
   @override
@@ -947,7 +964,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
         enableTaxDisplay,
         netPriceOverride,
         displayOrderDiscount,
-        minOrderAmount
+        minOrderAmount,
+        salesOrg
       ]);
 
   @JsonKey(ignore: true)
@@ -1004,7 +1022,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final bool enableTaxDisplay,
       required final bool netPriceOverride,
       required final bool displayOrderDiscount,
-      required final String minOrderAmount}) = _$_SalesOrganisationConfigs;
+      required final String minOrderAmount,
+      required final SalesOrg salesOrg}) = _$_SalesOrganisationConfigs;
   const _SalesOrganisationConfigs._() : super._();
 
   @override
@@ -1097,6 +1116,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   bool get displayOrderDiscount;
   @override
   String get minOrderAmount;
+  @override
+  SalesOrg get salesOrg;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsCopyWith<_$_SalesOrganisationConfigs>

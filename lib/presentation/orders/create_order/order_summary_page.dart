@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
@@ -681,28 +682,54 @@ class _Disclaimer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       key: const Key('disclaimerKey'),
       children: [
-        context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg.isSg &&
-                !context.read<UserBloc>().state.user.role.type.isSalesRep
+        context.read<EligibilityBloc>().state.isOrderSummaryPPEDisclaimerEnable
             ? RichText(
                 text: TextSpan(
                   children: <TextSpan>[
                     TextSpan(
                       text:
-                          'To avoid delays to your PPE Orders, please\n\n\u2022 Order the quantity as stated in the MOH Order template\n\n\u2022 Do not place NON PPE items in the same Order\nNote: Minimum Order value is waived for MOH PPE Orders only',
+                          'To avoid delays to your PPE Orders, please\n\n\u2022 Order the quantity as stated in the MOH Order template\n\n\u2022 Do not place NON PPE items in the same Order\nNote: Minimum Order value is waived for MOH PPE Orders only\n',
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ],
                 ),
               )
             : const SizedBox.shrink(),
+        const _MarketMessage(),
         const SizedBox(
           height: 15,
         ),
         //displayNote()
       ],
     );
+  }
+}
+
+class _MarketMessage extends StatelessWidget {
+  const _MarketMessage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final orderMarketMessage =
+        context.read<SalesOrgBloc>().state.configs.orderSummaryDisclaimer;
+    final orderType =
+        context.read<OrderDocumentTypeBloc>().state.selectedOrderType;
+
+    return !(orderType.isZPFB || orderType.isZPFC)
+        ? RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  text: orderMarketMessage,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ],
+            ),
+          )
+        : const SizedBox.shrink();
   }
 }
 

@@ -119,4 +119,8 @@ class EligibilityState with _$EligibilityState {
       : salesOrgConfigs.priceOverride;
   bool get isBatchNumberEnable => salesOrgConfigs.batchNumDisplay;
   bool get isRemarksEnable => salesOrgConfigs.enableRemarks;
+
+  bool get isOrderSummaryPPEDisclaimerEnable {
+    return salesOrganisation.salesOrg.isSg && !user.role.type.isSalesRep;
+  }
 }

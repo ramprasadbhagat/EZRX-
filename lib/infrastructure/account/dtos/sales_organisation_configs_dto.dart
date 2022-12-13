@@ -148,12 +148,16 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'minOrderAmount', defaultValue: '0')
     @HiveField(144, defaultValue: '0')
         required String minOrderAmount,
+    @JsonKey(name: 'salesOrgCode', defaultValue: '0')
+    @HiveField(145, defaultValue: '0')
+        required String salesOrg,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
     SalesOrganisationConfigs configs,
   ) {
     return SalesOrganisationConfigsDto(
+      salesOrg: configs.salesOrg.getOrCrash(),
       enableIRN: configs.enableIRN,
       enableDefaultMD: configs.enableDefaultMD,
       priceOverride: configs.priceOverride,
@@ -204,6 +208,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
 
   SalesOrganisationConfigs toDomain() {
     return SalesOrganisationConfigs(
+      salesOrg: SalesOrg(salesOrg),
       enableIRN: enableIRN,
       enableDefaultMD: enableDefaultMD,
       disableProcessingStatus: disableProcessingStatus,

@@ -38,6 +38,7 @@ void main() {
   );
 
   final fakeSaleOrgConfig = SalesOrganisationConfigs(
+    salesOrg: SalesOrg(''),
     enableIRN: false,
     enableDefaultMD: false,
     disableProcessingStatus: false,

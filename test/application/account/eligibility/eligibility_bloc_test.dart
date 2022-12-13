@@ -34,6 +34,7 @@ void main() {
     customerInfos: fakeSalesOrgCustomerInfos,
   );
   final fakeSaleOrgConfig = SalesOrganisationConfigs(
+    salesOrg: SalesOrg(''),
     enableIRN: false,
     enableDefaultMD: false,
     disableProcessingStatus: false,

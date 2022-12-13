@@ -119,6 +119,7 @@ const PriceDto _emptyPriceDto = PriceDto(
 
 const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
     SalesOrganisationConfigsDto(
+  salesOrg: '',
   enableIRN: false,
   currency: '',
   disableBundles: false,

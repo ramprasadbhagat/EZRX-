@@ -53,9 +53,11 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool netPriceOverride,
     required bool displayOrderDiscount,
     required String minOrderAmount,
+    required SalesOrg salesOrg,
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
+        salesOrg: SalesOrg(''),
         enableIRN: false,
         enableDefaultMD: false,
         disableProcessingStatus: false,
@@ -112,5 +114,18 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
 
   List get getExcludePrincipal {
     return disablePrincipals ? [] : principalList;
+  }
+
+  String get orderSummaryDisclaimer {
+    switch (salesOrg.country) {
+      case 'VN':
+        return '\u2022Prices shown are exclusive of tax\u2022\n\n\u2022Minimum order amount allowed is $minOrderAmount ${currency.code}';
+      case 'TW':
+        return '\u2022價格均已含稅\n\n本網站價格及搭贈資訊係以前日資料為基礎揭示，本公司仍須以今日之授權生效的價格為最終銷售發票開立之根據\n\n\u2022金額 ${currency.code} 0 以上即可送出訂單，當日最低訂單配送金額須滿 ${currency.code} 2500';
+      case 'PH':
+        return '\u2022Prices shown are inclusive of tax\n\n\u2022Minimum order amount allowed is ${currency.code} $minOrderAmount';
+      default:
+        return '\u2022Prices shown are exclusive of tax\u2022\n\n\u2022Minimum order amount allowed is ${currency.code} $minOrderAmount';
+    }
   }
 }
