@@ -914,7 +914,14 @@ class _PaymentTermState extends State<_PaymentTerm> {
                   return e.isNotEmpty
                       ? PlatformDialogAction(
                           key: Key('paymentterm-$e'),
-                          child: Text(e),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            width: double.infinity,
+                            child: Text(
+                              e,
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
                           onPressed: () async {
                             _controller.text = e;
                             await context.router.pop();

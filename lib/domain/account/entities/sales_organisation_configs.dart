@@ -15,7 +15,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool hideCustomer,
     required bool enableGimmickMaterial,
     required bool languageFilter,
-    required String languageValue,
+    required LanguageValue languageValue,
     required bool disablePrincipals,
     required List principalList,
     required bool disableOrderType,
@@ -63,7 +63,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         hideCustomer: false,
         enableGimmickMaterial: false,
         languageFilter: false,
-        languageValue: '',
+        languageValue: LanguageValue(''),
         disablePrincipals: false,
         principalList: [],
         disableOrderType: false,
@@ -104,8 +104,11 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
       );
 
   String get getConfigLangauge {
-    return languageFilter ? languageValue : '';
+    return languageFilter ? languageValue.getOrDefaultValue('') : '';
   }
+
+  String get getConfigLangaugeDefaultEnglish =>
+      languageFilter ? languageValue.getOrDefaultValue('E') : 'E';
 
   List get getExcludePrincipal {
     return disablePrincipals ? [] : principalList;

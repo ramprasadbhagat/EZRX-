@@ -56,7 +56,7 @@ void main() {
     disablePrincipals: false,
     enableGimmickMaterial: false,
     languageFilter: false,
-    languageValue: '',
+    languageValue: LanguageValue(''),
     disableBundles: false,
     principalList: [],
     enableBatchNumber: false,
