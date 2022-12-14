@@ -43,6 +43,8 @@ class ShipToInfo with _$ShipToInfo {
           street3: '',
           street4: '',
           street5: '',
+          city1: '',
+          city2: '',
         ),
         status: Status(''),
         postalCode: '',

@@ -21,6 +21,8 @@ mixin _$CustomerAddress {
   String get street3 => throw _privateConstructorUsedError;
   String get street4 => throw _privateConstructorUsedError;
   String get street5 => throw _privateConstructorUsedError;
+  String get city1 => throw _privateConstructorUsedError;
+  String get city2 => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CustomerAddressCopyWith<CustomerAddress> get copyWith =>
@@ -38,7 +40,9 @@ abstract class $CustomerAddressCopyWith<$Res> {
       String street2,
       String street3,
       String street4,
-      String street5});
+      String street5,
+      String city1,
+      String city2});
 }
 
 /// @nodoc
@@ -59,6 +63,8 @@ class _$CustomerAddressCopyWithImpl<$Res, $Val extends CustomerAddress>
     Object? street3 = null,
     Object? street4 = null,
     Object? street5 = null,
+    Object? city1 = null,
+    Object? city2 = null,
   }) {
     return _then(_value.copyWith(
       street1: null == street1
@@ -81,6 +87,14 @@ class _$CustomerAddressCopyWithImpl<$Res, $Val extends CustomerAddress>
           ? _value.street5
           : street5 // ignore: cast_nullable_to_non_nullable
               as String,
+      city1: null == city1
+          ? _value.city1
+          : city1 // ignore: cast_nullable_to_non_nullable
+              as String,
+      city2: null == city2
+          ? _value.city2
+          : city2 // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -98,7 +112,9 @@ abstract class _$$_CustomerAddressCopyWith<$Res>
       String street2,
       String street3,
       String street4,
-      String street5});
+      String street5,
+      String city1,
+      String city2});
 }
 
 /// @nodoc
@@ -117,6 +133,8 @@ class __$$_CustomerAddressCopyWithImpl<$Res>
     Object? street3 = null,
     Object? street4 = null,
     Object? street5 = null,
+    Object? city1 = null,
+    Object? city2 = null,
   }) {
     return _then(_$_CustomerAddress(
       street1: null == street1
@@ -139,6 +157,14 @@ class __$$_CustomerAddressCopyWithImpl<$Res>
           ? _value.street5
           : street5 // ignore: cast_nullable_to_non_nullable
               as String,
+      city1: null == city1
+          ? _value.city1
+          : city1 // ignore: cast_nullable_to_non_nullable
+              as String,
+      city2: null == city2
+          ? _value.city2
+          : city2 // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -151,7 +177,9 @@ class _$_CustomerAddress extends _CustomerAddress {
       required this.street2,
       required this.street3,
       required this.street4,
-      required this.street5})
+      required this.street5,
+      required this.city1,
+      required this.city2})
       : super._();
 
   @override
@@ -164,6 +192,10 @@ class _$_CustomerAddress extends _CustomerAddress {
   final String street4;
   @override
   final String street5;
+  @override
+  final String city1;
+  @override
+  final String city2;
 
   @override
   bool operator ==(dynamic other) {
@@ -174,12 +206,14 @@ class _$_CustomerAddress extends _CustomerAddress {
             (identical(other.street2, street2) || other.street2 == street2) &&
             (identical(other.street3, street3) || other.street3 == street3) &&
             (identical(other.street4, street4) || other.street4 == street4) &&
-            (identical(other.street5, street5) || other.street5 == street5));
+            (identical(other.street5, street5) || other.street5 == street5) &&
+            (identical(other.city1, city1) || other.city1 == city1) &&
+            (identical(other.city2, city2) || other.city2 == city2));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, street1, street2, street3, street4, street5);
+  int get hashCode => Object.hash(
+      runtimeType, street1, street2, street3, street4, street5, city1, city2);
 
   @JsonKey(ignore: true)
   @override
@@ -194,7 +228,9 @@ abstract class _CustomerAddress extends CustomerAddress {
       required final String street2,
       required final String street3,
       required final String street4,
-      required final String street5}) = _$_CustomerAddress;
+      required final String street5,
+      required final String city1,
+      required final String city2}) = _$_CustomerAddress;
   const _CustomerAddress._() : super._();
 
   @override
@@ -207,6 +243,10 @@ abstract class _CustomerAddress extends CustomerAddress {
   String get street4;
   @override
   String get street5;
+  @override
+  String get city1;
+  @override
+  String get city2;
   @override
   @JsonKey(ignore: true)
   _$$_CustomerAddressCopyWith<_$_CustomerAddress> get copyWith =>

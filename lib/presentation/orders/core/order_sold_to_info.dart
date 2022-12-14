@@ -59,7 +59,7 @@ List<SoldToDetails> _getTextRowLevelsForSoldToInfo(
     ),
     SoldToDetails(
       key: 'Address'.tr(),
-      value: customer.customerAddress.toString(),
+      value: customer.customerAddress.toAddress(),
     ),
     SoldToDetails(
       key: 'Postal Code'.tr(),
@@ -71,7 +71,7 @@ List<SoldToDetails> _getTextRowLevelsForSoldToInfo(
     ),
     SoldToDetails(
       key: 'Phone'.tr(),
-      value: 'NA',
+      value: customer.telephoneNumber,
     ),
   ];
 }

@@ -18,11 +18,14 @@ import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/bill_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_address.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -324,25 +327,34 @@ void main() {
       testWidgets(
         'test CustomerDetailsStep',
         (tester) async {
+          when(() => orderSummaryBlocMock.state)
+              .thenReturn(OrderSummaryState.initial().copyWith(
+            step: 1,
+            maxSteps: 5,
+          ));
           final expectedStates = [
             CustomerCodeState.initial().copyWith(
               customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+                telephoneNumber: '1234567890',
                 customerCodeSoldTo: '123456789',
                 shipToInfos: <ShipToInfo>[
                   ShipToInfo.empty().copyWith(
                     shipToCustomerCode: '12345678',
                   ),
                 ],
+                paymentTermDescription: '30 days',
               ),
             ),
             CustomerCodeState.initial().copyWith(
               customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+                telephoneNumber: '1234567890',
                 customerCodeSoldTo: '987654321',
                 shipToInfos: <ShipToInfo>[
                   ShipToInfo.empty().copyWith(
                     shipToCustomerCode: '987654321',
                   ),
                 ],
+                paymentTermDescription: '30 days',
               ),
             ),
           ];
@@ -351,7 +363,65 @@ void main() {
           await tester.pumpAndSettle();
           final customerDetailsKey =
               find.byKey(const Key('_CustomerDetailsStepperKey'));
+
+          final paymentDescription = find.textContaining('30 days');
+          final phoneNumber = find.textContaining('1234567890');
+          expect(paymentDescription, findsOneWidget);
           expect(customerDetailsKey, findsOneWidget);
+          expect(phoneNumber, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        'test SoldToAddressStep',
+        (tester) async {
+          when(() => orderSummaryBlocMock.state)
+              .thenReturn(OrderSummaryState.initial().copyWith(
+            step: 1,
+            maxSteps: 5,
+          ));
+          final expectedStates = [
+            CustomerCodeState.initial().copyWith(
+              customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+                telephoneNumber: '1234567890',
+                customerCodeSoldTo: '123456789',
+                shipToInfos: <ShipToInfo>[
+                  ShipToInfo.empty().copyWith(
+                    shipToCustomerCode: '12345678',
+                  ),
+                ],
+                paymentTermDescription: 'NA',
+                customerAddress: CustomerAddress.empty().copyWith(
+                  city1: 'city1',
+                  city2: 'city2',
+                  street1: 'street',
+                ),
+              ),
+            ),
+            CustomerCodeState.initial().copyWith(
+              customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+                telephoneNumber: '1234567890',
+                customerCodeSoldTo: '987654321',
+                shipToInfos: <ShipToInfo>[
+                  ShipToInfo.empty().copyWith(
+                    shipToCustomerCode: '987654321',
+                  ),
+                ],
+                customerAddress: CustomerAddress.empty().copyWith(
+                  city1: 'city1',
+                  city2: 'city2',
+                  street1: 'street',
+                ),
+                paymentTermDescription: '30 days',
+              ),
+            ),
+          ];
+          whenListen(customerCodeBlocMock, Stream.fromIterable(expectedStates));
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          final address = find.textContaining('street, city2, city1');
+          expect(address, findsOneWidget);
         },
       );
 
@@ -411,14 +481,25 @@ void main() {
           final expectedStates = [
             ShipToCodeState.initial().copyWith(
               shipToInfo: ShipToInfo.empty().copyWith(
-                city1: 'Kolkata',
+                city1: 'city1',
+                shipToAddress: ShipToAddress.empty().copyWith(
+                  street: 'street',
+                  city1: 'city1',
+                  city2: 'city2',
+                ),
               ),
             ),
             ShipToCodeState.initial().copyWith(
               shipToInfo: ShipToInfo.empty().copyWith(
-                city1: 'Bangkok',
+                city1: 'city1',
+                city2: 'city2',
+                shipToAddress: ShipToAddress.empty().copyWith(
+                  street: 'street',
+                  city1: 'city1',
+                  city2: 'city2',
+                ),
               ),
-            ),
+            )
           ];
           when(() => userBlocMock.state).thenReturn(
             UserState.initial().copyWith(
@@ -438,6 +519,8 @@ void main() {
           final customerDetailsKey =
               find.byKey(const Key('additionalDetailsFormKey'));
           expect(customerDetailsKey, findsOneWidget);
+          final address = find.textContaining('street, city2, city1');
+          expect(address, findsOneWidget);
           final continueButtonKey = find.byKey(const Key('continueButtonKey'));
           expect(continueButtonKey, findsNWidgets(5));
           await tester.tap(continueButtonKey.at(3));
@@ -899,7 +982,14 @@ void main() {
             CustomerCodeState.initial().copyWith(
               customerCodeInfo: CustomerCodeInfo.empty().copyWith(
                 billToInfos: <BillToInfo>[
-                  BillToInfo.empty().copyWith(billToCustomerCode: '123456789'),
+                  BillToInfo.empty().copyWith(
+                    billToCustomerCode: '123456789',
+                    billToAddress: BillToAddress.empty().copyWith(
+                      city1: 'city1',
+                      city2: 'city2',
+                      street: 'street',
+                    ),
+                  ),
                 ],
                 shipToInfos: <ShipToInfo>[
                   ShipToInfo.empty().copyWith(city1: 'KOL'),
@@ -932,6 +1022,8 @@ void main() {
 
           await tester.pumpWidget(getWidget());
           await tester.pump();
+          final address = find.textContaining('street, city2, city1');
+          expect(address, findsOneWidget);
           final billToKey = find.byKey(
             const Key('billToCustomer'),
             skipOffstage: false,
@@ -1037,6 +1129,7 @@ void main() {
         },
       );
 
+      // ignore: todo
       // TODO: Biswaranjan
       // testWidgets(
       //   '=> test CartDetails',

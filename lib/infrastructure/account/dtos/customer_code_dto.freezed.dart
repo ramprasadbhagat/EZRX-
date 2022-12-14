@@ -42,6 +42,12 @@ mixin _$CustomerCodeDto {
   String get street4 => throw _privateConstructorUsedError;
   @JsonKey(name: 'street5')
   String get street5 => throw _privateConstructorUsedError;
+  @JsonKey(name: 'city1')
+  String get city1 => throw _privateConstructorUsedError;
+  @JsonKey(name: 'city2')
+  String get city2 => throw _privateConstructorUsedError;
+  @JsonKey(name: 'telephoneNumber')
+  String get telephoneNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'postalCode')
   String get postalCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'division', defaultValue: '')
@@ -100,6 +106,12 @@ abstract class $CustomerCodeDtoCopyWith<$Res> {
           String street4,
       @JsonKey(name: 'street5')
           String street5,
+      @JsonKey(name: 'city1')
+          String city1,
+      @JsonKey(name: 'city2')
+          String city2,
+      @JsonKey(name: 'telephoneNumber')
+          String telephoneNumber,
       @JsonKey(name: 'postalCode')
           String postalCode,
       @JsonKey(name: 'division', defaultValue: '')
@@ -148,6 +160,9 @@ class _$CustomerCodeDtoCopyWithImpl<$Res, $Val extends CustomerCodeDto>
     Object? street3 = null,
     Object? street4 = null,
     Object? street5 = null,
+    Object? city1 = null,
+    Object? city2 = null,
+    Object? telephoneNumber = null,
     Object? postalCode = null,
     Object? division = null,
     Object? customerClassification = null,
@@ -204,6 +219,18 @@ class _$CustomerCodeDtoCopyWithImpl<$Res, $Val extends CustomerCodeDto>
       street5: null == street5
           ? _value.street5
           : street5 // ignore: cast_nullable_to_non_nullable
+              as String,
+      city1: null == city1
+          ? _value.city1
+          : city1 // ignore: cast_nullable_to_non_nullable
+              as String,
+      city2: null == city2
+          ? _value.city2
+          : city2 // ignore: cast_nullable_to_non_nullable
+              as String,
+      telephoneNumber: null == telephoneNumber
+          ? _value.telephoneNumber
+          : telephoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
       postalCode: null == postalCode
           ? _value.postalCode
@@ -284,6 +311,12 @@ abstract class _$$_CustomerCodeDtoCopyWith<$Res>
           String street4,
       @JsonKey(name: 'street5')
           String street5,
+      @JsonKey(name: 'city1')
+          String city1,
+      @JsonKey(name: 'city2')
+          String city2,
+      @JsonKey(name: 'telephoneNumber')
+          String telephoneNumber,
       @JsonKey(name: 'postalCode')
           String postalCode,
       @JsonKey(name: 'division', defaultValue: '')
@@ -330,6 +363,9 @@ class __$$_CustomerCodeDtoCopyWithImpl<$Res>
     Object? street3 = null,
     Object? street4 = null,
     Object? street5 = null,
+    Object? city1 = null,
+    Object? city2 = null,
+    Object? telephoneNumber = null,
     Object? postalCode = null,
     Object? division = null,
     Object? customerClassification = null,
@@ -386,6 +422,18 @@ class __$$_CustomerCodeDtoCopyWithImpl<$Res>
       street5: null == street5
           ? _value.street5
           : street5 // ignore: cast_nullable_to_non_nullable
+              as String,
+      city1: null == city1
+          ? _value.city1
+          : city1 // ignore: cast_nullable_to_non_nullable
+              as String,
+      city2: null == city2
+          ? _value.city2
+          : city2 // ignore: cast_nullable_to_non_nullable
+              as String,
+      telephoneNumber: null == telephoneNumber
+          ? _value.telephoneNumber
+          : telephoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
       postalCode: null == postalCode
           ? _value.postalCode
@@ -461,6 +509,12 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
           required this.street4,
       @JsonKey(name: 'street5')
           required this.street5,
+      @JsonKey(name: 'city1')
+          required this.city1,
+      @JsonKey(name: 'city2')
+          required this.city2,
+      @JsonKey(name: 'telephoneNumber')
+          required this.telephoneNumber,
       @JsonKey(name: 'postalCode')
           required this.postalCode,
       @JsonKey(name: 'division', defaultValue: '')
@@ -525,6 +579,15 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
   @JsonKey(name: 'street5')
   final String street5;
   @override
+  @JsonKey(name: 'city1')
+  final String city1;
+  @override
+  @JsonKey(name: 'city2')
+  final String city2;
+  @override
+  @JsonKey(name: 'telephoneNumber')
+  final String telephoneNumber;
+  @override
   @JsonKey(name: 'postalCode')
   final String postalCode;
   @override
@@ -574,7 +637,7 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
 
   @override
   String toString() {
-    return 'CustomerCodeDto(customerCodeSoldTo: $customerCodeSoldTo, name1: $name1, name2: $name2, name3: $name3, name4: $name4, status: $status, street1: $street1, street2: $street2, street3: $street3, street4: $street4, street5: $street5, postalCode: $postalCode, division: $division, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region, emailAddresses: $emailAddresses)';
+    return 'CustomerCodeDto(customerCodeSoldTo: $customerCodeSoldTo, name1: $name1, name2: $name2, name3: $name3, name4: $name4, status: $status, street1: $street1, street2: $street2, street3: $street3, street4: $street4, street5: $street5, city1: $city1, city2: $city2, telephoneNumber: $telephoneNumber, postalCode: $postalCode, division: $division, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region, emailAddresses: $emailAddresses)';
   }
 
   @override
@@ -594,6 +657,10 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
             (identical(other.street3, street3) || other.street3 == street3) &&
             (identical(other.street4, street4) || other.street4 == street4) &&
             (identical(other.street5, street5) || other.street5 == street5) &&
+            (identical(other.city1, city1) || other.city1 == city1) &&
+            (identical(other.city2, city2) || other.city2 == city2) &&
+            (identical(other.telephoneNumber, telephoneNumber) ||
+                other.telephoneNumber == telephoneNumber) &&
             (identical(other.postalCode, postalCode) ||
                 other.postalCode == postalCode) &&
             (identical(other.division, division) ||
@@ -632,6 +699,9 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
         street3,
         street4,
         street5,
+        city1,
+        city2,
+        telephoneNumber,
         postalCode,
         division,
         customerClassification,
@@ -683,6 +753,12 @@ abstract class _CustomerCodeDto extends CustomerCodeDto {
           required final String street4,
       @JsonKey(name: 'street5')
           required final String street5,
+      @JsonKey(name: 'city1')
+          required final String city1,
+      @JsonKey(name: 'city2')
+          required final String city2,
+      @JsonKey(name: 'telephoneNumber')
+          required final String telephoneNumber,
       @JsonKey(name: 'postalCode')
           required final String postalCode,
       @JsonKey(name: 'division', defaultValue: '')
@@ -743,6 +819,15 @@ abstract class _CustomerCodeDto extends CustomerCodeDto {
   @override
   @JsonKey(name: 'street5')
   String get street5;
+  @override
+  @JsonKey(name: 'city1')
+  String get city1;
+  @override
+  @JsonKey(name: 'city2')
+  String get city2;
+  @override
+  @JsonKey(name: 'telephoneNumber')
+  String get telephoneNumber;
   @override
   @JsonKey(name: 'postalCode')
   String get postalCode;

@@ -25,6 +25,9 @@ class CustomerCodeDto with _$CustomerCodeDto {
     @JsonKey(name: 'street3') required String street3,
     @JsonKey(name: 'street4') required String street4,
     @JsonKey(name: 'street5') required String street5,
+    @JsonKey(name: 'city1') required String city1,
+    @JsonKey(name: 'city2') required String city2,
+    @JsonKey(name: 'telephoneNumber') required String telephoneNumber,
     @JsonKey(name: 'postalCode') required String postalCode,
     @JsonKey(name: 'division', defaultValue: '') required String division,
     @JsonKey(name: 'customerClassification')
@@ -54,6 +57,8 @@ class CustomerCodeDto with _$CustomerCodeDto {
       street3: customerCodeInfo.customerAddress.street3,
       street4: customerCodeInfo.customerAddress.street4,
       street5: customerCodeInfo.customerAddress.street5,
+      city1: customerCodeInfo.customerAddress.city1,
+      city2: customerCodeInfo.customerAddress.city2,
       division: customerCodeInfo.division,
       postalCode: customerCodeInfo.postalCode,
       customerClassification: customerCodeInfo.customerClassification,
@@ -71,6 +76,7 @@ class CustomerCodeDto with _$CustomerCodeDto {
       emailAddresses: customerCodeInfo.emailAddresses
           .map((e) => e.value.getOrElse(() => ''))
           .toList(),
+      telephoneNumber: customerCodeInfo.telephoneNumber,
     );
   }
 
@@ -89,6 +95,8 @@ class CustomerCodeDto with _$CustomerCodeDto {
         street3: street3,
         street4: street4,
         street5: street5,
+        city1: city1,
+        city2: city2,
       ),
       status: Status(status),
       division: division,
@@ -102,6 +110,7 @@ class CustomerCodeDto with _$CustomerCodeDto {
       customerGrp4: CustomerGrp4(customerGrp4),
       region: region,
       emailAddresses: emailAddresses.map((e) => EmailAddress(e)).toList(),
+      telephoneNumber: telephoneNumber,
     );
   }
 

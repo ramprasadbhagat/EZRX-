@@ -118,6 +118,7 @@ class ShipToAddressInfo extends StatelessWidget {
     );
   }
 }
+
 class ShipToDetails {
   const ShipToDetails({
     required this.key,
@@ -126,6 +127,7 @@ class ShipToDetails {
   final String key;
   final String value;
 }
+
 List<ShipToDetails> _getTextRowLevelsForShipToInfo(ShipToInfo shipToInfo) {
   return [
     ShipToDetails(
@@ -134,8 +136,8 @@ List<ShipToDetails> _getTextRowLevelsForShipToInfo(ShipToInfo shipToInfo) {
     ),
     ShipToDetails(
       key: 'Address'.tr(),
-      value:shipToInfo.shipToAddress.toString(),
-            ),
+      value: shipToInfo.shipToAddress.toAddress(),
+    ),
     ShipToDetails(
       key: 'Postal Code'.tr(),
       value: shipToInfo.postalCode,

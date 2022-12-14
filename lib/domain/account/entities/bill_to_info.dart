@@ -55,6 +55,8 @@ class BillToInfo with _$BillToInfo {
           street3: '',
           street4: '',
           street5: '',
+          city1: '',
+          city2: '',
         ),
         billToAltName: BillToAltName(
           altName1: '',

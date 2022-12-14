@@ -83,6 +83,8 @@ class ShipToDto with _$ShipToDto {
         street3: street3,
         street4: street4,
         street5: street5,
+        city1: city1,
+        city2: city2,
       ),
       postalCode: postalCode,
       city1: city1,

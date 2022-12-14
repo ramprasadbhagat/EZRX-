@@ -31,6 +31,7 @@ mixin _$CustomerCodeInfo {
   CustomerAttr7 get customerAttr7 => throw _privateConstructorUsedError;
   CustomerGrp4 get customerGrp4 => throw _privateConstructorUsedError;
   String get region => throw _privateConstructorUsedError;
+  String get telephoneNumber => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CustomerCodeInfoCopyWith<CustomerCodeInfo> get copyWith =>
@@ -58,7 +59,8 @@ abstract class $CustomerCodeInfoCopyWith<$Res> {
       List<EmailAddress> emailAddresses,
       CustomerAttr7 customerAttr7,
       CustomerGrp4 customerGrp4,
-      String region});
+      String region,
+      String telephoneNumber});
 
   $CustomerNameCopyWith<$Res> get customerName;
   $CustomerAddressCopyWith<$Res> get customerAddress;
@@ -92,6 +94,7 @@ class _$CustomerCodeInfoCopyWithImpl<$Res, $Val extends CustomerCodeInfo>
     Object? customerAttr7 = null,
     Object? customerGrp4 = null,
     Object? region = null,
+    Object? telephoneNumber = null,
   }) {
     return _then(_value.copyWith(
       customerCodeSoldTo: null == customerCodeSoldTo
@@ -154,6 +157,10 @@ class _$CustomerCodeInfoCopyWithImpl<$Res, $Val extends CustomerCodeInfo>
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
               as String,
+      telephoneNumber: null == telephoneNumber
+          ? _value.telephoneNumber
+          : telephoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -197,7 +204,8 @@ abstract class _$$_CustomerCodeInfoCopyWith<$Res>
       List<EmailAddress> emailAddresses,
       CustomerAttr7 customerAttr7,
       CustomerGrp4 customerGrp4,
-      String region});
+      String region,
+      String telephoneNumber});
 
   @override
   $CustomerNameCopyWith<$Res> get customerName;
@@ -231,6 +239,7 @@ class __$$_CustomerCodeInfoCopyWithImpl<$Res>
     Object? customerAttr7 = null,
     Object? customerGrp4 = null,
     Object? region = null,
+    Object? telephoneNumber = null,
   }) {
     return _then(_$_CustomerCodeInfo(
       customerCodeSoldTo: null == customerCodeSoldTo
@@ -293,6 +302,10 @@ class __$$_CustomerCodeInfoCopyWithImpl<$Res>
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
               as String,
+      telephoneNumber: null == telephoneNumber
+          ? _value.telephoneNumber
+          : telephoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -315,7 +328,8 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
       required final List<EmailAddress> emailAddresses,
       required this.customerAttr7,
       required this.customerGrp4,
-      required this.region})
+      required this.region,
+      required this.telephoneNumber})
       : _shipToInfos = shipToInfos,
         _billToInfos = billToInfos,
         _emailAddresses = emailAddresses,
@@ -366,10 +380,12 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
   final CustomerGrp4 customerGrp4;
   @override
   final String region;
+  @override
+  final String telephoneNumber;
 
   @override
   String toString() {
-    return 'CustomerCodeInfo(customerCodeSoldTo: $customerCodeSoldTo, customerName: $customerName, customerAddress: $customerAddress, status: $status, division: $division, postalCode: $postalCode, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, emailAddresses: $emailAddresses, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region)';
+    return 'CustomerCodeInfo(customerCodeSoldTo: $customerCodeSoldTo, customerName: $customerName, customerAddress: $customerAddress, status: $status, division: $division, postalCode: $postalCode, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, emailAddresses: $emailAddresses, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region, telephoneNumber: $telephoneNumber)';
   }
 
   @override
@@ -404,7 +420,9 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
                 other.customerAttr7 == customerAttr7) &&
             (identical(other.customerGrp4, customerGrp4) ||
                 other.customerGrp4 == customerGrp4) &&
-            (identical(other.region, region) || other.region == region));
+            (identical(other.region, region) || other.region == region) &&
+            (identical(other.telephoneNumber, telephoneNumber) ||
+                other.telephoneNumber == telephoneNumber));
   }
 
   @override
@@ -424,7 +442,8 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
       const DeepCollectionEquality().hash(_emailAddresses),
       customerAttr7,
       customerGrp4,
-      region);
+      region,
+      telephoneNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -449,7 +468,8 @@ abstract class _CustomerCodeInfo extends CustomerCodeInfo {
       required final List<EmailAddress> emailAddresses,
       required final CustomerAttr7 customerAttr7,
       required final CustomerGrp4 customerGrp4,
-      required final String region}) = _$_CustomerCodeInfo;
+      required final String region,
+      required final String telephoneNumber}) = _$_CustomerCodeInfo;
   const _CustomerCodeInfo._() : super._();
 
   @override
@@ -482,6 +502,8 @@ abstract class _CustomerCodeInfo extends CustomerCodeInfo {
   CustomerGrp4 get customerGrp4;
   @override
   String get region;
+  @override
+  String get telephoneNumber;
   @override
   @JsonKey(ignore: true)
   _$$_CustomerCodeInfoCopyWith<_$_CustomerCodeInfo> get copyWith =>

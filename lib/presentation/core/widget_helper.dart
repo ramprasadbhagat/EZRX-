@@ -42,7 +42,7 @@ class WidgetHelper {
       ),
       _KeyValuePair(
         key: 'Address'.tr(),
-        value: billToInfo.billToAddress.toString(),
+        value: billToInfo.billToAddress.toAddress(),
       ),
       _KeyValuePair(
         key: 'Postal Code'.tr(),

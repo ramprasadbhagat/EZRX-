@@ -28,6 +28,7 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
     required CustomerAttr7 customerAttr7,
     required CustomerGrp4 customerGrp4,
     required String region,
+    required String telephoneNumber,
   }) = _CustomerCodeInfo;
 
   factory CustomerCodeInfo.empty() => CustomerCodeInfo(
@@ -44,6 +45,8 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
           street3: '',
           street4: '',
           street5: '',
+          city1: '',
+          city2: '',
         ),
         status: Status(''),
         division: '',
@@ -57,6 +60,7 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
         customerGrp4: CustomerGrp4(''),
         region: '',
         emailAddresses: <EmailAddress>[],
+        telephoneNumber: '',
       );
 
   String get customerEmailAddress {

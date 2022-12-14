@@ -482,9 +482,9 @@ List<_OrderSummaryDetails> _getTextRowLevelsForCustomerInfo(
       key: 'Customer Local Group',
       value: customer.customerLocalGroup,
     ),
-    const _OrderSummaryDetails(
+    _OrderSummaryDetails(
       key: 'Payment Term Description',
-      value: 'NA',
+      value: customer.paymentTermDescription,
     ),
   ];
 }
