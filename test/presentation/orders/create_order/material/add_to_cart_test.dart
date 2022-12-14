@@ -4,6 +4,7 @@ import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -48,8 +49,12 @@ class EligibilityMockBloc extends MockBloc<EligibilityEvent, EligibilityState>
 class ShipToCodeMockBloc extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
-class TenderContractBlocMock extends MockBloc<TenderContractEvent, TenderContractState>
+class TenderContractBlocMock
+    extends MockBloc<TenderContractEvent, TenderContractState>
     implements TenderContractBloc {}
+
+class FavoriteMockBloc extends MockBloc<FavouriteEvent, FavouriteState>
+    implements FavouriteBloc {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -61,6 +66,7 @@ void main() {
   late EligibilityBloc eligibilityMockBloc;
   final AddToCartBloc addToCartBlocMock = AddToCartBlocMock();
   late TenderContractBloc tenderContractBlocMock;
+  late FavouriteBloc favouriteMockBloc;
 
   final materialInfo = MaterialInfo.empty().copyWith(
     materialNumber: MaterialNumber('000000000023168451'),
@@ -98,6 +104,7 @@ void main() {
       eligibilityMockBloc = EligibilityMockBloc();
       shipToCodeMockBloc = ShipToCodeMockBloc();
       tenderContractBlocMock = TenderContractBlocMock();
+      favouriteMockBloc = FavoriteMockBloc();
 
       autoRouterMock = locator<AppRouter>();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -110,6 +117,7 @@ void main() {
           .thenReturn(ShipToCodeState.initial());
       when(() => tenderContractBlocMock.state)
           .thenReturn(TenderContractState.initial());
+      when(() => favouriteMockBloc.state).thenReturn(FavouriteState.initial());
     });
 
     Widget getScopedWidget(Widget child) {
@@ -136,8 +144,9 @@ void main() {
                 create: ((context) => shipToCodeMockBloc)),
             BlocProvider<EligibilityBloc>(
                 create: (context) => eligibilityMockBloc),
-            BlocProvider<TenderContractBloc>(create: (context) => tenderContractBlocMock),
-
+            BlocProvider<TenderContractBloc>(
+                create: (context) => tenderContractBlocMock),
+            BlocProvider<FavouriteBloc>(create: (context) => favouriteMockBloc),
           ],
           child: child,
         ),
@@ -157,8 +166,8 @@ void main() {
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
           .copyWith(
-          salesOrganisation: SalesOrganisation.empty()
-              .copyWith(salesOrg: SalesOrg('SG'))));
+              salesOrganisation: SalesOrganisation.empty()
+                  .copyWith(salesOrg: SalesOrg('SG'))));
       await tester.pumpWidget(getScopedWidget(AddToCart(
         isCovid19Tab: false,
         hasValidTenderContract: false,
@@ -185,8 +194,8 @@ void main() {
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
           .copyWith(
-          salesOrganisation: SalesOrganisation.empty()
-              .copyWith(salesOrg: SalesOrg('SG'))));
+              salesOrganisation: SalesOrganisation.empty()
+                  .copyWith(salesOrg: SalesOrg('SG'))));
       await tester.pumpWidget(getScopedWidget(AddToCart(
         isCovid19Tab: false,
         hasValidTenderContract: false,
@@ -204,88 +213,88 @@ void main() {
     });
 
     testWidgets('Test add to cart covid material + commercial material',
-            (tester) async {
-          when(() => cartBlocMock.state).thenReturn(CartState.initial().copyWith(
-            cartItemList: [
-              priceAggregate.copyWith(
-                materialInfo: materialInfo,
-              ),
-            ],
-          ));
+        (tester) async {
+      when(() => cartBlocMock.state).thenReturn(CartState.initial().copyWith(
+        cartItemList: [
+          priceAggregate.copyWith(
+            materialInfo: materialInfo,
+          ),
+        ],
+      ));
 
-          when(() => addToCartBlocMock.state).thenReturn(
-            AddToCartState.initial().copyWith(
-              cartItem: priceAggregate.copyWith(
-                price: priceAggregate.price.copyWith(
-                  zmgDiscount: true,
-                ),
-                materialInfo: materialInfo.copyWith(
-                  isFOCMaterial: true,
-                  materialGroup4: MaterialGroup.four('6A1'),
-                ),
-              ),
+      when(() => addToCartBlocMock.state).thenReturn(
+        AddToCartState.initial().copyWith(
+          cartItem: priceAggregate.copyWith(
+            price: priceAggregate.price.copyWith(
+              zmgDiscount: true,
             ),
-          );
+            materialInfo: materialInfo.copyWith(
+              isFOCMaterial: true,
+              materialGroup4: MaterialGroup.four('6A1'),
+            ),
+          ),
+        ),
+      );
 
-          await tester.pumpWidget(getScopedWidget(AddToCart(
-            isCovid19Tab: true,
-            hasValidTenderContract: false,
-            hasMandatoryTenderContract: false,
-          )));
+      await tester.pumpWidget(getScopedWidget(AddToCart(
+        isCovid19Tab: true,
+        hasValidTenderContract: false,
+        hasMandatoryTenderContract: false,
+      )));
 
-          final button = find.text('Add to Cart');
-          await tester.tap(button);
-          await tester.pump(const Duration(seconds: 1));
+      final button = find.text('Add to Cart');
+      await tester.tap(button);
+      await tester.pump(const Duration(seconds: 1));
 
-          const snackbarText =
-              'Covid material cannot be combined with commercial material.';
-          final snackbarWidget = find.text(snackbarText);
+      const snackbarText =
+          'Covid material cannot be combined with commercial material.';
+      final snackbarWidget = find.text(snackbarText);
 
-          expect(snackbarWidget, findsOneWidget);
-        });
+      expect(snackbarWidget, findsOneWidget);
+    });
 
     testWidgets('Test add to cart commercial material + covid material test',
-            (tester) async {
-          when(() => cartBlocMock.state).thenReturn(CartState.initial().copyWith(
-            cartItemList: [
-              priceAggregate.copyWith(
-                materialInfo: materialInfo.copyWith(
-                  isFOCMaterial: true,
-                  materialGroup4: MaterialGroup.four('6A1'),
-                ),
-              ),
-            ],
-          ));
-
-          when(() => addToCartBlocMock.state).thenReturn(
-            AddToCartState.initial().copyWith(
-              cartItem: priceAggregate.copyWith(
-                price: priceAggregate.price.copyWith(
-                  zmgDiscount: true,
-                ),
-                materialInfo: materialInfo,
-              ),
+        (tester) async {
+      when(() => cartBlocMock.state).thenReturn(CartState.initial().copyWith(
+        cartItemList: [
+          priceAggregate.copyWith(
+            materialInfo: materialInfo.copyWith(
+              isFOCMaterial: true,
+              materialGroup4: MaterialGroup.four('6A1'),
             ),
-          );
+          ),
+        ],
+      ));
 
-          await tester.pumpWidget(getScopedWidget(
-            AddToCart(
-              isCovid19Tab: true,
-              hasValidTenderContract: false,
-              hasMandatoryTenderContract: false,
+      when(() => addToCartBlocMock.state).thenReturn(
+        AddToCartState.initial().copyWith(
+          cartItem: priceAggregate.copyWith(
+            price: priceAggregate.price.copyWith(
+              zmgDiscount: true,
             ),
-          ));
+            materialInfo: materialInfo,
+          ),
+        ),
+      );
 
-          final button = find.text('Add to Cart');
-          await tester.tap(button);
-          await tester.pump(const Duration(seconds: 1));
+      await tester.pumpWidget(getScopedWidget(
+        AddToCart(
+          isCovid19Tab: true,
+          hasValidTenderContract: false,
+          hasMandatoryTenderContract: false,
+        ),
+      ));
 
-          const snackbarText =
-              'Commercial material cannot be combined with covid material.';
-          final snackbarWidget = find.text(snackbarText);
+      final button = find.text('Add to Cart');
+      await tester.tap(button);
+      await tester.pump(const Duration(seconds: 1));
 
-          expect(snackbarWidget, findsOneWidget);
-        });
+      const snackbarText =
+          'Commercial material cannot be combined with covid material.';
+      final snackbarWidget = find.text(snackbarText);
+
+      expect(snackbarWidget, findsOneWidget);
+    });
 
     testWidgets('Test add to cart eligible items', (tester) async {
       when(() => cartBlocMock.state).thenReturn(CartState.initial().copyWith(

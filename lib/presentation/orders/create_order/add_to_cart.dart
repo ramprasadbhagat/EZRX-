@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/add_to_cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_detail_widget.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -75,6 +76,11 @@ class _AddToCartState extends State<AddToCart> {
         backgroundColor: ZPColors.white,
         appBar: AppBar(
           title: const Text('Material Detail').tr(),
+          actions: [
+            FavoriteButton(
+              materialInfo: addToCartBloc.state.cartItem.materialInfo,
+            ),
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.all(15),
