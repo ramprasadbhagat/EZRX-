@@ -31,4 +31,29 @@ class MaterialListLocalDataSource {
         .map((e) => MaterialDto.fromJson(e).toDomain())
         .toList();
   }
+
+  Future<List<MaterialInfo>> searchMaterialList() async {
+    final data = json.decode(
+      await rootBundle
+          .loadString('assets/json/getMaterialsWithMetaResponse.json'),
+    );
+    final finalData = data['data']['materialsWithMeta']['materials'];
+
+    return List.from(finalData)
+        .map((e) => MaterialDto.fromJson(e).toDomain())
+        .toList();
+  }
+
+  Future<List<MaterialInfo>> searchMaterialListSalesRep() async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/getCustomerMaterialsForSalesRepResponse.json',
+      ),
+    );
+    final finalData = data['data']['customerMaterialsForSalesRep']['materials'];
+
+    return List.from(finalData)
+        .map((e) => MaterialDto.fromJson(e).toDomain())
+        .toList();
+  }
 }

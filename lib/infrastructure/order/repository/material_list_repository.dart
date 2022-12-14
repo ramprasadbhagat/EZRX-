@@ -119,17 +119,17 @@ class MaterialListRepository implements IMaterialListRepository {
     required String pickAndPack,
     bool isForFoc = false,
   }) async {
-    // if (config.appFlavor == Flavor.mock) {
-    //   try {
-    // final materialListData = user.role.type.isSalesRep
-    //     ? await materialListLocalDataSource.getMaterialListSalesRep()
-    //     : await materialListLocalDataSource.getMaterialList();
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final materialListData = user.role.type.isSalesRep
+            ? await materialListLocalDataSource.searchMaterialListSalesRep()
+            : await materialListLocalDataSource.searchMaterialList();
 
-    //     return Right(materialListData);
-    //   } catch (e) {
-    //     return Left(FailureHandler.handleFailure(e));
-    //   }
-    // }
+        return Right(materialListData);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
 
     try {
       final materialListData = user.role.type.isSalesRep
