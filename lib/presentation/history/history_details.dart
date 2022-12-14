@@ -15,6 +15,7 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -203,6 +204,7 @@ void _addToCartPressed(
       stockInfo: StockInfo.empty().copyWith(
         materialNumber: itemInfo.info.materialNumber,
       ),
+      tenderContract: TenderContract.empty(),
     );
     cartBloc.add(CartEvent.addToCart(
       item: priceAggregate,

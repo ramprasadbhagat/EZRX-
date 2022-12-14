@@ -159,7 +159,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 selectedItemsMaterialNumber: updatedMaterialList,
                 cartItemList: cartItemList,
                 apiFailureOrSuccessOption: none(),
-                // isFetching: false,
+                // isFetching:  false,
               ),
             );
             if (e.item.price.isDiscountEligible) {

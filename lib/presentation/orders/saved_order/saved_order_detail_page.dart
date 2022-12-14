@@ -12,6 +12,7 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_action_button.dart';
@@ -32,7 +33,7 @@ class SavedOrderDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     locator<CountlyService>().recordCountlyView('Saved Order Details Screen');
-    
+
     return Scaffold(
       key: const Key('SavedOrderDetailPage'),
       backgroundColor: ZPColors.white,
@@ -46,38 +47,38 @@ class SavedOrderDetailPage extends StatelessWidget {
         key: const ValueKey('SavedDetailRefreshIndicator'),
         color: ZPColors.primary,
         onRefresh: () async => context.read<MaterialPriceDetailBloc>().add(
-              MaterialPriceDetailEvent.refresh(
-                user: context.read<UserBloc>().state.user,
-                customerCode:
-                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                salesOrganisation:
-                    context.read<SalesOrgBloc>().state.salesOrganisation,
-                salesOrganisationConfigs:
-                    context.read<SalesOrgBloc>().state.configs,
-                shipToCode: context.read<ShipToCodeBloc>().state.shipToInfo,
-                materialInfoList: order.items
-                    .map(
-                      (item) => MaterialQueryInfo.fromSavedOrder(
-                        orderMaterial: item,
-                      ),
-                    )
-                    .toList(),
-                pickAndPack:
-                    context.read<EligibilityBloc>().state.getPNPValueMaterial,
+          MaterialPriceDetailEvent.refresh(
+            user: context.read<UserBloc>().state.user,
+            customerCode:
+            context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            salesOrganisation:
+            context.read<SalesOrgBloc>().state.salesOrganisation,
+            salesOrganisationConfigs:
+            context.read<SalesOrgBloc>().state.configs,
+            shipToCode: context.read<ShipToCodeBloc>().state.shipToInfo,
+            materialInfoList: order.items
+                .map(
+                  (item) => MaterialQueryInfo.fromSavedOrder(
+                orderMaterial: item,
               ),
-            ),
+            )
+                .toList(),
+            pickAndPack:
+            context.read<EligibilityBloc>().state.getPNPValueMaterial,
+          ),
+        ),
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
               child: BlocBuilder<MaterialPriceDetailBloc,
                   MaterialPriceDetailState>(
                 buildWhen: (previous, current) =>
-                    previous.isValidating != current.isValidating,
+                previous.isValidating != current.isValidating,
                 builder: (context, state) {
                   return OrderInvalidWarning(
                     isLoading: state.isValidating,
                     isInvalidOrder: order.allMaterialQueryInfo.every(
-                      (item) => !state.isValidMaterial(
+                          (item) => !state.isValidMaterial(
                         query: item,
                       ),
                     ),
@@ -87,7 +88,7 @@ class SavedOrderDetailPage extends StatelessWidget {
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                (context, index) {
+                    (context, index) {
                   final material = order.items[index];
 
                   return Column(
@@ -111,22 +112,22 @@ class SavedOrderDetailPage extends StatelessWidget {
               child: BlocBuilder<MaterialPriceDetailBloc,
                   MaterialPriceDetailState>(
                 buildWhen: (previous, current) =>
-                    previous.isValidating != current.isValidating ||
+                previous.isValidating != current.isValidating ||
                     previous.isFetching != current.isFetching,
                 builder: (context, state) {
                   return OrderActionButton(
                     onAddToCartPressed: () => _addToCartPressed(context, state),
                     onDeletePressed: () {
                       context.read<SavedOrderListBloc>().add(
-                            SavedOrderListEvent.delete(
-                              order: order,
-                              user: context.read<UserBloc>().state.user,
-                            ),
-                          );
+                        SavedOrderListEvent.delete(
+                          order: order,
+                          user: context.read<UserBloc>().state.user,
+                        ),
+                      );
                       context.router.pop();
                     },
                     enableAddToCart: order.allMaterialQueryInfo.any(
-                      (item) => state.isValidMaterial(
+                          (item) => state.isValidMaterial(
                         query: item,
                       ),
                     ),
@@ -158,6 +159,7 @@ class SavedOrderDetailPage extends StatelessWidget {
           stockInfo: StockInfo.empty().copyWith(
             materialNumber: itemInfo.info.materialNumber,
           ),
+          tenderContract: TenderContract.empty(),
         );
 
         return priceAggregate;
@@ -170,12 +172,12 @@ class SavedOrderDetailPage extends StatelessWidget {
       items: priceAggregateList,
       customerCodeInfo: context.read<EligibilityBloc>().state.customerCodeInfo,
       salesOrganisation:
-          context.read<EligibilityBloc>().state.salesOrganisation,
+      context.read<EligibilityBloc>().state.salesOrganisation,
       salesOrganisationConfigs:
-          context.read<EligibilityBloc>().state.salesOrgConfigs,
+      context.read<EligibilityBloc>().state.salesOrgConfigs,
       shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
       doNotAllowOutOfStockMaterials:
-          context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials,
+      context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials,
     ));
 
     context.router.pushNamed('cart_page');

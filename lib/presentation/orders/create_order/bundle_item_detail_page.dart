@@ -12,6 +12,7 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_label.dart';
@@ -52,18 +53,18 @@ class BundleItemDetailPage extends StatelessWidget {
             ...bundleAggregate.bundle.bundleInfoMessage
                 .map(
                   (e) => Text(
-                    e,
-                    style: Theme.of(context).textTheme.subtitle2?.apply(
-                          color: ZPColors.lightGray,
-                        ),
-                  ),
-                )
+                e,
+                style: Theme.of(context).textTheme.subtitle2?.apply(
+                  color: ZPColors.lightGray,
+                ),
+              ),
+            )
                 .toList(),
             Expanded(
               child: BlocBuilder<MaterialPriceDetailBloc,
                   MaterialPriceDetailState>(
                 buildWhen: (previous, current) =>
-                    previous.isValidating != current.isValidating ||
+                previous.isValidating != current.isValidating ||
                     previous.isFetching != current.isFetching,
                 builder: (context, state) {
                   return ListView.builder(
@@ -87,9 +88,9 @@ class BundleItemDetailPage extends StatelessWidget {
                       context
                           .read<AddToCartBloc>()
                           .add(AddToCartEvent.updateQuantity(
-                            1,
-                            context.read<CartBloc>().state.zmgMaterialCount,
-                          ));
+                        1,
+                        context.read<CartBloc>().state.zmgMaterialCount,
+                      ));
                       quantityControllerList[bundleAggregate
                           .materialInfos[index].materialNumber
                           .getOrCrash()] = controller;
@@ -115,7 +116,7 @@ class BundleItemDetailPage extends StatelessWidget {
               child: BlocBuilder<MaterialPriceDetailBloc,
                   MaterialPriceDetailState>(
                 buildWhen: (previous, current) =>
-                    previous.isValidating != current.isValidating ||
+                previous.isValidating != current.isValidating ||
                     previous.isFetching != current.isFetching,
                 builder: (context, state) {
                   if (state.isFetching || state.isValidating) {
@@ -148,15 +149,15 @@ class BundleItemDetailPage extends StatelessWidget {
   }
 
   void _addToCartPressed(
-    BuildContext context,
-    Bundle bundle,
-    Map<String, TextEditingController> list,
-  ) {
+      BuildContext context,
+      Bundle bundle,
+      Map<String, TextEditingController> list,
+      ) {
     final cartBloc = context.read<CartBloc>();
     final materialPriceDetailBloc = context.read<MaterialPriceDetailBloc>();
     final priceAggregateList = bundleAggregate.materialInfos.map((material) {
       final itemInfo =
-          materialPriceDetailBloc.state.materialDetails[material.queryInfo];
+      materialPriceDetailBloc.state.materialDetails[material.queryInfo];
       if (itemInfo != null) {
         final priceAggregate = PriceAggregate(
           price: itemInfo.price,
@@ -168,7 +169,7 @@ class BundleItemDetailPage extends StatelessWidget {
           addedBonusList: [],
           stockInfo: StockInfo.empty().copyWith(
             materialNumber: itemInfo.info.materialNumber,
-          ),
+          ), tenderContract: TenderContract.empty(),
         );
 
         return priceAggregate;
@@ -180,12 +181,12 @@ class BundleItemDetailPage extends StatelessWidget {
       items: priceAggregateList,
       customerCodeInfo: context.read<EligibilityBloc>().state.customerCodeInfo,
       salesOrganisation:
-          context.read<EligibilityBloc>().state.salesOrganisation,
+      context.read<EligibilityBloc>().state.salesOrganisation,
       salesOrganisationConfigs:
-          context.read<EligibilityBloc>().state.salesOrgConfigs,
+      context.read<EligibilityBloc>().state.salesOrgConfigs,
       shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
       doNotAllowOutOfStockMaterials:
-          context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials,
+      context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials,
     ));
 
     //TODO: Will revisit
@@ -220,59 +221,60 @@ class _ListContent extends StatelessWidget {
                 Text(
                   materialInfo.materialNumber.displayMatNo,
                   style: Theme.of(context).textTheme.subtitle2?.apply(
-                        color: ZPColors.kPrimaryColor,
-                      ),
+                    color: ZPColors.kPrimaryColor,
+                  ),
                 ),
                 Text(
                   materialInfo.materialDescription,
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
                 (enableDefaultMD &&
-                        materialInfo.defaultMaterialDescription.isNotEmpty)
+                    materialInfo.defaultMaterialDescription.isNotEmpty)
                     ? Text(
-                        materialInfo.defaultMaterialDescription,
-                        style: Theme.of(context).textTheme.subtitle2?.apply(
-                              color: ZPColors.lightGray,
-                            ),
-                      )
+                  materialInfo.defaultMaterialDescription,
+                  style: Theme.of(context).textTheme.subtitle2?.apply(
+                    color: ZPColors.lightGray,
+                  ),
+                )
                     : const SizedBox.shrink(),
                 Text(
                   materialInfo.principalData.principalName,
                   style: Theme.of(context).textTheme.subtitle2?.apply(
-                        color: ZPColors.lightGray,
-                      ),
+                    color: ZPColors.lightGray,
+                  ),
                 ),
               ],
             ),
           ),
           QuantityInput(
+            isEnabled: true,
             quantityAddKey: const Key('bundleAdd'),
             quantityDeleteKey: const Key('bundleDelete'),
             quantityTextKey:
-                Key('$bundleCode${materialInfo.materialNumber.getValue()}'),
+            Key('$bundleCode${materialInfo.materialNumber.getValue()}'),
             onFieldChange: (int value) {
               context.read<AddToCartBloc>().add(
-                    AddToCartEvent.updateQuantity(
-                      value,
-                      context.read<CartBloc>().state.zmgMaterialCount,
-                    ),
-                  );
+                AddToCartEvent.updateQuantity(
+                  value,
+                  context.read<CartBloc>().state.zmgMaterialCount,
+                ),
+              );
             },
             minusPressed: (int value) {
               context.read<AddToCartBloc>().add(
-                    AddToCartEvent.updateQuantity(
-                      value,
-                      context.read<CartBloc>().state.zmgMaterialCount,
-                    ),
-                  );
+                AddToCartEvent.updateQuantity(
+                  value,
+                  context.read<CartBloc>().state.zmgMaterialCount,
+                ),
+              );
             },
             addPressed: (int value) {
               context.read<AddToCartBloc>().add(
-                    AddToCartEvent.updateQuantity(
-                      value,
-                      context.read<CartBloc>().state.zmgMaterialCount,
-                    ),
-                  );
+                AddToCartEvent.updateQuantity(
+                  value,
+                  context.read<CartBloc>().state.zmgMaterialCount,
+                ),
+              );
             },
             controller: controller,
           ),

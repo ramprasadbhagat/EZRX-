@@ -8,8 +8,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class BonusDiscountLabel extends StatelessWidget {
   final MaterialInfo materialInfo;
+  final String tenderContractNumber;
 
-  const BonusDiscountLabel({Key? key, required this.materialInfo})
+  const BonusDiscountLabel({Key? key, required this.materialInfo, required this.tenderContractNumber})
       : super(key: key);
 
   @override
@@ -19,6 +20,7 @@ class BonusDiscountLabel extends StatelessWidget {
         final itemPrice =
             materialPriceState.getPriceForMaterial(materialInfo.materialNumber);
 
+
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -26,7 +28,7 @@ class BonusDiscountLabel extends StatelessWidget {
                Padding(
                 padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
                 child: Text(
-                  'Tender contract',
+                  tenderContractNumber,
                   style: Theme.of(context).textTheme.bodyText1?.apply(
                         color: ZPColors.tender,
                       ),

@@ -118,6 +118,7 @@ class _BonusItemTileState extends State<BonusItemTile> {
               Padding(
                 padding: const EdgeInsets.only(right: 20.0),
                 child: QuantityInput(
+                  isEnabled: true,
                   quantityAddKey: const Key('addBonusFromCart'),
                   quantityDeleteKey: const Key('removeBonusFromCart'),
                   quantityTextKey: Key(

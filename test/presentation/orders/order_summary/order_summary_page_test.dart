@@ -16,6 +16,7 @@ import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.da
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -101,6 +102,10 @@ class AdditionalDetailsBlocMock
 
 class AutoRouterMock extends Mock implements AppRouter {}
 
+class TenderContractBlocMock
+    extends MockBloc<TenderContractEvent, TenderContractState>
+    implements TenderContractBloc {}
+
 enum StepVariant {
   three,
   five,
@@ -146,12 +151,14 @@ void main() {
   late OrderHistoryListBloc orderHistoryListBlocMock;
   late OrderHistoryFilterBloc orderHistoryFilterBlocMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
+  late TenderContractBloc tenderContractBlocMock;
+
   setUpAll(
     () {
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
       locator.registerLazySingleton(() => AppRouter());
-      locator
-        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
+      locator.registerLazySingleton(
+          () => CountlyService(config: locator<Config>()));
     },
   );
   setUp(
@@ -173,6 +180,8 @@ void main() {
       orderHistoryListBlocMock = OrderHistoryListBlocMock();
       orderHistoryFilterBlocMock = OrderHistoryFilterBlocMock();
       additionalDetailsBlocMock = AdditionalDetailsBlocMock();
+      tenderContractBlocMock = TenderContractBlocMock();
+
       autoRouterMock = locator<AppRouter>();
 
       when(() => orderSummaryBlocMock.state)
@@ -232,6 +241,9 @@ void main() {
                   .copyWith(type: RoleType('external_sales_rep')))));
       when(() => savedOrderListBlocMock.state)
           .thenReturn(SavedOrderListState.initial());
+      when(() => tenderContractBlocMock.state)
+          .thenReturn(TenderContractState.initial());
+
     },
   );
   group(
@@ -270,6 +282,8 @@ void main() {
                 create: (context) => orderHistoryFilterBlocMock),
             BlocProvider<AdditionalDetailsBloc>(
                 create: (context) => additionalDetailsBlocMock),
+            BlocProvider<TenderContractBloc>(create: (context) => tenderContractBlocMock),
+
           ],
           child: const OrderSummaryPage(),
         );

@@ -1,12 +1,9 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/add_to_cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_detail_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,12 +30,13 @@ class AddToCart extends StatefulWidget {
 class _AddToCartState extends State<AddToCart> {
   late SalesOrgBloc salesOrgBloc;
   late AddToCartBloc addToCartBloc;
+  late TenderContractBloc tenderContractBloc;
 
   @override
   void initState() {
     salesOrgBloc = context.read<SalesOrgBloc>();
-
     addToCartBloc = context.read<AddToCartBloc>();
+    tenderContractBloc = context.read<TenderContractBloc>();
     final cartBloc = context.read<CartBloc>();
     final cartItem = addToCartBloc.state.cartItem;
     addToCartBloc.add(
@@ -49,6 +47,7 @@ class _AddToCartState extends State<AddToCart> {
             : cartBloc.state.onAddCartDiscountMaterialCount(cartItem),
       ),
     );
+    tenderContractBloc.add(const TenderContractEvent.unselected());
     super.initState();
   }
 
@@ -58,9 +57,9 @@ class _AddToCartState extends State<AddToCart> {
   }
 
   bool get _isAddToCartAllowed {
-    return !salesOrgBloc.state.configs.materialWithoutPrice &&
+    return !(!salesOrgBloc.state.configs.materialWithoutPrice &&
         addToCartBloc.state.cartItem.price.finalPrice.isEmpty &&
-        !widget.isCovid19Tab;
+        !widget.isCovid19Tab);
   }
 
   @override
@@ -92,10 +91,10 @@ class _AddToCartState extends State<AddToCart> {
                           onQuantityChanged: (int value) {
                             final cartItem = addToCartBloc.state.cartItem;
                             final discountedMaterialCount = cartItem
-                                    .price.zmgDiscount
+                                .price.zmgDiscount
                                 ? cartBloc.state.zmgMaterialCount
                                 : cartBloc.state
-                                    .onAddCartDiscountMaterialCount(cartItem);
+                                .onAddCartDiscountMaterialCount(cartItem);
                             addToCartBloc.add(
                               AddToCartEvent.updateQuantity(
                                 value,
@@ -106,22 +105,15 @@ class _AddToCartState extends State<AddToCart> {
                         ),
                         widget.hasValidTenderContract
                             ? SelectContract(
-                                materialInfo: state.cartItem.materialInfo,
-                              )
+                          materialInfo: state.cartItem.materialInfo,
+                        )
                             : const SizedBox.shrink(),
                       ],
                     ),
                   ),
-                  ElevatedButton(
-                    style: _isAddToCartAllowed
-                        ? ElevatedButton.styleFrom(
-                            backgroundColor: ZPColors.lightGray,
-                          )
-                        : null,
-                    onPressed: () => _isAddToCartAllowed
-                        ? null
-                        : _addToCart(context, state.cartItem),
-                    child: const Text('Add to Cart').tr(),
+                  AddToCartButton(
+                    isAddToCartAllowed: _isAddToCartAllowed,
+                    cartItem: state.cartItem,
                   ),
                 ],
               );
@@ -130,36 +122,5 @@ class _AddToCartState extends State<AddToCart> {
         ),
       ),
     );
-  }
-
-  void _addToCart(BuildContext context, PriceAggregate selectedCartItem) {
-    final cartState = context.read<CartBloc>().state;
-    if (selectedCartItem.materialInfo.materialGroup4.isFOC &&
-        cartState.containNonFocMaterial) {
-      showSnackBar(
-        context: context,
-        message:
-            'Covid material cannot be combined with commercial material.'.tr(),
-      );
-    } else if (!selectedCartItem.materialInfo.materialGroup4.isFOC &&
-        cartState.containFocMaterial) {
-      showSnackBar(
-        context: context,
-        message:
-            'Commercial material cannot be combined with covid material.'.tr(),
-      );
-    } else {
-      final eligibilityState = context.read<EligibilityBloc>().state;
-      context.read<CartBloc>().add(CartEvent.addToCart(
-            item: context.read<AddToCartBloc>().state.cartItem,
-            customerCodeInfo: eligibilityState.customerCodeInfo,
-            salesOrganisation: eligibilityState.salesOrganisation,
-            salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
-            shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-            doNotallowOutOfStockMaterial:
-                eligibilityState.doNotAllowOutOfStockMaterials,
-          ));
-      context.router.pop();
-    }
   }
 }

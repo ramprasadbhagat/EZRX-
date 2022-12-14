@@ -20,34 +20,49 @@ TenderContractDto _$TenderContractDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TenderContractDto {
+  @HiveField(0, defaultValue: '')
   @JsonKey(name: 'contractNumber')
   String get contractNumber => throw _privateConstructorUsedError;
+  @HiveField(1, defaultValue: '')
   @JsonKey(name: 'contractItemNumber')
   String get contractItemNumber => throw _privateConstructorUsedError;
+  @HiveField(2, defaultValue: '')
   @JsonKey(name: 'contractReference')
   String get contractReference => throw _privateConstructorUsedError;
+  @HiveField(3, defaultValue: '')
   @JsonKey(name: 'tenderOrderReason')
   String get tenderOrderReason => throw _privateConstructorUsedError;
+  @HiveField(4, defaultValue: '')
   @JsonKey(name: 'tenderVisaNumber')
   String get tenderVisaNumber => throw _privateConstructorUsedError;
+  @HiveField(5, defaultValue: '')
   @JsonKey(name: 'salesDistrict')
   String get salesDistrict => throw _privateConstructorUsedError;
+  @HiveField(6, defaultValue: '')
   @JsonKey(name: 'tenderPackageDescription')
   String get tenderPackageDescription => throw _privateConstructorUsedError;
+  @HiveField(7, defaultValue: '')
   @JsonKey(name: 'tenderPrice')
   String get tenderPrice => throw _privateConstructorUsedError;
+  @HiveField(8, defaultValue: 0)
   @JsonKey(name: 'pricingUnit')
   int get pricingUnit => throw _privateConstructorUsedError;
+  @HiveField(9, defaultValue: 0)
   @JsonKey(name: 'remainingTenderQuantity')
   int get remainingTenderQuantity => throw _privateConstructorUsedError;
+  @HiveField(10, defaultValue: 0)
   @JsonKey(name: 'contractQuantity')
   int get contractQuantity => throw _privateConstructorUsedError;
+  @HiveField(11, defaultValue: '')
   @JsonKey(name: 'contractExpiryDate')
   String get contractExpiryDate => throw _privateConstructorUsedError;
+  @HiveField(12, defaultValue: '')
   @JsonKey(name: 'announcementLetterNumber')
   String get announcementLetterNumber => throw _privateConstructorUsedError;
+  @HiveField(13, defaultValue: false)
   @JsonKey(name: 'isNearToExpire')
   bool get isNearToExpire => throw _privateConstructorUsedError;
+  @HiveField(14, defaultValue: '')
   @JsonKey(name: 'contractPaymentTerm')
   String get contractPaymentTerm => throw _privateConstructorUsedError;
 
@@ -64,34 +79,49 @@ abstract class $TenderContractDtoCopyWith<$Res> {
       _$TenderContractDtoCopyWithImpl<$Res, TenderContractDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'contractNumber')
+      {@HiveField(0, defaultValue: '')
+      @JsonKey(name: 'contractNumber')
           String contractNumber,
+      @HiveField(1, defaultValue: '')
       @JsonKey(name: 'contractItemNumber')
           String contractItemNumber,
+      @HiveField(2, defaultValue: '')
       @JsonKey(name: 'contractReference')
           String contractReference,
+      @HiveField(3, defaultValue: '')
       @JsonKey(name: 'tenderOrderReason')
           String tenderOrderReason,
+      @HiveField(4, defaultValue: '')
       @JsonKey(name: 'tenderVisaNumber')
           String tenderVisaNumber,
+      @HiveField(5, defaultValue: '')
       @JsonKey(name: 'salesDistrict')
           String salesDistrict,
+      @HiveField(6, defaultValue: '')
       @JsonKey(name: 'tenderPackageDescription')
           String tenderPackageDescription,
+      @HiveField(7, defaultValue: '')
       @JsonKey(name: 'tenderPrice')
           String tenderPrice,
+      @HiveField(8, defaultValue: 0)
       @JsonKey(name: 'pricingUnit')
           int pricingUnit,
+      @HiveField(9, defaultValue: 0)
       @JsonKey(name: 'remainingTenderQuantity')
           int remainingTenderQuantity,
+      @HiveField(10, defaultValue: 0)
       @JsonKey(name: 'contractQuantity')
           int contractQuantity,
+      @HiveField(11, defaultValue: '')
       @JsonKey(name: 'contractExpiryDate')
           String contractExpiryDate,
+      @HiveField(12, defaultValue: '')
       @JsonKey(name: 'announcementLetterNumber')
           String announcementLetterNumber,
+      @HiveField(13, defaultValue: false)
       @JsonKey(name: 'isNearToExpire')
           bool isNearToExpire,
+      @HiveField(14, defaultValue: '')
       @JsonKey(name: 'contractPaymentTerm')
           String contractPaymentTerm});
 }
@@ -199,34 +229,49 @@ abstract class _$$_TenderContractDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'contractNumber')
+      {@HiveField(0, defaultValue: '')
+      @JsonKey(name: 'contractNumber')
           String contractNumber,
+      @HiveField(1, defaultValue: '')
       @JsonKey(name: 'contractItemNumber')
           String contractItemNumber,
+      @HiveField(2, defaultValue: '')
       @JsonKey(name: 'contractReference')
           String contractReference,
+      @HiveField(3, defaultValue: '')
       @JsonKey(name: 'tenderOrderReason')
           String tenderOrderReason,
+      @HiveField(4, defaultValue: '')
       @JsonKey(name: 'tenderVisaNumber')
           String tenderVisaNumber,
+      @HiveField(5, defaultValue: '')
       @JsonKey(name: 'salesDistrict')
           String salesDistrict,
+      @HiveField(6, defaultValue: '')
       @JsonKey(name: 'tenderPackageDescription')
           String tenderPackageDescription,
+      @HiveField(7, defaultValue: '')
       @JsonKey(name: 'tenderPrice')
           String tenderPrice,
+      @HiveField(8, defaultValue: 0)
       @JsonKey(name: 'pricingUnit')
           int pricingUnit,
+      @HiveField(9, defaultValue: 0)
       @JsonKey(name: 'remainingTenderQuantity')
           int remainingTenderQuantity,
+      @HiveField(10, defaultValue: 0)
       @JsonKey(name: 'contractQuantity')
           int contractQuantity,
+      @HiveField(11, defaultValue: '')
       @JsonKey(name: 'contractExpiryDate')
           String contractExpiryDate,
+      @HiveField(12, defaultValue: '')
       @JsonKey(name: 'announcementLetterNumber')
           String announcementLetterNumber,
+      @HiveField(13, defaultValue: false)
       @JsonKey(name: 'isNearToExpire')
           bool isNearToExpire,
+      @HiveField(14, defaultValue: '')
       @JsonKey(name: 'contractPaymentTerm')
           String contractPaymentTerm});
 }
@@ -325,36 +370,52 @@ class __$$_TenderContractDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
+@HiveType(typeId: 20, adapterName: 'TenderContractDtoAdapter')
 class _$_TenderContractDto extends _TenderContractDto {
   const _$_TenderContractDto(
-      {@JsonKey(name: 'contractNumber')
+      {@HiveField(0, defaultValue: '')
+      @JsonKey(name: 'contractNumber')
           required this.contractNumber,
+      @HiveField(1, defaultValue: '')
       @JsonKey(name: 'contractItemNumber')
           required this.contractItemNumber,
+      @HiveField(2, defaultValue: '')
       @JsonKey(name: 'contractReference')
           required this.contractReference,
+      @HiveField(3, defaultValue: '')
       @JsonKey(name: 'tenderOrderReason')
           required this.tenderOrderReason,
+      @HiveField(4, defaultValue: '')
       @JsonKey(name: 'tenderVisaNumber')
           required this.tenderVisaNumber,
+      @HiveField(5, defaultValue: '')
       @JsonKey(name: 'salesDistrict')
           required this.salesDistrict,
+      @HiveField(6, defaultValue: '')
       @JsonKey(name: 'tenderPackageDescription')
           required this.tenderPackageDescription,
+      @HiveField(7, defaultValue: '')
       @JsonKey(name: 'tenderPrice')
           required this.tenderPrice,
+      @HiveField(8, defaultValue: 0)
       @JsonKey(name: 'pricingUnit')
           required this.pricingUnit,
+      @HiveField(9, defaultValue: 0)
       @JsonKey(name: 'remainingTenderQuantity')
           required this.remainingTenderQuantity,
+      @HiveField(10, defaultValue: 0)
       @JsonKey(name: 'contractQuantity')
           required this.contractQuantity,
+      @HiveField(11, defaultValue: '')
       @JsonKey(name: 'contractExpiryDate')
           required this.contractExpiryDate,
+      @HiveField(12, defaultValue: '')
       @JsonKey(name: 'announcementLetterNumber')
           required this.announcementLetterNumber,
+      @HiveField(13, defaultValue: false)
       @JsonKey(name: 'isNearToExpire')
           required this.isNearToExpire,
+      @HiveField(14, defaultValue: '')
       @JsonKey(name: 'contractPaymentTerm')
           required this.contractPaymentTerm})
       : super._();
@@ -363,48 +424,63 @@ class _$_TenderContractDto extends _TenderContractDto {
       _$$_TenderContractDtoFromJson(json);
 
   @override
+  @HiveField(0, defaultValue: '')
   @JsonKey(name: 'contractNumber')
   final String contractNumber;
   @override
+  @HiveField(1, defaultValue: '')
   @JsonKey(name: 'contractItemNumber')
   final String contractItemNumber;
   @override
+  @HiveField(2, defaultValue: '')
   @JsonKey(name: 'contractReference')
   final String contractReference;
   @override
+  @HiveField(3, defaultValue: '')
   @JsonKey(name: 'tenderOrderReason')
   final String tenderOrderReason;
   @override
+  @HiveField(4, defaultValue: '')
   @JsonKey(name: 'tenderVisaNumber')
   final String tenderVisaNumber;
   @override
+  @HiveField(5, defaultValue: '')
   @JsonKey(name: 'salesDistrict')
   final String salesDistrict;
   @override
+  @HiveField(6, defaultValue: '')
   @JsonKey(name: 'tenderPackageDescription')
   final String tenderPackageDescription;
   @override
+  @HiveField(7, defaultValue: '')
   @JsonKey(name: 'tenderPrice')
   final String tenderPrice;
   @override
+  @HiveField(8, defaultValue: 0)
   @JsonKey(name: 'pricingUnit')
   final int pricingUnit;
   @override
+  @HiveField(9, defaultValue: 0)
   @JsonKey(name: 'remainingTenderQuantity')
   final int remainingTenderQuantity;
   @override
+  @HiveField(10, defaultValue: 0)
   @JsonKey(name: 'contractQuantity')
   final int contractQuantity;
   @override
+  @HiveField(11, defaultValue: '')
   @JsonKey(name: 'contractExpiryDate')
   final String contractExpiryDate;
   @override
+  @HiveField(12, defaultValue: '')
   @JsonKey(name: 'announcementLetterNumber')
   final String announcementLetterNumber;
   @override
+  @HiveField(13, defaultValue: false)
   @JsonKey(name: 'isNearToExpire')
   final bool isNearToExpire;
   @override
+  @HiveField(14, defaultValue: '')
   @JsonKey(name: 'contractPaymentTerm')
   final String contractPaymentTerm;
 
@@ -490,34 +566,49 @@ class _$_TenderContractDto extends _TenderContractDto {
 
 abstract class _TenderContractDto extends TenderContractDto {
   const factory _TenderContractDto(
-      {@JsonKey(name: 'contractNumber')
+      {@HiveField(0, defaultValue: '')
+      @JsonKey(name: 'contractNumber')
           required final String contractNumber,
+      @HiveField(1, defaultValue: '')
       @JsonKey(name: 'contractItemNumber')
           required final String contractItemNumber,
+      @HiveField(2, defaultValue: '')
       @JsonKey(name: 'contractReference')
           required final String contractReference,
+      @HiveField(3, defaultValue: '')
       @JsonKey(name: 'tenderOrderReason')
           required final String tenderOrderReason,
+      @HiveField(4, defaultValue: '')
       @JsonKey(name: 'tenderVisaNumber')
           required final String tenderVisaNumber,
+      @HiveField(5, defaultValue: '')
       @JsonKey(name: 'salesDistrict')
           required final String salesDistrict,
+      @HiveField(6, defaultValue: '')
       @JsonKey(name: 'tenderPackageDescription')
           required final String tenderPackageDescription,
+      @HiveField(7, defaultValue: '')
       @JsonKey(name: 'tenderPrice')
           required final String tenderPrice,
+      @HiveField(8, defaultValue: 0)
       @JsonKey(name: 'pricingUnit')
           required final int pricingUnit,
+      @HiveField(9, defaultValue: 0)
       @JsonKey(name: 'remainingTenderQuantity')
           required final int remainingTenderQuantity,
+      @HiveField(10, defaultValue: 0)
       @JsonKey(name: 'contractQuantity')
           required final int contractQuantity,
+      @HiveField(11, defaultValue: '')
       @JsonKey(name: 'contractExpiryDate')
           required final String contractExpiryDate,
+      @HiveField(12, defaultValue: '')
       @JsonKey(name: 'announcementLetterNumber')
           required final String announcementLetterNumber,
+      @HiveField(13, defaultValue: false)
       @JsonKey(name: 'isNearToExpire')
           required final bool isNearToExpire,
+      @HiveField(14, defaultValue: '')
       @JsonKey(name: 'contractPaymentTerm')
           required final String contractPaymentTerm}) = _$_TenderContractDto;
   const _TenderContractDto._() : super._();
@@ -526,48 +617,63 @@ abstract class _TenderContractDto extends TenderContractDto {
       _$_TenderContractDto.fromJson;
 
   @override
+  @HiveField(0, defaultValue: '')
   @JsonKey(name: 'contractNumber')
   String get contractNumber;
   @override
+  @HiveField(1, defaultValue: '')
   @JsonKey(name: 'contractItemNumber')
   String get contractItemNumber;
   @override
+  @HiveField(2, defaultValue: '')
   @JsonKey(name: 'contractReference')
   String get contractReference;
   @override
+  @HiveField(3, defaultValue: '')
   @JsonKey(name: 'tenderOrderReason')
   String get tenderOrderReason;
   @override
+  @HiveField(4, defaultValue: '')
   @JsonKey(name: 'tenderVisaNumber')
   String get tenderVisaNumber;
   @override
+  @HiveField(5, defaultValue: '')
   @JsonKey(name: 'salesDistrict')
   String get salesDistrict;
   @override
+  @HiveField(6, defaultValue: '')
   @JsonKey(name: 'tenderPackageDescription')
   String get tenderPackageDescription;
   @override
+  @HiveField(7, defaultValue: '')
   @JsonKey(name: 'tenderPrice')
   String get tenderPrice;
   @override
+  @HiveField(8, defaultValue: 0)
   @JsonKey(name: 'pricingUnit')
   int get pricingUnit;
   @override
+  @HiveField(9, defaultValue: 0)
   @JsonKey(name: 'remainingTenderQuantity')
   int get remainingTenderQuantity;
   @override
+  @HiveField(10, defaultValue: 0)
   @JsonKey(name: 'contractQuantity')
   int get contractQuantity;
   @override
+  @HiveField(11, defaultValue: '')
   @JsonKey(name: 'contractExpiryDate')
   String get contractExpiryDate;
   @override
+  @HiveField(12, defaultValue: '')
   @JsonKey(name: 'announcementLetterNumber')
   String get announcementLetterNumber;
   @override
+  @HiveField(13, defaultValue: false)
   @JsonKey(name: 'isNearToExpire')
   bool get isNearToExpire;
   @override
+  @HiveField(14, defaultValue: '')
   @JsonKey(name: 'contractPaymentTerm')
   String get contractPaymentTerm;
   @override

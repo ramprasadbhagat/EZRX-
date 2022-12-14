@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -20,15 +21,20 @@ class BonusMaterialBlocMock
 
 class CartRepositoryMock extends Mock implements CartRepository {}
 
+class TenderContractBlocMock extends MockBloc<TenderContractEvent, TenderContractState>
+    implements TenderContractBloc {}
+
 void main() {
   late BonusMaterialBloc bonusMaterialBloc;
   late List<MaterialInfo> mockbonusItemWithDataList;
   late PriceAggregate cartItem;
+  late TenderContractBloc tenderContractBlocMock;
 
   setUp(
-    () {
+        () {
       WidgetsFlutterBinding.ensureInitialized();
       bonusMaterialBloc = BonusMaterialBlocMock();
+      tenderContractBlocMock = TenderContractBlocMock();
       cartItem = PriceAggregate.empty().copyWith(
         quantity: 2,
         materialInfo: MaterialInfo.empty().copyWith(
@@ -64,6 +70,9 @@ void main() {
           BlocProvider<BonusMaterialBloc>(
             create: (context) => bonusMaterialBloc,
           ),
+          BlocProvider<TenderContractBloc>(
+            create: (context) => tenderContractBlocMock,
+          ),
         ],
         child: BonusAddPage(
           cartItem: cartItem,
@@ -73,7 +82,7 @@ void main() {
 
     testWidgets(
       'Load add bonus Page',
-      (tester) async {
+          (tester) async {
         await tester.pumpWidget(getWidget());
         await tester.pump();
         final cartPage = find.byKey(const Key('addBonus'));
@@ -156,7 +165,8 @@ void main() {
           bonus: mockbonusItemWithDataList,
         ),
       );
-
+      when(() => tenderContractBlocMock.state)
+          .thenReturn(TenderContractState.initial());
       await tester.runAsync(() async {
         await tester.pumpWidget(getWidget());
       });

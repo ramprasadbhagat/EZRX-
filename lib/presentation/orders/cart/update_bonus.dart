@@ -72,6 +72,7 @@ class UpdateBonus extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       QuantityInput(
+                        isEnabled: true,
                         quantityAddKey: const Key('bounsAdd'),
                         quantityDeleteKey: const Key('bonusDelete'),
                         quantityTextKey: const Key('bonusItem'),

@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.d
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/aggregate/bundle_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
@@ -62,6 +63,9 @@ class MaterialPriceDetailMockBloc
     extends MockBloc<MaterialPriceDetailEvent, MaterialPriceDetailState>
     implements MaterialPriceDetailBloc {}
 
+class TenderContractBlocMock extends MockBloc<TenderContractEvent, TenderContractState>
+    implements TenderContractBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late CartBloc cartMockBloc;
@@ -75,6 +79,7 @@ void main() {
   late CustomerCodeMockBloc customerCodeMockBloc;
   late MaterialBundleListBloc materialBundleListMockBloc;
   late MaterialPriceDetailBloc materialPriceDetailMockBloc;
+  late TenderContractBloc tenderContractBlocMock;
 
   final mockBundle = Bundle(
     bundleName: BundleName('Mock Bundle'),
@@ -119,6 +124,7 @@ void main() {
       customerCodeMockBloc = CustomerCodeMockBloc();
       materialBundleListMockBloc = MaterialBundleListMockBloc();
       materialPriceDetailMockBloc = MaterialPriceDetailMockBloc();
+      tenderContractBlocMock = TenderContractBlocMock();
 
       when(() => cartMockBloc.state).thenReturn(CartState.initial());
       when(() => salesOrgMockBloc.state).thenReturn(SalesOrgState.initial());
@@ -140,6 +146,9 @@ void main() {
           },
         ),
       );
+      when(() => tenderContractBlocMock.state)
+          .thenReturn(TenderContractState.initial());
+
     });
 
     Widget getScopedWidget(Widget child) {
@@ -173,6 +182,8 @@ void main() {
             BlocProvider<MaterialPriceDetailBloc>(
               create: (context) => materialPriceDetailMockBloc,
             ),
+            BlocProvider<TenderContractBloc>(create: (context) => tenderContractBlocMock),
+
           ],
           child: child,
         ),
@@ -193,7 +204,7 @@ void main() {
         Key('materialOption${mockMaterialInfo.materialNumber.getValue()}'),
       );
       final bundleItemDetailPage =
-          find.byKey(const Key('BundleItemDetailPage'));
+      find.byKey(const Key('BundleItemDetailPage'));
       final addToCartButton = find.text('Add to Cart');
 
       expect(pageTitleWidget, findsOneWidget);
@@ -203,54 +214,54 @@ void main() {
     });
 
     testWidgets('Clicking on + button increases bundle quantity',
-        (tester) async {
-      await tester.pumpWidget(
-        getScopedWidget(
-          BundleItemDetailPage(
-            bundleAggregate: mockBundleAggregate,
-          ),
-        ),
-      );
+            (tester) async {
+          await tester.pumpWidget(
+            getScopedWidget(
+              BundleItemDetailPage(
+                bundleAggregate: mockBundleAggregate,
+              ),
+            ),
+          );
 
-      final itemQuantityAddButton = find.byKey(const Key('bundleAdd'));
-      final quantityTextWidget = find.byKey(Key(
-          '${mockBundleAggregate.bundle.bundleCode}${mockMaterialInfo.materialNumber.getValue()}'));
-      final quantityTextInput = tester.widget<TextField>(quantityTextWidget);
+          final itemQuantityAddButton = find.byKey(const Key('bundleAdd'));
+          final quantityTextWidget = find.byKey(Key(
+              '${mockBundleAggregate.bundle.bundleCode}${mockMaterialInfo.materialNumber.getValue()}'));
+          final quantityTextInput = tester.widget<TextField>(quantityTextWidget);
 
-      expect(quantityTextInput.controller?.value.text, '0');
+          expect(quantityTextInput.controller?.value.text, '0');
 
-      await tester.tap(itemQuantityAddButton);
+          await tester.tap(itemQuantityAddButton);
 
-      expect(quantityTextInput.controller?.value.text, '1');
-    });
+          expect(quantityTextInput.controller?.value.text, '1');
+        });
 
     testWidgets('Clicking on - button decreases bundle quantity',
-        (tester) async {
-      await tester.pumpWidget(
-        getScopedWidget(
-          BundleItemDetailPage(
-            bundleAggregate: mockBundleAggregate,
-          ),
-        ),
-      );
+            (tester) async {
+          await tester.pumpWidget(
+            getScopedWidget(
+              BundleItemDetailPage(
+                bundleAggregate: mockBundleAggregate,
+              ),
+            ),
+          );
 
-      final itemQuantityAddButton = find.byKey(const Key('bundleAdd'));
-      final itemQuantityDeleteButton = find.byKey(const Key('bundleDelete'));
-      final quantityTextWidget = find.byKey(Key(
-          '${mockBundleAggregate.bundle.bundleCode}${mockMaterialInfo.materialNumber.getValue()}'));
-      final quantityTextInput = tester.widget<TextField>(quantityTextWidget);
+          final itemQuantityAddButton = find.byKey(const Key('bundleAdd'));
+          final itemQuantityDeleteButton = find.byKey(const Key('bundleDelete'));
+          final quantityTextWidget = find.byKey(Key(
+              '${mockBundleAggregate.bundle.bundleCode}${mockMaterialInfo.materialNumber.getValue()}'));
+          final quantityTextInput = tester.widget<TextField>(quantityTextWidget);
 
-      expect(quantityTextInput.controller?.value.text, '0');
-      await tester.tap(itemQuantityAddButton);
-      await tester.tap(itemQuantityAddButton);
-      expect(quantityTextInput.controller?.value.text, '2');
-      await tester.tap(itemQuantityDeleteButton);
-      expect(quantityTextInput.controller?.value.text, '1');
-    });
+          expect(quantityTextInput.controller?.value.text, '0');
+          await tester.tap(itemQuantityAddButton);
+          await tester.tap(itemQuantityAddButton);
+          expect(quantityTextInput.controller?.value.text, '2');
+          await tester.tap(itemQuantityDeleteButton);
+          expect(quantityTextInput.controller?.value.text, '1');
+        });
 
     testWidgets(
       'Directly entering integer value to quantity should update the value',
-      (tester) async {
+          (tester) async {
         await tester.pumpWidget(
           getScopedWidget(
             BundleItemDetailPage(

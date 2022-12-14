@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/presentation/core/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -58,6 +59,7 @@ class FavouriteListTile extends StatelessWidget {
               stockInfo: StockInfo.empty().copyWith(
                 materialNumber: priceDetail.info.materialNumber,
               ),
+              tenderContract: TenderContract.empty(),
             );
 
             return ListTile(

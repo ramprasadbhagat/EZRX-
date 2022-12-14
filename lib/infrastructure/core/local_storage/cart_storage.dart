@@ -12,6 +12,7 @@ import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_rule_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_tier_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/stock_info_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/tender_contract_dto.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class CartStorage {
@@ -41,6 +42,7 @@ class CartStorage {
         ..registerAdapter(PriceDtoAdapter())
         ..registerAdapter(SalesOrganisationConfigsDtoAdapter())
         ..registerAdapter(PriceAggregateDtoAdapter())
+        ..registerAdapter(TenderContractDtoAdapter())
         ..registerAdapter(StockInfoDtoAdapter())
         ..registerAdapter(MaterialItemBonusDtoAdapter());
       _cartBox = await Hive.openBox(

@@ -33,7 +33,7 @@ class TenderContract with _$TenderContract {
         tenderVisaNumber: TenderContractNumber.tenderVisaNumber(''),
         salesDistrict: TenderContractInfo.salesDistrict(''),
         tenderPackageDescription: TenderContractInfo.packageDescription(''),
-        tenderPrice: TenderPrice(''),
+        tenderPrice: TenderPrice('0'),
         pricingUnit: 0,
         remainingTenderQuantity: 0,
         contractQuantity: 0,

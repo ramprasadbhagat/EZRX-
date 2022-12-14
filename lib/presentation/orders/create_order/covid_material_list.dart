@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -36,21 +37,21 @@ class CovidMaterialListPage extends StatelessWidget {
       key: const Key('covidmaterialListPage'),
       body: BlocConsumer<CovidMaterialListBloc, CovidMaterialListState>(
         listenWhen: (previous, current) =>
-            previous.apiFailureOrSuccessOption !=
+        previous.apiFailureOrSuccessOption !=
             current.apiFailureOrSuccessOption,
         listener: (context, state) {
           state.apiFailureOrSuccessOption.fold(
-            () {},
-            (either) => either.fold(
-              (failure) {
+                () {},
+                (either) => either.fold(
+                  (failure) {
                 ErrorUtils.handleApiFailure(context, failure);
               },
-              (_) {},
+                  (_) {},
             ),
           );
         },
         buildWhen: (previous, current) =>
-            previous.isFetching != current.isFetching ||
+        previous.isFetching != current.isFetching ||
             previous.materialList != current.materialList,
         builder: (context, state) {
           return Column(
@@ -81,68 +82,68 @@ class _BodyContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: covidMaterialListState.isFetching &&
-              covidMaterialListState.materialList.isEmpty
+          covidMaterialListState.materialList.isEmpty
           ? LoadingShimmer.logo(key: const Key('loaderImage'))
           : ScrollList<MaterialInfo>(
-              emptyMessage: 'There are no vaccine in this customer code',
-              onRefresh: () {
-                context.read<CovidMaterialListBloc>().add(
-                      const CovidMaterialListEvent.updateSearchKey(
-                        searchKey: '',
-                      ),
-                    );
-                context.read<CovidMaterialListBloc>().add(
-                      CovidMaterialListEvent.fetch(
-                        user: context.read<UserBloc>().state.user,
-                        salesOrganisation: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
-                        configs: context.read<SalesOrgBloc>().state.configs,
-                        customerCodeInfo: context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo,
-                        shipToInfo:
-                            context.read<ShipToCodeBloc>().state.shipToInfo,
-                        pickAndPack: context
-                            .read<EligibilityBloc>()
-                            .state
-                            .getPNPValueCovidMaterial,
-                      ),
-                    );
-              },
-              onLoadingMore: () => context.read<CovidMaterialListBloc>().add(
-                    CovidMaterialListEvent.loadMore(
-                      user: context.read<UserBloc>().state.user,
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      configs: context.read<SalesOrgBloc>().state.configs,
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      shipToInfo:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
-                      pickAndPack: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .getPNPValueCovidMaterial,
-                    ),
-                  ),
-              isLoading: covidMaterialListState.isFetching,
-              itemBuilder: (context, index, item) {
-                final salesOrgConfigs =
-                    context.read<SalesOrgBloc>().state.configs;
-
-                return _ListContent(
-                  materialInfo: item,
-                  addToCart: addToCart,
-                  salesOrgConfigs: salesOrgConfigs,
-                );
-              },
-              items: covidMaterialListState.materialList,
+        emptyMessage: 'There are no vaccine in this customer code',
+        onRefresh: () {
+          context.read<CovidMaterialListBloc>().add(
+            const CovidMaterialListEvent.updateSearchKey(
+              searchKey: '',
             ),
+          );
+          context.read<CovidMaterialListBloc>().add(
+            CovidMaterialListEvent.fetch(
+              user: context.read<UserBloc>().state.user,
+              salesOrganisation: context
+                  .read<SalesOrgBloc>()
+                  .state
+                  .salesOrganisation,
+              configs: context.read<SalesOrgBloc>().state.configs,
+              customerCodeInfo: context
+                  .read<CustomerCodeBloc>()
+                  .state
+                  .customerCodeInfo,
+              shipToInfo:
+              context.read<ShipToCodeBloc>().state.shipToInfo,
+              pickAndPack: context
+                  .read<EligibilityBloc>()
+                  .state
+                  .getPNPValueCovidMaterial,
+            ),
+          );
+        },
+        onLoadingMore: () => context.read<CovidMaterialListBloc>().add(
+          CovidMaterialListEvent.loadMore(
+            user: context.read<UserBloc>().state.user,
+            salesOrganisation:
+            context.read<SalesOrgBloc>().state.salesOrganisation,
+            configs: context.read<SalesOrgBloc>().state.configs,
+            customerCodeInfo: context
+                .read<CustomerCodeBloc>()
+                .state
+                .customerCodeInfo,
+            shipToInfo:
+            context.read<ShipToCodeBloc>().state.shipToInfo,
+            pickAndPack: context
+                .read<EligibilityBloc>()
+                .state
+                .getPNPValueCovidMaterial,
+          ),
+        ),
+        isLoading: covidMaterialListState.isFetching,
+        itemBuilder: (context, index, item) {
+          final salesOrgConfigs =
+              context.read<SalesOrgBloc>().state.configs;
+
+          return _ListContent(
+            materialInfo: item,
+            addToCart: addToCart,
+            salesOrgConfigs: salesOrgConfigs,
+          );
+        },
+        items: covidMaterialListState.materialList,
+      ),
     );
   }
 }
@@ -185,12 +186,13 @@ class _ListContent extends StatelessWidget {
                 salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
                 quantity: 1,
                 discountedMaterialCount:
-                    context.read<CartBloc>().state.zmgMaterialCount,
+                context.read<CartBloc>().state.zmgMaterialCount,
                 bundle: Bundle.empty(),
                 addedBonusList: [],
                 stockInfo: StockInfo.empty().copyWith(
                   materialNumber: materialInfo.materialNumber,
                 ),
+                tenderContract: TenderContract.empty(),
               ),
               isCovid19Tab: true,
             );
@@ -202,36 +204,36 @@ class _ListContent extends StatelessWidget {
             Text(
               materialInfo.materialNumber.displayMatNo,
               style: Theme.of(context).textTheme.subtitle2?.apply(
-                    color: ZPColors.kPrimaryColor,
-                  ),
+                color: ZPColors.kPrimaryColor,
+              ),
             ),
             Text(
               materialInfo.materialDescription,
               style: Theme.of(context).textTheme.bodyText1,
             ),
             (salesOrgConfigs.enableDefaultMD &&
-                    materialInfo.defaultMaterialDescription.isNotEmpty)
+                materialInfo.defaultMaterialDescription.isNotEmpty)
                 ? Text(
-                    materialInfo.defaultMaterialDescription,
-                    style: Theme.of(context).textTheme.subtitle2?.apply(
-                          color: ZPColors.lightGray,
-                        ),
-                  )
+              materialInfo.defaultMaterialDescription,
+              style: Theme.of(context).textTheme.subtitle2?.apply(
+                color: ZPColors.lightGray,
+              ),
+            )
                 : const SizedBox.shrink(),
             (salesOrgConfigs.enableIRN &&
-                    materialInfo.itemRegistrationNumber.isNotEmpty)
+                materialInfo.itemRegistrationNumber.isNotEmpty)
                 ? Text(
-                    materialInfo.itemRegistrationNumber,
-                    style: Theme.of(context).textTheme.subtitle2?.apply(
-                          color: ZPColors.lightGray,
-                        ),
-                  )
+              materialInfo.itemRegistrationNumber,
+              style: Theme.of(context).textTheme.subtitle2?.apply(
+                color: ZPColors.lightGray,
+              ),
+            )
                 : const SizedBox.shrink(),
             Text(
               materialInfo.principalData.principalName,
               style: Theme.of(context).textTheme.subtitle2?.apply(
-                    color: ZPColors.lightGray,
-                  ),
+                color: ZPColors.lightGray,
+              ),
             ),
             _GovermentMaterialCode(materialInfo: materialInfo),
             _PriceLabel(materialInfo: materialInfo),
@@ -254,14 +256,14 @@ class _GovermentMaterialCode extends StatelessWidget {
     return BlocBuilder<SalesOrgBloc, SalesOrgState>(
       builder: (context, state) {
         return state.configs.enableGMC &&
-                materialInfo.governmentMaterialCode.isNotEmpty
+            materialInfo.governmentMaterialCode.isNotEmpty
             ? Text(
-                '${'Government Material Code:'.tr()} ${materialInfo.governmentMaterialCode}',
-                style: Theme.of(context).textTheme.subtitle2?.apply(
-                      color: ZPColors.lightGray,
-                    ),
-                overflow: TextOverflow.ellipsis,
-              )
+          '${'Government Material Code:'.tr()} ${materialInfo.governmentMaterialCode}',
+          style: Theme.of(context).textTheme.subtitle2?.apply(
+            color: ZPColors.lightGray,
+          ),
+          overflow: TextOverflow.ellipsis,
+        )
             : const SizedBox.shrink();
       },
     );
@@ -276,7 +278,7 @@ class _PriceLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
       buildWhen: (previous, current) =>
-          previous.isFetching != current.isFetching,
+      previous.isFetching != current.isFetching,
       builder: (context, state) {
         final itemPrice = state.materialPrice[materialInfo.materialNumber];
         if (itemPrice != null) {
@@ -286,12 +288,13 @@ class _PriceLabel extends StatelessWidget {
             salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
             quantity: 1,
             discountedMaterialCount:
-                context.read<CartBloc>().state.zmgMaterialCount,
+            context.read<CartBloc>().state.zmgMaterialCount,
             bundle: Bundle.empty(),
             addedBonusList: [],
             stockInfo: StockInfo.empty().copyWith(
               materialNumber: materialInfo.materialNumber,
             ),
+            tenderContract: TenderContract.empty(),
           );
 
           return Column(
@@ -299,25 +302,25 @@ class _PriceLabel extends StatelessWidget {
             children: [
               context.read<SalesOrgBloc>().state.configs.enableVat
                   ? Text(
-                      '${'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr()}${priceAggregate.display(PriceType.unitPriceBeforeGst)}',
-                      style: Theme.of(context).textTheme.bodyText1?.apply(
-                            color: ZPColors.lightGray,
-                          ),
-                    )
+                '${'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr()}${priceAggregate.display(PriceType.unitPriceBeforeGst)}',
+                style: Theme.of(context).textTheme.bodyText1?.apply(
+                  color: ZPColors.lightGray,
+                ),
+              )
                   : const SizedBox.shrink(),
               context.read<SalesOrgBloc>().state.configs.enableListPrice
                   ? Text(
-                      '${'List Price:'.tr()}${priceAggregate.display(PriceType.listPrice)}',
-                      style: Theme.of(context).textTheme.bodyText1?.apply(
-                            color: ZPColors.lightGray,
-                          ),
-                    )
+                '${'List Price:'.tr()}${priceAggregate.display(PriceType.listPrice)}',
+                style: Theme.of(context).textTheme.bodyText1?.apply(
+                  color: ZPColors.lightGray,
+                ),
+              )
                   : const SizedBox.shrink(),
               Text(
                 '${'Unit Price: '.tr()}${priceAggregate.display(PriceType.unitPrice)}',
                 style: Theme.of(context).textTheme.bodyText1?.apply(
-                      color: ZPColors.black,
-                    ),
+                  color: ZPColors.black,
+                ),
               ),
             ],
           );
@@ -333,8 +336,8 @@ class _PriceLabel extends StatelessWidget {
         return Text(
           '${'Unit Price: '.tr()}NA',
           style: Theme.of(context).textTheme.bodyText1?.apply(
-                color: ZPColors.black,
-              ),
+            color: ZPColors.black,
+          ),
         );
       },
     );
@@ -370,7 +373,7 @@ class _SearchBarState extends State<_SearchBar> {
       color: ZPColors.white,
       child: BlocConsumer<CovidMaterialListBloc, CovidMaterialListState>(
         listenWhen: (previous, current) =>
-            previous.searchKey != current.searchKey,
+        previous.searchKey != current.searchKey,
         listener: (context, state) {
           final searchText = state.searchKey.getValue();
           _searchController.value = TextEditingValue(
@@ -379,7 +382,7 @@ class _SearchBarState extends State<_SearchBar> {
           );
         },
         buildWhen: (previous, current) =>
-            previous.searchKey != current.searchKey ||
+        previous.searchKey != current.searchKey ||
             previous.isFetching != current.isFetching,
         builder: (context, state) {
           return Form(
@@ -390,51 +393,51 @@ class _SearchBarState extends State<_SearchBar> {
               enabled: !state.isFetching,
               onChanged: (value) {
                 context.read<CovidMaterialListBloc>().add(
-                      CovidMaterialListEvent.updateSearchKey(searchKey: value),
-                    );
+                  CovidMaterialListEvent.updateSearchKey(searchKey: value),
+                );
               },
               onFieldSubmitted: (value) {
                 if (state.searchKey.isValid()) {
                   // search code goes here
                   context.read<CovidMaterialListBloc>().add(
-                        CovidMaterialListEvent.searchMaterialList(
-                          user: context.read<UserBloc>().state.user,
-                          salesOrganisation: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrganisation,
-                          configs: context.read<SalesOrgBloc>().state.configs,
-                          customerCodeInfo: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                          shipToInfo:
-                              context.read<ShipToCodeBloc>().state.shipToInfo,
-                          selectedMaterialFilter: context
-                              .read<MaterialFilterBloc>()
-                              .state
-                              .selectedMaterialFilter,
-                          pickAndPack: context
-                              .read<EligibilityBloc>()
-                              .state
-                              .getPNPValueCovidMaterial,
-                        ),
-                      );
+                    CovidMaterialListEvent.searchMaterialList(
+                      user: context.read<UserBloc>().state.user,
+                      salesOrganisation: context
+                          .read<SalesOrgBloc>()
+                          .state
+                          .salesOrganisation,
+                      configs: context.read<SalesOrgBloc>().state.configs,
+                      customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                      shipToInfo:
+                      context.read<ShipToCodeBloc>().state.shipToInfo,
+                      selectedMaterialFilter: context
+                          .read<MaterialFilterBloc>()
+                          .state
+                          .selectedMaterialFilter,
+                      pickAndPack: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .getPNPValueCovidMaterial,
+                    ),
+                  );
                 } else {
                   showSnackBar(
                     context: context,
                     message:
-                        'Search input must be greater than 2 characters.'.tr(),
+                    'Search input must be greater than 2 characters.'.tr(),
                   );
                 }
               },
               validator: (_) => state.searchKey.value.fold(
-                (f) => f.maybeMap(
+                    (f) => f.maybeMap(
                   subceedLength: (f) =>
                       'Search input must be greater than 2 characters.'.tr(),
                   orElse: () => null,
                 ),
-                (_) => null,
+                    (_) => null,
               ),
               decoration: InputDecoration(
                 border: const OutlineInputBorder(
@@ -454,31 +457,31 @@ class _SearchBarState extends State<_SearchBar> {
                   icon: const Icon(Icons.clear),
                   onPressed: () {
                     context.read<CovidMaterialListBloc>().add(
-                          const CovidMaterialListEvent.updateSearchKey(
-                            searchKey: '',
-                          ),
-                        );
+                      const CovidMaterialListEvent.updateSearchKey(
+                        searchKey: '',
+                      ),
+                    );
                     // fetch code goes here
                     context.read<CovidMaterialListBloc>().add(
-                          CovidMaterialListEvent.fetch(
-                            user: context.read<UserBloc>().state.user,
-                            salesOrganisation: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
-                            configs: context.read<SalesOrgBloc>().state.configs,
-                            customerCodeInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .customerCodeInfo,
-                            shipToInfo:
-                                context.read<ShipToCodeBloc>().state.shipToInfo,
-                            pickAndPack: context
-                                .read<EligibilityBloc>()
-                                .state
-                                .getPNPValueCovidMaterial,
-                          ),
-                        );
+                      CovidMaterialListEvent.fetch(
+                        user: context.read<UserBloc>().state.user,
+                        salesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        configs: context.read<SalesOrgBloc>().state.configs,
+                        customerCodeInfo: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customerCodeInfo,
+                        shipToInfo:
+                        context.read<ShipToCodeBloc>().state.shipToInfo,
+                        pickAndPack: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .getPNPValueCovidMaterial,
+                      ),
+                    );
                   },
                 ),
                 hintText: 'Search...'.tr(),

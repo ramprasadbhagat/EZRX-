@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/custom_label.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
@@ -248,6 +249,7 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
                   ),
                   BonusDiscountLabel(
                     materialInfo: widget.cartItem.materialInfo,
+                    tenderContractNumber: widget.cartItem.tenderContract.contractNumber.displayTenderContractNumberInCart,
                   ),
                 ],
               ),
@@ -273,6 +275,7 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
           ),
         ),
         QuantityInput(
+          isEnabled: widget.cartItem.tenderContract == TenderContract.empty(),
           quantityTextKey: const Key('cartItem'),
           controller: controller,
           onFieldChange: (value) {

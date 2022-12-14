@@ -1,6 +1,10 @@
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_icon.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class QuantityInput extends StatelessWidget {
   final TextEditingController controller;
@@ -10,6 +14,8 @@ class QuantityInput extends StatelessWidget {
   final Function(int) addPressed;
   final Key quantityAddKey;
   final Key quantityDeleteKey;
+  final bool isEnabled;
+
   const QuantityInput({
     Key? key,
     required this.controller,
@@ -19,6 +25,7 @@ class QuantityInput extends StatelessWidget {
     required this.addPressed,
     required this.quantityAddKey,
     required this.quantityDeleteKey,
+    required this.isEnabled,
   }) : super(key: key);
 
   static const minimumQty = 0;
@@ -31,6 +38,7 @@ class QuantityInput extends StatelessWidget {
         SizedBox(
           width: 70,
           child: TextField(
+            enabled: isEnabled,
             key: quantityTextKey,
             controller: controller,
             keyboardType: TextInputType.number,
@@ -59,37 +67,64 @@ class QuantityInput extends StatelessWidget {
             QuantityIcon(
               key: quantityDeleteKey,
               pressed: () {
-                FocusScope.of(context).unfocus();
-                final value = (int.tryParse(controller.text) ?? 0) - 1;
-                if (value > minimumQty) {
-                  final text = value.toString();
-                  controller.value = TextEditingValue(
-                    text: text,
-                    selection: TextSelection.collapsed(offset: text.length),
-                  );
-                  minusPressed(value);
+                if (isEnabled) {
+                  FocusScope.of(context).unfocus();
+                  final value = (int.tryParse(controller.text) ?? 0) - 1;
+                  if (value > minimumQty) {
+                    final text = value.toString();
+                    controller.value = TextEditingValue(
+                      text: text,
+                      selection: TextSelection.collapsed(offset: text.length),
+                    );
+                    minusPressed(value);
+                  }
                 }
               },
               icon: Icons.remove,
+              isEnabled: isEnabled,
+
             ),
             QuantityIcon(
               key: quantityAddKey,
               pressed: () {
-                FocusScope.of(context).unfocus();
-                final value = (int.tryParse(controller.text) ?? 0) + 1;
+                if (isEnabled) {
+                  FocusScope.of(context).unfocus();
+                  final value = (int.tryParse(controller.text) ?? 0) + 1;
 
-                if (value < maximumQty) {
-                  final text = value.toString();
-                  controller.value = TextEditingValue(
-                    text: text,
-                    selection: TextSelection.collapsed(offset: text.length),
-                  );
-                  addPressed(value);
+                  if (value < maximumQty) {
+                    final text = value.toString();
+                    controller.value = TextEditingValue(
+                      text: text,
+                      selection: TextSelection.collapsed(offset: text.length),
+                    );
+                    addPressed(value);
+                  }
                 }
               },
               icon: Icons.add,
+              isEnabled: isEnabled,
             ),
           ],
+        ),
+        BlocBuilder<TenderContractBloc, TenderContractState>(
+          builder: (context, state) {
+            final value = int.tryParse(controller.text);
+
+            return state.selectedTenderContract == TenderContract.empty() ||
+                    state.selectedTenderContract ==
+                        TenderContract.noContract() ||
+                    value! <=
+                        state.selectedTenderContract.remainingTenderQuantity
+                ? const SizedBox.shrink()
+                : const Text(
+                    'Please ensure the order quantity is less than \nor equal to Remaining Quantity of the contract',
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    style: TextStyle(
+                      color: ZPColors.red,
+                    ),
+                  );
+          },
         ),
       ],
     );

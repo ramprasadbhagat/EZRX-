@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bonus_lable.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/price_tier_label.dart';
@@ -103,6 +104,7 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             QuantityInput(
+              isEnabled: widget.cartItem.tenderContract == TenderContract.empty(),
               quantityAddKey: const Key('cartItemAdd'),
               quantityDeleteKey: const Key('cartItemDelete'),
               quantityTextKey: const Key('item'),

@@ -126,13 +126,31 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
               materialNumber: '',
               salesDistrict: '')
           : fields[7] as StockInfoDto,
+      tenderContractDto: fields[8] == null
+          ? const TenderContractDto(
+              contractNumber: '',
+              contractItemNumber: '',
+              contractReference: '',
+              tenderOrderReason: '',
+              tenderVisaNumber: '',
+              salesDistrict: '',
+              tenderPackageDescription: '',
+              tenderPrice: '',
+              pricingUnit: 0,
+              remainingTenderQuantity: 0,
+              contractQuantity: 0,
+              contractExpiryDate: '',
+              announcementLetterNumber: '',
+              isNearToExpire: false,
+              contractPaymentTerm: '')
+          : fields[8] as TenderContractDto,
     );
   }
 
   @override
   void write(BinaryWriter writer, PriceAggregateDto obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.materialDto)
       ..writeByte(1)
@@ -148,7 +166,9 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
       ..writeByte(6)
       ..write(obj.bonusItem)
       ..writeByte(7)
-      ..write(obj.stockInfoDto);
+      ..write(obj.stockInfoDto)
+      ..writeByte(8)
+      ..write(obj.tenderContractDto);
   }
 
   @override

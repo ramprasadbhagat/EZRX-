@@ -23,7 +23,7 @@ class TenderContractItem extends StatelessWidget {
         leading: BlocBuilder<TenderContractBloc, TenderContractState>(
           builder: (context, state) {
             return GestureDetector(
-              onTap: () => selectTenderContract(context, state),
+              onTap: () => selectTenderContract(context),
               child: Container(
                 height: 35,
                 width: 35,
@@ -54,16 +54,12 @@ class TenderContractItem extends StatelessWidget {
       state.selectedTenderContract.contractNumber ==
       tenderContract.contractNumber;
 
-  void selectTenderContract(BuildContext context, TenderContractState state) =>
-      _isSelected(state)
-          ? context.read<TenderContractBloc>().add(
-                const TenderContractEvent.unselected(),
-              )
-          : context.read<TenderContractBloc>().add(
-                TenderContractEvent.selected(
-                  tenderContract: tenderContract,
-                ),
-              );
+  void selectTenderContract(BuildContext context) =>
+      context.read<TenderContractBloc>().add(
+            TenderContractEvent.selected(
+              tenderContract: tenderContract,
+            ),
+          );
 }
 
 class TenderContractHeader extends StatelessWidget {
@@ -151,7 +147,8 @@ class TenderContractBody extends StatelessWidget {
               ),
               TenderInfoText(
                 title: 'Contract Expiry Date',
-                info: tenderContract.contractExpiryDate.displayContractExpiryDate,
+                info:
+                    tenderContract.contractExpiryDate.displayContractExpiryDate,
               ),
             ],
           ),

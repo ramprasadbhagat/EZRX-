@@ -5,6 +5,7 @@ import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_bonus_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/stock_info_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/tender_contract_dto.dart';
 import 'package:hive/hive.dart';
 
 part 'price_aggregate_dto.g.dart';
@@ -20,6 +21,7 @@ class PriceAggregateDto {
     required this.bundleDto,
     required this.bonusItem,
     required this.stockInfoDto,
+    required this.tenderContractDto,
   });
 
   @HiveField(0, defaultValue: _emptyConstMaterialDto)
@@ -38,6 +40,8 @@ class PriceAggregateDto {
   List<MaterialItemBonusDto> bonusItem;
   @HiveField(7, defaultValue: _emptyStockInfoDto)
   StockInfoDto stockInfoDto;
+  @HiveField(8, defaultValue: _emptyTenderContractDto)
+  TenderContractDto tenderContractDto;
 
   factory PriceAggregateDto.fromDomain(PriceAggregate cart) {
     return PriceAggregateDto(
@@ -49,6 +53,7 @@ class PriceAggregateDto {
       ),
       zmgMaterialCountOnCart: cart.discountedMaterialCount,
       stockInfoDto: StockInfoDto.fromDomain(cart.stockInfo),
+      tenderContractDto: TenderContractDto.fromDomain(cart.tenderContract),
       bundleDto: BundleDto.fromDomain(cart.bundle),
       bonusItem: cart.addedBonusList
           .map(
@@ -70,6 +75,7 @@ class PriceAggregateDto {
       bundle: bundleDto.toDomain(),
       addedBonusList: bonusItem.map((e) => e.toDomain()).toList(),
       stockInfo: stockInfoDto.toDomain(),
+      tenderContract: tenderContractDto.toDomain(),
     );
   }
 }
@@ -179,4 +185,22 @@ const StockInfoDto _emptyStockInfoDto = StockInfoDto(
   inStock: '',
   materialNumber: '',
   salesDistrict: '',
+);
+
+const TenderContractDto _emptyTenderContractDto = TenderContractDto(
+  contractNumber: '',
+  contractItemNumber: '',
+  contractReference: '',
+  tenderOrderReason: '',
+  tenderVisaNumber: '',
+  salesDistrict: '',
+  tenderPackageDescription: '',
+  tenderPrice: '',
+  pricingUnit: 0,
+  remainingTenderQuantity: 0,
+  contractQuantity: 0,
+  contractExpiryDate: '',
+  announcementLetterNumber: '',
+  isNearToExpire: false,
+  contractPaymentTerm: '',
 );

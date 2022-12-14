@@ -318,7 +318,7 @@ class TenderPrice extends ValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory TenderPrice(String input) {
-    return TenderPrice._(validateStringNotEmpty(input));
+    return TenderPrice._(Right(input));
   }
 
   double get tenderPrice {
@@ -352,6 +352,10 @@ class TenderContractNumber extends ValueObject<String> {
     return naIfEmpty(value.getOrElse(() => '-'));
   }
 
+  String get displayTenderContractNumberInCart {
+    return getTenderContractNumber(value.getOrElse(() => ''));
+  }
+
   String get displayTenderContractItemNumber {
     return naIfEmpty(value.getOrElse(() => '-'));
   }
@@ -372,7 +376,7 @@ class TenderContractReason extends ValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory TenderContractReason(String input) {
-    return TenderContractReason._(validateStringNotEmpty(input));
+    return TenderContractReason._(Right(input));
   }
 
   bool get is730 {
