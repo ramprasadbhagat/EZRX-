@@ -42,7 +42,6 @@ void main() {
       tester.printToConsole('Input password');
       await tester.tap(loginPasswordField);
       await tester.enterText(loginPasswordField, 'St@ysafe01');
-      await tester.pumpAndSettle(const Duration(microseconds: 200));
 
       await tester.pumpAndSettle(const Duration(seconds: 1));
 

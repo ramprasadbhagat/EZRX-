@@ -66,5 +66,16 @@
                 "--release"
             ],
         },
+        {
+            "name": "browserstack",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_browserstack.dart",
+            "args": [
+                "--flavor",
+                "uat",
+                "--debug"
+            ],
+        },
     ]
 }
