@@ -29,7 +29,8 @@ class HomeNavigationTabbar extends StatelessWidget {
                   children: [
                     SizerUtil.deviceType == DeviceType.mobile
                         ? BlocBuilder<UserBloc, UserState>(
-                            buildWhen: (previous, current) => previous != current,
+                            buildWhen: (previous, current) =>
+                                previous != current,
                             builder: (context, state) {
                               return AutoTabsScaffold(
                                 lazyLoad: false,
@@ -55,7 +56,8 @@ class HomeNavigationTabbar extends StatelessWidget {
                             },
                           )
                         : BlocBuilder<UserBloc, UserState>(
-                            buildWhen: (previous, current) => previous != current,
+                            buildWhen: (previous, current) =>
+                                previous != current,
                             builder: (context, state) {
                               return AutoTabsRouter(
                                 lazyLoad: false,
@@ -63,7 +65,8 @@ class HomeNavigationTabbar extends StatelessWidget {
                                     .map((item) => item.route)
                                     .toList(),
                                 builder: (context, child, animation) {
-                                  var activeIndex = _getTabs(context).indexWhere(
+                                  var activeIndex =
+                                      _getTabs(context).indexWhere(
                                     (d) => context.tabsRouter
                                         .isRouteActive(d.route.routeName),
                                   );
@@ -117,7 +120,7 @@ List<RouteItem> _getTabs(BuildContext context) {
         .where((element) => element.label != 'Favourites')
         .toList();
   }
-  
+
   return _routesItems;
 }
 
@@ -130,7 +133,7 @@ final _routesItems = [
 
   RouteItem(
     route: HistoryTabRoute(),
-    icon: const Icon(Icons.shopping_basket_outlined, key: Key('historyTab')),
+    icon: const Icon(Icons.fact_check_outlined, key: Key('historyTab')),
     label: 'History',
   ),
   RouteItem(
