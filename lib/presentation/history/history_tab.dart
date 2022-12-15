@@ -45,11 +45,12 @@ class HistoryTab extends StatelessWidget {
           locale: context.locale,
         ),
         automaticallyImplyLeading: false,
+        toolbarHeight: kToolbarHeight + 2.0,
         actions: const [CartButton()],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(30.0),
           child: Padding(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
             child: BlocBuilder<ShipToCodeBloc, ShipToCodeState>(
               buildWhen: (previous, current) =>
                   previous.haveShipTo != current.haveShipTo,

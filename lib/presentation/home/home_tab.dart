@@ -29,10 +29,11 @@ class HomeTab extends StatelessWidget {
         // SvgPicture.asset('assets/svg/ezrxlogo.svg', height: 30),
         automaticallyImplyLeading: false,
         actions: const [CartButton()],
+        toolbarHeight: kToolbarHeight + 8.0,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(40.0),
           child: Padding(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
             child: Row(
               children: const [
                 SalesOrgSelector(key: ValueKey('HomeSalesOrgSelector')),
@@ -111,20 +112,19 @@ class HomeTab extends StatelessWidget {
                       crossAxisSpacing: 8.0,
                       mainAxisSpacing: 8.0,
                       childAspectRatio: (1 / .6),
-                      children:
-                          disableCreateOrder
-                              ? []
-                              : List.generate(
-                                  homePageTiles.length,
-                                  (index) {
-                                    return Center(
-                                      child: _TileCard(
-                                        key: const Key('HomeTileCard'),
-                                        homePageTile: homePageTiles[index],
-                                      ),
-                                    );
-                                  },
-                                ),
+                      children: disableCreateOrder
+                          ? []
+                          : List.generate(
+                              homePageTiles.length,
+                              (index) {
+                                return Center(
+                                  child: _TileCard(
+                                    key: const Key('HomeTileCard'),
+                                    homePageTile: homePageTiles[index],
+                                  ),
+                                );
+                              },
+                            ),
                     ),
                   ),
                 ),
@@ -177,17 +177,17 @@ class _TileCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         String countlyTile;
-        switch(homePageTile.routeName) {
-          case 'material_list_page' :
+        switch (homePageTile.routeName) {
+          case 'material_list_page':
             countlyTile = 'Create Order';
             break;
-          case 'saved_order_list' :
+          case 'saved_order_list':
             countlyTile = 'Saved Orders';
             break;
-          case 'order_template_list_page' :
+          case 'order_template_list_page':
             countlyTile = 'Order Template';
             break;
-          default : 
+          default:
             countlyTile = '';
         }
         locator<CountlyService>().addCountlyEvent(countlyTile);
