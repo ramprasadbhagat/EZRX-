@@ -66,23 +66,21 @@ class MaterialInfo with _$MaterialInfo {
         materialInfo: this,
       );
 
-  String get displayTaxes {
+  String get _displayTaxes {
     return taxes.isNotEmpty ? '${taxes.join('% , ')}%' : '0%';
   }
 
-  String? getTaxClassification(
+  String getTaxClassification(
     bool enableTaxDisplay,
     bool enableTaxClassification,
   ) {
     return enableTaxDisplay && enableTaxClassification
         ? taxClassification.getOrCrash()
-        : null;
+        : '';
   }
 
-  String? getTotalTax(bool enableTaxDisplay) {
-    return enableTaxDisplay && displayTaxes != '0%'
-        ? '${'Total Tax: '.tr()}$taxes'
-        : null;
+  String getTotalTax(bool enableTaxDisplay) {
+    return enableTaxDisplay ? '${'Total Tax: '.tr()}$_displayTaxes' : '';
   }
 
   String get displayDescription => materialDescription.isEmpty
