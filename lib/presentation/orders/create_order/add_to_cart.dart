@@ -97,10 +97,10 @@ class _AddToCartState extends State<AddToCart> {
                           onQuantityChanged: (int value) {
                             final cartItem = addToCartBloc.state.cartItem;
                             final discountedMaterialCount = cartItem
-                                .price.zmgDiscount
+                                    .price.zmgDiscount
                                 ? cartBloc.state.zmgMaterialCount
                                 : cartBloc.state
-                                .onAddCartDiscountMaterialCount(cartItem);
+                                    .onAddCartDiscountMaterialCount(cartItem);
                             addToCartBloc.add(
                               AddToCartEvent.updateQuantity(
                                 value,
@@ -111,8 +111,8 @@ class _AddToCartState extends State<AddToCart> {
                         ),
                         widget.hasValidTenderContract
                             ? SelectContract(
-                          materialInfo: state.cartItem.materialInfo,
-                        )
+                                materialInfo: state.cartItem.materialInfo,
+                              )
                             : const SizedBox.shrink(),
                       ],
                     ),

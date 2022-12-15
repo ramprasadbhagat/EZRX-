@@ -130,7 +130,8 @@ class BundleItemDetailPage extends StatelessWidget {
 
                   return ElevatedButton(
                     onPressed: () {
-                      locator<CountlyService>().addCountlyEvent('Add bundles to cart');
+                      locator<CountlyService>()
+                          .addCountlyEvent('Add bundles to cart');
                       _addToCartPressed(
                         context,
                         bundleAggregate.bundle,
@@ -253,6 +254,11 @@ class _ListContent extends StatelessWidget {
             quantityTextKey:
             Key('$bundleCode${materialInfo.materialNumber.getValue()}'),
             onFieldChange: (int value) {
+              locator<CountlyService>().addCountlyEvent(
+                'changed_quantity',
+                segmentation: {
+                  'materialNum':materialInfo.materialNumber.getOrCrash(),
+              },);
               context.read<AddToCartBloc>().add(
                 AddToCartEvent.updateQuantity(
                   value,
@@ -261,6 +267,11 @@ class _ListContent extends StatelessWidget {
               );
             },
             minusPressed: (int value) {
+              locator<CountlyService>().addCountlyEvent(
+                'deduct_quantity',
+                segmentation: {
+                  'materialNum':materialInfo.materialNumber.getOrCrash(),
+              },);
               context.read<AddToCartBloc>().add(
                 AddToCartEvent.updateQuantity(
                   value,
@@ -269,6 +280,11 @@ class _ListContent extends StatelessWidget {
               );
             },
             addPressed: (int value) {
+              locator<CountlyService>().addCountlyEvent(
+                'add_quantity',
+                segmentation: {
+                  'materialNum':materialInfo.materialNumber.getOrCrash(),
+              },);
               context.read<AddToCartBloc>().add(
                 AddToCartEvent.updateQuantity(
                   value,

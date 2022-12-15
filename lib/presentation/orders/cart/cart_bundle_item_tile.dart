@@ -8,6 +8,8 @@ import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_label.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus_tile.dart';
@@ -249,7 +251,8 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
                   ),
                   BonusDiscountLabel(
                     materialInfo: widget.cartItem.materialInfo,
-                    tenderContractNumber: widget.cartItem.tenderContract.contractNumber.displayTenderContractNumberInCart,
+                    tenderContractNumber: widget.cartItem.tenderContract
+                        .contractNumber.displayTenderContractNumberInCart,
                   ),
                 ],
               ),
@@ -279,6 +282,14 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
           quantityTextKey: const Key('cartItem'),
           controller: controller,
           onFieldChange: (value) {
+            locator<CountlyService>().addCountlyEvent(
+              'changed_quantity',
+              segmentation: {
+                'materialNum': widget.cartItem.getMaterialNumber.getOrCrash(),
+                'listPrice': widget.cartItem.listPrice,
+                'price': widget.cartItem.price.finalPrice.getOrCrash(),
+              },
+            );
             context.read<CartBloc>().add(
                   CartEvent.updateCartItem(
                     item: widget.cartItem.copyWith(quantity: value),
@@ -298,6 +309,14 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
           },
           minusPressed: (k) {
             if (widget.cartItem.quantity > 1) {
+              locator<CountlyService>().addCountlyEvent(
+                'deduct_quantity',
+                segmentation: {
+                  'materialNum': widget.cartItem.getMaterialNumber.getOrCrash(),
+                  'listPrice': widget.cartItem.listPrice,
+                  'price': widget.cartItem.price.finalPrice.getOrCrash(),
+                },
+              );
               context.read<CartBloc>().add(
                     CartEvent.addToCart(
                       item: widget.cartItem.copyWith(quantity: -1),
@@ -324,6 +343,14 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
             }
           },
           addPressed: (k) {
+            locator<CountlyService>().addCountlyEvent(
+              'add_quantity',
+              segmentation: {
+                'materialNum': widget.cartItem.getMaterialNumber.getOrCrash(),
+                'listPrice': widget.cartItem.listPrice,
+                'price': widget.cartItem.price.finalPrice.getOrCrash(),
+              },
+            );
             context.read<CartBloc>().add(
                   CartEvent.addToCart(
                     item: widget.cartItem.copyWith(quantity: 1),

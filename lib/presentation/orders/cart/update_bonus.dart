@@ -77,9 +77,36 @@ class UpdateBonus extends StatelessWidget {
                         quantityDeleteKey: const Key('bonusDelete'),
                         quantityTextKey: const Key('bonusItem'),
                         controller: controller,
-                        onFieldChange: (p0) {},
-                        minusPressed: (p0) {},
-                        addPressed: (p0) {},
+                        onFieldChange: (p0) {
+                          locator<CountlyService>().addCountlyEvent(
+                            'changed_quantity',
+                            segmentation: {
+                              'materialNum': materialInfo.materialNumber.getOrCrash(),
+                              'listPrice': cartItem.listPrice,
+                              'price': cartItem.price.finalPrice.getOrCrash(),
+                            },
+                          );
+                        },
+                        minusPressed: (p0) {
+                          locator<CountlyService>().addCountlyEvent(
+                            'deduct_quantity',
+                            segmentation: {
+                              'materialNum': materialInfo.materialNumber.getOrCrash(),
+                              'listPrice': cartItem.listPrice,
+                              'price': cartItem.price.finalPrice.getOrCrash(),
+                            },
+                          );
+                        },
+                        addPressed: (p0) {
+                          locator<CountlyService>().addCountlyEvent(
+                          'add_quantity',
+                          segmentation: {
+                            'materialNum': materialInfo.materialNumber.getOrCrash(),
+                            'listPrice': cartItem.listPrice,
+                            'price': cartItem.price.finalPrice.getOrCrash(),
+                          },
+                        );
+                        },
                       ),
                     ],
                   ),

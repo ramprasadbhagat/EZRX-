@@ -3,6 +3,8 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bonus_lable.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/price_tier_label.dart';
@@ -109,9 +111,33 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
               quantityDeleteKey: const Key('cartItemDelete'),
               quantityTextKey: const Key('item'),
               controller: _controller,
-              onFieldChange: widget.onQuantityChanged,
-              minusPressed: widget.onQuantityChanged,
-              addPressed: widget.onQuantityChanged,
+              onFieldChange: (val) {
+                locator<CountlyService>()
+                    .addCountlyEvent('changed_quantity', segmentation: {
+                  'materialNum': widget.cartItem.getMaterialNumber.getOrCrash(),
+                  'listPrice': widget.cartItem.listPrice,
+                  'price': widget.cartItem.price.finalPrice.getOrCrash(),
+                });
+                widget.onQuantityChanged.call(val);
+              },
+              minusPressed: (val) {
+                locator<CountlyService>()
+                    .addCountlyEvent('deduct_quantity', segmentation: {
+                  'materialNum': widget.cartItem.getMaterialNumber.getOrCrash(),
+                  'listPrice': widget.cartItem.listPrice,
+                  'price': widget.cartItem.price.finalPrice.getOrCrash(),
+                });
+                widget.onQuantityChanged.call(val);
+              },
+              addPressed: (val) {
+                locator<CountlyService>()
+                    .addCountlyEvent('add_quantity', segmentation: {
+                  'materialNum': widget.cartItem.getMaterialNumber.getOrCrash(),
+                  'listPrice': widget.cartItem.listPrice,
+                  'price': widget.cartItem.price.finalPrice.getOrCrash(),
+                });
+                widget.onQuantityChanged.call(val);
+              },
             ),
           ],
         ),
