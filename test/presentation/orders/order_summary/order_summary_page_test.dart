@@ -246,7 +246,6 @@ void main() {
           .thenReturn(SavedOrderListState.initial());
       when(() => tenderContractBlocMock.state)
           .thenReturn(TenderContractState.initial());
-
     },
   );
   group(
@@ -285,8 +284,8 @@ void main() {
                 create: (context) => orderHistoryFilterBlocMock),
             BlocProvider<AdditionalDetailsBloc>(
                 create: (context) => additionalDetailsBlocMock),
-            BlocProvider<TenderContractBloc>(create: (context) => tenderContractBlocMock),
-
+            BlocProvider<TenderContractBloc>(
+                create: (context) => tenderContractBlocMock),
           ],
           child: const OrderSummaryPage(),
         );
@@ -975,9 +974,10 @@ void main() {
         (tester) async {
           when(() => orderSummaryBlocMock.state)
               .thenReturn(OrderSummaryState.initial().copyWith(
-            step: 3,
+            step: 4,
             maxSteps: 5,
           ));
+
           when(() => customerCodeBlocMock.state).thenReturn(
             CustomerCodeState.initial().copyWith(
               customerCodeInfo: CustomerCodeInfo.empty().copyWith(
@@ -998,37 +998,49 @@ void main() {
               ),
             ),
           );
-          when(() => salesOrgBlocMock.state)
-              .thenReturn(SalesOrgState.initial().copyWith(
-            configs: SalesOrganisationConfigs.empty().copyWith(
-              enableReferenceNote: true,
-              enableVat: true,
-              enableFutureDeliveryDay: true,
-              enableMobileNumber: true,
-              enableSpecialInstructions: true,
-              disableOrderType: false,
-              enableCollectiveNumber: true,
-              enablePaymentTerms: true,
-              enableBillTo: true,
+
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+                billToInfos: <BillToInfo>[
+                  BillToInfo.empty().copyWith(
+                    billToCustomerCode: '123456789',
+                    billToAddress: BillToAddress.empty().copyWith(
+                      city1: 'city1',
+                      city2: 'city2',
+                      street: 'street',
+                    ),
+                  ),
+                ],
+                shipToInfos: <ShipToInfo>[
+                  ShipToInfo.empty().copyWith(city1: 'KOL'),
+                ],
+                customerCodeSoldTo: '987654321',
+              ),
+              salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+                enableReferenceNote: true,
+                enableVat: true,
+                enableFutureDeliveryDay: true,
+                enableMobileNumber: true,
+                enableSpecialInstructions: true,
+                disableOrderType: false,
+                enableCollectiveNumber: true,
+                enablePaymentTerms: true,
+                enableBillTo: true,
+              ),
             ),
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2601'),
-            ),
-          ));
-          when(() => userBlocMock.state).thenReturn(UserState.initial()
-              .copyWith(
-                  user: User.empty().copyWith(
-                      role: Role.empty().copyWith(type: RoleType('client')))));
+          );
 
           await tester.pumpWidget(getWidget());
           await tester.pump();
-          final address = find.textContaining('street, city2, city1');
-          expect(address, findsOneWidget);
+
           final billToKey = find.byKey(
             const Key('billToCustomer'),
             skipOffstage: false,
           );
           expect(billToKey, findsOneWidget);
+          final address = find.textContaining('street, city2, city1');
+          expect(address, findsOneWidget);
         },
       );
 

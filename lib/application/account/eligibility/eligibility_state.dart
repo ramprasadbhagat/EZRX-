@@ -123,4 +123,14 @@ class EligibilityState with _$EligibilityState {
   bool get isOrderSummaryPPEDisclaimerEnable {
     return salesOrganisation.salesOrg.isSg && !user.role.type.isSalesRep;
   }
+
+  bool get isBillToInfo {
+    final billToInfo = customerCodeInfo.billToInfos.isNotEmpty
+        ? customerCodeInfo.billToInfos.first
+        : BillToInfo.empty();
+
+    return salesOrgConfigs.enableBillTo &&
+        billToInfo.billToCustomerCode.isNotEmpty &&
+        billToInfo.billToCustomerCode != customerCodeInfo.customerCodeSoldTo;
+  }
 }

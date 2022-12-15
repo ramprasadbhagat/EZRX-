@@ -370,9 +370,7 @@ List<Step> _getSteps({
       title: Text('Ship to Address'.tr()),
       content: const ShipToAddressInfo(),
     ),
-    if (config.enableBillTo &&
-        billToInfo.billToCustomerCode.isNotEmpty &&
-        billToInfo.billToCustomerCode != customerCodeInfo.customerCodeSoldTo)
+    if (context.read<EligibilityBloc>().state.isBillToInfo)
       Step(
         title: Text('Bill to Address'.tr()),
         content: _BillToCustomerStep(

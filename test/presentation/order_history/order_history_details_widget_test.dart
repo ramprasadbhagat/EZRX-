@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/order/order_history_details/download_atta
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/bill_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -305,7 +306,7 @@ void main() {
 
       expect(billToAddress, findsNothing);
     });
-    testWidgets('Bill to address   visiable test ', (tester) async {
+    testWidgets('Bill to address visiable test ', (tester) async {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: orderHistoryDetails,
@@ -316,9 +317,23 @@ void main() {
       );
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-          enableBillTo: true,
-        )),
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            billToInfos: <BillToInfo>[
+              BillToInfo.empty().copyWith(
+                billToCustomerCode: '123456789',
+                billToAddress: BillToAddress.empty().copyWith(
+                  city1: 'city1',
+                  city2: 'city2',
+                  street: 'street',
+                ),
+              ),
+            ],
+            customerCodeSoldTo: '987654321',
+          ),
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            enableBillTo: true,
+          ),
+        ),
       );
       // final isBillToenable = eligibilityBlocMock.state.isOrderTypeEnable;
 

@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
@@ -20,8 +21,12 @@ void main() {
   ];
 
   final fakeShipToInfo = ShipToInfo.empty().copyWith(building: 'fakeBuilding');
-  final fakeCustomerInfo =
-      CustomerCodeInfo.empty().copyWith(shipToInfos: [fakeShipToInfo]);
+  final fakeBillToInfo =
+      BillToInfo.empty().copyWith(billToCustomerCode: 'customer1234');
+  final fakeCustomerInfo = CustomerCodeInfo.empty().copyWith(
+      shipToInfos: [fakeShipToInfo],
+      billToInfos: [fakeBillToInfo],
+      customerCodeSoldTo: 'customer123');
   final fakeUser = User.empty().copyWith(
     username: Username('fake-user'),
     role: Role.empty().copyWith(
@@ -66,7 +71,7 @@ void main() {
     priceOverride: false,
     disablePaymentTermsDisplay: false,
     disableDeliveryDate: false,
-    enableBillTo: false,
+    enableBillTo: true,
     showPOAttachment: false,
     addOosMaterials: false,
     expiryDateDisplay: false,
@@ -212,6 +217,57 @@ void main() {
       final pickAndPackValueMY =
           newEligibilityState.getPNPValueBonusMaterialSearch;
       expect(pickAndPackValueMY, 'include');
+    },
+  );
+
+  test(
+    'eligibility state isBillToInfo should return true',
+    () {
+      final eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeUser,
+        salesOrganisation: fakeSaleOrg,
+        salesOrgConfigs: fakeSaleOrgConfig,
+        customerCodeInfo: fakeCustomerInfo,
+        shipToInfo: fakeShipToInfo,
+      );
+
+      final showBillToInfo = eligibilityState.isBillToInfo;
+      expect(showBillToInfo, true);
+    },
+  );
+
+  test(
+    'eligibility state isBillToInfo should return false when customerCodeSoldTo and billToCustomerCode is same',
+    () {
+      final eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeUser,
+        salesOrganisation: fakeSaleOrg,
+        salesOrgConfigs: fakeSaleOrgConfig,
+        customerCodeInfo:
+            fakeCustomerInfo.copyWith(customerCodeSoldTo: 'customer1234'),
+        shipToInfo: fakeShipToInfo,
+      );
+
+      final showBillToInfo = eligibilityState.isBillToInfo;
+      expect(showBillToInfo, false);
+    },
+  );
+
+  test(
+    'eligibility state isBillToInfo should return false when billToInfos is empty',
+    () {
+      final eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeUser,
+        salesOrganisation: fakeSaleOrg,
+        salesOrgConfigs: fakeSaleOrgConfig,
+        customerCodeInfo: fakeCustomerInfo.copyWith(
+          billToInfos: [],
+        ),
+        shipToInfo: fakeShipToInfo,
+      );
+
+      final showBillToInfo = eligibilityState.isBillToInfo;
+      expect(showBillToInfo, false);
     },
   );
 }
