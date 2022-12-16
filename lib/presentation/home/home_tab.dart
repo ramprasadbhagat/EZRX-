@@ -18,6 +18,7 @@ import 'package:ezrxmobile/presentation/home/selector/shipping_address_selector.
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({Key? key}) : super(key: key);
@@ -26,8 +27,8 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset('assets/images/ezrxlogo.png', height: 30),
-        // SvgPicture.asset('assets/svg/ezrxlogo.svg', height: 30),
+        centerTitle: true,
+        title: SvgPicture.asset('assets/svg/ezrxlogo.svg', height: 30),
         automaticallyImplyLeading: false,
         actions: const [CartButton()],
         toolbarHeight: kToolbarHeight + 8.0,
