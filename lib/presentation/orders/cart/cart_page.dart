@@ -30,7 +30,7 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     locator<CountlyService>().recordCountlyView('Cart Window Screen');
-    
+
     return BlocConsumer<CartBloc, CartState>(
       listenWhen: (previous, current) =>
           previous.apiFailureOrSuccessOption !=
@@ -185,24 +185,24 @@ class CartPage extends StatelessWidget {
         ));
     final selectedMaterialList =
         context.read<CartBloc>().state.selectedItemsMaterialNumber;
-    context
-        .read<OrderEligibilityBloc>()
-        .add(OrderEligibilityEvent.checkMinimumOrderValue(
-          cartItems: context
-              .read<CartBloc>()
-              .state
-              .cartItemList
-              .where((element) =>
-                  selectedMaterialList.contains(element.getMaterialNumber))
-              .toList(),
-          configs: config,
-          customerCodeInfo: customerCodeInfo,
-          grandTotal: context.read<CartBloc>().state.grandTotal,
-          orderType: '',
-          salesOrg: context.read<SalesOrgBloc>().state.salesOrganisation,
-          shipInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-          user: context.read<UserBloc>().state.user,
-        ));
+    context.read<OrderEligibilityBloc>().add(
+          OrderEligibilityEvent.initialized(
+            cartItems: context
+                .read<CartBloc>()
+                .state
+                .cartItemList
+                .where((element) =>
+                    selectedMaterialList.contains(element.getMaterialNumber))
+                .toList(),
+            configs: config,
+            customerCodeInfo: customerCodeInfo,
+            grandTotal: context.read<CartBloc>().state.grandTotal,
+            orderType: '',
+            salesOrg: context.read<SalesOrgBloc>().state.salesOrganisation,
+            shipInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+            user: context.read<UserBloc>().state.user,
+          ),
+        );
     context.router.pushNamed('order_summary');
   }
 }

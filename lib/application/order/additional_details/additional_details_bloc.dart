@@ -33,7 +33,7 @@ class AdditionalDetailsBloc
   ) async {
     await event.map(
       initialized: (value) async => emit(
-        AdditionalDetailsState.initial().copyWith(
+        state.copyWith(
           additionalDetailsData: state.additionalDetailsData.copyWith(
             deliveryDate: DeliveryDate(
               _initialDate(
@@ -99,6 +99,7 @@ class AdditionalDetailsBloc
         state.copyWith(
           isValidated: false,
           showErrorMessages: true,
+          additionalDetailsData: state.additionalDetailsData,
         ),
       );
     }

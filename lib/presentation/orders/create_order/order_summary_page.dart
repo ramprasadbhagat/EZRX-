@@ -126,12 +126,31 @@ class _BodyContent extends StatelessWidget {
           children: [
             const AccountSuspendedBanner(),
             Expanded(
-              child: _Stepper(
+              child: _WrapStepper(
                 savedOrderState: savedOrderState,
               ),
             ),
           ],
         );
+      },
+    );
+  }
+}
+
+class _WrapStepper extends StatelessWidget {
+  final SavedOrderListState savedOrderState;
+  const _WrapStepper({
+    required this.savedOrderState,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<OrderEligibilityBloc, OrderEligibilityState>(
+      buildWhen: (previous, current) =>
+          previous.grandTotal != current.grandTotal,
+      builder: (context, state) {
+        return _Stepper(savedOrderState: savedOrderState);
       },
     );
   }
@@ -252,7 +271,7 @@ class _Stepper extends StatelessWidget {
       builder: (context, state) {
         final config = context.read<SalesOrgBloc>().state.configs;
         final eligibleForOrderSubmit =
-            context.read<OrderEligibilityBloc>().state.eligibleForOrderSubmit;
+            context.read<OrderEligibilityBloc>().state.isMinOrderValuePassed;
         final isAccountSuspended =
             context.read<EligibilityBloc>().state.isAccountSuspended;
 
@@ -276,22 +295,17 @@ class _Stepper extends StatelessWidget {
                           : ZPColors.primary,
                     ),
                     onPressed: () {
-                      if (details.currentStep == state.maxSteps) {
-                        if (eligibleForOrderSubmit) {
-                          _validateForm(
-                            context: context,
-                          );
-                        }
-                      } else {
-                        if (details.currentStep ==
-                            state.additionalDetailsStep) {
-                          _validateForm(
-                            context: context,
-                          );
-                        } else {
-                          _stepContinue(context);
-                        }
-                      }
+                      details.currentStep == state.maxSteps
+                          ? eligibleForOrderSubmit && !isAccountSuspended
+                              ? _validateForm(
+                                  context: context,
+                                )
+                              : null
+                          : details.currentStep == state.additionalDetailsStep
+                              ? _validateForm(
+                                  context: context,
+                                )
+                              : _stepContinue(context);
                     },
                     child: details.currentStep == state.maxSteps
                         ? LoadingShimmer.withChild(
@@ -613,6 +627,19 @@ class _CartDetails extends StatelessWidget {
         final taxCode = context.read<SalesOrgBloc>().state.salesOrg.taxCode;
         final selectedMaterialList =
             context.read<CartBloc>().state.selectedItemsMaterialNumber;
+        final readyToSubmitCartItem = state.displayCartItems
+            .where((e) => e.itemType == CartItemType.material)
+            .where((e) => selectedMaterialList
+                .contains(e.materials.first.getMaterialNumber))
+            .map((e) => e.materials.first)
+            .toList();
+        context.read<OrderEligibilityBloc>().add(
+              OrderEligibilityEvent.update(
+                cartItems: readyToSubmitCartItem,
+                orderType: '',
+                grandTotal: state.grandTotal,
+              ),
+            );
 
         return Column(
           children: [

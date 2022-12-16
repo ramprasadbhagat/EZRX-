@@ -309,49 +309,6 @@ class OrderRepository implements IOrderRepository {
       materials: _getMaterialInfoList(cartItems: cartItems),
     );
   }
-
-  @override
-  bool checkMinOrderValue({
-    required List<PriceAggregate> cartItems,
-    required SalesOrganisation salesOrg,
-    required SalesOrganisationConfigs configs,
-    required double grandTotal,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipInfo,
-    required String orderType,
-    required User user,
-  }) {
-    if (!_hasPrinciple(cartItems, user.role.type.isSalesRep)) {
-      if (orderType.isNotEmpty &&
-          (orderType.contains('ZPFC') || orderType.contains('ZPFB'))) {
-        return true;
-      }
-      if (cartItems
-          .where((element) => element.materialInfo.materialGroup4.isFOC)
-          .isNotEmpty) {
-        return true;
-      }
-
-      return !shipInfo.status.isSuspended &&
-              !customerCodeInfo.status.isSuspended
-          ? cartItems
-                  .where((element) => (!element.materialInfo.isSampleMaterial))
-                  .isNotEmpty
-              ? grandTotal >= double.parse(configs.minOrderAmount)
-                  ? true
-                  : false
-              : true
-          : false;
-    }
-
-    return false;
-  }
-
-  bool _hasPrinciple(List<PriceAggregate> cartItems, bool isSalesRep) {
-    return isSalesRep
-        ? cartItems.where((element) => element.hasSalesRepPrinciple).isNotEmpty
-        : cartItems.where((element) => element.hasClientPrinciple).isNotEmpty;
-  }
 }
 
 SubmitOrderCustomer _getSubmitOrderCustomer({

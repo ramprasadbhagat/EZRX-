@@ -46,15 +46,4 @@ abstract class IOrderRepository {
     required String orderType,
     required SalesOrganisationConfigs configs,
   });
-
-  bool checkMinOrderValue({
-    required List<PriceAggregate> cartItems,
-    required SalesOrganisation salesOrg,
-    required SalesOrganisationConfigs configs,
-    required double grandTotal,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipInfo,
-    required String orderType,
-    required User user,
-  });
 }

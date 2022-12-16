@@ -335,7 +335,7 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
-    () => OrderEligibilityBloc(repository: locator<OrderRepository>()),
+    () => OrderEligibilityBloc(),
   );
 
   //============================================================

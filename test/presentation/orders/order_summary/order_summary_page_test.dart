@@ -211,11 +211,7 @@ void main() {
       ));
       when(
         () => orderEligibilityBlocMock.state,
-      ).thenReturn(
-        OrderEligibilityState.initial().copyWith(
-          eligibleForOrderSubmit: true,
-        ),
-      );
+      ).thenReturn(OrderEligibilityState.initial().copyWith());
       when(() => salesOrgBlocMock.state)
           .thenReturn(SalesOrgState.initial().copyWith(
         configs: SalesOrganisationConfigs.empty().copyWith(
@@ -540,11 +536,7 @@ void main() {
           );
           when(
             () => orderEligibilityBlocMock.state,
-          ).thenReturn(
-            OrderEligibilityState.initial().copyWith(
-              eligibleForOrderSubmit: true,
-            ),
-          );
+          ).thenReturn(OrderEligibilityState.initial().copyWith());
           tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
           tester.binding.window.devicePixelRatioTestValue = 1.0;
           await tester.pumpWidget(getWidget());
@@ -709,11 +701,7 @@ void main() {
           ));
           when(
             () => orderEligibilityBlocMock.state,
-          ).thenReturn(
-            OrderEligibilityState.initial().copyWith(
-              eligibleForOrderSubmit: true,
-            ),
-          );
+          ).thenReturn(OrderEligibilityState.initial().copyWith());
 
           await tester.pumpWidget(getWidget());
           await tester.pump();
