@@ -439,7 +439,7 @@ void main() {
                 'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
             expect(item, findsOneWidget);
             final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-            expect(listWidget, findsNWidgets(2));
+            expect(listWidget,  findsAtLeastNWidgets(1));
             final addWidget = tester.widget(find.byKey(const Key('cartAdd')));
             await tester.tap(find.byWidget(addWidget));
             await tester.pump();
@@ -471,7 +471,7 @@ void main() {
                 'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
             expect(item, findsOneWidget);
             final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-            expect(listWidget, findsNWidgets(2));
+            expect(listWidget,  findsAtLeastNWidgets(1));
             final addWidget = tester.widget(find.byKey(const Key('cartAdd')));
             await tester.tap(find.byWidget(addWidget));
             await tester.pump();
@@ -499,7 +499,7 @@ void main() {
             'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-        expect(listWidget, findsAtLeastNWidgets(1));
+        expect(listWidget,  findsAtLeastNWidgets(1));
 
         final removeWidget = tester.widget(find.byKey(const Key('cartDelete')));
         await tester.tap(find.byWidget(removeWidget));
@@ -816,7 +816,7 @@ void main() {
             expect(item, findsOneWidget);
 
             final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-            expect(listWidget, findsNWidgets(2));
+            expect(listWidget, findsNWidgets(1));
 
             if (salesOrgBloc.state.configs.enableRemarks) {
               final addRemarkButton =

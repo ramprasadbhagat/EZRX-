@@ -50,7 +50,7 @@ void main() {
         stockInfo: StockInfo.empty().copyWith(
           materialNumber: MaterialNumber('8949542'),
           inStock: MaterialInStock('Yes'),
-          expiryDate: '-',
+          expiryDate: ExpiryDate('NA'),
           salesDistrict: '',
           batch: '',
         )),
@@ -84,7 +84,7 @@ void main() {
   final mockStockInfo = StockInfo.empty().copyWith(
     materialNumber: MaterialNumber('8949542'),
     inStock: MaterialInStock('Yes'),
-    expiryDate: '-',
+    expiryDate: ExpiryDate('NA'),
     salesDistrict: '',
     batch: '',
   );
@@ -1680,7 +1680,7 @@ void main() {
     stockInfo: StockInfo.empty().copyWith(
       materialNumber: bonusMaterialNumber,
       inStock: MaterialInStock('Yes'),
-      expiryDate: '-',
+      expiryDate: ExpiryDate('NA'),
       salesDistrict: '',
       batch: '',
     ),

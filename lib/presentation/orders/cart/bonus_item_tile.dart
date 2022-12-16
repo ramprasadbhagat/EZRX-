@@ -73,19 +73,37 @@ class _BonusItemTileState extends State<BonusItemTile> {
                         ],
                       ),
                       Text(
-                        'Expiry Data :-'.tr(),
-                        style: const TextStyle(
-                          color: ZPColors.lightGray,
-                          fontSize: 12,
-                        ),
+                        '${'Material type : '.tr()}Bonus',
+                        style: Theme.of(context).textTheme.bodyText1?.apply(
+                              color: ZPColors.lightGray,
+                            ),
                       ),
                       Text(
-                        'In Stock :'.tr(),
-                        style: const TextStyle(
-                          color: ZPColors.lightGray,
-                          fontSize: 12,
-                        ),
+                        '${'Mat No : '.tr()}${widget.bonusItem.materialInfo.materialNumber.displayMatNo}',
+                        style: Theme.of(context).textTheme.bodyText1?.apply(
+                              color: ZPColors.lightGray,
+                            ),
                       ),
+                      Text(
+                        '${'Quantity: '.tr()}${widget.bonusItem.qty}',
+                        style: Theme.of(context).textTheme.bodyText1?.apply(
+                              color: ZPColors.lightGray,
+                            ),
+                      ),
+                      if (widget.cartItem.salesOrgConfig.expiryDateDisplay)
+                        Text(
+                          '${'Expiry Date : '.tr()}${widget.bonusItem.expiryDate.getExpiryDate}',
+                          style: Theme.of(context).textTheme.bodyText1?.apply(
+                                color: ZPColors.lightGray,
+                              ),
+                        ),
+                      if (!widget.cartItem.salesOrgConfig.hideStockDisplay)
+                        Text(
+                          '${'In Stock : '.tr()}${widget.bonusItem.inStock}',
+                          style: Theme.of(context).textTheme.bodyText1?.apply(
+                                color: ZPColors.lightGray,
+                              ),
+                        ),
                       if (context
                           .read<SalesOrgBloc>()
                           .state

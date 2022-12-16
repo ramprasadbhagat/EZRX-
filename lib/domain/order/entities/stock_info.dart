@@ -9,7 +9,7 @@ class StockInfo with _$StockInfo {
 
   const factory StockInfo({
     required MaterialNumber materialNumber,
-    required String expiryDate,
+    required ExpiryDate expiryDate,
     required String batch,
     required MaterialInStock inStock,
     required String salesDistrict,
@@ -17,7 +17,7 @@ class StockInfo with _$StockInfo {
 
   factory StockInfo.empty() => StockInfo(
         materialNumber: MaterialNumber(''),
-        expiryDate: '',
+        expiryDate: ExpiryDate(''),
         batch: '',
         inStock: MaterialInStock(''),
         salesDistrict: '',

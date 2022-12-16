@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/cart_bottom_sheet.dart';
@@ -95,23 +96,23 @@ class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
                 children: [
                   Row(
                     children: [
-                      widget.showCheckBox
-                          ? Checkbox(
-                              onChanged: ((v) => {
-                                    context
-                                        .read<CartBloc>()
-                                        .add(CartEvent.updateSelectedItem(
-                                          item: widget.cartItem,
-                                        )),
-                                  }),
-                              value: context
-                                  .read<CartBloc>()
-                                  .state
-                                  .selectedItemsMaterialNumber
-                                  .contains(widget
-                                      .cartItem.materialInfo.materialNumber),
-                            )
-                          : const SizedBox.shrink(),
+                      if (widget.showCheckBox)
+                        Checkbox(
+                          onChanged: ((v) => {
+                                context
+                                    .read<CartBloc>()
+                                    .add(CartEvent.updateSelectedItem(
+                                      item: widget.cartItem,
+                                    )),
+                              }),
+                          value: context
+                              .read<CartBloc>()
+                              .state
+                              .selectedItemsMaterialNumber
+                              .contains(
+                                widget.cartItem.materialInfo.materialNumber,
+                              ),
+                        ),
                       Expanded(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -140,29 +141,21 @@ class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
                                 ),
                               ],
                             ),
-                            taxDetails.isNotEmpty
-                                ? Text(
-                                    taxDetails,
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1,
-                                  )
-                                : const SizedBox.shrink(),
                             Text(
                               widget.cartItem.materialInfo.materialDescription,
                               style: Theme.of(context).textTheme.bodyText1,
                             ),
-                            widget.cartItem.isDefaultMDEnabled
-                                ? Text(
-                                    widget.cartItem.materialInfo
-                                        .defaultMaterialDescription,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .subtitle2
-                                        ?.apply(
-                                          color: ZPColors.lightGray,
-                                        ),
-                                  )
-                                : const SizedBox.shrink(),
+                            if (widget.cartItem.isDefaultMDEnabled)
+                              Text(
+                                widget.cartItem.materialInfo
+                                    .defaultMaterialDescription,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle2
+                                    ?.apply(
+                                      color: ZPColors.lightGray,
+                                    ),
+                              ),
                             Text(
                               widget.cartItem.materialInfo.principalData
                                   .principalName,
@@ -171,7 +164,7 @@ class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
                                         color: ZPColors.lightGray,
                                       ),
                             ),
-                            GestureDetector(
+                            InkWell(
                               key: const Key('priceOverride'),
                               onTap: () async {
                                 await showModalBottomSheet<void>(
@@ -208,50 +201,144 @@ class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  !widget.cartItem.salesOrgConfig
-                                          .hideStockDisplay
-                                      ? Text(
-                                          '${'In Stock : '.tr()}${widget.cartItem.stockInfo.inStock.getOrDefaultValue('')}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1
-                                              ?.apply(
-                                                color: ZPColors.lightGray,
-                                              ),
-                                        )
-                                      : const SizedBox.shrink(),
-                                  widget.cartItem.salesOrgConfig
-                                          .expiryDateDisplay
-                                      ? Text(
-                                          '${'Expiry Date : '.tr()}${widget.cartItem.stockInfo.expiryDate}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1
-                                              ?.apply(
-                                                color: ZPColors.lightGray,
-                                              ),
-                                        )
-                                      : const SizedBox.shrink(),
-
-                                  widget.cartItem.isEnableVat
-                                      ? Text(
-                                          '${'Price before ${widget.taxCode}: '.tr()}${widget.cartItem.display(PriceType.unitPriceBeforeGst)}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1
-                                              ?.apply(
-                                                color: isPriceOverride
-                                                    ? ZPColors.red
-                                                    : ZPColors.lightGray,
-                                                decoration: widget
-                                                        .cartItem
-                                                        .salesOrgConfig
-                                                        .priceOverride
-                                                    ? TextDecoration.underline
-                                                    : TextDecoration.none,
-                                              ),
-                                        )
-                                      : const SizedBox.shrink(),
+                                  Text(
+                                    '${'Material type : '.tr()}${widget.cartItem.toSavedOrderMaterial().type}',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1
+                                        ?.apply(
+                                          color: ZPColors.lightGray,
+                                        ),
+                                  ),
+                                  Text(
+                                    '${'Unit of Measurement : '.tr()}${widget.cartItem.materialInfo.unitOfMeasurement}',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1
+                                        ?.apply(
+                                          color: ZPColors.lightGray,
+                                        ),
+                                  ),
+                                  if (!widget.cartItem.materialInfo.hidePrice)
+                                    Wrap(
+                                      spacing: 8.0,
+                                      runSpacing: 4.0,
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                            bottom: 3.0,
+                                          ),
+                                          child: Text(
+                                            'Deals : '.tr(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1
+                                                ?.apply(
+                                                  color: ZPColors.lightGray,
+                                                ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  if (widget.cartItem.price.tiers.isNotEmpty)
+                                    Wrap(
+                                      spacing: 8.0,
+                                      runSpacing: 4.0,
+                                      children: widget
+                                          .cartItem.price.priceTireItem
+                                          .map((e) => Container(
+                                                height: 25.0,
+                                                width: 130.0,
+                                                decoration: const BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: AssetImage(
+                                                      'assets/images/tierpriceback.png',
+                                                    ),
+                                                    fit: BoxFit.fill,
+                                                  ),
+                                                ),
+                                                child: Center(
+                                                  child: RichText(
+                                                    text: TextSpan(
+                                                      children: <TextSpan>[
+                                                        TextSpan(
+                                                          text:
+                                                              "${"Buy ".tr()}${e.quantity} ${"or more".tr()}: ",
+                                                          style:
+                                                              const TextStyle(
+                                                            fontSize: 9,
+                                                            color: Colors.white,
+                                                            fontFamily:
+                                                                'Poppins',
+                                                          ),
+                                                        ),
+                                                        TextSpan(
+                                                          text: StringUtils
+                                                              .displayPrice(
+                                                            context
+                                                                .read<
+                                                                    SalesOrgBloc>()
+                                                                .state
+                                                                .configs,
+                                                            e.rate,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ))
+                                          .toList(),
+                                    ),
+                                  if (!widget
+                                      .cartItem.salesOrgConfig.hideStockDisplay)
+                                    Text(
+                                      '${'In Stock : '.tr()}${widget.cartItem.stockInfo.inStock.getOrDefaultValue('')}',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1
+                                          ?.apply(
+                                            color: ZPColors.lightGray,
+                                          ),
+                                    ),
+                                  Text(
+                                    '${'Quantity: '.tr()}${widget.cartItem.quantity}',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1
+                                        ?.apply(
+                                          color: ZPColors.lightGray,
+                                        ),
+                                  ),
+                                  if (widget.cartItem.salesOrgConfig
+                                      .expiryDateDisplay)
+                                    Text(
+                                      '${'Expiry Date : '.tr()}${widget.cartItem.stockInfo.expiryDate.getExpiryDate}',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1
+                                          ?.apply(
+                                            color: ZPColors.lightGray,
+                                          ),
+                                    ),
+                                  if (widget.cartItem.isEnableVat)
+                                    Text(
+                                      '${'Price before ${widget.taxCode}: '.tr()}${widget.cartItem.display(PriceType.unitPriceBeforeGst)}',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1
+                                          ?.apply(
+                                            color: isPriceOverride
+                                                ? ZPColors.red
+                                                : ZPColors.lightGray,
+                                            decoration: widget
+                                                    .cartItem
+                                                    .salesOrgConfig
+                                                    .priceOverride
+                                                ? TextDecoration.underline
+                                                : TextDecoration.none,
+                                          ),
+                                    ),
                                   Text(
                                     '${'List Price: '.tr()}${widget.cartItem.display(PriceType.listPrice)}',
                                     key: const Key('listPrice'),
@@ -268,7 +355,6 @@ class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
                                               : TextDecoration.none,
                                         ),
                                   ),
-                                  //.state.salesOrganisation.p
                                   Text(
                                     '${'Unit Price: '.tr()}${widget.cartItem.display(PriceType.unitPrice)}',
                                     style: Theme.of(context)
@@ -277,13 +363,42 @@ class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
                                         ?.apply(
                                           color: isPriceOverride
                                               ? ZPColors.red
-                                              : ZPColors.black,
+                                              : ZPColors.lightGray,
                                           decoration: widget.cartItem
                                                   .salesOrgConfig.priceOverride
                                               ? TextDecoration.underline
                                               : TextDecoration.none,
                                         ),
                                   ),
+                                  Text(
+                                    '${'Total Price: '.tr()}${widget.cartItem.display(PriceType.unitPriceTotal)}',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1
+                                        ?.apply(
+                                          color: isPriceOverride
+                                              ? ZPColors.red
+                                              : ZPColors.lightGray,
+                                          decoration: widget.cartItem
+                                                  .salesOrgConfig.priceOverride
+                                              ? TextDecoration.underline
+                                              : TextDecoration.none,
+                                        ),
+                                  ),
+                                  if (context
+                                      .read<SalesOrgBloc>()
+                                      .state
+                                      .configs
+                                      .enableRemarks)
+                                    Text(
+                                      '${'Remarks : '.tr()}${widget.cartItem.materialInfo.remarks}',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1
+                                          ?.apply(
+                                            color: ZPColors.lightGray,
+                                          ),
+                                    ),
                                 ],
                               ),
                             ),
@@ -436,21 +551,20 @@ class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
               ),
             ),
           ),
-          widget.cartItem.materialInfo.remarks.isEmpty &&
-                  context.read<SalesOrgBloc>().state.configs.enableRemarks
-              ? AddRemarksButton(
-                  key: const Key('addRemarks'),
-                  onPressed: () {
-                    AddRemarkDialog.show(
-                      context: context,
-                      cartItem: widget.cartItem,
-                      isEdit: false,
-                      bonusItem: widget.cartItem.materialInfo,
-                      isBonus: false,
-                    );
-                  },
-                )
-              : const SizedBox.shrink(),
+          if (widget.cartItem.materialInfo.remarks.isEmpty &&
+              context.read<SalesOrgBloc>().state.configs.enableRemarks)
+            AddRemarksButton(
+              key: const Key('addRemarks'),
+              onPressed: () {
+                AddRemarkDialog.show(
+                  context: context,
+                  cartItem: widget.cartItem,
+                  isEdit: false,
+                  bonusItem: widget.cartItem.materialInfo,
+                  isBonus: false,
+                );
+              },
+            ),
           BounsTile(
             cartItem: widget.cartItem,
           ),

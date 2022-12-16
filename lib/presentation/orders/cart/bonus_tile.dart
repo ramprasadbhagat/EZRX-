@@ -19,78 +19,79 @@ class BounsTile extends StatelessWidget {
       key: const Key('bonusTile'),
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: custom.ExpansionTile(
-            initiallyExpanded: true,
-            title: Text(
-              'Bonuses'.tr(),
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
-            children: <Widget>[
-              if (cartItem.isEligibleAddAdditionBonus &&
-                  context.read<EligibilityBloc>().state.getBonusOverRide)
-                Row(
-                  key: const ValueKey('addBonusButton'),
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BonusAddPage(
-                                cartItem: cartItem,
-                              ),
-                            ),
-                          );
-                        },
-                        child: Row(
-                          children: <Widget>[
-                            const Icon(
-                              Icons.add,
-                              color: ZPColors.kPrimaryColor,
-                            ),
-                            RichText(
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text: 'Add Bonus'.tr(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText1
-                                            ?.apply(
-                                              color: ZPColors.kPrimaryColor,
+            padding: const EdgeInsets.all(8.0),
+            child: (cartItem.isEligibleAddAdditionBonus &&
+                    context.read<EligibilityBloc>().state.getBonusOverRide)
+                ? custom.ExpansionTile(
+                    initiallyExpanded: true,
+                    title: Text(
+                      'Bonuses'.tr(),
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    children: <Widget>[
+                      Row(
+                        key: const ValueKey('addBonusButton'),
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          SizedBox(
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => BonusAddPage(
+                                      cartItem: cartItem,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Row(
+                                children: <Widget>[
+                                  const Icon(
+                                    Icons.add,
+                                    color: ZPColors.kPrimaryColor,
+                                  ),
+                                  RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          children: [
+                                            TextSpan(
+                                              text: 'Add Bonus'.tr(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText1
+                                                  ?.apply(
+                                                    color:
+                                                        ZPColors.kPrimaryColor,
+                                                  ),
                                             ),
-                                      ),
-                                    ],
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-              ...cartItem.getAddedBonusList.map(
-                (e) {
-                  return BonusItemTile(
-                    key: ValueKey(
-                      '${e.materialInfo.materialNumber}${e.additionalBonusFlag}${e.qty}',
-                    ),
-                    bonusItem: e,
-                    cartItem: cartItem,
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
+                      ...cartItem.getAddedBonusList.map(
+                        (e) {
+                          return BonusItemTile(
+                            key: ValueKey(
+                              '${e.materialInfo.materialNumber}${e.additionalBonusFlag}${e.qty}',
+                            ),
+                            bonusItem: e,
+                            cartItem: cartItem,
+                          );
+                        },
+                      ),
+                    ],
+                  )
+                : const SizedBox.shrink(),),
       ],
     );
   }

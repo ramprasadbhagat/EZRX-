@@ -530,6 +530,7 @@ class DeliveryDate extends ValueObject<String> {
 
   const DeliveryDate._(this.value);
 }
+
 class OrderNumber extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -542,7 +543,19 @@ class OrderNumber extends ValueObject<String> {
     return naIfEmpty(removeLeadingZero(value.getOrElse(() => '')));
   }
 
-  
-
   const OrderNumber._(this.value);
+}
+
+class ExpiryDate extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory ExpiryDate(String input) {
+    return ExpiryDate._(validateStringNotEmpty(input));
+  }
+  String get getExpiryDate {
+    return naIfEmpty(value.getOrElse(() => ''));
+  }
+
+  const ExpiryDate._(this.value);
 }

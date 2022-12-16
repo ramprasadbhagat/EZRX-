@@ -672,7 +672,8 @@ class _CartDetails extends StatelessWidget {
                 state.subtotal,
               ),
             ),
-            salesOrgConfig.enableVat || salesOrgConfig.enableTaxAtTotalLevelOnly
+            salesOrgConfig.enableVat && !salesOrgConfig.currency.isVN ||
+                    salesOrgConfig.enableTaxAtTotalLevelOnly
                 ? BalanceTextRow(
                     keyText: '$taxCode in %'.tr(),
                     valueText: '${salesOrgConfig.vatValue}%',

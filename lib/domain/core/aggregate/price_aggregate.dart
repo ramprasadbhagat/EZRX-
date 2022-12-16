@@ -322,6 +322,7 @@ class PriceAggregate with _$PriceAggregate {
     return materialInfo.principalData.principalCode.isSubmitAllowedForClient();
   }
 
+  
   List<MaterialItemBonus> get getAddedBonusList =>
       List<MaterialItemBonus>.from(addedBonusList)
         ..sort(
@@ -342,3 +343,4 @@ enum PriceType {
   unitPriceTotal,
   unitPriceBeforeGst,
 }
+  
