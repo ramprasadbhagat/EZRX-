@@ -62,6 +62,8 @@ class HistoryDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final disableCreateOrder =
         context.read<UserBloc>().state.user.disableCreateOrder;
+    final customerCodeInfo =
+        context.read<EligibilityBloc>().state.customerCodeInfo;
 
     return Scaffold(
       key: const ValueKey('orderHistoryDetailsPage'),
@@ -148,11 +150,13 @@ class HistoryDetails extends StatelessWidget {
                     ),
                     const _SoldToAddress(),
                     const _ShipToAddress(),
-                    context.read<EligibilityBloc>().state.isBillToInfo
-                        ? _BillToAddress(
-                            billToInfo: billToInfo,
-                          )
-                        : const SizedBox.shrink(),
+                    if (context.read<EligibilityBloc>().state.isBillToEnable &&
+                        customerCodeInfo.billToInfos.isNotEmpty &&
+                        customerCodeInfo.customerCodeSoldTo !=
+                            billToInfo.billToCustomerCode)
+                      _BillToAddress(
+                        billToInfo: billToInfo,
+                      ),
                     if (context
                             .read<EligibilityBloc>()
                             .state
