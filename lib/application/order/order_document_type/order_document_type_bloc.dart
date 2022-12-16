@@ -19,39 +19,44 @@ class OrderDocumentTypeBloc
 
   Future<void> _onEvent(event, emit) async {
     await event.map(
-        initialized: (_) => emit(OrderDocumentTypeState.initial()),
-        fetch: (e) async {
-          emit(state.copyWith(isSubmitting: true,));
-          final failureOrSuccess =
-              await orderDocumentTypeRepository.getOrderDocumentTypList(
-                  salesOrganisation: e.salesOrganisation,);
-          failureOrSuccess.fold(
-            (failure) => emit(state.copyWith(
-              orderDocumentTypeListFailureOrSuccessOption:
-                  optionOf(failureOrSuccess),
-              isSubmitting: false,
-            )),
-            (orderDocumentTypeList) => emit(state.copyWith(
+      initialized: (_) => emit(OrderDocumentTypeState.initial()),
+      fetch: (e) async {
+        emit(state.copyWith(isSubmitting: true,));
+        final failureOrSuccess =
+            await orderDocumentTypeRepository.getOrderDocumentTypList(
+          salesOrganisation: e.salesOrganisation,);
+        failureOrSuccess.fold(
+          (failure) => emit(state.copyWith(
+            orderDocumentTypeListFailureOrSuccessOption:
+                optionOf(failureOrSuccess),
+            isSubmitting: false,
+          )),
+          (orderDocumentTypeList) {
+            if (e.isEDI) {
+              orderDocumentTypeList.removeWhere((item) => item.documentType.contains('ZPOR'));
+            }
+            emit(state.copyWith(
               orderDocumentTypeListFailureOrSuccessOption:
                   optionOf(failureOrSuccess),
               isSubmitting: false,
               orderDocumentTypeList: orderDocumentTypeList,
-            )),
-          );
-        },
-        selectedOrderType: (e) {
-          if(e.isReasonSelected){
-            emit(state.copyWith(
-              isReasonSelected: true,
-              selectedReason: e.selectedOrderType,
             ));
-          }else{
-            emit(state.copyWith(
-              isOrderTypeSelected: true,
-              selectedOrderType: e.selectedOrderType,
-            ));
-          }
-        },
+          },
         );
+      },
+      selectedOrderType: (e) {
+        if(e.isReasonSelected){
+          emit(state.copyWith(
+            isReasonSelected: true,
+            selectedReason: e.selectedOrderType,
+          ));
+        }else{
+          emit(state.copyWith(
+            isOrderTypeSelected: true,
+            selectedOrderType: e.selectedOrderType,
+          ));
+        }
+      },
+    );
   }
 }

@@ -50,7 +50,7 @@ void main() {
         );
       },
       act: (OrderDocumentTypeBloc bloc) =>
-          bloc.add(OrderDocumentTypeEvent.fetch(salesOrganisation: mockSalesOrganisation)),
+          bloc.add(OrderDocumentTypeEvent.fetch(salesOrganisation: mockSalesOrganisation,isEDI: false)),
       expect: () => [
         OrderDocumentTypeState.initial().copyWith(
           isSubmitting: true,
@@ -75,7 +75,7 @@ void main() {
         );
       },
       act: (OrderDocumentTypeBloc bloc) =>
-          bloc.add(OrderDocumentTypeEvent.fetch(salesOrganisation: mockSalesOrganisation)),
+          bloc.add(OrderDocumentTypeEvent.fetch(salesOrganisation: mockSalesOrganisation, isEDI: false)),
       expect: () => [
         OrderDocumentTypeState.initial().copyWith(
           isSubmitting: true,

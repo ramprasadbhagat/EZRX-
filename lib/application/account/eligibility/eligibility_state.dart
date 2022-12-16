@@ -124,6 +124,9 @@ class EligibilityState with _$EligibilityState {
     return salesOrganisation.salesOrg.isSg && !user.role.type.isSalesRep;
   }
 
+  bool get isSalesRep => user.role.type.isSalesRep;
+  bool get isEDI => customerCodeInfo.status.isEDI;
+
   bool get isBillToInfo {
     final billToInfo = customerCodeInfo.billToInfos.isNotEmpty
         ? customerCodeInfo.billToInfos.first

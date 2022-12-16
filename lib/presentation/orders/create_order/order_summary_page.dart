@@ -23,12 +23,14 @@ import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/orders/core/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_helper.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_bundle_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_material_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
+import 'package:ezrxmobile/presentation/orders/core/edi_user_continue_note.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/additional_details.dart';
@@ -124,6 +126,7 @@ class _BodyContent extends StatelessWidget {
       builder: (context, savedOrderState) {
         return Column(
           children: [
+            const EdiUserBanner(),
             const AccountSuspendedBanner(),
             Expanded(
               child: _WrapStepper(
@@ -227,6 +230,15 @@ class _Stepper extends StatelessWidget {
         .add(const OrderSummaryEvent.stepContinue());
   }
 
+  bool _isCustomerEDI(BuildContext context) {
+    final orderType = context.read<OrderDocumentTypeBloc>().state;
+    final eligibiityState = context.read<EligibilityBloc>().state;
+
+    return eligibiityState.isEDI
+        ? eligibiityState.isSalesRep && orderType.isOrderTypeEDICompatible
+        : !eligibiityState.isEDI;
+  }
+
   void _handleError(BuildContext context, OrderSummaryState state) {
     state.apiFailureOrSuccessOption.fold(
       () {},
@@ -278,67 +290,76 @@ class _Stepper extends StatelessWidget {
         return Stepper(
           margin: const EdgeInsets.fromLTRB(50, 10, 10, 10),
           controlsBuilder: (context, details) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    key: Key(details.currentStep == state.maxSteps
-                        ? 'submitButtonKey'
-                        : 'continueButtonKey'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: details.currentStep == state.maxSteps
-                          ? eligibleForOrderSubmit && !isAccountSuspended
-                              ? ZPColors.primary
-                              : ZPColors.lightGray
-                          : ZPColors.primary,
-                    ),
-                    onPressed: () {
-                      details.currentStep == state.maxSteps
-                          ? eligibleForOrderSubmit && !isAccountSuspended
-                              ? _validateForm(
-                                  context: context,
-                                )
-                              : null
-                          : details.currentStep == state.additionalDetailsStep
-                              ? _validateForm(
-                                  context: context,
-                                )
-                              : _stepContinue(context);
-                    },
-                    child: details.currentStep == state.maxSteps
-                        ? LoadingShimmer.withChild(
-                            enabled: state.isSubmitting,
-                            child: const Text('Submit').tr(),
-                          )
-                        : const Text('Continue').tr(),
-                  ),
-                  ElevatedButton(
-                    style:
-                        Theme.of(context).elevatedButtonTheme.style!.copyWith(
+            return Column(
+              children: [
+                EdiUserContinueNote(
+                    maxStepsReached: details.currentStep == state.maxSteps,),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        key: Key(details.currentStep == state.maxSteps
+                            ? 'submitButtonKey'
+                            : 'continueButtonKey'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: details.currentStep == state.maxSteps
+                              ? eligibleForOrderSubmit &&
+                                      !isAccountSuspended &&
+                                      _isCustomerEDI(context)
+                                  ? ZPColors.primary
+                                  : ZPColors.lightGray
+                              : ZPColors.primary,
+                        ),
+                        onPressed: () {
+                          details.currentStep == state.maxSteps
+                              ? eligibleForOrderSubmit &&
+                                      !isAccountSuspended &&
+                                      _isCustomerEDI(context)
+                                  ? _validateForm(
+                                      context: context,
+                                    )
+                                  : null
+                              : details.currentStep == state.additionalDetailsStep
+                                  ? _validateForm(
+                                      context: context,
+                                    )
+                                  : _stepContinue(context);
+                        },
+                        child: details.currentStep == state.maxSteps
+                            ? LoadingShimmer.withChild(
+                                enabled: state.isSubmitting,
+                                child: const Text('Submit').tr(),
+                              )
+                            : const Text('Continue').tr(),
+                      ),
+                      ElevatedButton(
+                        style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
                               backgroundColor: MaterialStateProperty.all(
                                 ZPColors.darkGray,
                               ),
                             ),
-                    onPressed: () async {
-                      if (details.currentStep == state.maxSteps) {
-                        _saveOrder(context);
-                      } else {
-                        context
-                            .read<OrderSummaryBloc>()
-                            .add(const OrderSummaryEvent.stepCancel());
-                      }
-                    },
-                    child: details.currentStep == state.maxSteps
-                        ? LoadingShimmer.withChild(
-                            enabled: savedOrderState.isCreating,
-                            child: const Text('Save').tr(),
-                          )
-                        : const Text('Back').tr(),
+                        onPressed: () async {
+                          if (details.currentStep == state.maxSteps) {
+                            _saveOrder(context);
+                          } else {
+                            context
+                                .read<OrderSummaryBloc>()
+                                .add(const OrderSummaryEvent.stepCancel());
+                          }
+                        },
+                        child: details.currentStep == state.maxSteps
+                            ? LoadingShimmer.withChild(
+                                enabled: savedOrderState.isCreating,
+                                child: const Text('Save').tr(),
+                              )
+                            : const Text('Back').tr(),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             );
           },
           physics: const BouncingScrollPhysics(),

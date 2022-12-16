@@ -207,6 +207,10 @@ class Status extends ValueObject<String> {
     return value.getOrElse(() => '').contains('Z1');
   }
 
+  bool get isEDI {
+    return value.getOrElse(() => '') == 'EDI';
+  }
+
   bool get isSuspended => isContain01 || isContainZ1;
 
   const Status._(this.value);

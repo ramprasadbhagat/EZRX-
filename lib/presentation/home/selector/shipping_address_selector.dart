@@ -77,7 +77,12 @@ class ShipCodeSelector extends StatelessWidget {
                       selectedShipTo: state.shipToInfo,
                     ),
                   );
-
+              context.read<OrderDocumentTypeBloc>().add(
+                    OrderDocumentTypeEvent.fetch(
+                      salesOrganisation: context.read<SalesOrgBloc>().state.salesOrganisation,
+                      isEDI: context.read<CustomerCodeBloc>().state.customerCodeInfo.status.isEDI,
+                    ),
+                  );
               context.read<MaterialListBloc>().add(
                     MaterialListEvent.fetch(
                       user: context.read<UserBloc>().state.user,

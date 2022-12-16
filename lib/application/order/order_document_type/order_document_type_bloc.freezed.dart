@@ -19,7 +19,8 @@ mixin _$OrderDocumentTypeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(SalesOrganisation salesOrganisation) fetch,
+    required TResult Function(SalesOrganisation salesOrganisation, bool isEDI)
+        fetch,
     required TResult Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)
         selectedOrderType,
@@ -28,7 +29,7 @@ mixin _$OrderDocumentTypeEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult? Function(SalesOrganisation salesOrganisation, bool isEDI)? fetch,
     TResult? Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)?
         selectedOrderType,
@@ -37,7 +38,7 @@ mixin _$OrderDocumentTypeEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult Function(SalesOrganisation salesOrganisation, bool isEDI)? fetch,
     TResult Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)?
         selectedOrderType,
@@ -126,7 +127,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(SalesOrganisation salesOrganisation) fetch,
+    required TResult Function(SalesOrganisation salesOrganisation, bool isEDI)
+        fetch,
     required TResult Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)
         selectedOrderType,
@@ -138,7 +140,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult? Function(SalesOrganisation salesOrganisation, bool isEDI)? fetch,
     TResult? Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)?
         selectedOrderType,
@@ -150,7 +152,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult Function(SalesOrganisation salesOrganisation, bool isEDI)? fetch,
     TResult Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)?
         selectedOrderType,
@@ -207,7 +209,7 @@ abstract class _$$_FetchOrderDocumentTypeCopyWith<$Res> {
           $Res Function(_$_FetchOrderDocumentType) then) =
       __$$_FetchOrderDocumentTypeCopyWithImpl<$Res>;
   @useResult
-  $Res call({SalesOrganisation salesOrganisation});
+  $Res call({SalesOrganisation salesOrganisation, bool isEDI});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
@@ -225,12 +227,17 @@ class __$$_FetchOrderDocumentTypeCopyWithImpl<$Res>
   @override
   $Res call({
     Object? salesOrganisation = null,
+    Object? isEDI = null,
   }) {
     return _then(_$_FetchOrderDocumentType(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
+      isEDI: null == isEDI
+          ? _value.isEDI
+          : isEDI // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -246,14 +253,17 @@ class __$$_FetchOrderDocumentTypeCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_FetchOrderDocumentType implements _FetchOrderDocumentType {
-  const _$_FetchOrderDocumentType({required this.salesOrganisation});
+  const _$_FetchOrderDocumentType(
+      {required this.salesOrganisation, required this.isEDI});
 
   @override
   final SalesOrganisation salesOrganisation;
+  @override
+  final bool isEDI;
 
   @override
   String toString() {
-    return 'OrderDocumentTypeEvent.fetch(salesOrganisation: $salesOrganisation)';
+    return 'OrderDocumentTypeEvent.fetch(salesOrganisation: $salesOrganisation, isEDI: $isEDI)';
   }
 
   @override
@@ -262,11 +272,12 @@ class _$_FetchOrderDocumentType implements _FetchOrderDocumentType {
         (other.runtimeType == runtimeType &&
             other is _$_FetchOrderDocumentType &&
             (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation));
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.isEDI, isEDI) || other.isEDI == isEDI));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrganisation);
+  int get hashCode => Object.hash(runtimeType, salesOrganisation, isEDI);
 
   @JsonKey(ignore: true)
   @override
@@ -279,38 +290,39 @@ class _$_FetchOrderDocumentType implements _FetchOrderDocumentType {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(SalesOrganisation salesOrganisation) fetch,
+    required TResult Function(SalesOrganisation salesOrganisation, bool isEDI)
+        fetch,
     required TResult Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)
         selectedOrderType,
   }) {
-    return fetch(salesOrganisation);
+    return fetch(salesOrganisation, isEDI);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult? Function(SalesOrganisation salesOrganisation, bool isEDI)? fetch,
     TResult? Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)?
         selectedOrderType,
   }) {
-    return fetch?.call(salesOrganisation);
+    return fetch?.call(salesOrganisation, isEDI);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult Function(SalesOrganisation salesOrganisation, bool isEDI)? fetch,
     TResult Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)?
         selectedOrderType,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(salesOrganisation);
+      return fetch(salesOrganisation, isEDI);
     }
     return orElse();
   }
@@ -352,10 +364,11 @@ class _$_FetchOrderDocumentType implements _FetchOrderDocumentType {
 
 abstract class _FetchOrderDocumentType implements OrderDocumentTypeEvent {
   const factory _FetchOrderDocumentType(
-          {required final SalesOrganisation salesOrganisation}) =
-      _$_FetchOrderDocumentType;
+      {required final SalesOrganisation salesOrganisation,
+      required final bool isEDI}) = _$_FetchOrderDocumentType;
 
   SalesOrganisation get salesOrganisation;
+  bool get isEDI;
   @JsonKey(ignore: true)
   _$$_FetchOrderDocumentTypeCopyWith<_$_FetchOrderDocumentType> get copyWith =>
       throw _privateConstructorUsedError;
@@ -449,7 +462,8 @@ class _$_SelectedOrderType implements _SelectedOrderType {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(SalesOrganisation salesOrganisation) fetch,
+    required TResult Function(SalesOrganisation salesOrganisation, bool isEDI)
+        fetch,
     required TResult Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)
         selectedOrderType,
@@ -461,7 +475,7 @@ class _$_SelectedOrderType implements _SelectedOrderType {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult? Function(SalesOrganisation salesOrganisation, bool isEDI)? fetch,
     TResult? Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)?
         selectedOrderType,
@@ -473,7 +487,7 @@ class _$_SelectedOrderType implements _SelectedOrderType {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult Function(SalesOrganisation salesOrganisation, bool isEDI)? fetch,
     TResult Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)?
         selectedOrderType,

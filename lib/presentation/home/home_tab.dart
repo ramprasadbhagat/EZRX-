@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/presentation/core/cart_button.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/orders/core/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/home/selector/sales_org_selector.dart';
@@ -53,6 +54,7 @@ class HomeTab extends StatelessWidget {
 
             return ListView(
               children: [
+                const EdiUserBanner(),
                 const AccountSuspendedBanner(),
                 const HomeBanner(
                   key: ValueKey('HomeBanner'),

@@ -153,11 +153,6 @@ class SalesOrgSelector extends StatelessWidget {
             salesOrganisation: state.salesOrganisation,
           ),
         );
-    context.read<OrderDocumentTypeBloc>().add(
-          OrderDocumentTypeEvent.fetch(
-            salesOrganisation: state.salesOrganisation,
-          ),
-        );
 
     if (fetchCustomer) {
       context.read<CustomerCodeBloc>().add(
