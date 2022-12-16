@@ -40,14 +40,14 @@ class OrderHistoryDetailsRepository implements IOrderHistoryDetailsRepository {
               .getOrderHistoryDetailsForSalesRep(
               loginUserType: user.role.type.loginUserType,
               companyName: '',
-              orderId: orderHistoryItem.orderNumber,
+              orderId: orderHistoryItem.orderNumber.displayOrderNumber,
               language: '',
               userName: user.username.getOrCrash(),
             )
           : await orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
               loginUserType: user.role.type.loginUserType,
               companyName: '',
-              orderId: orderHistoryItem.orderNumber,
+              orderId: orderHistoryItem.orderNumber.displayOrderNumber,
               language: '',
             );
 

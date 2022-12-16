@@ -42,7 +42,7 @@ mixin _$OrderHistoryItemDto {
   double get tax => throw _privateConstructorUsedError;
   @JsonKey(name: 'OrderType')
   String get orderType => throw _privateConstructorUsedError;
-  @JsonKey(name: 'OrderNumber', defaultValue: 'NA')
+  @JsonKey(name: 'OrderNumber', defaultValue: '')
   String get orderNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'EZRXNumber')
   String get ezrxNumber => throw _privateConstructorUsedError;
@@ -79,7 +79,7 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
       @JsonKey(name: 'LineNumber') String lineNumber,
       @JsonKey(name: 'Tax', defaultValue: 0.0) double tax,
       @JsonKey(name: 'OrderType') String orderType,
-      @JsonKey(name: 'OrderNumber', defaultValue: 'NA') String orderNumber,
+      @JsonKey(name: 'OrderNumber', defaultValue: '') String orderNumber,
       @JsonKey(name: 'EZRXNumber') String ezrxNumber,
       @JsonKey(name: 'CreatedDate') String createdDate,
       @JsonKey(name: 'CreatedTime') String createdTime,
@@ -211,7 +211,7 @@ abstract class _$$_OrderHistoryItemDtoCopyWith<$Res>
       @JsonKey(name: 'LineNumber') String lineNumber,
       @JsonKey(name: 'Tax', defaultValue: 0.0) double tax,
       @JsonKey(name: 'OrderType') String orderType,
-      @JsonKey(name: 'OrderNumber', defaultValue: 'NA') String orderNumber,
+      @JsonKey(name: 'OrderNumber', defaultValue: '') String orderNumber,
       @JsonKey(name: 'EZRXNumber') String ezrxNumber,
       @JsonKey(name: 'CreatedDate') String createdDate,
       @JsonKey(name: 'CreatedTime') String createdTime,
@@ -325,40 +325,23 @@ class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
   const _$_OrderHistoryItemDto(
-      {@JsonKey(name: 'MaterialCode')
-          required this.materialNumber,
-      @JsonKey(name: 'MaterialDescription')
-          required this.materialDescription,
-      @JsonKey(name: 'Qty')
-          required this.qty,
-      @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
-          required this.unitPrice,
-      @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
-          required this.totalPrice,
-      @JsonKey(name: 'Status', defaultValue: 'NA')
-          required this.status,
-      @JsonKey(name: 'DeliveryDate')
-          required this.deliveryDate,
-      @JsonKey(name: 'DeliveryTime')
-          required this.deliveryTime,
-      @JsonKey(name: 'LineNumber')
-          required this.lineNumber,
-      @JsonKey(name: 'Tax', defaultValue: 0.0)
-          required this.tax,
-      @JsonKey(name: 'OrderType')
-          required this.orderType,
-      @JsonKey(name: 'OrderNumber', defaultValue: 'NA')
-          required this.orderNumber,
-      @JsonKey(name: 'EZRXNumber')
-          required this.ezrxNumber,
-      @JsonKey(name: 'CreatedDate')
-          required this.createdDate,
-      @JsonKey(name: 'CreatedTime')
-          required this.createdTime,
-      @JsonKey(name: 'OrderBy')
-          required this.orderBy,
-      @JsonKey(name: 'PurchaseOrderType')
-          required this.purchaseOrderType})
+      {@JsonKey(name: 'MaterialCode') required this.materialNumber,
+      @JsonKey(name: 'MaterialDescription') required this.materialDescription,
+      @JsonKey(name: 'Qty') required this.qty,
+      @JsonKey(name: 'UnitPrice', defaultValue: 0.0) required this.unitPrice,
+      @JsonKey(name: 'TotalPrice', defaultValue: 0.0) required this.totalPrice,
+      @JsonKey(name: 'Status', defaultValue: 'NA') required this.status,
+      @JsonKey(name: 'DeliveryDate') required this.deliveryDate,
+      @JsonKey(name: 'DeliveryTime') required this.deliveryTime,
+      @JsonKey(name: 'LineNumber') required this.lineNumber,
+      @JsonKey(name: 'Tax', defaultValue: 0.0) required this.tax,
+      @JsonKey(name: 'OrderType') required this.orderType,
+      @JsonKey(name: 'OrderNumber', defaultValue: '') required this.orderNumber,
+      @JsonKey(name: 'EZRXNumber') required this.ezrxNumber,
+      @JsonKey(name: 'CreatedDate') required this.createdDate,
+      @JsonKey(name: 'CreatedTime') required this.createdTime,
+      @JsonKey(name: 'OrderBy') required this.orderBy,
+      @JsonKey(name: 'PurchaseOrderType') required this.purchaseOrderType})
       : super._();
 
   factory _$_OrderHistoryItemDto.fromJson(Map<String, dynamic> json) =>
@@ -398,7 +381,7 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
   @JsonKey(name: 'OrderType')
   final String orderType;
   @override
-  @JsonKey(name: 'OrderNumber', defaultValue: 'NA')
+  @JsonKey(name: 'OrderNumber', defaultValue: '')
   final String orderNumber;
   @override
   @JsonKey(name: 'EZRXNumber')
@@ -519,7 +502,7 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
           required final double tax,
       @JsonKey(name: 'OrderType')
           required final String orderType,
-      @JsonKey(name: 'OrderNumber', defaultValue: 'NA')
+      @JsonKey(name: 'OrderNumber', defaultValue: '')
           required final String orderNumber,
       @JsonKey(name: 'EZRXNumber')
           required final String ezrxNumber,
@@ -570,7 +553,7 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   @JsonKey(name: 'OrderType')
   String get orderType;
   @override
-  @JsonKey(name: 'OrderNumber', defaultValue: 'NA')
+  @JsonKey(name: 'OrderNumber', defaultValue: '')
   String get orderNumber;
   @override
   @JsonKey(name: 'EZRXNumber')

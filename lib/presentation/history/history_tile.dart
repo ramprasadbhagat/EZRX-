@@ -53,7 +53,7 @@ class OrderHistoryListTile extends StatelessWidget {
       onTap: () {
         locator<CountlyService>()
             .addCountlyEvent('view Order Details', segmentation: {
-          'order_id': orderHistoryItem.orderNumber,
+          'order_id': orderHistoryItem.orderNumber.displayOrderNumber,
           'createdDate': orderHistoryItem.createdDate,
           'selectedSalesOrg': context
               .read<SalesOrgBloc>()
@@ -117,7 +117,7 @@ class OrderHistoryListTile extends StatelessWidget {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      '#${orderHistoryItem.orderNumber}',
+                      '#${orderHistoryItem.orderNumber.displayOrderNumber}',
                       softWrap: true,
                       style: const TextStyle(
                         fontSize: 14.0,

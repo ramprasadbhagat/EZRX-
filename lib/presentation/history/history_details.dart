@@ -73,7 +73,7 @@ class HistoryDetails extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_ios_new_sharp),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text('#${orderHistoryItem.orderNumber}'.tr()),
+        title: Text('#${orderHistoryItem.orderNumber.displayOrderNumber}'.tr()),
         actions: disableCreateOrder
             ? <Widget>[]
             : <Widget>[

@@ -20,7 +20,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     @JsonKey(name: 'LineNumber') required String lineNumber,
     @JsonKey(name: 'Tax', defaultValue: 0.0) required double tax,
     @JsonKey(name: 'OrderType') required String orderType,
-    @JsonKey(name: 'OrderNumber', defaultValue: 'NA')
+    @JsonKey(name: 'OrderNumber', defaultValue: '')
         required String orderNumber,
     @JsonKey(name: 'EZRXNumber') required String ezrxNumber,
     @JsonKey(name: 'CreatedDate') required String createdDate,
@@ -41,7 +41,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       lineNumber: orderHistoryItem.lineNumber,
       tax: orderHistoryItem.tax,
       orderType: orderHistoryItem.orderType,
-      orderNumber: orderHistoryItem.orderNumber,
+      orderNumber: orderHistoryItem.orderNumber.getOrCrash(),
       ezrxNumber: orderHistoryItem.ezrxNumber,
       createdDate: orderHistoryItem.createdDate,
       createdTime: orderHistoryItem.createdTime,
@@ -62,7 +62,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       lineNumber: lineNumber,
       tax: tax,
       orderType: orderType,
-      orderNumber: orderNumber,
+      orderNumber:OrderNumber(orderNumber) ,
       ezrxNumber: ezrxNumber,
       createdDate: createdDate,
       createdTime: createdTime,

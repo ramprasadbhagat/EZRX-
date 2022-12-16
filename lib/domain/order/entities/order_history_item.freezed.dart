@@ -27,7 +27,7 @@ mixin _$OrderHistoryItem {
   String get lineNumber => throw _privateConstructorUsedError;
   double get tax => throw _privateConstructorUsedError;
   String get orderType => throw _privateConstructorUsedError;
-  String get orderNumber => throw _privateConstructorUsedError;
+  OrderNumber get orderNumber => throw _privateConstructorUsedError;
   String get ezrxNumber => throw _privateConstructorUsedError;
   String get createdDate => throw _privateConstructorUsedError;
   String get createdTime => throw _privateConstructorUsedError;
@@ -57,7 +57,7 @@ abstract class $OrderHistoryItemCopyWith<$Res> {
       String lineNumber,
       double tax,
       String orderType,
-      String orderNumber,
+      OrderNumber orderNumber,
       String ezrxNumber,
       String createdDate,
       String createdTime,
@@ -144,7 +144,7 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
       orderNumber: null == orderNumber
           ? _value.orderNumber
           : orderNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as OrderNumber,
       ezrxNumber: null == ezrxNumber
           ? _value.ezrxNumber
           : ezrxNumber // ignore: cast_nullable_to_non_nullable
@@ -189,7 +189,7 @@ abstract class _$$_OrderHistoryItemCopyWith<$Res>
       String lineNumber,
       double tax,
       String orderType,
-      String orderNumber,
+      OrderNumber orderNumber,
       String ezrxNumber,
       String createdDate,
       String createdTime,
@@ -274,7 +274,7 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
       orderNumber: null == orderNumber
           ? _value.orderNumber
           : orderNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as OrderNumber,
       ezrxNumber: null == ezrxNumber
           ? _value.ezrxNumber
           : ezrxNumber // ignore: cast_nullable_to_non_nullable
@@ -345,7 +345,7 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
   @override
   final String orderType;
   @override
-  final String orderNumber;
+  final OrderNumber orderNumber;
   @override
   final String ezrxNumber;
   @override
@@ -440,7 +440,7 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
       required final String lineNumber,
       required final double tax,
       required final String orderType,
-      required final String orderNumber,
+      required final OrderNumber orderNumber,
       required final String ezrxNumber,
       required final String createdDate,
       required final String createdTime,
@@ -471,7 +471,7 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   @override
   String get orderType;
   @override
-  String get orderNumber;
+  OrderNumber get orderNumber;
   @override
   String get ezrxNumber;
   @override

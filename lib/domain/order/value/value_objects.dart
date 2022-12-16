@@ -530,3 +530,19 @@ class DeliveryDate extends ValueObject<String> {
 
   const DeliveryDate._(this.value);
 }
+class OrderNumber extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory OrderNumber(String input) {
+    return OrderNumber._(validateStringNotEmpty(input));
+  }
+
+  String get displayOrderNumber {
+    return naIfEmpty(removeLeadingZero(value.getOrElse(() => '')));
+  }
+
+  
+
+  const OrderNumber._(this.value);
+}

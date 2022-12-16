@@ -20,7 +20,7 @@ _$_OrderHistoryItemDto _$$_OrderHistoryItemDtoFromJson(
       lineNumber: json['LineNumber'] as String,
       tax: (json['Tax'] as num?)?.toDouble() ?? 0.0,
       orderType: json['OrderType'] as String,
-      orderNumber: json['OrderNumber'] as String? ?? 'NA',
+      orderNumber: json['OrderNumber'] as String? ?? '',
       ezrxNumber: json['EZRXNumber'] as String,
       createdDate: json['CreatedDate'] as String,
       createdTime: json['CreatedTime'] as String,
