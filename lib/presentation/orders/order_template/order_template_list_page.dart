@@ -11,7 +11,6 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/orders/order_template/order_template_item.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,11 +19,11 @@ class OrderTemplateListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    locator<CountlyService>().recordCountlyView('Manage Order Templates Screen');
-    
+    locator<CountlyService>()
+        .recordCountlyView('Manage Order Templates Screen');
+
     return Scaffold(
       key: const Key('OrderTemplateListPage'),
-      backgroundColor: ZPColors.white,
       appBar: AppBar(
         title: Text('Order Templates'.tr()),
         actions: const [CartButton()],

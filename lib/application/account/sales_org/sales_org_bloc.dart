@@ -45,11 +45,7 @@ class SalesOrgBloc extends Bloc<SalesOrgEvent, SalesOrgState> {
             );
           },
         );
-        add(
-          SalesOrgEvent.selected(
-            salesOrganisation: salesOrg,
-          ),
-        );
+        add(SalesOrgEvent.selected(salesOrganisation: salesOrg));
       },
       selected: (e) async {
         emit(state.copyWith(salesOrganisation: e.salesOrganisation));

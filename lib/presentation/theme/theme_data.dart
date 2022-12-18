@@ -30,12 +30,11 @@ final appThemeData = {
     dialogTheme: DialogTheme(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
     ),
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       centerTitle: true,
       color: ZPColors.white,
-      titleTextStyle:
-          ThemeData.light().textTheme.headline1?.copyWith(fontSize: 17.sp),
-      iconTheme: const IconThemeData(
+      titleTextStyle: TextStyle(color: ZPColors.darkGray),
+      iconTheme: IconThemeData(
         color: ZPColors.lightGray,
       ),
       elevation: 1,

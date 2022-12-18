@@ -159,7 +159,7 @@ class OrderMaterialItem extends StatelessWidget {
                       .tr(),
               info: _MaterialPriceInfo(
                 materialQueryInfo: materialQueryInfo,
-                priceType: PriceType.unitPriceBeforeGst,
+                priceType: PriceType.listPrice,
               ),
             ),
             _MaterialItemInfo(

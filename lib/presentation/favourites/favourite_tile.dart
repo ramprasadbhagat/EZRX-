@@ -117,7 +117,7 @@ class FavouriteListTile extends StatelessWidget {
                                         .configs
                                         .enableVat
                                     ? Text(
-                                        '${'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr()}${priceAggregate.display(PriceType.unitPriceBeforeGst)}',
+                                        '${'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr()}${priceAggregate.display(PriceType.listPrice)}',
                                         key: const Key('priceBefore'),
                                         style: Theme.of(context)
                                             .textTheme

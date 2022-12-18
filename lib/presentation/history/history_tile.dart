@@ -48,6 +48,8 @@ class OrderHistoryListTile extends StatelessWidget {
     final enableOHPrice = context.read<EligibilityBloc>().state.enableOHPrice;
     final enableTaxDisplay =
         context.read<EligibilityBloc>().state.salesOrgConfigs.enableTaxDisplay;
+    final isDeliveryDateOrTimeEnable =
+        context.read<EligibilityBloc>().state.isDeliveryDateOrTimeEnable;
 
     return InkWell(
       onTap: () {
@@ -115,7 +117,7 @@ class OrderHistoryListTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Expanded(
-                    flex: 1,
+                    flex: 2,
                     child: Text(
                       '#${orderHistoryItem.orderNumber.displayOrderNumber}',
                       softWrap: true,
@@ -172,10 +174,13 @@ class OrderHistoryListTile extends StatelessWidget {
                 keyText: 'Order Date'.tr(),
                 valueText: orderHistoryItem.createdDate,
               ),
-              BalanceTextRow(
-                keyText: 'Delivery Date/Time'.tr(),
-                valueText: orderHistoryItem.deliveryDate,
-              ),
+              isDeliveryDateOrTimeEnable &&
+                      orderHistoryItem.deliveryDate.isNotEmpty
+                  ? BalanceTextRow(
+                      keyText: 'Delivery Date/Time'.tr(),
+                      valueText: orderHistoryItem.deliveryDate,
+                    )
+                  : const SizedBox.shrink(),
               BalanceTextRow(
                 keyText: 'Quantity'.tr(),
                 valueText: orderHistoryItem.qty.toString(),

@@ -144,10 +144,6 @@ class PriceAggregate with _$PriceAggregate {
     return value;
   }
 
-  bool get isEnableVat {
-    return salesOrgConfig.enableVat;
-  }
-
   double get listPriceTotal {
     return listPrice * quantity;
   }
@@ -190,7 +186,7 @@ class PriceAggregate with _$PriceAggregate {
         result =
             salesOrgConfig.enableTaxAtTotalLevelOnly ? listPrice : unitPrice;
         break;
-      case PriceType.unitPriceBeforeGst:
+
       case PriceType.listPriceTotal:
         result = listPriceTotal;
         break;
@@ -322,7 +318,6 @@ class PriceAggregate with _$PriceAggregate {
     return materialInfo.principalData.principalCode.isSubmitAllowedForClient();
   }
 
-  
   List<MaterialItemBonus> get getAddedBonusList =>
       List<MaterialItemBonus>.from(addedBonusList)
         ..sort(
@@ -341,6 +336,4 @@ enum PriceType {
   unitPrice,
   listPriceTotal,
   unitPriceTotal,
-  unitPriceBeforeGst,
 }
-  

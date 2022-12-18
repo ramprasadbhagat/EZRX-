@@ -293,7 +293,8 @@ class _Stepper extends StatelessWidget {
             return Column(
               children: [
                 EdiUserContinueNote(
-                    maxStepsReached: details.currentStep == state.maxSteps,),
+                  maxStepsReached: details.currentStep == state.maxSteps,
+                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: Row(
@@ -321,7 +322,8 @@ class _Stepper extends StatelessWidget {
                                       context: context,
                                     )
                                   : null
-                              : details.currentStep == state.additionalDetailsStep
+                              : details.currentStep ==
+                                      state.additionalDetailsStep
                                   ? _validateForm(
                                       context: context,
                                     )
@@ -335,7 +337,10 @@ class _Stepper extends StatelessWidget {
                             : const Text('Continue').tr(),
                       ),
                       ElevatedButton(
-                        style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
+                        style: Theme.of(context)
+                            .elevatedButtonTheme
+                            .style!
+                            .copyWith(
                               backgroundColor: MaterialStateProperty.all(
                                 ZPColors.darkGray,
                               ),
@@ -713,6 +718,7 @@ class _CartDetails extends StatelessWidget {
                       ? CartMaterialItemTile(
                           cartItem: item.materials.first,
                           taxCode: taxCode,
+                          isOrderSummaryView: true,
                         )
                       : const SizedBox.shrink();
                 case CartItemType.bundle:

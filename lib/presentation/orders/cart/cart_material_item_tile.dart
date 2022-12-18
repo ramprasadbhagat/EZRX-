@@ -28,12 +28,14 @@ class CartMaterialItemTile extends StatefulWidget {
   final PriceAggregate cartItem;
   final String taxCode;
   final bool showCheckBox;
+  final bool isOrderSummaryView;
 
   const CartMaterialItemTile({
     Key? key,
     required this.cartItem,
     this.taxCode = 'VAT',
     this.showCheckBox = false,
+    this.isOrderSummaryView = false,
   }) : super(key: key);
 
   @override
@@ -66,6 +68,9 @@ class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
   @override
   Widget build(BuildContext context) {
     final isPriceOverride = widget.cartItem.price.isPriceOverride;
+    final enableListPrice =
+        context.read<SalesOrgBloc>().state.configs.enableListPrice;
+    final enableVat = context.read<SalesOrgBloc>().state.configs.enableVat;
 
     return Card(
       child: Column(
@@ -164,6 +169,127 @@ class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
                                         color: ZPColors.lightGray,
                                       ),
                             ),
+                            widget.isOrderSummaryView
+                                ? Text(
+                                    '${'Material type : '.tr()}${widget.cartItem.toSavedOrderMaterial().type}',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1
+                                        ?.apply(
+                                          color: ZPColors.lightGray,
+                                        ),
+                                  )
+                                : const SizedBox.shrink(),
+                            widget.isOrderSummaryView
+                                ? Text(
+                                    '${'Unit of Measurement : '.tr()}${widget.cartItem.materialInfo.unitOfMeasurement}',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1
+                                        ?.apply(
+                                          color: ZPColors.lightGray,
+                                        ),
+                                  )
+                                : const SizedBox.shrink(),
+                            // TODO: Jyoti - what is the point just show an empty label
+                            // if (!widget.cartItem.materialInfo.hidePrice &&
+                            // widget.isOrderSummaryView)
+                            //   Wrap(
+                            //     spacing: 8.0,
+                            //     runSpacing: 4.0,
+                            //     children: <Widget>[
+                            //       Padding(
+                            //         padding: const EdgeInsets.only(
+                            //           bottom: 3.0,
+                            //         ),
+                            //         child: Text(
+                            //           'Deals : '.tr(),
+                            //           style: Theme.of(context)
+                            //               .textTheme
+                            //               .bodyText1
+                            //               ?.apply(
+                            //                 color: ZPColors.lightGray,
+                            //               ),
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            if (widget.cartItem.price.tiers.isNotEmpty)
+                              Wrap(
+                                spacing: 8.0,
+                                runSpacing: 4.0,
+                                children: widget.cartItem.price.priceTireItem
+                                    .map((e) => Container(
+                                          height: 25.0,
+                                          width: 130.0,
+                                          decoration: const BoxDecoration(
+                                            image: DecorationImage(
+                                              image: AssetImage(
+                                                'assets/images/tierpriceback.png',
+                                              ),
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ),
+                                          child: Center(
+                                            child: RichText(
+                                              text: TextSpan(
+                                                children: <TextSpan>[
+                                                  TextSpan(
+                                                    text:
+                                                        "${"Buy ".tr()}${e.quantity} ${"or more".tr()}: ",
+                                                    style: const TextStyle(
+                                                      fontSize: 9,
+                                                      color: Colors.white,
+                                                      fontFamily: 'Poppins',
+                                                    ),
+                                                  ),
+                                                  TextSpan(
+                                                    text: StringUtils
+                                                        .displayPrice(
+                                                      context
+                                                          .read<SalesOrgBloc>()
+                                                          .state
+                                                          .configs,
+                                                      e.rate,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ))
+                                    .toList(),
+                              ),
+                            if (widget
+                                .cartItem.salesOrgConfig.expiryDateDisplay)
+                              Text(
+                                '${'Expiry Date : '.tr()}${widget.cartItem.stockInfo.expiryDate.getExpiryDate}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1
+                                    ?.apply(
+                                      color: ZPColors.lightGray,
+                                    ),
+                              ),
+                            if (!widget
+                                .cartItem.salesOrgConfig.hideStockDisplay)
+                              Text(
+                                '${'In Stock : '.tr()}${widget.cartItem.stockInfo.inStock.getOrDefaultValue('')}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1
+                                    ?.apply(
+                                      color: ZPColors.lightGray,
+                                    ),
+                              ),
+                            // Text(
+                            //   '${'Quantity: '.tr()}${widget.cartItem.quantity}',
+                            //   style:
+                            //       Theme.of(context).textTheme.bodyText1?.apply(
+                            //             color: ZPColors.lightGray,
+                            //           ),
+                            // ),
+
                             InkWell(
                               key: const Key('priceOverride'),
                               onTap: () async {
@@ -201,204 +327,80 @@ class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    '${'Material type : '.tr()}${widget.cartItem.toSavedOrderMaterial().type}',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1
-                                        ?.apply(
-                                          color: ZPColors.lightGray,
-                                        ),
-                                  ),
-                                  Text(
-                                    '${'Unit of Measurement : '.tr()}${widget.cartItem.materialInfo.unitOfMeasurement}',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1
-                                        ?.apply(
-                                          color: ZPColors.lightGray,
-                                        ),
-                                  ),
-                                  if (!widget.cartItem.materialInfo.hidePrice)
-                                    Wrap(
-                                      spacing: 8.0,
-                                      runSpacing: 4.0,
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                            bottom: 3.0,
-                                          ),
-                                          child: Text(
-                                            'Deals : '.tr(),
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1
-                                                ?.apply(
-                                                  color: ZPColors.lightGray,
-                                                ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  if (widget.cartItem.price.tiers.isNotEmpty)
-                                    Wrap(
-                                      spacing: 8.0,
-                                      runSpacing: 4.0,
-                                      children: widget
-                                          .cartItem.price.priceTireItem
-                                          .map((e) => Container(
-                                                height: 25.0,
-                                                width: 130.0,
-                                                decoration: const BoxDecoration(
-                                                  image: DecorationImage(
-                                                    image: AssetImage(
-                                                      'assets/images/tierpriceback.png',
-                                                    ),
-                                                    fit: BoxFit.fill,
-                                                  ),
-                                                ),
-                                                child: Center(
-                                                  child: RichText(
-                                                    text: TextSpan(
-                                                      children: <TextSpan>[
-                                                        TextSpan(
-                                                          text:
-                                                              "${"Buy ".tr()}${e.quantity} ${"or more".tr()}: ",
-                                                          style:
-                                                              const TextStyle(
-                                                            fontSize: 9,
-                                                            color: Colors.white,
-                                                            fontFamily:
-                                                                'Poppins',
-                                                          ),
-                                                        ),
-                                                        TextSpan(
-                                                          text: StringUtils
-                                                              .displayPrice(
-                                                            context
-                                                                .read<
-                                                                    SalesOrgBloc>()
-                                                                .state
-                                                                .configs,
-                                                            e.rate,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ))
-                                          .toList(),
-                                    ),
-                                  if (!widget
-                                      .cartItem.salesOrgConfig.hideStockDisplay)
-                                    Text(
-                                      '${'In Stock : '.tr()}${widget.cartItem.stockInfo.inStock.getOrDefaultValue('')}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyText1
-                                          ?.apply(
-                                            color: ZPColors.lightGray,
-                                          ),
-                                    ),
-                                  Text(
-                                    '${'Quantity: '.tr()}${widget.cartItem.quantity}',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1
-                                        ?.apply(
-                                          color: ZPColors.lightGray,
-                                        ),
-                                  ),
-                                  if (widget.cartItem.salesOrgConfig
-                                      .expiryDateDisplay)
-                                    Text(
-                                      '${'Expiry Date : '.tr()}${widget.cartItem.stockInfo.expiryDate.getExpiryDate}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyText1
-                                          ?.apply(
-                                            color: ZPColors.lightGray,
-                                          ),
-                                    ),
-                                  if (widget.cartItem.isEnableVat)
-                                    Text(
-                                      '${'Price before ${widget.taxCode}: '.tr()}${widget.cartItem.display(PriceType.unitPriceBeforeGst)}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyText1
-                                          ?.apply(
-                                            color: isPriceOverride
-                                                ? ZPColors.red
-                                                : ZPColors.lightGray,
-                                            decoration: widget
-                                                    .cartItem
-                                                    .salesOrgConfig
-                                                    .priceOverride
-                                                ? TextDecoration.underline
-                                                : TextDecoration.none,
-                                          ),
-                                    ),
-                                  Text(
-                                    '${'List Price: '.tr()}${widget.cartItem.display(PriceType.listPrice)}',
-                                    key: const Key('listPrice'),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1
-                                        ?.apply(
-                                          color: isPriceOverride
-                                              ? ZPColors.red
-                                              : ZPColors.lightGray,
-                                          decoration: widget.cartItem
-                                                  .salesOrgConfig.priceOverride
-                                              ? TextDecoration.underline
-                                              : TextDecoration.none,
-                                        ),
-                                  ),
+                                  enableVat
+                                      ? Text(
+                                          '${'Price before ${widget.taxCode}: '.tr()}${widget.cartItem.display(PriceType.listPrice)}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1
+                                              ?.apply(
+                                                color: isPriceOverride
+                                                    ? ZPColors.red
+                                                    : ZPColors.black,
+                                                decoration: widget
+                                                        .cartItem
+                                                        .salesOrgConfig
+                                                        .priceOverride
+                                                    ? TextDecoration.underline
+                                                    : TextDecoration.none,
+                                              ),
+                                        )
+                                      : const SizedBox.shrink(),
+                                  enableListPrice
+                                      ? Text(
+                                          '${'List Price: '.tr()}${widget.cartItem.display(PriceType.listPrice)}',
+                                          key: const Key('listPrice'),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1
+                                              ?.apply(
+                                                color: isPriceOverride
+                                                    ? ZPColors.red
+                                                    : ZPColors.black,
+                                                decoration: widget
+                                                        .cartItem
+                                                        .salesOrgConfig
+                                                        .priceOverride
+                                                    ? TextDecoration.underline
+                                                    : TextDecoration.none,
+                                              ),
+                                        )
+                                      : const SizedBox.shrink(),
                                   Text(
                                     '${'Unit Price: '.tr()}${widget.cartItem.display(PriceType.unitPrice)}',
+                                    key: const Key('unitPrice'),
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyText1
                                         ?.apply(
                                           color: isPriceOverride
                                               ? ZPColors.red
-                                              : ZPColors.lightGray,
+                                              : ZPColors.black,
                                           decoration: widget.cartItem
                                                   .salesOrgConfig.priceOverride
                                               ? TextDecoration.underline
                                               : TextDecoration.none,
                                         ),
                                   ),
-                                  Text(
-                                    '${'Total Price: '.tr()}${widget.cartItem.display(PriceType.unitPriceTotal)}',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1
-                                        ?.apply(
-                                          color: isPriceOverride
-                                              ? ZPColors.red
-                                              : ZPColors.lightGray,
-                                          decoration: widget.cartItem
-                                                  .salesOrgConfig.priceOverride
-                                              ? TextDecoration.underline
-                                              : TextDecoration.none,
-                                        ),
-                                  ),
-                                  if (context
-                                      .read<SalesOrgBloc>()
-                                      .state
-                                      .configs
-                                      .enableRemarks)
-                                    Text(
-                                      '${'Remarks : '.tr()}${widget.cartItem.materialInfo.remarks}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyText1
-                                          ?.apply(
-                                            color: ZPColors.lightGray,
-                                          ),
-                                    ),
+                                  widget.isOrderSummaryView
+                                      ? Text(
+                                          '${'Total Price: '.tr()}${widget.cartItem.display(PriceType.unitPriceTotal)}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1
+                                              ?.apply(
+                                                color: isPriceOverride
+                                                    ? ZPColors.red
+                                                    : ZPColors.black,
+                                                decoration: widget
+                                                        .cartItem
+                                                        .salesOrgConfig
+                                                        .priceOverride
+                                                    ? TextDecoration.underline
+                                                    : TextDecoration.none,
+                                              ),
+                                        )
+                                      : const SizedBox.shrink(),
                                 ],
                               ),
                             ),

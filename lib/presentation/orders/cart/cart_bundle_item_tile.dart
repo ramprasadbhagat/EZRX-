@@ -35,6 +35,10 @@ class CartBundleItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final enableListPrice =
+        context.read<SalesOrgBloc>().state.configs.enableListPrice;
+    final enableVat = context.read<SalesOrgBloc>().state.configs.enableVat;
+
     return Card(
       child: Column(
         children: [
@@ -125,9 +129,9 @@ class CartBundleItemTile extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                materialCommonInfo.isEnableVat
+                                enableVat
                                     ? Text(
-                                        '${'Price before $taxCode: '.tr()}${materialCommonInfo.display(PriceType.unitPriceBeforeGst)}',
+                                        '${'Price before $taxCode: '.tr()}${materialCommonInfo.display(PriceType.listPrice)}',
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyText1
@@ -144,16 +148,19 @@ class CartBundleItemTile extends StatelessWidget {
                                             ),
                                       )
                                     : const SizedBox.shrink(),
-                                Text(
-                                  '${'List Price: '.tr()}${StringUtils.displayPrice(materialCommonInfo.salesOrgConfig, cartItem.listPrice)}',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1
-                                      ?.apply(
-                                        color: ZPColors.black,
-                                        decoration: TextDecoration.underline,
-                                      ),
-                                ),
+                                enableListPrice
+                                    ? Text(
+                                        '${'List Price: '.tr()}${StringUtils.displayPrice(materialCommonInfo.salesOrgConfig, cartItem.listPrice)}',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1
+                                            ?.apply(
+                                              color: ZPColors.black,
+                                              decoration:
+                                                  TextDecoration.underline,
+                                            ),
+                                      )
+                                    : const SizedBox.shrink(),
                                 Text(
                                   '${'Unit Price: '.tr()}${StringUtils.displayPrice(materialCommonInfo.salesOrgConfig, cartItem.unitPrice)}',
                                   style: Theme.of(context)

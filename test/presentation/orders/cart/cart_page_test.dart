@@ -75,7 +75,8 @@ class MaterialListBlocMock
     extends MockBloc<MaterialListEvent, MaterialListState>
     implements MaterialListBloc {}
 
-class TenderContractBlocMock extends MockBloc<TenderContractEvent, TenderContractState>
+class TenderContractBlocMock
+    extends MockBloc<TenderContractEvent, TenderContractState>
     implements TenderContractBloc {}
 
 final locator = GetIt.instance;
@@ -105,11 +106,11 @@ void main() {
   ];
   setUpAll(() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
-    locator.registerLazySingleton(
-            () => CountlyService(config: locator<Config>()));
+    locator
+        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
   });
   setUp(
-        () {
+    () {
       WidgetsFlutterBinding.ensureInitialized();
       materialListBlocMock = MaterialListBlocMock();
 
@@ -125,21 +126,21 @@ void main() {
       mockPriceList = {};
       mockPriceList.putIfAbsent(
           MaterialNumber('000000000023168451'),
-              () => Price.empty().copyWith(
-            finalPrice: MaterialPrice(4.5),
-          ));
+          () => Price.empty().copyWith(
+                finalPrice: MaterialPrice(4.5),
+              ));
 
       mockCartItemBundles = [
         PriceAggregate.empty().copyWith(
           addedBonusList: [
             MaterialItemBonus.empty().copyWith(
                 materialInfo: MaterialInfo.empty().copyWith(
-                  materialNumber: MaterialNumber('0000000000111111'),
-                  materialDescription: ' Mosys D',
-                  principalData: PrincipalData.empty().copyWith(
-                    principalName: 'å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸',
-                  ),
-                )),
+              materialNumber: MaterialNumber('0000000000111111'),
+              materialDescription: ' Mosys D',
+              principalData: PrincipalData.empty().copyWith(
+                principalName: 'å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸',
+              ),
+            )),
           ],
           quantity: 10,
           bundle: Bundle(
@@ -282,19 +283,18 @@ void main() {
       ));
       when(() => customerCodeBloc.state)
           .thenReturn(CustomerCodeState.initial().copyWith(
-          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-            customerCodeSoldTo: '1234',
-          )));
+              customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+        customerCodeSoldTo: '1234',
+      )));
       when(() => userBloc.state).thenReturn(UserState.initial()
           .copyWith(user: User.empty().copyWith(hasBonusOverride: false)));
       when(() => tenderContractBlocMock.state)
           .thenReturn(TenderContractState.initial());
-
-        },
+    },
   );
   group(
     'Test Cart_Page',
-        () {
+    () {
       Widget getWidget() {
         return MultiBlocProviderFrameWrapper(
           providers: [
@@ -312,8 +312,8 @@ void main() {
                 create: ((context) => materialListBlocMock)),
             BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
             BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBloc),
-            BlocProvider<TenderContractBloc>(create: (context) => tenderContractBlocMock),
-
+            BlocProvider<TenderContractBloc>(
+                create: (context) => tenderContractBlocMock),
           ],
           child: const CartPage(),
         );
@@ -321,7 +321,7 @@ void main() {
 
       testWidgets(
         'Load Cart Page',
-            (tester) async {
+        (tester) async {
           await tester.pumpWidget(getWidget());
           await tester.pump();
           final cartPage = find.byKey(const Key('cartpage'));
@@ -330,7 +330,7 @@ void main() {
       );
       testWidgets(
         'Load Cart Page with Error',
-            (tester) async {
+        (tester) async {
           when(() => cartBloc.state).thenReturn(CartState.initial().copyWith(
             apiFailureOrSuccessOption: none(),
             isFetching: false,
@@ -399,11 +399,11 @@ void main() {
         expect(scrollWidget, findsOneWidget);
 
         final cartBundleItemTile =
-        find.byWidgetPredicate((w) => w is CartBundleItemTile);
+            find.byWidgetPredicate((w) => w is CartBundleItemTile);
 
         expect(cartBundleItemTile, findsOneWidget);
         final cartTile =
-        find.byWidgetPredicate((w) => w is CartMaterialItemTile);
+            find.byWidgetPredicate((w) => w is CartMaterialItemTile);
 
         expect(cartTile, findsOneWidget);
         final selectAllButton = find.byKey(const Key('selectAllButton'));
@@ -422,64 +422,64 @@ void main() {
       });
 
       testWidgets('Test have cart item list add and slide and remove item',
-              (tester) async {
-            when(() => cartBloc.state).thenReturn(
-              CartState.initial().copyWith(
-                cartItemList: mockCartItemWithDataList,
-                isFetching: true,
-              ),
-            );
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItemList: mockCartItemWithDataList,
+            isFetching: true,
+          ),
+        );
 
-            await tester.runAsync(() async {
-              await tester.pumpWidget(getWidget());
-            });
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
 
-            await tester.pump();
-            final item = find.byKey(Key(
-                'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
-            expect(item, findsOneWidget);
-            final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-            expect(listWidget,  findsAtLeastNWidgets(1));
-            final addWidget = tester.widget(find.byKey(const Key('cartAdd')));
-            await tester.tap(find.byWidget(addWidget));
-            await tester.pump();
+        await tester.pump();
+        final item = find.byKey(Key(
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+        expect(item, findsOneWidget);
+        final listWidget = find.byWidgetPredicate((w) => w is ListTile);
+        expect(listWidget, findsAtLeastNWidgets(1));
+        final addWidget = tester.widget(find.byKey(const Key('cartAdd')));
+        await tester.tap(find.byWidget(addWidget));
+        await tester.pump();
 
-            await tester.drag(
-                find.byKey(const Key('slidable')), const Offset(-300, 0.0));
-            await tester.pump();
+        await tester.drag(
+            find.byKey(const Key('slidable')), const Offset(-300, 0.0));
+        await tester.pump();
 
-            final removeWidget = tester.widget(find.byKey(const Key('cartDelete')));
-            await tester.tap(find.byWidget(removeWidget));
-            await tester.pump();
-          });
+        final removeWidget = tester.widget(find.byKey(const Key('cartDelete')));
+        await tester.tap(find.byWidget(removeWidget));
+        await tester.pump();
+      });
 
       testWidgets('Test have cart item list add and decrease item',
-              (tester) async {
-            when(() => cartBloc.state).thenReturn(
-              CartState.initial().copyWith(
-                cartItemList: mockCartItemWithDataList,
-                isFetching: true,
-              ),
-            );
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItemList: mockCartItemWithDataList,
+            isFetching: true,
+          ),
+        );
 
-            await tester.runAsync(() async {
-              await tester.pumpWidget(getWidget());
-            });
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
 
-            await tester.pump();
-            final item = find.byKey(Key(
-                'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
-            expect(item, findsOneWidget);
-            final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-            expect(listWidget,  findsAtLeastNWidgets(1));
-            final addWidget = tester.widget(find.byKey(const Key('cartAdd')));
-            await tester.tap(find.byWidget(addWidget));
-            await tester.pump();
+        await tester.pump();
+        final item = find.byKey(Key(
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+        expect(item, findsOneWidget);
+        final listWidget = find.byWidgetPredicate((w) => w is ListTile);
+        expect(listWidget, findsAtLeastNWidgets(1));
+        final addWidget = tester.widget(find.byKey(const Key('cartAdd')));
+        await tester.tap(find.byWidget(addWidget));
+        await tester.pump();
 
-            final removeWidget = tester.widget(find.byKey(const Key('cartDelete')));
-            await tester.tap(find.byWidget(removeWidget));
-            await tester.pump();
-          });
+        final removeWidget = tester.widget(find.byKey(const Key('cartDelete')));
+        await tester.tap(find.byWidget(removeWidget));
+        await tester.pump();
+      });
 
       testWidgets('Test have cart item list decrease item', (tester) async {
         //todo
@@ -499,7 +499,7 @@ void main() {
             'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-        expect(listWidget,  findsAtLeastNWidgets(1));
+        expect(listWidget, findsAtLeastNWidgets(1));
 
         final removeWidget = tester.widget(find.byKey(const Key('cartDelete')));
         await tester.tap(find.byWidget(removeWidget));
@@ -563,68 +563,68 @@ void main() {
       //   expect(finder, findsOneWidget);
       // });
       testWidgets('Test have cart item list and Material price loading NA',
-              (tester) async {
-            when(() => cartBloc.state).thenReturn(
-              CartState.initial().copyWith(
-                cartItemList: mockCartItemWithDataList2,
-                isFetching: false,
-              ),
-            );
-            when(() => materialPriceBloc.state).thenReturn(
-              MaterialPriceState.initial().copyWith(
-                materialPrice: {},
-                isFetching: false,
-              ),
-            );
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItemList: mockCartItemWithDataList2,
+            isFetching: false,
+          ),
+        );
+        when(() => materialPriceBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            materialPrice: {},
+            isFetching: false,
+          ),
+        );
 
-            await tester.runAsync(() async {
-              await tester.pumpWidget(getWidget());
-            });
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
 
-            await tester.pump();
-            final item = find.byKey(Key(
-                'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
-            expect(item, findsOneWidget);
-            final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-            expect(listWidget, findsAtLeastNWidgets(1));
-            final finder = find.byKey(const Key('price-loading'));
-            expect(finder, findsNothing);
-          });
+        await tester.pump();
+        final item = find.byKey(Key(
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+        expect(item, findsOneWidget);
+        final listWidget = find.byWidgetPredicate((w) => w is ListTile);
+        expect(listWidget, findsAtLeastNWidgets(1));
+        final finder = find.byKey(const Key('price-loading'));
+        expect(finder, findsNothing);
+      });
       testWidgets('Test have cart item list and Material price loading Builder',
-              (tester) async {
-            when(() => cartBloc.state).thenReturn(
-              CartState.initial().copyWith(
-                cartItemList: mockCartItemWithDataList2,
-                isFetching: false,
-              ),
-            );
-            when(() => materialPriceBloc.state).thenReturn(
-              MaterialPriceState.initial().copyWith(
-                materialPrice: {},
-                isFetching: true,
-              ),
-            );
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItemList: mockCartItemWithDataList2,
+            isFetching: false,
+          ),
+        );
+        when(() => materialPriceBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            materialPrice: {},
+            isFetching: true,
+          ),
+        );
 
-            final expectedStates = [
-              MaterialPriceState.initial().copyWith(
-                isFetching: false,
-              ),
-            ];
-            whenListen(materialPriceBloc, Stream.fromIterable(expectedStates));
+        final expectedStates = [
+          MaterialPriceState.initial().copyWith(
+            isFetching: false,
+          ),
+        ];
+        whenListen(materialPriceBloc, Stream.fromIterable(expectedStates));
 
-            await tester.runAsync(() async {
-              await tester.pumpWidget(getWidget());
-            });
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
 
-            await tester.pump();
-            final item = find.byKey(Key(
-                'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
-            expect(item, findsOneWidget);
-            final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-            expect(listWidget, findsAtLeastNWidgets(1));
-            final finder = find.byKey(const Key('price-loading'));
-            expect(finder, findsNothing);
-          });
+        await tester.pump();
+        final item = find.byKey(Key(
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+        expect(item, findsOneWidget);
+        final listWidget = find.byWidgetPredicate((w) => w is ListTile);
+        expect(listWidget, findsAtLeastNWidgets(1));
+        final finder = find.byKey(const Key('price-loading'));
+        expect(finder, findsNothing);
+      });
 
       testWidgets('Test have zmg Discount cart item', (tester) async {
         when(() => materialPriceBloc.state)
@@ -689,6 +689,38 @@ void main() {
         expect(find.byKey(const Key('priceTierLable')), findsWidgets);
       });
 
+      testWidgets('Check if price is not overrided ', (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItemList: mockCartItemWithDataList,
+            isFetching: true,
+          ),
+        );
+
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
+
+        await tester.pump();
+        final item = find.byKey(Key(
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+        expect(item, findsOneWidget);
+        final listWidget = find.byWidgetPredicate((w) => w is ListTile);
+        expect(listWidget, findsAtLeastNWidgets(1));
+        final removeWidget = tester.widget(find.byKey(const Key('cartDelete')));
+        await tester.tap(find.byWidget(removeWidget));
+
+        await tester.pump();
+        final priceWidget = find.byKey(const Key('priceOverride'));
+        expect(priceWidget, findsOneWidget);
+        final unitPrice = find.byKey(const Key('unitPrice'));
+
+        expect(
+          (tester.firstWidget(unitPrice) as Text).style!.color,
+          ZPColors.black,
+        );
+      });
+
       testWidgets('open bottom sheet to override price', (tester) async {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
@@ -742,25 +774,18 @@ void main() {
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
         expect(listWidget, findsAtLeastNWidgets(1));
-        final removeWidget = tester.widget(find.byKey(const Key('cartDelete')));
-        await tester.tap(find.byWidget(removeWidget));
-
-        await tester.pump();
-        final priceWidget = find.byKey(
-          const Key('priceOverride'),
-        );
+        final priceWidget = find.byKey(const Key('priceOverride'));
         expect(priceWidget, findsOneWidget);
-        // final listPrice = find.byKey(const Key('listPrice'));
+        final unitPrice = find.byKey(const Key('unitPrice'));
 
         expect(
-            (tester.firstWidget(find.byKey(
-              const Key('listPrice'),
-            )) as Text)
-                .style!
-                .color,
-            ZPColors.red);
+          (tester.firstWidget(unitPrice) as Text).style!.color,
+          ZPColors.red,
+        );
       });
-      testWidgets('Check if price is not overrided ', (tester) async {
+
+      testWidgets('Test have cart item list add update a bonus item',
+          (tester) async {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartItemList: mockCartItemWithDataList,
@@ -776,78 +801,40 @@ void main() {
         final item = find.byKey(Key(
             'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
         expect(item, findsOneWidget);
+
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-        expect(listWidget, findsAtLeastNWidgets(1));
-        final removeWidget = tester.widget(find.byKey(const Key('cartDelete')));
-        await tester.tap(find.byWidget(removeWidget));
+        expect(listWidget, findsNWidgets(1));
 
-        await tester.pump();
-        final priceWidget = find.byKey(
-          const Key('priceOverride'),
-        );
-        expect(priceWidget, findsOneWidget);
-        // final listPrice = find.byKey(const Key('listPrice'));
-
-        expect(
-            (tester.firstWidget(find.byKey(
-              const Key('listPrice'),
-            )) as Text)
-                .style!
-                .color,
-            ZPColors.lightGray);
-      });
-
-      testWidgets('Test have cart item list add update a bonus item',
-              (tester) async {
-            when(() => cartBloc.state).thenReturn(
-              CartState.initial().copyWith(
-                cartItemList: mockCartItemWithDataList,
-                isFetching: true,
-              ),
-            );
-
-            await tester.runAsync(() async {
-              await tester.pumpWidget(getWidget());
-            });
-
-            await tester.pump();
-            final item = find.byKey(Key(
-                'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
-            expect(item, findsOneWidget);
-
-            final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-            expect(listWidget, findsNWidgets(1));
-
-            if (salesOrgBloc.state.configs.enableRemarks) {
-              final addRemarkButton =
+        if (salesOrgBloc.state.configs.enableRemarks) {
+          final addRemarkButton =
               tester.widget(find.byKey(const Key('addRemarks')));
-              await tester.tap(find.byWidget(addRemarkButton));
-              await tester.pump();
+          await tester.tap(find.byWidget(addRemarkButton));
+          await tester.pump();
 
-              final addRemarkDialog = find.byKey(const Key('addRemarksDialog'));
-              expect(addRemarkDialog, findsOneWidget);
+          final addRemarkDialog = find.byKey(const Key('addRemarksDialog'));
+          expect(addRemarkDialog, findsOneWidget);
 
-              const remarkText = '1234';
-              final textField = find.byKey(const Key('remarkTextField'));
-              await tester.enterText(textField, remarkText);
+          const remarkText = '1234';
+          final textField = find.byKey(const Key('remarkTextField'));
+          await tester.enterText(textField, remarkText);
 
-              verify(() => cartBloc.add(const CartEvent.remarksChanged(remarkText)))
-                  .called(1);
+          verify(() => cartBloc.add(const CartEvent.remarksChanged(remarkText)))
+              .called(1);
 
-              final addButton = find.byKey(const Key('Add'));
-              await tester.tap(addButton);
-              await tester.pump();
+          final addButton = find.byKey(const Key('Add'));
+          await tester.tap(addButton);
+          await tester.pump();
 
-              verify(
-                    () => cartBloc.add(
-                  CartEvent.addRemarksToCartItem(
-                    item: mockCartItemWithDataList[0],
-                    isDelete: false,
-                  ),
-                ),
-              ).called(1);
-            }
-          });
+          verify(
+            () => cartBloc.add(
+              CartEvent.addRemarksToCartItem(
+                item: mockCartItemWithDataList[0],
+                isDelete: false,
+              ),
+            ),
+          ).called(1);
+        }
+      });
 
       testWidgets('Test have Tire Discount cart item', (tester) async {
         when(() => materialPriceBloc.state)
@@ -898,12 +885,12 @@ void main() {
       });
 
       testWidgets('Test have cart item list add delete a bonus item',
-              (tester) async {
-            when(() => cartBloc.state).thenReturn(
-              CartState.initial().copyWith(
-                cartItemList: mockCartItemWithDataList
-                    .map(
-                      (e) => e.copyWith(
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItemList: mockCartItemWithDataList
+                .map(
+                  (e) => e.copyWith(
                     materialInfo: e.materialInfo.copyWith(
                       materialGroup4: MaterialGroup.four('none'),
                       hidePrice: false,
@@ -911,61 +898,61 @@ void main() {
                     price: e.price.copyWith(additionalBonusEligible: true),
                   ),
                 )
-                    .toList(),
-                isFetching: true,
-              ),
-            );
-            when(() => eligibilityBloc.state).thenReturn(
-              EligibilityState.initial().copyWith(
-                  user: User.empty().copyWith(
-                    role: Role.empty().copyWith(
-                      type: RoleType('external_sales_rep'),
-                    ),
-                    hasBonusOverride: true,
-                  )),
-            );
-            await tester.runAsync(() async {
-              await tester.pumpWidget(getWidget());
-            });
+                .toList(),
+            isFetching: true,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+              user: User.empty().copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('external_sales_rep'),
+            ),
+            hasBonusOverride: true,
+          )),
+        );
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
 
-            await tester.pump();
+        await tester.pump();
 
-            final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-            expect(listWidget, findsAtLeastNWidgets(1));
-            final item = find.byKey(const Key('bonusTile'));
-            expect(item, findsOneWidget);
-            final addWidget = tester.widget(
-              find.byKey(
-                const Key('addBonusFromCart'),
-              ),
-            );
-            await tester.tap(
-              find.byWidget(addWidget),
-            );
+        final listWidget = find.byWidgetPredicate((w) => w is ListTile);
+        expect(listWidget, findsAtLeastNWidgets(1));
+        final item = find.byKey(const Key('bonusTile'));
+        expect(item, findsOneWidget);
+        final addWidget = tester.widget(
+          find.byKey(
+            const Key('addBonusFromCart'),
+          ),
+        );
+        await tester.tap(
+          find.byWidget(addWidget),
+        );
 
-            final removeWidget = tester.widget(
-              find.byKey(
-                const Key('removeBonusFromCart'),
-              ),
-            );
-            await tester.tap(
-              find.byWidget(removeWidget),
-            );
-            final deleteWidget = tester.widget(
-              find.byKey(
-                const Key('deleteBonusFromCart'),
-              ),
-            );
-            await tester.tap(
-              find.byWidget(deleteWidget),
-            );
+        final removeWidget = tester.widget(
+          find.byKey(
+            const Key('removeBonusFromCart'),
+          ),
+        );
+        await tester.tap(
+          find.byWidget(removeWidget),
+        );
+        final deleteWidget = tester.widget(
+          find.byKey(
+            const Key('deleteBonusFromCart'),
+          ),
+        );
+        await tester.tap(
+          find.byWidget(deleteWidget),
+        );
 
-            expect(
-                find.byKey(
-                  const Key('addBonusButton'),
-                ),
-                findsOneWidget);
-          });
+        expect(
+            find.byKey(
+              const Key('addBonusButton'),
+            ),
+            findsOneWidget);
+      });
     },
   );
 }
