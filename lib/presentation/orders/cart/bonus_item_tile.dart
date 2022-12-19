@@ -72,24 +72,24 @@ class _BonusItemTileState extends State<BonusItemTile> {
                           ),
                         ],
                       ),
-                      Text(
-                        '${'Material type : '.tr()}Bonus',
-                        style: Theme.of(context).textTheme.bodyText1?.apply(
-                              color: ZPColors.lightGray,
-                            ),
-                      ),
+                      // Text(
+                      //   '${'Material type : '.tr()}Bonus',
+                      //   style: Theme.of(context).textTheme.bodyText1?.apply(
+                      //         color: ZPColors.lightGray,
+                      //       ),
+                      // ),
                       Text(
                         '${'Mat No : '.tr()}${widget.bonusItem.materialInfo.materialNumber.displayMatNo}',
                         style: Theme.of(context).textTheme.bodyText1?.apply(
                               color: ZPColors.lightGray,
                             ),
                       ),
-                      Text(
-                        '${'Quantity: '.tr()}${widget.bonusItem.qty}',
-                        style: Theme.of(context).textTheme.bodyText1?.apply(
-                              color: ZPColors.lightGray,
-                            ),
-                      ),
+                      // Text(
+                      //   '${'Quantity: '.tr()}${widget.bonusItem.qty}',
+                      //   style: Theme.of(context).textTheme.bodyText1?.apply(
+                      //         color: ZPColors.lightGray,
+                      //       ),
+                      // ),
                       if (widget.cartItem.salesOrgConfig.expiryDateDisplay)
                         Text(
                           '${'Expiry Date : '.tr()}${widget.bonusItem.expiryDate.getExpiryDate}',
@@ -149,8 +149,11 @@ class _BonusItemTileState extends State<BonusItemTile> {
                     locator<CountlyService>().addCountlyEvent(
                       'changed_quantity',
                       segmentation: {
-                        'materialNum' :widget.bonusItem.materialInfo.materialNumber.getOrCrash(),
-                      },);
+                        'materialNum': widget
+                            .bonusItem.materialInfo.materialNumber
+                            .getOrCrash(),
+                      },
+                    );
                     context.read<CartBloc>().add(
                           CartEvent.updateBonusItem(
                             bonusItemCount: value,
@@ -164,9 +167,10 @@ class _BonusItemTileState extends State<BonusItemTile> {
                     locator<CountlyService>().addCountlyEvent(
                       'deduct_quantity',
                       segmentation: {
-                        'materialNum':widget.cartItem.getMaterialNumber.getOrCrash(),
+                        'materialNum':
+                            widget.cartItem.getMaterialNumber.getOrCrash(),
                         'listPrice': widget.cartItem.listPrice,
-                        'price':widget.cartItem.price.finalPrice.getOrCrash(),
+                        'price': widget.cartItem.price.finalPrice.getOrCrash(),
                       },
                     );
                     context.read<CartBloc>().add(
@@ -182,11 +186,12 @@ class _BonusItemTileState extends State<BonusItemTile> {
                     locator<CountlyService>().addCountlyEvent(
                       'add_quantity',
                       segmentation: {
-                        'materialNum':widget.cartItem.getMaterialNumber.getOrCrash(),
+                        'materialNum':
+                            widget.cartItem.getMaterialNumber.getOrCrash(),
                         'listPrice': widget.cartItem.listPrice,
-                        'price':widget.cartItem.price.finalPrice.getOrCrash(),
+                        'price': widget.cartItem.price.finalPrice.getOrCrash(),
                       },
-                    );                                                            
+                    );
                     context.read<CartBloc>().add(
                           CartEvent.updateBonusItem(
                             bonusItemCount: value,
