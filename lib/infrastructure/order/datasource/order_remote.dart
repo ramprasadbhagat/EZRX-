@@ -60,6 +60,7 @@ class OrderRemoteDataSource {
       }
 
       return List.from(res.data['data']['draftOrders'])
+          .where((e) => json.decode(e['itemlist']) != null)
           .map((e) => SavedOrderDto.fromJson(e).toDomain())
           .toList();
     });

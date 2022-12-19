@@ -16,7 +16,8 @@ class OrderLocalDataSource {
       await rootBundle.loadString('assets/json/getSavedOrdersResponse.json'),
     );
 
-    return List.from(data['data']['draftorders'])
+    return List.from(data['data']['draftOrders'])
+        .where((e) => json.decode(e['itemlist']) != null)
         .map((e) => SavedOrderDto.fromJson(e).toDomain())
         .toList();
   }

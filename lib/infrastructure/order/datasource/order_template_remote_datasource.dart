@@ -42,6 +42,7 @@ class OrderTemplateRemoteDataSource {
       _orderTemplateExceptionChecker(res: res);
 
       return List.from(res.data['data']['orderTemplates'])
+          .where((e) => json.decode(e['cartList']) != null)
           .map((e) => OrderTemplateDto.fromJson(e).toDomain())
           .toList();
     });
