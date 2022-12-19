@@ -17,6 +17,7 @@ import 'package:ezrxmobile/presentation/orders/cart/add_remarks_button.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/edit_delete_dialog.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bonus_discount_label.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/bonus_lable.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/price_override_bottomsheet.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/price_tier_label.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
@@ -229,7 +230,22 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                   )
                   .toList(),
             ),
-
+          if (cartItem.price.isBonusDealEligible && isOrderSummaryView)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Wrap(
+                  spacing: 8.0,
+                  runSpacing: 4.0,
+                  children: cartItem.price.priceBonusItem
+                      .map<Widget>(
+                        (e) => BonusLabel(bonus: e),
+                      )
+                      .toList(),
+                ),
+              ],
+            ),
           if (cartItem.salesOrgConfig.expiryDateDisplay)
             Text(
               '${'Expiry Date : '.tr()}${cartItem.stockInfo.expiryDate.getExpiryDate}',
