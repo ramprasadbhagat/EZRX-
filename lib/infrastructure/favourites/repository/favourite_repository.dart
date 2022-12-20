@@ -59,20 +59,10 @@ class FavouriteRepository implements IFavouriteRepository {
     required User user,
   }) async {
     if (config.appFlavor == Flavor.mock) {
-      try {
-        // final addedFavourite = await localDataSource.addFavourite(
-        //   item: item,
-        //   isPackAndPick: true,
-        // );
-        final newfavouriteItems = List<Favourite>.from(favouriteItems)
-          ..insert(0, item);
+      final newfavouriteItems = List<Favourite>.from(favouriteItems)
+        ..insert(0, item);
 
-        return Right(newfavouriteItems);
-      } catch (e) {
-        return Left(
-          FailureHandler.handleFailure(e),
-        );
-      }
+      return Right(newfavouriteItems);
     }
     try {
       // TODO: this is not a correct way, will revisit when we have full context
@@ -113,19 +103,10 @@ class FavouriteRepository implements IFavouriteRepository {
     required List<Favourite> favouriteItems,
   }) async {
     if (config.appFlavor == Flavor.mock) {
-      try {
-        // final deletedFavourite = await localDataSource.deleteFavourite(
-        //   item: item,
-        // );
-        final newfavouriteItems = List<Favourite>.from(favouriteItems)
-          ..removeWhere((element) => element.id == item.id);
+      final newfavouriteItems = List<Favourite>.from(favouriteItems)
+        ..removeWhere((element) => element.id == item.id);
 
-        return Right(newfavouriteItems);
-      } catch (e) {
-        return Left(
-          FailureHandler.handleFailure(e),
-        );
-      }
+      return Right(newfavouriteItems);
     }
     try {
       final deletedFavourite =
