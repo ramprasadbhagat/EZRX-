@@ -3,6 +3,8 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/add_to_cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_detail_widget.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/favorite_button.dart';
@@ -14,14 +16,10 @@ import 'package:ezrxmobile/presentation/orders/create_order/select_contract.dart
 
 class AddToCart extends StatefulWidget {
   final bool isCovid19Tab;
-  bool hasValidTenderContract = false;
-  bool hasMandatoryTenderContract = false;
 
-  AddToCart({
+  const AddToCart({
     Key? key,
     required this.isCovid19Tab,
-    required this.hasValidTenderContract,
-    required this.hasMandatoryTenderContract,
   }) : super(key: key);
 
   @override
@@ -62,6 +60,9 @@ class _AddToCartState extends State<AddToCart> {
         addToCartBloc.state.cartItem.price.finalPrice.isEmpty &&
         !widget.isCovid19Tab);
   }
+
+  TenderContract get selectedTenderContract =>
+      context.read<TenderContractBloc>().state.selectedTenderContract;
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +110,7 @@ class _AddToCartState extends State<AddToCart> {
                             );
                           },
                         ),
-                        widget.hasValidTenderContract
+                        state.cartItem.materialInfo.hasValidTenderContract
                             ? SelectContract(
                                 materialInfo: state.cartItem.materialInfo,
                               )
@@ -119,7 +120,19 @@ class _AddToCartState extends State<AddToCart> {
                   ),
                   AddToCartButton(
                     isAddToCartAllowed: _isAddToCartAllowed,
-                    cartItem: state.cartItem,
+                    cartItem: selectedTenderContract ==
+                                TenderContract.empty() ||
+                            selectedTenderContract ==
+                                TenderContract.noContract()
+                        ? state.cartItem
+                        : state.cartItem.copyWith(
+                            tenderContract: selectedTenderContract,
+                            price: state.cartItem.price.copyWith(
+                              finalPrice: MaterialPrice(
+                                selectedTenderContract.tenderPrice.tenderPrice,
+                              ),
+                            ),
+                          ),
                   ),
                 ],
               );

@@ -325,6 +325,12 @@ class TenderPrice extends ValueObject<String> {
     return totalPriceStringAsFixed(value.getOrElse(() => '0'));
   }
 
+  double tenderPriceByPricingUnit(int pricingUnit) {
+    return pricingUnit == 0
+        ? 0
+        : totalPriceStringAsFixed(value.getOrElse(() => '0')) / pricingUnit;
+  }
+
   const TenderPrice._(this.value);
 }
 
@@ -553,6 +559,7 @@ class ExpiryDate extends ValueObject<String> {
   factory ExpiryDate(String input) {
     return ExpiryDate._(validateStringNotEmpty(input));
   }
+
   String get getExpiryDate {
     return naIfEmpty(value.getOrElse(() => ''));
   }

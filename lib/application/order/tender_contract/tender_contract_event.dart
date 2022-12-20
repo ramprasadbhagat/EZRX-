@@ -8,6 +8,7 @@ class TenderContractEvent with _$TenderContractEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required MaterialInfo materialInfo,
+    required TenderContract defaultSelectedTenderContract,
   }) = _Fetch;
   const factory TenderContractEvent.selected({
     required TenderContract tenderContract,

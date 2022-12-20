@@ -60,13 +60,16 @@ class TenderContractBloc
                   ..insert(0, TenderContract.noContract()))
                 : tenderContractList;
 
-            //Select 730 contract if present, else select first item
+            //Select default if present else Select 730 contract if present, else select first item
             add(
               TenderContractEvent.selected(
-                tenderContract: newTenderContractList.firstWhere(
-                  (e) => e.tenderOrderReason.is730,
-                  orElse: () => newTenderContractList.first,
-                ),
+                tenderContract:
+                    e.defaultSelectedTenderContract != TenderContract.empty()
+                        ? e.defaultSelectedTenderContract
+                        : newTenderContractList.firstWhere(
+                            (e) => e.tenderOrderReason.is730,
+                            orElse: () => newTenderContractList.first,
+                          ),
               ),
             );
 

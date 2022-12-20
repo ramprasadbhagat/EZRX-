@@ -23,7 +23,8 @@ mixin _$TenderContractEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialInfo materialInfo)
+            MaterialInfo materialInfo,
+            TenderContract defaultSelectedTenderContract)
         fetch,
     required TResult Function(TenderContract tenderContract) selected,
     required TResult Function() unselected,
@@ -36,7 +37,8 @@ mixin _$TenderContractEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialInfo materialInfo)?
+            MaterialInfo materialInfo,
+            TenderContract defaultSelectedTenderContract)?
         fetch,
     TResult? Function(TenderContract tenderContract)? selected,
     TResult? Function()? unselected,
@@ -49,7 +51,8 @@ mixin _$TenderContractEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialInfo materialInfo)?
+            MaterialInfo materialInfo,
+            TenderContract defaultSelectedTenderContract)?
         fetch,
     TResult Function(TenderContract tenderContract)? selected,
     TResult Function()? unselected,
@@ -144,7 +147,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialInfo materialInfo)
+            MaterialInfo materialInfo,
+            TenderContract defaultSelectedTenderContract)
         fetch,
     required TResult Function(TenderContract tenderContract) selected,
     required TResult Function() unselected,
@@ -160,7 +164,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialInfo materialInfo)?
+            MaterialInfo materialInfo,
+            TenderContract defaultSelectedTenderContract)?
         fetch,
     TResult? Function(TenderContract tenderContract)? selected,
     TResult? Function()? unselected,
@@ -176,7 +181,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialInfo materialInfo)?
+            MaterialInfo materialInfo,
+            TenderContract defaultSelectedTenderContract)?
         fetch,
     TResult Function(TenderContract tenderContract)? selected,
     TResult Function()? unselected,
@@ -239,12 +245,14 @@ abstract class _$$_FetchCopyWith<$Res> {
       {SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
-      MaterialInfo materialInfo});
+      MaterialInfo materialInfo,
+      TenderContract defaultSelectedTenderContract});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $MaterialInfoCopyWith<$Res> get materialInfo;
+  $TenderContractCopyWith<$Res> get defaultSelectedTenderContract;
 }
 
 /// @nodoc
@@ -261,6 +269,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? materialInfo = null,
+    Object? defaultSelectedTenderContract = null,
   }) {
     return _then(_$_Fetch(
       salesOrganisation: null == salesOrganisation
@@ -279,6 +288,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.materialInfo
           : materialInfo // ignore: cast_nullable_to_non_nullable
               as MaterialInfo,
+      defaultSelectedTenderContract: null == defaultSelectedTenderContract
+          ? _value.defaultSelectedTenderContract
+          : defaultSelectedTenderContract // ignore: cast_nullable_to_non_nullable
+              as TenderContract,
     ));
   }
 
@@ -313,6 +326,15 @@ class __$$_FetchCopyWithImpl<$Res>
       return _then(_value.copyWith(materialInfo: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TenderContractCopyWith<$Res> get defaultSelectedTenderContract {
+    return $TenderContractCopyWith<$Res>(_value.defaultSelectedTenderContract,
+        (value) {
+      return _then(_value.copyWith(defaultSelectedTenderContract: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -322,7 +344,8 @@ class _$_Fetch implements _Fetch {
       {required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.shipToInfo,
-      required this.materialInfo});
+      required this.materialInfo,
+      required this.defaultSelectedTenderContract});
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -332,10 +355,12 @@ class _$_Fetch implements _Fetch {
   final ShipToInfo shipToInfo;
   @override
   final MaterialInfo materialInfo;
+  @override
+  final TenderContract defaultSelectedTenderContract;
 
   @override
   String toString() {
-    return 'TenderContractEvent.fetch(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, materialInfo: $materialInfo)';
+    return 'TenderContractEvent.fetch(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, materialInfo: $materialInfo, defaultSelectedTenderContract: $defaultSelectedTenderContract)';
   }
 
   @override
@@ -350,12 +375,21 @@ class _$_Fetch implements _Fetch {
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
             (identical(other.materialInfo, materialInfo) ||
-                other.materialInfo == materialInfo));
+                other.materialInfo == materialInfo) &&
+            (identical(other.defaultSelectedTenderContract,
+                    defaultSelectedTenderContract) ||
+                other.defaultSelectedTenderContract ==
+                    defaultSelectedTenderContract));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrganisation,
-      customerCodeInfo, shipToInfo, materialInfo);
+  int get hashCode => Object.hash(
+      runtimeType,
+      salesOrganisation,
+      customerCodeInfo,
+      shipToInfo,
+      materialInfo,
+      defaultSelectedTenderContract);
 
   @JsonKey(ignore: true)
   @override
@@ -371,12 +405,14 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialInfo materialInfo)
+            MaterialInfo materialInfo,
+            TenderContract defaultSelectedTenderContract)
         fetch,
     required TResult Function(TenderContract tenderContract) selected,
     required TResult Function() unselected,
   }) {
-    return fetch(salesOrganisation, customerCodeInfo, shipToInfo, materialInfo);
+    return fetch(salesOrganisation, customerCodeInfo, shipToInfo, materialInfo,
+        defaultSelectedTenderContract);
   }
 
   @override
@@ -387,13 +423,14 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialInfo materialInfo)?
+            MaterialInfo materialInfo,
+            TenderContract defaultSelectedTenderContract)?
         fetch,
     TResult? Function(TenderContract tenderContract)? selected,
     TResult? Function()? unselected,
   }) {
-    return fetch?.call(
-        salesOrganisation, customerCodeInfo, shipToInfo, materialInfo);
+    return fetch?.call(salesOrganisation, customerCodeInfo, shipToInfo,
+        materialInfo, defaultSelectedTenderContract);
   }
 
   @override
@@ -404,15 +441,16 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialInfo materialInfo)?
+            MaterialInfo materialInfo,
+            TenderContract defaultSelectedTenderContract)?
         fetch,
     TResult Function(TenderContract tenderContract)? selected,
     TResult Function()? unselected,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(
-          salesOrganisation, customerCodeInfo, shipToInfo, materialInfo);
+      return fetch(salesOrganisation, customerCodeInfo, shipToInfo,
+          materialInfo, defaultSelectedTenderContract);
     }
     return orElse();
   }
@@ -460,12 +498,14 @@ abstract class _Fetch implements TenderContractEvent {
       {required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
-      required final MaterialInfo materialInfo}) = _$_Fetch;
+      required final MaterialInfo materialInfo,
+      required final TenderContract defaultSelectedTenderContract}) = _$_Fetch;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
   MaterialInfo get materialInfo;
+  TenderContract get defaultSelectedTenderContract;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -551,7 +591,8 @@ class _$_Selected implements _Selected {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialInfo materialInfo)
+            MaterialInfo materialInfo,
+            TenderContract defaultSelectedTenderContract)
         fetch,
     required TResult Function(TenderContract tenderContract) selected,
     required TResult Function() unselected,
@@ -567,7 +608,8 @@ class _$_Selected implements _Selected {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialInfo materialInfo)?
+            MaterialInfo materialInfo,
+            TenderContract defaultSelectedTenderContract)?
         fetch,
     TResult? Function(TenderContract tenderContract)? selected,
     TResult? Function()? unselected,
@@ -583,7 +625,8 @@ class _$_Selected implements _Selected {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialInfo materialInfo)?
+            MaterialInfo materialInfo,
+            TenderContract defaultSelectedTenderContract)?
         fetch,
     TResult Function(TenderContract tenderContract)? selected,
     TResult Function()? unselected,
@@ -686,7 +729,8 @@ class _$_Unselected implements _Unselected {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialInfo materialInfo)
+            MaterialInfo materialInfo,
+            TenderContract defaultSelectedTenderContract)
         fetch,
     required TResult Function(TenderContract tenderContract) selected,
     required TResult Function() unselected,
@@ -702,7 +746,8 @@ class _$_Unselected implements _Unselected {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialInfo materialInfo)?
+            MaterialInfo materialInfo,
+            TenderContract defaultSelectedTenderContract)?
         fetch,
     TResult? Function(TenderContract tenderContract)? selected,
     TResult? Function()? unselected,
@@ -718,7 +763,8 @@ class _$_Unselected implements _Unselected {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            MaterialInfo materialInfo)?
+            MaterialInfo materialInfo,
+            TenderContract defaultSelectedTenderContract)?
         fetch,
     TResult Function(TenderContract tenderContract)? selected,
     TResult Function()? unselected,

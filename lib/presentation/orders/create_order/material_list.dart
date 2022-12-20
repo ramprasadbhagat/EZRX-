@@ -45,67 +45,67 @@ class MaterialListPage extends StatelessWidget {
       key: const Key('materialListPage'),
       body: BlocConsumer<MaterialListBloc, MaterialListState>(
         listenWhen: (previous, current) =>
-            previous.apiFailureOrSuccessOption !=
+        previous.apiFailureOrSuccessOption !=
             current.apiFailureOrSuccessOption,
         listener: (context, state) {
           state.apiFailureOrSuccessOption.fold(
-            () {},
-            (either) => either.fold(
-              (failure) {
+                () {},
+                (either) => either.fold(
+                  (failure) {
                 ErrorUtils.handleApiFailure(context, failure);
               },
-              (_) {},
+                  (_) {},
             ),
           );
         },
         buildWhen: (previous, current) =>
-            previous.isFetching != current.isFetching ||
+        previous.isFetching != current.isFetching ||
             previous.materialList != current.materialList,
         builder: (context, state) {
           return BlocListener<OrderDocumentTypeBloc, OrderDocumentTypeState>(
             listenWhen: (previous, current) =>
-                previous.selectedOrderType != current.selectedOrderType ||
+            previous.selectedOrderType != current.selectedOrderType ||
                 previous.isSubmitting != current.isSubmitting,
             listener: (context, orderDocumentTypeState) {
               orderDocumentTypeState.orderDocumentTypeListFailureOrSuccessOption
                   .fold(
-                () {},
-                (either) => either.fold(
-                  (failure) {
+                    () {},
+                    (either) => either.fold(
+                      (failure) {
                     showSnackBar(
                       context: context,
                       message: 'Unable to fetch Order Type',
                     );
                   },
-                  (_) {
+                      (_) {
                     context.read<MaterialListBloc>().add(
-                          MaterialListEvent.fetch(
-                            user: context.read<UserBloc>().state.user,
-                            salesOrganisation: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
-                            configs: context.read<SalesOrgBloc>().state.configs,
-                            customerCodeInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .customerCodeInfo,
-                            shipToInfo:
-                                context.read<ShipToCodeBloc>().state.shipToInfo,
-                            selectedMaterialFilter: context
-                                .read<MaterialFilterBloc>()
-                                .state
-                                .selectedMaterialFilter,
-                            orderDocumentType: context
-                                .read<OrderDocumentTypeBloc>()
-                                .state
-                                .selectedOrderType,
-                            pickAndPack: context
-                                .read<EligibilityBloc>()
-                                .state
-                                .getPNPValueMaterial,
-                          ),
-                        );
+                      MaterialListEvent.fetch(
+                        user: context.read<UserBloc>().state.user,
+                        salesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        configs: context.read<SalesOrgBloc>().state.configs,
+                        customerCodeInfo: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customerCodeInfo,
+                        shipToInfo:
+                        context.read<ShipToCodeBloc>().state.shipToInfo,
+                        selectedMaterialFilter: context
+                            .read<MaterialFilterBloc>()
+                            .state
+                            .selectedMaterialFilter,
+                        orderDocumentType: context
+                            .read<OrderDocumentTypeBloc>()
+                            .state
+                            .selectedOrderType,
+                        pickAndPack: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .getPNPValueMaterial,
+                      ),
+                    );
                   },
                 ),
               );
@@ -144,90 +144,90 @@ class _BodyContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: materialListState.isFetching &&
-              materialListState.materialList.isEmpty
+          materialListState.materialList.isEmpty
           ? LoadingShimmer.logo(key: const Key('loaderImage'))
           : ScrollList<MaterialInfo>(
-              emptyMessage: 'No material found',
-              onRefresh: () {
-                context.read<MaterialPriceBloc>().add(
-                      const MaterialPriceEvent.initialized(),
-                    );
+        emptyMessage: 'No material found',
+        onRefresh: () {
+          context.read<MaterialPriceBloc>().add(
+            const MaterialPriceEvent.initialized(),
+          );
 
-                context.read<MaterialFilterBloc>().add(
-                      const MaterialFilterEvent.clearSelected(),
-                    );
+          context.read<MaterialFilterBloc>().add(
+            const MaterialFilterEvent.clearSelected(),
+          );
 
-                context.read<MaterialListBloc>().add(
-                      const MaterialListEvent.updateSearchKey(searchKey: ''),
-                    );
-                context.read<MaterialListBloc>().add(
-                      MaterialListEvent.fetch(
-                        user: context.read<UserBloc>().state.user,
-                        salesOrganisation: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
-                        configs: context.read<SalesOrgBloc>().state.configs,
-                        customerCodeInfo: context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo,
-                        shipToInfo:
-                            context.read<ShipToCodeBloc>().state.shipToInfo,
-                        selectedMaterialFilter: context
-                            .read<MaterialFilterBloc>()
-                            .state
-                            .getEmptyMaterialFilter(),
-                        orderDocumentType: context
-                            .read<OrderDocumentTypeBloc>()
-                            .state
-                            .selectedOrderType,
-                        pickAndPack: context
-                            .read<EligibilityBloc>()
-                            .state
-                            .getPNPValueMaterial,
-                      ),
-                    );
-              },
-              onLoadingMore: () => context.read<MaterialListBloc>().add(
-                    MaterialListEvent.loadMore(
-                      user: context.read<UserBloc>().state.user,
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      configs: context.read<SalesOrgBloc>().state.configs,
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      shipToInfo:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
-                      selectedMaterialFilter: context
-                          .read<MaterialFilterBloc>()
-                          .state
-                          .selectedMaterialFilter,
-                      orderDocumentType: context
-                          .read<OrderDocumentTypeBloc>()
-                          .state
-                          .selectedOrderType,
-                      pickAndPack: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .getPNPValueMaterial,
-                    ),
-                  ),
-              isLoading: materialListState.isFetching,
-              itemBuilder: (context, index, item) {
-                final salesOrgConfigs =
-                    context.read<SalesOrgBloc>().state.configs;
-
-                return _ListContent(
-                  salesOrgConfigs: salesOrgConfigs,
-                  materialInfo: item,
-                  addToCart: addToCart,
-                );
-              },
-              items: materialListState.materialList,
+          context.read<MaterialListBloc>().add(
+            const MaterialListEvent.updateSearchKey(searchKey: ''),
+          );
+          context.read<MaterialListBloc>().add(
+            MaterialListEvent.fetch(
+              user: context.read<UserBloc>().state.user,
+              salesOrganisation: context
+                  .read<SalesOrgBloc>()
+                  .state
+                  .salesOrganisation,
+              configs: context.read<SalesOrgBloc>().state.configs,
+              customerCodeInfo: context
+                  .read<CustomerCodeBloc>()
+                  .state
+                  .customerCodeInfo,
+              shipToInfo:
+              context.read<ShipToCodeBloc>().state.shipToInfo,
+              selectedMaterialFilter: context
+                  .read<MaterialFilterBloc>()
+                  .state
+                  .getEmptyMaterialFilter(),
+              orderDocumentType: context
+                  .read<OrderDocumentTypeBloc>()
+                  .state
+                  .selectedOrderType,
+              pickAndPack: context
+                  .read<EligibilityBloc>()
+                  .state
+                  .getPNPValueMaterial,
             ),
+          );
+        },
+        onLoadingMore: () => context.read<MaterialListBloc>().add(
+          MaterialListEvent.loadMore(
+            user: context.read<UserBloc>().state.user,
+            salesOrganisation:
+            context.read<SalesOrgBloc>().state.salesOrganisation,
+            configs: context.read<SalesOrgBloc>().state.configs,
+            customerCodeInfo: context
+                .read<CustomerCodeBloc>()
+                .state
+                .customerCodeInfo,
+            shipToInfo:
+            context.read<ShipToCodeBloc>().state.shipToInfo,
+            selectedMaterialFilter: context
+                .read<MaterialFilterBloc>()
+                .state
+                .selectedMaterialFilter,
+            orderDocumentType: context
+                .read<OrderDocumentTypeBloc>()
+                .state
+                .selectedOrderType,
+            pickAndPack: context
+                .read<EligibilityBloc>()
+                .state
+                .getPNPValueMaterial,
+          ),
+        ),
+        isLoading: materialListState.isFetching,
+        itemBuilder: (context, index, item) {
+          final salesOrgConfigs =
+              context.read<SalesOrgBloc>().state.configs;
+
+          return _ListContent(
+            salesOrgConfigs: salesOrgConfigs,
+            materialInfo: item,
+            addToCart: addToCart,
+          );
+        },
+        items: materialListState.materialList,
+      ),
     );
   }
 }
@@ -262,18 +262,19 @@ class _ListContent extends StatelessWidget {
           } else {
             if (materialInfo.hasValidTenderContract) {
               context.read<TenderContractBloc>().add(
-                    TenderContractEvent.fetch(
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      shipToInfo:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
-                      materialInfo: materialInfo,
-                    ),
-                  );
+                TenderContractEvent.fetch(
+                  customerCodeInfo: context
+                      .read<CustomerCodeBloc>()
+                      .state
+                      .customerCodeInfo,
+                  salesOrganisation:
+                  context.read<SalesOrgBloc>().state.salesOrganisation,
+                  shipToInfo:
+                  context.read<ShipToCodeBloc>().state.shipToInfo,
+                  materialInfo: materialInfo,
+                  defaultSelectedTenderContract: TenderContract.empty(),
+                ),
+              );
             }
             addToCart(
               context: context,
@@ -283,7 +284,7 @@ class _ListContent extends StatelessWidget {
                 salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
                 quantity: 1,
                 discountedMaterialCount:
-                    context.read<CartBloc>().state.zmgMaterialCount,
+                context.read<CartBloc>().state.zmgMaterialCount,
                 bundle: Bundle.empty(),
                 addedBonusList: [],
                 stockInfo: StockInfo.empty().copyWith(
@@ -291,8 +292,6 @@ class _ListContent extends StatelessWidget {
                 ),
                 tenderContract: TenderContract.empty(),
               ),
-              hasValidTenderContract: materialInfo.hasValidTenderContract,
-              hasMandatoryTenderContract: materialInfo.hasValidTenderContract,
             );
           }
         },
@@ -305,8 +304,8 @@ class _ListContent extends StatelessWidget {
                 Text(
                   materialInfo.materialNumber.displayMatNo,
                   style: Theme.of(context).textTheme.subtitle2?.apply(
-                        color: ZPColors.kPrimaryColor,
-                      ),
+                    color: ZPColors.kPrimaryColor,
+                  ),
                 ),
                 BonusDiscountLabel(
                   materialInfo: materialInfo,
@@ -319,28 +318,28 @@ class _ListContent extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyText1,
             ),
             (salesOrgConfigs.enableDefaultMD &&
-                    materialInfo.defaultMaterialDescription.isNotEmpty)
+                materialInfo.defaultMaterialDescription.isNotEmpty)
                 ? Text(
-                    materialInfo.defaultMaterialDescription,
-                    style: Theme.of(context).textTheme.subtitle2?.apply(
-                          color: ZPColors.lightGray,
-                        ),
-                  )
+              materialInfo.defaultMaterialDescription,
+              style: Theme.of(context).textTheme.subtitle2?.apply(
+                color: ZPColors.lightGray,
+              ),
+            )
                 : const SizedBox.shrink(),
             (salesOrgConfigs.enableIRN &&
-                    materialInfo.itemRegistrationNumber.isNotEmpty)
+                materialInfo.itemRegistrationNumber.isNotEmpty)
                 ? Text(
-                    materialInfo.itemRegistrationNumber,
-                    style: Theme.of(context).textTheme.subtitle2?.apply(
-                          color: ZPColors.lightGray,
-                        ),
-                  )
+              materialInfo.itemRegistrationNumber,
+              style: Theme.of(context).textTheme.subtitle2?.apply(
+                color: ZPColors.lightGray,
+              ),
+            )
                 : const SizedBox.shrink(),
             Text(
               materialInfo.principalData.principalName,
               style: Theme.of(context).textTheme.subtitle2?.apply(
-                    color: ZPColors.lightGray,
-                  ),
+                color: ZPColors.lightGray,
+              ),
             ),
             _GovermentMaterialCode(
               materialInfo: materialInfo,
@@ -370,14 +369,14 @@ class _GovermentMaterialCode extends StatelessWidget {
     return BlocBuilder<SalesOrgBloc, SalesOrgState>(
       builder: (context, state) {
         return state.configs.enableGMC &&
-                materialInfo.governmentMaterialCode.isNotEmpty
+            materialInfo.governmentMaterialCode.isNotEmpty
             ? Text(
-                '${'Government Material Code:'.tr()} ${materialInfo.governmentMaterialCode}',
-                style: Theme.of(context).textTheme.subtitle2?.apply(
-                      color: ZPColors.lightGray,
-                    ),
-                overflow: TextOverflow.ellipsis,
-              )
+          '${'Government Material Code:'.tr()} ${materialInfo.governmentMaterialCode}',
+          style: Theme.of(context).textTheme.subtitle2?.apply(
+            color: ZPColors.lightGray,
+          ),
+          overflow: TextOverflow.ellipsis,
+        )
             : const SizedBox.shrink();
       },
     );
@@ -393,7 +392,7 @@ class _PriceLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
       buildWhen: (previous, current) =>
-          previous.isFetching != current.isFetching,
+      previous.isFetching != current.isFetching,
       builder: (context, state) {
         final itemPrice = state.materialPrice[materialInfo.materialNumber];
         if (itemPrice != null) {
@@ -419,33 +418,33 @@ class _PriceLabel extends StatelessWidget {
             children: [
               priceAggregate.taxDetails.isNotEmpty
                   ? Text(
-                      priceAggregate.taxDetails,
-                      style: Theme.of(context).textTheme.bodyText1?.apply(
-                            color: ZPColors.lightGray,
-                          ),
-                    )
+                priceAggregate.taxDetails,
+                style: Theme.of(context).textTheme.bodyText1?.apply(
+                  color: ZPColors.lightGray,
+                ),
+              )
                   : const SizedBox.shrink(),
               context.read<SalesOrgBloc>().state.configs.enableVat
                   ? Text(
-                      '${'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr()}${priceAggregate.display(PriceType.listPrice)}',
-                      style: Theme.of(context).textTheme.bodyText1?.apply(
-                            color: ZPColors.lightGray,
-                          ),
-                    )
+                '${'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr()}${priceAggregate.display(PriceType.listPrice)}',
+                style: Theme.of(context).textTheme.bodyText1?.apply(
+                  color: ZPColors.lightGray,
+                ),
+              )
                   : const SizedBox.shrink(),
               context.read<SalesOrgBloc>().state.configs.enableListPrice
                   ? Text(
-                      '${'List Price:'.tr()}${priceAggregate.display(PriceType.listPrice)}',
-                      style: Theme.of(context).textTheme.bodyText1?.apply(
-                            color: ZPColors.lightGray,
-                          ),
-                    )
+                '${'List Price:'.tr()}${priceAggregate.display(PriceType.listPrice)}',
+                style: Theme.of(context).textTheme.bodyText1?.apply(
+                  color: ZPColors.lightGray,
+                ),
+              )
                   : const SizedBox.shrink(),
               Text(
                 '${'Unit Price: '.tr()}${priceAggregate.display(PriceType.unitPrice)}',
                 style: Theme.of(context).textTheme.bodyText1?.apply(
-                      color: ZPColors.black,
-                    ),
+                  color: ZPColors.black,
+                ),
               ),
             ],
           );
@@ -461,8 +460,8 @@ class _PriceLabel extends StatelessWidget {
         return Text(
           '${'Unit Price: '.tr()}NA',
           style: Theme.of(context).textTheme.bodyText1?.apply(
-                color: ZPColors.black,
-              ),
+            color: ZPColors.black,
+          ),
         );
       },
     );
@@ -492,22 +491,22 @@ class _SearchBarState extends State<_SearchBar> {
         ),
       );
       context.read<MaterialListBloc>().add(
-            MaterialListEvent.searchMaterialList(
-              user: context.read<UserBloc>().state.user,
-              salesOrganisation:
-                  context.read<SalesOrgBloc>().state.salesOrganisation,
-              configs: context.read<SalesOrgBloc>().state.configs,
-              customerCodeInfo:
-                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
-              shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-              selectedMaterialFilter: context
-                  .read<MaterialFilterBloc>()
-                  .state
-                  .selectedMaterialFilter,
-              pickAndPack:
-                  context.read<EligibilityBloc>().state.getPNPValueMaterial,
-            ),
-          );
+        MaterialListEvent.searchMaterialList(
+          user: context.read<UserBloc>().state.user,
+          salesOrganisation:
+          context.read<SalesOrgBloc>().state.salesOrganisation,
+          configs: context.read<SalesOrgBloc>().state.configs,
+          customerCodeInfo:
+          context.read<CustomerCodeBloc>().state.customerCodeInfo,
+          shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+          selectedMaterialFilter: context
+              .read<MaterialFilterBloc>()
+              .state
+              .selectedMaterialFilter,
+          pickAndPack:
+          context.read<EligibilityBloc>().state.getPNPValueMaterial,
+        ),
+      );
     }
     super.initState();
   }
@@ -526,7 +525,7 @@ class _SearchBarState extends State<_SearchBar> {
       color: ZPColors.white,
       child: BlocConsumer<MaterialListBloc, MaterialListState>(
         listenWhen: (previous, current) =>
-            previous.searchKey != current.searchKey,
+        previous.searchKey != current.searchKey,
         listener: (context, state) {
           final searchText = state.searchKey.getValue();
           _searchController.value = TextEditingValue(
@@ -535,7 +534,7 @@ class _SearchBarState extends State<_SearchBar> {
           );
         },
         buildWhen: (previous, current) =>
-            previous.searchKey != current.searchKey ||
+        previous.searchKey != current.searchKey ||
             previous.isFetching != current.isFetching,
         builder: (context, state) {
           return Form(
@@ -546,36 +545,36 @@ class _SearchBarState extends State<_SearchBar> {
               enabled: !state.isFetching,
               onChanged: (value) {
                 context.read<MaterialListBloc>().add(
-                      MaterialListEvent.updateSearchKey(searchKey: value),
-                    );
+                  MaterialListEvent.updateSearchKey(searchKey: value),
+                );
               },
               onFieldSubmitted: (value) {
                 if (state.searchKey.isValid()) {
                   // search code goes here
                   context.read<MaterialListBloc>().add(
-                        MaterialListEvent.searchMaterialList(
-                          user: context.read<UserBloc>().state.user,
-                          salesOrganisation: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrganisation,
-                          configs: context.read<SalesOrgBloc>().state.configs,
-                          customerCodeInfo: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                          shipToInfo:
-                              context.read<ShipToCodeBloc>().state.shipToInfo,
-                          selectedMaterialFilter: context
-                              .read<MaterialFilterBloc>()
-                              .state
-                              .selectedMaterialFilter,
-                          pickAndPack: context
-                              .read<EligibilityBloc>()
-                              .state
-                              .getPNPValueMaterial,
-                        ),
-                      );
+                    MaterialListEvent.searchMaterialList(
+                      user: context.read<UserBloc>().state.user,
+                      salesOrganisation: context
+                          .read<SalesOrgBloc>()
+                          .state
+                          .salesOrganisation,
+                      configs: context.read<SalesOrgBloc>().state.configs,
+                      customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                      shipToInfo:
+                      context.read<ShipToCodeBloc>().state.shipToInfo,
+                      selectedMaterialFilter: context
+                          .read<MaterialFilterBloc>()
+                          .state
+                          .selectedMaterialFilter,
+                      pickAndPack: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .getPNPValueMaterial,
+                    ),
+                  );
                   locator<CountlyService>().addCountlyEvent(
                     'Product Search',
                     segmentation: {
@@ -603,17 +602,17 @@ class _SearchBarState extends State<_SearchBar> {
                   showSnackBar(
                     context: context,
                     message:
-                        'Search input must be greater than 2 characters.'.tr(),
+                    'Search input must be greater than 2 characters.'.tr(),
                   );
                 }
               },
               validator: (_) => state.searchKey.value.fold(
-                (f) => f.maybeMap(
+                    (f) => f.maybeMap(
                   subceedLength: (f) =>
                       'Search input must be greater than 2 characters.'.tr(),
                   orElse: () => null,
                 ),
-                (_) => null,
+                    (_) => null,
               ),
               decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -633,43 +632,43 @@ class _SearchBarState extends State<_SearchBar> {
                   onPressed: () {
                     //To reset the filters
                     context.read<MaterialFilterBloc>().add(
-                          const MaterialFilterEvent.clearSelected(),
-                        );
+                      const MaterialFilterEvent.clearSelected(),
+                    );
 
                     context.read<MaterialListBloc>().add(
-                          const MaterialListEvent.updateSearchKey(
-                            searchKey: '',
-                          ),
-                        );
+                      const MaterialListEvent.updateSearchKey(
+                        searchKey: '',
+                      ),
+                    );
                     // fetch code goes here
                     context
                         .read<MaterialListBloc>()
                         .add(MaterialListEvent.fetch(
-                          user: context.read<UserBloc>().state.user,
-                          salesOrganisation: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrganisation,
-                          configs: context.read<SalesOrgBloc>().state.configs,
-                          customerCodeInfo: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                          shipToInfo:
-                              context.read<ShipToCodeBloc>().state.shipToInfo,
-                          selectedMaterialFilter: context
-                              .read<MaterialFilterBloc>()
-                              .state
-                              .getEmptyMaterialFilter(),
-                          orderDocumentType: context
-                              .read<OrderDocumentTypeBloc>()
-                              .state
-                              .selectedOrderType,
-                          pickAndPack: context
-                              .read<EligibilityBloc>()
-                              .state
-                              .getPNPValueMaterial,
-                        ));
+                      user: context.read<UserBloc>().state.user,
+                      salesOrganisation: context
+                          .read<SalesOrgBloc>()
+                          .state
+                          .salesOrganisation,
+                      configs: context.read<SalesOrgBloc>().state.configs,
+                      customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                      shipToInfo:
+                      context.read<ShipToCodeBloc>().state.shipToInfo,
+                      selectedMaterialFilter: context
+                          .read<MaterialFilterBloc>()
+                          .state
+                          .getEmptyMaterialFilter(),
+                      orderDocumentType: context
+                          .read<OrderDocumentTypeBloc>()
+                          .state
+                          .selectedOrderType,
+                      pickAndPack: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .getPNPValueMaterial,
+                    ));
                   },
                 ),
                 hintText: 'Search...'.tr(),
@@ -701,8 +700,8 @@ class _MaterialFilters extends StatelessWidget {
                   state.getFilterLabel(MaterialFilterType.principal).tr(),
                   maxLines: 1,
                   style: Theme.of(context).textTheme.subtitle2?.apply(
-                        color: ZPColors.primary,
-                      ),
+                    color: ZPColors.primary,
+                  ),
                 ),
                 onTap: () {
                   context.router.push(
@@ -718,8 +717,8 @@ class _MaterialFilters extends StatelessWidget {
                   state.getFilterLabel(MaterialFilterType.therapeutic).tr(),
                   maxLines: 1,
                   style: Theme.of(context).textTheme.subtitle2?.apply(
-                        color: ZPColors.primary,
-                      ),
+                    color: ZPColors.primary,
+                  ),
                 ),
                 onTap: () {
                   context.router.push(
@@ -735,8 +734,8 @@ class _MaterialFilters extends StatelessWidget {
                   state.getFilterLabel(MaterialFilterType.brand).tr(),
                   maxLines: 1,
                   style: Theme.of(context).textTheme.subtitle2?.apply(
-                        color: ZPColors.primary,
-                      ),
+                    color: ZPColors.primary,
+                  ),
                 ),
                 onTap: () {
                   context.router.push(

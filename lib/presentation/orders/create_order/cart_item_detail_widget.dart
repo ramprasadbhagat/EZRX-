@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
@@ -22,6 +24,7 @@ class CartItemDetailWidget extends StatefulWidget {
 
   final PriceAggregate cartItem;
   final Function(int) onQuantityChanged;
+
   @override
   State<CartItemDetailWidget> createState() => _CartItemDetailWidgetState();
 }
@@ -106,7 +109,7 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             QuantityInput(
-              isEnabled: widget.cartItem.tenderContract == TenderContract.empty(),
+              isEnabled: true,
               quantityAddKey: const Key('cartItemAdd'),
               quantityDeleteKey: const Key('cartItemDelete'),
               quantityTextKey: const Key('item'),
@@ -142,45 +145,71 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
           ],
         ),
         const SizedBox(height: 15),
-        enableVat
-            ? Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: BalanceTextRow(
-                  keyText: 'Unit price before $taxCode'.tr(),
-                  valueText: widget.cartItem.display(PriceType.listPrice),
-                  keyFlex: 1,
-                  valueFlex: 1,
+        BlocBuilder<TenderContractBloc, TenderContractState>(
+          buildWhen: (previous, current) =>
+              previous.selectedTenderContract != current.selectedTenderContract,
+          builder: (context, state) {
+            final cartItem = state.selectedTenderContract ==
+                        TenderContract.empty() ||
+                    state.selectedTenderContract == TenderContract.noContract()
+                ? widget.cartItem
+                : widget.cartItem.copyWith(
+                    tenderContract: state.selectedTenderContract,
+                    price: widget.cartItem.price.copyWith(
+                      finalPrice: MaterialPrice(
+                        state.selectedTenderContract.tenderPrice
+                            .tenderPriceByPricingUnit(
+                          state.selectedTenderContract.pricingUnit,
+                        ),
+                      ),
+                    ),
+                  );
+
+            return Column(
+              children: [
+                enableVat
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: BalanceTextRow(
+                          keyText: 'Unit price before $taxCode'.tr(),
+                          valueText: cartItem.display(PriceType.listPrice),
+                          keyFlex: 1,
+                          valueFlex: 1,
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: BalanceTextRow(
+                    keyText: 'Unit Price'.tr(),
+                    valueText: cartItem.display(PriceType.unitPrice),
+                    keyFlex: 1,
+                    valueFlex: 1,
+                  ),
                 ),
-              )
-            : const SizedBox.shrink(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: BalanceTextRow(
-            keyText: 'Unit Price'.tr(),
-            valueText: widget.cartItem.display(PriceType.unitPrice),
-            keyFlex: 1,
-            valueFlex: 1,
-          ),
-        ),
-        enableVat
-            ? Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: BalanceTextRow(
-                  keyText: 'Total price before $taxCode'.tr(),
-                  valueText: widget.cartItem.display(PriceType.listPriceTotal),
-                  keyFlex: 1,
-                  valueFlex: 1,
+                enableVat
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: BalanceTextRow(
+                          keyText: 'Total price before $taxCode'.tr(),
+                          valueText: cartItem.display(PriceType.listPriceTotal),
+                          keyFlex: 1,
+                          valueFlex: 1,
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: BalanceTextRow(
+                    keyText: 'Total Price'.tr(),
+                    valueText: cartItem.display(PriceType.unitPriceTotal),
+                    keyFlex: 1,
+                    valueFlex: 1,
+                  ),
                 ),
-              )
-            : const SizedBox.shrink(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: BalanceTextRow(
-            keyText: 'Total Price'.tr(),
-            valueText: widget.cartItem.display(PriceType.unitPriceTotal),
-            keyFlex: 1,
-            valueFlex: 1,
-          ),
+              ],
+            );
+          },
         ),
         const SizedBox(height: 15),
       ],

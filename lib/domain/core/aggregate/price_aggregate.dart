@@ -85,9 +85,15 @@ class PriceAggregate with _$PriceAggregate {
   }
 
   double get listPrice {
-    if (price.isDiscountEligible) return discountedListPrice;
+    if (price.isDiscountEligible) {
+      return tenderContract.tenderPrice.tenderPrice != 0
+          ? tenderContract.tenderPrice.tenderPriceByPricingUnit(tenderContract.pricingUnit)
+          : discountedListPrice;
+    }
 
-    return price.finalPrice.getOrDefaultValue(0);
+    return tenderContract.tenderPrice.tenderPrice != 0
+        ? tenderContract.tenderPrice.tenderPriceByPricingUnit(tenderContract.pricingUnit)
+        : price.finalPrice.getOrDefaultValue(0);
   }
 
   double get unitPrice {

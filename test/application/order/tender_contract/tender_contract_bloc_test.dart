@@ -69,6 +69,7 @@ void main() {
           customerCodeInfo: mockCustomerCodeInfo,
           shipToInfo: mockShipToInfo,
           materialInfo: mockMaterialInfo,
+          defaultSelectedTenderContract: TenderContract.empty(),
         ));
 
         final notContainReason730 = !mockTenderContractList
@@ -120,6 +121,7 @@ void main() {
           customerCodeInfo: mockCustomerCodeInfo,
           shipToInfo: mockShipToInfo,
           materialInfo: mockMaterialInfo,
+          defaultSelectedTenderContract: TenderContract.empty(),
         ));
       },
       expect: () => [

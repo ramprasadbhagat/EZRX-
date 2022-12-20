@@ -1216,9 +1216,7 @@ void main() {
         getScopedWidget(
           MaterialListPage(addToCart: ({
             required BuildContext context,
-            required bool hasValidTenderContract,
             required PriceAggregate priceAggregate,
-            required bool hasMandatoryTenderContract,
           }) {
             mockAddToCartStub.addToCart();
           }),

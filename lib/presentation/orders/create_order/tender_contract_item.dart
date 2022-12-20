@@ -88,7 +88,7 @@ class TenderContractHeader extends StatelessWidget {
               )
             : const SizedBox.shrink(),
         Text(
-          'Tender Price: ${tenderContract.tenderPrice.tenderPrice}',
+          'Tender Price: ${tenderContract.tenderPrice.tenderPriceByPricingUnit(tenderContract.pricingUnit)}',
           style: Theme.of(context).textTheme.subtitle2?.apply(
                 color: ZPColors.lightGray,
               ),

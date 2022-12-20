@@ -106,26 +106,27 @@ class QuantityInput extends StatelessWidget {
             ),
           ],
         ),
-        BlocBuilder<TenderContractBloc, TenderContractState>(
-          builder: (context, state) {
-            final value = int.tryParse(controller.text);
+        if (isEnabled)
+          BlocBuilder<TenderContractBloc, TenderContractState>(
+            builder: (context, state) {
+              final value = int.tryParse(controller.text);
 
-            return state.selectedTenderContract == TenderContract.empty() ||
-                    state.selectedTenderContract ==
-                        TenderContract.noContract() ||
-                    value! <=
-                        state.selectedTenderContract.remainingTenderQuantity
-                ? const SizedBox.shrink()
-                : const Text(
-                    'Please ensure the order quantity is less than \nor equal to Remaining Quantity of the contract',
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    style: TextStyle(
-                      color: ZPColors.red,
-                    ),
-                  );
-          },
-        ),
+              return state.selectedTenderContract == TenderContract.empty() ||
+                      state.selectedTenderContract ==
+                          TenderContract.noContract() ||
+                      value! <=
+                          state.selectedTenderContract.remainingTenderQuantity
+                  ? const SizedBox.shrink()
+                  : const Text(
+                      'Please ensure the order quantity is less than \nor equal to Remaining Quantity of the contract',
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      style: TextStyle(
+                        color: ZPColors.red,
+                      ),
+                    );
+            },
+          ),
       ],
     );
   }
