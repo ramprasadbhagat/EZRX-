@@ -76,9 +76,7 @@ class PriceAggregate with _$PriceAggregate {
       type: 'Comm',
       itemRegistrationNumber: materialInfo.itemRegistrationNumber,
       unitOfMeasurement: materialInfo.unitOfMeasurement,
-      bonuses: addedBonusList
-          .where((element) => element.additionalBonusFlag)
-          .toList(),
+      bonuses: addedBonusList,
       // zdp8Override: isOverride,
       hidePrice: materialInfo.hidePrice,
       materialGroup2: materialInfo.materialGroup2,

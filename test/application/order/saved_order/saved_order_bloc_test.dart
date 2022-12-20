@@ -8,7 +8,10 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +29,8 @@ void main() {
   final mockSalesOrg = SalesOrganisation.empty();
   final mockCustomerCodeInfo = CustomerCodeInfo.empty();
   final mockShipToInfo = ShipToInfo.empty();
+  late List<PriceAggregate> fakeCartItemList;
+  final mockSavedOrder = SavedOrder.empty();
 
   late final List<SavedOrder> savedOrderListMock;
 
@@ -243,18 +248,32 @@ void main() {
       '==> Create Draft Order with Success',
       build: () => SavedOrderListBloc(repository: repository),
       setUp: () {
+        fakeCartItemList = [
+          PriceAggregate.empty().copyWith(
+            price: Price.empty().copyWith(
+              finalPrice: MaterialPrice(10.34),
+            ),
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialDescription: 'Fake Description',
+            ),
+            quantity: 1,
+          ),
+        ];
         when(() => repository.createDraftOrder(
               shipToInfo: ShipToInfo.empty(),
               customerCodeInfo: CustomerCodeInfo.empty(),
               grandTotal: 0.0,
               salesOrganisation: SalesOrganisation.empty(),
               user: User.empty(),
-              cartItems: <PriceAggregate>[PriceAggregate.empty()],
+              cartItems: fakeCartItemList,
               data: AdditionalDetailsData.empty(),
             )).thenAnswer(
           (invocation) async => Right(
             SavedOrder.empty().copyWith(
               draftorder: true,
+              items: fakeCartItemList
+                  .map((cartItem) => cartItem.toSavedOrderMaterial())
+                  .toList(),
             ),
           ),
         );
@@ -266,7 +285,7 @@ void main() {
           grandTotal: 0.0,
           salesOrganisation: SalesOrganisation.empty(),
           user: User.empty(),
-          cartItems: <PriceAggregate>[PriceAggregate.empty()],
+          cartItems: fakeCartItemList,
           data: AdditionalDetailsData.empty(),
           existingSavedOrderList: <SavedOrder>[],
         ),
@@ -282,6 +301,9 @@ void main() {
           savedOrders: <SavedOrder>[
             SavedOrder.empty().copyWith(
               draftorder: true,
+              items: fakeCartItemList
+                  .map((cartItem) => cartItem.toSavedOrderMaterial())
+                  .toList(),
             )
           ],
           apiFailureOrSuccessOption: none(),
@@ -329,6 +351,111 @@ void main() {
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Fake-Error'))),
           isCreating: false,
+        ),
+      ],
+    );
+
+    blocTest(
+      'Delete saved order failure',
+      build: () => SavedOrderListBloc(repository: repository),
+      setUp: () {
+        when(
+          () => repository.deleteSavedOrder(
+            orderItem: mockSavedOrder,
+            ordersList: [],
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+      },
+      act: (SavedOrderListBloc bloc) => bloc.add(
+        SavedOrderListEvent.delete(
+          user: mockUser,
+          order: mockSavedOrder,
+        ),
+      ),
+      expect: () => [
+        SavedOrderListState.initial().copyWith(
+          isFetching: true,
+          isDraftOrderCreated: false,
+          isCreating: false,
+          apiFailureOrSuccessOption: none(),
+        ),
+        SavedOrderListState.initial().copyWith(
+          isFetching: false,
+          apiFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          ),
+        ),
+      ],
+    );
+
+    blocTest(
+      'Delete saved order success',
+      build: () => SavedOrderListBloc(repository: repository),
+      setUp: () {
+        when(() => repository.getSavedOrder(
+            user: mockUser,
+            salesOrg: mockSalesOrg,
+            customerCode: mockCustomerCodeInfo,
+            shipToCode: mockShipToInfo,
+            pageSize: _defaultPageSize,
+            offset: 0)).thenAnswer(
+          (invocation) async => Right(savedOrderListMock),
+        );
+
+        when(
+          () => repository.deleteSavedOrder(
+            orderItem: savedOrderListMock[0],
+            ordersList: savedOrderListMock,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(
+            savedOrderListMock.sublist(1),
+          ),
+        );
+      },
+      act: (SavedOrderListBloc bloc) {
+        bloc.add(
+          SavedOrderListEvent.fetch(
+            userInfo: mockUser,
+            selectedSalesOrganisation: mockSalesOrg,
+            selectedCustomerCode: mockCustomerCodeInfo,
+            selectedShipTo: mockShipToInfo,
+          ),
+        );
+        bloc.add(
+          SavedOrderListEvent.delete(
+            user: mockUser,
+            order: savedOrderListMock[0],
+          ),
+        );
+      },
+      expect: () => [
+        SavedOrderListState.initial().copyWith(
+          isFetching: true,
+        ),
+        SavedOrderListState.initial().copyWith(
+          isFetching: false,
+          savedOrders: savedOrderListMock,
+          canLoadMore: savedOrderListMock.length >= _defaultPageSize,
+          nextPageIndex: 1,
+        ),
+        SavedOrderListState.initial().copyWith(
+          isFetching: true,
+          savedOrders: savedOrderListMock,
+          canLoadMore: savedOrderListMock.length >= _defaultPageSize,
+          nextPageIndex: 1,
+        ),
+        SavedOrderListState.initial().copyWith(
+          isFetching: false,
+          savedOrders: savedOrderListMock.sublist(1),
+          canLoadMore: savedOrderListMock.length >= _defaultPageSize,
+          nextPageIndex: 1,
         ),
       ],
     );
