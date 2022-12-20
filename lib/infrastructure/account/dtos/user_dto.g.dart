@@ -8,12 +8,14 @@ part of 'user_dto.dart';
 
 _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
       id: json['id'] as String? ?? '',
-      username: json['username'] as String,
-      email: json['email'] as String,
+      username: json['username'] as String? ?? '',
+      email: json['email'] as String? ?? '',
       firstName: json['firstName'] as String? ?? '',
       lastName: json['lastName'] as String? ?? '',
-      role: RoleDto.fromJson(json['role'] as Map<String, dynamic>),
-      customerCode: json['customerCode'] as String,
+      role: json['role'] == null
+          ? RoleDto.emptyRoleDto
+          : RoleDto.fromJson(json['role'] as Map<String, dynamic>),
+      customerCode: json['customerCode'] as String? ?? '',
       userSalesOrganisations: json['userSalesOrganisationList'] == null
           ? []
           : const _SalesOrganisationListConverter().fromJson(

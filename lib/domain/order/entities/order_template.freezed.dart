@@ -18,9 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OrderTemplate {
   String get templateId => throw _privateConstructorUsedError;
   String get templateName => throw _privateConstructorUsedError;
-  List<OrderTemplateMaterial> get items =>
-      throw _privateConstructorUsedError; // TODO: User entity , not map
-  Map<String, dynamic> get user => throw _privateConstructorUsedError;
+  List<OrderTemplateMaterial> get items => throw _privateConstructorUsedError;
+  User get user => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderTemplateCopyWith<OrderTemplate> get copyWith =>
@@ -37,7 +36,9 @@ abstract class $OrderTemplateCopyWith<$Res> {
       {String templateId,
       String templateName,
       List<OrderTemplateMaterial> items,
-      Map<String, dynamic> user});
+      User user});
+
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -74,8 +75,16 @@ class _$OrderTemplateCopyWithImpl<$Res, $Val extends OrderTemplate>
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as User,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
   }
 }
 
@@ -91,7 +100,10 @@ abstract class _$$_OrderTemplateCopyWith<$Res>
       {String templateId,
       String templateName,
       List<OrderTemplateMaterial> items,
-      Map<String, dynamic> user});
+      User user});
+
+  @override
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -124,9 +136,9 @@ class __$$_OrderTemplateCopyWithImpl<$Res>
           : items // ignore: cast_nullable_to_non_nullable
               as List<OrderTemplateMaterial>,
       user: null == user
-          ? _value._user
+          ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as User,
     ));
   }
 }
@@ -138,9 +150,8 @@ class _$_OrderTemplate extends _OrderTemplate {
       {required this.templateId,
       required this.templateName,
       required final List<OrderTemplateMaterial> items,
-      required final Map<String, dynamic> user})
+      required this.user})
       : _items = items,
-        _user = user,
         super._();
 
   @override
@@ -154,14 +165,8 @@ class _$_OrderTemplate extends _OrderTemplate {
     return EqualUnmodifiableListView(_items);
   }
 
-// TODO: User entity , not map
-  final Map<String, dynamic> _user;
-// TODO: User entity , not map
   @override
-  Map<String, dynamic> get user {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_user);
-  }
+  final User user;
 
   @override
   String toString() {
@@ -178,16 +183,12 @@ class _$_OrderTemplate extends _OrderTemplate {
             (identical(other.templateName, templateName) ||
                 other.templateName == templateName) &&
             const DeepCollectionEquality().equals(other._items, _items) &&
-            const DeepCollectionEquality().equals(other._user, _user));
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      templateId,
-      templateName,
-      const DeepCollectionEquality().hash(_items),
-      const DeepCollectionEquality().hash(_user));
+  int get hashCode => Object.hash(runtimeType, templateId, templateName,
+      const DeepCollectionEquality().hash(_items), user);
 
   @JsonKey(ignore: true)
   @override
@@ -201,7 +202,7 @@ abstract class _OrderTemplate extends OrderTemplate {
       {required final String templateId,
       required final String templateName,
       required final List<OrderTemplateMaterial> items,
-      required final Map<String, dynamic> user}) = _$_OrderTemplate;
+      required final User user}) = _$_OrderTemplate;
   const _OrderTemplate._() : super._();
 
   @override
@@ -210,8 +211,8 @@ abstract class _OrderTemplate extends OrderTemplate {
   String get templateName;
   @override
   List<OrderTemplateMaterial> get items;
-  @override // TODO: User entity , not map
-  Map<String, dynamic> get user;
+  @override
+  User get user;
   @override
   @JsonKey(ignore: true)
   _$$_OrderTemplateCopyWith<_$_OrderTemplate> get copyWith =>

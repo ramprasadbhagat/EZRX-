@@ -93,11 +93,12 @@ void main() {
         ],
       );
 
-      const tempObj = OrderTemplate(
-          templateId: '1231',
-          templateName: 'fake-name',
-          items: <OrderTemplateMaterial>[],
-          user: <String, dynamic>{});
+      final tempObj = OrderTemplate(
+        templateId: '1231',
+        templateName: 'fake-name',
+        items: <OrderTemplateMaterial>[],
+        user: User.empty(),
+      );
 
       blocTest(
         'Delete Existing Template Item',
@@ -114,7 +115,7 @@ void main() {
           });
         },
         act: (OrderTemplateListBloc bloc) {
-          return bloc.add(const OrderTemplateListEvent.delete(tempObj));
+          return bloc.add(OrderTemplateListEvent.delete(tempObj));
         },
         seed: () {
           return OrderTemplateListState.initial().copyWith(
@@ -149,7 +150,7 @@ void main() {
           });
         },
         act: (OrderTemplateListBloc bloc) {
-          return bloc.add(const OrderTemplateListEvent.delete(tempObj));
+          return bloc.add(OrderTemplateListEvent.delete(tempObj));
         },
         seed: () {
           return OrderTemplateListState.initial().copyWith(
@@ -203,9 +204,7 @@ void main() {
                 templateId: 'id',
                 templateName: 'fake-saved-template',
                 items: cartList,
-                user: {
-                  'id': mockUser.id,
-                },
+                user: mockUser,
               ),
             );
             return Right(saveTemplateListMock);
@@ -214,7 +213,8 @@ void main() {
               .thenAnswer((invocation) async => Right(saveTemplateListMock));
         },
         act: (OrderTemplateListBloc bloc) {
-          bloc.add(const OrderTemplateListEvent.templateNameChanged('fake-saved-template'));
+          bloc.add(const OrderTemplateListEvent.templateNameChanged(
+              'fake-saved-template'));
           bloc.add(
             OrderTemplateListEvent.save(
               templateName: 'fake-saved-template',
@@ -243,7 +243,6 @@ void main() {
             templateName: TemplateName('fake-saved-template'),
             apiFailureOrSuccessOption: optionOf(Right(saveTemplateListMock)),
             orderTemplateList: saveTemplateListMock,
-
           ),
         ],
       );
@@ -271,7 +270,8 @@ void main() {
           isFetching: false,
         ),
         act: (OrderTemplateListBloc bloc) {
-          bloc.add(const OrderTemplateListEvent.templateNameChanged('fake-saved-template'));
+          bloc.add(const OrderTemplateListEvent.templateNameChanged(
+              'fake-saved-template'));
           bloc.add(
             OrderTemplateListEvent.save(
               templateName: 'fake-saved-template',

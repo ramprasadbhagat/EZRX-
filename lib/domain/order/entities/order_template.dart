@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -12,8 +13,7 @@ class OrderTemplate with _$OrderTemplate {
     required String templateId,
     required String templateName,
     required List<OrderTemplateMaterial> items,
-    // TODO: User entity , not map
-    required Map<String, dynamic> user,
+    required User user,
   }) = _OrderTemplate;
 
   List<MaterialQueryInfo> get allMaterialQueryInfo => items

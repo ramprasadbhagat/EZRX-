@@ -34,6 +34,12 @@ class RoleDto with _$RoleDto {
     );
   }
 
+  static const emptyRoleDto = RoleDto(
+    id: '',
+    name: '',
+    type: '',
+    description: '',
+  );
   factory RoleDto.fromJson(Map<String, dynamic> json) =>
       _$RoleDtoFromJson(json);
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/user_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_template_material_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -13,9 +14,7 @@ class OrderTemplateDto with _$OrderTemplateDto {
   const factory OrderTemplateDto({
     @JsonKey(name: 'id') required String templateId,
     @JsonKey(name: 'name', defaultValue: '') required String templateName,
-    // TODO: use UserDto someday
-    @JsonKey(name: 'user', defaultValue: <String, dynamic>{})
-        required Map<String, dynamic> user,
+    @Default(UserDto.emptyUserDto) @JsonKey(name: 'user') UserDto user,
     @_CartItemListConverter()
     @JsonKey(name: 'cartList', defaultValue: <OrderTemplateMaterialDto>[])
         required List<OrderTemplateMaterialDto> items,
@@ -25,7 +24,7 @@ class OrderTemplateDto with _$OrderTemplateDto {
     return OrderTemplateDto(
       templateId: orderTemplate.templateId,
       templateName: orderTemplate.templateName,
-      user: orderTemplate.user,
+      user: UserDto.fromDomain(orderTemplate.user),
       items: orderTemplate.items
           .map((e) => OrderTemplateMaterialDto.fromDomain(e))
           .toList(),
@@ -36,7 +35,7 @@ class OrderTemplateDto with _$OrderTemplateDto {
     return OrderTemplate(
       templateId: templateId,
       templateName: templateName,
-      user: user,
+      user: user.toDomain(),
       items: items.map((e) => e.toDomain()).toList(),
     );
   }

@@ -22,9 +22,9 @@ UserDto _$UserDtoFromJson(Map<String, dynamic> json) {
 mixin _$UserDto {
   @JsonKey(name: 'id', defaultValue: '')
   String get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'username')
+  @JsonKey(name: 'username', defaultValue: '')
   String get username => throw _privateConstructorUsedError;
-  @JsonKey(name: 'email')
+  @JsonKey(name: 'email', defaultValue: '')
   String get email => throw _privateConstructorUsedError;
   @JsonKey(name: 'firstName', defaultValue: '')
   String get firstName => throw _privateConstructorUsedError;
@@ -32,7 +32,7 @@ mixin _$UserDto {
   String get lastName => throw _privateConstructorUsedError;
   @JsonKey(name: 'role')
   RoleDto get role => throw _privateConstructorUsedError;
-  @JsonKey(name: 'customerCode')
+  @JsonKey(name: 'customerCode', defaultValue: '')
   String get customerCode => throw _privateConstructorUsedError;
   @_SalesOrganisationListConverter()
   @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
@@ -74,9 +74,9 @@ abstract class $UserDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id', defaultValue: '')
           String id,
-      @JsonKey(name: 'username')
+      @JsonKey(name: 'username', defaultValue: '')
           String username,
-      @JsonKey(name: 'email')
+      @JsonKey(name: 'email', defaultValue: '')
           String email,
       @JsonKey(name: 'firstName', defaultValue: '')
           String firstName,
@@ -84,7 +84,7 @@ abstract class $UserDtoCopyWith<$Res> {
           String lastName,
       @JsonKey(name: 'role')
           RoleDto role,
-      @JsonKey(name: 'customerCode')
+      @JsonKey(name: 'customerCode', defaultValue: '')
           String customerCode,
       @_SalesOrganisationListConverter()
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
@@ -233,9 +233,9 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id', defaultValue: '')
           String id,
-      @JsonKey(name: 'username')
+      @JsonKey(name: 'username', defaultValue: '')
           String username,
-      @JsonKey(name: 'email')
+      @JsonKey(name: 'email', defaultValue: '')
           String email,
       @JsonKey(name: 'firstName', defaultValue: '')
           String firstName,
@@ -243,7 +243,7 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
           String lastName,
       @JsonKey(name: 'role')
           RoleDto role,
-      @JsonKey(name: 'customerCode')
+      @JsonKey(name: 'customerCode', defaultValue: '')
           String customerCode,
       @_SalesOrganisationListConverter()
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
@@ -378,17 +378,17 @@ class _$_UserDto extends _UserDto {
   const _$_UserDto(
       {@JsonKey(name: 'id', defaultValue: '')
           required this.id,
-      @JsonKey(name: 'username')
+      @JsonKey(name: 'username', defaultValue: '')
           required this.username,
-      @JsonKey(name: 'email')
+      @JsonKey(name: 'email', defaultValue: '')
           required this.email,
       @JsonKey(name: 'firstName', defaultValue: '')
           required this.firstName,
       @JsonKey(name: 'lastName', defaultValue: '')
           required this.lastName,
       @JsonKey(name: 'role')
-          required this.role,
-      @JsonKey(name: 'customerCode')
+          this.role = RoleDto.emptyRoleDto,
+      @JsonKey(name: 'customerCode', defaultValue: '')
           required this.customerCode,
       @_SalesOrganisationListConverter()
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
@@ -421,10 +421,10 @@ class _$_UserDto extends _UserDto {
   @JsonKey(name: 'id', defaultValue: '')
   final String id;
   @override
-  @JsonKey(name: 'username')
+  @JsonKey(name: 'username', defaultValue: '')
   final String username;
   @override
-  @JsonKey(name: 'email')
+  @JsonKey(name: 'email', defaultValue: '')
   final String email;
   @override
   @JsonKey(name: 'firstName', defaultValue: '')
@@ -436,7 +436,7 @@ class _$_UserDto extends _UserDto {
   @JsonKey(name: 'role')
   final RoleDto role;
   @override
-  @JsonKey(name: 'customerCode')
+  @JsonKey(name: 'customerCode', defaultValue: '')
   final String customerCode;
   final List<SalesOrganisationDto> _userSalesOrganisations;
   @override
@@ -564,17 +564,17 @@ abstract class _UserDto extends UserDto {
   const factory _UserDto(
       {@JsonKey(name: 'id', defaultValue: '')
           required final String id,
-      @JsonKey(name: 'username')
+      @JsonKey(name: 'username', defaultValue: '')
           required final String username,
-      @JsonKey(name: 'email')
+      @JsonKey(name: 'email', defaultValue: '')
           required final String email,
       @JsonKey(name: 'firstName', defaultValue: '')
           required final String firstName,
       @JsonKey(name: 'lastName', defaultValue: '')
           required final String lastName,
       @JsonKey(name: 'role')
-          required final RoleDto role,
-      @JsonKey(name: 'customerCode')
+          final RoleDto role,
+      @JsonKey(name: 'customerCode', defaultValue: '')
           required final String customerCode,
       @_SalesOrganisationListConverter()
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
@@ -605,10 +605,10 @@ abstract class _UserDto extends UserDto {
   @JsonKey(name: 'id', defaultValue: '')
   String get id;
   @override
-  @JsonKey(name: 'username')
+  @JsonKey(name: 'username', defaultValue: '')
   String get username;
   @override
-  @JsonKey(name: 'email')
+  @JsonKey(name: 'email', defaultValue: '')
   String get email;
   @override
   @JsonKey(name: 'firstName', defaultValue: '')
@@ -620,7 +620,7 @@ abstract class _UserDto extends UserDto {
   @JsonKey(name: 'role')
   RoleDto get role;
   @override
-  @JsonKey(name: 'customerCode')
+  @JsonKey(name: 'customerCode', defaultValue: '')
   String get customerCode;
   @override
   @_SalesOrganisationListConverter()

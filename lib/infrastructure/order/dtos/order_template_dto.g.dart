@@ -10,7 +10,9 @@ _$_OrderTemplateDto _$$_OrderTemplateDtoFromJson(Map<String, dynamic> json) =>
     _$_OrderTemplateDto(
       templateId: json['id'] as String,
       templateName: json['name'] as String? ?? '',
-      user: json['user'] as Map<String, dynamic>? ?? {},
+      user: json['user'] == null
+          ? UserDto.emptyUserDto
+          : UserDto.fromJson(json['user'] as Map<String, dynamic>),
       items: json['cartList'] == null
           ? []
           : const _CartItemListConverter().fromJson(json['cartList'] as String),

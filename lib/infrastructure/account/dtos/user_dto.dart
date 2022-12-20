@@ -22,12 +22,13 @@ class UserDto with _$UserDto {
 
   const factory UserDto({
     @JsonKey(name: 'id', defaultValue: '') required String id,
-    @JsonKey(name: 'username') required String username,
-    @JsonKey(name: 'email') required String email,
+    @JsonKey(name: 'username', defaultValue: '') required String username,
+    @JsonKey(name: 'email', defaultValue: '') required String email,
     @JsonKey(name: 'firstName', defaultValue: '') required String firstName,
     @JsonKey(name: 'lastName', defaultValue: '') required String lastName,
-    @JsonKey(name: 'role') required RoleDto role,
-    @JsonKey(name: 'customerCode') required String customerCode,
+    @Default(RoleDto.emptyRoleDto) @JsonKey(name: 'role') RoleDto role,
+    @JsonKey(name: 'customerCode', defaultValue: '')
+        required String customerCode,
     @_SalesOrganisationListConverter()
     @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
         required List<SalesOrganisationDto> userSalesOrganisations,
@@ -74,7 +75,24 @@ class UserDto with _$UserDto {
       disableCreateOrder: user.disableCreateOrder,
     );
   }
-
+  static const emptyUserDto = UserDto(
+    acceptPrivacyPolicy: false,
+    acceptPrivacyPolicyTime: '',
+    customerCode: '',
+    email: '',
+    emailNotifications: false,
+    enableOrderType: false,
+    firstName: '',
+    hasBonusOverride: false,
+    id: '',
+    languagePreference: '',
+    lastName: '',
+    mobileNotifications: false,
+    privacyPolicyAcceptedPlatform: '',
+    username: '',
+    userSalesOrganisations: [],
+    disableCreateOrder: false,
+  );
   User toDomain() {
     return User(
       id: id,
