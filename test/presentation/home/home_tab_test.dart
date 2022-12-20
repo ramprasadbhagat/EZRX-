@@ -162,7 +162,10 @@ void main() {
         when(() => materialPriceBlocMock.state)
             .thenReturn(MaterialPriceState.initial());
         when(() => eligibilityBlocMock.state)
-            .thenReturn(EligibilityState.initial());
+            .thenReturn(EligibilityState.initial().copyWith(
+              customerCodeInfo: CustomerCodeInfo.empty()
+              .copyWith(status: Status('EDI'))
+        ));
         when(() => covidMaterialListBlocMock.state)
             .thenReturn(CovidMaterialListState.initial());
         when(() => cartBlocMock.state).thenReturn(CartState.initial());
@@ -253,6 +256,8 @@ void main() {
         expect(find.byType(HomeTab), findsOneWidget);
         expect(
             find.byKey(const ValueKey('HomeSalesOrgSelector')), findsOneWidget);
+        final ediUserBanner = find.byKey(const ValueKey('EdiUserBanner'));
+        expect(ediUserBanner,findsOneWidget);
         expect(find.byKey(const ValueKey('HomeCustomerCodeSelector')),
             findsOneWidget);
         expect(

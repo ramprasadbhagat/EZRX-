@@ -233,7 +233,10 @@ void main() {
       when(() => shipToCodeBlocMock.state)
           .thenReturn(ShipToCodeState.initial());
       when(() => eligibilityBlocMock.state)
-          .thenReturn(EligibilityState.initial().copyWith());
+            .thenReturn(EligibilityState.initial().copyWith(
+              customerCodeInfo: CustomerCodeInfo.empty()
+              .copyWith(status: Status('EDI'))
+        ));    
       when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
           user: User.empty().copyWith(
               role: Role.empty()
@@ -310,7 +313,8 @@ void main() {
           tester.binding.window.devicePixelRatioTestValue = 1.0;
           final orderSummaryPage = find.byKey(const Key('orderSummaryKey'));
           expect(orderSummaryPage, findsOneWidget);
-
+          final ediUserBanner = find.byKey(const ValueKey('EdiUserBanner'));
+          expect(ediUserBanner,findsOneWidget);
           final continueKey =
               find.byKey(const Key('continueButtonKey'), skipOffstage: false);
           expect(continueKey, findsNWidgets(5));

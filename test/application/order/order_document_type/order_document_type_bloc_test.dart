@@ -20,10 +20,14 @@ void main() {
   final mockSalesOrganisation = SalesOrganisation.empty();
   final selectedOrderDocumentType= OrderDocumentType.empty().copyWith(documentType: 'ZPOR');
   late final List<OrderDocumentType> orderDocumentTypeListMock;
+  late final List<OrderDocumentType> orderDocumentTypeListEDICustomerMock;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     orderDocumentTypeListMock = await OrderDocumentTypeLocalDataSource().getOrderDocumentTypList();
+    orderDocumentTypeListEDICustomerMock = await OrderDocumentTypeLocalDataSource().getOrderDocumentTypList();
+    orderDocumentTypeListEDICustomerMock
+        .removeWhere((element) => element.documentType.contains('ZPOR'));
   });
 
   group('Order DocumentType List BLOC', () {
@@ -84,8 +88,33 @@ void main() {
           orderDocumentTypeListFailureOrSuccessOption:
                   optionOf(Right(orderDocumentTypeListMock)),
               isSubmitting: false,
-          orderDocumentTypeList: orderDocumentTypeListMock    
+            orderDocumentTypeList: orderDocumentTypeListMock),
+      ],
+    );
+
+    blocTest(
+      'order Document Type List Success For EDI Customer',
+      build: () => OrderDocumentTypeBloc(
+          orderDocumentTypeRepository: orderDocumentTypeRepository),
+      setUp: () {
+        when(
+          () => orderDocumentTypeRepository.getOrderDocumentTypList(
+              salesOrganisation: mockSalesOrganisation),
+        ).thenAnswer(
+            (invocation) async => Right(orderDocumentTypeListEDICustomerMock));
+      },
+      act: (OrderDocumentTypeBloc bloc) => bloc.add(
+          OrderDocumentTypeEvent.fetch(
+              salesOrganisation: mockSalesOrganisation, isEDI: true)),
+      expect: () => [
+        OrderDocumentTypeState.initial().copyWith(
+          isSubmitting: true,
         ),
+        OrderDocumentTypeState.initial().copyWith(
+            orderDocumentTypeListFailureOrSuccessOption:
+                optionOf(Right(orderDocumentTypeListEDICustomerMock)),
+            isSubmitting: false,
+            orderDocumentTypeList: orderDocumentTypeListEDICustomerMock),
       ],
     );
 

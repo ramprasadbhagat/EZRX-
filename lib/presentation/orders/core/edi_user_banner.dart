@@ -14,6 +14,7 @@ class EdiUserBanner extends StatelessWidget {
       builder: (context, state) {
         return state.customerCodeInfo.status.isEDI
             ? SizedBox(
+              key: const Key('EdiUserBanner'),
                 height: 38,
                 child: Container(
                   decoration: const BoxDecoration(
