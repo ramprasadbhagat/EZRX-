@@ -1,0 +1,251 @@
+import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/account_selector_storage_dto.dart';
+import 'package:ezrxmobile/infrastructure/account/repository/sales_org_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+
+class SalesOrgLocalDataSourceMock extends Mock
+    implements SalesOrgLocalDataSource {}
+
+class SalesOrgRemoteDataSourceMock extends Mock
+    implements SalesOrgRemoteDataSource {}
+
+class AccountSelectorStorageMock extends Mock
+    implements AccountSelectorStorage {}
+
+class ConfigMock extends Mock implements Config {}
+
+class CountlyServiceMock extends Mock implements CountlyService {}
+
+void main() {
+  late Config configMock;
+  late String mockSalesOrgName;
+  late SalesOrganisation mockSalesOrg;
+  late CountlyService countlyServiceMock;
+  late SalesOrgRepository salesOrgRepository;
+  late AccountSelectorStorage accountSelectorStorageMock;
+  late SalesOrgLocalDataSource salesOrgLocalDataSourceMock;
+  late SalesOrgRemoteDataSource salesOrgRemoteDataSourceMock;
+
+  setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    configMock = ConfigMock();
+    countlyServiceMock = CountlyServiceMock();
+    accountSelectorStorageMock = AccountSelectorStorageMock();
+    salesOrgLocalDataSourceMock = SalesOrgLocalDataSourceMock();
+    salesOrgRemoteDataSourceMock = SalesOrgRemoteDataSourceMock();
+
+    mockSalesOrgName = 'mockSalesOrg';
+
+    mockSalesOrg = SalesOrganisation.empty().copyWith(
+      salesOrg: SalesOrg(mockSalesOrgName),
+    );
+
+    salesOrgRepository = SalesOrgRepository(
+      config: configMock,
+      countlyService: countlyServiceMock,
+      localDataSource: salesOrgLocalDataSourceMock,
+      remoteDataSource: salesOrgRemoteDataSourceMock,
+      accountSelectorStorage: accountSelectorStorageMock,
+    );
+
+    registerFallbackValue(AccountSelectorStorageDto.empty());
+  });
+
+  group('Sales Org Repository Test', () {
+    test(
+        'Get Sales Organisation Config from local data source successfully test',
+        () async {
+      when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+
+      when(
+        () => salesOrgLocalDataSourceMock.getConfig(
+          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+        ),
+      ).thenAnswer((invocation) async => SalesOrganisationConfigs.empty());
+
+      final result =
+          await salesOrgRepository.getSalesOrganisationConfigs(mockSalesOrg);
+
+      expect(result.isRight(), true);
+    });
+
+    test('Get Sales Organisation Config from local data source failed test',
+        () async {
+      when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+
+      when(
+        () => salesOrgLocalDataSourceMock.getConfig(
+          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+        ),
+      ).thenThrow((invocation) async => MockException());
+
+      final result =
+          await salesOrgRepository.getSalesOrganisationConfigs(mockSalesOrg);
+
+      expect(result.isLeft(), true);
+    });
+
+    test(
+        'Get Sales Organisation Config from remote data source successfully test',
+        () async {
+      when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+
+      when(
+        () => countlyServiceMock.addCountlyEvent(
+          'salesOrg_save',
+          segmentation: {
+            'salesOrg': mockSalesOrg.salesOrg.getOrCrash(),
+          },
+        ),
+      ).thenAnswer((invocation) async {
+        return;
+      });
+
+      when(
+        () => salesOrgRemoteDataSourceMock.getConfig(
+          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+        ),
+      ).thenAnswer((invocation) async => SalesOrganisationConfigs.empty());
+
+      final result =
+          await salesOrgRepository.getSalesOrganisationConfigs(mockSalesOrg);
+
+      expect(result.isRight(), true);
+    });
+
+    test('Get Sales Organisation Config from remote data source failed test',
+        () async {
+      when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+
+      when(
+        () => countlyServiceMock.addCountlyEvent(
+          'salesOrg_save',
+          segmentation: {
+            'salesOrg': mockSalesOrg.salesOrg.getOrCrash(),
+          },
+        ),
+      ).thenAnswer((invocation) async {
+        return;
+      });
+
+      when(
+        () => salesOrgRemoteDataSourceMock.getConfig(
+          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+        ),
+      ).thenThrow((invocation) async => Exception());
+
+      final result =
+          await salesOrgRepository.getSalesOrganisationConfigs(mockSalesOrg);
+
+      expect(result.isLeft(), true);
+    });
+
+    test('Init sales org storage success test', () async {
+      when(() => accountSelectorStorageMock.init())
+          .thenAnswer((invocation) async {
+        return;
+      });
+
+      final result = await salesOrgRepository.initSalesOrgStorage();
+
+      expect(result.isRight(), true);
+    });
+
+    test('Init sales org storage failed test', () async {
+      when(() => accountSelectorStorageMock.init())
+          .thenThrow((invocation) => Exception());
+
+      final result = await salesOrgRepository.initSalesOrgStorage();
+
+      expect(result.isLeft(), true);
+    });
+
+    test('Store sales org in account storage success test', () async {
+      when(() => accountSelectorStorageMock.get())
+          .thenAnswer((invocation) async => AccountSelectorStorageDto.empty());
+
+      when(
+        () => accountSelectorStorageMock.set(
+          accountSelectorStorageDto:
+              any(named: 'accountSelectorStorageDto', that: isNotNull),
+        ),
+      ).thenAnswer((invocation) async {
+        return;
+      });
+
+      final result = await salesOrgRepository.storeSalesOrg(
+        salesOrg: mockSalesOrgName,
+      );
+
+      expect(result.isRight(), true);
+    });
+
+    test('Store sales org in account storage failure test', () async {
+      when(() => accountSelectorStorageMock.get())
+          .thenAnswer((invocation) async => AccountSelectorStorageDto.empty());
+
+      when(
+        () => accountSelectorStorageMock.set(
+          accountSelectorStorageDto:
+              any(named: 'accountSelectorStorageDto', that: isNotNull),
+        ),
+      ).thenThrow((invocation) => MockException());
+
+      final result = await salesOrgRepository.storeSalesOrg(
+        salesOrg: mockSalesOrgName,
+      );
+
+      expect(result.isLeft(), true);
+    });
+
+    test('Get sales org success test', () async {
+      final mockAccountSelectorDto = AccountSelectorStorageDto.empty();
+
+      when(() => accountSelectorStorageMock.get())
+          .thenAnswer((invocation) async => mockAccountSelectorDto);
+
+      final result = await salesOrgRepository.getSalesOrg();
+
+      expect(result.isRight(), true);
+    });
+
+    test('Get sales org failed test', () async {
+      when(() => accountSelectorStorageMock.get())
+          .thenThrow((invocation) => Exception());
+
+      final result = await salesOrgRepository.getSalesOrg();
+
+      expect(result.isLeft(), true);
+    });
+
+    test('Delete sales org success test', () async {
+      when(() => accountSelectorStorageMock.delete())
+          .thenAnswer((invocation) async {
+        return;
+      });
+
+      final result = await salesOrgRepository.deleteSalesOrg();
+
+      expect(result.isRight(), true);
+    });
+
+    test('Delete sales org failed test', () async {
+      when(() => accountSelectorStorageMock.delete())
+          .thenThrow((invocation) => Exception());
+
+      final result = await salesOrgRepository.deleteSalesOrg();
+
+      expect(result.isLeft(), true);
+    });
+  });
+}
