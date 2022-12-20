@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NewPasswordTextField extends StatelessWidget {
   final User user;
-  const NewPasswordTextField({Key? key,required this.user}) : super(key: key);
+  const NewPasswordTextField({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,37 +35,29 @@ class NewPasswordTextField extends StatelessWidget {
                   );
             },
             obscureText: state.isNewPasswordObscure,
-            validator: (text) {
-              return context
-                  .read<ResetPasswordBloc>()
-                  .state
-                  .newPassword
-                  .value
-                  .fold(
-                    (f) => f.maybeMap(
-                      empty: (_) => 'New Password.'.tr(),
-                      subceedLength: (_) =>
-                          'Minimum length of 10 characters'.tr(),
-                      mustOneUpperCaseCharacter: (_) =>
-                          'Contain at least 1 Upper case character (A to Z)'
-                              .tr(),
-                      mustOneLowerCaseCharacter: (_) =>
-                          'Contain at least 1 Lower case character (a to z)'
-                              .tr(),
-                      mustOneNumericCharacter: (_) =>
-                          'Contain at least a numeric character (0 to 9)'.tr(),
-                      mustOneSpecialCharacter: (_) =>
-                          'Contain at least one special character from the list (i.e. _ , # , ? , ! , @ , \$ , % , ^ , & , *, - )'
-                              .tr(),
-                      mustNotContainUserName: (_) =>
-                          'Must not contain any part of your username and/or name'
-                              .tr(),
-                      mustNotMatchOldPassword: (_) =>
-                          'New password cannot be same as old one',
-                      orElse: () => null,
-                    ),
-                    (_) => null,
-                  );
+            validator: (_) {
+              return state.newPassword.value.fold(
+                (f) => f.maybeMap(
+                  empty: (_) => 'New Password.'.tr(),
+                  subceedLength: (_) => 'Minimum length of 10 characters'.tr(),
+                  mustOneUpperCaseCharacter: (_) =>
+                      'Contain at least 1 Upper case character (A to Z)'.tr(),
+                  mustOneLowerCaseCharacter: (_) =>
+                      'Contain at least 1 Lower case character (a to z)'.tr(),
+                  mustOneNumericCharacter: (_) =>
+                      'Contain at least a numeric character (0 to 9)'.tr(),
+                  mustOneSpecialCharacter: (_) =>
+                      'Contain at least one special character from the list (i.e. _ , # , ? , ! , @ , \$ , % , ^ , & , *, - )'
+                          .tr(),
+                  mustNotContainUserName: (_) =>
+                      'Must not contain any part of your username and/or name'
+                          .tr(),
+                  mustNotMatchOldPassword: (_) =>
+                      'New password cannot be same as old one',
+                  orElse: () => null,
+                ),
+                (_) => null,
+              );
             },
             decoration: InputDecoration(
               labelText: 'New Password'.tr(),

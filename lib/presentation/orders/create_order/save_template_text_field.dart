@@ -46,18 +46,13 @@ class SaveTemplateTextField extends StatelessWidget {
                 onChanged: (value) => context.read<OrderTemplateListBloc>().add(
                       OrderTemplateListEvent.templateNameChanged(value),
                     ),
-                validator: (_) => context
-                    .read<OrderTemplateListBloc>()
-                    .state
-                    .templateName
-                    .value
-                    .fold(
-                      (f) => f.maybeMap(
-                        empty: (_) => 'Template name cannot be empty.'.tr(),
-                        orElse: () => null,
-                      ),
-                      (_) => null,
-                    ),
+                validator: (_) => state.templateName.value.fold(
+                  (f) => f.maybeMap(
+                    empty: (_) => 'Template name cannot be empty.'.tr(),
+                    orElse: () => null,
+                  ),
+                  (_) => null,
+                ),
               ),
             ),
           ),

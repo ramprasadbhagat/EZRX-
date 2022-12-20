@@ -86,17 +86,6 @@ class _CustomerSearchPage extends State<CustomerSearchPage> {
                   onChanged: (value) {
                     customerCodeBloc
                         .add(CustomerCodeEvent.updateSearchKey(value));
-                    //   if (_debounce?.isActive ?? false) _debounce?.cancel();
-                    //   _debounce = Timer(const Duration(seconds: 3), () {
-                    //     customerCodeBloc.add(
-                    //       CustomerCodeEvent.fetch(
-                    //         userInfo: userBloc.state.user,
-                    //         selectedSalesOrg: salesOrgBloc.state.salesOrganisation,
-                    //         isRefresh: true,
-                    //         hidecustomer: salesOrgBloc.state.configs.hideCustomer,
-                    //       ),
-                    //     );
-                    //   });
                   },
                   onFieldSubmitted: (value) {
                     if (state.searchKey.isValid()) {

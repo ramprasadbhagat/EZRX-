@@ -7,7 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ConfirmPasswordTextField extends StatelessWidget {
   final User user;
-  const ConfirmPasswordTextField({Key? key, required this.user}) : super(key: key);
+  const ConfirmPasswordTextField({Key? key, required this.user})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,20 +37,15 @@ class ConfirmPasswordTextField extends StatelessWidget {
                   );
             },
             obscureText: state.isConfirmPasswordObscure,
-            validator: (text) {
-              return context
-                  .read<ResetPasswordBloc>()
-                  .state
-                  .confirmPassword
-                  .value
-                  .fold(
-                    (f) => f.maybeMap(
-                      empty: (_) => 'Confirm Password.'.tr(),
-                      mustMatchNewPassword: (_) => 'Password mismatch'.tr(),
-                      orElse: () => null,
-                    ),
-                    (_) => null,
-                  );
+            validator: (_) {
+              return state.confirmPassword.value.fold(
+                (f) => f.maybeMap(
+                  empty: (_) => 'Confirm Password.'.tr(),
+                  mustMatchNewPassword: (_) => 'Password mismatch'.tr(),
+                  orElse: () => null,
+                ),
+                (_) => null,
+              );
             },
             decoration: InputDecoration(
               labelText: 'Confirm Password'.tr(),

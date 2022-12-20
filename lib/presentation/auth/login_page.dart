@@ -208,14 +208,13 @@ class _UsernameField extends StatelessWidget {
               onChanged: (value) => context.read<LoginFormBloc>().add(
                     LoginFormEvent.usernameChanged(value),
                   ),
-              validator: (_) =>
-                  context.read<LoginFormBloc>().state.username.value.fold(
-                        (f) => f.maybeMap(
-                          empty: (_) => 'Username cannot be empty.'.tr(),
-                          orElse: () => null,
-                        ),
-                        (_) => null,
-                      ),
+              validator: (_) => state.username.value.fold(
+                (f) => f.maybeMap(
+                  empty: (_) => 'Username cannot be empty.'.tr(),
+                  orElse: () => null,
+                ),
+                (_) => null,
+              ),
             );
           },
         ),
@@ -275,14 +274,13 @@ class _PasswordField extends StatelessWidget {
               onChanged: (value) => context.read<LoginFormBloc>().add(
                     LoginFormEvent.passwordChanged(value),
                   ),
-              validator: (_) =>
-                  context.read<LoginFormBloc>().state.password.value.fold(
-                        (f) => f.maybeMap(
-                          empty: (_) => 'Password cannot be empty.'.tr(),
-                          orElse: () => null,
-                        ),
-                        (_) => null,
-                      ),
+              validator: (_) => state.password.value.fold(
+                (f) => f.maybeMap(
+                  empty: (_) => 'Password cannot be empty.'.tr(),
+                  orElse: () => null,
+                ),
+                (_) => null,
+              ),
               onFieldSubmitted: (value) {
                 if (!state.isSubmitting) {
                   FocusScope.of(context).unfocus();

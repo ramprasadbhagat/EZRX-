@@ -110,14 +110,13 @@ class _UsernameFieldState extends State<UsernameField> {
             onChanged: (value) => context.read<ProxyLoginFormBloc>().add(
                   ProxyLoginFormEvent.usernameChanged(value),
                 ),
-            validator: (_) =>
-                context.read<ProxyLoginFormBloc>().state.username.value.fold(
-                      (f) => f.maybeMap(
-                        empty: (_) => 'Username cannot be empty.'.tr(),
-                        orElse: () => null,
-                      ),
-                      (_) => null,
-                    ),
+            validator: (_) => state.username.value.fold(
+              (f) => f.maybeMap(
+                empty: (_) => 'Username cannot be empty.'.tr(),
+                orElse: () => null,
+              ),
+              (_) => null,
+            ),
             onFieldSubmitted: (value) {
               if (!state.isSubmitting) {
                 FocusScope.of(context).unfocus();

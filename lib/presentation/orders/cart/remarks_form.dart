@@ -48,14 +48,13 @@ class RemarksForm extends StatelessWidget {
               onChanged: (value) => context.read<CartBloc>().add(
                     CartEvent.remarksChanged(value),
                   ),
-              validator: (_) =>
-                  context.read<CartBloc>().state.remarks.value.fold(
-                        (f) => f.maybeMap(
-                          empty: (_) => 'Remarks cannot be empty.'.tr(),
-                          orElse: () => null,
-                        ),
-                        (_) => null,
-                      ),
+              validator: (_) => state.remarks.value.fold(
+                (f) => f.maybeMap(
+                  empty: (_) => 'Remarks cannot be empty.'.tr(),
+                  orElse: () => null,
+                ),
+                (_) => null,
+              ),
             ),
           ),
         );

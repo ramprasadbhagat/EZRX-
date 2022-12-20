@@ -35,19 +35,14 @@ class OldPasswordTextField extends StatelessWidget {
                   );
             },
             obscureText: state.isOldPasswordObscure,
-            validator: (text) {
-              return context
-                  .read<ResetPasswordBloc>()
-                  .state
-                  .oldPassword
-                  .value
-                  .fold(
-                    (f) => f.maybeMap(
-                      empty: (_) => 'Old Password.'.tr(),
-                      orElse: () => null,
-                    ),
-                    (_) => null,
-                  );
+            validator: (_) {
+              return state.oldPassword.value.fold(
+                (f) => f.maybeMap(
+                  empty: (_) => 'Old Password.'.tr(),
+                  orElse: () => null,
+                ),
+                (_) => null,
+              );
             },
             decoration: InputDecoration(
               labelText: 'Old Password'.tr(),

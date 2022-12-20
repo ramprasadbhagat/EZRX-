@@ -204,8 +204,7 @@ class _TextFormFieldState extends State<_TextFormField> {
                   ),
                 );
           },
-          validator: (value) => _validateForm(
-            value: value,
+          validator: (_) => _validateForm(
             label: widget.label,
             context: context,
           ),
@@ -233,7 +232,6 @@ class _TextFormFieldState extends State<_TextFormField> {
   }
 
   String? _validateForm({
-    required String? value,
     required AdditionalDetailsLabel label,
     required BuildContext context,
   }) {
@@ -429,7 +427,7 @@ class _PaymentTerm extends StatelessWidget {
                   ),
                 );
           },
-          validator: (value) {
+          validator: (_) {
             return context
                 .read<AdditionalDetailsBloc>()
                 .state
