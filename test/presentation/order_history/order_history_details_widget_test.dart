@@ -6,7 +6,9 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/download_attachment/bloc/download_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
@@ -21,6 +23,8 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/bonus_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
+import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
@@ -30,6 +34,8 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_order_ite
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_local.dart';
@@ -92,6 +98,13 @@ class MockOrderHistoryDetailsRepository extends Mock
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
+class MaterialPriceBlocMock
+    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
+    implements MaterialPriceBloc {}
+
+class AddToCartBlocMock extends MockBloc<AddToCartEvent, AddToCartState>
+    implements AddToCartBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late GetIt locator;
@@ -112,6 +125,8 @@ void main() {
   late DownloadAttachmentBloc downloadAttachmentBlocMock;
   late OrderHistory orderHistory;
   late OrderHistoryDetailsRepository orderHistoryDetailsRepository;
+  late MaterialPriceBlocMock materialPriceBlocMock;
+  late AddToCartBlocMock addToCartBlocMock;
 
   setUpAll(() async {
     orderHistoryDetailsRepository = MockOrderHistoryDetailsRepository();
@@ -142,6 +157,8 @@ void main() {
       eligibilityBlocMock = EligibilityBlocMock();
       materialPriceDetailBlocMock = MockMaterialPriceDetailBloc();
       downloadAttachmentBlocMock = MockDownloadAttachmentBloc();
+      materialPriceBlocMock = MaterialPriceBlocMock();
+      addToCartBlocMock = AddToCartBlocMock();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => mockOrderHistoryListBloc.state)
           .thenReturn(OrderHistoryListState.initial());
@@ -175,6 +192,9 @@ void main() {
           .thenReturn(MaterialPriceDetailState.initial());
       when(() => downloadAttachmentBlocMock.state)
           .thenReturn(DownloadAttachmentState.initial());
+      when(() => materialPriceBlocMock.state)
+          .thenReturn(MaterialPriceState.initial());
+      when(() => addToCartBlocMock.state).thenReturn(AddToCartState.initial());   
     });
     StackRouterScope getWUT() {
       return WidgetUtils.getScopedWidget(
@@ -199,6 +219,12 @@ void main() {
           ),
           BlocProvider<DownloadAttachmentBloc>(
             create: (context) => downloadAttachmentBlocMock,
+          ),
+          BlocProvider<MaterialPriceBloc>(
+            create: (context) => materialPriceBlocMock,
+          ),
+          BlocProvider<AddToCartBloc>(
+            create: (context) => addToCartBlocMock,
           ),
         ],
         child: Material(
@@ -507,10 +533,90 @@ void main() {
       // await tester.pumpAndSettle(const Duration(milliseconds: 50));
     });
 
-    testWidgets('order summary bonus details  test ', (tester) async {
+    testWidgets('order summary bonus details  test When Product Not Available', (tester) async {
       final bonusItemList = [
         OrderHistoryDetailsBonusAggregate(
-          orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first,
+          orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first
+              .copyWith(
+                  plannedDeliveryDate: '12/01/22', sAPStatus: 'Order Placed'),
+          details:
+              orderHistoryDetails.orderHistoryDetailsOrderItem.first.details,
+          tenderContractDetails:
+              OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
+          bonusList: orderHistoryDetails.orderHistoryDetailsOrderItem,
+        ),
+      ];
+      when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
+        OrderHistoryDetailsState.initial().copyWith(
+          orderHistoryDetails: orderHistoryDetails,
+          failureOrSuccessOption: none(),
+          showErrorMessage: false,
+          isLoading: true,
+          bonusItem: bonusItemList,
+        ),
+      );
+      final expectedStates = [
+        mockOrderHistoryDetailsBloc.state.copyWith(
+          isLoading: false,
+        ),
+      ];
+      whenListen(mockOrderHistoryDetailsBloc, Stream.fromIterable(expectedStates));
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+          batchNumDisplay: true,
+          enableTaxDisplay: true,
+          enableRemarks: true,
+          displayOrderDiscount: true,
+          disableDeliveryDate: true,
+        )),
+      );
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+            user: User.empty().copyWith(
+          disableCreateOrder: false,
+        )),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+
+      final materialNumber = orderHistoryDetails
+          .orderHistoryDetailsOrderItem.first.materialNumber.displayMatNo;
+
+      final orderItemBonusCardField =
+          find.byKey(Key('orderItemBonusCard-$materialNumber'));
+
+      expect(orderItemBonusCardField, findsOneWidget);
+      await tester.pump();
+
+      final deliveryDate = find.byKey(const Key('deliveryDateTime'));
+      expect(deliveryDate, findsOneWidget);
+
+      final discountRate = find.byKey(const Key('discountRateForBonusCard'));
+
+      expect(discountRate, findsOneWidget);
+      await tester.pump();
+      final sapStatusNotEmptyOrderItem =
+          find.byKey(const Key('sapStatusNotEmpty'));
+
+      expect(sapStatusNotEmptyOrderItem, findsOneWidget);
+      await tester.pump();
+
+      await tester.drag(find.byKey(const Key('scrollHistoryDetail')),
+          const Offset(0.0, -700));
+      await tester.pump();
+
+      final orderItemCard = find.byKey(const Key('orderItemCard'));
+      expect(orderItemCard, findsOneWidget);
+      await tester.tap(orderItemCard, warnIfMissed: false);
+    });
+
+    testWidgets('order summary bonus details  test When Product is Available', (tester) async {
+      final bonusItemList = [
+        OrderHistoryDetailsBonusAggregate(
+          orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first
+              .copyWith(
+                  plannedDeliveryDate: '12/01/22', sAPStatus: ''),
           details:
               orderHistoryDetails.orderHistoryDetailsOrderItem.first.details,
           tenderContractDetails:
@@ -537,6 +643,31 @@ void main() {
           disableDeliveryDate: true,
         )),
       );
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+            user: User.empty().copyWith(
+          disableCreateOrder: false,
+        )),
+      );
+      final materialPriceVal = <MaterialNumber, Price>{
+        bonusItemList.first.orderItem.materialNumber: Price.empty()
+      };
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          materialPrice: materialPriceVal,
+        ),
+      );
+      final materialDetailsVal = <MaterialQueryInfo, MaterialPriceDetail>{
+        MaterialQueryInfo.fromOrderHistoryDetails(
+          orderHistoryDetailsOrderItem:
+              orderHistoryDetails.orderHistoryDetailsOrderItem.first,
+        ): MaterialPriceDetail.empty(),
+      };
+      when(() => materialPriceDetailBlocMock.state).thenReturn(
+        MaterialPriceDetailState.initial().copyWith(
+          materialDetails: materialDetailsVal,
+        ),
+      );
       await tester.pumpWidget(getWUT());
       await tester.pump();
 
@@ -548,20 +679,111 @@ void main() {
 
       expect(orderItemBonusCardField, findsOneWidget);
       await tester.pump();
-      final discountRate = find.byKey(const Key('discountRateForBonusCard'));
 
-      expect(discountRate, findsOneWidget);
-      await tester.pump();
       final sapStatusNotEmptyOrderItem =
           find.byKey(const Key('sapStatusNotEmpty'));
 
       expect(sapStatusNotEmptyOrderItem, findsOneWidget);
+      await tester.pump();
+
+      await tester.drag(find.byKey(const Key('scrollHistoryDetail')),
+          const Offset(0.0, -700));
+      await tester.pump();
+
+      final orderItemCard = find.byKey(const Key('orderItemCard'));
+      expect(orderItemCard, findsOneWidget);
+      await tester.tap(orderItemCard, warnIfMissed: false);
     });
 
-    testWidgets('order summary item details test ', (tester) async {
+    testWidgets('order summary item details test When Product Not Available',
+        (tester) async {
       final bonusItemList = [
         OrderHistoryDetailsBonusAggregate(
-          orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first,
+          orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first
+              .copyWith(
+                  plannedDeliveryDate: '12/01/22', sAPStatus: 'Order Placed'),
+          details:
+              orderHistoryDetails.orderHistoryDetailsOrderItem.first.details,
+          tenderContractDetails:
+              OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
+          bonusList: <OrderHistoryDetailsOrderItem>[],
+        ),
+      ];
+      when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
+        OrderHistoryDetailsState.initial().copyWith(
+          orderHistoryDetails: orderHistoryDetails,
+          failureOrSuccessOption: none(),
+          isLoading: true,
+          showErrorMessage: false,
+          bonusItem: bonusItemList,
+        ),
+      );
+      final expectedStates = [
+        mockOrderHistoryDetailsBloc.state.copyWith(
+          isLoading: false,
+        ),
+      ];
+      whenListen(mockOrderHistoryDetailsBloc, Stream.fromIterable(expectedStates));
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+          batchNumDisplay: true,
+          enableTaxDisplay: true,
+          enableRemarks: true,
+          displayOrderDiscount: true,
+          disableDeliveryDate: true,
+        )),
+      );
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+            user: User.empty().copyWith(
+          disableCreateOrder: false,
+        )),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+
+      final materialNumber = orderHistoryDetails
+          .orderHistoryDetailsOrderItem.first.materialNumber.displayMatNo;
+
+      final orderItemCardField =
+          find.byKey(Key('orderItemCard-$materialNumber'));
+
+      expect(orderItemCardField, findsOneWidget);
+      await tester.pump();
+
+      final deliveryDate = find.byKey(const Key('deliveryDateTime'));
+      expect(deliveryDate, findsOneWidget);
+
+      final sapStatusNotEmptyOrderItem =
+          find.byKey(const Key('sapStatusNotEmpty'));
+
+      expect(sapStatusNotEmptyOrderItem, findsOneWidget);
+      await tester.pump();
+      final discountRateForOrderItem =
+          find.byKey(const Key('discountRateForItemCard'));
+
+      expect(discountRateForOrderItem, findsOneWidget);
+
+      await tester.pump();
+
+      await tester.drag(find.byKey(const Key('scrollHistoryDetail')),
+          const Offset(0.0, -600));
+      await tester.pump();
+
+      final orderItemCard = find.byKey(const Key('orderItemCard'));
+      expect(orderItemCard, findsOneWidget);
+      await tester.tap(orderItemCard, warnIfMissed: false);
+      await tester.pump();
+    });
+
+    testWidgets('order summary item details test When Product is Available',
+        (tester) async {
+      final bonusItemList = [
+        OrderHistoryDetailsBonusAggregate(
+          orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first
+              .copyWith(
+                  plannedDeliveryDate: '12/01/22', sAPStatus: ''),
           details:
               orderHistoryDetails.orderHistoryDetailsOrderItem.first.details,
           tenderContractDetails:
@@ -588,6 +810,32 @@ void main() {
           disableDeliveryDate: true,
         )),
       );
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+            user: User.empty().copyWith(
+          disableCreateOrder: false,
+        )),
+      );
+      final materialPriceVal = <MaterialNumber, Price>{
+        bonusItemList.first.orderItem.materialNumber: Price.empty()
+      };
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          materialPrice: materialPriceVal,
+        ),
+      );
+      final materialDetailsVal = <MaterialQueryInfo, MaterialPriceDetail>{
+        MaterialQueryInfo.fromOrderHistoryDetails(
+          orderHistoryDetailsOrderItem:
+              orderHistoryDetails.orderHistoryDetailsOrderItem.first,
+        ): MaterialPriceDetail.empty(),
+      };
+      when(() => materialPriceDetailBlocMock.state).thenReturn(
+        MaterialPriceDetailState.initial().copyWith(
+          materialDetails: materialDetailsVal,
+        ),
+      );
+
       await tester.pumpWidget(getWUT());
       await tester.pump();
 
@@ -598,23 +846,76 @@ void main() {
           find.byKey(Key('orderItemCard-$materialNumber'));
 
       expect(orderItemCardField, findsOneWidget);
+  
+      final sapStatusNotEmptyOrderItem =
+          find.byKey(const Key('sapStatusNotEmpty'));
+      expect(sapStatusNotEmptyOrderItem, findsOneWidget);
+      await tester.pump();
+
+      await tester.drag(find.byKey(const Key('scrollHistoryDetail')),
+          const Offset(0.0, -600));
+      await tester.pump(const Duration(seconds: 1));
+
+      final orderItemCard = find.byKey(const Key('orderItemCard'));
+      expect(orderItemCard, findsOneWidget);
+      await tester.tap(orderItemCard, warnIfMissed: false);
+    });
+
+    testWidgets('order summary TenderContract details test When sapStatus is not empty', (tester) async {
+      final bonusItemList = [
+        OrderHistoryDetailsBonusAggregate(
+          orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first
+              .copyWith(isTenderContractMaterial: true),
+          details: <OrderHistoryDetailsOrderItemDetails>[],
+          tenderContractDetails:
+              OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
+          bonusList: <OrderHistoryDetailsOrderItem>[],
+        ),
+      ];
+      when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
+        OrderHistoryDetailsState.initial().copyWith(
+          orderHistoryDetails: orderHistoryDetails,
+          failureOrSuccessOption: none(),
+          isLoading: true,
+          showErrorMessage: false,
+          bonusItem: bonusItemList,
+        ),
+      );
+      final expectedStates = [
+        mockOrderHistoryDetailsBloc.state.copyWith(
+          isLoading: false,
+        ),
+      ];
+      whenListen(mockOrderHistoryDetailsBloc, Stream.fromIterable(expectedStates));
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+          batchNumDisplay: true,
+        )),
+      );
+
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+
+      final materialNumber = orderHistoryDetails
+          .orderHistoryDetailsOrderItem.first.materialNumber.displayMatNo;
+
+      final orderTenderContractCardField =
+          find.byKey(Key('orderTenderContractCard-$materialNumber'));
+
+      expect(orderTenderContractCardField, findsOneWidget);
       await tester.pump();
       final sapStatusNotEmptyOrderItem =
           find.byKey(const Key('sapStatusNotEmpty'));
 
       expect(sapStatusNotEmptyOrderItem, findsOneWidget);
-      await tester.pump();
-      final discountRateForOrderItem =
-          find.byKey(const Key('discountRateForItemCard'));
-
-      expect(discountRateForOrderItem, findsOneWidget);
     });
 
-    testWidgets('order summary TenderContract details test ', (tester) async {
+    testWidgets('order summary TenderContract details test When sapStatus is empty', (tester) async {
       final bonusItemList = [
         OrderHistoryDetailsBonusAggregate(
           orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first
-              .copyWith(isTenderContractMaterial: true),
+              .copyWith(isTenderContractMaterial: true, sAPStatus: ''),
           details: <OrderHistoryDetailsOrderItemDetails>[],
           tenderContractDetails:
               OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
@@ -667,7 +968,7 @@ void main() {
       await tester.pump();
       final reOrderButton = find.byKey(const Key('reOrderButton'));
       expect(reOrderButton, findsOneWidget);
-      await tester.tap(reOrderButton);
+      await tester.tap(reOrderButton,warnIfMissed: false);
       await tester.pumpAndSettle(const Duration(milliseconds: 50));
     });
   });

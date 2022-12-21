@@ -133,6 +133,7 @@ class HistoryDetails extends StatelessWidget {
               bottom: 20,
             ),
             child: SingleChildScrollView(
+              key: const Key('scrollHistoryDetail'),
               child: Theme(
                 data: Theme.of(context)
                     .copyWith(dividerColor: Colors.transparent),

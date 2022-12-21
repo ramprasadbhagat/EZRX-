@@ -65,6 +65,7 @@ class OrderItemBonusCard extends StatelessWidget {
                   }
                 },
           child: Card(
+            key: const Key('orderItemCard'),
             color: Colors.white,
             elevation: 3,
             child: Padding(
@@ -117,6 +118,7 @@ class OrderItemBonusCard extends StatelessWidget {
                               orderHistoryDetailsBonusAggregate
                                   .orderItem.plannedDeliveryDate.isNotEmpty
                           ? BalanceTextRow(
+                              key: const Key('deliveryDateTime'),
                               keyText: 'Delivery Date/Time'.tr(),
                               valueText: orderHistoryDetailsBonusAggregate
                                   .orderItem.plannedDeliveryDate,
