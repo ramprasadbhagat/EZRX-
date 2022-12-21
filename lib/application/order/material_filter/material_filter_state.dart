@@ -74,7 +74,8 @@ class MaterialFilterState with _$MaterialFilterState {
   }
 
   List<String> getSearchedFilterList(MaterialFilterType filterType) {
-    final filterList = getFilterList(filterType);
+    final filterList = List<String>.from(getFilterList(filterType))
+      ..sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
     if (searchKey.isEmpty) {
       return filterList;
     }
