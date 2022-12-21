@@ -148,7 +148,7 @@ _$_PriceBonusDto _$$_PriceBonusDtoFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_PriceBonusDtoToJson(_$_PriceBonusDto instance) =>
     <String, dynamic>{
-      'BonusTiers': instance.items,
+      'BonusTiers': instance.items.map((e) => e.toJson()).toList(),
     };
 
 _$_PriceBonusItemDto _$$_PriceBonusItemDtoFromJson(Map<String, dynamic> json) =>
@@ -166,7 +166,7 @@ Map<String, dynamic> _$$_PriceBonusItemDtoToJson(
     <String, dynamic>{
       'Calculation': instance.calculation,
       'QualifyingQuantity': instance.qualifyingQuantity,
-      'BonusMaterial': instance.bonusMaterials,
+      'BonusMaterial': instance.bonusMaterials.map((e) => e.toJson()).toList(),
     };
 
 _$_BonusMaterialDto _$$_BonusMaterialDtoFromJson(Map<String, dynamic> json) =>

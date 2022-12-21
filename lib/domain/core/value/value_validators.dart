@@ -85,8 +85,17 @@ Either<ValueFailure<String>, String> validateContainUserNameOrName(
       ? right(input)
       : left(ValueFailure.mustNotContainUserName(failedValue: input));
 }
+
 Either<ValueFailure<String>, String> validateStringIsEmpty(String input) {
   return input.isEmpty
       ? right(input)
       : left(ValueFailure.empty(failedValue: input));
+}
+
+Either<ValueFailure<double>, double> validateNumberIsBiggerThanZero(
+  double input,
+) {
+  return input > 0.0
+      ? right(input)
+      : left(ValueFailure.numberMustBiggerThanZero(failedValue: input));
 }

@@ -21,7 +21,7 @@ mixin _$PriceOverrideEvent {
     required TResult Function() initialized,
     required TResult Function(
             PriceAggregate item,
-            String newPrice,
+            double newPrice,
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
         fetch,
@@ -32,7 +32,7 @@ mixin _$PriceOverrideEvent {
     TResult? Function()? initialized,
     TResult? Function(
             PriceAggregate item,
-            String newPrice,
+            double newPrice,
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
@@ -43,7 +43,7 @@ mixin _$PriceOverrideEvent {
     TResult Function()? initialized,
     TResult Function(
             PriceAggregate item,
-            String newPrice,
+            double newPrice,
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
@@ -130,7 +130,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function() initialized,
     required TResult Function(
             PriceAggregate item,
-            String newPrice,
+            double newPrice,
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
         fetch,
@@ -144,7 +144,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function()? initialized,
     TResult? Function(
             PriceAggregate item,
-            String newPrice,
+            double newPrice,
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
@@ -158,7 +158,7 @@ class _$_Initialized implements _Initialized {
     TResult Function()? initialized,
     TResult Function(
             PriceAggregate item,
-            String newPrice,
+            double newPrice,
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
@@ -213,7 +213,7 @@ abstract class _$$_FetchCopyWith<$Res> {
   @useResult
   $Res call(
       {PriceAggregate item,
-      String newPrice,
+      double newPrice,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo});
 
@@ -245,7 +245,7 @@ class __$$_FetchCopyWithImpl<$Res>
       newPrice: null == newPrice
           ? _value.newPrice
           : newPrice // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -294,7 +294,7 @@ class _$_Fetch implements _Fetch {
   @override
   final PriceAggregate item;
   @override
-  final String newPrice;
+  final double newPrice;
   @override
   final SalesOrganisation salesOrganisation;
   @override
@@ -335,7 +335,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function() initialized,
     required TResult Function(
             PriceAggregate item,
-            String newPrice,
+            double newPrice,
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
         fetch,
@@ -349,7 +349,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function()? initialized,
     TResult? Function(
             PriceAggregate item,
-            String newPrice,
+            double newPrice,
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
@@ -363,7 +363,7 @@ class _$_Fetch implements _Fetch {
     TResult Function()? initialized,
     TResult Function(
             PriceAggregate item,
-            String newPrice,
+            double newPrice,
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
@@ -410,12 +410,12 @@ class _$_Fetch implements _Fetch {
 abstract class _Fetch implements PriceOverrideEvent {
   const factory _Fetch(
       {required final PriceAggregate item,
-      required final String newPrice,
+      required final double newPrice,
       required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo}) = _$_Fetch;
 
   PriceAggregate get item;
-  String get newPrice;
+  double get newPrice;
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   @JsonKey(ignore: true)

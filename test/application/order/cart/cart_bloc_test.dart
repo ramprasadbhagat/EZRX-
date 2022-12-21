@@ -6794,7 +6794,7 @@ void main() {
 
       group('Test Material Bonus + Additional Bonus CartBloc', () {
         blocTest<CartBloc, CartState>(
-          'Add Additional Bonus with existing materail bonus',
+          'Add Additional Bonus with existing material bonus',
           build: () => CartBloc(cartRepository: cartRepositoryMock),
           seed: () => CartState.initial().copyWith(
             selectedItemsMaterialNumber: [bonusMaterialNumber],

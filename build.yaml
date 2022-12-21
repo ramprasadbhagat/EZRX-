@@ -5,3 +5,6 @@ global_options:
   hive_generator:hive_generator:
     runs_before:
       - json_serializable:json_serializable
+  json_serializable:
+        options:
+          explicit_to_json: true

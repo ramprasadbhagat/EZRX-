@@ -83,7 +83,7 @@ class CartPage extends StatelessWidget {
                               .salesOrganisation,
                         ));
                   },
-                  isLoading: state.isFetching,
+                  isLoading: state.isFetching && state.cartItemList.isEmpty,
                   itemBuilder: (context, index, item) {
                     switch (item.itemType) {
                       case CartItemType.material:

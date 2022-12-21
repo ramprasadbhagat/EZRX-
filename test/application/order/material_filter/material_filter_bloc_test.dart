@@ -93,6 +93,7 @@ void main() {
     batchNumDisplay: false,
     displayOrderDiscount: false,
     minOrderAmount: '0',
+    enableZDP8Override: false,
   );
 
   const fakeSelectedPrincipalFilterCategory = MaterialFilterType.principal;

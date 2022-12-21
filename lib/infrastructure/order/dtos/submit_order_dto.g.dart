@@ -38,9 +38,9 @@ Map<String, dynamic> _$$_SubmitOrderDtoToJson(_$_SubmitOrderDto instance) =>
     <String, dynamic>{
       'username': instance.userName,
       'companyName': instance.companyName,
-      'customer': instance.customer,
+      'customer': instance.customer.toJson(),
       'POReference': instance.poReference,
-      'materials': instance.materials,
+      'materials': instance.materials.map((e) => e.toJson()).toList(),
       'PODate': instance.poDate,
       'RequestedDeliveryDate': instance.requestedDeliveryDate,
       'specialInstructions': instance.specialInstructions,

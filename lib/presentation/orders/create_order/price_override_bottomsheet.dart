@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PriceSheet extends StatefulWidget {
@@ -25,7 +26,7 @@ class _PriceSheetState extends State<PriceSheet> {
   void initState() {
     super.initState();
 
-    newPrice = widget.item.getNewPrice();
+    newPrice = widget.item.price.priceOverride.getOrDefaultValue(0);
   }
 
   @override
@@ -84,6 +85,11 @@ class _PriceSheetState extends State<PriceSheet> {
                         ),
                         style: Theme.of(context).textTheme.titleSmall,
                         enableInteractiveSelection: false,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(
+                            RegExp(r'^\d+\.?\d{0,2}'),
+                          ),
+                        ],
                         keyboardType: const TextInputType.numberWithOptions(
                           signed: false,
                           decimal: true,
@@ -139,7 +145,7 @@ class _PriceSheetState extends State<PriceSheet> {
                       previous.isFetching != current.isFetching,
                   builder: (context, state) {
                     return ElevatedButton(
-                      key: const Key('ssoLoginButton'),
+                      key: const Key('ssoLoginButton'), //TODO: change the key
                       onPressed: state.isFetching
                           ? null
                           : () {

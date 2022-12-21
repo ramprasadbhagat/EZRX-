@@ -10,26 +10,39 @@ part 'submit_order_dto.g.dart';
 @freezed
 class SubmitOrderDto with _$SubmitOrderDto {
   const SubmitOrderDto._();
-
   const factory SubmitOrderDto({
-    @JsonKey(name: 'username', defaultValue: '') required String userName,
-    @JsonKey(name: 'companyName', defaultValue: '') required String companyName,
-    @JsonKey(name: 'customer') required SubmitOrderCustomerDto customer,
-    @JsonKey(name: 'POReference', defaultValue: '') required String poReference,
-    @JsonKey(name: 'materials', defaultValue: <SubmitMaterialInfoDto>[])
+    @JsonKey(
+      name: 'username',
+      defaultValue: '',
+    )
+        required String userName,
+    @JsonKey(name: 'companyName', defaultValue: '')
+        required String companyName,
+    @JsonKey(name: 'customer')
+        required SubmitOrderCustomerDto customer,
+    @JsonKey(name: 'POReference', defaultValue: '')
+        required String poReference,
+    @JsonKey(
+      name: 'materials',
+      defaultValue: <SubmitMaterialInfoDto>[],
+    )
         required List<SubmitMaterialInfoDto> materials,
-    @JsonKey(name: 'PODate', defaultValue: '') required String poDate,
+    @JsonKey(name: 'PODate', defaultValue: '')
+        required String poDate,
     @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
         required String requestedDeliveryDate,
     @JsonKey(name: 'specialInstructions', defaultValue: '')
         required String specialInstructions,
     @JsonKey(name: 'PurchaseOrderType', defaultValue: '')
         required String purchaseOrderType,
-    @JsonKey(name: 'orderType', defaultValue: '') required String orderType,
-    @JsonKey(name: 'orderReason', defaultValue: '') required String orderReason,
+    @JsonKey(name: 'orderType', defaultValue: '')
+        required String orderType,
+    @JsonKey(name: 'orderReason', defaultValue: '')
+        required String orderReason,
     @JsonKey(name: 'shippingCondition', defaultValue: '')
         required String shippingCondition,
-    @JsonKey(name: 'telephone', defaultValue: '') required String telephone,
+    @JsonKey(name: 'telephone', defaultValue: '')
+        required String telephone,
     @JsonKey(name: 'referenceNotes', defaultValue: '')
         required String referenceNotes,
     @JsonKey(name: 'paymentTerms', defaultValue: '')
@@ -40,7 +53,8 @@ class SubmitOrderDto with _$SubmitOrderDto {
         required bool subscribeStatusChange,
     @JsonKey(name: 'trackingLevel', defaultValue: '')
         required String trackingLevel,
-    @JsonKey(name: 'blockOrder', defaultValue: false) required bool blockOrder,
+    @JsonKey(name: 'blockOrder', defaultValue: false)
+        required bool blockOrder,
   }) = _SubmitOrderDto;
 
   SubmitOrder toDomain() {

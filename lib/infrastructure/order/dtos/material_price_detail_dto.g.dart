@@ -17,7 +17,7 @@ _$_MaterialDetailDto _$$_MaterialDetailDtoFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_MaterialDetailDtoToJson(
         _$_MaterialDetailDto instance) =>
     <String, dynamic>{
-      'Price': instance.price,
-      'MaterialInformation': instance.info,
+      'Price': instance.price.toJson(),
+      'MaterialInformation': instance.info.toJson(),
       'ValidMaterial': instance.isValidMaterial,
     };

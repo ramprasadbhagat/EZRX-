@@ -75,8 +75,8 @@
           "acceptAUPTC": null,
           "emailNotifications":true,
           "mobileNotifications":true,
-          "acceptPrivacyPolicy":false,
-          "acceptPrivacyPolicyTime":"2021-12-01T07:22:01Z",
+          "acceptPrivacyPolicy":true,
+          "acceptPrivacyPolicyTime":"2021-12-20T07:22:01Z",
           "privacyPolicyAcceptedPlatform":"mobile",
           "mobileToken":[
              {

@@ -42,6 +42,15 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
           FailureHandler.handleFailure(e),
         );
       }
+      materialDetails.addAll(
+        {
+          for (final materialQuery in materialQueryList)
+            materialQuery: materialDetailData.firstWhere(
+              (element) => element.price.materialNumber == materialQuery.value,
+              orElse: () => MaterialPriceDetail.empty(),
+            ),
+        },
+      );
     } else {
       try {
         final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
@@ -50,7 +59,7 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
         final language = salesOrganisationConfigs.getConfigLangauge;
         final queryMaterialNumbers = materialQueryList
             .map(
-              (e) => e.value.getOrCrash(),
+              (e) => e.priceQuery,
             )
             .toList();
         materialDetailData = await remoteDataSource.getMaterialDetail(
@@ -58,7 +67,7 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
           customerCode: customerCode,
           shipToCode: shipToCode,
           language: language,
-          materialNumbers: queryMaterialNumbers,
+          queryString: queryMaterialNumbers,
         );
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));

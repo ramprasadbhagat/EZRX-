@@ -34,13 +34,15 @@ class PriceDtoAdapter extends TypeAdapter<_$_PriceDto> {
       additionalBonusEligible: fields[12] == null ? false : fields[12] as bool,
       isValid: fields[13] == null ? false : fields[13] as bool,
       isPriceOverride: fields[14] == null ? false : fields[14] as bool,
+      zdp8Override: fields[15] == null ? 0 : fields[15] as double,
+      priceOverride: fields[16] == null ? 0 : fields[16] as double,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_PriceDto obj) {
     writer
-      ..writeByte(15)
+      ..writeByte(17)
       ..writeByte(0)
       ..write(obj.materialNumber)
       ..writeByte(5)
@@ -63,6 +65,10 @@ class PriceDtoAdapter extends TypeAdapter<_$_PriceDto> {
       ..write(obj.isValid)
       ..writeByte(14)
       ..write(obj.isPriceOverride)
+      ..writeByte(15)
+      ..write(obj.zdp8Override)
+      ..writeByte(16)
+      ..write(obj.priceOverride)
       ..writeByte(1)
       ..write(obj.rules)
       ..writeByte(2)
@@ -118,15 +124,17 @@ _$_PriceDto _$$_PriceDtoFromJson(Map<String, dynamic> json) => _$_PriceDto(
           json['AdditionalBonusEligible'] as bool? ?? false,
       isValid: json['Valid'] as bool? ?? false,
       isPriceOverride: json['isPriceOverride'] as bool? ?? false,
+      zdp8Override: (json['zdp8Override'] as num?)?.toDouble() ?? 0,
+      priceOverride: (json['priceOverride'] as num?)?.toDouble() ?? 0,
     );
 
 Map<String, dynamic> _$$_PriceDtoToJson(_$_PriceDto instance) =>
     <String, dynamic>{
       'MaterialNumber': instance.materialNumber,
-      'PriceRules': instance.rules,
-      'TieredPricing': instance.tiers,
-      'Bonuses': instance.bonuses,
-      'Bundles': instance.bundles,
+      'PriceRules': instance.rules.map((e) => e.toJson()).toList(),
+      'TieredPricing': instance.tiers.map((e) => e.toJson()).toList(),
+      'Bonuses': instance.bonuses.map((e) => e.toJson()).toList(),
+      'Bundles': instance.bundles.map((e) => e.toJson()).toList(),
       'OverridenRulePresent': instance.overrideRulePresent,
       'ZDP5MaxQuota': instance.zdp5MaxQuota,
       'ZDP5RemainingQuota': instance.zdp5RemainingQuota,
@@ -137,4 +145,6 @@ Map<String, dynamic> _$$_PriceDtoToJson(_$_PriceDto instance) =>
       'AdditionalBonusEligible': instance.additionalBonusEligible,
       'Valid': instance.isValid,
       'isPriceOverride': instance.isPriceOverride,
+      'zdp8Override': instance.zdp8Override,
+      'priceOverride': instance.priceOverride,
     };

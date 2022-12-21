@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/price_override_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -33,7 +34,7 @@ void main() {
             () => priceOverrideRepositoryMock.updateItemPrice(
               customerCodeInfo: CustomerCodeInfo.empty(),
               item: PriceAggregate.empty(),
-              newPrice: '70',
+              newPrice: 70.0,
               salesOrganisation: SalesOrganisation.empty(),
             ),
           ).thenAnswer(
@@ -46,7 +47,7 @@ void main() {
           PriceOverrideEvent.fetch(
             customerCodeInfo: CustomerCodeInfo.empty(),
             item: PriceAggregate.empty(),
-            newPrice: '70',
+            newPrice: 70.0,
             salesOrganisation: SalesOrganisation.empty(),
           ),
         ),
@@ -57,7 +58,12 @@ void main() {
           ),
           PriceOverrideState.initial().copyWith(
             isFetching: false,
-            cartItemList: [Price.empty()],
+            cartItemList: [
+              Price.empty().copyWith(
+                priceOverride: PriceOverrideValue(70.0),
+                isPriceOverride: true,
+              ),
+            ],
           ),
         ],
       );
@@ -71,7 +77,7 @@ void main() {
             () => priceOverrideRepositoryMock.updateItemPrice(
               customerCodeInfo: CustomerCodeInfo.empty(),
               item: PriceAggregate.empty(),
-              newPrice: '70',
+              newPrice: 70.0,
               salesOrganisation: SalesOrganisation.empty(),
             ),
           ).thenAnswer(
@@ -85,7 +91,7 @@ void main() {
           PriceOverrideEvent.fetch(
             customerCodeInfo: CustomerCodeInfo.empty(),
             item: PriceAggregate.empty(),
-            newPrice: '70',
+            newPrice: 70.0,
             salesOrganisation: SalesOrganisation.empty(),
           ),
         ),

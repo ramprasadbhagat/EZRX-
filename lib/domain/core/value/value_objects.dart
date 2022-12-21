@@ -45,32 +45,6 @@ abstract class ValueObject<T> {
   String toString() => 'Value($value)';
 }
 
-abstract class DateValueObject<T> {
-  const DateValueObject();
-  Either<ValueFailure<T>, DateTime> get value;
-
-  /// Throws [UnexpectedValueError] containing the [ValueFailure]
-  DateTime getOrCrash() {
-    // id = identity - same as writing (right) => right
-    return value.fold((f) => throw UnexpectedValueError(f), id);
-  }
-
-  bool isValid() => value.isRight();
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is DateValueObject<T> && other.value == value;
-  }
-
-  @override
-  int get hashCode => value.hashCode;
-
-  @override
-  String toString() => 'Value($value)';
-}
-
 class SearchKey extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;

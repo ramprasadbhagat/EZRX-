@@ -28,6 +28,8 @@ class Price with _$Price {
     @Default(true) bool isValidMaterial,
     @Default(false) bool isFOC,
     @Default(false) bool isPriceOverride,
+    required Zdp8OverrideValue zdp8Override,
+    required PriceOverrideValue priceOverride,
   }) = _Price;
 
   factory Price.empty() => Price(
@@ -45,7 +47,8 @@ class Price with _$Price {
         finalTotalPrice: MaterialPrice(0),
         additionalBonusEligible: false,
         isValid: true,
-        isPriceOverride: false,
+        zdp8Override: Zdp8OverrideValue(0),
+        priceOverride: PriceOverrideValue(0),
       );
 
   List<PriceTierItem> get priceTireItem =>

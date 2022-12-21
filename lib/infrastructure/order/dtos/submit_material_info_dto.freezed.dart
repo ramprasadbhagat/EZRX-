@@ -33,6 +33,13 @@ mixin _$SubmitMaterialInfoDto {
   String get batch => throw _privateConstructorUsedError;
   @JsonKey(name: 'salesDistrict', defaultValue: '')
   String get salesDistrict => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'override',
+      toJson: overrideTojson,
+      readValue: materialItemOverrideread,
+      includeIfNull: false)
+  MaterialItemOverrideDto get materialItemOverride =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -58,7 +65,11 @@ abstract class $SubmitMaterialInfoDtoCopyWith<$Res> {
       @JsonKey(name: 'batch', defaultValue: '')
           String batch,
       @JsonKey(name: 'salesDistrict', defaultValue: '')
-          String salesDistrict});
+          String salesDistrict,
+      @JsonKey(name: 'override', toJson: overrideTojson, readValue: materialItemOverrideread, includeIfNull: false)
+          MaterialItemOverrideDto materialItemOverride});
+
+  $MaterialItemOverrideDtoCopyWith<$Res> get materialItemOverride;
 }
 
 /// @nodoc
@@ -81,6 +92,7 @@ class _$SubmitMaterialInfoDtoCopyWithImpl<$Res,
     Object? comment = null,
     Object? batch = null,
     Object? salesDistrict = null,
+    Object? materialItemOverride = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -107,7 +119,20 @@ class _$SubmitMaterialInfoDtoCopyWithImpl<$Res,
           ? _value.salesDistrict
           : salesDistrict // ignore: cast_nullable_to_non_nullable
               as String,
+      materialItemOverride: null == materialItemOverride
+          ? _value.materialItemOverride
+          : materialItemOverride // ignore: cast_nullable_to_non_nullable
+              as MaterialItemOverrideDto,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MaterialItemOverrideDtoCopyWith<$Res> get materialItemOverride {
+    return $MaterialItemOverrideDtoCopyWith<$Res>(_value.materialItemOverride,
+        (value) {
+      return _then(_value.copyWith(materialItemOverride: value) as $Val);
+    });
   }
 }
 
@@ -131,7 +156,12 @@ abstract class _$$_SubmitMaterialInfoDtoCopyWith<$Res>
       @JsonKey(name: 'batch', defaultValue: '')
           String batch,
       @JsonKey(name: 'salesDistrict', defaultValue: '')
-          String salesDistrict});
+          String salesDistrict,
+      @JsonKey(name: 'override', toJson: overrideTojson, readValue: materialItemOverrideread, includeIfNull: false)
+          MaterialItemOverrideDto materialItemOverride});
+
+  @override
+  $MaterialItemOverrideDtoCopyWith<$Res> get materialItemOverride;
 }
 
 /// @nodoc
@@ -151,6 +181,7 @@ class __$$_SubmitMaterialInfoDtoCopyWithImpl<$Res>
     Object? comment = null,
     Object? batch = null,
     Object? salesDistrict = null,
+    Object? materialItemOverride = null,
   }) {
     return _then(_$_SubmitMaterialInfoDto(
       materialNumber: null == materialNumber
@@ -177,6 +208,10 @@ class __$$_SubmitMaterialInfoDtoCopyWithImpl<$Res>
           ? _value.salesDistrict
           : salesDistrict // ignore: cast_nullable_to_non_nullable
               as String,
+      materialItemOverride: null == materialItemOverride
+          ? _value.materialItemOverride
+          : materialItemOverride // ignore: cast_nullable_to_non_nullable
+              as MaterialItemOverrideDto,
     ));
   }
 }
@@ -196,7 +231,9 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
       @JsonKey(name: 'batch', defaultValue: '')
           required this.batch,
       @JsonKey(name: 'salesDistrict', defaultValue: '')
-          required this.salesDistrict})
+          required this.salesDistrict,
+      @JsonKey(name: 'override', toJson: overrideTojson, readValue: materialItemOverrideread, includeIfNull: false)
+          required this.materialItemOverride})
       : _bonuses = bonuses,
         super._();
 
@@ -226,10 +263,17 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
   @override
   @JsonKey(name: 'salesDistrict', defaultValue: '')
   final String salesDistrict;
+  @override
+  @JsonKey(
+      name: 'override',
+      toJson: overrideTojson,
+      readValue: materialItemOverrideread,
+      includeIfNull: false)
+  final MaterialItemOverrideDto materialItemOverride;
 
   @override
   String toString() {
-    return 'SubmitMaterialInfoDto(materialNumber: $materialNumber, qty: $qty, bonuses: $bonuses, comment: $comment, batch: $batch, salesDistrict: $salesDistrict)';
+    return 'SubmitMaterialInfoDto(materialNumber: $materialNumber, qty: $qty, bonuses: $bonuses, comment: $comment, batch: $batch, salesDistrict: $salesDistrict, materialItemOverride: $materialItemOverride)';
   }
 
   @override
@@ -244,7 +288,9 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
             (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.batch, batch) || other.batch == batch) &&
             (identical(other.salesDistrict, salesDistrict) ||
-                other.salesDistrict == salesDistrict));
+                other.salesDistrict == salesDistrict) &&
+            (identical(other.materialItemOverride, materialItemOverride) ||
+                other.materialItemOverride == materialItemOverride));
   }
 
   @JsonKey(ignore: true)
@@ -256,7 +302,8 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
       const DeepCollectionEquality().hash(_bonuses),
       comment,
       batch,
-      salesDistrict);
+      salesDistrict,
+      materialItemOverride);
 
   @JsonKey(ignore: true)
   @override
@@ -286,7 +333,9 @@ abstract class _SubmitMaterialInfoDto extends SubmitMaterialInfoDto {
       @JsonKey(name: 'batch', defaultValue: '')
           required final String batch,
       @JsonKey(name: 'salesDistrict', defaultValue: '')
-          required final String salesDistrict}) = _$_SubmitMaterialInfoDto;
+          required final String salesDistrict,
+      @JsonKey(name: 'override', toJson: overrideTojson, readValue: materialItemOverrideread, includeIfNull: false)
+          required final MaterialItemOverrideDto materialItemOverride}) = _$_SubmitMaterialInfoDto;
   const _SubmitMaterialInfoDto._() : super._();
 
   factory _SubmitMaterialInfoDto.fromJson(Map<String, dynamic> json) =
@@ -310,6 +359,13 @@ abstract class _SubmitMaterialInfoDto extends SubmitMaterialInfoDto {
   @override
   @JsonKey(name: 'salesDistrict', defaultValue: '')
   String get salesDistrict;
+  @override
+  @JsonKey(
+      name: 'override',
+      toJson: overrideTojson,
+      readValue: materialItemOverrideread,
+      includeIfNull: false)
+  MaterialItemOverrideDto get materialItemOverride;
   @override
   @JsonKey(ignore: true)
   _$$_SubmitMaterialInfoDtoCopyWith<_$_SubmitMaterialInfoDto> get copyWith =>

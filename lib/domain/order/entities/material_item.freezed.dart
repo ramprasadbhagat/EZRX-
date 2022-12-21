@@ -21,18 +21,17 @@ mixin _$MaterialItem {
   String get comment => throw _privateConstructorUsedError;
   bool get hidePrice => throw _privateConstructorUsedError;
   String get batchNumber => throw _privateConstructorUsedError;
-  bool get zdp8Override => throw _privateConstructorUsedError;
   List<MaterialItemBonus> get bonuses => throw _privateConstructorUsedError;
   MaterialGroup get materialGroup2 => throw _privateConstructorUsedError;
   MaterialGroup get materialGroup4 => throw _privateConstructorUsedError;
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
-  double get overridenPrice => throw _privateConstructorUsedError;
+  PriceOverrideValue get overridenPrice => throw _privateConstructorUsedError;
   String get unitOfMeasurement => throw _privateConstructorUsedError;
   String get itemRegistrationNumber => throw _privateConstructorUsedError;
   String get materialDescription => throw _privateConstructorUsedError;
-  MaterialItemOverride get overrideInfo => throw _privateConstructorUsedError;
   String get remarks => throw _privateConstructorUsedError;
+  Zdp8OverrideValue get zdp8Override => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialItemCopyWith<MaterialItem> get copyWith =>
@@ -51,20 +50,17 @@ abstract class $MaterialItemCopyWith<$Res> {
       String comment,
       bool hidePrice,
       String batchNumber,
-      bool zdp8Override,
       List<MaterialItemBonus> bonuses,
       MaterialGroup materialGroup2,
       MaterialGroup materialGroup4,
       MaterialNumber materialNumber,
       String defaultMaterialDescription,
-      double overridenPrice,
+      PriceOverrideValue overridenPrice,
       String unitOfMeasurement,
       String itemRegistrationNumber,
       String materialDescription,
-      MaterialItemOverride overrideInfo,
-      String remarks});
-
-  $MaterialItemOverrideCopyWith<$Res> get overrideInfo;
+      String remarks,
+      Zdp8OverrideValue zdp8Override});
 }
 
 /// @nodoc
@@ -85,7 +81,6 @@ class _$MaterialItemCopyWithImpl<$Res, $Val extends MaterialItem>
     Object? comment = null,
     Object? hidePrice = null,
     Object? batchNumber = null,
-    Object? zdp8Override = null,
     Object? bonuses = null,
     Object? materialGroup2 = null,
     Object? materialGroup4 = null,
@@ -95,8 +90,8 @@ class _$MaterialItemCopyWithImpl<$Res, $Val extends MaterialItem>
     Object? unitOfMeasurement = null,
     Object? itemRegistrationNumber = null,
     Object? materialDescription = null,
-    Object? overrideInfo = null,
     Object? remarks = null,
+    Object? zdp8Override = null,
   }) {
     return _then(_value.copyWith(
       qty: null == qty
@@ -119,10 +114,6 @@ class _$MaterialItemCopyWithImpl<$Res, $Val extends MaterialItem>
           ? _value.batchNumber
           : batchNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      zdp8Override: null == zdp8Override
-          ? _value.zdp8Override
-          : zdp8Override // ignore: cast_nullable_to_non_nullable
-              as bool,
       bonuses: null == bonuses
           ? _value.bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
@@ -146,7 +137,7 @@ class _$MaterialItemCopyWithImpl<$Res, $Val extends MaterialItem>
       overridenPrice: null == overridenPrice
           ? _value.overridenPrice
           : overridenPrice // ignore: cast_nullable_to_non_nullable
-              as double,
+              as PriceOverrideValue,
       unitOfMeasurement: null == unitOfMeasurement
           ? _value.unitOfMeasurement
           : unitOfMeasurement // ignore: cast_nullable_to_non_nullable
@@ -159,23 +150,15 @@ class _$MaterialItemCopyWithImpl<$Res, $Val extends MaterialItem>
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      overrideInfo: null == overrideInfo
-          ? _value.overrideInfo
-          : overrideInfo // ignore: cast_nullable_to_non_nullable
-              as MaterialItemOverride,
       remarks: null == remarks
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
               as String,
+      zdp8Override: null == zdp8Override
+          ? _value.zdp8Override
+          : zdp8Override // ignore: cast_nullable_to_non_nullable
+              as Zdp8OverrideValue,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $MaterialItemOverrideCopyWith<$Res> get overrideInfo {
-    return $MaterialItemOverrideCopyWith<$Res>(_value.overrideInfo, (value) {
-      return _then(_value.copyWith(overrideInfo: value) as $Val);
-    });
   }
 }
 
@@ -193,21 +176,17 @@ abstract class _$$_MaterialItemCopyWith<$Res>
       String comment,
       bool hidePrice,
       String batchNumber,
-      bool zdp8Override,
       List<MaterialItemBonus> bonuses,
       MaterialGroup materialGroup2,
       MaterialGroup materialGroup4,
       MaterialNumber materialNumber,
       String defaultMaterialDescription,
-      double overridenPrice,
+      PriceOverrideValue overridenPrice,
       String unitOfMeasurement,
       String itemRegistrationNumber,
       String materialDescription,
-      MaterialItemOverride overrideInfo,
-      String remarks});
-
-  @override
-  $MaterialItemOverrideCopyWith<$Res> get overrideInfo;
+      String remarks,
+      Zdp8OverrideValue zdp8Override});
 }
 
 /// @nodoc
@@ -226,7 +205,6 @@ class __$$_MaterialItemCopyWithImpl<$Res>
     Object? comment = null,
     Object? hidePrice = null,
     Object? batchNumber = null,
-    Object? zdp8Override = null,
     Object? bonuses = null,
     Object? materialGroup2 = null,
     Object? materialGroup4 = null,
@@ -236,8 +214,8 @@ class __$$_MaterialItemCopyWithImpl<$Res>
     Object? unitOfMeasurement = null,
     Object? itemRegistrationNumber = null,
     Object? materialDescription = null,
-    Object? overrideInfo = null,
     Object? remarks = null,
+    Object? zdp8Override = null,
   }) {
     return _then(_$_MaterialItem(
       qty: null == qty
@@ -260,10 +238,6 @@ class __$$_MaterialItemCopyWithImpl<$Res>
           ? _value.batchNumber
           : batchNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      zdp8Override: null == zdp8Override
-          ? _value.zdp8Override
-          : zdp8Override // ignore: cast_nullable_to_non_nullable
-              as bool,
       bonuses: null == bonuses
           ? _value._bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
@@ -287,7 +261,7 @@ class __$$_MaterialItemCopyWithImpl<$Res>
       overridenPrice: null == overridenPrice
           ? _value.overridenPrice
           : overridenPrice // ignore: cast_nullable_to_non_nullable
-              as double,
+              as PriceOverrideValue,
       unitOfMeasurement: null == unitOfMeasurement
           ? _value.unitOfMeasurement
           : unitOfMeasurement // ignore: cast_nullable_to_non_nullable
@@ -300,14 +274,14 @@ class __$$_MaterialItemCopyWithImpl<$Res>
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      overrideInfo: null == overrideInfo
-          ? _value.overrideInfo
-          : overrideInfo // ignore: cast_nullable_to_non_nullable
-              as MaterialItemOverride,
       remarks: null == remarks
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
               as String,
+      zdp8Override: null == zdp8Override
+          ? _value.zdp8Override
+          : zdp8Override // ignore: cast_nullable_to_non_nullable
+              as Zdp8OverrideValue,
     ));
   }
 }
@@ -321,7 +295,6 @@ class _$_MaterialItem extends _MaterialItem {
       required this.comment,
       required this.hidePrice,
       required this.batchNumber,
-      required this.zdp8Override,
       required final List<MaterialItemBonus> bonuses,
       required this.materialGroup2,
       required this.materialGroup4,
@@ -331,8 +304,8 @@ class _$_MaterialItem extends _MaterialItem {
       required this.unitOfMeasurement,
       required this.itemRegistrationNumber,
       required this.materialDescription,
-      required this.overrideInfo,
-      required this.remarks})
+      required this.remarks,
+      required this.zdp8Override})
       : _bonuses = bonuses,
         super._();
 
@@ -346,8 +319,6 @@ class _$_MaterialItem extends _MaterialItem {
   final bool hidePrice;
   @override
   final String batchNumber;
-  @override
-  final bool zdp8Override;
   final List<MaterialItemBonus> _bonuses;
   @override
   List<MaterialItemBonus> get bonuses {
@@ -364,7 +335,7 @@ class _$_MaterialItem extends _MaterialItem {
   @override
   final String defaultMaterialDescription;
   @override
-  final double overridenPrice;
+  final PriceOverrideValue overridenPrice;
   @override
   final String unitOfMeasurement;
   @override
@@ -372,13 +343,13 @@ class _$_MaterialItem extends _MaterialItem {
   @override
   final String materialDescription;
   @override
-  final MaterialItemOverride overrideInfo;
-  @override
   final String remarks;
+  @override
+  final Zdp8OverrideValue zdp8Override;
 
   @override
   String toString() {
-    return 'MaterialItem(qty: $qty, type: $type, comment: $comment, hidePrice: $hidePrice, batchNumber: $batchNumber, zdp8Override: $zdp8Override, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, defaultMaterialDescription: $defaultMaterialDescription, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, materialDescription: $materialDescription, overrideInfo: $overrideInfo, remarks: $remarks)';
+    return 'MaterialItem(qty: $qty, type: $type, comment: $comment, hidePrice: $hidePrice, batchNumber: $batchNumber, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, defaultMaterialDescription: $defaultMaterialDescription, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, materialDescription: $materialDescription, remarks: $remarks, zdp8Override: $zdp8Override)';
   }
 
   @override
@@ -393,8 +364,6 @@ class _$_MaterialItem extends _MaterialItem {
                 other.hidePrice == hidePrice) &&
             (identical(other.batchNumber, batchNumber) ||
                 other.batchNumber == batchNumber) &&
-            (identical(other.zdp8Override, zdp8Override) ||
-                other.zdp8Override == zdp8Override) &&
             const DeepCollectionEquality().equals(other._bonuses, _bonuses) &&
             (identical(other.materialGroup2, materialGroup2) ||
                 other.materialGroup2 == materialGroup2) &&
@@ -414,9 +383,9 @@ class _$_MaterialItem extends _MaterialItem {
                 other.itemRegistrationNumber == itemRegistrationNumber) &&
             (identical(other.materialDescription, materialDescription) ||
                 other.materialDescription == materialDescription) &&
-            (identical(other.overrideInfo, overrideInfo) ||
-                other.overrideInfo == overrideInfo) &&
-            (identical(other.remarks, remarks) || other.remarks == remarks));
+            (identical(other.remarks, remarks) || other.remarks == remarks) &&
+            (identical(other.zdp8Override, zdp8Override) ||
+                other.zdp8Override == zdp8Override));
   }
 
   @override
@@ -427,7 +396,6 @@ class _$_MaterialItem extends _MaterialItem {
       comment,
       hidePrice,
       batchNumber,
-      zdp8Override,
       const DeepCollectionEquality().hash(_bonuses),
       materialGroup2,
       materialGroup4,
@@ -437,8 +405,8 @@ class _$_MaterialItem extends _MaterialItem {
       unitOfMeasurement,
       itemRegistrationNumber,
       materialDescription,
-      overrideInfo,
-      remarks);
+      remarks,
+      zdp8Override);
 
   @JsonKey(ignore: true)
   @override
@@ -454,18 +422,17 @@ abstract class _MaterialItem extends MaterialItem {
       required final String comment,
       required final bool hidePrice,
       required final String batchNumber,
-      required final bool zdp8Override,
       required final List<MaterialItemBonus> bonuses,
       required final MaterialGroup materialGroup2,
       required final MaterialGroup materialGroup4,
       required final MaterialNumber materialNumber,
       required final String defaultMaterialDescription,
-      required final double overridenPrice,
+      required final PriceOverrideValue overridenPrice,
       required final String unitOfMeasurement,
       required final String itemRegistrationNumber,
       required final String materialDescription,
-      required final MaterialItemOverride overrideInfo,
-      required final String remarks}) = _$_MaterialItem;
+      required final String remarks,
+      required final Zdp8OverrideValue zdp8Override}) = _$_MaterialItem;
   const _MaterialItem._() : super._();
 
   @override
@@ -479,8 +446,6 @@ abstract class _MaterialItem extends MaterialItem {
   @override
   String get batchNumber;
   @override
-  bool get zdp8Override;
-  @override
   List<MaterialItemBonus> get bonuses;
   @override
   MaterialGroup get materialGroup2;
@@ -491,7 +456,7 @@ abstract class _MaterialItem extends MaterialItem {
   @override
   String get defaultMaterialDescription;
   @override
-  double get overridenPrice;
+  PriceOverrideValue get overridenPrice;
   @override
   String get unitOfMeasurement;
   @override
@@ -499,9 +464,9 @@ abstract class _MaterialItem extends MaterialItem {
   @override
   String get materialDescription;
   @override
-  MaterialItemOverride get overrideInfo;
-  @override
   String get remarks;
+  @override
+  Zdp8OverrideValue get zdp8Override;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialItemCopyWith<_$_MaterialItem> get copyWith =>

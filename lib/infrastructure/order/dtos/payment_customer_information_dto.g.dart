@@ -19,5 +19,5 @@ Map<String, dynamic> _$$_PaymentCustomerInformationDtoToJson(
         _$_PaymentCustomerInformationDto instance) =>
     <String, dynamic>{
       'paymentTerm': instance.paymentTerm,
-      'shipTo': instance.shipToDtoList,
+      'shipTo': instance.shipToDtoList.map((e) => e.toJson()).toList(),
     };

@@ -16,7 +16,7 @@ class UserLocalDataSource {
   Future<User> getUser() async {
     final token = await tokenStorage.get();
     final data = json.decode(
-      token.access != rootAdminToken
+      token.access == rootAdminToken || token.access.isEmpty
           ? await rootBundle.loadString('assets/json/userResponse.json')
           : await rootBundle.loadString('assets/json/proxyUserResponse.json'),
     );

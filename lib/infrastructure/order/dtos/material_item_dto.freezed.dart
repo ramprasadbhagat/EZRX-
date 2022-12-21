@@ -32,7 +32,12 @@ mixin _$MaterialItemDto {
   String get materialGroup4 => throw _privateConstructorUsedError;
   @JsonKey(name: 'materialNumber', defaultValue: '')
   String get materialNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'overridenPrice', defaultValue: 0)
+  @JsonKey(
+      name: 'priceOverride',
+      defaultValue: 0,
+      readValue: doubleFormatCheck,
+      includeIfNull: false,
+      toJson: overrideTojson)
   double get overridenPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
   String get unitOfMeasurement => throw _privateConstructorUsedError;
@@ -48,14 +53,8 @@ mixin _$MaterialItemDto {
   String get comment => throw _privateConstructorUsedError;
   @JsonKey(name: 'batchNumber', defaultValue: '')
   String get batchNumber => throw _privateConstructorUsedError;
-  @JsonKey(
-      name: 'zdp8Override',
-      defaultValue: false,
-      readValue: boolStringFormatCheck)
-  bool get zdp8Override => throw _privateConstructorUsedError;
-  @JsonKey(name: 'override', readValue: materialItemOverride)
-  MaterialItemOverrideDto get overrideInfo =>
-      throw _privateConstructorUsedError;
+  @JsonKey(name: 'zdp8Override', readValue: doubleFormatCheck, defaultValue: 0)
+  double get zdp8Override => throw _privateConstructorUsedError;
   @JsonKey(name: 'remarks', defaultValue: '')
   String get remarks => throw _privateConstructorUsedError;
 
@@ -84,7 +83,7 @@ abstract class $MaterialItemDtoCopyWith<$Res> {
           String materialGroup4,
       @JsonKey(name: 'materialNumber', defaultValue: '')
           String materialNumber,
-      @JsonKey(name: 'overridenPrice', defaultValue: 0)
+      @JsonKey(name: 'priceOverride', defaultValue: 0, readValue: doubleFormatCheck, includeIfNull: false, toJson: overrideTojson)
           double overridenPrice,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
           String unitOfMeasurement,
@@ -100,14 +99,10 @@ abstract class $MaterialItemDtoCopyWith<$Res> {
           String comment,
       @JsonKey(name: 'batchNumber', defaultValue: '')
           String batchNumber,
-      @JsonKey(name: 'zdp8Override', defaultValue: false, readValue: boolStringFormatCheck)
-          bool zdp8Override,
-      @JsonKey(name: 'override', readValue: materialItemOverride)
-          MaterialItemOverrideDto overrideInfo,
+      @JsonKey(name: 'zdp8Override', readValue: doubleFormatCheck, defaultValue: 0)
+          double zdp8Override,
       @JsonKey(name: 'remarks', defaultValue: '')
           String remarks});
-
-  $MaterialItemOverrideDtoCopyWith<$Res> get overrideInfo;
 }
 
 /// @nodoc
@@ -138,7 +133,6 @@ class _$MaterialItemDtoCopyWithImpl<$Res, $Val extends MaterialItemDto>
     Object? comment = null,
     Object? batchNumber = null,
     Object? zdp8Override = null,
-    Object? overrideInfo = null,
     Object? remarks = null,
   }) {
     return _then(_value.copyWith(
@@ -201,24 +195,12 @@ class _$MaterialItemDtoCopyWithImpl<$Res, $Val extends MaterialItemDto>
       zdp8Override: null == zdp8Override
           ? _value.zdp8Override
           : zdp8Override // ignore: cast_nullable_to_non_nullable
-              as bool,
-      overrideInfo: null == overrideInfo
-          ? _value.overrideInfo
-          : overrideInfo // ignore: cast_nullable_to_non_nullable
-              as MaterialItemOverrideDto,
+              as double,
       remarks: null == remarks
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $MaterialItemOverrideDtoCopyWith<$Res> get overrideInfo {
-    return $MaterialItemOverrideDtoCopyWith<$Res>(_value.overrideInfo, (value) {
-      return _then(_value.copyWith(overrideInfo: value) as $Val);
-    });
   }
 }
 
@@ -243,7 +225,7 @@ abstract class _$$_MaterialItemDtoCopyWith<$Res>
           String materialGroup4,
       @JsonKey(name: 'materialNumber', defaultValue: '')
           String materialNumber,
-      @JsonKey(name: 'overridenPrice', defaultValue: 0)
+      @JsonKey(name: 'priceOverride', defaultValue: 0, readValue: doubleFormatCheck, includeIfNull: false, toJson: overrideTojson)
           double overridenPrice,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
           String unitOfMeasurement,
@@ -259,15 +241,10 @@ abstract class _$$_MaterialItemDtoCopyWith<$Res>
           String comment,
       @JsonKey(name: 'batchNumber', defaultValue: '')
           String batchNumber,
-      @JsonKey(name: 'zdp8Override', defaultValue: false, readValue: boolStringFormatCheck)
-          bool zdp8Override,
-      @JsonKey(name: 'override', readValue: materialItemOverride)
-          MaterialItemOverrideDto overrideInfo,
+      @JsonKey(name: 'zdp8Override', readValue: doubleFormatCheck, defaultValue: 0)
+          double zdp8Override,
       @JsonKey(name: 'remarks', defaultValue: '')
           String remarks});
-
-  @override
-  $MaterialItemOverrideDtoCopyWith<$Res> get overrideInfo;
 }
 
 /// @nodoc
@@ -296,7 +273,6 @@ class __$$_MaterialItemDtoCopyWithImpl<$Res>
     Object? comment = null,
     Object? batchNumber = null,
     Object? zdp8Override = null,
-    Object? overrideInfo = null,
     Object? remarks = null,
   }) {
     return _then(_$_MaterialItemDto(
@@ -359,11 +335,7 @@ class __$$_MaterialItemDtoCopyWithImpl<$Res>
       zdp8Override: null == zdp8Override
           ? _value.zdp8Override
           : zdp8Override // ignore: cast_nullable_to_non_nullable
-              as bool,
-      overrideInfo: null == overrideInfo
-          ? _value.overrideInfo
-          : overrideInfo // ignore: cast_nullable_to_non_nullable
-              as MaterialItemOverrideDto,
+              as double,
       remarks: null == remarks
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
@@ -388,7 +360,7 @@ class _$_MaterialItemDto extends _MaterialItemDto {
           required this.materialGroup4,
       @JsonKey(name: 'materialNumber', defaultValue: '')
           required this.materialNumber,
-      @JsonKey(name: 'overridenPrice', defaultValue: 0)
+      @JsonKey(name: 'priceOverride', defaultValue: 0, readValue: doubleFormatCheck, includeIfNull: false, toJson: overrideTojson)
           required this.overridenPrice,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
           required this.unitOfMeasurement,
@@ -404,10 +376,8 @@ class _$_MaterialItemDto extends _MaterialItemDto {
           required this.comment,
       @JsonKey(name: 'batchNumber', defaultValue: '')
           required this.batchNumber,
-      @JsonKey(name: 'zdp8Override', defaultValue: false, readValue: boolStringFormatCheck)
+      @JsonKey(name: 'zdp8Override', readValue: doubleFormatCheck, defaultValue: 0)
           required this.zdp8Override,
-      @JsonKey(name: 'override', readValue: materialItemOverride)
-          required this.overrideInfo,
       @JsonKey(name: 'remarks', defaultValue: '')
           required this.remarks})
       : _bonuses = bonuses,
@@ -440,7 +410,12 @@ class _$_MaterialItemDto extends _MaterialItemDto {
   @JsonKey(name: 'materialNumber', defaultValue: '')
   final String materialNumber;
   @override
-  @JsonKey(name: 'overridenPrice', defaultValue: 0)
+  @JsonKey(
+      name: 'priceOverride',
+      defaultValue: 0,
+      readValue: doubleFormatCheck,
+      includeIfNull: false,
+      toJson: overrideTojson)
   final double overridenPrice;
   @override
   @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
@@ -464,21 +439,15 @@ class _$_MaterialItemDto extends _MaterialItemDto {
   @JsonKey(name: 'batchNumber', defaultValue: '')
   final String batchNumber;
   @override
-  @JsonKey(
-      name: 'zdp8Override',
-      defaultValue: false,
-      readValue: boolStringFormatCheck)
-  final bool zdp8Override;
-  @override
-  @JsonKey(name: 'override', readValue: materialItemOverride)
-  final MaterialItemOverrideDto overrideInfo;
+  @JsonKey(name: 'zdp8Override', readValue: doubleFormatCheck, defaultValue: 0)
+  final double zdp8Override;
   @override
   @JsonKey(name: 'remarks', defaultValue: '')
   final String remarks;
 
   @override
   String toString() {
-    return 'MaterialItemDto(qty: $qty, hidePrice: $hidePrice, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, defaultMaterialDescription: $defaultMaterialDescription, materialDescription: $materialDescription, type: $type, comment: $comment, batchNumber: $batchNumber, zdp8Override: $zdp8Override, overrideInfo: $overrideInfo, remarks: $remarks)';
+    return 'MaterialItemDto(qty: $qty, hidePrice: $hidePrice, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, defaultMaterialDescription: $defaultMaterialDescription, materialDescription: $materialDescription, type: $type, comment: $comment, batchNumber: $batchNumber, zdp8Override: $zdp8Override, remarks: $remarks)';
   }
 
   @override
@@ -514,8 +483,6 @@ class _$_MaterialItemDto extends _MaterialItemDto {
                 other.batchNumber == batchNumber) &&
             (identical(other.zdp8Override, zdp8Override) ||
                 other.zdp8Override == zdp8Override) &&
-            (identical(other.overrideInfo, overrideInfo) ||
-                other.overrideInfo == overrideInfo) &&
             (identical(other.remarks, remarks) || other.remarks == remarks));
   }
 
@@ -538,7 +505,6 @@ class _$_MaterialItemDto extends _MaterialItemDto {
       comment,
       batchNumber,
       zdp8Override,
-      overrideInfo,
       remarks);
 
   @JsonKey(ignore: true)
@@ -569,7 +535,7 @@ abstract class _MaterialItemDto extends MaterialItemDto {
           required final String materialGroup4,
       @JsonKey(name: 'materialNumber', defaultValue: '')
           required final String materialNumber,
-      @JsonKey(name: 'overridenPrice', defaultValue: 0)
+      @JsonKey(name: 'priceOverride', defaultValue: 0, readValue: doubleFormatCheck, includeIfNull: false, toJson: overrideTojson)
           required final double overridenPrice,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
           required final String unitOfMeasurement,
@@ -585,10 +551,8 @@ abstract class _MaterialItemDto extends MaterialItemDto {
           required final String comment,
       @JsonKey(name: 'batchNumber', defaultValue: '')
           required final String batchNumber,
-      @JsonKey(name: 'zdp8Override', defaultValue: false, readValue: boolStringFormatCheck)
-          required final bool zdp8Override,
-      @JsonKey(name: 'override', readValue: materialItemOverride)
-          required final MaterialItemOverrideDto overrideInfo,
+      @JsonKey(name: 'zdp8Override', readValue: doubleFormatCheck, defaultValue: 0)
+          required final double zdp8Override,
       @JsonKey(name: 'remarks', defaultValue: '')
           required final String remarks}) = _$_MaterialItemDto;
   const _MaterialItemDto._() : super._();
@@ -615,7 +579,12 @@ abstract class _MaterialItemDto extends MaterialItemDto {
   @JsonKey(name: 'materialNumber', defaultValue: '')
   String get materialNumber;
   @override
-  @JsonKey(name: 'overridenPrice', defaultValue: 0)
+  @JsonKey(
+      name: 'priceOverride',
+      defaultValue: 0,
+      readValue: doubleFormatCheck,
+      includeIfNull: false,
+      toJson: overrideTojson)
   double get overridenPrice;
   @override
   @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
@@ -639,14 +608,8 @@ abstract class _MaterialItemDto extends MaterialItemDto {
   @JsonKey(name: 'batchNumber', defaultValue: '')
   String get batchNumber;
   @override
-  @JsonKey(
-      name: 'zdp8Override',
-      defaultValue: false,
-      readValue: boolStringFormatCheck)
-  bool get zdp8Override;
-  @override
-  @JsonKey(name: 'override', readValue: materialItemOverride)
-  MaterialItemOverrideDto get overrideInfo;
+  @JsonKey(name: 'zdp8Override', readValue: doubleFormatCheck, defaultValue: 0)
+  double get zdp8Override;
   @override
   @JsonKey(name: 'remarks', defaultValue: '')
   String get remarks;

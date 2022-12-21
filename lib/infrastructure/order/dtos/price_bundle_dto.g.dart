@@ -110,7 +110,7 @@ Map<String, dynamic> _$$_PriceBundleDtoToJson(_$_PriceBundleDto instance) =>
     <String, dynamic>{
       'BundleName': instance.name,
       'BundleCode': instance.code,
-      'BundleInformation': instance.information,
+      'BundleInformation': instance.information.map((e) => e.toJson()).toList(),
     };
 
 _$_PriceBundleItemDto _$$_PriceBundleItemDtoFromJson(

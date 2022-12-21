@@ -57,5 +57,5 @@ Map<String, dynamic> _$$_ShipToDtoToJson(_$_ShipToDto instance) =>
       'region': instance.region,
       'floor': instance.floor,
       'plant': instance.plant,
-      'licenses': instance.licenseDtoList,
+      'licenses': instance.licenseDtoList.map((e) => e.toJson()).toList(),
     };

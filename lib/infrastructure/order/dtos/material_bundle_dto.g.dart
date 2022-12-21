@@ -19,5 +19,5 @@ Map<String, dynamic> _$$_MaterialBundleDtoToJson(
         _$_MaterialBundleDto instance) =>
     <String, dynamic>{
       'MaterialNumber': instance.materialNumber,
-      'Bundles': instance.bundles,
+      'Bundles': instance.bundles.map((e) => e.toJson()).toList(),
     };

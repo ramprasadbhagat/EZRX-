@@ -21,5 +21,5 @@ Map<String, dynamic> _$$_SubmitOrderResponseDtoToJson(
         _$_SubmitOrderResponseDto instance) =>
     <String, dynamic>{
       'SalesDocument': instance.salesDocument,
-      'Messages': instance.messages,
+      'Messages': instance.messages.map((e) => e.toJson()).toList(),
     };

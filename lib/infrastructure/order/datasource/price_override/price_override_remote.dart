@@ -25,8 +25,7 @@ class PriceOverrideRemoteDataSource {
   Future<List<Price>> getOverridePrice({
     required String custCode,
     required String salesOrg,
-    required String materialNumber,
-    required String price,
+    required Map<String, dynamic> materialQuery,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryMaterialFilters =
@@ -35,12 +34,7 @@ class PriceOverrideRemoteDataSource {
       final inputVariables = {
         'customer': custCode,
         'salesOrganisation': salesOrg,
-        'request': [
-          {
-            'MaterialNumber': materialNumber,
-            'ZPO1': price,
-          },
-        ],
+        'request': [materialQuery],
       };
 
       final priceList = await httpService.request(

@@ -33,6 +33,8 @@ mixin _$Price {
   bool get isValidMaterial => throw _privateConstructorUsedError;
   bool get isFOC => throw _privateConstructorUsedError;
   bool get isPriceOverride => throw _privateConstructorUsedError;
+  Zdp8OverrideValue get zdp8Override => throw _privateConstructorUsedError;
+  PriceOverrideValue get priceOverride => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PriceCopyWith<Price> get copyWith => throw _privateConstructorUsedError;
@@ -60,7 +62,9 @@ abstract class $PriceCopyWith<$Res> {
       bool isValid,
       bool isValidMaterial,
       bool isFOC,
-      bool isPriceOverride});
+      bool isPriceOverride,
+      Zdp8OverrideValue zdp8Override,
+      PriceOverrideValue priceOverride});
 }
 
 /// @nodoc
@@ -93,6 +97,8 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
     Object? isValidMaterial = null,
     Object? isFOC = null,
     Object? isPriceOverride = null,
+    Object? zdp8Override = null,
+    Object? priceOverride = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -163,6 +169,14 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
           ? _value.isPriceOverride
           : isPriceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
+      zdp8Override: null == zdp8Override
+          ? _value.zdp8Override
+          : zdp8Override // ignore: cast_nullable_to_non_nullable
+              as Zdp8OverrideValue,
+      priceOverride: null == priceOverride
+          ? _value.priceOverride
+          : priceOverride // ignore: cast_nullable_to_non_nullable
+              as PriceOverrideValue,
     ) as $Val);
   }
 }
@@ -190,7 +204,9 @@ abstract class _$$_PriceCopyWith<$Res> implements $PriceCopyWith<$Res> {
       bool isValid,
       bool isValidMaterial,
       bool isFOC,
-      bool isPriceOverride});
+      bool isPriceOverride,
+      Zdp8OverrideValue zdp8Override,
+      PriceOverrideValue priceOverride});
 }
 
 /// @nodoc
@@ -219,6 +235,8 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res, _$_Price>
     Object? isValidMaterial = null,
     Object? isFOC = null,
     Object? isPriceOverride = null,
+    Object? zdp8Override = null,
+    Object? priceOverride = null,
   }) {
     return _then(_$_Price(
       materialNumber: null == materialNumber
@@ -289,6 +307,14 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res, _$_Price>
           ? _value.isPriceOverride
           : isPriceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
+      zdp8Override: null == zdp8Override
+          ? _value.zdp8Override
+          : zdp8Override // ignore: cast_nullable_to_non_nullable
+              as Zdp8OverrideValue,
+      priceOverride: null == priceOverride
+          ? _value.priceOverride
+          : priceOverride // ignore: cast_nullable_to_non_nullable
+              as PriceOverrideValue,
     ));
   }
 }
@@ -313,7 +339,9 @@ class _$_Price extends _Price {
       required this.isValid,
       this.isValidMaterial = true,
       this.isFOC = false,
-      this.isPriceOverride = false})
+      this.isPriceOverride = false,
+      required this.zdp8Override,
+      required this.priceOverride})
       : _rules = rules,
         _tiers = tiers,
         _bonuses = bonuses,
@@ -377,10 +405,14 @@ class _$_Price extends _Price {
   @override
   @JsonKey()
   final bool isPriceOverride;
+  @override
+  final Zdp8OverrideValue zdp8Override;
+  @override
+  final PriceOverrideValue priceOverride;
 
   @override
   String toString() {
-    return 'Price(materialNumber: $materialNumber, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, overrideRulePresent: $overrideRulePresent, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, zmgDiscount: $zmgDiscount, lastPrice: $lastPrice, finalPrice: $finalPrice, finalTotalPrice: $finalTotalPrice, additionalBonusEligible: $additionalBonusEligible, isValid: $isValid, isValidMaterial: $isValidMaterial, isFOC: $isFOC, isPriceOverride: $isPriceOverride)';
+    return 'Price(materialNumber: $materialNumber, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, overrideRulePresent: $overrideRulePresent, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, zmgDiscount: $zmgDiscount, lastPrice: $lastPrice, finalPrice: $finalPrice, finalTotalPrice: $finalTotalPrice, additionalBonusEligible: $additionalBonusEligible, isValid: $isValid, isValidMaterial: $isValidMaterial, isFOC: $isFOC, isPriceOverride: $isPriceOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride)';
   }
 
   @override
@@ -416,29 +448,36 @@ class _$_Price extends _Price {
                 other.isValidMaterial == isValidMaterial) &&
             (identical(other.isFOC, isFOC) || other.isFOC == isFOC) &&
             (identical(other.isPriceOverride, isPriceOverride) ||
-                other.isPriceOverride == isPriceOverride));
+                other.isPriceOverride == isPriceOverride) &&
+            (identical(other.zdp8Override, zdp8Override) ||
+                other.zdp8Override == zdp8Override) &&
+            (identical(other.priceOverride, priceOverride) ||
+                other.priceOverride == priceOverride));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      materialNumber,
-      const DeepCollectionEquality().hash(_rules),
-      const DeepCollectionEquality().hash(_tiers),
-      const DeepCollectionEquality().hash(_bonuses),
-      const DeepCollectionEquality().hash(_bundles),
-      overrideRulePresent,
-      zdp5MaxQuota,
-      zdp5RemainingQuota,
-      zmgDiscount,
-      lastPrice,
-      finalPrice,
-      finalTotalPrice,
-      additionalBonusEligible,
-      isValid,
-      isValidMaterial,
-      isFOC,
-      isPriceOverride);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        materialNumber,
+        const DeepCollectionEquality().hash(_rules),
+        const DeepCollectionEquality().hash(_tiers),
+        const DeepCollectionEquality().hash(_bonuses),
+        const DeepCollectionEquality().hash(_bundles),
+        overrideRulePresent,
+        zdp5MaxQuota,
+        zdp5RemainingQuota,
+        zmgDiscount,
+        lastPrice,
+        finalPrice,
+        finalTotalPrice,
+        additionalBonusEligible,
+        isValid,
+        isValidMaterial,
+        isFOC,
+        isPriceOverride,
+        zdp8Override,
+        priceOverride
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -465,7 +504,9 @@ abstract class _Price extends Price {
       required final bool isValid,
       final bool isValidMaterial,
       final bool isFOC,
-      final bool isPriceOverride}) = _$_Price;
+      final bool isPriceOverride,
+      required final Zdp8OverrideValue zdp8Override,
+      required final PriceOverrideValue priceOverride}) = _$_Price;
   const _Price._() : super._();
 
   @override
@@ -502,6 +543,10 @@ abstract class _Price extends Price {
   bool get isFOC;
   @override
   bool get isPriceOverride;
+  @override
+  Zdp8OverrideValue get zdp8Override;
+  @override
+  PriceOverrideValue get priceOverride;
   @override
   @JsonKey(ignore: true)
   _$$_PriceCopyWith<_$_Price> get copyWith =>

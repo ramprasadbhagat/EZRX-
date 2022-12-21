@@ -53,6 +53,6 @@ Map<String, dynamic> _$$_OrderHistoryDetailsOrderItemDtoToJson(
       'ExpiryDate': instance.expiryDate,
       'LineReferenceNotes': instance.lineReferenceNotes,
       'IsTenderContractMaterial': instance.isTenderContractMaterial,
-      'Details': instance.details,
-      'TenderContractDetails': instance.tenderContractDetails,
+      'Details': instance.details.map((e) => e.toJson()).toList(),
+      'TenderContractDetails': instance.tenderContractDetails.toJson(),
     };

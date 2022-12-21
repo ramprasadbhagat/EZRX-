@@ -304,6 +304,147 @@
           "MaterialGroup4": "6GS"
         },
         "ValidMaterial": true
+      },
+      {
+        "Price": {
+          "MaterialNumber": "000000000023245611",
+          "OverridenRulePresent": false,
+          "ZDP5MaxQuota": "",
+          "ZDP5RemainingQuota": "",
+          "ZMGDiscount": false,
+          "ListPrice": 7.92,
+          "FinalIndividualPrice": 4.85,
+          "FinalTotalPrice": 0,
+          "Valid": true,
+          "Bundles": [],
+          "AdditionalBonusEligible": false,
+          "PriceRules": [],
+          "Bonuses": [],
+          "TieredPricing": []
+        },
+        "MaterialInformation": {
+          "TaxClassification": "Product : Full Tax",
+          "Taxm1": "1",
+          "Taxes": [
+            "7"
+          ],
+          "PrincipalCode": "0000100813",
+          "PrincipalName": "A. Menarini Singapore Pte. Ltd.",
+          "MaterialNumber": "000000000023245611",
+          "MaterialDescription": "BREACOL COUGH SYRUP 100MG/5ML 120ML BOTG",
+          "TherapeuticClass": "Expectorants",
+          "ItemBrand": "BREACOL",
+          "defaultMaterialDescription": "BREACOL COUGH SYRUP 100MG/5ML 120ML BOTG",
+          "hasMandatoryTenderContract": null,
+          "hasValidTenderContract": null,
+          "hidePrice": false,
+          "GovernmentMaterialCode": "",
+          "IsSampleMaterial": false,
+          "ItemRegistrationNumber": "SIN08411P",
+          "UnitOfMeasurement": "EA",
+          "MaterialGroup2": "",
+          "MaterialGroup4": "6GS"
+        },
+        "ValidMaterial": true
+      },
+      {
+        "Price": {
+          "MaterialNumber": "000000000021209747",
+          "OverridenRulePresent": false,
+          "ZDP5MaxQuota": "",
+          "ZDP5RemainingQuota": "",
+          "ZMGDiscount": false,
+          "ListPrice": 7.92,
+          "FinalIndividualPrice": 4.85,
+          "FinalTotalPrice": 0,
+          "Valid": true,
+          "Bundles": [],
+          "AdditionalBonusEligible": false,
+          "PriceRules": [
+            {
+              "Type": "SGD",
+              "Rate": 7.92,
+              "Conditions": "ZLP0 - A901 - 0054643168",
+              "BonusEligible": true,
+              "ConditionNumber": "0054643168"
+            },
+            {
+              "Type": "SGD",
+              "Rate": 0,
+              "Conditions": "ZDP2 - A917 - 0060799940",
+              "BonusEligible": false,
+              "ConditionNumber": "0060799940"
+            }
+          ],
+          "Bonuses": [],
+          "TieredPricing": []
+        },
+        "MaterialInformation": {
+          "TaxClassification": "Product : Full Tax",
+          "Taxm1": "1",
+          "Taxes": [
+            "7"
+          ],
+          "PrincipalCode": "0000100813",
+          "PrincipalName": "A. Menarini Singapore Pte. Ltd.",
+          "MaterialNumber": "000000000021209747",
+          "MaterialDescription": "BREACOL COUGH SYRUP 100MG/5ML 120ML BOTG",
+          "TherapeuticClass": "Expectorants",
+          "ItemBrand": "BREACOL",
+          "defaultMaterialDescription": "BREACOL COUGH SYRUP 100MG/5ML 120ML BOTG",
+          "hasMandatoryTenderContract": null,
+          "hasValidTenderContract": null,
+          "hidePrice": false,
+          "GovernmentMaterialCode": "",
+          "IsSampleMaterial": false,
+          "ItemRegistrationNumber": "SIN08411P",
+          "UnitOfMeasurement": "EA",
+          "MaterialGroup2": "",
+          "MaterialGroup4": "6GS"
+        },
+        "ValidMaterial": true
+      },
+      {
+        "Price": {
+          "MaterialNumber": "000000000023245612",
+          "OverridenRulePresent": false,
+          "ZDP5MaxQuota": "",
+          "ZDP5RemainingQuota": "",
+          "ZMGDiscount": false,
+          "ListPrice": 7.92,
+          "FinalIndividualPrice": 4.85,
+          "FinalTotalPrice": 0,
+          "Valid": true,
+          "Bundles": [],
+          "AdditionalBonusEligible": false,
+          "PriceRules": [],
+          "Bonuses": [],
+          "TieredPricing": []
+        },
+        "MaterialInformation": {
+          "TaxClassification": "Product : Full Tax",
+          "Taxm1": "1",
+          "Taxes": [
+            "7"
+          ],
+          "PrincipalCode": "0000100813",
+          "PrincipalName": "A. Menarini Singapore Pte. Ltd.",
+          "MaterialNumber": "000000000023245612",
+          "MaterialDescription": "BREACOL COUGH SYRUP 100MG/5ML 120ML BOTG",
+          "TherapeuticClass": "Expectorants",
+          "ItemBrand": "BREACOL",
+          "defaultMaterialDescription": "BREACOL COUGH SYRUP 100MG/5ML 120ML BOTG",
+          "hasMandatoryTenderContract": null,
+          "hasValidTenderContract": null,
+          "hidePrice": false,
+          "GovernmentMaterialCode": "",
+          "IsSampleMaterial": false,
+          "ItemRegistrationNumber": "SIN08411P",
+          "UnitOfMeasurement": "EA",
+          "MaterialGroup2": "",
+          "MaterialGroup4": "6GS"
+        },
+        "ValidMaterial": true
       }
     ]
   }

@@ -222,7 +222,7 @@ class CartRepository implements ICartRepository {
       );
     } catch (e) {
       await countlyService.addCountlyEvent('add_to_cart_failed');
-      
+
       return Left(FailureHandler.handleFailure(e));
     }
   }
@@ -345,12 +345,10 @@ class CartRepository implements ICartRepository {
         final stockInfoList = salesOrganisationConfigs.enableBatchNumber
             ? await stockInfoLocalDataSource.getStockInfoList()
             : [await stockInfoLocalDataSource.getStockInfo()];
-        final stockInformation = stockInfoList
-            .where(
-              (element) => element.materialNumber == material.materialNumber,
-            )
-            .toList()
-            .first;
+        final stockInformation = stockInfoList.firstWhere(
+          (element) => element.materialNumber == material.materialNumber,
+          orElse: () => StockInfo.empty(),
+        );
 
         return Right(stockInformation);
       } catch (e) {
@@ -373,12 +371,10 @@ class CartRepository implements ICartRepository {
                   selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
                 ),
               ];
-        final stockInformation = stockInfoList
-            .where(
-              (element) => element.materialNumber == material.materialNumber,
-            )
-            .toList()
-            .first;
+        final stockInformation = stockInfoList.firstWhere(
+          (element) => element.materialNumber == material.materialNumber,
+          orElse: () => StockInfo.empty(),
+        );
 
         return Right(stockInformation);
       } catch (e) {

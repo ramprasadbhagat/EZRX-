@@ -22,6 +22,8 @@ mixin _$MaterialQueryInfo {
   String get description => throw _privateConstructorUsedError;
   String get principalName => throw _privateConstructorUsedError;
   MaterialQty get qty => throw _privateConstructorUsedError;
+  double get priceOverride => throw _privateConstructorUsedError;
+  double get zdp8Override => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialQueryInfoCopyWith<MaterialQueryInfo> get copyWith =>
@@ -40,7 +42,9 @@ abstract class $MaterialQueryInfoCopyWith<$Res> {
       MaterialGroup materialGroup4,
       String description,
       String principalName,
-      MaterialQty qty});
+      MaterialQty qty,
+      double priceOverride,
+      double zdp8Override});
 }
 
 /// @nodoc
@@ -62,6 +66,8 @@ class _$MaterialQueryInfoCopyWithImpl<$Res, $Val extends MaterialQueryInfo>
     Object? description = null,
     Object? principalName = null,
     Object? qty = null,
+    Object? priceOverride = null,
+    Object? zdp8Override = null,
   }) {
     return _then(_value.copyWith(
       value: null == value
@@ -88,6 +94,14 @@ class _$MaterialQueryInfoCopyWithImpl<$Res, $Val extends MaterialQueryInfo>
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
               as MaterialQty,
+      priceOverride: null == priceOverride
+          ? _value.priceOverride
+          : priceOverride // ignore: cast_nullable_to_non_nullable
+              as double,
+      zdp8Override: null == zdp8Override
+          ? _value.zdp8Override
+          : zdp8Override // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -106,7 +120,9 @@ abstract class _$$_MaterialQueryInfoCopyWith<$Res>
       MaterialGroup materialGroup4,
       String description,
       String principalName,
-      MaterialQty qty});
+      MaterialQty qty,
+      double priceOverride,
+      double zdp8Override});
 }
 
 /// @nodoc
@@ -126,6 +142,8 @@ class __$$_MaterialQueryInfoCopyWithImpl<$Res>
     Object? description = null,
     Object? principalName = null,
     Object? qty = null,
+    Object? priceOverride = null,
+    Object? zdp8Override = null,
   }) {
     return _then(_$_MaterialQueryInfo(
       value: null == value
@@ -152,6 +170,14 @@ class __$$_MaterialQueryInfoCopyWithImpl<$Res>
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
               as MaterialQty,
+      priceOverride: null == priceOverride
+          ? _value.priceOverride
+          : priceOverride // ignore: cast_nullable_to_non_nullable
+              as double,
+      zdp8Override: null == zdp8Override
+          ? _value.zdp8Override
+          : zdp8Override // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -165,7 +191,9 @@ class _$_MaterialQueryInfo extends _MaterialQueryInfo {
       required this.materialGroup4,
       required this.description,
       required this.principalName,
-      required this.qty})
+      required this.qty,
+      this.priceOverride = 0,
+      this.zdp8Override = 0})
       : super._();
 
   @override
@@ -180,10 +208,16 @@ class _$_MaterialQueryInfo extends _MaterialQueryInfo {
   final String principalName;
   @override
   final MaterialQty qty;
+  @override
+  @JsonKey()
+  final double priceOverride;
+  @override
+  @JsonKey()
+  final double zdp8Override;
 
   @override
   String toString() {
-    return 'MaterialQueryInfo(value: $value, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, description: $description, principalName: $principalName, qty: $qty)';
+    return 'MaterialQueryInfo(value: $value, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, description: $description, principalName: $principalName, qty: $qty, priceOverride: $priceOverride, zdp8Override: $zdp8Override)';
   }
 
   @override
@@ -200,12 +234,24 @@ class _$_MaterialQueryInfo extends _MaterialQueryInfo {
                 other.description == description) &&
             (identical(other.principalName, principalName) ||
                 other.principalName == principalName) &&
-            (identical(other.qty, qty) || other.qty == qty));
+            (identical(other.qty, qty) || other.qty == qty) &&
+            (identical(other.priceOverride, priceOverride) ||
+                other.priceOverride == priceOverride) &&
+            (identical(other.zdp8Override, zdp8Override) ||
+                other.zdp8Override == zdp8Override));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, value, materialGroup2,
-      materialGroup4, description, principalName, qty);
+  int get hashCode => Object.hash(
+      runtimeType,
+      value,
+      materialGroup2,
+      materialGroup4,
+      description,
+      principalName,
+      qty,
+      priceOverride,
+      zdp8Override);
 
   @JsonKey(ignore: true)
   @override
@@ -222,7 +268,9 @@ abstract class _MaterialQueryInfo extends MaterialQueryInfo {
       required final MaterialGroup materialGroup4,
       required final String description,
       required final String principalName,
-      required final MaterialQty qty}) = _$_MaterialQueryInfo;
+      required final MaterialQty qty,
+      final double priceOverride,
+      final double zdp8Override}) = _$_MaterialQueryInfo;
   const _MaterialQueryInfo._() : super._();
 
   @override
@@ -237,6 +285,10 @@ abstract class _MaterialQueryInfo extends MaterialQueryInfo {
   String get principalName;
   @override
   MaterialQty get qty;
+  @override
+  double get priceOverride;
+  @override
+  double get zdp8Override;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialQueryInfoCopyWith<_$_MaterialQueryInfo> get copyWith =>

@@ -19,6 +19,8 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
     required String description,
     required String principalName,
     required MaterialQty qty,
+    @Default(0) double priceOverride,
+    @Default(0) double zdp8Override,
   }) = _MaterialQueryInfo;
 
   factory MaterialQueryInfo.fromSavedOrder({
@@ -31,6 +33,8 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
         materialGroup4: orderMaterial.materialGroup4,
         description: orderMaterial.displayDescription,
         principalName: 'NA',
+        priceOverride: orderMaterial.overridenPrice.getOrDefaultValue(0),
+        zdp8Override: orderMaterial.zdp8Override.getOrDefaultValue(0),
       );
 
   factory MaterialQueryInfo.fromOrderTemplate({
@@ -106,4 +110,19 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
         description: orderHistoryDetailsOrderItem.materialDescription,
         principalName: 'NA',
       );
+
+  Map<String, dynamic> get priceQuery {
+    final data = <String, dynamic>{
+      'MaterialNumber': value.getOrCrash(),
+    };
+
+    if (priceOverride != 0) {
+      data['ZPO1'] = priceOverride;
+    }
+    if (zdp8Override != 0) {
+      data['ZDP8'] = zdp8Override;
+    }
+
+    return data;
+  }
 }

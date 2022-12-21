@@ -10,6 +10,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/price_override/price_
 import 'package:ezrxmobile/infrastructure/order/datasource/price_override/price_override_remote.dart';
 
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 
 class PriceOverrideRepository implements IPriceOverrideRepository {
   final Config config;
@@ -24,7 +25,7 @@ class PriceOverrideRepository implements IPriceOverrideRepository {
   @override
   Future<Either<ApiFailure, List<Price>>> updateItemPrice({
     required PriceAggregate item,
-    required String newPrice,
+    required double newPrice,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
   }) async {
@@ -33,7 +34,10 @@ class PriceOverrideRepository implements IPriceOverrideRepository {
         final price = await localDataSource.getOverridePrice();
 
         return Right(
-          price,
+          price
+              .map((Price e) =>
+                  e.copyWith(materialNumber: item.getMaterialNumber))
+              .toList(),
         );
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
@@ -42,10 +46,10 @@ class PriceOverrideRepository implements IPriceOverrideRepository {
 
     try {
       final price = await remoteDataSource.getOverridePrice(
-        price: newPrice,
         custCode: customerCodeInfo.customerCodeSoldTo,
-        materialNumber: item.materialInfo.materialNumber.getOrCrash(),
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+        materialQuery:
+            PriceDto.fromDomain(item.price).priceOverrideQuery(newPrice),
       );
 
       return Right(price);

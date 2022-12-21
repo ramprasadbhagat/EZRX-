@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'price_aggregate.freezed.dart';
@@ -65,6 +66,7 @@ class PriceAggregate with _$PriceAggregate {
       materialNumber: materialInfo.materialNumber,
       quantity: quantity,
       salesDistrict: stockInfo.salesDistrict,
+      materialItemOverride: MaterialItemOverrideDto.fromPrice(price).toDomain(),
     );
   }
 
@@ -76,8 +78,11 @@ class PriceAggregate with _$PriceAggregate {
       type: 'Comm',
       itemRegistrationNumber: materialInfo.itemRegistrationNumber,
       unitOfMeasurement: materialInfo.unitOfMeasurement,
-      bonuses: addedBonusList,
-      // zdp8Override: isOverride,
+      bonuses: addedBonusList
+          .where((element) => element.additionalBonusFlag)
+          .toList(),
+      zdp8Override: price.zdp8Override,
+      overridenPrice: price.priceOverride,
       hidePrice: materialInfo.hidePrice,
       materialGroup2: materialInfo.materialGroup2,
       materialGroup4: materialInfo.materialGroup4,

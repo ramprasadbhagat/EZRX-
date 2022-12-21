@@ -251,7 +251,11 @@ class MaterialPriceDetailBloc
       for (final material in materials)
         material: MaterialPriceDetail.defaultWithPrice(
           query: material,
-          price: value,
+          price: value.copyWith(
+            zdp8Override: Zdp8OverrideValue(material.zdp8Override),
+            isPriceOverride: material.priceOverride != 0,
+            priceOverride: PriceOverrideValue(material.priceOverride),
+          ),
         ),
     };
 

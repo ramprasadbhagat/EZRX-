@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/domain/order/repository/i_price_override_repository.dart';
@@ -53,7 +54,15 @@ class PriceOverrideBloc extends Bloc<PriceOverrideEvent, PriceOverrideState> {
               state.copyWith(
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
-                cartItemList: itemPrice,
+                cartItemList: itemPrice
+                    .map(
+                      (e) => e.copyWith(
+                        zdp8Override: value.item.price.zdp8Override,
+                        priceOverride: PriceOverrideValue(value.newPrice),
+                        isPriceOverride: true,
+                      ),
+                    )
+                    .toList(),
               ),
             );
           },

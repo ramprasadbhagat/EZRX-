@@ -65,6 +65,12 @@ mixin _$PriceDto {
   @JsonKey(name: 'isPriceOverride', defaultValue: false)
   @HiveField(14, defaultValue: false)
   bool get isPriceOverride => throw _privateConstructorUsedError;
+  @HiveField(15, defaultValue: 0)
+  @JsonKey(name: 'zdp8Override', defaultValue: 0)
+  double get zdp8Override => throw _privateConstructorUsedError;
+  @HiveField(16, defaultValue: 0)
+  @JsonKey(name: 'priceOverride', defaultValue: 0)
+  double get priceOverride => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -122,7 +128,13 @@ abstract class $PriceDtoCopyWith<$Res> {
           bool isValid,
       @JsonKey(name: 'isPriceOverride', defaultValue: false)
       @HiveField(14, defaultValue: false)
-          bool isPriceOverride});
+          bool isPriceOverride,
+      @HiveField(15, defaultValue: 0)
+      @JsonKey(name: 'zdp8Override', defaultValue: 0)
+          double zdp8Override,
+      @HiveField(16, defaultValue: 0)
+      @JsonKey(name: 'priceOverride', defaultValue: 0)
+          double priceOverride});
 }
 
 /// @nodoc
@@ -153,6 +165,8 @@ class _$PriceDtoCopyWithImpl<$Res, $Val extends PriceDto>
     Object? additionalBonusEligible = null,
     Object? isValid = null,
     Object? isPriceOverride = null,
+    Object? zdp8Override = null,
+    Object? priceOverride = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -215,6 +229,14 @@ class _$PriceDtoCopyWithImpl<$Res, $Val extends PriceDto>
           ? _value.isPriceOverride
           : isPriceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
+      zdp8Override: null == zdp8Override
+          ? _value.zdp8Override
+          : zdp8Override // ignore: cast_nullable_to_non_nullable
+              as double,
+      priceOverride: null == priceOverride
+          ? _value.priceOverride
+          : priceOverride // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -271,7 +293,13 @@ abstract class _$$_PriceDtoCopyWith<$Res> implements $PriceDtoCopyWith<$Res> {
           bool isValid,
       @JsonKey(name: 'isPriceOverride', defaultValue: false)
       @HiveField(14, defaultValue: false)
-          bool isPriceOverride});
+          bool isPriceOverride,
+      @HiveField(15, defaultValue: 0)
+      @JsonKey(name: 'zdp8Override', defaultValue: 0)
+          double zdp8Override,
+      @HiveField(16, defaultValue: 0)
+      @JsonKey(name: 'priceOverride', defaultValue: 0)
+          double priceOverride});
 }
 
 /// @nodoc
@@ -300,6 +328,8 @@ class __$$_PriceDtoCopyWithImpl<$Res>
     Object? additionalBonusEligible = null,
     Object? isValid = null,
     Object? isPriceOverride = null,
+    Object? zdp8Override = null,
+    Object? priceOverride = null,
   }) {
     return _then(_$_PriceDto(
       materialNumber: null == materialNumber
@@ -362,6 +392,14 @@ class __$$_PriceDtoCopyWithImpl<$Res>
           ? _value.isPriceOverride
           : isPriceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
+      zdp8Override: null == zdp8Override
+          ? _value.zdp8Override
+          : zdp8Override // ignore: cast_nullable_to_non_nullable
+              as double,
+      priceOverride: null == priceOverride
+          ? _value.priceOverride
+          : priceOverride // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -415,7 +453,13 @@ class _$_PriceDto extends _PriceDto {
           required this.isValid,
       @JsonKey(name: 'isPriceOverride', defaultValue: false)
       @HiveField(14, defaultValue: false)
-          required this.isPriceOverride})
+          required this.isPriceOverride,
+      @HiveField(15, defaultValue: 0)
+      @JsonKey(name: 'zdp8Override', defaultValue: 0)
+          required this.zdp8Override,
+      @HiveField(16, defaultValue: 0)
+      @JsonKey(name: 'priceOverride', defaultValue: 0)
+          required this.priceOverride})
       : _rules = rules,
         _tiers = tiers,
         _bonuses = bonuses,
@@ -505,10 +549,18 @@ class _$_PriceDto extends _PriceDto {
   @JsonKey(name: 'isPriceOverride', defaultValue: false)
   @HiveField(14, defaultValue: false)
   final bool isPriceOverride;
+  @override
+  @HiveField(15, defaultValue: 0)
+  @JsonKey(name: 'zdp8Override', defaultValue: 0)
+  final double zdp8Override;
+  @override
+  @HiveField(16, defaultValue: 0)
+  @JsonKey(name: 'priceOverride', defaultValue: 0)
+  final double priceOverride;
 
   @override
   String toString() {
-    return 'PriceDto(materialNumber: $materialNumber, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, overrideRulePresent: $overrideRulePresent, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, zmgDiscount: $zmgDiscount, listPrice: $listPrice, finalIndividualPrice: $finalIndividualPrice, finalTotalPrice: $finalTotalPrice, additionalBonusEligible: $additionalBonusEligible, isValid: $isValid, isPriceOverride: $isPriceOverride)';
+    return 'PriceDto(materialNumber: $materialNumber, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, overrideRulePresent: $overrideRulePresent, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, zmgDiscount: $zmgDiscount, listPrice: $listPrice, finalIndividualPrice: $finalIndividualPrice, finalTotalPrice: $finalTotalPrice, additionalBonusEligible: $additionalBonusEligible, isValid: $isValid, isPriceOverride: $isPriceOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride)';
   }
 
   @override
@@ -541,7 +593,11 @@ class _$_PriceDto extends _PriceDto {
                 other.additionalBonusEligible == additionalBonusEligible) &&
             (identical(other.isValid, isValid) || other.isValid == isValid) &&
             (identical(other.isPriceOverride, isPriceOverride) ||
-                other.isPriceOverride == isPriceOverride));
+                other.isPriceOverride == isPriceOverride) &&
+            (identical(other.zdp8Override, zdp8Override) ||
+                other.zdp8Override == zdp8Override) &&
+            (identical(other.priceOverride, priceOverride) ||
+                other.priceOverride == priceOverride));
   }
 
   @JsonKey(ignore: true)
@@ -562,7 +618,9 @@ class _$_PriceDto extends _PriceDto {
       finalTotalPrice,
       additionalBonusEligible,
       isValid,
-      isPriceOverride);
+      isPriceOverride,
+      zdp8Override,
+      priceOverride);
 
   @JsonKey(ignore: true)
   @override
@@ -624,7 +682,13 @@ abstract class _PriceDto extends PriceDto {
           required final bool isValid,
       @JsonKey(name: 'isPriceOverride', defaultValue: false)
       @HiveField(14, defaultValue: false)
-          required final bool isPriceOverride}) = _$_PriceDto;
+          required final bool isPriceOverride,
+      @HiveField(15, defaultValue: 0)
+      @JsonKey(name: 'zdp8Override', defaultValue: 0)
+          required final double zdp8Override,
+      @HiveField(16, defaultValue: 0)
+      @JsonKey(name: 'priceOverride', defaultValue: 0)
+          required final double priceOverride}) = _$_PriceDto;
   const _PriceDto._() : super._();
 
   factory _PriceDto.fromJson(Map<String, dynamic> json) = _$_PriceDto.fromJson;
@@ -689,6 +753,14 @@ abstract class _PriceDto extends PriceDto {
   @JsonKey(name: 'isPriceOverride', defaultValue: false)
   @HiveField(14, defaultValue: false)
   bool get isPriceOverride;
+  @override
+  @HiveField(15, defaultValue: 0)
+  @JsonKey(name: 'zdp8Override', defaultValue: 0)
+  double get zdp8Override;
+  @override
+  @HiveField(16, defaultValue: 0)
+  @JsonKey(name: 'priceOverride', defaultValue: 0)
+  double get priceOverride;
   @override
   @JsonKey(ignore: true)
   _$$_PriceDtoCopyWith<_$_PriceDto> get copyWith =>

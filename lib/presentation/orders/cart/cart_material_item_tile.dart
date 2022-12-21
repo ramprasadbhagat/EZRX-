@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/discount_override/discount_override_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
@@ -15,6 +16,7 @@ import 'package:ezrxmobile/presentation/core/remarks_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_remark_dialog.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_remarks_button.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus_tile.dart';
+import 'package:ezrxmobile/presentation/orders/cart/discount_override_toggle.dart';
 import 'package:ezrxmobile/presentation/orders/cart/edit_delete_dialog.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bonus_discount_label.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bonus_lable.dart';
@@ -90,7 +92,28 @@ class CartMaterialItemTile extends StatelessWidget {
                         taxCode: taxCode,
                         isOrderSummaryView: isOrderSummaryView,
                       ),
-                      _CartItemQuantityInput(cartItem: cartItem),
+                      Column(
+                        children: [
+                          _CartItemQuantityInput(cartItem: cartItem),
+                          if (context
+                              .read<EligibilityBloc>()
+                              .state
+                              .isZDP8Override)
+                            BlocProvider(
+                              create: (context) =>
+                                  locator<DiscountOverrideBloc>()
+                                    ..add(
+                                      DiscountOverrideEvent.update(
+                                        price: cartItem.price,
+                                        showErrorMessages: false,
+                                      ),
+                                    ),
+                              child: DiscountOverrideToggle(
+                                cartItem: cartItem,
+                              ),
+                            ),
+                        ],
+                      ),
                     ],
                   ),
                   if (cartItem.materialInfo.remarks.isNotEmpty &&
@@ -283,7 +306,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                         context.read<PriceOverrideBloc>().add(
                               PriceOverrideEvent.fetch(
                                 item: cartItem,
-                                newPrice: newPrice.toString(),
+                                newPrice: newPrice,
                                 salesOrganisation: context
                                     .read<SalesOrgBloc>()
                                     .state

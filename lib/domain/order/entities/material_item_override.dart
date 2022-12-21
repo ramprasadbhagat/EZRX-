@@ -10,15 +10,34 @@ class MaterialItemOverride with _$MaterialItemOverride {
   const factory MaterialItemOverride({
     required String reference,
     required List<ValueOverride> valueOverride,
-    required dynamic percentageOverride,
+    required List<PercentageOverride> percentageOverride,
   }) = _MaterialItemOverride;
+
+  factory MaterialItemOverride.empty() => const MaterialItemOverride(
+        reference: '',
+        valueOverride: [],
+        percentageOverride: [],
+      );
 }
 
 @freezed
 class ValueOverride with _$ValueOverride {
   const factory ValueOverride({
-    required String code,
-    required dynamic price,
+    @Default('ZP01') String code,
+    required double price,
     required Currency currency,
   }) = _ValueOverride;
+
+  factory ValueOverride.empty() => ValueOverride(
+        price: 0,
+        currency: Currency('sgd'),
+      );
+}
+
+@freezed
+class PercentageOverride with _$PercentageOverride {
+  const factory PercentageOverride({
+    @Default('ZDP8') String code,
+    required double percentage,
+  }) = _PercentageOverride;
 }

@@ -8,6 +8,7 @@ class StockInfoLocalDataSource {
   StockInfoLocalDataSource();
 
   Future<StockInfo> getStockInfo() async {
+    await Future.delayed(const Duration(seconds: 1));
     final data = json.decode(
       await rootBundle.loadString('assets/json/stockInformationResponse.json'),
     );
@@ -16,6 +17,7 @@ class StockInfoLocalDataSource {
   }
 
   Future<List<StockInfo>> getStockInfoList() async {
+    await Future.delayed(const Duration(seconds: 1));
     final data = json.decode(
       await rootBundle
           .loadString('assets/json/stockInformationListResponse.json'),

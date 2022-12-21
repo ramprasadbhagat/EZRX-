@@ -139,7 +139,8 @@ class MaterialListRemoteDataSource {
         apiEndpoint: 'customerMaterialsForSalesRep',
       );
       _materialListExceptionChecker(res: res);
-      final finalData = res.data['data']['materialsWithMeta']['materials'];
+      final finalData =
+          res.data['data']['customerMaterialsForSalesRep']['materials'];
 
       return List.from(finalData)
           .map((e) => MaterialDto.fromJson(e).toDomain())

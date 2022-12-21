@@ -1,8 +1,8 @@
 class ValidCustomMaterialQuery {
   String getValidCustomerMaterial() {
     return '''
-      query (\$input:validCustomerMaterialsRequest!){
-        validCustomerMaterials(request:\$input)
+      query validCustomerMaterials(\$request:validCustomerMaterialsRequest!){
+        validCustomerMaterials(request:\$request)
           {
             materials
         }

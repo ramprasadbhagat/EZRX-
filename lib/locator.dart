@@ -13,6 +13,7 @@ import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.d
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/discount_override/discount_override_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
@@ -100,6 +101,7 @@ import 'package:ezrxmobile/infrastructure/favourites/repository/favourite_reposi
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_po_document_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_po_document_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_filter_local.dart';
@@ -176,6 +178,10 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:local_auth/local_auth.dart';
+
+import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_remote.dart';
+
+import 'package:ezrxmobile/infrastructure/order/repository/discount_override_repository.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -1264,6 +1270,36 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => TenderContractBloc(
       tenderContractRepository: locator<TenderContractRepository>(),
+    ),
+  );
+
+  //============================================================
+  //  Discount Override
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => DiscountOverrideLocalDataSource());
+
+  locator.registerLazySingleton(
+    () => DiscountOverrideRemoteDataSource(
+      httpService: locator<HttpService>(),
+      queryMutation: locator<MaterialPriceQueryMutation>(),
+      config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => DiscountOverrideRepository(
+      config: locator<Config>(),
+      localDataSource: locator<DiscountOverrideLocalDataSource>(),
+      remoteDataSource: locator<DiscountOverrideRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => DiscountOverrideBloc(
+      repository: locator<DiscountOverrideRepository>(),
     ),
   );
 }

@@ -71,13 +71,14 @@ class SalesOrganisationConfigsDtoAdapter
       displayOrderDiscount: fields[143] == null ? false : fields[143] as bool,
       minOrderAmount: fields[144] == null ? '0' : fields[144] as String,
       salesOrg: fields[145] == null ? '0' : fields[145] as String,
+      enableZDP8Override: fields[146] == null ? false : fields[146] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_SalesOrganisationConfigsDto obj) {
     writer
-      ..writeByte(46)
+      ..writeByte(47)
       ..writeByte(100)
       ..write(obj.disableProcessingStatus)
       ..writeByte(101)
@@ -168,6 +169,8 @@ class SalesOrganisationConfigsDtoAdapter
       ..write(obj.minOrderAmount)
       ..writeByte(145)
       ..write(obj.salesOrg)
+      ..writeByte(146)
+      ..write(obj.enableZDP8Override)
       ..writeByte(7)
       ..write(obj.principalList);
   }
@@ -242,6 +245,7 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       displayOrderDiscount: json['displayOrderDiscount'] as bool? ?? false,
       minOrderAmount: json['minOrderAmount'] as String? ?? '0',
       salesOrg: json['salesOrgCode'] as String? ?? '0',
+      enableZDP8Override: json['enableZDP8Override'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -294,4 +298,5 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'displayOrderDiscount': instance.displayOrderDiscount,
       'minOrderAmount': instance.minOrderAmount,
       'salesOrgCode': instance.salesOrg,
+      'enableZDP8Override': instance.enableZDP8Override,
     };

@@ -142,8 +142,6 @@ class MaterialDto with _$MaterialDto {
 
   factory MaterialDto.fromJson(Map<String, dynamic> json) =>
       _$MaterialDtoFromJson(json);
-
-  // const MaterialDto.ke();
 }
 
 List handleEmptyTaxList(Map json, String key) {

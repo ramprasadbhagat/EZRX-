@@ -107,7 +107,7 @@ _$_PriceTierDto _$$_PriceTierDtoFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_PriceTierDtoToJson(_$_PriceTierDto instance) =>
     <String, dynamic>{
       'Tier': instance.tier,
-      'PriceTier': instance.items,
+      'PriceTier': instance.items.map((e) => e.toJson()).toList(),
     };
 
 _$_PriceTierItemDto _$$_PriceTierItemDtoFromJson(Map<String, dynamic> json) =>

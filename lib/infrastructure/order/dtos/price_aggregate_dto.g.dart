@@ -59,7 +59,9 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
               zdp5MaxQuota: '',
               zdp5RemainingQuota: '',
               zmgDiscount: false,
-              isPriceOverride: false)
+              isPriceOverride: false,
+              zdp8Override: 0.0,
+              priceOverride: 0.0)
           : fields[2] as PriceDto,
       salesOrganisationConfigsDto: fields[3] == null
           ? const SalesOrganisationConfigsDto(
@@ -108,7 +110,8 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
               netPriceOverride: false,
               batchNumDisplay: false,
               displayOrderDiscount: false,
-              minOrderAmount: '0')
+              minOrderAmount: '0',
+              enableZDP8Override: false)
           : fields[3] as SalesOrganisationConfigsDto,
       zmgMaterialCountOnCart: fields[4] == null ? 0 : fields[4] as int,
       bundleDto: fields[5] == null

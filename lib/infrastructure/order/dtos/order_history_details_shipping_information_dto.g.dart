@@ -36,5 +36,5 @@ Map<String, dynamic> _$$_OrderHistoryDetailsShippingInformationDtoToJson(
       'Country': instance.country,
       'Phone': instance.phone,
       'Fax': instance.fax,
-      'Invoices': instance.invoices,
+      'Invoices': instance.invoices.map((e) => e.toJson()).toList(),
     };

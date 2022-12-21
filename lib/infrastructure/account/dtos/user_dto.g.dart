@@ -43,7 +43,7 @@ Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
       'email': instance.email,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
-      'role': instance.role,
+      'role': instance.role.toJson(),
       'customerCode': instance.customerCode,
       'userSalesOrganisationList': const _SalesOrganisationListConverter()
           .toJson(instance.userSalesOrganisations),

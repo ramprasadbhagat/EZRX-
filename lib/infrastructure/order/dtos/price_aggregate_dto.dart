@@ -121,6 +121,8 @@ const PriceDto _emptyPriceDto = PriceDto(
   zdp5RemainingQuota: '',
   zmgDiscount: false,
   isPriceOverride: false,
+  zdp8Override: 0,
+  priceOverride: 0,
 );
 
 const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
@@ -171,6 +173,7 @@ const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
   batchNumDisplay: false,
   displayOrderDiscount: false,
   minOrderAmount: '0',
+  enableZDP8Override: false,
 );
 
 const BundleDto _emptyBundleDto = BundleDto(

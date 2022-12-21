@@ -64,5 +64,6 @@ Map<String, dynamic> _$$_BundleDtoToJson(_$_BundleDto instance) =>
     <String, dynamic>{
       'bundleName': instance.bundleName,
       'bundleCode': instance.bundleCode,
-      'bundleInformation': instance.bundleInformation,
+      'bundleInformation':
+          instance.bundleInformation.map((e) => e.toJson()).toList(),
     };

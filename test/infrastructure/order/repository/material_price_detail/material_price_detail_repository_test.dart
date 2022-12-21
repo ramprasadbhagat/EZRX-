@@ -109,16 +109,25 @@ void main() {
   group('MaterialDetail Repository', () {
     test('Get MaterialDetails from remote success with no ZDP5 enable',
         () async {
-      when(() => remoteDataSourceMock.getMaterialDetail(
-              salesOrgCode: 'fake-saleOrg',
-              customerCode: 'fake-customer-code',
-              shipToCode: 'fake-ship-to-code',
-              language: '',
-              materialNumbers: [
-                'fake-material-1',
-                'fake-material-2',
-                'fake-material-3',
-              ])).thenAnswer(
+      when(
+        () => remoteDataSourceMock.getMaterialDetail(
+          salesOrgCode: 'fake-saleOrg',
+          customerCode: 'fake-customer-code',
+          shipToCode: 'fake-ship-to-code',
+          language: '',
+          queryString: [
+            {
+              'MaterialNumber': 'fake-material-1',
+            },
+            {
+              'MaterialNumber': 'fake-material-2',
+            },
+            {
+              'MaterialNumber': 'fake-material-3',
+            }
+          ],
+        ),
+      ).thenAnswer(
         (invocation) async => fakeQueryResponseNotEnableZDP5,
       );
 
@@ -146,16 +155,25 @@ void main() {
 
     test('Get MaterialDetails from remote success with no ZDP5 enable',
         () async {
-      when(() => remoteDataSourceMock.getMaterialDetail(
-              salesOrgCode: 'fake-saleOrg',
-              customerCode: 'fake-customer-code',
-              shipToCode: 'fake-ship-to-code',
-              language: '',
-              materialNumbers: [
-                'fake-material-1',
-                'fake-material-2',
-                'fake-material-3',
-              ])).thenAnswer(
+      when(
+        () => remoteDataSourceMock.getMaterialDetail(
+          salesOrgCode: 'fake-saleOrg',
+          customerCode: 'fake-customer-code',
+          shipToCode: 'fake-ship-to-code',
+          language: '',
+          queryString: [
+            {
+              'MaterialNumber': 'fake-material-1',
+            },
+            {
+              'MaterialNumber': 'fake-material-2',
+            },
+            {
+              'MaterialNumber': 'fake-material-3',
+            }
+          ],
+        ),
+      ).thenAnswer(
         (invocation) async => fakeQueryResponseToEnableZDP5,
       );
       when(() => remoteDataSourceMock.getMaterialDetailZDP5Enabled(

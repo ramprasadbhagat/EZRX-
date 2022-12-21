@@ -136,4 +136,7 @@ class EligibilityState with _$EligibilityState {
         billToInfo.billToCustomerCode.isNotEmpty &&
         billToInfo.billToCustomerCode != customerCodeInfo.customerCodeSoldTo;
   }
+
+  bool get isZDP8Override =>
+      user.role.type.isSalesRep && salesOrgConfigs.enableZDP8Override;
 }

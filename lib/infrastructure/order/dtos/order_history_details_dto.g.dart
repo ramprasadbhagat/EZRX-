@@ -41,11 +41,16 @@ _$_OrderHistoryDetailsDto _$$_OrderHistoryDetailsDtoFromJson(
 Map<String, dynamic> _$$_OrderHistoryDetailsDtoToJson(
         _$_OrderHistoryDetailsDto instance) =>
     <String, dynamic>{
-      'OrderHeader': instance.orderHistoryDetailsOrderHeader,
-      'ShippingInformation': instance.orderHistoryDetailsShippingInformation,
-      'OrderItems': instance.orderHistoryDetailsOrderItem,
-      'PaymentTerm': instance.orderHistoryDetailsPaymentTerm,
+      'OrderHeader': instance.orderHistoryDetailsOrderHeader.toJson(),
+      'ShippingInformation':
+          instance.orderHistoryDetailsShippingInformation.toJson(),
+      'OrderItems':
+          instance.orderHistoryDetailsOrderItem.map((e) => e.toJson()).toList(),
+      'PaymentTerm': instance.orderHistoryDetailsPaymentTerm.toJson(),
       'SpecialInstructions': instance.orderHistoryDetailsSpecialInstructions,
-      'PODocuments': instance.orderHistoryDetailsPoDocuments,
-      'Messages': instance.orderHistoryDetailsMessages,
+      'PODocuments': instance.orderHistoryDetailsPoDocuments
+          .map((e) => e.toJson())
+          .toList(),
+      'Messages':
+          instance.orderHistoryDetailsMessages.map((e) => e.toJson()).toList(),
     };

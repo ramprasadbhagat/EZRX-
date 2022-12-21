@@ -249,7 +249,7 @@ void main() {
       );
 
       blocTest<AddToCartBloc, AddToCartState>(
-        'Tire Materail UpdateQuantity AddToCartBloc for Material with Trie discount enable in cart',
+        'Tire Material UpdateQuantity AddToCartBloc for Material with Trie discount enable in cart',
         setUp: () {
           addToCartQuantity = 5;
           onCartDiscountProductQuantity = 0;
@@ -294,7 +294,7 @@ void main() {
       );
 
       blocTest<AddToCartBloc, AddToCartState>(
-        'Tire Materail UpdateQuantity AddToCartBloc for Material with Trie discount enable in cart',
+        'Tire Material UpdateQuantity AddToCartBloc for Material with Trie discount enable in cart',
         setUp: () {
           addToCartQuantity = 3;
           onCartDiscountProductQuantity = 2;

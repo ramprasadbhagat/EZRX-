@@ -18,7 +18,8 @@ _$_MaterialItemDto _$$_MaterialItemDtoFromJson(Map<String, dynamic> json) =>
       materialGroup2: json['materialGroup2'] as String? ?? '',
       materialGroup4: json['materialGroup4'] as String? ?? '',
       materialNumber: json['materialNumber'] as String? ?? '',
-      overridenPrice: (json['overridenPrice'] as num?)?.toDouble() ?? 0,
+      overridenPrice:
+          (doubleFormatCheck(json, 'priceOverride') as num?)?.toDouble() ?? 0,
       unitOfMeasurement: json['unitOfMeasurement'] as String? ?? '',
       itemRegistrationNumber: json['itemRegistrationNumber'] as String? ?? '',
       defaultMaterialDescription:
@@ -28,29 +29,35 @@ _$_MaterialItemDto _$$_MaterialItemDtoFromJson(Map<String, dynamic> json) =>
       comment: json['comment'] as String? ?? '',
       batchNumber: json['batchNumber'] as String? ?? '',
       zdp8Override:
-          boolStringFormatCheck(json, 'zdp8Override') as bool? ?? false,
-      overrideInfo: MaterialItemOverrideDto.fromJson(
-          materialItemOverride(json, 'override') as Map<String, dynamic>),
+          (doubleFormatCheck(json, 'zdp8Override') as num?)?.toDouble() ?? 0,
       remarks: json['remarks'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_MaterialItemDtoToJson(_$_MaterialItemDto instance) =>
-    <String, dynamic>{
-      'qty': instance.qty,
-      'hidePrice': instance.hidePrice,
-      'additionalBonus': instance.bonuses,
-      'materialGroup2': instance.materialGroup2,
-      'materialGroup4': instance.materialGroup4,
-      'materialNumber': instance.materialNumber,
-      'overridenPrice': instance.overridenPrice,
-      'unitOfMeasurement': instance.unitOfMeasurement,
-      'itemRegistrationNumber': instance.itemRegistrationNumber,
-      'defaultMaterialDescription': instance.defaultMaterialDescription,
-      'materialDescription': instance.materialDescription,
-      'type': instance.type,
-      'comment': instance.comment,
-      'batchNumber': instance.batchNumber,
-      'zdp8Override': instance.zdp8Override,
-      'override': instance.overrideInfo,
-      'remarks': instance.remarks,
-    };
+Map<String, dynamic> _$$_MaterialItemDtoToJson(_$_MaterialItemDto instance) {
+  final val = <String, dynamic>{
+    'qty': instance.qty,
+    'hidePrice': instance.hidePrice,
+    'additionalBonus': instance.bonuses.map((e) => e.toJson()).toList(),
+    'materialGroup2': instance.materialGroup2,
+    'materialGroup4': instance.materialGroup4,
+    'materialNumber': instance.materialNumber,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('priceOverride', overrideTojson(instance.overridenPrice));
+  val['unitOfMeasurement'] = instance.unitOfMeasurement;
+  val['itemRegistrationNumber'] = instance.itemRegistrationNumber;
+  val['defaultMaterialDescription'] = instance.defaultMaterialDescription;
+  val['materialDescription'] = instance.materialDescription;
+  val['type'] = instance.type;
+  val['comment'] = instance.comment;
+  val['batchNumber'] = instance.batchNumber;
+  val['zdp8Override'] = instance.zdp8Override;
+  val['remarks'] = instance.remarks;
+  return val;
+}

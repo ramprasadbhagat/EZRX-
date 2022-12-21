@@ -59,7 +59,7 @@ class _BonusItemTile extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          'Materail Number'.tr(),
+                          'Material Number'.tr(),
                           style: Theme.of(context).textTheme.caption,
                         ),
                       ),
@@ -75,7 +75,7 @@ class _BonusItemTile extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          'Materail qty'.tr(),
+                          'Material qty'.tr(),
                           style: Theme.of(context).textTheme.caption,
                         ),
                       ),

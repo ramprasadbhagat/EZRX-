@@ -123,30 +123,31 @@ void main() {
   ];
 
   final fakematerialInfo = MaterialInfo(
-      quantity: 0,
-      materialNumber: fakeMaterialNumber,
-      materialDescription: "Reag Cup 15ml 1'S",
-      governmentMaterialCode: '',
-      therapeuticClass: 'All other non-therapeutic products',
-      itemBrand: 'Item not listed in I',
-      principalData: PrincipalData(
-        principalName: '台灣羅氏醫療診斷設備(股)公司',
-        principalCode: PrincipleCode('0000102004'),
-      ),
-      taxClassification: MaterialTaxClassification('Product : Full Tax'),
-      itemRegistrationNumber: 'NA',
-      unitOfMeasurement: 'EA',
-      materialGroup2: MaterialGroup.two(''),
-      materialGroup4: MaterialGroup.four('OTH'),
-      isSampleMaterial: false,
-      hidePrice: false,
-      hasValidTenderContract: false,
-      hasMandatoryTenderContract: false,
-      taxes: ['5'],
-      bundles: [],
-      defaultMaterialDescription: '',
-      isFOCMaterial: false,
-      remarks: '');
+    quantity: 0,
+    materialNumber: fakeMaterialNumber,
+    materialDescription: "Reag Cup 15ml 1'S",
+    governmentMaterialCode: '',
+    therapeuticClass: 'All other non-therapeutic products',
+    itemBrand: 'Item not listed in I',
+    principalData: PrincipalData(
+      principalName: '台灣羅氏醫療診斷設備(股)公司',
+      principalCode: PrincipleCode('0000102004'),
+    ),
+    taxClassification: MaterialTaxClassification('Product : Full Tax'),
+    itemRegistrationNumber: 'NA',
+    unitOfMeasurement: 'EA',
+    materialGroup2: MaterialGroup.two(''),
+    materialGroup4: MaterialGroup.four('OTH'),
+    isSampleMaterial: false,
+    hidePrice: false,
+    hasValidTenderContract: false,
+    hasMandatoryTenderContract: false,
+    taxes: ['5'],
+    bundles: [],
+    defaultMaterialDescription: '',
+    isFOCMaterial: false,
+    remarks: '',
+  );
   late MaterialFilterBloc mockMaterialFilterBloc;
   late StockInformationBloc mockStockInformationBloc;
 

@@ -537,6 +537,16 @@ class DeliveryDate extends ValueObject<String> {
   const DeliveryDate._(this.value);
 }
 
+class Zdp8OverrideValue extends ValueObject<double> {
+  @override
+  final Either<ValueFailure<double>, double> value;
+
+  factory Zdp8OverrideValue(double input) =>
+      Zdp8OverrideValue._(validateNumberIsBiggerThanZero(input));
+
+  const Zdp8OverrideValue._(this.value);
+}
+
 class OrderNumber extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -565,4 +575,14 @@ class ExpiryDate extends ValueObject<String> {
   }
 
   const ExpiryDate._(this.value);
+}
+
+class PriceOverrideValue extends ValueObject<double> {
+  @override
+  final Either<ValueFailure<double>, double> value;
+
+  factory PriceOverrideValue(double input) =>
+      PriceOverrideValue._(validateNumberIsBiggerThanZero(input));
+
+  const PriceOverrideValue._(this.value);
 }

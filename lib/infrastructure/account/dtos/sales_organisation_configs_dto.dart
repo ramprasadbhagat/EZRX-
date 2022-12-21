@@ -151,6 +151,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'salesOrgCode', defaultValue: '0')
     @HiveField(145, defaultValue: '0')
         required String salesOrg,
+    @JsonKey(name: 'enableZDP8Override', defaultValue: false)
+    @HiveField(146, defaultValue: false)
+        required bool enableZDP8Override,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -203,6 +206,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       batchNumDisplay: configs.batchNumDisplay,
       displayOrderDiscount: configs.displayOrderDiscount,
       minOrderAmount: configs.minOrderAmount,
+      enableZDP8Override: configs.enableZDP8Override,
     );
   }
 
@@ -254,6 +258,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       batchNumDisplay: batchNumDisplay,
       displayOrderDiscount: displayOrderDiscount,
       minOrderAmount: minOrderAmount,
+      enableZDP8Override: enableZDP8Override,
     );
   }
 

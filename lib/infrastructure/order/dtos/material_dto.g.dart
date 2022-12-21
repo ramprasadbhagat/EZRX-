@@ -162,7 +162,7 @@ Map<String, dynamic> _$$_MaterialDtoToJson(_$_MaterialDto instance) =>
       'hasValidTenderContract': instance.hasValidTenderContract,
       'hasMandatoryTenderContract': instance.hasMandatoryTenderContract,
       'taxes': instance.taxes,
-      'bundles': instance.bundles,
+      'bundles': instance.bundles.map((e) => e.toJson()).toList(),
       'defaultMaterialDescription': instance.defaultMaterialDescription,
       'isFOCMaterial': instance.isFOCMaterial,
       'quantity': instance.quantity,

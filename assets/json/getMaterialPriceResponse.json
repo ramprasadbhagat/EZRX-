@@ -463,51 +463,55 @@
           }
         ],
         "Bundles": [],
-        "Bonuses": [
+        "Bonuses": [],
+        "TieredPricing": [],
+        "Valid": true,
+        "FinalIndividualPrice": 540,
+        "ZMGDiscount": false,
+        "OverridenRulePresent": false,
+        "ZDP5MaxQuota": "",
+        "ZDP5RemainingQuota": "",
+        "__typename": "Price"
+      },
+      {
+        "MaterialNumber": "000000000021209747",
+        "ListPrice": 540,
+        "AdditionalBonusEligible": true,
+        "PriceRules": [
           {
-            "BonusTiers": [
-              {
-                "QualifyingQuantity": 5,
-                "Calculation": "913",
-                "BonusMaterial": [
-                  {
-                    "Id": 1,
-                    "MaterialNumber": "000000000023063774",
-                    "MaterialDescription": "(M) TEOSYAL PS RD I 1ML PRFS 2'S",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 5,
-                    "BonusQuantity": 1,
-                    "Calculation": "913",
-                    "BonusRatio": 1,
-                    "ConditionId": "0000224002",
-                    "__typename": "BonusMaterial"
-                  }
-                ],
-                "__typename": "BonusTier"
-              },
-              {
-                "QualifyingQuantity": 10,
-                "Calculation": "913",
-                "BonusMaterial": [
-                  {
-                    "Id": 2,
-                    "MaterialNumber": "000000000023063774",
-                    "MaterialDescription": "(M) TEOSYAL PS RD I 1ML PRFS 2'S",
-                    "LimitPerTransaction": 0,
-                    "QualifyingQuantity": 10,
-                    "BonusQuantity": 3,
-                    "Calculation": "913",
-                    "BonusRatio": 3,
-                    "ConditionId": "0000224002",
-                    "__typename": "BonusMaterial"
-                  }
-                ],
-                "__typename": "BonusTier"
-              }
-            ],
-            "__typename": "Bonus"
+            "Type": "MYR",
+            "Rate": 540,
+            "Conditions": "ZLP0 - A901 - 0002069567",
+            "BonusEligible": true,
+            "__typename": "PriceRule"
           }
         ],
+        "Bundles": [],
+        "Bonuses": [],
+        "TieredPricing": [],
+        "Valid": true,
+        "FinalIndividualPrice": 540,
+        "ZMGDiscount": false,
+        "OverridenRulePresent": false,
+        "ZDP5MaxQuota": "",
+        "ZDP5RemainingQuota": "",
+        "__typename": "Price"
+      },
+      {
+        "MaterialNumber": "000000000023245612",
+        "ListPrice": 540,
+        "AdditionalBonusEligible": true,
+        "PriceRules": [
+          {
+            "Type": "MYR",
+            "Rate": 540,
+            "Conditions": "ZLP0 - A901 - 0002069567",
+            "BonusEligible": true,
+            "__typename": "PriceRule"
+          }
+        ],
+        "Bundles": [],
+        "Bonuses": [],
         "TieredPricing": [],
         "Valid": true,
         "FinalIndividualPrice": 540,

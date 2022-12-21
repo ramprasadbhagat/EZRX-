@@ -35,19 +35,21 @@ class ValidCustomerMaterialRemoteDataSource {
       final res = await httpService.request(
         method: 'POST',
         url: '${config.urlConstants}license',
-        data: jsonEncode({
-          'query': queryData,
-          'variables': {
-            'input': {
-              'customerShipToCode': customerCode,
-              'customerSoldToCode': shipToCode,
-              'salesOrganisation': salesOrganisation,
-              'materialNumberList': materialList,
-              'focMaterialNumberList': focMaterialList,
-              'pickAndPack': pickAndPackValue,
+        data: jsonEncode(
+          {
+            'query': queryData,
+            'variables': {
+              'request': {
+                'customerShipToCode': shipToCode,
+                'customerSoldToCode': customerCode,
+                'salesOrganisation': salesOrganisation,
+                'materialNumberList': materialList,
+                'focMaterialNumberList': focMaterialList,
+                'pickAndPack': pickAndPackValue,
+              },
             },
           },
-        }),
+        ),
         apiEndpoint: 'validCustomerMaterials',
       );
       _validCustomerMaterialExceptionChecker(res: res);

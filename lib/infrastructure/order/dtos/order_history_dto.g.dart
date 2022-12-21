@@ -19,6 +19,6 @@ _$_OrderHistoryItemDto _$$_OrderHistoryItemDtoFromJson(
 Map<String, dynamic> _$$_OrderHistoryItemDtoToJson(
         _$_OrderHistoryItemDto instance) =>
     <String, dynamic>{
-      'OrderBasicInformation': instance.orderBasicInformation,
-      'OrderItems': instance.orderItems,
+      'OrderBasicInformation': instance.orderBasicInformation.toJson(),
+      'OrderItems': instance.orderItems.map((e) => e.toJson()).toList(),
     };

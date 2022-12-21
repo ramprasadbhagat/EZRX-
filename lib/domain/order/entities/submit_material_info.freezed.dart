@@ -22,6 +22,8 @@ mixin _$SubmitMaterialInfo {
   String get comment => throw _privateConstructorUsedError;
   String get batch => throw _privateConstructorUsedError;
   String get salesDistrict => throw _privateConstructorUsedError;
+  MaterialItemOverride get materialItemOverride =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SubmitMaterialInfoCopyWith<SubmitMaterialInfo> get copyWith =>
@@ -40,7 +42,10 @@ abstract class $SubmitMaterialInfoCopyWith<$Res> {
       List<MaterialItemBonus> bonuses,
       String comment,
       String batch,
-      String salesDistrict});
+      String salesDistrict,
+      MaterialItemOverride materialItemOverride});
+
+  $MaterialItemOverrideCopyWith<$Res> get materialItemOverride;
 }
 
 /// @nodoc
@@ -62,6 +67,7 @@ class _$SubmitMaterialInfoCopyWithImpl<$Res, $Val extends SubmitMaterialInfo>
     Object? comment = null,
     Object? batch = null,
     Object? salesDistrict = null,
+    Object? materialItemOverride = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -88,7 +94,20 @@ class _$SubmitMaterialInfoCopyWithImpl<$Res, $Val extends SubmitMaterialInfo>
           ? _value.salesDistrict
           : salesDistrict // ignore: cast_nullable_to_non_nullable
               as String,
+      materialItemOverride: null == materialItemOverride
+          ? _value.materialItemOverride
+          : materialItemOverride // ignore: cast_nullable_to_non_nullable
+              as MaterialItemOverride,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MaterialItemOverrideCopyWith<$Res> get materialItemOverride {
+    return $MaterialItemOverrideCopyWith<$Res>(_value.materialItemOverride,
+        (value) {
+      return _then(_value.copyWith(materialItemOverride: value) as $Val);
+    });
   }
 }
 
@@ -106,7 +125,11 @@ abstract class _$$_SubmitMaterialInfoCopyWith<$Res>
       List<MaterialItemBonus> bonuses,
       String comment,
       String batch,
-      String salesDistrict});
+      String salesDistrict,
+      MaterialItemOverride materialItemOverride});
+
+  @override
+  $MaterialItemOverrideCopyWith<$Res> get materialItemOverride;
 }
 
 /// @nodoc
@@ -126,6 +149,7 @@ class __$$_SubmitMaterialInfoCopyWithImpl<$Res>
     Object? comment = null,
     Object? batch = null,
     Object? salesDistrict = null,
+    Object? materialItemOverride = null,
   }) {
     return _then(_$_SubmitMaterialInfo(
       materialNumber: null == materialNumber
@@ -152,6 +176,10 @@ class __$$_SubmitMaterialInfoCopyWithImpl<$Res>
           ? _value.salesDistrict
           : salesDistrict // ignore: cast_nullable_to_non_nullable
               as String,
+      materialItemOverride: null == materialItemOverride
+          ? _value.materialItemOverride
+          : materialItemOverride // ignore: cast_nullable_to_non_nullable
+              as MaterialItemOverride,
     ));
   }
 }
@@ -165,7 +193,8 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
       required final List<MaterialItemBonus> bonuses,
       required this.comment,
       required this.batch,
-      required this.salesDistrict})
+      required this.salesDistrict,
+      required this.materialItemOverride})
       : _bonuses = bonuses,
         super._();
 
@@ -186,10 +215,12 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
   final String batch;
   @override
   final String salesDistrict;
+  @override
+  final MaterialItemOverride materialItemOverride;
 
   @override
   String toString() {
-    return 'SubmitMaterialInfo(materialNumber: $materialNumber, quantity: $quantity, bonuses: $bonuses, comment: $comment, batch: $batch, salesDistrict: $salesDistrict)';
+    return 'SubmitMaterialInfo(materialNumber: $materialNumber, quantity: $quantity, bonuses: $bonuses, comment: $comment, batch: $batch, salesDistrict: $salesDistrict, materialItemOverride: $materialItemOverride)';
   }
 
   @override
@@ -205,7 +236,9 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
             (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.batch, batch) || other.batch == batch) &&
             (identical(other.salesDistrict, salesDistrict) ||
-                other.salesDistrict == salesDistrict));
+                other.salesDistrict == salesDistrict) &&
+            (identical(other.materialItemOverride, materialItemOverride) ||
+                other.materialItemOverride == materialItemOverride));
   }
 
   @override
@@ -216,7 +249,8 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
       const DeepCollectionEquality().hash(_bonuses),
       comment,
       batch,
-      salesDistrict);
+      salesDistrict,
+      materialItemOverride);
 
   @JsonKey(ignore: true)
   @override
@@ -228,12 +262,14 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
 
 abstract class _SubmitMaterialInfo extends SubmitMaterialInfo {
   const factory _SubmitMaterialInfo(
-      {required final MaterialNumber materialNumber,
-      required final int quantity,
-      required final List<MaterialItemBonus> bonuses,
-      required final String comment,
-      required final String batch,
-      required final String salesDistrict}) = _$_SubmitMaterialInfo;
+          {required final MaterialNumber materialNumber,
+          required final int quantity,
+          required final List<MaterialItemBonus> bonuses,
+          required final String comment,
+          required final String batch,
+          required final String salesDistrict,
+          required final MaterialItemOverride materialItemOverride}) =
+      _$_SubmitMaterialInfo;
   const _SubmitMaterialInfo._() : super._();
 
   @override
@@ -248,6 +284,8 @@ abstract class _SubmitMaterialInfo extends SubmitMaterialInfo {
   String get batch;
   @override
   String get salesDistrict;
+  @override
+  MaterialItemOverride get materialItemOverride;
   @override
   @JsonKey(ignore: true)
   _$$_SubmitMaterialInfoCopyWith<_$_SubmitMaterialInfo> get copyWith =>

@@ -51,10 +51,10 @@ class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.mustMatchNewPassword({
     required T failedValue,
   }) = MatchNewPassword<T>;
-  const factory ValueFailure.invalidDate({
-    required T failedValue,
-  }) = InvalidDate<T>;
   const factory ValueFailure.isEmpty({
     required T failedValue,
   }) = isEmpty<T>;
+  const factory ValueFailure.numberMustBiggerThanZero({
+    required T failedValue,
+  }) = numberMustBiggerThanZero<T>;
 }
