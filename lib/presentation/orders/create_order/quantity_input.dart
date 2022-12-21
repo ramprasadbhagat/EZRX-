@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_icon.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class QuantityInput extends StatelessWidget {
   final Key quantityAddKey;
   final Key quantityDeleteKey;
   final bool isEnabled;
+  final bool isLoading;
 
   const QuantityInput({
     Key? key,
@@ -26,6 +28,7 @@ class QuantityInput extends StatelessWidget {
     required this.quantityAddKey,
     required this.quantityDeleteKey,
     required this.isEnabled,
+    this.isLoading = false,
   }) : super(key: key);
 
   static const minimumQty = 0;
@@ -62,34 +65,36 @@ class QuantityInput extends StatelessWidget {
             style: Theme.of(context).textTheme.headline5,
           ),
         ),
-        Row(
-          children: [
-            QuantityIcon(
-              key: quantityDeleteKey,
-              pressed: () {
-                if (isEnabled) {
-                  FocusScope.of(context).unfocus();
-                  final value = (int.tryParse(controller.text) ?? 0) - 1;
-                  if (value > minimumQty) {
-                    final text = value.toString();
-                    controller.value = TextEditingValue(
-                      text: text,
-                      selection: TextSelection.collapsed(offset: text.length),
-                    );
-                    minusPressed(value);
-                  }
-                }
-              },
-              icon: Icons.remove,
-              isEnabled: isEnabled,
+        isLoading
+            ? const QuantityIconShimmer()
+            : Row(
+                children: [
+                  QuantityIcon(
+                    key: quantityDeleteKey,
+                    pressed: () {
+                      if (isEnabled) {
+                        FocusScope.of(context).unfocus();
+                        final value = (int.tryParse(controller.text) ?? 0) - 1;
+                        if (value > minimumQty) {
+                          final text = value.toString();
+                          controller.value = TextEditingValue(
+                            text: text,
+                            selection: TextSelection.collapsed(offset: text.length),
+                          );
+                          minusPressed(value);
+                        }
+                      }
+                    },
+                    icon: Icons.remove,
+                    isEnabled: isEnabled,
 
-            ),
-            QuantityIcon(
-              key: quantityAddKey,
-              pressed: () {
-                if (isEnabled) {
-                  FocusScope.of(context).unfocus();
-                  final value = (int.tryParse(controller.text) ?? 0) + 1;
+                  ),
+                  QuantityIcon(
+                    key: quantityAddKey,
+                    pressed: () {
+                      if (isEnabled) {
+                        FocusScope.of(context).unfocus();
+                        final value = (int.tryParse(controller.text) ?? 0) + 1;
 
                   if (value < maximumQty) {
                     final text = value.toString();
@@ -127,6 +132,34 @@ class QuantityInput extends StatelessWidget {
                     );
             },
           ),
+      ],
+    );
+  }
+}
+
+class QuantityIconShimmer extends StatelessWidget {
+  const QuantityIconShimmer({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        LoadingShimmer.withChild(
+          child: QuantityIcon(
+            pressed: () {},
+            icon: Icons.remove,
+            isEnabled: false,
+          ),
+        ),
+        LoadingShimmer.withChild(
+          child: QuantityIcon(
+            pressed: () {},
+            icon: Icons.remove,
+            isEnabled: false,
+          ),
+        ),
       ],
     );
   }

@@ -354,11 +354,13 @@ void main() {
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: none(),
             selectedItemsMaterialNumber: [],
+            isFetching: true,
           ),
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: none(),
             cartItemList: mockCartItemList,
             selectedItemsMaterialNumber: mockMaterialItemList,
+            isFetching: false,
           ),
         ],
       );
@@ -396,6 +398,7 @@ void main() {
         expect: () => [
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: none(),
+            isFetching: true,
           ),
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: optionOf(
@@ -403,6 +406,7 @@ void main() {
                 ApiFailure.other('Fake-Error'),
               ),
             ),
+            isFetching: false,
           ),
         ],
       );
@@ -553,12 +557,15 @@ void main() {
             doNotallowOutOfStockMaterial: true,
             salesOrganisationConfigs: SalesOrganisationConfigs.empty())),
         expect: () => [
-          CartState.initial(),
+          CartState.initial().copyWith(
+            isFetching: true,
+          ),
           CartState.initial().copyWith(
             cartItemList: [mockZmgCartItemList.first],
             selectedItemsMaterialNumber: [
               mockZmgCartItemList.first.getMaterialNumber
             ],
+            isFetching: false,
           ),
           CartState.initial().copyWith(
             cartItemList: [
@@ -567,6 +574,7 @@ void main() {
             selectedItemsMaterialNumber: [
               mockZmgCartItemList.first.getMaterialNumber
             ],
+            isFetching: false,
           ),
         ],
         verify: (CartBloc bloc) {
@@ -644,6 +652,7 @@ void main() {
             selectedItemsMaterialNumber: [
               mockZmgCartItemList.last.getMaterialNumber,
             ],
+            isFetching: false,
           ),
           CartState.initial().copyWith(
             cartItemList: [
@@ -655,6 +664,7 @@ void main() {
             selectedItemsMaterialNumber: [
               mockZmgCartItemList.last.getMaterialNumber
             ],
+            isFetching: false,
           ),
         ],
         verify: (CartBloc bloc) {
@@ -1054,6 +1064,7 @@ void main() {
             selectedItemsMaterialNumber: [
               mockZmgCartItemList.first.getMaterialNumber
             ],
+            isFetching: false,
           ),
           CartState.initial().copyWith(
             cartItemList: [
@@ -1072,6 +1083,7 @@ void main() {
             selectedItemsMaterialNumber: [
               mockZmgCartItemList.first.getMaterialNumber
             ],
+            isFetching: false,
           ),
         ],
         verify: (CartBloc bloc) {
@@ -1804,7 +1816,9 @@ void main() {
           ),
         ),
         expect: () => [
-          CartState.initial(),
+          CartState.initial().copyWith(
+            isFetching: true,
+          ),
           CartState.initial().copyWith(
             selectedItemsMaterialNumber: [bonusMaterialNumber],
             cartItemList: [
@@ -1816,7 +1830,7 @@ void main() {
               )
             ],
             apiFailureOrSuccessOption: none(),
-            // isFetching: false,
+            isFetching: false,
           )
         ],
         verify: (CartBloc bloc) {
@@ -1941,7 +1955,23 @@ void main() {
           ),
         ),
         expect: () => [
-          CartState.initial(),
+          CartState.initial().copyWith(
+            isFetching: true,
+          ),
+          CartState.initial().copyWith(
+            selectedItemsMaterialNumber: [bonusMaterialNumber],
+            cartItemList: [
+              bonus913MockCartItem.copyWith(
+                quantity: bonus913MockCartItem
+                    .price.priceBonusItem.last.qualifyingQuantity,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              )
+            ],
+            apiFailureOrSuccessOption: none(),
+            isFetching: false,
+          ),
           CartState.initial().copyWith(
             selectedItemsMaterialNumber: [bonusMaterialNumber],
             cartItemList: [
@@ -2122,7 +2152,23 @@ void main() {
           ),
         ),
         expect: () => [
-          CartState.initial(),
+          CartState.initial().copyWith(
+            isFetching: true,
+          ),
+          CartState.initial().copyWith(
+            selectedItemsMaterialNumber: [bonusMaterialNumber],
+            cartItemList: [
+              bonus913MockCartItem.copyWith(
+                quantity: bonus913MockCartItem
+                    .price.priceBonusItem.last.qualifyingQuantity,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              )
+            ],
+            apiFailureOrSuccessOption: none(),
+            isFetching: false,
+          ),
           CartState.initial().copyWith(
             selectedItemsMaterialNumber: [bonusMaterialNumber],
             cartItemList: [
@@ -2317,7 +2363,9 @@ void main() {
           ),
         ),
         expect: () => [
-          CartState.initial(),
+          CartState.initial().copyWith(
+          isFetching: true,
+          ),
           CartState.initial().copyWith(
             selectedItemsMaterialNumber: [bonusMaterialNumber],
             cartItemList: [
@@ -2331,6 +2379,23 @@ void main() {
               )
             ],
             apiFailureOrSuccessOption: none(),
+            isFetching: false,
+          ),
+          
+          CartState.initial().copyWith(
+            selectedItemsMaterialNumber: [bonusMaterialNumber],
+            cartItemList: [
+              bonus913MockCartItem.copyWith(
+                quantity: bonus913MockCartItem.price.priceBonusItem
+                    .elementAt(1)
+                    .qualifyingQuantity,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              )
+            ],
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
           ),
           CartState.initial().copyWith(
             selectedItemsMaterialNumber: [bonusMaterialNumber],
@@ -2502,7 +2567,9 @@ void main() {
           ),
         ),
         expect: () => [
-          CartState.initial(),
+          CartState.initial().copyWith(
+            isFetching: true,
+          ),
           CartState.initial().copyWith(
             selectedItemsMaterialNumber: [bonusMaterialNumber],
             cartItemList: [
@@ -2515,6 +2582,21 @@ void main() {
               )
             ],
             apiFailureOrSuccessOption: none(),
+            isFetching: false,
+          ),
+          CartState.initial().copyWith(
+            selectedItemsMaterialNumber: [bonusMaterialNumber],
+            cartItemList: [
+              bonus913MockCartItem.copyWith(
+                quantity: bonus913MockCartItem
+                    .price.priceBonusItem.first.qualifyingQuantity,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              )
+            ],
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
           ),
           CartState.initial().copyWith(
             selectedItemsMaterialNumber: [bonusMaterialNumber],
@@ -2677,7 +2759,9 @@ void main() {
           ),
         ),
         expect: () => [
-          CartState.initial(),
+          CartState.initial().copyWith(
+            isFetching: true,
+          ),
           CartState.initial().copyWith(
             selectedItemsMaterialNumber: [bonusMaterialNumber],
             cartItemList: [
@@ -2689,6 +2773,20 @@ void main() {
               )
             ],
             apiFailureOrSuccessOption: none(),
+            isFetching: false,
+          ),
+          CartState.initial().copyWith(
+            selectedItemsMaterialNumber: [bonusMaterialNumber],
+            cartItemList: [
+              bonus913MockCartItem.copyWith(
+                quantity: 8,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              )
+            ],
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
           ),
           CartState.initial().copyWith(
             selectedItemsMaterialNumber: [bonusMaterialNumber],
@@ -2850,7 +2948,9 @@ void main() {
           ),
         ),
         expect: () => [
-          CartState.initial(),
+          CartState.initial().copyWith(
+            isFetching: true,
+          ),
           CartState.initial().copyWith(
             selectedItemsMaterialNumber: [bonusMaterialNumber],
             cartItemList: [
@@ -2862,6 +2962,20 @@ void main() {
               )
             ],
             apiFailureOrSuccessOption: none(),
+            isFetching: false,
+          ),
+          CartState.initial().copyWith(
+            selectedItemsMaterialNumber: [bonusMaterialNumber],
+            cartItemList: [
+              bonus913MockCartItem.copyWith(
+                quantity: 13,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              )
+            ],
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
           ),
           CartState.initial().copyWith(
             selectedItemsMaterialNumber: [bonusMaterialNumber],
@@ -3023,7 +3137,9 @@ void main() {
           ),
         ),
         expect: () => [
-          CartState.initial(),
+          CartState.initial().copyWith(
+            isFetching: true,
+          ),
           CartState.initial().copyWith(
             selectedItemsMaterialNumber: [bonusMaterialNumber],
             cartItemList: [
@@ -3035,6 +3151,20 @@ void main() {
               )
             ],
             apiFailureOrSuccessOption: none(),
+            isFetching: false,
+          ),
+          CartState.initial().copyWith(
+            selectedItemsMaterialNumber: [bonusMaterialNumber],
+            cartItemList: [
+              bonus913MockCartItem.copyWith(
+                quantity: 15,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              )
+            ],
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
           ),
           CartState.initial().copyWith(
             selectedItemsMaterialNumber: [bonusMaterialNumber],
@@ -3208,6 +3338,20 @@ void main() {
               )
             ],
             apiFailureOrSuccessOption: none(),
+            isFetching: false,
+          ),
+          CartState.initial().copyWith(
+            selectedItemsMaterialNumber: [bonusMaterialNumber],
+            cartItemList: [
+              bonus913MockCartItem.copyWith(
+                quantity: 18,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              )
+            ],
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
           ),
           CartState.initial().copyWith(
             selectedItemsMaterialNumber: [bonusMaterialNumber],
@@ -3260,7 +3404,7 @@ void main() {
             )
           ],
           apiFailureOrSuccessOption: none(),
-          isFetching: false,
+          isFetching: true,
         ),
         setUp: () {
           when(
@@ -3473,7 +3617,7 @@ void main() {
             )
           ],
           apiFailureOrSuccessOption: none(),
-          isFetching: false,
+          isFetching: true,
         ),
         setUp: () {
           when(
@@ -3653,7 +3797,7 @@ void main() {
             )
           ],
           apiFailureOrSuccessOption: none(),
-          isFetching: false,
+          isFetching: true,
         ),
         setUp: () {
           when(
@@ -3945,7 +4089,7 @@ void main() {
             )
           ],
           apiFailureOrSuccessOption: none(),
-          isFetching: false,
+          isFetching: true,
         ),
         setUp: () {
           when(
@@ -4239,7 +4383,7 @@ void main() {
             )
           ],
           apiFailureOrSuccessOption: none(),
-          isFetching: false,
+          isFetching: true,
         ),
         setUp: () {
           when(
@@ -4555,7 +4699,7 @@ void main() {
             )
           ],
           apiFailureOrSuccessOption: none(),
-          isFetching: false,
+          isFetching: true,
         ),
         setUp: () {
           when(
@@ -6993,7 +7137,7 @@ void main() {
               )
             ],
             apiFailureOrSuccessOption: none(),
-            isFetching: false,
+            isFetching: true,
           ),
           setUp: () {
             when(
@@ -7300,7 +7444,7 @@ void main() {
               )
             ],
             apiFailureOrSuccessOption: none(),
-            isFetching: false,
+            isFetching: true,
           ),
           setUp: () {
             when(

@@ -65,7 +65,7 @@ class CartItem with _$CartItem {
     var bundleRate = 0.0;
     for (final bundleInfo in materials.first.bundle.sortedBundleInformation) {
       if (_totalQty >= bundleInfo.quantity) {
-        bundleRate = bundleInfo.rate;
+        bundleRate = bundleInfo.type.isPercent() ? bundleInfo.rate * -1 : bundleInfo.rate;
       }
     }
 

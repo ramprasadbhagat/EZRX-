@@ -426,7 +426,7 @@ void main() {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartItemList: mockCartItemWithDataList,
-            isFetching: true,
+            isFetching: false,
           ),
         );
 
@@ -458,7 +458,7 @@ void main() {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartItemList: mockCartItemWithDataList,
-            isFetching: true,
+            isFetching: false,
           ),
         );
 
@@ -486,7 +486,7 @@ void main() {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartItemList: mockCartItemWithDataList2,
-            isFetching: true,
+            isFetching: false,
           ),
         );
 
@@ -693,7 +693,7 @@ void main() {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartItemList: mockCartItemWithDataList,
-            isFetching: true,
+            isFetching: false,
           ),
         );
 
@@ -725,7 +725,7 @@ void main() {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartItemList: mockCartItemWithDataList,
-            isFetching: true,
+            isFetching: false,
           ),
         );
 

@@ -107,7 +107,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         emit(
           state.copyWith(
             apiFailureOrSuccessOption: none(),
-            // isFetching: true,
+            isFetching: true,
           ),
         );
 
@@ -129,6 +129,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           emit(state.copyWith(
             apiFailureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('Product Not Available'))),
+            isFetching: false,
           ));
 
           return;
@@ -144,6 +145,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
               ),
             );
           },
@@ -159,7 +161,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 selectedItemsMaterialNumber: updatedMaterialList,
                 cartItemList: cartItemList,
                 apiFailureOrSuccessOption: none(),
-                // isFetching:  false,
+                isFetching:  false,
               ),
             );
             if (e.item.price.isDiscountEligible) {
