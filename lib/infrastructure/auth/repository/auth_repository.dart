@@ -93,7 +93,7 @@ class AuthRepository implements IAuthRepository {
           },
         );
       }
-      
+
       return Left(FailureHandler.handleFailure(e));
     }
   }
