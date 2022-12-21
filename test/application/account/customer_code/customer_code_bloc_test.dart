@@ -30,6 +30,17 @@ void main() {
         customerCodeSoldTo: CustomerCode('fake-customer-code'), shipToInfos: [])
   ];
 
+  final fakeMultipleSalesOrgCustomerInfos = [
+    SalesOrgCustomerInfo(
+      customerCodeSoldTo: CustomerCode('fake-customer-code-1'),
+      shipToInfos: [],
+    ),
+    SalesOrgCustomerInfo(
+      customerCodeSoldTo: CustomerCode('fake-customer-code-2'),
+      shipToInfos: [],
+    )
+  ];
+
   final fakeShipToInfo = ShipToInfo.empty().copyWith(building: 'fakeBuilding');
   final fakeCustomerInfo =
       CustomerCodeInfo.empty().copyWith(shipToInfos: [fakeShipToInfo]);
@@ -39,6 +50,11 @@ void main() {
   final fakeSaleOrg = SalesOrganisation(
     salesOrg: SalesOrg('fake-1234'),
     customerInfos: fakeSalesOrgCustomerInfos,
+  );
+
+  final fakeSaleOrgWithMultipleCustomerInfo = SalesOrganisation(
+    salesOrg: SalesOrg('fake-1234'),
+    customerInfos: fakeMultipleSalesOrgCustomerInfos,
   );
 
   setUpAll(() async {
@@ -374,6 +390,49 @@ void main() {
     );
 
     blocTest(
+      'Customer Code On Load More Success with search key',
+      build: () =>
+          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      setUp: () {
+        when(() => customerCodeMockRepo.getCustomerCode(
+              fakeSaleOrg,
+              fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
+              false,
+              0,
+              fakeUser,
+            )).thenAnswer(
+          (invocation) async => Right(
+            customerMockData,
+          ),
+        );
+      },
+      seed: () => CustomerCodeState.initial().copyWith(
+        searchKey: SearchKey('fake-customer-code'),
+      ),
+      act: (CustomerCodeBloc bloc) => bloc
+        ..add(CustomerCodeEvent.loadMore(
+            hidecustomer: false,
+            userInfo: fakeUser,
+            selectedSalesOrg: fakeSaleOrg)),
+      expect: () => [
+        CustomerCodeState.initial().copyWith(
+          isFetching: true,
+          searchKey: SearchKey('fake-customer-code'),
+          // customerCodeList: customerMockData,
+        ),
+        CustomerCodeState.initial().copyWith(
+          isFetching: false,
+          searchKey: SearchKey('fake-customer-code'),
+          apiFailureOrSuccessOption: none(),
+          canLoadMore: true,
+          customerCodeList: [
+            ...customerMockData,
+          ],
+        )
+      ],
+    );
+
+    blocTest(
       'loadStoredCustomerCode - Customer Code Storage returns failure',
       build: () =>
           CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
@@ -567,6 +626,74 @@ void main() {
               customerMockData.first.customerCodeSoldTo,
             )),
       ],
+    );
+
+    blocTest<CustomerCodeBloc, CustomerCodeState>(
+      '=> Test if apiSuccess',
+      build: () => CustomerCodeBloc(
+        customerCodeRepository: customerCodeMockRepo,
+      ),
+      act: (bloc) {
+        final isApiSuccess = CustomerCodeState.initial().apiSuccess;
+        expect(isApiSuccess, true);
+      },
+    );
+
+    blocTest(
+      'Customer Code Fetch Success with finalCustomerCodeinfo length greater than one',
+      build: () =>
+          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      setUp: () {
+        when(() => customerCodeMockRepo.getCustomerCode(
+              fakeSaleOrgWithMultipleCustomerInfo,
+              fakeMultipleSalesOrgCustomerInfos[0]
+                  .customerCodeSoldTo
+                  .checkAllOrCustomerCode,
+              false,
+              0,
+              fakeUser,
+            )).thenAnswer(
+          (invocation) async => Right([customerMockData.first]),
+        );
+        when(() => customerCodeMockRepo.getCustomerCode(
+              fakeSaleOrgWithMultipleCustomerInfo,
+              fakeMultipleSalesOrgCustomerInfos[1]
+                  .customerCodeSoldTo
+                  .checkAllOrCustomerCode,
+              false,
+              1,
+              fakeUser,
+            )).thenAnswer(
+          (invocation) async => Right([customerMockData.first]),
+        );
+      },
+      act: (CustomerCodeBloc bloc) {
+        bloc.add(
+          CustomerCodeEvent.fetch(
+            hidecustomer: false,
+            userInfo: fakeUser,
+            selectedSalesOrg: fakeSaleOrgWithMultipleCustomerInfo,
+          ),
+        );
+      },
+      expect: () => [
+        CustomerCodeState.initial(),
+        CustomerCodeState.initial().copyWith(isFetching: true),
+        CustomerCodeState.initial().copyWith(
+          isFetching: false,
+          customerCodeInfo: customerMockData.first,
+          customerCodeList: [
+            customerMockData.first,
+            customerMockData.first,
+          ],
+          apiFailureOrSuccessOption: none(),
+          canLoadMore: false,
+        ),
+      ],
+      verify: (CustomerCodeBloc bloc) => expect(
+        bloc.state.customerCodeList,
+        [customerMockData.first, customerMockData.first],
+      ),
     );
   });
 }

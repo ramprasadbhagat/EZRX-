@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/ship_to_code_repository.dart';
 import 'package:flutter/material.dart';
@@ -116,6 +117,141 @@ void main() {
           shipToInfoList: [
             ShipToInfo.empty().copyWith(shipToCustomerCode: 'fake-ship-to-code')
           ],
+        ),
+      ],
+    );
+
+    blocTest<ShipToCodeBloc, ShipToCodeState>(
+      'Ship To Code LoadSavedShipToCode isLeft',
+      setUp: () {
+        when(
+          () => mockShipToCodeRepo.getShipToCode(),
+        ).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('Fake Error'),
+          ),
+        );
+        when(
+          () => mockShipToCodeRepo.storeShipToCode(
+            shipToCode: 'default-ship-to-code',
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(unit),
+        );
+      },
+      build: () => ShipToCodeBloc(
+        shipToCodeRepository: mockShipToCodeRepo,
+      ),
+      act: (ShipToCodeBloc bloc) {
+        bloc.add(
+          ShipToCodeEvent.loadSavedShipToCode(
+            shipToInfos: [
+              ShipToInfo.empty().copyWith(
+                shipToCustomerCode: 'fake-ship-to-code',
+              )
+            ],
+            defaultShipToInfo: ShipToInfo.empty().copyWith(
+              shipToCustomerCode: 'default-ship-to-code',
+            ),
+          ),
+        );
+      },
+      expect: () => [
+        ShipToCodeState.initial().copyWith(
+          shipToInfo: ShipToInfo.empty().copyWith(
+            shipToCustomerCode: 'default-ship-to-code',
+          ),
+        ),
+      ],
+    );
+
+    blocTest<ShipToCodeBloc, ShipToCodeState>(
+      'Ship To Code LoadSavedShipToCode isRight firstWhere',
+      setUp: () {
+        when(
+          () => mockShipToCodeRepo.getShipToCode(),
+        ).thenAnswer(
+          (invocation) async => const Right(
+            'dummy-ship-to-code',
+          ),
+        );
+        when(
+          () => mockShipToCodeRepo.storeShipToCode(
+            shipToCode: 'dummy-ship-to-code',
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(unit),
+        );
+      },
+      build: () => ShipToCodeBloc(
+        shipToCodeRepository: mockShipToCodeRepo,
+      ),
+      act: (ShipToCodeBloc bloc) {
+        bloc.add(
+          ShipToCodeEvent.loadSavedShipToCode(
+            shipToInfos: [
+              ShipToInfo.empty().copyWith(
+                shipToCustomerCode: 'fake-ship-to-code',
+              ),
+              ShipToInfo.empty().copyWith(
+                shipToCustomerCode: 'dummy-ship-to-code',
+              ),
+            ],
+            defaultShipToInfo: ShipToInfo.empty().copyWith(
+              shipToCustomerCode: 'default-ship-to-code',
+            ),
+          ),
+        );
+      },
+      expect: () => [
+        ShipToCodeState.initial().copyWith(
+          shipToInfo: ShipToInfo.empty().copyWith(
+            shipToCustomerCode: 'dummy-ship-to-code',
+          ),
+        ),
+      ],
+    );
+
+    blocTest<ShipToCodeBloc, ShipToCodeState>(
+      'Ship To Code LoadSavedShipToCode isRight orElse',
+      setUp: () {
+        when(
+          () => mockShipToCodeRepo.getShipToCode(),
+        ).thenAnswer(
+          (invocation) async => const Right(
+            'dummy-ship-to-code',
+          ),
+        );
+        when(
+          () => mockShipToCodeRepo.storeShipToCode(
+            shipToCode: 'default-ship-to-code',
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(unit),
+        );
+      },
+      build: () => ShipToCodeBloc(
+        shipToCodeRepository: mockShipToCodeRepo,
+      ),
+      act: (ShipToCodeBloc bloc) {
+        bloc.add(
+          ShipToCodeEvent.loadSavedShipToCode(
+            shipToInfos: [
+              ShipToInfo.empty().copyWith(
+                shipToCustomerCode: 'default-ship-to-code',
+              ),
+            ],
+            defaultShipToInfo: ShipToInfo.empty().copyWith(
+              shipToCustomerCode: 'default-ship-to-code',
+            ),
+          ),
+        );
+      },
+      expect: () => [
+        ShipToCodeState.initial().copyWith(
+          shipToInfo: ShipToInfo.empty().copyWith(
+            shipToCustomerCode: 'default-ship-to-code',
+          ),
         ),
       ],
     );

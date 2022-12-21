@@ -192,6 +192,51 @@ void main() {
         ),
       ],
     );
+
+    blocTest<SalesOrgBloc, SalesOrgState>(
+      '=> Test if hideCustomer',
+      build: () => SalesOrgBloc(
+        salesOrgRepository: salesOrgRepositoryMock,
+      ),
+      act: (bloc) {
+        final isHideCustomer = SalesOrgState.initial().hideCustomer;
+        expect(isHideCustomer, false);
+      },
+    );
+
+    blocTest<SalesOrgBloc, SalesOrgState>(
+      '=> Test currency getter',
+      build: () => SalesOrgBloc(
+        salesOrgRepository: salesOrgRepositoryMock,
+      ),
+      act: (bloc) {
+        final currency = SalesOrgState.initial()
+            .copyWith(
+              configs: SalesOrganisationConfigs.empty().copyWith(
+                currency: Currency('PHP'),
+              ),
+            )
+            .currency;
+        expect(currency.getOrCrash(), 'PHP');
+      },
+    );
+
+    blocTest<SalesOrgBloc, SalesOrgState>(
+      '=> Test disableBundles getter',
+      build: () => SalesOrgBloc(
+        salesOrgRepository: salesOrgRepositoryMock,
+      ),
+      act: (bloc) {
+        final isDisableBundles = SalesOrgState.initial()
+            .copyWith(
+              configs: SalesOrganisationConfigs.empty().copyWith(
+                disableBundles: true,
+              ),
+            )
+            .disableBundles;
+        expect(isDisableBundles, true);
+      },
+    );
     // blocTest<SalesOrgBloc, SalesOrgState>(
     //   'For "Stream Listener"',
     //   build: () => SalesOrgBloc(
