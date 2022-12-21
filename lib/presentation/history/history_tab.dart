@@ -272,6 +272,12 @@ class HistoryTab extends StatelessWidget {
                     : Column(
                         children: [
                           const AccountSuspendedBanner(),
+                          if (context
+                              .read<OrderHistoryFilterByStatusBloc>()
+                              .state
+                              .filterByStatusName
+                              .isNotEmpty)
+                            const _SelectedStatusChip(),
                           context
                                   .read<OrderHistoryFilterBloc>()
                                   .state
@@ -418,6 +424,73 @@ class HistoryTab extends StatelessWidget {
             );
           },
         ),
+      ),
+    );
+  }
+}
+
+class _SelectedStatusChip extends StatelessWidget {
+  const _SelectedStatusChip({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 80,
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Filtering on the basis of : '.tr(),
+                style: const TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+            ),
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: BlocBuilder<OrderHistoryFilterByStatusBloc,
+                OrderHistoryFilterByStatusState>(
+              buildWhen: (previous, current) => previous != current,
+              builder: (context, state) {
+                return Row(
+                  children: state.filterByStatusName
+                      .map(
+                        (e) => Container(
+                          child: state.isChecked(e)
+                              ? Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 5,
+                                  ),
+                                  child: Transform(
+                                    transform: Matrix4.identity()..scale(0.9),
+                                    child: Chip(
+                                      backgroundColor: ZPColors.lightGray,
+                                      label: Text(
+                                        e,
+                                        style: const TextStyle(
+                                          color: ZPColors.black,
+                                          fontSize: 14.0,
+                                        ),
+                                      ).tr(),
+                                    ),
+                                  ),
+                                )
+                              : Container(),
+                        ),
+                      )
+                      .toList(),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

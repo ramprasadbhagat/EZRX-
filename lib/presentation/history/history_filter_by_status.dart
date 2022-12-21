@@ -18,21 +18,36 @@ class HistoryFilterByStatus extends StatelessWidget {
           key: const ValueKey('order_history_filter_by_status'),
           child: Column(
             children: <Widget>[
-              Container(
-                padding: const EdgeInsets.only(
-                  left: 10.0,
-                  right: 10.0,
-                  top: 15.0,
-                  bottom: 15.0,
-                ),
-                child: Text(
-                  'Select Status'.tr(),
-                  style: const TextStyle(
-                    color: ZPColors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+              Stack(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0,
+                      vertical: 15.0,
+                    ),
+                    child: Text(
+                      'Select Status'.tr(),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: ZPColors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                ),
+                  Positioned(
+                    right: 10,
+                    top: 5,
+                    child: IconButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      icon: const Icon(
+                        Icons.clear,
+                        color: ZPColors.black,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               Column(
                 children: state.getAllStatusName.map((status) {
@@ -100,10 +115,6 @@ class _ClearButtonForFilterByStatus extends StatelessWidget {
       ),
       child: ElevatedButton(
         key: const ValueKey('filterclearAllButton'),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-           ),
         onPressed: () async {
           context.read<OrderHistoryFilterByStatusBloc>().add(
                 const OrderHistoryFilterByStatusEvent.initialized(),
@@ -114,11 +125,9 @@ class _ClearButtonForFilterByStatus extends StatelessWidget {
           child: Text(
             'Clear All'.tr(),
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 16,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                  color: ZPColors.white,
+                ),
           ),
         ),
       ),
