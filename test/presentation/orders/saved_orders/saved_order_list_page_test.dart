@@ -73,8 +73,8 @@ void main() {
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton(
-          () => CountlyService(config: locator<Config>()));
+    locator
+        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
     savedOrdersMock = await OrderLocalDataSource().getSavedOrders();
     autoRouterMock = locator<AppRouter>();
   });

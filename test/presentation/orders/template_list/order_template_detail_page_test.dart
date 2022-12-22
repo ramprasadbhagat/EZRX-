@@ -163,7 +163,7 @@ void main() {
         );
         await tester.pumpWidget(orderTemplateDetailPage());
         await tester.pump();
-        expect(find.byKey(const Key('InvalidOrderWarning')), findsOneWidget);
+        expect(find.byKey(const Key('invalidOrderWarning')), findsOneWidget);
         expect(find.byType(OrderMaterialItem), findsAtLeastNWidgets(1));
         expect(find.text('Invalid'), findsAtLeastNWidgets(1));
         expect(find.text('NA'), findsAtLeastNWidgets(1));
@@ -180,7 +180,7 @@ void main() {
         );
         await tester.pumpWidget(orderTemplateDetailPage());
         expect(
-            find.byKey(const Key('OrderActionButtonShimmer')), findsOneWidget);
+            find.byKey(const Key('orderActionButtonShimmer')), findsOneWidget);
         expect(find.byType(OrderMaterialItem), findsAtLeastNWidgets(1));
         expect(find.byKey(const Key('price-loading')), findsAtLeastNWidgets(1));
       },

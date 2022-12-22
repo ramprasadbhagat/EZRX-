@@ -12,6 +12,7 @@ class SaveOrderBounsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+      key: const Key('saveOrderBounsTile'),
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: custom.ExpansionTile(
         initiallyExpanded: true,

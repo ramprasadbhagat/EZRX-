@@ -35,7 +35,7 @@ class SavedOrderDetailPage extends StatelessWidget {
     locator<CountlyService>().recordCountlyView('Saved Order Details Screen');
 
     return Scaffold(
-      key: const Key('SavedOrderDetailPage'),
+      key: const Key('savedOrderDetailPage'),
       backgroundColor: ZPColors.white,
       appBar: PreferredSize(
         preferredSize: const Size(double.infinity, 60),
@@ -44,7 +44,7 @@ class SavedOrderDetailPage extends StatelessWidget {
         ),
       ),
       body: RefreshIndicator(
-        key: const ValueKey('SavedDetailRefreshIndicator'),
+        key: const ValueKey('savedDetailRefreshIndicator'),
         color: ZPColors.primary,
         onRefresh: () async => context.read<MaterialPriceDetailBloc>().add(
               MaterialPriceDetailEvent.refresh(
