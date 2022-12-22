@@ -11,6 +11,8 @@ import 'package:ezrxmobile/application/order/covid_material_list/covid_material_
 import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
@@ -103,6 +105,14 @@ class OrderHistoryFilterByStatusBlocMock extends MockBloc<
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
+class MaterialPriceBlocMock
+    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
+    implements MaterialPriceBloc {}
+
+class MaterialPriceDetailBlocMock
+    extends MockBloc<MaterialPriceDetailEvent, MaterialPriceDetailState>
+    implements MaterialPriceDetailBloc {}
+
 final fakeShipToInfo =
     ShipToInfo.empty().copyWith(shipToCustomerCode: '00001234');
 
@@ -142,6 +152,8 @@ void main() {
   late CartBlocMock mockCartBloc;
   late OrderHistoryFilterBlocMock mockOrderHistoryFilterBloc;
   late OrderHistoryFilterByStatusBlocMock mockOrderHistoryFilterByStatusBloc;
+  late MaterialPriceBlocMock mockMaterialPriceBloc;
+  late MaterialPriceDetailBlocMock mockMaterialPriceDetailBloc;
 
   final fakeSalesOrg = SalesOrganisation(
     salesOrg: SalesOrg('2601'),
@@ -170,6 +182,8 @@ void main() {
     mockCartBloc = CartBlocMock();
     mockOrderHistoryFilterBloc = OrderHistoryFilterBlocMock();
     mockOrderHistoryFilterByStatusBloc = OrderHistoryFilterByStatusBlocMock();
+    mockMaterialPriceBloc = MaterialPriceBlocMock();
+    mockMaterialPriceDetailBloc = MaterialPriceDetailBlocMock();
   });
 
   setUp(() async {
@@ -213,6 +227,10 @@ void main() {
         .thenReturn(OrderHistoryFilterState.initial());
     when(() => mockOrderHistoryFilterByStatusBloc.state)
         .thenReturn(OrderHistoryFilterByStatusState.initial());
+    when(() => mockMaterialPriceBloc.state)
+        .thenReturn(MaterialPriceState.initial());
+    when(() => mockMaterialPriceDetailBloc.state)
+        .thenReturn(MaterialPriceDetailState.initial());
   });
 
   group('Ship Code selector Test ', () {
@@ -253,6 +271,10 @@ void main() {
                 create: (context) => mockOrderHistoryFilterBloc),
             BlocProvider<OrderHistoryFilterByStatusBloc>(
                 create: (context) => mockOrderHistoryFilterByStatusBloc),
+            BlocProvider<MaterialPriceBloc>(
+                create: (context) => mockMaterialPriceBloc),
+            BlocProvider<MaterialPriceDetailBloc>(
+                create: (context) => mockMaterialPriceDetailBloc),
           ],
           child: Material(
             child: Scaffold(

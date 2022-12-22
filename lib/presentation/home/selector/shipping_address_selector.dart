@@ -11,6 +11,8 @@ import 'package:ezrxmobile/application/order/covid_material_list/covid_material_
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
@@ -54,17 +56,28 @@ class ShipCodeSelector extends StatelessWidget {
                   ),
                 );
 
+            context.read<MaterialPriceBloc>().add(
+                  const MaterialPriceEvent.initialized(),
+                );
+
+            context.read<MaterialPriceDetailBloc>().add(
+                  const MaterialPriceDetailEvent.initialized(),
+                );
+
             if (state.haveShipTo) {
               context.read<EligibilityBloc>().add(
-                EligibilityEvent.update(
-                  user: context.read<UserBloc>().state.user,
-                  salesOrganisation: salesOrgState.salesOrganisation,
-                  salesOrgConfigs: salesOrgState.configs,
-                  customerCodeInfo: context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                  shipToInfo: state.shipToInfo,
-                ),
-            );
-              
+                    EligibilityEvent.update(
+                      user: context.read<UserBloc>().state.user,
+                      salesOrganisation: salesOrgState.salesOrganisation,
+                      salesOrgConfigs: salesOrgState.configs,
+                      customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                      shipToInfo: state.shipToInfo,
+                    ),
+                  );
+
               context.read<SavedOrderListBloc>().add(
                     SavedOrderListEvent.fetch(
                       userInfo: context.read<UserBloc>().state.user,
@@ -79,8 +92,14 @@ class ShipCodeSelector extends StatelessWidget {
                   );
               context.read<OrderDocumentTypeBloc>().add(
                     OrderDocumentTypeEvent.fetch(
-                      salesOrganisation: context.read<SalesOrgBloc>().state.salesOrganisation,
-                      isEDI: context.read<CustomerCodeBloc>().state.customerCodeInfo.status.isEDI,
+                      salesOrganisation:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      isEDI: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo
+                          .status
+                          .isEDI,
                     ),
                   );
               context.read<MaterialListBloc>().add(
