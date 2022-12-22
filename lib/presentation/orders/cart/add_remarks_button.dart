@@ -16,7 +16,7 @@ class AddRemarksButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 10.0),
         child: InkWell(
-          key: key,
+          key: Key('$key-InkWell'),
           onTap: onPressed,
           child: Padding(
             padding: const EdgeInsets.symmetric(

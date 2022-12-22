@@ -22,6 +22,6 @@ Map<String, dynamic> _$$_OrderTemplateDtoToJson(_$_OrderTemplateDto instance) =>
     <String, dynamic>{
       'id': instance.templateId,
       'name': instance.templateName,
-      'user': instance.user,
+      'user': instance.user.toJson(),
       'cartList': const _CartItemListConverter().toJson(instance.items),
     };

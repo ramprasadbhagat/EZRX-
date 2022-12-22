@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_bonus.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus_item_tile.dart';
@@ -11,24 +12,34 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BounsTile extends StatelessWidget {
   final PriceAggregate cartItem;
+
   const BounsTile({Key? key, required this.cartItem}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // 1. isSalesRep => userdata.hasBonusOverride , isClient => salesOrgConfig.priceOverride
+    // 2. ZPFB and ZPFC cannot override bonus
+    final isBonusOverrideEnable =
+        context.read<EligibilityBloc>().state.isBonusOverrideEnable &&
+            !context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType;
+    final bonusList = cartItem.getAddedBonusList;
+    final isEligibleAddAdditionBonus = cartItem.isEligibleAddAdditionBonus;
+
     return Column(
       key: const Key('bonusTile'),
       children: [
         Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: (cartItem.isEligibleAddAdditionBonus &&
-                    context.read<EligibilityBloc>().state.getBonusOverRide)
-                ? custom.ExpansionTile(
-                    initiallyExpanded: true,
-                    title: Text(
-                      'Bonuses'.tr(),
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                    children: <Widget>[
+          padding: const EdgeInsets.all(8.0),
+          child: (isEligibleAddAdditionBonus && isBonusOverrideEnable) ||
+                  (!isBonusOverrideEnable && bonusList.isNotEmpty)
+              ? custom.ExpansionTile(
+                  initiallyExpanded: true,
+                  title: Text(
+                    'Bonuses'.tr(),
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                  children: <Widget>[
+                    if (isBonusOverrideEnable)
                       Row(
                         key: const ValueKey('addBonusButton'),
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -78,20 +89,22 @@ class BounsTile extends StatelessWidget {
                           ),
                         ],
                       ),
-                      ...cartItem.getAddedBonusList.map(
-                        (e) {
-                          return BonusItemTile(
-                            key: ValueKey(
-                              '${e.materialInfo.materialNumber}${e.additionalBonusFlag}${e.qty}',
-                            ),
-                            bonusItem: e,
-                            cartItem: cartItem,
-                          );
-                        },
-                      ),
-                    ],
-                  )
-                : const SizedBox.shrink(),),
+                    ...bonusList.map(
+                      (bonusItem) {
+                        return BonusItemTile(
+                          key: ValueKey(
+                            '${bonusItem.materialInfo.materialNumber}${bonusItem.additionalBonusFlag}${bonusItem.qty}',
+                          ),
+                          bonusItem: bonusItem,
+                          cartItem: cartItem,
+                          isBonusOverrideEnable: isBonusOverrideEnable,
+                        );
+                      },
+                    ),
+                  ],
+                )
+              : const SizedBox.shrink(),
+        ),
       ],
     );
   }

@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.d
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -23,6 +24,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -79,6 +81,10 @@ class TenderContractBlocMock
     extends MockBloc<TenderContractEvent, TenderContractState>
     implements TenderContractBloc {}
 
+class OrderDocumentTypeBlocMock
+    extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
+    implements OrderDocumentTypeBloc {}
+
 final locator = GetIt.instance;
 
 void main() {
@@ -94,6 +100,7 @@ void main() {
   late List<PriceAggregate> mockCartItemBundles;
   late MaterialListBloc materialListBlocMock;
   late TenderContractBloc tenderContractBlocMock;
+  late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
 
   late List<PriceAggregate> mockCartItemWithDataListOverride;
   late Map<MaterialNumber, Price> mockPriceList;
@@ -122,6 +129,7 @@ void main() {
       userBloc = UserBlocMock();
       shipToCodeBloc = ShipToBlocMock();
       tenderContractBlocMock = TenderContractBlocMock();
+      orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
 
       mockPriceList = {};
       mockPriceList.putIfAbsent(
@@ -276,6 +284,8 @@ void main() {
           disableOrderType: false,
           enableCollectiveNumber: true,
           enablePaymentTerms: true,
+          enableRemarks: true,
+          priceOverride: true,
         ),
         salesOrganisation: SalesOrganisation.empty().copyWith(
           salesOrg: SalesOrg('2601'),
@@ -290,6 +300,13 @@ void main() {
           .copyWith(user: User.empty().copyWith(hasBonusOverride: false)));
       when(() => tenderContractBlocMock.state)
           .thenReturn(TenderContractState.initial());
+      when(() => orderDocumentTypeBlocMock.state).thenReturn(
+        OrderDocumentTypeState.initial().copyWith(
+          selectedOrderType: OrderDocumentType.empty().copyWith(
+            documentType: 'ZPOR',
+          ),
+        ),
+      );
     },
   );
   group(
@@ -314,6 +331,8 @@ void main() {
             BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBloc),
             BlocProvider<TenderContractBloc>(
                 create: (context) => tenderContractBlocMock),
+            BlocProvider<OrderDocumentTypeBloc>(
+                create: (context) => orderDocumentTypeBlocMock),
           ],
           child: const CartPage(),
         );
@@ -802,12 +821,9 @@ void main() {
             'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
         expect(item, findsOneWidget);
 
-        final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-        expect(listWidget, findsNWidgets(1));
-
         if (salesOrgBloc.state.configs.enableRemarks) {
           final addRemarkButton =
-              tester.widget(find.byKey(const Key('addRemarks')));
+              tester.widget(find.byKey(const Key('addRemarksBonus')));
           await tester.tap(find.byWidget(addRemarkButton));
           await tester.pump();
 
@@ -827,8 +843,10 @@ void main() {
 
           verify(
             () => cartBloc.add(
-              CartEvent.addRemarksToCartItem(
+              CartEvent.addRemarksToBonusItem(
                 item: mockCartItemWithDataList[0],
+                bonusItem:
+                    mockCartItemWithDataList[0].addedBonusList[0].materialInfo,
                 isDelete: false,
               ),
             ),

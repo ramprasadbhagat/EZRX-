@@ -58,59 +58,61 @@ class QuantityInput extends StatelessWidget {
               if (text.isEmpty) return;
               onFieldChange(int.parse(text));
             },
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               isDense: true,
               contentPadding: EdgeInsets.zero,
+              border: isEnabled ? null : InputBorder.none,
             ),
             style: Theme.of(context).textTheme.headline5,
           ),
         ),
         isLoading
             ? const QuantityIconShimmer()
-            : Row(
-                children: [
-                  QuantityIcon(
-                    key: quantityDeleteKey,
-                    pressed: () {
-                      if (isEnabled) {
-                        FocusScope.of(context).unfocus();
-                        final value = (int.tryParse(controller.text) ?? 0) - 1;
-                        if (value > minimumQty) {
-                          final text = value.toString();
-                          controller.value = TextEditingValue(
-                            text: text,
-                            selection: TextSelection.collapsed(offset: text.length),
-                          );
-                          minusPressed(value);
-                        }
-                      }
-                    },
-                    icon: Icons.remove,
-                    isEnabled: isEnabled,
+            : isEnabled
+                ? Row(
+                    children: [
+                      QuantityIcon(
+                        key: quantityDeleteKey,
+                        pressed: () {
+                          FocusScope.of(context).unfocus();
+                          final value =
+                              (int.tryParse(controller.text) ?? 0) - 1;
+                          if (value > minimumQty) {
+                            final text = value.toString();
+                            controller.value = TextEditingValue(
+                              text: text,
+                              selection:
+                                  TextSelection.collapsed(offset: text.length),
+                            );
+                            minusPressed(value);
+                          }
+                        },
+                        icon: Icons.remove,
+                        isEnabled: isEnabled,
+                      ),
+                      QuantityIcon(
+                        key: quantityAddKey,
+                        pressed: () {
+                          FocusScope.of(context).unfocus();
+                          final value =
+                              (int.tryParse(controller.text) ?? 0) + 1;
 
-                  ),
-                  QuantityIcon(
-                    key: quantityAddKey,
-                    pressed: () {
-                      if (isEnabled) {
-                        FocusScope.of(context).unfocus();
-                        final value = (int.tryParse(controller.text) ?? 0) + 1;
-
-                  if (value < maximumQty) {
-                    final text = value.toString();
-                    controller.value = TextEditingValue(
-                      text: text,
-                      selection: TextSelection.collapsed(offset: text.length),
-                    );
-                    addPressed(value);
-                  }
-                }
-              },
-              icon: Icons.add,
-              isEnabled: isEnabled,
-            ),
-          ],
-        ),
+                          if (value < maximumQty) {
+                            final text = value.toString();
+                            controller.value = TextEditingValue(
+                              text: text,
+                              selection:
+                                  TextSelection.collapsed(offset: text.length),
+                            );
+                            addPressed(value);
+                          }
+                        },
+                        icon: Icons.add,
+                        isEnabled: isEnabled,
+                      ),
+                    ],
+                  )
+                : const SizedBox.shrink(),
         if (isEnabled)
           BlocBuilder<TenderContractBloc, TenderContractState>(
             builder: (context, state) {

@@ -17,12 +17,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class BonusItemTile extends StatefulWidget {
   const BonusItemTile({
     Key? key,
-    required this.bonusItem,
     required this.cartItem,
+    required this.bonusItem,
+    required this.isBonusOverrideEnable,
   }) : super(key: key);
 
-  final MaterialItemBonus bonusItem;
+  final bool isBonusOverrideEnable;
   final PriceAggregate cartItem;
+  final MaterialItemBonus bonusItem;
 
   @override
   State<BonusItemTile> createState() => _BonusItemTileState();
@@ -138,7 +140,7 @@ class _BonusItemTileState extends State<BonusItemTile> {
               Padding(
                 padding: const EdgeInsets.only(right: 20.0),
                 child: QuantityInput(
-                  isEnabled: true,
+                  isEnabled: widget.isBonusOverrideEnable,
                   quantityAddKey: const Key('addBonusFromCart'),
                   quantityDeleteKey: const Key('removeBonusFromCart'),
                   quantityTextKey: Key(
@@ -206,23 +208,24 @@ class _BonusItemTileState extends State<BonusItemTile> {
             ],
           ),
         ),
-        Positioned(
-          right: 0,
-          top: -15,
-          child: IconButton(
-            key: const Key('deleteBonusFromCart'),
-            onPressed: () {
-              context.read<CartBloc>().add(
-                    CartEvent.deleteBonusItem(
-                      cartItem: widget.cartItem,
-                      bonusItem: widget.bonusItem,
-                      isUpdateFromCart: true,
-                    ),
-                  );
-            },
-            icon: const Icon(Icons.delete),
+        if (widget.isBonusOverrideEnable)
+          Positioned(
+            right: 0,
+            top: -15,
+            child: IconButton(
+              key: const Key('deleteBonusFromCart'),
+              onPressed: () {
+                context.read<CartBloc>().add(
+                      CartEvent.deleteBonusItem(
+                        cartItem: widget.cartItem,
+                        bonusItem: widget.bonusItem,
+                        isUpdateFromCart: true,
+                      ),
+                    );
+              },
+              icon: const Icon(Icons.delete),
+            ),
           ),
-        ),
       ],
     );
   }

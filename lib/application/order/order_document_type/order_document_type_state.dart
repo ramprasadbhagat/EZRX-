@@ -38,10 +38,10 @@ class OrderDocumentTypeState with _$OrderDocumentTypeState {
         .toList();
   }
 
-  bool get isOrderTypeEDICompatible{
-    return selectedOrderType.isZPFB || selectedOrderType.isZPFC;
-  }
+  bool get isSpecialOrderType => selectedOrderType.isSpecialOrderType;
 
   bool get isReasonFieldEnable =>
-      isOrderTypeSelected && !selectedOrderType.isZPOR && reasonList.isNotEmpty;
+      isOrderTypeSelected &&
+      selectedOrderType.isSpecialOrderType &&
+      reasonList.isNotEmpty;
 }

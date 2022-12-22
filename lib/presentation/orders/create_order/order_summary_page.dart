@@ -235,8 +235,8 @@ class _Stepper extends StatelessWidget {
     final eligibiityState = context.read<EligibilityBloc>().state;
 
     return eligibiityState.isEDI
-        ? eligibiityState.isSalesRep && orderType.isOrderTypeEDICompatible
-        : !eligibiityState.isEDI;
+        ? eligibiityState.isSalesRep && orderType.isSpecialOrderType
+        : true;
   }
 
   void _handleError(BuildContext context, OrderSummaryState state) {

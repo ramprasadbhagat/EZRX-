@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EdiUserContinueNote extends StatelessWidget {
-  const EdiUserContinueNote({Key? key, required this.maxStepsReached}) : super(key: key);
+  const EdiUserContinueNote({Key? key, required this.maxStepsReached})
+      : super(key: key);
   final bool maxStepsReached;
 
   @override
@@ -30,7 +31,9 @@ class EdiUserContinueNote extends StatelessWidget {
                           .tr(),
                       textAlign: TextAlign.center,
                       style: const TextStyle(
-                          fontSize: 12, fontWeight: FontWeight.w600,),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ),
@@ -44,8 +47,8 @@ class EdiUserContinueNote extends StatelessWidget {
     final orderType = context.read<OrderDocumentTypeBloc>().state;
     final eligibiityState = context.read<EligibilityBloc>().state;
 
-    return eligibiityState.isEDI
-        ? eligibiityState.isSalesRep && !orderType.isOrderTypeEDICompatible
-        : eligibiityState.isEDI;
+    return eligibiityState.isEDI &&
+        eligibiityState.isSalesRep &&
+        !orderType.isSpecialOrderType;
   }
 }
