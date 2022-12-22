@@ -1,5 +1,4 @@
-import 'dart:async';
-
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -25,16 +24,11 @@ class OrderHistoryListBloc
   OrderHistoryListBloc({
     required this.orderHistoryRepository,
   }) : super(OrderHistoryListState.initial()) {
-    on<OrderHistoryListEvent>(_onEvent);
-  }
-
-  Future<void> _onEvent(
-    OrderHistoryListEvent event,
-    Emitter<OrderHistoryListState> emit,
-  ) async {
-    await event.map(
-      initialized: (e) async => emit(OrderHistoryListState.initial()),
-      fetch: (e) async {
+    on<_Initialized>((event, emit) async {
+      emit(OrderHistoryListState.initial());
+    });
+    on<_Fetch>(
+      (e, emit) async {
         emit(
           state.copyWith(
             isFetching: true,
@@ -55,6 +49,7 @@ class OrderHistoryListBloc
           offset: 0,
           orderHistoryFilter: e.orderHistoryFilter,
         );
+        if (emit.isDone) return;
 
         failureOrSuccess.fold(
           (failure) {
@@ -79,56 +74,52 @@ class OrderHistoryListBloc
           },
         );
       },
-      loadMore: (e) async {
-        if (state.isFetching || !state.canLoadMore) return;
-        emit(state.copyWith(isFetching: true, failureOrSuccessOption: none()));
-
-        final failureOrSuccess = await orderHistoryRepository.getOrderHistory(
-          salesOrgConfig: e.salesOrgConfigs,
-          soldTo: e.customerCodeInfo,
-          shipTo: e.shipToInfo,
-          user: e.user,
-          orderBy: 'orderDate',
-          sort: e.sortDirection,
-          pageSize: _pageSize,
-          offset: state.orderHistoryList.orderHistoryItems.length,
-          orderHistoryFilter: e.orderHistoryFilter,
-        );
-
-        await failureOrSuccess.fold(
-          (failure) async {
-            emit(
-              state.copyWith(
-                failureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
-              ),
-            );
-          },
-          (orderHistoryList) async {
-            final newOrderHistoryList = List<OrderHistoryItem>.from(
-              state.orderHistoryList.orderHistoryItems,
-            )..addAll(orderHistoryList.orderHistoryItems);
-
-            emit(
-              state.copyWith(
-                orderHistoryList: state.orderHistoryList.copyWith(
-                  orderHistoryItems: newOrderHistoryList,
-                ),
-                failureOrSuccessOption: none(),
-                isFetching: false,
-                canLoadMore:
-                    orderHistoryList.orderHistoryItems.length >= _pageSize,
-                nextPageIndex: state.nextPageIndex + 1,
-              ),
-            );
-          },
-        );
-      },
+      transformer: restartable(),
     );
-  }
+    on<_LoadMore>((e, emit) async {
+      if (state.isFetching || !state.canLoadMore) return;
+      emit(state.copyWith(isFetching: true, failureOrSuccessOption: none()));
 
-  @override
-  Future<void> close() async {
-    return super.close();
+      final failureOrSuccess = await orderHistoryRepository.getOrderHistory(
+        salesOrgConfig: e.salesOrgConfigs,
+        soldTo: e.customerCodeInfo,
+        shipTo: e.shipToInfo,
+        user: e.user,
+        orderBy: 'orderDate',
+        sort: e.sortDirection,
+        pageSize: _pageSize,
+        offset: state.orderHistoryList.orderHistoryItems.length,
+        orderHistoryFilter: e.orderHistoryFilter,
+      );
+
+      await failureOrSuccess.fold(
+        (failure) async {
+          emit(
+            state.copyWith(
+              failureOrSuccessOption: optionOf(failureOrSuccess),
+              isFetching: false,
+            ),
+          );
+        },
+        (orderHistoryList) async {
+          final newOrderHistoryList = List<OrderHistoryItem>.from(
+            state.orderHistoryList.orderHistoryItems,
+          )..addAll(orderHistoryList.orderHistoryItems);
+
+          emit(
+            state.copyWith(
+              orderHistoryList: state.orderHistoryList.copyWith(
+                orderHistoryItems: newOrderHistoryList,
+              ),
+              failureOrSuccessOption: none(),
+              isFetching: false,
+              canLoadMore:
+                  orderHistoryList.orderHistoryItems.length >= _pageSize,
+              nextPageIndex: state.nextPageIndex + 1,
+            ),
+          );
+        },
+      );
+    });
   }
 }
