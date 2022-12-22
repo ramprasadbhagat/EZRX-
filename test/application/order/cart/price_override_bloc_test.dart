@@ -26,6 +26,34 @@ void main() {
         },
       );
       blocTest<PriceOverrideBloc, PriceOverrideState>(
+        'initial to Fetch the overrided price',
+        build: () => PriceOverrideBloc(
+            priceOverrideRepository: priceOverrideRepositoryMock),
+        setUp: () {
+          when(
+            () => priceOverrideRepositoryMock.updateItemPrice(
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              item: PriceAggregate.empty(),
+              newPrice: 0.0,
+              salesOrganisation: SalesOrganisation.empty(),
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(
+              [Price.empty()],
+            ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          const PriceOverrideEvent.initialized(),
+        ),
+        expect: () => [
+          PriceOverrideState.initial().copyWith(
+            isFetching: false,
+            cartItemList: [],
+          ),
+        ],
+      );
+      blocTest<PriceOverrideBloc, PriceOverrideState>(
         'Fetch the overrided price',
         build: () => PriceOverrideBloc(
             priceOverrideRepository: priceOverrideRepositoryMock),
@@ -81,9 +109,8 @@ void main() {
               salesOrganisation: SalesOrganisation.empty(),
             ),
           ).thenAnswer(
-            // ignore: prefer_const_constructors
-            (invocation) async => Left(
-              const ApiFailure.priceOverrideNotFound(),
+            (invocation) async => const Left(
+              ApiFailure.priceOverrideNotFound(),
             ),
           );
         },

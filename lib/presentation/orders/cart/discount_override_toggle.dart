@@ -60,6 +60,7 @@ class DiscountOverrideToggle extends StatelessWidget {
       },
       builder: ((context, state) {
         return Column(
+          key: const Key('discountOverride'),
           children: [
             const SizedBox(
               height: 20,
