@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -40,6 +41,39 @@ void main() {
       act: (UserBloc bloc) => bloc.add(const UserEvent.fetch()),
       expect: () => [
         UserState.initial().copyWith(user: User.empty().copyWith(id: 'fakeId')),
+      ],
+    );
+
+    blocTest<UserBloc, UserState>(
+      'T&c accept',
+      build: () => UserBloc(
+        userRepository: userRepoMock,
+      ),
+      setUp: () {
+        when(() => userRepoMock.updateUserTc(User.empty())).thenAnswer(
+          (invocation) async => Right(SettingTc.empty()),
+        );
+      },
+      act: (UserBloc bloc) => bloc.add(const UserEvent.accptTnc()),
+      expect: () => [
+        UserState.initial().copyWith(user: User.empty()),
+      ],
+    );
+    blocTest<UserBloc, UserState>(
+      'T&c failed',
+      build: () => UserBloc(
+        userRepository: userRepoMock,
+      ),
+      setUp: () {
+        when(() => userRepoMock.updateUserTc(User.empty())).thenAnswer(
+          (invocation) async => const Left(ApiFailure.other('tnc failed')),
+        );
+      },
+      act: (UserBloc bloc) => bloc.add(const UserEvent.accptTnc()),
+      expect: () => [
+        UserState.initial().copyWith(
+            userFailureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('tnc failed'))))
       ],
     );
 

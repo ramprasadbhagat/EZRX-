@@ -970,7 +970,7 @@ packages:
     source: hosted
     version: "0.0.2"
   open_file_safe:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: open_file_safe
       url: "https://pub.dartlang.org"
@@ -1054,7 +1054,7 @@ packages:
     source: hosted
     version: "1.0.1"
   path_provider:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: path_provider
       url: "https://pub.dartlang.org"
