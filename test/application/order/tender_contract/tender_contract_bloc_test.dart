@@ -100,6 +100,56 @@ void main() {
     );
 
     blocTest(
+      'Fetch tender contracts success with defaultSelectedTenderContract',
+      build: () => TenderContractBloc(
+          tenderContractRepository: tenderContractMockRepository),
+      setUp: () {
+        when(() => tenderContractMockRepository.getTenderContractDetails(
+              salesOrganisation: mockSalesOrganisation,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              material: mockMaterialInfo,
+            )).thenAnswer(
+          (invocation) async => Right(mockTenderContractList),
+        );
+      },
+      act: (TenderContractBloc bloc) {
+        bloc.add(TenderContractEvent.fetch(
+          salesOrganisation: mockSalesOrganisation,
+          customerCodeInfo: mockCustomerCodeInfo,
+          shipToInfo: mockShipToInfo,
+          materialInfo: mockMaterialInfo,
+          defaultSelectedTenderContract: mockTenderContractList.first,
+        ));
+
+        final notContainReason730 = !mockTenderContractList
+            .any((element) => element.tenderOrderReason.is730);
+
+        newMockTenderContractList = notContainReason730
+            ? (List<TenderContract>.from(mockTenderContractList)
+              ..insert(0, TenderContract.noContract()))
+            : mockTenderContractList;
+      },
+      expect: () => [
+        materialState.copyWith(
+          isFetching: true,
+          tenderContractList: [],
+          apiFailureOrSuccessOption: none(),
+        ),
+        materialState.copyWith(
+          isFetching: false,
+          tenderContractList: newMockTenderContractList,
+          apiFailureOrSuccessOption: optionOf(Right(mockTenderContractList)),
+        ),
+        materialState.copyWith(
+          tenderContractList: newMockTenderContractList,
+          selectedTenderContract: mockTenderContractList.first,
+          apiFailureOrSuccessOption: optionOf(Right(mockTenderContractList)),
+        ),
+      ],
+    );
+
+    blocTest(
       'Fetch tender contracts fail',
       build: () => TenderContractBloc(
           tenderContractRepository: tenderContractMockRepository),

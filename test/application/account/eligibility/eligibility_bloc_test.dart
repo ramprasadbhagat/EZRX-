@@ -238,6 +238,86 @@ void main() {
   );
 
   test(
+    'eligibility state validateOutOfStockValue should return true',
+    () {
+      final eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeUser.copyWith(
+          role: Role.empty().copyWith(
+            type: RoleType('external_sales_rep'),
+          ),
+        ),
+        salesOrganisation: fakeSaleOrg,
+        salesOrgConfigs: fakeSaleOrgConfig,
+        customerCodeInfo: fakeCustomerInfo,
+        shipToInfo: fakeShipToInfo,
+      );
+
+      final isOosValueZero = eligibilityState.validateOutOfStockValue;
+      expect(isOosValueZero, true);
+    },
+  );
+
+  test(
+    'eligibility state doNotAllowOutOfStockMaterials should return true for sales rep user and addOosMaterials as true',
+    () {
+      final eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeUser.copyWith(
+          role: Role.empty().copyWith(
+            type: RoleType('external_sales_rep'),
+          ),
+        ),
+        salesOrganisation: fakeSaleOrg,
+        salesOrgConfigs: fakeSaleOrgConfig.copyWith(
+          addOosMaterials: true,
+        ),
+        customerCodeInfo: fakeCustomerInfo,
+        shipToInfo: fakeShipToInfo,
+      );
+
+      final doNotAllowOutOfStockMaterials =
+          eligibilityState.doNotAllowOutOfStockMaterials;
+      expect(doNotAllowOutOfStockMaterials, true);
+    },
+  );
+
+  test(
+    'eligibility state isdisplayOrderDiscountEnable should return true',
+    () {
+      final eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeUser,
+        salesOrganisation: fakeSaleOrg,
+        salesOrgConfigs: fakeSaleOrgConfig.copyWith(
+          displayOrderDiscount: true,
+        ),
+        customerCodeInfo: fakeCustomerInfo,
+        shipToInfo: fakeShipToInfo,
+      );
+
+      final displayOrderDiscount =
+          eligibilityState.isdisplayOrderDiscountEnable;
+      expect(displayOrderDiscount, true);
+    },
+  );
+
+  test(
+    'eligibility state isRemarksEnable return true',
+    () {
+      final eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeUser,
+        salesOrganisation: fakeSaleOrg,
+        salesOrgConfigs: fakeSaleOrgConfig.copyWith(
+          enableRemarks: true,
+        ),
+        customerCodeInfo: fakeCustomerInfo,
+        shipToInfo: fakeShipToInfo,
+      );
+
+      final isRemarksEnable = eligibilityState.isRemarksEnable;
+      expect(isRemarksEnable, true);
+    },
+  );
+
+  test(
     'eligibility state isBillToInfo should return false when customerCodeSoldTo and billToCustomerCode is same',
     () {
       final eligibilityState = EligibilityState.initial().copyWith(

@@ -2,12 +2,14 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/core/aggregate/bonus_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_history_details_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -30,6 +32,26 @@ void main() {
           tenderContractDetails:
               OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
         )
+      ],
+    );
+    final validOrderHistoryDetails = OrderHistoryDetails.empty().copyWith(
+      orderHistoryDetailsOrderItem: [
+        OrderHistoryDetailsOrderItem.empty().copyWith(
+          type: OrderItemType('Comm'),
+          details: [
+            OrderHistoryDetailsOrderItemDetails.empty(),
+          ],
+          tenderContractDetails:
+              OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
+        ),
+        OrderHistoryDetailsOrderItem.empty().copyWith(
+          type: OrderItemType('Non-Comm'),
+          details: [
+            OrderHistoryDetailsOrderItemDetails.empty(),
+          ],
+          tenderContractDetails:
+              OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
+        ),
       ],
     );
     const apiServerTimeOut = ApiFailure.serverTimeout();
@@ -96,6 +118,58 @@ void main() {
           orderHistoryDetails: emptyOrderHistoryDetails,
           failureOrSuccessOption: none(),
           isLoading: false,
+        ),
+      ],
+    );
+
+    blocTest<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
+      'emit correct data on successful fetch() event with OrderItemType as COMM',
+      setUp: () {
+        when(
+          () => orderHistoryDetailsRepository.getOrderHistoryDetails(
+            user: emptyUser,
+            orderHistoryItem: emptyOrderHistoryItem,
+          ),
+        ).thenAnswer((invocation) async => Right(validOrderHistoryDetails));
+      },
+      build: () => getOrderHistoryDetailsBloc(),
+      act: (bloc) => bloc.add(
+        OrderHistoryDetailsEvent.fetch(
+          user: emptyUser,
+          orderHistoryItem: emptyOrderHistoryItem,
+        ),
+      ),
+      expect: () => [
+        OrderHistoryDetailsState.initial().copyWith(
+          isLoading: true,
+          showErrorMessage: false,
+          failureOrSuccessOption: none(),
+        ),
+        OrderHistoryDetailsState.initial().copyWith(
+          orderHistoryDetails: validOrderHistoryDetails,
+          failureOrSuccessOption: none(),
+          isLoading: false,
+          bonusItem: [
+            OrderHistoryDetailsBonusAggregate.empty().copyWith(
+              orderItem: OrderHistoryDetailsOrderItem.empty().copyWith(
+                type: OrderItemType('Comm'),
+                details: [
+                  OrderHistoryDetailsOrderItemDetails.empty(),
+                ],
+              ),
+              details: [
+                OrderHistoryDetailsOrderItemDetails.empty(),
+              ],
+              bonusList: [
+                OrderHistoryDetailsOrderItem.empty().copyWith(
+                  type: OrderItemType('Non-Comm'),
+                  details: [
+                    OrderHistoryDetailsOrderItemDetails.empty(),
+                  ],
+                ),
+              ],
+            ),
+          ],
         ),
       ],
     );

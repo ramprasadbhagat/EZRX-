@@ -60,6 +60,27 @@ void main() {
       expect: () => [const AuthState.authenticated()],
     );
     blocTest(
+      'init',
+      build: () => AuthBloc(authRepository: authRepoMock),
+      setUp: () {
+        when(() => authRepoMock.initTokenStorage()).thenAnswer(
+            (invocation) async => const Left(ApiFailure.other('fake-error')));
+        when(() => authRepoMock.initCredStorage()).thenAnswer(
+            (invocation) async => const Left(ApiFailure.other('fake-error')));
+        when(() => authRepoMock.initOkta()).thenAnswer(
+            (invocation) async => const Left(ApiFailure.other('fake-error')));
+        when(() => authRepoMock.tokenValid())
+            .thenAnswer((invocation) async => const Right(unit));
+        when(() => authRepoMock.canBeAuthenticatedAndBioAvailable())
+            .thenAnswer((invocation) async => const Right(true));
+        when(() => authRepoMock.doBiometricAuthentication()).thenAnswer(
+            (invocation) async => const Left(ApiFailure.invalidBiometirc()));
+      },
+      act: (AuthBloc bloc) async => bloc.add(const AuthEvent.init()),
+      expect: () => [const AuthState.unauthenticated()],
+    );
+
+    blocTest(
       'Authenticated On Auth Check Test With Biometric Failure ',
       build: () => AuthBloc(authRepository: authRepoMock),
       setUp: () {

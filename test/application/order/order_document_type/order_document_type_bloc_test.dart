@@ -10,7 +10,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-
 class OrderDocumentTypeRepositoryMock extends Mock
     implements OrderDocumentTypeRepository {}
 
@@ -18,14 +17,23 @@ void main() {
   final orderDocumentTypeRepository = OrderDocumentTypeRepositoryMock();
 
   final mockSalesOrganisation = SalesOrganisation.empty();
-  final selectedOrderDocumentType= OrderDocumentType.empty().copyWith(documentType: 'ZPOR');
+  final selectedOrderDocumentType =
+      OrderDocumentType.empty().copyWith(documentType: 'ZPOR');
   late final List<OrderDocumentType> orderDocumentTypeListMock;
   late final List<OrderDocumentType> orderDocumentTypeListEDICustomerMock;
+  final fakeOrderDocumentTypeList = [
+    OrderDocumentType.empty().copyWith(
+      documentType: 'fake-document-type',
+      orderReason: 'fake-reason',
+    ),
+  ];
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    orderDocumentTypeListMock = await OrderDocumentTypeLocalDataSource().getOrderDocumentTypList();
-    orderDocumentTypeListEDICustomerMock = await OrderDocumentTypeLocalDataSource().getOrderDocumentTypList();
+    orderDocumentTypeListMock =
+        await OrderDocumentTypeLocalDataSource().getOrderDocumentTypList();
+    orderDocumentTypeListEDICustomerMock =
+        await OrderDocumentTypeLocalDataSource().getOrderDocumentTypList();
     orderDocumentTypeListEDICustomerMock
         .removeWhere((element) => element.documentType.contains('ZPOR'));
   });
@@ -33,8 +41,8 @@ void main() {
   group('Order DocumentType List BLOC', () {
     blocTest(
       'Initialize',
-      build: () =>
-          OrderDocumentTypeBloc(orderDocumentTypeRepository: orderDocumentTypeRepository),
+      build: () => OrderDocumentTypeBloc(
+          orderDocumentTypeRepository: orderDocumentTypeRepository),
       act: ((OrderDocumentTypeBloc bloc) =>
           bloc.add(const OrderDocumentTypeEvent.initialized())),
       expect: () => [OrderDocumentTypeState.initial()],
@@ -42,52 +50,54 @@ void main() {
 
     blocTest(
       'order Document Type List Failure',
-      build: () =>
-          OrderDocumentTypeBloc(orderDocumentTypeRepository: orderDocumentTypeRepository),
+      build: () => OrderDocumentTypeBloc(
+          orderDocumentTypeRepository: orderDocumentTypeRepository),
       setUp: () {
         when(
-          () => orderDocumentTypeRepository.getOrderDocumentTypList(salesOrganisation: mockSalesOrganisation),
+          () => orderDocumentTypeRepository.getOrderDocumentTypList(
+              salesOrganisation: mockSalesOrganisation),
         ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
       },
-      act: (OrderDocumentTypeBloc bloc) =>
-          bloc.add(OrderDocumentTypeEvent.fetch(salesOrganisation: mockSalesOrganisation,isEDI: false)),
+      act: (OrderDocumentTypeBloc bloc) => bloc.add(
+          OrderDocumentTypeEvent.fetch(
+              salesOrganisation: mockSalesOrganisation, isEDI: false)),
       expect: () => [
         OrderDocumentTypeState.initial().copyWith(
           isSubmitting: true,
         ),
         OrderDocumentTypeState.initial().copyWith(
           orderDocumentTypeListFailureOrSuccessOption:
-                  optionOf(const Left(ApiFailure.other('fake-error'))),
-              isSubmitting: false,
+              optionOf(const Left(ApiFailure.other('fake-error'))),
+          isSubmitting: false,
         ),
       ],
     );
 
     blocTest(
       'order Document Type List Success',
-      build: () =>
-          OrderDocumentTypeBloc(orderDocumentTypeRepository: orderDocumentTypeRepository),
+      build: () => OrderDocumentTypeBloc(
+          orderDocumentTypeRepository: orderDocumentTypeRepository),
       setUp: () {
         when(
-          () => orderDocumentTypeRepository.getOrderDocumentTypList(salesOrganisation: mockSalesOrganisation),
-        ).thenAnswer(
-          (invocation) async => Right(orderDocumentTypeListMock)
-        );
+          () => orderDocumentTypeRepository.getOrderDocumentTypList(
+              salesOrganisation: mockSalesOrganisation),
+        ).thenAnswer((invocation) async => Right(orderDocumentTypeListMock));
       },
-      act: (OrderDocumentTypeBloc bloc) =>
-          bloc.add(OrderDocumentTypeEvent.fetch(salesOrganisation: mockSalesOrganisation, isEDI: false)),
+      act: (OrderDocumentTypeBloc bloc) => bloc.add(
+          OrderDocumentTypeEvent.fetch(
+              salesOrganisation: mockSalesOrganisation, isEDI: false)),
       expect: () => [
         OrderDocumentTypeState.initial().copyWith(
           isSubmitting: true,
         ),
         OrderDocumentTypeState.initial().copyWith(
-          orderDocumentTypeListFailureOrSuccessOption:
-                  optionOf(Right(orderDocumentTypeListMock)),
-              isSubmitting: false,
+            orderDocumentTypeListFailureOrSuccessOption:
+                optionOf(Right(orderDocumentTypeListMock)),
+            isSubmitting: false,
             orderDocumentTypeList: orderDocumentTypeListMock),
       ],
     );
@@ -120,9 +130,12 @@ void main() {
 
     blocTest(
       'For order document type "selected" Event if reason is true',
-      build: () =>  OrderDocumentTypeBloc(orderDocumentTypeRepository: orderDocumentTypeRepository),
+      build: () => OrderDocumentTypeBloc(
+          orderDocumentTypeRepository: orderDocumentTypeRepository),
       act: (OrderDocumentTypeBloc bloc) => bloc.add(
-          OrderDocumentTypeEvent.selectedOrderType(isReasonSelected: true,selectedOrderType: selectedOrderDocumentType)),
+          OrderDocumentTypeEvent.selectedOrderType(
+              isReasonSelected: true,
+              selectedOrderType: selectedOrderDocumentType)),
       expect: () => [
         OrderDocumentTypeState.initial().copyWith(
           isReasonSelected: true,
@@ -133,15 +146,53 @@ void main() {
 
     blocTest(
       'For order document type "selected" Event if reason is false',
-      build: () =>  OrderDocumentTypeBloc(orderDocumentTypeRepository: orderDocumentTypeRepository),
+      build: () => OrderDocumentTypeBloc(
+          orderDocumentTypeRepository: orderDocumentTypeRepository),
       act: (OrderDocumentTypeBloc bloc) => bloc.add(
-          OrderDocumentTypeEvent.selectedOrderType(isReasonSelected: false,selectedOrderType: selectedOrderDocumentType)),
+          OrderDocumentTypeEvent.selectedOrderType(
+              isReasonSelected: false,
+              selectedOrderType: selectedOrderDocumentType)),
       expect: () => [
         OrderDocumentTypeState.initial().copyWith(
           isOrderTypeSelected: true,
           selectedOrderType: selectedOrderDocumentType,
         ),
       ],
+    );
+
+    test(
+      'Test reasonList',
+      () {
+        final reasonList = OrderDocumentTypeState.initial()
+            .copyWith(
+              orderDocumentTypeList: fakeOrderDocumentTypeList,
+              selectedOrderType: fakeOrderDocumentTypeList.first,
+            )
+            .reasonList;
+        expect(
+          reasonList,
+          fakeOrderDocumentTypeList,
+        );
+      },
+    );
+
+    test(
+      'Test isReasonFieldEnable',
+      () {
+        final isReasonFieldEnable = OrderDocumentTypeState.initial()
+            .copyWith(
+              orderDocumentTypeList: fakeOrderDocumentTypeList,
+              selectedOrderType: fakeOrderDocumentTypeList.first.copyWith(
+                documentType: 'ZPFB',
+              ),
+              isOrderTypeSelected: true,
+            )
+            .isReasonFieldEnable;
+        expect(
+          isReasonFieldEnable,
+          false,
+        );
+      },
     );
   });
 }

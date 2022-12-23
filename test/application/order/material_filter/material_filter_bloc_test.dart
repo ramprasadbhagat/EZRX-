@@ -345,5 +345,22 @@ void main() {
         MaterialFilterState.initial(),
       ],
     );
+
+    test(
+      '=> Test getSearchedFilterList getter',
+      () {
+        final filterList = MaterialFilterState.initial()
+            .copyWith(
+                materialFilter: MaterialFilter.empty().copyWith(
+                  uniquePrincipalName: [
+                    'principle-1',
+                    'principle-2',
+                  ],
+                ),
+                searchKey: 'principle-2')
+            .getSearchedFilterList(MaterialFilterType.principal);
+        expect(filterList, ['principle-2']);
+      },
+    );
   });
 }

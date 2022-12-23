@@ -292,5 +292,19 @@ void main() {
         )
       ],
     );
+    blocTest(
+      'Tab Reset Password with invalid old, new, confirm password',
+      build: () => ResetPasswordBloc(
+        changePasswordRepository: resetPasswordRepoMock,
+      ),
+      act: (ResetPasswordBloc bloc) =>
+          bloc.add(ResetPasswordEvent.resetPasswordPressed(user: user)),
+      expect: () => [
+        ResetPasswordState.initial().copyWith(
+          showErrorMessages: true,
+          passwordResetFailureOrSuccessOption: none(),
+        )
+      ],
+    );
   });
 }

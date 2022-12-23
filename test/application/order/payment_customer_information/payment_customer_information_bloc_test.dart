@@ -118,5 +118,52 @@ void main() {
         )
       ],
     );
+
+    blocTest<PaymentCustomerInformationBloc, PaymentCustomerInformationState>(
+      'Payment Customer Information Fetch success with license list',
+      build: () => PaymentCustomerInformationBloc(
+        paymentCustomerInformationRepository:
+            paymentCustomerInformationRepositoryMock,
+      ),
+      setUp: () {
+        when(() => paymentCustomerInformationRepositoryMock
+            .getPaymentCustomerInformation(
+                customerCodeInfo: fakeCustomerCodeInfo,
+                salesOrganisation: fakeSaleOrganisation)).thenAnswer(
+          (invocation) async => Right(paymentCustomerInformationMockData),
+        );
+      },
+      act: (bloc) => bloc.add(PaymentCustomerInformationEvent.fetch(
+        customeCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeSaleOrganisation,
+        selectedShipToCode: '0070149863',
+      )),
+      expect: () => [
+        PaymentCustomerInformationState.initial().copyWith(
+          paymentCustomerInformation: paymentCustomerInformationMockData,
+          licenses: paymentCustomerInformationMockData.shipToInfoList
+              .where((element) => element.shipToCustomerCode == '0070149863')
+              .first
+              .licenses,
+          paymentCustomerInformationFailureOrSuccessOption: none(),
+        )
+      ],
+    );
+
+    test(
+      '=> Test getLicensesType getter',
+      () {
+        final licensesType = PaymentCustomerInformationState.initial()
+            .copyWith(
+              licenses: paymentCustomerInformationMockData.shipToInfoList
+                  .where(
+                      (element) => element.shipToCustomerCode == '0070149863')
+                  .first
+                  .licenses,
+            )
+            .getLicensesType;
+        expect(licensesType, 'R03');
+      },
+    );
   });
 }

@@ -248,6 +248,38 @@ void main() {
       );
 
       blocTest(
+        'Save Order Template with inValid template name',
+        build: () =>
+            OrderTemplateListBloc(orderTemplateRepository: templateRepository),
+        act: (OrderTemplateListBloc bloc) {
+          bloc.add(
+            OrderTemplateListEvent.save(
+              templateName: '',
+              userID: mockUser.id,
+              templateList: saveTemplateListMock,
+              cartList: cartList,
+            ),
+          );
+        },
+        expect: () => [
+          OrderTemplateListState.initial().copyWith(
+            isFetching: true,
+            isSubmitting: true,
+            showErrorMessages: false,
+            orderTemplateList: saveTemplateListMock,
+            templateName: TemplateName(''),
+          ),
+          OrderTemplateListState.initial().copyWith(
+            isFetching: false,
+            isSubmitting: false,
+            showErrorMessages: true,
+            orderTemplateList: saveTemplateListMock,
+            templateName: TemplateName(''),
+          ),
+        ],
+      );
+
+      blocTest(
         'Save Order template error',
         build: () =>
             OrderTemplateListBloc(orderTemplateRepository: templateRepository),

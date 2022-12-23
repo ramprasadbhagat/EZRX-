@@ -59,6 +59,21 @@ void main() {
     );
 
     blocTest(
+      'Create bloc and load last saved cred failure',
+      build: () => LoginFormBloc(authRepository: authRepoMock),
+      setUp: () {
+        when(() => authRepoMock.loadCredential()).thenAnswer(
+            (invocation) async => const Left(ApiFailure.accountLocked()));
+        when(() => authRepoMock.canBeAuthenticatedAndBioAvailable())
+            .thenAnswer((invocation) async => const Right(false));
+      },
+      act: (LoginFormBloc bloc) {
+        bloc.add(const LoginFormEvent.loadLastSavedCred());
+        expect(bloc.state.username, Username(''));
+      },
+    );
+
+    blocTest(
       'Change username',
       build: () => LoginFormBloc(authRepository: authRepoMock),
       setUp: () {
