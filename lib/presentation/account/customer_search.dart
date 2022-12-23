@@ -38,7 +38,7 @@ class _CustomerSearchPage extends State<CustomerSearchPage> {
       _searchController.value = TextEditingValue(
         text: searchText.getOrCrash(),
         selection: TextSelection.collapsed(
-          offset: searchText.getOrCrash().length,
+          offset: _searchController.selection.base.offset,
         ),
       );
     }
@@ -70,7 +70,9 @@ class _CustomerSearchPage extends State<CustomerSearchPage> {
               final searchText = state.searchKey.getValue();
               _searchController.value = TextEditingValue(
                 text: searchText,
-                selection: TextSelection.collapsed(offset: searchText.length),
+                selection: TextSelection.collapsed(
+                  offset: _searchController.selection.base.offset,
+                ),
               );
             },
             buildWhen: (previous, current) =>

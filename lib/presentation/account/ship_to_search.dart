@@ -33,7 +33,7 @@ class _ShiptToSearchPage extends State<ShiptToSearchPage> {
       _searchController.value = TextEditingValue(
         text: searchText.getOrCrash(),
         selection: TextSelection.collapsed(
-          offset: searchText.getOrCrash().length,
+          offset: _searchController.selection.base.offset,
         ),
       );
     }
@@ -92,7 +92,9 @@ class AppBar extends StatelessWidget {
           final searchText = state.searchKey.getValue();
           searchController.value = TextEditingValue(
             text: searchText,
-            selection: TextSelection.collapsed(offset: searchText.length),
+            selection: TextSelection.collapsed(
+              offset: searchController.selection.base.offset,
+            ),
           );
         },
         buildWhen: (previous, current) =>

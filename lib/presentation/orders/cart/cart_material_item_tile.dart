@@ -404,7 +404,7 @@ class _CartItemQuantityInputState extends State<_CartItemQuantityInput> {
     controller.value = TextEditingValue(
       text: widget.cartItem.quantity.toString(),
       selection: TextSelection.collapsed(
-        offset: widget.cartItem.quantity.toString().length,
+        offset: controller.selection.base.offset,
       ),
     );
 
@@ -420,10 +420,12 @@ class _CartItemQuantityInputState extends State<_CartItemQuantityInput> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CartBloc, CartState>(
-      buildWhen: (previous, current) => previous.isFetching != current.isFetching,
+      buildWhen: (previous, current) =>
+          previous.isFetching != current.isFetching,
       builder: (context, state) {
         return QuantityInput(
-          isEnabled: widget.cartItem.tenderContract == TenderContract.empty() && !state.isFetching,
+          isEnabled: widget.cartItem.tenderContract == TenderContract.empty() &&
+              !state.isFetching,
           quantityAddKey: const Key('cartAdd'),
           quantityDeleteKey: const Key('cartDelete'),
           quantityTextKey: const Key('cartItem'),

@@ -37,7 +37,7 @@ class _BonusAddPageState extends State<BonusAddPage> {
       _searchController.value = TextEditingValue(
         text: searchText.getOrCrash(),
         selection: TextSelection.collapsed(
-          offset: searchText.getOrCrash().length,
+          offset: _searchController.selection.base.offset,
         ),
       );
     }
@@ -62,8 +62,9 @@ class _BonusAddPageState extends State<BonusAddPage> {
                   final searchText = state.searchKey.getValue();
                   _searchController.value = TextEditingValue(
                     text: searchText,
-                    selection:
-                        TextSelection.collapsed(offset: searchText.length),
+                    selection: TextSelection.collapsed(
+                      offset: _searchController.selection.base.offset,
+                    ),
                   );
                 },
                 (either) => either.fold(

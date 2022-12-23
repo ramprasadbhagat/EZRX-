@@ -378,7 +378,9 @@ class _SearchBarState extends State<_SearchBar> {
           final searchText = state.searchKey.getValue();
           _searchController.value = TextEditingValue(
             text: searchText,
-            selection: TextSelection.collapsed(offset: searchText.length),
+            selection: TextSelection.collapsed(
+              offset: _searchController.selection.base.offset,
+            ),
           );
         },
         buildWhen: (previous, current) =>

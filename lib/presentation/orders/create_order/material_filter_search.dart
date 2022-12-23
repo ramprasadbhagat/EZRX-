@@ -25,7 +25,7 @@ class _MaterialFilterSearch extends State<MaterialFilterSearch> {
     _searchController.value = TextEditingValue(
       text: widget.searchText,
       selection: TextSelection.collapsed(
-        offset: widget.searchText.length,
+        offset: _searchController.selection.base.offset,
       ),
     );
 

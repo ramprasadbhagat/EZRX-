@@ -81,8 +81,9 @@ class QuantityInput extends StatelessWidget {
                             final text = value.toString();
                             controller.value = TextEditingValue(
                               text: text,
-                              selection:
-                                  TextSelection.collapsed(offset: text.length),
+                              selection: TextSelection.collapsed(
+                                offset: controller.selection.base.offset,
+                              ),
                             );
                             minusPressed(value);
                           }
@@ -101,8 +102,9 @@ class QuantityInput extends StatelessWidget {
                             final text = value.toString();
                             controller.value = TextEditingValue(
                               text: text,
-                              selection:
-                                  TextSelection.collapsed(offset: text.length),
+                              selection: TextSelection.collapsed(
+                                offset: controller.selection.base.offset,
+                              ),
                             );
                             addPressed(value);
                           }

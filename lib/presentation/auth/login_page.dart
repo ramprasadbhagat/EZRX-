@@ -191,7 +191,9 @@ class _UsernameField extends StatelessWidget {
             final username = state.username.getOrCrash();
             controller.value = TextEditingValue(
               text: username,
-              selection: TextSelection.collapsed(offset: username.length),
+              selection: TextSelection.collapsed(
+                offset: controller.selection.base.offset,
+              ),
             );
           },
           buildWhen: (previous, current) =>
@@ -244,7 +246,9 @@ class _PasswordField extends StatelessWidget {
             final password = state.password.getOrCrash();
             controller.value = TextEditingValue(
               text: password,
-              selection: TextSelection.collapsed(offset: password.length),
+              selection: TextSelection.collapsed(
+                offset: controller.selection.base.offset,
+              ),
             );
           },
           buildWhen: (previous, current) =>
