@@ -47,7 +47,7 @@ void main() {
     disableOrderType: false,
     disablePrincipals: false,
     enableGimmickMaterial: false,
-    languageFilter: false,
+    languageFilter: true,
     languageValue: LanguageValue(''),
     disableBundles: false,
     principalList: [],
@@ -172,7 +172,8 @@ void main() {
         when(() => paymentTermsRepositoryMock.getPaymentTerms(
               customerCodeInfo: fakeCustomerCode,
               salesOrganisation: fakeSaleOrganisation,
-              salesOrgConfig: fakeSaleOrgConfig,
+              salesOrgConfig:
+                  fakeSaleOrgConfig, //.copyWith(languageFilter: true),
               paymentCustomerInfo: fakepaymentCustomerInformation,
               salesRepInfo: fakesalesRepInfo,
             )).thenAnswer(

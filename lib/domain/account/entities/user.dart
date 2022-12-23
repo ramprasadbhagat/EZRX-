@@ -32,7 +32,7 @@ class User with _$User {
         id: '',
         username: Username(''),
         email: EmailAddress(''),
-        fullName: const FullName(firstName: '', lastName: ''),
+        fullName: FullName.empty(),
         role: Role(id: '', name: '', type: RoleType(''), description: ''),
         customerCode: CustomerCode(''),
         userSalesOrganisations: <SalesOrganisation>[],

@@ -33,7 +33,7 @@ void main() {
   final mockShipToInfo = ShipToInfo.empty();
   final mockSelectedMaterialFilter = MaterialFilter.empty();
   final mockSalesOrganisation = SalesOrganisation(
-      salesOrg: salesOrg2601, customerInfos: <SalesOrgCustomerInfo>[]);
+      salesOrg: salesOrg2601, customerInfos: [SalesOrgCustomerInfo.empty()]);
 
   late final List<MaterialInfo> materialListMock;
   final covidMaterialState = CovidMaterialListState.initial();

@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
@@ -152,7 +153,9 @@ void main() {
             userInfo: User.empty(),
             selectedSalesOrganisation: SalesOrganisation.empty(),
             selectedCustomerCode: CustomerCodeInfo.empty(),
-            selectedShipTo: ShipToInfo.empty(),
+            selectedShipTo: ShipToInfo.empty().copyWith(
+              shipToName: ShipToName.empty(),
+            ),
           ),
         ),
       ).called(1);

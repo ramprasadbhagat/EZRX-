@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_org_ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
@@ -30,7 +31,10 @@ void main() {
   final salesOrg2601 = SalesOrg('2601');
   final mockSalesOrganisation = SalesOrganisation(
     salesOrg: salesOrg2601,
-    customerInfos: <SalesOrgCustomerInfo>[],
+    customerInfos: <SalesOrgCustomerInfo>[
+      SalesOrgCustomerInfo.empty()
+          .copyWith(shipToInfos: [SalesOrgShipToInfo.empty()])
+    ],
   );
 
   setUpAll(

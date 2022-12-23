@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -158,18 +159,59 @@ void main() {
     });
 
     testWidgets(
-      'Test Profile tile',
+      'Test Profile tile length more than or equal to 1',
+      (tester) async {
+        final expectedStates = [
+          UserState.initial().copyWith(
+            user: User.empty().copyWith(
+              id: 'testId',
+              fullName: const FullName(firstName: 'test', lastName: 'test'),
+            ),
+          ),
+        ];
+        whenListen(userBlocMock, Stream.fromIterable(expectedStates));
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        find.byKey(const Key('profileTile'));
+        expect(find.byKey(const Key('profileTile')), findsOneWidget);
+      },
+      variant: variants,
+    );
+    testWidgets(
+      'Test Profile tile returns empty name',
       (tester) async {
         final expectedStates = [
           UserState.initial().copyWith(
             userFailureOrSuccessOption: optionOf(
               _getUserFailure(variants.currentValue!),
             ),
-            user: User.empty().copyWith(id: 'testId'),
+            user: User.empty().copyWith(
+              id: 'testId',
+            ),
           ),
         ];
         whenListen(userBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getScopedWidget());
+        find.byKey(const Key('profileTile'));
+        expect(find.byKey(const Key('profileTile')), findsOneWidget);
+      },
+      variant: variants,
+    );
+
+    testWidgets(
+      'Test Profile name length in 1',
+      (tester) async {
+        final expectedStates = [
+          UserState.initial().copyWith(
+            user: User.empty().copyWith(
+              id: 'testId',
+              fullName: const FullName(firstName: 'test', lastName: 't'),
+            ),
+          ),
+        ];
+        whenListen(userBlocMock, Stream.fromIterable(expectedStates));
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
         find.byKey(const Key('profileTile'));
         expect(find.byKey(const Key('profileTile')), findsOneWidget);
       },

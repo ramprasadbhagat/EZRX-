@@ -19,9 +19,12 @@ import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_address.dart';
+import 'package:ezrxmobile/domain/account/entities/bill_to_alt_name.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/bill_to_name.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_address.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_name.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -29,6 +32,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
@@ -155,7 +159,7 @@ void main() {
   late OrderHistoryFilterBloc orderHistoryFilterBlocMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
   late TenderContractBloc tenderContractBlocMock;
-
+  late CustomerName emptyCustomerName;
   setUpAll(
     () {
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
@@ -232,11 +236,10 @@ void main() {
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
       when(() => shipToCodeBlocMock.state)
           .thenReturn(ShipToCodeState.initial());
-      when(() => eligibilityBlocMock.state)
-            .thenReturn(EligibilityState.initial().copyWith(
-              customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(status: Status('EDI'))
-        ));    
+      when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+              customerCodeInfo:
+                  CustomerCodeInfo.empty().copyWith(status: Status('EDI'))));
       when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
           user: User.empty().copyWith(
               role: Role.empty()
@@ -245,6 +248,7 @@ void main() {
           .thenReturn(SavedOrderListState.initial());
       when(() => tenderContractBlocMock.state)
           .thenReturn(TenderContractState.initial());
+      emptyCustomerName = CustomerName.empty();
     },
   );
   group(
@@ -302,6 +306,24 @@ void main() {
       testWidgets(
         'Load Order Summary and StepContinue',
         (tester) async {
+          when(() => salesOrgBlocMock.state)
+              .thenReturn(SalesOrgState.initial().copyWith(
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              salesOrg: SalesOrg('3000'),
+              enableReferenceNote: true,
+              enableVat: true,
+              enableFutureDeliveryDay: true,
+              enableMobileNumber: true,
+              enableSpecialInstructions: true,
+              disableOrderType: false,
+              enableCollectiveNumber: true,
+              enablePaymentTerms: true,
+              ponRequired: true,
+            ),
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2601'),
+            ),
+          ));
           when(() => orderSummaryBlocMock.state)
               .thenReturn(OrderSummaryState.initial().copyWith(
             step: 1,
@@ -314,7 +336,7 @@ void main() {
           final orderSummaryPage = find.byKey(const Key('orderSummaryKey'));
           expect(orderSummaryPage, findsOneWidget);
           final ediUserBanner = find.byKey(const ValueKey('EdiUserBanner'));
-          expect(ediUserBanner,findsOneWidget);
+          expect(ediUserBanner, findsOneWidget);
           final continueKey =
               find.byKey(const Key('continueButtonKey'), skipOffstage: false);
           expect(continueKey, findsNWidgets(5));
@@ -326,6 +348,33 @@ void main() {
       testWidgets(
         'test CustomerDetailsStep',
         (tester) async {
+          when(() => customerCodeBlocMock.state)
+              .thenReturn(CustomerCodeState.initial().copyWith(
+            customerCodeInfo:
+                CustomerCodeInfo.empty().copyWith(shipToInfos: <ShipToInfo>[
+              ShipToInfo.empty().copyWith(),
+            ], emailAddresses: [
+              EmailAddress('test@gmail.com')
+            ]),
+          ));
+          when(() => salesOrgBlocMock.state)
+              .thenReturn(SalesOrgState.initial().copyWith(
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              salesOrg: SalesOrg('2800'),
+              enableReferenceNote: true,
+              enableVat: true,
+              enableFutureDeliveryDay: true,
+              enableMobileNumber: true,
+              enableSpecialInstructions: true,
+              disableOrderType: false,
+              enableCollectiveNumber: true,
+              enablePaymentTerms: true,
+              ponRequired: true,
+            ),
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2601'),
+            ),
+          ));
           when(() => orderSummaryBlocMock.state)
               .thenReturn(OrderSummaryState.initial().copyWith(
             step: 1,
@@ -374,6 +423,24 @@ void main() {
       testWidgets(
         'test SoldToAddressStep',
         (tester) async {
+          when(() => salesOrgBlocMock.state)
+              .thenReturn(SalesOrgState.initial().copyWith(
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              salesOrg: SalesOrg('PH02'),
+              enableReferenceNote: true,
+              enableVat: true,
+              enableFutureDeliveryDay: true,
+              enableMobileNumber: true,
+              enableSpecialInstructions: true,
+              disableOrderType: false,
+              enableCollectiveNumber: true,
+              enablePaymentTerms: true,
+              ponRequired: true,
+            ),
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2601'),
+            ),
+          ));
           when(() => orderSummaryBlocMock.state)
               .thenReturn(OrderSummaryState.initial().copyWith(
             step: 1,
@@ -981,6 +1048,8 @@ void main() {
                       city2: 'city2',
                       street: 'street',
                     ),
+                    billToAltName: BillToAltName.empty(),
+                    billToName: BillToName.empty(),
                   ),
                 ],
                 shipToInfos: <ShipToInfo>[
