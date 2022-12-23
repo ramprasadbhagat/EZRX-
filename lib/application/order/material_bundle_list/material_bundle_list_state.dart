@@ -21,4 +21,9 @@ class MaterialBundleListState with _$MaterialBundleListState {
         nextPageIndex: 0,
         searchKey: '',
       );
+
+  List<BundleAggregate> get getSortedBundleList {
+    return List<BundleAggregate>.from(bundleList)
+      ..sort((a, b) => a.bundle.bundleCode.compareTo(b.bundle.bundleCode));
+  }
 }

@@ -89,7 +89,7 @@ class _BodyContent extends StatelessWidget {
               isLoading: state.isFetching,
               itemBuilder: (context, index, item) =>
                   _ListContent(bundleAggregate: item),
-              items: state.bundleList,
+              items: state.getSortedBundleList,
             ),
     );
   }
