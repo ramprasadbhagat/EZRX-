@@ -92,7 +92,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
 
               emit(state.copyWith(
                 isSubmitting: false,
-                showErrorMessages: true,
+                showErrorMessages: false,
                 username: Username(''),
                 password: Password.login(''),
                 authFailureOrSuccessOption: optionOf(failureOrSuccess),

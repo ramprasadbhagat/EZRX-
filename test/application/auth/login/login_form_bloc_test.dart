@@ -304,7 +304,7 @@ void main() {
         ),
         loginFormState.copyWith(
           isSubmitting: false,
-          showErrorMessages: true,
+          showErrorMessages: false,
           username: Username(''),
           password: Password.login(''),
           authFailureOrSuccessOption: optionOf(
@@ -364,7 +364,7 @@ void main() {
         ),
         loginFormState.copyWith(
           isSubmitting: false,
-          showErrorMessages: true,
+          showErrorMessages: false,
           rememberPassword: true,
           username: Username(''),
           password: Password.login(''),
