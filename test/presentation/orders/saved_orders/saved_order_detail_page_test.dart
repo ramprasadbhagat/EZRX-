@@ -140,10 +140,13 @@ void main() {
 
   group('Saved Order Detail Screen', () {
     testWidgets(
-      'Saved Order Detail with all SaveOrderBounsTile',
+      'Saved Order Detail with all SaveOrderBounsTile and non empty description',
       (tester) async {
         final saveOrder = SavedOrder.empty().copyWith(items: [
-          orderMock.items[0].copyWith(bonuses: [MaterialItemBonus.empty()])
+          orderMock.items[0].copyWith(
+            bonuses: [MaterialItemBonus.empty()],
+            materialDescription: 'non-empty description',
+          )
         ]);
 
         await tester.pumpWidget(savedOrderDetailPage(

@@ -92,7 +92,22 @@ void main() {
           zdp5RemainingQuota: '0',
         )
   ];
-
+  final fakeQueryResponseWhenEnableZDP5WithOverride = [
+    MaterialPriceDetail.empty().copyWith.price(
+        materialNumber: MaterialNumber('fake-material-1'),
+        finalPrice: MaterialPrice(1),
+        zdp8Override: Zdp8OverrideValue(1),
+        priceOverride: PriceOverrideValue(1),
+        zdp5MaxQuota: '3'),
+  ];
+  final fakeQueryWithOverride = [
+    MaterialQueryInfo.empty().copyWith(
+      value: MaterialNumber('fake-material-1'),
+      qty: MaterialQty(1),
+      zdp8Override: 1,
+      priceOverride: 1,
+    ),
+  ];
   setUpAll(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
@@ -219,5 +234,45 @@ void main() {
         );
       });
     });
+
+    test('Get MaterialDetails from remote success ZDP8 override',
+        () async {
+          when(
+                () => remoteDataSourceMock.getMaterialDetail(
+              salesOrgCode: 'fake-saleOrg',
+              customerCode: 'fake-customer-code',
+              shipToCode: 'fake-ship-to-code',
+              language: '',
+              queryString: [
+                {
+                  'MaterialNumber': 'fake-material-1',
+                  'ZDP8': 1,
+                  'ZPO1': 1,
+                },
+              ],
+            ),
+          ).thenAnswer(
+                (invocation) async => fakeQueryResponseWhenEnableZDP5WithOverride,
+          );
+
+          final result = await repository.getMaterialDetail(
+            salesOrganisation: fakeSaleOrg,
+            salesOrganisationConfigs: fakeSaleOrgConfig,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToCodeInfo: fakeShipToInfo,
+            materialQueryList: fakeQueryWithOverride,
+          );
+
+          expect(result.isRight(), true);
+
+          await result.fold((l) async {}, (r) async {
+            expect(
+              r,
+              {
+                fakeQueryWithOverride[0]: fakeQueryResponseWhenEnableZDP5WithOverride[0],
+              },
+            );
+          });
+        });
   });
 }

@@ -798,7 +798,7 @@ void main() {
     // });
 
     //Test for Pricing
-    testWidgets('show list price and unit price', (tester) async {
+   testWidgets('show list price and unit price', (tester) async {
       final expectedState = [
         MaterialListState.initial().copyWith(isFetching: true),
         MaterialListState.initial().copyWith(
@@ -806,7 +806,9 @@ void main() {
           isFetching: false,
           nextPageIndex: 2,
           materialList: <MaterialInfo>[
-            MaterialInfo.empty().copyWith(materialNumber: fakeMaterialNumber)
+            MaterialInfo.empty().copyWith(
+                materialNumber: fakeMaterialNumber,
+                materialDescription: fakematerialInfo.materialDescription)
           ],
         )
       ];
@@ -826,6 +828,7 @@ void main() {
       await tester
           .pumpWidget(getScopedWidget(MaterialListPage(addToCart: () {})));
       await tester.pump();
+
       final materialList = find.byKey(const Key('scrollList'));
       expect(materialList, findsOneWidget);
       await tester.drag(materialList, const Offset(0.0, -300));
@@ -833,12 +836,49 @@ void main() {
       final listContent = find.byKey(Key(
           'materialOption${materialListBlocMock.state.materialList.first.materialNumber.getOrCrash()}'));
       expect(listContent, findsOneWidget);
+
+      final priceAggregate = PriceAggregate.empty().copyWith(
+        materialInfo: materialListBlocMock.state.materialList.first,
+        salesOrgConfig: salesOrgBlocMock.state.configs.copyWith(
+          enableTaxClassification: true,
+          enableTaxDisplay: true,
+          currency: Currency('vnd'),
+        ),
+      );
+      final taxDetailsText = find.textContaining('Total Tax: ');
+      final taxClassification = find.textContaining(
+          MaterialTaxClassification('taxClassification').getOrCrash());
+      if (priceAggregate.materialInfo.materialDescription.isNotEmpty) {
+        final mat = find.textContaining(
+            materialListBlocMock.state.materialList.first.materialDescription);
+        expect(mat, findsOneWidget);
+      }
+      if (priceAggregate.taxDetails.isNotEmpty) {
+        if (salesOrgBlocMock.state.configs.enableTaxDisplay) {
+          expect(taxDetailsText, findsOneWidget);
+        }
+      }
       final listPrice = find.textContaining('List Price: '.tr());
       if (salesOrgBlocMock.state.configs.enableListPrice) {
         expect(listPrice, findsOneWidget);
       }
       final unitPrice = find.textContaining('Unit Price: '.tr());
       expect(unitPrice, findsOneWidget);
+
+      final priceAggregatetest = PriceAggregate.empty().copyWith(
+        materialInfo: materialListBlocMock.state.materialList.first,
+        salesOrgConfig: salesOrgBlocMock.state.configs.copyWith(
+          enableTaxClassification: true,
+          enableTaxDisplay: true,
+          currency: Currency(''),
+        ),
+      );
+      if (priceAggregatetest.taxDetails.isNotEmpty) {
+        if (salesOrgBlocMock.state.configs.enableTaxDisplay &&
+            salesOrgBlocMock.state.configs.enableTaxClassification) {
+          expect(taxClassification, findsOneWidget);
+        }
+      }
     });
 
     testWidgets('zmg discount lable', (tester) async {

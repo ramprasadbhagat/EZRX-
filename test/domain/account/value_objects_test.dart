@@ -80,6 +80,7 @@ void main() {
         final salesOrg = SalesOrg(input);
         final result = salesOrg.country;
         expect(result, 'TW');
+        expect(salesOrg.isTW, true);
       },
     );
 
@@ -1286,5 +1287,27 @@ void main() {
       final result = salesOrg.contactPersonName;
       expect(result, 'Ty TNHH Thương Mại và Dược Phẩm Sang');
     });
+  });
+
+  group('Oos value object', () {
+    test(
+      'should return true when value is 0',
+      () async {
+        const input = 0;
+        final oosValue = OosValue(input);
+        final result = oosValue.isOosValueZero;
+        expect(result, true);
+      },
+    );
+
+    test(
+      'should return false when value is not 0',
+      () async {
+        const input = 1;
+        final oosValue = OosValue(input);
+        final result = oosValue.isOosValueZero;
+        expect(result, false);
+      },
+    );
   });
 }

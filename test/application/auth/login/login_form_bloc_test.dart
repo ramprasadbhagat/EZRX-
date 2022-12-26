@@ -18,6 +18,7 @@ void main() {
   final fakeJWT = JWT('fake-success');
 
   var loginFormState = LoginFormState.initial();
+  final credMockEmpty = Cred.empty();
 
   final credMock = Cred(
     username: fakeUser,
@@ -29,7 +30,7 @@ void main() {
       build: () => LoginFormBloc(authRepository: authRepoMock),
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
-          (invocation) async => const Left(
+              (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
@@ -63,7 +64,7 @@ void main() {
       build: () => LoginFormBloc(authRepository: authRepoMock),
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
-            (invocation) async => const Left(ApiFailure.accountLocked()));
+                (invocation) async => const Left(ApiFailure.accountLocked()));
         when(() => authRepoMock.canBeAuthenticatedAndBioAvailable())
             .thenAnswer((invocation) async => const Right(false));
       },
@@ -74,11 +75,25 @@ void main() {
     );
 
     blocTest(
+      'Create bloc and load last saved cred fail',
+      build: () => LoginFormBloc(authRepository: authRepoMock),
+      setUp: () {
+        when(() => authRepoMock.loadCredential())
+            .thenAnswer((invocation) async => Right(credMockEmpty));
+        when(() => authRepoMock.canBeAuthenticatedAndBioAvailable())
+            .thenAnswer((invocation) async => const Right(false));
+      },
+      act: (LoginFormBloc bloc) =>
+          bloc.add(const LoginFormEvent.loadLastSavedCred()),
+      expect: () => [],
+    );
+
+    blocTest(
       'Change username',
       build: () => LoginFormBloc(authRepository: authRepoMock),
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
-          (invocation) async => const Left(
+              (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
@@ -98,7 +113,7 @@ void main() {
       build: () => LoginFormBloc(authRepository: authRepoMock),
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
-          (invocation) async => const Left(
+              (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
@@ -118,7 +133,7 @@ void main() {
       build: () => LoginFormBloc(authRepository: authRepoMock),
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
-          (invocation) async => const Left(
+              (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
@@ -138,7 +153,7 @@ void main() {
       build: () => LoginFormBloc(authRepository: authRepoMock),
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
-          (invocation) async => const Left(
+              (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
@@ -158,13 +173,13 @@ void main() {
       build: () => LoginFormBloc(authRepository: authRepoMock),
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
-          (invocation) async => const Left(
+              (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
 
         when(() => authRepoMock.loginWithOkta()).thenAnswer(
-          (invocation) async => const Left(
+              (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
@@ -193,15 +208,15 @@ void main() {
       build: () => LoginFormBloc(authRepository: authRepoMock),
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
-          (invocation) async => const Left(
+              (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
 
         when(
-          () => authRepoMock.loginWithOkta(),
+              () => authRepoMock.loginWithOkta(),
         ).thenAnswer(
-          (invocation) async => const Left(
+              (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
@@ -230,15 +245,15 @@ void main() {
       build: () => LoginFormBloc(authRepository: authRepoMock),
       setUp: () {
         when(() => authRepoMock.loadCredential()).thenAnswer(
-          (invocation) async => const Left(
+              (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
 
         when(() =>
-                authRepoMock.login(username: fakeUser, password: fakePassword))
+            authRepoMock.login(username: fakeUser, password: fakePassword))
             .thenAnswer(
-          (invocation) async => const Left(
+              (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
@@ -272,23 +287,23 @@ void main() {
       setUp: () {
         loginFormState = LoginFormState.initial();
         when(() => authRepoMock.loadCredential()).thenAnswer(
-          (invocation) async => const Left(
+              (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
 
         when(() =>
-                authRepoMock.login(username: fakeUser, password: fakePassword))
+            authRepoMock.login(username: fakeUser, password: fakePassword))
             .thenAnswer(
-          (invocation) async => Right(Login(jwt: fakeJWT)),
+              (invocation) async => Right(Login(jwt: fakeJWT)),
         );
 
         when(() => authRepoMock.storeJWT(jwt: fakeJWT)).thenAnswer(
-          (invocation) async => const Right(unit),
+              (invocation) async => const Right(unit),
         );
 
         when(() => authRepoMock.deleteCredential()).thenAnswer(
-          (invocation) async => const Right(unit),
+              (invocation) async => const Right(unit),
         );
       },
       act: (LoginFormBloc bloc) => bloc
@@ -320,28 +335,28 @@ void main() {
       setUp: () {
         loginFormState = LoginFormState.initial();
         when(() => authRepoMock.loadCredential()).thenAnswer(
-          (invocation) async => const Left(
+              (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
 
         when(() =>
-                authRepoMock.login(username: fakeUser, password: fakePassword))
+            authRepoMock.login(username: fakeUser, password: fakePassword))
             .thenAnswer(
-          (invocation) async => Right(Login(jwt: fakeJWT)),
+              (invocation) async => Right(Login(jwt: fakeJWT)),
         );
 
         when(() => authRepoMock.storeJWT(jwt: fakeJWT)).thenAnswer(
-          (invocation) async => const Right(unit),
+              (invocation) async => const Right(unit),
         );
 
         when(() => authRepoMock.deleteCredential()).thenAnswer(
-          (invocation) async => const Right(unit),
+              (invocation) async => const Right(unit),
         );
 
         when(() => authRepoMock.storeCredential(
             username: fakeUser, password: fakePassword)).thenAnswer(
-          (invocation) async => const Right(unit),
+              (invocation) async => const Right(unit),
         );
       },
       act: (LoginFormBloc bloc) => bloc
@@ -381,18 +396,18 @@ void main() {
       setUp: () {
         loginFormState = LoginFormState.initial();
         when(() => authRepoMock.loadCredential()).thenAnswer(
-          (invocation) async => const Left(
+              (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
         );
 
         when(() => authRepoMock.login(
             username: Username(''), password: fakePassword)).thenAnswer(
-          (invocation) async => Right(Login(jwt: fakeJWT)),
+              (invocation) async => Right(Login(jwt: fakeJWT)),
         );
       },
       act: (LoginFormBloc bloc) =>
-          bloc..add(const LoginFormEvent.loginWithEmailAndPasswordPressed()),
+      bloc..add(const LoginFormEvent.loginWithEmailAndPasswordPressed()),
       expect: () => [
         loginFormState.copyWith(
           username: Username(''),

@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/aup_tc/entities/tncdate.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/repository/aup_tc_repository.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
@@ -29,6 +30,7 @@ void main() {
   late User user;
   late SettingTc settingTc;
   late SalesOrganisation salesOrganisation;
+  late TncDate tncDate;
   // late TncDate tncDate;
   // late Role role;
 
@@ -36,13 +38,14 @@ void main() {
     config = Config()..appFlavor = Flavor.uat;
     aupTcRepository = MockAupTcRepository();
     aupTcRepository = MockAupTcRepository();
+    tncDate = TncDate.empty();
     final TokenStorage tokenStorage = MockTokenStorage();
     when(() => tokenStorage.get())
         .thenAnswer((invocation) async => JWTDto(access: ''));
     user = await UserLocalDataSource(tokenStorage: tokenStorage).getUser();
     settingTc = SettingTc(
         acceptPrivacyPolicy: false,
-        acceptPrivacyPolicyTime: DateTime.parse('1970-01-01 00:00:00'),
+        acceptPrivacyPolicyTime: tncDate.date,
         privacyPolicyAcceptedPlatform: 'Mobile');
     // tncDate = TncDate(date: DateTime.parse('1970-01-01 00:00:00'));
     // role = Role.empty().copyWith(type: RoleType('internal_sales_rep'));
@@ -68,8 +71,7 @@ void main() {
               user.copyWith(
                 settingTc: settingTc.copyWith(
                     acceptPrivacyPolicy: false,
-                    acceptPrivacyPolicyTime:
-                        DateTime.parse('1970-01-01 00:00:00'),
+                    acceptPrivacyPolicyTime: tncDate.date,
                     privacyPolicyAcceptedPlatform: 'Mobile'),
               ),
               salesOrganisation.salesOrg));
@@ -118,7 +120,7 @@ void main() {
                 settingTc: settingTc.copyWith(
                     acceptPrivacyPolicy: false,
                     acceptPrivacyPolicyTime:
-                        DateTime.parse('1970-01-01 00:00:00'),
+                        tncDate.date,
                     privacyPolicyAcceptedPlatform: 'Mobile'),
               ),
               SalesOrg('3070')));
@@ -144,7 +146,7 @@ void main() {
                 settingTc: settingTc.copyWith(
                     acceptPrivacyPolicy: false,
                     acceptPrivacyPolicyTime:
-                        DateTime.parse('1970-01-01 00:00:00'),
+                        tncDate.date,
                     privacyPolicyAcceptedPlatform: 'Mobile'),
               ),
               SalesOrg('2800')));
@@ -170,7 +172,7 @@ void main() {
                 settingTc: settingTc.copyWith(
                     acceptPrivacyPolicy: false,
                     acceptPrivacyPolicyTime:
-                        DateTime.parse('1970-01-01 00:00:00'),
+                        tncDate.date,
                     privacyPolicyAcceptedPlatform: 'Mobile'),
               ),
               SalesOrg('2902')));
@@ -196,7 +198,7 @@ void main() {
                 settingTc: settingTc.copyWith(
                     acceptPrivacyPolicy: false,
                     acceptPrivacyPolicyTime:
-                        DateTime.parse('1970-01-01 00:00:00'),
+                        tncDate.date,
                     privacyPolicyAcceptedPlatform: 'Mobile'),
               ),
               SalesOrg('2201')));
@@ -222,7 +224,7 @@ void main() {
                 settingTc: settingTc.copyWith(
                     acceptPrivacyPolicy: false,
                     acceptPrivacyPolicyTime:
-                        DateTime.parse('1970-01-01 00:00:00'),
+                        tncDate.date,
                     privacyPolicyAcceptedPlatform: 'Mobile'),
               ),
               SalesOrg('1500')));
