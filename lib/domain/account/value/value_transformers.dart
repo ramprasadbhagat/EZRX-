@@ -222,7 +222,38 @@ bool roleCanLoginOnBehalf(String roleType) {
   }
 }
 
-String roleUserType(String roleType) {
+String roleNameToRoleType(String roleName) {
+  // use map insted of switch statement to reduce cyclomatic complexity
+  final roleNameToRoleTypeMap = {
+    'Public': 'public',
+    'ROOT Admin': 'root_admin',
+    'ZP Admin': 'zp_admin',
+    'Internal Sales Rep': 'internal_sales_rep',
+    'Client Admin': 'client_admin',
+    'Return Requestor': 'return_requestor',
+    'External Sales Rep': 'external_sales_rep',
+    'Client User': 'client_user',
+    'Return Admin': 'return_admin',
+    'Return Approver': 'return_approver',
+    'ZP Admin Attachments': 'zp_admin_attachments',
+  };
+
+  return roleNameToRoleTypeMap[roleName] ?? 'Unknown';
+}
+
+bool roleCanLoginOnBehalfByZPAdmin(String userRoleType) {
+  switch (userRoleType) {
+    case 'client_admin':
+    case 'client_user':
+    case 'internal_sales_rep':
+    case 'external_sales_rep':
+      return true;
+    default:
+      return false;
+  }
+}
+
+String logInUserType(String roleType) {
   switch (roleType) {
     case 'internal_sales_rep':
     case 'external_sales_rep':

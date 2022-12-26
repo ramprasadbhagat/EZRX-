@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/entities/cred.dart';
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_auth_repository.dart';
@@ -123,6 +124,34 @@ class AuthRepository implements IAuthRepository {
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
+  }
+
+  @override
+  Future<Either<ApiFailure, Unit>> isEligibleProxyLogin({
+    required User user,
+    required JWT jwt,
+  }) async {
+    // 1.Root admin can proxy login any account
+    // 2.ZP admin can proxy login same salesOrg's client and salesReps
+
+    if (user.role.type.isRootAdmin) return const Right(unit);
+
+    if (!user.role.type.isZPAdmin) {
+      return const Left(ApiFailure.proxyLoginRolePermissionNotMatch());
+    }
+
+    if (!jwt.roleName.isEligibleLoginRoleForZPAdmin) {
+      return const Left(ApiFailure.proxyLoginZPTargetRoleNotMatch());
+    }
+
+    final salesOrgMatches = user.userSalesOrganisations.any((element) =>
+        jwt.salesOrgs.contains(element.salesOrg.value.getOrElse(() => '')));
+
+    if (!salesOrgMatches) {
+      return const Left(ApiFailure.proxyLoginZPSalesOrgNotMatch());
+    }
+
+    return const Right(unit);
   }
 
   @override

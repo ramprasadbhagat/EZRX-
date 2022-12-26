@@ -19,19 +19,19 @@ mixin _$ProxyLoginFormEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String usernameStr) usernameChanged,
-    required TResult Function() loginWithADButtonPressed,
+    required TResult Function(User user) loginWithADButtonPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function()? loginWithADButtonPressed,
+    TResult? Function(User user)? loginWithADButtonPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String usernameStr)? usernameChanged,
-    TResult Function()? loginWithADButtonPressed,
+    TResult Function(User user)? loginWithADButtonPressed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -142,7 +142,7 @@ class _$_UsernameChanged implements _UsernameChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String usernameStr) usernameChanged,
-    required TResult Function() loginWithADButtonPressed,
+    required TResult Function(User user) loginWithADButtonPressed,
   }) {
     return usernameChanged(usernameStr);
   }
@@ -151,7 +151,7 @@ class _$_UsernameChanged implements _UsernameChanged {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function()? loginWithADButtonPressed,
+    TResult? Function(User user)? loginWithADButtonPressed,
   }) {
     return usernameChanged?.call(usernameStr);
   }
@@ -160,7 +160,7 @@ class _$_UsernameChanged implements _UsernameChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String usernameStr)? usernameChanged,
-    TResult Function()? loginWithADButtonPressed,
+    TResult Function(User user)? loginWithADButtonPressed,
     required TResult orElse(),
   }) {
     if (usernameChanged != null) {
@@ -218,6 +218,10 @@ abstract class _$$_LoginWithADButtonPressedCopyWith<$Res> {
           _$_LoginWithADButtonPressed value,
           $Res Function(_$_LoginWithADButtonPressed) then) =
       __$$_LoginWithADButtonPressedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({User user});
+
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -227,55 +231,87 @@ class __$$_LoginWithADButtonPressedCopyWithImpl<$Res>
   __$$_LoginWithADButtonPressedCopyWithImpl(_$_LoginWithADButtonPressed _value,
       $Res Function(_$_LoginWithADButtonPressed) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = null,
+  }) {
+    return _then(_$_LoginWithADButtonPressed(
+      null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_LoginWithADButtonPressed implements _LoginWithADButtonPressed {
-  const _$_LoginWithADButtonPressed();
+  const _$_LoginWithADButtonPressed(this.user);
+
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'ProxyLoginFormEvent.loginWithADButtonPressed()';
+    return 'ProxyLoginFormEvent.loginWithADButtonPressed(user: $user)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoginWithADButtonPressed);
+            other is _$_LoginWithADButtonPressed &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, user);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_LoginWithADButtonPressedCopyWith<_$_LoginWithADButtonPressed>
+      get copyWith => __$$_LoginWithADButtonPressedCopyWithImpl<
+          _$_LoginWithADButtonPressed>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String usernameStr) usernameChanged,
-    required TResult Function() loginWithADButtonPressed,
+    required TResult Function(User user) loginWithADButtonPressed,
   }) {
-    return loginWithADButtonPressed();
+    return loginWithADButtonPressed(user);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String usernameStr)? usernameChanged,
-    TResult? Function()? loginWithADButtonPressed,
+    TResult? Function(User user)? loginWithADButtonPressed,
   }) {
-    return loginWithADButtonPressed?.call();
+    return loginWithADButtonPressed?.call(user);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String usernameStr)? usernameChanged,
-    TResult Function()? loginWithADButtonPressed,
+    TResult Function(User user)? loginWithADButtonPressed,
     required TResult orElse(),
   }) {
     if (loginWithADButtonPressed != null) {
-      return loginWithADButtonPressed();
+      return loginWithADButtonPressed(user);
     }
     return orElse();
   }
@@ -315,7 +351,13 @@ class _$_LoginWithADButtonPressed implements _LoginWithADButtonPressed {
 }
 
 abstract class _LoginWithADButtonPressed implements ProxyLoginFormEvent {
-  const factory _LoginWithADButtonPressed() = _$_LoginWithADButtonPressed;
+  const factory _LoginWithADButtonPressed(final User user) =
+      _$_LoginWithADButtonPressed;
+
+  User get user;
+  @JsonKey(ignore: true)
+  _$$_LoginWithADButtonPressedCopyWith<_$_LoginWithADButtonPressed>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

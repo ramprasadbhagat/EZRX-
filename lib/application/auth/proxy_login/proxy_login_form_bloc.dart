@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_auth_repository.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -37,21 +38,47 @@ class ProxyLoginFormBloc
             isSubmitting: true,
             authFailureOrSuccessOption: none(),
           ));
-          final failureOrSuccess = await authRepository.proxyLogin(
+          final proxyLoginFailureOrSuccess = await authRepository.proxyLogin(
             username: state.username,
           );
-          await failureOrSuccess.fold(
-            (_) {},
+          await proxyLoginFailureOrSuccess.fold(
+            (_) {
+              emit(
+                state.copyWith(
+                  isSubmitting: false,
+                  showErrorMessages: true,
+                  authFailureOrSuccessOption: optionOf(
+                    proxyLoginFailureOrSuccess,
+                  ),
+                ),
+              );
+            },
             (login) async {
-              await authRepository.logout();
-              await authRepository.storeJWT(jwt: login.jwt);
+              final isEligibleProxyLoginFailureOrSuccess =
+                  await authRepository.isEligibleProxyLogin(
+                user: e.user,
+                jwt: login.jwt,
+              );
+
+              await isEligibleProxyLoginFailureOrSuccess.fold(
+                (_) {},
+                (success) async {
+                  await authRepository.logout();
+                  await authRepository.storeJWT(jwt: login.jwt);
+                },
+              );
+
+              emit(
+                state.copyWith(
+                  isSubmitting: false,
+                  showErrorMessages: true,
+                  authFailureOrSuccessOption: optionOf(
+                    isEligibleProxyLoginFailureOrSuccess,
+                  ),
+                ),
+              );
             },
           );
-          emit(state.copyWith(
-            isSubmitting: false,
-            showErrorMessages: true,
-            authFailureOrSuccessOption: optionOf(failureOrSuccess),
-          ));
         } else {
           emit(state.copyWith(showErrorMessages: true));
         }

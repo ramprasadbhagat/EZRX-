@@ -17,9 +17,10 @@ class LoginOnBehalfPage extends StatelessWidget {
       appBar: AppBar(title: const Text('Login on behalf').tr()),
       body: SafeArea(
         child: BlocConsumer<ProxyLoginFormBloc, ProxyLoginFormState>(
-          listenWhen: (previous, current) =>
-              previous.authFailureOrSuccessOption !=
-              current.authFailureOrSuccessOption,
+          listenWhen: (previous, current) {
+              return previous.authFailureOrSuccessOption !=
+              current.authFailureOrSuccessOption;
+              },
           listener: (context, state) {
             state.authFailureOrSuccessOption.fold(
               () {},
@@ -121,7 +122,9 @@ class _UsernameFieldState extends State<UsernameField> {
               if (!state.isSubmitting) {
                 FocusScope.of(context).unfocus();
                 context.read<ProxyLoginFormBloc>().add(
-                      const ProxyLoginFormEvent.loginWithADButtonPressed(),
+                      ProxyLoginFormEvent.loginWithADButtonPressed(
+                        context.read<UserBloc>().state.user,
+                      ),
                     );
               }
             },
@@ -156,7 +159,10 @@ class LoginButton extends StatelessWidget {
                 : () {
                     FocusScope.of(context).unfocus();
                     context.read<ProxyLoginFormBloc>().add(
-                          const ProxyLoginFormEvent.loginWithADButtonPressed(),
+                          ProxyLoginFormEvent.loginWithADButtonPressed(context
+                              .read<UserBloc>()
+                              .state
+                              .user),
                         );
                   },
             child: const Text('Login').tr(),

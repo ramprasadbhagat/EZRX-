@@ -223,7 +223,7 @@ void main() {
         UserState.initial().copyWith(
           user: User.empty().copyWith(
             id: 'testId',
-            role: Role.empty().copyWith(type: RoleType('zp_admin')),
+            role: Role.empty().copyWith(type: RoleType('root_admin')),
           ),
         ),
       ];

@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/auth/value/value_validators.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
@@ -124,12 +125,21 @@ class JWT extends ValueObject<String> {
   Duration get remainingTime {
     return getJWTRemainingTime(value.getOrElse(() => ''));
   }
+
   String get userId {
     return getJwtUserId(value.getOrElse(() => ''));
   }
 
   bool get isExpired {
     return isJWTExpired(value.getOrElse(() => ''));
+  }
+
+  List get salesOrgs {
+    return getJWTSalesOrg(value.getOrElse(() => ''));
+  }
+
+  RoleName get roleName {
+    return getJWTRoleName(value.getOrElse(() => ''));
   }
 
   const JWT._(this.value);

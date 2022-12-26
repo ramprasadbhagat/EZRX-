@@ -20,6 +20,13 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.tokenExpired() = _TokenExpired;
   const factory ApiFailure.authenticationFailed() = _AuthenticationFailed;
 
+  const factory ApiFailure.proxyLoginRolePermissionNotMatch() =
+      _ProxyLoginRolePermissionNotMatch;
+  const factory ApiFailure.proxyLoginZPTargetRoleNotMatch() =
+      _ProxyLoginZPTargetRoleNotMatch;
+  const factory ApiFailure.proxyLoginZPSalesOrgNotMatch() =
+      _ProxyLoginZPSalesOrgNotMatch;
+
   // Bio failure
   const factory ApiFailure.deviceNotSupportBiometirc() =
       _DeviceNotSupportBiometirc;
@@ -48,6 +55,12 @@ extension ApiFailureExt on ApiFailure {
       noSupportedBiometrics: (_) => 'No supported biometric',
       invalidBiometirc: (_) => 'Incorrect biometric',
       priceOverrideNotFound: (_) => 'Price override not found!',
+      proxyLoginRolePermissionNotMatch: (_) =>
+          'Only Root Admin and ZP Admin can login on behalf',
+      proxyLoginZPSalesOrgNotMatch: (_) =>
+          'ZP Admin can only login on behalf of users from the same Sales Org',
+      proxyLoginZPTargetRoleNotMatch: (_) =>
+          'ZP Admin can only login on behalf of Sales Rep and Customer users',
     );
 
     return failureMessage;

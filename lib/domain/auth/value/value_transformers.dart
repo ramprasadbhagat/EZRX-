@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+
 Map<String, dynamic> getJWTPayload(String token) {
   final splitToken = token.split('.'); // Split the token by '.'
   if (splitToken.length != 3) {
@@ -52,9 +54,9 @@ Duration getJWTRemainingTime(String token) {
 }
 
 String getJwtUserId(String token) {
-   if (token.isEmpty) return '';
+  if (token.isEmpty) return '';
   final decodedToken = getJWTPayload(token);
-  
+
   return decodedToken['id'].toString();
 }
 
@@ -64,4 +66,18 @@ bool isJWTExpired(String token) {
   final expirationDate = getJWTExpirationDate(token);
 
   return DateTime.now().isAfter(expirationDate);
+}
+
+List getJWTSalesOrg(String token) {
+  if (token.isEmpty) [];
+  final payload = getJWTPayload(token);
+
+  return payload['salesOrgs'];
+}
+
+RoleName getJWTRoleName(String token) {
+  if (token.isEmpty) [];
+  final payload = getJWTPayload(token);
+
+  return RoleName(payload['role']);
 }

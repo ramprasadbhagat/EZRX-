@@ -114,7 +114,7 @@ class RoleType extends ValueObject<String> {
   }
 
   String get loginUserType {
-    return roleUserType(value.getOrElse(() => ''));
+    return logInUserType(value.getOrElse(() => ''));
   }
 
   bool get isSalesRep {
@@ -129,7 +129,38 @@ class RoleType extends ValueObject<String> {
     return loginUserType == 'client';
   }
 
+  bool get isZPAdmin {
+    return value.getOrElse(() => '') == 'zp_admin';
+  }
+
+  bool get isRootAdmin {
+    return value.getOrElse(() => '') == 'root_admin';
+  }
+
+  bool get isEligibleLoginRoleForZPAdmin {
+    return roleCanLoginOnBehalfByZPAdmin(value.getOrElse(() => ''));
+  }
+
   const RoleType._(this.value);
+}
+
+class RoleName extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory RoleName(String input) {
+    return RoleName._(validateStringNotEmpty(input));
+  }
+
+  String get getRoleType {
+    return roleNameToRoleType(value.getOrElse(() => ''));
+  }
+
+  bool get isEligibleLoginRoleForZPAdmin {
+    return roleCanLoginOnBehalfByZPAdmin(getRoleType);
+  }
+
+  const RoleName._(this.value);
 }
 
 class Currency extends ValueObject<String> {

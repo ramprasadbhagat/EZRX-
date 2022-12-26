@@ -4,6 +4,6 @@ part of 'proxy_login_form_bloc.dart';
 class ProxyLoginFormEvent with _$ProxyLoginFormEvent {
   const factory ProxyLoginFormEvent.usernameChanged(String usernameStr) =
       _UsernameChanged;
-  const factory ProxyLoginFormEvent.loginWithADButtonPressed() =
+  const factory ProxyLoginFormEvent.loginWithADButtonPressed(User user) =
       _LoginWithADButtonPressed;
 }
