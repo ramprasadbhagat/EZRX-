@@ -50,6 +50,8 @@ class UserDto with _$UserDto {
         required bool hasBonusOverride,
     @JsonKey(name: 'disableCreateOrder', defaultValue: false)
         required bool disableCreateOrder,
+    @JsonKey(name: 'hasPriceOverride', defaultValue: false)
+        required bool hasPriceOverride,
   }) = _UserDto;
 
   factory UserDto.fromDomain(User user) {
@@ -73,6 +75,7 @@ class UserDto with _$UserDto {
           user.settingTc.privacyPolicyAcceptedPlatform,
       hasBonusOverride: user.hasBonusOverride,
       disableCreateOrder: user.disableCreateOrder,
+      hasPriceOverride: user.hasPriceOverride,
     );
   }
   static const emptyUserDto = UserDto(
@@ -92,6 +95,7 @@ class UserDto with _$UserDto {
     username: '',
     userSalesOrganisations: [],
     disableCreateOrder: false,
+    hasPriceOverride: false,
   );
   User toDomain() {
     return User(
@@ -120,6 +124,7 @@ class UserDto with _$UserDto {
       enableOrderType: enableOrderType,
       hasBonusOverride: hasBonusOverride,
       disableCreateOrder: disableCreateOrder,
+      hasPriceOverride: hasPriceOverride,
     );
   }
 

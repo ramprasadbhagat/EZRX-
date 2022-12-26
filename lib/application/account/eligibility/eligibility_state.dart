@@ -139,4 +139,7 @@ class EligibilityState with _$EligibilityState {
 
   bool get isZDP8Override =>
       user.role.type.isSalesRep && salesOrgConfigs.enableZDP8Override;
+  bool get isPriceOverrideEnable => user.role.type.isSalesRep
+      ? user.hasPriceOverride
+      : salesOrgConfigs.priceOverride;
 }

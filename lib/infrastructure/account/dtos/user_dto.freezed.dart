@@ -60,6 +60,8 @@ mixin _$UserDto {
   bool get hasBonusOverride => throw _privateConstructorUsedError;
   @JsonKey(name: 'disableCreateOrder', defaultValue: false)
   bool get disableCreateOrder => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hasPriceOverride', defaultValue: false)
+  bool get hasPriceOverride => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -106,7 +108,9 @@ abstract class $UserDtoCopyWith<$Res> {
       @JsonKey(name: 'hasBonusOverride', defaultValue: false)
           bool hasBonusOverride,
       @JsonKey(name: 'disableCreateOrder', defaultValue: false)
-          bool disableCreateOrder});
+          bool disableCreateOrder,
+      @JsonKey(name: 'hasPriceOverride', defaultValue: false)
+          bool hasPriceOverride});
 
   $RoleDtoCopyWith<$Res> get role;
 }
@@ -141,6 +145,7 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
     Object? privacyPolicyAcceptedPlatform = null,
     Object? hasBonusOverride = null,
     Object? disableCreateOrder = null,
+    Object? hasPriceOverride = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -211,6 +216,10 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
           ? _value.disableCreateOrder
           : disableCreateOrder // ignore: cast_nullable_to_non_nullable
               as bool,
+      hasPriceOverride: null == hasPriceOverride
+          ? _value.hasPriceOverride
+          : hasPriceOverride // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -265,7 +274,9 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       @JsonKey(name: 'hasBonusOverride', defaultValue: false)
           bool hasBonusOverride,
       @JsonKey(name: 'disableCreateOrder', defaultValue: false)
-          bool disableCreateOrder});
+          bool disableCreateOrder,
+      @JsonKey(name: 'hasPriceOverride', defaultValue: false)
+          bool hasPriceOverride});
 
   @override
   $RoleDtoCopyWith<$Res> get role;
@@ -298,6 +309,7 @@ class __$$_UserDtoCopyWithImpl<$Res>
     Object? privacyPolicyAcceptedPlatform = null,
     Object? hasBonusOverride = null,
     Object? disableCreateOrder = null,
+    Object? hasPriceOverride = null,
   }) {
     return _then(_$_UserDto(
       id: null == id
@@ -368,6 +380,10 @@ class __$$_UserDtoCopyWithImpl<$Res>
           ? _value.disableCreateOrder
           : disableCreateOrder // ignore: cast_nullable_to_non_nullable
               as bool,
+      hasPriceOverride: null == hasPriceOverride
+          ? _value.hasPriceOverride
+          : hasPriceOverride // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -410,7 +426,9 @@ class _$_UserDto extends _UserDto {
       @JsonKey(name: 'hasBonusOverride', defaultValue: false)
           required this.hasBonusOverride,
       @JsonKey(name: 'disableCreateOrder', defaultValue: false)
-          required this.disableCreateOrder})
+          required this.disableCreateOrder,
+      @JsonKey(name: 'hasPriceOverride', defaultValue: false)
+          required this.hasPriceOverride})
       : _userSalesOrganisations = userSalesOrganisations,
         super._();
 
@@ -477,10 +495,13 @@ class _$_UserDto extends _UserDto {
   @override
   @JsonKey(name: 'disableCreateOrder', defaultValue: false)
   final bool disableCreateOrder;
+  @override
+  @JsonKey(name: 'hasPriceOverride', defaultValue: false)
+  final bool hasPriceOverride;
 
   @override
   String toString() {
-    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, acceptPrivacyPolicyTime: $acceptPrivacyPolicyTime, privacyPolicyAcceptedPlatform: $privacyPolicyAcceptedPlatform, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder)';
+    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, acceptPrivacyPolicyTime: $acceptPrivacyPolicyTime, privacyPolicyAcceptedPlatform: $privacyPolicyAcceptedPlatform, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, hasPriceOverride: $hasPriceOverride)';
   }
 
   @override
@@ -521,7 +542,9 @@ class _$_UserDto extends _UserDto {
             (identical(other.hasBonusOverride, hasBonusOverride) ||
                 other.hasBonusOverride == hasBonusOverride) &&
             (identical(other.disableCreateOrder, disableCreateOrder) ||
-                other.disableCreateOrder == disableCreateOrder));
+                other.disableCreateOrder == disableCreateOrder) &&
+            (identical(other.hasPriceOverride, hasPriceOverride) ||
+                other.hasPriceOverride == hasPriceOverride));
   }
 
   @JsonKey(ignore: true)
@@ -544,7 +567,8 @@ class _$_UserDto extends _UserDto {
       acceptPrivacyPolicyTime,
       privacyPolicyAcceptedPlatform,
       hasBonusOverride,
-      disableCreateOrder);
+      disableCreateOrder,
+      hasPriceOverride);
 
   @JsonKey(ignore: true)
   @override
@@ -596,7 +620,9 @@ abstract class _UserDto extends UserDto {
       @JsonKey(name: 'hasBonusOverride', defaultValue: false)
           required final bool hasBonusOverride,
       @JsonKey(name: 'disableCreateOrder', defaultValue: false)
-          required final bool disableCreateOrder}) = _$_UserDto;
+          required final bool disableCreateOrder,
+      @JsonKey(name: 'hasPriceOverride', defaultValue: false)
+          required final bool hasPriceOverride}) = _$_UserDto;
   const _UserDto._() : super._();
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$_UserDto.fromJson;
@@ -656,6 +682,9 @@ abstract class _UserDto extends UserDto {
   @override
   @JsonKey(name: 'disableCreateOrder', defaultValue: false)
   bool get disableCreateOrder;
+  @override
+  @JsonKey(name: 'hasPriceOverride', defaultValue: false)
+  bool get hasPriceOverride;
   @override
   @JsonKey(ignore: true)
   _$$_UserDtoCopyWith<_$_UserDto> get copyWith =>

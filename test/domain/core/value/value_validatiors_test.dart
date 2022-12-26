@@ -465,6 +465,7 @@ void main() {
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
+          hasPriceOverride: false,
         );
         final result = validateContainUserNameOrName(input, user);
         expect(result, const Right(input));
@@ -492,6 +493,7 @@ void main() {
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
+          hasPriceOverride: false,
         );
         final result = validateContainUserNameOrName(input, user);
         expect(
@@ -522,6 +524,7 @@ void main() {
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
+          hasPriceOverride: false,
         );
         final result = validateContainUserNameOrName(input, user);
         expect(
@@ -552,6 +555,7 @@ void main() {
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
+          hasPriceOverride: false,
         );
         final result = validateContainUserNameOrName(input, user);
         expect(

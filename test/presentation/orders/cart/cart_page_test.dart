@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/order/cart/discount_override/discount_ove
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -94,6 +95,10 @@ class DiscountOverrideBlocMock
     extends MockBloc<DiscountOverrideEvent, DiscountOverrideState>
     implements DiscountOverrideBloc {}
 
+class OrderEligibilityBlocMock
+    extends MockBloc<OrderEligibilityEvent, OrderEligibilityState>
+    implements OrderEligibilityBloc {}
+
 final locator = GetIt.instance;
 
 void main() {
@@ -113,6 +118,7 @@ void main() {
   late DiscountOverrideBloc discountOverrideBlocMock;
   late List<PriceAggregate> mockCartItemWithDataListOverride;
   late Map<MaterialNumber, Price> mockPriceList;
+  late OrderEligibilityBloc orderEligibilityBlocMock;
   final AuthBloc authBlocMock = AuthBlocMock();
   final AddToCartBloc addToCartBlocMock = AddToCartBlocMock();
 
@@ -143,6 +149,8 @@ void main() {
       tenderContractBlocMock = TenderContractBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       discountOverrideBlocMock = DiscountOverrideBlocMock();
+      orderEligibilityBlocMock = OrderEligibilityBlocMock();
+
       mockPriceList = {};
       mockPriceList.putIfAbsent(
           MaterialNumber('000000000023168451'),
@@ -281,6 +289,9 @@ void main() {
       when(() => userBloc.state).thenReturn(UserState.initial());
       when(() => discountOverrideBlocMock.state)
           .thenReturn(DiscountOverrideState.initial());
+      when(
+        () => orderEligibilityBlocMock.state,
+      ).thenReturn(OrderEligibilityState.initial().copyWith());
       // when(() => salesOrgBloc.state)
       //     .thenReturn(SalesOrgState.initial().copyWith(
       //   salesOrganisation: SalesOrganisation.empty().copyWith(
@@ -347,6 +358,8 @@ void main() {
                 create: (context) => tenderContractBlocMock),
             BlocProvider<OrderDocumentTypeBloc>(
                 create: (context) => orderDocumentTypeBlocMock),
+            BlocProvider<OrderEligibilityBloc>(
+                create: (context) => orderEligibilityBlocMock),
           ],
           child: const CartPage(),
         );
@@ -837,7 +850,8 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pump();
 
-        final discountOverrideFinder = find.byKey(const Key('discountOverride'));
+        final discountOverrideFinder =
+            find.byKey(const Key('discountOverride'));
         expect(discountOverrideFinder, findsOneWidget);
       });
       testWidgets('Test have cart item list add update a bonus item',
