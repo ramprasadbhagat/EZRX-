@@ -114,10 +114,10 @@ class HistoryDetails extends StatelessWidget {
           final orderDetails =
               context.read<OrderHistoryDetailsBloc>().state.orderHistoryDetails;
           if (state.showErrorMessage) {
-            Center(
+            return Center(
               child: Text(
                 'Unable to Get Order History'.tr(),
-                key: const Key('unable'),
+                key: const Key('unableToGetOrder'),
                 style: const TextStyle(
                   color: ZPColors.darkerGreen,
                   fontSize: 16,
@@ -149,8 +149,12 @@ class HistoryDetails extends StatelessWidget {
                       orderDetails: orderDetails,
                       customerCodeInfo: customerCodeInfo,
                     ),
-                    const _SoldToAddress(),
-                    const _ShipToAddress(),
+                    const _SoldToAddress(
+                      key: Key('soldToAddressWidget'),
+                    ),
+                    const _ShipToAddress(
+                      key: Key('shipToAddressWidget'),
+                    ),
                     if (context.read<EligibilityBloc>().state.isBillToEnable &&
                         customerCodeInfo.billToInfos.isNotEmpty &&
                         customerCodeInfo.customerCodeSoldTo !=
@@ -317,6 +321,7 @@ class _OrderDetails extends StatelessWidget {
               ),
             if (enableTaxDisplay || enableTaxAtTotalLevelOnly)
               BalanceTextRow(
+                key: const Key('taxDisplay'),
                 keyText: context.read<SalesOrgBloc>().state.salesOrg.isSg
                     ? 'GST'
                     : 'Total Tax'.tr(),
@@ -584,6 +589,7 @@ class _AdditionalCommentsState extends State<_AdditionalComments> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     InkWell(
+                                      key: Key(pODocuments.url),
                                       onTap: () async {
                                         context
                                             .read<DownloadAttachmentBloc>()
@@ -644,6 +650,7 @@ class _AdditionalCommentsState extends State<_AdditionalComments> {
                                       2 &&
                                   !show
                               ? InkWell(
+                                  key: const Key('viewAll'),
                                   child: Text(
                                     'View All'.tr(),
                                     style: const TextStyle(
@@ -659,6 +666,7 @@ class _AdditionalCommentsState extends State<_AdditionalComments> {
                                 )
                               : const SizedBox(),
                           InkWell(
+                            key: const Key('downloadAll'),
                             onTap: () {
                               context.read<DownloadAttachmentBloc>().add(
                                     DownloadAttachmentEvent.downloadFile(

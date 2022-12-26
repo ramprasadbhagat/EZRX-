@@ -43,8 +43,14 @@ void main() {
           BlocProvider<OrderHistoryFilterByStatusBloc>(
               create: (context) => mockOrderHistoryFilterByStatusBloc),
         ],
-        child: const Material(
-            child: SizedBox(height: 100, child: HistoryFilterByStatus())),
+        child: Material(
+          child: SizedBox(
+            height: 100,
+            child: HistoryFilterByStatus(
+              key: UniqueKey(),
+            ),
+          ),
+        ),
       );
     }
 
@@ -62,6 +68,12 @@ void main() {
           find.byKey(const Key('filterclearAllButton'));
       expect(filtercByStatus, findsOneWidget);
       expect(filterclearAllButton, findsOneWidget);
+
+      final checkboxListTile = find.byKey(const Key('checkboxListTile'));
+      expect(checkboxListTile, findsWidgets);
+
+      await tester.tap(checkboxListTile.first);
+      await tester.pump();
     });
     testWidgets('Checked status is selected or not test', (tester) async {
       when(() => mockOrderHistoryFilterByStatusBloc.state).thenReturn(

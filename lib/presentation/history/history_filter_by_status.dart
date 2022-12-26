@@ -59,6 +59,7 @@ class HistoryFilterByStatus extends StatelessWidget {
                     child: Column(
                       children: <Widget>[
                         CheckboxListTile(
+                          key: const Key('checkboxListTile'),
                           checkColor: Colors.white,
                           activeColor: ZPColors.kPrimaryColor,
                           title: Text(status.tr()),

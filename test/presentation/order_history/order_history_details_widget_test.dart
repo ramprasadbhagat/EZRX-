@@ -50,6 +50,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../utils/material_frame_wrapper.dart';
 import '../../utils/widget_utils.dart';
 import '../orders/create_order/material_bundle/material_bundle_list_test.dart';
 
@@ -127,6 +128,7 @@ void main() {
   late OrderHistoryDetailsRepository orderHistoryDetailsRepository;
   late MaterialPriceBlocMock materialPriceBlocMock;
   late AddToCartBlocMock addToCartBlocMock;
+  late OrderHistory mockOrderHistoryItem;
 
   setUpAll(() async {
     orderHistoryDetailsRepository = MockOrderHistoryDetailsRepository();
@@ -151,6 +153,9 @@ void main() {
     locator.registerLazySingleton<HttpService>(
       () => mockHTTPService,
     );
+
+    mockOrderHistoryItem =
+        await OrderHistoryLocalDataSource().getOrderHistory();
   });
   group('Order History Details', () {
     setUp(() {
@@ -194,7 +199,7 @@ void main() {
           .thenReturn(DownloadAttachmentState.initial());
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
-      when(() => addToCartBlocMock.state).thenReturn(AddToCartState.initial());   
+      when(() => addToCartBlocMock.state).thenReturn(AddToCartState.initial());
     });
     StackRouterScope getWUT() {
       return WidgetUtils.getScopedWidget(
@@ -233,7 +238,7 @@ void main() {
           customerCodeInfo: CustomerCodeInfo.empty(),
           orderHistoryBasicInfo:
               OrderHistoryBasicInfo.empty().copyWith(soldTo: 'slkfjdl'),
-          orderHistoryItem: OrderHistoryItem.empty(),
+          orderHistoryItem: mockOrderHistoryItem.orderHistoryItems[0],
           salesOrgConfigs: SalesOrganisationConfigs.empty(),
         )),
       );
@@ -265,6 +270,27 @@ void main() {
 
       expect(invoicesField, findsOneWidget);
     });
+
+    testWidgets('Show Error Message test ', (tester) async {
+      when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
+        OrderHistoryDetailsState.initial().copyWith(
+          showErrorMessage: true,
+        ),
+      );
+
+      await tester.pumpWidget(
+        MaterialFrameWrapper(
+          child: BlocProvider<OrderHistoryDetailsBloc>(
+            create: (context) => mockOrderHistoryDetailsBloc,
+            child: getWUT(),
+          ),
+        ),
+      );
+
+      final errorMessage = find.byKey(const Key('unableToGetOrder'));
+      expect(errorMessage, findsOneWidget);
+    });
+
     testWidgets(' system message test ', (tester) async {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
@@ -488,6 +514,50 @@ void main() {
         expect(pODocumentsUrl, findsOneWidget);
       }
     });
+
+    testWidgets('poDocument not empty', (tester) async {
+      final mockPoDocuments =
+          orderHistoryDetails.orderHistoryDetailsPoDocuments;
+
+      when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
+        OrderHistoryDetailsState.initial().copyWith(
+          orderHistoryDetails: orderHistoryDetails.copyWith(
+            orderHistoryDetailsPoDocuments:
+                List<OrderHistoryDetailsPODocuments>.generate(
+              5,
+              (index) => mockPoDocuments.first,
+            ),
+          ),
+          failureOrSuccessOption: none(),
+          isLoading: false,
+          showErrorMessage: false,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            showPOAttachment: true,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+
+      final pODocumentWidget = find.byKey(
+          Key(orderHistoryDetails.orderHistoryDetailsPoDocuments.first.url));
+      await tester.tap(pODocumentWidget.first, warnIfMissed: false);
+      await tester.pump();
+
+      final viewAll = find.byKey(const Key('viewAll'));
+      await tester.tap(viewAll, warnIfMissed: false);
+      await tester.pump();
+
+      final downloadAll = find.byKey(const Key('downloadAll'));
+      await tester.tap(downloadAll, warnIfMissed: false);
+      await tester.pump();
+    });
+
     testWidgets('addToCartPressed test ', (tester) async {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
@@ -501,10 +571,27 @@ void main() {
         MaterialPriceDetailState.initial().copyWith(
           isValidating: false,
           isFetching: false,
+          materialDetails: {
+            MaterialQueryInfo.fromOrderHistory(
+                orderHistoryItem: mockOrderHistoryItem
+                    .orderHistoryItems[0]): MaterialPriceDetail.empty()
+                .copyWith
+                .price(isValidMaterial: false),
+          },
         ),
       );
-      await tester.pumpWidget(getWUT());
+
+      await tester.pumpWidget(
+        MaterialFrameWrapper(
+          child: BlocProvider<OrderHistoryDetailsBloc>(
+            create: (context) => mockOrderHistoryDetailsBloc,
+            child: getWUT(),
+          ),
+        ),
+      );
+
       await tester.pump();
+
       final addToCartPressed = find.byKey(const Key('addToCartPressed'));
       expect(addToCartPressed, findsOneWidget);
       await tester.tap(addToCartPressed);
@@ -533,7 +620,8 @@ void main() {
       // await tester.pumpAndSettle(const Duration(milliseconds: 50));
     });
 
-    testWidgets('order summary bonus details  test When Product Not Available', (tester) async {
+    testWidgets('order summary bonus details  test When Product Not Available',
+        (tester) async {
       final bonusItemList = [
         OrderHistoryDetailsBonusAggregate(
           orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first
@@ -560,7 +648,8 @@ void main() {
           isLoading: false,
         ),
       ];
-      whenListen(mockOrderHistoryDetailsBloc, Stream.fromIterable(expectedStates));
+      whenListen(
+          mockOrderHistoryDetailsBloc, Stream.fromIterable(expectedStates));
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
             salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
@@ -611,12 +700,12 @@ void main() {
       await tester.tap(orderItemCard, warnIfMissed: false);
     });
 
-    testWidgets('order summary bonus details  test When Product is Available', (tester) async {
+    testWidgets('order summary bonus details  test When Product is Available',
+        (tester) async {
       final bonusItemList = [
         OrderHistoryDetailsBonusAggregate(
           orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first
-              .copyWith(
-                  plannedDeliveryDate: '12/01/22', sAPStatus: ''),
+              .copyWith(plannedDeliveryDate: '12/01/22', sAPStatus: ''),
           details:
               orderHistoryDetails.orderHistoryDetailsOrderItem.first.details,
           tenderContractDetails:
@@ -723,7 +812,8 @@ void main() {
           isLoading: false,
         ),
       ];
-      whenListen(mockOrderHistoryDetailsBloc, Stream.fromIterable(expectedStates));
+      whenListen(
+          mockOrderHistoryDetailsBloc, Stream.fromIterable(expectedStates));
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
             salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
@@ -739,6 +829,14 @@ void main() {
             user: User.empty().copyWith(
           disableCreateOrder: false,
         )),
+      );
+      when(() => mockSalesOrgBloc.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          configs: SalesOrganisationConfigs.empty().copyWith(
+            enableTaxDisplay: true,
+            enableTaxAtTotalLevelOnly: true,
+          ),
+        ),
       );
       await tester.pumpWidget(getWUT());
       await tester.pump();
@@ -765,6 +863,9 @@ void main() {
 
       expect(discountRateForOrderItem, findsOneWidget);
 
+      final taxDisplay = find.byKey(const Key('taxDisplay'));
+      expect(taxDisplay, findsOneWidget);
+
       await tester.pump();
 
       await tester.drag(find.byKey(const Key('scrollHistoryDetail')),
@@ -782,8 +883,7 @@ void main() {
       final bonusItemList = [
         OrderHistoryDetailsBonusAggregate(
           orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first
-              .copyWith(
-                  plannedDeliveryDate: '12/01/22', sAPStatus: ''),
+              .copyWith(plannedDeliveryDate: '12/01/22', sAPStatus: ''),
           details:
               orderHistoryDetails.orderHistoryDetailsOrderItem.first.details,
           tenderContractDetails:
@@ -846,7 +946,7 @@ void main() {
           find.byKey(Key('orderItemCard-$materialNumber'));
 
       expect(orderItemCardField, findsOneWidget);
-  
+
       final sapStatusNotEmptyOrderItem =
           find.byKey(const Key('sapStatusNotEmpty'));
       expect(sapStatusNotEmptyOrderItem, findsOneWidget);
@@ -861,7 +961,9 @@ void main() {
       await tester.tap(orderItemCard, warnIfMissed: false);
     });
 
-    testWidgets('order summary TenderContract details test When sapStatus is not empty', (tester) async {
+    testWidgets(
+        'order summary TenderContract details test When sapStatus is not empty',
+        (tester) async {
       final bonusItemList = [
         OrderHistoryDetailsBonusAggregate(
           orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first
@@ -886,7 +988,8 @@ void main() {
           isLoading: false,
         ),
       ];
-      whenListen(mockOrderHistoryDetailsBloc, Stream.fromIterable(expectedStates));
+      whenListen(
+          mockOrderHistoryDetailsBloc, Stream.fromIterable(expectedStates));
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
             salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
@@ -911,7 +1014,9 @@ void main() {
       expect(sapStatusNotEmptyOrderItem, findsOneWidget);
     });
 
-    testWidgets('order summary TenderContract details test When sapStatus is empty', (tester) async {
+    testWidgets(
+        'order summary TenderContract details test When sapStatus is empty',
+        (tester) async {
       final bonusItemList = [
         OrderHistoryDetailsBonusAggregate(
           orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first
@@ -968,7 +1073,7 @@ void main() {
       await tester.pump();
       final reOrderButton = find.byKey(const Key('reOrderButton'));
       expect(reOrderButton, findsOneWidget);
-      await tester.tap(reOrderButton,warnIfMissed: false);
+      await tester.tap(reOrderButton, warnIfMissed: false);
       await tester.pumpAndSettle(const Duration(milliseconds: 50));
     });
   });

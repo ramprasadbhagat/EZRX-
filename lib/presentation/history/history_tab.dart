@@ -63,6 +63,7 @@ class HistoryTab extends StatelessWidget {
                               OrderHistoryFilterState>(
                             builder: (context, state) {
                               return InkWell(
+                                key: const Key('orderDateFilter'),
                                 onTap: () {
                                   context.read<OrderHistoryFilterBloc>().add(
                                         OrderHistoryFilterEvent.sortByDate(
@@ -389,7 +390,7 @@ class HistoryTab extends StatelessWidget {
                                   ),
                               itemBuilder: (context, index, item) =>
                                   OrderHistoryListTile(
-                                key: const ValueKey('historyTitle'),
+                                key: ValueKey('historyTitle$index'),
                                 orderHistoryItem: item,
                                 customerCodeInfo: context
                                     .read<CustomerCodeBloc>()

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 
@@ -28,7 +29,7 @@ void main() {
   final mockOrderHistoryFilter = OrderHistoryFilter.empty();
 
   late AppRouter autoRouterMock;
- 
+
   setUpAll(() {
     locator = GetIt.instance;
     locator.registerLazySingleton(() => AppRouter());
@@ -52,10 +53,22 @@ void main() {
     }
 
     testWidgets('Order History Filter test ', (tester) async {
+      final expectedStates = [
+        OrderHistoryFilterState.initial().copyWith(
+          isSubmitting: false,
+        ),
+      ];
+      whenListen(
+          mockOrderHistoryFilterBloc, Stream.fromIterable(expectedStates));
+
       when(() => mockOrderHistoryFilterBloc.state).thenReturn(
         OrderHistoryFilterState.initial().copyWith(
-            isSubmitting: true, orderHistoryFilterList: mockOrderHistoryFilter),
+          isSubmitting: true,
+          showErrorMessages: true,
+          orderHistoryFilterList: mockOrderHistoryFilter,
+        ),
       );
+
       await tester.pumpWidget(getWUT());
       final orderFilterList = find.byKey(const Key('orderHistoryFilter'));
       final orderIdTextField = find.byKey(const Key('filterOrderIdField'));
@@ -80,6 +93,40 @@ void main() {
       expect(filterclearButton, findsOneWidget);
       expect(filterapplyButton, findsOneWidget);
       expect(filtercrossButton, findsOneWidget);
+
+      await tester.enterText(orderIdTextField, 'en');
+      await tester.pump();
+
+      final orderIdTextFieldText = find.text('en');
+      expect(orderIdTextFieldText, findsOneWidget);
+
+      final minLengthErrorMessage =
+          find.text('Search input must be greater than 2 characters.');
+      await tester.pump();
+
+      expect(minLengthErrorMessage, findsNothing);
+    });
+
+    testWidgets('Order History Filter Loading test ', (tester) async {
+      final expectedStates = [
+        OrderHistoryFilterState.initial().copyWith(
+          isSubmitting: false,
+        ),
+        OrderHistoryFilterState.initial().copyWith(
+          isSubmitting: true,
+        ),
+      ];
+      whenListen(
+          mockOrderHistoryFilterBloc, Stream.fromIterable(expectedStates));
+
+      when(() => mockOrderHistoryFilterBloc.state).thenReturn(
+        OrderHistoryFilterState.initial().copyWith(
+            isSubmitting: true, orderHistoryFilterList: mockOrderHistoryFilter),
+      );
+      await tester.pumpWidget(getWUT());
+
+      final orderIdTextFieldText = find.text('loader');
+      expect(orderIdTextFieldText, findsNothing);
     });
 
     testWidgets('  entering orderId in Order History Filter test ',
@@ -95,7 +142,7 @@ void main() {
       expect(find.text('123'), findsNothing);
       expect(find.text('020'), findsOneWidget);
     });
-   
+
     testWidgets('  entering PoNumber  in Order History Filter test  ',
         (tester) async {
       await tester.runAsync(() async {
@@ -109,7 +156,6 @@ void main() {
       expect(find.text('123'), findsNothing);
       expect(find.text('100'), findsOneWidget);
     });
-  
 
     testWidgets('  entering  princpleSearch  in Order History Filter test ',
         (tester) async {
@@ -124,7 +170,7 @@ void main() {
       expect(find.text('123'), findsNothing);
       expect(find.text('188'), findsOneWidget);
     });
-   
+
     testWidgets('  entering materialSearch  in Order History Filter  test',
         (tester) async {
       await tester.runAsync(() async {
@@ -138,7 +184,6 @@ void main() {
       expect(find.text('123'), findsNothing);
       expect(find.text('199'), findsOneWidget);
     });
-   
 
     testWidgets(' test apply Order History Filter  ', (tester) async {
       await tester.pumpWidget(getWUT());
@@ -180,6 +225,10 @@ void main() {
       await tester.tap(fromdateField);
       await tester.pumpAndSettle(const Duration(seconds: 2));
       expect(find.byType(DatePickerDialog), findsOneWidget);
+
+      final okButton = find.text('OK');
+      await tester.tap(okButton);
+      await tester.pump();
     });
 
     testWidgets(' test filtertodateField date picker test ', (tester) async {
@@ -194,6 +243,10 @@ void main() {
       await tester.tap(fromdateField);
       await tester.pump();
       expect(find.byType(DatePickerDialog), findsOneWidget);
+
+      final okButton = find.text('OK');
+      await tester.tap(okButton);
+      await tester.pump();
     });
 
     testWidgets(' test close button History Filter  ', (tester) async {
