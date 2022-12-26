@@ -253,6 +253,8 @@ class _TotalSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final vatInPercentage = context.read<EligibilityBloc>().state;
+
     return BlocBuilder<CartBloc, CartState>(
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
@@ -271,14 +273,12 @@ class _TotalSection extends StatelessWidget {
                     StringUtils.displayPrice(salesOrgConfig, state.subtotal),
                 valueFlex: 1,
               ),
-              salesOrgConfig.enableVat ||
-                      salesOrgConfig.enableTaxAtTotalLevelOnly
-                  ? BalanceTextRow(
-                      keyText: '$taxCode in %'.tr(),
-                      valueText: '${salesOrgConfig.vatValue}%',
-                      valueFlex: 1,
-                    )
-                  : const SizedBox.shrink(),
+              if (vatInPercentage.shouldDisplayVATInPercentage)
+                BalanceTextRow(
+                  keyText: '$taxCode in %'.tr(),
+                  valueText: '${salesOrgConfig.vatValue}%',
+                  valueFlex: 1,
+                ),
               salesOrgConfig.enableVat ||
                       salesOrgConfig.enableTaxAtTotalLevelOnly
                   ? BalanceTextRow(

@@ -667,6 +667,8 @@ class _CartDetails extends StatelessWidget {
               ),
             );
 
+        final vatInPercentage = context.read<EligibilityBloc>().state;
+
         return Column(
           children: [
             const _Disclaimer(),
@@ -677,13 +679,11 @@ class _CartDetails extends StatelessWidget {
                 state.subtotal,
               ),
             ),
-            salesOrgConfig.enableVat && !salesOrgConfig.currency.isVN ||
-                    salesOrgConfig.enableTaxAtTotalLevelOnly
-                ? BalanceTextRow(
-                    keyText: '$taxCode in %'.tr(),
-                    valueText: '${salesOrgConfig.vatValue}%',
-                  )
-                : const SizedBox.shrink(),
+            if (vatInPercentage.shouldDisplayVATInPercentage)
+              BalanceTextRow(
+                keyText: '$taxCode in %'.tr(),
+                valueText: '${salesOrgConfig.vatValue}%',
+              ),
             salesOrgConfig.enableVat || salesOrgConfig.enableTaxAtTotalLevelOnly
                 ? BalanceTextRow(
                     keyText: taxCode.tr(),

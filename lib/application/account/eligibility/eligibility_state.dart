@@ -142,4 +142,7 @@ class EligibilityState with _$EligibilityState {
   bool get isPriceOverrideEnable => user.role.type.isSalesRep
       ? user.hasPriceOverride
       : salesOrgConfigs.priceOverride;
+  bool get shouldDisplayVATInPercentage =>
+      salesOrgConfigs.enableVat && !salesOrgConfigs.currency.isVN ||
+      salesOrgConfigs.enableTaxAtTotalLevelOnly;
 }
