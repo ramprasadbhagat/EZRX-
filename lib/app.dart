@@ -27,7 +27,6 @@ import 'package:ezrxmobile/application/order/order_history_details/download_atta
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
-import 'package:ezrxmobile/application/order/stock_information/stock_information_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -216,9 +215,6 @@ class App extends StatelessWidget {
         ),
         BlocProvider<MaterialPriceDetailBloc>(
           create: (context) => locator<MaterialPriceDetailBloc>(),
-        ),
-        BlocProvider<StockInformationBloc>(
-          create: (context) => locator<StockInformationBloc>(),
         ),
         BlocProvider<PaymentCustomerInformationBloc>(
           create: (context) => locator<PaymentCustomerInformationBloc>(),

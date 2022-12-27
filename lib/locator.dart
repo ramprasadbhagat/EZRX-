@@ -29,7 +29,6 @@ import 'package:ezrxmobile/application/order/order_history_details/order_history
 import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
-import 'package:ezrxmobile/application/order/stock_information/stock_information_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -164,7 +163,6 @@ import 'package:ezrxmobile/infrastructure/order/repository/material_price_reposi
 import 'package:ezrxmobile/infrastructure/order/repository/order_document_type_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_history_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/price_override_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/stock_info_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_bundle_list_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
@@ -306,16 +304,6 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
-    () => CartRepository(
-      cartStorage: locator<CartStorage>(),
-      config: locator<Config>(),
-      stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
-      stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
-      countlyService: locator<CountlyService>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
     () => AuthBloc(
       authRepository: locator<AuthRepository>(),
     ),
@@ -329,25 +317,10 @@ void setupLocator() {
     () => ProxyLoginFormBloc(authRepository: locator<AuthRepository>()),
   );
 
-  locator.registerLazySingleton(
-    () => CartBloc(cartRepository: locator<CartRepository>()),
-  );
-
-  locator.registerLazySingleton(
-    () => AddToCartBloc(),
-  );
-
-  locator.registerLazySingleton(
-    () => OrderSummaryBloc(repository: locator<OrderRepository>()),
-  );
-
-  locator.registerLazySingleton(
-    () => AdditionalDetailsBloc(),
-  );
-
-  locator.registerLazySingleton(
-    () => OrderEligibilityBloc(),
-  );
+  //============================================================
+  //  Returns Approver
+  //
+  //============================================================
 
   locator.registerLazySingleton(() => ApproverQueryMutation());
 
@@ -703,6 +676,18 @@ void setupLocator() {
     ),
   );
 
+  locator.registerLazySingleton(
+    () => OrderSummaryBloc(repository: locator<OrderRepository>()),
+  );
+
+  locator.registerLazySingleton(
+    () => AdditionalDetailsBloc(),
+  );
+
+  locator.registerLazySingleton(
+    () => OrderEligibilityBloc(),
+  );
+
   //============================================================
   // Saved Orders
   //
@@ -783,37 +768,6 @@ void setupLocator() {
     ),
   );
 
-  //============================================================
-  //  Order Template List
-  //
-  //============================================================
-
-  locator.registerLazySingleton(() => OrderTemplateQueries());
-
-  locator.registerLazySingleton(() => OrderTemplateLocalDataSource());
-
-  locator.registerLazySingleton(() => OrderTemplateRemoteDataSource(
-        httpService: locator<HttpService>(),
-        orderTemplateQueries: locator<OrderTemplateQueries>(),
-        dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-        config: locator<Config>(),
-      ));
-
-  locator.registerLazySingleton(
-    () => OrderTemplateRepository(
-      config: locator<Config>(),
-      orderTemplateLocalDataSource: locator<OrderTemplateLocalDataSource>(),
-      orderTemplateRemoteDataSource: locator<OrderTemplateRemoteDataSource>(),
-      countlyService: locator<CountlyService>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => OrderTemplateListBloc(
-      orderTemplateRepository: locator<OrderTemplateRepository>(),
-    ),
-  );
-
   locator.registerLazySingleton(() => MaterialBundleQuery());
 
   locator.registerLazySingleton(() => MaterialBundleListLocalDatasource());
@@ -842,6 +796,37 @@ void setupLocator() {
       materialBundleListRepository: locator<MaterialBundleListRepository>(),
       customerMaterialPriceDetailsRepository:
           locator<MaterialPriceDetailRepository>(),
+    ),
+  );
+
+  //============================================================
+  //  Order Template List
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => OrderTemplateQueries());
+
+  locator.registerLazySingleton(() => OrderTemplateLocalDataSource());
+
+  locator.registerLazySingleton(() => OrderTemplateRemoteDataSource(
+        httpService: locator<HttpService>(),
+        orderTemplateQueries: locator<OrderTemplateQueries>(),
+        dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+        config: locator<Config>(),
+      ));
+
+  locator.registerLazySingleton(
+    () => OrderTemplateRepository(
+      config: locator<Config>(),
+      orderTemplateLocalDataSource: locator<OrderTemplateLocalDataSource>(),
+      orderTemplateRemoteDataSource: locator<OrderTemplateRemoteDataSource>(),
+      countlyService: locator<CountlyService>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => OrderTemplateListBloc(
+      orderTemplateRepository: locator<OrderTemplateRepository>(),
     ),
   );
 
@@ -942,6 +927,7 @@ void setupLocator() {
       orderHistoryDetailsRepository: locator<OrderHistoryDetailsRepository>(),
     ),
   );
+
   locator.registerLazySingleton(
     () => OrderHistoryDetailsRemoteDataSource(
       config: locator<Config>(),
@@ -1150,36 +1136,6 @@ void setupLocator() {
   );
 
   //============================================================
-  //  Stock Information
-  //
-  //============================================================
-  locator.registerLazySingleton(() => StockInfoLocalDataSource());
-  locator.registerLazySingleton(() => StockInfoQueryMutation());
-
-  locator.registerLazySingleton(
-    () => StockInfoRemoteDataSource(
-      config: locator<Config>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-      httpService: locator<HttpService>(),
-      stockInfoQueryMutation: locator<StockInfoQueryMutation>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => StockInfoRepository(
-      config: locator<Config>(),
-      stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
-      stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => StockInformationBloc(
-      stockInfoRepository: locator<StockInfoRepository>(),
-    ),
-  );
-
-  //============================================================
   //  Material Filter
   //
   //============================================================
@@ -1333,5 +1289,40 @@ void setupLocator() {
     () => DiscountOverrideBloc(
       repository: locator<DiscountOverrideRepository>(),
     ),
+  );
+
+  //============================================================
+  //  Cart
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => AddToCartBloc(),
+  );
+
+  locator.registerLazySingleton(() => StockInfoLocalDataSource());
+  locator.registerLazySingleton(() => StockInfoQueryMutation());
+
+  locator.registerLazySingleton(
+    () => StockInfoRemoteDataSource(
+      config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      httpService: locator<HttpService>(),
+      stockInfoQueryMutation: locator<StockInfoQueryMutation>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => CartRepository(
+      cartStorage: locator<CartStorage>(),
+      config: locator<Config>(),
+      stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
+      stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
+      countlyService: locator<CountlyService>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => CartBloc(cartRepository: locator<CartRepository>()),
   );
 }

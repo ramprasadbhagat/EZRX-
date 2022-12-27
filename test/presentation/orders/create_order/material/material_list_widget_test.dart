@@ -13,7 +13,6 @@ import 'package:ezrxmobile/application/order/material_filter/material_filter_blo
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
-import 'package:ezrxmobile/application/order/stock_information/stock_information_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -73,10 +72,6 @@ class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 class MockMaterialFilterBloc
     extends MockBloc<MaterialFilterEvent, MaterialFilterState>
     implements MaterialFilterBloc {}
-
-class MockStockInformationBloc
-    extends MockBloc<StockInformationEvent, StockInformationState>
-    implements StockInformationBloc {}
 
 class MaterialListBlocMock
     extends MockBloc<MaterialListEvent, MaterialListState>
@@ -149,7 +144,6 @@ void main() {
     remarks: '',
   );
   late MaterialFilterBloc mockMaterialFilterBloc;
-  late StockInformationBloc mockStockInformationBloc;
 
   setUpAll(() async {
     setupLocator();
@@ -166,7 +160,6 @@ void main() {
       materialPriceBlocMock = MaterialPriceBlocMock();
       cartBlocMock = CartBlocMock();
       mockMaterialFilterBloc = MockMaterialFilterBloc();
-      mockStockInformationBloc = MockStockInformationBloc();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       mockAddToCartStub = MockAddToCartStub();
       autoRouterMock = locator<AppRouter>();
@@ -229,8 +222,6 @@ void main() {
             BlocProvider<CartBloc>(create: ((context) => cartBlocMock)),
             BlocProvider<MaterialFilterBloc>(
                 create: ((context) => mockMaterialFilterBloc)),
-            BlocProvider<StockInformationBloc>(
-                create: ((context) => mockStockInformationBloc)),
             BlocProvider<MaterialListBloc>(
                 create: ((context) => materialListBlocMock)),
             BlocProvider<OrderDocumentTypeBloc>(
@@ -798,7 +789,7 @@ void main() {
     // });
 
     //Test for Pricing
-   testWidgets('show list price and unit price', (tester) async {
+    testWidgets('show list price and unit price', (tester) async {
       final expectedState = [
         MaterialListState.initial().copyWith(isFetching: true),
         MaterialListState.initial().copyWith(
