@@ -229,9 +229,6 @@ class App extends StatelessWidget {
         BlocProvider<PaymentTermBloc>(
           create: (context) => locator<PaymentTermBloc>(),
         ),
-        BlocProvider<CovidMaterialListBloc>(
-          create: (context) => locator<CovidMaterialListBloc>(),
-        ),
         BlocProvider<CartBloc>(
           create: (context) => locator<CartBloc>(),
         ),
