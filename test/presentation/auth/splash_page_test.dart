@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/account/approver/approver_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
@@ -42,6 +43,9 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
+class ApproverBlocMock extends MockBloc<ApproverEvent, ApproverState>
+    implements ApproverBloc {}
+
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
@@ -74,6 +78,7 @@ void main() {
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
   late PaymentTermBloc paymentTermBlocMock;
   late AppRouter autoRouterMock;
+  late ApproverBloc approverBlocMock;
 
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
@@ -111,6 +116,7 @@ void main() {
       cartBlocMock = CartBlocMock();
       paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
       paymentTermBlocMock = PaymentTermBlocMock();
+      approverBlocMock = ApproverBlocMock();
       autoRouterMock = locator<AppRouter>();
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -127,6 +133,7 @@ void main() {
           .thenReturn(PaymentCustomerInformationState.initial());
       when(() => paymentTermBlocMock.state)
           .thenReturn(PaymentTermState.initial());
+      when(() => approverBlocMock.state).thenReturn(ApproverState.initial());
     });
 
     Future getWidget(tester) async {
@@ -139,6 +146,7 @@ void main() {
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
+            BlocProvider<ApproverBloc>(create: (context) => approverBlocMock),
             BlocProvider<ShipToCodeBloc>(
                 create: (context) => shipToCodeBLocMock),
             BlocProvider<SalesRepBloc>(create: (context) => salesRepBlocMock),

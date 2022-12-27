@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/approver/approver_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/cart_button.dart';
 import 'package:ezrxmobile/presentation/core/profile_tile.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +27,7 @@ class AccountTab extends StatelessWidget {
               const ProfileTile(),
               const _LoginOnBehalfTile(),
               const _SettingsTile(),
+              const _ReturnsTile(),
             ],
           ).toList(),
         ),
@@ -71,6 +74,54 @@ class _SettingsTile extends StatelessWidget {
         locale: context.locale,
       ).tr(),
       onTap: () => context.router.pushNamed('settings'),
+    );
+  }
+}
+
+class _ReturnsTile extends StatelessWidget {
+  const _ReturnsTile({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<UserBloc, UserState>(
+      buildWhen: (previous, current) => previous != current,
+      builder: (context, state) {
+        return BlocConsumer<ApproverBloc, ApproverState>(
+          listenWhen: (previous, current) =>
+              previous.apiFailureOrSuccessOption !=
+                  current.apiFailureOrSuccessOption ||
+              previous.isApprover != current.isApprover,
+          listener: (context, state) {
+            state.apiFailureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  ErrorUtils.handleApiFailure(context, failure);
+                },
+                (_) {},
+              ),
+            );
+          },
+          buildWhen: (previous, current) =>
+              previous.isApprover != current.isApprover,
+          builder: (context, state) {
+            return Visibility(
+              visible: state.isApprover,
+              child: ListTile(
+                key: const Key('returnsTile'),
+                leading: const Icon(Icons.undo),
+                title: Text(
+                  'Returns',
+                  locale: context.locale,
+                ).tr(),
+                onTap: () {
+                  //TODO: implement it later on
+                },
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

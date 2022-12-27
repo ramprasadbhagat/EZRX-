@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/approver/approver_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
@@ -58,13 +59,18 @@ class SplashPage extends StatelessWidget {
         ),
         BlocListener<UserBloc, UserState>(
           listenWhen: (previous, current) =>
-              previous.user.username != current.user.username,
+              previous.user.username != current.user.username &&
+              current.user.username.isValid(),
           listener: (context, state) {
-            if (state.user.username.isValid()) {
-              final welcomeMessage =
-                  '${'Welcome back'.tr()}, ${state.user.username.getOrCrash()}';
-              showSnackBar(context: context, message: welcomeMessage);
-            }
+            final welcomeMessage =
+                '${'Welcome back'.tr()}, ${state.user.username.getOrCrash()}';
+            showSnackBar(context: context, message: welcomeMessage);
+
+            context.read<ApproverBloc>().add(
+                  ApproverEvent.fetch(
+                    userInfo: state.user,
+                  ),
+                );
           },
         ),
         BlocListener<UserBloc, UserState>(
