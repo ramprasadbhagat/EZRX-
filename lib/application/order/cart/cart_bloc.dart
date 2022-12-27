@@ -181,7 +181,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               );
             }
             final addedItem = _getItemFromCart(e.item);
-            if (addedItem.isEligibleForBonus && addedItem.refreshAddedBonus) {
+            if (addedItem.refreshAddedBonus) {
               await _updateBonus(
                 item: addedItem,
                 emit: emit,
@@ -189,14 +189,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 salesOrganisation: e.salesOrganisation,
                 salesOrganisationConfigs: e.salesOrganisationConfigs,
                 shipToInfo: e.shipToInfo,
-              );
-            }
-            if (!addedItem.isEligibleForBonus && addedItem.isDealBounsAdded) {
-              await _deleteBonus(
-                e.item,
-                MaterialItemBonus.empty()
-                    .copyWith(materialInfo: e.item.materialInfo),
-                emit,
               );
             }
           },
@@ -274,7 +266,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               );
             }
             final addedItem = _getItemFromCart(e.item);
-            if (addedItem.isEligibleForBonus && addedItem.refreshAddedBonus) {
+            if (addedItem.refreshAddedBonus) {
               await _updateBonus(
                 item: addedItem,
                 emit: emit,
@@ -282,14 +274,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 salesOrganisation: e.salesOrganisation,
                 salesOrganisationConfigs: e.salesOrganisationConfigs,
                 shipToInfo: e.shipToInfo,
-              );
-            }
-            if (!addedItem.isEligibleForBonus && addedItem.isDealBounsAdded) {
-              await _deleteBonus(
-                e.item,
-                MaterialItemBonus.empty()
-                    .copyWith(materialInfo: e.item.materialInfo),
-                emit,
               );
             }
           },
@@ -701,67 +685,42 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         isFetching: true,
       ),
     );
-    final materialItemBonus = item.getMaterialItemBonus;
+    var materialItemBonus = item.getMaterialItemBonus;
 
-    final stockInfo = await cartRepository.getStockInfo(
-      material: item.materialInfo,
+    final stockInfo = await cartRepository.getStockInfoList(
+      materialInfoList: materialItemBonus
+          .map((MaterialItemBonus element) => element.materialInfo)
+          .toList(),
       customerCodeInfo: customerCodeInfo,
       salesOrganisation: salesOrganisation,
       salesOrganisationConfigs: salesOrganisationConfigs,
       shipToInfo: shipToInfo,
     );
+    if (materialItemBonus.isNotEmpty) {
+      stockInfo.fold(
+          (l) => emit(
+                state.copyWith(
+                  apiFailureOrSuccessOption: optionOf(stockInfo),
+                  isFetching: false,
+                ),
+              ), (List<StockInfo> stockinfoList) {
+        materialItemBonus =
+            materialItemBonus.map<MaterialItemBonus>((MaterialItemBonus bonus) {
+          final stock = stockinfoList.firstWhere(
+            (StockInfo stockInfo) =>
+                stockInfo.materialNumber == bonus.materialNumber,
+            orElse: () => StockInfo.empty(),
+          );
 
-    stockInfo.fold(
-      (l) => null,
-      (StockInfo stockinfo) => materialItemBonus.copyWith(
-        expiryDate: stockinfo.expiryDate,
-        inStock: stockinfo.inStock.getOrDefaultValue(''),
-      ),
-    );
+          return bonus.copyWith(inStock: stock.inStock.getOrDefaultValue(''));
+        }).toList();
+        },
+      );
+    }
 
-    final failureOrSuccess = await cartRepository.updateBonusItem(
-      bonusItem: item.getMaterialItemBonus,
-      quantity: item.getMaterialItemBonus.qty,
+    final failureOrSuccess = await cartRepository.updateDealBonusItem(
+      bonusItem: materialItemBonus,
       cartItem: item,
-      isUpdatedFromCart: true,
-    );
-    failureOrSuccess.fold(
-      (apiFailure) {
-        emit(
-          state.copyWith(
-            apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-            isFetching: false,
-          ),
-        );
-      },
-      (cartItemList) {
-        emit(
-          state.copyWith(
-            cartItemList: cartItemList,
-            apiFailureOrSuccessOption: none(),
-            isFetching: false,
-          ),
-        );
-      },
-    );
-  }
-
-  Future<void> _deleteBonus(
-    PriceAggregate item,
-    MaterialItemBonus bonusItem,
-    Emitter<CartState> emit,
-  ) async {
-    emit(
-      state.copyWith(
-        apiFailureOrSuccessOption: none(),
-        isFetching: true,
-      ),
-    );
-
-    final failureOrSuccess = await cartRepository.deleteBonusItem(
-      bonusItem: bonusItem,
-      cartItem: item,
-      isUpdateFromCart: true,
     );
     failureOrSuccess.fold(
       (apiFailure) {

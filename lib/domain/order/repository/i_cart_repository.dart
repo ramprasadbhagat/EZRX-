@@ -89,4 +89,17 @@ abstract class ICartRepository {
     required MaterialItemBonus bonusItem,
     required bool isUpdateFromCart,
   });
+
+  Future<Either<ApiFailure, List<PriceAggregate>>> updateDealBonusItem({
+    required PriceAggregate cartItem,
+    required List<MaterialItemBonus> bonusItem,
+  });
+
+  Future<Either<ApiFailure, List<StockInfo>>> getStockInfoList({
+    required List<MaterialInfo> materialInfoList,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+  });
 }

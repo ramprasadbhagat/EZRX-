@@ -41,4 +41,5 @@ class MaterialItemBonus with _$MaterialItemBonus {
         qty: bonusMaterial.bonusQuantity,
         materialDescription: bonusMaterial.materialDescription,
       );
+  MaterialNumber get materialNumber => materialInfo.materialNumber;
 }

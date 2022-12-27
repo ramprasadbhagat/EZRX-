@@ -241,76 +241,105 @@ class PriceAggregate with _$PriceAggregate {
           );
   }
 
-  bool get isEligibleForBonus =>
-      bonusavailable && quantity >= price.priceBonusItem.last.bonusQuantity;
-
   bool get refreshAddedBonus =>
-      _addedDealBonusMaterial.qty != calculateMaterialItemBonus;
+      calculateMaterialItemBonus.length != _addedDealBonusMaterial.length ||
+      calculateMaterialItemBonus.any((BonusMaterial canculatedBonus) =>
+          canculatedBonus.bonusQuantity !=
+          _addedDealBonusMaterial
+              .firstWhere(
+                (MaterialItemBonus availableBonus) =>
+                    availableBonus.materialNumber ==
+                    canculatedBonus.materialNumber,
+                orElse: () => MaterialItemBonus.empty(),
+              )
+              .qty);
 
-  bool get isDealBounsAdded => addedBonusList.any((element) =>
-      element.materialInfo.materialNumber == materialInfo.materialNumber &&
-      !element.additionalBonusFlag);
-
-  bool get bonusavailable =>
-      price.priceBonusItem.isNotEmpty && _bonusItem != BonusMaterial.empty();
-
-  BonusMaterial get _bonusItem => price.priceBonusItem.firstWhere(
-        (BonusMaterial element) => quantity >= element.qualifyingQuantity,
-        orElse: () => BonusMaterial.empty(),
+  PriceBonusItem get _bonusItem => price.priceBonusItem.firstWhere(
+        (PriceBonusItem element) => quantity >= element.qualifyingQuantity,
+        orElse: () => PriceBonusItem.empty(),
       );
 
-  MaterialItemBonus get _addedDealBonusMaterial => addedBonusList.firstWhere(
+  Iterable<MaterialItemBonus> get _addedDealBonusMaterial =>
+      addedBonusList.where(
         (MaterialItemBonus element) =>
-            element.materialInfo.materialNumber ==
-                materialInfo.materialNumber &&
-            !element.additionalBonusFlag,
-        orElse: () => MaterialItemBonus.empty(),
+            !element.additionalBonusFlag && element.bonusOverrideFlag,
       );
 
   @protected
-  int get calculateMaterialItemBonus {
+  List<BonusMaterial> get calculateMaterialItemBonus {
     switch (_bonusItem.calculation.getCalculationEnum) {
       case BonusMaterialCalculationEnum.calculation915:
-        return (quantity / _bonusItem.qualifyingQuantity).truncate() *
-            _bonusItem.bonusQuantity;
-
+        return _bonusItem.bonusMaterials
+            .map(
+              (BonusMaterial element) => element.copyWith(
+                bonusQuantity:
+                    (quantity / _bonusItem.qualifyingQuantity).truncate() *
+                        element.bonusQuantity,
+              ),
+            )
+            .toList();
       case BonusMaterialCalculationEnum.calculation914:
-        return ((quantity / _bonusItem.qualifyingQuantity) *
-                _bonusItem.bonusQuantity)
-            .truncate();
-
+        return _bonusItem.bonusMaterials
+            .map(
+              (BonusMaterial element) => element.copyWith(
+                bonusQuantity: ((quantity / _bonusItem.qualifyingQuantity) *
+                        element.bonusQuantity)
+                    .truncate(),
+              ),
+            )
+            .toList();
       case BonusMaterialCalculationEnum.calculation913:
-        var bonusQty = 0;
-        price.priceBonusItem.fold<int>(quantity, (remainQty, item) {
-          final ratio = (remainQty / item.qualifyingQuantity).truncate();
-          if (remainQty >= item.qualifyingQuantity) {
-            bonusQty += (ratio * item.bonusQuantity).truncate();
-          }
+        final bonusMaterial = <MaterialNumber, BonusMaterial>{};
+        price.priceBonusItem.fold<int>(quantity, (remainQty, element) {
+          if (remainQty >= element.qualifyingQuantity) {
+            for (final newBonus in element.bonusMaterials) {
+              bonusMaterial.update(
+                newBonus.materialNumber,
+                (BonusMaterial oldBonus) => oldBonus.copyWith(
+                  bonusQuantity:
+                      oldBonus.bonusQuantity + newBonus.bonusQuantity,
+                ),
+                ifAbsent: () => newBonus,
+              );
+            }
+            final ratio = (remainQty / element.qualifyingQuantity).truncate();
 
-          return remainQty - (ratio * item.qualifyingQuantity);
+            return remainQty - (ratio * element.qualifyingQuantity);
+          } else {
+
+            return remainQty;
+          }
         });
-        return bonusQty;
+        return bonusMaterial.values.toList();
 
       case BonusMaterialCalculationEnum.calculation911:
-        return (quantity / _bonusItem.bonusRatio).truncate() *
-            _bonusItem.bonusQuantity;
+        return _bonusItem.bonusMaterials
+            .map(
+              (BonusMaterial element) => element.copyWith(
+                bonusQuantity: (quantity / element.bonusRatio).truncate() *
+                    element.bonusQuantity,
+              ),
+            )
+            .toList();
 
       case BonusMaterialCalculationEnum.calculation912:
       default:
-        return _bonusItem.bonusQuantity;
+        return _bonusItem.bonusMaterials;
     }
   }
 
-  MaterialItemBonus get getMaterialItemBonus {
-    final ratio = (quantity / _bonusItem.qualifyingQuantity).floor();
-    final remainingQty = quantity - (_bonusItem.qualifyingQuantity * ratio);
+  List<MaterialItemBonus> get getMaterialItemBonus {
 
-    return MaterialItemBonus.fromBonusMaterial(_bonusItem).copyWith(
-      qty: calculateMaterialItemBonus,
-      remainingQty: remainingQty,
-      additionalBonusFlag: false,
-      bonusOverrideFlag: true,
-    );
+    return calculateMaterialItemBonus.map((BonusMaterial element) {
+      final ratio = (quantity / element.qualifyingQuantity).floor();
+      final remainingQty = quantity - (element.qualifyingQuantity * ratio);
+      
+      return MaterialItemBonus.fromBonusMaterial(element).copyWith(
+        remainingQty: remainingQty,
+        additionalBonusFlag: false,
+        bonusOverrideFlag: true,
+      );
+    }).toList();
   }
 
   bool get isEligibleAddAdditionBonus =>

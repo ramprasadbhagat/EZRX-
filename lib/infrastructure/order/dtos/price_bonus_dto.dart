@@ -49,7 +49,7 @@ class PriceBonusItemDto with _$PriceBonusItemDto {
 
   factory PriceBonusItemDto.fromDomain(PriceBonusItem priceBonusItem) {
     return PriceBonusItemDto(
-      calculation: priceBonusItem.calculation,
+      calculation: priceBonusItem.calculation.getOrDefaultValue(''),
       qualifyingQuantity: priceBonusItem.qualifyingQuantity,
       bonusMaterials: priceBonusItem.bonusMaterials
           .map((e) => BonusMaterialDto.fromDomain(e))
@@ -58,7 +58,7 @@ class PriceBonusItemDto with _$PriceBonusItemDto {
   }
 
   PriceBonusItem toDomain() => PriceBonusItem(
-        calculation: calculation,
+        calculation: BonusMaterialCalculation(calculation),
         qualifyingQuantity: qualifyingQuantity,
         bonusMaterials: bonusMaterials.map((e) => e.toDomain()).toList(),
       );

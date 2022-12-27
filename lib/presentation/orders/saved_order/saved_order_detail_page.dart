@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
@@ -86,27 +87,48 @@ class SavedOrderDetailPage extends StatelessWidget {
                 },
               ),
             ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final material = order.items[index];
-
-                  return Column(
-                    children: [
-                      OrderMaterialItem(
-                        materialQueryInfo: material.queryInfo,
-                        materialNumber: material.materialNumber.displayMatNo,
-                        qty: material.qty.toString(),
-                      ),
-                      if (material.bonuses.isNotEmpty)
-                        SaveOrderBounsTile(
-                          item: material,
-                        ),
-                    ],
-                  );
-                },
-                childCount: order.items.length,
-              ),
+            BlocBuilder<MaterialPriceDetailBloc, MaterialPriceDetailState>(
+              buildWhen: (previous, current) =>
+                  previous.isFetching != current.isFetching,
+              builder: (context, state) {
+                return SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      var material = order.items[index];
+                      final materialPrice =
+                          state.materialDetails[material.queryInfo]?.price ??
+                              Price.empty();
+                      material = material.copyWith(
+                        bonuses: List.from(material.bonuses)
+                          ..addAll(
+                            PriceAggregate.empty()
+                                .copyWith(
+                                  quantity: material.qty,
+                                  price: materialPrice,
+                                )
+                                .getMaterialItemBonus,
+                          ),
+                      );
+                      
+                      return Column(
+                        children: [
+                          OrderMaterialItem(
+                            materialQueryInfo: material.queryInfo,
+                            materialNumber:
+                                material.materialNumber.displayMatNo,
+                            qty: material.qty.toString(),
+                          ),
+                          if (material.bonuses.isNotEmpty)
+                            SaveOrderBounsTile(
+                              item: material,
+                            ),
+                        ],
+                      );
+                    },
+                    childCount: order.items.length,
+                  ),
+                );
+              },
             ),
             SliverToBoxAdapter(
               child: BlocBuilder<MaterialPriceDetailBloc,
@@ -166,7 +188,10 @@ class SavedOrderDetailPage extends StatelessWidget {
           tenderContract: TenderContract.empty(),
         );
 
-        return priceAggregate;
+        return priceAggregate.copyWith(
+          addedBonusList: List.from(priceAggregate.addedBonusList)
+            ..addAll(priceAggregate.getMaterialItemBonus),
+        );
       }
 
       return PriceAggregate.empty();

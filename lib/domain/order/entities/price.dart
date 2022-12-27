@@ -58,11 +58,24 @@ class Price with _$Price {
 
   bool get isDiscountEligible => isTireDiscountEligible || zmgDiscount;
 
-  bool get isBonusDealEligible => priceBonusItem.isNotEmpty;
+  bool get isBonusDealEligible => _availableBonus.isNotEmpty;
 
-  List<BonusMaterial> get priceBonusItem =>
-      bonuses.isNotEmpty ? bonuses.first.getItems : <BonusMaterial>[];
 
+  List<PriceBonusItem> get priceBonusItem => bonuses.isNotEmpty
+      ? bonuses.first.sortedPriceBonusItem
+      : <PriceBonusItem>[];
+
+  Iterable<BonusMaterial> get _availableBonus =>
+      priceBonusItem.expand((element) => element.bonusMaterials);
+
+  Iterable<BonusMaterial> get sameMaterialBonus => _availableBonus.where(
+        (BonusMaterial element) => element.materialNumber == materialNumber,
+      );
+
+  Iterable<BonusMaterial> get otherMaterialBonus => _availableBonus.where(
+        (BonusMaterial element) => element.materialNumber != materialNumber,
+      );
+      
   bool get isFailurePrice =>
       isValidMaterial && !isFOC && finalPrice == MaterialPrice.unavailable();
 }

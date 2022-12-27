@@ -268,4 +268,28 @@ class CartStorage {
       throw CacheException(message: e.toString());
     }
   }
+
+  Future updateDealBonus({
+    required PriceAggregateDto cartDto,
+    required List<MaterialItemBonusDto> bonusItemsDto,
+  }) async {
+    try {
+      for (final entry in _cartBox.toMap().entries) {
+        final existingItem = entry.value as PriceAggregateDto;
+        if (existingItem.materialDto.materialNumber ==
+            cartDto.materialDto.materialNumber) {
+          existingItem.bonusItem = existingItem.bonusItem
+              .where(
+                (MaterialItemBonusDto element) => element.additionalBonusFlag,
+              )
+              .toList()
+            ..addAll(bonusItemsDto);
+          await _cartBox.put(entry.key, existingItem);
+          break;
+        }
+      }
+    } catch (e) {
+      throw CacheException(message: e.toString());
+    }
+  }
 }

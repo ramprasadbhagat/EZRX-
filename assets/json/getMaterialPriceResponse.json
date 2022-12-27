@@ -520,6 +520,307 @@
         "ZDP5MaxQuota": "",
         "ZDP5RemainingQuota": "",
         "__typename": "Price"
+      },
+      {
+        "MaterialNumber": "000000000023175833",
+        "ListPrice": 550,
+        "AdditionalBonusEligible": true,
+        "PriceRules": [
+          {
+            "Type": "TWD",
+            "Rate": 550,
+            "Conditions": "ZLP0 - A750 - 0046815199",
+            "BonusEligible": true,
+            "__typename": "PriceRule"
+          },
+          {
+            "Type": "TWD",
+            "Rate": 0,
+            "Conditions": "ZDP7 - A750 - 0046815195",
+            "BonusEligible": true,
+            "__typename": "PriceRule"
+          }
+        ],
+        "Bundles": [],
+        "Bonuses": [
+          {
+            "BonusTiers": [
+              {
+                "QualifyingQuantity": 1,
+                "Calculation": "915",
+                "BonusMaterial": [
+                  {
+                    "Id": 1,
+                    "MaterialNumber": "000000000026063717",
+                    "MaterialDescription": "悅己膜衣錠 衛教說明書 ( Yasmin )",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 1,
+                    "BonusQuantity": 1,
+                    "Calculation": "915",
+                    "BonusRatio": 1,
+                    "ConditionId": "0002899045",
+                    "__typename": "BonusMaterial"
+                  }
+                ],
+                "__typename": "BonusTier"
+              },
+              {
+                "QualifyingQuantity": 12,
+                "Calculation": "915",
+                "BonusMaterial": [
+                  {
+                    "Id": 2,
+                    "MaterialNumber": "000000000023175833",
+                    "MaterialDescription": "悅己膜衣錠 1x21",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 12,
+                    "BonusQuantity": 2,
+                    "Calculation": "915",
+                    "BonusRatio": 1,
+                    "ConditionId": "0002899045",
+                    "__typename": "BonusMaterial"
+                  },
+                  {
+                    "Id": 3,
+                    "MaterialNumber": "000000000026063717",
+                    "MaterialDescription": "悅己膜衣錠 衛教說明書 ( Yasmin )",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 12,
+                    "BonusQuantity": 14,
+                    "Calculation": "915",
+                    "BonusRatio": 1,
+                    "ConditionId": "0002899045",
+                    "__typename": "BonusMaterial"
+                  }
+                ],
+                "__typename": "BonusTier"
+              },
+              {
+                "QualifyingQuantity": 24,
+                "Calculation": "915",
+                "BonusMaterial": [
+                  {
+                    "Id": 4,
+                    "MaterialNumber": "000000000023175833",
+                    "MaterialDescription": "悅己膜衣錠 1x21",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 24,
+                    "BonusQuantity": 5,
+                    "Calculation": "915",
+                    "BonusRatio": 1,
+                    "ConditionId": "0002899045",
+                    "__typename": "BonusMaterial"
+                  },
+                  {
+                    "Id": 5,
+                    "MaterialNumber": "000000000026063717",
+                    "MaterialDescription": "悅己膜衣錠 衛教說明書 ( Yasmin )",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 24,
+                    "BonusQuantity": 29,
+                    "Calculation": "915",
+                    "BonusRatio": 1,
+                    "ConditionId": "0002899045",
+                    "__typename": "BonusMaterial"
+                  }
+                ],
+                "__typename": "BonusTier"
+              },
+              {
+                "QualifyingQuantity": 53,
+                "Calculation": "915",
+                "BonusMaterial": [
+                  {
+                    "Id": 6,
+                    "MaterialNumber": "000000000023175833",
+                    "MaterialDescription": "悅己膜衣錠 1x21",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 53,
+                    "BonusQuantity": 15,
+                    "Calculation": "915",
+                    "BonusRatio": 1,
+                    "ConditionId": "0002899045",
+                    "__typename": "BonusMaterial"
+                  },
+                  {
+                    "Id": 7,
+                    "MaterialNumber": "000000000026063717",
+                    "MaterialDescription": "悅己膜衣錠 衛教說明書 ( Yasmin )",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 53,
+                    "BonusQuantity": 68,
+                    "Calculation": "915",
+                    "BonusRatio": 1,
+                    "ConditionId": "0002899045",
+                    "__typename": "BonusMaterial"
+                  }
+                ],
+                "__typename": "BonusTier"
+              },
+              {
+                "QualifyingQuantity": 74,
+                "Calculation": "915",
+                "BonusMaterial": [
+                  {
+                    "Id": 8,
+                    "MaterialNumber": "000000000023175833",
+                    "MaterialDescription": "悅己膜衣錠 1x21",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 74,
+                    "BonusQuantity": 28,
+                    "Calculation": "915",
+                    "BonusRatio": 1,
+                    "ConditionId": "0002899045",
+                    "__typename": "BonusMaterial"
+                  },
+                  {
+                    "Id": 9,
+                    "MaterialNumber": "000000000026063717",
+                    "MaterialDescription": "悅己膜衣錠 衛教說明書 ( Yasmin )",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 74,
+                    "BonusQuantity": 102,
+                    "Calculation": "915",
+                    "BonusRatio": 1,
+                    "ConditionId": "0002899045",
+                    "__typename": "BonusMaterial"
+                  }
+                ],
+                "__typename": "BonusTier"
+              }
+            ],
+            "__typename": "Bonus"
+          }
+        ],
+        "TieredPricing": [
+          {
+            "Tier": "C",
+            "PriceTier": [
+              {
+                "Sequence": 0,
+                "Quantity": 1,
+                "Type": "",
+                "Rate": 550,
+                "ApplyBonus": true,
+                "__typename": "PriceTier"
+              }
+            ],
+            "__typename": "TieredPricing"
+          }
+        ],
+        "Valid": true,
+        "FinalIndividualPrice": 550,
+        "ZMGDiscount": false,
+        "OverridenRulePresent": false,
+        "ZDP5MaxQuota": "",
+        "ZDP5RemainingQuota": "",
+        "__typename": "Price"
+      },
+      {
+        "MaterialNumber": "000000000023007483",
+        "ListPrice": 126,
+        "AdditionalBonusEligible": true,
+        "PriceRules": [
+          {
+            "Type": "SGD",
+            "Rate": 126,
+            "Conditions": "ZLP0 - A901 - 0000885455",
+            "BonusEligible": true,
+            "__typename": "PriceRule"
+          }
+        ],
+        "Bundles": [],
+        "Bonuses": [
+          {
+            "BonusTiers": [
+              {
+                "QualifyingQuantity": 6,
+                "Calculation": "913",
+                "BonusMaterial": [
+                  {
+                    "Id": 1,
+                    "MaterialNumber": "000000000023007483",
+                    "MaterialDescription": "Brilinta Tab 90mg 4x14s",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 6,
+                    "BonusQuantity": 1,
+                    "Calculation": "913",
+                    "BonusRatio": 1,
+                    "ConditionId": "0000754042",
+                    "__typename": "BonusMaterial"
+                  }
+                ],
+                "__typename": "BonusTier"
+              },
+              {
+                "QualifyingQuantity": 12,
+                "Calculation": "913",
+                "BonusMaterial": [
+                  {
+                    "Id": 2,
+                    "MaterialNumber": "000000000023007483",
+                    "MaterialDescription": "Brilinta Tab 90mg 4x14s",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 12,
+                    "BonusQuantity": 2,
+                    "Calculation": "913",
+                    "BonusRatio": 1,
+                    "ConditionId": "0000754042",
+                    "__typename": "BonusMaterial"
+                  }
+                ],
+                "__typename": "BonusTier"
+              },
+              {
+                "QualifyingQuantity": 24,
+                "Calculation": "913",
+                "BonusMaterial": [
+                  {
+                    "Id": 3,
+                    "MaterialNumber": "000000000023007483",
+                    "MaterialDescription": "Brilinta Tab 90mg 4x14s",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 24,
+                    "BonusQuantity": 5,
+                    "Calculation": "913",
+                    "BonusRatio": 1,
+                    "ConditionId": "0000754042",
+                    "__typename": "BonusMaterial"
+                  }
+                ],
+                "__typename": "BonusTier"
+              },
+              {
+                "QualifyingQuantity": 36,
+                "Calculation": "913",
+                "BonusMaterial": [
+                  {
+                    "Id": 4,
+                    "MaterialNumber": "000000000023007483",
+                    "MaterialDescription": "Brilinta Tab 90mg 4x14s",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 36,
+                    "BonusQuantity": 8,
+                    "Calculation": "913",
+                    "BonusRatio": 1,
+                    "ConditionId": "0000754042",
+                    "__typename": "BonusMaterial"
+                  }
+                ],
+                "__typename": "BonusTier"
+              }
+            ],
+            "__typename": "Bonus"
+          }
+        ],
+        "TieredPricing": [],
+        "Valid": true,
+        "FinalIndividualPrice": 126,
+        "ZMGDiscount": false,
+        "OverridenRulePresent": false,
+        "ZDP5MaxQuota": "",
+        "ZDP5RemainingQuota": "",
+        "__typename": "Price"
       }
     ]
   }

@@ -253,6 +253,56 @@
           "isSampleMaterial": false,
           "isFOCMaterial": false,
           "__typename": "Material"
+        },
+        {
+          "materialNumber": "000000000023175833",
+          "materialDescription": "悅己膜衣錠 1x21",
+          "principalCode": "0000101968",
+          "principalName": "台灣拜耳股份有限公司",
+          "therapeuticClass": "Non-IMS classified",
+          "governmentMaterialCode": "",
+          "genericMaterialName": "",
+          "defaultMaterialDescription": "Yasmin FTB 1x21 TW",
+          "oldMaterialCode": "182YS12",
+          "materialGroup4": "E1",
+          "materialGroup2": "",
+          "taxClassification": "Product : Full Tax",
+          "itemRegistrationNumber": "D023338",
+          "taxM1": "1",
+          "taxes": [
+            "5"
+          ],
+          "unitOfMeasurement": "EA",
+          "hidePrice": false,
+          "hasValidTenderContract": null,
+          "hasMandatoryTenderContract": null,
+          "isSampleMaterial": false,
+          "__typename": "Material"
+        },
+        {
+          "materialNumber": "000000000023007483",
+          "materialDescription": "Brilinta Tab 90mg 4x14s",
+          "principalCode": "0000100729",
+          "principalName": "AstraZeneca Singapore Pte Ltd",
+          "therapeuticClass": "Platelet aggregation inhibitors",
+          "governmentMaterialCode": "",
+          "genericMaterialName": "",
+          "defaultMaterialDescription": "Brilinta Tab 90mg 4x14s",
+          "oldMaterialCode": "122UK102201",
+          "materialGroup4": "6PB",
+          "materialGroup2": "",
+          "taxClassification": "Product : Full Tax",
+          "itemRegistrationNumber": "",
+          "taxM1": "1",
+          "taxes": [
+            "0"
+          ],
+          "unitOfMeasurement": "EA",
+          "hidePrice": false,
+          "hasValidTenderContract": null,
+          "hasMandatoryTenderContract": null,
+          "isSampleMaterial": false,
+          "__typename": "Material"
         }
       ]
     }

@@ -19,6 +19,7 @@ import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/material_item_bonus_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_aggregate_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/stock_info_dto.dart';
@@ -412,6 +413,61 @@ class CartRepository implements ICartRepository {
 
       return Right(stockInfoList);
     } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<PriceAggregate>>> updateDealBonusItem({
+    required PriceAggregate cartItem,
+    required List<MaterialItemBonus> bonusItem,
+  }) async {
+    try {
+      await cartStorage.updateDealBonus(
+        cartDto: PriceAggregateDto.fromDomain(cartItem),
+        bonusItemsDto: bonusItem
+            .map(
+              (MaterialItemBonus element) =>
+                  MaterialItemBonusDto.fromDomain(element),
+            )
+            .toList(),
+      );
+
+      return fetchCartItems();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<StockInfo>>> getStockInfoList({
+    required List<MaterialInfo> materialInfoList,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+  }) async {
+    try {
+      final stockList = <StockInfo>[];
+      for (final element in materialInfoList) {
+        final stockInfo = await getStockInfo(
+          customerCodeInfo: customerCodeInfo,
+          material: element,
+          salesOrganisation: salesOrganisation,
+          salesOrganisationConfigs: salesOrganisationConfigs,
+          shipToInfo: shipToInfo,
+        );
+        stockInfo.fold(
+          (failure) => stockList.add(
+            StockInfo.empty().copyWith(materialNumber: element.materialNumber),
+          ),
+          (stockInfo) => stockList.add(stockInfo),
+        );
+      }
+
+      return Right(stockList);
+    } catch (e) {
+      
       return Left(FailureHandler.handleFailure(e));
     }
   }

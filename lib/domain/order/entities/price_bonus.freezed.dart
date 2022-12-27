@@ -142,7 +142,8 @@ abstract class _PriceBonus extends PriceBonus {
 
 /// @nodoc
 mixin _$PriceBonusItem {
-  String get calculation => throw _privateConstructorUsedError;
+  BonusMaterialCalculation get calculation =>
+      throw _privateConstructorUsedError;
   int get qualifyingQuantity => throw _privateConstructorUsedError;
   List<BonusMaterial> get bonusMaterials => throw _privateConstructorUsedError;
 
@@ -158,7 +159,7 @@ abstract class $PriceBonusItemCopyWith<$Res> {
       _$PriceBonusItemCopyWithImpl<$Res, PriceBonusItem>;
   @useResult
   $Res call(
-      {String calculation,
+      {BonusMaterialCalculation calculation,
       int qualifyingQuantity,
       List<BonusMaterial> bonusMaterials});
 }
@@ -184,7 +185,7 @@ class _$PriceBonusItemCopyWithImpl<$Res, $Val extends PriceBonusItem>
       calculation: null == calculation
           ? _value.calculation
           : calculation // ignore: cast_nullable_to_non_nullable
-              as String,
+              as BonusMaterialCalculation,
       qualifyingQuantity: null == qualifyingQuantity
           ? _value.qualifyingQuantity
           : qualifyingQuantity // ignore: cast_nullable_to_non_nullable
@@ -206,7 +207,7 @@ abstract class _$$_PriceBonusItemCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String calculation,
+      {BonusMaterialCalculation calculation,
       int qualifyingQuantity,
       List<BonusMaterial> bonusMaterials});
 }
@@ -230,7 +231,7 @@ class __$$_PriceBonusItemCopyWithImpl<$Res>
       calculation: null == calculation
           ? _value.calculation
           : calculation // ignore: cast_nullable_to_non_nullable
-              as String,
+              as BonusMaterialCalculation,
       qualifyingQuantity: null == qualifyingQuantity
           ? _value.qualifyingQuantity
           : qualifyingQuantity // ignore: cast_nullable_to_non_nullable
@@ -254,7 +255,7 @@ class _$_PriceBonusItem extends _PriceBonusItem {
         super._();
 
   @override
-  final String calculation;
+  final BonusMaterialCalculation calculation;
   @override
   final int qualifyingQuantity;
   final List<BonusMaterial> _bonusMaterials;
@@ -295,13 +296,13 @@ class _$_PriceBonusItem extends _PriceBonusItem {
 
 abstract class _PriceBonusItem extends PriceBonusItem {
   const factory _PriceBonusItem(
-      {required final String calculation,
+      {required final BonusMaterialCalculation calculation,
       required final int qualifyingQuantity,
       required final List<BonusMaterial> bonusMaterials}) = _$_PriceBonusItem;
   const _PriceBonusItem._() : super._();
 
   @override
-  String get calculation;
+  BonusMaterialCalculation get calculation;
   @override
   int get qualifyingQuantity;
   @override

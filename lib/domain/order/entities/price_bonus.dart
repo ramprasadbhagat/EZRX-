@@ -31,13 +31,13 @@ class PriceBonus with _$PriceBonus {
 class PriceBonusItem with _$PriceBonusItem {
   const PriceBonusItem._();
   const factory PriceBonusItem({
-    required String calculation,
+    required BonusMaterialCalculation calculation,
     required int qualifyingQuantity,
     required List<BonusMaterial> bonusMaterials,
   }) = _PriceBonusItem;
 
-  factory PriceBonusItem.empty() => const PriceBonusItem(
-        calculation: '',
+  factory PriceBonusItem.empty() => PriceBonusItem(
+        calculation: BonusMaterialCalculation(''),
         qualifyingQuantity: 0,
         bonusMaterials: [],
       );
