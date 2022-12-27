@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 

@@ -555,10 +555,6 @@ class OrderNumber extends ValueObject<String> {
     return OrderNumber._(validateStringNotEmpty(input));
   }
 
-  String get displayOrderNumber {
-    return naIfEmpty(removeLeadingZero(value.getOrElse(() => '')));
-  }
-
   const OrderNumber._(this.value);
 }
 

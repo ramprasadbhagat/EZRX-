@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
@@ -73,7 +74,7 @@ class HistoryDetails extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_ios_new_sharp),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text('#${orderHistoryItem.orderNumber.displayOrderNumber}'.tr()),
+        title: Text('#${orderHistoryItem.orderNumber.getOrCrash()}'.tr()),
         actions: disableCreateOrder
             ? <Widget>[]
             : <Widget>[
@@ -107,24 +108,29 @@ class HistoryDetails extends StatelessWidget {
                 ),
               ],
       ),
-      body: BlocBuilder<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
+      body: BlocConsumer<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
+        listenWhen: (previous, current) =>
+            previous.failureOrSuccessOption != current.failureOrSuccessOption,
+        listener: (context, state) {
+          state.failureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) {
+                final failureMessage = failure.failureMessage;
+                showSnackBar(
+                  context: context,
+                  message: failureMessage.tr(),
+                );
+              },
+              (success) {},
+            ),
+          );
+        },
         buildWhen: (previous, current) =>
             previous.isLoading != current.isLoading,
         builder: (context, state) {
           final orderDetails =
               context.read<OrderHistoryDetailsBloc>().state.orderHistoryDetails;
-          if (state.showErrorMessage) {
-            return Center(
-              child: Text(
-                'Unable to Get Order History'.tr(),
-                key: const Key('unableToGetOrder'),
-                style: const TextStyle(
-                  color: ZPColors.darkerGreen,
-                  fontSize: 16,
-                ),
-              ),
-            );
-          }
 
           return Container(
             padding: const EdgeInsets.only(

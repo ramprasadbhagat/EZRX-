@@ -13,10 +13,11 @@ class OrderHistoryDetailsRepository implements IOrderHistoryDetailsRepository {
   final Config config;
   final OrderHistoryDetailsLocalDataSource localDataSource;
   final OrderHistoryDetailsRemoteDataSource orderHistoryDetailsRemoteDataSource;
-  OrderHistoryDetailsRepository(
-      {required this.config,
-      required this.localDataSource,
-      required this.orderHistoryDetailsRemoteDataSource,});
+  OrderHistoryDetailsRepository({
+    required this.config,
+    required this.localDataSource,
+    required this.orderHistoryDetailsRemoteDataSource,
+  });
   @override
   Future<Either<ApiFailure, OrderHistoryDetails>> getOrderHistoryDetails({
     required User user,
@@ -30,7 +31,6 @@ class OrderHistoryDetailsRepository implements IOrderHistoryDetailsRepository {
 
         return Right(result);
       } catch (e) {
-        
         return Left(FailureHandler.handleFailure(e));
       }
     }
@@ -40,21 +40,22 @@ class OrderHistoryDetailsRepository implements IOrderHistoryDetailsRepository {
               .getOrderHistoryDetailsForSalesRep(
               loginUserType: user.role.type.loginUserType,
               companyName: '',
-              orderId: orderHistoryItem.orderNumber.displayOrderNumber,
+              orderId: orderHistoryItem.orderNumber.getOrCrash(),
               language: '',
               userName: user.username.getOrCrash(),
             )
           : await orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
               loginUserType: user.role.type.loginUserType,
               companyName: '',
-              orderId: orderHistoryItem.orderNumber.displayOrderNumber,
+              orderId: orderHistoryItem.orderNumber.getOrCrash(),
               language: '',
             );
 
       return Right(orderHistoryDetailsList);
     } catch (e) {
-
-      return Left(FailureHandler.handleFailure(e),);
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
     }
   }
 }

@@ -23,6 +23,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/bonus_aggregate.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
@@ -33,7 +34,6 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_order_ite
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
@@ -272,12 +272,20 @@ void main() {
     });
 
     testWidgets('Show Error Message test ', (tester) async {
-      when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
-        OrderHistoryDetailsState.initial().copyWith(
-          showErrorMessage: true,
-        ),
-      );
-
+      whenListen(
+          mockOrderHistoryDetailsBloc,
+          Stream.fromIterable(
+            [
+              OrderHistoryDetailsState.initial().copyWith(
+                failureOrSuccessOption: none(),
+              ),
+              OrderHistoryDetailsState.initial().copyWith(
+                failureOrSuccessOption: optionOf(
+                  const Left(ApiFailure.other('Fake Error')),
+                ),
+              ),
+            ],
+          ));
       await tester.pumpWidget(
         MaterialFrameWrapper(
           child: BlocProvider<OrderHistoryDetailsBloc>(
@@ -286,9 +294,7 @@ void main() {
           ),
         ),
       );
-
-      final errorMessage = find.byKey(const Key('unableToGetOrder'));
-      expect(errorMessage, findsOneWidget);
+      await tester.pump();
     });
 
     testWidgets(' system message test ', (tester) async {
@@ -387,13 +393,6 @@ void main() {
           ),
         ),
       );
-      // final isBillToenable = eligibilityBlocMock.state.isOrderTypeEnable;
-
-      // expect(isBillToenable, false);
-      // when(() => mockOrderHistoryListBloc.state).thenReturn(
-      //   OrderHistoryListState.initial()
-      //       .copyWith(orderHistoryList: orderHistory),
-      // );
 
       await tester.pumpWidget(getWUT());
       final billToAddress = find.byKey(const Key('billToAddress'));
@@ -415,8 +414,7 @@ void main() {
             salesOrgConfigs: SalesOrganisationConfigs.empty()
                 .copyWith(enablePaymentTerms: true)),
       );
-      // final isPaymentTermEnable = eligibilityBlocMock.state.isPaymentTermEnable;
-      // expect(isPaymentTermEnable, false);
+ 
 
       await tester.pumpWidget(getWUT());
       final paymentTerm = find.byKey(const Key('paymentTerm'));
@@ -508,7 +506,6 @@ void main() {
       await tester.pump();
 
       final pODocumentsUrl = find.textContaining('pODocumentsUrl');
-      // expect(pODocumentsUrl, findsNothing);
       if (mockOrderHistoryDetailsBloc
           .state.orderHistoryDetails.orderHistoryDetailsPoDocuments.isEmpty) {
         expect(pODocumentsUrl, findsOneWidget);
@@ -614,10 +611,6 @@ void main() {
       );
       await tester.pumpWidget(getWUT());
       await tester.pump();
-      // final addToCartPressed = find.byKey(const Key('addToCartPressed'));
-      // expect(addToCartPressed, findsOneWidget);
-      // await tester.tap(addToCartPressed);
-      // await tester.pumpAndSettle(const Duration(milliseconds: 50));
     });
 
     testWidgets('order summary bonus details  test When Product Not Available',
