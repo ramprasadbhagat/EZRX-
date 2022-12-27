@@ -20,6 +20,7 @@ class EligibilityState with _$EligibilityState {
         shipToInfo: ShipToInfo.empty(),
       );
 
+  bool get isBundleMaterialEnable => !salesOrgConfigs.disableBundles;
   bool get isCovidMaterialEnable {
     // 1. SG Covid tab
     return (customerCodeInfo.customerAttr7.isZEV &&

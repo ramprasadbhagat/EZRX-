@@ -14,11 +14,15 @@ class MaterialRoot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<EligibilityBloc, EligibilityState>(
-      buildWhen: (previous, current) => previous != current,
+      buildWhen: (previous, current) =>
+          previous.isBundleMaterialEnable != current.isBundleMaterialEnable ||
+          previous.isCovidMaterialEnable != current.isCovidMaterialEnable,
       builder: (context, state) {
-        final disableBundles = state.salesOrgConfigs.disableBundles;
-        final enableCovidMaterial = state.isCovidMaterialEnable;
-        final length = (disableBundles ? 1 : 2) + (enableCovidMaterial ? 1 : 0);
+        final isBundleMaterialEnable = state.isBundleMaterialEnable;
+        final isCovidMaterialEnable = state.isCovidMaterialEnable;
+        final length = 1 +
+            (isBundleMaterialEnable ? 1 : 0) +
+            (isCovidMaterialEnable ? 1 : 0);
 
         return Scaffold(
           appBar: PreferredSize(
@@ -36,15 +40,15 @@ class MaterialRoot extends StatelessWidget {
                   length: length,
                   tabHeaderText: [
                     'Material'.tr(),
-                    if (!disableBundles) 'Bundles'.tr(),
-                    if (enableCovidMaterial) 'COVID-19'.tr(),
+                    if (isBundleMaterialEnable) 'Bundles'.tr(),
+                    if (isCovidMaterialEnable) 'COVID-19'.tr(),
                   ],
                   tabWidgets: [
                     const MaterialListPage(
                       addToCart: CartBottomSheet.showAddToCartBottomSheet,
                     ),
-                    if (!disableBundles) const MaterialBundleListPage(),
-                    if (enableCovidMaterial)
+                    if (isBundleMaterialEnable) const MaterialBundleListPage(),
+                    if (isCovidMaterialEnable)
                       const CovidMaterialListPage(
                         addToCart: CartBottomSheet.showAddToCartBottomSheet,
                       ),

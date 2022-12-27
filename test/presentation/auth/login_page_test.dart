@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -48,6 +49,9 @@ class AnnnouncementBlocMock
     extends MockBloc<AnnouncementEvent, AnnouncementState>
     implements AnnouncementBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 class PaymentCustomerInformationBlocMock extends MockBloc<
         PaymentCustomerInformationEvent, PaymentCustomerInformationState>
     implements PaymentCustomerInformationBloc {}
@@ -62,6 +66,7 @@ void main() {
   final CustomerCodeBloc customerCodeBlocMock = CustomerCodeBlocMock();
   final ShipToCodeBloc shipToCodeBLocMock = ShipToCodeBlocMock();
   final CartBloc cartBlocMock = CartBlocMock();
+  final eligibilityBlocMock = EligibilityBlocMock();
   final PaymentCustomerInformationBloc paymentCustomerInformationBlocMock =
       PaymentCustomerInformationBlocMock();
 
@@ -88,6 +93,8 @@ void main() {
       when(() => paymentCustomerInformationBlocMock.state)
           .thenReturn(PaymentCustomerInformationState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
     });
     testWidgets("Test don't have credential", (tester) async {
       await tester.pumpWidget(
@@ -210,6 +217,9 @@ void main() {
               BlocProvider<UserBloc>(
                 create: (context) => userBlocMock,
               ),
+              BlocProvider<EligibilityBloc>(
+                create: (context) => eligibilityBlocMock,
+              ),
             ],
             child: const LoginPage(),
           ),
@@ -241,6 +251,9 @@ void main() {
             ),
             BlocProvider<CartBloc>(
               create: (context) => cartBlocMock,
+            ),
+            BlocProvider<EligibilityBloc>(
+              create: (context) => eligibilityBlocMock,
             ),
           ],
           child: const SplashPage(),

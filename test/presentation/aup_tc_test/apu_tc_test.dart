@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -55,6 +56,9 @@ class PaymentCustomerInfoMockBloc extends MockBloc<
         PaymentCustomerInformationEvent, PaymentCustomerInformationState>
     implements PaymentCustomerInformationBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 void main() {
   late GetIt locator;
   late SalesOrgBloc mockSalesOrgBloc;
@@ -65,12 +69,14 @@ void main() {
   late AuthBloc authBlocMock;
   late CartBloc cartBlocMock;
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     mockSalesOrgBloc = MockSalesOrgBloc();
     mockAuthBloc = MockAuthBloc();
     mockAupTcBloc = MockAupTcBloc();
+    eligibilityBlocMock = EligibilityBlocMock();
     locator = GetIt.instance;
     locator.registerLazySingleton(() => AppRouter());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
@@ -95,12 +101,15 @@ void main() {
       authBlocMock = AuthBlocMock();
       cartBlocMock = CartBlocMock();
       paymentCustomerInformationBlocMock = PaymentCustomerInfoMockBloc();
+      eligibilityBlocMock = EligibilityBlocMock();
       // autoRouterMock = locator<AppRouter>();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
       when(() => paymentCustomerInformationBlocMock.state)
           .thenReturn(PaymentCustomerInformationState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
     });
     testWidgets(
         'Test - AupTc Widget Show AupTcBloc state.showTermsAndConditon=true',
@@ -172,6 +181,9 @@ void main() {
             ),
             BlocProvider<PaymentCustomerInformationBloc>(
               create: (context) => paymentCustomerInformationBlocMock,
+            ),
+            BlocProvider<EligibilityBloc>(
+              create: (context) => eligibilityBlocMock,
             ),
           ],
           child: const SplashPage(),

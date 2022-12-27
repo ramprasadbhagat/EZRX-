@@ -4,12 +4,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/approver/approver_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -150,6 +154,45 @@ class SplashPage extends StatelessWidget {
                           context.read<SalesOrgBloc>().state.configs,
                       salesRepresentativeInfo:
                           context.read<SalesRepBloc>().state.salesRepInfo,
+                    ),
+                  );
+            }
+          },
+        ),
+        BlocListener<EligibilityBloc, EligibilityState>(
+          listenWhen: (previous, current) =>
+              previous.isCovidMaterialEnable != current.isCovidMaterialEnable ||
+              previous.isBundleMaterialEnable !=
+                  current.isBundleMaterialEnable ||
+              previous.isOrderTypeEnable != current.isOrderTypeEnable,
+          listener: (context, state) {
+            if (state.isCovidMaterialEnable) {
+              context.read<CovidMaterialListBloc>().add(
+                    CovidMaterialListEvent.fetch(
+                      user: state.user,
+                      salesOrganisation: state.salesOrganisation,
+                      configs: state.salesOrgConfigs,
+                      customerCodeInfo: state.customerCodeInfo,
+                      shipToInfo: state.shipToInfo,
+                      pickAndPack: state.getPNPValueCovidMaterial,
+                    ),
+                  );
+            }
+            if (state.isBundleMaterialEnable) {
+              context.read<MaterialBundleListBloc>().add(
+                    MaterialBundleListEvent.fetch(
+                      user: state.user,
+                      customerCode: state.customerCodeInfo,
+                      shipToCode: state.shipToInfo,
+                      salesOrganisation: state.salesOrganisation,
+                    ),
+                  );
+            }
+            if (state.isOrderTypeEnable) {
+              context.read<OrderDocumentTypeBloc>().add(
+                    OrderDocumentTypeEvent.fetch(
+                      salesOrganisation: state.salesOrganisation,
+                      isEDI: state.customerCodeInfo.status.isEDI,
                     ),
                   );
             }

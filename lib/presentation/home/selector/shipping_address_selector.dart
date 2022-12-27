@@ -7,10 +7,8 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
-import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
-import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
@@ -40,10 +38,6 @@ class ShipCodeSelector extends StatelessWidget {
           listenWhen: (previous, current) =>
               previous.shipToInfo != current.shipToInfo,
           listener: (context, state) {
-            final enableBundles =
-                !(context.read<SalesOrgBloc>().state.configs.disableBundles);
-            final enableCovidMaterial =
-                context.read<EligibilityBloc>().state.isCovidMaterialEnable;
             final salesOrgState = context.read<SalesOrgBloc>().state;
 
             context.read<MaterialFilterBloc>().add(
@@ -90,18 +84,7 @@ class ShipCodeSelector extends StatelessWidget {
                       selectedShipTo: state.shipToInfo,
                     ),
                   );
-              context.read<OrderDocumentTypeBloc>().add(
-                    OrderDocumentTypeEvent.fetch(
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      isEDI: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo
-                          .status
-                          .isEDI,
-                    ),
-                  );
+
               context.read<MaterialListBloc>().add(
                     MaterialListEvent.fetch(
                       user: context.read<UserBloc>().state.user,
@@ -127,27 +110,7 @@ class ShipCodeSelector extends StatelessWidget {
                           .getPNPValueMaterial,
                     ),
                   );
-              if (enableCovidMaterial) {
-                context.read<CovidMaterialListBloc>().add(
-                      CovidMaterialListEvent.fetch(
-                        user: context.read<UserBloc>().state.user,
-                        salesOrganisation: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
-                        configs: context.read<SalesOrgBloc>().state.configs,
-                        customerCodeInfo: context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo,
-                        shipToInfo: state.shipToInfo,
-                        pickAndPack: context
-                            .read<EligibilityBloc>()
-                            .state
-                            .getPNPValueMaterial,
-                      ),
-                    );
-              }
+
               context.read<OrderHistoryListBloc>().add(
                     OrderHistoryListEvent.fetch(
                       salesOrgConfigs:
@@ -175,23 +138,6 @@ class ShipCodeSelector extends StatelessWidget {
                     ),
                   );
 
-              if (enableBundles) {
-                context.read<MaterialBundleListBloc>().add(
-                      MaterialBundleListEvent.fetch(
-                        user: context.read<UserBloc>().state.user,
-                        customerCode: context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo,
-                        shipToCode:
-                            context.read<ShipToCodeBloc>().state.shipToInfo,
-                        salesOrganisation: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
-                      ),
-                    );
-              }
               context.read<CartBloc>().add(CartEvent.fetch(
                     customerCodeInfo:
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
@@ -258,18 +204,6 @@ class ShipCodeSelector extends StatelessWidget {
               context
                   .read<FavouriteBloc>()
                   .add(const FavouriteEvent.initialized());
-
-              if (enableBundles) {
-                context
-                    .read<MaterialBundleListBloc>()
-                    .add(const MaterialBundleListEvent.initialized());
-              }
-
-              if (enableCovidMaterial) {
-                context
-                    .read<CovidMaterialListBloc>()
-                    .add(const CovidMaterialListEvent.initialized());
-              }
               context
                   .read<OrderHistoryFilterBloc>()
                   .add(const OrderHistoryFilterEvent.initialized());

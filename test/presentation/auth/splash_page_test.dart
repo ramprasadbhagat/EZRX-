@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/approver/approver_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
@@ -64,6 +65,9 @@ class PaymentCustomerInformationBlocMock extends MockBloc<
 class PaymentTermBlocMock extends MockBloc<PaymentTermEvent, PaymentTermState>
     implements PaymentTermBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -77,6 +81,7 @@ void main() {
   late CartBloc cartBlocMock;
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
   late PaymentTermBloc paymentTermBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
   late AppRouter autoRouterMock;
   late ApproverBloc approverBlocMock;
 
@@ -117,6 +122,7 @@ void main() {
       paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
       paymentTermBlocMock = PaymentTermBlocMock();
       approverBlocMock = ApproverBlocMock();
+      eligibilityBlocMock = EligibilityBlocMock();
       autoRouterMock = locator<AppRouter>();
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -134,6 +140,8 @@ void main() {
       when(() => paymentTermBlocMock.state)
           .thenReturn(PaymentTermState.initial());
       when(() => approverBlocMock.state).thenReturn(ApproverState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
     });
 
     Future getWidget(tester) async {
@@ -156,6 +164,8 @@ void main() {
                 create: (context) => paymentCustomerInformationBlocMock),
             BlocProvider<PaymentTermBloc>(
                 create: (context) => paymentTermBlocMock),
+            BlocProvider<EligibilityBloc>(
+                create: (context) => eligibilityBlocMock),
           ],
           child: const SplashPage(),
         ),
