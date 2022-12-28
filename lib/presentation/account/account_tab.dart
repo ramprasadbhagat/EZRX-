@@ -114,9 +114,7 @@ class _ReturnsTile extends StatelessWidget {
                   'Returns',
                   locale: context.locale,
                 ).tr(),
-                onTap: () {
-                  //TODO: implement it later on
-                },
+                onTap: () => context.router.pushNamed('returns'),
               ),
             );
           },

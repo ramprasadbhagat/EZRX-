@@ -212,7 +212,7 @@ String salesOrgCountry(String salesOrg) {
 //  'zp_admin'
 //  'client_admin'
 //  'client_user'
-bool roleCanLoginOnBehalf(String roleType) {
+bool isAdmin(String roleType) {
   switch (roleType) {
     case 'root_admin':
     case 'zp_admin':

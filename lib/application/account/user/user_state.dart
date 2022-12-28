@@ -20,6 +20,7 @@ class UserState with _$UserState {
   String get userRoleName => user.role.name;
   FullName get userFullName => user.fullName;
   bool get userCanLoginOnBehalf => user.role.type.canLoginOnBehalf;
+  bool get userHasReturnsAdminAccess => user.role.type.hasReturnsAdminAccess;
   String get languagePreference => user.settings.languagePreference;
   bool get emailNotifications => user.settings.emailNotifications;
   List<SalesOrganisation> get userSalesOrganisations =>

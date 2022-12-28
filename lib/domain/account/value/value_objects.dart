@@ -110,7 +110,11 @@ class RoleType extends ValueObject<String> {
   }
 
   bool get canLoginOnBehalf {
-    return roleCanLoginOnBehalf(value.getOrElse(() => ''));
+    return isAdmin(value.getOrElse(() => ''));
+  }
+
+  bool get hasReturnsAdminAccess {
+    return isAdmin(value.getOrElse(() => ''));
   }
 
   String get loginUserType {
