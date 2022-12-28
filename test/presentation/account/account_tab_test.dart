@@ -261,5 +261,70 @@ void main() {
       await tester.tap(settingsTile);
       await tester.pump();
     });
+
+    testWidgets('Test return tile', (tester) async {
+      final expectedApproverStates = [
+        ApproverState.initial().copyWith(isApprover: true),
+      ];
+
+      whenListen(approverBlocMock, Stream.fromIterable(expectedApproverStates));
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final returnsTile = find.byKey(const Key('returnsTile'));
+      expect(returnsTile, findsOneWidget);
+    });
+
+    testWidgets(
+        'Returns Tile listener run check when api fails and when approver status changes',
+        (tester) async {
+      final expectedApproverStates = [
+        ApproverState.initial().copyWith(
+          isApprover: true,
+          apiFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('mockError'),
+            ),
+          ),
+        ),
+        ApproverState.initial().copyWith(
+          apiFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('mockError'),
+            ),
+          ),
+        ),
+      ];
+
+      whenListen(approverBlocMock, Stream.fromIterable(expectedApproverStates));
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final snackBar = find.byKey(const Key('snackBarMessage'));
+      expect(snackBar, findsOneWidget);
+    });
+
+    testWidgets('Returns Tile listener run check when api fails',
+        (tester) async {
+      final expectedApproverStates = [
+        ApproverState.initial(),
+        ApproverState.initial().copyWith(
+          apiFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('mockError'),
+            ),
+          ),
+        ),
+      ];
+
+      whenListen(approverBlocMock, Stream.fromIterable(expectedApproverStates));
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final snackBar = find.byKey(const Key('snackBarMessage'));
+      expect(snackBar, findsOneWidget);
+    });
   });
 }
