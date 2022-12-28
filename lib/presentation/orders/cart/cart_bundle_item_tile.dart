@@ -132,7 +132,7 @@ class CartBundleItemTile extends StatelessWidget {
                               children: [
                                 enableVat
                                     ? Text(
-                                        '${'Price before $taxCode: '.tr()}${materialCommonInfo.display(PriceType.listPrice)}',
+                                        '${'Price before $taxCode: '.tr()}${materialCommonInfo.display(PriceType.finalPrice)}',
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyText1

@@ -94,7 +94,7 @@ void main() {
         ],
         verify: (AddToCartBloc bloc) {
           expect(
-            bloc.state.cartItem.listPrice,
+            bloc.state.cartItem.finalPrice,
             mockCartItemList.first.price.priceTireItem.last.rate,
           );
         },
@@ -125,11 +125,11 @@ void main() {
         ],
         verify: (AddToCartBloc bloc) {
           expect(
-            bloc.state.cartItem.listPrice,
+            bloc.state.cartItem.finalPrice,
             mockCartItemList.first.price.priceTireItem.last.rate,
           );
           expect(
-            bloc.state.cartItem.listPriceTotal,
+            bloc.state.cartItem.finalPriceTotal,
             (mockCartItemList.first
                     .copyWith(quantity: 2)
                     .price
@@ -173,7 +173,7 @@ void main() {
         ],
         verify: (AddToCartBloc bloc) {
           expect(
-            bloc.state.cartItem.listPrice,
+            bloc.state.cartItem.finalPrice,
             mockCartItemList.first.price
                 .copyWith(zmgDiscount: true)
                 .priceTireItem
@@ -181,7 +181,7 @@ void main() {
                 .rate,
           );
           expect(
-            bloc.state.cartItem.listPriceTotal,
+            bloc.state.cartItem.finalPriceTotal,
             mockCartItemList.first.price
                     .copyWith(zmgDiscount: true)
                     .priceTireItem
@@ -223,7 +223,7 @@ void main() {
         ],
         verify: (AddToCartBloc bloc) {
           expect(
-            bloc.state.cartItem.listPrice,
+            bloc.state.cartItem.finalPrice,
             mockCartItemList.first.price
                 .copyWith(zmgDiscount: true)
                 .priceTireItem
@@ -231,7 +231,7 @@ void main() {
                 .rate,
           );
           expect(
-            bloc.state.cartItem.listPriceTotal,
+            bloc.state.cartItem.finalPriceTotal,
             mockCartItemList.first
                     .copyWith(
                       discountedMaterialCount:
@@ -274,7 +274,7 @@ void main() {
         ],
         verify: (AddToCartBloc bloc) {
           expect(
-            bloc.state.cartItem.listPrice,
+            bloc.state.cartItem.finalPrice,
             mockCartItemList.first.price
                 .copyWith(zmgDiscount: true)
                 .priceTireItem
@@ -282,7 +282,7 @@ void main() {
                 .rate,
           );
           expect(
-            bloc.state.cartItem.listPriceTotal,
+            bloc.state.cartItem.finalPriceTotal,
             mockCartItemList.first.price
                     .copyWith(zmgDiscount: true)
                     .priceTireItem
@@ -320,7 +320,7 @@ void main() {
         ],
         verify: (AddToCartBloc bloc) {
           expect(
-            bloc.state.cartItem.listPrice,
+            bloc.state.cartItem.finalPrice,
             mockCartItemList.first.price
                 .copyWith(zmgDiscount: true)
                 .priceTireItem
@@ -328,7 +328,7 @@ void main() {
                 .rate,
           );
           expect(
-            bloc.state.cartItem.listPriceTotal,
+            bloc.state.cartItem.finalPriceTotal,
             mockCartItemList.first.price
                     .copyWith(zmgDiscount: true)
                     .priceTireItem

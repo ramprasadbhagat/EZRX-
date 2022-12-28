@@ -316,7 +316,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
               children: [
                 if (enableVat)
                   Text(
-                    '${'Price before $taxCode: '.tr()}${cartItem.display(PriceType.listPrice)}',
+                    '${'Price before $taxCode: '.tr()}${cartItem.display(PriceType.finalPrice)}',
                     style: Theme.of(context).textTheme.bodyText1?.apply(
                           color:
                               isPriceOverride ? ZPColors.red : ZPColors.black,

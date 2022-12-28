@@ -426,7 +426,7 @@ class _PriceLabel extends StatelessWidget {
                   : const SizedBox.shrink(),
               context.read<SalesOrgBloc>().state.configs.enableVat
                   ? Text(
-                      '${'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr()}${priceAggregate.display(PriceType.listPrice)}',
+                      '${'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr()}${priceAggregate.display(PriceType.finalPrice)}',
                       style: Theme.of(context).textTheme.bodyText1?.apply(
                             color: ZPColors.lightGray,
                           ),

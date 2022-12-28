@@ -30,19 +30,15 @@ class CartItem with _$CartItem {
 
   double get listPrice {
     if (materials.isEmpty) return 0;
-    switch (itemType) {
-      case CartItemType.material:
-        return materials.first.listPrice;
-      case CartItemType.bundle:
-        return _bundleRate;
-    }
+    
+    return materials.first.listPrice;
   }
 
   double get subTotalPrice {
     if (materials.isEmpty) return 0;
     switch (itemType) {
       case CartItemType.material:
-        return materials.first.listPriceTotal;
+        return materials.first.finalPriceTotal;
       case CartItemType.bundle:
         return _bundleRate * _totalQty;
     }

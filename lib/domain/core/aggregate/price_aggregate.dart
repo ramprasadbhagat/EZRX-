@@ -89,21 +89,7 @@ class PriceAggregate with _$PriceAggregate {
     );
   }
 
-  double get listPrice {
-    if (price.isDiscountEligible) {
-      return tenderContract.tenderPrice.tenderPrice != 0
-          ? tenderContract.tenderPrice.tenderPriceByPricingUnit(tenderContract.pricingUnit)
-          : discountedListPrice;
-    }
-
-    return tenderContract.tenderPrice.tenderPrice != 0
-        ? tenderContract.tenderPrice.tenderPriceByPricingUnit(tenderContract.pricingUnit)
-        : price.finalPrice.getOrDefaultValue(0);
-  }
-
-  double get unitPrice {
-    final value = listPrice;
-
+  double vatCalculation(double value) {
     // VN Tax
     if (salesOrgConfig.enableVat &&
         salesOrgConfig.enableTaxClassification &&
@@ -121,8 +107,30 @@ class PriceAggregate with _$PriceAggregate {
     return value;
   }
 
+  double get listPrice {
+    return vatCalculation(price.lastPrice.getOrCrash());
+  }
+
+  double get finalPrice {
+    if (price.isDiscountEligible) {
+      return tenderContract.tenderPrice.tenderPrice != 0
+          ? tenderContract.tenderPrice
+              .tenderPriceByPricingUnit(tenderContract.pricingUnit)
+          : discountedListPrice;
+    }
+
+    return tenderContract.tenderPrice.tenderPrice != 0
+        ? tenderContract.tenderPrice
+            .tenderPriceByPricingUnit(tenderContract.pricingUnit)
+        : price.finalPrice.getOrDefaultValue(0);
+  }
+
+  double get unitPrice {
+    return vatCalculation(finalPrice);
+  }
+
   double get unitPriceForTotal {
-    final value = listPrice;
+    final value = finalPrice;
 
     // VN Tax
     if (salesOrgConfig.enableVat &&
@@ -153,8 +161,8 @@ class PriceAggregate with _$PriceAggregate {
     return value;
   }
 
-  double get listPriceTotal {
-    return listPrice * quantity;
+  double get finalPriceTotal {
+    return finalPrice * quantity;
   }
 
   double get unitPriceTotal {
@@ -191,17 +199,20 @@ class PriceAggregate with _$PriceAggregate {
 
     double result;
     switch (priceType) {
+      case PriceType.finalPrice:
+        result = finalPrice;
+        break;
       case PriceType.unitPrice:
         result =
-            salesOrgConfig.enableTaxAtTotalLevelOnly ? listPrice : unitPrice;
+            salesOrgConfig.enableTaxAtTotalLevelOnly ? finalPrice : unitPrice;
         break;
 
-      case PriceType.listPriceTotal:
-        result = listPriceTotal;
+      case PriceType.finalPriceTotal:
+        result = finalPriceTotal;
         break;
       case PriceType.unitPriceTotal:
         result = salesOrgConfig.enableTaxAtTotalLevelOnly
-            ? listPriceTotal
+            ? finalPriceTotal
             : unitPriceTotal;
         break;
       case PriceType.listPrice:
@@ -372,6 +383,7 @@ class PriceAggregate with _$PriceAggregate {
 enum PriceType {
   listPrice,
   unitPrice,
-  listPriceTotal,
+  finalPrice,
+  finalPriceTotal,
   unitPriceTotal,
 }

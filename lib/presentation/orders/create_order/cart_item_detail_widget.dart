@@ -161,7 +161,7 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: BalanceTextRow(
                           keyText: 'Unit price before $taxCode'.tr(),
-                          valueText: cartItem.display(PriceType.listPrice),
+                          valueText: cartItem.display(PriceType.finalPrice),
                           keyFlex: 1,
                           valueFlex: 1,
                         ),
@@ -181,7 +181,7 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: BalanceTextRow(
                           keyText: 'Total price before $taxCode'.tr(),
-                          valueText: cartItem.display(PriceType.listPriceTotal),
+                          valueText: cartItem.display(PriceType.finalPriceTotal),
                           keyFlex: 1,
                           valueFlex: 1,
                         ),
