@@ -1,11 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/presentation/orders/cart/add_bonus.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/custom_expansion_tile.dart'
     as custom;
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,16 +48,8 @@ class BounsTile extends StatelessWidget {
                         children: <Widget>[
                           SizedBox(
                             child: TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => BonusAddPage(
-                                      cartItem: cartItem,
-                                    ),
-                                  ),
-                                );
-                              },
+                              onPressed: () => context.router
+                                  .push(BonusAddPageRoute(cartItem: cartItem)),
                               child: Row(
                                 children: <Widget>[
                                   const Icon(

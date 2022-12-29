@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class OrderHistoryFilterDrawer extends StatelessWidget {
                   previous.isSubmitting != current.isSubmitting,
               listener: (context, state) {
                 if (state.isSubmitting) {
-                  Navigator.pop(context);
+                  context.router.pop();
                 }
               },
               builder: (context, state) {
@@ -124,9 +125,7 @@ class _FilterHeader extends StatelessWidget {
                 Icons.close,
               ),
               onPressed: () {
-                Navigator.pop(
-                  context,
-                );
+                context.router.pop();
               },
             ),
           ),
@@ -621,12 +620,11 @@ class _ClearButton extends StatelessWidget {
           (states) => const BorderSide(color: ZPColors.primary),
         ),
       ),
-      onPressed: () async {
+      onPressed: () {
         context.read<OrderHistoryFilterBloc>().add(
               const OrderHistoryFilterEvent.initialized(),
             );
-
-        Navigator.of(context).pop();
+        context.router.pop();
       },
       child: Text(
         'Clear'.tr(),

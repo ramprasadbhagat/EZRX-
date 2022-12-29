@@ -20,16 +20,20 @@ class OrderHistoryListBlocMock
     extends MockBloc<OrderHistoryListEvent, OrderHistoryListState>
     implements OrderHistoryListBloc {}
 
+class MockAppRouter extends Mock implements AppRouter {}
+
 void main() {
   late GetIt locator;
-  late AppRouter autoRouterMock;
   final mockOrderHistoryFilterByStatusBloc =
       OrderHistoryFilterByStatusMockBloc();
+  late MockAppRouter autoRouterMock;
+
   setUpAll(() {
     locator = GetIt.instance;
-    locator.registerLazySingleton(() => AppRouter());
-    autoRouterMock = locator<AppRouter>();
+    locator.registerLazySingleton(() => MockAppRouter());
+    autoRouterMock = locator<MockAppRouter>();
     locator.registerLazySingleton(() => mockOrderHistoryFilterByStatusBloc);
+    when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
   });
   group('Order-History Filter By Status', () {
     setUp(() {
@@ -102,7 +106,7 @@ void main() {
       expect(filterclearAllButton, findsOneWidget);
       await tester.tap(filterclearAllButton);
       await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(filterclearAllButton, findsNothing);
+      verify(() => autoRouterMock.pop()).called(1);
     });
   });
 }

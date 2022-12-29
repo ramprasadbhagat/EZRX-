@@ -222,7 +222,7 @@ class _BodyContent extends StatelessWidget {
               //                         .selectedMaterialFilter,
               //                   ),
               //                 );
-              //             Navigator.pop(context);
+              //             context.router.pop();
               //           },
               //           child: const Text(
               //             'Apply',

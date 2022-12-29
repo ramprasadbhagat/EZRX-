@@ -494,6 +494,8 @@ void main() {
 
     testWidgets('Change order type when already cart item added, success',
         (tester) async {
+      tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+      tester.binding.window.devicePixelRatioTestValue = 1.0;
       final eligibilityState = eligibilityBlocMock.state.copyWith(
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
@@ -520,19 +522,6 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 1));
       final orderTypeSelector = find.byKey(const Key('orderTypeSelector'));
       expect(orderTypeSelector, findsOneWidget);
-
-      final orderDocumentTypedialog =
-          find.byKey(const Key('orderDocumentTypedialog'));
-      expect(orderDocumentTypedialog, findsOneWidget);
-      await tester.tap(orderDocumentTypedialog);
-
-      await tester.pumpAndSettle(const Duration(seconds: 1));
-
-      final documentType =
-          find.byKey(Key(fakeOrderDocumentTypeList.last.documentType));
-      expect(documentType, findsOneWidget);
-      await tester.tap(documentType);
-      await tester.pumpAndSettle(const Duration(seconds: 1));
 
       //add to cart
       when(() => cartBlocMock.state).thenReturn(
@@ -590,19 +579,6 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 3));
       final orderTypeSelector = find.byKey(const Key('orderTypeSelector'));
       expect(orderTypeSelector, findsOneWidget);
-
-      final orderDocumentTypedialog =
-          find.byKey(const Key('orderDocumentTypedialog'));
-      expect(orderDocumentTypedialog, findsOneWidget);
-      await tester.tap(orderDocumentTypedialog);
-
-      await tester.pumpAndSettle(const Duration(seconds: 2));
-
-      final documentType =
-          find.byKey(Key(fakeOrderDocumentTypeList.last.documentType));
-      expect(documentType, findsOneWidget);
-      await tester.tap(documentType);
-      await tester.pumpAndSettle(const Duration(seconds: 1));
 
       //add to cart
       when(() => cartBlocMock.state).thenReturn(

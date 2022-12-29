@@ -75,6 +75,8 @@ class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
+class MockAppRouter extends Mock implements AppRouter {}
+
 class OrderHistoryFilterMockBloc
     extends MockBloc<OrderHistoryFilterEvent, OrderHistoryFilterState>
     implements OrderHistoryFilterBloc {}
@@ -118,7 +120,7 @@ void main() {
   final userBlocMock = UserBlocMock();
   late CustomerCodeBloc customerCodeBlocMock;
   late MockHTTPService mockHTTPService;
-  late AppRouter autoRouterMock;
+  late MockAppRouter autoRouterMock;
 
   late OrderHistoryDetails orderHistoryDetails;
   late EligibilityBlocMock eligibilityBlocMock;
@@ -137,7 +139,7 @@ void main() {
     orderHistoryDetails =
         await OrderHistoryDetailsLocalDataSource().getOrderHistoryDetails();
     orderHistory = await OrderHistoryLocalDataSource().getOrderHistory();
-    locator.registerLazySingleton(() => AppRouter());
+    locator.registerLazySingleton(() => MockAppRouter());
     locator.registerLazySingleton(() => locator<CountlyService>());
     locator.registerLazySingleton(() => mockOrderHistoryListBloc);
     locator.registerLazySingleton(() => mockOrderHistoryDetailsBloc);
@@ -146,7 +148,7 @@ void main() {
     locator.registerLazySingleton(() => mockSalesOrgBloc);
     locator.registerLazySingleton(() => orderHistoryDetailsRepository);
 
-    autoRouterMock = locator<AppRouter>();
+    autoRouterMock = locator<MockAppRouter>();
     mockHTTPService = MockHTTPService();
     customerCodeBlocMock = CustomerCodeBlocMock();
 
@@ -200,6 +202,11 @@ void main() {
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
       when(() => addToCartBlocMock.state).thenReturn(AddToCartState.initial());
+      when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
+      when(() => materialPriceBlocMock.state)
+          .thenReturn(MaterialPriceState.initial());
+      when(() => addToCartBlocMock.state).thenReturn(AddToCartState.initial());
+      when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
     });
     StackRouterScope getWUT() {
       return WidgetUtils.getScopedWidget(
@@ -414,7 +421,6 @@ void main() {
             salesOrgConfigs: SalesOrganisationConfigs.empty()
                 .copyWith(enablePaymentTerms: true)),
       );
- 
 
       await tester.pumpWidget(getWUT());
       final paymentTerm = find.byKey(const Key('paymentTerm'));
@@ -430,6 +436,7 @@ void main() {
           showErrorMessage: false,
         ),
       );
+      when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
       await tester.pumpWidget(getWUT());
       await tester.pump();
       final orderHistoryDetailsList =
@@ -438,7 +445,7 @@ void main() {
       await tester.tap(orderHistoryDetailsList);
       await tester.pumpAndSettle(const Duration(milliseconds: 50));
 
-      expect(orderHistoryDetailsList, findsNothing);
+      verify(() => autoRouterMock.pop()).called(1);
     });
 
     testWidgets('Reorder test ', (tester) async {
@@ -554,8 +561,9 @@ void main() {
       await tester.tap(downloadAll, warnIfMissed: false);
       await tester.pump();
     });
-
     testWidgets('addToCartPressed test ', (tester) async {
+      when(() => autoRouterMock.pushNamed('cart_page'))
+          .thenAnswer((invocation) async => true);
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty(),
@@ -577,6 +585,8 @@ void main() {
           },
         ),
       );
+      when(() => autoRouterMock.pushNamed('cart_page'))
+          .thenAnswer((invocation) async => true);
 
       await tester.pumpWidget(
         MaterialFrameWrapper(

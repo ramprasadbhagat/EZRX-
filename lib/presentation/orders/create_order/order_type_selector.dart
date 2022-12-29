@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
@@ -188,8 +190,8 @@ class _OrderTypeSelectorField extends StatelessWidget {
                   fontSize: 14,
                 ),
               ),
-              onPressed: () async {
-                Navigator.pop(ctx);
+              onPressed: () {
+                ctx.router.pop();
                 final validationText = getValidationText(
                   orderDocumentTypeState.selectedOrderType,
                   i,

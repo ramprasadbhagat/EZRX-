@@ -452,6 +452,14 @@ void main() {
         await tester.pumpWidget(getWUT());
         await tester.pump();
         expect(filterstatus, findsOneWidget);
+        await tester.tap(filterstatus);
+        await tester.pumpAndSettle(const Duration(seconds: 3));
+        final filterclearAllButton =
+            find.byKey(const Key('filterclearAllButton'));
+
+        expect(filterclearAllButton, findsOneWidget);
+        await tester.tap(filterclearAllButton);
+        await tester.pumpAndSettle(const Duration(seconds: 3));
       });
       testWidgets('Filter status list not empty test', (tester) async {
         when(() => mockShipToCodeBloc.state).thenReturn(

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_bonus.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/account/account_tab.dart';
 import 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
@@ -84,6 +85,7 @@ import 'package:ezrxmobile/presentation/history/history_details.dart';
     AutoRoute(path: 'saved_order_list', page: SavedOrderListPage),
     AutoRoute(path: 'saved_order_detail', page: SavedOrderDetailPage),
     AutoRoute(path: 'history_details', page: HistoryDetails),
+    AutoRoute(path: 'add_bonus', page: BonusAddPage),
     CustomRoute(
       path: 'bundle_item_detail',
       page: BundleItemDetailPage,

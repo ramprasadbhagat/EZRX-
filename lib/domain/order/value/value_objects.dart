@@ -565,7 +565,6 @@ class ExpiryDate extends ValueObject<String> {
   factory ExpiryDate(String input) {
     return ExpiryDate._(validateStringNotEmpty(input));
   }
-
   String get getExpiryDate {
     return naIfEmpty(value.getOrElse(() => ''));
   }

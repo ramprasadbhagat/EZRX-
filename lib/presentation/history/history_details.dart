@@ -72,7 +72,7 @@ class HistoryDetails extends StatelessWidget {
         leading: IconButton(
           key: const ValueKey('backToOrderHistoryDetailsPage'),
           icon: const Icon(Icons.arrow_back_ios_new_sharp),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => context.router.pop(),
         ),
         title: Text('#${orderHistoryItem.orderNumber.getOrCrash()}'.tr()),
         actions: disableCreateOrder
@@ -839,7 +839,7 @@ class LoadingOverlay {
   BuildContext _context;
 
   void hide() {
-    Navigator.of(_context).pop();
+    _context.router.pop();
   }
 
   void show() {

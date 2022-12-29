@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
@@ -22,25 +21,30 @@ class OrderHistoryListBlocMock
     extends MockBloc<OrderHistoryListEvent, OrderHistoryListState>
     implements OrderHistoryListBloc {}
 
+class MockAppRouter extends Mock implements AppRouter {}
+
 void main() {
   late GetIt locator;
   final mockOrderHistoryFilterBloc = OrderHistoryFilterMockBloc();
   final mockOrderHistoryFilter = OrderHistoryFilter.empty();
 
-  late AppRouter autoRouterMock;
+  late MockAppRouter autoRouterMock;
 
   setUpAll(() {
     locator = GetIt.instance;
-    locator.registerLazySingleton(() => AppRouter());
-    autoRouterMock = locator<AppRouter>();
+    locator.registerLazySingleton(() => MockAppRouter());
     locator.registerLazySingleton(() => mockOrderHistoryFilterBloc);
   });
   group('Order-History Filter', () {
     setUp(() {
+      autoRouterMock = locator<MockAppRouter>();
+
       when(() => mockOrderHistoryFilterBloc.state)
           .thenReturn(OrderHistoryFilterState.initial());
+      autoRouterMock = locator<MockAppRouter>();
     });
-    StackRouterScope getWUT() {
+
+    Widget getWUT() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         providers: [
@@ -122,6 +126,8 @@ void main() {
         OrderHistoryFilterState.initial().copyWith(
             isSubmitting: true, orderHistoryFilterList: mockOrderHistoryFilter),
       );
+      when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
+
       await tester.pumpWidget(getWUT());
 
       final orderIdTextFieldText = find.text('loader');
@@ -203,13 +209,15 @@ void main() {
         OrderHistoryFilterState.initial()
             .copyWith(orderHistoryFilterList: mockOrderHistoryFilter),
       );
+      when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
+
       await tester.pumpWidget(getWUT());
-      await tester.pump();
+
       final filterclearButton = find.byKey(const Key('filterClearButton'));
       expect(filterclearButton, findsOneWidget);
       await tester.tap(filterclearButton);
       await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(filterclearButton, findsNothing);
+      verify(() => autoRouterMock.pop()).called(2);
     });
 
     testWidgets(' test filtefromdateField date picker test ', (tester) async {
@@ -254,12 +262,14 @@ void main() {
       when(() => mockOrderHistoryFilterBloc.state).thenReturn(
         OrderHistoryFilterState.initial().copyWith(isSubmitting: true),
       );
+      when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
+
       await tester.pumpWidget(getWUT());
       await tester.pump();
       final filtercrossButton = find.byKey(const Key('filterCrossButton'));
       await tester.tap(filtercrossButton);
-      await tester.pumpAndSettle(const Duration(milliseconds: 50));
-      expect(filtercrossButton, findsNothing);
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+      verify(() => autoRouterMock.pop()).called(1);
     });
   });
 }
