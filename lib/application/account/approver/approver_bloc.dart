@@ -21,6 +21,18 @@ class ApproverBloc extends Bloc<ApproverEvent, ApproverState> {
       emit(ApproverState.initial());
     });
     on<_Fetch>((event, emit) async {
+      final showReturns = approverRepository.getReturnsConfig();
+
+      if (!showReturns) {
+        emit(
+          state.copyWith(
+            isApprover: false,
+          ),
+        );
+
+        return;
+      }
+
       final failureOrSuccess =
           await approverRepository.getIsApprover(event.userInfo);
       failureOrSuccess.fold(

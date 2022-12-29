@@ -340,6 +340,7 @@ void setupLocator() {
       localDataSource: locator<ApproverLocalDataSource>(),
       remoteDataSource: locator<ApproverRemoteDataSource>(),
       config: locator<Config>(),
+      remoteConfigService: locator<RemoteConfigService>(),
     ),
   );
 

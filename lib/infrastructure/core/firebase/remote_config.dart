@@ -15,6 +15,10 @@ class RemoteConfigService {
     return getBool(RemoteConfigConstants.enableTnc);
   }
 
+  bool getReturnsConfig() {
+    return getBool(RemoteConfigConstants.enableReturns);
+  }
+
   /// Setting in-app default parameter values to make app behave as intended
   /// before it connects or if no values are set in the Remote Config backend
   Future<void> setInAppDefaultValues() async {

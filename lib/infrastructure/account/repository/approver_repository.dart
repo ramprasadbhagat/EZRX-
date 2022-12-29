@@ -6,16 +6,19 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/approver_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/approver_remote.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 
 class ApproverRepository implements IApproverRepository {
   final Config config;
   final ApproverLocalDataSource localDataSource;
+  final RemoteConfigService remoteConfigService;
   final ApproverRemoteDataSource remoteDataSource;
 
   ApproverRepository({
     required this.config,
     required this.localDataSource,
     required this.remoteDataSource,
+    required this.remoteConfigService,
   });
 
   @override
@@ -37,6 +40,20 @@ class ApproverRepository implements IApproverRepository {
       return Right(isApprover.isApprover);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  bool getReturnsConfig() {
+    if (config.appFlavor == Flavor.mock) {
+      return true;
+    }
+    try {
+      final isReturnsEnabled = remoteConfigService.getReturnsConfig();
+
+      return isReturnsEnabled;
+    } catch (e) {
+      return false;
     }
   }
 }

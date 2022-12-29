@@ -39,9 +39,11 @@ void main() {
     );
 
     blocTest(
-      'Approver Fetch',
+      'Approver Fetch when remote config enableReturns is true',
       build: () => ApproverBloc(approverRepository: approverRepositoryMock),
       setUp: () {
+        when(() => approverRepositoryMock.getReturnsConfig())
+            .thenAnswer((invocation) => true);
         when(
           () => approverRepositoryMock.getIsApprover(mockUser),
         ).thenAnswer((invocation) async => const Right(true));
@@ -53,9 +55,27 @@ void main() {
     );
 
     blocTest(
+      'Approver Fetch when remote config enableReturns is false',
+      build: () => ApproverBloc(approverRepository: approverRepositoryMock),
+      setUp: () {
+        when(() => approverRepositoryMock.getReturnsConfig())
+            .thenAnswer((invocation) => false);
+        when(
+          () => approverRepositoryMock.getIsApprover(mockUser),
+        ).thenAnswer((invocation) async => const Right(true));
+      },
+      act: (ApproverBloc bloc) {
+        bloc.add(ApproverEvent.fetch(userInfo: mockUser));
+      },
+      expect: () => [ApproverState.initial()],
+    );
+
+    blocTest(
       'Approver Fetch Failed',
       build: () => ApproverBloc(approverRepository: approverRepositoryMock),
       setUp: () {
+        when(() => approverRepositoryMock.getReturnsConfig())
+            .thenAnswer((invocation) => true);
         when(
           () => approverRepositoryMock.getIsApprover(mockUser),
         ).thenAnswer(

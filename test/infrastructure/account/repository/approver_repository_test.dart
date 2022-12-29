@@ -6,6 +6,7 @@ import 'package:ezrxmobile/infrastructure/account/datasource/approver_local.dart
 import 'package:ezrxmobile/infrastructure/account/datasource/approver_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/is_approver_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/approver_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -17,17 +18,21 @@ class ApproverLocalDataSourceMock extends Mock
 
 class ConfigMock extends Mock implements Config {}
 
+class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
+
 void main() {
   late User mockUser;
   late Config configMock;
   late IsApproverDto mockApproverDto;
   late ApproverRepository repository;
+  late RemoteConfigService remoteConfigServiceMock;
   late ApproverLocalDataSource approverLocalDataSourceMock;
   late ApproverRemoteDataSource approverRemoteDataSourceMock;
 
   setUpAll(() async {
     configMock = ConfigMock();
     mockApproverDto = IsApproverDto(isApprover: true);
+    remoteConfigServiceMock = RemoteConfigServiceMock();
     approverLocalDataSourceMock = ApproverLocalDataSourceMock();
     approverRemoteDataSourceMock = ApproverRemoteDataSourceMock();
 
@@ -36,6 +41,7 @@ void main() {
     repository = ApproverRepository(
       config: configMock,
       localDataSource: approverLocalDataSourceMock,
+      remoteConfigService: remoteConfigServiceMock,
       remoteDataSource: approverRemoteDataSourceMock,
     );
   });
@@ -87,6 +93,24 @@ void main() {
       final result = await repository.getIsApprover(mockUser);
 
       expect(result.isLeft(), true);
+    });
+
+    test('Remote config show returns is true for mock', () {
+      when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+
+      final returnsConfigResult = repository.getReturnsConfig();
+
+      expect(returnsConfigResult, true);
+    });
+
+    test('Remote config show returns is true', () {
+      when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+
+      when(() => remoteConfigServiceMock.getReturnsConfig()).thenReturn(true);
+
+      final returnsConfigResult = repository.getReturnsConfig();
+
+      expect(returnsConfigResult, true);
     });
   });
 }
