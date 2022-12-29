@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -7,6 +8,13 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/presentation/account/customer_search.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -50,7 +58,35 @@ void main() {
   late AppRouter autoRouterMock;
   late List<CustomerCodeInfo> customerCodeListMock;
   late CartBloc cartBlocMock;
-
+  final fakeCustomerCodeInfo =
+      CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100730');
+  final fakeMaterialNumber = MaterialNumber('000000000023168451');
+  final fakematerialInfo = MaterialInfo(
+    quantity: 0,
+    materialNumber: fakeMaterialNumber,
+    materialDescription: "Reag Cup 15ml 1'S",
+    governmentMaterialCode: '',
+    therapeuticClass: 'All other non-therapeutic products',
+    itemBrand: 'Item not listed in I',
+    principalData: PrincipalData(
+      principalName: '台灣羅氏醫療診斷設備(股)公司',
+      principalCode: PrincipleCode('0000102004'),
+    ),
+    taxClassification: MaterialTaxClassification('Product : Full Tax'),
+    itemRegistrationNumber: 'NA',
+    unitOfMeasurement: 'EA',
+    materialGroup2: MaterialGroup.two(''),
+    materialGroup4: MaterialGroup.four('OTH'),
+    isSampleMaterial: false,
+    hidePrice: false,
+    hasValidTenderContract: false,
+    hasMandatoryTenderContract: false,
+    taxes: ['5'],
+    bundles: [],
+    defaultMaterialDescription: '',
+    isFOCMaterial: false,
+    remarks: '',
+  );
   setUpAll(() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
@@ -87,6 +123,34 @@ void main() {
     }
 
     testWidgets('Load customer Search Widget', (tester) async {
+      whenListen(
+          customerCodeBlocMock,
+          Stream.fromIterable(
+            [
+              CustomerCodeState.initial().copyWith(
+                searchKey: SearchKey(''),
+                isSearchActive: false,
+                isFetching: false,
+                customerCodeInfo: CustomerCodeInfo.empty()
+                    .copyWith(customerCodeSoldTo: '123456'),
+                apiFailureOrSuccessOption: none(),
+                customerCodeList: [
+                  CustomerCodeInfo.empty(),
+                ],
+              ),
+              CustomerCodeState.initial().copyWith(
+                searchKey: SearchKey('GSK'),
+                isSearchActive: true,
+                isFetching: true,
+                customerCodeInfo: CustomerCodeInfo.empty()
+                    .copyWith(customerCodeSoldTo: 'fake-123456'),
+                apiFailureOrSuccessOption: none(),
+                customerCodeList: [
+                  CustomerCodeInfo.empty(),
+                ],
+              ),
+            ],
+          ));
       await tester.pumpWidget(getScopedWidget());
       final customerSearchPage = find.byKey(const Key('customerSearchPage'));
       expect(customerSearchPage, findsOneWidget);
@@ -125,7 +189,97 @@ void main() {
       },
       variant: customerCodeVariants,
     );
+    testWidgets(
+      'Test when cart item is not empty',
+      (tester) async {
+        when(() => cartBlocMock.state)
+            .thenReturn(CartState.initial().copyWith(cartItemList: [
+          PriceAggregate.empty().copyWith(
+            materialInfo: fakematerialInfo,
+          ),
+        ]));
 
+        when(() => customerCodeBlocMock.state).thenReturn(
+          CustomerCodeState.initial().copyWith(customerCodeList: [
+            CustomerCodeInfo.empty().copyWith(
+              telephoneNumber: '1234567890',
+              customerCodeSoldTo: '123456789',
+              shipToInfos: <ShipToInfo>[
+                ShipToInfo.empty().copyWith(
+                  shipToCustomerCode: '12345678',
+                ),
+              ],
+              paymentTermDescription: '30 days',
+            ),
+          ]),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+
+        await tester.pump();
+
+        final customerCodeSelect = find.byKey(const Key('customerCodeSelect'));
+
+        expect(customerCodeSelect, findsOneWidget);
+
+        await tester.pump(const Duration(seconds: 1));
+
+        expect(find.byType(ListTile), findsWidgets);
+
+        await tester.tap(
+          find.byType(ListTile).first,
+        );
+
+        await tester.pump(const Duration(seconds: 1));
+
+        expect(find.text('Change Customer Code'), findsOneWidget);
+        await tester.tap(find.text('Cancel'));
+        await tester.pumpAndSettle(const Duration(seconds: 3));
+        await tester.tap(find.text('Change'));
+        await tester.pumpAndSettle(const Duration(seconds: 3));
+      },
+    );
+    testWidgets(
+      'Test when cartList is empty',
+      (tester) async {
+        when(() => cartBlocMock.state).thenReturn(CartState.initial());
+
+        when(() => customerCodeBlocMock.state).thenReturn(
+          CustomerCodeState.initial().copyWith(customerCodeList: [
+            CustomerCodeInfo.empty().copyWith(
+              telephoneNumber: '1234567890',
+              customerCodeSoldTo: '123456789',
+              shipToInfos: <ShipToInfo>[
+                ShipToInfo.empty().copyWith(
+                  shipToCustomerCode: '12345678',
+                ),
+              ],
+              paymentTermDescription: '30 days',
+            ),
+          ]),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+
+        await tester.pump();
+
+        final customerCodeSelect = find.byKey(const Key('customerCodeSelect'));
+
+        expect(customerCodeSelect, findsOneWidget);
+
+        await tester.pump(const Duration(seconds: 1));
+
+        expect(find.byType(ListTile), findsWidgets);
+
+        await tester.tap(
+          find.byType(ListTile).first,
+        );
+
+        await tester.pump(const Duration(seconds: 1));
+
+        expect(find.text('Change Customer Code'), findsNothing);
+      },
+    );
     testWidgets('Search input must be greater than 2 characters.',
         (tester) async {
       await tester.pumpWidget(getScopedWidget());
@@ -133,8 +287,7 @@ void main() {
 
       final txtForm = find.byKey(const Key('customerCodeSearchField'));
       await tester.enterText(txtForm, '1234');
-      expect(
-          find.text('123'), findsNothing); // 3 characters shouldn't be allowed
+      expect(find.text('123'), findsNothing);
       expect(find.text('1234'), findsOneWidget);
     });
 
@@ -213,10 +366,125 @@ void main() {
     });
 
     testWidgets('Clear Customer code Search', (tester) async {
+      when(() => customerCodeBlocMock.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          searchKey: SearchKey('GSK'),
+          isSearchActive: true,
+          isFetching: false,
+          customerCodeInfo: CustomerCodeInfo.empty()
+              .copyWith(customerCodeSoldTo: 'fake-123456'),
+          customerCodeList: [
+            CustomerCodeInfo.empty(),
+          ],
+        ),
+      );
+      await tester.runAsync(() async {
+        await tester.pumpWidget(getScopedWidget());
+      });
+
+      final clearCusromerCodeSearch =
+          find.byKey(const Key('clearCustomerCodeSearch'));
+      expect(clearCusromerCodeSearch, findsOneWidget);
+      await tester.tap(clearCusromerCodeSearch);
+    });
+
+    testWidgets('Test onRefresh', (tester) async {
+      when(() => customerCodeBlocMock.state).thenReturn(
+        CustomerCodeState.initial().copyWith(customerCodeList: [
+          CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '1000'),
+          CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '1100'),
+          CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '1200'),
+        ]),
+      );
+
+      final handle = tester.ensureSemantics();
+
+      await tester.pumpWidget(getScopedWidget());
+
+      await tester.drag(
+        find.text('1000'),
+        const Offset(0.0, 1000.0),
+      );
+      await tester.pump(const Duration(seconds: 1));
+
+      expect(
+        tester.getSemantics(find.byType(RefreshProgressIndicator)),
+        matchesSemantics(
+          label: 'Refresh',
+        ),
+      );
+
+      await tester
+          .pump(const Duration(seconds: 1)); // finish the scroll animation
+      await tester.pump(
+          const Duration(seconds: 1)); // finish the indicator settle animation
+      await tester.pump(
+          const Duration(seconds: 1)); // finish the indicator hide animation
+
+      handle.dispose();
+    });
+    testWidgets('Test loadingMore', (tester) async {
+      when(() => customerCodeBlocMock.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          customerCodeList: [
+            fakeCustomerCodeInfo,
+            CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100728'),
+            CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100729'),
+            CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100731'),
+            CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100732'),
+            CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100733'),
+            CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100734'),
+            CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100738'),
+            CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100739'),
+            CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100741'),
+            CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100742'),
+            CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100743'),
+            CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100744'),
+            CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100748'),
+            CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100749'),
+            CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100751'),
+            CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100752'),
+            CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100753'),
+            CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100754')
+          ],
+          isFetching: true,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+
+      final firstListItem = find.text('0000100730');
+
+      await tester.drag(
+        firstListItem,
+        const Offset(0.0, -1000.0),
+      );
+      await tester.pump(const Duration(seconds: 1));
+
+      final loadIndicatorWidget = find.byKey(const Key('loadIndicator'));
+
+      expect(loadIndicatorWidget, findsOneWidget);
+      await tester.pump(const Duration(seconds: 1));
+      await tester.pump(const Duration(seconds: 1));
+      await tester.pump(const Duration(seconds: 1));
+    });
+
+    testWidgets('Field Submitted Customer code Search', (tester) async {
       final expectedCustomerCodeListStates = [
+        CustomerCodeState.initial().copyWith(
+            isFetching: false,
+            customerCodeList: [],
+            apiFailureOrSuccessOption: none(),
+            searchKey: SearchKey('')),
         CustomerCodeState.initial().copyWith(
           isFetching: false,
           customerCodeList: [],
+          searchKey: SearchKey('GSK'),
+          apiFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          ),
         ),
       ];
 
@@ -234,17 +502,28 @@ void main() {
       });
 
       await tester.pump();
-      final clearCusromerCodeSearch =
-          find.byKey(const Key('clearCustomerCodeSearch'));
-      expect(clearCusromerCodeSearch, findsOneWidget);
-      await tester.tap(clearCusromerCodeSearch);
+      await tester.enterText(
+          find.byKey(const Key('customerCodeSearchField')), 'a@b.c');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pump();
+      expect(find.text('123'), findsNothing);
+      expect(find.text('a@b.c'), findsOneWidget);
     });
-
-    testWidgets('Field Submitted Customer code Search', (tester) async {
+    testWidgets('Test error Message to Customer code Search', (tester) async {
       final expectedCustomerCodeListStates = [
+        CustomerCodeState.initial().copyWith(
+            isFetching: false,
+            customerCodeList: [],
+            apiFailureOrSuccessOption: none(),
+            searchKey: SearchKey('')),
         CustomerCodeState.initial().copyWith(
           isFetching: false,
           customerCodeList: [],
+          apiFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          ),
         ),
       ];
 
@@ -269,7 +548,44 @@ void main() {
       expect(find.text('123'), findsNothing);
       expect(find.text('a@b.c'), findsOneWidget);
       final errorMessage = find.byKey(const Key('snackBarMessage'));
+      await tester.pump();
       expect(errorMessage, findsOneWidget);
+    });
+    testWidgets('Field Submitted Customer code Search when ', (tester) async {
+      final expectedCustomerCodeListStates = [
+        CustomerCodeState.initial().copyWith(
+            isFetching: false,
+            customerCodeList: [],
+            apiFailureOrSuccessOption: none(),
+            searchKey: SearchKey('')),
+        CustomerCodeState.initial().copyWith(
+          isFetching: false,
+          customerCodeList: [],
+          searchKey: SearchKey('GSK'),
+          apiFailureOrSuccessOption: optionOf(const Right('')),
+        ),
+      ];
+
+      whenListen(customerCodeBlocMock,
+          Stream.fromIterable(expectedCustomerCodeListStates),
+          initialState: customerCodeBlocMock.state.copyWith(
+            isFetching: true,
+            canLoadMore: true,
+            customerCodeInfo: customerCodeListMock.first,
+            customerCodeList: customerCodeListMock,
+          ));
+
+      await tester.runAsync(() async {
+        await tester.pumpWidget(getScopedWidget());
+      });
+
+      await tester.pump();
+      await tester.enterText(
+          find.byKey(const Key('customerCodeSearchField')), 'a@b.c');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pump();
+      expect(find.text('123'), findsNothing);
+      expect(find.text('a@b.c'), findsOneWidget);
     });
   });
 }

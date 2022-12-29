@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -36,7 +37,7 @@ class MockAupTcBloc extends MockBloc<AupTcEvent, AupTcState>
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
@@ -58,6 +59,9 @@ class PaymentCustomerInfoMockBloc extends MockBloc<
 
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
+    class ResetPasswordMockBloc
+    extends MockBloc<ResetPasswordEvent, ResetPasswordState>
+    implements ResetPasswordBloc {}
 
 void main() {
   late GetIt locator;
@@ -66,10 +70,10 @@ void main() {
   late AppRouter autoRouterMock;
   late MockAupTcBloc mockAupTcBloc;
   late UserBloc userBlocMock;
-  late AuthBloc authBlocMock;
   late CartBloc cartBlocMock;
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
   late EligibilityBloc eligibilityBlocMock;
+  late ResetPasswordBloc resetPasswordBlocMock;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -81,6 +85,9 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => mockAuthBloc);
+
+    locator.registerLazySingleton(() => resetPasswordBlocMock);
+
     locator.registerLazySingleton(() => PackageInfoService());
     autoRouterMock = locator<AppRouter>();
     locator
@@ -98,18 +105,21 @@ void main() {
     setUp(() {
       // autoRouterMock = locator<AppRouter>();
       userBlocMock = UserBlocMock();
-      authBlocMock = AuthBlocMock();
+      // authBlocMock = AuthBlocMock();
       cartBlocMock = CartBlocMock();
       paymentCustomerInformationBlocMock = PaymentCustomerInfoMockBloc();
       eligibilityBlocMock = EligibilityBlocMock();
+      resetPasswordBlocMock = ResetPasswordMockBloc();
       // autoRouterMock = locator<AppRouter>();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
-      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
       when(() => paymentCustomerInformationBlocMock.state)
           .thenReturn(PaymentCustomerInformationState.initial());
       when(() => eligibilityBlocMock.state)
           .thenReturn(EligibilityState.initial());
+          when(() => resetPasswordBlocMock.state)
+          .thenReturn(ResetPasswordState.initial());
     });
     testWidgets(
         'Test - AupTc Widget Show AupTcBloc state.showTermsAndConditon=true',
@@ -157,7 +167,7 @@ void main() {
           showTermsAndConditon: false,
         ),
       );
-      whenListen(authBlocMock, Stream.fromIterable(expectedStates),
+      whenListen(mockAuthBloc, Stream.fromIterable(expectedStates),
           initialState: const AuthState.initial());
 
       await tester.pumpWidget(
@@ -168,7 +178,7 @@ void main() {
               create: (context) => mockSalesOrgBloc,
             ),
             BlocProvider<AuthBloc>(
-              create: (context) => authBlocMock,
+              create: (context) => mockAuthBloc,
             ),
             BlocProvider<AupTcBloc>(
               create: (context) => mockAupTcBloc,
@@ -184,6 +194,9 @@ void main() {
             ),
             BlocProvider<EligibilityBloc>(
               create: (context) => eligibilityBlocMock,
+            ),
+             BlocProvider<ResetPasswordBloc>(
+              create: (context) => resetPasswordBlocMock,
             ),
           ],
           child: const SplashPage(),
@@ -266,7 +279,7 @@ void main() {
         autoRouterMock: autoRouterMock,
         providers: [
           BlocProvider<AuthBloc>(
-            create: (context) => authBlocMock,
+            create: (context) => mockAuthBloc,
           ),
           BlocProvider<AupTcBloc>(
             create: (context) => mockAupTcBloc,
@@ -278,5 +291,97 @@ void main() {
     await tester.tap(tosTile);
     await tester.pump();
     expect(autoRouterMock.current.name, AupTCDialogRoute.name);
+  });
+
+  testWidgets('Setting screen contactUsTile', (tester) async {
+    await TesterUtils.setUpLocalizationWrapper(
+        tester: tester,
+        home: const SettingsPage(),
+        locale: const Locale('en', 'SG'),
+        isAutoRouteEnabled: true,
+        autoRouterMock: autoRouterMock,
+        providers: [
+          BlocProvider<AuthBloc>(
+            create: (context) => mockAuthBloc,
+          ),
+          BlocProvider<AupTcBloc>(
+            create: (context) => mockAupTcBloc,
+          ),
+        ]);
+    await tester.pump();
+    final contactUsTile = find.byKey(const Key('contactUsTile'));
+    expect(contactUsTile, findsOneWidget);
+    await tester.tap(contactUsTile);
+    await tester.pump();
+    expect(autoRouterMock.current.name, ContactUsPageRoute.name);
+  });
+  testWidgets('Setting screen changePasswordTile', (tester) async {
+    await TesterUtils.setUpLocalizationWrapper(
+        tester: tester,
+        home: const SettingsPage(),
+        locale: const Locale('en', 'SG'),
+        isAutoRouteEnabled: true,
+        autoRouterMock: autoRouterMock,
+        providers: [
+          BlocProvider<AuthBloc>(
+            create: (context) => mockAuthBloc,
+          ),
+          BlocProvider<AupTcBloc>(
+            create: (context) => mockAupTcBloc,
+          ),
+          BlocProvider<ResetPasswordBloc>(
+            create: (context) => resetPasswordBlocMock,
+          ),
+        ]);
+    await tester.pump();
+    final changePasswordTile = find.byKey(const Key('changePasswordTile'));
+    expect(changePasswordTile, findsOneWidget);
+    await tester.tap(changePasswordTile);
+    await tester.pump();
+    expect(autoRouterMock.current.name, ChangePasswordPageRoute.name);
+  });
+  testWidgets('Setting screen Privacy Policy', (tester) async {
+    await TesterUtils.setUpLocalizationWrapper(
+        tester: tester,
+        home: const SettingsPage(),
+        locale: const Locale('en', 'SG'),
+        isAutoRouteEnabled: true,
+        autoRouterMock: autoRouterMock,
+        providers: [
+          BlocProvider<AuthBloc>(
+            create: (context) => mockAuthBloc,
+          ),
+          BlocProvider<AupTcBloc>(
+            create: (context) => mockAupTcBloc,
+          ),
+        ]);
+    await tester.pump();
+    final privacyPolicy = find.byKey(const Key('Privacy_Policy'));
+    expect(privacyPolicy, findsOneWidget);
+    await tester.tap(privacyPolicy);
+    await tester.pump();
+    expect(autoRouterMock.current.name, WebViewPageRoute.name);
+  });
+  testWidgets('Setting screen logoutTile', (tester) async {
+    await TesterUtils.setUpLocalizationWrapper(
+        tester: tester,
+        home: const SettingsPage(),
+        locale: const Locale('en', 'SG'),
+        isAutoRouteEnabled: true,
+        autoRouterMock: autoRouterMock,
+        providers: [
+          BlocProvider<AuthBloc>(
+            create: (context) => mockAuthBloc,
+          ),
+          BlocProvider<AupTcBloc>(
+            create: (context) => mockAupTcBloc,
+          ),
+        ]);
+    await tester.pump();
+    final logoutTile = find.byKey(const Key('logoutTile'));
+    expect(logoutTile, findsOneWidget);
+    await tester.tap(logoutTile);
+    // await tester.pump();
+    // expect();
   });
 }

@@ -38,9 +38,9 @@ class HomeTab extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
             child: Row(
               children: const [
-                SalesOrgSelector(key: ValueKey('HomeSalesOrgSelector')),
-                CustomerCodeSelector(key: ValueKey('HomeCustomerCodeSelector')),
-                ShipCodeSelector(key: ValueKey('HomeShipCodeSelector')),
+                SalesOrgSelector(key: ValueKey('homeSalesOrgSelector')),
+                CustomerCodeSelector(key: ValueKey('homeCustomerCodeSelector')),
+                ShipCodeSelector(key: ValueKey('homeShipCodeSelector')),
               ],
             ),
           ),
@@ -122,7 +122,6 @@ class HomeTab extends StatelessWidget {
                               (index) {
                                 return Center(
                                   child: _TileCard(
-                                    key: const Key('HomeTileCard'),
                                     homePageTile: homePageTiles[index],
                                   ),
                                 );
@@ -178,6 +177,7 @@ class _TileCard extends StatelessWidget {
     final textStyle = Theme.of(context).textTheme.subtitle2;
 
     return GestureDetector(
+      key: ValueKey(homePageTile.routeName),
       onTap: () {
         String countlyTile;
         switch (homePageTile.routeName) {

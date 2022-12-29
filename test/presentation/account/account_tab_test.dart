@@ -273,6 +273,8 @@ void main() {
       await tester.pump();
       final returnsTile = find.byKey(const Key('returnsTile'));
       expect(returnsTile, findsOneWidget);
+      await tester.tap(returnsTile);
+      expect(autoRouterMock.current.name, ReturnsPageRoute.name);
     });
 
     testWidgets(
@@ -288,11 +290,7 @@ void main() {
           ),
         ),
         ApproverState.initial().copyWith(
-          apiFailureOrSuccessOption: optionOf(
-            const Left(
-              ApiFailure.other('mockError'),
-            ),
-          ),
+          apiFailureOrSuccessOption: optionOf(const Right('succes')),
         ),
       ];
 

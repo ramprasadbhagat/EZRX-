@@ -17,6 +17,7 @@ import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -30,6 +31,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../utils/widget_utils.dart';
 
 class MaterialListBlocMock
     extends MockBloc<MaterialListEvent, MaterialListState>
@@ -75,6 +78,8 @@ class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class MockHTTPService extends Mock implements HttpService {}
 
+class AutoRouterMock extends Mock implements AppRouter {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -91,6 +96,7 @@ void main() {
   late AuthBlocMock authBlocMock;
   late UserBlocMock userBlocMock;
   late HttpService mockHTTPService;
+  late AppRouter autoRouterMock;
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
   final fakematerialInfo1 = MaterialInfo(
     quantity: 0,
@@ -133,9 +139,11 @@ void main() {
       locator.registerLazySingleton(
           () => CountlyService(config: locator<Config>()));
       mockHTTPService = MockHTTPService();
+      autoRouterMock = locator<AppRouter>();
       locator.registerLazySingleton<HttpService>(
         () => mockHTTPService,
       );
+      autoRouterMock = locator<AppRouter>();
     });
     group('Home Tab Screen', () {
       setUp(() {
@@ -162,11 +170,10 @@ void main() {
                 .copyWith(materialList: [fakematerialInfo1]));
         when(() => materialPriceBlocMock.state)
             .thenReturn(MaterialPriceState.initial());
-        when(() => eligibilityBlocMock.state)
-            .thenReturn(EligibilityState.initial().copyWith(
-              customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(status: Status('EDI'))
-        ));
+        when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+                customerCodeInfo:
+                    CustomerCodeInfo.empty().copyWith(status: Status('EDI'))));
         when(() => covidMaterialListBlocMock.state)
             .thenReturn(CovidMaterialListState.initial());
         when(() => cartBlocMock.state).thenReturn(CartState.initial());
@@ -189,7 +196,8 @@ void main() {
             saveLocale: true,
             useOnlyLangCode: false,
             assetLoader: CsvAssetLoader(),
-            child: MultiBlocProvider(
+            child: WidgetUtils.getScopedWidget(
+              autoRouterMock: autoRouterMock,
               providers: [
                 BlocProvider<CustomerCodeBloc>(
                     create: (context) => mockCustomerCodeBloc),
@@ -210,17 +218,25 @@ void main() {
                 BlocProvider<AuthBloc>(create: (context) => authBlocMock),
                 BlocProvider<UserBloc>(create: (context) => userBlocMock),
               ],
-              child: const MaterialApp(
-                home: Scaffold(
-                  body: HomeTab(),
-                ),
-              ),
+              child: const HomeTab(),
             ),
           ),
         );
       }
 
       testWidgets('Home Tab  test', (WidgetTester tester) async {
+        final expectedEligibilityState = [
+          EligibilityState.initial().copyWith(
+              user: User.empty().copyWith(disableCreateOrder: false),
+              customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+                status: Status(''),
+              )),
+          EligibilityState.initial().copyWith(
+              user: User.empty().copyWith(disableCreateOrder: true),
+              customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+                status: Status('EDI'),
+              )),
+        ];
         final expectedMaterialState = [
           MaterialListState.initial().copyWith(
               isFetching: true,
@@ -250,20 +266,21 @@ void main() {
             materialListBlocMock, Stream.fromIterable(expectedMaterialState));
         whenListen(covidMaterialListBlocMock,
             Stream.fromIterable(expectedCovidMaterialState));
-
+        whenListen(
+            eligibilityBlocMock, Stream.fromIterable(expectedEligibilityState));
         await getWidget(tester);
         await tester.pump(const Duration(seconds: 3));
-
         expect(find.byType(HomeTab), findsOneWidget);
         expect(
-            find.byKey(const ValueKey('HomeSalesOrgSelector')), findsOneWidget);
+            find.byKey(const ValueKey('homeSalesOrgSelector')), findsOneWidget);
         final ediUserBanner = find.byKey(const ValueKey('EdiUserBanner'));
-        expect(ediUserBanner,findsOneWidget);
-        expect(find.byKey(const ValueKey('HomeCustomerCodeSelector')),
+        expect(ediUserBanner, findsOneWidget);
+        expect(find.byKey(const ValueKey('homeCustomerCodeSelector')),
             findsOneWidget);
         expect(
-            find.byKey(const ValueKey('HomeShipCodeSelector')), findsOneWidget);
+            find.byKey(const ValueKey('homeShipCodeSelector')), findsOneWidget);
         expect(find.byKey(const ValueKey('HomeBanner')), findsOneWidget);
+
         expect(find.text('Create Order'), findsOneWidget);
         expect(find.text('Saved Orders'), findsOneWidget);
         expect(find.text('Order Template'), findsOneWidget);
@@ -272,6 +289,52 @@ void main() {
             customerCode: fakeCustomerCodeInfo,
             materials: [fakematerialInfo1],
             salesOrganisation: fakeSalesOrganisation))).called(2);
+      });
+
+      testWidgets('Home Tab _TileCard onTap test', (WidgetTester tester) async {
+        final expectedEligibilityState = [
+          EligibilityState.initial().copyWith(
+              user: User.empty().copyWith(disableCreateOrder: false),
+              customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+                status: Status('EDI'),
+              )),
+        ];
+        whenListen(
+            eligibilityBlocMock, Stream.fromIterable(expectedEligibilityState));
+        await getWidget(tester);
+        await tester.pump();
+
+        final onTapTest = find.byKey(const Key('material_list_page'));
+        expect(onTapTest, findsOneWidget);
+        await tester.tap(onTapTest);
+
+        expect(onTapTest, findsAtLeastNWidgets(1));
+
+        expect(autoRouterMock.current.name, MaterialRootRoute.name);
+        final onTapTest1 = find.byKey(const Key('saved_order_list'));
+        expect(onTapTest1, findsOneWidget);
+        await tester.tap(onTapTest1);
+
+        expect(onTapTest1, findsAtLeastNWidgets(1));
+
+        expect(autoRouterMock.current.name, SavedOrderListPageRoute.name);
+        final onTapTest2 = find.byKey(const Key('order_template_list_page'));
+        expect(onTapTest2, findsOneWidget);
+        await tester.tap(onTapTest2);
+
+        expect(onTapTest2, findsAtLeastNWidgets(1));
+
+        expect(autoRouterMock.current.name, OrderTemplateListPageRoute.name);
+      });
+
+      testWidgets('Home Tab disableCreateOrder test',
+          (WidgetTester tester) async {
+        when(() => userBlocMock.state).thenReturn(
+          UserState.initial()
+              .copyWith(user: User.empty().copyWith(disableCreateOrder: true)),
+        );
+
+        await getWidget(tester);
       });
     });
   });

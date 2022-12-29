@@ -252,6 +252,7 @@ class _ListContent extends StatelessWidget {
             if (shipToInfo != shipToBloc.state.shipToInfo &&
                 cartBloc.state.cartItemList.isNotEmpty) {
               ConfirmClearDialog.show(
+                
                 context: context,
                 title: 'Change Shipping Address'.tr(),
                 description:
