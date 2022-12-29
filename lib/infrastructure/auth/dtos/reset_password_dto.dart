@@ -13,13 +13,6 @@ class ResetPasswordDto with _$ResetPasswordDto {
     @JsonKey(name: 'status') required String status,
   }) = _ResetPasswordDto;
 
-  factory ResetPasswordDto.fromDomain(ResetPassword resetPasswordEntities) {
-    return ResetPasswordDto(
-      success: resetPasswordEntities.success,
-      status: resetPasswordEntities.status,
-    );
-  }
-
   ResetPassword toDomain() {
     return ResetPassword(
       status: status,

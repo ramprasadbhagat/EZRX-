@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
@@ -19,7 +21,13 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:local_auth/local_auth.dart';
+// ignore: depend_on_referenced_packages
+import 'package:local_auth_android/local_auth_android.dart';
+// ignore: depend_on_referenced_packages
+import 'package:local_auth_ios/local_auth_ios.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../../presentation/home/selectors/shipping_address_selector_test.dart';
 // ignore: depend_on_referenced_packages
 // ignore: depend_on_referenced_packages
 // ignore: depend_on_referenced_packages
@@ -51,6 +59,8 @@ class LocalAuthenticationMock extends Mock implements LocalAuthentication {}
 
 class CountlyServiceMock extends Mock implements CountlyService {}
 
+class RoleNameMock extends Mock implements RoleName {}
+
 void main() {
   late AuthRemoteDataSource remoteDataSourceMock;
   late AuthLocalDataSource localDataSourceMock;
@@ -62,6 +72,7 @@ void main() {
   late PushNotificationService pushNotificationServiceMock;
   late LocalAuthentication localAuthenticationMock;
   late CountlyService countlyServiceMock;
+  late RoleName roleNameMock;
 
   late AuthRepository repository;
   late Config configMock;
@@ -86,6 +97,7 @@ void main() {
       localAuthenticationMock = LocalAuthenticationMock();
       oktaLoginServicesMock = OktaLoginServicesMock();
       pushNotificationServiceMock = PushNotificationServiceMock();
+      roleNameMock = RoleNameMock();
 
       locator.registerLazySingleton(
           () => CountlyService(config: locator<Config>()));
@@ -125,6 +137,66 @@ void main() {
       ).thenAnswer(
         (invocation) async => const Right(unit),
       );
+      when(
+        () => localAuthenticationMock.authenticate(
+          localizedReason: 'Complete the biometrics to continue',
+          authMessages: const <AuthMessages>[
+            AndroidAuthMessages(
+              signInTitle: 'Biometric authentication required!',
+              cancelButton: 'No thanks',
+              biometricNotRecognized: 'Failed Attempt',
+              biometricRequiredTitle: 'Supports Biometric, but not setup',
+              biometricSuccess: 'Recognised you',
+              goToSettingsButton: 'Let\'s setup biometric',
+              goToSettingsDescription: 'You can setupbiometric on settings',
+            ),
+            IOSAuthMessages(
+              cancelButton: 'No thanks',
+              goToSettingsButton: 'Let\'s setup biometric',
+              goToSettingsDescription: 'You can setupbiometric on settings',
+              lockOut: 'you have been locked out',
+              localizedFallbackTitle: 'Fallback',
+            ),
+          ],
+          options: const AuthenticationOptions(
+            biometricOnly: true,
+            useErrorDialogs: true,
+            stickyAuth: true,
+            sensitiveTransaction: true,
+          ),
+        ),
+      ).thenAnswer((invocation) async {
+        return true;
+      });
+
+      when(
+        () => localAuthenticationMock.canCheckBiometrics,
+      ).thenAnswer((invocation) async {
+        return true;
+      });
+
+      when(
+        () => localAuthenticationMock.isDeviceSupported(),
+      ).thenAnswer((invocation) async {
+        return true;
+      });
+
+      when(
+        () => localAuthenticationMock.getAvailableBiometrics(),
+      ).thenAnswer((invocation) async {
+        return [BiometricType.fingerprint];
+      });
+
+      when(() => countlyServiceMock.addCountlyEvent('Biometric login'))
+          .thenAnswer((invocation) async {
+        return;
+      });
+
+      when(
+        () => roleNameMock.isEligibleLoginRoleForZPAdmin,
+      ).thenAnswer((invocation) {
+        return true;
+      });
     },
   );
   group('Auth Repository should - ', () {
@@ -667,6 +739,122 @@ void main() {
         verify(
           () => oktaLoginServicesMock.login(),
         ).called(1);
+      },
+    );
+
+    test(
+      'Biometric Check success',
+      () async {
+        repository = AuthRepository(
+          remoteDataSource: remoteDataSourceMock,
+          config: configMock,
+          localDataSource: localDataSourceMock,
+          tokenStorage: tokenStorageMock,
+          accountSelectorStorage: accountSelectorStorageMock,
+          cartStorage: cartStorageMock,
+          countlyService: countlyServiceMock,
+          credStorage: credStorageMock,
+          localAuthentication: localAuthenticationMock,
+          oktaLoginServices: oktaLoginServicesMock,
+          pushNotificationService: pushNotificationServiceMock,
+        );
+
+        final result = await repository.doBiometricAuthentication();
+
+        expect(result.isRight(), true);
+
+        verify(
+          () => localAuthenticationMock.authenticate(
+            localizedReason: 'Complete the biometrics to continue',
+            authMessages: const <AuthMessages>[
+              AndroidAuthMessages(
+                signInTitle: 'Biometric authentication required!',
+                cancelButton: 'No thanks',
+                biometricNotRecognized: 'Failed Attempt',
+                biometricRequiredTitle: 'Supports Biometric, but not setup',
+                biometricSuccess: 'Recognised you',
+                goToSettingsButton: 'Let\'s setup biometric',
+                goToSettingsDescription: 'You can setupbiometric on settings',
+              ),
+              IOSAuthMessages(
+                cancelButton: 'No thanks',
+                goToSettingsButton: 'Let\'s setup biometric',
+                goToSettingsDescription: 'You can setupbiometric on settings',
+                lockOut: 'you have been locked out',
+                localizedFallbackTitle: 'Fallback',
+              ),
+            ],
+            options: const AuthenticationOptions(
+              biometricOnly: true,
+              useErrorDialogs: true,
+              stickyAuth: true,
+              sensitiveTransaction: true,
+            ),
+          ),
+        ).called(1);
+      },
+    );
+
+    test(
+      'Biometric canBeAuthenticated success',
+      () async {
+        repository = AuthRepository(
+          remoteDataSource: remoteDataSourceMock,
+          config: configMock,
+          localDataSource: localDataSourceMock,
+          tokenStorage: tokenStorageMock,
+          accountSelectorStorage: accountSelectorStorageMock,
+          cartStorage: cartStorageMock,
+          countlyService: countlyServiceMock,
+          credStorage: credStorageMock,
+          localAuthentication: localAuthenticationMock,
+          oktaLoginServices: oktaLoginServicesMock,
+          pushNotificationService: pushNotificationServiceMock,
+        );
+
+        final result = await repository.canBeAuthenticatedAndBioAvailable();
+
+        expect(result.isRight(), true);
+
+        verify(
+          () => localAuthenticationMock.canCheckBiometrics,
+        ).called(1);
+        verify(
+          () => localAuthenticationMock.isDeviceSupported(),
+        ).called(1);
+        verify(
+          () => localAuthenticationMock.getAvailableBiometrics(),
+        ).called(1);
+      },
+    );
+
+    test(
+      'isEligibleProxyLogin failure',
+      () async {
+        repository = AuthRepository(
+          remoteDataSource: remoteDataSourceMock,
+          config: configMock,
+          localDataSource: localDataSourceMock,
+          tokenStorage: tokenStorageMock,
+          accountSelectorStorage: accountSelectorStorageMock,
+          cartStorage: cartStorageMock,
+          countlyService: countlyServiceMock,
+          credStorage: credStorageMock,
+          localAuthentication: localAuthenticationMock,
+          oktaLoginServices: oktaLoginServicesMock,
+          pushNotificationService: pushNotificationServiceMock,
+        );
+
+        final result = await repository.isEligibleProxyLogin(
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('zp_admin'),
+            ),
+          ),
+          jwt: fakeJWT,
+        );
+
+        expect(result.isLeft(), true);
       },
     );
   });

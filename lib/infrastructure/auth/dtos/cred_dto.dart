@@ -13,13 +13,6 @@ class CredDto {
   @HiveField(1)
   final String password;
 
-  factory CredDto.fromDomain(Cred cred) {
-    return CredDto(
-      username: cred.username.getOrCrash(),
-      password: cred.password.getOrCrash(),
-    );
-  }
-
   Cred toDomain() {
     return Cred(
       username: Username(username),

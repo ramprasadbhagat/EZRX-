@@ -13,10 +13,6 @@ class LoginDto with _$LoginDto {
     @JsonKey(name: 'eZRxJWT') required String access,
   }) = _LoginDto;
 
-  factory LoginDto.fromDomain(Login login) {
-    return LoginDto(access: login.jwt.getOrCrash());
-  }
-
   Login toDomain() {
     return Login(jwt: JWT(access));
   }
