@@ -253,10 +253,10 @@ class PriceAggregate with _$PriceAggregate {
   }
 
   bool get refreshAddedBonus =>
-      calculateMaterialItemBonus.length != _addedDealBonusMaterial.length ||
+      calculateMaterialItemBonus.length != addedDealBonusMaterial.length ||
       calculateMaterialItemBonus.any((BonusMaterial canculatedBonus) =>
           canculatedBonus.bonusQuantity !=
-          _addedDealBonusMaterial
+          addedDealBonusMaterial
               .firstWhere(
                 (MaterialItemBonus availableBonus) =>
                     availableBonus.materialNumber ==
@@ -269,8 +269,8 @@ class PriceAggregate with _$PriceAggregate {
         (PriceBonusItem element) => quantity >= element.qualifyingQuantity,
         orElse: () => PriceBonusItem.empty(),
       );
-
-  Iterable<MaterialItemBonus> get _addedDealBonusMaterial =>
+  @protected
+  Iterable<MaterialItemBonus> get addedDealBonusMaterial =>
       addedBonusList.where(
         (MaterialItemBonus element) =>
             !element.additionalBonusFlag && element.bonusOverrideFlag,
