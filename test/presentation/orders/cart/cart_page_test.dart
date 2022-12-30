@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/discount_override/discount_override_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
@@ -99,6 +100,10 @@ class OrderEligibilityBlocMock
     extends MockBloc<OrderEligibilityEvent, OrderEligibilityState>
     implements OrderEligibilityBloc {}
 
+class PriceOverrideBlocMock
+    extends MockBloc<PriceOverrideEvent, PriceOverrideState>
+    implements PriceOverrideBloc {}
+
 final locator = GetIt.instance;
 
 void main() {
@@ -121,6 +126,7 @@ void main() {
   late OrderEligibilityBloc orderEligibilityBlocMock;
   final AuthBloc authBlocMock = AuthBlocMock();
   final AddToCartBloc addToCartBlocMock = AddToCartBlocMock();
+  late PriceOverrideBloc priceOverrideBloc;
 
   final mockMaterialItemList = [
     MaterialNumber('000000000023168451'),
@@ -150,6 +156,7 @@ void main() {
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       discountOverrideBlocMock = DiscountOverrideBlocMock();
       orderEligibilityBlocMock = OrderEligibilityBlocMock();
+      priceOverrideBloc = PriceOverrideBlocMock();
 
       mockPriceList = {};
       mockPriceList.putIfAbsent(
@@ -332,6 +339,8 @@ void main() {
           ),
         ),
       );
+      when(() => priceOverrideBloc.state).thenReturn(
+        PriceOverrideState.initial());
     },
   );
   group(
@@ -360,6 +369,8 @@ void main() {
                 create: (context) => orderDocumentTypeBlocMock),
             BlocProvider<OrderEligibilityBloc>(
                 create: (context) => orderEligibilityBlocMock),
+            BlocProvider<PriceOverrideBloc>(
+                create: (context) => priceOverrideBloc),    
           ],
           child: const CartPage(),
         );
@@ -765,6 +776,57 @@ void main() {
           (tester.firstWidget(unitPrice) as Text).style!.color,
           ZPColors.black,
         );
+      });
+
+      testWidgets('should Price OverRide not Visible ', (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItemList: mockCartItemWithDataList,
+            isFetching: false,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: User.empty().copyWith(
+              role: Role.empty().copyWith(
+                type: RoleType('external_sales_rep'),
+              ),
+              hasPriceOverride: false,
+            ),
+          ),
+        );
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+          OrderEligibilityState.initial().copyWith(
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              disableOrderType: false,
+            ),
+            orderType: 'ZPFC',
+            user: User.empty().copyWith(
+              role: Role.empty().copyWith(
+                type: RoleType('external_sales_rep'),
+              ),
+              hasPriceOverride: false,
+            ),
+          ),
+        );
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
+
+        await tester.pump();
+        final item = find.byKey(Key(
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+        expect(item, findsOneWidget);
+        final listWidget = find.byWidgetPredicate((w) => w is ListTile);
+        expect(listWidget, findsAtLeastNWidgets(1));
+        await tester.pump();
+        final priceWidget = find.byKey(const Key('priceOverride'));
+        expect(priceWidget, findsOneWidget);
+        await tester.tap(priceWidget);
+        await tester.pump();
+        final priceSheet = find.byKey(const Key('priceSheet'));
+
+        expect(priceSheet, findsNothing);
       });
 
       testWidgets('open bottom sheet to override price', (tester) async {

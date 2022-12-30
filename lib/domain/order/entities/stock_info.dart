@@ -22,5 +22,4 @@ class StockInfo with _$StockInfo {
         inStock: MaterialInStock(''),
         salesDistrict: '',
       );
-  bool get isMaterialInStock => inStock.isMaterialInStock;
 }

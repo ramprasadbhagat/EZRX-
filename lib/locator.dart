@@ -67,7 +67,6 @@ import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_q
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_remote.dart';
 import 'package:ezrxmobile/infrastructure/announcement/repository/announcement_repository.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/datasource/tncdate_local.dart';
-import 'package:ezrxmobile/infrastructure/aup_tc/datasource/tncdate_querymutation.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/datasource/tncdate_remote.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/repository/aup_tc_repository.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_local.dart';
@@ -984,13 +983,11 @@ void setupLocator() {
     () => AcceptanceDateLocalDataSource(),
   );
 
-  locator.registerLazySingleton(() => TncQueryMutation());
 
   locator.registerLazySingleton(
     () => AcceptanceDateRemoteDataSource(
       httpService: locator<HttpService>(),
       exceptionHandler: locator<DataSourceExceptionHandler>(),
-      queryMutation: locator<TncQueryMutation>(),
     ),
   );
 

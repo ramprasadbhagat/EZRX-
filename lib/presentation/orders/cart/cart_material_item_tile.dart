@@ -286,6 +286,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                   context: context,
                   builder: (BuildContext context) {
                     return PriceSheet(
+                      key: const Key('priceSheet'),
                       item: cartItem,
                       onTap: (double newPrice) {
                         if (cartItem.salesOrgConfig.priceOverride) {

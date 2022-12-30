@@ -238,7 +238,7 @@ void main() {
       final expectedfailureStates = [
         ResetPasswordState.initial().copyWith(
             passwordResetFailureOrSuccessOption: optionOf(
-          const Left(ApiFailure.other('fake-message')),
+          const Left(ApiFailure.authenticationFailed()),
         ))
       ];
       when(() => mockUserBloc.state).thenReturn(UserState.initial());

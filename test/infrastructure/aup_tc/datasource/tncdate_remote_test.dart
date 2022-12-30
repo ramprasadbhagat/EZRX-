@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/infrastructure/aup_tc/datasource/tncdate_querymutation.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/datasource/tncdate_remote.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:flutter/material.dart';
@@ -14,17 +13,14 @@ void main() {
   group('AcceptanceDateRemoteDataSource should - ', () {
     late AcceptanceDateRemoteDataSource tncRemote;
     late HttpService httpService;
-    late TncQueryMutation tncQueryMutation;
     late DataSourceExceptionHandler dataSourceExceptionHandler;
 
     setUpAll(() {
       WidgetsFlutterBinding.ensureInitialized();
       httpService = MockHTTPService();
-      tncQueryMutation = TncQueryMutation();
       dataSourceExceptionHandler = DataSourceExceptionHandler();
       tncRemote = AcceptanceDateRemoteDataSource(
         httpService: httpService,
-        queryMutation: tncQueryMutation,
         exceptionHandler: dataSourceExceptionHandler,
       );
     });

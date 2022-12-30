@@ -695,5 +695,46 @@ void main() {
         [customerMockData.first, customerMockData.first],
       ),
     );
+
+    blocTest(
+      'Customer Code Fetch Success with finalCustomerCodeinfo length is zero',
+      build: () =>
+          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      setUp: () {
+        when(() => customerCodeMockRepo.getCustomerCode(
+              fakeSaleOrg,
+              fakeSalesOrgCustomerInfos[0]
+                  .customerCodeSoldTo
+                  .checkAllOrCustomerCode,
+              false,
+              0,
+              fakeUser,
+            )).thenAnswer(
+          (invocation) async => const Right(<CustomerCodeInfo>[]),
+        );
+      },
+      act: (CustomerCodeBloc bloc) {
+        bloc.add(
+          CustomerCodeEvent.fetch(
+            hidecustomer: false,
+            userInfo: fakeUser,
+            selectedSalesOrg: fakeSaleOrg,
+          ),
+        );
+      },
+      expect: () => [
+        CustomerCodeState.initial(),
+        CustomerCodeState.initial().copyWith(isFetching: true),
+        CustomerCodeState.initial().copyWith(
+          isFetching: false,
+         customerCodeInfo: CustomerCodeInfo.empty(),
+          customerCodeList: [],
+          apiFailureOrSuccessOption: none(),
+          canLoadMore: false,
+        ),
+      ],
+    );  
+
+
   });
 }

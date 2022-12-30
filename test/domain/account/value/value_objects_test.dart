@@ -128,6 +128,66 @@ void main() {
     );
 
     test(
+      'should return true when role type is zp admin',
+      () async {
+        const input = 'zp_admin';
+        final roleType = RoleType(input);
+        final result = roleType.isZPAdmin;
+        expect(result, true);
+      },
+    );
+
+    test(
+      'should return false when role type is not zp admin',
+      () async {
+        const input = 'root_admin';
+        final roleType = RoleType(input);
+        final result = roleType.isZPAdmin;
+        expect(result, false);
+      },
+    );
+
+    test(
+      'should return true when role type is Root Admin',
+      () async {
+        const input = 'root_admin';
+        final roleType = RoleType(input);
+        final result = roleType.isRootAdmin;
+        expect(result, true);
+      },
+    );
+
+    test(
+      'should return false when role type is not Root Admin',
+      () async {
+        const input = 'zp_admin';
+        final roleType = RoleType(input);
+        final result = roleType.isRootAdmin;
+        expect(result, false);
+      },
+    );
+
+    test(
+      'should return true when user is eligible login role for ZPAdmin',
+      () async {
+        const input = 'external_sales_rep';
+        final roleType = RoleType(input);
+        final result = roleType.isEligibleLoginRoleForZPAdmin;
+        expect(result, true);
+      },
+    );
+
+    test(
+      'should return false when user is not eligible login role for ZPAdmin',
+      () async {
+        const input = 'zp_admin';
+        final roleType = RoleType(input);
+        final result = roleType.isEligibleLoginRoleForZPAdmin;
+        expect(result, false);
+      },
+    );
+
+    test(
       'should return false when check can proxy login with External Sales Rep role',
       () async {
         const input = 'external_sales_rep';
@@ -1309,5 +1369,49 @@ void main() {
         expect(result, false);
       },
     );
+
+  group('RoleName value object', () {
+
+    test(
+      'should return external_sales_rep when user role type is External Sales Rep',
+      () async {
+        const input = 'External Sales Rep';
+        final roleName = RoleName(input);
+        final result = roleName.getRoleType;
+        expect(result, 'external_sales_rep');
+      },
+    );
+
+    test(
+      'should return Unknown when user role type is not known',
+      () async {
+        const input = 'Unknown user';
+        final roleName = RoleName(input);
+        final result = roleName.getRoleType;
+        expect(result, 'Unknown');
+      },
+    );
+
+    test(
+      'should return true when user is eligible login role for ZPAdmin',
+      () async {
+        const input = 'External Sales Rep';
+        final roleName = RoleName(input);
+        final result = roleName.isEligibleLoginRoleForZPAdmin;
+        expect(result, true);
+      },
+    );
+
+    test(
+      'should return false when user is not eligible login role for ZPAdmin',
+      () async {
+        const input = 'Return Approver';
+        final roleName = RoleName(input);
+        final result = roleName.isEligibleLoginRoleForZPAdmin;
+        expect(result, false);
+      },
+    );
+
+    });
   });
 }
