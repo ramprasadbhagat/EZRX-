@@ -114,18 +114,15 @@ void main() {
     blocTest(
       'Order Summary Step Continue when step is maxStep',
       build: () => OrderSummaryBloc(repository: orderRepositoryMock),
+
       seed: () => OrderSummaryState.initial().copyWith(
-        maxSteps: 4,
         step: 4,
       ),
       act: (OrderSummaryBloc bloc) {
         bloc.add(const OrderSummaryEvent.stepContinue());
       },
       expect: () => [
-        OrderSummaryState.initial().copyWith(
-          step: 0,
-          maxSteps: 4,
-        ),
+        //no change in state
       ],
     );
 

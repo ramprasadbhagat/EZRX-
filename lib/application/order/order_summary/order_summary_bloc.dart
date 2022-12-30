@@ -40,7 +40,7 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
       stepContinue: (value) async {
         emit(state.copyWith(
           apiFailureOrSuccessOption: none(),
-          step: state.step < state.maxSteps ? state.step + 1 : 0,
+          step: state.step < state.maxSteps ? state.step + 1 : state.step,
         ));
       },
       stepCancel: (value) async {
