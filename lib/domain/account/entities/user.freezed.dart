@@ -29,6 +29,7 @@ mixin _$User {
   bool get enableOrderType => throw _privateConstructorUsedError;
   bool get hasBonusOverride => throw _privateConstructorUsedError;
   bool get disableCreateOrder => throw _privateConstructorUsedError;
+  bool get disableReturns => throw _privateConstructorUsedError;
   bool get hasPriceOverride => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -53,6 +54,7 @@ abstract class $UserCopyWith<$Res> {
       bool enableOrderType,
       bool hasBonusOverride,
       bool disableCreateOrder,
+      bool disableReturns,
       bool hasPriceOverride});
 
   $FullNameCopyWith<$Res> get fullName;
@@ -86,6 +88,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? enableOrderType = null,
     Object? hasBonusOverride = null,
     Object? disableCreateOrder = null,
+    Object? disableReturns = null,
     Object? hasPriceOverride = null,
   }) {
     return _then(_value.copyWith(
@@ -136,6 +139,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       disableCreateOrder: null == disableCreateOrder
           ? _value.disableCreateOrder
           : disableCreateOrder // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disableReturns: null == disableReturns
+          ? _value.disableReturns
+          : disableReturns // ignore: cast_nullable_to_non_nullable
               as bool,
       hasPriceOverride: null == hasPriceOverride
           ? _value.hasPriceOverride
@@ -196,6 +203,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       bool enableOrderType,
       bool hasBonusOverride,
       bool disableCreateOrder,
+      bool disableReturns,
       bool hasPriceOverride});
 
   @override
@@ -229,6 +237,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? enableOrderType = null,
     Object? hasBonusOverride = null,
     Object? disableCreateOrder = null,
+    Object? disableReturns = null,
     Object? hasPriceOverride = null,
   }) {
     return _then(_$_User(
@@ -280,6 +289,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.disableCreateOrder
           : disableCreateOrder // ignore: cast_nullable_to_non_nullable
               as bool,
+      disableReturns: null == disableReturns
+          ? _value.disableReturns
+          : disableReturns // ignore: cast_nullable_to_non_nullable
+              as bool,
       hasPriceOverride: null == hasPriceOverride
           ? _value.hasPriceOverride
           : hasPriceOverride // ignore: cast_nullable_to_non_nullable
@@ -304,6 +317,7 @@ class _$_User extends _User {
       required this.enableOrderType,
       required this.hasBonusOverride,
       required this.disableCreateOrder,
+      required this.disableReturns,
       required this.hasPriceOverride})
       : _userSalesOrganisations = userSalesOrganisations,
         super._();
@@ -338,11 +352,13 @@ class _$_User extends _User {
   @override
   final bool disableCreateOrder;
   @override
+  final bool disableReturns;
+  @override
   final bool hasPriceOverride;
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, settings: $settings, settingTc: $settingTc, enableOrderType: $enableOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, hasPriceOverride: $hasPriceOverride)';
+    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, settings: $settings, settingTc: $settingTc, enableOrderType: $enableOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, hasPriceOverride: $hasPriceOverride)';
   }
 
   @override
@@ -371,6 +387,8 @@ class _$_User extends _User {
                 other.hasBonusOverride == hasBonusOverride) &&
             (identical(other.disableCreateOrder, disableCreateOrder) ||
                 other.disableCreateOrder == disableCreateOrder) &&
+            (identical(other.disableReturns, disableReturns) ||
+                other.disableReturns == disableReturns) &&
             (identical(other.hasPriceOverride, hasPriceOverride) ||
                 other.hasPriceOverride == hasPriceOverride));
   }
@@ -390,6 +408,7 @@ class _$_User extends _User {
       enableOrderType,
       hasBonusOverride,
       disableCreateOrder,
+      disableReturns,
       hasPriceOverride);
 
   @JsonKey(ignore: true)
@@ -413,6 +432,7 @@ abstract class _User extends User {
       required final bool enableOrderType,
       required final bool hasBonusOverride,
       required final bool disableCreateOrder,
+      required final bool disableReturns,
       required final bool hasPriceOverride}) = _$_User;
   const _User._() : super._();
 
@@ -440,6 +460,8 @@ abstract class _User extends User {
   bool get hasBonusOverride;
   @override
   bool get disableCreateOrder;
+  @override
+  bool get disableReturns;
   @override
   bool get hasPriceOverride;
   @override

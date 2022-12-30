@@ -34,6 +34,7 @@ _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
           json['privacyPolicyAcceptedPlatform'] as String? ?? '',
       hasBonusOverride: json['hasBonusOverride'] as bool? ?? false,
       disableCreateOrder: json['disableCreateOrder'] as bool? ?? false,
+      disableReturns: json['disableReturns'] as bool? ?? false,
       hasPriceOverride: json['hasPriceOverride'] as bool? ?? false,
     );
 
@@ -57,5 +58,6 @@ Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
       'privacyPolicyAcceptedPlatform': instance.privacyPolicyAcceptedPlatform,
       'hasBonusOverride': instance.hasBonusOverride,
       'disableCreateOrder': instance.disableCreateOrder,
+      'disableReturns': instance.disableReturns,
       'hasPriceOverride': instance.hasPriceOverride,
     };

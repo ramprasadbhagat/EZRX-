@@ -465,6 +465,7 @@ void main() {
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
+          disableReturns: false,
           hasPriceOverride: false,
         );
         final result = validateContainUserNameOrName(input, user);
@@ -493,6 +494,7 @@ void main() {
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
+          disableReturns: false,
           hasPriceOverride: false,
         );
         final result = validateContainUserNameOrName(input, user);
@@ -524,6 +526,7 @@ void main() {
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
+          disableReturns: false,
           hasPriceOverride: false,
         );
         final result = validateContainUserNameOrName(input, user);
@@ -555,6 +558,7 @@ void main() {
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
+          disableReturns: false,
           hasPriceOverride: false,
         );
         final result = validateContainUserNameOrName(input, user);

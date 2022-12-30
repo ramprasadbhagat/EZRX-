@@ -325,7 +325,8 @@ void main() {
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
-          hasPriceOverride:false,
+          disableReturns: false,
+          hasPriceOverride: false,
         );
         final result = isMustNotContainUserNameOrName(input: input, user: user);
         expect(result, true);
@@ -353,7 +354,8 @@ void main() {
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
-          hasPriceOverride:false,
+          disableReturns: false,
+          hasPriceOverride: false,
         );
         final result = isMustNotContainUserNameOrName(input: input, user: user);
         expect(result, false);
@@ -381,7 +383,8 @@ void main() {
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
-          hasPriceOverride:false,
+          disableReturns: false,
+          hasPriceOverride: false,
         );
         final result = isMustNotContainUserNameOrName(input: input, user: user);
         expect(result, false);
@@ -409,7 +412,8 @@ void main() {
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
-          hasPriceOverride:false,
+          disableReturns: false,
+          hasPriceOverride: false,
         );
         final result = isMustNotContainUserNameOrName(input: input, user: user);
         expect(result, false);

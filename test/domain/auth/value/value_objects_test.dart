@@ -403,7 +403,8 @@ void main() {
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
-          hasPriceOverride:false,
+          disableReturns: false,
+          hasPriceOverride: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.isValid();
@@ -434,7 +435,8 @@ void main() {
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
-          hasPriceOverride:false,
+          disableReturns: false,
+          hasPriceOverride: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -471,7 +473,8 @@ void main() {
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
-          hasPriceOverride:false,
+          disableReturns: false,
+          hasPriceOverride: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -508,7 +511,8 @@ void main() {
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
-          hasPriceOverride:false,
+          disableReturns: false,
+          hasPriceOverride: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -545,7 +549,8 @@ void main() {
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
-          hasPriceOverride:false,
+          disableReturns: false,
+          hasPriceOverride: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -582,7 +587,8 @@ void main() {
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
-          hasPriceOverride:false,
+          disableReturns: false,
+          hasPriceOverride: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -620,7 +626,8 @@ void main() {
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
-          hasPriceOverride:false,
+          disableReturns: false,
+          hasPriceOverride: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -658,7 +665,8 @@ void main() {
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
-          hasPriceOverride:false,
+          disableReturns: false,
+          hasPriceOverride: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(
@@ -695,7 +703,8 @@ void main() {
           enableOrderType: false,
           hasBonusOverride: false,
           disableCreateOrder: false,
-          hasPriceOverride:false,
+          disableReturns: false,
+          hasPriceOverride: false,
         );
         final password = Password.resetV2(newPassword, oldPassword, user);
         final result = password.value.fold(

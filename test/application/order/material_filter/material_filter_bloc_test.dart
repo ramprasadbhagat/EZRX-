@@ -94,6 +94,8 @@ void main() {
     displayOrderDiscount: false,
     minOrderAmount: '0',
     enableZDP8Override: false,
+    disableReturnsAccessSR: false,
+    disableReturnsAccess: false,
   );
 
   const fakeSelectedPrincipalFilterCategory = MaterialFilterType.principal;

@@ -67,7 +67,6 @@
              
           ],
           "passwordLastUpdate":"",
-          "disableReturns":false,
           "passwordLastRetained":"",
           "languagePreference":"EN",
           "userSalesOrganisationList":{
@@ -92,6 +91,7 @@
           "passwordActionTime":"2021-12-16T08:15:26.846Z",
           "disablePaymentAccess":true,
           "disableCreateOrder":false,
+          "disableReturns":false,
           "createdAt":"2021-09-08T06:58:40.426Z",
           "updatedAt":"2022-02-10T14:34:05Z",
           "enableOrderType":true

@@ -154,6 +154,12 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'enableZDP8Override', defaultValue: false)
     @HiveField(146, defaultValue: false)
         required bool enableZDP8Override,
+    @JsonKey(name: 'disableReturnsAccessSR', defaultValue: false)
+    @HiveField(147, defaultValue: false)
+        required bool disableReturnsAccessSR,
+    @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
+    @HiveField(148, defaultValue: false)
+        required bool disableReturnsAccess,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -207,6 +213,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       displayOrderDiscount: configs.displayOrderDiscount,
       minOrderAmount: configs.minOrderAmount,
       enableZDP8Override: configs.enableZDP8Override,
+      disableReturnsAccessSR: configs.disableReturnsAccessSR,
+      disableReturnsAccess: configs.disableReturnsAccess,
     );
   }
 
@@ -259,6 +267,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       displayOrderDiscount: displayOrderDiscount,
       minOrderAmount: minOrderAmount,
       enableZDP8Override: enableZDP8Override,
+      disableReturnsAccessSR: disableReturnsAccessSR,
+      disableReturnsAccess: disableReturnsAccess,
     );
   }
 

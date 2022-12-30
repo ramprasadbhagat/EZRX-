@@ -37,6 +37,7 @@ class ExpansionTile extends StatefulWidget {
     this.children = const <Widget>[],
     this.trailing,
     this.initiallyExpanded = false,
+    this.keepHeaderBorder =  false,
   }) : super(key: key);
 
   /// A widget to display before the title.
@@ -75,6 +76,9 @@ class ExpansionTile extends StatefulWidget {
 
   /// Specifies if the list tile is initially expanded (true) or collapsed (false, the default).
   final bool initiallyExpanded;
+
+  /// Specifies if the header border will be visible or not.
+  final bool keepHeaderBorder;
 
   @override
   _ExpansionTileState createState() => _ExpansionTileState();
@@ -168,10 +172,10 @@ class _ExpansionTileState extends State<ExpansionTile>
               child: Container(
                 height: 40,
                 margin: const EdgeInsets.all(0),
-                decoration: const BoxDecoration(
-                  border: Border(
+                decoration: BoxDecoration(
+                  border: widget.keepHeaderBorder?const Border(
                     bottom: BorderSide(width: 1, color: ZPColors.black),
-                  ),
+                  ):null,
                 ),
                 child: ListTile(
                   contentPadding: const EdgeInsets.all(0),

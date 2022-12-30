@@ -163,6 +163,12 @@ mixin _$SalesOrganisationConfigsDto {
   @JsonKey(name: 'enableZDP8Override', defaultValue: false)
   @HiveField(146, defaultValue: false)
   bool get enableZDP8Override => throw _privateConstructorUsedError;
+  @JsonKey(name: 'disableReturnsAccessSR', defaultValue: false)
+  @HiveField(147, defaultValue: false)
+  bool get disableReturnsAccessSR => throw _privateConstructorUsedError;
+  @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
+  @HiveField(148, defaultValue: false)
+  bool get disableReturnsAccess => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -320,7 +326,13 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
           String salesOrg,
       @JsonKey(name: 'enableZDP8Override', defaultValue: false)
       @HiveField(146, defaultValue: false)
-          bool enableZDP8Override});
+          bool enableZDP8Override,
+      @JsonKey(name: 'disableReturnsAccessSR', defaultValue: false)
+      @HiveField(147, defaultValue: false)
+          bool disableReturnsAccessSR,
+      @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
+      @HiveField(148, defaultValue: false)
+          bool disableReturnsAccess});
 }
 
 /// @nodoc
@@ -384,6 +396,8 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
     Object? minOrderAmount = null,
     Object? salesOrg = null,
     Object? enableZDP8Override = null,
+    Object? disableReturnsAccessSR = null,
+    Object? disableReturnsAccess = null,
   }) {
     return _then(_value.copyWith(
       disableProcessingStatus: null == disableProcessingStatus
@@ -574,6 +588,14 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
           ? _value.enableZDP8Override
           : enableZDP8Override // ignore: cast_nullable_to_non_nullable
               as bool,
+      disableReturnsAccessSR: null == disableReturnsAccessSR
+          ? _value.disableReturnsAccessSR
+          : disableReturnsAccessSR // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disableReturnsAccess: null == disableReturnsAccess
+          ? _value.disableReturnsAccess
+          : disableReturnsAccess // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -729,7 +751,13 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
           String salesOrg,
       @JsonKey(name: 'enableZDP8Override', defaultValue: false)
       @HiveField(146, defaultValue: false)
-          bool enableZDP8Override});
+          bool enableZDP8Override,
+      @JsonKey(name: 'disableReturnsAccessSR', defaultValue: false)
+      @HiveField(147, defaultValue: false)
+          bool disableReturnsAccessSR,
+      @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
+      @HiveField(148, defaultValue: false)
+          bool disableReturnsAccess});
 }
 
 /// @nodoc
@@ -792,6 +820,8 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? minOrderAmount = null,
     Object? salesOrg = null,
     Object? enableZDP8Override = null,
+    Object? disableReturnsAccessSR = null,
+    Object? disableReturnsAccess = null,
   }) {
     return _then(_$_SalesOrganisationConfigsDto(
       disableProcessingStatus: null == disableProcessingStatus
@@ -982,6 +1012,14 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.enableZDP8Override
           : enableZDP8Override // ignore: cast_nullable_to_non_nullable
               as bool,
+      disableReturnsAccessSR: null == disableReturnsAccessSR
+          ? _value.disableReturnsAccessSR
+          : disableReturnsAccessSR // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disableReturnsAccess: null == disableReturnsAccess
+          ? _value.disableReturnsAccess
+          : disableReturnsAccess // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1132,7 +1170,13 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
           required this.salesOrg,
       @JsonKey(name: 'enableZDP8Override', defaultValue: false)
       @HiveField(146, defaultValue: false)
-          required this.enableZDP8Override})
+          required this.enableZDP8Override,
+      @JsonKey(name: 'disableReturnsAccessSR', defaultValue: false)
+      @HiveField(147, defaultValue: false)
+          required this.disableReturnsAccessSR,
+      @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
+      @HiveField(148, defaultValue: false)
+          required this.disableReturnsAccess})
       : _principalList = principalList,
         super._();
 
@@ -1333,10 +1377,18 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @JsonKey(name: 'enableZDP8Override', defaultValue: false)
   @HiveField(146, defaultValue: false)
   final bool enableZDP8Override;
+  @override
+  @JsonKey(name: 'disableReturnsAccessSR', defaultValue: false)
+  @HiveField(147, defaultValue: false)
+  final bool disableReturnsAccessSR;
+  @override
+  @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
+  @HiveField(148, defaultValue: false)
+  final bool disableReturnsAccess;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, ponRequired: $ponRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, ponRequired: $ponRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess)';
   }
 
   @override
@@ -1419,7 +1471,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
             (identical(other.displayOrderDiscount, displayOrderDiscount) || other.displayOrderDiscount == displayOrderDiscount) &&
             (identical(other.minOrderAmount, minOrderAmount) || other.minOrderAmount == minOrderAmount) &&
             (identical(other.salesOrg, salesOrg) || other.salesOrg == salesOrg) &&
-            (identical(other.enableZDP8Override, enableZDP8Override) || other.enableZDP8Override == enableZDP8Override));
+            (identical(other.enableZDP8Override, enableZDP8Override) || other.enableZDP8Override == enableZDP8Override) &&
+            (identical(other.disableReturnsAccessSR, disableReturnsAccessSR) || other.disableReturnsAccessSR == disableReturnsAccessSR) &&
+            (identical(other.disableReturnsAccess, disableReturnsAccess) || other.disableReturnsAccess == disableReturnsAccess));
   }
 
   @JsonKey(ignore: true)
@@ -1472,7 +1526,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
         displayOrderDiscount,
         minOrderAmount,
         salesOrg,
-        enableZDP8Override
+        enableZDP8Override,
+        disableReturnsAccessSR,
+        disableReturnsAccess
       ]);
 
   @JsonKey(ignore: true)
@@ -1634,7 +1690,13 @@ abstract class _SalesOrganisationConfigsDto
               required final String salesOrg,
           @JsonKey(name: 'enableZDP8Override', defaultValue: false)
           @HiveField(146, defaultValue: false)
-              required final bool enableZDP8Override}) =
+              required final bool enableZDP8Override,
+          @JsonKey(name: 'disableReturnsAccessSR', defaultValue: false)
+          @HiveField(147, defaultValue: false)
+              required final bool disableReturnsAccessSR,
+          @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
+          @HiveField(148, defaultValue: false)
+              required final bool disableReturnsAccess}) =
       _$_SalesOrganisationConfigsDto;
   const _SalesOrganisationConfigsDto._() : super._();
 
@@ -1830,6 +1892,14 @@ abstract class _SalesOrganisationConfigsDto
   @JsonKey(name: 'enableZDP8Override', defaultValue: false)
   @HiveField(146, defaultValue: false)
   bool get enableZDP8Override;
+  @override
+  @JsonKey(name: 'disableReturnsAccessSR', defaultValue: false)
+  @HiveField(147, defaultValue: false)
+  bool get disableReturnsAccessSR;
+  @override
+  @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
+  @HiveField(148, defaultValue: false)
+  bool get disableReturnsAccess;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsDtoCopyWith<_$_SalesOrganisationConfigsDto>

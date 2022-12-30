@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
-import 'package:ezrxmobile/presentation/orders/cart/custom_expansion_tile.dart'
+import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
     as custom;
 import 'package:flutter/material.dart';
 
@@ -15,6 +15,7 @@ class SaveOrderBounsTile extends StatelessWidget {
       key: const Key('saveOrderBounsTile'),
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: custom.ExpansionTile(
+        keepHeaderBorder: true,
         initiallyExpanded: true,
         title: Text(
           'Bonuses'.tr(),

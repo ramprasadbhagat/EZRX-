@@ -85,6 +85,8 @@ void main() {
     displayOrderDiscount: false,
     minOrderAmount: '0',
     enableZDP8Override: false,
+    disableReturnsAccessSR: false,
+    disableReturnsAccess: false,
   );
 
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(

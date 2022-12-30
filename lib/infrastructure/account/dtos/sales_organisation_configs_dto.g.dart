@@ -72,13 +72,15 @@ class SalesOrganisationConfigsDtoAdapter
       minOrderAmount: fields[144] == null ? '0' : fields[144] as String,
       salesOrg: fields[145] == null ? '0' : fields[145] as String,
       enableZDP8Override: fields[146] == null ? false : fields[146] as bool,
+      disableReturnsAccessSR: fields[147] == null ? false : fields[147] as bool,
+      disableReturnsAccess: fields[148] == null ? false : fields[148] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_SalesOrganisationConfigsDto obj) {
     writer
-      ..writeByte(47)
+      ..writeByte(49)
       ..writeByte(100)
       ..write(obj.disableProcessingStatus)
       ..writeByte(101)
@@ -171,6 +173,10 @@ class SalesOrganisationConfigsDtoAdapter
       ..write(obj.salesOrg)
       ..writeByte(146)
       ..write(obj.enableZDP8Override)
+      ..writeByte(147)
+      ..write(obj.disableReturnsAccessSR)
+      ..writeByte(148)
+      ..write(obj.disableReturnsAccess)
       ..writeByte(7)
       ..write(obj.principalList);
   }
@@ -246,6 +252,8 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       minOrderAmount: json['minOrderAmount'] as String? ?? '0',
       salesOrg: json['salesOrgCode'] as String? ?? '0',
       enableZDP8Override: json['enableZDP8Override'] as bool? ?? false,
+      disableReturnsAccessSR: json['disableReturnsAccessSR'] as bool? ?? false,
+      disableReturnsAccess: json['disableReturnsAccess'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -299,4 +307,6 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'minOrderAmount': instance.minOrderAmount,
       'salesOrgCode': instance.salesOrg,
       'enableZDP8Override': instance.enableZDP8Override,
+      'disableReturnsAccessSR': instance.disableReturnsAccessSR,
+      'disableReturnsAccess': instance.disableReturnsAccess,
     };

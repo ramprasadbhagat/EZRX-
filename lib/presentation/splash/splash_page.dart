@@ -51,6 +51,9 @@ class SplashPage extends StatelessWidget {
               },
               unauthenticated: (_) {
                 context.read<UserBloc>().add(const UserEvent.initialized());
+                context
+                    .read<EligibilityBloc>()
+                    .add(const EligibilityEvent.initialized());
                 context.router.replaceAll(
                   [
                     const SplashPageRoute(),

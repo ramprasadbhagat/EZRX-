@@ -26,6 +26,7 @@ class User with _$User {
     required bool enableOrderType,
     required bool hasBonusOverride,
     required bool disableCreateOrder,
+    required bool disableReturns,
     required bool hasPriceOverride,
   }) = _User;
 
@@ -50,6 +51,7 @@ class User with _$User {
         enableOrderType: false,
         hasBonusOverride: false,
         disableCreateOrder: false,
-        hasPriceOverride:false,
+        disableReturns: false,
+        hasPriceOverride: false,
       );
 }

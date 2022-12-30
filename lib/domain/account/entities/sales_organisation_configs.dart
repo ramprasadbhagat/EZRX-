@@ -55,6 +55,8 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required String minOrderAmount,
     required SalesOrg salesOrg,
     required bool enableZDP8Override,
+    required bool disableReturnsAccessSR,
+    required bool disableReturnsAccess,
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
@@ -105,6 +107,8 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         displayOrderDiscount: false,
         minOrderAmount: '0',
         enableZDP8Override: false,
+        disableReturnsAccessSR: false,
+        disableReturnsAccess: false,
       );
 
   String get getConfigLangauge {

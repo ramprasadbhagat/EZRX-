@@ -63,6 +63,8 @@ mixin _$SalesOrganisationConfigs {
   String get minOrderAmount => throw _privateConstructorUsedError;
   SalesOrg get salesOrg => throw _privateConstructorUsedError;
   bool get enableZDP8Override => throw _privateConstructorUsedError;
+  bool get disableReturnsAccessSR => throw _privateConstructorUsedError;
+  bool get disableReturnsAccess => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrganisationConfigsCopyWith<SalesOrganisationConfigs> get copyWith =>
@@ -122,7 +124,9 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       bool displayOrderDiscount,
       String minOrderAmount,
       SalesOrg salesOrg,
-      bool enableZDP8Override});
+      bool enableZDP8Override,
+      bool disableReturnsAccessSR,
+      bool disableReturnsAccess});
 }
 
 /// @nodoc
@@ -186,6 +190,8 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
     Object? minOrderAmount = null,
     Object? salesOrg = null,
     Object? enableZDP8Override = null,
+    Object? disableReturnsAccessSR = null,
+    Object? disableReturnsAccess = null,
   }) {
     return _then(_value.copyWith(
       enableIRN: null == enableIRN
@@ -376,6 +382,14 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
           ? _value.enableZDP8Override
           : enableZDP8Override // ignore: cast_nullable_to_non_nullable
               as bool,
+      disableReturnsAccessSR: null == disableReturnsAccessSR
+          ? _value.disableReturnsAccessSR
+          : disableReturnsAccessSR // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disableReturnsAccess: null == disableReturnsAccess
+          ? _value.disableReturnsAccess
+          : disableReturnsAccess // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -436,7 +450,9 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       bool displayOrderDiscount,
       String minOrderAmount,
       SalesOrg salesOrg,
-      bool enableZDP8Override});
+      bool enableZDP8Override,
+      bool disableReturnsAccessSR,
+      bool disableReturnsAccess});
 }
 
 /// @nodoc
@@ -498,6 +514,8 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? minOrderAmount = null,
     Object? salesOrg = null,
     Object? enableZDP8Override = null,
+    Object? disableReturnsAccessSR = null,
+    Object? disableReturnsAccess = null,
   }) {
     return _then(_$_SalesOrganisationConfigs(
       enableIRN: null == enableIRN
@@ -688,6 +706,14 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.enableZDP8Override
           : enableZDP8Override // ignore: cast_nullable_to_non_nullable
               as bool,
+      disableReturnsAccessSR: null == disableReturnsAccessSR
+          ? _value.disableReturnsAccessSR
+          : disableReturnsAccessSR // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disableReturnsAccess: null == disableReturnsAccess
+          ? _value.disableReturnsAccess
+          : disableReturnsAccess // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -742,7 +768,9 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       required this.displayOrderDiscount,
       required this.minOrderAmount,
       required this.salesOrg,
-      required this.enableZDP8Override})
+      required this.enableZDP8Override,
+      required this.disableReturnsAccessSR,
+      required this.disableReturnsAccess})
       : _principalList = principalList,
         super._();
 
@@ -845,10 +873,14 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   final SalesOrg salesOrg;
   @override
   final bool enableZDP8Override;
+  @override
+  final bool disableReturnsAccessSR;
+  @override
+  final bool disableReturnsAccess;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, ponRequired: $ponRequired, enableTaxDisplay: $enableTaxDisplay, netPriceOverride: $netPriceOverride, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override)';
+    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, ponRequired: $ponRequired, enableTaxDisplay: $enableTaxDisplay, netPriceOverride: $netPriceOverride, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess)';
   }
 
   @override
@@ -931,7 +963,9 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
             (identical(other.displayOrderDiscount, displayOrderDiscount) || other.displayOrderDiscount == displayOrderDiscount) &&
             (identical(other.minOrderAmount, minOrderAmount) || other.minOrderAmount == minOrderAmount) &&
             (identical(other.salesOrg, salesOrg) || other.salesOrg == salesOrg) &&
-            (identical(other.enableZDP8Override, enableZDP8Override) || other.enableZDP8Override == enableZDP8Override));
+            (identical(other.enableZDP8Override, enableZDP8Override) || other.enableZDP8Override == enableZDP8Override) &&
+            (identical(other.disableReturnsAccessSR, disableReturnsAccessSR) || other.disableReturnsAccessSR == disableReturnsAccessSR) &&
+            (identical(other.disableReturnsAccess, disableReturnsAccess) || other.disableReturnsAccess == disableReturnsAccess));
   }
 
   @override
@@ -983,7 +1017,9 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
         displayOrderDiscount,
         minOrderAmount,
         salesOrg,
-        enableZDP8Override
+        enableZDP8Override,
+        disableReturnsAccessSR,
+        disableReturnsAccess
       ]);
 
   @JsonKey(ignore: true)
@@ -1042,7 +1078,9 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final bool displayOrderDiscount,
       required final String minOrderAmount,
       required final SalesOrg salesOrg,
-      required final bool enableZDP8Override}) = _$_SalesOrganisationConfigs;
+      required final bool enableZDP8Override,
+      required final bool disableReturnsAccessSR,
+      required final bool disableReturnsAccess}) = _$_SalesOrganisationConfigs;
   const _SalesOrganisationConfigs._() : super._();
 
   @override
@@ -1139,6 +1177,10 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   SalesOrg get salesOrg;
   @override
   bool get enableZDP8Override;
+  @override
+  bool get disableReturnsAccessSR;
+  @override
+  bool get disableReturnsAccess;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsCopyWith<_$_SalesOrganisationConfigs>

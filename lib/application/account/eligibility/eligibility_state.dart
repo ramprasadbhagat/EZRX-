@@ -20,6 +20,20 @@ class EligibilityState with _$EligibilityState {
         shipToInfo: ShipToInfo.empty(),
       );
 
+  bool get isReturnsEnable {
+    if (user.disableReturns) return false;
+
+    if (user.role.type.isSalesRep && salesOrgConfigs.disableReturnsAccessSR) {
+      return false;
+    }
+
+    if (user.role.type.isClient && salesOrgConfigs.disableReturnsAccess) {
+      return false;
+    }
+
+    return true;
+  }
+
   bool get isBundleMaterialEnable => !salesOrgConfigs.disableBundles;
   bool get isCovidMaterialEnable {
     // 1. SG Covid tab

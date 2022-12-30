@@ -86,6 +86,8 @@ void main() {
     displayOrderDiscount: false,
     minOrderAmount: '0',
     enableZDP8Override: false,
+    disableReturnsAccessSR: false,
+    disableReturnsAccess: false,
   );
 
   group('Eligibility Bloc', () {

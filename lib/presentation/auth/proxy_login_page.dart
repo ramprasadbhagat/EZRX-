@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
@@ -17,10 +18,9 @@ class LoginOnBehalfPage extends StatelessWidget {
       appBar: AppBar(title: const Text('Login on behalf').tr()),
       body: SafeArea(
         child: BlocConsumer<ProxyLoginFormBloc, ProxyLoginFormState>(
-          listenWhen: (previous, current) {
-              return previous.authFailureOrSuccessOption !=
-              current.authFailureOrSuccessOption;
-              },
+          listenWhen: (previous, current) =>
+              previous.authFailureOrSuccessOption !=
+              current.authFailureOrSuccessOption,
           listener: (context, state) {
             state.authFailureOrSuccessOption.fold(
               () {},
@@ -33,6 +33,9 @@ class LoginOnBehalfPage extends StatelessWidget {
                   context
                       .read<SalesOrgBloc>()
                       .add(const SalesOrgEvent.initialized());
+                  context
+                      .read<EligibilityBloc>()
+                      .add(const EligibilityEvent.initialized());
                   context.read<UserBloc>().add(const UserEvent.fetch());
                   context.router.pop();
                 },
@@ -159,10 +162,9 @@ class LoginButton extends StatelessWidget {
                 : () {
                     FocusScope.of(context).unfocus();
                     context.read<ProxyLoginFormBloc>().add(
-                          ProxyLoginFormEvent.loginWithADButtonPressed(context
-                              .read<UserBloc>()
-                              .state
-                              .user),
+                          ProxyLoginFormEvent.loginWithADButtonPressed(
+                            context.read<UserBloc>().state.user,
+                          ),
                         );
                   },
             child: const Text('Login').tr(),

@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
+import 'package:ezrxmobile/application/account/approver/approver_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -76,6 +77,9 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
+class ApproverBlocMock extends MockBloc<ApproverEvent, ApproverState>
+    implements ApproverBloc {}
+
 class MockHTTPService extends Mock implements HttpService {}
 
 class AutoRouterMock extends Mock implements AppRouter {}
@@ -95,6 +99,7 @@ void main() {
   late ShipToCodeBlocMock shipToCodeBlocMock;
   late AuthBlocMock authBlocMock;
   late UserBlocMock userBlocMock;
+  late ApproverBlocMock approverBlocMock;
   late HttpService mockHTTPService;
   late AppRouter autoRouterMock;
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
@@ -157,6 +162,7 @@ void main() {
         shipToCodeBlocMock = ShipToCodeBlocMock();
         authBlocMock = AuthBlocMock();
         userBlocMock = UserBlocMock();
+        approverBlocMock = ApproverBlocMock();
         cartBlocMock = CartBlocMock();
         mockHTTPService = MockHTTPService();
 
@@ -182,6 +188,7 @@ void main() {
             .thenReturn(ShipToCodeState.initial());
         when(() => authBlocMock.state).thenReturn(const AuthState.initial());
         when(() => userBlocMock.state).thenReturn(UserState.initial());
+        when(() => approverBlocMock.state).thenReturn(ApproverState.initial());
       });
 
       Future getWidget(tester) async {
@@ -217,6 +224,8 @@ void main() {
                     create: (context) => shipToCodeBlocMock),
                 BlocProvider<AuthBloc>(create: (context) => authBlocMock),
                 BlocProvider<UserBloc>(create: (context) => userBlocMock),
+                BlocProvider<ApproverBloc>(
+                    create: (context) => approverBlocMock),
               ],
               child: const HomeTab(),
             ),
@@ -281,10 +290,10 @@ void main() {
             find.byKey(const ValueKey('homeShipCodeSelector')), findsOneWidget);
         expect(find.byKey(const ValueKey('HomeBanner')), findsOneWidget);
 
+        expect(find.text('Orders'), findsOneWidget);
         expect(find.text('Create Order'), findsOneWidget);
         expect(find.text('Saved Orders'), findsOneWidget);
         expect(find.text('Order Template'), findsOneWidget);
-
         verify(() => materialPriceBlocMock.add(MaterialPriceEvent.fetch(
             customerCode: fakeCustomerCodeInfo,
             materials: [fakematerialInfo1],

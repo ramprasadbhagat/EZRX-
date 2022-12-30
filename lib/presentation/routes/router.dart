@@ -31,7 +31,6 @@ import 'package:ezrxmobile/presentation/returns/policy_configuration.dart';
 import 'package:ezrxmobile/presentation/returns/request_return.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary.dart';
 import 'package:ezrxmobile/presentation/returns/returns_overview.dart';
-import 'package:ezrxmobile/presentation/returns/returns_feature_page.dart';
 import 'package:ezrxmobile/presentation/returns/user_restriction.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 
@@ -44,7 +43,6 @@ import 'package:ezrxmobile/presentation/history/history_details.dart';
     AutoRoute(path: 'login', page: LoginPage),
     AutoRoute(path: 'login_on_behalf', page: LoginOnBehalfPage),
     AutoRoute(path: 'settings', page: SettingsPage),
-    AutoRoute(path: 'returns', page: ReturnsPage),
     AutoRoute(path: 'returns_overview', page: ReturnsOverview),
     AutoRoute(path: 'request_return', page: RequestReturn),
     AutoRoute(path: 'approver_actions', page: ApproverActions),

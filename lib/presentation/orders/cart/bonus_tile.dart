@@ -4,7 +4,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus_item_tile.dart';
-import 'package:ezrxmobile/presentation/orders/cart/custom_expansion_tile.dart'
+import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
     as custom;
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -35,6 +35,7 @@ class BounsTile extends StatelessWidget {
                   (!isBonusOverrideEnable && bonusList.isNotEmpty)
               ? custom.ExpansionTile(
                   initiallyExpanded: true,
+                  keepHeaderBorder: true,
                   title: Text(
                     'Bonuses'.tr(),
                     style: Theme.of(context).textTheme.titleSmall,

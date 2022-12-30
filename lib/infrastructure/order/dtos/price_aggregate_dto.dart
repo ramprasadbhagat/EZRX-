@@ -174,6 +174,8 @@ const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
   displayOrderDiscount: false,
   minOrderAmount: '0',
   enableZDP8Override: false,
+  disableReturnsAccessSR: false,
+  disableReturnsAccess: false,
 );
 
 const BundleDto _emptyBundleDto = BundleDto(

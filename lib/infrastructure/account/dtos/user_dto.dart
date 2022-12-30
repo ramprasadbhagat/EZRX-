@@ -50,6 +50,8 @@ class UserDto with _$UserDto {
         required bool hasBonusOverride,
     @JsonKey(name: 'disableCreateOrder', defaultValue: false)
         required bool disableCreateOrder,
+    @JsonKey(name: 'disableReturns', defaultValue: false)
+        required bool disableReturns,
     @JsonKey(name: 'hasPriceOverride', defaultValue: false)
         required bool hasPriceOverride,
   }) = _UserDto;
@@ -75,6 +77,7 @@ class UserDto with _$UserDto {
           user.settingTc.privacyPolicyAcceptedPlatform,
       hasBonusOverride: user.hasBonusOverride,
       disableCreateOrder: user.disableCreateOrder,
+      disableReturns: user.disableReturns,
       hasPriceOverride: user.hasPriceOverride,
     );
   }
@@ -95,6 +98,7 @@ class UserDto with _$UserDto {
     username: '',
     userSalesOrganisations: [],
     disableCreateOrder: false,
+    disableReturns: false,
     hasPriceOverride: false,
   );
   User toDomain() {
@@ -124,6 +128,7 @@ class UserDto with _$UserDto {
       enableOrderType: enableOrderType,
       hasBonusOverride: hasBonusOverride,
       disableCreateOrder: disableCreateOrder,
+      disableReturns: disableReturns,
       hasPriceOverride: hasPriceOverride,
     );
   }
