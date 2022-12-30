@@ -264,6 +264,7 @@ class _PasswordField extends StatelessWidget {
               decoration: InputDecoration(
                 labelText: 'Password'.tr(),
                 suffixIcon: IconButton(
+                  key: const Key('loginPasswordFieldSuffixIcon'),
                   icon: Icon(
                     state.passwordVisible
                         ? Icons.visibility

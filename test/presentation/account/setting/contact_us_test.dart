@@ -31,7 +31,11 @@ void main() {
     setUp(() {
       autoRouterMock = locator<AppRouter>();
       salesOrgBlocMock = SalesOrgBlocMock();
-      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+      when(() => salesOrgBlocMock.state)
+          .thenReturn(SalesOrgState.initial().copyWith(
+        salesOrganisation:
+            SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2001')),
+      ));
     });
 
     StackRouterScope getScopedWidget() {
@@ -70,6 +74,7 @@ void main() {
 
       final nameTile = find.byKey(const Key('nameTile'));
       final emailTile = find.byKey(const Key('emailTile'));
+      final phoneNumberTile = find.byKey(const Key('phoneNumberTile'));
       final emailTxt = find.text(salesOrgEmail);
       final personNameTxt = find.text(salesOrgName);
       await widgetTester.pumpAndSettle();
@@ -77,8 +82,12 @@ void main() {
       expect(emailTile, findsOneWidget);
       expect(emailTxt, findsOneWidget);
       expect(personNameTxt, findsOneWidget);
+      expect(phoneNumberTile, findsOneWidget);
 
       await widgetTester.tap(emailTile);
+      await widgetTester.pumpAndSettle();
+
+      await widgetTester.tap(phoneNumberTile);
       await widgetTester.pumpAndSettle();
     });
 

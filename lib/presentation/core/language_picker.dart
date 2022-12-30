@@ -10,6 +10,7 @@ class LanguagePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlatformAlertDialog(
+      key: const Key('languagePicker'),
       title: const Text('Please select a language').tr(),
       actions: <Widget>[
         PlatformDialogAction(

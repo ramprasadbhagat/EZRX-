@@ -21,38 +21,9 @@ class AupTCDialog extends StatefulWidget {
 }
 
 class AupTCDialogState extends State<AupTCDialog> {
-  ScrollController termsandConditionScrollController = ScrollController();
   bool termsAndConditionReadtoEnd = false; //flag to see user read all content
   int lastHighValue = 0;
   bool isLoading = false;
-
-  void _termsAndConditionScrollListner() {
-    if (termsandConditionScrollController.offset >=
-            termsandConditionScrollController.position.maxScrollExtent &&
-        !termsandConditionScrollController.position.outOfRange) {
-      //condition if for user reached to end of content
-      setState(() {
-        termsAndConditionReadtoEnd = true;
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    termsandConditionScrollController.addListener(
-      _termsAndConditionScrollListner,
-    ); //Listner for scroll of terms and condition
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    termsandConditionScrollController.removeListener(
-      _termsAndConditionScrollListner,
-    );
-    termsandConditionScrollController.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -150,46 +121,45 @@ class AcceptButton extends StatelessWidget {
               ),
             ),
             InkWell(
-                onTap: () {
-                  if (!termsAndConditionReadtoEnd) {
-                    showSnackBar(
-                      context: context,
-                      message:
-                          'You Need To read full Terms and Condition before Accept'
-                              .tr(),
-                    );
-                  } else {
-                    context.read<UserBloc>().add(const UserEvent.accptTnc());
-                    if (fromSetting) {
-                     context.router.pop();
-                    }
+              onTap: () {
+                if (!termsAndConditionReadtoEnd) {
+                  showSnackBar(
+                    context: context,
+                    message:
+                        'You Need To read full Terms and Condition before Accept'
+                            .tr(),
+                  );
+                } else {
+                  context.read<UserBloc>().add(const UserEvent.accptTnc());
+                  if (fromSetting) {
+                    context.router.pop();
                   }
-                },
-                child: Container(
-                  height: 40,
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  decoration: BoxDecoration(
-                    color: termsAndConditionReadtoEnd
-                        ? ZPColors.secondary
-                        : ZPColors.lightGray,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Center(
-                      child: Text(
+                }
+              },
+              child: Container(
+                height: 40,
+                margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                decoration: BoxDecoration(
+                  color: termsAndConditionReadtoEnd
+                      ? ZPColors.secondary
+                      : ZPColors.lightGray,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Center(
+                  child: Text(
                     'Accept',
                     style: TextStyle(
-                        fontSize: 16,
-                        color: termsAndConditionReadtoEnd
-                            ? ZPColors.primary
-                            : ZPColors.darkGray,
-                        fontWeight: FontWeight.w700,
-                      ),
+                      fontSize: 16,
+                      color: termsAndConditionReadtoEnd
+                          ? ZPColors.primary
+                          : ZPColors.darkGray,
+                      fontWeight: FontWeight.w700,
+                    ),
                     textAlign: TextAlign.center,
                   ),
-                 ),
                 ),
               ),
+            ),
           ],
         ),
       ),

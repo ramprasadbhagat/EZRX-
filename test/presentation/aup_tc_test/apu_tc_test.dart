@@ -20,6 +20,7 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
@@ -154,6 +155,12 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 3));
       expect(auptcAcceptButton, findsOneWidget);
       await tester.tap(auptcAcceptButton);
+      await tester.pump();
+      var willPopCalled = false;
+      final dynamic widgetsAppState = tester.state(find.byType(WidgetsApp));
+      willPopCalled = await widgetsAppState.didPopRoute();
+      await tester.pump();
+      expect(willPopCalled, true);
     });
 
     testWidgets(
@@ -270,7 +277,8 @@ void main() {
     expect(snackBarMsgFinder, findsOneWidget);
   });
 
-  testWidgets('Setting screen toc tile', (tester) async {
+  testWidgets('Setting screen toc and notification and language tile',
+      (tester) async {
     await TesterUtils.setUpLocalizationWrapper(
         tester: tester,
         home: const SettingsPage(),
@@ -291,6 +299,25 @@ void main() {
     await tester.tap(tosTile);
     await tester.pump();
     expect(autoRouterMock.current.name, AupTCDialogRoute.name);
+    final notificationTile = find.byKey(const Key('notificationTile'));
+    expect(notificationTile, findsOneWidget);
+    await tester.tap(notificationTile);
+    await tester.pump(const Duration(seconds: 2));
+    final languageTile = find.byKey(const Key('languageTile'));
+    expect(languageTile, findsOneWidget);
+    await tester.pump(const Duration(seconds: 2));
+    await tester.tap(languageTile);
+    await tester.pump(const Duration(seconds: 2));
+    await tester.pumpAndSettle(const Duration(
+      seconds: 3,
+    ));
+    final languagePicker =
+        find.byWidgetPredicate((w) => w is PlatformDialogAction);
+    await tester.pump(const Duration(seconds: 2));
+    expect(languagePicker, findsNWidgets(6));
+    final salesOrg = find.byType(PlatformDialogAction).first;
+    await tester.tap(salesOrg, warnIfMissed: false);
+    await tester.pumpAndSettle(const Duration(seconds: 3));
   });
 
   testWidgets('Setting screen contactUsTile', (tester) async {

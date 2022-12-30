@@ -4,7 +4,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/full_name.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/change_password_repository.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -181,7 +184,6 @@ void main() {
       await tester.pump();
       expect(minLengthErrorMessage, findsOneWidget);
 
-
       await tester.enterText(newPasswordTextField, 'Auron@2022!');
       await tester.pump();
 
@@ -233,6 +235,469 @@ void main() {
           of: confirmPasswordTextField, matching: mismatchErrorMessage);
       expect(validationMessageFinder, findsNothing);
     });
+
+    /**/
+
+    testWidgets(
+      'validate confirm password isRight',
+      (tester) async {
+        final expectedStates2 = [
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.login('Auron@2012!'),
+            newPassword: Password.login('Auron@2023!'),
+            oldPassword: Password.login('Auron@2022!'),
+          )
+        ];
+        when(() => mockUserBloc.state).thenReturn(UserState.initial());
+        when(() => resetPasswordBlocMock.state).thenReturn(
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.login('Auron@2022!'),
+            newPassword: Password.login('Auron@2023!'),
+            oldPassword: Password.login('Auron@2022!'),
+          ),
+        );
+        whenListen(resetPasswordBlocMock, Stream.fromIterable(expectedStates2));
+        await getScopedWidget(const ChangePasswordPage(), tester);
+        final oldPasswordTextField =
+            find.byKey(const Key('oldPasswordTextField'));
+        final newPasswordTextField =
+            find.byKey(const Key('newPasswordTextField'));
+        final confirmPasswordTextField =
+            find.byKey(const Key('confirmPasswordTextField'));
+        expect(oldPasswordTextField, findsOneWidget);
+        expect(newPasswordTextField, findsOneWidget);
+        expect(confirmPasswordTextField, findsOneWidget);
+        await tester.pump();
+
+        await tester.enterText(
+            find.byKey(const Key('confirmPasswordTextField')), 'Auron@2012!');
+        await tester.pump(const Duration(seconds: 2));
+      },
+    );
+
+    testWidgets(
+      'validate confirm password mustMatchNewPassword',
+      (tester) async {
+        final expectedStates = [
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.comfirm('Auron@2022!', 'Auron@2012!'),
+            newPassword: Password.login('Auron@2023!'),
+            oldPassword: Password.login('Auron@2022!'),
+          ),
+        ];
+        when(() => mockUserBloc.state).thenReturn(UserState.initial());
+        when(() => resetPasswordBlocMock.state).thenReturn(
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.login('Auron@2012!'),
+            newPassword: Password.login('Auron@2023!'),
+            oldPassword: Password.login('Auron@2022!'),
+          ),
+        );
+        whenListen(resetPasswordBlocMock, Stream.fromIterable(expectedStates));
+        await getScopedWidget(const ChangePasswordPage(), tester);
+        final oldPasswordTextField =
+            find.byKey(const Key('oldPasswordTextField'));
+        final newPasswordTextField =
+            find.byKey(const Key('newPasswordTextField'));
+        final confirmPasswordTextField =
+            find.byKey(const Key('confirmPasswordTextField'));
+        expect(oldPasswordTextField, findsOneWidget);
+        expect(newPasswordTextField, findsOneWidget);
+        expect(confirmPasswordTextField, findsOneWidget);
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('oldPasswordTextField')), 'Auron@2021!');
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('newPasswordTextField')), 'Auron@2012!');
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('confirmPasswordTextField')), 'Auron@2022!');
+        await tester.pump(const Duration(seconds: 2));
+      },
+    );
+
+    testWidgets(
+      'validate confirm/old password orElse',
+      (tester) async {
+        final expectedStates = [
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.reset('abc'),
+            newPassword: Password.login('Auron@2023!'),
+            oldPassword: Password.reset('abc'),
+          ),
+        ];
+        when(() => mockUserBloc.state).thenReturn(UserState.initial());
+        when(() => resetPasswordBlocMock.state).thenReturn(
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.comfirm('Auron@2021!', 'Auron@2022!'),
+          ),
+        );
+        whenListen(resetPasswordBlocMock, Stream.fromIterable(expectedStates));
+        await getScopedWidget(const ChangePasswordPage(), tester);
+        final oldPasswordTextField =
+            find.byKey(const Key('oldPasswordTextField'));
+        final newPasswordTextField =
+            find.byKey(const Key('newPasswordTextField'));
+        final confirmPasswordTextField =
+            find.byKey(const Key('confirmPasswordTextField'));
+        expect(oldPasswordTextField, findsOneWidget);
+        expect(newPasswordTextField, findsOneWidget);
+        expect(confirmPasswordTextField, findsOneWidget);
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('oldPasswordTextField')), 'Auron@2021!');
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('newPasswordTextField')), 'Auron@2012!');
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('confirmPasswordTextField')), 'Auron@2022!');
+        await tester.pump(const Duration(seconds: 2));
+      },
+    );
+
+    testWidgets(
+      'validate new password orElse',
+      (tester) async {
+        final expectedStates = [
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.login('Auron@2023!'),
+            newPassword: Password.reset(
+              'abc',
+            ),
+            oldPassword: Password.login('Auron@2023!'),
+          ),
+        ];
+        when(() => mockUserBloc.state).thenReturn(UserState.initial());
+        when(() => resetPasswordBlocMock.state).thenReturn(
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.comfirm('Auron@2021!', 'Auron@2022!'),
+            newPassword: Password.login('abc'),
+          ),
+        );
+        whenListen(resetPasswordBlocMock, Stream.fromIterable(expectedStates));
+        await getScopedWidget(const ChangePasswordPage(), tester);
+        final oldPasswordTextField =
+            find.byKey(const Key('oldPasswordTextField'));
+        final newPasswordTextField =
+            find.byKey(const Key('newPasswordTextField'));
+        final confirmPasswordTextField =
+            find.byKey(const Key('confirmPasswordTextField'));
+        expect(oldPasswordTextField, findsOneWidget);
+        expect(newPasswordTextField, findsOneWidget);
+        expect(confirmPasswordTextField, findsOneWidget);
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('oldPasswordTextField')), 'Auron@2021!');
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('newPasswordTextField')), 'abc');
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('confirmPasswordTextField')), 'Auron@2022!');
+        await tester.pump(const Duration(seconds: 2));
+      },
+    );
+
+    testWidgets(
+      'validate new password mustNotMatchOldPassword',
+      (tester) async {
+        final expectedStates = [
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.login('Auron@2023!'),
+            newPassword: Password.resetV2(
+              'Auron@2023!',
+              'Auron@2023!',
+              User.empty().copyWith(
+                username: Username('ezrxtest05'),
+                fullName: FullName.empty().copyWith(
+                  firstName: 'Steve',
+                  lastName: 'Gerrard',
+                ),
+              ),
+            ),
+            oldPassword: Password.login('Auron@2023!'),
+          ),
+        ];
+        when(() => mockUserBloc.state).thenReturn(UserState.initial());
+        when(() => resetPasswordBlocMock.state).thenReturn(
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.comfirm('Auron@2021!', 'Auron@2022!'),
+            newPassword: Password.login('abc'),
+          ),
+        );
+        whenListen(resetPasswordBlocMock, Stream.fromIterable(expectedStates));
+        await getScopedWidget(const ChangePasswordPage(), tester);
+        final oldPasswordTextField =
+            find.byKey(const Key('oldPasswordTextField'));
+        final newPasswordTextField =
+            find.byKey(const Key('newPasswordTextField'));
+        final confirmPasswordTextField =
+            find.byKey(const Key('confirmPasswordTextField'));
+        expect(oldPasswordTextField, findsOneWidget);
+        expect(newPasswordTextField, findsOneWidget);
+        expect(confirmPasswordTextField, findsOneWidget);
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('oldPasswordTextField')), 'Auron@2021!');
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('newPasswordTextField')), 'abc');
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('confirmPasswordTextField')), 'Auron@2022!');
+        await tester.pump(const Duration(seconds: 2));
+      },
+    );
+
+    testWidgets(
+      'validate new password mustNotContainUserName',
+      (tester) async {
+        final expectedStates = [
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.login('Auron@2023!'),
+            newPassword: Password.resetV2('Ezrxtest@05', 'Auron@2023!',
+                User.empty().copyWith(username: Username('Ezrxtest@05'))),
+            oldPassword: Password.login('Auron@2023!'),
+          ),
+        ];
+        when(() => mockUserBloc.state).thenReturn(UserState.initial());
+        when(() => resetPasswordBlocMock.state).thenReturn(
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.comfirm('Auron@2021!', 'Auron@2022!'),
+            newPassword: Password.login('abc'),
+          ),
+        );
+        whenListen(resetPasswordBlocMock, Stream.fromIterable(expectedStates));
+        await getScopedWidget(const ChangePasswordPage(), tester);
+        final oldPasswordTextField =
+            find.byKey(const Key('oldPasswordTextField'));
+        final newPasswordTextField =
+            find.byKey(const Key('newPasswordTextField'));
+        final confirmPasswordTextField =
+            find.byKey(const Key('confirmPasswordTextField'));
+        expect(oldPasswordTextField, findsOneWidget);
+        expect(newPasswordTextField, findsOneWidget);
+        expect(confirmPasswordTextField, findsOneWidget);
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('oldPasswordTextField')), 'Auron@2021!');
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('newPasswordTextField')), 'abc');
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('confirmPasswordTextField')), 'Auron@2022!');
+        await tester.pump(const Duration(seconds: 2));
+      },
+    );
+
+    testWidgets(
+      'validate new password mustOneSpecialCharacter',
+      (tester) async {
+        final expectedStates = [
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.login('Auron@2023!'),
+            newPassword: Password.resetV2('Aur9', 'Auron@2023!', User.empty()),
+            oldPassword: Password.login('Auron@2023!'),
+          ),
+        ];
+        when(() => mockUserBloc.state).thenReturn(UserState.initial());
+        when(() => resetPasswordBlocMock.state).thenReturn(
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.comfirm('Auron@2021!', 'Auron@2022!'),
+            newPassword: Password.login('abc'),
+          ),
+        );
+        whenListen(resetPasswordBlocMock, Stream.fromIterable(expectedStates));
+        await getScopedWidget(const ChangePasswordPage(), tester);
+        final oldPasswordTextField =
+            find.byKey(const Key('oldPasswordTextField'));
+        final newPasswordTextField =
+            find.byKey(const Key('newPasswordTextField'));
+        final confirmPasswordTextField =
+            find.byKey(const Key('confirmPasswordTextField'));
+        expect(oldPasswordTextField, findsOneWidget);
+        expect(newPasswordTextField, findsOneWidget);
+        expect(confirmPasswordTextField, findsOneWidget);
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('oldPasswordTextField')), 'Auron@2021!');
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('newPasswordTextField')), 'abc');
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('confirmPasswordTextField')), 'Auron@2022!');
+        await tester.pump(const Duration(seconds: 2));
+      },
+    );
+
+    testWidgets(
+      'validate new password mustOneNumericCharacter',
+      (tester) async {
+        final expectedStates = [
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.login('Auron@2023!'),
+            newPassword: Password.resetV2('Aur', 'Auron@2023!', User.empty()),
+            oldPassword: Password.login('Auron@2023!'),
+          ),
+        ];
+        when(() => mockUserBloc.state).thenReturn(UserState.initial());
+        when(() => resetPasswordBlocMock.state).thenReturn(
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.comfirm('Auron@2021!', 'Auron@2022!'),
+            newPassword: Password.login('abc'),
+          ),
+        );
+        whenListen(resetPasswordBlocMock, Stream.fromIterable(expectedStates));
+        await getScopedWidget(const ChangePasswordPage(), tester);
+        final oldPasswordTextField =
+            find.byKey(const Key('oldPasswordTextField'));
+        final newPasswordTextField =
+            find.byKey(const Key('newPasswordTextField'));
+        final confirmPasswordTextField =
+            find.byKey(const Key('confirmPasswordTextField'));
+        expect(oldPasswordTextField, findsOneWidget);
+        expect(newPasswordTextField, findsOneWidget);
+        expect(confirmPasswordTextField, findsOneWidget);
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('oldPasswordTextField')), 'Auron@2021!');
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('newPasswordTextField')), 'abc');
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('confirmPasswordTextField')), 'Auron@2022!');
+        await tester.pump(const Duration(seconds: 2));
+      },
+    );
+
+    testWidgets(
+      'validate new password mustOneLowerCaseCharacter',
+      (tester) async {
+        final expectedStates = [
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.login('Auron@2023!'),
+            newPassword: Password.resetV2('ABC', 'Auron@2023!', User.empty()),
+            oldPassword: Password.login('Auron@2023!'),
+          ),
+        ];
+        when(() => mockUserBloc.state).thenReturn(UserState.initial());
+        when(() => resetPasswordBlocMock.state).thenReturn(
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.comfirm('Auron@2021!', 'Auron@2022!'),
+            newPassword: Password.login('abc'),
+          ),
+        );
+        whenListen(resetPasswordBlocMock, Stream.fromIterable(expectedStates));
+        await getScopedWidget(const ChangePasswordPage(), tester);
+        final oldPasswordTextField =
+            find.byKey(const Key('oldPasswordTextField'));
+        final newPasswordTextField =
+            find.byKey(const Key('newPasswordTextField'));
+        final confirmPasswordTextField =
+            find.byKey(const Key('confirmPasswordTextField'));
+        expect(oldPasswordTextField, findsOneWidget);
+        expect(newPasswordTextField, findsOneWidget);
+        expect(confirmPasswordTextField, findsOneWidget);
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('oldPasswordTextField')), 'Auron@2021!');
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('newPasswordTextField')), 'abc');
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('confirmPasswordTextField')), 'Auron@2022!');
+        await tester.pump(const Duration(seconds: 2));
+      },
+    );
+
+    testWidgets(
+      'validate new password mustOneUpperCaseCharacter',
+      (tester) async {
+        final expectedStates = [
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.login('Auron@2023!'),
+            newPassword: Password.resetV2('abc', 'Auron@2023!', User.empty()),
+            oldPassword: Password.login('Auron@2023!'),
+          ),
+        ];
+        when(() => mockUserBloc.state).thenReturn(UserState.initial());
+        when(() => resetPasswordBlocMock.state).thenReturn(
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.comfirm('Auron@2021!', 'Auron@2022!'),
+            newPassword: Password.login('abc'),
+          ),
+        );
+        whenListen(resetPasswordBlocMock, Stream.fromIterable(expectedStates));
+        await getScopedWidget(const ChangePasswordPage(), tester);
+        final oldPasswordTextField =
+            find.byKey(const Key('oldPasswordTextField'));
+        final newPasswordTextField =
+            find.byKey(const Key('newPasswordTextField'));
+        final confirmPasswordTextField =
+            find.byKey(const Key('confirmPasswordTextField'));
+        expect(oldPasswordTextField, findsOneWidget);
+        expect(newPasswordTextField, findsOneWidget);
+        expect(confirmPasswordTextField, findsOneWidget);
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('oldPasswordTextField')), 'Auron@2021!');
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('newPasswordTextField')), 'abc');
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('confirmPasswordTextField')), 'Auron@2022!');
+        await tester.pump(const Duration(seconds: 2));
+      },
+    );
+
+    testWidgets(
+      'validate new password subceedLength',
+      (tester) async {
+        final expectedStates = [
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.login('Auron@2023!'),
+            newPassword:
+                Password.resetV2('Auron@20', 'Auron@2023!', User.empty()),
+            oldPassword: Password.login('Auron@2023!'),
+          ),
+        ];
+        when(() => mockUserBloc.state).thenReturn(UserState.initial());
+        when(() => resetPasswordBlocMock.state).thenReturn(
+          ResetPasswordState.initial().copyWith(
+            confirmPassword: Password.comfirm('Auron@2021!', 'Auron@2022!'),
+            newPassword: Password.login('abc'),
+          ),
+        );
+        whenListen(resetPasswordBlocMock, Stream.fromIterable(expectedStates));
+        await getScopedWidget(const ChangePasswordPage(), tester);
+        final oldPasswordTextField =
+            find.byKey(const Key('oldPasswordTextField'));
+        final newPasswordTextField =
+            find.byKey(const Key('newPasswordTextField'));
+        final confirmPasswordTextField =
+            find.byKey(const Key('confirmPasswordTextField'));
+        expect(oldPasswordTextField, findsOneWidget);
+        expect(newPasswordTextField, findsOneWidget);
+        expect(confirmPasswordTextField, findsOneWidget);
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('oldPasswordTextField')), 'Auron@2021!');
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('newPasswordTextField')), 'abc');
+        await tester.pump(const Duration(seconds: 2));
+        await tester.enterText(
+            find.byKey(const Key('confirmPasswordTextField')), 'Auron@2022!');
+        await tester.pump(const Duration(seconds: 2));
+      },
+    );
 
     testWidgets('Failure Change Password Button', (tester) async {
       final expectedfailureStates = [
