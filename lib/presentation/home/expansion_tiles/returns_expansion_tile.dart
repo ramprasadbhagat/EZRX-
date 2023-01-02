@@ -16,22 +16,22 @@ class ReturnsExpansionTile extends StatelessWidget {
   final List<HomePageTile> _returnsPageTiles = <HomePageTile>[
     const HomePageTile(
       title: 'Overview',
-      icon: Icons.add_box_outlined,
+      icon: Icons.space_dashboard_outlined,
       routeName: 'returns_overview',
     ),
     const HomePageTile(
       title: 'Request return',
-      icon: Icons.add_box_outlined,
+      icon: Icons.pending_actions_outlined,
       routeName: 'request_return',
     ),
     const HomePageTile(
       title: 'Approver actions',
-      icon: Icons.add_box_outlined,
+      icon: Icons.rule_outlined,
       routeName: 'approver_actions',
     ),
     const HomePageTile(
       title: 'Return Summary',
-      icon: Icons.add_box_outlined,
+      icon: Icons.summarize_outlined,
       routeName: 'return_summary',
     ),
   ];
@@ -39,12 +39,12 @@ class ReturnsExpansionTile extends StatelessWidget {
   final List<HomePageTile> _adminTiles = <HomePageTile>[
     const HomePageTile(
       title: 'User Restriction',
-      icon: Icons.add_box_outlined,
+      icon: Icons.admin_panel_settings_outlined,
       routeName: 'user_restriction',
     ),
     const HomePageTile(
       title: 'Policy Configuration',
-      icon: Icons.add_box_outlined,
+      icon: Icons.policy_outlined,
       routeName: 'policy_configuration',
     ),
   ];
