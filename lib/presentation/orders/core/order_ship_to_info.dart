@@ -23,93 +23,82 @@ class ShipToAddressInfo extends StatelessWidget {
             ..._getTextRowLevelsForShipToInfo(state.shipToInfo).map(
               (e) {
                 return e.key != 'License'
-                    ? Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: BalanceTextRow(
-                          keyText: e.key,
-                          valueText: e.value,
-                          keyFlex: 1,
-                          valueFlex: 1,
-                        ),
-                      )
-                    : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 2.0,
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Text(
-                                  e.key,
-                                  style: const TextStyle(
-                                    color: ZPColors.darkGray,
-                                    fontSize: 12.0,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    final paymentCustomerInformationState = context
-                                        .read<PaymentCustomerInformationBloc>()
-                                        .state;
-                                    locator<CountlyService>().addCountlyEvent(
-                                        'view_license_info',
-                                        segmentation: {
-                                          'NumLicenseAttached':
-                                            paymentCustomerInformationState
-                                            .licenses.length,
-                                          'LicenseType': 
-                                            paymentCustomerInformationState
-                                            .getLicensesType,
-                                        },);
-                                    showModalBottomSheet(
-                                      context: context,
-                                      builder: (_) {
-                                        return SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.6,
-                                          child: const LicenseModel(),
-                                        );
-                                      },
-                                    );
-                                  },
-                                  child: Wrap(children: [
-                                    const Text(
-                                      ': ',
-                                      style: TextStyle(
-                                        color: ZPColors.black,
-                                        fontSize: 12.0,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    Text(
-                                      e.value,
-                                      style: const TextStyle(
-                                        color: ZPColors.secondary,
-                                        fontSize: 12.0,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w600,
-                                        decoration: TextDecoration.underline,
-                                      ),
-                                    ),
-                                  ]),
-                                ),
-                              ),
-                            ],
+                    ? BalanceTextRow(
+                      keyText: e.key,
+                      valueText: e.value,
+                      keyFlex: 1,
+                      valueFlex: 1,
+                    )
+                    : Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            e.key,
+                            style: const TextStyle(
+                              color: ZPColors.darkGray,
+                              fontSize: 12.0,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ),
-                      );
+                        Expanded(
+                          flex: 1,
+                          child: GestureDetector(
+                            onTap: () {
+                              final paymentCustomerInformationState = context
+                                  .read<PaymentCustomerInformationBloc>()
+                                  .state;
+                              locator<CountlyService>().addCountlyEvent(
+                                  'view_license_info',
+                                  segmentation: {
+                                    'NumLicenseAttached':
+                                      paymentCustomerInformationState
+                                      .licenses.length,
+                                    'LicenseType':
+                                      paymentCustomerInformationState
+                                      .getLicensesType,
+                                  },);
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (_) {
+                                  return SizedBox(
+                                    height: MediaQuery.of(context)
+                                            .size
+                                            .height *
+                                        0.6,
+                                    child: const LicenseModel(),
+                                  );
+                                },
+                              );
+                            },
+                            child: Wrap(children: [
+                              const Text(
+                                ': ',
+                                style: TextStyle(
+                                  color: ZPColors.black,
+                                  fontSize: 12.0,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Text(
+                                e.value,
+                                style: const TextStyle(
+                                  color: ZPColors.secondary,
+                                  fontSize: 12.0,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w600,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ]),
+                          ),
+                        ),
+                      ],
+                    );
               },
             ),
           ],

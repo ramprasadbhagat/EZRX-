@@ -35,13 +35,14 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/history/widgets/history_details_expanion_tile.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/history/widgets/history_details_order_summary_order_bonus_card.dart';
 import 'package:ezrxmobile/presentation/history/widgets/history_details_order_summary_order_item_card.dart';
 import 'package:ezrxmobile/presentation/history/widgets/history_details_order_summary_order_tender_contract_card.dart';
+import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
+as custom;
 
 class HistoryDetails extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
@@ -310,10 +311,18 @@ class _OrderDetails extends StatelessWidget {
     return BlocBuilder<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
       builder: (context, state) {
-        return CustomExpansionTile(
+        return custom.ExpansionTile(
+          initiallyExpanded: true,
           key: const ValueKey('orderDetails'),
-          titleText: 'Order Details'.tr(),
-          items: [
+          title: Text(
+            'Order Details'.tr(),
+            style: const TextStyle(
+              fontSize: 16.0,
+              color: ZPColors.darkerGreen,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          children: [
             if (enableOHPrice)
               BalanceTextRow(
                 keyText: 'Total sub value'.tr(),
@@ -468,10 +477,18 @@ class _SoldToAddress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomExpansionTile(
-      key: const ValueKey('soldToAddress'),
-      titleText: 'Sold to Address'.tr(),
-      items: const [
+    return custom.ExpansionTile(
+        initiallyExpanded: true,
+        key: const ValueKey('soldToAddress'),
+        title: Text(
+          'Sold to Address'.tr(),
+          style: const TextStyle(
+            fontSize: 16.0,
+            color: ZPColors.darkerGreen,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        children: const [
         SoldToAddressInfo(),
       ],
     );
@@ -485,10 +502,18 @@ class _ShipToAddress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomExpansionTile(
-      key: const ValueKey('shipToAddress'),
-      titleText: 'Ship to Address'.tr(),
-      items: const [
+    return custom.ExpansionTile(
+        initiallyExpanded: true,
+        key: const ValueKey('shipToAddress'),
+        title: Text(
+          'Ship to Address'.tr(),
+          style: const TextStyle(
+            fontSize: 16.0,
+            color: ZPColors.darkerGreen,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        children: const [
         ShipToAddressInfo(),
       ],
     );
@@ -502,10 +527,18 @@ class _BillToAddress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomExpansionTile(
-      key: const ValueKey('billToAddress'),
-      titleText: 'Bill to Address'.tr(),
-      items: WidgetHelper.getBillToCustomerDetails(billToInfo),
+    return custom.ExpansionTile(
+        initiallyExpanded: true,
+        key: const ValueKey('billToAddress'),
+        title: Text(
+          'Bill to Address'.tr(),
+          style: const TextStyle(
+            fontSize: 16.0,
+            color: ZPColors.darkerGreen,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        children: WidgetHelper.getBillToCustomerDetails(billToInfo),
     );
   }
 }
@@ -527,10 +560,18 @@ class _AdditionalCommentsState extends State<_AdditionalComments> {
   Widget build(BuildContext context) {
     final overlay = LoadingOverlay.of(context);
 
-    return CustomExpansionTile(
-      key: const ValueKey('additionalComment'),
-      titleText: 'Additional Comments'.tr(),
-      items: <Widget>[
+    return custom.ExpansionTile(
+        initiallyExpanded: true,
+        key: const ValueKey('additionalComment'),
+        title: Text(
+          'Additional Comments'.tr(),
+          style: const TextStyle(
+            fontSize: 16.0,
+            color: ZPColors.darkerGreen,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        children: [
         BlocListener<DownloadAttachmentBloc, DownloadAttachmentState>(
           listenWhen: (previous, current) => previous != current,
           listener: (context, state) async {
@@ -771,10 +812,18 @@ class _Invoices extends StatelessWidget {
     return BlocBuilder<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
       builder: (context, state) {
-        return CustomExpansionTile(
-          key: const ValueKey('invoices'),
-          titleText: 'Invoices'.tr(),
-          items: <Widget>[
+        return custom.ExpansionTile(
+            initiallyExpanded: true,
+            key: const ValueKey('invoices'),
+            title: Text(
+              'Invoices'.tr(),
+              style: const TextStyle(
+                fontSize: 16.0,
+                color: ZPColors.darkerGreen,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            children: [
             Container(
               padding: const EdgeInsets.only(
                 top: 0.0,

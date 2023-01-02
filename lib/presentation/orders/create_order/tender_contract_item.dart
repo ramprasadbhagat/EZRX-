@@ -3,6 +3,8 @@ import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
+    as custom;
 
 class TenderContractItem extends StatelessWidget {
   final TenderContract tenderContract;
@@ -12,41 +14,42 @@ class TenderContractItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 10),
-      elevation: .5,
-      child: ExpansionTile(
-        tilePadding: const EdgeInsets.symmetric(horizontal: 8.0),
-        childrenPadding:
-            const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        title: TenderContractHeader(tenderContract: tenderContract),
-        leading: BlocBuilder<TenderContractBloc, TenderContractState>(
-          builder: (context, state) {
-            return GestureDetector(
-              onTap: () => selectTenderContract(context),
-              child: Container(
-                height: 35,
-                width: 35,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  border: Border.all(color: ZPColors.lightGray),
-                  borderRadius: BorderRadius.circular(10),
-                  color: _isSelected(state) ? ZPColors.primary : ZPColors.white,
-                ),
-                child: Icon(
-                  Icons.check_rounded,
-                  size: 17,
-                  color:
-                      _isSelected(state) ? ZPColors.white : ZPColors.lightGray,
-                ),
+    return custom.ExpansionTile(
+      threeLineTitle: true,
+      leading: BlocBuilder<TenderContractBloc, TenderContractState>(
+        builder: (context, state) {
+          return GestureDetector(
+            onTap: () => selectTenderContract(context),
+            child: Container(
+              height: 35,
+              width: 35,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                border: Border.all(color: ZPColors.lightGray),
+                borderRadius: BorderRadius.circular(10),
+                color: _isSelected(state)
+                    ? ZPColors.primary
+                    : ZPColors.white,
               ),
-            );
-          },
-        ),
-        children: [
-          TenderContractBody(tenderContract: tenderContract),
-        ],
+              child: Icon(
+                Icons.check_rounded,
+                size: 17,
+                color: _isSelected(state)
+                    ? ZPColors.white
+                    : ZPColors.lightGray,
+              ),
+            ),
+          );
+        },
       ),
+      initiallyExpanded: true,
+      title: TenderContractHeader(tenderContract: tenderContract),
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: TenderContractBody(tenderContract: tenderContract),
+        ),
+      ],
     );
   }
 

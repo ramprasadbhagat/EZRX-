@@ -38,6 +38,8 @@ class ExpansionTile extends StatefulWidget {
     this.trailing,
     this.initiallyExpanded = false,
     this.keepHeaderBorder =  false,
+    this.threeLineTitle = false,
+
   }) : super(key: key);
 
   /// A widget to display before the title.
@@ -79,6 +81,8 @@ class ExpansionTile extends StatefulWidget {
 
   /// Specifies if the header border will be visible or not.
   final bool keepHeaderBorder;
+
+  final bool threeLineTitle;
 
   @override
   _ExpansionTileState createState() => _ExpansionTileState();
@@ -170,7 +174,7 @@ class _ExpansionTileState extends State<ExpansionTile>
             child: Container(
               color: widget.headerBackgroundColor,
               child: Container(
-                height: 40,
+                height: widget.threeLineTitle ? null : 40,
                 margin: const EdgeInsets.all(0),
                 decoration: BoxDecoration(
                   border: widget.keepHeaderBorder?const Border(

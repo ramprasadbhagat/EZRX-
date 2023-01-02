@@ -17,13 +17,15 @@ import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
-import 'package:ezrxmobile/presentation/history/widgets/history_details_expanion_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
+as custom;
 
 class OrderItemBonusCard extends StatelessWidget {
   final OrderHistoryDetailsBonusAggregate orderHistoryDetailsBonusAggregate;
+
   const OrderItemBonusCard({
     Key? key,
     required this.orderHistoryDetailsBonusAggregate,
@@ -204,9 +206,17 @@ class OrderItemBonusCard extends StatelessWidget {
                         ),
                     ],
                   ),
-                  CustomExpansionTile(
-                    titleText: 'Bonuses'.tr(),
-                    items: <Widget>[
+                  custom.ExpansionTile(
+                    initiallyExpanded: true,
+                    title: Text(
+                      'Bonuses'.tr(),
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                        color: ZPColors.darkerGreen,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    children: [
                       Container(
                         padding: const EdgeInsets.only(
                           top: 0.0,

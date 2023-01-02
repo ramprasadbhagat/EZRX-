@@ -18,14 +18,11 @@ class SoldToAddressInfo extends StatelessWidget {
           children: [
             ..._getTextRowLevelsForSoldToInfo(state.customerCodeInfo).map(
               (e) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: BalanceTextRow(
-                    keyText: e.key,
-                    valueText: e.value,
-                    keyFlex: 1,
-                    valueFlex: 1,
-                  ),
+                return BalanceTextRow(
+                  keyText: e.key,
+                  valueText: e.value,
+                  keyFlex: 1,
+                  valueFlex: 1,
                 );
               },
             ),
