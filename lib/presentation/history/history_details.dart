@@ -202,6 +202,7 @@ void _addToCartPressed(
   OrderHistoryItem orderHistoryItem,
 ) {
   final cartBloc = context.read<CartBloc>();
+  cartBloc.add(const CartEvent.clearCart());
   final queryInfo = MaterialQueryInfo.fromOrderHistory(
     orderHistoryItem: orderHistoryItem,
   );
