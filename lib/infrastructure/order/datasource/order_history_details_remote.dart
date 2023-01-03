@@ -89,7 +89,7 @@ class OrderHistoryDetailsRemoteDataSource {
 
       _orderHistoryDetailsExceptionChecker(res: res);
 
-      if (res.data['data']['orderDetails'].isEmpty) {
+      if (res.data['data']['orderDetailsForSalesRep'].isEmpty) {
         return OrderHistoryDetails.empty();
       }
 
