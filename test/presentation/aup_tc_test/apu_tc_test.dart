@@ -38,8 +38,6 @@ class MockAupTcBloc extends MockBloc<AupTcEvent, AupTcState>
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
-
-
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
@@ -60,7 +58,8 @@ class PaymentCustomerInfoMockBloc extends MockBloc<
 
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
-    class ResetPasswordMockBloc
+
+class ResetPasswordMockBloc
     extends MockBloc<ResetPasswordEvent, ResetPasswordState>
     implements ResetPasswordBloc {}
 
@@ -119,8 +118,9 @@ void main() {
           .thenReturn(PaymentCustomerInformationState.initial());
       when(() => eligibilityBlocMock.state)
           .thenReturn(EligibilityState.initial());
-          when(() => resetPasswordBlocMock.state)
+      when(() => resetPasswordBlocMock.state)
           .thenReturn(ResetPasswordState.initial());
+      when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
     });
     testWidgets(
         'Test - AupTc Widget Show AupTcBloc state.showTermsAndConditon=true',
@@ -202,7 +202,7 @@ void main() {
             BlocProvider<EligibilityBloc>(
               create: (context) => eligibilityBlocMock,
             ),
-             BlocProvider<ResetPasswordBloc>(
+            BlocProvider<ResetPasswordBloc>(
               create: (context) => resetPasswordBlocMock,
             ),
           ],

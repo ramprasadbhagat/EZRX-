@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
+import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -68,6 +69,10 @@ class PaymentTermBlocMock extends MockBloc<PaymentTermEvent, PaymentTermState>
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class UserRestrictionListBlocMock
+    extends MockBloc<UserRestrictionListEvent, UserRestrictionListState>
+    implements UserRestrictionListBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -84,6 +89,7 @@ void main() {
   late EligibilityBloc eligibilityBlocMock;
   late AppRouter autoRouterMock;
   late ApproverBloc approverBlocMock;
+  late UserRestrictionListBloc userRestrictionListBlocMock;
 
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
@@ -122,6 +128,7 @@ void main() {
       paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
       paymentTermBlocMock = PaymentTermBlocMock();
       approverBlocMock = ApproverBlocMock();
+      userRestrictionListBlocMock = UserRestrictionListBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
       autoRouterMock = locator<AppRouter>();
 
@@ -142,6 +149,8 @@ void main() {
       when(() => approverBlocMock.state).thenReturn(ApproverState.initial());
       when(() => eligibilityBlocMock.state)
           .thenReturn(EligibilityState.initial());
+      when(() => userRestrictionListBlocMock.state)
+          .thenReturn(UserRestrictionListState.initial());
     });
 
     Future getWidget(tester) async {
@@ -155,6 +164,9 @@ void main() {
             BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
             BlocProvider<ApproverBloc>(create: (context) => approverBlocMock),
+            BlocProvider<UserRestrictionListBloc>(
+              create: (context) => userRestrictionListBlocMock,
+            ),
             BlocProvider<ShipToCodeBloc>(
                 create: (context) => shipToCodeBLocMock),
             BlocProvider<SalesRepBloc>(create: (context) => salesRepBlocMock),
@@ -215,6 +227,9 @@ void main() {
         UserState.initial(),
         UserState.initial().copyWith(user: fakeUser),
       ];
+
+      final salesOrg = salesOrgBlocMock.state.salesOrg;
+
       whenListen(userBlocMock, Stream.fromIterable(expectedUserListStates));
       await getWidget(tester);
       await tester.pump();
@@ -224,8 +239,7 @@ void main() {
       verify(() => salesRepBlocMock.add(SalesRepEvent.fetch(user: fakeUser)))
           .called(1);
 
-      verify(() => aupTcBlocMock
-              .add(AupTcEvent.show(fakeUser, salesOrgBlocMock.state.salesOrg)))
+      verify(() => aupTcBlocMock.add(AupTcEvent.show(fakeUser, salesOrg)))
           .called(1);
 
       verify(() => cartBlocMock.add(const CartEvent.initialized())).called(1);

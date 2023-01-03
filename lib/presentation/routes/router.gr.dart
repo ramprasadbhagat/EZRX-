@@ -59,7 +59,7 @@ import '../returns/policy_configuration.dart' as _i10;
 import '../returns/request_return.dart' as _i6;
 import '../returns/return_summary.dart' as _i8;
 import '../returns/returns_overview.dart' as _i5;
-import '../returns/user_restriction.dart' as _i9;
+import '../returns/user_restriction_list.dart' as _i9;
 import '../splash/splash_page.dart' as _i1;
 
 class AppRouter extends _i36.RootStackRouter {
@@ -116,10 +116,10 @@ class AppRouter extends _i36.RootStackRouter {
         child: const _i8.ReturnSummary(),
       );
     },
-    UserRestrictionRoute.name: (routeData) {
+    UserRestrictionListPageRoute.name: (routeData) {
       return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i9.UserRestriction(),
+        child: const _i9.UserRestrictionListPage(),
       );
     },
     PolicyConfigurationRoute.name: (routeData) {
@@ -372,7 +372,7 @@ class AppRouter extends _i36.RootStackRouter {
           path: 'return_summary',
         ),
         _i36.RouteConfig(
-          UserRestrictionRoute.name,
+          UserRestrictionListPageRoute.name,
           path: 'user_restriction',
         ),
         _i36.RouteConfig(
@@ -585,15 +585,15 @@ class ReturnSummaryRoute extends _i36.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i9.UserRestriction]
-class UserRestrictionRoute extends _i36.PageRouteInfo<void> {
-  const UserRestrictionRoute()
+/// [_i9.UserRestrictionListPage]
+class UserRestrictionListPageRoute extends _i36.PageRouteInfo<void> {
+  const UserRestrictionListPageRoute()
       : super(
-          UserRestrictionRoute.name,
+          UserRestrictionListPageRoute.name,
           path: 'user_restriction',
         );
 
-  static const String name = 'UserRestrictionRoute';
+  static const String name = 'UserRestrictionListPageRoute';
 }
 
 /// generated route for

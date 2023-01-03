@@ -31,7 +31,7 @@ import 'package:ezrxmobile/presentation/returns/policy_configuration.dart';
 import 'package:ezrxmobile/presentation/returns/request_return.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary.dart';
 import 'package:ezrxmobile/presentation/returns/returns_overview.dart';
-import 'package:ezrxmobile/presentation/returns/user_restriction.dart';
+import 'package:ezrxmobile/presentation/returns/user_restriction_list.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 
 import 'package:ezrxmobile/presentation/history/history_details.dart';
@@ -47,7 +47,7 @@ import 'package:ezrxmobile/presentation/history/history_details.dart';
     AutoRoute(path: 'request_return', page: RequestReturn),
     AutoRoute(path: 'approver_actions', page: ApproverActions),
     AutoRoute(path: 'return_summary', page: ReturnSummary),
-    AutoRoute(path: 'user_restriction', page: UserRestriction),
+    AutoRoute(path: 'user_restriction', page: UserRestrictionListPage),
     AutoRoute(path: 'policy_configuration', page: PolicyConfiguration),
     AutoRoute(path: 'web_view_page', page: WebViewPage),
     AutoRoute(path: 'change_password_page', page: ChangePasswordPage),

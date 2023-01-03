@@ -38,6 +38,7 @@ import 'package:ezrxmobile/application/order/order_template_list/order_template_
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
+import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/approver_local.dart';
@@ -173,6 +174,10 @@ import 'package:ezrxmobile/infrastructure/order/repository/payment_customer_info
 import 'package:ezrxmobile/infrastructure/order/repository/payment_term_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/tender_contract_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/valid_customer_material_repository.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_local.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_mutation.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_remote.dart';
+import 'package:ezrxmobile/infrastructure/returns/repository/user_restriction_repository.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/routes/router_observer.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -346,6 +351,38 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ApproverBloc(
       approverRepository: locator<ApproverRepository>(),
+    ),
+  );
+
+  //============================================================
+  // Returns - User Restriction
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => UserRestrictionMutation());
+
+  locator.registerLazySingleton(() => UserRestrictionLocalDataSource());
+
+  locator.registerLazySingleton(
+    () => UserRestrictionRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      userRestrictionMutation: locator<UserRestrictionMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => UserRestrictionRepository(
+      config: locator<Config>(),
+      localDataSource: locator<UserRestrictionLocalDataSource>(),
+      remoteDataSource: locator<UserRestrictionRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => UserRestrictionListBloc(
+      userRestrictionRepository: locator<UserRestrictionRepository>(),
     ),
   );
 

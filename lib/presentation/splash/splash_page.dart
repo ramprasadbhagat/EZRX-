@@ -16,6 +16,7 @@ import 'package:ezrxmobile/application/order/material_bundle_list/material_bundl
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
+import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -199,6 +200,26 @@ class SplashPage extends StatelessWidget {
                     ),
                   );
             }
+          },
+        ),
+        BlocListener<EligibilityBloc, EligibilityState>(
+          listenWhen: (previous, current) =>
+              previous.salesOrganisation.salesOrg !=
+                  current.salesOrganisation.salesOrg ||
+              previous.isReturnsEnable != current.isReturnsEnable ||
+              previous.user.role.type.hasReturnsAdminAccess !=
+                  current.user.role.type.hasReturnsAdminAccess,
+          listener: (context, state) {
+            final areReturnsEnabled = state.isReturnsEnable;
+            final isAdmin = state.user.role.type.hasReturnsAdminAccess;
+
+            if (!areReturnsEnabled || !isAdmin) return;
+
+            context.read<UserRestrictionListBloc>().add(
+                  UserRestrictionListEvent.fetch(
+                    salesOrg: state.salesOrganisation.salesOrg,
+                  ),
+                );
           },
         ),
       ],
