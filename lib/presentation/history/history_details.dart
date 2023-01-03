@@ -9,14 +9,18 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/core/aggregate/bonus_aggregate.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -42,7 +46,7 @@ import 'package:ezrxmobile/presentation/history/widgets/history_details_order_su
 import 'package:ezrxmobile/presentation/history/widgets/history_details_order_summary_order_item_card.dart';
 import 'package:ezrxmobile/presentation/history/widgets/history_details_order_summary_order_tender_contract_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
-as custom;
+    as custom;
 
 class HistoryDetails extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
@@ -91,19 +95,9 @@ class HistoryDetails extends StatelessWidget {
                       );
                     }
 
-                    return TextButton(
-                      key: const ValueKey('addToCartPressed'),
-                      onPressed: () => _addToCartPressed(
-                        context,
-                        state,
-                        orderHistoryItem,
-                      ),
-                      child: Text(
-                        'Reorder'.tr(),
-                        style: const TextStyle(
-                          color: ZPColors.kPrimaryColor,
-                        ),
-                      ),
+                    return _ReOrder(
+                      fromTopMenu: true,
+                      orderHistoryItem: orderHistoryItem,
                     );
                   },
                 ),
@@ -193,46 +187,6 @@ class HistoryDetails extends StatelessWidget {
         },
       ),
     );
-  }
-}
-
-void _addToCartPressed(
-  BuildContext context,
-  MaterialPriceDetailState state,
-  OrderHistoryItem orderHistoryItem,
-) {
-  final cartBloc = context.read<CartBloc>();
-  cartBloc.add(const CartEvent.clearCart());
-  final queryInfo = MaterialQueryInfo.fromOrderHistory(
-    orderHistoryItem: orderHistoryItem,
-  );
-  final itemInfo = state.materialDetails[queryInfo];
-  if (itemInfo != null) {
-    final priceAggregate = PriceAggregate(
-      price: itemInfo.price,
-      materialInfo: itemInfo.info,
-      salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-      quantity: queryInfo.qty.getOrCrash(),
-      discountedMaterialCount: cartBloc.state.zmgMaterialCount,
-      bundle: Bundle.empty(),
-      addedBonusList: [],
-      stockInfo: StockInfo.empty().copyWith(
-        materialNumber: itemInfo.info.materialNumber,
-      ),
-      tenderContract: TenderContract.empty(),
-    );
-    cartBloc.add(CartEvent.addToCart(
-      item: priceAggregate,
-      customerCodeInfo: context.read<CustomerCodeBloc>().state.customerCodeInfo,
-      salesOrganisationConfigs: context.read<SalesOrgBloc>().state.configs,
-      shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-      doNotallowOutOfStockMaterial:
-          context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials,
-      salesOrganisation: context.read<SalesOrgBloc>().state.salesOrganisation,
-    ));
-
-    //TODO: Revisit later
-    context.router.pushNamed('cart_page');
   }
 }
 
@@ -479,17 +433,17 @@ class _SoldToAddress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return custom.ExpansionTile(
-        initiallyExpanded: true,
-        key: const ValueKey('soldToAddress'),
-        title: Text(
-          'Sold to Address'.tr(),
-          style: const TextStyle(
-            fontSize: 16.0,
-            color: ZPColors.darkerGreen,
-            fontWeight: FontWeight.w600,
-          ),
+      initiallyExpanded: true,
+      key: const ValueKey('soldToAddress'),
+      title: Text(
+        'Sold to Address'.tr(),
+        style: const TextStyle(
+          fontSize: 16.0,
+          color: ZPColors.darkerGreen,
+          fontWeight: FontWeight.w600,
         ),
-        children: const [
+      ),
+      children: const [
         SoldToAddressInfo(),
       ],
     );
@@ -504,17 +458,17 @@ class _ShipToAddress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return custom.ExpansionTile(
-        initiallyExpanded: true,
-        key: const ValueKey('shipToAddress'),
-        title: Text(
-          'Ship to Address'.tr(),
-          style: const TextStyle(
-            fontSize: 16.0,
-            color: ZPColors.darkerGreen,
-            fontWeight: FontWeight.w600,
-          ),
+      initiallyExpanded: true,
+      key: const ValueKey('shipToAddress'),
+      title: Text(
+        'Ship to Address'.tr(),
+        style: const TextStyle(
+          fontSize: 16.0,
+          color: ZPColors.darkerGreen,
+          fontWeight: FontWeight.w600,
         ),
-        children: const [
+      ),
+      children: const [
         ShipToAddressInfo(),
       ],
     );
@@ -529,17 +483,17 @@ class _BillToAddress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return custom.ExpansionTile(
-        initiallyExpanded: true,
-        key: const ValueKey('billToAddress'),
-        title: Text(
-          'Bill to Address'.tr(),
-          style: const TextStyle(
-            fontSize: 16.0,
-            color: ZPColors.darkerGreen,
-            fontWeight: FontWeight.w600,
-          ),
+      initiallyExpanded: true,
+      key: const ValueKey('billToAddress'),
+      title: Text(
+        'Bill to Address'.tr(),
+        style: const TextStyle(
+          fontSize: 16.0,
+          color: ZPColors.darkerGreen,
+          fontWeight: FontWeight.w600,
         ),
-        children: WidgetHelper.getBillToCustomerDetails(billToInfo),
+      ),
+      children: WidgetHelper.getBillToCustomerDetails(billToInfo),
     );
   }
 }
@@ -562,17 +516,17 @@ class _AdditionalCommentsState extends State<_AdditionalComments> {
     final overlay = LoadingOverlay.of(context);
 
     return custom.ExpansionTile(
-        initiallyExpanded: true,
-        key: const ValueKey('additionalComment'),
-        title: Text(
-          'Additional Comments'.tr(),
-          style: const TextStyle(
-            fontSize: 16.0,
-            color: ZPColors.darkerGreen,
-            fontWeight: FontWeight.w600,
-          ),
+      initiallyExpanded: true,
+      key: const ValueKey('additionalComment'),
+      title: Text(
+        'Additional Comments'.tr(),
+        style: const TextStyle(
+          fontSize: 16.0,
+          color: ZPColors.darkerGreen,
+          fontWeight: FontWeight.w600,
         ),
-        children: [
+      ),
+      children: [
         BlocListener<DownloadAttachmentBloc, DownloadAttachmentState>(
           listenWhen: (previous, current) => previous != current,
           listener: (context, state) async {
@@ -814,17 +768,17 @@ class _Invoices extends StatelessWidget {
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
       builder: (context, state) {
         return custom.ExpansionTile(
-            initiallyExpanded: true,
-            key: const ValueKey('invoices'),
-            title: Text(
-              'Invoices'.tr(),
-              style: const TextStyle(
-                fontSize: 16.0,
-                color: ZPColors.darkerGreen,
-                fontWeight: FontWeight.w600,
-              ),
+          initiallyExpanded: true,
+          key: const ValueKey('invoices'),
+          title: Text(
+            'Invoices'.tr(),
+            style: const TextStyle(
+              fontSize: 16.0,
+              color: ZPColors.darkerGreen,
+              fontWeight: FontWeight.w600,
             ),
-            children: [
+          ),
+          children: [
             Container(
               padding: const EdgeInsets.only(
                 top: 0.0,
@@ -913,6 +867,189 @@ class LoadingOverlay {
   }
 }
 
+class _ReOrder extends StatelessWidget {
+  final bool fromTopMenu;
+  final OrderHistoryItem orderHistoryItem;
+  const _ReOrder({
+    Key? key,
+    required this.fromTopMenu,
+    required this.orderHistoryItem,
+  }) : super(key: key);
+
+  Future<void> _addToCart({
+    required BuildContext context,
+    required MaterialPriceDetail itemInfo,
+    required MaterialQueryInfo queryInfo,
+    required TenderContract tenderContract,
+  }) async {
+    final priceAggregate = PriceAggregate(
+      price: itemInfo.price,
+      materialInfo: itemInfo.info,
+      salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+      quantity: queryInfo.qty.getOrCrash(),
+      discountedMaterialCount: context.read<CartBloc>().state.zmgMaterialCount,
+      bundle: Bundle.empty(),
+      addedBonusList: [],
+      stockInfo: StockInfo.empty().copyWith(
+        materialNumber: itemInfo.info.materialNumber,
+      ),
+      tenderContract: tenderContract,
+    );
+    context.read<CartBloc>().add(
+          CartEvent.addToCart(
+            item: priceAggregate,
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            salesOrganisationConfigs:
+                context.read<SalesOrgBloc>().state.configs,
+            shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+            doNotallowOutOfStockMaterial: context
+                .read<EligibilityBloc>()
+                .state
+                .doNotAllowOutOfStockMaterials,
+            salesOrganisation:
+                context.read<SalesOrgBloc>().state.salesOrganisation,
+          ),
+        );
+    //TODO: Revisit later
+    await context.router.pushNamed('cart_page');
+  }
+
+  TenderContract _getSelectedTenderContract(
+    BuildContext context,
+    MaterialNumber matNo,
+  ) {
+    final orderHistoryDetailsState =
+        context.read<OrderHistoryDetailsBloc>().state;
+    final orderHistoryDetailsBonusAggregate =
+        orderHistoryDetailsState.bonusItem.firstWhere(
+      (bonusItem) =>
+          bonusItem.bonusList.isEmpty &&
+          bonusItem.orderItem.isTenderContractMaterial &&
+          bonusItem.orderItem.materialNumber == matNo,
+      orElse: () => OrderHistoryDetailsBonusAggregate.empty(),
+    );
+
+    return orderHistoryDetailsBonusAggregate ==
+            OrderHistoryDetailsBonusAggregate.empty()
+        ? TenderContract.empty()
+        : TenderContract.empty().copyWith(
+            contractNumber: TenderContractNumber.tenderContractNumber(
+              orderHistoryDetailsBonusAggregate
+                  .tenderContractDetails.tenderContractNumber,
+            ),
+          );
+  }
+
+  void _addToCartPressed(
+    BuildContext context,
+    MaterialPriceDetailState state,
+    OrderHistoryItem orderHistoryItem,
+  ) {
+    final queryInfo = MaterialQueryInfo.fromOrderHistory(
+      orderHistoryItem: orderHistoryItem,
+    );
+    final itemInfo = state.materialDetails[queryInfo];
+    if (itemInfo != null) {
+      //Emptying the cart
+      final cartBloc = context.read<CartBloc>();
+      cartBloc.add(const CartEvent.clearCart());
+      if (itemInfo.info.hasValidTenderContract) {
+        context
+            .read<TenderContractBloc>()
+            .add(const TenderContractEvent.unselected());
+        context.read<TenderContractBloc>().add(
+              TenderContractEvent.fetch(
+                salesOrganisation:
+                    context.read<SalesOrgBloc>().state.salesOrganisation,
+                customerCodeInfo:
+                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                materialInfo: itemInfo.info,
+                defaultSelectedTenderContract: _getSelectedTenderContract(
+                  context,
+                  itemInfo.info.materialNumber,
+                ),
+              ),
+            );
+      } else {
+        _addToCart(
+          context: context,
+          itemInfo: itemInfo,
+          queryInfo: queryInfo,
+          tenderContract: TenderContract.noContract(),
+        );
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<TenderContractBloc, TenderContractState>(
+      listenWhen: (previous, current) =>
+          previous.selectedTenderContract != current.selectedTenderContract &&
+          current.selectedTenderContract != TenderContract.empty() &&
+          fromTopMenu,
+      listener: (context, state) {
+        final queryInfo = MaterialQueryInfo.fromOrderHistory(
+          orderHistoryItem: orderHistoryItem,
+        );
+        final itemInfo = context
+            .read<MaterialPriceDetailBloc>()
+            .state
+            .materialDetails[queryInfo];
+        _addToCart(
+          context: context,
+          itemInfo: itemInfo!,
+          queryInfo: queryInfo,
+          tenderContract: state.selectedTenderContract,
+        );
+      },
+      buildWhen: (previous, current) => previous != current,
+      builder: (context, state) {
+        return fromTopMenu
+            ? state.isFetching
+                ? TextButtonShimmer(
+                    key: const ValueKey('reorder'),
+                    title: 'Reorder'.tr(),
+                  )
+                : TextButton(
+                    key: const ValueKey('addToCartPressed'),
+                    onPressed: () => _addToCartPressed(
+                      context,
+                      context.read<MaterialPriceDetailBloc>().state,
+                      orderHistoryItem,
+                    ),
+                    child: Text(
+                      'Reorder'.tr(),
+                      style: const TextStyle(
+                        color: ZPColors.kPrimaryColor,
+                      ),
+                    ),
+                  )
+            : Center(
+                child: Container(
+                  width: 160,
+                  padding: const EdgeInsets.all(16.0),
+                  child: ElevatedButton(
+                    key: const ValueKey('reOrderButton'),
+                    onPressed: () => _addToCartPressed(
+                      context,
+                      context.read<MaterialPriceDetailBloc>().state,
+                      orderHistoryItem,
+                    ),
+                    child: LoadingShimmer.withChild(
+                      enabled: state.isFetching,
+                      child: const Text('Re-order').tr(),
+                    ),
+                  ),
+                ),
+              );
+      },
+    );
+  }
+}
+
 class _OrderSummary extends StatelessWidget {
   final OrderHistoryDetails orderDetails;
   final SalesOrganisationConfigs salesOrgConfigs;
@@ -978,31 +1115,9 @@ class _OrderSummary extends StatelessWidget {
                 builder: (context, state) {
                   return state.user.disableCreateOrder
                       ? const SizedBox.shrink()
-                      : Center(
-                          child: Container(
-                            width: 160,
-                            padding: const EdgeInsets.all(16.0),
-                            child: ElevatedButton(
-                              key: const ValueKey('reOrderButton'),
-                              // style: ButtonStyle(
-                              //   backgroundColor: MaterialStateProperty.resolveWith(
-                              //     (states) => ZPColors.white,
-                              //   ),
-                              //   side: MaterialStateProperty.resolveWith(
-                              //     (states) => const BorderSide(color: ZPColors.primary),
-                              //   ),
-                              // ),
-                              onPressed: () => _addToCartPressed(
-                                context,
-                                context.read<MaterialPriceDetailBloc>().state,
-                                orderHistoryItem,
-                              ),
-                              child: Text(
-                                'Re-order'.tr(),
-                                // style: const TextStyle(color: ZPColors.darkerGreen),
-                              ),
-                            ),
-                          ),
+                      : _ReOrder(
+                          fromTopMenu: false,
+                          orderHistoryItem: orderHistoryItem,
                         );
                 },
               ),

@@ -14,6 +14,7 @@ import 'package:ezrxmobile/application/order/order_history_details/download_atta
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -75,6 +76,10 @@ class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
+class TenderContractMockBloc
+    extends MockBloc<TenderContractEvent, TenderContractState>
+    implements TenderContractBloc {}
+
 class MockAppRouter extends Mock implements AppRouter {}
 
 class OrderHistoryFilterMockBloc
@@ -118,6 +123,7 @@ void main() {
   final mockCartBloc = CartMocBloc();
   final mockSalesOrgBloc = SalesOrgMockBloc();
   final userBlocMock = UserBlocMock();
+  final tenderContractMockBloc = TenderContractMockBloc();
   late CustomerCodeBloc customerCodeBlocMock;
   late MockHTTPService mockHTTPService;
   late MockAppRouter autoRouterMock;
@@ -146,6 +152,7 @@ void main() {
     locator.registerLazySingleton(() => mockShipToCodeBloc);
     locator.registerLazySingleton(() => mockCartBloc);
     locator.registerLazySingleton(() => mockSalesOrgBloc);
+    locator.registerLazySingleton(() => tenderContractMockBloc);
     locator.registerLazySingleton(() => orderHistoryDetailsRepository);
 
     autoRouterMock = locator<MockAppRouter>();
@@ -178,6 +185,8 @@ void main() {
           .thenReturn(CustomerCodeState.initial());
       when(() => mockOrderHistoryDetailsBloc.state)
           .thenReturn(OrderHistoryDetailsState.initial());
+      when(() => tenderContractMockBloc.state)
+          .thenReturn(TenderContractState.initial());
       when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
@@ -237,6 +246,9 @@ void main() {
           ),
           BlocProvider<AddToCartBloc>(
             create: (context) => addToCartBlocMock,
+          ),
+          BlocProvider<TenderContractBloc>(
+            create: (context) => tenderContractMockBloc,
           ),
         ],
         child: Material(
