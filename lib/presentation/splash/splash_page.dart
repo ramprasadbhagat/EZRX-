@@ -168,7 +168,8 @@ class SplashPage extends StatelessWidget {
               previous.isCovidMaterialEnable != current.isCovidMaterialEnable ||
               previous.isBundleMaterialEnable !=
                   current.isBundleMaterialEnable ||
-              previous.isOrderTypeEnable != current.isOrderTypeEnable,
+              previous.isOrderTypeEnable != current.isOrderTypeEnable ||
+              previous.customerCodeInfo != current.customerCodeInfo,
           listener: (context, state) {
             if (state.isCovidMaterialEnable) {
               context.read<CovidMaterialListBloc>().add(
