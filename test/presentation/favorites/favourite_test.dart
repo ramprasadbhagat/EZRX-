@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -8,6 +9,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -25,6 +27,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../application/auth/auth_bloc_test.dart';
 import '../../utils/material_frame_wrapper.dart';
 
 class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -54,6 +57,9 @@ class MockFavouriteBloc extends MockBloc<FavouriteEvent, FavouriteState>
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class AddToCartBlocMock extends MockBloc<AddToCartEvent, AddToCartState>
+    implements AddToCartBloc {}
+
 void main() {
   var mockFavouriteBloc = MockFavouriteBloc();
   var userBlocMock = UserMockBloc();
@@ -64,6 +70,7 @@ void main() {
   var cartMockBloc = CartMockBloc();
   var mockMaterialPriceDetailBloc = MaterialPriceDetailMockBloc();
   late EligibilityBlocMock mockEligiblityBloc;
+  late AddToCartBlocMock addToCartBlocMock;
 
   final mockFavourite1 = Favourite(
     id: 'fake-id-1',
@@ -83,6 +90,8 @@ void main() {
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
+    locator.registerFactory<MaterialPriceDetailBloc>
+      (() => mockMaterialPriceDetailBloc);
   });
 
   void initialSetup() {
@@ -95,6 +104,7 @@ void main() {
     cartMockBloc = CartMockBloc();
     mockMaterialPriceDetailBloc = MaterialPriceDetailMockBloc();
     mockEligiblityBloc = EligibilityBlocMock();
+    addToCartBlocMock = AddToCartBlocMock();
     when(() => mockEligiblityBloc.state).thenReturn(EligibilityState.initial());
     when(() => customerCodeMockBloc.state)
         .thenReturn(CustomerCodeState.initial());
@@ -107,6 +117,7 @@ void main() {
     when(() => mockMaterialPriceDetailBloc.state)
         .thenReturn(MaterialPriceDetailState.initial());
     when(() => mockFavouriteBloc.state).thenReturn(FavouriteState.initial());
+    when(() => addToCartBlocMock.state).thenReturn(AddToCartState.initial());
   }
 
   group(
@@ -143,8 +154,10 @@ void main() {
                 ),
                 BlocProvider<EligibilityBloc>(
                     create: (context) => mockEligiblityBloc),
+                BlocProvider<AddToCartBloc>(
+                    create: (context) => addToCartBlocMock),
               ],
-              child: const FavouritesTab(),
+              child: const WrappedRoute(child: FavouritesTab()),
             ),
           ),
         );
@@ -232,6 +245,83 @@ void main() {
         expect(find.byKey(const Key('snackBarMessage')), findsOneWidget);
         expect(find.byType(FavouriteListTile), findsNothing);
         expect(find.text('No favorite found'), findsOneWidget);
+      });
+
+      testWidgets('Favourite API sucess', (tester) async {
+        initialSetup();
+        when(() => mockFavouriteBloc.stream).thenAnswer((invocation) {
+          return Stream.fromIterable(
+            [
+              FavouriteState.initial(),
+              FavouriteState.initial().copyWith(
+                isLoading: false,
+                failureOrSuccessOption: optionOf(
+                  const Right('success'),
+                ),
+              ),
+            ],
+          );
+        });
+
+        await tester.pumpWidget(getFavoritePage());
+        await tester.pump();
+      });
+
+      testWidgets('Favourite items loading', (tester) async {
+        initialSetup();
+        when(() => mockFavouriteBloc.stream).thenAnswer((invocation) {
+          return Stream.fromIterable(
+            [
+              FavouriteState.initial(),
+              FavouriteState.initial().copyWith(
+                isLoading: true,
+                failureOrSuccessOption: optionOf(
+                  const Right('success'),
+                ),
+                favouriteItems: [
+                  mockFavourite1,
+                  mockFavourite2,
+                ],
+              ),
+            ],
+          );
+        });
+
+        await tester.pumpWidget(getFavoritePage());
+        await tester.pump();
+
+        final loaderImage = find.byKey(const Key('LoaderImage'));
+        expect(loaderImage, findsWidgets);
+      });
+
+      testWidgets('Favourite items loading while validating material price',
+          (tester) async {
+        initialSetup();
+        when(() => mockFavouriteBloc.stream).thenAnswer((invocation) {
+          return Stream.fromIterable(
+            [
+              FavouriteState.initial(),
+              FavouriteState.initial().copyWith(
+                failureOrSuccessOption: optionOf(
+                  const Right('success'),
+                ),
+                favouriteItems: [
+                  mockFavourite1,
+                  mockFavourite2,
+                ],
+              ),
+            ],
+          );
+        });
+        when(() => mockMaterialPriceDetailBloc.state).thenReturn(
+          MaterialPriceDetailState.initial().copyWith(isValidating: true),
+        );
+
+        await tester.pumpWidget(getFavoritePage());
+        await tester.pump();
+
+        final loaderImage = find.byKey(const Key('LoaderImage'));
+        expect(loaderImage, findsWidgets);
       });
 
       // Need to modify this
@@ -341,6 +431,104 @@ void main() {
 
         expect(find.byType(FavouriteListTile), findsOneWidget);
         expect(find.byKey(const Key('priceBefore')), findsOneWidget);
+      });
+
+      testWidgets('favourite tile ontap to show cart bottomsheet',
+          (tester) async {
+        initialSetup();
+        when(() => salesOrgMockBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              enableDefaultMD: true,
+              enableVat: true,
+            ),
+          ),
+        );
+        when(() => mockFavouriteBloc.state).thenAnswer((invocation) {
+          return FavouriteState.initial().copyWith(
+            isLoading: false,
+            favouriteItems: [
+              mockFavourite1,
+              mockFavourite2,
+            ],
+          );
+        });
+        whenListen(
+            mockMaterialPriceDetailBloc,
+            Stream.fromIterable(
+              [
+                MaterialPriceDetailState.initial()
+                    .copyWith(isValidating: true, isFetching: true),
+                MaterialPriceDetailState.initial().copyWith(
+                  isValidating: false,
+                  isFetching: false,
+                  materialDetails: {
+                    MaterialQueryInfo.fromFavorite(material: mockFavourite1):
+                        MaterialPriceDetail.empty().copyWith(
+                      info: MaterialInfo.empty().copyWith(
+                          defaultMaterialDescription: 'test',
+                      ),
+                    ),
+                  },
+                ),
+              ],
+            ));
+        await tester.pumpWidget(getFavoritePage());
+        await tester.pump();
+
+        final oneValidFavouriteListTile = find.byType(FavouriteListTile);
+        expect(oneValidFavouriteListTile, findsOneWidget);
+        await tester.tap(oneValidFavouriteListTile);
+      });
+
+      testWidgets('favourite tile is Waiting for StatusUpdate', (tester) async {
+        initialSetup();
+        when(() => salesOrgMockBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              enableDefaultMD: true,
+              enableVat: true,
+            ),
+          ),
+        );
+        when(() => mockFavouriteBloc.state).thenAnswer((invocation) {
+          return FavouriteState.initial().copyWith(
+            isLoading: false,
+            favouriteItems: [
+              mockFavourite1.copyWith(isWaitingStatusUpdate: true),
+              mockFavourite2,
+            ],
+          );
+        });
+        whenListen(
+            mockMaterialPriceDetailBloc,
+            Stream.fromIterable(
+              [
+                MaterialPriceDetailState.initial()
+                    .copyWith(isValidating: true, isFetching: true),
+                MaterialPriceDetailState.initial().copyWith(
+                  isValidating: false,
+                  isFetching: false,
+                  materialDetails: {
+                    MaterialQueryInfo.fromFavorite(material: mockFavourite1):
+                        MaterialPriceDetail.empty().copyWith(
+                      info: MaterialInfo.empty().copyWith(
+                          defaultMaterialDescription: 'test',
+                      ),
+                    ),
+                  },
+                ),
+              ],
+            ));
+        await tester.pumpWidget(getFavoritePage());
+        await tester.pump();
+
+        final oneValidFavouriteListTile = find.byType(FavouriteListTile);
+        expect(oneValidFavouriteListTile, findsOneWidget);
+
+        final statusUpdate = find.byKey(const Key('statusUpdate'));
+        expect(statusUpdate, findsOneWidget);
+        await tester.tap(statusUpdate);
       });
     },
   );

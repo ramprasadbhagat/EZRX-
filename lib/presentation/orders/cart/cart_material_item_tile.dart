@@ -120,6 +120,7 @@ class CartMaterialItemTile extends StatelessWidget {
                   if (cartItem.materialInfo.remarks.isNotEmpty &&
                       context.read<SalesOrgBloc>().state.configs.enableRemarks)
                     RemarksMessage(
+                      key: Key('remarks${cartItem.materialInfo.remarks}'),
                       message:
                           '${'Remarks: '.tr()}${cartItem.materialInfo.remarks}',
                       showEditDeleteDialog: EditDeleteDialog(

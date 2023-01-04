@@ -108,5 +108,20 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 1));
       verify(() => autoRouterMock.pop()).called(1);
     });
+
+    testWidgets('filter close button', (tester) async {
+      when(() => mockOrderHistoryFilterByStatusBloc.state).thenReturn(
+        OrderHistoryFilterByStatusState.initial().copyWith(
+          filterByStatusName: [],
+        ),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+
+      final closeButton = find.byKey(const Key('closeButton'));
+      expect(closeButton, findsOneWidget);
+      await tester.tap(closeButton);
+      await tester.pump();
+    });
   });
 }

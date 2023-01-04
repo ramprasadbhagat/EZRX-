@@ -190,6 +190,11 @@ void main() {
       (tester) async {
         final expectedStates = [
           UserState.initial().copyWith(
+            user: User.empty().copyWith(
+              id: 'testId',
+            ),
+          ),
+          UserState.initial().copyWith(
             userFailureOrSuccessOption: optionOf(
               _getUserFailure(variants.currentValue!),
             ),

@@ -165,6 +165,7 @@ void main() {
       await tester.pumpWidget(getWUT());
       await tester.pump();
 
+      await tester.pump(const Duration(seconds: 8));
       expect(
         find.byKey(const Key('homeBanner')),
         findsOneWidget,

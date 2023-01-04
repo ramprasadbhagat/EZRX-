@@ -212,8 +212,8 @@ class HistoryTab extends StatelessWidget {
         listenWhen: (previous, current) =>
             previous.isSubmitting != current.isSubmitting &&
                 current.isSubmitting ||
-            !scaffoldKey.currentState!.isEndDrawerOpen ||
-            previous.sortDirection != current.sortDirection,
+            previous.sortDirection != current.sortDirection ||
+            !scaffoldKey.currentState!.isEndDrawerOpen,
         listener: (context, state) {
           final hasCustomerCodeInfo = context
               .read<CustomerCodeBloc>()
@@ -438,6 +438,7 @@ class _SelectedStatusChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      key: const Key('SelectedStatusChip'),                         
       height: 80,
       width: MediaQuery.of(context).size.width,
       child: Column(
@@ -463,28 +464,24 @@ class _SelectedStatusChip extends StatelessWidget {
                 return Row(
                   children: state.filterByStatusName
                       .map(
-                        (e) => Container(
-                          child: state.isChecked(e)
-                              ? Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 5,
+                        (e) => Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 5,
+                                ),
+                                child: Transform(
+                                  transform: Matrix4.identity()..scale(0.9),
+                                  child: Chip(
+                                    backgroundColor: ZPColors.lightGray,
+                                    label: Text(
+                                      e,
+                                      style: const TextStyle(
+                                        color: ZPColors.black,
+                                        fontSize: 14.0,
+                                      ),
+                                    ).tr(),
                                   ),
-                                  child: Transform(
-                                    transform: Matrix4.identity()..scale(0.9),
-                                    child: Chip(
-                                      backgroundColor: ZPColors.lightGray,
-                                      label: Text(
-                                        e,
-                                        style: const TextStyle(
-                                          color: ZPColors.black,
-                                          fontSize: 14.0,
-                                        ),
-                                      ).tr(),
-                                    ),
-                                  ),
-                                )
-                              : Container(),
-                        ),
+                                ),
+                              ),
                       )
                       .toList(),
                 );

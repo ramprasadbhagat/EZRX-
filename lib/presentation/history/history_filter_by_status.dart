@@ -41,6 +41,7 @@ class HistoryFilterByStatus extends StatelessWidget {
                     right: 10,
                     top: 5,
                     child: IconButton(
+                      key: const Key('closeButton'),
                       onPressed: () => Navigator.of(context).pop(),
                       icon: const Icon(
                         Icons.clear,

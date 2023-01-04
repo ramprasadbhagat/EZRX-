@@ -20,6 +20,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart' hide Config;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 
 import '../../../utils/widget_utils.dart';
 
@@ -47,6 +48,10 @@ class CustomerCodeBlocMock
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
+class MaterialListBlocMock
+    extends MockBloc<MaterialListEvent, MaterialListState>
+    implements MaterialListBloc {}
+
 class AutoRouterMock extends Mock implements AppRouter {}
 
 void main() {
@@ -58,13 +63,14 @@ void main() {
   late AppRouter autoRouterMock;
   const mockUrl = 'mock-image-urls';
   const mockUrlLink = 'www.google.com';
-  final mockBanner = BannerItem.empty().copyWith(
+  var mockBanner = BannerItem.empty().copyWith(
     url: mockUrl,
     urlLink: mockUrlLink,
   );
   late DefaultCacheManager cacheManagerMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late ShipToCodeBloc shipToCodeBlocMock;
+  late MaterialListBloc materialListBloc;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -111,13 +117,16 @@ void main() {
       autoRouterMock = locator<AppRouter>();
       customerCodeBlocMock = CustomerCodeBlocMock();
       shipToCodeBlocMock = ShipToCodeBlocMock();
+      materialListBloc = MaterialListBlocMock();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
       when(() => shipToCodeBlocMock.state)
-          .thenReturn(ShipToCodeState.initial());    
+          .thenReturn(ShipToCodeState.initial());
+      when(() => materialListBloc.state)
+          .thenReturn(MaterialListState.initial());
     });
 
     Widget getWUT(Config config) {
@@ -139,8 +148,8 @@ void main() {
           BlocProvider<AuthBloc>(create: (context) => authBlocMock),
           BlocProvider<CustomerCodeBloc>(
               create: (context) => customerCodeBlocMock),
-          BlocProvider<ShipToCodeBloc>(
-              create: (context) => shipToCodeBlocMock),    
+          BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBlocMock),
+          BlocProvider<MaterialListBloc>(create: (context) => materialListBloc),
         ],
         child: getWUT(config),
       );
@@ -210,6 +219,44 @@ void main() {
       );
       final gestDOffset = tester.getCenter(gestD);
       await tester.tapAt(gestDOffset);
+    });
+
+    testWidgets('Banner test 3 - Have mock cache file with keyword ',
+        (tester) async {
+      final config = locator<Config>();
+      config.appFlavor = Flavor.uat;
+      const fileSystem = LocalFileSystem();
+      mockBanner =
+          mockBanner.copyWith(isKeyword: true, keyword: 'fake-keyword');
+      when(
+        () => cacheManagerMock.getFileFromCache(mockUrl),
+      ).thenAnswer(
+        (invocation) async {
+          final fileInfo = FileInfo(
+            fileSystem.file(
+                './assets/images/ezrxlogo.png'), // Return your image file path
+            FileSource.Cache,
+            DateTime(2050),
+            mockUrl,
+          );
+
+          return fileInfo;
+        },
+      );
+
+      final wut = getScopedWidget(config);
+
+      await tester.pumpWidget(wut);
+      await tester.pump();
+
+      final bannerTile = find.byType(BannerTile);
+      expect(
+        bannerTile,
+        findsOneWidget,
+      );
+      await tester.tap(bannerTile);
+      await tester.pump();
+
     });
 
     testWidgets('Banner test 4 - Mock cache file returns NULL', (tester) async {

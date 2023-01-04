@@ -285,6 +285,8 @@ void main() {
       });
 
       testWidgets('order Type test', (tester) async {
+        final newShortList = orderHistoryItem.orderHistoryItems.sublist(0, 3);
+        final list = orderHistoryItem.copyWith(orderHistoryItems: newShortList);
         final orderHistoryBloc = locator<OrderHistoryListBlocMock>();
         final expectedStates = [
           OrderHistoryFilterState.initial().copyWith(
@@ -323,7 +325,7 @@ void main() {
           return Stream.fromIterable([
             OrderHistoryListState.initial().copyWith(
               failureOrSuccessOption: none(),
-              orderHistoryList: orderHistoryItem,
+              orderHistoryList: list,
               isFetching: false,
             ),
           ]);
@@ -342,11 +344,11 @@ void main() {
         expect(find.byType(OrderHistoryListTile), findsWidgets);
 
         await tester.drag(
-            find.byKey(const Key('orderHistoryList')), const Offset(0.0, -300));
+            find.byKey(const Key('scrollList')), const Offset(0.0, -800));
         await tester.pump();
       });
 
-      testWidgets('order Type error test', (tester) async {
+      testWidgets('order Type error test 1', (tester) async {
         final expectedStates = [
           OrderHistoryListState.initial().copyWith(
             failureOrSuccessOption: optionOf(
@@ -369,6 +371,42 @@ void main() {
         expect(errorMessage, findsNothing);
         await tester.pump();
         expect(errorMessage, findsOneWidget);
+      });
+
+      testWidgets('order Type error test 2', (tester) async {
+        when(() => mockOrderHistoryListBloc.state).thenReturn(
+          OrderHistoryListState.initial().copyWith(
+              isFetching: false,
+              failureOrSuccessOption: optionOf(
+                const Left(
+                  ApiFailure.other('fake-error'),
+                ),
+              )),
+        );
+        whenListen(
+            mockOrderHistoryListBloc,
+            Stream.fromIterable([
+              OrderHistoryListState.initial().copyWith(
+                failureOrSuccessOption: none(),
+              ),
+              mockOrderHistoryListBloc.state,
+            ]));
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+      });
+
+      testWidgets('order Type success test', (tester) async {
+        final expectedStates = [
+          OrderHistoryListState.initial().copyWith(
+            failureOrSuccessOption: optionOf(
+              const Right('fake-message'),
+            ),
+          ),
+        ];
+        whenListen(
+            mockOrderHistoryListBloc, Stream.fromIterable(expectedStates));
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
       });
 
       testWidgets('Filter button test', (tester) async {
@@ -402,13 +440,38 @@ void main() {
 
         expect(find.byKey(const Key('Filter_list_not_empty')), findsOneWidget);
       });
-
-      testWidgets('Filter button test ', (tester) async {
+//
+      testWidgets('Filter button test 1', (tester) async {
         when(() => mockOrderHistoryListBloc.state)
             .thenReturn(OrderHistoryListState.initial());
-        when(() => mockOrderHistoryFilterBloc.state).thenReturn(
+        final expectedStates = [
           OrderHistoryFilterState.initial().copyWith(isSubmitting: true),
-        );
+        ];
+        whenListen(
+            mockOrderHistoryFilterBloc, Stream.fromIterable(expectedStates));
+        when(() => mockShipToCodeBloc.state).thenReturn(
+            ShipToCodeState.initial().copyWith(
+                shipToInfo:
+                    ShipToInfo.empty().copyWith(defaultShipToAddress: true)));
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+        final filterButton = find.byKey(const Key('filterButton'));
+        expect(filterButton, findsOneWidget);
+        await tester.tap(filterButton);
+        final orderDateFilter = find.byKey(const Key('orderDateFilter'));
+        expect(orderDateFilter, findsOneWidget);
+        await tester.tap(orderDateFilter);
+      });
+
+      testWidgets('Filter button test 2', (tester) async {
+        when(() => mockOrderHistoryListBloc.state)
+            .thenReturn(OrderHistoryListState.initial());
+        final expectedStates = [
+          OrderHistoryFilterState.initial()
+              .copyWith(isSubmitting: false, sortDirection: 'desc'),
+        ];
+        whenListen(
+            mockOrderHistoryFilterBloc, Stream.fromIterable(expectedStates));
         when(() => mockShipToCodeBloc.state).thenReturn(
             ShipToCodeState.initial().copyWith(
                 shipToInfo:
@@ -501,8 +564,11 @@ void main() {
             ],
           ),
         );
+        whenListen(mockOrderHistoryFilterByStatusBloc,
+            Stream.fromIterable([mockOrderHistoryFilterByStatusBloc.state]));
         await tester.pumpWidget(getWUT());
         await tester.pump();
+        expect(find.byKey(const Key('SelectedStatusChip')), findsOneWidget);
 
         expect(find.byType(OrderHistoryListTile), findsNWidgets(2));
       });

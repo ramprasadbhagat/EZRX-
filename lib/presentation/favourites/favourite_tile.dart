@@ -141,6 +141,7 @@ class FavouriteListTile extends StatelessWidget {
                       favourite.isWaitingStatusUpdate
                           ? LoadingShimmer.withChild(
                               child: IconButton(
+                                key: const Key('statusUpdate'),
                                 icon: const Icon(
                                   Icons.favorite,
                                   color: ZPColors.secondary,

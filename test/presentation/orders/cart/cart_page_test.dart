@@ -562,6 +562,46 @@ void main() {
         await tester.tap(find.byWidget(removeWidget));
         await tester.pump();
       });
+
+      testWidgets('Test have cart item list with one remark message',
+          (tester) async {
+        final mockCartItemWithRemarkDataList = [
+          mockCartItemWithDataList2.first.copyWith(
+            materialInfo: mockCartItemWithDataList2.first.materialInfo.copyWith(
+              remarks: 'good product',
+            ),
+          ),
+        ];
+
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItemList: mockCartItemWithRemarkDataList,
+            isFetching: false,
+          ),
+        );
+        when(() => salesOrgBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+              configs: SalesOrganisationConfigs.empty().copyWith(
+            enableRemarks: true,
+          )),
+        );
+
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
+
+        await tester.pump();
+        final item = find.byKey(Key(
+            'cartItem${mockCartItemWithRemarkDataList[0].materialInfo.materialNumber}'));
+        expect(item, findsOneWidget);
+        final listWidget = find.byWidgetPredicate((w) => w is ListTile);
+        expect(listWidget, findsAtLeastNWidgets(1));
+
+        final remarkWidget = find.byKey(
+            Key('remarks${mockCartItemWithRemarkDataList[0].materialInfo.remarks}'));
+        expect(remarkWidget, findsOneWidget);
+      });
+
       // TODO: Biswaranjan
       // delete button now change to slide to show
       // Cart item now directly get value from Price Aggegrate instead of cal

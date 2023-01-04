@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/account/notification_settings/notification_settings_page.dart';
@@ -21,18 +20,38 @@ class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
   EasyLocalization.logger.enableLevels = [];
+  late final AppRouter autoRouterMock;
 
   late UserBloc userBlocMock;
-
-  late AppRouter autoRouterMock;
   setUpAll(() async {
     setupLocator();
+    autoRouterMock = locator<AppRouter>();
   });
 
   group('Notification Settings Page should - ', () {
+    Widget getScopedWidget() {
+      return EasyLocalization(
+        supportedLocales: const [
+          Locale('en', 'SG'),
+        ],
+        path: 'assets/langs/langs.csv',
+        startLocale: const Locale('en', 'SG'),
+        fallbackLocale: const Locale('en', 'SG'),
+        saveLocale: true,
+        useOnlyLangCode: false,
+        assetLoader: CsvAssetLoader(),
+        child: WidgetUtils.getScopedWidget(
+          autoRouterMock: autoRouterMock,
+          providers: [
+            BlocProvider<UserBloc>(create: (context) => userBlocMock),
+          ],
+          child: const NotificationSettingsPage(),
+        ),
+      );
+    }
+
     setUp(() {
       userBlocMock = UserBlocMock();
-      autoRouterMock = locator<AppRouter>();
       when(() => userBlocMock.state).thenReturn(UserState(
         user: User.empty().copyWith(
           settings: User.empty().settings.copyWith(
@@ -45,7 +64,7 @@ void main() async {
     });
 
     testWidgets('Load [NotificationSettingsPage] widgets', (tester) async {
-      await _pumpWidget(tester, userBlocMock, autoRouterMock);
+      await tester.pumpWidget(getScopedWidget());
       final titleFinder = find.text('Set Up Email Notifications'.tr());
       final finder = find.byWidgetPredicate((w) => w is ListTile);
       expect(find.byType(Scaffold), findsOneWidget);
@@ -61,46 +80,86 @@ void main() async {
     testWidgets(
       'successfully work on tapping for language preferences',
       (tester) async {
-        await _pumpWidget(tester, userBlocMock, autoRouterMock);
+        await tester.pumpWidget(getScopedWidget());
         await tester
             .tap(find.byKey(const Key('gestureDetectorForLanguagePicker')));
         await tester.pumpAndSettle();
+        expect(
+          find.byKey(const Key('notificationSettingsLanguagePicker')),
+          findsOneWidget,
+        );
+      },
+    );
 
-        final languagePicker =
-            find.byWidgetPredicate((w) => w is PlatformDialogAction);
+    testWidgets(
+      'tapp on language preferences, changing the language',
+      (tester) async {
+        await tester.pumpWidget(getScopedWidget());
+        await tester
+            .tap(find.byKey(const Key('gestureDetectorForLanguagePicker')));
+        await tester.pumpAndSettle();
+        expect(
+          find.byKey(const Key('notificationSettingsLanguagePicker')),
+          findsOneWidget,
+        );
+
+        final thaiLanguageTile = find.byKey(const Key('thaiLanguageTile'));
+        expect(thaiLanguageTile, findsOneWidget);
+        await tester.tap(thaiLanguageTile, warnIfMissed: false);
+        await tester.pump();
+        expect(find.text('ภาษาไทย'), findsOneWidget);
         await tester.pump(const Duration(seconds: 2));
-        expect(languagePicker, findsNWidgets(6));
-        final salesOrg = find.byType(PlatformDialogAction).first;
-        await tester.tap(salesOrg, warnIfMissed: false);
-        await tester.pumpAndSettle(const Duration(seconds: 3));
+
+        await tester
+            .tap(find.byKey(const Key('notificationSettingsLanguagePicker')));
+        final mandarinLanguageTile =
+            find.byKey(const Key('mandarinLanguageTile'));
+        expect(mandarinLanguageTile, findsOneWidget);
+        await tester.tap(mandarinLanguageTile, warnIfMissed: false);
+        await tester.pump();
+        expect(find.text('繁體中文'), findsOneWidget);
+
+        await tester
+            .tap(find.byKey(const Key('notificationSettingsLanguagePicker')));
+        final burmeseLanguageTile =
+            find.byKey(const Key('burmeseLanguageTile'));
+        expect(burmeseLanguageTile, findsOneWidget);
+        await tester.tap(burmeseLanguageTile, warnIfMissed: false);
+        await tester.pump();
+        expect(find.text('ဗမာဘာသာစကား'), findsOneWidget);
+
+        await tester
+            .tap(find.byKey(const Key('notificationSettingsLanguagePicker')));
+        final vietnameseLanguageTile =
+            find.byKey(const Key('vietnameseLanguageTile'));
+        expect(vietnameseLanguageTile, findsOneWidget);
+        await tester.tap(vietnameseLanguageTile, warnIfMissed: false);
+        await tester.pump();
+        expect(find.text('Tiếng Việt'), findsOneWidget);
+
+        await tester
+            .tap(find.byKey(const Key('notificationSettingsLanguagePicker')));
+        final khmerLanguageTile = find.byKey(const Key('khmerLanguageTile'));
+        expect(khmerLanguageTile, findsOneWidget);
+        await tester.tap(khmerLanguageTile, warnIfMissed: false);
+        await tester.pump();
+        expect(find.text('ភាសាខ្មែរ'), findsOneWidget);
+
+        await tester
+            .tap(find.byKey(const Key('notificationSettingsLanguagePicker')));
+        final englishLanguageTile =
+            find.byKey(const Key('englishLanguageTile'));
+        expect(englishLanguageTile, findsOneWidget);
+        await tester.tap(englishLanguageTile, warnIfMissed: false);
+        await tester.pump();
+        expect(find.text('English'), findsAtLeastNWidgets(1));
       },
     );
 
     testWidgets(
       'successfully work on tapping for email notifications',
       (tester) async {
-        final expectedStates = [
-          UserState.initial().copyWith(
-            user: User.empty().copyWith(
-              settings: Settings.empty().copyWith(
-                emailNotifications: false,
-                languagePreference: 'en',
-              ),
-            ),
-          ),
-        ];
-        when(() => userBlocMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: User.empty().copyWith(
-              settings: Settings.empty().copyWith(
-                emailNotifications: false,
-                languagePreference: 'tw',
-              ),
-            ),
-          ),
-        );
-        whenListen(userBlocMock, Stream.fromIterable(expectedStates));
-        await _pumpWidget(tester, userBlocMock, autoRouterMock);
+        await tester.pumpWidget(getScopedWidget());
         final switchFinder = find.byKey(const Key('flutterSwitch'));
         await tester.tap(switchFinder);
         await tester.pumpAndSettle();
@@ -113,25 +172,4 @@ void main() async {
       },
     );
   });
-}
-
-Future<void> _pumpWidget(WidgetTester tester, UserBloc userBlocMock,
-    AppRouter autoRouterMock) async {
-  await tester.pumpWidget(EasyLocalization(
-      supportedLocales: const [
-        Locale('en', 'SG'),
-      ],
-      path: 'assets/langs/langs.csv',
-      startLocale: const Locale('en', 'SG'),
-      fallbackLocale: const Locale('en', 'SG'),
-      saveLocale: true,
-      useOnlyLangCode: false,
-      assetLoader: CsvAssetLoader(),
-      child: WidgetUtils.getScopedWidget(
-        autoRouterMock: autoRouterMock,
-        providers: [
-          BlocProvider<UserBloc>(create: (context) => userBlocMock),
-        ],
-        child: const NotificationSettingsPage(),
-      )));
 }

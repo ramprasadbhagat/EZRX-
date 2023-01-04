@@ -882,12 +882,6 @@ class LoadingOverlay {
     );
   }
 
-  Future<T> during<T>(Future<T> future) {
-    show();
-
-    return future.whenComplete(() => hide());
-  }
-
   LoadingOverlay._create(this._context);
 
   factory LoadingOverlay.of(BuildContext context) {

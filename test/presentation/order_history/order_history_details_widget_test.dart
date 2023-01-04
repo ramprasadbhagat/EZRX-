@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -24,7 +25,9 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/bonus_aggregate.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
@@ -34,8 +37,10 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_messages.
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -113,6 +118,13 @@ class MaterialPriceBlocMock
 class AddToCartBlocMock extends MockBloc<AddToCartEvent, AddToCartState>
     implements AddToCartBloc {}
 
+class TenderContractBlocMock
+    extends MockBloc<TenderContractEvent, TenderContractState>
+    implements TenderContractBloc {}
+
+class FavouriteBlocMock extends MockBloc<FavouriteEvent, FavouriteState>
+    implements FavouriteBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late GetIt locator;
@@ -136,6 +148,8 @@ void main() {
   late OrderHistoryDetailsRepository orderHistoryDetailsRepository;
   late MaterialPriceBlocMock materialPriceBlocMock;
   late AddToCartBlocMock addToCartBlocMock;
+  late TenderContractBlocMock tenderContractBlocMock;
+  late FavouriteBlocMock favouriteBlocMock;
   late OrderHistory mockOrderHistoryItem;
 
   setUpAll(() async {
@@ -173,6 +187,8 @@ void main() {
       downloadAttachmentBlocMock = MockDownloadAttachmentBloc();
       materialPriceBlocMock = MaterialPriceBlocMock();
       addToCartBlocMock = AddToCartBlocMock();
+      tenderContractBlocMock = TenderContractBlocMock();
+      favouriteBlocMock = FavouriteBlocMock();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => mockOrderHistoryListBloc.state)
           .thenReturn(OrderHistoryListState.initial());
@@ -215,6 +231,9 @@ void main() {
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
       when(() => addToCartBlocMock.state).thenReturn(AddToCartState.initial());
+      when(() => tenderContractBlocMock.state)
+          .thenReturn(TenderContractState.initial());
+      when(() => favouriteBlocMock.state).thenReturn(FavouriteState.initial());
       when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
     });
     StackRouterScope getWUT() {
@@ -248,7 +267,10 @@ void main() {
             create: (context) => addToCartBlocMock,
           ),
           BlocProvider<TenderContractBloc>(
-            create: (context) => tenderContractMockBloc,
+            create: (context) => tenderContractBlocMock,
+          ),
+          BlocProvider<FavouriteBloc>(
+            create: (context) => favouriteBlocMock,
           ),
         ],
         child: Material(
@@ -276,8 +298,8 @@ void main() {
       final orderHistoryDetailsList =
           find.byKey(const Key('orderHistoryDetailsPage'));
       final orderDetailsField = find.byKey(const Key('orderDetails'));
-      final soldToAddressField = find.byKey(const Key('soldToAddress'));
-      final shiptoAddressField = find.byKey(const Key('shipToAddress'));
+      final soldToAddressField = find.byKey(const Key('soldToAddressWidget'));
+      final shiptoAddressField = find.byKey(const Key('shipToAddressWidget'));
 
       final invoicesField = find.byKey(const Key('invoices'));
 
@@ -290,7 +312,8 @@ void main() {
       expect(invoicesField, findsOneWidget);
     });
 
-    testWidgets('Show Error Message test ', (tester) async {
+    testWidgets('Show Error Message test with reorder button loading',
+        (tester) async {
       whenListen(
           mockOrderHistoryDetailsBloc,
           Stream.fromIterable(
@@ -305,6 +328,15 @@ void main() {
               ),
             ],
           ));
+      whenListen(
+          tenderContractBlocMock,
+          Stream.fromIterable([
+            TenderContractState.initial(),
+            TenderContractState.initial().copyWith(
+              isFetching: true,
+              selectedTenderContract: TenderContract.empty(),),
+          ]));
+
       await tester.pumpWidget(
         MaterialFrameWrapper(
           child: BlocProvider<OrderHistoryDetailsBloc>(
@@ -314,6 +346,8 @@ void main() {
         ),
       );
       await tester.pump();
+      final reorder = find.byKey(const Key('reorder'));
+      expect(reorder, findsOneWidget);
     });
 
     testWidgets(' system message test ', (tester) async {
@@ -469,17 +503,42 @@ void main() {
           showErrorMessage: false,
         ),
       );
-      when(() => materialPriceDetailBlocMock.state).thenReturn(
-        MaterialPriceDetailState.initial().copyWith(
-          isValidating: true,
-        ),
-      );
+      whenListen(
+          materialPriceDetailBlocMock,
+          Stream.fromIterable([
+            MaterialPriceDetailState.initial(),
+            MaterialPriceDetailState.initial().copyWith(
+              isFetching: true,
+            ),
+          ]));
       await tester.pumpWidget(getWUT());
       await tester.pump();
       final reorder = find.byKey(const Key('reorder'));
 
       await tester.tap(reorder);
       await tester.pump();
+    });
+
+    testWidgets('Disable Reorder button ', (tester) async {
+      when(() => userBlocMock.state).thenReturn(UserState.initial()
+          .copyWith(user: User.empty().copyWith(disableCreateOrder: true)));
+      when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
+        OrderHistoryDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty(),
+          failureOrSuccessOption: none(),
+          isLoading: false,
+          showErrorMessage: false,
+        ),
+      );
+      when(() => materialPriceDetailBlocMock.state).thenReturn(
+        MaterialPriceDetailState.initial().copyWith(
+          isFetching: false,
+        ),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+      final reorder = find.text('Reorder');
+      expect(reorder, findsNothing);
     });
     testWidgets('Additional comments test ', (tester) async {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
@@ -504,15 +563,8 @@ void main() {
       final additionCommentsField = find.byKey(const Key('additionalComment'));
       expect(additionCommentsField, findsOneWidget);
     });
-    testWidgets('poDocument empty', (tester) async {
-      when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
-        OrderHistoryDetailsState.initial().copyWith(
-          orderHistoryDetails: orderHistoryDetails,
-          failureOrSuccessOption: none(),
-          isLoading: false,
-          showErrorMessage: false,
-        ),
-      );
+
+    testWidgets('Download attachment error message', (tester) async {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
@@ -521,17 +573,69 @@ void main() {
               ]),
         ),
       );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty()
+                .copyWith(showPOAttachment: true)),
+      );
+      whenListen(
+          downloadAttachmentBlocMock,
+          Stream.fromIterable([
+            DownloadAttachmentState.initial().copyWith(
+                failureOrSuccessOption: optionOf(
+              const Left(ApiFailure.other('fake-error')),
+            )),
+            DownloadAttachmentState.initial(),
+          ]));
       await tester.pumpWidget(getWUT());
       await tester.pump();
 
-      final pODocumentsUrl = find.textContaining('pODocumentsUrl');
+      final errorSnackBar = find.text('fake-error');
+      expect(errorSnackBar, findsOneWidget);
+    });
+    testWidgets('poDocument empty', (tester) async {
+      when(() => mockOrderHistoryDetailsBloc.state)
+          .thenReturn(OrderHistoryDetailsState.initial());
+      when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
+        OrderHistoryDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsPoDocuments: <OrderHistoryDetailsPODocuments>[
+                OrderHistoryDetailsPODocuments.empty().copyWith(url: '')
+              ]),
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty()
+                .copyWith(showPOAttachment: true)),
+      );
+      whenListen(
+          downloadAttachmentBlocMock,
+          Stream.fromIterable([
+            DownloadAttachmentState.initial().copyWith(
+                fileFetchMode: FileFetchMode.none,
+                failureOrSuccessOption: none(),
+                fileData: [
+                  OrderHistoryDetailsPoDocumentsBuffer.empty().copyWith(
+                    name: 'fake-name',
+                  )
+                ]),
+            DownloadAttachmentState.initial(),
+          ]));
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+      await tester.drag(find.byKey(const Key('scrollHistoryDetail')),
+          const Offset(0.0, -700));
+      await tester.pump();
+
+      final pODocumentsUrl = find.byKey(const Key('pODocumentsUrl'));
       if (mockOrderHistoryDetailsBloc
           .state.orderHistoryDetails.orderHistoryDetailsPoDocuments.isEmpty) {
         expect(pODocumentsUrl, findsOneWidget);
       }
     });
 
-    testWidgets('poDocument not empty', (tester) async {
+    testWidgets('poDocument not empty download success', (tester) async {
       final mockPoDocuments =
           orderHistoryDetails.orderHistoryDetailsPoDocuments;
 
@@ -556,23 +660,134 @@ void main() {
           ),
         ),
       );
+      whenListen(
+          downloadAttachmentBlocMock,
+          Stream.fromIterable([
+            DownloadAttachmentState.initial().copyWith(
+                fileFetchMode: FileFetchMode.download,
+                failureOrSuccessOption: optionOf(const Right('succes')),
+                fileData: [
+                  OrderHistoryDetailsPoDocumentsBuffer.empty().copyWith(
+                    name: 'fake-name',
+                  )
+                ]),
+            DownloadAttachmentState.initial(),
+          ]));
 
       await tester.pumpWidget(getWUT());
+      await tester.pump();
+      await tester.drag(find.byKey(const Key('scrollHistoryDetail')),
+          const Offset(0.0, -700));
+      await tester.pump();
+
+      final downloadAll = find.byKey(const Key('downloadAll'));
+      await tester.tap(downloadAll, warnIfMissed: false);
+      await tester.pump(const Duration(seconds: 5));
+    });
+
+    testWidgets('poDocument not empty download a particular file success',
+        (tester) async {
+      final mockPoDocuments =
+          orderHistoryDetails.orderHistoryDetailsPoDocuments;
+
+      when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
+        OrderHistoryDetailsState.initial().copyWith(
+          orderHistoryDetails: orderHistoryDetails.copyWith(
+            orderHistoryDetailsPoDocuments:
+                List<OrderHistoryDetailsPODocuments>.generate(
+              5,
+              (index) => mockPoDocuments.first,
+            ),
+          ),
+          failureOrSuccessOption: none(),
+          isLoading: false,
+          showErrorMessage: false,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            showPOAttachment: true,
+          ),
+        ),
+      );
+      whenListen(
+          downloadAttachmentBlocMock,
+          Stream.fromIterable([
+            DownloadAttachmentState.initial().copyWith(
+                fileFetchMode: FileFetchMode.download,
+                failureOrSuccessOption: optionOf(const Right('succes')),
+                fileData: [
+                  OrderHistoryDetailsPoDocumentsBuffer.empty().copyWith(
+                    name: 'fake-name',
+                  )
+                ]),
+            DownloadAttachmentState.initial(),
+          ]));
+
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+      await tester.drag(find.byKey(const Key('scrollHistoryDetail')),
+          const Offset(0.0, -700));
       await tester.pump();
 
       final pODocumentWidget = find.byKey(
           Key(orderHistoryDetails.orderHistoryDetailsPoDocuments.first.url));
       await tester.tap(pODocumentWidget.first, warnIfMissed: false);
       await tester.pump();
+    });
+
+    testWidgets('poDocument not empty test view success', (tester) async {
+      final mockPoDocuments =
+          orderHistoryDetails.orderHistoryDetailsPoDocuments;
+
+      when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
+        OrderHistoryDetailsState.initial().copyWith(
+          orderHistoryDetails: orderHistoryDetails.copyWith(
+            orderHistoryDetailsPoDocuments:
+                List<OrderHistoryDetailsPODocuments>.generate(
+              5,
+              (index) => mockPoDocuments.first,
+            ),
+          ),
+          failureOrSuccessOption: none(),
+          isLoading: false,
+          showErrorMessage: false,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            showPOAttachment: true,
+          ),
+        ),
+      );
+      whenListen(
+          downloadAttachmentBlocMock,
+          Stream.fromIterable([
+            DownloadAttachmentState.initial().copyWith(
+                fileFetchMode: FileFetchMode.view,
+                failureOrSuccessOption: optionOf(const Right('succes')),
+                fileData: [
+                  OrderHistoryDetailsPoDocumentsBuffer.empty().copyWith(
+                    name: 'fake-name',
+                  )
+                ]),
+            DownloadAttachmentState.initial(),
+          ]));
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+      await tester.drag(find.byKey(const Key('scrollHistoryDetail')),
+          const Offset(0.0, -700));
+      await tester.pump();
+      final additionCommentsField = find.byKey(const Key('additionalComment'));
+      expect(additionCommentsField, findsOneWidget);
 
       final viewAll = find.byKey(const Key('viewAll'));
       await tester.tap(viewAll, warnIfMissed: false);
       await tester.pump();
-
-      final downloadAll = find.byKey(const Key('downloadAll'));
-      await tester.tap(downloadAll, warnIfMissed: false);
-      await tester.pump();
     });
+
     testWidgets('addToCartPressed test ', (tester) async {
       when(() => autoRouterMock.pushNamed('cart_page'))
           .thenAnswer((invocation) async => true);
@@ -594,6 +809,121 @@ void main() {
                     .orderHistoryItems[0]): MaterialPriceDetail.empty()
                 .copyWith
                 .price(isValidMaterial: false),
+          },
+        ),
+      );
+      when(() => autoRouterMock.pushNamed('cart_page'))
+          .thenAnswer((invocation) async => true);
+
+      await tester.pumpWidget(
+        MaterialFrameWrapper(
+          child: BlocProvider<OrderHistoryDetailsBloc>(
+            create: (context) => mockOrderHistoryDetailsBloc,
+            child: getWUT(),
+          ),
+        ),
+      );
+
+      await tester.pump();
+
+      final addToCartPressed = find.byKey(const Key('addToCartPressed'));
+      expect(addToCartPressed, findsOneWidget);
+      await tester.tap(addToCartPressed);
+      await tester.pumpAndSettle(const Duration(milliseconds: 50));
+    });
+
+    testWidgets('fetch tender contract test with empty tender contract',
+        (tester) async {
+      when(() => autoRouterMock.pushNamed('cart_page'))
+          .thenAnswer((invocation) async => true);
+      when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
+        OrderHistoryDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty(),
+          failureOrSuccessOption: none(),
+          isLoading: false,
+          showErrorMessage: false,
+        ),
+      );
+      when(() => materialPriceDetailBlocMock.state).thenReturn(
+        MaterialPriceDetailState.initial().copyWith(
+          isValidating: false,
+          isFetching: false,
+          materialDetails: {
+            MaterialQueryInfo.fromOrderHistory(
+                orderHistoryItem: mockOrderHistoryItem
+                    .orderHistoryItems[0]): MaterialPriceDetail.empty()
+                .copyWith
+                .price(
+                  isValidMaterial: false,
+                )
+                .copyWith
+                .info(hasValidTenderContract: true),
+          },
+        ),
+      );
+      when(() => autoRouterMock.pushNamed('cart_page'))
+          .thenAnswer((invocation) async => true);
+
+      await tester.pumpWidget(
+        MaterialFrameWrapper(
+          child: BlocProvider<OrderHistoryDetailsBloc>(
+            create: (context) => mockOrderHistoryDetailsBloc,
+            child: getWUT(),
+          ),
+        ),
+      );
+
+      await tester.pump();
+
+      final addToCartPressed = find.byKey(const Key('addToCartPressed'));
+      expect(addToCartPressed, findsOneWidget);
+      await tester.tap(addToCartPressed);
+      await tester.pumpAndSettle(const Duration(milliseconds: 50));
+    });
+
+    testWidgets('fetch tender contract test with valid tender contract',
+        (tester) async {
+      final bonusItemList = [
+        OrderHistoryDetailsBonusAggregate(
+          orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first
+              .copyWith(
+                  isTenderContractMaterial: true,
+                  sAPStatus: 'Order Placed',
+                  materialNumber: MaterialNumber('000001234')),
+          details:
+              orderHistoryDetails.orderHistoryDetailsOrderItem.first.details,
+          tenderContractDetails:
+              OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
+          bonusList: <OrderHistoryDetailsOrderItem>[],
+        ),
+      ];
+      when(() => autoRouterMock.pushNamed('cart_page'))
+          .thenAnswer((invocation) async => true);
+      when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
+        OrderHistoryDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty(),
+          failureOrSuccessOption: none(),
+          isLoading: false,
+          showErrorMessage: false,
+          bonusItem: bonusItemList,
+        ),
+      );
+      when(() => materialPriceDetailBlocMock.state).thenReturn(
+        MaterialPriceDetailState.initial().copyWith(
+          isValidating: false,
+          isFetching: false,
+          materialDetails: {
+            MaterialQueryInfo.fromOrderHistory(
+                orderHistoryItem: mockOrderHistoryItem
+                    .orderHistoryItems[0]): MaterialPriceDetail.empty()
+                .copyWith
+                .price(
+                  isValidMaterial: false,
+                )
+                .copyWith
+                .info(hasValidTenderContract: true)
+                .copyWith
+                .info(materialNumber: MaterialNumber('000001234')),
           },
         ),
       );
@@ -825,6 +1155,7 @@ void main() {
       final expectedStates = [
         mockOrderHistoryDetailsBloc.state.copyWith(
           isLoading: false,
+          failureOrSuccessOption: optionOf(const Right('sucess')),
         ),
       ];
       whenListen(
@@ -895,10 +1226,15 @@ void main() {
 
     testWidgets('order summary item details test When Product is Available',
         (tester) async {
+      final materialNumber = orderHistoryDetails
+          .orderHistoryDetailsOrderItem.first.materialNumber.displayMatNo;
       final bonusItemList = [
         OrderHistoryDetailsBonusAggregate(
-          orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first
-              .copyWith(plannedDeliveryDate: '12/01/22', sAPStatus: ''),
+          orderItem:
+              orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
+            plannedDeliveryDate: '12/01/22',
+            sAPStatus: '',
+          ),
           details:
               orderHistoryDetails.orderHistoryDetailsOrderItem.first.details,
           tenderContractDetails:
@@ -925,6 +1261,15 @@ void main() {
           disableDeliveryDate: true,
         )),
       );
+      when(() => mockCartBloc.state).thenReturn(CartState.initial().copyWith(
+        cartItemList: [
+          PriceAggregate.empty().copyWith(
+              price: Price.empty()
+                  .copyWith(materialNumber: MaterialNumber(materialNumber)),
+              materialInfo: MaterialInfo.empty()
+                  .copyWith(materialNumber: MaterialNumber(materialNumber))),
+        ],
+      ));
       when(() => userBlocMock.state).thenReturn(
         UserState.initial().copyWith(
             user: User.empty().copyWith(
@@ -933,6 +1278,7 @@ void main() {
       );
       final materialPriceVal = <MaterialNumber, Price>{
         bonusItemList.first.orderItem.materialNumber: Price.empty()
+            .copyWith(materialNumber: MaterialNumber(materialNumber)),
       };
       when(() => materialPriceBlocMock.state).thenReturn(
         MaterialPriceState.initial().copyWith(
@@ -943,7 +1289,9 @@ void main() {
         MaterialQueryInfo.fromOrderHistoryDetails(
           orderHistoryDetailsOrderItem:
               orderHistoryDetails.orderHistoryDetailsOrderItem.first,
-        ): MaterialPriceDetail.empty(),
+        ): MaterialPriceDetail.empty().copyWith(
+            info: MaterialInfo.empty()
+                .copyWith(materialNumber: MaterialNumber('00000001324'))),
       };
       when(() => materialPriceDetailBlocMock.state).thenReturn(
         MaterialPriceDetailState.initial().copyWith(
@@ -953,9 +1301,6 @@ void main() {
 
       await tester.pumpWidget(getWUT());
       await tester.pump();
-
-      final materialNumber = orderHistoryDetails
-          .orderHistoryDetailsOrderItem.first.materialNumber.displayMatNo;
 
       final orderItemCardField =
           find.byKey(Key('orderItemCard-$materialNumber'));
@@ -974,6 +1319,7 @@ void main() {
       final orderItemCard = find.byKey(const Key('orderItemCard'));
       expect(orderItemCard, findsOneWidget);
       await tester.tap(orderItemCard, warnIfMissed: false);
+      await tester.pump();
     });
 
     testWidgets(
@@ -992,7 +1338,9 @@ void main() {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: orderHistoryDetails,
-          failureOrSuccessOption: none(),
+          failureOrSuccessOption: optionOf(
+            const Left(ApiFailure.other('Fake Error')),
+          ),
           isLoading: true,
           showErrorMessage: false,
           bonusItem: bonusItemList,
@@ -1001,6 +1349,7 @@ void main() {
       final expectedStates = [
         mockOrderHistoryDetailsBloc.state.copyWith(
           isLoading: false,
+          failureOrSuccessOption: none(),
         ),
       ];
       whenListen(
@@ -1084,7 +1433,20 @@ void main() {
           showErrorMessage: false,
         ),
       );
+      whenListen(
+          userBlocMock,
+          Stream.fromIterable([
+            UserState.initial().copyWith(
+              user: User.empty().copyWith(
+                disableCreateOrder: true,
+              ),
+            ),
+            UserState.initial(),
+          ]));
       await tester.pumpWidget(getWUT());
+      await tester.pump();
+      await tester.drag(find.byKey(const Key('scrollHistoryDetail')),
+          const Offset(0.0, -700));
       await tester.pump();
       final reOrderButton = find.byKey(const Key('reOrderButton'));
       expect(reOrderButton, findsOneWidget);
