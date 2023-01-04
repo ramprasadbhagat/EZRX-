@@ -60,13 +60,14 @@ class PriceAggregate with _$PriceAggregate {
 
   SubmitMaterialInfo toSubmitMaterialInfo() {
     return SubmitMaterialInfo(
-      batch: stockInfo.batch,
+      batch: salesOrgConfig.enableBatchNumber ? stockInfo.batch : '',
       bonuses: <MaterialItemBonus>[],
       comment: '',
       materialNumber: materialInfo.materialNumber,
       quantity: quantity,
       salesDistrict: stockInfo.salesDistrict,
       materialItemOverride: MaterialItemOverrideDto.fromPrice(price).toDomain(),
+      tenderContract: tenderContract,
     );
   }
 
@@ -269,6 +270,7 @@ class PriceAggregate with _$PriceAggregate {
         (PriceBonusItem element) => quantity >= element.qualifyingQuantity,
         orElse: () => PriceBonusItem.empty(),
       );
+
   @protected
   Iterable<MaterialItemBonus> get addedDealBonusMaterial =>
       addedBonusList.where(
@@ -317,7 +319,6 @@ class PriceAggregate with _$PriceAggregate {
 
             return remainQty - (ratio * element.qualifyingQuantity);
           } else {
-
             return remainQty;
           }
         });
@@ -340,11 +341,10 @@ class PriceAggregate with _$PriceAggregate {
   }
 
   List<MaterialItemBonus> get getMaterialItemBonus {
-
     return calculateMaterialItemBonus.map((BonusMaterial element) {
       final ratio = (quantity / element.qualifyingQuantity).floor();
       final remainingQty = quantity - (element.qualifyingQuantity * ratio);
-      
+
       return MaterialItemBonus.fromBonusMaterial(element).copyWith(
         remainingQty: remainingQty,
         additionalBonusFlag: false,
@@ -367,7 +367,6 @@ class PriceAggregate with _$PriceAggregate {
     return materialInfo.principalData.principalCode.isSubmitAllowedForClient();
   }
 
-  
   List<MaterialItemBonus> get getAddedBonusList =>
       List<MaterialItemBonus>.from(addedBonusList)
         ..sort(
@@ -388,4 +387,3 @@ enum PriceType {
   finalPriceTotal,
   unitPriceTotal,
 }
-  

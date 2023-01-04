@@ -124,7 +124,7 @@ void main() {
                 MaterialItemOverrideDto.fromPrice(priceAggregate.price)
                     .toDomain(),
             quantity: priceAggregate.quantity,
-            salesDistrict: stockInfo.salesDistrict,
+            salesDistrict: stockInfo.salesDistrict, tenderContract: priceAggregate.tenderContract,
           ),
         );
       },

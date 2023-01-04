@@ -11,6 +11,8 @@ _$_SubmitMaterialInfoDto _$$_SubmitMaterialInfoDtoFromJson(
     _$_SubmitMaterialInfoDto(
       materialNumber: json['materialNumber'] as String? ?? '',
       qty: json['qty'] as int? ?? 0,
+      tenderContract: SubmitTenderContractDto.fromJson(
+          json['contract'] as Map<String, dynamic>),
       bonuses: (json['bonuses'] as List<dynamic>?)
               ?.map((e) =>
                   MaterialItemBonusDto.fromJson(e as Map<String, dynamic>))
@@ -28,10 +30,9 @@ Map<String, dynamic> _$$_SubmitMaterialInfoDtoToJson(
   final val = <String, dynamic>{
     'materialNumber': instance.materialNumber,
     'qty': instance.qty,
+    'contract': instance.tenderContract.toJson(),
     'bonuses': instance.bonuses.map((e) => e.toJson()).toList(),
     'comment': instance.comment,
-    'batch': instance.batch,
-    'salesDistrict': instance.salesDistrict,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -40,6 +41,8 @@ Map<String, dynamic> _$$_SubmitMaterialInfoDtoToJson(
     }
   }
 
+  writeNotNull('batch', overrideBatchJson(instance.batch));
+  val['salesDistrict'] = instance.salesDistrict;
   writeNotNull('override', overrideTojson(instance.materialItemOverride));
   return val;
 }

@@ -202,7 +202,7 @@ class OrderRepository implements IOrderRepository {
     if (config.appFlavor == Flavor.mock) {
       try {
         final submitOrderResponse = await localDataSource.submitOrder(
-          submitOrder: SubmitOrderDto.fromDomain(submitOrder),
+          submitOrder: SubmitOrderDto.fromDomain(submitOrder, configs.currency.getValue()),
         );
 
         return Right(submitOrderResponse);
@@ -214,7 +214,7 @@ class OrderRepository implements IOrderRepository {
     }
     try {
       final submitOrderResponse = await remoteDataSource.submitOrder(
-        submitOrder: SubmitOrderDto.fromDomain(submitOrder),
+        submitOrder: SubmitOrderDto.fromDomain(submitOrder, configs.currency.getValue()),
       );
 
       return Right(submitOrderResponse);
@@ -296,20 +296,22 @@ class OrderRepository implements IOrderRepository {
       subscribeStatusChange: true,
       orderType:
           getOrderType(orderType: orderType, cartItems: cartItems, user: user),
-      orderReason: gettenderAvailability(cartItem: cartItems.last)
-          ? 'tenderOrderReason'
+      orderReason: cartItems
+              .map((cartItem) =>
+                  cartItem.tenderContract.tenderOrderReason.getValue())
+              .contains('730')
+          ? '730'
           : '',
-      purchaseOrderType: orderType,
+      purchaseOrderType: user.role.type.purchaseOrderType,
       shippingCondition: '',
-      paymentTerms: gettenderAvailability(cartItem: cartItems.last)
-          ? 'contractPaymentTerm'
-          : data.paymentTerm.getValue(),
+      paymentTerms: cartItems.first.tenderContract.contractPaymentTerm.getValue(),
       customer: _getSubmitOrderCustomer(
         customerCodeInfo: customerCodeInfo,
         salesOrganisation: salesOrganisation,
         shipToInfo: shipToInfo,
       ),
-      blockOrder: false, //TODO: principle list from sales org config
+      blockOrder: false,
+      //TODO: principle list from sales org config
       materials: _getMaterialInfoList(cartItems: cartItems),
     );
   }

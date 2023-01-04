@@ -25,12 +25,13 @@ void main() {
             'additionalBonusFlag': false,
           }
         ],
-        'override': <String, dynamic>{}
+        'override': <String, dynamic>{},
+        'contract': <String, dynamic>{}
       };
     });
     test('Test fromDomain', () {
       final configsDto = SubmitMaterialInfoDto.fromDomain(
-          SubmitMaterialInfoDto.fromJson(data).toDomain());
+          SubmitMaterialInfoDto.fromJson(data).toDomain(),'fake-currency');
 
       expect(configsDto.materialNumber, '1234');
     });
@@ -43,7 +44,7 @@ void main() {
 
     test('Test toJson', () {
       final configsDto = SubmitMaterialInfoDto.fromDomain(
-              SubmitMaterialInfoDto.fromJson(data).toDomain())
+              SubmitMaterialInfoDto.fromJson(data).toDomain(),'fake-currency')
           .toJson();
 
       expect(configsDto['qty'], 20);

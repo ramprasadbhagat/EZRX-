@@ -20,12 +20,12 @@ void main() {
     });
 
     test('Test fromDomain', () {
-      final configsDto = SubmitOrderDto.fromDomain(SubmitOrderDto.fromJson(data).toDomain());
+      final configsDto = SubmitOrderDto.fromDomain(SubmitOrderDto.fromJson(data).toDomain(),'fake-currency');
       expect(configsDto.companyName, 'test-name');
     });
 
     test('Test toJson', () {
-      final configsDto = SubmitOrderDto.fromDomain(SubmitOrderDto.fromJson(data).toDomain()).toJson();
+      final configsDto = SubmitOrderDto.fromDomain(SubmitOrderDto.fromJson(data).toDomain(),'fake-currency').toJson();
       expect(configsDto['companyName'], 'test-name');
     });
   });

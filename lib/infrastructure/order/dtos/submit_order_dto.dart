@@ -81,14 +81,14 @@ class SubmitOrderDto with _$SubmitOrderDto {
     );
   }
 
-  factory SubmitOrderDto.fromDomain(SubmitOrder submitOrder) {
+  factory SubmitOrderDto.fromDomain(SubmitOrder submitOrder, String currency) {
     return SubmitOrderDto(
       userName: submitOrder.userName,
       companyName: submitOrder.companyName.getOrCrash(),
       customer: SubmitOrderCustomerDto.fromDomain(submitOrder.customer),
       poReference: submitOrder.poReference,
       materials: submitOrder.materials
-          .map((e) => SubmitMaterialInfoDto.fromDomain(e))
+          .map((e) => SubmitMaterialInfoDto.fromDomain(e, currency))
           .toList(),
       poDate: submitOrder.poDate,
       requestedDeliveryDate: submitOrder.requestedDeliveryDate,

@@ -42,7 +42,7 @@ class TenderContractItem extends StatelessWidget {
           );
         },
       ),
-      initiallyExpanded: true,
+      initiallyExpanded: false,
       title: TenderContractHeader(tenderContract: tenderContract),
       children: [
         Padding(

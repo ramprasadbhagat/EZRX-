@@ -81,7 +81,7 @@ void main() {
 
           final result = await localDataSource.submitOrder(
               submitOrder: SubmitOrderDto.fromDomain(SubmitOrder.empty()
-                  .copyWith(companyName: CompanyName('fake-name'))));
+                  .copyWith(companyName: CompanyName('fake-name')),'fake-currency'));
 
           expect(
             result,
