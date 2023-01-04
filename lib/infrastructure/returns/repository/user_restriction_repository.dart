@@ -5,7 +5,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_remote.dart';
-import 'package:ezrxmobile/infrastructure/returns/repository/i_user_restriction_repository.dart';
+import 'package:ezrxmobile/domain/returns/repository/i_user_restriction_repository.dart';
 
 class UserRestrictionRepository extends IUserRestrictionRepository {
   final Config config;

@@ -3,7 +3,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:ezrxmobile/infrastructure/returns/repository/i_user_restriction_repository.dart';
+import 'package:ezrxmobile/domain/returns/repository/i_user_restriction_repository.dart';
 
 part 'user_restriction_list_bloc.freezed.dart';
 
