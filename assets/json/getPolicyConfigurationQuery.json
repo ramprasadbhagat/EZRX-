@@ -1,0 +1,9 @@
+{
+  
+    "variables": {
+      "request": {
+        "salesOrg": "2601"
+      }
+    },
+    "query": "query policies($request: policiesRequest!) {\n  policies(request: $request) {\n    salesOrg\n    principalCode\n    monthsBeforeExpiry\n    monthsAfterExpiry\n    uuid\n    returnsAllowed\n    principalName\n }\n}\n"
+  }

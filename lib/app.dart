@@ -39,6 +39,7 @@ import 'package:ezrxmobile/application/order/order_history_list/order_history_li
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
+import 'package:ezrxmobile/application/returns/policy_configuration_list/policy_configuration_list_bloc.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
@@ -261,6 +262,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<TenderContractBloc>(
           create: (context) => locator<TenderContractBloc>(),
+        ),
+        BlocProvider<PolicyConfigurationListBloc>(
+          create: (context) => locator<PolicyConfigurationListBloc>(),
         ),
       ],
       child: MaterialApp.router(

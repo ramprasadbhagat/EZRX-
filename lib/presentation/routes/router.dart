@@ -27,7 +27,7 @@ import 'package:ezrxmobile/presentation/orders/order_template/order_template_lis
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_detail_page.dart';
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_list_page.dart';
 import 'package:ezrxmobile/presentation/returns/approver_actions.dart';
-import 'package:ezrxmobile/presentation/returns/policy_configuration.dart';
+import 'package:ezrxmobile/presentation/returns/policy_configuration_list.dart';
 import 'package:ezrxmobile/presentation/returns/request_return.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary.dart';
 import 'package:ezrxmobile/presentation/returns/returns_overview.dart';

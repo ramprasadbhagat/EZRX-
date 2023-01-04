@@ -55,7 +55,7 @@ import '../orders/order_template/order_template_list_page.dart' as _i21;
 import '../orders/saved_order/saved_order_detail_page.dart' as _i28;
 import '../orders/saved_order/saved_order_list_page.dart' as _i27;
 import '../returns/approver_actions.dart' as _i7;
-import '../returns/policy_configuration.dart' as _i10;
+import '../returns/policy_configuration_list.dart' as _i10;
 import '../returns/request_return.dart' as _i6;
 import '../returns/return_summary.dart' as _i8;
 import '../returns/returns_overview.dart' as _i5;

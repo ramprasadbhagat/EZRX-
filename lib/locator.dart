@@ -39,6 +39,7 @@ import 'package:ezrxmobile/application/order/payment_customer_information/paymen
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
+import 'package:ezrxmobile/application/returns/policy_configuration_list/policy_configuration_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/approver_local.dart';
@@ -178,6 +179,10 @@ import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_lo
 import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_mutation.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/user_restriction_repository.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_list_local.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_list_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_list_remote.dart';
+import 'package:ezrxmobile/infrastructure/returns/repository/policy_configuration_list_repository.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/routes/router_observer.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -1020,7 +1025,6 @@ void setupLocator() {
     () => AcceptanceDateLocalDataSource(),
   );
 
-
   locator.registerLazySingleton(
     () => AcceptanceDateRemoteDataSource(
       httpService: locator<HttpService>(),
@@ -1359,5 +1363,42 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => CartBloc(cartRepository: locator<CartRepository>()),
+  );
+
+  //============================================================
+  //  Policy Configuration
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => PolicyConfigurationLocalDataSource(),
+  );
+
+  locator.registerLazySingleton(
+    () => PolicyConfigurationListQueryMutation(),
+  );
+
+  locator.registerLazySingleton(
+    () => PolicyConfigurationRemoteDataSource(
+      config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      httpService: locator<HttpService>(),
+      policyConfigurationQueryMutation:
+          locator<PolicyConfigurationListQueryMutation>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => PolicyConfigurationRepository(
+      config: locator<Config>(),
+      localDataSource: locator<PolicyConfigurationLocalDataSource>(),
+      countlyService: locator<CountlyService>(),
+      remoteDataSource: locator<PolicyConfigurationRemoteDataSource>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => PolicyConfigurationListBloc(
+      policyConfigurationRepository: locator<PolicyConfigurationRepository>(),
+    ),
   );
 }
