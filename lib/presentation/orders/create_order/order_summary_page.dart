@@ -159,11 +159,16 @@ class _WrapStepper extends StatelessWidget {
   }
 }
 
-class _Stepper extends StatelessWidget {
-  final SavedOrderListState savedOrderState;
-
-  const _Stepper({
-    required this.savedOrderState,
+class _SubmitContinueButton extends StatelessWidget {
+  final ControlsDetails details;
+  final bool eligibleForOrderSubmit;
+  final bool isAccountSuspended;
+  final OrderSummaryState orderSummaryState;
+  const _SubmitContinueButton({
+    required this.details,
+    required this.eligibleForOrderSubmit,
+    required this.isAccountSuspended,
+    required this.orderSummaryState,
     Key? key,
   }) : super(key: key);
 
@@ -176,6 +181,107 @@ class _Stepper extends StatelessWidget {
           ),
         );
   }
+
+  void _stepContinue(BuildContext context) {
+    context
+        .read<OrderSummaryBloc>()
+        .add(const OrderSummaryEvent.stepContinue());
+  }
+
+  bool _isCustomerEDI(BuildContext context) {
+    final orderType = context.read<OrderDocumentTypeBloc>().state;
+    final eligibiityState = context.read<EligibilityBloc>().state;
+
+    return eligibiityState.isEDI
+        ? eligibiityState.isSalesRep && orderType.isSpecialOrderType
+        : true;
+  }
+
+  void _submitOrder(BuildContext context) {
+    context.read<OrderSummaryBloc>().add(OrderSummaryEvent.submitOrder(
+          config: context.read<SalesOrgBloc>().state.configs,
+          shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+          customerCodeInfo:
+              context.read<CustomerCodeBloc>().state.customerCodeInfo,
+          salesOrganisation:
+              context.read<SalesOrgBloc>().state.salesOrganisation,
+          user: context.read<UserBloc>().state.user,
+          cartItems: context.read<CartBloc>().state.cartItemList,
+          grandTotal: context.read<CartBloc>().state.grandTotal,
+          orderType: '',
+          data:
+              context.read<AdditionalDetailsBloc>().state.additionalDetailsData,
+        ));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<AdditionalDetailsBloc, AdditionalDetailsState>(
+      listenWhen: (previous, current) => previous != current,
+      listener: (context, state) {
+        final orderSummaryBloc = context.read<OrderSummaryBloc>();
+        final orderSummaryState = orderSummaryBloc.state;
+        if (state.isValidated) {
+          orderSummaryState.step == orderSummaryState.additionalDetailsStep
+              ? orderSummaryBloc.add(const OrderSummaryEvent.stepContinue())
+              : _submitOrder(context);
+        } else if (!state.isValidated && state.showErrorMessages) {
+          orderSummaryBloc.add(
+            OrderSummaryEvent.stepTapped(
+              step: orderSummaryState.additionalDetailsStep,
+            ),
+          );
+        }
+      },
+      buildWhen: (previous, current) => previous != current,
+      builder: (context, state) {
+        return ElevatedButton(
+          key: Key(details.currentStep == orderSummaryState.maxSteps
+              ? 'submitButtonKey'
+              : 'continueButtonKey'),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: details.currentStep == orderSummaryState.maxSteps
+                ? eligibleForOrderSubmit &&
+                        !isAccountSuspended &&
+                        _isCustomerEDI(context)
+                    ? ZPColors.primary
+                    : ZPColors.lightGray
+                : ZPColors.primary,
+          ),
+          onPressed: () {
+            details.currentStep == orderSummaryState.maxSteps
+                ? eligibleForOrderSubmit &&
+                        !isAccountSuspended &&
+                        _isCustomerEDI(context)
+                    ? _validateForm(
+                        context: context,
+                      )
+                    : null
+                : details.currentStep == orderSummaryState.additionalDetailsStep
+                    ? _validateForm(
+                        context: context,
+                      )
+                    : _stepContinue(context);
+          },
+          child: details.currentStep == orderSummaryState.maxSteps
+              ? LoadingShimmer.withChild(
+                  enabled: orderSummaryState.isSubmitting,
+                  child: const Text('Submit').tr(),
+                )
+              : const Text('Continue').tr(),
+        );
+      },
+    );
+  }
+}
+
+class _Stepper extends StatelessWidget {
+  final SavedOrderListState savedOrderState;
+
+  const _Stepper({
+    required this.savedOrderState,
+    Key? key,
+  }) : super(key: key);
 
   void _saveOrder(BuildContext context) {
     context.read<SavedOrderListBloc>().add(
@@ -222,21 +328,6 @@ class _Stepper extends StatelessWidget {
             step: step,
           ),
         );
-  }
-
-  void _stepContinue(BuildContext context) {
-    context
-        .read<OrderSummaryBloc>()
-        .add(const OrderSummaryEvent.stepContinue());
-  }
-
-  bool _isCustomerEDI(BuildContext context) {
-    final orderType = context.read<OrderDocumentTypeBloc>().state;
-    final eligibiityState = context.read<EligibilityBloc>().state;
-
-    return eligibiityState.isEDI
-        ? eligibiityState.isSalesRep && orderType.isSpecialOrderType
-        : true;
   }
 
   void _handleError(BuildContext context, OrderSummaryState state) {
@@ -300,65 +391,11 @@ class _Stepper extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      BlocListener<AdditionalDetailsBloc,
-                          AdditionalDetailsState>(
-                        listenWhen: (previous, current) => previous != current,
-                        listener: (context, state) {
-                          final orderSummaryBloc =
-                              context.read<OrderSummaryBloc>();
-                          final orderSummaryState = orderSummaryBloc.state;
-                          if (state.isValidated) {
-                            orderSummaryState.step ==
-                                    orderSummaryState.additionalDetailsStep
-                                ? orderSummaryBloc
-                                    .add(const OrderSummaryEvent.stepContinue())
-                                : _submitOrder(context);
-                          } else if (!state.isValidated &&
-                              state.showErrorMessages) {
-                            orderSummaryBloc.add(
-                              OrderSummaryEvent.stepTapped(
-                                step: orderSummaryState.additionalDetailsStep,
-                              ),
-                            );
-                          }
-                        },
-                        child: ElevatedButton(
-                          key: Key(details.currentStep == state.maxSteps
-                              ? 'submitButtonKey'
-                              : 'continueButtonKey'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                details.currentStep == state.maxSteps
-                                    ? eligibleForOrderSubmit &&
-                                            !isAccountSuspended &&
-                                            _isCustomerEDI(context)
-                                        ? ZPColors.primary
-                                        : ZPColors.lightGray
-                                    : ZPColors.primary,
-                          ),
-                          onPressed: () {
-                            details.currentStep == state.maxSteps
-                                ? eligibleForOrderSubmit &&
-                                        !isAccountSuspended &&
-                                        _isCustomerEDI(context)
-                                    ? _validateForm(
-                                        context: context,
-                                      )
-                                    : null
-                                : details.currentStep ==
-                                        state.additionalDetailsStep
-                                    ? _validateForm(
-                                        context: context,
-                                      )
-                                    : _stepContinue(context);
-                          },
-                          child: details.currentStep == state.maxSteps
-                              ? LoadingShimmer.withChild(
-                                  enabled: state.isSubmitting,
-                                  child: const Text('Submit').tr(),
-                                )
-                              : const Text('Continue').tr(),
-                        ),
+                      _SubmitContinueButton(
+                        details: details,
+                        eligibleForOrderSubmit: eligibleForOrderSubmit,
+                        isAccountSuspended: isAccountSuspended,
+                        orderSummaryState: state,
                       ),
                       ElevatedButton(
                         style: Theme.of(context)
@@ -407,23 +444,6 @@ class _Stepper extends StatelessWidget {
         );
       },
     );
-  }
-
-  void _submitOrder(BuildContext context) {
-    context.read<OrderSummaryBloc>().add(OrderSummaryEvent.submitOrder(
-          config: context.read<SalesOrgBloc>().state.configs,
-          shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-          customerCodeInfo:
-              context.read<CustomerCodeBloc>().state.customerCodeInfo,
-          salesOrganisation:
-              context.read<SalesOrgBloc>().state.salesOrganisation,
-          user: context.read<UserBloc>().state.user,
-          cartItems: context.read<CartBloc>().state.cartItemList,
-          grandTotal: context.read<CartBloc>().state.grandTotal,
-          orderType: '',
-          data:
-              context.read<AdditionalDetailsBloc>().state.additionalDetailsData,
-        ));
   }
 }
 
