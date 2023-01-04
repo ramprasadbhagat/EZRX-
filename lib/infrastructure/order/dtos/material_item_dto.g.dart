@@ -31,6 +31,17 @@ _$_MaterialItemDto _$$_MaterialItemDtoFromJson(Map<String, dynamic> json) =>
       zdp8Override:
           (doubleFormatCheck(json, 'zdp8Override') as num?)?.toDouble() ?? 0,
       remarks: json['remarks'] as String? ?? '',
+      bundleName: json['BundleName'] as String? ?? '',
+      bundleCode: json['BundleCode'] as String? ?? '',
+      bundleInformation: (json['BundleInformation'] as List<dynamic>?)
+              ?.map((e) => BundleInfoDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      materials: (json['materials'] as List<dynamic>?)
+              ?.map((e) => MaterialDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      totalQuantity: json['totalQuantity'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_MaterialItemDtoToJson(_$_MaterialItemDto instance) {
@@ -59,5 +70,11 @@ Map<String, dynamic> _$$_MaterialItemDtoToJson(_$_MaterialItemDto instance) {
   val['batchNumber'] = instance.batchNumber;
   val['zdp8Override'] = instance.zdp8Override;
   val['remarks'] = instance.remarks;
+  val['BundleName'] = instance.bundleName;
+  val['BundleCode'] = instance.bundleCode;
+  val['BundleInformation'] =
+      instance.bundleInformation.map((e) => e.toJson()).toList();
+  val['materials'] = instance.materials.map((e) => e.toJson()).toList();
+  val['totalQuantity'] = instance.totalQuantity;
   return val;
 }

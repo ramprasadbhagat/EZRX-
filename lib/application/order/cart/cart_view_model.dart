@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'cart_view_model.freezed.dart';
@@ -15,7 +16,10 @@ class CartItem with _$CartItem {
   CartItem copyWithNewItem(PriceAggregate material) {
     final newMaterials = List<PriceAggregate>.from(materials)..add(material);
 
-    return CartItem(materials: newMaterials, itemType: itemType);
+    return CartItem(
+      materials: newMaterials,
+      itemType: itemType,
+    );
   }
 
   double get unitPrice {
@@ -30,7 +34,7 @@ class CartItem with _$CartItem {
 
   double get listPrice {
     if (materials.isEmpty) return 0;
-    
+
     return materials.first.listPrice;
   }
 
@@ -61,11 +65,48 @@ class CartItem with _$CartItem {
     var bundleRate = 0.0;
     for (final bundleInfo in materials.first.bundle.sortedBundleInformation) {
       if (_totalQty >= bundleInfo.quantity) {
-        bundleRate = bundleInfo.type.isPercent() ? bundleInfo.rate * -1 : bundleInfo.rate;
+        bundleRate = bundleInfo.type.isPercent()
+            ? bundleInfo.rate * -1
+            : bundleInfo.rate;
       }
     }
 
     return bundleRate;
+  }
+
+  List<MaterialItem> toSavedOrderMaterial() {
+    final saveOrderItems = <MaterialItem>[];
+
+    if (itemType == CartItemType.bundle) {
+      final bundleItems = materials
+          .map(
+            (cartItemData) => cartItemData.materialInfo.copyWith(
+              quantity: cartItemData.quantity,
+            ),
+          )
+          .toList();
+
+      if (bundleItems.isNotEmpty) {
+        saveOrderItems.add(
+          MaterialItem.empty().copyWith(
+            bundleName: materials.first.bundle.bundleName.getValue(),
+            bundleCode: materials.first.bundle.bundleCode,
+            bundleInformation: materials.first.bundle.bundleInformation,
+            totalQuantity: _totalQty,
+            materials: bundleItems,
+            type: 'Bundle',
+          ),
+        );
+      }
+    } else {
+      saveOrderItems.addAll(
+        materials
+            .map((cartItemData) => cartItemData.toSavedOrderMaterial())
+            .toList(),
+      );
+    }
+
+    return saveOrderItems;
   }
 }
 

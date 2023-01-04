@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -9,8 +10,8 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
-import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
+import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_customer.dart';
@@ -110,7 +111,7 @@ class OrderRepository implements IOrderRepository {
   Future<Either<ApiFailure, SavedOrder>> createDraftOrder({
     required ShipToInfo shipToInfo,
     required User user,
-    required List<PriceAggregate> cartItems,
+    required List<CartItem> cartItems,
     required double grandTotal,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
@@ -167,10 +168,13 @@ class OrderRepository implements IOrderRepository {
     }
   }
 
-  List<MaterialItem> _getItemList(List<PriceAggregate> cartItemList) {
-    return cartItemList
-        .map((cartItem) => cartItem.toSavedOrderMaterial())
-        .toList();
+  List<MaterialItem> _getItemList(List<CartItem> cartItemList) {
+    final saveOrderItems = <MaterialItem>[];
+    cartItemList.map(
+      (cartItem) => saveOrderItems.addAll(cartItem.toSavedOrderMaterial()),
+    );
+
+    return saveOrderItems;
   }
 
   @override
@@ -227,7 +231,7 @@ class OrderRepository implements IOrderRepository {
   SavedOrder _getCreateDraftOrderRequest({
     required ShipToInfo shipToInfo,
     required User user,
-    required List<PriceAggregate> cartItems,
+    required List<CartItem> cartItems,
     required double grandTotal,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,

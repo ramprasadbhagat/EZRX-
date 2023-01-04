@@ -24,7 +24,6 @@ import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_name.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_address.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_name.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -159,7 +158,6 @@ void main() {
   late OrderHistoryFilterBloc orderHistoryFilterBlocMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
   late TenderContractBloc tenderContractBlocMock;
-  late CustomerName emptyCustomerName;
   setUpAll(
     () {
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
@@ -248,7 +246,6 @@ void main() {
           .thenReturn(SavedOrderListState.initial());
       when(() => tenderContractBlocMock.state)
           .thenReturn(TenderContractState.initial());
-      emptyCustomerName = CustomerName.empty();
     },
   );
   group(

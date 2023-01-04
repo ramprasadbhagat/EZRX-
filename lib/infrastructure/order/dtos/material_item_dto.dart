@@ -1,5 +1,7 @@
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/bundle_info_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_bonus_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -53,6 +55,16 @@ class MaterialItemDto with _$MaterialItemDto {
         required double zdp8Override,
     @JsonKey(name: 'remarks', defaultValue: '')
         required String remarks,
+    @JsonKey(name: 'BundleName', defaultValue: '')
+        required String bundleName,
+    @JsonKey(name: 'BundleCode', defaultValue: '')
+        required String bundleCode,
+    @JsonKey(name: 'BundleInformation', defaultValue: [])
+        required List<BundleInfoDto> bundleInformation,
+    @JsonKey(name: 'materials', defaultValue: [])
+        required List<MaterialDto> materials,
+    @JsonKey(name: 'totalQuantity', defaultValue: 0)
+        required int totalQuantity,
   }) = _MaterialItemDto;
 
   MaterialItem toDomain() {
@@ -73,6 +85,11 @@ class MaterialItemDto with _$MaterialItemDto {
       itemRegistrationNumber: itemRegistrationNumber,
       materialDescription: materialDescription,
       remarks: remarks,
+      bundleName: bundleName,
+      bundleCode: bundleCode,
+      bundleInformation: bundleInformation.map((e) => e.toDomain()).toList(),
+      materials: materials.map((e) => e.toDomain()).toList(),
+      totalQuantity: totalQuantity,
     );
   }
 
@@ -89,13 +106,21 @@ class MaterialItemDto with _$MaterialItemDto {
       materialDescription: materialItem.materialDescription,
       materialGroup2: materialItem.materialGroup2.getOrCrash(),
       materialGroup4: materialItem.materialGroup4.getOrCrash(),
-      materialNumber: materialItem.materialNumber.getOrCrash(),
+      materialNumber: materialItem.materialNumber.getValue(),
       overridenPrice: materialItem.overridenPrice.getOrDefaultValue(0),
       qty: materialItem.qty,
       type: materialItem.type,
       unitOfMeasurement: materialItem.unitOfMeasurement,
       zdp8Override: materialItem.zdp8Override.getOrDefaultValue(0),
       remarks: materialItem.remarks,
+      bundleName: materialItem.bundleName,
+      bundleCode: materialItem.bundleCode,
+      bundleInformation: materialItem.bundleInformation
+          .map((e) => BundleInfoDto.fromDomain(e))
+          .toList(),
+      totalQuantity: materialItem.totalQuantity,
+      materials:
+          materialItem.materials.map((e) => MaterialDto.fromDomain(e)).toList(),
     );
   }
 

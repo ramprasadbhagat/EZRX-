@@ -292,7 +292,7 @@ class _Stepper extends StatelessWidget {
             salesOrganisation:
                 context.read<SalesOrgBloc>().state.salesOrganisation,
             user: context.read<UserBloc>().state.user,
-            cartItems: context.read<CartBloc>().state.cartItemList,
+            cartItems: context.read<CartBloc>().state.displayCartItems,
             grandTotal: context.read<CartBloc>().state.grandTotal,
             data: context
                 .read<AdditionalDetailsBloc>()

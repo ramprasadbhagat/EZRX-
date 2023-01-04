@@ -35,7 +35,7 @@ mixin _$SavedOrderListEvent {
     required TResult Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<CartItem> cartItems,
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
@@ -63,7 +63,7 @@ mixin _$SavedOrderListEvent {
     TResult? Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<CartItem> cartItems,
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
@@ -85,7 +85,7 @@ mixin _$SavedOrderListEvent {
     TResult Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<CartItem> cartItems,
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
@@ -198,7 +198,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<CartItem> cartItems,
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
@@ -229,7 +229,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<CartItem> cartItems,
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
@@ -254,7 +254,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<CartItem> cartItems,
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
@@ -470,7 +470,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<CartItem> cartItems,
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
@@ -502,7 +502,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<CartItem> cartItems,
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
@@ -528,7 +528,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<CartItem> cartItems,
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
@@ -759,7 +759,7 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<CartItem> cartItems,
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
@@ -791,7 +791,7 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<CartItem> cartItems,
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
@@ -817,7 +817,7 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<CartItem> cartItems,
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
@@ -996,7 +996,7 @@ class _$_Delete implements _Delete {
     required TResult Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<CartItem> cartItems,
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
@@ -1027,7 +1027,7 @@ class _$_Delete implements _Delete {
     TResult? Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<CartItem> cartItems,
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
@@ -1052,7 +1052,7 @@ class _$_Delete implements _Delete {
     TResult Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<CartItem> cartItems,
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
@@ -1128,7 +1128,7 @@ abstract class _$$_CreateDraftCopyWith<$Res> {
   $Res call(
       {ShipToInfo shipToInfo,
       User user,
-      List<PriceAggregate> cartItems,
+      List<CartItem> cartItems,
       double grandTotal,
       CustomerCodeInfo customerCodeInfo,
       SalesOrganisation salesOrganisation,
@@ -1174,7 +1174,7 @@ class __$$_CreateDraftCopyWithImpl<$Res>
       cartItems: null == cartItems
           ? _value._cartItems
           : cartItems // ignore: cast_nullable_to_non_nullable
-              as List<PriceAggregate>,
+              as List<CartItem>,
       grandTotal: null == grandTotal
           ? _value.grandTotal
           : grandTotal // ignore: cast_nullable_to_non_nullable
@@ -1245,7 +1245,7 @@ class _$_CreateDraft implements _CreateDraft {
   const _$_CreateDraft(
       {required this.shipToInfo,
       required this.user,
-      required final List<PriceAggregate> cartItems,
+      required final List<CartItem> cartItems,
       required this.grandTotal,
       required this.customerCodeInfo,
       required this.salesOrganisation,
@@ -1258,9 +1258,9 @@ class _$_CreateDraft implements _CreateDraft {
   final ShipToInfo shipToInfo;
   @override
   final User user;
-  final List<PriceAggregate> _cartItems;
+  final List<CartItem> _cartItems;
   @override
-  List<PriceAggregate> get cartItems {
+  List<CartItem> get cartItems {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_cartItems);
   }
@@ -1344,7 +1344,7 @@ class _$_CreateDraft implements _CreateDraft {
     required TResult Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<CartItem> cartItems,
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
@@ -1376,7 +1376,7 @@ class _$_CreateDraft implements _CreateDraft {
     TResult? Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<CartItem> cartItems,
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
@@ -1402,7 +1402,7 @@ class _$_CreateDraft implements _CreateDraft {
     TResult Function(
             ShipToInfo shipToInfo,
             User user,
-            List<PriceAggregate> cartItems,
+            List<CartItem> cartItems,
             double grandTotal,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation,
@@ -1463,7 +1463,7 @@ abstract class _CreateDraft implements SavedOrderListEvent {
   const factory _CreateDraft(
       {required final ShipToInfo shipToInfo,
       required final User user,
-      required final List<PriceAggregate> cartItems,
+      required final List<CartItem> cartItems,
       required final double grandTotal,
       required final CustomerCodeInfo customerCodeInfo,
       required final SalesOrganisation salesOrganisation,
@@ -1472,7 +1472,7 @@ abstract class _CreateDraft implements SavedOrderListEvent {
 
   ShipToInfo get shipToInfo;
   User get user;
-  List<PriceAggregate> get cartItems;
+  List<CartItem> get cartItems;
   double get grandTotal;
   CustomerCodeInfo get customerCodeInfo;
   SalesOrganisation get salesOrganisation;

@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -9,6 +10,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -29,7 +31,7 @@ void main() {
   final mockSalesOrg = SalesOrganisation.empty();
   final mockCustomerCodeInfo = CustomerCodeInfo.empty();
   final mockShipToInfo = ShipToInfo.empty();
-  late List<PriceAggregate> fakeCartItemList;
+  late List<CartItem> fakeCartItemList;
   final mockSavedOrder = SavedOrder.empty();
 
   late final List<SavedOrder> savedOrderListMock;
@@ -38,6 +40,14 @@ void main() {
     WidgetsFlutterBinding.ensureInitialized();
     savedOrderListMock = await OrderLocalDataSource().getSavedOrders();
   });
+
+  List<MaterialItem> getItemList(List<CartItem> cartItemList) {
+    final saveOrderItems = <MaterialItem>[];
+    for (final cartItem in cartItemList) {
+      saveOrderItems.addAll(cartItem.toSavedOrderMaterial());
+    }
+    return saveOrderItems;
+  }
 
   group('Saved Order Bloc', () {
     blocTest('Initialize',
@@ -249,14 +259,19 @@ void main() {
       build: () => SavedOrderListBloc(repository: repository),
       setUp: () {
         fakeCartItemList = [
-          PriceAggregate.empty().copyWith(
-            price: Price.empty().copyWith(
-              finalPrice: MaterialPrice(10.34),
-            ),
-            materialInfo: MaterialInfo.empty().copyWith(
-              materialDescription: 'Fake Description',
-            ),
-            quantity: 1,
+          CartItem(
+            materials: [
+              PriceAggregate.empty().copyWith(
+                price: Price.empty().copyWith(
+                  finalPrice: MaterialPrice(10.34),
+                ),
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialDescription: 'Fake Description',
+                ),
+                quantity: 1,
+              ),
+            ],
+            itemType: CartItemType.material,
           ),
         ];
         when(() => repository.createDraftOrder(
@@ -271,9 +286,7 @@ void main() {
           (invocation) async => Right(
             SavedOrder.empty().copyWith(
               draftorder: true,
-              items: fakeCartItemList
-                  .map((cartItem) => cartItem.toSavedOrderMaterial())
-                  .toList(),
+              items: getItemList(fakeCartItemList),
             ),
           ),
         );
@@ -301,9 +314,7 @@ void main() {
           savedOrders: <SavedOrder>[
             SavedOrder.empty().copyWith(
               draftorder: true,
-              items: fakeCartItemList
-                  .map((cartItem) => cartItem.toSavedOrderMaterial())
-                  .toList(),
+              items: getItemList(fakeCartItemList),
             )
           ],
           apiFailureOrSuccessOption: none(),
@@ -321,7 +332,7 @@ void main() {
               grandTotal: 0.0,
               salesOrganisation: SalesOrganisation.empty(),
               user: User.empty(),
-              cartItems: <PriceAggregate>[PriceAggregate.empty()],
+              cartItems: <CartItem>[],
               data: AdditionalDetailsData.empty(),
             )).thenAnswer(
           (invocation) async => const Left(
@@ -336,7 +347,7 @@ void main() {
           grandTotal: 0.0,
           salesOrganisation: SalesOrganisation.empty(),
           user: User.empty(),
-          cartItems: <PriceAggregate>[PriceAggregate.empty()],
+          cartItems: <CartItem>[],
           data: AdditionalDetailsData.empty(),
           existingSavedOrderList: <SavedOrder>[],
         ),

@@ -1,5 +1,7 @@
-import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -25,6 +27,11 @@ class MaterialItem with _$MaterialItem {
     required String materialDescription,
     required String remarks,
     required Zdp8OverrideValue zdp8Override,
+    required String bundleName,
+    required String bundleCode,
+    required List<BundleInfo> bundleInformation,
+    required List<MaterialInfo> materials,
+    required int totalQuantity,
   }) = _MaterialItem;
 
   factory MaterialItem.empty() => MaterialItem(
@@ -44,6 +51,11 @@ class MaterialItem with _$MaterialItem {
         materialDescription: '',
         remarks: '',
         zdp8Override: Zdp8OverrideValue(0),
+        bundleName: '',
+        bundleCode: '',
+        bundleInformation: [],
+        materials: [],
+        totalQuantity: 0,
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromSavedOrder(

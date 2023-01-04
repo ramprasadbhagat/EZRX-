@@ -11,9 +11,6 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item_override.dart';
-import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/submit_order.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response_message.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
@@ -24,7 +21,6 @@ class OrderRepositoryMock extends Mock implements OrderRepository {}
 
 void main() {
   late OrderRepository orderRepositoryMock;
-  late AdditionalDetailsData additionalDetailsData;
   final submitOrderResponse = SubmitOrderResponse.empty()
       .copyWith(salesDocument: 'fake-sales-document', messages: [
     SubmitOrderResponseMessage.empty().copyWith(
@@ -33,13 +29,6 @@ void main() {
     ),
   ]);
   late OrderSummaryState orderSummaryState;
-  late SubmitOrder submitOrder;
-
-  final config = SalesOrganisationConfigs.empty().copyWith(
-    ponRequired: true,
-    enableMobileNumber: true,
-    enablePaymentTerms: true,
-  );
 
   group('Test Order Summary Bloc', () {
     setUp(
@@ -49,7 +38,6 @@ void main() {
           additionalDetailsStep: 3,
           maxSteps: 4,
         );
-        additionalDetailsData = AdditionalDetailsData.empty();
       },
     );
     blocTest<OrderSummaryBloc, OrderSummaryState>(
@@ -114,7 +102,6 @@ void main() {
     blocTest(
       'Order Summary Step Continue when step is maxStep',
       build: () => OrderSummaryBloc(repository: orderRepositoryMock),
-
       seed: () => OrderSummaryState.initial().copyWith(
         step: 4,
       ),
@@ -195,17 +182,6 @@ void main() {
     blocTest(
       'Order Summary submit order success',
       setUp: () {
-        submitOrder = SubmitOrder.empty().copyWith(
-          materials: [
-            SubmitMaterialInfo.empty().copyWith(
-              materialItemOverride: MaterialItemOverride.empty().copyWith(
-                valueOverride: [
-                  ValueOverride.empty(),
-                ],
-              ),
-            ),
-          ],
-        );
         when(() => orderRepositoryMock.submitOrder(
               shipToInfo: ShipToInfo.empty().copyWith(city1: 'Kol'),
               user:

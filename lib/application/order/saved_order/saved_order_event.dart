@@ -22,7 +22,7 @@ class SavedOrderListEvent with _$SavedOrderListEvent {
   const factory SavedOrderListEvent.createDraft({
     required ShipToInfo shipToInfo,
     required User user,
-    required List<PriceAggregate> cartItems,
+    required List<CartItem> cartItems,
     required double grandTotal,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,

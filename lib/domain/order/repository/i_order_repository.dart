@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -28,7 +29,7 @@ abstract class IOrderRepository {
   Future<Either<ApiFailure, SavedOrder>> createDraftOrder({
     required ShipToInfo shipToInfo,
     required User user,
-    required List<PriceAggregate> cartItems,
+    required List<CartItem> cartItems,
     required double grandTotal,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
