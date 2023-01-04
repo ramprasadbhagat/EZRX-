@@ -4,12 +4,10 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
@@ -74,24 +72,6 @@ class OrderHistoryListTile extends StatelessWidget {
               .shipToInfo
               .shipToCustomerCode,
         });
-        context.read<MaterialPriceDetailBloc>().add(
-              MaterialPriceDetailEvent.fetch(
-                user: context.read<UserBloc>().state.user,
-                customerCode: customerCodeInfo,
-                salesOrganisation:
-                    context.read<SalesOrgBloc>().state.salesOrganisation,
-                salesOrganisationConfigs: salesOrgConfigs,
-                shipToCode: shipToInfo,
-                materialInfoList: [
-                  MaterialQueryInfo.fromOrderHistory(
-                    orderHistoryItem: orderHistoryItem,
-                  ),
-                ],
-                skipFOCCheck: true,
-                pickAndPack:
-                    context.read<EligibilityBloc>().state.getPNPValueMaterial,
-              ),
-            );
         context.read<OrderHistoryDetailsBloc>().add(
               OrderHistoryDetailsEvent.fetch(
                 user: context.read<UserBloc>().state.user,

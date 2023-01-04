@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -47,6 +48,9 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         tenderContractDetails:
             OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
       );
-
+      
+  MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromOrderHistoryDetails(
+        orderHistoryDetailsOrderItem: this,
+      );
 
 }

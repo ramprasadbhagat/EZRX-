@@ -71,120 +71,148 @@ class HistoryDetails extends StatelessWidget {
     final customerCodeInfo =
         context.read<EligibilityBloc>().state.customerCodeInfo;
 
-    return Scaffold(
-      key: const ValueKey('orderHistoryDetailsPage'),
-      appBar: AppBar(
-        leading: IconButton(
-          key: const ValueKey('backToOrderHistoryDetailsPage'),
-          icon: const Icon(Icons.arrow_back_ios_new_sharp),
-          onPressed: () => context.router.pop(),
-        ),
-        title: Text('#${orderHistoryItem.orderNumber.getOrCrash()}'.tr()),
-        actions: disableCreateOrder
-            ? <Widget>[]
-            : <Widget>[
-                BlocBuilder<MaterialPriceDetailBloc, MaterialPriceDetailState>(
-                  buildWhen: (previous, current) =>
-                      previous.isValidating != current.isValidating ||
-                      previous.isFetching != current.isFetching,
-                  builder: (context, state) {
-                    if (state.isValidating || state.isFetching) {
-                      return TextButtonShimmer(
-                        key: const ValueKey('reorder'),
-                        title: 'Reorder'.tr(),
+    return BlocListener<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
+      listenWhen: (previous, current) =>
+          previous.orderHistoryDetails.orderHistoryDetailsOrderItem !=
+          current.orderHistoryDetails.orderHistoryDetailsOrderItem,
+      listener: (context, state) {
+        final eligibilityState = context.read<EligibilityBloc>().state;
+        context.read<MaterialPriceDetailBloc>().add(
+              MaterialPriceDetailEvent.fetch(
+                user: eligibilityState.user,
+                customerCode: eligibilityState.customerCodeInfo,
+                salesOrganisation: eligibilityState.salesOrganisation,
+                salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
+                shipToCode: eligibilityState.shipToInfo,
+                materialInfoList: state.orderHistoryDetails
+                    .allOrderHistoryDetailsOrderItemQueryInfo,
+                skipFOCCheck: true,
+                pickAndPack:
+                    context.read<EligibilityBloc>().state.getPNPValueMaterial,
+              ),
+            );
+      },
+      child: Scaffold(
+        key: const ValueKey('orderHistoryDetailsPage'),
+        appBar: AppBar(
+          leading: IconButton(
+            key: const ValueKey('backToOrderHistoryDetailsPage'),
+            icon: const Icon(Icons.arrow_back_ios_new_sharp),
+            onPressed: () => context.router.pop(),
+          ),
+          title: Text('#${orderHistoryItem.orderNumber.getOrCrash()}'.tr()),
+          actions: disableCreateOrder
+              ? <Widget>[]
+              : <Widget>[
+                  BlocBuilder<MaterialPriceDetailBloc,
+                      MaterialPriceDetailState>(
+                    buildWhen: (previous, current) =>
+                        previous.isValidating != current.isValidating ||
+                        previous.isFetching != current.isFetching,
+                    builder: (context, state) {
+                      if (state.isValidating || state.isFetching) {
+                        return TextButtonShimmer(
+                          key: const ValueKey('reorder'),
+                          title: 'Reorder'.tr(),
+                        );
+                      }
+
+                      return _ReOrder(
+                        fromTopMenu: true,
+                        orderHistoryItem: orderHistoryItem,
                       );
-                    }
+                    },
+                  ),
+                ],
+        ),
+        body: BlocConsumer<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
+          listenWhen: (previous, current) =>
+              previous.failureOrSuccessOption != current.failureOrSuccessOption,
+          listener: (context, state) {
+            state.failureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  final failureMessage = failure.failureMessage;
+                  showSnackBar(
+                    context: context,
+                    message: failureMessage.tr(),
+                  );
+                },
+                (success) {},
+              ),
+            );
+          },
+          buildWhen: (previous, current) =>
+              previous.isLoading != current.isLoading,
+          builder: (context, state) {
+            final orderDetails = context
+                .read<OrderHistoryDetailsBloc>()
+                .state
+                .orderHistoryDetails;
 
-                    return _ReOrder(
-                      fromTopMenu: true,
-                      orderHistoryItem: orderHistoryItem,
-                    );
-                  },
-                ),
-              ],
-      ),
-      body: BlocConsumer<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
-        listenWhen: (previous, current) =>
-            previous.failureOrSuccessOption != current.failureOrSuccessOption,
-        listener: (context, state) {
-          state.failureOrSuccessOption.fold(
-            () {},
-            (either) => either.fold(
-              (failure) {
-                final failureMessage = failure.failureMessage;
-                showSnackBar(
-                  context: context,
-                  message: failureMessage.tr(),
-                );
-              },
-              (success) {},
-            ),
-          );
-        },
-        buildWhen: (previous, current) =>
-            previous.isLoading != current.isLoading,
-        builder: (context, state) {
-          final orderDetails =
-              context.read<OrderHistoryDetailsBloc>().state.orderHistoryDetails;
-
-          return Container(
-            padding: const EdgeInsets.only(
-              left: 15,
-              right: 15,
-              bottom: 20,
-            ),
-            child: SingleChildScrollView(
-              key: const Key('scrollHistoryDetail'),
-              child: Theme(
-                data: Theme.of(context)
-                    .copyWith(dividerColor: Colors.transparent),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (state.orderHistoryDetails.orderHistoryDetailsMessages
-                        .isNotEmpty)
-                      _SystemMessage(
+            return Container(
+              padding: const EdgeInsets.only(
+                left: 15,
+                right: 15,
+                bottom: 20,
+              ),
+              child: SingleChildScrollView(
+                key: const Key('scrollHistoryDetail'),
+                child: Theme(
+                  data: Theme.of(context)
+                      .copyWith(dividerColor: Colors.transparent),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (state.orderHistoryDetails.orderHistoryDetailsMessages
+                          .isNotEmpty)
+                        _SystemMessage(
+                          orderDetails: orderDetails,
+                        ),
+                      _OrderDetails(
+                        orderDetails: orderDetails,
+                        customerCodeInfo: customerCodeInfo,
+                      ),
+                      const _SoldToAddress(
+                        key: Key('soldToAddressWidget'),
+                      ),
+                      const _ShipToAddress(
+                        key: Key('shipToAddressWidget'),
+                      ),
+                      if (context
+                              .read<EligibilityBloc>()
+                              .state
+                              .isBillToEnable &&
+                          customerCodeInfo.billToInfos.isNotEmpty &&
+                          customerCodeInfo.customerCodeSoldTo !=
+                              billToInfo.billToCustomerCode)
+                        _BillToAddress(
+                          billToInfo: billToInfo,
+                        ),
+                      if (context
+                              .read<EligibilityBloc>()
+                              .state
+                              .isShowPOAttachmentEnable &&
+                          orderDetails.poDocumentsAvailable)
+                        _AdditionalComments(
+                          orderDetails: orderDetails,
+                        ),
+                      _Invoices(
                         orderDetails: orderDetails,
                       ),
-                    _OrderDetails(
-                      orderDetails: orderDetails,
-                      customerCodeInfo: customerCodeInfo,
-                    ),
-                    const _SoldToAddress(
-                      key: Key('soldToAddressWidget'),
-                    ),
-                    const _ShipToAddress(
-                      key: Key('shipToAddressWidget'),
-                    ),
-                    if (context.read<EligibilityBloc>().state.isBillToEnable &&
-                        customerCodeInfo.billToInfos.isNotEmpty &&
-                        customerCodeInfo.customerCodeSoldTo !=
-                            billToInfo.billToCustomerCode)
-                      _BillToAddress(
-                        billToInfo: billToInfo,
-                      ),
-                    if (context
-                            .read<EligibilityBloc>()
-                            .state
-                            .isShowPOAttachmentEnable &&
-                        orderDetails.poDocumentsAvailable)
-                      _AdditionalComments(
+                      _OrderSummary(
                         orderDetails: orderDetails,
+                        salesOrgConfigs: salesOrgConfigs,
+                        orderHistoryItem: orderHistoryItem,
                       ),
-                    _Invoices(
-                      orderDetails: orderDetails,
-                    ),
-                    _OrderSummary(
-                      orderDetails: orderDetails,
-                      salesOrgConfigs: salesOrgConfigs,
-                      orderHistoryItem: orderHistoryItem,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
@@ -876,12 +904,12 @@ class _ReOrder extends StatelessWidget {
     required this.orderHistoryItem,
   }) : super(key: key);
 
-  Future<void> _addToCart({
+  PriceAggregate _addToCart({
     required BuildContext context,
     required MaterialPriceDetail itemInfo,
     required MaterialQueryInfo queryInfo,
     required TenderContract tenderContract,
-  }) async {
+  }) {
     final priceAggregate = PriceAggregate(
       price: itemInfo.price,
       materialInfo: itemInfo.info,
@@ -895,24 +923,8 @@ class _ReOrder extends StatelessWidget {
       ),
       tenderContract: tenderContract,
     );
-    context.read<CartBloc>().add(
-          CartEvent.addToCart(
-            item: priceAggregate,
-            customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
-            salesOrganisationConfigs:
-                context.read<SalesOrgBloc>().state.configs,
-            shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-            doNotallowOutOfStockMaterial: context
-                .read<EligibilityBloc>()
-                .state
-                .doNotAllowOutOfStockMaterials,
-            salesOrganisation:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
-          ),
-        );
-    //TODO: Revisit later
-    await context.router.pushNamed('cart_page');
+    
+    return priceAggregate;
   }
 
   TenderContract _getSelectedTenderContract(
@@ -946,41 +958,64 @@ class _ReOrder extends StatelessWidget {
     MaterialPriceDetailState state,
     OrderHistoryItem orderHistoryItem,
   ) {
-    final queryInfo = MaterialQueryInfo.fromOrderHistory(
-      orderHistoryItem: orderHistoryItem,
-    );
-    final itemInfo = state.materialDetails[queryInfo];
-    if (itemInfo != null) {
-      //Emptying the cart
-      final cartBloc = context.read<CartBloc>();
-      cartBloc.add(const CartEvent.clearCart());
-      if (itemInfo.info.hasValidTenderContract) {
-        context
-            .read<TenderContractBloc>()
-            .add(const TenderContractEvent.unselected());
-        context.read<TenderContractBloc>().add(
-              TenderContractEvent.fetch(
-                salesOrganisation:
-                    context.read<SalesOrgBloc>().state.salesOrganisation,
-                customerCodeInfo:
-                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-                materialInfo: itemInfo.info,
-                defaultSelectedTenderContract: _getSelectedTenderContract(
-                  context,
-                  itemInfo.info.materialNumber,
+    final cartBloc = context.read<CartBloc>();
+    cartBloc.add(const CartEvent.clearCart());
+    final eligibilityState = context.read<EligibilityBloc>().state;
+    final orderHistoryDetails =
+        context.read<OrderHistoryDetailsBloc>().state.orderHistoryDetails;
+
+    orderHistoryDetails.allOrderHistoryDetailsOrderItemQueryInfo
+        .map((queryInfo) {
+      final itemInfo = state.materialDetails[queryInfo];
+      if (itemInfo != null) {
+        if (itemInfo.info.hasValidTenderContract) {
+          context
+              .read<TenderContractBloc>()
+              .add(const TenderContractEvent.unselected());
+          context.read<TenderContractBloc>().add(
+                TenderContractEvent.fetch(
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                  materialInfo: itemInfo.info,
+                  defaultSelectedTenderContract: _getSelectedTenderContract(
+                    context,
+                    itemInfo.info.materialNumber,
+                  ),
                 ),
-              ),
-            );
-      } else {
-        _addToCart(
+              );
+        }
+      }
+    });
+
+    final items = orderHistoryDetails.allOrderHistoryDetailsOrderItemQueryInfo
+        .map<PriceAggregate>((queryInfo) {
+      final itemInfo = state.materialDetails[queryInfo];
+      if (itemInfo != null) {
+        return _addToCart(
           context: context,
           itemInfo: itemInfo,
           queryInfo: queryInfo,
           tenderContract: TenderContract.noContract(),
         );
       }
-    }
+
+      return PriceAggregate.empty();
+    }).toList();
+
+    context.read<CartBloc>().add(CartEvent.addToCartFromList(
+          items: items,
+          customerCodeInfo: eligibilityState.customerCodeInfo,
+          salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
+          salesOrganisation: eligibilityState.salesOrganisation,
+          shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+          doNotAllowOutOfStockMaterials:
+              eligibilityState.doNotAllowOutOfStockMaterials,
+        ));
+
+    context.router.pushNamed('cart_page');
   }
 
   @override

@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_messages.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_term.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
@@ -15,7 +16,6 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
     required OrderHistoryDetailsShippingInformation
         orderHistoryDetailsShippingInformation,
     required List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItem,
-   
     required OrderHistoryDetailsPaymentTerm orderHistoryDetailsPaymentTerm,
     required String orderHistoryDetailsSpecialInstructions,
     required List<OrderHistoryDetailsPODocuments>
@@ -41,5 +41,10 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
 
   bool get poDocumentsAvailable => orderHistoryDetailsPoDocuments.isNotEmpty;
 
-
+  List<MaterialQueryInfo> get allOrderHistoryDetailsOrderItemQueryInfo =>
+      orderHistoryDetailsOrderItem
+          .map(
+            (item) => item.queryInfo,
+          )
+          .toList();
 }
