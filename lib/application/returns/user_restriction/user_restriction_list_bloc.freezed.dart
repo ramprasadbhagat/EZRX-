@@ -20,18 +20,21 @@ mixin _$UserRestrictionListEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(SalesOrg salesOrg) fetch,
+    required TResult Function(String searchKey) updateSearchKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(SalesOrg salesOrg)? fetch,
+    TResult? Function(String searchKey)? updateSearchKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(SalesOrg salesOrg)? fetch,
+    TResult Function(String searchKey)? updateSearchKey,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$UserRestrictionListEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -115,6 +121,7 @@ class _$_Initialized implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(SalesOrg salesOrg) fetch,
+    required TResult Function(String searchKey) updateSearchKey,
   }) {
     return initialized();
   }
@@ -124,6 +131,7 @@ class _$_Initialized implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(SalesOrg salesOrg)? fetch,
+    TResult? Function(String searchKey)? updateSearchKey,
   }) {
     return initialized?.call();
   }
@@ -133,6 +141,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(SalesOrg salesOrg)? fetch,
+    TResult Function(String searchKey)? updateSearchKey,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -146,6 +155,7 @@ class _$_Initialized implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
   }) {
     return initialized(this);
   }
@@ -155,6 +165,7 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
   }) {
     return initialized?.call(this);
   }
@@ -164,6 +175,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -242,6 +254,7 @@ class _$_Fetch implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(SalesOrg salesOrg) fetch,
+    required TResult Function(String searchKey) updateSearchKey,
   }) {
     return fetch(salesOrg);
   }
@@ -251,6 +264,7 @@ class _$_Fetch implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(SalesOrg salesOrg)? fetch,
+    TResult? Function(String searchKey)? updateSearchKey,
   }) {
     return fetch?.call(salesOrg);
   }
@@ -260,6 +274,7 @@ class _$_Fetch implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(SalesOrg salesOrg)? fetch,
+    TResult Function(String searchKey)? updateSearchKey,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -273,6 +288,7 @@ class _$_Fetch implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
   }) {
     return fetch(this);
   }
@@ -282,6 +298,7 @@ class _$_Fetch implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
   }) {
     return fetch?.call(this);
   }
@@ -291,6 +308,7 @@ class _$_Fetch implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -310,8 +328,149 @@ abstract class _Fetch implements UserRestrictionListEvent {
 }
 
 /// @nodoc
+abstract class _$$_UpdateSearchKeyCopyWith<$Res> {
+  factory _$$_UpdateSearchKeyCopyWith(
+          _$_UpdateSearchKey value, $Res Function(_$_UpdateSearchKey) then) =
+      __$$_UpdateSearchKeyCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String searchKey});
+}
+
+/// @nodoc
+class __$$_UpdateSearchKeyCopyWithImpl<$Res>
+    extends _$UserRestrictionListEventCopyWithImpl<$Res, _$_UpdateSearchKey>
+    implements _$$_UpdateSearchKeyCopyWith<$Res> {
+  __$$_UpdateSearchKeyCopyWithImpl(
+      _$_UpdateSearchKey _value, $Res Function(_$_UpdateSearchKey) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? searchKey = null,
+  }) {
+    return _then(_$_UpdateSearchKey(
+      null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateSearchKey implements _UpdateSearchKey {
+  const _$_UpdateSearchKey(this.searchKey);
+
+  @override
+  final String searchKey;
+
+  @override
+  String toString() {
+    return 'UserRestrictionListEvent.updateSearchKey(searchKey: $searchKey)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateSearchKey &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, searchKey);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateSearchKeyCopyWith<_$_UpdateSearchKey> get copyWith =>
+      __$$_UpdateSearchKeyCopyWithImpl<_$_UpdateSearchKey>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(SalesOrg salesOrg) fetch,
+    required TResult Function(String searchKey) updateSearchKey,
+  }) {
+    return updateSearchKey(searchKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(SalesOrg salesOrg)? fetch,
+    TResult? Function(String searchKey)? updateSearchKey,
+  }) {
+    return updateSearchKey?.call(searchKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(SalesOrg salesOrg)? fetch,
+    TResult Function(String searchKey)? updateSearchKey,
+    required TResult orElse(),
+  }) {
+    if (updateSearchKey != null) {
+      return updateSearchKey(searchKey);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
+  }) {
+    return updateSearchKey(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
+  }) {
+    return updateSearchKey?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    required TResult orElse(),
+  }) {
+    if (updateSearchKey != null) {
+      return updateSearchKey(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateSearchKey implements UserRestrictionListEvent {
+  const factory _UpdateSearchKey(final String searchKey) = _$_UpdateSearchKey;
+
+  String get searchKey;
+  @JsonKey(ignore: true)
+  _$$_UpdateSearchKeyCopyWith<_$_UpdateSearchKey> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$UserRestrictionListState {
   bool get isFetching => throw _privateConstructorUsedError;
+  String get searchKey => throw _privateConstructorUsedError;
   List<String> get usernames => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
@@ -329,6 +488,7 @@ abstract class $UserRestrictionListStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isFetching,
+      String searchKey,
       List<String> usernames,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
 }
@@ -348,6 +508,7 @@ class _$UserRestrictionListStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? isFetching = null,
+    Object? searchKey = null,
     Object? usernames = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
@@ -356,6 +517,10 @@ class _$UserRestrictionListStateCopyWithImpl<$Res,
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as String,
       usernames: null == usernames
           ? _value.usernames
           : usernames // ignore: cast_nullable_to_non_nullable
@@ -378,6 +543,7 @@ abstract class _$$_UserRestrictionStateCopyWith<$Res>
   @useResult
   $Res call(
       {bool isFetching,
+      String searchKey,
       List<String> usernames,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
 }
@@ -395,6 +561,7 @@ class __$$_UserRestrictionStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isFetching = null,
+    Object? searchKey = null,
     Object? usernames = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
@@ -403,6 +570,10 @@ class __$$_UserRestrictionStateCopyWithImpl<$Res>
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as String,
       usernames: null == usernames
           ? _value._usernames
           : usernames // ignore: cast_nullable_to_non_nullable
@@ -420,6 +591,7 @@ class __$$_UserRestrictionStateCopyWithImpl<$Res>
 class _$_UserRestrictionState extends _UserRestrictionState {
   _$_UserRestrictionState(
       {required this.isFetching,
+      required this.searchKey,
       required final List<String> usernames,
       required this.apiFailureOrSuccessOption})
       : _usernames = usernames,
@@ -427,6 +599,8 @@ class _$_UserRestrictionState extends _UserRestrictionState {
 
   @override
   final bool isFetching;
+  @override
+  final String searchKey;
   final List<String> _usernames;
   @override
   List<String> get usernames {
@@ -439,7 +613,7 @@ class _$_UserRestrictionState extends _UserRestrictionState {
 
   @override
   String toString() {
-    return 'UserRestrictionListState(isFetching: $isFetching, usernames: $usernames, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
+    return 'UserRestrictionListState(isFetching: $isFetching, searchKey: $searchKey, usernames: $usernames, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
   }
 
   @override
@@ -449,6 +623,8 @@ class _$_UserRestrictionState extends _UserRestrictionState {
             other is _$_UserRestrictionState &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey) &&
             const DeepCollectionEquality()
                 .equals(other._usernames, _usernames) &&
             (identical(other.apiFailureOrSuccessOption,
@@ -460,6 +636,7 @@ class _$_UserRestrictionState extends _UserRestrictionState {
   int get hashCode => Object.hash(
       runtimeType,
       isFetching,
+      searchKey,
       const DeepCollectionEquality().hash(_usernames),
       apiFailureOrSuccessOption);
 
@@ -474,6 +651,7 @@ class _$_UserRestrictionState extends _UserRestrictionState {
 abstract class _UserRestrictionState extends UserRestrictionListState {
   factory _UserRestrictionState(
       {required final bool isFetching,
+      required final String searchKey,
       required final List<String> usernames,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption}) = _$_UserRestrictionState;
@@ -481,6 +659,8 @@ abstract class _UserRestrictionState extends UserRestrictionListState {
 
   @override
   bool get isFetching;
+  @override
+  String get searchKey;
   @override
   List<String> get usernames;
   @override

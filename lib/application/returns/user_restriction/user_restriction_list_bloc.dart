@@ -53,5 +53,10 @@ class UserRestrictionListBloc
         },
       );
     });
+    on<_UpdateSearchKey>((event, emit) async {
+      emit(state.copyWith(
+        searchKey: event.searchKey,
+      ));
+    });
   }
 }

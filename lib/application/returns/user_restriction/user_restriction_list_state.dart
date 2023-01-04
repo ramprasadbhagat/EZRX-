@@ -6,13 +6,26 @@ class UserRestrictionListState with _$UserRestrictionListState {
 
   factory UserRestrictionListState({
     required bool isFetching,
+    required String searchKey,
     required List<String> usernames,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
   }) = _UserRestrictionState;
 
   factory UserRestrictionListState.initial() => UserRestrictionListState(
-    isFetching: false,
-    usernames: <String>[],
-    apiFailureOrSuccessOption: none(),
-  );
+        searchKey: '',
+        isFetching: false,
+        usernames: <String>[],
+        apiFailureOrSuccessOption: none(),
+      );
+
+  List<String> getSearchedUsernamesList() {
+    if (searchKey.isEmpty) return usernames;
+
+    final filteredList = usernames
+        .where((element) =>
+            element.toLowerCase().contains(searchKey.toLowerCase()))
+        .toList();
+
+    return filteredList;
+  }
 }

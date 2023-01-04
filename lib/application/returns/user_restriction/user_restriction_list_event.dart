@@ -7,4 +7,7 @@ class UserRestrictionListEvent with _$UserRestrictionListEvent {
   const factory UserRestrictionListEvent.fetch({
     required SalesOrg salesOrg,
   }) = _Fetch;
+
+  const factory UserRestrictionListEvent.updateSearchKey(String searchKey) =
+      _UpdateSearchKey;
 }
