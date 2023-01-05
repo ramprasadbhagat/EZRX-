@@ -17,6 +17,7 @@ import 'package:ezrxmobile/application/order/order_document_type/order_document_
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration_list/policy_configuration_list_bloc.dart';
+import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -222,11 +223,23 @@ class SplashPage extends StatelessWidget {
                     salesOrg: state.salesOrganisation.salesOrg,
                   ),
                 );
-                 // Policy Configuration fetch event
+            // Policy Configuration fetch event
             context.read<PolicyConfigurationListBloc>().add(
                   PolicyConfigurationListEvent.fetch(
                     salesOrganisation:
                         context.read<SalesOrgBloc>().state.salesOrganisation,
+                  ),
+                );
+          },
+        ),
+        BlocListener<EligibilityBloc, EligibilityState>(
+          listenWhen: (previous, current) =>
+              previous.isReturnsEnable != current.isReturnsEnable &&
+              current.isReturnsEnable,
+          listener: (context, state) {
+            context.read<UsageCodeBloc>().add(
+                  UsageCodeEvent.fetch(
+                    salesOrg: state.salesOrganisation.salesOrg,
                   ),
                 );
           },
