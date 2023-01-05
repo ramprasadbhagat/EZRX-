@@ -39,7 +39,7 @@ class UpdateCartButton extends StatelessWidget {
         .tenderOrderReason;
     final tenderContractInCartReason = tenderContractInCart.tenderOrderReason;
 
-    return cartItems.isEmpty
+    return cartItems.isEmpty || cartItems.length == 1
         ? true
         : ((tenderContractInCartReason.is730 ==
                 selectedTenderContractReason.is730) ||
