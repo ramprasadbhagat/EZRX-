@@ -19,7 +19,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../utils/material_frame_wrapper.dart';
+import '../../../utils/widget_utils.dart';
 
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
@@ -81,7 +81,8 @@ void main() {
 
     Future getWidget(tester) async {
       return await tester.pumpWidget(
-        MaterialFrameWrapper(
+        WidgetUtils.getScopedWidget(
+          autoRouterMock: locator<AppRouter>(),
           child: MultiBlocProvider(
             providers: [
               BlocProvider<CustomerCodeBloc>(
@@ -167,14 +168,16 @@ void main() {
 
     testWidgets('When customerCodeInfo got changed', (tester) async {
       final expectedCustomerCodeListStates = [
-        CustomerCodeState.initial().copyWith(isFetching: true),
         CustomerCodeState.initial().copyWith(
-          isFetching: false,
-          customerCodeInfo: fakeCustomerInfo2,
-          customerCodeList: [
-            CustomerCodeInfo.empty(),
-          ],
+          isFetching: true,
         ),
+        CustomerCodeState.initial().copyWith(
+            isFetching: false,
+            customerCodeInfo: fakeCustomerInfo2,
+            customerCodeList: [
+              CustomerCodeInfo.empty(),
+            ],
+            apiFailureOrSuccessOption: optionOf(const Right(null))),
       ];
       whenListen(mockCustomerCodeBloc,
           Stream.fromIterable(expectedCustomerCodeListStates));
@@ -185,6 +188,46 @@ void main() {
 
       final selectedCustomerCodeText1 = find.text('00001235');
       expect(selectedCustomerCodeText1, findsOneWidget);
+    });
+
+    testWidgets('When customerCodeInfo got changed from Previous error State',
+        (tester) async {
+      final expectedCustomerCodeListStates = [
+        CustomerCodeState.initial().copyWith(
+          isFetching: true,
+          apiFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('authentication failed'),
+            ),
+          ),
+        ),
+        CustomerCodeState.initial().copyWith(
+            isFetching: false,
+            customerCodeInfo: fakeCustomerInfo2,
+            customerCodeList: [
+              CustomerCodeInfo.empty(),
+            ],
+            apiFailureOrSuccessOption: none()),
+      ];
+      whenListen(mockCustomerCodeBloc,
+          Stream.fromIterable(expectedCustomerCodeListStates));
+
+      await getWidget(tester);
+
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+
+      final selectedCustomerCodeText1 = find.text('00001235');
+      expect(selectedCustomerCodeText1, findsOneWidget);
+      await tester.pump();
+      final customerCodeSelect =
+          find.byKey(const ValueKey('customerCodeSelect'));
+      await tester.ensureVisible(customerCodeSelect.first);
+      await tester.pumpAndSettle();
+      await tester.tap(customerCodeSelect.first);
+      expect(
+        locator<AppRouter>().current.route.name,
+        CustomerSearchPageRoute.name,
+      );
     });
   });
 }

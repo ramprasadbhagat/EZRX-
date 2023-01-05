@@ -134,6 +134,7 @@ class _BonusAddPageState extends State<BonusAddPage> {
                     isDense: true,
                     prefixIcon: const Icon(Icons.search),
                     suffixIcon: IconButton(
+                      key: const ValueKey('addBonusTextFieldClear'),
                       icon: const Icon(Icons.clear),
                       onPressed: () {
                         context.read<BonusMaterialBloc>().add(
@@ -150,14 +151,10 @@ class _BonusAddPageState extends State<BonusAddPage> {
           ),
         ),
       ),
-      body: BlocConsumer<BonusMaterialBloc, BonusMaterialState>(
+      body: BlocBuilder<BonusMaterialBloc, BonusMaterialState>(
         buildWhen: (previous, current) =>
             previous.isFetching != current.isFetching ||
             previous.isStarting != current.isStarting,
-        listenWhen: (previous, current) =>
-            previous.isFetching != current.isFetching ||
-            previous.isStarting != current.isStarting,
-        listener: (context, state) {},
         builder: (context, state) {
           return state.isStarting
               ? Container(

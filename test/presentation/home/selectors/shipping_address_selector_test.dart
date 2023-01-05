@@ -4,11 +4,8 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
-import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -38,12 +35,11 @@ import 'package:mocktail/mocktail.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../utils/material_frame_wrapper.dart';
+import '../../../utils/widget_utils.dart';
 
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
@@ -72,10 +68,6 @@ class MaterialFilterBlocMock
     extends MockBloc<MaterialFilterEvent, MaterialFilterState>
     implements MaterialFilterBloc {}
 
-class CovidMaterialListBlocMock
-    extends MockBloc<CovidMaterialListEvent, CovidMaterialListState>
-    implements CovidMaterialListBloc {}
-
 class OrderHistoryListBlocMock
     extends MockBloc<OrderHistoryListEvent, OrderHistoryListState>
     implements OrderHistoryListBloc {}
@@ -86,10 +78,6 @@ class OrderTemplateListBlocMock
 
 class FavouriteBlocMock extends MockBloc<FavouriteEvent, FavouriteState>
     implements FavouriteBloc {}
-
-class MaterialBundleListBlocMock
-    extends MockBloc<MaterialBundleListEvent, MaterialBundleListState>
-    implements MaterialBundleListBloc {}
 
 class PaymentCustomerInformationBlocMock extends MockBloc<
         PaymentCustomerInformationEvent, PaymentCustomerInformationState>
@@ -134,7 +122,6 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
   late CustomerCodeBlocMock mockCustomerCodeBloc;
-  late AuthBlocMock mockAuthBloc;
   late SalesOrgBlocMock mockSalesOrgBloc;
   late EligibilityBlocMock mockEligibilityBloc;
   late ShipToCodeBlocMock mockShipToCodeBloc;
@@ -143,11 +130,9 @@ void main() {
   late MaterialListBlocMock mockMaterialListBloc;
   late OrderDocumentTypeBlocMock mockOrderDocumentTypeBloc;
   late MaterialFilterBlocMock mockMaterialFilterBloc;
-  late CovidMaterialListBlocMock mockCovidMaterialListBloc;
   late OrderHistoryListBlocMock mockOrderHistoryListBloc;
   late OrderTemplateListBlocMock mockOrderTemplateListBloc;
   late FavouriteBlocMock mockFavouriteBloc;
-  late MaterialBundleListBlocMock mockMaterialBundleListBloc;
   late PaymentCustomerInformationBlocMock mockPaymentCustomerInformationBloc;
   late CartBlocMock mockCartBloc;
   late OrderHistoryFilterBlocMock mockOrderHistoryFilterBloc;
@@ -164,7 +149,6 @@ void main() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
     mockCustomerCodeBloc = CustomerCodeBlocMock();
-    mockAuthBloc = AuthBlocMock();
     mockSalesOrgBloc = SalesOrgBlocMock();
     mockEligibilityBloc = EligibilityBlocMock();
     mockShipToCodeBloc = ShipToCodeBlocMock();
@@ -173,11 +157,9 @@ void main() {
     mockMaterialListBloc = MaterialListBlocMock();
     mockOrderDocumentTypeBloc = OrderDocumentTypeBlocMock();
     mockMaterialFilterBloc = MaterialFilterBlocMock();
-    mockCovidMaterialListBloc = CovidMaterialListBlocMock();
     mockOrderHistoryListBloc = OrderHistoryListBlocMock();
     mockOrderTemplateListBloc = OrderTemplateListBlocMock();
     mockFavouriteBloc = FavouriteBlocMock();
-    mockMaterialBundleListBloc = MaterialBundleListBlocMock();
     mockPaymentCustomerInformationBloc = PaymentCustomerInformationBlocMock();
     mockCartBloc = CartBlocMock();
     mockOrderHistoryFilterBloc = OrderHistoryFilterBlocMock();
@@ -189,7 +171,6 @@ void main() {
   setUp(() async {
     when(() => mockCustomerCodeBloc.state)
         .thenReturn(CustomerCodeState.initial());
-    when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
     when(() => mockSalesOrgBloc.state).thenReturn(
         SalesOrgState.initial().copyWith(salesOrganisation: fakeSalesOrg));
     when(
@@ -211,15 +192,11 @@ void main() {
         .thenReturn(OrderDocumentTypeState.initial());
     when(() => mockMaterialFilterBloc.state)
         .thenReturn(MaterialFilterState.initial());
-    when(() => mockCovidMaterialListBloc.state)
-        .thenReturn(CovidMaterialListState.initial());
     when(() => mockOrderHistoryListBloc.state)
         .thenReturn(OrderHistoryListState.initial());
     when(() => mockOrderTemplateListBloc.state)
         .thenReturn(OrderTemplateListState.initial());
     when(() => mockFavouriteBloc.state).thenReturn(FavouriteState.initial());
-    when(() => mockMaterialBundleListBloc.state)
-        .thenReturn(MaterialBundleListState.initial());
     when(() => mockPaymentCustomerInformationBloc.state)
         .thenReturn(PaymentCustomerInformationState.initial());
     when(() => mockCartBloc.state).thenReturn(CartState.initial());
@@ -236,11 +213,11 @@ void main() {
   group('Ship Code selector Test ', () {
     Future getWidget(tester) async {
       return await tester.pumpWidget(MaterialFrameWrapper(
-        child: MultiBlocProvider(
+        child: WidgetUtils.getScopedWidget(
+          autoRouterMock: locator<AppRouter>(),
           providers: [
             BlocProvider<CustomerCodeBloc>(
                 create: (context) => mockCustomerCodeBloc),
-            BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
             BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
             BlocProvider<EligibilityBloc>(
                 create: (context) => mockEligibilityBloc),
@@ -255,15 +232,11 @@ void main() {
                 create: (context) => mockOrderDocumentTypeBloc),
             BlocProvider<MaterialFilterBloc>(
                 create: (context) => mockMaterialFilterBloc),
-            BlocProvider<CovidMaterialListBloc>(
-                create: (context) => mockCovidMaterialListBloc),
             BlocProvider<OrderHistoryListBloc>(
                 create: (context) => mockOrderHistoryListBloc),
             BlocProvider<OrderTemplateListBloc>(
                 create: (context) => mockOrderTemplateListBloc),
             BlocProvider<FavouriteBloc>(create: (context) => mockFavouriteBloc),
-            BlocProvider<MaterialBundleListBloc>(
-                create: (context) => mockMaterialBundleListBloc),
             BlocProvider<PaymentCustomerInformationBloc>(
                 create: (context) => mockPaymentCustomerInformationBloc),
             BlocProvider<CartBloc>(create: (context) => mockCartBloc),
@@ -357,6 +330,37 @@ void main() {
       await getWidget(tester);
       final selectedShipCode = find.text('00001235');
       expect(selectedShipCode, findsNothing);
+    });
+    testWidgets('When shipToInfo no data routing check', (tester) async {
+      final expectedStates = [
+        CustomerCodeState.initial(),
+        CustomerCodeState.initial().copyWith(
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            telephoneNumber: '1234567890',
+          ),
+        ),
+      ];
+      whenListen(mockCustomerCodeBloc, Stream.fromIterable(expectedStates));
+      whenListen(
+          mockShipToCodeBloc,
+          Stream.fromIterable([
+            ShipToCodeState.initial().copyWith(
+              isSearching: false,
+              shipToInfo: fakeShipToInfo,
+            ),
+            ShipToCodeState.initial()
+                .copyWith(isSearching: false, shipToInfo: ShipToInfo.empty()),
+          ]));
+
+      await getWidget(tester);
+      final shipToCodeSelect = find.byKey(const ValueKey('shipToCodeSelect'));
+      await tester.ensureVisible(shipToCodeSelect.first);
+      await tester.pumpAndSettle();
+      await tester.tap(shipToCodeSelect.first);
+      expect(
+        locator<AppRouter>().current.route.name,
+        ShiptToSearchPageRoute.name,
+      );
     });
   });
 }

@@ -19,6 +19,7 @@ class ShipToAddressInfo extends StatelessWidget {
     return BlocBuilder<ShipToCodeBloc, ShipToCodeState>(
       builder: (context, state) {
         return Column(
+          key: const ValueKey('shipToAddressInfoStepperKey'),
           children: [
             ..._getTextRowLevelsForShipToInfo(state.shipToInfo).map(
               (e) {
@@ -47,6 +48,7 @@ class ShipToAddressInfo extends StatelessWidget {
                         Expanded(
                           flex: 1,
                           child: GestureDetector(
+                              key: const ValueKey('shipToAddressInfo_license'),
                             onTap: () {
                               final paymentCustomerInformationState = context
                                   .read<PaymentCustomerInformationBloc>()

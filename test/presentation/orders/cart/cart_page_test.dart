@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/discount_override/discount_override_bloc.dart';
@@ -14,12 +15,15 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -36,18 +40,20 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/discount_override_repository.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_bundle_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_material_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
+import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../utils/multi_bloc_provider_frame_wrapper.dart';
+import '../../../utils/widget_utils.dart';
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
@@ -104,7 +110,15 @@ class PriceOverrideBlocMock
     extends MockBloc<PriceOverrideEvent, PriceOverrideState>
     implements PriceOverrideBloc {}
 
-final locator = GetIt.instance;
+class OrderSummaryBlocMock
+    extends MockBloc<OrderSummaryEvent, OrderSummaryState>
+    implements OrderSummaryBloc {}
+
+class CountlyServiceMock extends Mock implements CountlyService {}
+
+class AdditionalDetailsBlocMock
+    extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
+    implements AdditionalDetailsBloc {}
 
 void main() {
   late CartBloc cartBloc;
@@ -127,24 +141,31 @@ void main() {
   final AuthBloc authBlocMock = AuthBlocMock();
   final AddToCartBloc addToCartBlocMock = AddToCartBlocMock();
   late PriceOverrideBloc priceOverrideBloc;
+  late AppRouter autoRouter;
+  late OrderSummaryBloc orderSummaryBlocMock;
+  late CountlyService countlyMockService;
+  late AdditionalDetailsBloc additionalDetailsBlocMock;
 
   final mockMaterialItemList = [
     MaterialNumber('000000000023168451'),
     MaterialNumber('000000000023168441')
   ];
   setUpAll(() {
+    countlyMockService = CountlyServiceMock();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator
         .registerLazySingleton(() => CountlyService(config: locator<Config>()));
     locator.registerLazySingleton(() => DiscountOverrideRepositoryMock());
     locator.registerFactory(() =>
         DiscountOverrideBloc(repository: DiscountOverrideRepositoryMock()));
+    locator.registerFactory(() => AppRouter());
+    autoRouter = locator<AppRouter>();
   });
   setUp(
     () {
       WidgetsFlutterBinding.ensureInitialized();
       materialListBlocMock = MaterialListBlocMock();
-
+      additionalDetailsBlocMock = AdditionalDetailsBlocMock();
       cartBloc = CartBlocMock();
       materialPriceBloc = MaterialPriceBlocMock();
       salesOrgBloc = SalesOrgBlocMock();
@@ -157,6 +178,7 @@ void main() {
       discountOverrideBlocMock = DiscountOverrideBlocMock();
       orderEligibilityBlocMock = OrderEligibilityBlocMock();
       priceOverrideBloc = PriceOverrideBlocMock();
+      orderSummaryBlocMock = OrderSummaryBlocMock();
 
       mockPriceList = {};
       mockPriceList.putIfAbsent(
@@ -299,12 +321,9 @@ void main() {
       when(
         () => orderEligibilityBlocMock.state,
       ).thenReturn(OrderEligibilityState.initial().copyWith());
-      // when(() => salesOrgBloc.state)
-      //     .thenReturn(SalesOrgState.initial().copyWith(
-      //   salesOrganisation: SalesOrganisation.empty().copyWith(
-      //     salesOrg: SalesOrg('2601'),
-      //   ),
-      // ));
+      when(() => orderSummaryBlocMock.state).thenReturn(
+        OrderSummaryState.initial().copyWith(),
+      );
       when(() => salesOrgBloc.state)
           .thenReturn(SalesOrgState.initial().copyWith(
         configs: SalesOrganisationConfigs.empty().copyWith(
@@ -339,15 +358,21 @@ void main() {
           ),
         ),
       );
-      when(() => priceOverrideBloc.state).thenReturn(
-        PriceOverrideState.initial());
+      when(() => priceOverrideBloc.state)
+          .thenReturn(PriceOverrideState.initial());
+      when(() => additionalDetailsBlocMock.state)
+          .thenReturn(AdditionalDetailsState.initial());
+      when(() => countlyMockService.recordCountlyView(
+            'Cart Window Screen',
+          )).thenAnswer((invocation) async => Future.value());
     },
   );
   group(
     'Test Cart_Page',
     () {
       Widget getWidget() {
-        return MultiBlocProviderFrameWrapper(
+        return WidgetUtils.getScopedWidget(
+          autoRouterMock: autoRouter,
           providers: [
             BlocProvider<UserBloc>(create: (context) => userBloc),
             BlocProvider<CartBloc>(create: (context) => cartBloc),
@@ -370,7 +395,11 @@ void main() {
             BlocProvider<OrderEligibilityBloc>(
                 create: (context) => orderEligibilityBlocMock),
             BlocProvider<PriceOverrideBloc>(
-                create: (context) => priceOverrideBloc),    
+                create: (context) => priceOverrideBloc),
+            BlocProvider<OrderSummaryBloc>(
+                create: (context) => orderSummaryBlocMock),
+            BlocProvider<AdditionalDetailsBloc>(
+                create: (context) => additionalDetailsBlocMock),
           ],
           child: const CartPage(),
         );
@@ -1118,11 +1147,195 @@ void main() {
           find.byWidget(deleteWidget),
         );
 
-        expect(
-            find.byKey(
-              const Key('addBonusButton'),
+        final addBonusButton = find.byKey(
+          const Key('addBonusButton'),
+        );
+        expect(addBonusButton, findsOneWidget);
+        await tester.tap(addBonusButton);
+        await tester.pump();
+        expect(autoRouter.current.name, BonusAddPageRoute.name);
+      });
+
+      testWidgets('Test have cart item remarks update', (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItemList: mockCartItemWithDataList,
+            isFetching: true,
+          ),
+        );
+
+        when(() => salesOrgBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              enableRemarks: true,
             ),
-            findsOneWidget);
+          ),
+        );
+        final expectedStates = [
+          CartState.initial().copyWith(
+            cartItemList: mockCartItemWithDataList,
+            remarks: Remarks('test'),
+            showErrorMessages: true,
+            isRemarksAdding: true,
+          ),
+          CartState.initial().copyWith(
+            cartItemList: mockCartItemWithDataList,
+            remarks: Remarks(''),
+            showErrorMessages: false,
+            isRemarksAdding: false,
+          ),
+        ];
+
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
+
+        await tester.pump();
+        final item = find.byKey(Key(
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+        expect(item, findsOneWidget);
+        final addRemarkDialog = find.byKey(const Key('addRemarksDialog'));
+        final addRemarkButton =
+            tester.widget(find.byKey(const Key('addRemarksBonus')));
+        await tester.tap(find.byWidget(addRemarkButton));
+        whenListen(
+          cartBloc,
+          Stream.fromIterable(expectedStates),
+          initialState: CartState.initial().copyWith(
+            cartItemList: mockCartItemWithDataList,
+            isFetching: true,
+          ),
+        );
+        await tester.pump();
+      });
+
+      testWidgets('cart order summary ', (tester) async {
+        locator.unregister<CountlyService>();
+        locator.registerLazySingleton<CountlyService>(() => countlyMockService);
+
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+              cartItemList: mockCartItemWithDataList,
+              isFetching: false,
+              selectedItemsMaterialNumber: mockCartItemWithDataList
+                  .map<MaterialNumber>((e) => e.getMaterialNumber)
+                  .toList()),
+        );
+        when(() => customerCodeBloc.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              customerCodeSoldTo: '1234',
+              billToInfos: [
+                BillToInfo.empty().copyWith(
+                  billToCustomerCode: 'test',
+                )
+              ],
+            ),
+          ),
+        );
+        when(() => salesOrgBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs:
+                SalesOrganisationConfigs.empty().copyWith(enableBillTo: true),
+          ),
+        );
+        when(() => countlyMockService.addCountlyEvent(
+              'Checkout',
+              segmentation: {
+                'numItemInCart': mockCartItemWithDataList.length,
+                'subTotal': 0,
+                'grandTotal': 0,
+              },
+            )).thenAnswer((invocation) async => Future.value());
+        when(() => countlyMockService.recordCountlyView(
+              'Cart Window Screen',
+            )).thenAnswer((invocation) async => Future.value());
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
+
+        await tester.pump();
+        final orderSummaryButton = find.byKey(const Key('orderSummaryButton'));
+        expect(orderSummaryButton, findsOneWidget);
+        await tester.tap(orderSummaryButton);
+        verify(
+          () => countlyMockService.addCountlyEvent(
+            'Checkout',
+            segmentation: {
+              'numItemInCart': mockCartItemWithDataList.length,
+              'subTotal': 0,
+              'grandTotal': 0,
+            },
+          ),
+        ).called(1);
+      });
+
+      testWidgets('cart item radio button', (tester) async {
+        final expectedStates = [
+          CartState.initial().copyWith(
+            cartItemList: [],
+            isFetching: true,
+            selectedItemsMaterialNumber: [],
+            apiFailureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('Fake-Error'))),
+          ),
+          CartState.initial().copyWith(
+            cartItemList: mockCartItemWithDataList,
+            isFetching: false,
+            apiFailureOrSuccessOption: none(),
+            selectedItemsMaterialNumber: mockCartItemWithDataList
+                .map<MaterialNumber>((e) => e.getMaterialNumber)
+                .toList(),
+          )
+        ];
+        whenListen(cartBloc, Stream.fromIterable(expectedStates));
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              enableTaxAtTotalLevelOnly: true,
+            ),
+          ),
+        );
+        const taxCode = 'VAT';
+        when(() => salesOrgBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+              salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg(taxCode),
+          )),
+        );
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
+
+        await tester.pump();
+        final selectAllRadioButton =
+            find.byKey(const Key('selectAllRadioButton'));
+        expect(selectAllRadioButton, findsOneWidget);
+        await tester.tap(selectAllRadioButton);
+        verify(() => cartBloc.add(
+              const CartEvent.updateSelectAllItems(),
+            )).called(1);
+      });
+
+      testWidgets('cart page AccountSuspendedBanner ', (tester) async {
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              status: Status('01'),
+            ),
+            shipToInfo: ShipToInfo.empty().copyWith(
+              status: Status('01'),
+            ),
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+
+        await tester.pump();
+        final accountSuspendedBanner = find.byType(AccountSuspendedBanner);
+        expect(accountSuspendedBanner, findsOneWidget);
+        final accountSuspendedBannerTest = find.textContaining(
+            'Customer is suspended, please contact ZP Admin for support');
+        expect(accountSuspendedBannerTest, findsOneWidget);
       });
     },
   );

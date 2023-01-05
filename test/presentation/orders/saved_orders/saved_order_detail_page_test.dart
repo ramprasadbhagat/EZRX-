@@ -24,6 +24,7 @@ import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_material_item.dart';
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_detail_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -230,6 +231,11 @@ void main() {
             find.byKey(const Key('orderActionButtonShimmer')), findsOneWidget);
         expect(find.byType(OrderMaterialItem), findsAtLeastNWidgets(1));
         expect(find.byKey(const Key('price-loading')), findsAtLeastNWidgets(1));
+        final loadingShimmer = find.byType(LoadingShimmer);
+        expect(loadingShimmer, findsAtLeastNWidgets(2));
+        await tester.tap(loadingShimmer.first);
+        await tester.tap(loadingShimmer.last);
+
       },
     );
 

@@ -131,6 +131,7 @@ class CartPage extends StatelessWidget {
                             ],
                           ),
                           ElevatedButton(
+                            key: const ValueKey('orderSummaryButton'),
                             onPressed: state.selectedItemList.isEmpty
                                 ? null
                                 : () {
@@ -222,6 +223,7 @@ class _SelectAllButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Radio(
+                key: const Key('selectAllRadioButton'),
                 value: state.selectedItemList.length,
                 groupValue: state.cartItemList.length,
                 toggleable: true,

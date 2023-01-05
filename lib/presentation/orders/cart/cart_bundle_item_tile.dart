@@ -116,6 +116,7 @@ class CartBundleItemTile extends StatelessWidget {
                                 .map(
                                   (e) => Text(
                                     e,
+                                    // key: const ValueKey(e),
                                     style: Theme.of(context)
                                         .textTheme
                                         .subtitle2

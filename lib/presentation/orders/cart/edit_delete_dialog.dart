@@ -21,6 +21,7 @@ class EditDeleteDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton(
+      key: const ValueKey('editDeleteDialog'),
       padding: EdgeInsets.zero,
       icon: const Icon(
         Icons.more_vert,

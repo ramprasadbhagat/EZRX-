@@ -77,7 +77,8 @@ void main() {
       )));
 
       final priceSheetWidget = find.byKey(const Key('priceSheetKey'));
-      final overridePriceButton = find.byKey(const Key('ssoLoginButton'));
+      final overridePriceButton =
+          find.byKey(const Key('priceOverrideSubmitButton'));
       final formField = find.byType(TextFormField);
       final formFieldWidget = tester.widget<TextFormField>(formField);
 
@@ -95,7 +96,8 @@ void main() {
         onTap: (_) {},
       )));
 
-      final overridePriceButton = find.byKey(const Key('ssoLoginButton'));
+      final overridePriceButton =
+          find.byKey(const Key('priceOverrideSubmitButton'));
       final formField = find.byType(TextFormField);
       final formFieldWidget = tester.widget<TextFormField>(formField);
 

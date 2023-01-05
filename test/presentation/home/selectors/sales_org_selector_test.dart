@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -131,6 +132,10 @@ void main() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
     locator = GetIt.instance;
+    
+  });
+
+  setUp(() {
     mockCustomerCodeBloc = CustomerCodeBlocMock();
     authBlocMock = AuthBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
@@ -237,8 +242,19 @@ void main() {
         'when tapped on custom selector show Platform Dialog with different data',
         (tester) async {
       locator<Config>().appFlavor = Flavor.dev;
-      WidgetsFlutterBinding.ensureInitialized();
-
+      final expectedUserListStates = [
+        UserState.initial(),
+        UserState.initial().copyWith(
+          user: User.empty().copyWith(
+            userSalesOrganisations: [
+              SalesOrganisation.empty().copyWith(
+                salesOrg: SalesOrg('1500'),
+              )
+            ],
+          ),
+        ),
+      ];
+      whenListen(userBlocMock, Stream.fromIterable(expectedUserListStates));
       when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(salesOrganisation: fakeSalesOrg));
       when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
@@ -319,6 +335,97 @@ void main() {
       await getScopedWidget(tester);
       final selectedCustomerCodeText = find.text(salesCodeText2);
       expect(selectedCustomerCodeText, findsNothing);
+    });
+
+    testWidgets(
+        'When there is an error fetching salesOrg data and SalesOrg is Empty',
+        (tester) async {
+      final expectedSalesOrgListStates = [
+        SalesOrgState.initial().copyWith(
+          salesOrgFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('authentication failed'),
+            ),
+          ),
+        ),
+      ];
+      whenListen(
+          salesOrgBlocMock, Stream.fromIterable(expectedSalesOrgListStates));
+
+      await getScopedWidget(tester);
+      verify(
+        () => bannerBlocMock.add(
+          const BannerEvent.initialized(),
+        ),
+      ).called(2);
+      verify(() => orderDocumentTypeBlocMock
+          .add(const OrderDocumentTypeEvent.initialized())).called(2);
+      verify(
+        () => mockCustomerCodeBloc.add(
+          const CustomerCodeEvent.initialized(),
+        ),
+      ).called(2);
+    });
+
+    testWidgets('When there is an previous error fetching salesOrg data',
+        (tester) async {
+      final expectedSalesOrgListStates = [
+        SalesOrgState.initial().copyWith(
+          salesOrganisation: fakeSalesOrg,
+          salesOrgFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('authentication failed'),
+            ),
+          ),
+        ),
+        SalesOrgState.initial().copyWith(
+          salesOrganisation: fakeSalesOrg.copyWith(salesOrg: SalesOrg('2601')),
+        ),
+      ];
+      whenListen(
+          salesOrgBlocMock, Stream.fromIterable(expectedSalesOrgListStates));
+
+      await getScopedWidget(tester);
+      final selectedCustomerCodeText = find.text(salesCodeText2);
+      expect(selectedCustomerCodeText, findsNothing);
+    });
+
+    testWidgets(
+        'When there is an error fetching salesOrg data refresh customer',
+        (tester) async {
+      final expectedSalesOrgListStates = [
+        SalesOrgState.initial().copyWith(
+          salesOrganisation: fakeSalesOrg,
+        ),
+        SalesOrgState.initial().copyWith(
+          salesOrganisation: fakeSalesOrg.copyWith(salesOrg: SalesOrg('2601')),
+          configs: SalesOrganisationConfigs.empty().copyWith(
+            addOosMaterials: true,
+          ),
+          salesOrgFailureOrSuccessOption: optionOf(
+            const Right(null),
+          ),
+        ),
+      ];
+      when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
+          user: User.empty().copyWith(
+        userSalesOrganisations: [fakeSalesOrg2],
+      )));
+      whenListen(
+          salesOrgBlocMock, Stream.fromIterable(expectedSalesOrgListStates));
+
+      await getScopedWidget(tester);
+      verify(
+        () => mockCustomerCodeBloc.add(
+          CustomerCodeEvent.loadStoredCustomerCode(
+            hidecustomer: false,
+            selectedSalesOrg: fakeSalesOrg.copyWith(salesOrg: SalesOrg('2601')),
+            userInfo: User.empty().copyWith(
+              userSalesOrganisations: [fakeSalesOrg2],
+            ),
+          ),
+        ),
+      ).called(1);
     });
   });
 }

@@ -145,7 +145,7 @@ class _PriceSheetState extends State<PriceSheet> {
                       previous.isFetching != current.isFetching,
                   builder: (context, state) {
                     return ElevatedButton(
-                      key: const Key('ssoLoginButton'), //TODO: change the key
+                      key: const Key('priceOverrideSubmitButton'),
                       onPressed: state.isFetching
                           ? null
                           : () {
